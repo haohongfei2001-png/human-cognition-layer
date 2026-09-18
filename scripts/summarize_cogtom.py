@@ -95,6 +95,7 @@ def main() -> int:
                 "question": sample.get("question"),
                 "options": sample.get("options"),
                 "gold_answer": sample.get("answer"),
+                "gold_content": (sample.get("options") or {}).get(sample.get("answer")),
                 "variant_outputs": [
                     {
                         "permuted_answer": d.get("permuted_answer"),
@@ -130,6 +131,7 @@ def main() -> int:
                 "question",
                 "options",
                 "gold_answer",
+                "gold_content",
                 "human_error_type",
                 "human_why_wrong",
                 "human_missing_information_or_reasoning",
