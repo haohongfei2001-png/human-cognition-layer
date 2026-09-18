@@ -1,0 +1,61 @@
+name: CogToM One-time Smoke Test
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/SMOKE_TEST_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - name: Checkout HCL repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Bootstrap pinned CogToM and dependencies
+        shell: bash
+        run: |
+          git clone --quiet https://github.com/Beijing-AISI/CogToM.git .cache/CogToM
+          git -C .cache/CogToM checkout --quiet --detach 28c6781b6ea7d7ef7d491f61adc18f076f8b993c
+          python -m pip install --upgrade pip
+          python -m pip install -r .cache/CogToM/requirements.txt
+
+      - name: Verify secret is configured
+        shell: bash
+        run: |
+          if [ -z "$DEEPSEEK_API_KEY" ]; then
+            echo "::error::Missing repository secret DEEPSEEK_API_KEY"
+            exit 2
+          fi
+
+      - name: Run 20-group Chinese DeepSeek Flash smoke test
+        shell: bash
+        run: |
+          python scripts/run_cogtom_baseline.py \
+            --model deepseek-flash \
+            --language zh \
+            --limit 20 \
+            --workers 4
+
+      - name: Upload smoke artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cogtom-smoke-${{ github.run_id }}
+          path: artifacts/
+          if-no-files-found: warn
+          retention-days: 30
