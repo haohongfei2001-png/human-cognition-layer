@@ -153,6 +153,18 @@ def write_llm_config(model: str) -> Path:
     return config
 
 
+def write_gen_config(max_tokens: int, seed: int) -> Path:
+    """Provider-specific decoding budget; DeepSeek thinking is enabled by default."""
+    config = COGTOM_DIR / "configs" / "hcl-deepseek-gen.yaml"
+    config.write_text(
+        "temperature: 0.0\n"
+        f"max_tokens: {max_tokens}\n"
+        f"seed: {seed}\n",
+        encoding="utf-8",
+    )
+    return config
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", choices=SUPPORTED_MODELS, default="deepseek-flash")
@@ -170,6 +182,12 @@ def parse_args() -> argparse.Namespace:
         help="Subset selection. Stratified is the research default; head exists only for debugging.",
     )
     parser.add_argument("--workers", type=int, default=4)
+    parser.add_argument(
+        "--max-tokens",
+        type=int,
+        default=8192,
+        help="Completion budget. DeepSeek thinking tokens share this budget; 2048 can truncate hard items.",
+    )
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--run-name", default=None)
     parser.add_argument("--force", action="store_true")
@@ -192,6 +210,7 @@ def main() -> int:
     (COGTOM_DIR / "logs").mkdir(exist_ok=True)
 
     llm_config = write_llm_config(args.model)
+    gen_config = write_gen_config(args.max_tokens, args.seed)
     sample_path, dataset_config, sampling_meta = prepare_dataset(
         language=args.language,
         size=args.limit,
@@ -217,6 +236,8 @@ def main() -> int:
         str(llm_config.relative_to(COGTOM_DIR)),
         "--prompt-config",
         prompt,
+        "--gen-config",
+        str(gen_config.relative_to(COGTOM_DIR)),
         "--dataset-config",
         str(dataset_config.relative_to(COGTOM_DIR)),
         "--run-name",
@@ -252,6 +273,8 @@ def main() -> int:
         "actual_groups": sampling_meta["selected_groups"],
         "variants_per_group": 5,
         "workers": args.workers,
+        "max_tokens": args.max_tokens,
+        "deepseek_thinking_mode": "default_enabled",
         "seed": args.seed,
         "prompt": f"vanilla-{args.language}",
         "sampling": sampling_meta,
