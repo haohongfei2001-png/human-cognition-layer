@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Run the official CogToM benchmark against DeepSeek without modifying CogToM.
+"""Run the official CogToM benchmark against DeepSeek without modifying its prompts or evaluator.
 
-This wrapper intentionally keeps Phase 0 minimal:
-- pins the upstream benchmark revision;
-- uses CogToM's original prompts/evaluator;
-- only supplies an OpenAI-compatible DeepSeek model config;
-- writes reproducible artifacts for later manual error analysis.
+Phase-0 wrapper responsibilities:
+- pin the upstream benchmark revision;
+- select a reproducible evaluation subset;
+- use CogToM's original prompt/evaluator/pipeline;
+- supply an OpenAI-compatible DeepSeek model config;
+- write reproducible artifacts for manual error analysis.
+
+The default subset is stratified by (category, subcategory) because CogToM's
+JSONL is ordered; using upstream --limit alone would over-sample early paradigms.
 """
 
 from __future__ import annotations
@@ -13,11 +17,14 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import random
 import shutil
 import subprocess
 import sys
+from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / ".cache"
@@ -29,8 +36,7 @@ SUPPORTED_MODELS = ("deepseek-flash", "deepseek-v4-pro")
 
 
 def run(cmd: list[str], *, cwd: Path | None = None, env: dict[str, str] | None = None) -> None:
-    printable = " ".join(cmd)
-    print(f"+ {printable}", flush=True)
+    print("+ " + " ".join(cmd), flush=True)
     subprocess.run(cmd, cwd=cwd, env=env, check=True)
 
 
@@ -39,7 +45,6 @@ def ensure_cogtom() -> None:
     if not COGTOM_DIR.exists():
         run(["git", "clone", "--quiet", UPSTREAM_URL, str(COGTOM_DIR)])
 
-    # Always pin the benchmark to the recorded revision.
     run(["git", "fetch", "--quiet", "origin"], cwd=COGTOM_DIR)
     run(["git", "checkout", "--quiet", "--detach", UPSTREAM_COMMIT], cwd=COGTOM_DIR)
 
@@ -48,6 +53,95 @@ def ensure_cogtom() -> None:
     ).strip()
     if actual != UPSTREAM_COMMIT:
         raise RuntimeError(f"CogToM revision mismatch: {actual} != {UPSTREAM_COMMIT}")
+
+
+def read_jsonl(path: Path) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    with path.open("r", encoding="utf-8") as f:
+        for line in f:
+            if line.strip():
+                rows.append(json.loads(line))
+    return rows
+
+
+def stratified_sample(records: list[dict[str, Any]], size: int, seed: int) -> list[dict[str, Any]]:
+    """Round-robin sample across CogToM paradigms with deterministic shuffling."""
+    if size <= 0 or size >= len(records):
+        return records.copy()
+
+    rng = random.Random(seed)
+    buckets: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    for row in records:
+        key = (str(row.get("category", "unknown")), str(row.get("subcategory", "unknown")))
+        buckets[key].append(row)
+
+    for bucket in buckets.values():
+        rng.shuffle(bucket)
+
+    keys = sorted(buckets)
+    selected: list[dict[str, Any]] = []
+    cursor = {key: 0 for key in keys}
+
+    while len(selected) < size:
+        progressed = False
+        for key in keys:
+            idx = cursor[key]
+            bucket = buckets[key]
+            if idx >= len(bucket):
+                continue
+            selected.append(bucket[idx])
+            cursor[key] += 1
+            progressed = True
+            if len(selected) >= size:
+                break
+        if not progressed:
+            break
+
+    # Randomize evaluation order while preserving the selected composition.
+    rng.shuffle(selected)
+    return selected
+
+
+def prepare_dataset(language: str, size: int, seed: int, sampling: str) -> tuple[Path, Path, dict[str, Any]]:
+    source = COGTOM_DIR / "data" / f"CogToM-{language}.jsonl"
+    records = read_jsonl(source)
+
+    if sampling == "head":
+        selected = records if size <= 0 else records[:size]
+    elif sampling == "stratified":
+        selected = stratified_sample(records, size=size, seed=seed)
+    else:
+        raise ValueError(f"Unsupported sampling strategy: {sampling}")
+
+    sample_name = f"hcl-{language}-{sampling}-{len(selected)}-seed{seed}.jsonl"
+    sample_path = COGTOM_DIR / "data" / sample_name
+    with sample_path.open("w", encoding="utf-8") as f:
+        for row in selected:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+    config_path = COGTOM_DIR / "configs" / "datasets" / "hcl-sample.yaml"
+    config_path.write_text(
+        'dataset_type: "TomDataset"\n'
+        f'file_path: "./data/{sample_name}"\n'
+        "limit: -1\n",
+        encoding="utf-8",
+    )
+
+    strata = defaultdict(int)
+    categories = defaultdict(int)
+    for row in selected:
+        categories[str(row.get("category", "unknown"))] += 1
+        strata[(str(row.get("category", "unknown")), str(row.get("subcategory", "unknown")))] += 1
+
+    sampling_meta = {
+        "strategy": sampling,
+        "source_groups": len(records),
+        "selected_groups": len(selected),
+        "selected_categories": dict(sorted(categories.items())),
+        "selected_subcategory_count": len(strata),
+        "seed": seed,
+    }
+    return sample_path, config_path, sampling_meta
 
 
 def write_llm_config(model: str) -> Path:
@@ -69,6 +163,12 @@ def parse_args() -> argparse.Namespace:
         default=20,
         help="Number of CogToM question groups. Each group is evaluated with 5 option-order variants.",
     )
+    parser.add_argument(
+        "--sampling",
+        choices=("stratified", "head"),
+        default="stratified",
+        help="Subset selection. Stratified is the research default; head exists only for debugging.",
+    )
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--run-name", default=None)
@@ -88,18 +188,23 @@ def main() -> int:
         return 2
 
     ensure_cogtom()
-
-    # CogToM requires these directories to exist.
     (COGTOM_DIR / "results").mkdir(exist_ok=True)
     (COGTOM_DIR / "logs").mkdir(exist_ok=True)
 
-    config_path = write_llm_config(args.model)
+    llm_config = write_llm_config(args.model)
+    sample_path, dataset_config, sampling_meta = prepare_dataset(
+        language=args.language,
+        size=args.limit,
+        seed=args.seed,
+        sampling=args.sampling,
+    )
     prompt = f"configs/prompts/vanilla-{args.language}.yaml"
-    dataset = f"configs/datasets/cogtom-{args.language}.yaml"
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     safe_model = args.model.replace("/", "-")
-    run_name = args.run_name or f"{safe_model}_vanilla-{args.language}_{args.limit}_{stamp}"
+    run_name = args.run_name or (
+        f"{safe_model}_vanilla-{args.language}_{args.sampling}-{sampling_meta['selected_groups']}_{stamp}"
+    )
 
     env = os.environ.copy()
     env["OPENAI_API_KEY"] = key
@@ -109,15 +214,15 @@ def main() -> int:
         sys.executable,
         "main.py",
         "--llm-config",
-        str(config_path.relative_to(COGTOM_DIR)),
+        str(llm_config.relative_to(COGTOM_DIR)),
         "--prompt-config",
         prompt,
         "--dataset-config",
-        dataset,
+        str(dataset_config.relative_to(COGTOM_DIR)),
         "--run-name",
         run_name,
         "--limit",
-        str(args.limit),
+        "-1",
         "--workers",
         str(args.workers),
         "--seed",
@@ -143,11 +248,13 @@ def main() -> int:
         "model": args.model,
         "base_url": DEEPSEEK_BASE_URL,
         "language": args.language,
-        "limit_groups": args.limit,
+        "requested_groups": args.limit,
+        "actual_groups": sampling_meta["selected_groups"],
         "variants_per_group": 5,
         "workers": args.workers,
         "seed": args.seed,
         "prompt": f"vanilla-{args.language}",
+        "sampling": sampling_meta,
         "cogtom_repository": UPSTREAM_URL,
         "cogtom_commit": UPSTREAM_COMMIT,
     }
@@ -156,7 +263,6 @@ def main() -> int:
         encoding="utf-8",
     )
 
-    dataset_path = COGTOM_DIR / "data" / f"CogToM-{args.language}.jsonl"
     run(
         [
             sys.executable,
@@ -164,7 +270,7 @@ def main() -> int:
             "--results",
             str(artifact_dir / "raw.jsonl"),
             "--dataset",
-            str(dataset_path),
+            str(sample_path),
             "--metadata",
             str(artifact_dir / "metadata.json"),
             "--output-dir",
