@@ -189,12 +189,14 @@
     "expected": {
       "mode": "EPISTEMIC",
       "uncertainty": [
-        "low"
+        "medium",
+        "high"
       ],
-      "min_hypotheses": 0,
-      "max_hypotheses": 2,
-      "require_missing_bridge": false
-    }
+      "min_hypotheses": 2,
+      "max_hypotheses": 4,
+      "require_missing_bridge": true
+    },
+    "adjudication_note": "Corrected after audit: the scene never states that Xiaole knew the original box content, so a unique low-uncertainty false-belief inference is not licensed."
   },
   {
     "id": "e03_second_order_explicit",
@@ -245,14 +247,15 @@
     "scene": "小赵躲在门外，完整听到了屋内两人说‘明天取消会议’，屋内两人不知道小赵在门外。",
     "question": "小赵是否知道明天取消会议？",
     "expected": {
-      "mode": "EPISTEMIC",
+      "mode": "SIMPLE",
       "uncertainty": [
         "low"
       ],
       "min_hypotheses": 0,
       "max_hypotheses": 1,
       "require_missing_bridge": false
-    }
+    },
+    "adjudication_note": "Corrected after audit: the information-access path is direct and explicit; the speakers' ignorance of the listener is irrelevant to whether the listener heard the statement."
   },
   {
     "id": "e07_unread_message",
