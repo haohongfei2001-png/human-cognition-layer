@@ -108,3 +108,22 @@ Does final benchmark/social-interaction performance improve?
 3. only after state fidelity is acceptable, run larger CogToM/SOTOPIA tests.
 
 No model training yet.
+
+
+## Decision granularity
+
+HCL state must be calibrated to the granularity of the user's actual question.
+
+Unknown fine-grained details must not automatically make a coarser decision uncertain.
+
+Example:
+- evidence strongly supports "the person is preparing to leave";
+- destination remains unknown;
+- for "what are they about to do?" the state may be SIMPLE / low uncertainty;
+- for "where are they going?" the same scene may require high uncertainty.
+
+## Uncertainty semantics
+
+- **low**: decision-relevant interpretation is explicit, directly observed, or overwhelmingly supported at the required granularity.
+- **medium**: one interpretation is materially better supported, while credible alternatives remain.
+- **high**: multiple materially different interpretations remain comparably plausible, or a critical bridge is absent so no interpretation is clearly privileged.
