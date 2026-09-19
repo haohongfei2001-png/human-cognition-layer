@@ -1,0 +1,46 @@
+name: HCL v0.3 Paired Boundary Fresh
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_V03_PAIRED_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  fidelity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install openai
+
+      - name: Run fresh 24-case paired-boundary suite
+        run: |
+          python scripts/run_hcl_v03_state_fidelity.py \
+            --model deepseek-flash \
+            --fixtures eval/state_fidelity/fixtures_v03_paired_fresh.json \
+            --max-tokens 8192
+
+      - name: Upload fidelity artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v03-paired-${{ github.run_id }}
+          path: artifacts/hcl-v03-state-fidelity/
+          if-no-files-found: warn
+          retention-days: 30
