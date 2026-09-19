@@ -14,6 +14,7 @@ from typing import Any
 
 from hcl.v03.answer_loop import HCLAnswerLoop, extract_json
 from hcl.v03.backends import OpenAICompatibleBackend
+from hcl.v03.decision_policy import HCLDecisionPolicy
 
 from sotopia.agents.llm_agent import LLMAgent
 from sotopia.messages import AgentAction, Observation
@@ -26,6 +27,7 @@ You receive:
 - the visible interaction history;
 - the current SOTOPIA observation;
 - the frozen HCL cognition state;
+- the HCL Decision Policy plan;
 - the currently available action types.
 
 Choose one valid action that helps the agent pursue its goal while remaining
@@ -44,8 +46,12 @@ Rules:
 3. Do not invent private information the agent has not observed.
 4. Do not collapse uncertain motives/beliefs into certainty.
 5. Do not create unnecessary doubt when the HCL state is SIMPLE/low.
-6. Keep the action natural and goal-directed.
-7. Do not mention HCL or internal reasoning.
+6. Use the Decision Policy to convert cautious cognition into useful action:
+   targeted probing, alternative routes, commitment, or exit as appropriate.
+7. Do not treat uncertainty as a reason for passivity when a reversible,
+   decision-relevant action is available.
+8. Keep the action natural and goal-directed.
+9. Do not mention HCL or internal reasoning.
 """
 
 
@@ -144,6 +150,7 @@ class DirectSocialAgent(LLMAgent):
         )
 
     async def aact(self, obs: Observation) -> AgentAction:
+        history_before = self._history_text_direct()
         self.recv_message("Environment", obs)
 
         if self._goal is None:
@@ -156,7 +163,7 @@ class DirectSocialAgent(LLMAgent):
             f"【agent】\n{self.agent_name}\n\n"
             f"【private goal】\n{self.goal}\n\n"
             "【visible history】\n"
-            f"{self._history_text_direct()}\n\n"
+            f"{history_before}\n\n"
             "【current observation】\n"
             f"{obs.to_natural_language()}\n\n"
             "【available actions】\n"
@@ -208,7 +215,9 @@ class HCLSocialAgent(LLMAgent):
             seed=42,
         )
         self.hcl_loop = HCLAnswerLoop(backend)
+        self.decision_policy = HCLDecisionPolicy(backend)
         self._hcl_last_state: dict[str, Any] | None = None
+        self._hcl_last_decision_plan: dict[str, Any] | None = None
         self._hcl_turn_log: list[dict[str, Any]] = []
 
     def _history_text(self) -> str:
@@ -216,12 +225,12 @@ class HCLSocialAgent(LLMAgent):
             message.to_natural_language() for _, message in self.inbox
         )
 
-    def _turn_input(self, obs: Observation) -> str:
+    def _turn_input(self, obs: Observation, *, history_before: str) -> str:
         return (
             f"你正在扮演 {self.agent_name}。\n"
             f"你的私有目标：{self.goal}\n\n"
             "你目前可见的互动历史：\n"
-            f"{self._history_text()}\n\n"
+            f"{history_before}\n\n"
             "当前环境观察：\n"
             f"{obs.to_natural_language()}\n\n"
             f"当前可用动作：{', '.join(obs.available_actions)}\n\n"
@@ -237,6 +246,7 @@ class HCLSocialAgent(LLMAgent):
         *,
         turn_input: str,
         state: dict[str, Any],
+        decision_plan: dict[str, Any],
         obs: Observation,
         checker: dict[str, Any] | None = None,
         previous: AgentAction | None = None,
@@ -248,6 +258,8 @@ class HCLSocialAgent(LLMAgent):
                 + turn_input
                 + "\n\n【HCL cognition state】\n"
                 + json.dumps(state, ensure_ascii=False, indent=2)
+                + "\n\n【HCL Decision Policy】\n"
+                + json.dumps(decision_plan, ensure_ascii=False, indent=2)
                 + "\n\n【available actions】\n"
                 + json.dumps(obs.available_actions, ensure_ascii=False)
             )
@@ -258,6 +270,8 @@ class HCLSocialAgent(LLMAgent):
                 + turn_input
                 + "\n\n【HCL cognition state】\n"
                 + json.dumps(state, ensure_ascii=False, indent=2)
+                + "\n\n【HCL Decision Policy】\n"
+                + json.dumps(decision_plan, ensure_ascii=False, indent=2)
                 + "\n\n【available actions】\n"
                 + json.dumps(obs.available_actions, ensure_ascii=False)
                 + "\n\n【previous action】\n"
@@ -298,6 +312,10 @@ class HCLSocialAgent(LLMAgent):
         )
 
     async def aact(self, obs: Observation) -> AgentAction:
+        # Capture prior visible history before appending the current observation.
+        # This prevents the current observation from being duplicated in the
+        # cognition/action prompt.
+        history_before = self._history_text()
         self.recv_message("Environment", obs)
 
         # SOTOPIA normally sets goals before the episode loop. Keep a robust
@@ -305,16 +323,56 @@ class HCLSocialAgent(LLMAgent):
         if self._goal is None:
             self._goal = "Act naturally and coherently in the interaction."
 
-        if len(obs.available_actions) == 1 and "none" in obs.available_actions:
-            return AgentAction(action_type="none", argument="", to=[])
-
-        turn_input = self._turn_input(obs)
+        turn_input = self._turn_input(obs, history_before=history_before)
         state = self.hcl_loop.build_state(turn_input)
         self._hcl_last_state = state
+
+        # Canonical always-on rule: even environment-forced no-op turns pass
+        # through HCL cognition and are logged. No extra model call is required
+        # for decision policy when the environment exposes no actionable choice.
+        if len(obs.available_actions) == 1 and "none" in obs.available_actions:
+            decision_plan = {
+                "goal_progress_state": "OPEN",
+                "hard_constraints": ["Environment currently allows only the none action."],
+                "soft_constraints": [],
+                "critical_information_gap": "",
+                "strategy_type": "DEFER",
+                "chosen_action_intent": "Observe this turn and take no action because none is the only available action.",
+                "expected_goal_progress": "low",
+                "information_gain": "medium",
+                "reversibility": "high",
+                "social_risk": "low",
+                "decision_note": "Forced no-op by environment action mask; HCL cognition still updated.",
+            }
+            self._hcl_last_decision_plan = decision_plan
+            final_action = AgentAction(action_type="none", argument="", to=[])
+            self._hcl_turn_log.append(
+                {
+                    "turn_number": obs.turn_number,
+                    "forced_noop": True,
+                    "state": state,
+                    "decision_plan": decision_plan,
+                    "draft": final_action.model_dump(),
+                    "first_check": {"status": "PASS", "violations": []},
+                    "candidate": final_action.model_dump(),
+                    "final_check": {"status": "PASS", "violations": []},
+                    "final_action": final_action.model_dump(),
+                }
+            )
+            return final_action
+
+        decision_plan = self.decision_policy.build_plan(
+            private_goal=self.goal,
+            visible_context=turn_input,
+            state=state,
+            available_actions=list(obs.available_actions),
+        )
+        self._hcl_last_decision_plan = decision_plan
 
         draft = self._generate_action(
             turn_input=turn_input,
             state=state,
+            decision_plan=decision_plan,
             obs=obs,
         )
         first_check = self.hcl_loop.check(
@@ -328,6 +386,7 @@ class HCLSocialAgent(LLMAgent):
             candidate = self._generate_action(
                 turn_input=turn_input,
                 state=state,
+                decision_plan=decision_plan,
                 obs=obs,
                 checker=first_check,
                 previous=draft,
@@ -343,6 +402,7 @@ class HCLSocialAgent(LLMAgent):
             final_action = self._generate_action(
                 turn_input=turn_input,
                 state=state,
+                decision_plan=decision_plan,
                 obs=obs,
                 checker=final_check,
                 previous=candidate,
@@ -351,7 +411,9 @@ class HCLSocialAgent(LLMAgent):
         self._hcl_turn_log.append(
             {
                 "turn_number": obs.turn_number,
+                "forced_noop": False,
                 "state": state,
+                "decision_plan": decision_plan,
                 "draft": draft.model_dump(),
                 "first_check": first_check,
                 "candidate": candidate.model_dump(),
@@ -364,4 +426,5 @@ class HCLSocialAgent(LLMAgent):
     def reset(self) -> None:
         super().reset()
         self._hcl_last_state = None
+        self._hcl_last_decision_plan = None
         self._hcl_turn_log = []
