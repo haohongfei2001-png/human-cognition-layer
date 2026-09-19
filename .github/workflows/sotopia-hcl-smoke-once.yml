@@ -1,0 +1,47 @@
+name: SOTOPIA HCL Custom-Agent Smoke
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/SOTOPIA_HCL_SMOKE_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      CUSTOM_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pinned SOTOPIA
+        shell: bash
+        run: |
+          git clone --quiet https://github.com/sotopia-lab/sotopia.git .cache/sotopia
+          git -C .cache/sotopia checkout --quiet --detach a0aaafb440e570e5e61b7c44a44e5e417c545383
+          python -m pip install --upgrade pip
+          python -m pip install -e .cache/sotopia
+
+      - name: Run SOTOPIA custom-agent smoke
+        shell: bash
+        run: |
+          python scripts/run_sotopia_hcl_smoke.py
+
+      - name: Upload smoke artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sotopia-hcl-smoke-${{ github.run_id }}
+          path: artifacts/sotopia-hcl-smoke/
+          if-no-files-found: warn
+          retention-days: 30
