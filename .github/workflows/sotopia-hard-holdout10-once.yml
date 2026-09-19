@@ -13,7 +13,13 @@ permissions:
 jobs:
   paired-holdout:
     runs-on: ubuntu-latest
-    timeout-minutes: 240
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        start: [10, 12, 14, 16, 18]
+
     env:
       CUSTOM_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
       SOTOPIA_STORAGE_BACKEND: redis
@@ -73,16 +79,16 @@ jobs:
           assert len(hard.environments) >= 20
           PY
 
-      - name: Run fresh holdout settings 10-19
+      - name: Run fresh two-setting holdout shard
         shell: bash
         run: |
-          python scripts/run_sotopia_hard_slice_ab.py --start 10 --count 10
+          python scripts/run_sotopia_hard_slice_ab.py --start ${{ matrix.start }} --count 2
 
-      - name: Upload holdout artifacts
+      - name: Upload holdout shard
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sotopia-hard-holdout10-${{ github.run_id }}
+          name: sotopia-hard-holdout10-start-${{ matrix.start }}-${{ github.run_id }}
           path: artifacts/sotopia-hard-slice-ab/
           if-no-files-found: warn
           retention-days: 30
@@ -91,3 +97,35 @@ jobs:
         if: failure()
         shell: bash
         run: docker logs hcl-sotopia-redis || true
+
+  aggregate:
+    needs: paired-holdout
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: sotopia-hard-holdout10-start-*-${{ github.run_id }}
+          path: downloaded-holdout
+          merge-multiple: false
+
+      - name: Aggregate fixed holdout
+        shell: bash
+        run: |
+          python scripts/aggregate_sotopia_slice_artifacts.py \
+            --root downloaded-holdout \
+            --out artifacts/sotopia-hard-holdout10-summary \
+            --expected-start 10 \
+            --expected-count 10
+
+      - name: Upload aggregate summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sotopia-hard-holdout10-summary-${{ github.run_id }}
+          path: artifacts/sotopia-hard-holdout10-summary/
+          if-no-files-found: warn
+          retention-days: 30
