@@ -5,6 +5,7 @@ import argparse
 import json
 import os
 import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,23 +21,25 @@ def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--fixtures", default="eval/answer_loop/checker_fixtures_v01.json")
     p.add_argument("--model", default="deepseek-flash")
+    p.add_argument("--workers", type=int, default=4)
     args = p.parse_args()
 
     key = os.getenv("DEEPSEEK_API_KEY")
     if not key:
         raise RuntimeError("DEEPSEEK_API_KEY is required")
 
-    backend = OpenAICompatibleBackend(
-        api_key=key,
-        base_url=BASE_URL,
-        model=args.model,
-        seed=42,
-    )
-    loop = HCLAnswerLoop(backend)
     fixtures = json.loads((ROOT / args.fixtures).read_text(encoding="utf-8"))
 
-    results = []
-    for i, f in enumerate(fixtures, 1):
+    def run_one(index_fixture):
+        index, f = index_fixture
+        backend = OpenAICompatibleBackend(
+            api_key=key,
+            base_url=BASE_URL,
+            model=args.model,
+            seed=42,
+        )
+        loop = HCLAnswerLoop(backend)
+
         state = loop.build_state(f["input"])
         verdict = loop.check(f["input"], state, f["candidate"])
 
@@ -80,7 +83,7 @@ def main() -> int:
             ]
         )
 
-        result = {
+        return index, {
             "id": f["id"],
             "passed": passed,
             "input": f["input"],
@@ -98,12 +101,23 @@ def main() -> int:
             "final_required_ok": final_required_ok,
             "final_forbidden_ok": final_forbidden_ok,
         }
-        results.append(result)
-        print(
-            f"[{i}/{len(fixtures)}] {f['id']}: "
-            f"{'PASS' if passed else 'FAIL'}",
-            flush=True,
-        )
+
+    completed = []
+    with ThreadPoolExecutor(max_workers=max(1, args.workers)) as ex:
+        futures = [
+            ex.submit(run_one, item)
+            for item in enumerate(fixtures)
+        ]
+        for done_count, future in enumerate(as_completed(futures), 1):
+            index, result = future.result()
+            completed.append((index, result))
+            print(
+                f"[{done_count}/{len(fixtures)}] {result['id']}: "
+                f"{'PASS' if result['passed'] else 'FAIL'}",
+                flush=True,
+            )
+
+    results = [result for _, result in sorted(completed, key=lambda x: x[0])]
 
     passed_count = sum(r["passed"] for r in results)
     summary = {
