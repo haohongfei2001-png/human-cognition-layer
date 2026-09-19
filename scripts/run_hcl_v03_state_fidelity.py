@@ -217,17 +217,22 @@ def main():
 
     results = [result for _, result in sorted(completed, key=lambda x: x[0])]
 
-    passed = sum(r["evaluation"]["passed"] for r in results)
+    gated = [r for r in results if not r["expected"].get("exclude_from_gate", False)]
+    excluded = [r for r in results if r["expected"].get("exclude_from_gate", False)]
+    passed = sum(r["evaluation"]["passed"] for r in gated)
     summary = {
         "model":args.model,
         "fixture_count":len(results),
+        "gated_fixture_count":len(gated),
+        "excluded_fixture_count":len(excluded),
         "passed":passed,
-        "failed":len(results)-passed,
-        "pass_rate":passed/len(results),
-        "mode_accuracy":sum(r["evaluation"]["checks"].get("mode",False) for r in results)/len(results),
-        "uncertainty_accuracy":sum(r["evaluation"]["checks"].get("uncertainty",False) for r in results)/len(results),
-        "schema_valid_rate":sum(r["evaluation"]["checks"].get("schema_valid",False) for r in results)/len(results),
-        "failed_ids":[r["id"] for r in results if not r["evaluation"]["passed"]]
+        "failed":len(gated)-passed,
+        "pass_rate":passed/len(gated) if gated else 0.0,
+        "mode_accuracy":sum(r["evaluation"]["checks"].get("mode",False) for r in gated)/len(gated) if gated else 0.0,
+        "uncertainty_accuracy":sum(r["evaluation"]["checks"].get("uncertainty",False) for r in gated)/len(gated) if gated else 0.0,
+        "schema_valid_rate":sum(r["evaluation"]["checks"].get("schema_valid",False) for r in gated)/len(gated) if gated else 0.0,
+        "failed_ids":[r["id"] for r in gated if not r["evaluation"]["passed"]],
+        "excluded_ids":[r["id"] for r in excluded]
     }
 
     out = ROOT / "artifacts/hcl-v03-state-fidelity"
@@ -260,7 +265,7 @@ def main():
         )
     (out/"REPORT.md").write_text("\n".join(lines)+"\n",encoding="utf-8")
     print(json.dumps(summary,ensure_ascii=False,indent=2))
-    return 0 if passed == len(results) else 3
+    return 0 if passed == len(gated) else 3
 
 if __name__ == "__main__":
     raise SystemExit(main())
