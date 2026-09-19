@@ -1,0 +1,357 @@
+[
+  {
+    "id": "p01_truthful_direct_message",
+    "scene": "项目真实截止日期是周五。老师明确告诉小青：‘项目周五截止。’小青没有收到其他冲突信息。",
+    "question": "小青目前对截止日期的认知状态如何？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "p02_false_direct_message",
+    "scene": "项目真实截止日期是周五。老师误以为截止日期是周六，并明确告诉小青：‘项目周六截止。’小青没有收到其他信息。",
+    "question": "小青目前会相信项目哪天截止？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false,
+      "agent_fields_contains": {
+        "小青": {
+          "believes": [
+            "周六"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "p03_observed_change",
+    "scene": "小倩看到杯子先放在A柜。后来她又亲眼看到杯子从A柜移到B柜。",
+    "question": "小倩现在认为杯子在哪里？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "p04_unobserved_change",
+    "scene": "小倩看到杯子放在A柜后离开。她离开后别人把杯子移到B柜。小倩没有回来，也没有收到消息。",
+    "question": "小倩现在会认为杯子在哪里？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false,
+      "agent_fields_excludes": {
+        "小倩": {
+          "knows": [
+            "B柜"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "p05_clearly_heard_announcement",
+    "scene": "主持人用麦克风宣布‘活动改到下午四点’，小卓站在第一排并明确听到了完整通知。",
+    "question": "小卓是否获得了活动改到四点的信息？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "p06_uncertain_hearing_announcement",
+    "scene": "主持人在大厅宣布‘活动改到下午四点’。小卓当时在大厅外的走廊，但故事没有说明门是否打开，也没有说明他是否听到。",
+    "question": "能否确定小卓知道活动改到四点？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 5,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "p07_explicit_emotion_statement",
+    "scene": "小叶说：‘我很失望，因为申请没有通过。’",
+    "question": "小叶的情绪是什么？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "p08_behavior_only_emotion",
+    "scene": "申请结果公布后，小叶看了一眼手机，把手机放下，沉默了很久。没有描述她说了什么、表情如何。",
+    "question": "小叶现在是什么情绪？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "p09_explicit_cause_for_leaving",
+    "scene": "小韩说：‘我先走，因为医院打电话让我马上过去。’随后他离开聚会。",
+    "question": "小韩为什么提前离开？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "p10_ambiguous_early_leaving",
+    "scene": "小韩参加聚会十分钟后突然离开，没有解释原因，也没有其他背景信息。",
+    "question": "小韩为什么提前离开？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "p11_second_order_bridge_explicit",
+    "scene": "阿琳看到小峰离开房间。小峰离开后，阿琳看到礼物被移到另一张桌子，并确认小峰直到现在都没有回来、没有收到任何消息。",
+    "question": "阿琳认为小峰会以为礼物还在哪里？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false,
+      "min_beliefs_about_others": {
+        "阿琳": 1
+      }
+    }
+  },
+  {
+    "id": "p12_second_order_bridge_missing",
+    "scene": "礼物被移到了另一张桌子。阿琳知道礼物被移动，但故事没有说明她是否知道小峰有没有看到移动，也没有说明她是否知道小峰后来收到过消息。",
+    "question": "阿琳能否确定小峰对礼物位置的信念？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 5,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "p13_obvious_joke",
+    "scene": "外面下着暴雨，小林浑身湿透走进屋里，笑着说：‘今天天气真适合晒被子。’",
+    "question": "小林这句话主要是什么性质？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low",
+        "medium"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "p14_ambiguous_short_remark",
+    "scene": "讨论结束后，小林只说了一句‘挺好的’，随后不再说话。没有语气、表情或上下文信息。",
+    "question": "小林是真心满意还是在反讽？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 5,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "p15_explicit_intention",
+    "scene": "小博说：‘我现在去楼下取快递。’随后拿起手机往门口走。",
+    "question": "小博明确打算做什么？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "p16_behavior_inferred_intention",
+    "scene": "小博拿起手机和外套，往门口走。故事没有说明他要去哪里。",
+    "question": "小博打算做什么？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "p17_explicit_preference",
+    "scene": "小璐说：‘我最喜欢安静的咖啡馆，不喜欢吵闹的酒吧。’",
+    "question": "小璐明确表达的偏好是什么？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "p18_preference_behavior_conflict",
+    "scene": "小璐以前说自己不喜欢吵闹的酒吧，但今晚主动去了一个很吵的酒吧。没有说明原因。",
+    "question": "为什么小璐今晚去了酒吧？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "p19_read_message",
+    "scene": "小余打开并读完消息：‘航班延误两小时。’",
+    "question": "小余是否获得了航班延误的信息？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "p20_unread_message",
+    "scene": "航空公司给小余发了‘航班延误两小时’的消息，但小余手机关机，故事明确说明他还没有看到消息。",
+    "question": "小余现在是否知道航班延误？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "p21_complete_information_chain",
+    "scene": "老板告诉主管会议取消，主管随后当着团队所有人的面宣布‘会议取消’，团队成员都明确听到了。",
+    "question": "团队成员是否获得了会议取消的信息？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "p22_incomplete_information_chain",
+    "scene": "老板告诉主管会议取消，主管说‘我稍后告诉团队’，但故事到此结束，没有说明主管是否真的通知。",
+    "question": "能否确定团队已经知道会议取消？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "medium",
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 4,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "p23_explicit_social_motive",
+    "scene": "小乔说：‘我给她送花是为了向她道歉。’",
+    "question": "小乔明确说自己送花的目的是什么？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "p24_ambiguous_social_gift",
+    "scene": "争吵后的第二天，小乔给对方送了一束花，但没有说任何解释。",
+    "question": "小乔为什么送花？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  }
+]
