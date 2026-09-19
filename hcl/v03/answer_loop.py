@@ -206,21 +206,33 @@ class HCLAnswerLoop:
         self.check_max_tokens = check_max_tokens
 
     def build_state(self, user_input: str) -> dict[str, Any]:
-        raw = self.backend.complete(
-            [
-                {"role": "system", "content": STATE_SYSTEM},
-                {
-                    "role": "user",
-                    "content": user_input + "\n\n只生成 HCL 中间状态，不要回答最终问题。",
-                },
-            ],
-            max_tokens=self.state_max_tokens,
-            temperature=0.0,
+        base_user = user_input + "\n\n只生成 HCL 中间状态，不要回答最终问题。"
+        last_raw = ""
+        for attempt in range(3):
+            suffix = ""
+            if attempt > 0:
+                suffix = (
+                    "\n\n前一次输出不是可解析的 JSON。"
+                    "这次必须只输出一个完整 JSON 对象，不要使用 Markdown、代码块或额外文字。"
+                )
+            last_raw = self.backend.complete(
+                [
+                    {"role": "system", "content": STATE_SYSTEM},
+                    {
+                        "role": "user",
+                        "content": base_user + suffix,
+                    },
+                ],
+                max_tokens=self.state_max_tokens,
+                temperature=0.0,
+            )
+            state = extract_json(last_raw)
+            if state is not None:
+                return self._normalize_state(state)
+
+        raise RuntimeError(
+            "HCL state builder returned no valid JSON after 3 attempts"
         )
-        state = extract_json(raw)
-        if state is None:
-            raise RuntimeError("HCL state builder returned no valid JSON")
-        return self._normalize_state(state)
 
     def generate_draft(self, user_input: str, state: dict[str, Any]) -> str:
         return self.backend.complete(
