@@ -1,177 +1,230 @@
 # Canonical Status
 
 ## Project
-Human Cognition Layer
+
+Human Cognition Layer (HCL)
 
 ## Current phase
-**PHASE-01 — Module-first HCL architecture**
 
-## Research question
-Can a portable cognition layer improve a strong language model's reasoning about human beliefs, intentions, knowledge states, emotions, and implicit mental states without modifying the base model?
+**PHASE-01 — Module-first cognition architecture / state fidelity**
 
-## Current rules
-- No model training in PHASE-00.
-- No HCL implementation before the first human error audit.
-- Use the official CogToM prompt/evaluator unchanged.
-- Keep the upstream CogToM revision pinned.
-- Benchmark items and gold answers must not become training examples.
-- Learn abstract failure mechanisms, not benchmark answers.
+## Core thesis
 
-## Upstream benchmark
-- Repository: Beijing-AISI/CogToM
-- Pinned commit: `28c6781b6ea7d7ef7d491f61adc18f076f8b993c`
-- License: MIT
+The HCL module is the research asset.
 
-## Baseline provider
-- Provider: DeepSeek OpenAI-compatible API
-- Model: `deepseek-flash`
-- Language: Chinese
-- Sampling: deterministic stratified sample, seed 42
-- Completion budget: 8192 tokens
-- DeepSeek thinking: default enabled
+The base model is replaceable. Benchmarks are measurement instruments.
 
-## Completed representative baseline
-- GitHub Actions run: `35407860416`
-- Groups: **200**
-- Option-order variants per group: **5**
-- CogToM subcategories covered: **46 / 46**
-- Mean group accuracy: **0.960**
-- All-five-variants-correct rate: **0.925**
-- Semantic consistency rate: **0.935**
-- Groups with any error: **15**
-- Unresolved extraction failures: **0**
-- Transient empty responses recovered by retry: **10**
+Canonical architecture:
 
-Lowest observed subcategory scores:
-- 2nd-Order False Belief: **0.64**
-- Persuasion Story Task: **0.68**
-- Test of Emotion Comprehension — Belief Based Emotions: **0.75**
-- Synesthetic Fallacy Problem: **0.80**
-- Aware of Reader’s Knowledge Task: **0.85**
+```text
+Input
+  ↓
+HCL cognition state
+  ↓
+Base model
+  ↓
+HCL consistency / calibration
+  ↓
+Answer
+```
 
-Full summary and row-level failures are stored in the workflow artifact:
-`cogtom-baseline-200-35407860416`.
-
-## Current gate
-**HCL_V0_1_DESIGN_READY**
-
-The research owner directly audited cases 01–02. Those two judgments were sufficient to extract a reusable principle: **epistemic uncertainty must be preserved when second-order knowledge or hidden causes are underdetermined**. The remaining 13 cases were provisionally screened by AI using that principle and are explicitly not treated as owner labels.
-
-For each error, record:
-1. What is explicitly known?
-2. What did the model infer incorrectly?
-3. What distinction or reasoning step did it miss?
-4. Does the same mechanism appear in another error?
-5. What general mechanism might correct it without encoding the benchmark answer?
-
-The earlier provisional “100 error” target is superseded for this first gate: the representative 200-group baseline produced only 15 error groups. Review all 15 first; only if evidence is insufficient should we deliberately collect a larger audit set.
-
-## Next action after human audit
-Do **not** train yet.
-
-After the human annotations are available:
-1. cluster repeated failure mechanisms;
-2. decide whether a portable HCL v0.1 is justified;
-3. test HCL as an external module on CogToM before any model training;
-4. only later move to SOTOPIA-Hard and eventual EQ-Bench 4 visibility work.
-
-
-## Human audit seed result
-
-Direct owner judgments:
-- Case 01: gold is underdetermined because Xiaoli's belief about Xiaohua's knowledge access is not established.
-- Case 02: gold is underdetermined because returning without hangers has multiple latent causes; Xiaoxue cannot safely infer that mother saw her action.
-
-Reusable principles:
-1. narrator truth != character knowledge;
-2. second-order belief requires an explicit evidence bridge;
-3. ambiguous observable outcomes should retain multiple latent-cause hypotheses;
-4. underdetermined benchmark gold should not become a training target.
-
-See:
-- `reports/HUMAN_AUDIT_SEED_CASES_01_02.md`
-- `reports/COGTOM_FAILURES_PROVISIONAL_SCREEN.md`
-
-## Next action
-
-Design **HCL v0.1 — Epistemic Uncertainty Layer** as a portable external module, then test it on a fresh unseen CogToM holdout before any model training.
-
-No model weights should be modified in this phase.
-
-
-## HCL v0.2 fresh-holdout result
-
-Run: `35412243224`
-
-Fresh 40-group holdout excluded both:
-- the 200-group seed-42 design/audit set;
-- the 100-group seed-43 HCL v0.1 holdout.
-
-Result:
-- Vanilla mean group accuracy: **97.0%**
-- HCL v0.2 mean group accuracy: **97.0%**
-- Activated groups: **10 / 40**
-- Improved groups: **0**
-- Harmed groups: **0**
-- Net delta: **0.0 pp**
-
-Interpretation:
-- Selective routing successfully removed the regression tax seen in v0.1.
-- It did **not** demonstrate measurable gain on broad CogToM.
-- Broad CogToM is near ceiling for DeepSeek Flash in this setup and is not a suitable primary optimization target.
-
-## Gold-reliability concern
-
-The owner's direct audit of the first two failures challenged the benchmark gold itself:
-- one item omitted the evidence needed for a unique second-order belief;
-- another treated one observed outcome as if it uniquely identified a hidden cause.
-
-Therefore CogToM gold labels must not be treated as unquestionable truth for HCL training.
-
-Current policy:
-1. CogToM remains a diagnostic/unit-test benchmark.
-2. Items judged underdetermined or normatively ambiguous must be tagged `gold_questionable` and excluded from training targets.
-3. Improvements against CogToM gold alone are insufficient evidence of better human understanding.
-4. The next main method evaluation should move to an interaction benchmark with less dependence on a single forced gold answer.
-
-## Next research step
-
-**Move to SOTOPIA-Hard method evaluation.**
-
-Use the same portable HCL design as an external layer around the same base model and compare:
-- vanilla social agent;
-- vanilla + selective HCL.
-
-CogToM remains as a regression/diagnostic suite only.
-
-Before any training:
-- implement SOTOPIA baseline runner;
-- reproduce a small standard hard subset;
-- add HCL as a detachable module;
-- compare goal/social metrics under the same evaluator configuration.
-
-No model weights should be modified yet.
-
-
-## Module-first correction
-
-The research owner clarified that the **HCL module itself is the core asset**.
-
-Canonical consequence:
-- do not reduce HCL usage simply because an early HCL version lowers benchmark score;
-- treat regressions as evidence for improving the module;
-- HCL remains in the loop for every input;
-- adaptive internal depth is allowed;
-- bypassing HCL is not the canonical design.
-
-The v0.2 selective-routing experiment is retained as historical evidence only. It is not the canonical architecture.
-
-Canonical next version:
-**HCL v0.3 — Always-On Cognition Layer**
+Every input passes through HCL. HCL may use different internal depths, but canonical HCL is not bypassed merely to protect benchmark score.
 
 See:
 - `docs/MODULE_FIRST_DOCTRINE.md`
 - `hcl/HCL_V0_3_SPEC.md`
 
-Next action:
-implement and validate HCL v0.3 state quality before moving to larger benchmark runs or model training.
+## Current HCL version
+
+**HCL v0.3 — Always-On Cognition Layer**
+
+Internal modes:
+
+- `SIMPLE`
+- `EPISTEMIC`
+- `CAUSAL_AMBIGUITY`
+
+Portable state schema:
+- `hcl/v03/state_schema.json`
+
+State-builder protocol:
+- `hcl/v03/STATE_BUILDER_PROMPT.md`
+
+## Research-owner seed insight
+
+The owner directly audited two CogToM failures.
+
+The reusable principles extracted from those judgments are:
+
+1. narrator/world truth != character knowledge;
+2. second-order belief requires an evidence bridge;
+3. an observed outcome does not uniquely reveal its hidden cause when multiple causes remain compatible;
+4. genuine underdetermination should remain uncertain rather than being collapsed into a forced interpretation.
+
+These owner judgments are recorded separately from AI-assisted screening:
+
+- `reports/HUMAN_AUDIT_SEED_CASES_01_02.md`
+- `reports/COGTOM_FAILURES_PROVISIONAL_SCREEN.md`
+
+## CogToM baseline history
+
+Pinned upstream revision:
+`28c6781b6ea7d7ef7d491f61adc18f076f8b993c`
+
+Representative 200-group DeepSeek Flash baseline:
+- run: `35407860416`
+- 46 / 46 CogToM subcategories covered
+- mean group accuracy: **96.0%**
+- strict all-5-variants-correct: **92.5%**
+- semantic consistency: **93.5%**
+- groups with any error: **15**
+
+CogToM remains useful as a diagnostic/regression suite, but its gold labels are not treated as unquestionable human-state truth. Items that are underdetermined or normatively ambiguous must not become HCL training targets merely because a benchmark provides one answer.
+
+## Historical HCL task-performance experiments
+
+### HCL v0.1 — always-on heavy epistemic analysis
+
+Disjoint 100-group CogToM holdout:
+- vanilla DeepSeek: **98.6%**
+- DeepSeek + HCL v0.1: **96.8%**
+- delta: **-1.8 pp**
+
+Diagnosis:
+- module over-analysis introduced an intervention tax;
+- some non-epistemic tasks were made worse;
+- this is evidence to improve HCL, not evidence to remove the module.
+
+### HCL v0.2 — selective safeguard experiment
+
+Fresh 40-group CogToM holdout:
+- vanilla: **97.0%**
+- HCL v0.2: **97.0%**
+- activated: **10 / 40**
+- improved: **0**
+- harmed: **0**
+
+Interpretation:
+- selective routing removed v0.1 regressions;
+- however, bypassing HCL is not the canonical project direction;
+- v0.2 is retained as historical evidence only.
+
+## HCL v0.3 state-fidelity history
+
+### Suite v0.1 — 12 synthetic cases, first run
+
+Run `35413204446`
+
+Reported:
+- 8 / 12 pass
+- mode accuracy: 66.7%
+- uncertainty accuracy: 91.7%
+- schema validity: 91.7%
+
+Failure analysis showed:
+- excessive EPISTEMIC mode selection on explicit evidence;
+- over-generation of speculative alternatives in a humor case;
+- one completion-budget failure.
+
+### Suite v0.1 — second run after minimal-model correction
+
+Run `35413506240`
+
+Reported:
+- 10 / 12 pass
+- mode accuracy: **100%**
+- uncertainty accuracy: **100%**
+- schema validity: **100%**
+
+The two nominal failures were evaluator false negatives:
+- one state correctly expressed high uncertainty but did not use the exact phrase `信息不足`;
+- one state correctly represented “other members already know” as a rejected/unsupported hypothesis, but a global forbidden-substring check treated any mention as failure.
+
+Conclusion:
+**Do not tune HCL to satisfy lexical test artifacts. Fix the evaluator.**
+
+The evaluator has now been changed so lexical checks are advisory only. Gating uses structural semantics:
+- schema validity;
+- mode;
+- uncertainty level;
+- hypothesis-count bounds;
+- missing-bridge requirements;
+- optional field-scoped agent assertions.
+
+## Current experiment
+
+**Fresh State Fidelity Suite v0.2**
+
+Files:
+- `eval/state_fidelity/fixtures_v02_fresh.json`
+- `eval/state_fidelity/SUITE_V02.md`
+
+Composition:
+- 12 SIMPLE
+- 12 EPISTEMIC
+- 12 CAUSAL_AMBIGUITY
+- total: **36 fresh cases**
+
+These cases were created after the first 12-case prompt iteration and therefore serve as a fresh boundary test rather than a tuning set.
+
+Current GitHub Actions run:
+`35414125494`
+
+Status:
+**IN_PROGRESS**
+
+## Current gate
+
+Do not train yet.
+
+The next transition is allowed only after the fresh 36-case suite is analyzed.
+
+Possible outcomes:
+
+1. **High state fidelity**
+   - freeze HCL v0.3 state semantics;
+   - add task-answer integration;
+   - run CogToM regression diagnostics;
+   - begin SOTOPIA-Hard method evaluation.
+
+2. **Systematic state failures**
+   - identify the representation/update rule that failed;
+   - revise HCL itself;
+   - rerun on another fresh boundary set.
+
+3. **Ambiguous cases requiring genuine human judgment**
+   - stop automation at those cases;
+   - ask the research owner for the minimal semantic judgment needed.
+
+## Long-term evaluation route
+
+```text
+HCL state fidelity
+    ↓
+CogToM diagnostic / regression
+    ↓
+SOTOPIA-Hard multi-turn method validation
+    ↓
+cross-base-model transfer
+    ↓
+independent training data / adapter if justified
+    ↓
+EQ-Bench 4 public visibility
+```
+
+## Training policy
+
+No benchmark test item or gold answer becomes a training example.
+
+Permitted learning loop:
+
+```text
+evaluation failure
+→ abstract failure mechanism
+→ independently created new cases
+→ module/data revision
+→ fresh evaluation
+```
+
+Current status:
+**WAITING_FOR_FRESH_STATE_FIDELITY_V02_RESULT**
