@@ -23,11 +23,11 @@ from sotopia.database import (
 )
 from sotopia.database.persistent_profile import EnvironmentList
 from sotopia.envs.evaluators import (
-    EpisodeLLMEvaluator,
     EvaluationForAgents,
     RuleBasedTerminatedEvaluator,
-    unweighted_aggregate_evaluate,
 )
+from sotopia.generation_utils.generate import agenerate
+from sotopia.generation_utils.output_parsers import PydanticOutputParser
 from sotopia.envs.parallel import ParallelSotopiaEnv
 from sotopia.messages import AgentAction, SimpleMessage
 
@@ -79,6 +79,102 @@ def make_agents(
         cls = HCLSocialAgent if use_hcl and i == tested_index else DirectSocialAgent
         agents.append(cls(agent_profile=profile, model_name=MODEL))
     return agents
+
+
+async def evaluate_transcript(messages: list[tuple[str, Any]]) -> list[dict[str, Any] | None]:
+    """Run SOTOPIA's official dimension rubric with robust score extraction.
+
+    The pinned upstream EpisodeLLMEvaluator successfully generates and parses
+    EvaluationForAgents, but then indexes nested Pydantic model_dump values as
+    tuples (value[1]/value[0]). Under Pydantic v2 those values are dictionaries,
+    causing a KeyError(1) that is swallowed and returned as an empty score list.
+
+    This helper preserves the official prompt, EvaluationForAgents schema and
+    SotopiaDimensions, changing only the broken extraction step.
+    """
+    messages_filtered = [
+        (speaker, message)
+        for speaker, message in messages
+        if "did nothing" not in message.to_natural_language()
+    ]
+    history = "\n".join(
+        (
+            f"{speaker} {message.to_natural_language()}"
+            if speaker != "Environment"
+            else message.to_natural_language()
+        )
+        for speaker, message in messages_filtered
+    )
+
+    participating_agents = {
+        speaker for speaker, _ in messages if speaker != "Environment"
+    }
+    num_agents = len(participating_agents)
+    if num_agents == 0:
+        return []
+
+    agent_instruction = (
+        "There are exactly "
+        + str(num_agents)
+        + " agents. Under the 'evaluations' field, use exactly these keys: "
+        + "["
+        + ", ".join(f'"agent_{i+1}"' for i in range(num_agents))
+        + "] (no other keys).\n"
+    )
+
+    response_cls = EvaluationForAgents[SotopiaDimensions]
+    response = await agenerate(
+        model_name=MODEL,
+        template="""{history}
+            Based on previous interactions, evaluate how well participants achieve their goals.
+            {agent_instruction}
+            Please follow the format:
+            {format_instructions}
+        """,
+        input_values={
+            "history": history,
+            "agent_instruction": agent_instruction,
+        },
+        output_parser=PydanticOutputParser(
+            pydantic_object=response_cls,
+        ),
+        temperature=0.0,
+        structured_output=False,
+    )
+
+    scored: list[dict[str, Any] | None] = []
+    for evaluation in list(response.evaluations.values())[:num_agents]:
+        raw = evaluation.model_dump()
+        dimensions: dict[str, float | int] = {}
+        reasoning: dict[str, str] = {}
+
+        for dimension, value in raw.items():
+            score: Any = None
+            reason = ""
+            if isinstance(value, dict):
+                score = value.get("score")
+                reason = str(value.get("reasoning", ""))
+            elif isinstance(value, (list, tuple)) and len(value) >= 2:
+                reason = str(value[0])
+                score = value[1]
+
+            if isinstance(score, (int, float)):
+                dimensions[dimension] = score
+                reasoning[dimension] = reason
+
+        if dimensions:
+            scored.append(
+                {
+                    "overall": sum(dimensions.values()) / len(dimensions),
+                    "dimensions": dimensions,
+                    "reasoning": reasoning,
+                }
+            )
+        else:
+            scored.append(None)
+
+    return scored
+
 
 
 async def run_episode(
@@ -180,35 +276,10 @@ async def run_episode(
         else []
     )
 
-    # Score the completed transcript explicitly with SOTOPIA's official
-    # EpisodeLLMEvaluator. The pinned env.astep currently discards terminal
-    # p1_rate/p2_rate when building info, which otherwise makes every artifact
-    # appear as 0 even when the evaluator produced non-zero dimension scores.
-    terminal_evaluator = EpisodeLLMEvaluator(
-        MODEL,
-        EvaluationForAgents[SotopiaDimensions],
-    )
-    terminal_items = await terminal_evaluator.__acall__(
-        turn_number=-1,
-        messages=env.inbox,
-        temperature=0.0,
-    )
-    terminal_response = unweighted_aggregate_evaluate(terminal_items)
-
-    def serialize_rate(rate: Any) -> dict[str, Any] | None:
-        if rate is None:
-            return None
-        overall, dimensions = rate
-        return {
-            "overall": overall,
-            "dimensions": dimensions,
-        }
-
-    scored = [
-        serialize_rate(terminal_response.p1_rate),
-        serialize_rate(terminal_response.p2_rate),
-    ]
-    reasoning = terminal_response.comments or ""
+    # Score with SOTOPIA's official rubric/schema, while bypassing only the
+    # pinned evaluator's broken Pydantic-v2 tuple indexing during extraction.
+    scored = await evaluate_transcript(env.inbox)
+    reasoning = ""
 
     return {
         "tag": tag,
