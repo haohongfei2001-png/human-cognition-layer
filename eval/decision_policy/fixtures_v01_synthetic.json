@@ -1,0 +1,426 @@
+{
+  "suite": "HCL decision policy synthetic v0.1",
+  "principle": "Independent synthetic fixtures derived from abstract failure patterns; no SOTOPIA benchmark dialogue is copied.",
+  "cases": [
+    {
+      "id": "dp01_hard_cap_high_value_probe",
+      "private_goal": "Raise as much support as possible for a community fundraiser.",
+      "visible_context": "A donor increased their personal gift from $200 to $300 and has explicitly said $300 is a hard personal cap. You do not know whether their employer offers donation matching.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "The donor explicitly capped personal giving at $300.",
+          "Employer matching availability is unknown."
+        ],
+        "agents": {
+          "actor": {
+            "observed": [
+              "The donor's $300 cap."
+            ],
+            "knows": [
+              "The personal cap is currently explicit."
+            ],
+            "believes": [],
+            "beliefs_about_others": []
+          },
+          "donor": {
+            "observed": [],
+            "knows": [],
+            "believes": [],
+            "beliefs_about_others": []
+          }
+        },
+        "hypotheses": [],
+        "missing_bridges": [
+          "No evidence about employer matching."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "A potentially high-leverage alternative is unknown."
+        },
+        "decision_relevant_summary": "Respect the personal cap; a specific external matching mechanism could increase impact without changing that cap."
+      },
+      "expected_strategy_types": [
+        "INFORMATION_PROBE"
+      ]
+    },
+    {
+      "id": "dp02_price_gap_exhausted_exit",
+      "private_goal": "Sell a phone for at least $600.",
+      "visible_context": "After several offers, the buyer has stated that $455 is their absolute maximum and will not buy multiple units. Your verified floor is $600. No financing, trade, or bundle option exists.",
+      "available_actions": [
+        "speak",
+        "leave"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Seller floor is $600.",
+          "Buyer hard maximum is $455.",
+          "No alternative deal structure is available."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "Reservation values and lack of alternatives are explicit."
+        },
+        "decision_relevant_summary": "There is no mutually acceptable deal in the current interaction."
+      },
+      "expected_strategy_types": [
+        "EXIT",
+        "DEFER"
+      ]
+    },
+    {
+      "id": "dp03_resource_refusal_try_alternative",
+      "private_goal": "Stay safely warm through the night.",
+      "visible_context": "A companion has the only blanket and explicitly refuses to share it. Both of you are cold. You have extra clothing, dry wood, and a fire pit, but have not tried them yet.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Blanket sharing is explicitly refused.",
+          "Extra layers and fire-building are available and untried."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "The immediate alternatives are known."
+        },
+        "decision_relevant_summary": "Do not coerce access to the blanket; use available warming alternatives first."
+      },
+      "expected_strategy_types": [
+        "ALTERNATIVE_PATH"
+      ]
+    },
+    {
+      "id": "dp04_failed_alternative_seek_shelter",
+      "private_goal": "Stay safely warm through the night.",
+      "visible_context": "The fire and extra clothing have not been enough. The companion still explicitly refuses to share the blanket. A staffed heated ranger shelter is known to be a short walk away.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Blanket sharing is refused.",
+          "Current warming methods are insufficient.",
+          "A heated shelter is available nearby."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "A safer alternative is directly available."
+        },
+        "decision_relevant_summary": "The best available route to the underlying safety goal is the nearby heated shelter."
+      },
+      "expected_strategy_types": [
+        "ALTERNATIVE_PATH",
+        "DIRECT_PROGRESS"
+      ]
+    },
+    {
+      "id": "dp05_provenance_concern_verify",
+      "private_goal": "Complete a legitimate sale of a vintage record.",
+      "visible_context": "A buyer says the record looks exactly like one owned by a mutual friend and asks whether you were authorized to sell it. You thought the record was yours but now realize you have never checked the storage-box label or receipt.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "The buyer raised a concrete ownership concern.",
+          "Seller's ownership belief is no longer well-supported."
+        ],
+        "agents": {
+          "actor": {
+            "observed": [
+              "Buyer's ownership concern."
+            ],
+            "knows": [
+              "Ownership provenance has not been verified."
+            ],
+            "believes": [
+              "The record was probably mine."
+            ],
+            "beliefs_about_others": []
+          }
+        },
+        "hypotheses": [
+          {
+            "hypothesis": "The record is mine.",
+            "support": [
+              "Prior assumption."
+            ],
+            "counterevidence_or_missing": [
+              "No receipt/label checked.",
+              "Buyer recognizes it as friend's."
+            ]
+          },
+          {
+            "hypothesis": "The record belongs to the mutual friend.",
+            "support": [
+              "Buyer recognizes it."
+            ],
+            "counterevidence_or_missing": [
+              "Not yet verified."
+            ]
+          }
+        ],
+        "missing_bridges": [
+          "No verification of provenance."
+        ],
+        "uncertainty": {
+          "level": "high",
+          "reason": "Ownership is decision-critical and unresolved."
+        },
+        "decision_relevant_summary": "Pause the irreversible sale and verify ownership before transferring the record."
+      },
+      "expected_strategy_types": [
+        "INFORMATION_PROBE",
+        "DEFER"
+      ]
+    },
+    {
+      "id": "dp06_declined_trip_accept_coffee",
+      "private_goal": "Spend meaningful time with a friend this month.",
+      "visible_context": "Your friend clearly cannot join the weekend trip because of existing plans, but warmly proposes coffee next week instead.",
+      "available_actions": [
+        "speak",
+        "leave"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Weekend trip is unavailable.",
+          "Friend explicitly offers coffee next week."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "The alternative social plan is explicit."
+        },
+        "decision_relevant_summary": "Accept the offered alternative rather than continuing to press the blocked trip."
+      },
+      "expected_strategy_types": [
+        "COMMIT",
+        "ALTERNATIVE_PATH"
+      ]
+    },
+    {
+      "id": "dp07_ambiguous_delay_probe",
+      "private_goal": "Get a delayed project back on schedule.",
+      "visible_context": "A teammate missed a milestone and says only that 'something came up.' You need to decide whether to redistribute work, but do not know whether the blocker is temporary, technical, or capacity-related.",
+      "available_actions": [
+        "speak",
+        "action"
+      ],
+      "state": {
+        "mode": "CAUSAL_AMBIGUITY",
+        "explicit_facts": [
+          "Milestone was missed.",
+          "Cause is unspecified."
+        ],
+        "agents": {},
+        "hypotheses": [
+          {
+            "hypothesis": "Temporary personal interruption.",
+            "support": [],
+            "counterevidence_or_missing": [
+              "No detail."
+            ]
+          },
+          {
+            "hypothesis": "Technical blocker.",
+            "support": [],
+            "counterevidence_or_missing": [
+              "No detail."
+            ]
+          },
+          {
+            "hypothesis": "Capacity problem.",
+            "support": [],
+            "counterevidence_or_missing": [
+              "No detail."
+            ]
+          }
+        ],
+        "missing_bridges": [
+          "No information about duration or type of blocker."
+        ],
+        "uncertainty": {
+          "level": "high",
+          "reason": "Different causes imply different scheduling actions."
+        },
+        "decision_relevant_summary": "Ask a targeted question about blocker type and expected duration before reallocating work."
+      },
+      "expected_strategy_types": [
+        "INFORMATION_PROBE"
+      ]
+    },
+    {
+      "id": "dp08_known_matching_route",
+      "private_goal": "Increase the effective value of a donor's contribution.",
+      "visible_context": "The donor's personal cap is $300. They have confirmed their employer will match eligible donations 1:1, and they have not yet submitted the match request.",
+      "available_actions": [
+        "speak",
+        "action"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Personal cap is $300.",
+          "A confirmed 1:1 employer match is available.",
+          "Match request is not submitted yet."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "The leverage mechanism is confirmed."
+        },
+        "decision_relevant_summary": "Use the confirmed employer match rather than press for more personal money."
+      },
+      "expected_strategy_types": [
+        "ALTERNATIVE_PATH",
+        "DIRECT_PROGRESS"
+      ]
+    },
+    {
+      "id": "dp09_acceptable_offer_commit",
+      "private_goal": "Sell the item for at least $610.",
+      "visible_context": "A buyer offers $620 cash today. The item is available, there are no ownership concerns, and your minimum acceptable price is $610.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Offer is $620.",
+          "Seller floor is $610.",
+          "No material unresolved issue remains."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "The offer satisfies the reservation value."
+        },
+        "decision_relevant_summary": "The current offer satisfies the goal and can be accepted."
+      },
+      "expected_strategy_types": [
+        "COMMIT"
+      ]
+    },
+    {
+      "id": "dp10_nonprice_term_unlocks_deal",
+      "private_goal": "Sell a desk for at least $180.",
+      "visible_context": "The buyer says $180 works only if delivery is included. You can deliver it tomorrow at low cost, and no other issue is unresolved.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Price target is met if delivery is included.",
+          "Seller can deliver at low cost."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "The remaining term and feasibility are explicit."
+        },
+        "decision_relevant_summary": "Use the low-cost delivery term to close the acceptable-price deal."
+      },
+      "expected_strategy_types": [
+        "COMMIT",
+        "ALTERNATIVE_PATH"
+      ]
+    },
+    {
+      "id": "dp11_goal_achieved_confirm",
+      "private_goal": "Schedule a meeting with the client this week.",
+      "visible_context": "The client has accepted Thursday at 2 PM and asked you to send the calendar invite.",
+      "available_actions": [
+        "speak",
+        "action"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Thursday 2 PM is accepted.",
+          "Calendar invite is requested."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "The agreement is complete."
+        },
+        "decision_relevant_summary": "Complete the agreed scheduling action."
+      },
+      "expected_strategy_types": [
+        "COMMIT",
+        "DIRECT_PROGRESS"
+      ]
+    },
+    {
+      "id": "dp12_direct_approved_execution",
+      "private_goal": "Publish the approved announcement.",
+      "visible_context": "The final announcement text has been approved by all required reviewers and the scheduled publishing window is open now.",
+      "available_actions": [
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Final text is approved.",
+          "Publishing window is open."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "No relevant uncertainty remains."
+        },
+        "decision_relevant_summary": "Publish the approved announcement now."
+      },
+      "expected_strategy_types": [
+        "DIRECT_PROGRESS",
+        "COMMIT"
+      ]
+    }
+  ]
+}
