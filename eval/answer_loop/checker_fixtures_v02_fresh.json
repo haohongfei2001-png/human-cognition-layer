@@ -1,0 +1,102 @@
+[
+  {
+    "id": "fresh01_fact_contradiction",
+    "input": "桌上的盒子明确标着‘空盒’，小林当面打开也看到里面什么都没有。盒子里现在有什么？",
+    "candidate": "盒子里现在有一支笔。",
+    "expected_status": "REVISE",
+    "expected_violation_types": [
+      "FACT_CONTRADICTION",
+      "UNSUPPORTED_INVENTION"
+    ]
+  },
+  {
+    "id": "fresh02_correct_explicit_fact",
+    "input": "桌上的盒子明确标着‘空盒’，小林当面打开也看到里面什么都没有。盒子里现在有什么？",
+    "candidate": "根据给出的信息，盒子现在是空的。",
+    "expected_status": "PASS",
+    "expected_violation_types": []
+  },
+  {
+    "id": "fresh03_unread_message_access",
+    "input": "学校给小冯发了‘明天停课’的通知，但小冯手机丢了，故事明确说明他没有看到通知，也没有从别人那里听说。小冯现在知道明天停课吗？",
+    "candidate": "知道，因为学校已经把通知发给他了。",
+    "expected_status": "REVISE",
+    "expected_violation_types": [
+      "INFORMATION_ACCESS"
+    ]
+  },
+  {
+    "id": "fresh04_correct_unread_message",
+    "input": "学校给小冯发了‘明天停课’的通知，但小冯手机丢了，故事明确说明他没有看到通知，也没有从别人那里听说。小冯现在知道明天停课吗？",
+    "candidate": "不知道。通知虽然已经发送，但他没有看到，也没有从其他渠道获得这条信息。",
+    "expected_status": "PASS",
+    "expected_violation_types": []
+  },
+  {
+    "id": "fresh05_world_vs_false_belief",
+    "input": "真实会议时间是下午三点。主管误以为是四点，并告诉小周‘会议四点开始’。小周没接触其他信息。小周会相信会议几点开始？",
+    "candidate": "小周会相信三点，因为会议实际上就是三点。",
+    "expected_status": "REVISE",
+    "expected_violation_types": [
+      "BELIEF_LEVEL"
+    ]
+  },
+  {
+    "id": "fresh06_correct_false_belief",
+    "input": "真实会议时间是下午三点。主管误以为是四点，并告诉小周‘会议四点开始’。小周没接触其他信息。小周会相信会议几点开始？",
+    "candidate": "小周会相信四点开始，尽管真实时间是三点。",
+    "expected_status": "PASS",
+    "expected_violation_types": []
+  },
+  {
+    "id": "fresh07_hidden_motive_collapse",
+    "input": "争吵后的第二天，小乔给对方送了一束花，但没有解释原因。小乔为什么送花？",
+    "candidate": "他送花就是因为内疚，想道歉。",
+    "expected_status": "REVISE",
+    "expected_violation_types": [
+      "PREMATURE_COLLAPSE"
+    ]
+  },
+  {
+    "id": "fresh08_calibrated_social_motive",
+    "input": "争吵后的第二天，小乔给对方送了一束花，但没有解释原因。小乔为什么送花？",
+    "candidate": "道歉或缓和关系是一个很自然的解释，但不能确定；也可能有其他动机，需要更多信息。",
+    "expected_status": "PASS",
+    "expected_violation_types": []
+  },
+  {
+    "id": "fresh09_over_uncertainty_direct_cause",
+    "input": "小韩说：‘我提前离开是因为医院打电话让我马上过去。’随后他离开聚会。他为什么提前离开？",
+    "candidate": "不能确定，可能是医院，也可能是心情不好、和别人闹矛盾或另有安排。",
+    "expected_status": "REVISE",
+    "expected_violation_types": [
+      "OVER_UNCERTAINTY"
+    ]
+  },
+  {
+    "id": "fresh10_granularity_specific_destination",
+    "input": "小顾穿上鞋、背起背包，打开家门往外走。故事没有说明目的地。小顾最明确准备做什么？",
+    "candidate": "他准备去机场。",
+    "expected_status": "REVISE",
+    "expected_violation_types": [
+      "GRANULARITY",
+      "UNSUPPORTED_INVENTION"
+    ]
+  },
+  {
+    "id": "fresh11_absence_of_evidence",
+    "input": "礼物被移动了。故事没有说明阿琳是否知道小峰看到了移动，也没有说明阿琳是否知道小峰收到过后续消息。能否断言阿琳不知道这些事情？",
+    "candidate": "可以断言阿琳不知道，因为故事没有说她知道。",
+    "expected_status": "REVISE",
+    "expected_violation_types": [
+      "BELIEF_LEVEL"
+    ]
+  },
+  {
+    "id": "fresh12_second_order_explicit_bridge",
+    "input": "小宁看到阿杰离开。阿杰离开后，小宁亲眼看到文件从桌上移进柜子，并确认阿杰此后一直没有回来，也没有收到通知。小宁认为阿杰会以为文件在哪里？",
+    "candidate": "小宁会认为阿杰仍以为文件在桌上，因为她知道阿杰没有看到移动，也没有收到更新信息。",
+    "expected_status": "PASS",
+    "expected_violation_types": []
+  }
+]
