@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/HCL_V03_STATE_V02_TRIGGER"
+      - ".github/HCL_V03_STATE_V02_REGRESSION_TRIGGER"
 
 permissions:
   contents: read
