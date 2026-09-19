@@ -91,6 +91,110 @@ def _parse_custom_model(model_name: str) -> tuple[str, str, str]:
     return model_name, base_url, api_key
 
 
+BASELINE_ACTION_SYSTEM = """You are a SOTOPIA social agent.
+
+You receive:
+- your identity;
+- your private social goal;
+- the visible interaction history;
+- the current environment observation;
+- the currently available action types.
+
+Choose one valid next action that helps pursue your private goal while keeping
+the interaction natural and coherent.
+
+Return JSON only:
+{
+  "action_type": "none|speak|non-verbal communication|action|leave",
+  "argument": "...",
+  "to": []
+}
+
+Rules:
+1. action_type MUST be one of the available actions supplied by the environment.
+2. Use an empty argument for none/leave.
+3. Stay consistent with the visible history.
+4. Do not invent facts or private information not available to the agent.
+5. Keep the action natural and goal-directed.
+"""
+
+
+class DirectSocialAgent(LLMAgent):
+    """Fair DeepSeek baseline using the same direct transport as HCLSocialAgent.
+
+    SOTOPIA's stock LLMAgent currently requests a response_format unsupported
+    by the DeepSeek endpoint and silently falls back to "none". This adapter
+    preserves ordinary goal/history-driven social action generation while
+    removing that transport incompatibility. It has no HCL state or checker.
+    """
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        api_model, base_url, api_key = _parse_custom_model(self.model_name)
+        self.direct_backend = OpenAICompatibleBackend(
+            api_key=api_key,
+            base_url=base_url,
+            model=api_model,
+            seed=42,
+        )
+
+    def _history_text_direct(self) -> str:
+        return "\n".join(
+            message.to_natural_language() for _, message in self.inbox
+        )
+
+    async def aact(self, obs: Observation) -> AgentAction:
+        self.recv_message("Environment", obs)
+
+        if self._goal is None:
+            self._goal = "Act naturally and coherently in the interaction."
+
+        if len(obs.available_actions) == 1 and "none" in obs.available_actions:
+            return AgentAction(action_type="none", argument="", to=[])
+
+        payload = (
+            f"【agent】\n{self.agent_name}\n\n"
+            f"【private goal】\n{self.goal}\n\n"
+            "【visible history】\n"
+            f"{self._history_text_direct()}\n\n"
+            "【current observation】\n"
+            f"{obs.to_natural_language()}\n\n"
+            "【available actions】\n"
+            + json.dumps(obs.available_actions, ensure_ascii=False)
+        )
+
+        raw = self.direct_backend.complete(
+            [
+                {"role": "system", "content": BASELINE_ACTION_SYSTEM},
+                {"role": "user", "content": payload},
+            ],
+            max_tokens=4096,
+            temperature=0.0,
+        )
+        parsed = extract_json(raw)
+        if parsed is None:
+            return AgentAction(action_type="none", argument="", to=[])
+
+        action_type = str(parsed.get("action_type", "none")).strip()
+        if action_type not in obs.available_actions:
+            action_type = (
+                "none" if "none" in obs.available_actions else obs.available_actions[0]
+            )
+
+        argument = str(parsed.get("argument", ""))
+        to_value = parsed.get("to", [])
+        to = [str(x) for x in to_value] if isinstance(to_value, list) else []
+
+        if action_type in {"none", "leave"}:
+            argument = ""
+
+        return AgentAction(
+            action_type=action_type,  # type: ignore[arg-type]
+            argument=argument,
+            to=to,
+        )
+
+
 class HCLSocialAgent(LLMAgent):
     """SOTOPIA LLMAgent-compatible agent with always-on HCL cognition."""
 
