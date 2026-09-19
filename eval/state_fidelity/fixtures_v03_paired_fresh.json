@@ -232,14 +232,16 @@
     "scene": "小博拿起手机和外套，往门口走。故事没有说明他要去哪里。",
     "question": "小博打算做什么？",
     "expected": {
-      "mode": "CAUSAL_AMBIGUITY",
+      "mode": "SIMPLE",
       "uncertainty": [
-        "high"
+        "low",
+        "medium"
       ],
-      "min_hypotheses": 2,
-      "max_hypotheses": 6,
-      "require_missing_bridge": true
-    }
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false
+    },
+    "adjudication_note": "The question asks for coarse intended action. Walking to the door with phone and coat strongly supports 'leave/go out'; unknown destination is a finer-grained uncertainty and should not inflate the whole state."
   },
   {
     "id": "p17_explicit_preference",
@@ -347,11 +349,13 @@
     "expected": {
       "mode": "CAUSAL_AMBIGUITY",
       "uncertainty": [
+        "medium",
         "high"
       ],
       "min_hypotheses": 2,
       "max_hypotheses": 6,
       "require_missing_bridge": true
-    }
+    },
+    "adjudication_note": "Post-quarrel timing gives reconciliation/apology materially stronger support than a context-free motive, but alternatives remain credible. Medium vs high is a calibration boundary, not a structural cognition failure."
   }
 ]
