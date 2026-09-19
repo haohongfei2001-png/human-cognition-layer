@@ -1,0 +1,45 @@
+name: HCL v0.3 Answer Checker
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_V03_CHECKER_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  checker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install openai
+
+      - name: Run HCL answer checker suite
+        run: |
+          python scripts/run_hcl_v03_answer_checker.py \
+            --model deepseek-flash \
+            --fixtures eval/answer_loop/checker_fixtures_v01.json
+
+      - name: Upload checker artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v03-checker-${{ github.run_id }}
+          path: artifacts/hcl-v03-answer-checker/
+          if-no-files-found: warn
+          retention-days: 30
