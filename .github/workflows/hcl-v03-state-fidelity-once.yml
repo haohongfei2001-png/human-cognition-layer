@@ -1,0 +1,43 @@
+name: HCL v0.3 State Fidelity
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_V03_STATE_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  fidelity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install openai
+
+      - name: Run HCL v0.3 state fidelity suite
+        run: |
+          python scripts/run_hcl_v03_state_fidelity.py             --model deepseek-flash             --fixtures eval/state_fidelity/fixtures_v01.json             --max-tokens 4096
+
+      - name: Upload fidelity artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v03-state-fidelity-${{ github.run_id }}
+          path: artifacts/hcl-v03-state-fidelity/
+          if-no-files-found: warn
+          retention-days: 30
