@@ -97,3 +97,57 @@ See:
 Design **HCL v0.1 — Epistemic Uncertainty Layer** as a portable external module, then test it on a fresh unseen CogToM holdout before any model training.
 
 No model weights should be modified in this phase.
+
+
+## HCL v0.2 fresh-holdout result
+
+Run: `35412243224`
+
+Fresh 40-group holdout excluded both:
+- the 200-group seed-42 design/audit set;
+- the 100-group seed-43 HCL v0.1 holdout.
+
+Result:
+- Vanilla mean group accuracy: **97.0%**
+- HCL v0.2 mean group accuracy: **97.0%**
+- Activated groups: **10 / 40**
+- Improved groups: **0**
+- Harmed groups: **0**
+- Net delta: **0.0 pp**
+
+Interpretation:
+- Selective routing successfully removed the regression tax seen in v0.1.
+- It did **not** demonstrate measurable gain on broad CogToM.
+- Broad CogToM is near ceiling for DeepSeek Flash in this setup and is not a suitable primary optimization target.
+
+## Gold-reliability concern
+
+The owner's direct audit of the first two failures challenged the benchmark gold itself:
+- one item omitted the evidence needed for a unique second-order belief;
+- another treated one observed outcome as if it uniquely identified a hidden cause.
+
+Therefore CogToM gold labels must not be treated as unquestionable truth for HCL training.
+
+Current policy:
+1. CogToM remains a diagnostic/unit-test benchmark.
+2. Items judged underdetermined or normatively ambiguous must be tagged `gold_questionable` and excluded from training targets.
+3. Improvements against CogToM gold alone are insufficient evidence of better human understanding.
+4. The next main method evaluation should move to an interaction benchmark with less dependence on a single forced gold answer.
+
+## Next research step
+
+**Move to SOTOPIA-Hard method evaluation.**
+
+Use the same portable HCL design as an external layer around the same base model and compare:
+- vanilla social agent;
+- vanilla + selective HCL.
+
+CogToM remains as a regression/diagnostic suite only.
+
+Before any training:
+- implement SOTOPIA baseline runner;
+- reproduce a small standard hard subset;
+- add HCL as a detachable module;
+- compare goal/social metrics under the same evaluator configuration.
+
+No model weights should be modified yet.
