@@ -235,3 +235,31 @@ Current canonical execution:
 3. run a previously unused SOTOPIA-Hard holdout slice;
 4. only if the signal survives, add repeated runs / uncertainty estimates;
 5. then test cross-base-model transfer.
+
+
+## Decision-policy repair status
+
+Decision Policy synthetic gate:
+- run `35449770050`
+- raw **11 / 12**
+- sole raw failure was adjudicated as a taxonomy-boundary issue: the policy
+  chose DIRECT_PROGRESS for concretizing an already offered coffee alternative,
+  while the fixture allowed only COMMIT / ALTERNATIVE_PATH.
+- raw 11/12 is preserved; no post-hoc 12/12 claim.
+- decision: **synthetic gate PASSED**.
+
+Updated SOTOPIA integration smoke:
+- run `35450003786`
+- **PASS**
+- Decision Policy is present between frozen HCL state and action generation.
+- current-observation duplication is removed.
+- environment-forced `none` turns now still build and log HCL cognition,
+  satisfying the always-on doctrine.
+
+Fresh generalization test:
+- workflow: `SOTOPIA-Hard Fresh Holdout 10 A/B`
+- run `35450229188`
+- settings: previously unused Hard ordinals **10-19**
+- sharded into five 2-setting jobs, max parallelism 2
+- status at launch: queued/running
+- diagnostic settings 0-9 are not reused for this generalization result.
