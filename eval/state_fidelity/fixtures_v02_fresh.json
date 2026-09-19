@@ -1,0 +1,512 @@
+[
+  {
+    "id": "s01_direct_location",
+    "scene": "林涛亲眼看到钥匙被放进玄关抽屉，之后一直站在旁边，没有人碰过抽屉。",
+    "question": "林涛现在认为钥匙在哪里？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "s02_explicit_preference",
+    "scene": "小雅说：‘我不喝咖啡，我只喝绿茶。’",
+    "question": "如果只有咖啡和绿茶，哪一种符合小雅明确表达的偏好？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "s03_explicit_emotion",
+    "scene": "阿哲说：‘我现在很开心，因为考试通过了。’",
+    "question": "阿哲明确表达了什么情绪？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "s04_explicit_intention",
+    "scene": "陈琳说：‘我今晚七点去图书馆还书。’",
+    "question": "陈琳明确表示今晚准备做什么？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "s05_direct_observation",
+    "scene": "小孟站在窗边，清楚看到快递员把包裹放在门口。",
+    "question": "小孟是否知道包裹被放在门口？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "s06_public_announcement",
+    "scene": "主持人在所有参会者都在场时宣布：‘会议改到三点。’",
+    "question": "在场参会者是否获得了会议改到三点的信息？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "s07_explicit_refusal",
+    "scene": "小周说：‘谢谢，但我不参加今晚的聚餐。’",
+    "question": "小周是否接受了今晚的聚餐邀请？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "s08_explicit_promise",
+    "scene": "王宁对李明说：‘我明早九点把文件发给你。’",
+    "question": "王宁明确承诺了什么？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "s09_obvious_humor",
+    "scene": "外面烈日炎炎，小秦看着朋友厚厚的羽绒服笑道：‘今天真适合穿这个去晒太阳。’",
+    "question": "这句话主要是在做什么？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low",
+        "medium"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "s10_explicit_cause",
+    "scene": "小何说：‘我今天迟到是因为地铁停运了。’",
+    "question": "根据小何自己的明确陈述，他为什么迟到？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "s11_explicit_desire",
+    "scene": "小安说：‘我最想去海边，不想去商场。’",
+    "question": "小安明确表达了什么愿望？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "s12_read_message",
+    "scene": "小雨打开并读完了老板发来的消息，消息写着项目延期一周。",
+    "question": "小雨是否知道项目延期一周？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "e01_false_belief_location",
+    "scene": "赵强把球放进蓝箱后离开。离开后，孙梅把球移到红箱。赵强没有回来，也没收到任何消息。",
+    "question": "赵强现在会认为球在哪里？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "e02_false_belief_content",
+    "scene": "妈妈把礼物盒里原来的玩具换成了一本书。小乐在更换前离开房间，没有看到更换，也没有被告知。",
+    "question": "小乐会认为礼物盒里是什么？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "e03_second_order_explicit",
+    "scene": "刘敏看到郭涛把文件放进A柜。郭涛离开后，刘敏看到别人把文件移到B柜，并确认郭涛一直没回来也没收到消息。",
+    "question": "刘敏认为郭涛会认为文件在哪里？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "e04_second_order_missing_bridge",
+    "scene": "小陈知道办公室已经换了门禁密码。小李刚从外地回来。故事没有说明小李是否收到通知，也没有说明小陈是否知道小李收到过通知。",
+    "question": "小陈能否确定小李知道新密码？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "medium",
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 5,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "e05_private_information",
+    "scene": "主管只私下告诉小林明天放假，并明确说还没通知其他人。小林没有转告任何人。",
+    "question": "在没有其他信息时，能否认为其他同事已经知道明天放假？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low",
+        "medium"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 3,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "e06_overheard_information",
+    "scene": "小赵躲在门外，完整听到了屋内两人说‘明天取消会议’，屋内两人不知道小赵在门外。",
+    "question": "小赵是否知道明天取消会议？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "e07_unread_message",
+    "scene": "老板给小魏发了‘下午会议取消’的消息，但故事明确说明小魏的手机没电，他还没有看到这条消息。",
+    "question": "小魏现在是否知道下午会议取消？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "e08_false_information",
+    "scene": "老师误以为考试在周五，于是明确告诉小杰‘考试周五进行’。实际考试安排是周四，小杰没有接触其他信息。",
+    "question": "小杰目前会相信考试在哪一天？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "e09_blindfold",
+    "scene": "箱子里放入一支红笔时，小安戴着眼罩。随后眼罩摘下，但箱子一直关着，也没人告诉他里面是什么。",
+    "question": "小安是否知道箱子里是红笔？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low",
+        "medium"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "e10_second_order_observation",
+    "scene": "小芳看到小凯离开房间。小凯离开后，小芳亲眼看到桌上的杯子被换走，并且看到小凯始终没有回来。",
+    "question": "小芳是否有依据认为小凯还会按原来的杯子位置来判断？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low",
+        "medium"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 3,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "e11_uncertain_hearing",
+    "scene": "小马和小周在隔壁房间谈到项目延期。小林坐在走廊，但故事没有说明门是否关着、他们说话音量多大，也没有说明小林是否听到。",
+    "question": "能否确定小林知道项目延期？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 5,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "e12_broken_chain",
+    "scene": "老板告诉了主管，主管说‘我稍后告诉团队’，但故事没有说明主管后来是否真的告诉了团队。",
+    "question": "能否确定团队已经知道老板的消息？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "medium",
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 4,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "c01_no_reply",
+    "scene": "小陈昨晚给朋友发了一条需要回复的消息，到第二天中午仍没收到回复。没有提供朋友期间的任何情况。",
+    "question": "朋友没有回复说明什么？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "c02_terse_reply",
+    "scene": "平时很健谈的小王在会议后只说‘知道了’，随后离开。没有表情、语气或会议内容信息。",
+    "question": "小王当时为什么这么简短？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "c03_empty_handed",
+    "scene": "主管让小李去仓库拿打印纸。几分钟后小李空手回来，也没有解释。",
+    "question": "小李为什么空手回来？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "c04_left_early",
+    "scene": "小敏参加朋友生日聚会不到半小时就离开，没说明原因。",
+    "question": "小敏为什么提前离开？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "c05_late_meeting",
+    "scene": "小郑比约定时间晚了四十分钟到会议室，到了以后没有解释原因。",
+    "question": "小郑为什么迟到？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "c06_crying",
+    "scene": "小夏走出办公室时眼里有泪，但故事没有说明办公室里发生了什么。",
+    "question": "小夏为什么哭？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "c07_laughter_after_news",
+    "scene": "听到一条令人意外的坏消息后，小杜突然笑了一下。没有进一步描述。",
+    "question": "小杜为什么笑？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "c08_unopened_gift",
+    "scene": "小青收到朋友送的礼物后把它放在桌上，一整天没有拆开。",
+    "question": "小青为什么没有拆礼物？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "c09_unfollow",
+    "scene": "小林发现一位朋友在社交平台上取消了对自己的关注，没有其他信息。",
+    "question": "朋友为什么取消关注？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "c10_avoids_eye_contact",
+    "scene": "谈话中小唐一直很少和对方对视，但没有其他行为或背景信息。",
+    "question": "小唐为什么很少对视？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "c11_cancel_plan",
+    "scene": "朋友在见面前一小时发消息说‘今天不去了’，没有解释原因。",
+    "question": "朋友为什么取消见面？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "c12_sudden_silence",
+    "scene": "聊天时小许原本一直积极回应，某个话题出现后突然沉默，但没有说明他在想什么。",
+    "question": "小许为什么突然沉默？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  }
+]
