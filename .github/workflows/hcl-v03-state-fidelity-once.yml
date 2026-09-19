@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/HCL_V03_STATE_TRIGGER"
+      - ".github/HCL_V03_STATE_TRIGGER_V2"
 
 permissions:
   contents: read
@@ -31,7 +31,7 @@ jobs:
 
       - name: Run HCL v0.3 state fidelity suite
         run: |
-          python scripts/run_hcl_v03_state_fidelity.py             --model deepseek-flash             --fixtures eval/state_fidelity/fixtures_v01.json             --max-tokens 4096
+          python scripts/run_hcl_v03_state_fidelity.py             --model deepseek-flash             --fixtures eval/state_fidelity/fixtures_v01.json             --max-tokens 8192
 
       - name: Upload fidelity artifacts
         if: always()
