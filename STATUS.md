@@ -139,7 +139,7 @@ The checker must inspect:
 
 ## Current gate
 
-**ANSWER_LOOP_IMPLEMENTATION_READY**
+**ANSWER_LOOP_CHECKER_GATE_PASSED**
 
 No model training yet.
 
@@ -160,3 +160,37 @@ HCL state semantics (FROZEN)
 → training/adapters if justified
 → EQ-Bench 4
 ```
+
+
+## Answer-loop checker result
+
+Always-on answer-loop implementation:
+- `hcl/v03/answer_loop.py`
+- `hcl/v03/backends.py`
+- `hcl/v03/ANSWER_LOOP_PROTOCOL.md`
+
+First adversarial checker suite:
+- run `35415496804`
+- raw 9 / 12
+- revision-family hit rate: 100%
+- final-check pass rate: 100%
+- all raw failures were audit/test expectation issues, not checker logic failures.
+
+Fresh adversarial checker suite:
+- run `35415880531`
+- raw **11 / 12**
+- revision-family hit rate: **100%**
+- final-check pass rate: **100%**
+- sole raw failure was a fixture expectation that silently assumed an agent's initial knowledge.
+
+See:
+- `reports/HCL_V03_ANSWER_CHECKER_V01_ADJUDICATION.md`
+- `reports/HCL_V03_ANSWER_CHECKER_V02_ADJUDICATION.md`
+
+Decision:
+**HCL v0.3 answer checker gate PASSED.**
+
+Next canonical execution:
+1. small always-on CogToM regression diagnostic;
+2. SOTOPIA-Hard custom-agent smoke;
+3. then fixed-subset A/B if smoke succeeds.
