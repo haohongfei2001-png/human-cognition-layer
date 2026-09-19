@@ -102,9 +102,22 @@ def stratified_sample(records: list[dict[str, Any]], size: int, seed: int) -> li
     return selected
 
 
-def prepare_dataset(language: str, size: int, seed: int, sampling: str) -> tuple[Path, Path, dict[str, Any]]:
+def prepare_dataset(
+    language: str,
+    size: int,
+    seed: int,
+    sampling: str,
+    exclude_size: int = 0,
+    exclude_seed: int = 42,
+) -> tuple[Path, Path, dict[str, Any]]:
     source = COGTOM_DIR / "data" / f"CogToM-{language}.jsonl"
     records = read_jsonl(source)
+
+    excluded_ids: set[str] = set()
+    if exclude_size > 0:
+        excluded = stratified_sample(records, size=exclude_size, seed=exclude_seed)
+        excluded_ids = {str(r.get("id")) for r in excluded}
+        records = [r for r in records if str(r.get("id")) not in excluded_ids]
 
     if sampling == "head":
         selected = records if size <= 0 else records[:size]
@@ -140,6 +153,8 @@ def prepare_dataset(language: str, size: int, seed: int, sampling: str) -> tuple
         "selected_categories": dict(sorted(categories.items())),
         "selected_subcategory_count": len(strata),
         "seed": seed,
+        "excluded_groups": len(excluded_ids),
+        "exclude_seed": exclude_seed if excluded_ids else None,
     }
     return sample_path, config_path, sampling_meta
 
@@ -183,6 +198,13 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument(
+        "--exclude-size",
+        type=int,
+        default=0,
+        help="Exclude a deterministic stratified sample before selecting this run (for disjoint holdouts).",
+    )
+    parser.add_argument("--exclude-seed", type=int, default=42)
+    parser.add_argument(
         "--max-tokens",
         type=int,
         default=8192,
@@ -216,6 +238,8 @@ def main() -> int:
         size=args.limit,
         seed=args.seed,
         sampling=args.sampling,
+        exclude_size=args.exclude_size,
+        exclude_seed=args.exclude_seed,
     )
     prompt = f"configs/prompts/vanilla-{args.language}.yaml"
 
