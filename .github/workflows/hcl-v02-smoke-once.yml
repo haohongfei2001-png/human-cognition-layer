@@ -1,0 +1,51 @@
+name: HCL v0.2 Fresh Holdout Smoke
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_V02_SMOKE_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      DEEPSEEK_API_KEY: \${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install CogToM dependencies
+        shell: bash
+        run: |
+          git clone --quiet https://github.com/Beijing-AISI/CogToM.git .cache/CogToM
+          git -C .cache/CogToM checkout --quiet --detach 28c6781b6ea7d7ef7d491f61adc18f076f8b993c
+          python -m pip install --upgrade pip
+          python -m pip install -r .cache/CogToM/requirements.txt
+
+      - name: Run fresh 40-group HCL v0.2 smoke
+        shell: bash
+        run: |
+          python scripts/run_cogtom_hcl_v02.py \
+            --model deepseek-flash \
+            --language zh \
+            --limit 40 \
+            --seed 44 \
+            --workers 6
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v02-smoke-\${{ github.run_id }}
+          path: artifacts/
+          if-no-files-found: warn
+          retention-days: 30
