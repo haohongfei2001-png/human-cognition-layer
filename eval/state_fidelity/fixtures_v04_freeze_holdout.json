@@ -1,0 +1,276 @@
+[
+  {
+    "id": "h01_explicit_schedule",
+    "scene": "小程说：‘我三点去牙医那里复诊。’",
+    "question": "小程明确说三点要做什么？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "h02_direct_visual_update",
+    "scene": "阿文一直站在桌边，亲眼看到红色文件夹从桌面移进右侧柜子，之后没人再动它。",
+    "question": "阿文现在认为红色文件夹在哪里？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "h03_explicit_social_motive",
+    "scene": "争执后，小宁说：‘我发这条消息就是想向她道歉。’",
+    "question": "小宁明确说明自己发消息的目的是什么？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "h04_coarse_action_granularity",
+    "scene": "小顾穿上鞋、背起已经收好的背包，打开家门往外走。故事没有说明他的目的地。",
+    "question": "小顾接下来最明确要做的粗粒度动作是什么？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "h05_explicit_emotion",
+    "scene": "小周说：‘我对这个结果非常满意。’",
+    "question": "小周明确表达的态度是什么？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "h06_clear_joke",
+    "scene": "打印机又卡纸了，小夏笑着拍了拍机器说：‘它今天一定特别想休假。’",
+    "question": "这句话主要是在做什么？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low",
+        "medium"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "h07_false_belief_explicit_initial_knowledge",
+    "scene": "小艾亲眼看到巧克力放进一号盒。随后她离开。她离开后，巧克力被移到二号盒；小艾没有回来，也没有收到任何消息。",
+    "question": "小艾现在会认为巧克力在哪个盒子？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false,
+      "agent_fields_excludes": {
+        "小艾": {
+          "knows": [
+            "二号盒"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "h08_misinformation_world_belief_divergence",
+    "scene": "火车真实发车时间是下午五点。朋友误看时刻表后告诉小梁‘火车六点发车’，小梁没有看到真正时刻表，也没收到其他信息。",
+    "question": "小梁目前会相信火车几点发车？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false,
+      "agent_fields_contains": {
+        "小梁": {
+          "believes": [
+            "六点"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "h09_second_order_clear",
+    "scene": "小宁看见阿杰离开办公室。阿杰离开后，小宁看到文件被从桌上移进柜子，并确认阿杰此后一直没回来、没收到通知。",
+    "question": "小宁认为阿杰会认为文件还在哪里？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false,
+      "min_beliefs_about_others": {
+        "小宁": 1
+      }
+    }
+  },
+  {
+    "id": "h10_second_order_unknown_access",
+    "scene": "小宁知道文件被移进柜子，但故事没有说明阿杰当时是否在场，也没有说明小宁是否知道阿杰有没有看到。",
+    "question": "小宁能否确定阿杰对文件位置的信念？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 5,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "h11_unread_notification",
+    "scene": "学校给小冯发送了‘明天停课’的通知，但小冯手机丢了，故事明确说明他没有看到通知，也没有从其他人那里听说。",
+    "question": "小冯现在是否知道明天停课？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false
+    }
+  },
+  {
+    "id": "h12_uncertain_information_chain",
+    "scene": "经理把新安排告诉了组长。组长说会转告组员，但故事没有描述之后发生了什么。",
+    "question": "能否确定组员已经知道新安排？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "medium",
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 4,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "h13_equal_plausibility_silence",
+    "scene": "小陈看到消息后一直没有回复。没有提供他的日程、情绪、关系状态或设备情况。",
+    "question": "小陈为什么没有回复？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "h14_context_favors_reconciliation",
+    "scene": "两人昨晚吵了一架。第二天早上，其中一人主动发来‘昨晚的事我想再聊聊’，但没有说明具体目的。",
+    "question": "他为什么主动发这条消息？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "medium",
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "h15_behavior_emotion_multiple_causes",
+    "scene": "汇报结束后，小方叹了一口气，靠在椅背上。没有提供汇报结果、表情或他说的话。",
+    "question": "小方此刻可能是什么状态，为什么叹气？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "h16_strong_prior_but_not_unique",
+    "scene": "外面刚下过大雨。小齐从室外进来，裤脚全湿，手里拿着一把正在滴水的伞。没有说明他刚才具体去了哪里。",
+    "question": "为什么小齐的裤脚和伞是湿的？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "medium",
+        "high"
+      ],
+      "min_hypotheses": 1,
+      "max_hypotheses": 5,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "h17_ambiguous_social_distance",
+    "scene": "最近一周，小唐见到某位朋友时总是很快结束谈话。没有说明两人是否发生矛盾，也没有其他背景。",
+    "question": "小唐为什么总是很快结束谈话？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  },
+  {
+    "id": "h18_favored_motive_with_alternatives",
+    "scene": "同事刚完成一个困难项目。第二天，组长特意请他吃饭并当面夸奖他的工作，但没有说明请吃饭的唯一目的。",
+    "question": "组长为什么请他吃饭？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "medium",
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true
+    }
+  }
+]
