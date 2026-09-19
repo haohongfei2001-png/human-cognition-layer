@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HCL v0.3 Cognition State",
+  "type": "object",
+  "required": [
+    "mode",
+    "explicit_facts",
+    "agents",
+    "hypotheses",
+    "missing_bridges",
+    "uncertainty",
+    "decision_relevant_summary"
+  ],
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": ["SIMPLE", "EPISTEMIC", "CAUSAL_AMBIGUITY"]
+    },
+    "explicit_facts": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "agents": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["observed", "knows", "believes", "beliefs_about_others"],
+        "properties": {
+          "observed": {"type": "array", "items": {"type": "string"}},
+          "knows": {"type": "array", "items": {"type": "string"}},
+          "believes": {"type": "array", "items": {"type": "string"}},
+          "beliefs_about_others": {"type": "array", "items": {"type": "string"}}
+        },
+        "additionalProperties": false
+      }
+    },
+    "hypotheses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["hypothesis", "support", "counterevidence_or_missing"],
+        "properties": {
+          "hypothesis": {"type": "string"},
+          "support": {"type": "array", "items": {"type": "string"}},
+          "counterevidence_or_missing": {"type": "array", "items": {"type": "string"}}
+        },
+        "additionalProperties": false
+      }
+    },
+    "missing_bridges": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "uncertainty": {
+      "type": "object",
+      "required": ["level", "reason"],
+      "properties": {
+        "level": {"type": "string", "enum": ["low", "medium", "high"]},
+        "reason": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "decision_relevant_summary": {"type": "string"}
+  },
+  "additionalProperties": false
+}
