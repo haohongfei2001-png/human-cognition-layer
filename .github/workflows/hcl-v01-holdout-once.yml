@@ -1,0 +1,110 @@
+name: HCL v0.1 Disjoint Holdout A/B
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_V01_HOLDOUT_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  ab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - name: Checkout HCL repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install CogToM dependencies
+        shell: bash
+        run: |
+          git clone --quiet https://github.com/Beijing-AISI/CogToM.git .cache/CogToM
+          git -C .cache/CogToM checkout --quiet --detach 28c6781b6ea7d7ef7d491f61adc18f076f8b993c
+          python -m pip install --upgrade pip
+          python -m pip install -r .cache/CogToM/requirements.txt
+
+      - name: Run vanilla DeepSeek on disjoint 100-group holdout
+        shell: bash
+        run: |
+          python scripts/run_cogtom_baseline.py \
+            --model deepseek-flash \
+            --language zh \
+            --limit 100 \
+            --sampling stratified \
+            --exclude-size 200 \
+            --exclude-seed 42 \
+            --seed 43 \
+            --workers 8 \
+            --max-tokens 8192
+
+      - name: Run DeepSeek plus HCL v0.1 on same holdout
+        shell: bash
+        run: |
+          python scripts/run_cogtom_hcl_v01.py \
+            --model deepseek-flash \
+            --language zh \
+            --limit 100 \
+            --exclude-size 200 \
+            --exclude-seed 42 \
+            --seed 43 \
+            --workers 8 \
+            --analysis-max-tokens 4096 \
+            --answer-max-tokens 8192
+
+      - name: Build A/B report
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          root = pathlib.Path("artifacts")
+          vanilla = sorted([p for p in root.glob("deepseek-flash_vanilla-zh_stratified-100_*") if p.is_dir()])[-1]
+          hcl = sorted([p for p in root.glob("hcl-v0.1_deepseek-flash_zh_holdout-100_*") if p.is_dir()])[-1]
+          vs = json.loads((vanilla/"summary.json").read_text())
+          hs = json.loads((hcl/"summary.json").read_text())
+
+          def pct(x): return f"{100*x:.2f}%"
+          lines = [
+              "# HCL v0.1 Disjoint Holdout A/B",
+              "",
+              "Holdout: CogToM seed 43, excluding the 200 design/audit groups from seed 42.",
+              "",
+              "| Metric | Vanilla DeepSeek | DeepSeek + HCL v0.1 | Delta |",
+              "|---|---:|---:|---:|",
+          ]
+          for key, label in [
+              ("mean_group_accuracy", "Mean group accuracy"),
+              ("strict_all_variants_correct_rate", "All-5-variants-correct"),
+              ("semantic_consistency_rate", "Semantic consistency"),
+          ]:
+              a, b = vs[key], hs[key]
+              lines.append(f"| {label} | {pct(a)} | {pct(b)} | {100*(b-a):+.2f} pp |")
+          lines += [
+              "",
+              f"- Vanilla error groups: **{vs['groups_with_any_error']}**",
+              f"- HCL error groups: **{hs['groups_with_any_error']}**",
+              "",
+              "This is a development holdout, not a public benchmark claim.",
+          ]
+          (root/"HCL_V01_AB_REPORT.md").write_text("\n".join(lines)+"\n", encoding="utf-8")
+          print("\n".join(lines))
+          PY
+
+      - name: Upload A/B artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v01-ab-${{ github.run_id }}
+          path: artifacts/
+          if-no-files-found: warn
+          retention-days: 30
