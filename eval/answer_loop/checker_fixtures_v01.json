@@ -1,0 +1,169 @@
+[
+  {
+    "id": "chk01_correct_explicit_fact",
+    "input": "小林亲眼看见钥匙被放进玄关抽屉，之后没人移动。小林现在认为钥匙在哪里？",
+    "candidate": "小林会认为钥匙就在玄关抽屉里。",
+    "expected_status": "PASS",
+    "expected_violation_types": [],
+    "final_required": [
+      "玄关抽屉"
+    ],
+    "final_forbidden": [
+      "可能在别处"
+    ]
+  },
+  {
+    "id": "chk02_over_uncertainty",
+    "input": "小林亲眼看见钥匙被放进玄关抽屉，之后没人移动。小林现在认为钥匙在哪里？",
+    "candidate": "不太确定，钥匙可能在玄关抽屉，也可能后来去了别的地方。",
+    "expected_status": "REVISE",
+    "expected_violation_types": [
+      "OVER_UNCERTAINTY"
+    ],
+    "final_required": [
+      "玄关抽屉"
+    ],
+    "final_forbidden": [
+      "不太确定",
+      "可能后来"
+    ]
+  },
+  {
+    "id": "chk03_information_access_false_belief",
+    "input": "王晨把文件放进左边柜子后离开。之后李琪把文件移到右边柜子。王晨没有回来，也没收到消息。王晨现在会认为文件在哪？",
+    "candidate": "王晨会认为文件在右边柜子，因为文件实际上已经被移过去了。",
+    "expected_status": "REVISE",
+    "expected_violation_types": [
+      "INFORMATION_ACCESS",
+      "BELIEF_LEVEL"
+    ],
+    "final_required": [
+      "左边"
+    ],
+    "final_forbidden": [
+      "会认为文件在右边"
+    ]
+  },
+  {
+    "id": "chk04_premature_collapse_nonreply",
+    "input": "阿岚昨晚给朋友发了一条需要回复的消息，第二天中午仍然没有回复。没有提供朋友期间的任何情况。朋友没回复说明什么？",
+    "candidate": "这说明朋友已经不在乎阿岚了。",
+    "expected_status": "REVISE",
+    "expected_violation_types": [
+      "PREMATURE_COLLAPSE"
+    ],
+    "final_required": [
+      "无法确定"
+    ],
+    "final_forbidden": [
+      "说明朋友已经不在乎"
+    ]
+  },
+  {
+    "id": "chk05_correct_ambiguity",
+    "input": "阿岚昨晚给朋友发了一条需要回复的消息，第二天中午仍然没有回复。没有提供朋友期间的任何情况。朋友没回复说明什么？",
+    "candidate": "仅凭没有回复无法确定原因；可能没看到、正忙，或有其他情况，需要更多信息才能区分。",
+    "expected_status": "PASS",
+    "expected_violation_types": [],
+    "final_required": [
+      "无法确定"
+    ],
+    "final_forbidden": []
+  },
+  {
+    "id": "chk06_granularity_unsupported_destination",
+    "input": "小顾穿上鞋、背起已经收好的背包，打开家门往外走。没有说明目的地。小顾接下来最明确要做的粗粒度动作是什么？",
+    "candidate": "小顾准备去超市买东西。",
+    "expected_status": "REVISE",
+    "expected_violation_types": [
+      "GRANULARITY",
+      "UNSUPPORTED_INVENTION"
+    ],
+    "final_required": [
+      "出门"
+    ],
+    "final_forbidden": [
+      "超市"
+    ]
+  },
+  {
+    "id": "chk07_belief_level_misinformation",
+    "input": "火车真实发车时间是下午五点。朋友误看时刻表后告诉小梁‘火车六点发车’，小梁没看到真正时刻表，也没有其他信息。小梁目前会相信几点发车？",
+    "candidate": "小梁会相信火车下午五点发车，因为这才是真实时间。",
+    "expected_status": "REVISE",
+    "expected_violation_types": [
+      "BELIEF_LEVEL"
+    ],
+    "final_required": [
+      "六点"
+    ],
+    "final_forbidden": [
+      "会相信火车下午五点"
+    ]
+  },
+  {
+    "id": "chk08_correct_misinformation",
+    "input": "火车真实发车时间是下午五点。朋友误看时刻表后告诉小梁‘火车六点发车’，小梁没看到真正时刻表，也没有其他信息。小梁目前会相信几点发车？",
+    "candidate": "小梁目前会相信六点发车，虽然真实发车时间是五点。",
+    "expected_status": "PASS",
+    "expected_violation_types": [],
+    "final_required": [
+      "六点"
+    ],
+    "final_forbidden": []
+  },
+  {
+    "id": "chk09_second_order_missing_bridge",
+    "input": "礼物被移到了另一张桌子。阿琳知道礼物被移动，但故事没有说明她是否知道小峰有没有看到移动，也没有说明她是否知道小峰后来收到过消息。阿琳能否确定小峰对礼物位置的信念？",
+    "candidate": "可以。阿琳一定知道小峰仍然相信礼物在原来的地方。",
+    "expected_status": "REVISE",
+    "expected_violation_types": [
+      "BELIEF_LEVEL",
+      "PREMATURE_COLLAPSE"
+    ],
+    "final_required": [
+      "不能确定"
+    ],
+    "final_forbidden": [
+      "一定知道"
+    ]
+  },
+  {
+    "id": "chk10_correct_second_order_uncertainty",
+    "input": "礼物被移到了另一张桌子。阿琳知道礼物被移动，但故事没有说明她是否知道小峰有没有看到移动，也没有说明她是否知道小峰后来收到过消息。阿琳能否确定小峰对礼物位置的信念？",
+    "candidate": "不能确定。关键缺口是阿琳不知道小峰是否看到移动或后来获得了相关信息。",
+    "expected_status": "PASS",
+    "expected_violation_types": [],
+    "final_required": [
+      "不能确定"
+    ],
+    "final_forbidden": []
+  },
+  {
+    "id": "chk11_overinterpret_humor",
+    "input": "打印机又卡纸了，小夏笑着拍了拍机器说：‘它今天一定特别想休假。’这句话主要是在做什么？",
+    "candidate": "这可能说明小夏真的相信打印机有自主意识，也可能是在暗示公司设备采购存在严重问题。",
+    "expected_status": "REVISE",
+    "expected_violation_types": [
+      "OVER_UNCERTAINTY",
+      "UNSUPPORTED_INVENTION"
+    ],
+    "final_required": [
+      "玩笑"
+    ],
+    "final_forbidden": [
+      "真的相信打印机有自主意识"
+    ]
+  },
+  {
+    "id": "chk12_correct_humor",
+    "input": "打印机又卡纸了，小夏笑着拍了拍机器说：‘它今天一定特别想休假。’这句话主要是在做什么？",
+    "candidate": "是在开玩笑，用拟人的方式吐槽打印机又卡纸。",
+    "expected_status": "PASS",
+    "expected_violation_types": [],
+    "final_required": [
+      "玩笑"
+    ],
+    "final_forbidden": []
+  }
+]
