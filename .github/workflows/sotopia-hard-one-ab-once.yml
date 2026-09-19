@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/SOTOPIA_HARD_ONE_AB_TRIGGER_V2"
+      - ".github/SOTOPIA_HARD_ONE_AB_TRIGGER_V3"
 
 permissions:
   contents: read
@@ -33,6 +33,14 @@ jobs:
           git -C .cache/sotopia checkout --quiet --detach a0aaafb440e570e5e61b7c44a44e5e417c545383
           python -m pip install --upgrade pip
           python -m pip install -e .cache/sotopia
+          # Reproduce the pinned upstream environment instead of accepting
+          # dependency drift from broad pyproject ranges.
+          python -m pip install \
+            "pydantic==2.9.2" \
+            "redis-om==0.3.2" \
+            "redis==5.1.1" \
+            "openai==2.14.0" \
+            "litellm==1.80.11"
 
       - name: Load official SOTOPIA dataset into Redis
         shell: bash
