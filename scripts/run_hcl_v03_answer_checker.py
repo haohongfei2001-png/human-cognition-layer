@@ -4,12 +4,15 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import sys
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 
 from hcl.v03.answer_loop import HCLAnswerLoop
 from hcl.v03.backends import OpenAICompatibleBackend
 
-ROOT = Path(__file__).resolve().parents[1]
 BASE_URL = "https://api.deepseek.com"
 
 
