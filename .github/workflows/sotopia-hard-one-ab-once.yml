@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/SOTOPIA_HARD_ONE_AB_TRIGGER_V5"
+      - ".github/SOTOPIA_HARD_ONE_AB_TRIGGER_V6"
 
 permissions:
   contents: read
