@@ -6,7 +6,7 @@ Human Cognition Layer (HCL)
 
 ## Current phase
 
-**PHASE-02 — Always-on answer loop integration**
+**PHASE-03 — SOTOPIA-Hard paired method validation**
 
 ## Core doctrine
 
@@ -190,7 +190,21 @@ See:
 Decision:
 **HCL v0.3 answer checker gate PASSED.**
 
-Next canonical execution:
-1. small always-on CogToM regression diagnostic;
-2. SOTOPIA-Hard custom-agent smoke;
-3. then fixed-subset A/B if smoke succeeds.
+Completed:
+- SOTOPIA custom-agent smoke: PASS;
+- fair single-setting Hard A/B: PASS;
+- repaired official-rubric score extraction: PASS.
+
+Scored single-setting run `35430762893`:
+- tested-role control overall: **-0.8571**
+- tested-role HCL overall: **2.1429**
+- paired delta: **+3.0000**
+- HCL cognition states: 10
+
+This is one-setting evidence only, not an aggregate efficacy claim.
+
+Current canonical execution:
+1. fixed 10-setting SOTOPIA-Hard paired A/B slice;
+2. inspect dimension-level paired deltas and trajectory failure modes;
+3. if signal survives, add repeated runs / confidence intervals;
+4. then cross-base-model transfer.
