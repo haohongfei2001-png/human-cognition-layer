@@ -13,12 +13,12 @@ sys.path.insert(0, str(ROOT))
 
 from hcl.integrations.sotopia_agent import HCLSocialAgent
 
+from sotopia.agents import Agents
 from sotopia.agents.llm_agent import LLMAgent
 from sotopia.database import (
     AgentProfile,
     EnvAgentComboStorage,
     EnvironmentProfile,
-    EpisodeLog,
     SotopiaDimensions,
 )
 from sotopia.database.persistent_profile import EnvironmentList
@@ -28,7 +28,7 @@ from sotopia.envs.evaluators import (
     RuleBasedTerminatedEvaluator,
 )
 from sotopia.envs.parallel import ParallelSotopiaEnv
-from sotopia.server import arun_one_episode
+from sotopia.messages import AgentAction, SimpleMessage
 
 MODEL = "custom/deepseek-flash@https://api.deepseek.com"
 HARD_LIST_ID = "01HAK34YPB1H1RWXQDASDKHSNS"
@@ -91,46 +91,116 @@ async def run_episode(
     use_hcl: bool,
     tag: str,
 ) -> dict[str, Any]:
+    """Run one official SOTOPIA episode without constructing EpisodeLog.
+
+    Upstream's pinned Redis EpisodeLog model currently fails under the hosted
+    runner with an ExpressionProxy default for pk. That persistence bug is
+    orthogonal to environment dynamics/evaluation, so this runner uses the
+    same env/agent loop and terminal evaluators but stores results directly as
+    JSON artifacts.
+    """
     env = build_env(env_id)
-    agents = make_agents(
+    agent_list = make_agents(
         agent_ids=agent_ids,
         tested_index=tested_index,
         use_hcl=use_hcl,
     )
+    agents = Agents({agent.agent_name: agent for agent in agent_list})
 
-    await arun_one_episode(
-        env=env,
-        agent_list=agents,
-        omniscient=False,
-        script_like=False,
-        json_in_script=False,
-        tag=tag,
-        push_to_db=True,
-        streaming=False,
-    )
+    observations = env.reset(agents=agents, omniscient=False)
+    agents.reset()
 
-    episodes = EpisodeLog.find(EpisodeLog.tag == tag).all()
-    if not episodes:
-        raise RuntimeError(f"EpisodeLog not found for tag {tag}")
-    episode = episodes[-1]
+    for index, agent_name in enumerate(env.agents):
+        agents[agent_name].goal = env.profile.agent_goals[index]
 
-    tested_agent = agents[tested_index]
+    transcript: list[list[dict[str, str]]] = []
+    done = False
+    final_info: dict[str, Any] = {}
+
+    while not done:
+        turn_record: list[dict[str, str]] = []
+
+        actions = await asyncio.gather(
+            *[
+                agents[agent_name].aact(observations[agent_name])
+                for agent_name in env.agents
+            ]
+        )
+
+        action_map: dict[str, AgentAction] = {}
+        for idx, agent_name in enumerate(env.agents):
+            action = actions[idx]
+            try:
+                AgentAction.model_validate(
+                    action.model_dump(),
+                    context={"agent_names": env.agents, "sender": agent_name},
+                )
+            except ValueError as exc:
+                agents[agent_name].recv_message(
+                    "Environment",
+                    SimpleMessage(
+                        message=(
+                            f"Invalid action: {exc}. "
+                            "Regenerate according to the error."
+                        )
+                    ),
+                )
+                action = await agents[agent_name].aact(observations[agent_name])
+                AgentAction.model_validate(
+                    action.model_dump(),
+                    context={"agent_names": env.agents, "sender": agent_name},
+                )
+
+            action_map[agent_name] = action
+            turn_record.append(
+                {
+                    "sender": agent_name,
+                    "receiver": "Environment",
+                    "message": action.to_natural_language(),
+                }
+            )
+
+        observations, _, terminated, _, info = await env.astep(action_map)
+        final_info = info
+
+        for agent_name in env.agents:
+            turn_record.append(
+                {
+                    "sender": "Environment",
+                    "receiver": agent_name,
+                    "message": observations[agent_name].to_natural_language(),
+                }
+            )
+
+        transcript.append(turn_record)
+        done = all(terminated.values())
+
+    tested_agent = agent_list[tested_index]
     hcl_log = (
         getattr(tested_agent, "_hcl_turn_log", [])
         if use_hcl
         else []
     )
 
+    rewards = [
+        final_info[agent_name]["complete_rating"]
+        for agent_name in env.agents
+    ]
+    reasoning = [
+        str(final_info[agent_name].get("comments", ""))
+        for agent_name in env.agents
+    ]
+
     return {
         "tag": tag,
         "environment": env_id,
         "tested_index": tested_index,
         "agent_ids": agent_ids,
-        "agent_names": [agent.agent_name for agent in agents],
-        "models": episode.models,
-        "rewards": episode.rewards,
-        "reasoning": episode.reasoning,
-        "messages": episode.messages,
+        "agent_names": [agent.agent_name for agent in agent_list],
+        "models": [MODEL, MODEL, MODEL],
+        "rewards": rewards,
+        "reasoning": reasoning,
+        "messages": transcript,
         "hcl_turn_count": len(hcl_log),
         "hcl_turn_log": hcl_log,
     }
