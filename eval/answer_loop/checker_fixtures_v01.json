@@ -132,12 +132,15 @@
     "id": "chk10_correct_second_order_uncertainty",
     "input": "礼物被移到了另一张桌子。阿琳知道礼物被移动，但故事没有说明她是否知道小峰有没有看到移动，也没有说明她是否知道小峰后来收到过消息。阿琳能否确定小峰对礼物位置的信念？",
     "candidate": "不能确定。关键缺口是阿琳不知道小峰是否看到移动或后来获得了相关信息。",
-    "expected_status": "PASS",
-    "expected_violation_types": [],
+    "expected_status": "REVISE",
+    "expected_violation_types": [
+      "BELIEF_LEVEL"
+    ],
     "final_required": [
       "不能确定"
     ],
-    "final_forbidden": []
+    "final_forbidden": [],
+    "adjudication_note": "The candidate says '阿琳不知道', while the source only says the story does not specify whether 阿琳 knows. The checker correctly distinguishes absence of evidence from evidence of absence."
   },
   {
     "id": "chk11_overinterpret_humor",
