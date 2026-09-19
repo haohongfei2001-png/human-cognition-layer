@@ -21,14 +21,15 @@ A question may contain words such as "know", "believe", or "see" and still be SI
 Do NOT create unnecessary hypotheses in SIMPLE mode.
 
 ### EPISTEMIC
-Use EPISTEMIC only when the answer materially depends on:
+Use EPISTEMIC when the answer materially depends on:
 - asymmetric information access;
 - false belief;
 - who observed or did not observe a change;
 - what one agent thinks another agent knows or believes;
-- an incomplete or disputed information-transfer path.
+- an incomplete or disputed information-transfer path;
+- **a divergence between world truth and an agent's belief**, including misinformation or false belief.
 
-Direct, explicit knowledge does not by itself require EPISTEMIC mode.
+Direct, explicit knowledge does not by itself require EPISTEMIC mode when the agent's belief simply matches the established world state. However, explicit communication of false information creates an epistemic state because world truth and agent belief diverge.
 
 ### CAUSAL_AMBIGUITY
 Use CAUSAL_AMBIGUITY only when:
@@ -82,3 +83,12 @@ Return JSON only, matching this structure exactly:
 }
 
 Use the same language as the input.
+
+
+## Canonical serialization rule
+
+The JSON enum tokens are protocol constants and MUST remain in English exactly:
+- `mode`: `SIMPLE`, `EPISTEMIC`, or `CAUSAL_AMBIGUITY`
+- `uncertainty.level`: `low`, `medium`, or `high`
+
+All explanatory string values should follow the input language, but enum tokens must never be translated.
