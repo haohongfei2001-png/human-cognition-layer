@@ -78,11 +78,55 @@ def evaluate_fixture(fixture, state):
     checks["hypothesis_count"] = exp["min_hypotheses"] <= len(hs) <= exp["max_hypotheses"]
     bridges = state.get("missing_bridges",[])
     checks["missing_bridge"] = (len(bridges) > 0) if exp["require_missing_bridge"] else True
+    # Legacy lexical checks are diagnostic-only. They are too brittle to gate
+    # cognition fidelity because a valid state may mention a rejected hypothesis
+    # or express "insufficient information" with different wording.
     text = "\n".join(flatten_strings(state))
-    checks["required_substrings"] = all(s in text for s in exp.get("required_substrings",[]))
-    checks["forbidden_substrings"] = all(s not in text for s in exp.get("forbidden_substrings",[]))
-    failures = [k for k,v in checks.items() if not v]
-    return {"passed":all(checks.values()),"checks":checks,"schema_errors":se,"failures":failures}
+    checks["lexical_required_advisory"] = all(s in text for s in exp.get("required_substrings",[]))
+    checks["lexical_forbidden_advisory"] = all(s not in text for s in exp.get("forbidden_substrings",[]))
+
+    # Structured, field-scoped semantic assertions.
+    field_contains = exp.get("agent_fields_contains", {})
+    field_excludes = exp.get("agent_fields_excludes", {})
+    agents = state.get("agents", {}) if isinstance(state.get("agents"), dict) else {}
+
+    contains_ok = True
+    for agent, fields in field_contains.items():
+        adata = agents.get(agent, {})
+        for field, terms in fields.items():
+            values = adata.get(field, []) if isinstance(adata, dict) else []
+            field_text = "\n".join(str(v) for v in values)
+            if not all(term in field_text for term in terms):
+                contains_ok = False
+    checks["agent_fields_contains"] = contains_ok
+
+    excludes_ok = True
+    for agent, fields in field_excludes.items():
+        adata = agents.get(agent, {})
+        for field, terms in fields.items():
+            values = adata.get(field, []) if isinstance(adata, dict) else []
+            field_text = "\n".join(str(v) for v in values)
+            if any(term in field_text for term in terms):
+                excludes_ok = False
+    checks["agent_fields_excludes"] = excludes_ok
+
+    min_nested = exp.get("min_beliefs_about_others", {})
+    nested_ok = True
+    for agent, minimum in min_nested.items():
+        adata = agents.get(agent, {})
+        values = adata.get("beliefs_about_others", []) if isinstance(adata, dict) else []
+        if len(values) < minimum:
+            nested_ok = False
+    checks["nested_belief_minimum"] = nested_ok
+
+    # Only semantic/structural checks gate pass/fail.
+    gating = [
+        "schema_valid", "mode", "uncertainty", "hypothesis_count",
+        "missing_bridge", "agent_fields_contains",
+        "agent_fields_excludes", "nested_belief_minimum"
+    ]
+    failures = [k for k in gating if not checks.get(k, True)]
+    return {"passed":not failures,"checks":checks,"schema_errors":se,"failures":failures}
 
 def call_builder(client, model, system_prompt, fixture, max_tokens):
     user = "情境：\n" + fixture["scene"] + "\n\n问题：\n" + fixture["question"] + "\n\n只生成 HCL 中间状态，不要回答最终问题。"
