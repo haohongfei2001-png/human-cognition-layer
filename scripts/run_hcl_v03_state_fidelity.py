@@ -37,6 +37,37 @@ def flatten_strings(obj: Any):
             out.extend(flatten_strings(v))
     return out
 
+def normalize_state(state):
+    """Normalize harmless localized enum variants at the protocol boundary.
+
+    Explanatory strings may follow the user's language, but HCL protocol enums
+    are canonical English tokens. Normalization prevents serialization-only
+    variation from being mistaken for a cognition failure.
+    """
+    if not isinstance(state, dict):
+        return state
+    mode_alias = {
+        "简单": "SIMPLE",
+        "认识论": "EPISTEMIC",
+        "认知": "EPISTEMIC",
+        "因果歧义": "CAUSAL_AMBIGUITY",
+        "因果模糊": "CAUSAL_AMBIGUITY",
+    }
+    uncertainty_alias = {
+        "低": "low",
+        "中": "medium",
+        "中等": "medium",
+        "高": "high",
+    }
+    mode = state.get("mode")
+    if mode in mode_alias:
+        state["mode"] = mode_alias[mode]
+    u = state.get("uncertainty")
+    if isinstance(u, dict) and u.get("level") in uncertainty_alias:
+        u["level"] = uncertainty_alias[u["level"]]
+    return state
+
+
 def schema_errors(state):
     if state is None:
         return ["invalid_json_or_empty"]
@@ -142,7 +173,7 @@ def call_builder(client, model, system_prompt, fixture, max_tokens):
         last = r.choices[0].message.content or ""
         state = extract_json(last)
         if state is not None:
-            return last, state
+            return last, normalize_state(state)
     return last, None
 
 def main():
