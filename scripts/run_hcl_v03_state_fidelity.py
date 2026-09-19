@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 import argparse, json, os
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any
 from openai import OpenAI
@@ -181,6 +182,7 @@ def main():
     p.add_argument("--model", default="deepseek-flash")
     p.add_argument("--fixtures", default="eval/state_fidelity/fixtures_v01.json")
     p.add_argument("--max-tokens", type=int, default=4096)
+    p.add_argument("--workers", type=int, default=6)
     args = p.parse_args()
 
     key = os.getenv("DEEPSEEK_API_KEY")
@@ -191,15 +193,29 @@ def main():
     fixtures = json.loads((ROOT / args.fixtures).read_text(encoding="utf-8"))
     client = OpenAI(api_key=key, base_url=DEEPSEEK_BASE_URL)
 
-    results = []
-    for i, fixture in enumerate(fixtures, 1):
+    def run_one(index_fixture):
+        index, fixture = index_fixture
         raw, state = call_builder(client, args.model, prompt, fixture, args.max_tokens)
         ev = evaluate_fixture(fixture, state)
-        results.append({
+        return index, {
             "id":fixture["id"],"scene":fixture["scene"],"question":fixture["question"],
             "expected":fixture["expected"],"state":state,"evaluation":ev,"raw":raw
-        })
-        print(f"[{i}/{len(fixtures)}] {fixture['id']}: {'PASS' if ev['passed'] else 'FAIL'}", flush=True)
+        }
+
+    indexed = list(enumerate(fixtures))
+    completed = []
+    with ThreadPoolExecutor(max_workers=max(1, args.workers)) as ex:
+        futures = [ex.submit(run_one, item) for item in indexed]
+        for done_count, fut in enumerate(as_completed(futures), 1):
+            index, result = fut.result()
+            completed.append((index, result))
+            print(
+                f"[{done_count}/{len(fixtures)}] {result['id']}: "
+                f"{'PASS' if result['evaluation']['passed'] else 'FAIL'}",
+                flush=True,
+            )
+
+    results = [result for _, result in sorted(completed, key=lambda x: x[0])]
 
     passed = sum(r["evaluation"]["passed"] for r in results)
     summary = {
