@@ -40,6 +40,24 @@ Use CAUSAL_AMBIGUITY only when:
 Do not invent exotic alternative worlds merely because they are logically possible.
 Use ordinary contextual assumptions unless the text gives evidence for a special setting.
 
+## Decision granularity
+
+Match the state to the granularity of the actual question.
+
+- Do not inflate uncertainty about a coarse-grained question merely because finer details remain unknown.
+- Example: if behavior strongly establishes "preparing to leave" but not the destination, a question asking what the person is about to do may be low-uncertainty at the level "leave/go out".
+- Conversely, if the question asks for the specific destination or motive, the missing finer detail matters and uncertainty must increase.
+
+## Uncertainty calibration
+
+Use these meanings consistently:
+
+- `low`: the decision-relevant interpretation is directly stated, directly observed, or overwhelmingly supported at the question's required granularity.
+- `medium`: one interpretation has materially stronger contextual support, but credible alternatives remain.
+- `high`: two or more materially different interpretations remain comparably plausible, or a critical evidence bridge is missing such that no interpretation is clearly privileged.
+
+Uncertainty concerns the **decision-relevant proposition**, not every unknown detail in the scene.
+
 ## General cognition rules
 
 1. Narrator/world truth is NOT automatically character knowledge.
