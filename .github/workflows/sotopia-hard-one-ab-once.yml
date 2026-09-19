@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/SOTOPIA_HARD_ONE_AB_TRIGGER"
+      - ".github/SOTOPIA_HARD_ONE_AB_TRIGGER_V2"
 
 permissions:
   contents: read
@@ -38,7 +38,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p .cache/redis-data
-          curl -L --fail --retry 3             https://cmu.box.com/shared/static/xiivc5z8rnmi1zr6vmk1ohxslylvynur             -o .cache/redis-data/dump.rdb
+          curl -L --fail --retry 3             https://huggingface.co/datasets/cmu-lti/sotopia-pi/resolve/main/dump.rdb?download=true             -o .cache/redis-data/dump.rdb
           test -s .cache/redis-data/dump.rdb
           docker run -d             --name hcl-sotopia-redis             -p 6379:6379             -v "$PWD/.cache/redis-data:/data"             redis/redis-stack-server:latest
 
