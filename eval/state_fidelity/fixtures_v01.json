@@ -1,0 +1,265 @@
+[
+  {
+    "id": "simple_explicit_location",
+    "scene": "小林亲眼看见蓝色钥匙被放进书桌最上面的抽屉。之后没有人移动钥匙。",
+    "question": "小林现在认为蓝色钥匙在哪里？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false,
+      "required_substrings": [
+        "亲眼",
+        "抽屉"
+      ],
+      "forbidden_substrings": [
+        "不知道钥匙",
+        "可能在别处"
+      ]
+    }
+  },
+  {
+    "id": "simple_no_overthinking_preference",
+    "scene": "阿宁说：‘我最喜欢喝无糖乌龙茶，不喜欢甜饮料。’",
+    "question": "如果只有无糖乌龙茶和全糖奶茶，哪一种更符合阿宁明确表达的偏好？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false,
+      "required_substrings": [
+        "无糖乌龙茶",
+        "不喜欢甜"
+      ],
+      "forbidden_substrings": [
+        "隐藏动机",
+        "可能其实喜欢"
+      ]
+    }
+  },
+  {
+    "id": "epistemic_first_order_false_belief",
+    "scene": "王晨把文件放在左边柜子里后离开办公室。王晨离开后，李琪把文件移到了右边柜子。王晨没有回来，也没有收到任何消息。",
+    "question": "王晨现在会认为文件在哪个柜子？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false,
+      "required_substrings": [
+        "王晨",
+        "左边",
+        "没有"
+      ],
+      "forbidden_substrings": [
+        "王晨知道文件被移到右边"
+      ]
+    }
+  },
+  {
+    "id": "epistemic_second_order_explicit",
+    "scene": "周敏看到陈浩把盒子放进红柜子。随后陈浩离开。陈浩离开后，周敏亲眼看到孙宁把盒子移到绿柜子。周敏也确认陈浩一直没有回来、没有收到消息。",
+    "question": "周敏认为陈浩会认为盒子在哪里？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false,
+      "required_substrings": [
+        "周敏",
+        "陈浩",
+        "红柜子",
+        "没有"
+      ],
+      "forbidden_substrings": [
+        "陈浩知道盒子在绿柜子"
+      ]
+    }
+  },
+  {
+    "id": "epistemic_second_order_missing_bridge",
+    "scene": "小哲知道冰箱里还有一盒牛奶。小雨刚从外面回来。故事没有说明小雨是否看过冰箱，也没有说明小哲是否知道小雨看过冰箱。",
+    "question": "小哲是否能确定小雨知道冰箱里有牛奶？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "medium",
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 5,
+      "require_missing_bridge": true,
+      "required_substrings": [
+        "没有说明",
+        "小雨",
+        "小哲"
+      ],
+      "forbidden_substrings": [
+        "小雨一定知道",
+        "小雨肯定不知道"
+      ]
+    }
+  },
+  {
+    "id": "causal_ambiguous_nonresponse",
+    "scene": "阿岚昨晚给朋友发了一条需要回复的消息。第二天中午朋友仍然没有回复。除此之外，没有提供朋友昨晚到今天的任何情况。",
+    "question": "朋友没有回复最可能说明什么？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true,
+      "required_substrings": [
+        "没有回复"
+      ],
+      "forbidden_substrings": [
+        "一定是不在乎",
+        "确定在生气"
+      ]
+    }
+  },
+  {
+    "id": "causal_ambiguous_outcome",
+    "scene": "经理让小赵去会议室取一份打印材料。几分钟后小赵空手回来了，没有解释原因。",
+    "question": "为什么小赵空手回来？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true,
+      "required_substrings": [
+        "空手",
+        "原因"
+      ],
+      "forbidden_substrings": [
+        "一定没找到",
+        "一定有人拿走"
+      ]
+    }
+  },
+  {
+    "id": "epistemic_observation_bridge_present",
+    "scene": "林若站在门口，清楚地看到赵青打开抽屉拿走了信封。赵青随后当着林若的面说：‘我把信封拿走了，别告诉别人。’",
+    "question": "林若是否知道赵青拿走了信封？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false,
+      "required_substrings": [
+        "看到",
+        "拿走"
+      ],
+      "forbidden_substrings": [
+        "无法确定林若是否知道"
+      ]
+    }
+  },
+  {
+    "id": "simple_humor_no_epistemic_sprawl",
+    "scene": "朋友问小孟为什么带着雨伞进了电影院。小孟笑着说：‘怕电影里的雨淋到我。’",
+    "question": "这句话主要是在做什么？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low",
+        "medium"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 2,
+      "require_missing_bridge": false,
+      "required_substrings": [
+        "玩笑"
+      ],
+      "forbidden_substrings": [
+        "二阶信念",
+        "信息传递路径"
+      ]
+    }
+  },
+  {
+    "id": "causal_ambiguity_social_expression",
+    "scene": "会议结束后，平时话很多的小周只说了句‘行吧’，然后很快离开。没有描述他的表情，也没有提供会议中发生了什么。",
+    "question": "小周此时是什么心情？",
+    "expected": {
+      "mode": "CAUSAL_AMBIGUITY",
+      "uncertainty": [
+        "high"
+      ],
+      "min_hypotheses": 2,
+      "max_hypotheses": 6,
+      "require_missing_bridge": true,
+      "required_substrings": [
+        "信息不足"
+      ],
+      "forbidden_substrings": [
+        "一定不满",
+        "一定失望"
+      ]
+    }
+  },
+  {
+    "id": "epistemic_private_message",
+    "scene": "老板只私下告诉了小宋项目延期，没有告诉其他成员。小宋没有转述这件事，也没有在公共群里提到。",
+    "question": "在没有其他信息的情况下，能否认为其他成员已经知道项目延期？",
+    "expected": {
+      "mode": "EPISTEMIC",
+      "uncertainty": [
+        "low",
+        "medium"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 3,
+      "require_missing_bridge": true,
+      "required_substrings": [
+        "私下",
+        "没有"
+      ],
+      "forbidden_substrings": [
+        "其他成员已经知道"
+      ]
+    }
+  },
+  {
+    "id": "simple_explicit_emotion",
+    "scene": "小何说：‘我现在非常生气，因为他们没经过我同意就改了我的方案。’",
+    "question": "小何明确表达了什么情绪？",
+    "expected": {
+      "mode": "SIMPLE",
+      "uncertainty": [
+        "low"
+      ],
+      "min_hypotheses": 0,
+      "max_hypotheses": 1,
+      "require_missing_bridge": false,
+      "required_substrings": [
+        "生气"
+      ],
+      "forbidden_substrings": [
+        "可能其实是悲伤",
+        "无法判断情绪"
+      ]
+    }
+  }
+]
