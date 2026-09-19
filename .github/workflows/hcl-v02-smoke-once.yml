@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/HCL_V02_SMOKE_TRIGGER"
+      - ".github/HCL_V02_SMOKE_TRIGGER_V2"
 
 permissions:
   contents: read
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     env:
-      DEEPSEEK_API_KEY: \${{ secrets.DEEPSEEK_API_KEY }}
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
 
     steps:
       - uses: actions/checkout@v4
@@ -45,7 +45,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: hcl-v02-smoke-\${{ github.run_id }}
+          name: hcl-v02-smoke-${{ github.run_id }}
           path: artifacts/
           if-no-files-found: warn
           retention-days: 30
