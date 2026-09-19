@@ -11,7 +11,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from hcl.integrations.sotopia_agent import HCLSocialAgent
+from hcl.integrations.sotopia_agent import DirectSocialAgent, HCLSocialAgent
 
 from sotopia.agents import Agents
 from sotopia.agents.llm_agent import LLMAgent
@@ -78,7 +78,9 @@ def make_agents(
     profiles = [AgentProfile.get(agent_id) for agent_id in agent_ids]
     agents: list[LLMAgent] = []
     for i, profile in enumerate(profiles):
-        cls = HCLSocialAgent if use_hcl and i == tested_index else LLMAgent
+        # Fair A/B: every agent uses the same direct DeepSeek transport.
+        # The only treatment difference is HCL on the tested role.
+        cls = HCLSocialAgent if use_hcl and i == tested_index else DirectSocialAgent
         agents.append(cls(agent_profile=profile, model_name=MODEL))
     return agents
 
@@ -262,8 +264,10 @@ async def main() -> int:
         },
         "note": (
             "This is a one-setting engineering A/B smoke, not a performance claim. "
-            "SOTOPIA generation is stochastic; performance inference requires a fixed "
-            "multi-setting / repeated evaluation slice."
+            "Both arms and the partner use the same direct DeepSeek transport; the "
+            "treatment's only tested-role difference is the always-on HCL cognition "
+            "layer. SOTOPIA generation is stochastic; performance inference requires "
+            "a fixed multi-setting / repeated evaluation slice."
         ),
     }
 
