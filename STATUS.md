@@ -53,9 +53,9 @@ Full summary and row-level failures are stored in the workflow artifact:
 `cogtom-baseline-200-35407860416`.
 
 ## Current gate
-**AWAITING_HUMAN_ERROR_AUDIT**
+**HCL_V0_1_DESIGN_READY**
 
-The product/research owner should now personally review **all 15 failed or partially failed groups** before HCL v0.1 is designed.
+The research owner directly audited cases 01–02. Those two judgments were sufficient to extract a reusable principle: **epistemic uncertainty must be preserved when second-order knowledge or hidden causes are underdetermined**. The remaining 13 cases were provisionally screened by AI using that principle and are explicitly not treated as owner labels.
 
 For each error, record:
 1. What is explicitly known?
@@ -74,3 +74,26 @@ After the human annotations are available:
 2. decide whether a portable HCL v0.1 is justified;
 3. test HCL as an external module on CogToM before any model training;
 4. only later move to SOTOPIA-Hard and eventual EQ-Bench 4 visibility work.
+
+
+## Human audit seed result
+
+Direct owner judgments:
+- Case 01: gold is underdetermined because Xiaoli's belief about Xiaohua's knowledge access is not established.
+- Case 02: gold is underdetermined because returning without hangers has multiple latent causes; Xiaoxue cannot safely infer that mother saw her action.
+
+Reusable principles:
+1. narrator truth != character knowledge;
+2. second-order belief requires an explicit evidence bridge;
+3. ambiguous observable outcomes should retain multiple latent-cause hypotheses;
+4. underdetermined benchmark gold should not become a training target.
+
+See:
+- `reports/HUMAN_AUDIT_SEED_CASES_01_02.md`
+- `reports/COGTOM_FAILURES_PROVISIONAL_SCREEN.md`
+
+## Next action
+
+Design **HCL v0.1 — Epistemic Uncertainty Layer** as a portable external module, then test it on a fresh unseen CogToM holdout before any model training.
+
+No model weights should be modified in this phase.
