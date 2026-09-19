@@ -1,0 +1,82 @@
+name: SOTOPIA-Hard One-Setting A/B
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/SOTOPIA_HARD_ONE_AB_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  ab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      CUSTOM_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      SOTOPIA_STORAGE_BACKEND: redis
+      REDIS_OM_URL: redis://localhost:6379
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pinned SOTOPIA
+        shell: bash
+        run: |
+          git clone --quiet https://github.com/sotopia-lab/sotopia.git .cache/sotopia
+          git -C .cache/sotopia checkout --quiet --detach a0aaafb440e570e5e61b7c44a44e5e417c545383
+          python -m pip install --upgrade pip
+          python -m pip install -e .cache/sotopia
+
+      - name: Load official SOTOPIA dataset into Redis
+        shell: bash
+        run: |
+          mkdir -p .cache/redis-data
+          curl -L --fail --retry 3             https://cmu.box.com/shared/static/xiivc5z8rnmi1zr6vmk1ohxslylvynur             -o .cache/redis-data/dump.rdb
+          test -s .cache/redis-data/dump.rdb
+          docker run -d             --name hcl-sotopia-redis             -p 6379:6379             -v "$PWD/.cache/redis-data:/data"             redis/redis-stack-server:latest
+
+          for i in {1..30}; do
+            if docker exec hcl-sotopia-redis redis-cli ping | grep -q PONG; then
+              exit 0
+            fi
+            sleep 2
+          done
+          docker logs hcl-sotopia-redis
+          exit 1
+
+      - name: Verify hard benchmark data exists
+        shell: bash
+        run: |
+          python - <<'PY'
+          from sotopia.database.persistent_profile import EnvironmentList
+          hard = EnvironmentList.get("01HAK34YPB1H1RWXQDASDKHSNS")
+          print("hard_env_count", len(hard.environments))
+          print("agent_index_count", len(hard.agent_index or []))
+          assert len(hard.environments) > 0
+          PY
+
+      - name: Run one official hard setting control vs HCL
+        shell: bash
+        run: |
+          python scripts/run_sotopia_hard_one_ab.py
+
+      - name: Upload A/B artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sotopia-hard-one-ab-${{ github.run_id }}
+          path: artifacts/sotopia-hard-one-ab/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Redis logs on failure
+        if: failure()
+        shell: bash
+        run: docker logs hcl-sotopia-redis || true
