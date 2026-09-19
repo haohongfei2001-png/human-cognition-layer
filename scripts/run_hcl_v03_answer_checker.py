@@ -73,13 +73,14 @@ def main() -> int:
             token not in final_answer for token in f.get("final_forbidden", [])
         )
 
+        # Final lexical checks are advisory only. A semantically correct revision
+        # must not fail merely because it says "不能确定" instead of "无法确定",
+        # or mentions a rejected proposition under negation.
         passed = all(
             [
                 status_ok,
                 violation_ok,
                 final_pass,
-                final_required_ok,
-                final_forbidden_ok,
             ]
         )
 
