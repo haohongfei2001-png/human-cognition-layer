@@ -6,7 +6,7 @@ Human Cognition Layer (HCL)
 
 ## Current phase
 
-**PHASE-03 — SOTOPIA-Hard paired method validation**
+**PHASE-04 — Decision-policy repair and fresh holdout validation**
 
 ## Core doctrine
 
@@ -203,8 +203,35 @@ Scored single-setting run `35430762893`:
 
 This is one-setting evidence only, not an aggregate efficacy claim.
 
+Fixed 10-setting SOTOPIA-Hard paired slice: **CLOSED**
+
+Primary run `35431739928` + failed-setting closure `35449140294`:
+- usable paired settings: **10 / 10**
+- control overall mean: **2.7429**
+- HCL overall mean: **2.7000**
+- paired mean delta: **-0.0429**
+- improved / tied / worsened: **4 / 4 / 2**
+- relationship mean delta: **+0.80**
+- social-rules mean delta: **+1.20**
+- knowledge mean delta: **-1.20**
+- financial/material mean delta: **-0.60**
+- goal mean delta: **-0.30**
+
+Interpretation:
+- no aggregate improvement claim;
+- strongest repeated weakness is knowledge acquisition (negative in 8/10);
+- some raw-score losses arise from benchmark tradeoffs where direct goal
+  attainment can conflict with explicit interpersonal boundaries;
+- genuine implementation weakness remains: correct cautious cognition can map
+  to overly passive / low-information action.
+
+The 10 settings are now a diagnostic set and must not be treated as fresh
+generalization evidence after policy changes.
+
 Current canonical execution:
-1. fixed 10-setting SOTOPIA-Hard paired A/B slice;
-2. inspect dimension-level paired deltas and trajectory failure modes;
-3. if signal survives, add repeated runs / confidence intervals;
-4. then cross-base-model transfer.
+1. validate the new HCL Decision Policy on independent synthetic fixtures;
+2. if that gate passes, integrate it after the frozen HCL state and before
+   action generation;
+3. run a previously unused SOTOPIA-Hard holdout slice;
+4. only if the signal survives, add repeated runs / uncertainty estimates;
+5. then test cross-base-model transfer.
