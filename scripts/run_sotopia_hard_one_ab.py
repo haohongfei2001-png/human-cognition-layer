@@ -26,6 +26,7 @@ from sotopia.envs.evaluators import (
     EpisodeLLMEvaluator,
     EvaluationForAgents,
     RuleBasedTerminatedEvaluator,
+    unweighted_aggregate_evaluate,
 )
 from sotopia.envs.parallel import ParallelSotopiaEnv
 from sotopia.messages import AgentAction, SimpleMessage
@@ -60,12 +61,7 @@ def build_env(env_id: str) -> ParallelSotopiaEnv:
         evaluators=[
             RuleBasedTerminatedEvaluator(max_turn_number=20, max_stale_turn=2),
         ],
-        terminal_evaluators=[
-            EpisodeLLMEvaluator(
-                MODEL,
-                EvaluationForAgents[SotopiaDimensions],
-            ),
-        ],
+        terminal_evaluators=[],
     )
 
 
@@ -184,14 +180,35 @@ async def run_episode(
         else []
     )
 
-    rewards = [
-        final_info[agent_name]["complete_rating"]
-        for agent_name in env.agents
+    # Score the completed transcript explicitly with SOTOPIA's official
+    # EpisodeLLMEvaluator. The pinned env.astep currently discards terminal
+    # p1_rate/p2_rate when building info, which otherwise makes every artifact
+    # appear as 0 even when the evaluator produced non-zero dimension scores.
+    terminal_evaluator = EpisodeLLMEvaluator(
+        MODEL,
+        EvaluationForAgents[SotopiaDimensions],
+    )
+    terminal_items = await terminal_evaluator.__acall__(
+        turn_number=-1,
+        messages=env.inbox,
+        temperature=0.0,
+    )
+    terminal_response = unweighted_aggregate_evaluate(terminal_items)
+
+    def serialize_rate(rate: Any) -> dict[str, Any] | None:
+        if rate is None:
+            return None
+        overall, dimensions = rate
+        return {
+            "overall": overall,
+            "dimensions": dimensions,
+        }
+
+    scored = [
+        serialize_rate(terminal_response.p1_rate),
+        serialize_rate(terminal_response.p2_rate),
     ]
-    reasoning = [
-        str(final_info[agent_name].get("comments", ""))
-        for agent_name in env.agents
-    ]
+    reasoning = terminal_response.comments or ""
 
     return {
         "tag": tag,
@@ -200,7 +217,7 @@ async def run_episode(
         "agent_ids": agent_ids,
         "agent_names": [agent.agent_name for agent in agent_list],
         "models": [MODEL, MODEL, MODEL],
-        "rewards": rewards,
+        "rewards": scored,
         "reasoning": reasoning,
         "messages": transcript,
         "hcl_turn_count": len(hcl_log),
