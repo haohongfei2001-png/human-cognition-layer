@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/HCL_V03_CHECKER_TRIGGER_V2"
+      - ".github/HCL_V03_CHECKER_FRESH_V02_TRIGGER"
 
 permissions:
   contents: read
@@ -33,7 +33,7 @@ jobs:
         run: |
           python scripts/run_hcl_v03_answer_checker.py \
             --model deepseek-flash \
-            --fixtures eval/answer_loop/checker_fixtures_v01.json \
+            --fixtures eval/answer_loop/checker_fixtures_v02_fresh.json \
             --workers 4
 
       - name: Upload checker artifacts
