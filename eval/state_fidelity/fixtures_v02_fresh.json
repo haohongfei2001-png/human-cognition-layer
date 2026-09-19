@@ -196,7 +196,9 @@
       "max_hypotheses": 4,
       "require_missing_bridge": true
     },
-    "adjudication_note": "Corrected after audit: the scene never states that Xiaole knew the original box content, so a unique low-uncertainty false-belief inference is not licensed."
+    "adjudication_note": "The scene never states that Xiaole observed or knew the original toy before leaving. A low-uncertainty classic false-belief answer requires an unstated premise; this fixture is therefore retained for analysis but excluded from the state-fidelity gate.",
+    "exclude_from_gate": true,
+    "adjudication_status": "AMBIGUOUS_FIXTURE"
   },
   {
     "id": "e03_second_order_explicit",
