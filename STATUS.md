@@ -4,7 +4,7 @@
 Human Cognition Layer
 
 ## Current phase
-**PHASE-00 — CogToM baseline + manual error audit**
+**PHASE-01 — Module-first HCL architecture**
 
 ## Research question
 Can a portable cognition layer improve a strong language model's reasoning about human beliefs, intentions, knowledge states, emotions, and implicit mental states without modifying the base model?
@@ -151,3 +151,27 @@ Before any training:
 - compare goal/social metrics under the same evaluator configuration.
 
 No model weights should be modified yet.
+
+
+## Module-first correction
+
+The research owner clarified that the **HCL module itself is the core asset**.
+
+Canonical consequence:
+- do not reduce HCL usage simply because an early HCL version lowers benchmark score;
+- treat regressions as evidence for improving the module;
+- HCL remains in the loop for every input;
+- adaptive internal depth is allowed;
+- bypassing HCL is not the canonical design.
+
+The v0.2 selective-routing experiment is retained as historical evidence only. It is not the canonical architecture.
+
+Canonical next version:
+**HCL v0.3 — Always-On Cognition Layer**
+
+See:
+- `docs/MODULE_FIRST_DOCTRINE.md`
+- `hcl/HCL_V0_3_SPEC.md`
+
+Next action:
+implement and validate HCL v0.3 state quality before moving to larger benchmark runs or model training.
