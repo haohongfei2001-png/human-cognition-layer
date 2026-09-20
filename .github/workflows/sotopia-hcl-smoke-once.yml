@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/SOTOPIA_HCL_SMOKE_TRIGGER_V2"
+      - ".github/SOTOPIA_HCL_SMOKE_TRIGGER_V3"
 
 permissions:
   contents: read
