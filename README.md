@@ -1,78 +1,196 @@
 # Human Cognition Layer
 
-通过**可迁移、可拔插的认知层**，提高模型对人的信念、意图、知识状态、情绪与隐含心理状态的理解。
+Human Cognition Layer (HCL) 是一个面向**人类心智状态建模与决策校准**的可迁移、可拔插认知层研究项目。
+
+项目的核心问题不是“能否针对某个 benchmark 调出更高分”，而是：
+
+> 在不修改底座模型权重的前提下，能否用明确、可复现、可迁移的认知结构，更稳定地建模人的知识、信念、意图、因果不确定性与社会决策，并改善最终回答或行动？
+
+**Canonical live state:** [STATUS.md](STATUS.md)
 
 ## Research thesis
 
-The base model is replaceable. The cognition layer is the asset.
+**The base model is replaceable. The cognition layer is the asset.**
 
-本项目不把第一阶段目标设为微调某个模型，而是先回答一个更基础的问题：
+HCL 采用 module-first doctrine：认知层应保持在处理链路中，性能回退用于暴露认知层或决策策略的问题，而不是通过静默绕过 HCL 来获得更好的 benchmark 分数。
 
-> 在不修改底座权重的情况下，能否通过明确、可复现的认知结构，提高模型在人类心智推理任务上的表现？
+核心约束见：
 
-## Current phase: Phase 0 — CogToM baseline
+- [docs/MODULE_FIRST_DOCTRINE.md](docs/MODULE_FIRST_DOCTRINE.md)
+- [hcl/HCL_V0_3_SPEC.md](hcl/HCL_V0_3_SPEC.md)
 
-当前阶段**禁止实现 Human Cognition Layer、禁止训练模型**。先建立干净基线并人工审计错误。
+## Current phase
 
-1. 使用官方 [Beijing-AISI/CogToM](https://github.com/Beijing-AISI/CogToM) 评测代码。
-2. 用 DeepSeek OpenAI-compatible API 跑 smoke test。
-3. 再跑正式 baseline。
-4. 导出逐题错误，人工分析真实 failure modes。
-5. 只有在错误审计后，才设计 HCL v0.1。
+当前 canonical phase：
 
-上游 CogToM 固定到 commit:
+**PHASE-04 — Decision-policy repair and fresh holdout validation**
+
+当前已经不是早期 CogToM baseline 阶段。HCL v0.3 的 state semantics 已冻结，always-on answer loop 已实现并通过 checker gate，Decision Policy 已通过独立 synthetic gate 并接入 SOTOPIA action-generation path。
+
+当前研究 gate：
+
+**HOLDOUT_SIGNAL_POSITIVE_REQUIRES_REPEATS**
+
+最近一次此前未使用的 SOTOPIA-Hard 10-setting paired holdout 给出了正向信号，但样本量仍小且每个 arm 只有单轨迹，因此**不能据此宣称 HCL 已被证明有效**。当前实现应保持冻结，先做预定义 seed/repeat 的稳定性与方差验证；只有信号稳定后才进入 cross-base-model transfer。
+
+当前仍**没有开始模型训练**。是否需要训练数据、adapter 或其他参数化方法，要等方法层本身通过更强的外部验证后再决定。
+
+## HCL v0.3 architecture
+
+### 1. Frozen cognition state
+
+每个输入都先构造结构化 cognition state。当前冻结模式包括：
+
+- SIMPLE
+- EPISTEMIC
+- CAUSAL_AMBIGUITY
+
+关键语义原则包括：
+
+- world truth 与 agent knowledge 分离；
+- 信息转移必须有 evidence bridge；
+- 一阶信念与二阶信念分离；
+- world-belief divergence 作为 epistemic state 处理；
+- 保留真实竞争因果，不为方便强行消歧；
+- 使用 minimal sufficient modeling；
+- 不确定性和回答粒度必须与问题粒度匹配。
+
+冻结契约：
+
+- [hcl/v03/FROZEN_STATE_SEMANTICS.md](hcl/v03/FROZEN_STATE_SEMANTICS.md)
+- [hcl/v03/state_schema.json](hcl/v03/state_schema.json)
+- [hcl/v03/STATE_BUILDER_PROMPT.md](hcl/v03/STATE_BUILDER_PROMPT.md)
+
+### 2. Always-on answer loop
+
+回答链路当前为：
+
+~~~text
+Input
+  ↓
+HCL v0.3 cognition state
+  ↓
+Base-model draft
+  ↓
+HCL consistency / calibration check
+  ↓
+Final answer
+~~~
+
+checker 检查显式事实一致性、agent 信息可达性、一阶/二阶信念、错误消歧、过度不确定以及回答粒度。
+
+实现：
+
+- [hcl/v03/answer_loop.py](hcl/v03/answer_loop.py)
+- [hcl/v03/backends.py](hcl/v03/backends.py)
+- [hcl/v03/ANSWER_LOOP_PROTOCOL.md](hcl/v03/ANSWER_LOOP_PROTOCOL.md)
+
+### 3. Decision Policy for interactive action
+
+SOTOPIA 等交互环境中，HCL cognition state 后增加 Decision Policy，将“知道什么 / 不知道什么 / 存在哪些可能性”进一步映射成更合适的行动策略。
+
+这一步是为了解决早期实验暴露出的一个真实问题：认知判断本身可以是谨慎且正确的，但如果缺少行动策略，最终行为可能变得过度被动、低信息或低推进。
+
+## Current evidence
+
+以下数字是研究证据，不是最终产品能力声明。
+
+### State fidelity
+
+最终 fresh 18-case freeze holdout：
+
+- raw: **17 / 18**
+- mode accuracy: **94.4%**
+- uncertainty accuracy: **94.4%**
+- schema validity: **100%**
+
+唯一 raw failure 经审计被判定为 fixture-design 问题；历史原始分数保持 17/18，不做事后改分。
+
+### Answer checker
+
+fresh adversarial checker suite：
+
+- raw: **11 / 12**
+- revision-family hit rate: **100%**
+- final-check pass rate: **100%**
+
+结论：**HCL v0.3 answer checker gate PASSED**。
+
+### SOTOPIA-Hard
+
+固定 diagnostic slice（10 settings）在 Decision Policy 修复前：
+
+- control mean overall: **2.7429**
+- HCL mean overall: **2.7000**
+- paired mean delta: **-0.0429**
+
+该结果没有显示 aggregate improvement，并暴露了 knowledge acquisition、financial/material 与 goal 推进方面的问题。
+
+Decision Policy 修复后的 fresh holdout（此前未使用的 Hard ordinals 10–19）：
+
+- control mean overall: **2.4714**
+- HCL + Decision Policy mean overall: **2.8857**
+- paired mean delta: **+0.4143**
+- improved / tied / worsened: **7 / 1 / 2**
+
+这是**鼓舞性的 fresh-holdout signal**，但不是最终 efficacy claim：n=10、每个 arm 单轨迹，并且使用自定义 DeepSeek partner/evaluator，不与官方 leaderboard 直接可比。
+
+完整实验记录、run id、adjudication 与最新 repeat 状态见 [STATUS.md](STATUS.md)。
+
+## Benchmarks
+
+### CogToM
+
+CogToM 现在是 diagnostic/regression instrument，而不是项目当前阶段本身，也不被视为不可质疑的人类心智真值。
+
+官方上游评测代码固定到 commit：
 
 `28c6781b6ea7d7ef7d491f61adc18f076f8b993c`
 
-这样不同实验之间不会因为 benchmark 代码变化而失去可比性。
+代表性 200-group baseline 覆盖 46/46 subcategories，mean group accuracy 为 96.0%。历史 HCL v0.1/v0.2 结果保留用于回归和方法诊断。
 
-## Quick start
+### SOTOPIA-Hard
 
-### Local
+SOTOPIA-Hard 是当前主要的方法验证环境。当前流程强调：
 
-```bash
-export DEEPSEEK_API_KEY="..."
-python scripts/run_cogtom_baseline.py --model deepseek-flash --limit 20 --language zh
-```
-
-正式 baseline：
-
-```bash
-python scripts/run_cogtom_baseline.py --model deepseek-v4-pro --limit 200 --language zh
-```
-
-> DeepSeek 当前 API 与 OpenAI Chat Completions 兼容；本项目只从环境变量读取密钥，任何密钥都不得提交到仓库。
-
-### GitHub Actions
-
-仓库包含手动 workflow：`CogToM Baseline`。
-
-运行前需要在 repository secret 中添加：
-
-`DEEPSEEK_API_KEY`
-
-之后可以直接从 Actions 手动选择模型、语言和样本数运行。结果不会 commit 回仓库，而是作为 workflow artifact 保存。
-
-## Outputs
-
-每次运行生成：
-
-```text
-artifacts/<run-name>/
-├── raw.jsonl
-├── summary.json
-├── errors.jsonl
-└── AUDIT.md
-```
-
-`AUDIT.md` 是人工错题审计工作表，不由 AI 自动替代人的第一轮判断。
+1. 诊断集与 fresh generalization holdout 严格分开；
+2. 决策策略修改后不得再把已看过的设置当 fresh evidence；
+3. 正向单次结果必须经过 predefined repeats / seeds；
+4. 稳定后再做 cross-base-model transfer。
 
 ## Research discipline
 
-- Benchmark 原题/标准答案不进入训练数据。
-- 可以根据 benchmark 暴露的**抽象失败模式**自行生成新的训练材料。
-- Phase 0 只建立 baseline，不为了提高分数修改 prompt。
-- 所有实验必须记录模型、prompt、上游 benchmark commit、seed、limit 和运行时间。
-- API key、原始私密数据和本地 `.env` 永不提交。
+- Benchmark 原题与标准答案不得作为训练数据。
+- 可以根据 benchmark 暴露的**抽象 failure mode**设计独立 synthetic fixtures。
+- raw score、失败案例和事后 adjudication 必须分别保留，不做 post-hoc 改分。
+- 不因为 HCL 某次表现更差就静默绕过 HCL；回退本身是诊断信号。
+- fresh holdout 一旦消费，就不能继续作为调参后的 fresh generalization evidence。
+- 所有实验应记录模型、prompt/协议版本、seed、benchmark slice、上游 commit 与运行环境。
+- API key、私密数据、本地 `.env` 和凭据不得提交到仓库。
+- 在 repeated holdout 与 cross-base transfer 之前，不启动模型训练。
 
-Canonical state: [STATUS.md](STATUS.md)
+## Historical CogToM runner
+
+CogToM baseline/diagnostic runner 仍可用于回归：
+
+~~~bash
+export DEEPSEEK_API_KEY="..."
+python scripts/run_cogtom_baseline.py --model deepseek-flash --limit 20 --language zh
+~~~
+
+正式/较大样本运行可按实验配置调整模型与 limit。运行结果应作为实验 artifact 保存，具体当前 workflow 与状态以 [STATUS.md](STATUS.md) 和仓库 Actions 配置为准。
+
+## Current route
+
+~~~text
+HCL v0.3 state semantics (FROZEN)
+→ always-on answer loop
+→ Decision Policy
+→ fresh SOTOPIA-Hard holdout
+→ predefined repeat stability / variance
+→ cross-base-model transfer
+→ training / adapters only if justified
+→ broader external validation
+~~~
+
+不要从 README 推断某个实验仍在运行或已经结束；**实时执行状态始终以 [STATUS.md](STATUS.md) 为唯一事实源。**
