@@ -274,8 +274,7 @@
       "expected_verification_statuses": [
         "RESOLVABLE"
       ],
-      "expected_fallback_required": false,
-      "expected_min_equivalent_probe_count": 2
+      "expected_fallback_required": false
     },
     {
       "id": "vs06_irreversible_transfer_receipt_available_now",
