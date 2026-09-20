@@ -65,5 +65,6 @@ jobs:
             artifacts/action-checker-verification-v02/
             artifacts/decision-policy-negotiation-regression-v021/
             artifacts/decision-policy-goal-regression-v021/
+            artifacts/goal-pursuit-regression-adjudication-v021/
           if-no-files-found: warn
           retention-days: 30
