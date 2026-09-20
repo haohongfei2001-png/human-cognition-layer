@@ -70,6 +70,7 @@ def make_agents(
     agent_ids: list[str],
     tested_index: int,
     use_hcl: bool,
+    seed: int = 42,
 ) -> list[LLMAgent]:
     profiles = [AgentProfile.get(agent_id) for agent_id in agent_ids]
     agents: list[LLMAgent] = []
@@ -77,7 +78,13 @@ def make_agents(
         # Fair A/B: every agent uses the same direct DeepSeek transport.
         # The only treatment difference is HCL on the tested role.
         cls = HCLSocialAgent if use_hcl and i == tested_index else DirectSocialAgent
-        agents.append(cls(agent_profile=profile, model_name=MODEL))
+        agent = cls(agent_profile=profile, model_name=MODEL)
+        if isinstance(agent, HCLSocialAgent):
+            agent.hcl_loop.backend.seed = seed
+            agent.decision_policy.backend.seed = seed
+        else:
+            agent.direct_backend.seed = seed
+        agents.append(agent)
     return agents
 
 
@@ -184,6 +191,7 @@ async def run_episode(
     tested_index: int,
     use_hcl: bool,
     tag: str,
+    seed: int = 42,
 ) -> dict[str, Any]:
     """Run one official SOTOPIA episode without constructing EpisodeLog.
 
@@ -198,6 +206,7 @@ async def run_episode(
         agent_ids=agent_ids,
         tested_index=tested_index,
         use_hcl=use_hcl,
+        seed=seed,
     )
     agents = Agents({agent.agent_name: agent for agent in agent_list})
 
@@ -291,6 +300,7 @@ async def run_episode(
         "rewards": scored,
         "reasoning": reasoning,
         "messages": transcript,
+        "generation_seed": seed,
         "hcl_turn_count": len(hcl_log),
         "hcl_turn_log": hcl_log,
     }
