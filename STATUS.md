@@ -677,3 +677,51 @@ Next canonical execution:
    already-seen environment templates, **not fresh-scenario evidence**;
 4. run complete paired control vs HCL episodes on the pinned SOTOPIA dataset;
 5. preserve raw outcomes and do not tune against the holdout before closure.
+
+
+## Decision Policy v0.2.1 post-repair holdout predeclaration
+
+Smoke-tested behavior-bearing implementation is frozen at:
+`f6e591db8d22ae0e2175769852a1a8aa9c3e106a`
+
+Freeze contract:
+- `hcl/v03/FROZEN_DECISION_POLICY_V021.md`
+
+Predeclaration:
+- `hcl/v03/FRESH_EXPANDED_COMBO_V021_PREDECLARATION.md`
+
+Predeclared unused expanded-combo slice:
+- environment ordinals: `1,3,5,7,9,11,13,15,17,19`
+- combo ordinal: `3`
+- expanded ordinals: `8,18,28,38,48,58,68,78,88,98`
+- seed: `42`
+
+Freshness:
+- all 10 selected env-agent combinations are previously unused;
+- combo ordinal 3 was untouched by the recorded expanded-combo holdouts;
+- the selected expanded ordinals are disjoint from the 40 previously consumed
+  successful expanded settings;
+- **all environment templates have been seen before**.
+
+Therefore the only allowed freshness claim is:
+**fresh persona/pairing combinations inside already-seen environment templates**.
+
+This is explicitly **not fresh-scenario evidence**.
+
+Selection is deterministic:
+- untouched combo ordinal 3;
+- odd environment parity across the full Hard list;
+- environment 19 is included by parity rule, not cherry-picked.
+
+No behavior-bearing code change is allowed between the smoke-tested freeze anchor
+and holdout execution. The holdout workflow verifies this invariant before each
+paired job.
+
+**Current gate: V021_POST_REPAIR_UNUSED_COMBO_HOLDOUT_PREDECLARED_READY**
+
+Next execution:
+1. trigger the frozen paired holdout;
+2. consume no other expanded combos concurrently;
+3. do not tune against partial results;
+4. require all 10 paired settings + aggregate before interpretation;
+5. preserve raw results and freshness boundary.
