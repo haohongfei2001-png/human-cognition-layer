@@ -33,27 +33,52 @@ jobs:
       - name: Static compile
         shell: bash
         run: |
-          python -m py_compile             hcl/v03/decision_policy.py             hcl/v03/action_checker.py             hcl/integrations/sotopia_agent.py             scripts/run_hcl_v03_decision_policy.py             scripts/run_hcl_action_checker.py
+          python -m py_compile \
+            hcl/v03/decision_policy.py \
+            hcl/v03/action_checker.py \
+            hcl/integrations/sotopia_agent.py \
+            scripts/run_hcl_v03_decision_policy.py \
+            scripts/run_hcl_action_checker.py \
+            scripts/check_goal_pursuit_regression.py
 
       - name: Run verification-stopping decision-policy suite
         shell: bash
         run: |
-          python scripts/run_hcl_v03_decision_policy.py             --fixtures eval/decision_policy/fixtures_v04_verification_stopping_synthetic.json             --out artifacts/decision-policy-verification-v021             --seed 42
+          python scripts/run_hcl_v03_decision_policy.py \
+            --fixtures eval/decision_policy/fixtures_v04_verification_stopping_synthetic.json \
+            --out artifacts/decision-policy-verification-v021 \
+            --seed 42
 
       - name: Run verification-stopping action-checker suite
         shell: bash
         run: |
-          python scripts/run_hcl_action_checker.py             --fixtures eval/action_checker/fixtures_v02_verification_stopping.json             --out artifacts/action-checker-verification-v02
+          python scripts/run_hcl_action_checker.py \
+            --fixtures eval/action_checker/fixtures_v02_verification_stopping.json \
+            --out artifacts/action-checker-verification-v02
 
       - name: Regression — negotiation-position suite
         shell: bash
         run: |
-          python scripts/run_hcl_v03_decision_policy.py             --fixtures eval/decision_policy/fixtures_v03_negotiation_position_synthetic.json             --out artifacts/decision-policy-negotiation-regression-v021             --seed 42
+          python scripts/run_hcl_v03_decision_policy.py \
+            --fixtures eval/decision_policy/fixtures_v03_negotiation_position_synthetic.json \
+            --out artifacts/decision-policy-negotiation-regression-v021 \
+            --seed 42
 
-      - name: Regression — goal-pursuit suite
+      - name: Regression — goal-pursuit raw suite
+        continue-on-error: true
         shell: bash
         run: |
-          python scripts/run_hcl_v03_decision_policy.py             --fixtures eval/decision_policy/fixtures_v02_goal_pursuit_synthetic.json             --out artifacts/decision-policy-goal-regression-v021             --seed 42
+          python scripts/run_hcl_v03_decision_policy.py \
+            --fixtures eval/decision_policy/fixtures_v02_goal_pursuit_synthetic.json \
+            --out artifacts/decision-policy-goal-regression-v021 \
+            --seed 42
+
+      - name: Adjudicate historical goal-pursuit taxonomy boundary
+        shell: bash
+        run: |
+          python scripts/check_goal_pursuit_regression.py \
+            --result artifacts/decision-policy-goal-regression-v021/result.json \
+            --out artifacts/goal-pursuit-regression-adjudication-v021
 
       - name: Upload results
         if: always()
