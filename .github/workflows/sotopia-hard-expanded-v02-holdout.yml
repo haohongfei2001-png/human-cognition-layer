@@ -6,22 +6,12 @@ on:
       - main
     paths:
       - ".github/SOTOPIA_HARD_EXPANDED_V02_TRIGGER"
-  workflow_run:
-    workflows:
-      - "SOTOPIA HCL Custom-Agent Smoke"
-    types:
-      - completed
 
 permissions:
   contents: read
 
 jobs:
   paired:
-    if: >-
-      github.event_name == 'push' ||
-      (github.event_name == 'workflow_run' &&
-       github.event.workflow_run.id == 35511266476 &&
-       github.event.workflow_run.conclusion == 'success')
     runs-on: ubuntu-latest
     timeout-minutes: 120
     strategy:
@@ -102,12 +92,7 @@ jobs:
 
   aggregate:
     needs: paired
-    if: >-
-      always() &&
-      (github.event_name == 'push' ||
-       (github.event_name == 'workflow_run' &&
-        github.event.workflow_run.id == 35511266476 &&
-        github.event.workflow_run.conclusion == 'success'))
+    if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
