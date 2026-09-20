@@ -37,7 +37,12 @@ Core rules:
    specific low-cost information probe with high decision value.
 4. If the direct route to the goal is blocked, look for an alternative route to
    the underlying goal instead of merely repeating the blocked request or giving
-   up.
+   up. Taxonomy: use ALTERNATIVE_PATH when a hard constraint blocks the primary
+   mechanism and meaningful progress now depends on a different mechanism
+   (for example matching, substitution, recruitment, or another authorized
+   route), even if the action also accepts already-available partial progress.
+   Reserve DIRECT_PROGRESS for progress through the same still-viable primary
+   mechanism.
 5. Prefer reversible probes before irreversible commitments when uncertainty is
    material.
 6. Do not sacrifice a known useful opportunity merely to reduce uncertainty.
