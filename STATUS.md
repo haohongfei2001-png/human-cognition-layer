@@ -604,3 +604,76 @@ Next canonical execution:
    combo set be consumed;
 7. do not start model training or cross-base transfer until this reliability
    gate is closed.
+
+
+## Verification-deadlock v0.2.1 synthetic repair closure
+
+Independent synthetic repair:
+- canonical run: `35518761327`
+- commit under test: `e5714e522e2cb0e02749c370f0a563d498c74f98`
+- raw artifact: `10607148842`
+- verification Decision Policy suite: **12 / 12**
+- Action Checker anti-loop suite: **5 / 5**
+- negotiation-position regression: **12 / 12**
+- goal-pursuit regression: **11 / 12 raw**
+
+The sole raw goal-pursuit miss is the same historical
+`gp03_irreversible_legal_uncertainty` taxonomy boundary already present in
+pre-repair run `35492464682`:
+- actual strategy remains `ALTERNATIVE_PATH`;
+- goal state is `BLOCKED`;
+- ownership/legal hard constraints are preserved;
+- verification is `UNRESOLVABLE_IN_INTERFACE`;
+- bounded fallback is required.
+
+A dedicated regression checker accepts only this exact previously adjudicated
+case with the safe structure above. New/multiple failures still fail. Raw 11/12
+is preserved; no post-hoc 12/12 claim is made.
+
+Failure history before canonical success is preserved:
+- `35517862848`: 11/12 — fallback structural invariant exposed;
+- `35517997649`: 11/12 — probe-family counting across a genuinely new channel
+  exposed a fixture-semantics error;
+- `35518116442`: new repair suites passed, negotiation regression 11/12 exposed
+  a strategy-taxonomy compatibility issue;
+- `35518350648`: repair + negotiation gates passed, historical raw goal 11/12
+  still blocked workflow success;
+- `35518711508`: same historical raw boundary still blocked until the exact,
+  bounded adjudication gate was wired;
+- `35518761327`: canonical raw evidence + bounded adjudication succeeded.
+
+Independence audit:
+- repair fixtures use unrelated domains and copy no SOTOPIA persona, dialogue,
+  exact price, evaluator answer, or record-sale wording;
+- only the abstract failure class is transferred into synthetic validation.
+
+Frozen-state audit:
+- no HCL v0.3 frozen state-semantics file changed;
+- HCL remains always-on;
+- no training started;
+- no cross-base-model transfer started.
+
+SOTOPIA integration smoke:
+- run `35519183891`
+- commit `f6e591db8d22ae0e2175769852a1a8aa9c3e106a`
+- **SUCCESS**
+- raw smoke artifact `10607982455`;
+- HCL state, Decision Policy, turn log, repaired verification fields, and
+  forced-noop always-on path are present and asserted.
+
+The smoke is adapter/integration-path evidence only, not a benchmark episode or
+efficacy result.
+
+See:
+- `reports/HCL_VERIFICATION_DEADLOCK_V021_SYNTHETIC_GATE.md`
+
+**Current gate: VERIFICATION_DEADLOCK_SYNTHETIC_AND_SMOKE_PASSED_REQUIRES_PREDECLARED_UNUSED_COMBO_HOLDOUT**
+
+Next canonical execution:
+1. freeze the smoke-tested v0.2.1 decision/action implementation;
+2. predeclare a previously unused expanded Hard env-agent combo slice and its
+   freshness boundary before viewing outcomes;
+3. explicitly state that the holdout is fresh persona/pairing evidence inside
+   already-seen environment templates, **not fresh-scenario evidence**;
+4. run complete paired control vs HCL episodes on the pinned SOTOPIA dataset;
+5. preserve raw outcomes and do not tune against the holdout before closure.
