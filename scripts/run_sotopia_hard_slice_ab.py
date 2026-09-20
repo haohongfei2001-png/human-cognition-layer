@@ -166,6 +166,7 @@ async def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--start", type=int, default=0)
     p.add_argument("--count", type=int, default=10)
+    p.add_argument("--seed", type=int, default=42)
     args = p.parse_args()
 
     settings = pick_hard_settings(start=args.start, count=args.count)
@@ -180,6 +181,7 @@ async def main() -> int:
             "hard_list_id": HARD_LIST_ID,
         },
         "model": MODEL,
+        "generation_seed": args.seed,
         "slice": {
             "start": args.start,
             "count": args.count,
@@ -218,14 +220,16 @@ async def main() -> int:
                 agent_ids=agent_ids,
                 tested_index=tested_index,
                 use_hcl=False,
-                tag=f"hcl_slice_{ordinal:03d}_control",
+                tag=f"hcl_slice_seed{args.seed}_{ordinal:03d}_control",
+                seed=args.seed,
             )
             treatment = await run_with_retry(
                 env_id=env_id,
                 agent_ids=agent_ids,
                 tested_index=tested_index,
                 use_hcl=True,
-                tag=f"hcl_slice_{ordinal:03d}_treatment",
+                tag=f"hcl_slice_seed{args.seed}_{ordinal:03d}_treatment",
+                seed=args.seed,
             )
 
             cr = tested_reward(control)
@@ -269,6 +273,7 @@ async def main() -> int:
             print(f"  FAILED: {failure}", flush=True)
 
         progress = {
+            "generation_seed": args.seed,
             "requested_settings": len(settings),
             "completed_settings": len(results),
             "failed_settings": failures,
@@ -280,6 +285,7 @@ async def main() -> int:
         )
 
     summary = {
+        "generation_seed": args.seed,
         "requested_settings": len(settings),
         "completed_settings": len(results),
         "failed_settings": failures,
