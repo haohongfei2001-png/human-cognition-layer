@@ -725,3 +725,25 @@ Next execution:
 3. do not tune against partial results;
 4. require all 10 paired settings + aggregate before interpretation;
 5. preserve raw results and freshness boundary.
+
+
+## Decision Policy v0.2.1 post-repair holdout launch
+
+Workflow:
+- `SOTOPIA-Hard Decision Policy v0.2.1 Post-Repair Expanded Holdout`
+- run: `35523303566`
+- launch commit: `b5823c48fe7c488c7d8fb9c2079465deeff9ef51`
+
+Predeclared settings:
+- expanded ordinals: `8,18,28,38,48,58,68,78,88,98`
+- combo ordinal: `3`
+- seed: `42`
+
+The workflow verifies that behavior-bearing files are unchanged from the
+smoke-tested freeze anchor
+`f6e591db8d22ae0e2175769852a1a8aa9c3e106a` before each paired job.
+
+The launch is a complete paired benchmark execution on the pinned official
+SOTOPIA dataset. No partial result may be used for tuning.
+
+**Current gate: V021_POST_REPAIR_UNUSED_COMBO_HOLDOUT_RUNNING**
