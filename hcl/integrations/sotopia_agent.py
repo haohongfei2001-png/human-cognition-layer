@@ -53,6 +53,9 @@ Rules:
    decision-relevant action is available.
 8. Keep the action natural and goal-directed.
 9. Do not mention HCL or internal reasoning.
+10. If the Decision Policy marks verification EXHAUSTED or
+    UNRESOLVABLE_IN_INTERFACE, do not repeat the same verification action.
+    Preserve the uncertainty and execute the bounded fallback intent instead.
 """
 
 
@@ -243,6 +246,25 @@ class HCLSocialAgent(LLMAgent):
     def _action_to_text(action: AgentAction) -> str:
         return json.dumps(action.model_dump(), ensure_ascii=False)
 
+    def _decision_history_for_policy(self, *, limit: int = 6) -> list[dict[str, Any]]:
+        """Return compact structured prior decisions for probe-budget reasoning."""
+        history: list[dict[str, Any]] = []
+        for entry in self._hcl_turn_log[-limit:]:
+            plan = entry.get("decision_plan") or {}
+            final_action = entry.get("final_action") or {}
+            history.append(
+                {
+                    "turn_number": entry.get("turn_number"),
+                    "strategy_type": plan.get("strategy_type"),
+                    "critical_information_gap": plan.get("critical_information_gap"),
+                    "verification_status": plan.get("verification_status"),
+                    "equivalent_probe_count": plan.get("equivalent_probe_count", 0),
+                    "chosen_action_intent": plan.get("chosen_action_intent"),
+                    "final_action": final_action,
+                }
+            )
+        return history
+
     def _generate_action(
         self,
         *,
@@ -338,6 +360,10 @@ class HCLSocialAgent(LLMAgent):
                 "hard_constraints": ["Environment currently allows only the none action."],
                 "soft_constraints": [],
                 "critical_information_gap": "",
+                "verification_status": "NOT_NEEDED",
+                "equivalent_probe_count": 0,
+                "option_decay": "low",
+                "fallback_required": False,
                 "strategy_type": "DEFER",
                 "chosen_action_intent": "Observe this turn and take no action because none is the only available action.",
                 "expected_goal_progress": "low",
@@ -368,6 +394,7 @@ class HCLSocialAgent(LLMAgent):
             visible_context=turn_input,
             state=state,
             available_actions=list(obs.available_actions),
+            decision_history=self._decision_history_for_policy(),
         )
         self._hcl_last_decision_plan = decision_plan
 
