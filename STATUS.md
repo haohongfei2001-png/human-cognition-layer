@@ -537,3 +537,70 @@ Predeclared v0.2 fresh expanded-combo holdout:
 - module frozen before outcomes
 
 **Current gate: DECISION_POLICY_V02_FRESH_EXPANDED_HOLDOUT_RUNNING**
+
+
+## Decision Policy v0.2 fresh expanded holdout closure
+
+Run `35511421008`: **SUCCESS / 10 of 10 paired settings completed**
+
+Predeclared expanded ordinals:
+`7,17,27,37,47,57,67,77,87,97`
+
+Aggregate:
+- control overall: **2.5714**
+- HCL + Decision Policy v0.2 overall: **2.6857**
+- paired delta: **+0.1143**
+- improved / tied / worsened: **5 / 3 / 2**
+
+Dimension deltas:
+- believability: **+0.3**
+- relationship: **+0.8**
+- knowledge: **-0.2**
+- secret: **0.0**
+- social_rules: **+0.1**
+- financial/material: **+0.4**
+- goal: **-0.6**
+
+Goal-negative expanded settings:
+- `27`: -1 — infeasible bargaining / evaluator granularity; no general policy
+  defect established.
+- `57`: -8 — metric conflict around exclusive scarce-resource possession; do
+  not repair for raw goal score.
+- `87`: -4 — explicit bodily/health need after one bounded counterproposal;
+  evaluator sensitivity, no general policy defect established.
+- `97`: -3 — **verification deadlock confirmed**.
+
+Expanded `97` reproduces the previously documented Hard-setting-19 failure
+under a different env-agent combination:
+- HCL correctly identifies a decision-critical ownership uncertainty;
+- repeated verification / external-check actions do not yield a resolving
+  observation in the current interaction interface;
+- option value decays while HCL remains in INFORMATION_PROBE / defer behavior;
+- the episode ends without a bounded fallback.
+
+This is **not** a frozen cognition-state defect. It is a decision/action-layer
+stopping-rule and observability defect.
+
+See:
+- `reports/SOTOPIA_V02_FRESH_EXPANDED_GOAL_NEGATIVE_AUDIT.md`
+
+Freshness boundary:
+- these were fresh env-agent/persona combinations;
+- environment templates were previously seen;
+- after this run, **60** expanded Hard env-agent combinations remain unused.
+
+**Current gate: VERIFICATION_DEADLOCK_CONFIRMED_REQUIRES_INDEPENDENT_SYNTHETIC_REPAIR**
+
+Next canonical execution:
+1. keep HCL v0.3 state semantics frozen and HCL always-on;
+2. do not tune against expanded 27 / 57 / 87;
+3. design a minimal decision/action-layer repair for the abstract
+   non-resolving-verification / option-decay failure class;
+4. include probe budget, observable-resolution detection, option-decay
+   accounting, bounded constraint-respecting fallback, and no fabricated
+   verification result;
+5. validate first on independent synthetic fixtures using unrelated domains;
+6. only after that gate passes may another previously unused SOTOPIA expanded
+   combo set be consumed;
+7. do not start model training or cross-base transfer until this reliability
+   gate is closed.
