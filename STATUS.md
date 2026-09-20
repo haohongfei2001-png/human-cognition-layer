@@ -263,3 +263,42 @@ Fresh generalization test:
 - sharded into five 2-setting jobs, max parallelism 2
 - status at launch: queued/running
 - diagnostic settings 0-9 are not reused for this generalization result.
+
+
+## Fresh SOTOPIA-Hard Decision Policy holdout
+
+Run `35450229188`: **PASS / 10 of 10 paired settings completed**
+
+Previously unused Hard ordinals 10-19:
+- control mean overall: **2.4714**
+- HCL + Decision Policy mean overall: **2.8857**
+- paired mean delta: **+0.4143**
+- improved / tied / worsened: **7 / 1 / 2**
+
+Dimension paired deltas:
+- believability: **+0.50**
+- relationship: **+0.40**
+- knowledge: **0.00**
+- secret: **0.00**
+- social_rules: **+0.50**
+- financial/material: **+1.20**
+- goal: **+0.30**
+
+This fresh slice is consistent with the intended action-policy repair:
+the diagnostic slice's knowledge (-1.20), financial/material (-0.60), and goal
+(-0.30) deficits did not reproduce.
+
+Claim boundary:
+- encouraging fresh-holdout signal;
+- not a final efficacy claim;
+- n=10 and one trajectory per arm;
+- custom DeepSeek partner/evaluator, not official leaderboard-comparable.
+
+**Current gate: HOLDOUT_SIGNAL_POSITIVE_REQUIRES_REPEATS**
+
+Do not tune against settings 10-19 before repeat-stability testing.
+Next execution:
+1. freeze current implementation;
+2. repeat the same fixed holdout with predefined additional seeds / repeats;
+3. estimate paired stability and variance;
+4. if stable, move to cross-base-model transfer.
