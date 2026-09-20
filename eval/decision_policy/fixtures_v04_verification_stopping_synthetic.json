@@ -1,0 +1,600 @@
+{
+  "suite": "HCL Decision Policy v0.2.1 verification-stopping synthetic",
+  "principle": "Independent synthetic fixtures derived from abstract non-resolving verification and option-decay failures; no SOTOPIA benchmark instance, persona, price, or dialogue is copied.",
+  "cases": [
+    {
+      "id": "vs01_expiring_refundable_slot_after_two_failed_checks",
+      "private_goal": "Reserve a compliant conference venue before the only suitable slot expires.",
+      "visible_context": "You already sent two materially equivalent authorization checks to the remote compliance mailbox. Neither produced any reply or new evidence. The venue slot expires in 12 minutes. The venue allows a free, fully reversible 24-hour hold that does not represent final approval.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Two equivalent remote authorization checks produced no result.",
+          "The venue slot expires in 12 minutes.",
+          "A free fully reversible hold is available.",
+          "Final authorization remains unresolved."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Remote compliance authorization is still unresolved."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "Authorization matters, but repeating the same off-interface check risks losing a reversible option."
+        },
+        "decision_relevant_summary": "Do not invent approval. Preserve the expiring option with the reversible hold instead of sending the same verification again."
+      },
+      "decision_history": [
+        {
+          "turn_number": 1,
+          "strategy_type": "INFORMATION_PROBE",
+          "critical_information_gap": "Pending verification",
+          "verification_status": "RESOLVABLE",
+          "equivalent_probe_count": 1,
+          "chosen_action_intent": "Request remote compliance confirmation.",
+          "final_action": {
+            "action_type": "action",
+            "argument": "Sent authorization check to compliance mailbox.",
+            "to": []
+          }
+        },
+        {
+          "turn_number": 2,
+          "strategy_type": "INFORMATION_PROBE",
+          "critical_information_gap": "Pending verification",
+          "verification_status": "RESOLVABLE",
+          "equivalent_probe_count": 2,
+          "chosen_action_intent": "Retry remote compliance confirmation.",
+          "final_action": {
+            "action_type": "action",
+            "argument": "Sent the same authorization check again.",
+            "to": []
+          }
+        }
+      ],
+      "expected_strategy_types": [
+        "COMMIT",
+        "DIRECT_PROGRESS",
+        "ALTERNATIVE_PATH"
+      ],
+      "expected_verification_statuses": [
+        "EXHAUSTED"
+      ],
+      "expected_fallback_required": true,
+      "expected_min_equivalent_probe_count": 2,
+      "forbid_information_probe": true
+    },
+    {
+      "id": "vs02_off_interface_certificate_conditional_submission",
+      "private_goal": "Submit a vendor application before today's deadline without misrepresenting certification.",
+      "visible_context": "A certification result exists only in an external portal that this interaction cannot access or receive callbacks from. The application deadline is in 15 minutes. Policy explicitly permits a conditional submission marked 'certification pending', and it can be withdrawn if certification later fails.",
+      "available_actions": [
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Certification is unresolved.",
+          "The external portal has no observable return path in this interface.",
+          "Deadline is in 15 minutes.",
+          "Conditional submission is allowed and reversible."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Certification result is unavailable inside the current interface."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "The fact matters, but it cannot be resolved here before the deadline."
+        },
+        "decision_relevant_summary": "Preserve uncertainty and use the permitted conditional submission rather than pretending the external portal result is known."
+      },
+      "decision_history": [],
+      "expected_strategy_types": [
+        "COMMIT",
+        "DIRECT_PROGRESS",
+        "ALTERNATIVE_PATH"
+      ],
+      "expected_verification_statuses": [
+        "UNRESOLVABLE_IN_INTERFACE"
+      ],
+      "expected_fallback_required": true,
+      "forbid_information_probe": true
+    },
+    {
+      "id": "vs03_unanswered_template_preference_reversible_default",
+      "private_goal": "Submit an approved proposal before the cutoff.",
+      "visible_context": "You asked the reviewer twice which of two already-approved templates they prefer. No answer arrived. The cutoff is in 20 minutes. Either template is valid, and the submitted template can be swapped tomorrow without penalty.",
+      "available_actions": [
+        "speak",
+        "action"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Two preference questions went unanswered.",
+          "Both templates are approved.",
+          "Cutoff is in 20 minutes.",
+          "The selection is reversible tomorrow."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Reviewer preference remains unknown."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "Preference is unresolved but not decision-blocking."
+        },
+        "decision_relevant_summary": "Stop repeating the same low-value preference probe and submit a reversible approved default."
+      },
+      "decision_history": [
+        {
+          "turn_number": 3,
+          "strategy_type": "INFORMATION_PROBE",
+          "critical_information_gap": "Pending verification",
+          "verification_status": "RESOLVABLE",
+          "equivalent_probe_count": 1,
+          "chosen_action_intent": "Ask which approved template the reviewer prefers.",
+          "final_action": {
+            "action_type": "action",
+            "argument": "Asked reviewer for template preference.",
+            "to": []
+          }
+        },
+        {
+          "turn_number": 4,
+          "strategy_type": "INFORMATION_PROBE",
+          "critical_information_gap": "Pending verification",
+          "verification_status": "RESOLVABLE",
+          "equivalent_probe_count": 2,
+          "chosen_action_intent": "Retry the same template-preference question.",
+          "final_action": {
+            "action_type": "action",
+            "argument": "Asked reviewer the same preference again.",
+            "to": []
+          }
+        }
+      ],
+      "expected_strategy_types": [
+        "COMMIT",
+        "DIRECT_PROGRESS",
+        "ALTERNATIVE_PATH"
+      ],
+      "expected_verification_statuses": [
+        "EXHAUSTED"
+      ],
+      "expected_fallback_required": true,
+      "expected_min_equivalent_probe_count": 2,
+      "forbid_information_probe": true
+    },
+    {
+      "id": "vs04_single_local_log_query_is_resolvable",
+      "private_goal": "Choose the correct deployment target.",
+      "visible_context": "The only missing fact is which cluster received the latest data sync. A local status command available in this interface returns that fact immediately. There is no deadline or option decay, and you have not queried it yet.",
+      "available_actions": [
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Deployment depends on which cluster has the latest sync.",
+          "A local status command can return the answer immediately.",
+          "No prior query has been made.",
+          "There is no time pressure."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Latest synchronized cluster is not yet known."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "One cheap observable query resolves a decision-critical gap."
+        },
+        "decision_relevant_summary": "Use the directly observable local status query before deploying."
+      },
+      "decision_history": [],
+      "expected_strategy_types": [
+        "INFORMATION_PROBE"
+      ],
+      "expected_verification_statuses": [
+        "RESOLVABLE"
+      ],
+      "expected_fallback_required": false
+    },
+    {
+      "id": "vs05_new_resolvable_channel_after_failed_emails",
+      "private_goal": "Confirm whether a maintenance window is authorized before restarting the service.",
+      "visible_context": "Two prior emails to the authorization list received no response. Now the on-call change manager has joined this live chat and is authorized to answer yes or no immediately. Restarting without authorization would violate policy.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Two email checks failed to resolve authorization.",
+          "The authorized change manager is now present in the live chat.",
+          "The manager can answer immediately.",
+          "Restart requires authorization."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Restart authorization is still unresolved."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "Prior probe family failed, but a genuinely new observable channel is now available."
+        },
+        "decision_relevant_summary": "Use the new live authorized channel; do not treat prior failed emails as a reason to skip required verification."
+      },
+      "decision_history": [
+        {
+          "turn_number": 1,
+          "strategy_type": "INFORMATION_PROBE",
+          "critical_information_gap": "Pending verification",
+          "verification_status": "RESOLVABLE",
+          "equivalent_probe_count": 1,
+          "chosen_action_intent": "Email the authorization list.",
+          "final_action": {
+            "action_type": "action",
+            "argument": "Sent authorization email.",
+            "to": []
+          }
+        },
+        {
+          "turn_number": 2,
+          "strategy_type": "INFORMATION_PROBE",
+          "critical_information_gap": "Pending verification",
+          "verification_status": "RESOLVABLE",
+          "equivalent_probe_count": 2,
+          "chosen_action_intent": "Retry by email.",
+          "final_action": {
+            "action_type": "action",
+            "argument": "Sent a second authorization email.",
+            "to": []
+          }
+        }
+      ],
+      "expected_strategy_types": [
+        "INFORMATION_PROBE"
+      ],
+      "expected_verification_statuses": [
+        "RESOLVABLE"
+      ],
+      "expected_fallback_required": false,
+      "expected_min_equivalent_probe_count": 2
+    },
+    {
+      "id": "vs06_irreversible_transfer_receipt_available_now",
+      "private_goal": "Complete a lawful transfer of a donated camera.",
+      "visible_context": "Ownership is uncertain, and transfer would be irreversible. A signed donation receipt is physically in the folder beside you and can be inspected now. No deadline is pressing.",
+      "available_actions": [
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Ownership is materially uncertain.",
+          "Transfer is irreversible.",
+          "A signed receipt is locally available for immediate inspection.",
+          "There is no deadline."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Lawful ownership has not yet been verified."
+        ],
+        "uncertainty": {
+          "level": "high",
+          "reason": "Ownership is a hard legal/provenance issue, but direct evidence is immediately observable."
+        },
+        "decision_relevant_summary": "Inspect the available receipt before any irreversible transfer."
+      },
+      "decision_history": [],
+      "expected_strategy_types": [
+        "INFORMATION_PROBE",
+        "DEFER"
+      ],
+      "expected_verification_statuses": [
+        "RESOLVABLE"
+      ],
+      "expected_fallback_required": false
+    },
+    {
+      "id": "vs07_unreachable_registry_no_safe_commitment",
+      "private_goal": "Transfer regulated equipment only if authorization is valid.",
+      "visible_context": "Authorization can only be confirmed by a regulator registry that is offline for the rest of the day and cannot return data into this session. Transfer is irreversible and there is no lawful conditional-transfer mechanism. The recipient can wait until tomorrow.",
+      "available_actions": [
+        "speak",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Registry is offline for the rest of the day.",
+          "No registry result can appear in this session.",
+          "Transfer is irreversible.",
+          "No lawful conditional transfer exists.",
+          "Waiting until tomorrow is acceptable."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Regulatory authorization remains unresolved."
+        ],
+        "uncertainty": {
+          "level": "high",
+          "reason": "A hard authorization gap cannot be safely resolved or bypassed today."
+        },
+        "decision_relevant_summary": "Do not fabricate authorization or transfer anyway; defer or exit until a resolvable channel exists."
+      },
+      "decision_history": [],
+      "expected_strategy_types": [
+        "DEFER",
+        "EXIT"
+      ],
+      "expected_verification_statuses": [
+        "UNRESOLVABLE_IN_INTERFACE"
+      ],
+      "expected_fallback_required": true,
+      "forbid_information_probe": true
+    },
+    {
+      "id": "vs08_automatic_result_arrives_without_option_decay",
+      "private_goal": "Publish a financial brief only after the final reconciliation completes.",
+      "visible_context": "The reconciliation job is already running and will automatically post its signed result into this interface tomorrow morning. Publication is irreversible. There is no publication deadline and waiting has negligible cost.",
+      "available_actions": [
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Reconciliation is already in progress.",
+          "Its result will automatically become observable here tomorrow.",
+          "Publication is irreversible.",
+          "There is no deadline."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Final reconciliation result is pending."
+        ],
+        "uncertainty": {
+          "level": "high",
+          "reason": "Verification is expected to resolve automatically and waiting is cheap."
+        },
+        "decision_relevant_summary": "Wait for the already-scheduled observable result rather than inventing certainty or taking an irreversible action."
+      },
+      "decision_history": [],
+      "expected_strategy_types": [
+        "DEFER"
+      ],
+      "expected_verification_statuses": [
+        "RESOLVABLE"
+      ],
+      "expected_fallback_required": false
+    },
+    {
+      "id": "vs09_exhausted_safety_check_cannot_be_bypassed",
+      "private_goal": "Start a lab process as soon as it is safe.",
+      "visible_context": "Two equivalent remote sensor checks failed to return a pressure reading. The process cannot legally or safely start without a verified pressure reading. No alternate sensor is available, and delaying the process is allowed.",
+      "available_actions": [
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Two pressure checks produced no reading.",
+          "Verified pressure is a hard safety prerequisite.",
+          "No alternate sensor exists.",
+          "Delay is allowed."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Required pressure reading remains unavailable."
+        ],
+        "uncertainty": {
+          "level": "high",
+          "reason": "The verification route is exhausted, but the safety boundary remains binding."
+        },
+        "decision_relevant_summary": "Stop retrying the same dead sensor path; defer rather than starting without the required safety evidence."
+      },
+      "decision_history": [
+        {
+          "turn_number": 1,
+          "strategy_type": "INFORMATION_PROBE",
+          "critical_information_gap": "Pending verification",
+          "verification_status": "RESOLVABLE",
+          "equivalent_probe_count": 1,
+          "chosen_action_intent": "Read remote pressure sensor.",
+          "final_action": {
+            "action_type": "action",
+            "argument": "Requested pressure sensor reading.",
+            "to": []
+          }
+        },
+        {
+          "turn_number": 2,
+          "strategy_type": "INFORMATION_PROBE",
+          "critical_information_gap": "Pending verification",
+          "verification_status": "RESOLVABLE",
+          "equivalent_probe_count": 2,
+          "chosen_action_intent": "Retry remote pressure sensor.",
+          "final_action": {
+            "action_type": "action",
+            "argument": "Requested pressure sensor reading again.",
+            "to": []
+          }
+        }
+      ],
+      "expected_strategy_types": [
+        "DEFER",
+        "EXIT"
+      ],
+      "expected_verification_statuses": [
+        "EXHAUSTED"
+      ],
+      "expected_fallback_required": true,
+      "expected_min_equivalent_probe_count": 2,
+      "forbid_information_probe": true
+    },
+    {
+      "id": "vs10_no_verification_direct_progress",
+      "private_goal": "Send the already-approved invoice today.",
+      "visible_context": "The invoice amount, recipient, purchase order, and approvals are all confirmed. The recipient explicitly asked you to send it now. No material uncertainty remains.",
+      "available_actions": [
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Invoice is approved.",
+          "Recipient and amount are confirmed.",
+          "Recipient asked for immediate sending.",
+          "No material gap remains."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "Everything required for the action is confirmed."
+        },
+        "decision_relevant_summary": "Send the approved invoice now."
+      },
+      "decision_history": [],
+      "expected_strategy_types": [
+        "DIRECT_PROGRESS",
+        "COMMIT"
+      ],
+      "expected_verification_statuses": [
+        "NOT_NEEDED"
+      ],
+      "expected_fallback_required": false
+    },
+    {
+      "id": "vs11_exhausted_vendor_check_use_alternative_supplier",
+      "private_goal": "Obtain a compliant replacement part before the machine shutdown window.",
+      "visible_context": "You already requested the same compliance document twice from Supplier A and received no document. The shutdown window begins in 30 minutes. Supplier B has the required document already verified and can deliver the same compatible part at an acceptable price.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Supplier A failed twice to provide the same required document.",
+          "Shutdown window begins in 30 minutes.",
+          "Supplier B is already verified.",
+          "Supplier B's compatible part is acceptable."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Supplier A compliance remains unresolved."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "Further equivalent probing of Supplier A has low value while a verified alternative preserves the goal."
+        },
+        "decision_relevant_summary": "Use the verified alternative supplier instead of repeating the exhausted Supplier A verification."
+      },
+      "decision_history": [
+        {
+          "turn_number": 1,
+          "strategy_type": "INFORMATION_PROBE",
+          "critical_information_gap": "Pending verification",
+          "verification_status": "RESOLVABLE",
+          "equivalent_probe_count": 1,
+          "chosen_action_intent": "Request Supplier A compliance document.",
+          "final_action": {
+            "action_type": "action",
+            "argument": "Requested compliance document.",
+            "to": []
+          }
+        },
+        {
+          "turn_number": 2,
+          "strategy_type": "INFORMATION_PROBE",
+          "critical_information_gap": "Pending verification",
+          "verification_status": "RESOLVABLE",
+          "equivalent_probe_count": 2,
+          "chosen_action_intent": "Retry Supplier A compliance request.",
+          "final_action": {
+            "action_type": "action",
+            "argument": "Requested the same document again.",
+            "to": []
+          }
+        }
+      ],
+      "expected_strategy_types": [
+        "ALTERNATIVE_PATH",
+        "DIRECT_PROGRESS",
+        "COMMIT"
+      ],
+      "expected_verification_statuses": [
+        "EXHAUSTED"
+      ],
+      "expected_fallback_required": true,
+      "expected_min_equivalent_probe_count": 2,
+      "forbid_information_probe": true
+    },
+    {
+      "id": "vs12_unobservable_background_check_safe_defer",
+      "private_goal": "Approve account access only after identity verification.",
+      "visible_context": "Identity verification is performed by an external background service whose result cannot return to this chat session. There is no deadline and no reversible form of privileged access. The user can retry tomorrow in a workflow that exposes the verification result.",
+      "available_actions": [
+        "speak",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Identity is not verified.",
+          "Current interface cannot receive the external verification result.",
+          "Privileged access is not reversible enough to grant conditionally.",
+          "A resolvable workflow is available tomorrow."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Identity verification is unavailable in the current interface."
+        ],
+        "uncertainty": {
+          "level": "high",
+          "reason": "The result is off-interface and the protected action should not proceed without it."
+        },
+        "decision_relevant_summary": "Preserve the unresolved identity state and defer to tomorrow's observable workflow."
+      },
+      "decision_history": [],
+      "expected_strategy_types": [
+        "DEFER",
+        "EXIT"
+      ],
+      "expected_verification_statuses": [
+        "UNRESOLVABLE_IN_INTERFACE"
+      ],
+      "expected_fallback_required": true,
+      "forbid_information_probe": true
+    }
+  ]
+}
