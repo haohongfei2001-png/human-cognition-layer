@@ -47,6 +47,7 @@ async def main() -> int:
     assert base_action.action_type in observation.available_actions
     assert hcl_action.action_type in observation.available_actions
     assert isinstance(hcl_action.argument, str)
+    assert hcl.action_checker is not None
     assert hcl._hcl_last_state is not None
     assert hcl._hcl_last_decision_plan is not None
     assert hcl._hcl_turn_log
