@@ -467,3 +467,55 @@ Freshness boundary:
 Unused expanded combos remaining after this run: **70**.
 
 **Current gate: GOAL_PURSUIT_REMAINS_UNRESOLVED_AFTER_ACTION_CHECKER**
+
+
+## Goal-negative audit and Decision Policy v0.2
+
+Expanded-combo goal-negative audit:
+- source run: `35496131831`
+- six goal-negative cases classified as:
+  - 2 metric conflicts that must **not** be optimized away;
+  - 2 infeasible-bargaining / evaluator-granularity cases with no established
+    policy defect;
+  - 2 genuine Decision Policy defects:
+    1. adverse self-anchoring;
+    2. premature constraint crystallization.
+
+Unified failure pattern:
+- v0.1 can overvalue information probing even when the probe itself shapes the
+  counterpart's commitment;
+- v0.1 can upgrade a soft opening position into a hard constraint too early.
+
+Independent synthetic baseline on frozen v0.1:
+- run `35511100930`
+- raw **11 / 12**
+- sole miss was adjudicated as a strategy-label boundary: actual behavior made
+  the correct bounded counterproposal despite the INFORMATION_PROBE label.
+- interpretation: the capability existed latently; the external failure is a
+  reliability problem, not total conceptual absence.
+
+Decision Policy v0.2:
+- adds explicit soft-position vs hard-constraint semantics;
+- treats probes as interventions with possible anchoring cost;
+- allows concrete proposals to serve as information acquisition;
+- requires probe-to-progress transition when enough information exists;
+- requires a bounded counterproposal before EXIT when no incompatible hard
+  boundary is known.
+
+v0.2 synthetic gate:
+- run `35511183476`
+- **12 / 12 PASS**
+- no HCL state-semantic change.
+
+Integration smoke:
+- run `35511266476`
+- current state: running.
+
+Next predeclared external holdout after smoke:
+- environment ordinals: `1,3,5,7,9,11,13,15,17,19`
+- combo ordinal: `2`
+- expanded ordinals: `7,17,27,37,47,57,67,77,87,97`
+- seed: `42`
+- all 10 env-agent combinations are previously unused.
+
+**Current gate: DECISION_POLICY_V02_INTEGRATION_SMOKE**
