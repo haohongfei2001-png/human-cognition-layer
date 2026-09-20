@@ -1,0 +1,70 @@
+name: SOTOPIA-Hard Expanded Combo Inventory
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/SOTOPIA_HARD_EXPANDED_INVENTORY_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SOTOPIA_STORAGE_BACKEND: redis
+      REDIS_OM_URL: redis://localhost:6379
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pinned SOTOPIA
+        shell: bash
+        run: |
+          git clone --quiet https://github.com/sotopia-lab/sotopia.git .cache/sotopia
+          git -C .cache/sotopia checkout --quiet --detach a0aaafb440e570e5e61b7c44a44e5e417c545383
+          python -m pip install --upgrade pip
+          python -m pip install -e .cache/sotopia
+          python -m pip install \
+            "pydantic==2.9.2" \
+            "redis-om==0.3.2" \
+            "redis==5.1.1"
+
+      - name: Load official SOTOPIA dataset into Redis
+        shell: bash
+        run: |
+          mkdir -p .cache/redis-data
+          curl -L --fail --retry 3 \
+            "https://huggingface.co/datasets/cmu-lti/sotopia-pi/resolve/main/dump.rdb?download=true" \
+            -o .cache/redis-data/dump.rdb
+          test -s .cache/redis-data/dump.rdb
+          docker run -d \
+            --name hcl-sotopia-redis \
+            -p 6379:6379 \
+            -v "$PWD/.cache/redis-data:/data" \
+            redis/redis-stack-server:latest
+          for i in {1..30}; do
+            if docker exec hcl-sotopia-redis redis-cli ping | grep -q PONG; then
+              exit 0
+            fi
+            sleep 2
+          done
+          docker logs hcl-sotopia-redis
+          exit 1
+
+      - name: Inventory expanded Hard combos
+        shell: bash
+        run: python scripts/inventory_sotopia_hard_expanded_combos.py
+
+      - name: Upload inventory
+        uses: actions/upload-artifact@v4
+        with:
+          name: sotopia-hard-expanded-inventory-${{ github.run_id }}
+          path: artifacts/sotopia-hard-expanded-inventory/
+          retention-days: 30
