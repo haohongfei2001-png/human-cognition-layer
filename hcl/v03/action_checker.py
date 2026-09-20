@@ -53,7 +53,10 @@ Check these violation families:
 - IRREVERSIBILITY_MISMATCH: plan depends on reversibility/contingency but the
   action removes that protection.
 - LOOPING: plan says a probe route is exhausted or low-value, but the action
-  simply repeats the same probe.
+  simply repeats the same probe. Treat verification_status=EXHAUSTED or
+  UNRESOLVABLE_IN_INTERFACE, or fallback_required=true, as an explicit signal
+  that materially equivalent verification should not be repeated unless the
+  candidate uses a genuinely new resolvable channel.
 
 Rules:
 1. A deliberate commitment under uncertainty may PASS if the Decision Policy
@@ -64,7 +67,11 @@ Rules:
    proposition is resolved.
 4. Judge the candidate against the supplied Decision Policy, while still
    independently enforcing hard factual and constraint consistency.
-5. PASS requires zero material violations.
+5. If the Decision Policy marks verification as EXHAUSTED or
+   UNRESOLVABLE_IN_INTERFACE, the candidate must preserve the unresolved fact
+   without retrying the same non-resolving verification action. Prefer the
+   policy's bounded fallback.
+6. PASS requires zero material violations.
 
 Return JSON only:
 {
