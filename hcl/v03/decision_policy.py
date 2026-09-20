@@ -23,6 +23,7 @@ You receive:
 - the acting agent's private goal;
 - the interaction context visible to that agent;
 - the frozen HCL cognition state;
+- recent HCL decision/action history, when available;
 - currently available action types.
 
 You do NOT change the HCL cognition state. Convert it into a compact action
@@ -70,6 +71,29 @@ Core rules:
     bounded counterproposal first. EXIT becomes appropriate after an explicit
     incompatible hard boundary, repeated bounded proposals establishing
     infeasibility, or negligible marginal value.
+16. Verification has a finite budget. Treat materially equivalent attempts to
+    resolve the same information gap as one probe family. Use recent decision/
+    action history to count prior attempts; do not reset the budget merely by
+    rephrasing the same question or repeating the same external action.
+17. Before choosing INFORMATION_PROBE, decide whether the proposed probe can
+    produce a NEW OBSERVABLE result inside the current interaction interface and
+    relevant time horizon. If the result is off-interface, unavailable, or has
+    already failed to appear after equivalent attempts, its marginal information
+    value is low even if the underlying fact remains important.
+18. If two or more materially equivalent verification attempts have produced no
+    new decision-relevant evidence, normally mark that probe family EXHAUSTED.
+    A further probe is justified only if a genuinely new channel/evidence source
+    is available and can plausibly resolve the gap.
+19. Account explicitly for option decay. When waiting or repeated probing can
+    destroy a useful opportunity, compare the cost of waiting with the risk of
+    acting. Prefer a bounded constraint-respecting reversible fallback when one
+    exists.
+20. When verification is EXHAUSTED or UNRESOLVABLE_IN_INTERFACE, do not fabricate
+    a resolution and do not silently treat the uncertain proposition as true.
+    Choose the best safe fallback: conditional/reversible commitment,
+    alternative path, defer, or exit.
+21. Hard legal, ownership, consent, and safety constraints remain binding. Probe
+    exhaustion is never permission to cross a hard boundary.
 
 Return JSON only:
 {
@@ -77,6 +101,10 @@ Return JSON only:
   "hard_constraints": ["..."],
   "soft_constraints": ["..."],
   "critical_information_gap": "...",
+  "verification_status": "NOT_NEEDED|RESOLVABLE|UNRESOLVABLE_IN_INTERFACE|EXHAUSTED",
+  "equivalent_probe_count": 0,
+  "option_decay": "low|medium|high",
+  "fallback_required": false,
   "strategy_type": "DIRECT_PROGRESS|INFORMATION_PROBE|ALTERNATIVE_PATH|COMMIT|DEFER|EXIT",
   "chosen_action_intent": "...",
   "expected_goal_progress": "low|medium|high",
@@ -108,6 +136,7 @@ class HCLDecisionPolicy:
         visible_context: str,
         state: dict[str, Any],
         available_actions: list[str],
+        decision_history: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         payload = (
             "【private goal】\n"
@@ -116,6 +145,8 @@ class HCLDecisionPolicy:
             + visible_context
             + "\n\n【frozen HCL cognition state】\n"
             + json.dumps(state, ensure_ascii=False, indent=2)
+            + "\n\n【recent HCL decision/action history】\n"
+            + json.dumps(decision_history or [], ensure_ascii=False, indent=2)
             + "\n\n【available action types】\n"
             + json.dumps(available_actions, ensure_ascii=False)
         )
@@ -172,11 +203,38 @@ class HCLDecisionPolicy:
             if not isinstance(plan.get(key), str):
                 plan[key] = ""
 
+        verification = str(plan.get("verification_status", "")).upper()
+        if verification not in {
+            "NOT_NEEDED",
+            "RESOLVABLE",
+            "UNRESOLVABLE_IN_INTERFACE",
+            "EXHAUSTED",
+        }:
+            verification = "NOT_NEEDED"
+        plan["verification_status"] = verification
+
+        try:
+            probe_count = int(plan.get("equivalent_probe_count", 0))
+        except (TypeError, ValueError):
+            probe_count = 0
+        plan["equivalent_probe_count"] = max(0, probe_count)
+
+        fallback = plan.get("fallback_required", False)
+        if isinstance(fallback, bool):
+            plan["fallback_required"] = fallback
+        else:
+            plan["fallback_required"] = str(fallback).strip().lower() in {
+                "true",
+                "1",
+                "yes",
+            }
+
         for key in (
             "expected_goal_progress",
             "information_gain",
             "reversibility",
             "social_risk",
+            "option_decay",
         ):
             value = str(plan.get(key, "")).lower()
             plan[key] = value if value in {"low", "medium", "high"} else "medium"
