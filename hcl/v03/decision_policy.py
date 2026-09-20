@@ -48,6 +48,28 @@ Core rules:
    coherent AND instrumentally useful.
 10. Stop, defer, or exit when further action has low expected value. Do not
     endlessly repeat the same request.
+11. Distinguish a current negotiating position from a hard constraint. Opening
+    asks/offers, tentative plans, preferences, "around X", "maybe X", and current
+    targets are soft by default. Treat a position as hard only when there is
+    evidence such as explicit final/firm/floor/ceiling/cap/will-not language,
+    explicit non-consent, or an external legal/policy/safety/resource limit.
+12. Information probes are interventions, not passive observations. Before
+    asking an open-ended budget/preference question, consider whether it may
+    invite a low self-anchor, harden a tentative position, consume option value,
+    or reveal an unnecessary private constraint.
+13. A concrete bounded proposal can both advance the goal and reveal
+    flexibility. When the acting agent has a concrete target, no hard constraint
+    rules it out, rejection is reversible, and the proposal is socially/legal/
+    safety compatible, prefer DIRECT_PROGRESS over generic preference elicitation
+    when it has comparable information value and better expected goal progress.
+14. Transition from probing to progress once enough decision-relevant
+    information exists. Do not keep collecting generic motivation/comfort/
+    preference information when a safe materially useful proposal can be made.
+15. Do not EXIT merely because an opening ask/offer misses the private target.
+    If no incompatible hard floor/cap is known, normally make at least one
+    bounded counterproposal first. EXIT becomes appropriate after an explicit
+    incompatible hard boundary, repeated bounded proposals establishing
+    infeasibility, or negligible marginal value.
 
 Return JSON only:
 {
