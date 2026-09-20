@@ -49,6 +49,7 @@ def main() -> int:
                 visible_context=case["visible_context"],
                 state=case["state"],
                 available_actions=case["available_actions"],
+                decision_history=case.get("decision_history", []),
             )
             actual = plan.get("strategy_type")
             ok = actual in case["expected_strategy_types"]
@@ -59,11 +60,35 @@ def main() -> int:
             if plan.get("goal_progress_state") == "BLOCKED":
                 ok = ok and bool(plan.get("hard_constraints"))
 
+            expected_verification = case.get("expected_verification_statuses")
+            if expected_verification:
+                ok = ok and plan.get("verification_status") in expected_verification
+
+            if "expected_fallback_required" in case:
+                ok = ok and (
+                    bool(plan.get("fallback_required"))
+                    is bool(case["expected_fallback_required"])
+                )
+
+            if case.get("forbid_information_probe"):
+                ok = ok and actual != "INFORMATION_PROBE"
+
+            if "expected_min_equivalent_probe_count" in case:
+                ok = ok and int(plan.get("equivalent_probe_count", 0)) >= int(
+                    case["expected_min_equivalent_probe_count"]
+                )
+
             result = {
                 "id": case["id"],
                 "passed": ok,
                 "expected_strategy_types": case["expected_strategy_types"],
                 "actual_strategy_type": actual,
+                "expected_verification_statuses": case.get(
+                    "expected_verification_statuses"
+                ),
+                "expected_fallback_required": case.get(
+                    "expected_fallback_required"
+                ),
                 "plan": plan,
             }
         except Exception as exc:
