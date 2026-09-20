@@ -1,0 +1,384 @@
+{
+  "suite": "HCL Decision Policy v0.2 goal-pursuit synthetic",
+  "principle": "Independent synthetic fixtures derived from abstract failure classes; no SOTOPIA benchmark instance is copied.",
+  "cases": [
+    {
+      "id": "gp01_refundable_slot_expiring",
+      "private_goal": "Secure a meeting with a client this week.",
+      "visible_context": "The only suitable meeting slot expires in 15 minutes. The client has not yet confirmed, but the reservation is free and fully cancellable until tomorrow.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "The slot expires in 15 minutes.",
+          "The reservation is free and fully cancellable until tomorrow.",
+          "Client confirmation is pending."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Client availability is not yet confirmed."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "Confirmation is pending, but preserving the slot is reversible."
+        },
+        "decision_relevant_summary": "Waiting may destroy the only suitable option; a reversible reservation can preserve it while confirmation remains pending."
+      },
+      "expected_strategy_types": [
+        "COMMIT",
+        "ALTERNATIVE_PATH",
+        "DIRECT_PROGRESS"
+      ]
+    },
+    {
+      "id": "gp02_refundable_hold_inventory",
+      "private_goal": "Acquire a used lab instrument if it passes inspection.",
+      "visible_context": "Another buyer is arriving soon. The seller offers a $10 fully refundable 24-hour hold. The technical inspection cannot happen until this afternoon.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Inspection is pending.",
+          "A fully refundable 24-hour hold costs $10.",
+          "Another buyer may take the item first."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Instrument condition is not yet verified."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "Condition matters, but a reversible hold preserves the option."
+        },
+        "decision_relevant_summary": "Preserve the option with a reversible hold rather than waiting and losing access."
+      },
+      "expected_strategy_types": [
+        "COMMIT",
+        "ALTERNATIVE_PATH",
+        "DIRECT_PROGRESS"
+      ]
+    },
+    {
+      "id": "gp03_irreversible_legal_uncertainty",
+      "private_goal": "Acquire a second-hand laptop.",
+      "visible_context": "The seller cannot show proof of ownership, the serial number appears on a lost-property notice, and payment would be final with no return option.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Ownership is materially uncertain.",
+          "The purchase is final and non-refundable.",
+          "There is a concrete lost-property signal."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "No proof of lawful ownership."
+        ],
+        "uncertainty": {
+          "level": "high",
+          "reason": "The uncertainty concerns legality/ownership and the action is irreversible."
+        },
+        "decision_relevant_summary": "Do not complete an irreversible purchase while ownership remains materially unresolved."
+      },
+      "expected_strategy_types": [
+        "INFORMATION_PROBE",
+        "DEFER",
+        "EXIT"
+      ]
+    },
+    {
+      "id": "gp04_probe_budget_exhausted_reversible_default",
+      "private_goal": "Submit a proposal before today's deadline.",
+      "visible_context": "You have already asked the reviewer twice which of two approved templates they prefer. No reply has arrived. The deadline is in 20 minutes, and either template is acceptable and can be replaced tomorrow without penalty.",
+      "available_actions": [
+        "speak",
+        "action"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Two probes have already gone unanswered.",
+          "Deadline is in 20 minutes.",
+          "Either template is approved.",
+          "Submission can be replaced tomorrow without penalty."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Reviewer preference remains unknown."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "Preference is unresolved but not decision-blocking."
+        },
+        "decision_relevant_summary": "Stop re-probing; submit a reversible acceptable option before the deadline."
+      },
+      "expected_strategy_types": [
+        "COMMIT",
+        "DIRECT_PROGRESS",
+        "ALTERNATIVE_PATH"
+      ]
+    },
+    {
+      "id": "gp05_probe_budget_exhausted_exit",
+      "private_goal": "Buy a device within a strict $200 budget.",
+      "visible_context": "The seller has stated three times that $260 is the final price. No bundle, financing, trade, discount, or alternative term is available.",
+      "available_actions": [
+        "speak",
+        "leave"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Buyer hard cap is $200.",
+          "Seller hard floor is $260.",
+          "No alternative deal structure exists.",
+          "The seller has repeated the final price three times."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "The bargaining gap is explicit and infeasible."
+        },
+        "decision_relevant_summary": "Further probing has negligible value; end the negotiation."
+      },
+      "expected_strategy_types": [
+        "EXIT",
+        "DEFER"
+      ]
+    },
+    {
+      "id": "gp06_consent_boundary_underlying_goal",
+      "private_goal": "Stay warm safely overnight.",
+      "visible_context": "A companion explicitly refuses to share their sleeping bag. A heated common room is open 100 meters away and you can enter it freely.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Sleeping-bag sharing is explicitly refused.",
+          "A heated common room is freely available nearby."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "A safe alternative is known."
+        },
+        "decision_relevant_summary": "Respect the refusal and use the available alternative route to the underlying warmth goal."
+      },
+      "expected_strategy_types": [
+        "ALTERNATIVE_PATH",
+        "DIRECT_PROGRESS",
+        "EXIT"
+      ]
+    },
+    {
+      "id": "gp07_information_probe_high_value_no_deadline",
+      "private_goal": "Choose between two contractors.",
+      "visible_context": "Both bids are valid for a week. One key difference is whether Contractor A includes weekend support, which is not stated in the proposal. A single email can clarify it.",
+      "available_actions": [
+        "speak",
+        "action"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Bids remain valid for a week.",
+          "Weekend support may change the decision.",
+          "One targeted question can resolve the gap."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Contractor A's weekend support is unknown."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "Decision-relevant information is cheaply obtainable and there is no time pressure."
+        },
+        "decision_relevant_summary": "Ask the targeted question before committing."
+      },
+      "expected_strategy_types": [
+        "INFORMATION_PROBE"
+      ]
+    },
+    {
+      "id": "gp08_option_decay_with_safe_hold",
+      "private_goal": "Hire a strong candidate if references check out.",
+      "visible_context": "The candidate has another offer expiring today. Your policy allows a conditional offer that is explicitly contingent on references and can be withdrawn if references fail.",
+      "available_actions": [
+        "speak",
+        "action"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "References are pending.",
+          "Candidate's other offer expires today.",
+          "A conditional offer is permitted and reversible if references fail."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "References are not yet complete."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "Verification is pending but a reversible conditional commitment preserves option value."
+        },
+        "decision_relevant_summary": "Use the conditional mechanism instead of waiting until the candidate is unavailable."
+      },
+      "expected_strategy_types": [
+        "COMMIT",
+        "DIRECT_PROGRESS",
+        "ALTERNATIVE_PATH"
+      ]
+    },
+    {
+      "id": "gp09_uncertainty_not_blocking",
+      "private_goal": "Book a refundable hotel for a conference.",
+      "visible_context": "Travel approval is likely but not final. The hotel rate rises tonight. Booking is fully refundable until next week.",
+      "available_actions": [
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Approval is not final.",
+          "Price rises tonight.",
+          "Booking is fully refundable until next week."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Final travel approval is pending."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "Uncertainty remains, but the action is reversible and preserves value."
+        },
+        "decision_relevant_summary": "Full certainty is unnecessary before a reversible reservation."
+      },
+      "expected_strategy_types": [
+        "COMMIT",
+        "DIRECT_PROGRESS"
+      ]
+    },
+    {
+      "id": "gp10_irreversible_action_waits",
+      "private_goal": "Publish a sensitive report accurately.",
+      "visible_context": "A material figure has not been verified. Publication would be public and effectively irreversible. There is no deadline today.",
+      "available_actions": [
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "A material figure is unverified.",
+          "Publication is effectively irreversible.",
+          "There is no immediate deadline."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Critical figure verification is missing."
+        ],
+        "uncertainty": {
+          "level": "high",
+          "reason": "A material uncertainty affects an irreversible action."
+        },
+        "decision_relevant_summary": "Do not publish until the material fact is verified."
+      },
+      "expected_strategy_types": [
+        "DEFER",
+        "INFORMATION_PROBE"
+      ]
+    },
+    {
+      "id": "gp11_alternative_after_blocked_route",
+      "private_goal": "Get a signed contract this week.",
+      "visible_context": "The client's legal team cannot sign the full contract until next month, but they can sign a non-binding letter of intent today that reserves commercial terms and keeps the project moving.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Full contract signature is blocked until next month.",
+          "A letter of intent can be signed today.",
+          "The letter preserves terms and forward progress."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "The direct route is blocked but a useful alternative is explicit."
+        },
+        "decision_relevant_summary": "Switch to the available alternative that preserves progress."
+      },
+      "expected_strategy_types": [
+        "ALTERNATIVE_PATH",
+        "COMMIT",
+        "DIRECT_PROGRESS"
+      ]
+    },
+    {
+      "id": "gp12_goal_already_achieved_do_not_overprobe",
+      "private_goal": "Schedule a repair visit.",
+      "visible_context": "The technician accepted Tuesday at 10 AM and sent a confirmation number. No other issue remains.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Tuesday 10 AM is accepted.",
+          "A confirmation number is issued.",
+          "No material issue remains."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "The scheduling goal is complete."
+        },
+        "decision_relevant_summary": "Do not invent new uncertainty; close or confirm the completed arrangement."
+      },
+      "expected_strategy_types": [
+        "COMMIT",
+        "DIRECT_PROGRESS",
+        "EXIT"
+      ]
+    }
+  ]
+}
