@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import sys
@@ -12,25 +13,32 @@ sys.path.insert(0, str(ROOT))
 from hcl.v03.backends import OpenAICompatibleBackend
 from hcl.v03.decision_policy import HCLDecisionPolicy
 
-FIXTURES = ROOT / "eval/decision_policy/fixtures_v01_synthetic.json"
-OUT = ROOT / "artifacts/decision-policy-v01"
+DEFAULT_FIXTURES = ROOT / "eval/decision_policy/fixtures_v01_synthetic.json"
+DEFAULT_OUT = ROOT / "artifacts/decision-policy-v01"
 
 
 def main() -> int:
+    p = argparse.ArgumentParser()
+    p.add_argument("--fixtures", type=Path, default=DEFAULT_FIXTURES)
+    p.add_argument("--out", type=Path, default=DEFAULT_OUT)
+    p.add_argument("--seed", type=int, default=42)
+    args = p.parse_args()
     api_key = os.getenv("DEEPSEEK_API_KEY") or os.getenv("CUSTOM_API_KEY")
     if not api_key:
         raise RuntimeError("DEEPSEEK_API_KEY or CUSTOM_API_KEY is required")
 
-    suite = json.loads(FIXTURES.read_text(encoding="utf-8"))
+    fixtures_path = args.fixtures if args.fixtures.is_absolute() else ROOT / args.fixtures
+    out_dir = args.out if args.out.is_absolute() else ROOT / args.out
+    suite = json.loads(fixtures_path.read_text(encoding="utf-8"))
     backend = OpenAICompatibleBackend(
         api_key=api_key,
         base_url="https://api.deepseek.com",
         model="deepseek-flash",
-        seed=42,
+        seed=args.seed,
     )
     policy = HCLDecisionPolicy(backend)
 
-    OUT.mkdir(parents=True, exist_ok=True)
+    out_dir.mkdir(parents=True, exist_ok=True)
     results = []
     passed = 0
 
@@ -78,6 +86,8 @@ def main() -> int:
 
     summary = {
         "suite": suite["suite"],
+        "fixture_file": str(fixtures_path.relative_to(ROOT)),
+        "generation_seed": args.seed,
         "total": len(results),
         "passed": passed,
         "failed": len(results) - passed,
@@ -89,7 +99,7 @@ def main() -> int:
         ),
     }
 
-    (OUT / "result.json").write_text(
+    (out_dir / "result.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
