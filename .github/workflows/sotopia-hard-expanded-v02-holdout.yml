@@ -1,0 +1,123 @@
+name: SOTOPIA-Hard Decision Policy v0.2 Fresh Expanded Holdout
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/SOTOPIA_HARD_EXPANDED_V02_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  paired:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        environment_ordinal: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+
+    env:
+      CUSTOM_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      SOTOPIA_STORAGE_BACKEND: redis
+      REDIS_OM_URL: redis://localhost:6379
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pinned SOTOPIA
+        shell: bash
+        run: |
+          git clone --quiet https://github.com/sotopia-lab/sotopia.git .cache/sotopia
+          git -C .cache/sotopia checkout --quiet --detach a0aaafb440e570e5e61b7c44a44e5e417c545383
+          python -m pip install --upgrade pip
+          python -m pip install -e .cache/sotopia
+          python -m pip install \
+            "pydantic==2.9.2" \
+            "redis-om==0.3.2" \
+            "redis==5.1.1" \
+            "openai==2.14.0" \
+            "litellm==1.80.11"
+
+      - name: Load official SOTOPIA dataset into Redis
+        shell: bash
+        run: |
+          mkdir -p .cache/redis-data
+          curl -L --fail --retry 3 \
+            "https://huggingface.co/datasets/cmu-lti/sotopia-pi/resolve/main/dump.rdb?download=true" \
+            -o .cache/redis-data/dump.rdb
+          test -s .cache/redis-data/dump.rdb
+          docker run -d \
+            --name hcl-sotopia-redis \
+            -p 6379:6379 \
+            -v "$PWD/.cache/redis-data:/data" \
+            redis/redis-stack-server:latest
+          for i in {1..30}; do
+            if docker exec hcl-sotopia-redis redis-cli ping | grep -q PONG; then
+              exit 0
+            fi
+            sleep 2
+          done
+          docker logs hcl-sotopia-redis
+          exit 1
+
+      - name: Run predeclared fresh combo
+        shell: bash
+        run: |
+          python scripts/run_sotopia_hard_expanded_one_ab.py \
+            --environment-ordinal ${{ matrix.environment_ordinal }} \
+            --combo-ordinal 2 \
+            --seed 42
+
+      - name: Upload combo artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sotopia-hard-v02-expanded-env-${{ matrix.environment_ordinal }}-${{ github.run_id }}
+          path: artifacts/sotopia-hard-expanded-one-ab/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Redis logs on failure
+        if: failure()
+        shell: bash
+        run: docker logs hcl-sotopia-redis || true
+
+  aggregate:
+    needs: paired
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: sotopia-hard-v02-expanded-env-*-${{ github.run_id }}
+          path: downloaded-expanded
+          merge-multiple: false
+
+      - name: Aggregate predeclared v0.2 holdout
+        shell: bash
+        run: |
+          python scripts/aggregate_sotopia_slice_artifacts.py \
+            --root downloaded-expanded \
+            --out artifacts/sotopia-hard-v02-expanded-holdout-summary \
+            --expected-ordinals "7,17,27,37,47,57,67,77,87,97"
+
+      - name: Upload aggregate summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sotopia-hard-v02-expanded-holdout-summary-${{ github.run_id }}
+          path: artifacts/sotopia-hard-v02-expanded-holdout-summary/
+          if-no-files-found: warn
+          retention-days: 30
