@@ -364,4 +364,14 @@ SOTOPIA integration:
 - integration smoke run: `35492711369`
 - current state at launch: in progress.
 
-**Current gate: ACTION_CHECKER_INTEGRATION_SMOKE**
+Action-checker integration smoke:
+- run `35492711369`
+- **PASS / SUCCESS**
+
+Fresh SOTOPIA-Hard action-checker holdout:
+- run `35493750111`
+- previously unused Hard ordinals **20-29**
+- five 2-setting shards, max parallelism 2
+- current state at launch: running
+
+**Current gate: FRESH_ACTION_CHECKER_HOLDOUT_20_29_RUNNING**
