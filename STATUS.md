@@ -331,3 +331,37 @@ Unstable:
 The original positive overall holdout does not robustly repeat.
 Do not weaken/bypass HCL. Diagnose the remaining goal-pursuit instability at
 the Decision Policy/action layer without training on exact SOTOPIA instances.
+
+
+## Goal-regression component diagnosis and Action Checker
+
+Repeat audit isolated two materially different sources of goal loss:
+- some SOTOPIA goal penalties are metric conflicts where literal private-goal
+  pursuit rewards behavior that crosses interpersonal boundaries;
+- at least one repeated loss is a real control-flow defect: the generic answer
+  checker can block a Decision Policy action merely because uncertainty remains,
+  conflating "acting under uncertainty" with "claiming uncertainty is resolved".
+
+Independent Decision Policy goal-pursuit audit:
+- run `35492464682`
+- raw **11 / 12**
+- sole raw miss was a taxonomy-boundary case where choosing a lawful alternative
+  path was semantically correct.
+- conclusion: no broad Decision Policy inability on option value / probe budgets
+  was established.
+
+Action-specific checker:
+- implementation: `hcl/v03/action_checker.py`
+- synthetic run: `35492634398`
+- result: **14 / 14 PASS**
+- explicitly validates reversible/conditional actions under uncertainty while
+  still rejecting false certainty, hard-constraint violations, looping,
+  irreversibility mismatch, invalid action types, and plan mismatch.
+
+SOTOPIA integration:
+- `HCLSocialAgent` now uses the Action Checker instead of the generic answer
+  checker for social actions.
+- integration smoke run: `35492711369`
+- current state at launch: in progress.
+
+**Current gate: ACTION_CHECKER_INTEGRATION_SMOKE**
