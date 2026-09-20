@@ -302,3 +302,32 @@ Next execution:
 2. repeat the same fixed holdout with predefined additional seeds / repeats;
 3. estimate paired stability and variance;
 4. if stable, move to cross-base-model transfer.
+
+
+## Repeat stability — seeds 42 / 43 / 44
+
+Runs:
+- seed 42: `35450229188`
+- seeds 43/44: `35482453412`
+
+Paired overall deltas:
+- seed 42: **+0.4143**
+- seed 43: **-0.0857**
+- seed 44: **+0.0143**
+- mean of run-level paired means: **+0.1143**
+
+Stable dimension signs across all three:
+- believability: positive
+- relationship: positive
+- knowledge: non-negative
+- social_rules: positive
+
+Unstable:
+- financial/material: +1.20, -0.10, -0.10
+- goal: +0.30, -1.60, -1.20
+
+**Current gate: REPEAT_STABILITY_MIXED_GOAL_REGRESSION**
+
+The original positive overall holdout does not robustly repeat.
+Do not weaken/bypass HCL. Diagnose the remaining goal-pursuit instability at
+the Decision Policy/action layer without training on exact SOTOPIA instances.
