@@ -1,0 +1,48 @@
+name: HCL Negotiation-Position Synthetic v0.2
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_NEGOTIATION_POSITION_V02_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install openai
+
+      - name: Run negotiation-position synthetic suite
+        shell: bash
+        run: |
+          python scripts/run_hcl_v03_decision_policy.py \
+            --fixtures eval/decision_policy/fixtures_v03_negotiation_position_synthetic.json \
+            --out artifacts/decision-policy-negotiation-position-v02 \
+            --seed 42
+
+      - name: Upload result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-negotiation-position-v02-${{ github.run_id }}
+          path: artifacts/decision-policy-negotiation-position-v02/
+          if-no-files-found: warn
+          retention-days: 30
