@@ -430,3 +430,40 @@ Predeclared fresh-combo robustness holdout:
   environment templates; not fresh-scenario evidence.
 
 **Current gate: EXPANDED_COMBO_HOLDOUT_RUNNING**
+
+
+## Expanded-combo Action Checker holdout result
+
+Run `35496131831`: **SUCCESS / 10 of 10 paired settings**
+
+Previously unused env-agent combos:
+`1,11,21,31,41,51,61,71,81,91`
+
+Aggregate:
+- control overall: **2.2714**
+- HCL + Decision Policy + Action Checker: **2.4286**
+- paired delta: **+0.1571**
+- improved / tied / worsened: **4 / 2 / 4**
+
+Dimension deltas:
+- believability: **+0.2**
+- relationship: **+0.4**
+- knowledge: **0.0**
+- secret: **+0.4**
+- social_rules: **+1.0**
+- financial/material: **+0.3**
+- goal: **-1.2**
+
+Interpretation:
+- Action Checker repair survives new persona pairing at the overall level;
+- the old systematic knowledge deficit remains absent;
+- **goal pursuit remains the principal unresolved weakness** and reproduces the
+  negative repeat signal seen under seeds 43/44.
+
+Freshness boundary:
+- fresh env-agent/persona combinations only;
+- environment templates were previously seen.
+
+Unused expanded combos remaining after this run: **70**.
+
+**Current gate: GOAL_PURSUIT_REMAINS_UNRESOLVED_AFTER_ACTION_CHECKER**
