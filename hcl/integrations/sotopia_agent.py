@@ -13,6 +13,7 @@ import os
 from typing import Any
 
 from hcl.v03.answer_loop import HCLAnswerLoop, extract_json
+from hcl.v03.action_checker import HCLActionChecker
 from hcl.v03.backends import OpenAICompatibleBackend
 from hcl.v03.decision_policy import HCLDecisionPolicy
 
@@ -216,6 +217,7 @@ class HCLSocialAgent(LLMAgent):
         )
         self.hcl_loop = HCLAnswerLoop(backend)
         self.decision_policy = HCLDecisionPolicy(backend)
+        self.action_checker = HCLActionChecker(backend)
         self._hcl_last_state: dict[str, Any] | None = None
         self._hcl_last_decision_plan: dict[str, Any] | None = None
         self._hcl_turn_log: list[dict[str, Any]] = []
@@ -375,10 +377,12 @@ class HCLSocialAgent(LLMAgent):
             decision_plan=decision_plan,
             obs=obs,
         )
-        first_check = self.hcl_loop.check(
-            turn_input,
-            state,
-            self._action_to_text(draft),
+        first_check = self.action_checker.check(
+            turn_context=turn_input,
+            state=state,
+            decision_plan=decision_plan,
+            available_actions=list(obs.available_actions),
+            candidate_action=draft.model_dump(),
         )
 
         candidate = draft
@@ -392,10 +396,12 @@ class HCLSocialAgent(LLMAgent):
                 previous=draft,
             )
 
-        final_check = self.hcl_loop.check(
-            turn_input,
-            state,
-            self._action_to_text(candidate),
+        final_check = self.action_checker.check(
+            turn_context=turn_input,
+            state=state,
+            decision_plan=decision_plan,
+            available_actions=list(obs.available_actions),
+            candidate_action=candidate.model_dump(),
         )
         final_action = candidate
         if final_check.get("status") == "REVISE":
