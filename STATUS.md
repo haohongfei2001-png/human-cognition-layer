@@ -403,3 +403,30 @@ Current corrective gate:
    to a different external validation source.
 
 **Current gate: HARD_EXPANDED_COMBO_INVENTORY**
+
+
+## Expanded Hard inventory and combo-level holdout
+
+Inventory run `35495418673`: **SUCCESS**
+
+Exact pinned Hard inventory:
+- 20 environment positions
+- 5 env-agent combos per position
+- **100 expanded settings total**
+- 20 previously consumed first-combo settings
+- **80 unused env-agent combos remain**
+
+The previous 20-29 environment-ordinal attempt consumed no episodes and is
+methodologically void.
+
+Predeclared fresh-combo robustness holdout:
+- run `35496131831`
+- environment ordinals: `0,2,4,6,8,10,12,14,16,18`
+- combo ordinal: `1`
+- expanded ordinals: `1,11,21,31,41,51,61,71,81,91`
+- seed: `42`
+- current state at launch: running
+- claim boundary: fresh env-agent combinations inside previously seen
+  environment templates; not fresh-scenario evidence.
+
+**Current gate: EXPANDED_COMBO_HOLDOUT_RUNNING**
