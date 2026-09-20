@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import sys
@@ -12,16 +13,24 @@ sys.path.insert(0, str(ROOT))
 from hcl.v03.action_checker import HCLActionChecker
 from hcl.v03.backends import OpenAICompatibleBackend
 
-FIXTURES = ROOT / "eval/action_checker/fixtures_v01_synthetic.json"
-OUT = ROOT / "artifacts/action-checker-v01"
+DEFAULT_FIXTURES = ROOT / "eval/action_checker/fixtures_v01_synthetic.json"
+DEFAULT_OUT = ROOT / "artifacts/action-checker-v01"
 
 
 def main() -> int:
+    p = argparse.ArgumentParser()
+    p.add_argument("--fixtures", type=Path, default=DEFAULT_FIXTURES)
+    p.add_argument("--out", type=Path, default=DEFAULT_OUT)
+    args = p.parse_args()
+
+    fixtures_path = args.fixtures if args.fixtures.is_absolute() else ROOT / args.fixtures
+    out_dir = args.out if args.out.is_absolute() else ROOT / args.out
+
     api_key = os.getenv("DEEPSEEK_API_KEY") or os.getenv("CUSTOM_API_KEY")
     if not api_key:
         raise RuntimeError("DEEPSEEK_API_KEY or CUSTOM_API_KEY is required")
 
-    suite = json.loads(FIXTURES.read_text(encoding="utf-8"))
+    suite = json.loads(fixtures_path.read_text(encoding="utf-8"))
     backend = OpenAICompatibleBackend(
         api_key=api_key,
         base_url="https://api.deepseek.com",
@@ -30,7 +39,7 @@ def main() -> int:
     )
     checker = HCLActionChecker(backend)
 
-    OUT.mkdir(parents=True, exist_ok=True)
+    out_dir.mkdir(parents=True, exist_ok=True)
     results = []
     passed = 0
 
@@ -83,6 +92,7 @@ def main() -> int:
 
     summary = {
         "suite": suite["suite"],
+        "fixture_file": str(fixtures_path.relative_to(ROOT)),
         "total": len(results),
         "passed": passed,
         "failed": len(results) - passed,
@@ -93,7 +103,7 @@ def main() -> int:
             "performance evidence."
         ),
     }
-    (OUT / "result.json").write_text(
+    (out_dir / "result.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
