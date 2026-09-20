@@ -1,0 +1,4 @@
+trigger: v0.2.1-post-repair-unused-combo-holdout
+freeze: f6e591db8d22ae0e2175769852a1a8aa9c3e106a
+expanded_ordinals: 8,18,28,38,48,58,68,78,88,98
+seed: 42
