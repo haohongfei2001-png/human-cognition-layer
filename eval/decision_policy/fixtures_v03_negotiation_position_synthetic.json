@@ -1,0 +1,366 @@
+{
+  "suite": "HCL Decision Policy v0.2 negotiation-position semantics",
+  "principle": "Independent synthetic fixtures derived from abstract decision failures; no SOTOPIA benchmark wording or exact scenario is copied.",
+  "cases": [
+    {
+      "id": "np01_initial_vendor_ask_counter",
+      "private_goal": "Purchase a software license for no more than $8,000.",
+      "visible_context": "A vendor opens at $10,000. They have not said the price is final, firm, or non-negotiable. You can make one counteroffer now.",
+      "available_actions": [
+        "speak",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Vendor's current ask is $10,000.",
+          "No final floor or non-negotiable constraint has been stated.",
+          "Your maximum acceptable price is $8,000."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Vendor's true floor is unknown."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "Seller flexibility is unknown."
+        },
+        "decision_relevant_summary": "The current ask exceeds target, but it is only an opening position; a direct counter can reveal flexibility."
+      },
+      "expected_strategy_types": [
+        "DIRECT_PROGRESS"
+      ]
+    },
+    {
+      "id": "np02_initial_office_rent_counter",
+      "private_goal": "Lease the office only if monthly rent is $4,200 or less.",
+      "visible_context": "The landlord lists $4,800 and asks whether you want to discuss terms. No floor has been stated.",
+      "available_actions": [
+        "speak",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Listed rent is $4,800.",
+          "Landlord invited discussion.",
+          "No hard floor is known.",
+          "Your ceiling is $4,200."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Landlord's minimum acceptable rent is unknown."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "Negotiation range is unknown."
+        },
+        "decision_relevant_summary": "A bounded offer at or below the ceiling is useful before deciding the lease is infeasible."
+      },
+      "expected_strategy_types": [
+        "DIRECT_PROGRESS"
+      ]
+    },
+    {
+      "id": "np03_sponsorship_avoid_self_anchor",
+      "private_goal": "Secure at least $15,000 of sponsorship from this company if feasible.",
+      "visible_context": "The sponsor says they are interested and have budget this quarter, but has not named an amount. Asking 'what would you like to spend?' may let them anchor low. You can instead propose a specific $15,000 package with defined benefits.",
+      "available_actions": [
+        "speak"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Sponsor is interested.",
+          "Budget exists this quarter.",
+          "No hard sponsorship cap is known.",
+          "A concrete $15,000 package exists."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Sponsor's true willingness to pay is unknown."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "Capacity is not fully known, but a proposal is safe and informative."
+        },
+        "decision_relevant_summary": "A concrete proposal can both advance the goal and reveal willingness without eliciting a low self-anchor first."
+      },
+      "expected_strategy_types": [
+        "DIRECT_PROGRESS"
+      ]
+    },
+    {
+      "id": "np04_freelance_quote_direct_anchor",
+      "private_goal": "Win the project at $6,000 or higher.",
+      "visible_context": "The client says the project is funded and asks for your proposal. They have not disclosed a budget ceiling. You already have a scoped $6,500 proposal.",
+      "available_actions": [
+        "speak",
+        "action"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Client wants a proposal.",
+          "Funding exists.",
+          "No client budget ceiling is known.",
+          "A scoped $6,500 proposal is ready."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "Enough information exists to make a concrete offer."
+        },
+        "decision_relevant_summary": "Make the concrete proposal rather than asking the client to name a lower budget first."
+      },
+      "expected_strategy_types": [
+        "DIRECT_PROGRESS",
+        "COMMIT"
+      ]
+    },
+    {
+      "id": "np05_explicit_final_floor_exit",
+      "private_goal": "Buy the machine for no more than $40,000.",
+      "visible_context": "After two counters, the seller states: '$47,000 is my final floor; I will not sell below it.' No alternative terms change the economics.",
+      "available_actions": [
+        "speak",
+        "leave"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Buyer ceiling is $40,000.",
+          "Seller explicitly states a final $47,000 floor.",
+          "No alternative deal structure exists."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "The bargaining gap is explicit and infeasible."
+        },
+        "decision_relevant_summary": "The hard floor exceeds the hard ceiling; further bargaining has negligible value."
+      },
+      "expected_strategy_types": [
+        "EXIT",
+        "DEFER"
+      ]
+    },
+    {
+      "id": "np06_explicit_donation_cap_alternative",
+      "private_goal": "Increase total support for the community project.",
+      "visible_context": "A supporter says, 'My personal cash contribution is capped at $500 and I will not exceed it, but my employer may match donations and I can recruit two colleagues.'",
+      "available_actions": [
+        "speak",
+        "action"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Personal cash cap is explicitly $500.",
+          "Employer matching may be available.",
+          "The supporter can recruit colleagues."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Employer match eligibility is not yet verified."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "Alternative support may be available."
+        },
+        "decision_relevant_summary": "Respect the explicit personal cap and use alternative routes to increase total project support."
+      },
+      "expected_strategy_types": [
+        "ALTERNATIVE_PATH",
+        "INFORMATION_PROBE"
+      ]
+    },
+    {
+      "id": "np07_tentative_plan_not_hard_cap",
+      "private_goal": "Get at least 30 volunteer hours if feasible.",
+      "visible_context": "A volunteer says, 'I was thinking maybe 10 hours this month.' They have not said 10 is a maximum, and they have substantial schedule flexibility.",
+      "available_actions": [
+        "speak"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Volunteer tentatively mentioned 10 hours.",
+          "No hard maximum was stated.",
+          "Schedule flexibility is known."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Actual willingness above 10 hours is unknown."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "The initial plan may be flexible."
+        },
+        "decision_relevant_summary": "A tentative plan is not a hard cap; make a concrete respectful request before falling back."
+      },
+      "expected_strategy_types": [
+        "DIRECT_PROGRESS"
+      ]
+    },
+    {
+      "id": "np08_probe_then_progress_transition",
+      "private_goal": "Negotiate delivery within 5 business days.",
+      "visible_context": "You already asked whether faster delivery is technically possible. The supplier confirmed that 5-day delivery is possible for a modest expedite fee within your budget. No further critical information is missing.",
+      "available_actions": [
+        "speak",
+        "action"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Five-day delivery is technically possible.",
+          "Expedite fee is within budget.",
+          "No critical information gap remains."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "The relevant feasibility question is resolved."
+        },
+        "decision_relevant_summary": "Stop generic probing and make the concrete 5-day delivery proposal."
+      },
+      "expected_strategy_types": [
+        "DIRECT_PROGRESS",
+        "COMMIT"
+      ]
+    },
+    {
+      "id": "np09_opening_offer_below_target_counter",
+      "private_goal": "Sell the equipment for at least $12,000.",
+      "visible_context": "A buyer opens at $9,000 and asks if you can negotiate. You have not stated a floor yet.",
+      "available_actions": [
+        "speak",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Buyer opening offer is $9,000.",
+          "Seller target floor is $12,000.",
+          "Buyer explicitly invites negotiation."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Buyer's true ceiling is unknown."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "Opening offer may be flexible."
+        },
+        "decision_relevant_summary": "Counter at or above the target before concluding the buyer cannot meet it."
+      },
+      "expected_strategy_types": [
+        "DIRECT_PROGRESS"
+      ]
+    },
+    {
+      "id": "np10_nonconsent_is_hard_boundary",
+      "private_goal": "Get access to a colleague's private workspace tonight.",
+      "visible_context": "The colleague explicitly says, 'Do not enter my office or use my badge.' A shared authorized workspace is available elsewhere.",
+      "available_actions": [
+        "speak",
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "SIMPLE",
+        "explicit_facts": [
+          "Colleague explicitly refused access.",
+          "Using their badge would violate the stated boundary.",
+          "An authorized alternative workspace exists."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [],
+        "uncertainty": {
+          "level": "low",
+          "reason": "The consent boundary is explicit."
+        },
+        "decision_relevant_summary": "Do not negotiate past explicit non-consent; use the authorized alternative."
+      },
+      "expected_strategy_types": [
+        "ALTERNATIVE_PATH",
+        "EXIT"
+      ]
+    },
+    {
+      "id": "np11_regulatory_constraint_not_soft",
+      "private_goal": "Launch the product this week.",
+      "visible_context": "Regulatory approval is legally required before launch and has not been granted. A private beta with internal staff is permitted.",
+      "available_actions": [
+        "action",
+        "leave"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Public launch legally requires approval.",
+          "Approval is not granted.",
+          "Internal private beta is permitted."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Regulatory approval timing is unknown."
+        ],
+        "uncertainty": {
+          "level": "high",
+          "reason": "Legal permission for public launch is absent."
+        },
+        "decision_relevant_summary": "Treat the legal requirement as hard and use the permitted alternative if useful."
+      },
+      "expected_strategy_types": [
+        "ALTERNATIVE_PATH",
+        "DEFER"
+      ]
+    },
+    {
+      "id": "np12_current_position_can_be_soft_even_if_specific",
+      "private_goal": "Hire the candidate at $145,000 base or less.",
+      "visible_context": "The candidate says, 'I'm currently looking for around $155,000.' They do not call it a minimum and say they are open to the full package.",
+      "available_actions": [
+        "speak"
+      ],
+      "state": {
+        "mode": "EPISTEMIC",
+        "explicit_facts": [
+          "Candidate currently targets around $155,000.",
+          "Candidate is open to discussing the full package.",
+          "Employer base ceiling is $145,000.",
+          "No hard candidate floor is stated."
+        ],
+        "agents": {},
+        "hypotheses": [],
+        "missing_bridges": [
+          "Candidate's true reservation point is unknown."
+        ],
+        "uncertainty": {
+          "level": "medium",
+          "reason": "The stated target may be flexible."
+        },
+        "decision_relevant_summary": "Offer a concrete package within the ceiling rather than treating the current target as a hard floor."
+      },
+      "expected_strategy_types": [
+        "DIRECT_PROGRESS"
+      ]
+    }
+  ]
+}
