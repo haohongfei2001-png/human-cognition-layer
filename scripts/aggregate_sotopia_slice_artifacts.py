@@ -74,6 +74,12 @@ def main() -> int:
     p.add_argument("--out", type=Path, required=True)
     p.add_argument("--expected-start", type=int, default=10)
     p.add_argument("--expected-count", type=int, default=10)
+    p.add_argument(
+        "--expected-ordinals",
+        type=str,
+        default="",
+        help="Optional comma-separated exact ordinal list; overrides start/count.",
+    )
     args = p.parse_args()
 
     by_ordinal: dict[int, dict[str, Any]] = {}
@@ -103,9 +109,16 @@ def main() -> int:
                 failures.append(failure)
 
     settings = [by_ordinal[k] for k in sorted(by_ordinal)]
-    expected = list(
-        range(args.expected_start, args.expected_start + args.expected_count)
-    )
+    if args.expected_ordinals.strip():
+        expected = [
+            int(x.strip())
+            for x in args.expected_ordinals.split(",")
+            if x.strip()
+        ]
+    else:
+        expected = list(
+            range(args.expected_start, args.expected_start + args.expected_count)
+        )
     missing = [x for x in expected if x not in by_ordinal]
 
     summary = {
