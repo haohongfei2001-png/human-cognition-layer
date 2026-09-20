@@ -375,3 +375,31 @@ Fresh SOTOPIA-Hard action-checker holdout:
 - current state at launch: running
 
 **Current gate: FRESH_ACTION_CHECKER_HOLDOUT_20_29_RUNNING**
+
+
+## Fresh 20-29 preflight correction
+
+Run `35493750111` failed during dataset preflight **before any SOTOPIA episode ran**.
+
+Observed from the pinned official dataset:
+- Hard environment list length: **20**
+- agent_index length: **20**
+
+The attempted ordinals 20-29 therefore did not exist in the environment-level
+list. No fresh benchmark trajectories were consumed by this failed run.
+
+Important upstream audit:
+SOTOPIA's official benchmark implementation does **not** collapse each hard
+environment to one agent pair. It iterates every `EnvAgentComboStorage` that
+matches each hard environment. Our earlier slice helper selected only the first
+stable agent combo per environment.
+
+Current corrective gate:
+1. inventory the full expanded Hard env-agent-combo set exactly;
+2. mark all previously consumed first-combo settings as non-fresh;
+3. if unused Hard combos exist, select the next 10 previously unseen expanded
+   combos before running the Action Checker holdout;
+4. if no unused Hard combos exist, stop claiming fresh Hard evidence and move
+   to a different external validation source.
+
+**Current gate: HARD_EXPANDED_COMBO_INVENTORY**
