@@ -519,3 +519,21 @@ Next predeclared external holdout after smoke:
 - all 10 env-agent combinations are previously unused.
 
 **Current gate: DECISION_POLICY_V02_INTEGRATION_SMOKE**
+
+
+## Decision Policy v0.2 external validation launch
+
+Integration smoke:
+- run `35511266476`
+- **SUCCESS**
+
+Predeclared v0.2 fresh expanded-combo holdout:
+- run `35511421008`
+- expanded ordinals: `7,17,27,37,47,57,67,77,87,97`
+- environment ordinals: `1,3,5,7,9,11,13,15,17,19`
+- combo ordinal: `2`
+- seed: `42`
+- all 10 env-agent combinations were unused before launch
+- module frozen before outcomes
+
+**Current gate: DECISION_POLICY_V02_FRESH_EXPANDED_HOLDOUT_RUNNING**
