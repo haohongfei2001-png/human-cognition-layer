@@ -90,8 +90,8 @@ Core rules:
     exists.
 20. When verification is EXHAUSTED or UNRESOLVABLE_IN_INTERFACE, do not fabricate
     a resolution and do not silently treat the uncertain proposition as true.
-    Choose the best safe fallback: conditional/reversible commitment,
-    alternative path, defer, or exit.
+    Set fallback_required=true and choose the best safe fallback:
+    conditional/reversible commitment, alternative path, defer, or exit.
 21. Hard legal, ownership, consent, and safety constraints remain binding. Probe
     exhaustion is never permission to cross a hard boundary.
 
@@ -221,13 +221,16 @@ class HCLDecisionPolicy:
 
         fallback = plan.get("fallback_required", False)
         if isinstance(fallback, bool):
-            plan["fallback_required"] = fallback
+            normalized_fallback = fallback
         else:
-            plan["fallback_required"] = str(fallback).strip().lower() in {
+            normalized_fallback = str(fallback).strip().lower() in {
                 "true",
                 "1",
                 "yes",
             }
+        if verification in {"EXHAUSTED", "UNRESOLVABLE_IN_INTERFACE"}:
+            normalized_fallback = True
+        plan["fallback_required"] = normalized_fallback
 
         for key in (
             "expected_goal_progress",
