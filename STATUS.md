@@ -829,3 +829,68 @@ A green diagnostic workflow means that bounded metadata evidence was collected;
 it does **not** mean ordinal 48 passed.
 
 **Current gate: ORDINAL48_CONSUMED_DIAGNOSTIC_REPLAY_PREDECLARED_READY**
+
+
+## Ordinal 48 Decision-JSON diagnostic replay closure
+
+Bounded consumed-setting diagnostic:
+- run: `35585685155`
+- launch commit: `8dfe862613213933983f4f8c20ae7363e1738732`
+- artifact: `10632519832`
+- attempts: **2 / 2**
+- both attempts reproduced:
+  `HCL decision policy returned no valid JSON after 3 attempts`
+- no fresh or efficacy claim is permitted.
+
+Raw Decision Policy wrapper metadata:
+
+Attempt 1:
+- accepted object 1333 bytes;
+- accepted object 1707 bytes;
+- empty 0 bytes;
+- empty 0 bytes;
+- empty 0 bytes.
+- classification: **empty-output family**.
+
+Attempt 2:
+- accepted object 1502 bytes;
+- accepted object 1421 bytes;
+- empty 0 bytes;
+- accepted object 2263 bytes;
+- empty 0 bytes;
+- non-empty 1333 bytes with no parseable object;
+- empty 0 bytes.
+- classification: **mixed invalid-output family**.
+
+No wrapper event was a transport exception.
+
+Important:
+`OpenAICompatibleBackend.complete()` internally makes up to four provider
+requests before returning one wrapper result. Therefore one wrapper-level
+`empty` event means all four underlying provider completions returned empty
+final content.
+
+The final three empty wrapper events in attempt 1 therefore establish at least
+**12 consecutive underlying provider completions with empty content** at the
+failing Decision Policy turn.
+
+This reproduces ordinal 48 as a real Decision Policy output/transport failure,
+not merely an original logging ambiguity. It does not identify provider
+`finish_reason`, separate reasoning-content usage, or token exhaustion.
+
+See:
+- `reports/ORDINAL48_DECISION_JSON_DIAGNOSTIC_RESULT.md`
+
+Do not increase retry count or change Decision Policy prompt based on this
+evidence alone.
+
+**Current gate: ORDINAL48_PROVIDER_ATTEMPT_METADATA_REQUIRED**
+
+Next canonical work:
+1. add opt-in provider-attempt-level, content-free Decision Policy diagnostics;
+2. preserve the existing 4-attempt backend loop exactly;
+3. record finish reason, content bytes/hash, optional reasoning-content
+   bytes/hash and token usage only;
+4. certify observer transparency without provider calls;
+5. if certified, run the same consumed ordinal48 bounded diagnostic again;
+6. do not create a new holdout or behavior-bearing amendment yet.
