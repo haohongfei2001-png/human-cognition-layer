@@ -12,7 +12,7 @@ permissions:
 
 env:
   HCL_BEHAVIOR_ANCHOR: ce36d7e6f911910f97437c23455dee33e0e7bc82
-  FANTOM_PROTOCOL_ANCHOR: 2ae1aca1bb1e5b89057a94d10097cbcc8722a7ff
+  FANTOM_PROTOCOL_ANCHOR: cf6acc22bc7c00f23e8785dfb8f1c81501b76e52
 
 jobs:
   preflight:
@@ -49,6 +49,8 @@ jobs:
         run: |
           python -m py_compile             scripts/inventory_fantom_external_v01.py             scripts/run_fantom_external_v01.py             scripts/aggregate_fantom_external_v01.py             tests/test_fantom_external_v01.py
           python -m unittest discover -s tests -p test_fantom_external_v01.py -v
+          python scripts/run_fantom_external_v01.py --help >/dev/null
+          python scripts/aggregate_fantom_external_v01.py --help >/dev/null
 
       - name: Rebuild deterministic selection from pinned official dataset
         shell: bash
