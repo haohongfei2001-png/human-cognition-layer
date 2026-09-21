@@ -1686,3 +1686,98 @@ Paid execution:
 No behavior/protocol change is permitted while this run is open.
 
 **Current gate: FANTOM_EXT_V02_FULL_CONTEXT_PAIRED_RUNNING**
+
+
+## FANToM external validation v0.2 full-context final closure
+
+Canonical run:
+- `35609498441`
+- **SUCCESS**
+- 6/6 paired shards complete
+- aggregate complete
+- aggregate artifact: `10644692374`
+- artifact SHA-256:
+  `6a6098bf460646f19070e6d8943eb5a0943d18aec972cfba4839e5eea49d82a7`
+
+Sample:
+- **48 questions**
+- **48 distinct full-context FANToM conversations**
+- **0 conversation overlap with v0.1**
+- exact sample/protocol frozen before provider calls.
+
+Primary information-asymmetry block:
+- n = **32**
+- control = **26/32 = 81.25%**
+- HCL = **26/32 = 81.25%**
+- improved = **2**
+- worsened = **2**
+- net paired gain = **0**
+
+Primary inaccessible-belief:
+- control = **12/16 = 75%**
+- HCL = **13/16 = 81.25%**
+- improved 1 / worsened 0
+- net = **+1**
+- the gain occurs in inaccessible second-order belief.
+
+Primary information-state:
+- control = **14/16 = 87.5%**
+- HCL = **13/16 = 81.25%**
+- improved 1 / worsened 2
+- net = **-1**
+
+Breakdown:
+- full-context answerability:
+  - 6/8 vs 6/8
+  - improved 1 / worsened 1
+  - one HCL-worsened item has normalized prediction **null** after both HCL
+    revision passes, so the raw failure includes an output-interface/format
+    failure;
+- full-context information accessibility:
+  - control 8/8
+  - HCL 7/8
+  - net -1
+  - raw categorical regression preserved.
+
+Stability controls:
+- accessible belief:
+  - control 7/8
+  - HCL 7/8
+  - net 0
+- fact token-F1:
+  - control mean **0.2128511971**
+  - HCL mean **0.2676538557**
+  - paired delta **+0.0548026587**
+
+Predeclared result:
+- positive threshold not met;
+- negative threshold not met;
+- **MIXED / INCONCLUSIVE**.
+
+Compared with v0.1:
+- v0.1 had categorical identity/ceiling;
+- v0.2 is more discriminative;
+- belief shows a small favorable signal;
+- information-state shows a small unfavorable signal;
+- no net primary efficacy gain is established.
+
+See:
+- `reports/FANTOM_EXTERNAL_VALIDATION_V02_PREDECLARATION.md`
+- `reports/FANTOM_EXTERNAL_VALIDATION_V02_CLOSURE.md`
+
+All 48 v0.2 questions are now consumed.
+Do not tune HCL against these questions.
+
+**Current gate: FANTOM_EXT_V02_MIXED_REQUIRES_INDEPENDENT_INFO_STATE_INTERFACE_AUDIT**
+
+Next canonical work:
+1. keep frozen HCL v0.3 state semantics unchanged;
+2. create synthetic non-FANToM fixtures for strict yes/no and A/B output
+   preservation, answerability, information access and high-uncertainty forced
+   categorical answers;
+3. evaluate current frozen HCL answer loop before any repair;
+4. if a repeatable abstract defect is established, repair only the answer/output
+   interface layer on independent synthetic fixtures;
+5. repeat existing state/answer-loop regressions before consuming any new
+   external benchmark evidence;
+6. do not use FANToM v0.1/v0.2 content as training/tuning data.
