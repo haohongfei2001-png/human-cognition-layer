@@ -20,12 +20,22 @@ SALT = "HCL-FANTOM-EXT-V01-20260921"
 TARGETS = {
     "belief_inaccessible_first": 4,
     "belief_inaccessible_second": 4,
-    "belief_accessible_first": 4,
-    "belief_accessible_second": 4,
     "answerability_inaccessible_binary": 4,
     "info_accessibility_inaccessible_binary": 4,
+    "belief_accessible_first": 4,
+    "belief_accessible_second": 4,
     "fact_control": 8,
 }
+
+SELECTION_ORDER = [
+    "belief_inaccessible_first",
+    "belief_inaccessible_second",
+    "answerability_inaccessible_binary",
+    "info_accessibility_inaccessible_binary",
+    "belief_accessible_first",
+    "belief_accessible_second",
+    "fact_control",
+]
 
 
 def sha(text: str) -> str:
@@ -220,25 +230,44 @@ def inventory(df: pd.DataFrame) -> dict[str, Any]:
 
     counts = {name: len(items) for name, items in sorted(buckets.items())}
     selected: list[dict[str, Any]] = []
+    used_conversation_ids: set[str] = set()
 
-    for stratum, target in TARGETS.items():
+    for stratum in SELECTION_ORDER:
+        target = TARGETS[stratum]
         items = sorted(buckets.get(stratum, []), key=lambda item: item["selection_rank"])
         if len(items) < target:
             raise RuntimeError(
                 f"FANToM stratum {stratum} has {len(items)} candidates, need {target}"
             )
-        chosen = items[:target]
-        for item in chosen:
+
+        chosen: list[dict[str, Any]] = []
+        for item in items:
+            conversation_id = str(item["set_id"]).split("-")[0]
+            if conversation_id in used_conversation_ids:
+                continue
             item = dict(item)
             item["stratum"] = stratum
-            selected.append(item)
+            item["conversation_id"] = conversation_id
+            chosen.append(item)
+            used_conversation_ids.add(conversation_id)
+            if len(chosen) == target:
+                break
 
-    selected.sort(key=lambda item: (item["stratum"], item["selection_rank"]))
+        if len(chosen) != target:
+            raise RuntimeError(
+                f"FANToM stratum {stratum} could only provide {len(chosen)} "
+                f"globally conversation-disjoint candidates, need {target}"
+            )
+        selected.extend(chosen)
+
+    selected.sort(key=lambda item: (SELECTION_ORDER.index(item["stratum"]), item["selection_rank"]))
 
     if len(selected) != sum(TARGETS.values()):
         raise RuntimeError("Selected question count mismatch")
     if len({item["question_id"] for item in selected}) != len(selected):
         raise RuntimeError("Duplicate selected question_id")
+    if len({item["conversation_id"] for item in selected}) != len(selected):
+        raise RuntimeError("Selected questions are not conversation-disjoint")
 
     return {
         "source": {
@@ -251,11 +280,14 @@ def inventory(df: pd.DataFrame) -> dict[str, Any]:
         "selection": {
             "salt": SALT,
             "targets": TARGETS,
+            "selection_order": SELECTION_ORDER,
             "total_selected": len(selected),
+            "conversation_disjoint": True,
             "method": (
-                "Within each predeclared metadata stratum, choose the lowest "
-                "SHA256(salt|question_id) ranks. Belief option orientation is "
-                "SHA256-derived and fixed before model calls."
+                "In fixed stratum order, greedily choose the lowest "
+                "SHA256(salt|question_id) ranks whose FANToM conversation_id "
+                "has not appeared in any previously selected question. Belief "
+                "option orientation is SHA256-derived and fixed before model calls."
             ),
         },
         "dataset": {
