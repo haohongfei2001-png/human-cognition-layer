@@ -4,8 +4,8 @@ import hashlib
 import subprocess
 import sys
 
-ORIGINAL = '2b8895ce9b3d49dcc2a89c12bf283863139153f897da5bf2013d892dcca3ae0b'
-PATCHED = 'd9692373e6522b02884671d80bec1ce3ba99ba62888e8e9c137b20761737a583'
+ORIGINAL = '46829dad9a17cc267be068a7cd28daeee7607b8eac14b4a35b40d2fe5234eaea'
+PATCHED = 'f9b73e5f19ff6f2329673f08407e1f27cc5b1d06673a9c2fc252a8be207ad18f'
 ROOT = Path(__file__).resolve().parents[1]
 
 def apply(root: Path) -> None:
