@@ -80,6 +80,32 @@ jobs:
         shell: bash
         run: python scripts/run_ordinal48_decision_json_diagnostic.py
 
+      - name: Verify v0.2.1a confirmation criterion
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          data = json.loads(
+              Path("artifacts/ordinal48-decision-json-diagnostic/result.json")
+              .read_text(encoding="utf-8")
+          )
+          attempts = data["attempts"]
+          assert any(x["episode_outcome"] == "success" for x in attempts), attempts
+          assert not any(
+              x["exact_invalid_json_runtime_error"] for x in attempts
+          ), attempts
+
+          provider_events = [
+              event
+              for attempt in attempts
+              for event in attempt["provider_events"]
+          ]
+          assert provider_events
+          assert all(event["max_tokens"] == 8192 for event in provider_events)
+          PY
+
       - name: Verify provider diagnostic artifact is metadata-only
         shell: bash
         run: |
