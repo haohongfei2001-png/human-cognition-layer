@@ -1,0 +1,155 @@
+name: Ordinal 48 Provider Attempt Diagnostic Replay
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/ORDINAL48_PROVIDER_DIAGNOSTIC_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    env:
+      CUSTOM_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      HCL_DECISION_DIAGNOSTICS: "1"
+      HCL_PROVIDER_ATTEMPT_DIAGNOSTICS: "1"
+      SOTOPIA_STORAGE_BACKEND: redis
+      REDIS_OM_URL: redis://localhost:6379
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify frozen behavior-bearing implementation
+        shell: bash
+        run: |
+          git diff --exit-code             f6e591db8d22ae0e2175769852a1a8aa9c3e106a..HEAD             --             hcl/v03/decision_policy.py             hcl/v03/action_checker.py             hcl/integrations/sotopia_agent.py
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Static compile diagnostics
+        shell: bash
+        run: |
+          python -m py_compile             scripts/hcl_decision_diagnostics.py             scripts/run_sotopia_hard_one_ab.py             scripts/run_ordinal48_decision_json_diagnostic.py             tests/test_decision_diagnostics.py
+
+      - name: Install pinned SOTOPIA
+        shell: bash
+        run: |
+          git clone --quiet https://github.com/sotopia-lab/sotopia.git .cache/sotopia
+          git -C .cache/sotopia checkout --quiet --detach a0aaafb440e570e5e61b7c44a44e5e417c545383
+          python -m pip install --upgrade pip
+          python -m pip install -e .cache/sotopia
+          python -m pip install             "pydantic==2.9.2"             "redis-om==0.3.2"             "redis==5.1.1"             "openai==2.14.0"             "litellm==1.80.11"
+
+      - name: Apply certified same-provider output repair
+        shell: bash
+        run: python scripts/apply_sotopia_output_repair.py .cache/sotopia
+
+      - name: Certify provider-attempt observer without provider calls
+        shell: bash
+        run: |
+          python -m unittest discover -s tests -p test_decision_diagnostics.py -v
+          python -m unittest discover -s tests -p test_sotopia_output_repair.py -v
+
+      - name: Load official SOTOPIA dataset into Redis
+        shell: bash
+        run: |
+          mkdir -p .cache/redis-data
+          curl -L --fail --retry 3             "https://huggingface.co/datasets/cmu-lti/sotopia-pi/resolve/main/dump.rdb?download=true"             -o .cache/redis-data/dump.rdb
+          test -s .cache/redis-data/dump.rdb
+          docker run -d             --name hcl-sotopia-redis             -p 6379:6379             -v "$PWD/.cache/redis-data:/data"             redis/redis-stack-server:latest
+          for i in {1..30}; do
+            if docker exec hcl-sotopia-redis redis-cli ping | grep -q PONG; then
+              exit 0
+            fi
+            sleep 2
+          done
+          docker logs hcl-sotopia-redis
+          exit 1
+
+      - name: Run consumed ordinal48 provider-attempt diagnostic
+        shell: bash
+        run: python scripts/run_ordinal48_decision_json_diagnostic.py
+
+      - name: Verify provider diagnostic artifact is metadata-only
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("artifacts/ordinal48-decision-json-diagnostic/result.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+
+          assert data["setting"] == {
+              "environment_ordinal": 9,
+              "combo_ordinal": 3,
+              "expanded_ordinal": 48,
+          }
+          assert data["generation_seed"] == 42
+          assert 1 <= data["attempts_executed"] <= 2
+          assert data["diagnostic_event_count"] > 0
+          assert data["provider_event_count"] > 0
+
+          allowed_provider_keys = {
+              "episode_attempt",
+              "backend_call",
+              "provider_attempt",
+              "max_tokens",
+              "temperature",
+              "outcome",
+              "finish_reason",
+              "content_bytes",
+              "content_sha256",
+              "reasoning_bytes",
+              "reasoning_sha256",
+              "refusal_bytes",
+              "refusal_sha256",
+              "prompt_tokens",
+              "completion_tokens",
+              "total_tokens",
+              "reasoning_tokens",
+          }
+
+          for attempt in data["attempts"]:
+              for event in attempt["provider_events"]:
+                  assert set(event) <= allowed_provider_keys
+                  assert 1 <= event["provider_attempt"] <= 4
+
+          raw = path.read_text(encoding="utf-8").lower()
+          forbidden = [
+              '"messages":',
+              '"prompt":',
+              '"response_text":',
+              '"reasoning_text":',
+              '"refusal_text":',
+              '"api_key":',
+              '"persona":',
+              '"transcript":',
+          ]
+          for token in forbidden:
+              assert token not in raw, token
+          PY
+
+      - name: Upload provider-attempt diagnostic artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ordinal48-provider-attempt-diagnostic-${{ github.run_id }}
+          path: artifacts/ordinal48-decision-json-diagnostic/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Redis logs on infrastructure failure
+        if: failure()
+        shell: bash
+        run: docker logs hcl-sotopia-redis || true
