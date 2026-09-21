@@ -1,0 +1,82 @@
+name: FANToM External Validation v0.2 Full-Context Inventory
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/FANTOM_EXT_V02_INVENTORY_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install inventory dependency
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pandas
+
+      - name: Static compile
+        shell: bash
+        run: python -m py_compile scripts/inventory_fantom_external_v02.py
+
+      - name: Inventory pinned FANToM full-context candidates
+        shell: bash
+        run: python scripts/inventory_fantom_external_v02.py
+
+      - name: Verify zero-provider v0.2 artifact
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          data = json.loads(
+              Path("artifacts/fantom-external-v02-inventory/inventory.json")
+              .read_text(encoding="utf-8")
+          )
+          assert data["source"]["commit"] == "1cae6fa30f5ba04ca0fff5f5716b5ba7055e2e85"
+          assert data["source"]["dataset_sha256"] == "1d08dfa0ea474c7f83b9bc7e3a7b466eab25194043489dd618b4c5223e1253a4"
+          assert data["selection"]["total_selected"] == 48
+          assert data["selection"]["conversation_disjoint"] is True
+          assert data["selection"]["v01_conversation_overlap"] == 0
+          assert data["selection"]["context_type"] == "full"
+          assert len(data["selected"]) == 48
+          assert len({x["question_id"] for x in data["selected"]}) == 48
+          assert len({x["conversation_id"] for x in data["selected"]}) == 48
+
+          v01 = json.loads(
+              Path("eval/fantom/selection_v01.json").read_text(encoding="utf-8")
+          )
+          old = {x["conversation_id"] for x in v01["selected"]}
+          new = {x["conversation_id"] for x in data["selected"]}
+          assert not (old & new)
+
+          raw = json.dumps(data).lower()
+          for forbidden in (
+              '"prediction":',
+              '"response_text":',
+              '"api_key":',
+          ):
+              assert forbidden not in raw
+          PY
+
+      - name: Upload inventory evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: fantom-external-v02-inventory-${{ github.run_id }}
+          path: artifacts/fantom-external-v02-inventory/
+          if-no-files-found: error
+          retention-days: 30
