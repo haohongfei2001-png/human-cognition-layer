@@ -1,0 +1,4 @@
+trigger: fantom-external-v02-full-context-inventory
+provider_calls: 0
+selection_salt: HCL-FANTOM-FULL-V02-20260921
+exclude_v01_conversations: true
