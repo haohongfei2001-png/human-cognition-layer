@@ -927,3 +927,84 @@ Synthetic no-network tests must pass before the consumed provider replay can
 execute.
 
 **Current gate: ORDINAL48_PROVIDER_ATTEMPT_DIAGNOSTIC_PREDECLARED_READY**
+
+
+## Ordinal 48 provider-attempt diagnostic closure
+
+Consumed provider-attempt diagnostic:
+- run: `35588167021`
+- launch commit: `1409f159c57fdb1aab4f959b7e4a2a405c48228b`
+- artifact: `10634471138`
+- artifact SHA-256:
+  `2f17a73edb80bf65ef947691d173309ffbccd0c39cfc9ceb27902546f92d537d`
+- attempts: **2 / 2**
+- provider events: **37**
+- both attempts reproduced the exact frozen Decision Policy no-valid-JSON
+  RuntimeError;
+- original 8/10 holdout remains incomplete and consumed.
+
+Provider-level result:
+- non-empty final-content attempts: **7**
+- empty final-content attempts: **30**
+- transport exceptions: **0**
+
+For **every one of the 30 empty attempts**:
+- `finish_reason=length`;
+- `max_tokens=4096`;
+- `completion_tokens=4096`;
+- `reasoning_tokens=4096`;
+- separate reasoning content is non-empty;
+- final `content` is zero bytes.
+
+Successful provider attempts in the same replay end with
+`finish_reason=stop`, non-empty final content and reasoning usage below the
+4096 ceiling.
+
+Attempt 1 is especially decisive:
+- two earlier Decision Policy calls succeed;
+- the failing turn then produces three outer JSON attempts;
+- each outer attempt invokes all four backend provider attempts;
+- all **12 consecutive provider attempts** end at the 4096 reasoning-token
+  ceiling with zero final content.
+
+**Root cause confirmed: Decision Policy's explicit 4096 completion budget is
+exhausted by provider thinking/reasoning before final JSON content is emitted.**
+
+This is not primarily:
+- the ordinal88 provider-routing bug;
+- a missing credential;
+- a transport exception;
+- an HCL state-semantic defect;
+- an Action Checker defect;
+- insufficient retry count.
+
+See:
+- `reports/ORDINAL48_PROVIDER_ATTEMPT_DIAGNOSTIC_RESULT.md`
+
+No behavior-bearing repair has been applied.
+
+A minimal amendment proposal is frozen for owner review:
+- `hcl/v03/DECISION_POLICY_V021A_OUTPUT_BUDGET_AMENDMENT_PROPOSAL.md`
+- proposed sole runtime change: Decision Policy `max_tokens 4096 -> 8192`;
+- model/provider/prompt/seed/retry counts/state semantics/checker remain
+  unchanged.
+
+The proposal raises the maximum billable output-token envelope:
+- current worst-case failing `build_plan`: 49,152 output tokens;
+- proposed theoretical ceiling: 98,304 output tokens.
+
+Actual spend could fall if the larger budget avoids repeated failed calls, but
+the permitted per-request/token envelope increases.
+
+Per current execution authority this is a **cost-boundary change**.
+
+**Current gate: ORDINAL48_ROOT_CAUSE_CONFIRMED_AWAITING_OWNER_OUTPUT_BUDGET_AUTHORIZATION**
+
+Until owner authorization:
+1. do not change Decision Policy `max_tokens`;
+2. do not lower/disable thinking as a workaround;
+3. do not increase retries;
+4. do not rerun ordinal48 again;
+5. do not start a new holdout;
+6. preserve HCL v0.3 frozen state and always-on behavior;
+7. preserve the original 8/10 incomplete verdict.
