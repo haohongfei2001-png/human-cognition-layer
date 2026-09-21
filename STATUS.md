@@ -894,3 +894,36 @@ Next canonical work:
 4. certify observer transparency without provider calls;
 5. if certified, run the same consumed ordinal48 bounded diagnostic again;
 6. do not create a new holdout or behavior-bearing amendment yet.
+
+
+## Ordinal 48 provider-attempt diagnostic predeclaration
+
+The wrapper-level diagnostic reproduced ordinal48 twice and established repeated
+empty final content. The next step remains diagnostic only.
+
+Predeclaration:
+- `reports/ORDINAL48_PROVIDER_ATTEMPT_DIAGNOSTIC_PREDECLARATION.md`
+
+Execution boundary:
+- same consumed expanded ordinal 48;
+- environment 9 / combo 3 / seed 42;
+- HCL treatment only;
+- same model/provider/endpoint/key;
+- maximum 2 episode attempts;
+- existing backend maximum 4 provider requests per `complete()`;
+- existing Decision Policy maximum 3 JSON attempts;
+- no prompt, retry, model, temperature, token-limit or HCL behavior change.
+
+Provider-attempt observer is opt-in via
+`HCL_PROVIDER_ATTEMPT_DIAGNOSTICS=1` and records only:
+- provider attempt ordinal;
+- finish reason;
+- content bytes/hash;
+- optional reasoning/refusal bytes/hash;
+- token usage;
+- transport-exception outcome without exception text.
+
+Synthetic no-network tests must pass before the consumed provider replay can
+execute.
+
+**Current gate: ORDINAL48_PROVIDER_ATTEMPT_DIAGNOSTIC_PREDECLARED_READY**
