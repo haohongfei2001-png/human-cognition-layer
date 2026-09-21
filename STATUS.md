@@ -767,3 +767,24 @@ The no-provider-call integration certification and publication are complete.
 Preserve the original 8/10 incomplete holdout; ordinal 48 and
 remaining efficacy certification are unresolved, not PASS. No new holdout or
 freshness declaration is opened by this repair.
+
+
+## Decision JSON diagnostic plumbing closure (2026-09-21)
+
+Execution `HCL-JSON-DIAGNOSTICS-20260921-aem01` is COMPLETE; writer released.
+Runtime main `88a6322ea5f32afa437cece39665e20110e016c0` merged PR2 candidate
+`ac95f4f33e65d5cf6ca2e10051f9f33aa352bd04`. Independent review accepted the
+5-file scope. Exact-main integration run `35558532085` and candidate run
+`35558285692` both succeeded: 6 actual pinned-SOTOPIA routing tests and
+6 synthetic diagnostic-transparency tests, plus the frozen-file gate.
+
+The optional `HCL_DECISION_DIAGNOSTICS=1` observer is off by default and records
+only response metadata. It does not change the frozen behavior, call count,
+seed, retry policy, credentials or outcome. No model request or holdout was
+launched or replayed. See `reports/DECISION_JSON_DIAGNOSTICS.md`.
+
+The original holdout remains **8/10 INCOMPLETE**. The preserved ordinal48 log
+does not identify its raw response or exact cause; no JSON efficacy repair or
+fresh evidence is claimed. All ten attempted combinations remain consumed.
+Any subsequent behavior change must follow the project freeze/amendment and
+new synthetic/smoke gates; this closure grants no new holdout authorization.

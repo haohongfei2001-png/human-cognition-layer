@@ -48,3 +48,14 @@ This is observability plumbing permitted by the freeze; it neither fixes ordinal
 nor releases the incomplete efficacy gate. Any later replay must be separately
 recorded as already-consumed diagnostic evidence, never fresh evidence. No new
 holdout, seed or product/credential boundary is authorized by this document.
+
+## Published certification
+
+PR2 candidate `ac95f4f33e65d5cf6ca2e10051f9f33aa352bd04` passed run
+`35558285692` and independent read-only review. Runtime main
+`88a6322ea5f32afa437cece39665e20110e016c0` passed exact-main run
+`35558532085`: both sets of 6 tests and the frozen-behavior comparison.
+Links: [PR2](https://github.com/haohongfei2001-png/human-cognition-layer/pull/2),
+[main certification](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/35558532085).
+This final documentation records that runtime certification without creating
+a recursive requirement to certify a later documentation-only commit.
