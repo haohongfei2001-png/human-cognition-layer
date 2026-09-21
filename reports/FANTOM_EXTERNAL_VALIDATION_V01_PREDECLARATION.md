@@ -111,9 +111,14 @@ interactive action-policy layer.
 
 ## Prompt format
 
-Common benchmark header:
+Common benchmark header is included exactly once in the **user prompt supplied
+to both arms**:
 
 `This is a theory-of-mind test. Answer only from the supplied conversation and follow the requested output format exactly.`
+
+The direct-control system message is neutral and only asks the model to answer
+the user's benchmark request directly and obey its requested output format. It
+does not repeat or add task-specific ToM information.
 
 Belief MC:
 - deterministic A/B ordering from the frozen manifest;
