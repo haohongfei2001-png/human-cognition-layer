@@ -1111,3 +1111,42 @@ The confirmation is constrained to the already-consumed environment9/combo3/
 expanded48/seed42 treatment setting and cannot repair the original 8/10 holdout.
 
 **Current gate: V021A_SMOKE_PASSED_REQUIRES_CONSUMED_ORDINAL48_CONFIRMATION**
+
+
+## Decision Policy v0.2.1a synthetic validation closure
+
+Owner-authorized output-budget amendment:
+- behavior commit: `ce36d7e6f911910f97437c23455dee33e0e7bc82`
+- sole behavior change:
+  `HCLDecisionPolicy.max_tokens 4096 -> 8192`
+
+Canonical validation:
+- run `35594584730`
+- **SUCCESS**
+- artifact `10635169895`
+
+Evidence:
+- exact amendment-scope diff: PASS;
+- no-network budget/retry certification: PASS;
+- verification-stopping Decision Policy: **12/12**;
+- Action Checker anti-loop: **5/5**;
+- negotiation-position regression: **12/12**;
+- goal-pursuit regression: **11/12 raw**, exactly the historical
+  `gp03_irreversible_legal_uncertainty` taxonomy boundary;
+- exact bounded adjudication: PASS;
+- no fixture weakening and no new raw regression.
+
+First validation attempt `35594522038` failed only because pinned SOTOPIA was
+not installed before a structural runner test. That CI dependency was fixed;
+no HCL behavior changed.
+
+See:
+- `reports/HCL_V021A_OUTPUT_BUDGET_VALIDATION.md`
+
+**Current gate: V021A_SYNTHETIC_GATE_PASSED_REQUIRES_SOTOPIA_SMOKE**
+
+Next:
+1. run SOTOPIA custom-agent smoke on v0.2.1a;
+2. if smoke passes, run consumed ordinal48 diagnostic confirmation only;
+3. do not start a new holdout;
+4. preserve original post-repair holdout as 8/10 incomplete.
