@@ -1,0 +1,8 @@
+trigger: fantom-external-v01-paired-pilot
+hcl_behavior_anchor: ce36d7e6f911910f97437c23455dee33e0e7bc82
+protocol_anchor: 2ae1aca1bb1e5b89057a94d10097cbcc8722a7ff
+selection: eval/fantom/selection_v01.json
+questions: 32
+distinct_conversations: 32
+seed: 42
+partial_tuning: forbidden
