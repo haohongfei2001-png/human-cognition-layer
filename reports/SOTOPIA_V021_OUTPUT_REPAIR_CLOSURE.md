@@ -43,9 +43,21 @@ The new integration gate imports the actual pinned SOTOPIA implementation and
 exercises malformed generation -> repair -> Pydantic parse, plain parser,
 alternate-model rejection, failure retry count, native routing and the actual
 HCL evaluator binding. Provider completion calls use synthetic mocks; no private
-benchmark or paid model call is made. Remote gate result is pending publication.
+benchmark or paid model call is made. Local Python3.12 integration: 6/6 PASS. Candidate `e4a1ff5b2c51589f67ad623710446a60f8689bee`
+CI run35548234948: SUCCESS. PR1 merged runtime main
+`af11819b0306fabda4bf4ad408b690456742a29b`; exact-main CI
+[35548423886](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/35548423886)
+job106178526397: SUCCESS, including the unchanged frozen behavior diff gate and
+all six actual-module integration tests under Python3.11.
 
-The repair can close as infrastructure engineering after exact-head CI; the
+First CI refused the initial text-fetch digest because the fetched text added
+one terminal newline relative to raw Git bytes. Raw pinned source was rechecked
+from codeload: original SHA256
+`46829dad9a17cc267be068a7cd28daeee7607b8eac14b4a35b40d2fe5234eaea`,
+patched SHA256 `f9b73e5f19ff6f2329673f08407e1f27cc5b1d06673a9c2fc252a8be207ad18f`.
+Only the exact-byte digests changed; the guard was not relaxed.
+
+The routing repair is COMPLETE as infrastructure engineering after exact-head CI; the
 original incomplete holdout and HCL efficacy remain unresolved. A future replay
 must be separately declared diagnostic/consumed, preserve every attempt, and
 must not claim independent fresh evidence.

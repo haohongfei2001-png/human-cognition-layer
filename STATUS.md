@@ -755,7 +755,7 @@ predeclared complete 10-pair set was not produced. These are execution failures,
 not an efficacy verdict. All ten attempted combinations are consumed diagnostic
 history; no later replay may call this slice fresh.
 
-A same-provider output-repair plumbing fix is under isolated certification.
+A same-provider output-repair plumbing fix is COMPLETE on main `af11819b0306fabda4bf4ad408b690456742a29b`. Exact-main integration run `35548423886` succeeded; PR1 candidate run `35548234948` also succeeded.
 It explicitly binds evaluator repair to the original DeepSeek model/endpoint,
 forwards that endpoint and its existing custom key, and rejects alternate repair
 identities before forwarding custom credentials. No new key, seed change,
@@ -763,7 +763,7 @@ additional retry, HCL behavior change or holdout rerun is included. The earlier
 forwarding-only candidate is superseded because it missed the upstream OpenAI
 default model. See `reports/SOTOPIA_V021_OUTPUT_REPAIR_CLOSURE.md`.
 
-Next: complete no-provider-call integration certification and publish this
-plumbing repair. Preserve the original 8/10 incomplete holdout; ordinal 48 and
+The no-provider-call integration certification and publication are complete.
+Preserve the original 8/10 incomplete holdout; ordinal 48 and
 remaining efficacy certification are unresolved, not PASS. No new holdout or
 freshness declaration is opened by this repair.
