@@ -1,6 +1,6 @@
 # Decision Policy v0.2.1a — Output Budget Amendment Proposal
 
-Status: **PROPOSED / NOT AUTHORIZED**
+Status: **AUTHORIZED / IMPLEMENTED / VALIDATED — HISTORICAL PROPOSAL**
 
 This document freezes the next minimal repair candidate for review. It does not
 change runtime behavior and does not authorize paid/provider validation.
@@ -138,3 +138,24 @@ Even if all gates pass:
 - do not automatically launch a new holdout;
 - first update canonical evidence and decide whether an independent unused
   validation source remains methodologically justified.
+
+
+## Final disposition
+
+Owner authorization was granted and the proposal was implemented exactly as
+specified.
+
+Canonical behavior anchor:
+`ce36d7e6f911910f97437c23455dee33e0e7bc82`
+
+Validation:
+- synthetic/regression gate `35594584730`: SUCCESS;
+- SOTOPIA smoke `35595222418`: SUCCESS;
+- consumed ordinal48 confirmation `35595588158`: SUCCESS;
+- updated infrastructure certification `35596299688`: SUCCESS.
+
+Canonical closure:
+- `reports/HCL_V021A_OUTPUT_BUDGET_CLOSURE.md`
+- `hcl/v03/FROZEN_DECISION_POLICY_V021A.md`
+
+The original external holdout remains 8/10 incomplete.
