@@ -1,0 +1,10 @@
+trigger: fantom-external-v02-full-context-paired
+hcl_behavior_anchor: ce36d7e6f911910f97437c23455dee33e0e7bc82
+protocol_anchor: 7d0f3f2fedb80e367ae5cfd0a1fcdf7a71dfaa4a
+selection: eval/fantom/selection_v02.json
+questions: 48
+distinct_conversations: 48
+v01_overlap: 0
+context: full
+seed: 42
+partial_tuning: forbidden
