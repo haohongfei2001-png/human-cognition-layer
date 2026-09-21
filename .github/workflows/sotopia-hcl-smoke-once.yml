@@ -19,6 +19,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify v0.2.1a behavior anchor
+        shell: bash
+        run: |
+          git diff --exit-code \
+            ce36d7e6f911910f97437c23455dee33e0e7bc82..HEAD \
+            -- \
+            hcl/v03/decision_policy.py \
+            hcl/v03/action_checker.py \
+            hcl/integrations/sotopia_agent.py
 
       - uses: actions/setup-python@v5
         with:
