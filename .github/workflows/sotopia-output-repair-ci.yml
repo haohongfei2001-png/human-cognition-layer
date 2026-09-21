@@ -1,10 +1,10 @@
 name: SOTOPIA same-provider output repair
 on:
   pull_request:
-    paths: ['patches/**', 'tests/test_sotopia_output_repair.py', 'scripts/apply_sotopia_output_repair.py', 'scripts/run_sotopia_hard_one_ab.py', '.github/workflows/sotopia-output-repair-ci.yml']
+    paths: ['patches/**', 'tests/test_sotopia_output_repair.py', 'tests/test_decision_diagnostics.py', 'scripts/hcl_decision_diagnostics.py', 'scripts/apply_sotopia_output_repair.py', 'scripts/run_sotopia_hard_one_ab.py', '.github/workflows/sotopia-output-repair-ci.yml']
   push:
     branches: [main]
-    paths: ['patches/**', 'tests/test_sotopia_output_repair.py', 'scripts/apply_sotopia_output_repair.py', 'scripts/run_sotopia_hard_one_ab.py', '.github/workflows/sotopia-output-repair-ci.yml']
+    paths: ['patches/**', 'tests/test_sotopia_output_repair.py', 'tests/test_decision_diagnostics.py', 'scripts/hcl_decision_diagnostics.py', 'scripts/apply_sotopia_output_repair.py', 'scripts/run_sotopia_hard_one_ab.py', '.github/workflows/sotopia-output-repair-ci.yml']
 permissions:
   contents: read
 jobs:
@@ -32,3 +32,5 @@ jobs:
           python -m pip install 'pydantic==2.9.2' 'redis-om==0.3.2' 'redis==5.1.1' 'openai==2.14.0' 'litellm==1.80.11'
       - name: Exercise actual generation fallback and evaluator binding without provider calls
         run: python -m unittest discover -s tests -p test_sotopia_output_repair.py -v
+      - name: Certify diagnostic transparency without provider calls
+        run: python -m unittest discover -s tests -p test_decision_diagnostics.py -v
