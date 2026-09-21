@@ -1,0 +1,115 @@
+name: HCL Decision Policy v0.2.1a Output Budget Gate
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_V021A_OUTPUT_BUDGET_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify amendment scope
+        shell: bash
+        run: |
+          python - <<'PY'
+          import subprocess
+          from pathlib import Path
+
+          base = "610344ed7a916ca656b1e8dd23b68a091a8a5e6d"
+          behavior = [
+              "hcl/v03/decision_policy.py",
+              "hcl/v03/action_checker.py",
+              "hcl/integrations/sotopia_agent.py",
+          ]
+
+          changed = subprocess.check_output(
+              ["git", "diff", "--name-only", f"{base}..HEAD", "--", *behavior],
+              text=True,
+          ).splitlines()
+          assert changed == ["hcl/v03/decision_policy.py"], changed
+
+          before = subprocess.check_output(
+              ["git", "show", f"{base}:hcl/v03/decision_policy.py"],
+              text=True,
+          )
+          after = Path("hcl/v03/decision_policy.py").read_text(encoding="utf-8")
+
+          expected_before = "        max_tokens: int = 4096,\n"
+          expected_after = "        max_tokens: int = 8192,\n"
+          assert before.count(expected_before) == 1
+          expected = before.replace(expected_before, expected_after)
+          assert after == expected
+          PY
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install openai
+
+      - name: Static compile
+        shell: bash
+        run: |
+          python -m py_compile             hcl/v03/decision_policy.py             hcl/v03/action_checker.py             hcl/v03/answer_loop.py             scripts/run_hcl_v03_decision_policy.py             scripts/run_hcl_action_checker.py             scripts/check_goal_pursuit_regression.py             scripts/hcl_decision_diagnostics.py
+
+      - name: No-network budget and retry certification
+        shell: bash
+        run: python -m unittest discover -s tests -p test_decision_diagnostics.py -v
+
+      - name: Verification-stopping Decision Policy suite
+        shell: bash
+        run: |
+          python scripts/run_hcl_v03_decision_policy.py             --fixtures eval/decision_policy/fixtures_v04_verification_stopping_synthetic.json             --out artifacts/v021a-verification-stopping             --seed 42
+
+      - name: Action Checker anti-loop regression
+        shell: bash
+        run: |
+          python scripts/run_hcl_action_checker.py             --fixtures eval/action_checker/fixtures_v02_verification_stopping.json             --out artifacts/v021a-action-checker
+
+      - name: Negotiation-position regression
+        shell: bash
+        run: |
+          python scripts/run_hcl_v03_decision_policy.py             --fixtures eval/decision_policy/fixtures_v03_negotiation_position_synthetic.json             --out artifacts/v021a-negotiation             --seed 42
+
+      - name: Goal-pursuit raw regression
+        continue-on-error: true
+        shell: bash
+        run: |
+          python scripts/run_hcl_v03_decision_policy.py             --fixtures eval/decision_policy/fixtures_v02_goal_pursuit_synthetic.json             --out artifacts/v021a-goal-pursuit             --seed 42
+
+      - name: Exact bounded historical goal-pursuit adjudication
+        shell: bash
+        run: |
+          python scripts/check_goal_pursuit_regression.py             --result artifacts/v021a-goal-pursuit/result.json             --out artifacts/v021a-goal-pursuit-adjudication
+
+      - name: Upload validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v021a-output-budget-gate-${{ github.run_id }}
+          path: |
+            artifacts/v021a-verification-stopping/
+            artifacts/v021a-action-checker/
+            artifacts/v021a-negotiation/
+            artifacts/v021a-goal-pursuit/
+            artifacts/v021a-goal-pursuit-adjudication/
+          if-no-files-found: warn
+          retention-days: 30
