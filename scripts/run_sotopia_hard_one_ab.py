@@ -82,6 +82,9 @@ def make_agents(
         if isinstance(agent, HCLSocialAgent):
             agent.hcl_loop.backend.seed = seed
             agent.decision_policy.backend.seed = seed
+            if os.getenv("HCL_DECISION_DIAGNOSTICS") == "1":
+                from scripts.hcl_decision_diagnostics import DecisionDiagnosticBackend
+                agent.decision_policy.backend = DecisionDiagnosticBackend(agent.decision_policy.backend)
         else:
             agent.direct_backend.seed = seed
         agents.append(agent)
