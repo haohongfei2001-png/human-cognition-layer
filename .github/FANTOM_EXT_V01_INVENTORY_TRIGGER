@@ -1,3 +1,4 @@
 trigger: fantom-external-v01-inventory
 provider_calls: 0
 selection_salt: HCL-FANTOM-EXT-V01-20260921
+rerun: 2
