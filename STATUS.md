@@ -1660,3 +1660,29 @@ Execution:
 - aggregate only after all 48 complete.
 
 **Current gate: FANTOM_EXT_V02_FULL_CONTEXT_PAIRED_PREDECLARED_READY**
+
+
+## FANToM external validation v0.2 full-context execution
+
+Canonical workflow:
+- run: `35609498441`
+- launch commit: `fae8f8810f63c459b01f8fae7a97159bb976dae1`
+
+Zero-provider preflight:
+- HCL behavior freeze: PASS
+- FANToM v0.2 protocol freeze: PASS
+- protocol unit tests: PASS
+- runner/aggregator entrypoint smoke: PASS
+- official dataset SHA verification: PASS
+- deterministic 48-question reconstruction: PASS
+- v0.1 conversation overlap: 0
+
+Paid execution:
+- 6 deterministic shards × 8 questions
+- maximum parallelism 2
+- no partial outcome inspection/tuning
+- aggregate required before interpretation.
+
+No behavior/protocol change is permitted while this run is open.
+
+**Current gate: FANTOM_EXT_V02_FULL_CONTEXT_PAIRED_RUNNING**
