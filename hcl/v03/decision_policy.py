@@ -129,7 +129,7 @@ class HCLDecisionPolicy:
         self,
         backend: ChatBackend,
         *,
-        max_tokens: int = 4096,
+        max_tokens: int = 8192,
     ) -> None:
         self.backend = backend
         self.max_tokens = max_tokens
