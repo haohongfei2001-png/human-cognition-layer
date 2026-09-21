@@ -1150,3 +1150,90 @@ Next:
 2. if smoke passes, run consumed ordinal48 diagnostic confirmation only;
 3. do not start a new holdout;
 4. preserve original post-repair holdout as 8/10 incomplete.
+
+
+## Decision Policy v0.2.1a final canonical closure
+
+This section **supersedes all earlier v0.2.1a intermediate gates above**.
+
+Owner-authorized runtime amendment:
+- behavior anchor: `ce36d7e6f911910f97437c23455dee33e0e7bc82`
+- sole behavior change:
+  `HCLDecisionPolicy.max_tokens 4096 -> 8192`
+
+Canonical evidence chain:
+
+1. Synthetic/regression gate
+   - run `35594584730`: **SUCCESS**
+   - verification-stopping Decision Policy: **12/12**
+   - Action Checker anti-loop: **5/5**
+   - negotiation-position: **12/12**
+   - historical goal-pursuit: **11/12 raw**
+   - sole raw miss remains exactly
+     `gp03_irreversible_legal_uncertainty`
+   - existing exact bounded adjudication: PASS.
+
+2. SOTOPIA custom-agent integration smoke
+   - run `35595222418`: **SUCCESS**
+   - HCL state present;
+   - Decision Policy present;
+   - Action Checker PASS;
+   - repaired verification fields present;
+   - forced environment no-op remains HCL always-on.
+
+3. Consumed ordinal48 confirmation
+   - run `35595588158`: **SUCCESS**
+   - artifact `10636821661`
+   - episode attempts executed: **1**
+   - final episode outcome: **success**
+   - exact no-valid-JSON RuntimeError: **false**
+   - provider attempts: **3**
+   - every provider call requested `max_tokens=8192`
+   - all three provider calls ended `finish_reason=stop`
+   - reasoning tokens: **2499, 5878, 6123**
+   - no empty final content;
+   - no provider retry within a backend call;
+   - no outer Decision Policy JSON retry;
+   - no transport exception.
+
+The 5878- and 6123-reasoning-token calls directly confirm that the old 4096
+budget was insufficient for this consumed setting and that the authorized 8192
+budget provided enough headroom for final JSON.
+
+4. Infrastructure baseline
+   - same-provider/output-repair CI baseline advanced to the validated v0.2.1a
+     behavior anchor;
+   - exact-main run `35596299688`: **SUCCESS**.
+
+See:
+- `reports/HCL_V021A_OUTPUT_BUDGET_GATE.md`
+- `reports/HCL_V021A_OUTPUT_BUDGET_CLOSURE.md`
+- `reports/ORDINAL48_V021A_CONFIRMATION_PREDECLARATION.md`
+
+Claim boundary:
+- Decision Policy v0.2.1a is the **validated canonical runtime**;
+- HCL v0.3 state semantics remain frozen;
+- HCL remains always-on;
+- no training or cross-base-model transfer has started;
+- consumed ordinal48 confirmation is diagnostic only;
+- the original post-repair holdout remains **8/10 INCOMPLETE**;
+- ordinal48 is not retroactively promoted;
+- no old combo-3 setting regains freshness;
+- no new holdout is authorized by this closure.
+
+A redundant additional smoke was triggered later while reconciling a stale
+STATUS tail. It is non-canonical and does not gate this closure; no downstream
+work depends on it.
+
+**Current gate: V021A_VALIDATED_CANONICAL_RUNTIME — NO_NEW_HOLDOUT_AUTHORIZED**
+
+Next research work requires a new explicit validation decision:
+- either design a genuinely independent external validation source / unused
+  evidence plan;
+- or authorize a bounded new holdout with a predeclared freshness boundary.
+
+Until then:
+1. do not tune v0.2.1a against consumed SOTOPIA settings;
+2. do not start another holdout automatically;
+3. do not change the 8192 budget or retry policy;
+4. preserve the original 8/10 incomplete holdout verdict.
