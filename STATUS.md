@@ -1044,3 +1044,39 @@ Required validation sequence:
 The original 8/10 holdout remains incomplete regardless of diagnostic replay.
 
 **Current gate: V021A_OUTPUT_BUDGET_AMENDMENT_VALIDATION_RUNNING**
+
+
+## Decision Policy v0.2.1a synthetic/regression validation closure
+
+Canonical validation:
+- run: `35594584730`
+- artifact: `10635169895`
+- result: **SUCCESS**
+
+Raw evidence:
+- verification-stopping Decision Policy: **12/12**
+- Action Checker anti-loop: **5/5**
+- negotiation-position: **12/12**
+- historical goal-pursuit: **11/12 raw**
+- sole goal-pursuit miss remains exactly
+  `gp03_irreversible_legal_uncertainty`;
+- existing exact bounded taxonomy adjudication: PASS;
+- raw 11/12 is preserved.
+
+Amendment-scope gate proved the only behavior-bearing change from
+pre-amendment main `610344ed7a916ca656b1e8dd23b68a091a8a5e6d` is:
+- Decision Policy default output budget `4096 -> 8192`.
+
+Action Checker, state builder, answer/check budgets, prompt, taxonomy, model,
+provider, seed, temperature and retry counts remain unchanged.
+
+See:
+- `reports/HCL_V021A_OUTPUT_BUDGET_GATE.md`
+
+**Current gate: V021A_SYNTHETIC_PASSED_REQUIRES_INTEGRATION_SMOKE**
+
+Next:
+1. run the SOTOPIA custom-agent smoke with behavior locked to
+   `ce36d7e6f911910f97437c23455dee33e0e7bc82`;
+2. if smoke passes, run only consumed ordinal48 diagnostic confirmation;
+3. do not start a new holdout.
