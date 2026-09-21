@@ -1,0 +1,267 @@
+name: FANToM External Validation v0.2 Full-Context Paired Pilot
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/FANTOM_EXT_V02_PAIRED_TRIGGER"
+
+permissions:
+  contents: read
+
+env:
+  HCL_BEHAVIOR_ANCHOR: ce36d7e6f911910f97437c23455dee33e0e7bc82
+  FANTOM_V02_PROTOCOL_ANCHOR: 7d0f3f2fedb80e367ae5cfd0a1fcdf7a71dfaa4a
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify frozen HCL behavior
+        shell: bash
+        run: |
+          git diff --exit-code "$HCL_BEHAVIOR_ANCHOR"..HEAD --             hcl/v03/decision_policy.py             hcl/v03/action_checker.py             hcl/v03/answer_loop.py             hcl/v03/backends.py             hcl/integrations/sotopia_agent.py             hcl/v03/state_schema.json             hcl/v03/FROZEN_STATE_SEMANTICS.md
+
+      - name: Verify frozen FANToM v0.2 protocol
+        shell: bash
+        run: |
+          git diff --exit-code "$FANTOM_V02_PROTOCOL_ANCHOR"..HEAD --             eval/fantom/selection_v02.json             reports/FANTOM_EXTERNAL_VALIDATION_V02_PREDECLARATION.md             scripts/inventory_fantom_external_v02.py             scripts/run_fantom_external_v02.py             scripts/aggregate_fantom_external_v02.py             tests/test_fantom_external_v02.py
+
+      - name: Install zero-provider dependencies
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pandas openai
+
+      - name: Compile and run v0.2 protocol tests
+        shell: bash
+        run: |
+          python -m py_compile             scripts/inventory_fantom_external_v02.py             scripts/run_fantom_external_v02.py             scripts/aggregate_fantom_external_v02.py             tests/test_fantom_external_v02.py
+          python -m unittest discover -s tests -p test_fantom_external_v02.py -v
+          python scripts/run_fantom_external_v02.py --help >/dev/null
+          python scripts/aggregate_fantom_external_v02.py --help >/dev/null
+
+      - name: Rebuild deterministic full-context selection
+        shell: bash
+        run: |
+          python scripts/inventory_fantom_external_v02.py             --out artifacts/fantom-v02-preflight-inventory
+
+      - name: Verify rebuilt v0.2 selection equals frozen manifest
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          frozen = json.loads(
+              Path("eval/fantom/selection_v02.json").read_text(encoding="utf-8")
+          )
+          rebuilt = json.loads(
+              Path(
+                  "artifacts/fantom-v02-preflight-inventory/inventory.json"
+              ).read_text(encoding="utf-8")
+          )
+
+          fields = (
+              "question_id",
+              "set_id",
+              "family",
+              "stratum",
+              "conversation_id",
+              "correct_option",
+          )
+          def project(items):
+              return [
+                  {key: item.get(key) for key in fields if key in item}
+                  for item in items
+              ]
+
+          assert project(rebuilt["selected"]) == project(frozen["selected"])
+          assert len(frozen["selected"]) == 48
+          assert len({x["conversation_id"] for x in frozen["selected"]}) == 48
+          assert frozen["selection"]["context_type"] == "full"
+          assert frozen["selection"]["v01_conversation_overlap"] == 0
+
+          v01 = json.loads(
+              Path("eval/fantom/selection_v01.json").read_text(encoding="utf-8")
+          )
+          old = {x["conversation_id"] for x in v01["selected"]}
+          new = {x["conversation_id"] for x in frozen["selected"]}
+          assert not (old & new)
+
+          from scripts import run_fantom_external_v02 as runner
+          assert runner.MODEL == "deepseek-flash"
+          assert runner.BASE_URL == "https://api.deepseek.com"
+          assert runner.SEED == 42
+          assert runner.TEMPERATURE == 0.0
+          assert runner.DIRECT_MAX_TOKENS == 4096
+          PY
+
+  paired:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        shard_index: [0, 1, 2, 3, 4, 5]
+
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Re-verify frozen HCL and FANToM v0.2 protocol
+        shell: bash
+        run: |
+          git diff --exit-code "$HCL_BEHAVIOR_ANCHOR"..HEAD --             hcl/v03/decision_policy.py             hcl/v03/action_checker.py             hcl/v03/answer_loop.py             hcl/v03/backends.py             hcl/integrations/sotopia_agent.py             hcl/v03/state_schema.json             hcl/v03/FROZEN_STATE_SEMANTICS.md
+          git diff --exit-code "$FANTOM_V02_PROTOCOL_ANCHOR"..HEAD --             eval/fantom/selection_v02.json             reports/FANTOM_EXTERNAL_VALIDATION_V02_PREDECLARATION.md             scripts/inventory_fantom_external_v02.py             scripts/run_fantom_external_v02.py             scripts/aggregate_fantom_external_v02.py             tests/test_fantom_external_v02.py
+
+      - name: Install runner dependencies
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pandas openai
+
+      - name: Run predeclared full-context paired shard
+        shell: bash
+        run: |
+          python scripts/run_fantom_external_v02.py             --shard-index ${{ matrix.shard_index }}             --shard-count 6
+
+      - name: Verify shard artifact privacy boundary
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          shard = ${{ matrix.shard_index }}
+          path = Path(f"artifacts/fantom-external-v02/shard_{shard}.json")
+          if not path.exists():
+              raise SystemExit("missing shard artifact")
+
+          data = json.loads(path.read_text(encoding="utf-8"))
+          assert data["shard_index"] == shard
+          assert data["shard_count"] == 6
+          assert data["requested"] == 8
+          assert data["completed"] + len(data["failures"]) == 8
+          assert data["context_type"] == "full"
+
+          raw = path.read_text(encoding="utf-8").lower()
+          forbidden = [
+              '"context":',
+              '"question":',
+              '"correct_answer":',
+              '"wrong_answer":',
+              '"prompt":',
+              '"messages":',
+              '"response_text":',
+              '"final_answer":',
+              '"state":',
+              '"api_key":',
+          ]
+          for token in forbidden:
+              assert token not in raw, token
+          PY
+
+      - name: Upload paired shard
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fantom-external-v02-shard-${{ matrix.shard_index }}-${{ github.run_id }}
+          path: artifacts/fantom-external-v02/shard_${{ matrix.shard_index }}.json
+          if-no-files-found: error
+          retention-days: 30
+
+  aggregate:
+    needs: paired
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify frozen v0.2 protocol before aggregation
+        shell: bash
+        run: |
+          git diff --exit-code "$FANTOM_V02_PROTOCOL_ANCHOR"..HEAD --             eval/fantom/selection_v02.json             reports/FANTOM_EXTERNAL_VALIDATION_V02_PREDECLARATION.md             scripts/aggregate_fantom_external_v02.py
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: fantom-external-v02-shard-*-${{ github.run_id }}
+          path: downloaded-fantom-v02
+          merge-multiple: true
+
+      - name: Aggregate only after all 48 questions complete
+        shell: bash
+        run: |
+          python scripts/aggregate_fantom_external_v02.py             --root downloaded-fantom-v02             --out artifacts/fantom-external-v02-summary
+
+      - name: Verify aggregate privacy and frozen sample
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("artifacts/fantom-external-v02-summary/summary.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          assert data["sample"]["questions"] == 48
+          assert data["sample"]["distinct_conversations"] == 48
+          assert data["sample"]["conversation_disjoint"] is True
+          assert data["sample"]["v01_conversation_overlap"] == 0
+          assert data["sample"]["context_type"] == "full"
+          assert len(data["question_level"]) == 48
+
+          raw = path.read_text(encoding="utf-8").lower()
+          forbidden = [
+              '"context":',
+              '"question":',
+              '"correct_answer":',
+              '"wrong_answer":',
+              '"prompt":',
+              '"messages":',
+              '"response_text":',
+              '"final_answer":',
+              '"state":',
+              '"api_key":',
+          ]
+          for token in forbidden:
+              assert token not in raw, token
+          PY
+
+      - name: Upload canonical aggregate
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fantom-external-v02-summary-${{ github.run_id }}
+          path: artifacts/fantom-external-v02-summary/
+          if-no-files-found: error
+          retention-days: 30
