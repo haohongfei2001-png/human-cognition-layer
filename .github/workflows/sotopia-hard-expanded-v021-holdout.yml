@@ -48,6 +48,9 @@ jobs:
           python -m pip install -e .cache/sotopia
           python -m pip install             "pydantic==2.9.2"             "redis-om==0.3.2"             "redis==5.1.1"             "openai==2.14.0"             "litellm==1.80.11"
 
+      - name: Apply pinned same-provider output repair
+        run: python scripts/apply_sotopia_output_repair.py .cache/sotopia
+
       - name: Load official SOTOPIA dataset into Redis
         shell: bash
         run: |

@@ -1,0 +1,34 @@
+name: SOTOPIA same-provider output repair
+on:
+  pull_request:
+    paths: ['patches/**', 'tests/test_sotopia_output_repair.py', 'scripts/apply_sotopia_output_repair.py', 'scripts/run_sotopia_hard_one_ab.py', '.github/workflows/sotopia-output-repair-ci.yml']
+  push:
+    branches: [main]
+    paths: ['patches/**', 'tests/test_sotopia_output_repair.py', 'scripts/apply_sotopia_output_repair.py', 'scripts/run_sotopia_hard_one_ab.py', '.github/workflows/sotopia-output-repair-ci.yml']
+permissions:
+  contents: read
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      LITELLM_LOCAL_MODEL_COST_MAP: 'True'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check frozen behavior
+        run: git diff --exit-code f6e591db8d22ae0e2175769852a1a8aa9c3e106a HEAD -- hcl/v03/decision_policy.py hcl/v03/action_checker.py hcl/integrations/sotopia_agent.py
+      - name: Install actual pinned SOTOPIA
+        run: |
+          git clone --quiet https://github.com/sotopia-lab/sotopia.git .cache/sotopia
+          git -C .cache/sotopia checkout --quiet --detach a0aaafb440e570e5e61b7c44a44e5e417c545383
+          python scripts/apply_sotopia_output_repair.py .cache/sotopia
+          python scripts/apply_sotopia_output_repair.py .cache/sotopia
+          python -m pip install -e .cache/sotopia
+          python -m pip install 'pydantic==2.9.2' 'redis-om==0.3.2' 'redis==5.1.1' 'openai==2.14.0' 'litellm==1.80.11'
+      - name: Exercise actual generation fallback and evaluator binding without provider calls
+        run: python -m unittest discover -s tests -p test_sotopia_output_repair.py -v
