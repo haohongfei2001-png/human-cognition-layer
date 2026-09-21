@@ -5,6 +5,8 @@ import unittest
 from unittest.mock import Mock, patch
 from types import SimpleNamespace
 
+from hcl.v03.answer_loop import HCLAnswerLoop
+from hcl.v03.action_checker import HCLActionChecker
 from hcl.v03.backends import OpenAICompatibleBackend
 from hcl.v03.decision_policy import HCLDecisionPolicy
 from scripts.hcl_decision_diagnostics import (
@@ -161,7 +163,16 @@ class Diagnostics(unittest.TestCase):
             policy.build_plan(private_goal='synthetic', visible_context='synthetic', state={}, available_actions=['speak'])
         self.assertEqual(backend.complete.call_count, 3)
         self.assertEqual([e['outcome'] for e in events], ['empty','no_parseable_object','no_parseable_object'])
-        self.assertTrue(all(c.kwargs == {'max_tokens':4096,'temperature':0.0} for c in backend.complete.call_args_list))
+        self.assertTrue(all(c.kwargs == {'max_tokens':8192,'temperature':0.0} for c in backend.complete.call_args_list))
+
+    def test_v021a_budget_scope_is_decision_policy_only(self):
+        backend = Mock()
+        self.assertEqual(HCLDecisionPolicy(backend).max_tokens, 8192)
+        self.assertEqual(HCLActionChecker(backend).max_tokens, 4096)
+        loop = HCLAnswerLoop(backend)
+        self.assertEqual(loop.state_max_tokens, 8192)
+        self.assertEqual(loop.answer_max_tokens, 4096)
+        self.assertEqual(loop.check_max_tokens, 4096)
 
     def test_original_exception_propagates_once_without_message_disclosure(self):
         failure = RuntimeError('API_SECRET_SENTINEL'); backend = Mock(); backend.complete.side_effect = failure
