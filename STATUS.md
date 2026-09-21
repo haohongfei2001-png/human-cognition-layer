@@ -1008,3 +1008,39 @@ Until owner authorization:
 5. do not start a new holdout;
 6. preserve HCL v0.3 frozen state and always-on behavior;
 7. preserve the original 8/10 incomplete verdict.
+
+
+## Decision Policy v0.2.1a output-budget amendment execution
+
+Owner explicitly authorized the bounded Decision Policy output-budget increase.
+
+Authorized behavior-bearing amendment:
+- commit: `ce36d7e6f911910f97437c23455dee33e0e7bc82`
+- sole runtime change:
+  `HCLDecisionPolicy.max_tokens 4096 -> 8192`
+
+Freeze contract:
+- `hcl/v03/FROZEN_DECISION_POLICY_V021A.md`
+
+Authorization does not extend to:
+- output budgets above 8192;
+- extra retries;
+- provider/model changes;
+- disabling/lowering thinking;
+- a new holdout;
+- training or cross-base transfer.
+
+Required validation sequence:
+1. exact amendment-scope diff check;
+2. no-network budget/retry certification;
+3. verification-stopping Decision Policy synthetic;
+4. Action Checker anti-loop regression;
+5. negotiation-position regression;
+6. historical goal-pursuit raw regression with only the existing bounded
+   taxonomy adjudication;
+7. SOTOPIA integration smoke;
+8. consumed ordinal48 diagnostic confirmation.
+
+The original 8/10 holdout remains incomplete regardless of diagnostic replay.
+
+**Current gate: V021A_OUTPUT_BUDGET_AMENDMENT_VALIDATION_RUNNING**
