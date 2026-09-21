@@ -48,7 +48,8 @@ Before any model call:
 2. verify the upstream SHA-256;
 3. inspect only benchmark metadata/schema;
 4. enumerate candidate deterministic question families;
-5. select candidate IDs with a fixed hash rule;
+5. select candidate IDs with a fixed hash rule while enforcing global
+   FANToM conversation-level disjointness;
 6. publish counts + IDs;
 7. do not query DeepSeek.
 
@@ -65,6 +66,20 @@ Candidate families for the first bounded paired pilot:
 - inaccessible answerability binary;
 - inaccessible information-accessibility binary;
 - fact control.
+
+Selection is performed in this fixed stratum order:
+1. inaccessible first-order belief;
+2. inaccessible second-order belief;
+3. inaccessible answerability binary;
+4. inaccessible information-accessibility binary;
+5. accessible first-order belief;
+6. accessible second-order belief;
+7. fact control.
+
+Within each stratum, candidates are ordered by the fixed hash salt and selected
+greedily only when their FANToM conversation ID has not already been selected
+for any earlier stratum. This prevents correlated questions from the same
+conversation entering the 32-question pilot.
 
 Belief evaluation will use a deterministic two-choice presentation generated
 from the benchmark's correct/wrong belief answers. Choice order is derived from
