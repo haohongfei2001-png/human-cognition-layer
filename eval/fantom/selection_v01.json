@@ -1,0 +1,277 @@
+{
+  "source": {
+    "repository": "skywalker023/fantom",
+    "commit": "1cae6fa30f5ba04ca0fff5f5716b5ba7055e2e85",
+    "dataset_url": "https://storage.googleapis.com/ai2-mosaic-public/projects/fantom/fantom.tar.gz",
+    "dataset_sha256": "1d08dfa0ea474c7f83b9bc7e3a7b466eab25194043489dd618b4c5223e1253a4",
+    "dataset_version": "1.0"
+  },
+  "inventory_run": 35602513859,
+  "inventory_artifact": 10638929742,
+  "inventory_artifact_sha256": "b00425bd66e1747803cc245a3e39e7bcc0fda0ba50152dd3bac08ac807d24e7e",
+  "selection": {
+    "salt": "HCL-FANTOM-EXT-V01-20260921",
+    "total_selected": 32,
+    "conversation_disjoint": true,
+    "targets": {
+      "belief_inaccessible_first": 4,
+      "belief_inaccessible_second": 4,
+      "answerability_inaccessible_binary": 4,
+      "info_accessibility_inaccessible_binary": 4,
+      "belief_accessible_first": 4,
+      "belief_accessible_second": 4,
+      "fact_control": 8
+    }
+  },
+  "candidate_counts": {
+    "answerability_inaccessible_binary": 2225,
+    "belief_accessible_first": 228,
+    "belief_accessible_second": 319,
+    "belief_inaccessible_first": 642,
+    "belief_inaccessible_second": 351,
+    "fact_control": 870,
+    "info_accessibility_inaccessible_binary": 2225
+  },
+  "selected": [
+    {
+      "question_id": "b515c7bb7147db81748f6b025cf9b03f8bc5cc8e4c8f972f7bb25a3213ec9e16",
+      "set_id": "26-1-0",
+      "family": "belief_mc",
+      "stratum": "belief_inaccessible_first",
+      "conversation_id": "26",
+      "correct_option": "B"
+    },
+    {
+      "question_id": "a77107982ae9b31705749213aeed85f944d0d698eaf81a503234fa0411d18b82",
+      "set_id": "174-1-1",
+      "family": "belief_mc",
+      "stratum": "belief_inaccessible_first",
+      "conversation_id": "174",
+      "correct_option": "A"
+    },
+    {
+      "question_id": "62e8a8f134145777a09e1376412eb7d97bcd08d3fe39d64de4ceea260b43dd56",
+      "set_id": "87-0-1",
+      "family": "belief_mc",
+      "stratum": "belief_inaccessible_first",
+      "conversation_id": "87",
+      "correct_option": "A"
+    },
+    {
+      "question_id": "e21ffb1e97ff3fac8cd34621d221317809a57a7dbd964ffb0980b5ac7a0c910e",
+      "set_id": "222-0-1",
+      "family": "belief_mc",
+      "stratum": "belief_inaccessible_first",
+      "conversation_id": "222",
+      "correct_option": "B"
+    },
+    {
+      "question_id": "c8f96cf477e88e19157a30d6580afd791008738a84986bb5cbc6fc8600f7d3dc",
+      "set_id": "2-0-0",
+      "family": "belief_mc",
+      "stratum": "belief_inaccessible_second",
+      "conversation_id": "2",
+      "correct_option": "B"
+    },
+    {
+      "question_id": "32cff4ecf7b807ba030685e869f8550f553b90fd0763565e8279d170c5a6d2e1",
+      "set_id": "164-0-2",
+      "family": "belief_mc",
+      "stratum": "belief_inaccessible_second",
+      "conversation_id": "164",
+      "correct_option": "A"
+    },
+    {
+      "question_id": "49ea48ebc120517ea99a9dba5dca47bdfee415c452bf4df4efdc5d32764a852f",
+      "set_id": "48-0-2",
+      "family": "belief_mc",
+      "stratum": "belief_inaccessible_second",
+      "conversation_id": "48",
+      "correct_option": "A"
+    },
+    {
+      "question_id": "9103c2f5efe64ee8a694abfea4454a6dc215255b17914646f77fdfbb7765ab77",
+      "set_id": "12-0-2",
+      "family": "belief_mc",
+      "stratum": "belief_inaccessible_second",
+      "conversation_id": "12",
+      "correct_option": "A"
+    },
+    {
+      "question_id": "ee51a849395b0cdb90688e21416e895d55f78a75f3443aa05add1ccd9243e2a2",
+      "set_id": "169-1-1",
+      "family": "answerability_binary",
+      "stratum": "answerability_inaccessible_binary",
+      "conversation_id": "169"
+    },
+    {
+      "question_id": "26f4a6ddff73b953e2f98e59bba225f0d53a919560eef036dba4104057267b08",
+      "set_id": "216-2-2",
+      "family": "answerability_binary",
+      "stratum": "answerability_inaccessible_binary",
+      "conversation_id": "216"
+    },
+    {
+      "question_id": "1da9a726e771da0bae860c5f85be2261abb2429cf8cc3cc36a24d3d5c4437c8e",
+      "set_id": "21-1-0",
+      "family": "answerability_binary",
+      "stratum": "answerability_inaccessible_binary",
+      "conversation_id": "21"
+    },
+    {
+      "question_id": "983af8e0f6226f6b6dd8c15949a940f84be3e665762df9fa6e3a99e66c4196b5",
+      "set_id": "56-0-0",
+      "family": "answerability_binary",
+      "stratum": "answerability_inaccessible_binary",
+      "conversation_id": "56"
+    },
+    {
+      "question_id": "b3077794059eda897a0cf1ce2bd59822d6617ee826dac844d3b2dc4313428b82",
+      "set_id": "82-0-1",
+      "family": "info_accessibility_binary",
+      "stratum": "info_accessibility_inaccessible_binary",
+      "conversation_id": "82"
+    },
+    {
+      "question_id": "64c4776d18bb7622ecbc6704dcb0c0a28c438625890e159f5af68c3cee63f733",
+      "set_id": "236-0-1",
+      "family": "info_accessibility_binary",
+      "stratum": "info_accessibility_inaccessible_binary",
+      "conversation_id": "236"
+    },
+    {
+      "question_id": "51e62a1cfdd39ea28b0c823bf682973a5c57017de4a97f155754f11faab2666b",
+      "set_id": "188-0-0",
+      "family": "info_accessibility_binary",
+      "stratum": "info_accessibility_inaccessible_binary",
+      "conversation_id": "188"
+    },
+    {
+      "question_id": "b7aad564f8e3bf6284b6b32e274e384682d6fe69ce2c39f456cf970cd04d4bae",
+      "set_id": "229-0-2",
+      "family": "info_accessibility_binary",
+      "stratum": "info_accessibility_inaccessible_binary",
+      "conversation_id": "229"
+    },
+    {
+      "question_id": "4c702ef5e1841791b521d0bd8bec8fdaedf2763f69dd0b49643a35953085a0e7",
+      "set_id": "132-0-2",
+      "family": "belief_mc",
+      "stratum": "belief_accessible_first",
+      "conversation_id": "132",
+      "correct_option": "A"
+    },
+    {
+      "question_id": "14b1e40ab6563da9c1ca1eff7f3d84ee0629e421d3b6a31fb3d12c30a7d4ac50",
+      "set_id": "247-0-0",
+      "family": "belief_mc",
+      "stratum": "belief_accessible_first",
+      "conversation_id": "247",
+      "correct_option": "A"
+    },
+    {
+      "question_id": "adf230fa97dfb1f1617d38a97bc88ff8f883e516fdad338e3d413b39ce3212c8",
+      "set_id": "19-0-1",
+      "family": "belief_mc",
+      "stratum": "belief_accessible_first",
+      "conversation_id": "19",
+      "correct_option": "B"
+    },
+    {
+      "question_id": "2d37f62b1e8c5f3c3857e3dad876adbe1b2eed30c239512b3de2c9956e884381",
+      "set_id": "73-1-1",
+      "family": "belief_mc",
+      "stratum": "belief_accessible_first",
+      "conversation_id": "73",
+      "correct_option": "A"
+    },
+    {
+      "question_id": "bebfd4962377e110a32bc64cc12ff02dd9b18178053622093290d2283e631d33",
+      "set_id": "180-2-2",
+      "family": "belief_mc",
+      "stratum": "belief_accessible_second",
+      "conversation_id": "180",
+      "correct_option": "B"
+    },
+    {
+      "question_id": "281dfaac619054ef0b4d5786f69b9c445983c97ca82d9ad41169ec4d6c2bee14",
+      "set_id": "243-0-1",
+      "family": "belief_mc",
+      "stratum": "belief_accessible_second",
+      "conversation_id": "243",
+      "correct_option": "A"
+    },
+    {
+      "question_id": "04ffa75c15bc424374be1708911e42868c3c0dcd363cc2d1a45e9e64a21cdf16",
+      "set_id": "0-0-0",
+      "family": "belief_mc",
+      "stratum": "belief_accessible_second",
+      "conversation_id": "0",
+      "correct_option": "B"
+    },
+    {
+      "question_id": "411ec9fdfc94d553fb8ee3768cc209f6d179682b0393de8a8403d116600ee0f3",
+      "set_id": "194-0-0",
+      "family": "belief_mc",
+      "stratum": "belief_accessible_second",
+      "conversation_id": "194",
+      "correct_option": "B"
+    },
+    {
+      "question_id": "f28e5982128078c51b724798d162b1bb6eae1433b701f99346e9ea3f86e6bee0",
+      "set_id": "139-0-1",
+      "family": "fact",
+      "stratum": "fact_control",
+      "conversation_id": "139"
+    },
+    {
+      "question_id": "7bfa43158e8f5a4d8d76ed213284c06405a41a5cd5fd8e2c600b9e82571f144f",
+      "set_id": "121-1-1",
+      "family": "fact",
+      "stratum": "fact_control",
+      "conversation_id": "121"
+    },
+    {
+      "question_id": "6f17650a11f74e1c77efadd0ad2c0dcf6da49e70c4931cf87ea8374665591f07",
+      "set_id": "158-1-0",
+      "family": "fact",
+      "stratum": "fact_control",
+      "conversation_id": "158"
+    },
+    {
+      "question_id": "82b6f2914fcf52f498a35bdd7137c47a6dbb9b34d511e9c0a5f30f7f0dc693eb",
+      "set_id": "235-0-2",
+      "family": "fact",
+      "stratum": "fact_control",
+      "conversation_id": "235"
+    },
+    {
+      "question_id": "d4c024a64785ef7cd52b82f181d85f02959a697001c93122a49048a8f1b7e706",
+      "set_id": "250-1-1",
+      "family": "fact",
+      "stratum": "fact_control",
+      "conversation_id": "250"
+    },
+    {
+      "question_id": "923bf09e03aae2f8d67ceeec578df3c1b2610271c7ba470fe9239ac9e123da3f",
+      "set_id": "91-0-1",
+      "family": "fact",
+      "stratum": "fact_control",
+      "conversation_id": "91"
+    },
+    {
+      "question_id": "e9a59ad0000fd455d7b9052aa803ab5aaf137d5a63e206af624008696b45e17f",
+      "set_id": "62-0-0",
+      "family": "fact",
+      "stratum": "fact_control",
+      "conversation_id": "62"
+    },
+    {
+      "question_id": "ef2a1823db220e2ee4e2160766732fa67ea159638725bf65d3ff3678072f0210",
+      "set_id": "54-0-0",
+      "family": "fact",
+      "stratum": "fact_control",
+      "conversation_id": "54"
+    }
+  ]
+}
