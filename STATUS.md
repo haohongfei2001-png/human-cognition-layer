@@ -1080,3 +1080,34 @@ Next:
    `ce36d7e6f911910f97437c23455dee33e0e7bc82`;
 2. if smoke passes, run only consumed ordinal48 diagnostic confirmation;
 3. do not start a new holdout.
+
+
+## Decision Policy v0.2.1a integration smoke closure
+
+SOTOPIA custom-agent smoke:
+- run: `35595222418`
+- result: **SUCCESS**
+- artifact: `10636505914`
+- artifact SHA-256:
+  `714a08ec85b0c2c49b9cd5c358767eb775139263abcbf7ec844191f1120e1b5e`
+
+Before execution the workflow verified behavior-bearing files were unchanged
+from v0.2.1a anchor
+`ce36d7e6f911910f97437c23455dee33e0e7bc82`.
+
+Raw smoke assertions include:
+- HCL state present;
+- Decision Policy present;
+- repaired verification fields present;
+- Action Checker first/final checks PASS;
+- environment-forced no-op still passes through HCL.
+
+The smoke is integration-path evidence, not efficacy evidence.
+
+Consumed ordinal48 confirmation is predeclared in:
+- `reports/ORDINAL48_V021A_CONFIRMATION_PREDECLARATION.md`
+
+The confirmation is constrained to the already-consumed environment9/combo3/
+expanded48/seed42 treatment setting and cannot repair the original 8/10 holdout.
+
+**Current gate: V021A_SMOKE_PASSED_REQUIRES_CONSUMED_ORDINAL48_CONFIRMATION**
