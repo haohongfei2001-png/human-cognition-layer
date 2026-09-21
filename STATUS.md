@@ -1271,3 +1271,103 @@ See:
 - `reports/FANTOM_EXTERNAL_VALIDATION_V01_PLAN.md`
 
 **Current gate: FANTOM_EXT_V01_ZERO_PROVIDER_INVENTORY_RUNNING**
+
+
+## FANToM external validation v0.1 inventory closure and paired predeclaration
+
+Independent external source:
+- FANToM repository: `skywalker023/fantom`
+- pinned upstream commit:
+  `1cae6fa30f5ba04ca0fff5f5716b5ba7055e2e85`
+- official dataset SHA-256:
+  `1d08dfa0ea474c7f83b9bc7e3a7b466eab25194043489dd618b4c5223e1253a4`
+
+Final zero-provider inventory:
+- run: `35602513859`
+- **SUCCESS**
+- artifact: `10638929742`
+- artifact SHA-256:
+  `b00425bd66e1747803cc245a3e39e7bcc0fda0ba50152dd3bac08ac807d24e7e`
+- FANToM sets inventoried: **870**
+- provider/model calls: **0**
+
+Historical inventory attempts are preserved:
+- `35602156116`: failed before selection because the archive member lookup
+  assumed a directory prefix; no provider call occurred;
+- `35602254720`: successful metadata inventory, but pre-launch review found
+  that independent per-stratum selection could reuse a conversation;
+- before any model outcome existed, selection was tightened to global
+  conversation-level disjointness;
+- `35602513859`: final successful conversation-disjoint inventory.
+
+Frozen sample:
+- machine manifest: `eval/fantom/selection_v01.json`
+- **32 questions**
+- **32 distinct FANToM conversations**
+- selection salt: `HCL-FANTOM-EXT-V01-20260921`
+- exact IDs and belief A/B orientation are committed before provider calls.
+
+Strata:
+- 4 inaccessible first-order belief MC;
+- 4 inaccessible second-order belief MC;
+- 4 inaccessible answerability binary;
+- 4 inaccessible information-accessibility binary;
+- 4 accessible first-order belief MC;
+- 4 accessible second-order belief MC;
+- 8 fact controls.
+
+Paired protocol:
+- `reports/FANTOM_EXTERNAL_VALIDATION_V01_PREDECLARATION.md`
+- protocol anchor:
+  `2ae1aca1bb1e5b89057a94d10097cbcc8722a7ff`
+- HCL behavior anchor:
+  `ce36d7e6f911910f97437c23455dee33e0e7bc82`
+
+Common:
+- FANToM short context;
+- DeepSeek `deepseek-flash`;
+- same existing endpoint/key;
+- seed 42;
+- temperature 0;
+- same user benchmark prompt in both arms.
+
+Control:
+- direct DeepSeek answer.
+
+Treatment:
+- frozen HCL v0.3 answer loop;
+- state 8192; answer/check 4096;
+- HCL state always-on;
+- Decision Policy / Action Checker not used because FANToM v0.1 is static
+  cognition QA.
+
+Predeclared primary evidence:
+- 16 information-asymmetry questions;
+- paired improved/worsened count;
+- inaccessible belief and information-state subblocks.
+
+Predeclared stability controls:
+- 8 accessible belief MC;
+- 8 fact controls.
+
+Interpretation thresholds were frozen before launch in the predeclaration.
+No LLM judge, embedding regrade, semantic regrade or post-hoc answer
+adjudication is allowed.
+
+Privacy boundary:
+artifacts contain only IDs, strata, normalized predictions/scores, hashes and
+compact HCL metadata. FANToM conversations/questions/gold text/prompts/full HCL
+state are not persisted.
+
+Paid paired workflow has a mandatory **zero-provider preflight**:
+1. verify HCL behavior unchanged from v0.2.1a anchor;
+2. verify FANToM selection/protocol/runner/aggregator unchanged from protocol
+   anchor;
+3. rerun deterministic protocol unit tests;
+4. redownload/hash-check official FANToM;
+5. reconstruct and prove the same frozen 32-question sample.
+
+Only after all preflight checks pass may the four 8-question shards run, with
+maximum parallelism 2. No partial model result may be used for tuning.
+
+**Current gate: FANTOM_EXT_V01_PAIRED_PILOT_PREDECLARED_READY**
