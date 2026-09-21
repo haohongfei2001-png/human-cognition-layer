@@ -10,6 +10,10 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in os.sys.path:
+    os.sys.path.insert(0, str(ROOT))
+
 from hcl.v03.answer_loop import HCLAnswerLoop
 from hcl.v03.backends import OpenAICompatibleBackend
 from scripts.inventory_fantom_external_v01 import (
@@ -22,7 +26,6 @@ from scripts.inventory_fantom_external_v01 import (
     tom_order,
 )
 
-ROOT = Path(__file__).resolve().parents[1]
 SELECTION_FILE = ROOT / "eval/fantom/selection_v01.json"
 
 MODEL = "deepseek-flash"
