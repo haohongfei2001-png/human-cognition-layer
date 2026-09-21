@@ -788,3 +788,44 @@ does not identify its raw response or exact cause; no JSON efficacy repair or
 fresh evidence is claimed. All ten attempted combinations remain consumed.
 Any subsequent behavior change must follow the project freeze/amendment and
 new synthetic/smoke gates; this closure grants no new holdout authorization.
+
+
+## Ordinal 48 bounded Decision-JSON diagnostic replay
+
+The original v0.2.1 post-repair holdout remains **8/10 INCOMPLETE**.
+This section does not reopen that holdout and does not create fresh evidence.
+
+Predeclaration:
+- `reports/ORDINAL48_DECISION_JSON_DIAGNOSTIC_PREDECLARATION.md`
+
+Fixed diagnostic setting:
+- original run: `35523303566`
+- environment ordinal: `9`
+- combo ordinal: `3`
+- expanded ordinal: `48`
+- seed: `42`
+- treatment only: `HCLSocialAgent`
+- same DeepSeek model/provider and existing credential path
+- pinned SOTOPIA commit unchanged
+- certified same-provider output-repair patch applied
+- `HCL_DECISION_DIAGNOSTICS=1`
+
+Bounded execution:
+- maximum 2 treatment episode attempts, matching the historical outer retry
+  ceiling;
+- frozen Decision Policy still has maximum 3 JSON attempts per call;
+- stop after the first successful episode;
+- no control replay;
+- no new seed, temperature, token budget, model, prompt, retry policy,
+  behavior-bearing HCL change, or fresh holdout.
+
+Allowed output is metadata only:
+- accepted / empty / no-parseable-object / transport-exception outcome;
+- response byte count and SHA256 when available;
+- episode-level success/failure and exception class;
+- no prompt, response text, transcript, persona, credential or efficacy score.
+
+A green diagnostic workflow means that bounded metadata evidence was collected;
+it does **not** mean ordinal 48 passed.
+
+**Current gate: ORDINAL48_CONSUMED_DIAGNOSTIC_REPLAY_PREDECLARED_READY**
