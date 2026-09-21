@@ -1371,3 +1371,39 @@ Only after all preflight checks pass may the four 8-question shards run, with
 maximum parallelism 2. No partial model result may be used for tuning.
 
 **Current gate: FANTOM_EXT_V01_PAIRED_PILOT_PREDECLARED_READY**
+
+
+## FANToM v0.1 first-launch execution recovery
+
+First paired launch:
+- run: `35603596148`
+- zero-provider preflight: **SUCCESS**
+- all four paired shards: **FAILED before provider/model calls**
+- common error:
+  `ModuleNotFoundError: No module named 'hcl'`
+- provider/model calls: **0**
+- predictions/paired outcomes observed: **0**
+- aggregate: failed because no shard artifacts existed.
+
+This was a script-entrypoint Python path bug. The runner imported `hcl.*`
+before adding the repository root to `sys.path`.
+
+Minimal repair:
+- commit `cf6acc22bc7c00f23e8785dfb8f1c81501b76e52`
+- only startup/import bootstrapping changed;
+- selection, prompt, scoring, model/provider, seed/temperature, HCL behavior and
+  interpretation thresholds remain unchanged.
+
+Recovery workflow:
+- protocol anchor advanced to the import-fix commit;
+- preflight now executes both runner and aggregator `--help` entrypoints before
+  any provider-backed shard can start.
+
+See:
+- `reports/FANTOM_EXTERNAL_VALIDATION_V01_EXECUTION_RECOVERY.md`
+
+Because the failed launch made zero provider calls and exposed no model outcome,
+the recovery remains the same frozen 32-question predeclared pilot. The failed
+launch remains preserved in history.
+
+**Current gate: FANTOM_EXT_V01_PAIRED_PILOT_EXECUTION_RECOVERY_READY**
