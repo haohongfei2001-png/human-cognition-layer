@@ -22,6 +22,7 @@ EXPECTED_EXPANDED_ORDINAL = 48
 SEED = 42
 MAX_EPISODE_ATTEMPTS = 2
 DIAGNOSTIC_PREFIX = "HCL_DECISION_DIAGNOSTIC "
+PROVIDER_DIAGNOSTIC_PREFIX = "HCL_PROVIDER_ATTEMPT_DIAGNOSTIC "
 
 
 def parse_diagnostic_events(stderr_text: str, *, attempt: int) -> list[dict[str, Any]]:
@@ -46,6 +47,40 @@ def parse_diagnostic_events(stderr_text: str, *, attempt: int) -> list[dict[str,
                 )
                 if key in event
             }
+            safe["episode_attempt"] = attempt
+            events.append(safe)
+    return events
+
+
+def parse_provider_events(stderr_text: str, *, attempt: int) -> list[dict[str, Any]]:
+    events: list[dict[str, Any]] = []
+    allowed = {
+        "backend_call",
+        "provider_attempt",
+        "max_tokens",
+        "temperature",
+        "outcome",
+        "finish_reason",
+        "content_bytes",
+        "content_sha256",
+        "reasoning_bytes",
+        "reasoning_sha256",
+        "refusal_bytes",
+        "refusal_sha256",
+        "prompt_tokens",
+        "completion_tokens",
+        "total_tokens",
+        "reasoning_tokens",
+    }
+    for line in stderr_text.splitlines():
+        if not line.startswith(PROVIDER_DIAGNOSTIC_PREFIX):
+            continue
+        try:
+            event = json.loads(line[len(PROVIDER_DIAGNOSTIC_PREFIX) :])
+        except json.JSONDecodeError:
+            continue
+        if isinstance(event, dict):
+            safe = {key: event[key] for key in allowed if key in event}
             safe["episode_attempt"] = attempt
             events.append(safe)
     return events
@@ -137,6 +172,9 @@ async def main() -> int:
             final_episode_outcome = "failure"
 
         events = parse_diagnostic_events(captured.getvalue(), attempt=attempt)
+        provider_events = parse_provider_events(
+            captured.getvalue(), attempt=attempt
+        )
         classification = classify_attempt(
             success=success,
             error_type=error_type,
@@ -153,6 +191,7 @@ async def main() -> int:
                 "hcl_turn_count": hcl_turn_count,
                 "classification": classification,
                 "decision_events": events,
+                "provider_events": provider_events,
             }
         )
 
@@ -163,6 +202,7 @@ async def main() -> int:
             await asyncio.sleep(5)
 
     event_count = sum(len(item["decision_events"]) for item in attempts)
+    provider_event_count = sum(len(item["provider_events"]) for item in attempts)
     summary = {
         "purpose": "consumed ordinal48 Decision JSON diagnostic replay only",
         "claim_boundary": (
@@ -183,6 +223,7 @@ async def main() -> int:
         "max_episode_attempts": MAX_EPISODE_ATTEMPTS,
         "attempts_executed": len(attempts),
         "diagnostic_event_count": event_count,
+        "provider_event_count": provider_event_count,
         "final_episode_outcome": final_episode_outcome,
         "attempts": attempts,
     }
@@ -195,6 +236,7 @@ async def main() -> int:
     public_summary = {
         "attempts_executed": len(attempts),
         "diagnostic_event_count": event_count,
+        "provider_event_count": provider_event_count,
         "final_episode_outcome": final_episode_outcome,
         "attempt_classifications": [
             {
@@ -208,6 +250,19 @@ async def main() -> int:
                 "decision_event_outcomes": [
                     event.get("outcome") for event in item["decision_events"]
                 ],
+                "provider_attempt_summary": [
+                    {
+                        "backend_call": event.get("backend_call"),
+                        "provider_attempt": event.get("provider_attempt"),
+                        "outcome": event.get("outcome"),
+                        "finish_reason": event.get("finish_reason"),
+                        "content_bytes": event.get("content_bytes"),
+                        "reasoning_bytes": event.get("reasoning_bytes"),
+                        "completion_tokens": event.get("completion_tokens"),
+                        "reasoning_tokens": event.get("reasoning_tokens"),
+                    }
+                    for event in item["provider_events"]
+                ],
             }
             for item in attempts
         ],
@@ -217,7 +272,11 @@ async def main() -> int:
     # Workflow success means diagnostic evidence was collected, not that the
     # historical episode passed. Require at least one observed Decision Policy
     # transport call so a green job cannot be mistaken for an empty diagnostic.
-    return 0 if event_count > 0 else 3
+    require_provider_events = os.getenv("HCL_PROVIDER_ATTEMPT_DIAGNOSTICS") == "1"
+    evidence_ok = event_count > 0 and (
+        provider_event_count > 0 if require_provider_events else True
+    )
+    return 0 if evidence_ok else 3
 
 
 if __name__ == "__main__":
