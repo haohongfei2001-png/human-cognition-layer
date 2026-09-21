@@ -1,0 +1,47 @@
+--- a/sotopia/generation_utils/generate.py
++++ b/sotopia/generation_utils/generate.py
+@@ -68,6 +68,7 @@
+     model_name: str,
+     use_fixed_model_version: bool = True,
+     base_url: str | None = None,
++    api_key: str | None = None,
+ ) -> str:
+     format_instructions = output_parser.get_format_instructions()
+     template = """
+@@ -90,12 +91,16 @@
+         )
+         response = await acompletion(
+             model=model_name,
++            base_url=base_url,
++            api_key=api_key,
+             response_format=response_format,
+             messages=[{"role": "user", "content": content}],
+         )
+     else:
+         response = await acompletion(
+             model=model_name,
++            base_url=base_url,
++            api_key=api_key,
+             messages=[{"role": "user", "content": content}],
+         )
+     content = response.choices[0].message.content
+@@ -295,12 +300,18 @@
+     try:
+         parsed_result = output_parser.parse(result, **parse_kwargs)
+     except Exception:
++        repair_model = bad_output_process_model or model_name
++        # Custom credentials belong only to this exact model/endpoint identity.
++        # HCL's evaluator explicitly selects the normalized original model.
++        if base_url is not None and repair_model != model_name:
++            raise ValueError("Custom output repair must use the original model/provider")
+         reformat_result = await format_bad_output(
+             result,
+             output_parser,
+-            bad_output_process_model or model_name,
++            repair_model,
+             use_fixed_model_version,
+             base_url=base_url,
++            api_key=api_key,
+         )
+         parsed_result = output_parser.parse(reformat_result, **parse_kwargs)
+ 

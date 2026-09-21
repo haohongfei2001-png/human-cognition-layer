@@ -746,4 +746,24 @@ smoke-tested freeze anchor
 The launch is a complete paired benchmark execution on the pinned official
 SOTOPIA dataset. No partial result may be used for tuning.
 
-**Current gate: V021_POST_REPAIR_UNUSED_COMBO_HOLDOUT_RUNNING**
+**Current gate: V021_POST_REPAIR_HOLDOUT_INCOMPLETE — 8/10 paired settings completed; 2 failed.**
+
+Run `35523303566` is completed/failure, not running. Ordinal 48 failed with
+`HCL decision policy returned no valid JSON after 3 attempts`; ordinal 88 failed
+with an OpenAI missing-key AuthenticationError. The aggregate failed because the
+predeclared complete 10-pair set was not produced. These are execution failures,
+not an efficacy verdict. All ten attempted combinations are consumed diagnostic
+history; no later replay may call this slice fresh.
+
+A same-provider output-repair plumbing fix is under isolated certification.
+It explicitly binds evaluator repair to the original DeepSeek model/endpoint,
+forwards that endpoint and its existing custom key, and rejects alternate repair
+identities before forwarding custom credentials. No new key, seed change,
+additional retry, HCL behavior change or holdout rerun is included. The earlier
+forwarding-only candidate is superseded because it missed the upstream OpenAI
+default model. See `reports/SOTOPIA_V021_OUTPUT_REPAIR_CLOSURE.md`.
+
+Next: complete no-provider-call integration certification and publish this
+plumbing repair. Preserve the original 8/10 incomplete holdout; ordinal 48 and
+remaining efficacy certification are unresolved, not PASS. No new holdout or
+freshness declaration is opened by this repair.

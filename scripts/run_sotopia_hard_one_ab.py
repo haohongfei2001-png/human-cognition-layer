@@ -132,6 +132,8 @@ async def evaluate_transcript(messages: list[tuple[str, Any]]) -> list[dict[str,
     response_cls = EvaluationForAgents[SotopiaDimensions]
     response = await agenerate(
         model_name=MODEL,
+        # Reformat with the same provider/model, never the upstream OpenAI default.
+        bad_output_process_model=MODEL.split("@", 1)[0].replace("custom/", "openai/", 1),
         template="""{history}
             Based on previous interactions, evaluate how well participants achieve their goals.
             {agent_instruction}
