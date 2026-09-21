@@ -50,6 +50,8 @@ jobs:
           assert data["selection"]["total_selected"] == 32
           assert len(data["selected"]) == 32
           assert len({x["question_id"] for x in data["selected"]}) == 32
+          assert len({x["conversation_id"] for x in data["selected"]}) == 32
+          assert data["selection"]["conversation_disjoint"] is True
           assert "prediction" not in path.read_text(encoding="utf-8").lower()
           PY
 
