@@ -1,0 +1,101 @@
+name: HCL Info-State Output-Interface Audit v0.1
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_INFO_STATE_OUTPUT_AUDIT_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+env:
+  HCL_BEHAVIOR_ANCHOR: ce36d7e6f911910f97437c23455dee33e0e7bc82
+  AUDIT_PROTOCOL_ANCHOR: a1775b5ee6002165776b544aa65ae0fee4a0c9f3
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify frozen HCL cognition/answer behavior
+        shell: bash
+        run: |
+          git diff --exit-code "$HCL_BEHAVIOR_ANCHOR"..HEAD --             hcl/v03/answer_loop.py             hcl/v03/backends.py             hcl/v03/state_schema.json             hcl/v03/FROZEN_STATE_SEMANTICS.md
+
+      - name: Verify frozen audit protocol
+        shell: bash
+        run: |
+          git diff --exit-code "$AUDIT_PROTOCOL_ANCHOR"..HEAD --             reports/HCL_INFO_STATE_OUTPUT_INTERFACE_AUDIT_V01.md             eval/answer_loop/info_state_output_interface_v01.json             scripts/run_info_state_output_interface_audit_v01.py
+
+      - name: Install dependency
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Static and fixture preflight
+        shell: bash
+        run: |
+          python -m py_compile scripts/run_info_state_output_interface_audit_v01.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          p = Path("eval/answer_loop/info_state_output_interface_v01.json")
+          data = json.loads(p.read_text(encoding="utf-8"))
+          cases = data["cases"]
+          assert len(cases) == 16
+          assert len({x["id"] for x in cases}) == 16
+          assert sum(x["family"] == "full_loop" for x in cases) == 8
+          assert sum(x["family"] == "forced_revision" for x in cases) == 8
+          assert all(x["format"] in {"binary", "ab"} for x in cases)
+          assert all(x["gold"] in {"yes", "no", "A", "B"} for x in cases)
+          PY
+          python scripts/run_info_state_output_interface_audit_v01.py --help >/dev/null
+
+      - name: Run frozen independent synthetic audit
+        shell: bash
+        run: |
+          python scripts/run_info_state_output_interface_audit_v01.py
+
+      - name: Verify audit artifact structure
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("artifacts/hcl-info-state-output-interface-v01")
+          summary = json.loads((root / "summary.json").read_text(encoding="utf-8"))
+          rows = [
+              json.loads(line)
+              for line in (root / "results.jsonl").read_text(encoding="utf-8").splitlines()
+              if line.strip()
+          ]
+          assert summary["fixture_count"] == 16
+          assert len(rows) == 16
+          assert summary["full_loop"]["n"] == 8
+          assert summary["forced_revision"]["n"] == 8
+          assert isinstance(summary["abstract_interface_defect_established"], bool)
+          PY
+
+      - name: Upload raw audit evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-info-state-output-interface-v01-${{ github.run_id }}
+          path: artifacts/hcl-info-state-output-interface-v01/
+          if-no-files-found: error
+          retention-days: 30
