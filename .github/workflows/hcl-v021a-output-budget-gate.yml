@@ -62,8 +62,11 @@ jobs:
       - name: Install dependencies
         shell: bash
         run: |
+          git clone --quiet https://github.com/sotopia-lab/sotopia.git .cache/sotopia
+          git -C .cache/sotopia checkout --quiet --detach a0aaafb440e570e5e61b7c44a44e5e417c545383
           python -m pip install --upgrade pip
-          python -m pip install openai
+          python -m pip install -e .cache/sotopia
+          python -m pip install             "pydantic==2.9.2"             "redis-om==0.3.2"             "redis==5.1.1"             "openai==2.14.0"             "litellm==1.80.11"
 
       - name: Static compile
         shell: bash
