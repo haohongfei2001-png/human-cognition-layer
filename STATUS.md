@@ -1237,3 +1237,37 @@ Until then:
 2. do not start another holdout automatically;
 3. do not change the 8192 budget or retry policy;
 4. preserve the original 8/10 incomplete holdout verdict.
+
+
+## FANToM external validation v0.1 authorization
+
+Owner authorized the next independent external validation stage.
+
+Selected external source:
+- benchmark: FANToM
+- repository: `skywalker023/fantom`
+- pinned commit: `1cae6fa30f5ba04ca0fff5f5716b5ba7055e2e85`
+- official dataset archive SHA-256:
+  `1d08dfa0ea474c7f83b9bc7e3a7b466eab25194043489dd618b4c5223e1253a4`
+
+Rationale:
+- directly tests belief, answerability and information access under
+  multi-party information asymmetry;
+- includes a no-false-belief control condition;
+- does not reuse the consumed SOTOPIA-Hard environment templates.
+
+ToMATO was rejected for this gate after source audit because its generation
+pipeline uses SOTOPIA agents/environments. EQ-Bench 4 is deferred because its
+official methodology introduces additional commercial persona/judge provider
+credential and cost boundaries.
+
+Current execution is **inventory only**:
+- zero provider/model calls;
+- fixed hash salt `HCL-FANTOM-EXT-V01-20260921`;
+- deterministic 32-question target across predeclared strata;
+- no model result is viewed before exact question IDs are committed.
+
+See:
+- `reports/FANTOM_EXTERNAL_VALIDATION_V01_PLAN.md`
+
+**Current gate: FANTOM_EXT_V01_ZERO_PROVIDER_INVENTORY_RUNNING**
