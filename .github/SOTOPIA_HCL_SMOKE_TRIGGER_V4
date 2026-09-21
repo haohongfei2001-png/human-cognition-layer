@@ -1,1 +1,2 @@
-run once: validate Decision Policy v0.2.1 verification stopping + Action Checker integration in SOTOPIA
+trigger: v0.2.1a-output-budget-smoke
+behavior_anchor: ce36d7e6f911910f97437c23455dee33e0e7bc82
