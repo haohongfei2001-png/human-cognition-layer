@@ -1781,3 +1781,48 @@ Next canonical work:
 5. repeat existing state/answer-loop regressions before consuming any new
    external benchmark evidence;
 6. do not use FANToM v0.1/v0.2 content as training/tuning data.
+
+
+## HCL independent info-state / output-interface audit v0.1 predeclaration
+
+Triggered by FANToM v0.2 mixed result:
+- belief subblock net +1;
+- information-state subblock net -1;
+- one HCL-worsened answerability item had no parser-valid yes/no verdict after
+  both revision passes.
+
+Consumed FANToM content is not used for tuning.
+
+Independent synthetic audit:
+- predeclaration:
+  `reports/HCL_INFO_STATE_OUTPUT_INTERFACE_AUDIT_V01.md`
+- fixtures:
+  `eval/answer_loop/info_state_output_interface_v01.json`
+- runner:
+  `scripts/run_info_state_output_interface_audit_v01.py`
+- audit protocol anchor:
+  `a1775b5ee6002165776b544aa65ae0fee4a0c9f3`
+
+Fixture design:
+- 16 total;
+- 8 complete HCL answer-loop cases;
+- 8 checker-triggered forced-revision cases;
+- binary yes/no and A/B interfaces;
+- independent domains unrelated to FANToM/SOTOPIA.
+
+Frozen HCL under audit:
+- HCL v0.3 state semantics unchanged;
+- answer loop unchanged;
+- provider/model/seed unchanged.
+
+Raw audit reports separately:
+- semantic accuracy;
+- parser-valid rate;
+- exact-format rate;
+- forced-revision checker hit rate;
+- final-check PASS rate.
+
+A CI SUCCESS means the audit executed and evidence was captured. It does not
+mean the current HCL passed the interface audit.
+
+**Current gate: INFO_STATE_OUTPUT_INTERFACE_AUDIT_V01_PREDECLARED_READY**
