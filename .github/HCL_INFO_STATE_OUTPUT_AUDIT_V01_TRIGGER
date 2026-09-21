@@ -1,0 +1,5 @@
+trigger: info-state-output-interface-audit-v01
+hcl_behavior_anchor: ce36d7e6f911910f97437c23455dee33e0e7bc82
+audit_protocol_anchor: a1775b5ee6002165776b544aa65ae0fee4a0c9f3
+fixtures: 16
+external_benchmark_calls: 0
