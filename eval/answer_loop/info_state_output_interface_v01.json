@@ -1,0 +1,126 @@
+{
+  "suite": "HCL info-state/output-interface audit v0.1",
+  "principle": "Independent synthetic fixtures; no FANToM/SOTOPIA text or gold reused.",
+  "cases": [
+    {
+      "id": "io01_full_binary_direct_access",
+      "family": "full_loop",
+      "format": "binary",
+      "gold": "yes",
+      "input": "In a laboratory, Priya is standing beside the supervisor when the supervisor clearly says, 'The freezer access code is 4821.' Priya hears the statement. Does Priya know the freezer access code? Return exactly yes or no."
+    },
+    {
+      "id": "io02_full_binary_missing_access",
+      "family": "full_loop",
+      "format": "binary",
+      "gold": "no",
+      "input": "Damon leaves the office at 2 PM. At 3 PM a memo is posted inside the office saying tomorrow's briefing moved to 9 AM. The story explicitly says Damon does not see the memo and receives no message about it. Does Damon know that the briefing moved to 9 AM? Return exactly yes or no."
+    },
+    {
+      "id": "io03_full_binary_false_belief",
+      "family": "full_loop",
+      "format": "binary",
+      "gold": "yes",
+      "input": "Lena sees a museum guide place the blue key in cabinet A, then Lena leaves. While she is away, the guide moves the key to cabinet B. Lena does not see the move and gets no update. Does Lena still believe the blue key is in cabinet A? Return exactly yes or no."
+    },
+    {
+      "id": "io04_full_binary_second_order",
+      "family": "full_loop",
+      "format": "binary",
+      "gold": "yes",
+      "input": "Omar watches Jules put a token in drawer 1. Omar then sees Jules leave the room. After Jules leaves, Omar watches another person move the token to drawer 2 and also knows Jules receives no message about the move. Does Omar think Jules still believes the token is in drawer 1? Return exactly yes or no."
+    },
+    {
+      "id": "io05_full_binary_answerability",
+      "family": "full_loop",
+      "format": "binary",
+      "gold": "no",
+      "input": "A conference session was originally scheduled for Room 3. After Tessa leaves the venue, organizers move the session to Room 7. The story explicitly says Tessa neither sees the change nor receives any update. Based only on the information available to Tessa, can she correctly answer which room the session is now in? Return exactly yes or no."
+    },
+    {
+      "id": "io06_full_binary_information_access",
+      "family": "full_loop",
+      "format": "binary",
+      "gold": "yes",
+      "input": "During equipment checkout, the technician says aloud, 'The spare battery is in locker 12.' Marco is present, listening, and the story says he hears the technician. Does Marco have access to the information that the spare battery is in locker 12? Return exactly yes or no."
+    },
+    {
+      "id": "io07_full_ab_false_belief",
+      "family": "full_loop",
+      "format": "ab",
+      "gold": "B",
+      "input": "Nadia is told by a colleague that the training room is 204. The colleague is mistaken; the actual room is 205. Nadia has no other source of information. Which room does Nadia believe the training is in? [A] 205 [B] 204. Return exactly [A] or [B]."
+    },
+    {
+      "id": "io08_full_ab_uncertain_access",
+      "family": "full_loop",
+      "format": "ab",
+      "gold": "B",
+      "input": "A library posts a notice while Mei is away. The story does not say whether Mei later sees the notice, receives a message about it, or remains unaware. Which statement is justified? [A] Mei definitely knows the notice's content. [B] Mei's knowledge cannot be established from the given information. Return exactly [A] or [B]."
+    },
+    {
+      "id": "io09_revision_binary_wrong_access",
+      "family": "forced_revision",
+      "format": "binary",
+      "gold": "no",
+      "input": "A package rerouting message appears on a terminal after Ivo leaves the warehouse. The story explicitly says Ivo never sees the terminal and receives no later message. Does Ivo know the package was rerouted? Return exactly yes or no.",
+      "candidate": "Yes, because the rerouting message exists in the warehouse system."
+    },
+    {
+      "id": "io10_revision_binary_overuncertain",
+      "family": "forced_revision",
+      "format": "binary",
+      "gold": "yes",
+      "input": "A teacher directly tells Sora, face to face, 'Tomorrow's class starts at 10 AM,' and Sora acknowledges hearing it. Does Sora know that tomorrow's class starts at 10 AM? Return exactly yes or no.",
+      "candidate": "It is hard to know; perhaps Sora heard it, but perhaps not."
+    },
+    {
+      "id": "io11_revision_binary_false_belief",
+      "family": "forced_revision",
+      "format": "binary",
+      "gold": "yes",
+      "input": "Kai sees a notebook placed on shelf X and then leaves. The notebook is moved to shelf Y while Kai is absent, and Kai receives no update. Does Kai still believe the notebook is on shelf X? Return exactly yes or no.",
+      "candidate": "No, because the notebook is actually on shelf Y now."
+    },
+    {
+      "id": "io12_revision_binary_second_order",
+      "family": "forced_revision",
+      "format": "binary",
+      "gold": "no",
+      "input": "Rina knows that a badge was moved, but the story does not say whether Rina knows if Cole witnessed the move or received a later update. Can Rina determine with certainty what Cole believes about the badge's location? Return exactly yes or no.",
+      "candidate": "Yes. Rina can be certain that Cole still believes the old location."
+    },
+    {
+      "id": "io13_revision_binary_answerability",
+      "family": "forced_revision",
+      "format": "binary",
+      "gold": "no",
+      "input": "The final exam room changes after Malik leaves campus. Malik neither sees the new posting nor receives a message. Based only on Malik's available information, can Malik correctly answer the current exam room? Return exactly yes or no.",
+      "candidate": "Yes, because the school has already published the new room."
+    },
+    {
+      "id": "io14_revision_binary_info_access",
+      "family": "forced_revision",
+      "format": "binary",
+      "gold": "yes",
+      "input": "A librarian tells Ana directly, 'The reserved atlas is behind the front desk.' Ana hears the statement clearly. Does Ana have access to the information about where the reserved atlas is? Return exactly yes or no.",
+      "candidate": "No. We cannot be certain Ana has that information."
+    },
+    {
+      "id": "io15_revision_ab_wrong_belief",
+      "family": "forced_revision",
+      "format": "ab",
+      "gold": "B",
+      "input": "Eli is told that the interview begins at 2 PM, but the true time is 1 PM. Eli never sees the true schedule and receives no correction. What time does Eli believe the interview begins? [A] 1 PM [B] 2 PM. Return exactly [A] or [B].",
+      "candidate": "[A]"
+    },
+    {
+      "id": "io16_revision_ab_uncertainty",
+      "family": "forced_revision",
+      "format": "ab",
+      "gold": "B",
+      "input": "A notice is posted while Noor is absent. The story gives no evidence about whether Noor later sees it or is told about it. Which conclusion is supported? [A] Noor definitely knows the notice. [B] Noor's knowledge is not established by the story. Return exactly [A] or [B].",
+      "candidate": "[A] Noor must know because the notice was posted publicly."
+    }
+  ]
+}
