@@ -32,8 +32,8 @@ TEMPERATURE = 0.0
 DIRECT_MAX_TOKENS = 4096
 
 CONTROL_SYSTEM = (
-    "This is a theory-of-mind test. Answer only from the supplied conversation "
-    "and follow the requested output format exactly. Do not add an explanation."
+    "Answer the user's benchmark request directly. Follow its requested output "
+    "format exactly and do not add an explanation."
 )
 
 
