@@ -48,7 +48,7 @@ def load_dataframe(archive: bytes) -> pd.DataFrame:
         members = [
             member
             for member in tar.getmembers()
-            if member.isfile() and member.name.endswith("/fantom_v1.json")
+            if member.isfile() and Path(member.name).name == "fantom_v1.json"
         ]
         if len(members) != 1:
             raise RuntimeError(
