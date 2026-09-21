@@ -1407,3 +1407,121 @@ the recovery remains the same frozen 32-question predeclared pilot. The failed
 launch remains preserved in history.
 
 **Current gate: FANTOM_EXT_V01_PAIRED_PILOT_EXECUTION_RECOVERY_READY**
+
+
+## FANToM external validation v0.1 final closure
+
+External source:
+- FANToM
+- pinned upstream commit:
+  `1cae6fa30f5ba04ca0fff5f5716b5ba7055e2e85`
+- official dataset SHA-256:
+  `1d08dfa0ea474c7f83b9bc7e3a7b466eab25194043489dd618b4c5223e1253a4`
+
+Frozen sample:
+- **32 questions**
+- **32 distinct FANToM conversations**
+- exact IDs frozen before provider calls;
+- short-context input;
+- deterministic belief option orientation;
+- no LLM judge / embedding regrade / post-hoc semantic adjudication.
+
+Canonical paired run:
+- `35603955200`
+- **SUCCESS**
+- all 4 paired shards complete;
+- aggregate complete;
+- aggregate artifact: `10641159030`
+- artifact SHA-256:
+  `80b08aff9a4ea6ca996d5ca674333b18bd392a98c9a0b472a187ef09646210aa`
+
+Execution recovery history:
+- first launch `35603596148` failed all shards at
+  `ModuleNotFoundError: No module named 'hcl'`;
+- failure occurred before any provider/model call;
+- zero predictions/outcomes were observed;
+- minimal import-path repair:
+  `cf6acc22bc7c00f23e8785dfb8f1c81501b76e52`;
+- sample/prompt/scoring/model/HCL behavior were unchanged;
+- recovery preflight added real script-entrypoint startup checks.
+
+Primary information-asymmetry block:
+- n = **16**
+- control: **14/16 = 87.5%**
+- HCL: **14/16 = 87.5%**
+- improved: **0**
+- worsened: **0**
+- both correct: 14
+- both wrong: 2
+- net paired gain: **0**
+
+Primary subblocks:
+- inaccessible belief:
+  - control **6/8 = 75%**
+  - HCL **6/8 = 75%**
+  - net paired gain 0
+- inaccessible answerability + information accessibility:
+  - control **8/8 = 100%**
+  - HCL **8/8 = 100%**
+  - net paired gain 0
+
+Stability controls:
+- accessible belief:
+  - control **8/8 = 100%**
+  - HCL **8/8 = 100%**
+  - net paired gain 0
+- fact control:
+  - control mean token-F1 **0.3005864506**
+  - HCL mean token-F1 **0.3156938487**
+  - paired mean delta **+0.0151073982**
+
+Across all 24 categorical questions:
+- control-wrong / HCL-correct: **0**
+- control-correct / HCL-wrong: **0**
+
+The two primary belief misses were shared by both arms:
+- one inaccessible first-order belief item;
+- one inaccessible second-order belief item.
+
+The consumed FANToM items must not be used for tuning.
+
+Predeclared interpretation:
+- positive required primary net paired gain >= +2 plus stability conditions;
+- negative required primary net < 0 or a predeclared control regression;
+- observed primary net = 0 with no control regression.
+
+Therefore:
+
+**FANToM v0.1 interpretation: MIXED / INCONCLUSIVE**
+
+See:
+- `reports/FANTOM_EXTERNAL_VALIDATION_V01_PREDECLARATION.md`
+- `reports/FANTOM_EXTERNAL_VALIDATION_V01_EXECUTION_RECOVERY.md`
+- `reports/FANTOM_EXTERNAL_VALIDATION_V01_CLOSURE.md`
+
+Claim boundary:
+- this is bounded independent external cognition-transfer evidence;
+- it shows clean transfer and no detected categorical regression;
+- it does **not** show categorical efficacy gain;
+- it is not an official FANToM leaderboard result;
+- it is not full-context FANToM;
+- it is not interactive Decision Policy efficacy;
+- it is not cross-base transfer;
+- it is not HCL 1.0 certification.
+
+Research implication:
+the sample is largely ceiling/identity-limited against direct DeepSeek.
+Information-state and accessible-belief strata are saturated, while the two
+inaccessible-belief errors are identical in both arms.
+
+Do not tune HCL against these consumed failures.
+
+**Current gate: FANTOM_EXT_V01_MIXED_REQUIRES_NEXT_VALIDATION_DECISION**
+
+Next work must be separately predeclared and should increase discriminative
+power without reusing these consumed questions. Candidate directions include:
+1. a harder independent benchmark;
+2. FANToM full-context on completely disjoint unused conversations;
+3. cross-base transfer where the base model has more headroom for HCL to help.
+
+No next benchmark is automatically authorized by this closure.
