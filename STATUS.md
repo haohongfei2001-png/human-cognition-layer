@@ -1568,3 +1568,95 @@ See:
 - `reports/FANTOM_EXTERNAL_VALIDATION_V02_PLAN.md`
 
 **Current gate: FANTOM_EXT_V02_ZERO_PROVIDER_INVENTORY_RUNNING**
+
+
+## FANToM external validation v0.2 full-context predeclaration closure
+
+Zero-provider inventory:
+- run: `35608769203`
+- result: **SUCCESS**
+- artifact: `10642254950`
+- artifact SHA-256:
+  `99ca92874cbc5cbf1640829e5155ac21a447a0c8dcfcf640bb9d883f9a8f8afd`
+- provider/model calls: **0**
+- v0.1 conversations excluded: **32**
+- final v0.2 sample: **48 questions / 48 distinct conversations**
+- v0.1 conversation overlap: **0**
+
+Frozen selection:
+- `eval/fantom/selection_v02.json`
+- salt: `HCL-FANTOM-FULL-V02-20260921`
+- context: **full**
+- exact IDs and belief A/B orientation committed before provider calls.
+
+Strata:
+- 8 inaccessible first-order belief MC
+- 8 inaccessible second-order belief MC
+- 8 full-context inaccessible answerability binary
+- 8 full-context inaccessible information-accessibility binary
+- 4 accessible first-order belief MC
+- 4 accessible second-order belief MC
+- 8 fact controls
+
+Frozen paired protocol:
+- `reports/FANTOM_EXTERNAL_VALIDATION_V02_PREDECLARATION.md`
+- protocol anchor:
+  `7d0f3f2fedb80e367ae5cfd0a1fcdf7a71dfaa4a`
+- HCL behavior anchor:
+  `ce36d7e6f911910f97437c23455dee33e0e7bc82`
+
+Common:
+- DeepSeek `deepseek-flash`
+- existing endpoint/key
+- seed 42
+- temperature 0
+- same full-context user benchmark prompt in both arms
+
+Control:
+- direct DeepSeek
+
+Treatment:
+- frozen HCL v0.3 answer loop
+- state budget 8192
+- answer/check budget 4096
+- HCL always-on
+- Decision Policy / Action Checker excluded because this is static cognition QA
+
+Primary:
+- 32 questions
+- 16 inaccessible belief
+- 16 information-state
+
+Controls:
+- 8 accessible belief
+- 8 fact
+
+Predeclared positive:
+- primary net paired gain >= +3
+- no primary-subblock accuracy regression
+- accessible belief net >= -1
+- fact token-F1 delta >= -0.05
+
+Predeclared negative:
+- primary net < 0 OR
+- accessible belief net <= -2 OR
+- fact token-F1 delta < -0.05
+
+Otherwise:
+- MIXED / INCONCLUSIVE
+
+Formal workflow requires zero-provider preflight before paid shards:
+1. HCL behavior diff = zero from behavior anchor;
+2. v0.2 selection/protocol/runner/aggregator/tests diff = zero from protocol anchor;
+3. unit tests + runner/aggregator entrypoint smoke;
+4. official FANToM archive hash verification;
+5. deterministic reconstruction of the same 48 IDs;
+6. explicit proof of v0.1 conversation overlap = 0.
+
+Execution:
+- 6 deterministic shards × 8 questions
+- max parallelism 2
+- no partial outcome inspection/tuning
+- aggregate only after all 48 complete.
+
+**Current gate: FANTOM_EXT_V02_FULL_CONTEXT_PAIRED_PREDECLARED_READY**
