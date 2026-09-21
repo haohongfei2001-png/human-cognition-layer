@@ -5,11 +5,142 @@ import unittest
 from unittest.mock import Mock, patch
 from types import SimpleNamespace
 
+from hcl.v03.backends import OpenAICompatibleBackend
 from hcl.v03.decision_policy import HCLDecisionPolicy
-from scripts.hcl_decision_diagnostics import DecisionDiagnosticBackend
+from scripts.hcl_decision_diagnostics import (
+    DecisionDiagnosticBackend,
+    ProviderAttemptDiagnosticBackend,
+)
 
 
 class Diagnostics(unittest.TestCase):
+
+    @staticmethod
+    def _provider_response(
+        content,
+        *,
+        finish_reason="stop",
+        reasoning_content=None,
+        prompt_tokens=100,
+        completion_tokens=20,
+        reasoning_tokens=None,
+    ):
+        message = SimpleNamespace(
+            content=content,
+            reasoning_content=reasoning_content,
+            refusal=None,
+            model_extra={},
+        )
+        choice = SimpleNamespace(message=message, finish_reason=finish_reason)
+        details = SimpleNamespace(reasoning_tokens=reasoning_tokens)
+        usage = SimpleNamespace(
+            prompt_tokens=prompt_tokens,
+            completion_tokens=completion_tokens,
+            total_tokens=prompt_tokens + completion_tokens,
+            completion_tokens_details=details,
+        )
+        return SimpleNamespace(choices=[choice], usage=usage)
+
+    @staticmethod
+    def _backend_with_responses(responses):
+        class FakeCompletions:
+            def __init__(self, items):
+                self.items = list(items)
+                self.calls = []
+
+            def create(self, **kwargs):
+                self.calls.append(kwargs)
+                item = self.items.pop(0)
+                if isinstance(item, Exception):
+                    raise item
+                return item
+
+        completions = FakeCompletions(responses)
+        backend = object.__new__(OpenAICompatibleBackend)
+        backend.client = SimpleNamespace(
+            chat=SimpleNamespace(completions=completions)
+        )
+        backend.model = "deepseek-flash"
+        backend.seed = 42
+        return backend, completions
+
+    def test_provider_attempt_wrapper_matches_frozen_retry_and_return(self):
+        responses = [
+            self._provider_response("", finish_reason="length", reasoning_content="PRIVATE_REASONING_SENTINEL", completion_tokens=4096, reasoning_tokens=4096),
+            self._provider_response("", finish_reason="stop"),
+            self._provider_response('{"ok":true}', finish_reason="stop"),
+        ]
+        plain, plain_calls = self._backend_with_responses(responses)
+        plain_result = plain.complete(
+            [{"role": "user", "content": "PRIVATE_PROMPT_SENTINEL"}],
+            max_tokens=4096,
+            temperature=0.0,
+        )
+
+        wrapped_responses = [
+            self._provider_response("", finish_reason="length", reasoning_content="PRIVATE_REASONING_SENTINEL", completion_tokens=4096, reasoning_tokens=4096),
+            self._provider_response("", finish_reason="stop"),
+            self._provider_response('{"ok":true}', finish_reason="stop"),
+        ]
+        base, wrapped_calls = self._backend_with_responses(wrapped_responses)
+        events = []
+        wrapped = ProviderAttemptDiagnosticBackend(base, events.append)
+        wrapped_result = wrapped.complete(
+            [{"role": "user", "content": "PRIVATE_PROMPT_SENTINEL"}],
+            max_tokens=4096,
+            temperature=0.0,
+        )
+
+        self.assertEqual(wrapped_result, plain_result)
+        self.assertEqual(wrapped_calls.calls, plain_calls.calls)
+        self.assertEqual(len(events), 3)
+        self.assertEqual(
+            [e["outcome"] for e in events],
+            ["content_empty", "content_empty", "content_nonempty"],
+        )
+        self.assertEqual(events[0]["finish_reason"], "length")
+        self.assertEqual(events[0]["reasoning_bytes"], len("PRIVATE_REASONING_SENTINEL".encode()))
+        self.assertEqual(events[0]["reasoning_tokens"], 4096)
+        self.assertNotIn("SENTINEL", json.dumps(events))
+        self.assertNotIn("messages", json.dumps(events).lower())
+
+    def test_provider_attempt_wrapper_preserves_four_empty_limit(self):
+        responses = [self._provider_response("") for _ in range(4)]
+        base, calls = self._backend_with_responses(responses)
+        events = []
+        wrapped = ProviderAttemptDiagnosticBackend(base, events.append)
+        self.assertEqual(wrapped.complete([], max_tokens=4096), "")
+        self.assertEqual(len(calls.calls), 4)
+        self.assertEqual(len(events), 4)
+        self.assertTrue(all(e["outcome"] == "content_empty" for e in events))
+
+    def test_provider_attempt_wrapper_preserves_exception_identity(self):
+        failure = RuntimeError("PRIVATE_PROVIDER_ERROR_SENTINEL")
+        base, calls = self._backend_with_responses([failure])
+        events = []
+        wrapped = ProviderAttemptDiagnosticBackend(base, events.append)
+        with self.assertRaises(RuntimeError) as caught:
+            wrapped.complete([], max_tokens=4096)
+        self.assertIs(caught.exception, failure)
+        self.assertEqual(len(calls.calls), 1)
+        self.assertEqual(events, [{
+            "backend_call": 1,
+            "provider_attempt": 1,
+            "max_tokens": 4096,
+            "temperature": 0.0,
+            "outcome": "transport_exception",
+        }])
+        self.assertNotIn("SENTINEL", json.dumps(events))
+
+    def test_provider_attempt_bad_sink_is_inert(self):
+        def broken(_):
+            raise OSError("synthetic sink failure")
+        response = self._provider_response('{"ok":true}')
+        base, calls = self._backend_with_responses([response])
+        wrapped = ProviderAttemptDiagnosticBackend(base, broken)
+        self.assertEqual(wrapped.complete([], max_tokens=10), '{"ok":true}')
+        self.assertEqual(len(calls.calls), 1)
+
     def test_exact_forwarding_return_identity_and_no_content_in_event(self):
         raw = '{"chosen_action_intent":"PRIVATE_SENTINEL"}'
         backend = Mock(); backend.complete.return_value = raw
@@ -71,16 +202,58 @@ class Diagnostics(unittest.TestCase):
                 self.action_checker = SimpleNamespace(backend=backend)
         class FakeDirect:
             def __init__(self, **kwargs): self.direct_backend = SimpleNamespace(seed=None)
-        for value in ('', '1'):
-            with self.subTest(value=value), patch.dict('os.environ',{'HCL_DECISION_DIAGNOSTICS':value}), patch.object(runner,'HCLSocialAgent',FakeHCL), patch.object(runner,'DirectSocialAgent',FakeDirect), patch.object(runner.AgentProfile,'get',return_value=object()):
-                agents = runner.make_agents(agent_ids=['a','b'],tested_index=0,use_hcl=True,seed=42)
+
+        cases = [
+            ("", "", "plain"),
+            ("1", "", "decision"),
+            ("", "1", "provider"),
+            ("1", "1", "both"),
+        ]
+        for decision_value, provider_value, expected in cases:
+            with (
+                self.subTest(expected=expected),
+                patch.dict(
+                    "os.environ",
+                    {
+                        "HCL_DECISION_DIAGNOSTICS": decision_value,
+                        "HCL_PROVIDER_ATTEMPT_DIAGNOSTICS": provider_value,
+                    },
+                ),
+                patch.object(runner, "HCLSocialAgent", FakeHCL),
+                patch.object(runner, "DirectSocialAgent", FakeDirect),
+                patch.object(runner.AgentProfile, "get", return_value=object()),
+            ):
+                agents = runner.make_agents(
+                    agent_ids=["a", "b"],
+                    tested_index=0,
+                    use_hcl=True,
+                    seed=42,
+                )
                 agent = agents[0]
-                self.assertEqual(agent.hcl_loop.backend.seed,42)
-                self.assertIs(agent.hcl_loop.backend,agent.action_checker.backend)
-                if value == '1':
-                    self.assertIsInstance(agent.decision_policy.backend,DecisionDiagnosticBackend)
-                    self.assertIs(agent.decision_policy.backend.backend,agent.hcl_loop.backend)
-                else: self.assertIs(agent.decision_policy.backend,agent.hcl_loop.backend)
-                self.assertEqual(agents[1].direct_backend.seed,42)
+                self.assertEqual(agent.hcl_loop.backend.seed, 42)
+                self.assertIs(agent.hcl_loop.backend, agent.action_checker.backend)
+
+                transport = agent.decision_policy.backend
+                if expected == "plain":
+                    self.assertIs(transport, agent.hcl_loop.backend)
+                elif expected == "decision":
+                    self.assertIsInstance(transport, DecisionDiagnosticBackend)
+                    self.assertIs(transport.backend, agent.hcl_loop.backend)
+                elif expected == "provider":
+                    self.assertIsInstance(
+                        transport, ProviderAttemptDiagnosticBackend
+                    )
+                    self.assertIs(transport.backend, agent.hcl_loop.backend)
+                else:
+                    self.assertIsInstance(transport, DecisionDiagnosticBackend)
+                    self.assertIsInstance(
+                        transport.backend, ProviderAttemptDiagnosticBackend
+                    )
+                    self.assertIs(
+                        transport.backend.backend,
+                        agent.hcl_loop.backend,
+                    )
+
+                self.assertEqual(agents[1].direct_backend.seed, 42)
 
 if __name__ == '__main__': unittest.main()
