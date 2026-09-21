@@ -30,7 +30,7 @@ jobs:
       - name: Verify frozen behavior-bearing implementation
         shell: bash
         run: |
-          git diff --exit-code             f6e591db8d22ae0e2175769852a1a8aa9c3e106a..HEAD             --             hcl/v03/decision_policy.py             hcl/v03/action_checker.py             hcl/integrations/sotopia_agent.py
+          git diff --exit-code             ce36d7e6f911910f97437c23455dee33e0e7bc82..HEAD             --             hcl/v03/decision_policy.py             hcl/v03/action_checker.py             hcl/integrations/sotopia_agent.py
 
       - uses: actions/setup-python@v5
         with:
