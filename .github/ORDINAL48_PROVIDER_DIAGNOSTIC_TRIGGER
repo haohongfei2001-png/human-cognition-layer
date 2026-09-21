@@ -1,6 +1,7 @@
-trigger: ordinal48-consumed-provider-attempt-diagnostic
+trigger: ordinal48-consumed-v0.2.1a-confirmation
 expanded_ordinal: 48
 environment_ordinal: 9
 combo_ordinal: 3
 seed: 42
+behavior_anchor: ce36d7e6f911910f97437c23455dee33e0e7bc82
 freshness: consumed-diagnostic-only
