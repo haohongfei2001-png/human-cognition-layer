@@ -1525,3 +1525,46 @@ power without reusing these consumed questions. Candidate directions include:
 3. cross-base transfer where the base model has more headroom for HCL to help.
 
 No next benchmark is automatically authorized by this closure.
+
+
+## FANToM external validation v0.2 full-context authorization
+
+Owner authorized continuation after FANToM v0.1 closed MIXED/INCONCLUSIVE.
+
+v0.2 objective:
+increase discriminative power without reusing any consumed v0.1 conversation.
+
+Fixed source:
+- FANToM upstream commit:
+  `1cae6fa30f5ba04ca0fff5f5716b5ba7055e2e85`
+- official dataset SHA-256:
+  `1d08dfa0ea474c7f83b9bc7e3a7b466eab25194043489dd618b4c5223e1253a4`
+
+Inventory protocol:
+- full-context input;
+- fixed salt:
+  `HCL-FANTOM-FULL-V02-20260921`;
+- exclude every conversation in `eval/fantom/selection_v01.json`;
+- enforce global conversation-level disjointness;
+- follow official FANToM full-context accessibility logic for answerability and
+  information-accessibility binary families;
+- zero provider/model calls before exact sample freeze.
+
+Target sample:
+- 8 inaccessible first-order belief MC;
+- 8 inaccessible second-order belief MC;
+- 8 full-context inaccessible answerability binary;
+- 8 full-context inaccessible information-accessibility binary;
+- 4 accessible first-order belief MC;
+- 4 accessible second-order belief MC;
+- 8 fact controls.
+
+Total:
+- **48 questions**
+- **48 new conversations**
+- **0 v0.1 conversation overlap**
+
+See:
+- `reports/FANTOM_EXTERNAL_VALIDATION_V02_PLAN.md`
+
+**Current gate: FANTOM_EXT_V02_ZERO_PROVIDER_INVENTORY_RUNNING**
