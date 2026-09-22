@@ -2624,3 +2624,26 @@ Regression protocol:
 No external benchmark evidence is authorized.
 
 **Current gate: STATE_JSON_RELIABILITY_REPAIR_V02_RELIABILITY_PASS_REGRESSIONS_READY**
+
+
+## HCL state-JSON reliability repair v0.2 post-reliability regressions
+
+Canonical regression workflow:
+- run: `35710695556`
+- launch commit: `658ad0d25ec0662cb55ec13e649c8455e0bfd61c`
+
+Preflight:
+- repaired HCL behavior frozen at
+  `37df0afaacfa819abafe1979002100c645fab1c2`: PASS
+- regression protocol frozen: PASS
+- original info-state/output-interface audit protocol unchanged: PASS
+- relevant zero-provider repair tests: PASS
+
+Provider-backed regressions:
+1. production-path state fidelity, same existing fixtures/evaluator;
+2. existing answer-checker fresh suite;
+3. original 16-case information-state/output-interface audit under repaired HCL.
+
+All three must pass before v0.2 repair closure. No external benchmark evidence.
+
+**Current gate: STATE_JSON_RELIABILITY_REPAIR_V02_REGRESSIONS_RUNNING**
