@@ -1826,3 +1826,62 @@ A CI SUCCESS means the audit executed and evidence was captured. It does not
 mean the current HCL passed the interface audit.
 
 **Current gate: INFO_STATE_OUTPUT_INTERFACE_AUDIT_V01_PREDECLARED_READY**
+
+
+## HCL info-state / output-interface audit v0.1 closure
+
+Canonical audit:
+- run: `35613640456`
+- result: **SUCCESS as evidence collection**
+- artifact: `10645726589`
+- artifact SHA-256:
+  `edb86e1cb469510c3243a5015032c8450bbcf7cd41c56e061f8441ad7c8f9bff`
+
+Raw results:
+
+Full-loop:
+- semantic: **8/8**
+- parser-valid: **8/8**
+- exact-format: **8/8**
+- final-check PASS: **7/8**
+
+Forced revision:
+- checker REVISE: **8/8**
+- semantic after revision: **8/8**
+- parser-valid after revision: **8/8**
+- exact-format: **7/8**
+- final-check PASS: **8/8**
+
+Predeclared abstract-interface defect criteria:
+- parser-invalid final answer: none
+- semantic repair that loses parser-valid format: none
+- final-check PASS accepting parser-invalid categorical output: none
+
+Therefore:
+
+**NO ABSTRACT PARSER/INTERFACE DEFECT ESTABLISHED**
+
+The independent audit does not reproduce the FANToM v0.2 parser-null
+answerability regression.
+
+Secondary non-gating signals:
+- one exact, semantically correct full-loop answer receives final-check REVISE;
+- one forced-revision output is parser-valid/semantic-correct but not exact-only
+  format.
+
+These single synthetic observations do not authorize a behavior repair.
+
+See:
+- `reports/HCL_INFO_STATE_OUTPUT_INTERFACE_AUDIT_V01.md`
+- `reports/HCL_INFO_STATE_OUTPUT_INTERFACE_AUDIT_V01_CLOSURE.md`
+
+No HCL state/answer-loop/checker/prompt/parser/token/retry change is made.
+
+Next methodological direction:
+- test whether FANToM v0.2's small inaccessible-belief signal transfers to an
+  independent higher-order ToM benchmark;
+- selected candidate: Hi-ToM;
+- same existing DeepSeek provider/key only;
+- zero-provider inventory/predeclaration required before any paid model call.
+
+**Current gate: INFO_STATE_AUDIT_NO_REPAIR_REQUIRES_HITOM_ZERO_PROVIDER_INVENTORY**
