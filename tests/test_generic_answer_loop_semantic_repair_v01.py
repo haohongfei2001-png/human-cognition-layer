@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import ast
 import inspect
+import textwrap
 import unittest
 
 from hcl.v03 import answer_loop
@@ -53,7 +54,7 @@ class GenericAnswerLoopSemanticRepairTests(unittest.TestCase):
 
     def test_state_retry_budget_remains_three(self):
         source = inspect.getsource(answer_loop.HCLAnswerLoop.build_state)
-        tree = ast.parse(source)
+        tree = ast.parse(textwrap.dedent(source))
         calls = [
             node
             for node in ast.walk(tree)
