@@ -106,10 +106,14 @@ Strict pass gate:
 
 Only if the fresh communication state gate passes:
 
-1. rerun the 12-case fresh semantic-faithfulness answer suite;
-2. rerun original 16-case information-state/output-interface audit;
-3. rerun production-path state-fidelity suite;
-4. rerun existing answer-checker fresh suite.
+1. rerun the frozen 24-case state-generation reliability suite:
+   - 24/24 success;
+   - 0 state_json_exhaustion;
+   - 0 backend/other exceptions;
+2. rerun the 12-case fresh semantic-faithfulness answer suite;
+3. rerun original 16-case information-state/output-interface audit;
+4. rerun production-path state-fidelity suite;
+5. rerun existing answer-checker fresh suite.
 
 Repair closes only if all gates pass in the same frozen behavior.
 
