@@ -3191,3 +3191,26 @@ Boundary workflow:
 No external benchmark evidence is authorized.
 
 **Current gate: RUNTIME_STATE_PROMPT_CONFORMANCE_V01_BOUNDARY_READY**
+
+
+## Runtime state-prompt conformance v0.1 preflight recovery
+
+Initial boundary run:
+- `35720474468`
+- provider-backed boundary calls: **0**
+- freeze checks: PASS
+- zero-provider test step: FAIL due only to case-sensitive literal assertions
+  against existing capitalized prompt text.
+
+No runtime behavior, fixture, pass criterion, or provider protocol changed.
+
+Infrastructure-only correction:
+- test commit:
+  `33eec1a54d471d8073e4ad6eb7eb20498e8d2758`
+- assertions now compare case-insensitively;
+- boundary evidence remains unconsumed because no provider call occurred.
+
+Updated protocol anchor:
+`33eec1a54d471d8073e4ad6eb7eb20498e8d2758`
+
+**Current gate: RUNTIME_STATE_PROMPT_CONFORMANCE_V01_BOUNDARY_READY_AFTER_PREFLIGHT_FIX**
