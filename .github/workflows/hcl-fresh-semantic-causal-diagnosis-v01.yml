@@ -1,0 +1,133 @@
+name: HCL Fresh Semantic Failure Causal Diagnosis v0.1
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_FRESH_SEMANTIC_CAUSAL_DIAGNOSIS_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+env:
+  ANSWER_REPAIR_BEHAVIOR_ANCHOR: 4ab45463bbeacbe3eb8eaa91be7ec908130ce980
+  FRESH_CAUSAL_PROTOCOL_ANCHOR: 7ff0a632e43f9fb17f1cc9e6bfac3fff708e2b96
+  ORIGINAL_INTERFACE_AUDIT_PROTOCOL_ANCHOR: a1775b5ee6002165776b544aa65ae0fee4a0c9f3
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify frozen generic answer-loop repair
+        shell: bash
+        run: |
+          git diff --exit-code "$ANSWER_REPAIR_BEHAVIOR_ANCHOR"..HEAD --             hcl/v03/answer_loop.py             hcl/v03/backends.py             hcl/v03/state_schema.json             hcl/v03/FROZEN_STATE_SEMANTICS.md
+
+      - name: Verify fresh causal protocol frozen
+        shell: bash
+        run: |
+          git diff --exit-code "$FRESH_CAUSAL_PROTOCOL_ANCHOR"..HEAD --             reports/HCL_GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_V01_FRESH_CAUSAL_DIAGNOSIS_V01.md             eval/answer_loop/semantic_faithfulness_fresh_v01.json             scripts/run_generic_answer_fresh_causal_diagnosis_v01.py             tests/test_generic_answer_fresh_causal_diagnosis_v01.py
+
+      - name: Verify original parser unchanged
+        shell: bash
+        run: |
+          git diff --exit-code "$ORIGINAL_INTERFACE_AUDIT_PROTOCOL_ANCHOR"..HEAD --             scripts/run_info_state_output_interface_audit_v01.py
+
+      - name: Install zero-provider dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Compile and run causal interpretation gates
+        shell: bash
+        run: |
+          python -m py_compile             scripts/run_generic_answer_fresh_causal_diagnosis_v01.py             tests/test_generic_answer_fresh_causal_diagnosis_v01.py
+          python -m unittest discover -s tests -p test_generic_answer_fresh_causal_diagnosis_v01.py -v
+
+      - name: Verify target and control fixture identities
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows={x["id"]:x for x in json.loads(
+              Path("eval/answer_loop/semantic_faithfulness_fresh_v01.json").read_text()
+          )["cases"]}
+          assert rows["sf07_exact_positive_signal"]["gold"] == "A"
+          assert rows["sf02_direct_positive_schedule"]["gold"] == "A"
+          assert rows["sf03_direct_positive_location"]["gold"] == "yes"
+          assert rows["sf07_exact_positive_signal"]["direction"] == "DIRECT_POSITIVE"
+          assert rows["sf02_direct_positive_schedule"]["direction"] == "DIRECT_POSITIVE"
+          assert rows["sf03_direct_positive_location"]["direction"] == "DIRECT_POSITIVE"
+          PY
+
+  diagnose:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Reverify frozen behavior and protocol
+        shell: bash
+        run: |
+          git diff --exit-code "$ANSWER_REPAIR_BEHAVIOR_ANCHOR"..HEAD --             hcl/v03/answer_loop.py             hcl/v03/backends.py             hcl/v03/state_schema.json             hcl/v03/FROZEN_STATE_SEMANTICS.md
+          git diff --exit-code "$FRESH_CAUSAL_PROTOCOL_ANCHOR"..HEAD --             reports/HCL_GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_V01_FRESH_CAUSAL_DIAGNOSIS_V01.md             eval/answer_loop/semantic_faithfulness_fresh_v01.json             scripts/run_generic_answer_fresh_causal_diagnosis_v01.py             tests/test_generic_answer_fresh_causal_diagnosis_v01.py
+
+      - name: Install dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Run bounded 24-run fresh causal diagnosis
+        run: |
+          python scripts/run_generic_answer_fresh_causal_diagnosis_v01.py --workers 4
+
+      - name: Verify bounded coverage and content-free evidence
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path("artifacts/hcl-generic-answer-fresh-causal-v01")
+          s=json.loads((root/"summary.json").read_text())
+          rows=[json.loads(x) for x in (root/"results.jsonl").read_text().splitlines() if x.strip()]
+          assert s["run_count"] == 24
+          assert s["repeats_per_fixture"] == 8
+          assert len(rows) == 24
+          assert sum(x["fixture_id"]=="sf07_exact_positive_signal" for x in rows) == 8
+          assert sum(x["fixture_id"]=="sf02_direct_positive_schedule" for x in rows) == 8
+          assert sum(x["fixture_id"]=="sf03_direct_positive_location" for x in rows) == 8
+          raw=(root/"summary.json").read_text().lower()+(root/"results.jsonl").read_text().lower()
+          for key in (
+              '"input":','"draft_text":','"candidate_text":','"final_text":',
+              '"final_answer":','"state_body":','"explanation":',
+              '"revision_instruction":','"messages":','"api_key":','"exception_text":'
+          ):
+              assert key not in raw, key
+          PY
+
+      - name: Upload fresh causal diagnosis evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-fresh-semantic-causal-v01-${{ github.run_id }}
+          path: artifacts/hcl-generic-answer-fresh-causal-v01/
+          if-no-files-found: error
+          retention-days: 30
