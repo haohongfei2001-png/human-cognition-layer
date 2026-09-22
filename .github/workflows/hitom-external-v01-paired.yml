@@ -1,0 +1,156 @@
+name: Hi-ToM External Validation v0.1 Paired Pilot
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/HITOM_EXT_V01_PAIRED_TRIGGER"
+
+permissions:
+  contents: read
+
+env:
+  HCL_BEHAVIOR_ANCHOR: ce36d7e6f911910f97437c23455dee33e0e7bc82
+  HITOM_PROTOCOL_ANCHOR: 02effce47e02585d88844a3555279ce80170952f
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - name: Verify frozen HCL behavior
+        run: |
+          git diff --exit-code "$HCL_BEHAVIOR_ANCHOR"..HEAD --             hcl/v03/answer_loop.py hcl/v03/backends.py             hcl/v03/state_schema.json hcl/v03/FROZEN_STATE_SEMANTICS.md
+      - name: Verify frozen Hi-ToM protocol
+        run: |
+          git diff --exit-code "$HITOM_PROTOCOL_ANCHOR"..HEAD --             eval/hitom/selection_v01.json             reports/HITOM_EXTERNAL_VALIDATION_V01_PREDECLARATION.md             scripts/inventory_hitom_external_v01.py             scripts/run_hitom_external_v01.py             scripts/aggregate_hitom_external_v01.py             tests/test_hitom_external_v01.py
+      - name: Fetch pinned Hi-ToM source
+        run: |
+          git clone --quiet https://github.com/ying-hui-he/Hi-ToM_dataset.git .cache/hitom
+          git -C .cache/hitom checkout --quiet --detach 4279d3f783ff4f3b9fcced2a2fec9f6328683f82
+          test "$(git -C .cache/hitom rev-parse HEAD)" = "4279d3f783ff4f3b9fcced2a2fec9f6328683f82"
+          test "$(git -C .cache/hitom hash-object Hi-ToM_data/Hi-ToM_data.json)" = "23ab2aee6b2e80115dd645d88b91529ad2a29309"
+      - name: Install zero-provider dependencies
+        run: python -m pip install --upgrade pip && python -m pip install openai
+      - name: Compile, test, and smoke entrypoints
+        run: |
+          python -m py_compile scripts/inventory_hitom_external_v01.py scripts/run_hitom_external_v01.py scripts/aggregate_hitom_external_v01.py tests/test_hitom_external_v01.py
+          python -m unittest discover -s tests -p test_hitom_external_v01.py -v
+          python scripts/run_hitom_external_v01.py --help >/dev/null
+          python scripts/aggregate_hitom_external_v01.py --help >/dev/null
+      - name: Rebuild deterministic selection
+        run: |
+          python scripts/inventory_hitom_external_v01.py             --dataset .cache/hitom/Hi-ToM_data/Hi-ToM_data.json             --out artifacts/hitom-preflight-inventory
+      - name: Verify rebuilt sample equals frozen manifest
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          frozen=json.loads(Path("eval/hitom/selection_v01.json").read_text())
+          rebuilt=json.loads(Path("artifacts/hitom-preflight-inventory/inventory.json").read_text())
+          fields=("sample_id","question_order","deception","story_length","story_sha256","gold_option","selection_rank")
+          project=lambda xs:[{k:x[k] for k in fields} for x in xs]
+          assert project(rebuilt["selected"])==project(frozen["selected"])
+          assert len(frozen["selected"])==60
+          assert len({x["story_sha256"] for x in frozen["selected"]})==60
+          PY
+
+  paired:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        shard_index: [0,1,2,3,4,5]
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - name: Re-verify frozen protocol
+        run: |
+          git diff --exit-code "$HCL_BEHAVIOR_ANCHOR"..HEAD -- hcl/v03/answer_loop.py hcl/v03/backends.py hcl/v03/state_schema.json hcl/v03/FROZEN_STATE_SEMANTICS.md
+          git diff --exit-code "$HITOM_PROTOCOL_ANCHOR"..HEAD -- eval/hitom/selection_v01.json reports/HITOM_EXTERNAL_VALIDATION_V01_PREDECLARATION.md scripts/inventory_hitom_external_v01.py scripts/run_hitom_external_v01.py scripts/aggregate_hitom_external_v01.py tests/test_hitom_external_v01.py
+      - name: Fetch pinned Hi-ToM source
+        run: |
+          git clone --quiet https://github.com/ying-hui-he/Hi-ToM_dataset.git .cache/hitom
+          git -C .cache/hitom checkout --quiet --detach 4279d3f783ff4f3b9fcced2a2fec9f6328683f82
+          test "$(git -C .cache/hitom hash-object Hi-ToM_data/Hi-ToM_data.json)" = "23ab2aee6b2e80115dd645d88b91529ad2a29309"
+      - name: Install runner dependency
+        run: python -m pip install --upgrade pip && python -m pip install openai
+      - name: Run predeclared paired shard
+        run: |
+          python scripts/run_hitom_external_v01.py             --dataset .cache/hitom/Hi-ToM_data/Hi-ToM_data.json             --shard-index ${{ matrix.shard_index }} --shard-count 6
+      - name: Verify shard privacy boundary
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          shard=${{ matrix.shard_index }}
+          p=Path(f"artifacts/hitom-external-v01/shard_{shard}.json")
+          if not p.exists(): raise SystemExit("missing shard artifact")
+          d=json.loads(p.read_text())
+          assert d["requested"]==10
+          assert d["completed"]+len(d["failures"])==10
+          raw=p.read_text().lower()
+          for x in ('"story":','"question":','"choices":','"answer":','"prompt":','"messages":','"response_text":','"final_answer":','"state":','"api_key":'):
+              assert x not in raw, x
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hitom-external-v01-shard-${{ matrix.shard_index }}-${{ github.run_id }}
+          path: artifacts/hitom-external-v01/shard_${{ matrix.shard_index }}.json
+          if-no-files-found: error
+          retention-days: 30
+
+  aggregate:
+    needs: paired
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Verify frozen aggregation protocol
+        run: |
+          git diff --exit-code "$HITOM_PROTOCOL_ANCHOR"..HEAD -- eval/hitom/selection_v01.json reports/HITOM_EXTERNAL_VALIDATION_V01_PREDECLARATION.md scripts/aggregate_hitom_external_v01.py
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: hitom-external-v01-shard-*-${{ github.run_id }}
+          path: downloaded-hitom-v01
+          merge-multiple: true
+      - name: Aggregate only after all 60 rows complete
+        run: |
+          python scripts/aggregate_hitom_external_v01.py             --root downloaded-hitom-v01             --out artifacts/hitom-external-v01-summary
+      - name: Verify aggregate privacy
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("artifacts/hitom-external-v01-summary/summary.json")
+          d=json.loads(p.read_text())
+          assert d["sample"]=={"questions":60,"distinct_stories":60}
+          assert len(d["question_level"])==60
+          raw=p.read_text().lower()
+          for x in ('"story":','"question":','"choices":','"answer":','"prompt":','"messages":','"response_text":','"final_answer":','"state":','"api_key":'):
+              assert x not in raw, x
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hitom-external-v01-summary-${{ github.run_id }}
+          path: artifacts/hitom-external-v01-summary/
+          if-no-files-found: error
+          retention-days: 30
