@@ -2998,3 +2998,26 @@ Protocol:
   `7ff0a632e43f9fb17f1cc9e6bfac3fff708e2b96`
 
 **Current gate: GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_V01_FRESH_CAUSAL_READY**
+
+
+## HCL generic answer-loop semantic repair v0.1 fresh causal execution
+
+Canonical workflow:
+- run: `35718992914`
+- launch commit: `48786d195908044a8d37b42f7fd266fda9e76e74`
+
+Preflight:
+- frozen generic answer-loop repair: PASS
+- fresh fixture/protocol freeze: PASS
+- original parser unchanged: PASS
+- causal interpretation tests: PASS
+- target/control identities: PASS
+
+Provider-backed bounded diagnosis:
+- target sf07: 8 repeats
+- control sf02: 8 repeats
+- control sf03: 8 repeats
+- total: 24
+- no HCL behavior changes while run is open
+
+**Current gate: GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_V01_FRESH_CAUSAL_RUNNING**
