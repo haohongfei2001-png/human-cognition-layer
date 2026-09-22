@@ -1,0 +1,113 @@
+{
+  "suite": "HCL generic answer-loop semantic-faithfulness fresh v0.1",
+  "cases": [
+    {
+      "id": "sf01_direct_positive_badge",
+      "family": "full_loop",
+      "format": "binary",
+      "gold": "yes",
+      "requires_exact": true,
+      "direction": "DIRECT_POSITIVE",
+      "input": "Mara is standing next to the receptionist when the receptionist clearly says the visitor badge number aloud. Mara hears it. Does Mara know the visitor badge number? Return exactly yes or no."
+    },
+    {
+      "id": "sf02_direct_positive_schedule",
+      "family": "full_loop",
+      "format": "ab",
+      "gold": "A",
+      "requires_exact": true,
+      "direction": "DIRECT_POSITIVE",
+      "input": "Tariq reads the notice board himself and sees that the seminar starts at noon. Does Tariq know when the seminar starts? [A] Yes [B] No. Return exactly [A] or [B]."
+    },
+    {
+      "id": "sf03_direct_positive_location",
+      "family": "full_loop",
+      "format": "binary",
+      "gold": "yes",
+      "requires_exact": true,
+      "direction": "DIRECT_POSITIVE",
+      "input": "Nora watches the technician place the spare key inside the blue drawer. Does Nora know where the spare key was placed? Return exactly yes or no."
+    },
+    {
+      "id": "sf04_no_access_message",
+      "family": "full_loop",
+      "format": "binary",
+      "gold": "no",
+      "requires_exact": true,
+      "direction": "DIRECT_NEGATIVE",
+      "input": "Eli leaves before the announcement. After he leaves, the organizer announces the new room. The story explicitly says Eli receives no message and does not return. Does Eli know the new room? Return exactly yes or no."
+    },
+    {
+      "id": "sf05_no_access_email",
+      "family": "full_loop",
+      "format": "ab",
+      "gold": "B",
+      "requires_exact": true,
+      "direction": "DIRECT_NEGATIVE",
+      "input": "A notice is emailed to Rina, but the story explicitly says her device is offline and she neither opens the email nor hears the news from anyone. Does Rina know the notice contents? [A] Yes [B] No. Return exactly [A] or [B]."
+    },
+    {
+      "id": "sf06_no_access_hidden_move",
+      "family": "full_loop",
+      "format": "binary",
+      "gold": "no",
+      "requires_exact": true,
+      "direction": "DIRECT_NEGATIVE",
+      "input": "Owen leaves the studio. While he is gone, a prop is moved to another cabinet. The story explicitly says Owen does not see the move and receives no update. Does Owen know the prop's new cabinet? Return exactly yes or no."
+    },
+    {
+      "id": "sf07_exact_positive_signal",
+      "family": "full_loop",
+      "format": "ab",
+      "gold": "A",
+      "requires_exact": true,
+      "direction": "DIRECT_POSITIVE",
+      "input": "Lena directly hears the alarm operator say that the east gate is open. Does Lena know that the east gate is open? [A] Yes [B] No. Return exactly [A] or [B]."
+    },
+    {
+      "id": "sf08_exact_positive_label",
+      "family": "full_loop",
+      "format": "binary",
+      "gold": "yes",
+      "requires_exact": true,
+      "direction": "DIRECT_POSITIVE",
+      "input": "Jun personally reads the label on the sealed container stating its contents. Does Jun know what the label states about the contents? Return exactly yes or no."
+    },
+    {
+      "id": "sf09_exact_negative_call",
+      "family": "full_loop",
+      "format": "ab",
+      "gold": "B",
+      "requires_exact": true,
+      "direction": "DIRECT_NEGATIVE",
+      "input": "A coordinator calls while Sofia's phone is switched off. The story explicitly states Sofia never receives the voicemail and nobody tells her what was said. Does Sofia know the coordinator's message? [A] Yes [B] No. Return exactly [A] or [B]."
+    },
+    {
+      "id": "sf10_exact_negative_screen",
+      "family": "full_loop",
+      "format": "binary",
+      "gold": "no",
+      "requires_exact": true,
+      "direction": "DIRECT_NEGATIVE",
+      "input": "A result appears on a screen after Pavel has left the room. The story explicitly says Pavel cannot see the screen and gets no later update. Does Pavel know the result? Return exactly yes or no."
+    },
+    {
+      "id": "sf11_transfer_positive",
+      "family": "full_loop",
+      "format": "binary",
+      "gold": "yes",
+      "requires_exact": true,
+      "direction": "EXPLICIT_TRANSFER",
+      "input": "Mei sees the revised map. She then tells Ivo exactly where the checkpoint moved, and Ivo hears her. Does Ivo know the checkpoint's new location? Return exactly yes or no."
+    },
+    {
+      "id": "sf12_second_order_bridge",
+      "family": "full_loop",
+      "format": "ab",
+      "gold": "A",
+      "requires_exact": true,
+      "direction": "EXPLICIT_TRANSFER",
+      "input": "Kian watches Mira read the updated roster aloud, and Kian hears every item. Later someone asks whether Mira knows the roster update. Does Kian have evidence that Mira knows the update? [A] Yes [B] No. Return exactly [A] or [B]."
+    }
+  ]
+}
