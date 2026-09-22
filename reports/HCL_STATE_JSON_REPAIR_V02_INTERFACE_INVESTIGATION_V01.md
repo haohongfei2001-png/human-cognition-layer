@@ -116,35 +116,39 @@ Do not persist:
 
 ## Predeclared interpretation
 
-### A. Isolated stochastic interface instability
-All are true:
-- io01 has at least one pass and at least one fail across 8 repeats;
-- io02 passes parser+semantic gate at least 7/8;
-- io01 state mode remains EPISTEMIC in all completed repeats;
-- no runtime exception prevents completion.
+Use `parser_valid && semantic_correct` as the repetition success gate.
 
-This establishes output-interface instability under frozen behavior. It does
-not authorize weakening the existing 8/8 regression gate.
-
-### B. Stable io01 regression
-io01 parser+semantic success is <=2/8 while io02 is >=7/8.
-
-This supports a reproducible fixture-specific regression and requires a
-separate repair investigation before v0.2 can close.
+Interpretation is mutually exclusive and evaluated in this order:
 
 ### C. Broad output instability
-io02 parser+semantic success is <=6/8, or both fixtures show repeated failures.
+io02 control success is <=6/8.
 
 This supports broader answer/checker/revision instability and blocks repair
 closure.
 
-### D. One-off failure not reproduced
-io01 and io02 each pass parser+semantic gate >=7/8, with no more than one io01
-failure.
+### B. Stable io01 regression
+io02 control success is >=7/8 and io01 success is <=2/8.
 
-This supports a transient provider/output event. The original failed regression
-remains historical evidence; repair v0.2 still cannot close automatically.
-A separate, predeclared full regression confirmation would then be required.
+This supports a reproducible fixture-specific regression and requires a
+separate repair investigation before v0.2 can close.
+
+### A. Isolated stochastic interface instability
+io02 control success is >=7/8 and io01 success is 3-6/8.
+
+This establishes material output-interface instability under frozen behavior.
+It does not authorize weakening the existing 8/8 regression gate.
+
+### D. Original failure has low repeatability
+io02 control success is >=7/8 and io01 success is >=7/8.
+
+This supports a transient/low-repeatability provider-output event rather than a
+stable fixture-specific regression. The original failed regression remains
+historical evidence; repair v0.2 still cannot close automatically. A separate,
+predeclared full regression confirmation would then be required.
+
+For A/B/D, io01 state mode must remain EPISTEMIC in every successfully executed
+repeat. Any runtime exception or unexpected state-mode drift is reported
+separately and blocks automatic progression.
 
 ## No rerun-until-pass
 
