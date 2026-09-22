@@ -2561,3 +2561,29 @@ Pass gate remains 24/24 independent synthetic state builds with zero runtime
 failures. No external benchmark evidence is authorized.
 
 **Current gate: STATE_JSON_RELIABILITY_REPAIR_V02_VALIDATION_READY**
+
+
+## HCL state-JSON reliability repair v0.2 validation execution
+
+Canonical workflow:
+- run: `35709921859`
+- launch commit: `a4ac59a75e2a0a3def2c4ba2256f58843a4bc047`
+
+Zero-provider preflight:
+- state semantics / STATE_SYSTEM unchanged from failed v0.1: PASS
+- v0.2 backend implementation frozen: PASS
+- v0.2 protocol frozen: PASS
+- only HCL runtime file changed from failed v0.1: `hcl/v03/backends.py`: PASS
+- v0.2 runtime unit gates: PASS
+- exact 24-case frozen fixture coverage: PASS
+
+Provider-backed validation:
+- state thinking explicitly disabled;
+- state max_tokens remains 8192;
+- same 24 independent synthetic cases;
+- 6 shards x 4;
+- max parallelism 3;
+- pass requires 24/24 success and zero runtime failures;
+- no external benchmark content.
+
+**Current gate: STATE_JSON_RELIABILITY_REPAIR_V02_VALIDATION_RUNNING**
