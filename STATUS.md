@@ -3021,3 +3021,41 @@ Provider-backed bounded diagnosis:
 - no HCL behavior changes while run is open
 
 **Current gate: GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_V01_FRESH_CAUSAL_RUNNING**
+
+
+## HCL generic answer-loop semantic repair v0.1 fresh causal closure
+
+Canonical run:
+- `35718992914`
+- terminal result: **SUCCESS**
+- artifact: `10690876098`
+- digest:
+  `sha256:551654b9b9e8964acf555eb6b9ec755c5210f1c0f37eb489aec5ba7c0ea413ea`
+
+Target sf07, 8 repeats:
+- state direct support: **8/8**
+- draft semantic success: **0/8**
+- final semantic success: **0/8**
+- first inversion DRAFT: **8/8**
+- first checker false-pass: **6/8**
+- final checker false-pass: **7/8**
+
+Controls:
+- sf02 A/B direct-positive: **8/8 final success**
+- sf03 EPISTEMIC direct-positive: **8/8 final success**
+
+Predeclared interpretation:
+
+**TARGET_DRAFT_DOMINANT**
+
+The target state is supportive in observed/knows fields, but the content-free
+artifact cannot determine whether other state fields contradict or weaken that
+same proposition.
+
+Next canonical work:
+- bounded repository-owned synthetic state-conflict audit on sf07 + sf02 + sf03;
+- inspect full synthetic state bodies / field consistency;
+- no answer-loop behavior change before audit closure;
+- no fresh external benchmark evidence.
+
+**Current gate: FRESH_TARGET_DRAFT_DOMINANT_REQUIRES_SYNTHETIC_STATE_CONFLICT_AUDIT**
