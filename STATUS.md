@@ -3561,3 +3561,59 @@ No v0.4 runtime implementation is authorized by this repositioning alone.
 
 **Current gate: HCL_V04_RESEARCH_RESET_DESIGN_ONLY_NOT_IMPLEMENTED**
 
+## HCL v0.4 Phase 0 research-question freeze
+
+Phase-0 public protocol:
+- `docs/HCL_V04_PHASE0_RESEARCH_QUESTION_FREEZE.md`
+
+Evaluation exposure accounting:
+- `docs/HCL_V04_EVALUATION_EXPOSURE_REGISTER.md`
+
+Doctrine amendment:
+- module-first is now explicitly falsifiable;
+- a frozen HCL treatment may not be silently bypassed during evaluation;
+- after adequate comparison, evidence may conclude that the tested HCL
+  mechanism is unnecessary, equivalent to a simpler alternative, or harmful;
+- protect experimental integrity, not the assumption that HCL must be correct.
+
+Required comparison families now include:
+- A: vanilla base model;
+- B: strong ordinary reasoning / prompting;
+- C: strong full-history static reconstruction;
+- D: frozen dynamic HCL candidate;
+- E: ordinary persistent-memory control;
+- F: nearest-neighbor published method where technically applicable.
+
+Phase-0 literature review has independently confirmed that important parts of
+the obvious design space already have prior art, including external symbolic
+belief memory/revision, temporal belief-state chains, evolving mental-state
+hypotheses, hypothesis refinement for multi-agent planning, automated Bayesian
+ToM modeling, and dynamic mental-state evaluation.
+
+Therefore:
+- no v0.4 novelty claim is currently established;
+- no v0.4 runtime implementation is authorized yet;
+- no new external benchmark rows may be consumed;
+- HCL v0.3 remains the frozen engineering baseline;
+- the private novelty-gap ledger is maintained outside the public repository;
+- unpublished owner-originated conceptual examples and private derivations
+  remain outside GitHub.
+
+Exposure register summary:
+- CogToM: historically exposed / diagnostic only;
+- SOTOPIA-Hard: all environment templates exposed; multiple persona/combo slices
+  consumed; remaining combo novelty cannot be called fresh-scenario evidence;
+- FANToM: 32 v0.1 + 48 disjoint v0.2 conversations consumed;
+- Hi-ToM: all 60 selected stories/rows consumed once paid execution began;
+- repository synthetic suites remain regression/capability instruments only.
+
+Phase-0 PASS requires:
+1. a mechanism difference that survives nearest-neighbor review;
+2. an independently measurable effect beyond prompt wording / memory / compute;
+3. a concrete falsifying experiment;
+4. a strong simpler alternative in the comparison;
+5. explicit permission for the conclusion that HCL adds no value;
+6. owner-approved public/private disclosure boundary.
+
+**Current gate: HCL_V04_PHASE0_RESEARCH_QUESTION_FREEZE_IN_PROGRESS**
+
