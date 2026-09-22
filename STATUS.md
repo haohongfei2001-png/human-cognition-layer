@@ -3214,3 +3214,24 @@ Updated protocol anchor:
 `33eec1a54d471d8073e4ad6eb7eb20498e8d2758`
 
 **Current gate: RUNTIME_STATE_PROMPT_CONFORMANCE_V01_BOUNDARY_READY_AFTER_PREFLIGHT_FIX**
+
+
+## Runtime state-prompt conformance v0.1 boundary execution
+
+Canonical run:
+- `35720589183`
+- launch commit:
+  `74cf4f8c2d43698035d041099339c0c3ae8b665b`
+
+Preflight:
+- frozen semantic/runtime boundaries: PASS
+- updated protocol freeze: PASS
+- zero-provider static/unit gates: PASS
+- no provider evidence consumed by the earlier failed preflight run
+
+Provider-backed boundary:
+- 10 frozen fresh communication cases
+- strict gate: 10/10
+- no behavior changes while run is open
+
+**Current gate: RUNTIME_STATE_PROMPT_CONFORMANCE_V01_BOUNDARY_RUNNING**
