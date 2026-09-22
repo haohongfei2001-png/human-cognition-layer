@@ -2026,3 +2026,63 @@ Paid execution:
 No behavior/protocol/sample change is permitted while this run is open.
 
 **Current gate: HITOM_EXT_V01_PAIRED_RUNNING**
+
+
+## Hi-ToM external validation v0.1 final closure
+
+Canonical run:
+- `35675119858`
+- terminal result: **FAILURE**
+- zero-provider preflight: **SUCCESS**
+- 6 / 6 paired shard jobs terminal and failed
+- aggregate integrity gate: **FAILURE as designed**
+
+Execution completeness:
+- requested: **60**
+- completed paired rows: **36**
+- failures: **24**
+- persisted failure type: **RuntimeError for all 24 failures**
+- shard completed/failure counts:
+  - 0: 6 / 4
+  - 1: 7 / 3
+  - 2: 7 / 3
+  - 3: 6 / 4
+  - 4: 4 / 6
+  - 5: 6 / 4
+
+The frozen aggregator rejected incomplete evidence with
+`Hi-ToM aggregate integrity failure`.
+No aggregate summary artifact was produced.
+
+Therefore no partial accuracy, paired gain, subgroup result, or predeclared
+positive / negative / mixed efficacy interpretation is canonical.
+
+**Hi-ToM v0.1 efficacy: INCOMPLETE / NOT EVALUABLE**
+
+Failure provenance boundary:
+- canonical shard artifacts persist only exception class, not exception text;
+- all 24 failures are `RuntimeError`;
+- the frozen HCL state builder has a known RuntimeError path after three
+  unparseable state-JSON attempts;
+- this run is consistent with that path but does not prove that every failure
+  has that exact cause.
+
+All 60 selected Hi-ToM rows are consumed because paid execution began.
+Do not tune against them and do not rerun failed rows as fresh efficacy
+evidence.
+
+See:
+- `reports/HITOM_EXTERNAL_VALIDATION_V01_PREDECLARATION.md`
+- `reports/HITOM_EXTERNAL_VALIDATION_V01_CLOSURE.md`
+
+Next canonical work:
+1. keep HCL v0.3 state semantics frozen and HCL always-on;
+2. do not modify HCL from consumed Hi-ToM content;
+3. run an independent synthetic, non-Hi-ToM state-generation reliability audit;
+4. use content-free diagnostics to distinguish JSON parse exhaustion from
+   provider/transport/other runtime failure classes;
+5. only an independently reproduced abstract defect may authorize repair;
+6. validate any repair on independent synthetic regressions before consuming
+   new external evidence.
+
+**Current gate: HITOM_EXT_V01_INCOMPLETE_REQUIRES_INDEPENDENT_STATE_GENERATION_RELIABILITY_AUDIT**
