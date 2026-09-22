@@ -2301,3 +2301,53 @@ Provider-backed validation:
 - aggregate pass requires 24/24 success and zero runtime failures
 
 **Current gate: STATE_JSON_RELIABILITY_REPAIR_V01_VALIDATION_RUNNING**
+
+
+## HCL state-JSON reliability repair v0.1 closure
+
+Canonical validation:
+- run: `35695318437`
+- preflight: SUCCESS
+- 6/6 evidence-collection shards: SUCCESS
+- aggregate summary produced
+- predeclared repair pass gate: **FAIL**
+- summary artifact: `10682620073`
+- digest:
+  `sha256:9612c98b22472c3c1427fa3126c2e1ac6ed60687252a01499419b368cba41efb`
+
+Final result:
+- frozen synthetic cases: **24**
+- success: **8**
+- `state_json_exhaustion`: **16**
+- other runtime exceptions: **0**
+- all state attempts used provider-native structured JSON mode: **true**
+- repair_pass: **false**
+
+Failure-attempt diagnosis:
+- 48 attempts across the 16 failed cases;
+- 27 empty responses;
+- 21 non-empty but non-parseable responses;
+- all 16 failed cases exhausted the unchanged 3-attempt HCL budget.
+
+Therefore:
+
+**STATE-JSON REPAIR V0.1 FAILED**
+
+Provider-native JSON mode alone is insufficient.
+
+Do not consume new external benchmark evidence.
+
+Next canonical work:
+1. preserve the failed v0.1 candidate and evidence;
+2. run an independent content-free structured-output failure diagnostic;
+3. add finish-reason / truncation / response-length / empty / parse-outcome
+   metadata without persisting response text;
+4. distinguish empty-output failures from non-empty malformed/truncated output;
+5. only after diagnosis predeclare a minimal repair v0.2;
+6. keep consumed Hi-ToM / FANToM / SOTOPIA content forbidden for tuning.
+
+See:
+- `reports/HCL_STATE_JSON_RELIABILITY_REPAIR_V01.md`
+- `reports/HCL_STATE_JSON_RELIABILITY_REPAIR_V01_CLOSURE.md`
+
+**Current gate: STATE_JSON_REPAIR_V01_FAILED_REQUIRES_STRUCTURED_OUTPUT_DIAGNOSTIC**
