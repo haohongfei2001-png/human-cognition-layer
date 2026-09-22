@@ -3650,3 +3650,39 @@ Current Phase-0 gate remains open.
 
 **Current gate: HCL_V04_PHASE0_RESEARCH_QUESTION_FREEZE_IN_PROGRESS**
 
+## HCL v0.4 Research Plan v0.1 draft
+
+Public summary:
+- `docs/HCL_V04_RESEARCH_PLAN_V01_PUBLIC.md`
+
+Private detailed draft:
+- maintained outside the public repository;
+- includes the candidate first-mechanism architecture, correctness contract,
+  novelty-gap targets and causal experiment details;
+- unpublished owner-originated conceptual examples remain intentionally absent.
+
+Research Plan v0.1 decisions:
+- long-term HCL remains a broader complex-cognition research program;
+- the first v0.4 experiment is deliberately narrower and may fail;
+- correctness / validity is evaluated before downstream utility;
+- the candidate research family is an explicit persistent human-state update
+  mechanism, but persistence / belief revision / memory are **not** claimed as
+  novel by themselves;
+- the critical experimental comparison is strong static reconstruction /
+  ordinary memory / nearest published method versus the dynamic candidate;
+- implementation remains blocked until adversarial novelty/methodology review.
+
+Additional 2025–2026 literature review has increased the novelty burden:
+- dynamic epistemic belief-update frameworks already exist;
+- auditable evidence-level belief-update engines already exist;
+- internal belief auditing / repair before action already exists;
+- longitudinal belief-revision benchmarks already exist.
+
+Therefore Research Plan v0.1 is a **draft**, not a frozen architecture and not a
+novelty claim.
+
+No v0.4 runtime implementation has begun.
+No new external benchmark rows have been consumed.
+
+**Current gate: HCL_V04_RESEARCH_PLAN_V01_READY_FOR_ADVERSARIAL_REVIEW**
+
