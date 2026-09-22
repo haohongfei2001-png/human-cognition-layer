@@ -1,0 +1,107 @@
+name: HCL Communication Boundary Failure Adjudication v0.1
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_COMMUNICATION_BOUNDARY_ADJUDICATION_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+env:
+  STATE_PROMPT_REPAIR_BEHAVIOR_ANCHOR: da09c1fc8b82a538f6b0fdbbbe101e58b839241b
+  ADJUDICATION_PROTOCOL_ANCHOR: 38a7ff7f19e664f65dfb447b4593291a44701b33
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify frozen runtime repair
+        shell: bash
+        run: |
+          git diff --exit-code "$STATE_PROMPT_REPAIR_BEHAVIOR_ANCHOR"..HEAD --             hcl/v03/answer_loop.py             hcl/v03/backends.py             hcl/v03/state_schema.json             hcl/v03/FROZEN_STATE_SEMANTICS.md
+
+      - name: Verify adjudication protocol frozen
+        shell: bash
+        run: |
+          git diff --exit-code "$ADJUDICATION_PROTOCOL_ANCHOR"..HEAD --             reports/HCL_RUNTIME_STATE_PROMPT_CONFORMANCE_V01_BOUNDARY_FAILURE.md             reports/HCL_COMMUNICATION_BOUNDARY_FAILURE_ADJUDICATION_V01.md             eval/state_fidelity/communication_boundary_fresh_v01.json             scripts/run_communication_boundary_adjudication_v01.py             tests/test_communication_boundary_adjudication_v01.py
+
+      - name: Install zero-provider dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Compile and run adjudication checks
+        shell: bash
+        run: |
+          python -m py_compile             scripts/run_communication_boundary_adjudication_v01.py             tests/test_communication_boundary_adjudication_v01.py
+          python -m unittest discover -s tests -p test_communication_boundary_adjudication_v01.py -v
+
+  audit:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Reverify frozen runtime and protocol
+        shell: bash
+        run: |
+          git diff --exit-code "$STATE_PROMPT_REPAIR_BEHAVIOR_ANCHOR"..HEAD --             hcl/v03/answer_loop.py             hcl/v03/backends.py             hcl/v03/state_schema.json             hcl/v03/FROZEN_STATE_SEMANTICS.md
+          git diff --exit-code "$ADJUDICATION_PROTOCOL_ANCHOR"..HEAD --             reports/HCL_COMMUNICATION_BOUNDARY_FAILURE_ADJUDICATION_V01.md             eval/state_fidelity/communication_boundary_fresh_v01.json             scripts/run_communication_boundary_adjudication_v01.py             tests/test_communication_boundary_adjudication_v01.py
+
+      - name: Install dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Run fixed 12-state adjudication audit
+        run: |
+          python scripts/run_communication_boundary_adjudication_v01.py --workers 4
+
+      - name: Verify complete synthetic state evidence
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path("artifacts/hcl-communication-boundary-adjudication-v01")
+          s=json.loads((root/"summary.json").read_text())
+          rows=[json.loads(x) for x in (root/"states.jsonl").read_text().splitlines() if x.strip()]
+          assert s["run_count"] == 12
+          assert s["repeats_per_case"] == 4
+          assert s["audit_complete"] is True
+          assert len(rows) == 12
+          for case_id in (
+              "cb02_direct_teacher",
+              "cb06_unread_notice",
+              "cb10_conflicting_sources",
+          ):
+              assert sum(x["fixture_id"]==case_id for x in rows) == 4
+          PY
+
+      - name: Upload full synthetic adjudication evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-communication-boundary-adjudication-v01-${{ github.run_id }}
+          path: artifacts/hcl-communication-boundary-adjudication-v01/
+          if-no-files-found: error
+          retention-days: 30
