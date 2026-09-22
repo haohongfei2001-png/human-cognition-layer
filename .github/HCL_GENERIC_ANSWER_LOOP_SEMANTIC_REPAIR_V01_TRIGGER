@@ -1,0 +1,6 @@
+trigger: hcl-generic-answer-loop-semantic-repair-v01
+state_repair_anchor: 37df0afaacfa819abafe1979002100c645fab1c2
+answer_repair_impl_anchor: 4ab45463bbeacbe3eb8eaa91be7ec908130ce980
+answer_repair_protocol_anchor: 72252bdf7dba7c7f6a16dc961f8db29bbd7d01b6
+fresh_fixture_count: 12
+external_benchmark_calls: 0
