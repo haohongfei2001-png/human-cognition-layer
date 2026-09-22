@@ -2970,3 +2970,31 @@ See:
 - `reports/HCL_GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_V01_FRESH_FAILURE.md`
 
 **Current gate: GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_V01_FAILED_REQUIRES_FRESH_CAUSAL_DIAGNOSIS**
+
+
+## HCL generic answer-loop semantic repair v0.1 fresh causal diagnosis
+
+Bounded diagnosis:
+- target sf07: exactly 8 repeats;
+- control sf02: exactly 8 repeats;
+- control sf03: exactly 8 repeats;
+- total 24;
+- frozen generic answer-loop repair;
+- no prompt/runtime changes;
+- no extension after intermediate results.
+
+Predeclared classes:
+- BROAD_POSITIVE_PIPELINE_INSTABILITY
+- TARGET_STATE_DOMINANT
+- TARGET_DRAFT_DOMINANT
+- TARGET_CHECKER_REVISION_DOMINANT
+- TARGET_MIXED_CAUSAL_PATH
+- TARGET_FAILURE_LOW_REPEATABILITY
+- DIAGNOSTIC_INCOMPLETE
+
+Protocol:
+- `reports/HCL_GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_V01_FRESH_CAUSAL_DIAGNOSIS_V01.md`
+- anchor:
+  `7ff0a632e43f9fb17f1cc9e6bfac3fff708e2b96`
+
+**Current gate: GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_V01_FRESH_CAUSAL_READY**
