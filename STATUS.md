@@ -3291,3 +3291,33 @@ Provider-backed audit:
 - no runtime changes while open
 
 **Current gate: COMMUNICATION_BOUNDARY_ADJUDICATION_V01_RUNNING**
+
+
+## Communication boundary failure adjudication v0.1 closure
+
+Canonical run:
+- `35720920913`
+- artifact: `10690659128`
+- digest:
+  `sha256:148f3492d473917670e2eef102bce4fd7d6d9d04c92930183ef4d96f2cf07827`
+- 12 / 12 full synthetic states completed
+
+Classifications:
+- `cb02_direct_teacher`:
+  **EVALUATOR_FALSE_NEGATIVE** — localized time serialization;
+- `cb06_unread_notice`:
+  **FIXTURE_DESIGN_FALSE_NEGATIVE** — explicit no-access makes a non-empty
+  missing bridge unnecessary at the asked granularity;
+- `cb10_conflicting_sources`:
+  **EVALUATOR_FALSE_NEGATIVE** — localized target-agent key, no agent omission.
+
+Accounting:
+- original boundary remains **7/10 raw**;
+- all three raw failures satisfy frozen semantic criteria in **4/4** repeats;
+- adjudicated semantic boundary = **10/10**;
+- no HCL behavior changed during adjudication.
+
+The runtime prompt conformance repair may now advance to its already-predeclared
+full synthetic regression gate.
+
+**Current gate: RUNTIME_STATE_PROMPT_CONFORMANCE_V01_ADJUDICATED_BOUNDARY_PASS_REGRESSIONS_READY**
