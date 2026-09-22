@@ -2,17 +2,28 @@
 
 ## Core thesis
 
-The Human Cognition Layer (HCL) is the research object.
+The Human Cognition Layer (HCL) is the research program.
 
-The base model is replaceable. Benchmarks are measurement instruments. The HCL itself is the asset.
+The base model is replaceable. Benchmarks are measurement instruments. A
+portable cognition mechanism is the intended research asset **only if the
+evidence shows that it adds value beyond strong simpler alternatives**.
 
 Therefore:
 
-- HCL must not be discarded merely because an early version lowers benchmark score.
-- A score regression is evidence about **how the module is wrong**, not a reason to avoid using the module.
-- The project should improve the HCL's representations, update rules, uncertainty handling, and decision interface.
-- Routing/no-op behavior may exist **inside** HCL, but HCL remains in the loop for every input.
-- "Do not intervene" is an HCL output state, not bypassing HCL.
+- a frozen HCL treatment must not be silently bypassed during an evaluation just
+  to improve its score;
+- an early regression is evidence to investigate, not permission to rewrite the
+  evaluation after seeing results;
+- the research program must nevertheless allow the conclusion that a particular
+  HCL mechanism is unnecessary, equivalent to a simpler method, or harmful;
+- the project may improve representations, update rules, uncertainty handling
+  and decision interfaces only through an independent research cycle, not by
+  copying evaluation misses into production rules;
+- routing/no-op behavior may exist inside a tested architecture, but whether an
+  always-on external cognition layer is necessary is itself an empirical
+  question.
+
+**Protect experimental integrity, not the assumption that HCL must be correct.**
 
 ## What remains portable
 
@@ -42,7 +53,11 @@ When HCL score decreases, we must distinguish:
 - evaluator mismatch;
 - correct uncertainty being punished by a forced-choice benchmark.
 
-The response is to diagnose and improve HCL, not to minimize HCL usage.
+The response is to diagnose the failure under the frozen protocol. A new
+mechanism may be proposed only through independent development evidence. If a
+strong simpler alternative remains equivalent or better under adequate
+evaluation, the correct research conclusion may be that the tested HCL
+mechanism is not needed.
 
 ## Canonical architecture
 
