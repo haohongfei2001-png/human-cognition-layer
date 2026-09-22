@@ -1,0 +1,95 @@
+name: Hi-ToM External Validation v0.1 Inventory
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HITOM_EXT_V01_INVENTORY_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Fetch pinned Hi-ToM source
+        shell: bash
+        run: |
+          git clone --quiet https://github.com/ying-hui-he/Hi-ToM_dataset.git .cache/hitom
+          git -C .cache/hitom checkout --quiet --detach 4279d3f783ff4f3b9fcced2a2fec9f6328683f82
+          test "$(git -C .cache/hitom rev-parse HEAD)" = "4279d3f783ff4f3b9fcced2a2fec9f6328683f82"
+          test "$(git -C .cache/hitom hash-object Hi-ToM_data/Hi-ToM_data.json)" = "23ab2aee6b2e80115dd645d88b91529ad2a29309"
+
+      - name: Static compile
+        shell: bash
+        run: python -m py_compile scripts/inventory_hitom_external_v01.py
+
+      - name: Inventory VP data and freeze balanced story-disjoint candidates
+        shell: bash
+        run: |
+          python scripts/inventory_hitom_external_v01.py             --dataset .cache/hitom/Hi-ToM_data/Hi-ToM_data.json
+
+      - name: Verify zero-provider artifact
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("artifacts/hitom-external-v01-inventory/inventory.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+
+          assert data["source"]["commit"] == "4279d3f783ff4f3b9fcced2a2fec9f6328683f82"
+          assert data["source"]["data_blob_sha"] == "23ab2aee6b2e80115dd645d88b91529ad2a29309"
+          assert data["source"]["license"] == "Apache-2.0"
+          assert data["dataset"]["total_rows"] == 1200
+          assert data["dataset"]["vp_rows"] == 600
+          assert data["dataset"]["vp_unique_stories"] == 120
+          assert data["selection"]["total_selected"] == 60
+          assert data["selection"]["story_disjoint"] is True
+          assert len(data["selected"]) == 60
+          assert len({x["sample_id"] for x in data["selected"]}) == 60
+          assert len({x["story_sha256"] for x in data["selected"]}) == 60
+
+          for order in range(5):
+              rows = [x for x in data["selected"] if x["question_order"] == order]
+              assert len(rows) == 12
+              for deception in (False, True):
+                  for length in (1, 2, 3):
+                      cell = [
+                          x for x in rows
+                          if x["deception"] is deception
+                          and x["story_length"] == length
+                      ]
+                      assert len(cell) == 2
+
+          raw = path.read_text(encoding="utf-8").lower()
+          for forbidden in (
+              '"story":',
+              '"question":',
+              '"choices":',
+              '"answer":',
+              '"prediction":',
+              '"response_text":',
+              '"api_key":',
+          ):
+              assert forbidden not in raw, token
+          PY
+
+      - name: Upload inventory evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: hitom-external-v01-inventory-${{ github.run_id }}
+          path: artifacts/hitom-external-v01-inventory/
+          if-no-files-found: error
+          retention-days: 30
