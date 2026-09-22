@@ -1,0 +1,225 @@
+name: HCL State-JSON Reliability Repair v0.2 Validation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_STATE_JSON_RELIABILITY_REPAIR_V02_TRIGGER"
+
+permissions:
+  contents: read
+
+env:
+  FAILED_V01_ANCHOR: e9e46a7a22e01ca37906c4bc4c9f4daeab6b1703
+  REPAIR_V02_IMPL_ANCHOR: 37df0afaacfa819abafe1979002100c645fab1c2
+  REPAIR_V02_PROTOCOL_ANCHOR: 6ce04e42c7d1131bebf0d6aae6f17ecc71e189bf
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify state semantics and prompt unchanged from failed v0.1
+        shell: bash
+        run: |
+          git diff --exit-code "$FAILED_V01_ANCHOR"..HEAD -- \
+            hcl/v03/answer_loop.py \
+            hcl/v03/FROZEN_STATE_SEMANTICS.md \
+            hcl/v03/state_schema.json
+
+      - name: Verify v0.2 backend implementation frozen
+        shell: bash
+        run: |
+          git diff --exit-code "$REPAIR_V02_IMPL_ANCHOR"..HEAD -- \
+            hcl/v03/backends.py
+
+      - name: Verify v0.2 validation protocol frozen
+        shell: bash
+        run: |
+          git diff --exit-code "$REPAIR_V02_PROTOCOL_ANCHOR"..HEAD -- \
+            reports/HCL_STATE_JSON_RELIABILITY_REPAIR_V02.md \
+            eval/answer_loop/state_generation_reliability_v01.json \
+            scripts/run_state_json_repair_validation_v02.py \
+            scripts/aggregate_state_json_repair_validation_v02.py \
+            tests/test_state_json_reliability_repair_v02.py \
+            tests/test_state_json_repair_validation_v02.py
+
+      - name: Verify single HCL runtime-file change from failed v0.1
+        shell: bash
+        run: |
+          changed="$(git diff --name-only "$FAILED_V01_ANCHOR".."$REPAIR_V02_IMPL_ANCHOR" -- hcl/v03 | sort)"
+          test "$changed" = "hcl/v03/backends.py"
+
+      - name: Install zero-provider dependency
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Compile and run v0.2 unit gates
+        shell: bash
+        run: |
+          python -m py_compile \
+            hcl/v03/backends.py \
+            hcl/v03/answer_loop.py \
+            scripts/run_state_json_repair_validation_v02.py \
+            scripts/aggregate_state_json_repair_validation_v02.py \
+            tests/test_state_json_reliability_repair_v02.py \
+            tests/test_state_json_repair_validation_v02.py
+          python -m unittest discover -s tests -p test_state_json_reliability_repair_v02.py -v
+          python -m unittest discover -s tests -p test_state_json_repair_validation_v02.py -v
+          python -m unittest discover -s tests -p test_state_json_reliability_repair_v01.py -v
+          python scripts/run_state_json_repair_validation_v02.py --help >/dev/null
+          python scripts/aggregate_state_json_repair_validation_v02.py --help >/dev/null
+
+      - name: Verify exact frozen 24-case coverage
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+          data = json.loads(Path("eval/answer_loop/state_generation_reliability_v01.json").read_text())
+          cases = data["cases"]
+          assert len(cases) == 24
+          assert len({x["id"] for x in cases}) == 24
+          assert Counter((x["length_band"], x["complexity"]) for x in cases) == {
+              ("short", "simple"): 4,
+              ("short", "recursive"): 4,
+              ("medium", "simple"): 4,
+              ("medium", "recursive"): 4,
+              ("long", "simple"): 4,
+              ("long", "recursive"): 4,
+          }
+          PY
+
+  validate:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        shard_index: [0, 1, 2, 3, 4, 5]
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Reverify frozen v0.2 repair
+        shell: bash
+        run: |
+          git diff --exit-code "$FAILED_V01_ANCHOR"..HEAD -- \
+            hcl/v03/answer_loop.py \
+            hcl/v03/FROZEN_STATE_SEMANTICS.md \
+            hcl/v03/state_schema.json
+          git diff --exit-code "$REPAIR_V02_IMPL_ANCHOR"..HEAD -- hcl/v03/backends.py
+          git diff --exit-code "$REPAIR_V02_PROTOCOL_ANCHOR"..HEAD -- \
+            reports/HCL_STATE_JSON_RELIABILITY_REPAIR_V02.md \
+            eval/answer_loop/state_generation_reliability_v01.json \
+            scripts/run_state_json_repair_validation_v02.py \
+            scripts/aggregate_state_json_repair_validation_v02.py
+
+      - name: Install runner dependency
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Run frozen v0.2 validation shard
+        shell: bash
+        run: |
+          python scripts/run_state_json_repair_validation_v02.py \
+            --shard-index ${{ matrix.shard_index }} \
+            --shard-count 6
+
+      - name: Verify shard privacy
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          shard = ${{ matrix.shard_index }}
+          p = Path(f"artifacts/hcl-state-json-repair-v02/shard_{shard}.json")
+          data = json.loads(p.read_text(encoding="utf-8"))
+          assert data["requested"] == 4
+          assert data["completed"] == 4
+          assert len(data["results"]) == 4
+          for row in data["results"]:
+              assert all(a.get("structured_mode") is True for a in row["attempts"])
+          raw = p.read_text(encoding="utf-8").lower()
+          for key in ('"input":','"prompt":','"messages":','"response":','"response_text":','"state":','"api_key":','"exception_text":'):
+              assert key not in raw, key
+          PY
+
+      - name: Upload v0.2 validation shard
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-state-json-repair-v02-shard-${{ matrix.shard_index }}-${{ github.run_id }}
+          path: artifacts/hcl-state-json-repair-v02/shard_${{ matrix.shard_index }}.json
+          if-no-files-found: error
+          retention-days: 30
+
+  aggregate:
+    needs: validate
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: hcl-state-json-repair-v02-shard-*-${{ github.run_id }}
+          path: downloaded-state-json-repair-v02
+          merge-multiple: true
+
+      - name: Aggregate all 24 frozen cases
+        shell: bash
+        run: |
+          python scripts/aggregate_state_json_repair_validation_v02.py \
+            --root downloaded-state-json-repair-v02
+
+      - name: Enforce v0.2 repair pass gate
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("artifacts/hcl-state-json-repair-v02-summary/summary.json")
+          summary = json.loads(p.read_text(encoding="utf-8"))
+          assert summary["fixture_count"] == 24
+          assert summary["success_count"] == 24
+          assert summary["failure_count"] == 0
+          assert summary["state_json_exhaustion_count"] == 0
+          assert summary["backend_or_other_exception_count"] == 0
+          assert summary["all_state_attempts_used_structured_mode"] is True
+          assert summary["repair_pass"] is True
+          PY
+
+      - name: Upload v0.2 aggregate evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-state-json-repair-v02-summary-${{ github.run_id }}
+          path: artifacts/hcl-state-json-repair-v02-summary/
+          if-no-files-found: error
+          retention-days: 30
