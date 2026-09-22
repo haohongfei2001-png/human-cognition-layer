@@ -3087,3 +3087,25 @@ Protocol:
   `6e2fca4962eeca07b07648d3f2a7c7562e98df5e`
 
 **Current gate: FRESH_TARGET_STATE_CONFLICT_AUDIT_V01_READY**
+
+
+## HCL fresh target synthetic state-conflict audit v0.1 execution
+
+Canonical workflow:
+- run: `35719683320`
+- launch commit: `79bcfaed1e308c9260d83cd62084fa4ca8df0bc0`
+
+Preflight:
+- frozen HCL behavior: PASS
+- fresh fixtures / audit protocol frozen: PASS
+- zero-provider audit checks: PASS
+
+Provider-backed audit:
+- state builder only
+- target sf07: 8 builds
+- control sf02: 8 builds
+- control sf03: 8 builds
+- complete normalized synthetic states will be uploaded
+- no answer-layer calls
+
+**Current gate: FRESH_TARGET_STATE_CONFLICT_AUDIT_V01_RUNNING**
