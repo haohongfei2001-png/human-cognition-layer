@@ -3445,3 +3445,62 @@ Provider-backed adjudication:
 - no HCL behavior change
 
 **Current gate: RUNTIME_CONFORMANCE_FULL_REGRESSION_ADJUDICATION_V01_RUNNING**
+
+
+## Runtime state-prompt conformance v0.1 synthetic closure
+
+Canonical full regression:
+- run: `35721321301`
+- raw workflow result: **FAILURE** — preserved
+
+Substantive frozen gates:
+- state reliability: **24 / 24 PASS**
+- fresh answer semantic-faithfulness: **12 / 12 PASS**
+- output-interface:
+  - full-loop **8 / 8**
+  - forced-revision **8 / 8**
+- state fidelity raw: **11 / 12**
+- answer checker raw: **11 / 12**
+
+Bounded adjudication:
+- run: `35723696097`
+- terminal result: **SUCCESS**
+- artifact: `10691499923`
+- digest:
+  `sha256:ddfd60af8ea360bfed679de82bd96d5bb640525ed41c8d5cb4398143f47b63b2`
+
+Adjudication classifications:
+- `epistemic_private_message`:
+  **EVALUATOR_FALSE_NEGATIVE**
+  - semantic state behavior 4/4 correct
+  - one raw failure only from non-empty missing_bridge requirement
+- `fresh11_absence_of_evidence`:
+  **TAXONOMY_EVALUATOR_FALSE_NEGATIVE**
+  - REVISE 4/4
+  - corrected answer 4/4
+  - final checker PASS 4/4
+  - raw mismatch only violation-family taxonomy
+
+Adjudicated semantic accounting:
+- production-path state fidelity: **12 / 12**
+- answer-checker fresh suite: **12 / 12**
+
+Final synthetic decision:
+
+**ADJUDICATED SYNTHETIC PASS**
+
+Frozen behavior:
+`da09c1fc8b82a538f6b0fdbbbe101e58b839241b`
+
+No HCL behavior changed during adjudication.
+
+Historical raw failures and artifacts remain preserved.
+
+Closure:
+- `reports/HCL_RUNTIME_STATE_PROMPT_CONFORMANCE_V01_SYNTHETIC_CLOSURE.md`
+
+Fresh external evidence is not started automatically. It requires a separately
+predeclared protocol using only previously unconsumed rows and no evaluation-row
+tuning.
+
+**Current gate: RUNTIME_STATE_PROMPT_CONFORMANCE_V01_SYNTHETIC_COMPLETE_EXTERNAL_EVIDENCE_NOT_STARTED**
