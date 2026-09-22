@@ -3235,3 +3235,38 @@ Provider-backed boundary:
 - no behavior changes while run is open
 
 **Current gate: RUNTIME_STATE_PROMPT_CONFORMANCE_V01_BOUNDARY_RUNNING**
+
+
+## Runtime state-prompt conformance v0.1 boundary result
+
+Canonical run:
+- `35720589183`
+- terminal result: **FAILURE**
+- all 10 fresh boundary cases completed
+- runtime exceptions: **0**
+- raw strict pass: **7 / 10**
+- artifact: `10690883430`
+- digest:
+  `sha256:90b03b563fecf8ac5561d6a9bee1d961337a9f95a39a89667ef9638f2b056693`
+
+Raw failed IDs:
+- `cb02_direct_teacher`: only lexical knows-term check failed;
+- `cb06_unread_notice`: only non-empty missing-bridge expectation failed;
+- `cb10_conflicting_sources`: only target-agent-key lookup failed.
+
+The raw 7/10 result is preserved. No rerun-until-pass and no prompt change is
+authorized from these summary flags alone.
+
+Bounded adjudication predeclared:
+- exactly the 3 failed synthetic cases;
+- 4 full state builds each, 12 total;
+- full synthetic state JSON persisted;
+- classify each as evaluator false negative, fixture-design false negative,
+  runtime semantic defect, or mixed/unstable.
+
+Protocol:
+- `reports/HCL_COMMUNICATION_BOUNDARY_FAILURE_ADJUDICATION_V01.md`
+- anchor:
+  `38a7ff7f19e664f65dfb447b4593291a44701b33`
+
+**Current gate: COMMUNICATION_BOUNDARY_RAW_7_OF_10_REQUIRES_ADJUDICATION**
