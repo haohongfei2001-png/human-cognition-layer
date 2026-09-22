@@ -3686,3 +3686,54 @@ No new external benchmark rows have been consumed.
 
 **Current gate: HCL_V04_RESEARCH_PLAN_V01_READY_FOR_ADVERSARIAL_REVIEW**
 
+## HCL v0.4 capability-first correction
+
+Owner clarified the primary project objective:
+
+> Build an HCL with real, substantively correct capability improvement; use a
+> valuable benchmark / leaderboard as external proof, recognition and reward.
+
+The project is **not** publication-first.
+
+Consequences:
+- publication novelty is not an implementation prerequisite;
+- prior work is a mechanism library and comparison source, not a veto on using
+  effective ideas;
+- correctness remains primary;
+- downstream capability is the second gate;
+- leaderboard performance is an explicit final product/research outcome, but it
+  does not define cognitive truth.
+
+New primary plan:
+- `docs/HCL_V04_CAPABILITY_DEVELOPMENT_PLAN_V01_PUBLIC.md`
+
+Historical plan:
+- `docs/HCL_V04_RESEARCH_PLAN_V01_PUBLIC.md` is retained but superseded as the
+  primary development route.
+
+Canonical development order:
+
+```text
+capability objective
+→ minimal capability architecture
+→ minimal implementation
+→ correctness validation
+→ downstream capability validation
+→ robustness / cross-base transfer
+→ valuable external benchmark / leaderboard
+```
+
+Existing rigor is retained:
+- no benchmark-answer patching;
+- no reuse of consumed rows as fresh evidence;
+- synthetic tests do not define capability;
+- strong static/memory baselines remain useful for diagnosing what actually
+  creates value;
+- simpler mechanisms should replace more complex mechanisms when equally correct
+  and useful.
+
+No v0.4 runtime implementation has begun yet.
+No new external benchmark evidence has been consumed.
+
+**Current gate: HCL_V04_CAPABILITY_PLAN_V01_READY_FOR_ARCHITECTURE_REVIEW**
+
