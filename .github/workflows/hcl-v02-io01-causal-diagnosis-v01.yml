@@ -1,0 +1,135 @@
+name: HCL v0.2 io01 Causal Diagnosis v0.1
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_V02_IO01_CAUSAL_DIAGNOSIS_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+env:
+  REPAIR_V02_BEHAVIOR_ANCHOR: 37df0afaacfa819abafe1979002100c645fab1c2
+  CAUSAL_PROTOCOL_ANCHOR: b32a89907929e6abfa1cc037cd95df78fcc0566c
+  ORIGINAL_INTERFACE_AUDIT_PROTOCOL_ANCHOR: a1775b5ee6002165776b544aa65ae0fee4a0c9f3
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify frozen v0.2 behavior
+        shell: bash
+        run: |
+          git diff --exit-code "$REPAIR_V02_BEHAVIOR_ANCHOR"..HEAD --             hcl/v03/backends.py             hcl/v03/answer_loop.py             hcl/v03/state_schema.json             hcl/v03/FROZEN_STATE_SEMANTICS.md
+
+      - name: Verify original interface audit assets unchanged
+        shell: bash
+        run: |
+          git diff --exit-code "$ORIGINAL_INTERFACE_AUDIT_PROTOCOL_ANCHOR"..HEAD --             scripts/run_info_state_output_interface_audit_v01.py             eval/answer_loop/info_state_output_interface_v01.json
+
+      - name: Verify causal protocol frozen
+        shell: bash
+        run: |
+          git diff --exit-code "$CAUSAL_PROTOCOL_ANCHOR"..HEAD --             reports/HCL_STATE_JSON_REPAIR_V02_IO01_CAUSAL_DIAGNOSIS_V01.md             scripts/run_v02_io01_causal_diagnosis_v01.py             tests/test_v02_io01_causal_diagnosis_v01.py
+
+      - name: Install zero-provider dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Compile and run causal interpretation gates
+        shell: bash
+        run: |
+          python -m py_compile             scripts/run_v02_io01_causal_diagnosis_v01.py             tests/test_v02_io01_causal_diagnosis_v01.py
+          python -m unittest discover -s tests -p test_v02_io01_causal_diagnosis_v01.py -v
+
+      - name: Verify target and control fixture identity
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path("eval/answer_loop/info_state_output_interface_v01.json").read_text())
+          rows={x["id"]:x for x in data["cases"]}
+          assert rows["io01_full_binary_direct_access"]["family"] == "full_loop"
+          assert rows["io02_full_binary_missing_access"]["family"] == "full_loop"
+          assert rows["io01_full_binary_direct_access"]["gold"] == "yes"
+          assert rows["io02_full_binary_missing_access"]["gold"] == "no"
+          PY
+
+  diagnose:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Reverify frozen behavior and protocol
+        shell: bash
+        run: |
+          git diff --exit-code "$REPAIR_V02_BEHAVIOR_ANCHOR"..HEAD --             hcl/v03/backends.py hcl/v03/answer_loop.py hcl/v03/state_schema.json hcl/v03/FROZEN_STATE_SEMANTICS.md
+          git diff --exit-code "$CAUSAL_PROTOCOL_ANCHOR"..HEAD --             reports/HCL_STATE_JSON_REPAIR_V02_IO01_CAUSAL_DIAGNOSIS_V01.md             scripts/run_v02_io01_causal_diagnosis_v01.py             tests/test_v02_io01_causal_diagnosis_v01.py
+          git diff --exit-code "$ORIGINAL_INTERFACE_AUDIT_PROTOCOL_ANCHOR"..HEAD --             scripts/run_info_state_output_interface_audit_v01.py             eval/answer_loop/info_state_output_interface_v01.json
+
+      - name: Install dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Run bounded io01 causal diagnosis
+        run: |
+          python scripts/run_v02_io01_causal_diagnosis_v01.py --workers 4
+
+      - name: Verify bounded coverage and content-free evidence
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root=Path("artifacts/hcl-v02-io01-causal-diagnosis-v01")
+          summary=json.loads((root/"summary.json").read_text())
+          rows=[json.loads(x) for x in (root/"results.jsonl").read_text().splitlines() if x.strip()]
+
+          assert summary["run_count"] == 16
+          assert len(rows) == 16
+          assert sum(x["fixture_id"]=="io01_full_binary_direct_access" for x in rows) == 8
+          assert sum(x["fixture_id"]=="io02_full_binary_missing_access" for x in rows) == 8
+
+          raw=(root/"summary.json").read_text().lower()+(root/"results.jsonl").read_text().lower()
+          for key in (
+              '"input":','"target_token":','"final_answer":','"draft_text":',
+              '"candidate_text":','"state_body":','"explanation":',
+              '"revision_instruction":','"messages":','"api_key":','"exception_text":'
+          ):
+              assert key not in raw, key
+          PY
+
+      - name: Upload causal diagnosis evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-v02-io01-causal-diagnosis-v01-${{ github.run_id }}
+          path: artifacts/hcl-v02-io01-causal-diagnosis-v01/
+          if-no-files-found: error
+          retention-days: 30
