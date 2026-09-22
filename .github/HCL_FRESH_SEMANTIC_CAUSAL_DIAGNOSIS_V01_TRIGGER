@@ -1,0 +1,8 @@
+trigger: hcl-fresh-semantic-causal-diagnosis-v01
+answer_repair_behavior_anchor: 4ab45463bbeacbe3eb8eaa91be7ec908130ce980
+protocol_anchor: 7ff0a632e43f9fb17f1cc9e6bfac3fff708e2b96
+target: sf07_exact_positive_signal
+controls: sf02_direct_positive_schedule,sf03_direct_positive_location
+repeats_each: 8
+workers: 4
+external_benchmark_calls: 0
