@@ -2351,3 +2351,48 @@ See:
 - `reports/HCL_STATE_JSON_RELIABILITY_REPAIR_V01_CLOSURE.md`
 
 **Current gate: STATE_JSON_REPAIR_V01_FAILED_REQUIRES_STRUCTURED_OUTPUT_DIAGNOSTIC**
+
+
+## HCL structured-output failure diagnostic v0.1 predeclaration
+
+Triggered by failed state-JSON repair v0.1:
+- 24 frozen synthetic cases;
+- 8 successes;
+- 16 state-json exhaustion failures;
+- 27 empty failed attempts;
+- 21 non-empty non-parseable failed attempts;
+- provider-native JSON mode already active.
+
+Diagnostic contract:
+- reports/HCL_STRUCTURED_OUTPUT_FAILURE_DIAGNOSTIC_V01.md
+- runner:
+  scripts/run_structured_output_failure_diagnostic_v01.py
+- aggregate:
+  scripts/aggregate_structured_output_failure_diagnostic_v01.py
+- zero-provider tests:
+  tests/test_structured_output_failure_diagnostic_v01.py
+- protocol anchor:
+  0fddc962b9b8fa102bbd197fff51f367e02e680d
+- failed repair behavior anchor:
+  e9e46a7a22e01ca37906c4bc4c9f4daeab6b1703
+
+The diagnostic reproduces the current state request exactly but records only
+content-free provider metadata:
+- finish_reason;
+- token usage;
+- duration;
+- empty/non-empty;
+- response byte counts and hash;
+- JSON syntax validity / top-level type;
+- current HCL object-parse outcome;
+- provider exception class.
+
+No HCL behavior change and no repair v0.2 is authorized before diagnostic closure.
+
+Execution:
+- exact same 24 synthetic reliability fixtures;
+- 6 shards x 4;
+- max parallelism 3;
+- all 24 must terminate for canonical aggregate.
+
+**Current gate: STRUCTURED_OUTPUT_FAILURE_DIAGNOSTIC_V01_PREDECLARED_READY**
