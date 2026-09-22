@@ -3737,3 +3737,17 @@ No new external benchmark evidence has been consumed.
 
 **Current gate: HCL_V04_CAPABILITY_PLAN_V01_READY_FOR_ARCHITECTURE_REVIEW**
 
+## Pro architecture review package published
+
+The full capability-architecture review package is now available directly in
+GitHub:
+
+- `docs/HCL_V04_CAPABILITY_DEVELOPMENT_PLAN_V01.md`
+- `docs/HCL_V04_PRO_CAPABILITY_ARCHITECTURE_REVIEW_PROMPT.md`
+
+These files intentionally exclude owner material not approved for public
+release. GPT-5.6 Pro may review the repository directly without separate Drive
+attachments.
+
+**Current gate: HCL_V04_CAPABILITY_PLAN_V01_READY_FOR_ARCHITECTURE_REVIEW**
+
