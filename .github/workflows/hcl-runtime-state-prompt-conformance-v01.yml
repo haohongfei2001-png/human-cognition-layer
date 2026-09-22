@@ -1,0 +1,140 @@
+name: HCL Runtime State-Prompt Conformance v0.1 Boundary
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_RUNTIME_STATE_PROMPT_CONFORMANCE_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+env:
+  PRE_STATE_PROMPT_REPAIR_ANCHOR: 4ab45463bbeacbe3eb8eaa91be7ec908130ce980
+  STATE_PROMPT_REPAIR_IMPL_ANCHOR: da09c1fc8b82a538f6b0fdbbbe101e58b839241b
+  STATE_PROMPT_REPAIR_PROTOCOL_ANCHOR: 727b75ac3e70c0af78f3ee0de02abc028b981720
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify frozen semantic/runtime boundaries
+        shell: bash
+        run: |
+          git diff --exit-code "$PRE_STATE_PROMPT_REPAIR_ANCHOR"..HEAD --             hcl/v03/backends.py             hcl/v03/state_schema.json             hcl/v03/FROZEN_STATE_SEMANTICS.md
+          git diff --exit-code "$STATE_PROMPT_REPAIR_IMPL_ANCHOR"..HEAD --             hcl/v03/answer_loop.py
+          python - <<'PY'
+          import ast
+          import os
+          import subprocess
+          from pathlib import Path
+
+          old=subprocess.check_output(
+              ["git","show",f"{os.environ['PRE_STATE_PROMPT_REPAIR_ANCHOR']}:hcl/v03/answer_loop.py"],
+              text=True,
+          )
+          new=Path("hcl/v03/answer_loop.py").read_text(encoding="utf-8")
+
+          def parse(s): return ast.parse(s)
+          def assignment(tree,name):
+              for n in tree.body:
+                  if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id==name for t in n.targets):
+                      return ast.dump(n.value,include_attributes=False)
+              raise RuntimeError(name)
+          def method(tree,name):
+              for n in tree.body:
+                  if isinstance(n,ast.ClassDef) and n.name=="HCLAnswerLoop":
+                      for x in n.body:
+                          if isinstance(x,ast.FunctionDef) and x.name==name:
+                              return ast.dump(x,include_attributes=False)
+              raise RuntimeError(name)
+
+          ot,nt=parse(old),parse(new)
+          for const in ("DRAFT_SYSTEM","CHECK_SYSTEM","REVISION_SYSTEM"):
+              assert assignment(ot,const)==assignment(nt,const)
+          for name in ("__init__","build_state","generate_draft","check","revise","run"):
+              assert method(ot,name)==method(nt,name)
+          assert assignment(ot,"STATE_SYSTEM") != assignment(nt,"STATE_SYSTEM")
+          PY
+
+      - name: Verify conformance protocol frozen
+        shell: bash
+        run: |
+          git diff --exit-code "$STATE_PROMPT_REPAIR_PROTOCOL_ANCHOR"..HEAD --             reports/HCL_RUNTIME_STATE_PROMPT_CONFORMANCE_REPAIR_V01.md             eval/state_fidelity/communication_boundary_fresh_v01.json             scripts/run_runtime_state_prompt_conformance_v01.py             tests/test_runtime_state_prompt_conformance_v01.py             tests/test_runtime_state_prompt_conformance_validation_v01.py
+
+      - name: Install zero-provider dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Compile and run zero-provider gates
+        shell: bash
+        run: |
+          python -m py_compile             hcl/v03/answer_loop.py             scripts/run_runtime_state_prompt_conformance_v01.py             tests/test_runtime_state_prompt_conformance_v01.py             tests/test_runtime_state_prompt_conformance_validation_v01.py
+          python -m unittest discover -s tests -p test_runtime_state_prompt_conformance_v01.py -v
+          python -m unittest discover -s tests -p test_runtime_state_prompt_conformance_validation_v01.py -v
+          python scripts/run_runtime_state_prompt_conformance_v01.py --help >/dev/null
+
+  boundary:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Reverify frozen repair and boundary suite
+        shell: bash
+        run: |
+          git diff --exit-code "$STATE_PROMPT_REPAIR_IMPL_ANCHOR"..HEAD -- hcl/v03/answer_loop.py
+          git diff --exit-code "$STATE_PROMPT_REPAIR_PROTOCOL_ANCHOR"..HEAD --             reports/HCL_RUNTIME_STATE_PROMPT_CONFORMANCE_REPAIR_V01.md             eval/state_fidelity/communication_boundary_fresh_v01.json             scripts/run_runtime_state_prompt_conformance_v01.py
+
+      - name: Install dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Run fresh communication boundary suite
+        run: |
+          python scripts/run_runtime_state_prompt_conformance_v01.py --workers 4
+
+      - name: Enforce strict 10-of-10 boundary gate
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path("artifacts/hcl-runtime-state-prompt-conformance-v01")
+          s=json.loads((root/"summary.json").read_text())
+          assert s["fixture_count"] == 10
+          assert s["completed_count"] == 10
+          assert s["runtime_exception_count"] == 0
+          assert s["passed_count"] == 10
+          assert s["failed_count"] == 0
+          assert s["failed_ids"] == []
+          assert s["pass_gate"] is True
+          PY
+
+      - name: Upload communication boundary evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-runtime-state-prompt-conformance-v01-${{ github.run_id }}
+          path: artifacts/hcl-runtime-state-prompt-conformance-v01/
+          if-no-files-found: error
+          retention-days: 30
