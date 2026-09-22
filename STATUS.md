@@ -1928,3 +1928,75 @@ No provider/model call is permitted before exact sample IDs and story hashes are
 committed.
 
 **Current gate: HITOM_EXT_V01_ZERO_PROVIDER_INVENTORY_READY**
+
+
+## Hi-ToM external validation v0.1 inventory closure and paired predeclaration
+
+Zero-provider inventory:
+- first run `35674804556`: failed before selection because the official JSON root
+  is `{"data":[...]}`; source pin checks passed; provider calls = 0;
+- corrected run `35674853358`: **SUCCESS**;
+- inventory artifact: `10672173370`;
+- artifact SHA-256:
+  `cf32c62c0203c4b8ff8a0d016e2d68bd10abd674b41db29393d4de2a341ab7fc`;
+- provider/model calls: **0**.
+
+Pinned source:
+- `ying-hui-he/Hi-ToM_dataset`
+- commit `4279d3f783ff4f3b9fcced2a2fec9f6328683f82`
+- data blob `23ab2aee6b2e80115dd645d88b91529ad2a29309`
+- Apache-2.0.
+
+Frozen selection:
+- `eval/hitom/selection_v01.json`
+- salt `HCL-HITOM-V01-20260922`
+- VP only;
+- 60 questions / 60 distinct stories;
+- exactly 12 rows at each order 0–4;
+- within each order, 2 rows from every deception × story-length cell;
+- exact sample IDs, story hashes and gold option letters frozen before provider
+  calls.
+
+Frozen protocol:
+- `reports/HITOM_EXTERNAL_VALIDATION_V01_PREDECLARATION.md`
+- protocol anchor:
+  `02effce47e02585d88844a3555279ce80170952f`
+- HCL behavior anchor:
+  `ce36d7e6f911910f97437c23455dee33e0e7bc82`
+
+Paired design:
+- same `deepseek-flash`, endpoint/key, seed 42, temperature 0;
+- no CoT prompt;
+- shared story/question/choices + official Hi-ToM assumptions;
+- exact option-letter scoring;
+- control = direct DeepSeek;
+- treatment = frozen HCL answer loop.
+
+Primary:
+- orders 2–4, n=36.
+
+Lower-order stability:
+- orders 0–1, n=24.
+
+Predeclared positive:
+- primary net >= +4;
+- no order 2/3/4 subgroup net <= -2;
+- lower-order control net >= -2.
+
+Predeclared negative:
+- primary net < 0 OR lower-order net <= -3.
+
+Otherwise:
+- MIXED / INCONCLUSIVE.
+
+Formal paid workflow requires:
+1. zero-diff HCL behavior check;
+2. zero-diff Hi-ToM protocol check;
+3. pinned repo commit/blob verification;
+4. zero-provider tests and entrypoint smoke;
+5. deterministic reconstruction of the same 60 rows;
+6. then 6 shards × 10, max parallelism 2;
+7. no partial-result tuning;
+8. aggregate only after all 60 complete.
+
+**Current gate: HITOM_EXT_V01_PAIRED_PREDECLARED_READY**
