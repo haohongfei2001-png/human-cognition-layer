@@ -2747,3 +2747,45 @@ See:
 - `reports/HCL_STATE_JSON_REPAIR_V02_INTERFACE_INVESTIGATION_V01_CLOSURE.md`
 
 **Current gate: STATE_JSON_REPAIR_V02_STABLE_IO01_REGRESSION_REQUIRES_CAUSAL_DIAGNOSIS**
+
+
+## HCL v0.2 io01 causal diagnosis v0.1 predeclaration
+
+Goal:
+- locate the first semantic inversion inside the frozen
+  state -> draft -> checker -> revision -> final pipeline;
+- target io01: exactly 8 repeats;
+- control io02: exactly 8 repeats;
+- no HCL behavior change;
+- no external benchmark evidence.
+
+Content-free target-state probe:
+- runtime-extracted synthetic target token;
+- target-agent observed/knows booleans only;
+- no target-token text or state body persisted.
+
+Pipeline evidence:
+- draft/candidate/final parser+semantic scores;
+- checker status and violation-family sets;
+- state SHA-256;
+- first inversion stage;
+- derived false-pass/false-revise/revision-failure signals.
+
+Predeclared causal classes:
+- STATE_DOMINANT
+- DRAFT_DOMINANT
+- REVISION_DOMINANT
+- CHECKER_CONTROL_FAILURE
+- MIXED_CAUSAL_PATH
+- NOT_REPRODUCED_IN_CAUSAL_RUN
+- BROAD_PIPELINE_INSTABILITY
+- DIAGNOSTIC_INCOMPLETE
+
+Protocol:
+- `reports/HCL_STATE_JSON_REPAIR_V02_IO01_CAUSAL_DIAGNOSIS_V01.md`
+- protocol anchor:
+  `b32a89907929e6abfa1cc037cd95df78fcc0566c`
+- behavior anchor:
+  `37df0afaacfa819abafe1979002100c645fab1c2`
+
+**Current gate: STATE_JSON_REPAIR_V02_IO01_CAUSAL_DIAGNOSIS_V01_READY**
