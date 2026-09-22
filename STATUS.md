@@ -2161,3 +2161,58 @@ Paid synthetic execution:
 - no HCL behavior change permitted while this run is open
 
 **Current gate: STATE_GENERATION_RELIABILITY_AUDIT_V01_RUNNING**
+
+
+## HCL state-generation reliability audit v0.1 closure
+
+Canonical run:
+- `35685106840`
+- terminal result: **CANCELLED at 120-minute timeout**
+- zero-provider preflight: PASS
+- HCL behavior freeze: PASS
+- audit protocol freeze: PASS
+
+Observed before timeout:
+- synthetic cases completed: **22 / 24**
+- success: **4**
+- `state_json_exhaustion`: **18**
+- `backend_or_other_exception`: **0**
+- final 2 long/recursive cases: not reached
+- every observed JSON-exhaustion case used all **3** HCL-level state attempts
+
+Predeclared defect gate:
+- threshold: >=2 distinct `state_json_exhaustion` cases
+- observed: **18**
+
+Therefore:
+
+**STATE JSON RELIABILITY DEFECT ESTABLISHED**
+
+The final two unobserved cases cannot invalidate this conclusion because the
+predeclared threshold was exceeded before timeout.
+
+The result independently reproduces the abstract state-generation failure class
+without using any consumed Hi-ToM / FANToM / SOTOPIA content.
+
+Important boundary:
+- this does not prove that all 24 Hi-ToM RuntimeErrors had the same exact cause;
+- no backend/transport defect was established in the 22 completed synthetic
+  cases;
+- Hi-ToM efficacy remains NOT EVALUABLE.
+
+See:
+- `reports/HCL_STATE_GENERATION_RELIABILITY_AUDIT_V01.md`
+- `reports/HCL_STATE_GENERATION_RELIABILITY_AUDIT_V01_CLOSURE.md`
+
+Next canonical work:
+1. keep HCL v0.3 cognition semantics frozen and HCL always-on;
+2. design a minimal independent repair of the abstract state-JSON reliability
+   mechanism only;
+3. do not use consumed Hi-ToM content for repair or tuning;
+4. add zero-provider tests for structured-output / JSON recovery / retry and
+   timeout invariants;
+5. validate the repair on the same independent synthetic reliability suite plus
+   existing state-fidelity, answer-loop/checker and output-interface regressions;
+6. do not consume new external benchmark evidence until those gates pass.
+
+**Current gate: STATE_JSON_RELIABILITY_DEFECT_ESTABLISHED_REQUIRES_INDEPENDENT_REPAIR**
