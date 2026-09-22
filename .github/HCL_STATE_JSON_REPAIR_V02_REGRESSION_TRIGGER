@@ -1,0 +1,5 @@
+trigger: hcl-state-json-repair-v02-regressions
+behavior_anchor: 37df0afaacfa819abafe1979002100c645fab1c2
+regression_protocol_anchor: 33b423c3160c88a08dc8033385f6887ef92ac38a
+reliability_run: 35709921859
+external_benchmark_calls: 0
