@@ -2525,3 +2525,39 @@ Contract:
 - `reports/HCL_STATE_JSON_RELIABILITY_REPAIR_V02.md`
 
 **Current gate: STATE_JSON_RELIABILITY_REPAIR_V02_PREDECLARED_READY**
+
+
+## HCL state-JSON reliability repair v0.2 implementation
+
+Implementation:
+- runtime commit:
+  `37df0afaacfa819abafe1979002100c645fab1c2`
+- only HCL runtime file changed from failed v0.1 candidate:
+  `hcl/v03/backends.py`
+- state JSON path now explicitly sends:
+  `extra_body={"thinking":{"type":"disabled"}}`
+- JSON response format remains enabled.
+
+Frozen:
+- state prompt / STATE_SYSTEM unchanged;
+- state schema / cognition semantics unchanged;
+- state max_tokens remains 8192;
+- HCL retry budget remains 3;
+- backend empty retry remains 4;
+- model/provider/endpoint/seed unchanged;
+- draft/check/revision completion unchanged.
+
+Validation assets:
+- runner:
+  `scripts/run_state_json_repair_validation_v02.py`
+- aggregate:
+  `scripts/aggregate_state_json_repair_validation_v02.py`
+- zero-provider runtime tests:
+  `tests/test_state_json_reliability_repair_v02.py`
+- validation tests:
+  `tests/test_state_json_repair_validation_v02.py`
+
+Pass gate remains 24/24 independent synthetic state builds with zero runtime
+failures. No external benchmark evidence is authorized.
+
+**Current gate: STATE_JSON_RELIABILITY_REPAIR_V02_VALIDATION_READY**
