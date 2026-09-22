@@ -1,0 +1,5 @@
+trigger: state-generation-reliability-audit-v01
+hcl_behavior_anchor: ce36d7e6f911910f97437c23455dee33e0e7bc82
+audit_protocol_anchor: 822fd9a0d7cad47f50fa588803b9ca38a51ebc1c
+fixtures: 24
+external_benchmark_calls: 0
