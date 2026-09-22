@@ -1,0 +1,8 @@
+trigger: hcl-v02-io01-causal-diagnosis-v01
+behavior_anchor: 37df0afaacfa819abafe1979002100c645fab1c2
+protocol_anchor: b32a89907929e6abfa1cc037cd95df78fcc0566c
+target: io01_full_binary_direct_access
+control: io02_full_binary_missing_access
+repeats_each: 8
+workers: 4
+external_benchmark_calls: 0
