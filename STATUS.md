@@ -6,7 +6,7 @@ Human Cognition Layer (HCL)
 
 ## Current phase
 
-**PHASE-04 — Decision-policy repair and fresh holdout validation**
+**PHASE-05 — HCL v0.4 research reset / design-only**
 
 ## Core doctrine
 
@@ -17,8 +17,9 @@ The base model is replaceable. Benchmarks are measurement instruments.
 HCL remains in the loop for every input. Performance regressions are used to diagnose and improve the module; they are not a reason to silently bypass HCL.
 
 See:
+- `docs/RESEARCH_POSITIONING_V04.md`
 - `docs/MODULE_FIRST_DOCTRINE.md`
-- `hcl/HCL_V0_3_SPEC.md`
+- `hcl/HCL_V0_3_SPEC.md` — frozen baseline prototype
 
 ## State semantics
 
@@ -3504,3 +3505,59 @@ predeclared protocol using only previously unconsumed rows and no evaluation-row
 tuning.
 
 **Current gate: RUNTIME_STATE_PROMPT_CONFORMANCE_V01_SYNTHETIC_COMPLETE_EXTERNAL_EVIDENCE_NOT_STARTED**
+
+## HCL v0.4 research repositioning
+
+Research reset decision:
+
+HCL v0.3 is now formally treated as a **frozen baseline
+epistemic/social-cognition prototype**, not as the final Human Cognition Layer
+architecture.
+
+The research objective is re-centered on a portable complex-cognition module
+whose contribution must be established by:
+
+- a coherent cognition representation/update mechanism;
+- measurable capability improvement on unseen tasks;
+- ablation evidence identifying where the gain comes from;
+- transfer across replaceable base models;
+- independent external evaluation / recognized benchmark evidence.
+
+The project explicitly distinguishes:
+
+- **research mechanism** — the actual cognition module;
+- **tests** — implementation/capability measurement;
+- **benchmarks / leaderboards** — external evidence and recognition.
+
+Synthetic tests are not research success by themselves and must not drive an
+open-ended benchmark-failure → prompt-rule → confirming-test loop.
+
+Development firewall for v0.4:
+
+1. do not add cognition rules directly from leaderboard misses;
+2. do not tune on consumed fresh evaluation rows;
+3. use benchmark failures only to motivate abstract research questions;
+4. develop mechanisms using independent evidence;
+5. freeze before unseen external evaluation;
+6. require cross-base transfer before claiming the cognition layer itself is
+   the source of improvement.
+
+Public/IP boundary:
+
+- public repository documents only released research positioning, implementation
+  and evidence;
+- unpublished owner-originated conceptual examples, private research reasoning,
+  and intentionally withheld mechanism details are not to be added without
+  explicit owner authorization.
+
+Public positioning:
+- `docs/RESEARCH_POSITIONING_V04.md`
+
+v0.3 remains frozen as the reproducible baseline at the last synthetic closure.
+
+No new external benchmark rows are consumed by this repositioning.
+
+No v0.4 runtime implementation is authorized by this repositioning alone.
+
+**Current gate: HCL_V04_RESEARCH_RESET_DESIGN_ONLY_NOT_IMPLEMENTED**
+
