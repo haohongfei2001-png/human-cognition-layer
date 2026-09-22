@@ -2866,3 +2866,40 @@ See:
 - `reports/HCL_STATE_JSON_REPAIR_V02_IO01_CAUSAL_DIAGNOSIS_V01_CLOSURE.md`
 
 **Current gate: IO01_DRAFT_DOMINANT_REQUIRES_GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_DESIGN**
+
+
+## HCL generic answer-loop semantic faithfulness repair v0.1 implementation
+
+Diagnosis basis:
+- state supports target gold semantics: 8/8;
+- first semantic inversion at DRAFT: 5/8;
+- first semantic inversion at FIRST_REVISION: 3/8;
+- checker/revision secondary failures present;
+- matched control stable.
+
+Repair scope:
+- only `DRAFT_SYSTEM`, `CHECK_SYSTEM`, `REVISION_SYSTEM`;
+- generic state-grounding / semantic-monotonicity / exact-output rules;
+- no fixture-specific literals;
+- no state prompt/schema/semantics change;
+- repair-v0.2 thinking-disabled state path preserved.
+
+Implementation anchor:
+- `4ab45463bbeacbe3eb8eaa91be7ec908130ce980`
+
+Fresh synthetic validation:
+- `eval/answer_loop/semantic_faithfulness_fresh_v01.json`
+- 12 new repository-owned cases;
+- direct positive, direct negative, explicit transfer, binary and A/B exact-output;
+- strict gate: 12/12 semantic + parser + exact-format, 0 runtime exceptions.
+
+If and only if fresh validation passes:
+1. production-path state-fidelity regression;
+2. existing answer-checker fresh suite;
+3. unchanged original 16-case output-interface audit.
+
+Complete synthetic closure requires all gates above to pass.
+
+No new external benchmark evidence is authorized.
+
+**Current gate: GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_V01_VALIDATION_READY**
