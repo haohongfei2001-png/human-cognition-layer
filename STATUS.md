@@ -2138,3 +2138,26 @@ No HCL behavior repair is authorized by predeclaration alone.
 The audit must run frozen behavior first.
 
 **Current gate: STATE_GENERATION_RELIABILITY_AUDIT_V01_PREDECLARED_READY**
+
+
+## HCL state-generation reliability audit v0.1 execution
+
+Canonical workflow:
+- run: `35685106840`
+- launch commit: `8c3141f2256ed954d523bed3a9e63364ef03fbff`
+
+Zero-provider preflight:
+- frozen HCL state-generation behavior diff: PASS
+- frozen reliability-audit protocol diff: PASS
+- Python compile: PASS
+- zero-provider unit tests: PASS
+- deterministic 24-case / 6-stratum fixture validation: PASS
+- runner entrypoint smoke: PASS
+
+Paid synthetic execution:
+- 24 independent repository-owned synthetic cases
+- no external benchmark content
+- content-free observation only
+- no HCL behavior change permitted while this run is open
+
+**Current gate: STATE_GENERATION_RELIABILITY_AUDIT_V01_RUNNING**
