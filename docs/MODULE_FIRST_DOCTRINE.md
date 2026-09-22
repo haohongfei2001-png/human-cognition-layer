@@ -4,26 +4,38 @@
 
 The Human Cognition Layer (HCL) is the research program.
 
-The base model is replaceable. Benchmarks are measurement instruments. A
-portable cognition mechanism is the intended research asset **only if the
-evidence shows that it adds value beyond strong simpler alternatives**.
+The base model is replaceable. Benchmarks are measurement instruments. The
+primary research objective is to build a cognition mechanism that is
+**substantively correct before it is competitively scored**.
+
+HCL must therefore be judged on two separate axes:
+
+1. **correctness / validity** — whether its state, perspective boundaries,
+   evidence dependencies, uncertainty and updates are faithful to the available
+   evidence and to the human-state construct being modeled;
+2. **utility / efficacy** — whether a correct mechanism actually improves
+   downstream reasoning, prediction or action under fair comparison.
+
+These axes must not be collapsed.
 
 Therefore:
 
-- a frozen HCL treatment must not be silently bypassed during an evaluation just
-  to improve its score;
-- an early regression is evidence to investigate, not permission to rewrite the
-  evaluation after seeing results;
-- the research program must nevertheless allow the conclusion that a particular
-  HCL mechanism is unnecessary, equivalent to a simpler method, or harmful;
-- the project may improve representations, update rules, uncertainty handling
-  and decision interfaces only through an independent research cycle, not by
-  copying evaluation misses into production rules;
-- routing/no-op behavior may exist inside a tested architecture, but whether an
-  always-on external cognition layer is necessary is itself an empirical
-  question.
+- a lower benchmark score does **not** automatically mean that the HCL cognition
+  is wrong;
+- a higher benchmark score does **not** automatically validate an incorrect
+  cognition mechanism;
+- benchmark disagreement must be diagnosed as possible cognition error,
+  construct/gold ambiguity, evaluator mismatch, output-interface failure,
+  tradeoff, or genuine task-performance loss;
+- a frozen HCL treatment must not be silently bypassed during evaluation just to
+  improve its score;
+- a cognition claim may be rejected when the mechanism is substantively wrong
+  under independently grounded evidence;
+- a utility/necessity claim may be rejected when a substantively correct HCL
+  fails to add downstream value beyond strong alternatives;
+- these are different conclusions and must be reported separately.
 
-**Protect experimental integrity, not the assumption that HCL must be correct.**
+**Correctness first; benchmark score is evidence, not authority.**
 
 ## What remains portable
 
@@ -42,22 +54,33 @@ No single base-model checkpoint defines the project.
 
 ## Benchmark policy
 
-Benchmark score is necessary but not sufficient.
+Benchmark score is useful external evidence, but it is not the definition of
+cognitive correctness.
 
 When HCL score decreases, we must distinguish:
 
-- genuine degradation in reasoning;
-- benchmark-gold ambiguity;
+- genuine cognitive or reasoning error;
+- benchmark-gold ambiguity or construct mismatch;
 - overthinking / representation overload;
 - output-interface failure;
 - evaluator mismatch;
-- correct uncertainty being punished by a forced-choice benchmark.
+- a valid uncertainty representation being punished by forced-choice scoring;
+- a genuinely correct cognition state that does not translate into better task
+  performance.
 
-The response is to diagnose the failure under the frozen protocol. A new
-mechanism may be proposed only through independent development evidence. If a
-strong simpler alternative remains equivalent or better under adequate
-evaluation, the correct research conclusion may be that the tested HCL
-mechanism is not needed.
+The response is first to determine **what is actually correct**, using the
+strongest available grounding: explicit task evidence, formal environment
+state, information-access constraints, independently collected human behavior,
+or other construct-valid evidence.
+
+Only after correctness is assessed should benchmark performance be interpreted.
+
+If HCL is substantively correct but does not beat a strong simpler alternative,
+that weakens or falsifies the **incremental utility / necessity claim**, not the
+correctness claim itself.
+
+If HCL scores well while producing substantively wrong human-state inferences,
+the score does not validate the mechanism.
 
 ## Canonical architecture
 
