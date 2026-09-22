@@ -78,6 +78,17 @@ has already discovered the final Human Cognition Layer architecture.
 
 Future HCL work must be evaluated against a stronger standard.
 
+**Correctness is primary; score is not the ontology.**
+
+For directly observable or formally specified states, correctness should be
+grounded in facts, event history and information-access constraints.
+
+For latent human states that are not directly observable, correctness means the
+module stays within the evidence, preserves genuine alternatives, represents
+uncertainty honestly, and is validated against independent human behavior or
+other construct-valid evidence where available. A benchmark gold label is not
+automatically treated as unquestionable psychological truth.
+
 A meaningful research contribution should establish that a cognition module:
 
 1. adds a capability not reducible to benchmark-specific prompt patching;
