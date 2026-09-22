@@ -3270,3 +3270,24 @@ Protocol:
   `38a7ff7f19e664f65dfb447b4593291a44701b33`
 
 **Current gate: COMMUNICATION_BOUNDARY_RAW_7_OF_10_REQUIRES_ADJUDICATION**
+
+
+## Communication boundary failure adjudication v0.1 execution
+
+Canonical run:
+- `35720920913`
+- launch commit:
+  `a900bc971fa76449208d0cc0414a574b30a82678`
+
+Preflight:
+- frozen runtime repair: PASS
+- adjudication protocol frozen: PASS
+- zero-provider audit checks: PASS
+
+Provider-backed audit:
+- 3 raw failed cases × 4 state builds = 12
+- full repository-owned synthetic state JSON persisted
+- no answer-layer calls
+- no runtime changes while open
+
+**Current gate: COMMUNICATION_BOUNDARY_ADJUDICATION_V01_RUNNING**
