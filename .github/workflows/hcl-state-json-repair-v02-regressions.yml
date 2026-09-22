@@ -1,0 +1,252 @@
+name: HCL State-JSON Repair v0.2 Regressions
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_STATE_JSON_REPAIR_V02_REGRESSION_TRIGGER"
+
+permissions:
+  contents: read
+
+env:
+  REPAIR_V02_BEHAVIOR_ANCHOR: 37df0afaacfa819abafe1979002100c645fab1c2
+  REGRESSION_PROTOCOL_ANCHOR: 33b423c3160c88a08dc8033385f6887ef92ac38a
+  ORIGINAL_INTERFACE_AUDIT_PROTOCOL_ANCHOR: a1775b5ee6002165776b544aa65ae0fee4a0c9f3
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify repaired HCL behavior frozen
+        shell: bash
+        run: |
+          git diff --exit-code "$REPAIR_V02_BEHAVIOR_ANCHOR"..HEAD -- \
+            hcl/v03/backends.py \
+            hcl/v03/answer_loop.py \
+            hcl/v03/state_schema.json \
+            hcl/v03/FROZEN_STATE_SEMANTICS.md
+
+      - name: Verify regression protocol frozen
+        shell: bash
+        run: |
+          git diff --exit-code "$REGRESSION_PROTOCOL_ANCHOR"..HEAD -- \
+            reports/HCL_STATE_JSON_REPAIR_V02_REGRESSION_PROTOCOL.md \
+            scripts/run_hcl_v03_state_fidelity_repair_v02.py \
+            scripts/run_hcl_v03_state_fidelity.py \
+            scripts/run_hcl_v03_answer_checker.py \
+            scripts/run_info_state_output_interface_audit_v01.py \
+            eval/state_fidelity/fixtures_v01.json \
+            eval/answer_loop/checker_fixtures_v02_fresh.json \
+            eval/answer_loop/info_state_output_interface_v01.json
+
+      - name: Verify original interface audit protocol unchanged
+        shell: bash
+        run: |
+          git diff --exit-code "$ORIGINAL_INTERFACE_AUDIT_PROTOCOL_ANCHOR"..HEAD -- \
+            scripts/run_info_state_output_interface_audit_v01.py \
+            eval/answer_loop/info_state_output_interface_v01.json
+
+      - name: Install zero-provider dependency
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Compile and run relevant zero-provider tests
+        shell: bash
+        run: |
+          python -m py_compile \
+            scripts/run_hcl_v03_state_fidelity_repair_v02.py \
+            scripts/run_hcl_v03_state_fidelity.py \
+            scripts/run_hcl_v03_answer_checker.py \
+            scripts/run_info_state_output_interface_audit_v01.py
+          python -m unittest discover -s tests -p test_state_json_reliability_repair_v02.py -v
+          python -m unittest discover -s tests -p test_state_json_repair_validation_v02.py -v
+
+  state_fidelity:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify repaired behavior and regression assets
+        shell: bash
+        run: |
+          git diff --exit-code "$REPAIR_V02_BEHAVIOR_ANCHOR"..HEAD -- \
+            hcl/v03/backends.py hcl/v03/answer_loop.py hcl/v03/state_schema.json hcl/v03/FROZEN_STATE_SEMANTICS.md
+          git diff --exit-code "$REGRESSION_PROTOCOL_ANCHOR"..HEAD -- \
+            scripts/run_hcl_v03_state_fidelity_repair_v02.py scripts/run_hcl_v03_state_fidelity.py eval/state_fidelity/fixtures_v01.json
+      - name: Install dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+      - name: Run production-path state-fidelity regression
+        run: |
+          python scripts/run_hcl_v03_state_fidelity_repair_v02.py \
+            --model deepseek-flash \
+            --fixtures eval/state_fidelity/fixtures_v01.json \
+            --workers 4
+      - name: Upload state-fidelity evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-v02-regression-state-fidelity-${{ github.run_id }}
+          path: artifacts/hcl-v03-state-fidelity-repair-v02/
+          if-no-files-found: error
+          retention-days: 30
+
+  answer_checker:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify repaired behavior and checker assets
+        shell: bash
+        run: |
+          git diff --exit-code "$REPAIR_V02_BEHAVIOR_ANCHOR"..HEAD -- \
+            hcl/v03/backends.py hcl/v03/answer_loop.py hcl/v03/state_schema.json hcl/v03/FROZEN_STATE_SEMANTICS.md
+          git diff --exit-code "$REGRESSION_PROTOCOL_ANCHOR"..HEAD -- \
+            scripts/run_hcl_v03_answer_checker.py eval/answer_loop/checker_fixtures_v02_fresh.json
+      - name: Install dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+      - name: Run existing answer-checker regression
+        run: |
+          python scripts/run_hcl_v03_answer_checker.py \
+            --model deepseek-flash \
+            --fixtures eval/answer_loop/checker_fixtures_v02_fresh.json \
+            --workers 4
+      - name: Upload checker evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-v02-regression-answer-checker-${{ github.run_id }}
+          path: artifacts/hcl-v03-answer-checker/
+          if-no-files-found: error
+          retention-days: 30
+
+  output_interface:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify repaired behavior and original audit assets
+        shell: bash
+        run: |
+          git diff --exit-code "$REPAIR_V02_BEHAVIOR_ANCHOR"..HEAD -- \
+            hcl/v03/backends.py hcl/v03/answer_loop.py hcl/v03/state_schema.json hcl/v03/FROZEN_STATE_SEMANTICS.md
+          git diff --exit-code "$ORIGINAL_INTERFACE_AUDIT_PROTOCOL_ANCHOR"..HEAD -- \
+            scripts/run_info_state_output_interface_audit_v01.py \
+            eval/answer_loop/info_state_output_interface_v01.json
+      - name: Install dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+      - name: Run original synthetic output-interface audit under repaired HCL
+        run: |
+          python scripts/run_info_state_output_interface_audit_v01.py \
+            --out artifacts/hcl-info-state-output-interface-v02-regression
+      - name: Enforce prior interface regression expectations
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path("artifacts/hcl-info-state-output-interface-v02-regression/summary.json").read_text())
+          assert s["fixture_count"] == 16
+          assert s["full_loop"]["n"] == 8
+          assert s["full_loop"]["semantic_correct"] == 8
+          assert s["full_loop"]["parser_valid"] == 8
+          assert s["forced_revision"]["n"] == 8
+          assert s["forced_revision"]["semantic_correct"] == 8
+          assert s["forced_revision"]["parser_valid"] == 8
+          assert s["abstract_interface_defect_established"] is False
+          PY
+      - name: Upload interface evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-v02-regression-output-interface-${{ github.run_id }}
+          path: artifacts/hcl-info-state-output-interface-v02-regression/
+          if-no-files-found: error
+          retention-days: 30
+
+  regression_gate:
+    needs: [state_fidelity, answer_checker, output_interface]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: hcl-v02-regression-state-fidelity-${{ github.run_id }}
+          path: regression/state
+      - uses: actions/download-artifact@v4
+        with:
+          name: hcl-v02-regression-answer-checker-${{ github.run_id }}
+          path: regression/checker
+      - uses: actions/download-artifact@v4
+        with:
+          name: hcl-v02-regression-output-interface-${{ github.run_id }}
+          path: regression/interface
+      - name: Enforce complete v0.2 regression gate
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          state=json.loads(Path("regression/state/summary.json").read_text())
+          checker=json.loads(Path("regression/checker/summary.json").read_text())
+          interface=json.loads(Path("regression/interface/summary.json").read_text())
+
+          assert state["failed"] == 0
+          assert state["pass_rate"] == 1.0
+          assert state["schema_valid_rate"] == 1.0
+
+          assert checker["failed"] == 0
+          assert checker["passed"] == checker["fixture_count"]
+          assert checker["pass_rate"] == 1.0
+
+          assert interface["fixture_count"] == 16
+          assert interface["full_loop"]["semantic_correct"] == 8
+          assert interface["full_loop"]["parser_valid"] == 8
+          assert interface["forced_revision"]["semantic_correct"] == 8
+          assert interface["forced_revision"]["parser_valid"] == 8
+          assert interface["abstract_interface_defect_established"] is False
+          PY
