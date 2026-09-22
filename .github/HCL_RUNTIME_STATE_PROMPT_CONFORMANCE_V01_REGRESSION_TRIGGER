@@ -1,0 +1,6 @@
+trigger: hcl-runtime-state-prompt-conformance-v01-full-regressions
+behavior_anchor: da09c1fc8b82a538f6b0fdbbbe101e58b839241b
+protocol_anchor: 574784ddb2ac5d4b525ddb30d3403144ec973f53
+stage1_state_reliability_cases: 24
+stage2_regressions: fresh_answer,output_interface,state_fidelity,answer_checker
+external_benchmark_calls: 0
