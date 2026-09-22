@@ -1885,3 +1885,46 @@ Next methodological direction:
 - zero-provider inventory/predeclaration required before any paid model call.
 
 **Current gate: INFO_STATE_AUDIT_NO_REPAIR_REQUIRES_HITOM_ZERO_PROVIDER_INVENTORY**
+
+
+## Hi-ToM external validation v0.1 zero-provider inventory
+
+Triggered after:
+- FANToM v0.2 mixed closure;
+- independent info-state/output-interface audit found no repeatable parser/interface defect.
+
+Pinned external source:
+- repository: `ying-hui-he/Hi-ToM_dataset`
+- commit: `4279d3f783ff4f3b9fcced2a2fec9f6328683f82`
+- data path: `Hi-ToM_data/Hi-ToM_data.json`
+- git blob SHA: `23ab2aee6b2e80115dd645d88b91529ad2a29309`
+- license: Apache-2.0.
+
+Zero-provider design:
+- use VP rows only;
+- do not use dataset CoT prompts;
+- fixed salt: `HCL-HITOM-V01-20260922`;
+- globally story-disjoint selection;
+- 2 rows per `question_order × deception × story_length` cell.
+
+Target sample:
+- order 0: 12
+- order 1: 12
+- order 2: 12
+- order 3: 12
+- order 4: 12
+- total: **60 questions / 60 distinct stories**.
+
+Primary higher-order block:
+- orders 2–4, n=36.
+
+Lower-order stability control:
+- orders 0–1, n=24.
+
+See:
+- `reports/HITOM_EXTERNAL_VALIDATION_V01_PLAN.md`
+
+No provider/model call is permitted before exact sample IDs and story hashes are
+committed.
+
+**Current gate: HITOM_EXT_V01_ZERO_PROVIDER_INVENTORY_READY**
