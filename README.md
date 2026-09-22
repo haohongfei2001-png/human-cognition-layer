@@ -1,10 +1,10 @@
 # Human Cognition Layer
 
-Human Cognition Layer (HCL) 是一个面向**人类心智状态建模与决策校准**的可迁移、可拔插认知层研究项目。
+Human Cognition Layer (HCL) 是一个面向**复杂人类认知建模、状态更新与社会决策**的可迁移认知层研究项目。
 
-项目的核心问题不是“能否针对某个 benchmark 调出更高分”，而是：
+项目的最终目标不是把某个 benchmark 调到更高分，也不是把输入分成几个类别，而是：
 
-> 在不修改底座模型权重的前提下，能否用明确、可复现、可迁移的认知结构，更稳定地建模人的知识、信念、意图、因果不确定性与社会决策，并改善最终回答或行动？
+> **构造一个独立于底座模型的复杂认知模块，使不同 LLM 能更可靠地形成、维护、更新并使用关于人的结构化认知，从而在未见过的推理与交互任务上获得稳定提升。**
 
 **Canonical live state:** [STATUS.md](STATUS.md)
 
@@ -12,28 +12,76 @@ Human Cognition Layer (HCL) 是一个面向**人类心智状态建模与决策�
 
 **The base model is replaceable. The cognition layer is the asset.**
 
-HCL 采用 module-first doctrine：认知层应保持在处理链路中，性能回退用于暴露认知层或决策策略的问题，而不是通过静默绕过 HCL 来获得更好的 benchmark 分数。
+研究成果应当是一个可复用、可迁移、能够真正增加能力的认知模块。
 
-核心约束见：
+Benchmark / leaderboard 的角色是：
 
+- 外部测量；
+- 泛化检验；
+- 研究认可渠道。
+
+它们不是模块设计的答案来源。
+
+因此本项目明确反对：
+
+- 根据 leaderboard 错题逐条补 prompt 规则；
+- 把 internal synthetic test 的满分当作研究有效性的证明；
+- 把 SIMPLE / EPISTEMIC / CAUSAL_AMBIGUITY 分类本身当作研究贡献；
+- 消费 fresh evaluation 后继续针对这些样本调参。
+
+公开研究定位见：
+
+- [docs/RESEARCH_POSITIONING_V04.md](docs/RESEARCH_POSITIONING_V04.md)
 - [docs/MODULE_FIRST_DOCTRINE.md](docs/MODULE_FIRST_DOCTRINE.md)
-- [hcl/HCL_V0_3_SPEC.md](hcl/HCL_V0_3_SPEC.md)
 
 ## Current phase
 
-当前 canonical phase：
+当前 canonical 阶段：
 
-**PHASE-04 — Decision-policy repair and fresh holdout validation**
+**PHASE-05 — HCL v0.4 Research Reset / Design-Only**
 
-当前已经不是早期 CogToM baseline 阶段。HCL v0.3 的 state semantics 已冻结，always-on answer loop 已实现并通过 checker gate，Decision Policy 已通过独立 synthetic gate 并接入 SOTOPIA action-generation path。
+HCL v0.3 现在被正式定位为：
 
-当前研究 gate：
+> **baseline epistemic/social-cognition prototype**
 
-**HOLDOUT_SIGNAL_POSITIVE_REQUIRES_REPEATS**
+v0.3 已经完成了一整套可运行基础设施：
 
-最近一次此前未使用的 SOTOPIA-Hard 10-setting paired holdout 给出了正向信号，但样本量仍小且每个 arm 只有单轨迹，因此**不能据此宣称 HCL 已被证明有效**。当前实现应保持冻结，先做预定义 seed/repeat 的稳定性与方差验证；只有信号稳定后才进入 cross-base-model transfer。
+- always-on cognition state；
+- answer generation / checker / bounded revision；
+- Decision Policy；
+- Action Checker；
+- SOTOPIA integration；
+- OpenAI-compatible provider transport；
+- synthetic reliability / regression / adjudication harness。
 
-当前仍**没有开始模型训练**。是否需要训练数据、adapter 或其他参数化方法，要等方法层本身通过更强的外部验证后再决定。
+最新 v0.3 synthetic package 已完成：
+
+- state-generation reliability: 24/24；
+- fresh answer semantic-faithfulness: 12/12；
+- output-interface: 8/8 + 8/8；
+- state fidelity: adjudicated semantic 12/12；
+- answer checker: adjudicated behavioral 12/12。
+
+这些结果说明 **v0.3 baseline 已经实现并具有稳定工程行为**。
+
+它们不证明：
+
+- HCL 已经是最终正确的复杂认知架构；
+- HCL 已经在广泛外部任务上稳定优于裸模型；
+- HCL 已经跨底座模型迁移；
+- synthetic 满分等于真实认知能力提升。
+
+因此当前不继续沿着“benchmark failure → prompt patch → synthetic gate”滚动开发。
+
+下一阶段首先重新设计 v0.4 的研究问题、模块边界、representation/update contract、persistent state、ablation、cross-base transfer 和独立外部验证防火墙。
+
+**在 v0.4 design package 冻结前，不启动新的 v0.4 runtime，也不消费新的 fresh external benchmark。**
+
+## Intellectual-property boundary
+
+公开仓库只包含已决定公开的研究定位、实现、协议与实验结果。
+
+未公开的 owner-originated conceptual examples、私有研究推演和拟作为后续研究成果组成部分的机制细节，不应在未获得明确授权前写入公开仓库。
 
 ## HCL v0.3 architecture
 
@@ -182,15 +230,17 @@ python scripts/run_cogtom_baseline.py --model deepseek-flash --limit 20 --langua
 
 ## Current route
 
-~~~text
-HCL v0.3 state semantics (FROZEN)
-→ always-on answer loop
-→ Decision Policy
-→ fresh SOTOPIA-Hard holdout
-→ predefined repeat stability / variance
+```text
+HCL v0.3 baseline (FROZEN)
+→ HCL v0.4 research reset / design
+→ representation + update mechanism
+→ independent capability validation
+→ frozen unseen external evaluation
 → cross-base-model transfer
-→ training / adapters only if justified
-→ broader external validation
-~~~
+→ recognized benchmark / leaderboard evidence
+→ training / adapters only if the evidence justifies them
+```
+
+当前原则是：**先形成研究机制，再让榜单证明它；不让榜单错题反向定义认知模块。**
 
 不要从 README 推断某个实验仍在运行或已经结束；**实时执行状态始终以 [STATUS.md](STATUS.md) 为唯一事实源。**
