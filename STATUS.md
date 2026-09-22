@@ -3370,3 +3370,56 @@ Stage 1:
 Stage 2 remains blocked pending Stage 1.
 
 **Current gate: RUNTIME_STATE_PROMPT_CONFORMANCE_V01_STATE_RELIABILITY_RUNNING**
+
+
+## Runtime state-prompt conformance v0.1 full regression raw result
+
+Canonical workflow:
+- run: `35721321301`
+- terminal workflow result: **FAILURE**
+- launch commit: `a13566d910af04df3cd726b965b4125b6d96ac6e`
+
+Frozen gates:
+
+1. state-generation reliability:
+   - **24 / 24 PASS**
+   - reliability aggregate: PASS
+
+2. fresh semantic-faithfulness answer suite:
+   - **12 / 12 PASS**
+
+3. original information-state/output-interface audit:
+   - full-loop semantic/parser: **8 / 8**
+   - forced-revision semantic/parser: **8 / 8**
+   - interface gate: PASS
+
+4. production-path state fidelity:
+   - raw: **11 / 12**
+   - sole failed ID: `epistemic_private_message`
+   - schema/mode/uncertainty/agent-field checks passed
+   - only raw failure: legacy non-empty `missing_bridges` expectation
+
+5. existing fresh answer-checker suite:
+   - raw: **11 / 12**
+   - sole failed ID: `fresh11_absence_of_evidence`
+   - checker status: REVISE as expected
+   - revision produced semantically corrected answer
+   - final checker: PASS
+   - only raw mismatch: violation taxonomy
+     `PREMATURE_COLLAPSE` vs fixture's sole expected `BELIEF_LEVEL`
+
+The original raw workflow remains FAILURE and is preserved.
+
+Bounded adjudication predeclared:
+- state-fidelity raw failure: 4 independent state builds;
+- answer-checker raw failure: 4 independent checker/revision pipelines;
+- total provider-backed adjudication runs: 8;
+- frozen HCL behavior;
+- no fixture/evaluator/runtime changes.
+
+Protocol:
+- `reports/HCL_RUNTIME_CONFORMANCE_REGRESSION_ADJUDICATION_V01.md`
+- protocol anchor:
+  `9ef67f6a4bbe9b7058a76c94264ba4cd286361bf`
+
+**Current gate: RUNTIME_CONFORMANCE_FULL_REGRESSION_RAW_FAILURES_REQUIRE_ADJUDICATION**
