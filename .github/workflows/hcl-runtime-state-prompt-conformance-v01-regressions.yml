@@ -1,0 +1,329 @@
+name: HCL Runtime State-Prompt Conformance v0.1 Full Regressions
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_RUNTIME_STATE_PROMPT_CONFORMANCE_V01_REGRESSION_TRIGGER"
+
+permissions:
+  contents: read
+
+env:
+  BEHAVIOR_ANCHOR: da09c1fc8b82a538f6b0fdbbbe101e58b839241b
+  REGRESSION_PROTOCOL_ANCHOR: 574784ddb2ac5d4b525ddb30d3403144ec973f53
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify frozen repaired behavior
+        shell: bash
+        run: |
+          git diff --exit-code "$BEHAVIOR_ANCHOR"..HEAD --             hcl/v03/answer_loop.py             hcl/v03/backends.py             hcl/v03/state_schema.json             hcl/v03/FROZEN_STATE_SEMANTICS.md
+
+      - name: Verify regression protocol and assets frozen
+        shell: bash
+        run: |
+          git diff --exit-code "$REGRESSION_PROTOCOL_ANCHOR"..HEAD --             reports/HCL_RUNTIME_STATE_PROMPT_CONFORMANCE_V01_REGRESSION_PROTOCOL.md             eval/answer_loop/state_generation_reliability_v01.json             scripts/run_state_json_repair_validation_v02.py             scripts/aggregate_state_json_repair_validation_v02.py             eval/answer_loop/semantic_faithfulness_fresh_v01.json             scripts/run_generic_answer_loop_semantic_repair_v01.py             eval/answer_loop/info_state_output_interface_v01.json             scripts/run_info_state_output_interface_audit_v01.py             eval/state_fidelity/fixtures_v01.json             scripts/run_hcl_v03_state_fidelity_repair_v02.py             scripts/run_hcl_v03_state_fidelity.py             eval/answer_loop/checker_fixtures_v02_fresh.json             scripts/run_hcl_v03_answer_checker.py
+
+      - name: Install zero-provider dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Compile and run relevant zero-provider gates
+        shell: bash
+        run: |
+          python -m py_compile             hcl/v03/answer_loop.py             hcl/v03/backends.py             scripts/run_state_json_repair_validation_v02.py             scripts/aggregate_state_json_repair_validation_v02.py             scripts/run_generic_answer_loop_semantic_repair_v01.py             scripts/run_info_state_output_interface_audit_v01.py             scripts/run_hcl_v03_state_fidelity_repair_v02.py             scripts/run_hcl_v03_answer_checker.py
+          python -m unittest discover -s tests -p test_state_json_reliability_repair_v02.py -v
+          python -m unittest discover -s tests -p test_state_json_repair_validation_v02.py -v
+          python -m unittest discover -s tests -p test_generic_answer_loop_semantic_repair_v01.py -v
+          python -m unittest discover -s tests -p test_runtime_state_prompt_conformance_v01.py -v
+
+  reliability:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        shard_index: [0, 1, 2, 3, 4, 5]
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify frozen repaired behavior
+        run: |
+          git diff --exit-code "$BEHAVIOR_ANCHOR"..HEAD --             hcl/v03/answer_loop.py hcl/v03/backends.py             hcl/v03/state_schema.json hcl/v03/FROZEN_STATE_SEMANTICS.md
+      - name: Install dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+      - name: Run frozen reliability shard
+        run: |
+          python scripts/run_state_json_repair_validation_v02.py             --shard-index ${{ matrix.shard_index }}             --shard-count 6
+      - name: Upload reliability shard
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-runtime-conformance-reliability-shard-${{ matrix.shard_index }}-${{ github.run_id }}
+          path: artifacts/hcl-state-json-repair-v02/shard_${{ matrix.shard_index }}.json
+          if-no-files-found: error
+          retention-days: 30
+
+  reliability_gate:
+    needs: reliability
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: hcl-runtime-conformance-reliability-shard-*-${{ github.run_id }}
+          path: downloaded-reliability
+          merge-multiple: true
+      - name: Aggregate frozen reliability suite
+        run: |
+          python scripts/aggregate_state_json_repair_validation_v02.py             --root downloaded-reliability
+      - name: Enforce 24-of-24 reliability gate
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("artifacts/hcl-state-json-repair-v02-summary/summary.json")
+          s=json.loads(p.read_text())
+          assert s["fixture_count"] == 24
+          assert s["success_count"] == 24
+          assert s["failure_count"] == 0
+          assert s["state_json_exhaustion_count"] == 0
+          assert s["backend_or_other_exception_count"] == 0
+          assert s["all_state_attempts_used_structured_mode"] is True
+          assert s["repair_pass"] is True
+          PY
+      - name: Upload reliability aggregate
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-runtime-conformance-reliability-summary-${{ github.run_id }}
+          path: artifacts/hcl-state-json-repair-v02-summary/
+          if-no-files-found: error
+          retention-days: 30
+
+  fresh_answer:
+    needs: reliability_gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+      - name: Run fresh 12-case semantic-faithfulness suite
+        run: |
+          python scripts/run_generic_answer_loop_semantic_repair_v01.py --workers 4
+      - name: Enforce fresh answer gate
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("artifacts/hcl-generic-answer-loop-semantic-repair-v01/summary.json")
+          s=json.loads(p.read_text())
+          assert s["fixture_count"] == 12
+          assert s["completed_count"] == 12
+          assert s["runtime_exception_count"] == 0
+          assert s["semantic_correct_count"] == 12
+          assert s["parser_valid_count"] == 12
+          assert s["exact_format_count"] == s["exact_required_count"] == 12
+          assert s["failed_ids"] == []
+          assert s["pass_gate"] is True
+          PY
+      - name: Upload fresh answer evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-runtime-conformance-fresh-answer-${{ github.run_id }}
+          path: artifacts/hcl-generic-answer-loop-semantic-repair-v01/
+          if-no-files-found: error
+          retention-days: 30
+
+  output_interface:
+    needs: reliability_gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+      - name: Run original output-interface audit
+        run: |
+          python scripts/run_info_state_output_interface_audit_v01.py             --out artifacts/hcl-runtime-conformance-interface-v01
+      - name: Enforce original interface gate
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("artifacts/hcl-runtime-conformance-interface-v01/summary.json")
+          s=json.loads(p.read_text())
+          assert s["fixture_count"] == 16
+          assert s["full_loop"]["semantic_correct"] == 8
+          assert s["full_loop"]["parser_valid"] == 8
+          assert s["forced_revision"]["semantic_correct"] == 8
+          assert s["forced_revision"]["parser_valid"] == 8
+          assert s["abstract_interface_defect_established"] is False
+          PY
+      - name: Upload interface evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-runtime-conformance-interface-${{ github.run_id }}
+          path: artifacts/hcl-runtime-conformance-interface-v01/
+          if-no-files-found: error
+          retention-days: 30
+
+  state_fidelity:
+    needs: reliability_gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+      - name: Run production-path state fidelity
+        run: |
+          python scripts/run_hcl_v03_state_fidelity_repair_v02.py             --model deepseek-flash             --fixtures eval/state_fidelity/fixtures_v01.json             --workers 4
+      - name: Upload state-fidelity evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-runtime-conformance-state-fidelity-${{ github.run_id }}
+          path: artifacts/hcl-v03-state-fidelity-repair-v02/
+          if-no-files-found: error
+          retention-days: 30
+
+  answer_checker:
+    needs: reliability_gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+      - name: Run existing fresh answer-checker suite
+        run: |
+          python scripts/run_hcl_v03_answer_checker.py             --model deepseek-flash             --fixtures eval/answer_loop/checker_fixtures_v02_fresh.json             --workers 4
+      - name: Upload answer-checker evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-runtime-conformance-answer-checker-${{ github.run_id }}
+          path: artifacts/hcl-v03-answer-checker/
+          if-no-files-found: error
+          retention-days: 30
+
+  closure_gate:
+    needs: [reliability_gate, fresh_answer, output_interface, state_fidelity, answer_checker]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: hcl-runtime-conformance-reliability-summary-${{ github.run_id }}
+          path: evidence/reliability
+      - uses: actions/download-artifact@v4
+        with:
+          name: hcl-runtime-conformance-fresh-answer-${{ github.run_id }}
+          path: evidence/fresh
+      - uses: actions/download-artifact@v4
+        with:
+          name: hcl-runtime-conformance-interface-${{ github.run_id }}
+          path: evidence/interface
+      - uses: actions/download-artifact@v4
+        with:
+          name: hcl-runtime-conformance-state-fidelity-${{ github.run_id }}
+          path: evidence/state
+      - uses: actions/download-artifact@v4
+        with:
+          name: hcl-runtime-conformance-answer-checker-${{ github.run_id }}
+          path: evidence/checker
+      - name: Enforce complete synthetic closure
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          reliability=json.loads(Path("evidence/reliability/summary.json").read_text())
+          fresh=json.loads(Path("evidence/fresh/summary.json").read_text())
+          interface=json.loads(Path("evidence/interface/summary.json").read_text())
+          state=json.loads(Path("evidence/state/summary.json").read_text())
+          checker=json.loads(Path("evidence/checker/summary.json").read_text())
+
+          assert reliability["repair_pass"] is True
+          assert reliability["success_count"] == 24
+
+          assert fresh["pass_gate"] is True
+          assert fresh["semantic_correct_count"] == 12
+          assert fresh["parser_valid_count"] == 12
+
+          assert interface["full_loop"]["semantic_correct"] == 8
+          assert interface["full_loop"]["parser_valid"] == 8
+          assert interface["forced_revision"]["semantic_correct"] == 8
+          assert interface["forced_revision"]["parser_valid"] == 8
+          assert interface["abstract_interface_defect_established"] is False
+
+          assert state["failed"] == 0
+          assert state["pass_rate"] == 1.0
+          assert state["schema_valid_rate"] == 1.0
+
+          assert checker["failed"] == 0
+          assert checker["passed"] == checker["fixture_count"]
+          assert checker["pass_rate"] == 1.0
+          PY
