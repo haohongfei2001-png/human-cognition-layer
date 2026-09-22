@@ -36,6 +36,7 @@ jobs:
             hcl/v03/state_schema.json
           python - <<'PY'
           import ast
+          import os
           import subprocess
           from pathlib import Path
 
@@ -48,8 +49,9 @@ jobs:
                               return ast.literal_eval(node.value)
               raise RuntimeError("STATE_SYSTEM not found")
 
+          anchor = os.environ["ORIGINAL_HCL_BEHAVIOR_ANCHOR"]
           old = subprocess.check_output(
-              ["git", "show", "$ORIGINAL_HCL_BEHAVIOR_ANCHOR:hcl/v03/answer_loop.py"],
+              ["git", "show", f"{anchor}:hcl/v03/answer_loop.py"],
               text=True,
           )
           new = Path("hcl/v03/answer_loop.py").read_text(encoding="utf-8")
