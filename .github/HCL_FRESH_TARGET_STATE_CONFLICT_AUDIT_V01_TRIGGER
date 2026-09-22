@@ -1,0 +1,9 @@
+trigger: hcl-fresh-target-state-conflict-audit-v01
+behavior_anchor: 4ab45463bbeacbe3eb8eaa91be7ec908130ce980
+protocol_anchor: 6e2fca4962eeca07b07648d3f2a7c7562e98df5e
+target: sf07_exact_positive_signal
+controls: sf02_direct_positive_schedule,sf03_direct_positive_location
+repeats_each: 8
+workers: 4
+answer_layer_calls: 0
+external_benchmark_calls: 0
