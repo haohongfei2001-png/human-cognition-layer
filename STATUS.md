@@ -3109,3 +3109,47 @@ Provider-backed audit:
 - no answer-layer calls
 
 **Current gate: FRESH_TARGET_STATE_CONFLICT_AUDIT_V01_RUNNING**
+
+
+## HCL fresh target synthetic state-conflict audit v0.1 closure
+
+Canonical run:
+- `35719683320`
+- terminal result: **SUCCESS**
+- artifact: `10690786827`
+- digest:
+  `sha256:9e9d005ae7e3e5d4d3ab310ce072847e3b52ce3af085be175da32e419c1f8c09`
+
+Predeclared state-conflict decision:
+
+**NO_STATE_INTERNAL_CONFLICT_FOUND**
+
+Corrected interpretation:
+- the target `knows` field records knowledge that the source made a statement,
+  not knowledge of the world proposition itself;
+- the previous content-free lexical probe was too coarse to distinguish those
+  propositions.
+
+Secondary finding:
+
+**FROZEN STATE-SEMANTICS IMPLEMENTATION DRIFT ESTABLISHED**
+
+Reason:
+- frozen v0.3 semantics say directly communicated information without relevant
+  conflict supports low uncertainty;
+- canonical builder semantics forbid manufactured uncertainty / exotic
+  alternatives;
+- runtime state path instead generated EPISTEMIC/medium in 8/8 target states and
+  invented possible lying/unreliability/truth/trust bridges despite no such
+  textual conflict.
+
+Controls did not show this pattern.
+
+Next canonical work:
+- generic runtime STATE_SYSTEM conformance repair;
+- exact prompt wording only, no schema or frozen-semantic change;
+- fresh direct-communication boundary validation first;
+- preserve explicit misinformation/conflict behavior;
+- no external benchmark evidence.
+
+**Current gate: FROZEN_STATE_SEMANTICS_IMPLEMENTATION_DRIFT_REQUIRES_RUNTIME_PROMPT_CONFORMANCE_REPAIR**
