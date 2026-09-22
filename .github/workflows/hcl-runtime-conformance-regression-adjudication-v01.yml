@@ -1,0 +1,112 @@
+name: HCL Runtime Conformance Regression Adjudication v0.1
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_RUNTIME_CONFORMANCE_REGRESSION_ADJUDICATION_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+env:
+  BEHAVIOR_ANCHOR: da09c1fc8b82a538f6b0fdbbbe101e58b839241b
+  ADJUDICATION_PROTOCOL_ANCHOR: 9ef67f6a4bbe9b7058a76c94264ba4cd286361bf
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify frozen runtime behavior
+        shell: bash
+        run: |
+          git diff --exit-code "$BEHAVIOR_ANCHOR"..HEAD --             hcl/v03/answer_loop.py             hcl/v03/backends.py             hcl/v03/state_schema.json             hcl/v03/FROZEN_STATE_SEMANTICS.md
+
+      - name: Verify adjudication protocol and frozen fixtures
+        shell: bash
+        run: |
+          git diff --exit-code "$ADJUDICATION_PROTOCOL_ANCHOR"..HEAD --             reports/HCL_RUNTIME_CONFORMANCE_REGRESSION_ADJUDICATION_V01.md             scripts/run_runtime_conformance_regression_adjudication_v01.py             tests/test_runtime_conformance_regression_adjudication_v01.py             eval/state_fidelity/fixtures_v01.json             eval/answer_loop/checker_fixtures_v02_fresh.json
+
+      - name: Install zero-provider dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Compile and run adjudication checks
+        shell: bash
+        run: |
+          python -m py_compile             scripts/run_runtime_conformance_regression_adjudication_v01.py             tests/test_runtime_conformance_regression_adjudication_v01.py
+          python -m unittest discover -s tests             -p test_runtime_conformance_regression_adjudication_v01.py -v
+
+  adjudicate:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Reverify frozen behavior and adjudication protocol
+        shell: bash
+        run: |
+          git diff --exit-code "$BEHAVIOR_ANCHOR"..HEAD --             hcl/v03/answer_loop.py             hcl/v03/backends.py             hcl/v03/state_schema.json             hcl/v03/FROZEN_STATE_SEMANTICS.md
+          git diff --exit-code "$ADJUDICATION_PROTOCOL_ANCHOR"..HEAD --             reports/HCL_RUNTIME_CONFORMANCE_REGRESSION_ADJUDICATION_V01.md             scripts/run_runtime_conformance_regression_adjudication_v01.py             tests/test_runtime_conformance_regression_adjudication_v01.py             eval/state_fidelity/fixtures_v01.json             eval/answer_loop/checker_fixtures_v02_fresh.json
+
+      - name: Install dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Run bounded 4+4 regression adjudication
+        run: |
+          python scripts/run_runtime_conformance_regression_adjudication_v01.py             --workers 4
+
+      - name: Verify bounded evidence completeness
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root=Path("artifacts/hcl-runtime-conformance-regression-adjudication-v01")
+          s=json.loads((root/"summary.json").read_text())
+          rows=[json.loads(x) for x in (root/"evidence.jsonl").read_text().splitlines() if x.strip()]
+
+          assert s["run_count"] == 8
+          assert s["repeats_per_fixture"] == 4
+          assert s["state_completed"] == 4
+          assert s["checker_completed"] == 4
+          assert s["runtime_exception_count"] == 0
+          assert s["adjudication_ready"] is True
+
+          assert len(rows) == 8
+          assert sum(x["kind"]=="state_fidelity" for x in rows) == 4
+          assert sum(x["kind"]=="answer_checker" for x in rows) == 4
+          PY
+
+      - name: Upload full adjudication evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-runtime-conformance-regression-adjudication-v01-${{ github.run_id }}
+          path: artifacts/hcl-runtime-conformance-regression-adjudication-v01/
+          if-no-files-found: error
+          retention-days: 30
