@@ -1,0 +1,6 @@
+trigger: hcl-state-json-reliability-repair-v01
+repair_impl_anchor: e9e46a7a22e01ca37906c4bc4c9f4daeab6b1703
+repair_protocol_anchor: 07c49bc52a9ee456925aa2d568a48f7cf3311f7d
+fixtures: 24
+shards: 6
+external_benchmark_calls: 0
