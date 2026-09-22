@@ -153,6 +153,11 @@ Effective immediately for v0.4 research:
 
 ## 8. v0.4 research reset
 
+Canonical Phase-0 controls:
+- `docs/HCL_V04_PHASE0_RESEARCH_QUESTION_FREEZE.md`
+- `docs/HCL_V04_EVALUATION_EXPOSURE_REGISTER.md`
+
+
 The next phase is **design-first**, not benchmark-first.
 
 Before new implementation, v0.4 must specify at least:
@@ -169,6 +174,11 @@ Before new implementation, v0.4 must specify at least:
 
 No new v0.4 runtime implementation is authorized merely by this positioning
 document.
+
+The research program must also remain falsifiable: a frozen HCL treatment must
+not be bypassed during evaluation, but sufficiently strong evidence may conclude
+that the tested HCL mechanism is unnecessary, equivalent to a simpler method, or
+harmful. Experimental integrity is protected; HCL's usefulness is not assumed.
 
 ## 9. Recognition objective
 
