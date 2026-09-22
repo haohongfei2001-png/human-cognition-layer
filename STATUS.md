@@ -3423,3 +3423,25 @@ Protocol:
   `9ef67f6a4bbe9b7058a76c94264ba4cd286361bf`
 
 **Current gate: RUNTIME_CONFORMANCE_FULL_REGRESSION_RAW_FAILURES_REQUIRE_ADJUDICATION**
+
+
+## Runtime conformance full-regression adjudication v0.1 execution
+
+Canonical workflow:
+- run: `35723696097`
+- launch commit:
+  `e947d39418ba7fc13ff19716fc059bafd97312a4`
+
+Preflight:
+- frozen runtime behavior: PASS
+- adjudication protocol / frozen fixtures: PASS
+- zero-provider adjudication checks: PASS
+
+Provider-backed adjudication:
+- `epistemic_private_message`: 4 independent state builds
+- `fresh11_absence_of_evidence`: 4 independent checker/revision pipelines
+- total: 8
+- full repository-owned synthetic evidence persisted
+- no HCL behavior change
+
+**Current gate: RUNTIME_CONFORMANCE_FULL_REGRESSION_ADJUDICATION_V01_RUNNING**
