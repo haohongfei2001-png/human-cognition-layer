@@ -1,0 +1,9 @@
+trigger: hcl-state-json-reliability-repair-v02
+failed_v01_anchor: e9e46a7a22e01ca37906c4bc4c9f4daeab6b1703
+repair_v02_impl_anchor: 37df0afaacfa819abafe1979002100c645fab1c2
+repair_v02_protocol_anchor: 6ce04e42c7d1131bebf0d6aae6f17ecc71e189bf
+fixtures: 24
+shards: 6
+state_thinking: disabled
+state_max_tokens: 8192
+external_benchmark_calls: 0
