@@ -2482,3 +2482,46 @@ Next canonical work:
    closure.
 
 **Current gate: OUTPUT_BUDGET_EXHAUSTION_ESTABLISHED_REQUIRES_REPAIR_V02_DESIGN**
+
+
+## HCL state-JSON reliability repair v0.2 predeclaration
+
+Diagnosis basis:
+- 189 / 191 provider calls ended with `finish_reason=length`;
+- every length-terminated call consumed exactly 8192 completion tokens;
+- `deepseek-flash` currently enables thinking mode by default;
+- current HCL state requests do not explicitly disable thinking.
+
+Frozen v0.2 hypothesis:
+- default provider thinking is consuming the bounded completion budget before a
+  complete state JSON is emitted.
+
+Single-variable repair:
+- state JSON generation only:
+  `extra_body={"thinking":{"type":"disabled"}}`;
+- preserve `response_format={"type":"json_object"}`;
+- preserve state max_tokens 8192;
+- preserve model/provider/endpoint/seed;
+- preserve HCL state prompt/schema/semantics;
+- preserve 3 HCL-level retries and 4 backend empty retries;
+- ordinary draft/check/revision completion unchanged.
+
+Explicitly forbidden in v0.2:
+- increasing max_tokens;
+- changing state schema or STATE_SYSTEM;
+- parser broadening;
+- retry increase;
+- provider/model switch;
+- consumed benchmark tuning.
+
+Validation:
+- same frozen 24 independent synthetic reliability cases;
+- 6 x 4 shards;
+- pass requires 24/24 success, zero JSON exhaustion, zero other exception;
+- if reliability passes, existing semantic/regression gates remain mandatory
+  before any fresh external evidence.
+
+Contract:
+- `reports/HCL_STATE_JSON_RELIABILITY_REPAIR_V02.md`
+
+**Current gate: STATE_JSON_RELIABILITY_REPAIR_V02_PREDECLARED_READY**
