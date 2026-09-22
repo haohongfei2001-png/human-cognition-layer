@@ -1,5 +1,13 @@
 # HCL v0.3 — Always-On Cognition Layer
 
+
+> **Status:** FROZEN BASELINE PROTOTYPE.
+>
+> v0.3 is retained as the project's reproducible epistemic/social-cognition
+> baseline. It is not the final HCL research architecture and must not be used
+> to constrain v0.4 merely because its current schema or mode taxonomy already
+> has extensive tests. See `docs/RESEARCH_POSITIONING_V04.md`.
+
 ## Motivation
 
 v0.1 applied a heavy epistemic analysis universally and regressed on a high-ceiling CogToM holdout.
