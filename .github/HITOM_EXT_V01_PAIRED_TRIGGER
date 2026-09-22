@@ -1,0 +1,8 @@
+trigger: hitom-external-v01-paired
+hcl_behavior_anchor: ce36d7e6f911910f97437c23455dee33e0e7bc82
+protocol_anchor: 02effce47e02585d88844a3555279ce80170952f
+selection: eval/hitom/selection_v01.json
+questions: 60
+distinct_stories: 60
+seed: 42
+partial_tuning: forbidden
