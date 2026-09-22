@@ -1,0 +1,222 @@
+{
+  "suite": "HCL state-generation reliability audit v0.1",
+  "principle": "Deterministic synthetic recipes only; no external benchmark content.",
+  "cases": [
+    {
+      "id": "sgr_short_simple_01",
+      "length_band": "short",
+      "complexity": "simple",
+      "event_count": 8,
+      "agent_count": 3,
+      "nested_claims": 0,
+      "variant": 1
+    },
+    {
+      "id": "sgr_short_simple_02",
+      "length_band": "short",
+      "complexity": "simple",
+      "event_count": 8,
+      "agent_count": 3,
+      "nested_claims": 0,
+      "variant": 2
+    },
+    {
+      "id": "sgr_short_simple_03",
+      "length_band": "short",
+      "complexity": "simple",
+      "event_count": 8,
+      "agent_count": 3,
+      "nested_claims": 0,
+      "variant": 3
+    },
+    {
+      "id": "sgr_short_simple_04",
+      "length_band": "short",
+      "complexity": "simple",
+      "event_count": 8,
+      "agent_count": 3,
+      "nested_claims": 0,
+      "variant": 4
+    },
+    {
+      "id": "sgr_short_recursive_01",
+      "length_band": "short",
+      "complexity": "recursive",
+      "event_count": 8,
+      "agent_count": 4,
+      "nested_claims": 2,
+      "variant": 1
+    },
+    {
+      "id": "sgr_short_recursive_02",
+      "length_band": "short",
+      "complexity": "recursive",
+      "event_count": 8,
+      "agent_count": 4,
+      "nested_claims": 2,
+      "variant": 2
+    },
+    {
+      "id": "sgr_short_recursive_03",
+      "length_band": "short",
+      "complexity": "recursive",
+      "event_count": 8,
+      "agent_count": 4,
+      "nested_claims": 2,
+      "variant": 3
+    },
+    {
+      "id": "sgr_short_recursive_04",
+      "length_band": "short",
+      "complexity": "recursive",
+      "event_count": 8,
+      "agent_count": 4,
+      "nested_claims": 2,
+      "variant": 4
+    },
+    {
+      "id": "sgr_medium_simple_01",
+      "length_band": "medium",
+      "complexity": "simple",
+      "event_count": 28,
+      "agent_count": 4,
+      "nested_claims": 0,
+      "variant": 1
+    },
+    {
+      "id": "sgr_medium_simple_02",
+      "length_band": "medium",
+      "complexity": "simple",
+      "event_count": 28,
+      "agent_count": 4,
+      "nested_claims": 0,
+      "variant": 2
+    },
+    {
+      "id": "sgr_medium_simple_03",
+      "length_band": "medium",
+      "complexity": "simple",
+      "event_count": 28,
+      "agent_count": 4,
+      "nested_claims": 0,
+      "variant": 3
+    },
+    {
+      "id": "sgr_medium_simple_04",
+      "length_band": "medium",
+      "complexity": "simple",
+      "event_count": 28,
+      "agent_count": 4,
+      "nested_claims": 0,
+      "variant": 4
+    },
+    {
+      "id": "sgr_medium_recursive_01",
+      "length_band": "medium",
+      "complexity": "recursive",
+      "event_count": 28,
+      "agent_count": 5,
+      "nested_claims": 4,
+      "variant": 1
+    },
+    {
+      "id": "sgr_medium_recursive_02",
+      "length_band": "medium",
+      "complexity": "recursive",
+      "event_count": 28,
+      "agent_count": 5,
+      "nested_claims": 4,
+      "variant": 2
+    },
+    {
+      "id": "sgr_medium_recursive_03",
+      "length_band": "medium",
+      "complexity": "recursive",
+      "event_count": 28,
+      "agent_count": 5,
+      "nested_claims": 4,
+      "variant": 3
+    },
+    {
+      "id": "sgr_medium_recursive_04",
+      "length_band": "medium",
+      "complexity": "recursive",
+      "event_count": 28,
+      "agent_count": 5,
+      "nested_claims": 4,
+      "variant": 4
+    },
+    {
+      "id": "sgr_long_simple_01",
+      "length_band": "long",
+      "complexity": "simple",
+      "event_count": 60,
+      "agent_count": 5,
+      "nested_claims": 0,
+      "variant": 1
+    },
+    {
+      "id": "sgr_long_simple_02",
+      "length_band": "long",
+      "complexity": "simple",
+      "event_count": 60,
+      "agent_count": 5,
+      "nested_claims": 0,
+      "variant": 2
+    },
+    {
+      "id": "sgr_long_simple_03",
+      "length_band": "long",
+      "complexity": "simple",
+      "event_count": 60,
+      "agent_count": 5,
+      "nested_claims": 0,
+      "variant": 3
+    },
+    {
+      "id": "sgr_long_simple_04",
+      "length_band": "long",
+      "complexity": "simple",
+      "event_count": 60,
+      "agent_count": 5,
+      "nested_claims": 0,
+      "variant": 4
+    },
+    {
+      "id": "sgr_long_recursive_01",
+      "length_band": "long",
+      "complexity": "recursive",
+      "event_count": 60,
+      "agent_count": 6,
+      "nested_claims": 8,
+      "variant": 1
+    },
+    {
+      "id": "sgr_long_recursive_02",
+      "length_band": "long",
+      "complexity": "recursive",
+      "event_count": 60,
+      "agent_count": 6,
+      "nested_claims": 8,
+      "variant": 2
+    },
+    {
+      "id": "sgr_long_recursive_03",
+      "length_band": "long",
+      "complexity": "recursive",
+      "event_count": 60,
+      "agent_count": 6,
+      "nested_claims": 8,
+      "variant": 3
+    },
+    {
+      "id": "sgr_long_recursive_04",
+      "length_band": "long",
+      "complexity": "recursive",
+      "event_count": 60,
+      "agent_count": 6,
+      "nested_claims": 8,
+      "variant": 4
+    }
+  ]
+}
