@@ -1,5 +1,10 @@
 # HCL v0.4 Research Plan v0.1 — Public Summary
 
+> **Status: SUPERSEDED AS PRIMARY DEVELOPMENT ROUTE.**  
+> This document is retained as historical research-methodology work. The current
+> capability-first plan is `docs/HCL_V04_CAPABILITY_DEVELOPMENT_PLAN_V01_PUBLIC.md`.
+> Novelty/publication is no longer an implementation prerequisite.
+
 Status: **DRAFT READY FOR ADVERSARIAL REVIEW / NOT FROZEN**
 
 This public summary records the research program boundary without disclosing
