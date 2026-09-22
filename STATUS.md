@@ -2587,3 +2587,40 @@ Provider-backed validation:
 - no external benchmark content.
 
 **Current gate: STATE_JSON_RELIABILITY_REPAIR_V02_VALIDATION_RUNNING**
+
+
+## HCL state-JSON reliability repair v0.2 reliability result
+
+Canonical validation:
+- run: `35709921859`
+- terminal result: **SUCCESS**
+- summary artifact: `10685139911`
+- summary digest:
+  `sha256:c1de680d89a572549b63f9da2ef6c819c1e5f517caf6935b6de850fd8e662e16`
+
+Strict reliability gate:
+- frozen synthetic cases: **24 / 24 success**
+- state_json_exhaustion: **0**
+- backend/other exceptions: **0**
+- all six strata: **4 / 4**
+- 23 cases succeeded on HCL attempt 1
+- 1 long/recursive case succeeded on HCL attempt 2
+- repair_pass: **true**
+
+This establishes synthetic state-generation reliability only. Repair v0.2 is
+not closed until post-reliability regressions pass.
+
+Regression protocol:
+- `reports/HCL_STATE_JSON_REPAIR_V02_REGRESSION_PROTOCOL.md`
+- production-path state-fidelity wrapper:
+  `scripts/run_hcl_v03_state_fidelity_repair_v02.py`
+- existing answer-checker runner / fresh fixtures unchanged
+- original info-state/output-interface audit runner / fixtures unchanged
+- HCL behavior anchor:
+  `37df0afaacfa819abafe1979002100c645fab1c2`
+- regression protocol anchor:
+  `33b423c3160c88a08dc8033385f6887ef92ac38a`
+
+No external benchmark evidence is authorized.
+
+**Current gate: STATE_JSON_RELIABILITY_REPAIR_V02_RELIABILITY_PASS_REGRESSIONS_READY**
