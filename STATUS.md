@@ -2789,3 +2789,27 @@ Protocol:
   `37df0afaacfa819abafe1979002100c645fab1c2`
 
 **Current gate: STATE_JSON_REPAIR_V02_IO01_CAUSAL_DIAGNOSIS_V01_READY**
+
+
+## HCL v0.2 io01 causal diagnosis v0.1 execution
+
+Canonical workflow:
+- run: `35715326584`
+- launch commit: `5b688bb620cd39ce82a223a47b6fc3ebcf1fae83`
+
+Preflight:
+- frozen repair-v0.2 behavior: PASS
+- original output-interface audit assets unchanged: PASS
+- causal protocol frozen: PASS
+- zero-provider causal interpretation tests: PASS
+- target/control fixture identity: PASS
+
+Provider-backed diagnosis:
+- target io01: exactly 8 repeats
+- control io02: exactly 8 repeats
+- maximum workers: 4
+- records content-free state probes, stage semantic/parser scores, checker
+  status/violation-family sets and first-inversion stage
+- no HCL behavior change while open
+
+**Current gate: STATE_JSON_REPAIR_V02_IO01_CAUSAL_DIAGNOSIS_V01_RUNNING**
