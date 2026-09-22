@@ -2396,3 +2396,26 @@ Execution:
 - all 24 must terminate for canonical aggregate.
 
 **Current gate: STRUCTURED_OUTPUT_FAILURE_DIAGNOSTIC_V01_PREDECLARED_READY**
+
+
+## HCL structured-output failure diagnostic v0.1 execution
+
+Canonical workflow:
+- run: `35702581717`
+- launch commit: `cace86e54a33a93ab763489ea898e4be5def1617`
+
+Zero-provider preflight:
+- failed repair candidate unchanged: PASS
+- diagnostic protocol frozen: PASS
+- compile / classification unit tests: PASS
+- exact 24-case frozen fixture coverage: PASS
+
+Provider-backed diagnostic:
+- same 24 independent synthetic cases
+- 6 shards x 4 cases
+- maximum parallelism 3
+- records finish_reason, token usage, duration, empty/non-empty and JSON structural metadata only
+- no response text or HCL state persisted
+- no repair v0.2 permitted while this run is open
+
+**Current gate: STRUCTURED_OUTPUT_FAILURE_DIAGNOSTIC_V01_RUNNING**
