@@ -2699,3 +2699,51 @@ Interpretation thresholds are frozen in:
   `ba82fcdaa9ffd57857b367aaf3a061394e9eee81`
 
 **Current gate: STATE_JSON_REPAIR_V02_INTERFACE_INVESTIGATION_V01_TRIGGERED**
+
+
+## HCL v0.2 output-interface regression investigation v0.1 closure
+
+Canonical run:
+- `35713019987`
+- terminal result: **SUCCESS**
+- artifact: `10688945137`
+- digest:
+  `sha256:475013eec79d156dada22d80be34ed50418927a6a3f027fc4ff9dbe0745483e6`
+
+Bounded result:
+- target `io01_full_binary_direct_access`: **1 / 8** parser+semantic success
+- control `io02_full_binary_missing_access`: **8 / 8** success
+- runtime exceptions: **0**
+- io01 state mode: EPISTEMIC in **8 / 8**
+- io01 distinct normalized-state hashes: **8 / 8**
+- io01 parsed outputs:
+  - correct yes: **1**
+  - wrong no: **5**
+  - parser-invalid: **2**
+
+Predeclared interpretation:
+
+**STABLE_IO01_REGRESSION**
+
+This confirms that the prior output-interface 7/8 failure was not a one-off.
+The target failure is predominantly semantic, while the matched control remains
+stable.
+
+Repair v0.2 therefore remains **not closed** despite:
+- 24/24 state-generation reliability PASS;
+- state-fidelity regression PASS;
+- answer-checker regression PASS.
+
+Next canonical work:
+- targeted synthetic causal diagnosis of io01 under frozen v0.2 behavior;
+- locate the first semantic inversion among state -> draft -> checker ->
+  revision/final-answer;
+- retain matched control;
+- no behavior change before diagnosis;
+- no fresh external benchmark evidence.
+
+See:
+- `reports/HCL_STATE_JSON_REPAIR_V02_INTERFACE_INVESTIGATION_V01.md`
+- `reports/HCL_STATE_JSON_REPAIR_V02_INTERFACE_INVESTIGATION_V01_CLOSURE.md`
+
+**Current gate: STATE_JSON_REPAIR_V02_STABLE_IO01_REGRESSION_REQUIRES_CAUSAL_DIAGNOSIS**
