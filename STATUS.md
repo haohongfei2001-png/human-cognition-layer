@@ -2216,3 +2216,30 @@ Next canonical work:
 6. do not consume new external benchmark evidence until those gates pass.
 
 **Current gate: STATE_JSON_RELIABILITY_DEFECT_ESTABLISHED_REQUIRES_INDEPENDENT_REPAIR**
+
+
+## HCL state-JSON reliability repair v0.1 predeclaration
+
+Authorized by:
+- independent synthetic reliability audit;
+- 18 distinct `state_json_exhaustion` reproductions before timeout;
+- no consumed external benchmark content used for repair.
+
+Repair contract:
+- `reports/HCL_STATE_JSON_RELIABILITY_REPAIR_V01.md`
+- keep HCL v0.3 cognition semantics / schema / state prompt meaning frozen;
+- add provider-native JSON mode only for state generation;
+- preserve ordinary text completion for draft/check/revision;
+- preserve 3 HCL-level state retries;
+- preserve existing backend non-empty retry behavior;
+- keep legacy/fake backend compatibility.
+
+Provider-backed repair validation:
+- same frozen 24 synthetic reliability cases;
+- no wording or stratum changes;
+- execution-only sharding: 6 × 4;
+- pass requires 24/24 success, 0 state JSON exhaustion, 0 other exception.
+
+No new external benchmark evidence is authorized by predeclaration.
+
+**Current gate: STATE_JSON_RELIABILITY_REPAIR_V01_PREDECLARED_READY**
