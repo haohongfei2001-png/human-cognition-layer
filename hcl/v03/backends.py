@@ -29,6 +29,7 @@ class OpenAICompatibleBackend:
         max_tokens: int,
         temperature: float,
         response_format: dict[str, str] | None = None,
+        extra_body: dict[str, object] | None = None,
     ) -> str:
         last = ""
         for _ in range(4):
@@ -41,6 +42,8 @@ class OpenAICompatibleBackend:
             }
             if response_format is not None:
                 kwargs["response_format"] = response_format
+            if extra_body is not None:
+                kwargs["extra_body"] = extra_body
             response = self.client.chat.completions.create(**kwargs)
             last = response.choices[0].message.content or ""
             if last.strip():
@@ -72,4 +75,5 @@ class OpenAICompatibleBackend:
             max_tokens=max_tokens,
             temperature=temperature,
             response_format={"type": "json_object"},
+            extra_body={"thinking": {"type": "disabled"}},
         )
