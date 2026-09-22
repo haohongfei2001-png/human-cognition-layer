@@ -35,7 +35,8 @@ HCL 首先要求认知表示和更新本身在事实、信息边界、时间关�
 
 - [docs/RESEARCH_POSITIONING_V04.md](docs/RESEARCH_POSITIONING_V04.md)
 - [docs/HCL_V04_PHASE0_RESEARCH_QUESTION_FREEZE.md](docs/HCL_V04_PHASE0_RESEARCH_QUESTION_FREEZE.md)
-- [docs/HCL_V04_RESEARCH_PLAN_V01_PUBLIC.md](docs/HCL_V04_RESEARCH_PLAN_V01_PUBLIC.md)
+- [docs/HCL_V04_CAPABILITY_DEVELOPMENT_PLAN_V01_PUBLIC.md](docs/HCL_V04_CAPABILITY_DEVELOPMENT_PLAN_V01_PUBLIC.md)
+- [docs/HCL_V04_RESEARCH_PLAN_V01_PUBLIC.md](docs/HCL_V04_RESEARCH_PLAN_V01_PUBLIC.md) — historical/superseded
 - [docs/HCL_V04_EVALUATION_EXPOSURE_REGISTER.md](docs/HCL_V04_EVALUATION_EXPOSURE_REGISTER.md)
 - [docs/MODULE_FIRST_DOCTRINE.md](docs/MODULE_FIRST_DOCTRINE.md)
 
@@ -80,7 +81,7 @@ v0.3 已经完成了一整套可运行基础设施：
 
 下一阶段首先重新设计 v0.4 的研究问题、模块边界、representation/update contract、persistent state、ablation、cross-base transfer 和独立外部验证防火墙。
 
-**Research Plan v0.1 已形成，但仍是 draft，当前等待独立 adversarial novelty / methodology review。只有在 novelty gap、correctness contract、可证伪机制主张和强对照实验冻结后，才允许进入 v0.4 runtime；在此之前不消费新的 fresh external benchmark。**
+**Capability Development Plan v0.1 已形成，但仍是 draft。当前下一步是能力架构审查：判断第一版最小能力升级是否更正确、更有用、可实现，并吸收已有研究中的有效机制。冻结 correctness contract 与最小实现边界后即可进入 v0.4 minimal implementation；在此之前不消费新的 fresh external benchmark。**
 
 ## Intellectual-property boundary
 
