@@ -3153,3 +3153,41 @@ Next canonical work:
 - no external benchmark evidence.
 
 **Current gate: FROZEN_STATE_SEMANTICS_IMPLEMENTATION_DRIFT_REQUIRES_RUNTIME_PROMPT_CONFORMANCE_REPAIR**
+
+
+## HCL runtime state-prompt conformance repair v0.1 implementation
+
+Diagnosis:
+- full synthetic state audit found no internal logical contradiction;
+- runtime direct-communication handling drifted from already-frozen v0.3
+  minimal-sufficient-model / no-manufactured-uncertainty semantics.
+
+Repair:
+- only runtime `STATE_SYSTEM` wording changed;
+- implementation commit:
+  `da09c1fc8b82a538f6b0fdbbbe101e58b839241b`;
+- schema / frozen semantics / backends / build_state / retry budgets unchanged;
+- repair-v0.2 thinking-disabled JSON state path unchanged;
+- generic answer-loop DRAFT/CHECK/REVISION prompts unchanged from
+  `4ab45463bbeacbe3eb8eaa91be7ec908130ce980`.
+
+Fresh boundary:
+- 10 new repository-owned communication cases;
+- ordinary direct communication;
+- no receipt;
+- explicit misinformation;
+- explicit deception;
+- explicit source unreliability;
+- conflicting sources;
+- strict pass requires 10/10 semantic/state-structure conformance.
+
+Contract/protocol anchor:
+- `reports/HCL_RUNTIME_STATE_PROMPT_CONFORMANCE_REPAIR_V01.md`
+- `727b75ac3e70c0af78f3ee0de02abc028b981720`
+
+Boundary workflow:
+- `.github/workflows/hcl-runtime-state-prompt-conformance-v01.yml`
+
+No external benchmark evidence is authorized.
+
+**Current gate: RUNTIME_STATE_PROMPT_CONFORMANCE_V01_BOUNDARY_READY**
