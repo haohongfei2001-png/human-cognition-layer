@@ -3059,3 +3059,31 @@ Next canonical work:
 - no fresh external benchmark evidence.
 
 **Current gate: FRESH_TARGET_DRAFT_DOMINANT_REQUIRES_SYNTHETIC_STATE_CONFLICT_AUDIT**
+
+
+## HCL fresh target synthetic state-conflict audit v0.1
+
+Scope:
+- state builder only;
+- target sf07: 8 state builds;
+- control sf02: 8 state builds;
+- control sf03: 8 state builds;
+- total: 24;
+- complete normalized synthetic state JSON may be persisted;
+- no draft/checker/revision/final-answer calls.
+
+Audit goal:
+- determine whether target observed/knows direct support coexists with an
+  explicit contradictory claim in hypotheses, missing bridges, uncertainty,
+  summary, or agent fields;
+- compare the same field pattern against controls.
+
+Behavior remains frozen at:
+`4ab45463bbeacbe3eb8eaa91be7ec908130ce980`
+
+Protocol:
+- `reports/HCL_FRESH_TARGET_STATE_CONFLICT_AUDIT_V01.md`
+- protocol anchor:
+  `6e2fca4962eeca07b07648d3f2a7c7562e98df5e`
+
+**Current gate: FRESH_TARGET_STATE_CONFLICT_AUDIT_V01_READY**
