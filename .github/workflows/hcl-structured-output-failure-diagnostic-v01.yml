@@ -1,0 +1,215 @@
+name: HCL Structured-Output Failure Diagnostic v0.1
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_STRUCTURED_OUTPUT_FAILURE_DIAGNOSTIC_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+env:
+  FAILED_REPAIR_ANCHOR: e9e46a7a22e01ca37906c4bc4c9f4daeab6b1703
+  DIAGNOSTIC_PROTOCOL_ANCHOR: 0fddc962b9b8fa102bbd197fff51f367e02e680d
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify failed repair candidate unchanged
+        shell: bash
+        run: |
+          git diff --exit-code "$FAILED_REPAIR_ANCHOR"..HEAD -- \
+            hcl/v03/backends.py \
+            hcl/v03/answer_loop.py \
+            hcl/v03/FROZEN_STATE_SEMANTICS.md \
+            hcl/v03/state_schema.json
+
+      - name: Verify diagnostic protocol frozen
+        shell: bash
+        run: |
+          git diff --exit-code "$DIAGNOSTIC_PROTOCOL_ANCHOR"..HEAD -- \
+            reports/HCL_STRUCTURED_OUTPUT_FAILURE_DIAGNOSTIC_V01.md \
+            eval/answer_loop/state_generation_reliability_v01.json \
+            scripts/run_structured_output_failure_diagnostic_v01.py \
+            scripts/aggregate_structured_output_failure_diagnostic_v01.py \
+            tests/test_structured_output_failure_diagnostic_v01.py
+
+      - name: Install zero-provider dependencies
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Compile and run zero-provider diagnostic gates
+        shell: bash
+        run: |
+          python -m py_compile \
+            scripts/run_structured_output_failure_diagnostic_v01.py \
+            scripts/aggregate_structured_output_failure_diagnostic_v01.py \
+            tests/test_structured_output_failure_diagnostic_v01.py
+          python -m unittest discover -s tests -p test_structured_output_failure_diagnostic_v01.py -v
+          python scripts/run_structured_output_failure_diagnostic_v01.py --help >/dev/null
+          python scripts/aggregate_structured_output_failure_diagnostic_v01.py --help >/dev/null
+
+      - name: Verify exact frozen fixture coverage
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+
+          data = json.loads(
+              Path("eval/answer_loop/state_generation_reliability_v01.json").read_text()
+          )
+          cases = data["cases"]
+          assert len(cases) == 24
+          assert len({x["id"] for x in cases}) == 24
+          counts = Counter((x["length_band"], x["complexity"]) for x in cases)
+          assert counts == {
+              ("short", "simple"): 4,
+              ("short", "recursive"): 4,
+              ("medium", "simple"): 4,
+              ("medium", "recursive"): 4,
+              ("long", "simple"): 4,
+              ("long", "recursive"): 4,
+          }
+          PY
+
+  diagnostic:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        shard_index: [0, 1, 2, 3, 4, 5]
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Reverify frozen candidate and diagnostic
+        shell: bash
+        run: |
+          git diff --exit-code "$FAILED_REPAIR_ANCHOR"..HEAD -- \
+            hcl/v03/backends.py \
+            hcl/v03/answer_loop.py \
+            hcl/v03/FROZEN_STATE_SEMANTICS.md \
+            hcl/v03/state_schema.json
+          git diff --exit-code "$DIAGNOSTIC_PROTOCOL_ANCHOR"..HEAD -- \
+            reports/HCL_STRUCTURED_OUTPUT_FAILURE_DIAGNOSTIC_V01.md \
+            eval/answer_loop/state_generation_reliability_v01.json \
+            scripts/run_structured_output_failure_diagnostic_v01.py \
+            scripts/aggregate_structured_output_failure_diagnostic_v01.py
+
+      - name: Install diagnostic dependency
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Run content-free structured-output diagnostic shard
+        shell: bash
+        run: |
+          python scripts/run_structured_output_failure_diagnostic_v01.py \
+            --shard-index ${{ matrix.shard_index }} \
+            --shard-count 6
+
+      - name: Verify shard privacy and metadata shape
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          shard = ${{ matrix.shard_index }}
+          p = Path(f"artifacts/hcl-structured-output-diagnostic-v01/shard_{shard}.json")
+          data = json.loads(p.read_text(encoding="utf-8"))
+          assert data["requested"] == 4
+          assert data["completed"] == 4
+          assert len(data["results"]) == 4
+          for row in data["results"]:
+              assert row["provider_call_count"] == len(row["provider_calls"])
+              for call in row["provider_calls"]:
+                  assert "category" in call
+                  assert "duration_ms" in call
+          raw = p.read_text(encoding="utf-8").lower()
+          for key in ('"input":', '"prompt":', '"messages":', '"response":', '"response_text":', '"state":', '"parsed_json":', '"api_key":', '"exception_text":'):
+              assert key not in raw, key
+          PY
+
+      - name: Upload diagnostic shard
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-structured-output-diagnostic-v01-shard-${{ matrix.shard_index }}-${{ github.run_id }}
+          path: artifacts/hcl-structured-output-diagnostic-v01/shard_${{ matrix.shard_index }}.json
+          if-no-files-found: error
+          retention-days: 30
+
+  aggregate:
+    needs: diagnostic
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: hcl-structured-output-diagnostic-v01-shard-*-${{ github.run_id }}
+          path: downloaded-structured-output-diagnostic-v01
+          merge-multiple: true
+
+      - name: Aggregate complete diagnostic evidence
+        shell: bash
+        run: |
+          python scripts/aggregate_structured_output_failure_diagnostic_v01.py \
+            --root downloaded-structured-output-diagnostic-v01
+
+      - name: Verify canonical diagnostic completeness and privacy
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("artifacts/hcl-structured-output-diagnostic-v01-summary")
+          summary = json.loads((root / "summary.json").read_text(encoding="utf-8"))
+          assert summary["fixture_count"] == 24
+          assert summary["diagnostic_complete"] is True
+          assert summary["case_success_count"] + summary["case_failure_count"] == 24
+          raw = (root / "summary.json").read_text(encoding="utf-8").lower() + (root / "results.jsonl").read_text(encoding="utf-8").lower()
+          for key in ('"input":', '"prompt":', '"messages":', '"response":', '"response_text":', '"state":', '"parsed_json":', '"api_key":', '"exception_text":'):
+              assert key not in raw, key
+          PY
+
+      - name: Upload aggregate diagnostic evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-structured-output-diagnostic-v01-summary-${{ github.run_id }}
+          path: artifacts/hcl-structured-output-diagnostic-v01-summary/
+          if-no-files-found: error
+          retention-days: 30
