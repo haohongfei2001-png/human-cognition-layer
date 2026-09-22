@@ -2903,3 +2903,25 @@ Complete synthetic closure requires all gates above to pass.
 No new external benchmark evidence is authorized.
 
 **Current gate: GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_V01_VALIDATION_READY**
+
+
+## HCL generic answer-loop semantic faithfulness repair v0.1 execution
+
+Canonical workflow:
+- run: `35718513459`
+- launch commit: `1c3b72a3c22cb75ef29dc62b980e34fe0707ca2b`
+
+Preflight:
+- successful state-repair v0.2 path unchanged: PASS
+- STATE_SYSTEM / build_state / state defaults unchanged: PASS
+- answer-loop repair implementation frozen: PASS
+- fresh semantic-faithfulness suite frozen: PASS
+- original output-interface audit assets unchanged: PASS
+- zero-provider repair/validation tests: PASS
+
+Provider-backed stage 1:
+- 12-case fresh semantic-faithfulness validation
+- strict gate: 12/12 semantic + parser + exact-format
+- broader regressions remain blocked until fresh stage passes
+
+**Current gate: GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_V01_FRESH_VALIDATION_RUNNING**
