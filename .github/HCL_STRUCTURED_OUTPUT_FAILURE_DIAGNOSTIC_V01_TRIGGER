@@ -1,0 +1,6 @@
+trigger: hcl-structured-output-failure-diagnostic-v01
+failed_repair_anchor: e9e46a7a22e01ca37906c4bc4c9f4daeab6b1703
+diagnostic_protocol_anchor: 0fddc962b9b8fa102bbd197fff51f367e02e680d
+fixtures: 24
+shards: 6
+external_benchmark_calls: 0
