@@ -29,9 +29,11 @@ Benchmark / leaderboard 的角色是：
 - 把 SIMPLE / EPISTEMIC / CAUSAL_AMBIGUITY 分类本身当作研究贡献；
 - 消费 fresh evaluation 后继续针对这些样本调参。
 
-公开研究定位见：
+公开研究定位与 Phase-0 门禁见：
 
 - [docs/RESEARCH_POSITIONING_V04.md](docs/RESEARCH_POSITIONING_V04.md)
+- [docs/HCL_V04_PHASE0_RESEARCH_QUESTION_FREEZE.md](docs/HCL_V04_PHASE0_RESEARCH_QUESTION_FREEZE.md)
+- [docs/HCL_V04_EVALUATION_EXPOSURE_REGISTER.md](docs/HCL_V04_EVALUATION_EXPOSURE_REGISTER.md)
 - [docs/MODULE_FIRST_DOCTRINE.md](docs/MODULE_FIRST_DOCTRINE.md)
 
 ## Current phase
@@ -75,7 +77,7 @@ v0.3 已经完成了一整套可运行基础设施：
 
 下一阶段首先重新设计 v0.4 的研究问题、模块边界、representation/update contract、persistent state、ablation、cross-base transfer 和独立外部验证防火墙。
 
-**在 v0.4 design package 冻结前，不启动新的 v0.4 runtime，也不消费新的 fresh external benchmark。**
+**当前 Phase 0 尚未通过。只有在 novelty gap、可证伪机制主张和强对照实验冻结后，才允许进入 v0.4 runtime；在此之前不消费新的 fresh external benchmark。**
 
 ## Intellectual-property boundary
 
