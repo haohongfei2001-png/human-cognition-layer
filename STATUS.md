@@ -3617,3 +3617,36 @@ Phase-0 PASS requires:
 
 **Current gate: HCL_V04_PHASE0_RESEARCH_QUESTION_FREEZE_IN_PROGRESS**
 
+## Phase-0 correctness / utility clarification
+
+Owner clarification:
+
+HCL v0.4 is **not** governed by benchmark-score absolutism.
+
+Canonical interpretation now separates:
+
+1. **correctness / validity**
+   - whether cognition respects explicit facts, event history, information access,
+     perspective, time and evidence boundaries;
+   - for latent human states without direct ground truth, whether the model
+     avoids unsupported certainty, preserves genuine alternatives and is
+     consistent with independent construct-valid human evidence where available;
+
+2. **utility / efficacy**
+   - whether a substantively correct cognition mechanism improves downstream
+     reasoning, prediction or action beyond strong alternatives.
+
+Consequences:
+- lower score alone does not prove HCL cognition is wrong;
+- higher score alone does not prove HCL cognition is correct;
+- a correct HCL with no downstream gain may fail the incremental-utility claim
+  while retaining a correctness claim;
+- a high-scoring HCL with substantively wrong cognition fails the cognition
+  claim;
+- benchmark/gold disagreement must be diagnosed rather than automatically
+  resolved in favor of the benchmark.
+
+Current Phase-0 gate remains open.
+
+**Current gate: HCL_V04_PHASE0_RESEARCH_QUESTION_FREEZE_IN_PROGRESS**
+
