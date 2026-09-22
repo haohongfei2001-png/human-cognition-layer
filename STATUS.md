@@ -2243,3 +2243,35 @@ Provider-backed repair validation:
 No new external benchmark evidence is authorized by predeclaration.
 
 **Current gate: STATE_JSON_RELIABILITY_REPAIR_V01_PREDECLARED_READY**
+
+
+## HCL state-JSON reliability repair v0.1 implementation
+
+Implementation:
+- backend JSON mode commit:
+  `2a6b7d3e6e77e09be7cf75a83573a539af2f75b4`
+- state-builder structured-capability selection commit:
+  `e9e46a7a22e01ca37906c4bc4c9f4daeab6b1703`
+- repair unit invariants:
+  `tests/test_state_json_reliability_repair_v01.py`
+- sharded validation runner:
+  `scripts/run_state_json_repair_validation_v01.py`
+- aggregate:
+  `scripts/aggregate_state_json_repair_validation_v01.py`
+
+Behavior boundary:
+- HCL v0.3 state semantics unchanged;
+- state schema unchanged;
+- STATE_SYSTEM unchanged;
+- HCL-level retry budget remains 3;
+- ordinary draft/check/revision completion remains text mode;
+- only state generation uses provider-native JSON mode when supported;
+- legacy backends without `complete_json` remain supported.
+
+Validation:
+- exact same 24 independent synthetic reliability cases;
+- 6 shards × 4 cases;
+- pass requires 24/24 success, 0 JSON exhaustion, 0 other exception;
+- no new external benchmark evidence.
+
+**Current gate: STATE_JSON_RELIABILITY_REPAIR_V01_VALIDATION_READY**
