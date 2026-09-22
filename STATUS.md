@@ -2086,3 +2086,55 @@ Next canonical work:
    new external evidence.
 
 **Current gate: HITOM_EXT_V01_INCOMPLETE_REQUIRES_INDEPENDENT_STATE_GENERATION_RELIABILITY_AUDIT**
+
+
+## HCL state-generation reliability audit v0.1 predeclaration
+
+Triggered by:
+- Hi-ToM v0.1 terminal execution: 36/60 paired rows complete;
+- 24/60 persisted `RuntimeError`;
+- Hi-ToM efficacy not evaluated;
+- consumed Hi-ToM content remains forbidden for tuning.
+
+Independent audit:
+- predeclaration:
+  `reports/HCL_STATE_GENERATION_RELIABILITY_AUDIT_V01.md`
+- synthetic recipes:
+  `eval/answer_loop/state_generation_reliability_v01.json`
+- runner:
+  `scripts/run_state_generation_reliability_audit_v01.py`
+- zero-provider tests:
+  `tests/test_state_generation_reliability_audit_v01.py`
+- protocol anchor:
+  `822fd9a0d7cad47f50fa588803b9ca38a51ebc1c`
+- frozen HCL behavior anchor:
+  `ce36d7e6f911910f97437c23455dee33e0e7bc82`
+
+Fixture design:
+- 24 deterministic synthetic cases;
+- 6 strata × 4 cases:
+  short/simple, short/recursive, medium/simple, medium/recursive,
+  long/simple, long/recursive;
+- no Hi-ToM / FANToM / SOTOPIA content.
+
+Content-free diagnostics persist only:
+- fixture/stratum metadata;
+- input byte count + SHA-256, never input text;
+- HCL-level state attempt count;
+- response byte count + SHA-256;
+- empty flag;
+- JSON-object parseability;
+- exception class;
+- predeclared failure class.
+
+Predeclared repeatability gates:
+- >=2 distinct `state_json_exhaustion` cases:
+  state-generation JSON reliability defect established;
+- >=2 distinct `backend_or_other_exception` cases:
+  backend/transport/other reliability defect established;
+- both may be established simultaneously.
+
+No HCL behavior repair is authorized by predeclaration alone.
+The audit must run frozen behavior first.
+
+**Current gate: STATE_GENERATION_RELIABILITY_AUDIT_V01_PREDECLARED_READY**
