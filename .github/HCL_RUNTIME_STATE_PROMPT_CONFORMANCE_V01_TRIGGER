@@ -1,6 +1,7 @@
 trigger: hcl-runtime-state-prompt-conformance-v01
 pre_repair_anchor: 4ab45463bbeacbe3eb8eaa91be7ec908130ce980
 implementation_anchor: da09c1fc8b82a538f6b0fdbbbe101e58b839241b
-protocol_anchor: 727b75ac3e70c0af78f3ee0de02abc028b981720
+protocol_anchor: 33eec1a54d471d8073e4ad6eb7eb20498e8d2758
 fresh_boundary_cases: 10
 external_benchmark_calls: 0
+attempt: 2
