@@ -3347,3 +3347,26 @@ Execution order:
 No external benchmark calls.
 
 **Current gate: RUNTIME_STATE_PROMPT_CONFORMANCE_V01_FULL_REGRESSIONS_READY**
+
+
+## Runtime state-prompt conformance v0.1 full regressions execution
+
+Canonical workflow:
+- run: `35721321301`
+- launch commit:
+  `a13566d910af04df3cd726b965b4125b6d96ac6e`
+
+Preflight:
+- repaired behavior freeze: PASS
+- regression protocol/assets freeze: PASS
+- zero-provider invariant gates: PASS
+
+Stage 1:
+- 24-case frozen state-generation reliability
+- 6 shards × 4
+- max parallelism 3
+- strict aggregate 24/24 required before Stage 2 unlocks
+
+Stage 2 remains blocked pending Stage 1.
+
+**Current gate: RUNTIME_STATE_PROMPT_CONFORMANCE_V01_STATE_RELIABILITY_RUNNING**
