@@ -30,17 +30,51 @@ The project may continue only if a meaningful mechanism-level gap remains.
 
 HCL is a research program, not a conclusion that must be protected.
 
+But falsifiability must not be reduced to leaderboard score.
+
+Phase 0 separates two claims:
+
+### 2.1 Correctness / validity claim
+
+Is the cognition state itself faithful to the evidence, perspective boundaries,
+temporal state and human construct being modeled?
+
+A cognition mechanism is rejected or revised when it is substantively wrong
+under independently grounded evidence.
+
+Examples of relevant grounding include:
+
+- explicit facts in the task;
+- formal environment state;
+- who actually had access to which information;
+- time-stamped event history;
+- independently collected human judgments or behavior when the claim concerns
+  real people;
+- construct-valid expert adjudication where no single benchmark gold can serve
+  as unquestionable truth.
+
+### 2.2 Utility / efficacy claim
+
+If the cognition mechanism is substantively correct, does it improve downstream
+reasoning, prediction or action beyond strong alternatives?
+
+A lower benchmark score does not automatically reject the correctness claim.
+
+A higher benchmark score does not automatically establish the correctness claim.
+
+If HCL is correct but fails to outperform a simpler method, the appropriate
+conclusion may be:
+
+> the tested cognition mechanism is valid but has not established incremental
+> utility or necessity for this task/resource regime.
+
+If HCL scores well while making substantively wrong cognitive inferences, the
+mechanism has not been validated.
+
 During a frozen evaluation, the assigned HCL treatment must not be silently
 bypassed or modified to improve its score.
 
-After the experiment, however, the evidence is allowed to show that the HCL
-treatment is unnecessary, equivalent to a simpler alternative, or worse.
-
-Therefore:
-
-> Protect experimental integrity, not the assumption that HCL must be useful.
-
-A negative result is a valid research outcome.
+**Correctness first; benchmark performance is secondary evidence about utility.**
 
 ## 3. Public research question
 
@@ -150,20 +184,48 @@ the cognition mechanism.
 
 ## 6. Failure criteria
 
-Any of the following can invalidate or materially narrow the v0.4 thesis:
+Failure must be classified by claim type.
+
+### 6.1 Correctness failure
+
+The cognition mechanism is substantively wrong when, under independently
+grounded evidence, it systematically:
+
+- attributes information to an agent who did not have access to it;
+- confuses later system knowledge with an agent's earlier belief;
+- overwrites historical mental state with later correction;
+- treats unsupported interpretations as established;
+- violates the stated evidence/provenance/update semantics;
+- produces human-state predictions contradicted by sufficiently strong
+  construct-valid human evidence.
+
+These failures can reject or revise the cognition mechanism itself even if a
+benchmark score happens to be high.
+
+### 6.2 Utility / necessity failure
+
+A substantively correct mechanism may still fail to establish practical or
+scientific utility if:
 
 - D is statistically indistinguishable from or worse than a strong C/E/F;
 - the advantage disappears under comparable observable resource budgets;
-- perturbing the claimed cognitive state does not causally affect downstream
-  behavior in the expected direction;
-- unrelated state perturbations produce the same apparent gain;
-- gains occur only on internally authored rule-conformance tests;
+- the same downstream benefit is fully explained by ordinary memory, extra
+  compute, state formatting, checker or planner effects;
 - the effect exists only on the development base model;
-- the implementation requires hidden/oracle information unavailable at
+- the apparent contribution is already explained by a nearest-neighbor method.
+
+These results weaken the **incremental utility / necessity** claim. They do not
+by themselves prove that the cognition representation is false.
+
+### 6.3 Scope failure
+
+The claim must be narrowed if:
+
+- the effect is equally strong on non-human generic state tracking;
+- the mechanism only works with hidden/oracle information unavailable at
   deployment time;
-- the apparent contribution is already explained by a nearest-neighbor method;
-- the effect is equally strong on non-human generic state tracking, requiring a
-  narrower or different research claim.
+- the measured benchmark construct does not validly represent the human-state
+  phenomenon being claimed.
 
 A failed hypothesis must not be converted into a pass by adding benchmark-shaped
 rules and reusing the same observed evaluation evidence.
@@ -240,10 +302,16 @@ Before Phase 0 can be marked complete, the project must have:
 Phase 0 **PASSES** only if all of the following are true:
 
 - a mechanism difference remains after nearest-neighbor review;
+- the proposed cognitive state/update has an independent correctness criterion,
+  not just a benchmark score;
 - the difference is measurable independently of prompt wording;
-- at least one experiment can falsify the mechanism claim;
-- a strong simpler alternative is implemented in the planned comparison;
-- the research design allows the conclusion that HCL adds no value;
+- at least one experiment can falsify the correctness claim;
+- at least one experiment can test incremental utility beyond a strong simpler
+  alternative;
+- correctness and downstream utility are reported separately;
+- the research design allows the conclusion that HCL is cognitively wrong,
+  useful but unnecessary, correct but not incrementally useful, or both correct
+  and useful;
 - the owner has approved the public disclosure boundary.
 
 Phase 0 **FAILS / STOPS** if:
