@@ -1,0 +1,124 @@
+name: HCL State-Generation Reliability Audit v0.1
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_STATE_GENERATION_RELIABILITY_AUDIT_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+env:
+  HCL_BEHAVIOR_ANCHOR: ce36d7e6f911910f97437c23455dee33e0e7bc82
+  AUDIT_PROTOCOL_ANCHOR: 822fd9a0d7cad47f50fa588803b9ca38a51ebc1c
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify frozen HCL state-generation behavior
+        shell: bash
+        run: |
+          git diff --exit-code "$HCL_BEHAVIOR_ANCHOR"..HEAD -- \
+            hcl/v03/answer_loop.py \
+            hcl/v03/backends.py \
+            hcl/v03/state_schema.json \
+            hcl/v03/FROZEN_STATE_SEMANTICS.md
+
+      - name: Verify frozen reliability-audit protocol
+        shell: bash
+        run: |
+          git diff --exit-code "$AUDIT_PROTOCOL_ANCHOR"..HEAD -- \
+            reports/HCL_STATE_GENERATION_RELIABILITY_AUDIT_V01.md \
+            eval/answer_loop/state_generation_reliability_v01.json \
+            scripts/run_state_generation_reliability_audit_v01.py \
+            tests/test_state_generation_reliability_audit_v01.py
+
+      - name: Install dependency
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "openai==2.14.0"
+
+      - name: Zero-provider static and unit preflight
+        shell: bash
+        run: |
+          python -m py_compile scripts/run_state_generation_reliability_audit_v01.py tests/test_state_generation_reliability_audit_v01.py
+          python -m unittest discover -s tests -p test_state_generation_reliability_audit_v01.py -v
+          python scripts/run_state_generation_reliability_audit_v01.py --help >/dev/null
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+
+          p = Path("eval/answer_loop/state_generation_reliability_v01.json")
+          data = json.loads(p.read_text(encoding="utf-8"))
+          cases = data["cases"]
+          assert len(cases) == 24
+          assert len({x["id"] for x in cases}) == 24
+          counts = Counter((x["length_band"], x["complexity"]) for x in cases)
+          assert counts == {
+              ("short", "simple"): 4,
+              ("short", "recursive"): 4,
+              ("medium", "simple"): 4,
+              ("medium", "recursive"): 4,
+              ("long", "simple"): 4,
+              ("long", "recursive"): 4,
+          }
+          PY
+
+      - name: Run frozen independent state-generation reliability audit
+        shell: bash
+        run: |
+          python scripts/run_state_generation_reliability_audit_v01.py
+
+      - name: Verify content-free audit artifact
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("artifacts/hcl-state-generation-reliability-v01")
+          summary = json.loads((root / "summary.json").read_text(encoding="utf-8"))
+          rows = [
+              json.loads(line)
+              for line in (root / "results.jsonl").read_text(encoding="utf-8").splitlines()
+              if line.strip()
+          ]
+          assert summary["fixture_count"] == 24
+          assert len(rows) == 24
+          assert summary["success_count"] + summary["failure_count"] == 24
+          assert summary["state_json_exhaustion_count"] + summary["backend_or_other_exception_count"] == summary["failure_count"]
+          assert summary["predeclared_interpretation"] in {
+              "MIXED_RUNTIME_RELIABILITY_DEFECT",
+              "STATE_JSON_RELIABILITY_DEFECT_ESTABLISHED",
+              "BACKEND_OR_OTHER_RELIABILITY_DEFECT_ESTABLISHED",
+              "NO_REPEATABLE_DEFECT_ESTABLISHED",
+          }
+          raw = (root / "summary.json").read_text(encoding="utf-8").lower() + (root / "results.jsonl").read_text(encoding="utf-8").lower()
+          for key in ('"input":', '"prompt":', '"messages":', '"response":', '"response_text":', '"state":', '"normalized_state":', '"api_key":', '"exception_text":'):
+              assert key not in raw, key
+          PY
+
+      - name: Upload raw content-free audit evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-state-generation-reliability-v01-${{ github.run_id }}
+          path: artifacts/hcl-state-generation-reliability-v01/
+          if-no-files-found: error
+          retention-days: 30
