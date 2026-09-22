@@ -1,0 +1,7 @@
+trigger: hcl-communication-boundary-adjudication-v01
+behavior_anchor: da09c1fc8b82a538f6b0fdbbbe101e58b839241b
+protocol_anchor: 38a7ff7f19e664f65dfb447b4593291a44701b33
+cases: cb02_direct_teacher,cb06_unread_notice,cb10_conflicting_sources
+repeats_each: 4
+answer_layer_calls: 0
+external_benchmark_calls: 0
