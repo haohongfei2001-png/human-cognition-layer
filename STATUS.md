@@ -2647,3 +2647,37 @@ Provider-backed regressions:
 All three must pass before v0.2 repair closure. No external benchmark evidence.
 
 **Current gate: STATE_JSON_RELIABILITY_REPAIR_V02_REGRESSIONS_RUNNING**
+
+
+## HCL state-JSON repair v0.2 regression result
+
+Canonical run:
+- `35710695556`
+- terminal result: **FAILURE**
+
+Passed:
+- zero-provider/freeze preflight;
+- production-path state-fidelity regression;
+- answer-checker regression.
+
+Failed:
+- output-interface regression: full_loop 7/8;
+- sole failure: `io01_full_binary_direct_access`;
+- aggregate regression gate therefore failed.
+
+The original failed run is preserved and is not replaced by a rerun.
+
+Bounded investigation predeclared:
+- target io01: exactly 8 repeats;
+- stable control io02: exactly 8 repeats;
+- frozen v0.2 behavior;
+- no extra retries;
+- no raw answer/state persistence;
+- mutually exclusive interpretation thresholds frozen before provider calls.
+
+Investigation assets:
+- `reports/HCL_STATE_JSON_REPAIR_V02_INTERFACE_INVESTIGATION_V01.md`
+- `scripts/run_v02_interface_regression_investigation_v01.py`
+- `tests/test_v02_interface_regression_investigation_v01.py`
+
+**Current gate: STATE_JSON_REPAIR_V02_REGRESSION_FAILED_INTERFACE_INVESTIGATION_READY**
