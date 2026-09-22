@@ -2000,3 +2000,29 @@ Formal paid workflow requires:
 8. aggregate only after all 60 complete.
 
 **Current gate: HITOM_EXT_V01_PAIRED_PREDECLARED_READY**
+
+
+## Hi-ToM external validation v0.1 execution
+
+Canonical paired workflow:
+- run: `35675119858`
+- launch commit: `888426d64f3d92a852a2dfc111fd1ae442e85e04`
+
+Zero-provider preflight:
+- HCL behavior freeze: PASS
+- Hi-ToM protocol freeze: PASS
+- pinned repository commit/blob: PASS
+- zero-provider unit tests: PASS
+- runner/aggregator entrypoint smoke: PASS
+- deterministic 60-row reconstruction: PASS
+- 60 distinct story hashes: PASS
+
+Paid execution:
+- 6 deterministic shards × 10 rows
+- maximum parallelism 2
+- no partial outcome inspection/tuning
+- aggregate required before interpretation.
+
+No behavior/protocol/sample change is permitted while this run is open.
+
+**Current gate: HITOM_EXT_V01_PAIRED_RUNNING**
