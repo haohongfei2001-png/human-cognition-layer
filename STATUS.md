@@ -2419,3 +2419,66 @@ Provider-backed diagnostic:
 - no repair v0.2 permitted while this run is open
 
 **Current gate: STRUCTURED_OUTPUT_FAILURE_DIAGNOSTIC_V01_RUNNING**
+
+
+## HCL structured-output failure diagnostic v0.1 closure
+
+Canonical run:
+- `35702581717`
+- terminal result: **SUCCESS**
+- preflight: SUCCESS
+- 6/6 diagnostic shards: SUCCESS
+- aggregate: SUCCESS
+- summary artifact: `10685496277`
+- digest:
+  `sha256:98596af2cf71216d5dea8753adc54525ac57488479540b19fcff966b156743a3`
+
+Complete 24-case diagnostic:
+- case success: **2 / 24**
+- state-json exhaustion: **22 / 24**
+- provider exception cases: **0**
+
+Bottom-level provider calls: **191**
+- `empty_length`: **149**
+- `nonparseable_length`: **40**
+- `valid_json_object`: **2**
+
+Finish reasons:
+- `length`: **189**
+- `stop`: **2**
+
+Token evidence:
+- every one of the 189 length-terminated calls consumed exactly
+  **8192 completion tokens**;
+- all 149 empty calls were length-terminated at 8192 tokens;
+- all 40 non-empty non-parseable calls were length-terminated at 8192 tokens;
+- the only 2 valid JSON objects ended with `stop` before the token ceiling.
+
+Therefore:
+
+**OUTPUT-BUDGET EXHAUSTION MECHANISM ESTABLISHED**
+
+The primary next repair should target output-budget / generation-efficiency,
+not generic parser broadening and not additional retries.
+
+Important boundary:
+- the diagnostic does not establish why the provider internally consumed the
+  full 8192 completion-token budget;
+- no reasoning-token subfield was persisted;
+- no external benchmark content was used;
+- HCL semantics/schema remain unchanged.
+
+See:
+- `reports/HCL_STRUCTURED_OUTPUT_FAILURE_DIAGNOSTIC_V01.md`
+- `reports/HCL_STRUCTURED_OUTPUT_FAILURE_DIAGNOSTIC_V01_CLOSURE.md`
+
+Next canonical work:
+1. predeclare an output-budget-focused repair v0.2 design;
+2. keep cognition semantics/schema frozen unless separately justified;
+3. do not increase retries as the primary repair;
+4. validate any v0.2 candidate on the same independent 24-case suite;
+5. require 24/24 success before broader regression gates;
+6. do not consume fresh external benchmark evidence before repair + regression
+   closure.
+
+**Current gate: OUTPUT_BUDGET_EXHAUSTION_ESTABLISHED_REQUIRES_REPAIR_V02_DESIGN**
