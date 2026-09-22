@@ -13,18 +13,23 @@ public release.
 HCL v0.4 is not authorized to begin by expanding the v0.3 schema or adding more
 benchmark-shaped prompt rules.
 
-Phase 0 must first establish a falsifiable research question and an evaluation
-design capable of distinguishing a real cognition-mechanism contribution from:
+Phase 0 must first establish a clear capability objective, a correctness
+contract, and an evaluation design capable of distinguishing genuine HCL
+capability from:
 
 - stronger prompting;
 - more inference-time compute;
 - ordinary persistent memory;
 - full-history reconstruction;
 - state-format effects;
-- checker / planner effects;
-- an already-published Theory-of-Mind method.
+- checker / planner effects.
 
-The project may continue only if a meaningful mechanism-level gap remains.
+Published Theory-of-Mind / belief-update methods are inputs to capability design
+and strong baselines. Prior art does not prohibit HCL from using an effective
+mechanism.
+
+The project may continue when there is a credible path to a more correct and
+useful cognition layer, even if some components are already known.
 
 ## 2. Falsifiability principle
 
@@ -86,8 +91,9 @@ At a deliberately high public abstraction level, Phase 0 asks:
 
 This question does not yet define the unpublished internal mechanism.
 
-The final Phase 0 thesis must be narrower and must identify a concrete,
-testable mechanism difference before implementation begins.
+The final Phase 0 plan must identify a concrete capability slice whose
+correctness can be evaluated and whose downstream value can be compared against
+strong simpler alternatives before broad implementation begins.
 
 ## 4. Strong comparison design
 
@@ -287,41 +293,41 @@ The private novelty analysis is therefore maintained outside this repository.
 
 Before Phase 0 can be marked complete, the project must have:
 
-1. a one-page falsifiable core thesis;
-2. a nearest-neighbor literature/difference matrix;
-3. the strongest alternative explanation;
-4. the experiment that distinguishes that alternative from the HCL candidate;
-5. an A/B/C/D/E/F comparison contract;
-6. explicit failure / stop criteria;
-7. development-vs-evaluation exposure accounting;
-8. an initial resource-budget policy;
-9. a reviewed public/private IP boundary.
+1. a clear capability objective;
+2. an operational correctness contract;
+3. a minimal capability slice;
+4. strong A/B/C/D/E/F comparison definitions;
+5. explicit failure / simplify / stop criteria;
+6. development-vs-evaluation exposure accounting;
+7. an initial resource-budget policy;
+8. a reviewed public/private IP boundary;
+9. a literature mechanism inventory sufficient to avoid rebuilding weaker
+   versions of existing methods.
 
 ## 11. Phase 0 exit gate
 
 Phase 0 **PASSES** only if all of the following are true:
 
-- a mechanism difference remains after nearest-neighbor review;
-- the proposed cognitive state/update has an independent correctness criterion,
-  not just a benchmark score;
-- the difference is measurable independently of prompt wording;
-- at least one experiment can falsify the correctness claim;
-- at least one experiment can test incremental utility beyond a strong simpler
-  alternative;
+- the first capability slice is clearly defined;
+- its cognitive state/update has an independent correctness criterion, not just
+  a benchmark score;
+- at least one experiment can expose a correctness failure;
+- at least one experiment can test downstream value beyond strong simpler
+  alternatives;
 - correctness and downstream utility are reported separately;
-- the research design allows the conclusion that HCL is cognitively wrong,
-  useful but unnecessary, correct but not incrementally useful, or both correct
-  and useful;
+- the plan can simplify or remove mechanisms that add no real capability;
 - the owner has approved the public disclosure boundary.
 
-Phase 0 **FAILS / STOPS** if:
+Phase 0 **REVISES / STOPS THE CURRENT SLICE** if:
 
-- the remaining difference is only naming, schema fields, prompt wording or
-  additional model calls;
-- no independent measurement exists;
-- the claimed mechanism cannot be separated from memory / compute / planner
-  effects;
-- the research program refuses to accept a negative HCL conclusion.
+- no independent correctness measurement exists;
+- the proposed slice is primarily naming/schema/prompt complexity;
+- its effects cannot be separated from memory / compute / planner effects;
+- a simpler mechanism is equally correct and useful;
+- the current design repeatedly produces substantively wrong cognition.
+
+Lack of publication novelty alone is **not** a stop condition for capability
+development.
 
 ## 12. Current gate
 
