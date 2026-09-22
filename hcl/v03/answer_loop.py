@@ -108,6 +108,15 @@ DRAFT_SYSTEM = """You are the response generator inside an always-on Human Cogni
 
 Answer the user's actual question using the supplied HCL state as structured cognitive context.
 
+Semantic grounding contract:
+- the structured HCL state is authoritative cognitive context;
+- explicit facts and entries in an agent's observed or knows fields are directly established evidence at their stated granularity;
+- for questions about whether an agent knows, observed, received, or has access to information, do not negate directly established observed or knows evidence;
+- explicit no-access or missing-evidence state must not be upgraded to knowledge;
+- if neither direction is established, preserve calibrated uncertainty;
+- EPISTEMIC mode, uncertainty, and hypotheses do not override a directly established explicit fact or observed/knows entry at the asked granularity;
+- if the user requires an exact output form, obey that form exactly and add no explanation.
+
 Rules:
 - respect explicit facts and agent-specific information access;
 - do not give a character narrator-only knowledge;
@@ -128,13 +137,21 @@ You receive:
 2. the frozen HCL cognition state;
 3. a candidate answer.
 
+Semantic monotonicity contract:
+- Judge state faithfulness before style.
+- Denying directly established observed/knows evidence about the asked proposition is an INFORMATION_ACCESS violation.
+- Contradicting explicit facts is a FACT_CONTRADICTION violation.
+- Do not request revision merely because the state is EPISTEMIC or uncertain about unrelated details when the asked proposition is directly established.
+- If the user explicitly requires an exact output form, failure to obey that form is a GRANULARITY violation.
+- PASS requires both semantic faithfulness and compliance with explicit answer granularity or format.
+
 Check exactly these violation families:
 - FACT_CONTRADICTION: contradicts explicit facts.
-- INFORMATION_ACCESS: gives an agent information they did not observe/receive/infer with support.
+- INFORMATION_ACCESS: gives an agent information they did not observe/receive/infer with support, or denies directly established observed/knows evidence.
 - BELIEF_LEVEL: confuses world truth, first-order belief, or second-order belief.
 - PREMATURE_COLLAPSE: presents one hidden cause/mental state as certain when genuine alternatives remain.
 - OVER_UNCERTAINTY: invents doubt or alternatives despite direct/overwhelming evidence at the asked granularity.
-- GRANULARITY: answers a different finer/coarser question than the user asked.
+- GRANULARITY: answers a different finer/coarser question than the user asked or violates an explicit exact-output requirement.
 - UNSUPPORTED_INVENTION: introduces material claims absent from facts/hypotheses.
 
 Return JSON only:
@@ -161,6 +178,14 @@ Do not reject merely for harmless wording/style differences.
 REVISION_SYSTEM = """You are the final response generator inside an always-on HCL system.
 
 Revise the draft to satisfy the supplied HCL cognition state and HCL checker.
+
+Semantic preservation contract:
+- the HCL state outranks checker prose if they conflict;
+- preserve every part of the draft that is already semantically supported by the state;
+- Never flip a directly supported answer merely to satisfy a checker request;
+- correct only genuine material violations;
+- direct observed/knows evidence must remain affirmative for the relevant access or knowledge proposition unless the state itself contains contrary evidence;
+- if the user requires an exact-output form, obey it exactly and add no explanation.
 
 Requirements:
 - correct every material checker violation;
