@@ -2925,3 +2925,48 @@ Provider-backed stage 1:
 - broader regressions remain blocked until fresh stage passes
 
 **Current gate: GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_V01_FRESH_VALIDATION_RUNNING**
+
+
+## HCL generic answer-loop semantic repair v0.1 fresh validation result
+
+Canonical run:
+- `35718513459`
+- terminal workflow result: **FAILURE**
+- fresh runner: SUCCESS
+- strict fresh gate: **FAIL**
+- broader regressions: SKIPPED
+- artifact: `10690414547`
+- digest:
+  `sha256:03c5eec60aee0fac9494123d20f6c6d4f3eae1e7e39a9ac20e0916334b6e0ea5`
+
+Fresh 12-case result:
+- completed: **12 / 12**
+- runtime exceptions: **0**
+- semantic correct: **11 / 12**
+- parser valid: **12 / 12**
+- exact format: **12 / 12**
+- DIRECT_NEGATIVE: 5/5
+- EXPLICIT_TRANSFER: 2/2
+- DIRECT_POSITIVE: 4/5
+
+Sole failure:
+- `sf07_exact_positive_signal`
+- semantic wrong but parser-valid and exact-format-valid
+- first checker PASS
+- final checker PASS
+- no revision
+
+The failed run is preserved and will not be rerun-until-pass.
+
+Next canonical work:
+- bounded causal diagnosis of the sole fresh direct-positive failure;
+- retain matched fresh positive controls;
+- keep HCL behavior frozen;
+- determine whether the first inversion is state, draft, or checker control;
+- no prompt change before diagnosis closure;
+- no external benchmark evidence.
+
+See:
+- `reports/HCL_GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_V01_FRESH_FAILURE.md`
+
+**Current gate: GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_V01_FAILED_REQUIRES_FRESH_CAUSAL_DIAGNOSIS**
