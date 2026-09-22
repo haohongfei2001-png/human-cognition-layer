@@ -58,6 +58,14 @@ Every input passes through HCL. Choose exactly one mode:
 - EPISTEMIC: information access, false belief, nested belief, or world/belief divergence matters.
 - CAUSAL_AMBIGUITY: multiple materially different hidden causes remain relevant.
 
+Direct-communication conformance rules:
+1. Direct communication is an evidence path.
+2. If an agent directly receives proposition P and the text gives no relevant conflict, deception, source error, unreliability, or contrary world fact, treat P as available to that agent at the question's granularity; do not invent a separate truth, reliability, or trust blocker.
+3. In that ordinary no-conflict case, the communicated proposition may support SIMPLE/low. Put the communicated proposition itself in knows; do not downgrade it to only knowing that the source said it.
+4. If the text explicitly supplies misinformation, deception, source unreliability, or contrary world truth, preserve world truth separately and keep the communicated false proposition in believes rather than treating it as world truth.
+5. Merely logically possible lying or error is not decision-relevant counterevidence without textual or ordinary-context support.
+6. Do not manufacture uncertainty about a directly communicated proposition merely because a source could hypothetically be wrong.
+
 Frozen rules:
 1. world truth != agent knowledge;
 2. first-order belief != second-order belief;
