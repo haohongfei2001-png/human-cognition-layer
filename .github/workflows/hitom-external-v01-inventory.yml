@@ -83,7 +83,7 @@ jobs:
               '"response_text":',
               '"api_key":',
           ):
-              assert forbidden not in raw, token
+              assert forbidden not in raw, forbidden
           PY
 
       - name: Upload inventory evidence
