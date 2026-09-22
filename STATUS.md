@@ -2813,3 +2813,56 @@ Provider-backed diagnosis:
 - no HCL behavior change while open
 
 **Current gate: STATE_JSON_REPAIR_V02_IO01_CAUSAL_DIAGNOSIS_V01_RUNNING**
+
+
+## HCL v0.2 io01 causal diagnosis v0.1 closure
+
+Canonical run:
+- `35715326584`
+- terminal result: **SUCCESS**
+- artifact: `10688104138`
+- digest:
+  `sha256:154e92c9aa3b156a74b42a2256946d7663718bf0821ea912343e8fd518f3aa4a`
+
+Target io01, 8 repetitions:
+- runtime exceptions: **0**
+- target agent found: **8 / 8**
+- state mode EPISTEMIC: **8 / 8**
+- state supports gold semantics: **8 / 8**
+- final success: **2 / 8**
+
+First inversion:
+- STATE: **0**
+- DRAFT: **5**
+- FIRST_REVISION: **3**
+- SECOND_REVISION: **0**
+- NONE: **0**
+
+Predeclared interpretation:
+
+**DRAFT_DOMINANT**
+
+Secondary control failures:
+- first checker false-revise: **3 / 8**
+- first revision failed to correct wrong draft: **5 / 8**
+- first revision inverted a correct draft: **3 / 8**
+- final checker false-pass on wrong candidate: **4 / 8**
+- second revision failed to correct: **2 / 8**
+
+Matched control io02:
+- final success: **8 / 8**
+- broad pipeline collapse not established.
+
+Implication:
+- preserve the successful v0.2 state-generation fix;
+- do not change frozen state semantics/schema;
+- next repair must be generic and scoped to answer-loop semantic faithfulness:
+  draft faithfulness + checker/revision protections;
+- no io01 literal special-casing;
+- no fresh external benchmark evidence.
+
+See:
+- `reports/HCL_STATE_JSON_REPAIR_V02_IO01_CAUSAL_DIAGNOSIS_V01.md`
+- `reports/HCL_STATE_JSON_REPAIR_V02_IO01_CAUSAL_DIAGNOSIS_V01_CLOSURE.md`
+
+**Current gate: IO01_DRAFT_DOMINANT_REQUIRES_GENERIC_ANSWER_LOOP_SEMANTIC_REPAIR_DESIGN**
