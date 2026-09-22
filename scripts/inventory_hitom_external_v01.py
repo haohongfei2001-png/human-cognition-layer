@@ -166,9 +166,13 @@ def main() -> int:
     )
     args = p.parse_args()
 
-    rows = json.loads(args.dataset.read_text(encoding="utf-8"))
-    if not isinstance(rows, list):
-        raise RuntimeError("Hi-ToM dataset root must be a list")
+    raw = json.loads(args.dataset.read_text(encoding="utf-8"))
+    if isinstance(raw, dict) and isinstance(raw.get("data"), list):
+        rows = raw["data"]
+    elif isinstance(raw, list):
+        rows = raw
+    else:
+        raise RuntimeError("Hi-ToM dataset root must be a list or {'data': [...]} object")
 
     result = inventory(rows)
     args.out.mkdir(parents=True, exist_ok=True)
