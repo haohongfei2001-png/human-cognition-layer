@@ -215,17 +215,26 @@ class HCLAnswerLoop:
                     "\n\n前一次输出不是可解析的 JSON。"
                     "这次必须只输出一个完整 JSON 对象，不要使用 Markdown、代码块或额外文字。"
                 )
-            last_raw = self.backend.complete(
-                [
-                    {"role": "system", "content": STATE_SYSTEM},
-                    {
-                        "role": "user",
-                        "content": base_user + suffix,
-                    },
-                ],
-                max_tokens=self.state_max_tokens,
-                temperature=0.0,
-            )
+            messages = [
+                {"role": "system", "content": STATE_SYSTEM},
+                {
+                    "role": "user",
+                    "content": base_user + suffix,
+                },
+            ]
+            complete_json = getattr(self.backend, "complete_json", None)
+            if callable(complete_json):
+                last_raw = complete_json(
+                    messages,
+                    max_tokens=self.state_max_tokens,
+                    temperature=0.0,
+                )
+            else:
+                last_raw = self.backend.complete(
+                    messages,
+                    max_tokens=self.state_max_tokens,
+                    temperature=0.0,
+                )
             state = extract_json(last_raw)
             if state is not None:
                 return self._normalize_state(state)
