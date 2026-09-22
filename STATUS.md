@@ -3321,3 +3321,29 @@ The runtime prompt conformance repair may now advance to its already-predeclared
 full synthetic regression gate.
 
 **Current gate: RUNTIME_STATE_PROMPT_CONFORMANCE_V01_ADJUDICATED_BOUNDARY_PASS_REGRESSIONS_READY**
+
+
+## Runtime state-prompt conformance v0.1 full synthetic regression protocol
+
+Protocol:
+- `reports/HCL_RUNTIME_STATE_PROMPT_CONFORMANCE_V01_REGRESSION_PROTOCOL.md`
+- protocol anchor:
+  `574784ddb2ac5d4b525ddb30d3403144ec973f53`
+- frozen behavior:
+  `da09c1fc8b82a538f6b0fdbbbe101e58b839241b`
+
+Execution order:
+1. state-generation reliability:
+   - 24 frozen cases;
+   - 6 shards × 4;
+   - strict 24/24, zero runtime failures;
+2. only after reliability pass:
+   - fresh semantic-faithfulness answer suite 12/12;
+   - original output-interface audit 8/8 + 8/8;
+   - production-path state fidelity 100%;
+   - answer-checker fresh suite 100%;
+3. final closure gate requires all evidence.
+
+No external benchmark calls.
+
+**Current gate: RUNTIME_STATE_PROMPT_CONFORMANCE_V01_FULL_REGRESSIONS_READY**
