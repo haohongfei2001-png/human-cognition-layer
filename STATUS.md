@@ -2275,3 +2275,29 @@ Validation:
 - no new external benchmark evidence.
 
 **Current gate: STATE_JSON_RELIABILITY_REPAIR_V01_VALIDATION_READY**
+
+
+## HCL state-JSON reliability repair v0.1 validation execution
+
+Canonical workflow:
+- run: `35695318437`
+- launch commit: `a8788e2ee9a190e1b9ffc84e21580ad8a324b1bd`
+
+Zero-provider preflight:
+- frozen cognition semantics / schema: PASS
+- STATE_SYSTEM equality to original behavior anchor: PASS
+- repair implementation freeze: PASS
+- repair protocol freeze: PASS
+- compile: PASS
+- repair unit gates: PASS
+- prior reliability-audit zero-provider tests: PASS
+- exact 24-case fixture coverage: PASS
+
+Provider-backed validation:
+- same 24 independent synthetic cases
+- 6 shards × 4 cases
+- maximum parallelism 3
+- no external benchmark content
+- aggregate pass requires 24/24 success and zero runtime failures
+
+**Current gate: STATE_JSON_RELIABILITY_REPAIR_V01_VALIDATION_RUNNING**
