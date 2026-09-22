@@ -1,0 +1,181 @@
+{
+  "suite": "HCL runtime state-prompt communication boundary fresh v0.1",
+  "cases": [
+    {
+      "id": "cb01_direct_dispatch",
+      "input": "A dispatcher tells Rowan directly, 'Platform 6 is closed.' Rowan hears the message. Does Rowan know that Platform 6 is closed?",
+      "agent": "Rowan",
+      "expected_mode": [
+        "SIMPLE"
+      ],
+      "expected_uncertainty": [
+        "low"
+      ],
+      "require_missing_bridge": false,
+      "knows_all": [
+        "Platform 6",
+        "closed"
+      ],
+      "believes_all": [],
+      "forbidden_knows": []
+    },
+    {
+      "id": "cb02_direct_teacher",
+      "input": "A teacher tells Imani directly that tomorrow's lab starts at 10 AM. Imani hears the teacher clearly. Does Imani know the lab start time?",
+      "agent": "Imani",
+      "expected_mode": [
+        "SIMPLE"
+      ],
+      "expected_uncertainty": [
+        "low"
+      ],
+      "require_missing_bridge": false,
+      "knows_all": [
+        "10 AM"
+      ],
+      "believes_all": [],
+      "forbidden_knows": []
+    },
+    {
+      "id": "cb03_read_message",
+      "input": "Mateo opens and reads a message from the event organizer saying the venue changed to Hall C. No conflicting information is given. Does Mateo know the new venue?",
+      "agent": "Mateo",
+      "expected_mode": [
+        "SIMPLE"
+      ],
+      "expected_uncertainty": [
+        "low"
+      ],
+      "require_missing_bridge": false,
+      "knows_all": [
+        "Hall C"
+      ],
+      "believes_all": [],
+      "forbidden_knows": []
+    },
+    {
+      "id": "cb04_direct_colleague",
+      "input": "Priyanka asks where the signed form is. Her colleague answers directly, 'It is in the top cabinet.' Priyanka hears the answer, and no conflicting information is given. Does Priyanka know where the signed form is?",
+      "agent": "Priyanka",
+      "expected_mode": [
+        "SIMPLE"
+      ],
+      "expected_uncertainty": [
+        "low"
+      ],
+      "require_missing_bridge": false,
+      "knows_all": [
+        "top cabinet"
+      ],
+      "believes_all": [],
+      "forbidden_knows": []
+    },
+    {
+      "id": "cb05_no_receipt",
+      "input": "After Victor leaves, a coordinator announces that the meeting moved to Room 4. The story explicitly says Victor does not hear the announcement and receives no message. Does Victor know the new room?",
+      "agent": "Victor",
+      "expected_mode": [
+        "EPISTEMIC"
+      ],
+      "expected_uncertainty": [
+        "low",
+        "medium"
+      ],
+      "require_missing_bridge": true,
+      "knows_all": [],
+      "believes_all": [],
+      "forbidden_knows": [
+        "Room 4"
+      ]
+    },
+    {
+      "id": "cb06_unread_notice",
+      "input": "A notice saying the deadline moved to Friday is sent to Ayla, but the story explicitly says she never opens it and nobody tells her. Does Ayla know the new deadline?",
+      "agent": "Ayla",
+      "expected_mode": [
+        "EPISTEMIC"
+      ],
+      "expected_uncertainty": [
+        "low",
+        "medium"
+      ],
+      "require_missing_bridge": true,
+      "knows_all": [],
+      "believes_all": [],
+      "forbidden_knows": [
+        "Friday"
+      ]
+    },
+    {
+      "id": "cb07_false_message",
+      "input": "The real key is in Drawer B. Ken mistakenly tells Zoe, 'The key is in Drawer A.' Zoe hears Ken and has no other information. What will Zoe believe about the key location?",
+      "agent": "Zoe",
+      "expected_mode": [
+        "EPISTEMIC"
+      ],
+      "expected_uncertainty": [
+        "low"
+      ],
+      "require_missing_bridge": false,
+      "knows_all": [],
+      "believes_all": [
+        "Drawer A"
+      ],
+      "forbidden_knows": [
+        "Drawer B"
+      ]
+    },
+    {
+      "id": "cb08_explicit_deception",
+      "input": "The file is actually in the blue folder. Sam deliberately lies to Noor and says, 'The file is in the red folder.' Noor hears Sam and has no other information. What will Noor believe?",
+      "agent": "Noor",
+      "expected_mode": [
+        "EPISTEMIC"
+      ],
+      "expected_uncertainty": [
+        "low"
+      ],
+      "require_missing_bridge": false,
+      "knows_all": [],
+      "believes_all": [
+        "red folder"
+      ],
+      "forbidden_knows": [
+        "blue folder"
+      ]
+    },
+    {
+      "id": "cb09_unreliable_source",
+      "input": "The story explicitly says the display sensor is malfunctioning and often wrong. It shows 'Tank full' to Dara. Dara sees the display, with no independent confirmation. Does Dara know the tank is full?",
+      "agent": "Dara",
+      "expected_mode": [
+        "EPISTEMIC"
+      ],
+      "expected_uncertainty": [
+        "medium",
+        "high"
+      ],
+      "require_missing_bridge": true,
+      "knows_all": [],
+      "believes_all": [],
+      "forbidden_knows": [
+        "tank is full"
+      ]
+    },
+    {
+      "id": "cb10_conflicting_sources",
+      "input": "One supervisor tells Chen, 'The inspection is Monday.' A second supervisor immediately tells Chen, 'The inspection is Tuesday.' No other evidence resolves the conflict. Does Chen know the inspection day?",
+      "agent": "Chen",
+      "expected_mode": [
+        "EPISTEMIC"
+      ],
+      "expected_uncertainty": [
+        "high"
+      ],
+      "require_missing_bridge": true,
+      "knows_all": [],
+      "believes_all": [],
+      "forbidden_knows": []
+    }
+  ]
+}
