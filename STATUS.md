@@ -3850,3 +3850,38 @@ Owner-originated unpublished conceptual examples remain outside GitHub.
 
 **Current gate: HCL_V04_EXPLICIT_BELIEF_SLICE_COMPLETE_LATENT_HYPOTHESIS_SLICE_READY**
 
+## HCL v0.4 latent-hypothesis capability closure
+
+Closure:
+- `reports/HCL_V04_LATENT_HYPOTHESIS_CAPABILITY_V01_CLOSURE.md`
+
+Canonical run:
+- `35849522485`
+- C = 11/12
+- D = 12/12
+- E = 12/12
+- controlled hidden candidate top-or-tied:
+  - C = 12/12
+  - D = 12/12
+
+Interpretation:
+- bounded competing-hypothesis representation is viable on controlled scenarios;
+- dynamic persistence corrected one static-reconstruction prediction error;
+- ordinary full-history reasoning E matched D's perfect prediction accuracy at
+  much lower cost;
+- per-event hypothesis maintenance is not justified as a general default;
+- do not keep escalating passive prediction difficulty merely to force a win.
+
+Next capability:
+**Hypothesis-Guided Information Acquisition and Action**
+
+Goal:
+- use unresolved hypotheses to choose discriminating probes/questions;
+- update after the observation;
+- act when uncertainty is sufficiently resolved;
+- compare final task success and probe efficiency against ordinary reasoning.
+
+No external benchmark rows are authorized yet.
+
+**Current gate: HCL_V04_LATENT_PREDICTION_COMPLETE_HYPOTHESIS_GUIDED_ACTION_READY**
+
