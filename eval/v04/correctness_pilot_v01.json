@@ -1,0 +1,237 @@
+[
+  {
+    "id": "neutral_report_no_acceptance",
+    "manual_review": "Alice was exposed to a source assertion. The assertion is not world truth and exposure alone should not become a belief estimate.",
+    "events": [
+      {
+        "event_id": "nr1",
+        "valid_time": "2026-01-01T10:00:00+00:00",
+        "recorded_at": "2026-01-01T10:01:00+00:00",
+        "raw_text": "A source tells Alice: 'The package is in locker 7.' Nothing else says whether the source is correct or whether Alice accepts the statement.",
+        "source_id": "source",
+        "actor_id": "source",
+        "recipient_ids": ["alice"],
+        "metadata": {}
+      }
+    ],
+    "queries": [
+      {
+        "viewer": "__system__",
+        "query": "What cognitive state is supported?",
+        "checks": [
+          {"kind": "require_type", "assertion_type": "SOURCE_ASSERTION"},
+          {"kind": "require_type_subject", "assertion_type": "INFORMATION_EXPOSURE", "subject_agent_id": "alice"},
+          {"kind": "forbid_type", "assertion_type": "SCENE_FACT"},
+          {"kind": "forbid_type_subject", "assertion_type": "BELIEF_ESTIMATE", "subject_agent_id": "alice"}
+        ]
+      }
+    ]
+  },
+  {
+    "id": "explicit_acceptance_supports_belief",
+    "manual_review": "Alice explicitly accepts the communicated proposition, so exposure plus a belief estimate is supported; the source assertion still is not automatically a scene fact.",
+    "events": [
+      {
+        "event_id": "ea1",
+        "valid_time": "2026-01-01T10:00:00+00:00",
+        "recorded_at": "2026-01-01T10:01:00+00:00",
+        "raw_text": "A source tells Alice: 'The package is in locker 7.' Alice replies: 'Okay, I believe you; I will go to locker 7.'",
+        "source_id": "source",
+        "actor_id": "source",
+        "recipient_ids": ["alice"],
+        "observer_ids": ["source"],
+        "metadata": {}
+      }
+    ],
+    "queries": [
+      {
+        "viewer": "__system__",
+        "query": "What does Alice believe?",
+        "checks": [
+          {"kind": "require_type_subject", "assertion_type": "INFORMATION_EXPOSURE", "subject_agent_id": "alice"},
+          {"kind": "require_type_subject", "assertion_type": "BELIEF_ESTIMATE", "subject_agent_id": "alice"},
+          {"kind": "forbid_type", "assertion_type": "SCENE_FACT"}
+        ]
+      }
+    ]
+  },
+  {
+    "id": "explicit_rejection_preserves_distinction",
+    "manual_review": "Alice receives P but explicitly rejects it and states an alternative belief. The patch should preserve exposure and a belief estimate without treating P as fact.",
+    "events": [
+      {
+        "event_id": "er1",
+        "valid_time": "2026-01-01T10:00:00+00:00",
+        "recorded_at": "2026-01-01T10:01:00+00:00",
+        "raw_text": "A source tells Alice: 'The meeting is at four.' Alice replies: 'I think that message is wrong. I still believe the meeting is at three.'",
+        "source_id": "source",
+        "actor_id": "source",
+        "recipient_ids": ["alice"],
+        "observer_ids": ["source"],
+        "metadata": {}
+      }
+    ],
+    "queries": [
+      {
+        "viewer": "__system__",
+        "query": "What does Alice currently believe?",
+        "checks": [
+          {"kind": "require_type_subject", "assertion_type": "INFORMATION_EXPOSURE", "subject_agent_id": "alice"},
+          {"kind": "require_type_subject", "assertion_type": "BELIEF_ESTIMATE", "subject_agent_id": "alice"},
+          {"kind": "forbid_type", "assertion_type": "SCENE_FACT"}
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hidden_scene_fact_not_agent_knowledge",
+    "manual_review": "The environment establishes a scene fact while Alice is absent. The system may record the fact, but Alice's perspective-safe view must not expose the event.",
+    "events": [
+      {
+        "event_id": "hf1",
+        "valid_time": "2026-01-01T10:00:00+00:00",
+        "recorded_at": "2026-01-01T10:01:00+00:00",
+        "raw_text": "While Alice is absent, the package is actually moved to locker 9.",
+        "source_id": "environment",
+        "actor_id": "environment",
+        "observer_ids": ["bob"],
+        "metadata": {"scene_fact": true}
+      }
+    ],
+    "queries": [
+      {
+        "viewer": "__system__",
+        "query": "Where is the package?",
+        "checks": [
+          {"kind": "require_type", "assertion_type": "SCENE_FACT"}
+        ]
+      },
+      {
+        "viewer": "alice",
+        "query": "What information is available to Alice?",
+        "checks": [
+          {"kind": "forbid_event_visible", "event_id": "hf1"}
+        ]
+      }
+    ]
+  },
+  {
+    "id": "correction_not_received_does_not_update_agent",
+    "manual_review": "Alice explicitly accepted the old time. The world later changes and Bob receives the correction, but Alice does not. Alice's view should retain her old belief evidence and exclude the correction event.",
+    "events": [
+      {
+        "event_id": "cn1",
+        "valid_time": "2026-01-01T09:00:00+00:00",
+        "recorded_at": "2026-01-01T09:01:00+00:00",
+        "raw_text": "Alice reads the official notice saying the meeting is at three and says: 'Okay, I believe it is at three.'",
+        "source_id": "notice",
+        "actor_id": "notice",
+        "recipient_ids": ["alice"],
+        "metadata": {}
+      },
+      {
+        "event_id": "cn2",
+        "valid_time": "2026-01-01T10:00:00+00:00",
+        "recorded_at": "2026-01-01T10:01:00+00:00",
+        "raw_text": "The meeting is actually changed to four. Bob receives the official correction; Alice does not receive it.",
+        "source_id": "environment",
+        "actor_id": "environment",
+        "recipient_ids": ["bob"],
+        "metadata": {"scene_fact": true}
+      }
+    ],
+    "queries": [
+      {
+        "viewer": "alice",
+        "query": "What does Alice believe about the meeting time?",
+        "checks": [
+          {"kind": "require_type_subject", "assertion_type": "BELIEF_ESTIMATE", "subject_agent_id": "alice"},
+          {"kind": "forbid_event_visible", "event_id": "cn2"}
+        ]
+      }
+    ]
+  },
+  {
+    "id": "later_system_discovery_preserves_historical_agent_state",
+    "manual_review": "The system later establishes that Alice's earlier belief was false. The current system view may change, but Alice's earlier belief record must remain queryable and the later event must not leak into Alice's perspective.",
+    "events": [
+      {
+        "event_id": "sd1",
+        "valid_time": "2026-01-01T09:00:00+00:00",
+        "recorded_at": "2026-01-01T09:01:00+00:00",
+        "raw_text": "Alice says: 'I believe the key is in drawer A.'",
+        "source_id": "alice",
+        "actor_id": "alice",
+        "observer_ids": ["alice"],
+        "metadata": {}
+      },
+      {
+        "event_id": "sd2",
+        "valid_time": "2026-01-01T08:30:00+00:00",
+        "recorded_at": "2026-01-01T11:00:00+00:00",
+        "raw_text": "An archive record later establishes that the key was actually in drawer B at 08:30. Alice has not seen this archive record.",
+        "source_id": "archive",
+        "actor_id": "archive",
+        "observer_ids": ["__system__"],
+        "metadata": {"scene_fact": true}
+      }
+    ],
+    "queries": [
+      {
+        "viewer": "alice",
+        "query": "What is Alice's supported belief?",
+        "checks": [
+          {"kind": "require_type_subject", "assertion_type": "BELIEF_ESTIMATE", "subject_agent_id": "alice"},
+          {"kind": "forbid_event_visible", "event_id": "sd2"}
+        ]
+      },
+      {
+        "viewer": "__system__",
+        "event_time": "2026-01-01T09:30:00+00:00",
+        "knowledge_cutoff": "2026-01-01T09:30:00+00:00",
+        "query": "What did HCL have evidence for by 09:30?",
+        "checks": [
+          {"kind": "forbid_event_visible", "event_id": "sd2"}
+        ]
+      }
+    ]
+  },
+  {
+    "id": "conflicting_sources_without_resolution",
+    "manual_review": "Two sources give Alice incompatible claims and there is no fact source or explicit acceptance. The system must not promote either claim to scene fact or an established belief.",
+    "events": [
+      {
+        "event_id": "cs1",
+        "valid_time": "2026-01-01T09:00:00+00:00",
+        "recorded_at": "2026-01-01T09:01:00+00:00",
+        "raw_text": "Source One tells Alice: 'The gate is open.'",
+        "source_id": "source_one",
+        "actor_id": "source_one",
+        "recipient_ids": ["alice"],
+        "metadata": {}
+      },
+      {
+        "event_id": "cs2",
+        "valid_time": "2026-01-01T09:10:00+00:00",
+        "recorded_at": "2026-01-01T09:11:00+00:00",
+        "raw_text": "Source Two tells Alice: 'The gate is closed.' Nothing establishes which source is correct, and Alice does not say which claim she accepts.",
+        "source_id": "source_two",
+        "actor_id": "source_two",
+        "recipient_ids": ["alice"],
+        "metadata": {}
+      }
+    ],
+    "queries": [
+      {
+        "viewer": "__system__",
+        "query": "What is established about the gate and Alice's belief?",
+        "checks": [
+          {"kind": "require_count_at_least", "assertion_type": "SOURCE_ASSERTION", "count": 2},
+          {"kind": "require_count_at_least", "assertion_type": "INFORMATION_EXPOSURE", "count": 2},
+          {"kind": "forbid_type", "assertion_type": "SCENE_FACT"},
+          {"kind": "forbid_type_subject", "assertion_type": "BELIEF_ESTIMATE", "subject_agent_id": "alice"}
+        ]
+      }
+    ]
+  }
+]
