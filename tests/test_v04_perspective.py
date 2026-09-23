@@ -4,6 +4,7 @@ import unittest
 
 from hcl.v04 import (
     AssertionType,
+    BeliefStance,
     CognitiveAssertion,
     CognitionStore,
     EventRecord,
@@ -91,6 +92,7 @@ class V04PerspectiveTests(unittest.TestCase):
                         CognitiveAssertion(
                             assertion_id="alice_belief_three",
                             assertion_type=AssertionType.BELIEF_ESTIMATE,
+                            belief_stance=BeliefStance.AFFIRM,
                             subject_agent_id="alice",
                             proposition_id="three",
                             valid_time=T0,
@@ -164,6 +166,7 @@ class V04PerspectiveTests(unittest.TestCase):
                         CognitiveAssertion(
                             assertion_id="b3",
                             assertion_type=AssertionType.BELIEF_ESTIMATE,
+                            belief_stance=BeliefStance.AFFIRM,
                             subject_agent_id="alice",
                             proposition_id="three",
                             valid_time=T0,
@@ -205,6 +208,7 @@ class V04PerspectiveTests(unittest.TestCase):
                         CognitiveAssertion(
                             assertion_id="b3_after",
                             assertion_type=AssertionType.BELIEF_ESTIMATE,
+                            belief_stance=BeliefStance.AFFIRM,
                             subject_agent_id="alice",
                             proposition_id="three",
                             valid_time=T1,
