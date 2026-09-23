@@ -32,4 +32,6 @@ jobs:
             tests.test_v04_store \
             tests.test_v04_perspective \
             tests.test_v04_recovery \
-            tests.test_v04_runtime
+            tests.test_v04_runtime \
+            tests.test_v04_hypotheses \
+            tests.test_v04_evidence_scoped_revision
