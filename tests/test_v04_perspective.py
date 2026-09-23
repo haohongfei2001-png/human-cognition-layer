@@ -229,6 +229,7 @@ class V04PerspectiveTests(unittest.TestCase):
                 EventRecord(
                     event_id="public",
                     valid_time=T0,
+                    recorded_at="2026-01-01T10:01:00+00:00",
                     raw_text="Alice receives P.",
                     source_id="source",
                     actor_id="source",
