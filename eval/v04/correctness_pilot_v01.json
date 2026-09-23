@@ -10,7 +10,9 @@
         "raw_text": "A source tells Alice: 'The package is in locker 7.' Nothing else says whether the source is correct or whether Alice accepts the statement.",
         "source_id": "source",
         "actor_id": "source",
-        "recipient_ids": ["alice"],
+        "recipient_ids": [
+          "alice"
+        ],
         "metadata": {}
       }
     ],
@@ -19,10 +21,24 @@
         "viewer": "__system__",
         "query": "What cognitive state is supported?",
         "checks": [
-          {"kind": "require_type", "assertion_type": "SOURCE_ASSERTION"},
-          {"kind": "require_type_subject", "assertion_type": "INFORMATION_EXPOSURE", "subject_agent_id": "alice"},
-          {"kind": "forbid_type", "assertion_type": "SCENE_FACT"},
-          {"kind": "forbid_type_subject", "assertion_type": "BELIEF_ESTIMATE", "subject_agent_id": "alice"}
+          {
+            "kind": "require_type",
+            "assertion_type": "SOURCE_ASSERTION"
+          },
+          {
+            "kind": "require_type_subject",
+            "assertion_type": "INFORMATION_EXPOSURE",
+            "subject_agent_id": "alice"
+          },
+          {
+            "kind": "forbid_type",
+            "assertion_type": "SCENE_FACT"
+          },
+          {
+            "kind": "forbid_type_subject",
+            "assertion_type": "BELIEF_ESTIMATE",
+            "subject_agent_id": "alice"
+          }
         ]
       }
     ]
@@ -38,8 +54,12 @@
         "raw_text": "A source tells Alice: 'The package is in locker 7.' Alice replies: 'Okay, I believe you; I will go to locker 7.'",
         "source_id": "source",
         "actor_id": "source",
-        "recipient_ids": ["alice"],
-        "observer_ids": ["source"],
+        "recipient_ids": [
+          "alice"
+        ],
+        "observer_ids": [
+          "source"
+        ],
         "metadata": {}
       }
     ],
@@ -48,9 +68,21 @@
         "viewer": "__system__",
         "query": "What does Alice believe?",
         "checks": [
-          {"kind": "require_type_subject", "assertion_type": "INFORMATION_EXPOSURE", "subject_agent_id": "alice"},
-          {"kind": "require_type_subject", "assertion_type": "BELIEF_ESTIMATE", "subject_agent_id": "alice"},
-          {"kind": "forbid_type", "assertion_type": "SCENE_FACT"}
+          {
+            "kind": "require_type_subject",
+            "assertion_type": "INFORMATION_EXPOSURE",
+            "subject_agent_id": "alice"
+          },
+          {
+            "kind": "require_belief_stance",
+            "subject_agent_id": "alice",
+            "belief_stance": "AFFIRM",
+            "proposition_text": "The package is in locker 7."
+          },
+          {
+            "kind": "forbid_type",
+            "assertion_type": "SCENE_FACT"
+          }
         ]
       }
     ]
@@ -66,8 +98,12 @@
         "raw_text": "A source tells Alice: 'The meeting is at four.' Alice replies: 'I think that message is wrong. I still believe the meeting is at three.'",
         "source_id": "source",
         "actor_id": "source",
-        "recipient_ids": ["alice"],
-        "observer_ids": ["source"],
+        "recipient_ids": [
+          "alice"
+        ],
+        "observer_ids": [
+          "source"
+        ],
         "metadata": {}
       }
     ],
@@ -76,9 +112,27 @@
         "viewer": "__system__",
         "query": "What does Alice currently believe?",
         "checks": [
-          {"kind": "require_type_subject", "assertion_type": "INFORMATION_EXPOSURE", "subject_agent_id": "alice"},
-          {"kind": "require_type_subject", "assertion_type": "BELIEF_ESTIMATE", "subject_agent_id": "alice"},
-          {"kind": "forbid_type", "assertion_type": "SCENE_FACT"}
+          {
+            "kind": "require_type_subject",
+            "assertion_type": "INFORMATION_EXPOSURE",
+            "subject_agent_id": "alice"
+          },
+          {
+            "kind": "require_belief_stance",
+            "subject_agent_id": "alice",
+            "belief_stance": "AFFIRM",
+            "proposition_text": "The meeting is at three."
+          },
+          {
+            "kind": "require_belief_stance",
+            "subject_agent_id": "alice",
+            "belief_stance": "DENY",
+            "proposition_text": "The meeting is at four."
+          },
+          {
+            "kind": "forbid_type",
+            "assertion_type": "SCENE_FACT"
+          }
         ]
       }
     ]
@@ -94,8 +148,12 @@
         "raw_text": "While Alice is absent, the package is actually moved to locker 9.",
         "source_id": "environment",
         "actor_id": "environment",
-        "observer_ids": ["bob"],
-        "metadata": {"scene_fact": true}
+        "observer_ids": [
+          "bob"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
       }
     ],
     "queries": [
@@ -103,14 +161,20 @@
         "viewer": "__system__",
         "query": "Where is the package?",
         "checks": [
-          {"kind": "require_type", "assertion_type": "SCENE_FACT"}
+          {
+            "kind": "require_type",
+            "assertion_type": "SCENE_FACT"
+          }
         ]
       },
       {
         "viewer": "alice",
         "query": "What information is available to Alice?",
         "checks": [
-          {"kind": "forbid_event_visible", "event_id": "hf1"}
+          {
+            "kind": "forbid_event_visible",
+            "event_id": "hf1"
+          }
         ]
       }
     ]
@@ -126,7 +190,9 @@
         "raw_text": "Alice reads the official notice saying the meeting is at three and says: 'Okay, I believe it is at three.'",
         "source_id": "notice",
         "actor_id": "notice",
-        "recipient_ids": ["alice"],
+        "recipient_ids": [
+          "alice"
+        ],
         "metadata": {}
       },
       {
@@ -136,8 +202,12 @@
         "raw_text": "The meeting is actually changed to four. Bob receives the official correction; Alice does not receive it.",
         "source_id": "environment",
         "actor_id": "environment",
-        "recipient_ids": ["bob"],
-        "metadata": {"scene_fact": true}
+        "recipient_ids": [
+          "bob"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
       }
     ],
     "queries": [
@@ -145,8 +215,36 @@
         "viewer": "alice",
         "query": "What does Alice believe about the meeting time?",
         "checks": [
-          {"kind": "require_type_subject", "assertion_type": "BELIEF_ESTIMATE", "subject_agent_id": "alice"},
-          {"kind": "forbid_event_visible", "event_id": "cn2"}
+          {
+            "kind": "require_belief_stance",
+            "subject_agent_id": "alice",
+            "belief_stance": "AFFIRM",
+            "proposition_text": "The meeting is at three."
+          },
+          {
+            "kind": "forbid_event_visible",
+            "event_id": "cn2"
+          }
+        ]
+      },
+      {
+        "viewer": "__system__",
+        "query": "What changed in the world and who received the correction?",
+        "checks": [
+          {
+            "kind": "require_type",
+            "assertion_type": "SCENE_FACT"
+          },
+          {
+            "kind": "require_type_subject",
+            "assertion_type": "INFORMATION_EXPOSURE",
+            "subject_agent_id": "bob"
+          },
+          {
+            "kind": "forbid_type_subject",
+            "assertion_type": "INFORMATION_EXPOSURE",
+            "subject_agent_id": "alice"
+          }
         ]
       }
     ]
@@ -162,7 +260,9 @@
         "raw_text": "Alice says: 'I believe the key is in drawer A.'",
         "source_id": "alice",
         "actor_id": "alice",
-        "observer_ids": ["alice"],
+        "observer_ids": [
+          "alice"
+        ],
         "metadata": {}
       },
       {
@@ -172,8 +272,12 @@
         "raw_text": "An archive record later establishes that the key was actually in drawer B at 08:30. Alice has not seen this archive record.",
         "source_id": "archive",
         "actor_id": "archive",
-        "observer_ids": ["__system__"],
-        "metadata": {"scene_fact": true}
+        "observer_ids": [
+          "__system__"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
       }
     ],
     "queries": [
@@ -181,8 +285,16 @@
         "viewer": "alice",
         "query": "What is Alice's supported belief?",
         "checks": [
-          {"kind": "require_type_subject", "assertion_type": "BELIEF_ESTIMATE", "subject_agent_id": "alice"},
-          {"kind": "forbid_event_visible", "event_id": "sd2"}
+          {
+            "kind": "require_belief_stance",
+            "subject_agent_id": "alice",
+            "belief_stance": "AFFIRM",
+            "proposition_text": "The key is in drawer A."
+          },
+          {
+            "kind": "forbid_event_visible",
+            "event_id": "sd2"
+          }
         ]
       },
       {
@@ -191,7 +303,10 @@
         "knowledge_cutoff": "2026-01-01T09:30:00+00:00",
         "query": "What did HCL have evidence for by 09:30?",
         "checks": [
-          {"kind": "forbid_event_visible", "event_id": "sd2"}
+          {
+            "kind": "forbid_event_visible",
+            "event_id": "sd2"
+          }
         ]
       }
     ]
@@ -207,7 +322,9 @@
         "raw_text": "Source One tells Alice: 'The gate is open.'",
         "source_id": "source_one",
         "actor_id": "source_one",
-        "recipient_ids": ["alice"],
+        "recipient_ids": [
+          "alice"
+        ],
         "metadata": {}
       },
       {
@@ -217,7 +334,9 @@
         "raw_text": "Source Two tells Alice: 'The gate is closed.' Nothing establishes which source is correct, and Alice does not say which claim she accepts.",
         "source_id": "source_two",
         "actor_id": "source_two",
-        "recipient_ids": ["alice"],
+        "recipient_ids": [
+          "alice"
+        ],
         "metadata": {}
       }
     ],
@@ -226,10 +345,25 @@
         "viewer": "__system__",
         "query": "What is established about the gate and Alice's belief?",
         "checks": [
-          {"kind": "require_count_at_least", "assertion_type": "SOURCE_ASSERTION", "count": 2},
-          {"kind": "require_count_at_least", "assertion_type": "INFORMATION_EXPOSURE", "count": 2},
-          {"kind": "forbid_type", "assertion_type": "SCENE_FACT"},
-          {"kind": "forbid_type_subject", "assertion_type": "BELIEF_ESTIMATE", "subject_agent_id": "alice"}
+          {
+            "kind": "require_count_at_least",
+            "assertion_type": "SOURCE_ASSERTION",
+            "count": 2
+          },
+          {
+            "kind": "require_count_at_least",
+            "assertion_type": "INFORMATION_EXPOSURE",
+            "count": 2
+          },
+          {
+            "kind": "forbid_type",
+            "assertion_type": "SCENE_FACT"
+          },
+          {
+            "kind": "forbid_type_subject",
+            "assertion_type": "BELIEF_ESTIMATE",
+            "subject_agent_id": "alice"
+          }
         ]
       }
     ]
