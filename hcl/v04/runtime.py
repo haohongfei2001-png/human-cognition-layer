@@ -8,12 +8,17 @@ from typing import Protocol
 from .model import (
     CheckerResult,
     EventRecord,
+    IngestResult,
     QueryContext,
     ResponseResult,
     SemanticPatch,
 )
 from .schema import SchemaValidationError
-from .semantic import SemanticBackend, propose_patch
+from .semantic import (
+    SemanticBackend,
+    propose_patch,
+    repair_patch_for_invariant,
+)
 from .store import CognitionStore
 
 
@@ -95,15 +100,40 @@ class HCLV04Runtime:
         backend: SemanticBackend,
         *,
         semantic_version: str = "v04.1",
-    ):
+    ) -> IngestResult:
         event_receipt = self.append_event(event)
         patch = self.propose_patch(
             event.event_id,
             backend,
             semantic_version=semantic_version,
         )
-        state_receipt = self.apply_patch(self.store.state_version, patch)
-        return event_receipt, state_receipt
+        rejected_patch = None
+        repair_reason = None
+        repair_count = 0
+
+        try:
+            state_receipt = self.apply_patch(self.store.state_version, patch)
+        except SchemaValidationError as exc:
+            rejected_patch = patch
+            repair_reason = str(exc)
+            patch = repair_patch_for_invariant(
+                event,
+                patch,
+                repair_reason,
+                backend,
+                semantic_version=semantic_version,
+            )
+            repair_count = 1
+            state_receipt = self.apply_patch(self.store.state_version, patch)
+
+        return IngestResult(
+            event_receipt=event_receipt,
+            state_receipt=state_receipt,
+            committed_patch=patch,
+            rejected_patch=rejected_patch,
+            semantic_repair_count=repair_count,
+            repair_reason=repair_reason,
+        )
 
     def build_view(
         self,
