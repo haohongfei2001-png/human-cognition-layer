@@ -1,0 +1,4 @@
+Frozen open-world v0.1 internal diagnostic
+Fixture SHA-256: ad8d8e96ab6e3d251bda416a10e9f6eac028d87d5376b1c8eea0441ea3bcbe41
+Runner preflight: 2 tests passed on 2026-09-23
+Single existing DeepSeek model; no external benchmark rows or runtime promotion.
