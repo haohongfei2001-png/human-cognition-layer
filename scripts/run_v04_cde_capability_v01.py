@@ -31,6 +31,12 @@ Distinguish:
 - system knowledge from the target person's belief;
 - later corrections from earlier historical state.
 
+A supported BELIEF_ESTIMATE is the current best estimate of that person's belief
+until later evidence supports a belief revision. SOURCE_ASSERTION or
+INFORMATION_EXPOSURE alone does not supersede an existing supported belief.
+When multiple BELIEF_ESTIMATE records exist for the same issue, prefer the
+latest evidence-supported stance while preserving explicit uncertainty where
+the evidence genuinely does not decide.
 If the evidence does not support one belief label, use UNCERTAIN when it is an
 allowed label.
 """
