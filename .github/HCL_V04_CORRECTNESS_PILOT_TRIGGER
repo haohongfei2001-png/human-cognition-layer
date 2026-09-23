@@ -1,0 +1,4 @@
+HCL v0.4 correctness pilot v0.1 trigger
+timestamp: 2026-09-23
+purpose: provider-backed semantic correctness pilot only
+external_benchmark_consumption: none
