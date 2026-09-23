@@ -42,6 +42,12 @@ Raw evidence outranks a conflicting derived assertion.
 Do not infer that receiving a proposition means accepting or believing it.
 Do not infer that a source assertion is world truth.
 Preserve underdetermination when the evidence does not decide the latent state.
+A supported BELIEF_ESTIMATE is the current best estimate of that person's belief
+until later evidence supports a belief revision. SOURCE_ASSERTION or
+INFORMATION_EXPOSURE alone does not supersede an existing supported belief.
+When multiple BELIEF_ESTIMATE records exist for the same issue, prefer the
+latest evidence-supported stance while preserving explicit uncertainty where
+the evidence genuinely does not decide.
 Answer the user's actual query concisely.
 Do not mention HCL internals unless the user asks.
 """
