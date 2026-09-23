@@ -104,19 +104,34 @@ def patch_from_mapping(
         raise SchemaValidationError("semantic backend must return a JSON object")
 
     propositions: list[Proposition] = []
+    proposition_aliases: dict[str, str] = {}
+
     for raw in payload.get("propositions", []):
         if not isinstance(raw, dict):
             raise SchemaValidationError("proposition entries must be objects")
         canonical_text = str(raw.get("canonical_text", "")).strip()
-        proposition_id = str(raw.get("proposition_id", "")).strip()
-        if not proposition_id:
-            proposition_id = _stable_id("p", f"{event.event_id}:{canonical_text}")
+        polarity = str(raw.get("polarity", "POSITIVE")).strip() or "POSITIVE"
+        proposed_id = str(raw.get("proposition_id", "")).strip()
+        proposition_id = _stable_id(
+            "p",
+            json.dumps(
+                {
+                    "canonical_text": canonical_text.casefold(),
+                    "polarity": polarity,
+                },
+                sort_keys=True,
+                ensure_ascii=False,
+            ),
+        )
+        if proposed_id:
+            proposition_aliases[proposed_id] = proposition_id
+
         source_event_ids = tuple(raw.get("source_event_ids") or [event.event_id])
         propositions.append(
             Proposition(
                 proposition_id=proposition_id,
                 canonical_text=canonical_text,
-                polarity=str(raw.get("polarity", "POSITIVE")),
+                polarity=polarity,
                 relation_metadata=dict(raw.get("relation_metadata") or {}),
                 valid_time_start=raw.get("valid_time_start"),
                 valid_time_end=raw.get("valid_time_end"),
@@ -124,11 +139,54 @@ def patch_from_mapping(
             )
         )
 
-    assertions: list[CognitiveAssertion] = []
-    now = event.recorded_at
-    for raw in payload.get("assertions", []):
+    raw_assertions = payload.get("assertions", [])
+    if not isinstance(raw_assertions, list):
+        raise SchemaValidationError("assertions must be a list")
+
+    assertion_aliases: dict[str, str] = {}
+    normalized_identity: list[tuple[dict[str, Any], str, str | None]] = []
+
+    for raw in raw_assertions:
         if not isinstance(raw, dict):
             raise SchemaValidationError("assertion entries must be objects")
+        proposed_id = str(raw.get("assertion_id", "")).strip()
+        proposed_prop = raw.get("proposition_id")
+        mapped_prop = (
+            proposition_aliases.get(str(proposed_prop), str(proposed_prop))
+            if proposed_prop is not None
+            else None
+        )
+
+        identity_payload = {
+            key: value
+            for key, value in raw.items()
+            if key
+            not in {
+                "assertion_id",
+                "depends_on_assertion_ids",
+                "system_record_time",
+            }
+        }
+        identity_payload["proposition_id"] = mapped_prop
+        assertion_id = _stable_id(
+            "a",
+            json.dumps(
+                {
+                    "event_id": event.event_id,
+                    "assertion": identity_payload,
+                },
+                sort_keys=True,
+                ensure_ascii=False,
+            ),
+        )
+        if proposed_id:
+            assertion_aliases[proposed_id] = assertion_id
+        normalized_identity.append((raw, assertion_id, mapped_prop))
+
+    assertions: list[CognitiveAssertion] = []
+    now = event.recorded_at
+
+    for raw, assertion_id, mapped_prop in normalized_identity:
         type_value = raw.get("assertion_type")
         try:
             assertion_type = AssertionType(type_value)
@@ -163,26 +221,24 @@ def patch_from_mapping(
                     f"invalid belief_stance: {stance_value!r}"
                 ) from exc
 
-        seed = json.dumps(raw, sort_keys=True, ensure_ascii=False)
-        assertion_id = str(raw.get("assertion_id", "")).strip()
-        if not assertion_id:
-            assertion_id = _stable_id("a", f"{event.event_id}:{seed}")
+        dependencies = tuple(
+            assertion_aliases.get(str(dep), str(dep))
+            for dep in (raw.get("depends_on_assertion_ids") or [])
+        )
 
         assertions.append(
             CognitiveAssertion(
                 assertion_id=assertion_id,
                 assertion_type=assertion_type,
                 subject_agent_id=raw.get("subject_agent_id"),
-                proposition_id=raw.get("proposition_id"),
+                proposition_id=mapped_prop,
                 hypothesis_text=raw.get("hypothesis_text"),
                 valid_time=str(raw.get("valid_time") or event.valid_time),
                 system_record_time=str(raw.get("system_record_time") or now),
                 evidence_event_ids=tuple(
                     raw.get("evidence_event_ids") or [event.event_id]
                 ),
-                depends_on_assertion_ids=tuple(
-                    raw.get("depends_on_assertion_ids") or []
-                ),
+                depends_on_assertion_ids=dependencies,
                 status=status,
                 support_level=support,
                 belief_stance=belief_stance,
@@ -190,10 +246,42 @@ def patch_from_mapping(
             )
         )
 
+    normalized_payload = {
+        "event_id": event.event_id,
+        "semantic_version": semantic_version,
+        "propositions": [
+            {
+                "proposition_id": p.proposition_id,
+                "canonical_text": p.canonical_text,
+                "polarity": p.polarity,
+                "source_event_ids": list(p.source_event_ids),
+            }
+            for p in propositions
+        ],
+        "assertions": [
+            {
+                "assertion_id": a.assertion_id,
+                "assertion_type": a.assertion_type.value,
+                "subject_agent_id": a.subject_agent_id,
+                "proposition_id": a.proposition_id,
+                "hypothesis_text": a.hypothesis_text,
+                "valid_time": a.valid_time,
+                "evidence_event_ids": list(a.evidence_event_ids),
+                "depends_on_assertion_ids": list(a.depends_on_assertion_ids),
+                "status": a.status.value,
+                "support_level": (
+                    a.support_level.value if a.support_level else None
+                ),
+                "belief_stance": (
+                    a.belief_stance.value if a.belief_stance else None
+                ),
+            }
+            for a in assertions
+        ],
+    }
     patch_id = _stable_id(
         "patch",
-        json.dumps(payload, sort_keys=True, ensure_ascii=False)
-        + f":{event.event_id}:{semantic_version}",
+        json.dumps(normalized_payload, sort_keys=True, ensure_ascii=False),
     )
     patch = SemanticPatch(
         patch_id=patch_id,
