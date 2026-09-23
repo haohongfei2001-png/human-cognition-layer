@@ -57,3 +57,19 @@ __all__ += [
     "HypothesisTracker",
     "HypothesisUpdateReceipt",
 ]
+
+from .probe_policy import (
+    ActionDecision,
+    ActionOption,
+    HypothesisGuidedPolicy,
+    ProbeDecision,
+    ProbeOption,
+)
+
+__all__ += [
+    "ActionDecision",
+    "ActionOption",
+    "HypothesisGuidedPolicy",
+    "ProbeDecision",
+    "ProbeOption",
+]
