@@ -402,6 +402,7 @@ class HypothesisTracker:
         previous: HypothesisState,
         *,
         next_version: int,
+        allowed_event_ids: set[str] | None = None,
     ) -> HypothesisState:
         if not isinstance(payload, dict):
             raise SchemaValidationError("hypothesis update must be a JSON object")
@@ -413,6 +414,8 @@ class HypothesisTracker:
         expected = set(definitions)
         returned: dict[str, dict] = {}
         existing_events = {event.event_id for event in self.store.list_events()}
+        if allowed_event_ids is not None:
+            existing_events &= allowed_event_ids
 
         for raw in raw_candidates:
             if not isinstance(raw, dict):
@@ -554,6 +557,7 @@ class HypothesisTracker:
         current: HypothesisState,
         new_event_ids: tuple[str, ...],
         backend: HypothesisBackend,
+        allowed_event_ids: set[str] | None = None,
     ) -> tuple[HypothesisState, bool, str | None, str | None]:
         messages = self._proposal_messages(
             target_id,
@@ -576,6 +580,7 @@ class HypothesisTracker:
                     payload,
                     current,
                     next_version=current.version + 1,
+                    allowed_event_ids=allowed_event_ids,
                 )
                 return (
                     state,
@@ -626,6 +631,8 @@ class HypothesisTracker:
         target_id: str,
         new_event_ids: tuple[str, ...] | list[str],
         backend: HypothesisBackend,
+        *,
+        allowed_event_ids: set[str] | None = None,
     ) -> HypothesisUpdateReceipt:
         current = self.current(target_id)
         event_ids = tuple(new_event_ids)
@@ -638,6 +645,7 @@ class HypothesisTracker:
             current,
             event_ids,
             backend,
+            allowed_event_ids,
         )
         with self.conn:
             self._insert_version(
