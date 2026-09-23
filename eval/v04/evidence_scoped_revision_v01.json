@@ -1,0 +1,856 @@
+[
+  {
+    "id": "harbor_route",
+    "hidden_target": "SAFETY",
+    "target": {
+      "target_id": "harbor_route-target",
+      "subject_agent_id": "Kira",
+      "target_kind": "PREFERENCE_GOAL",
+      "question": "Why does Kira keep preferring the longer harbor route?",
+      "candidates": [
+        [
+          "SAFETY",
+          "Kira prioritizes avoiding an uncertain bridge."
+        ],
+        [
+          "ARRIVAL",
+          "Kira is optimizing arrival time after considering traffic."
+        ],
+        [
+          "FUEL",
+          "Kira is trying to reduce fuel use."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "harbor_route-e1",
+        "valid_time": "2026-07-01T09:00:00+00:00",
+        "recorded_at": "2026-07-01T09:00:05+00:00",
+        "raw_text": "Kira chose the harbor route twice despite a slightly longer trip.",
+        "source_id": "dispatcher",
+        "actor_id": "Kira",
+        "observer_ids": [
+          "dispatcher"
+        ],
+        "metadata": {
+          "target_ids": [
+            "harbor_route-target"
+          ]
+        }
+      },
+      {
+        "event_id": "harbor_route-e2",
+        "valid_time": "2026-07-01T09:04:00+00:00",
+        "recorded_at": "2026-07-01T09:04:05+00:00",
+        "raw_text": "A bridge inspection notice reached the dispatcher but delivery to Kira is not recorded.",
+        "source_id": "road_office",
+        "actor_id": "road_office",
+        "observer_ids": [
+          "dispatcher"
+        ],
+        "metadata": {
+          "target_ids": [
+            "harbor_route-target"
+          ]
+        }
+      },
+      {
+        "event_id": "harbor_route-e3",
+        "valid_time": "2026-07-01T09:08:00+00:00",
+        "recorded_at": "2026-07-01T09:08:05+00:00",
+        "raw_text": "A different driver discussed a cafe opening near the depot.",
+        "source_id": "other_driver",
+        "actor_id": "other_driver",
+        "observer_ids": [
+          "dispatcher"
+        ],
+        "metadata": {
+          "target_ids": [
+            "harbor_route-other"
+          ]
+        }
+      },
+      {
+        "event_id": "harbor_route-e4",
+        "valid_time": "2026-07-01T09:12:00+00:00",
+        "recorded_at": "2026-07-01T09:12:05+00:00",
+        "raw_text": "The dispatcher later learned the bridge inspection was postponed; no message to Kira is recorded.",
+        "source_id": "road_office",
+        "actor_id": "road_office",
+        "observer_ids": [
+          "dispatcher"
+        ],
+        "metadata": {
+          "target_ids": [
+            "harbor_route-target"
+          ]
+        }
+      }
+    ],
+    "probes": [
+      [
+        "ASK_BRIDGE",
+        "Ask Kira whether the bridge uncertainty matters to the choice."
+      ],
+      [
+        "ASK_ARRIVAL",
+        "Ask Kira what arrival deadline she is optimizing for."
+      ],
+      [
+        "ASK_FUEL",
+        "Ask Kira whether fuel use is the limiting factor."
+      ]
+    ],
+    "high_information_probes": [
+      "ASK_BRIDGE"
+    ],
+    "probe_responses": {
+      "SAFETY": {
+        "ASK_BRIDGE": "Kira says she has not received an official all-clear and would rather avoid the bridge.",
+        "ASK_ARRIVAL": "Kira says arrival is flexible.",
+        "ASK_FUEL": "Kira says fuel is not the deciding concern."
+      },
+      "ARRIVAL": {
+        "ASK_BRIDGE": "Kira says the bridge is fine and the harbor route is faster at her departure time.",
+        "ASK_ARRIVAL": "Kira says she is optimizing a fixed arrival window.",
+        "ASK_FUEL": "Kira says fuel is secondary."
+      },
+      "FUEL": {
+        "ASK_BRIDGE": "Kira says the bridge is not the issue.",
+        "ASK_ARRIVAL": "Kira says arrival is flexible.",
+        "ASK_FUEL": "Kira says the harbor route uses less fuel for her vehicle."
+      }
+    },
+    "actions": [
+      [
+        "KEEP_SAFE_ROUTE",
+        "Keep the harbor route until Kira receives and assesses the bridge update."
+      ],
+      [
+        "OPTIMIZE_ARRIVAL",
+        "Plan departure around the faster arrival window."
+      ],
+      [
+        "COMPARE_FUEL",
+        "Compare route fuel use before changing the route."
+      ]
+    ],
+    "correct_actions": {
+      "SAFETY": "KEEP_SAFE_ROUTE",
+      "ARRIVAL": "OPTIMIZE_ARRIVAL",
+      "FUEL": "COMPARE_FUEL"
+    }
+  },
+  {
+    "id": "museum_caption",
+    "hidden_target": "SOURCE",
+    "target": {
+      "target_id": "museum_caption-target",
+      "subject_agent_id": "Mina",
+      "target_kind": "INTENTION",
+      "question": "Why has Mina not approved the exhibit caption?",
+      "candidates": [
+        [
+          "SOURCE",
+          "Mina needs a reliable provenance citation."
+        ],
+        [
+          "DISAGREES",
+          "Mina objects to the interpretation."
+        ],
+        [
+          "WORKLOAD",
+          "Mina agrees but has not had review time."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "museum_caption-e1",
+        "valid_time": "2026-07-02T09:00:00+00:00",
+        "recorded_at": "2026-07-02T09:00:05+00:00",
+        "raw_text": "Mina marked the caption pending and circled its source attribution.",
+        "source_id": "Mina",
+        "actor_id": "Mina",
+        "observer_ids": [
+          "assistant"
+        ],
+        "metadata": {
+          "target_ids": [
+            "museum_caption-target"
+          ]
+        }
+      },
+      {
+        "event_id": "museum_caption-e2",
+        "valid_time": "2026-07-02T09:04:00+00:00",
+        "recorded_at": "2026-07-02T09:04:05+00:00",
+        "raw_text": "The archive sent a corrected source card to the assistant, with no recorded delivery to Mina.",
+        "source_id": "archive",
+        "actor_id": "archive",
+        "observer_ids": [
+          "assistant"
+        ],
+        "metadata": {
+          "target_ids": [
+            "museum_caption-target"
+          ]
+        }
+      },
+      {
+        "event_id": "museum_caption-e3",
+        "valid_time": "2026-07-02T09:08:00+00:00",
+        "recorded_at": "2026-07-02T09:08:05+00:00",
+        "raw_text": "Facilities replaced a lamp in a different gallery.",
+        "source_id": "facilities",
+        "actor_id": "facilities",
+        "observer_ids": [
+          "assistant"
+        ],
+        "metadata": {
+          "target_ids": [
+            "museum_caption-other"
+          ]
+        }
+      },
+      {
+        "event_id": "museum_caption-e4",
+        "valid_time": "2026-07-02T09:12:00+00:00",
+        "recorded_at": "2026-07-02T09:12:05+00:00",
+        "raw_text": "Mina continued to use the pending label after the assistant updated a draft copy.",
+        "source_id": "assistant",
+        "actor_id": "assistant",
+        "observer_ids": [
+          "assistant"
+        ],
+        "metadata": {
+          "target_ids": [
+            "museum_caption-target"
+          ]
+        }
+      }
+    ],
+    "probes": [
+      [
+        "SHOW_SOURCE",
+        "Show Mina the corrected source card and ask whether it resolves her concern."
+      ],
+      [
+        "ASK_INTERPRETATION",
+        "Ask Mina whether she disagrees with the caption interpretation."
+      ],
+      [
+        "OFFER_TIME",
+        "Offer a dedicated review slot."
+      ]
+    ],
+    "high_information_probes": [
+      "SHOW_SOURCE"
+    ],
+    "probe_responses": {
+      "SOURCE": {
+        "SHOW_SOURCE": "Mina says the corrected citation resolves the provenance issue.",
+        "ASK_INTERPRETATION": "Mina says the interpretation is acceptable if the citation is verified.",
+        "OFFER_TIME": "Mina says time is available but the source needs checking."
+      },
+      "DISAGREES": {
+        "SHOW_SOURCE": "Mina says the citation is fine but the interpretation remains wrong.",
+        "ASK_INTERPRETATION": "Mina explains a specific interpretive disagreement.",
+        "OFFER_TIME": "Mina says more time will not settle the disagreement."
+      },
+      "WORKLOAD": {
+        "SHOW_SOURCE": "Mina says the source is fine and she simply has not completed her review.",
+        "ASK_INTERPRETATION": "Mina says she has no interpretation concern.",
+        "OFFER_TIME": "Mina accepts a review slot and can sign off."
+      }
+    },
+    "actions": [
+      [
+        "VERIFY_CITATION",
+        "Verify the citation with Mina before approval."
+      ],
+      [
+        "REVISE_INTERPRETATION",
+        "Revise the interpretation with Mina."
+      ],
+      [
+        "SCHEDULE_REVIEW",
+        "Schedule review time without changing the caption."
+      ]
+    ],
+    "correct_actions": {
+      "SOURCE": "VERIFY_CITATION",
+      "DISAGREES": "REVISE_INTERPRETATION",
+      "WORKLOAD": "SCHEDULE_REVIEW"
+    }
+  },
+  {
+    "id": "volunteer_shift",
+    "hidden_target": "TRANSPORT",
+    "target": {
+      "target_id": "volunteer_shift-target",
+      "subject_agent_id": "Noor",
+      "target_kind": "MOTIVE",
+      "question": "Why did Noor stop confirming the community shift?",
+      "candidates": [
+        [
+          "TRANSPORT",
+          "Noor lacks a reliable way to reach the site."
+        ],
+        [
+          "CARE",
+          "Noor has a conflicting caregiving duty."
+        ],
+        [
+          "INTEREST",
+          "Noor no longer wants this shift."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "volunteer_shift-e1",
+        "valid_time": "2026-07-03T09:00:00+00:00",
+        "recorded_at": "2026-07-03T09:00:05+00:00",
+        "raw_text": "Noor had previously confirmed three shifts but did not confirm the next one.",
+        "source_id": "scheduler",
+        "actor_id": "Noor",
+        "observer_ids": [
+          "scheduler"
+        ],
+        "metadata": {
+          "target_ids": [
+            "volunteer_shift-target"
+          ]
+        }
+      },
+      {
+        "event_id": "volunteer_shift-e2",
+        "valid_time": "2026-07-03T09:04:00+00:00",
+        "recorded_at": "2026-07-03T09:04:05+00:00",
+        "raw_text": "A route suspension notice reached the organizer; receipt by Noor is unknown.",
+        "source_id": "transit",
+        "actor_id": "transit",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {
+          "target_ids": [
+            "volunteer_shift-target"
+          ]
+        }
+      },
+      {
+        "event_id": "volunteer_shift-e3",
+        "valid_time": "2026-07-03T09:08:00+00:00",
+        "recorded_at": "2026-07-03T09:08:05+00:00",
+        "raw_text": "Another volunteer changed a supply order.",
+        "source_id": "volunteer",
+        "actor_id": "volunteer",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {
+          "target_ids": [
+            "volunteer_shift-other"
+          ]
+        }
+      },
+      {
+        "event_id": "volunteer_shift-e4",
+        "valid_time": "2026-07-03T09:12:00+00:00",
+        "recorded_at": "2026-07-03T09:12:05+00:00",
+        "raw_text": "Noor replied that the time itself still works, but did not explain the silence.",
+        "source_id": "Noor",
+        "actor_id": "Noor",
+        "observer_ids": [
+          "scheduler"
+        ],
+        "metadata": {
+          "target_ids": [
+            "volunteer_shift-target"
+          ]
+        }
+      }
+    ],
+    "probes": [
+      [
+        "OFFER_RIDE",
+        "Ask whether a reliable ride would make the shift possible."
+      ],
+      [
+        "ASK_CARE",
+        "Ask whether a caregiving obligation conflicts with the shift."
+      ],
+      [
+        "ASK_INTEREST",
+        "Ask whether Noor still wants to volunteer."
+      ]
+    ],
+    "high_information_probes": [
+      "OFFER_RIDE"
+    ],
+    "probe_responses": {
+      "TRANSPORT": {
+        "OFFER_RIDE": "Noor says yes; the bus route was cancelled and a ride would solve it.",
+        "ASK_CARE": "Noor says caregiving is not a problem.",
+        "ASK_INTEREST": "Noor says yes, if travel is possible."
+      },
+      "CARE": {
+        "OFFER_RIDE": "Noor says transport is fine but the caregiving duty remains.",
+        "ASK_CARE": "Noor says a caregiving duty prevents the shift.",
+        "ASK_INTEREST": "Noor says yes but cannot make this time."
+      },
+      "INTEREST": {
+        "OFFER_RIDE": "Noor says a ride would not change their decision.",
+        "ASK_CARE": "Noor says no caregiving conflict.",
+        "ASK_INTEREST": "Noor says they would rather step away from shifts."
+      }
+    },
+    "actions": [
+      [
+        "ARRANGE_RIDE",
+        "Arrange a ride only with Noor consent."
+      ],
+      [
+        "FIND_REPLACEMENT",
+        "Find a replacement for the caregiving conflict."
+      ],
+      [
+        "RELEASE_SHIFT",
+        "Release Noor from the shift without pressure."
+      ]
+    ],
+    "correct_actions": {
+      "TRANSPORT": "ARRANGE_RIDE",
+      "CARE": "FIND_REPLACEMENT",
+      "INTEREST": "RELEASE_SHIFT"
+    }
+  },
+  {
+    "id": "recording_room",
+    "hidden_target": "PRIVACY",
+    "target": {
+      "target_id": "recording_room-target",
+      "subject_agent_id": "Jules",
+      "target_kind": "PREFERENCE_GOAL",
+      "question": "Why does Jules avoid the shared recording room?",
+      "candidates": [
+        [
+          "NOISE",
+          "Jules needs a quieter room to work."
+        ],
+        [
+          "PRIVACY",
+          "Jules needs a private conversation space."
+        ],
+        [
+          "EQUIPMENT",
+          "Jules needs equipment absent from that room."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "recording_room-e1",
+        "valid_time": "2026-07-04T09:00:00+00:00",
+        "recorded_at": "2026-07-04T09:00:05+00:00",
+        "raw_text": "Jules declined the shared recording room and asked for an alternative.",
+        "source_id": "Jules",
+        "actor_id": "Jules",
+        "observer_ids": [
+          "coordinator"
+        ],
+        "metadata": {
+          "target_ids": [
+            "recording_room-target"
+          ]
+        }
+      },
+      {
+        "event_id": "recording_room-e2",
+        "valid_time": "2026-07-04T09:04:00+00:00",
+        "recorded_at": "2026-07-04T09:04:05+00:00",
+        "raw_text": "The coordinator received notice that acoustic panels were installed; Jules did not receive the notice.",
+        "source_id": "facilities",
+        "actor_id": "facilities",
+        "observer_ids": [
+          "coordinator"
+        ],
+        "metadata": {
+          "target_ids": [
+            "recording_room-target"
+          ]
+        }
+      },
+      {
+        "event_id": "recording_room-e3",
+        "valid_time": "2026-07-04T09:08:00+00:00",
+        "recorded_at": "2026-07-04T09:08:05+00:00",
+        "raw_text": "A separate team reordered desk chairs.",
+        "source_id": "separate_team",
+        "actor_id": "separate_team",
+        "observer_ids": [
+          "coordinator"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "recording_room-e4",
+        "valid_time": "2026-07-04T09:12:00+00:00",
+        "recorded_at": "2026-07-04T09:12:05+00:00",
+        "raw_text": "Jules accepted a time slot but still requested another room.",
+        "source_id": "Jules",
+        "actor_id": "Jules",
+        "observer_ids": [
+          "coordinator"
+        ],
+        "metadata": {
+          "target_ids": [
+            "recording_room-target"
+          ]
+        }
+      }
+    ],
+    "probes": [
+      [
+        "OFFER_PRIVATE",
+        "Offer a private room with the same equipment and ask if that works."
+      ],
+      [
+        "OFFER_QUIET",
+        "Explain the acoustic change and ask if the room now works."
+      ],
+      [
+        "ASK_EQUIPMENT",
+        "Ask which recording equipment Jules needs."
+      ]
+    ],
+    "high_information_probes": [
+      "OFFER_PRIVATE"
+    ],
+    "probe_responses": {
+      "NOISE": {
+        "OFFER_PRIVATE": "Jules says privacy is not important; quiet is the issue.",
+        "OFFER_QUIET": "Jules says the acoustic change would make the room usable.",
+        "ASK_EQUIPMENT": "Jules says existing equipment is enough."
+      },
+      "PRIVACY": {
+        "OFFER_PRIVATE": "Jules says yes; the conversation needs privacy.",
+        "OFFER_QUIET": "Jules says quieter sound does not solve the privacy concern.",
+        "ASK_EQUIPMENT": "Jules says equipment is adequate."
+      },
+      "EQUIPMENT": {
+        "OFFER_PRIVATE": "Jules says privacy is fine but needs a different microphone.",
+        "OFFER_QUIET": "Jules says noise is not the issue.",
+        "ASK_EQUIPMENT": "Jules names the missing microphone."
+      }
+    },
+    "actions": [
+      [
+        "QUIET_ROOM",
+        "Use the room after Jules checks the acoustic change."
+      ],
+      [
+        "PRIVATE_ROOM",
+        "Reserve a private room."
+      ],
+      [
+        "EQUIP_ROOM",
+        "Provide the needed microphone before booking."
+      ]
+    ],
+    "correct_actions": {
+      "NOISE": "QUIET_ROOM",
+      "PRIVACY": "PRIVATE_ROOM",
+      "EQUIPMENT": "EQUIP_ROOM"
+    }
+  },
+  {
+    "id": "workshop_notes",
+    "hidden_target": "ACCESS",
+    "target": {
+      "target_id": "workshop_notes-target",
+      "subject_agent_id": "Anika",
+      "target_kind": "INTENTION",
+      "question": "Why does Anika keep handing out written notes after a live explanation?",
+      "candidates": [
+        [
+          "ACCESS",
+          "Anika is making the material accessible to absent participants."
+        ],
+        [
+          "AUDIT",
+          "Anika needs a durable audit record."
+        ],
+        [
+          "HABIT",
+          "Anika is following a routine without a specific need."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "workshop_notes-e1",
+        "valid_time": "2026-07-05T09:00:00+00:00",
+        "recorded_at": "2026-07-05T09:00:05+00:00",
+        "raw_text": "Anika handed out written notes after two workshop explanations.",
+        "source_id": "observer",
+        "actor_id": "Anika",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {
+          "target_ids": [
+            "workshop_notes-target"
+          ]
+        }
+      },
+      {
+        "event_id": "workshop_notes-e2",
+        "valid_time": "2026-07-05T09:04:00+00:00",
+        "recorded_at": "2026-07-05T09:04:05+00:00",
+        "raw_text": "The organizer learned that two participants missed the second meeting; delivery of that news to Anika is unconfirmed.",
+        "source_id": "organizer",
+        "actor_id": "organizer",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {
+          "target_ids": [
+            "workshop_notes-target"
+          ]
+        }
+      },
+      {
+        "event_id": "workshop_notes-e3",
+        "valid_time": "2026-07-05T09:08:00+00:00",
+        "recorded_at": "2026-07-05T09:08:05+00:00",
+        "raw_text": "A different workshop changed its projector settings.",
+        "source_id": "technician",
+        "actor_id": "technician",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {
+          "target_ids": [
+            "workshop_notes-other"
+          ]
+        }
+      },
+      {
+        "event_id": "workshop_notes-e4",
+        "valid_time": "2026-07-05T09:12:00+00:00",
+        "recorded_at": "2026-07-05T09:12:05+00:00",
+        "raw_text": "Anika asked whether the notes should include diagrams but did not explain why.",
+        "source_id": "Anika",
+        "actor_id": "Anika",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {
+          "target_ids": [
+            "workshop_notes-target"
+          ]
+        }
+      }
+    ],
+    "probes": [
+      [
+        "ASK_ABSENT",
+        "Ask Anika whether the notes are intended for participants who missed the session."
+      ],
+      [
+        "ASK_AUDIT",
+        "Ask whether the notes are needed for a formal record."
+      ],
+      [
+        "ASK_ROUTINE",
+        "Ask whether the notes are simply a standard routine."
+      ]
+    ],
+    "high_information_probes": [
+      "ASK_ABSENT"
+    ],
+    "probe_responses": {
+      "ACCESS": {
+        "ASK_ABSENT": "Anika says yes, absent participants need the notes and diagrams.",
+        "ASK_AUDIT": "Anika says no formal audit is required.",
+        "ASK_ROUTINE": "Anika says the notes help people who missed the session."
+      },
+      "AUDIT": {
+        "ASK_ABSENT": "Anika says the missing participants are not the reason.",
+        "ASK_AUDIT": "Anika says the program requires an auditable written record.",
+        "ASK_ROUTINE": "Anika says it is a compliance step."
+      },
+      "HABIT": {
+        "ASK_ABSENT": "Anika says she did not know anyone missed the session.",
+        "ASK_AUDIT": "Anika says there is no audit requirement.",
+        "ASK_ROUTINE": "Anika says she has always handed out notes this way."
+      }
+    },
+    "actions": [
+      [
+        "SHARE_ACCESSIBLE",
+        "Make the notes and diagrams available to absent participants."
+      ],
+      [
+        "KEEP_AUDIT",
+        "Store the notes as the required record."
+      ],
+      [
+        "ASK_USEFULNESS",
+        "Check whether the routine helps before continuing it."
+      ]
+    ],
+    "correct_actions": {
+      "ACCESS": "SHARE_ACCESSIBLE",
+      "AUDIT": "KEEP_AUDIT",
+      "HABIT": "ASK_USEFULNESS"
+    }
+  },
+  {
+    "id": "library_review",
+    "hidden_target": "COMPAT",
+    "target": {
+      "target_id": "library_review-target",
+      "subject_agent_id": "Chen",
+      "target_kind": "COGNITIVE_STATE",
+      "question": "Why has Chen paused review of the library update?",
+      "candidates": [
+        [
+          "SECURITY",
+          "Chen sees a security risk."
+        ],
+        [
+          "COMPAT",
+          "Chen expects an API compatibility break."
+        ],
+        [
+          "CAPACITY",
+          "Chen has not had enough review time."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "library_review-e1",
+        "valid_time": "2026-07-06T09:00:00+00:00",
+        "recorded_at": "2026-07-06T09:00:05+00:00",
+        "raw_text": "Chen marked the update as awaiting review after reading the change summary.",
+        "source_id": "Chen",
+        "actor_id": "Chen",
+        "observer_ids": [
+          "maintainer"
+        ],
+        "metadata": {
+          "target_ids": [
+            "library_review-target"
+          ]
+        }
+      },
+      {
+        "event_id": "library_review-e2",
+        "valid_time": "2026-07-06T09:04:00+00:00",
+        "recorded_at": "2026-07-06T09:04:05+00:00",
+        "raw_text": "The author fixed a security scanner warning and informed the maintainer; Chen was not notified.",
+        "source_id": "author",
+        "actor_id": "author",
+        "observer_ids": [
+          "maintainer"
+        ],
+        "metadata": {
+          "target_ids": [
+            "library_review-target"
+          ]
+        }
+      },
+      {
+        "event_id": "library_review-e3",
+        "valid_time": "2026-07-06T09:08:00+00:00",
+        "recorded_at": "2026-07-06T09:08:05+00:00",
+        "raw_text": "A different repository announced a documentation release.",
+        "source_id": "other_team",
+        "actor_id": "other_team",
+        "observer_ids": [
+          "maintainer"
+        ],
+        "metadata": {
+          "target_ids": [
+            "library_review-other"
+          ]
+        }
+      },
+      {
+        "event_id": "library_review-e4",
+        "valid_time": "2026-07-06T09:12:00+00:00",
+        "recorded_at": "2026-07-06T09:12:05+00:00",
+        "raw_text": "Chen asked which older clients still use the removed method.",
+        "source_id": "Chen",
+        "actor_id": "Chen",
+        "observer_ids": [
+          "maintainer"
+        ],
+        "metadata": {
+          "target_ids": [
+            "library_review-target"
+          ]
+        }
+      }
+    ],
+    "probes": [
+      [
+        "CHECK_OLD_CLIENTS",
+        "Show Chen the older-client compatibility inventory and ask if it resolves the pause."
+      ],
+      [
+        "CHECK_SECURITY",
+        "Ask Chen whether the scanner warning is the blocker."
+      ],
+      [
+        "OFFER_REVIEW",
+        "Offer more review time."
+      ]
+    ],
+    "high_information_probes": [
+      "CHECK_OLD_CLIENTS"
+    ],
+    "probe_responses": {
+      "SECURITY": {
+        "CHECK_OLD_CLIENTS": "Chen says compatibility is acceptable but the security finding remains.",
+        "CHECK_SECURITY": "Chen says the security risk needs a verified fix.",
+        "OFFER_REVIEW": "Chen says time is not the issue."
+      },
+      "COMPAT": {
+        "CHECK_OLD_CLIENTS": "Chen points to an older client still using the removed method.",
+        "CHECK_SECURITY": "Chen says security is not the remaining concern.",
+        "OFFER_REVIEW": "Chen says more time will not fix the compatibility break."
+      },
+      "CAPACITY": {
+        "CHECK_OLD_CLIENTS": "Chen says compatibility looks fine but has not finished reviewing.",
+        "CHECK_SECURITY": "Chen says the security issue is resolved.",
+        "OFFER_REVIEW": "Chen accepts a review block and expects to finish."
+      }
+    },
+    "actions": [
+      [
+        "SECURITY_REVIEW",
+        "Verify the security fix with Chen."
+      ],
+      [
+        "RESTORE_API",
+        "Restore or migrate the older-client API before approval."
+      ],
+      [
+        "RESERVE_TIME",
+        "Reserve review time without changing behavior."
+      ]
+    ],
+    "correct_actions": {
+      "SECURITY": "SECURITY_REVIEW",
+      "COMPAT": "RESTORE_API",
+      "CAPACITY": "RESERVE_TIME"
+    }
+  }
+]
