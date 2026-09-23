@@ -3929,3 +3929,11 @@ C, D and simpler direct-history E each selected 6/6 final actions and 6/6 high-i
 A different internal capability question requires a separately frozen independent contract. These six scenarios may not be tuned and rerun as fresh evidence.
 
 **Current gate: HCL_V04_OPEN_WORLD_HYPOTHESIS_V01_DIAGNOSTIC_COMPLETE_NO_PROMOTION_NEXT_CONTRACT_NOT_FROZEN**
+
+## HCL v0.4 perspective-safe correction action diagnostic closure
+
+The frozen six-case internal C/D/E comparison ran once at experimental exact head `bd7cecfd2567b2497156ee2770c4fa4bac7369cc` in workflow `35900191714`. Closure: `reports/HCL_V04_PERSPECTIVE_SAFE_ACTION_V01_CLOSURE.md`. C and D each chose 5/6 safe actions; E chose 6/6 with fewer calls. The semantic audit found C/D's ungrounded correction identity in the disputed-title case and D's stale acceptance claim after a later film-credit revision. E also gave one imprecise receipt/acceptance rationale. The structured grounded-state gate fails; no incremental HCL utility is established. The experimental code and fixture remain unmerged. No external benchmark rows, owner-private material, new provider/model, training, cross-model paid run, publication, or runtime promotion occurred.
+
+These six cases are consumed internal diagnostic evidence, not fresh evidence for tuning or rerun. A different capability question requires a separately frozen independent contract.
+
+**Current gate: HCL_V04_PERSPECTIVE_SAFE_ACTION_V01_DIAGNOSTIC_COMPLETE_NO_PROMOTION_NEXT_CONTRACT_NOT_FROZEN**
