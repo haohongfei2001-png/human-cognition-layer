@@ -1,0 +1,621 @@
+[
+  {
+    "id": "teammate_probe",
+    "hidden_target": "OVERLOADED",
+    "target": {
+      "target_id": "p_team",
+      "subject_agent_id": "alex",
+      "target_kind": "MOTIVE",
+      "question": "Why is Alex delaying the implementation?",
+      "candidates": [
+        [
+          "OVERLOADED",
+          "Alex intends to do the task but is overloaded by urgent work."
+        ],
+        [
+          "AVOIDING",
+          "Alex is intentionally avoiding the task."
+        ],
+        [
+          "BLOCKED",
+          "Alex wants to proceed but is blocked by missing access/dependency."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "pt1",
+        "valid_time": "2026-06-01T09:00:00+00:00",
+        "recorded_at": "2026-06-01T09:01:00+00:00",
+        "raw_text": "Alex misses a checkpoint after handling multiple urgent incidents.",
+        "source_id": "environment",
+        "actor_id": "alex",
+        "observer_ids": [
+          "manager"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "pt2",
+        "valid_time": "2026-06-01T09:20:00+00:00",
+        "recorded_at": "2026-06-01T09:21:00+00:00",
+        "raw_text": "Alex says: 'I have the access and information I need; I have not had a clear block of time.'",
+        "source_id": "alex",
+        "actor_id": "alex",
+        "observer_ids": [
+          "manager"
+        ],
+        "metadata": {}
+      }
+    ],
+    "probes": [
+      [
+        "OFFER_FREE_BLOCK",
+        "Ask: If I clear an uninterrupted hour now, can you start immediately?"
+      ],
+      [
+        "ASK_BLOCKER",
+        "Ask directly whether any missing access or dependency blocks the task."
+      ],
+      [
+        "ASK_INTEREST",
+        "Ask whether Alex actually wants to complete this task."
+      ]
+    ],
+    "high_information_probes": [
+      "OFFER_FREE_BLOCK"
+    ],
+    "probe_responses": {
+      "OVERLOADED": {
+        "OFFER_FREE_BLOCK": "Alex says: 'Yes. Clear an hour and I can start immediately.'",
+        "ASK_BLOCKER": "Alex says: 'No blocker; I have what I need.'",
+        "ASK_INTEREST": "Alex says: 'Yes, I want to finish it.'"
+      },
+      "AVOIDING": {
+        "OFFER_FREE_BLOCK": "Alex says: 'I would rather not commit even if time is cleared.'",
+        "ASK_BLOCKER": "Alex says: 'No technical blocker.'",
+        "ASK_INTEREST": "Alex says: 'Honestly, I keep putting this task off because I do not want to do it.'"
+      },
+      "BLOCKED": {
+        "OFFER_FREE_BLOCK": "Alex says: 'Extra time will not help until I get the missing access.'",
+        "ASK_BLOCKER": "Alex says: 'Yes, I am missing the required access.'",
+        "ASK_INTEREST": "Alex says: 'I do want to do it, but I cannot proceed yet.'"
+      }
+    },
+    "actions": [
+      [
+        "CLEAR_TIME",
+        "Clear an uninterrupted work block for Alex."
+      ],
+      [
+        "ESCALATE_AVOIDANCE",
+        "Treat the delay as avoidance and escalate commitment."
+      ],
+      [
+        "FIX_DEPENDENCY",
+        "Resolve the missing access/dependency first."
+      ]
+    ],
+    "correct_actions": {
+      "OVERLOADED": "CLEAR_TIME",
+      "AVOIDING": "ESCALATE_AVOIDANCE",
+      "BLOCKED": "FIX_DEPENDENCY"
+    }
+  },
+  {
+    "id": "buyer_probe",
+    "hidden_target": "BUDGET_LIMIT",
+    "target": {
+      "target_id": "p_buyer",
+      "subject_agent_id": "buyer",
+      "target_kind": "MOTIVE",
+      "question": "Why is the buyer making low offers?",
+      "candidates": [
+        [
+          "BUDGET_LIMIT",
+          "The buyer has a genuine hard spending limit."
+        ],
+        [
+          "ANCHORING",
+          "The buyer can pay more but is strategically anchoring low."
+        ],
+        [
+          "LOW_INTEREST",
+          "The buyer has weak interest and values the item poorly."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "pb1",
+        "valid_time": "2026-06-02T09:00:00+00:00",
+        "recorded_at": "2026-06-02T09:01:00+00:00",
+        "raw_text": "The buyer says the product fits their needs but makes an offer well below asking price.",
+        "source_id": "buyer",
+        "actor_id": "buyer",
+        "observer_ids": [
+          "seller"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "pb2",
+        "valid_time": "2026-06-02T09:10:00+00:00",
+        "recorded_at": "2026-06-02T09:11:00+00:00",
+        "raw_text": "The buyer keeps asking detailed delivery questions and does not leave the negotiation.",
+        "source_id": "environment",
+        "actor_id": "buyer",
+        "observer_ids": [
+          "seller"
+        ],
+        "metadata": {}
+      }
+    ],
+    "probes": [
+      [
+        "ASK_HARD_LIMIT",
+        "Ask for the maximum total amount the buyer can actually spend."
+      ],
+      [
+        "ASK_INTEREST",
+        "Ask how interested the buyer is in owning the product."
+      ],
+      [
+        "OFFER_FEATURE",
+        "Offer an extra feature while keeping the price high and observe the response."
+      ]
+    ],
+    "high_information_probes": [
+      "ASK_HARD_LIMIT"
+    ],
+    "probe_responses": {
+      "BUDGET_LIMIT": {
+        "ASK_HARD_LIMIT": "The buyer says: '100 is a hard limit; I cannot spend more.'",
+        "ASK_INTEREST": "The buyer says: 'I am very interested.'",
+        "OFFER_FEATURE": "The buyer says: 'The feature is nice, but I still cannot exceed my budget.'"
+      },
+      "ANCHORING": {
+        "ASK_HARD_LIMIT": "The buyer says: 'I could stretch well above 100 for the right deal.'",
+        "ASK_INTEREST": "The buyer says: 'I am very interested.'",
+        "OFFER_FEATURE": "The buyer becomes more willing to raise the offer when the feature is added."
+      },
+      "LOW_INTEREST": {
+        "ASK_HARD_LIMIT": "The buyer says: 'Budget is not really the issue; I just do not value it highly.'",
+        "ASK_INTEREST": "The buyer says: 'My interest is low unless it is extremely cheap.'",
+        "OFFER_FEATURE": "The buyer remains uninterested even with the extra feature."
+      }
+    },
+    "actions": [
+      [
+        "OFFER_99",
+        "Offer a final price of 99."
+      ],
+      [
+        "HOLD_PRICE",
+        "Hold a higher price and continue negotiating."
+      ],
+      [
+        "END_NEGOTIATION",
+        "End the negotiation because interest is too low."
+      ]
+    ],
+    "correct_actions": {
+      "BUDGET_LIMIT": "OFFER_99",
+      "ANCHORING": "HOLD_PRICE",
+      "LOW_INTEREST": "END_NEGOTIATION"
+    }
+  },
+  {
+    "id": "client_probe",
+    "hidden_target": "CONFUSED",
+    "target": {
+      "target_id": "p_client",
+      "subject_agent_id": "client",
+      "target_kind": "COGNITIVE_STATE",
+      "question": "Why is the client silent after the proposal?",
+      "candidates": [
+        [
+          "CONFUSED",
+          "The client is interested but does not understand key parts."
+        ],
+        [
+          "DISAGREES",
+          "The client understands but disagrees with the approach."
+        ],
+        [
+          "BUSY",
+          "The client has not engaged because attention is elsewhere."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "pc1",
+        "valid_time": "2026-06-03T09:00:00+00:00",
+        "recorded_at": "2026-06-03T09:01:00+00:00",
+        "raw_text": "The client reads the proposal and asks what two technical terms mean.",
+        "source_id": "client",
+        "actor_id": "client",
+        "observer_ids": [
+          "consultant"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "pc2",
+        "valid_time": "2026-06-03T09:10:00+00:00",
+        "recorded_at": "2026-06-03T09:11:00+00:00",
+        "raw_text": "After a jargon-heavy reply, the client becomes quiet without approving or rejecting.",
+        "source_id": "environment",
+        "actor_id": "client",
+        "observer_ids": [
+          "consultant"
+        ],
+        "metadata": {}
+      }
+    ],
+    "probes": [
+      [
+        "ASK_UNCLEAR",
+        "Ask which part of the proposal is still unclear."
+      ],
+      [
+        "ASK_DISAGREE",
+        "Ask whether the client understands but disagrees with the approach."
+      ],
+      [
+        "ASK_STATUS",
+        "Ask whether the client has had enough time to review the proposal."
+      ]
+    ],
+    "high_information_probes": [
+      "ASK_UNCLEAR"
+    ],
+    "probe_responses": {
+      "CONFUSED": {
+        "ASK_UNCLEAR": "The client identifies two concepts they still do not understand.",
+        "ASK_DISAGREE": "The client says: 'I am not ready to agree or disagree because I still do not understand it.'",
+        "ASK_STATUS": "The client says: 'I reviewed it, but parts are unclear.'"
+      },
+      "DISAGREES": {
+        "ASK_UNCLEAR": "The client says: 'I understand it; clarity is not the problem.'",
+        "ASK_DISAGREE": "The client explains a substantive disagreement with the approach.",
+        "ASK_STATUS": "The client says: 'I reviewed it fully.'"
+      },
+      "BUSY": {
+        "ASK_UNCLEAR": "The client says: 'I have not read enough to know what is unclear.'",
+        "ASK_DISAGREE": "The client says: 'I have not reviewed enough to form an opinion.'",
+        "ASK_STATUS": "The client says: 'I have been too busy to review it properly.'"
+      }
+    },
+    "actions": [
+      [
+        "EXPLAIN_PLAIN",
+        "Explain the unclear concepts in plain language."
+      ],
+      [
+        "ADDRESS_OBJECTION",
+        "Address the substantive disagreement."
+      ],
+      [
+        "GIVE_TIME",
+        "Give the client time to review before pushing further."
+      ]
+    ],
+    "correct_actions": {
+      "CONFUSED": "EXPLAIN_PLAIN",
+      "DISAGREES": "ADDRESS_OBJECTION",
+      "BUSY": "GIVE_TIME"
+    }
+  },
+  {
+    "id": "reviewer_probe",
+    "hidden_target": "NEEDS_APPROVAL",
+    "target": {
+      "target_id": "p_review",
+      "subject_agent_id": "reviewer",
+      "target_kind": "MOTIVE",
+      "question": "Why is the reviewer leaving the change pending?",
+      "candidates": [
+        [
+          "NEEDS_APPROVAL",
+          "A required approval is the remaining dependency."
+        ],
+        [
+          "QUALITY_CONCERN",
+          "The reviewer has unresolved technical concerns."
+        ],
+        [
+          "LOW_PRIORITY",
+          "The reviewer is postponing a low-priority review."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "pr1",
+        "valid_time": "2026-06-04T09:00:00+00:00",
+        "recorded_at": "2026-06-04T09:01:00+00:00",
+        "raw_text": "The reviewer leaves the change pending after reading it.",
+        "source_id": "environment",
+        "actor_id": "reviewer",
+        "observer_ids": [
+          "author"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "pr2",
+        "valid_time": "2026-06-04T09:10:00+00:00",
+        "recorded_at": "2026-06-04T09:11:00+00:00",
+        "raw_text": "The reviewer has not requested a code modification yet.",
+        "source_id": "environment",
+        "actor_id": "reviewer",
+        "observer_ids": [
+          "author"
+        ],
+        "metadata": {}
+      }
+    ],
+    "probes": [
+      [
+        "ASK_ROOT_CAUSE",
+        "Ask: What exactly is preventing approval right now?"
+      ],
+      [
+        "ASK_CODE_ISSUES",
+        "Ask only whether there are technical/code problems."
+      ],
+      [
+        "ASK_PRIORITY",
+        "Ask whether the review is being delayed because it is low priority."
+      ]
+    ],
+    "high_information_probes": [
+      "ASK_ROOT_CAUSE"
+    ],
+    "probe_responses": {
+      "NEEDS_APPROVAL": {
+        "ASK_ROOT_CAUSE": "The reviewer says: 'The code is fine; I am waiting for required manager approval.'",
+        "ASK_CODE_ISSUES": "The reviewer says: 'No code issue.'",
+        "ASK_PRIORITY": "The reviewer says: 'Priority is not the problem.'"
+      },
+      "QUALITY_CONCERN": {
+        "ASK_ROOT_CAUSE": "The reviewer says: 'I found a correctness concern that must be fixed.'",
+        "ASK_CODE_ISSUES": "The reviewer describes the code issue.",
+        "ASK_PRIORITY": "The reviewer says: 'Priority is not the issue.'"
+      },
+      "LOW_PRIORITY": {
+        "ASK_ROOT_CAUSE": "The reviewer says: 'Nothing is blocking it; I have simply deprioritized this review.'",
+        "ASK_CODE_ISSUES": "The reviewer says: 'No technical issue.'",
+        "ASK_PRIORITY": "The reviewer says: 'Yes, other work has higher priority.'"
+      }
+    },
+    "actions": [
+      [
+        "GET_APPROVAL",
+        "Obtain the required manager approval."
+      ],
+      [
+        "REWORK_CODE",
+        "Fix the technical concern."
+      ],
+      [
+        "RAISE_PRIORITY",
+        "Raise or reschedule the review priority."
+      ]
+    ],
+    "correct_actions": {
+      "NEEDS_APPROVAL": "GET_APPROVAL",
+      "QUALITY_CONCERN": "REWORK_CODE",
+      "LOW_PRIORITY": "RAISE_PRIORITY"
+    }
+  },
+  {
+    "id": "route_probe",
+    "hidden_target": "SAFETY_PRIORITY",
+    "target": {
+      "target_id": "p_route",
+      "subject_agent_id": "driver",
+      "target_kind": "PREFERENCE_GOAL",
+      "question": "What priority drives the driver's route choice?",
+      "candidates": [
+        [
+          "SAFETY_PRIORITY",
+          "The driver prioritizes safety over speed."
+        ],
+        [
+          "TIME_PRIORITY",
+          "The driver prioritizes fastest arrival."
+        ],
+        [
+          "FUEL_CONSTRAINT",
+          "The driver prioritizes minimizing fuel use."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "pp1",
+        "valid_time": "2026-06-05T07:00:00+00:00",
+        "recorded_at": "2026-06-05T07:01:00+00:00",
+        "raw_text": "The driver selects a slightly slower route after seeing an accident warning on the fastest road.",
+        "source_id": "environment",
+        "actor_id": "driver",
+        "observer_ids": [
+          "dispatcher"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "pp2",
+        "valid_time": "2026-06-05T07:10:00+00:00",
+        "recorded_at": "2026-06-05T07:11:00+00:00",
+        "raw_text": "The slower route also uses slightly more fuel than the fastest road.",
+        "source_id": "environment",
+        "actor_id": "traffic",
+        "observer_ids": [
+          "driver",
+          "dispatcher"
+        ],
+        "metadata": {}
+      }
+    ],
+    "probes": [
+      [
+        "ASK_TRADEOFF",
+        "Ask which factor matters most when speed, fuel, and safety conflict."
+      ],
+      [
+        "ASK_TIME_LIMIT",
+        "Ask only how much delay the driver will tolerate."
+      ],
+      [
+        "ASK_FUEL_LIMIT",
+        "Ask only how much extra fuel the driver will tolerate."
+      ]
+    ],
+    "high_information_probes": [
+      "ASK_TRADEOFF"
+    ],
+    "probe_responses": {
+      "SAFETY_PRIORITY": {
+        "ASK_TRADEOFF": "The driver says: 'Safety comes first; I will accept delay and fuel cost to avoid a serious warning.'",
+        "ASK_TIME_LIMIT": "The driver says: 'I can tolerate delay when safety is involved.'",
+        "ASK_FUEL_LIMIT": "The driver says: 'I can tolerate extra fuel when safety is involved.'"
+      },
+      "TIME_PRIORITY": {
+        "ASK_TRADEOFF": "The driver says: 'Arrival time matters most unless a road is closed.'",
+        "ASK_TIME_LIMIT": "The driver says: 'I strongly avoid delays.'",
+        "ASK_FUEL_LIMIT": "The driver says: 'Fuel matters less than time.'"
+      },
+      "FUEL_CONSTRAINT": {
+        "ASK_TRADEOFF": "The driver says: 'Fuel cost is the binding constraint for me.'",
+        "ASK_TIME_LIMIT": "The driver says: 'Delay is acceptable if it saves fuel.'",
+        "ASK_FUEL_LIMIT": "The driver states a strict fuel-use limit."
+      }
+    },
+    "actions": [
+      [
+        "CHOOSE_SAFE",
+        "Choose the safer route despite added time/cost."
+      ],
+      [
+        "CHOOSE_FAST",
+        "Choose the fastest available route."
+      ],
+      [
+        "CHOOSE_LOW_FUEL",
+        "Choose the route with lowest fuel use."
+      ]
+    ],
+    "correct_actions": {
+      "SAFETY_PRIORITY": "CHOOSE_SAFE",
+      "TIME_PRIORITY": "CHOOSE_FAST",
+      "FUEL_CONSTRAINT": "CHOOSE_LOW_FUEL"
+    }
+  },
+  {
+    "id": "meeting_probe",
+    "hidden_target": "CALENDAR_CONFLICT",
+    "target": {
+      "target_id": "p_meeting",
+      "subject_agent_id": "riley",
+      "target_kind": "MOTIVE",
+      "question": "Why is Riley rejecting proposed meetings?",
+      "candidates": [
+        [
+          "CALENDAR_CONFLICT",
+          "Riley wants to meet but the proposed time conflicts."
+        ],
+        [
+          "AVOIDING_PERSON",
+          "Riley is trying to avoid the other participant."
+        ],
+        [
+          "LOCATION_PROBLEM",
+          "Riley accepts the person/time but rejects the location."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "pm1",
+        "valid_time": "2026-06-06T09:00:00+00:00",
+        "recorded_at": "2026-06-06T09:01:00+00:00",
+        "raw_text": "Riley rejects a 2 PM meeting but does not explain why.",
+        "source_id": "riley",
+        "actor_id": "riley",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "pm2",
+        "valid_time": "2026-06-06T09:10:00+00:00",
+        "recorded_at": "2026-06-06T09:11:00+00:00",
+        "raw_text": "Riley also rejects a 3 PM meeting at the same location.",
+        "source_id": "riley",
+        "actor_id": "riley",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {}
+      }
+    ],
+    "probes": [
+      [
+        "ASK_CONSTRAINT",
+        "Ask what specific constraint is causing the refusals."
+      ],
+      [
+        "CHANGE_ROOM",
+        "Ask whether a different room would make 3 PM acceptable."
+      ],
+      [
+        "OFFER_AFTER_4",
+        "Ask whether a slot after 4 PM would be acceptable."
+      ]
+    ],
+    "high_information_probes": [
+      "ASK_CONSTRAINT"
+    ],
+    "probe_responses": {
+      "CALENDAR_CONFLICT": {
+        "ASK_CONSTRAINT": "Riley says: 'I am booked until 4; the person and room are fine.'",
+        "CHANGE_ROOM": "Riley says: 'Changing the room does not solve my 3 PM calendar conflict.'",
+        "OFFER_AFTER_4": "Riley says: 'Yes, after 4 works.'"
+      },
+      "AVOIDING_PERSON": {
+        "ASK_CONSTRAINT": "Riley says: 'The real issue is that I do not want this meeting with that person.'",
+        "CHANGE_ROOM": "Riley still refuses even with a new room.",
+        "OFFER_AFTER_4": "Riley still refuses after 4."
+      },
+      "LOCATION_PROBLEM": {
+        "ASK_CONSTRAINT": "Riley says: 'The time and person are fine; I cannot use that location.'",
+        "CHANGE_ROOM": "Riley says a different room would solve the problem.",
+        "OFFER_AFTER_4": "Riley says time is not the issue; the location still is."
+      }
+    },
+    "actions": [
+      [
+        "SCHEDULE_AFTER_4",
+        "Offer a meeting after 4 PM."
+      ],
+      [
+        "CANCEL_OR_REFRAME",
+        "Do not keep rescheduling; address the interpersonal avoidance."
+      ],
+      [
+        "CHANGE_LOCATION",
+        "Keep the time but change the location."
+      ]
+    ],
+    "correct_actions": {
+      "CALENDAR_CONFLICT": "SCHEDULE_AFTER_4",
+      "AVOIDING_PERSON": "CANCEL_OR_REFRAME",
+      "LOCATION_PROBLEM": "CHANGE_LOCATION"
+    }
+  }
+]
