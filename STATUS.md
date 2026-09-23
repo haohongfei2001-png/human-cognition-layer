@@ -3885,3 +3885,26 @@ No external benchmark rows are authorized yet.
 
 **Current gate: HCL_V04_LATENT_PREDICTION_COMPLETE_HYPOTHESIS_GUIDED_ACTION_READY**
 
+## HCL v0.4 hypothesis-guided action capability closure
+
+Closure: `reports/HCL_V04_HYPOTHESIS_GUIDED_ACTION_V01_CLOSURE.md`.
+
+The frozen six-scenario C/D/E action diagnostic is **COMPLETE** on integrated
+runtime main `825626654eca8794b739f7c3f5108120801cc669`.
+Exact-main workflow `35854781478` and minimal-slice regression `35854781504`
+both succeeded. Candidate workflow `35853990890` also succeeded.
+
+- Candidate final action: C 6/6, D 6/6, E 5/6.
+- Exact-main final action: C 6/6, D 6/6, E 6/6.
+- Candidate high-information probes: C 4/6, D 5/6, E 5/6.
+- Exact-main high-information probes: C 5/6, D 5/6, E 6/6.
+- E used fewer calls and substantially fewer input/output characters.
+- The candidate E miss disappeared on the exact-main rerun with identical
+  code/fixtures/model/seed; no stable incremental HCL utility is established.
+
+This is controlled internal evidence only. No external benchmark, real-human,
+cross-model or production claim follows. No new external benchmark rows were
+consumed and no owner-private research examples entered GitHub. A new capability
+or transfer run requires a separately frozen canonical contract.
+
+**Current gate: HCL_V04_HYPOTHESIS_GUIDED_ACTION_V01_CONTROLLED_COMPLETE_NEXT_CONTRACT_NOT_FROZEN**
