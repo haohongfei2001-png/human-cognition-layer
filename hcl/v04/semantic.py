@@ -47,6 +47,13 @@ Keep these record types distinct:
 Do not infer that receiving P means believing P.
 Do not infer that a source assertion means P is world truth.
 Do not use future information to rewrite historical agent state.
+Use SCENE_FACT only when the event metadata explicitly marks the content as an
+environment/scene fact or the input contract otherwise explicitly declares it
+as world truth.
+Do not create BELIEF_ESTIMATE solely because INFORMATION_EXPOSURE occurred.
+Create a belief estimate only when the event supplies additional evidence such
+as explicit acceptance/rejection, prior belief evidence, or behavior that
+supports the estimate.
 
 Return JSON only with:
 {
