@@ -100,6 +100,22 @@ def run_check(view: dict, check: dict) -> tuple[bool, str]:
             f"{check['count']} actual={count}"
         )
 
+    if kind == "require_belief_stance":
+        matches = [
+            x
+            for x in rows
+            if x["assertion_type"] == "BELIEF_ESTIMATE"
+            and x["subject_agent_id"] == check["subject_agent_id"]
+            and x.get("belief_stance") == check["belief_stance"]
+            and x.get("proposition_text") == check["proposition_text"]
+        ]
+        ok = bool(matches)
+        return ok, (
+            "require_belief_stance "
+            f"{check['subject_agent_id']} {check['belief_stance']} "
+            f"{check['proposition_text']!r}"
+        )
+
     evidence_ids = {x["event_id"] for x in view["evidence"]}
     if kind == "forbid_event_visible":
         ok = check["event_id"] not in evidence_ids
