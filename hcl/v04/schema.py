@@ -63,6 +63,16 @@ def validate_assertion(assertion: CognitiveAssertion) -> None:
             f"{assertion.assertion_type.value} requires subject_agent_id"
         )
 
+    if (
+        assertion.assertion_type == AssertionType.BELIEF_ESTIMATE
+        and assertion.support_level is not None
+        and assertion.support_level.value == "COUNTEREVIDENCE"
+    ):
+        raise SchemaValidationError(
+            "BELIEF_ESTIMATE cannot use COUNTEREVIDENCE; counterevidence "
+            "must weaken a separate hypothesis rather than assert the belief"
+        )
+
     if assertion.assertion_type == AssertionType.LATENT_HYPOTHESIS:
         if not assertion.subject_agent_id or not assertion.hypothesis_text:
             raise SchemaValidationError(
