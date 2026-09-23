@@ -1,0 +1,39 @@
+name: HCL v0.4 CDE Capability Comparison v0.2
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_V04_CDE_V02_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      DEEPSEEK_BASE_URL: https://api.deepseek.com
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install runtime dependency
+        run: python -m pip install openai
+      - name: Run frozen C/D/E v0.2 comparison
+        run: |
+          python scripts/run_v04_cde_capability_v02.py \
+            --model deepseek-flash \
+            --fixtures eval/v04/cde_capability_v02.json
+      - name: Upload comparison evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v04-cde-v02-${{ github.run_id }}
+          path: artifacts/hcl-v04-cde-v02/
+          if-no-files-found: warn
+          retention-days: 30
