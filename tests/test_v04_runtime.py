@@ -44,9 +44,10 @@ class V04RuntimeTests(unittest.TestCase):
                     recipient_ids=("alice",),
                 )
             )
-            backend = FakeBackend(json_outputs=["not-json"])
+            backend = FakeBackend(json_outputs=["not-json", "still-not-json"])
             with self.assertRaises(SchemaValidationError):
                 runtime.propose_patch("e1", backend)
+            self.assertEqual(len(backend.json_calls), 2)
             self.assertEqual(runtime.store.state_version, 0)
             self.assertEqual(
                 runtime.build_view(None, None, None, "q").relevant_assertions,
@@ -77,9 +78,12 @@ class V04RuntimeTests(unittest.TestCase):
                     }
                 ],
             }
-            backend = FakeBackend(json_outputs=[json.dumps(payload)])
+            backend = FakeBackend(
+                json_outputs=[json.dumps(payload), json.dumps(payload)]
+            )
             with self.assertRaises(SchemaValidationError):
                 runtime.propose_patch("e1", backend)
+            self.assertEqual(len(backend.json_calls), 2)
             self.assertEqual(runtime.store.state_version, 0)
         finally:
             runtime.store.close()
