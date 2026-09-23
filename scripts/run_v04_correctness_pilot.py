@@ -90,6 +90,18 @@ def run_check(view: dict, check: dict) -> tuple[bool, str]:
             f"{check['subject_agent_id']}"
         )
 
+    if kind == "forbid_type_subject_event":
+        ok = not any(
+            x["assertion_type"] == check["assertion_type"]
+            and x["subject_agent_id"] == check["subject_agent_id"]
+            and check["event_id"] in x.get("evidence_event_ids", [])
+            for x in rows
+        )
+        return ok, (
+            f"forbid_type_subject_event {check['assertion_type']} "
+            f"{check['subject_agent_id']} event={check['event_id']}"
+        )
+
     if kind == "require_count_at_least":
         count = sum(
             1 for x in rows if x["assertion_type"] == check["assertion_type"]
