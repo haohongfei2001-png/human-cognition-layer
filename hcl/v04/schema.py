@@ -6,6 +6,7 @@ from datetime import datetime
 
 from .model import (
     AssertionType,
+    BeliefStance,
     CognitiveAssertion,
     EventRecord,
     Proposition,
@@ -63,14 +64,22 @@ def validate_assertion(assertion: CognitiveAssertion) -> None:
             f"{assertion.assertion_type.value} requires subject_agent_id"
         )
 
-    if (
-        assertion.assertion_type == AssertionType.BELIEF_ESTIMATE
-        and assertion.support_level is not None
-        and assertion.support_level.value == "COUNTEREVIDENCE"
-    ):
+    if assertion.assertion_type == AssertionType.BELIEF_ESTIMATE:
+        if assertion.belief_stance is None:
+            raise SchemaValidationError(
+                "BELIEF_ESTIMATE requires belief_stance AFFIRM or DENY"
+            )
+        if assertion.support_level is not None and assertion.support_level.value in {
+            "COUNTEREVIDENCE",
+            "INSUFFICIENT",
+        }:
+            raise SchemaValidationError(
+                "BELIEF_ESTIMATE support_level must support the stated belief stance; "
+                "use LATENT_HYPOTHESIS for unresolved/counterevidence-only state"
+            )
+    elif assertion.belief_stance is not None:
         raise SchemaValidationError(
-            "BELIEF_ESTIMATE cannot use COUNTEREVIDENCE; counterevidence "
-            "must weaken a separate hypothesis rather than assert the belief"
+            "belief_stance is valid only for BELIEF_ESTIMATE"
         )
 
     if assertion.assertion_type == AssertionType.LATENT_HYPOTHESIS:
