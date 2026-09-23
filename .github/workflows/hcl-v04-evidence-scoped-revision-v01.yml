@@ -1,0 +1,45 @@
+name: HCL v0.4 Evidence-Scoped Revision v0.1
+
+on:
+  push:
+    branches:
+      - manager/hcl-v04-evidence-scoped-revision-20260923
+    paths:
+      - ".github/HCL_V04_EVIDENCE_SCOPED_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      DEEPSEEK_BASE_URL: https://api.deepseek.com
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install existing model client
+        run: python -m pip install openai
+      - name: Verify frozen synthetic fixture and correctness gates before any provider call
+        run: |
+          echo '7f08cbe1f5dd8207f505f37a9354440c28450d2462f7b0177cf184b10a4aa6ab  eval/v04/evidence_scoped_revision_v01.json' | sha256sum -c -
+          python scripts/run_v04_evidence_scoped_revision_v01.py --validate-only
+          python -m compileall -q hcl/v04 scripts/run_v04_evidence_scoped_revision_v01.py tests/test_v04_evidence_scoped_revision.py
+          python -m unittest -v tests.test_v04_store tests.test_v04_perspective tests.test_v04_recovery tests.test_v04_runtime tests.test_v04_hypotheses tests.test_v04_probe_policy tests.test_v04_evidence_scoped_revision
+      - name: Run one frozen single-model C D E F comparison
+        run: |
+          python scripts/run_v04_evidence_scoped_revision_v01.py \
+            --model deepseek-flash \
+            --fixtures eval/v04/evidence_scoped_revision_v01.json
+      - name: Upload internal diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v04-evidence-scoped-v01-${{ github.run_id }}
+          path: artifacts/hcl-v04-evidence-scoped-v01/
+          if-no-files-found: warn
+          retention-days: 30

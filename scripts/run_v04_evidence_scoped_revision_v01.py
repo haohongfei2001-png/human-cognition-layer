@@ -17,6 +17,22 @@ FROZEN_FIXTURE_SHA256 = "7f08cbe1f5dd8207f505f37a9354440c28450d2462f7b0177cf184b
 DEFAULT_FIXTURES = "eval/v04/evidence_scoped_revision_v01.json"
 
 
+class BudgetedBackend:
+    def __init__(self, delegate, limit: int) -> None:
+        self.delegate = delegate
+        self.limit = limit
+        self.calls = 0
+
+    def complete_json(self, messages, *, max_tokens, temperature=0.0):
+        if self.calls >= self.limit:
+            raise RuntimeError("frozen internal provider-call budget exceeded")
+        self.calls += 1
+        return self.delegate.complete_json(messages, max_tokens=max_tokens, temperature=temperature)
+
+    def metrics(self):
+        return self.delegate.metrics()
+
+
 def validate_frozen(fixtures: list[dict], digest: str) -> None:
     if digest != FROZEN_FIXTURE_SHA256:
         raise ValueError("frozen evidence-scoped fixture hash changed")
@@ -175,7 +191,11 @@ def main() -> None:
     from scripts.run_v04_latent_hypothesis_capability_v01 import make_backend
 
     api_key = os.environ["DEEPSEEK_API_KEY"]
-    backends = {arm: make_backend(api_key, args.base_url, args.model) for arm in "CDEF"}
+    budgets = {"C": 36, "D": 54, "E": 18, "F": 36}
+    backends = {
+        arm: BudgetedBackend(make_backend(api_key, args.base_url, args.model), budgets[arm])
+        for arm in "CDEF"
+    }
     rows: dict[str, list[dict]] = {arm: [] for arm in "CDEF"}
     for scene in fixtures:
         rows["C"].append(run_structured(scene, backends["C"], persistent=False))
