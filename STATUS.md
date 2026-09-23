@@ -3908,3 +3908,14 @@ consumed and no owner-private research examples entered GitHub. A new capability
 or transfer run requires a separately frozen canonical contract.
 
 **Current gate: HCL_V04_HYPOTHESIS_GUIDED_ACTION_V01_CONTROLLED_COMPLETE_NEXT_CONTRACT_NOT_FROZEN**
+
+
+## HCL v0.4 evidence-scoped revision controlled diagnostic closure
+
+The owner-authorized next bounded internal contract was frozen and run on experimental PR #4. Closure: `reports/HCL_V04_EVIDENCE_SCOPED_REVISION_V01_CLOSURE.md`. The six new synthetic scenario fixture was committed before provider use, then single-model run `35872423297` succeeded at exact experimental head `b6a174ce3356f7fe1407567c6754eae73b37aff3` after deterministic preflight.
+
+C and E achieved 6/6 final actions; eager D and evidence-scoped F achieved 5/6. E used 12 calls and 32,350 input characters; F used 25 calls and 107,976 input characters. F had no incremental capability or cost advantage over the simpler E path. The experimental F code is retained on PR #4 for audit and is not merged or made default. No external benchmark rows, owner-private examples, cross-model transfer or publication were used. This is a completed internal diagnostic, not a positive HCL efficacy claim.
+
+A different capability question requires a separately frozen contract before another provider-backed or external run. Existing main runtime and the prior controlled six-scenario closure remain unchanged.
+
+**Current gate: HCL_V04_EVIDENCE_SCOPED_REVISION_V01_DIAGNOSTIC_COMPLETE_NO_PROMOTION_NEXT_CONTRACT_NOT_FROZEN**
