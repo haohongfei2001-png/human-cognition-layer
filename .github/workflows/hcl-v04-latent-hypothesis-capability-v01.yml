@@ -1,0 +1,39 @@
+name: HCL v0.4 Latent Hypothesis Capability v0.1
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_V04_LATENT_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      DEEPSEEK_BASE_URL: https://api.deepseek.com
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependency
+        run: python -m pip install openai
+      - name: Run frozen latent-hypothesis capability comparison
+        run: |
+          python scripts/run_v04_latent_hypothesis_capability_v01.py \
+            --model deepseek-flash \
+            --fixtures eval/v04/latent_hypothesis_capability_v01.json
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v04-latent-v01-${{ github.run_id }}
+          path: artifacts/hcl-v04-latent-v01/
+          if-no-files-found: warn
+          retention-days: 30
