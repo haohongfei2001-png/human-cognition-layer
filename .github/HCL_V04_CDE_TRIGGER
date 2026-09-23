@@ -4,3 +4,4 @@ plan: reports/HCL_V04_CDE_CAPABILITY_COMPARISON_V01_PLAN.md
 fixtures: eval/v04/cde_capability_v01.json
 external_benchmark_consumption: none
 retry_after_deterministic_identity_fix: 9879715d07661aad880dedc371bddb406d9c158f
+retry_after_json_label_transport: 79ea5d49341d121a6dbf34251da19cb520150b42
