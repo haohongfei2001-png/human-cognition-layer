@@ -3919,3 +3919,13 @@ C and E achieved 6/6 final actions; eager D and evidence-scoped F achieved 5/6. 
 A different capability question requires a separately frozen contract before another provider-backed or external run. Existing main runtime and the prior controlled six-scenario closure remain unchanged.
 
 **Current gate: HCL_V04_EVIDENCE_SCOPED_REVISION_V01_DIAGNOSTIC_COMPLETE_NO_PROMOTION_NEXT_CONTRACT_NOT_FROZEN**
+
+## HCL v0.4 open-world hypothesis controlled diagnostic closure
+
+The separately frozen internal contract and six synthetic scenarios were run once on experimental PR #5 at exact head `7b190fb1a029b70292e4944b45b2b06919190f8e`. Closure: `reports/HCL_V04_OPEN_WORLD_HYPOTHESIS_V01_CLOSURE.md`; workflow `35880082830` passed deterministic preflight and the single-model C/D/E comparison.
+
+C, D and simpler direct-history E each selected 6/6 final actions and 6/6 high-information probes. C and D used 25 and 26 provider calls versus E's 12. A semantic audit found that both structured arms marked the unknown explanation SUPPORTED from an office policy correction before the subject's reason for non-confirmation was established. Under the frozen grounded-state gate, those structured-arm claims fail despite correct final actions. No incremental HCL utility is established. Experimental code and fixtures remain on unmerged PR #5; main runtime is unchanged. No external benchmark rows, owner-private examples, cross-model transfer or publication were used.
+
+A different internal capability question requires a separately frozen independent contract. These six scenarios may not be tuned and rerun as fresh evidence.
+
+**Current gate: HCL_V04_OPEN_WORLD_HYPOTHESIS_V01_DIAGNOSTIC_COMPLETE_NO_PROMOTION_NEXT_CONTRACT_NOT_FROZEN**
