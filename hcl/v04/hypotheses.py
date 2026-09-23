@@ -512,6 +512,17 @@ class HypothesisTracker:
         new_event_ids: tuple[str, ...],
     ) -> list[dict[str, str]]:
         target = self._target_row(target_id)
+        prior_event_ids: list[str] = []
+        seen: set[str] = set()
+        for candidate in current.candidates:
+            for event_id in (
+                list(candidate.support_event_ids)
+                + list(candidate.counterevidence_event_ids)
+                + list(candidate.unresolved_event_ids)
+            ):
+                if event_id not in seen and event_id not in new_event_ids:
+                    seen.add(event_id)
+                    prior_event_ids.append(event_id)
         return [
             {"role": "system", "content": HYPOTHESIS_UPDATE_SYSTEM},
             {
@@ -528,6 +539,9 @@ class HypothesisTracker:
                             ),
                         },
                         "current_state": self._state_payload(current),
+                        "prior_evidence": self._events_payload(
+                            tuple(prior_event_ids)
+                        ),
                         "new_events": self._events_payload(new_event_ids),
                     }
                 ),
