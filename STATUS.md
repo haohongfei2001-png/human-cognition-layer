@@ -3937,3 +3937,11 @@ The owner-authorized next bounded internal capability question is frozen on the 
 The frozen C/D/E runner is implemented on this branch and has passed a fake-backend no-gold-leak test locally. It has not been executed against the provider. Current next action is exact-head deterministic CI, then one bounded existing-model comparison and a separate semantic audit before any efficacy conclusion. Main HCL runtime remains unchanged until a justified, independently verified promotion decision.
 
 **Current gate: HCL_V04_PERSPECTIVE_SAFE_ACTION_V01_FROZEN_COMPARISON_NOT_RUN**
+
+## HCL v0.4 perspective-safe correction action diagnostic closure
+
+The frozen six-case internal C/D/E comparison ran once at experimental exact head `bd7cecfd2567b2497156ee2770c4fa4bac7369cc` in workflow `35900191714`. Closure: `reports/HCL_V04_PERSPECTIVE_SAFE_ACTION_V01_CLOSURE.md`. C and D each chose 5/6 safe actions; E chose 6/6 with fewer calls. The semantic audit found C/D's ungrounded correction identity in the disputed-title case and D's stale acceptance claim after a later film-credit revision. E also gave one imprecise receipt/acceptance rationale. The structured grounded-state gate fails; no incremental HCL utility is established. The experimental code and fixture remain unmerged. No external benchmark rows, owner-private material, new provider/model, training, cross-model paid run, publication, or runtime promotion occurred.
+
+These six cases are consumed internal diagnostic evidence, not fresh evidence for tuning or rerun. A different capability question requires a separately frozen independent contract.
+
+**Current gate: HCL_V04_PERSPECTIVE_SAFE_ACTION_V01_DIAGNOSTIC_COMPLETE_NO_PROMOTION_NEXT_CONTRACT_NOT_FROZEN**
