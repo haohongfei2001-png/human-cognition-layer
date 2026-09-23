@@ -895,9 +895,29 @@ class CognitionStore:
                 ).fetchall():
                     self.conn.execute(
                         """
-                        INSERT INTO assertions VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        INSERT INTO assertions(
+                            assertion_id, assertion_type, subject_agent_id,
+                            proposition_id, hypothesis_text, valid_time,
+                            system_record_time, evidence_event_ids,
+                            depends_on_assertion_ids, status, support_level,
+                            belief_stance, semantic_version
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                         """,
-                        tuple(row),
+                        (
+                            row["assertion_id"],
+                            row["assertion_type"],
+                            row["subject_agent_id"],
+                            row["proposition_id"],
+                            row["hypothesis_text"],
+                            row["valid_time"],
+                            row["system_record_time"],
+                            row["evidence_event_ids"],
+                            row["depends_on_assertion_ids"],
+                            row["status"],
+                            row["support_level"],
+                            row["belief_stance"],
+                            row["semantic_version"],
+                        ),
                     )
                 for row in temp.conn.execute(
                     "SELECT * FROM dependencies"
