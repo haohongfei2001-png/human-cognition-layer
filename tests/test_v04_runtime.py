@@ -88,6 +88,121 @@ class V04RuntimeTests(unittest.TestCase):
         finally:
             runtime.store.close()
 
+    def test_ingest_repairs_invalid_exposure_once(self):
+        runtime = HCLV04Runtime(CognitionStore())
+        try:
+            event = EventRecord(
+                event_id="e1",
+                valid_time=T0,
+                raw_text="Bob receives the correction; Alice does not receive it.",
+                source_id="source",
+                actor_id="source",
+                recipient_ids=("bob",),
+                metadata={"scene_fact": True},
+            )
+            invalid = {
+                "propositions": [
+                    {
+                        "proposition_id": "p1",
+                        "canonical_text": "the correction",
+                        "source_event_ids": ["e1"],
+                    }
+                ],
+                "assertions": [
+                    {
+                        "assertion_id": "bad_exp",
+                        "assertion_type": "INFORMATION_EXPOSURE",
+                        "subject_agent_id": "alice",
+                        "proposition_id": "p1",
+                        "valid_time": T0,
+                        "evidence_event_ids": ["e1"],
+                        "depends_on_assertion_ids": [],
+                        "status": "ACTIVE",
+                        "support_level": "DIRECT_SUPPORT",
+                    }
+                ],
+            }
+            repaired = {
+                "propositions": [
+                    {
+                        "proposition_id": "p1",
+                        "canonical_text": "the correction",
+                        "source_event_ids": ["e1"],
+                    }
+                ],
+                "assertions": [
+                    {
+                        "assertion_id": "bob_exp",
+                        "assertion_type": "INFORMATION_EXPOSURE",
+                        "subject_agent_id": "bob",
+                        "proposition_id": "p1",
+                        "valid_time": T0,
+                        "evidence_event_ids": ["e1"],
+                        "depends_on_assertion_ids": [],
+                        "status": "ACTIVE",
+                        "support_level": "DIRECT_SUPPORT",
+                    }
+                ],
+            }
+            backend = FakeBackend(
+                json_outputs=[json.dumps(invalid), json.dumps(repaired)]
+            )
+            result = runtime.ingest_event(event, backend)
+            self.assertEqual(result.semantic_repair_count, 1)
+            self.assertIsNotNone(result.rejected_patch)
+            self.assertIn("no evidence path", result.repair_reason)
+            alice = runtime.build_view("alice", None, None, "q")
+            bob = runtime.build_view("bob", None, None, "q")
+            self.assertEqual(alice.relevant_assertions, ())
+            self.assertEqual(len(bob.relevant_assertions), 1)
+        finally:
+            runtime.store.close()
+
+    def test_belief_counterevidence_is_not_accepted_as_belief(self):
+        runtime = HCLV04Runtime(CognitionStore())
+        try:
+            runtime.append_event(
+                EventRecord(
+                    event_id="e1",
+                    valid_time=T0,
+                    raw_text="Alice explicitly rejects P.",
+                    source_id="alice",
+                    actor_id="alice",
+                    observer_ids=("alice",),
+                )
+            )
+            invalid = {
+                "propositions": [
+                    {
+                        "proposition_id": "p1",
+                        "canonical_text": "P",
+                        "source_event_ids": ["e1"],
+                    }
+                ],
+                "assertions": [
+                    {
+                        "assertion_id": "b1",
+                        "assertion_type": "BELIEF_ESTIMATE",
+                        "subject_agent_id": "alice",
+                        "proposition_id": "p1",
+                        "valid_time": T0,
+                        "evidence_event_ids": ["e1"],
+                        "depends_on_assertion_ids": [],
+                        "status": "ACTIVE",
+                        "support_level": "COUNTEREVIDENCE",
+                    }
+                ],
+            }
+            repaired = {"propositions": invalid["propositions"], "assertions": []}
+            backend = FakeBackend(
+                json_outputs=[json.dumps(invalid), json.dumps(repaired)]
+            )
+            patch = runtime.propose_patch("e1", backend)
+            self.assertEqual(len(backend.json_calls), 2)
+            self.assertEqual(patch.assertions, ())
+        finally:
+            runtime.store.close()
+
     def test_pass_with_violations_is_not_accepted(self):
         runtime = HCLV04Runtime(CognitionStore())
         try:
