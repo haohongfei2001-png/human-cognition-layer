@@ -3908,3 +3908,11 @@ consumed and no owner-private research examples entered GitHub. A new capability
 or transfer run requires a separately frozen canonical contract.
 
 **Current gate: HCL_V04_HYPOTHESIS_GUIDED_ACTION_V01_CONTROLLED_COMPLETE_NEXT_CONTRACT_NOT_FROZEN**
+
+## HCL v0.4 evidence-scoped revision contract freeze
+
+The owner authorized autonomous continuation to the next bounded internal capability contract after the controlled hypothesis-guided action slice. The next contract is `docs/HCL_V04_EVIDENCE_SCOPED_REVISION_V01_CONTRACT.md`. It asks whether always-on evidence with target-scoped, query-time hypothesis revision preserves grounded probe/action capability while reducing unnecessary hypothesis maintenance. The prior C/D/E result remains a baseline and does not establish a new HCL win.
+
+This freeze opens only bounded internal implementation and independently frozen synthetic validation. It consumes no new external benchmark rows, uses no owner-private research examples, authorizes no new paid cross-model experiment or publication, and does not relax perspective, provenance, revision or always-on correctness gates. The first implementation writer is `manager/hcl-v04-evidence-scoped-revision-20260923`; no capability PASS is claimed by this contract registration.
+
+**Current gate: HCL_V04_EVIDENCE_SCOPED_REVISION_V01_FROZEN_IMPLEMENTATION_ACTIVE**
