@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from dataclasses import asdict
 from typing import Any, Protocol
 
 from .model import (
@@ -273,3 +274,91 @@ def propose_patch(
         raise last_error
     raise SchemaValidationError("semantic patch proposal failed")
 
+
+
+SEMANTIC_INVARIANT_REPAIR_SYSTEM = """The proposed HCL v0.4 SemanticPatch
+passed basic JSON parsing but violated a deterministic cognition invariant.
+
+Repair the semantic proposal once. Preserve supported meaning, but remove or
+correct assertions that violate the invariant.
+
+Hard rules:
+- INFORMATION_EXPOSURE requires an actual observation/recipient/actor/public
+  evidence path for that subject. A sentence saying an agent did NOT receive
+  information is not evidence that the agent received it.
+- BELIEF_ESTIMATE represents support for the estimate that an agent believes P.
+  Do not encode counterevidence as BELIEF_ESTIMATE with COUNTEREVIDENCE.
+- SOURCE_ASSERTION is not SCENE_FACT unless the event contract establishes world
+  truth.
+- Do not invent new facts or new exposure events to satisfy validation.
+
+Return the complete corrected JSON object only, using the original proposal
+schema.
+"""
+
+
+def patch_to_mapping(patch: SemanticPatch) -> dict[str, Any]:
+    propositions = [asdict(p) for p in patch.propositions]
+    assertions = []
+    for assertion in patch.assertions:
+        item = asdict(assertion)
+        item["assertion_type"] = assertion.assertion_type.value
+        item["status"] = assertion.status.value
+        item["support_level"] = (
+            assertion.support_level.value if assertion.support_level else None
+        )
+        assertions.append(item)
+    return {
+        "propositions": propositions,
+        "assertions": assertions,
+    }
+
+
+def repair_patch_for_invariant(
+    event: EventRecord,
+    patch: SemanticPatch,
+    validation_error: str,
+    backend: SemanticBackend,
+    *,
+    semantic_version: str = "v04.1",
+    max_tokens: int = 2048,
+) -> SemanticPatch:
+    raw = backend.complete_json(
+        [
+            {"role": "system", "content": SEMANTIC_INVARIANT_REPAIR_SYSTEM},
+            {
+                "role": "user",
+                "content": json.dumps(
+                    {
+                        "event": {
+                            "event_id": event.event_id,
+                            "valid_time": event.valid_time,
+                            "source_id": event.source_id,
+                            "actor_id": event.actor_id,
+                            "observer_ids": list(event.observer_ids),
+                            "recipient_ids": list(event.recipient_ids),
+                            "raw_text": event.raw_text,
+                            "metadata": event.metadata,
+                        },
+                        "rejected_patch": patch_to_mapping(patch),
+                        "validation_error": validation_error,
+                    },
+                    ensure_ascii=False,
+                    sort_keys=True,
+                ),
+            },
+        ],
+        max_tokens=max_tokens,
+        temperature=0.0,
+    )
+    try:
+        payload = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise SchemaValidationError(
+            "semantic invariant repair returned invalid JSON"
+        ) from exc
+    return patch_from_mapping(
+        event,
+        payload,
+        semantic_version=semantic_version,
+    )
