@@ -1,0 +1,307 @@
+[
+  {
+    "id": "meeting_correction_not_received",
+    "events": [
+      {
+        "event_id": "mnr1",
+        "valid_time": "2026-02-01T09:00:00+00:00",
+        "recorded_at": "2026-02-01T09:01:00+00:00",
+        "raw_text": "Alice reads the official notice that the meeting is at three and says: 'Okay, I believe it is at three.'",
+        "source_id": "notice",
+        "actor_id": "notice",
+        "recipient_ids": ["alice"],
+        "metadata": {}
+      },
+      {
+        "event_id": "mnr2",
+        "valid_time": "2026-02-01T09:30:00+00:00",
+        "recorded_at": "2026-02-01T09:31:00+00:00",
+        "raw_text": "Bob asks Alice whether she is ready for the three o'clock meeting. Alice says yes.",
+        "source_id": "bob",
+        "actor_id": "bob",
+        "observer_ids": ["alice", "bob"],
+        "metadata": {}
+      },
+      {
+        "event_id": "mnr3",
+        "valid_time": "2026-02-01T10:00:00+00:00",
+        "recorded_at": "2026-02-01T10:01:00+00:00",
+        "raw_text": "The meeting is actually changed to four. Bob receives the official correction. Alice does not receive it.",
+        "source_id": "environment",
+        "actor_id": "environment",
+        "recipient_ids": ["bob"],
+        "metadata": {"scene_fact": true}
+      },
+      {
+        "event_id": "mnr4",
+        "valid_time": "2026-02-01T10:15:00+00:00",
+        "recorded_at": "2026-02-01T10:16:00+00:00",
+        "raw_text": "Bob leaves for another room without speaking to Alice.",
+        "source_id": "environment",
+        "actor_id": "bob",
+        "observer_ids": ["__system__"],
+        "metadata": {"scene_fact": true}
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 2,
+        "question": "What meeting time does Alice currently believe?",
+        "allowed_labels": ["THREE", "FOUR", "UNCERTAIN"],
+        "gold": "THREE"
+      },
+      {
+        "after_event": 4,
+        "question": "What meeting time does Alice currently believe?",
+        "allowed_labels": ["THREE", "FOUR", "UNCERTAIN"],
+        "gold": "THREE"
+      }
+    ]
+  },
+  {
+    "id": "meeting_correction_accepted",
+    "events": [
+      {
+        "event_id": "mca1",
+        "valid_time": "2026-02-02T09:00:00+00:00",
+        "recorded_at": "2026-02-02T09:01:00+00:00",
+        "raw_text": "Alice reads the official notice that the meeting is at three and says: 'I believe it is at three.'",
+        "source_id": "notice",
+        "actor_id": "notice",
+        "recipient_ids": ["alice"],
+        "metadata": {}
+      },
+      {
+        "event_id": "mca2",
+        "valid_time": "2026-02-02T10:00:00+00:00",
+        "recorded_at": "2026-02-02T10:01:00+00:00",
+        "raw_text": "The meeting is actually changed to four. Alice receives the official correction.",
+        "source_id": "environment",
+        "actor_id": "environment",
+        "recipient_ids": ["alice"],
+        "metadata": {"scene_fact": true}
+      },
+      {
+        "event_id": "mca3",
+        "valid_time": "2026-02-02T10:02:00+00:00",
+        "recorded_at": "2026-02-02T10:03:00+00:00",
+        "raw_text": "Alice says: 'Understood. I believe the meeting is at four now.'",
+        "source_id": "alice",
+        "actor_id": "alice",
+        "observer_ids": ["alice"],
+        "metadata": {}
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 1,
+        "question": "What meeting time does Alice currently believe?",
+        "allowed_labels": ["THREE", "FOUR", "UNCERTAIN"],
+        "gold": "THREE"
+      },
+      {
+        "after_event": 3,
+        "question": "What meeting time does Alice currently believe?",
+        "allowed_labels": ["THREE", "FOUR", "UNCERTAIN"],
+        "gold": "FOUR"
+      }
+    ]
+  },
+  {
+    "id": "meeting_correction_rejected",
+    "events": [
+      {
+        "event_id": "mcr1",
+        "valid_time": "2026-02-03T09:00:00+00:00",
+        "recorded_at": "2026-02-03T09:01:00+00:00",
+        "raw_text": "Alice says: 'I believe the meeting is at three.'",
+        "source_id": "alice",
+        "actor_id": "alice",
+        "observer_ids": ["alice"],
+        "metadata": {}
+      },
+      {
+        "event_id": "mcr2",
+        "valid_time": "2026-02-03T10:00:00+00:00",
+        "recorded_at": "2026-02-03T10:01:00+00:00",
+        "raw_text": "A message tells Alice the meeting is at four. Nothing in this event establishes whether the message is correct.",
+        "source_id": "message",
+        "actor_id": "message",
+        "recipient_ids": ["alice"],
+        "metadata": {}
+      },
+      {
+        "event_id": "mcr3",
+        "valid_time": "2026-02-03T10:02:00+00:00",
+        "recorded_at": "2026-02-03T10:03:00+00:00",
+        "raw_text": "Alice replies: 'I think that message is wrong. I still believe the meeting is at three.'",
+        "source_id": "alice",
+        "actor_id": "alice",
+        "observer_ids": ["alice"],
+        "metadata": {}
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 2,
+        "question": "What meeting time does Alice currently believe?",
+        "allowed_labels": ["THREE", "FOUR", "UNCERTAIN"],
+        "gold": "THREE"
+      },
+      {
+        "after_event": 3,
+        "question": "What meeting time does Alice currently believe?",
+        "allowed_labels": ["THREE", "FOUR", "UNCERTAIN"],
+        "gold": "THREE"
+      }
+    ]
+  },
+  {
+    "id": "conflicting_sources_no_acceptance",
+    "events": [
+      {
+        "event_id": "csn1",
+        "valid_time": "2026-02-04T09:00:00+00:00",
+        "recorded_at": "2026-02-04T09:01:00+00:00",
+        "raw_text": "Source One tells Alice: 'The gate is open.' Alice gives no response that indicates whether she accepts the claim.",
+        "source_id": "source_one",
+        "actor_id": "source_one",
+        "recipient_ids": ["alice"],
+        "metadata": {}
+      },
+      {
+        "event_id": "csn2",
+        "valid_time": "2026-02-04T09:10:00+00:00",
+        "recorded_at": "2026-02-04T09:11:00+00:00",
+        "raw_text": "Source Two tells Alice: 'The gate is closed.' Alice again gives no response indicating which source she accepts. Nothing establishes which source is correct.",
+        "source_id": "source_two",
+        "actor_id": "source_two",
+        "recipient_ids": ["alice"],
+        "metadata": {}
+      },
+      {
+        "event_id": "csn3",
+        "valid_time": "2026-02-04T09:20:00+00:00",
+        "recorded_at": "2026-02-04T09:21:00+00:00",
+        "raw_text": "Alice says only: 'I need more evidence before deciding.'",
+        "source_id": "alice",
+        "actor_id": "alice",
+        "observer_ids": ["alice"],
+        "metadata": {}
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 1,
+        "question": "What is Alice's supported belief about whether the gate is open?",
+        "allowed_labels": ["OPEN", "CLOSED", "UNCERTAIN"],
+        "gold": "UNCERTAIN"
+      },
+      {
+        "after_event": 3,
+        "question": "What is Alice's supported belief about whether the gate is open?",
+        "allowed_labels": ["OPEN", "CLOSED", "UNCERTAIN"],
+        "gold": "UNCERTAIN"
+      }
+    ]
+  },
+  {
+    "id": "hidden_key_move",
+    "events": [
+      {
+        "event_id": "hkm1",
+        "valid_time": "2026-02-05T09:00:00+00:00",
+        "recorded_at": "2026-02-05T09:01:00+00:00",
+        "raw_text": "Alice puts the key in drawer A and says: 'The key is in drawer A.'",
+        "source_id": "alice",
+        "actor_id": "alice",
+        "observer_ids": ["alice"],
+        "metadata": {"scene_fact": true}
+      },
+      {
+        "event_id": "hkm2",
+        "valid_time": "2026-02-05T10:00:00+00:00",
+        "recorded_at": "2026-02-05T10:01:00+00:00",
+        "raw_text": "While Alice is absent, Bob moves the key from drawer A to drawer B. Alice does not observe the move.",
+        "source_id": "environment",
+        "actor_id": "bob",
+        "observer_ids": ["bob"],
+        "metadata": {"scene_fact": true}
+      },
+      {
+        "event_id": "hkm3",
+        "valid_time": "2026-02-05T10:10:00+00:00",
+        "recorded_at": "2026-02-05T10:11:00+00:00",
+        "raw_text": "Alice returns. Nobody tells her that the key was moved.",
+        "source_id": "environment",
+        "actor_id": "alice",
+        "observer_ids": ["alice"],
+        "metadata": {"scene_fact": true}
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 1,
+        "question": "Where does Alice believe the key is?",
+        "allowed_labels": ["DRAWER_A", "DRAWER_B", "UNCERTAIN"],
+        "gold": "DRAWER_A"
+      },
+      {
+        "after_event": 3,
+        "question": "Where does Alice believe the key is?",
+        "allowed_labels": ["DRAWER_A", "DRAWER_B", "UNCERTAIN"],
+        "gold": "DRAWER_A"
+      }
+    ]
+  },
+  {
+    "id": "later_claim_rejected",
+    "events": [
+      {
+        "event_id": "lcr1",
+        "valid_time": "2026-02-06T09:00:00+00:00",
+        "recorded_at": "2026-02-06T09:01:00+00:00",
+        "raw_text": "Alice says: 'I believe the document version is V1.'",
+        "source_id": "alice",
+        "actor_id": "alice",
+        "observer_ids": ["alice"],
+        "metadata": {}
+      },
+      {
+        "event_id": "lcr2",
+        "valid_time": "2026-02-06T10:00:00+00:00",
+        "recorded_at": "2026-02-06T10:01:00+00:00",
+        "raw_text": "Bob privately receives a message saying the document version is V2. Nothing establishes whether the message is correct.",
+        "source_id": "message",
+        "actor_id": "message",
+        "recipient_ids": ["bob"],
+        "metadata": {}
+      },
+      {
+        "event_id": "lcr3",
+        "valid_time": "2026-02-06T10:10:00+00:00",
+        "recorded_at": "2026-02-06T10:11:00+00:00",
+        "raw_text": "Bob tells Alice: 'The document is V2.' Alice replies: 'I do not trust that claim. I still believe it is V1.'",
+        "source_id": "bob",
+        "actor_id": "bob",
+        "recipient_ids": ["alice"],
+        "observer_ids": ["bob"],
+        "metadata": {}
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 1,
+        "question": "What document version does Alice currently believe?",
+        "allowed_labels": ["V1", "V2", "UNCERTAIN"],
+        "gold": "V1"
+      },
+      {
+        "after_event": 3,
+        "question": "What document version does Alice currently believe?",
+        "allowed_labels": ["V1", "V2", "UNCERTAIN"],
+        "gold": "V1"
+      }
+    ]
+  }
+]
