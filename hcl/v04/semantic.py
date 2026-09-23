@@ -75,7 +75,7 @@ Return JSON only with:
       "evidence_event_ids": ["..."],
       "depends_on_assertion_ids": [],
       "status": "ACTIVE|UNRESOLVED",
-      "support_level": null
+      "support_level": "DIRECT_SUPPORT|INDIRECT_SUPPORT|COUNTEREVIDENCE|INSUFFICIENT|null"
     }
   ]
 }
@@ -187,6 +187,21 @@ def patch_from_mapping(
     return patch
 
 
+SEMANTIC_REPAIR_SYSTEM = """Repair a proposed HCL v0.4 SemanticPatch so that it
+matches the declared JSON schema and enum values exactly.
+
+Do not add new facts merely to make the output valid.
+Do not change SOURCE_ASSERTION into SCENE_FACT.
+Do not change INFORMATION_EXPOSURE into BELIEF_ESTIMATE without independent
+acceptance/rejection/behavior evidence.
+
+Allowed support_level values are exactly:
+DIRECT_SUPPORT, INDIRECT_SUPPORT, COUNTEREVIDENCE, INSUFFICIENT, or null.
+
+Return the corrected JSON object only.
+"""
+
+
 def propose_patch(
     event: EventRecord,
     backend: SemanticBackend,
@@ -204,23 +219,57 @@ def propose_patch(
         "raw_text": event.raw_text,
         "metadata": event.metadata,
     }
+    messages = [
+        {"role": "system", "content": SEMANTIC_SYSTEM},
+        {
+            "role": "user",
+            "content": json.dumps(user_payload, ensure_ascii=False, sort_keys=True),
+        },
+    ]
     raw = backend.complete_json(
-        [
-            {"role": "system", "content": SEMANTIC_SYSTEM},
-            {
-                "role": "user",
-                "content": json.dumps(user_payload, ensure_ascii=False, sort_keys=True),
-            },
-        ],
+        messages,
         max_tokens=max_tokens,
         temperature=0.0,
     )
-    try:
-        payload = json.loads(raw)
-    except json.JSONDecodeError as exc:
-        raise SchemaValidationError("semantic backend returned invalid JSON") from exc
-    return patch_from_mapping(
-        event,
-        payload,
-        semantic_version=semantic_version,
-    )
+
+    last_error: Exception | None = None
+    for attempt in range(2):
+        try:
+            payload = json.loads(raw)
+            return patch_from_mapping(
+                event,
+                payload,
+                semantic_version=semantic_version,
+            )
+        except (json.JSONDecodeError, SchemaValidationError) as exc:
+            last_error = exc
+            if attempt == 1:
+                break
+            raw = backend.complete_json(
+                [
+                    {"role": "system", "content": SEMANTIC_REPAIR_SYSTEM},
+                    {
+                        "role": "user",
+                        "content": json.dumps(
+                            {
+                                "event": user_payload,
+                                "invalid_output": raw,
+                                "validation_error": str(exc),
+                            },
+                            ensure_ascii=False,
+                            sort_keys=True,
+                        ),
+                    },
+                ],
+                max_tokens=max_tokens,
+                temperature=0.0,
+            )
+
+    if isinstance(last_error, json.JSONDecodeError):
+        raise SchemaValidationError(
+            "semantic backend returned invalid JSON after one repair"
+        ) from last_error
+    if last_error is not None:
+        raise last_error
+    raise SchemaValidationError("semantic patch proposal failed")
+
