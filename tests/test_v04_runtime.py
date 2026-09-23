@@ -161,13 +161,40 @@ class V04RuntimeTests(unittest.TestCase):
             alice = runtime.build_view("alice", None, None, "q")
             bob = runtime.build_view("bob", None, None, "q")
             self.assertEqual(alice.relevant_assertions, ())
-            bob_ids = {x["assertion_id"] for x in bob.relevant_assertions}
-            self.assertEqual(bob_ids, {"scene", "bob_exp"})
-            system_ids = {
-                x["assertion_id"]
-                for x in runtime.build_view(None, None, None, "q").relevant_assertions
-            }
-            self.assertEqual(system_ids, {"scene", "bob_exp"})
+            bob_rows = bob.relevant_assertions
+            self.assertTrue(
+                any(
+                    x["assertion_type"] == "SCENE_FACT"
+                    for x in bob_rows
+                )
+            )
+            self.assertTrue(
+                any(
+                    x["assertion_type"] == "INFORMATION_EXPOSURE"
+                    and x["subject_agent_id"] == "bob"
+                    for x in bob_rows
+                )
+            )
+            system_rows = runtime.build_view(
+                None, None, None, "q"
+            ).relevant_assertions
+            self.assertTrue(
+                any(x["assertion_type"] == "SCENE_FACT" for x in system_rows)
+            )
+            self.assertTrue(
+                any(
+                    x["assertion_type"] == "INFORMATION_EXPOSURE"
+                    and x["subject_agent_id"] == "bob"
+                    for x in system_rows
+                )
+            )
+            self.assertFalse(
+                any(
+                    x["assertion_type"] == "INFORMATION_EXPOSURE"
+                    and x["subject_agent_id"] == "alice"
+                    for x in system_rows
+                )
+            )
         finally:
             runtime.store.close()
 
@@ -303,6 +330,77 @@ class V04RuntimeTests(unittest.TestCase):
                 patch.assertions[0].system_record_time,
                 recorded_at,
             )
+        finally:
+            runtime.store.close()
+
+    def test_model_ids_are_aliases_not_storage_identity(self):
+        runtime = HCLV04Runtime(CognitionStore())
+        try:
+            e1 = EventRecord(
+                event_id="e1",
+                valid_time=T0,
+                recorded_at="2026-01-01T10:01:00+00:00",
+                raw_text="Alice says P.",
+                source_id="alice",
+                actor_id="alice",
+                observer_ids=("alice",),
+            )
+            e2 = EventRecord(
+                event_id="e2",
+                valid_time="2026-01-01T11:00:00+00:00",
+                recorded_at="2026-01-01T11:01:00+00:00",
+                raw_text="Alice repeats P.",
+                source_id="alice",
+                actor_id="alice",
+                observer_ids=("alice",),
+            )
+            runtime.append_event(e1)
+            runtime.append_event(e2)
+
+            def payload(valid_time):
+                return {
+                    "propositions": [
+                        {
+                            "proposition_id": "model_prop",
+                            "canonical_text": "P",
+                            "source_event_ids": [],
+                        }
+                    ],
+                    "assertions": [
+                        {
+                            "assertion_id": "same",
+                            "assertion_type": "BELIEF_ESTIMATE",
+                            "subject_agent_id": "alice",
+                            "proposition_id": "model_prop",
+                            "valid_time": valid_time,
+                            "evidence_event_ids": [],
+                            "depends_on_assertion_ids": [],
+                            "status": "ACTIVE",
+                            "support_level": "DIRECT_SUPPORT",
+                            "belief_stance": "AFFIRM",
+                        }
+                    ],
+                }
+
+            b1 = FakeBackend(json_outputs=[json.dumps(payload(T0))])
+            b2 = FakeBackend(
+                json_outputs=[
+                    json.dumps(payload("2026-01-01T11:00:00+00:00"))
+                ]
+            )
+            p1 = runtime.propose_patch("e1", b1)
+            p2 = runtime.propose_patch("e2", b2)
+
+            self.assertNotEqual(
+                p1.assertions[0].assertion_id,
+                p2.assertions[0].assertion_id,
+            )
+            self.assertEqual(
+                p1.propositions[0].proposition_id,
+                p2.propositions[0].proposition_id,
+            )
+            self.assertNotEqual(p1.assertions[0].assertion_id, "same")
+            self.assertNotEqual(p1.propositions[0].proposition_id, "model_prop")
         finally:
             runtime.store.close()
 
