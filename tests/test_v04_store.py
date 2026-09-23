@@ -4,6 +4,7 @@ import unittest
 
 from hcl.v04 import (
     AssertionType,
+    BeliefStance,
     CognitiveAssertion,
     CognitionStore,
     EventRecord,
@@ -75,6 +76,7 @@ class V04StoreTests(unittest.TestCase):
                 CognitiveAssertion(
                     assertion_id="a_bad",
                     assertion_type=AssertionType.BELIEF_ESTIMATE,
+                    belief_stance=BeliefStance.AFFIRM,
                     subject_agent_id="alice",
                     proposition_id="missing",
                     valid_time=T0,
