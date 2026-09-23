@@ -1,0 +1,35 @@
+name: HCL v0.4 Minimal Slice
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "hcl/v04/**"
+      - "tests/test_v04_*.py"
+      - "docs/HCL_V04_CAPABILITY_PLAN_V1_0.md"
+      - "docs/HCL_V04_MINIMAL_IMPLEMENTATION_CONTRACT_V1_0.md"
+      - ".github/workflows/hcl-v04-minimal-slice.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  minimal-slice:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile v0.4
+        run: python -m compileall -q hcl/v04 tests/test_v04_*.py
+      - name: Run v0.4 contract tests
+        run: |
+          python -m unittest -v \
+            tests.test_v04_store \
+            tests.test_v04_perspective \
+            tests.test_v04_recovery \
+            tests.test_v04_runtime
