@@ -122,6 +122,16 @@ class RebuildReceipt:
 
 
 @dataclass(frozen=True)
+class IngestResult:
+    event_receipt: EventReceipt
+    state_receipt: StateReceipt
+    committed_patch: SemanticPatch
+    rejected_patch: SemanticPatch | None = None
+    semantic_repair_count: int = 0
+    repair_reason: str | None = None
+
+
+@dataclass(frozen=True)
 class QueryContext:
     viewer: str | None
     event_time: str | None
