@@ -259,6 +259,53 @@ class V04RuntimeTests(unittest.TestCase):
         finally:
             runtime.store.close()
 
+    def test_semantic_record_time_defaults_to_event_record_time(self):
+        runtime = HCLV04Runtime(CognitionStore())
+        try:
+            recorded_at = "2026-01-01T10:01:00+00:00"
+            runtime.append_event(
+                EventRecord(
+                    event_id="e1",
+                    valid_time=T0,
+                    recorded_at=recorded_at,
+                    raw_text="Alice says she believes P.",
+                    source_id="alice",
+                    actor_id="alice",
+                    observer_ids=("alice",),
+                )
+            )
+            payload = {
+                "propositions": [
+                    {
+                        "proposition_id": "p1",
+                        "canonical_text": "P",
+                        "source_event_ids": ["e1"],
+                    }
+                ],
+                "assertions": [
+                    {
+                        "assertion_id": "b1",
+                        "assertion_type": "BELIEF_ESTIMATE",
+                        "subject_agent_id": "alice",
+                        "proposition_id": "p1",
+                        "valid_time": T0,
+                        "evidence_event_ids": ["e1"],
+                        "depends_on_assertion_ids": [],
+                        "status": "ACTIVE",
+                        "support_level": "DIRECT_SUPPORT",
+                        "belief_stance": "AFFIRM",
+                    }
+                ],
+            }
+            backend = FakeBackend(json_outputs=[json.dumps(payload)])
+            patch = runtime.propose_patch("e1", backend)
+            self.assertEqual(
+                patch.assertions[0].system_record_time,
+                recorded_at,
+            )
+        finally:
+            runtime.store.close()
+
     def test_pass_with_violations_is_not_accepted(self):
         runtime = HCLV04Runtime(CognitionStore())
         try:
