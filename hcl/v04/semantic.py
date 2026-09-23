@@ -10,6 +10,7 @@ from typing import Any, Protocol
 from .model import (
     AssertionStatus,
     AssertionType,
+    BeliefStance,
     CognitiveAssertion,
     EventRecord,
     Proposition,
@@ -40,7 +41,11 @@ Keep these record types distinct:
 - SCENE_FACT: explicit task/environment fact, not automatically known by agents.
 - SOURCE_ASSERTION: a source said proposition P; does not establish P as true.
 - INFORMATION_EXPOSURE: an agent observed/received content; does not establish belief.
-- BELIEF_ESTIMATE: evidence supports that an agent believes P; remains revisable.
+- BELIEF_ESTIMATE: evidence supports an agent stance toward the object-level proposition P.
+  Use belief_stance=AFFIRM when the agent is supported as believing P.
+  Use belief_stance=DENY when the agent is supported as rejecting/denying P.
+  BELIEF_ESTIMATE must point to the object-level proposition P itself; do not
+  create a meta-proposition such as "Alice believes P".
 - STATED_GOAL_INTENTION: an explicitly stated goal/plan; not the only hidden motive.
 - LATENT_HYPOTHESIS: a candidate hidden interpretation.
 - OTHER_UNKNOWN: current candidates may be incomplete.
@@ -76,7 +81,8 @@ Return JSON only with:
       "evidence_event_ids": ["..."],
       "depends_on_assertion_ids": [],
       "status": "ACTIVE|UNRESOLVED",
-      "support_level": "DIRECT_SUPPORT|INDIRECT_SUPPORT|COUNTEREVIDENCE|INSUFFICIENT|null"
+      "support_level": "DIRECT_SUPPORT|INDIRECT_SUPPORT|COUNTEREVIDENCE|INSUFFICIENT|null",
+      "belief_stance": "AFFIRM|DENY|null"
     }
   ]
 }
@@ -146,6 +152,16 @@ def patch_from_mapping(
                     f"invalid support_level: {support_value!r}"
                 ) from exc
 
+        stance_value = raw.get("belief_stance")
+        belief_stance = None
+        if stance_value is not None:
+            try:
+                belief_stance = BeliefStance(stance_value)
+            except Exception as exc:
+                raise SchemaValidationError(
+                    f"invalid belief_stance: {stance_value!r}"
+                ) from exc
+
         seed = json.dumps(raw, sort_keys=True, ensure_ascii=False)
         assertion_id = str(raw.get("assertion_id", "")).strip()
         if not assertion_id:
@@ -168,6 +184,7 @@ def patch_from_mapping(
                 ),
                 status=status,
                 support_level=support,
+                belief_stance=belief_stance,
                 semantic_version=semantic_version,
             )
         )
@@ -198,6 +215,11 @@ acceptance/rejection/behavior evidence.
 
 Allowed support_level values are exactly:
 DIRECT_SUPPORT, INDIRECT_SUPPORT, COUNTEREVIDENCE, INSUFFICIENT, or null.
+
+BELIEF_ESTIMATE requires belief_stance AFFIRM or DENY.
+Do not encode rejection as a positive belief. If Alice says "I think P is wrong",
+use belief_stance=DENY for the object-level proposition P, or represent her
+affirmed alternative proposition separately.
 
 Return the corrected JSON object only.
 """
@@ -286,7 +308,8 @@ Hard rules:
 - INFORMATION_EXPOSURE requires an actual observation/recipient/actor/public
   evidence path for that subject. A sentence saying an agent did NOT receive
   information is not evidence that the agent received it.
-- BELIEF_ESTIMATE represents support for the estimate that an agent believes P.
+- BELIEF_ESTIMATE represents an evidence-supported stance toward object-level P.
+  Use belief_stance=AFFIRM or DENY. Do not encode rejection as AFFIRM.
   Do not encode counterevidence as BELIEF_ESTIMATE with COUNTEREVIDENCE.
 - SOURCE_ASSERTION is not SCENE_FACT unless the event contract establishes world
   truth.
@@ -306,6 +329,9 @@ def patch_to_mapping(patch: SemanticPatch) -> dict[str, Any]:
         item["status"] = assertion.status.value
         item["support_level"] = (
             assertion.support_level.value if assertion.support_level else None
+        )
+        item["belief_stance"] = (
+            assertion.belief_stance.value if assertion.belief_stance else None
         )
         assertions.append(item)
     return {
