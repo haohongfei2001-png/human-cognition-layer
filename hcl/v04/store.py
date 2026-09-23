@@ -12,6 +12,7 @@ from typing import Iterable
 from .model import (
     AssertionStatus,
     AssertionType,
+    BeliefStance,
     CognitiveAssertion,
     EventReceipt,
     EventRecord,
@@ -113,6 +114,7 @@ class CognitionStore:
                 depends_on_assertion_ids TEXT NOT NULL,
                 status TEXT NOT NULL,
                 support_level TEXT,
+                belief_stance TEXT,
                 semantic_version TEXT NOT NULL
             );
 
@@ -142,6 +144,16 @@ class CognitionStore:
             );
             """
         )
+        assertion_columns = {
+            row["name"]
+            for row in self.conn.execute("PRAGMA table_info(assertions)").fetchall()
+        }
+        if "belief_stance" not in assertion_columns:
+            with self.conn:
+                self.conn.execute(
+                    "ALTER TABLE assertions ADD COLUMN belief_stance TEXT"
+                )
+
         with self.conn:
             self.conn.execute(
                 "INSERT OR IGNORE INTO meta(key, value) VALUES('state_version', '0')"
@@ -345,6 +357,9 @@ class CognitionStore:
         payload["support_level"] = (
             assertion.support_level.value if assertion.support_level else None
         )
+        payload["belief_stance"] = (
+            assertion.belief_stance.value if assertion.belief_stance else None
+        )
         return payload
 
     def _patch_payload(self, patch: SemanticPatch) -> dict:
@@ -391,6 +406,11 @@ class CognitionStore:
                     ),
                     status=AssertionStatus(a.get("status", "ACTIVE")),
                     support_level=SupportLevel(support) if support else None,
+                    belief_stance=(
+                        BeliefStance(a["belief_stance"])
+                        if a.get("belief_stance")
+                        else None
+                    ),
                     semantic_version=a.get(
                         "semantic_version", payload["semantic_version"]
                     ),
@@ -475,8 +495,8 @@ class CognitionStore:
                         proposition_id, hypothesis_text, valid_time,
                         system_record_time, evidence_event_ids,
                         depends_on_assertion_ids, status, support_level,
-                        semantic_version
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        belief_stance, semantic_version
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
                         assertion.assertion_id,
@@ -492,6 +512,11 @@ class CognitionStore:
                         (
                             assertion.support_level.value
                             if assertion.support_level
+                            else None
+                        ),
+                        (
+                            assertion.belief_stance.value
+                            if assertion.belief_stance
                             else None
                         ),
                         assertion.semantic_version,
@@ -605,6 +630,7 @@ class CognitionStore:
             ),
             "status": row["status"],
             "support_level": row["support_level"],
+            "belief_stance": row["belief_stance"],
             "semantic_version": row["semantic_version"],
         }
 
@@ -839,7 +865,7 @@ class CognitionStore:
                 ).fetchall():
                     self.conn.execute(
                         """
-                        INSERT INTO assertions VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        INSERT INTO assertions VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                         """,
                         tuple(row),
                     )
