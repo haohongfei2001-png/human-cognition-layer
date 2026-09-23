@@ -1,0 +1,4 @@
+HCL v0.4 evidence-scoped revision v0.1 frozen internal C/D/E/F comparison.
+Fixture SHA-256: 7f08cbe1f5dd8207f505f37a9354440c28450d2462f7b0177cf184b10a4aa6ab
+Base implementation: 9b25ecf3e13d44073eb96cb505586bf61585c75a
+Single existing model; internal synthetic scenarios only; bounded calls; no external benchmark or publication.
