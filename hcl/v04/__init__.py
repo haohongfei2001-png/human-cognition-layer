@@ -3,6 +3,7 @@
 from .model import (
     AssertionStatus,
     AssertionType,
+    BeliefStance,
     CognitiveAssertion,
     EventReceipt,
     EventRecord,
@@ -22,6 +23,7 @@ from .store import CognitionStore
 __all__ = [
     "AssertionStatus",
     "AssertionType",
+    "BeliefStance",
     "CognitiveAssertion",
     "CognitionStore",
     "EventReceipt",
