@@ -1,0 +1,44 @@
+name: HCL v0.4 Perspective-Safe Action v0.1 Diagnostic
+
+on:
+  push:
+    branches:
+      - manager/hcl-v04-perspective-action-20260924
+    paths:
+      - ".github/HCL_V04_PERSPECTIVE_ACTION_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hcl-v04-perspective-safe-action-v01
+  cancel-in-progress: false
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install existing provider client
+        run: python -m pip install openai
+      - name: Verify frozen scope and deterministic gates
+        run: |
+          echo 'f76844dac359059e0ffd14f69f4ef8d0f18a84878f915640b5f460b8cc3cd3b8  eval/v04/perspective_safe_action_v01.json' | sha256sum -c -
+          python scripts/run_v04_perspective_safe_action_v01.py --validate-only
+          python -m unittest -v tests.test_v04_perspective_safe_action_v01 tests.test_v04_perspective tests.test_v04_hypotheses tests.test_v04_probe_policy
+      - name: Run one bounded existing-model C/D/E comparison
+        run: python scripts/run_v04_perspective_safe_action_v01.py
+      - name: Preserve raw synthetic evidence for semantic audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v04-perspective-safe-action-v01-${{ github.run_id }}
+          path: artifacts/hcl-v04-perspective-safe-action-v01/
+          if-no-files-found: warn
+          retention-days: 30
