@@ -1,0 +1,798 @@
+[
+  {
+    "id": "teammate_delay",
+    "hidden_target": "OVERLOADED",
+    "target": {
+      "target_id": "team_delay",
+      "subject_agent_id": "alex",
+      "target_kind": "INTENTION_CAUSE",
+      "question": "Why is Alex delaying the assigned implementation?",
+      "candidates": [
+        [
+          "OVERLOADED",
+          "Alex intends to do the task but is overloaded by competing urgent work."
+        ],
+        [
+          "AVOIDING",
+          "Alex is intentionally avoiding the assigned task."
+        ],
+        [
+          "BLOCKED",
+          "Alex wants to proceed but is blocked by missing information or dependency."
+        ]
+      ]
+    },
+    "events": [
+      {
+        "event_id": "td1",
+        "valid_time": "2026-05-01T09:00:00+00:00",
+        "recorded_at": "2026-05-01T09:01:00+00:00",
+        "raw_text": "Alex misses the implementation checkpoint but reports handling three urgent production incidents.",
+        "source_id": "environment",
+        "actor_id": "alex",
+        "observer_ids": [
+          "manager"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "td2",
+        "valid_time": "2026-05-01T10:00:00+00:00",
+        "recorded_at": "2026-05-01T10:01:00+00:00",
+        "raw_text": "Alex says: 'I have everything I need for the implementation; I just need an uninterrupted block of time.'",
+        "source_id": "alex",
+        "actor_id": "alex",
+        "observer_ids": [
+          "manager"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "td3",
+        "valid_time": "2026-05-01T11:00:00+00:00",
+        "recorded_at": "2026-05-01T11:01:00+00:00",
+        "raw_text": "A one-hour free block opens in Alex's calendar after the urgent incidents are handed off.",
+        "source_id": "environment",
+        "actor_id": "calendar",
+        "observer_ids": [
+          "alex",
+          "manager"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "td4",
+        "valid_time": "2026-05-01T11:05:00+00:00",
+        "recorded_at": "2026-05-01T11:06:00+00:00",
+        "raw_text": "Alex immediately opens the implementation branch and starts coding.",
+        "source_id": "environment",
+        "actor_id": "alex",
+        "observer_ids": [
+          "manager"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "td5",
+        "valid_time": "2026-05-01T12:00:00+00:00",
+        "recorded_at": "2026-05-01T12:01:00+00:00",
+        "raw_text": "Another urgent incident interrupts Alex after twenty minutes.",
+        "source_id": "environment",
+        "actor_id": "incident",
+        "observer_ids": [
+          "alex",
+          "manager"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "td6",
+        "valid_time": "2026-05-01T13:00:00+00:00",
+        "recorded_at": "2026-05-01T13:01:00+00:00",
+        "raw_text": "The incident is resolved and Alex again has a free block. No new dependency is introduced.",
+        "source_id": "environment",
+        "actor_id": "incident",
+        "observer_ids": [
+          "alex",
+          "manager"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "td7",
+        "valid_time": "2026-05-01T13:05:00+00:00",
+        "recorded_at": "2026-05-01T13:06:00+00:00",
+        "raw_text": "Alex returns to the implementation branch and resumes coding.",
+        "source_id": "environment",
+        "actor_id": "alex",
+        "observer_ids": [
+          "manager"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 3,
+        "question": "What will Alex most likely do next?",
+        "allowed_labels": [
+          "START_TASK",
+          "CONTINUE_AVOIDING",
+          "ASK_FOR_BLOCKER_HELP"
+        ],
+        "gold_behavior": "START_TASK"
+      },
+      {
+        "after_event": 6,
+        "question": "What will Alex most likely do next?",
+        "allowed_labels": [
+          "START_TASK",
+          "CONTINUE_AVOIDING",
+          "ASK_FOR_BLOCKER_HELP"
+        ],
+        "gold_behavior": "START_TASK"
+      }
+    ]
+  },
+  {
+    "id": "buyer_negotiation",
+    "hidden_target": "BUDGET_LIMIT",
+    "target": {
+      "target_id": "buyer_goal",
+      "subject_agent_id": "buyer",
+      "target_kind": "MOTIVE",
+      "question": "What best explains the buyer's low offers?",
+      "candidates": [
+        [
+          "BUDGET_LIMIT",
+          "The buyer genuinely has a hard spending limit."
+        ],
+        [
+          "ANCHORING",
+          "The buyer can pay more but is strategically anchoring low."
+        ],
+        [
+          "LOW_INTEREST",
+          "The buyer has weak interest and will buy only at a very low price."
+        ]
+      ]
+    },
+    "events": [
+      {
+        "event_id": "bn1",
+        "valid_time": "2026-05-02T09:00:00+00:00",
+        "recorded_at": "2026-05-02T09:01:00+00:00",
+        "raw_text": "The buyer says the product is exactly what they need but states: 'My total budget cannot exceed 100.'",
+        "source_id": "buyer",
+        "actor_id": "buyer",
+        "observer_ids": [
+          "seller"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "bn2",
+        "valid_time": "2026-05-02T09:10:00+00:00",
+        "recorded_at": "2026-05-02T09:11:00+00:00",
+        "raw_text": "The seller offers 115. The buyer declines and offers 95 while continuing to ask detailed questions about delivery.",
+        "source_id": "environment",
+        "actor_id": "seller",
+        "observer_ids": [
+          "buyer",
+          "seller"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "bn3",
+        "valid_time": "2026-05-02T09:20:00+00:00",
+        "recorded_at": "2026-05-02T09:21:00+00:00",
+        "raw_text": "The seller offers 105 with no other change.",
+        "source_id": "environment",
+        "actor_id": "seller",
+        "observer_ids": [
+          "buyer",
+          "seller"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "bn4",
+        "valid_time": "2026-05-02T09:21:00+00:00",
+        "recorded_at": "2026-05-02T09:22:00+00:00",
+        "raw_text": "The buyer responds: 'I still cannot go over 100. I can do 98.'",
+        "source_id": "buyer",
+        "actor_id": "buyer",
+        "observer_ids": [
+          "seller"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "bn5",
+        "valid_time": "2026-05-02T09:30:00+00:00",
+        "recorded_at": "2026-05-02T09:31:00+00:00",
+        "raw_text": "The seller offers 99 with the same delivery terms.",
+        "source_id": "environment",
+        "actor_id": "seller",
+        "observer_ids": [
+          "buyer",
+          "seller"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "bn6",
+        "valid_time": "2026-05-02T09:31:00+00:00",
+        "recorded_at": "2026-05-02T09:32:00+00:00",
+        "raw_text": "The buyer immediately accepts the 99 offer.",
+        "source_id": "environment",
+        "actor_id": "buyer",
+        "observer_ids": [
+          "seller"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 3,
+        "question": "How will the buyer most likely respond to the 105 offer?",
+        "allowed_labels": [
+          "ACCEPT",
+          "COUNTER_LOWER",
+          "WALK_AWAY"
+        ],
+        "gold_behavior": "COUNTER_LOWER"
+      },
+      {
+        "after_event": 5,
+        "question": "How will the buyer most likely respond to the 99 offer?",
+        "allowed_labels": [
+          "ACCEPT",
+          "COUNTER_LOWER",
+          "WALK_AWAY"
+        ],
+        "gold_behavior": "ACCEPT"
+      }
+    ]
+  },
+  {
+    "id": "client_silence",
+    "hidden_target": "CONFUSED",
+    "target": {
+      "target_id": "client_silence",
+      "subject_agent_id": "client",
+      "target_kind": "COGNITIVE_STATE",
+      "question": "What best explains the client's silence?",
+      "candidates": [
+        [
+          "CONFUSED",
+          "The client is interested but does not yet understand the proposal."
+        ],
+        [
+          "DISAGREES",
+          "The client understands the proposal but fundamentally disagrees."
+        ],
+        [
+          "BUSY",
+          "The client is mainly silent because other work is consuming attention."
+        ]
+      ]
+    },
+    "events": [
+      {
+        "event_id": "cl1",
+        "valid_time": "2026-05-03T09:00:00+00:00",
+        "recorded_at": "2026-05-03T09:01:00+00:00",
+        "raw_text": "The client reads the proposal and asks what two technical terms mean.",
+        "source_id": "client",
+        "actor_id": "client",
+        "observer_ids": [
+          "consultant"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "cl2",
+        "valid_time": "2026-05-03T09:10:00+00:00",
+        "recorded_at": "2026-05-03T09:11:00+00:00",
+        "raw_text": "The consultant answers using the same technical jargon. The client becomes quiet and does not approve or reject the proposal.",
+        "source_id": "environment",
+        "actor_id": "consultant",
+        "observer_ids": [
+          "client",
+          "consultant"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "cl3",
+        "valid_time": "2026-05-03T09:20:00+00:00",
+        "recorded_at": "2026-05-03T09:21:00+00:00",
+        "raw_text": "The consultant prepares a plain-language explanation with a concrete example.",
+        "source_id": "environment",
+        "actor_id": "consultant",
+        "observer_ids": [
+          "consultant"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "cl4",
+        "valid_time": "2026-05-03T09:25:00+00:00",
+        "recorded_at": "2026-05-03T09:26:00+00:00",
+        "raw_text": "After hearing the plain-language explanation, the client asks two detailed follow-up questions and says the proposal now makes more sense.",
+        "source_id": "client",
+        "actor_id": "client",
+        "observer_ids": [
+          "consultant"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "cl5",
+        "valid_time": "2026-05-03T09:35:00+00:00",
+        "recorded_at": "2026-05-03T09:36:00+00:00",
+        "raw_text": "The consultant answers both follow-up questions directly.",
+        "source_id": "consultant",
+        "actor_id": "consultant",
+        "observer_ids": [
+          "client"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "cl6",
+        "valid_time": "2026-05-03T09:40:00+00:00",
+        "recorded_at": "2026-05-03T09:41:00+00:00",
+        "raw_text": "The client says: 'That resolves my confusion. I am ready to approve this approach.'",
+        "source_id": "client",
+        "actor_id": "client",
+        "observer_ids": [
+          "consultant"
+        ],
+        "metadata": {}
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 3,
+        "question": "What will the client most likely do after the plain-language explanation?",
+        "allowed_labels": [
+          "ENGAGE_WITH_QUESTIONS",
+          "REJECT_PROPOSAL",
+          "IGNORE_AND_SWITCH_TASK"
+        ],
+        "gold_behavior": "ENGAGE_WITH_QUESTIONS"
+      },
+      {
+        "after_event": 5,
+        "question": "What will the client most likely do after the follow-up questions are answered?",
+        "allowed_labels": [
+          "APPROVE",
+          "REJECT_PROPOSAL",
+          "DEFER_WITHOUT_REASON"
+        ],
+        "gold_behavior": "APPROVE"
+      }
+    ]
+  },
+  {
+    "id": "reviewer_delay",
+    "hidden_target": "NEEDS_APPROVAL",
+    "target": {
+      "target_id": "review_delay",
+      "subject_agent_id": "reviewer",
+      "target_kind": "MOTIVE",
+      "question": "What best explains the reviewer's delay?",
+      "candidates": [
+        [
+          "NEEDS_APPROVAL",
+          "The reviewer is waiting for required manager approval."
+        ],
+        [
+          "QUALITY_CONCERN",
+          "The reviewer has unresolved quality concerns about the change."
+        ],
+        [
+          "LOW_PRIORITY",
+          "The reviewer considers the review low priority and is postponing it."
+        ]
+      ]
+    },
+    "events": [
+      {
+        "event_id": "rv1",
+        "valid_time": "2026-05-04T09:00:00+00:00",
+        "recorded_at": "2026-05-04T09:01:00+00:00",
+        "raw_text": "The reviewer says: 'The change looks technically fine, but policy requires my manager's approval before I can approve it.'",
+        "source_id": "reviewer",
+        "actor_id": "reviewer",
+        "observer_ids": [
+          "author"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "rv2",
+        "valid_time": "2026-05-04T09:20:00+00:00",
+        "recorded_at": "2026-05-04T09:21:00+00:00",
+        "raw_text": "The author asks whether any code changes are needed. The reviewer replies: 'No code changes from me right now; I am still waiting on approval.'",
+        "source_id": "reviewer",
+        "actor_id": "reviewer",
+        "observer_ids": [
+          "author"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "rv3",
+        "valid_time": "2026-05-04T10:00:00+00:00",
+        "recorded_at": "2026-05-04T10:01:00+00:00",
+        "raw_text": "The manager has not yet responded.",
+        "source_id": "environment",
+        "actor_id": "manager",
+        "observer_ids": [
+          "reviewer",
+          "author"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "rv4",
+        "valid_time": "2026-05-04T10:30:00+00:00",
+        "recorded_at": "2026-05-04T10:31:00+00:00",
+        "raw_text": "The reviewer leaves the review pending and repeats that approval is the remaining dependency.",
+        "source_id": "reviewer",
+        "actor_id": "reviewer",
+        "observer_ids": [
+          "author"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "rv5",
+        "valid_time": "2026-05-04T11:00:00+00:00",
+        "recorded_at": "2026-05-04T11:01:00+00:00",
+        "raw_text": "The manager sends the reviewer the required approval.",
+        "source_id": "manager",
+        "actor_id": "manager",
+        "recipient_ids": [
+          "reviewer"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "rv6",
+        "valid_time": "2026-05-04T11:05:00+00:00",
+        "recorded_at": "2026-05-04T11:06:00+00:00",
+        "raw_text": "The reviewer approves the change without requesting any modification.",
+        "source_id": "environment",
+        "actor_id": "reviewer",
+        "observer_ids": [
+          "author"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 3,
+        "question": "What will the reviewer most likely do before manager approval arrives?",
+        "allowed_labels": [
+          "KEEP_PENDING",
+          "REQUEST_CODE_CHANGES",
+          "APPROVE_NOW"
+        ],
+        "gold_behavior": "KEEP_PENDING"
+      },
+      {
+        "after_event": 5,
+        "question": "What will the reviewer most likely do after receiving manager approval?",
+        "allowed_labels": [
+          "APPROVE",
+          "REQUEST_CODE_CHANGES",
+          "IGNORE_REVIEW"
+        ],
+        "gold_behavior": "APPROVE"
+      }
+    ]
+  },
+  {
+    "id": "route_choice",
+    "hidden_target": "SAFETY_PRIORITY",
+    "target": {
+      "target_id": "route_choice",
+      "subject_agent_id": "driver",
+      "target_kind": "PREFERENCE_GOAL",
+      "question": "What priority best explains the driver's route choices?",
+      "candidates": [
+        [
+          "SAFETY_PRIORITY",
+          "The driver prioritizes safety over speed."
+        ],
+        [
+          "TIME_PRIORITY",
+          "The driver prioritizes the fastest route even when risk is higher."
+        ],
+        [
+          "FUEL_CONSTRAINT",
+          "The driver primarily chooses routes to minimize fuel use."
+        ]
+      ]
+    },
+    "events": [
+      {
+        "event_id": "rc1",
+        "valid_time": "2026-05-05T07:00:00+00:00",
+        "recorded_at": "2026-05-05T07:01:00+00:00",
+        "raw_text": "The driver chooses a route ten minutes slower because the faster road has an accident warning.",
+        "source_id": "environment",
+        "actor_id": "driver",
+        "observer_ids": [
+          "dispatcher"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "rc2",
+        "valid_time": "2026-05-05T07:10:00+00:00",
+        "recorded_at": "2026-05-05T07:11:00+00:00",
+        "raw_text": "The driver says: 'I would rather arrive later than take a route with a serious safety warning.'",
+        "source_id": "driver",
+        "actor_id": "driver",
+        "observer_ids": [
+          "dispatcher"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "rc3",
+        "valid_time": "2026-05-05T07:20:00+00:00",
+        "recorded_at": "2026-05-05T07:21:00+00:00",
+        "raw_text": "A storm alert is issued for the fastest route; a slower route remains clear.",
+        "source_id": "weather",
+        "actor_id": "weather",
+        "observer_ids": [
+          "driver",
+          "dispatcher"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "rc4",
+        "valid_time": "2026-05-05T07:21:00+00:00",
+        "recorded_at": "2026-05-05T07:22:00+00:00",
+        "raw_text": "The driver takes the slower clear route.",
+        "source_id": "environment",
+        "actor_id": "driver",
+        "observer_ids": [
+          "dispatcher"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "rc5",
+        "valid_time": "2026-05-05T08:00:00+00:00",
+        "recorded_at": "2026-05-05T08:01:00+00:00",
+        "raw_text": "Later, the fastest route reopens but carries a fresh collision warning. A slightly slower route has no warning.",
+        "source_id": "traffic",
+        "actor_id": "traffic",
+        "observer_ids": [
+          "driver",
+          "dispatcher"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "rc6",
+        "valid_time": "2026-05-05T08:01:00+00:00",
+        "recorded_at": "2026-05-05T08:02:00+00:00",
+        "raw_text": "The driver again chooses the slower route without a safety warning.",
+        "source_id": "environment",
+        "actor_id": "driver",
+        "observer_ids": [
+          "dispatcher"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 3,
+        "question": "Which route will the driver most likely choose next?",
+        "allowed_labels": [
+          "SAFER_ROUTE",
+          "FASTEST_ROUTE",
+          "LOWEST_FUEL_ROUTE"
+        ],
+        "gold_behavior": "SAFER_ROUTE"
+      },
+      {
+        "after_event": 5,
+        "question": "Which route will the driver most likely choose next?",
+        "allowed_labels": [
+          "SAFER_ROUTE",
+          "FASTEST_ROUTE",
+          "LOWEST_FUEL_ROUTE"
+        ],
+        "gold_behavior": "SAFER_ROUTE"
+      }
+    ]
+  },
+  {
+    "id": "meeting_reschedule",
+    "hidden_target": "CALENDAR_CONFLICT",
+    "target": {
+      "target_id": "meeting_reschedule",
+      "subject_agent_id": "riley",
+      "target_kind": "MOTIVE",
+      "question": "What best explains Riley's repeated refusal of the proposed meeting?",
+      "candidates": [
+        [
+          "CALENDAR_CONFLICT",
+          "Riley wants the meeting but the proposed time conflicts with another commitment."
+        ],
+        [
+          "AVOIDING_PERSON",
+          "Riley is trying to avoid meeting the other participant."
+        ],
+        [
+          "LOCATION_PROBLEM",
+          "Riley is willing to meet but rejects the proposed location."
+        ]
+      ]
+    },
+    "events": [
+      {
+        "event_id": "mr1",
+        "valid_time": "2026-05-06T09:00:00+00:00",
+        "recorded_at": "2026-05-06T09:01:00+00:00",
+        "raw_text": "Riley declines a 2 PM meeting and says: 'I have another commitment at 2, but I do want to meet.'",
+        "source_id": "riley",
+        "actor_id": "riley",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "mr2",
+        "valid_time": "2026-05-06T09:10:00+00:00",
+        "recorded_at": "2026-05-06T09:11:00+00:00",
+        "raw_text": "The organizer proposes the same location at 3 PM. Riley says: 'I am still booked until 4.'",
+        "source_id": "riley",
+        "actor_id": "riley",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "mr3",
+        "valid_time": "2026-05-06T09:20:00+00:00",
+        "recorded_at": "2026-05-06T09:21:00+00:00",
+        "raw_text": "The organizer offers 5 PM at the original location.",
+        "source_id": "organizer",
+        "actor_id": "organizer",
+        "observer_ids": [
+          "riley"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "mr4",
+        "valid_time": "2026-05-06T09:21:00+00:00",
+        "recorded_at": "2026-05-06T09:22:00+00:00",
+        "raw_text": "Riley immediately accepts the 5 PM meeting at the original location.",
+        "source_id": "environment",
+        "actor_id": "riley",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "mr5",
+        "valid_time": "2026-05-06T10:00:00+00:00",
+        "recorded_at": "2026-05-06T10:01:00+00:00",
+        "raw_text": "A colleague asks whether changing the room would make 3 PM possible. Riley replies: 'No, the room was never the issue; I am busy until 4.'",
+        "source_id": "riley",
+        "actor_id": "riley",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "mr6",
+        "valid_time": "2026-05-06T10:10:00+00:00",
+        "recorded_at": "2026-05-06T10:11:00+00:00",
+        "raw_text": "The organizer again offers a 3 PM slot in a different room.",
+        "source_id": "organizer",
+        "actor_id": "organizer",
+        "observer_ids": [
+          "riley"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "mr7",
+        "valid_time": "2026-05-06T10:11:00+00:00",
+        "recorded_at": "2026-05-06T10:12:00+00:00",
+        "raw_text": "Riley declines the 3 PM slot and repeats that the calendar conflict lasts until 4.",
+        "source_id": "environment",
+        "actor_id": "riley",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 3,
+        "question": "How will Riley most likely respond to the 5 PM offer?",
+        "allowed_labels": [
+          "ACCEPT",
+          "REJECT_TIME",
+          "REJECT_LOCATION"
+        ],
+        "gold_behavior": "ACCEPT"
+      },
+      {
+        "after_event": 6,
+        "question": "How will Riley most likely respond to the 3 PM offer in a different room?",
+        "allowed_labels": [
+          "ACCEPT",
+          "REJECT_TIME",
+          "REJECT_LOCATION"
+        ],
+        "gold_behavior": "REJECT_TIME"
+      }
+    ]
+  }
+]
