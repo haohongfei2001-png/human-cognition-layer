@@ -1,0 +1,695 @@
+[
+  {
+    "id": "studio_booking",
+    "hidden_target": "OTHER_UNKNOWN",
+    "target": {
+      "target_id": "studio_booking-target",
+      "subject_agent_id": "Lina",
+      "target_kind": "MOTIVE",
+      "question": "Why did Lina cancel the community studio booking?",
+      "candidates": [
+        [
+          "COST",
+          "The fee became too high."
+        ],
+        [
+          "SCHEDULE",
+          "The available time conflicts with Lina’s schedule."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "studio_booking-e1",
+        "valid_time": "2026-08-01T00:07:00+00:00",
+        "recorded_at": "2026-08-01T00:07:05+00:00",
+        "raw_text": "Lina reserved the community studio and later cancelled twice without stating a reason.",
+        "source_id": "booking",
+        "actor_id": "staff",
+        "observer_ids": [
+          "staff"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "studio_booking-e2",
+        "valid_time": "2026-08-01T00:14:00+00:00",
+        "recorded_at": "2026-08-01T00:14:05+00:00",
+        "raw_text": "A staff member assumed that the fee might be the issue, but Lina did not confirm this.",
+        "source_id": "staff",
+        "actor_id": "staff",
+        "observer_ids": [
+          "staff"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "studio_booking-e3",
+        "valid_time": "2026-08-01T00:21:00+00:00",
+        "recorded_at": "2026-08-01T00:21:05+00:00",
+        "raw_text": "The building manager reported a temporary lift outage to staff; there is no record that Lina received this report.",
+        "source_id": "manager",
+        "actor_id": "manager",
+        "observer_ids": [
+          "staff"
+        ],
+        "metadata": {}
+      }
+    ],
+    "probes": [
+      [
+        "ASK_OPEN",
+        "Ask Lina what made the studio unusable for her."
+      ],
+      [
+        "ASK_FEE",
+        "Ask Lina whether the fee is too high."
+      ],
+      [
+        "ASK_TIME",
+        "Ask Lina whether a different time would work."
+      ]
+    ],
+    "high_information_probes": [
+      "ASK_OPEN"
+    ],
+    "probe_responses": {
+      "COST": {
+        "ASK_OPEN": "Lina says the fee is beyond her budget.",
+        "ASK_FEE": "Lina says yes, the fee is too high.",
+        "ASK_TIME": "Lina says another time would not solve the price."
+      },
+      "SCHEDULE": {
+        "ASK_OPEN": "Lina says the booked hour conflicts with a required appointment.",
+        "ASK_FEE": "Lina says the fee is fine.",
+        "ASK_TIME": "Lina says an evening slot would work."
+      },
+      "OTHER_UNKNOWN": {
+        "ASK_OPEN": "Lina says she cannot reach the upstairs room while the lift is out.",
+        "ASK_FEE": "Lina says the fee is fine; access is the problem.",
+        "ASK_TIME": "Lina says another time would help only after access is restored."
+      }
+    },
+    "actions": [
+      [
+        "OFFER_FEE_HELP",
+        "Offer an affordable fee option."
+      ],
+      [
+        "CHANGE_TIME",
+        "Find a compatible booking time."
+      ],
+      [
+        "CHECK_ACCESS",
+        "Confirm an accessible room or restored lift before rebooking."
+      ]
+    ],
+    "correct_actions": {
+      "COST": "OFFER_FEE_HELP",
+      "SCHEDULE": "CHANGE_TIME",
+      "OTHER_UNKNOWN": "CHECK_ACCESS"
+    }
+  },
+  {
+    "id": "training_readiness",
+    "hidden_target": "CONFIDENCE",
+    "target": {
+      "target_id": "training_readiness-target",
+      "subject_agent_id": "Omar",
+      "target_kind": "MOTIVE",
+      "question": "Why has Omar not begun the training practice?",
+      "candidates": [
+        [
+          "TIME",
+          "Omar lacks an uninterrupted practice window."
+        ],
+        [
+          "CONFIDENCE",
+          "Omar worries about practicing incorrectly."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "training_readiness-e1",
+        "valid_time": "2026-08-02T00:07:00+00:00",
+        "recorded_at": "2026-08-02T00:07:05+00:00",
+        "raw_text": "Omar enrolled in a skills session and received the practice instructions.",
+        "source_id": "trainer",
+        "actor_id": "trainer",
+        "observer_ids": [
+          "Omar"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "training_readiness-e2",
+        "valid_time": "2026-08-02T00:14:00+00:00",
+        "recorded_at": "2026-08-02T00:14:05+00:00",
+        "raw_text": "Omar attended the demonstration but has not started the optional exercise.",
+        "source_id": "trainer",
+        "actor_id": "trainer",
+        "observer_ids": [
+          "trainer"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "training_readiness-e3",
+        "valid_time": "2026-08-02T00:21:00+00:00",
+        "recorded_at": "2026-08-02T00:21:05+00:00",
+        "raw_text": "A teammate guessed Omar was too busy; Omar has not endorsed that explanation.",
+        "source_id": "teammate",
+        "actor_id": "teammate",
+        "observer_ids": [
+          "trainer"
+        ],
+        "metadata": {}
+      }
+    ],
+    "probes": [
+      [
+        "ASK_WINDOW",
+        "Ask whether a reserved practice hour would allow a start."
+      ],
+      [
+        "ASK_READINESS",
+        "Ask what would make the first practice attempt feel safe."
+      ],
+      [
+        "ASK_OPEN",
+        "Ask Omar what is blocking the first attempt."
+      ]
+    ],
+    "high_information_probes": [
+      "ASK_READINESS",
+      "ASK_OPEN"
+    ],
+    "probe_responses": {
+      "TIME": {
+        "ASK_WINDOW": "Omar says a protected hour would let him begin.",
+        "ASK_READINESS": "Omar says he understands the task but needs time.",
+        "ASK_OPEN": "Omar says his current shift leaves no uninterrupted practice window."
+      },
+      "CONFIDENCE": {
+        "ASK_WINDOW": "Omar says time is available but he is not sure whether mistakes are safe.",
+        "ASK_READINESS": "Omar says a supervised first attempt would help because he fears practicing incorrectly.",
+        "ASK_OPEN": "Omar says he has time but is uncertain about doing it correctly."
+      },
+      "OTHER_UNKNOWN": {
+        "ASK_WINDOW": "Omar says extra time will not help because the practice account is disabled.",
+        "ASK_READINESS": "Omar says he cannot access the exercise at all.",
+        "ASK_OPEN": "Omar says the practice account is disabled."
+      }
+    },
+    "actions": [
+      [
+        "RESERVE_TIME",
+        "Reserve a protected practice hour."
+      ],
+      [
+        "SUPERVISE_START",
+        "Offer a low-stakes supervised first attempt."
+      ],
+      [
+        "RESTORE_ACCESS",
+        "Restore the practice account before planning practice."
+      ]
+    ],
+    "correct_actions": {
+      "TIME": "RESERVE_TIME",
+      "CONFIDENCE": "SUPERVISE_START",
+      "OTHER_UNKNOWN": "RESTORE_ACCESS"
+    }
+  },
+  {
+    "id": "translation_audio",
+    "hidden_target": "OTHER_UNKNOWN",
+    "target": {
+      "target_id": "translation_audio-target",
+      "subject_agent_id": "Mira",
+      "target_kind": "MOTIVE",
+      "question": "Why has Mira paused the translation review?",
+      "candidates": [
+        [
+          "TERMS",
+          "Mira lacks a terminology reference."
+        ],
+        [
+          "DEADLINE",
+          "Mira lacks enough review time."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "translation_audio-e1",
+        "valid_time": "2026-08-03T00:07:00+00:00",
+        "recorded_at": "2026-08-03T00:07:05+00:00",
+        "raw_text": "Mira accepted a translation review and received the text document.",
+        "source_id": "coordinator",
+        "actor_id": "coordinator",
+        "observer_ids": [
+          "Mira"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "translation_audio-e2",
+        "valid_time": "2026-08-03T00:14:00+00:00",
+        "recorded_at": "2026-08-03T00:14:05+00:00",
+        "raw_text": "Mira asked whether a glossary was available; the coordinator sent one.",
+        "source_id": "coordinator",
+        "actor_id": "coordinator",
+        "observer_ids": [
+          "Mira"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "translation_audio-e3",
+        "valid_time": "2026-08-03T00:21:00+00:00",
+        "recorded_at": "2026-08-03T00:21:05+00:00",
+        "raw_text": "The coordinator later found that an audio attachment in the shared manifest pointed to a missing file. This discovery was not sent to Mira.",
+        "source_id": "coordinator",
+        "actor_id": "coordinator",
+        "observer_ids": [
+          "coordinator"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "translation_audio-e4",
+        "valid_time": "2026-08-03T00:28:00+00:00",
+        "recorded_at": "2026-08-03T00:28:05+00:00",
+        "raw_text": "Another reviewer guessed the deadline was too short, without asking Mira.",
+        "source_id": "reviewer",
+        "actor_id": "reviewer",
+        "observer_ids": [
+          "coordinator"
+        ],
+        "metadata": {}
+      }
+    ],
+    "probes": [
+      [
+        "ASK_INPUT",
+        "Ask Mira whether any required source material is unavailable."
+      ],
+      [
+        "ASK_TERMS",
+        "Ask whether the glossary is sufficient."
+      ],
+      [
+        "ASK_TIME",
+        "Ask whether a longer deadline would solve the pause."
+      ]
+    ],
+    "high_information_probes": [
+      "ASK_INPUT"
+    ],
+    "probe_responses": {
+      "TERMS": {
+        "ASK_INPUT": "Mira says she needs a specialized term list not in the glossary.",
+        "ASK_TERMS": "Mira says the glossary lacks the relevant technical terms.",
+        "ASK_TIME": "Mira says the deadline is adequate if the terminology is clarified."
+      },
+      "DEADLINE": {
+        "ASK_INPUT": "Mira says all material is available but she cannot finish by the deadline.",
+        "ASK_TERMS": "Mira says the glossary is sufficient.",
+        "ASK_TIME": "Mira says two more days would solve the problem."
+      },
+      "OTHER_UNKNOWN": {
+        "ASK_INPUT": "Mira says the required audio cannot be opened from the shared link.",
+        "ASK_TERMS": "Mira says the terms are clear but she cannot access the audio.",
+        "ASK_TIME": "Mira says more time alone will not restore the missing audio."
+      }
+    },
+    "actions": [
+      [
+        "SHARE_TERMS",
+        "Supply the missing terminology reference."
+      ],
+      [
+        "EXTEND_TIME",
+        "Agree on a longer review deadline."
+      ],
+      [
+        "RESTORE_AUDIO",
+        "Restore the source audio before asking Mira to continue."
+      ]
+    ],
+    "correct_actions": {
+      "TERMS": "SHARE_TERMS",
+      "DEADLINE": "EXTEND_TIME",
+      "OTHER_UNKNOWN": "RESTORE_AUDIO"
+    }
+  },
+  {
+    "id": "garden_swap",
+    "hidden_target": "TRANSPORT",
+    "target": {
+      "target_id": "garden_swap-target",
+      "subject_agent_id": "Theo",
+      "target_kind": "MOTIVE",
+      "question": "Why did Theo miss the seed exchange?",
+      "candidates": [
+        [
+          "TRANSPORT",
+          "Theo could not get to the venue."
+        ],
+        [
+          "INTEREST",
+          "Theo no longer wants to participate."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "garden_swap-e1",
+        "valid_time": "2026-08-04T00:07:00+00:00",
+        "recorded_at": "2026-08-04T00:07:05+00:00",
+        "raw_text": "Theo had asked for two seed varieties before the exchange.",
+        "source_id": "organizer",
+        "actor_id": "organizer",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "garden_swap-e2",
+        "valid_time": "2026-08-04T00:14:00+00:00",
+        "recorded_at": "2026-08-04T00:14:05+00:00",
+        "raw_text": "Theo did not arrive during the scheduled exchange.",
+        "source_id": "organizer",
+        "actor_id": "organizer",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "garden_swap-e3",
+        "valid_time": "2026-08-04T00:21:00+00:00",
+        "recorded_at": "2026-08-04T00:21:05+00:00",
+        "raw_text": "The organizer saw a bus service notice but has no evidence Theo saw it.",
+        "source_id": "transport",
+        "actor_id": "transport",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {}
+      }
+    ],
+    "probes": [
+      [
+        "ASK_TRAVEL",
+        "Ask Theo whether travel to the venue was possible."
+      ],
+      [
+        "ASK_INTEREST",
+        "Ask whether Theo still wants the seeds."
+      ],
+      [
+        "ASK_OPEN",
+        "Ask Theo what prevented attendance."
+      ]
+    ],
+    "high_information_probes": [
+      "ASK_TRAVEL",
+      "ASK_OPEN"
+    ],
+    "probe_responses": {
+      "TRANSPORT": {
+        "ASK_TRAVEL": "Theo says the last bus was cancelled and he had no ride.",
+        "ASK_INTEREST": "Theo says he still wants to take part.",
+        "ASK_OPEN": "Theo says he could not reach the venue after the bus cancellation."
+      },
+      "INTEREST": {
+        "ASK_TRAVEL": "Theo says travel was possible.",
+        "ASK_INTEREST": "Theo says he no longer wants the seeds.",
+        "ASK_OPEN": "Theo says he changed his mind about joining."
+      },
+      "OTHER_UNKNOWN": {
+        "ASK_TRAVEL": "Theo says travel was possible but the event notice gave the wrong room.",
+        "ASK_INTEREST": "Theo says he still wants the seeds.",
+        "ASK_OPEN": "Theo says he went to a different room because the notice was wrong."
+      }
+    },
+    "actions": [
+      [
+        "ARRANGE_TRAVEL",
+        "Offer a practical travel or pickup option."
+      ],
+      [
+        "STOP_REMINDERS",
+        "Respect Theo’s stated decision not to participate."
+      ],
+      [
+        "CORRECT_LOCATION",
+        "Correct the event location and offer another handoff."
+      ]
+    ],
+    "correct_actions": {
+      "TRANSPORT": "ARRANGE_TRAVEL",
+      "INTEREST": "STOP_REMINDERS",
+      "OTHER_UNKNOWN": "CORRECT_LOCATION"
+    }
+  },
+  {
+    "id": "notice_photo",
+    "hidden_target": "PRIVACY",
+    "target": {
+      "target_id": "notice_photo-target",
+      "subject_agent_id": "Nadia",
+      "target_kind": "MOTIVE",
+      "question": "Why did Nadia decline the public notice photo?",
+      "candidates": [
+        [
+          "PRIVACY",
+          "Nadia does not want her image posted publicly."
+        ],
+        [
+          "LANGUAGE",
+          "Nadia cannot understand the notice text."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "notice_photo-e1",
+        "valid_time": "2026-08-05T00:07:00+00:00",
+        "recorded_at": "2026-08-05T00:07:05+00:00",
+        "raw_text": "Nadia agreed to share event details but declined the proposed public photograph.",
+        "source_id": "Nadia",
+        "actor_id": "Nadia",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "notice_photo-e2",
+        "valid_time": "2026-08-05T00:14:00+00:00",
+        "recorded_at": "2026-08-05T00:14:05+00:00",
+        "raw_text": "The organizer offered to translate the notice; Nadia said the written wording was clear.",
+        "source_id": "organizer",
+        "actor_id": "organizer",
+        "observer_ids": [
+          "Nadia"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "notice_photo-e3",
+        "valid_time": "2026-08-05T00:21:00+00:00",
+        "recorded_at": "2026-08-05T00:21:05+00:00",
+        "raw_text": "A volunteer speculated that Nadia disliked the event, but Nadia did not say this.",
+        "source_id": "volunteer",
+        "actor_id": "volunteer",
+        "observer_ids": [
+          "organizer"
+        ],
+        "metadata": {}
+      }
+    ],
+    "probes": [
+      [
+        "ASK_PRIVACY",
+        "Ask whether a notice without Nadia’s image is acceptable."
+      ],
+      [
+        "ASK_LANGUAGE",
+        "Ask whether translated wording would change her decision."
+      ],
+      [
+        "ASK_OPEN",
+        "Ask what condition would make the notice acceptable."
+      ]
+    ],
+    "high_information_probes": [
+      "ASK_PRIVACY",
+      "ASK_OPEN"
+    ],
+    "probe_responses": {
+      "PRIVACY": {
+        "ASK_PRIVACY": "Nadia says yes, details without her image may be posted.",
+        "ASK_LANGUAGE": "Nadia says translation is not the concern.",
+        "ASK_OPEN": "Nadia says she wants to participate without a public photograph."
+      },
+      "LANGUAGE": {
+        "ASK_PRIVACY": "Nadia says a photo alone is not the central issue.",
+        "ASK_LANGUAGE": "Nadia says she needs the notice in another language before approving it.",
+        "ASK_OPEN": "Nadia says she cannot approve text she cannot read."
+      },
+      "OTHER_UNKNOWN": {
+        "ASK_PRIVACY": "Nadia says the draft includes an outdated date and must be corrected first.",
+        "ASK_LANGUAGE": "Nadia says she understands the text but the date is wrong.",
+        "ASK_OPEN": "Nadia says the event date is incorrect."
+      }
+    },
+    "actions": [
+      [
+        "NO_PUBLIC_IMAGE",
+        "Publish only event details without Nadia’s image."
+      ],
+      [
+        "TRANSLATE_NOTICE",
+        "Provide translated notice text for review."
+      ],
+      [
+        "CORRECT_DATE",
+        "Correct the event date before requesting approval."
+      ]
+    ],
+    "correct_actions": {
+      "PRIVACY": "NO_PUBLIC_IMAGE",
+      "LANGUAGE": "TRANSLATE_NOTICE",
+      "OTHER_UNKNOWN": "CORRECT_DATE"
+    }
+  },
+  {
+    "id": "equipment_loan",
+    "hidden_target": "OTHER_UNKNOWN",
+    "target": {
+      "target_id": "equipment_loan-target",
+      "subject_agent_id": "Ravi",
+      "target_kind": "MOTIVE",
+      "question": "Why has Ravi not confirmed the equipment loan?",
+      "candidates": [
+        [
+          "MAINTENANCE",
+          "The equipment needs repair before lending."
+        ],
+        [
+          "BUDGET",
+          "Ravi cannot cover the deposit."
+        ]
+      ]
+    },
+    "initial_events": [
+      {
+        "event_id": "equipment_loan-e1",
+        "valid_time": "2026-08-06T00:07:00+00:00",
+        "recorded_at": "2026-08-06T00:07:05+00:00",
+        "raw_text": "Ravi requested the equipment for a weekend workshop.",
+        "source_id": "Ravi",
+        "actor_id": "Ravi",
+        "observer_ids": [
+          "custodian"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "equipment_loan-e2",
+        "valid_time": "2026-08-06T00:14:00+00:00",
+        "recorded_at": "2026-08-06T00:14:05+00:00",
+        "raw_text": "A custodian said the equipment was physically working when last checked.",
+        "source_id": "custodian",
+        "actor_id": "custodian",
+        "observer_ids": [
+          "custodian"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "equipment_loan-e3",
+        "valid_time": "2026-08-06T00:21:00+00:00",
+        "recorded_at": "2026-08-06T00:21:05+00:00",
+        "raw_text": "The office later corrected an old policy summary: this equipment now requires a separate authorization before any loan. Ravi did not receive the correction.",
+        "source_id": "office",
+        "actor_id": "office",
+        "observer_ids": [
+          "custodian"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "equipment_loan-e4",
+        "valid_time": "2026-08-06T00:28:00+00:00",
+        "recorded_at": "2026-08-06T00:28:05+00:00",
+        "raw_text": "Another volunteer repeated the older policy summary, but this retelling has the same source.",
+        "source_id": "volunteer",
+        "actor_id": "volunteer",
+        "observer_ids": [
+          "custodian"
+        ],
+        "metadata": {}
+      }
+    ],
+    "probes": [
+      [
+        "ASK_APPROVAL",
+        "Ask Ravi whether the required loan authorization has been obtained."
+      ],
+      [
+        "ASK_CONDITION",
+        "Ask whether Ravi found a physical defect."
+      ],
+      [
+        "ASK_DEPOSIT",
+        "Ask whether the deposit prevents confirmation."
+      ]
+    ],
+    "high_information_probes": [
+      "ASK_APPROVAL"
+    ],
+    "probe_responses": {
+      "MAINTENANCE": {
+        "ASK_APPROVAL": "Ravi says he has approval but the equipment failed his own check.",
+        "ASK_CONDITION": "Ravi says the power connector failed during his check.",
+        "ASK_DEPOSIT": "Ravi says the deposit is affordable."
+      },
+      "BUDGET": {
+        "ASK_APPROVAL": "Ravi says approval is available but the deposit exceeds his budget.",
+        "ASK_CONDITION": "Ravi says the equipment appears to work.",
+        "ASK_DEPOSIT": "Ravi says he cannot cover the deposit."
+      },
+      "OTHER_UNKNOWN": {
+        "ASK_APPROVAL": "Ravi says he has not been told about the new authorization and has no approval yet.",
+        "ASK_CONDITION": "Ravi says the equipment appears to work.",
+        "ASK_DEPOSIT": "Ravi says the deposit is affordable but he has no approval."
+      }
+    },
+    "actions": [
+      [
+        "REPAIR_FIRST",
+        "Repair and verify the equipment before lending."
+      ],
+      [
+        "DEPOSIT_HELP",
+        "Offer an approved deposit alternative."
+      ],
+      [
+        "OBTAIN_APPROVAL",
+        "Explain the current authorization requirement and obtain approval before lending."
+      ]
+    ],
+    "correct_actions": {
+      "MAINTENANCE": "REPAIR_FIRST",
+      "BUDGET": "DEPOSIT_HELP",
+      "OTHER_UNKNOWN": "OBTAIN_APPROVAL"
+    }
+  }
+]
