@@ -31,6 +31,17 @@ class FakeBackend:
 
 
 class V04RuntimeTests(unittest.TestCase):
+    def test_answer_prompt_does_not_treat_exposure_as_belief_revision(self):
+        from hcl.v04.runtime import ANSWER_SYSTEM
+        self.assertIn(
+            "SOURCE_ASSERTION or\nINFORMATION_EXPOSURE alone does not supersede",
+            ANSWER_SYSTEM,
+        )
+        self.assertIn(
+            "supported BELIEF_ESTIMATE is the current best estimate",
+            ANSWER_SYSTEM,
+        )
+
     def test_invalid_semantic_json_does_not_mutate_derived_state(self):
         runtime = HCLV04Runtime(CognitionStore())
         try:
