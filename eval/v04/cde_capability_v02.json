@@ -1,0 +1,840 @@
+[
+  {
+    "id": "airport_gate_hidden_update",
+    "events": [
+      {
+        "event_id": "ag1",
+        "valid_time": "2026-03-01T08:00:00+00:00",
+        "recorded_at": "2026-03-01T08:01:00+00:00",
+        "raw_text": "Nora reads the official airport board showing gate G12 and says: 'I believe my flight leaves from G12.'",
+        "source_id": "board",
+        "actor_id": "board",
+        "recipient_ids": [
+          "nora"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "ag2",
+        "valid_time": "2026-03-01T08:05:00+00:00",
+        "recorded_at": "2026-03-01T08:06:00+00:00",
+        "raw_text": "Leo buys coffee and talks with Sam about breakfast. Nora hears none of this.",
+        "source_id": "environment",
+        "actor_id": "leo",
+        "observer_ids": [
+          "leo",
+          "sam"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "ag3",
+        "valid_time": "2026-03-01T08:10:00+00:00",
+        "recorded_at": "2026-03-01T08:11:00+00:00",
+        "raw_text": "The flight is actually moved to gate G14. Leo receives the airline alert. Nora does not receive it.",
+        "source_id": "environment",
+        "actor_id": "airline",
+        "recipient_ids": [
+          "leo"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "ag4",
+        "valid_time": "2026-03-01T08:15:00+00:00",
+        "recorded_at": "2026-03-01T08:16:00+00:00",
+        "raw_text": "Nora says: 'I have not received any gate update, so I still believe it is G12.'",
+        "source_id": "nora",
+        "actor_id": "nora",
+        "observer_ids": [
+          "nora"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "ag5",
+        "valid_time": "2026-03-01T08:20:00+00:00",
+        "recorded_at": "2026-03-01T08:21:00+00:00",
+        "raw_text": "Leo walks to a shop without speaking to Nora.",
+        "source_id": "environment",
+        "actor_id": "leo",
+        "observer_ids": [
+          "__system__"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "ag6",
+        "valid_time": "2026-03-01T08:25:00+00:00",
+        "recorded_at": "2026-03-01T08:26:00+00:00",
+        "raw_text": "Sam sends Leo a message about a charger. Nora is not included.",
+        "source_id": "sam",
+        "actor_id": "sam",
+        "recipient_ids": [
+          "leo"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "ag7",
+        "valid_time": "2026-03-01T08:30:00+00:00",
+        "recorded_at": "2026-03-01T08:31:00+00:00",
+        "raw_text": "Nora checks her phone and says: 'Still no new airline message; I still think G12.'",
+        "source_id": "nora",
+        "actor_id": "nora",
+        "observer_ids": [
+          "nora"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "ag8",
+        "valid_time": "2026-03-01T08:35:00+00:00",
+        "recorded_at": "2026-03-01T08:36:00+00:00",
+        "raw_text": "Leo returns but asks Nora only whether she has her passport. He does not mention the gate.",
+        "source_id": "leo",
+        "actor_id": "leo",
+        "observer_ids": [
+          "leo",
+          "nora"
+        ],
+        "metadata": {}
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 1,
+        "question": "Which gate does Nora currently believe the flight uses?",
+        "allowed_labels": [
+          "G12",
+          "G14",
+          "UNCERTAIN"
+        ],
+        "gold": "G12"
+      },
+      {
+        "after_event": 4,
+        "question": "Which gate does Nora currently believe the flight uses?",
+        "allowed_labels": [
+          "G12",
+          "G14",
+          "UNCERTAIN"
+        ],
+        "gold": "G12"
+      },
+      {
+        "after_event": 8,
+        "question": "Which gate does Nora currently believe the flight uses?",
+        "allowed_labels": [
+          "G12",
+          "G14",
+          "UNCERTAIN"
+        ],
+        "gold": "G12"
+      }
+    ]
+  },
+  {
+    "id": "lab_freezer_reject_then_accept",
+    "events": [
+      {
+        "event_id": "lf1",
+        "valid_time": "2026-03-02T09:00:00+00:00",
+        "recorded_at": "2026-03-02T09:01:00+00:00",
+        "raw_text": "Mina labels the sample for freezer A and says: 'I believe the sample belongs in freezer A.'",
+        "source_id": "mina",
+        "actor_id": "mina",
+        "observer_ids": [
+          "mina"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "lf2",
+        "valid_time": "2026-03-02T09:10:00+00:00",
+        "recorded_at": "2026-03-02T09:11:00+00:00",
+        "raw_text": "Kai discusses lunch with June in another room. Mina is not present.",
+        "source_id": "environment",
+        "actor_id": "kai",
+        "observer_ids": [
+          "kai",
+          "june"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "lf3",
+        "valid_time": "2026-03-02T09:20:00+00:00",
+        "recorded_at": "2026-03-02T09:21:00+00:00",
+        "raw_text": "A chat message tells Mina: 'The sample should be in freezer B.' Nothing establishes whether that message is authoritative.",
+        "source_id": "chat",
+        "actor_id": "chat",
+        "recipient_ids": [
+          "mina"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "lf4",
+        "valid_time": "2026-03-02T09:22:00+00:00",
+        "recorded_at": "2026-03-02T09:23:00+00:00",
+        "raw_text": "Mina replies: 'I think that chat message is mistaken. I still believe freezer A is correct.'",
+        "source_id": "mina",
+        "actor_id": "mina",
+        "observer_ids": [
+          "mina"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "lf5",
+        "valid_time": "2026-03-02T09:30:00+00:00",
+        "recorded_at": "2026-03-02T09:31:00+00:00",
+        "raw_text": "June moves some unrelated boxes in storage while Mina works elsewhere.",
+        "source_id": "environment",
+        "actor_id": "june",
+        "observer_ids": [
+          "june"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "lf6",
+        "valid_time": "2026-03-02T09:40:00+00:00",
+        "recorded_at": "2026-03-02T09:41:00+00:00",
+        "raw_text": "The lab supervisor directly tells Mina: 'I checked the protocol. The sample belongs in freezer B.'",
+        "source_id": "supervisor",
+        "actor_id": "supervisor",
+        "recipient_ids": [
+          "mina"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "lf7",
+        "valid_time": "2026-03-02T09:41:00+00:00",
+        "recorded_at": "2026-03-02T09:42:00+00:00",
+        "raw_text": "Mina replies: 'Understood. I believe freezer B is correct now.'",
+        "source_id": "mina",
+        "actor_id": "mina",
+        "observer_ids": [
+          "mina"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "lf8",
+        "valid_time": "2026-03-02T09:50:00+00:00",
+        "recorded_at": "2026-03-02T09:51:00+00:00",
+        "raw_text": "Kai asks Mina whether she wants coffee; they do not discuss the sample.",
+        "source_id": "kai",
+        "actor_id": "kai",
+        "observer_ids": [
+          "kai",
+          "mina"
+        ],
+        "metadata": {}
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 1,
+        "question": "Which freezer does Mina currently believe is correct?",
+        "allowed_labels": [
+          "A",
+          "B",
+          "UNCERTAIN"
+        ],
+        "gold": "A"
+      },
+      {
+        "after_event": 4,
+        "question": "Which freezer does Mina currently believe is correct?",
+        "allowed_labels": [
+          "A",
+          "B",
+          "UNCERTAIN"
+        ],
+        "gold": "A"
+      },
+      {
+        "after_event": 8,
+        "question": "Which freezer does Mina currently believe is correct?",
+        "allowed_labels": [
+          "A",
+          "B",
+          "UNCERTAIN"
+        ],
+        "gold": "B"
+      }
+    ]
+  },
+  {
+    "id": "book_hidden_move_then_observe",
+    "events": [
+      {
+        "event_id": "bk1",
+        "valid_time": "2026-03-03T10:00:00+00:00",
+        "recorded_at": "2026-03-03T10:01:00+00:00",
+        "raw_text": "Omar places the reference book on shelf A and says: 'I believe the book is on shelf A.'",
+        "source_id": "omar",
+        "actor_id": "omar",
+        "observer_ids": [
+          "omar"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "bk2",
+        "valid_time": "2026-03-03T10:10:00+00:00",
+        "recorded_at": "2026-03-03T10:11:00+00:00",
+        "raw_text": "Omar leaves the room. Priya discusses a printer problem with Chen.",
+        "source_id": "environment",
+        "actor_id": "omar",
+        "observer_ids": [
+          "priya",
+          "chen"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "bk3",
+        "valid_time": "2026-03-03T10:20:00+00:00",
+        "recorded_at": "2026-03-03T10:21:00+00:00",
+        "raw_text": "While Omar is absent, Priya moves the book from shelf A to shelf B. Omar does not observe the move.",
+        "source_id": "environment",
+        "actor_id": "priya",
+        "observer_ids": [
+          "priya"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "bk4",
+        "valid_time": "2026-03-03T10:30:00+00:00",
+        "recorded_at": "2026-03-03T10:31:00+00:00",
+        "raw_text": "Omar returns. Nobody tells him about the move.",
+        "source_id": "environment",
+        "actor_id": "omar",
+        "observer_ids": [
+          "omar"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "bk5",
+        "valid_time": "2026-03-03T10:35:00+00:00",
+        "recorded_at": "2026-03-03T10:36:00+00:00",
+        "raw_text": "Chen tells Omar: 'I heard the book might be on shelf B.' Omar replies: 'I do not trust that rumor; I still believe shelf A.'",
+        "source_id": "chen",
+        "actor_id": "chen",
+        "recipient_ids": [
+          "omar"
+        ],
+        "observer_ids": [
+          "chen"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "bk6",
+        "valid_time": "2026-03-03T10:40:00+00:00",
+        "recorded_at": "2026-03-03T10:41:00+00:00",
+        "raw_text": "Priya leaves to answer a phone call. She says nothing to Omar.",
+        "source_id": "environment",
+        "actor_id": "priya",
+        "observer_ids": [
+          "__system__"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "bk7",
+        "valid_time": "2026-03-03T10:45:00+00:00",
+        "recorded_at": "2026-03-03T10:46:00+00:00",
+        "raw_text": "Omar walks to shelf B and directly sees the reference book there.",
+        "source_id": "environment",
+        "actor_id": "omar",
+        "observer_ids": [
+          "omar"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "bk8",
+        "valid_time": "2026-03-03T10:46:00+00:00",
+        "recorded_at": "2026-03-03T10:47:00+00:00",
+        "raw_text": "Omar says: 'I see it now. I believe the book is on shelf B.'",
+        "source_id": "omar",
+        "actor_id": "omar",
+        "observer_ids": [
+          "omar"
+        ],
+        "metadata": {}
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 1,
+        "question": "Where does Omar currently believe the book is?",
+        "allowed_labels": [
+          "SHELF_A",
+          "SHELF_B",
+          "UNCERTAIN"
+        ],
+        "gold": "SHELF_A"
+      },
+      {
+        "after_event": 5,
+        "question": "Where does Omar currently believe the book is?",
+        "allowed_labels": [
+          "SHELF_A",
+          "SHELF_B",
+          "UNCERTAIN"
+        ],
+        "gold": "SHELF_A"
+      },
+      {
+        "after_event": 8,
+        "question": "Where does Omar currently believe the book is?",
+        "allowed_labels": [
+          "SHELF_A",
+          "SHELF_B",
+          "UNCERTAIN"
+        ],
+        "gold": "SHELF_B"
+      }
+    ]
+  },
+  {
+    "id": "deadline_partial_relay_then_confirm",
+    "events": [
+      {
+        "event_id": "dl1",
+        "valid_time": "2026-03-04T09:00:00+00:00",
+        "recorded_at": "2026-03-04T09:01:00+00:00",
+        "raw_text": "Sara reads the project schedule and says: 'I believe the deadline is Friday.'",
+        "source_id": "schedule",
+        "actor_id": "schedule",
+        "recipient_ids": [
+          "sara"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "dl2",
+        "valid_time": "2026-03-04T09:15:00+00:00",
+        "recorded_at": "2026-03-04T09:16:00+00:00",
+        "raw_text": "The manager privately tells Bob that the deadline has been changed to Monday. Sara is not included.",
+        "source_id": "manager",
+        "actor_id": "manager",
+        "recipient_ids": [
+          "bob"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "dl3",
+        "valid_time": "2026-03-04T09:20:00+00:00",
+        "recorded_at": "2026-03-04T09:21:00+00:00",
+        "raw_text": "Sara and Kim discuss a design mockup. The deadline is not mentioned.",
+        "source_id": "environment",
+        "actor_id": "sara",
+        "observer_ids": [
+          "sara",
+          "kim"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "dl4",
+        "valid_time": "2026-03-04T09:30:00+00:00",
+        "recorded_at": "2026-03-04T09:31:00+00:00",
+        "raw_text": "Bob tells Sara: 'I heard the deadline might be Monday.' Sara replies: 'That sounds uncertain. I still believe Friday until the manager confirms it.'",
+        "source_id": "bob",
+        "actor_id": "bob",
+        "recipient_ids": [
+          "sara"
+        ],
+        "observer_ids": [
+          "bob"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "dl5",
+        "valid_time": "2026-03-04T09:35:00+00:00",
+        "recorded_at": "2026-03-04T09:36:00+00:00",
+        "raw_text": "Kim sends Bob a file about the mockup. Sara is not copied.",
+        "source_id": "kim",
+        "actor_id": "kim",
+        "recipient_ids": [
+          "bob"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "dl6",
+        "valid_time": "2026-03-04T09:45:00+00:00",
+        "recorded_at": "2026-03-04T09:46:00+00:00",
+        "raw_text": "The manager directly tells Sara: 'The deadline is Monday.'",
+        "source_id": "manager",
+        "actor_id": "manager",
+        "recipient_ids": [
+          "sara"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "dl7",
+        "valid_time": "2026-03-04T09:46:00+00:00",
+        "recorded_at": "2026-03-04T09:47:00+00:00",
+        "raw_text": "Sara replies: 'Thanks for confirming. I believe the deadline is Monday now.'",
+        "source_id": "sara",
+        "actor_id": "sara",
+        "observer_ids": [
+          "sara"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "dl8",
+        "valid_time": "2026-03-04T10:00:00+00:00",
+        "recorded_at": "2026-03-04T10:01:00+00:00",
+        "raw_text": "Sara resumes discussing the mockup with Kim; no new deadline information appears.",
+        "source_id": "environment",
+        "actor_id": "sara",
+        "observer_ids": [
+          "sara",
+          "kim"
+        ],
+        "metadata": {}
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 1,
+        "question": "Which deadline does Sara currently believe?",
+        "allowed_labels": [
+          "FRIDAY",
+          "MONDAY",
+          "UNCERTAIN"
+        ],
+        "gold": "FRIDAY"
+      },
+      {
+        "after_event": 4,
+        "question": "Which deadline does Sara currently believe?",
+        "allowed_labels": [
+          "FRIDAY",
+          "MONDAY",
+          "UNCERTAIN"
+        ],
+        "gold": "FRIDAY"
+      },
+      {
+        "after_event": 8,
+        "question": "Which deadline does Sara currently believe?",
+        "allowed_labels": [
+          "FRIDAY",
+          "MONDAY",
+          "UNCERTAIN"
+        ],
+        "gold": "MONDAY"
+      }
+    ]
+  },
+  {
+    "id": "document_relay_rejected_then_official",
+    "events": [
+      {
+        "event_id": "dv1",
+        "valid_time": "2026-03-05T08:00:00+00:00",
+        "recorded_at": "2026-03-05T08:01:00+00:00",
+        "raw_text": "Leah says: 'I believe the approved document version is V1.'",
+        "source_id": "leah",
+        "actor_id": "leah",
+        "observer_ids": [
+          "leah"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "dv2",
+        "valid_time": "2026-03-05T08:10:00+00:00",
+        "recorded_at": "2026-03-05T08:11:00+00:00",
+        "raw_text": "Chris privately receives an unverified message claiming the document is V2. Leah does not receive it.",
+        "source_id": "message",
+        "actor_id": "message",
+        "recipient_ids": [
+          "chris"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "dv3",
+        "valid_time": "2026-03-05T08:15:00+00:00",
+        "recorded_at": "2026-03-05T08:16:00+00:00",
+        "raw_text": "Leah talks with Mei about a meeting room. Document versions are not discussed.",
+        "source_id": "environment",
+        "actor_id": "leah",
+        "observer_ids": [
+          "leah",
+          "mei"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "dv4",
+        "valid_time": "2026-03-05T08:20:00+00:00",
+        "recorded_at": "2026-03-05T08:21:00+00:00",
+        "raw_text": "Chris tells Leah: 'Someone says the document is V2.' Leah replies: 'I do not trust that claim. I still believe V1 is approved.'",
+        "source_id": "chris",
+        "actor_id": "chris",
+        "recipient_ids": [
+          "leah"
+        ],
+        "observer_ids": [
+          "chris"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "dv5",
+        "valid_time": "2026-03-05T08:30:00+00:00",
+        "recorded_at": "2026-03-05T08:31:00+00:00",
+        "raw_text": "Mei sends Chris a calendar invite unrelated to the document.",
+        "source_id": "mei",
+        "actor_id": "mei",
+        "recipient_ids": [
+          "chris"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "dv6",
+        "valid_time": "2026-03-05T08:40:00+00:00",
+        "recorded_at": "2026-03-05T08:41:00+00:00",
+        "raw_text": "The official release page publishes version V3 and Leah directly opens the page.",
+        "source_id": "release_page",
+        "actor_id": "release_page",
+        "observer_ids": [
+          "leah"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "dv7",
+        "valid_time": "2026-03-05T08:41:00+00:00",
+        "recorded_at": "2026-03-05T08:42:00+00:00",
+        "raw_text": "Leah says: 'I have checked the official page. I believe V3 is the approved version now.'",
+        "source_id": "leah",
+        "actor_id": "leah",
+        "observer_ids": [
+          "leah"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "dv8",
+        "valid_time": "2026-03-05T08:50:00+00:00",
+        "recorded_at": "2026-03-05T08:51:00+00:00",
+        "raw_text": "Chris asks Leah about lunch; no document information is exchanged.",
+        "source_id": "chris",
+        "actor_id": "chris",
+        "observer_ids": [
+          "chris",
+          "leah"
+        ],
+        "metadata": {}
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 1,
+        "question": "Which document version does Leah currently believe is approved?",
+        "allowed_labels": [
+          "V1",
+          "V2",
+          "V3",
+          "UNCERTAIN"
+        ],
+        "gold": "V1"
+      },
+      {
+        "after_event": 4,
+        "question": "Which document version does Leah currently believe is approved?",
+        "allowed_labels": [
+          "V1",
+          "V2",
+          "V3",
+          "UNCERTAIN"
+        ],
+        "gold": "V1"
+      },
+      {
+        "after_event": 8,
+        "question": "Which document version does Leah currently believe is approved?",
+        "allowed_labels": [
+          "V1",
+          "V2",
+          "V3",
+          "UNCERTAIN"
+        ],
+        "gold": "V3"
+      }
+    ]
+  },
+  {
+    "id": "route_conflict_then_explicit_decision",
+    "events": [
+      {
+        "event_id": "rt1",
+        "valid_time": "2026-03-06T07:00:00+00:00",
+        "recorded_at": "2026-03-06T07:01:00+00:00",
+        "raw_text": "A dispatcher tells Yuki: 'Use the east route.' Yuki replies: 'I have not decided whether I trust that route yet.'",
+        "source_id": "dispatcher",
+        "actor_id": "dispatcher",
+        "recipient_ids": [
+          "yuki"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "rt2",
+        "valid_time": "2026-03-06T07:05:00+00:00",
+        "recorded_at": "2026-03-06T07:06:00+00:00",
+        "raw_text": "A second source tells Yuki: 'Use the west route.' Yuki gives no acceptance.",
+        "source_id": "second_source",
+        "actor_id": "second_source",
+        "recipient_ids": [
+          "yuki"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "rt3",
+        "valid_time": "2026-03-06T07:10:00+00:00",
+        "recorded_at": "2026-03-06T07:11:00+00:00",
+        "raw_text": "Yuki says: 'The reports conflict. I am still undecided.'",
+        "source_id": "yuki",
+        "actor_id": "yuki",
+        "observer_ids": [
+          "yuki"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "rt4",
+        "valid_time": "2026-03-06T07:15:00+00:00",
+        "recorded_at": "2026-03-06T07:16:00+00:00",
+        "raw_text": "Ken receives a weather update but does not share it with Yuki.",
+        "source_id": "weather",
+        "actor_id": "weather",
+        "recipient_ids": [
+          "ken"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "rt5",
+        "valid_time": "2026-03-06T07:20:00+00:00",
+        "recorded_at": "2026-03-06T07:21:00+00:00",
+        "raw_text": "Yuki checks an official route board which clearly marks the east route as open and the west route as closed.",
+        "source_id": "route_board",
+        "actor_id": "route_board",
+        "observer_ids": [
+          "yuki"
+        ],
+        "metadata": {
+          "scene_fact": true
+        }
+      },
+      {
+        "event_id": "rt6",
+        "valid_time": "2026-03-06T07:21:00+00:00",
+        "recorded_at": "2026-03-06T07:22:00+00:00",
+        "raw_text": "Yuki says: 'The official board settles it. I believe east is the correct route.'",
+        "source_id": "yuki",
+        "actor_id": "yuki",
+        "observer_ids": [
+          "yuki"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "rt7",
+        "valid_time": "2026-03-06T07:30:00+00:00",
+        "recorded_at": "2026-03-06T07:31:00+00:00",
+        "raw_text": "Ken asks Yuki whether she packed water. They do not discuss routes.",
+        "source_id": "ken",
+        "actor_id": "ken",
+        "observer_ids": [
+          "ken",
+          "yuki"
+        ],
+        "metadata": {}
+      },
+      {
+        "event_id": "rt8",
+        "valid_time": "2026-03-06T07:35:00+00:00",
+        "recorded_at": "2026-03-06T07:36:00+00:00",
+        "raw_text": "Yuki repeats: 'I am taking the east route.'",
+        "source_id": "yuki",
+        "actor_id": "yuki",
+        "observer_ids": [
+          "yuki"
+        ],
+        "metadata": {}
+      }
+    ],
+    "queries": [
+      {
+        "after_event": 2,
+        "question": "Which route does Yuki currently believe is correct?",
+        "allowed_labels": [
+          "EAST",
+          "WEST",
+          "UNCERTAIN"
+        ],
+        "gold": "UNCERTAIN"
+      },
+      {
+        "after_event": 3,
+        "question": "Which route does Yuki currently believe is correct?",
+        "allowed_labels": [
+          "EAST",
+          "WEST",
+          "UNCERTAIN"
+        ],
+        "gold": "UNCERTAIN"
+      },
+      {
+        "after_event": 8,
+        "question": "Which route does Yuki currently believe is correct?",
+        "allowed_labels": [
+          "EAST",
+          "WEST",
+          "UNCERTAIN"
+        ],
+        "gold": "EAST"
+      }
+    ]
+  }
+]
