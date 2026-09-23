@@ -36,6 +36,11 @@ class SupportLevel(str, Enum):
     INSUFFICIENT = "INSUFFICIENT"
 
 
+class BeliefStance(str, Enum):
+    AFFIRM = "AFFIRM"
+    DENY = "DENY"
+
+
 @dataclass(frozen=True)
 class EventRecord:
     event_id: str
@@ -75,6 +80,7 @@ class CognitiveAssertion:
     depends_on_assertion_ids: tuple[str, ...] = ()
     status: AssertionStatus = AssertionStatus.ACTIVE
     support_level: SupportLevel | None = None
+    belief_stance: BeliefStance | None = None
     semantic_version: str = "v04.1"
 
 
