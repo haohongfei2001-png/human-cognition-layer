@@ -16,6 +16,8 @@ from .model import (
 from .schema import SchemaValidationError
 from .semantic import (
     SemanticBackend,
+    patch_from_mapping,
+    patch_to_mapping,
     propose_patch,
     repair_patch_for_invariant,
 )
@@ -70,6 +72,46 @@ Return only the revised user-facing answer.
 """
 
 
+def _merge_repair_with_preserved(
+    event: EventRecord,
+    rejected: SemanticPatch,
+    repaired: SemanticPatch,
+    preserved_assertions,
+    *,
+    semantic_version: str,
+) -> SemanticPatch:
+    """Preserve independently valid assertions across bounded repair."""
+    proposition_map: dict[str, dict] = {}
+    for payload in (
+        patch_to_mapping(rejected).get("propositions", []),
+        patch_to_mapping(repaired).get("propositions", []),
+    ):
+        for item in payload:
+            proposition_map[item["proposition_id"]] = item
+
+    assertion_map: dict[str, dict] = {
+        item["assertion_id"]: item
+        for item in patch_to_mapping(repaired).get("assertions", [])
+    }
+    preserved_ids = {a.assertion_id for a in preserved_assertions}
+    rejected_map = {
+        item["assertion_id"]: item
+        for item in patch_to_mapping(rejected).get("assertions", [])
+    }
+    for assertion_id in preserved_ids:
+        assertion_map[assertion_id] = rejected_map[assertion_id]
+
+    payload = {
+        "propositions": list(proposition_map.values()),
+        "assertions": list(assertion_map.values()),
+    }
+    return patch_from_mapping(
+        event,
+        payload,
+        semantic_version=semantic_version,
+    )
+
+
 class HCLV04Runtime:
     def __init__(self, store: CognitionStore | None = None) -> None:
         self.store = store or CognitionStore()
@@ -116,11 +158,19 @@ class HCLV04Runtime:
         except SchemaValidationError as exc:
             rejected_patch = patch
             repair_reason = str(exc)
-            patch = repair_patch_for_invariant(
+            preserved_assertions = self.store.independently_valid_assertions(patch)
+            repaired = repair_patch_for_invariant(
                 event,
                 patch,
                 repair_reason,
                 backend,
+                semantic_version=semantic_version,
+            )
+            patch = _merge_repair_with_preserved(
+                event,
+                rejected_patch,
+                repaired,
+                preserved_assertions,
                 semantic_version=semantic_version,
             )
             repair_count = 1
