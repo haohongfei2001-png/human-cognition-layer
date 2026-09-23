@@ -3802,3 +3802,51 @@ Next canonical work:
 
 **Current gate: HCL_V04_MINIMAL_SLICE_CORRECTNESS_COMPLETE_CAPABILITY_COMPARISON_READY**
 
+## HCL v0.4 explicit-belief capability comparison closure
+
+C/D/E v0.1 closure:
+- `reports/HCL_V04_CDE_CAPABILITY_COMPARISON_V01_CLOSURE.md`
+- canonical valid run `35847392708`
+- C = 11/12
+- D = 11/12
+- E = 11/12
+- no incremental accuracy signal;
+- D showed maintenance/reuse efficiency over C;
+- E remained much cheaper than either structured arm.
+
+C/D/E v0.2 closure:
+- `reports/HCL_V04_CDE_CAPABILITY_COMPARISON_V02_CLOSURE.md`
+- canonical run `35848146884`
+- 48 events / 18 queries
+- C = 18/18
+- D = 18/18
+- E = 18/18
+- C/D normalized state equality: 8/18
+- D used fewer calls and less input/output than C;
+- E remained dramatically cheaper while matching perfect task accuracy.
+
+Canonical interpretation:
+
+- explicit first-order belief tracking is at ceiling for the tested base model;
+- dynamic persistent HCL has not established incremental downstream capability
+  on this slice;
+- persistence currently has correctness/audit/reuse engineering value rather
+  than proven answer-accuracy value;
+- do not keep enlarging this simple slice merely to force an HCL win.
+
+Next canonical capability slice:
+
+**Bounded Latent-Hypothesis Tracking and Revision**
+
+Target:
+- multiple plausible latent belief/goal/intention hypotheses;
+- explicit support/counterevidence;
+- OTHER/UNKNOWN preservation;
+- revision from later behavior;
+- behavior prediction / communication usefulness.
+
+No new external benchmark rows are authorized yet.
+Owner-originated unpublished conceptual examples remain outside GitHub.
+
+**Current gate: HCL_V04_EXPLICIT_BELIEF_SLICE_COMPLETE_LATENT_HYPOTHESIS_SLICE_READY**
+
