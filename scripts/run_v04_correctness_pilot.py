@@ -142,13 +142,29 @@ def main() -> None:
     for fixture in fixtures:
         runtime = HCLV04Runtime(CognitionStore())
         patches = []
+        rejected_patches = []
+        semantic_repairs = []
         try:
             for raw_event in fixture["events"]:
                 event = event_from_mapping(raw_event)
-                runtime.append_event(event)
-                patch = runtime.propose_patch(event.event_id, backend)
-                runtime.apply_patch(runtime.store.state_version, patch)
-                patches.append(patch_payload(patch))
+                ingest = runtime.ingest_event(event, backend)
+                patches.append(patch_payload(ingest.committed_patch))
+                if ingest.rejected_patch is not None:
+                    rejected_patches.append(
+                        {
+                            "event_id": event.event_id,
+                            "repair_reason": ingest.repair_reason,
+                            "patch": patch_payload(ingest.rejected_patch),
+                        }
+                    )
+                if ingest.semantic_repair_count:
+                    semantic_repairs.append(
+                        {
+                            "event_id": event.event_id,
+                            "count": ingest.semantic_repair_count,
+                            "reason": ingest.repair_reason,
+                        }
+                    )
 
             query_results = []
             for q_index, query in enumerate(fixture.get("queries", [])):
@@ -184,6 +200,8 @@ def main() -> None:
                     "manual_review": fixture["manual_review"],
                     "events": fixture["events"],
                     "patches": patches,
+                    "rejected_patches": rejected_patches,
+                    "semantic_repairs": semantic_repairs,
                     "queries": query_results,
                     "state_version": runtime.store.state_version,
                     "checksum": runtime.store.deterministic_checksum(),
@@ -203,6 +221,8 @@ def main() -> None:
                     "manual_review": fixture["manual_review"],
                     "events": fixture["events"],
                     "patches": patches,
+                    "rejected_patches": rejected_patches,
+                    "semantic_repairs": semantic_repairs,
                     "queries": [],
                     "state_version": runtime.store.state_version,
                     "checksum": runtime.store.deterministic_checksum(),
