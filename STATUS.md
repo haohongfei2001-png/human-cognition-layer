@@ -3929,3 +3929,11 @@ C, D and simpler direct-history E each selected 6/6 final actions and 6/6 high-i
 A different internal capability question requires a separately frozen independent contract. These six scenarios may not be tuned and rerun as fresh evidence.
 
 **Current gate: HCL_V04_OPEN_WORLD_HYPOTHESIS_V01_DIAGNOSTIC_COMPLETE_NO_PROMOTION_NEXT_CONTRACT_NOT_FROZEN**
+
+## HCL v0.4 perspective-safe correction action contract freeze
+
+The owner-authorized next bounded internal capability question is frozen on the experimental branch `manager/hcl-v04-perspective-action-20260924`; see `docs/HCL_V04_PERSPECTIVE_SAFE_ACTION_V01_CONTRACT.md`. Six independently authored synthetic correction/action cases were sealed at SHA-256 `f76844dac359059e0ffd14f69f4ef8d0f18a84878f915640b5f460b8cc3cd3b8` before any provider use. Deterministic preflight and existing perspective/hypothesis/policy regression tests pass locally. No provider comparison, external benchmark, owner-private example, cross-model paid experiment, training, public release, or runtime promotion has occurred. The failed open-world and evidence-scoped experiments remain unmerged and are not reused as fresh cases.
+
+Current next action is to implement and verify the frozen C/D/E comparison on this same isolated branch, with a separate semantic audit before any efficacy conclusion. Main HCL runtime remains unchanged until a justified, independently verified promotion decision.
+
+**Current gate: HCL_V04_PERSPECTIVE_SAFE_ACTION_V01_FROZEN_COMPARISON_NOT_RUN**

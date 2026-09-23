@@ -1,0 +1,563 @@
+{
+  "suite": "HCL v0.4 perspective-safe correction action v0.1",
+  "cases": [
+    {
+      "id": "mural_coating_not_delivered",
+      "target_recipient": "painter_elle",
+      "question": "What should the coordinator do before Elle paints the community mural?",
+      "events": [
+        {
+          "event_id": "mc1",
+          "valid_time": "2026-07-01T09:00:00+00:00",
+          "recorded_at": "2026-07-01T09:00:00+00:00",
+          "raw_text": "The project lead told Elle to use glossy coating on the mural.",
+          "source_id": "project_lead",
+          "actor_id": "project_lead",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "painter_elle"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "mc2",
+          "valid_time": "2026-07-01T10:00:00+00:00",
+          "recorded_at": "2026-07-01T10:00:00+00:00",
+          "raw_text": "The project lead confirmed to the coordinator that matte coating replaces glossy coating. Elle was not on this call or message.",
+          "source_id": "project_lead",
+          "actor_id": "project_lead",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "coordinator"
+          ],
+          "metadata": {}
+        }
+      ],
+      "allowed_actions": [
+        [
+          "SEND_CORRECTION",
+          "Deliver the latest supported correction to the named recipient."
+        ],
+        [
+          "ASK_CONFIRMATION",
+          "Ask the named recipient to confirm their understanding before relying on the correction."
+        ],
+        [
+          "PROCEED",
+          "Proceed with the corrected plan with the named recipient."
+        ],
+        [
+          "VERIFY_SOURCE",
+          "Verify the disputed correction at its source before relaying it as established."
+        ]
+      ],
+      "hypothesis_target": {
+        "target_id": "mural_coating_not_delivered:current-correction-acceptance",
+        "subject_agent_id": "painter_elle",
+        "target_kind": "COMMUNICATION_STATE",
+        "question": "What is established about painter_elle and the current correction?",
+        "candidates": [
+          [
+            "NOT_RECEIVED",
+            "The recipient has not received the current correction."
+          ],
+          [
+            "RECEIVED_UNCONFIRMED",
+            "The recipient received it, but acceptance is not established."
+          ],
+          [
+            "ACCEPTED_CURRENT",
+            "The recipient explicitly accepted the current correction."
+          ]
+        ]
+      },
+      "expected_action": "SEND_CORRECTION",
+      "forbidden_claims": [
+        "Elle received the matte-coating correction.",
+        "Elle accepted the matte-coating correction."
+      ]
+    },
+    {
+      "id": "radio_script_delivered_unconfirmed",
+      "target_recipient": "host_nia",
+      "question": "What should the producer do before depending on Nia to use the revised radio intro?",
+      "events": [
+        {
+          "event_id": "rs1",
+          "valid_time": "2026-07-02T09:00:00+00:00",
+          "recorded_at": "2026-07-02T09:00:00+00:00",
+          "raw_text": "The producer sent Nia the original intro script.",
+          "source_id": "producer",
+          "actor_id": "producer",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "host_nia"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "rs2",
+          "valid_time": "2026-07-02T10:00:00+00:00",
+          "recorded_at": "2026-07-02T10:00:00+00:00",
+          "raw_text": "The producer sent Nia a corrected intro script through the direct rehearsal channel. Delivery was confirmed, but Nia gave no reply.",
+          "source_id": "producer",
+          "actor_id": "producer",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "host_nia"
+          ],
+          "metadata": {}
+        }
+      ],
+      "allowed_actions": [
+        [
+          "SEND_CORRECTION",
+          "Deliver the latest supported correction to the named recipient."
+        ],
+        [
+          "ASK_CONFIRMATION",
+          "Ask the named recipient to confirm their understanding before relying on the correction."
+        ],
+        [
+          "PROCEED",
+          "Proceed with the corrected plan with the named recipient."
+        ],
+        [
+          "VERIFY_SOURCE",
+          "Verify the disputed correction at its source before relaying it as established."
+        ]
+      ],
+      "hypothesis_target": {
+        "target_id": "radio_script_delivered_unconfirmed:current-correction-acceptance",
+        "subject_agent_id": "host_nia",
+        "target_kind": "COMMUNICATION_STATE",
+        "question": "What is established about host_nia and the current correction?",
+        "candidates": [
+          [
+            "NOT_RECEIVED",
+            "The recipient has not received the current correction."
+          ],
+          [
+            "RECEIVED_UNCONFIRMED",
+            "The recipient received it, but acceptance is not established."
+          ],
+          [
+            "ACCEPTED_CURRENT",
+            "The recipient explicitly accepted the current correction."
+          ]
+        ]
+      },
+      "expected_action": "ASK_CONFIRMATION",
+      "forbidden_claims": [
+        "Nia accepted or understood the corrected script.",
+        "Nia rejected the corrected script."
+      ]
+    },
+    {
+      "id": "makerspace_rule_acknowledged",
+      "target_recipient": "member_omar",
+      "question": "What should the workshop organizer do for Omar after the reservation rule correction?",
+      "events": [
+        {
+          "event_id": "mr1",
+          "valid_time": "2026-07-03T09:00:00+00:00",
+          "recorded_at": "2026-07-03T09:00:00+00:00",
+          "raw_text": "The workshop organizer told Omar that the laser cutter reservation starts at 10:00.",
+          "source_id": "organizer",
+          "actor_id": "organizer",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "member_omar"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "mr2",
+          "valid_time": "2026-07-03T10:00:00+00:00",
+          "recorded_at": "2026-07-03T10:00:00+00:00",
+          "raw_text": "The organizer verified the published schedule and directly corrected Omar: the reservation starts at 11:00.",
+          "source_id": "organizer",
+          "actor_id": "organizer",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "member_omar"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "mr3",
+          "valid_time": "2026-07-03T10:30:00+00:00",
+          "recorded_at": "2026-07-03T10:30:00+00:00",
+          "raw_text": "Omar replied directly to the organizer: 'I understand and will use the 11:00 reservation.'",
+          "source_id": "member_omar",
+          "actor_id": "member_omar",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "organizer"
+          ],
+          "metadata": {}
+        }
+      ],
+      "allowed_actions": [
+        [
+          "SEND_CORRECTION",
+          "Deliver the latest supported correction to the named recipient."
+        ],
+        [
+          "ASK_CONFIRMATION",
+          "Ask the named recipient to confirm their understanding before relying on the correction."
+        ],
+        [
+          "PROCEED",
+          "Proceed with the corrected plan with the named recipient."
+        ],
+        [
+          "VERIFY_SOURCE",
+          "Verify the disputed correction at its source before relaying it as established."
+        ]
+      ],
+      "hypothesis_target": {
+        "target_id": "makerspace_rule_acknowledged:current-correction-acceptance",
+        "subject_agent_id": "member_omar",
+        "target_kind": "COMMUNICATION_STATE",
+        "question": "What is established about member_omar and the current correction?",
+        "candidates": [
+          [
+            "NOT_RECEIVED",
+            "The recipient has not received the current correction."
+          ],
+          [
+            "RECEIVED_UNCONFIRMED",
+            "The recipient received it, but acceptance is not established."
+          ],
+          [
+            "ACCEPTED_CURRENT",
+            "The recipient explicitly accepted the current correction."
+          ]
+        ]
+      },
+      "expected_action": "PROCEED",
+      "forbidden_claims": [
+        "Omar accepted a later unmentioned rule change.",
+        "The prior 10:00 instruction was never sent."
+      ]
+    },
+    {
+      "id": "science_fair_title_disputed",
+      "target_recipient": "volunteer_paz",
+      "question": "What should the coordinator do before telling Paz a replacement exhibit title?",
+      "events": [
+        {
+          "event_id": "sf1",
+          "valid_time": "2026-07-04T09:00:00+00:00",
+          "recorded_at": "2026-07-04T09:00:00+00:00",
+          "raw_text": "The curator approved the exhibit title: Blue Microbes. Paz received the approved title.",
+          "source_id": "curator",
+          "actor_id": "curator",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "volunteer_paz"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "sf2",
+          "valid_time": "2026-07-04T10:00:00+00:00",
+          "recorded_at": "2026-07-04T10:00:00+00:00",
+          "raw_text": "A helper told the coordinator that the title changed to Green Microbes, citing an unsigned draft.",
+          "source_id": "helper",
+          "actor_id": "helper",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "coordinator"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "sf3",
+          "valid_time": "2026-07-04T10:30:00+00:00",
+          "recorded_at": "2026-07-04T10:30:00+00:00",
+          "raw_text": "The curator told the coordinator that no final replacement title has been approved and the helper draft may be wrong.",
+          "source_id": "curator",
+          "actor_id": "curator",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "coordinator"
+          ],
+          "metadata": {}
+        }
+      ],
+      "allowed_actions": [
+        [
+          "SEND_CORRECTION",
+          "Deliver the latest supported correction to the named recipient."
+        ],
+        [
+          "ASK_CONFIRMATION",
+          "Ask the named recipient to confirm their understanding before relying on the correction."
+        ],
+        [
+          "PROCEED",
+          "Proceed with the corrected plan with the named recipient."
+        ],
+        [
+          "VERIFY_SOURCE",
+          "Verify the disputed correction at its source before relaying it as established."
+        ]
+      ],
+      "hypothesis_target": {
+        "target_id": "science_fair_title_disputed:current-correction-acceptance",
+        "subject_agent_id": "volunteer_paz",
+        "target_kind": "COMMUNICATION_STATE",
+        "question": "What is established about volunteer_paz and the current correction?",
+        "candidates": [
+          [
+            "NOT_RECEIVED",
+            "The recipient has not received the current correction."
+          ],
+          [
+            "RECEIVED_UNCONFIRMED",
+            "The recipient received it, but acceptance is not established."
+          ],
+          [
+            "ACCEPTED_CURRENT",
+            "The recipient explicitly accepted the current correction."
+          ]
+        ]
+      },
+      "expected_action": "VERIFY_SOURCE",
+      "forbidden_claims": [
+        "Green Microbes is the verified replacement title.",
+        "Paz received the disputed helper draft."
+      ]
+    },
+    {
+      "id": "orchestra_recipient_specific",
+      "target_recipient": "viola_lead_luis",
+      "question": "What should the stage manager do for Luis before the new seating plan is used?",
+      "events": [
+        {
+          "event_id": "os1",
+          "valid_time": "2026-07-05T09:00:00+00:00",
+          "recorded_at": "2026-07-05T09:00:00+00:00",
+          "raw_text": "The stage manager sent the old seating chart to both the violin lead and viola lead Luis.",
+          "source_id": "stage_manager",
+          "actor_id": "stage_manager",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "violin_lead",
+            "viola_lead_luis"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "os2",
+          "valid_time": "2026-07-05T10:00:00+00:00",
+          "recorded_at": "2026-07-05T10:00:00+00:00",
+          "raw_text": "The conductor approved a new seating chart and sent it only to the violin lead and stage manager. Luis was not copied.",
+          "source_id": "conductor",
+          "actor_id": "conductor",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "violin_lead",
+            "stage_manager"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "os3",
+          "valid_time": "2026-07-05T10:30:00+00:00",
+          "recorded_at": "2026-07-05T10:30:00+00:00",
+          "raw_text": "The violin lead acknowledged the new chart. There is no delivery record or response from Luis.",
+          "source_id": "violin_lead",
+          "actor_id": "violin_lead",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "stage_manager"
+          ],
+          "metadata": {}
+        }
+      ],
+      "allowed_actions": [
+        [
+          "SEND_CORRECTION",
+          "Deliver the latest supported correction to the named recipient."
+        ],
+        [
+          "ASK_CONFIRMATION",
+          "Ask the named recipient to confirm their understanding before relying on the correction."
+        ],
+        [
+          "PROCEED",
+          "Proceed with the corrected plan with the named recipient."
+        ],
+        [
+          "VERIFY_SOURCE",
+          "Verify the disputed correction at its source before relaying it as established."
+        ]
+      ],
+      "hypothesis_target": {
+        "target_id": "orchestra_recipient_specific:current-correction-acceptance",
+        "subject_agent_id": "viola_lead_luis",
+        "target_kind": "COMMUNICATION_STATE",
+        "question": "What is established about viola_lead_luis and the current correction?",
+        "candidates": [
+          [
+            "NOT_RECEIVED",
+            "The recipient has not received the current correction."
+          ],
+          [
+            "RECEIVED_UNCONFIRMED",
+            "The recipient received it, but acceptance is not established."
+          ],
+          [
+            "ACCEPTED_CURRENT",
+            "The recipient explicitly accepted the current correction."
+          ]
+        ]
+      },
+      "expected_action": "SEND_CORRECTION",
+      "forbidden_claims": [
+        "Luis received the new chart because the violin lead received it.",
+        "Luis accepted the new chart."
+      ]
+    },
+    {
+      "id": "film_credit_later_revision_unconfirmed",
+      "target_recipient": "editor_rae",
+      "question": "What should the producer do before relying on Rae to export the latest film credits?",
+      "events": [
+        {
+          "event_id": "fc1",
+          "valid_time": "2026-07-06T09:00:00+00:00",
+          "recorded_at": "2026-07-06T09:00:00+00:00",
+          "raw_text": "The producer sent Rae the first film-credit spelling: Maren.",
+          "source_id": "producer",
+          "actor_id": "producer",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "editor_rae"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "fc2",
+          "valid_time": "2026-07-06T10:00:00+00:00",
+          "recorded_at": "2026-07-06T10:00:00+00:00",
+          "raw_text": "The producer directly corrected Rae: the verified spelling is Marin.",
+          "source_id": "producer",
+          "actor_id": "producer",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "editor_rae"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "fc3",
+          "valid_time": "2026-07-06T10:30:00+00:00",
+          "recorded_at": "2026-07-06T10:30:00+00:00",
+          "raw_text": "Rae replied: 'I understand and will use Marin.'",
+          "source_id": "editor_rae",
+          "actor_id": "editor_rae",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "producer"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "fc4",
+          "valid_time": "2026-07-06T11:00:00+00:00",
+          "recorded_at": "2026-07-06T11:00:00+00:00",
+          "raw_text": "The credits owner verified a later correction to Marina. The producer delivered the update directly to Rae, but Rae has not replied.",
+          "source_id": "credits_owner",
+          "actor_id": "credits_owner",
+          "observer_ids": [
+            "system"
+          ],
+          "recipient_ids": [
+            "producer",
+            "editor_rae"
+          ],
+          "metadata": {}
+        }
+      ],
+      "allowed_actions": [
+        [
+          "SEND_CORRECTION",
+          "Deliver the latest supported correction to the named recipient."
+        ],
+        [
+          "ASK_CONFIRMATION",
+          "Ask the named recipient to confirm their understanding before relying on the correction."
+        ],
+        [
+          "PROCEED",
+          "Proceed with the corrected plan with the named recipient."
+        ],
+        [
+          "VERIFY_SOURCE",
+          "Verify the disputed correction at its source before relaying it as established."
+        ]
+      ],
+      "hypothesis_target": {
+        "target_id": "film_credit_later_revision_unconfirmed:current-correction-acceptance",
+        "subject_agent_id": "editor_rae",
+        "target_kind": "COMMUNICATION_STATE",
+        "question": "What is established about editor_rae and the current correction?",
+        "candidates": [
+          [
+            "NOT_RECEIVED",
+            "The recipient has not received the current correction."
+          ],
+          [
+            "RECEIVED_UNCONFIRMED",
+            "The recipient received it, but acceptance is not established."
+          ],
+          [
+            "ACCEPTED_CURRENT",
+            "The recipient explicitly accepted the current correction."
+          ]
+        ]
+      },
+      "expected_action": "ASK_CONFIRMATION",
+      "forbidden_claims": [
+        "Rae accepted the later Marina correction.",
+        "The earlier Marin acceptance proves acceptance of Marina."
+      ]
+    }
+  ]
+}

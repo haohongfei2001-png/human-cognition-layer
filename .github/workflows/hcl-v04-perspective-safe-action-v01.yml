@@ -1,0 +1,30 @@
+name: HCL v0.4 Perspective-Safe Action v0.1 Preflight
+
+on:
+  pull_request:
+    paths:
+      - "eval/v04/perspective_safe_action_v01.json"
+      - "docs/HCL_V04_PERSPECTIVE_SAFE_ACTION_V01_CONTRACT.md"
+      - "scripts/validate_v04_perspective_safe_action_v01.py"
+      - "tests/test_v04_perspective_safe_action_v01.py"
+      - ".github/workflows/hcl-v04-perspective-safe-action-v01.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic-preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile bounded capability code
+        run: python -m compileall -q hcl/v04 scripts/validate_v04_perspective_safe_action_v01.py tests/test_v04_perspective_safe_action_v01.py
+      - name: Verify frozen fixture and perspective guards
+        run: |
+          python scripts/validate_v04_perspective_safe_action_v01.py
+          python -m unittest -v tests.test_v04_perspective_safe_action_v01 tests.test_v04_perspective tests.test_v04_hypotheses tests.test_v04_probe_policy
