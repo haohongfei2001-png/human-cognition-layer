@@ -582,11 +582,20 @@ class CognitionStore:
         return checksum
 
     def _assertion_dict(self, row: sqlite3.Row) -> dict:
+        proposition_text = None
+        if row["proposition_id"]:
+            proposition = self.conn.execute(
+                "SELECT canonical_text FROM propositions WHERE proposition_id=?",
+                (row["proposition_id"],),
+            ).fetchone()
+            if proposition:
+                proposition_text = proposition["canonical_text"]
         return {
             "assertion_id": row["assertion_id"],
             "assertion_type": row["assertion_type"],
             "subject_agent_id": row["subject_agent_id"],
             "proposition_id": row["proposition_id"],
+            "proposition_text": proposition_text,
             "hypothesis_text": row["hypothesis_text"],
             "valid_time": row["valid_time"],
             "system_record_time": row["system_record_time"],
