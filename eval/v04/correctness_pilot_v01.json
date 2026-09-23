@@ -241,9 +241,10 @@
             "subject_agent_id": "bob"
           },
           {
-            "kind": "forbid_type_subject",
+            "kind": "forbid_type_subject_event",
             "assertion_type": "INFORMATION_EXPOSURE",
-            "subject_agent_id": "alice"
+            "subject_agent_id": "alice",
+            "event_id": "cn2"
           }
         ]
       }
