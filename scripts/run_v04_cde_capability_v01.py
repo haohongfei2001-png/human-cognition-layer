@@ -21,7 +21,8 @@ from hcl.v04.store import CognitionStore
 
 ANSWER_SYSTEM = """You are answering a controlled human-state reasoning query.
 
-Return exactly one label from allowed_labels and nothing else.
+Return JSON only:
+{"label": "<one exact label from allowed_labels>"}
 
 Track the target person's perspective rather than substituting world truth.
 Distinguish:
@@ -108,13 +109,19 @@ def event_from_mapping(raw: dict) -> EventRecord:
     )
 
 
-def normalize_label(raw: str) -> str:
-    text = raw.strip().strip('"').strip("'").strip()
-    return text.upper()
+def normalize_label_json(raw: str, allowed_labels: list[str]) -> str:
+    try:
+        payload = json.loads(raw)
+    except json.JSONDecodeError:
+        return "__INVALID_JSON__"
+    label = str(payload.get("label", "")).strip().upper()
+    if label not in {x.upper() for x in allowed_labels}:
+        return f"__INVALID_LABEL__:{label}"
+    return label
 
 
 def answer_from_context(backend, query: dict, context: dict) -> str:
-    raw = backend.complete(
+    raw = backend.complete_json(
         [
             {"role": "system", "content": ANSWER_SYSTEM},
             {
@@ -130,14 +137,14 @@ def answer_from_context(backend, query: dict, context: dict) -> str:
                 ),
             },
         ],
-        max_tokens=64,
+        max_tokens=256,
         temperature=0.0,
     )
-    return normalize_label(raw)
+    return normalize_label_json(raw, query["allowed_labels"])
 
 
 def answer_from_memory(backend, query: dict, events: list[dict]) -> str:
-    raw = backend.complete(
+    raw = backend.complete_json(
         [
             {"role": "system", "content": ANSWER_SYSTEM},
             {
@@ -153,10 +160,10 @@ def answer_from_memory(backend, query: dict, events: list[dict]) -> str:
                 ),
             },
         ],
-        max_tokens=64,
+        max_tokens=256,
         temperature=0.0,
     )
-    return normalize_label(raw)
+    return normalize_label_json(raw, query["allowed_labels"])
 
 
 def state_signature(context: dict) -> list:
