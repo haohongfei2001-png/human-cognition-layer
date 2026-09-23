@@ -110,27 +110,17 @@ class V04RuntimeTests(unittest.TestCase):
                 ],
                 "assertions": [
                     {
-                        "assertion_id": "bad_exp",
-                        "assertion_type": "INFORMATION_EXPOSURE",
-                        "subject_agent_id": "alice",
+                        "assertion_id": "scene",
+                        "assertion_type": "SCENE_FACT",
+                        "subject_agent_id": None,
                         "proposition_id": "p1",
                         "valid_time": T0,
                         "evidence_event_ids": ["e1"],
                         "depends_on_assertion_ids": [],
                         "status": "ACTIVE",
                         "support_level": "DIRECT_SUPPORT",
-                    }
-                ],
-            }
-            repaired = {
-                "propositions": [
-                    {
-                        "proposition_id": "p1",
-                        "canonical_text": "the correction",
-                        "source_event_ids": ["e1"],
-                    }
-                ],
-                "assertions": [
+                        "belief_stance": None,
+                    },
                     {
                         "assertion_id": "bob_exp",
                         "assertion_type": "INFORMATION_EXPOSURE",
@@ -141,8 +131,25 @@ class V04RuntimeTests(unittest.TestCase):
                         "depends_on_assertion_ids": [],
                         "status": "ACTIVE",
                         "support_level": "DIRECT_SUPPORT",
+                        "belief_stance": None,
+                    },
+                    {
+                        "assertion_id": "bad_exp",
+                        "assertion_type": "INFORMATION_EXPOSURE",
+                        "subject_agent_id": "alice",
+                        "proposition_id": "p1",
+                        "valid_time": T0,
+                        "evidence_event_ids": ["e1"],
+                        "depends_on_assertion_ids": [],
+                        "status": "ACTIVE",
+                        "support_level": "DIRECT_SUPPORT",
+                        "belief_stance": None,
                     }
                 ],
+            }
+            repaired = {
+                "propositions": invalid["propositions"],
+                "assertions": [],
             }
             backend = FakeBackend(
                 json_outputs=[json.dumps(invalid), json.dumps(repaired)]
@@ -154,7 +161,13 @@ class V04RuntimeTests(unittest.TestCase):
             alice = runtime.build_view("alice", None, None, "q")
             bob = runtime.build_view("bob", None, None, "q")
             self.assertEqual(alice.relevant_assertions, ())
-            self.assertEqual(len(bob.relevant_assertions), 1)
+            bob_ids = {x["assertion_id"] for x in bob.relevant_assertions}
+            self.assertEqual(bob_ids, {"scene", "bob_exp"})
+            system_ids = {
+                x["assertion_id"]
+                for x in runtime.build_view(None, None, None, "q").relevant_assertions
+            }
+            self.assertEqual(system_ids, {"scene", "bob_exp"})
         finally:
             runtime.store.close()
 
@@ -190,6 +203,7 @@ class V04RuntimeTests(unittest.TestCase):
                         "depends_on_assertion_ids": [],
                         "status": "ACTIVE",
                         "support_level": "COUNTEREVIDENCE",
+                        "belief_stance": "AFFIRM",
                     }
                 ],
             }
@@ -200,6 +214,48 @@ class V04RuntimeTests(unittest.TestCase):
             patch = runtime.propose_patch("e1", backend)
             self.assertEqual(len(backend.json_calls), 2)
             self.assertEqual(patch.assertions, ())
+        finally:
+            runtime.store.close()
+
+    def test_explicit_deny_belief_stance_is_preserved(self):
+        runtime = HCLV04Runtime(CognitionStore())
+        try:
+            runtime.append_event(
+                EventRecord(
+                    event_id="e1",
+                    valid_time=T0,
+                    raw_text="Alice says she thinks P is wrong.",
+                    source_id="alice",
+                    actor_id="alice",
+                    observer_ids=("alice",),
+                )
+            )
+            payload = {
+                "propositions": [
+                    {
+                        "proposition_id": "p1",
+                        "canonical_text": "P",
+                        "source_event_ids": ["e1"],
+                    }
+                ],
+                "assertions": [
+                    {
+                        "assertion_id": "b1",
+                        "assertion_type": "BELIEF_ESTIMATE",
+                        "subject_agent_id": "alice",
+                        "proposition_id": "p1",
+                        "valid_time": T0,
+                        "evidence_event_ids": ["e1"],
+                        "depends_on_assertion_ids": [],
+                        "status": "ACTIVE",
+                        "support_level": "DIRECT_SUPPORT",
+                        "belief_stance": "DENY",
+                    }
+                ],
+            }
+            backend = FakeBackend(json_outputs=[json.dumps(payload)])
+            patch = runtime.propose_patch("e1", backend)
+            self.assertEqual(patch.assertions[0].belief_stance.value, "DENY")
         finally:
             runtime.store.close()
 
