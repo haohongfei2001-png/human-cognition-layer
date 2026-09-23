@@ -295,6 +295,10 @@
           {
             "kind": "forbid_event_visible",
             "event_id": "sd2"
+          },
+          {
+            "kind": "forbid_type",
+            "assertion_type": "STATED_GOAL_INTENTION"
           }
         ]
       },
@@ -304,6 +308,12 @@
         "knowledge_cutoff": "2026-01-01T09:30:00+00:00",
         "query": "What did HCL have evidence for by 09:30?",
         "checks": [
+          {
+            "kind": "require_belief_stance",
+            "subject_agent_id": "alice",
+            "belief_stance": "AFFIRM",
+            "proposition_text": "The key is in drawer A."
+          },
           {
             "kind": "forbid_event_visible",
             "event_id": "sd2"
