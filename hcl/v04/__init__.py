@@ -39,3 +39,21 @@ __all__ = [
     "StateReceipt",
     "SupportLevel",
 ]
+
+from .hypotheses import (
+    HypothesisCandidate,
+    HypothesisState,
+    HypothesisStatus,
+    HypothesisTarget,
+    HypothesisTracker,
+    HypothesisUpdateReceipt,
+)
+
+__all__ += [
+    "HypothesisCandidate",
+    "HypothesisState",
+    "HypothesisStatus",
+    "HypothesisTarget",
+    "HypothesisTracker",
+    "HypothesisUpdateReceipt",
+]
