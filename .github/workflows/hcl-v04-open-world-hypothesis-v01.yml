@@ -1,0 +1,43 @@
+name: HCL v0.4 Open-World Hypothesis v0.1
+
+on:
+  push:
+    branches:
+      - manager/hcl-v04-open-world-hypotheses-20260923
+    paths:
+      - ".github/HCL_V04_OPEN_WORLD_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      DEEPSEEK_BASE_URL: https://api.deepseek.com
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install existing runtime dependency
+        run: python -m pip install openai
+      - name: Verify frozen fixture and state contracts
+        run: |
+          echo 'ad8d8e96ab6e3d251bda416a10e9f6eac028d87d5376b1c8eea0441ea3bcbe41  eval/v04/open_world_hypothesis_v01.json' | sha256sum -c -
+          python scripts/run_v04_open_world_hypothesis_v01.py --validate-only
+          python -m unittest discover -s tests -p test_v04_open_world_runner.py
+          python -m unittest discover -s tests -p test_v04_hypotheses.py
+          python -m unittest discover -s tests -p test_v04_probe_policy.py
+      - name: Run one frozen C/D/E comparison
+        run: python scripts/run_v04_open_world_hypothesis_v01.py --model deepseek-flash
+      - name: Upload synthetic evidence for semantic audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v04-open-world-v01-${{ github.run_id }}
+          path: artifacts/hcl-v04-open-world-v01/
+          if-no-files-found: warn
+          retention-days: 30
