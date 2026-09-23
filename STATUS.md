@@ -3751,3 +3751,54 @@ attachments.
 
 **Current gate: HCL_V04_CAPABILITY_PLAN_V01_READY_FOR_ARCHITECTURE_REVIEW**
 
+## HCL v0.4 minimal-slice correctness closure
+
+Capability plan:
+- `docs/HCL_V04_CAPABILITY_PLAN_V1_0.md`
+
+Implementation contract:
+- `docs/HCL_V04_MINIMAL_IMPLEMENTATION_CONTRACT_V1_0.md`
+
+Closure:
+- `reports/HCL_V04_MINIMAL_SLICE_CORRECTNESS_PILOT_V01_CLOSURE.md`
+
+Canonical contract CI:
+- run `35845149540`
+- SUCCESS @ `e03e64edf5408bd379458b5440919426e4e945ce`
+
+Canonical provider-backed correctness pilot:
+- run `35845184484`
+- SUCCESS
+- 7 development scenarios
+- automated hard-check failures: 0
+- artifact `10743530241`
+- digest
+  `sha256:aae37f1c73cd92bd324497daff0f0bb085c02402a41c9715f08ead8e68f01d33`
+
+The artifact received manual semantic review after automated checks.
+
+Confirmed in the bounded development slice:
+- source assertion != world fact;
+- exposure != belief;
+- belief stance supports explicit AFFIRM / DENY;
+- perspective isolation;
+- later system evidence does not rewrite earlier agent state;
+- event/system record time is preserved correctly;
+- bounded repair can reject invalid exposure while retaining valid scene fact and
+  another agent's exposure.
+
+This is a development correctness closure only.
+
+It does not establish external efficacy, cross-model transfer, or leaderboard
+value.
+
+No new external benchmark rows were consumed.
+
+Next canonical work:
+- small internal C/D/E capability comparison;
+- C = full-history reconstruction;
+- D = dynamic persistent v0.4;
+- E = ordinary persistent memory.
+
+**Current gate: HCL_V04_MINIMAL_SLICE_CORRECTNESS_COMPLETE_CAPABILITY_COMPARISON_READY**
+
