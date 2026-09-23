@@ -292,6 +292,36 @@ class CognitionStore:
             for row in self.conn.execute("SELECT assertion_id FROM assertions")
         }
 
+    def validate_patch_candidate(self, patch: SemanticPatch) -> None:
+        """Validate a candidate patch without mutating committed state."""
+        self._validate_patch_against_store(patch)
+
+    def independently_valid_assertions(
+        self,
+        patch: SemanticPatch,
+    ) -> tuple[CognitiveAssertion, ...]:
+        """Return assertions that are independently safe to preserve.
+
+        Assertions with unresolved intra-patch dependencies are intentionally
+        excluded from this preservation set and must be regenerated/revalidated
+        by the semantic repair step.
+        """
+        valid: list[CognitiveAssertion] = []
+        for assertion in patch.assertions:
+            probe = SemanticPatch(
+                patch_id=f"{patch.patch_id}:probe:{assertion.assertion_id}",
+                event_id=patch.event_id,
+                semantic_version=patch.semantic_version,
+                propositions=patch.propositions,
+                assertions=(assertion,),
+            )
+            try:
+                self._validate_patch_against_store(probe)
+            except SchemaValidationError:
+                continue
+            valid.append(assertion)
+        return tuple(valid)
+
     def _validate_patch_against_store(self, patch: SemanticPatch) -> None:
         validate_patch_structure(patch)
         self.get_event(patch.event_id)
