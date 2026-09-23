@@ -73,6 +73,8 @@ class EvidenceScopedRevisionTests(unittest.TestCase):
         self.revision.record(event("e2"), target_ids=("a",))
         with self.assertRaises(PendingEvidenceError):
             self.revision.current("a")
+        with self.assertRaises(PendingEvidenceError):
+            self.revision.evidence_for_target("a")
         backend = FakeBackend(state(support=("e1",), unknown=("e2",)))
         result = self.revision.refresh("a", backend)
         self.assertEqual(result.new_event_ids, ("e1", "e2"))
@@ -93,6 +95,10 @@ class EvidenceScopedRevisionTests(unittest.TestCase):
         self.assertEqual(backend.calls, 1)
         self.assertEqual(self.store.get_event("unscoped").observer_ids, ("system",))
         self.assertEqual(self.revision.current("b").version, 1)
+        self.assertEqual(
+            [item.event_id for item in self.revision.evidence_for_target("b")],
+            ["unscoped"],
+        )
 
     def test_unrelated_evidence_reference_fails_closed_without_cursor_advance(self):
         self.revision.record(event("a-only"), target_ids=("a",))

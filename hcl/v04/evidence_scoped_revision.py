@@ -133,6 +133,14 @@ class EvidenceScopedRevision:
                 )
         return state
 
+    def evidence_for_target(self, target_id: str) -> tuple[EventRecord, ...]:
+        """Return only admitted raw evidence after its derived state is current."""
+        self.current(target_id)
+        return tuple(
+            self.store.get_event(event_id)
+            for event_id in self._relevant(target_id, through=self._cursor(target_id))
+        )
+
     def refresh(self, target_id: str, backend: HypothesisBackend) -> RevisionResult:
         cursor = self._cursor(target_id)
         latest = self._latest_index()
