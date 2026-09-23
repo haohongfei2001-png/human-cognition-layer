@@ -189,6 +189,27 @@ def main() -> None:
                     "checksum": runtime.store.deterministic_checksum(),
                 }
             )
+        except Exception as exc:
+            hard_failures.append(
+                {
+                    "fixture": fixture["id"],
+                    "query_index": None,
+                    "detail": f"{type(exc).__name__}: {exc}",
+                }
+            )
+            results.append(
+                {
+                    "id": fixture["id"],
+                    "manual_review": fixture["manual_review"],
+                    "events": fixture["events"],
+                    "patches": patches,
+                    "queries": [],
+                    "state_version": runtime.store.state_version,
+                    "checksum": runtime.store.deterministic_checksum(),
+                    "error_type": type(exc).__name__,
+                    "error": str(exc),
+                }
+            )
         finally:
             runtime.store.close()
 
