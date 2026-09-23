@@ -4,6 +4,7 @@ import unittest
 
 from hcl.v04 import (
     AssertionType,
+    BeliefStance,
     CognitiveAssertion,
     CognitionStore,
     EventRecord,
@@ -155,6 +156,7 @@ class V04RecoveryTests(unittest.TestCase):
                         CognitiveAssertion(
                             assertion_id="old_belief",
                             assertion_type=AssertionType.BELIEF_ESTIMATE,
+                            belief_stance=BeliefStance.AFFIRM,
                             subject_agent_id="alice",
                             proposition_id="three",
                             valid_time=T0,
@@ -239,6 +241,7 @@ class V04RecoveryTests(unittest.TestCase):
                         CognitiveAssertion(
                             assertion_id="derived",
                             assertion_type=AssertionType.BELIEF_ESTIMATE,
+                            belief_stance=BeliefStance.AFFIRM,
                             subject_agent_id="alice",
                             proposition_id="p",
                             valid_time=T0,
