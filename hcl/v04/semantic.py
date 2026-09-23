@@ -46,7 +46,8 @@ Keep these record types distinct:
   Use belief_stance=DENY when the agent is supported as rejecting/denying P.
   BELIEF_ESTIMATE must point to the object-level proposition P itself; do not
   create a meta-proposition such as "Alice believes P".
-- STATED_GOAL_INTENTION: an explicitly stated goal/plan; not the only hidden motive.
+- STATED_GOAL_INTENTION: an explicitly stated goal/plan/intention to act; not the only hidden motive.
+  A statement such as "I believe P" is a belief report, NOT a goal or intention.
 - LATENT_HYPOTHESIS: a candidate hidden interpretation.
 - OTHER_UNKNOWN: current candidates may be incomplete.
 
@@ -124,7 +125,7 @@ def patch_from_mapping(
         )
 
     assertions: list[CognitiveAssertion] = []
-    now = utc_now_iso()
+    now = event.recorded_at
     for raw in payload.get("assertions", []):
         if not isinstance(raw, dict):
             raise SchemaValidationError("assertion entries must be objects")
