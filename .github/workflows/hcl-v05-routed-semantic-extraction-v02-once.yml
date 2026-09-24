@@ -1,0 +1,121 @@
+name: HCL v0.5 Routed Semantic Extraction v0.2 Once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_V05_ROUTED_EXTRACTION_V02_TRIGGER"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hcl-v05-routed-extraction-v02-once
+  cancel-in-progress: false
+
+env:
+  CANDIDATE_ANCHOR: b2ae04ada3313fec942d4b24d460a25b33ab1832
+  FIXTURE_SHA256: 57d06573294c107f863c85890bd92a45bbc45871202bd1569b55d0ec080d3a58
+  GOLD_SHA256: 8dc199d75b4e187a9fe33ddaaffdf5d19ed9399303a47d57c75633a432336f62
+  DEEPSEEK_BASE_URL: https://api.deepseek.com
+  TRIGGER_PATH: .github/HCL_V05_ROUTED_EXTRACTION_V02_TRIGGER
+  RUN_ONCE_TOKEN: HCL_V05_ROUTED_EXTRACTION_V02_RUN_ONCE_20260924_A1
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Enforce immutable one-shot trigger
+        shell: bash
+        run: |
+          if [ "$GITHUB_RUN_ATTEMPT" != "1" ]; then
+            echo "Refusing provider execution on workflow rerun attempt $GITHUB_RUN_ATTEMPT"
+            exit 1
+          fi
+          test "$(cat "$TRIGGER_PATH")" = "$RUN_ONCE_TOKEN"
+          if git log --format=%H "${{ github.event.before }}" -- "$TRIGGER_PATH" | grep -q .; then
+            echo "Trigger path existed before this push; rows are already consumed or trigger history is not fresh."
+            exit 1
+          fi
+          git diff --diff-filter=A --name-only "${{ github.event.before }}" "$GITHUB_SHA" -- "$TRIGGER_PATH" \
+            | grep -Fx "$TRIGGER_PATH"
+
+      - name: Verify frozen candidate content
+        shell: bash
+        run: |
+          git diff --exit-code "$CANDIDATE_ANCHOR"..HEAD -- \
+            hcl/v05 \
+            scripts/run_v05_routed_semantic_extraction_v02.py \
+            tests/test_v05_routed_extraction_runner_v02.py \
+            eval/v05/routed_semantic_extraction_v02_fixture.json \
+            eval/v05/routed_semantic_extraction_v02_gold.json \
+            docs/HCL_V05_ROUTED_SEMANTIC_EXTRACTION_V02_PILOT.md
+          echo "$FIXTURE_SHA256  eval/v05/routed_semantic_extraction_v02_fixture.json" | sha256sum -c -
+          echo "$GOLD_SHA256  eval/v05/routed_semantic_extraction_v02_gold.json" | sha256sum -c -
+
+      - name: Run provider-free execution preflight
+        run: |
+          python scripts/run_v05_routed_semantic_extraction_v02.py --validate-only
+          python -m unittest -v tests.test_v05_routed_extraction_runner_v02 tests.test_v05_routed_semantic
+
+      - name: Install frozen provider client
+        run: python -m pip install "openai==2.14.0"
+
+      - name: Run frozen routed semantic extraction once
+        run: |
+          python scripts/run_v05_routed_semantic_extraction_v02.py \
+            --model deepseek-flash \
+            --fixtures eval/v05/routed_semantic_extraction_v02_fixture.json \
+            --gold eval/v05/routed_semantic_extraction_v02_gold.json \
+            --out artifacts/hcl-v05-routed-semantic-extraction-v02/result.json
+
+      - name: Verify complete evidence artifact
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          p = Path("artifacts/hcl-v05-routed-semantic-extraction-v02/result.json")
+          result = json.loads(p.read_text(encoding="utf-8"))
+
+          assert result["format"] == "hcl-v05-routed-semantic-extraction-v02"
+          assert result["fixture_sha256"] == os.environ["FIXTURE_SHA256"]
+          assert result["gold_sha256"] == os.environ["GOLD_SHA256"]
+          assert result["total_events"] == 36
+          assert len(result["rows"]) == 36
+          assert result["self_tp"] + result["self_fn"] == 19
+          assert result["revision_tp"] + result["revision_fn"] == 14
+          assert result["backend"]["calls"] >= 36
+          assert result["backend"]["input_chars"] > 0
+          assert result["backend"]["output_chars"] > 0
+          assert result["backend"]["provider_wall_seconds"] >= 0
+          for row in result["rows"]:
+              assert "predicted_self_stances" in row
+              assert "predicted_revision_relations" in row
+              assert "routed_stance_events" in row
+              assert "risk_class" in row
+              assert "exact" in row
+          PY
+
+      - name: Upload immutable routed extraction evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v05-routed-semantic-extraction-v02-${{ github.run_id }}
+          path: artifacts/hcl-v05-routed-semantic-extraction-v02/
+          if-no-files-found: warn
+          retention-days: 90
