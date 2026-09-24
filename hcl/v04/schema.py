@@ -82,6 +82,20 @@ def validate_assertion(assertion: CognitiveAssertion) -> None:
             "belief_stance is valid only for BELIEF_ESTIMATE"
         )
 
+    if assertion.assertion_type == AssertionType.PROPOSITION_REVISION:
+        if not assertion.proposition_id or not assertion.related_proposition_id:
+            raise SchemaValidationError(
+                "PROPOSITION_REVISION requires proposition_id and related_proposition_id"
+            )
+        if assertion.proposition_id == assertion.related_proposition_id:
+            raise SchemaValidationError(
+                "PROPOSITION_REVISION cannot revise the same proposition"
+            )
+    elif assertion.related_proposition_id is not None:
+        raise SchemaValidationError(
+            "related_proposition_id is valid only for PROPOSITION_REVISION"
+        )
+
     if assertion.assertion_type == AssertionType.LATENT_HYPOTHESIS:
         if not assertion.subject_agent_id or not assertion.hypothesis_text:
             raise SchemaValidationError(

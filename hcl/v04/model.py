@@ -15,6 +15,7 @@ def utc_now_iso() -> str:
 class AssertionType(str, Enum):
     SCENE_FACT = "SCENE_FACT"
     SOURCE_ASSERTION = "SOURCE_ASSERTION"
+    PROPOSITION_REVISION = "PROPOSITION_REVISION"
     INFORMATION_EXPOSURE = "INFORMATION_EXPOSURE"
     BELIEF_ESTIMATE = "BELIEF_ESTIMATE"
     STATED_GOAL_INTENTION = "STATED_GOAL_INTENTION"
@@ -82,6 +83,7 @@ class CognitiveAssertion:
     support_level: SupportLevel | None = None
     belief_stance: BeliefStance | None = None
     semantic_version: str = "v04.1"
+    related_proposition_id: str | None = None
 
 
 @dataclass(frozen=True)

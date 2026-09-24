@@ -107,6 +107,7 @@ class CognitionStore:
                 assertion_type TEXT NOT NULL,
                 subject_agent_id TEXT,
                 proposition_id TEXT,
+                related_proposition_id TEXT,
                 hypothesis_text TEXT,
                 valid_time TEXT NOT NULL,
                 system_record_time TEXT NOT NULL,
@@ -160,6 +161,11 @@ class CognitionStore:
             with self.conn:
                 self.conn.execute(
                     "ALTER TABLE assertions ADD COLUMN belief_stance TEXT"
+                )
+        if "related_proposition_id" not in assertion_columns:
+            with self.conn:
+                self.conn.execute(
+                    "ALTER TABLE assertions ADD COLUMN related_proposition_id TEXT"
                 )
 
         with self.conn:
@@ -294,6 +300,32 @@ class CognitionStore:
             for row in self.conn.execute("SELECT proposition_id FROM propositions")
         }
 
+    def proposition_catalog(self, limit: int = 64) -> tuple[dict, ...]:
+        """Return a bounded active proposition catalog for semantic revision linking."""
+        rows = self.conn.execute(
+            """
+            SELECT p.proposition_id, p.canonical_text, p.source_event_ids
+            FROM propositions p
+            WHERE EXISTS (
+                SELECT 1
+                FROM assertions a
+                WHERE a.proposition_id = p.proposition_id
+                  AND a.status IN ('ACTIVE', 'UNRESOLVED')
+            )
+            ORDER BY p.rowid DESC
+            LIMIT ?
+            """,
+            (limit,),
+        ).fetchall()
+        return tuple(
+            {
+                "proposition_id": row["proposition_id"],
+                "canonical_text": row["canonical_text"],
+                "source_event_ids": _loads(row["source_event_ids"], []),
+            }
+            for row in rows
+        )
+
     def _existing_assertion_ids(self) -> set[str]:
         return {
             row["assertion_id"]
@@ -335,7 +367,11 @@ class CognitionStore:
         self.get_event(patch.event_id)
 
         event_ids = {event.event_id for event in self.list_events()}
-        proposition_ids = self._existing_proposition_ids() | {
+        existing_proposition_ids = self._existing_proposition_ids()
+        revision_target_ids = {
+            item["proposition_id"] for item in self.proposition_catalog()
+        }
+        proposition_ids = existing_proposition_ids | {
             p.proposition_id for p in patch.propositions
         }
         assertion_ids = self._existing_assertion_ids() | {
@@ -358,6 +394,15 @@ class CognitionStore:
             if assertion.proposition_id and assertion.proposition_id not in proposition_ids:
                 raise SchemaValidationError(
                     f"assertion references missing proposition: {assertion.proposition_id}"
+                )
+            if (
+                assertion.related_proposition_id
+                and assertion.related_proposition_id not in revision_target_ids
+            ):
+                raise SchemaValidationError(
+                    "revision target must be present in the bounded active "
+                    "proposition catalog: "
+                    f"{assertion.related_proposition_id}"
                 )
             missing_dependencies = (
                 set(assertion.depends_on_assertion_ids) - assertion_ids
@@ -435,6 +480,7 @@ class CognitionStore:
                     assertion_type=AssertionType(a["assertion_type"]),
                     subject_agent_id=a.get("subject_agent_id"),
                     proposition_id=a.get("proposition_id"),
+                    related_proposition_id=a.get("related_proposition_id"),
                     hypothesis_text=a.get("hypothesis_text"),
                     valid_time=a["valid_time"],
                     system_record_time=a["system_record_time"],
@@ -530,17 +576,18 @@ class CognitionStore:
                     """
                     INSERT INTO assertions(
                         assertion_id, assertion_type, subject_agent_id,
-                        proposition_id, hypothesis_text, valid_time,
-                        system_record_time, evidence_event_ids,
+                        proposition_id, related_proposition_id, hypothesis_text,
+                        valid_time, system_record_time, evidence_event_ids,
                         depends_on_assertion_ids, status, support_level,
                         belief_stance, semantic_version
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
                         assertion.assertion_id,
                         assertion.assertion_type.value,
                         assertion.subject_agent_id,
                         assertion.proposition_id,
+                        assertion.related_proposition_id,
                         assertion.hypothesis_text,
                         assertion.valid_time,
                         assertion.system_record_time,
@@ -666,6 +713,11 @@ class CognitionStore:
             "subject_agent_id": row["subject_agent_id"],
             "proposition_id": row["proposition_id"],
             "proposition_text": proposition_text,
+            "related_proposition_id": (
+                row.get("related_proposition_id")
+                if isinstance(row, dict)
+                else row["related_proposition_id"]
+            ),
             "hypothesis_text": row["hypothesis_text"],
             "valid_time": row["valid_time"],
             "system_record_time": row["system_record_time"],
@@ -829,16 +881,121 @@ class CognitionStore:
             included.append(row)
             evidence_ids |= closure
 
-        relevant = tuple(self._assertion_dict(row, proposition_texts) for row in included)
+        def related_proposition_id(row) -> str | None:
+            if isinstance(row, dict):
+                return row.get("related_proposition_id")
+            return row["related_proposition_id"]
+
+        def record_at_or_after(row, reference) -> bool:
+            row_valid = _parse_time(row["valid_time"])
+            ref_valid = _parse_time(reference["valid_time"])
+            if row_valid != ref_valid:
+                return row_valid > ref_valid
+            return _parse_time(row["system_record_time"]) >= _parse_time(
+                reference["system_record_time"]
+            )
+
+        revisions_by_new: dict[str, list[tuple[str, sqlite3.Row | dict]]] = {}
+        belief_rows = [
+            row
+            for row in included
+            if row["assertion_type"] == AssertionType.BELIEF_ESTIMATE.value
+        ]
+        for row in included:
+            if row["assertion_type"] != AssertionType.PROPOSITION_REVISION.value:
+                continue
+            new_proposition_id = row["proposition_id"]
+            old_proposition_id = related_proposition_id(row)
+            if new_proposition_id and old_proposition_id:
+                revisions_by_new.setdefault(new_proposition_id, []).append(
+                    (old_proposition_id, row)
+                )
+
+        stale_belief_ids: set[str] = set()
+        revision_conflicts: list[dict] = []
+        seen_revision_conflicts: set[tuple[str, str, str]] = set()
+        for exposure in included:
+            if exposure["assertion_type"] != AssertionType.INFORMATION_EXPOSURE.value:
+                continue
+            subject = exposure["subject_agent_id"]
+            new_proposition_id = exposure["proposition_id"]
+            if not subject or not new_proposition_id:
+                continue
+            for old_proposition_id, revision in revisions_by_new.get(
+                new_proposition_id, []
+            ):
+                if not record_at_or_after(exposure, revision):
+                    continue
+                prior = [
+                    row
+                    for row in belief_rows
+                    if row["subject_agent_id"] == subject
+                    and row["proposition_id"] == old_proposition_id
+                    and (
+                        _parse_time(row["valid_time"])
+                        < _parse_time(exposure["valid_time"])
+                        or (
+                            _parse_time(row["valid_time"])
+                            == _parse_time(exposure["valid_time"])
+                            and _parse_time(row["system_record_time"])
+                            < _parse_time(exposure["system_record_time"])
+                        )
+                    )
+                ]
+                if not prior:
+                    continue
+                prior_ids = {row["assertion_id"] for row in prior}
+                later_stance = [
+                    row
+                    for row in belief_rows
+                    if row["subject_agent_id"] == subject
+                    and row["proposition_id"]
+                    in {old_proposition_id, new_proposition_id}
+                    and row["assertion_id"] not in prior_ids
+                    and record_at_or_after(row, exposure)
+                ]
+                if later_stance:
+                    continue
+                stale_belief_ids.update(prior_ids)
+                conflict_key = (
+                    subject,
+                    old_proposition_id,
+                    new_proposition_id,
+                )
+                if conflict_key in seen_revision_conflicts:
+                    continue
+                seen_revision_conflicts.add(conflict_key)
+                revision_conflicts.append(
+                    {
+                        "conflict_type": "REVISION_STANCE_UNRESOLVED",
+                        "subject_agent_id": subject,
+                        "prior_proposition_id": old_proposition_id,
+                        "revision_proposition_id": new_proposition_id,
+                        "revision_assertion_id": revision["assertion_id"],
+                        "exposure_assertion_id": exposure["assertion_id"],
+                        "stale_belief_assertion_ids": sorted(prior_ids),
+                    }
+                )
+
+        relevant_items: list[dict] = []
+        for row in included:
+            item = self._assertion_dict(row, proposition_texts)
+            if row["assertion_id"] in stale_belief_ids:
+                item["projection_status"] = "STALE_AFTER_REVISION_EXPOSURE"
+            relevant_items.append(item)
+        relevant = tuple(relevant_items)
+
         evidence = tuple(
             self._event_dict(self.get_event(event_id))
             for event_id in sorted(evidence_ids)
         )
-        unresolved = tuple(
+        unresolved_items = [
             self._assertion_dict(row, proposition_texts)
             for row in included
             if row["status"] == AssertionStatus.UNRESOLVED.value
-        )
+        ]
+        unresolved_items.extend(revision_conflicts)
+        unresolved = tuple(unresolved_items)
         hypotheses = tuple(
             self._assertion_dict(row, proposition_texts)
             for row in included
@@ -853,6 +1010,7 @@ class CognitionStore:
             (row["subject_agent_id"], row["proposition_id"])
             for row in included
             if row["assertion_type"] == AssertionType.BELIEF_ESTIMATE.value
+            and row["assertion_id"] not in stale_belief_ids
         }
         unsupported: list[str] = []
         if incomplete_legacy_history:
@@ -869,6 +1027,14 @@ class CognitionStore:
                     f"received({row['subject_agent_id']}, {row['proposition_id']}) "
                     "does not by itself entail belief"
                 )
+        for conflict in revision_conflicts:
+            unsupported.append(
+                "A received revision does not establish acceptance: "
+                f"{conflict['subject_agent_id']} received "
+                f"{conflict['revision_proposition_id']} revising "
+                f"{conflict['prior_proposition_id']}; the prior belief estimate "
+                "cannot certify the current stance without later stance evidence."
+            )
 
         return QueryContext(
             viewer=viewer,
@@ -897,11 +1063,16 @@ class CognitionStore:
 
         direct: set[str] = set()
         invalid_patches: set[str] = set()
+        invalidated_proposition_ids: set[str] = set()
 
         rows = self.conn.execute("SELECT * FROM assertions").fetchall()
         for row in rows:
             assertion_id = row["assertion_id"]
-            if assertion_id in affected or row["proposition_id"] in affected:
+            if (
+                assertion_id in affected
+                or row["proposition_id"] in affected
+                or row["related_proposition_id"] in affected
+            ):
                 direct.add(assertion_id)
                 continue
             event_ids = set(_loads(row["evidence_event_ids"], []))
@@ -919,6 +1090,19 @@ class CognitionStore:
                     for a in payload.get("assertions", [])
                     if "assertion_id" in a
                 }
+                invalidated_proposition_ids |= {
+                    p["proposition_id"]
+                    for p in payload.get("propositions", [])
+                    if "proposition_id" in p
+                }
+
+        if invalidated_proposition_ids:
+            for row in rows:
+                if (
+                    row["proposition_id"] in invalidated_proposition_ids
+                    or row["related_proposition_id"] in invalidated_proposition_ids
+                ):
+                    direct.add(row["assertion_id"])
 
         invalidated = set(direct)
         queue = list(direct)
@@ -1031,17 +1215,18 @@ class CognitionStore:
                         """
                         INSERT INTO assertions(
                             assertion_id, assertion_type, subject_agent_id,
-                            proposition_id, hypothesis_text, valid_time,
-                            system_record_time, evidence_event_ids,
+                            proposition_id, related_proposition_id, hypothesis_text,
+                            valid_time, system_record_time, evidence_event_ids,
                             depends_on_assertion_ids, status, support_level,
                             belief_stance, semantic_version
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                         """,
                         (
                             row["assertion_id"],
                             row["assertion_type"],
                             row["subject_agent_id"],
                             row["proposition_id"],
+                            row["related_proposition_id"],
                             row["hypothesis_text"],
                             row["valid_time"],
                             row["system_record_time"],
