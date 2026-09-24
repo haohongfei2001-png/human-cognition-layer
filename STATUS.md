@@ -4136,3 +4136,37 @@ the answer stage to misread AFFIRM/DENY polarity.
 v0.2 is now consumed and must not be rerun as fresh evidence.
 
 **Current gate: HCL_V04_LONG_HORIZON_V02_COMPLETE_NEGATIVE_UTILITY_CURRENT_STANCE_ARCHITECTURE_REQUIRED**
+
+
+## HCL v0.5 issue-centered current stance core v0.1
+
+Contract:
+- `docs/HCL_V05_CURRENT_STANCE_CORE_V01.md`
+
+Candidate PR #20 introduces a provider-free deterministic state machine instead
+of extending the v0.4 append-mostly query projection.
+
+Frozen core behavior:
+- later explicit stance closes older unresolved revision state;
+- receipt != acceptance;
+- repeated confirmation of an already accepted revision does not reopen
+  uncertainty;
+- rejecting a pending revision restores the suspended prior stance when no
+  alternative is affirmed;
+- same-time AFFIRM(old) + DENY(new) preserves old and records new as rejected;
+- target state is agent-scoped, so another agent's/world-only revision does not
+  change it;
+- historical cutoffs replay the earlier stance;
+- contradictory simultaneous affirmative values, or AFFIRM/DENY of the same
+  value, fail closed as CONFLICT.
+
+Provider-free evidence at exact PR head
+`23b102d79bdc721a99274446de630a6f572c1f15`:
+- v0.5 current-stance workflow `35989981508`: SUCCESS, **8 / 8**;
+- HCL integration workflow `35989981501`: SUCCESS, including the existing
+  v0.4 regressions and long-horizon preflights.
+
+No provider call, consumed-row rerun, external benchmark, owner-private example,
+training, or capability claim is part of this milestone.
+
+**Current gate: HCL_V05_CURRENT_STANCE_CORE_V01_PROVIDER_FREE_COMPLETE_SEMANTIC_INTEGRATION_NEXT**

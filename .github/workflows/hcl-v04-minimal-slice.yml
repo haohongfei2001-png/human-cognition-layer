@@ -5,7 +5,9 @@ on:
   pull_request:
     paths:
       - "hcl/v04/**"
+      - "hcl/v05/**"
       - "tests/test_v04_*.py"
+      - "tests/test_v05_*.py"
       - "eval/v04/long_horizon_bounded_context_v01_*.json"
       - "scripts/run_v04_long_horizon_bounded_context_v01.py"
       - "docs/HCL_V04_*.md"
@@ -15,7 +17,9 @@ on:
       - main
     paths:
       - "hcl/v04/**"
+      - "hcl/v05/**"
       - "tests/test_v04_*.py"
+      - "tests/test_v05_*.py"
       - "eval/v04/long_horizon_bounded_context_v01_*.json"
       - "scripts/run_v04_long_horizon_bounded_context_v01.py"
       - "docs/HCL_V04_*.md"
@@ -42,6 +46,9 @@ jobs:
             tests.test_v04_perspective \
             tests.test_v04_recovery \
             tests.test_v04_runtime
+      - name: Run v0.5 provider-free current-stance core when present
+        if: ${{ hashFiles('tests/test_v05_current_stance.py') != '' }}
+        run: python -m unittest -v tests.test_v05_current_stance
       - name: Run long-horizon provider-free preflight when present
         if: ${{ hashFiles('scripts/run_v04_long_horizon_bounded_context_v01.py') != '' }}
         run: |
