@@ -1,0 +1,4099 @@
+{
+  "format": "hcl-v04-long-horizon-bounded-context-v01-fixture",
+  "query_context_char_budget": 8000,
+  "ordinary_memory_char_budget": 6000,
+  "streams": [
+    {
+      "id": "s1",
+      "target_agent_id": "alice",
+      "events": [
+        {
+          "event_id": "s1-e01",
+          "valid_time": "2026-09-01T09:00:00+00:00",
+          "recorded_at": "2026-09-01T09:00:01+00:00",
+          "raw_text": "Routine operations note 01: Noah reports that unrelated cabinet S1-01 has inventory marker M7. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 1
+          }
+        },
+        {
+          "raw_text": "Coordinator Cara tells Alice: the currently approved exhibit label is Marin.",
+          "source_id": "cara",
+          "actor_id": "cara",
+          "recipient_ids": [
+            "alice"
+          ],
+          "event_id": "s1-e02",
+          "valid_time": "2026-09-01T09:05:00+00:00",
+          "recorded_at": "2026-09-01T09:05:01+00:00",
+          "observer_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 2
+          }
+        },
+        {
+          "event_id": "s1-e03",
+          "valid_time": "2026-09-01T09:10:00+00:00",
+          "recorded_at": "2026-09-01T09:10:01+00:00",
+          "raw_text": "Routine operations note 03: Pia reports that unrelated cabinet S1-03 has inventory marker M21. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 3
+          }
+        },
+        {
+          "event_id": "s1-e04",
+          "valid_time": "2026-09-01T09:15:00+00:00",
+          "recorded_at": "2026-09-01T09:15:01+00:00",
+          "raw_text": "Routine operations note 04: Quinn reports that unrelated cabinet S1-04 has inventory marker M5. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 4
+          }
+        },
+        {
+          "raw_text": "Alice says: I accept that Marin is the approved exhibit label.",
+          "source_id": "alice",
+          "actor_id": "alice",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s1-e05",
+          "valid_time": "2026-09-01T09:20:00+00:00",
+          "recorded_at": "2026-09-01T09:20:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 5
+          }
+        },
+        {
+          "event_id": "s1-e06",
+          "valid_time": "2026-09-01T09:25:00+00:00",
+          "recorded_at": "2026-09-01T09:25:01+00:00",
+          "raw_text": "Routine operations note 06: Sol reports that unrelated cabinet S1-06 has inventory marker M19. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 6
+          }
+        },
+        {
+          "event_id": "s1-e07",
+          "valid_time": "2026-09-01T09:30:00+00:00",
+          "recorded_at": "2026-09-01T09:30:01+00:00",
+          "raw_text": "Routine operations note 07: Noah reports that unrelated cabinet S1-07 has inventory marker M3. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 7
+          }
+        },
+        {
+          "event_id": "s1-e08",
+          "valid_time": "2026-09-01T09:35:00+00:00",
+          "recorded_at": "2026-09-01T09:35:01+00:00",
+          "raw_text": "Routine operations note 08: Omar reports that unrelated cabinet S1-08 has inventory marker M10. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 8
+          }
+        },
+        {
+          "event_id": "s1-e09",
+          "valid_time": "2026-09-01T09:40:00+00:00",
+          "recorded_at": "2026-09-01T09:40:01+00:00",
+          "raw_text": "Routine operations note 09: Pia reports that unrelated cabinet S1-09 has inventory marker M17. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 9
+          }
+        },
+        {
+          "event_id": "s1-e10",
+          "valid_time": "2026-09-01T09:45:00+00:00",
+          "recorded_at": "2026-09-01T09:45:01+00:00",
+          "raw_text": "Routine operations note 10: Quinn reports that unrelated cabinet S1-10 has inventory marker M1. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 10
+          }
+        },
+        {
+          "event_id": "s1-e11",
+          "valid_time": "2026-09-01T09:50:00+00:00",
+          "recorded_at": "2026-09-01T09:50:01+00:00",
+          "raw_text": "Routine operations note 11: Rae reports that unrelated cabinet S1-11 has inventory marker M8. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 11
+          }
+        },
+        {
+          "event_id": "s1-e12",
+          "valid_time": "2026-09-01T09:55:00+00:00",
+          "recorded_at": "2026-09-01T09:55:01+00:00",
+          "raw_text": "Routine operations note 12: Sol reports that unrelated cabinet S1-12 has inventory marker M15. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 12
+          }
+        },
+        {
+          "event_id": "s1-e13",
+          "valid_time": "2026-09-01T10:00:00+00:00",
+          "recorded_at": "2026-09-01T10:00:01+00:00",
+          "raw_text": "Routine operations note 13: Noah reports that unrelated cabinet S1-13 has inventory marker M22. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 13
+          }
+        },
+        {
+          "event_id": "s1-e14",
+          "valid_time": "2026-09-01T10:05:00+00:00",
+          "recorded_at": "2026-09-01T10:05:01+00:00",
+          "raw_text": "Routine operations note 14: Omar reports that unrelated cabinet S1-14 has inventory marker M6. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 14
+          }
+        },
+        {
+          "event_id": "s1-e15",
+          "valid_time": "2026-09-01T10:10:00+00:00",
+          "recorded_at": "2026-09-01T10:10:01+00:00",
+          "raw_text": "Routine operations note 15: Pia reports that unrelated cabinet S1-15 has inventory marker M13. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 15
+          }
+        },
+        {
+          "event_id": "s1-e16",
+          "valid_time": "2026-09-01T10:15:00+00:00",
+          "recorded_at": "2026-09-01T10:15:01+00:00",
+          "raw_text": "Routine operations note 16: Quinn reports that unrelated cabinet S1-16 has inventory marker M20. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 16
+          }
+        },
+        {
+          "event_id": "s1-e17",
+          "valid_time": "2026-09-01T10:20:00+00:00",
+          "recorded_at": "2026-09-01T10:20:01+00:00",
+          "raw_text": "Routine operations note 17: Rae reports that unrelated cabinet S1-17 has inventory marker M4. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 17
+          }
+        },
+        {
+          "event_id": "s1-e18",
+          "valid_time": "2026-09-01T10:25:00+00:00",
+          "recorded_at": "2026-09-01T10:25:01+00:00",
+          "raw_text": "Routine operations note 18: Sol reports that unrelated cabinet S1-18 has inventory marker M11. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 18
+          }
+        },
+        {
+          "event_id": "s1-e19",
+          "valid_time": "2026-09-01T10:30:00+00:00",
+          "recorded_at": "2026-09-01T10:30:01+00:00",
+          "raw_text": "Routine operations note 19: Noah reports that unrelated cabinet S1-19 has inventory marker M18. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 19
+          }
+        },
+        {
+          "raw_text": "Coordinator Cara issues a correction to Ben only: the approved exhibit label is Marina, replacing the earlier Marin label.",
+          "source_id": "cara",
+          "actor_id": "cara",
+          "recipient_ids": [
+            "ben"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 20,
+            "correction": true
+          },
+          "event_id": "s1-e20",
+          "valid_time": "2026-09-01T10:35:00+00:00",
+          "recorded_at": "2026-09-01T10:35:01+00:00",
+          "observer_ids": []
+        },
+        {
+          "event_id": "s1-e21",
+          "valid_time": "2026-09-01T10:40:00+00:00",
+          "recorded_at": "2026-09-01T10:40:01+00:00",
+          "raw_text": "Routine operations note 21: Pia reports that unrelated cabinet S1-21 has inventory marker M9. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 21
+          }
+        },
+        {
+          "raw_text": "Ben says: I received Cara's correction and I accept Marina as the approved label.",
+          "source_id": "ben",
+          "actor_id": "ben",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s1-e22",
+          "valid_time": "2026-09-01T10:45:00+00:00",
+          "recorded_at": "2026-09-01T10:45:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 22
+          }
+        },
+        {
+          "event_id": "s1-e23",
+          "valid_time": "2026-09-01T10:50:00+00:00",
+          "recorded_at": "2026-09-01T10:50:01+00:00",
+          "raw_text": "Routine operations note 23: Rae reports that unrelated cabinet S1-23 has inventory marker M0. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 23
+          }
+        },
+        {
+          "event_id": "s1-e24",
+          "valid_time": "2026-09-01T10:55:00+00:00",
+          "recorded_at": "2026-09-01T10:55:01+00:00",
+          "raw_text": "Routine operations note 24: Sol reports that unrelated cabinet S1-24 has inventory marker M7. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 24
+          }
+        },
+        {
+          "event_id": "s1-e25",
+          "valid_time": "2026-09-01T11:00:00+00:00",
+          "recorded_at": "2026-09-01T11:00:01+00:00",
+          "raw_text": "Routine operations note 25: Noah reports that unrelated cabinet S1-25 has inventory marker M14. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 25
+          }
+        },
+        {
+          "event_id": "s1-e26",
+          "valid_time": "2026-09-01T11:05:00+00:00",
+          "recorded_at": "2026-09-01T11:05:01+00:00",
+          "raw_text": "Routine operations note 26: Omar reports that unrelated cabinet S1-26 has inventory marker M21. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 26
+          }
+        },
+        {
+          "event_id": "s1-e27",
+          "valid_time": "2026-09-01T11:10:00+00:00",
+          "recorded_at": "2026-09-01T11:10:01+00:00",
+          "raw_text": "Routine operations note 27: Pia reports that unrelated cabinet S1-27 has inventory marker M5. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 27
+          }
+        },
+        {
+          "event_id": "s1-e28",
+          "valid_time": "2026-09-01T11:15:00+00:00",
+          "recorded_at": "2026-09-01T11:15:01+00:00",
+          "raw_text": "Routine operations note 28: Quinn reports that unrelated cabinet S1-28 has inventory marker M12. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 28
+          }
+        },
+        {
+          "event_id": "s1-e29",
+          "valid_time": "2026-09-01T11:20:00+00:00",
+          "recorded_at": "2026-09-01T11:20:01+00:00",
+          "raw_text": "Routine operations note 29: Rae reports that unrelated cabinet S1-29 has inventory marker M19. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 29
+          }
+        },
+        {
+          "event_id": "s1-e30",
+          "valid_time": "2026-09-01T11:25:00+00:00",
+          "recorded_at": "2026-09-01T11:25:01+00:00",
+          "raw_text": "Routine operations note 30: Sol reports that unrelated cabinet S1-30 has inventory marker M3. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 30
+          }
+        },
+        {
+          "event_id": "s1-e31",
+          "valid_time": "2026-09-01T11:30:00+00:00",
+          "recorded_at": "2026-09-01T11:30:01+00:00",
+          "raw_text": "Routine operations note 31: Noah reports that unrelated cabinet S1-31 has inventory marker M10. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 31
+          }
+        },
+        {
+          "event_id": "s1-e32",
+          "valid_time": "2026-09-01T11:35:00+00:00",
+          "recorded_at": "2026-09-01T11:35:01+00:00",
+          "raw_text": "Routine operations note 32: Omar reports that unrelated cabinet S1-32 has inventory marker M17. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 32
+          }
+        },
+        {
+          "event_id": "s1-e33",
+          "valid_time": "2026-09-01T11:40:00+00:00",
+          "recorded_at": "2026-09-01T11:40:01+00:00",
+          "raw_text": "Routine operations note 33: Pia reports that unrelated cabinet S1-33 has inventory marker M1. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 33
+          }
+        },
+        {
+          "event_id": "s1-e34",
+          "valid_time": "2026-09-01T11:45:00+00:00",
+          "recorded_at": "2026-09-01T11:45:01+00:00",
+          "raw_text": "Routine operations note 34: Quinn reports that unrelated cabinet S1-34 has inventory marker M8. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 34
+          }
+        },
+        {
+          "event_id": "s1-e35",
+          "valid_time": "2026-09-01T11:50:00+00:00",
+          "recorded_at": "2026-09-01T11:50:01+00:00",
+          "raw_text": "Routine operations note 35: Rae reports that unrelated cabinet S1-35 has inventory marker M15. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 35
+          }
+        },
+        {
+          "event_id": "s1-e36",
+          "valid_time": "2026-09-01T11:55:00+00:00",
+          "recorded_at": "2026-09-01T11:55:01+00:00",
+          "raw_text": "Routine operations note 36: Sol reports that unrelated cabinet S1-36 has inventory marker M22. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 36
+          }
+        },
+        {
+          "event_id": "s1-e37",
+          "valid_time": "2026-09-01T12:00:00+00:00",
+          "recorded_at": "2026-09-01T12:00:01+00:00",
+          "raw_text": "Routine operations note 37: Noah reports that unrelated cabinet S1-37 has inventory marker M6. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 37
+          }
+        },
+        {
+          "event_id": "s1-e38",
+          "valid_time": "2026-09-01T12:05:00+00:00",
+          "recorded_at": "2026-09-01T12:05:01+00:00",
+          "raw_text": "Routine operations note 38: Omar reports that unrelated cabinet S1-38 has inventory marker M13. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 38
+          }
+        },
+        {
+          "event_id": "s1-e39",
+          "valid_time": "2026-09-01T12:10:00+00:00",
+          "recorded_at": "2026-09-01T12:10:01+00:00",
+          "raw_text": "Routine operations note 39: Pia reports that unrelated cabinet S1-39 has inventory marker M20. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 39
+          }
+        },
+        {
+          "raw_text": "Cara now sends Alice the correction: Marina replaces the earlier Marin label.",
+          "source_id": "cara",
+          "actor_id": "cara",
+          "recipient_ids": [
+            "alice"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 40,
+            "correction_delivery": true
+          },
+          "event_id": "s1-e40",
+          "valid_time": "2026-09-01T12:15:00+00:00",
+          "recorded_at": "2026-09-01T12:15:01+00:00",
+          "observer_ids": []
+        },
+        {
+          "raw_text": "Alice says: I received the Marina correction, but I am not accepting or rejecting it yet; I want confirmation.",
+          "source_id": "alice",
+          "actor_id": "alice",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s1-e41",
+          "valid_time": "2026-09-01T12:20:00+00:00",
+          "recorded_at": "2026-09-01T12:20:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 41
+          }
+        },
+        {
+          "event_id": "s1-e42",
+          "valid_time": "2026-09-01T12:25:00+00:00",
+          "recorded_at": "2026-09-01T12:25:01+00:00",
+          "raw_text": "Routine operations note 42: Sol reports that unrelated cabinet S1-42 has inventory marker M18. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 42
+          }
+        },
+        {
+          "event_id": "s1-e43",
+          "valid_time": "2026-09-01T12:30:00+00:00",
+          "recorded_at": "2026-09-01T12:30:01+00:00",
+          "raw_text": "Routine operations note 43: Noah reports that unrelated cabinet S1-43 has inventory marker M2. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 43
+          }
+        },
+        {
+          "event_id": "s1-e44",
+          "valid_time": "2026-09-01T12:35:00+00:00",
+          "recorded_at": "2026-09-01T12:35:01+00:00",
+          "raw_text": "Routine operations note 44: Omar reports that unrelated cabinet S1-44 has inventory marker M9. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 44
+          }
+        },
+        {
+          "event_id": "s1-e45",
+          "valid_time": "2026-09-01T12:40:00+00:00",
+          "recorded_at": "2026-09-01T12:40:01+00:00",
+          "raw_text": "Routine operations note 45: Pia reports that unrelated cabinet S1-45 has inventory marker M16. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 45
+          }
+        },
+        {
+          "event_id": "s1-e46",
+          "valid_time": "2026-09-01T12:45:00+00:00",
+          "recorded_at": "2026-09-01T12:45:01+00:00",
+          "raw_text": "Routine operations note 46: Quinn reports that unrelated cabinet S1-46 has inventory marker M0. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 46
+          }
+        },
+        {
+          "event_id": "s1-e47",
+          "valid_time": "2026-09-01T12:50:00+00:00",
+          "recorded_at": "2026-09-01T12:50:01+00:00",
+          "raw_text": "Routine operations note 47: Rae reports that unrelated cabinet S1-47 has inventory marker M7. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 47
+          }
+        },
+        {
+          "event_id": "s1-e48",
+          "valid_time": "2026-09-01T12:55:00+00:00",
+          "recorded_at": "2026-09-01T12:55:01+00:00",
+          "raw_text": "Routine operations note 48: Sol reports that unrelated cabinet S1-48 has inventory marker M14. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 48
+          }
+        },
+        {
+          "event_id": "s1-e49",
+          "valid_time": "2026-09-01T13:00:00+00:00",
+          "recorded_at": "2026-09-01T13:00:01+00:00",
+          "raw_text": "Routine operations note 49: Noah reports that unrelated cabinet S1-49 has inventory marker M21. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 49
+          }
+        },
+        {
+          "raw_text": "Alice says: Until I see official confirmation, I still believe Marin is the approved label and I reject Marina as the current label.",
+          "source_id": "alice",
+          "actor_id": "alice",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s1-e50",
+          "valid_time": "2026-09-01T13:05:00+00:00",
+          "recorded_at": "2026-09-01T13:05:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 50
+          }
+        },
+        {
+          "event_id": "s1-e51",
+          "valid_time": "2026-09-01T13:10:00+00:00",
+          "recorded_at": "2026-09-01T13:10:01+00:00",
+          "raw_text": "Routine operations note 51: Pia reports that unrelated cabinet S1-51 has inventory marker M12. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 51
+          }
+        },
+        {
+          "event_id": "s1-e52",
+          "valid_time": "2026-09-01T13:15:00+00:00",
+          "recorded_at": "2026-09-01T13:15:01+00:00",
+          "raw_text": "Routine operations note 52: Quinn reports that unrelated cabinet S1-52 has inventory marker M19. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 52
+          }
+        },
+        {
+          "event_id": "s1-e53",
+          "valid_time": "2026-09-01T13:20:00+00:00",
+          "recorded_at": "2026-09-01T13:20:01+00:00",
+          "raw_text": "Routine operations note 53: Rae reports that unrelated cabinet S1-53 has inventory marker M3. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 53
+          }
+        },
+        {
+          "event_id": "s1-e54",
+          "valid_time": "2026-09-01T13:25:00+00:00",
+          "recorded_at": "2026-09-01T13:25:01+00:00",
+          "raw_text": "Routine operations note 54: Sol reports that unrelated cabinet S1-54 has inventory marker M10. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 54
+          }
+        },
+        {
+          "event_id": "s1-e55",
+          "valid_time": "2026-09-01T13:30:00+00:00",
+          "recorded_at": "2026-09-01T13:30:01+00:00",
+          "raw_text": "Routine operations note 55: Noah reports that unrelated cabinet S1-55 has inventory marker M17. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 55
+          }
+        },
+        {
+          "event_id": "s1-e56",
+          "valid_time": "2026-09-01T13:35:00+00:00",
+          "recorded_at": "2026-09-01T13:35:01+00:00",
+          "raw_text": "Routine operations note 56: Omar reports that unrelated cabinet S1-56 has inventory marker M1. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 56
+          }
+        },
+        {
+          "event_id": "s1-e57",
+          "valid_time": "2026-09-01T13:40:00+00:00",
+          "recorded_at": "2026-09-01T13:40:01+00:00",
+          "raw_text": "Routine operations note 57: Pia reports that unrelated cabinet S1-57 has inventory marker M8. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 57
+          }
+        },
+        {
+          "event_id": "s1-e58",
+          "valid_time": "2026-09-01T13:45:00+00:00",
+          "recorded_at": "2026-09-01T13:45:01+00:00",
+          "raw_text": "Routine operations note 58: Quinn reports that unrelated cabinet S1-58 has inventory marker M15. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 58
+          }
+        },
+        {
+          "event_id": "s1-e59",
+          "valid_time": "2026-09-01T13:50:00+00:00",
+          "recorded_at": "2026-09-01T13:50:01+00:00",
+          "raw_text": "Routine operations note 59: Rae reports that unrelated cabinet S1-59 has inventory marker M22. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 59
+          }
+        },
+        {
+          "raw_text": "The official registry now records Marina as the approved exhibit label. Cara observes this registry entry; Alice does not receive this event.",
+          "source_id": "official_registry",
+          "actor_id": "official_registry",
+          "observer_ids": [
+            "cara"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 60,
+            "scene_fact": true
+          },
+          "event_id": "s1-e60",
+          "valid_time": "2026-09-01T13:55:00+00:00",
+          "recorded_at": "2026-09-01T13:55:01+00:00",
+          "recipient_ids": []
+        },
+        {
+          "event_id": "s1-e61",
+          "valid_time": "2026-09-01T14:00:00+00:00",
+          "recorded_at": "2026-09-01T14:00:01+00:00",
+          "raw_text": "Routine operations note 61: Noah reports that unrelated cabinet S1-61 has inventory marker M13. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 61
+          }
+        },
+        {
+          "event_id": "s1-e62",
+          "valid_time": "2026-09-01T14:05:00+00:00",
+          "recorded_at": "2026-09-01T14:05:01+00:00",
+          "raw_text": "Routine operations note 62: Omar reports that unrelated cabinet S1-62 has inventory marker M20. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 62
+          }
+        },
+        {
+          "event_id": "s1-e63",
+          "valid_time": "2026-09-01T14:10:00+00:00",
+          "recorded_at": "2026-09-01T14:10:01+00:00",
+          "raw_text": "Routine operations note 63: Pia reports that unrelated cabinet S1-63 has inventory marker M4. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 63
+          }
+        },
+        {
+          "event_id": "s1-e64",
+          "valid_time": "2026-09-01T14:15:00+00:00",
+          "recorded_at": "2026-09-01T14:15:01+00:00",
+          "raw_text": "Routine operations note 64: Quinn reports that unrelated cabinet S1-64 has inventory marker M11. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 64
+          }
+        },
+        {
+          "event_id": "s1-e65",
+          "valid_time": "2026-09-01T14:20:00+00:00",
+          "recorded_at": "2026-09-01T14:20:01+00:00",
+          "raw_text": "Routine operations note 65: Rae reports that unrelated cabinet S1-65 has inventory marker M18. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 65
+          }
+        },
+        {
+          "event_id": "s1-e66",
+          "valid_time": "2026-09-01T14:25:00+00:00",
+          "recorded_at": "2026-09-01T14:25:01+00:00",
+          "raw_text": "Routine operations note 66: Sol reports that unrelated cabinet S1-66 has inventory marker M2. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 66
+          }
+        },
+        {
+          "event_id": "s1-e67",
+          "valid_time": "2026-09-01T14:30:00+00:00",
+          "recorded_at": "2026-09-01T14:30:01+00:00",
+          "raw_text": "Routine operations note 67: Noah reports that unrelated cabinet S1-67 has inventory marker M9. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 67
+          }
+        },
+        {
+          "event_id": "s1-e68",
+          "valid_time": "2026-09-01T14:35:00+00:00",
+          "recorded_at": "2026-09-01T14:35:01+00:00",
+          "raw_text": "Routine operations note 68: Omar reports that unrelated cabinet S1-68 has inventory marker M16. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 68
+          }
+        },
+        {
+          "event_id": "s1-e69",
+          "valid_time": "2026-09-01T14:40:00+00:00",
+          "recorded_at": "2026-09-01T14:40:01+00:00",
+          "raw_text": "Routine operations note 69: Pia reports that unrelated cabinet S1-69 has inventory marker M0. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 69
+          }
+        },
+        {
+          "raw_text": "Cara sends Alice a signed registry notice stating that Marina is the approved label replacing Marin.",
+          "source_id": "cara",
+          "actor_id": "cara",
+          "recipient_ids": [
+            "alice"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 70,
+            "official_notice": true
+          },
+          "event_id": "s1-e70",
+          "valid_time": "2026-09-01T14:45:00+00:00",
+          "recorded_at": "2026-09-01T14:45:01+00:00",
+          "observer_ids": []
+        },
+        {
+          "raw_text": "Alice says: I have checked the signed notice and I now accept Marina as the approved exhibit label.",
+          "source_id": "alice",
+          "actor_id": "alice",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s1-e71",
+          "valid_time": "2026-09-01T14:50:00+00:00",
+          "recorded_at": "2026-09-01T14:50:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 71
+          }
+        },
+        {
+          "event_id": "s1-e72",
+          "valid_time": "2026-09-01T14:55:00+00:00",
+          "recorded_at": "2026-09-01T14:55:01+00:00",
+          "raw_text": "Routine operations note 72: Sol reports that unrelated cabinet S1-72 has inventory marker M21. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 72
+          }
+        },
+        {
+          "event_id": "s1-e73",
+          "valid_time": "2026-09-01T15:00:00+00:00",
+          "recorded_at": "2026-09-01T15:00:01+00:00",
+          "raw_text": "Routine operations note 73: Noah reports that unrelated cabinet S1-73 has inventory marker M5. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 73
+          }
+        },
+        {
+          "event_id": "s1-e74",
+          "valid_time": "2026-09-01T15:05:00+00:00",
+          "recorded_at": "2026-09-01T15:05:01+00:00",
+          "raw_text": "Routine operations note 74: Omar reports that unrelated cabinet S1-74 has inventory marker M12. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 74
+          }
+        },
+        {
+          "event_id": "s1-e75",
+          "valid_time": "2026-09-01T15:10:00+00:00",
+          "recorded_at": "2026-09-01T15:10:01+00:00",
+          "raw_text": "Routine operations note 75: Pia reports that unrelated cabinet S1-75 has inventory marker M19. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 75
+          }
+        },
+        {
+          "event_id": "s1-e76",
+          "valid_time": "2026-09-01T15:15:00+00:00",
+          "recorded_at": "2026-09-01T15:15:01+00:00",
+          "raw_text": "Routine operations note 76: Quinn reports that unrelated cabinet S1-76 has inventory marker M3. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 76
+          }
+        },
+        {
+          "event_id": "s1-e77",
+          "valid_time": "2026-09-01T15:20:00+00:00",
+          "recorded_at": "2026-09-01T15:20:01+00:00",
+          "raw_text": "Routine operations note 77: Rae reports that unrelated cabinet S1-77 has inventory marker M10. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 77
+          }
+        },
+        {
+          "event_id": "s1-e78",
+          "valid_time": "2026-09-01T15:25:00+00:00",
+          "recorded_at": "2026-09-01T15:25:01+00:00",
+          "raw_text": "Routine operations note 78: Sol reports that unrelated cabinet S1-78 has inventory marker M17. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 78
+          }
+        },
+        {
+          "event_id": "s1-e79",
+          "valid_time": "2026-09-01T15:30:00+00:00",
+          "recorded_at": "2026-09-01T15:30:01+00:00",
+          "raw_text": "Routine operations note 79: Noah reports that unrelated cabinet S1-79 has inventory marker M1. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 79
+          }
+        },
+        {
+          "event_id": "s1-e80",
+          "valid_time": "2026-09-01T15:35:00+00:00",
+          "recorded_at": "2026-09-01T15:35:01+00:00",
+          "raw_text": "Routine operations note 80: Omar reports that unrelated cabinet S1-80 has inventory marker M8. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 80
+          }
+        }
+      ],
+      "queries": [
+        {
+          "query_id": "s1-q1",
+          "after_event": 10,
+          "target_agent_id": "alice",
+          "allowed_labels": [
+            "MARIN",
+            "MARINA",
+            "UNCERTAIN"
+          ],
+          "question": "Based only on Alice's perspective, which exhibit label does Alice currently believe is approved?"
+        },
+        {
+          "query_id": "s1-q2",
+          "after_event": 25,
+          "target_agent_id": "alice",
+          "allowed_labels": [
+            "MARIN",
+            "MARINA",
+            "UNCERTAIN"
+          ],
+          "question": "Based only on Alice's perspective, which exhibit label does Alice currently believe is approved?"
+        },
+        {
+          "query_id": "s1-q3",
+          "after_event": 42,
+          "target_agent_id": "alice",
+          "allowed_labels": [
+            "MARIN",
+            "MARINA",
+            "UNCERTAIN"
+          ],
+          "question": "After Alice received the correction but before she took a stance, which exhibit label is Alice currently supported as believing?"
+        },
+        {
+          "query_id": "s1-q4",
+          "after_event": 55,
+          "target_agent_id": "alice",
+          "allowed_labels": [
+            "MARIN",
+            "MARINA",
+            "UNCERTAIN"
+          ],
+          "question": "Which exhibit label does the evidence support Alice as currently believing?"
+        },
+        {
+          "query_id": "s1-q5",
+          "after_event": 65,
+          "target_agent_id": "alice",
+          "allowed_labels": [
+            "MARIN",
+            "MARINA",
+            "UNCERTAIN"
+          ],
+          "question": "The system has additional registry evidence that Alice did not receive. Which label does Alice currently believe is approved?"
+        },
+        {
+          "query_id": "s1-q6",
+          "after_event": 80,
+          "target_agent_id": "alice",
+          "allowed_labels": [
+            "MARIN",
+            "MARINA",
+            "UNCERTAIN"
+          ],
+          "question": "At the end of the stream, which exhibit label does Alice currently believe is approved?"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "target_agent_id": "diego",
+      "events": [
+        {
+          "event_id": "s2-e01",
+          "valid_time": "2026-09-02T09:00:00+00:00",
+          "recorded_at": "2026-09-02T09:00:01+00:00",
+          "raw_text": "Routine operations note 01: Noah reports that unrelated cabinet S2-01 has inventory marker M7. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 1
+          }
+        },
+        {
+          "event_id": "s2-e02",
+          "valid_time": "2026-09-02T09:05:00+00:00",
+          "recorded_at": "2026-09-02T09:05:01+00:00",
+          "raw_text": "Routine operations note 02: Omar reports that unrelated cabinet S2-02 has inventory marker M14. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 2
+          }
+        },
+        {
+          "raw_text": "Manager Mira tells Diego: the current project deadline is October 10.",
+          "source_id": "mira",
+          "actor_id": "mira",
+          "recipient_ids": [
+            "diego"
+          ],
+          "event_id": "s2-e03",
+          "valid_time": "2026-09-02T09:10:00+00:00",
+          "recorded_at": "2026-09-02T09:10:01+00:00",
+          "observer_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 3
+          }
+        },
+        {
+          "event_id": "s2-e04",
+          "valid_time": "2026-09-02T09:15:00+00:00",
+          "recorded_at": "2026-09-02T09:15:01+00:00",
+          "raw_text": "Routine operations note 04: Quinn reports that unrelated cabinet S2-04 has inventory marker M5. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 4
+          }
+        },
+        {
+          "event_id": "s2-e05",
+          "valid_time": "2026-09-02T09:20:00+00:00",
+          "recorded_at": "2026-09-02T09:20:01+00:00",
+          "raw_text": "Routine operations note 05: Rae reports that unrelated cabinet S2-05 has inventory marker M12. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 5
+          }
+        },
+        {
+          "raw_text": "Diego says: I accept October 10 as the current project deadline.",
+          "source_id": "diego",
+          "actor_id": "diego",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s2-e06",
+          "valid_time": "2026-09-02T09:25:00+00:00",
+          "recorded_at": "2026-09-02T09:25:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 6
+          }
+        },
+        {
+          "event_id": "s2-e07",
+          "valid_time": "2026-09-02T09:30:00+00:00",
+          "recorded_at": "2026-09-02T09:30:01+00:00",
+          "raw_text": "Routine operations note 07: Noah reports that unrelated cabinet S2-07 has inventory marker M3. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 7
+          }
+        },
+        {
+          "event_id": "s2-e08",
+          "valid_time": "2026-09-02T09:35:00+00:00",
+          "recorded_at": "2026-09-02T09:35:01+00:00",
+          "raw_text": "Routine operations note 08: Omar reports that unrelated cabinet S2-08 has inventory marker M10. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 8
+          }
+        },
+        {
+          "event_id": "s2-e09",
+          "valid_time": "2026-09-02T09:40:00+00:00",
+          "recorded_at": "2026-09-02T09:40:01+00:00",
+          "raw_text": "Routine operations note 09: Pia reports that unrelated cabinet S2-09 has inventory marker M17. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 9
+          }
+        },
+        {
+          "event_id": "s2-e10",
+          "valid_time": "2026-09-02T09:45:00+00:00",
+          "recorded_at": "2026-09-02T09:45:01+00:00",
+          "raw_text": "Routine operations note 10: Quinn reports that unrelated cabinet S2-10 has inventory marker M1. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 10
+          }
+        },
+        {
+          "event_id": "s2-e11",
+          "valid_time": "2026-09-02T09:50:00+00:00",
+          "recorded_at": "2026-09-02T09:50:01+00:00",
+          "raw_text": "Routine operations note 11: Rae reports that unrelated cabinet S2-11 has inventory marker M8. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 11
+          }
+        },
+        {
+          "event_id": "s2-e12",
+          "valid_time": "2026-09-02T09:55:00+00:00",
+          "recorded_at": "2026-09-02T09:55:01+00:00",
+          "raw_text": "Routine operations note 12: Sol reports that unrelated cabinet S2-12 has inventory marker M15. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 12
+          }
+        },
+        {
+          "event_id": "s2-e13",
+          "valid_time": "2026-09-02T10:00:00+00:00",
+          "recorded_at": "2026-09-02T10:00:01+00:00",
+          "raw_text": "Routine operations note 13: Noah reports that unrelated cabinet S2-13 has inventory marker M22. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 13
+          }
+        },
+        {
+          "event_id": "s2-e14",
+          "valid_time": "2026-09-02T10:05:00+00:00",
+          "recorded_at": "2026-09-02T10:05:01+00:00",
+          "raw_text": "Routine operations note 14: Omar reports that unrelated cabinet S2-14 has inventory marker M6. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 14
+          }
+        },
+        {
+          "event_id": "s2-e15",
+          "valid_time": "2026-09-02T10:10:00+00:00",
+          "recorded_at": "2026-09-02T10:10:01+00:00",
+          "raw_text": "Routine operations note 15: Pia reports that unrelated cabinet S2-15 has inventory marker M13. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 15
+          }
+        },
+        {
+          "event_id": "s2-e16",
+          "valid_time": "2026-09-02T10:15:00+00:00",
+          "recorded_at": "2026-09-02T10:15:01+00:00",
+          "raw_text": "Routine operations note 16: Quinn reports that unrelated cabinet S2-16 has inventory marker M20. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 16
+          }
+        },
+        {
+          "event_id": "s2-e17",
+          "valid_time": "2026-09-02T10:20:00+00:00",
+          "recorded_at": "2026-09-02T10:20:01+00:00",
+          "raw_text": "Routine operations note 17: Rae reports that unrelated cabinet S2-17 has inventory marker M4. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 17
+          }
+        },
+        {
+          "raw_text": "Eli tells Flora a rumor that the deadline might be October 8. Diego is not included in this message.",
+          "source_id": "eli",
+          "actor_id": "eli",
+          "recipient_ids": [
+            "flora"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 18,
+            "rumor": true
+          },
+          "event_id": "s2-e18",
+          "valid_time": "2026-09-02T10:25:00+00:00",
+          "recorded_at": "2026-09-02T10:25:01+00:00",
+          "observer_ids": []
+        },
+        {
+          "event_id": "s2-e19",
+          "valid_time": "2026-09-02T10:30:00+00:00",
+          "recorded_at": "2026-09-02T10:30:01+00:00",
+          "raw_text": "Routine operations note 19: Noah reports that unrelated cabinet S2-19 has inventory marker M18. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 19
+          }
+        },
+        {
+          "event_id": "s2-e20",
+          "valid_time": "2026-09-02T10:35:00+00:00",
+          "recorded_at": "2026-09-02T10:35:01+00:00",
+          "raw_text": "Routine operations note 20: Omar reports that unrelated cabinet S2-20 has inventory marker M2. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 20
+          }
+        },
+        {
+          "event_id": "s2-e21",
+          "valid_time": "2026-09-02T10:40:00+00:00",
+          "recorded_at": "2026-09-02T10:40:01+00:00",
+          "raw_text": "Routine operations note 21: Pia reports that unrelated cabinet S2-21 has inventory marker M9. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 21
+          }
+        },
+        {
+          "event_id": "s2-e22",
+          "valid_time": "2026-09-02T10:45:00+00:00",
+          "recorded_at": "2026-09-02T10:45:01+00:00",
+          "raw_text": "Routine operations note 22: Quinn reports that unrelated cabinet S2-22 has inventory marker M16. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 22
+          }
+        },
+        {
+          "event_id": "s2-e23",
+          "valid_time": "2026-09-02T10:50:00+00:00",
+          "recorded_at": "2026-09-02T10:50:01+00:00",
+          "raw_text": "Routine operations note 23: Rae reports that unrelated cabinet S2-23 has inventory marker M0. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 23
+          }
+        },
+        {
+          "event_id": "s2-e24",
+          "valid_time": "2026-09-02T10:55:00+00:00",
+          "recorded_at": "2026-09-02T10:55:01+00:00",
+          "raw_text": "Routine operations note 24: Sol reports that unrelated cabinet S2-24 has inventory marker M7. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 24
+          }
+        },
+        {
+          "event_id": "s2-e25",
+          "valid_time": "2026-09-02T11:00:00+00:00",
+          "recorded_at": "2026-09-02T11:00:01+00:00",
+          "raw_text": "Routine operations note 25: Noah reports that unrelated cabinet S2-25 has inventory marker M14. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 25
+          }
+        },
+        {
+          "event_id": "s2-e26",
+          "valid_time": "2026-09-02T11:05:00+00:00",
+          "recorded_at": "2026-09-02T11:05:01+00:00",
+          "raw_text": "Routine operations note 26: Omar reports that unrelated cabinet S2-26 has inventory marker M21. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 26
+          }
+        },
+        {
+          "event_id": "s2-e27",
+          "valid_time": "2026-09-02T11:10:00+00:00",
+          "recorded_at": "2026-09-02T11:10:01+00:00",
+          "raw_text": "Routine operations note 27: Pia reports that unrelated cabinet S2-27 has inventory marker M5. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 27
+          }
+        },
+        {
+          "raw_text": "Manager Mira sends Grace an official correction: the project deadline is October 12, replacing October 10. Diego is not a recipient.",
+          "source_id": "mira",
+          "actor_id": "mira",
+          "recipient_ids": [
+            "grace"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 28,
+            "correction": true
+          },
+          "event_id": "s2-e28",
+          "valid_time": "2026-09-02T11:15:00+00:00",
+          "recorded_at": "2026-09-02T11:15:01+00:00",
+          "observer_ids": []
+        },
+        {
+          "event_id": "s2-e29",
+          "valid_time": "2026-09-02T11:20:00+00:00",
+          "recorded_at": "2026-09-02T11:20:01+00:00",
+          "raw_text": "Routine operations note 29: Rae reports that unrelated cabinet S2-29 has inventory marker M19. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 29
+          }
+        },
+        {
+          "event_id": "s2-e30",
+          "valid_time": "2026-09-02T11:25:00+00:00",
+          "recorded_at": "2026-09-02T11:25:01+00:00",
+          "raw_text": "Routine operations note 30: Sol reports that unrelated cabinet S2-30 has inventory marker M3. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 30
+          }
+        },
+        {
+          "event_id": "s2-e31",
+          "valid_time": "2026-09-02T11:30:00+00:00",
+          "recorded_at": "2026-09-02T11:30:01+00:00",
+          "raw_text": "Routine operations note 31: Noah reports that unrelated cabinet S2-31 has inventory marker M10. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 31
+          }
+        },
+        {
+          "event_id": "s2-e32",
+          "valid_time": "2026-09-02T11:35:00+00:00",
+          "recorded_at": "2026-09-02T11:35:01+00:00",
+          "raw_text": "Routine operations note 32: Omar reports that unrelated cabinet S2-32 has inventory marker M17. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 32
+          }
+        },
+        {
+          "event_id": "s2-e33",
+          "valid_time": "2026-09-02T11:40:00+00:00",
+          "recorded_at": "2026-09-02T11:40:01+00:00",
+          "raw_text": "Routine operations note 33: Pia reports that unrelated cabinet S2-33 has inventory marker M1. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 33
+          }
+        },
+        {
+          "event_id": "s2-e34",
+          "valid_time": "2026-09-02T11:45:00+00:00",
+          "recorded_at": "2026-09-02T11:45:01+00:00",
+          "raw_text": "Routine operations note 34: Quinn reports that unrelated cabinet S2-34 has inventory marker M8. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 34
+          }
+        },
+        {
+          "raw_text": "Grace tells Diego: Mira told me the project deadline changed to October 12.",
+          "source_id": "grace",
+          "actor_id": "grace",
+          "recipient_ids": [
+            "diego"
+          ],
+          "event_id": "s2-e35",
+          "valid_time": "2026-09-02T11:50:00+00:00",
+          "recorded_at": "2026-09-02T11:50:01+00:00",
+          "observer_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 35
+          }
+        },
+        {
+          "raw_text": "Diego says: I heard Grace's message, but I do not trust that relay as confirmation; I still believe October 10 is the deadline.",
+          "source_id": "diego",
+          "actor_id": "diego",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s2-e36",
+          "valid_time": "2026-09-02T11:55:00+00:00",
+          "recorded_at": "2026-09-02T11:55:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 36
+          }
+        },
+        {
+          "event_id": "s2-e37",
+          "valid_time": "2026-09-02T12:00:00+00:00",
+          "recorded_at": "2026-09-02T12:00:01+00:00",
+          "raw_text": "Routine operations note 37: Noah reports that unrelated cabinet S2-37 has inventory marker M6. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 37
+          }
+        },
+        {
+          "event_id": "s2-e38",
+          "valid_time": "2026-09-02T12:05:00+00:00",
+          "recorded_at": "2026-09-02T12:05:01+00:00",
+          "raw_text": "Routine operations note 38: Omar reports that unrelated cabinet S2-38 has inventory marker M13. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 38
+          }
+        },
+        {
+          "event_id": "s2-e39",
+          "valid_time": "2026-09-02T12:10:00+00:00",
+          "recorded_at": "2026-09-02T12:10:01+00:00",
+          "raw_text": "Routine operations note 39: Pia reports that unrelated cabinet S2-39 has inventory marker M20. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 39
+          }
+        },
+        {
+          "event_id": "s2-e40",
+          "valid_time": "2026-09-02T12:15:00+00:00",
+          "recorded_at": "2026-09-02T12:15:01+00:00",
+          "raw_text": "Routine operations note 40: Quinn reports that unrelated cabinet S2-40 has inventory marker M4. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 40
+          }
+        },
+        {
+          "event_id": "s2-e41",
+          "valid_time": "2026-09-02T12:20:00+00:00",
+          "recorded_at": "2026-09-02T12:20:01+00:00",
+          "raw_text": "Routine operations note 41: Rae reports that unrelated cabinet S2-41 has inventory marker M11. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 41
+          }
+        },
+        {
+          "event_id": "s2-e42",
+          "valid_time": "2026-09-02T12:25:00+00:00",
+          "recorded_at": "2026-09-02T12:25:01+00:00",
+          "raw_text": "Routine operations note 42: Sol reports that unrelated cabinet S2-42 has inventory marker M18. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 42
+          }
+        },
+        {
+          "event_id": "s2-e43",
+          "valid_time": "2026-09-02T12:30:00+00:00",
+          "recorded_at": "2026-09-02T12:30:01+00:00",
+          "raw_text": "Routine operations note 43: Noah reports that unrelated cabinet S2-43 has inventory marker M2. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 43
+          }
+        },
+        {
+          "event_id": "s2-e44",
+          "valid_time": "2026-09-02T12:35:00+00:00",
+          "recorded_at": "2026-09-02T12:35:01+00:00",
+          "raw_text": "Routine operations note 44: Omar reports that unrelated cabinet S2-44 has inventory marker M9. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 44
+          }
+        },
+        {
+          "event_id": "s2-e45",
+          "valid_time": "2026-09-02T12:40:00+00:00",
+          "recorded_at": "2026-09-02T12:40:01+00:00",
+          "raw_text": "Routine operations note 45: Pia reports that unrelated cabinet S2-45 has inventory marker M16. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 45
+          }
+        },
+        {
+          "event_id": "s2-e46",
+          "valid_time": "2026-09-02T12:45:00+00:00",
+          "recorded_at": "2026-09-02T12:45:01+00:00",
+          "raw_text": "Routine operations note 46: Quinn reports that unrelated cabinet S2-46 has inventory marker M0. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 46
+          }
+        },
+        {
+          "event_id": "s2-e47",
+          "valid_time": "2026-09-02T12:50:00+00:00",
+          "recorded_at": "2026-09-02T12:50:01+00:00",
+          "raw_text": "Routine operations note 47: Rae reports that unrelated cabinet S2-47 has inventory marker M7. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 47
+          }
+        },
+        {
+          "event_id": "s2-e48",
+          "valid_time": "2026-09-02T12:55:00+00:00",
+          "recorded_at": "2026-09-02T12:55:01+00:00",
+          "raw_text": "Routine operations note 48: Sol reports that unrelated cabinet S2-48 has inventory marker M14. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 48
+          }
+        },
+        {
+          "event_id": "s2-e49",
+          "valid_time": "2026-09-02T13:00:00+00:00",
+          "recorded_at": "2026-09-02T13:00:01+00:00",
+          "raw_text": "Routine operations note 49: Noah reports that unrelated cabinet S2-49 has inventory marker M21. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 49
+          }
+        },
+        {
+          "raw_text": "Manager Mira directly tells Diego: this is the official correction; October 12 replaces October 10 as the project deadline.",
+          "source_id": "mira",
+          "actor_id": "mira",
+          "recipient_ids": [
+            "diego"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 50,
+            "direct_correction": true
+          },
+          "event_id": "s2-e50",
+          "valid_time": "2026-09-02T13:05:00+00:00",
+          "recorded_at": "2026-09-02T13:05:01+00:00",
+          "observer_ids": []
+        },
+        {
+          "raw_text": "Diego says: I accept Mira's direct correction and now believe the deadline is October 12.",
+          "source_id": "diego",
+          "actor_id": "diego",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s2-e51",
+          "valid_time": "2026-09-02T13:10:00+00:00",
+          "recorded_at": "2026-09-02T13:10:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 51
+          }
+        },
+        {
+          "event_id": "s2-e52",
+          "valid_time": "2026-09-02T13:15:00+00:00",
+          "recorded_at": "2026-09-02T13:15:01+00:00",
+          "raw_text": "Routine operations note 52: Quinn reports that unrelated cabinet S2-52 has inventory marker M19. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 52
+          }
+        },
+        {
+          "event_id": "s2-e53",
+          "valid_time": "2026-09-02T13:20:00+00:00",
+          "recorded_at": "2026-09-02T13:20:01+00:00",
+          "raw_text": "Routine operations note 53: Rae reports that unrelated cabinet S2-53 has inventory marker M3. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 53
+          }
+        },
+        {
+          "event_id": "s2-e54",
+          "valid_time": "2026-09-02T13:25:00+00:00",
+          "recorded_at": "2026-09-02T13:25:01+00:00",
+          "raw_text": "Routine operations note 54: Sol reports that unrelated cabinet S2-54 has inventory marker M10. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 54
+          }
+        },
+        {
+          "event_id": "s2-e55",
+          "valid_time": "2026-09-02T13:30:00+00:00",
+          "recorded_at": "2026-09-02T13:30:01+00:00",
+          "raw_text": "Routine operations note 55: Noah reports that unrelated cabinet S2-55 has inventory marker M17. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 55
+          }
+        },
+        {
+          "event_id": "s2-e56",
+          "valid_time": "2026-09-02T13:35:00+00:00",
+          "recorded_at": "2026-09-02T13:35:01+00:00",
+          "raw_text": "Routine operations note 56: Omar reports that unrelated cabinet S2-56 has inventory marker M1. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 56
+          }
+        },
+        {
+          "event_id": "s2-e57",
+          "valid_time": "2026-09-02T13:40:00+00:00",
+          "recorded_at": "2026-09-02T13:40:01+00:00",
+          "raw_text": "Routine operations note 57: Pia reports that unrelated cabinet S2-57 has inventory marker M8. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 57
+          }
+        },
+        {
+          "event_id": "s2-e58",
+          "valid_time": "2026-09-02T13:45:00+00:00",
+          "recorded_at": "2026-09-02T13:45:01+00:00",
+          "raw_text": "Routine operations note 58: Quinn reports that unrelated cabinet S2-58 has inventory marker M15. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 58
+          }
+        },
+        {
+          "event_id": "s2-e59",
+          "valid_time": "2026-09-02T13:50:00+00:00",
+          "recorded_at": "2026-09-02T13:50:01+00:00",
+          "raw_text": "Routine operations note 59: Rae reports that unrelated cabinet S2-59 has inventory marker M22. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 59
+          }
+        },
+        {
+          "event_id": "s2-e60",
+          "valid_time": "2026-09-02T13:55:00+00:00",
+          "recorded_at": "2026-09-02T13:55:01+00:00",
+          "raw_text": "Routine operations note 60: Sol reports that unrelated cabinet S2-60 has inventory marker M6. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 60
+          }
+        },
+        {
+          "event_id": "s2-e61",
+          "valid_time": "2026-09-02T14:00:00+00:00",
+          "recorded_at": "2026-09-02T14:00:01+00:00",
+          "raw_text": "Routine operations note 61: Noah reports that unrelated cabinet S2-61 has inventory marker M13. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 61
+          }
+        },
+        {
+          "event_id": "s2-e62",
+          "valid_time": "2026-09-02T14:05:00+00:00",
+          "recorded_at": "2026-09-02T14:05:01+00:00",
+          "raw_text": "Routine operations note 62: Omar reports that unrelated cabinet S2-62 has inventory marker M20. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 62
+          }
+        },
+        {
+          "raw_text": "The authoritative scheduling system records a new deadline of October 14 replacing October 12. Mira can see this system update; Diego does not receive it.",
+          "source_id": "schedule_system",
+          "actor_id": "schedule_system",
+          "observer_ids": [
+            "mira"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 63,
+            "scene_fact": true,
+            "correction": true
+          },
+          "event_id": "s2-e63",
+          "valid_time": "2026-09-02T14:10:00+00:00",
+          "recorded_at": "2026-09-02T14:10:01+00:00",
+          "recipient_ids": []
+        },
+        {
+          "event_id": "s2-e64",
+          "valid_time": "2026-09-02T14:15:00+00:00",
+          "recorded_at": "2026-09-02T14:15:01+00:00",
+          "raw_text": "Routine operations note 64: Quinn reports that unrelated cabinet S2-64 has inventory marker M11. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 64
+          }
+        },
+        {
+          "event_id": "s2-e65",
+          "valid_time": "2026-09-02T14:20:00+00:00",
+          "recorded_at": "2026-09-02T14:20:01+00:00",
+          "raw_text": "Routine operations note 65: Rae reports that unrelated cabinet S2-65 has inventory marker M18. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 65
+          }
+        },
+        {
+          "event_id": "s2-e66",
+          "valid_time": "2026-09-02T14:25:00+00:00",
+          "recorded_at": "2026-09-02T14:25:01+00:00",
+          "raw_text": "Routine operations note 66: Sol reports that unrelated cabinet S2-66 has inventory marker M2. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 66
+          }
+        },
+        {
+          "event_id": "s2-e67",
+          "valid_time": "2026-09-02T14:30:00+00:00",
+          "recorded_at": "2026-09-02T14:30:01+00:00",
+          "raw_text": "Routine operations note 67: Noah reports that unrelated cabinet S2-67 has inventory marker M9. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 67
+          }
+        },
+        {
+          "event_id": "s2-e68",
+          "valid_time": "2026-09-02T14:35:00+00:00",
+          "recorded_at": "2026-09-02T14:35:01+00:00",
+          "raw_text": "Routine operations note 68: Omar reports that unrelated cabinet S2-68 has inventory marker M16. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 68
+          }
+        },
+        {
+          "event_id": "s2-e69",
+          "valid_time": "2026-09-02T14:40:00+00:00",
+          "recorded_at": "2026-09-02T14:40:01+00:00",
+          "raw_text": "Routine operations note 69: Pia reports that unrelated cabinet S2-69 has inventory marker M0. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 69
+          }
+        },
+        {
+          "event_id": "s2-e70",
+          "valid_time": "2026-09-02T14:45:00+00:00",
+          "recorded_at": "2026-09-02T14:45:01+00:00",
+          "raw_text": "Routine operations note 70: Quinn reports that unrelated cabinet S2-70 has inventory marker M7. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 70
+          }
+        },
+        {
+          "event_id": "s2-e71",
+          "valid_time": "2026-09-02T14:50:00+00:00",
+          "recorded_at": "2026-09-02T14:50:01+00:00",
+          "raw_text": "Routine operations note 71: Rae reports that unrelated cabinet S2-71 has inventory marker M14. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 71
+          }
+        },
+        {
+          "raw_text": "Mira tells Diego that the scheduling system now shows October 14 replacing October 12.",
+          "source_id": "mira",
+          "actor_id": "mira",
+          "recipient_ids": [
+            "diego"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 72,
+            "correction_delivery": true
+          },
+          "event_id": "s2-e72",
+          "valid_time": "2026-09-02T14:55:00+00:00",
+          "recorded_at": "2026-09-02T14:55:01+00:00",
+          "observer_ids": []
+        },
+        {
+          "raw_text": "Diego says: I received the October 14 update, but I will not accept or reject it until I see the signed change notice.",
+          "source_id": "diego",
+          "actor_id": "diego",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s2-e73",
+          "valid_time": "2026-09-02T15:00:00+00:00",
+          "recorded_at": "2026-09-02T15:00:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 73
+          }
+        },
+        {
+          "event_id": "s2-e74",
+          "valid_time": "2026-09-02T15:05:00+00:00",
+          "recorded_at": "2026-09-02T15:05:01+00:00",
+          "raw_text": "Routine operations note 74: Omar reports that unrelated cabinet S2-74 has inventory marker M12. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 74
+          }
+        },
+        {
+          "event_id": "s2-e75",
+          "valid_time": "2026-09-02T15:10:00+00:00",
+          "recorded_at": "2026-09-02T15:10:01+00:00",
+          "raw_text": "Routine operations note 75: Pia reports that unrelated cabinet S2-75 has inventory marker M19. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 75
+          }
+        },
+        {
+          "event_id": "s2-e76",
+          "valid_time": "2026-09-02T15:15:00+00:00",
+          "recorded_at": "2026-09-02T15:15:01+00:00",
+          "raw_text": "Routine operations note 76: Quinn reports that unrelated cabinet S2-76 has inventory marker M3. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 76
+          }
+        },
+        {
+          "event_id": "s2-e77",
+          "valid_time": "2026-09-02T15:20:00+00:00",
+          "recorded_at": "2026-09-02T15:20:01+00:00",
+          "raw_text": "Routine operations note 77: Rae reports that unrelated cabinet S2-77 has inventory marker M10. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 77
+          }
+        },
+        {
+          "raw_text": "Mira sends Diego the signed change notice confirming October 14 as the project deadline.",
+          "source_id": "mira",
+          "actor_id": "mira",
+          "recipient_ids": [
+            "diego"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 78,
+            "official_notice": true
+          },
+          "event_id": "s2-e78",
+          "valid_time": "2026-09-02T15:25:00+00:00",
+          "recorded_at": "2026-09-02T15:25:01+00:00",
+          "observer_ids": []
+        },
+        {
+          "raw_text": "Diego says: I checked the signed notice and accept October 14 as the current project deadline.",
+          "source_id": "diego",
+          "actor_id": "diego",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s2-e79",
+          "valid_time": "2026-09-02T15:30:00+00:00",
+          "recorded_at": "2026-09-02T15:30:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 79
+          }
+        },
+        {
+          "event_id": "s2-e80",
+          "valid_time": "2026-09-02T15:35:00+00:00",
+          "recorded_at": "2026-09-02T15:35:01+00:00",
+          "raw_text": "Routine operations note 80: Omar reports that unrelated cabinet S2-80 has inventory marker M8. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 80
+          }
+        }
+      ],
+      "queries": [
+        {
+          "query_id": "s2-q1",
+          "after_event": 10,
+          "target_agent_id": "diego",
+          "allowed_labels": [
+            "OCT10",
+            "OCT12",
+            "OCT14",
+            "UNCERTAIN"
+          ],
+          "question": "Which project deadline does Diego currently believe is in force?"
+        },
+        {
+          "query_id": "s2-q2",
+          "after_event": 30,
+          "target_agent_id": "diego",
+          "allowed_labels": [
+            "OCT10",
+            "OCT12",
+            "OCT14",
+            "UNCERTAIN"
+          ],
+          "question": "Mira corrected the deadline for Grace but not Diego. Which deadline does Diego currently believe is in force?"
+        },
+        {
+          "query_id": "s2-q3",
+          "after_event": 40,
+          "target_agent_id": "diego",
+          "allowed_labels": [
+            "OCT10",
+            "OCT12",
+            "OCT14",
+            "UNCERTAIN"
+          ],
+          "question": "After Grace relayed a change and Diego stated his reaction, which deadline does Diego believe is current?"
+        },
+        {
+          "query_id": "s2-q4",
+          "after_event": 55,
+          "target_agent_id": "diego",
+          "allowed_labels": [
+            "OCT10",
+            "OCT12",
+            "OCT14",
+            "UNCERTAIN"
+          ],
+          "question": "Which deadline does Diego currently believe is in force?"
+        },
+        {
+          "query_id": "s2-q5",
+          "after_event": 68,
+          "target_agent_id": "diego",
+          "allowed_labels": [
+            "OCT10",
+            "OCT12",
+            "OCT14",
+            "UNCERTAIN"
+          ],
+          "question": "The scheduling system has changed again without informing Diego. Which deadline does Diego currently believe is in force?"
+        },
+        {
+          "query_id": "s2-q6",
+          "after_event": 80,
+          "target_agent_id": "diego",
+          "allowed_labels": [
+            "OCT10",
+            "OCT12",
+            "OCT14",
+            "UNCERTAIN"
+          ],
+          "question": "At the end of the stream, which deadline does Diego currently believe is in force?"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "target_agent_id": "hana",
+      "events": [
+        {
+          "event_id": "s3-e01",
+          "valid_time": "2026-09-03T09:00:00+00:00",
+          "recorded_at": "2026-09-03T09:00:01+00:00",
+          "raw_text": "Routine operations note 01: Noah reports that unrelated cabinet S3-01 has inventory marker M7. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 1
+          }
+        },
+        {
+          "raw_text": "IT lead Jules tells Hana: the current access code word is Aster.",
+          "source_id": "jules",
+          "actor_id": "jules",
+          "recipient_ids": [
+            "hana"
+          ],
+          "event_id": "s3-e02",
+          "valid_time": "2026-09-03T09:05:00+00:00",
+          "recorded_at": "2026-09-03T09:05:01+00:00",
+          "observer_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 2
+          }
+        },
+        {
+          "event_id": "s3-e03",
+          "valid_time": "2026-09-03T09:10:00+00:00",
+          "recorded_at": "2026-09-03T09:10:01+00:00",
+          "raw_text": "Routine operations note 03: Pia reports that unrelated cabinet S3-03 has inventory marker M21. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 3
+          }
+        },
+        {
+          "raw_text": "Hana says: I accept Aster as the current access code word.",
+          "source_id": "hana",
+          "actor_id": "hana",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s3-e04",
+          "valid_time": "2026-09-03T09:15:00+00:00",
+          "recorded_at": "2026-09-03T09:15:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 4
+          }
+        },
+        {
+          "event_id": "s3-e05",
+          "valid_time": "2026-09-03T09:20:00+00:00",
+          "recorded_at": "2026-09-03T09:20:01+00:00",
+          "raw_text": "Routine operations note 05: Rae reports that unrelated cabinet S3-05 has inventory marker M12. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 5
+          }
+        },
+        {
+          "event_id": "s3-e06",
+          "valid_time": "2026-09-03T09:25:00+00:00",
+          "recorded_at": "2026-09-03T09:25:01+00:00",
+          "raw_text": "Routine operations note 06: Sol reports that unrelated cabinet S3-06 has inventory marker M19. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 6
+          }
+        },
+        {
+          "event_id": "s3-e07",
+          "valid_time": "2026-09-03T09:30:00+00:00",
+          "recorded_at": "2026-09-03T09:30:01+00:00",
+          "raw_text": "Routine operations note 07: Noah reports that unrelated cabinet S3-07 has inventory marker M3. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 7
+          }
+        },
+        {
+          "event_id": "s3-e08",
+          "valid_time": "2026-09-03T09:35:00+00:00",
+          "recorded_at": "2026-09-03T09:35:01+00:00",
+          "raw_text": "Routine operations note 08: Omar reports that unrelated cabinet S3-08 has inventory marker M10. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 8
+          }
+        },
+        {
+          "event_id": "s3-e09",
+          "valid_time": "2026-09-03T09:40:00+00:00",
+          "recorded_at": "2026-09-03T09:40:01+00:00",
+          "raw_text": "Routine operations note 09: Pia reports that unrelated cabinet S3-09 has inventory marker M17. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 9
+          }
+        },
+        {
+          "event_id": "s3-e10",
+          "valid_time": "2026-09-03T09:45:00+00:00",
+          "recorded_at": "2026-09-03T09:45:01+00:00",
+          "raw_text": "Routine operations note 10: Quinn reports that unrelated cabinet S3-10 has inventory marker M1. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 10
+          }
+        },
+        {
+          "event_id": "s3-e11",
+          "valid_time": "2026-09-03T09:50:00+00:00",
+          "recorded_at": "2026-09-03T09:50:01+00:00",
+          "raw_text": "Routine operations note 11: Rae reports that unrelated cabinet S3-11 has inventory marker M8. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 11
+          }
+        },
+        {
+          "event_id": "s3-e12",
+          "valid_time": "2026-09-03T09:55:00+00:00",
+          "recorded_at": "2026-09-03T09:55:01+00:00",
+          "raw_text": "Routine operations note 12: Sol reports that unrelated cabinet S3-12 has inventory marker M15. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 12
+          }
+        },
+        {
+          "event_id": "s3-e13",
+          "valid_time": "2026-09-03T10:00:00+00:00",
+          "recorded_at": "2026-09-03T10:00:01+00:00",
+          "raw_text": "Routine operations note 13: Noah reports that unrelated cabinet S3-13 has inventory marker M22. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 13
+          }
+        },
+        {
+          "event_id": "s3-e14",
+          "valid_time": "2026-09-03T10:05:00+00:00",
+          "recorded_at": "2026-09-03T10:05:01+00:00",
+          "raw_text": "Routine operations note 14: Omar reports that unrelated cabinet S3-14 has inventory marker M6. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 14
+          }
+        },
+        {
+          "raw_text": "IT lead Jules tells Ivan only: Birch replaces Aster as the current access code word. Hana is not a recipient.",
+          "source_id": "jules",
+          "actor_id": "jules",
+          "recipient_ids": [
+            "ivan"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 15,
+            "correction": true
+          },
+          "event_id": "s3-e15",
+          "valid_time": "2026-09-03T10:10:00+00:00",
+          "recorded_at": "2026-09-03T10:10:01+00:00",
+          "observer_ids": []
+        },
+        {
+          "event_id": "s3-e16",
+          "valid_time": "2026-09-03T10:15:00+00:00",
+          "recorded_at": "2026-09-03T10:15:01+00:00",
+          "raw_text": "Routine operations note 16: Quinn reports that unrelated cabinet S3-16 has inventory marker M20. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 16
+          }
+        },
+        {
+          "event_id": "s3-e17",
+          "valid_time": "2026-09-03T10:20:00+00:00",
+          "recorded_at": "2026-09-03T10:20:01+00:00",
+          "raw_text": "Routine operations note 17: Rae reports that unrelated cabinet S3-17 has inventory marker M4. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 17
+          }
+        },
+        {
+          "event_id": "s3-e18",
+          "valid_time": "2026-09-03T10:25:00+00:00",
+          "recorded_at": "2026-09-03T10:25:01+00:00",
+          "raw_text": "Routine operations note 18: Sol reports that unrelated cabinet S3-18 has inventory marker M11. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 18
+          }
+        },
+        {
+          "event_id": "s3-e19",
+          "valid_time": "2026-09-03T10:30:00+00:00",
+          "recorded_at": "2026-09-03T10:30:01+00:00",
+          "raw_text": "Routine operations note 19: Noah reports that unrelated cabinet S3-19 has inventory marker M18. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 19
+          }
+        },
+        {
+          "event_id": "s3-e20",
+          "valid_time": "2026-09-03T10:35:00+00:00",
+          "recorded_at": "2026-09-03T10:35:01+00:00",
+          "raw_text": "Routine operations note 20: Omar reports that unrelated cabinet S3-20 has inventory marker M2. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 20
+          }
+        },
+        {
+          "event_id": "s3-e21",
+          "valid_time": "2026-09-03T10:40:00+00:00",
+          "recorded_at": "2026-09-03T10:40:01+00:00",
+          "raw_text": "Routine operations note 21: Pia reports that unrelated cabinet S3-21 has inventory marker M9. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 21
+          }
+        },
+        {
+          "event_id": "s3-e22",
+          "valid_time": "2026-09-03T10:45:00+00:00",
+          "recorded_at": "2026-09-03T10:45:01+00:00",
+          "raw_text": "Routine operations note 22: Quinn reports that unrelated cabinet S3-22 has inventory marker M16. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 22
+          }
+        },
+        {
+          "event_id": "s3-e23",
+          "valid_time": "2026-09-03T10:50:00+00:00",
+          "recorded_at": "2026-09-03T10:50:01+00:00",
+          "raw_text": "Routine operations note 23: Rae reports that unrelated cabinet S3-23 has inventory marker M0. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 23
+          }
+        },
+        {
+          "event_id": "s3-e24",
+          "valid_time": "2026-09-03T10:55:00+00:00",
+          "recorded_at": "2026-09-03T10:55:01+00:00",
+          "raw_text": "Routine operations note 24: Sol reports that unrelated cabinet S3-24 has inventory marker M7. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 24
+          }
+        },
+        {
+          "raw_text": "Ivan tells Hana: Jules told me that Birch replaced Aster as the access code.",
+          "source_id": "ivan",
+          "actor_id": "ivan",
+          "recipient_ids": [
+            "hana"
+          ],
+          "event_id": "s3-e25",
+          "valid_time": "2026-09-03T11:00:00+00:00",
+          "recorded_at": "2026-09-03T11:00:01+00:00",
+          "observer_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 25
+          }
+        },
+        {
+          "raw_text": "Hana says: I heard Ivan's relay, but until IT tells me directly I still believe Aster is the current code.",
+          "source_id": "hana",
+          "actor_id": "hana",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s3-e26",
+          "valid_time": "2026-09-03T11:05:00+00:00",
+          "recorded_at": "2026-09-03T11:05:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 26
+          }
+        },
+        {
+          "event_id": "s3-e27",
+          "valid_time": "2026-09-03T11:10:00+00:00",
+          "recorded_at": "2026-09-03T11:10:01+00:00",
+          "raw_text": "Routine operations note 27: Pia reports that unrelated cabinet S3-27 has inventory marker M5. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 27
+          }
+        },
+        {
+          "event_id": "s3-e28",
+          "valid_time": "2026-09-03T11:15:00+00:00",
+          "recorded_at": "2026-09-03T11:15:01+00:00",
+          "raw_text": "Routine operations note 28: Quinn reports that unrelated cabinet S3-28 has inventory marker M12. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 28
+          }
+        },
+        {
+          "event_id": "s3-e29",
+          "valid_time": "2026-09-03T11:20:00+00:00",
+          "recorded_at": "2026-09-03T11:20:01+00:00",
+          "raw_text": "Routine operations note 29: Rae reports that unrelated cabinet S3-29 has inventory marker M19. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 29
+          }
+        },
+        {
+          "event_id": "s3-e30",
+          "valid_time": "2026-09-03T11:25:00+00:00",
+          "recorded_at": "2026-09-03T11:25:01+00:00",
+          "raw_text": "Routine operations note 30: Sol reports that unrelated cabinet S3-30 has inventory marker M3. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 30
+          }
+        },
+        {
+          "event_id": "s3-e31",
+          "valid_time": "2026-09-03T11:30:00+00:00",
+          "recorded_at": "2026-09-03T11:30:01+00:00",
+          "raw_text": "Routine operations note 31: Noah reports that unrelated cabinet S3-31 has inventory marker M10. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 31
+          }
+        },
+        {
+          "event_id": "s3-e32",
+          "valid_time": "2026-09-03T11:35:00+00:00",
+          "recorded_at": "2026-09-03T11:35:01+00:00",
+          "raw_text": "Routine operations note 32: Omar reports that unrelated cabinet S3-32 has inventory marker M17. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 32
+          }
+        },
+        {
+          "event_id": "s3-e33",
+          "valid_time": "2026-09-03T11:40:00+00:00",
+          "recorded_at": "2026-09-03T11:40:01+00:00",
+          "raw_text": "Routine operations note 33: Pia reports that unrelated cabinet S3-33 has inventory marker M1. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 33
+          }
+        },
+        {
+          "event_id": "s3-e34",
+          "valid_time": "2026-09-03T11:45:00+00:00",
+          "recorded_at": "2026-09-03T11:45:01+00:00",
+          "raw_text": "Routine operations note 34: Quinn reports that unrelated cabinet S3-34 has inventory marker M8. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 34
+          }
+        },
+        {
+          "event_id": "s3-e35",
+          "valid_time": "2026-09-03T11:50:00+00:00",
+          "recorded_at": "2026-09-03T11:50:01+00:00",
+          "raw_text": "Routine operations note 35: Rae reports that unrelated cabinet S3-35 has inventory marker M15. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 35
+          }
+        },
+        {
+          "event_id": "s3-e36",
+          "valid_time": "2026-09-03T11:55:00+00:00",
+          "recorded_at": "2026-09-03T11:55:01+00:00",
+          "raw_text": "Routine operations note 36: Sol reports that unrelated cabinet S3-36 has inventory marker M22. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 36
+          }
+        },
+        {
+          "event_id": "s3-e37",
+          "valid_time": "2026-09-03T12:00:00+00:00",
+          "recorded_at": "2026-09-03T12:00:01+00:00",
+          "raw_text": "Routine operations note 37: Noah reports that unrelated cabinet S3-37 has inventory marker M6. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 37
+          }
+        },
+        {
+          "event_id": "s3-e38",
+          "valid_time": "2026-09-03T12:05:00+00:00",
+          "recorded_at": "2026-09-03T12:05:01+00:00",
+          "raw_text": "Routine operations note 38: Omar reports that unrelated cabinet S3-38 has inventory marker M13. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 38
+          }
+        },
+        {
+          "event_id": "s3-e39",
+          "valid_time": "2026-09-03T12:10:00+00:00",
+          "recorded_at": "2026-09-03T12:10:01+00:00",
+          "raw_text": "Routine operations note 39: Pia reports that unrelated cabinet S3-39 has inventory marker M20. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 39
+          }
+        },
+        {
+          "raw_text": "Jules directly tells Hana: Birch replaces Aster as the current access code word.",
+          "source_id": "jules",
+          "actor_id": "jules",
+          "recipient_ids": [
+            "hana"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 40,
+            "direct_correction": true
+          },
+          "event_id": "s3-e40",
+          "valid_time": "2026-09-03T12:15:00+00:00",
+          "recorded_at": "2026-09-03T12:15:01+00:00",
+          "observer_ids": []
+        },
+        {
+          "raw_text": "Hana says: I received the Birch correction, but I have not decided whether to accept or reject it yet.",
+          "source_id": "hana",
+          "actor_id": "hana",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s3-e41",
+          "valid_time": "2026-09-03T12:20:00+00:00",
+          "recorded_at": "2026-09-03T12:20:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 41
+          }
+        },
+        {
+          "event_id": "s3-e42",
+          "valid_time": "2026-09-03T12:25:00+00:00",
+          "recorded_at": "2026-09-03T12:25:01+00:00",
+          "raw_text": "Routine operations note 42: Sol reports that unrelated cabinet S3-42 has inventory marker M18. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 42
+          }
+        },
+        {
+          "event_id": "s3-e43",
+          "valid_time": "2026-09-03T12:30:00+00:00",
+          "recorded_at": "2026-09-03T12:30:01+00:00",
+          "raw_text": "Routine operations note 43: Noah reports that unrelated cabinet S3-43 has inventory marker M2. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 43
+          }
+        },
+        {
+          "event_id": "s3-e44",
+          "valid_time": "2026-09-03T12:35:00+00:00",
+          "recorded_at": "2026-09-03T12:35:01+00:00",
+          "raw_text": "Routine operations note 44: Omar reports that unrelated cabinet S3-44 has inventory marker M9. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 44
+          }
+        },
+        {
+          "raw_text": "Hana says: I verified the IT message and now accept Birch as the current access code word.",
+          "source_id": "hana",
+          "actor_id": "hana",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s3-e45",
+          "valid_time": "2026-09-03T12:40:00+00:00",
+          "recorded_at": "2026-09-03T12:40:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 45
+          }
+        },
+        {
+          "event_id": "s3-e46",
+          "valid_time": "2026-09-03T12:45:00+00:00",
+          "recorded_at": "2026-09-03T12:45:01+00:00",
+          "raw_text": "Routine operations note 46: Quinn reports that unrelated cabinet S3-46 has inventory marker M0. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 46
+          }
+        },
+        {
+          "event_id": "s3-e47",
+          "valid_time": "2026-09-03T12:50:00+00:00",
+          "recorded_at": "2026-09-03T12:50:01+00:00",
+          "raw_text": "Routine operations note 47: Rae reports that unrelated cabinet S3-47 has inventory marker M7. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 47
+          }
+        },
+        {
+          "event_id": "s3-e48",
+          "valid_time": "2026-09-03T12:55:00+00:00",
+          "recorded_at": "2026-09-03T12:55:01+00:00",
+          "raw_text": "Routine operations note 48: Sol reports that unrelated cabinet S3-48 has inventory marker M14. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 48
+          }
+        },
+        {
+          "event_id": "s3-e49",
+          "valid_time": "2026-09-03T13:00:00+00:00",
+          "recorded_at": "2026-09-03T13:00:01+00:00",
+          "raw_text": "Routine operations note 49: Noah reports that unrelated cabinet S3-49 has inventory marker M21. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 49
+          }
+        },
+        {
+          "event_id": "s3-e50",
+          "valid_time": "2026-09-03T13:05:00+00:00",
+          "recorded_at": "2026-09-03T13:05:01+00:00",
+          "raw_text": "Routine operations note 50: Omar reports that unrelated cabinet S3-50 has inventory marker M5. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 50
+          }
+        },
+        {
+          "event_id": "s3-e51",
+          "valid_time": "2026-09-03T13:10:00+00:00",
+          "recorded_at": "2026-09-03T13:10:01+00:00",
+          "raw_text": "Routine operations note 51: Pia reports that unrelated cabinet S3-51 has inventory marker M12. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 51
+          }
+        },
+        {
+          "event_id": "s3-e52",
+          "valid_time": "2026-09-03T13:15:00+00:00",
+          "recorded_at": "2026-09-03T13:15:01+00:00",
+          "raw_text": "Routine operations note 52: Quinn reports that unrelated cabinet S3-52 has inventory marker M19. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 52
+          }
+        },
+        {
+          "event_id": "s3-e53",
+          "valid_time": "2026-09-03T13:20:00+00:00",
+          "recorded_at": "2026-09-03T13:20:01+00:00",
+          "raw_text": "Routine operations note 53: Rae reports that unrelated cabinet S3-53 has inventory marker M3. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 53
+          }
+        },
+        {
+          "event_id": "s3-e54",
+          "valid_time": "2026-09-03T13:25:00+00:00",
+          "recorded_at": "2026-09-03T13:25:01+00:00",
+          "raw_text": "Routine operations note 54: Sol reports that unrelated cabinet S3-54 has inventory marker M10. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 54
+          }
+        },
+        {
+          "raw_text": "The authoritative security console records Cedar as the new access code word replacing Birch. Jules and Kim see the console update; Hana does not receive it.",
+          "source_id": "security_console",
+          "actor_id": "security_console",
+          "observer_ids": [
+            "jules",
+            "kim"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 55,
+            "scene_fact": true,
+            "correction": true
+          },
+          "event_id": "s3-e55",
+          "valid_time": "2026-09-03T13:30:00+00:00",
+          "recorded_at": "2026-09-03T13:30:01+00:00",
+          "recipient_ids": []
+        },
+        {
+          "event_id": "s3-e56",
+          "valid_time": "2026-09-03T13:35:00+00:00",
+          "recorded_at": "2026-09-03T13:35:01+00:00",
+          "raw_text": "Routine operations note 56: Omar reports that unrelated cabinet S3-56 has inventory marker M1. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 56
+          }
+        },
+        {
+          "event_id": "s3-e57",
+          "valid_time": "2026-09-03T13:40:00+00:00",
+          "recorded_at": "2026-09-03T13:40:01+00:00",
+          "raw_text": "Routine operations note 57: Pia reports that unrelated cabinet S3-57 has inventory marker M8. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 57
+          }
+        },
+        {
+          "event_id": "s3-e58",
+          "valid_time": "2026-09-03T13:45:00+00:00",
+          "recorded_at": "2026-09-03T13:45:01+00:00",
+          "raw_text": "Routine operations note 58: Quinn reports that unrelated cabinet S3-58 has inventory marker M15. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 58
+          }
+        },
+        {
+          "event_id": "s3-e59",
+          "valid_time": "2026-09-03T13:50:00+00:00",
+          "recorded_at": "2026-09-03T13:50:01+00:00",
+          "raw_text": "Routine operations note 59: Rae reports that unrelated cabinet S3-59 has inventory marker M22. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 59
+          }
+        },
+        {
+          "event_id": "s3-e60",
+          "valid_time": "2026-09-03T13:55:00+00:00",
+          "recorded_at": "2026-09-03T13:55:01+00:00",
+          "raw_text": "Routine operations note 60: Sol reports that unrelated cabinet S3-60 has inventory marker M6. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 60
+          }
+        },
+        {
+          "event_id": "s3-e61",
+          "valid_time": "2026-09-03T14:00:00+00:00",
+          "recorded_at": "2026-09-03T14:00:01+00:00",
+          "raw_text": "Routine operations note 61: Noah reports that unrelated cabinet S3-61 has inventory marker M13. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 61
+          }
+        },
+        {
+          "event_id": "s3-e62",
+          "valid_time": "2026-09-03T14:05:00+00:00",
+          "recorded_at": "2026-09-03T14:05:01+00:00",
+          "raw_text": "Routine operations note 62: Omar reports that unrelated cabinet S3-62 has inventory marker M20. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 62
+          }
+        },
+        {
+          "event_id": "s3-e63",
+          "valid_time": "2026-09-03T14:10:00+00:00",
+          "recorded_at": "2026-09-03T14:10:01+00:00",
+          "raw_text": "Routine operations note 63: Pia reports that unrelated cabinet S3-63 has inventory marker M4. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 63
+          }
+        },
+        {
+          "event_id": "s3-e64",
+          "valid_time": "2026-09-03T14:15:00+00:00",
+          "recorded_at": "2026-09-03T14:15:01+00:00",
+          "raw_text": "Routine operations note 64: Quinn reports that unrelated cabinet S3-64 has inventory marker M11. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 64
+          }
+        },
+        {
+          "raw_text": "Kim tells Hana: I saw Cedar on the internal console; I think it replaced Birch.",
+          "source_id": "kim",
+          "actor_id": "kim",
+          "recipient_ids": [
+            "hana"
+          ],
+          "event_id": "s3-e65",
+          "valid_time": "2026-09-03T14:20:00+00:00",
+          "recorded_at": "2026-09-03T14:20:01+00:00",
+          "observer_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 65
+          }
+        },
+        {
+          "raw_text": "Hana says: I reject Kim's unofficial relay as sufficient evidence and still believe Birch is the current code until IT confirms it.",
+          "source_id": "hana",
+          "actor_id": "hana",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s3-e66",
+          "valid_time": "2026-09-03T14:25:00+00:00",
+          "recorded_at": "2026-09-03T14:25:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 66
+          }
+        },
+        {
+          "event_id": "s3-e67",
+          "valid_time": "2026-09-03T14:30:00+00:00",
+          "recorded_at": "2026-09-03T14:30:01+00:00",
+          "raw_text": "Routine operations note 67: Noah reports that unrelated cabinet S3-67 has inventory marker M9. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 67
+          }
+        },
+        {
+          "event_id": "s3-e68",
+          "valid_time": "2026-09-03T14:35:00+00:00",
+          "recorded_at": "2026-09-03T14:35:01+00:00",
+          "raw_text": "Routine operations note 68: Omar reports that unrelated cabinet S3-68 has inventory marker M16. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 68
+          }
+        },
+        {
+          "event_id": "s3-e69",
+          "valid_time": "2026-09-03T14:40:00+00:00",
+          "recorded_at": "2026-09-03T14:40:01+00:00",
+          "raw_text": "Routine operations note 69: Pia reports that unrelated cabinet S3-69 has inventory marker M0. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 69
+          }
+        },
+        {
+          "event_id": "s3-e70",
+          "valid_time": "2026-09-03T14:45:00+00:00",
+          "recorded_at": "2026-09-03T14:45:01+00:00",
+          "raw_text": "Routine operations note 70: Quinn reports that unrelated cabinet S3-70 has inventory marker M7. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 70
+          }
+        },
+        {
+          "event_id": "s3-e71",
+          "valid_time": "2026-09-03T14:50:00+00:00",
+          "recorded_at": "2026-09-03T14:50:01+00:00",
+          "raw_text": "Routine operations note 71: Rae reports that unrelated cabinet S3-71 has inventory marker M14. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 71
+          }
+        },
+        {
+          "event_id": "s3-e72",
+          "valid_time": "2026-09-03T14:55:00+00:00",
+          "recorded_at": "2026-09-03T14:55:01+00:00",
+          "raw_text": "Routine operations note 72: Sol reports that unrelated cabinet S3-72 has inventory marker M21. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 72
+          }
+        },
+        {
+          "event_id": "s3-e73",
+          "valid_time": "2026-09-03T15:00:00+00:00",
+          "recorded_at": "2026-09-03T15:00:01+00:00",
+          "raw_text": "Routine operations note 73: Noah reports that unrelated cabinet S3-73 has inventory marker M5. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 73
+          }
+        },
+        {
+          "event_id": "s3-e74",
+          "valid_time": "2026-09-03T15:05:00+00:00",
+          "recorded_at": "2026-09-03T15:05:01+00:00",
+          "raw_text": "Routine operations note 74: Omar reports that unrelated cabinet S3-74 has inventory marker M12. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 74
+          }
+        },
+        {
+          "raw_text": "Jules sends Hana the signed IT notice: Cedar replaces Birch as the current access code word.",
+          "source_id": "jules",
+          "actor_id": "jules",
+          "recipient_ids": [
+            "hana"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 75,
+            "official_notice": true
+          },
+          "event_id": "s3-e75",
+          "valid_time": "2026-09-03T15:10:00+00:00",
+          "recorded_at": "2026-09-03T15:10:01+00:00",
+          "observer_ids": []
+        },
+        {
+          "raw_text": "Hana says: I checked the signed IT notice and accept Cedar as the current access code word.",
+          "source_id": "hana",
+          "actor_id": "hana",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "event_id": "s3-e76",
+          "valid_time": "2026-09-03T15:15:00+00:00",
+          "recorded_at": "2026-09-03T15:15:01+00:00",
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 76
+          }
+        },
+        {
+          "event_id": "s3-e77",
+          "valid_time": "2026-09-03T15:20:00+00:00",
+          "recorded_at": "2026-09-03T15:20:01+00:00",
+          "raw_text": "Routine operations note 77: Rae reports that unrelated cabinet S3-77 has inventory marker M10. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 77
+          }
+        },
+        {
+          "event_id": "s3-e78",
+          "valid_time": "2026-09-03T15:25:00+00:00",
+          "recorded_at": "2026-09-03T15:25:01+00:00",
+          "raw_text": "Routine operations note 78: Sol reports that unrelated cabinet S3-78 has inventory marker M17. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 78
+          }
+        },
+        {
+          "event_id": "s3-e79",
+          "valid_time": "2026-09-03T15:30:00+00:00",
+          "recorded_at": "2026-09-03T15:30:01+00:00",
+          "raw_text": "Routine operations note 79: Noah reports that unrelated cabinet S3-79 has inventory marker M1. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 79
+          }
+        },
+        {
+          "event_id": "s3-e80",
+          "valid_time": "2026-09-03T15:35:00+00:00",
+          "recorded_at": "2026-09-03T15:35:01+00:00",
+          "raw_text": "Routine operations note 80: Omar reports that unrelated cabinet S3-80 has inventory marker M8. This note is unrelated to the tracked human-state issue.",
+          "source_id": "routine_log",
+          "actor_id": "omar",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 80
+          }
+        }
+      ],
+      "queries": [
+        {
+          "query_id": "s3-q1",
+          "after_event": 10,
+          "target_agent_id": "hana",
+          "allowed_labels": [
+            "ASTER",
+            "BIRCH",
+            "CEDAR",
+            "UNCERTAIN"
+          ],
+          "question": "Which access code word does Hana currently believe is in force?"
+        },
+        {
+          "query_id": "s3-q2",
+          "after_event": 30,
+          "target_agent_id": "hana",
+          "allowed_labels": [
+            "ASTER",
+            "BIRCH",
+            "CEDAR",
+            "UNCERTAIN"
+          ],
+          "question": "After Ivan's relay and Hana's explicit reaction, which access code word does Hana believe is current?"
+        },
+        {
+          "query_id": "s3-q3",
+          "after_event": 42,
+          "target_agent_id": "hana",
+          "allowed_labels": [
+            "ASTER",
+            "BIRCH",
+            "CEDAR",
+            "UNCERTAIN"
+          ],
+          "question": "After Hana received the direct Birch correction but before accepting or rejecting it, which code is she currently supported as believing?"
+        },
+        {
+          "query_id": "s3-q4",
+          "after_event": 60,
+          "target_agent_id": "hana",
+          "allowed_labels": [
+            "ASTER",
+            "BIRCH",
+            "CEDAR",
+            "UNCERTAIN"
+          ],
+          "question": "The security console has changed without informing Hana. Which code does Hana currently believe is in force?"
+        },
+        {
+          "query_id": "s3-q5",
+          "after_event": 80,
+          "target_agent_id": "hana",
+          "allowed_labels": [
+            "ASTER",
+            "BIRCH",
+            "CEDAR",
+            "UNCERTAIN"
+          ],
+          "question": "At the end of the stream, which access code word does Hana currently believe is in force?"
+        },
+        {
+          "query_id": "s3-q6",
+          "after_event": 80,
+          "target_agent_id": "hana",
+          "event_time": "2026-09-03T11:25:00+00:00",
+          "allowed_labels": [
+            "ASTER",
+            "BIRCH",
+            "CEDAR",
+            "UNCERTAIN"
+          ],
+          "question": "At historical time 2026-09-03T11:25:00+00:00, before Hana received IT's direct Birch correction, which access code word did Hana believe was current?"
+        }
+      ]
+    }
+  ]
+}

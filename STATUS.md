@@ -3995,3 +3995,33 @@ Canonical next contract:
 - `docs/HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_CONTRACT_V01.md`
 
 **Current gate: HCL_V04_PROPOSITION_REVISION_STANCE_CORRECTNESS_COMPLETE_LONG_HORIZON_CONTRACT_FROZEN_NOT_RUN**
+
+
+## HCL v0.4 long-horizon bounded-context implementation candidate
+
+Frozen contract:
+- `docs/HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_CONTRACT_V01.md`
+
+Implementation PR #12 now contains:
+- 3 frozen streams / 240 events / 18 scored queries;
+- separate fixture and gold files;
+- D persistent HCL vs E strong ordinary persistent memory under the same
+  8000-character query-time dynamic-context budget;
+- 6000-character ordinary-memory cap for E;
+- C full-history diagnostic oracle only;
+- no harness `track` / `sequence` annotations exposed to evaluated arms;
+- cost recording including calls, input/output characters, provider wall time,
+  arm wall time, query latency, and D/E persistent state/memory size.
+
+Frozen digests remain:
+- fixture: `a79b675cf484292a07916141d54d3022862c39851a3fc4b91c73cb13f1a75cfe`
+- gold: `376fb695eada3b52f7e8fadd395be479f9cbbf47c944c9d3b0c4a56d5f90c988`
+
+Provider-free evidence:
+- preflight `35978730334`: SUCCESS, 7/7 fairness guards;
+- integration/minimal-slice `35978730244`: SUCCESS;
+- manual frozen gold/timeline audit: PASS.
+
+No provider-backed scored row has been consumed yet.
+
+**Current gate: HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V01_IMPLEMENTED_PREFLIGHT_AND_GOLD_AUDIT_PASS_PROVIDER_RUN_NOT_STARTED**
