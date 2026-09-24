@@ -1,0 +1,5391 @@
+{
+  "format": "hcl-v05-strong-baseline-replication-v01-fixture",
+  "query_context_char_budget": 8000,
+  "persistent_state_char_budget": 6000,
+  "streams": [
+    {
+      "id": "r1",
+      "target_agents": [
+        "arin",
+        "bex"
+      ],
+      "queried_issues": [
+        "deployment_ring",
+        "meeting_slot"
+      ],
+      "ontology_seed": {
+        "deployment_ring": [
+          "RING_A",
+          "RING_B",
+          "RING_C"
+        ],
+        "meeting_slot": [
+          "MORNING",
+          "NOON",
+          "EVENING"
+        ],
+        "storage_zone": [
+          "ZONE_1",
+          "ZONE_2",
+          "ZONE_3"
+        ],
+        "review_method": [
+          "SOLO",
+          "PAIR",
+          "PANEL"
+        ]
+      },
+      "events": [
+        {
+          "event_id": "r1-e001",
+          "valid_time": "2026-07-14T08:04:00+00:00",
+          "recorded_at": "2026-07-14T08:04:01+00:00",
+          "raw_text": "lyra informs pavo: ZONE_2 is listed for the storage zone.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pavo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e002",
+          "valid_time": "2026-07-14T08:08:00+00:00",
+          "recorded_at": "2026-07-14T08:08:01+00:00",
+          "raw_text": "lyra tells arin: the listed deployment ring is RING_A.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "arin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e003",
+          "valid_time": "2026-07-14T08:12:00+00:00",
+          "recorded_at": "2026-07-14T08:12:01+00:00",
+          "raw_text": "arin says: I accept RING_A as my current deployment ring.",
+          "source_id": "arin",
+          "actor_id": "arin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e004",
+          "valid_time": "2026-07-14T08:16:00+00:00",
+          "recorded_at": "2026-07-14T08:16:01+00:00",
+          "raw_text": "pavo says: I reject PAIR for the review method and continue with PANEL.",
+          "source_id": "pavo",
+          "actor_id": "pavo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e005",
+          "valid_time": "2026-07-14T08:20:00+00:00",
+          "recorded_at": "2026-07-14T08:20:01+00:00",
+          "raw_text": "lyra tells bex: the listed deployment ring is RING_A.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "bex"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e006",
+          "valid_time": "2026-07-14T08:24:00+00:00",
+          "recorded_at": "2026-07-14T08:24:01+00:00",
+          "raw_text": "bex says: I accept RING_A as my current deployment ring.",
+          "source_id": "bex",
+          "actor_id": "bex",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e007",
+          "valid_time": "2026-07-14T08:28:00+00:00",
+          "recorded_at": "2026-07-14T08:28:01+00:00",
+          "raw_text": "lyra tells pavo: ZONE_2 replaces ZONE_3 for the storage zone.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pavo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e008",
+          "valid_time": "2026-07-14T08:32:00+00:00",
+          "recorded_at": "2026-07-14T08:32:01+00:00",
+          "raw_text": "lyra tells arin: the listed meeting slot is MORNING.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "arin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e009",
+          "valid_time": "2026-07-14T08:36:00+00:00",
+          "recorded_at": "2026-07-14T08:36:01+00:00",
+          "raw_text": "arin says: I accept MORNING as my current meeting slot.",
+          "source_id": "arin",
+          "actor_id": "arin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e010",
+          "valid_time": "2026-07-14T08:40:00+00:00",
+          "recorded_at": "2026-07-14T08:40:01+00:00",
+          "raw_text": "pavo says: I accept PAIR as my current review method.",
+          "source_id": "pavo",
+          "actor_id": "pavo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e011",
+          "valid_time": "2026-07-14T08:44:00+00:00",
+          "recorded_at": "2026-07-14T08:44:01+00:00",
+          "raw_text": "lyra tells bex: the listed meeting slot is MORNING.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "bex"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e012",
+          "valid_time": "2026-07-14T08:48:00+00:00",
+          "recorded_at": "2026-07-14T08:48:01+00:00",
+          "raw_text": "bex says: I accept MORNING as my current meeting slot.",
+          "source_id": "bex",
+          "actor_id": "bex",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e013",
+          "valid_time": "2026-07-14T08:52:00+00:00",
+          "recorded_at": "2026-07-14T08:52:01+00:00",
+          "raw_text": "quin says: I have not decided whether to accept ZONE_2 for the storage zone.",
+          "source_id": "quin",
+          "actor_id": "quin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e014",
+          "valid_time": "2026-07-14T08:56:00+00:00",
+          "recorded_at": "2026-07-14T08:56:01+00:00",
+          "raw_text": "quin says: I reject PANEL for the review method and continue with SOLO.",
+          "source_id": "quin",
+          "actor_id": "quin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e015",
+          "valid_time": "2026-07-14T09:00:00+00:00",
+          "recorded_at": "2026-07-14T09:00:01+00:00",
+          "raw_text": "orla says: I accept ZONE_1 as my current storage zone.",
+          "source_id": "orla",
+          "actor_id": "orla",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e016",
+          "valid_time": "2026-07-14T09:04:00+00:00",
+          "recorded_at": "2026-07-14T09:04:01+00:00",
+          "raw_text": "lyra informs pavo: PAIR is listed for the review method.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pavo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e017",
+          "valid_time": "2026-07-14T09:08:00+00:00",
+          "recorded_at": "2026-07-14T09:08:01+00:00",
+          "raw_text": "lyra tells quin: ZONE_3 replaces ZONE_1 for the storage zone.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "quin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e018",
+          "valid_time": "2026-07-14T09:12:00+00:00",
+          "recorded_at": "2026-07-14T09:12:01+00:00",
+          "raw_text": "lyra tells bex only: RING_B replaces RING_A for the deployment ring. arin is not a recipient.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "bex"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e019",
+          "valid_time": "2026-07-14T09:16:00+00:00",
+          "recorded_at": "2026-07-14T09:16:01+00:00",
+          "raw_text": "bex says: I verified lyra's message and accept RING_B as my deployment ring.",
+          "source_id": "bex",
+          "actor_id": "bex",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e020",
+          "valid_time": "2026-07-14T09:20:00+00:00",
+          "recorded_at": "2026-07-14T09:20:01+00:00",
+          "raw_text": "quin says: I accept PANEL as my current review method.",
+          "source_id": "quin",
+          "actor_id": "quin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e021",
+          "valid_time": "2026-07-14T09:24:00+00:00",
+          "recorded_at": "2026-07-14T09:24:01+00:00",
+          "raw_text": "lyra informs orla: ZONE_1 is listed for the storage zone.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orla"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e022",
+          "valid_time": "2026-07-14T09:28:00+00:00",
+          "recorded_at": "2026-07-14T09:28:01+00:00",
+          "raw_text": "lyra tells pavo: PAIR replaces PANEL for the review method.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pavo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e023",
+          "valid_time": "2026-07-14T09:32:00+00:00",
+          "recorded_at": "2026-07-14T09:32:01+00:00",
+          "raw_text": "orla says: I have not decided whether to accept ZONE_3 for the storage zone.",
+          "source_id": "orla",
+          "actor_id": "orla",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e024",
+          "valid_time": "2026-07-14T09:36:00+00:00",
+          "recorded_at": "2026-07-14T09:36:01+00:00",
+          "raw_text": "orla says: I reject SOLO for the review method and continue with PAIR.",
+          "source_id": "orla",
+          "actor_id": "orla",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e025",
+          "valid_time": "2026-07-14T09:40:00+00:00",
+          "recorded_at": "2026-07-14T09:40:01+00:00",
+          "raw_text": "pavo says: I accept ZONE_2 as my current storage zone.",
+          "source_id": "pavo",
+          "actor_id": "pavo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e026",
+          "valid_time": "2026-07-14T09:44:00+00:00",
+          "recorded_at": "2026-07-14T09:44:01+00:00",
+          "raw_text": "milo tells arin: lyra told me that RING_B replaces RING_A for the deployment ring.",
+          "source_id": "milo",
+          "actor_id": "milo",
+          "observer_ids": [],
+          "recipient_ids": [
+            "arin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e027",
+          "valid_time": "2026-07-14T09:48:00+00:00",
+          "recorded_at": "2026-07-14T09:48:01+00:00",
+          "raw_text": "arin says: I received the RING_B change, but I have not decided whether to accept or reject RING_B.",
+          "source_id": "arin",
+          "actor_id": "arin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e028",
+          "valid_time": "2026-07-14T09:52:00+00:00",
+          "recorded_at": "2026-07-14T09:52:01+00:00",
+          "raw_text": "quin says: I have not decided whether to accept PAIR for the review method.",
+          "source_id": "quin",
+          "actor_id": "quin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e029",
+          "valid_time": "2026-07-14T09:56:00+00:00",
+          "recorded_at": "2026-07-14T09:56:01+00:00",
+          "raw_text": "quin says: I reject ZONE_3 for the storage zone and continue with ZONE_1.",
+          "source_id": "quin",
+          "actor_id": "quin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e030",
+          "valid_time": "2026-07-14T10:00:00+00:00",
+          "recorded_at": "2026-07-14T10:00:01+00:00",
+          "raw_text": "milo tells bex: I heard that NOON may be the meeting slot now.",
+          "source_id": "milo",
+          "actor_id": "milo",
+          "observer_ids": [],
+          "recipient_ids": [
+            "bex"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e031",
+          "valid_time": "2026-07-14T10:04:00+00:00",
+          "recorded_at": "2026-07-14T10:04:01+00:00",
+          "raw_text": "bex says: I do not accept the NOON rumor and still believe MORNING is my meeting slot.",
+          "source_id": "bex",
+          "actor_id": "bex",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e032",
+          "valid_time": "2026-07-14T10:08:00+00:00",
+          "recorded_at": "2026-07-14T10:08:01+00:00",
+          "raw_text": "lyra tells quin: PANEL replaces SOLO for the review method.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "quin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e033",
+          "valid_time": "2026-07-14T10:12:00+00:00",
+          "recorded_at": "2026-07-14T10:12:01+00:00",
+          "raw_text": "pavo says: I have not decided whether to accept ZONE_1 for the storage zone.",
+          "source_id": "pavo",
+          "actor_id": "pavo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e034",
+          "valid_time": "2026-07-14T10:16:00+00:00",
+          "recorded_at": "2026-07-14T10:16:01+00:00",
+          "raw_text": "lyra directly tells arin: NOON replaces MORNING for the meeting slot.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "arin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e035",
+          "valid_time": "2026-07-14T10:20:00+00:00",
+          "recorded_at": "2026-07-14T10:20:01+00:00",
+          "raw_text": "arin says: I accept NOON as my meeting slot.",
+          "source_id": "arin",
+          "actor_id": "arin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e036",
+          "valid_time": "2026-07-14T10:24:00+00:00",
+          "recorded_at": "2026-07-14T10:24:01+00:00",
+          "raw_text": "lyra informs orla: SOLO is listed for the review method.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orla"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e037",
+          "valid_time": "2026-07-14T10:28:00+00:00",
+          "recorded_at": "2026-07-14T10:28:01+00:00",
+          "raw_text": "lyra tells pavo: ZONE_2 replaces ZONE_3 for the storage zone.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pavo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e038",
+          "valid_time": "2026-07-14T10:32:00+00:00",
+          "recorded_at": "2026-07-14T10:32:01+00:00",
+          "raw_text": "arin says: I reject RING_B for now and still believe RING_A is my deployment ring.",
+          "source_id": "arin",
+          "actor_id": "arin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e039",
+          "valid_time": "2026-07-14T10:36:00+00:00",
+          "recorded_at": "2026-07-14T10:36:01+00:00",
+          "raw_text": "orla says: I reject ZONE_1 for the storage zone and continue with ZONE_2.",
+          "source_id": "orla",
+          "actor_id": "orla",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e040",
+          "valid_time": "2026-07-14T10:40:00+00:00",
+          "recorded_at": "2026-07-14T10:40:01+00:00",
+          "raw_text": "pavo says: I accept PAIR as my current review method.",
+          "source_id": "pavo",
+          "actor_id": "pavo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e041",
+          "valid_time": "2026-07-14T10:44:00+00:00",
+          "recorded_at": "2026-07-14T10:44:01+00:00",
+          "raw_text": "lyra informs quin: ZONE_3 is listed for the storage zone.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "quin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e042",
+          "valid_time": "2026-07-14T10:48:00+00:00",
+          "recorded_at": "2026-07-14T10:48:01+00:00",
+          "raw_text": "lyra tells orla: SOLO replaces PAIR for the review method.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orla"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e043",
+          "valid_time": "2026-07-14T10:52:00+00:00",
+          "recorded_at": "2026-07-14T10:52:01+00:00",
+          "raw_text": "quin says: I have not decided whether to accept ZONE_2 for the storage zone.",
+          "source_id": "quin",
+          "actor_id": "quin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e044",
+          "valid_time": "2026-07-14T10:56:00+00:00",
+          "recorded_at": "2026-07-14T10:56:01+00:00",
+          "raw_text": "lyra directly reconfirms to bex: RING_B replaces RING_A for the deployment ring.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "bex"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e045",
+          "valid_time": "2026-07-14T11:00:00+00:00",
+          "recorded_at": "2026-07-14T11:00:01+00:00",
+          "raw_text": "orla says: I accept ZONE_1 as my current storage zone.",
+          "source_id": "orla",
+          "actor_id": "orla",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e046",
+          "valid_time": "2026-07-14T11:04:00+00:00",
+          "recorded_at": "2026-07-14T11:04:01+00:00",
+          "raw_text": "lyra informs pavo: PAIR is listed for the review method.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pavo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e047",
+          "valid_time": "2026-07-14T11:08:00+00:00",
+          "recorded_at": "2026-07-14T11:08:01+00:00",
+          "raw_text": "lyra tells quin: ZONE_3 replaces ZONE_1 for the storage zone.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "quin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e048",
+          "valid_time": "2026-07-14T11:12:00+00:00",
+          "recorded_at": "2026-07-14T11:12:01+00:00",
+          "raw_text": "lyra tells bex: NOON replaces MORNING for the meeting slot.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "bex"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e049",
+          "valid_time": "2026-07-14T11:16:00+00:00",
+          "recorded_at": "2026-07-14T11:16:01+00:00",
+          "raw_text": "bex says: I verified the notice and accept NOON as my meeting slot.",
+          "source_id": "bex",
+          "actor_id": "bex",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e050",
+          "valid_time": "2026-07-14T11:20:00+00:00",
+          "recorded_at": "2026-07-14T11:20:01+00:00",
+          "raw_text": "quin says: I accept PANEL as my current review method.",
+          "source_id": "quin",
+          "actor_id": "quin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e051",
+          "valid_time": "2026-07-14T11:24:00+00:00",
+          "recorded_at": "2026-07-14T11:24:01+00:00",
+          "raw_text": "lyra informs orla: ZONE_1 is listed for the storage zone.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orla"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e052",
+          "valid_time": "2026-07-14T11:28:00+00:00",
+          "recorded_at": "2026-07-14T11:28:01+00:00",
+          "raw_text": "lyra directly tells arin: RING_B replaces RING_A for the deployment ring.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "arin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e053",
+          "valid_time": "2026-07-14T11:32:00+00:00",
+          "recorded_at": "2026-07-14T11:32:01+00:00",
+          "raw_text": "arin says: I verified the update and now accept RING_B as my deployment ring.",
+          "source_id": "arin",
+          "actor_id": "arin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e054",
+          "valid_time": "2026-07-14T11:36:00+00:00",
+          "recorded_at": "2026-07-14T11:36:01+00:00",
+          "raw_text": "orla says: I reject SOLO for the review method and continue with PAIR.",
+          "source_id": "orla",
+          "actor_id": "orla",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e055",
+          "valid_time": "2026-07-14T11:40:00+00:00",
+          "recorded_at": "2026-07-14T11:40:01+00:00",
+          "raw_text": "pavo says: I accept ZONE_2 as my current storage zone.",
+          "source_id": "pavo",
+          "actor_id": "pavo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e056",
+          "valid_time": "2026-07-14T11:44:00+00:00",
+          "recorded_at": "2026-07-14T11:44:01+00:00",
+          "raw_text": "lyra informs quin: PANEL is listed for the review method.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "quin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e057",
+          "valid_time": "2026-07-14T11:48:00+00:00",
+          "recorded_at": "2026-07-14T11:48:01+00:00",
+          "raw_text": "lyra tells orla: ZONE_1 replaces ZONE_2 for the storage zone.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orla"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e058",
+          "valid_time": "2026-07-14T11:52:00+00:00",
+          "recorded_at": "2026-07-14T11:52:01+00:00",
+          "raw_text": "quin says: I have not decided whether to accept PAIR for the review method.",
+          "source_id": "quin",
+          "actor_id": "quin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e059",
+          "valid_time": "2026-07-14T11:56:00+00:00",
+          "recorded_at": "2026-07-14T11:56:01+00:00",
+          "raw_text": "quin says: I reject ZONE_3 for the storage zone and continue with ZONE_1.",
+          "source_id": "quin",
+          "actor_id": "quin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e060",
+          "valid_time": "2026-07-14T12:00:00+00:00",
+          "recorded_at": "2026-07-14T12:00:01+00:00",
+          "raw_text": "orla says: I accept SOLO as my current review method.",
+          "source_id": "orla",
+          "actor_id": "orla",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e061",
+          "valid_time": "2026-07-14T12:04:00+00:00",
+          "recorded_at": "2026-07-14T12:04:01+00:00",
+          "raw_text": "lyra informs pavo: ZONE_2 is listed for the storage zone.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pavo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e062",
+          "valid_time": "2026-07-14T12:08:00+00:00",
+          "recorded_at": "2026-07-14T12:08:01+00:00",
+          "raw_text": "The authoritative board records EVENING replacing NOON for the meeting slot. lyra sees the board; arin does not receive it.",
+          "source_id": "authority_board",
+          "actor_id": "authority_board",
+          "observer_ids": [
+            "lyra"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "r1-e063",
+          "valid_time": "2026-07-14T12:12:00+00:00",
+          "recorded_at": "2026-07-14T12:12:01+00:00",
+          "raw_text": "pavo says: I have not decided whether to accept ZONE_1 for the storage zone.",
+          "source_id": "pavo",
+          "actor_id": "pavo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e064",
+          "valid_time": "2026-07-14T12:16:00+00:00",
+          "recorded_at": "2026-07-14T12:16:01+00:00",
+          "raw_text": "lyra tells bex: EVENING replaces NOON for the meeting slot.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "bex"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e065",
+          "valid_time": "2026-07-14T12:20:00+00:00",
+          "recorded_at": "2026-07-14T12:20:01+00:00",
+          "raw_text": "bex says: I received the EVENING change but have not decided whether to accept it.",
+          "source_id": "bex",
+          "actor_id": "bex",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e066",
+          "valid_time": "2026-07-14T12:24:00+00:00",
+          "recorded_at": "2026-07-14T12:24:01+00:00",
+          "raw_text": "lyra informs orla: SOLO is listed for the review method.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orla"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e067",
+          "valid_time": "2026-07-14T12:28:00+00:00",
+          "recorded_at": "2026-07-14T12:28:01+00:00",
+          "raw_text": "lyra tells pavo: ZONE_2 replaces ZONE_3 for the storage zone.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pavo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e068",
+          "valid_time": "2026-07-14T12:32:00+00:00",
+          "recorded_at": "2026-07-14T12:32:01+00:00",
+          "raw_text": "orla says: I have not decided whether to accept PANEL for the review method.",
+          "source_id": "orla",
+          "actor_id": "orla",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e069",
+          "valid_time": "2026-07-14T12:36:00+00:00",
+          "recorded_at": "2026-07-14T12:36:01+00:00",
+          "raw_text": "orla says: I reject ZONE_1 for the storage zone and continue with ZONE_2.",
+          "source_id": "orla",
+          "actor_id": "orla",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e070",
+          "valid_time": "2026-07-14T12:40:00+00:00",
+          "recorded_at": "2026-07-14T12:40:01+00:00",
+          "raw_text": "The authoritative console records RING_C replacing RING_B for the deployment ring. lyra sees the console update; arin does not receive it.",
+          "source_id": "system_console",
+          "actor_id": "system_console",
+          "observer_ids": [
+            "lyra"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "r1-e071",
+          "valid_time": "2026-07-14T12:44:00+00:00",
+          "recorded_at": "2026-07-14T12:44:01+00:00",
+          "raw_text": "lyra informs quin: ZONE_3 is listed for the storage zone.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "quin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e072",
+          "valid_time": "2026-07-14T12:48:00+00:00",
+          "recorded_at": "2026-07-14T12:48:01+00:00",
+          "raw_text": "The authoritative console records RING_C replacing RING_B for the deployment ring. lyra sees it; bex is not informed.",
+          "source_id": "system_console",
+          "actor_id": "system_console",
+          "observer_ids": [
+            "lyra"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "r1-e073",
+          "valid_time": "2026-07-14T12:52:00+00:00",
+          "recorded_at": "2026-07-14T12:52:01+00:00",
+          "raw_text": "quin says: I have not decided whether to accept ZONE_2 for the storage zone.",
+          "source_id": "quin",
+          "actor_id": "quin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e074",
+          "valid_time": "2026-07-14T12:56:00+00:00",
+          "recorded_at": "2026-07-14T12:56:01+00:00",
+          "raw_text": "nemi tells arin: lyra told me that EVENING replaces NOON for the meeting slot.",
+          "source_id": "nemi",
+          "actor_id": "nemi",
+          "observer_ids": [],
+          "recipient_ids": [
+            "arin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e075",
+          "valid_time": "2026-07-14T13:00:00+00:00",
+          "recorded_at": "2026-07-14T13:00:01+00:00",
+          "raw_text": "arin says: I received the EVENING update, but I have not decided whether to accept it.",
+          "source_id": "arin",
+          "actor_id": "arin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e076",
+          "valid_time": "2026-07-14T13:04:00+00:00",
+          "recorded_at": "2026-07-14T13:04:01+00:00",
+          "raw_text": "bex says: I reject EVENING for now and still believe NOON is my meeting slot.",
+          "source_id": "bex",
+          "actor_id": "bex",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e077",
+          "valid_time": "2026-07-14T13:08:00+00:00",
+          "recorded_at": "2026-07-14T13:08:01+00:00",
+          "raw_text": "lyra tells quin: ZONE_3 replaces ZONE_1 for the storage zone.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "quin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e078",
+          "valid_time": "2026-07-14T13:12:00+00:00",
+          "recorded_at": "2026-07-14T13:12:01+00:00",
+          "raw_text": "milo tells bex: lyra told me that RING_C replaces RING_B for the deployment ring.",
+          "source_id": "milo",
+          "actor_id": "milo",
+          "observer_ids": [],
+          "recipient_ids": [
+            "bex"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e079",
+          "valid_time": "2026-07-14T13:16:00+00:00",
+          "recorded_at": "2026-07-14T13:16:01+00:00",
+          "raw_text": "bex says: I reject RING_C for now and still believe RING_B is my deployment ring.",
+          "source_id": "bex",
+          "actor_id": "bex",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e080",
+          "valid_time": "2026-07-14T13:20:00+00:00",
+          "recorded_at": "2026-07-14T13:20:01+00:00",
+          "raw_text": "quin says: I accept PANEL as my current review method.",
+          "source_id": "quin",
+          "actor_id": "quin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e081",
+          "valid_time": "2026-07-14T13:24:00+00:00",
+          "recorded_at": "2026-07-14T13:24:01+00:00",
+          "raw_text": "lyra informs orla: ZONE_1 is listed for the storage zone.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orla"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e082",
+          "valid_time": "2026-07-14T13:28:00+00:00",
+          "recorded_at": "2026-07-14T13:28:01+00:00",
+          "raw_text": "arin says: I reject EVENING and still believe NOON is my meeting slot.",
+          "source_id": "arin",
+          "actor_id": "arin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e083",
+          "valid_time": "2026-07-14T13:32:00+00:00",
+          "recorded_at": "2026-07-14T13:32:01+00:00",
+          "raw_text": "orla says: I have not decided whether to accept ZONE_3 for the storage zone.",
+          "source_id": "orla",
+          "actor_id": "orla",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e084",
+          "valid_time": "2026-07-14T13:36:00+00:00",
+          "recorded_at": "2026-07-14T13:36:01+00:00",
+          "raw_text": "lyra sends arin a signed notice: RING_C replaces RING_B for the deployment ring.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "arin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e085",
+          "valid_time": "2026-07-14T13:40:00+00:00",
+          "recorded_at": "2026-07-14T13:40:01+00:00",
+          "raw_text": "arin says: I checked the signed notice and now accept RING_C as my deployment ring.",
+          "source_id": "arin",
+          "actor_id": "arin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e086",
+          "valid_time": "2026-07-14T13:44:00+00:00",
+          "recorded_at": "2026-07-14T13:44:01+00:00",
+          "raw_text": "lyra informs quin: PANEL is listed for the review method.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "quin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e087",
+          "valid_time": "2026-07-14T13:48:00+00:00",
+          "recorded_at": "2026-07-14T13:48:01+00:00",
+          "raw_text": "lyra tells orla: ZONE_1 replaces ZONE_2 for the storage zone.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orla"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e088",
+          "valid_time": "2026-07-14T13:52:00+00:00",
+          "recorded_at": "2026-07-14T13:52:01+00:00",
+          "raw_text": "quin says: I have not decided whether to accept PAIR for the review method.",
+          "source_id": "quin",
+          "actor_id": "quin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e089",
+          "valid_time": "2026-07-14T13:56:00+00:00",
+          "recorded_at": "2026-07-14T13:56:01+00:00",
+          "raw_text": "quin says: I reject ZONE_3 for the storage zone and continue with ZONE_1.",
+          "source_id": "quin",
+          "actor_id": "quin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e090",
+          "valid_time": "2026-07-14T14:00:00+00:00",
+          "recorded_at": "2026-07-14T14:00:01+00:00",
+          "raw_text": "lyra directly tells bex: RING_C replaces RING_B for the deployment ring.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "bex"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e091",
+          "valid_time": "2026-07-14T14:04:00+00:00",
+          "recorded_at": "2026-07-14T14:04:01+00:00",
+          "raw_text": "bex says: I verified it and now accept RING_C as my deployment ring.",
+          "source_id": "bex",
+          "actor_id": "bex",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e092",
+          "valid_time": "2026-07-14T14:08:00+00:00",
+          "recorded_at": "2026-07-14T14:08:01+00:00",
+          "raw_text": "lyra sends bex a signed notice: EVENING replaces NOON for the meeting slot.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "bex"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e093",
+          "valid_time": "2026-07-14T14:12:00+00:00",
+          "recorded_at": "2026-07-14T14:12:01+00:00",
+          "raw_text": "bex says: I checked the signed notice and now accept EVENING as my meeting slot.",
+          "source_id": "bex",
+          "actor_id": "bex",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e094",
+          "valid_time": "2026-07-14T14:16:00+00:00",
+          "recorded_at": "2026-07-14T14:16:01+00:00",
+          "raw_text": "pavo says: I reject PAIR for the review method and continue with PANEL.",
+          "source_id": "pavo",
+          "actor_id": "pavo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e095",
+          "valid_time": "2026-07-14T14:20:00+00:00",
+          "recorded_at": "2026-07-14T14:20:01+00:00",
+          "raw_text": "quin says: I accept ZONE_3 as my current storage zone.",
+          "source_id": "quin",
+          "actor_id": "quin",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e096",
+          "valid_time": "2026-07-14T14:24:00+00:00",
+          "recorded_at": "2026-07-14T14:24:01+00:00",
+          "raw_text": "lyra informs orla: SOLO is listed for the review method.",
+          "source_id": "lyra",
+          "actor_id": "lyra",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orla"
+          ],
+          "metadata": {}
+        }
+      ],
+      "queries": [
+        {
+          "query_id": "r1-q01",
+          "after_event": 14,
+          "target_agent_id": "arin",
+          "target_issue_key": "deployment_ring",
+          "allowed_labels": [
+            "RING_A",
+            "RING_B",
+            "RING_C",
+            "UNCERTAIN"
+          ],
+          "question": "Which deployment ring does arin currently believe applies?"
+        },
+        {
+          "query_id": "r1-q07",
+          "after_event": 16,
+          "target_agent_id": "arin",
+          "target_issue_key": "meeting_slot",
+          "allowed_labels": [
+            "MORNING",
+            "NOON",
+            "EVENING",
+            "UNCERTAIN"
+          ],
+          "question": "Which meeting slot does arin currently believe applies?"
+        },
+        {
+          "query_id": "r1-q04",
+          "after_event": 24,
+          "target_agent_id": "bex",
+          "target_issue_key": "deployment_ring",
+          "allowed_labels": [
+            "RING_A",
+            "RING_B",
+            "RING_C",
+            "UNCERTAIN"
+          ],
+          "question": "Which deployment ring does bex believe after accepting the first revision?"
+        },
+        {
+          "query_id": "r1-q02",
+          "after_event": 30,
+          "target_agent_id": "arin",
+          "target_issue_key": "deployment_ring",
+          "allowed_labels": [
+            "RING_A",
+            "RING_B",
+            "RING_C",
+            "UNCERTAIN"
+          ],
+          "question": "After arin received the relayed RING_B revision but before taking a stance, which deployment ring is arin currently supported as believing?"
+        },
+        {
+          "query_id": "r1-q10",
+          "after_event": 36,
+          "target_agent_id": "bex",
+          "target_issue_key": "meeting_slot",
+          "allowed_labels": [
+            "MORNING",
+            "NOON",
+            "EVENING",
+            "UNCERTAIN"
+          ],
+          "question": "After the rumor and bex's response, which meeting slot does bex believe applies?"
+        },
+        {
+          "query_id": "r1-q11",
+          "after_event": 68,
+          "target_agent_id": "bex",
+          "target_issue_key": "meeting_slot",
+          "allowed_labels": [
+            "MORNING",
+            "NOON",
+            "EVENING",
+            "UNCERTAIN"
+          ],
+          "question": "After bex received EVENING but remained undecided, which meeting slot is bex currently supported as believing?"
+        },
+        {
+          "query_id": "r1-q08",
+          "after_event": 78,
+          "target_agent_id": "arin",
+          "target_issue_key": "meeting_slot",
+          "allowed_labels": [
+            "MORNING",
+            "NOON",
+            "EVENING",
+            "UNCERTAIN"
+          ],
+          "question": "After arin received the later EVENING revision but had not accepted or rejected it, which meeting slot is arin currently supported as believing?"
+        },
+        {
+          "query_id": "r1-q05",
+          "after_event": 82,
+          "target_agent_id": "bex",
+          "target_issue_key": "deployment_ring",
+          "allowed_labels": [
+            "RING_A",
+            "RING_B",
+            "RING_C",
+            "UNCERTAIN"
+          ],
+          "question": "After bex rejected the later revision, which deployment ring does bex believe applies?"
+        },
+        {
+          "query_id": "r1-q03",
+          "after_event": 88,
+          "target_agent_id": "arin",
+          "target_issue_key": "deployment_ring",
+          "allowed_labels": [
+            "RING_A",
+            "RING_B",
+            "RING_C",
+            "UNCERTAIN"
+          ],
+          "question": "Which deployment ring does arin currently believe applies?"
+        },
+        {
+          "query_id": "r1-q09",
+          "after_event": 88,
+          "target_agent_id": "arin",
+          "target_issue_key": "meeting_slot",
+          "allowed_labels": [
+            "MORNING",
+            "NOON",
+            "EVENING",
+            "UNCERTAIN"
+          ],
+          "question": "After arin rejected EVENING, which meeting slot does arin believe applies?"
+        },
+        {
+          "query_id": "r1-q06",
+          "after_event": 96,
+          "target_agent_id": "bex",
+          "target_issue_key": "deployment_ring",
+          "allowed_labels": [
+            "RING_A",
+            "RING_B",
+            "RING_C",
+            "UNCERTAIN"
+          ],
+          "question": "At the requested historical time, which deployment ring did bex believe applied?",
+          "event_time": "2026-07-14T11:20:00+00:00"
+        },
+        {
+          "query_id": "r1-q12",
+          "after_event": 96,
+          "target_agent_id": "bex",
+          "target_issue_key": "meeting_slot",
+          "allowed_labels": [
+            "MORNING",
+            "NOON",
+            "EVENING",
+            "UNCERTAIN"
+          ],
+          "question": "At the end of the stream, which meeting slot does bex believe applies?"
+        }
+      ]
+    },
+    {
+      "id": "r2",
+      "target_agents": [
+        "cian",
+        "dori"
+      ],
+      "queried_issues": [
+        "shipping_lane",
+        "billing_cycle"
+      ],
+      "ontology_seed": {
+        "shipping_lane": [
+          "LANE_RED",
+          "LANE_BLUE",
+          "LANE_GREEN"
+        ],
+        "billing_cycle": [
+          "CYCLE_1",
+          "CYCLE_2",
+          "CYCLE_3"
+        ],
+        "archive_tier": [
+          "ARCHIVE_A",
+          "ARCHIVE_B",
+          "ARCHIVE_C"
+        ],
+        "escalation_mode": [
+          "CHAT",
+          "CALL",
+          "TICKET"
+        ]
+      },
+      "events": [
+        {
+          "event_id": "r2-e001",
+          "valid_time": "2026-07-15T08:04:00+00:00",
+          "recorded_at": "2026-07-15T08:04:01+00:00",
+          "raw_text": "sela informs wren: ARCHIVE_B is listed for the archive tier.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "wren"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e002",
+          "valid_time": "2026-07-15T08:08:00+00:00",
+          "recorded_at": "2026-07-15T08:08:01+00:00",
+          "raw_text": "sela tells cian: the listed shipping lane is LANE_RED.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cian"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e003",
+          "valid_time": "2026-07-15T08:12:00+00:00",
+          "recorded_at": "2026-07-15T08:12:01+00:00",
+          "raw_text": "cian says: I accept LANE_RED as my current shipping lane.",
+          "source_id": "cian",
+          "actor_id": "cian",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e004",
+          "valid_time": "2026-07-15T08:16:00+00:00",
+          "recorded_at": "2026-07-15T08:16:01+00:00",
+          "raw_text": "wren says: I reject CALL for the escalation mode and continue with TICKET.",
+          "source_id": "wren",
+          "actor_id": "wren",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e005",
+          "valid_time": "2026-07-15T08:20:00+00:00",
+          "recorded_at": "2026-07-15T08:20:01+00:00",
+          "raw_text": "sela tells dori: the listed shipping lane is LANE_RED.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dori"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e006",
+          "valid_time": "2026-07-15T08:24:00+00:00",
+          "recorded_at": "2026-07-15T08:24:01+00:00",
+          "raw_text": "dori says: I accept LANE_RED as my current shipping lane.",
+          "source_id": "dori",
+          "actor_id": "dori",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e007",
+          "valid_time": "2026-07-15T08:28:00+00:00",
+          "recorded_at": "2026-07-15T08:28:01+00:00",
+          "raw_text": "sela tells wren: ARCHIVE_B replaces ARCHIVE_C for the archive tier.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "wren"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e008",
+          "valid_time": "2026-07-15T08:32:00+00:00",
+          "recorded_at": "2026-07-15T08:32:01+00:00",
+          "raw_text": "sela tells cian: the listed billing cycle is CYCLE_1.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cian"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e009",
+          "valid_time": "2026-07-15T08:36:00+00:00",
+          "recorded_at": "2026-07-15T08:36:01+00:00",
+          "raw_text": "cian says: I accept CYCLE_1 as my current billing cycle.",
+          "source_id": "cian",
+          "actor_id": "cian",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e010",
+          "valid_time": "2026-07-15T08:40:00+00:00",
+          "recorded_at": "2026-07-15T08:40:01+00:00",
+          "raw_text": "wren says: I accept CALL as my current escalation mode.",
+          "source_id": "wren",
+          "actor_id": "wren",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e011",
+          "valid_time": "2026-07-15T08:44:00+00:00",
+          "recorded_at": "2026-07-15T08:44:01+00:00",
+          "raw_text": "sela tells dori: the listed billing cycle is CYCLE_1.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dori"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e012",
+          "valid_time": "2026-07-15T08:48:00+00:00",
+          "recorded_at": "2026-07-15T08:48:01+00:00",
+          "raw_text": "dori says: I accept CYCLE_1 as my current billing cycle.",
+          "source_id": "dori",
+          "actor_id": "dori",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e013",
+          "valid_time": "2026-07-15T08:52:00+00:00",
+          "recorded_at": "2026-07-15T08:52:01+00:00",
+          "raw_text": "xara says: I have not decided whether to accept ARCHIVE_B for the archive tier.",
+          "source_id": "xara",
+          "actor_id": "xara",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e014",
+          "valid_time": "2026-07-15T08:56:00+00:00",
+          "recorded_at": "2026-07-15T08:56:01+00:00",
+          "raw_text": "xara says: I reject TICKET for the escalation mode and continue with CHAT.",
+          "source_id": "xara",
+          "actor_id": "xara",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e015",
+          "valid_time": "2026-07-15T09:00:00+00:00",
+          "recorded_at": "2026-07-15T09:00:01+00:00",
+          "raw_text": "viko says: I accept ARCHIVE_A as my current archive tier.",
+          "source_id": "viko",
+          "actor_id": "viko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e016",
+          "valid_time": "2026-07-15T09:04:00+00:00",
+          "recorded_at": "2026-07-15T09:04:01+00:00",
+          "raw_text": "sela informs wren: CALL is listed for the escalation mode.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "wren"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e017",
+          "valid_time": "2026-07-15T09:08:00+00:00",
+          "recorded_at": "2026-07-15T09:08:01+00:00",
+          "raw_text": "sela tells xara: ARCHIVE_C replaces ARCHIVE_A for the archive tier.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "xara"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e018",
+          "valid_time": "2026-07-15T09:12:00+00:00",
+          "recorded_at": "2026-07-15T09:12:01+00:00",
+          "raw_text": "sela tells dori only: LANE_BLUE replaces LANE_RED for the shipping lane. cian is not a recipient.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dori"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e019",
+          "valid_time": "2026-07-15T09:16:00+00:00",
+          "recorded_at": "2026-07-15T09:16:01+00:00",
+          "raw_text": "dori says: I verified sela's message and accept LANE_BLUE as my shipping lane.",
+          "source_id": "dori",
+          "actor_id": "dori",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e020",
+          "valid_time": "2026-07-15T09:20:00+00:00",
+          "recorded_at": "2026-07-15T09:20:01+00:00",
+          "raw_text": "xara says: I accept TICKET as my current escalation mode.",
+          "source_id": "xara",
+          "actor_id": "xara",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e021",
+          "valid_time": "2026-07-15T09:24:00+00:00",
+          "recorded_at": "2026-07-15T09:24:01+00:00",
+          "raw_text": "sela informs viko: ARCHIVE_A is listed for the archive tier.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "viko"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e022",
+          "valid_time": "2026-07-15T09:28:00+00:00",
+          "recorded_at": "2026-07-15T09:28:01+00:00",
+          "raw_text": "sela tells wren: CALL replaces TICKET for the escalation mode.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "wren"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e023",
+          "valid_time": "2026-07-15T09:32:00+00:00",
+          "recorded_at": "2026-07-15T09:32:01+00:00",
+          "raw_text": "viko says: I have not decided whether to accept ARCHIVE_C for the archive tier.",
+          "source_id": "viko",
+          "actor_id": "viko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e024",
+          "valid_time": "2026-07-15T09:36:00+00:00",
+          "recorded_at": "2026-07-15T09:36:01+00:00",
+          "raw_text": "viko says: I reject CHAT for the escalation mode and continue with CALL.",
+          "source_id": "viko",
+          "actor_id": "viko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e025",
+          "valid_time": "2026-07-15T09:40:00+00:00",
+          "recorded_at": "2026-07-15T09:40:01+00:00",
+          "raw_text": "wren says: I accept ARCHIVE_B as my current archive tier.",
+          "source_id": "wren",
+          "actor_id": "wren",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e026",
+          "valid_time": "2026-07-15T09:44:00+00:00",
+          "recorded_at": "2026-07-15T09:44:01+00:00",
+          "raw_text": "tavi tells cian: sela told me that LANE_BLUE replaces LANE_RED for the shipping lane.",
+          "source_id": "tavi",
+          "actor_id": "tavi",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cian"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e027",
+          "valid_time": "2026-07-15T09:48:00+00:00",
+          "recorded_at": "2026-07-15T09:48:01+00:00",
+          "raw_text": "cian says: I received the LANE_BLUE change, but I have not decided whether to accept or reject LANE_BLUE.",
+          "source_id": "cian",
+          "actor_id": "cian",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e028",
+          "valid_time": "2026-07-15T09:52:00+00:00",
+          "recorded_at": "2026-07-15T09:52:01+00:00",
+          "raw_text": "xara says: I have not decided whether to accept CALL for the escalation mode.",
+          "source_id": "xara",
+          "actor_id": "xara",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e029",
+          "valid_time": "2026-07-15T09:56:00+00:00",
+          "recorded_at": "2026-07-15T09:56:01+00:00",
+          "raw_text": "xara says: I reject ARCHIVE_C for the archive tier and continue with ARCHIVE_A.",
+          "source_id": "xara",
+          "actor_id": "xara",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e030",
+          "valid_time": "2026-07-15T10:00:00+00:00",
+          "recorded_at": "2026-07-15T10:00:01+00:00",
+          "raw_text": "tavi tells dori: I heard that CYCLE_2 may be the billing cycle now.",
+          "source_id": "tavi",
+          "actor_id": "tavi",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dori"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e031",
+          "valid_time": "2026-07-15T10:04:00+00:00",
+          "recorded_at": "2026-07-15T10:04:01+00:00",
+          "raw_text": "dori says: I do not accept the CYCLE_2 rumor and still believe CYCLE_1 is my billing cycle.",
+          "source_id": "dori",
+          "actor_id": "dori",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e032",
+          "valid_time": "2026-07-15T10:08:00+00:00",
+          "recorded_at": "2026-07-15T10:08:01+00:00",
+          "raw_text": "sela tells xara: TICKET replaces CHAT for the escalation mode.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "xara"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e033",
+          "valid_time": "2026-07-15T10:12:00+00:00",
+          "recorded_at": "2026-07-15T10:12:01+00:00",
+          "raw_text": "wren says: I have not decided whether to accept ARCHIVE_A for the archive tier.",
+          "source_id": "wren",
+          "actor_id": "wren",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e034",
+          "valid_time": "2026-07-15T10:16:00+00:00",
+          "recorded_at": "2026-07-15T10:16:01+00:00",
+          "raw_text": "sela directly tells cian: CYCLE_2 replaces CYCLE_1 for the billing cycle.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cian"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e035",
+          "valid_time": "2026-07-15T10:20:00+00:00",
+          "recorded_at": "2026-07-15T10:20:01+00:00",
+          "raw_text": "cian says: I accept CYCLE_2 as my billing cycle.",
+          "source_id": "cian",
+          "actor_id": "cian",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e036",
+          "valid_time": "2026-07-15T10:24:00+00:00",
+          "recorded_at": "2026-07-15T10:24:01+00:00",
+          "raw_text": "sela informs viko: CHAT is listed for the escalation mode.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "viko"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e037",
+          "valid_time": "2026-07-15T10:28:00+00:00",
+          "recorded_at": "2026-07-15T10:28:01+00:00",
+          "raw_text": "sela tells wren: ARCHIVE_B replaces ARCHIVE_C for the archive tier.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "wren"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e038",
+          "valid_time": "2026-07-15T10:32:00+00:00",
+          "recorded_at": "2026-07-15T10:32:01+00:00",
+          "raw_text": "cian says: I reject LANE_BLUE for now and still believe LANE_RED is my shipping lane.",
+          "source_id": "cian",
+          "actor_id": "cian",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e039",
+          "valid_time": "2026-07-15T10:36:00+00:00",
+          "recorded_at": "2026-07-15T10:36:01+00:00",
+          "raw_text": "viko says: I reject ARCHIVE_A for the archive tier and continue with ARCHIVE_B.",
+          "source_id": "viko",
+          "actor_id": "viko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e040",
+          "valid_time": "2026-07-15T10:40:00+00:00",
+          "recorded_at": "2026-07-15T10:40:01+00:00",
+          "raw_text": "wren says: I accept CALL as my current escalation mode.",
+          "source_id": "wren",
+          "actor_id": "wren",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e041",
+          "valid_time": "2026-07-15T10:44:00+00:00",
+          "recorded_at": "2026-07-15T10:44:01+00:00",
+          "raw_text": "sela informs xara: ARCHIVE_C is listed for the archive tier.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "xara"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e042",
+          "valid_time": "2026-07-15T10:48:00+00:00",
+          "recorded_at": "2026-07-15T10:48:01+00:00",
+          "raw_text": "sela tells viko: CHAT replaces CALL for the escalation mode.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "viko"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e043",
+          "valid_time": "2026-07-15T10:52:00+00:00",
+          "recorded_at": "2026-07-15T10:52:01+00:00",
+          "raw_text": "xara says: I have not decided whether to accept ARCHIVE_B for the archive tier.",
+          "source_id": "xara",
+          "actor_id": "xara",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e044",
+          "valid_time": "2026-07-15T10:56:00+00:00",
+          "recorded_at": "2026-07-15T10:56:01+00:00",
+          "raw_text": "sela directly reconfirms to dori: LANE_BLUE replaces LANE_RED for the shipping lane.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dori"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e045",
+          "valid_time": "2026-07-15T11:00:00+00:00",
+          "recorded_at": "2026-07-15T11:00:01+00:00",
+          "raw_text": "viko says: I accept ARCHIVE_A as my current archive tier.",
+          "source_id": "viko",
+          "actor_id": "viko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e046",
+          "valid_time": "2026-07-15T11:04:00+00:00",
+          "recorded_at": "2026-07-15T11:04:01+00:00",
+          "raw_text": "sela informs wren: CALL is listed for the escalation mode.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "wren"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e047",
+          "valid_time": "2026-07-15T11:08:00+00:00",
+          "recorded_at": "2026-07-15T11:08:01+00:00",
+          "raw_text": "sela tells xara: ARCHIVE_C replaces ARCHIVE_A for the archive tier.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "xara"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e048",
+          "valid_time": "2026-07-15T11:12:00+00:00",
+          "recorded_at": "2026-07-15T11:12:01+00:00",
+          "raw_text": "sela tells dori: CYCLE_2 replaces CYCLE_1 for the billing cycle.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dori"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e049",
+          "valid_time": "2026-07-15T11:16:00+00:00",
+          "recorded_at": "2026-07-15T11:16:01+00:00",
+          "raw_text": "dori says: I verified the notice and accept CYCLE_2 as my billing cycle.",
+          "source_id": "dori",
+          "actor_id": "dori",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e050",
+          "valid_time": "2026-07-15T11:20:00+00:00",
+          "recorded_at": "2026-07-15T11:20:01+00:00",
+          "raw_text": "xara says: I accept TICKET as my current escalation mode.",
+          "source_id": "xara",
+          "actor_id": "xara",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e051",
+          "valid_time": "2026-07-15T11:24:00+00:00",
+          "recorded_at": "2026-07-15T11:24:01+00:00",
+          "raw_text": "sela informs viko: ARCHIVE_A is listed for the archive tier.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "viko"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e052",
+          "valid_time": "2026-07-15T11:28:00+00:00",
+          "recorded_at": "2026-07-15T11:28:01+00:00",
+          "raw_text": "sela directly tells cian: LANE_BLUE replaces LANE_RED for the shipping lane.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cian"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e053",
+          "valid_time": "2026-07-15T11:32:00+00:00",
+          "recorded_at": "2026-07-15T11:32:01+00:00",
+          "raw_text": "cian says: I verified the update and now accept LANE_BLUE as my shipping lane.",
+          "source_id": "cian",
+          "actor_id": "cian",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e054",
+          "valid_time": "2026-07-15T11:36:00+00:00",
+          "recorded_at": "2026-07-15T11:36:01+00:00",
+          "raw_text": "viko says: I reject CHAT for the escalation mode and continue with CALL.",
+          "source_id": "viko",
+          "actor_id": "viko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e055",
+          "valid_time": "2026-07-15T11:40:00+00:00",
+          "recorded_at": "2026-07-15T11:40:01+00:00",
+          "raw_text": "wren says: I accept ARCHIVE_B as my current archive tier.",
+          "source_id": "wren",
+          "actor_id": "wren",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e056",
+          "valid_time": "2026-07-15T11:44:00+00:00",
+          "recorded_at": "2026-07-15T11:44:01+00:00",
+          "raw_text": "sela informs xara: TICKET is listed for the escalation mode.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "xara"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e057",
+          "valid_time": "2026-07-15T11:48:00+00:00",
+          "recorded_at": "2026-07-15T11:48:01+00:00",
+          "raw_text": "sela tells viko: ARCHIVE_A replaces ARCHIVE_B for the archive tier.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "viko"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e058",
+          "valid_time": "2026-07-15T11:52:00+00:00",
+          "recorded_at": "2026-07-15T11:52:01+00:00",
+          "raw_text": "xara says: I have not decided whether to accept CALL for the escalation mode.",
+          "source_id": "xara",
+          "actor_id": "xara",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e059",
+          "valid_time": "2026-07-15T11:56:00+00:00",
+          "recorded_at": "2026-07-15T11:56:01+00:00",
+          "raw_text": "xara says: I reject ARCHIVE_C for the archive tier and continue with ARCHIVE_A.",
+          "source_id": "xara",
+          "actor_id": "xara",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e060",
+          "valid_time": "2026-07-15T12:00:00+00:00",
+          "recorded_at": "2026-07-15T12:00:01+00:00",
+          "raw_text": "viko says: I accept CHAT as my current escalation mode.",
+          "source_id": "viko",
+          "actor_id": "viko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e061",
+          "valid_time": "2026-07-15T12:04:00+00:00",
+          "recorded_at": "2026-07-15T12:04:01+00:00",
+          "raw_text": "sela informs wren: ARCHIVE_B is listed for the archive tier.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "wren"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e062",
+          "valid_time": "2026-07-15T12:08:00+00:00",
+          "recorded_at": "2026-07-15T12:08:01+00:00",
+          "raw_text": "The authoritative board records CYCLE_3 replacing CYCLE_2 for the billing cycle. sela sees the board; cian does not receive it.",
+          "source_id": "authority_board",
+          "actor_id": "authority_board",
+          "observer_ids": [
+            "sela"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "r2-e063",
+          "valid_time": "2026-07-15T12:12:00+00:00",
+          "recorded_at": "2026-07-15T12:12:01+00:00",
+          "raw_text": "wren says: I have not decided whether to accept ARCHIVE_A for the archive tier.",
+          "source_id": "wren",
+          "actor_id": "wren",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e064",
+          "valid_time": "2026-07-15T12:16:00+00:00",
+          "recorded_at": "2026-07-15T12:16:01+00:00",
+          "raw_text": "sela tells dori: CYCLE_3 replaces CYCLE_2 for the billing cycle.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dori"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e065",
+          "valid_time": "2026-07-15T12:20:00+00:00",
+          "recorded_at": "2026-07-15T12:20:01+00:00",
+          "raw_text": "dori says: I received the CYCLE_3 change but have not decided whether to accept it.",
+          "source_id": "dori",
+          "actor_id": "dori",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e066",
+          "valid_time": "2026-07-15T12:24:00+00:00",
+          "recorded_at": "2026-07-15T12:24:01+00:00",
+          "raw_text": "sela informs viko: CHAT is listed for the escalation mode.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "viko"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e067",
+          "valid_time": "2026-07-15T12:28:00+00:00",
+          "recorded_at": "2026-07-15T12:28:01+00:00",
+          "raw_text": "sela tells wren: ARCHIVE_B replaces ARCHIVE_C for the archive tier.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "wren"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e068",
+          "valid_time": "2026-07-15T12:32:00+00:00",
+          "recorded_at": "2026-07-15T12:32:01+00:00",
+          "raw_text": "viko says: I have not decided whether to accept TICKET for the escalation mode.",
+          "source_id": "viko",
+          "actor_id": "viko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e069",
+          "valid_time": "2026-07-15T12:36:00+00:00",
+          "recorded_at": "2026-07-15T12:36:01+00:00",
+          "raw_text": "viko says: I reject ARCHIVE_A for the archive tier and continue with ARCHIVE_B.",
+          "source_id": "viko",
+          "actor_id": "viko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e070",
+          "valid_time": "2026-07-15T12:40:00+00:00",
+          "recorded_at": "2026-07-15T12:40:01+00:00",
+          "raw_text": "The authoritative console records LANE_GREEN replacing LANE_BLUE for the shipping lane. sela sees the console update; cian does not receive it.",
+          "source_id": "system_console",
+          "actor_id": "system_console",
+          "observer_ids": [
+            "sela"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "r2-e071",
+          "valid_time": "2026-07-15T12:44:00+00:00",
+          "recorded_at": "2026-07-15T12:44:01+00:00",
+          "raw_text": "sela informs xara: ARCHIVE_C is listed for the archive tier.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "xara"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e072",
+          "valid_time": "2026-07-15T12:48:00+00:00",
+          "recorded_at": "2026-07-15T12:48:01+00:00",
+          "raw_text": "The authoritative console records LANE_GREEN replacing LANE_BLUE for the shipping lane. sela sees it; dori is not informed.",
+          "source_id": "system_console",
+          "actor_id": "system_console",
+          "observer_ids": [
+            "sela"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "r2-e073",
+          "valid_time": "2026-07-15T12:52:00+00:00",
+          "recorded_at": "2026-07-15T12:52:01+00:00",
+          "raw_text": "xara says: I have not decided whether to accept ARCHIVE_B for the archive tier.",
+          "source_id": "xara",
+          "actor_id": "xara",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e074",
+          "valid_time": "2026-07-15T12:56:00+00:00",
+          "recorded_at": "2026-07-15T12:56:01+00:00",
+          "raw_text": "uma tells cian: sela told me that CYCLE_3 replaces CYCLE_2 for the billing cycle.",
+          "source_id": "uma",
+          "actor_id": "uma",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cian"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e075",
+          "valid_time": "2026-07-15T13:00:00+00:00",
+          "recorded_at": "2026-07-15T13:00:01+00:00",
+          "raw_text": "cian says: I received the CYCLE_3 update, but I have not decided whether to accept it.",
+          "source_id": "cian",
+          "actor_id": "cian",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e076",
+          "valid_time": "2026-07-15T13:04:00+00:00",
+          "recorded_at": "2026-07-15T13:04:01+00:00",
+          "raw_text": "dori says: I reject CYCLE_3 for now and still believe CYCLE_2 is my billing cycle.",
+          "source_id": "dori",
+          "actor_id": "dori",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e077",
+          "valid_time": "2026-07-15T13:08:00+00:00",
+          "recorded_at": "2026-07-15T13:08:01+00:00",
+          "raw_text": "sela tells xara: ARCHIVE_C replaces ARCHIVE_A for the archive tier.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "xara"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e078",
+          "valid_time": "2026-07-15T13:12:00+00:00",
+          "recorded_at": "2026-07-15T13:12:01+00:00",
+          "raw_text": "tavi tells dori: sela told me that LANE_GREEN replaces LANE_BLUE for the shipping lane.",
+          "source_id": "tavi",
+          "actor_id": "tavi",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dori"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e079",
+          "valid_time": "2026-07-15T13:16:00+00:00",
+          "recorded_at": "2026-07-15T13:16:01+00:00",
+          "raw_text": "dori says: I reject LANE_GREEN for now and still believe LANE_BLUE is my shipping lane.",
+          "source_id": "dori",
+          "actor_id": "dori",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e080",
+          "valid_time": "2026-07-15T13:20:00+00:00",
+          "recorded_at": "2026-07-15T13:20:01+00:00",
+          "raw_text": "xara says: I accept TICKET as my current escalation mode.",
+          "source_id": "xara",
+          "actor_id": "xara",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e081",
+          "valid_time": "2026-07-15T13:24:00+00:00",
+          "recorded_at": "2026-07-15T13:24:01+00:00",
+          "raw_text": "sela informs viko: ARCHIVE_A is listed for the archive tier.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "viko"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e082",
+          "valid_time": "2026-07-15T13:28:00+00:00",
+          "recorded_at": "2026-07-15T13:28:01+00:00",
+          "raw_text": "cian says: I reject CYCLE_3 and still believe CYCLE_2 is my billing cycle.",
+          "source_id": "cian",
+          "actor_id": "cian",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e083",
+          "valid_time": "2026-07-15T13:32:00+00:00",
+          "recorded_at": "2026-07-15T13:32:01+00:00",
+          "raw_text": "viko says: I have not decided whether to accept ARCHIVE_C for the archive tier.",
+          "source_id": "viko",
+          "actor_id": "viko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e084",
+          "valid_time": "2026-07-15T13:36:00+00:00",
+          "recorded_at": "2026-07-15T13:36:01+00:00",
+          "raw_text": "sela sends cian a signed notice: LANE_GREEN replaces LANE_BLUE for the shipping lane.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cian"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e085",
+          "valid_time": "2026-07-15T13:40:00+00:00",
+          "recorded_at": "2026-07-15T13:40:01+00:00",
+          "raw_text": "cian says: I checked the signed notice and now accept LANE_GREEN as my shipping lane.",
+          "source_id": "cian",
+          "actor_id": "cian",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e086",
+          "valid_time": "2026-07-15T13:44:00+00:00",
+          "recorded_at": "2026-07-15T13:44:01+00:00",
+          "raw_text": "sela informs xara: TICKET is listed for the escalation mode.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "xara"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e087",
+          "valid_time": "2026-07-15T13:48:00+00:00",
+          "recorded_at": "2026-07-15T13:48:01+00:00",
+          "raw_text": "sela tells viko: ARCHIVE_A replaces ARCHIVE_B for the archive tier.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "viko"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e088",
+          "valid_time": "2026-07-15T13:52:00+00:00",
+          "recorded_at": "2026-07-15T13:52:01+00:00",
+          "raw_text": "xara says: I have not decided whether to accept CALL for the escalation mode.",
+          "source_id": "xara",
+          "actor_id": "xara",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e089",
+          "valid_time": "2026-07-15T13:56:00+00:00",
+          "recorded_at": "2026-07-15T13:56:01+00:00",
+          "raw_text": "xara says: I reject ARCHIVE_C for the archive tier and continue with ARCHIVE_A.",
+          "source_id": "xara",
+          "actor_id": "xara",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e090",
+          "valid_time": "2026-07-15T14:00:00+00:00",
+          "recorded_at": "2026-07-15T14:00:01+00:00",
+          "raw_text": "sela directly tells dori: LANE_GREEN replaces LANE_BLUE for the shipping lane.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dori"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e091",
+          "valid_time": "2026-07-15T14:04:00+00:00",
+          "recorded_at": "2026-07-15T14:04:01+00:00",
+          "raw_text": "dori says: I verified it and now accept LANE_GREEN as my shipping lane.",
+          "source_id": "dori",
+          "actor_id": "dori",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e092",
+          "valid_time": "2026-07-15T14:08:00+00:00",
+          "recorded_at": "2026-07-15T14:08:01+00:00",
+          "raw_text": "sela sends dori a signed notice: CYCLE_3 replaces CYCLE_2 for the billing cycle.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dori"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e093",
+          "valid_time": "2026-07-15T14:12:00+00:00",
+          "recorded_at": "2026-07-15T14:12:01+00:00",
+          "raw_text": "dori says: I checked the signed notice and now accept CYCLE_3 as my billing cycle.",
+          "source_id": "dori",
+          "actor_id": "dori",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e094",
+          "valid_time": "2026-07-15T14:16:00+00:00",
+          "recorded_at": "2026-07-15T14:16:01+00:00",
+          "raw_text": "wren says: I reject CALL for the escalation mode and continue with TICKET.",
+          "source_id": "wren",
+          "actor_id": "wren",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e095",
+          "valid_time": "2026-07-15T14:20:00+00:00",
+          "recorded_at": "2026-07-15T14:20:01+00:00",
+          "raw_text": "xara says: I accept ARCHIVE_C as my current archive tier.",
+          "source_id": "xara",
+          "actor_id": "xara",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e096",
+          "valid_time": "2026-07-15T14:24:00+00:00",
+          "recorded_at": "2026-07-15T14:24:01+00:00",
+          "raw_text": "sela informs viko: CHAT is listed for the escalation mode.",
+          "source_id": "sela",
+          "actor_id": "sela",
+          "observer_ids": [],
+          "recipient_ids": [
+            "viko"
+          ],
+          "metadata": {}
+        }
+      ],
+      "queries": [
+        {
+          "query_id": "r2-q01",
+          "after_event": 14,
+          "target_agent_id": "cian",
+          "target_issue_key": "shipping_lane",
+          "allowed_labels": [
+            "LANE_RED",
+            "LANE_BLUE",
+            "LANE_GREEN",
+            "UNCERTAIN"
+          ],
+          "question": "Which shipping lane does cian currently believe applies?"
+        },
+        {
+          "query_id": "r2-q07",
+          "after_event": 16,
+          "target_agent_id": "cian",
+          "target_issue_key": "billing_cycle",
+          "allowed_labels": [
+            "CYCLE_1",
+            "CYCLE_2",
+            "CYCLE_3",
+            "UNCERTAIN"
+          ],
+          "question": "Which billing cycle does cian currently believe applies?"
+        },
+        {
+          "query_id": "r2-q04",
+          "after_event": 24,
+          "target_agent_id": "dori",
+          "target_issue_key": "shipping_lane",
+          "allowed_labels": [
+            "LANE_RED",
+            "LANE_BLUE",
+            "LANE_GREEN",
+            "UNCERTAIN"
+          ],
+          "question": "Which shipping lane does dori believe after accepting the first revision?"
+        },
+        {
+          "query_id": "r2-q02",
+          "after_event": 30,
+          "target_agent_id": "cian",
+          "target_issue_key": "shipping_lane",
+          "allowed_labels": [
+            "LANE_RED",
+            "LANE_BLUE",
+            "LANE_GREEN",
+            "UNCERTAIN"
+          ],
+          "question": "After cian received the relayed LANE_BLUE revision but before taking a stance, which shipping lane is cian currently supported as believing?"
+        },
+        {
+          "query_id": "r2-q10",
+          "after_event": 36,
+          "target_agent_id": "dori",
+          "target_issue_key": "billing_cycle",
+          "allowed_labels": [
+            "CYCLE_1",
+            "CYCLE_2",
+            "CYCLE_3",
+            "UNCERTAIN"
+          ],
+          "question": "After the rumor and dori's response, which billing cycle does dori believe applies?"
+        },
+        {
+          "query_id": "r2-q11",
+          "after_event": 68,
+          "target_agent_id": "dori",
+          "target_issue_key": "billing_cycle",
+          "allowed_labels": [
+            "CYCLE_1",
+            "CYCLE_2",
+            "CYCLE_3",
+            "UNCERTAIN"
+          ],
+          "question": "After dori received CYCLE_3 but remained undecided, which billing cycle is dori currently supported as believing?"
+        },
+        {
+          "query_id": "r2-q08",
+          "after_event": 78,
+          "target_agent_id": "cian",
+          "target_issue_key": "billing_cycle",
+          "allowed_labels": [
+            "CYCLE_1",
+            "CYCLE_2",
+            "CYCLE_3",
+            "UNCERTAIN"
+          ],
+          "question": "After cian received the later CYCLE_3 revision but had not accepted or rejected it, which billing cycle is cian currently supported as believing?"
+        },
+        {
+          "query_id": "r2-q05",
+          "after_event": 82,
+          "target_agent_id": "dori",
+          "target_issue_key": "shipping_lane",
+          "allowed_labels": [
+            "LANE_RED",
+            "LANE_BLUE",
+            "LANE_GREEN",
+            "UNCERTAIN"
+          ],
+          "question": "After dori rejected the later revision, which shipping lane does dori believe applies?"
+        },
+        {
+          "query_id": "r2-q03",
+          "after_event": 88,
+          "target_agent_id": "cian",
+          "target_issue_key": "shipping_lane",
+          "allowed_labels": [
+            "LANE_RED",
+            "LANE_BLUE",
+            "LANE_GREEN",
+            "UNCERTAIN"
+          ],
+          "question": "Which shipping lane does cian currently believe applies?"
+        },
+        {
+          "query_id": "r2-q09",
+          "after_event": 88,
+          "target_agent_id": "cian",
+          "target_issue_key": "billing_cycle",
+          "allowed_labels": [
+            "CYCLE_1",
+            "CYCLE_2",
+            "CYCLE_3",
+            "UNCERTAIN"
+          ],
+          "question": "After cian rejected CYCLE_3, which billing cycle does cian believe applies?"
+        },
+        {
+          "query_id": "r2-q06",
+          "after_event": 96,
+          "target_agent_id": "dori",
+          "target_issue_key": "shipping_lane",
+          "allowed_labels": [
+            "LANE_RED",
+            "LANE_BLUE",
+            "LANE_GREEN",
+            "UNCERTAIN"
+          ],
+          "question": "At the requested historical time, which shipping lane did dori believe applied?",
+          "event_time": "2026-07-15T11:20:00+00:00"
+        },
+        {
+          "query_id": "r2-q12",
+          "after_event": 96,
+          "target_agent_id": "dori",
+          "target_issue_key": "billing_cycle",
+          "allowed_labels": [
+            "CYCLE_1",
+            "CYCLE_2",
+            "CYCLE_3",
+            "UNCERTAIN"
+          ],
+          "question": "At the end of the stream, which billing cycle does dori believe applies?"
+        }
+      ]
+    },
+    {
+      "id": "r3",
+      "target_agents": [
+        "elio",
+        "faye"
+      ],
+      "queried_issues": [
+        "sensor_profile",
+        "report_window"
+      ],
+      "ontology_seed": {
+        "sensor_profile": [
+          "PROFILE_LOW",
+          "PROFILE_MID",
+          "PROFILE_HIGH"
+        ],
+        "report_window": [
+          "WINDOW_7",
+          "WINDOW_14",
+          "WINDOW_30"
+        ],
+        "routing_hub": [
+          "HUB_A",
+          "HUB_B",
+          "HUB_C"
+        ],
+        "approval_mode": [
+          "AUTO",
+          "MANUAL",
+          "HYBRID"
+        ]
+      },
+      "events": [
+        {
+          "event_id": "r3-e001",
+          "valid_time": "2026-07-16T08:04:00+00:00",
+          "recorded_at": "2026-07-16T08:04:01+00:00",
+          "raw_text": "yara informs cato: HUB_B is listed for the routing hub.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cato"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e002",
+          "valid_time": "2026-07-16T08:08:00+00:00",
+          "recorded_at": "2026-07-16T08:08:01+00:00",
+          "raw_text": "yara tells elio: the listed sensor profile is PROFILE_LOW.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "elio"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e003",
+          "valid_time": "2026-07-16T08:12:00+00:00",
+          "recorded_at": "2026-07-16T08:12:01+00:00",
+          "raw_text": "elio says: I accept PROFILE_LOW as my current sensor profile.",
+          "source_id": "elio",
+          "actor_id": "elio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e004",
+          "valid_time": "2026-07-16T08:16:00+00:00",
+          "recorded_at": "2026-07-16T08:16:01+00:00",
+          "raw_text": "cato says: I reject MANUAL for the approval mode and continue with HYBRID.",
+          "source_id": "cato",
+          "actor_id": "cato",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e005",
+          "valid_time": "2026-07-16T08:20:00+00:00",
+          "recorded_at": "2026-07-16T08:20:01+00:00",
+          "raw_text": "yara tells faye: the listed sensor profile is PROFILE_LOW.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "faye"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e006",
+          "valid_time": "2026-07-16T08:24:00+00:00",
+          "recorded_at": "2026-07-16T08:24:01+00:00",
+          "raw_text": "faye says: I accept PROFILE_LOW as my current sensor profile.",
+          "source_id": "faye",
+          "actor_id": "faye",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e007",
+          "valid_time": "2026-07-16T08:28:00+00:00",
+          "recorded_at": "2026-07-16T08:28:01+00:00",
+          "raw_text": "yara tells cato: HUB_B replaces HUB_C for the routing hub.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cato"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e008",
+          "valid_time": "2026-07-16T08:32:00+00:00",
+          "recorded_at": "2026-07-16T08:32:01+00:00",
+          "raw_text": "yara tells elio: the listed report window is WINDOW_7.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "elio"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e009",
+          "valid_time": "2026-07-16T08:36:00+00:00",
+          "recorded_at": "2026-07-16T08:36:01+00:00",
+          "raw_text": "elio says: I accept WINDOW_7 as my current report window.",
+          "source_id": "elio",
+          "actor_id": "elio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e010",
+          "valid_time": "2026-07-16T08:40:00+00:00",
+          "recorded_at": "2026-07-16T08:40:01+00:00",
+          "raw_text": "cato says: I accept MANUAL as my current approval mode.",
+          "source_id": "cato",
+          "actor_id": "cato",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e011",
+          "valid_time": "2026-07-16T08:44:00+00:00",
+          "recorded_at": "2026-07-16T08:44:01+00:00",
+          "raw_text": "yara tells faye: the listed report window is WINDOW_7.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "faye"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e012",
+          "valid_time": "2026-07-16T08:48:00+00:00",
+          "recorded_at": "2026-07-16T08:48:01+00:00",
+          "raw_text": "faye says: I accept WINDOW_7 as my current report window.",
+          "source_id": "faye",
+          "actor_id": "faye",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e013",
+          "valid_time": "2026-07-16T08:52:00+00:00",
+          "recorded_at": "2026-07-16T08:52:01+00:00",
+          "raw_text": "dema says: I have not decided whether to accept HUB_B for the routing hub.",
+          "source_id": "dema",
+          "actor_id": "dema",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e014",
+          "valid_time": "2026-07-16T08:56:00+00:00",
+          "recorded_at": "2026-07-16T08:56:01+00:00",
+          "raw_text": "dema says: I reject HYBRID for the approval mode and continue with AUTO.",
+          "source_id": "dema",
+          "actor_id": "dema",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e015",
+          "valid_time": "2026-07-16T09:00:00+00:00",
+          "recorded_at": "2026-07-16T09:00:01+00:00",
+          "raw_text": "brio says: I accept HUB_A as my current routing hub.",
+          "source_id": "brio",
+          "actor_id": "brio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e016",
+          "valid_time": "2026-07-16T09:04:00+00:00",
+          "recorded_at": "2026-07-16T09:04:01+00:00",
+          "raw_text": "yara informs cato: MANUAL is listed for the approval mode.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cato"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e017",
+          "valid_time": "2026-07-16T09:08:00+00:00",
+          "recorded_at": "2026-07-16T09:08:01+00:00",
+          "raw_text": "yara tells dema: HUB_C replaces HUB_A for the routing hub.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e018",
+          "valid_time": "2026-07-16T09:12:00+00:00",
+          "recorded_at": "2026-07-16T09:12:01+00:00",
+          "raw_text": "yara tells faye only: PROFILE_MID replaces PROFILE_LOW for the sensor profile. elio is not a recipient.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "faye"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e019",
+          "valid_time": "2026-07-16T09:16:00+00:00",
+          "recorded_at": "2026-07-16T09:16:01+00:00",
+          "raw_text": "faye says: I verified yara's message and accept PROFILE_MID as my sensor profile.",
+          "source_id": "faye",
+          "actor_id": "faye",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e020",
+          "valid_time": "2026-07-16T09:20:00+00:00",
+          "recorded_at": "2026-07-16T09:20:01+00:00",
+          "raw_text": "dema says: I accept HYBRID as my current approval mode.",
+          "source_id": "dema",
+          "actor_id": "dema",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e021",
+          "valid_time": "2026-07-16T09:24:00+00:00",
+          "recorded_at": "2026-07-16T09:24:01+00:00",
+          "raw_text": "yara informs brio: HUB_A is listed for the routing hub.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "brio"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e022",
+          "valid_time": "2026-07-16T09:28:00+00:00",
+          "recorded_at": "2026-07-16T09:28:01+00:00",
+          "raw_text": "yara tells cato: MANUAL replaces HYBRID for the approval mode.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cato"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e023",
+          "valid_time": "2026-07-16T09:32:00+00:00",
+          "recorded_at": "2026-07-16T09:32:01+00:00",
+          "raw_text": "brio says: I have not decided whether to accept HUB_C for the routing hub.",
+          "source_id": "brio",
+          "actor_id": "brio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e024",
+          "valid_time": "2026-07-16T09:36:00+00:00",
+          "recorded_at": "2026-07-16T09:36:01+00:00",
+          "raw_text": "brio says: I reject AUTO for the approval mode and continue with MANUAL.",
+          "source_id": "brio",
+          "actor_id": "brio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e025",
+          "valid_time": "2026-07-16T09:40:00+00:00",
+          "recorded_at": "2026-07-16T09:40:01+00:00",
+          "raw_text": "cato says: I accept HUB_B as my current routing hub.",
+          "source_id": "cato",
+          "actor_id": "cato",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e026",
+          "valid_time": "2026-07-16T09:44:00+00:00",
+          "recorded_at": "2026-07-16T09:44:01+00:00",
+          "raw_text": "zane tells elio: yara told me that PROFILE_MID replaces PROFILE_LOW for the sensor profile.",
+          "source_id": "zane",
+          "actor_id": "zane",
+          "observer_ids": [],
+          "recipient_ids": [
+            "elio"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e027",
+          "valid_time": "2026-07-16T09:48:00+00:00",
+          "recorded_at": "2026-07-16T09:48:01+00:00",
+          "raw_text": "elio says: I received the PROFILE_MID change, but I have not decided whether to accept or reject PROFILE_MID.",
+          "source_id": "elio",
+          "actor_id": "elio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e028",
+          "valid_time": "2026-07-16T09:52:00+00:00",
+          "recorded_at": "2026-07-16T09:52:01+00:00",
+          "raw_text": "dema says: I have not decided whether to accept MANUAL for the approval mode.",
+          "source_id": "dema",
+          "actor_id": "dema",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e029",
+          "valid_time": "2026-07-16T09:56:00+00:00",
+          "recorded_at": "2026-07-16T09:56:01+00:00",
+          "raw_text": "dema says: I reject HUB_C for the routing hub and continue with HUB_A.",
+          "source_id": "dema",
+          "actor_id": "dema",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e030",
+          "valid_time": "2026-07-16T10:00:00+00:00",
+          "recorded_at": "2026-07-16T10:00:01+00:00",
+          "raw_text": "zane tells faye: I heard that WINDOW_14 may be the report window now.",
+          "source_id": "zane",
+          "actor_id": "zane",
+          "observer_ids": [],
+          "recipient_ids": [
+            "faye"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e031",
+          "valid_time": "2026-07-16T10:04:00+00:00",
+          "recorded_at": "2026-07-16T10:04:01+00:00",
+          "raw_text": "faye says: I do not accept the WINDOW_14 rumor and still believe WINDOW_7 is my report window.",
+          "source_id": "faye",
+          "actor_id": "faye",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e032",
+          "valid_time": "2026-07-16T10:08:00+00:00",
+          "recorded_at": "2026-07-16T10:08:01+00:00",
+          "raw_text": "yara tells dema: HYBRID replaces AUTO for the approval mode.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e033",
+          "valid_time": "2026-07-16T10:12:00+00:00",
+          "recorded_at": "2026-07-16T10:12:01+00:00",
+          "raw_text": "cato says: I have not decided whether to accept HUB_A for the routing hub.",
+          "source_id": "cato",
+          "actor_id": "cato",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e034",
+          "valid_time": "2026-07-16T10:16:00+00:00",
+          "recorded_at": "2026-07-16T10:16:01+00:00",
+          "raw_text": "yara directly tells elio: WINDOW_14 replaces WINDOW_7 for the report window.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "elio"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e035",
+          "valid_time": "2026-07-16T10:20:00+00:00",
+          "recorded_at": "2026-07-16T10:20:01+00:00",
+          "raw_text": "elio says: I accept WINDOW_14 as my report window.",
+          "source_id": "elio",
+          "actor_id": "elio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e036",
+          "valid_time": "2026-07-16T10:24:00+00:00",
+          "recorded_at": "2026-07-16T10:24:01+00:00",
+          "raw_text": "yara informs brio: AUTO is listed for the approval mode.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "brio"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e037",
+          "valid_time": "2026-07-16T10:28:00+00:00",
+          "recorded_at": "2026-07-16T10:28:01+00:00",
+          "raw_text": "yara tells cato: HUB_B replaces HUB_C for the routing hub.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cato"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e038",
+          "valid_time": "2026-07-16T10:32:00+00:00",
+          "recorded_at": "2026-07-16T10:32:01+00:00",
+          "raw_text": "elio says: I reject PROFILE_MID for now and still believe PROFILE_LOW is my sensor profile.",
+          "source_id": "elio",
+          "actor_id": "elio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e039",
+          "valid_time": "2026-07-16T10:36:00+00:00",
+          "recorded_at": "2026-07-16T10:36:01+00:00",
+          "raw_text": "brio says: I reject HUB_A for the routing hub and continue with HUB_B.",
+          "source_id": "brio",
+          "actor_id": "brio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e040",
+          "valid_time": "2026-07-16T10:40:00+00:00",
+          "recorded_at": "2026-07-16T10:40:01+00:00",
+          "raw_text": "cato says: I accept MANUAL as my current approval mode.",
+          "source_id": "cato",
+          "actor_id": "cato",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e041",
+          "valid_time": "2026-07-16T10:44:00+00:00",
+          "recorded_at": "2026-07-16T10:44:01+00:00",
+          "raw_text": "yara informs dema: HUB_C is listed for the routing hub.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e042",
+          "valid_time": "2026-07-16T10:48:00+00:00",
+          "recorded_at": "2026-07-16T10:48:01+00:00",
+          "raw_text": "yara tells brio: AUTO replaces MANUAL for the approval mode.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "brio"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e043",
+          "valid_time": "2026-07-16T10:52:00+00:00",
+          "recorded_at": "2026-07-16T10:52:01+00:00",
+          "raw_text": "dema says: I have not decided whether to accept HUB_B for the routing hub.",
+          "source_id": "dema",
+          "actor_id": "dema",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e044",
+          "valid_time": "2026-07-16T10:56:00+00:00",
+          "recorded_at": "2026-07-16T10:56:01+00:00",
+          "raw_text": "yara directly reconfirms to faye: PROFILE_MID replaces PROFILE_LOW for the sensor profile.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "faye"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e045",
+          "valid_time": "2026-07-16T11:00:00+00:00",
+          "recorded_at": "2026-07-16T11:00:01+00:00",
+          "raw_text": "brio says: I accept HUB_A as my current routing hub.",
+          "source_id": "brio",
+          "actor_id": "brio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e046",
+          "valid_time": "2026-07-16T11:04:00+00:00",
+          "recorded_at": "2026-07-16T11:04:01+00:00",
+          "raw_text": "yara informs cato: MANUAL is listed for the approval mode.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cato"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e047",
+          "valid_time": "2026-07-16T11:08:00+00:00",
+          "recorded_at": "2026-07-16T11:08:01+00:00",
+          "raw_text": "yara tells dema: HUB_C replaces HUB_A for the routing hub.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e048",
+          "valid_time": "2026-07-16T11:12:00+00:00",
+          "recorded_at": "2026-07-16T11:12:01+00:00",
+          "raw_text": "yara tells faye: WINDOW_14 replaces WINDOW_7 for the report window.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "faye"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e049",
+          "valid_time": "2026-07-16T11:16:00+00:00",
+          "recorded_at": "2026-07-16T11:16:01+00:00",
+          "raw_text": "faye says: I verified the notice and accept WINDOW_14 as my report window.",
+          "source_id": "faye",
+          "actor_id": "faye",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e050",
+          "valid_time": "2026-07-16T11:20:00+00:00",
+          "recorded_at": "2026-07-16T11:20:01+00:00",
+          "raw_text": "dema says: I accept HYBRID as my current approval mode.",
+          "source_id": "dema",
+          "actor_id": "dema",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e051",
+          "valid_time": "2026-07-16T11:24:00+00:00",
+          "recorded_at": "2026-07-16T11:24:01+00:00",
+          "raw_text": "yara informs brio: HUB_A is listed for the routing hub.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "brio"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e052",
+          "valid_time": "2026-07-16T11:28:00+00:00",
+          "recorded_at": "2026-07-16T11:28:01+00:00",
+          "raw_text": "yara directly tells elio: PROFILE_MID replaces PROFILE_LOW for the sensor profile.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "elio"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e053",
+          "valid_time": "2026-07-16T11:32:00+00:00",
+          "recorded_at": "2026-07-16T11:32:01+00:00",
+          "raw_text": "elio says: I verified the update and now accept PROFILE_MID as my sensor profile.",
+          "source_id": "elio",
+          "actor_id": "elio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e054",
+          "valid_time": "2026-07-16T11:36:00+00:00",
+          "recorded_at": "2026-07-16T11:36:01+00:00",
+          "raw_text": "brio says: I reject AUTO for the approval mode and continue with MANUAL.",
+          "source_id": "brio",
+          "actor_id": "brio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e055",
+          "valid_time": "2026-07-16T11:40:00+00:00",
+          "recorded_at": "2026-07-16T11:40:01+00:00",
+          "raw_text": "cato says: I accept HUB_B as my current routing hub.",
+          "source_id": "cato",
+          "actor_id": "cato",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e056",
+          "valid_time": "2026-07-16T11:44:00+00:00",
+          "recorded_at": "2026-07-16T11:44:01+00:00",
+          "raw_text": "yara informs dema: HYBRID is listed for the approval mode.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e057",
+          "valid_time": "2026-07-16T11:48:00+00:00",
+          "recorded_at": "2026-07-16T11:48:01+00:00",
+          "raw_text": "yara tells brio: HUB_A replaces HUB_B for the routing hub.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "brio"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e058",
+          "valid_time": "2026-07-16T11:52:00+00:00",
+          "recorded_at": "2026-07-16T11:52:01+00:00",
+          "raw_text": "dema says: I have not decided whether to accept MANUAL for the approval mode.",
+          "source_id": "dema",
+          "actor_id": "dema",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e059",
+          "valid_time": "2026-07-16T11:56:00+00:00",
+          "recorded_at": "2026-07-16T11:56:01+00:00",
+          "raw_text": "dema says: I reject HUB_C for the routing hub and continue with HUB_A.",
+          "source_id": "dema",
+          "actor_id": "dema",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e060",
+          "valid_time": "2026-07-16T12:00:00+00:00",
+          "recorded_at": "2026-07-16T12:00:01+00:00",
+          "raw_text": "brio says: I accept AUTO as my current approval mode.",
+          "source_id": "brio",
+          "actor_id": "brio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e061",
+          "valid_time": "2026-07-16T12:04:00+00:00",
+          "recorded_at": "2026-07-16T12:04:01+00:00",
+          "raw_text": "yara informs cato: HUB_B is listed for the routing hub.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cato"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e062",
+          "valid_time": "2026-07-16T12:08:00+00:00",
+          "recorded_at": "2026-07-16T12:08:01+00:00",
+          "raw_text": "The authoritative board records WINDOW_30 replacing WINDOW_14 for the report window. yara sees the board; elio does not receive it.",
+          "source_id": "authority_board",
+          "actor_id": "authority_board",
+          "observer_ids": [
+            "yara"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "r3-e063",
+          "valid_time": "2026-07-16T12:12:00+00:00",
+          "recorded_at": "2026-07-16T12:12:01+00:00",
+          "raw_text": "cato says: I have not decided whether to accept HUB_A for the routing hub.",
+          "source_id": "cato",
+          "actor_id": "cato",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e064",
+          "valid_time": "2026-07-16T12:16:00+00:00",
+          "recorded_at": "2026-07-16T12:16:01+00:00",
+          "raw_text": "yara tells faye: WINDOW_30 replaces WINDOW_14 for the report window.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "faye"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e065",
+          "valid_time": "2026-07-16T12:20:00+00:00",
+          "recorded_at": "2026-07-16T12:20:01+00:00",
+          "raw_text": "faye says: I received the WINDOW_30 change but have not decided whether to accept it.",
+          "source_id": "faye",
+          "actor_id": "faye",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e066",
+          "valid_time": "2026-07-16T12:24:00+00:00",
+          "recorded_at": "2026-07-16T12:24:01+00:00",
+          "raw_text": "yara informs brio: AUTO is listed for the approval mode.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "brio"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e067",
+          "valid_time": "2026-07-16T12:28:00+00:00",
+          "recorded_at": "2026-07-16T12:28:01+00:00",
+          "raw_text": "yara tells cato: HUB_B replaces HUB_C for the routing hub.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cato"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e068",
+          "valid_time": "2026-07-16T12:32:00+00:00",
+          "recorded_at": "2026-07-16T12:32:01+00:00",
+          "raw_text": "brio says: I have not decided whether to accept HYBRID for the approval mode.",
+          "source_id": "brio",
+          "actor_id": "brio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e069",
+          "valid_time": "2026-07-16T12:36:00+00:00",
+          "recorded_at": "2026-07-16T12:36:01+00:00",
+          "raw_text": "brio says: I reject HUB_A for the routing hub and continue with HUB_B.",
+          "source_id": "brio",
+          "actor_id": "brio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e070",
+          "valid_time": "2026-07-16T12:40:00+00:00",
+          "recorded_at": "2026-07-16T12:40:01+00:00",
+          "raw_text": "The authoritative console records PROFILE_HIGH replacing PROFILE_MID for the sensor profile. yara sees the console update; elio does not receive it.",
+          "source_id": "system_console",
+          "actor_id": "system_console",
+          "observer_ids": [
+            "yara"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "r3-e071",
+          "valid_time": "2026-07-16T12:44:00+00:00",
+          "recorded_at": "2026-07-16T12:44:01+00:00",
+          "raw_text": "yara informs dema: HUB_C is listed for the routing hub.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e072",
+          "valid_time": "2026-07-16T12:48:00+00:00",
+          "recorded_at": "2026-07-16T12:48:01+00:00",
+          "raw_text": "The authoritative console records PROFILE_HIGH replacing PROFILE_MID for the sensor profile. yara sees it; faye is not informed.",
+          "source_id": "system_console",
+          "actor_id": "system_console",
+          "observer_ids": [
+            "yara"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "r3-e073",
+          "valid_time": "2026-07-16T12:52:00+00:00",
+          "recorded_at": "2026-07-16T12:52:01+00:00",
+          "raw_text": "dema says: I have not decided whether to accept HUB_B for the routing hub.",
+          "source_id": "dema",
+          "actor_id": "dema",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e074",
+          "valid_time": "2026-07-16T12:56:00+00:00",
+          "recorded_at": "2026-07-16T12:56:01+00:00",
+          "raw_text": "alix tells elio: yara told me that WINDOW_30 replaces WINDOW_14 for the report window.",
+          "source_id": "alix",
+          "actor_id": "alix",
+          "observer_ids": [],
+          "recipient_ids": [
+            "elio"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e075",
+          "valid_time": "2026-07-16T13:00:00+00:00",
+          "recorded_at": "2026-07-16T13:00:01+00:00",
+          "raw_text": "elio says: I received the WINDOW_30 update, but I have not decided whether to accept it.",
+          "source_id": "elio",
+          "actor_id": "elio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e076",
+          "valid_time": "2026-07-16T13:04:00+00:00",
+          "recorded_at": "2026-07-16T13:04:01+00:00",
+          "raw_text": "faye says: I reject WINDOW_30 for now and still believe WINDOW_14 is my report window.",
+          "source_id": "faye",
+          "actor_id": "faye",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e077",
+          "valid_time": "2026-07-16T13:08:00+00:00",
+          "recorded_at": "2026-07-16T13:08:01+00:00",
+          "raw_text": "yara tells dema: HUB_C replaces HUB_A for the routing hub.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e078",
+          "valid_time": "2026-07-16T13:12:00+00:00",
+          "recorded_at": "2026-07-16T13:12:01+00:00",
+          "raw_text": "zane tells faye: yara told me that PROFILE_HIGH replaces PROFILE_MID for the sensor profile.",
+          "source_id": "zane",
+          "actor_id": "zane",
+          "observer_ids": [],
+          "recipient_ids": [
+            "faye"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e079",
+          "valid_time": "2026-07-16T13:16:00+00:00",
+          "recorded_at": "2026-07-16T13:16:01+00:00",
+          "raw_text": "faye says: I reject PROFILE_HIGH for now and still believe PROFILE_MID is my sensor profile.",
+          "source_id": "faye",
+          "actor_id": "faye",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e080",
+          "valid_time": "2026-07-16T13:20:00+00:00",
+          "recorded_at": "2026-07-16T13:20:01+00:00",
+          "raw_text": "dema says: I accept HYBRID as my current approval mode.",
+          "source_id": "dema",
+          "actor_id": "dema",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e081",
+          "valid_time": "2026-07-16T13:24:00+00:00",
+          "recorded_at": "2026-07-16T13:24:01+00:00",
+          "raw_text": "yara informs brio: HUB_A is listed for the routing hub.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "brio"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e082",
+          "valid_time": "2026-07-16T13:28:00+00:00",
+          "recorded_at": "2026-07-16T13:28:01+00:00",
+          "raw_text": "elio says: I reject WINDOW_30 and still believe WINDOW_14 is my report window.",
+          "source_id": "elio",
+          "actor_id": "elio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e083",
+          "valid_time": "2026-07-16T13:32:00+00:00",
+          "recorded_at": "2026-07-16T13:32:01+00:00",
+          "raw_text": "brio says: I have not decided whether to accept HUB_C for the routing hub.",
+          "source_id": "brio",
+          "actor_id": "brio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e084",
+          "valid_time": "2026-07-16T13:36:00+00:00",
+          "recorded_at": "2026-07-16T13:36:01+00:00",
+          "raw_text": "yara sends elio a signed notice: PROFILE_HIGH replaces PROFILE_MID for the sensor profile.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "elio"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e085",
+          "valid_time": "2026-07-16T13:40:00+00:00",
+          "recorded_at": "2026-07-16T13:40:01+00:00",
+          "raw_text": "elio says: I checked the signed notice and now accept PROFILE_HIGH as my sensor profile.",
+          "source_id": "elio",
+          "actor_id": "elio",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e086",
+          "valid_time": "2026-07-16T13:44:00+00:00",
+          "recorded_at": "2026-07-16T13:44:01+00:00",
+          "raw_text": "yara informs dema: HYBRID is listed for the approval mode.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "dema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e087",
+          "valid_time": "2026-07-16T13:48:00+00:00",
+          "recorded_at": "2026-07-16T13:48:01+00:00",
+          "raw_text": "yara tells brio: HUB_A replaces HUB_B for the routing hub.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "brio"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e088",
+          "valid_time": "2026-07-16T13:52:00+00:00",
+          "recorded_at": "2026-07-16T13:52:01+00:00",
+          "raw_text": "dema says: I have not decided whether to accept MANUAL for the approval mode.",
+          "source_id": "dema",
+          "actor_id": "dema",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e089",
+          "valid_time": "2026-07-16T13:56:00+00:00",
+          "recorded_at": "2026-07-16T13:56:01+00:00",
+          "raw_text": "dema says: I reject HUB_C for the routing hub and continue with HUB_A.",
+          "source_id": "dema",
+          "actor_id": "dema",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e090",
+          "valid_time": "2026-07-16T14:00:00+00:00",
+          "recorded_at": "2026-07-16T14:00:01+00:00",
+          "raw_text": "yara directly tells faye: PROFILE_HIGH replaces PROFILE_MID for the sensor profile.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "faye"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e091",
+          "valid_time": "2026-07-16T14:04:00+00:00",
+          "recorded_at": "2026-07-16T14:04:01+00:00",
+          "raw_text": "faye says: I verified it and now accept PROFILE_HIGH as my sensor profile.",
+          "source_id": "faye",
+          "actor_id": "faye",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e092",
+          "valid_time": "2026-07-16T14:08:00+00:00",
+          "recorded_at": "2026-07-16T14:08:01+00:00",
+          "raw_text": "yara sends faye a signed notice: WINDOW_30 replaces WINDOW_14 for the report window.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "faye"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e093",
+          "valid_time": "2026-07-16T14:12:00+00:00",
+          "recorded_at": "2026-07-16T14:12:01+00:00",
+          "raw_text": "faye says: I checked the signed notice and now accept WINDOW_30 as my report window.",
+          "source_id": "faye",
+          "actor_id": "faye",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e094",
+          "valid_time": "2026-07-16T14:16:00+00:00",
+          "recorded_at": "2026-07-16T14:16:01+00:00",
+          "raw_text": "cato says: I reject MANUAL for the approval mode and continue with HYBRID.",
+          "source_id": "cato",
+          "actor_id": "cato",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e095",
+          "valid_time": "2026-07-16T14:20:00+00:00",
+          "recorded_at": "2026-07-16T14:20:01+00:00",
+          "raw_text": "dema says: I accept HUB_C as my current routing hub.",
+          "source_id": "dema",
+          "actor_id": "dema",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e096",
+          "valid_time": "2026-07-16T14:24:00+00:00",
+          "recorded_at": "2026-07-16T14:24:01+00:00",
+          "raw_text": "yara informs brio: AUTO is listed for the approval mode.",
+          "source_id": "yara",
+          "actor_id": "yara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "brio"
+          ],
+          "metadata": {}
+        }
+      ],
+      "queries": [
+        {
+          "query_id": "r3-q01",
+          "after_event": 14,
+          "target_agent_id": "elio",
+          "target_issue_key": "sensor_profile",
+          "allowed_labels": [
+            "PROFILE_LOW",
+            "PROFILE_MID",
+            "PROFILE_HIGH",
+            "UNCERTAIN"
+          ],
+          "question": "Which sensor profile does elio currently believe applies?"
+        },
+        {
+          "query_id": "r3-q07",
+          "after_event": 16,
+          "target_agent_id": "elio",
+          "target_issue_key": "report_window",
+          "allowed_labels": [
+            "WINDOW_7",
+            "WINDOW_14",
+            "WINDOW_30",
+            "UNCERTAIN"
+          ],
+          "question": "Which report window does elio currently believe applies?"
+        },
+        {
+          "query_id": "r3-q04",
+          "after_event": 24,
+          "target_agent_id": "faye",
+          "target_issue_key": "sensor_profile",
+          "allowed_labels": [
+            "PROFILE_LOW",
+            "PROFILE_MID",
+            "PROFILE_HIGH",
+            "UNCERTAIN"
+          ],
+          "question": "Which sensor profile does faye believe after accepting the first revision?"
+        },
+        {
+          "query_id": "r3-q02",
+          "after_event": 30,
+          "target_agent_id": "elio",
+          "target_issue_key": "sensor_profile",
+          "allowed_labels": [
+            "PROFILE_LOW",
+            "PROFILE_MID",
+            "PROFILE_HIGH",
+            "UNCERTAIN"
+          ],
+          "question": "After elio received the relayed PROFILE_MID revision but before taking a stance, which sensor profile is elio currently supported as believing?"
+        },
+        {
+          "query_id": "r3-q10",
+          "after_event": 36,
+          "target_agent_id": "faye",
+          "target_issue_key": "report_window",
+          "allowed_labels": [
+            "WINDOW_7",
+            "WINDOW_14",
+            "WINDOW_30",
+            "UNCERTAIN"
+          ],
+          "question": "After the rumor and faye's response, which report window does faye believe applies?"
+        },
+        {
+          "query_id": "r3-q11",
+          "after_event": 68,
+          "target_agent_id": "faye",
+          "target_issue_key": "report_window",
+          "allowed_labels": [
+            "WINDOW_7",
+            "WINDOW_14",
+            "WINDOW_30",
+            "UNCERTAIN"
+          ],
+          "question": "After faye received WINDOW_30 but remained undecided, which report window is faye currently supported as believing?"
+        },
+        {
+          "query_id": "r3-q08",
+          "after_event": 78,
+          "target_agent_id": "elio",
+          "target_issue_key": "report_window",
+          "allowed_labels": [
+            "WINDOW_7",
+            "WINDOW_14",
+            "WINDOW_30",
+            "UNCERTAIN"
+          ],
+          "question": "After elio received the later WINDOW_30 revision but had not accepted or rejected it, which report window is elio currently supported as believing?"
+        },
+        {
+          "query_id": "r3-q05",
+          "after_event": 82,
+          "target_agent_id": "faye",
+          "target_issue_key": "sensor_profile",
+          "allowed_labels": [
+            "PROFILE_LOW",
+            "PROFILE_MID",
+            "PROFILE_HIGH",
+            "UNCERTAIN"
+          ],
+          "question": "After faye rejected the later revision, which sensor profile does faye believe applies?"
+        },
+        {
+          "query_id": "r3-q03",
+          "after_event": 88,
+          "target_agent_id": "elio",
+          "target_issue_key": "sensor_profile",
+          "allowed_labels": [
+            "PROFILE_LOW",
+            "PROFILE_MID",
+            "PROFILE_HIGH",
+            "UNCERTAIN"
+          ],
+          "question": "Which sensor profile does elio currently believe applies?"
+        },
+        {
+          "query_id": "r3-q09",
+          "after_event": 88,
+          "target_agent_id": "elio",
+          "target_issue_key": "report_window",
+          "allowed_labels": [
+            "WINDOW_7",
+            "WINDOW_14",
+            "WINDOW_30",
+            "UNCERTAIN"
+          ],
+          "question": "After elio rejected WINDOW_30, which report window does elio believe applies?"
+        },
+        {
+          "query_id": "r3-q06",
+          "after_event": 96,
+          "target_agent_id": "faye",
+          "target_issue_key": "sensor_profile",
+          "allowed_labels": [
+            "PROFILE_LOW",
+            "PROFILE_MID",
+            "PROFILE_HIGH",
+            "UNCERTAIN"
+          ],
+          "question": "At the requested historical time, which sensor profile did faye believe applied?",
+          "event_time": "2026-07-16T11:20:00+00:00"
+        },
+        {
+          "query_id": "r3-q12",
+          "after_event": 96,
+          "target_agent_id": "faye",
+          "target_issue_key": "report_window",
+          "allowed_labels": [
+            "WINDOW_7",
+            "WINDOW_14",
+            "WINDOW_30",
+            "UNCERTAIN"
+          ],
+          "question": "At the end of the stream, which report window does faye believe applies?"
+        }
+      ]
+    },
+    {
+      "id": "r4",
+      "target_agents": [
+        "gita",
+        "hugo"
+      ],
+      "queried_issues": [
+        "service_region",
+        "maintenance_shift"
+      ],
+      "ontology_seed": {
+        "service_region": [
+          "REGION_EAST",
+          "REGION_WEST",
+          "REGION_CENTRAL"
+        ],
+        "maintenance_shift": [
+          "SHIFT_A",
+          "SHIFT_B",
+          "SHIFT_C"
+        ],
+        "backup_site": [
+          "SITE_NORTH",
+          "SITE_SOUTH",
+          "SITE_CLOUD"
+        ],
+        "inspection_mode": [
+          "LIGHT",
+          "STANDARD",
+          "DEEP"
+        ]
+      },
+      "events": [
+        {
+          "event_id": "r4-e001",
+          "valid_time": "2026-07-17T08:04:00+00:00",
+          "recorded_at": "2026-07-17T08:04:01+00:00",
+          "raw_text": "ines informs mako: SITE_SOUTH is listed for the backup site.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "mako"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e002",
+          "valid_time": "2026-07-17T08:08:00+00:00",
+          "recorded_at": "2026-07-17T08:08:01+00:00",
+          "raw_text": "ines tells gita: the listed service region is REGION_EAST.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "gita"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e003",
+          "valid_time": "2026-07-17T08:12:00+00:00",
+          "recorded_at": "2026-07-17T08:12:01+00:00",
+          "raw_text": "gita says: I accept REGION_EAST as my current service region.",
+          "source_id": "gita",
+          "actor_id": "gita",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e004",
+          "valid_time": "2026-07-17T08:16:00+00:00",
+          "recorded_at": "2026-07-17T08:16:01+00:00",
+          "raw_text": "mako says: I reject STANDARD for the inspection mode and continue with DEEP.",
+          "source_id": "mako",
+          "actor_id": "mako",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e005",
+          "valid_time": "2026-07-17T08:20:00+00:00",
+          "recorded_at": "2026-07-17T08:20:01+00:00",
+          "raw_text": "ines tells hugo: the listed service region is REGION_EAST.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "hugo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e006",
+          "valid_time": "2026-07-17T08:24:00+00:00",
+          "recorded_at": "2026-07-17T08:24:01+00:00",
+          "raw_text": "hugo says: I accept REGION_EAST as my current service region.",
+          "source_id": "hugo",
+          "actor_id": "hugo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e007",
+          "valid_time": "2026-07-17T08:28:00+00:00",
+          "recorded_at": "2026-07-17T08:28:01+00:00",
+          "raw_text": "ines tells mako: SITE_SOUTH replaces SITE_CLOUD for the backup site.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "mako"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e008",
+          "valid_time": "2026-07-17T08:32:00+00:00",
+          "recorded_at": "2026-07-17T08:32:01+00:00",
+          "raw_text": "ines tells gita: the listed maintenance shift is SHIFT_A.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "gita"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e009",
+          "valid_time": "2026-07-17T08:36:00+00:00",
+          "recorded_at": "2026-07-17T08:36:01+00:00",
+          "raw_text": "gita says: I accept SHIFT_A as my current maintenance shift.",
+          "source_id": "gita",
+          "actor_id": "gita",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e010",
+          "valid_time": "2026-07-17T08:40:00+00:00",
+          "recorded_at": "2026-07-17T08:40:01+00:00",
+          "raw_text": "mako says: I accept STANDARD as my current inspection mode.",
+          "source_id": "mako",
+          "actor_id": "mako",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e011",
+          "valid_time": "2026-07-17T08:44:00+00:00",
+          "recorded_at": "2026-07-17T08:44:01+00:00",
+          "raw_text": "ines tells hugo: the listed maintenance shift is SHIFT_A.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "hugo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e012",
+          "valid_time": "2026-07-17T08:48:00+00:00",
+          "recorded_at": "2026-07-17T08:48:01+00:00",
+          "raw_text": "hugo says: I accept SHIFT_A as my current maintenance shift.",
+          "source_id": "hugo",
+          "actor_id": "hugo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e013",
+          "valid_time": "2026-07-17T08:52:00+00:00",
+          "recorded_at": "2026-07-17T08:52:01+00:00",
+          "raw_text": "noraq says: I have not decided whether to accept SITE_SOUTH for the backup site.",
+          "source_id": "noraq",
+          "actor_id": "noraq",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e014",
+          "valid_time": "2026-07-17T08:56:00+00:00",
+          "recorded_at": "2026-07-17T08:56:01+00:00",
+          "raw_text": "noraq says: I reject DEEP for the inspection mode and continue with LIGHT.",
+          "source_id": "noraq",
+          "actor_id": "noraq",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e015",
+          "valid_time": "2026-07-17T09:00:00+00:00",
+          "recorded_at": "2026-07-17T09:00:01+00:00",
+          "raw_text": "luma says: I accept SITE_NORTH as my current backup site.",
+          "source_id": "luma",
+          "actor_id": "luma",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e016",
+          "valid_time": "2026-07-17T09:04:00+00:00",
+          "recorded_at": "2026-07-17T09:04:01+00:00",
+          "raw_text": "ines informs mako: STANDARD is listed for the inspection mode.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "mako"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e017",
+          "valid_time": "2026-07-17T09:08:00+00:00",
+          "recorded_at": "2026-07-17T09:08:01+00:00",
+          "raw_text": "ines tells noraq: SITE_CLOUD replaces SITE_NORTH for the backup site.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "noraq"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e018",
+          "valid_time": "2026-07-17T09:12:00+00:00",
+          "recorded_at": "2026-07-17T09:12:01+00:00",
+          "raw_text": "ines tells hugo only: REGION_WEST replaces REGION_EAST for the service region. gita is not a recipient.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "hugo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e019",
+          "valid_time": "2026-07-17T09:16:00+00:00",
+          "recorded_at": "2026-07-17T09:16:01+00:00",
+          "raw_text": "hugo says: I verified ines's message and accept REGION_WEST as my service region.",
+          "source_id": "hugo",
+          "actor_id": "hugo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e020",
+          "valid_time": "2026-07-17T09:20:00+00:00",
+          "recorded_at": "2026-07-17T09:20:01+00:00",
+          "raw_text": "noraq says: I accept DEEP as my current inspection mode.",
+          "source_id": "noraq",
+          "actor_id": "noraq",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e021",
+          "valid_time": "2026-07-17T09:24:00+00:00",
+          "recorded_at": "2026-07-17T09:24:01+00:00",
+          "raw_text": "ines informs luma: SITE_NORTH is listed for the backup site.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "luma"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e022",
+          "valid_time": "2026-07-17T09:28:00+00:00",
+          "recorded_at": "2026-07-17T09:28:01+00:00",
+          "raw_text": "ines tells mako: STANDARD replaces DEEP for the inspection mode.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "mako"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e023",
+          "valid_time": "2026-07-17T09:32:00+00:00",
+          "recorded_at": "2026-07-17T09:32:01+00:00",
+          "raw_text": "luma says: I have not decided whether to accept SITE_CLOUD for the backup site.",
+          "source_id": "luma",
+          "actor_id": "luma",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e024",
+          "valid_time": "2026-07-17T09:36:00+00:00",
+          "recorded_at": "2026-07-17T09:36:01+00:00",
+          "raw_text": "luma says: I reject LIGHT for the inspection mode and continue with STANDARD.",
+          "source_id": "luma",
+          "actor_id": "luma",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e025",
+          "valid_time": "2026-07-17T09:40:00+00:00",
+          "recorded_at": "2026-07-17T09:40:01+00:00",
+          "raw_text": "mako says: I accept SITE_SOUTH as my current backup site.",
+          "source_id": "mako",
+          "actor_id": "mako",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e026",
+          "valid_time": "2026-07-17T09:44:00+00:00",
+          "recorded_at": "2026-07-17T09:44:01+00:00",
+          "raw_text": "jori tells gita: ines told me that REGION_WEST replaces REGION_EAST for the service region.",
+          "source_id": "jori",
+          "actor_id": "jori",
+          "observer_ids": [],
+          "recipient_ids": [
+            "gita"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e027",
+          "valid_time": "2026-07-17T09:48:00+00:00",
+          "recorded_at": "2026-07-17T09:48:01+00:00",
+          "raw_text": "gita says: I received the REGION_WEST change, but I have not decided whether to accept or reject REGION_WEST.",
+          "source_id": "gita",
+          "actor_id": "gita",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e028",
+          "valid_time": "2026-07-17T09:52:00+00:00",
+          "recorded_at": "2026-07-17T09:52:01+00:00",
+          "raw_text": "noraq says: I have not decided whether to accept STANDARD for the inspection mode.",
+          "source_id": "noraq",
+          "actor_id": "noraq",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e029",
+          "valid_time": "2026-07-17T09:56:00+00:00",
+          "recorded_at": "2026-07-17T09:56:01+00:00",
+          "raw_text": "noraq says: I reject SITE_CLOUD for the backup site and continue with SITE_NORTH.",
+          "source_id": "noraq",
+          "actor_id": "noraq",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e030",
+          "valid_time": "2026-07-17T10:00:00+00:00",
+          "recorded_at": "2026-07-17T10:00:01+00:00",
+          "raw_text": "jori tells hugo: I heard that SHIFT_B may be the maintenance shift now.",
+          "source_id": "jori",
+          "actor_id": "jori",
+          "observer_ids": [],
+          "recipient_ids": [
+            "hugo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e031",
+          "valid_time": "2026-07-17T10:04:00+00:00",
+          "recorded_at": "2026-07-17T10:04:01+00:00",
+          "raw_text": "hugo says: I do not accept the SHIFT_B rumor and still believe SHIFT_A is my maintenance shift.",
+          "source_id": "hugo",
+          "actor_id": "hugo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e032",
+          "valid_time": "2026-07-17T10:08:00+00:00",
+          "recorded_at": "2026-07-17T10:08:01+00:00",
+          "raw_text": "ines tells noraq: DEEP replaces LIGHT for the inspection mode.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "noraq"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e033",
+          "valid_time": "2026-07-17T10:12:00+00:00",
+          "recorded_at": "2026-07-17T10:12:01+00:00",
+          "raw_text": "mako says: I have not decided whether to accept SITE_NORTH for the backup site.",
+          "source_id": "mako",
+          "actor_id": "mako",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e034",
+          "valid_time": "2026-07-17T10:16:00+00:00",
+          "recorded_at": "2026-07-17T10:16:01+00:00",
+          "raw_text": "ines directly tells gita: SHIFT_B replaces SHIFT_A for the maintenance shift.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "gita"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e035",
+          "valid_time": "2026-07-17T10:20:00+00:00",
+          "recorded_at": "2026-07-17T10:20:01+00:00",
+          "raw_text": "gita says: I accept SHIFT_B as my maintenance shift.",
+          "source_id": "gita",
+          "actor_id": "gita",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e036",
+          "valid_time": "2026-07-17T10:24:00+00:00",
+          "recorded_at": "2026-07-17T10:24:01+00:00",
+          "raw_text": "ines informs luma: LIGHT is listed for the inspection mode.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "luma"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e037",
+          "valid_time": "2026-07-17T10:28:00+00:00",
+          "recorded_at": "2026-07-17T10:28:01+00:00",
+          "raw_text": "ines tells mako: SITE_SOUTH replaces SITE_CLOUD for the backup site.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "mako"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e038",
+          "valid_time": "2026-07-17T10:32:00+00:00",
+          "recorded_at": "2026-07-17T10:32:01+00:00",
+          "raw_text": "gita says: I reject REGION_WEST for now and still believe REGION_EAST is my service region.",
+          "source_id": "gita",
+          "actor_id": "gita",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e039",
+          "valid_time": "2026-07-17T10:36:00+00:00",
+          "recorded_at": "2026-07-17T10:36:01+00:00",
+          "raw_text": "luma says: I reject SITE_NORTH for the backup site and continue with SITE_SOUTH.",
+          "source_id": "luma",
+          "actor_id": "luma",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e040",
+          "valid_time": "2026-07-17T10:40:00+00:00",
+          "recorded_at": "2026-07-17T10:40:01+00:00",
+          "raw_text": "mako says: I accept STANDARD as my current inspection mode.",
+          "source_id": "mako",
+          "actor_id": "mako",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e041",
+          "valid_time": "2026-07-17T10:44:00+00:00",
+          "recorded_at": "2026-07-17T10:44:01+00:00",
+          "raw_text": "ines informs noraq: SITE_CLOUD is listed for the backup site.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "noraq"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e042",
+          "valid_time": "2026-07-17T10:48:00+00:00",
+          "recorded_at": "2026-07-17T10:48:01+00:00",
+          "raw_text": "ines tells luma: LIGHT replaces STANDARD for the inspection mode.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "luma"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e043",
+          "valid_time": "2026-07-17T10:52:00+00:00",
+          "recorded_at": "2026-07-17T10:52:01+00:00",
+          "raw_text": "noraq says: I have not decided whether to accept SITE_SOUTH for the backup site.",
+          "source_id": "noraq",
+          "actor_id": "noraq",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e044",
+          "valid_time": "2026-07-17T10:56:00+00:00",
+          "recorded_at": "2026-07-17T10:56:01+00:00",
+          "raw_text": "ines directly reconfirms to hugo: REGION_WEST replaces REGION_EAST for the service region.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "hugo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e045",
+          "valid_time": "2026-07-17T11:00:00+00:00",
+          "recorded_at": "2026-07-17T11:00:01+00:00",
+          "raw_text": "luma says: I accept SITE_NORTH as my current backup site.",
+          "source_id": "luma",
+          "actor_id": "luma",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e046",
+          "valid_time": "2026-07-17T11:04:00+00:00",
+          "recorded_at": "2026-07-17T11:04:01+00:00",
+          "raw_text": "ines informs mako: STANDARD is listed for the inspection mode.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "mako"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e047",
+          "valid_time": "2026-07-17T11:08:00+00:00",
+          "recorded_at": "2026-07-17T11:08:01+00:00",
+          "raw_text": "ines tells noraq: SITE_CLOUD replaces SITE_NORTH for the backup site.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "noraq"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e048",
+          "valid_time": "2026-07-17T11:12:00+00:00",
+          "recorded_at": "2026-07-17T11:12:01+00:00",
+          "raw_text": "ines tells hugo: SHIFT_B replaces SHIFT_A for the maintenance shift.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "hugo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e049",
+          "valid_time": "2026-07-17T11:16:00+00:00",
+          "recorded_at": "2026-07-17T11:16:01+00:00",
+          "raw_text": "hugo says: I verified the notice and accept SHIFT_B as my maintenance shift.",
+          "source_id": "hugo",
+          "actor_id": "hugo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e050",
+          "valid_time": "2026-07-17T11:20:00+00:00",
+          "recorded_at": "2026-07-17T11:20:01+00:00",
+          "raw_text": "noraq says: I accept DEEP as my current inspection mode.",
+          "source_id": "noraq",
+          "actor_id": "noraq",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e051",
+          "valid_time": "2026-07-17T11:24:00+00:00",
+          "recorded_at": "2026-07-17T11:24:01+00:00",
+          "raw_text": "ines informs luma: SITE_NORTH is listed for the backup site.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "luma"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e052",
+          "valid_time": "2026-07-17T11:28:00+00:00",
+          "recorded_at": "2026-07-17T11:28:01+00:00",
+          "raw_text": "ines directly tells gita: REGION_WEST replaces REGION_EAST for the service region.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "gita"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e053",
+          "valid_time": "2026-07-17T11:32:00+00:00",
+          "recorded_at": "2026-07-17T11:32:01+00:00",
+          "raw_text": "gita says: I verified the update and now accept REGION_WEST as my service region.",
+          "source_id": "gita",
+          "actor_id": "gita",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e054",
+          "valid_time": "2026-07-17T11:36:00+00:00",
+          "recorded_at": "2026-07-17T11:36:01+00:00",
+          "raw_text": "luma says: I reject LIGHT for the inspection mode and continue with STANDARD.",
+          "source_id": "luma",
+          "actor_id": "luma",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e055",
+          "valid_time": "2026-07-17T11:40:00+00:00",
+          "recorded_at": "2026-07-17T11:40:01+00:00",
+          "raw_text": "mako says: I accept SITE_SOUTH as my current backup site.",
+          "source_id": "mako",
+          "actor_id": "mako",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e056",
+          "valid_time": "2026-07-17T11:44:00+00:00",
+          "recorded_at": "2026-07-17T11:44:01+00:00",
+          "raw_text": "ines informs noraq: DEEP is listed for the inspection mode.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "noraq"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e057",
+          "valid_time": "2026-07-17T11:48:00+00:00",
+          "recorded_at": "2026-07-17T11:48:01+00:00",
+          "raw_text": "ines tells luma: SITE_NORTH replaces SITE_SOUTH for the backup site.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "luma"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e058",
+          "valid_time": "2026-07-17T11:52:00+00:00",
+          "recorded_at": "2026-07-17T11:52:01+00:00",
+          "raw_text": "noraq says: I have not decided whether to accept STANDARD for the inspection mode.",
+          "source_id": "noraq",
+          "actor_id": "noraq",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e059",
+          "valid_time": "2026-07-17T11:56:00+00:00",
+          "recorded_at": "2026-07-17T11:56:01+00:00",
+          "raw_text": "noraq says: I reject SITE_CLOUD for the backup site and continue with SITE_NORTH.",
+          "source_id": "noraq",
+          "actor_id": "noraq",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e060",
+          "valid_time": "2026-07-17T12:00:00+00:00",
+          "recorded_at": "2026-07-17T12:00:01+00:00",
+          "raw_text": "luma says: I accept LIGHT as my current inspection mode.",
+          "source_id": "luma",
+          "actor_id": "luma",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e061",
+          "valid_time": "2026-07-17T12:04:00+00:00",
+          "recorded_at": "2026-07-17T12:04:01+00:00",
+          "raw_text": "ines informs mako: SITE_SOUTH is listed for the backup site.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "mako"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e062",
+          "valid_time": "2026-07-17T12:08:00+00:00",
+          "recorded_at": "2026-07-17T12:08:01+00:00",
+          "raw_text": "The authoritative board records SHIFT_C replacing SHIFT_B for the maintenance shift. ines sees the board; gita does not receive it.",
+          "source_id": "authority_board",
+          "actor_id": "authority_board",
+          "observer_ids": [
+            "ines"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "r4-e063",
+          "valid_time": "2026-07-17T12:12:00+00:00",
+          "recorded_at": "2026-07-17T12:12:01+00:00",
+          "raw_text": "mako says: I have not decided whether to accept SITE_NORTH for the backup site.",
+          "source_id": "mako",
+          "actor_id": "mako",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e064",
+          "valid_time": "2026-07-17T12:16:00+00:00",
+          "recorded_at": "2026-07-17T12:16:01+00:00",
+          "raw_text": "ines tells hugo: SHIFT_C replaces SHIFT_B for the maintenance shift.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "hugo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e065",
+          "valid_time": "2026-07-17T12:20:00+00:00",
+          "recorded_at": "2026-07-17T12:20:01+00:00",
+          "raw_text": "hugo says: I received the SHIFT_C change but have not decided whether to accept it.",
+          "source_id": "hugo",
+          "actor_id": "hugo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e066",
+          "valid_time": "2026-07-17T12:24:00+00:00",
+          "recorded_at": "2026-07-17T12:24:01+00:00",
+          "raw_text": "ines informs luma: LIGHT is listed for the inspection mode.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "luma"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e067",
+          "valid_time": "2026-07-17T12:28:00+00:00",
+          "recorded_at": "2026-07-17T12:28:01+00:00",
+          "raw_text": "ines tells mako: SITE_SOUTH replaces SITE_CLOUD for the backup site.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "mako"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e068",
+          "valid_time": "2026-07-17T12:32:00+00:00",
+          "recorded_at": "2026-07-17T12:32:01+00:00",
+          "raw_text": "luma says: I have not decided whether to accept DEEP for the inspection mode.",
+          "source_id": "luma",
+          "actor_id": "luma",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e069",
+          "valid_time": "2026-07-17T12:36:00+00:00",
+          "recorded_at": "2026-07-17T12:36:01+00:00",
+          "raw_text": "luma says: I reject SITE_NORTH for the backup site and continue with SITE_SOUTH.",
+          "source_id": "luma",
+          "actor_id": "luma",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e070",
+          "valid_time": "2026-07-17T12:40:00+00:00",
+          "recorded_at": "2026-07-17T12:40:01+00:00",
+          "raw_text": "The authoritative console records REGION_CENTRAL replacing REGION_WEST for the service region. ines sees the console update; gita does not receive it.",
+          "source_id": "system_console",
+          "actor_id": "system_console",
+          "observer_ids": [
+            "ines"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "r4-e071",
+          "valid_time": "2026-07-17T12:44:00+00:00",
+          "recorded_at": "2026-07-17T12:44:01+00:00",
+          "raw_text": "ines informs noraq: SITE_CLOUD is listed for the backup site.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "noraq"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e072",
+          "valid_time": "2026-07-17T12:48:00+00:00",
+          "recorded_at": "2026-07-17T12:48:01+00:00",
+          "raw_text": "The authoritative console records REGION_CENTRAL replacing REGION_WEST for the service region. ines sees it; hugo is not informed.",
+          "source_id": "system_console",
+          "actor_id": "system_console",
+          "observer_ids": [
+            "ines"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "r4-e073",
+          "valid_time": "2026-07-17T12:52:00+00:00",
+          "recorded_at": "2026-07-17T12:52:01+00:00",
+          "raw_text": "noraq says: I have not decided whether to accept SITE_SOUTH for the backup site.",
+          "source_id": "noraq",
+          "actor_id": "noraq",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e074",
+          "valid_time": "2026-07-17T12:56:00+00:00",
+          "recorded_at": "2026-07-17T12:56:01+00:00",
+          "raw_text": "kavi tells gita: ines told me that SHIFT_C replaces SHIFT_B for the maintenance shift.",
+          "source_id": "kavi",
+          "actor_id": "kavi",
+          "observer_ids": [],
+          "recipient_ids": [
+            "gita"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e075",
+          "valid_time": "2026-07-17T13:00:00+00:00",
+          "recorded_at": "2026-07-17T13:00:01+00:00",
+          "raw_text": "gita says: I received the SHIFT_C update, but I have not decided whether to accept it.",
+          "source_id": "gita",
+          "actor_id": "gita",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e076",
+          "valid_time": "2026-07-17T13:04:00+00:00",
+          "recorded_at": "2026-07-17T13:04:01+00:00",
+          "raw_text": "hugo says: I reject SHIFT_C for now and still believe SHIFT_B is my maintenance shift.",
+          "source_id": "hugo",
+          "actor_id": "hugo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e077",
+          "valid_time": "2026-07-17T13:08:00+00:00",
+          "recorded_at": "2026-07-17T13:08:01+00:00",
+          "raw_text": "ines tells noraq: SITE_CLOUD replaces SITE_NORTH for the backup site.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "noraq"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e078",
+          "valid_time": "2026-07-17T13:12:00+00:00",
+          "recorded_at": "2026-07-17T13:12:01+00:00",
+          "raw_text": "jori tells hugo: ines told me that REGION_CENTRAL replaces REGION_WEST for the service region.",
+          "source_id": "jori",
+          "actor_id": "jori",
+          "observer_ids": [],
+          "recipient_ids": [
+            "hugo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e079",
+          "valid_time": "2026-07-17T13:16:00+00:00",
+          "recorded_at": "2026-07-17T13:16:01+00:00",
+          "raw_text": "hugo says: I reject REGION_CENTRAL for now and still believe REGION_WEST is my service region.",
+          "source_id": "hugo",
+          "actor_id": "hugo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e080",
+          "valid_time": "2026-07-17T13:20:00+00:00",
+          "recorded_at": "2026-07-17T13:20:01+00:00",
+          "raw_text": "noraq says: I accept DEEP as my current inspection mode.",
+          "source_id": "noraq",
+          "actor_id": "noraq",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e081",
+          "valid_time": "2026-07-17T13:24:00+00:00",
+          "recorded_at": "2026-07-17T13:24:01+00:00",
+          "raw_text": "ines informs luma: SITE_NORTH is listed for the backup site.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "luma"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e082",
+          "valid_time": "2026-07-17T13:28:00+00:00",
+          "recorded_at": "2026-07-17T13:28:01+00:00",
+          "raw_text": "gita says: I reject SHIFT_C and still believe SHIFT_B is my maintenance shift.",
+          "source_id": "gita",
+          "actor_id": "gita",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e083",
+          "valid_time": "2026-07-17T13:32:00+00:00",
+          "recorded_at": "2026-07-17T13:32:01+00:00",
+          "raw_text": "luma says: I have not decided whether to accept SITE_CLOUD for the backup site.",
+          "source_id": "luma",
+          "actor_id": "luma",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e084",
+          "valid_time": "2026-07-17T13:36:00+00:00",
+          "recorded_at": "2026-07-17T13:36:01+00:00",
+          "raw_text": "ines sends gita a signed notice: REGION_CENTRAL replaces REGION_WEST for the service region.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "gita"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e085",
+          "valid_time": "2026-07-17T13:40:00+00:00",
+          "recorded_at": "2026-07-17T13:40:01+00:00",
+          "raw_text": "gita says: I checked the signed notice and now accept REGION_CENTRAL as my service region.",
+          "source_id": "gita",
+          "actor_id": "gita",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e086",
+          "valid_time": "2026-07-17T13:44:00+00:00",
+          "recorded_at": "2026-07-17T13:44:01+00:00",
+          "raw_text": "ines informs noraq: DEEP is listed for the inspection mode.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "noraq"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e087",
+          "valid_time": "2026-07-17T13:48:00+00:00",
+          "recorded_at": "2026-07-17T13:48:01+00:00",
+          "raw_text": "ines tells luma: SITE_NORTH replaces SITE_SOUTH for the backup site.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "luma"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e088",
+          "valid_time": "2026-07-17T13:52:00+00:00",
+          "recorded_at": "2026-07-17T13:52:01+00:00",
+          "raw_text": "noraq says: I have not decided whether to accept STANDARD for the inspection mode.",
+          "source_id": "noraq",
+          "actor_id": "noraq",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e089",
+          "valid_time": "2026-07-17T13:56:00+00:00",
+          "recorded_at": "2026-07-17T13:56:01+00:00",
+          "raw_text": "noraq says: I reject SITE_CLOUD for the backup site and continue with SITE_NORTH.",
+          "source_id": "noraq",
+          "actor_id": "noraq",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e090",
+          "valid_time": "2026-07-17T14:00:00+00:00",
+          "recorded_at": "2026-07-17T14:00:01+00:00",
+          "raw_text": "ines directly tells hugo: REGION_CENTRAL replaces REGION_WEST for the service region.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "hugo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e091",
+          "valid_time": "2026-07-17T14:04:00+00:00",
+          "recorded_at": "2026-07-17T14:04:01+00:00",
+          "raw_text": "hugo says: I verified it and now accept REGION_CENTRAL as my service region.",
+          "source_id": "hugo",
+          "actor_id": "hugo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e092",
+          "valid_time": "2026-07-17T14:08:00+00:00",
+          "recorded_at": "2026-07-17T14:08:01+00:00",
+          "raw_text": "ines sends hugo a signed notice: SHIFT_C replaces SHIFT_B for the maintenance shift.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "hugo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e093",
+          "valid_time": "2026-07-17T14:12:00+00:00",
+          "recorded_at": "2026-07-17T14:12:01+00:00",
+          "raw_text": "hugo says: I checked the signed notice and now accept SHIFT_C as my maintenance shift.",
+          "source_id": "hugo",
+          "actor_id": "hugo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e094",
+          "valid_time": "2026-07-17T14:16:00+00:00",
+          "recorded_at": "2026-07-17T14:16:01+00:00",
+          "raw_text": "mako says: I reject STANDARD for the inspection mode and continue with DEEP.",
+          "source_id": "mako",
+          "actor_id": "mako",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e095",
+          "valid_time": "2026-07-17T14:20:00+00:00",
+          "recorded_at": "2026-07-17T14:20:01+00:00",
+          "raw_text": "noraq says: I accept SITE_CLOUD as my current backup site.",
+          "source_id": "noraq",
+          "actor_id": "noraq",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r4-e096",
+          "valid_time": "2026-07-17T14:24:00+00:00",
+          "recorded_at": "2026-07-17T14:24:01+00:00",
+          "raw_text": "ines informs luma: LIGHT is listed for the inspection mode.",
+          "source_id": "ines",
+          "actor_id": "ines",
+          "observer_ids": [],
+          "recipient_ids": [
+            "luma"
+          ],
+          "metadata": {}
+        }
+      ],
+      "queries": [
+        {
+          "query_id": "r4-q01",
+          "after_event": 14,
+          "target_agent_id": "gita",
+          "target_issue_key": "service_region",
+          "allowed_labels": [
+            "REGION_EAST",
+            "REGION_WEST",
+            "REGION_CENTRAL",
+            "UNCERTAIN"
+          ],
+          "question": "Which service region does gita currently believe applies?"
+        },
+        {
+          "query_id": "r4-q07",
+          "after_event": 16,
+          "target_agent_id": "gita",
+          "target_issue_key": "maintenance_shift",
+          "allowed_labels": [
+            "SHIFT_A",
+            "SHIFT_B",
+            "SHIFT_C",
+            "UNCERTAIN"
+          ],
+          "question": "Which maintenance shift does gita currently believe applies?"
+        },
+        {
+          "query_id": "r4-q04",
+          "after_event": 24,
+          "target_agent_id": "hugo",
+          "target_issue_key": "service_region",
+          "allowed_labels": [
+            "REGION_EAST",
+            "REGION_WEST",
+            "REGION_CENTRAL",
+            "UNCERTAIN"
+          ],
+          "question": "Which service region does hugo believe after accepting the first revision?"
+        },
+        {
+          "query_id": "r4-q02",
+          "after_event": 30,
+          "target_agent_id": "gita",
+          "target_issue_key": "service_region",
+          "allowed_labels": [
+            "REGION_EAST",
+            "REGION_WEST",
+            "REGION_CENTRAL",
+            "UNCERTAIN"
+          ],
+          "question": "After gita received the relayed REGION_WEST revision but before taking a stance, which service region is gita currently supported as believing?"
+        },
+        {
+          "query_id": "r4-q10",
+          "after_event": 36,
+          "target_agent_id": "hugo",
+          "target_issue_key": "maintenance_shift",
+          "allowed_labels": [
+            "SHIFT_A",
+            "SHIFT_B",
+            "SHIFT_C",
+            "UNCERTAIN"
+          ],
+          "question": "After the rumor and hugo's response, which maintenance shift does hugo believe applies?"
+        },
+        {
+          "query_id": "r4-q11",
+          "after_event": 68,
+          "target_agent_id": "hugo",
+          "target_issue_key": "maintenance_shift",
+          "allowed_labels": [
+            "SHIFT_A",
+            "SHIFT_B",
+            "SHIFT_C",
+            "UNCERTAIN"
+          ],
+          "question": "After hugo received SHIFT_C but remained undecided, which maintenance shift is hugo currently supported as believing?"
+        },
+        {
+          "query_id": "r4-q08",
+          "after_event": 78,
+          "target_agent_id": "gita",
+          "target_issue_key": "maintenance_shift",
+          "allowed_labels": [
+            "SHIFT_A",
+            "SHIFT_B",
+            "SHIFT_C",
+            "UNCERTAIN"
+          ],
+          "question": "After gita received the later SHIFT_C revision but had not accepted or rejected it, which maintenance shift is gita currently supported as believing?"
+        },
+        {
+          "query_id": "r4-q05",
+          "after_event": 82,
+          "target_agent_id": "hugo",
+          "target_issue_key": "service_region",
+          "allowed_labels": [
+            "REGION_EAST",
+            "REGION_WEST",
+            "REGION_CENTRAL",
+            "UNCERTAIN"
+          ],
+          "question": "After hugo rejected the later revision, which service region does hugo believe applies?"
+        },
+        {
+          "query_id": "r4-q03",
+          "after_event": 88,
+          "target_agent_id": "gita",
+          "target_issue_key": "service_region",
+          "allowed_labels": [
+            "REGION_EAST",
+            "REGION_WEST",
+            "REGION_CENTRAL",
+            "UNCERTAIN"
+          ],
+          "question": "Which service region does gita currently believe applies?"
+        },
+        {
+          "query_id": "r4-q09",
+          "after_event": 88,
+          "target_agent_id": "gita",
+          "target_issue_key": "maintenance_shift",
+          "allowed_labels": [
+            "SHIFT_A",
+            "SHIFT_B",
+            "SHIFT_C",
+            "UNCERTAIN"
+          ],
+          "question": "After gita rejected SHIFT_C, which maintenance shift does gita believe applies?"
+        },
+        {
+          "query_id": "r4-q06",
+          "after_event": 96,
+          "target_agent_id": "hugo",
+          "target_issue_key": "service_region",
+          "allowed_labels": [
+            "REGION_EAST",
+            "REGION_WEST",
+            "REGION_CENTRAL",
+            "UNCERTAIN"
+          ],
+          "question": "At the requested historical time, which service region did hugo believe applied?",
+          "event_time": "2026-07-17T11:20:00+00:00"
+        },
+        {
+          "query_id": "r4-q12",
+          "after_event": 96,
+          "target_agent_id": "hugo",
+          "target_issue_key": "maintenance_shift",
+          "allowed_labels": [
+            "SHIFT_A",
+            "SHIFT_B",
+            "SHIFT_C",
+            "UNCERTAIN"
+          ],
+          "question": "At the end of the stream, which maintenance shift does hugo believe applies?"
+        }
+      ]
+    }
+  ]
+}

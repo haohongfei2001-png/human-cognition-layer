@@ -4571,3 +4571,34 @@ v0.5. After it, either move to external benchmark/transfer or reassess the
 distinct HCL architecture rather than opening another similar internal round.
 
 **Current gate: HCL_V05_STRONG_BASELINE_REPLICATION_V01_DESIGN_FROZEN_PACKAGE_NOT_GENERATED**
+
+
+## HCL v0.5 final strong-baseline replication — frozen package preflight
+
+Canonical design:
+- `docs/HCL_V05_STRONG_BASELINE_REPLICATION_V01.md`
+
+Frozen package:
+- `docs/HCL_V05_STRONG_BASELINE_REPLICATION_V01_PACKAGE.md`
+- 4 streams / 384 events / 48 queries;
+- 8 named agents and 4 seeded issues per stream;
+- 2 queried target agents + 2 queried issues per stream;
+- D routed HCL vs G generic LLM-managed structured state is primary;
+- E free-form persistent memory secondary;
+- C full-history diagnostic.
+
+Frozen digests:
+- fixture:
+  `478c9e8dbd4255ba418e743faa9627db71807a390b61d105fb33e22270ea9faa`
+- gold:
+  `7900e7cb5c49def7e4f9800c1e1188211115f0fcd3fde73bab43c09c5ee17eff`
+
+Provider-free evidence:
+- v0.5 workflow `36024155815`: SUCCESS, **69 / 69**;
+- validate-only: PASS, **4 / 384 / 48**;
+- HCL integration workflow `36024155773`: SUCCESS;
+- manual frozen gold/timeline audit: PASS.
+
+No provider-backed row in this package has been consumed.
+
+**Current gate: HCL_V05_STRONG_BASELINE_REPLICATION_V01_PACKAGE_FROZEN_PREFLIGHT_PASS_PROVIDER_NOT_STARTED**

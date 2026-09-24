@@ -1,0 +1,197 @@
+{
+  "format": "hcl-v05-strong-baseline-replication-v01-gold",
+  "labels": {
+    "r1-q01": {
+      "gold": "RING_A",
+      "risk_class": "initial_acceptance"
+    },
+    "r1-q02": {
+      "gold": "UNCERTAIN",
+      "risk_class": "revision_pending"
+    },
+    "r1-q03": {
+      "gold": "RING_C",
+      "risk_class": "final_acceptance"
+    },
+    "r1-q04": {
+      "gold": "RING_B",
+      "risk_class": "parallel_agent_acceptance"
+    },
+    "r1-q05": {
+      "gold": "RING_B",
+      "risk_class": "explicit_rejection"
+    },
+    "r1-q06": {
+      "gold": "RING_B",
+      "risk_class": "historical_replay"
+    },
+    "r1-q07": {
+      "gold": "MORNING",
+      "risk_class": "second_issue_initial"
+    },
+    "r1-q08": {
+      "gold": "UNCERTAIN",
+      "risk_class": "second_issue_pending"
+    },
+    "r1-q09": {
+      "gold": "NOON",
+      "risk_class": "second_issue_rejection"
+    },
+    "r1-q10": {
+      "gold": "MORNING",
+      "risk_class": "rumor_rejected"
+    },
+    "r1-q11": {
+      "gold": "UNCERTAIN",
+      "risk_class": "parallel_issue_pending"
+    },
+    "r1-q12": {
+      "gold": "EVENING",
+      "risk_class": "parallel_issue_final"
+    },
+    "r2-q01": {
+      "gold": "LANE_RED",
+      "risk_class": "initial_acceptance"
+    },
+    "r2-q02": {
+      "gold": "UNCERTAIN",
+      "risk_class": "revision_pending"
+    },
+    "r2-q03": {
+      "gold": "LANE_GREEN",
+      "risk_class": "final_acceptance"
+    },
+    "r2-q04": {
+      "gold": "LANE_BLUE",
+      "risk_class": "parallel_agent_acceptance"
+    },
+    "r2-q05": {
+      "gold": "LANE_BLUE",
+      "risk_class": "explicit_rejection"
+    },
+    "r2-q06": {
+      "gold": "LANE_BLUE",
+      "risk_class": "historical_replay"
+    },
+    "r2-q07": {
+      "gold": "CYCLE_1",
+      "risk_class": "second_issue_initial"
+    },
+    "r2-q08": {
+      "gold": "UNCERTAIN",
+      "risk_class": "second_issue_pending"
+    },
+    "r2-q09": {
+      "gold": "CYCLE_2",
+      "risk_class": "second_issue_rejection"
+    },
+    "r2-q10": {
+      "gold": "CYCLE_1",
+      "risk_class": "rumor_rejected"
+    },
+    "r2-q11": {
+      "gold": "UNCERTAIN",
+      "risk_class": "parallel_issue_pending"
+    },
+    "r2-q12": {
+      "gold": "CYCLE_3",
+      "risk_class": "parallel_issue_final"
+    },
+    "r3-q01": {
+      "gold": "PROFILE_LOW",
+      "risk_class": "initial_acceptance"
+    },
+    "r3-q02": {
+      "gold": "UNCERTAIN",
+      "risk_class": "revision_pending"
+    },
+    "r3-q03": {
+      "gold": "PROFILE_HIGH",
+      "risk_class": "final_acceptance"
+    },
+    "r3-q04": {
+      "gold": "PROFILE_MID",
+      "risk_class": "parallel_agent_acceptance"
+    },
+    "r3-q05": {
+      "gold": "PROFILE_MID",
+      "risk_class": "explicit_rejection"
+    },
+    "r3-q06": {
+      "gold": "PROFILE_MID",
+      "risk_class": "historical_replay"
+    },
+    "r3-q07": {
+      "gold": "WINDOW_7",
+      "risk_class": "second_issue_initial"
+    },
+    "r3-q08": {
+      "gold": "UNCERTAIN",
+      "risk_class": "second_issue_pending"
+    },
+    "r3-q09": {
+      "gold": "WINDOW_14",
+      "risk_class": "second_issue_rejection"
+    },
+    "r3-q10": {
+      "gold": "WINDOW_7",
+      "risk_class": "rumor_rejected"
+    },
+    "r3-q11": {
+      "gold": "UNCERTAIN",
+      "risk_class": "parallel_issue_pending"
+    },
+    "r3-q12": {
+      "gold": "WINDOW_30",
+      "risk_class": "parallel_issue_final"
+    },
+    "r4-q01": {
+      "gold": "REGION_EAST",
+      "risk_class": "initial_acceptance"
+    },
+    "r4-q02": {
+      "gold": "UNCERTAIN",
+      "risk_class": "revision_pending"
+    },
+    "r4-q03": {
+      "gold": "REGION_CENTRAL",
+      "risk_class": "final_acceptance"
+    },
+    "r4-q04": {
+      "gold": "REGION_WEST",
+      "risk_class": "parallel_agent_acceptance"
+    },
+    "r4-q05": {
+      "gold": "REGION_WEST",
+      "risk_class": "explicit_rejection"
+    },
+    "r4-q06": {
+      "gold": "REGION_WEST",
+      "risk_class": "historical_replay"
+    },
+    "r4-q07": {
+      "gold": "SHIFT_A",
+      "risk_class": "second_issue_initial"
+    },
+    "r4-q08": {
+      "gold": "UNCERTAIN",
+      "risk_class": "second_issue_pending"
+    },
+    "r4-q09": {
+      "gold": "SHIFT_B",
+      "risk_class": "second_issue_rejection"
+    },
+    "r4-q10": {
+      "gold": "SHIFT_A",
+      "risk_class": "rumor_rejected"
+    },
+    "r4-q11": {
+      "gold": "UNCERTAIN",
+      "risk_class": "parallel_issue_pending"
+    },
+    "r4-q12": {
+      "gold": "SHIFT_C",
+      "risk_class": "parallel_issue_final"
+    }
+  }
+}
