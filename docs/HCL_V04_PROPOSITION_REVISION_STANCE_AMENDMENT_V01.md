@@ -82,7 +82,8 @@ A revision relation must fail closed if the related proposition does not exist.
 
 ## Validation boundary
 
-This round uses deterministic mechanism tests only.
+This round uses deterministic mechanism tests only. The existing
+`HCL v0.4 Minimal Slice` workflow must pass on the PR head before merge.
 
 It does **not** authorize:
 
