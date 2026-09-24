@@ -332,6 +332,11 @@ Allowed support_level values are exactly:
 DIRECT_SUPPORT, INDIRECT_SUPPORT, COUNTEREVIDENCE, INSUFFICIENT, or null.
 
 BELIEF_ESTIMATE requires belief_stance AFFIRM or DENY.
+A BELIEF_ESTIMATE may use support_level DIRECT_SUPPORT, INDIRECT_SUPPORT, or null.
+It MUST NOT use COUNTEREVIDENCE or INSUFFICIENT: those levels do not support the
+stated belief stance. If the event only supplies counterevidence or insufficient
+evidence, omit BELIEF_ESTIMATE or represent unresolved interpretation as a
+LATENT_HYPOTHESIS when that is substantively warranted.
 Do not encode rejection as a positive belief. If Alice says "I think P is wrong",
 use belief_stance=DENY for the object-level proposition P, or represent her
 affirmed alternative proposition separately.
@@ -340,14 +345,84 @@ Return the corrected JSON object only.
 """
 
 
-def propose_patch(
+def _fail_closed_salvage_belief_assertions(
+    event: EventRecord,
+    payload: dict[str, Any],
+    *,
+    semantic_version: str,
+) -> tuple[SemanticPatch, tuple[str, ...]]:
+    """Drop only locally invalid BELIEF_ESTIMATE assertions after bounded repair.
+
+    This is intentionally narrow. It never rewrites a stance, invents a latent
+    hypothesis, or weakens validation for other assertion types.
+    """
+    if not isinstance(payload, dict):
+        raise SchemaValidationError("semantic backend must return a JSON object")
+    raw_assertions = payload.get("assertions", [])
+    if not isinstance(raw_assertions, list):
+        raise SchemaValidationError("assertions must be a list")
+
+    kept: list[Any] = []
+    dropped: list[str] = []
+    allowed_support = {
+        None,
+        "DIRECT_SUPPORT",
+        "INDIRECT_SUPPORT",
+        "COUNTEREVIDENCE",
+        "INSUFFICIENT",
+    }
+    for index, raw in enumerate(raw_assertions):
+        if not isinstance(raw, dict):
+            kept.append(raw)
+            continue
+        if raw.get("assertion_type") != AssertionType.BELIEF_ESTIMATE.value:
+            kept.append(raw)
+            continue
+
+        stance = raw.get("belief_stance")
+        support = raw.get("support_level")
+        reason = None
+        if stance not in {BeliefStance.AFFIRM.value, BeliefStance.DENY.value}:
+            reason = f"invalid or missing belief_stance={stance!r}"
+        elif support not in allowed_support:
+            reason = f"invalid support_level={support!r}"
+        elif support in {
+            SupportLevel.COUNTEREVIDENCE.value,
+            SupportLevel.INSUFFICIENT.value,
+        }:
+            reason = (
+                f"support_level={support} does not support a BELIEF_ESTIMATE stance"
+            )
+
+        if reason is None:
+            kept.append(raw)
+        else:
+            dropped.append(f"assertion[{index}]: {reason}")
+
+    if not dropped:
+        raise SchemaValidationError(
+            "no fail-closed BELIEF_ESTIMATE salvage applies to this schema failure"
+        )
+
+    filtered = dict(payload)
+    filtered["assertions"] = kept
+    patch = patch_from_mapping(
+        event,
+        filtered,
+        semantic_version=semantic_version,
+    )
+    return patch, tuple(dropped)
+
+
+def propose_patch_with_diagnostics(
     event: EventRecord,
     backend: SemanticBackend,
     *,
     known_propositions: tuple[dict[str, Any], ...] = (),
     semantic_version: str = "v04.1",
     max_tokens: int = 2048,
-) -> SemanticPatch:
+) -> tuple[SemanticPatch, int, str | None]:
+    """Propose a patch and report bounded semantic-repair activity."""
     user_payload = {
         "event_id": event.event_id,
         "valid_time": event.valid_time,
@@ -373,17 +448,28 @@ def propose_patch(
         temperature=0.0,
     )
 
+    first_error: Exception | None = None
     last_error: Exception | None = None
     for attempt in range(2):
         try:
             payload = json.loads(raw)
-            return patch_from_mapping(
+            patch = patch_from_mapping(
                 event,
                 payload,
                 semantic_version=semantic_version,
             )
+            if attempt == 0:
+                return patch, 0, None
+            return (
+                patch,
+                1,
+                "semantic proposal required one model repair after: "
+                f"{first_error}",
+            )
         except (json.JSONDecodeError, SchemaValidationError) as exc:
             last_error = exc
+            if first_error is None:
+                first_error = exc
             if attempt == 1:
                 break
             raw = backend.complete_json(
@@ -406,6 +492,26 @@ def propose_patch(
                 temperature=0.0,
             )
 
+    if isinstance(last_error, SchemaValidationError):
+        try:
+            repaired_payload = json.loads(raw)
+            patch, dropped = _fail_closed_salvage_belief_assertions(
+                event,
+                repaired_payload,
+                semantic_version=semantic_version,
+            )
+        except (json.JSONDecodeError, SchemaValidationError):
+            pass
+        else:
+            return (
+                patch,
+                2,
+                "model repair remained schema-invalid; deterministic fail-closed "
+                "salvage dropped unsupported belief assertion(s): "
+                + "; ".join(dropped)
+                + f"; last validation error: {last_error}",
+            )
+
     if isinstance(last_error, json.JSONDecodeError):
         raise SchemaValidationError(
             "semantic backend returned invalid JSON after one repair"
@@ -414,6 +520,23 @@ def propose_patch(
         raise last_error
     raise SchemaValidationError("semantic patch proposal failed")
 
+
+def propose_patch(
+    event: EventRecord,
+    backend: SemanticBackend,
+    *,
+    known_propositions: tuple[dict[str, Any], ...] = (),
+    semantic_version: str = "v04.1",
+    max_tokens: int = 2048,
+) -> SemanticPatch:
+    patch, _, _ = propose_patch_with_diagnostics(
+        event,
+        backend,
+        known_propositions=known_propositions,
+        semantic_version=semantic_version,
+        max_tokens=max_tokens,
+    )
+    return patch
 
 
 SEMANTIC_INVARIANT_REPAIR_SYSTEM = """The proposed HCL v0.4 SemanticPatch
