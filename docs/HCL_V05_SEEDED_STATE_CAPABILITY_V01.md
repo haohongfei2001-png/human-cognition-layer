@@ -47,9 +47,19 @@ Fresh target domains:
 
 Fixture:
 - `eval/v05/seeded_state_capability_v01_fixture.json`
+- SHA-256:
+  `5879f487f3b5b92079c091733074600233e3de0da3ae87a01061f09badd2d2ef`
 
 Gold:
 - `eval/v05/seeded_state_capability_v01_gold.json`
+- SHA-256:
+  `e4813c41b5863799c0e3f9d4954a6338a35cbd986fadf879c6651dd619f6fed8`
+
+Provider-free exact-head evidence:
+- v0.5 workflow `36008112636`: SUCCESS;
+- v0.5 provider-free suite: **59 / 59**;
+- seeded capability validate-only: PASS, **3 streams / 216 events / 24 queries**;
+- HCL integration workflow `36008112663`: SUCCESS.
 
 The package is independent of consumed v0.4 long-horizon v0.2 concrete event
 texts and target agents.
@@ -148,4 +158,4 @@ Per-row semantic analysis overrides simplistic score storytelling.
 - No external benchmark, owner-private example, cross-model run, training,
   publication claim, or leaderboard action is authorized by this pilot.
 
-**Gate: HCL_V05_SEEDED_STATE_CAPABILITY_V01_FROZEN_PREFLIGHT_NOT_RUN**
+**Gate: HCL_V05_SEEDED_STATE_CAPABILITY_V01_FROZEN_PREFLIGHT_PASS_PROVIDER_NOT_STARTED**
