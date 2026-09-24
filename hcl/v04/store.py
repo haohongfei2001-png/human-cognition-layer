@@ -367,7 +367,8 @@ class CognitionStore:
         self.get_event(patch.event_id)
 
         event_ids = {event.event_id for event in self.list_events()}
-        proposition_ids = self._existing_proposition_ids() | {
+        existing_proposition_ids = self._existing_proposition_ids()
+        proposition_ids = existing_proposition_ids | {
             p.proposition_id for p in patch.propositions
         }
         assertion_ids = self._existing_assertion_ids() | {
@@ -393,10 +394,10 @@ class CognitionStore:
                 )
             if (
                 assertion.related_proposition_id
-                and assertion.related_proposition_id not in proposition_ids
+                and assertion.related_proposition_id not in existing_proposition_ids
             ):
                 raise SchemaValidationError(
-                    "assertion references missing related proposition: "
+                    "revision target must be an existing prior proposition: "
                     f"{assertion.related_proposition_id}"
                 )
             missing_dependencies = (
@@ -881,6 +882,15 @@ class CognitionStore:
                 return row.get("related_proposition_id")
             return row["related_proposition_id"]
 
+        def record_at_or_after(row, reference) -> bool:
+            row_valid = _parse_time(row["valid_time"])
+            ref_valid = _parse_time(reference["valid_time"])
+            if row_valid != ref_valid:
+                return row_valid > ref_valid
+            return _parse_time(row["system_record_time"]) >= _parse_time(
+                reference["system_record_time"]
+            )
+
         revisions_by_new: dict[str, list[tuple[str, sqlite3.Row | dict]]] = {}
         belief_rows = [
             row
@@ -910,6 +920,8 @@ class CognitionStore:
             for old_proposition_id, revision in revisions_by_new.get(
                 new_proposition_id, []
             ):
+                if not record_at_or_after(exposure, revision):
+                    continue
                 prior = [
                     row
                     for row in belief_rows
@@ -935,8 +947,7 @@ class CognitionStore:
                     and row["proposition_id"]
                     in {old_proposition_id, new_proposition_id}
                     and row["assertion_id"] not in prior_ids
-                    and _parse_time(row["valid_time"])
-                    >= _parse_time(exposure["valid_time"])
+                    and record_at_or_after(row, exposure)
                 ]
                 if later_stance:
                     continue
