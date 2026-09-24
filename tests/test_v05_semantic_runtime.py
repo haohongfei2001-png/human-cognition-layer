@@ -10,7 +10,7 @@ from hcl.v05 import StanceSignal, StanceStatus
 from hcl.v05.runtime import HCLV05Runtime
 from hcl.v05.semantic import (
     SemanticExtractionError,
-    extract_stance_events,
+    extract_routed_stance_events,
 )
 
 
@@ -53,7 +53,47 @@ def event(
 
 
 def payload(*rows):
-    return json.dumps({"stance_events": list(rows)})
+    self_stances = []
+    revision_relations = []
+    for row in rows:
+        if row["signal"] == "REVISION_EXPOSURE":
+            revision_relations.append(
+                {
+                    "issue_key": row["issue_key"],
+                    "new_value_key": row["value_key"],
+                    "prior_value_key": row["prior_value_key"],
+                }
+            )
+        else:
+            self_stances.append(
+                {
+                    "issue_key": row["issue_key"],
+                    "signal": row["signal"],
+                    "value_key": row["value_key"],
+                }
+            )
+    return json.dumps(
+        {
+            "self_stances": self_stances,
+            "revision_relations": revision_relations,
+        }
+    )
+
+
+def invalid_subject_payload(issue="route_assignment", value="RED"):
+    return json.dumps(
+        {
+            "self_stances": [
+                {
+                    "subject_agent_id": "other",
+                    "issue_key": issue,
+                    "signal": "AFFIRM",
+                    "value_key": value,
+                }
+            ],
+            "revision_relations": [],
+        }
+    )
 
 
 class V05SemanticIntegrationTests(unittest.TestCase):
@@ -76,34 +116,37 @@ class V05SemanticIntegrationTests(unittest.TestCase):
                 )
             ]
         )
-        result = extract_stance_events(raw, backend)
+        result = extract_routed_stance_events(raw, backend)
         self.assertEqual(result.repair_count, 0)
         self.assertEqual(len(result.stance_events), 1)
         self.assertEqual(result.stance_events[0].signal, StanceSignal.AFFIRM)
         self.assertEqual(result.stance_events[0].value_key, "BLUE")
 
-    def test_revision_exposure_requires_real_access_path(self):
+    def test_revision_exposure_routes_to_actual_recipient(self):
         raw = event(
             "e1",
             "Source tells Bob only: Blue replaces Red.",
             actor="source",
             recipients=("bob",),
         )
-        invalid = payload(
-            {
-                "subject_agent_id": "alice",
-                "issue_key": "route_assignment",
-                "signal": "REVISION_EXPOSURE",
-                "value_key": "BLUE",
-                "prior_value_key": "RED",
-            }
+        backend = FakeBackend(
+            [
+                payload(
+                    {
+                        "subject_agent_id": "ignored",
+                        "issue_key": "route_assignment",
+                        "signal": "REVISION_EXPOSURE",
+                        "value_key": "BLUE",
+                        "prior_value_key": "RED",
+                    }
+                )
+            ]
         )
-        repaired = payload()
-        backend = FakeBackend([invalid, repaired])
-        result = extract_stance_events(raw, backend)
-        self.assertEqual(result.repair_count, 1)
-        self.assertEqual(result.stance_events, ())
-        self.assertIn("information path", result.repair_reason)
+        result = extract_routed_stance_events(raw, backend)
+        self.assertEqual(result.repair_count, 0)
+        self.assertEqual(len(result.stance_events), 1)
+        self.assertEqual(result.stance_events[0].subject_agent_id, "bob")
+        self.assertEqual(result.stance_events[0].signal, StanceSignal.REVISION_EXPOSURE)
 
     def test_other_person_stance_claim_cannot_become_target_belief(self):
         raw = event(
@@ -111,17 +154,21 @@ class V05SemanticIntegrationTests(unittest.TestCase):
             "Bob says Alice accepts Blue.",
             actor="bob",
         )
-        invalid = payload(
+        invalid = json.dumps(
             {
-                "subject_agent_id": "alice",
-                "issue_key": "route_assignment",
-                "signal": "AFFIRM",
-                "value_key": "BLUE",
-                "prior_value_key": None,
+                "self_stances": [
+                    {
+                        "subject_agent_id": "alice",
+                        "issue_key": "route_assignment",
+                        "signal": "AFFIRM",
+                        "value_key": "BLUE",
+                    }
+                ],
+                "revision_relations": [],
             }
         )
         backend = FakeBackend([invalid, payload()])
-        result = extract_stance_events(raw, backend)
+        result = extract_routed_stance_events(raw, backend)
         self.assertEqual(result.stance_events, ())
         self.assertEqual(result.repair_count, 1)
 
@@ -273,15 +320,7 @@ class V05SemanticIntegrationTests(unittest.TestCase):
     def test_semantic_failure_preserves_raw_event_and_supports_reprocess(self):
         runtime = HCLV05Runtime()
         raw = event("e1", "Ari accepts Red.", actor="ari")
-        invalid = payload(
-            {
-                "subject_agent_id": "other",
-                "issue_key": "route_assignment",
-                "signal": "AFFIRM",
-                "value_key": "RED",
-                "prior_value_key": None,
-            }
-        )
+        invalid = invalid_subject_payload()
         with self.assertRaises(SemanticExtractionError):
             runtime.ingest_event(raw, FakeBackend([invalid, invalid]))
 
@@ -318,18 +357,10 @@ class V05SemanticIntegrationTests(unittest.TestCase):
 
     def test_repeated_invalid_extraction_stays_strict(self):
         raw = event("e1", "Ari accepts Red.", actor="ari")
-        invalid = payload(
-            {
-                "subject_agent_id": "other",
-                "issue_key": "route_assignment",
-                "signal": "AFFIRM",
-                "value_key": "RED",
-                "prior_value_key": None,
-            }
-        )
+        invalid = invalid_subject_payload()
         backend = FakeBackend([invalid, invalid])
         with self.assertRaises(SemanticExtractionError):
-            extract_stance_events(raw, backend)
+            extract_routed_stance_events(raw, backend)
         self.assertEqual(len(backend.calls), 2)
 
 
