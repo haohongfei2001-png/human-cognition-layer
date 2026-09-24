@@ -4463,3 +4463,33 @@ The 36-event routed extraction v0.2 package is consumed and must not be rerun as
 fresh evidence.
 
 **Current gate: HCL_V05_ROUTED_EXTRACTION_V02_COMPLETE_END_TO_END_FRESH_CAPABILITY_NEXT**
+
+
+## HCL v0.5 seeded state capability v0.1 — frozen preflight
+
+Contract:
+- `docs/HCL_V05_SEEDED_STATE_CAPABILITY_V01.md`
+
+Fresh controlled package:
+- 3 streams / 216 events / 24 scored queries;
+- targets/domains: Iris/release channel, Jonah/backup cadence, Kei/invoice currency;
+- two seeded distractor issues per stream;
+- D/E receive the identical pre-registered ontology;
+- D uses canonical routed v0.5 extraction + deterministic CurrentStance→label;
+- E uses strong ordinary free-form persistent memory + bounded retrieval;
+- C is full-history diagnostic only.
+
+Frozen digests:
+- fixture:
+  `5879f487f3b5b92079c091733074600233e3de0da3ae87a01061f09badd2d2ef`
+- gold:
+  `e4813c41b5863799c0e3f9d4954a6338a35cbd986fadf879c6651dd619f6fed8`
+
+Provider-free evidence:
+- v0.5 workflow `36008112636`: SUCCESS, **59 / 59**;
+- validate-only: PASS, **3 / 216 / 24**;
+- HCL integration workflow `36008112663`: SUCCESS.
+
+No provider-backed scored query in this package has been consumed yet.
+
+**Current gate: HCL_V05_SEEDED_STATE_CAPABILITY_V01_FROZEN_PREFLIGHT_PASS_PROVIDER_NOT_STARTED**
