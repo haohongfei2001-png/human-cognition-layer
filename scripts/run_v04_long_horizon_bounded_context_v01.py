@@ -463,8 +463,8 @@ def compact_hcl_context(
     return result, size
 
 
-def persistent_hcl_state_chars(store: CognitionStore) -> int:
-    """Size the derived persistent cognition state, excluding raw event history."""
+def persistent_hcl_state_snapshot(store: CognitionStore) -> dict[str, Any]:
+    """Snapshot derived persistent cognition state, excluding raw event history."""
     assertions = [
         dict(row)
         for row in store.conn.execute(
@@ -481,9 +481,13 @@ def persistent_hcl_state_chars(store: CognitionStore) -> int:
             "SELECT * FROM propositions ORDER BY proposition_id"
         ).fetchall()
     ]
+    return {"assertions": assertions, "propositions": propositions}
+
+
+def persistent_hcl_state_chars(store: CognitionStore) -> int:
     return len(
         json.dumps(
-            {"assertions": assertions, "propositions": propositions},
+            persistent_hcl_state_snapshot(store),
             ensure_ascii=False,
             sort_keys=True,
         )
@@ -547,7 +551,10 @@ def run_d_stream(
                 None,
                 query["question"],
             ).as_dict()
-            state_chars = persistent_hcl_state_chars(runtime.store)
+            state_snapshot = persistent_hcl_state_snapshot(runtime.store)
+            state_chars = len(
+                json.dumps(state_snapshot, ensure_ascii=False, sort_keys=True)
+            )
             bounded, context_chars = compact_hcl_context(
                 raw_context, query, query_char_budget=query_char_budget
             )
@@ -562,6 +569,8 @@ def run_d_stream(
                     "query_context_chars": context_chars,
                     "state_version": raw_context.get("state_version"),
                     "state_chars": state_chars,
+                    "persistent_state": state_snapshot,
+                    "query_context": bounded,
                     "query_elapsed_seconds": round(query_elapsed, 6),
                     "semantic_repairs_so_far": semantic_repairs,
                 }
@@ -613,6 +622,7 @@ def run_e_stream(
                     "prediction": prediction,
                     "query_context_chars": context_chars,
                     "memory_chars": len(memory),
+                    "query_context": bounded,
                     "query_elapsed_seconds": round(query_elapsed, 6),
                     "memory_repairs_so_far": memory_repairs,
                     "events_processed": processed,
@@ -646,6 +656,7 @@ def run_c_stream(
                 "query_id": query["query_id"],
                 "prediction": prediction,
                 "query_context_chars": context_chars,
+                "query_context": dynamic,
                 "query_elapsed_seconds": round(query_elapsed, 6),
             }
         )
