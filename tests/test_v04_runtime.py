@@ -276,6 +276,18 @@ class V04RuntimeTests(unittest.TestCase):
                 ],
                 "assertions": [
                     {
+                        "assertion_id": "source_assertion",
+                        "assertion_type": "SOURCE_ASSERTION",
+                        "subject_agent_id": None,
+                        "proposition_id": "p1",
+                        "valid_time": T0,
+                        "evidence_event_ids": ["e1"],
+                        "depends_on_assertion_ids": [],
+                        "status": "ACTIVE",
+                        "support_level": "DIRECT_SUPPORT",
+                        "belief_stance": None,
+                    },
+                    {
                         "assertion_id": "bad_belief",
                         "assertion_type": "BELIEF_ESTIMATE",
                         "subject_agent_id": "alice",
@@ -298,12 +310,15 @@ class V04RuntimeTests(unittest.TestCase):
             self.assertEqual(result.semantic_repair_count, 2)
             self.assertIn("deterministic fail-closed salvage", result.repair_reason)
             self.assertIn("COUNTEREVIDENCE", result.repair_reason)
-            self.assertEqual(result.committed_patch.assertions, ())
-            self.assertEqual(runtime.store.state_version, 1)
+            self.assertEqual(len(result.committed_patch.assertions), 1)
             self.assertEqual(
-                runtime.build_view(None, None, None, "q").relevant_assertions,
-                (),
+                result.committed_patch.assertions[0].assertion_type.value,
+                "SOURCE_ASSERTION",
             )
+            self.assertEqual(runtime.store.state_version, 1)
+            rows = runtime.build_view(None, None, None, "q").relevant_assertions
+            self.assertEqual(len(rows), 1)
+            self.assertEqual(rows[0]["assertion_type"], "SOURCE_ASSERTION")
             self.assertEqual(runtime.store.get_event("e1").raw_text, event.raw_text)
         finally:
             runtime.store.close()
