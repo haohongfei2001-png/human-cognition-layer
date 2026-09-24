@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  CANDIDATE_ANCHOR: 84633df57c3f6cfd60191b09c8310a86b11740e8
+  CANDIDATE_ANCHOR: 1aeeb85fa628dbefe92ae8e92d98de70b435f5b2
   FIXTURE_SHA256: a79b675cf484292a07916141d54d3022862c39851a3fc4b91c73cb13f1a75cfe
   GOLD_SHA256: 376fb695eada3b52f7e8fadd395be479f9cbbf47c944c9d3b0c4a56d5f90c988
   DEEPSEEK_BASE_URL: https://api.deepseek.com
@@ -41,6 +41,7 @@ jobs:
           git diff --exit-code "$CANDIDATE_ANCHOR"..HEAD -- \
             hcl/v04 \
             scripts/run_v04_long_horizon_bounded_context_v01.py \
+            tests/test_v04_long_horizon_runner.py \
             eval/v04/long_horizon_bounded_context_v01_fixture.json \
             eval/v04/long_horizon_bounded_context_v01_gold.json \
             docs/HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_CONTRACT_V01.md
@@ -99,7 +100,10 @@ jobs:
               assert result["arms"][arm]["max_persistent_state_chars"] is not None
 
           assert all("state_chars" in row for row in result["arms"]["D"]["rows"])
+          assert all("persistent_state" in row for row in result["arms"]["D"]["rows"])
           assert all("memory_chars" in row for row in result["arms"]["E"]["rows"])
+          for arm in ("C", "D", "E"):
+              assert all("query_context" in row for row in result["arms"][arm]["rows"])
           PY
 
       - name: Upload immutable pilot evidence
