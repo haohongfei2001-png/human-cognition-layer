@@ -6,6 +6,8 @@ on:
     paths:
       - "hcl/v04/**"
       - "tests/test_v04_*.py"
+      - "eval/v04/long_horizon_bounded_context_v01_*.json"
+      - "scripts/run_v04_long_horizon_bounded_context_v01.py"
       - "docs/HCL_V04_*.md"
       - ".github/workflows/hcl-v04-minimal-slice.yml"
   push:
@@ -14,6 +16,8 @@ on:
     paths:
       - "hcl/v04/**"
       - "tests/test_v04_*.py"
+      - "eval/v04/long_horizon_bounded_context_v01_*.json"
+      - "scripts/run_v04_long_horizon_bounded_context_v01.py"
       - "docs/HCL_V04_*.md"
       - ".github/workflows/hcl-v04-minimal-slice.yml"
 
@@ -38,3 +42,8 @@ jobs:
             tests.test_v04_perspective \
             tests.test_v04_recovery \
             tests.test_v04_runtime
+      - name: Run long-horizon provider-free preflight when present
+        if: ${{ hashFiles('scripts/run_v04_long_horizon_bounded_context_v01.py') != '' }}
+        run: |
+          python scripts/run_v04_long_horizon_bounded_context_v01.py --validate-only
+          python -m unittest -v tests.test_v04_long_horizon_runner
