@@ -1,0 +1,4103 @@
+{
+  "format": "hcl-v04-long-horizon-bounded-context-v02-fixture",
+  "query_context_char_budget": 8000,
+  "ordinary_memory_char_budget": 6000,
+  "streams": [
+    {
+      "id": "s4",
+      "target_agent_id": "lin",
+      "events": [
+        {
+          "event_id": "s4-e01",
+          "valid_time": "2026-08-01T09:00:00+00:00",
+          "recorded_at": "2026-08-01T09:00:01+00:00",
+          "raw_text": "Routine logistics note 01: quinn reports that unrelated storage item S4-01 carries audit marker K8. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 1
+          }
+        },
+        {
+          "event_id": "s4-e02",
+          "valid_time": "2026-08-01T09:05:00+00:00",
+          "recorded_at": "2026-08-01T09:05:01+00:00",
+          "raw_text": "Coordinator Zoe tells Lin: the assigned briefing room is North Room.",
+          "source_id": "zoe",
+          "actor_id": "zoe",
+          "observer_ids": [],
+          "recipient_ids": [
+            "lin"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 2
+          }
+        },
+        {
+          "event_id": "s4-e03",
+          "valid_time": "2026-08-01T09:10:00+00:00",
+          "recorded_at": "2026-08-01T09:10:01+00:00",
+          "raw_text": "Routine logistics note 03: sol reports that unrelated storage item S4-03 carries audit marker K22. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 3
+          }
+        },
+        {
+          "event_id": "s4-e04",
+          "valid_time": "2026-08-01T09:15:00+00:00",
+          "recorded_at": "2026-08-01T09:15:01+00:00",
+          "raw_text": "Routine logistics note 04: uma reports that unrelated storage item S4-04 carries audit marker K0. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 4
+          }
+        },
+        {
+          "event_id": "s4-e05",
+          "valid_time": "2026-08-01T09:20:00+00:00",
+          "recorded_at": "2026-08-01T09:20:01+00:00",
+          "raw_text": "Lin says: I accept North Room as the assigned briefing room.",
+          "source_id": "lin",
+          "actor_id": "lin",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 5
+          }
+        },
+        {
+          "event_id": "s4-e06",
+          "valid_time": "2026-08-01T09:25:00+00:00",
+          "recorded_at": "2026-08-01T09:25:01+00:00",
+          "raw_text": "Routine logistics note 06: wen reports that unrelated storage item S4-06 carries audit marker K14. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 6
+          }
+        },
+        {
+          "event_id": "s4-e07",
+          "valid_time": "2026-08-01T09:30:00+00:00",
+          "recorded_at": "2026-08-01T09:30:01+00:00",
+          "raw_text": "Routine logistics note 07: noah reports that unrelated storage item S4-07 carries audit marker K21. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 7
+          }
+        },
+        {
+          "event_id": "s4-e08",
+          "valid_time": "2026-08-01T09:35:00+00:00",
+          "recorded_at": "2026-08-01T09:35:01+00:00",
+          "raw_text": "Routine logistics note 08: pia reports that unrelated storage item S4-08 carries audit marker K28. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 8
+          }
+        },
+        {
+          "event_id": "s4-e09",
+          "valid_time": "2026-08-01T09:40:00+00:00",
+          "recorded_at": "2026-08-01T09:40:01+00:00",
+          "raw_text": "Routine logistics note 09: quinn reports that unrelated storage item S4-09 carries audit marker K6. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 9
+          }
+        },
+        {
+          "event_id": "s4-e10",
+          "valid_time": "2026-08-01T09:45:00+00:00",
+          "recorded_at": "2026-08-01T09:45:01+00:00",
+          "raw_text": "Routine logistics note 10: rae reports that unrelated storage item S4-10 carries audit marker K13. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 10
+          }
+        },
+        {
+          "event_id": "s4-e11",
+          "valid_time": "2026-08-01T09:50:00+00:00",
+          "recorded_at": "2026-08-01T09:50:01+00:00",
+          "raw_text": "Routine logistics note 11: sol reports that unrelated storage item S4-11 carries audit marker K20. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 11
+          }
+        },
+        {
+          "event_id": "s4-e12",
+          "valid_time": "2026-08-01T09:55:00+00:00",
+          "recorded_at": "2026-08-01T09:55:01+00:00",
+          "raw_text": "Routine logistics note 12: uma reports that unrelated storage item S4-12 carries audit marker K27. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 12
+          }
+        },
+        {
+          "event_id": "s4-e13",
+          "valid_time": "2026-08-01T10:00:00+00:00",
+          "recorded_at": "2026-08-01T10:00:01+00:00",
+          "raw_text": "Routine logistics note 13: victor reports that unrelated storage item S4-13 carries audit marker K5. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 13
+          }
+        },
+        {
+          "event_id": "s4-e14",
+          "valid_time": "2026-08-01T10:05:00+00:00",
+          "recorded_at": "2026-08-01T10:05:01+00:00",
+          "raw_text": "Routine logistics note 14: wen reports that unrelated storage item S4-14 carries audit marker K12. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 14
+          }
+        },
+        {
+          "event_id": "s4-e15",
+          "valid_time": "2026-08-01T10:10:00+00:00",
+          "recorded_at": "2026-08-01T10:10:01+00:00",
+          "raw_text": "Routine logistics note 15: noah reports that unrelated storage item S4-15 carries audit marker K19. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 15
+          }
+        },
+        {
+          "event_id": "s4-e16",
+          "valid_time": "2026-08-01T10:15:00+00:00",
+          "recorded_at": "2026-08-01T10:15:01+00:00",
+          "raw_text": "Routine logistics note 16: pia reports that unrelated storage item S4-16 carries audit marker K26. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 16
+          }
+        },
+        {
+          "event_id": "s4-e17",
+          "valid_time": "2026-08-01T10:20:00+00:00",
+          "recorded_at": "2026-08-01T10:20:01+00:00",
+          "raw_text": "Routine logistics note 17: quinn reports that unrelated storage item S4-17 carries audit marker K4. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 17
+          }
+        },
+        {
+          "event_id": "s4-e18",
+          "valid_time": "2026-08-01T10:25:00+00:00",
+          "recorded_at": "2026-08-01T10:25:01+00:00",
+          "raw_text": "Coordinator Zoe sends Kai a correction only: South Room replaces North Room as the assigned briefing room. Lin is not a recipient.",
+          "source_id": "zoe",
+          "actor_id": "zoe",
+          "observer_ids": [],
+          "recipient_ids": [
+            "kai"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 18,
+            "correction": true
+          }
+        },
+        {
+          "event_id": "s4-e19",
+          "valid_time": "2026-08-01T10:30:00+00:00",
+          "recorded_at": "2026-08-01T10:30:01+00:00",
+          "raw_text": "Routine logistics note 19: sol reports that unrelated storage item S4-19 carries audit marker K18. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 19
+          }
+        },
+        {
+          "event_id": "s4-e20",
+          "valid_time": "2026-08-01T10:35:00+00:00",
+          "recorded_at": "2026-08-01T10:35:01+00:00",
+          "raw_text": "Routine logistics note 20: uma reports that unrelated storage item S4-20 carries audit marker K25. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 20
+          }
+        },
+        {
+          "event_id": "s4-e21",
+          "valid_time": "2026-08-01T10:40:00+00:00",
+          "recorded_at": "2026-08-01T10:40:01+00:00",
+          "raw_text": "Routine logistics note 21: victor reports that unrelated storage item S4-21 carries audit marker K3. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 21
+          }
+        },
+        {
+          "event_id": "s4-e22",
+          "valid_time": "2026-08-01T10:45:00+00:00",
+          "recorded_at": "2026-08-01T10:45:01+00:00",
+          "raw_text": "Routine logistics note 22: wen reports that unrelated storage item S4-22 carries audit marker K10. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 22
+          }
+        },
+        {
+          "event_id": "s4-e23",
+          "valid_time": "2026-08-01T10:50:00+00:00",
+          "recorded_at": "2026-08-01T10:50:01+00:00",
+          "raw_text": "Routine logistics note 23: noah reports that unrelated storage item S4-23 carries audit marker K17. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 23
+          }
+        },
+        {
+          "event_id": "s4-e24",
+          "valid_time": "2026-08-01T10:55:00+00:00",
+          "recorded_at": "2026-08-01T10:55:01+00:00",
+          "raw_text": "Routine logistics note 24: pia reports that unrelated storage item S4-24 carries audit marker K24. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 24
+          }
+        },
+        {
+          "event_id": "s4-e25",
+          "valid_time": "2026-08-01T11:00:00+00:00",
+          "recorded_at": "2026-08-01T11:00:01+00:00",
+          "raw_text": "Kai tells Lin: Zoe told me that South Room replaced North Room for the briefing.",
+          "source_id": "kai",
+          "actor_id": "kai",
+          "observer_ids": [],
+          "recipient_ids": [
+            "lin"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 25
+          }
+        },
+        {
+          "event_id": "s4-e26",
+          "valid_time": "2026-08-01T11:05:00+00:00",
+          "recorded_at": "2026-08-01T11:05:01+00:00",
+          "raw_text": "Lin says: I heard Kai's relay, but I do not accept it as confirmation; I still believe North Room is assigned.",
+          "source_id": "lin",
+          "actor_id": "lin",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 26
+          }
+        },
+        {
+          "event_id": "s4-e27",
+          "valid_time": "2026-08-01T11:10:00+00:00",
+          "recorded_at": "2026-08-01T11:10:01+00:00",
+          "raw_text": "Routine logistics note 27: sol reports that unrelated storage item S4-27 carries audit marker K16. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 27
+          }
+        },
+        {
+          "event_id": "s4-e28",
+          "valid_time": "2026-08-01T11:15:00+00:00",
+          "recorded_at": "2026-08-01T11:15:01+00:00",
+          "raw_text": "Routine logistics note 28: uma reports that unrelated storage item S4-28 carries audit marker K23. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 28
+          }
+        },
+        {
+          "event_id": "s4-e29",
+          "valid_time": "2026-08-01T11:20:00+00:00",
+          "recorded_at": "2026-08-01T11:20:01+00:00",
+          "raw_text": "Routine logistics note 29: victor reports that unrelated storage item S4-29 carries audit marker K1. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 29
+          }
+        },
+        {
+          "event_id": "s4-e30",
+          "valid_time": "2026-08-01T11:25:00+00:00",
+          "recorded_at": "2026-08-01T11:25:01+00:00",
+          "raw_text": "Routine logistics note 30: wen reports that unrelated storage item S4-30 carries audit marker K8. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 30
+          }
+        },
+        {
+          "event_id": "s4-e31",
+          "valid_time": "2026-08-01T11:30:00+00:00",
+          "recorded_at": "2026-08-01T11:30:01+00:00",
+          "raw_text": "Routine logistics note 31: noah reports that unrelated storage item S4-31 carries audit marker K15. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 31
+          }
+        },
+        {
+          "event_id": "s4-e32",
+          "valid_time": "2026-08-01T11:35:00+00:00",
+          "recorded_at": "2026-08-01T11:35:01+00:00",
+          "raw_text": "Routine logistics note 32: pia reports that unrelated storage item S4-32 carries audit marker K22. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 32
+          }
+        },
+        {
+          "event_id": "s4-e33",
+          "valid_time": "2026-08-01T11:40:00+00:00",
+          "recorded_at": "2026-08-01T11:40:01+00:00",
+          "raw_text": "Routine logistics note 33: quinn reports that unrelated storage item S4-33 carries audit marker K0. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 33
+          }
+        },
+        {
+          "event_id": "s4-e34",
+          "valid_time": "2026-08-01T11:45:00+00:00",
+          "recorded_at": "2026-08-01T11:45:01+00:00",
+          "raw_text": "Routine logistics note 34: rae reports that unrelated storage item S4-34 carries audit marker K7. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 34
+          }
+        },
+        {
+          "event_id": "s4-e35",
+          "valid_time": "2026-08-01T11:50:00+00:00",
+          "recorded_at": "2026-08-01T11:50:01+00:00",
+          "raw_text": "Routine logistics note 35: sol reports that unrelated storage item S4-35 carries audit marker K14. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 35
+          }
+        },
+        {
+          "event_id": "s4-e36",
+          "valid_time": "2026-08-01T11:55:00+00:00",
+          "recorded_at": "2026-08-01T11:55:01+00:00",
+          "raw_text": "Routine logistics note 36: uma reports that unrelated storage item S4-36 carries audit marker K21. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 36
+          }
+        },
+        {
+          "event_id": "s4-e37",
+          "valid_time": "2026-08-01T12:00:00+00:00",
+          "recorded_at": "2026-08-01T12:00:01+00:00",
+          "raw_text": "Routine logistics note 37: victor reports that unrelated storage item S4-37 carries audit marker K28. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 37
+          }
+        },
+        {
+          "event_id": "s4-e38",
+          "valid_time": "2026-08-01T12:05:00+00:00",
+          "recorded_at": "2026-08-01T12:05:01+00:00",
+          "raw_text": "Zoe directly tells Lin: South Room replaces North Room as the assigned briefing room.",
+          "source_id": "zoe",
+          "actor_id": "zoe",
+          "observer_ids": [],
+          "recipient_ids": [
+            "lin"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 38,
+            "direct_correction": true
+          }
+        },
+        {
+          "event_id": "s4-e39",
+          "valid_time": "2026-08-01T12:10:00+00:00",
+          "recorded_at": "2026-08-01T12:10:01+00:00",
+          "raw_text": "Lin says: I received Zoe's South Room correction, but I have not accepted or rejected it yet.",
+          "source_id": "lin",
+          "actor_id": "lin",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 39
+          }
+        },
+        {
+          "event_id": "s4-e40",
+          "valid_time": "2026-08-01T12:15:00+00:00",
+          "recorded_at": "2026-08-01T12:15:01+00:00",
+          "raw_text": "Routine logistics note 40: pia reports that unrelated storage item S4-40 carries audit marker K20. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 40
+          }
+        },
+        {
+          "event_id": "s4-e41",
+          "valid_time": "2026-08-01T12:20:00+00:00",
+          "recorded_at": "2026-08-01T12:20:01+00:00",
+          "raw_text": "Routine logistics note 41: quinn reports that unrelated storage item S4-41 carries audit marker K27. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 41
+          }
+        },
+        {
+          "event_id": "s4-e42",
+          "valid_time": "2026-08-01T12:25:00+00:00",
+          "recorded_at": "2026-08-01T12:25:01+00:00",
+          "raw_text": "Routine logistics note 42: rae reports that unrelated storage item S4-42 carries audit marker K5. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 42
+          }
+        },
+        {
+          "event_id": "s4-e43",
+          "valid_time": "2026-08-01T12:30:00+00:00",
+          "recorded_at": "2026-08-01T12:30:01+00:00",
+          "raw_text": "Routine logistics note 43: sol reports that unrelated storage item S4-43 carries audit marker K12. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 43
+          }
+        },
+        {
+          "event_id": "s4-e44",
+          "valid_time": "2026-08-01T12:35:00+00:00",
+          "recorded_at": "2026-08-01T12:35:01+00:00",
+          "raw_text": "Routine logistics note 44: uma reports that unrelated storage item S4-44 carries audit marker K19. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 44
+          }
+        },
+        {
+          "event_id": "s4-e45",
+          "valid_time": "2026-08-01T12:40:00+00:00",
+          "recorded_at": "2026-08-01T12:40:01+00:00",
+          "raw_text": "Routine logistics note 45: victor reports that unrelated storage item S4-45 carries audit marker K26. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 45
+          }
+        },
+        {
+          "event_id": "s4-e46",
+          "valid_time": "2026-08-01T12:45:00+00:00",
+          "recorded_at": "2026-08-01T12:45:01+00:00",
+          "raw_text": "Routine logistics note 46: wen reports that unrelated storage item S4-46 carries audit marker K4. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 46
+          }
+        },
+        {
+          "event_id": "s4-e47",
+          "valid_time": "2026-08-01T12:50:00+00:00",
+          "recorded_at": "2026-08-01T12:50:01+00:00",
+          "raw_text": "Routine logistics note 47: noah reports that unrelated storage item S4-47 carries audit marker K11. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 47
+          }
+        },
+        {
+          "event_id": "s4-e48",
+          "valid_time": "2026-08-01T12:55:00+00:00",
+          "recorded_at": "2026-08-01T12:55:01+00:00",
+          "raw_text": "Lin says: I checked the organizer message and now accept South Room as the assigned briefing room.",
+          "source_id": "lin",
+          "actor_id": "lin",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 48
+          }
+        },
+        {
+          "event_id": "s4-e49",
+          "valid_time": "2026-08-01T13:00:00+00:00",
+          "recorded_at": "2026-08-01T13:00:01+00:00",
+          "raw_text": "Routine logistics note 49: quinn reports that unrelated storage item S4-49 carries audit marker K25. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 49
+          }
+        },
+        {
+          "event_id": "s4-e50",
+          "valid_time": "2026-08-01T13:05:00+00:00",
+          "recorded_at": "2026-08-01T13:05:01+00:00",
+          "raw_text": "Routine logistics note 50: rae reports that unrelated storage item S4-50 carries audit marker K3. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 50
+          }
+        },
+        {
+          "event_id": "s4-e51",
+          "valid_time": "2026-08-01T13:10:00+00:00",
+          "recorded_at": "2026-08-01T13:10:01+00:00",
+          "raw_text": "Routine logistics note 51: sol reports that unrelated storage item S4-51 carries audit marker K10. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 51
+          }
+        },
+        {
+          "event_id": "s4-e52",
+          "valid_time": "2026-08-01T13:15:00+00:00",
+          "recorded_at": "2026-08-01T13:15:01+00:00",
+          "raw_text": "Routine logistics note 52: uma reports that unrelated storage item S4-52 carries audit marker K17. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 52
+          }
+        },
+        {
+          "event_id": "s4-e53",
+          "valid_time": "2026-08-01T13:20:00+00:00",
+          "recorded_at": "2026-08-01T13:20:01+00:00",
+          "raw_text": "Routine logistics note 53: victor reports that unrelated storage item S4-53 carries audit marker K24. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 53
+          }
+        },
+        {
+          "event_id": "s4-e54",
+          "valid_time": "2026-08-01T13:25:00+00:00",
+          "recorded_at": "2026-08-01T13:25:01+00:00",
+          "raw_text": "Routine logistics note 54: wen reports that unrelated storage item S4-54 carries audit marker K2. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 54
+          }
+        },
+        {
+          "event_id": "s4-e55",
+          "valid_time": "2026-08-01T13:30:00+00:00",
+          "recorded_at": "2026-08-01T13:30:01+00:00",
+          "raw_text": "Routine logistics note 55: noah reports that unrelated storage item S4-55 carries audit marker K9. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 55
+          }
+        },
+        {
+          "event_id": "s4-e56",
+          "valid_time": "2026-08-01T13:35:00+00:00",
+          "recorded_at": "2026-08-01T13:35:01+00:00",
+          "raw_text": "Routine logistics note 56: pia reports that unrelated storage item S4-56 carries audit marker K16. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 56
+          }
+        },
+        {
+          "event_id": "s4-e57",
+          "valid_time": "2026-08-01T13:40:00+00:00",
+          "recorded_at": "2026-08-01T13:40:01+00:00",
+          "raw_text": "Routine logistics note 57: quinn reports that unrelated storage item S4-57 carries audit marker K23. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 57
+          }
+        },
+        {
+          "event_id": "s4-e58",
+          "valid_time": "2026-08-01T13:45:00+00:00",
+          "recorded_at": "2026-08-01T13:45:01+00:00",
+          "raw_text": "Routine logistics note 58: rae reports that unrelated storage item S4-58 carries audit marker K1. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 58
+          }
+        },
+        {
+          "event_id": "s4-e59",
+          "valid_time": "2026-08-01T13:50:00+00:00",
+          "recorded_at": "2026-08-01T13:50:01+00:00",
+          "raw_text": "Routine logistics note 59: sol reports that unrelated storage item S4-59 carries audit marker K8. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 59
+          }
+        },
+        {
+          "event_id": "s4-e60",
+          "valid_time": "2026-08-01T13:55:00+00:00",
+          "recorded_at": "2026-08-01T13:55:01+00:00",
+          "raw_text": "Routine logistics note 60: uma reports that unrelated storage item S4-60 carries audit marker K15. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 60
+          }
+        },
+        {
+          "event_id": "s4-e61",
+          "valid_time": "2026-08-01T14:00:00+00:00",
+          "recorded_at": "2026-08-01T14:00:01+00:00",
+          "raw_text": "The authoritative venue system records East Room as the assigned briefing room replacing South Room. Zoe sees the update; Lin does not receive it.",
+          "source_id": "venue_system",
+          "actor_id": "venue_system",
+          "observer_ids": [
+            "zoe"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 61,
+            "scene_fact": true,
+            "correction": true
+          }
+        },
+        {
+          "event_id": "s4-e62",
+          "valid_time": "2026-08-01T14:05:00+00:00",
+          "recorded_at": "2026-08-01T14:05:01+00:00",
+          "raw_text": "Routine logistics note 62: wen reports that unrelated storage item S4-62 carries audit marker K0. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 62
+          }
+        },
+        {
+          "event_id": "s4-e63",
+          "valid_time": "2026-08-01T14:10:00+00:00",
+          "recorded_at": "2026-08-01T14:10:01+00:00",
+          "raw_text": "Routine logistics note 63: noah reports that unrelated storage item S4-63 carries audit marker K7. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 63
+          }
+        },
+        {
+          "event_id": "s4-e64",
+          "valid_time": "2026-08-01T14:15:00+00:00",
+          "recorded_at": "2026-08-01T14:15:01+00:00",
+          "raw_text": "Routine logistics note 64: pia reports that unrelated storage item S4-64 carries audit marker K14. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 64
+          }
+        },
+        {
+          "event_id": "s4-e65",
+          "valid_time": "2026-08-01T14:20:00+00:00",
+          "recorded_at": "2026-08-01T14:20:01+00:00",
+          "raw_text": "Routine logistics note 65: quinn reports that unrelated storage item S4-65 carries audit marker K21. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 65
+          }
+        },
+        {
+          "event_id": "s4-e66",
+          "valid_time": "2026-08-01T14:25:00+00:00",
+          "recorded_at": "2026-08-01T14:25:01+00:00",
+          "raw_text": "Routine logistics note 66: rae reports that unrelated storage item S4-66 carries audit marker K28. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 66
+          }
+        },
+        {
+          "event_id": "s4-e67",
+          "valid_time": "2026-08-01T14:30:00+00:00",
+          "recorded_at": "2026-08-01T14:30:01+00:00",
+          "raw_text": "Routine logistics note 67: sol reports that unrelated storage item S4-67 carries audit marker K6. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 67
+          }
+        },
+        {
+          "event_id": "s4-e68",
+          "valid_time": "2026-08-01T14:35:00+00:00",
+          "recorded_at": "2026-08-01T14:35:01+00:00",
+          "raw_text": "Routine logistics note 68: uma reports that unrelated storage item S4-68 carries audit marker K13. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 68
+          }
+        },
+        {
+          "event_id": "s4-e69",
+          "valid_time": "2026-08-01T14:40:00+00:00",
+          "recorded_at": "2026-08-01T14:40:01+00:00",
+          "raw_text": "Routine logistics note 69: victor reports that unrelated storage item S4-69 carries audit marker K20. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 69
+          }
+        },
+        {
+          "event_id": "s4-e70",
+          "valid_time": "2026-08-01T14:45:00+00:00",
+          "recorded_at": "2026-08-01T14:45:01+00:00",
+          "raw_text": "Kai tells Lin: I heard the venue system may have changed the room to East Room.",
+          "source_id": "kai",
+          "actor_id": "kai",
+          "observer_ids": [],
+          "recipient_ids": [
+            "lin"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 70
+          }
+        },
+        {
+          "event_id": "s4-e71",
+          "valid_time": "2026-08-01T14:50:00+00:00",
+          "recorded_at": "2026-08-01T14:50:01+00:00",
+          "raw_text": "Lin says: I reject Kai's unofficial relay as sufficient evidence and still believe South Room is assigned.",
+          "source_id": "lin",
+          "actor_id": "lin",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 71
+          }
+        },
+        {
+          "event_id": "s4-e72",
+          "valid_time": "2026-08-01T14:55:00+00:00",
+          "recorded_at": "2026-08-01T14:55:01+00:00",
+          "raw_text": "Routine logistics note 72: pia reports that unrelated storage item S4-72 carries audit marker K12. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 72
+          }
+        },
+        {
+          "event_id": "s4-e73",
+          "valid_time": "2026-08-01T15:00:00+00:00",
+          "recorded_at": "2026-08-01T15:00:01+00:00",
+          "raw_text": "Routine logistics note 73: quinn reports that unrelated storage item S4-73 carries audit marker K19. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 73
+          }
+        },
+        {
+          "event_id": "s4-e74",
+          "valid_time": "2026-08-01T15:05:00+00:00",
+          "recorded_at": "2026-08-01T15:05:01+00:00",
+          "raw_text": "Routine logistics note 74: rae reports that unrelated storage item S4-74 carries audit marker K26. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 74
+          }
+        },
+        {
+          "event_id": "s4-e75",
+          "valid_time": "2026-08-01T15:10:00+00:00",
+          "recorded_at": "2026-08-01T15:10:01+00:00",
+          "raw_text": "Routine logistics note 75: sol reports that unrelated storage item S4-75 carries audit marker K4. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 75
+          }
+        },
+        {
+          "event_id": "s4-e76",
+          "valid_time": "2026-08-01T15:15:00+00:00",
+          "recorded_at": "2026-08-01T15:15:01+00:00",
+          "raw_text": "Zoe sends Lin a signed venue notice stating that East Room replaces South Room as the assigned briefing room.",
+          "source_id": "zoe",
+          "actor_id": "zoe",
+          "observer_ids": [],
+          "recipient_ids": [
+            "lin"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 76,
+            "official_notice": true
+          }
+        },
+        {
+          "event_id": "s4-e77",
+          "valid_time": "2026-08-01T15:20:00+00:00",
+          "recorded_at": "2026-08-01T15:20:01+00:00",
+          "raw_text": "Lin says: I verified the signed notice and accept East Room as the assigned briefing room.",
+          "source_id": "lin",
+          "actor_id": "lin",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 77
+          }
+        },
+        {
+          "event_id": "s4-e78",
+          "valid_time": "2026-08-01T15:25:00+00:00",
+          "recorded_at": "2026-08-01T15:25:01+00:00",
+          "raw_text": "Routine logistics note 78: wen reports that unrelated storage item S4-78 carries audit marker K25. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 78
+          }
+        },
+        {
+          "event_id": "s4-e79",
+          "valid_time": "2026-08-01T15:30:00+00:00",
+          "recorded_at": "2026-08-01T15:30:01+00:00",
+          "raw_text": "Routine logistics note 79: noah reports that unrelated storage item S4-79 carries audit marker K3. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 79
+          }
+        },
+        {
+          "event_id": "s4-e80",
+          "valid_time": "2026-08-01T15:35:00+00:00",
+          "recorded_at": "2026-08-01T15:35:01+00:00",
+          "raw_text": "Routine logistics note 80: pia reports that unrelated storage item S4-80 carries audit marker K10. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 80
+          }
+        }
+      ],
+      "queries": [
+        {
+          "query_id": "s4-q1",
+          "after_event": 10,
+          "target_agent_id": "lin",
+          "allowed_labels": [
+            "NORTH",
+            "SOUTH",
+            "EAST",
+            "UNCERTAIN"
+          ],
+          "question": "Which briefing room does Lin currently believe is assigned?"
+        },
+        {
+          "query_id": "s4-q2",
+          "after_event": 27,
+          "target_agent_id": "lin",
+          "allowed_labels": [
+            "NORTH",
+            "SOUTH",
+            "EAST",
+            "UNCERTAIN"
+          ],
+          "question": "After Kai relayed a correction and Lin stated her reaction, which briefing room does Lin believe is assigned?"
+        },
+        {
+          "query_id": "s4-q3",
+          "after_event": 40,
+          "target_agent_id": "lin",
+          "allowed_labels": [
+            "NORTH",
+            "SOUTH",
+            "EAST",
+            "UNCERTAIN"
+          ],
+          "question": "After Lin received Zoe's direct correction but before taking a stance, which briefing room is Lin currently supported as believing?"
+        },
+        {
+          "query_id": "s4-q4",
+          "after_event": 50,
+          "target_agent_id": "lin",
+          "allowed_labels": [
+            "NORTH",
+            "SOUTH",
+            "EAST",
+            "UNCERTAIN"
+          ],
+          "question": "Which briefing room does the evidence support Lin as currently believing?"
+        },
+        {
+          "query_id": "s4-q5",
+          "after_event": 65,
+          "target_agent_id": "lin",
+          "allowed_labels": [
+            "NORTH",
+            "SOUTH",
+            "EAST",
+            "UNCERTAIN"
+          ],
+          "question": "The venue system has changed without informing Lin. Which briefing room does Lin currently believe is assigned?"
+        },
+        {
+          "query_id": "s4-q6",
+          "after_event": 80,
+          "target_agent_id": "lin",
+          "allowed_labels": [
+            "NORTH",
+            "SOUTH",
+            "EAST",
+            "UNCERTAIN"
+          ],
+          "question": "At the end of the stream, which briefing room does Lin currently believe is assigned?"
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "target_agent_id": "maya",
+      "events": [
+        {
+          "event_id": "s5-e01",
+          "valid_time": "2026-08-02T09:00:00+00:00",
+          "recorded_at": "2026-08-02T09:00:01+00:00",
+          "raw_text": "Routine logistics note 01: rae reports that unrelated storage item S5-01 carries audit marker K9. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 1
+          }
+        },
+        {
+          "event_id": "s5-e02",
+          "valid_time": "2026-08-02T09:05:00+00:00",
+          "recorded_at": "2026-08-02T09:05:01+00:00",
+          "raw_text": "Routine logistics note 02: sol reports that unrelated storage item S5-02 carries audit marker K16. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 2
+          }
+        },
+        {
+          "event_id": "s5-e03",
+          "valid_time": "2026-08-02T09:10:00+00:00",
+          "recorded_at": "2026-08-02T09:10:01+00:00",
+          "raw_text": "Finance lead Aria tells Maya: the current approved project budget cap is 120K.",
+          "source_id": "aria",
+          "actor_id": "aria",
+          "observer_ids": [],
+          "recipient_ids": [
+            "maya"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 3
+          }
+        },
+        {
+          "event_id": "s5-e04",
+          "valid_time": "2026-08-02T09:15:00+00:00",
+          "recorded_at": "2026-08-02T09:15:01+00:00",
+          "raw_text": "Routine logistics note 04: victor reports that unrelated storage item S5-04 carries audit marker K1. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 4
+          }
+        },
+        {
+          "event_id": "s5-e05",
+          "valid_time": "2026-08-02T09:20:00+00:00",
+          "recorded_at": "2026-08-02T09:20:01+00:00",
+          "raw_text": "Routine logistics note 05: wen reports that unrelated storage item S5-05 carries audit marker K8. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 5
+          }
+        },
+        {
+          "event_id": "s5-e06",
+          "valid_time": "2026-08-02T09:25:00+00:00",
+          "recorded_at": "2026-08-02T09:25:01+00:00",
+          "raw_text": "Maya says: I accept 120K as the current approved project budget cap.",
+          "source_id": "maya",
+          "actor_id": "maya",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 6
+          }
+        },
+        {
+          "event_id": "s5-e07",
+          "valid_time": "2026-08-02T09:30:00+00:00",
+          "recorded_at": "2026-08-02T09:30:01+00:00",
+          "raw_text": "Routine logistics note 07: pia reports that unrelated storage item S5-07 carries audit marker K22. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 7
+          }
+        },
+        {
+          "event_id": "s5-e08",
+          "valid_time": "2026-08-02T09:35:00+00:00",
+          "recorded_at": "2026-08-02T09:35:01+00:00",
+          "raw_text": "Routine logistics note 08: quinn reports that unrelated storage item S5-08 carries audit marker K0. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 8
+          }
+        },
+        {
+          "event_id": "s5-e09",
+          "valid_time": "2026-08-02T09:40:00+00:00",
+          "recorded_at": "2026-08-02T09:40:01+00:00",
+          "raw_text": "Routine logistics note 09: rae reports that unrelated storage item S5-09 carries audit marker K7. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 9
+          }
+        },
+        {
+          "event_id": "s5-e10",
+          "valid_time": "2026-08-02T09:45:00+00:00",
+          "recorded_at": "2026-08-02T09:45:01+00:00",
+          "raw_text": "Routine logistics note 10: sol reports that unrelated storage item S5-10 carries audit marker K14. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 10
+          }
+        },
+        {
+          "event_id": "s5-e11",
+          "valid_time": "2026-08-02T09:50:00+00:00",
+          "recorded_at": "2026-08-02T09:50:01+00:00",
+          "raw_text": "Routine logistics note 11: uma reports that unrelated storage item S5-11 carries audit marker K21. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 11
+          }
+        },
+        {
+          "event_id": "s5-e12",
+          "valid_time": "2026-08-02T09:55:00+00:00",
+          "recorded_at": "2026-08-02T09:55:01+00:00",
+          "raw_text": "Routine logistics note 12: victor reports that unrelated storage item S5-12 carries audit marker K28. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 12
+          }
+        },
+        {
+          "event_id": "s5-e13",
+          "valid_time": "2026-08-02T10:00:00+00:00",
+          "recorded_at": "2026-08-02T10:00:01+00:00",
+          "raw_text": "Routine logistics note 13: wen reports that unrelated storage item S5-13 carries audit marker K6. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 13
+          }
+        },
+        {
+          "event_id": "s5-e14",
+          "valid_time": "2026-08-02T10:05:00+00:00",
+          "recorded_at": "2026-08-02T10:05:01+00:00",
+          "raw_text": "Routine logistics note 14: noah reports that unrelated storage item S5-14 carries audit marker K13. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 14
+          }
+        },
+        {
+          "event_id": "s5-e15",
+          "valid_time": "2026-08-02T10:10:00+00:00",
+          "recorded_at": "2026-08-02T10:10:01+00:00",
+          "raw_text": "Routine logistics note 15: pia reports that unrelated storage item S5-15 carries audit marker K20. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 15
+          }
+        },
+        {
+          "event_id": "s5-e16",
+          "valid_time": "2026-08-02T10:15:00+00:00",
+          "recorded_at": "2026-08-02T10:15:01+00:00",
+          "raw_text": "Routine logistics note 16: quinn reports that unrelated storage item S5-16 carries audit marker K27. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 16
+          }
+        },
+        {
+          "event_id": "s5-e17",
+          "valid_time": "2026-08-02T10:20:00+00:00",
+          "recorded_at": "2026-08-02T10:20:01+00:00",
+          "raw_text": "Routine logistics note 17: rae reports that unrelated storage item S5-17 carries audit marker K5. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 17
+          }
+        },
+        {
+          "event_id": "s5-e18",
+          "valid_time": "2026-08-02T10:25:00+00:00",
+          "recorded_at": "2026-08-02T10:25:01+00:00",
+          "raw_text": "Routine logistics note 18: sol reports that unrelated storage item S5-18 carries audit marker K12. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 18
+          }
+        },
+        {
+          "event_id": "s5-e19",
+          "valid_time": "2026-08-02T10:30:00+00:00",
+          "recorded_at": "2026-08-02T10:30:01+00:00",
+          "raw_text": "Routine logistics note 19: uma reports that unrelated storage item S5-19 carries audit marker K19. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 19
+          }
+        },
+        {
+          "event_id": "s5-e20",
+          "valid_time": "2026-08-02T10:35:00+00:00",
+          "recorded_at": "2026-08-02T10:35:01+00:00",
+          "raw_text": "Aria sends Rafi an official correction only: 135K replaces 120K as the approved project budget cap. Maya is not a recipient.",
+          "source_id": "aria",
+          "actor_id": "aria",
+          "observer_ids": [],
+          "recipient_ids": [
+            "rafi"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 20,
+            "correction": true
+          }
+        },
+        {
+          "event_id": "s5-e21",
+          "valid_time": "2026-08-02T10:40:00+00:00",
+          "recorded_at": "2026-08-02T10:40:01+00:00",
+          "raw_text": "Routine logistics note 21: wen reports that unrelated storage item S5-21 carries audit marker K4. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 21
+          }
+        },
+        {
+          "event_id": "s5-e22",
+          "valid_time": "2026-08-02T10:45:00+00:00",
+          "recorded_at": "2026-08-02T10:45:01+00:00",
+          "raw_text": "Routine logistics note 22: noah reports that unrelated storage item S5-22 carries audit marker K11. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 22
+          }
+        },
+        {
+          "event_id": "s5-e23",
+          "valid_time": "2026-08-02T10:50:00+00:00",
+          "recorded_at": "2026-08-02T10:50:01+00:00",
+          "raw_text": "Routine logistics note 23: pia reports that unrelated storage item S5-23 carries audit marker K18. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 23
+          }
+        },
+        {
+          "event_id": "s5-e24",
+          "valid_time": "2026-08-02T10:55:00+00:00",
+          "recorded_at": "2026-08-02T10:55:01+00:00",
+          "raw_text": "Routine logistics note 24: quinn reports that unrelated storage item S5-24 carries audit marker K25. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 24
+          }
+        },
+        {
+          "event_id": "s5-e25",
+          "valid_time": "2026-08-02T11:00:00+00:00",
+          "recorded_at": "2026-08-02T11:00:01+00:00",
+          "raw_text": "Routine logistics note 25: rae reports that unrelated storage item S5-25 carries audit marker K3. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 25
+          }
+        },
+        {
+          "event_id": "s5-e26",
+          "valid_time": "2026-08-02T11:05:00+00:00",
+          "recorded_at": "2026-08-02T11:05:01+00:00",
+          "raw_text": "Routine logistics note 26: sol reports that unrelated storage item S5-26 carries audit marker K10. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 26
+          }
+        },
+        {
+          "event_id": "s5-e27",
+          "valid_time": "2026-08-02T11:10:00+00:00",
+          "recorded_at": "2026-08-02T11:10:01+00:00",
+          "raw_text": "Routine logistics note 27: uma reports that unrelated storage item S5-27 carries audit marker K17. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 27
+          }
+        },
+        {
+          "event_id": "s5-e28",
+          "valid_time": "2026-08-02T11:15:00+00:00",
+          "recorded_at": "2026-08-02T11:15:01+00:00",
+          "raw_text": "Routine logistics note 28: victor reports that unrelated storage item S5-28 carries audit marker K24. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 28
+          }
+        },
+        {
+          "event_id": "s5-e29",
+          "valid_time": "2026-08-02T11:20:00+00:00",
+          "recorded_at": "2026-08-02T11:20:01+00:00",
+          "raw_text": "Routine logistics note 29: wen reports that unrelated storage item S5-29 carries audit marker K2. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 29
+          }
+        },
+        {
+          "event_id": "s5-e30",
+          "valid_time": "2026-08-02T11:25:00+00:00",
+          "recorded_at": "2026-08-02T11:25:01+00:00",
+          "raw_text": "Rafi tells Maya: Aria told me that the approved budget cap changed to 135K.",
+          "source_id": "rafi",
+          "actor_id": "rafi",
+          "observer_ids": [],
+          "recipient_ids": [
+            "maya"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 30
+          }
+        },
+        {
+          "event_id": "s5-e31",
+          "valid_time": "2026-08-02T11:30:00+00:00",
+          "recorded_at": "2026-08-02T11:30:01+00:00",
+          "raw_text": "Maya says: I heard Rafi's relay, but until Aria confirms it directly I still believe the approved cap is 120K.",
+          "source_id": "maya",
+          "actor_id": "maya",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 31
+          }
+        },
+        {
+          "event_id": "s5-e32",
+          "valid_time": "2026-08-02T11:35:00+00:00",
+          "recorded_at": "2026-08-02T11:35:01+00:00",
+          "raw_text": "Routine logistics note 32: quinn reports that unrelated storage item S5-32 carries audit marker K23. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 32
+          }
+        },
+        {
+          "event_id": "s5-e33",
+          "valid_time": "2026-08-02T11:40:00+00:00",
+          "recorded_at": "2026-08-02T11:40:01+00:00",
+          "raw_text": "Routine logistics note 33: rae reports that unrelated storage item S5-33 carries audit marker K1. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 33
+          }
+        },
+        {
+          "event_id": "s5-e34",
+          "valid_time": "2026-08-02T11:45:00+00:00",
+          "recorded_at": "2026-08-02T11:45:01+00:00",
+          "raw_text": "Routine logistics note 34: sol reports that unrelated storage item S5-34 carries audit marker K8. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 34
+          }
+        },
+        {
+          "event_id": "s5-e35",
+          "valid_time": "2026-08-02T11:50:00+00:00",
+          "recorded_at": "2026-08-02T11:50:01+00:00",
+          "raw_text": "Routine logistics note 35: uma reports that unrelated storage item S5-35 carries audit marker K15. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 35
+          }
+        },
+        {
+          "event_id": "s5-e36",
+          "valid_time": "2026-08-02T11:55:00+00:00",
+          "recorded_at": "2026-08-02T11:55:01+00:00",
+          "raw_text": "Routine logistics note 36: victor reports that unrelated storage item S5-36 carries audit marker K22. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 36
+          }
+        },
+        {
+          "event_id": "s5-e37",
+          "valid_time": "2026-08-02T12:00:00+00:00",
+          "recorded_at": "2026-08-02T12:00:01+00:00",
+          "raw_text": "Routine logistics note 37: wen reports that unrelated storage item S5-37 carries audit marker K0. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 37
+          }
+        },
+        {
+          "event_id": "s5-e38",
+          "valid_time": "2026-08-02T12:05:00+00:00",
+          "recorded_at": "2026-08-02T12:05:01+00:00",
+          "raw_text": "Routine logistics note 38: noah reports that unrelated storage item S5-38 carries audit marker K7. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 38
+          }
+        },
+        {
+          "event_id": "s5-e39",
+          "valid_time": "2026-08-02T12:10:00+00:00",
+          "recorded_at": "2026-08-02T12:10:01+00:00",
+          "raw_text": "Routine logistics note 39: pia reports that unrelated storage item S5-39 carries audit marker K14. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 39
+          }
+        },
+        {
+          "event_id": "s5-e40",
+          "valid_time": "2026-08-02T12:15:00+00:00",
+          "recorded_at": "2026-08-02T12:15:01+00:00",
+          "raw_text": "Aria directly tells Maya: 135K replaces 120K as the approved project budget cap.",
+          "source_id": "aria",
+          "actor_id": "aria",
+          "observer_ids": [],
+          "recipient_ids": [
+            "maya"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 40,
+            "direct_correction": true
+          }
+        },
+        {
+          "event_id": "s5-e41",
+          "valid_time": "2026-08-02T12:20:00+00:00",
+          "recorded_at": "2026-08-02T12:20:01+00:00",
+          "raw_text": "Maya says: I received Aria's 135K correction, but I have not accepted or rejected it yet.",
+          "source_id": "maya",
+          "actor_id": "maya",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 41
+          }
+        },
+        {
+          "event_id": "s5-e42",
+          "valid_time": "2026-08-02T12:25:00+00:00",
+          "recorded_at": "2026-08-02T12:25:01+00:00",
+          "raw_text": "Routine logistics note 42: sol reports that unrelated storage item S5-42 carries audit marker K6. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 42
+          }
+        },
+        {
+          "event_id": "s5-e43",
+          "valid_time": "2026-08-02T12:30:00+00:00",
+          "recorded_at": "2026-08-02T12:30:01+00:00",
+          "raw_text": "Routine logistics note 43: uma reports that unrelated storage item S5-43 carries audit marker K13. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 43
+          }
+        },
+        {
+          "event_id": "s5-e44",
+          "valid_time": "2026-08-02T12:35:00+00:00",
+          "recorded_at": "2026-08-02T12:35:01+00:00",
+          "raw_text": "Routine logistics note 44: victor reports that unrelated storage item S5-44 carries audit marker K20. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 44
+          }
+        },
+        {
+          "event_id": "s5-e45",
+          "valid_time": "2026-08-02T12:40:00+00:00",
+          "recorded_at": "2026-08-02T12:40:01+00:00",
+          "raw_text": "Routine logistics note 45: wen reports that unrelated storage item S5-45 carries audit marker K27. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 45
+          }
+        },
+        {
+          "event_id": "s5-e46",
+          "valid_time": "2026-08-02T12:45:00+00:00",
+          "recorded_at": "2026-08-02T12:45:01+00:00",
+          "raw_text": "Routine logistics note 46: noah reports that unrelated storage item S5-46 carries audit marker K5. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 46
+          }
+        },
+        {
+          "event_id": "s5-e47",
+          "valid_time": "2026-08-02T12:50:00+00:00",
+          "recorded_at": "2026-08-02T12:50:01+00:00",
+          "raw_text": "Routine logistics note 47: pia reports that unrelated storage item S5-47 carries audit marker K12. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 47
+          }
+        },
+        {
+          "event_id": "s5-e48",
+          "valid_time": "2026-08-02T12:55:00+00:00",
+          "recorded_at": "2026-08-02T12:55:01+00:00",
+          "raw_text": "Routine logistics note 48: quinn reports that unrelated storage item S5-48 carries audit marker K19. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 48
+          }
+        },
+        {
+          "event_id": "s5-e49",
+          "valid_time": "2026-08-02T13:00:00+00:00",
+          "recorded_at": "2026-08-02T13:00:01+00:00",
+          "raw_text": "Routine logistics note 49: rae reports that unrelated storage item S5-49 carries audit marker K26. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 49
+          }
+        },
+        {
+          "event_id": "s5-e50",
+          "valid_time": "2026-08-02T13:05:00+00:00",
+          "recorded_at": "2026-08-02T13:05:01+00:00",
+          "raw_text": "Maya says: I checked Aria's message and now accept 135K as the approved project budget cap.",
+          "source_id": "maya",
+          "actor_id": "maya",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 50
+          }
+        },
+        {
+          "event_id": "s5-e51",
+          "valid_time": "2026-08-02T13:10:00+00:00",
+          "recorded_at": "2026-08-02T13:10:01+00:00",
+          "raw_text": "Routine logistics note 51: uma reports that unrelated storage item S5-51 carries audit marker K11. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 51
+          }
+        },
+        {
+          "event_id": "s5-e52",
+          "valid_time": "2026-08-02T13:15:00+00:00",
+          "recorded_at": "2026-08-02T13:15:01+00:00",
+          "raw_text": "Routine logistics note 52: victor reports that unrelated storage item S5-52 carries audit marker K18. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 52
+          }
+        },
+        {
+          "event_id": "s5-e53",
+          "valid_time": "2026-08-02T13:20:00+00:00",
+          "recorded_at": "2026-08-02T13:20:01+00:00",
+          "raw_text": "Routine logistics note 53: wen reports that unrelated storage item S5-53 carries audit marker K25. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 53
+          }
+        },
+        {
+          "event_id": "s5-e54",
+          "valid_time": "2026-08-02T13:25:00+00:00",
+          "recorded_at": "2026-08-02T13:25:01+00:00",
+          "raw_text": "Routine logistics note 54: noah reports that unrelated storage item S5-54 carries audit marker K3. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 54
+          }
+        },
+        {
+          "event_id": "s5-e55",
+          "valid_time": "2026-08-02T13:30:00+00:00",
+          "recorded_at": "2026-08-02T13:30:01+00:00",
+          "raw_text": "Routine logistics note 55: pia reports that unrelated storage item S5-55 carries audit marker K10. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 55
+          }
+        },
+        {
+          "event_id": "s5-e56",
+          "valid_time": "2026-08-02T13:35:00+00:00",
+          "recorded_at": "2026-08-02T13:35:01+00:00",
+          "raw_text": "Routine logistics note 56: quinn reports that unrelated storage item S5-56 carries audit marker K17. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 56
+          }
+        },
+        {
+          "event_id": "s5-e57",
+          "valid_time": "2026-08-02T13:40:00+00:00",
+          "recorded_at": "2026-08-02T13:40:01+00:00",
+          "raw_text": "Routine logistics note 57: rae reports that unrelated storage item S5-57 carries audit marker K24. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 57
+          }
+        },
+        {
+          "event_id": "s5-e58",
+          "valid_time": "2026-08-02T13:45:00+00:00",
+          "recorded_at": "2026-08-02T13:45:01+00:00",
+          "raw_text": "Routine logistics note 58: sol reports that unrelated storage item S5-58 carries audit marker K2. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 58
+          }
+        },
+        {
+          "event_id": "s5-e59",
+          "valid_time": "2026-08-02T13:50:00+00:00",
+          "recorded_at": "2026-08-02T13:50:01+00:00",
+          "raw_text": "Routine logistics note 59: uma reports that unrelated storage item S5-59 carries audit marker K9. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 59
+          }
+        },
+        {
+          "event_id": "s5-e60",
+          "valid_time": "2026-08-02T13:55:00+00:00",
+          "recorded_at": "2026-08-02T13:55:01+00:00",
+          "raw_text": "Routine logistics note 60: victor reports that unrelated storage item S5-60 carries audit marker K16. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 60
+          }
+        },
+        {
+          "event_id": "s5-e61",
+          "valid_time": "2026-08-02T14:00:00+00:00",
+          "recorded_at": "2026-08-02T14:00:01+00:00",
+          "raw_text": "Routine logistics note 61: wen reports that unrelated storage item S5-61 carries audit marker K23. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 61
+          }
+        },
+        {
+          "event_id": "s5-e62",
+          "valid_time": "2026-08-02T14:05:00+00:00",
+          "recorded_at": "2026-08-02T14:05:01+00:00",
+          "raw_text": "Routine logistics note 62: noah reports that unrelated storage item S5-62 carries audit marker K1. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 62
+          }
+        },
+        {
+          "event_id": "s5-e63",
+          "valid_time": "2026-08-02T14:10:00+00:00",
+          "recorded_at": "2026-08-02T14:10:01+00:00",
+          "raw_text": "The authoritative finance ledger records 150K as the approved project budget cap replacing 135K. Aria sees the ledger update; Maya does not receive it.",
+          "source_id": "finance_ledger",
+          "actor_id": "finance_ledger",
+          "observer_ids": [
+            "aria"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 63,
+            "scene_fact": true,
+            "correction": true
+          }
+        },
+        {
+          "event_id": "s5-e64",
+          "valid_time": "2026-08-02T14:15:00+00:00",
+          "recorded_at": "2026-08-02T14:15:01+00:00",
+          "raw_text": "Routine logistics note 64: quinn reports that unrelated storage item S5-64 carries audit marker K15. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 64
+          }
+        },
+        {
+          "event_id": "s5-e65",
+          "valid_time": "2026-08-02T14:20:00+00:00",
+          "recorded_at": "2026-08-02T14:20:01+00:00",
+          "raw_text": "Routine logistics note 65: rae reports that unrelated storage item S5-65 carries audit marker K22. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 65
+          }
+        },
+        {
+          "event_id": "s5-e66",
+          "valid_time": "2026-08-02T14:25:00+00:00",
+          "recorded_at": "2026-08-02T14:25:01+00:00",
+          "raw_text": "Routine logistics note 66: sol reports that unrelated storage item S5-66 carries audit marker K0. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 66
+          }
+        },
+        {
+          "event_id": "s5-e67",
+          "valid_time": "2026-08-02T14:30:00+00:00",
+          "recorded_at": "2026-08-02T14:30:01+00:00",
+          "raw_text": "Routine logistics note 67: uma reports that unrelated storage item S5-67 carries audit marker K7. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 67
+          }
+        },
+        {
+          "event_id": "s5-e68",
+          "valid_time": "2026-08-02T14:35:00+00:00",
+          "recorded_at": "2026-08-02T14:35:01+00:00",
+          "raw_text": "Routine logistics note 68: victor reports that unrelated storage item S5-68 carries audit marker K14. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 68
+          }
+        },
+        {
+          "event_id": "s5-e69",
+          "valid_time": "2026-08-02T14:40:00+00:00",
+          "recorded_at": "2026-08-02T14:40:01+00:00",
+          "raw_text": "Routine logistics note 69: wen reports that unrelated storage item S5-69 carries audit marker K21. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 69
+          }
+        },
+        {
+          "event_id": "s5-e70",
+          "valid_time": "2026-08-02T14:45:00+00:00",
+          "recorded_at": "2026-08-02T14:45:01+00:00",
+          "raw_text": "Routine logistics note 70: noah reports that unrelated storage item S5-70 carries audit marker K28. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 70
+          }
+        },
+        {
+          "event_id": "s5-e71",
+          "valid_time": "2026-08-02T14:50:00+00:00",
+          "recorded_at": "2026-08-02T14:50:01+00:00",
+          "raw_text": "Routine logistics note 71: pia reports that unrelated storage item S5-71 carries audit marker K6. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 71
+          }
+        },
+        {
+          "event_id": "s5-e72",
+          "valid_time": "2026-08-02T14:55:00+00:00",
+          "recorded_at": "2026-08-02T14:55:01+00:00",
+          "raw_text": "Aria sends Maya a signed budget notice stating that 150K replaces 135K as the approved project budget cap.",
+          "source_id": "aria",
+          "actor_id": "aria",
+          "observer_ids": [],
+          "recipient_ids": [
+            "maya"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 72,
+            "official_notice": true
+          }
+        },
+        {
+          "event_id": "s5-e73",
+          "valid_time": "2026-08-02T15:00:00+00:00",
+          "recorded_at": "2026-08-02T15:00:01+00:00",
+          "raw_text": "Maya says: I received the signed 150K notice but want to verify the signature before deciding whether to accept it.",
+          "source_id": "maya",
+          "actor_id": "maya",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 73
+          }
+        },
+        {
+          "event_id": "s5-e74",
+          "valid_time": "2026-08-02T15:05:00+00:00",
+          "recorded_at": "2026-08-02T15:05:01+00:00",
+          "raw_text": "Routine logistics note 74: sol reports that unrelated storage item S5-74 carries audit marker K27. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 74
+          }
+        },
+        {
+          "event_id": "s5-e75",
+          "valid_time": "2026-08-02T15:10:00+00:00",
+          "recorded_at": "2026-08-02T15:10:01+00:00",
+          "raw_text": "Routine logistics note 75: uma reports that unrelated storage item S5-75 carries audit marker K5. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 75
+          }
+        },
+        {
+          "event_id": "s5-e76",
+          "valid_time": "2026-08-02T15:15:00+00:00",
+          "recorded_at": "2026-08-02T15:15:01+00:00",
+          "raw_text": "Routine logistics note 76: victor reports that unrelated storage item S5-76 carries audit marker K12. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 76
+          }
+        },
+        {
+          "event_id": "s5-e77",
+          "valid_time": "2026-08-02T15:20:00+00:00",
+          "recorded_at": "2026-08-02T15:20:01+00:00",
+          "raw_text": "Routine logistics note 77: wen reports that unrelated storage item S5-77 carries audit marker K19. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 77
+          }
+        },
+        {
+          "event_id": "s5-e78",
+          "valid_time": "2026-08-02T15:25:00+00:00",
+          "recorded_at": "2026-08-02T15:25:01+00:00",
+          "raw_text": "Maya says: I verified the signed notice and now accept 150K as the approved project budget cap.",
+          "source_id": "maya",
+          "actor_id": "maya",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 78
+          }
+        },
+        {
+          "event_id": "s5-e79",
+          "valid_time": "2026-08-02T15:30:00+00:00",
+          "recorded_at": "2026-08-02T15:30:01+00:00",
+          "raw_text": "Routine logistics note 79: pia reports that unrelated storage item S5-79 carries audit marker K4. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 79
+          }
+        },
+        {
+          "event_id": "s5-e80",
+          "valid_time": "2026-08-02T15:35:00+00:00",
+          "recorded_at": "2026-08-02T15:35:01+00:00",
+          "raw_text": "Routine logistics note 80: quinn reports that unrelated storage item S5-80 carries audit marker K11. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 80
+          }
+        }
+      ],
+      "queries": [
+        {
+          "query_id": "s5-q1",
+          "after_event": 10,
+          "target_agent_id": "maya",
+          "allowed_labels": [
+            "120K",
+            "135K",
+            "150K",
+            "UNCERTAIN"
+          ],
+          "question": "Which project budget cap does Maya currently believe is approved?"
+        },
+        {
+          "query_id": "s5-q2",
+          "after_event": 32,
+          "target_agent_id": "maya",
+          "allowed_labels": [
+            "120K",
+            "135K",
+            "150K",
+            "UNCERTAIN"
+          ],
+          "question": "After Rafi relayed Aria's change and Maya stated her reaction, which budget cap does Maya believe is approved?"
+        },
+        {
+          "query_id": "s5-q3",
+          "after_event": 42,
+          "target_agent_id": "maya",
+          "allowed_labels": [
+            "120K",
+            "135K",
+            "150K",
+            "UNCERTAIN"
+          ],
+          "question": "After Maya received Aria's direct correction but before deciding, which budget cap is Maya currently supported as believing?"
+        },
+        {
+          "query_id": "s5-q4",
+          "after_event": 68,
+          "target_agent_id": "maya",
+          "allowed_labels": [
+            "120K",
+            "135K",
+            "150K",
+            "UNCERTAIN"
+          ],
+          "question": "The finance ledger has changed again without informing Maya. Which budget cap does Maya currently believe is approved?"
+        },
+        {
+          "query_id": "s5-q5",
+          "after_event": 80,
+          "target_agent_id": "maya",
+          "allowed_labels": [
+            "120K",
+            "135K",
+            "150K",
+            "UNCERTAIN"
+          ],
+          "question": "At the end of the stream, which project budget cap does Maya currently believe is approved?"
+        },
+        {
+          "query_id": "s5-q6",
+          "after_event": 80,
+          "event_time": "2026-08-02T11:55:00+00:00",
+          "target_agent_id": "maya",
+          "allowed_labels": [
+            "120K",
+            "135K",
+            "150K",
+            "UNCERTAIN"
+          ],
+          "question": "At historical time 2026-08-02T11:55:00+00:00, before Maya received Aria's direct 135K correction, which budget cap did Maya believe was approved?"
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "target_agent_id": "nora",
+      "events": [
+        {
+          "event_id": "s6-e01",
+          "valid_time": "2026-08-03T09:00:00+00:00",
+          "recorded_at": "2026-08-03T09:00:01+00:00",
+          "raw_text": "Routine logistics note 01: sol reports that unrelated storage item S6-01 carries audit marker K10. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 1
+          }
+        },
+        {
+          "event_id": "s6-e02",
+          "valid_time": "2026-08-03T09:05:00+00:00",
+          "recorded_at": "2026-08-03T09:05:01+00:00",
+          "raw_text": "Operations lead Omar tells Nora: the current assigned shipping dock is Dock Alpha.",
+          "source_id": "omar",
+          "actor_id": "omar",
+          "observer_ids": [],
+          "recipient_ids": [
+            "nora"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 2
+          }
+        },
+        {
+          "event_id": "s6-e03",
+          "valid_time": "2026-08-03T09:10:00+00:00",
+          "recorded_at": "2026-08-03T09:10:01+00:00",
+          "raw_text": "Routine logistics note 03: victor reports that unrelated storage item S6-03 carries audit marker K24. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 3
+          }
+        },
+        {
+          "event_id": "s6-e04",
+          "valid_time": "2026-08-03T09:15:00+00:00",
+          "recorded_at": "2026-08-03T09:15:01+00:00",
+          "raw_text": "Nora says: I accept Dock Alpha as the current assigned shipping dock.",
+          "source_id": "nora",
+          "actor_id": "nora",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 4
+          }
+        },
+        {
+          "event_id": "s6-e05",
+          "valid_time": "2026-08-03T09:20:00+00:00",
+          "recorded_at": "2026-08-03T09:20:01+00:00",
+          "raw_text": "Routine logistics note 05: noah reports that unrelated storage item S6-05 carries audit marker K9. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 5
+          }
+        },
+        {
+          "event_id": "s6-e06",
+          "valid_time": "2026-08-03T09:25:00+00:00",
+          "recorded_at": "2026-08-03T09:25:01+00:00",
+          "raw_text": "Routine logistics note 06: pia reports that unrelated storage item S6-06 carries audit marker K16. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 6
+          }
+        },
+        {
+          "event_id": "s6-e07",
+          "valid_time": "2026-08-03T09:30:00+00:00",
+          "recorded_at": "2026-08-03T09:30:01+00:00",
+          "raw_text": "Routine logistics note 07: quinn reports that unrelated storage item S6-07 carries audit marker K23. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 7
+          }
+        },
+        {
+          "event_id": "s6-e08",
+          "valid_time": "2026-08-03T09:35:00+00:00",
+          "recorded_at": "2026-08-03T09:35:01+00:00",
+          "raw_text": "Routine logistics note 08: rae reports that unrelated storage item S6-08 carries audit marker K1. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 8
+          }
+        },
+        {
+          "event_id": "s6-e09",
+          "valid_time": "2026-08-03T09:40:00+00:00",
+          "recorded_at": "2026-08-03T09:40:01+00:00",
+          "raw_text": "Routine logistics note 09: sol reports that unrelated storage item S6-09 carries audit marker K8. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 9
+          }
+        },
+        {
+          "event_id": "s6-e10",
+          "valid_time": "2026-08-03T09:45:00+00:00",
+          "recorded_at": "2026-08-03T09:45:01+00:00",
+          "raw_text": "Routine logistics note 10: uma reports that unrelated storage item S6-10 carries audit marker K15. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 10
+          }
+        },
+        {
+          "event_id": "s6-e11",
+          "valid_time": "2026-08-03T09:50:00+00:00",
+          "recorded_at": "2026-08-03T09:50:01+00:00",
+          "raw_text": "Routine logistics note 11: victor reports that unrelated storage item S6-11 carries audit marker K22. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 11
+          }
+        },
+        {
+          "event_id": "s6-e12",
+          "valid_time": "2026-08-03T09:55:00+00:00",
+          "recorded_at": "2026-08-03T09:55:01+00:00",
+          "raw_text": "Routine logistics note 12: wen reports that unrelated storage item S6-12 carries audit marker K0. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 12
+          }
+        },
+        {
+          "event_id": "s6-e13",
+          "valid_time": "2026-08-03T10:00:00+00:00",
+          "recorded_at": "2026-08-03T10:00:01+00:00",
+          "raw_text": "Routine logistics note 13: noah reports that unrelated storage item S6-13 carries audit marker K7. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 13
+          }
+        },
+        {
+          "event_id": "s6-e14",
+          "valid_time": "2026-08-03T10:05:00+00:00",
+          "recorded_at": "2026-08-03T10:05:01+00:00",
+          "raw_text": "Routine logistics note 14: pia reports that unrelated storage item S6-14 carries audit marker K14. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 14
+          }
+        },
+        {
+          "event_id": "s6-e15",
+          "valid_time": "2026-08-03T10:10:00+00:00",
+          "recorded_at": "2026-08-03T10:10:01+00:00",
+          "raw_text": "Tessa tells Nora: Omar told me that Dock Beta replaces Dock Alpha as the assigned shipping dock.",
+          "source_id": "tessa",
+          "actor_id": "tessa",
+          "observer_ids": [],
+          "recipient_ids": [
+            "nora"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 15
+          }
+        },
+        {
+          "event_id": "s6-e16",
+          "valid_time": "2026-08-03T10:15:00+00:00",
+          "recorded_at": "2026-08-03T10:15:01+00:00",
+          "raw_text": "Nora says: I trust Tessa's relay and accept Dock Beta as the current assigned shipping dock.",
+          "source_id": "nora",
+          "actor_id": "nora",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 16
+          }
+        },
+        {
+          "event_id": "s6-e17",
+          "valid_time": "2026-08-03T10:20:00+00:00",
+          "recorded_at": "2026-08-03T10:20:01+00:00",
+          "raw_text": "Routine logistics note 17: sol reports that unrelated storage item S6-17 carries audit marker K6. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 17
+          }
+        },
+        {
+          "event_id": "s6-e18",
+          "valid_time": "2026-08-03T10:25:00+00:00",
+          "recorded_at": "2026-08-03T10:25:01+00:00",
+          "raw_text": "Routine logistics note 18: uma reports that unrelated storage item S6-18 carries audit marker K13. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 18
+          }
+        },
+        {
+          "event_id": "s6-e19",
+          "valid_time": "2026-08-03T10:30:00+00:00",
+          "recorded_at": "2026-08-03T10:30:01+00:00",
+          "raw_text": "Routine logistics note 19: victor reports that unrelated storage item S6-19 carries audit marker K20. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 19
+          }
+        },
+        {
+          "event_id": "s6-e20",
+          "valid_time": "2026-08-03T10:35:00+00:00",
+          "recorded_at": "2026-08-03T10:35:01+00:00",
+          "raw_text": "Routine logistics note 20: wen reports that unrelated storage item S6-20 carries audit marker K27. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 20
+          }
+        },
+        {
+          "event_id": "s6-e21",
+          "valid_time": "2026-08-03T10:40:00+00:00",
+          "recorded_at": "2026-08-03T10:40:01+00:00",
+          "raw_text": "Routine logistics note 21: noah reports that unrelated storage item S6-21 carries audit marker K5. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 21
+          }
+        },
+        {
+          "event_id": "s6-e22",
+          "valid_time": "2026-08-03T10:45:00+00:00",
+          "recorded_at": "2026-08-03T10:45:01+00:00",
+          "raw_text": "Routine logistics note 22: pia reports that unrelated storage item S6-22 carries audit marker K12. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 22
+          }
+        },
+        {
+          "event_id": "s6-e23",
+          "valid_time": "2026-08-03T10:50:00+00:00",
+          "recorded_at": "2026-08-03T10:50:01+00:00",
+          "raw_text": "Routine logistics note 23: quinn reports that unrelated storage item S6-23 carries audit marker K19. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 23
+          }
+        },
+        {
+          "event_id": "s6-e24",
+          "valid_time": "2026-08-03T10:55:00+00:00",
+          "recorded_at": "2026-08-03T10:55:01+00:00",
+          "raw_text": "Routine logistics note 24: rae reports that unrelated storage item S6-24 carries audit marker K26. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 24
+          }
+        },
+        {
+          "event_id": "s6-e25",
+          "valid_time": "2026-08-03T11:00:00+00:00",
+          "recorded_at": "2026-08-03T11:00:01+00:00",
+          "raw_text": "Routine logistics note 25: sol reports that unrelated storage item S6-25 carries audit marker K4. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 25
+          }
+        },
+        {
+          "event_id": "s6-e26",
+          "valid_time": "2026-08-03T11:05:00+00:00",
+          "recorded_at": "2026-08-03T11:05:01+00:00",
+          "raw_text": "Routine logistics note 26: uma reports that unrelated storage item S6-26 carries audit marker K11. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 26
+          }
+        },
+        {
+          "event_id": "s6-e27",
+          "valid_time": "2026-08-03T11:10:00+00:00",
+          "recorded_at": "2026-08-03T11:10:01+00:00",
+          "raw_text": "Routine logistics note 27: victor reports that unrelated storage item S6-27 carries audit marker K18. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 27
+          }
+        },
+        {
+          "event_id": "s6-e28",
+          "valid_time": "2026-08-03T11:15:00+00:00",
+          "recorded_at": "2026-08-03T11:15:01+00:00",
+          "raw_text": "Routine logistics note 28: wen reports that unrelated storage item S6-28 carries audit marker K25. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 28
+          }
+        },
+        {
+          "event_id": "s6-e29",
+          "valid_time": "2026-08-03T11:20:00+00:00",
+          "recorded_at": "2026-08-03T11:20:01+00:00",
+          "raw_text": "Routine logistics note 29: noah reports that unrelated storage item S6-29 carries audit marker K3. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 29
+          }
+        },
+        {
+          "event_id": "s6-e30",
+          "valid_time": "2026-08-03T11:25:00+00:00",
+          "recorded_at": "2026-08-03T11:25:01+00:00",
+          "raw_text": "Omar directly confirms to Nora that Dock Beta replaced Dock Alpha as the assigned shipping dock.",
+          "source_id": "omar",
+          "actor_id": "omar",
+          "observer_ids": [],
+          "recipient_ids": [
+            "nora"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 30,
+            "direct_correction": true
+          }
+        },
+        {
+          "event_id": "s6-e31",
+          "valid_time": "2026-08-03T11:30:00+00:00",
+          "recorded_at": "2026-08-03T11:30:01+00:00",
+          "raw_text": "Routine logistics note 31: quinn reports that unrelated storage item S6-31 carries audit marker K17. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 31
+          }
+        },
+        {
+          "event_id": "s6-e32",
+          "valid_time": "2026-08-03T11:35:00+00:00",
+          "recorded_at": "2026-08-03T11:35:01+00:00",
+          "raw_text": "Routine logistics note 32: rae reports that unrelated storage item S6-32 carries audit marker K24. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 32
+          }
+        },
+        {
+          "event_id": "s6-e33",
+          "valid_time": "2026-08-03T11:40:00+00:00",
+          "recorded_at": "2026-08-03T11:40:01+00:00",
+          "raw_text": "Routine logistics note 33: sol reports that unrelated storage item S6-33 carries audit marker K2. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 33
+          }
+        },
+        {
+          "event_id": "s6-e34",
+          "valid_time": "2026-08-03T11:45:00+00:00",
+          "recorded_at": "2026-08-03T11:45:01+00:00",
+          "raw_text": "Routine logistics note 34: uma reports that unrelated storage item S6-34 carries audit marker K9. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 34
+          }
+        },
+        {
+          "event_id": "s6-e35",
+          "valid_time": "2026-08-03T11:50:00+00:00",
+          "recorded_at": "2026-08-03T11:50:01+00:00",
+          "raw_text": "Routine logistics note 35: victor reports that unrelated storage item S6-35 carries audit marker K16. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 35
+          }
+        },
+        {
+          "event_id": "s6-e36",
+          "valid_time": "2026-08-03T11:55:00+00:00",
+          "recorded_at": "2026-08-03T11:55:01+00:00",
+          "raw_text": "Routine logistics note 36: wen reports that unrelated storage item S6-36 carries audit marker K23. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 36
+          }
+        },
+        {
+          "event_id": "s6-e37",
+          "valid_time": "2026-08-03T12:00:00+00:00",
+          "recorded_at": "2026-08-03T12:00:01+00:00",
+          "raw_text": "Routine logistics note 37: noah reports that unrelated storage item S6-37 carries audit marker K1. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 37
+          }
+        },
+        {
+          "event_id": "s6-e38",
+          "valid_time": "2026-08-03T12:05:00+00:00",
+          "recorded_at": "2026-08-03T12:05:01+00:00",
+          "raw_text": "Routine logistics note 38: pia reports that unrelated storage item S6-38 carries audit marker K8. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 38
+          }
+        },
+        {
+          "event_id": "s6-e39",
+          "valid_time": "2026-08-03T12:10:00+00:00",
+          "recorded_at": "2026-08-03T12:10:01+00:00",
+          "raw_text": "Routine logistics note 39: quinn reports that unrelated storage item S6-39 carries audit marker K15. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 39
+          }
+        },
+        {
+          "event_id": "s6-e40",
+          "valid_time": "2026-08-03T12:15:00+00:00",
+          "recorded_at": "2026-08-03T12:15:01+00:00",
+          "raw_text": "Routine logistics note 40: rae reports that unrelated storage item S6-40 carries audit marker K22. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 40
+          }
+        },
+        {
+          "event_id": "s6-e41",
+          "valid_time": "2026-08-03T12:20:00+00:00",
+          "recorded_at": "2026-08-03T12:20:01+00:00",
+          "raw_text": "Routine logistics note 41: sol reports that unrelated storage item S6-41 carries audit marker K0. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 41
+          }
+        },
+        {
+          "event_id": "s6-e42",
+          "valid_time": "2026-08-03T12:25:00+00:00",
+          "recorded_at": "2026-08-03T12:25:01+00:00",
+          "raw_text": "Routine logistics note 42: uma reports that unrelated storage item S6-42 carries audit marker K7. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 42
+          }
+        },
+        {
+          "event_id": "s6-e43",
+          "valid_time": "2026-08-03T12:30:00+00:00",
+          "recorded_at": "2026-08-03T12:30:01+00:00",
+          "raw_text": "Routine logistics note 43: victor reports that unrelated storage item S6-43 carries audit marker K14. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 43
+          }
+        },
+        {
+          "event_id": "s6-e44",
+          "valid_time": "2026-08-03T12:35:00+00:00",
+          "recorded_at": "2026-08-03T12:35:01+00:00",
+          "raw_text": "Routine logistics note 44: wen reports that unrelated storage item S6-44 carries audit marker K21. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 44
+          }
+        },
+        {
+          "event_id": "s6-e45",
+          "valid_time": "2026-08-03T12:40:00+00:00",
+          "recorded_at": "2026-08-03T12:40:01+00:00",
+          "raw_text": "The authoritative dispatch console records Dock Gamma as the assigned shipping dock replacing Dock Beta. Omar sees the console update; Nora does not receive it.",
+          "source_id": "dispatch_console",
+          "actor_id": "dispatch_console",
+          "observer_ids": [
+            "omar"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 45,
+            "scene_fact": true,
+            "correction": true
+          }
+        },
+        {
+          "event_id": "s6-e46",
+          "valid_time": "2026-08-03T12:45:00+00:00",
+          "recorded_at": "2026-08-03T12:45:01+00:00",
+          "raw_text": "Routine logistics note 46: pia reports that unrelated storage item S6-46 carries audit marker K6. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 46
+          }
+        },
+        {
+          "event_id": "s6-e47",
+          "valid_time": "2026-08-03T12:50:00+00:00",
+          "recorded_at": "2026-08-03T12:50:01+00:00",
+          "raw_text": "Routine logistics note 47: quinn reports that unrelated storage item S6-47 carries audit marker K13. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 47
+          }
+        },
+        {
+          "event_id": "s6-e48",
+          "valid_time": "2026-08-03T12:55:00+00:00",
+          "recorded_at": "2026-08-03T12:55:01+00:00",
+          "raw_text": "Routine logistics note 48: rae reports that unrelated storage item S6-48 carries audit marker K20. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 48
+          }
+        },
+        {
+          "event_id": "s6-e49",
+          "valid_time": "2026-08-03T13:00:00+00:00",
+          "recorded_at": "2026-08-03T13:00:01+00:00",
+          "raw_text": "Routine logistics note 49: sol reports that unrelated storage item S6-49 carries audit marker K27. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 49
+          }
+        },
+        {
+          "event_id": "s6-e50",
+          "valid_time": "2026-08-03T13:05:00+00:00",
+          "recorded_at": "2026-08-03T13:05:01+00:00",
+          "raw_text": "Routine logistics note 50: uma reports that unrelated storage item S6-50 carries audit marker K5. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 50
+          }
+        },
+        {
+          "event_id": "s6-e51",
+          "valid_time": "2026-08-03T13:10:00+00:00",
+          "recorded_at": "2026-08-03T13:10:01+00:00",
+          "raw_text": "Routine logistics note 51: victor reports that unrelated storage item S6-51 carries audit marker K12. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 51
+          }
+        },
+        {
+          "event_id": "s6-e52",
+          "valid_time": "2026-08-03T13:15:00+00:00",
+          "recorded_at": "2026-08-03T13:15:01+00:00",
+          "raw_text": "Routine logistics note 52: wen reports that unrelated storage item S6-52 carries audit marker K19. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 52
+          }
+        },
+        {
+          "event_id": "s6-e53",
+          "valid_time": "2026-08-03T13:20:00+00:00",
+          "recorded_at": "2026-08-03T13:20:01+00:00",
+          "raw_text": "Routine logistics note 53: noah reports that unrelated storage item S6-53 carries audit marker K26. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 53
+          }
+        },
+        {
+          "event_id": "s6-e54",
+          "valid_time": "2026-08-03T13:25:00+00:00",
+          "recorded_at": "2026-08-03T13:25:01+00:00",
+          "raw_text": "Routine logistics note 54: pia reports that unrelated storage item S6-54 carries audit marker K4. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 54
+          }
+        },
+        {
+          "event_id": "s6-e55",
+          "valid_time": "2026-08-03T13:30:00+00:00",
+          "recorded_at": "2026-08-03T13:30:01+00:00",
+          "raw_text": "Omar directly tells Nora: Dock Gamma replaces Dock Beta as the assigned shipping dock.",
+          "source_id": "omar",
+          "actor_id": "omar",
+          "observer_ids": [],
+          "recipient_ids": [
+            "nora"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 55,
+            "direct_correction": true
+          }
+        },
+        {
+          "event_id": "s6-e56",
+          "valid_time": "2026-08-03T13:35:00+00:00",
+          "recorded_at": "2026-08-03T13:35:01+00:00",
+          "raw_text": "Nora says: I received the Dock Gamma correction, but without a signed dispatch notice I reject it for now and still believe Dock Beta is assigned.",
+          "source_id": "nora",
+          "actor_id": "nora",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 56
+          }
+        },
+        {
+          "event_id": "s6-e57",
+          "valid_time": "2026-08-03T13:40:00+00:00",
+          "recorded_at": "2026-08-03T13:40:01+00:00",
+          "raw_text": "Routine logistics note 57: sol reports that unrelated storage item S6-57 carries audit marker K25. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 57
+          }
+        },
+        {
+          "event_id": "s6-e58",
+          "valid_time": "2026-08-03T13:45:00+00:00",
+          "recorded_at": "2026-08-03T13:45:01+00:00",
+          "raw_text": "Routine logistics note 58: uma reports that unrelated storage item S6-58 carries audit marker K3. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 58
+          }
+        },
+        {
+          "event_id": "s6-e59",
+          "valid_time": "2026-08-03T13:50:00+00:00",
+          "recorded_at": "2026-08-03T13:50:01+00:00",
+          "raw_text": "Routine logistics note 59: victor reports that unrelated storage item S6-59 carries audit marker K10. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 59
+          }
+        },
+        {
+          "event_id": "s6-e60",
+          "valid_time": "2026-08-03T13:55:00+00:00",
+          "recorded_at": "2026-08-03T13:55:01+00:00",
+          "raw_text": "Routine logistics note 60: wen reports that unrelated storage item S6-60 carries audit marker K17. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 60
+          }
+        },
+        {
+          "event_id": "s6-e61",
+          "valid_time": "2026-08-03T14:00:00+00:00",
+          "recorded_at": "2026-08-03T14:00:01+00:00",
+          "raw_text": "Routine logistics note 61: noah reports that unrelated storage item S6-61 carries audit marker K24. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 61
+          }
+        },
+        {
+          "event_id": "s6-e62",
+          "valid_time": "2026-08-03T14:05:00+00:00",
+          "recorded_at": "2026-08-03T14:05:01+00:00",
+          "raw_text": "Routine logistics note 62: pia reports that unrelated storage item S6-62 carries audit marker K2. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "pia",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 62
+          }
+        },
+        {
+          "event_id": "s6-e63",
+          "valid_time": "2026-08-03T14:10:00+00:00",
+          "recorded_at": "2026-08-03T14:10:01+00:00",
+          "raw_text": "Routine logistics note 63: quinn reports that unrelated storage item S6-63 carries audit marker K9. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 63
+          }
+        },
+        {
+          "event_id": "s6-e64",
+          "valid_time": "2026-08-03T14:15:00+00:00",
+          "recorded_at": "2026-08-03T14:15:01+00:00",
+          "raw_text": "Routine logistics note 64: rae reports that unrelated storage item S6-64 carries audit marker K16. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 64
+          }
+        },
+        {
+          "event_id": "s6-e65",
+          "valid_time": "2026-08-03T14:20:00+00:00",
+          "recorded_at": "2026-08-03T14:20:01+00:00",
+          "raw_text": "Routine logistics note 65: sol reports that unrelated storage item S6-65 carries audit marker K23. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 65
+          }
+        },
+        {
+          "event_id": "s6-e66",
+          "valid_time": "2026-08-03T14:25:00+00:00",
+          "recorded_at": "2026-08-03T14:25:01+00:00",
+          "raw_text": "Routine logistics note 66: uma reports that unrelated storage item S6-66 carries audit marker K1. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 66
+          }
+        },
+        {
+          "event_id": "s6-e67",
+          "valid_time": "2026-08-03T14:30:00+00:00",
+          "recorded_at": "2026-08-03T14:30:01+00:00",
+          "raw_text": "Routine logistics note 67: victor reports that unrelated storage item S6-67 carries audit marker K8. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 67
+          }
+        },
+        {
+          "event_id": "s6-e68",
+          "valid_time": "2026-08-03T14:35:00+00:00",
+          "recorded_at": "2026-08-03T14:35:01+00:00",
+          "raw_text": "Routine logistics note 68: wen reports that unrelated storage item S6-68 carries audit marker K15. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 68
+          }
+        },
+        {
+          "event_id": "s6-e69",
+          "valid_time": "2026-08-03T14:40:00+00:00",
+          "recorded_at": "2026-08-03T14:40:01+00:00",
+          "raw_text": "Routine logistics note 69: noah reports that unrelated storage item S6-69 carries audit marker K22. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 69
+          }
+        },
+        {
+          "event_id": "s6-e70",
+          "valid_time": "2026-08-03T14:45:00+00:00",
+          "recorded_at": "2026-08-03T14:45:01+00:00",
+          "raw_text": "Omar sends Nora a signed dispatch notice stating that Dock Gamma replaces Dock Beta as the assigned shipping dock.",
+          "source_id": "omar",
+          "actor_id": "omar",
+          "observer_ids": [],
+          "recipient_ids": [
+            "nora"
+          ],
+          "metadata": {
+            "track": "primary",
+            "sequence": 70,
+            "official_notice": true
+          }
+        },
+        {
+          "event_id": "s6-e71",
+          "valid_time": "2026-08-03T14:50:00+00:00",
+          "recorded_at": "2026-08-03T14:50:01+00:00",
+          "raw_text": "Nora says: I received the signed Dock Gamma notice, but I have not yet decided whether to accept it.",
+          "source_id": "nora",
+          "actor_id": "nora",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 71
+          }
+        },
+        {
+          "event_id": "s6-e72",
+          "valid_time": "2026-08-03T14:55:00+00:00",
+          "recorded_at": "2026-08-03T14:55:01+00:00",
+          "raw_text": "Routine logistics note 72: rae reports that unrelated storage item S6-72 carries audit marker K14. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 72
+          }
+        },
+        {
+          "event_id": "s6-e73",
+          "valid_time": "2026-08-03T15:00:00+00:00",
+          "recorded_at": "2026-08-03T15:00:01+00:00",
+          "raw_text": "Routine logistics note 73: sol reports that unrelated storage item S6-73 carries audit marker K21. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "sol",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 73
+          }
+        },
+        {
+          "event_id": "s6-e74",
+          "valid_time": "2026-08-03T15:05:00+00:00",
+          "recorded_at": "2026-08-03T15:05:01+00:00",
+          "raw_text": "Routine logistics note 74: uma reports that unrelated storage item S6-74 carries audit marker K28. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "uma",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 74
+          }
+        },
+        {
+          "event_id": "s6-e75",
+          "valid_time": "2026-08-03T15:10:00+00:00",
+          "recorded_at": "2026-08-03T15:10:01+00:00",
+          "raw_text": "Routine logistics note 75: victor reports that unrelated storage item S6-75 carries audit marker K6. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "victor",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 75
+          }
+        },
+        {
+          "event_id": "s6-e76",
+          "valid_time": "2026-08-03T15:15:00+00:00",
+          "recorded_at": "2026-08-03T15:15:01+00:00",
+          "raw_text": "Routine logistics note 76: wen reports that unrelated storage item S6-76 carries audit marker K13. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "wen",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 76
+          }
+        },
+        {
+          "event_id": "s6-e77",
+          "valid_time": "2026-08-03T15:20:00+00:00",
+          "recorded_at": "2026-08-03T15:20:01+00:00",
+          "raw_text": "Routine logistics note 77: noah reports that unrelated storage item S6-77 carries audit marker K20. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "noah",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 77
+          }
+        },
+        {
+          "event_id": "s6-e78",
+          "valid_time": "2026-08-03T15:25:00+00:00",
+          "recorded_at": "2026-08-03T15:25:01+00:00",
+          "raw_text": "Nora says: I verified the signed dispatch notice and now accept Dock Gamma as the assigned shipping dock.",
+          "source_id": "nora",
+          "actor_id": "nora",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "primary",
+            "sequence": 78
+          }
+        },
+        {
+          "event_id": "s6-e79",
+          "valid_time": "2026-08-03T15:30:00+00:00",
+          "recorded_at": "2026-08-03T15:30:01+00:00",
+          "raw_text": "Routine logistics note 79: quinn reports that unrelated storage item S6-79 carries audit marker K5. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "quinn",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 79
+          }
+        },
+        {
+          "event_id": "s6-e80",
+          "valid_time": "2026-08-03T15:35:00+00:00",
+          "recorded_at": "2026-08-03T15:35:01+00:00",
+          "raw_text": "Routine logistics note 80: rae reports that unrelated storage item S6-80 carries audit marker K12. This note is unrelated to the tracked person's decision state.",
+          "source_id": "routine_log",
+          "actor_id": "rae",
+          "observer_ids": [
+            "experimenter"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "track": "decoy",
+            "sequence": 80
+          }
+        }
+      ],
+      "queries": [
+        {
+          "query_id": "s6-q1",
+          "after_event": 10,
+          "target_agent_id": "nora",
+          "allowed_labels": [
+            "ALPHA",
+            "BETA",
+            "GAMMA",
+            "UNCERTAIN"
+          ],
+          "question": "Which shipping dock does Nora currently believe is assigned?"
+        },
+        {
+          "query_id": "s6-q2",
+          "after_event": 20,
+          "target_agent_id": "nora",
+          "allowed_labels": [
+            "ALPHA",
+            "BETA",
+            "GAMMA",
+            "UNCERTAIN"
+          ],
+          "question": "After Tessa's relay and Nora's explicit reaction, which shipping dock does Nora believe is assigned?"
+        },
+        {
+          "query_id": "s6-q3",
+          "after_event": 50,
+          "target_agent_id": "nora",
+          "allowed_labels": [
+            "ALPHA",
+            "BETA",
+            "GAMMA",
+            "UNCERTAIN"
+          ],
+          "question": "The dispatch console has changed without informing Nora. Which shipping dock does Nora currently believe is assigned?"
+        },
+        {
+          "query_id": "s6-q4",
+          "after_event": 60,
+          "target_agent_id": "nora",
+          "allowed_labels": [
+            "ALPHA",
+            "BETA",
+            "GAMMA",
+            "UNCERTAIN"
+          ],
+          "question": "After Omar directly told Nora about Dock Gamma and Nora stated her reaction, which dock does Nora believe is assigned?"
+        },
+        {
+          "query_id": "s6-q5",
+          "after_event": 72,
+          "target_agent_id": "nora",
+          "allowed_labels": [
+            "ALPHA",
+            "BETA",
+            "GAMMA",
+            "UNCERTAIN"
+          ],
+          "question": "After Nora received the signed Dock Gamma notice but before deciding whether to accept it, which dock is Nora currently supported as believing?"
+        },
+        {
+          "query_id": "s6-q6",
+          "after_event": 80,
+          "target_agent_id": "nora",
+          "allowed_labels": [
+            "ALPHA",
+            "BETA",
+            "GAMMA",
+            "UNCERTAIN"
+          ],
+          "question": "At the end of the stream, which shipping dock does Nora currently believe is assigned?"
+        }
+      ]
+    }
+  ]
+}
