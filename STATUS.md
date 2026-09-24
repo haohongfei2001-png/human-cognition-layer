@@ -4493,3 +4493,46 @@ Provider-free evidence:
 No provider-backed scored query in this package has been consumed yet.
 
 **Current gate: HCL_V05_SEEDED_STATE_CAPABILITY_V01_FROZEN_PREFLIGHT_PASS_PROVIDER_NOT_STARTED**
+
+
+## HCL v0.5 seeded state capability v0.1 closure
+
+Closure:
+- `reports/HCL_V05_SEEDED_STATE_CAPABILITY_V01_CLOSURE.md`
+
+Exact one-shot evidence:
+- run `36008684122`: SUCCESS
+- trigger/main `e835d975abced2670a5162bfd791c16d4bcc9e9b`
+- artifact `10812927658`
+- result JSON SHA-256:
+  `e8890e3154eff54eff720c0db7edf852af0b5dd6667d72a4550a17c200ddb322`
+
+Frozen result:
+- C full-history diagnostic: **22 / 24**
+- D routed v0.5 HCL: **24 / 24**
+- E strong ordinary memory: **23 / 24**
+- D semantic repair / extraction errors: **0 / 0**
+
+Efficiency on this implementation:
+- D input chars: 572,646 vs E 738,976;
+- D output chars: 26,993 vs E 264,182;
+- D provider wall: 194.61 s vs E 1515.37 s;
+- D max query projection: 844 chars vs E 7,993 chars.
+
+The pre-registered positive-utility threshold required D to exceed E by at
+least 2/24. The observed gap is +1, so **incremental utility is not formally
+established**. The result is nevertheless a strong positive signal: D is perfect
+on the fresh slice, has zero semantic failures/repairs, and is materially more
+efficient than E.
+
+The package is consumed and must not be rerun as fresh evidence.
+
+Next:
+one final internal replication against both:
+1. strong free-form persistent memory; and
+2. a strong generic LLM-managed structured-state baseline.
+
+If HCL clearly wins that fresh replication, stop internal synthetic iteration
+and move to external benchmark / cross-model transfer.
+
+**Current gate: HCL_V05_SEEDED_STATE_V01_COMPLETE_PROMISING_NOT_ESTABLISHED_STRONG_BASELINE_REPLICATION_NEXT**
