@@ -1,0 +1,2999 @@
+{
+  "format": "hcl-v05-seeded-state-capability-v01-fixture",
+  "query_context_char_budget": 8000,
+  "ordinary_memory_char_budget": 6000,
+  "streams": [
+    {
+      "id": "c1",
+      "target_agent_id": "iris",
+      "target_issue_key": "release_channel",
+      "ontology_seed": {
+        "release_channel": [
+          "STABLE",
+          "BETA",
+          "CANARY"
+        ],
+        "desk_zone": [
+          "NORTH",
+          "EAST",
+          "WEST"
+        ],
+        "alert_level": [
+          "LOW",
+          "MEDIUM",
+          "HIGH"
+        ]
+      },
+      "events": [
+        {
+          "event_id": "c1-e01",
+          "valid_time": "2026-06-10T08:05:00+00:00",
+          "recorded_at": "2026-06-10T08:05:01+00:00",
+          "raw_text": "coord_c1 tells sol: EAST is the current desk zone.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e02",
+          "valid_time": "2026-06-10T08:10:00+00:00",
+          "recorded_at": "2026-06-10T08:10:01+00:00",
+          "raw_text": "Release lead Lena tells Iris: the current release channel is STABLE.",
+          "source_id": "lena",
+          "actor_id": "lena",
+          "observer_ids": [],
+          "recipient_ids": [
+            "iris"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e03",
+          "valid_time": "2026-06-10T08:15:00+00:00",
+          "recorded_at": "2026-06-10T08:15:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept NORTH as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e04",
+          "valid_time": "2026-06-10T08:20:00+00:00",
+          "recorded_at": "2026-06-10T08:20:01+00:00",
+          "raw_text": "Iris says: I accept STABLE as the current release channel.",
+          "source_id": "iris",
+          "actor_id": "iris",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e05",
+          "valid_time": "2026-06-10T08:25:00+00:00",
+          "recorded_at": "2026-06-10T08:25:01+00:00",
+          "raw_text": "coord_c1 tells sol: WEST is the current desk zone.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e06",
+          "valid_time": "2026-06-10T08:30:00+00:00",
+          "recorded_at": "2026-06-10T08:30:01+00:00",
+          "raw_text": "coord_c1 tells taro: LOW replaces MEDIUM as the alert level.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "taro"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e07",
+          "valid_time": "2026-06-10T08:35:00+00:00",
+          "recorded_at": "2026-06-10T08:35:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept EAST as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e08",
+          "valid_time": "2026-06-10T08:40:00+00:00",
+          "recorded_at": "2026-06-10T08:40:01+00:00",
+          "raw_text": "rhea says: I accept HIGH as the current alert level.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e09",
+          "valid_time": "2026-06-10T08:45:00+00:00",
+          "recorded_at": "2026-06-10T08:45:01+00:00",
+          "raw_text": "coord_c1 tells sol: NORTH is the current desk zone.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e10",
+          "valid_time": "2026-06-10T08:50:00+00:00",
+          "recorded_at": "2026-06-10T08:50:01+00:00",
+          "raw_text": "coord_c1 tells taro: MEDIUM replaces HIGH as the alert level.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "taro"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e11",
+          "valid_time": "2026-06-10T08:55:00+00:00",
+          "recorded_at": "2026-06-10T08:55:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept WEST as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e12",
+          "valid_time": "2026-06-10T09:00:00+00:00",
+          "recorded_at": "2026-06-10T09:00:01+00:00",
+          "raw_text": "rhea says: I accept LOW as the current alert level.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e13",
+          "valid_time": "2026-06-10T09:05:00+00:00",
+          "recorded_at": "2026-06-10T09:05:01+00:00",
+          "raw_text": "coord_c1 tells sol: EAST is the current desk zone.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e14",
+          "valid_time": "2026-06-10T09:10:00+00:00",
+          "recorded_at": "2026-06-10T09:10:01+00:00",
+          "raw_text": "Lena tells Rowan only: BETA replaces STABLE as the release channel. Iris is not a recipient.",
+          "source_id": "lena",
+          "actor_id": "lena",
+          "observer_ids": [],
+          "recipient_ids": [
+            "rowan"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e15",
+          "valid_time": "2026-06-10T09:15:00+00:00",
+          "recorded_at": "2026-06-10T09:15:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept NORTH as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e16",
+          "valid_time": "2026-06-10T09:20:00+00:00",
+          "recorded_at": "2026-06-10T09:20:01+00:00",
+          "raw_text": "rhea says: I accept MEDIUM as the current alert level.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e17",
+          "valid_time": "2026-06-10T09:25:00+00:00",
+          "recorded_at": "2026-06-10T09:25:01+00:00",
+          "raw_text": "coord_c1 tells sol: WEST is the current desk zone.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e18",
+          "valid_time": "2026-06-10T09:30:00+00:00",
+          "recorded_at": "2026-06-10T09:30:01+00:00",
+          "raw_text": "coord_c1 tells taro: LOW replaces MEDIUM as the alert level.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "taro"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e19",
+          "valid_time": "2026-06-10T09:35:00+00:00",
+          "recorded_at": "2026-06-10T09:35:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept EAST as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e20",
+          "valid_time": "2026-06-10T09:40:00+00:00",
+          "recorded_at": "2026-06-10T09:40:01+00:00",
+          "raw_text": "Rowan tells Iris: Lena told me that BETA replaces STABLE as the release channel.",
+          "source_id": "rowan",
+          "actor_id": "rowan",
+          "observer_ids": [],
+          "recipient_ids": [
+            "iris"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e21",
+          "valid_time": "2026-06-10T09:45:00+00:00",
+          "recorded_at": "2026-06-10T09:45:01+00:00",
+          "raw_text": "Iris says: I reject BETA for now and still believe STABLE is the release channel.",
+          "source_id": "iris",
+          "actor_id": "iris",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e22",
+          "valid_time": "2026-06-10T09:50:00+00:00",
+          "recorded_at": "2026-06-10T09:50:01+00:00",
+          "raw_text": "coord_c1 tells taro: MEDIUM replaces HIGH as the alert level.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "taro"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e23",
+          "valid_time": "2026-06-10T09:55:00+00:00",
+          "recorded_at": "2026-06-10T09:55:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept WEST as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e24",
+          "valid_time": "2026-06-10T10:00:00+00:00",
+          "recorded_at": "2026-06-10T10:00:01+00:00",
+          "raw_text": "rhea says: I accept LOW as the current alert level.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e25",
+          "valid_time": "2026-06-10T10:05:00+00:00",
+          "recorded_at": "2026-06-10T10:05:01+00:00",
+          "raw_text": "coord_c1 tells sol: EAST is the current desk zone.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e26",
+          "valid_time": "2026-06-10T10:10:00+00:00",
+          "recorded_at": "2026-06-10T10:10:01+00:00",
+          "raw_text": "coord_c1 tells taro: HIGH replaces LOW as the alert level.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "taro"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e27",
+          "valid_time": "2026-06-10T10:15:00+00:00",
+          "recorded_at": "2026-06-10T10:15:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept NORTH as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e28",
+          "valid_time": "2026-06-10T10:20:00+00:00",
+          "recorded_at": "2026-06-10T10:20:01+00:00",
+          "raw_text": "rhea says: I accept MEDIUM as the current alert level.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e29",
+          "valid_time": "2026-06-10T10:25:00+00:00",
+          "recorded_at": "2026-06-10T10:25:01+00:00",
+          "raw_text": "coord_c1 tells sol: WEST is the current desk zone.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e30",
+          "valid_time": "2026-06-10T10:30:00+00:00",
+          "recorded_at": "2026-06-10T10:30:01+00:00",
+          "raw_text": "coord_c1 tells taro: LOW replaces MEDIUM as the alert level.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "taro"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e31",
+          "valid_time": "2026-06-10T10:35:00+00:00",
+          "recorded_at": "2026-06-10T10:35:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept EAST as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e32",
+          "valid_time": "2026-06-10T10:40:00+00:00",
+          "recorded_at": "2026-06-10T10:40:01+00:00",
+          "raw_text": "Lena directly tells Iris: BETA replaces STABLE as the release channel.",
+          "source_id": "lena",
+          "actor_id": "lena",
+          "observer_ids": [],
+          "recipient_ids": [
+            "iris"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e33",
+          "valid_time": "2026-06-10T10:45:00+00:00",
+          "recorded_at": "2026-06-10T10:45:01+00:00",
+          "raw_text": "Iris says: I received the BETA change, but I have not decided whether to accept or reject BETA yet.",
+          "source_id": "iris",
+          "actor_id": "iris",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e34",
+          "valid_time": "2026-06-10T10:50:00+00:00",
+          "recorded_at": "2026-06-10T10:50:01+00:00",
+          "raw_text": "coord_c1 tells taro: MEDIUM replaces HIGH as the alert level.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "taro"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e35",
+          "valid_time": "2026-06-10T10:55:00+00:00",
+          "recorded_at": "2026-06-10T10:55:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept WEST as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e36",
+          "valid_time": "2026-06-10T11:00:00+00:00",
+          "recorded_at": "2026-06-10T11:00:01+00:00",
+          "raw_text": "rhea says: I accept LOW as the current alert level.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e37",
+          "valid_time": "2026-06-10T11:05:00+00:00",
+          "recorded_at": "2026-06-10T11:05:01+00:00",
+          "raw_text": "coord_c1 tells sol: EAST is the current desk zone.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e38",
+          "valid_time": "2026-06-10T11:10:00+00:00",
+          "recorded_at": "2026-06-10T11:10:01+00:00",
+          "raw_text": "coord_c1 tells taro: HIGH replaces LOW as the alert level.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "taro"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e39",
+          "valid_time": "2026-06-10T11:15:00+00:00",
+          "recorded_at": "2026-06-10T11:15:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept NORTH as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e40",
+          "valid_time": "2026-06-10T11:20:00+00:00",
+          "recorded_at": "2026-06-10T11:20:01+00:00",
+          "raw_text": "rhea says: I accept MEDIUM as the current alert level.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e41",
+          "valid_time": "2026-06-10T11:25:00+00:00",
+          "recorded_at": "2026-06-10T11:25:01+00:00",
+          "raw_text": "coord_c1 tells sol: WEST is the current desk zone.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e42",
+          "valid_time": "2026-06-10T11:30:00+00:00",
+          "recorded_at": "2026-06-10T11:30:01+00:00",
+          "raw_text": "Iris says: I verified the release note and now accept BETA as the release channel.",
+          "source_id": "iris",
+          "actor_id": "iris",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e43",
+          "valid_time": "2026-06-10T11:35:00+00:00",
+          "recorded_at": "2026-06-10T11:35:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept EAST as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e44",
+          "valid_time": "2026-06-10T11:40:00+00:00",
+          "recorded_at": "2026-06-10T11:40:01+00:00",
+          "raw_text": "rhea says: I accept HIGH as the current alert level.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e45",
+          "valid_time": "2026-06-10T11:45:00+00:00",
+          "recorded_at": "2026-06-10T11:45:01+00:00",
+          "raw_text": "coord_c1 tells sol: NORTH is the current desk zone.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e46",
+          "valid_time": "2026-06-10T11:50:00+00:00",
+          "recorded_at": "2026-06-10T11:50:01+00:00",
+          "raw_text": "coord_c1 tells taro: MEDIUM replaces HIGH as the alert level.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "taro"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e47",
+          "valid_time": "2026-06-10T11:55:00+00:00",
+          "recorded_at": "2026-06-10T11:55:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept WEST as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e48",
+          "valid_time": "2026-06-10T12:00:00+00:00",
+          "recorded_at": "2026-06-10T12:00:01+00:00",
+          "raw_text": "rhea says: I accept LOW as the current alert level.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e49",
+          "valid_time": "2026-06-10T12:05:00+00:00",
+          "recorded_at": "2026-06-10T12:05:01+00:00",
+          "raw_text": "coord_c1 tells sol: EAST is the current desk zone.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e50",
+          "valid_time": "2026-06-10T12:10:00+00:00",
+          "recorded_at": "2026-06-10T12:10:01+00:00",
+          "raw_text": "coord_c1 tells taro: HIGH replaces LOW as the alert level.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "taro"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e51",
+          "valid_time": "2026-06-10T12:15:00+00:00",
+          "recorded_at": "2026-06-10T12:15:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept NORTH as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e52",
+          "valid_time": "2026-06-10T12:20:00+00:00",
+          "recorded_at": "2026-06-10T12:20:01+00:00",
+          "raw_text": "rhea says: I accept MEDIUM as the current alert level.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e53",
+          "valid_time": "2026-06-10T12:25:00+00:00",
+          "recorded_at": "2026-06-10T12:25:01+00:00",
+          "raw_text": "The authoritative deployment console records CANARY as replacing BETA. Lena sees the console update; Iris does not receive it.",
+          "source_id": "deployment_console",
+          "actor_id": "deployment_console",
+          "observer_ids": [
+            "lena"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "c1-e54",
+          "valid_time": "2026-06-10T12:30:00+00:00",
+          "recorded_at": "2026-06-10T12:30:01+00:00",
+          "raw_text": "coord_c1 tells taro: LOW replaces MEDIUM as the alert level.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "taro"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e55",
+          "valid_time": "2026-06-10T12:35:00+00:00",
+          "recorded_at": "2026-06-10T12:35:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept EAST as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e56",
+          "valid_time": "2026-06-10T12:40:00+00:00",
+          "recorded_at": "2026-06-10T12:40:01+00:00",
+          "raw_text": "rhea says: I accept HIGH as the current alert level.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e57",
+          "valid_time": "2026-06-10T12:45:00+00:00",
+          "recorded_at": "2026-06-10T12:45:01+00:00",
+          "raw_text": "coord_c1 tells sol: NORTH is the current desk zone.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e58",
+          "valid_time": "2026-06-10T12:50:00+00:00",
+          "recorded_at": "2026-06-10T12:50:01+00:00",
+          "raw_text": "coord_c1 tells taro: MEDIUM replaces HIGH as the alert level.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "taro"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e59",
+          "valid_time": "2026-06-10T12:55:00+00:00",
+          "recorded_at": "2026-06-10T12:55:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept WEST as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e60",
+          "valid_time": "2026-06-10T13:00:00+00:00",
+          "recorded_at": "2026-06-10T13:00:01+00:00",
+          "raw_text": "rhea says: I accept LOW as the current alert level.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e61",
+          "valid_time": "2026-06-10T13:05:00+00:00",
+          "recorded_at": "2026-06-10T13:05:01+00:00",
+          "raw_text": "Lena tells Iris: BETA remains the active release channel in the notice you already accepted.",
+          "source_id": "lena",
+          "actor_id": "lena",
+          "observer_ids": [],
+          "recipient_ids": [
+            "iris"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e62",
+          "valid_time": "2026-06-10T13:10:00+00:00",
+          "recorded_at": "2026-06-10T13:10:01+00:00",
+          "raw_text": "coord_c1 tells taro: HIGH replaces LOW as the alert level.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "taro"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e63",
+          "valid_time": "2026-06-10T13:15:00+00:00",
+          "recorded_at": "2026-06-10T13:15:01+00:00",
+          "raw_text": "rhea says: I have not decided whether to accept NORTH as the desk zone.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e64",
+          "valid_time": "2026-06-10T13:20:00+00:00",
+          "recorded_at": "2026-06-10T13:20:01+00:00",
+          "raw_text": "rhea says: I accept MEDIUM as the current alert level.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e65",
+          "valid_time": "2026-06-10T13:25:00+00:00",
+          "recorded_at": "2026-06-10T13:25:01+00:00",
+          "raw_text": "coord_c1 tells sol: WEST is the current desk zone.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e66",
+          "valid_time": "2026-06-10T13:30:00+00:00",
+          "recorded_at": "2026-06-10T13:30:01+00:00",
+          "raw_text": "Lena tells Iris: CANARY replaces BETA as the release channel.",
+          "source_id": "lena",
+          "actor_id": "lena",
+          "observer_ids": [],
+          "recipient_ids": [
+            "iris"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e67",
+          "valid_time": "2026-06-10T13:35:00+00:00",
+          "recorded_at": "2026-06-10T13:35:01+00:00",
+          "raw_text": "Iris says: I reject CANARY for now and still believe BETA is the release channel.",
+          "source_id": "iris",
+          "actor_id": "iris",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e68",
+          "valid_time": "2026-06-10T13:40:00+00:00",
+          "recorded_at": "2026-06-10T13:40:01+00:00",
+          "raw_text": "rhea says: I accept HIGH as the current alert level.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e69",
+          "valid_time": "2026-06-10T13:45:00+00:00",
+          "recorded_at": "2026-06-10T13:45:01+00:00",
+          "raw_text": "coord_c1 tells sol: NORTH is the current desk zone.",
+          "source_id": "coord_c1",
+          "actor_id": "coord_c1",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e70",
+          "valid_time": "2026-06-10T13:50:00+00:00",
+          "recorded_at": "2026-06-10T13:50:01+00:00",
+          "raw_text": "Lena sends Iris a signed release notice stating that CANARY replaces BETA as the release channel.",
+          "source_id": "lena",
+          "actor_id": "lena",
+          "observer_ids": [],
+          "recipient_ids": [
+            "iris"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e71",
+          "valid_time": "2026-06-10T13:55:00+00:00",
+          "recorded_at": "2026-06-10T13:55:01+00:00",
+          "raw_text": "Iris says: I verified the signed notice and now accept CANARY as the release channel.",
+          "source_id": "iris",
+          "actor_id": "iris",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c1-e72",
+          "valid_time": "2026-06-10T14:00:00+00:00",
+          "recorded_at": "2026-06-10T14:00:01+00:00",
+          "raw_text": "rhea says: I accept LOW as the current alert level.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        }
+      ],
+      "queries": [
+        {
+          "query_id": "c1-q1",
+          "after_event": 10,
+          "target_agent_id": "iris",
+          "target_issue_key": "release_channel",
+          "allowed_labels": [
+            "STABLE",
+            "BETA",
+            "CANARY",
+            "UNCERTAIN"
+          ],
+          "question": "Which release channel does Iris currently believe is active?"
+        },
+        {
+          "query_id": "c1-q2",
+          "after_event": 24,
+          "target_agent_id": "iris",
+          "target_issue_key": "release_channel",
+          "allowed_labels": [
+            "STABLE",
+            "BETA",
+            "CANARY",
+            "UNCERTAIN"
+          ],
+          "question": "After Rowan's relay and Iris's reaction, which release channel does Iris believe is active?"
+        },
+        {
+          "query_id": "c1-q3",
+          "after_event": 36,
+          "target_agent_id": "iris",
+          "target_issue_key": "release_channel",
+          "allowed_labels": [
+            "STABLE",
+            "BETA",
+            "CANARY",
+            "UNCERTAIN"
+          ],
+          "question": "After Iris received Lena's direct BETA correction but before accepting or rejecting it, which release channel is Iris currently supported as believing?"
+        },
+        {
+          "query_id": "c1-q4",
+          "after_event": 50,
+          "target_agent_id": "iris",
+          "target_issue_key": "release_channel",
+          "allowed_labels": [
+            "STABLE",
+            "BETA",
+            "CANARY",
+            "UNCERTAIN"
+          ],
+          "question": "Which release channel does Iris currently believe is active?"
+        },
+        {
+          "query_id": "c1-q5",
+          "after_event": 60,
+          "target_agent_id": "iris",
+          "target_issue_key": "release_channel",
+          "allowed_labels": [
+            "STABLE",
+            "BETA",
+            "CANARY",
+            "UNCERTAIN"
+          ],
+          "question": "The deployment console changed without informing Iris. Which release channel does Iris currently believe is active?"
+        },
+        {
+          "query_id": "c1-q6",
+          "after_event": 68,
+          "target_agent_id": "iris",
+          "target_issue_key": "release_channel",
+          "allowed_labels": [
+            "STABLE",
+            "BETA",
+            "CANARY",
+            "UNCERTAIN"
+          ],
+          "question": "After Iris rejected the CANARY correction, which release channel does she believe is active?"
+        },
+        {
+          "query_id": "c1-q7",
+          "after_event": 72,
+          "target_agent_id": "iris",
+          "target_issue_key": "release_channel",
+          "allowed_labels": [
+            "STABLE",
+            "BETA",
+            "CANARY",
+            "UNCERTAIN"
+          ],
+          "question": "At the end of the stream, which release channel does Iris believe is active?"
+        },
+        {
+          "query_id": "c1-q8",
+          "after_event": 72,
+          "target_agent_id": "iris",
+          "target_issue_key": "release_channel",
+          "allowed_labels": [
+            "STABLE",
+            "BETA",
+            "CANARY",
+            "UNCERTAIN"
+          ],
+          "question": "At the requested historical time, which release channel did Iris believe was active?",
+          "event_time": "2026-06-10T10:30:00+00:00"
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "target_agent_id": "jonah",
+      "target_issue_key": "backup_cadence",
+      "ontology_seed": {
+        "backup_cadence": [
+          "DAILY",
+          "WEEKLY",
+          "MONTHLY"
+        ],
+        "review_mode": [
+          "PEER",
+          "AUTO",
+          "HYBRID"
+        ],
+        "access_tier": [
+          "BRONZE",
+          "SILVER",
+          "GOLD"
+        ]
+      },
+      "events": [
+        {
+          "event_id": "c2-e01",
+          "valid_time": "2026-06-11T08:05:00+00:00",
+          "recorded_at": "2026-06-11T08:05:01+00:00",
+          "raw_text": "coord_c2 tells orin: AUTO is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e02",
+          "valid_time": "2026-06-11T08:10:00+00:00",
+          "recorded_at": "2026-06-11T08:10:01+00:00",
+          "raw_text": "coord_c2 tells pema: GOLD replaces BRONZE as the access tier.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e03",
+          "valid_time": "2026-06-11T08:15:00+00:00",
+          "recorded_at": "2026-06-11T08:15:01+00:00",
+          "raw_text": "Operations lead Mara tells Jonah: the current backup cadence is DAILY.",
+          "source_id": "mara",
+          "actor_id": "mara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "jonah"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e04",
+          "valid_time": "2026-06-11T08:20:00+00:00",
+          "recorded_at": "2026-06-11T08:20:01+00:00",
+          "raw_text": "niko says: I accept SILVER as the current access tier.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e05",
+          "valid_time": "2026-06-11T08:25:00+00:00",
+          "recorded_at": "2026-06-11T08:25:01+00:00",
+          "raw_text": "Jonah says: I accept DAILY as the current backup cadence.",
+          "source_id": "jonah",
+          "actor_id": "jonah",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e06",
+          "valid_time": "2026-06-11T08:30:00+00:00",
+          "recorded_at": "2026-06-11T08:30:01+00:00",
+          "raw_text": "coord_c2 tells pema: BRONZE replaces SILVER as the access tier.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e07",
+          "valid_time": "2026-06-11T08:35:00+00:00",
+          "recorded_at": "2026-06-11T08:35:01+00:00",
+          "raw_text": "niko says: I have not decided whether to accept AUTO as the review mode.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e08",
+          "valid_time": "2026-06-11T08:40:00+00:00",
+          "recorded_at": "2026-06-11T08:40:01+00:00",
+          "raw_text": "niko says: I accept GOLD as the current access tier.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e09",
+          "valid_time": "2026-06-11T08:45:00+00:00",
+          "recorded_at": "2026-06-11T08:45:01+00:00",
+          "raw_text": "coord_c2 tells orin: PEER is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e10",
+          "valid_time": "2026-06-11T08:50:00+00:00",
+          "recorded_at": "2026-06-11T08:50:01+00:00",
+          "raw_text": "coord_c2 tells pema: SILVER replaces GOLD as the access tier.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e11",
+          "valid_time": "2026-06-11T08:55:00+00:00",
+          "recorded_at": "2026-06-11T08:55:01+00:00",
+          "raw_text": "niko says: I have not decided whether to accept HYBRID as the review mode.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e12",
+          "valid_time": "2026-06-11T09:00:00+00:00",
+          "recorded_at": "2026-06-11T09:00:01+00:00",
+          "raw_text": "niko says: I accept BRONZE as the current access tier.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e13",
+          "valid_time": "2026-06-11T09:05:00+00:00",
+          "recorded_at": "2026-06-11T09:05:01+00:00",
+          "raw_text": "coord_c2 tells orin: AUTO is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e14",
+          "valid_time": "2026-06-11T09:10:00+00:00",
+          "recorded_at": "2026-06-11T09:10:01+00:00",
+          "raw_text": "coord_c2 tells pema: GOLD replaces BRONZE as the access tier.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e15",
+          "valid_time": "2026-06-11T09:15:00+00:00",
+          "recorded_at": "2026-06-11T09:15:01+00:00",
+          "raw_text": "niko says: I have not decided whether to accept PEER as the review mode.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e16",
+          "valid_time": "2026-06-11T09:20:00+00:00",
+          "recorded_at": "2026-06-11T09:20:01+00:00",
+          "raw_text": "Mara tells Mae only: WEEKLY replaces DAILY as the backup cadence. Jonah is not a recipient.",
+          "source_id": "mara",
+          "actor_id": "mara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "mae"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e17",
+          "valid_time": "2026-06-11T09:25:00+00:00",
+          "recorded_at": "2026-06-11T09:25:01+00:00",
+          "raw_text": "coord_c2 tells orin: HYBRID is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e18",
+          "valid_time": "2026-06-11T09:30:00+00:00",
+          "recorded_at": "2026-06-11T09:30:01+00:00",
+          "raw_text": "coord_c2 tells pema: BRONZE replaces SILVER as the access tier.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e19",
+          "valid_time": "2026-06-11T09:35:00+00:00",
+          "recorded_at": "2026-06-11T09:35:01+00:00",
+          "raw_text": "niko says: I have not decided whether to accept AUTO as the review mode.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e20",
+          "valid_time": "2026-06-11T09:40:00+00:00",
+          "recorded_at": "2026-06-11T09:40:01+00:00",
+          "raw_text": "niko says: I accept GOLD as the current access tier.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e21",
+          "valid_time": "2026-06-11T09:45:00+00:00",
+          "recorded_at": "2026-06-11T09:45:01+00:00",
+          "raw_text": "coord_c2 tells orin: PEER is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e22",
+          "valid_time": "2026-06-11T09:50:00+00:00",
+          "recorded_at": "2026-06-11T09:50:01+00:00",
+          "raw_text": "Mae tells Jonah: Mara told me that WEEKLY replaces DAILY as the backup cadence.",
+          "source_id": "mae",
+          "actor_id": "mae",
+          "observer_ids": [],
+          "recipient_ids": [
+            "jonah"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e23",
+          "valid_time": "2026-06-11T09:55:00+00:00",
+          "recorded_at": "2026-06-11T09:55:01+00:00",
+          "raw_text": "Jonah says: I trust Mae's relay and accept WEEKLY as the current backup cadence.",
+          "source_id": "jonah",
+          "actor_id": "jonah",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e24",
+          "valid_time": "2026-06-11T10:00:00+00:00",
+          "recorded_at": "2026-06-11T10:00:01+00:00",
+          "raw_text": "niko says: I accept BRONZE as the current access tier.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e25",
+          "valid_time": "2026-06-11T10:05:00+00:00",
+          "recorded_at": "2026-06-11T10:05:01+00:00",
+          "raw_text": "coord_c2 tells orin: AUTO is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e26",
+          "valid_time": "2026-06-11T10:10:00+00:00",
+          "recorded_at": "2026-06-11T10:10:01+00:00",
+          "raw_text": "coord_c2 tells pema: GOLD replaces BRONZE as the access tier.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e27",
+          "valid_time": "2026-06-11T10:15:00+00:00",
+          "recorded_at": "2026-06-11T10:15:01+00:00",
+          "raw_text": "niko says: I have not decided whether to accept PEER as the review mode.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e28",
+          "valid_time": "2026-06-11T10:20:00+00:00",
+          "recorded_at": "2026-06-11T10:20:01+00:00",
+          "raw_text": "niko says: I accept SILVER as the current access tier.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e29",
+          "valid_time": "2026-06-11T10:25:00+00:00",
+          "recorded_at": "2026-06-11T10:25:01+00:00",
+          "raw_text": "coord_c2 tells orin: HYBRID is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e30",
+          "valid_time": "2026-06-11T10:30:00+00:00",
+          "recorded_at": "2026-06-11T10:30:01+00:00",
+          "raw_text": "coord_c2 tells pema: BRONZE replaces SILVER as the access tier.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e31",
+          "valid_time": "2026-06-11T10:35:00+00:00",
+          "recorded_at": "2026-06-11T10:35:01+00:00",
+          "raw_text": "niko says: I have not decided whether to accept AUTO as the review mode.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e32",
+          "valid_time": "2026-06-11T10:40:00+00:00",
+          "recorded_at": "2026-06-11T10:40:01+00:00",
+          "raw_text": "niko says: I accept GOLD as the current access tier.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e33",
+          "valid_time": "2026-06-11T10:45:00+00:00",
+          "recorded_at": "2026-06-11T10:45:01+00:00",
+          "raw_text": "coord_c2 tells orin: PEER is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e34",
+          "valid_time": "2026-06-11T10:50:00+00:00",
+          "recorded_at": "2026-06-11T10:50:01+00:00",
+          "raw_text": "Mara directly confirms to Jonah: WEEKLY replaces DAILY as the backup cadence.",
+          "source_id": "mara",
+          "actor_id": "mara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "jonah"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e35",
+          "valid_time": "2026-06-11T10:55:00+00:00",
+          "recorded_at": "2026-06-11T10:55:01+00:00",
+          "raw_text": "niko says: I have not decided whether to accept HYBRID as the review mode.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e36",
+          "valid_time": "2026-06-11T11:00:00+00:00",
+          "recorded_at": "2026-06-11T11:00:01+00:00",
+          "raw_text": "niko says: I accept BRONZE as the current access tier.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e37",
+          "valid_time": "2026-06-11T11:05:00+00:00",
+          "recorded_at": "2026-06-11T11:05:01+00:00",
+          "raw_text": "coord_c2 tells orin: AUTO is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e38",
+          "valid_time": "2026-06-11T11:10:00+00:00",
+          "recorded_at": "2026-06-11T11:10:01+00:00",
+          "raw_text": "coord_c2 tells pema: GOLD replaces BRONZE as the access tier.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e39",
+          "valid_time": "2026-06-11T11:15:00+00:00",
+          "recorded_at": "2026-06-11T11:15:01+00:00",
+          "raw_text": "niko says: I have not decided whether to accept PEER as the review mode.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e40",
+          "valid_time": "2026-06-11T11:20:00+00:00",
+          "recorded_at": "2026-06-11T11:20:01+00:00",
+          "raw_text": "niko says: I accept SILVER as the current access tier.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e41",
+          "valid_time": "2026-06-11T11:25:00+00:00",
+          "recorded_at": "2026-06-11T11:25:01+00:00",
+          "raw_text": "coord_c2 tells orin: HYBRID is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e42",
+          "valid_time": "2026-06-11T11:30:00+00:00",
+          "recorded_at": "2026-06-11T11:30:01+00:00",
+          "raw_text": "coord_c2 tells pema: BRONZE replaces SILVER as the access tier.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e43",
+          "valid_time": "2026-06-11T11:35:00+00:00",
+          "recorded_at": "2026-06-11T11:35:01+00:00",
+          "raw_text": "niko says: I have not decided whether to accept AUTO as the review mode.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e44",
+          "valid_time": "2026-06-11T11:40:00+00:00",
+          "recorded_at": "2026-06-11T11:40:01+00:00",
+          "raw_text": "niko says: I accept GOLD as the current access tier.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e45",
+          "valid_time": "2026-06-11T11:45:00+00:00",
+          "recorded_at": "2026-06-11T11:45:01+00:00",
+          "raw_text": "coord_c2 tells orin: PEER is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e46",
+          "valid_time": "2026-06-11T11:50:00+00:00",
+          "recorded_at": "2026-06-11T11:50:01+00:00",
+          "raw_text": "The authoritative backup scheduler records MONTHLY replacing WEEKLY. Mara sees the scheduler update; Jonah does not receive it.",
+          "source_id": "backup_scheduler",
+          "actor_id": "backup_scheduler",
+          "observer_ids": [
+            "mara"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "c2-e47",
+          "valid_time": "2026-06-11T11:55:00+00:00",
+          "recorded_at": "2026-06-11T11:55:01+00:00",
+          "raw_text": "niko says: I have not decided whether to accept HYBRID as the review mode.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e48",
+          "valid_time": "2026-06-11T12:00:00+00:00",
+          "recorded_at": "2026-06-11T12:00:01+00:00",
+          "raw_text": "niko says: I accept BRONZE as the current access tier.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e49",
+          "valid_time": "2026-06-11T12:05:00+00:00",
+          "recorded_at": "2026-06-11T12:05:01+00:00",
+          "raw_text": "coord_c2 tells orin: AUTO is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e50",
+          "valid_time": "2026-06-11T12:10:00+00:00",
+          "recorded_at": "2026-06-11T12:10:01+00:00",
+          "raw_text": "coord_c2 tells pema: GOLD replaces BRONZE as the access tier.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e51",
+          "valid_time": "2026-06-11T12:15:00+00:00",
+          "recorded_at": "2026-06-11T12:15:01+00:00",
+          "raw_text": "niko says: I have not decided whether to accept PEER as the review mode.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e52",
+          "valid_time": "2026-06-11T12:20:00+00:00",
+          "recorded_at": "2026-06-11T12:20:01+00:00",
+          "raw_text": "niko says: I accept SILVER as the current access tier.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e53",
+          "valid_time": "2026-06-11T12:25:00+00:00",
+          "recorded_at": "2026-06-11T12:25:01+00:00",
+          "raw_text": "coord_c2 tells orin: HYBRID is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e54",
+          "valid_time": "2026-06-11T12:30:00+00:00",
+          "recorded_at": "2026-06-11T12:30:01+00:00",
+          "raw_text": "coord_c2 tells pema: BRONZE replaces SILVER as the access tier.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e55",
+          "valid_time": "2026-06-11T12:35:00+00:00",
+          "recorded_at": "2026-06-11T12:35:01+00:00",
+          "raw_text": "Mara tells Jonah: MONTHLY replaces WEEKLY as the backup cadence.",
+          "source_id": "mara",
+          "actor_id": "mara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "jonah"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e56",
+          "valid_time": "2026-06-11T12:40:00+00:00",
+          "recorded_at": "2026-06-11T12:40:01+00:00",
+          "raw_text": "Jonah says: I received the MONTHLY change, but I have not decided whether to accept it.",
+          "source_id": "jonah",
+          "actor_id": "jonah",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e57",
+          "valid_time": "2026-06-11T12:45:00+00:00",
+          "recorded_at": "2026-06-11T12:45:01+00:00",
+          "raw_text": "coord_c2 tells orin: PEER is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e58",
+          "valid_time": "2026-06-11T12:50:00+00:00",
+          "recorded_at": "2026-06-11T12:50:01+00:00",
+          "raw_text": "coord_c2 tells pema: SILVER replaces GOLD as the access tier.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e59",
+          "valid_time": "2026-06-11T12:55:00+00:00",
+          "recorded_at": "2026-06-11T12:55:01+00:00",
+          "raw_text": "niko says: I have not decided whether to accept HYBRID as the review mode.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e60",
+          "valid_time": "2026-06-11T13:00:00+00:00",
+          "recorded_at": "2026-06-11T13:00:01+00:00",
+          "raw_text": "niko says: I accept BRONZE as the current access tier.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e61",
+          "valid_time": "2026-06-11T13:05:00+00:00",
+          "recorded_at": "2026-06-11T13:05:01+00:00",
+          "raw_text": "coord_c2 tells orin: AUTO is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e62",
+          "valid_time": "2026-06-11T13:10:00+00:00",
+          "recorded_at": "2026-06-11T13:10:01+00:00",
+          "raw_text": "coord_c2 tells pema: GOLD replaces BRONZE as the access tier.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e63",
+          "valid_time": "2026-06-11T13:15:00+00:00",
+          "recorded_at": "2026-06-11T13:15:01+00:00",
+          "raw_text": "niko says: I have not decided whether to accept PEER as the review mode.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e64",
+          "valid_time": "2026-06-11T13:20:00+00:00",
+          "recorded_at": "2026-06-11T13:20:01+00:00",
+          "raw_text": "Jonah says: I reject MONTHLY for now and still believe WEEKLY is the backup cadence.",
+          "source_id": "jonah",
+          "actor_id": "jonah",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e65",
+          "valid_time": "2026-06-11T13:25:00+00:00",
+          "recorded_at": "2026-06-11T13:25:01+00:00",
+          "raw_text": "coord_c2 tells orin: HYBRID is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e66",
+          "valid_time": "2026-06-11T13:30:00+00:00",
+          "recorded_at": "2026-06-11T13:30:01+00:00",
+          "raw_text": "coord_c2 tells pema: BRONZE replaces SILVER as the access tier.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pema"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e67",
+          "valid_time": "2026-06-11T13:35:00+00:00",
+          "recorded_at": "2026-06-11T13:35:01+00:00",
+          "raw_text": "niko says: I have not decided whether to accept AUTO as the review mode.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e68",
+          "valid_time": "2026-06-11T13:40:00+00:00",
+          "recorded_at": "2026-06-11T13:40:01+00:00",
+          "raw_text": "niko says: I accept GOLD as the current access tier.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e69",
+          "valid_time": "2026-06-11T13:45:00+00:00",
+          "recorded_at": "2026-06-11T13:45:01+00:00",
+          "raw_text": "coord_c2 tells orin: PEER is the current review mode.",
+          "source_id": "coord_c2",
+          "actor_id": "coord_c2",
+          "observer_ids": [],
+          "recipient_ids": [
+            "orin"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e70",
+          "valid_time": "2026-06-11T13:50:00+00:00",
+          "recorded_at": "2026-06-11T13:50:01+00:00",
+          "raw_text": "Mara sends Jonah a signed backup notice stating that MONTHLY replaces WEEKLY as the backup cadence.",
+          "source_id": "mara",
+          "actor_id": "mara",
+          "observer_ids": [],
+          "recipient_ids": [
+            "jonah"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e71",
+          "valid_time": "2026-06-11T13:55:00+00:00",
+          "recorded_at": "2026-06-11T13:55:01+00:00",
+          "raw_text": "Jonah says: I verified the signed notice and now accept MONTHLY as the backup cadence.",
+          "source_id": "jonah",
+          "actor_id": "jonah",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c2-e72",
+          "valid_time": "2026-06-11T14:00:00+00:00",
+          "recorded_at": "2026-06-11T14:00:01+00:00",
+          "raw_text": "niko says: I accept BRONZE as the current access tier.",
+          "source_id": "niko",
+          "actor_id": "niko",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        }
+      ],
+      "queries": [
+        {
+          "query_id": "c2-q1",
+          "after_event": 10,
+          "target_agent_id": "jonah",
+          "target_issue_key": "backup_cadence",
+          "allowed_labels": [
+            "DAILY",
+            "WEEKLY",
+            "MONTHLY",
+            "UNCERTAIN"
+          ],
+          "question": "Which backup cadence does Jonah currently believe is active?"
+        },
+        {
+          "query_id": "c2-q2",
+          "after_event": 26,
+          "target_agent_id": "jonah",
+          "target_issue_key": "backup_cadence",
+          "allowed_labels": [
+            "DAILY",
+            "WEEKLY",
+            "MONTHLY",
+            "UNCERTAIN"
+          ],
+          "question": "After Mae's relay and Jonah's explicit acceptance, which backup cadence does Jonah believe is active?"
+        },
+        {
+          "query_id": "c2-q3",
+          "after_event": 38,
+          "target_agent_id": "jonah",
+          "target_issue_key": "backup_cadence",
+          "allowed_labels": [
+            "DAILY",
+            "WEEKLY",
+            "MONTHLY",
+            "UNCERTAIN"
+          ],
+          "question": "After Mara directly reconfirmed the WEEKLY revision, which backup cadence does Jonah believe is active?"
+        },
+        {
+          "query_id": "c2-q4",
+          "after_event": 50,
+          "target_agent_id": "jonah",
+          "target_issue_key": "backup_cadence",
+          "allowed_labels": [
+            "DAILY",
+            "WEEKLY",
+            "MONTHLY",
+            "UNCERTAIN"
+          ],
+          "question": "The scheduler changed without informing Jonah. Which backup cadence does Jonah believe is active?"
+        },
+        {
+          "query_id": "c2-q5",
+          "after_event": 58,
+          "target_agent_id": "jonah",
+          "target_issue_key": "backup_cadence",
+          "allowed_labels": [
+            "DAILY",
+            "WEEKLY",
+            "MONTHLY",
+            "UNCERTAIN"
+          ],
+          "question": "After Jonah received MONTHLY but had not decided whether to accept it, which cadence is he currently supported as believing?"
+        },
+        {
+          "query_id": "c2-q6",
+          "after_event": 66,
+          "target_agent_id": "jonah",
+          "target_issue_key": "backup_cadence",
+          "allowed_labels": [
+            "DAILY",
+            "WEEKLY",
+            "MONTHLY",
+            "UNCERTAIN"
+          ],
+          "question": "After Jonah rejected MONTHLY, which backup cadence does he believe is active?"
+        },
+        {
+          "query_id": "c2-q7",
+          "after_event": 72,
+          "target_agent_id": "jonah",
+          "target_issue_key": "backup_cadence",
+          "allowed_labels": [
+            "DAILY",
+            "WEEKLY",
+            "MONTHLY",
+            "UNCERTAIN"
+          ],
+          "question": "At the end of the stream, which backup cadence does Jonah believe is active?"
+        },
+        {
+          "query_id": "c2-q8",
+          "after_event": 72,
+          "target_agent_id": "jonah",
+          "target_issue_key": "backup_cadence",
+          "allowed_labels": [
+            "DAILY",
+            "WEEKLY",
+            "MONTHLY",
+            "UNCERTAIN"
+          ],
+          "question": "At the requested historical time, which backup cadence did Jonah believe was active?",
+          "event_time": "2026-06-11T11:20:00+00:00"
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "target_agent_id": "kei",
+      "target_issue_key": "invoice_currency",
+      "ontology_seed": {
+        "invoice_currency": [
+          "USD",
+          "EUR",
+          "JPY"
+        ],
+        "shipping_priority": [
+          "STANDARD",
+          "EXPRESS",
+          "ECONOMY"
+        ],
+        "audit_window": [
+          "D7",
+          "D14",
+          "D30"
+        ]
+      },
+      "events": [
+        {
+          "event_id": "c3-e01",
+          "valid_time": "2026-06-12T08:05:00+00:00",
+          "recorded_at": "2026-06-12T08:05:01+00:00",
+          "raw_text": "coord_c3 tells timo: EXPRESS is the current shipping priority.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "timo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e02",
+          "valid_time": "2026-06-12T08:10:00+00:00",
+          "recorded_at": "2026-06-12T08:10:01+00:00",
+          "raw_text": "Finance officer Dae tells Kei: the current invoice currency is USD.",
+          "source_id": "dae",
+          "actor_id": "dae",
+          "observer_ids": [],
+          "recipient_ids": [
+            "kei"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e03",
+          "valid_time": "2026-06-12T08:15:00+00:00",
+          "recorded_at": "2026-06-12T08:15:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept STANDARD as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e04",
+          "valid_time": "2026-06-12T08:20:00+00:00",
+          "recorded_at": "2026-06-12T08:20:01+00:00",
+          "raw_text": "Kei says: I accept USD as the current invoice currency.",
+          "source_id": "kei",
+          "actor_id": "kei",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e05",
+          "valid_time": "2026-06-12T08:25:00+00:00",
+          "recorded_at": "2026-06-12T08:25:01+00:00",
+          "raw_text": "coord_c3 tells timo: ECONOMY is the current shipping priority.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "timo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e06",
+          "valid_time": "2026-06-12T08:30:00+00:00",
+          "recorded_at": "2026-06-12T08:30:01+00:00",
+          "raw_text": "coord_c3 tells vivi: D7 replaces D14 as the audit window.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "vivi"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e07",
+          "valid_time": "2026-06-12T08:35:00+00:00",
+          "recorded_at": "2026-06-12T08:35:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept EXPRESS as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e08",
+          "valid_time": "2026-06-12T08:40:00+00:00",
+          "recorded_at": "2026-06-12T08:40:01+00:00",
+          "raw_text": "sena says: I accept D30 as the current audit window.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e09",
+          "valid_time": "2026-06-12T08:45:00+00:00",
+          "recorded_at": "2026-06-12T08:45:01+00:00",
+          "raw_text": "coord_c3 tells timo: STANDARD is the current shipping priority.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "timo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e10",
+          "valid_time": "2026-06-12T08:50:00+00:00",
+          "recorded_at": "2026-06-12T08:50:01+00:00",
+          "raw_text": "coord_c3 tells vivi: D14 replaces D30 as the audit window.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "vivi"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e11",
+          "valid_time": "2026-06-12T08:55:00+00:00",
+          "recorded_at": "2026-06-12T08:55:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept ECONOMY as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e12",
+          "valid_time": "2026-06-12T09:00:00+00:00",
+          "recorded_at": "2026-06-12T09:00:01+00:00",
+          "raw_text": "sena says: I accept D7 as the current audit window.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e13",
+          "valid_time": "2026-06-12T09:05:00+00:00",
+          "recorded_at": "2026-06-12T09:05:01+00:00",
+          "raw_text": "coord_c3 tells timo: EXPRESS is the current shipping priority.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "timo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e14",
+          "valid_time": "2026-06-12T09:10:00+00:00",
+          "recorded_at": "2026-06-12T09:10:01+00:00",
+          "raw_text": "Dae tells Lia only: EUR replaces USD as the invoice currency. Kei is not a recipient.",
+          "source_id": "dae",
+          "actor_id": "dae",
+          "observer_ids": [],
+          "recipient_ids": [
+            "lia"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e15",
+          "valid_time": "2026-06-12T09:15:00+00:00",
+          "recorded_at": "2026-06-12T09:15:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept STANDARD as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e16",
+          "valid_time": "2026-06-12T09:20:00+00:00",
+          "recorded_at": "2026-06-12T09:20:01+00:00",
+          "raw_text": "sena says: I accept D14 as the current audit window.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e17",
+          "valid_time": "2026-06-12T09:25:00+00:00",
+          "recorded_at": "2026-06-12T09:25:01+00:00",
+          "raw_text": "coord_c3 tells timo: ECONOMY is the current shipping priority.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "timo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e18",
+          "valid_time": "2026-06-12T09:30:00+00:00",
+          "recorded_at": "2026-06-12T09:30:01+00:00",
+          "raw_text": "coord_c3 tells vivi: D7 replaces D14 as the audit window.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "vivi"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e19",
+          "valid_time": "2026-06-12T09:35:00+00:00",
+          "recorded_at": "2026-06-12T09:35:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept EXPRESS as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e20",
+          "valid_time": "2026-06-12T09:40:00+00:00",
+          "recorded_at": "2026-06-12T09:40:01+00:00",
+          "raw_text": "Lia tells Kei: I heard that the invoice currency is EUR now.",
+          "source_id": "lia",
+          "actor_id": "lia",
+          "observer_ids": [],
+          "recipient_ids": [
+            "kei"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e21",
+          "valid_time": "2026-06-12T09:45:00+00:00",
+          "recorded_at": "2026-06-12T09:45:01+00:00",
+          "raw_text": "Kei says: I do not accept the EUR rumor and still believe USD is the invoice currency.",
+          "source_id": "kei",
+          "actor_id": "kei",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e22",
+          "valid_time": "2026-06-12T09:50:00+00:00",
+          "recorded_at": "2026-06-12T09:50:01+00:00",
+          "raw_text": "coord_c3 tells vivi: D14 replaces D30 as the audit window.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "vivi"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e23",
+          "valid_time": "2026-06-12T09:55:00+00:00",
+          "recorded_at": "2026-06-12T09:55:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept ECONOMY as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e24",
+          "valid_time": "2026-06-12T10:00:00+00:00",
+          "recorded_at": "2026-06-12T10:00:01+00:00",
+          "raw_text": "sena says: I accept D7 as the current audit window.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e25",
+          "valid_time": "2026-06-12T10:05:00+00:00",
+          "recorded_at": "2026-06-12T10:05:01+00:00",
+          "raw_text": "coord_c3 tells timo: EXPRESS is the current shipping priority.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "timo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e26",
+          "valid_time": "2026-06-12T10:10:00+00:00",
+          "recorded_at": "2026-06-12T10:10:01+00:00",
+          "raw_text": "coord_c3 tells vivi: D30 replaces D7 as the audit window.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "vivi"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e27",
+          "valid_time": "2026-06-12T10:15:00+00:00",
+          "recorded_at": "2026-06-12T10:15:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept STANDARD as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e28",
+          "valid_time": "2026-06-12T10:20:00+00:00",
+          "recorded_at": "2026-06-12T10:20:01+00:00",
+          "raw_text": "sena says: I accept D14 as the current audit window.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e29",
+          "valid_time": "2026-06-12T10:25:00+00:00",
+          "recorded_at": "2026-06-12T10:25:01+00:00",
+          "raw_text": "coord_c3 tells timo: ECONOMY is the current shipping priority.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "timo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e30",
+          "valid_time": "2026-06-12T10:30:00+00:00",
+          "recorded_at": "2026-06-12T10:30:01+00:00",
+          "raw_text": "Dae directly tells Kei: EUR replaces USD as the invoice currency.",
+          "source_id": "dae",
+          "actor_id": "dae",
+          "observer_ids": [],
+          "recipient_ids": [
+            "kei"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e31",
+          "valid_time": "2026-06-12T10:35:00+00:00",
+          "recorded_at": "2026-06-12T10:35:01+00:00",
+          "raw_text": "Kei says: I reject EUR for now and still believe USD is the invoice currency.",
+          "source_id": "kei",
+          "actor_id": "kei",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e32",
+          "valid_time": "2026-06-12T10:40:00+00:00",
+          "recorded_at": "2026-06-12T10:40:01+00:00",
+          "raw_text": "sena says: I accept D30 as the current audit window.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e33",
+          "valid_time": "2026-06-12T10:45:00+00:00",
+          "recorded_at": "2026-06-12T10:45:01+00:00",
+          "raw_text": "coord_c3 tells timo: STANDARD is the current shipping priority.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "timo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e34",
+          "valid_time": "2026-06-12T10:50:00+00:00",
+          "recorded_at": "2026-06-12T10:50:01+00:00",
+          "raw_text": "coord_c3 tells vivi: D14 replaces D30 as the audit window.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "vivi"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e35",
+          "valid_time": "2026-06-12T10:55:00+00:00",
+          "recorded_at": "2026-06-12T10:55:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept ECONOMY as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e36",
+          "valid_time": "2026-06-12T11:00:00+00:00",
+          "recorded_at": "2026-06-12T11:00:01+00:00",
+          "raw_text": "sena says: I accept D7 as the current audit window.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e37",
+          "valid_time": "2026-06-12T11:05:00+00:00",
+          "recorded_at": "2026-06-12T11:05:01+00:00",
+          "raw_text": "coord_c3 tells timo: EXPRESS is the current shipping priority.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "timo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e38",
+          "valid_time": "2026-06-12T11:10:00+00:00",
+          "recorded_at": "2026-06-12T11:10:01+00:00",
+          "raw_text": "coord_c3 tells vivi: D30 replaces D7 as the audit window.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "vivi"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e39",
+          "valid_time": "2026-06-12T11:15:00+00:00",
+          "recorded_at": "2026-06-12T11:15:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept STANDARD as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e40",
+          "valid_time": "2026-06-12T11:20:00+00:00",
+          "recorded_at": "2026-06-12T11:20:01+00:00",
+          "raw_text": "Dae sends Kei a signed notice stating that EUR replaces USD as the invoice currency.",
+          "source_id": "dae",
+          "actor_id": "dae",
+          "observer_ids": [],
+          "recipient_ids": [
+            "kei"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e41",
+          "valid_time": "2026-06-12T11:25:00+00:00",
+          "recorded_at": "2026-06-12T11:25:01+00:00",
+          "raw_text": "Kei says: I verified the signed notice and now accept EUR as the invoice currency.",
+          "source_id": "kei",
+          "actor_id": "kei",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e42",
+          "valid_time": "2026-06-12T11:30:00+00:00",
+          "recorded_at": "2026-06-12T11:30:01+00:00",
+          "raw_text": "coord_c3 tells vivi: D7 replaces D14 as the audit window.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "vivi"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e43",
+          "valid_time": "2026-06-12T11:35:00+00:00",
+          "recorded_at": "2026-06-12T11:35:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept EXPRESS as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e44",
+          "valid_time": "2026-06-12T11:40:00+00:00",
+          "recorded_at": "2026-06-12T11:40:01+00:00",
+          "raw_text": "sena says: I accept D30 as the current audit window.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e45",
+          "valid_time": "2026-06-12T11:45:00+00:00",
+          "recorded_at": "2026-06-12T11:45:01+00:00",
+          "raw_text": "coord_c3 tells timo: STANDARD is the current shipping priority.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "timo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e46",
+          "valid_time": "2026-06-12T11:50:00+00:00",
+          "recorded_at": "2026-06-12T11:50:01+00:00",
+          "raw_text": "coord_c3 tells vivi: D14 replaces D30 as the audit window.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "vivi"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e47",
+          "valid_time": "2026-06-12T11:55:00+00:00",
+          "recorded_at": "2026-06-12T11:55:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept ECONOMY as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e48",
+          "valid_time": "2026-06-12T12:00:00+00:00",
+          "recorded_at": "2026-06-12T12:00:01+00:00",
+          "raw_text": "sena says: I accept D7 as the current audit window.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e49",
+          "valid_time": "2026-06-12T12:05:00+00:00",
+          "recorded_at": "2026-06-12T12:05:01+00:00",
+          "raw_text": "coord_c3 tells timo: EXPRESS is the current shipping priority.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "timo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e50",
+          "valid_time": "2026-06-12T12:10:00+00:00",
+          "recorded_at": "2026-06-12T12:10:01+00:00",
+          "raw_text": "coord_c3 tells vivi: D30 replaces D7 as the audit window.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "vivi"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e51",
+          "valid_time": "2026-06-12T12:15:00+00:00",
+          "recorded_at": "2026-06-12T12:15:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept STANDARD as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e52",
+          "valid_time": "2026-06-12T12:20:00+00:00",
+          "recorded_at": "2026-06-12T12:20:01+00:00",
+          "raw_text": "The authoritative finance ledger records JPY replacing EUR as the invoice currency. Dae sees the ledger update; Kei does not receive it.",
+          "source_id": "finance_ledger",
+          "actor_id": "finance_ledger",
+          "observer_ids": [
+            "dae"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "c3-e53",
+          "valid_time": "2026-06-12T12:25:00+00:00",
+          "recorded_at": "2026-06-12T12:25:01+00:00",
+          "raw_text": "coord_c3 tells timo: ECONOMY is the current shipping priority.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "timo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e54",
+          "valid_time": "2026-06-12T12:30:00+00:00",
+          "recorded_at": "2026-06-12T12:30:01+00:00",
+          "raw_text": "coord_c3 tells vivi: D7 replaces D14 as the audit window.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "vivi"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e55",
+          "valid_time": "2026-06-12T12:35:00+00:00",
+          "recorded_at": "2026-06-12T12:35:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept EXPRESS as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e56",
+          "valid_time": "2026-06-12T12:40:00+00:00",
+          "recorded_at": "2026-06-12T12:40:01+00:00",
+          "raw_text": "sena says: I accept D30 as the current audit window.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e57",
+          "valid_time": "2026-06-12T12:45:00+00:00",
+          "recorded_at": "2026-06-12T12:45:01+00:00",
+          "raw_text": "coord_c3 tells timo: STANDARD is the current shipping priority.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "timo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e58",
+          "valid_time": "2026-06-12T12:50:00+00:00",
+          "recorded_at": "2026-06-12T12:50:01+00:00",
+          "raw_text": "coord_c3 tells vivi: D14 replaces D30 as the audit window.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "vivi"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e59",
+          "valid_time": "2026-06-12T12:55:00+00:00",
+          "recorded_at": "2026-06-12T12:55:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept ECONOMY as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e60",
+          "valid_time": "2026-06-12T13:00:00+00:00",
+          "recorded_at": "2026-06-12T13:00:01+00:00",
+          "raw_text": "Assistant Noor tells Kei: Dae told me that JPY replaces EUR as the invoice currency.",
+          "source_id": "noor",
+          "actor_id": "noor",
+          "observer_ids": [],
+          "recipient_ids": [
+            "kei"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e61",
+          "valid_time": "2026-06-12T13:05:00+00:00",
+          "recorded_at": "2026-06-12T13:05:01+00:00",
+          "raw_text": "Kei says: I received the JPY change, but I have not decided whether to accept or reject JPY.",
+          "source_id": "kei",
+          "actor_id": "kei",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e62",
+          "valid_time": "2026-06-12T13:10:00+00:00",
+          "recorded_at": "2026-06-12T13:10:01+00:00",
+          "raw_text": "coord_c3 tells vivi: D30 replaces D7 as the audit window.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "vivi"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e63",
+          "valid_time": "2026-06-12T13:15:00+00:00",
+          "recorded_at": "2026-06-12T13:15:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept STANDARD as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e64",
+          "valid_time": "2026-06-12T13:20:00+00:00",
+          "recorded_at": "2026-06-12T13:20:01+00:00",
+          "raw_text": "sena says: I accept D14 as the current audit window.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e65",
+          "valid_time": "2026-06-12T13:25:00+00:00",
+          "recorded_at": "2026-06-12T13:25:01+00:00",
+          "raw_text": "coord_c3 tells timo: ECONOMY is the current shipping priority.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "timo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e66",
+          "valid_time": "2026-06-12T13:30:00+00:00",
+          "recorded_at": "2026-06-12T13:30:01+00:00",
+          "raw_text": "Kei says: I reject JPY for now and still believe EUR is the invoice currency.",
+          "source_id": "kei",
+          "actor_id": "kei",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e67",
+          "valid_time": "2026-06-12T13:35:00+00:00",
+          "recorded_at": "2026-06-12T13:35:01+00:00",
+          "raw_text": "sena says: I have not decided whether to accept EXPRESS as the shipping priority.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e68",
+          "valid_time": "2026-06-12T13:40:00+00:00",
+          "recorded_at": "2026-06-12T13:40:01+00:00",
+          "raw_text": "sena says: I accept D30 as the current audit window.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e69",
+          "valid_time": "2026-06-12T13:45:00+00:00",
+          "recorded_at": "2026-06-12T13:45:01+00:00",
+          "raw_text": "coord_c3 tells timo: STANDARD is the current shipping priority.",
+          "source_id": "coord_c3",
+          "actor_id": "coord_c3",
+          "observer_ids": [],
+          "recipient_ids": [
+            "timo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e70",
+          "valid_time": "2026-06-12T13:50:00+00:00",
+          "recorded_at": "2026-06-12T13:50:01+00:00",
+          "raw_text": "Dae directly tells Kei: JPY replaces EUR as the invoice currency.",
+          "source_id": "dae",
+          "actor_id": "dae",
+          "observer_ids": [],
+          "recipient_ids": [
+            "kei"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e71",
+          "valid_time": "2026-06-12T13:55:00+00:00",
+          "recorded_at": "2026-06-12T13:55:01+00:00",
+          "raw_text": "Kei says: I checked Dae's message and now accept JPY as the invoice currency.",
+          "source_id": "kei",
+          "actor_id": "kei",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "c3-e72",
+          "valid_time": "2026-06-12T14:00:00+00:00",
+          "recorded_at": "2026-06-12T14:00:01+00:00",
+          "raw_text": "sena says: I accept D7 as the current audit window.",
+          "source_id": "sena",
+          "actor_id": "sena",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        }
+      ],
+      "queries": [
+        {
+          "query_id": "c3-q1",
+          "after_event": 10,
+          "target_agent_id": "kei",
+          "target_issue_key": "invoice_currency",
+          "allowed_labels": [
+            "USD",
+            "EUR",
+            "JPY",
+            "UNCERTAIN"
+          ],
+          "question": "Which invoice currency does Kei currently believe is active?"
+        },
+        {
+          "query_id": "c3-q2",
+          "after_event": 24,
+          "target_agent_id": "kei",
+          "target_issue_key": "invoice_currency",
+          "allowed_labels": [
+            "USD",
+            "EUR",
+            "JPY",
+            "UNCERTAIN"
+          ],
+          "question": "After Lia's non-explicit rumor and Kei's reaction, which invoice currency does Kei believe is active?"
+        },
+        {
+          "query_id": "c3-q3",
+          "after_event": 34,
+          "target_agent_id": "kei",
+          "target_issue_key": "invoice_currency",
+          "allowed_labels": [
+            "USD",
+            "EUR",
+            "JPY",
+            "UNCERTAIN"
+          ],
+          "question": "After Dae's direct EUR correction and Kei's rejection, which invoice currency does Kei believe is active?"
+        },
+        {
+          "query_id": "c3-q4",
+          "after_event": 46,
+          "target_agent_id": "kei",
+          "target_issue_key": "invoice_currency",
+          "allowed_labels": [
+            "USD",
+            "EUR",
+            "JPY",
+            "UNCERTAIN"
+          ],
+          "question": "Which invoice currency does Kei currently believe is active?"
+        },
+        {
+          "query_id": "c3-q5",
+          "after_event": 56,
+          "target_agent_id": "kei",
+          "target_issue_key": "invoice_currency",
+          "allowed_labels": [
+            "USD",
+            "EUR",
+            "JPY",
+            "UNCERTAIN"
+          ],
+          "question": "The finance ledger changed without informing Kei. Which invoice currency does Kei believe is active?"
+        },
+        {
+          "query_id": "c3-q6",
+          "after_event": 62,
+          "target_agent_id": "kei",
+          "target_issue_key": "invoice_currency",
+          "allowed_labels": [
+            "USD",
+            "EUR",
+            "JPY",
+            "UNCERTAIN"
+          ],
+          "question": "After Kei received the JPY relay but had not decided, which currency is Kei currently supported as believing?"
+        },
+        {
+          "query_id": "c3-q7",
+          "after_event": 68,
+          "target_agent_id": "kei",
+          "target_issue_key": "invoice_currency",
+          "allowed_labels": [
+            "USD",
+            "EUR",
+            "JPY",
+            "UNCERTAIN"
+          ],
+          "question": "After Kei rejected JPY, which invoice currency does Kei believe is active?"
+        },
+        {
+          "query_id": "c3-q8",
+          "after_event": 72,
+          "target_agent_id": "kei",
+          "target_issue_key": "invoice_currency",
+          "allowed_labels": [
+            "USD",
+            "EUR",
+            "JPY",
+            "UNCERTAIN"
+          ],
+          "question": "At the end of the stream, which invoice currency does Kei believe is active?"
+        }
+      ]
+    }
+  ]
+}
