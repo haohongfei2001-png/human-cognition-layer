@@ -37,3 +37,6 @@ __all__ += [
 
 from .store import V05Store
 __all__ += ["V05Store"]
+
+from .semantic import RevisionRelation, extract_routed_stance_events
+__all__ += ["RevisionRelation", "extract_routed_stance_events"]
