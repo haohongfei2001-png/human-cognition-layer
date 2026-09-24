@@ -109,7 +109,7 @@ class MeteredBackend:
         self.output_chars += len(out)
         return out
 
-    def metrics(self) -> dict[str, int]:
+    def metrics(self) -> dict[str, int | float]:
         return {
             "calls": self.calls,
             "json_calls": self.json_calls,
@@ -560,7 +560,6 @@ def run_d_stream(
                     "query_id": query["query_id"],
                     "prediction": prediction,
                     "query_context_chars": context_chars,
-                "query_elapsed_seconds": round(query_elapsed, 6),
                     "state_version": raw_context.get("state_version"),
                     "state_chars": state_chars,
                     "query_elapsed_seconds": round(query_elapsed, 6),
@@ -647,6 +646,7 @@ def run_c_stream(
                 "query_id": query["query_id"],
                 "prediction": prediction,
                 "query_context_chars": context_chars,
+                "query_elapsed_seconds": round(query_elapsed, 6),
             }
         )
     return rows
