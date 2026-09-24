@@ -8,6 +8,7 @@ import json
 import os
 import re
 import sys
+import time
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -57,6 +58,8 @@ stance, use UNCERTAIN when it is allowed. For historical questions, answer for
 the requested historical time rather than the present.
 """
 
+HARNESS_ONLY_METADATA_FIELDS = {"track", "sequence"}
+
 STOPWORDS = {
     "the", "a", "an", "is", "are", "was", "were", "to", "of", "and", "or",
     "in", "on", "at", "as", "does", "do", "did", "which", "what", "currently",
@@ -74,6 +77,7 @@ class MeteredBackend:
         self.text_calls = 0
         self.input_chars = 0
         self.output_chars = 0
+        self.provider_wall_seconds = 0.0
 
     def _record_input(self, messages: list[dict[str, str]]) -> None:
         self.calls += 1
@@ -82,18 +86,26 @@ class MeteredBackend:
     def complete_json(self, messages, *, max_tokens, temperature=0.0):
         self._record_input(messages)
         self.json_calls += 1
-        out = self.backend.complete_json(
-            messages, max_tokens=max_tokens, temperature=temperature
-        )
+        started = time.perf_counter()
+        try:
+            out = self.backend.complete_json(
+                messages, max_tokens=max_tokens, temperature=temperature
+            )
+        finally:
+            self.provider_wall_seconds += time.perf_counter() - started
         self.output_chars += len(out)
         return out
 
     def complete(self, messages, *, max_tokens, temperature=0.0):
         self._record_input(messages)
         self.text_calls += 1
-        out = self.backend.complete(
-            messages, max_tokens=max_tokens, temperature=temperature
-        )
+        started = time.perf_counter()
+        try:
+            out = self.backend.complete(
+                messages, max_tokens=max_tokens, temperature=temperature
+            )
+        finally:
+            self.provider_wall_seconds += time.perf_counter() - started
         self.output_chars += len(out)
         return out
 
@@ -104,6 +116,7 @@ class MeteredBackend:
             "text_calls": self.text_calls,
             "input_chars": self.input_chars,
             "output_chars": self.output_chars,
+            "provider_wall_seconds": round(self.provider_wall_seconds, 6),
         }
 
 
@@ -124,6 +137,14 @@ def make_real_backend(api_key: str, base_url: str, model: str) -> MeteredBackend
     )
 
 
+def model_visible_metadata(raw: dict[str, Any]) -> dict[str, Any]:
+    return {
+        key: value
+        for key, value in dict(raw.get("metadata") or {}).items()
+        if key not in HARNESS_ONLY_METADATA_FIELDS
+    }
+
+
 def event_from_mapping(raw: dict[str, Any]) -> EventRecord:
     return EventRecord(
         event_id=raw["event_id"],
@@ -136,7 +157,7 @@ def event_from_mapping(raw: dict[str, Any]) -> EventRecord:
         recipient_ids=tuple(raw.get("recipient_ids") or []),
         semantic_version=raw.get("semantic_version", "v04.1"),
         supersedes=raw.get("supersedes"),
-        metadata=dict(raw.get("metadata") or {}),
+        metadata=model_visible_metadata(raw),
     )
 
 
@@ -150,7 +171,7 @@ def event_prompt_payload(raw: dict[str, Any]) -> dict[str, Any]:
         "observer_ids": raw.get("observer_ids") or [],
         "recipient_ids": raw.get("recipient_ids") or [],
         "raw_text": raw["raw_text"],
-        "metadata": raw.get("metadata") or {},
+        "metadata": model_visible_metadata(raw),
     }
 
 
@@ -281,7 +302,9 @@ def update_ordinary_memory(
     return out, repairs
 
 
-def _event_retrieval_score(event: dict[str, Any], query: dict[str, Any]) -> tuple[int, int]:
+def _event_retrieval_score(
+    event: dict[str, Any], query: dict[str, Any]
+) -> tuple[int, str, str]:
     query_tokens = _tokens(
         query["question"] + " " + " ".join(query.get("allowed_labels") or [])
     )
@@ -294,10 +317,8 @@ def _event_retrieval_score(event: dict[str, Any], query: dict[str, Any]) -> tupl
         or target in event["raw_text"].lower()
     )
     overlap = len(query_tokens & event_tokens)
-    primary = int((event.get("metadata") or {}).get("track") == "primary")
-    sequence = int((event.get("metadata") or {}).get("sequence", 0))
-    score = overlap * 20 + int(target_access) * 12 + primary * 4
-    return score, sequence
+    score = overlap * 20 + int(target_access) * 12
+    return score, str(event.get("recorded_at") or ""), str(event["event_id"])
 
 
 def ordinary_query_context(
@@ -442,6 +463,33 @@ def compact_hcl_context(
     return result, size
 
 
+def persistent_hcl_state_chars(store: CognitionStore) -> int:
+    """Size the derived persistent cognition state, excluding raw event history."""
+    assertions = [
+        dict(row)
+        for row in store.conn.execute(
+            """
+            SELECT * FROM assertions
+            WHERE status IN ('ACTIVE', 'UNRESOLVED')
+            ORDER BY assertion_id
+            """
+        ).fetchall()
+    ]
+    propositions = [
+        dict(row)
+        for row in store.conn.execute(
+            "SELECT * FROM propositions ORDER BY proposition_id"
+        ).fetchall()
+    ]
+    return len(
+        json.dumps(
+            {"assertions": assertions, "propositions": propositions},
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+    )
+
+
 def answer_label(
     backend: MeteredBackend,
     query: dict[str, Any],
@@ -492,24 +540,30 @@ def run_d_stream(
                 semantic_repairs += result.semantic_repair_count
                 ingested += 1
 
+            query_started = time.perf_counter()
             raw_context = runtime.build_view(
                 "__system__",
                 query.get("event_time"),
                 None,
                 query["question"],
             ).as_dict()
+            state_chars = persistent_hcl_state_chars(runtime.store)
             bounded, context_chars = compact_hcl_context(
                 raw_context, query, query_char_budget=query_char_budget
             )
             prediction = answer_label(
                 backend, query, arm="D", dynamic_context=bounded
             )
+            query_elapsed = time.perf_counter() - query_started
             rows.append(
                 {
                     "query_id": query["query_id"],
                     "prediction": prediction,
                     "query_context_chars": context_chars,
+                "query_elapsed_seconds": round(query_elapsed, 6),
                     "state_version": raw_context.get("state_version"),
+                    "state_chars": state_chars,
+                    "query_elapsed_seconds": round(query_elapsed, 6),
                     "semantic_repairs_so_far": semantic_repairs,
                 }
             )
@@ -543,6 +597,7 @@ def run_e_stream(
         memory_repairs += repaired
         processed = index
         for query in queries_by_after.get(index, []):
+            query_started = time.perf_counter()
             bounded, context_chars = ordinary_query_context(
                 memory,
                 stream["events"],
@@ -552,12 +607,14 @@ def run_e_stream(
             prediction = answer_label(
                 backend, query, arm="E", dynamic_context=bounded
             )
+            query_elapsed = time.perf_counter() - query_started
             rows.append(
                 {
                     "query_id": query["query_id"],
                     "prediction": prediction,
                     "query_context_chars": context_chars,
                     "memory_chars": len(memory),
+                    "query_elapsed_seconds": round(query_elapsed, 6),
                     "memory_repairs_so_far": memory_repairs,
                     "events_processed": processed,
                 }
@@ -571,6 +628,7 @@ def run_c_stream(
 ) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for query in stream["queries"]:
+        query_started = time.perf_counter()
         events = [
             event_prompt_payload(event)
             for event in stream["events"][: int(query["after_event"])]
@@ -583,6 +641,7 @@ def run_c_stream(
         prediction = answer_label(
             backend, query, arm="C", dynamic_context=dynamic
         )
+        query_elapsed = time.perf_counter() - query_started
         rows.append(
             {
                 "query_id": query["query_id"],
@@ -692,22 +751,33 @@ def main() -> None:
         for arm in ("C", "D", "E")
     }
     raw_rows = {"C": [], "D": [], "E": []}
+    arm_wall_seconds = {"C": 0.0, "D": 0.0, "E": 0.0}
 
     for stream in fixture["streams"]:
-        for row in run_c_stream(stream, backends["C"]):
+        started = time.perf_counter()
+        c_stream_rows = run_c_stream(stream, backends["C"])
+        arm_wall_seconds["C"] += time.perf_counter() - started
+        for row in c_stream_rows:
             raw_rows["C"].append({"stream": stream["id"], **row})
-        for row in run_d_stream(
+        started = time.perf_counter()
+        d_stream_rows = run_d_stream(
             stream,
             backends["D"],
             query_char_budget=query_budget,
-        ):
+        )
+        arm_wall_seconds["D"] += time.perf_counter() - started
+        for row in d_stream_rows:
             raw_rows["D"].append({"stream": stream["id"], **row})
-        for row in run_e_stream(
+
+        started = time.perf_counter()
+        e_stream_rows = run_e_stream(
             stream,
             backends["E"],
             query_char_budget=query_budget,
             memory_char_budget=memory_budget,
-        ):
+        )
+        arm_wall_seconds["E"] += time.perf_counter() - started
+        for row in e_stream_rows:
             raw_rows["E"].append({"stream": stream["id"], **row})
 
     scored = {
@@ -728,8 +798,17 @@ def main() -> None:
             arm: {
                 **scored[arm],
                 "backend": backends[arm].metrics(),
+                "wall_clock_seconds": round(arm_wall_seconds[arm], 6),
                 "max_query_context_chars": max(
                     row["query_context_chars"] for row in raw_rows[arm]
+                ),
+                "max_persistent_state_chars": (
+                    max(
+                        row.get("state_chars", row.get("memory_chars", 0))
+                        for row in raw_rows[arm]
+                    )
+                    if arm in {"D", "E"}
+                    else None
                 ),
             }
             for arm in ("C", "D", "E")
