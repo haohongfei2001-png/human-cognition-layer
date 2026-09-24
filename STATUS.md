@@ -6,7 +6,7 @@ Human Cognition Layer (HCL)
 
 ## Current phase
 
-**PHASE-05 — HCL v0.4 research reset / design-only**
+**PHASE-06 — HCL v0.4 capability runtime / correctness refinement / incremental utility unproven**
 
 ## Core doctrine
 
@@ -3958,3 +3958,40 @@ This is a deterministic internal correctness repair, not a new capability
 comparison or external-efficacy claim. It consumes no new benchmark rows,
 owner-private examples, paid providers, training or publication. The current
 next-contract gate above remains unchanged.
+
+
+## HCL v0.4 proposition-revision / stance correctness closure
+
+Bounded amendment:
+- `docs/HCL_V04_PROPOSITION_REVISION_STANCE_AMENDMENT_V01.md`
+- runtime PR #9
+- merged main: `d3ecb4b8dff2fd0b1aa9adca6cca5087b9810f8e`
+- exact-main workflow: `35967420749`
+- result: SUCCESS
+- deterministic v0.4 contract suite: 35 / 35
+
+The amendment makes correction identity explicit through
+`PROPOSITION_REVISION(new -> prior)`, restricts revision targets to the exact
+bounded active proposition catalog exposed to the semantic proposer, and
+separates receipt of a correction from acceptance/rejection of that correction.
+A prior belief can remain as historical evidence while being projected as
+`STALE_AFTER_REVISION_EXPOSURE` when the agent received a specific revision
+but no later stance evidence exists. Equivalent ISO timestamps use parsed time
+plus system-record-time ordering, and revision relations participate in
+invalidation/rebuild.
+
+This closes a deterministic correctness defect revealed by prior internal
+diagnostics. It does **not** establish incremental HCL efficacy. No consumed
+capability fixture was tuned/rerun as fresh evidence; no external benchmark,
+owner-private example, cross-model paid run, training, or leaderboard
+submission was used.
+
+Next research question:
+whether persistent structured HCL adds capability over a strong ordinary
+persistent-memory baseline when both operate under the same bounded query
+context on long, multi-party histories.
+
+Canonical next contract:
+- `docs/HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_CONTRACT_V01.md`
+
+**Current gate: HCL_V04_PROPOSITION_REVISION_STANCE_CORRECTNESS_COMPLETE_LONG_HORIZON_CONTRACT_FROZEN_NOT_RUN**
