@@ -37,7 +37,47 @@ def event(event_id, text, *, actor=None, recipients=(), minute=0):
 
 
 def payload(*rows):
-    return json.dumps({"stance_events": list(rows)})
+    self_stances = []
+    revision_relations = []
+    for row in rows:
+        if row["signal"] == "REVISION_EXPOSURE":
+            revision_relations.append(
+                {
+                    "issue_key": row["issue_key"],
+                    "new_value_key": row["value_key"],
+                    "prior_value_key": row["prior_value_key"],
+                }
+            )
+        else:
+            self_stances.append(
+                {
+                    "issue_key": row["issue_key"],
+                    "signal": row["signal"],
+                    "value_key": row["value_key"],
+                }
+            )
+    return json.dumps(
+        {
+            "self_stances": self_stances,
+            "revision_relations": revision_relations,
+        }
+    )
+
+
+def invalid_subject_payload(issue="route_assignment", value="RED"):
+    return json.dumps(
+        {
+            "self_stances": [
+                {
+                    "subject_agent_id": "other",
+                    "issue_key": issue,
+                    "signal": "AFFIRM",
+                    "value_key": value,
+                }
+            ],
+            "revision_relations": [],
+        }
+    )
 
 
 class V05PersistenceTests(unittest.TestCase):
@@ -77,15 +117,7 @@ class V05PersistenceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             db = str(Path(tmp) / "stance.sqlite")
             raw = event("e1", "Ari accepts Red.", actor="ari")
-            invalid = payload(
-                {
-                    "subject_agent_id": "other",
-                    "issue_key": "route_assignment",
-                    "signal": "AFFIRM",
-                    "value_key": "RED",
-                    "prior_value_key": None,
-                }
-            )
+            invalid = invalid_subject_payload()
 
             runtime = HCLV05Runtime(path=db)
             with self.assertRaises(SemanticExtractionError):
@@ -309,15 +341,7 @@ class V05PersistenceTests(unittest.TestCase):
                 ),
             )
             runtime.invalidate_semantics("e1", "invalidate prior interpretation")
-            invalid = payload(
-                {
-                    "subject_agent_id": "other",
-                    "issue_key": "route_assignment",
-                    "signal": "AFFIRM",
-                    "value_key": "BLUE",
-                    "prior_value_key": None,
-                }
-            )
+            invalid = invalid_subject_payload(value="BLUE")
             with self.assertRaises(SemanticExtractionError):
                 runtime.reprocess_event(
                     "e1",
