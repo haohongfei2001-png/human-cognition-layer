@@ -47,3 +47,8 @@ jobs:
         run: |
           python scripts/run_v04_long_horizon_bounded_context_v01.py --validate-only
           python -m unittest -v tests.test_v04_long_horizon_runner
+      - name: Run fresh long-horizon v0.2 preflight when present
+        if: ${{ hashFiles('scripts/run_v04_long_horizon_bounded_context_v02.py') != '' }}
+        run: |
+          python scripts/run_v04_long_horizon_bounded_context_v02.py --validate-only
+          python -m unittest -v tests.test_v04_long_horizon_runner_v02
