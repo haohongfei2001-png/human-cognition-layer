@@ -1,0 +1,34 @@
+name: HCL v0.4 Long-Horizon v0.1 Preflight
+
+on:
+  pull_request:
+    paths:
+      - "eval/v04/long_horizon_bounded_context_v01_*.json"
+      - "scripts/run_v04_long_horizon_bounded_context_v01.py"
+      - "tests/test_v04_long_horizon_runner.py"
+      - "docs/HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_CONTRACT_V01.md"
+      - ".github/workflows/hcl-v04-long-horizon-v01-preflight.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile runner
+        run: |
+          python -m compileall -q hcl/v04 scripts/run_v04_long_horizon_bounded_context_v01.py tests/test_v04_long_horizon_runner.py
+      - name: Validate frozen fixture and gold separation
+        run: |
+          python scripts/run_v04_long_horizon_bounded_context_v01.py --validate-only
+          sha256sum             eval/v04/long_horizon_bounded_context_v01_fixture.json             eval/v04/long_horizon_bounded_context_v01_gold.json
+      - name: Run provider-free fairness guards
+        run: |
+          python -m unittest -v tests.test_v04_long_horizon_runner
