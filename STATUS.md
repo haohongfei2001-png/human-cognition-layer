@@ -3937,3 +3937,24 @@ The frozen six-case internal C/D/E comparison ran once at experimental exact hea
 These six cases are consumed internal diagnostic evidence, not fresh evidence for tuning or rerun. A different capability question requires a separately frozen independent contract.
 
 **Current gate: HCL_V04_PERSPECTIVE_SAFE_ACTION_V01_DIAGNOSTIC_COMPLETE_NO_PROMOTION_NEXT_CONTRACT_NOT_FROZEN**
+
+## HCL v0.4 historical system-cutoff correctness repair
+
+The frozen minimal implementation contract requires historical HCL knowledge
+as of a prior system cutoff to survive later correction and rebuild. A
+controlled regression found that current-only assertion lookup erased that
+earlier view after invalidation; rebuilding an otherwise active patch could
+also revive a selectively invalidated assertion.
+
+PR #8 repairs this existing correctness contract. Invalidation times are now
+recorded durably, historical views reconstruct accepted patch state before
+later invalidations, and rebuild replays only surviving assertions. The
+evidence closure includes proposition source events, so a later or private
+source cannot leak into an earlier or narrower view. Existing databases that
+lack old invalidation timestamps fail closed and mark the historical cutoff
+incomplete; their missing times cannot be reconstructed.
+
+This is a deterministic internal correctness repair, not a new capability
+comparison or external-efficacy claim. It consumes no new benchmark rows,
+owner-private examples, paid providers, training or publication. The current
+next-contract gate above remains unchanged.

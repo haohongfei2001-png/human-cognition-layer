@@ -133,6 +133,14 @@ class CognitionStore:
                 applied_state_version INTEGER NOT NULL
             );
 
+            CREATE TABLE IF NOT EXISTS assertion_invalidations (
+                assertion_id TEXT NOT NULL,
+                state_version INTEGER NOT NULL,
+                invalidated_at TEXT NOT NULL,
+                reason TEXT NOT NULL,
+                PRIMARY KEY (assertion_id, state_version)
+            );
+
             CREATE TABLE IF NOT EXISTS snapshots (
                 state_version INTEGER PRIMARY KEY,
                 through_event_id TEXT,
@@ -636,15 +644,22 @@ class CognitionStore:
         )
         return checksum
 
-    def _assertion_dict(self, row: sqlite3.Row) -> dict:
+    def _assertion_dict(
+        self, row: sqlite3.Row | dict, proposition_texts: dict[str, str] | None = None
+    ) -> dict:
         proposition_text = None
         if row["proposition_id"]:
-            proposition = self.conn.execute(
-                "SELECT canonical_text FROM propositions WHERE proposition_id=?",
-                (row["proposition_id"],),
-            ).fetchone()
-            if proposition:
-                proposition_text = proposition["canonical_text"]
+            if isinstance(row, dict) and "_historical_proposition_text" in row:
+                proposition_text = row["_historical_proposition_text"]
+            elif proposition_texts is not None:
+                proposition_text = proposition_texts.get(row["proposition_id"])
+            else:
+                proposition = self.conn.execute(
+                    "SELECT canonical_text FROM propositions WHERE proposition_id=?",
+                    (row["proposition_id"],),
+                ).fetchone()
+                if proposition:
+                    proposition_text = proposition["canonical_text"]
         return {
             "assertion_id": row["assertion_id"],
             "assertion_type": row["assertion_type"],
@@ -673,7 +688,7 @@ class CognitionStore:
     def _assertion_evidence_closure(
         self,
         assertion_id: str,
-        by_id: dict[str, sqlite3.Row],
+        by_id: dict[str, sqlite3.Row | dict],
         visiting: set[str] | None = None,
     ) -> set[str]:
         visiting = set() if visiting is None else set(visiting)
@@ -682,12 +697,93 @@ class CognitionStore:
         visiting.add(assertion_id)
         row = by_id[assertion_id]
         events = set(_loads(row["evidence_event_ids"], []))
+        proposition_id = row["proposition_id"]
+        if proposition_id:
+            if isinstance(row, dict) and "_historical_proposition_source_ids" in row:
+                events.update(row["_historical_proposition_source_ids"])
+            else:
+                proposition = self.conn.execute(
+                    "SELECT source_event_ids FROM propositions WHERE proposition_id=?",
+                    (proposition_id,),
+                ).fetchone()
+                if proposition:
+                    events.update(_loads(proposition["source_event_ids"], []))
         for parent in _loads(row["depends_on_assertion_ids"], []):
             if parent in by_id:
                 events |= self._assertion_evidence_closure(
                     parent, by_id, visiting
                 )
         return events
+
+    def _historical_assertion_rows(
+        self, knowledge_cutoff: str
+    ) -> tuple[list[dict], dict[str, str], bool]:
+        """Reconstruct the accepted semantic state before later invalidations.
+
+        Patch payloads are immutable even when a rebuild replaces the derived
+        tables. An invalidation is a separate system-time event, so current
+        assertion status cannot answer an earlier knowledge-cutoff query.
+        """
+        invalidations: dict[str, list[tuple[int, str]]] = {}
+        for row in self.conn.execute(
+            "SELECT assertion_id, state_version, invalidated_at "
+            "FROM assertion_invalidations ORDER BY state_version"
+        ):
+            invalidations.setdefault(row["assertion_id"], []).append(
+                (int(row["state_version"]), row["invalidated_at"])
+            )
+        current_status = {
+            row["assertion_id"]: row["status"]
+            for row in self.conn.execute("SELECT assertion_id, status FROM assertions")
+        }
+        propositions: dict[str, str] = {}
+        proposition_sources: dict[str, tuple[str, ...]] = {}
+        assertions: dict[str, dict] = {}
+        incomplete_legacy_history = False
+        for patch_row in self.conn.execute(
+            "SELECT payload_json, status, applied_state_version FROM patches "
+            "ORDER BY applied_state_version, patch_id"
+        ):
+            payload = _loads(patch_row["payload_json"], {})
+            for proposition in payload.get("propositions", []):
+                propositions[proposition["proposition_id"]] = proposition["canonical_text"]
+                proposition_sources[proposition["proposition_id"]] = tuple(
+                    proposition.get("source_event_ids") or []
+                )
+            applied_version = int(patch_row["applied_state_version"])
+            for original in payload.get("assertions", []):
+                assertion_id = original["assertion_id"]
+                if not _time_leq(original["system_record_time"], knowledge_cutoff):
+                    continue
+                events = invalidations.get(assertion_id, [])
+                invalidated = any(
+                    version > applied_version and _time_leq(at, knowledge_cutoff)
+                    for version, at in events
+                )
+                # Old databases lack invalidation-time receipts. Never turn an
+                # unrecorded invalid assertion into historical evidence.
+                if not events and (
+                    patch_row["status"] != "ACTIVE"
+                    or current_status.get(assertion_id) not in ("ACTIVE", "UNRESOLVED")
+                ):
+                    invalidated = True
+                    incomplete_legacy_history = True
+                if invalidated or original["status"] not in ("ACTIVE", "UNRESOLVED"):
+                    assertions.pop(assertion_id, None)
+                    continue
+                row = dict(original)
+                row["_historical_proposition_text"] = propositions.get(
+                    original.get("proposition_id")
+                )
+                row["_historical_proposition_source_ids"] = proposition_sources.get(
+                    original.get("proposition_id"), ()
+                )
+                row["evidence_event_ids"] = _dumps(original.get("evidence_event_ids") or [])
+                row["depends_on_assertion_ids"] = _dumps(
+                    original.get("depends_on_assertion_ids") or []
+                )
+                assertions[assertion_id] = row
+        return [assertions[key] for key in sorted(assertions)], propositions, incomplete_legacy_history
 
     def build_view(
         self,
@@ -696,7 +792,14 @@ class CognitionStore:
         knowledge_cutoff: str | None,
         query: str,
     ) -> QueryContext:
-        rows = self._active_assertion_rows()
+        if knowledge_cutoff is None:
+            rows = self._active_assertion_rows()
+            proposition_texts = None
+            incomplete_legacy_history = False
+        else:
+            rows, proposition_texts, incomplete_legacy_history = (
+                self._historical_assertion_rows(knowledge_cutoff)
+            )
         by_id = {row["assertion_id"]: row for row in rows}
 
         included: list[sqlite3.Row] = []
@@ -710,6 +813,11 @@ class CognitionStore:
             closure = self._assertion_evidence_closure(
                 row["assertion_id"], by_id
             )
+            if knowledge_cutoff is not None and any(
+                not _time_leq(self.get_event(event_id).recorded_at, knowledge_cutoff)
+                for event_id in closure
+            ):
+                continue
             if viewer not in (None, "__system__"):
                 if not closure:
                     continue
@@ -721,18 +829,18 @@ class CognitionStore:
             included.append(row)
             evidence_ids |= closure
 
-        relevant = tuple(self._assertion_dict(row) for row in included)
+        relevant = tuple(self._assertion_dict(row, proposition_texts) for row in included)
         evidence = tuple(
             self._event_dict(self.get_event(event_id))
             for event_id in sorted(evidence_ids)
         )
         unresolved = tuple(
-            self._assertion_dict(row)
+            self._assertion_dict(row, proposition_texts)
             for row in included
             if row["status"] == AssertionStatus.UNRESOLVED.value
         )
         hypotheses = tuple(
-            self._assertion_dict(row)
+            self._assertion_dict(row, proposition_texts)
             for row in included
             if row["assertion_type"]
             in {
@@ -747,6 +855,11 @@ class CognitionStore:
             if row["assertion_type"] == AssertionType.BELIEF_ESTIMATE.value
         }
         unsupported: list[str] = []
+        if incomplete_legacy_history:
+            unsupported.append(
+                "Historical invalidation time was not recorded for a pre-upgrade "
+                "assertion; this cutoff cannot be certified as complete."
+            )
         for row in included:
             if row["assertion_type"] != AssertionType.INFORMATION_EXPOSURE.value:
                 continue
@@ -823,8 +936,14 @@ class CognitionStore:
                     queue.append(child_id)
 
         new_version = self.state_version + 1
+        invalidated_at = utc_now_iso()
         with self.conn:
             for assertion_id in invalidated:
+                self.conn.execute(
+                    "INSERT INTO assertion_invalidations("
+                    "assertion_id, state_version, invalidated_at, reason) VALUES (?, ?, ?, ?)",
+                    (assertion_id, new_version, invalidated_at, reason),
+                )
                 self.conn.execute(
                     "UPDATE assertions SET status='INVALID' WHERE assertion_id=?",
                     (assertion_id,),
@@ -846,6 +965,9 @@ class CognitionStore:
         )
 
     def active_patches(self) -> tuple[SemanticPatch, ...]:
+        active_ids = {
+            row["assertion_id"] for row in self._active_assertion_rows()
+        }
         rows = self.conn.execute(
             """
             SELECT payload_json FROM patches
@@ -853,10 +975,22 @@ class CognitionStore:
             ORDER BY applied_state_version, patch_id
             """
         ).fetchall()
-        return tuple(
-            self._patch_from_payload(_loads(row["payload_json"], {}))
-            for row in rows
-        )
+        result = []
+        for row in rows:
+            patch = self._patch_from_payload(_loads(row["payload_json"], {}))
+            result.append(
+                SemanticPatch(
+                    patch_id=patch.patch_id,
+                    event_id=patch.event_id,
+                    semantic_version=patch.semantic_version,
+                    propositions=patch.propositions,
+                    assertions=tuple(
+                        assertion for assertion in patch.assertions
+                        if assertion.assertion_id in active_ids
+                    ),
+                )
+            )
+        return tuple(result)
 
     def rebuild(
         self,
