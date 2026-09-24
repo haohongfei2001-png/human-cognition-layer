@@ -103,10 +103,10 @@ class HCLV05Runtime:
                     semantic_repair_count=0,
                     repair_reason=None,
                 )
-            if status == "FAILED":
+            if status in {"FAILED", "INVALIDATED"}:
                 raise ValueError(
-                    f"event_id {event.event_id!r} is preserved but semantic extraction "
-                    "has not succeeded; use reprocess_event"
+                    f"event_id {event.event_id!r} is preserved but semantic state "
+                    f"is {status}; use reprocess_event"
                 )
             raise ValueError(
                 f"event_id {event.event_id!r} exists without a semantic receipt"
@@ -126,11 +126,14 @@ class HCLV05Runtime:
             raise ValueError(
                 f"event_id {event_id!r} already has committed stance semantics"
             )
-        if status != "FAILED":
+        if status not in {"FAILED", "INVALIDATED"}:
             raise ValueError(
-                f"event_id {event_id!r} has no recorded semantic failure"
+                f"event_id {event_id!r} has no failed/invalidated semantics to reprocess"
             )
         return self._extract_and_commit(event, backend)
+
+    def invalidate_semantics(self, event_id: str, reason: str) -> None:
+        self.store.invalidate_semantics(event_id, reason)
 
     def current_stance(
         self,

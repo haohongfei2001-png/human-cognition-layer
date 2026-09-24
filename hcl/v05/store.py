@@ -65,6 +65,24 @@ class V05Store:
                 FOREIGN KEY(event_id) REFERENCES raw_events(event_id),
                 CHECK(status IN ('COMMITTED', 'FAILED'))
             );
+
+            CREATE TABLE IF NOT EXISTS semantic_invalidations (
+                event_id TEXT PRIMARY KEY,
+                invalidated_at TEXT NOT NULL,
+                reason TEXT NOT NULL,
+                FOREIGN KEY(event_id) REFERENCES raw_events(event_id)
+            );
+
+            CREATE TABLE IF NOT EXISTS semantic_invalidation_history (
+                event_id TEXT NOT NULL,
+                invalidation_index INTEGER NOT NULL,
+                invalidated_at TEXT NOT NULL,
+                reason TEXT NOT NULL,
+                prior_stance_payloads_json TEXT NOT NULL,
+                prior_receipt_json TEXT NOT NULL,
+                PRIMARY KEY(event_id, invalidation_index),
+                FOREIGN KEY(event_id) REFERENCES raw_events(event_id)
+            );
             """
         )
 
@@ -163,6 +181,12 @@ class V05Store:
         )
 
     def semantic_status(self, event_id: str) -> str | None:
+        invalidated = self.conn.execute(
+            "SELECT 1 FROM semantic_invalidations WHERE event_id=?",
+            (event_id,),
+        ).fetchone()
+        if invalidated is not None:
+            return "INVALIDATED"
         row = self.conn.execute(
             "SELECT status FROM semantic_receipts WHERE event_id=?",
             (event_id,),
@@ -200,6 +224,10 @@ class V05Store:
             )
         with self.conn:
             self.conn.execute(
+                "DELETE FROM semantic_invalidations WHERE event_id=?",
+                (event_id,),
+            )
+            self.conn.execute(
                 """
                 INSERT INTO semantic_receipts(
                     event_id, status, repair_count, reason, updated_at
@@ -212,6 +240,105 @@ class V05Store:
                 """,
                 (event_id, reason, _now_iso()),
             )
+
+    def invalidate_semantics(self, event_id: str, reason: str) -> None:
+        if not reason.strip():
+            raise ValueError("reason must not be empty")
+        self.get_event(event_id)
+        if self.semantic_status(event_id) != "COMMITTED":
+            raise ValueError(
+                f"event_id {event_id!r} must have committed semantics before invalidation"
+            )
+
+        stance_rows = self.conn.execute(
+            """
+            SELECT payload_json
+            FROM stance_events
+            WHERE source_event_id=?
+            ORDER BY stance_event_id
+            """,
+            (event_id,),
+        ).fetchall()
+        receipt = self.conn.execute(
+            """
+            SELECT event_id, status, repair_count, reason, updated_at
+            FROM semantic_receipts
+            WHERE event_id=?
+            """,
+            (event_id,),
+        ).fetchone()
+        history_index = self.conn.execute(
+            """
+            SELECT COALESCE(MAX(invalidation_index), 0) + 1 AS next_index
+            FROM semantic_invalidation_history
+            WHERE event_id=?
+            """,
+            (event_id,),
+        ).fetchone()
+        invalidated_at = _now_iso()
+
+        with self.conn:
+            self.conn.execute(
+                """
+                INSERT INTO semantic_invalidation_history(
+                    event_id, invalidation_index, invalidated_at, reason,
+                    prior_stance_payloads_json, prior_receipt_json
+                ) VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    event_id,
+                    int(history_index["next_index"]),
+                    invalidated_at,
+                    reason,
+                    _dumps([json.loads(row["payload_json"]) for row in stance_rows]),
+                    _dumps(dict(receipt)),
+                ),
+            )
+            self.conn.execute(
+                "DELETE FROM stance_events WHERE source_event_id=?",
+                (event_id,),
+            )
+            self.conn.execute(
+                """
+                INSERT INTO semantic_invalidations(event_id, invalidated_at, reason)
+                VALUES (?, ?, ?)
+                ON CONFLICT(event_id) DO UPDATE SET
+                    invalidated_at=excluded.invalidated_at,
+                    reason=excluded.reason
+                """,
+                (event_id, invalidated_at, reason),
+            )
+
+    def semantic_invalidation_reason(self, event_id: str) -> str | None:
+        row = self.conn.execute(
+            "SELECT reason FROM semantic_invalidations WHERE event_id=?",
+            (event_id,),
+        ).fetchone()
+        return None if row is None else str(row["reason"])
+
+    def invalidation_history(self, event_id: str) -> tuple[dict, ...]:
+        rows = self.conn.execute(
+            """
+            SELECT invalidation_index, invalidated_at, reason,
+                   prior_stance_payloads_json, prior_receipt_json
+            FROM semantic_invalidation_history
+            WHERE event_id=?
+            ORDER BY invalidation_index
+            """,
+            (event_id,),
+        ).fetchall()
+        return tuple(
+            {
+                "invalidation_index": int(row["invalidation_index"]),
+                "invalidated_at": row["invalidated_at"],
+                "reason": row["reason"],
+                "prior_stance_payloads": json.loads(
+                    row["prior_stance_payloads_json"]
+                ),
+                "prior_receipt": json.loads(row["prior_receipt_json"]),
+            }
+            for row in rows
+        )
 
     def commit_semantics(
         self,
@@ -255,6 +382,10 @@ class V05Store:
                         payload_json,
                     ),
                 )
+            self.conn.execute(
+                "DELETE FROM semantic_invalidations WHERE event_id=?",
+                (source_event_id,),
+            )
             self.conn.execute(
                 """
                 INSERT INTO semantic_receipts(
