@@ -1,0 +1,479 @@
+{
+  "format": "hcl-v05-semantic-extraction-v01-fixture",
+  "streams": [
+    {
+      "id": "x1",
+      "catalog_seed": {
+        "meeting_format": [
+          "IN_PERSON",
+          "VIDEO",
+          "HYBRID"
+        ]
+      },
+      "events": [
+        {
+          "event_id": "x1-e01",
+          "valid_time": "2026-04-01T09:00:00+00:00",
+          "recorded_at": "2026-04-01T09:00:01+00:00",
+          "raw_text": "Coordinator Sora tells Ada: the current meeting format is in person.",
+          "source_id": "sora",
+          "actor_id": "sora",
+          "observer_ids": [],
+          "recipient_ids": [
+            "ada"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "x1-e02",
+          "valid_time": "2026-04-01T09:05:00+00:00",
+          "recorded_at": "2026-04-01T09:05:01+00:00",
+          "raw_text": "Ada says: I accept in-person as the current meeting format.",
+          "source_id": "ada",
+          "actor_id": "ada",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "x1-e03",
+          "valid_time": "2026-04-01T09:10:00+00:00",
+          "recorded_at": "2026-04-01T09:10:01+00:00",
+          "raw_text": "Sora tells Bo only: video replaces in-person as the meeting format.",
+          "source_id": "sora",
+          "actor_id": "sora",
+          "observer_ids": [],
+          "recipient_ids": [
+            "bo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "x1-e04",
+          "valid_time": "2026-04-01T09:15:00+00:00",
+          "recorded_at": "2026-04-01T09:15:01+00:00",
+          "raw_text": "Bo says: Ada accepts video as the meeting format.",
+          "source_id": "bo",
+          "actor_id": "bo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "x1-e05",
+          "valid_time": "2026-04-01T09:20:00+00:00",
+          "recorded_at": "2026-04-01T09:20:01+00:00",
+          "raw_text": "Sora tells Ada directly: video replaces in-person as the meeting format.",
+          "source_id": "sora",
+          "actor_id": "sora",
+          "observer_ids": [],
+          "recipient_ids": [
+            "ada"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "x1-e06",
+          "valid_time": "2026-04-01T09:25:00+00:00",
+          "recorded_at": "2026-04-01T09:25:01+00:00",
+          "raw_text": "Ada says: I received the video change, but I have not decided whether to accept or reject video yet.",
+          "source_id": "ada",
+          "actor_id": "ada",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "x1-e07",
+          "valid_time": "2026-04-01T09:30:00+00:00",
+          "recorded_at": "2026-04-01T09:30:01+00:00",
+          "raw_text": "Ada says: I reject video for now and I still believe in-person is the meeting format.",
+          "source_id": "ada",
+          "actor_id": "ada",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "x1-e08",
+          "valid_time": "2026-04-01T09:35:00+00:00",
+          "recorded_at": "2026-04-01T09:35:01+00:00",
+          "raw_text": "Sora again tells Ada: video replaces in-person as the meeting format.",
+          "source_id": "sora",
+          "actor_id": "sora",
+          "observer_ids": [],
+          "recipient_ids": [
+            "ada"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "x1-e09",
+          "valid_time": "2026-04-01T09:40:00+00:00",
+          "recorded_at": "2026-04-01T09:40:01+00:00",
+          "raw_text": "Ada says: I checked the signed notice and now accept video as the meeting format.",
+          "source_id": "ada",
+          "actor_id": "ada",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "x1-e10",
+          "valid_time": "2026-04-01T09:45:00+00:00",
+          "recorded_at": "2026-04-01T09:45:01+00:00",
+          "raw_text": "The scheduling portal records hybrid as replacing video. Sora sees the portal update; Ada does not receive it.",
+          "source_id": "scheduling_portal",
+          "actor_id": "scheduling_portal",
+          "observer_ids": [
+            "sora"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "x1-e11",
+          "valid_time": "2026-04-01T09:50:00+00:00",
+          "recorded_at": "2026-04-01T09:50:01+00:00",
+          "raw_text": "Bo tells Ada: I heard the portal might say hybrid now.",
+          "source_id": "bo",
+          "actor_id": "bo",
+          "observer_ids": [],
+          "recipient_ids": [
+            "ada"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "x1-e12",
+          "valid_time": "2026-04-01T09:55:00+00:00",
+          "recorded_at": "2026-04-01T09:55:01+00:00",
+          "raw_text": "Ada says: I do not accept the hybrid rumor; I still believe video is the meeting format.",
+          "source_id": "ada",
+          "actor_id": "ada",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "id": "x2",
+      "catalog_seed": {
+        "retention_period": [
+          "D30",
+          "D45",
+          "D60"
+        ]
+      },
+      "events": [
+        {
+          "event_id": "x2-e01",
+          "valid_time": "2026-04-01T10:00:00+00:00",
+          "recorded_at": "2026-04-01T10:00:01+00:00",
+          "raw_text": "Policy lead Mira tells Ben: the current retention period is 30 days.",
+          "source_id": "mira",
+          "actor_id": "mira",
+          "observer_ids": [],
+          "recipient_ids": [
+            "ben"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "x2-e02",
+          "valid_time": "2026-04-01T10:05:00+00:00",
+          "recorded_at": "2026-04-01T10:05:01+00:00",
+          "raw_text": "Ben says: I accept 30 days as the current retention period.",
+          "source_id": "ben",
+          "actor_id": "ben",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "x2-e03",
+          "valid_time": "2026-04-01T10:10:00+00:00",
+          "recorded_at": "2026-04-01T10:10:01+00:00",
+          "raw_text": "Mira tells Cal only: 45 days replaces 30 days as the retention period.",
+          "source_id": "mira",
+          "actor_id": "mira",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cal"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "x2-e04",
+          "valid_time": "2026-04-01T10:15:00+00:00",
+          "recorded_at": "2026-04-01T10:15:01+00:00",
+          "raw_text": "Cal says: I accept 45 days as the current retention period.",
+          "source_id": "cal",
+          "actor_id": "cal",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "x2-e05",
+          "valid_time": "2026-04-01T10:20:00+00:00",
+          "recorded_at": "2026-04-01T10:20:01+00:00",
+          "raw_text": "Cal tells Ben: Mira told me that 45 days replaces 30 days as the retention period.",
+          "source_id": "cal",
+          "actor_id": "cal",
+          "observer_ids": [],
+          "recipient_ids": [
+            "ben"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "x2-e06",
+          "valid_time": "2026-04-01T10:25:00+00:00",
+          "recorded_at": "2026-04-01T10:25:01+00:00",
+          "raw_text": "Ben says: I heard Cal, but I reject 45 days as current and still believe the retention period is 30 days.",
+          "source_id": "ben",
+          "actor_id": "ben",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "x2-e07",
+          "valid_time": "2026-04-01T10:30:00+00:00",
+          "recorded_at": "2026-04-01T10:30:01+00:00",
+          "raw_text": "Mira directly tells Ben: 45 days replaces 30 days as the retention period.",
+          "source_id": "mira",
+          "actor_id": "mira",
+          "observer_ids": [],
+          "recipient_ids": [
+            "ben"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "x2-e08",
+          "valid_time": "2026-04-01T10:35:00+00:00",
+          "recorded_at": "2026-04-01T10:35:01+00:00",
+          "raw_text": "Ben says: I received Mira's 45-day change but I have not decided whether to accept it.",
+          "source_id": "ben",
+          "actor_id": "ben",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "x2-e09",
+          "valid_time": "2026-04-01T10:40:00+00:00",
+          "recorded_at": "2026-04-01T10:40:01+00:00",
+          "raw_text": "Ben says: I have verified the policy and now accept 45 days as the retention period.",
+          "source_id": "ben",
+          "actor_id": "ben",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "x2-e10",
+          "valid_time": "2026-04-01T10:45:00+00:00",
+          "recorded_at": "2026-04-01T10:45:01+00:00",
+          "raw_text": "The policy database records 60 days replacing 45 days. Mira sees the database update; Ben does not receive it.",
+          "source_id": "policy_database",
+          "actor_id": "policy_database",
+          "observer_ids": [
+            "mira"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "x2-e11",
+          "valid_time": "2026-04-01T10:50:00+00:00",
+          "recorded_at": "2026-04-01T10:50:01+00:00",
+          "raw_text": "Mira tells Ben: 60 days replaces 45 days as the retention period.",
+          "source_id": "mira",
+          "actor_id": "mira",
+          "observer_ids": [],
+          "recipient_ids": [
+            "ben"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "x2-e12",
+          "valid_time": "2026-04-01T10:55:00+00:00",
+          "recorded_at": "2026-04-01T10:55:01+00:00",
+          "raw_text": "Ben says: I reject 60 days for now and continue to believe 45 days is the retention period.",
+          "source_id": "ben",
+          "actor_id": "ben",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "id": "x3",
+      "catalog_seed": {
+        "sensor_mode": [
+          "ECO",
+          "NORMAL",
+          "BOOST"
+        ]
+      },
+      "events": [
+        {
+          "event_id": "x3-e01",
+          "valid_time": "2026-04-01T11:00:00+00:00",
+          "recorded_at": "2026-04-01T11:00:01+00:00",
+          "raw_text": "Device lead Nia tells Cyra: the current sensor mode is eco.",
+          "source_id": "nia",
+          "actor_id": "nia",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cyra"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "x3-e02",
+          "valid_time": "2026-04-01T11:05:00+00:00",
+          "recorded_at": "2026-04-01T11:05:01+00:00",
+          "raw_text": "Cyra says: I accept eco as the current sensor mode.",
+          "source_id": "cyra",
+          "actor_id": "cyra",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "x3-e03",
+          "valid_time": "2026-04-01T11:10:00+00:00",
+          "recorded_at": "2026-04-01T11:10:01+00:00",
+          "raw_text": "Nia tells Theo only: normal replaces eco as the sensor mode.",
+          "source_id": "nia",
+          "actor_id": "nia",
+          "observer_ids": [],
+          "recipient_ids": [
+            "theo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "x3-e04",
+          "valid_time": "2026-04-01T11:15:00+00:00",
+          "recorded_at": "2026-04-01T11:15:01+00:00",
+          "raw_text": "Theo tells Cyra: Nia told me that normal replaces eco as the sensor mode.",
+          "source_id": "theo",
+          "actor_id": "theo",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cyra"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "x3-e05",
+          "valid_time": "2026-04-01T11:20:00+00:00",
+          "recorded_at": "2026-04-01T11:20:01+00:00",
+          "raw_text": "Cyra says: I trust Theo's relay and accept normal as the current sensor mode.",
+          "source_id": "cyra",
+          "actor_id": "cyra",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "x3-e06",
+          "valid_time": "2026-04-01T11:25:00+00:00",
+          "recorded_at": "2026-04-01T11:25:01+00:00",
+          "raw_text": "Nia directly confirms to Cyra: normal replaces eco as the sensor mode.",
+          "source_id": "nia",
+          "actor_id": "nia",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cyra"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "x3-e07",
+          "valid_time": "2026-04-01T11:30:00+00:00",
+          "recorded_at": "2026-04-01T11:30:01+00:00",
+          "raw_text": "Cyra says: normal remains the sensor mode I accept.",
+          "source_id": "cyra",
+          "actor_id": "cyra",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "x3-e08",
+          "valid_time": "2026-04-01T11:35:00+00:00",
+          "recorded_at": "2026-04-01T11:35:01+00:00",
+          "raw_text": "The device console records boost replacing normal. Nia sees the console update; Cyra does not receive it.",
+          "source_id": "device_console",
+          "actor_id": "device_console",
+          "observer_ids": [
+            "nia"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "x3-e09",
+          "valid_time": "2026-04-01T11:40:00+00:00",
+          "recorded_at": "2026-04-01T11:40:01+00:00",
+          "raw_text": "Nia tells Cyra: boost replaces normal as the sensor mode.",
+          "source_id": "nia",
+          "actor_id": "nia",
+          "observer_ids": [],
+          "recipient_ids": [
+            "cyra"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "x3-e10",
+          "valid_time": "2026-04-01T11:45:00+00:00",
+          "recorded_at": "2026-04-01T11:45:01+00:00",
+          "raw_text": "Cyra says: I received the boost update, but I have not decided whether to accept or reject boost.",
+          "source_id": "cyra",
+          "actor_id": "cyra",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "x3-e11",
+          "valid_time": "2026-04-01T11:50:00+00:00",
+          "recorded_at": "2026-04-01T11:50:01+00:00",
+          "raw_text": "Cyra says: I reject boost as my current mode and still believe normal is the sensor mode.",
+          "source_id": "cyra",
+          "actor_id": "cyra",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "x3-e12",
+          "valid_time": "2026-04-01T11:55:00+00:00",
+          "recorded_at": "2026-04-01T11:55:01+00:00",
+          "raw_text": "Cyra says: after checking the signed diagnostic, I now accept boost as the sensor mode.",
+          "source_id": "cyra",
+          "actor_id": "cyra",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        }
+      ]
+    }
+  ]
+}
