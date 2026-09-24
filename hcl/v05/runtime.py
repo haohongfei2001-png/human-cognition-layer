@@ -38,10 +38,53 @@ class HCLV05Runtime:
     deterministic projector.
     """
 
-    def __init__(self, store: V05Store | None = None, *, path: str = ":memory:") -> None:
+    def __init__(
+        self,
+        store: V05Store | None = None,
+        *,
+        path: str = ":memory:",
+        semantic_catalog_seed: dict[str, list[str]] | None = None,
+    ) -> None:
         if store is not None and path != ":memory:":
             raise ValueError("provide either store or path, not both")
         self.store = store or V05Store(path)
+        self.semantic_catalog_seed = self._normalize_catalog_seed(
+            semantic_catalog_seed or {}
+        )
+
+    @staticmethod
+    def _normalize_catalog_seed(
+        raw: dict[str, list[str]],
+    ) -> dict[str, list[str]]:
+        normalized: dict[str, list[str]] = {}
+        for issue, values in raw.items():
+            issue_key = str(issue).strip()
+            if not issue_key:
+                raise ValueError("semantic catalog issue key must not be empty")
+            clean_values = [str(value).strip() for value in values]
+            if not clean_values or any(not value for value in clean_values):
+                raise ValueError(
+                    f"semantic catalog issue {issue_key!r} requires non-empty values"
+                )
+            if len(clean_values) != len(set(clean_values)):
+                raise ValueError(
+                    f"semantic catalog issue {issue_key!r} has duplicate values"
+                )
+            normalized[issue_key] = sorted(clean_values)
+        return dict(sorted(normalized.items()))
+
+    def semantic_catalog(self) -> dict[str, list[str]]:
+        dynamic = catalog_from_events(self.store.all_stance_events())
+        merged = {
+            issue: set(values)
+            for issue, values in self.semantic_catalog_seed.items()
+        }
+        for issue, values in dynamic.items():
+            merged.setdefault(issue, set()).update(values)
+        return {
+            issue: sorted(values)
+            for issue, values in sorted(merged.items())
+        }
 
     def close(self) -> None:
         self.store.close()
@@ -67,7 +110,7 @@ class HCLV05Runtime:
             extraction: ExtractionResult = extract_routed_stance_events(
                 event,
                 backend,
-                known_catalog=catalog_from_events(self.store.all_stance_events()),
+                known_catalog=self.semantic_catalog(),
             )
         except Exception as exc:
             self.store.record_semantic_failure(event.event_id, str(exc))
