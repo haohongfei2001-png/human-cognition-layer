@@ -60,12 +60,22 @@ and gold labels are separate from v0.1.
 
 Fixture:
 - `eval/v04/long_horizon_bounded_context_v02_fixture.json`
+- SHA-256:
+  `5aad883a58ddfb12c1089381bc1471898eb21cdbe6e143b1d5a5e256d816b110`
 
 Gold:
 - `eval/v04/long_horizon_bounded_context_v02_gold.json`
+- SHA-256:
+  `a50be5387f97cc9de8b6b83868518d5c765b2298348029d8d3939dcca5a348af`
 
 Runner:
 - `scripts/run_v04_long_horizon_bounded_context_v02.py`
+
+Provider-free evidence:
+- v0.2 preflight run `35984108570`: PASS;
+- v0.2 freshness/fairness guards: **6 / 6**;
+- combined v0.4 minimal-slice run `35984108490`: SUCCESS;
+- manual gold/timeline audit: PASS for all 18 labels before provider use.
 
 ## Capability coverage
 
@@ -146,4 +156,4 @@ failure.
 - No external benchmark, owner-private material, cross-model run, training,
   publication claim, or leaderboard action is authorized by this contract.
 
-**Gate: HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V02_FROZEN_PREFLIGHT_PENDING_PROVIDER_NOT_AUTHORIZED**
+**Gate: HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V02_FROZEN_PREFLIGHT_AND_GOLD_AUDIT_PASS_PROVIDER_NOT_STARTED**
