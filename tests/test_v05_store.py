@@ -203,6 +203,32 @@ class V05PersistenceTests(unittest.TestCase):
             )
             runtime.close()
 
+    def test_invalidated_duplicate_requires_explicit_reprocess(self):
+        runtime = HCLV05Runtime()
+        try:
+            raw = event("e1", "Ari accepts Red.", actor="ari")
+            runtime.ingest_event(
+                raw,
+                FakeBackend(
+                    [
+                        payload(
+                            {
+                                "subject_agent_id": "ari",
+                                "issue_key": "route_assignment",
+                                "signal": "AFFIRM",
+                                "value_key": "RED",
+                                "prior_value_key": None,
+                            }
+                        )
+                    ]
+                ),
+            )
+            runtime.invalidate_semantics("e1", "invalidate semantics")
+            with self.assertRaisesRegex(ValueError, "INVALIDATED; use reprocess_event"):
+                runtime.ingest_event(raw, FakeBackend([]))
+        finally:
+            runtime.close()
+
     def test_invalidated_semantics_persist_across_restart_and_reprocess(self):
         with tempfile.TemporaryDirectory() as tmp:
             db = str(Path(tmp) / "stance.sqlite")
