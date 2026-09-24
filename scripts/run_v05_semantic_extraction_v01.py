@@ -172,16 +172,11 @@ def validate_fixture(fixture: dict[str, Any], gold: dict[str, Any]) -> None:
 
     assert total_signals == 36
 
-    forbidden = {
-        "briefing room",
-        "budget cap",
-        "shipping dock",
-        "lin",
-        "maya",
-        "nora",
-    }
     lowered = fixture_text.lower()
-    assert not any(item in lowered for item in forbidden)
+    for phrase in ("briefing room", "budget cap", "shipping dock"):
+        assert phrase not in lowered
+    for agent in ("lin", "maya", "nora"):
+        assert re.search(rf"\\b{re.escape(agent)}\\b", lowered) is None
 
 
 def load_and_validate(
