@@ -240,9 +240,10 @@ python scripts/run_cogtom_baseline.py --model deepseek-flash --limit 20 --langua
 
 ```text
 HCL v0.3 baseline (FROZEN)
-→ HCL v0.4 research reset / design
-→ representation + update mechanism
-→ independent capability validation
+→ HCL v0.4 minimal persistent cognition runtime
+→ correctness / revision semantics
+→ long-horizon bounded-context capability test
+→ independent transfer validation
 → frozen unseen external evaluation
 → cross-base-model transfer
 → recognized benchmark / leaderboard evidence
