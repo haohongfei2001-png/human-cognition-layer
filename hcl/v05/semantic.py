@@ -32,6 +32,7 @@ class ExtractionResult:
     stance_events: tuple[StanceEvent, ...]
     repair_count: int = 0
     repair_reason: str | None = None
+    revision_relations: tuple["RevisionRelation", ...] = ()
 
 
 SEMANTIC_SYSTEM = """You extract event-local stance signals for HCL v0.5.
@@ -607,7 +608,7 @@ def extract_routed_stance_events(
     for attempt in range(2):
         try:
             payload = json.loads(raw)
-            stance_events, _ = _parse_routed_payload(event, payload)
+            stance_events, revision_relations = _parse_routed_payload(event, payload)
             return ExtractionResult(
                 stance_events=stance_events,
                 repair_count=attempt,
@@ -616,6 +617,7 @@ def extract_routed_stance_events(
                     if attempt == 0
                     else f"routed semantic extraction required one repair after: {first_error}"
                 ),
+                revision_relations=revision_relations,
             )
         except (json.JSONDecodeError, SemanticExtractionError) as exc:
             if first_error is None:
