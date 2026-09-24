@@ -9,6 +9,7 @@ on:
       - "eval/v05/**"
       - "scripts/run_v05_semantic_extraction_v01.py"
       - ".github/workflows/hcl-v05-current-stance.yml"
+      - ".github/workflows/hcl-v05-routed-semantic-extraction-v02-once.yml"
       - ".github/workflows/hcl-v05-semantic-extraction-v01-once.yml"
   push:
     branches:
@@ -20,6 +21,7 @@ on:
       - "eval/v05/**"
       - "scripts/run_v05_semantic_extraction_v01.py"
       - ".github/workflows/hcl-v05-current-stance.yml"
+      - ".github/workflows/hcl-v05-routed-semantic-extraction-v02-once.yml"
       - ".github/workflows/hcl-v05-semantic-extraction-v01-once.yml"
 
 permissions:
