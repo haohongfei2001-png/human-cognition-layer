@@ -255,6 +255,59 @@ class V04RuntimeTests(unittest.TestCase):
         finally:
             runtime.store.close()
 
+    def test_repeated_invalid_belief_repair_fails_closed_without_crashing_ingest(self):
+        runtime = HCLV04Runtime(CognitionStore())
+        try:
+            event = EventRecord(
+                event_id="e1",
+                valid_time=T0,
+                raw_text="Alice explicitly rejects P.",
+                source_id="alice",
+                actor_id="alice",
+                observer_ids=("alice",),
+            )
+            invalid = {
+                "propositions": [
+                    {
+                        "proposition_id": "p1",
+                        "canonical_text": "P",
+                        "source_event_ids": ["e1"],
+                    }
+                ],
+                "assertions": [
+                    {
+                        "assertion_id": "bad_belief",
+                        "assertion_type": "BELIEF_ESTIMATE",
+                        "subject_agent_id": "alice",
+                        "proposition_id": "p1",
+                        "valid_time": T0,
+                        "evidence_event_ids": ["e1"],
+                        "depends_on_assertion_ids": [],
+                        "status": "ACTIVE",
+                        "support_level": "COUNTEREVIDENCE",
+                        "belief_stance": "AFFIRM",
+                    }
+                ],
+            }
+            backend = FakeBackend(
+                json_outputs=[json.dumps(invalid), json.dumps(invalid)]
+            )
+            result = runtime.ingest_event(event, backend)
+
+            self.assertEqual(len(backend.json_calls), 2)
+            self.assertEqual(result.semantic_repair_count, 2)
+            self.assertIn("deterministic fail-closed salvage", result.repair_reason)
+            self.assertIn("COUNTEREVIDENCE", result.repair_reason)
+            self.assertEqual(result.committed_patch.assertions, ())
+            self.assertEqual(runtime.store.state_version, 1)
+            self.assertEqual(
+                runtime.build_view(None, None, None, "q").relevant_assertions,
+                (),
+            )
+            self.assertEqual(runtime.store.get_event("e1").raw_text, event.raw_text)
+        finally:
+            runtime.store.close()
+
     def test_explicit_deny_belief_stance_is_preserved(self):
         runtime = HCLV04Runtime(CognitionStore())
         try:
