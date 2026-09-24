@@ -4299,3 +4299,40 @@ Provider-free evidence:
 No provider-backed event in this package has been consumed yet.
 
 **Current gate: HCL_V05_SEMANTIC_EXTRACTION_V01_FROZEN_PREFLIGHT_PASS_PROVIDER_NOT_STARTED**
+
+
+## HCL v0.5 semantic extraction v0.1 closure
+
+Closure:
+- `reports/HCL_V05_SEMANTIC_EXTRACTION_V01_CLOSURE.md`
+
+Exact one-shot evidence:
+- run `36000445768`: SUCCESS
+- trigger/main `706e12928a5e6251f1809f67662cdec4e30d287b`
+- artifact `10807648913`
+- result JSON SHA-256:
+  `db6db98784db9652206350b3bc4297160052aadfe3412aabf7179c15281e2fbb`
+
+Frozen result:
+- exact events: **20 / 36**
+- signal TP / FP / FN: **24 / 8 / 12**
+- precision: **0.75**
+- recall: **0.6667**
+- extraction errors: **0**
+- repair events: **0**
+
+The extraction boundary is not reliable enough for a new capability run.
+Failures concentrate in two semantic-interface defects:
+1. source assertions are sometimes promoted to the source actor's own stance;
+2. revision relation recognition is entangled with guessing the exposure
+   subject, causing missed/misattributed recipient/observer exposure.
+
+The 36-event v0.1 extraction package is consumed and must not be rerun as fresh
+evidence.
+
+Next mechanism direction:
+separate event-level revision relation recognition from deterministic
+recipient/observer exposure routing, while restricting model-created stance to
+explicit self-stance reports.
+
+**Current gate: HCL_V05_SEMANTIC_EXTRACTION_V01_COMPLETE_UNRELIABLE_ROUTED_EXTRACTION_ARCHITECTURE_NEXT**
