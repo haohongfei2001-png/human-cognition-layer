@@ -317,10 +317,342 @@ def extract_stance_events(
     raise SemanticExtractionError("stance extraction failed")
 
 
+@dataclass(frozen=True)
+class RevisionRelation:
+    issue_key: str
+    new_value_key: str
+    prior_value_key: str
+
+
+ROUTED_SEMANTIC_SYSTEM = """You extract two kinds of event-local semantics for HCL v0.5.
+
+You do NOT decide anyone's final/current belief and you do NOT decide who was
+exposed to a revision. Deterministic code handles information-flow routing from
+the event recipient/observer metadata.
+
+Return JSON only:
+{
+  "self_stances": [
+    {
+      "issue_key": "...",
+      "signal": "AFFIRM|DENY|UNRESOLVED",
+      "value_key": "..."
+    }
+  ],
+  "revision_relations": [
+    {
+      "issue_key": "...",
+      "new_value_key": "...",
+      "prior_value_key": "..."
+    }
+  ]
+}
+
+SELF STANCE rules:
+- self_stances describe ONLY an explicit mental stance reported by the event
+  actor about the actor themself.
+- A source merely telling, informing, announcing, asserting, or reporting that
+  proposition P is true is NOT evidence of the source's own belief and must not
+  create a self_stance.
+- "A tells B: X is current" -> no self stance for A.
+- "A says: I believe/accept X" -> AFFIRM X.
+- "A says: I reject/deny X" -> DENY X.
+- "A says: I have not decided whether to accept X" -> UNRESOLVED X.
+- A third-party claim about another person's stance is not a self stance.
+- A self-report that mentions a previously received correction does not itself
+  recreate revision exposure.
+
+REVISION RELATION rules:
+- revision_relations identify only an explicit semantic replacement/correction
+  relation in this event: new_value replaces/corrects prior_value.
+- Do not include a subject/person in a revision relation.
+- Do not infer a revision from a repeated statement of the same value.
+- A relay may contain a revision relation if it explicitly says new replaces or
+  supersedes old.
+- A world/system update may contain a revision relation even if not everyone
+  observed it. Deterministic routing decides who was exposed.
+
+IDENTITY rules:
+- issue_key identifies the semantic issue.
+- value keys identify object-level alternatives, never meta-sentences.
+- Reuse known issue/value keys exactly when they match.
+- For a new issue/value, choose a concise stable key.
+
+If neither kind is directly supported, return empty lists.
+Do not output subject_agent_id, gold labels, predictions, confidence, or a
+current-state summary.
+"""
+
+
+ROUTED_REPAIR_SYSTEM = """Repair the HCL v0.5 routed semantic extraction.
+
+Return exactly:
+{
+  "self_stances": [
+    {"issue_key": "...", "signal": "AFFIRM|DENY|UNRESOLVED", "value_key": "..."}
+  ],
+  "revision_relations": [
+    {"issue_key": "...", "new_value_key": "...", "prior_value_key": "..."}
+  ]
+}
+
+Hard rules:
+- self_stances are only explicit self-reports by the event actor;
+- source assertion is not source belief;
+- third-party stance claim is not self stance;
+- revision relations contain no person/subject;
+- revision new and prior values must differ;
+- mentioning an earlier correction in a self-report does not recreate exposure;
+- remove unsupported entries rather than inventing replacements.
+
+Return the complete corrected JSON object only.
+"""
+
+
+def _explicit_exposure_targets(event: EventRecord) -> tuple[str, ...]:
+    targets = []
+    seen = set()
+    for subject in (*event.recipient_ids, *event.observer_ids):
+        subject = str(subject).strip()
+        if not subject or subject in seen:
+            continue
+        seen.add(subject)
+        targets.append(subject)
+    return tuple(targets)
+
+
+def _parse_routed_payload(
+    event: EventRecord,
+    payload: dict,
+) -> tuple[tuple[StanceEvent, ...], tuple[RevisionRelation, ...]]:
+    if not isinstance(payload, dict):
+        raise SemanticExtractionError("semantic output must be an object")
+    allowed_top = {"self_stances", "revision_relations"}
+    extra_top = set(payload) - allowed_top
+    if extra_top:
+        raise SemanticExtractionError(
+            f"unexpected routed extraction fields: {sorted(extra_top)}"
+        )
+
+    raw_self = payload.get("self_stances", [])
+    raw_revisions = payload.get("revision_relations", [])
+    if not isinstance(raw_self, list):
+        raise SemanticExtractionError("self_stances must be a list")
+    if not isinstance(raw_revisions, list):
+        raise SemanticExtractionError("revision_relations must be a list")
+
+    result: list[StanceEvent] = []
+    identities: set[tuple[str, str, str, str, str | None]] = set()
+
+    if raw_self and not event.actor_id:
+        raise SemanticExtractionError(
+            "self_stances require an event actor"
+        )
+
+    for index, raw in enumerate(raw_self):
+        if not isinstance(raw, dict):
+            raise SemanticExtractionError(
+                f"self_stances[{index}] must be an object"
+            )
+        allowed = {"issue_key", "signal", "value_key"}
+        extra = set(raw) - allowed
+        if extra:
+            raise SemanticExtractionError(
+                f"self_stances[{index}] has unexpected fields: {sorted(extra)}"
+            )
+        issue_key = _clean_key(raw.get("issue_key"), "issue_key")
+        value_key = _clean_key(raw.get("value_key"), "value_key")
+        try:
+            signal = StanceSignal(str(raw.get("signal")))
+        except ValueError as exc:
+            raise SemanticExtractionError(
+                f"invalid self stance signal={raw.get('signal')!r}"
+            ) from exc
+        if signal not in {
+            StanceSignal.AFFIRM,
+            StanceSignal.DENY,
+            StanceSignal.UNRESOLVED,
+        }:
+            raise SemanticExtractionError(
+                "self_stances may contain only AFFIRM, DENY, or UNRESOLVED"
+            )
+        subject = str(event.actor_id)
+        identity = (subject, issue_key, signal.value, value_key, None)
+        if identity in identities:
+            continue
+        identities.add(identity)
+        id_payload = {
+            "subject_agent_id": subject,
+            "issue_key": issue_key,
+            "signal": signal.value,
+            "value_key": value_key,
+            "prior_value_key": None,
+        }
+        result.append(
+            StanceEvent(
+                event_id=_stable_event_id(event.event_id, id_payload),
+                subject_agent_id=subject,
+                issue_key=issue_key,
+                signal=signal,
+                value_key=value_key,
+                prior_value_key=None,
+                valid_time=event.valid_time,
+                system_record_time=event.recorded_at,
+                evidence_event_ids=(event.event_id,),
+            )
+        )
+
+    revisions: list[RevisionRelation] = []
+    revision_keys: set[tuple[str, str, str]] = set()
+    targets = _explicit_exposure_targets(event)
+    for index, raw in enumerate(raw_revisions):
+        if not isinstance(raw, dict):
+            raise SemanticExtractionError(
+                f"revision_relations[{index}] must be an object"
+            )
+        allowed = {"issue_key", "new_value_key", "prior_value_key"}
+        extra = set(raw) - allowed
+        if extra:
+            raise SemanticExtractionError(
+                f"revision_relations[{index}] has unexpected fields: {sorted(extra)}"
+            )
+        issue_key = _clean_key(raw.get("issue_key"), "issue_key")
+        new_value = _clean_key(raw.get("new_value_key"), "new_value_key")
+        prior_value = _clean_key(raw.get("prior_value_key"), "prior_value_key")
+        if new_value == prior_value:
+            raise SemanticExtractionError("revision values must differ")
+        revision_key = (issue_key, new_value, prior_value)
+        if revision_key in revision_keys:
+            continue
+        revision_keys.add(revision_key)
+        revisions.append(
+            RevisionRelation(
+                issue_key=issue_key,
+                new_value_key=new_value,
+                prior_value_key=prior_value,
+            )
+        )
+        for subject in targets:
+            identity = (
+                subject,
+                issue_key,
+                StanceSignal.REVISION_EXPOSURE.value,
+                new_value,
+                prior_value,
+            )
+            if identity in identities:
+                continue
+            identities.add(identity)
+            id_payload = {
+                "subject_agent_id": subject,
+                "issue_key": issue_key,
+                "signal": StanceSignal.REVISION_EXPOSURE.value,
+                "value_key": new_value,
+                "prior_value_key": prior_value,
+            }
+            result.append(
+                StanceEvent(
+                    event_id=_stable_event_id(event.event_id, id_payload),
+                    subject_agent_id=subject,
+                    issue_key=issue_key,
+                    signal=StanceSignal.REVISION_EXPOSURE,
+                    value_key=new_value,
+                    prior_value_key=prior_value,
+                    valid_time=event.valid_time,
+                    system_record_time=event.recorded_at,
+                    evidence_event_ids=(event.event_id,),
+                )
+            )
+
+    return tuple(result), tuple(revisions)
+
+
+def extract_routed_stance_events(
+    event: EventRecord,
+    backend: SemanticBackend,
+    *,
+    known_catalog: dict[str, list[str]] | None = None,
+    max_tokens: int = 1536,
+) -> ExtractionResult:
+    """Extract self stance + revision relation, route exposure deterministically."""
+    user_payload = {
+        "event": {
+            "event_id": event.event_id,
+            "valid_time": event.valid_time,
+            "recorded_at": event.recorded_at,
+            "source_id": event.source_id,
+            "actor_id": event.actor_id,
+            "observer_ids": list(event.observer_ids),
+            "recipient_ids": list(event.recipient_ids),
+            "raw_text": event.raw_text,
+            "metadata": event.metadata,
+        },
+        "known_issue_value_catalog": known_catalog or {},
+    }
+    raw = backend.complete_json(
+        [
+            {"role": "system", "content": ROUTED_SEMANTIC_SYSTEM},
+            {
+                "role": "user",
+                "content": json.dumps(
+                    user_payload, ensure_ascii=False, sort_keys=True
+                ),
+            },
+        ],
+        max_tokens=max_tokens,
+        temperature=0.0,
+    )
+
+    first_error: Exception | None = None
+    for attempt in range(2):
+        try:
+            payload = json.loads(raw)
+            stance_events, _ = _parse_routed_payload(event, payload)
+            return ExtractionResult(
+                stance_events=stance_events,
+                repair_count=attempt,
+                repair_reason=(
+                    None
+                    if attempt == 0
+                    else f"routed semantic extraction required one repair after: {first_error}"
+                ),
+            )
+        except (json.JSONDecodeError, SemanticExtractionError) as exc:
+            if first_error is None:
+                first_error = exc
+            if attempt == 1:
+                raise SemanticExtractionError(
+                    f"routed stance extraction invalid after bounded repair: {exc}"
+                ) from exc
+            raw = backend.complete_json(
+                [
+                    {"role": "system", "content": ROUTED_REPAIR_SYSTEM},
+                    {
+                        "role": "user",
+                        "content": json.dumps(
+                            {
+                                "event": user_payload["event"],
+                                "known_issue_value_catalog": known_catalog or {},
+                                "invalid_output": raw,
+                                "validation_error": str(exc),
+                            },
+                            ensure_ascii=False,
+                            sort_keys=True,
+                        ),
+                    },
+                ],
+                max_tokens=max_tokens,
+                temperature=0.0,
+            )
+    raise SemanticExtractionError("routed stance extraction failed")
+
+
 __all__ = [
     "ExtractionResult",
     "SemanticBackend",
     "SemanticExtractionError",
+    "RevisionRelation",
     "catalog_from_events",
+    "extract_routed_stance_events",
     "extract_stance_events",
 ]
