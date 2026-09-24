@@ -717,7 +717,7 @@ class CognitionStore:
 
     def _historical_assertion_rows(
         self, knowledge_cutoff: str
-    ) -> tuple[list[dict], dict[str, str]]:
+    ) -> tuple[list[dict], dict[str, str], bool]:
         """Reconstruct the accepted semantic state before later invalidations.
 
         Patch payloads are immutable even when a rebuild replaces the derived
@@ -739,6 +739,7 @@ class CognitionStore:
         propositions: dict[str, str] = {}
         proposition_sources: dict[str, tuple[str, ...]] = {}
         assertions: dict[str, dict] = {}
+        incomplete_legacy_history = False
         for patch_row in self.conn.execute(
             "SELECT payload_json, status, applied_state_version FROM patches "
             "ORDER BY applied_state_version, patch_id"
@@ -766,6 +767,7 @@ class CognitionStore:
                     or current_status.get(assertion_id) not in ("ACTIVE", "UNRESOLVED")
                 ):
                     invalidated = True
+                    incomplete_legacy_history = True
                 if invalidated or original["status"] not in ("ACTIVE", "UNRESOLVED"):
                     assertions.pop(assertion_id, None)
                     continue
@@ -781,7 +783,7 @@ class CognitionStore:
                     original.get("depends_on_assertion_ids") or []
                 )
                 assertions[assertion_id] = row
-        return [assertions[key] for key in sorted(assertions)], propositions
+        return [assertions[key] for key in sorted(assertions)], propositions, incomplete_legacy_history
 
     def build_view(
         self,
@@ -793,8 +795,11 @@ class CognitionStore:
         if knowledge_cutoff is None:
             rows = self._active_assertion_rows()
             proposition_texts = None
+            incomplete_legacy_history = False
         else:
-            rows, proposition_texts = self._historical_assertion_rows(knowledge_cutoff)
+            rows, proposition_texts, incomplete_legacy_history = (
+                self._historical_assertion_rows(knowledge_cutoff)
+            )
         by_id = {row["assertion_id"]: row for row in rows}
 
         included: list[sqlite3.Row] = []
@@ -850,6 +855,11 @@ class CognitionStore:
             if row["assertion_type"] == AssertionType.BELIEF_ESTIMATE.value
         }
         unsupported: list[str] = []
+        if incomplete_legacy_history:
+            unsupported.append(
+                "Historical invalidation time was not recorded for a pre-upgrade "
+                "assertion; this cutoff cannot be certified as complete."
+            )
         for row in included:
             if row["assertion_type"] != AssertionType.INFORMATION_EXPOSURE.value:
                 continue

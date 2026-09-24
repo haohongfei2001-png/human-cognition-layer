@@ -375,6 +375,31 @@ class V04RecoveryTests(unittest.TestCase):
         finally:
             store.close()
 
+    def test_pre_upgrade_invalidation_without_time_fails_closed(self):
+        store = CognitionStore()
+        try:
+            store.append_event(EventRecord(
+                event_id="e1", valid_time=T0, recorded_at=R0,
+                raw_text="Claim P", source_id="source", actor_id="source",
+                observer_ids=("alice",),
+            ))
+            apply(store, SemanticPatch(
+                patch_id="p1", event_id="e1", semantic_version="v04.1",
+                assertions=(CognitiveAssertion(
+                    assertion_id="a", assertion_type=AssertionType.SOURCE_ASSERTION,
+                    hypothesis_text="P", valid_time=T0, system_record_time=R0,
+                    evidence_event_ids=("e1",),
+                ),),
+            ))
+            store.invalidate(["p1"], "legacy correction")
+            with store.conn:
+                store.conn.execute("DELETE FROM assertion_invalidations")
+            past = store.build_view("alice", T0, "2026-01-01T10:30:00+00:00", "past")
+            self.assertEqual(past.relevant_assertions, ())
+            self.assertTrue(any("cannot be certified" in note for note in past.unsupported_conclusions))
+        finally:
+            store.close()
+
 
 if __name__ == "__main__":
     unittest.main()
