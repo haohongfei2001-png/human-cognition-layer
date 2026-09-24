@@ -34,3 +34,6 @@ __all__ += [
     "catalog_from_events",
     "extract_stance_events",
 ]
+
+from .store import V05Store
+__all__ += ["V05Store"]
