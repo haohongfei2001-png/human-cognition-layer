@@ -1,0 +1,77 @@
+{
+  "format": "hcl-v04-long-horizon-bounded-context-v01-gold",
+  "labels": {
+    "s1-q1": {
+      "gold": "MARIN",
+      "risk_class": "current_belief"
+    },
+    "s1-q2": {
+      "gold": "MARIN",
+      "risk_class": "perspective_leak"
+    },
+    "s1-q3": {
+      "gold": "UNCERTAIN",
+      "risk_class": "unsupported_certainty_after_revision_receipt"
+    },
+    "s1-q4": {
+      "gold": "MARIN",
+      "risk_class": "stale_revision"
+    },
+    "s1-q5": {
+      "gold": "MARIN",
+      "risk_class": "private_world_fact_leak"
+    },
+    "s1-q6": {
+      "gold": "MARINA",
+      "risk_class": "accepted_revision"
+    },
+    "s2-q1": {
+      "gold": "OCT10",
+      "risk_class": "current_belief"
+    },
+    "s2-q2": {
+      "gold": "OCT10",
+      "risk_class": "perspective_leak"
+    },
+    "s2-q3": {
+      "gold": "OCT10",
+      "risk_class": "relay_rejection"
+    },
+    "s2-q4": {
+      "gold": "OCT12",
+      "risk_class": "accepted_revision"
+    },
+    "s2-q5": {
+      "gold": "OCT12",
+      "risk_class": "private_world_fact_leak"
+    },
+    "s2-q6": {
+      "gold": "OCT14",
+      "risk_class": "accepted_revision"
+    },
+    "s3-q1": {
+      "gold": "ASTER",
+      "risk_class": "current_belief"
+    },
+    "s3-q2": {
+      "gold": "ASTER",
+      "risk_class": "relay_rejection"
+    },
+    "s3-q3": {
+      "gold": "UNCERTAIN",
+      "risk_class": "unsupported_certainty_after_revision_receipt"
+    },
+    "s3-q4": {
+      "gold": "BIRCH",
+      "risk_class": "private_world_fact_leak"
+    },
+    "s3-q5": {
+      "gold": "CEDAR",
+      "risk_class": "accepted_revision"
+    },
+    "s3-q6": {
+      "gold": "ASTER",
+      "risk_class": "historical_state"
+    }
+  }
+}
