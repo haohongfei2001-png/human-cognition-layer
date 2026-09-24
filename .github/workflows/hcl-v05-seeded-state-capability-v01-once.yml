@@ -1,0 +1,138 @@
+name: HCL v0.5 Seeded State Capability v0.1 Once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_V05_SEEDED_STATE_CAPABILITY_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hcl-v05-seeded-state-capability-v01-once
+  cancel-in-progress: false
+
+env:
+  CANDIDATE_ANCHOR: f59a3cc7b1e77eb1b4ee2ca3b22e051c43312dd3
+  FIXTURE_SHA256: 5879f487f3b5b92079c091733074600233e3de0da3ae87a01061f09badd2d2ef
+  GOLD_SHA256: e4813c41b5863799c0e3f9d4954a6338a35cbd986fadf879c6651dd619f6fed8
+  DEEPSEEK_BASE_URL: https://api.deepseek.com
+  TRIGGER_PATH: .github/HCL_V05_SEEDED_STATE_CAPABILITY_V01_TRIGGER
+  RUN_ONCE_TOKEN: HCL_V05_SEEDED_STATE_CAPABILITY_V01_RUN_ONCE_20260924_A1
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Enforce immutable one-shot trigger
+        shell: bash
+        run: |
+          if [ "$GITHUB_RUN_ATTEMPT" != "1" ]; then
+            echo "Refusing provider execution on workflow rerun attempt $GITHUB_RUN_ATTEMPT"
+            exit 1
+          fi
+          test "$(cat "$TRIGGER_PATH")" = "$RUN_ONCE_TOKEN"
+          if git log --format=%H "${{ github.event.before }}" -- "$TRIGGER_PATH" | grep -q .; then
+            echo "Trigger path existed before this push; scored rows are consumed or trigger history is not fresh."
+            exit 1
+          fi
+          git diff --diff-filter=A --name-only "${{ github.event.before }}" "$GITHUB_SHA" -- "$TRIGGER_PATH" \
+            | grep -Fx "$TRIGGER_PATH"
+
+      - name: Verify frozen candidate content
+        shell: bash
+        run: |
+          git diff --exit-code "$CANDIDATE_ANCHOR"..HEAD -- \
+            hcl/v05 \
+            scripts/run_v05_seeded_state_capability_v01.py \
+            tests/test_v05_seeded_state_capability_runner.py \
+            eval/v05/seeded_state_capability_v01_fixture.json \
+            eval/v05/seeded_state_capability_v01_gold.json \
+            docs/HCL_V05_SEEDED_STATE_CAPABILITY_V01.md
+          echo "$FIXTURE_SHA256  eval/v05/seeded_state_capability_v01_fixture.json" | sha256sum -c -
+          echo "$GOLD_SHA256  eval/v05/seeded_state_capability_v01_gold.json" | sha256sum -c -
+
+      - name: Run provider-free execution preflight
+        run: |
+          python scripts/run_v05_seeded_state_capability_v01.py --validate-only
+          python -m unittest -v tests.test_v05_seeded_state_capability_runner
+
+      - name: Install frozen provider client
+        run: python -m pip install "openai==2.14.0"
+
+      - name: Run frozen seeded state capability pilot once
+        run: |
+          python scripts/run_v05_seeded_state_capability_v01.py \
+            --model deepseek-flash \
+            --fixtures eval/v05/seeded_state_capability_v01_fixture.json \
+            --gold eval/v05/seeded_state_capability_v01_gold.json \
+            --out artifacts/hcl-v05-seeded-state-capability-v01/result.json
+
+      - name: Verify complete evidence artifact
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          p = Path("artifacts/hcl-v05-seeded-state-capability-v01/result.json")
+          result = json.loads(p.read_text(encoding="utf-8"))
+
+          assert result["format"] == "hcl-v05-seeded-state-capability-v01"
+          assert result["fixture_sha256"] == os.environ["FIXTURE_SHA256"]
+          assert result["gold_sha256"] == os.environ["GOLD_SHA256"]
+          assert result["primary_comparison"] == ["D", "E"]
+          assert result["diagnostic_oracle"] == "C"
+          assert result["d_answer_mode"] == "deterministic_current_stance_projection"
+          assert result["query_context_char_budget"] == 8000
+          assert result["ordinary_memory_char_budget"] == 6000
+
+          for arm in ("C", "D", "E"):
+              block = result["arms"][arm]
+              assert block["total"] == 24
+              assert len(block["rows"]) == 24
+              assert block["backend"]["calls"] > 0
+              assert block["backend"]["input_chars"] > 0
+              assert block["backend"]["output_chars"] > 0
+              assert block["backend"]["provider_wall_seconds"] >= 0
+              assert block["wall_clock_seconds"] >= 0
+
+          assert result["arms"]["C"]["backend"]["json_calls"] == 24
+          assert result["arms"]["D"]["backend"]["text_calls"] == 0
+          assert result["arms"]["D"]["backend"]["calls"] >= 216
+          assert result["arms"]["E"]["backend"]["text_calls"] >= 216
+          assert result["arms"]["E"]["backend"]["json_calls"] == 24
+          assert result["arms"]["E"]["max_query_context_chars"] <= 8000
+          assert result["arms"]["E"]["max_persistent_state_chars"] <= 6000
+
+          for row in result["arms"]["D"]["rows"]:
+              assert "target_current_stance" in row
+              assert "persistent_state" in row
+              assert "semantic_errors_so_far" in row
+          for row in result["arms"]["E"]["rows"]:
+              assert "query_context" in row
+              assert "memory_chars" in row
+          PY
+
+      - name: Upload immutable capability evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v05-seeded-state-capability-v01-${{ github.run_id }}
+          path: artifacts/hcl-v05-seeded-state-capability-v01/
+          if-no-files-found: warn
+          retention-days: 90
