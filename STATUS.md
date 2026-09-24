@@ -4099,3 +4099,40 @@ Codex code-review quota was unavailable on PR #16; exact-head CI plus manual
 fixture/gold and implementation review are the current validation basis.
 
 **Current gate: HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V02_FROZEN_PREFLIGHT_AND_GOLD_AUDIT_PASS_PROVIDER_NOT_STARTED**
+
+
+## HCL v0.4 long-horizon bounded-context v0.2 closure
+
+Closure:
+- `reports/HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V02_CLOSURE.md`
+
+Exact one-shot evidence:
+- run `35984587967`: SUCCESS
+- main/trigger `dbf127a95a1b4e180064010dacb22ff98457160d`
+- artifact `10802613472`
+- result JSON SHA-256:
+  `ff0e185c6833ae811b575109eb2066c659f8f2c1d2d98aaa6b67f364077cfd31`
+
+Frozen result:
+- C full-history diagnostic: **15 / 18**
+- D persistent HCL: **14 / 18**
+- E ordinary persistent memory: **17 / 18**
+
+Under the pre-registered primary D-vs-E interpretation, current v0.4 does not
+establish incremental utility; E is more correct on this frozen slice. D also
+used 2,220,200 input characters versus E's 721,384, although D had lower
+provider wall time.
+
+D did preserve one real mechanism advantage: all three receipt-without-stance
+queries were correct, while C missed all three and E missed one. That mechanism
+is retained as evidence, not promoted as an overall win.
+
+Artifact diagnosis localizes D's failures to current-state convergence:
+stale unresolved assertions survive later explicit stance, repeated
+confirmation can reopen uncertainty, revision identity is too literal across
+semantically equivalent propositions, and raw assertion projection can allow
+the answer stage to misread AFFIRM/DENY polarity.
+
+v0.2 is now consumed and must not be rerun as fresh evidence.
+
+**Current gate: HCL_V04_LONG_HORIZON_V02_COMPLETE_NEGATIVE_UTILITY_CURRENT_STANCE_ARCHITECTURE_REQUIRED**
