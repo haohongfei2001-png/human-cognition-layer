@@ -15,6 +15,7 @@ def utc_now_iso() -> str:
 class AssertionType(str, Enum):
     SCENE_FACT = "SCENE_FACT"
     SOURCE_ASSERTION = "SOURCE_ASSERTION"
+    PROPOSITION_REVISION = "PROPOSITION_REVISION"
     INFORMATION_EXPOSURE = "INFORMATION_EXPOSURE"
     BELIEF_ESTIMATE = "BELIEF_ESTIMATE"
     STATED_GOAL_INTENTION = "STATED_GOAL_INTENTION"
@@ -76,6 +77,7 @@ class CognitiveAssertion:
     evidence_event_ids: tuple[str, ...]
     subject_agent_id: str | None = None
     proposition_id: str | None = None
+    related_proposition_id: str | None = None
     hypothesis_text: str | None = None
     depends_on_assertion_ids: tuple[str, ...] = ()
     status: AssertionStatus = AssertionStatus.ACTIVE
