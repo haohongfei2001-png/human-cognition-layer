@@ -4428,3 +4428,38 @@ Provider-free evidence:
 No v0.2 provider-backed extraction event has been consumed yet.
 
 **Current gate: HCL_V05_ROUTED_SEMANTIC_EXTRACTION_V02_FROZEN_PREFLIGHT_PASS_PROVIDER_NOT_STARTED**
+
+
+## HCL v0.5 routed semantic extraction v0.2 closure
+
+Closure:
+- `reports/HCL_V05_ROUTED_SEMANTIC_EXTRACTION_V02_CLOSURE.md`
+
+Exact one-shot evidence:
+- run `36004792453`: SUCCESS
+- trigger/main `8efc35408b73ea6112970cf2bdb38da14949791b`
+- artifact `10809113887`
+- result JSON SHA-256:
+  `9a62fc5b7e94e27ee1b3fcbdbb8772f15f381fdea79bdebe5c854d87427e7181`
+
+Frozen result:
+- exact events: **35 / 36**
+- self stance TP / FP / FN: **19 / 1 / 0**
+- revision relation TP / FP / FN: **14 / 0 / 0**
+- extraction errors / repair events: **0 / 0**
+
+The routed architecture eliminated the prior revision subject/missing-relation
+failure class on this fresh slice. The sole mismatch is semantically ambiguous:
+"I think it may be Friday" was extracted as Omar UNRESOLVED(FRIDAY), while the
+frozen gold specified no self stance. The frozen score remains 35/36; the row is
+not post-hoc relabeled.
+
+This gate is sufficient for a new independent controlled end-to-end capability
+pilot, but not for a general extraction claim. The next pilot should seed
+issue/value identity for both arms so it tests persistent cognition rather than
+open-ended ontology induction.
+
+The 36-event routed extraction v0.2 package is consumed and must not be rerun as
+fresh evidence.
+
+**Current gate: HCL_V05_ROUTED_EXTRACTION_V02_COMPLETE_END_TO_END_FRESH_CAPABILITY_NEXT**
