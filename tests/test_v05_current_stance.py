@@ -154,6 +154,36 @@ class CurrentStanceCoreTests(unittest.TestCase):
         self.assertEqual(current.status, StanceStatus.AFFIRMED)
         self.assertEqual(current.affirmed_value_key, "BLUE")
 
+    def test_same_value_affirm_and_deny_fails_closed(self):
+        same_valid = "2026-01-01T10:01:00+00:00"
+        same_recorded = "2026-01-01T10:01:01+00:00"
+        events = [
+            StanceEvent(
+                event_id="affirm",
+                subject_agent_id="agent",
+                issue_key="route",
+                signal=StanceSignal.AFFIRM,
+                value_key="BLUE",
+                valid_time=same_valid,
+                system_record_time=same_recorded,
+            ),
+            StanceEvent(
+                event_id="deny",
+                subject_agent_id="agent",
+                issue_key="route",
+                signal=StanceSignal.DENY,
+                value_key="BLUE",
+                valid_time=same_valid,
+                system_record_time=same_recorded,
+            ),
+        ]
+        state = project_current_stance(
+            events, subject_agent_id="agent", issue_key="route"
+        )
+        self.assertEqual(state.status, StanceStatus.CONFLICT)
+        self.assertIsNone(state.affirmed_value_key)
+        self.assertIn("BLUE", state.rejected_value_keys)
+
     def test_conflicting_affirms_fail_closed(self):
         same_valid = "2026-01-01T10:01:00+00:00"
         same_recorded = "2026-01-01T10:01:01+00:00"
