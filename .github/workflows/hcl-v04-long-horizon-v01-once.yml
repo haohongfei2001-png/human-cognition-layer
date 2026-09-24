@@ -19,6 +19,8 @@ env:
   FIXTURE_SHA256: a79b675cf484292a07916141d54d3022862c39851a3fc4b91c73cb13f1a75cfe
   GOLD_SHA256: 376fb695eada3b52f7e8fadd395be479f9cbbf47c944c9d3b0c4a56d5f90c988
   DEEPSEEK_BASE_URL: https://api.deepseek.com
+  TRIGGER_PATH: .github/HCL_V04_LONG_HORIZON_V01_TRIGGER
+  RUN_ONCE_TOKEN: HCL_V04_LONG_HORIZON_V01_RUN_ONCE_20260924_A1
 
 jobs:
   compare:
@@ -34,6 +36,24 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Enforce immutable one-shot trigger
+        shell: bash
+        run: |
+          if [ "$GITHUB_RUN_ATTEMPT" != "1" ]; then
+            echo "Refusing provider execution on workflow rerun attempt $GITHUB_RUN_ATTEMPT"
+            exit 1
+          fi
+
+          test "$(cat "$TRIGGER_PATH")" = "$RUN_ONCE_TOKEN"
+
+          if git log --format=%H "${{ github.event.before }}" -- "$TRIGGER_PATH" | grep -q .; then
+            echo "Trigger path existed before this push; scored rows are already consumed or trigger history is not fresh."
+            exit 1
+          fi
+
+          git diff --diff-filter=A --name-only "${{ github.event.before }}" "$GITHUB_SHA" -- "$TRIGGER_PATH" \
+            | grep -Fx "$TRIGGER_PATH"
 
       - name: Verify frozen candidate content
         shell: bash
