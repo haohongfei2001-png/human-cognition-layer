@@ -4204,3 +4204,37 @@ No provider-backed extraction, capability fixture, consumed-row rerun,
 owner-private example, training or benchmark claim is part of this milestone.
 
 **Current gate: HCL_V05_SEMANTIC_STANCE_INTEGRATION_V01_PROVIDER_FREE_COMPLETE_PERSISTENCE_NEXT**
+
+
+## HCL v0.5 persistent stance store v0.1
+
+Contract:
+- `docs/HCL_V05_PERSISTENT_STANCE_STORE_V01.md`
+
+PR #22 moves the v0.5 runtime onto a transactional SQLite evidence/stance store
+without changing the deterministic stance-transition rules.
+
+Persistence semantics:
+- immutable raw events are committed before semantic extraction;
+- raw evidence survives semantic/backend failure and process restart;
+- semantic status is recorded separately as COMMITTED or FAILED;
+- failed semantics can be explicitly reprocessed after restart;
+- normal duplicate ingest never silently retries a failed extraction;
+- changed-content reuse of an event ID fails across restarts;
+- a valid empty semantic extraction is durably distinguished from "not
+  processed";
+- stance-event commit + semantic receipt are transactional;
+- reopening the database reconstructs the same current stance.
+
+Provider-free exact-head integration evidence at
+`c9f3e60a2de2a426a9939d182c2d63a5ae677884`:
+- HCL integration workflow `35990918733`: SUCCESS;
+- existing v0.4 suite: **36 / 36**;
+- v0.5 core + semantic runtime + persistence: **22 / 22**;
+- long-horizon v0.1 provider-free preflight: **8 / 8**;
+- long-horizon v0.2 provider-free preflight: **6 / 6**.
+
+No provider call, benchmark rerun, owner-private example, training or capability
+claim is part of this milestone.
+
+**Current gate: HCL_V05_PERSISTENT_STANCE_STORE_V01_PROVIDER_FREE_COMPLETE_INVALIDATION_REBUILD_NEXT**
