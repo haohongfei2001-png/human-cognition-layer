@@ -1047,6 +1047,7 @@ class CognitionStore:
 
         direct: set[str] = set()
         invalid_patches: set[str] = set()
+        invalidated_proposition_ids: set[str] = set()
 
         rows = self.conn.execute("SELECT * FROM assertions").fetchall()
         for row in rows:
@@ -1073,6 +1074,19 @@ class CognitionStore:
                     for a in payload.get("assertions", [])
                     if "assertion_id" in a
                 }
+                invalidated_proposition_ids |= {
+                    p["proposition_id"]
+                    for p in payload.get("propositions", [])
+                    if "proposition_id" in p
+                }
+
+        if invalidated_proposition_ids:
+            for row in rows:
+                if (
+                    row["proposition_id"] in invalidated_proposition_ids
+                    or row["related_proposition_id"] in invalidated_proposition_ids
+                ):
+                    direct.add(row["assertion_id"])
 
         invalidated = set(direct)
         queue = list(direct)
