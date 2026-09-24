@@ -4018,10 +4018,15 @@ Frozen digests remain:
 - gold: `376fb695eada3b52f7e8fadd395be479f9cbbf47c944c9d3b0c4a56d5f90c988`
 
 Provider-free evidence:
-- preflight `35978730334`: SUCCESS, 7/7 fairness guards;
-- integration/minimal-slice `35978730244`: SUCCESS;
+- preflight `35980000546`: SUCCESS, 8/8 fairness/evidence guards;
+- integration/minimal-slice `35980000406`: SUCCESS;
 - manual frozen gold/timeline audit: PASS.
 
 No provider-backed scored row has been consumed yet.
 
-**Current gate: HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V01_IMPLEMENTED_PREFLIGHT_AND_GOLD_AUDIT_PASS_PROVIDER_RUN_NOT_STARTED**
+The final execution candidate additionally preserves, for every scored query,
+the exact model-visible context; D also preserves the full derived cognition
+snapshot. The one-shot workflow rejects repeat trigger history and Actions
+reruns before provider calls.
+
+**Current gate: HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V01_FINAL_EVIDENCE_CONTRACT_FROZEN_PROVIDER_RUN_NOT_STARTED**
