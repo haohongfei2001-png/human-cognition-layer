@@ -16,10 +16,6 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from hcl.v04.backends import (
-    DEEPSEEK_FLASH_CAPABILITIES,
-    OpenAICompatibleBackend,
-)
 from hcl.v04.model import EventRecord
 from hcl.v05.semantic import SemanticExtractionError, extract_stance_events
 
@@ -55,6 +51,11 @@ class MeteredBackend:
 
 
 def make_backend(api_key: str, base_url: str, model: str) -> MeteredBackend:
+    from hcl.v04.backends import (
+        DEEPSEEK_FLASH_CAPABILITIES,
+        OpenAICompatibleBackend,
+    )
+
     return MeteredBackend(
         OpenAICompatibleBackend(
             api_key=api_key,
