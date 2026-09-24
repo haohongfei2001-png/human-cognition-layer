@@ -181,6 +181,21 @@ def validate_fixture(fixture: dict[str, Any], gold: dict[str, Any]) -> None:
             event_ids.add(eid)
             assert event["raw_text"].strip()
             assert event["valid_time"] and event["recorded_at"]
+        primary_count = sum(
+            1
+            for event in stream["events"]
+            if (event.get("metadata") or {}).get("track") == "primary"
+        )
+        assert primary_count >= 8
+        full_history_chars = len(
+            json.dumps(
+                [event_prompt_payload(event) for event in stream["events"]],
+                ensure_ascii=False,
+                sort_keys=True,
+            )
+        )
+        assert full_history_chars > fixture["query_context_char_budget"]
+
         for query in stream["queries"]:
             assert "gold" not in query
             assert "risk_class" not in query
