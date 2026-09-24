@@ -77,13 +77,13 @@ class CognitiveAssertion:
     evidence_event_ids: tuple[str, ...]
     subject_agent_id: str | None = None
     proposition_id: str | None = None
-    related_proposition_id: str | None = None
     hypothesis_text: str | None = None
     depends_on_assertion_ids: tuple[str, ...] = ()
     status: AssertionStatus = AssertionStatus.ACTIVE
     support_level: SupportLevel | None = None
     belief_stance: BeliefStance | None = None
     semantic_version: str = "v04.1"
+    related_proposition_id: str | None = None
 
 
 @dataclass(frozen=True)
