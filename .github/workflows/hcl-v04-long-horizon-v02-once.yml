@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  CANDIDATE_ANCHOR: ec29d8d72302a15e7a488a9a7be4efcdc56166e8
+  CANDIDATE_ANCHOR: 8d7f2b2cf9f027eb6b2046fdd8043f8bab2daac2
   FIXTURE_SHA256: 5aad883a58ddfb12c1089381bc1471898eb21cdbe6e143b1d5a5e256d816b110
   GOLD_SHA256: a50be5387f97cc9de8b6b83868518d5c765b2298348029d8d3939dcca5a348af
   DEEPSEEK_BASE_URL: https://api.deepseek.com
