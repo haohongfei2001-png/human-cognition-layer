@@ -19,6 +19,7 @@ from .semantic import (
     patch_from_mapping,
     patch_to_mapping,
     propose_patch,
+    propose_patch_with_diagnostics,
     repair_patch_for_invariant,
 )
 from .store import CognitionStore
@@ -156,36 +157,43 @@ class HCLV04Runtime:
         semantic_version: str = "v04.1",
     ) -> IngestResult:
         event_receipt = self.append_event(event)
-        patch = self.propose_patch(
-            event.event_id,
+        stored_event = self.store.get_event(event.event_id)
+        patch, proposal_repairs, proposal_reason = propose_patch_with_diagnostics(
+            stored_event,
             backend,
+            known_propositions=self.store.proposition_catalog(),
             semantic_version=semantic_version,
         )
         rejected_patch = None
-        repair_reason = None
-        repair_count = 0
+        repair_reason = proposal_reason
+        repair_count = proposal_repairs
 
         try:
             state_receipt = self.apply_patch(self.store.state_version, patch)
         except SchemaValidationError as exc:
             rejected_patch = patch
-            repair_reason = str(exc)
+            store_repair_reason = str(exc)
+            repair_reason = (
+                f"{repair_reason}; store invariant repair: {store_repair_reason}"
+                if repair_reason
+                else store_repair_reason
+            )
             preserved_assertions = self.store.independently_valid_assertions(patch)
             repaired = repair_patch_for_invariant(
-                event,
+                stored_event,
                 patch,
-                repair_reason,
+                store_repair_reason,
                 backend,
                 semantic_version=semantic_version,
             )
             patch = _merge_repair_with_preserved(
-                event,
+                stored_event,
                 rejected_patch,
                 repaired,
                 preserved_assertions,
                 semantic_version=semantic_version,
             )
-            repair_count = 1
+            repair_count += 1
             state_receipt = self.apply_patch(self.store.state_version, patch)
 
         return IngestResult(
