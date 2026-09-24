@@ -270,6 +270,52 @@ class V05SemanticIntegrationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             runtime.ingest_event(changed, FakeBackend([]))
 
+    def test_semantic_failure_preserves_raw_event_and_supports_reprocess(self):
+        runtime = HCLV05Runtime()
+        raw = event("e1", "Ari accepts Red.", actor="ari")
+        invalid = payload(
+            {
+                "subject_agent_id": "other",
+                "issue_key": "route_assignment",
+                "signal": "AFFIRM",
+                "value_key": "RED",
+                "prior_value_key": None,
+            }
+        )
+        with self.assertRaises(SemanticExtractionError):
+            runtime.ingest_event(raw, FakeBackend([invalid, invalid]))
+
+        self.assertEqual(len(runtime.events), 1)
+        self.assertEqual(runtime.events[0], raw)
+        self.assertEqual(runtime.stance_events, ())
+        self.assertIn("e1", runtime.semantic_failures)
+
+        with self.assertRaisesRegex(ValueError, "use reprocess_event"):
+            runtime.ingest_event(raw, FakeBackend([]))
+
+        repaired = runtime.reprocess_event(
+            "e1",
+            FakeBackend(
+                [
+                    payload(
+                        {
+                            "subject_agent_id": "ari",
+                            "issue_key": "route_assignment",
+                            "signal": "AFFIRM",
+                            "value_key": "RED",
+                            "prior_value_key": None,
+                        }
+                    )
+                ]
+            ),
+        )
+        self.assertFalse(repaired.duplicate)
+        self.assertNotIn("e1", runtime.semantic_failures)
+        self.assertEqual(
+            runtime.current_stance("ari", "route_assignment").affirmed_value_key,
+            "RED",
+        )
+
     def test_repeated_invalid_extraction_stays_strict(self):
         raw = event("e1", "Ari accepts Red.", actor="ari")
         invalid = payload(
