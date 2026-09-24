@@ -4369,3 +4369,32 @@ No provider call, consumed extraction rerun, capability run, owner-private
 example, training or benchmark claim is part of this milestone.
 
 **Current gate: HCL_V05_ROUTED_SEMANTIC_EXTRACTION_V02_PROVIDER_FREE_COMPLETE_RUNTIME_MIGRATION_NEXT**
+
+
+## HCL v0.5 routed runtime migration v0.1
+
+Contract:
+- `docs/HCL_V05_ROUTED_RUNTIME_MIGRATION_V01.md`
+
+PR #29 makes the routed semantic extractor the canonical HCLV05Runtime path.
+
+Canonical runtime semantics now:
+- model self-stance output has no subject choice; self stance is bound to event actor;
+- model revision output has no subject choice; it contains only issue/new/prior;
+- revision exposure subjects are derived deterministically from event
+  recipients/observers;
+- persistence, restart recovery, failed semantic reprocess, invalidation audit
+  and deterministic current-stance projection remain unchanged;
+- historical v0.1 extractor remains only for consumed evidence compatibility.
+
+Provider-free exact-head evidence at
+`6c0230814d4a100d847c1954608ed25101dd4f3e`:
+- v0.5 workflow `36003594642`: SUCCESS;
+- routed canonical runtime + persistence/recovery + routed extractor tests:
+  **42 / 42**;
+- HCL integration workflow `36003594727`: SUCCESS.
+
+No provider call, consumed extraction rerun, long-horizon capability run,
+owner-private example, training or benchmark claim is part of this milestone.
+
+**Current gate: HCL_V05_ROUTED_RUNTIME_MIGRATION_V01_PROVIDER_FREE_COMPLETE_FRESH_EXTRACTION_V02_NEXT**
