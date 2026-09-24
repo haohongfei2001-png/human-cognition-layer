@@ -136,6 +136,202 @@ class V04StoreTests(unittest.TestCase):
         self.assertEqual(rebuilt.active_patch_count, 1)
         self.assertEqual(rebuilt.rebuilt_assertion_count, 1)
 
+    def test_received_revision_makes_prior_belief_stale_without_new_stance(self):
+        first = SemanticPatch(
+            patch_id="initial",
+            event_id="e1",
+            semantic_version="v04.1",
+            propositions=(
+                Proposition(
+                    proposition_id="p_old",
+                    canonical_text="The approved label is Marin",
+                    source_event_ids=("e1",),
+                ),
+            ),
+            assertions=(
+                CognitiveAssertion(
+                    assertion_id="source_old",
+                    assertion_type=AssertionType.SOURCE_ASSERTION,
+                    proposition_id="p_old",
+                    valid_time=T0,
+                    system_record_time=T0,
+                    evidence_event_ids=("e1",),
+                ),
+                CognitiveAssertion(
+                    assertion_id="belief_old",
+                    assertion_type=AssertionType.BELIEF_ESTIMATE,
+                    subject_agent_id="alice",
+                    proposition_id="p_old",
+                    belief_stance=BeliefStance.AFFIRM,
+                    valid_time=T0,
+                    system_record_time=T0,
+                    evidence_event_ids=("e1",),
+                ),
+            ),
+        )
+        self.store.apply_patch(0, first)
+
+        t1 = "2026-01-01T11:00:00+00:00"
+        self.store.append_event(
+            EventRecord(
+                event_id="e2",
+                valid_time=t1,
+                recorded_at=t1,
+                raw_text="Correction: the approved label is Marina",
+                source_id="source",
+                actor_id="source",
+                recipient_ids=("alice",),
+            )
+        )
+        correction = SemanticPatch(
+            patch_id="correction",
+            event_id="e2",
+            semantic_version="v04.1",
+            propositions=(
+                Proposition(
+                    proposition_id="p_new",
+                    canonical_text="The approved label is Marina",
+                    source_event_ids=("e2",),
+                ),
+            ),
+            assertions=(
+                CognitiveAssertion(
+                    assertion_id="revision",
+                    assertion_type=AssertionType.PROPOSITION_REVISION,
+                    proposition_id="p_new",
+                    related_proposition_id="p_old",
+                    valid_time=t1,
+                    system_record_time=t1,
+                    evidence_event_ids=("e2",),
+                ),
+                CognitiveAssertion(
+                    assertion_id="exposure_new",
+                    assertion_type=AssertionType.INFORMATION_EXPOSURE,
+                    subject_agent_id="alice",
+                    proposition_id="p_new",
+                    valid_time=t1,
+                    system_record_time=t1,
+                    evidence_event_ids=("e2",),
+                ),
+            ),
+        )
+        self.store.apply_patch(1, correction)
+
+        current = self.store.build_view(None, None, None, "What does Alice believe now?")
+        belief_old = next(
+            item
+            for item in current.relevant_assertions
+            if item["assertion_id"] == "belief_old"
+        )
+        self.assertEqual(
+            belief_old["projection_status"],
+            "STALE_AFTER_REVISION_EXPOSURE",
+        )
+        conflicts = [
+            item
+            for item in current.unresolved_conflicts
+            if item.get("conflict_type") == "REVISION_STANCE_UNRESOLVED"
+        ]
+        self.assertEqual(len(conflicts), 1)
+        self.assertEqual(conflicts[0]["prior_proposition_id"], "p_old")
+        self.assertEqual(conflicts[0]["revision_proposition_id"], "p_new")
+        self.assertTrue(
+            any(
+                "received revision does not establish acceptance" in item.lower()
+                for item in current.unsupported_conclusions
+            )
+        )
+
+        before_correction = self.store.build_view(
+            None, T0, None, "What did Alice believe before the correction?"
+        )
+        historical_belief = next(
+            item
+            for item in before_correction.relevant_assertions
+            if item["assertion_id"] == "belief_old"
+        )
+        self.assertNotIn("projection_status", historical_belief)
+        self.assertFalse(
+            any(
+                item.get("conflict_type") == "REVISION_STANCE_UNRESOLVED"
+                for item in before_correction.unresolved_conflicts
+            )
+        )
+
+    def test_later_explicit_stance_resolves_revision_uncertainty(self):
+        self.test_received_revision_makes_prior_belief_stale_without_new_stance()
+
+        t2 = "2026-01-01T12:00:00+00:00"
+        self.store.append_event(
+            EventRecord(
+                event_id="e3",
+                valid_time=t2,
+                recorded_at=t2,
+                raw_text="Alice confirms that she accepts Marina",
+                source_id="alice",
+                actor_id="alice",
+                observer_ids=("alice",),
+            )
+        )
+        accepted = SemanticPatch(
+            patch_id="accepted",
+            event_id="e3",
+            semantic_version="v04.1",
+            assertions=(
+                CognitiveAssertion(
+                    assertion_id="belief_new",
+                    assertion_type=AssertionType.BELIEF_ESTIMATE,
+                    subject_agent_id="alice",
+                    proposition_id="p_new",
+                    belief_stance=BeliefStance.AFFIRM,
+                    valid_time=t2,
+                    system_record_time=t2,
+                    evidence_event_ids=("e3",),
+                ),
+            ),
+        )
+        self.store.apply_patch(2, accepted)
+        current = self.store.build_view(None, None, None, "What does Alice believe now?")
+        self.assertFalse(
+            any(
+                item.get("conflict_type") == "REVISION_STANCE_UNRESOLVED"
+                for item in current.unresolved_conflicts
+            )
+        )
+        belief_new = next(
+            item
+            for item in current.relevant_assertions
+            if item["assertion_id"] == "belief_new"
+        )
+        self.assertEqual(belief_new["belief_stance"], "AFFIRM")
+
+    def test_revision_requires_existing_related_proposition(self):
+        patch = SemanticPatch(
+            patch_id="bad_revision",
+            event_id="e1",
+            semantic_version="v04.1",
+            propositions=(
+                Proposition(
+                    proposition_id="p_new",
+                    canonical_text="Replacement",
+                    source_event_ids=("e1",),
+                ),
+            ),
+            assertions=(
+                CognitiveAssertion(
+                    assertion_id="bad_revision_assertion",
+                    assertion_type=AssertionType.PROPOSITION_REVISION,
+                    proposition_id="p_new",
+                    related_proposition_id="missing_old",
+                    valid_time=T0,
+                    system_record_time=T0,
+                    evidence_event_ids=("e1",),
+                ),
+            ),
+        )
+        with self.assertRaises(SchemaValidationError):
+            self.store.apply_patch(0, patch)
+
 
 if __name__ == "__main__":
     unittest.main()
