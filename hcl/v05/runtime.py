@@ -126,11 +126,14 @@ class HCLV05Runtime:
             raise ValueError(
                 f"event_id {event_id!r} already has committed stance semantics"
             )
-        if status != "FAILED":
+        if status not in {"FAILED", "INVALIDATED"}:
             raise ValueError(
-                f"event_id {event_id!r} has no recorded semantic failure"
+                f"event_id {event_id!r} has no failed/invalidated semantics to reprocess"
             )
         return self._extract_and_commit(event, backend)
+
+    def invalidate_semantics(self, event_id: str, reason: str) -> None:
+        self.store.invalidate_semantics(event_id, reason)
 
     def current_stance(
         self,
