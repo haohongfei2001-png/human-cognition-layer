@@ -304,10 +304,14 @@ class CognitionStore:
         """Return a bounded active proposition catalog for semantic revision linking."""
         rows = self.conn.execute(
             """
-            SELECT DISTINCT p.proposition_id, p.canonical_text, p.source_event_ids
+            SELECT p.proposition_id, p.canonical_text, p.source_event_ids
             FROM propositions p
-            JOIN assertions a ON a.proposition_id = p.proposition_id
-            WHERE a.status IN ('ACTIVE', 'UNRESOLVED')
+            WHERE EXISTS (
+                SELECT 1
+                FROM assertions a
+                WHERE a.proposition_id = p.proposition_id
+                  AND a.status IN ('ACTIVE', 'UNRESOLVED')
+            )
             ORDER BY p.rowid DESC
             LIMIT ?
             """,
@@ -911,8 +915,15 @@ class CognitionStore:
                     for row in belief_rows
                     if row["subject_agent_id"] == subject
                     and row["proposition_id"] == old_proposition_id
-                    and _parse_time(row["valid_time"])
-                    <= _parse_time(exposure["valid_time"])
+                    and (
+                        _parse_time(row["valid_time"])
+                        < _parse_time(exposure["valid_time"])
+                        or (
+                            row["valid_time"] == exposure["valid_time"]
+                            and _parse_time(row["system_record_time"])
+                            < _parse_time(exposure["system_record_time"])
+                        )
+                    )
                 ]
                 if not prior:
                     continue
@@ -1040,7 +1051,11 @@ class CognitionStore:
         rows = self.conn.execute("SELECT * FROM assertions").fetchall()
         for row in rows:
             assertion_id = row["assertion_id"]
-            if assertion_id in affected or row["proposition_id"] in affected:
+            if (
+                assertion_id in affected
+                or row["proposition_id"] in affected
+                or row["related_proposition_id"] in affected
+            ):
                 direct.add(assertion_id)
                 continue
             event_ids = set(_loads(row["evidence_event_ids"], []))
