@@ -332,6 +332,23 @@ class V04StoreTests(unittest.TestCase):
         with self.assertRaises(SchemaValidationError):
             self.store.apply_patch(0, patch)
 
+    def test_invalidating_prior_patch_cascades_to_revision_and_rebuilds(self):
+        self.test_received_revision_makes_prior_belief_stale_without_new_stance()
+        receipt = self.store.invalidate(
+            ["initial"],
+            "prior semantic interpretation was withdrawn",
+        )
+        self.assertIn("revision", receipt.invalidated_assertion_ids)
+        rebuilt = self.store.rebuild()
+        self.assertGreaterEqual(rebuilt.active_patch_count, 1)
+        current = self.store.build_view(None, None, None, "current")
+        self.assertFalse(
+            any(
+                item["assertion_type"] == "PROPOSITION_REVISION"
+                for item in current.relevant_assertions
+            )
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
