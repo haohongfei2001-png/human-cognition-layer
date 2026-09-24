@@ -34,9 +34,20 @@ open-ended ontology induction.
 
 Fixture:
 - `eval/v05/routed_semantic_extraction_v02_fixture.json`
+- SHA-256:
+  `57d06573294c107f863c85890bd92a45bbc45871202bd1569b55d0ec080d3a58`
 
 Gold:
 - `eval/v05/routed_semantic_extraction_v02_gold.json`
+- SHA-256:
+  `8dc199d75b4e187a9fe33ddaaffdf5d19ed9399303a47d57c75633a432336f62`
+
+Provider-free exact-head evidence:
+- v0.5 workflow `36004235872`: SUCCESS;
+- v0.5 tests: **49 / 49**;
+- routed extraction validate-only: PASS,
+  **3 streams / 36 events / 19 self / 14 revision**;
+- HCL integration workflow `36004235777`: SUCCESS.
 
 Runner:
 - `scripts/run_v05_routed_semantic_extraction_v02.py`
@@ -91,4 +102,4 @@ A sufficiently clean result may justify a new independent end-to-end capability
 package. Failure requires mechanism-level diagnosis and another fresh
 extraction package.
 
-**Gate: HCL_V05_ROUTED_SEMANTIC_EXTRACTION_V02_FROZEN_PREFLIGHT_NOT_RUN**
+**Gate: HCL_V05_ROUTED_SEMANTIC_EXTRACTION_V02_FROZEN_PREFLIGHT_PASS_PROVIDER_NOT_STARTED**
