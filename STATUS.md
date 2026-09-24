@@ -4063,3 +4063,39 @@ locally invalid belief assertion, without inventing a replacement stance or
 weakening unrelated schema validation.
 
 **Current gate: HCL_V04_LONG_HORIZON_V01_EXECUTION_FAILED_CONSUMED_SEMANTIC_SCHEMA_REPAIR_IN_PROGRESS**
+
+
+## HCL v0.4 long-horizon bounded-context v0.2 fresh package
+
+Frozen contract:
+- `docs/HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_CONTRACT_V02.md`
+
+v0.2 replaces the consumed v0.1 scored package with independent concrete
+evidence while retaining the same D/E fairness design and audited harness
+mechanics.
+
+Fresh package:
+- 3 streams / 240 events / 18 scored queries;
+- new domains: briefing room, project budget cap, shipping dock;
+- new target agents: Lin, Maya, Nora;
+- v0.2 event/query IDs and primary texts are disjoint from v0.1;
+- D/E query-time context cap remains 8000 characters;
+- E ordinary-memory cap remains 6000 characters.
+
+Frozen digests:
+- fixture:
+  `5aad883a58ddfb12c1089381bc1471898eb21cdbe6e143b1d5a5e256d816b110`
+- gold:
+  `a50be5387f97cc9de8b6b83868518d5c765b2298348029d8d3939dcca5a348af`
+
+Provider-free evidence:
+- v0.2 preflight `35984108570`: PASS, 6/6;
+- combined minimal-slice `35984108490`: SUCCESS;
+- manual frozen gold/timeline audit: PASS for all 18 labels.
+
+No v0.2 provider-backed scored row has been consumed.
+
+Codex code-review quota was unavailable on PR #16; exact-head CI plus manual
+fixture/gold and implementation review are the current validation basis.
+
+**Current gate: HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V02_FROZEN_PREFLIGHT_AND_GOLD_AUDIT_PASS_PROVIDER_NOT_STARTED**
