@@ -4030,3 +4030,36 @@ snapshot. The one-shot workflow rejects repeat trigger history and Actions
 reruns before provider calls.
 
 **Current gate: HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V01_FINAL_EVIDENCE_CONTRACT_FROZEN_PROVIDER_RUN_NOT_STARTED**
+
+
+## HCL v0.4 long-horizon bounded-context v0.1 execution closure
+
+Closure:
+- `reports/HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V01_EXECUTION_CLOSURE.md`
+
+One-shot provider run:
+- run `35980385848`
+- trigger/main `0f430da6dea90508b9a324b71bd43e8793a71182`
+- result: **EXECUTION FAILED**
+- no capability score or C/D/E verdict is valid.
+
+All pre-provider one-shot/frozen/digest/fairness gates passed. Provider calls then
+began. C completed all six s1 diagnostic queries; D began s1 ingestion and later
+failed before E or later streams ran. Exact D event consumption is not
+recoverable because no partial artifact was written.
+
+Failure:
+`BELIEF_ESTIMATE` remained schema-invalid after the bounded semantic model
+repair because its support level did not support the stated belief stance. The
+exception occurred inside semantic proposal construction before store-level
+invariant repair could run.
+
+The entire v0.1 frozen fixture is now treated as **consumed evidence** and must
+not be rerun as fresh evidence.
+
+Current repair direction is provider-free and mechanism-level:
+explicit repair semantics plus narrow deterministic fail-closed rejection of a
+locally invalid belief assertion, without inventing a replacement stance or
+weakening unrelated schema validation.
+
+**Current gate: HCL_V04_LONG_HORIZON_V01_EXECUTION_FAILED_CONSUMED_SEMANTIC_SCHEMA_REPAIR_IN_PROGRESS**
