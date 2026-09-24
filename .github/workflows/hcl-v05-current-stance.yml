@@ -30,5 +30,8 @@ jobs:
           python-version: "3.12"
       - name: Compile v0.5
         run: python -m compileall -q hcl/v05 tests/test_v05_*.py
-      - name: Run provider-free state-machine tests
-        run: python -m unittest -v tests.test_v05_current_stance
+      - name: Run provider-free v0.5 tests
+        run: |
+          python -m unittest -v \
+            tests.test_v05_current_stance \
+            tests.test_v05_semantic_runtime
