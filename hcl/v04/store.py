@@ -368,6 +368,9 @@ class CognitionStore:
 
         event_ids = {event.event_id for event in self.list_events()}
         existing_proposition_ids = self._existing_proposition_ids()
+        revision_target_ids = {
+            item["proposition_id"] for item in self.proposition_catalog()
+        }
         proposition_ids = existing_proposition_ids | {
             p.proposition_id for p in patch.propositions
         }
@@ -394,10 +397,11 @@ class CognitionStore:
                 )
             if (
                 assertion.related_proposition_id
-                and assertion.related_proposition_id not in existing_proposition_ids
+                and assertion.related_proposition_id not in revision_target_ids
             ):
                 raise SchemaValidationError(
-                    "revision target must be an existing prior proposition: "
+                    "revision target must be present in the bounded active "
+                    "proposition catalog: "
                     f"{assertion.related_proposition_id}"
                 )
             missing_dependencies = (
@@ -931,7 +935,8 @@ class CognitionStore:
                         _parse_time(row["valid_time"])
                         < _parse_time(exposure["valid_time"])
                         or (
-                            row["valid_time"] == exposure["valid_time"]
+                            _parse_time(row["valid_time"])
+                            == _parse_time(exposure["valid_time"])
                             and _parse_time(row["system_record_time"])
                             < _parse_time(exposure["system_record_time"])
                         )
