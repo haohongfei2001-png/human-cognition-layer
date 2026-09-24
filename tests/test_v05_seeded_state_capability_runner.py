@@ -148,7 +148,10 @@ class SeededStateCapabilityTests(unittest.TestCase):
         prompt = json.loads(fake.json_calls[0][-1]["content"])
         self.assertEqual(
             prompt["known_issue_value_catalog"],
-            mini["ontology_seed"],
+            {
+                issue: sorted(values)
+                for issue, values in sorted(mini["ontology_seed"].items())
+            },
         )
 
     def test_e_memory_is_free_form_but_receives_same_ontology(self):
