@@ -1204,30 +1204,17 @@
           "question": "Which deployment ring does arin currently believe applies?"
         },
         {
-          "query_id": "r1-q02",
-          "after_event": 30,
+          "query_id": "r1-q07",
+          "after_event": 16,
           "target_agent_id": "arin",
-          "target_issue_key": "deployment_ring",
+          "target_issue_key": "meeting_slot",
           "allowed_labels": [
-            "RING_A",
-            "RING_B",
-            "RING_C",
+            "MORNING",
+            "NOON",
+            "EVENING",
             "UNCERTAIN"
           ],
-          "question": "After arin received the relayed RING_B revision but before taking a stance, which deployment ring is arin currently supported as believing?"
-        },
-        {
-          "query_id": "r1-q03",
-          "after_event": 88,
-          "target_agent_id": "arin",
-          "target_issue_key": "deployment_ring",
-          "allowed_labels": [
-            "RING_A",
-            "RING_B",
-            "RING_C",
-            "UNCERTAIN"
-          ],
-          "question": "Which deployment ring does arin currently believe applies?"
+          "question": "Which meeting slot does arin currently believe applies?"
         },
         {
           "query_id": "r1-q04",
@@ -1243,9 +1230,9 @@
           "question": "Which deployment ring does bex believe after accepting the first revision?"
         },
         {
-          "query_id": "r1-q05",
-          "after_event": 82,
-          "target_agent_id": "bex",
+          "query_id": "r1-q02",
+          "after_event": 30,
+          "target_agent_id": "arin",
           "target_issue_key": "deployment_ring",
           "allowed_labels": [
             "RING_A",
@@ -1253,60 +1240,7 @@
             "RING_C",
             "UNCERTAIN"
           ],
-          "question": "After bex rejected the later revision, which deployment ring does bex believe applies?"
-        },
-        {
-          "query_id": "r1-q06",
-          "after_event": 96,
-          "target_agent_id": "bex",
-          "target_issue_key": "deployment_ring",
-          "allowed_labels": [
-            "RING_A",
-            "RING_B",
-            "RING_C",
-            "UNCERTAIN"
-          ],
-          "question": "At the requested historical time, which deployment ring did bex believe applied?",
-          "event_time": "2026-07-14T11:20:00+00:00"
-        },
-        {
-          "query_id": "r1-q07",
-          "after_event": 16,
-          "target_agent_id": "arin",
-          "target_issue_key": "meeting_slot",
-          "allowed_labels": [
-            "MORNING",
-            "NOON",
-            "EVENING",
-            "UNCERTAIN"
-          ],
-          "question": "Which meeting slot does arin currently believe applies?"
-        },
-        {
-          "query_id": "r1-q08",
-          "after_event": 78,
-          "target_agent_id": "arin",
-          "target_issue_key": "meeting_slot",
-          "allowed_labels": [
-            "MORNING",
-            "NOON",
-            "EVENING",
-            "UNCERTAIN"
-          ],
-          "question": "After arin received the later EVENING revision but had not accepted or rejected it, which meeting slot is arin currently supported as believing?"
-        },
-        {
-          "query_id": "r1-q09",
-          "after_event": 88,
-          "target_agent_id": "arin",
-          "target_issue_key": "meeting_slot",
-          "allowed_labels": [
-            "MORNING",
-            "NOON",
-            "EVENING",
-            "UNCERTAIN"
-          ],
-          "question": "After arin rejected EVENING, which meeting slot does arin believe applies?"
+          "question": "After arin received the relayed RING_B revision but before taking a stance, which deployment ring is arin currently supported as believing?"
         },
         {
           "query_id": "r1-q10",
@@ -1333,6 +1267,72 @@
             "UNCERTAIN"
           ],
           "question": "After bex received EVENING but remained undecided, which meeting slot is bex currently supported as believing?"
+        },
+        {
+          "query_id": "r1-q08",
+          "after_event": 78,
+          "target_agent_id": "arin",
+          "target_issue_key": "meeting_slot",
+          "allowed_labels": [
+            "MORNING",
+            "NOON",
+            "EVENING",
+            "UNCERTAIN"
+          ],
+          "question": "After arin received the later EVENING revision but had not accepted or rejected it, which meeting slot is arin currently supported as believing?"
+        },
+        {
+          "query_id": "r1-q05",
+          "after_event": 82,
+          "target_agent_id": "bex",
+          "target_issue_key": "deployment_ring",
+          "allowed_labels": [
+            "RING_A",
+            "RING_B",
+            "RING_C",
+            "UNCERTAIN"
+          ],
+          "question": "After bex rejected the later revision, which deployment ring does bex believe applies?"
+        },
+        {
+          "query_id": "r1-q03",
+          "after_event": 88,
+          "target_agent_id": "arin",
+          "target_issue_key": "deployment_ring",
+          "allowed_labels": [
+            "RING_A",
+            "RING_B",
+            "RING_C",
+            "UNCERTAIN"
+          ],
+          "question": "Which deployment ring does arin currently believe applies?"
+        },
+        {
+          "query_id": "r1-q09",
+          "after_event": 88,
+          "target_agent_id": "arin",
+          "target_issue_key": "meeting_slot",
+          "allowed_labels": [
+            "MORNING",
+            "NOON",
+            "EVENING",
+            "UNCERTAIN"
+          ],
+          "question": "After arin rejected EVENING, which meeting slot does arin believe applies?"
+        },
+        {
+          "query_id": "r1-q06",
+          "after_event": 96,
+          "target_agent_id": "bex",
+          "target_issue_key": "deployment_ring",
+          "allowed_labels": [
+            "RING_A",
+            "RING_B",
+            "RING_C",
+            "UNCERTAIN"
+          ],
+          "question": "At the requested historical time, which deployment ring did bex believe applied?",
+          "event_time": "2026-07-14T11:20:00+00:00"
         },
         {
           "query_id": "r1-q12",
@@ -2550,30 +2550,17 @@
           "question": "Which shipping lane does cian currently believe applies?"
         },
         {
-          "query_id": "r2-q02",
-          "after_event": 30,
+          "query_id": "r2-q07",
+          "after_event": 16,
           "target_agent_id": "cian",
-          "target_issue_key": "shipping_lane",
+          "target_issue_key": "billing_cycle",
           "allowed_labels": [
-            "LANE_RED",
-            "LANE_BLUE",
-            "LANE_GREEN",
+            "CYCLE_1",
+            "CYCLE_2",
+            "CYCLE_3",
             "UNCERTAIN"
           ],
-          "question": "After cian received the relayed LANE_BLUE revision but before taking a stance, which shipping lane is cian currently supported as believing?"
-        },
-        {
-          "query_id": "r2-q03",
-          "after_event": 88,
-          "target_agent_id": "cian",
-          "target_issue_key": "shipping_lane",
-          "allowed_labels": [
-            "LANE_RED",
-            "LANE_BLUE",
-            "LANE_GREEN",
-            "UNCERTAIN"
-          ],
-          "question": "Which shipping lane does cian currently believe applies?"
+          "question": "Which billing cycle does cian currently believe applies?"
         },
         {
           "query_id": "r2-q04",
@@ -2589,9 +2576,9 @@
           "question": "Which shipping lane does dori believe after accepting the first revision?"
         },
         {
-          "query_id": "r2-q05",
-          "after_event": 82,
-          "target_agent_id": "dori",
+          "query_id": "r2-q02",
+          "after_event": 30,
+          "target_agent_id": "cian",
           "target_issue_key": "shipping_lane",
           "allowed_labels": [
             "LANE_RED",
@@ -2599,60 +2586,7 @@
             "LANE_GREEN",
             "UNCERTAIN"
           ],
-          "question": "After dori rejected the later revision, which shipping lane does dori believe applies?"
-        },
-        {
-          "query_id": "r2-q06",
-          "after_event": 96,
-          "target_agent_id": "dori",
-          "target_issue_key": "shipping_lane",
-          "allowed_labels": [
-            "LANE_RED",
-            "LANE_BLUE",
-            "LANE_GREEN",
-            "UNCERTAIN"
-          ],
-          "question": "At the requested historical time, which shipping lane did dori believe applied?",
-          "event_time": "2026-07-15T11:20:00+00:00"
-        },
-        {
-          "query_id": "r2-q07",
-          "after_event": 16,
-          "target_agent_id": "cian",
-          "target_issue_key": "billing_cycle",
-          "allowed_labels": [
-            "CYCLE_1",
-            "CYCLE_2",
-            "CYCLE_3",
-            "UNCERTAIN"
-          ],
-          "question": "Which billing cycle does cian currently believe applies?"
-        },
-        {
-          "query_id": "r2-q08",
-          "after_event": 78,
-          "target_agent_id": "cian",
-          "target_issue_key": "billing_cycle",
-          "allowed_labels": [
-            "CYCLE_1",
-            "CYCLE_2",
-            "CYCLE_3",
-            "UNCERTAIN"
-          ],
-          "question": "After cian received the later CYCLE_3 revision but had not accepted or rejected it, which billing cycle is cian currently supported as believing?"
-        },
-        {
-          "query_id": "r2-q09",
-          "after_event": 88,
-          "target_agent_id": "cian",
-          "target_issue_key": "billing_cycle",
-          "allowed_labels": [
-            "CYCLE_1",
-            "CYCLE_2",
-            "CYCLE_3",
-            "UNCERTAIN"
-          ],
-          "question": "After cian rejected CYCLE_3, which billing cycle does cian believe applies?"
+          "question": "After cian received the relayed LANE_BLUE revision but before taking a stance, which shipping lane is cian currently supported as believing?"
         },
         {
           "query_id": "r2-q10",
@@ -2679,6 +2613,72 @@
             "UNCERTAIN"
           ],
           "question": "After dori received CYCLE_3 but remained undecided, which billing cycle is dori currently supported as believing?"
+        },
+        {
+          "query_id": "r2-q08",
+          "after_event": 78,
+          "target_agent_id": "cian",
+          "target_issue_key": "billing_cycle",
+          "allowed_labels": [
+            "CYCLE_1",
+            "CYCLE_2",
+            "CYCLE_3",
+            "UNCERTAIN"
+          ],
+          "question": "After cian received the later CYCLE_3 revision but had not accepted or rejected it, which billing cycle is cian currently supported as believing?"
+        },
+        {
+          "query_id": "r2-q05",
+          "after_event": 82,
+          "target_agent_id": "dori",
+          "target_issue_key": "shipping_lane",
+          "allowed_labels": [
+            "LANE_RED",
+            "LANE_BLUE",
+            "LANE_GREEN",
+            "UNCERTAIN"
+          ],
+          "question": "After dori rejected the later revision, which shipping lane does dori believe applies?"
+        },
+        {
+          "query_id": "r2-q03",
+          "after_event": 88,
+          "target_agent_id": "cian",
+          "target_issue_key": "shipping_lane",
+          "allowed_labels": [
+            "LANE_RED",
+            "LANE_BLUE",
+            "LANE_GREEN",
+            "UNCERTAIN"
+          ],
+          "question": "Which shipping lane does cian currently believe applies?"
+        },
+        {
+          "query_id": "r2-q09",
+          "after_event": 88,
+          "target_agent_id": "cian",
+          "target_issue_key": "billing_cycle",
+          "allowed_labels": [
+            "CYCLE_1",
+            "CYCLE_2",
+            "CYCLE_3",
+            "UNCERTAIN"
+          ],
+          "question": "After cian rejected CYCLE_3, which billing cycle does cian believe applies?"
+        },
+        {
+          "query_id": "r2-q06",
+          "after_event": 96,
+          "target_agent_id": "dori",
+          "target_issue_key": "shipping_lane",
+          "allowed_labels": [
+            "LANE_RED",
+            "LANE_BLUE",
+            "LANE_GREEN",
+            "UNCERTAIN"
+          ],
+          "question": "At the requested historical time, which shipping lane did dori believe applied?",
+          "event_time": "2026-07-15T11:20:00+00:00"
         },
         {
           "query_id": "r2-q12",
@@ -3896,30 +3896,17 @@
           "question": "Which sensor profile does elio currently believe applies?"
         },
         {
-          "query_id": "r3-q02",
-          "after_event": 30,
+          "query_id": "r3-q07",
+          "after_event": 16,
           "target_agent_id": "elio",
-          "target_issue_key": "sensor_profile",
+          "target_issue_key": "report_window",
           "allowed_labels": [
-            "PROFILE_LOW",
-            "PROFILE_MID",
-            "PROFILE_HIGH",
+            "WINDOW_7",
+            "WINDOW_14",
+            "WINDOW_30",
             "UNCERTAIN"
           ],
-          "question": "After elio received the relayed PROFILE_MID revision but before taking a stance, which sensor profile is elio currently supported as believing?"
-        },
-        {
-          "query_id": "r3-q03",
-          "after_event": 88,
-          "target_agent_id": "elio",
-          "target_issue_key": "sensor_profile",
-          "allowed_labels": [
-            "PROFILE_LOW",
-            "PROFILE_MID",
-            "PROFILE_HIGH",
-            "UNCERTAIN"
-          ],
-          "question": "Which sensor profile does elio currently believe applies?"
+          "question": "Which report window does elio currently believe applies?"
         },
         {
           "query_id": "r3-q04",
@@ -3935,9 +3922,9 @@
           "question": "Which sensor profile does faye believe after accepting the first revision?"
         },
         {
-          "query_id": "r3-q05",
-          "after_event": 82,
-          "target_agent_id": "faye",
+          "query_id": "r3-q02",
+          "after_event": 30,
+          "target_agent_id": "elio",
           "target_issue_key": "sensor_profile",
           "allowed_labels": [
             "PROFILE_LOW",
@@ -3945,60 +3932,7 @@
             "PROFILE_HIGH",
             "UNCERTAIN"
           ],
-          "question": "After faye rejected the later revision, which sensor profile does faye believe applies?"
-        },
-        {
-          "query_id": "r3-q06",
-          "after_event": 96,
-          "target_agent_id": "faye",
-          "target_issue_key": "sensor_profile",
-          "allowed_labels": [
-            "PROFILE_LOW",
-            "PROFILE_MID",
-            "PROFILE_HIGH",
-            "UNCERTAIN"
-          ],
-          "question": "At the requested historical time, which sensor profile did faye believe applied?",
-          "event_time": "2026-07-16T11:20:00+00:00"
-        },
-        {
-          "query_id": "r3-q07",
-          "after_event": 16,
-          "target_agent_id": "elio",
-          "target_issue_key": "report_window",
-          "allowed_labels": [
-            "WINDOW_7",
-            "WINDOW_14",
-            "WINDOW_30",
-            "UNCERTAIN"
-          ],
-          "question": "Which report window does elio currently believe applies?"
-        },
-        {
-          "query_id": "r3-q08",
-          "after_event": 78,
-          "target_agent_id": "elio",
-          "target_issue_key": "report_window",
-          "allowed_labels": [
-            "WINDOW_7",
-            "WINDOW_14",
-            "WINDOW_30",
-            "UNCERTAIN"
-          ],
-          "question": "After elio received the later WINDOW_30 revision but had not accepted or rejected it, which report window is elio currently supported as believing?"
-        },
-        {
-          "query_id": "r3-q09",
-          "after_event": 88,
-          "target_agent_id": "elio",
-          "target_issue_key": "report_window",
-          "allowed_labels": [
-            "WINDOW_7",
-            "WINDOW_14",
-            "WINDOW_30",
-            "UNCERTAIN"
-          ],
-          "question": "After elio rejected WINDOW_30, which report window does elio believe applies?"
+          "question": "After elio received the relayed PROFILE_MID revision but before taking a stance, which sensor profile is elio currently supported as believing?"
         },
         {
           "query_id": "r3-q10",
@@ -4025,6 +3959,72 @@
             "UNCERTAIN"
           ],
           "question": "After faye received WINDOW_30 but remained undecided, which report window is faye currently supported as believing?"
+        },
+        {
+          "query_id": "r3-q08",
+          "after_event": 78,
+          "target_agent_id": "elio",
+          "target_issue_key": "report_window",
+          "allowed_labels": [
+            "WINDOW_7",
+            "WINDOW_14",
+            "WINDOW_30",
+            "UNCERTAIN"
+          ],
+          "question": "After elio received the later WINDOW_30 revision but had not accepted or rejected it, which report window is elio currently supported as believing?"
+        },
+        {
+          "query_id": "r3-q05",
+          "after_event": 82,
+          "target_agent_id": "faye",
+          "target_issue_key": "sensor_profile",
+          "allowed_labels": [
+            "PROFILE_LOW",
+            "PROFILE_MID",
+            "PROFILE_HIGH",
+            "UNCERTAIN"
+          ],
+          "question": "After faye rejected the later revision, which sensor profile does faye believe applies?"
+        },
+        {
+          "query_id": "r3-q03",
+          "after_event": 88,
+          "target_agent_id": "elio",
+          "target_issue_key": "sensor_profile",
+          "allowed_labels": [
+            "PROFILE_LOW",
+            "PROFILE_MID",
+            "PROFILE_HIGH",
+            "UNCERTAIN"
+          ],
+          "question": "Which sensor profile does elio currently believe applies?"
+        },
+        {
+          "query_id": "r3-q09",
+          "after_event": 88,
+          "target_agent_id": "elio",
+          "target_issue_key": "report_window",
+          "allowed_labels": [
+            "WINDOW_7",
+            "WINDOW_14",
+            "WINDOW_30",
+            "UNCERTAIN"
+          ],
+          "question": "After elio rejected WINDOW_30, which report window does elio believe applies?"
+        },
+        {
+          "query_id": "r3-q06",
+          "after_event": 96,
+          "target_agent_id": "faye",
+          "target_issue_key": "sensor_profile",
+          "allowed_labels": [
+            "PROFILE_LOW",
+            "PROFILE_MID",
+            "PROFILE_HIGH",
+            "UNCERTAIN"
+          ],
+          "question": "At the requested historical time, which sensor profile did faye believe applied?",
+          "event_time": "2026-07-16T11:20:00+00:00"
         },
         {
           "query_id": "r3-q12",
@@ -5242,30 +5242,17 @@
           "question": "Which service region does gita currently believe applies?"
         },
         {
-          "query_id": "r4-q02",
-          "after_event": 30,
+          "query_id": "r4-q07",
+          "after_event": 16,
           "target_agent_id": "gita",
-          "target_issue_key": "service_region",
+          "target_issue_key": "maintenance_shift",
           "allowed_labels": [
-            "REGION_EAST",
-            "REGION_WEST",
-            "REGION_CENTRAL",
+            "SHIFT_A",
+            "SHIFT_B",
+            "SHIFT_C",
             "UNCERTAIN"
           ],
-          "question": "After gita received the relayed REGION_WEST revision but before taking a stance, which service region is gita currently supported as believing?"
-        },
-        {
-          "query_id": "r4-q03",
-          "after_event": 88,
-          "target_agent_id": "gita",
-          "target_issue_key": "service_region",
-          "allowed_labels": [
-            "REGION_EAST",
-            "REGION_WEST",
-            "REGION_CENTRAL",
-            "UNCERTAIN"
-          ],
-          "question": "Which service region does gita currently believe applies?"
+          "question": "Which maintenance shift does gita currently believe applies?"
         },
         {
           "query_id": "r4-q04",
@@ -5281,9 +5268,9 @@
           "question": "Which service region does hugo believe after accepting the first revision?"
         },
         {
-          "query_id": "r4-q05",
-          "after_event": 82,
-          "target_agent_id": "hugo",
+          "query_id": "r4-q02",
+          "after_event": 30,
+          "target_agent_id": "gita",
           "target_issue_key": "service_region",
           "allowed_labels": [
             "REGION_EAST",
@@ -5291,60 +5278,7 @@
             "REGION_CENTRAL",
             "UNCERTAIN"
           ],
-          "question": "After hugo rejected the later revision, which service region does hugo believe applies?"
-        },
-        {
-          "query_id": "r4-q06",
-          "after_event": 96,
-          "target_agent_id": "hugo",
-          "target_issue_key": "service_region",
-          "allowed_labels": [
-            "REGION_EAST",
-            "REGION_WEST",
-            "REGION_CENTRAL",
-            "UNCERTAIN"
-          ],
-          "question": "At the requested historical time, which service region did hugo believe applied?",
-          "event_time": "2026-07-17T11:20:00+00:00"
-        },
-        {
-          "query_id": "r4-q07",
-          "after_event": 16,
-          "target_agent_id": "gita",
-          "target_issue_key": "maintenance_shift",
-          "allowed_labels": [
-            "SHIFT_A",
-            "SHIFT_B",
-            "SHIFT_C",
-            "UNCERTAIN"
-          ],
-          "question": "Which maintenance shift does gita currently believe applies?"
-        },
-        {
-          "query_id": "r4-q08",
-          "after_event": 78,
-          "target_agent_id": "gita",
-          "target_issue_key": "maintenance_shift",
-          "allowed_labels": [
-            "SHIFT_A",
-            "SHIFT_B",
-            "SHIFT_C",
-            "UNCERTAIN"
-          ],
-          "question": "After gita received the later SHIFT_C revision but had not accepted or rejected it, which maintenance shift is gita currently supported as believing?"
-        },
-        {
-          "query_id": "r4-q09",
-          "after_event": 88,
-          "target_agent_id": "gita",
-          "target_issue_key": "maintenance_shift",
-          "allowed_labels": [
-            "SHIFT_A",
-            "SHIFT_B",
-            "SHIFT_C",
-            "UNCERTAIN"
-          ],
-          "question": "After gita rejected SHIFT_C, which maintenance shift does gita believe applies?"
+          "question": "After gita received the relayed REGION_WEST revision but before taking a stance, which service region is gita currently supported as believing?"
         },
         {
           "query_id": "r4-q10",
@@ -5371,6 +5305,72 @@
             "UNCERTAIN"
           ],
           "question": "After hugo received SHIFT_C but remained undecided, which maintenance shift is hugo currently supported as believing?"
+        },
+        {
+          "query_id": "r4-q08",
+          "after_event": 78,
+          "target_agent_id": "gita",
+          "target_issue_key": "maintenance_shift",
+          "allowed_labels": [
+            "SHIFT_A",
+            "SHIFT_B",
+            "SHIFT_C",
+            "UNCERTAIN"
+          ],
+          "question": "After gita received the later SHIFT_C revision but had not accepted or rejected it, which maintenance shift is gita currently supported as believing?"
+        },
+        {
+          "query_id": "r4-q05",
+          "after_event": 82,
+          "target_agent_id": "hugo",
+          "target_issue_key": "service_region",
+          "allowed_labels": [
+            "REGION_EAST",
+            "REGION_WEST",
+            "REGION_CENTRAL",
+            "UNCERTAIN"
+          ],
+          "question": "After hugo rejected the later revision, which service region does hugo believe applies?"
+        },
+        {
+          "query_id": "r4-q03",
+          "after_event": 88,
+          "target_agent_id": "gita",
+          "target_issue_key": "service_region",
+          "allowed_labels": [
+            "REGION_EAST",
+            "REGION_WEST",
+            "REGION_CENTRAL",
+            "UNCERTAIN"
+          ],
+          "question": "Which service region does gita currently believe applies?"
+        },
+        {
+          "query_id": "r4-q09",
+          "after_event": 88,
+          "target_agent_id": "gita",
+          "target_issue_key": "maintenance_shift",
+          "allowed_labels": [
+            "SHIFT_A",
+            "SHIFT_B",
+            "SHIFT_C",
+            "UNCERTAIN"
+          ],
+          "question": "After gita rejected SHIFT_C, which maintenance shift does gita believe applies?"
+        },
+        {
+          "query_id": "r4-q06",
+          "after_event": 96,
+          "target_agent_id": "hugo",
+          "target_issue_key": "service_region",
+          "allowed_labels": [
+            "REGION_EAST",
+            "REGION_WEST",
+            "REGION_CENTRAL",
+            "UNCERTAIN"
+          ],
+          "question": "At the requested historical time, which service region did hugo believe applied?",
+          "event_time": "2026-07-17T11:20:00+00:00"
         },
         {
           "query_id": "r4-q12",
