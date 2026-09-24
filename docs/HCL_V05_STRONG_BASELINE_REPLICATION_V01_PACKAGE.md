@@ -21,11 +21,21 @@ Canonical design:
 
 Fixture:
 - `eval/v05/strong_baseline_replication_v01_fixture.json`
+- SHA-256:
+  `478c9e8dbd4255ba418e743faa9627db71807a390b61d105fb33e22270ea9faa`
 
 Gold:
 - `eval/v05/strong_baseline_replication_v01_gold.json`
+- SHA-256:
+  `7900e7cb5c49def7e4f9800c1e1188211115f0fcd3fde73bab43c09c5ee17eff`
 
-The fixture/gold digests are recorded after provider-free validation.
+Provider-free exact-head evidence:
+- v0.5 workflow `36024155815`: SUCCESS;
+- v0.5 provider-free suite: **69 / 69**;
+- strong-baseline validate-only: PASS,
+  **4 streams / 384 events / 48 queries**;
+- manual frozen gold/timeline audit: PASS;
+- HCL integration workflow `36024155773`: SUCCESS.
 
 ## Compared arms
 
@@ -55,4 +65,4 @@ The provider-free gate must verify:
 - post-hoc scoring;
 - exact fixture/gold digests.
 
-**Gate: HCL_V05_STRONG_BASELINE_REPLICATION_V01_PACKAGE_FROZEN_PREFLIGHT_PENDING**
+**Gate: HCL_V05_STRONG_BASELINE_REPLICATION_V01_PACKAGE_FROZEN_PREFLIGHT_PASS_PROVIDER_NOT_STARTED**
