@@ -380,7 +380,7 @@ class V04StoreTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(
             SchemaValidationError,
-            "revision target must be an existing prior proposition",
+            "revision target must be present in the bounded active proposition catalog",
         ):
             self.store.apply_patch(0, patch)
 
@@ -487,6 +487,179 @@ class V04StoreTests(unittest.TestCase):
         )
         self.assertNotIn("projection_status", belief_old)
         self.assertFalse(
+            any(
+                item.get("conflict_type") == "REVISION_STANCE_UNRESOLVED"
+                for item in current.unresolved_conflicts
+            )
+        )
+
+    def test_revision_target_outside_bounded_catalog_is_rejected(self):
+        propositions = tuple(
+            Proposition(
+                proposition_id=f"catalog_{index:02d}",
+                canonical_text=f"Catalog proposition {index}",
+                source_event_ids=("e1",),
+            )
+            for index in range(65)
+        )
+        assertions = tuple(
+            CognitiveAssertion(
+                assertion_id=f"catalog_assertion_{index:02d}",
+                assertion_type=AssertionType.SOURCE_ASSERTION,
+                proposition_id=f"catalog_{index:02d}",
+                valid_time=T0,
+                system_record_time=T0,
+                evidence_event_ids=("e1",),
+            )
+            for index in range(65)
+        )
+        self.store.apply_patch(
+            0,
+            SemanticPatch(
+                patch_id="catalog_seed",
+                event_id="e1",
+                semantic_version="v04.1",
+                propositions=propositions,
+                assertions=assertions,
+            ),
+        )
+        catalog_ids = {
+            item["proposition_id"] for item in self.store.proposition_catalog()
+        }
+        self.assertEqual(len(catalog_ids), 64)
+        self.assertNotIn("catalog_00", catalog_ids)
+
+        t1 = "2026-01-01T11:00:00+00:00"
+        self.store.append_event(
+            EventRecord(
+                event_id="catalog_revision",
+                valid_time=t1,
+                recorded_at=t1,
+                raw_text="A correction refers to the oldest proposition",
+                source_id="source",
+                actor_id="source",
+            )
+        )
+        with self.assertRaisesRegex(
+            SchemaValidationError,
+            "bounded active proposition catalog",
+        ):
+            self.store.apply_patch(
+                1,
+                SemanticPatch(
+                    patch_id="catalog_revision_patch",
+                    event_id="catalog_revision",
+                    semantic_version="v04.1",
+                    propositions=(
+                        Proposition(
+                            proposition_id="catalog_new",
+                            canonical_text="Replacement",
+                            source_event_ids=("catalog_revision",),
+                        ),
+                    ),
+                    assertions=(
+                        CognitiveAssertion(
+                            assertion_id="catalog_revision_assertion",
+                            assertion_type=AssertionType.PROPOSITION_REVISION,
+                            proposition_id="catalog_new",
+                            related_proposition_id="catalog_00",
+                            valid_time=t1,
+                            system_record_time=t1,
+                            evidence_event_ids=("catalog_revision",),
+                        ),
+                    ),
+                ),
+            )
+
+    def test_equivalent_iso_valid_times_use_record_time_tie_break(self):
+        belief_valid = "2026-01-01T11:00:00Z"
+        exposure_valid = "2026-01-01T11:00:00+00:00"
+        belief_record = "2026-01-01T10:00:00+00:00"
+        exposure_record = "2026-01-01T11:30:00+00:00"
+
+        seed = SemanticPatch(
+            patch_id="iso_seed",
+            event_id="e1",
+            semantic_version="v04.1",
+            propositions=(
+                Proposition(
+                    proposition_id="iso_old",
+                    canonical_text="Old ISO value",
+                    source_event_ids=("e1",),
+                ),
+            ),
+            assertions=(
+                CognitiveAssertion(
+                    assertion_id="iso_belief_old",
+                    assertion_type=AssertionType.BELIEF_ESTIMATE,
+                    subject_agent_id="alice",
+                    proposition_id="iso_old",
+                    belief_stance=BeliefStance.AFFIRM,
+                    valid_time=belief_valid,
+                    system_record_time=belief_record,
+                    evidence_event_ids=("e1",),
+                ),
+            ),
+        )
+        self.store.apply_patch(0, seed)
+
+        self.store.append_event(
+            EventRecord(
+                event_id="iso_revision",
+                valid_time=exposure_valid,
+                recorded_at=exposure_record,
+                raw_text="Correction delivered to Alice",
+                source_id="source",
+                actor_id="source",
+                recipient_ids=("alice",),
+            )
+        )
+        self.store.apply_patch(
+            1,
+            SemanticPatch(
+                patch_id="iso_revision_patch",
+                event_id="iso_revision",
+                semantic_version="v04.1",
+                propositions=(
+                    Proposition(
+                        proposition_id="iso_new",
+                        canonical_text="New ISO value",
+                        source_event_ids=("iso_revision",),
+                    ),
+                ),
+                assertions=(
+                    CognitiveAssertion(
+                        assertion_id="iso_revision_relation",
+                        assertion_type=AssertionType.PROPOSITION_REVISION,
+                        proposition_id="iso_new",
+                        related_proposition_id="iso_old",
+                        valid_time=exposure_valid,
+                        system_record_time=exposure_record,
+                        evidence_event_ids=("iso_revision",),
+                    ),
+                    CognitiveAssertion(
+                        assertion_id="iso_exposure",
+                        assertion_type=AssertionType.INFORMATION_EXPOSURE,
+                        subject_agent_id="alice",
+                        proposition_id="iso_new",
+                        valid_time=exposure_valid,
+                        system_record_time=exposure_record,
+                        evidence_event_ids=("iso_revision",),
+                    ),
+                ),
+            ),
+        )
+        current = self.store.build_view(None, None, None, "current")
+        old = next(
+            item
+            for item in current.relevant_assertions
+            if item["assertion_id"] == "iso_belief_old"
+        )
+        self.assertEqual(
+            old["projection_status"],
+            "STALE_AFTER_REVISION_EXPOSURE",
+        )
+        self.assertTrue(
             any(
                 item.get("conflict_type") == "REVISION_STANCE_UNRESOLVED"
                 for item in current.unresolved_conflicts
