@@ -30,6 +30,12 @@ The extractor output is validated before it can affect state.
 - Invalid extraction gets at most one bounded semantic repair.
 - Repeated invalid extraction fails strictly rather than inventing state.
 
+Raw evidence is canonical: the runtime stores the immutable raw event before
+semantic extraction. A semantic/backend failure therefore cannot erase the
+source event or fabricate a derived stance. Failed events retain an explicit
+semantic-failure record and may be reprocessed deliberately; ordinary duplicate
+ingest does not silently retry them.
+
 The runtime is idempotent by raw event ID and rejects changed-content reuse of an
 existing ID.
 
