@@ -8,6 +8,7 @@ on:
       - "tests/test_v04_long_horizon_runner.py"
       - "docs/HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_CONTRACT_V01.md"
       - ".github/workflows/hcl-v04-long-horizon-v01-preflight.yml"
+      - ".github/workflows/hcl-v04-long-horizon-v01-once.yml"
   workflow_dispatch:
 
 permissions:
