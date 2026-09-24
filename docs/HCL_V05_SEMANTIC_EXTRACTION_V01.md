@@ -29,7 +29,15 @@ This pilot does not score final beliefs or actions. It evaluates only:
 Fixture and gold are separate:
 
 - `eval/v05/semantic_extraction_v01_fixture.json`
+  - SHA-256: `afb653516b10a420eac0eb9cdcc6b740dc04728dc18cd4e07c5b693be8dfbd7a`
 - `eval/v05/semantic_extraction_v01_gold.json`
+  - SHA-256: `e2d638003b3cf2b0fdd8f742f9594777ec68caa89ec6dc024e86bf02c3d69964`
+
+Provider-free exact-head evidence:
+- v0.5 workflow `35999994122`: SUCCESS;
+- v0.5 provider-free tests: **31 / 31**;
+- extraction validate-only: PASS, **3 streams / 36 events / 36 gold signals**;
+- HCL integration workflow `35999994106`: SUCCESS.
 
 Each stream includes a predeclared issue/value catalog. The provider must reuse
 those symbolic keys. This pilot therefore tests semantic stance extraction, not
@@ -87,4 +95,4 @@ A clean or sufficiently interpretable extraction result may justify a new,
 independent capability package. A failure requires mechanism-level diagnosis
 and a new extraction package after repair.
 
-**Gate: HCL_V05_SEMANTIC_EXTRACTION_V01_FROZEN_PREFLIGHT_NOT_RUN**
+**Gate: HCL_V05_SEMANTIC_EXTRACTION_V01_FROZEN_PREFLIGHT_PASS_PROVIDER_NOT_STARTED**
