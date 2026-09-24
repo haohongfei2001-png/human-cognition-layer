@@ -4238,3 +4238,36 @@ No provider call, benchmark rerun, owner-private example, training or capability
 claim is part of this milestone.
 
 **Current gate: HCL_V05_PERSISTENT_STANCE_STORE_V01_PROVIDER_FREE_COMPLETE_INVALIDATION_REBUILD_NEXT**
+
+
+## HCL v0.5 semantic invalidation and recovery v0.1
+
+Contract:
+- `docs/HCL_V05_SEMANTIC_INVALIDATION_RECOVERY_V01.md`
+
+PR #23 adds audited recovery for derived stance semantics without mutating raw
+evidence.
+
+Recovery semantics:
+- only COMMITTED semantics may be invalidated;
+- invalidation removes derived stance from current projection immediately;
+- raw event remains immutable and present;
+- prior stance payloads and prior semantic receipt are copied into append-only
+  invalidation history with reason/timestamp;
+- INVALIDATED survives restart and requires explicit `reprocess_event`;
+- successful reprocess commits new derived semantics while retaining audit
+  history;
+- failed reprocess becomes FAILED and never resurrects invalidated stance;
+- ordinary duplicate ingest of FAILED/INVALIDATED events never silently
+  reprocesses them.
+
+Provider-free exact-head evidence at
+`90bba2f17f3ef826537f8887557f76915c7ca866`:
+- v0.5 workflow `35991344491`: SUCCESS;
+- HCL integration workflow `35991344572`: SUCCESS;
+- v0.5 core + semantic + persistence + recovery tests all passed.
+
+No provider call, consumed-row rerun, external benchmark, owner-private example,
+training or capability claim is part of this milestone.
+
+**Current gate: HCL_V05_SEMANTIC_INVALIDATION_RECOVERY_V01_PROVIDER_FREE_COMPLETE_PROVIDER_EXTRACTION_VALIDATION_NEXT**
