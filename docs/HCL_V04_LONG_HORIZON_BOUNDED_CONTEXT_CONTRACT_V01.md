@@ -198,10 +198,10 @@ Provider-free preflight candidate:
 - query-time dynamic-context cap for D and E: **8000 characters**
 - ordinary free-form E memory cap: **6000 characters**
 - streams / events / scored queries: **3 / 240 / 18**
-- provider-free preflight run: `35978730334` — SUCCESS
-- provider-free fairness guards: **7 / 7**
+- provider-free preflight run: `35980000546` — SUCCESS
+- provider-free fairness / evidence guards: **8 / 8**
 - existing v0.4 + long-horizon preflight integration run:
-  `35978730244` — SUCCESS
+  `35980000406` — SUCCESS
 - existing v0.4 deterministic contract suite remains **35 / 35**
 - manual gold/timeline audit before provider execution: PASS; all 18 labels were
   rechecked against the frozen event chronology, including revision receipt
@@ -210,6 +210,22 @@ Provider-free preflight candidate:
 
 These digests are frozen before provider-backed execution. Any change to either
 file requires a new digest and invalidates the current execution candidate.
+
+Evidence preservation is also frozen before the first scored run:
+
+- every C/D/E scored row stores the exact dynamic query context presented to the
+  answer model;
+- every D scored row additionally stores the full derived persistent cognition
+  snapshot at that query, so state-formation failure can be separated from
+  query-projection failure;
+- every E scored row stores the ordinary persistent memory inside its exact query
+  context;
+- per-row query latency plus per-arm provider wall time, total wall time,
+  calls/input/output characters, and D/E persistent-state size are recorded.
+
+The provider execution workflow is one-shot by contract. It requires a fixed
+trigger nonce, requires the trigger path to be newly created with no prior path
+history, and rejects GitHub Actions rerun attempts before any provider call.
 
 ## Execution gate
 
@@ -221,4 +237,4 @@ Provider-backed execution is allowed only after:
 4. runner records per-arm cost;
 5. exact fixture digest is recorded.
 
-**Gate: HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V01_IMPLEMENTED_PREFLIGHT_AND_GOLD_AUDIT_PASS_NOT_RUN**
+**Gate: HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V01_FINAL_EVIDENCE_CONTRACT_FROZEN_PROVIDER_RUN_NOT_STARTED**

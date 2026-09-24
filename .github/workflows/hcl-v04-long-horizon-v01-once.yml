@@ -1,0 +1,136 @@
+name: HCL v0.4 Long-Horizon Bounded-Context v0.1 Once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_V04_LONG_HORIZON_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hcl-v04-long-horizon-v01-once
+  cancel-in-progress: false
+
+env:
+  CANDIDATE_ANCHOR: 18b242631285767aa80ca1ff6fff7c746f7f3a99
+  FIXTURE_SHA256: a79b675cf484292a07916141d54d3022862c39851a3fc4b91c73cb13f1a75cfe
+  GOLD_SHA256: 376fb695eada3b52f7e8fadd395be479f9cbbf47c944c9d3b0c4a56d5f90c988
+  DEEPSEEK_BASE_URL: https://api.deepseek.com
+  TRIGGER_PATH: .github/HCL_V04_LONG_HORIZON_V01_TRIGGER
+  RUN_ONCE_TOKEN: HCL_V04_LONG_HORIZON_V01_RUN_ONCE_20260924_A1
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Enforce immutable one-shot trigger
+        shell: bash
+        run: |
+          if [ "$GITHUB_RUN_ATTEMPT" != "1" ]; then
+            echo "Refusing provider execution on workflow rerun attempt $GITHUB_RUN_ATTEMPT"
+            exit 1
+          fi
+
+          test "$(cat "$TRIGGER_PATH")" = "$RUN_ONCE_TOKEN"
+
+          if git log --format=%H "${{ github.event.before }}" -- "$TRIGGER_PATH" | grep -q .; then
+            echo "Trigger path existed before this push; scored rows are already consumed or trigger history is not fresh."
+            exit 1
+          fi
+
+          git diff --diff-filter=A --name-only "${{ github.event.before }}" "$GITHUB_SHA" -- "$TRIGGER_PATH" \
+            | grep -Fx "$TRIGGER_PATH"
+
+      - name: Verify frozen candidate content
+        shell: bash
+        run: |
+          git diff --exit-code "$CANDIDATE_ANCHOR"..HEAD -- \
+            hcl/v04 \
+            scripts/run_v04_long_horizon_bounded_context_v01.py \
+            tests/test_v04_long_horizon_runner.py \
+            eval/v04/long_horizon_bounded_context_v01_fixture.json \
+            eval/v04/long_horizon_bounded_context_v01_gold.json \
+            docs/HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_CONTRACT_V01.md
+          echo "$FIXTURE_SHA256  eval/v04/long_horizon_bounded_context_v01_fixture.json" | sha256sum -c -
+          echo "$GOLD_SHA256  eval/v04/long_horizon_bounded_context_v01_gold.json" | sha256sum -c -
+
+      - name: Run provider-free execution preflight
+        run: |
+          python scripts/run_v04_long_horizon_bounded_context_v01.py --validate-only
+          python -m unittest -v tests.test_v04_long_horizon_runner
+
+      - name: Install frozen provider client
+        run: python -m pip install "openai==2.14.0"
+
+      - name: Run frozen single-model D/E pilot once
+        run: |
+          python scripts/run_v04_long_horizon_bounded_context_v01.py \
+            --model deepseek-flash \
+            --fixtures eval/v04/long_horizon_bounded_context_v01_fixture.json \
+            --gold eval/v04/long_horizon_bounded_context_v01_gold.json \
+            --out artifacts/hcl-v04-long-horizon-v01/result.json
+
+      - name: Verify complete evidence artifact
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          p = Path("artifacts/hcl-v04-long-horizon-v01/result.json")
+          result = json.loads(p.read_text(encoding="utf-8"))
+
+          assert result["fixture_sha256"] == os.environ["FIXTURE_SHA256"]
+          assert result["gold_sha256"] == os.environ["GOLD_SHA256"]
+          assert result["primary_comparison"] == ["D", "E"]
+          assert result["diagnostic_oracle"] == "C"
+          assert result["query_context_char_budget"] == 8000
+          assert result["ordinary_memory_char_budget"] == 6000
+
+          for arm in ("C", "D", "E"):
+              block = result["arms"][arm]
+              assert block["total"] == 18
+              assert len(block["rows"]) == 18
+              assert block["backend"]["calls"] > 0
+              assert block["backend"]["input_chars"] > 0
+              assert block["backend"]["output_chars"] > 0
+              assert block["backend"]["provider_wall_seconds"] >= 0
+              assert block["wall_clock_seconds"] >= 0
+              for row in block["rows"]:
+                  assert "query_elapsed_seconds" in row
+                  assert row["query_elapsed_seconds"] >= 0
+
+          for arm in ("D", "E"):
+              assert result["arms"][arm]["max_query_context_chars"] <= 8000
+              assert result["arms"][arm]["max_persistent_state_chars"] is not None
+
+          assert all("state_chars" in row for row in result["arms"]["D"]["rows"])
+          assert all("persistent_state" in row for row in result["arms"]["D"]["rows"])
+          assert all("memory_chars" in row for row in result["arms"]["E"]["rows"])
+          for arm in ("C", "D", "E"):
+              assert all("query_context" in row for row in result["arms"][arm]["rows"])
+          PY
+
+      - name: Upload immutable pilot evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v04-long-horizon-v01-${{ github.run_id }}
+          path: artifacts/hcl-v04-long-horizon-v01/
+          if-no-files-found: warn
+          retention-days: 90
