@@ -158,6 +158,167 @@ class V05PersistenceTests(unittest.TestCase):
                 )
             reopened.close()
 
+    def test_invalidation_removes_current_stance_but_preserves_raw_and_audit(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            db = str(Path(tmp) / "stance.sqlite")
+            runtime = HCLV05Runtime(path=db)
+            raw = event("e1", "Ari accepts Red.", actor="ari")
+            runtime.ingest_event(
+                raw,
+                FakeBackend(
+                    [
+                        payload(
+                            {
+                                "subject_agent_id": "ari",
+                                "issue_key": "route_assignment",
+                                "signal": "AFFIRM",
+                                "value_key": "RED",
+                                "prior_value_key": None,
+                            }
+                        )
+                    ]
+                ),
+            )
+            self.assertEqual(
+                runtime.current_stance(
+                    "ari", "route_assignment"
+                ).affirmed_value_key,
+                "RED",
+            )
+
+            runtime.invalidate_semantics("e1", "semantic interpretation was wrong")
+            state = runtime.current_stance("ari", "route_assignment")
+            self.assertEqual(state.status, StanceStatus.NO_AFFIRMED_VALUE)
+            self.assertEqual(runtime.events[0], raw)
+            self.assertEqual(runtime.store.semantic_status("e1"), "INVALIDATED")
+            history = runtime.store.invalidation_history("e1")
+            self.assertEqual(len(history), 1)
+            self.assertEqual(
+                history[0]["prior_stance_payloads"][0]["value_key"],
+                "RED",
+            )
+            self.assertEqual(
+                history[0]["prior_receipt"]["status"],
+                "COMMITTED",
+            )
+            runtime.close()
+
+    def test_invalidated_semantics_persist_across_restart_and_reprocess(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            db = str(Path(tmp) / "stance.sqlite")
+            runtime = HCLV05Runtime(path=db)
+            raw = event("e1", "Ari states a route.", actor="ari")
+            runtime.ingest_event(
+                raw,
+                FakeBackend(
+                    [
+                        payload(
+                            {
+                                "subject_agent_id": "ari",
+                                "issue_key": "route_assignment",
+                                "signal": "AFFIRM",
+                                "value_key": "RED",
+                                "prior_value_key": None,
+                            }
+                        )
+                    ]
+                ),
+            )
+            runtime.invalidate_semantics("e1", "replace incorrect derived stance")
+            runtime.close()
+
+            reopened = HCLV05Runtime(path=db)
+            self.assertEqual(reopened.store.semantic_status("e1"), "INVALIDATED")
+            self.assertEqual(reopened.stance_events, ())
+            result = reopened.reprocess_event(
+                "e1",
+                FakeBackend(
+                    [
+                        payload(
+                            {
+                                "subject_agent_id": "ari",
+                                "issue_key": "route_assignment",
+                                "signal": "AFFIRM",
+                                "value_key": "BLUE",
+                                "prior_value_key": None,
+                            }
+                        )
+                    ]
+                ),
+            )
+            self.assertFalse(result.duplicate)
+            self.assertEqual(reopened.store.semantic_status("e1"), "COMMITTED")
+            self.assertEqual(
+                reopened.current_stance(
+                    "ari", "route_assignment"
+                ).affirmed_value_key,
+                "BLUE",
+            )
+            history = reopened.store.invalidation_history("e1")
+            self.assertEqual(len(history), 1)
+            self.assertEqual(
+                history[0]["prior_stance_payloads"][0]["value_key"],
+                "RED",
+            )
+            reopened.close()
+
+    def test_failed_reprocess_after_invalidation_does_not_restore_old_stance(self):
+        runtime = HCLV05Runtime()
+        try:
+            raw = event("e1", "Ari states a route.", actor="ari")
+            runtime.ingest_event(
+                raw,
+                FakeBackend(
+                    [
+                        payload(
+                            {
+                                "subject_agent_id": "ari",
+                                "issue_key": "route_assignment",
+                                "signal": "AFFIRM",
+                                "value_key": "RED",
+                                "prior_value_key": None,
+                            }
+                        )
+                    ]
+                ),
+            )
+            runtime.invalidate_semantics("e1", "invalidate prior interpretation")
+            invalid = payload(
+                {
+                    "subject_agent_id": "other",
+                    "issue_key": "route_assignment",
+                    "signal": "AFFIRM",
+                    "value_key": "BLUE",
+                    "prior_value_key": None,
+                }
+            )
+            with self.assertRaises(SemanticExtractionError):
+                runtime.reprocess_event(
+                    "e1",
+                    FakeBackend([invalid, invalid]),
+                )
+            self.assertEqual(runtime.store.semantic_status("e1"), "FAILED")
+            self.assertEqual(runtime.stance_events, ())
+            self.assertEqual(
+                runtime.current_stance(
+                    "ari", "route_assignment"
+                ).status,
+                StanceStatus.NO_AFFIRMED_VALUE,
+            )
+            self.assertEqual(len(runtime.store.invalidation_history("e1")), 1)
+        finally:
+            runtime.close()
+
+    def test_only_committed_semantics_can_be_invalidated(self):
+        runtime = HCLV05Runtime()
+        try:
+            raw = event("e1", "Routine note.", actor="source")
+            runtime.store.append_event(raw)
+            with self.assertRaises(ValueError):
+                runtime.invalidate_semantics("e1", "no committed semantics")
+        finally:
+            runtime.close()
+
     def test_store_commit_is_atomic_on_duplicate_stance_ids(self):
         store = V05Store()
         try:
