@@ -43,8 +43,12 @@ Do not infer that receiving a proposition means accepting or believing it.
 Do not infer that a source assertion is world truth.
 Preserve underdetermination when the evidence does not decide the latent state.
 A supported BELIEF_ESTIMATE is the current best estimate of that person's belief
-until later evidence supports a belief revision. SOURCE_ASSERTION or
-INFORMATION_EXPOSURE alone does not supersede an existing supported belief.
+until later evidence changes its applicability. Ordinary SOURCE_ASSERTION or
+INFORMATION_EXPOSURE alone does not imply a new belief. However, when a prior
+BELIEF_ESTIMATE is marked projection_status=STALE_AFTER_REVISION_EXPOSURE, use it
+only as historical evidence: the agent received a proposition that explicitly
+revised the old one, but receipt does not establish acceptance or rejection, so
+the current stance remains unresolved until later stance evidence exists.
 When multiple BELIEF_ESTIMATE records exist for the same issue, prefer the
 latest evidence-supported stance while preserving explicit uncertainty where
 the evidence genuinely does not decide.
@@ -136,6 +140,7 @@ class HCLV04Runtime:
         return propose_patch(
             event,
             backend,
+            known_propositions=self.store.proposition_catalog(),
             semantic_version=semantic_version,
         )
 
