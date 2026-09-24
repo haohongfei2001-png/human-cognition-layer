@@ -34,4 +34,5 @@ jobs:
         run: |
           python -m unittest -v \
             tests.test_v05_current_stance \
-            tests.test_v05_semantic_runtime
+            tests.test_v05_semantic_runtime \
+            tests.test_v05_store
