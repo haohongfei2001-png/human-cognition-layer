@@ -42,7 +42,8 @@ jobs:
             tests.test_v05_current_stance \
             tests.test_v05_semantic_runtime \
             tests.test_v05_store \
-            tests.test_v05_semantic_extraction_runner
+            tests.test_v05_semantic_extraction_runner \
+            tests.test_v05_routed_semantic
       - name: Run semantic extraction provider-free preflight when present
         if: ${{ hashFiles('scripts/run_v05_semantic_extraction_v01.py') != '' }}
         run: python scripts/run_v05_semantic_extraction_v01.py --validate-only
