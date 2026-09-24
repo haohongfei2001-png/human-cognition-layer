@@ -185,6 +185,26 @@ evidence; diagnose a new independent mechanism question.
 - no external benchmark or leaderboard in this pilot;
 - no cross-model run until this single-model pilot has a clear interpretation.
 
+## Frozen implementation material
+
+Provider-free preflight candidate:
+
+- fixture: `eval/v04/long_horizon_bounded_context_v01_fixture.json`
+- fixture SHA-256:
+  `a79b675cf484292a07916141d54d3022862c39851a3fc4b91c73cb13f1a75cfe`
+- scoring key: `eval/v04/long_horizon_bounded_context_v01_gold.json`
+- gold SHA-256:
+  `376fb695eada3b52f7e8fadd395be479f9cbbf47c944c9d3b0c4a56d5f90c988`
+- query-time dynamic-context cap for D and E: **8000 characters**
+- ordinary free-form E memory cap: **6000 characters**
+- streams / events / scored queries: **3 / 240 / 18**
+- provider-free preflight run: `35968671723` — SUCCESS
+- provider-free fairness guards: **5 / 5**
+- existing v0.4 deterministic contract suite on the same PR head: **35 / 35**
+
+These digests are frozen before provider-backed execution. Any change to either
+file requires a new digest and invalidates the current execution candidate.
+
 ## Execution gate
 
 Provider-backed execution is allowed only after:
@@ -195,4 +215,4 @@ Provider-backed execution is allowed only after:
 4. runner records per-arm cost;
 5. exact fixture digest is recorded.
 
-**Gate: HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V01_FROZEN_READY_FOR_IMPLEMENTATION_NOT_RUN**
+**Gate: HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V01_IMPLEMENTED_PREFLIGHT_PASS_NOT_RUN**
