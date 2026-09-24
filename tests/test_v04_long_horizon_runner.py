@@ -8,8 +8,11 @@ from pathlib import Path
 
 from scripts.run_v04_long_horizon_bounded_context_v01 import (
     MeteredBackend,
+    _event_retrieval_score,
     answer_label,
     compact_hcl_context,
+    event_from_mapping,
+    event_prompt_payload,
     load_and_validate,
     ordinary_query_context,
     score_rows,
@@ -135,6 +138,69 @@ class LongHorizonRunnerTests(unittest.TestCase):
                 for row in payload["relevant_assertions"]
             )
         )
+
+    def test_harness_only_annotations_never_reach_models_or_retrieval(self):
+        stream = self.fixture["streams"][0]
+        event = stream["events"][0]
+        self.assertIn("track", event["metadata"])
+        self.assertIn("sequence", event["metadata"])
+
+        prompt_event = event_prompt_payload(event)
+        mapped_event = event_from_mapping(event)
+        self.assertNotIn("track", prompt_event["metadata"])
+        self.assertNotIn("sequence", prompt_event["metadata"])
+        self.assertNotIn("track", mapped_event.metadata)
+        self.assertNotIn("sequence", mapped_event.metadata)
+
+        scene_fact_event = next(
+            row
+            for candidate_stream in self.fixture["streams"]
+            for row in candidate_stream["events"]
+            if (row.get("metadata") or {}).get("scene_fact")
+        )
+        self.assertTrue(event_prompt_payload(scene_fact_event)["metadata"]["scene_fact"])
+        self.assertTrue(event_from_mapping(scene_fact_event).metadata["scene_fact"])
+
+        query = stream["queries"][0]
+        altered = json.loads(json.dumps(event))
+        altered["metadata"]["track"] = (
+            "primary" if event["metadata"]["track"] != "primary" else "decoy"
+        )
+        altered["metadata"]["sequence"] = 999999
+        self.assertEqual(
+            _event_retrieval_score(event, query),
+            _event_retrieval_score(altered, query),
+        )
+
+        fake = FakeBackend()
+        backend = MeteredBackend(fake)
+        update_ordinary_memory(
+            backend,
+            "",
+            event,
+            memory_char_budget=self.fixture["ordinary_memory_char_budget"],
+        )
+        prompts = "\n".join(
+            str(message["content"])
+            for _, call in fake.calls
+            for message in call
+        )
+        self.assertNotIn('"track"', prompts)
+        self.assertNotIn('"sequence"', prompts)
+
+    def test_meter_records_provider_wall_time(self):
+        fake = FakeBackend()
+        backend = MeteredBackend(fake)
+        query = self.fixture["streams"][0]["queries"][0]
+        answer_label(
+            backend,
+            query,
+            arm="E",
+            dynamic_context={"ordinary_memory": "", "supporting_events": []},
+        )
+        metrics = backend.metrics()
+        self.assertEqual(metrics["calls"], 1)
+        self.assertGreaterEqual(metrics["provider_wall_seconds"], 0.0)
 
     def test_model_prompts_never_receive_gold_or_risk_class(self):
         fake = FakeBackend()
