@@ -40,6 +40,10 @@ code will validate.
 Keep these record types distinct:
 - SCENE_FACT: explicit task/environment fact, not automatically known by agents.
 - SOURCE_ASSERTION: a source said proposition P; does not establish P as true.
+- PROPOSITION_REVISION: the current evidence presents proposition P_new as a
+  correction/replacement of a specific prior proposition P_old. Set
+  proposition_id=P_new and related_proposition_id=P_old. This relation does not
+  establish that P_new is true or that any agent accepts it.
 - INFORMATION_EXPOSURE: an agent observed/received content; does not establish belief.
 - BELIEF_ESTIMATE: evidence supports an agent stance toward the object-level proposition P.
   Use belief_stance=AFFIRM when the agent is supported as believing P.
@@ -52,6 +56,10 @@ Keep these record types distinct:
 - OTHER_UNKNOWN: current candidates may be incomplete.
 
 Do not infer that receiving P means believing P.
+Do not infer that receiving a revision means accepting the revision.
+Create PROPOSITION_REVISION only when the current evidence explicitly presents
+the new content as correcting, replacing, or superseding a known prior
+proposition. Use the supplied known_propositions IDs; do not invent a target.
 Do not infer that a source assertion means P is world truth.
 Do not use future information to rewrite historical agent state.
 Use SCENE_FACT only when the event metadata explicitly marks the content as an
@@ -77,6 +85,7 @@ Return JSON only with:
       "assertion_type": "...",
       "subject_agent_id": null,
       "proposition_id": null,
+      "related_proposition_id": null,
       "hypothesis_text": null,
       "valid_time": "...",
       "evidence_event_ids": ["..."],
@@ -144,7 +153,9 @@ def patch_from_mapping(
         raise SchemaValidationError("assertions must be a list")
 
     assertion_aliases: dict[str, str] = {}
-    normalized_identity: list[tuple[dict[str, Any], str, str | None]] = []
+    normalized_identity: list[
+        tuple[dict[str, Any], str, str | None, str | None]
+    ] = []
 
     for raw in raw_assertions:
         if not isinstance(raw, dict):
@@ -154,6 +165,14 @@ def patch_from_mapping(
         mapped_prop = (
             proposition_aliases.get(str(proposed_prop), str(proposed_prop))
             if proposed_prop is not None
+            else None
+        )
+        proposed_related_prop = raw.get("related_proposition_id")
+        mapped_related_prop = (
+            proposition_aliases.get(
+                str(proposed_related_prop), str(proposed_related_prop)
+            )
+            if proposed_related_prop is not None
             else None
         )
 
@@ -168,6 +187,7 @@ def patch_from_mapping(
             }
         }
         identity_payload["proposition_id"] = mapped_prop
+        identity_payload["related_proposition_id"] = mapped_related_prop
         assertion_id = _stable_id(
             "a",
             json.dumps(
@@ -181,12 +201,14 @@ def patch_from_mapping(
         )
         if proposed_id:
             assertion_aliases[proposed_id] = assertion_id
-        normalized_identity.append((raw, assertion_id, mapped_prop))
+        normalized_identity.append(
+            (raw, assertion_id, mapped_prop, mapped_related_prop)
+        )
 
     assertions: list[CognitiveAssertion] = []
     now = event.recorded_at
 
-    for raw, assertion_id, mapped_prop in normalized_identity:
+    for raw, assertion_id, mapped_prop, mapped_related_prop in normalized_identity:
         type_value = raw.get("assertion_type")
         try:
             assertion_type = AssertionType(type_value)
@@ -232,6 +254,7 @@ def patch_from_mapping(
                 assertion_type=assertion_type,
                 subject_agent_id=raw.get("subject_agent_id"),
                 proposition_id=mapped_prop,
+                related_proposition_id=mapped_related_prop,
                 hypothesis_text=raw.get("hypothesis_text"),
                 valid_time=str(raw.get("valid_time") or event.valid_time),
                 system_record_time=str(raw.get("system_record_time") or now),
@@ -264,6 +287,7 @@ def patch_from_mapping(
                 "assertion_type": a.assertion_type.value,
                 "subject_agent_id": a.subject_agent_id,
                 "proposition_id": a.proposition_id,
+                "related_proposition_id": a.related_proposition_id,
                 "hypothesis_text": a.hypothesis_text,
                 "valid_time": a.valid_time,
                 "evidence_event_ids": list(a.evidence_event_ids),
@@ -299,6 +323,8 @@ matches the declared JSON schema and enum values exactly.
 
 Do not add new facts merely to make the output valid.
 Do not change SOURCE_ASSERTION into SCENE_FACT.
+Do not create PROPOSITION_REVISION without explicit correction/replacement
+evidence and a real related_proposition_id.
 Do not change INFORMATION_EXPOSURE into BELIEF_ESTIMATE without independent
 acceptance/rejection/behavior evidence.
 
@@ -318,6 +344,7 @@ def propose_patch(
     event: EventRecord,
     backend: SemanticBackend,
     *,
+    known_propositions: tuple[dict[str, Any], ...] = (),
     semantic_version: str = "v04.1",
     max_tokens: int = 2048,
 ) -> SemanticPatch:
@@ -329,7 +356,9 @@ def propose_patch(
         "observer_ids": list(event.observer_ids),
         "recipient_ids": list(event.recipient_ids),
         "raw_text": event.raw_text,
+        "supersedes": event.supersedes,
         "metadata": event.metadata,
+        "known_propositions": list(known_propositions),
     }
     messages = [
         {"role": "system", "content": SEMANTIC_SYSTEM},
@@ -397,6 +426,8 @@ Hard rules:
 - INFORMATION_EXPOSURE requires an actual observation/recipient/actor/public
   evidence path for that subject. A sentence saying an agent did NOT receive
   information is not evidence that the agent received it.
+- PROPOSITION_REVISION links a new proposition to the specific prior proposition
+  it corrects/replaces. It does not imply truth or acceptance.
 - BELIEF_ESTIMATE represents an evidence-supported stance toward object-level P.
   Use belief_stance=AFFIRM or DENY. Do not encode rejection as AFFIRM.
   Do not encode counterevidence as BELIEF_ESTIMATE with COUNTEREVIDENCE.
