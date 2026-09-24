@@ -151,6 +151,14 @@ def _apply_batch(state: _MutableState, batch: list[StanceEvent]) -> None:
         return
 
     affirmed = next(iter(affirms), None)
+    if affirmed is not None and affirmed in denies:
+        state.accepted = None
+        state.pending = None
+        state.suspended = None
+        state.conflict = True
+        state.rejected.add(affirmed)
+        return
+
     if affirmed is not None:
         state.accepted = affirmed
         state.pending = None
