@@ -103,10 +103,10 @@ class HCLV05Runtime:
                     semantic_repair_count=0,
                     repair_reason=None,
                 )
-            if status == "FAILED":
+            if status in {"FAILED", "INVALIDATED"}:
                 raise ValueError(
-                    f"event_id {event.event_id!r} is preserved but semantic extraction "
-                    "has not succeeded; use reprocess_event"
+                    f"event_id {event.event_id!r} is preserved but semantic state "
+                    f"is {status}; use reprocess_event"
                 )
             raise ValueError(
                 f"event_id {event.event_id!r} exists without a semantic receipt"
