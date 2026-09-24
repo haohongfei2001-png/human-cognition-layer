@@ -4536,3 +4536,38 @@ If HCL clearly wins that fresh replication, stop internal synthetic iteration
 and move to external benchmark / cross-model transfer.
 
 **Current gate: HCL_V05_SEEDED_STATE_V01_COMPLETE_PROMISING_NOT_ESTABLISHED_STRONG_BASELINE_REPLICATION_NEXT**
+
+
+## HCL v0.5 final internal strong-baseline replication — design frozen
+
+Contract:
+- `docs/HCL_V05_STRONG_BASELINE_REPLICATION_V01.md`
+
+The next and final planned internal synthetic replication strengthens the
+baseline rather than changing v0.5 runtime.
+
+Primary comparator:
+- G = generic LLM-managed structured state with the same frozen ontology,
+  bounded state, dated history, and deterministic query readout;
+- no HCL-specific semantic types, routing machinery or transition algorithm.
+
+Planned fresh package:
+- 4 streams;
+- 96 events/stream;
+- 12 queries/stream;
+- 384 events / 48 queries;
+- multi-agent + multi-issue;
+- same ontology for D/G/E;
+- D vs G is primary;
+- E free-form memory and C full-history are secondary/diagnostic.
+
+Two pre-registered success routes:
+1. capability: D beats G by >=4/48, distributed across >=2 streams;
+2. practical efficiency: D is no worse than G by more than 1 query while using
+   <=60% of G provider character volume and <=60% of G provider wall time.
+
+This is the last planned internal synthetic capability replication for current
+v0.5. After it, either move to external benchmark/transfer or reassess the
+distinct HCL architecture rather than opening another similar internal round.
+
+**Current gate: HCL_V05_STRONG_BASELINE_REPLICATION_V01_DESIGN_FROZEN_PACKAGE_NOT_GENERATED**
