@@ -107,6 +107,7 @@ class CognitionStore:
                 assertion_type TEXT NOT NULL,
                 subject_agent_id TEXT,
                 proposition_id TEXT,
+                related_proposition_id TEXT,
                 hypothesis_text TEXT,
                 valid_time TEXT NOT NULL,
                 system_record_time TEXT NOT NULL,
@@ -160,6 +161,11 @@ class CognitionStore:
             with self.conn:
                 self.conn.execute(
                     "ALTER TABLE assertions ADD COLUMN belief_stance TEXT"
+                )
+        if "related_proposition_id" not in assertion_columns:
+            with self.conn:
+                self.conn.execute(
+                    "ALTER TABLE assertions ADD COLUMN related_proposition_id TEXT"
                 )
 
         with self.conn:
@@ -294,6 +300,28 @@ class CognitionStore:
             for row in self.conn.execute("SELECT proposition_id FROM propositions")
         }
 
+    def proposition_catalog(self, limit: int = 64) -> tuple[dict, ...]:
+        """Return a bounded active proposition catalog for semantic revision linking."""
+        rows = self.conn.execute(
+            """
+            SELECT DISTINCT p.proposition_id, p.canonical_text, p.source_event_ids
+            FROM propositions p
+            JOIN assertions a ON a.proposition_id = p.proposition_id
+            WHERE a.status IN ('ACTIVE', 'UNRESOLVED')
+            ORDER BY p.rowid DESC
+            LIMIT ?
+            """,
+            (limit,),
+        ).fetchall()
+        return tuple(
+            {
+                "proposition_id": row["proposition_id"],
+                "canonical_text": row["canonical_text"],
+                "source_event_ids": _loads(row["source_event_ids"], []),
+            }
+            for row in rows
+        )
+
     def _existing_assertion_ids(self) -> set[str]:
         return {
             row["assertion_id"]
@@ -358,6 +386,14 @@ class CognitionStore:
             if assertion.proposition_id and assertion.proposition_id not in proposition_ids:
                 raise SchemaValidationError(
                     f"assertion references missing proposition: {assertion.proposition_id}"
+                )
+            if (
+                assertion.related_proposition_id
+                and assertion.related_proposition_id not in proposition_ids
+            ):
+                raise SchemaValidationError(
+                    "assertion references missing related proposition: "
+                    f"{assertion.related_proposition_id}"
                 )
             missing_dependencies = (
                 set(assertion.depends_on_assertion_ids) - assertion_ids
@@ -435,6 +471,7 @@ class CognitionStore:
                     assertion_type=AssertionType(a["assertion_type"]),
                     subject_agent_id=a.get("subject_agent_id"),
                     proposition_id=a.get("proposition_id"),
+                    related_proposition_id=a.get("related_proposition_id"),
                     hypothesis_text=a.get("hypothesis_text"),
                     valid_time=a["valid_time"],
                     system_record_time=a["system_record_time"],
@@ -530,17 +567,18 @@ class CognitionStore:
                     """
                     INSERT INTO assertions(
                         assertion_id, assertion_type, subject_agent_id,
-                        proposition_id, hypothesis_text, valid_time,
-                        system_record_time, evidence_event_ids,
+                        proposition_id, related_proposition_id, hypothesis_text,
+                        valid_time, system_record_time, evidence_event_ids,
                         depends_on_assertion_ids, status, support_level,
                         belief_stance, semantic_version
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
                         assertion.assertion_id,
                         assertion.assertion_type.value,
                         assertion.subject_agent_id,
                         assertion.proposition_id,
+                        assertion.related_proposition_id,
                         assertion.hypothesis_text,
                         assertion.valid_time,
                         assertion.system_record_time,
@@ -666,6 +704,11 @@ class CognitionStore:
             "subject_agent_id": row["subject_agent_id"],
             "proposition_id": row["proposition_id"],
             "proposition_text": proposition_text,
+            "related_proposition_id": (
+                row.get("related_proposition_id")
+                if isinstance(row, dict)
+                else row["related_proposition_id"]
+            ),
             "hypothesis_text": row["hypothesis_text"],
             "valid_time": row["valid_time"],
             "system_record_time": row["system_record_time"],
@@ -1031,17 +1074,18 @@ class CognitionStore:
                         """
                         INSERT INTO assertions(
                             assertion_id, assertion_type, subject_agent_id,
-                            proposition_id, hypothesis_text, valid_time,
-                            system_record_time, evidence_event_ids,
+                            proposition_id, related_proposition_id, hypothesis_text,
+                            valid_time, system_record_time, evidence_event_ids,
                             depends_on_assertion_ids, status, support_level,
                             belief_stance, semantic_version
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                         """,
                         (
                             row["assertion_id"],
                             row["assertion_type"],
                             row["subject_agent_id"],
                             row["proposition_id"],
+                            row["related_proposition_id"],
                             row["hypothesis_text"],
                             row["valid_time"],
                             row["system_record_time"],
