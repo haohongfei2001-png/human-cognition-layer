@@ -4336,3 +4336,36 @@ recipient/observer exposure routing, while restricting model-created stance to
 explicit self-stance reports.
 
 **Current gate: HCL_V05_SEMANTIC_EXTRACTION_V01_COMPLETE_UNRELIABLE_ROUTED_EXTRACTION_ARCHITECTURE_NEXT**
+
+
+## HCL v0.5 routed semantic extraction v0.2 — provider-free architecture
+
+Contract:
+- `docs/HCL_V05_ROUTED_SEMANTIC_EXTRACTION_V02.md`
+
+PR #28 separates semantic relation recognition from information-flow routing.
+
+New boundary:
+- model self-stance output has no subject field; deterministic code binds it to
+  the event actor;
+- model revision output has no subject field; it contains only issue/new/prior;
+- deterministic code routes revision exposure to explicit event
+  recipients/observers;
+- sender/relay actor is not automatically treated as exposed;
+- self-report references to an earlier revision do not recreate exposure when
+  the event has no explicit audience;
+- schema rejects attempts to smuggle a subject into revision output.
+
+Provider-free exact-head evidence at
+`691486e2dc67259c0ad74595d5ce7dd6135dedc3`:
+- v0.5 workflow `36003117703`: SUCCESS;
+- routed + existing v0.5 tests: **42 / 42**;
+- HCL integration workflow `36003117658`: SUCCESS.
+
+The historical extractor remains available for consumed v0.1 evidence. Runtime
+has not yet switched to the routed extractor in this milestone.
+
+No provider call, consumed extraction rerun, capability run, owner-private
+example, training or benchmark claim is part of this milestone.
+
+**Current gate: HCL_V05_ROUTED_SEMANTIC_EXTRACTION_V02_PROVIDER_FREE_COMPLETE_RUNTIME_MIGRATION_NEXT**
