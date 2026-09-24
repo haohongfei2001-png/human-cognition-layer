@@ -1,0 +1,101 @@
+{
+  "format": "hcl-v05-seeded-state-capability-v01-gold",
+  "labels": {
+    "c1-q1": {
+      "gold": "STABLE",
+      "risk_class": "initial_acceptance"
+    },
+    "c1-q2": {
+      "gold": "STABLE",
+      "risk_class": "relay_rejected"
+    },
+    "c1-q3": {
+      "gold": "UNCERTAIN",
+      "risk_class": "revision_pending"
+    },
+    "c1-q4": {
+      "gold": "BETA",
+      "risk_class": "later_acceptance"
+    },
+    "c1-q5": {
+      "gold": "BETA",
+      "risk_class": "unseen_world_change"
+    },
+    "c1-q6": {
+      "gold": "BETA",
+      "risk_class": "explicit_rejection"
+    },
+    "c1-q7": {
+      "gold": "CANARY",
+      "risk_class": "final_acceptance"
+    },
+    "c1-q8": {
+      "gold": "STABLE",
+      "risk_class": "historical_replay"
+    },
+    "c2-q1": {
+      "gold": "DAILY",
+      "risk_class": "initial_acceptance"
+    },
+    "c2-q2": {
+      "gold": "WEEKLY",
+      "risk_class": "relay_accepted"
+    },
+    "c2-q3": {
+      "gold": "WEEKLY",
+      "risk_class": "repeated_confirmation"
+    },
+    "c2-q4": {
+      "gold": "WEEKLY",
+      "risk_class": "unseen_world_change"
+    },
+    "c2-q5": {
+      "gold": "UNCERTAIN",
+      "risk_class": "revision_pending"
+    },
+    "c2-q6": {
+      "gold": "WEEKLY",
+      "risk_class": "explicit_rejection"
+    },
+    "c2-q7": {
+      "gold": "MONTHLY",
+      "risk_class": "final_acceptance"
+    },
+    "c2-q8": {
+      "gold": "WEEKLY",
+      "risk_class": "historical_replay"
+    },
+    "c3-q1": {
+      "gold": "USD",
+      "risk_class": "initial_acceptance"
+    },
+    "c3-q2": {
+      "gold": "USD",
+      "risk_class": "rumor_rejected"
+    },
+    "c3-q3": {
+      "gold": "USD",
+      "risk_class": "direct_revision_rejected"
+    },
+    "c3-q4": {
+      "gold": "EUR",
+      "risk_class": "later_acceptance"
+    },
+    "c3-q5": {
+      "gold": "EUR",
+      "risk_class": "unseen_world_change"
+    },
+    "c3-q6": {
+      "gold": "UNCERTAIN",
+      "risk_class": "revision_pending"
+    },
+    "c3-q7": {
+      "gold": "EUR",
+      "risk_class": "explicit_rejection"
+    },
+    "c3-q8": {
+      "gold": "JPY",
+      "risk_class": "final_acceptance"
+    }
+  }
+}
