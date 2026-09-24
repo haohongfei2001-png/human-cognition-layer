@@ -4170,3 +4170,37 @@ No provider call, consumed-row rerun, external benchmark, owner-private example,
 training, or capability claim is part of this milestone.
 
 **Current gate: HCL_V05_CURRENT_STANCE_CORE_V01_PROVIDER_FREE_COMPLETE_SEMANTIC_INTEGRATION_NEXT**
+
+
+## HCL v0.5 semantic stance integration v0.1
+
+Contract:
+- `docs/HCL_V05_SEMANTIC_STANCE_INTEGRATION_V01.md`
+
+PR #21 connects immutable raw events to the deterministic v0.5 stance state
+through a bounded semantic extraction boundary. The semantic model may propose
+only event-local AFFIRM / DENY / REVISION_EXPOSURE / UNRESOLVED signals; it does
+not decide the current stance.
+
+Deterministic trust rules include:
+- self stance requires the subject to be the event actor;
+- revision exposure requires an actual event access path;
+- another person's claim cannot become the target's stance;
+- receipt cannot become acceptance;
+- changed-content reuse of an event ID fails closed;
+- semantic extraction gets at most one repair;
+- repeated invalid extraction remains a strict failure;
+- raw evidence is stored before semantic extraction and survives semantic or
+  backend failure;
+- failed raw events require explicit semantic reprocessing rather than silent
+  retry.
+
+Provider-free exact-head evidence at
+`85606f006ed29e2ab1648c44363bd10221c84032`:
+- v0.5 workflow `35990507004`: SUCCESS, **17 / 17** tests;
+- HCL integration workflow `35990507146`: SUCCESS.
+
+No provider-backed extraction, capability fixture, consumed-row rerun,
+owner-private example, training or benchmark claim is part of this milestone.
+
+**Current gate: HCL_V05_SEMANTIC_STANCE_INTEGRATION_V01_PROVIDER_FREE_COMPLETE_PERSISTENCE_NEXT**
