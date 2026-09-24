@@ -172,6 +172,83 @@ class V05SemanticIntegrationTests(unittest.TestCase):
         self.assertEqual(result.stance_events, ())
         self.assertEqual(result.repair_count, 1)
 
+    def test_seeded_catalog_is_supplied_before_any_stance_exists(self):
+        runtime = HCLV05Runtime(
+            semantic_catalog_seed={
+                "route_assignment": ["BLUE", "RED"],
+                "priority_band": ["HIGH", "LOW"],
+            }
+        )
+        try:
+            backend = FakeBackend(
+                [
+                    json.dumps(
+                        {
+                            "self_stances": [],
+                            "revision_relations": [],
+                        }
+                    )
+                ]
+            )
+            runtime.ingest_event(
+                event("seed-e1", "Routine note.", actor="source"),
+                backend,
+            )
+            prompt = json.loads(backend.calls[0][-1]["content"])
+            self.assertEqual(
+                prompt["known_issue_value_catalog"],
+                {
+                    "priority_band": ["HIGH", "LOW"],
+                    "route_assignment": ["BLUE", "RED"],
+                },
+            )
+        finally:
+            runtime.close()
+
+    def test_seeded_catalog_merges_with_observed_values(self):
+        runtime = HCLV05Runtime(
+            semantic_catalog_seed={"route_assignment": ["RED"]}
+        )
+        try:
+            runtime.store.append_event(
+                event("seed-e1", "Ari accepts Blue.", actor="ari")
+            )
+            from hcl.v05 import StanceEvent, StanceSignal
+
+            runtime.store.commit_semantics(
+                "seed-e1",
+                (
+                    StanceEvent(
+                        event_id="seed-stance",
+                        subject_agent_id="ari",
+                        issue_key="route_assignment",
+                        signal=StanceSignal.AFFIRM,
+                        value_key="BLUE",
+                        valid_time=T0,
+                        system_record_time=T0,
+                        evidence_event_ids=("seed-e1",),
+                    ),
+                ),
+                repair_count=0,
+                repair_reason=None,
+            )
+            self.assertEqual(
+                runtime.semantic_catalog(),
+                {"route_assignment": ["BLUE", "RED"]},
+            )
+        finally:
+            runtime.close()
+
+    def test_invalid_seed_catalog_fails_closed(self):
+        with self.assertRaises(ValueError):
+            HCLV05Runtime(
+                semantic_catalog_seed={"route_assignment": ["RED", "RED"]}
+            )
+        with self.assertRaises(ValueError):
+            HCLV05Runtime(
+                semantic_catalog_seed={"": ["RED"]}
+            )
+
     def test_known_catalog_is_supplied_to_backend(self):
         runtime = HCLV05Runtime()
         first = FakeBackend(
