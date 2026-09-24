@@ -4271,3 +4271,31 @@ No provider call, consumed-row rerun, external benchmark, owner-private example,
 training or capability claim is part of this milestone.
 
 **Current gate: HCL_V05_SEMANTIC_INVALIDATION_RECOVERY_V01_PROVIDER_FREE_COMPLETE_PROVIDER_EXTRACTION_VALIDATION_NEXT**
+
+
+## HCL v0.5 semantic extraction pilot v0.1 — frozen preflight
+
+Contract:
+- `docs/HCL_V05_SEMANTIC_EXTRACTION_V01.md`
+
+Fresh package:
+- 3 streams / 36 events / 36 gold stance signals;
+- domains: meeting format, retention period, sensor mode;
+- seeded issue/value catalogs isolate stance extraction from open-ended ontology
+  induction;
+- fixture/gold are separate and no gold/risk field enters model input.
+
+Frozen digests:
+- fixture:
+  `afb653516b10a420eac0eb9cdcc6b740dc04728dc18cd4e07c5b693be8dfbd7a`
+- gold:
+  `e2d638003b3cf2b0fdd8f742f9594777ec68caa89ec6dc024e86bf02c3d69964`
+
+Provider-free evidence:
+- v0.5 workflow `35999994122`: SUCCESS, **31 / 31**;
+- validate-only: PASS, **3 / 36 / 36**;
+- HCL integration workflow `35999994106`: SUCCESS.
+
+No provider-backed event in this package has been consumed yet.
+
+**Current gate: HCL_V05_SEMANTIC_EXTRACTION_V01_FROZEN_PREFLIGHT_PASS_PROVIDER_NOT_STARTED**

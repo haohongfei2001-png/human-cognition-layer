@@ -1,0 +1,432 @@
+{
+  "format": "hcl-v05-semantic-extraction-v01-gold",
+  "rows": {
+    "x1-e01": {
+      "risk_class": "source_info_not_stance",
+      "signals": []
+    },
+    "x1-e02": {
+      "risk_class": "self_affirm",
+      "signals": [
+        {
+          "subject_agent_id": "ada",
+          "issue_key": "meeting_format",
+          "signal": "AFFIRM",
+          "value_key": "IN_PERSON",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x1-e03": {
+      "risk_class": "other_agent_revision_exposure",
+      "signals": [
+        {
+          "subject_agent_id": "bo",
+          "issue_key": "meeting_format",
+          "signal": "REVISION_EXPOSURE",
+          "value_key": "VIDEO",
+          "prior_value_key": "IN_PERSON"
+        }
+      ]
+    },
+    "x1-e04": {
+      "risk_class": "third_party_stance_claim",
+      "signals": []
+    },
+    "x1-e05": {
+      "risk_class": "direct_revision_exposure",
+      "signals": [
+        {
+          "subject_agent_id": "ada",
+          "issue_key": "meeting_format",
+          "signal": "REVISION_EXPOSURE",
+          "value_key": "VIDEO",
+          "prior_value_key": "IN_PERSON"
+        }
+      ]
+    },
+    "x1-e06": {
+      "risk_class": "self_unresolved",
+      "signals": [
+        {
+          "subject_agent_id": "ada",
+          "issue_key": "meeting_format",
+          "signal": "UNRESOLVED",
+          "value_key": "VIDEO",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x1-e07": {
+      "risk_class": "deny_new_affirm_old",
+      "signals": [
+        {
+          "subject_agent_id": "ada",
+          "issue_key": "meeting_format",
+          "signal": "DENY",
+          "value_key": "VIDEO",
+          "prior_value_key": null
+        },
+        {
+          "subject_agent_id": "ada",
+          "issue_key": "meeting_format",
+          "signal": "AFFIRM",
+          "value_key": "IN_PERSON",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x1-e08": {
+      "risk_class": "repeated_revision_exposure",
+      "signals": [
+        {
+          "subject_agent_id": "ada",
+          "issue_key": "meeting_format",
+          "signal": "REVISION_EXPOSURE",
+          "value_key": "VIDEO",
+          "prior_value_key": "IN_PERSON"
+        }
+      ]
+    },
+    "x1-e09": {
+      "risk_class": "self_affirm_revision",
+      "signals": [
+        {
+          "subject_agent_id": "ada",
+          "issue_key": "meeting_format",
+          "signal": "AFFIRM",
+          "value_key": "VIDEO",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x1-e10": {
+      "risk_class": "world_update_observer_only",
+      "signals": [
+        {
+          "subject_agent_id": "sora",
+          "issue_key": "meeting_format",
+          "signal": "REVISION_EXPOSURE",
+          "value_key": "HYBRID",
+          "prior_value_key": "VIDEO"
+        }
+      ]
+    },
+    "x1-e11": {
+      "risk_class": "rumor_without_explicit_revision",
+      "signals": []
+    },
+    "x1-e12": {
+      "risk_class": "deny_rumor_affirm_old",
+      "signals": [
+        {
+          "subject_agent_id": "ada",
+          "issue_key": "meeting_format",
+          "signal": "DENY",
+          "value_key": "HYBRID",
+          "prior_value_key": null
+        },
+        {
+          "subject_agent_id": "ada",
+          "issue_key": "meeting_format",
+          "signal": "AFFIRM",
+          "value_key": "VIDEO",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x2-e01": {
+      "risk_class": "source_info_not_stance",
+      "signals": []
+    },
+    "x2-e02": {
+      "risk_class": "self_affirm",
+      "signals": [
+        {
+          "subject_agent_id": "ben",
+          "issue_key": "retention_period",
+          "signal": "AFFIRM",
+          "value_key": "D30",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x2-e03": {
+      "risk_class": "other_agent_revision_exposure",
+      "signals": [
+        {
+          "subject_agent_id": "cal",
+          "issue_key": "retention_period",
+          "signal": "REVISION_EXPOSURE",
+          "value_key": "D45",
+          "prior_value_key": "D30"
+        }
+      ]
+    },
+    "x2-e04": {
+      "risk_class": "self_affirm_other_agent",
+      "signals": [
+        {
+          "subject_agent_id": "cal",
+          "issue_key": "retention_period",
+          "signal": "AFFIRM",
+          "value_key": "D45",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x2-e05": {
+      "risk_class": "relay_revision_exposure",
+      "signals": [
+        {
+          "subject_agent_id": "ben",
+          "issue_key": "retention_period",
+          "signal": "REVISION_EXPOSURE",
+          "value_key": "D45",
+          "prior_value_key": "D30"
+        }
+      ]
+    },
+    "x2-e06": {
+      "risk_class": "relay_rejection",
+      "signals": [
+        {
+          "subject_agent_id": "ben",
+          "issue_key": "retention_period",
+          "signal": "DENY",
+          "value_key": "D45",
+          "prior_value_key": null
+        },
+        {
+          "subject_agent_id": "ben",
+          "issue_key": "retention_period",
+          "signal": "AFFIRM",
+          "value_key": "D30",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x2-e07": {
+      "risk_class": "direct_revision_exposure",
+      "signals": [
+        {
+          "subject_agent_id": "ben",
+          "issue_key": "retention_period",
+          "signal": "REVISION_EXPOSURE",
+          "value_key": "D45",
+          "prior_value_key": "D30"
+        }
+      ]
+    },
+    "x2-e08": {
+      "risk_class": "self_unresolved",
+      "signals": [
+        {
+          "subject_agent_id": "ben",
+          "issue_key": "retention_period",
+          "signal": "UNRESOLVED",
+          "value_key": "D45",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x2-e09": {
+      "risk_class": "self_affirm_revision",
+      "signals": [
+        {
+          "subject_agent_id": "ben",
+          "issue_key": "retention_period",
+          "signal": "AFFIRM",
+          "value_key": "D45",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x2-e10": {
+      "risk_class": "world_update_observer_only",
+      "signals": [
+        {
+          "subject_agent_id": "mira",
+          "issue_key": "retention_period",
+          "signal": "REVISION_EXPOSURE",
+          "value_key": "D60",
+          "prior_value_key": "D45"
+        }
+      ]
+    },
+    "x2-e11": {
+      "risk_class": "direct_revision_exposure_second",
+      "signals": [
+        {
+          "subject_agent_id": "ben",
+          "issue_key": "retention_period",
+          "signal": "REVISION_EXPOSURE",
+          "value_key": "D60",
+          "prior_value_key": "D45"
+        }
+      ]
+    },
+    "x2-e12": {
+      "risk_class": "deny_new_affirm_old",
+      "signals": [
+        {
+          "subject_agent_id": "ben",
+          "issue_key": "retention_period",
+          "signal": "DENY",
+          "value_key": "D60",
+          "prior_value_key": null
+        },
+        {
+          "subject_agent_id": "ben",
+          "issue_key": "retention_period",
+          "signal": "AFFIRM",
+          "value_key": "D45",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x3-e01": {
+      "risk_class": "source_info_not_stance",
+      "signals": []
+    },
+    "x3-e02": {
+      "risk_class": "self_affirm",
+      "signals": [
+        {
+          "subject_agent_id": "cyra",
+          "issue_key": "sensor_mode",
+          "signal": "AFFIRM",
+          "value_key": "ECO",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x3-e03": {
+      "risk_class": "other_agent_revision_exposure",
+      "signals": [
+        {
+          "subject_agent_id": "theo",
+          "issue_key": "sensor_mode",
+          "signal": "REVISION_EXPOSURE",
+          "value_key": "NORMAL",
+          "prior_value_key": "ECO"
+        }
+      ]
+    },
+    "x3-e04": {
+      "risk_class": "relay_revision_exposure",
+      "signals": [
+        {
+          "subject_agent_id": "cyra",
+          "issue_key": "sensor_mode",
+          "signal": "REVISION_EXPOSURE",
+          "value_key": "NORMAL",
+          "prior_value_key": "ECO"
+        }
+      ]
+    },
+    "x3-e05": {
+      "risk_class": "relay_acceptance",
+      "signals": [
+        {
+          "subject_agent_id": "cyra",
+          "issue_key": "sensor_mode",
+          "signal": "AFFIRM",
+          "value_key": "NORMAL",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x3-e06": {
+      "risk_class": "repeated_revision_exposure",
+      "signals": [
+        {
+          "subject_agent_id": "cyra",
+          "issue_key": "sensor_mode",
+          "signal": "REVISION_EXPOSURE",
+          "value_key": "NORMAL",
+          "prior_value_key": "ECO"
+        }
+      ]
+    },
+    "x3-e07": {
+      "risk_class": "reaffirm_current",
+      "signals": [
+        {
+          "subject_agent_id": "cyra",
+          "issue_key": "sensor_mode",
+          "signal": "AFFIRM",
+          "value_key": "NORMAL",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x3-e08": {
+      "risk_class": "world_update_observer_only",
+      "signals": [
+        {
+          "subject_agent_id": "nia",
+          "issue_key": "sensor_mode",
+          "signal": "REVISION_EXPOSURE",
+          "value_key": "BOOST",
+          "prior_value_key": "NORMAL"
+        }
+      ]
+    },
+    "x3-e09": {
+      "risk_class": "direct_revision_exposure_second",
+      "signals": [
+        {
+          "subject_agent_id": "cyra",
+          "issue_key": "sensor_mode",
+          "signal": "REVISION_EXPOSURE",
+          "value_key": "BOOST",
+          "prior_value_key": "NORMAL"
+        }
+      ]
+    },
+    "x3-e10": {
+      "risk_class": "self_unresolved",
+      "signals": [
+        {
+          "subject_agent_id": "cyra",
+          "issue_key": "sensor_mode",
+          "signal": "UNRESOLVED",
+          "value_key": "BOOST",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x3-e11": {
+      "risk_class": "deny_new_affirm_old",
+      "signals": [
+        {
+          "subject_agent_id": "cyra",
+          "issue_key": "sensor_mode",
+          "signal": "DENY",
+          "value_key": "BOOST",
+          "prior_value_key": null
+        },
+        {
+          "subject_agent_id": "cyra",
+          "issue_key": "sensor_mode",
+          "signal": "AFFIRM",
+          "value_key": "NORMAL",
+          "prior_value_key": null
+        }
+      ]
+    },
+    "x3-e12": {
+      "risk_class": "self_affirm_revision",
+      "signals": [
+        {
+          "subject_agent_id": "cyra",
+          "issue_key": "sensor_mode",
+          "signal": "AFFIRM",
+          "value_key": "BOOST",
+          "prior_value_key": null
+        }
+      ]
+    }
+  }
+}
