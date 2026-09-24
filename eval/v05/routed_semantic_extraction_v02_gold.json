@@ -1,0 +1,380 @@
+{
+  "format": "hcl-v05-routed-semantic-extraction-v02-gold",
+  "rows": {
+    "r1-e01": {
+      "risk_class": "source_info_not_self_stance",
+      "self_stances": [],
+      "revision_relations": []
+    },
+    "r1-e02": {
+      "risk_class": "self_affirm",
+      "self_stances": [
+        {
+          "issue_key": "delivery_channel",
+          "signal": "AFFIRM",
+          "value_key": "EMAIL"
+        }
+      ],
+      "revision_relations": []
+    },
+    "r1-e03": {
+      "risk_class": "revision_to_other_recipient",
+      "self_stances": [],
+      "revision_relations": [
+        {
+          "issue_key": "delivery_channel",
+          "new_value_key": "PORTAL",
+          "prior_value_key": "EMAIL"
+        }
+      ]
+    },
+    "r1-e04": {
+      "risk_class": "self_affirm_other_agent",
+      "self_stances": [
+        {
+          "issue_key": "delivery_channel",
+          "signal": "AFFIRM",
+          "value_key": "PORTAL"
+        }
+      ],
+      "revision_relations": []
+    },
+    "r1-e05": {
+      "risk_class": "relay_revision_relation",
+      "self_stances": [],
+      "revision_relations": [
+        {
+          "issue_key": "delivery_channel",
+          "new_value_key": "PORTAL",
+          "prior_value_key": "EMAIL"
+        }
+      ]
+    },
+    "r1-e06": {
+      "risk_class": "deny_new_affirm_old",
+      "self_stances": [
+        {
+          "issue_key": "delivery_channel",
+          "signal": "DENY",
+          "value_key": "PORTAL"
+        },
+        {
+          "issue_key": "delivery_channel",
+          "signal": "AFFIRM",
+          "value_key": "EMAIL"
+        }
+      ],
+      "revision_relations": []
+    },
+    "r1-e07": {
+      "risk_class": "direct_revision_relation",
+      "self_stances": [],
+      "revision_relations": [
+        {
+          "issue_key": "delivery_channel",
+          "new_value_key": "PORTAL",
+          "prior_value_key": "EMAIL"
+        }
+      ]
+    },
+    "r1-e08": {
+      "risk_class": "self_unresolved_reference",
+      "self_stances": [
+        {
+          "issue_key": "delivery_channel",
+          "signal": "UNRESOLVED",
+          "value_key": "PORTAL"
+        }
+      ],
+      "revision_relations": []
+    },
+    "r1-e09": {
+      "risk_class": "self_affirm_revision",
+      "self_stances": [
+        {
+          "issue_key": "delivery_channel",
+          "signal": "AFFIRM",
+          "value_key": "PORTAL"
+        }
+      ],
+      "revision_relations": []
+    },
+    "r1-e10": {
+      "risk_class": "world_revision_observer",
+      "self_stances": [],
+      "revision_relations": [
+        {
+          "issue_key": "delivery_channel",
+          "new_value_key": "COURIER",
+          "prior_value_key": "PORTAL"
+        }
+      ]
+    },
+    "r1-e11": {
+      "risk_class": "same_value_restatement_not_revision",
+      "self_stances": [],
+      "revision_relations": []
+    },
+    "r1-e12": {
+      "risk_class": "third_party_stance_claim",
+      "self_stances": [],
+      "revision_relations": []
+    },
+    "r2-e01": {
+      "risk_class": "source_info_not_self_stance",
+      "self_stances": [],
+      "revision_relations": []
+    },
+    "r2-e02": {
+      "risk_class": "self_affirm",
+      "self_stances": [
+        {
+          "issue_key": "maintenance_day",
+          "signal": "AFFIRM",
+          "value_key": "MONDAY"
+        }
+      ],
+      "revision_relations": []
+    },
+    "r2-e03": {
+      "risk_class": "revision_to_other_recipient",
+      "self_stances": [],
+      "revision_relations": [
+        {
+          "issue_key": "maintenance_day",
+          "new_value_key": "WEDNESDAY",
+          "prior_value_key": "MONDAY"
+        }
+      ]
+    },
+    "r2-e04": {
+      "risk_class": "relay_revision_relation",
+      "self_stances": [],
+      "revision_relations": [
+        {
+          "issue_key": "maintenance_day",
+          "new_value_key": "WEDNESDAY",
+          "prior_value_key": "MONDAY"
+        }
+      ]
+    },
+    "r2-e05": {
+      "risk_class": "relay_acceptance",
+      "self_stances": [
+        {
+          "issue_key": "maintenance_day",
+          "signal": "AFFIRM",
+          "value_key": "WEDNESDAY"
+        }
+      ],
+      "revision_relations": []
+    },
+    "r2-e06": {
+      "risk_class": "repeated_revision_relation",
+      "self_stances": [],
+      "revision_relations": [
+        {
+          "issue_key": "maintenance_day",
+          "new_value_key": "WEDNESDAY",
+          "prior_value_key": "MONDAY"
+        }
+      ]
+    },
+    "r2-e07": {
+      "risk_class": "reaffirm_current",
+      "self_stances": [
+        {
+          "issue_key": "maintenance_day",
+          "signal": "AFFIRM",
+          "value_key": "WEDNESDAY"
+        }
+      ],
+      "revision_relations": []
+    },
+    "r2-e08": {
+      "risk_class": "world_revision_multiple_observers",
+      "self_stances": [],
+      "revision_relations": [
+        {
+          "issue_key": "maintenance_day",
+          "new_value_key": "FRIDAY",
+          "prior_value_key": "WEDNESDAY"
+        }
+      ]
+    },
+    "r2-e09": {
+      "risk_class": "rumor_not_explicit_revision",
+      "self_stances": [],
+      "revision_relations": []
+    },
+    "r2-e10": {
+      "risk_class": "direct_revision_second",
+      "self_stances": [],
+      "revision_relations": [
+        {
+          "issue_key": "maintenance_day",
+          "new_value_key": "FRIDAY",
+          "prior_value_key": "WEDNESDAY"
+        }
+      ]
+    },
+    "r2-e11": {
+      "risk_class": "self_unresolved_reference",
+      "self_stances": [
+        {
+          "issue_key": "maintenance_day",
+          "signal": "UNRESOLVED",
+          "value_key": "FRIDAY"
+        }
+      ],
+      "revision_relations": []
+    },
+    "r2-e12": {
+      "risk_class": "deny_new_affirm_old",
+      "self_stances": [
+        {
+          "issue_key": "maintenance_day",
+          "signal": "DENY",
+          "value_key": "FRIDAY"
+        },
+        {
+          "issue_key": "maintenance_day",
+          "signal": "AFFIRM",
+          "value_key": "WEDNESDAY"
+        }
+      ],
+      "revision_relations": []
+    },
+    "r3-e01": {
+      "risk_class": "source_info_not_self_stance",
+      "self_stances": [],
+      "revision_relations": []
+    },
+    "r3-e02": {
+      "risk_class": "self_belief",
+      "self_stances": [
+        {
+          "issue_key": "review_queue",
+          "signal": "AFFIRM",
+          "value_key": "QUEUE_A"
+        }
+      ],
+      "revision_relations": []
+    },
+    "r3-e03": {
+      "risk_class": "revision_to_other_recipient",
+      "self_stances": [],
+      "revision_relations": [
+        {
+          "issue_key": "review_queue",
+          "new_value_key": "QUEUE_B",
+          "prior_value_key": "QUEUE_A"
+        }
+      ]
+    },
+    "r3-e04": {
+      "risk_class": "self_unresolved_without_direct_source",
+      "self_stances": [
+        {
+          "issue_key": "review_queue",
+          "signal": "UNRESOLVED",
+          "value_key": "QUEUE_B"
+        }
+      ],
+      "revision_relations": []
+    },
+    "r3-e05": {
+      "risk_class": "relay_revision_relation",
+      "self_stances": [],
+      "revision_relations": [
+        {
+          "issue_key": "review_queue",
+          "new_value_key": "QUEUE_B",
+          "prior_value_key": "QUEUE_A"
+        }
+      ]
+    },
+    "r3-e06": {
+      "risk_class": "relay_rejection",
+      "self_stances": [
+        {
+          "issue_key": "review_queue",
+          "signal": "DENY",
+          "value_key": "QUEUE_B"
+        },
+        {
+          "issue_key": "review_queue",
+          "signal": "AFFIRM",
+          "value_key": "QUEUE_A"
+        }
+      ],
+      "revision_relations": []
+    },
+    "r3-e07": {
+      "risk_class": "direct_revision_relation",
+      "self_stances": [],
+      "revision_relations": [
+        {
+          "issue_key": "review_queue",
+          "new_value_key": "QUEUE_B",
+          "prior_value_key": "QUEUE_A"
+        }
+      ]
+    },
+    "r3-e08": {
+      "risk_class": "self_unresolved_reference",
+      "self_stances": [
+        {
+          "issue_key": "review_queue",
+          "signal": "UNRESOLVED",
+          "value_key": "QUEUE_B"
+        }
+      ],
+      "revision_relations": []
+    },
+    "r3-e09": {
+      "risk_class": "self_affirm_revision",
+      "self_stances": [
+        {
+          "issue_key": "review_queue",
+          "signal": "AFFIRM",
+          "value_key": "QUEUE_B"
+        }
+      ],
+      "revision_relations": []
+    },
+    "r3-e10": {
+      "risk_class": "world_revision_observer",
+      "self_stances": [],
+      "revision_relations": [
+        {
+          "issue_key": "review_queue",
+          "new_value_key": "QUEUE_C",
+          "prior_value_key": "QUEUE_B"
+        }
+      ]
+    },
+    "r3-e11": {
+      "risk_class": "direct_revision_second",
+      "self_stances": [],
+      "revision_relations": [
+        {
+          "issue_key": "review_queue",
+          "new_value_key": "QUEUE_C",
+          "prior_value_key": "QUEUE_B"
+        }
+      ]
+    },
+    "r3-e12": {
+      "risk_class": "self_affirm_revision_second",
+      "self_stances": [
+        {
+          "issue_key": "review_queue",
+          "signal": "AFFIRM",
+          "value_key": "QUEUE_C"
+        }
+      ],
+      "revision_relations": []
+    }
+  }
+}

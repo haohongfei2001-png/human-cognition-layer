@@ -4398,3 +4398,33 @@ No provider call, consumed extraction rerun, long-horizon capability run,
 owner-private example, training or benchmark claim is part of this milestone.
 
 **Current gate: HCL_V05_ROUTED_RUNTIME_MIGRATION_V01_PROVIDER_FREE_COMPLETE_FRESH_EXTRACTION_V02_NEXT**
+
+
+## HCL v0.5 routed semantic extraction v0.2 — frozen preflight
+
+Contract:
+- `docs/HCL_V05_ROUTED_SEMANTIC_EXTRACTION_V02_PILOT.md`
+
+Fresh package:
+- 3 streams / 36 events;
+- 19 self-stance gold records;
+- 14 revision-relation gold records;
+- new domains: document delivery channel, maintenance day, review queue;
+- event IDs and raw texts are disjoint from consumed extraction v0.1;
+- model never selects exposure subject; recipients/observers route revision
+  exposure deterministically.
+
+Frozen digests:
+- fixture:
+  `57d06573294c107f863c85890bd92a45bbc45871202bd1569b55d0ec080d3a58`
+- gold:
+  `8dc199d75b4e187a9fe33ddaaffdf5d19ed9399303a47d57c75633a432336f62`
+
+Provider-free evidence:
+- v0.5 workflow `36004235872`: SUCCESS, **49 / 49**;
+- routed validate-only: PASS, **3 / 36 / 19 / 14**;
+- HCL integration workflow `36004235777`: SUCCESS.
+
+No v0.2 provider-backed extraction event has been consumed yet.
+
+**Current gate: HCL_V05_ROUTED_SEMANTIC_EXTRACTION_V02_FROZEN_PREFLIGHT_PASS_PROVIDER_NOT_STARTED**
