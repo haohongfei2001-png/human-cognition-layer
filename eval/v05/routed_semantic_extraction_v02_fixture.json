@@ -1,0 +1,482 @@
+{
+  "format": "hcl-v05-routed-semantic-extraction-v02-fixture",
+  "streams": [
+    {
+      "id": "r1",
+      "catalog_seed": {
+        "delivery_channel": [
+          "EMAIL",
+          "PORTAL",
+          "COURIER"
+        ]
+      },
+      "events": [
+        {
+          "event_id": "r1-e01",
+          "valid_time": "2026-06-01T09:00:00+00:00",
+          "recorded_at": "2026-06-01T09:00:01+00:00",
+          "raw_text": "Coordinator Vera tells Ivo: the current document delivery channel is email.",
+          "source_id": "vera",
+          "actor_id": "vera",
+          "observer_ids": [],
+          "recipient_ids": [
+            "ivo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e02",
+          "valid_time": "2026-06-01T09:05:00+00:00",
+          "recorded_at": "2026-06-01T09:05:01+00:00",
+          "raw_text": "Ivo says: I accept email as the current document delivery channel.",
+          "source_id": "ivo",
+          "actor_id": "ivo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e03",
+          "valid_time": "2026-06-01T09:10:00+00:00",
+          "recorded_at": "2026-06-01T09:10:01+00:00",
+          "raw_text": "Vera tells Jules only: portal replaces email as the document delivery channel.",
+          "source_id": "vera",
+          "actor_id": "vera",
+          "observer_ids": [],
+          "recipient_ids": [
+            "jules"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e04",
+          "valid_time": "2026-06-01T09:15:00+00:00",
+          "recorded_at": "2026-06-01T09:15:01+00:00",
+          "raw_text": "Jules says: I accept portal as the document delivery channel.",
+          "source_id": "jules",
+          "actor_id": "jules",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e05",
+          "valid_time": "2026-06-01T09:20:00+00:00",
+          "recorded_at": "2026-06-01T09:20:01+00:00",
+          "raw_text": "Jules tells Ivo: Vera told me that portal replaces email for document delivery.",
+          "source_id": "jules",
+          "actor_id": "jules",
+          "observer_ids": [],
+          "recipient_ids": [
+            "ivo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e06",
+          "valid_time": "2026-06-01T09:25:00+00:00",
+          "recorded_at": "2026-06-01T09:25:01+00:00",
+          "raw_text": "Ivo says: I heard Jules, but I reject portal for now and still believe email is the delivery channel.",
+          "source_id": "ivo",
+          "actor_id": "ivo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e07",
+          "valid_time": "2026-06-01T09:30:00+00:00",
+          "recorded_at": "2026-06-01T09:30:01+00:00",
+          "raw_text": "Vera directly tells Ivo: portal replaces email as the document delivery channel.",
+          "source_id": "vera",
+          "actor_id": "vera",
+          "observer_ids": [],
+          "recipient_ids": [
+            "ivo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e08",
+          "valid_time": "2026-06-01T09:35:00+00:00",
+          "recorded_at": "2026-06-01T09:35:01+00:00",
+          "raw_text": "Ivo says: I received the portal change, but I have not decided whether to accept it.",
+          "source_id": "ivo",
+          "actor_id": "ivo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e09",
+          "valid_time": "2026-06-01T09:40:00+00:00",
+          "recorded_at": "2026-06-01T09:40:01+00:00",
+          "raw_text": "Ivo says: I checked the signed instruction and now accept portal as the delivery channel.",
+          "source_id": "ivo",
+          "actor_id": "ivo",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e10",
+          "valid_time": "2026-06-01T09:45:00+00:00",
+          "recorded_at": "2026-06-01T09:45:01+00:00",
+          "raw_text": "The dispatch console records courier replacing portal. Vera sees the console update; Ivo does not receive it.",
+          "source_id": "dispatch_console",
+          "actor_id": "dispatch_console",
+          "observer_ids": [
+            "vera"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "r1-e11",
+          "valid_time": "2026-06-01T09:50:00+00:00",
+          "recorded_at": "2026-06-01T09:50:01+00:00",
+          "raw_text": "Vera again tells Ivo that portal is the current document delivery channel.",
+          "source_id": "vera",
+          "actor_id": "vera",
+          "observer_ids": [],
+          "recipient_ids": [
+            "ivo"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r1-e12",
+          "valid_time": "2026-06-01T09:55:00+00:00",
+          "recorded_at": "2026-06-01T09:55:01+00:00",
+          "raw_text": "Jules says: Ivo accepts courier now.",
+          "source_id": "jules",
+          "actor_id": "jules",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "id": "r2",
+      "catalog_seed": {
+        "maintenance_day": [
+          "MONDAY",
+          "WEDNESDAY",
+          "FRIDAY"
+        ]
+      },
+      "events": [
+        {
+          "event_id": "r2-e01",
+          "valid_time": "2026-06-02T09:00:00+00:00",
+          "recorded_at": "2026-06-02T09:00:01+00:00",
+          "raw_text": "Planner Lena tells Pax: the current maintenance day is Monday.",
+          "source_id": "lena",
+          "actor_id": "lena",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pax"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e02",
+          "valid_time": "2026-06-02T09:05:00+00:00",
+          "recorded_at": "2026-06-02T09:05:01+00:00",
+          "raw_text": "Pax says: I accept Monday as the current maintenance day.",
+          "source_id": "pax",
+          "actor_id": "pax",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e03",
+          "valid_time": "2026-06-02T09:10:00+00:00",
+          "recorded_at": "2026-06-02T09:10:01+00:00",
+          "raw_text": "Lena tells Quinn only: Wednesday replaces Monday as the maintenance day.",
+          "source_id": "lena",
+          "actor_id": "lena",
+          "observer_ids": [],
+          "recipient_ids": [
+            "quinn"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e04",
+          "valid_time": "2026-06-02T09:15:00+00:00",
+          "recorded_at": "2026-06-02T09:15:01+00:00",
+          "raw_text": "Quinn tells Pax: Lena said Wednesday replaces Monday as the maintenance day.",
+          "source_id": "quinn",
+          "actor_id": "quinn",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pax"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e05",
+          "valid_time": "2026-06-02T09:20:00+00:00",
+          "recorded_at": "2026-06-02T09:20:01+00:00",
+          "raw_text": "Pax says: I trust Quinn's relay and accept Wednesday as the maintenance day.",
+          "source_id": "pax",
+          "actor_id": "pax",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e06",
+          "valid_time": "2026-06-02T09:25:00+00:00",
+          "recorded_at": "2026-06-02T09:25:01+00:00",
+          "raw_text": "Lena directly confirms to Pax: Wednesday replaces Monday as the maintenance day.",
+          "source_id": "lena",
+          "actor_id": "lena",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pax"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e07",
+          "valid_time": "2026-06-02T09:30:00+00:00",
+          "recorded_at": "2026-06-02T09:30:01+00:00",
+          "raw_text": "Pax says: Wednesday remains the maintenance day I accept.",
+          "source_id": "pax",
+          "actor_id": "pax",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e08",
+          "valid_time": "2026-06-02T09:35:00+00:00",
+          "recorded_at": "2026-06-02T09:35:01+00:00",
+          "raw_text": "The maintenance board records Friday replacing Wednesday. Lena and Omar see the board update; Pax does not receive it.",
+          "source_id": "maintenance_board",
+          "actor_id": "maintenance_board",
+          "observer_ids": [
+            "lena",
+            "omar"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "r2-e09",
+          "valid_time": "2026-06-02T09:40:00+00:00",
+          "recorded_at": "2026-06-02T09:40:01+00:00",
+          "raw_text": "Omar tells Pax: I saw Friday on the board; I think it may be the new maintenance day.",
+          "source_id": "omar",
+          "actor_id": "omar",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pax"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e10",
+          "valid_time": "2026-06-02T09:45:00+00:00",
+          "recorded_at": "2026-06-02T09:45:01+00:00",
+          "raw_text": "Lena tells Pax: Friday replaces Wednesday as the maintenance day.",
+          "source_id": "lena",
+          "actor_id": "lena",
+          "observer_ids": [],
+          "recipient_ids": [
+            "pax"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e11",
+          "valid_time": "2026-06-02T09:50:00+00:00",
+          "recorded_at": "2026-06-02T09:50:01+00:00",
+          "raw_text": "Pax says: I received the Friday correction, but I have not decided whether to accept or reject Friday.",
+          "source_id": "pax",
+          "actor_id": "pax",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r2-e12",
+          "valid_time": "2026-06-02T09:55:00+00:00",
+          "recorded_at": "2026-06-02T09:55:01+00:00",
+          "raw_text": "Pax says: I reject Friday and continue to believe Wednesday is the maintenance day.",
+          "source_id": "pax",
+          "actor_id": "pax",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "id": "r3",
+      "catalog_seed": {
+        "review_queue": [
+          "QUEUE_A",
+          "QUEUE_B",
+          "QUEUE_C"
+        ]
+      },
+      "events": [
+        {
+          "event_id": "r3-e01",
+          "valid_time": "2026-06-03T09:00:00+00:00",
+          "recorded_at": "2026-06-03T09:00:01+00:00",
+          "raw_text": "Supervisor Rhea tells Sol: the current review queue is Queue A.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e02",
+          "valid_time": "2026-06-03T09:05:00+00:00",
+          "recorded_at": "2026-06-03T09:05:01+00:00",
+          "raw_text": "Sol says: I believe Queue A is the current review queue.",
+          "source_id": "sol",
+          "actor_id": "sol",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e03",
+          "valid_time": "2026-06-03T09:10:00+00:00",
+          "recorded_at": "2026-06-03T09:10:01+00:00",
+          "raw_text": "Rhea tells Uma only: Queue B supersedes Queue A as the review queue.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [
+            "uma"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e04",
+          "valid_time": "2026-06-03T09:15:00+00:00",
+          "recorded_at": "2026-06-03T09:15:01+00:00",
+          "raw_text": "Uma says: I have not decided whether to accept Queue B yet.",
+          "source_id": "uma",
+          "actor_id": "uma",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e05",
+          "valid_time": "2026-06-03T09:20:00+00:00",
+          "recorded_at": "2026-06-03T09:20:01+00:00",
+          "raw_text": "Uma tells Sol: Rhea told me Queue B supersedes Queue A for reviews.",
+          "source_id": "uma",
+          "actor_id": "uma",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e06",
+          "valid_time": "2026-06-03T09:25:00+00:00",
+          "recorded_at": "2026-06-03T09:25:01+00:00",
+          "raw_text": "Sol says: I do not accept Queue B from that relay; I still believe Queue A is current.",
+          "source_id": "sol",
+          "actor_id": "sol",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e07",
+          "valid_time": "2026-06-03T09:30:00+00:00",
+          "recorded_at": "2026-06-03T09:30:01+00:00",
+          "raw_text": "Rhea tells Sol directly: Queue B supersedes Queue A as the review queue.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e08",
+          "valid_time": "2026-06-03T09:35:00+00:00",
+          "recorded_at": "2026-06-03T09:35:01+00:00",
+          "raw_text": "Sol says: I have not decided whether to accept Queue B.",
+          "source_id": "sol",
+          "actor_id": "sol",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e09",
+          "valid_time": "2026-06-03T09:40:00+00:00",
+          "recorded_at": "2026-06-03T09:40:01+00:00",
+          "raw_text": "Sol says: I verified Rhea's message and now accept Queue B as the review queue.",
+          "source_id": "sol",
+          "actor_id": "sol",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e10",
+          "valid_time": "2026-06-03T09:45:00+00:00",
+          "recorded_at": "2026-06-03T09:45:01+00:00",
+          "raw_text": "The review service records Queue C superseding Queue B. Rhea observes the service update; Sol does not receive it.",
+          "source_id": "review_service",
+          "actor_id": "review_service",
+          "observer_ids": [
+            "rhea"
+          ],
+          "recipient_ids": [],
+          "metadata": {
+            "scene_fact": true
+          }
+        },
+        {
+          "event_id": "r3-e11",
+          "valid_time": "2026-06-03T09:50:00+00:00",
+          "recorded_at": "2026-06-03T09:50:01+00:00",
+          "raw_text": "Rhea tells Sol: Queue C supersedes Queue B as the review queue.",
+          "source_id": "rhea",
+          "actor_id": "rhea",
+          "observer_ids": [],
+          "recipient_ids": [
+            "sol"
+          ],
+          "metadata": {}
+        },
+        {
+          "event_id": "r3-e12",
+          "valid_time": "2026-06-03T09:55:00+00:00",
+          "recorded_at": "2026-06-03T09:55:01+00:00",
+          "raw_text": "Sol says: I accept Queue C as the current review queue.",
+          "source_id": "sol",
+          "actor_id": "sol",
+          "observer_ids": [],
+          "recipient_ids": [],
+          "metadata": {}
+        }
+      ]
+    }
+  ]
+}
