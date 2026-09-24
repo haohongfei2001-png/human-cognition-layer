@@ -10,7 +10,7 @@ from .semantic import (
     ExtractionResult,
     SemanticBackend,
     catalog_from_events,
-    extract_stance_events,
+    extract_routed_stance_events,
 )
 from .store import V05Store
 from .stance import (
@@ -64,7 +64,7 @@ class HCLV05Runtime:
         backend: SemanticBackend,
     ) -> V05IngestResult:
         try:
-            extraction: ExtractionResult = extract_stance_events(
+            extraction: ExtractionResult = extract_routed_stance_events(
                 event,
                 backend,
                 known_catalog=catalog_from_events(self.store.all_stance_events()),
