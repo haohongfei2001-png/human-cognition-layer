@@ -46,10 +46,14 @@ jobs:
             tests.test_v05_store \
             tests.test_v05_semantic_extraction_runner \
             tests.test_v05_routed_semantic \
+            tests.test_v05_seeded_state_capability_runner \
             tests.test_v05_routed_extraction_runner_v02
       - name: Run semantic extraction provider-free preflight when present
         if: ${{ hashFiles('scripts/run_v05_semantic_extraction_v01.py') != '' }}
         run: python scripts/run_v05_semantic_extraction_v01.py --validate-only
+      - name: Run seeded state capability provider-free preflight when present
+        if: ${{ hashFiles('scripts/run_v05_seeded_state_capability_v01.py') != '' }}
+        run: python scripts/run_v05_seeded_state_capability_v01.py --validate-only
       - name: Run routed extraction v0.2 provider-free preflight when present
         if: ${{ hashFiles('scripts/run_v05_routed_semantic_extraction_v02.py') != '' }}
         run: python scripts/run_v05_routed_semantic_extraction_v02.py --validate-only
