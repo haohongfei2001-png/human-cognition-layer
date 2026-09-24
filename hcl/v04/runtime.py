@@ -43,8 +43,9 @@ Do not infer that receiving a proposition means accepting or believing it.
 Do not infer that a source assertion is world truth.
 Preserve underdetermination when the evidence does not decide the latent state.
 A supported BELIEF_ESTIMATE is the current best estimate of that person's belief
-until later evidence changes its applicability. Ordinary SOURCE_ASSERTION or
-INFORMATION_EXPOSURE alone does not imply a new belief. However, when a prior
+until later evidence changes its applicability. SOURCE_ASSERTION or
+INFORMATION_EXPOSURE alone does not supersede an existing supported belief.
+Ordinary exposure also does not imply a new belief. However, when a prior
 BELIEF_ESTIMATE is marked projection_status=STALE_AFTER_REVISION_EXPOSURE, use it
 only as historical evidence: the agent received a proposition that explicitly
 revised the old one, but receipt does not establish acceptance or rejection, so
