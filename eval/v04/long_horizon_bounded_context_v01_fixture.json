@@ -1,7 +1,7 @@
 {
   "format": "hcl-v04-long-horizon-bounded-context-v01-fixture",
   "query_context_char_budget": 8000,
-  "ordinary_memory_char_budget": 8000,
+  "ordinary_memory_char_budget": 6000,
   "streams": [
     {
       "id": "s1",
