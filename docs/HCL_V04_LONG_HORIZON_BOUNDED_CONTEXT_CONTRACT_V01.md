@@ -198,9 +198,15 @@ Provider-free preflight candidate:
 - query-time dynamic-context cap for D and E: **8000 characters**
 - ordinary free-form E memory cap: **6000 characters**
 - streams / events / scored queries: **3 / 240 / 18**
-- provider-free preflight run: `35968671723` — SUCCESS
-- provider-free fairness guards: **5 / 5**
-- existing v0.4 deterministic contract suite on the same PR head: **35 / 35**
+- provider-free preflight run: `35978730334` — SUCCESS
+- provider-free fairness guards: **7 / 7**
+- existing v0.4 + long-horizon preflight integration run:
+  `35978730244` — SUCCESS
+- existing v0.4 deterministic contract suite remains **35 / 35**
+- manual gold/timeline audit before provider execution: PASS; all 18 labels were
+  rechecked against the frozen event chronology, including revision receipt
+  without stance, explicit rejection/acceptance, private world-fact separation,
+  and the historical-time query
 
 These digests are frozen before provider-backed execution. Any change to either
 file requires a new digest and invalidates the current execution candidate.
@@ -215,4 +221,4 @@ Provider-backed execution is allowed only after:
 4. runner records per-arm cost;
 5. exact fixture digest is recorded.
 
-**Gate: HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V01_IMPLEMENTED_PREFLIGHT_PASS_NOT_RUN**
+**Gate: HCL_V04_LONG_HORIZON_BOUNDED_CONTEXT_V01_IMPLEMENTED_PREFLIGHT_AND_GOLD_AUDIT_PASS_NOT_RUN**
