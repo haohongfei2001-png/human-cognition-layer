@@ -872,16 +872,103 @@ class CognitionStore:
             included.append(row)
             evidence_ids |= closure
 
-        relevant = tuple(self._assertion_dict(row, proposition_texts) for row in included)
+        def related_proposition_id(row) -> str | None:
+            if isinstance(row, dict):
+                return row.get("related_proposition_id")
+            return row["related_proposition_id"]
+
+        revisions_by_new: dict[str, list[tuple[str, sqlite3.Row | dict]]] = {}
+        belief_rows = [
+            row
+            for row in included
+            if row["assertion_type"] == AssertionType.BELIEF_ESTIMATE.value
+        ]
+        for row in included:
+            if row["assertion_type"] != AssertionType.PROPOSITION_REVISION.value:
+                continue
+            new_proposition_id = row["proposition_id"]
+            old_proposition_id = related_proposition_id(row)
+            if new_proposition_id and old_proposition_id:
+                revisions_by_new.setdefault(new_proposition_id, []).append(
+                    (old_proposition_id, row)
+                )
+
+        stale_belief_ids: set[str] = set()
+        revision_conflicts: list[dict] = []
+        seen_revision_conflicts: set[tuple[str, str, str]] = set()
+        for exposure in included:
+            if exposure["assertion_type"] != AssertionType.INFORMATION_EXPOSURE.value:
+                continue
+            subject = exposure["subject_agent_id"]
+            new_proposition_id = exposure["proposition_id"]
+            if not subject or not new_proposition_id:
+                continue
+            for old_proposition_id, revision in revisions_by_new.get(
+                new_proposition_id, []
+            ):
+                prior = [
+                    row
+                    for row in belief_rows
+                    if row["subject_agent_id"] == subject
+                    and row["proposition_id"] == old_proposition_id
+                    and _parse_time(row["valid_time"])
+                    <= _parse_time(exposure["valid_time"])
+                ]
+                if not prior:
+                    continue
+                prior_ids = {row["assertion_id"] for row in prior}
+                later_stance = [
+                    row
+                    for row in belief_rows
+                    if row["subject_agent_id"] == subject
+                    and row["proposition_id"]
+                    in {old_proposition_id, new_proposition_id}
+                    and row["assertion_id"] not in prior_ids
+                    and _parse_time(row["valid_time"])
+                    >= _parse_time(exposure["valid_time"])
+                ]
+                if later_stance:
+                    continue
+                stale_belief_ids.update(prior_ids)
+                conflict_key = (
+                    subject,
+                    old_proposition_id,
+                    new_proposition_id,
+                )
+                if conflict_key in seen_revision_conflicts:
+                    continue
+                seen_revision_conflicts.add(conflict_key)
+                revision_conflicts.append(
+                    {
+                        "conflict_type": "REVISION_STANCE_UNRESOLVED",
+                        "subject_agent_id": subject,
+                        "prior_proposition_id": old_proposition_id,
+                        "revision_proposition_id": new_proposition_id,
+                        "revision_assertion_id": revision["assertion_id"],
+                        "exposure_assertion_id": exposure["assertion_id"],
+                        "stale_belief_assertion_ids": sorted(prior_ids),
+                    }
+                )
+
+        relevant_items: list[dict] = []
+        for row in included:
+            item = self._assertion_dict(row, proposition_texts)
+            if row["assertion_id"] in stale_belief_ids:
+                item["projection_status"] = "STALE_AFTER_REVISION_EXPOSURE"
+            relevant_items.append(item)
+        relevant = tuple(relevant_items)
+
         evidence = tuple(
             self._event_dict(self.get_event(event_id))
             for event_id in sorted(evidence_ids)
         )
-        unresolved = tuple(
+        unresolved_items = [
             self._assertion_dict(row, proposition_texts)
             for row in included
             if row["status"] == AssertionStatus.UNRESOLVED.value
-        )
+        ]
+        unresolved_items.extend(revision_conflicts)
+        unresolved = tuple(unresolved_items)
         hypotheses = tuple(
             self._assertion_dict(row, proposition_texts)
             for row in included
@@ -896,6 +983,7 @@ class CognitionStore:
             (row["subject_agent_id"], row["proposition_id"])
             for row in included
             if row["assertion_type"] == AssertionType.BELIEF_ESTIMATE.value
+            and row["assertion_id"] not in stale_belief_ids
         }
         unsupported: list[str] = []
         if incomplete_legacy_history:
@@ -912,6 +1000,14 @@ class CognitionStore:
                     f"received({row['subject_agent_id']}, {row['proposition_id']}) "
                     "does not by itself entail belief"
                 )
+        for conflict in revision_conflicts:
+            unsupported.append(
+                "A received revision does not establish acceptance: "
+                f"{conflict['subject_agent_id']} received "
+                f"{conflict['revision_proposition_id']} revising "
+                f"{conflict['prior_proposition_id']}; the prior belief estimate "
+                "cannot certify the current stance without later stance evidence."
+            )
 
         return QueryContext(
             viewer=viewer,
