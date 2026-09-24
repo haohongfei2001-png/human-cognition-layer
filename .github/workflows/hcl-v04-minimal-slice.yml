@@ -2,14 +2,19 @@ name: HCL v0.4 Minimal Slice
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - "hcl/v04/**"
+      - "tests/test_v04_*.py"
+      - "docs/HCL_V04_*.md"
+      - ".github/workflows/hcl-v04-minimal-slice.yml"
   push:
     branches:
       - main
     paths:
       - "hcl/v04/**"
       - "tests/test_v04_*.py"
-      - "docs/HCL_V04_CAPABILITY_PLAN_V1_0.md"
-      - "docs/HCL_V04_MINIMAL_IMPLEMENTATION_CONTRACT_V1_0.md"
+      - "docs/HCL_V04_*.md"
       - ".github/workflows/hcl-v04-minimal-slice.yml"
 
 permissions:
