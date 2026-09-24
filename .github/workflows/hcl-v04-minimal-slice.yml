@@ -46,9 +46,12 @@ jobs:
             tests.test_v04_perspective \
             tests.test_v04_recovery \
             tests.test_v04_runtime
-      - name: Run v0.5 provider-free current-stance core when present
+      - name: Run v0.5 provider-free integration when present
         if: ${{ hashFiles('tests/test_v05_current_stance.py') != '' }}
-        run: python -m unittest -v tests.test_v05_current_stance
+        run: |
+          python -m unittest -v \
+            tests.test_v05_current_stance \
+            tests.test_v05_semantic_runtime
       - name: Run long-horizon provider-free preflight when present
         if: ${{ hashFiles('scripts/run_v04_long_horizon_bounded_context_v01.py') != '' }}
         run: |
