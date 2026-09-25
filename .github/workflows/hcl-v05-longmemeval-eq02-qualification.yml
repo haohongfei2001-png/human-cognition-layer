@@ -1,0 +1,106 @@
+name: HCL v0.5 EQ-02 LongMemEval Qualification
+
+on:
+  pull_request:
+    paths:
+      - "scripts/qualify_longmemeval_knowledge_update_v01.py"
+      - "tests/test_v05_longmemeval_qualification.py"
+      - "docs/HCL_V05_EQ02_LONGMEMEVAL_KNOWLEDGE_UPDATE_V01.md"
+      - ".github/workflows/hcl-v05-longmemeval-eq02-qualification.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/qualify_longmemeval_knowledge_update_v01.py"
+      - "tests/test_v05_longmemeval_qualification.py"
+      - "docs/HCL_V05_EQ02_LONGMEMEVAL_KNOWLEDGE_UPDATE_V01.md"
+      - ".github/workflows/hcl-v05-longmemeval-eq02-qualification.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  DATASET_REVISION: 98d7416c24c778c2fee6e6f3006e7a073259d48f
+  DATASET_SHA256: d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run zero-provider firewall unit tests
+        run: python -m unittest -v tests.test_v05_longmemeval_qualification
+
+      - name: Download pinned LongMemEval cleaned-S
+        shell: bash
+        run: |
+          mkdir -p .cache/longmemeval
+          curl -L --fail --retry 4 --retry-delay 5 \
+            "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/${DATASET_REVISION}/longmemeval_s_cleaned.json?download=true" \
+            -o .cache/longmemeval/longmemeval_s_cleaned.json
+
+      - name: Verify pinned dataset digest
+        shell: bash
+        run: |
+          echo "${DATASET_SHA256}  .cache/longmemeval/longmemeval_s_cleaned.json" \
+            | sha256sum -c -
+
+      - name: Run EQ-02 zero-provider qualification
+        run: |
+          python scripts/qualify_longmemeval_knowledge_update_v01.py \
+            --dataset .cache/longmemeval/longmemeval_s_cleaned.json \
+            --out artifacts/longmemeval-eq02-qualification/manifest.json
+
+      - name: Verify redacted qualification artifact
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("artifacts/longmemeval-eq02-qualification/manifest.json")
+          obj = json.loads(path.read_text(encoding="utf-8"))
+
+          assert obj["provider_calls"] == 0
+          assert obj["dataset_sha256"] == (
+              "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442"
+          )
+          assert obj["total_rows"] == 500
+          assert obj["selected_count"] == 32
+          assert len(obj["selected"]) == 32
+
+          allowed_selected = {
+              "question_id",
+              "history_sha256",
+              "session_count",
+              "turn_count",
+              "user_turn_count",
+              "assistant_turn_count",
+          }
+          for row in obj["selected"]:
+              assert set(row) == allowed_selected
+              assert len(row["history_sha256"]) == 64
+
+          forbidden_top = {
+              "question",
+              "answer",
+              "answer_session_ids",
+              "haystack_sessions",
+              "history",
+          }
+          assert not (forbidden_top & set(obj))
+          PY
+
+      - name: Upload redacted qualification manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v05-longmemeval-eq02-qualification-${{ github.run_id }}
+          path: artifacts/longmemeval-eq02-qualification/manifest.json
+          if-no-files-found: error
+          retention-days: 90
