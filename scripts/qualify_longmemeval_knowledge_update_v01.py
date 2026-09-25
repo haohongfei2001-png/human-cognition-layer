@@ -124,21 +124,35 @@ def state_input_view(row: dict[str, Any]) -> dict[str, Any]:
     return {"history": [item[2] for item in materialized]}
 
 
+def _mapping_keys(value: Any) -> set[str]:
+    keys: set[str] = set()
+    if isinstance(value, dict):
+        for key, child in value.items():
+            keys.add(str(key))
+            keys.update(_mapping_keys(child))
+    elif isinstance(value, list):
+        for child in value:
+            keys.update(_mapping_keys(child))
+    return keys
+
+
 def assert_state_firewall(row: dict[str, Any], view: dict[str, Any]) -> None:
-    serialized = json.dumps(view, ensure_ascii=False, sort_keys=True)
-    # Sentinel checks catch accidental value leakage in unit tests and real data
-    # without needing to inspect/log those values.
-    for field in ("question", "answer"):
-        value = row.get(field)
-        if isinstance(value, str) and value and value in serialized:
-            raise QualificationError(f"{field} leaked into state input")
-    for session in row.get("haystack_sessions") or []:
-        for turn in session:
-            if isinstance(turn, dict) and "has_answer" in turn:
-                if "has_answer" in serialized:
-                    raise QualificationError("has_answer leaked into state input")
-    if "answer_session_ids" in serialized:
-        raise QualificationError("answer_session_ids leaked into state input")
+    """Enforce structural label isolation, not lexical answer censorship.
+
+    The gold answer may legitimately occur in raw history because history is the
+    evidence being evaluated. What must never cross the firewall are annotation
+    fields/labels or question text supplied out-of-band.
+    """
+    leaked = _mapping_keys(view) & FORBIDDEN_STATE_FIELDS
+    if leaked:
+        raise QualificationError(
+            f"forbidden annotation fields leaked into state input: {sorted(leaked)}"
+        )
+    allowed_top = {"history"}
+    if set(view) != allowed_top:
+        raise QualificationError(
+            f"unexpected state-input fields: {sorted(set(view) - allowed_top)}"
+        )
 
 
 def history_digest(view: dict[str, Any]) -> str:
