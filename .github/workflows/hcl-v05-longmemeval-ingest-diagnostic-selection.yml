@@ -1,0 +1,81 @@
+name: HCL v0.5 LongMemEval Ingest Diagnostic Selection
+
+on:
+  pull_request:
+    paths:
+      - "scripts/select_longmemeval_ingest_diagnostic_v01.py"
+      - "tests/test_v05_longmemeval_ingest_diagnostic.py"
+      - "eval/longmemeval/knowledge_update_selection_v01.json"
+      - ".github/workflows/hcl-v05-longmemeval-ingest-diagnostic-selection.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/select_longmemeval_ingest_diagnostic_v01.py"
+      - "tests/test_v05_longmemeval_ingest_diagnostic.py"
+      - "eval/longmemeval/knowledge_update_selection_v01.json"
+      - ".github/workflows/hcl-v05-longmemeval-ingest-diagnostic-selection.yml"
+
+permissions:
+  contents: read
+
+env:
+  DATASET_REVISION: 98d7416c24c778c2fee6e6f3006e7a073259d48f
+  DATASET_SHA256: d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442
+
+jobs:
+  select:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run provider-free selection tests
+        run: |
+          python -m unittest -v \
+            tests.test_v05_longmemeval_qualification \
+            tests.test_v05_longmemeval_ingest_diagnostic
+
+      - name: Download pinned LongMemEval cleaned-S
+        run: |
+          mkdir -p .cache/longmemeval
+          curl -L --fail --retry 4 --retry-delay 5 \
+            "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/${DATASET_REVISION}/longmemeval_s_cleaned.json?download=true" \
+            -o .cache/longmemeval/longmemeval_s_cleaned.json
+
+      - name: Verify pinned dataset digest
+        run: |
+          echo "${DATASET_SHA256}  .cache/longmemeval/longmemeval_s_cleaned.json" \
+            | sha256sum -c -
+
+      - name: Freeze diagnostic candidate IDs
+        run: |
+          python scripts/select_longmemeval_ingest_diagnostic_v01.py \
+            --dataset .cache/longmemeval/longmemeval_s_cleaned.json \
+            --out artifacts/longmemeval-ingest-diagnostic-selection-v01/manifest.json
+
+      - name: Verify redacted two-row selection
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("artifacts/longmemeval-ingest-diagnostic-selection-v01/manifest.json")
+          o=json.loads(p.read_text())
+          assert o["provider_calls"] == 0
+          assert o["candidate_count"] == 46
+          assert o["selected_count"] == 2
+          assert len(o["selected"]) == 2
+          assert len({x["question_id"] for x in o["selected"]}) == 2
+          assert all(len(x["history_sha256"]) == 64 for x in o["selected"])
+          assert all(set(x) == {"question_id","history_sha256","session_count","turn_count"} for x in o["selected"])
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v05-longmemeval-ingest-diagnostic-selection-${{ github.run_id }}
+          path: artifacts/longmemeval-ingest-diagnostic-selection-v01/manifest.json
+          if-no-files-found: error
+          retention-days: 90

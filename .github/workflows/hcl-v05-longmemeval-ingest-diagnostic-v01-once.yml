@@ -1,0 +1,104 @@
+name: HCL v0.5 LongMemEval Ingest Diagnostic v0.1 Once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_V05_LONGMEMEVAL_INGEST_DIAGNOSTIC_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hcl-v05-longmemeval-ingest-diagnostic-v01-once
+  cancel-in-progress: false
+
+env:
+  CANDIDATE_ANCHOR: 2b6ec9ca84c0877f2f2826bd4a56f774c4518f64
+  DATASET_REVISION: 98d7416c24c778c2fee6e6f3006e7a073259d48f
+  DATASET_SHA256: d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442
+  TRIGGER_PATH: .github/HCL_V05_LONGMEMEVAL_INGEST_DIAGNOSTIC_V01_TRIGGER
+  RUN_ONCE_TOKEN: HCL_V05_LONGMEMEVAL_INGEST_DIAGNOSTIC_V01_RUN_ONCE_20260925_A1
+  DEEPSEEK_BASE_URL: https://api.deepseek.com
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Enforce immutable one-shot trigger
+        run: |
+          if [ "$GITHUB_RUN_ATTEMPT" != "1" ]; then
+            echo "Refusing provider execution on rerun"
+            exit 1
+          fi
+          test "$(cat "$TRIGGER_PATH")" = "$RUN_ONCE_TOKEN"
+          if git log --format=%H "${{ github.event.before }}" -- "$TRIGGER_PATH" | grep -q .; then
+            echo "Trigger already existed before this push"
+            exit 1
+          fi
+          git diff --diff-filter=A --name-only "${{ github.event.before }}" "$GITHUB_SHA" -- "$TRIGGER_PATH" | grep -Fx "$TRIGGER_PATH"
+
+      - name: Verify frozen candidate
+        run: |
+          git diff --exit-code "$CANDIDATE_ANCHOR"..HEAD --             hcl/v05             hcl/v04/backends.py             hcl/v04/provider_profiles.py             scripts/qualify_longmemeval_knowledge_update_v01.py             scripts/run_v05_longmemeval_ingest_diagnostic_v01.py             eval/longmemeval/knowledge_update_selection_v01.json             eval/longmemeval/knowledge_update_ingest_diagnostic_v01.json             docs/HCL_V05_LONGMEMEVAL_INGEST_DIAGNOSTIC_V01.md
+
+      - name: Provider-free preflight
+        run: |
+          python -m unittest -v             tests.test_v05_longmemeval_qualification             tests.test_v05_longmemeval_ingest_diagnostic             tests.test_v05_longmemeval_ingest_diagnostic_runner
+          python scripts/run_v05_longmemeval_ingest_diagnostic_v01.py --validate-only --dataset /dev/null
+
+      - name: Download pinned LongMemEval cleaned-S
+        run: |
+          mkdir -p .cache/longmemeval
+          curl -L --fail --retry 4 --retry-delay 5             "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/${DATASET_REVISION}/longmemeval_s_cleaned.json?download=true"             -o .cache/longmemeval/longmemeval_s_cleaned.json
+          echo "${DATASET_SHA256}  .cache/longmemeval/longmemeval_s_cleaned.json" | sha256sum -c -
+
+      - name: Install frozen provider client
+        run: python -m pip install "openai==2.14.0"
+
+      - name: Run external ingest diagnostic once
+        run: |
+          python scripts/run_v05_longmemeval_ingest_diagnostic_v01.py             --dataset .cache/longmemeval/longmemeval_s_cleaned.json             --out artifacts/longmemeval-ingest-diagnostic-v01/result.json
+
+      - name: Verify redacted diagnostic artifact
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("artifacts/longmemeval-ingest-diagnostic-v01/result.json")
+          o=json.loads(p.read_text())
+          assert o["format"] == "hcl-v05-longmemeval-ingest-diagnostic-v01"
+          assert o["selected_count"] == 2
+          assert o["total_events"] == 971
+          assert len(o["rows"]) == 2
+          forbidden={"question","answer","history","has_answer","answer_session_ids","raw_text"}
+          def keys(x):
+              out=set()
+              if isinstance(x,dict):
+                  for k,v in x.items():
+                      out.add(k); out.update(keys(v))
+              elif isinstance(x,list):
+                  for v in x: out.update(keys(v))
+              return out
+          assert not (forbidden & keys(o))
+          PY
+
+      - name: Upload immutable diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v05-longmemeval-ingest-diagnostic-v01-${{ github.run_id }}
+          path: artifacts/longmemeval-ingest-diagnostic-v01/
+          if-no-files-found: warn
+          retention-days: 90

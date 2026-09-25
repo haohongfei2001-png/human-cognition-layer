@@ -1,0 +1,28 @@
+{
+  "format": "hcl-v05-longmemeval-ingest-diagnostic-selection-v01",
+  "upstream_code_commit": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+  "dataset_revision": "98d7416c24c778c2fee6e6f3006e7a073259d48f",
+  "dataset_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+  "selection_run": 36097682544,
+  "selection_artifact": 10847493961,
+  "selection_artifact_zip_sha256": "0a48afcc5be425cba558e7a3e821fecfed3d767da0fca4ee4294bca49ab8584f",
+  "selection_manifest_sha256": "134dd872e25905e5a76fe1bb6fb81ad97892f0e7c2157a3dea1ba6e6f54d6643",
+  "selection_salt": "HCL-LONGMEMEVAL-KU-INGEST-DIAG-V01-20260925",
+  "excluded_sealed_count": 32,
+  "candidate_count": 46,
+  "selected": [
+    {
+      "question_id": "c7dc5443",
+      "history_sha256": "84fc9c53982a785ceb0c3c2d037130c03ea5e50332b44463394e98802ef6a481",
+      "session_count": 46,
+      "turn_count": 478
+    },
+    {
+      "question_id": "cc5ded98",
+      "history_sha256": "02032859da6063035206c2bc00ae9fdff76efb1de43d8b6f24c125d8d6095707",
+      "session_count": 53,
+      "turn_count": 493
+    }
+  ],
+  "privacy_boundary": "IDs/hashes/counts only; no question, answer, or history text."
+}
