@@ -4933,10 +4933,12 @@ CQ-00 closure:
 - the eight separately reserved DynToM development trials remain uninspected and provider-unconsumed;
 - provider calls: **0**.
 
+Historical CQ-00 authorization has been superseded by later owner authorization for benchmark-independent v0.6 runtime development.
+
 Current authorization:
 - CQ-00 is closed;
-- CQ-01 remains blocked on explicit owner choice/authorization of provider, model identity, reasoning budget and bounded monetary cap;
-- no specialized v0.6 cognition-runtime implementation until CQ-01 demonstrates a repeated residual gap;
+- minimal v0.6 cognition-runtime implementation is complete and provider-free certified;
+- provider-backed external utility testing still requires separate provider/model/budget authorization;
 - no LongMemEval paid trigger; its sealed 32-row package remains intact and reusable.
 
 Evidence:
@@ -4948,7 +4950,7 @@ LongMemEval status:
 - sealed 32 efficacy rows remain provider-unconsumed;
 - paid execution is deprioritized and is not a prerequisite for v0.6.
 
-**Current gate: HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_PROVIDER_FREE_CERTIFICATION**
+**Current gate: HCL_V06_MINIMAL_RUNTIME_COMPLETE_EXTERNAL_CPD_UTILITY_CHECK_NEXT**
 
 
 ## HCL v0.6 minimal perspective/belief runtime implementation
@@ -4980,3 +4982,37 @@ Claim boundary:
 - LongMemEval remains frozen and unconsumed.
 
 **Current gate: HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_PROVIDER_FREE_CERTIFICATION**
+
+
+## HCL v0.6 minimal perspective/belief runtime closure
+
+Closure:
+- `reports/HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_CLOSURE.md`
+
+Merged implementation:
+- main `9d632cfeea469555ef2896740fa43ed99aa467bc`;
+- PR #56;
+- PR exact-head CI `36125213746`: **SUCCESS**;
+- main exact-head CI `36125320225`: **SUCCESS**.
+
+Implemented capability:
+- first-order evidence-bounded character perspective;
+- bounded second-order access perspective;
+- provenance-preserving belief evidence;
+- CHARACTER_UNCERTAIN != SYSTEM_INSUFFICIENT;
+- challenge exposure != belief revision;
+- explicit direct revision / supersession;
+- perspective-bounded answer context.
+
+Evidence boundary:
+- real capability implementation is complete;
+- external efficacy is not yet established;
+- no provider-backed benchmark call was made;
+- v0.5 remains frozen;
+- LongMemEval remains untriggered and sealed.
+
+Next:
+- bounded external C/P/D utility check on the already frozen FANToM development conversations after provider/model/cost authorization;
+- do not expand architecture before that utility check unless an independent correctness defect is found.
+
+**Current gate: HCL_V06_MINIMAL_RUNTIME_COMPLETE_EXTERNAL_CPD_UTILITY_CHECK_NEXT**
