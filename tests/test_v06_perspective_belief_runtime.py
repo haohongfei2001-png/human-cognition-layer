@@ -112,6 +112,11 @@ class V06MinimalPerspectiveBeliefTests(unittest.TestCase):
         self.assertEqual(reader.status, BeliefStatus.AFFIRMED)
         self.assertEqual(bo_view.status, BeliefStatus.SYSTEM_INSUFFICIENT)
 
+        context = runtime.answer_context("bo")
+        self.assertEqual(context.target_information_view.event_ids, ())
+        estimates = {x.proposition_key: x for x in context.belief_estimates}
+        self.assertEqual(estimates["bridge_unsafe"].status, BeliefStatus.AFFIRMED)
+
     def test_first_order_view_respects_private_recipient_boundary(self):
         runtime = HCLV06Runtime()
         runtime.ingest_event(
