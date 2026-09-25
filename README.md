@@ -70,7 +70,7 @@ v0.5 已完成内部 synthetic capability loop。最新冻结结果不是“HCL 
 - [reports/HCL_V05_STRONG_BASELINE_REPLICATION_V01_CLOSURE.md](reports/HCL_V05_STRONG_BASELINE_REPLICATION_V01_CLOSURE.md)
 - [docs/HCL_V04_EVALUATION_EXPOSURE_REGISTER.md](docs/HCL_V04_EVALUATION_EXPOSURE_REGISTER.md)
 
-EQ-01 已完成：MemoryAgentBench FactConsolidation 需要 current v0.5 尚不存在的通用 fact identity / supersession 层，因此不作为 pure-adapter 外部首测，也没有消费 provider 或 benchmark rows。当前第一项工作是 **EQ-02：LongMemEval knowledge-update zero-provider qualification**；只有在严格 gold/question firewall 下证明现有 v0.5 可直接接入，才会冻结 provider-backed 外部 pilot。
+EQ-01 已完成：MemoryAgentBench FactConsolidation 需要 current v0.5 尚不存在的通用 fact identity / supersession 层，因此不作为 pure-adapter 外部首测，也没有消费 provider 或 benchmark rows。EQ-02 LongMemEval knowledge-update 零 provider qualification 已通过。后续两条非 efficacy 开发样本的 971/971 次摄入完成，语义失败与修复均为 0，达到预冻结兼容性门槛；这不构成外部 efficacy 证明。当前下一门禁是先冻结公平的 C/D/G efficacy 协议，并完成 provider-free 认证与第二模型家族的接入前提；封存的 32 条样本尚未进行 provider-backed efficacy 运行。
 
 DynToM 是后续动态 human mental-state validation 的重要候选，但当前 v0.5 不会为了适配第三人称 benchmark narration 而临时放宽 stance evidence semantics。
 
