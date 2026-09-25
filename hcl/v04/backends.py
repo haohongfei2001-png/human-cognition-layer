@@ -1,24 +1,18 @@
-"""Capability-aware OpenAI-compatible backend for HCL v0.4."""
+"""Capability-aware OpenAI-compatible backend for HCL v0.4/v0.5."""
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from typing import Any
 
 from openai import OpenAI
 
-
-@dataclass(frozen=True)
-class BackendCapabilities:
-    json_object_mode: bool = True
-    seed: bool = True
-    json_extra_body: dict[str, Any] = field(default_factory=dict)
-
-
-DEEPSEEK_FLASH_CAPABILITIES = BackendCapabilities(
-    json_object_mode=True,
-    seed=True,
-    json_extra_body={"thinking": {"type": "disabled"}},
+from .provider_profiles import (
+    BackendCapabilities,
+    DEEPSEEK_FLASH_CAPABILITIES,
+    GENERIC_OPENAI_COMPATIBLE_CAPABILITIES,
+    QWEN_OPENAI_COMPATIBLE_CAPABILITIES,
+    capabilities_for_profile,
+    provider_profile_names,
 )
 
 
@@ -94,3 +88,14 @@ class OpenAICompatibleBackend:
             temperature=temperature,
             json_mode=True,
         )
+
+
+__all__ = [
+    "BackendCapabilities",
+    "DEEPSEEK_FLASH_CAPABILITIES",
+    "GENERIC_OPENAI_COMPATIBLE_CAPABILITIES",
+    "QWEN_OPENAI_COMPATIBLE_CAPABILITIES",
+    "OpenAICompatibleBackend",
+    "capabilities_for_profile",
+    "provider_profile_names",
+]
