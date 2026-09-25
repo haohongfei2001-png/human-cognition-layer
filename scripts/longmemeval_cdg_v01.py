@@ -115,7 +115,10 @@ def validate_patch(patch: Any) -> list[dict[str, str]]:
         record = {"entity": _text(item["entity"], "entity", 120),
                   "attribute": _text(item["attribute"], "attribute", 120),
                   "value": _text(item["value"], "value", 1000),
-                  "note": _text(item["note"], "note", 240)}
+                  "note": ""}
+        if not isinstance(item["note"], str) or len(item["note"]) > 240:
+            raise ProtocolError("invalid note")
+        record["note"] = item["note"].strip()
         key = (record["entity"], record["attribute"])
         if key in seen:
             raise ProtocolError("duplicate generic key in patch")
@@ -146,13 +149,14 @@ def compact_state(state: dict[str, Any], limit: int) -> dict[str, Any]:
 
 
 class GenericMemory:
-    def __init__(self, backend: Any, *, state_char_limit: int = 6000):
+    def __init__(self, backend: Any, *, state_char_limit: int = 16000):
         if state_char_limit < 256:
             raise ProtocolError("generic state budget too small")
         self.backend = backend
         self.state_char_limit = state_char_limit
         self.state: dict[str, Any] = {"records": []}
         self.processed_events = 0
+        self.compacted_updates = 0
 
     def ingest(self, event: dict[str, Any]) -> None:
         """Process every event transactionally; never silently keep stale state."""
@@ -184,6 +188,8 @@ class GenericMemory:
             prior.update(value=upsert["value"], at=str(event["valid_time"]),
                          source_event_id=str(event["event_id"]), note=upsert["note"])
         candidate["records"].sort(key=lambda item: (item["entity"], item["attribute"]))
+        needed_compaction = len(canonical_json(candidate)) > self.state_char_limit
         candidate = compact_state(candidate, self.state_char_limit)
         self.state = candidate
         self.processed_events += 1
+        self.compacted_updates += int(needed_compaction)
