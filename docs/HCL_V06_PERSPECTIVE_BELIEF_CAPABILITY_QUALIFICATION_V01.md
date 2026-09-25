@@ -113,13 +113,15 @@ Tasks:
 4. Verify that future FANToM freshness is enforced at the **complete-conversation** level. The 80 historically consumed FANToM conversations remain excluded with all associated questions.
 5. Inspect only schema, metadata, task families and public evaluation logic needed to define a deterministic development selection. Do not inspect outcomes in order to hand-pick easy or HCL-favorable cases.
 6. For DynToM, verify that the public narrative itself is sufficient for the belief-state/change questions selected for qualification. Hidden generator state, transition labels and gold reasoning fields must not enter state construction.
-7. Freeze a deterministic, disjoint development qualification set before any provider call:
-   - 8 eligible complete FANToM conversations;
-   - 8 eligible DynToM belief-focused social scenarios;
-   - selected by a deterministic ID hash rule after all exclusion rules are applied.
-8. Register those 16 scenarios as **development-consumed upon first provider execution**. They can never become fresh v0.6 efficacy evidence.
+7. Freeze deterministic, disjoint CQ-00 selections before any provider call:
+   - 8 eligible complete FANToM conversations reserved for CQ-01 development;
+   - 4 DynToM belief-focused social scenarios used only for a narrative-evidence sufficiency audit;
+   - 8 additional DynToM belief-focused scenarios reserved for CQ-01 development;
+   - all selected by deterministic ID hash rules after exclusion/eligibility rules are applied.
+8. The four DynToM sufficiency-audit scenarios become **development-consumed when their story/question/gold content is manually inspected**. The 16 CQ-01 development scenarios become consumed on first manual outcome inspection or provider execution. None can later become fresh v0.6 efficacy evidence.
+9. DynToM CQ-00 must explicitly audit whether the public story supports the selected belief labels without relying on the hidden generation sketch. Hidden mental-state trajectories may be used only to understand upstream construction, never as HCL input or as a substitute for story-grounded evidence.
 
-CQ-00 passes only if both sources can be adapted without leaking gold, hidden mental-state trajectories or benchmark-specific rules into the candidate mechanism.
+CQ-00 passes only if FANToM can be adapted with complete-conversation freshness and the DynToM narrative sufficiency audit supports using public story evidence without leaking hidden mental-state trajectories or benchmark-specific rules into the candidate mechanism.
 
 ### CQ-01 — limited strong-model gap probe
 
