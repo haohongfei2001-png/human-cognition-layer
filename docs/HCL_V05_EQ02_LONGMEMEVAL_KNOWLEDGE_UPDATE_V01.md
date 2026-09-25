@@ -77,6 +77,9 @@ Each user turn becomes an external event:
   automatically become the user's stance;
 - valid_time is derived from the benchmark session timestamp plus stable
   within-session ordering;
+- explicit `haystack_dates` are chronology-authoritative; if cleaned-S list
+  order is non-monotonic, the adapter stably sorts by timestamp and records the
+  original source position only as provenance/tie-break;
 - raw text is preserved.
 
 No benchmark-specific semantic rule is added to the v0.5 extractor.
@@ -123,7 +126,8 @@ EQ-02 passes only if provider-free audit demonstrates all of:
 1. exact cleaned dataset digest verified;
 2. selected rows are `question_type == knowledge-update`;
 3. state constructor never receives gold/evidence labels or question text;
-4. event conversion is deterministic and timestamp preserving;
+4. event conversion is deterministic and timestamp preserving, with explicit
+   benchmark timestamps authoritative over file-list position;
 5. HCL state can be built from raw user/assistant history without
    benchmark-specific semantic code;
 6. no current-v0.5 semantic invariant is relaxed;
