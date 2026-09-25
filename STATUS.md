@@ -4844,3 +4844,33 @@ No provider call or selected-row content inspection occurred in this design
 milestone. Next: provider-free implementation and exact-head certification.
 
 **Current gate: HCL_V05_LONGMEMEVAL_CDG_EFFICACY_V01_DESIGN_FROZEN_PROVIDER_FREE_IMPLEMENTATION_NEXT**
+
+
+## HCL v0.5 LongMemEval sealed digest correction and C/D/G preflight
+
+Closure:
+- `reports/HCL_V05_LONGMEMEVAL_CDG_PREFLIGHT_V01_CLOSURE.md`
+
+The sealed 32-ID selection had one malformed 62-character history digest for
+`0977f2af`. The immutable EQ-02 artifact `10846604293` contained the full
+64-character digest; all other 31 hashes and all 32 IDs matched. Only that
+missing `d6` was restored. No selected provider-backed row was consumed.
+
+Provider-free C/D/G preflight:
+- candidate head `8c9823faa5c40f78b38ce1572e9116d2ed3231d5`;
+- run `36100901008`: SUCCESS;
+- artifact `10848869835`, ZIP SHA-256
+  `877836e437fb798d2305d2eebe9ab934876359c992e07d9d88c651aff9af3cad`;
+- redacted manifest SHA-256
+  `4e23b7eb3a3bf5d9fcc53895131f98a216478e1066163212a7810046ab28d17f`;
+- 32 histories verified, 15,601 events, maximum 528 per row, 2 abstention IDs;
+- provider calls: 0.
+
+Capacity estimate from the 971-event diagnostic: about 58.34 million D-arm
+input characters and 3.45 provider wall hours for ingestion alone at a linear
+rate. This excludes G, answers, judge and retries. It is not a cost quote or
+paid-run authorization. Next: finish provider-free C/D/G implementation and
+verify second-family, official-judge and bounded-cost prerequisites before any
+sealed efficacy call.
+
+**Current gate: HCL_V05_LONGMEMEVAL_CDG_V01_SEALED_HASH_CORRECTED_PREFLIGHT_PASS_PROVIDER_FREE_IMPLEMENTATION_NEXT**
