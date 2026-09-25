@@ -108,6 +108,12 @@ class V06FantomCPDTests(unittest.TestCase):
         self.assertFalse(result["arms"]["C"]["correct"])
         self.assertTrue(result["arms"]["P"]["correct"])
         self.assertTrue(result["arms"]["D"]["correct"])
+        self.assertIn("auditable_access_map", result["adapter"])
+        self.assertIn("access_normalization_count", result["adapter"])
+        self.assertEqual(
+            len(result["adapter"]["auditable_access_map"]),
+            len(context.splitlines()),
+        )
 
         adapter_payload = adapter.calls[0][1][1]["content"]
         self.assertNotIn(record["question"], adapter_payload)
