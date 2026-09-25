@@ -29,6 +29,13 @@ when warranted. Do not infer private mental states from silence. Do not use
 specialized HCL stance types, transition rules, or perspective routing.
 """
 
+GENERIC_PATCH_REPAIR_SYSTEM = """Repair the proposed generic memory patch into
+exactly {"upserts":[{"entity":"...","attribute":"...","value":"...",
+"note":"..."}]}. Keep only information supported by the supplied event.
+Use an empty upserts list when there is no durable information. Do not add
+HCL-specific stance types or transition logic. Return JSON only.
+"""
+
 
 class ProtocolError(ValueError):
     pass
@@ -157,21 +164,32 @@ class GenericMemory:
         self.state: dict[str, Any] = {"records": []}
         self.processed_events = 0
         self.compacted_updates = 0
+        self.repair_calls = 0
 
     def ingest(self, event: dict[str, Any]) -> None:
         """Process every event transactionally; never silently keep stale state."""
         required = {"event_id", "valid_time", "actor_id", "raw_text"}
         if not required <= set(event):
             raise ProtocolError("incomplete generic event")
+        event_payload = event_prompt_payload(event)
         raw = self.backend.complete_json(
             [{"role": "system", "content": GENERIC_UPDATE_SYSTEM},
              {"role": "user", "content": canonical_json({"state": self.state,
-                 "event": event_prompt_payload(event)})}],
+                 "event": event_payload})}],
             max_tokens=2048, temperature=0.0)
         try:
             upserts = validate_patch(json.loads(raw))
         except (json.JSONDecodeError, ProtocolError) as exc:
-            raise ProtocolError(f"generic update invalid: {exc}") from exc
+            repaired = self.backend.complete_json(
+                [{"role": "system", "content": GENERIC_PATCH_REPAIR_SYSTEM},
+                 {"role": "user", "content": canonical_json({"event": event_payload,
+                     "invalid_patch": raw[:20000], "error": str(exc)})}],
+                max_tokens=2048, temperature=0.0)
+            self.repair_calls += 1
+            try:
+                upserts = validate_patch(json.loads(repaired))
+            except (json.JSONDecodeError, ProtocolError) as second:
+                raise ProtocolError(f"generic update invalid after bounded repair: {second}") from second
         candidate = copy.deepcopy(self.state)
         by_key = {(item["entity"], item["attribute"]): item for item in candidate["records"]}
         for upsert in upserts:
