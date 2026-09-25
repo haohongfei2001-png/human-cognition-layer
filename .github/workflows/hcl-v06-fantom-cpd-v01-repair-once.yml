@@ -1,0 +1,100 @@
+name: HCL v0.6 FANToM C/P/D v0.1 Repair Once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_V06_FANTOM_CPD_V01_REPAIR_TRIGGER"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hcl-v06-fantom-cpd-v01-repair-once
+  cancel-in-progress: false
+
+env:
+  TRIGGER_PATH: .github/HCL_V06_FANTOM_CPD_V01_REPAIR_TRIGGER
+  RUN_ONCE_TOKEN: HCL_V06_FANTOM_CPD_V01_REPAIR_20260925_A2
+  REPAIR_OF_RUN: "36128133383"
+  HCL_V06_FANTOM_CPD_RUN_ONCE_TOKEN: HCL_V06_FANTOM_CPD_V01_REPAIR_20260925_A2
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Enforce immutable exact-parent repair trigger
+        shell: bash
+        run: |
+          test "$GITHUB_RUN_ATTEMPT" = "1"
+          test "$(git show -s --format=%P HEAD)" = "${{ github.event.before }}"
+          test "$(cat "$TRIGGER_PATH")" = "${RUN_ONCE_TOKEN}|${{ github.event.before }}|repair_of:${REPAIR_OF_RUN}"
+          if git log --format=%H "${{ github.event.before }}" -- "$TRIGGER_PATH" | grep -q .; then
+            echo "Repair trigger existed before this run"
+            exit 1
+          fi
+          test "$(git diff --diff-filter=A --name-only '${{ github.event.before }}' "$GITHUB_SHA")" = "$TRIGGER_PATH"
+          test "$(git diff --name-only '${{ github.event.before }}' "$GITHUB_SHA")" = "$TRIGGER_PATH"
+          test -f reports/HCL_V06_FANTOM_CPD_V01_ATTEMPT1_INVALID.md
+          grep -q "36128133383" reports/HCL_V06_FANTOM_CPD_V01_ATTEMPT1_INVALID.md
+
+      - name: Install frozen dependencies
+        run: python -m pip install "pandas>=2.2,<3" "openai==2.14.0"
+
+      - name: Run provider-free repair gates first
+        run: |
+          python -m compileall -q hcl/v04 hcl/v06 scripts/prepare_v06_fantom_cpd_v01.py scripts/run_v06_fantom_cpd_v01.py
+          python -m unittest -v tests.test_v05_provider_profiles
+          python -m unittest -v tests.test_v06_perspective_belief_runtime
+          python -m unittest -v tests.test_v06_conversation_adapter
+          python -m unittest -v tests.test_v06_fantom_cpd_v01
+          python -m unittest -v tests.test_v05_current_stance
+          python -m unittest -v tests.test_v05_semantic_runtime
+
+      - name: Download and verify pinned FANToM
+        run: |
+          mkdir -p .cache artifacts/hcl-v06-fantom-cpd-v01-repair
+          curl -L --fail --retry 4 --retry-delay 5 \
+            "https://storage.googleapis.com/ai2-mosaic-public/projects/fantom/fantom.tar.gz" \
+            -o .cache/fantom.tar.gz
+          echo "1d08dfa0ea474c7f83b9bc7e3a7b466eab25194043489dd618b4c5223e1253a4  .cache/fantom.tar.gz" | sha256sum -c -
+
+      - name: Verify exact frozen consumed selection and repair runner
+        run: |
+          python scripts/prepare_v06_fantom_cpd_v01.py \
+            --fantom-archive .cache/fantom.tar.gz \
+            --out .cache/selection.json
+          python - <<'PY'
+          import json
+          assert json.load(open(".cache/selection.json")) == json.load(open("eval/v06/fantom_cpd_selection_v01.json"))
+          PY
+          python scripts/run_v06_fantom_cpd_v01.py \
+            --fantom-archive .cache/fantom.tar.gz --validate-only
+          test -n "$DEEPSEEK_API_KEY"
+
+      - name: Execute bounded repair on same consumed development set once
+        run: |
+          python scripts/run_v06_fantom_cpd_v01.py \
+            --fantom-archive .cache/fantom.tar.gz \
+            --execute \
+            --out artifacts/hcl-v06-fantom-cpd-v01-repair/results.json
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-v06-fantom-cpd-repair-results-${{ github.run_id }}
+          path: artifacts/hcl-v06-fantom-cpd-v01-repair/
+          if-no-files-found: warn
+          retention-days: 90
