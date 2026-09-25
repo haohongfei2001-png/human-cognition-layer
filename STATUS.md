@@ -5280,9 +5280,15 @@ reader-only narrator sentences. A generic runtime hardening now represents
 narrated observed actions without treating them as certain intentions and
 exposes narrator goal evidence to the external reader without leaking it into
 the character's own information view. Independent synthetic tests and pinned
-source preflight pass locally; exact-main CI is pending.
+source preflight passed locally before merge.
 
 LongMemEval remains sealed and untouched. No v0.7 external utility or fresh
 comparative outcome is claimed.
 
-**Current gate: V07_SAGA_DEV_PROVIDER_FREE_EXACT_MAIN_THEN_SEPARATE_USD_0_50_OWNER_AUTHORIZATION**
+PR #70 merged as main `320e4e5c321eb662b2f03490d94bfe99007403c0`.
+Exact-main SAGA development preflight `36154225214`, v0.7 intention runtime
+`36154225286`, and v0.6 fresh-package regression `36154225285` all completed
+**SUCCESS**. No v0.7 provider call occurred. The v0.7 one-shot trigger remains
+absent and `HCL_V07_SAGA_DEV_COST_AUTHORIZED_USD` is unset.
+
+**Current gate: SEPARATE_OWNER_AUTHORIZATION_FOR_V07_SAGA_DEV_USD_0_50**
