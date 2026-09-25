@@ -46,33 +46,30 @@ HCL 首先要求认知表示和更新本身在事实、信息边界、时间关�
 
 当前 canonical 阶段：
 
-**HCL v0.5 — External Validation & Cross-Model Transfer**
+**HCL v0.6 — Capability Qualification: Evidence-Constrained Perspective & Belief Revision**
 
-v0.5 已完成内部 synthetic capability loop。最新冻结结果不是“HCL 已证明让底座模型更聪明”，而是：
+v0.5 已冻结为可靠但狭窄的基础：人物/时间绑定、显式立场抽取、证据路由、provenance 与可审计状态。现有证据支持它作为有限认知语义与研究基础设施；不支持把它描述成已经证明有效的广义 Human Cognition Layer。
 
-- fresh seeded-state pilot：HCL 24/24，strong ordinary memory 23/24；
-- final strong-baseline replication：HCL 48/48，generic structured state 36/48，free-form memory 38/48；
-- generic baseline 存在 54 次可避免的 state-budget update failure，因此不主张 clean capability superiority；
-- 预注册 Route B practical module utility 成立：HCL 在该 slice 上维持完整正确性与可审计状态，同时 provider-state-management 成本显著更低。
+v0.6 的第一个候选能力不是继续扩充 memory，而是验证：
 
-因此项目已停止继续构造近似内部 synthetic efficacy test。
+> 在多人、时间变化的对话或叙事中，显式约束人物的信息视角与信念修订，是否能减少当前强模型仍会犯的真实人物理解错误。
 
-当前工作改为：
+当前先做 **Capability Qualification**，而不是直接建设新的心理状态机：
 
-1. independently authored external validation；
-2. cross-base-model transfer；
-3. 使用 competent generic structured-memory baseline；
-4. 严格维护 consumed/fresh evidence boundary。
+1. CQ-00：零 provider 审计 FANToM / DynToM 的 fresh/exposure、数据与证据边界，并冻结小型 development qualification selection；
+2. CQ-01：只有另行批准 provider / model / cost 后，比较强模型 direct control 与薄 perspective scaffold；
+3. 只有 CQ-01 仍发现重复、可审计的 perspective / belief residual errors，才允许实现最小 v0.6 mechanism；
+4. 后续正式 efficacy 必须同时面对 C / P / competent G / D，而不是只战胜裸模型。
 
-外部验证与迁移合同：
+完整合同：
 
-- [docs/HCL_V05_EXTERNAL_TRANSFER_FOUNDATION_V01.md](docs/HCL_V05_EXTERNAL_TRANSFER_FOUNDATION_V01.md)
-- [reports/HCL_V05_STRONG_BASELINE_REPLICATION_V01_CLOSURE.md](reports/HCL_V05_STRONG_BASELINE_REPLICATION_V01_CLOSURE.md)
-- [docs/HCL_V04_EVALUATION_EXPOSURE_REGISTER.md](docs/HCL_V04_EVALUATION_EXPOSURE_REGISTER.md)
+- [docs/HCL_V06_PERSPECTIVE_BELIEF_CAPABILITY_QUALIFICATION_V01.md](docs/HCL_V06_PERSPECTIVE_BELIEF_CAPABILITY_QUALIFICATION_V01.md)
 
-EQ-01 已完成：MemoryAgentBench FactConsolidation 需要 current v0.5 尚不存在的通用 fact identity / supersession 层，因此不作为 pure-adapter 外部首测，也没有消费 provider 或 benchmark rows。EQ-02 LongMemEval knowledge-update 零 provider qualification 已通过。后续两条非 efficacy 开发样本的 971/971 次摄入完成，语义失败与修复均为 0，达到预冻结兼容性门槛；这不构成外部 efficacy 证明。当前下一门禁是先冻结公平的 C/D/G efficacy 协议，并完成 provider-free 认证与第二模型家族的接入前提；封存的 32 条样本尚未进行 provider-backed efficacy 运行。
+当前 LongMemEval 32-row C/D/G package 保持冻结、未消费，不触发 paid run，也不再作为 v0.6 的前置条件。其 hash / chronology / gold-firewall / one-shot / paired-statistics / cost-accounting 资产保留供未来长期状态工程问题复用。
 
-DynToM 是后续动态 human mental-state validation 的重要候选，但当前 v0.5 不会为了适配第三人称 benchmark narration 而临时放宽 stance evidence semantics。
+当前 gate：
+
+**HCL_V06_PERSPECTIVE_BELIEF_CQ00_ZERO_PROVIDER_QUALIFICATION_NEXT**
 
 ## Intellectual-property boundary
 
