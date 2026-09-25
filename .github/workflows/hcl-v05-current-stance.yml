@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - "hcl/v05/**"
+      - "hcl/v04/provider_profiles.py"
+      - "hcl/v04/backends.py"
+      - "scripts/run_v04_long_horizon_bounded_context_v01.py"
       - "tests/test_v05_*.py"
       - "docs/HCL_V05_*.md"
       - "eval/v05/**"
@@ -19,6 +22,9 @@ on:
       - main
     paths:
       - "hcl/v05/**"
+      - "hcl/v04/provider_profiles.py"
+      - "hcl/v04/backends.py"
+      - "scripts/run_v04_long_horizon_bounded_context_v01.py"
       - "tests/test_v05_*.py"
       - "docs/HCL_V05_*.md"
       - "eval/v05/**"
@@ -54,7 +60,8 @@ jobs:
             tests.test_v05_routed_semantic \
             tests.test_v05_seeded_state_capability_runner \
             tests.test_v05_routed_extraction_runner_v02 \
-            tests.test_v05_strong_baseline_replication_runner
+            tests.test_v05_strong_baseline_replication_runner \
+            tests.test_v05_provider_profiles
       - name: Run semantic extraction provider-free preflight when present
         if: ${{ hashFiles('scripts/run_v05_semantic_extraction_v01.py') != '' }}
         run: python scripts/run_v05_semantic_extraction_v01.py --validate-only

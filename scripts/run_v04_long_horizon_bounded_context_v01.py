@@ -120,11 +120,15 @@ class MeteredBackend:
         }
 
 
-def make_real_backend(api_key: str, base_url: str, model: str) -> MeteredBackend:
-    from hcl.v04.backends import (
-        DEEPSEEK_FLASH_CAPABILITIES,
-        OpenAICompatibleBackend,
-    )
+def make_real_backend(
+    api_key: str,
+    base_url: str,
+    model: str,
+    *,
+    provider_profile: str = "deepseek_flash",
+) -> MeteredBackend:
+    from hcl.v04.backends import OpenAICompatibleBackend
+    from hcl.v04.provider_profiles import capabilities_for_profile
 
     return MeteredBackend(
         OpenAICompatibleBackend(
@@ -132,7 +136,7 @@ def make_real_backend(api_key: str, base_url: str, model: str) -> MeteredBackend
             base_url=base_url,
             model=model,
             seed=42,
-            capabilities=DEEPSEEK_FLASH_CAPABILITIES,
+            capabilities=capabilities_for_profile(provider_profile),
         )
     )
 
