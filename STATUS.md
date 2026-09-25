@@ -4701,3 +4701,48 @@ Next authorized work:
 **EQ-01 — MemoryAgentBench FactConsolidation zero-provider qualification**.
 
 **Current gate: HCL_V05_EXTERNAL_TRANSFER_FOUNDATION_V01_FROZEN_EQ01_ZERO_PROVIDER_NEXT**
+
+
+## HCL v0.5 EQ-01 FactConsolidation qualification closure
+
+Closure:
+- `reports/HCL_V05_EQ01_FACTCONSOLIDATION_QUALIFICATION_CLOSURE.md`
+
+Result:
+- **PURE-ADAPTER QUALIFICATION FAILED**
+- no provider call;
+- no scored benchmark row consumed;
+- no HCL semantic change.
+
+Reason:
+FactConsolidation requires a generic fact identity/supersession layer
+(subject+relation or equivalent) that current v0.5 does not contain. Adding that
+layer only to run the benchmark would change the evaluated mechanism.
+
+Next:
+- EQ-02 LongMemEval knowledge-update zero-provider qualification.
+
+## HCL v0.5 EQ-02 LongMemEval knowledge-update qualification
+
+Contract:
+- `docs/HCL_V05_EQ02_LONGMEMEVAL_KNOWLEDGE_UPDATE_V01.md`
+
+Pinned upstream:
+- `xiaowu0162/LongMemEval@9e0b455f4ef0e2ab8f2e582289761153549043fc`
+- canonical data family: `xiaowu0162/longmemeval-cleaned`
+- candidate cleaned-S revision:
+  `98d7416c24c778c2fee6e6f3006e7a073259d48f`
+- candidate file SHA-256:
+  `d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442`
+
+EQ-02 remains zero-provider. State construction must not receive:
+- answer;
+- has_answer;
+- answer_session_ids;
+- gold/evaluation labels;
+- question text.
+
+If the official cleaned-S file retains the expected 78 knowledge-update rows,
+the first pilot selection is 32 IDs selected by deterministic SHA-256 rank.
+
+**Current gate: HCL_V05_EQ02_LONGMEMEVAL_KNOWLEDGE_UPDATE_ZERO_PROVIDER_QUALIFICATION**
