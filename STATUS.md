@@ -5318,3 +5318,38 @@ USD 0.50 total authorization. No repair provider call is made before
 exact-main certification; LongMemEval remains sealed.
 
 **Current gate: V07_SAGA_DEV_REPAIR_PROVIDER_FREE_CERTIFICATION_THEN_BOUNDED_REPAIR_RUN**
+
+## HCL v0.7 SAGA development repair result and provisional method decision
+
+PR #73 merged the generic fail-closed semantic repair as main
+`596883a7ba5544bd60fdf37cb85534becf603b06`. Exact-main SAGA preflight
+`36164862043` and v0.6 regression `36164862056` completed **SUCCESS**. PR #74
+then merged only the repair trigger as main
+`b864905844186ea31816d3929f365cf088750384`.
+
+Repair run `36165111831` completed **SUCCESS**, 12/12 development stories.
+Artifact ID `10877966052`, ZIP SHA-256
+`d9d1143151468b11fcf980f41d4f550369cebe3fb4545804a5513e8055e7af76`.
+All 99 responses reported `deepseek-flash`; no answer JSON was invalid. Three
+persistently invalid semantic extractions were recorded and dropped without
+creating goal claims. Any structured semantic evidence existed in just 2/12
+stories. Predeclared source-tier agreement C/P/D was **9/12, 12/12, 9/12**;
+paired D-only/P-only **0/3**. Arm-masked diagnostic review found that P's
+12/12 tier agreement includes an explicitness overclaim; it is not perfect
+goal understanding. There is no D increment over P on this development check.
+
+Repair provider-rated peak-cost ledger **USD 0.01055065**; cumulative with
+attempt 1 **USD 0.01297945**, under the owner-authorized USD 0.50 envelope.
+Both authorization variables are reset to zero. All 12 story families are
+development-consumed; no fresh efficacy or broad cognition claim follows.
+LongMemEval remains sealed. Full report:
+`reports/HCL_V07_SAGA_DEV_V01_REPAIR_CLOSURE.md`.
+
+Provisional decision: **SIMPLIFY** to a concise evidence/uncertainty
+instruction as the v0.7 comparison method. Keep the typed intention runtime
+as auditable infrastructure; do not tune or expand it on these consumed SAGA
+stories. Before v0.7 fresh C/P/G/D, freeze disjoint story families, a competent
+generic G and source-supported scoring; a fresh provider run needs separate
+bounded authorization.
+
+**Current gate: V07_FRESH_PROVIDER_FREE_DESIGN_AND_SEPARATE_FRESH_AUTHORIZATION**

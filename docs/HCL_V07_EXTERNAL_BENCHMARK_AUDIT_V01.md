@@ -1,6 +1,6 @@
 # HCL v0.7 External Benchmark Audit v0.1
 
-Status: **SOURCE AUDIT / DEVELOPMENT ATTEMPT 1 PARTIAL-CONSUMED**
+Status: **SOURCE AUDIT / DEVELOPMENT REPAIR COMPLETE / NO FRESH EFFICACY**
 
 The source-sufficiency audit has now produced a 12-story, development-only
 C/P/D protocol in `docs/HCL_V07_SAGA_DEVELOPMENT_UTILITY_V01.md`. Its first
@@ -9,9 +9,17 @@ semantic extraction on the third; see
 `reports/HCL_V07_SAGA_DEV_V01_ATTEMPT1_PARTIAL.md`. These are consumed
 development observations without a 12-case comparative conclusion.
 The audit found that SAGA's multiple annotations per story preclude treating
-one free-text goal as unique truth. The planned check therefore validates
-source anchoring and uncertainty, with blinded case adjudication after the
-run, rather than exact-string grading against a single annotation.
+one free-text goal as unique truth. The completed repair check therefore
+examined source anchoring and uncertainty with arm-masked diagnostic review,
+rather than exact-string grading against a single annotation.
+
+Repair run `36165111831` completed 12/12; see
+`reports/HCL_V07_SAGA_DEV_V01_REPAIR_CLOSURE.md`. The case review was
+arm-masked after aggregate scores were seen, so it is diagnostic rather than
+an independent blinded rating. Source-tier agreement favored the thin P
+instruction over the mostly empty D semantic state. No fresh v0.7 benchmark
+result exists, and the selected development story families are excluded from
+future fresh evidence.
 
 The v0.7 capability is intention, goal and action reasoning under an evidence
 constraint. A label inferred from a hidden character plan is not automatically

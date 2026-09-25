@@ -1,6 +1,15 @@
 # HCL v0.7 SAGA C/P/D Development Utility Protocol v0.1
 
-Status: **ATTEMPT 1 PARTIAL-CONSUMED / DEVELOPMENT REPAIR STAGED**
+Status: **ATTEMPT 1 PARTIAL-CONSUMED / REPAIR 12/12 COMPLETE / SIMPLIFY PROVISIONAL**
+
+The repair run `36165111831` completed all 12 development stories. C/P/D
+source-tier agreement was 9/12, 12/12 and 9/12. This is not goal-correctness
+or fresh efficacy; case review identified a P explicitness overclaim despite
+its perfect tier agreement. D's semantic state had any extracted evidence in
+only 2/12 stories. The provisional method decision is SIMPLIFY to a thin
+evidence/uncertainty instruction, retaining the typed runtime as auditable
+infrastructure. Full evidence, limitations and paired counts are in
+`reports/HCL_V07_SAGA_DEV_V01_REPAIR_CLOSURE.md`.
 
 Attempt 1 was run `36164041203`: two cases completed, third-case semantic
 extraction remained structurally invalid after one repair, and execution
@@ -87,8 +96,8 @@ USD 0.50 for attempt 1. Its trigger was consumed and authorization variable
 reset to zero. The repair workflow has a distinct exact-parent trigger and
 separate USD 0.49 operational guard, with the prior USD 0.0024288 ledger
 charged to the same owner-authorized USD 0.50 cumulative envelope. Its trigger
-is absent and repair authorization variable unset pending exact-main
-provider-free certification. The prior USD 3.50 authorization covered only
+was consumed after exact-main provider-free certification, and its separate
+authorization variable was reset to zero. The prior USD 3.50 authorization covered only
 the completed v0.6 FANToM pilot, not this check.
 No new account, credential or LongMemEval call is contemplated.
 
