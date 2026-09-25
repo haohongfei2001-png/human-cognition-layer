@@ -107,9 +107,13 @@ D **30/32**；D 相对 G 的独占修正/退化为 **8/0**，相对 P 为 **12/1
 
 v0.7 的首个小型外部开发验证已冻结为 12 条 SAGA 公开叙事的 C/P/D 比较。
 它区分叙事直接说出的目标与只能从行动推测的目标，并要求精确来源引文；
-人工 goal 标签不会被当成唯一真实动机。当前仅有无模型预检，尚未触发
-v0.7 provider 调用。该验证有独立的 USD 0.50 费用上限与一次性触发约束；
-见 [development protocol](docs/HCL_V07_SAGA_DEVELOPMENT_UTILITY_V01.md)。
+人工 goal 标签不会被当成唯一真实动机。首次运行 `36164041203` 已调用
+19 次模型，完成 2/12 条，在第三条语义提取两次无效后停止；这是**部分开发证据**，
+没有形成比较结论，费用账本为 USD 0.0024288。修复只保留原始叙事并舍弃无效
+提取，不从错误输出生成意图。后续明确标为同一批数据的开发修复尝试，
+其 USD 0.49 上限与首次费用合计低于已授权的 USD 0.50。
+见 [attempt 1 record](reports/HCL_V07_SAGA_DEV_V01_ATTEMPT1_PARTIAL.md)
+与 [development protocol](docs/HCL_V07_SAGA_DEVELOPMENT_UTILITY_V01.md)。
 
 v0.6.1 已在 main `0bf56af7baf305ca3bebb9035c4a989794a50eb8` 完成 provider-free certification：
 - runtime correctness run `36138966541` — **SUCCESS**；
@@ -119,7 +123,7 @@ v0.6.1 已在 main `0bf56af7baf305ca3bebb9035c4a989794a50eb8` 完成 provider-fr
 
 当前 gate：
 
-**SEPARATE_OWNER_AUTHORIZATION_FOR_V07_SAGA_DEV_USD_0_50**
+**V07_SAGA_DEV_REPAIR_PROVIDER_FREE_CERTIFICATION_THEN_BOUNDED_REPAIR_RUN**
 
 ## Intellectual-property boundary
 

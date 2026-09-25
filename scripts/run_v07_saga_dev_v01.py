@@ -15,12 +15,12 @@ if str(ROOT) not in sys.path:
 
 from hcl.v04.model import EventRecord
 from hcl.v06 import SYSTEM_VIEWER
-from hcl.v07 import HCLV07Runtime
+from hcl.v07 import HCLV07Runtime, V07ExtractionError
 from scripts.prepare_v07_saga_dev_v01 import MANIFEST, sha, story_text, verified_selection
 from scripts.run_v06_fantom_cpd_v01 import CappedBackend
 from scripts.run_v06_fantom_cpgd_fresh_v01 import BudgetLedger, OneCallDeepSeekBackend, _metrics
 
-CAP_USD = 0.50
+CAP_USD = 0.49
 ANSWER_MAX_TOKENS = 256
 EXTRACT_MAX_TOKENS = 1024
 CAPS = {
@@ -29,7 +29,9 @@ CAPS = {
     "P": {"calls": 12, "input_chars": 35_000, "output_chars": 12_000},
     "D": {"calls": 12, "input_chars": 200_000, "output_chars": 12_000},
 }
-RUN_ONCE_TOKEN = "HCL_V07_SAGA_DEV_V01_ONCE"
+RUN_ONCE_TOKEN = "HCL_V07_SAGA_DEV_V01_REPAIR_ONCE"
+PRIOR_ATTEMPT_RATED_COST_USD = 0.0024288
+AUTHORIZED_CUMULATIVE_CAP_USD = 0.50
 COMMON = (
     "Read the supplied story and identify the highlighted participant's most "
     "evidence-grounded goal. Distinguish a directly stated goal or intention "
@@ -63,15 +65,27 @@ def construct_state(story: str, story_id: str, backend: CappedBackend) -> tuple[
     """Question-blind, participant-blind and label-blind state construction."""
     runtime = HCLV07Runtime()
     repairs = 0
+    semantic_failures = []
     for event in narrative_events(story, story_id):
-        result = runtime.ingest_semantic_event(event, backend, max_tokens=EXTRACT_MAX_TOKENS)
-        repairs += result.repair_count
+        try:
+            result = runtime.ingest_semantic_event(event, backend, max_tokens=EXTRACT_MAX_TOKENS)
+            repairs += result.repair_count
+        except V07ExtractionError as exc:
+            # The two permitted extraction attempts failed. Keep the immutable
+            # source event, but never infer a goal from malformed model output.
+            repairs += 1
+            runtime.ingest_event(event)
+            semantic_failures.append({
+                "sentence_index": event.metadata["sentence_index"],
+                "error_type": type(exc).__name__, "error": str(exc)[:200],
+            })
     if len(runtime.perspectives.events) != 5:
         raise RuntimeError("semantic construction lost a source sentence")
     return runtime, {
         "source_events": 5,
         "semantic_evidence_count": len(runtime._evidence),
         "repair_count": repairs,
+        "semantic_failures": semantic_failures,
     }
 
 
@@ -159,8 +173,10 @@ def main() -> int:
         raise RuntimeError("provider execution requires a first-attempt GitHub Actions run")
     if os.getenv("HCL_V07_SAGA_DEV_RUN_ONCE_TOKEN") != RUN_ONCE_TOKEN:
         raise RuntimeError("missing one-shot token")
-    if float(os.getenv("HCL_V07_SAGA_DEV_COST_AUTHORIZED_USD", "0")) < CAP_USD:
-        raise RuntimeError("v0.7 development cost cap not authorized")
+    if PRIOR_ATTEMPT_RATED_COST_USD + CAP_USD > AUTHORIZED_CUMULATIVE_CAP_USD:
+        raise RuntimeError("repair and prior attempt exceed owner-authorized cumulative cap")
+    if float(os.getenv("HCL_V07_SAGA_DEV_REPAIR_COST_AUTHORIZED_USD", "0")) < CAP_USD:
+        raise RuntimeError("v0.7 development repair cost cap not authorized")
     key = os.getenv("DEEPSEEK_API_KEY")
     if not key:
         raise RuntimeError("existing provider credential unavailable")
@@ -186,6 +202,10 @@ def main() -> int:
     result = {
         "format": "hcl-v07-saga-development-result-v01",
         "freshness": "development only; exposed stories cannot become a fresh v0.7 set",
+        "attempt": "transport/semantic fail-closed repair 2; prior partial run 36164041203",
+        "prior_attempt_rated_cost_usd": PRIOR_ATTEMPT_RATED_COST_USD,
+        "repair_cap_usd": CAP_USD,
+        "authorized_cumulative_cap_usd": AUTHORIZED_CUMULATIVE_CAP_USD,
         "selection_sha256": sha(MANIFEST.read_bytes()),
         "selected_count": len(selected), "started_instance_ids": started,
         "completed_count": len(completed),

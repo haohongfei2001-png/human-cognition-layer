@@ -34,6 +34,22 @@ class FakeAnswerBackend:
         return self.output
 
 
+class PersistentlyInvalidSemanticBackend:
+    def __init__(self):
+        self.calls = 0
+
+    def complete_json(self, messages, *, max_tokens, temperature=0.0):
+        self.calls += 1
+        source = json.loads(messages[1]["content"])
+        if source["raw_text"] == "Mira wanted to finish the mural.":
+            return json.dumps({"intention_evidence": [{
+                "subject_agent_id": "Mira", "goal_key": "", "signal": "EXPLICIT_GOAL",
+                "provenance": "NARRATOR_ASSERTION", "evidence_text": "",
+                "supersedes_goal_key": None,
+            }]})
+        return '{"intention_evidence": []}'
+
+
 class V07SAGADevelopmentTests(unittest.TestCase):
     def test_state_is_built_from_narrative_without_task_or_labels(self):
         story = "\n".join([
@@ -65,6 +81,21 @@ class V07SAGADevelopmentTests(unittest.TestCase):
         self.assertEqual(parse_answer(raw, story)["evidence_class"], "EXPLICIT")
         with self.assertRaisesRegex(ValueError, "exact source quote"):
             parse_answer(raw.replace(story, "Mira wanted to sell it."), story)
+
+    def test_persistent_invalid_semantics_keep_source_and_drop_claim(self):
+        story = "\n".join([
+            "Mira wanted to finish the mural.", "Mira bought paint.",
+            "Rain began outside.", "Mira covered the canvas.",
+            "She returned the next day.",
+        ])
+        backend = PersistentlyInvalidSemanticBackend()
+        runtime, audit = construct_state(story, "synthetic", backend)
+        self.assertEqual(backend.calls, 6)
+        self.assertEqual(audit["source_events"], 5)
+        self.assertEqual(audit["semantic_evidence_count"], 0)
+        self.assertEqual(audit["repair_count"], 1)
+        self.assertEqual(audit["semantic_failures"][0]["sentence_index"], 0)
+        self.assertEqual(runtime.goal_estimates("Mira"), ())
 
     def test_invalid_answer_is_preserved_for_audit_without_stopping_other_arms(self):
         row = {f"story_line{i}": text for i, text in enumerate([
