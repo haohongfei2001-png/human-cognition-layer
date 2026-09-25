@@ -15,6 +15,7 @@ from scripts.qualify_longmemeval_knowledge_update_v01 import (
     history_digest,
     state_input_view,
 )
+from scripts.preflight_v05_longmemeval_cdg_v01 import validate_manifest
 
 
 def sample_row():
@@ -44,6 +45,11 @@ class FakeBackend:
 
 
 class CDGProviderFreeTests(unittest.TestCase):
+    def test_sealed_manifest_hashes_are_complete_and_disjoint(self):
+        _, selected = validate_manifest()
+        self.assertEqual(len(selected), 32)
+        self.assertEqual(sum(x["question_id"].endswith("_abs") for x in selected), 2)
+
     def test_oracle_release_requires_both_ingests_and_scrubs_labels(self):
         row = sample_row()
         view = state_input_view(row)
