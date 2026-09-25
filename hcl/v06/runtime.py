@@ -77,6 +77,7 @@ class HCLV06Runtime:
         self._events_by_id: dict[str, EventRecord] = {}
         self._semantic: dict[str, V06ExtractionResult] = {}
         self._semantic_failures: dict[str, str] = {}
+        self._prestructured_event_ids: set[str] = set()
 
     @property
     def events(self) -> tuple[EventRecord, ...]:
@@ -122,6 +123,29 @@ class HCLV06Runtime:
         self._events_by_id[event.event_id] = event
         return False
 
+    def ingest_prestructured_event(self, event: EventRecord) -> bool:
+        """Commit trusted/validated access metadata without belief extraction.
+
+        This is used when an upstream adapter has already converted a transcript
+        into immutable EventRecord evidence. It adds real perspective state
+        without forcing one model call per utterance. The same event may later
+        be semantically enriched through ingest_event.
+        """
+
+        duplicate = self._append_raw_event(event)
+        if duplicate:
+            if event.event_id in self._semantic:
+                return True
+            if event.event_id in self._semantic_failures:
+                raise ValueError(
+                    f"event_id {event.event_id!r} has failed semantics; "
+                    "reprocess before treating it as clean prestructured evidence"
+                )
+            self._prestructured_event_ids.add(event.event_id)
+            return True
+        self._prestructured_event_ids.add(event.event_id)
+        return False
+
     def _extract(
         self,
         event: EventRecord,
@@ -138,6 +162,7 @@ class HCLV06Runtime:
             raise
         self._semantic[event.event_id] = result
         self._semantic_failures.pop(event.event_id, None)
+        self._prestructured_event_ids.discard(event.event_id)
         return V06IngestResult(
             event_id=event.event_id,
             belief_evidence=result.belief_evidence,
@@ -167,6 +192,8 @@ class HCLV06Runtime:
                     f"event_id {event.event_id!r} is preserved but v0.6 semantics "
                     "failed; use reprocess_event"
                 )
+            if event.event_id in self._prestructured_event_ids:
+                return self._extract(event, backend)
             raise ValueError(
                 f"event_id {event.event_id!r} exists without v0.6 semantics"
             )
@@ -378,6 +405,69 @@ class HCLV06Runtime:
             target_information_view=information_view,
             belief_estimates=beliefs,
         )
+
+    def global_perspective_context(
+        self,
+        *,
+        event_time: str | None = None,
+        knowledge_cutoff: str | None = None,
+    ) -> dict:
+        """Question-independent perspective state for a whole interaction.
+
+        The context is constructed before a downstream question is released.
+        It exposes each character's own bounded evidence separately and a
+        pairwise access matrix containing only event IDs for bounded second-order
+        reasoning. It does not collapse all private evidence into one world view.
+        """
+
+        agents = self.known_agents
+        first_order = {
+            agent: self.perspective_view(
+                agent,
+                event_time=event_time,
+                knowledge_cutoff=knowledge_cutoff,
+            ).as_dict()
+            for agent in agents
+        }
+        second_order = {
+            viewer: {
+                target: list(
+                    self.second_order_view(
+                        viewer,
+                        target,
+                        event_time=event_time,
+                        knowledge_cutoff=knowledge_cutoff,
+                    ).event_ids
+                )
+                for target in agents
+                if target != viewer
+            }
+            for viewer in agents
+        }
+        system_beliefs = {
+            agent: [
+                estimate.as_dict()
+                for estimate in self.subject_beliefs(
+                    agent,
+                    viewer_agent_id=SYSTEM_VIEWER,
+                    event_time=event_time,
+                    knowledge_cutoff=knowledge_cutoff,
+                )
+            ]
+            for agent in agents
+        }
+        return {
+            "agents": list(agents),
+            "first_order_views": first_order,
+            "second_order_access_event_ids": second_order,
+            "system_belief_estimates": system_beliefs,
+            "semantic_rules": {
+                "views_are_not_interchangeable": True,
+                "information_exposure_is_not_belief_acceptance": True,
+                "system_uncertainty_is_not_character_uncertainty": True,
+                "reader_narrator_information_does_not_leak_to_characters": True,
+            },
+        }
 
     def answer_messages(
         self,
