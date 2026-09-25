@@ -1,0 +1,42 @@
+name: HCL v0.6 Minimal Perspective Belief Runtime
+
+on:
+  pull_request:
+    paths:
+      - "hcl/v06/**"
+      - "tests/test_v06_perspective_belief_runtime.py"
+      - ".github/workflows/hcl-v06-perspective-belief-runtime.yml"
+      - "docs/HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_V01.md"
+  push:
+    branches:
+      - main
+    paths:
+      - "hcl/v06/**"
+      - "tests/test_v06_perspective_belief_runtime.py"
+      - ".github/workflows/hcl-v06-perspective-belief-runtime.yml"
+      - "docs/HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_V01.md"
+
+permissions:
+  contents: read
+
+jobs:
+  provider-free:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile v0.6 runtime
+        run: python -m compileall -q hcl/v06
+
+      - name: Run v0.6 capability correctness tests
+        run: python -m unittest -v tests.test_v06_perspective_belief_runtime
+
+      - name: Preserve v0.5 stance regression
+        run: |
+          python -m unittest -v tests.test_v05_current_stance
+          python -m unittest -v tests.test_v05_semantic_runtime
