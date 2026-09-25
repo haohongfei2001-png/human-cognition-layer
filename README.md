@@ -56,10 +56,11 @@ v0.6 的第一个候选能力不是继续扩充 memory，而是验证：
 
 当前先做 **Capability Qualification**，而不是直接建设新的心理状态机：
 
-1. CQ-00：零 provider 审计 FANToM / DynToM 的 fresh/exposure、数据与证据边界，并冻结小型 development qualification selection；
-2. CQ-01：只有另行批准 provider / model / cost 后，比较强模型 direct control 与薄 perspective scaffold；
-3. 只有 CQ-01 仍发现重复、可审计的 perspective / belief residual errors，才允许实现最小 v0.6 mechanism；
-4. 后续正式 efficacy 必须同时面对 C / P / competent G / D，而不是只战胜裸模型。
+1. CQ-00 已完成：零 provider CI 成功；FANToM 通过资格审查并冻结 8 个历史完全不重叠的 development conversation；
+2. DynToM 在 4 个预冻结 narrative-sufficiency audit trial 中有 3 个出现公开叙事不足以唯一支持 gold belief 的问题，因此暂不作为当前 evidence-constrained primary source；
+3. CQ-01：只有另行批准 provider / model / reasoning budget / cost 后，先在 FANToM development set 比较强模型 direct control 与薄 perspective scaffold；
+4. 只有 CQ-01 仍发现重复、可审计的 perspective / belief residual errors，才允许实现最小 v0.6 mechanism；
+5. 后续正式 efficacy 必须同时面对 C / P / competent G / D，而不是只战胜裸模型。
 
 完整合同：
 
@@ -69,7 +70,7 @@ v0.6 的第一个候选能力不是继续扩充 memory，而是验证：
 
 当前 gate：
 
-**HCL_V06_PERSPECTIVE_BELIEF_CQ00_ZERO_PROVIDER_QUALIFICATION_NEXT**
+**HCL_V06_PERSPECTIVE_BELIEF_CQ01_FANTOM_PROVIDER_MODEL_COST_AUTHORIZATION**
 
 ## Intellectual-property boundary
 
