@@ -83,11 +83,18 @@ class LongMemEvalQualificationTests(unittest.TestCase):
         self.assertEqual(a, b)
         self.assertNotEqual(a, c)
 
-    def test_non_monotonic_sessions_fail_closed(self):
+    def test_non_monotonic_file_order_is_sorted_by_explicit_timestamp(self):
         row = self.synthetic_row()
         row["haystack_dates"] = list(reversed(row["haystack_dates"]))
-        with self.assertRaises(ValueError):
-            state_input_view(row)
+        row["haystack_session_ids"] = list(reversed(row["haystack_session_ids"]))
+        row["haystack_sessions"] = list(reversed(row["haystack_sessions"]))
+        view = state_input_view(row)
+        self.assertEqual(
+            [x["session_id"] for x in view["history"]],
+            ["s-old", "s-new"],
+        )
+        events = events_from_state_view(view, id_prefix="fixture")
+        self.assertLess(events[0]["valid_time"], events[2]["valid_time"])
 
 
 if __name__ == "__main__":
