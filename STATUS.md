@@ -4948,4 +4948,35 @@ LongMemEval status:
 - sealed 32 efficacy rows remain provider-unconsumed;
 - paid execution is deprioritized and is not a prerequisite for v0.6.
 
-**Current gate: HCL_V06_PERSPECTIVE_BELIEF_CQ01_FANTOM_PROVIDER_MODEL_COST_AUTHORIZATION**
+**Current gate: HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_PROVIDER_FREE_CERTIFICATION**
+
+
+## HCL v0.6 minimal perspective/belief runtime implementation
+
+Owner authorization changed the sequence: CQ-01 remains a later external validation step and is no longer a prerequisite for benchmark-independent v0.6 capability implementation.
+
+Candidate capability:
+- deterministic first-order character information perspective;
+- bounded second-order perspective: what A has evidence that B could access;
+- belief evidence preserving SELF_REPORT / NARRATOR_ASSERTION / THIRD_PARTY_REPORT / OBSERVED_ACTION provenance;
+- explicit separation of CHARACTER_UNCERTAIN from SYSTEM_INSUFFICIENT;
+- challenge exposure does not erase/suspend a prior belief;
+- explicit direct revision can supersede an old proposition;
+- perspective-bounded answer context for a downstream base model.
+
+Implementation:
+- `hcl/v06/perspective.py`
+- `hcl/v06/belief.py`
+- `hcl/v06/semantic.py`
+- `hcl/v06/runtime.py`
+- `tests/test_v06_perspective_belief_runtime.py`
+- `docs/HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_V01.md`
+
+Claim boundary:
+- this is real capability implementation, not yet external efficacy evidence;
+- v0.5 remains frozen and is not rewritten;
+- no personality/emotion/motivation/relationship/moral/philosophical ontology is added;
+- no provider-backed benchmark call is authorized by this implementation milestone;
+- LongMemEval remains frozen and unconsumed.
+
+**Current gate: HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_PROVIDER_FREE_CERTIFICATION**
