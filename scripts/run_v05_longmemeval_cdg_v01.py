@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Staged one-shot LongMemEval C/D/G answers; scoring is a separate process.
 
-Provider execution is deliberately unavailable outside GitHub Actions and an
-exact one-shot nonce. No workflow currently supplies that nonce.
+Provider execution is deliberately unavailable outside first-attempt GitHub
+Actions and an exact one-shot nonce. Only the separately gated trigger workflow
+supplies that nonce.
 """
 
 from __future__ import annotations
@@ -21,6 +22,7 @@ if str(ROOT) not in sys.path:
 
 from hcl.v05.runtime import HCLV05Runtime
 from scripts.longmemeval_cdg_v01 import (
+    CappedBackend,
     GenericMemory,
     IngestionReceipt,
     ProtocolError,
@@ -48,6 +50,13 @@ MODEL = "deepseek-flash"
 BASE_URL = "https://api.deepseek.com"
 COMMON_PACKET_CHAR_LIMIT = 30000
 STATE_CHAR_LIMIT = 16000
+ARM_CAPS = {
+    "C": {"max_calls": 32, "max_input_chars": 2_000_000, "max_output_chars": 100_000},
+    "D": {"max_calls": 20_000, "max_input_chars": 100_000_000,
+          "max_output_chars": 10_000_000},
+    "G": {"max_calls": 20_000, "max_input_chars": 350_000_000,
+          "max_output_chars": 20_000_000},
+}
 
 
 def _write_json(path: Path, value: Any) -> None:
@@ -123,7 +132,8 @@ def run_one(row: dict, expected_history_sha: str, backends: dict[str, Any],
             "d_state": d_state, "g_state": g_state}
 
 
-def execute(dataset: Path, out: Path, selected: list[dict]) -> None:
+def execute(dataset: Path, out: Path, selected: list[dict], *,
+            shard_index: int = 0, shard_count: int = 1) -> None:
     if os.getenv("GITHUB_ACTIONS") != "true" or os.getenv("GITHUB_RUN_ATTEMPT") != "1":
         raise ProtocolError("provider execution requires first-attempt GitHub Actions")
     if os.getenv("HCL_LONGMEMEVAL_CDG_V01_RUN_ONCE_TOKEN") != RUN_ONCE_TOKEN:
@@ -135,12 +145,18 @@ def execute(dataset: Path, out: Path, selected: list[dict]) -> None:
     preflight_dataset(dataset, selected)
     data = json.loads(dataset.read_text(encoding="utf-8"))
     lookup = {x["question_id"]: x for x in data}
-    backends = {arm: make_real_backend(key, BASE_URL, MODEL, provider_profile="deepseek_flash")
+    shard_caps = {arm: {key: value // shard_count for key, value in caps.items()}
+                  for arm, caps in ARM_CAPS.items()}
+    backends = {arm: CappedBackend(
+        make_real_backend(key, BASE_URL, MODEL, provider_profile="deepseek_flash"),
+        **shard_caps[arm])
                 for arm in ("C", "D", "G")}
     result = {"format": "hcl-v05-longmemeval-cdg-answers-v01",
               "status": "in_progress", "run_head": os.environ.get("GITHUB_SHA"),
               "dataset_sha256": EXPECTED_DATASET_SHA256,
-              "selected_count": len(selected), "rows": [], "attempted_ids": [], "backend": {}}
+              "arm_caps": shard_caps,
+              "selected_count": len(selected), "shard_index": shard_index,
+              "shard_count": shard_count, "rows": [], "attempted_ids": [], "backend": {}}
     _write_json(out, result)
     try:
         for item in selected:
@@ -172,10 +188,14 @@ def main() -> None:
     parser.add_argument("--out", type=Path, default=Path("artifacts/longmemeval-cdg-v01/raw-answers.json"))
     parser.add_argument("--validate-only", action="store_true")
     parser.add_argument("--execute", action="store_true")
+    parser.add_argument("--shard-index", type=int, default=0)
+    parser.add_argument("--shard-count", type=int, default=1)
     args = parser.parse_args()
     if args.validate_only == args.execute:
         parser.error("choose exactly one of --validate-only or --execute")
     _, selected = validate_manifest()
+    if args.shard_count not in {1, 8} or not 0 <= args.shard_index < args.shard_count:
+        parser.error("supported shard topology is 1 or 8 with a valid index")
     if args.validate_only:
         if args.dataset:
             result = preflight_dataset(args.dataset, selected)
@@ -185,7 +205,8 @@ def main() -> None:
         return
     if args.dataset is None:
         parser.error("--execute requires --dataset")
-    execute(args.dataset, args.out, selected)
+    execute(args.dataset, args.out, selected[args.shard_index::args.shard_count],
+            shard_index=args.shard_index, shard_count=args.shard_count)
 
 
 if __name__ == "__main__":

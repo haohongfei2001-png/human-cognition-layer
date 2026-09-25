@@ -41,6 +41,40 @@ class ProtocolError(ValueError):
     pass
 
 
+class CappedBackend:
+    """Stop a one-shot run before a new call would cross a character/call cap."""
+
+    def __init__(self, backend: Any, *, max_calls: int, max_input_chars: int,
+                 max_output_chars: int):
+        self.backend = backend
+        self.max_calls = max_calls
+        self.max_input_chars = max_input_chars
+        self.max_output_chars = max_output_chars
+
+    def _call(self, method: str, messages: list[dict[str, str]], **kwargs: Any) -> str:
+        before = self.backend.metrics()
+        added = sum(len(str(x.get("content", ""))) for x in messages)
+        if before["calls"] >= self.max_calls:
+            raise ProtocolError("arm provider call cap reached")
+        if before["input_chars"] + added > self.max_input_chars:
+            raise ProtocolError("arm input character cap reached")
+        if before["output_chars"] >= self.max_output_chars:
+            raise ProtocolError("arm output character cap reached")
+        result = getattr(self.backend, method)(messages, **kwargs)
+        if self.backend.metrics()["output_chars"] > self.max_output_chars:
+            raise ProtocolError("arm output character cap exceeded by last response")
+        return result
+
+    def complete(self, messages: list[dict[str, str]], **kwargs: Any) -> str:
+        return self._call("complete", messages, **kwargs)
+
+    def complete_json(self, messages: list[dict[str, str]], **kwargs: Any) -> str:
+        return self._call("complete_json", messages, **kwargs)
+
+    def metrics(self) -> dict[str, Any]:
+        return self.backend.metrics()
+
+
 def canonical_json(value: Any) -> str:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
