@@ -5171,3 +5171,21 @@ identifies SAGA as a conditional development candidate and Moral Stories as a
 secondary explicit-goal check; neither has been provider-consumed for v0.7.
 
 **Current gate: V06_FRESH_PROVIDER_FREE_CERTIFICATION_THEN_OWNER_BUDGET_AUTHORIZATION; V07_A_PROVIDER_FREE_CERTIFICATION**
+
+## Fresh pilot package exact-main certification and v0.7 source anchoring
+
+PR #64 merged as main `b5fe9d12806596164872ab1b78e4d2e8ac01e694`.
+The fresh C/P/G/D provider-free preflight, existing C/P/D provider-free gate,
+v0.6 minimal perspective gate, and v0.7 intention runtime gate all completed
+**SUCCESS** on that exact main commit (runs `36142888901`, `36142889179`,
+`36142888822`, `36142888742`). The 32-conversation selection remains sealed;
+no fresh provider call occurred.
+
+A follow-up v0.7 correctness hardening now requires intention evidence text to
+be an exact source excerpt and adds a question-blind event-local semantic
+adapter with one bounded repair and idempotent ingestion. Independent
+provider-free tests cover fabricated quote rejection, provenance, revision,
+action/intention separation and state preservation on invalid extraction.
+This follow-up requires its own exact-main certification before promotion.
+
+**Current gate: V06_FRESH_OWNER_BUDGET_AUTHORIZATION; V07_SOURCE_ANCHORING_PROVIDER_FREE_CERTIFICATION**

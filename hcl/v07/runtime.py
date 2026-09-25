@@ -125,9 +125,32 @@ class HCLV07Runtime:
     def __init__(self) -> None:
         self.perspectives = HCLV06Runtime()
         self._evidence: dict[str, IntentionEvidenceEvent] = {}
+        self._semantic_results: dict[str, "V07ExtractionResult"] = {}
 
     def ingest_event(self, event: EventRecord) -> bool:
         return self.perspectives.ingest_prestructured_event(event)
+
+    def ingest_semantic_event(self, event: EventRecord, backend) -> "V07ExtractionResult":
+        """Extract one source event without task access, then commit atomically."""
+        from .semantic import V07ExtractionResult, extract_intention_evidence
+
+        existing = next((item for item in self.perspectives.events if item.event_id == event.event_id), None)
+        if existing is not None and existing != event:
+            raise ValueError("event ID collision with different source content")
+        if event.event_id in self._semantic_results:
+            return self._semantic_results[event.event_id]
+        known_goals = tuple(sorted({item.goal_key for item in self._evidence.values()}))
+        result = extract_intention_evidence(event, backend, known_goals=known_goals)
+        self.ingest_event(event)
+        before = dict(self._evidence)
+        try:
+            for item in result.evidence:
+                self.ingest_intention_evidence(item)
+        except Exception:
+            self._evidence = before
+            raise
+        self._semantic_results[event.event_id] = result
+        return result
 
     def ingest_intention_evidence(self, evidence: IntentionEvidenceEvent) -> bool:
         source = {event.event_id: event for event in self.perspectives.events}.get(evidence.source_event_id)
@@ -135,6 +158,8 @@ class HCLV07Runtime:
             raise ValueError("intention evidence must cite an ingested source event")
         if evidence.valid_time != source.valid_time or evidence.system_record_time != source.recorded_at:
             raise ValueError("intention evidence chronology must match its source event")
+        if evidence.evidence_text.strip() not in source.raw_text:
+            raise ValueError("intention evidence text must be an exact source excerpt")
         if evidence.provenance == BeliefEvidenceKind.SELF_REPORT and source.actor_id != evidence.subject_agent_id:
             raise ValueError("self-report source actor must be the subject")
         if evidence.provenance == BeliefEvidenceKind.THIRD_PARTY_REPORT and (

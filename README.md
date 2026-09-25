@@ -96,6 +96,7 @@ provider-free package，**没有调用 provider，也没有 fresh 成绩**。
 下一块真实 cognition capability 已开始：v0.7 Evidence-Constrained Intention
 & Motivation。最小 runtime 区分明确意图、目标、行动、推测动机及他人归因，
 并支持证据约束的修订、完成、放弃和未决状态。当前是 provider-free candidate；
+事件级语义提取器只接受原始事件中的精确证据片段，并在无效输出时 fail closed；
 见 [runtime contract](docs/HCL_V07_INTENTION_MOTIVATION_MINIMAL_RUNTIME_V01.md)
 与 [external benchmark audit](docs/HCL_V07_EXTERNAL_BENCHMARK_AUDIT_V01.md)。
 
