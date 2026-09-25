@@ -5227,3 +5227,35 @@ fresh comparative evidence remain unrun. No v0.6 RETAIN/SIMPLIFY/REVISE
 decision can be made before the fresh C/P/G/D result.
 
 **Current gate: OWNER_AUTHORIZATION_FOR_V06_FRESH_CPGD_USD_3_50; V07_EXTERNAL_UTILITY_PROVIDER_GATE**
+
+## HCL v0.6 fresh C/P/G/D result and final development closure
+
+The owner authorized the separately capped USD 3.50 pilot. The repository
+authorization variable was set before, then reset to zero after, the one-shot
+trigger. PR #68 merged as main `135dd2cf5efa6300bb90f1fddcf7957c9cbf19d7`.
+Exact-main run `36151145297` completed **SUCCESS**, first attempt, with all
+32 frozen, historically disjoint conversations. Artifact ID `10871607773`,
+ZIP SHA-256 `0bcbf93ea035ed6c7ced4e6708edc07a3fe25795517148303cdd7a9b42792d17`.
+No provider failure, empty answer, invalid prediction, adapter repair or model
+identity drift occurred.
+
+Fresh pilot C/P/G/D correct: **11/32, 19/32, 22/32, 30/32**. Paired D-only /
+control-only: **19/0 vs C, 12/1 vs P, 8/0 vs G**. D's G-only wins span all
+four frozen strata. Calls **160**, measured provider-rated peak-cost ledger
+**USD 0.42461608** under the authorized USD 3.50 cap; total input/output
+characters **3,852,011 / 85,770**. D used substantially more answer-context
+input than G or P. These are one-model, 32-case fresh-pilot results, not broad
+human-cognition or cross-model proof. All 32 are now consumed; no tuning or
+fresh rerun is allowed.
+
+Final decision: **RETAIN** the frozen v0.6.1 perspective/belief component as a
+reusable capability, with its context-cost tradeoff documented. HCL v0.6 is
+closed; leave FANToM. Full evidence and interpretation:
+`reports/HCL_V06_PERSPECTIVE_BELIEF_FINAL_DEVELOPMENT_CLOSURE.md`.
+LongMemEval remains sealed and provider-unconsumed.
+
+v0.7 Evidence-Constrained Intention & Motivation continues from its certified
+provider-free runtime and source audit. Its external utility is not yet
+provider-consumed and requires a separately frozen protocol and authorization.
+
+**Current gate: V07_SMALL_EXTERNAL_UTILITY_PROTOCOL_AND_PROVIDER_AUTHORIZATION**
