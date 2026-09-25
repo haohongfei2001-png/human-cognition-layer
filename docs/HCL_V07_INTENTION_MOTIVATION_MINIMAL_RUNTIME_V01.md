@@ -1,6 +1,6 @@
 # HCL v0.7 Evidence-Constrained Intention & Motivation — Minimal Runtime
 
-Status: **V07-A PROVIDER-FREE CERTIFIED / V07-C DEVELOPMENT PACKAGE STAGED**
+Status: **V07-A PROVIDER-FREE CERTIFIED / V07-C DEVELOPMENT SHOWED NO D INCREMENT**
 
 The v0.7 runtime consumes immutable `EventRecord` evidence and typed,
 source-anchored `IntentionEvidenceEvent` records. It composes the v0.6
@@ -35,8 +35,10 @@ The event-local semantic adapter emits only source-excerpt-grounded evidence,
 keeps provenance, and gets at most one bounded structural repair. Invalid
 extraction leaves goal state unchanged. Duplicate event ingestion reuses the
 first committed extraction without a second provider call. This remains
-provider-free certified: no external narrative extraction quality or utility
-has yet been established. The runtime and adapter never read benchmark
+provider-free certified. The SAGA development repair run found semantic
+evidence in only 2/12 stories and no D increment over the thin P arm; see
+`reports/HCL_V07_SAGA_DEV_V01_REPAIR_CLOSURE.md`. External efficacy remains
+unestablished. The runtime and adapter never read benchmark
 question, answer or gold fields.
 
 Independent provider-free tests cover action/intention separation, direct
