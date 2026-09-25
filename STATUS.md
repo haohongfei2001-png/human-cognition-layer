@@ -5371,4 +5371,10 @@ USD 0.50 authorization applied to the completed development check. The fresh
 pilot has a separate USD 0.50 hard cap and requires owner authorization before
 any provider call. No fresh result or new efficacy claim exists.
 
-**Current gate: V07_FRESH_PROVIDER_FREE_CI_THEN_SEPARATE_OWNER_AUTHORIZATION_USD_0_50**
+PR #76 merged the provider-free package into main
+`42f95450061da8b1c54a7205b62fb66f55e4c3ed`. Exact-main SAGA preflight
+`36167509437`, v0.7 intention runtime `36167509514`, and v0.6 FANToM
+regression `36167509422` all passed. The fresh trigger and authorization
+variable are still absent; the validation slice has not been provider-consumed.
+
+**Current gate: SEPARATE_OWNER_AUTHORIZATION_FOR_V07_SAGA_FRESH_USD_0_50**

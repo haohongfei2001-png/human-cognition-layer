@@ -126,6 +126,7 @@ v0.7 的首个小型外部开发验证已冻结为 12 条 SAGA 公开叙事的 C
 独立的 16 条 SAGA 验证叙事 C/P/G/D 方案已作为无模型调用的准备工作冻结，
 包含完整通用叙事结构 G、与开发集全量故事 ID 不重合的来源校验、
 预先声明的配对分析和单独 USD 0.50 费用上限。
+main `42f95450061da8b1c54a7205b62fb66f55e4c3ed` 上的无模型调用检查已通过。
 目前尚无 fresh 模型调用或效能结果；执行需要另行授权。
 见 [fresh protocol](docs/HCL_V07_SAGA_FRESH_CPGD_V01.md)。
 
@@ -137,7 +138,7 @@ v0.6.1 已在 main `0bf56af7baf305ca3bebb9035c4a989794a50eb8` 完成 provider-fr
 
 当前 gate：
 
-**V07_FRESH_PROVIDER_FREE_CI_THEN_SEPARATE_OWNER_AUTHORIZATION_USD_0_50**
+**SEPARATE_OWNER_AUTHORIZATION_FOR_V07_SAGA_FRESH_USD_0_50**
 
 ## Intellectual-property boundary
 
