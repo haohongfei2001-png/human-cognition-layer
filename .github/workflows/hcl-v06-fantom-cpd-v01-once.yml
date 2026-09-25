@@ -1,0 +1,86 @@
+name: HCL v0.6 FANToM C/P/D v0.1 Once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/HCL_V06_FANTOM_CPD_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hcl-v06-fantom-cpd-v01-once
+  cancel-in-progress: false
+
+env:
+  TRIGGER_PATH: .github/HCL_V06_FANTOM_CPD_V01_TRIGGER
+  RUN_ONCE_TOKEN: HCL_V06_FANTOM_CPD_V01_RUN_ONCE_20260925_A1
+  HCL_V06_FANTOM_CPD_RUN_ONCE_TOKEN: HCL_V06_FANTOM_CPD_V01_RUN_ONCE_20260925_A1
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Enforce immutable exact-parent one-shot trigger
+        shell: bash
+        run: |
+          test "$GITHUB_RUN_ATTEMPT" = "1"
+          test "$(git show -s --format=%P HEAD)" = "${{ github.event.before }}"
+          test "$(cat "$TRIGGER_PATH")" = "${RUN_ONCE_TOKEN}|${{ github.event.before }}"
+          if git log --format=%H "${{ github.event.before }}" -- "$TRIGGER_PATH" | grep -q .; then
+            echo "Trigger existed before this run"
+            exit 1
+          fi
+          test "$(git diff --diff-filter=A --name-only '${{ github.event.before }}' "$GITHUB_SHA")" = "$TRIGGER_PATH"
+          test "$(git diff --name-only '${{ github.event.before }}' "$GITHUB_SHA")" = "$TRIGGER_PATH"
+
+      - name: Install frozen dependencies
+        run: python -m pip install "pandas>=2.2,<3" "openai==2.14.0"
+
+      - name: Run provider-free gates first
+        run: |
+          python -m compileall -q hcl/v06 scripts/prepare_v06_fantom_cpd_v01.py scripts/run_v06_fantom_cpd_v01.py
+          python -m unittest -v tests.test_v06_perspective_belief_runtime
+          python -m unittest -v tests.test_v06_conversation_adapter
+          python -m unittest -v tests.test_v06_fantom_cpd_v01
+
+      - name: Download and verify pinned FANToM
+        run: |
+          mkdir -p .cache artifacts/hcl-v06-fantom-cpd-v01
+          curl -L --fail --retry 4 --retry-delay 5             "https://storage.googleapis.com/ai2-mosaic-public/projects/fantom/fantom.tar.gz"             -o .cache/fantom.tar.gz
+          echo "1d08dfa0ea474c7f83b9bc7e3a7b466eab25194043489dd618b4c5223e1253a4  .cache/fantom.tar.gz" | sha256sum -c -
+
+      - name: Verify exact frozen selection and runner
+        run: |
+          python scripts/prepare_v06_fantom_cpd_v01.py             --fantom-archive .cache/fantom.tar.gz             --out .cache/selection.json
+          python - <<'PY'
+          import json
+          assert json.load(open(".cache/selection.json")) == json.load(open("eval/v06/fantom_cpd_selection_v01.json"))
+          PY
+          python scripts/run_v06_fantom_cpd_v01.py             --fantom-archive .cache/fantom.tar.gz --validate-only
+          test -n "$DEEPSEEK_API_KEY"
+
+      - name: Execute bounded C/P/D development utility check once
+        run: |
+          python scripts/run_v06_fantom_cpd_v01.py             --fantom-archive .cache/fantom.tar.gz             --execute             --out artifacts/hcl-v06-fantom-cpd-v01/results.json
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-v06-fantom-cpd-results-${{ github.run_id }}
+          path: artifacts/hcl-v06-fantom-cpd-v01/
+          if-no-files-found: warn
+          retention-days: 90
