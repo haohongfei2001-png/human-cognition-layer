@@ -5189,3 +5189,18 @@ action/intention separation and state preservation on invalid extraction.
 This follow-up requires its own exact-main certification before promotion.
 
 **Current gate: V06_FRESH_OWNER_BUDGET_AUTHORIZATION; V07_SOURCE_ANCHORING_PROVIDER_FREE_CERTIFICATION**
+
+## v0.7 source-anchoring exact-main closure and fresh-run budget guard
+
+PR #65 merged as main `e034ec68f903b45139f28676a792f63c05b43b78`.
+Exact-main provider-free runs `36143647599` (v0.7 intention runtime) and
+`36143647651` (fresh C/P/G/D preflight) both completed **SUCCESS**. The
+question-blind source-excerpt rule and semantic extractor are therefore
+provider-free certified. No v0.7 external utility or fresh v0.6 score exists.
+
+Before seeking owner approval for the fresh pilot, the runner's cost guard is
+being hardened from a character-only estimate to a shared pre-request budget
+reservation and provider-token ledger at the published peak rates. The USD 3.50
+cap and 32 sealed conversations do not change; no paid call is triggered.
+
+**Current gate: V06_FRESH_RATED_COST_GUARD_PROVIDER_FREE_CERTIFICATION_THEN_OWNER_AUTHORIZATION; V07_EXTERNAL_UTILITY_NOT_RUN**
