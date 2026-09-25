@@ -46,7 +46,7 @@ HCL 首先要求认知表示和更新本身在事实、信息边界、时间关�
 
 当前 canonical 阶段：
 
-**HCL v0.6 fresh comparison staged; v0.7 intention runtime in provider-free development**
+**HCL v0.6 frozen with RETAIN; v0.7 intention runtime in provider-free development**
 
 v0.5 保持冻结，作为显式 stance / revision / provenance / persistent-state 基础。v0.6 已经真正增加了一层人物信息视角与 belief evidence runtime，而不是继续只做 memory infrastructure。
 
@@ -82,16 +82,21 @@ v0.6.1 因此新增确定性的 participant-presence evidence floor，并把“�
 - [reports/HCL_V06_FANTOM_CPD_V01_REPAIR_CLOSURE.md](reports/HCL_V06_FANTOM_CPD_V01_REPAIR_CLOSURE.md)
 - [docs/HCL_V06_PERSPECTIVE_BOUNDARY_REPAIR_V061.md](docs/HCL_V06_PERSPECTIVE_BOUNDARY_REPAIR_V061.md)
 
-当前不会重跑这 8 个已消费 development conversation 来制造“修复后分数”。v0.6.1 先通过独立 provider-free correctness；之后新的外部 efficacy 必须使用新的 disjoint fresh selection，并加入 competent generic structured-state G。
+这 8 个已消费 development conversation 没有为了“修复后分数”重跑。v0.6.1 通过独立 provider-free correctness；之后使用全新 disjoint selection，并加入 competent generic structured-state G，完成了 fresh pilot。
 
 LongMemEval 32-row package 继续冻结、未消费，不阻塞当前 human-cognition capability 路线。
 
-新的 FANToM C/P/G/D fresh pilot 已冻结 32 条互不重叠的完整 conversation，
+新的 FANToM C/P/G/D fresh pilot 在 32 条互不重叠的完整 conversation 上完成，
 排除历史 80 条及上述 8 条 development 数据。G 保留完整事件、来源、时间、
-普通听闻关系与不确定性，作为有竞争力的通用结构基线。当前只完成
-provider-free package，**没有调用 provider，也没有 fresh 成绩**。
-见 [pilot protocol](docs/HCL_V06_FANTOM_CPGD_FRESH_V01.md) 与
-[case audit](reports/HCL_V06_FANTOM_CPD_V01_CASE_AUDIT.md)。
+普通听闻关系与不确定性，作为有竞争力的通用结构基线。一次性主线运行
+`36151145297` 全部完成：C **11/32**、P **19/32**、G **22/32**、
+D **30/32**；D 相对 G 的独占修正/退化为 **8/0**，相对 P 为 **12/1**。
+因此 v0.6 最终决定 **RETAIN** 冻结的 v0.6.1 perspective/belief component，
+并记录 D 更高的输入上下文成本。该结果是单模型、单 benchmark 的 fresh pilot，
+不证明广义 human cognition；32 条现已消费，不再用于调参或重做 fresh 成绩。
+见 [final closure](reports/HCL_V06_PERSPECTIVE_BELIEF_FINAL_DEVELOPMENT_CLOSURE.md)、
+[pilot protocol](docs/HCL_V06_FANTOM_CPGD_FRESH_V01.md) 与
+[development case audit](reports/HCL_V06_FANTOM_CPD_V01_CASE_AUDIT.md)。
 
 下一块真实 cognition capability 已开始：v0.7 Evidence-Constrained Intention
 & Motivation。最小 runtime 区分明确意图、目标、行动、推测动机及他人归因，
@@ -108,7 +113,7 @@ v0.6.1 已在 main `0bf56af7baf305ca3bebb9035c4a989794a50eb8` 完成 provider-fr
 
 当前 gate：
 
-**HCL_V06_V061_PERSPECTIVE_RUNTIME_FROZEN_NEXT_CAPABILITY_OR_FRESH_EFFICACY**
+**HCL_V07_SMALL_EXTERNAL_UTILITY_PROTOCOL_AND_PROVIDER_AUTHORIZATION**
 
 ## Intellectual-property boundary
 

@@ -1,6 +1,14 @@
 # HCL v0.6 Fresh FANToM C/P/G/D Pilot v0.1
 
-Status: **SELECTION AND PROVIDER-FREE PACKAGE FROZEN / PROVIDER NOT RUN**
+Status: **FRESH PILOT CONSUMED / SUCCESS / V0.6 RETAIN DECISION FROZEN**
+
+The once-only run `36151145297` completed all 32 cases on main
+`135dd2cf5efa6300bb90f1fddcf7957c9cbf19d7`. C/P/G/D scored
+11/19/22/30 respectively. The paired D-only/control-only counts were
+19/0 versus C, 12/1 versus P and 8/0 versus G. See
+`reports/HCL_V06_PERSPECTIVE_BELIEF_FINAL_DEVELOPMENT_CLOSURE.md` for the
+artifact digest, operational metrics, limits and final RETAIN decision.
+The 32 conversations are now consumed and must not be rerun as fresh evidence.
 
 ## Research question
 
@@ -74,18 +82,15 @@ Missing usage or transport uncertainty charges the full reservation and
 stops the consumed run. This is a provider-rated cost guard, not an invoice
 guarantee if the provider changes prices or bills outside documented usage.
 
-Existing owner authorization in the prior v0.6 C/P/D protocol covered a
-different, eight-conversation development run up to USD 1.00. It does **not**
-authorize this larger fresh pilot. The one-shot workflow is staged but cannot
-make a provider call until the owner approves at least the USD 3.50 planning
-cap and the matching repository authorization variable is set. No new account
-or credential may be purchased; LongMemEval remains untouched.
+The owner separately authorized this fresh pilot up to the USD 3.50 rated-cost
+guard. The repository authorization variable was set before the one-shot
+trigger and reset to zero after the successful run. No new account or
+credential was used; LongMemEval remains untouched.
 
 ## Execution and interpretation
 
-The future paid run requires an exact-parent, first-attempt, trigger-file-only
-main commit and passes provider-free regressions before any request. A partial
-run remains consumed evidence and is not relaunched as fresh. Result artifacts
+The paid run used an exact-parent, first-attempt, trigger-file-only
+main commit and passed provider-free regressions before any request. Result artifacts
 record the selected IDs/hashes, answer strings/predictions/correctness, access
 maps, state hashes, repairs, request counts, input/output characters and wall
 time. Raw benchmark conversations/questions/gold are not committed.
