@@ -1,0 +1,90 @@
+name: HCL v0.6 FANToM C/P/D Provider-Free
+
+on:
+  pull_request:
+    paths:
+      - "hcl/v06/**"
+      - "scripts/prepare_v06_fantom_cpd_v01.py"
+      - "scripts/run_v06_fantom_cpd_v01.py"
+      - "tests/test_v06_conversation_adapter.py"
+      - "tests/test_v06_fantom_cpd_v01.py"
+      - "eval/v06/perspective_belief_cq00_v01.json"
+      - "eval/v06/fantom_cpd_selection_v01.json"
+      - "docs/HCL_V06_FANTOM_CPD_UTILITY_V01.md"
+      - ".github/workflows/hcl-v06-fantom-cpd-preflight.yml"
+      - ".github/workflows/hcl-v06-fantom-cpd-v01-once.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "hcl/v06/**"
+      - "scripts/prepare_v06_fantom_cpd_v01.py"
+      - "scripts/run_v06_fantom_cpd_v01.py"
+      - "tests/test_v06_conversation_adapter.py"
+      - "tests/test_v06_fantom_cpd_v01.py"
+      - "eval/v06/fantom_cpd_selection_v01.json"
+      - "docs/HCL_V06_FANTOM_CPD_UTILITY_V01.md"
+      - ".github/workflows/hcl-v06-fantom-cpd-preflight.yml"
+      - ".github/workflows/hcl-v06-fantom-cpd-v01-once.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install provider-free dependencies
+        run: python -m pip install "pandas>=2.2,<3" "openai==2.14.0"
+
+      - name: Compile v0.6 and C/P/D harness
+        run: |
+          python -m compileall -q hcl/v06 scripts/prepare_v06_fantom_cpd_v01.py scripts/run_v06_fantom_cpd_v01.py
+
+      - name: Run provider-free correctness tests
+        run: |
+          python -m unittest -v tests.test_v06_perspective_belief_runtime
+          python -m unittest -v tests.test_v06_conversation_adapter
+          python -m unittest -v tests.test_v06_fantom_cpd_v01
+          python -m unittest -v tests.test_v05_current_stance
+          python -m unittest -v tests.test_v05_semantic_runtime
+
+      - name: Download pinned FANToM
+        run: |
+          mkdir -p .cache artifacts/hcl-v06-fantom-cpd-v01
+          curl -L --fail --retry 4 --retry-delay 5             "https://storage.googleapis.com/ai2-mosaic-public/projects/fantom/fantom.tar.gz"             -o .cache/fantom.tar.gz
+          echo "1d08dfa0ea474c7f83b9bc7e3a7b466eab25194043489dd618b4c5223e1253a4  .cache/fantom.tar.gz" | sha256sum -c -
+
+      - name: Freeze deterministic 8-question selection
+        run: |
+          python scripts/prepare_v06_fantom_cpd_v01.py             --fantom-archive .cache/fantom.tar.gz             --out artifacts/hcl-v06-fantom-cpd-v01/selection.json
+          python - <<'PY'
+          import json, pathlib
+          p=pathlib.Path("artifacts/hcl-v06-fantom-cpd-v01/selection.json")
+          x=json.loads(p.read_text())
+          assert x["selected_count"] == 8
+          assert x["provider_calls"] == 0
+          assert len({r["conversation_id"] for r in x["selected"]}) == 8
+          committed=pathlib.Path("eval/v06/fantom_cpd_selection_v01.json")
+          if committed.exists():
+              assert json.loads(committed.read_text()) == x
+          PY
+
+      - name: Validate paid runner without provider calls
+        run: |
+          if [ -f eval/v06/fantom_cpd_selection_v01.json ]; then
+            python scripts/run_v06_fantom_cpd_v01.py               --fantom-archive .cache/fantom.tar.gz --validate-only
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v06-fantom-cpd-preflight-${{ github.run_id }}
+          path: artifacts/hcl-v06-fantom-cpd-v01/
+          if-no-files-found: error
+          retention-days: 90
