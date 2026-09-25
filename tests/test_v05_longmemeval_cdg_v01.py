@@ -76,6 +76,7 @@ class CDGProviderFreeTests(unittest.TestCase):
                      raw_text="Delivery day is Tuesday")
         memory.ingest(event)
         self.assertEqual(memory.processed_events, 2)
+        self.assertGreaterEqual(memory.compacted_updates, 1)
         self.assertEqual(memory.state["records"][0]["value"], "Tuesday")
         self.assertLessEqual(len(json.dumps(memory.state, ensure_ascii=False, sort_keys=True, separators=(",", ":"))), 300)
 
