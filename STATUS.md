@@ -4874,3 +4874,31 @@ verify second-family, official-judge and bounded-cost prerequisites before any
 sealed efficacy call.
 
 **Current gate: HCL_V05_LONGMEMEVAL_CDG_V01_SEALED_HASH_CORRECTED_PREFLIGHT_PASS_PROVIDER_FREE_IMPLEMENTATION_NEXT**
+
+
+## HCL v0.5 LongMemEval C/D/G provider-free execution package
+
+Closure:
+- `reports/HCL_V05_LONGMEMEVAL_CDG_PROVIDER_FREE_V01_CLOSURE.md`
+
+Exact candidate code head `8a0ee63e4d6a3a3fe89033e979df68ce3858933f`:
+- C/D/G provider-free preflight `36101999945`: SUCCESS;
+- artifact `10848579774`, ZIP SHA-256
+  `044bd96ab776b77bfe87b3e157b127fc3e4be681c7892deea30b56f3e299fd1e`;
+- v0.5 current stance CI `36101999992`: SUCCESS;
+- v0.4 minimal slice CI `36101999856`: SUCCESS;
+- pinned dataset histories: 32/32 verified, 15,601 events, 2 abstention IDs;
+- pinned official judge source Git blob verified;
+- provider calls: 0.
+
+The staged answer runner enforces D/G ingestion before question and equal C/D/G
+oracle evidence. Generic G has deterministic compaction, bounded schema repair,
+and explicit terminal failure rather than silent update loss. A separate judge
+stage requires complete frozen raw answers. A provider-free paired summary
+preserves the pre-registered statistical and cost gates.
+
+No selected efficacy row is provider-backed consumed. Paid execution remains
+gated on the exact-head one-shot workflow, verified official-judge and second
+model-family access, endpoint/profile validation, and bounded cost commitment.
+
+**Current gate: HCL_V05_LONGMEMEVAL_CDG_V01_PROVIDER_FREE_PACKAGE_PASS_PAID_PREREQUISITES_OPEN**

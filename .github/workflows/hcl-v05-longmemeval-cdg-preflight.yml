@@ -6,6 +6,9 @@ on:
       - "eval/longmemeval/knowledge_update_selection_v01.json"
       - "scripts/longmemeval_cdg_v01.py"
       - "scripts/preflight_v05_longmemeval_cdg_v01.py"
+      - "scripts/run_v05_longmemeval_cdg_v01.py"
+      - "scripts/score_v05_longmemeval_cdg_v01.py"
+      - "scripts/summarize_v05_longmemeval_cdg_v01.py"
       - "tests/test_v05_longmemeval_cdg_v01.py"
       - ".github/workflows/hcl-v05-longmemeval-cdg-preflight.yml"
   push:
@@ -15,6 +18,9 @@ on:
       - "eval/longmemeval/knowledge_update_selection_v01.json"
       - "scripts/longmemeval_cdg_v01.py"
       - "scripts/preflight_v05_longmemeval_cdg_v01.py"
+      - "scripts/run_v05_longmemeval_cdg_v01.py"
+      - "scripts/score_v05_longmemeval_cdg_v01.py"
+      - "scripts/summarize_v05_longmemeval_cdg_v01.py"
       - "tests/test_v05_longmemeval_cdg_v01.py"
       - ".github/workflows/hcl-v05-longmemeval-cdg-preflight.yml"
 
@@ -48,6 +54,18 @@ jobs:
           python scripts/preflight_v05_longmemeval_cdg_v01.py \
             --dataset .cache/longmemeval/longmemeval_s_cleaned.json \
             --out artifacts/longmemeval-cdg-preflight-v01/manifest.json
+          python scripts/run_v05_longmemeval_cdg_v01.py --validate-only \
+            --dataset .cache/longmemeval/longmemeval_s_cleaned.json
+      - name: Verify pinned official judge source without provider calls
+        run: |
+          curl -L --fail --retry 4 --retry-delay 5 \
+            "https://raw.githubusercontent.com/xiaowu0162/LongMemEval/9e0b455f4ef0e2ab8f2e582289761153549043fc/src/evaluation/evaluate_qa.py" \
+            -o .cache/longmemeval/evaluate_qa.py
+          test "$(git hash-object .cache/longmemeval/evaluate_qa.py)" = \
+            "4732f3772b04a2b9069121ade304e6320494abc2"
+          python scripts/score_v05_longmemeval_cdg_v01.py \
+            --official-judge-source .cache/longmemeval/evaluate_qa.py \
+            --validate-only
       - name: Verify redacted artifact
         run: |
           python - <<'PY'
