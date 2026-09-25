@@ -4746,3 +4746,44 @@ If the official cleaned-S file retains the expected 78 knowledge-update rows,
 the first pilot selection is 32 IDs selected by deterministic SHA-256 rank.
 
 **Current gate: HCL_V05_EQ02_LONGMEMEVAL_KNOWLEDGE_UPDATE_ZERO_PROVIDER_QUALIFICATION**
+
+
+## HCL v0.5 EQ-02 LongMemEval qualification closure
+
+Closure:
+- `reports/HCL_V05_EQ02_LONGMEMEVAL_QUALIFICATION_CLOSURE.md`
+
+Exact evidence:
+- run `36094801638`: SUCCESS
+- artifact `10846604293`
+- artifact ZIP digest:
+  `sha256:d3f9e6545856a9fb0700f412dc7fc9a6f8609460507a0013aae89e93cffe1101`
+- manifest SHA-256:
+  `80df22912d1a6a82bdd3b820896d58c945072e8be8d407165b09797faef89c7d`
+
+Observed:
+- cleaned-S rows: **500**
+- knowledge-update rows: **78**
+- selected sealed IDs: **32**
+- provider calls: **0**
+- all 78 knowledge-update rows require timestamp-order normalization relative to
+  file/list order;
+- 3 blank history turns are skipped deterministically.
+
+Frozen selection:
+- `eval/longmemeval/knowledge_update_selection_v01.json`
+
+State input firewall excludes question/gold/evidence labels and preserves only
+timestamp/session/role/raw-turn evidence.
+
+EQ-02 result:
+- **QUALIFICATION PASS**
+- no efficacy claim;
+- no sealed row provider consumption.
+
+Next:
+external ingest-compatibility diagnostic on a small deterministic subset of the
+46 non-selected knowledge-update rows, without answer scoring or HCL semantic
+changes.
+
+**Current gate: HCL_V05_EQ02_QUALIFICATION_PASS_EXTERNAL_INGEST_COMPATIBILITY_NEXT**
