@@ -86,9 +86,15 @@ v0.6.1 因此新增确定性的 participant-presence evidence floor，并把“�
 
 LongMemEval 32-row package 继续冻结、未消费，不阻塞当前 human-cognition capability 路线。
 
+v0.6.1 已在 main `0bf56af7baf305ca3bebb9035c4a989794a50eb8` 完成 provider-free certification：
+- runtime correctness run `36138966541` — **SUCCESS**；
+- C/P/D provider-free run `36138966583` — **SUCCESS**。
+
+本轮没有为了“修复后分数”重跑 8 个已消费 FANToM conversation；v0.6.1 的新增边界只通过独立 synthetic correctness 验证。
+
 当前 gate：
 
-**HCL_V06_V061_PERSPECTIVE_BOUNDARY_REPAIR_PROVIDER_FREE_CERTIFICATION**
+**HCL_V06_V061_PERSPECTIVE_RUNTIME_FROZEN_NEXT_CAPABILITY_OR_FRESH_EFFICACY**
 
 ## Intellectual-property boundary
 
