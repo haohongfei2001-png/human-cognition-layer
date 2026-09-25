@@ -1,0 +1,139 @@
+{
+  "format": "hcl-v06-perspective-belief-cq00-closure-v01",
+  "base_main": "90452ee01be615db5daa8af0aa5838d6998acc99",
+  "cq00_ci": {
+    "run_id": 36119304220,
+    "conclusion": "success",
+    "artifact_id": 10856742534,
+    "artifact_digest": "sha256:a22cea64022a09045d5ac13a8676abf9b36ac41f5e363cfe1fbc4c35cc429609",
+    "provider_calls": 0
+  },
+  "fantom": {
+    "source_repo": "skywalker023/fantom",
+    "source_commit": "1cae6fa30f5ba04ca0fff5f5716b5ba7055e2e85",
+    "dataset_sha256": "1d08dfa0ea474c7f83b9bc7e3a7b466eab25194043489dd618b4c5223e1253a4",
+    "historical_consumed_conversations": 80,
+    "eligible_conversations": 165,
+    "qualification": "PASS",
+    "development_selection": [
+      {
+        "conversation_id": "119",
+        "stratum": "belief_inaccessible_first",
+        "selection_rank": "013a974fc834fd201b032c8fbaef8e2b81b58a4a785e65cf2808482095c94e77"
+      },
+      {
+        "conversation_id": "197",
+        "stratum": "belief_inaccessible_first",
+        "selection_rank": "01b7939eca330a3b151fe31fe32bff904980eb2d6ebd63f0277816a0f0ff50d5"
+      },
+      {
+        "conversation_id": "240",
+        "stratum": "belief_inaccessible_second",
+        "selection_rank": "04e2e35b0e2a18329ae1dd146b386e93e88d57e98e432ff1344d08658cd0d2c3"
+      },
+      {
+        "conversation_id": "7",
+        "stratum": "belief_inaccessible_second",
+        "selection_rank": "06c46c5de0cb7eb7fe27456b8dae64c7d2ef4289484f6bfa08ae824af6592edd"
+      },
+      {
+        "conversation_id": "220",
+        "stratum": "answerability_full_inaccessible_binary",
+        "selection_rank": "004a5bb0b10cccdbe8cb726ecbd8c9d80cffda3133c1aec112d7e53cc666859d"
+      },
+      {
+        "conversation_id": "189",
+        "stratum": "answerability_full_inaccessible_binary",
+        "selection_rank": "01430706576a44472b0e240a75f143b18e5770bb1c8fb2df0b3a9c42809e6f9d"
+      },
+      {
+        "conversation_id": "208",
+        "stratum": "info_accessibility_full_inaccessible_binary",
+        "selection_rank": "010492a3bafd617c206c070978858354c2da14eb431514d3fe07c1e4dd60108b"
+      },
+      {
+        "conversation_id": "36",
+        "stratum": "info_accessibility_full_inaccessible_binary",
+        "selection_rank": "01d9b5f6dec912f7c44e23fe6728ed86e7cc9d51cabb857ee8ae833710d64af1"
+      }
+    ],
+    "selection_content_inspected": false,
+    "provider_consumed": false
+  },
+  "dyntom": {
+    "source_repo": "GAIR-NLP/DynToM",
+    "source_commit": "9c95b1b8300f3e352626feae51aaeeda111b6d3d",
+    "eligible_belief_trials": 1161,
+    "upstream_gold_construction": "belief questions derive from hidden mental-state sketch; public story is separate evidence",
+    "narrative_sufficiency_audit": [
+      {
+        "trial_id": "111",
+        "selection_rank": "007c6225add3495ebb5baf3ef40e135da2bb92d79ef1257541eb734cbde20667",
+        "verdict": "PASS"
+      },
+      {
+        "trial_id": "364",
+        "selection_rank": "0084b647f363bff5dab12fa64965b40d77d82d705e244a25260dcc3ffcf1c345",
+        "verdict": "FAIL_STRICT_EVIDENCE_SUFFICIENCY",
+        "issue": "gold belief trajectory contains stronger/non-unique inference from negotiation behavior"
+      },
+      {
+        "trial_id": "420",
+        "selection_rank": "0087895ffd0cb56ea672cb09cedc6fb53f2a4484600284c00f9dcb32cfed9a36",
+        "verdict": "FAIL_STRICT_EVIDENCE_SUFFICIENCY",
+        "issue": "gold includes interpersonal belief states that are plausible but not uniquely entailed by public narrative"
+      },
+      {
+        "trial_id": "534",
+        "selection_rank": "00892c7cd70f8a5f9c55601ecdcb12f18a50f79e1167027fc9e31fc223e5301d",
+        "verdict": "FAIL_STRICT_EVIDENCE_SUFFICIENCY",
+        "issue": "at least one gold belief strengthens a future/modal concern into a current categorical belief"
+      }
+    ],
+    "audit_pass_count": 1,
+    "audit_fail_count": 3,
+    "qualification": "FAIL_FOR_CURRENT_EVIDENCE_CONSTRAINED_PRIMARY_USE",
+    "reserved_uninspected_development_trials": [
+      {
+        "trial_id": "612",
+        "selection_rank": "008ec050212bb80814711eb763daa06ddd90cd8ba30af9f3cf8a0f9e83cf65fa"
+      },
+      {
+        "trial_id": "987",
+        "selection_rank": "0096287552b4f69597db40197daf2c67eff877280b71848f0f7da03e6e51ccfa"
+      },
+      {
+        "trial_id": "178",
+        "selection_rank": "0176ecf89c37f0145ff3129921f4a4cf0039a1ed03aceea2202d33da516ac6a2"
+      },
+      {
+        "trial_id": "903",
+        "selection_rank": "018902667af769de73168f921e4fb5f110d2690fda2e3a25c0d51ca3a2ccec39"
+      },
+      {
+        "trial_id": "1018",
+        "selection_rank": "01e1f8369a19e538ac6018ef8a21b70da08f839026fe2c5657279daafc11b2f6"
+      },
+      {
+        "trial_id": "984",
+        "selection_rank": "02197fe88f14fa8a71ba3f847eb63d5a64a8311d0dbe596a6eec43afeaaad7a9"
+      },
+      {
+        "trial_id": "674",
+        "selection_rank": "0230725321dea8b0acb602b5afc1fe8c3ed62cb34ca38cd3eaefd630642b9681"
+      },
+      {
+        "trial_id": "357",
+        "selection_rank": "0250d81cc6c267dfd142c719edb237e4490fc261e7caf3b6ca68eae70cc8f872"
+      }
+    ],
+    "reserved_trials_content_inspected": false,
+    "reserved_trials_provider_consumed": false
+  },
+  "longmemeval": {
+    "paid_triggered": false,
+    "sealed_32_provider_consumed": false,
+    "disposition": "frozen_deprioritized_not_v06_prerequisite"
+  },
+  "next_gate": "HCL_V06_PERSPECTIVE_BELIEF_CQ01_FANTOM_PROVIDER_MODEL_COST_AUTHORIZATION"
+}
