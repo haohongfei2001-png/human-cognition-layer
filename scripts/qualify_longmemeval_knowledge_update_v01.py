@@ -76,8 +76,22 @@ def sanitized_turn(turn: dict[str, Any]) -> dict[str, str]:
     return {"role": role, "content": content}
 
 
+def history_input_order_is_monotonic(row: dict[str, Any]) -> bool:
+    dates = row.get("haystack_dates")
+    if not isinstance(dates, list):
+        raise QualificationError("haystack_dates must be a list")
+    parsed = [parse_longmemeval_timestamp(str(value)) for value in dates]
+    return all(a <= b for a, b in zip(parsed, parsed[1:]))
+
+
 def state_input_view(row: dict[str, Any]) -> dict[str, Any]:
-    """Return the only benchmark material allowed to reach HCL state ingestion."""
+    """Return the only benchmark material allowed to reach HCL state ingestion.
+
+    Explicit benchmark timestamps are the chronology source of truth. The
+    cleaned-S file may contain rows whose list order is not monotonic, so
+    sessions are stably ordered by (timestamp, source_position) without using
+    question/gold/evidence labels.
+    """
     session_ids = row.get("haystack_session_ids")
     dates = row.get("haystack_dates")
     sessions = row.get("haystack_sessions")
@@ -86,23 +100,28 @@ def state_input_view(row: dict[str, Any]) -> dict[str, Any]:
     if not (len(session_ids) == len(dates) == len(sessions)):
         raise QualificationError("haystack ids/dates/sessions length mismatch")
 
-    history = []
-    previous_dt: datetime | None = None
-    for session_id, date, session in zip(session_ids, dates, sessions):
+    materialized = []
+    for source_position, (session_id, date, session) in enumerate(
+        zip(session_ids, dates, sessions)
+    ):
         dt = parse_longmemeval_timestamp(str(date))
-        if previous_dt is not None and dt < previous_dt:
-            raise QualificationError("cleaned-S haystack timestamps are not monotonic")
-        previous_dt = dt
         if not isinstance(session, list):
             raise QualificationError("haystack session must be a list of turns")
-        history.append(
-            {
-                "session_id": str(session_id),
-                "date": str(date),
-                "turns": [sanitized_turn(turn) for turn in session],
-            }
+        materialized.append(
+            (
+                dt,
+                source_position,
+                {
+                    "session_id": str(session_id),
+                    "date": str(date),
+                    "source_position": source_position,
+                    "turns": [sanitized_turn(turn) for turn in session],
+                },
+            )
         )
-    return {"history": history}
+
+    materialized.sort(key=lambda item: (item[0], item[1]))
+    return {"history": [item[2] for item in materialized]}
 
 
 def assert_state_firewall(row: dict[str, Any], view: dict[str, Any]) -> None:
@@ -188,6 +207,7 @@ def audit_dataset(path: Path) -> dict[str, Any]:
     qids: set[str] = set()
     counts: Counter[str] = Counter()
     knowledge_rows: list[dict[str, Any]] = []
+    nonmonotonic_knowledge_rows = 0
 
     for row in data:
         if not isinstance(row, dict):
@@ -201,6 +221,8 @@ def audit_dataset(path: Path) -> dict[str, Any]:
         qids.add(qid)
         counts[qtype] += 1
         if qtype == "knowledge-update":
+            if not history_input_order_is_monotonic(row):
+                nonmonotonic_knowledge_rows += 1
             view = state_input_view(row)
             assert_state_firewall(row, view)
             events = events_from_state_view(
@@ -249,6 +271,13 @@ def audit_dataset(path: Path) -> dict[str, Any]:
         "total_rows": len(data),
         "question_type_counts": dict(sorted(counts.items())),
         "knowledge_update_rows": len(knowledge_rows),
+        "knowledge_update_rows_with_nonmonotonic_file_order": (
+            nonmonotonic_knowledge_rows
+        ),
+        "chronology_rule": (
+            "sort sessions by explicit haystack timestamp; source_position "
+            "is stable tie-break/provenance only"
+        ),
         "selected_count": len(selected),
         "selected": [
             {
@@ -299,6 +328,9 @@ def main() -> None:
                 "total_rows": result["total_rows"],
                 "question_type_counts": result["question_type_counts"],
                 "knowledge_update_rows": result["knowledge_update_rows"],
+                "knowledge_update_rows_with_nonmonotonic_file_order": result[
+                    "knowledge_update_rows_with_nonmonotonic_file_order"
+                ],
                 "selected_count": result["selected_count"],
                 "selected_question_ids": [
                     x["question_id"] for x in result["selected"]
