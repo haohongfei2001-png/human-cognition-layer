@@ -46,54 +46,49 @@ HCL 首先要求认知表示和更新本身在事实、信息边界、时间关�
 
 当前 canonical 阶段：
 
-**HCL v0.6 — Capability Qualification: Evidence-Constrained Perspective & Belief Revision**
+**HCL v0.6.1 — Perspective Boundary & Precise-Knowledge Repair**
 
-v0.5 已冻结为可靠但狭窄的基础：人物/时间绑定、显式立场抽取、证据路由、provenance 与可审计状态。现有证据支持它作为有限认知语义与研究基础设施；不支持把它描述成已经证明有效的广义 Human Cognition Layer。
+v0.5 保持冻结，作为显式 stance / revision / provenance / persistent-state 基础。v0.6 已经真正增加了一层人物信息视角与 belief evidence runtime，而不是继续只做 memory infrastructure。
 
-v0.6 的第一个候选能力不是继续扩充 memory，而是验证：
+当前已完成的 v0.6 cognition capability：
 
-> 在多人、时间变化的对话或叙事中，显式约束人物的信息视角与信念修订，是否能减少当前强模型仍会犯的真实人物理解错误。
+- 一阶人物信息视角；
+- 有限二阶视角：A 有证据认为 B 接触过什么；
+- self-report / narrator / third-party report / observed action 的 belief evidence 来源分离；
+- CHARACTER_UNCERTAIN 与 SYSTEM_INSUFFICIENT 分离；
+- 收到 challenge 不自动等于改变 belief；
+- 明确 direct revision 才能 supersede 旧 belief；
+- perspective-bounded downstream answer context。
 
-CQ-00 已完成，随后 owner 明确授权先进行 benchmark-independent 的最小 runtime 开发，因此 CQ-01 不再是实现前置条件：
+第一次有效的外部 development utility check 使用 8 个此前未消费的 FANToM conversation，在同一 `deepseek-flash` 下比较 C / P / D：
 
-1. CQ-00：FANToM 通过资格审查并冻结 8 个历史完全不重叠的 development conversation；
-2. DynToM 在 4 个预冻结 narrative-sufficiency audit trial 中有 3 个出现公开叙事不足以唯一支持 gold belief 的问题，因此暂不作为当前 evidence-constrained primary source；
-3. v0.6 minimal runtime 已实现并通过 provider-free certification；
-4. 下一步外部验证只做小规模 C / P / D utility check：强模型 direct control、薄 perspective scaffold、以及冻结的 v0.6 runtime；
-5. specialized D 若有真实增量，再进入包含 competent G 的正式 efficacy 阶段。
+- C direct：**4/8**；
+- P thin perspective scaffold：**4/8**；
+- D HCL v0.6：**6/8**；
+- D 相对 P：**2 个独占修正，0 个退化**。
 
-完整合同：
+因此预冻结 directional gate **PASS**。这只是 n=8、单模型、development-only 的正向信号，不是外部 efficacy 或 leaderboard claim。
 
-- [docs/HCL_V06_PERSPECTIVE_BELIEF_CAPABILITY_QUALIFICATION_V01.md](docs/HCL_V06_PERSPECTIVE_BELIEF_CAPABILITY_QUALIFICATION_V01.md)
+两类剩余抽象缺陷已经进入 v0.6.1 修复：
 
-当前 LongMemEval 32-row C/D/G package 保持冻结、未消费，不触发 paid run，也不再作为 v0.6 的前置条件。其 hash / chronology / gold-firewall / one-shot / paired-statistics / cost-accounting 资产保留供未来长期状态工程问题复用。
+1. **隐式首次出现 / late-entry boundary**：模型知道未来人物名单时，不能把未来才出现的人追溯性地放进早期 listener；
+2. **partial summary != precise knowledge**：听到相关主题或摘要，不等于知道一组更精确、更完整的复合信息。
 
-v0.6 第一块实际 cognition capability 已完成实现并通过 provider-free certification：
+v0.6.1 因此新增确定性的 participant-presence evidence floor，并把“精确知识需要所有 material details 有支持”写入 perspective semantic policy。后续 external harness 还会保存不含 benchmark 文本的 turn/speaker/listener access map，便于区分 access-state 错误和 downstream reasoning 错误。
 
-- 一阶人物信息视角与有限二阶视角；
-- 带来源身份的 belief evidence；
-- “人物自己不确定”和“系统证据不足”严格分离；
-- 收到挑战不自动改变原信念；
-- 只有直接修订证据才能 supersede 旧 belief；
-- 为基础模型提供 perspective-bounded answer context；
-- narrator 对人物心理的直接证据可供 HCL 建模，但 narrator/world 信息不会因此泄漏到人物可见信息中。
-
-实现 main：`9d632cfeea469555ef2896740fa43ed99aa467bc`  
-main certification run：`36125320225` — **SUCCESS**。
-
-实现合同：
+完整记录：
 
 - [docs/HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_V01.md](docs/HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_V01.md)
+- [reports/HCL_V06_FANTOM_CPD_V01_REPAIR_CLOSURE.md](reports/HCL_V06_FANTOM_CPD_V01_REPAIR_CLOSURE.md)
+- [docs/HCL_V06_PERSPECTIVE_BOUNDARY_REPAIR_V061.md](docs/HCL_V06_PERSPECTIVE_BOUNDARY_REPAIR_V061.md)
 
-下一步不是继续扩 architecture，而是在已冻结的 FANToM development conversations 上做一个小规模 C / P / D 外部效用检查。该步骤仍需单独批准 provider、model、reasoning budget 与成本上限。
+当前不会重跑这 8 个已消费 development conversation 来制造“修复后分数”。v0.6.1 先通过独立 provider-free correctness；之后新的外部 efficacy 必须使用新的 disjoint fresh selection，并加入 competent generic structured-state G。
 
-完整 closure：
-
-- [reports/HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_CLOSURE.md](reports/HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_CLOSURE.md)
+LongMemEval 32-row package 继续冻结、未消费，不阻塞当前 human-cognition capability 路线。
 
 当前 gate：
 
-**HCL_V06_MINIMAL_RUNTIME_COMPLETE_EXTERNAL_CPD_UTILITY_CHECK_NEXT**
+**HCL_V06_V061_PERSPECTIVE_BOUNDARY_REPAIR_PROVIDER_FREE_CERTIFICATION**
 
 ## Intellectual-property boundary
 

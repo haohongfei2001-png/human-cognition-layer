@@ -388,6 +388,7 @@ class V06MinimalPerspectiveBeliefTests(unittest.TestCase):
         self.assertEqual(len(messages), 2)
         self.assertIn("Information exposure does not imply belief acceptance", messages[0]["content"])
         self.assertIn("SYSTEM_INSUFFICIENT", messages[0]["content"])
+        self.assertIn("partial summary", messages[0]["content"])
         body = json.loads(messages[1]["content"])
         self.assertEqual(
             body["hcl_perspective_context"]["target_information_view"]["event_ids"],

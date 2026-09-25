@@ -55,7 +55,10 @@ D_SYSTEM = (
     "for what each person could access and second_order_access_event_ids for what "
     "one person has evidence another could access. Do not reconstruct an "
     "omniscient shared conversation. Information exposure does not itself prove "
-    "belief acceptance. Return only the requested final answer format."
+    "belief acceptance. A related topic or partial summary is not enough to "
+    "establish knowledge of a precise compound fact; every material detail must "
+    "be supported by the target's bounded view. Return only the requested final "
+    "answer format."
 )
 
 
@@ -279,9 +282,18 @@ def evaluate_one(
         "adapter": {
             "event_count": len(extraction.events),
             "repair_count": extraction.repair_count,
+            "access_normalization_count": extraction.access_normalization_count,
             "access_state_sha256": _sha_text(
                 json.dumps(d_context, ensure_ascii=False, sort_keys=True)
             ),
+            "auditable_access_map": [
+                {
+                    "turn_index": int(event.metadata.get("turn_index", -1)),
+                    "speaker": event.actor_id,
+                    "heard_by_agent_ids": list(event.observer_ids),
+                }
+                for event in extraction.events
+            ],
         },
         "arms": scored,
     }

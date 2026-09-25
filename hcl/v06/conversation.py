@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Protocol
@@ -43,6 +44,7 @@ class ConversationExtractionResult:
     events: tuple[EventRecord, ...]
     repair_count: int = 0
     repair_reason: str | None = None
+    access_normalization_count: int = 0
 
 
 SYSTEM_PROMPT = """Infer conversational information access from an in-person
@@ -181,6 +183,66 @@ def _parse_access_payload(
     return tuple(by_index[i] for i in range(len(turns)))
 
 
+
+def _looks_like_direct_address(text: str, agent: str) -> bool:
+    """Conservative evidence that an as-yet-silent participant is present.
+
+    A direct vocative near the start of an utterance (for example
+    "Lisa, ..." or "Hey Lisa, ...") is evidence that Lisa is present even
+    before Lisa's first speaking turn. Mere third-person mention is not.
+    """
+
+    name = re.escape(agent)
+    return bool(
+        re.match(
+            rf"^\s*(?:(?:hey|hi|hello|oh|well|so|thanks|thank\s+you|bye|goodbye|welcome(?:\s+back)?)\s+)?{name}\b\s*[,!?:]",
+            text,
+            flags=re.IGNORECASE,
+        )
+    )
+
+
+def _presence_evidence_start(
+    turns: tuple[ParsedTurn, ...],
+    known_agents: tuple[str, ...],
+) -> dict[str, int]:
+    starts: dict[str, int] = {}
+    for turn in turns:
+        starts.setdefault(turn.speaker, turn.turn_index)
+
+    for turn in turns:
+        for agent in known_agents:
+            if agent == turn.speaker:
+                continue
+            if _looks_like_direct_address(turn.text, agent):
+                starts[agent] = min(starts.get(agent, turn.turn_index), turn.turn_index)
+
+    return starts
+
+
+def _apply_presence_evidence_floor(
+    access: tuple[tuple[str, ...], ...],
+    *,
+    turns: tuple[ParsedTurn, ...],
+    known_agents: tuple[str, ...],
+) -> tuple[tuple[tuple[str, ...], ...], int]:
+    """Remove retroactive access unsupported by any evidence of presence.
+
+    LLM access extraction may know the complete participant roster and can
+    accidentally assign a future participant to earlier turns. HCL fails closed:
+    an agent cannot hear turns before their earliest speaking turn or an earlier
+    direct-address cue establishes their presence.
+    """
+
+    starts = _presence_evidence_start(turns, known_agents)
+    normalized: list[tuple[str, ...]] = []
+    removed = 0
+    for idx, listeners in enumerate(access):
+        kept = tuple(agent for agent in listeners if starts.get(agent, idx + 1) <= idx)
+        removed += len(listeners) - len(kept)
+        normalized.append(kept)
+    return tuple(normalized), removed
+
 def extract_conversation_events(
     transcript: str,
     conversation_id: str,
@@ -224,6 +286,11 @@ def extract_conversation_events(
                 turns=turns,
                 known_agents=known_agents,
             )
+            access, access_normalization_count = _apply_presence_evidence_floor(
+                access,
+                turns=turns,
+                known_agents=known_agents,
+            )
             events: list[EventRecord] = []
             for turn, listeners in zip(turns, access):
                 valid_time, recorded_at = _event_time(turn.turn_index)
@@ -242,6 +309,7 @@ def extract_conversation_events(
                             "conversation_id": conversation_id,
                             "turn_index": turn.turn_index,
                             "adapter": "v06_conversation_access_v01",
+                            "presence_evidence_floor": "v06.1",
                         },
                     )
                 )
@@ -253,6 +321,7 @@ def extract_conversation_events(
                     if attempt == 0
                     else f"conversation access repair after: {first_error}"
                 ),
+                access_normalization_count=access_normalization_count,
             )
         except (json.JSONDecodeError, ConversationAdapterError) as exc:
             if first_error is None:
