@@ -118,6 +118,38 @@ class V06FantomCPDTests(unittest.TestCase):
         self.assertNotIn("gold", adapter_json)
         self.assertNotIn("correct_answer", adapter_json)
 
+    def test_empty_answer_fails_closed_as_transport_error(self):
+        context = "Ana: hello."
+        record = {
+            "family": "answerability_binary",
+            "context": context,
+            "question": "Does Ana know?",
+            "target": "What happened?",
+            "correct_answer": "yes",
+            "set_id": "2-0-0",
+        }
+        manifest = {
+            "question_id": "qid-empty",
+            "conversation_id": "2",
+            "set_id": "2-0-0",
+            "stratum": "answerability_full_inaccessible_binary",
+            "family": "answerability_binary",
+        }
+        access = json.dumps({
+            "turn_access": [
+                {"turn_index": 0, "heard_by_agent_ids": []},
+            ]
+        })
+        with self.assertRaisesRegex(RuntimeError, "empty final answer content"):
+            evaluate_one(
+                manifest=manifest,
+                record=record,
+                c_backend=FakeBackend(text_outputs=[""]),
+                p_backend=FakeBackend(text_outputs=["yes"]),
+                d_adapter_backend=FakeBackend(json_outputs=[access]),
+                d_answer_backend=FakeBackend(text_outputs=["yes"]),
+            )
+
     def test_d_answer_does_not_receive_omniscient_full_context_string(self):
         context = "Ana: secret one.\nBo: hello."
         record = {

@@ -49,14 +49,20 @@ class OpenAICompatibleBackend:
         }
         if self.capabilities.seed:
             kwargs["seed"] = self.seed
+        # Provider-specific request extras apply to both text and JSON calls.
+        # DeepSeek Flash currently enables thinking by default; its frozen
+        # profile explicitly disables thinking so bounded answer calls do not
+        # spend the entire max_tokens budget in reasoning_content and return
+        # an empty final content field.
+        if self.capabilities.json_extra_body:
+            kwargs["extra_body"] = dict(self.capabilities.json_extra_body)
+
         if json_mode:
             if not self.capabilities.json_object_mode:
                 raise RuntimeError(
                     f"backend {self.model} does not declare JSON-object support"
                 )
             kwargs["response_format"] = {"type": "json_object"}
-            if self.capabilities.json_extra_body:
-                kwargs["extra_body"] = dict(self.capabilities.json_extra_body)
 
         response = self.client.chat.completions.create(**kwargs)
         return response.choices[0].message.content or ""

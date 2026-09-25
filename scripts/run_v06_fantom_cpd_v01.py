@@ -183,7 +183,7 @@ def _answer(
     system: str,
     user: str,
 ) -> str:
-    return backend.complete(
+    out = backend.complete(
         [
             {"role": "system", "content": system},
             {"role": "user", "content": user},
@@ -191,6 +191,12 @@ def _answer(
         max_tokens=ANSWER_MAX_TOKENS,
         temperature=TEMPERATURE,
     ).strip()
+    if not out:
+        raise RuntimeError(
+            "empty final answer content; treat as provider/transport failure, "
+            "not as an incorrect benchmark prediction"
+        )
+    return out
 
 
 def evaluate_one(
@@ -387,8 +393,8 @@ def main() -> int:
     if os.getenv("GITHUB_RUN_ATTEMPT") != "1":
         raise RuntimeError("C/P/D execution is first-attempt only")
     expected_token = os.getenv("HCL_V06_FANTOM_CPD_RUN_ONCE_TOKEN")
-    if expected_token != "HCL_V06_FANTOM_CPD_V01_RUN_ONCE_20260925_A1":
-        raise RuntimeError("missing exact v0.6 FANToM C/P/D one-shot token")
+    if expected_token != "HCL_V06_FANTOM_CPD_V01_REPAIR_20260925_A2":
+        raise RuntimeError("missing exact v0.6 FANToM C/P/D repair token")
     api_key = os.getenv("DEEPSEEK_API_KEY")
     if not api_key:
         raise RuntimeError("DEEPSEEK_API_KEY is required")
@@ -442,7 +448,9 @@ def main() -> int:
         raise BudgetExceeded("conservative planning cost bound exceeded $1.00")
 
     output = {
-        "format": "hcl-v06-fantom-cpd-results-v01",
+        "format": "hcl-v06-fantom-cpd-results-repair-v01",
+        "repair_of_run": 36128133383,
+        "freshness": "same_already_consumed_development_selection_not_fresh",
         "status": (
             "complete"
             if not failures and len(results) == selection["selected_count"]
@@ -460,9 +468,11 @@ def main() -> int:
         "metrics": metrics,
         "results": results,
         "claim_boundary": (
-            "Eight-conversation development utility check. Not fresh efficacy "
-            "evidence after this execution. D evaluates the v0.6 perspective slice; "
-            "it does not validate all future human-cognition capabilities."
+            "Repair execution on the same eight already-consumed development "
+            "conversations after run 36128133383 produced empty text outputs. "
+            "This repair is not fresh evidence. D evaluates only the v0.6 "
+            "perspective slice; it does not validate all future human-cognition "
+            "capabilities."
         ),
     }
     args.out.parent.mkdir(parents=True, exist_ok=True)
