@@ -132,6 +132,21 @@ class IntentionRuntimeTests(unittest.TestCase):
         self.assertEqual(runtime.goal_estimates("Mira")[0].status, GoalStatus.ACTIVE)
         self.assertEqual(runtime.goal_estimates("Mira", observer_agent_id=None), ())
 
+    def test_source_id_alone_cannot_launder_invented_intention_text(self):
+        runtime = HCLV07Runtime()
+        source = event(1, "Mira", "I walked past the station.")
+        runtime.ingest_event(source)
+        invented = IntentionEvidenceEvent(
+            evidence_id="invented", source_event_id=source.event_id,
+            subject_agent_id="Mira", goal_key="travel", signal=IntentionSignal.EXPLICIT_INTENTION,
+            provenance=Provenance.SELF_REPORT, valid_time=source.valid_time,
+            system_record_time=source.recorded_at,
+            evidence_text="I intend to travel tomorrow.",
+        )
+        with self.assertRaisesRegex(ValueError, "exact source excerpt"):
+            runtime.ingest_intention_evidence(invented)
+        self.assertEqual(runtime.goal_estimates("Mira"), ())
+
 
 if __name__ == "__main__":
     unittest.main()
