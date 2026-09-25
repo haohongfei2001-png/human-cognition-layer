@@ -4824,3 +4824,23 @@ Next:
   prerequisite before consuming the sealed efficacy selection.
 
 **Current gate: HCL_V05_LONGMEMEVAL_INGEST_DIAGNOSTIC_V01_COMPATIBILITY_PASS_EFFICACY_PROTOCOL_NEXT**
+
+
+## HCL v0.5 LongMemEval paired C/D/G efficacy design
+
+Contract:
+- `docs/HCL_V05_LONGMEMEVAL_CDG_EFFICACY_V01.md`
+
+The 32-row sealed selection remains provider-unconsumed. The contract freezes:
+- an explicit full-history ingestion barrier before question/gold/oracle release;
+- the same oracle evidence packet for C/D/G at answer time;
+- canonical D vs competent generic structured G, with deterministic G budget
+  handling and no silent event drop under ordinary size pressure;
+- official pinned LongMemEval judge code and `gpt-4o-2024-08-06`;
+- paired raw outcomes, discordance, cost, judge variance, and limited claims;
+- second-model-family access/profile and bounded-cost gates before sealed runs.
+
+No provider call or selected-row content inspection occurred in this design
+milestone. Next: provider-free implementation and exact-head certification.
+
+**Current gate: HCL_V05_LONGMEMEVAL_CDG_EFFICACY_V01_DESIGN_FROZEN_PROVIDER_FREE_IMPLEMENTATION_NEXT**
