@@ -1,0 +1,92 @@
+{
+  "claim_boundary": "Development utility selection only. Conversations were frozen in CQ-00 before provider execution. One deterministic perspective-relevant question is selected per conversation without model outcomes.",
+  "format": "hcl-v06-fantom-cpd-selection-v01",
+  "gold_text_committed": false,
+  "provider_calls": 0,
+  "question_text_committed": false,
+  "selected": [
+    {
+      "conversation_id": "119",
+      "correct_option": "A",
+      "family": "belief_mc",
+      "ordinal_in_family": 0,
+      "question_id": "63d22e2841c2aa6f83d5619200cbfe34bdfed0eb3d8cbcf2c81088fd190ce02e",
+      "selection_rank": "05f0fa7250d30b5009e750e9d07639624159b285def145dc73d18947bfce5d67",
+      "set_id": "119-0-2",
+      "stratum": "belief_inaccessible_first"
+    },
+    {
+      "conversation_id": "197",
+      "correct_option": "A",
+      "family": "belief_mc",
+      "ordinal_in_family": 0,
+      "question_id": "f1b36a9719f9f158285651c30f02a133456942d40566b5b3612a7e65cec76c62",
+      "selection_rank": "32795fe0f9ccfbc7be4da9b8daf4f3123546294606fc2836304a584b7273466a",
+      "set_id": "197-1-1",
+      "stratum": "belief_inaccessible_first"
+    },
+    {
+      "conversation_id": "240",
+      "correct_option": "B",
+      "family": "belief_mc",
+      "ordinal_in_family": 1,
+      "question_id": "a8f42814e385261c392fe92069954c9215eaa935b69ae738a9634c38461ea43d",
+      "selection_rank": "02e82fe1aef301d15eb7d3e5afee7bc991e4c657a12c830ccf38f64bbaa2ec0a",
+      "set_id": "240-0-0",
+      "stratum": "belief_inaccessible_second"
+    },
+    {
+      "conversation_id": "7",
+      "correct_option": "B",
+      "family": "belief_mc",
+      "ordinal_in_family": 1,
+      "question_id": "79219b814827d6c01089d60e254eb4f415f0386198379f35cf4ef27e5fb3ae02",
+      "selection_rank": "33f41c9f1553edf8e46319b9171c44aa2c340141815742532f1c422c26791ba1",
+      "set_id": "7-0-0",
+      "stratum": "belief_inaccessible_second"
+    },
+    {
+      "conversation_id": "220",
+      "family": "answerability_binary",
+      "ordinal_in_family": 1,
+      "question_id": "6946bc67b7e3bec5719ddbc09b2ec3a1d18b71d4eac660243a0d4105e7653fe0",
+      "selection_rank": "c48f6fce6bf1dce94d2503fffa5d7186fabf9f49906aca93ddb0d4086e3a7e7f",
+      "set_id": "220-0-0",
+      "stratum": "answerability_full_inaccessible_binary"
+    },
+    {
+      "conversation_id": "189",
+      "family": "answerability_binary",
+      "ordinal_in_family": 1,
+      "question_id": "7fc984b46680562a27a4e713bfa9f39edc04ffd1bcc138dfe2128c01559e9f6e",
+      "selection_rank": "09049f72e191144ed6f03a5a7808a544c9f597ee48abe5cf5a4da006ee360b66",
+      "set_id": "189-1-0",
+      "stratum": "answerability_full_inaccessible_binary"
+    },
+    {
+      "conversation_id": "208",
+      "family": "info_accessibility_binary",
+      "ordinal_in_family": 2,
+      "question_id": "1d08f56059a63873ba52e843cae597760bcd0547dfe2adee1f813ae9afc6d099",
+      "selection_rank": "129f48eaec20df482cd805def0547203d66ffcb0dd443835c93539ed73b484c9",
+      "set_id": "208-1-2",
+      "stratum": "info_accessibility_full_inaccessible_binary"
+    },
+    {
+      "conversation_id": "36",
+      "family": "info_accessibility_binary",
+      "ordinal_in_family": 1,
+      "question_id": "b72cd9b09611811e470ac9e3af72621da2d3129a1ad2c73f4fec4d3e5db3aac4",
+      "selection_rank": "02c87b0d67d8b86933125f8024be0486e4547621914fc28d29948a387e96a6bc",
+      "set_id": "36-0-2",
+      "stratum": "info_accessibility_full_inaccessible_binary"
+    }
+  ],
+  "selected_count": 8,
+  "selection_salt": "HCL-V06-FANTOM-CPD-V01-20260925",
+  "source": {
+    "commit": "1cae6fa30f5ba04ca0fff5f5716b5ba7055e2e85",
+    "dataset_sha256": "1d08dfa0ea474c7f83b9bc7e3a7b466eab25194043489dd618b4c5223e1253a4",
+    "repository": "skywalker023/fantom"
+  }
+}
