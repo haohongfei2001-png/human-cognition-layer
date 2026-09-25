@@ -4602,3 +4602,62 @@ Provider-free evidence:
 No provider-backed row in this package has been consumed.
 
 **Current gate: HCL_V05_STRONG_BASELINE_REPLICATION_V01_PACKAGE_FROZEN_PREFLIGHT_PASS_PROVIDER_NOT_STARTED**
+
+
+## HCL v0.5 final strong-baseline replication closure
+
+Closure:
+- `reports/HCL_V05_STRONG_BASELINE_REPLICATION_V01_CLOSURE.md`
+
+Exact one-shot evidence:
+- run `36024803238`: SUCCESS
+- trigger/main `a32b50d3c01ad0e7a9165a1a61ab0b6e2546e70a`
+- artifact `10824356781`
+- artifact ZIP digest:
+  `sha256:c0ccfa937336484461e3914275506b151df40e5583217d6cd12c9e05f3bbd193`
+- result JSON SHA-256:
+  `1860b6b2fb6712187ce2d51481e4d0b3ff29848904a01dbd69dbb56843ada316`
+
+Frozen result:
+- D routed HCL: **48 / 48**
+- G generic structured state: **36 / 48**
+- E strong free-form memory: **38 / 48**
+- C full-history diagnostic: **34 / 48**
+- D semantic repair / extraction errors: **0 / 0**
+- paired D-only / G-only: **12 / 0**
+
+Route A capability advantage:
+- **NOT ESTABLISHED**.
+- Although D-G = +12 across r1/r2/r3, G accumulated **54 distinct failed state
+  updates** after bounded repair, predominantly because repaired JSON still
+  exceeded the frozen 6000-character state limit.
+- This violates the pre-registered Route A requirement that G not be weakened
+  by avoidable truncation/schema failures.
+
+Route B practical module utility:
+- **PASS**.
+- D correctness: 48/48 vs G 36/48.
+- D provider chars: 1,102,604 vs G 8,121,696 = **13.58%**.
+- D provider wall: 312.75 s vs G 2902.85 s = **10.77%**.
+- D state/query representation remained mechanically valid and auditable.
+
+Interpretation:
+- do not claim specialized-HCL reasoning superiority from this run;
+- current v0.5 has established controlled internal practical module utility on
+  this slice;
+- the raw D-vs-G efficiency magnitude is partly affected by G's repeated
+  repair/failure loop, so future external generic baselines must use competent
+  deterministic state budgeting.
+
+The 384-event / 48-query package is consumed and must not be rerun as fresh
+evidence.
+
+The current v0.5 internal synthetic loop is closed under the frozen stop rule.
+
+Next:
+- external benchmark selection;
+- cross-base-model transfer;
+- competent generic structured-memory baseline for external comparison;
+- no further near-identical internal synthetic tuning.
+
+**Current gate: HCL_V05_INTERNAL_SYNTHETIC_COMPLETE_ROUTE_B_PASS_EXTERNAL_TRANSFER_NEXT**
