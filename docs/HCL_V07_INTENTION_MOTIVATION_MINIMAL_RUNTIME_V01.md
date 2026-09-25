@@ -1,6 +1,6 @@
 # HCL v0.7 Evidence-Constrained Intention & Motivation — Minimal Runtime
 
-Status: **V07-A PROVIDER-FREE CERTIFIED / EXTERNAL UTILITY UNTESTED**
+Status: **V07-A PROVIDER-FREE CERTIFIED / V07-C DEVELOPMENT PACKAGE STAGED**
 
 The v0.7 runtime consumes immutable `EventRecord` evidence and typed,
 source-anchored `IntentionEvidenceEvent` records. It composes the v0.6
@@ -14,6 +14,8 @@ event ID alone cannot introduce an invented intention sentence.
   intention or goal. Third-party reports remain attributions.
 - An observed action and a plausible inferred motivation are recorded
   separately. Neither proves a private intention or a unique motive.
+- Reader-only narrator descriptions may supply observed-action evidence with
+  narrator provenance; their action signal still cannot prove intention.
 - Directly evidenced revision names a previously evidenced goal. A change of
   action alone never revises a goal.
 - Explicit completion or abandonment changes goal status. Counterevidence
@@ -26,11 +28,13 @@ event ID alone cannot introduce an invented intention sentence.
   the observer can establish was available to the target. Reader-only
   narrator facts remain available to the system but do not leak into
   character views.
+- A reader answer context may use narrator intention evidence while retaining
+  the target's bounded information view as a separate channel.
 
 The event-local semantic adapter emits only source-excerpt-grounded evidence,
 keeps provenance, and gets at most one bounded structural repair. Invalid
 extraction leaves goal state unchanged. Duplicate event ingestion reuses the
-first committed extraction without a second provider call. This is still a
+first committed extraction without a second provider call. This remains
 provider-free certified: no external narrative extraction quality or utility
 has yet been established. The runtime and adapter never read benchmark
 question, answer or gold fields.

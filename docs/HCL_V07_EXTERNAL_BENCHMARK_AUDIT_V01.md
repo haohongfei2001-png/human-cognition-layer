@@ -2,6 +2,14 @@
 
 Status: **SOURCE AUDIT / NO PROVIDER CALLS / NO v0.7 OUTCOME CONSUMED**
 
+The source-sufficiency audit has now produced a 12-story, development-only
+C/P/D protocol in `docs/HCL_V07_SAGA_DEVELOPMENT_UTILITY_V01.md`. Its
+provider-free package is staged; no v0.7 provider outcome has been consumed.
+The audit found that SAGA's multiple annotations per story preclude treating
+one free-text goal as unique truth. The planned check therefore validates
+source anchoring and uncertainty, with blinded case adjudication after the
+run, rather than exact-string grading against a single annotation.
+
 The v0.7 capability is intention, goal and action reasoning under an evidence
 constraint. A label inferred from a hidden character plan is not automatically
 truth about the public narrative. Candidate labels need public support or must

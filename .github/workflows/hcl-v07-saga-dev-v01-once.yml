@@ -1,0 +1,70 @@
+name: HCL v0.7 SAGA Development C/P/D Once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/HCL_V07_SAGA_DEV_V01_TRIGGER"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hcl-v07-saga-dev-v01-once
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      HCL_V07_SAGA_DEV_COST_AUTHORIZED_USD: ${{ vars.HCL_V07_SAGA_DEV_COST_AUTHORIZED_USD }}
+      HCL_V07_SAGA_DEV_RUN_ONCE_TOKEN: HCL_V07_SAGA_DEV_V01_ONCE
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Enforce exact-parent first-attempt trigger
+        shell: bash
+        run: |
+          test "$GITHUB_RUN_ATTEMPT" = "1"
+          test "$(git show -s --format=%P HEAD)" = "${{ github.event.before }}"
+          test "$(cat .github/HCL_V07_SAGA_DEV_V01_TRIGGER)" = "${HCL_V07_SAGA_DEV_RUN_ONCE_TOKEN}|${{ github.event.before }}"
+          test "$(git diff --diff-filter=A --name-only '${{ github.event.before }}' "$GITHUB_SHA")" = ".github/HCL_V07_SAGA_DEV_V01_TRIGGER"
+          test "$(git diff --name-only '${{ github.event.before }}' "$GITHUB_SHA")" = ".github/HCL_V07_SAGA_DEV_V01_TRIGGER"
+          if git log --format=%H '${{ github.event.before }}' -- .github/HCL_V07_SAGA_DEV_V01_TRIGGER | grep -q .; then exit 1; fi
+      - run: python -m pip install "pandas>=2.2,<3" "openai==2.14.0"
+      - name: Verify separate budget authorization before provider call
+        run: |
+          python - <<'PY'
+          import os
+          assert float(os.getenv("HCL_V07_SAGA_DEV_COST_AUTHORIZED_USD") or "0") >= 0.50
+          assert os.getenv("DEEPSEEK_API_KEY")
+          PY
+      - name: Download pinned public source
+        run: |
+          mkdir -p .cache artifacts/hcl-v07-saga-dev-v01
+          gh api 'repos/saiumbc/SAGA/contents/data/actual_test.jsonl?ref=9c66afefb06b8bad77fc7f5913ddc8264a57c69b' \
+            --jq .content | base64 --decode > .cache/saga-actual-test.jsonl
+          echo 'a00ed709011dfdcb2016b0bb25753eaca4445afdbf8ae87bf4b33c213e415764  .cache/saga-actual-test.jsonl' | sha256sum -c -
+      - name: Reproduce source selection and provider-free regressions
+        run: |
+          python scripts/prepare_v07_saga_dev_v01.py --source .cache/saga-actual-test.jsonl
+          python scripts/run_v07_saga_dev_v01.py --source .cache/saga-actual-test.jsonl --validate-only
+          python -m unittest -v tests.test_v07_intention_runtime tests.test_v07_semantic tests.test_v07_saga_dev_v01
+      - name: Execute one bounded development check
+        run: |
+          python scripts/run_v07_saga_dev_v01.py --source .cache/saga-actual-test.jsonl --execute \
+            --out artifacts/hcl-v07-saga-dev-v01/results.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-v07-saga-dev-v01-${{ github.run_id }}
+          path: artifacts/hcl-v07-saga-dev-v01/
+          if-no-files-found: warn
+          retention-days: 90

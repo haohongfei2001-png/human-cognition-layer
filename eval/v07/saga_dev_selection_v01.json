@@ -1,0 +1,107 @@
+{
+  "format": "hcl-v07-saga-development-selection-v01",
+  "selected": [
+    {
+      "instance_id": "73a",
+      "participant": "Gina",
+      "participant_id": "p0",
+      "source_tier": "explicit_goal",
+      "story_id": "dceeb49e-c384-4df6-b525-a56f7b8c3e90",
+      "story_sha256": "24c83e7af6230c251f07f880dcc32d291b87eea0104964173b7d96a70cda1b15"
+    },
+    {
+      "instance_id": "763a",
+      "participant": "Jake",
+      "participant_id": "p0",
+      "source_tier": "explicit_goal",
+      "story_id": "b5db6b7c-601b-4ddd-9c66-3bc1cfc7d253",
+      "story_sha256": "f2578edba3ed069f207151015875529d00e9b362f9582b8e0433d2d6d5fa8bfa"
+    },
+    {
+      "instance_id": "1189a",
+      "participant": "Kelsey",
+      "participant_id": "p0",
+      "source_tier": "explicit_goal",
+      "story_id": "a9390f06-58bd-4795-8cd2-0c2accb8a367",
+      "story_sha256": "976704c07bc597e1590f4ca3eb5e090713ec07e91638217b93fd2f3c372195f7"
+    },
+    {
+      "instance_id": "1054a",
+      "participant": "Jake",
+      "participant_id": "p0",
+      "source_tier": "explicit_goal",
+      "story_id": "e83816b6-633c-4cab-a2a3-eee614ce1518",
+      "story_sha256": "dda68f9077ac2067b325d9f02adff29cde1560c83561a9ed86d332ad9b4c089d"
+    },
+    {
+      "instance_id": "1180a",
+      "participant": "Cindy",
+      "participant_id": "p0",
+      "source_tier": "explicit_goal",
+      "story_id": "1bfd5e8a-2707-4b8f-a620-03e181c3c1b7",
+      "story_sha256": "7d3d556eab027250ecfa091e0d252bc07a16edb18d4e9d0746de47b03fda2477"
+    },
+    {
+      "instance_id": "1087a",
+      "participant": "Cindy",
+      "participant_id": "p0",
+      "source_tier": "explicit_goal",
+      "story_id": "957b313c-263e-46d9-9b34-c2cfa7d0f240",
+      "story_sha256": "9fd024086c49e46dfb233986dcc9d03cf20c696d285b933b0c14a881aa29d894"
+    },
+    {
+      "instance_id": "1516a",
+      "participant": "Jared",
+      "participant_id": "p0",
+      "source_tier": "inferred_goal",
+      "story_id": "67eb8835-bddc-4acb-8dee-81d998320eb8",
+      "story_sha256": "8dae235f0ce3617008f659ccb2ce30483e97839a14fa8910906b73c6c6dd1edf"
+    },
+    {
+      "instance_id": "346a",
+      "participant": "Sam",
+      "participant_id": "p0",
+      "source_tier": "inferred_goal",
+      "story_id": "2b5885b1-f865-4cd0-ab3b-9c8ece32dc4a",
+      "story_sha256": "7f9ad3441e82055b0a17db45401be3449b2a7c4b8a1e3f98c706a808b5690eb4"
+    },
+    {
+      "instance_id": "232a",
+      "participant": "Janet",
+      "participant_id": "p0",
+      "source_tier": "inferred_goal",
+      "story_id": "85e3727e-c4f8-491f-844b-2c23a605bb2a",
+      "story_sha256": "f6521dde1edd87de71107fc2259f14885617e4aabc0b55cd77446f281d8085ac"
+    },
+    {
+      "instance_id": "1117a",
+      "participant": "Tom",
+      "participant_id": "p0",
+      "source_tier": "inferred_goal",
+      "story_id": "505db7e7-f483-464e-9158-5346c63204e7",
+      "story_sha256": "3aa1b88d6cdd3713c14903e8a4704f2f4ad2872006dff1b693a51a4a5c5922f1"
+    },
+    {
+      "instance_id": "1444a",
+      "participant": "Sam",
+      "participant_id": "p1",
+      "source_tier": "inferred_goal",
+      "story_id": "3f905b65-b954-4ebb-940e-1de416872aab",
+      "story_sha256": "33cdb2d1b35405c126d3c17774d7dfc75db02878bbde66816e61bd0ca3e95561"
+    },
+    {
+      "instance_id": "1309a",
+      "participant": "Melissa",
+      "participant_id": "p0",
+      "source_tier": "inferred_goal",
+      "story_id": "4a430b83-3c72-4fe3-9cc4-72247298b768",
+      "story_sha256": "4a1dad7f5fd2e8f36e4cde4ad04ee5184a948b92e2da04626d6bf5be5dc7052a"
+    }
+  ],
+  "selected_count": 12,
+  "selection_method": "manual source-evidence audit; development only; labels not treated as unique true mental states",
+  "source_commit": "9c66afefb06b8bad77fc7f5913ddc8264a57c69b",
+  "source_path": "data/actual_test.jsonl",
+  "source_repo": "saiumbc/SAGA",
+  "source_sha256": "a00ed709011dfdcb2016b0bb25753eaca4445afdbf8ae87bf4b33c213e415764"
+}

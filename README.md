@@ -105,6 +105,12 @@ D **30/32**；D 相对 G 的独占修正/退化为 **8/0**，相对 P 为 **12/1
 见 [runtime contract](docs/HCL_V07_INTENTION_MOTIVATION_MINIMAL_RUNTIME_V01.md)
 与 [external benchmark audit](docs/HCL_V07_EXTERNAL_BENCHMARK_AUDIT_V01.md)。
 
+v0.7 的首个小型外部开发验证已冻结为 12 条 SAGA 公开叙事的 C/P/D 比较。
+它区分叙事直接说出的目标与只能从行动推测的目标，并要求精确来源引文；
+人工 goal 标签不会被当成唯一真实动机。当前仅有无模型预检，尚未触发
+v0.7 provider 调用。该验证有独立的 USD 0.50 费用上限与一次性触发约束；
+见 [development protocol](docs/HCL_V07_SAGA_DEVELOPMENT_UTILITY_V01.md)。
+
 v0.6.1 已在 main `0bf56af7baf305ca3bebb9035c4a989794a50eb8` 完成 provider-free certification：
 - runtime correctness run `36138966541` — **SUCCESS**；
 - C/P/D provider-free run `36138966583` — **SUCCESS**。
@@ -113,7 +119,7 @@ v0.6.1 已在 main `0bf56af7baf305ca3bebb9035c4a989794a50eb8` 完成 provider-fr
 
 当前 gate：
 
-**HCL_V07_SMALL_EXTERNAL_UTILITY_PROTOCOL_AND_PROVIDER_AUTHORIZATION**
+**HCL_V07_SAGA_DEV_PROVIDER_FREE_EXACT_MAIN_THEN_SEPARATE_USD_0_50_OWNER_AUTHORIZATION**
 
 ## Intellectual-property boundary
 

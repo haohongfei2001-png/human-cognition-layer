@@ -69,8 +69,10 @@ class IntentionEvidenceEvent:
         datetime.fromisoformat(self.system_record_time.replace("Z", "+00:00"))
         if self.signal in DIRECT_SIGNALS and self.provenance not in DIRECT:
             raise ValueError("private intention/goal transitions require direct evidence")
-        if self.signal == IntentionSignal.OBSERVED_ACTION and self.provenance != BeliefEvidenceKind.OBSERVED_ACTION:
-            raise ValueError("action evidence requires observed-action provenance")
+        if self.signal == IntentionSignal.OBSERVED_ACTION and self.provenance not in {
+            BeliefEvidenceKind.OBSERVED_ACTION, BeliefEvidenceKind.NARRATOR_ASSERTION,
+        }:
+            raise ValueError("action evidence requires direct observation or narrator evidence")
         if self.signal == IntentionSignal.THIRD_PARTY_ATTRIBUTION and self.provenance != BeliefEvidenceKind.THIRD_PARTY_REPORT:
             raise ValueError("third-party attribution must preserve its source")
         if self.signal == IntentionSignal.INFERRED_MOTIVATION and self.provenance in DIRECT:
@@ -130,7 +132,7 @@ class HCLV07Runtime:
     def ingest_event(self, event: EventRecord) -> bool:
         return self.perspectives.ingest_prestructured_event(event)
 
-    def ingest_semantic_event(self, event: EventRecord, backend) -> "V07ExtractionResult":
+    def ingest_semantic_event(self, event: EventRecord, backend, *, max_tokens: int = 2048) -> "V07ExtractionResult":
         """Extract one source event without task access, then commit atomically."""
         from .semantic import V07ExtractionResult, extract_intention_evidence
 
@@ -140,7 +142,7 @@ class HCLV07Runtime:
         if event.event_id in self._semantic_results:
             return self._semantic_results[event.event_id]
         known_goals = tuple(sorted({item.goal_key for item in self._evidence.values()}))
-        result = extract_intention_evidence(event, backend, known_goals=known_goals)
+        result = extract_intention_evidence(event, backend, known_goals=known_goals, max_tokens=max_tokens)
         self.ingest_event(event)
         before = dict(self._evidence)
         try:
@@ -273,11 +275,17 @@ class HCLV07Runtime:
         self, subject_agent_id: str, *, observer_agent_id: str | None = None,
         event_time: str | None = None, knowledge_cutoff: str | None = None,
     ) -> dict:
+        # A reader can use narrator evidence when estimating a character's
+        # goal, while the character's own information view remains bounded.
+        perspective_observer = None if observer_agent_id == SYSTEM_VIEWER else observer_agent_id
         view = self.perspectives.answer_context(
-            subject_agent_id, observer_agent_id=observer_agent_id,
+            subject_agent_id, observer_agent_id=perspective_observer,
             event_time=event_time, knowledge_cutoff=knowledge_cutoff,
         )
-        visible = set(view.target_information_view.event_ids)
+        visible = self._visible_source_ids(
+            subject_agent_id, observer_agent_id,
+            event_time=event_time, knowledge_cutoff=knowledge_cutoff,
+        )
         evidence = [e.as_dict() for e in self._evidence.values()
                     if e.subject_agent_id == subject_agent_id and e.source_event_id in visible]
         evidence.sort(key=lambda e: (e["valid_time"], e["system_record_time"], e["evidence_id"]))
