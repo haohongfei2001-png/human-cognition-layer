@@ -4925,16 +4925,27 @@ Direction:
 - distinguish information exposure from belief revision, character uncertainty from system uncertainty, and narrator knowledge from character knowledge;
 - do not expand this phase into emotion, motivation, personality, relationship, moral, literary-wide or philosophical ontologies.
 
+CQ-00 closure:
+- zero-provider workflow run `36119304220`: **SUCCESS**;
+- artifact `10856742534`, digest `sha256:a22cea64022a09045d5ac13a8676abf9b36ac41f5e363cfe1fbc4c35cc429609`;
+- FANToM: **QUALIFICATION PASS**; historical 80 complete conversations excluded; 8 deterministic disjoint development conversations frozen;
+- DynToM: **NOT QUALIFIED for current evidence-constrained primary use**; four deterministic narrative-sufficiency audit trials were inspected, and 3/4 contained at least one material public-story/gold evidence ambiguity;
+- the eight separately reserved DynToM development trials remain uninspected and provider-unconsumed;
+- provider calls: **0**.
+
 Current authorization:
-- CQ-00 zero-provider benchmark/exposure qualification only;
-- freeze disjoint development qualification selections before any provider call;
-- no provider-backed CQ-01 gap probe without separate model/access/cost authorization;
-- no v0.6 cognition-runtime implementation until CQ-01 demonstrates a repeated residual gap;
+- CQ-00 is closed;
+- CQ-01 remains blocked on explicit owner choice/authorization of provider, model identity, reasoning budget and bounded monetary cap;
+- no specialized v0.6 cognition-runtime implementation until CQ-01 demonstrates a repeated residual gap;
 - no LongMemEval paid trigger; its sealed 32-row package remains intact and reusable.
+
+Evidence:
+- `eval/v06/perspective_belief_cq00_v01.json`
+- `reports/HCL_V06_PERSPECTIVE_BELIEF_CQ00_CLOSURE.md`
 
 LongMemEval status:
 - v0.5 guarded workflow remains staged;
 - sealed 32 efficacy rows remain provider-unconsumed;
 - paid execution is deprioritized and is not a prerequisite for v0.6.
 
-**Current gate: HCL_V06_PERSPECTIVE_BELIEF_CQ00_ZERO_PROVIDER_QUALIFICATION_NEXT**
+**Current gate: HCL_V06_PERSPECTIVE_BELIEF_CQ01_FANTOM_PROVIDER_MODEL_COST_AUTHORIZATION**
