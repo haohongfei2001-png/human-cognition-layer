@@ -106,6 +106,38 @@ class LongMemEvalQualificationTests(unittest.TestCase):
         self.assertEqual(a, b)
         self.assertNotEqual(a, c)
 
+
+    def test_equal_session_timestamps_preserve_source_session_order(self):
+        row = self.synthetic_row()
+        row["haystack_dates"] = [
+            "2023/05/20 (Sat) 09:10",
+            "2023/05/20 (Sat) 09:10",
+        ]
+        view = state_input_view(row)
+        events = events_from_state_view(view, id_prefix="fixture")
+        self.assertEqual(
+            [e["actor_id"] for e in events],
+            [
+                "longmemeval_user",
+                "longmemeval_assistant",
+                "longmemeval_user",
+                "longmemeval_assistant",
+            ],
+        )
+        self.assertEqual(
+            [e["raw_text"] for e in events],
+            [
+                "I prefer tea.",
+                "Noted.",
+                "I now prefer coffee instead of tea.",
+                "Updated.",
+            ],
+        )
+        self.assertEqual(
+            [e["valid_time"] for e in events],
+            sorted(e["valid_time"] for e in events),
+        )
+
     def test_non_monotonic_file_order_is_sorted_by_explicit_timestamp(self):
         row = self.synthetic_row()
         row["haystack_dates"] = list(reversed(row["haystack_dates"]))
