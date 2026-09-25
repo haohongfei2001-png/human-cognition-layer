@@ -54,13 +54,13 @@ v0.6 的第一个候选能力不是继续扩充 memory，而是验证：
 
 > 在多人、时间变化的对话或叙事中，显式约束人物的信息视角与信念修订，是否能减少当前强模型仍会犯的真实人物理解错误。
 
-当前先做 **Capability Qualification**，而不是直接建设新的心理状态机：
+CQ-00 已完成，随后 owner 明确授权先进行 benchmark-independent 的最小 runtime 开发，因此 CQ-01 不再是实现前置条件：
 
-1. CQ-00 已完成：零 provider CI 成功；FANToM 通过资格审查并冻结 8 个历史完全不重叠的 development conversation；
+1. CQ-00：FANToM 通过资格审查并冻结 8 个历史完全不重叠的 development conversation；
 2. DynToM 在 4 个预冻结 narrative-sufficiency audit trial 中有 3 个出现公开叙事不足以唯一支持 gold belief 的问题，因此暂不作为当前 evidence-constrained primary source；
-3. CQ-01：只有另行批准 provider / model / reasoning budget / cost 后，先在 FANToM development set 比较强模型 direct control 与薄 perspective scaffold；
-4. 只有 CQ-01 仍发现重复、可审计的 perspective / belief residual errors，才允许实现最小 v0.6 mechanism；
-5. 后续正式 efficacy 必须同时面对 C / P / competent G / D，而不是只战胜裸模型。
+3. v0.6 minimal runtime 已实现并通过 provider-free certification；
+4. 下一步外部验证只做小规模 C / P / D utility check：强模型 direct control、薄 perspective scaffold、以及冻结的 v0.6 runtime；
+5. specialized D 若有真实增量，再进入包含 competent G 的正式 efficacy 阶段。
 
 完整合同：
 
@@ -68,24 +68,32 @@ v0.6 的第一个候选能力不是继续扩充 memory，而是验证：
 
 当前 LongMemEval 32-row C/D/G package 保持冻结、未消费，不触发 paid run，也不再作为 v0.6 的前置条件。其 hash / chronology / gold-firewall / one-shot / paired-statistics / cost-accounting 资产保留供未来长期状态工程问题复用。
 
-当前开发已进入实际 capability implementation，而不是继续等待 CQ-01：
+v0.6 第一块实际 cognition capability 已完成实现并通过 provider-free certification：
 
-- 新增一阶人物信息视角与有限二阶视角；
-- 新增带来源身份的 belief evidence；
-- 区分“人物自己不确定”和“系统证据不足”；
+- 一阶人物信息视角与有限二阶视角；
+- 带来源身份的 belief evidence；
+- “人物自己不确定”和“系统证据不足”严格分离；
 - 收到挑战不自动改变原信念；
 - 只有直接修订证据才能 supersede 旧 belief；
-- 为基础模型提供 perspective-bounded answer context。
+- 为基础模型提供 perspective-bounded answer context；
+- narrator 对人物心理的直接证据可供 HCL 建模，但 narrator/world 信息不会因此泄漏到人物可见信息中。
+
+实现 main：`9d632cfeea469555ef2896740fa43ed99aa467bc`  
+main certification run：`36125320225` — **SUCCESS**。
 
 实现合同：
 
 - [docs/HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_V01.md](docs/HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_V01.md)
 
-CQ-01 FANToM 仍保留为后续外部验证，不再阻塞 benchmark-independent runtime 开发。
+下一步不是继续扩 architecture，而是在已冻结的 FANToM development conversations 上做一个小规模 C / P / D 外部效用检查。该步骤仍需单独批准 provider、model、reasoning budget 与成本上限。
+
+完整 closure：
+
+- [reports/HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_CLOSURE.md](reports/HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_CLOSURE.md)
 
 当前 gate：
 
-**HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_PROVIDER_FREE_CERTIFICATION**
+**HCL_V06_MINIMAL_RUNTIME_COMPLETE_EXTERNAL_CPD_UTILITY_CHECK_NEXT**
 
 ## Intellectual-property boundary
 
