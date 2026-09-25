@@ -4787,3 +4787,40 @@ external ingest-compatibility diagnostic on a small deterministic subset of the
 changes.
 
 **Current gate: HCL_V05_EQ02_QUALIFICATION_PASS_EXTERNAL_INGEST_COMPATIBILITY_NEXT**
+
+
+## HCL v0.5 LongMemEval external ingest compatibility diagnostic closure
+
+Closure:
+- `reports/HCL_V05_LONGMEMEVAL_INGEST_DIAGNOSTIC_V01_CLOSURE.md`
+
+Exact one-shot evidence:
+- run `36098161768`, attempt 1: SUCCESS;
+- trigger/main `52b8a7502a3b0ea42f08e159e503487ab7a6fe4f`;
+- artifact `10848441320`;
+- artifact ZIP SHA-256:
+  `07cf92c76619ab542e56e42883e0e669508e62fc8a348047cb1bb17df6b6e542`;
+- result JSON SHA-256:
+  `1aafe1186fcc1df2b566d37ef2a562576006f3d76c1b590646e3effd0591e9f6`.
+
+Frozen compatibility gate: **PASS**.
+- both development rows completed: 971/971 successful event ingests;
+- semantic failures: 0/971 (0%, threshold <=1%);
+- semantic repairs: 0/971 (0%, threshold <=5%);
+- committed stance events: 10 (threshold >0).
+
+The two diagnostic IDs `c7dc5443` and `cc5ded98` are now consumed. The
+sealed 32-row LongMemEval efficacy selection is still provider-unconsumed. This
+was ingestion only: no task questions, answers, gold labels or task scores were
+used. The sparse stance yield does not prove extraction completeness, and no
+external efficacy or HCL superiority claim follows from this compatibility pass.
+
+Next:
+- freeze a paired C/D/G efficacy protocol with equal external evidence;
+- implement a competent generic structured-memory G with deterministic budget
+  handling and no ordinary-size event loss;
+- pin official judge prompt/model and retain paired raw responses;
+- complete provider-free certification and second-model-family access/profile
+  prerequisite before consuming the sealed efficacy selection.
+
+**Current gate: HCL_V05_LONGMEMEVAL_INGEST_DIAGNOSTIC_V01_COMPATIBILITY_PASS_EFFICACY_PROTOCOL_NEXT**
