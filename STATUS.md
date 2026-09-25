@@ -5053,3 +5053,53 @@ Evidence:
 LongMemEval remains untouched and sealed.
 
 **Current gate: HCL_V06_FANTOM_CPD_V01_TRANSPORT_REPAIR_PROVIDER_FREE_CERTIFICATION**
+
+
+## HCL v0.6 FANToM C/P/D repair result and v0.6.1 capability repair
+
+Valid repair execution:
+- run `36137611816`: **SUCCESS**;
+- trigger/main `da513e38069e8456dba9a030b079504f0ae48332`;
+- artifact `10865463427`;
+- artifact digest `sha256:577272f0d6fe994c70a3c334898a7627f53b14a86b6937f4ca5db7aa0b6c87e6`;
+- same eight already-consumed development conversations;
+- provider calls: 32;
+- failures: 0;
+- conservative A2 character-as-token peak-price upper bound: USD 0.281624.
+
+Development result:
+- C direct: **4/8**;
+- P thin perspective scaffold: **4/8**;
+- D HCL v0.6: **6/8**;
+- D vs P: 2 D-only correct, 0 P-only correct;
+- D vs C: 2 D-only correct, 0 C-only correct;
+- pre-registered directional gate: **PASS**.
+
+Manual audit:
+- conversation 240: credible bounded second-order perspective save;
+- conversation 220: credible late-join answerability save;
+- conversation 197: all arms wrong; exposes an implicit first-appearance / late-entry boundary weakness, but the exact A2 access map was not preserved so the causal path is not claimed as proven;
+- conversation 36: all arms wrong; exposes the general error class partial/related summary != precise complete knowledge.
+
+Evidence:
+- `reports/HCL_V06_FANTOM_CPD_V01_REPAIR_CLOSURE.md`
+
+Claim boundary:
+- positive **development utility signal**, not fresh efficacy;
+- n=8, one model family, consumed development evidence;
+- no broad Theory-of-Mind or general human-cognition superiority claim.
+
+v0.6.1 capability repair now:
+- deterministic participant-presence evidence floor after access extraction;
+- direct-address evidence may establish presence before first reply;
+- future participants cannot receive earlier turns merely because the adapter knows the full roster;
+- perspective semantics explicitly require full material support for precise compound knowledge;
+- future artifacts retain redacted turn/speaker/listener access maps for causal audit;
+- no rerun of the same eight consumed conversations to manufacture a new score.
+
+Contract:
+- `docs/HCL_V06_PERSPECTIVE_BOUNDARY_REPAIR_V061.md`
+
+LongMemEval remains sealed and untriggered.
+
+**Current gate: HCL_V06_V061_PERSPECTIVE_BOUNDARY_REPAIR_PROVIDER_FREE_CERTIFICATION**
