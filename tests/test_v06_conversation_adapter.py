@@ -122,7 +122,7 @@ class V06ConversationAdapterTests(unittest.TestCase):
 
     def test_future_participant_is_removed_before_first_presence_evidence(self):
         transcript = "\n".join([
-            "Ana: The launch code is 4312.",
+            "Ana: Bo, the launch code is 4312.",
             "Bo: I heard it.",
             "Harmony: Hello Ana and Bo!",
             "Ana: Welcome, Harmony.",
