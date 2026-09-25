@@ -9,7 +9,8 @@ import unittest
 from hcl.v04.model import EventRecord
 from hcl.v06.generic_state import GenericStructuredState
 from scripts.prepare_v06_fantom_cpgd_fresh_v01 import excluded_conversations, sha
-from scripts.run_v06_fantom_cpgd_fresh_v01 import COST_CAP_USD, OneCallDeepSeekBackend, _hard_cap_is_safe, evaluate_one
+from scripts.run_v06_fantom_cpgd_fresh_v01 import BudgetLedger, COST_CAP_USD, OneCallDeepSeekBackend, _hard_cap_is_safe, evaluate_one
+from scripts.run_v06_fantom_cpd_v01 import BudgetExceeded
 
 
 class FakeBackend:
@@ -87,10 +88,13 @@ class FreshPilotTests(unittest.TestCase):
             return SimpleNamespace(
                 model="same-model",
                 choices=[SimpleNamespace(message=SimpleNamespace(content="ok"))],
+                usage=SimpleNamespace(prompt_tokens=5, prompt_cache_hit_tokens=0, prompt_cache_miss_tokens=5, completion_tokens=2),
             )
         backend = OneCallDeepSeekBackend.__new__(OneCallDeepSeekBackend)
         backend.client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=create)))
         backend.calls = backend.input_chars = backend.output_chars = 0
+        backend.ledger = BudgetLedger()
+        backend.rated_cost_usd = 0.0
         backend.provider_wall_seconds = 0.0
         backend.response_models = set()
         messages = [{"role": "user", "content": "hello"}]
@@ -100,6 +104,35 @@ class FreshPilotTests(unittest.TestCase):
         self.assertEqual(backend.metrics()["calls"], 2)
         self.assertTrue(all(call["extra_body"] == {"thinking": {"type": "disabled"}} for call in calls))
         self.assertEqual(calls[1]["response_format"], {"type": "json_object"})
+        self.assertGreater(backend.metrics()["rated_cost_usd"], 0)
+
+    def test_shared_cost_cap_blocks_request_before_provider_call(self):
+        backend = OneCallDeepSeekBackend.__new__(OneCallDeepSeekBackend)
+        calls = []
+        backend.client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=lambda **kwargs: calls.append(kwargs))))
+        backend.ledger = BudgetLedger(cap_usd=0.000001)
+        backend.calls = backend.input_chars = backend.output_chars = 0
+        backend.rated_cost_usd = 0.0
+        backend.provider_wall_seconds = 0.0
+        backend.response_models = set()
+        with self.assertRaises(BudgetExceeded):
+            backend.complete([{"role": "user", "content": "hello"}], max_tokens=64)
+        self.assertEqual(calls, [])
+
+    def test_missing_provider_usage_charges_reservation_and_fails_closed(self):
+        backend = OneCallDeepSeekBackend.__new__(OneCallDeepSeekBackend)
+        backend.client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(
+            create=lambda **kwargs: SimpleNamespace(usage=None)
+        )))
+        backend.ledger = BudgetLedger()
+        backend.calls = backend.input_chars = backend.output_chars = 0
+        backend.rated_cost_usd = 0.0
+        backend.provider_wall_seconds = 0.0
+        backend.response_models = set()
+        with self.assertRaisesRegex(RuntimeError, "omitted token usage"):
+            backend.complete([{"role": "user", "content": "hello"}], max_tokens=64)
+        self.assertGreater(backend.ledger.spent_usd, 0)
+        self.assertEqual(backend.calls, 1)
 
 
 if __name__ == "__main__":

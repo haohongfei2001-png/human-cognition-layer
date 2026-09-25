@@ -63,8 +63,16 @@ Frozen maximums: C/P/G/D each 32 answer requests; access adapter 64 requests
 overall. Component input/output character caps are enforced in the runner.
 The combined maximum is 8.56 million input characters and 760,000 output
 characters. At the frozen conservative character-as-token peak-price planning
-rates, the maximum is USD **3.48**, below the declared **USD 3.50 planning
-cap**. This is a planning bound, not a guaranteed invoice amount.
+rates, the character-cap maximum is USD **3.48**. The runner also shares a
+USD **3.50 operational rated-cost ledger** across every arm. Before each
+request, it reserves a conservative input-token bound from UTF-8 bytes plus
+1,024 framing tokens and the full output-token cap. If the reservation would
+exceed USD 3.50, it makes no request. After a response, it charges the
+provider-reported cache-hit, cache-miss and output tokens at the peak rates
+from [DeepSeek's published pricing](https://api-docs.deepseek.com/quick_start/pricing/).
+Missing usage or transport uncertainty charges the full reservation and
+stops the consumed run. This is a provider-rated cost guard, not an invoice
+guarantee if the provider changes prices or bills outside documented usage.
 
 Existing owner authorization in the prior v0.6 C/P/D protocol covered a
 different, eight-conversation development run up to USD 1.00. It does **not**
