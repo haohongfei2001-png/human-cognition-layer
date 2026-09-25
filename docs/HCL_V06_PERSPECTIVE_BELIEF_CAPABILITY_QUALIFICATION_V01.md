@@ -1,6 +1,6 @@
 # HCL v0.6 Capability Qualification — Evidence-Constrained Perspective & Belief Revision v0.1
 
-Status: **DESIGN FROZEN / ZERO-PROVIDER QUALIFICATION IMPLEMENTATION NEXT / NO v0.6 COGNITION RUNTIME AUTHORIZED**
+Status: **CQ-00 CLOSED / FANToM QUALIFIED / DynToM NOT QUALIFIED FOR CURRENT EVIDENCE-CONSTRAINED PRIMARY USE / CQ-01 OWNER AUTHORIZATION NEXT**
 
 ## Purpose
 
@@ -230,14 +230,25 @@ LongMemEval may be resumed later if the project specifically needs to answer a l
 
 ## Current authorization
 
-Authorized now:
-- CQ-00 zero-provider implementation and certification only.
+CQ-00 closure:
+- provider-free CI run `36119304220`: SUCCESS;
+- frozen manifest: `eval/v06/perspective_belief_cq00_v01.json`;
+- closure report: `reports/HCL_V06_PERSPECTIVE_BELIEF_CQ00_CLOSURE.md`;
+- FANToM: PASS with 8 complete, historically disjoint development conversations;
+- DynToM: FAIL for current strict evidence-constrained primary use after the four deterministically selected narrative-sufficiency audit trials exposed material public-story/gold ambiguity in 3/4 trials;
+- zero provider calls;
+- no LongMemEval sealed row consumed.
 
-Not authorized by this contract:
-- provider-backed CQ-01;
-- v0.6 cognition-runtime implementation;
+Authorized automatically after CQ-00:
+- no additional provider-backed work.
+
+Requires explicit owner authorization before execution:
+- CQ-01 provider/model identity, reasoning budget, API access and bounded monetary cap.
+
+Still not authorized:
+- specialized v0.6 cognition-runtime implementation;
 - fresh efficacy runs;
 - LongMemEval paid execution;
 - model training.
 
-**Current gate: HCL_V06_PERSPECTIVE_BELIEF_CQ00_ZERO_PROVIDER_QUALIFICATION_NEXT**
+**Current gate: HCL_V06_PERSPECTIVE_BELIEF_CQ01_FANTOM_PROVIDER_MODEL_COST_AUTHORIZATION**
