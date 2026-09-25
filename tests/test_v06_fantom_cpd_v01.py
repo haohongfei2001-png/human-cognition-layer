@@ -112,7 +112,11 @@ class V06FantomCPDTests(unittest.TestCase):
         adapter_payload = adapter.calls[0][1][1]["content"]
         self.assertNotIn(record["question"], adapter_payload)
         self.assertNotIn(record["target"], adapter_payload)
-        self.assertNotIn(record["correct_answer"], adapter_payload)
+        adapter_json = json.loads(adapter_payload)
+        self.assertEqual(set(adapter_json), {"known_agent_ids", "turns"})
+        self.assertNotIn("question", adapter_json)
+        self.assertNotIn("gold", adapter_json)
+        self.assertNotIn("correct_answer", adapter_json)
 
     def test_d_answer_does_not_receive_omniscient_full_context_string(self):
         context = "Ana: secret one.\nBo: hello."
