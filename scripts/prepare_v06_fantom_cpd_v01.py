@@ -7,8 +7,11 @@ import argparse
 import json
 from pathlib import Path
 from typing import Any
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from scripts.inventory_fantom_external_v02 import (
     accessibility,
