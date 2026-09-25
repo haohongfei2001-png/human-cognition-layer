@@ -5016,3 +5016,40 @@ Next:
 - do not expand architecture before that utility check unless an independent correctness defect is found.
 
 **Current gate: HCL_V06_MINIMAL_RUNTIME_COMPLETE_EXTERNAL_CPD_UTILITY_CHECK_NEXT**
+
+
+## HCL v0.6 FANToM C/P/D development utility — attempt 1 invalid
+
+Attempt 1:
+- workflow run `36128133383`: GitHub job SUCCESS but research result **INVALID**;
+- trigger/main `c7788f22378bbf5c8f2f74fea5cf02910ffd298f`;
+- artifact `10860698515`;
+- artifact digest `sha256:0a14b744a738eaeeb00c1da16536c8fb13b35bcf7776e26e3f885a351a8b0efb`;
+- provider calls: 32;
+- D access adapter: 8/8 completed, zero repairs;
+- C/P/D answer calls: 24/24 returned empty final content;
+- the apparent C=0/8, P=0/8, D=0/8 must **not** be interpreted as model or HCL capability evidence.
+
+Root cause:
+- current `deepseek-flash` enables thinking by default;
+- the frozen DeepSeek profile's `{"thinking":{"type":"disabled"}}` extra body was applied only to JSON-mode requests;
+- the D JSON access adapter therefore worked, while text answer calls used default thinking and exhausted the bounded answer budget without final content.
+
+Consumption:
+- all eight FANToM development conversations are now consumed development evidence;
+- a repair may rerun the exact same selection only;
+- the repair is not fresh evidence and cannot become sealed efficacy evidence.
+
+Repair:
+- provider-specific request extras now apply to both text and JSON calls;
+- provider-free tests verify DeepSeek text requests carry the non-thinking extra body;
+- empty final answer content now fails closed as transport/harness failure;
+- exact-parent repair workflow uses token `HCL_V06_FANTOM_CPD_V01_REPAIR_20260925_A2`;
+- original invalid artifact remains preserved.
+
+Evidence:
+- `reports/HCL_V06_FANTOM_CPD_V01_ATTEMPT1_INVALID.md`
+
+LongMemEval remains untouched and sealed.
+
+**Current gate: HCL_V06_FANTOM_CPD_V01_TRANSPORT_REPAIR_PROVIDER_FREE_CERTIFICATION**
