@@ -4661,3 +4661,43 @@ Next:
 - no further near-identical internal synthetic tuning.
 
 **Current gate: HCL_V05_INTERNAL_SYNTHETIC_COMPLETE_ROUTE_B_PASS_EXTERNAL_TRANSFER_NEXT**
+
+
+## HCL v0.5 external validation / cross-model transfer foundation
+
+Contract:
+- `docs/HCL_V05_EXTERNAL_TRANSFER_FOUNDATION_V01.md`
+
+Internal synthetic capability tuning is closed.
+
+External exposure remains binding:
+- CogToM historically exposed;
+- SOTOPIA-Hard templates exposed;
+- FANToM v0.1/v0.2: **80 conversations consumed**;
+- Hi-ToM v0.1: **60 selected rows consumed**.
+
+Benchmark qualification:
+- MemoryAgentBench FactConsolidation: first **external mechanism** qualification
+  target; deterministic accuracy, conflict/update focus; not a human-cognition
+  claim;
+- DynToM: leading later **dynamic human cognition** candidate, but current v0.5
+  does not yet have a benchmark-independent narrator-supported mental-state
+  evidence bridge;
+- FANToM: thematically relevant but partially consumed and not the first v0.5
+  run;
+- LongMemEval: practical secondary candidate with an LLM-judge confound.
+
+Cross-model prerequisite:
+- provider capabilities are now explicit rather than implicitly DeepSeek;
+- `deepseek_flash` preserves historical request behavior;
+- `qwen_openai` and `generic_openai` do not inherit DeepSeek-specific
+  `thinking` request bodies and do not assume seed support;
+- unknown profiles fail closed.
+
+No external benchmark row and no new provider/model call is consumed by this
+foundation milestone.
+
+Next authorized work:
+**EQ-01 — MemoryAgentBench FactConsolidation zero-provider qualification**.
+
+**Current gate: HCL_V05_EXTERNAL_TRANSFER_FOUNDATION_V01_FROZEN_EQ01_ZERO_PROVIDER_NEXT**
