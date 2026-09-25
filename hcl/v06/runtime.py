@@ -349,7 +349,11 @@ class HCLV06Runtime:
                 event_time=event_time,
                 knowledge_cutoff=knowledge_cutoff,
             )
-            observer_for_beliefs = target_agent_id
+            # Raw narrator/reader-only facts must not enter the character's
+            # information view. Direct narrator evidence *about the character's
+            # belief*, however, is evidence available to the external HCL
+            # system when modeling that character. Keep these channels separate.
+            observer_for_beliefs = SYSTEM_VIEWER
             order = 1
         else:
             information_view = self.second_order_view(
