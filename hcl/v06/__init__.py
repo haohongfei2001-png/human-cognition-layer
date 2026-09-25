@@ -1,3 +1,10 @@
+from .conversation import (
+    ConversationAdapterError,
+    ConversationExtractionResult,
+    ParsedTurn,
+    extract_conversation_events,
+    parse_transcript,
+)
 """HCL v0.6 evidence-constrained perspective and belief runtime."""
 
 from .belief import (
@@ -27,12 +34,15 @@ from .semantic import (
 
 __all__ = [
     "BeliefEvidenceEvent",
+    "ConversationAdapterError",
+    "ConversationExtractionResult",
     "BeliefEvidenceKind",
     "BeliefSignal",
     "BeliefStatus",
     "ChallengeRelation",
     "CurrentBeliefEstimate",
     "HCLV06Runtime",
+    "ParsedTurn",
     "PerspectiveAnswerContext",
     "PerspectiveView",
     "SYSTEM_VIEWER",
@@ -42,7 +52,9 @@ __all__ = [
     "bounded_second_order_perspective",
     "event_accessible_to",
     "extract_belief_evidence",
+    "extract_conversation_events",
     "first_order_perspective",
+    "parse_transcript",
     "project_belief_estimate",
     "project_subject_beliefs",
     "viewer_can_establish_target_access",
