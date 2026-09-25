@@ -6,7 +6,7 @@ Human Cognition Layer (HCL)
 
 ## Current phase
 
-**HCL v0.6 — Capability Qualification: Evidence-Constrained Perspective & Belief Revision**
+**HCL v0.6 fresh comparative pilot staged; v0.7 intention runtime provider-free candidate**
 
 ## Core doctrine
 
@@ -5136,3 +5136,38 @@ Next research decision:
 - alternatively, HCL may proceed to a new human-cognition capability only after keeping the v0.6.1 perspective runtime frozen as a reusable component.
 
 **Current gate: HCL_V06_V061_PERSPECTIVE_RUNTIME_FROZEN_NEXT_CAPABILITY_OR_FRESH_EFFICACY**
+
+## HCL v0.6 fresh C/P/G/D provider-free package and v0.7-A candidate
+
+Remote main was reread at `47f26c9fa106ed4b8f7e0253c2fedbf518fc312a`;
+no open HCL PR existed at takeover. The A2 closure and v0.6.1 repair were
+already merged, so they were not repeated. The independent four-case audit is
+`reports/HCL_V06_FANTOM_CPD_V01_CASE_AUDIT.md`. It preserves the A2 access-map
+causal limit, the eight consumed development conversations and the invalid
+Attempt 1 record.
+
+Fresh pilot provider-free package:
+- 32 disjoint complete FANToM conversations, eight per frozen stratum;
+- historical 80 plus v0.6 development eight excluded;
+- pinned archive, salt, IDs, context/question hashes and selection digest;
+- C direct, P thin scaffold, competent generic structured G, frozen v0.6.1 D;
+- G and D share question-blind access evidence; both states precede task release;
+- single-call, no-retry DeepSeek transport and component call/character caps;
+- zero-provider preflight and independent firewall/regression tests;
+- staged one-shot workflow **not triggered**.
+
+Protocol: `docs/HCL_V06_FANTOM_CPGD_FRESH_V01.md`. The conservative planning
+ceiling is USD 3.50. Prior authorization was limited to the different USD 1.00
+development run, so no fresh provider call is authorized yet. No fresh score or
+v0.6 final RETAIN/SIMPLIFY/REVISE decision exists. LongMemEval remains untouched.
+
+In parallel, the benchmark-independent v0.7 intention/goal runtime is a
+provider-free candidate. It reuses v0.6 perspective boundaries and adds typed
+explicit intentions, goal state, actions, inferred motivations, third-party
+attributions, support/counterevidence, direct revision, completed/abandoned/
+unresolved state and distinct system/character uncertainty. Independent local
+provider-free tests passed; exact-main CI is pending. External source audit
+identifies SAGA as a conditional development candidate and Moral Stories as a
+secondary explicit-goal check; neither has been provider-consumed for v0.7.
+
+**Current gate: V06_FRESH_PROVIDER_FREE_CERTIFICATION_THEN_OWNER_BUDGET_AUTHORIZATION; V07_A_PROVIDER_FREE_CERTIFICATION**
