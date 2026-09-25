@@ -6,7 +6,7 @@ Human Cognition Layer (HCL)
 
 ## Current phase
 
-**PHASE-06 — HCL v0.4 capability runtime / correctness refinement / incremental utility unproven**
+**HCL v0.6 — Capability Qualification: Evidence-Constrained Perspective & Belief Revision**
 
 ## Core doctrine
 
@@ -4911,3 +4911,30 @@ Candidate `8f770b2000c1712c5460580106434b973d27623b` passed provider-free cloud 
 The paid gate is held: official GPT-4o judge and independent Qwen-family access are not configured. Before any trigger, verify access, current prices, and an owner-approved monetary cap. Call and character caps in the staged code are operational safeguards, not a billable-token or currency cap. A new paid account, credential, or commitment remains an owner decision.
 
 **Current gate: HCL_V05_LONGMEMEVAL_CDG_V01_GUARDED_WORKFLOW_STAGED_PAID_ACCESS_BLOCKED**
+
+
+## HCL v0.6 capability qualification
+
+Contract:
+- `docs/HCL_V06_PERSPECTIVE_BELIEF_CAPABILITY_QUALIFICATION_V01.md`
+
+Direction:
+- v0.5 remains frozen as a narrow explicit-stance / evidence-routing / provenance foundation;
+- the next candidate human-cognition capability is evidence-constrained character perspective and belief revision;
+- do not assume a specialized HCL mechanism is necessary before testing a strong direct model and a thin perspective scaffold;
+- distinguish information exposure from belief revision, character uncertainty from system uncertainty, and narrator knowledge from character knowledge;
+- do not expand this phase into emotion, motivation, personality, relationship, moral, literary-wide or philosophical ontologies.
+
+Current authorization:
+- CQ-00 zero-provider benchmark/exposure qualification only;
+- freeze disjoint development qualification selections before any provider call;
+- no provider-backed CQ-01 gap probe without separate model/access/cost authorization;
+- no v0.6 cognition-runtime implementation until CQ-01 demonstrates a repeated residual gap;
+- no LongMemEval paid trigger; its sealed 32-row package remains intact and reusable.
+
+LongMemEval status:
+- v0.5 guarded workflow remains staged;
+- sealed 32 efficacy rows remain provider-unconsumed;
+- paid execution is deprioritized and is not a prerequisite for v0.6.
+
+**Current gate: HCL_V06_PERSPECTIVE_BELIEF_CQ00_ZERO_PROVIDER_QUALIFICATION_NEXT**
