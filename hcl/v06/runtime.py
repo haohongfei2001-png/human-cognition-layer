@@ -60,6 +60,7 @@ class PerspectiveAnswerContext:
                 "system_uncertainty_is_not_character_uncertainty": True,
                 "narrator_knowledge_is_not_character_knowledge": True,
                 "indirect_evidence_does_not_establish_private_belief": True,
+                "partial_or_related_evidence_is_not_precise_knowledge": True,
             },
         }
 
@@ -466,6 +467,7 @@ class HCLV06Runtime:
                 "information_exposure_is_not_belief_acceptance": True,
                 "system_uncertainty_is_not_character_uncertainty": True,
                 "reader_narrator_information_does_not_leak_to_characters": True,
+                "partial_or_related_evidence_is_not_precise_knowledge": True,
             },
         }
 
@@ -495,6 +497,9 @@ class HCLV06Runtime:
             "SYSTEM_INSUFFICIENT means the evidence is insufficient to know the "
             "character's belief; it does not mean the character is uncertain. "
             "Indirect reports/actions are evidence, not private-belief truth. "
+            "A related topic or partial summary is not the same as knowing a "
+            "precise compound fact: require support for every material detail "
+            "before treating precise information as known. "
             "If the bounded evidence cannot answer the question, say that the "
             "available evidence is insufficient."
         )
