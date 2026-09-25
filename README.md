@@ -46,44 +46,33 @@ HCL 首先要求认知表示和更新本身在事实、信息边界、时间关�
 
 当前 canonical 阶段：
 
-**PHASE-05 — HCL v0.4 Research Reset / Design-Only**
+**HCL v0.5 — External Validation & Cross-Model Transfer**
 
-HCL v0.3 现在被正式定位为：
+v0.5 已完成内部 synthetic capability loop。最新冻结结果不是“HCL 已证明让底座模型更聪明”，而是：
 
-> **baseline epistemic/social-cognition prototype**
+- fresh seeded-state pilot：HCL 24/24，strong ordinary memory 23/24；
+- final strong-baseline replication：HCL 48/48，generic structured state 36/48，free-form memory 38/48；
+- generic baseline 存在 54 次可避免的 state-budget update failure，因此不主张 clean capability superiority；
+- 预注册 Route B practical module utility 成立：HCL 在该 slice 上维持完整正确性与可审计状态，同时 provider-state-management 成本显著更低。
 
-v0.3 已经完成了一整套可运行基础设施：
+因此项目已停止继续构造近似内部 synthetic efficacy test。
 
-- always-on cognition state；
-- answer generation / checker / bounded revision；
-- Decision Policy；
-- Action Checker；
-- SOTOPIA integration；
-- OpenAI-compatible provider transport；
-- synthetic reliability / regression / adjudication harness。
+当前工作改为：
 
-最新 v0.3 synthetic package 已完成：
+1. independently authored external validation；
+2. cross-base-model transfer；
+3. 使用 competent generic structured-memory baseline；
+4. 严格维护 consumed/fresh evidence boundary。
 
-- state-generation reliability: 24/24；
-- fresh answer semantic-faithfulness: 12/12；
-- output-interface: 8/8 + 8/8；
-- state fidelity: adjudicated semantic 12/12；
-- answer checker: adjudicated behavioral 12/12。
+外部验证与迁移合同：
 
-这些结果说明 **v0.3 baseline 已经实现并具有稳定工程行为**。
+- [docs/HCL_V05_EXTERNAL_TRANSFER_FOUNDATION_V01.md](docs/HCL_V05_EXTERNAL_TRANSFER_FOUNDATION_V01.md)
+- [reports/HCL_V05_STRONG_BASELINE_REPLICATION_V01_CLOSURE.md](reports/HCL_V05_STRONG_BASELINE_REPLICATION_V01_CLOSURE.md)
+- [docs/HCL_V04_EVALUATION_EXPOSURE_REGISTER.md](docs/HCL_V04_EVALUATION_EXPOSURE_REGISTER.md)
 
-它们不证明：
+当前第一项工作是 **EQ-01：MemoryAgentBench FactConsolidation zero-provider qualification**。它只用于判断 external mechanism validation 是否能在不改变 v0.5 语义、不给模型答案结构、且不重现内部 generic-state budget 缺陷的条件下成立；尚未授权 provider-backed benchmark execution。
 
-- HCL 已经是最终正确的复杂认知架构；
-- HCL 已经在广泛外部任务上稳定优于裸模型；
-- HCL 已经跨底座模型迁移；
-- synthetic 满分等于真实认知能力提升。
-
-因此当前不继续沿着“benchmark failure → prompt patch → synthetic gate”滚动开发。
-
-下一阶段首先重新设计 v0.4 的研究问题、模块边界、representation/update contract、persistent state、ablation、cross-base transfer 和独立外部验证防火墙。
-
-**Capability Development Plan v0.1 已形成，但仍是 draft。当前下一步是能力架构审查：判断第一版最小能力升级是否更正确、更有用、可实现，并吸收已有研究中的有效机制。冻结 correctness contract 与最小实现边界后即可进入 v0.4 minimal implementation；在此之前不消费新的 fresh external benchmark。**
+DynToM 是后续动态 human mental-state validation 的重要候选，但当前 v0.5 不会为了适配第三人称 benchmark narration 而临时放宽 stance evidence semantics。
 
 ## Intellectual-property boundary
 
