@@ -4902,3 +4902,12 @@ gated on the exact-head one-shot workflow, verified official-judge and second
 model-family access, endpoint/profile validation, and bounded cost commitment.
 
 **Current gate: HCL_V05_LONGMEMEVAL_CDG_V01_PROVIDER_FREE_PACKAGE_PASS_PAID_PREREQUISITES_OPEN**
+
+
+## HCL v0.5 LongMemEval C/D/G guarded workflow staging
+
+Candidate `8f770b2000c1712c5460580106434b973d27623b` passed provider-free cloud checks: C/D/G preflight run `36103498615`, v0.5 Current Stance Core `36103498581`, and v0.4 Minimal Slice `36103498817` all SUCCESS. Preflight artifact `10850626094`, SHA-256 `83aa0f61d470bc9f15a327a5ec192c040043e0c94ca39d8d25b1262367447b60`. The provider-free suite has 11 checks; request-shape validation makes zero provider calls. The staged once workflow is trigger-file-only, and its trigger file is absent. The frozen 32 efficacy rows remain provider-unconsumed.
+
+The paid gate is held: official GPT-4o judge and independent Qwen-family access are not configured. Before any trigger, verify access, current prices, and an owner-approved monetary cap. Call and character caps in the staged code are operational safeguards, not a billable-token or currency cap. A new paid account, credential, or commitment remains an owner decision.
+
+**Current gate: HCL_V05_LONGMEMEVAL_CDG_V01_GUARDED_WORKFLOW_STAGED_PAID_ACCESS_BLOCKED**

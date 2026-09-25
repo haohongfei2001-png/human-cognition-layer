@@ -1,6 +1,6 @@
 # HCL v0.5 LongMemEval knowledge-update paired C/D/G efficacy contract v0.1
 
-Status: **DESIGN FROZEN / PROVIDER-FREE IMPLEMENTATION AND CERTIFICATION NEXT / SEALED ROWS UNCONSUMED**
+Status: **DESIGN AND PROVIDER-FREE PACKAGE FROZEN / PAID ACCESS GATED / SEALED ROWS UNCONSUMED**
 
 ## Research question and claim boundary
 
@@ -62,6 +62,31 @@ Report all 32 paired C/D/G labels, D-only/G-only and D-only/C-only counts, abste
 A specialized capability signal requires D-G >= 5/32, exact McNemar p <= 0.05, no severe D semantic failure, and no avoidable G update loss. Otherwise report a descriptive positive, null, or negative result without calling capability superiority established. Practical module utility requires D score >= G score - 1, no severe D state error, D total provider character volume <= 60% of G, and D provider wall time <= 60% of G. If neither route passes, report no established external incremental utility. If G outperforms D by >= 5/32, treat it as evidence against current HCL on this slice. C remains a meaningful secondary comparator; D beating G while losing to C cannot support an answer-quality improvement claim.
 
 ## Provider and one-shot gates
+
+The staged paid workflow is restricted to a new exact-parent main commit adding
+only `.github/HCL_V05_LONGMEMEVAL_CDG_V01_TRIGGER`, whose contents bind the
+predeclared nonce to its parent commit. It rejects repeat attempts. No trigger
+file is committed with the provider-free package. Its preflight first checks
+the pinned dataset, 32 history digests, official judge source, request shapes,
+and three **synthetic** access probes (DeepSeek, Qwen, GPT-4o). It opens no
+sealed efficacy row until all three probes succeed. The 32 rows are partitioned
+into eight fixed selection-order shards, four rows each, with at most two
+answer jobs in parallel. All eight must finish at the same head and combine
+without a missing or duplicate ID before official judging begins. Any partial
+shard remains consumed and cannot be rerun as a fresh sample.
+
+The frozen base answer model is `deepseek-flash` with temperature 0 and maximum
+256 output tokens. The common oracle packet is capped at 30,000 characters;
+the extra D/G state at 16,000 characters each. Total per-arm operational caps
+are C: 32 calls / 2 million input characters / 100,000 output characters;
+D: 20,000 / 100 million / 10 million; G: 20,000 / 350 million / 20 million.
+Each eight-way shard receives one eighth of each cap. These are request-count
+and character safeguards, **not** currency limits or token-based price quotes;
+the owner must separately approve a bounded paid commitment after provider
+access and current pricing are verified. A cap or timeout failure is a partial
+consumption, not a basis for replay. The Qwen probe is an access prerequisite
+for the separately frozen transfer study; it does not substitute Qwen outputs
+into this DeepSeek C/D/G primary comparison.
 
 Before the sealed provider run:
 

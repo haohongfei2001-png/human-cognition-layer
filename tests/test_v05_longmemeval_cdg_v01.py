@@ -5,6 +5,7 @@ import unittest
 from unittest.mock import patch
 
 from scripts.longmemeval_cdg_v01 import (
+    CappedBackend,
     GenericMemory,
     IngestionReceipt,
     ProtocolError,
@@ -20,6 +21,8 @@ from scripts.preflight_v05_longmemeval_cdg_v01 import validate_manifest
 from scripts.run_v05_longmemeval_cdg_v01 import run_one
 from scripts.score_v05_longmemeval_cdg_v01 import score_one, validate_answers, JudgeError
 from scripts.summarize_v05_longmemeval_cdg_v01 import exact_mcnemar_p, paired_bootstrap_interval
+from scripts.combine_v05_longmemeval_cdg_v01 import combine, CombineError
+from scripts.qualify_longmemeval_knowledge_update_v01 import EXPECTED_DATASET_SHA256
 
 
 def sample_row():
@@ -57,6 +60,23 @@ class FakeAnswerBackend:
         return "Tuesday"
 
 
+class FakeMeteredBackend:
+    def __init__(self):
+        self.calls = 0
+        self.input_chars = 0
+        self.output_chars = 0
+
+    def complete(self, messages, **kwargs):
+        self.calls += 1
+        self.input_chars += sum(len(x["content"]) for x in messages)
+        self.output_chars += 1
+        return "x"
+
+    def metrics(self):
+        return {"calls": self.calls, "input_chars": self.input_chars,
+                "output_chars": self.output_chars}
+
+
 class FakeJudgeClient:
     def __init__(self, responses):
         self.responses = iter(responses)
@@ -76,6 +96,36 @@ class CDGProviderFreeTests(unittest.TestCase):
         _, selected = validate_manifest()
         self.assertEqual(len(selected), 32)
         self.assertEqual(sum(x["question_id"].endswith("_abs") for x in selected), 2)
+
+    def test_provider_caps_fail_before_extra_call(self):
+        backend = FakeMeteredBackend()
+        capped = CappedBackend(backend, max_calls=1, max_input_chars=5, max_output_chars=1)
+        self.assertEqual(capped.complete([{"role": "user", "content": "hello"}]), "x")
+        with self.assertRaisesRegex(ProtocolError, "call cap"):
+            capped.complete([{"role": "user", "content": "x"}])
+        self.assertEqual(backend.calls, 1)
+
+    def test_eight_shards_combine_only_complete_frozen_ids(self):
+        _, selected = validate_manifest()
+        shards = []
+        meter = {"calls": 1, "json_calls": 0, "text_calls": 1,
+                 "input_chars": 10, "output_chars": 2, "provider_wall_seconds": 0.1}
+        for i in range(8):
+            ids = [x["question_id"] for x in selected[i::8]]
+            shards.append({"format": "hcl-v05-longmemeval-cdg-answers-v01",
+                           "status": "answers_complete_unscored", "run_head": "f" * 40,
+                           "dataset_sha256": EXPECTED_DATASET_SHA256,
+                           "shard_index": i, "shard_count": 8,
+                           "attempted_ids": ids,
+                           "rows": [{"question_id": qid} for qid in ids],
+                           "backend": {arm: meter for arm in ("C", "D", "G")}})
+        combined = combine(shards, selected)
+        self.assertEqual([x["question_id"] for x in combined["rows"]],
+                         [x["question_id"] for x in selected])
+        self.assertEqual(combined["backend"]["D"]["calls"], 8)
+        shards[0]["status"] = "failed_partial_consumed"
+        with self.assertRaisesRegex(CombineError, "partial shard"):
+            combine(shards, selected)
 
     def test_oracle_release_requires_both_ingests_and_scrubs_labels(self):
         row = sample_row()

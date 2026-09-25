@@ -37,3 +37,15 @@ The sealed run remains gated by the frozen contract:
 The 971-event diagnostic extrapolates to roughly 58.34 million D input characters and 3.45 D provider wall hours, excluding G and all answer/judge work. Characters are not billable tokens; actual prices and caching can differ. No new account, credential, billing change, or selected provider run was initiated here.
 
 **Gate: HCL_V05_LONGMEMEVAL_CDG_V01_PROVIDER_FREE_PACKAGE_PASS_PAID_PREREQUISITES_OPEN**
+
+
+## Guarded cloud execution package
+
+- Candidate head `8f770b2000c1712c5460580106434b973d27623b`.
+- Provider-free C/D/G preflight `36103498615`: SUCCESS; artifact `10850626094`, SHA-256 `83aa0f61d470bc9f15a327a5ec192c040043e0c94ca39d8d25b1262367447b60`.
+- v0.5 Current Stance Core `36103498581` and v0.4 Minimal Slice `36103498817`: SUCCESS.
+- Local 11/11 checks, synthetic request-shape validation, runner validation, and workflow syntax: PASS; zero provider calls.
+- An eight-shard, exact-parent, first-attempt cloud workflow is staged. No trigger file is present, so no paid row has started.
+- Access probe requires DeepSeek, Qwen-family and official GPT-4o credentials before any sealed row. Qwen and OpenAI access are outstanding. The workflow's call and character ceilings do not establish a currency limit.
+
+**Gate: GUARDED_WORKFLOW_STAGED / SEALED_32_UNCONSUMED / PAID_ACCESS_AND_OWNER_COST_COMMITMENT_BLOCKED.**

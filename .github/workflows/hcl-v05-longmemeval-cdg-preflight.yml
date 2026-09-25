@@ -9,6 +9,9 @@ on:
       - "scripts/run_v05_longmemeval_cdg_v01.py"
       - "scripts/score_v05_longmemeval_cdg_v01.py"
       - "scripts/summarize_v05_longmemeval_cdg_v01.py"
+      - "scripts/combine_v05_longmemeval_cdg_v01.py"
+      - "scripts/probe_v05_longmemeval_cdg_access_v01.py"
+      - ".github/workflows/hcl-v05-longmemeval-cdg-v01-once.yml"
       - "tests/test_v05_longmemeval_cdg_v01.py"
       - ".github/workflows/hcl-v05-longmemeval-cdg-preflight.yml"
   push:
@@ -21,6 +24,9 @@ on:
       - "scripts/run_v05_longmemeval_cdg_v01.py"
       - "scripts/score_v05_longmemeval_cdg_v01.py"
       - "scripts/summarize_v05_longmemeval_cdg_v01.py"
+      - "scripts/combine_v05_longmemeval_cdg_v01.py"
+      - "scripts/probe_v05_longmemeval_cdg_access_v01.py"
+      - ".github/workflows/hcl-v05-longmemeval-cdg-v01-once.yml"
       - "tests/test_v05_longmemeval_cdg_v01.py"
       - ".github/workflows/hcl-v05-longmemeval-cdg-preflight.yml"
 
@@ -41,7 +47,10 @@ jobs:
         with:
           python-version: "3.12"
       - name: Run provider-free C/D/G tests
-        run: python -m unittest -v tests.test_v05_longmemeval_cdg_v01
+        run: |
+          python -m compileall -q scripts/longmemeval_cdg_v01.py scripts/*v05_longmemeval_cdg_v01.py
+          python -m unittest -v tests.test_v05_longmemeval_cdg_v01
+          python scripts/probe_v05_longmemeval_cdg_access_v01.py --validate-only
       - name: Download pinned cleaned-S
         run: |
           mkdir -p .cache/longmemeval
