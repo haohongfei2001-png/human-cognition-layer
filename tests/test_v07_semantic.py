@@ -87,6 +87,29 @@ class V07SemanticTests(unittest.TestCase):
         runtime.ingest_semantic_event(source, backend)
         self.assertEqual(len(backend.inputs), 1)
 
+    def test_reader_only_narrator_can_report_action_without_proving_intention(self):
+        stamp = "2026-01-01T00:00:01+00:00"
+        source = EventRecord(
+            "narrated-action", stamp, "Mira carried the parcel to the station.",
+            "narrator", recorded_at=stamp, metadata={"reader_only": True},
+        )
+        runtime = HCLV07Runtime()
+        backend = FakeBackend(json.dumps({"intention_evidence": [
+            row("Mira", "deliver-parcel", "OBSERVED_ACTION", "NARRATOR_ASSERTION", source.raw_text)
+        ]}))
+        runtime.ingest_semantic_event(source, backend)
+        goal, = runtime.goal_estimates("Mira")
+        self.assertEqual(goal.status, GoalStatus.SYSTEM_INSUFFICIENT)
+        self.assertEqual(len(goal.action_evidence_ids), 1)
+
+    def test_narrated_action_requires_reader_only_source(self):
+        source = event(1, "Noah", "Mira carried the parcel to the station.")
+        invalid = json.dumps({"intention_evidence": [
+            row("Mira", "deliver-parcel", "OBSERVED_ACTION", "NARRATOR_ASSERTION", source.raw_text)
+        ]})
+        with self.assertRaises(V07ExtractionError):
+            extract_intention_evidence(source, FakeBackend(invalid, invalid))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -5,6 +5,7 @@ from __future__ import annotations
 import unittest
 
 from hcl.v04.model import EventRecord
+from hcl.v06 import SYSTEM_VIEWER
 from hcl.v06.belief import BeliefEvidenceKind as Provenance
 from hcl.v07 import GoalStatus, HCLV07Runtime, IntentionEvidenceEvent, IntentionSignal
 
@@ -131,6 +132,9 @@ class IntentionRuntimeTests(unittest.TestCase):
         ))
         self.assertEqual(runtime.goal_estimates("Mira")[0].status, GoalStatus.ACTIVE)
         self.assertEqual(runtime.goal_estimates("Mira", observer_agent_id=None), ())
+        reader = runtime.answer_context("Mira", observer_agent_id=SYSTEM_VIEWER)
+        self.assertEqual(len(reader["intention_evidence"]), 1)
+        self.assertEqual(reader["perspective"]["target_information_view"]["event_ids"], [])
 
     def test_source_id_alone_cannot_launder_invented_intention_text(self):
         runtime = HCLV07Runtime()

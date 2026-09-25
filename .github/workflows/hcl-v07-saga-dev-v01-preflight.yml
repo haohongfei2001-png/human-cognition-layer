@@ -1,0 +1,47 @@
+name: HCL v0.7 SAGA Development Provider-Free Preflight
+
+on:
+  pull_request:
+    paths:
+      - "hcl/v07/**"
+      - "scripts/prepare_v07_saga_dev_v01.py"
+      - "scripts/run_v07_saga_dev_v01.py"
+      - "eval/v07/saga_dev_selection_v01.json"
+      - "tests/test_v07_saga_dev_v01.py"
+      - ".github/workflows/hcl-v07-saga-dev-v01-*.yml"
+  push:
+    branches: [main]
+    paths:
+      - "hcl/v07/**"
+      - "scripts/prepare_v07_saga_dev_v01.py"
+      - "scripts/run_v07_saga_dev_v01.py"
+      - "eval/v07/saga_dev_selection_v01.json"
+      - "tests/test_v07_saga_dev_v01.py"
+      - ".github/workflows/hcl-v07-saga-dev-v01-*.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  provider-free:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install "pandas>=2.2,<3" "openai==2.14.0"
+      - name: Download and verify pinned SAGA source
+        run: |
+          mkdir -p .cache
+          gh api 'repos/saiumbc/SAGA/contents/data/actual_test.jsonl?ref=9c66afefb06b8bad77fc7f5913ddc8264a57c69b' \
+            --jq .content | base64 --decode > .cache/saga-actual-test.jsonl
+          echo 'a00ed709011dfdcb2016b0bb25753eaca4445afdbf8ae87bf4b33c213e415764  .cache/saga-actual-test.jsonl' | sha256sum -c -
+      - name: Verify frozen selection and no-provider runner
+        run: |
+          python scripts/prepare_v07_saga_dev_v01.py --source .cache/saga-actual-test.jsonl
+          python scripts/run_v07_saga_dev_v01.py --source .cache/saga-actual-test.jsonl --validate-only
+          python -m unittest -v tests.test_v07_saga_dev_v01 tests.test_v07_semantic tests.test_v07_intention_runtime tests.test_v06_perspective_belief_runtime tests.test_v04_perspective

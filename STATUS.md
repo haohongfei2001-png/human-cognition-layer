@@ -5259,3 +5259,30 @@ provider-free runtime and source audit. Its external utility is not yet
 provider-consumed and requires a separately frozen protocol and authorization.
 
 **Current gate: V07_SMALL_EXTERNAL_UTILITY_PROTOCOL_AND_PROVIDER_AUTHORIZATION**
+
+## HCL v0.7 SAGA development utility provider-free package
+
+The v0.7 source audit found 219 SAGA annotation rows but only 81 distinct
+story/participant groups and multiple plausible human goal descriptions per
+story. A manually source-audited **12-story development-only** selection is
+frozen at `eval/v07/saga_dev_selection_v01.json`: six directly narrated
+goal/plan cases and six inferred-goal cases, each from a distinct story ID.
+The selection is not random or fresh efficacy evidence. Source hash,
+story hashes, source-tier annotations and story-group disjointness are checked
+without provider calls. Original SAGA goal labels are not used as unique
+mental-state truth or as runtime input.
+
+The C/P/D runner, one-shot workflow and USD 0.50 shared rated-cost cap are
+staged in `docs/HCL_V07_SAGA_DEVELOPMENT_UTILITY_V01.md`. No v0.7 provider
+call has occurred; the trigger file is absent and the separate authorization
+variable is unset. Before task release, D constructs state from all five
+reader-only narrator sentences. A generic runtime hardening now represents
+narrated observed actions without treating them as certain intentions and
+exposes narrator goal evidence to the external reader without leaking it into
+the character's own information view. Independent synthetic tests and pinned
+source preflight pass locally; exact-main CI is pending.
+
+LongMemEval remains sealed and untouched. No v0.7 external utility or fresh
+comparative outcome is claimed.
+
+**Current gate: V07_SAGA_DEV_PROVIDER_FREE_EXACT_MAIN_THEN_SEPARATE_USD_0_50_OWNER_AUTHORIZATION**
