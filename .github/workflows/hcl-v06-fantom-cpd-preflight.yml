@@ -6,6 +6,7 @@ on:
       - "hcl/v06/**"
       - "hcl/v04/backends.py"
       - "tests/test_v05_provider_profiles.py"
+      - "tests/test_v06_deepseek_transport.py"
       - "scripts/prepare_v06_fantom_cpd_v01.py"
       - "scripts/run_v06_fantom_cpd_v01.py"
       - "tests/test_v06_conversation_adapter.py"
@@ -60,6 +61,7 @@ jobs:
           python -m unittest -v tests.test_v06_perspective_belief_runtime
           python -m unittest -v tests.test_v06_conversation_adapter
           python -m unittest -v tests.test_v06_fantom_cpd_v01
+          python -m unittest -v tests.test_v06_deepseek_transport
           python -m unittest -v tests.test_v05_provider_profiles
           python -m unittest -v tests.test_v05_current_stance
           python -m unittest -v tests.test_v05_semantic_runtime
