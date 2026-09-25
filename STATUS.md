@@ -6,7 +6,7 @@ Human Cognition Layer (HCL)
 
 ## Current phase
 
-**HCL v0.6 fresh comparative pilot staged; v0.7 intention runtime provider-free candidate**
+**HCL v0.6 fresh comparative pilot provider-free certified; v0.7 intention runtime provider-free certified**
 
 ## Core doctrine
 
@@ -5204,3 +5204,26 @@ reservation and provider-token ledger at the published peak rates. The USD 3.50
 cap and 32 sealed conversations do not change; no paid call is triggered.
 
 **Current gate: V06_FRESH_RATED_COST_GUARD_PROVIDER_FREE_CERTIFICATION_THEN_OWNER_AUTHORIZATION; V07_EXTERNAL_UTILITY_NOT_RUN**
+
+## Fresh pilot cost guard exact-main closure
+
+PR #66 merged as main `1662467790811b29649e47971f9c63a83ff09bbf`.
+The fresh C/P/G/D provider-free preflight run `36144342289` completed
+**SUCCESS** on that exact main commit. It rebuilt the 32-conversation manifest,
+checked the question/gold firewall and ran the v0.4–v0.7 regression suite.
+The shared USD 3.50 pre-request rated-cost ledger is certified without a
+provider call. The only active writer branch/PR was closed at merge.
+
+The next fresh provider run remains **NOT AUTHORIZED**: the earlier owner
+authorization covered only an eight-conversation development run capped at
+USD 1.00. The 32-conversation C/P/G/D pilot has a separate USD 3.50 operational
+cap. Its one-shot trigger has not been added to main, the repository approval
+variable is unset, and the existing DeepSeek credential has not been used for
+this pilot. LongMemEval 32 sealed rows remain provider-unconsumed.
+
+v0.7-A runtime and event-local extractor are provider-free certified. The
+SAGA/Moral Stories source audit is complete, while v0.7 external utility and
+fresh comparative evidence remain unrun. No v0.6 RETAIN/SIMPLIFY/REVISE
+decision can be made before the fresh C/P/G/D result.
+
+**Current gate: OWNER_AUTHORIZATION_FOR_V06_FRESH_CPGD_USD_3_50; V07_EXTERNAL_UTILITY_PROVIDER_GATE**

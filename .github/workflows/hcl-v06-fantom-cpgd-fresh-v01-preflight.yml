@@ -9,6 +9,8 @@ on:
       - "scripts/run_v06_fantom_cpgd_fresh_v01.py"
       - "tests/test_v06_fantom_cpgd_fresh_v01.py"
       - ".github/workflows/hcl-v06-fantom-cpgd-fresh-v01-preflight.yml"
+      - "STATUS.md"
+      - "README.md"
   push:
     branches: [main]
     paths:
@@ -18,6 +20,8 @@ on:
       - "scripts/run_v06_fantom_cpgd_fresh_v01.py"
       - "tests/test_v06_fantom_cpgd_fresh_v01.py"
       - ".github/workflows/hcl-v06-fantom-cpgd-fresh-v01-preflight.yml"
+      - "STATUS.md"
+      - "README.md"
 
 permissions:
   contents: read
