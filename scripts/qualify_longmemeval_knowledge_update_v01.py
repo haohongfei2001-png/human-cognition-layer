@@ -63,7 +63,7 @@ def parse_longmemeval_timestamp(value: str) -> datetime:
     return dt.replace(tzinfo=timezone.utc)
 
 
-def sanitized_turn(turn: dict[str, Any]) -> dict[str, str]:
+def sanitized_turn(turn: dict[str, Any]) -> dict[str, str] | None:
     if not isinstance(turn, dict):
         raise QualificationError("history turn must be an object")
     role = str(turn.get("role", "")).strip()
@@ -71,7 +71,9 @@ def sanitized_turn(turn: dict[str, Any]) -> dict[str, str]:
     if role not in {"user", "assistant"}:
         raise QualificationError(f"unexpected history role: {role!r}")
     if not content.strip():
-        raise QualificationError("history turn content must not be empty")
+        # Empty turns carry no event evidence. Skip them deterministically and
+        # report their count rather than manufacturing content.
+        return None
     # Deliberately discard all auxiliary labels such as has_answer.
     return {"role": role, "content": content}
 
@@ -107,6 +109,11 @@ def state_input_view(row: dict[str, Any]) -> dict[str, Any]:
         dt = parse_longmemeval_timestamp(str(date))
         if not isinstance(session, list):
             raise QualificationError("haystack session must be a list of turns")
+        clean_turns = []
+        for turn in session:
+            cleaned = sanitized_turn(turn)
+            if cleaned is not None:
+                clean_turns.append(cleaned)
         materialized.append(
             (
                 dt,
@@ -115,7 +122,7 @@ def state_input_view(row: dict[str, Any]) -> dict[str, Any]:
                     "session_id": str(session_id),
                     "date": str(date),
                     "source_position": source_position,
-                    "turns": [sanitized_turn(turn) for turn in session],
+                    "turns": clean_turns,
                 },
             )
         )
@@ -222,6 +229,7 @@ def audit_dataset(path: Path) -> dict[str, Any]:
     counts: Counter[str] = Counter()
     knowledge_rows: list[dict[str, Any]] = []
     nonmonotonic_knowledge_rows = 0
+    blank_turns_in_knowledge_rows = 0
 
     for row in data:
         if not isinstance(row, dict):
@@ -237,6 +245,14 @@ def audit_dataset(path: Path) -> dict[str, Any]:
         if qtype == "knowledge-update":
             if not history_input_order_is_monotonic(row):
                 nonmonotonic_knowledge_rows += 1
+            row_blank_turns = sum(
+                1
+                for session in (row.get("haystack_sessions") or [])
+                for turn in session
+                if isinstance(turn, dict)
+                and not str(turn.get("content", "")).strip()
+            )
+            blank_turns_in_knowledge_rows += row_blank_turns
             view = state_input_view(row)
             assert_state_firewall(row, view)
             events = events_from_state_view(
@@ -261,6 +277,7 @@ def audit_dataset(path: Path) -> dict[str, Any]:
                         event["actor_id"] == "longmemeval_assistant"
                         for event in events
                     ),
+                    "skipped_blank_turn_count": row_blank_turns,
                 }
             )
 
@@ -292,6 +309,9 @@ def audit_dataset(path: Path) -> dict[str, Any]:
             "sort sessions by explicit haystack timestamp; source_position "
             "is stable tie-break/provenance only"
         ),
+        "blank_history_turns_skipped_in_knowledge_update_rows": (
+            blank_turns_in_knowledge_rows
+        ),
         "selected_count": len(selected),
         "selected": [
             {
@@ -301,6 +321,7 @@ def audit_dataset(path: Path) -> dict[str, Any]:
                 "turn_count": row["turn_count"],
                 "user_turn_count": row["user_turn_count"],
                 "assistant_turn_count": row["assistant_turn_count"],
+                "skipped_blank_turn_count": row["skipped_blank_turn_count"],
             }
             for row in selected
         ],
@@ -344,6 +365,9 @@ def main() -> None:
                 "knowledge_update_rows": result["knowledge_update_rows"],
                 "knowledge_update_rows_with_nonmonotonic_file_order": result[
                     "knowledge_update_rows_with_nonmonotonic_file_order"
+                ],
+                "blank_history_turns_skipped_in_knowledge_update_rows": result[
+                    "blank_history_turns_skipped_in_knowledge_update_rows"
                 ],
                 "selected_count": result["selected_count"],
                 "selected_question_ids": [
