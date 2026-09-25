@@ -120,6 +120,61 @@ class V06ConversationAdapterTests(unittest.TestCase):
             context["second_order_access_event_ids"]["Ana"]["Bo"],
         )
 
+    def test_future_participant_is_removed_before_first_presence_evidence(self):
+        transcript = "\n".join([
+            "Ana: The launch code is 4312.",
+            "Bo: I heard it.",
+            "Harmony: Hello Ana and Bo!",
+            "Ana: Welcome, Harmony.",
+        ])
+        # The model incorrectly leaks future participant Harmony into turn 0/1.
+        access = {
+            "turn_access": [
+                {"turn_index": 0, "heard_by_agent_ids": ["Bo", "Harmony"]},
+                {"turn_index": 1, "heard_by_agent_ids": ["Ana", "Harmony"]},
+                {"turn_index": 2, "heard_by_agent_ids": ["Ana", "Bo"]},
+                {"turn_index": 3, "heard_by_agent_ids": ["Bo", "Harmony"]},
+            ]
+        }
+        result = extract_conversation_events(
+            transcript,
+            "future-presence",
+            FakeBackend([json.dumps(access)]),
+        )
+        self.assertEqual(result.access_normalization_count, 2)
+
+        runtime = HCLV06Runtime()
+        for event in result.events:
+            runtime.ingest_prestructured_event(event)
+
+        harmony = runtime.perspective_view("Harmony")
+        self.assertNotIn(result.events[0].event_id, harmony.event_ids)
+        self.assertNotIn(result.events[1].event_id, harmony.event_ids)
+        self.assertIn(result.events[2].event_id, harmony.event_ids)
+
+    def test_direct_address_can_establish_presence_before_first_reply(self):
+        transcript = "\n".join([
+            "Ana: Bo, did you hear the launch code?",
+            "Bo: Yes, I did.",
+        ])
+        access = {
+            "turn_access": [
+                {"turn_index": 0, "heard_by_agent_ids": ["Bo"]},
+                {"turn_index": 1, "heard_by_agent_ids": ["Ana"]},
+            ]
+        }
+        result = extract_conversation_events(
+            transcript,
+            "direct-address",
+            FakeBackend([json.dumps(access)]),
+        )
+        self.assertEqual(result.access_normalization_count, 0)
+
+        runtime = HCLV06Runtime()
+        for event in result.events:
+            runtime.ingest_prestructured_event(event)
+        self.assertIn(result.events[0].event_id, runtime.perspective_view("Bo").event_ids)
+
     def test_invalid_access_map_repairs_once(self):
         transcript = "Ana: Hello.\nBo: Hi."
         invalid = json.dumps({
