@@ -5353,3 +5353,22 @@ generic G and source-supported scoring; a fresh provider run needs separate
 bounded authorization.
 
 **Current gate: V07_FRESH_PROVIDER_FREE_DESIGN_AND_SEPARATE_FRESH_AUTHORIZATION**
+
+## HCL v0.7 disjoint SAGA fresh C/P/G/D package staged
+
+The 16-story validation selection uses the pinned SAGA `actual_val.jsonl`
+source, with eight directly narrated goal/plan cases and eight inferred-goal
+cases. The provider-free verifier checks source hashes, selected identities,
+complete stories, and zero story-family overlap with the entire development
+split. C/P/G/D share the full story and answer model; G is a complete generic
+narrative timeline, while D is the frozen typed runtime. G and D are built
+before the highlighted participant is released. See
+`docs/HCL_V07_SAGA_FRESH_CPGD_V01.md`.
+
+This is preparation only. The fresh one-shot trigger remains absent and the
+separate `HCL_V07_SAGA_FRESH_COST_AUTHORIZED_USD` variable is unset. The prior
+USD 0.50 authorization applied to the completed development check. The fresh
+pilot has a separate USD 0.50 hard cap and requires owner authorization before
+any provider call. No fresh result or new efficacy claim exists.
+
+**Current gate: V07_FRESH_PROVIDER_FREE_CI_THEN_SEPARATE_OWNER_AUTHORIZATION_USD_0_50**

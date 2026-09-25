@@ -1,0 +1,154 @@
+{
+  "development_source_path": "data/actual_test.jsonl",
+  "development_story_ids_excluded": [
+    "1bfd5e8a-2707-4b8f-a620-03e181c3c1b7",
+    "2b5885b1-f865-4cd0-ab3b-9c8ece32dc4a",
+    "3f905b65-b954-4ebb-940e-1de416872aab",
+    "4a430b83-3c72-4fe3-9cc4-72247298b768",
+    "505db7e7-f483-464e-9158-5346c63204e7",
+    "67eb8835-bddc-4acb-8dee-81d998320eb8",
+    "85e3727e-c4f8-491f-844b-2c23a605bb2a",
+    "957b313c-263e-46d9-9b34-c2cfa7d0f240",
+    "a9390f06-58bd-4795-8cd2-0c2accb8a367",
+    "b5db6b7c-601b-4ddd-9c66-3bc1cfc7d253",
+    "dceeb49e-c384-4df6-b525-a56f7b8c3e90",
+    "e83816b6-633c-4cab-a2a3-eee614ce1518"
+  ],
+  "format": "hcl-v07-saga-fresh-selection-v01",
+  "selected": [
+    {
+      "instance_id": "52a",
+      "participant": "Susan",
+      "participant_id": "p0",
+      "source_tier": "explicit_goal",
+      "story_id": "818aac2a-94f0-4002-9d89-642fd3e4bf34",
+      "story_sha256": "c46cff3429b4222f5a5ed63f0d38e080400e0071bf6155b94f3165d717de47cc"
+    },
+    {
+      "instance_id": "757a",
+      "participant": "Cindy",
+      "participant_id": "p0",
+      "source_tier": "explicit_goal",
+      "story_id": "9dd2e17b-caad-4f67-b5d0-3d233871adf4",
+      "story_sha256": "d554d7922043de0d1f5c64dc4e5e425362d52da3ed85c5e538768a6b47e95138"
+    },
+    {
+      "instance_id": "649a",
+      "participant": "Frank",
+      "participant_id": "p0",
+      "source_tier": "explicit_goal",
+      "story_id": "aa8fa66b-57dd-4c7f-8af2-7a6b9b9fb8c3",
+      "story_sha256": "3a0f9b6510b8cc3c1482bc3e3bead7bc0d42956b74d08ab61d5c9b768876c098"
+    },
+    {
+      "instance_id": "1501a",
+      "participant": "Amy",
+      "participant_id": "p0",
+      "source_tier": "explicit_goal",
+      "story_id": "7e27d6c7-9184-4838-9c7c-87c5245e1412",
+      "story_sha256": "1961de6c77619acfeb7228d00b34896577fc2084bae093666665867dd3cd0cf1"
+    },
+    {
+      "instance_id": "826a",
+      "participant": "Kim",
+      "participant_id": "p0",
+      "source_tier": "explicit_goal",
+      "story_id": "684e78a5-9003-41f1-a661-0d0ea37bbc70",
+      "story_sha256": "a8f6fb59c5cd067acaae171fce70cdc98f8b3b1d0d18746ecfb589b05749d657"
+    },
+    {
+      "instance_id": "445a",
+      "participant": "Anthony",
+      "participant_id": "p0",
+      "source_tier": "explicit_goal",
+      "story_id": "dd1c3ed3-d034-4e8a-b330-f97403b7892d",
+      "story_sha256": "0fcc15b89803ffd87e999465eb19f9c927f52147f3905015a7df3a7cc33b1004"
+    },
+    {
+      "instance_id": "1294a",
+      "participant": "Kate",
+      "participant_id": "p0",
+      "source_tier": "explicit_goal",
+      "story_id": "1e452c1f-bccd-4fe8-b851-e3f656236d5f",
+      "story_sha256": "0b3b1a91a396bc078466460f39a1de013b141d2851259a7f5836a8a75d239f94"
+    },
+    {
+      "instance_id": "709a",
+      "participant": "Pat",
+      "participant_id": "p0",
+      "source_tier": "explicit_goal",
+      "story_id": "bd399b52-9abc-475b-b183-5ed457b7956e",
+      "story_sha256": "e0b02b22c4b743ed47dd845dd1d4f724c7b8857751177d48e515af99eabdf2f7"
+    },
+    {
+      "instance_id": "184a",
+      "participant": "Gina",
+      "participant_id": "p0",
+      "source_tier": "inferred_goal",
+      "story_id": "82e7d199-d7bf-40e4-b684-3f3df97181f4",
+      "story_sha256": "2fce52b860a64a9829c0a3c02f931c156ac0812f8e810b78dd8a014b3b151381"
+    },
+    {
+      "instance_id": "544a",
+      "participant": "Jane",
+      "participant_id": "p0",
+      "source_tier": "inferred_goal",
+      "story_id": "03393bcb-97d5-4a80-a1a3-6862aac5cc9a",
+      "story_sha256": "f40331b931403295db5907a3dcbe048994b9a15ec9e2374c9c15d66330232c0e"
+    },
+    {
+      "instance_id": "910a",
+      "participant": "Jane",
+      "participant_id": "p0",
+      "source_tier": "inferred_goal",
+      "story_id": "d26f45f8-263a-4d0f-b001-db82ffe4b190",
+      "story_sha256": "2df34e6b6df4f698a72ecebbb9103efdf215baa818bad478628622c510972244"
+    },
+    {
+      "instance_id": "190a",
+      "participant": "Jim",
+      "participant_id": "p0",
+      "source_tier": "inferred_goal",
+      "story_id": "323d72f4-3c35-4f36-8fa4-1b6f9c741e62",
+      "story_sha256": "51dc1415695a38c0d64a96a2ab87bb47ab17eb05d751b21fe2694bf5260f6957"
+    },
+    {
+      "instance_id": "121a",
+      "participant": "Lisa",
+      "participant_id": "p0",
+      "source_tier": "inferred_goal",
+      "story_id": "7fedc7a6-1fea-4422-ba8f-bda5a7a1249a",
+      "story_sha256": "4d3c0644a90dfc2eecf5541735d21c4e0119e2d02d70b0faf5e065cd847f0a47"
+    },
+    {
+      "instance_id": "1339a",
+      "participant": "Ed",
+      "participant_id": "p0",
+      "source_tier": "inferred_goal",
+      "story_id": "29d790a7-6163-41fd-b7db-982d0af8dbda",
+      "story_sha256": "b905d1c7e2ad5975fe08f7f383320a1e2b07fbfb3cc8c903435614d6596777ca"
+    },
+    {
+      "instance_id": "1372a",
+      "participant": "Katie",
+      "participant_id": "p0",
+      "source_tier": "inferred_goal",
+      "story_id": "35d8616d-6987-40db-84c6-8062e0d55fb8",
+      "story_sha256": "06458ab3afe2208a522faa131d9bcd10f28dbc93ad31e2c51187190ea6fb75ca"
+    },
+    {
+      "instance_id": "793a",
+      "participant": "Annie",
+      "participant_id": "p0",
+      "source_tier": "inferred_goal",
+      "story_id": "febe1637-ea51-4eb6-941e-cd9aa06f3735",
+      "story_sha256": "a5d7884430afbeaabf5e0f2238292e82efd26b538b6209273e3d5f4907ce8aab"
+    }
+  ],
+  "selected_count": 16,
+  "selection_method": "manual source-only sufficiency audit, with no original_goal or outcome field inspection; provider-unconsumed",
+  "source_commit": "9c66afefb06b8bad77fc7f5913ddc8264a57c69b",
+  "source_path": "data/actual_val.jsonl",
+  "source_repo": "saiumbc/SAGA",
+  "source_sha256": "f3b37c84526bba4ae74bec8991b2789d7a3b97d15c8ea8de565afa590f625ff7"
+}
