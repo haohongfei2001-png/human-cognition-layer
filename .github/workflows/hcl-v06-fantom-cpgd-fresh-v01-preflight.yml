@@ -1,0 +1,59 @@
+name: HCL v0.6 FANToM C/P/G/D Fresh Provider-Free Preflight
+
+on:
+  pull_request:
+    paths:
+      - "eval/v06/fantom_cpgd_fresh_selection_v01.json"
+      - "hcl/v06/generic_state.py"
+      - "scripts/prepare_v06_fantom_cpgd_fresh_v01.py"
+      - "scripts/run_v06_fantom_cpgd_fresh_v01.py"
+      - "tests/test_v06_fantom_cpgd_fresh_v01.py"
+      - ".github/workflows/hcl-v06-fantom-cpgd-fresh-v01-preflight.yml"
+  push:
+    branches: [main]
+    paths:
+      - "eval/v06/fantom_cpgd_fresh_selection_v01.json"
+      - "hcl/v06/generic_state.py"
+      - "scripts/prepare_v06_fantom_cpgd_fresh_v01.py"
+      - "scripts/run_v06_fantom_cpgd_fresh_v01.py"
+      - "tests/test_v06_fantom_cpgd_fresh_v01.py"
+      - ".github/workflows/hcl-v06-fantom-cpgd-fresh-v01-preflight.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  provider-free:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install "pandas>=2.2,<3" "openai==2.14.0"
+      - name: Download and verify pinned public FANToM archive
+        run: |
+          mkdir -p .cache
+          curl -L --fail --retry 4 --retry-delay 5 \
+            'https://storage.googleapis.com/ai2-mosaic-public/projects/fantom/fantom.tar.gz' \
+            -o .cache/fantom.tar.gz
+          echo '1d08dfa0ea474c7f83b9bc7e3a7b466eab25194043489dd618b4c5223e1253a4  .cache/fantom.tar.gz' | sha256sum -c -
+      - name: Reproduce selection and run zero-provider preflight
+        run: |
+          python scripts/prepare_v06_fantom_cpgd_fresh_v01.py \
+            --fantom-archive .cache/fantom.tar.gz \
+            --mechanism-main 47f26c9fa106ed4b8f7e0253c2fedbf518fc312a \
+            --out .cache/fresh-selection.json
+          cmp .cache/fresh-selection.json eval/v06/fantom_cpgd_fresh_selection_v01.json
+          python scripts/run_v06_fantom_cpgd_fresh_v01.py \
+            --fantom-archive .cache/fantom.tar.gz --validate-only
+      - name: Capability and regression tests
+        run: |
+          python -m compileall -q hcl/v04 hcl/v05 hcl/v06 hcl/v07 scripts/prepare_v06_fantom_cpgd_fresh_v01.py scripts/run_v06_fantom_cpgd_fresh_v01.py
+          python -m unittest -v \
+            tests.test_v04_runtime tests.test_v04_perspective \
+            tests.test_v05_current_stance tests.test_v05_semantic_runtime \
+            tests.test_v06_perspective_belief_runtime tests.test_v06_conversation_adapter \
+            tests.test_v06_fantom_cpd_v01 tests.test_v06_fantom_cpgd_fresh_v01 \
+            tests.test_v07_intention_runtime

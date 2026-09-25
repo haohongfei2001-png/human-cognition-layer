@@ -1,0 +1,29 @@
+name: HCL v0.7 Intention Runtime Provider-Free
+
+on:
+  pull_request:
+    paths:
+      - "hcl/v07/**"
+      - "tests/test_v07_intention_runtime.py"
+      - ".github/workflows/hcl-v07-intention-runtime.yml"
+  push:
+    branches: [main]
+    paths:
+      - "hcl/v07/**"
+      - "tests/test_v07_intention_runtime.py"
+      - ".github/workflows/hcl-v07-intention-runtime.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  provider-free:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m compileall -q hcl/v04 hcl/v06 hcl/v07
+      - run: python -m unittest -v tests.test_v07_intention_runtime tests.test_v06_perspective_belief_runtime tests.test_v04_perspective

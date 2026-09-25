@@ -46,7 +46,7 @@ HCL 首先要求认知表示和更新本身在事实、信息边界、时间关�
 
 当前 canonical 阶段：
 
-**HCL v0.6.1 — Perspective Boundary & Precise-Knowledge Repair**
+**HCL v0.6 fresh comparison staged; v0.7 intention runtime in provider-free development**
 
 v0.5 保持冻结，作为显式 stance / revision / provenance / persistent-state 基础。v0.6 已经真正增加了一层人物信息视角与 belief evidence runtime，而不是继续只做 memory infrastructure。
 
@@ -85,6 +85,19 @@ v0.6.1 因此新增确定性的 participant-presence evidence floor，并把“�
 当前不会重跑这 8 个已消费 development conversation 来制造“修复后分数”。v0.6.1 先通过独立 provider-free correctness；之后新的外部 efficacy 必须使用新的 disjoint fresh selection，并加入 competent generic structured-state G。
 
 LongMemEval 32-row package 继续冻结、未消费，不阻塞当前 human-cognition capability 路线。
+
+新的 FANToM C/P/G/D fresh pilot 已冻结 32 条互不重叠的完整 conversation，
+排除历史 80 条及上述 8 条 development 数据。G 保留完整事件、来源、时间、
+普通听闻关系与不确定性，作为有竞争力的通用结构基线。当前只完成
+provider-free package，**没有调用 provider，也没有 fresh 成绩**。
+见 [pilot protocol](docs/HCL_V06_FANTOM_CPGD_FRESH_V01.md) 与
+[case audit](reports/HCL_V06_FANTOM_CPD_V01_CASE_AUDIT.md)。
+
+下一块真实 cognition capability 已开始：v0.7 Evidence-Constrained Intention
+& Motivation。最小 runtime 区分明确意图、目标、行动、推测动机及他人归因，
+并支持证据约束的修订、完成、放弃和未决状态。当前是 provider-free candidate；
+见 [runtime contract](docs/HCL_V07_INTENTION_MOTIVATION_MINIMAL_RUNTIME_V01.md)
+与 [external benchmark audit](docs/HCL_V07_EXTERNAL_BENCHMARK_AUDIT_V01.md)。
 
 v0.6.1 已在 main `0bf56af7baf305ca3bebb9035c4a989794a50eb8` 完成 provider-free certification：
 - runtime correctness run `36138966541` — **SUCCESS**；
