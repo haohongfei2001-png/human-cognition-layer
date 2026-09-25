@@ -5103,3 +5103,36 @@ Contract:
 LongMemEval remains sealed and untriggered.
 
 **Current gate: HCL_V06_V061_PERSPECTIVE_BOUNDARY_REPAIR_PROVIDER_FREE_CERTIFICATION**
+
+
+## HCL v0.6.1 perspective-boundary repair closure
+
+Merged implementation:
+- PR #62;
+- main `0bf56af7baf305ca3bebb9035c4a989794a50eb8`.
+
+Exact-main provider-free certification:
+- HCL v0.6 Minimal Perspective Belief Runtime run `36138966541`: **SUCCESS**;
+- HCL v0.6 FANToM C/P/D Provider-Free run `36138966583`: **SUCCESS**.
+
+Certified v0.6.1 capability changes:
+- deterministic participant-presence evidence floor;
+- conservative direct-address evidence for pre-reply presence;
+- no retroactive access for future participants merely because the complete roster is known;
+- partial/topic-related evidence is explicitly insufficient for precise compound knowledge;
+- future external artifacts can preserve redacted turn/speaker/listener access maps for causal audit.
+
+Evidence discipline:
+- the 8 consumed FANToM development conversations were **not** rerun after v0.6.1 changes;
+- v0.6.1 correctness is supported by independent provider-free fixtures and main CI;
+- the earlier valid C/P/D result remains the pre-repair development signal (C 4/8, P 4/8, D 6/8), not a post-repair score;
+- no fresh external efficacy claim follows yet.
+
+LongMemEval remains sealed and provider-unconsumed.
+
+Next research decision:
+- do not add more perspective-specific rules from these consumed FANToM cases;
+- the next external efficacy stage, when authorized, must use a new disjoint selection and include a competent generic structured-state G alongside C/P/D;
+- alternatively, HCL may proceed to a new human-cognition capability only after keeping the v0.6.1 perspective runtime frozen as a reusable component.
+
+**Current gate: HCL_V06_V061_PERSPECTIVE_RUNTIME_FROZEN_NEXT_CAPABILITY_OR_FRESH_EFFICACY**
