@@ -1,10 +1,13 @@
 # HCL v0.7 External Benchmark Audit v0.1
 
-Status: **SOURCE AUDIT / NO PROVIDER CALLS / NO v0.7 OUTCOME CONSUMED**
+Status: **SOURCE AUDIT / DEVELOPMENT ATTEMPT 1 PARTIAL-CONSUMED**
 
 The source-sufficiency audit has now produced a 12-story, development-only
-C/P/D protocol in `docs/HCL_V07_SAGA_DEVELOPMENT_UTILITY_V01.md`. Its
-provider-free package is staged; no v0.7 provider outcome has been consumed.
+C/P/D protocol in `docs/HCL_V07_SAGA_DEVELOPMENT_UTILITY_V01.md`. Its first
+provider run stopped after two completed cases and a persistently invalid
+semantic extraction on the third; see
+`reports/HCL_V07_SAGA_DEV_V01_ATTEMPT1_PARTIAL.md`. These are consumed
+development observations without a 12-case comparative conclusion.
 The audit found that SAGA's multiple annotations per story preclude treating
 one free-text goal as unique truth. The planned check therefore validates
 source anchoring and uncertainty, with blinded case adjudication after the

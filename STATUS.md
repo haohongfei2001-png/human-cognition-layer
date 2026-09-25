@@ -5292,3 +5292,29 @@ Exact-main SAGA development preflight `36154225214`, v0.7 intention runtime
 absent and `HCL_V07_SAGA_DEV_COST_AUTHORIZED_USD` is unset.
 
 **Current gate: SEPARATE_OWNER_AUTHORIZATION_FOR_V07_SAGA_DEV_USD_0_50**
+
+## HCL v0.7 SAGA development attempt 1 partial and generic recovery
+
+The owner separately authorized the existing DeepSeek credential for the
+USD 0.50 bounded v0.7 development check. PR #72 merged the exact-parent
+one-shot trigger as main `bd942940d2a19af53cf6b9c438c9b33eefbd1f48`.
+Run `36164041203` passed authorization, source digest, frozen selection and
+provider-free regressions, then ended **PARTIAL_CONSUMED** during semantic
+extraction of the third story after one invalid-output repair. Artifact
+ID `10876905749`, ZIP SHA-256
+`ff4fe207a77286584bf24b93102326769f8dbd80b45608e8e21fd2fad13af46f`.
+Two cases completed, 19 provider calls were charged, model identity stayed
+`deepseek-flash`, and the peak-rate cost ledger was **USD 0.0024288**. There
+is no 12-case C/P/D result. The selected stories are development-consumed,
+never fresh. Full record: `reports/HCL_V07_SAGA_DEV_V01_ATTEMPT1_PARTIAL.md`.
+
+The original authorization variable was reset to zero. A benchmark-independent
+repair preserves a reader-only source event when semantic extraction remains
+invalid, records the failure, and adds no intention claim. Synthetic tests
+cover this fail-closed path. A separately labeled attempt 2 is being staged
+with its own exact-parent first-attempt trigger and **USD 0.49** cap. The two
+attempts' maximum peak-rated ledger is USD 0.4924288, below the owner's
+USD 0.50 total authorization. No repair provider call is made before
+exact-main certification; LongMemEval remains sealed.
+
+**Current gate: V07_SAGA_DEV_REPAIR_PROVIDER_FREE_CERTIFICATION_THEN_BOUNDED_REPAIR_RUN**

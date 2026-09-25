@@ -1,6 +1,15 @@
 # HCL v0.7 SAGA C/P/D Development Utility Protocol v0.1
 
-Status: **SOURCE SLICE AND PROVIDER-FREE PACKAGE FROZEN / NO v0.7 PROVIDER CALL**
+Status: **ATTEMPT 1 PARTIAL-CONSUMED / DEVELOPMENT REPAIR STAGED**
+
+Attempt 1 was run `36164041203`: two cases completed, third-case semantic
+extraction remained structurally invalid after one repair, and execution
+stopped. Its 19 calls charged USD 0.0024288 to the peak-rate ledger. See
+`reports/HCL_V07_SAGA_DEV_V01_ATTEMPT1_PARTIAL.md`; never present the two
+completed results as a 12-case comparison or as fresh evidence. A generic
+fail-closed repair now keeps a source sentence but drops its malformed semantic
+claims, recording the failure. The separately labeled repair attempt has a
+USD 0.49 cap; both attempts together remain below the authorized USD 0.50.
 
 ## Purpose and source boundary
 
@@ -63,7 +72,7 @@ repair, but its exposed cases cannot become fresh evidence.
 
 ## Operational cap and one-shot rule
 
-Maximum calls: semantic extraction 120 (five sentences, at most one repair
+For each attempt, maximum calls: semantic extraction 120 (five sentences, at most one repair
 each), and C/P/D 12 each: **156** overall. Character caps are 665,000 input
 and 136,000 output overall. Using peak no-cache input USD 0.30/M and output
 USD 1.20/M, the character-as-token cap calculation is USD **0.3627**. A shared
@@ -74,8 +83,13 @@ These are operational safeguards, not an invoice guarantee if provider rates
 change. The one-shot workflow additionally requires an exact-parent trigger
 and first attempt, verifies the source digest, manifest and provider-free
 tests, and requires a separately set authorization variable of at least
-USD 0.50. The trigger is absent and the variable is unset. The prior USD 3.50
-authorization covered only the completed v0.6 FANToM pilot, not this check.
+USD 0.50 for attempt 1. Its trigger was consumed and authorization variable
+reset to zero. The repair workflow has a distinct exact-parent trigger and
+separate USD 0.49 operational guard, with the prior USD 0.0024288 ledger
+charged to the same owner-authorized USD 0.50 cumulative envelope. Its trigger
+is absent and repair authorization variable unset pending exact-main
+provider-free certification. The prior USD 3.50 authorization covered only
+the completed v0.6 FANToM pilot, not this check.
 No new account, credential or LongMemEval call is contemplated.
 
 The result artifact will include source IDs/hashes, arm answers, state hashes,
