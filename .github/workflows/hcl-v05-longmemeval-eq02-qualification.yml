@@ -82,6 +82,7 @@ jobs:
               "turn_count",
               "user_turn_count",
               "assistant_turn_count",
+              "skipped_blank_turn_count",
           }
           for row in obj["selected"]:
               assert set(row) == allowed_selected
