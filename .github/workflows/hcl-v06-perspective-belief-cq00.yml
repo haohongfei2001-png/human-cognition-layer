@@ -1,0 +1,83 @@
+name: HCL v0.6 Perspective Belief CQ-00
+
+on:
+  pull_request:
+    paths:
+      - "docs/HCL_V06_PERSPECTIVE_BELIEF_CAPABILITY_QUALIFICATION_V01.md"
+      - "scripts/qualify_v06_perspective_belief_cq00.py"
+      - "tests/test_v06_perspective_belief_cq00.py"
+      - "eval/fantom/selection_v01.json"
+      - "eval/fantom/selection_v02.json"
+      - ".github/workflows/hcl-v06-perspective-belief-cq00.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/HCL_V06_PERSPECTIVE_BELIEF_CAPABILITY_QUALIFICATION_V01.md"
+      - "scripts/qualify_v06_perspective_belief_cq00.py"
+      - "tests/test_v06_perspective_belief_cq00.py"
+      - "eval/fantom/selection_v01.json"
+      - "eval/fantom/selection_v02.json"
+      - ".github/workflows/hcl-v06-perspective-belief-cq00.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install provider-free dependency
+        run: python -m pip install "pandas>=2.2,<3"
+
+      - name: Run unit tests
+        run: python -m unittest -v tests.test_v06_perspective_belief_cq00
+
+      - name: Download pinned FANToM archive
+        run: |
+          mkdir -p .cache
+          curl -L --fail --retry 4 --retry-delay 5 \
+            "https://storage.googleapis.com/ai2-mosaic-public/projects/fantom/fantom.tar.gz" \
+            -o .cache/fantom.tar.gz
+          echo "1d08dfa0ea474c7f83b9bc7e3a7b466eab25194043489dd618b4c5223e1253a4  .cache/fantom.tar.gz" | sha256sum -c -
+
+      - name: Fetch pinned DynToM source
+        run: |
+          git init .cache/dyntom
+          git -C .cache/dyntom remote add origin https://github.com/GAIR-NLP/DynToM.git
+          git -C .cache/dyntom fetch --depth 1 origin 9c95b1b8300f3e352626feae51aaeeda111b6d3d
+          git -C .cache/dyntom checkout --detach FETCH_HEAD
+          test "$(git -C .cache/dyntom rev-parse HEAD)" = "9c95b1b8300f3e352626feae51aaeeda111b6d3d"
+
+      - name: Run CQ-00 zero-provider qualification
+        run: |
+          python scripts/qualify_v06_perspective_belief_cq00.py \
+            --fantom-archive .cache/fantom.tar.gz \
+            --dyntom-root .cache/dyntom \
+            --out artifacts/hcl-v06-perspective-belief-cq00/qualification.json
+          python - <<'PY'
+          import json
+          p = "artifacts/hcl-v06-perspective-belief-cq00/qualification.json"
+          x = json.load(open(p, encoding="utf-8"))
+          assert x["provider_calls"] == 0
+          assert x["fantom"]["historical_consumed_conversations"] == 80
+          assert x["fantom"]["selected_count"] == 8
+          assert x["dyntom"]["audit_count"] == 4
+          assert x["dyntom"]["development_count"] == 8
+          assert x["gold_or_question_text_committed"] is False
+          assert x["longmemeval_paid_triggered"] is False
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v06-perspective-belief-cq00-${{ github.run_id }}
+          path: artifacts/hcl-v06-perspective-belief-cq00/qualification.json
+          if-no-files-found: error
+          retention-days: 90
