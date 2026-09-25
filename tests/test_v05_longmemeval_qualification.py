@@ -57,6 +57,17 @@ class LongMemEvalQualificationTests(unittest.TestCase):
         self.assertNotIn("has_answer", material)
         self.assertNotIn("answer-secret", material)
 
+
+    def test_gold_text_may_legitimately_exist_in_raw_history(self):
+        row = self.synthetic_row()
+        row["answer"] = "I prefer tea."
+        view = state_input_view(row)
+        # The natural-language evidence is allowed; only annotation fields are not.
+        assert_state_firewall(row, view)
+        material = json.dumps(view, sort_keys=True)
+        self.assertIn("I prefer tea.", material)
+        self.assertNotIn('"answer"', material)
+
     def test_event_conversion_preserves_roles_and_time_order(self):
         view = state_input_view(self.synthetic_row())
         events = events_from_state_view(view, id_prefix="fixture")
