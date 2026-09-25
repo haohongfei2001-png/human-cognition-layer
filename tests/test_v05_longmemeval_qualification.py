@@ -87,6 +87,18 @@ class LongMemEvalQualificationTests(unittest.TestCase):
         )
         self.assertEqual(events[1]["recipient_ids"], ["longmemeval_user"])
 
+    def test_blank_history_turn_is_skipped_without_inventing_evidence(self):
+        row = self.synthetic_row()
+        row["haystack_sessions"][0].insert(
+            1, {"role": "assistant", "content": "   "}
+        )
+        view = state_input_view(row)
+        events = events_from_state_view(view, id_prefix="fixture")
+        self.assertEqual(len(events), 4)
+        self.assertTrue(
+            all(event["raw_text"].strip() for event in events)
+        )
+
     def test_selection_rank_is_deterministic_and_qid_only(self):
         a = selection_rank("question-123")
         b = selection_rank("question-123")
