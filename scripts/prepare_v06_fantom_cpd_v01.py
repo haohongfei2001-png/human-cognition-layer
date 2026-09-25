@@ -198,7 +198,7 @@ def freeze_selection(df: Any) -> dict[str, Any]:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--fantom-json", type=Path, required=True)
+    parser.add_argument("--fantom-archive", type=Path, required=True)
     parser.add_argument(
         "--out",
         type=Path,
@@ -206,7 +206,7 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    df = load_dataframe(args.fantom_json.read_bytes())
+    df = load_dataframe(args.fantom_archive.read_bytes())
     result = freeze_selection(df)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(
