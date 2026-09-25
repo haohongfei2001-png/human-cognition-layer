@@ -68,9 +68,24 @@ v0.6 的第一个候选能力不是继续扩充 memory，而是验证：
 
 当前 LongMemEval 32-row C/D/G package 保持冻结、未消费，不触发 paid run，也不再作为 v0.6 的前置条件。其 hash / chronology / gold-firewall / one-shot / paired-statistics / cost-accounting 资产保留供未来长期状态工程问题复用。
 
+当前开发已进入实际 capability implementation，而不是继续等待 CQ-01：
+
+- 新增一阶人物信息视角与有限二阶视角；
+- 新增带来源身份的 belief evidence；
+- 区分“人物自己不确定”和“系统证据不足”；
+- 收到挑战不自动改变原信念；
+- 只有直接修订证据才能 supersede 旧 belief；
+- 为基础模型提供 perspective-bounded answer context。
+
+实现合同：
+
+- [docs/HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_V01.md](docs/HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_V01.md)
+
+CQ-01 FANToM 仍保留为后续外部验证，不再阻塞 benchmark-independent runtime 开发。
+
 当前 gate：
 
-**HCL_V06_PERSPECTIVE_BELIEF_CQ01_FANTOM_PROVIDER_MODEL_COST_AUTHORIZATION**
+**HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_PROVIDER_FREE_CERTIFICATION**
 
 ## Intellectual-property boundary
 
