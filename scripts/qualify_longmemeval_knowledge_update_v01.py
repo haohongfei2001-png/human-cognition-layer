@@ -181,10 +181,11 @@ def events_from_state_view(
         base = parse_longmemeval_timestamp(session["date"])
         for turn_index, turn in enumerate(session["turns"]):
             global_index += 1
-            # Preserve benchmark chronology. Microsecond offsets only break ties
-            # deterministically; they do not reorder sessions.
-            valid = base + timedelta(microseconds=turn_index)
-            recorded = base + timedelta(microseconds=global_index)
+            # Preserve benchmark chronology. A global, sub-millisecond offset
+            # keeps source/session order deterministic when multiple sessions
+            # share the same minute-level benchmark timestamp.
+            valid = base + timedelta(microseconds=global_index * 2)
+            recorded = valid + timedelta(microseconds=1)
             role = turn["role"]
             actor = "longmemeval_user" if role == "user" else "longmemeval_assistant"
             recipient = (
