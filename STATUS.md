@@ -6,7 +6,7 @@ Human Cognition Layer (HCL)
 
 ## Current phase
 
-**HCL v0.6 frozen RETAIN; v0.7 frozen SIMPLIFY; v0.8 affect candidate provider-free staged**
+**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 frozen generic-tool development signal**
 
 ## Core doctrine
 
@@ -5543,3 +5543,28 @@ USD 0.10 ledger cap. Authorization unset, trigger absent. v0.8 authorization
 zero; LongMemEval sealed. No new provider credential or plan purchased.
 
 **Current gate: SEPARATE_OWNER_AUTHORIZATION_FOR_V09_DEVELOPMENT_USD_0_10**
+
+
+## v0.9 authorized development closure and generic-tool freeze
+
+PR #86 execution main `3e8ad9d4ddf9f0e400404ec6a4e369d10f031643`, run
+`36265833551` SUCCESS, attempt 1, 8/8 cases. C/P/tool-D declared-model agreement
+2/8, 2/8, 7/8; D/P improvements/reverse 5/0, meeting the frozen development
+criterion. All five saved calculations support their gains; 03 D retains a
+wrong final result despite correct trace/reason. Invalid C/P/D=2/2/0, no rescue.
+No native benchmark, fresh efficacy or full-abduction claim. Freeze as
+**RETAIN_GENERIC_TOOL_DEVELOPMENT_SIGNAL_ONLY**, not specialized superiority.
+
+24 calls / 71,762 input / 8,297 output chars / 29.026220 provider seconds /
+USD 0.00820461 peak-rated ledger under separately authorized USD 0.10.
+Authorization variable zero. All eight source/structural families consumed;
+CounterBench expansion stops. Actual archived state/traces and all hashes
+reconstructed; one-agent masked reason audit saved before unmasking, no
+independent human review. See closure report and machine receipt.
+
+**Current work: V09_FULL_ABDUCTION_SOURCE_QUALIFICATION_AND_GENERIC_BASELINE**.
+Qualified public inputs must genuinely constrain latent contexts; do not use
+hidden generator labels or force arithmetic/open-world data into Boolean scope.
+Fresh/provider scope requires a separate concrete owner authorization; original
+LongMemEval remains sealed. Historical pre-execution gates below/above are
+superseded by this closure.

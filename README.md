@@ -46,7 +46,7 @@ HCL 首先要求认知表示和更新本身在事实、信息边界、时间关�
 
 当前 canonical 阶段：
 
-**HCL v0.6 frozen RETAIN; v0.7 frozen SIMPLIFY; v0.8 frozen SIMPLIFY; v0.9 causal candidate staged**
+**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 frozen generic-tool development signal**
 
 v0.5 保持冻结，作为显式 stance / revision / provenance / persistent-state 基础。v0.6 已经真正增加了一层人物信息视角与 belief evidence runtime，而不是继续只做 memory infrastructure。
 
@@ -355,3 +355,18 @@ Zero v0.9 provider calls; separate USD 0.10 cap before execution.
 [Direction audit](docs/HCL_POST_V08_CAPABILITY_DIRECTION_AUDIT_V01.md) ·
 [Runtime](docs/HCL_V09_CAUSAL_COUNTERFACTUAL_MINIMAL_RUNTIME_V01.md) ·
 [Development protocol](docs/HCL_V09_COUNTERBENCH_DEVELOPMENT_UTILITY_V01.md).
+
+
+## v0.9 bounded causal computation: development decision
+
+The eight-source supplemented formal comparison completed: C/P/tool-D 2/8,
+2/8, 7/8 declared-model agreement; D/P five improvements, zero reverse.
+Freeze ordinary exact Boolean computation as a generic tool development signal.
+No native CounterBench, fresh efficacy or full latent-abduction claim. One D
+readout contradiction is preserved despite a correct trace; no case tuning.
+24 calls cost USD 0.00820461 peak-rated, within the separate USD 0.10 cap;
+authorization closed. Actual model/trace audit and all failures are archived.
+See [closure](reports/HCL_V09_CAUSAL_COUNTERFACTUAL_FINAL_DEVELOPMENT_CLOSURE.md)
+and [receipt](reports/HCL_V09_COUNTERBENCH_DEV_V01_RECEIPT.json).
+Next: qualify genuinely informative latent-abduction sources and competent
+generic executable comparison; leave consumed CounterBench families.
