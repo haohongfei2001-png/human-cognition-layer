@@ -6,7 +6,7 @@ Human Cognition Layer (HCL)
 
 ## Current phase
 
-**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 frozen generic-tool development signal**
+**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 generic-tool development signal; v0.10 argumentation candidate staged**
 
 ## Core doctrine
 
@@ -5507,7 +5507,7 @@ replaces intervened equations and returns all possible alternative outcomes.
 It separates determinate, underdetermined and inconsistent evidence without
 asserting hypothetical consequences as observed/private truth.
 
-Twelve independent runtime and four utility tests join existing regressions: 109
+Twelve independent runtime and five utility tests join existing regressions: 109
 passed locally. After minimal correctness, CounterBench source audit found
 ordinary-wording equation ambiguity, source contradictions and insufficient
 latent-abduction coverage. Stage only a transparently supplemented eight-source
@@ -5568,3 +5568,36 @@ hidden generator labels or force arithmetic/open-world data into Boolean scope.
 Fresh/provider scope requires a separate concrete owner authorization; original
 LongMemEval remains sealed. Historical pre-execution gates below/above are
 superseded by this closure.
+
+
+## Post-v0.9 follow-through and v0.10 minimal argumentation candidate
+
+PR #87 closure merged as `16c6c60db90241b2ed43a3372ce87dc55e261b98`;
+exact-main preflight 36266465248 passed. v0.9 full-abduction source audit
+found unsupported arithmetic/domain and instruction conflicts; that efficacy
+step remains unqualified/deferred, not PASS. No consumed case tuning or fresh
+code/math calls. v0.9 freezes its narrow generic-tool development signal.
+
+Select conflict/argument acceptance as a bounded conceptual/philosophical
+building block. `hcl/v10` computes grounded/complete/preferred/stable Dung
+acceptance, preserves cycles and multiple extensions, and separates formal
+labels from moral/world/private truth. It reuses source/access/bitemporal
+boundaries; missing/private/future graphs yield no trace. No natural-language
+attack mining, value hierarchy, ASPIC+ priority or PMPM semantics is claimed.
+12 runtime + 5 utility tests (including all 512 three-node graphs) join existing
+regressions: 126 passed locally. This is correctness, not efficacy.
+
+A source-qualified four-public-author-example C/P/generic-tool-T diagnostic
+is fixed on MIT PyArg revision f907bac94cbdd663839300b3b7523d4d958ff36f.
+Four distinct renamed graph families, three tiny three-node examples and one
+five-node example; source assertions visible, no blinded/fresh/native benchmark
+claim. Do not relabel internal synthetic gains or eight related completions as
+independent external evidence. Generic executor/runtime outputs must agree;
+no duplicate paid D/G arm or specialized architecture claim.
+
+See direction audit, minimal-runtime and PyArg utility docs. 12-call package
+requires separate USD 0.05 authorization; planning cap USD 0.0426. No v0.10
+provider call; cost variable unset, trigger absent. v0.9 variable zero;
+LongMemEval sealed. All actual inputs/state/calculations/raw answers archived.
+
+**Current gate: V10_PROVIDER_FREE_CI_THEN_SEPARATE_DEVELOPMENT_AUTHORIZATION_USD_0_05**.
