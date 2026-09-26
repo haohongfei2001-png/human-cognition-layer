@@ -1,0 +1,30 @@
+{
+  "actual_input_chars": {
+    "C": 15300,
+    "D": 39682,
+    "P": 16780
+  },
+  "candidate_main_sha": "883344a00fafa03bdb5fcb0fd72d019b7e8ce444",
+  "candidate_pr": 84,
+  "current_gate": "SEPARATE_OWNER_AUTHORIZATION_FOR_V09_DEVELOPMENT_USD_0_10",
+  "format": "hcl-v09-provider-free-main-certification-v01",
+  "logs_zip_sha256": "4a66451adecf8179ecd218e991558ca37df4db3062eaf10c24810241bb298957",
+  "longmemeval": "sealed provider-unconsumed",
+  "native_counterbench_efficacy": "not qualified; supplemental equation contract, source inconsistency and inadequate latent-abduction coverage disclosed",
+  "planning_char_as_token_peak_usd": 0.0696,
+  "prospective_call_cap": 24,
+  "prospective_cost_cap_usd": 0.1,
+  "selection_sha256": "8efa7bc092c8eb9cf53c9cf797a9a00a7c7f02453475f3ac796b6fd20b4c75ee",
+  "source_sha256": "39f935a48fb997869c1e4488c9a2b902dc08acd876da557c675722c269391a76",
+  "status": "PASS",
+  "test_count": 109,
+  "v06_regression_run": 36264745806,
+  "v09_provider_calls": 0,
+  "v09_run": 36264745858,
+  "verified_files": {
+    "hcl/v09/__init__.py": "be4fb1b12f31a3205f535ed0ebadbd780d6b1a9d82e02c002d9338cdba215ebd",
+    "hcl/v09/runtime.py": "b93aec2a0f201a674cbadedb5c5b070b1e1211901865debb09e6a80a1a0d3a3c",
+    "scripts/prepare_v09_counterbench_dev_v01.py": "37579d3e0f7a8d222ba209a59121380e439488d98508bcf3d7ad75f9cc5bb06c",
+    "scripts/run_v09_counterbench_dev_v01.py": "5252ab08c870ded6988ef2da06ae66378a8bebe84d55db17324fbe90a46e9047"
+  }
+}
