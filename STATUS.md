@@ -5526,3 +5526,20 @@ v0.8 authorization remains zero, LongMemEval sealed. The prior approval covered
 v0.8 only; this provider-backed comparison needs separately scoped approval.
 
 **Current gate: V09_PROVIDER_FREE_CI_THEN_SEPARATE_DEVELOPMENT_AUTHORIZATION_USD_0_10**
+
+
+## v0.9 exact-main provider-free certification
+
+PR #84 merged as main `883344a00fafa03bdb5fcb0fd72d019b7e8ce444`. Exact-main
+v0.9 preflight `36264745858` passed source digest, selection, zero-provider
+validation and all 109 regressions. Exact-main v0.6 preflight `36264745806`
+also passed. Receipt: `reports/HCL_V09_PROVIDER_FREE_CERTIFICATION_V01.json`.
+The runner archives actual model/trace inputs; the supplemented task's
+equation ambiguity, contradictions and limited abduction coverage remain
+disclosed. No native benchmark/full-causal efficacy claim is certified.
+
+Provider-backed v0.9 check remains unconsumed: 8 C/P/tool-D sources, 24 calls,
+USD 0.10 ledger cap. Authorization unset, trigger absent. v0.8 authorization
+zero; LongMemEval sealed. No new provider credential or plan purchased.
+
+**Current gate: SEPARATE_OWNER_AUTHORIZATION_FOR_V09_DEVELOPMENT_USD_0_10**
