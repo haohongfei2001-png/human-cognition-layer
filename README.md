@@ -46,7 +46,7 @@ HCL 首先要求认知表示和更新本身在事实、信息边界、时间关�
 
 当前 canonical 阶段：
 
-**HCL v0.6 frozen RETAIN; v0.7 frozen SIMPLIFY; v0.8 frozen SIMPLIFY**
+**HCL v0.6 frozen RETAIN; v0.7 frozen SIMPLIFY; v0.8 frozen SIMPLIFY; v0.9 causal candidate staged**
 
 v0.5 保持冻结，作为显式 stance / revision / provenance / persistent-state 基础。v0.6 已经真正增加了一层人物信息视角与 belief evidence runtime，而不是继续只做 memory infrastructure。
 
@@ -339,3 +339,19 @@ Decision **SIMPLIFY** to strong source-evidence/uncertainty prompting.
 official benchmark or private-emotion accuracy claim. Full source audit,
 ambiguities and state-receipt limitation:
 [final closure](reports/HCL_V08_AFFECT_APPRAISAL_FINAL_DEVELOPMENT_CLOSURE.md).
+
+## v0.9 minimal causal candidate
+
+Bounded causal/counterfactual computation now distinguishes factual evidence,
+alternative interventions and inconsistent/underdetermined outcomes under an
+explicit declared Boolean model. It reuses source/time/access infrastructure,
+with no real-world causal or private-mind truth assertion. 109 local
+provider-free regressions passed.
+
+The staged eight-source comparison openly supplements CounterBench's formal
+assumptions and records its limited abduction coverage. It is development
+diagnosis, not a native benchmark or complete counterfactual efficacy test.
+Zero v0.9 provider calls; separate USD 0.10 cap before execution.
+[Direction audit](docs/HCL_POST_V08_CAPABILITY_DIRECTION_AUDIT_V01.md) ·
+[Runtime](docs/HCL_V09_CAUSAL_COUNTERFACTUAL_MINIMAL_RUNTIME_V01.md) ·
+[Development protocol](docs/HCL_V09_COUNTERBENCH_DEVELOPMENT_UTILITY_V01.md).
