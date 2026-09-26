@@ -1,0 +1,575 @@
+{
+  "format": "hcl-v09-counterbench-dev-receipt-v01",
+  "status": "SUCCESS",
+  "decision": "RETAIN_GENERIC_TOOL_DEVELOPMENT_SIGNAL_ONLY",
+  "trigger_pr": 86,
+  "parent_sha": "e0c569415753e1276b1c1de9a9973522ffe6ed4b",
+  "execution_sha": "3e8ad9d4ddf9f0e400404ec6a4e369d10f031643",
+  "run_id": 36265833551,
+  "attempt": 1,
+  "artifact_id": 10913458619,
+  "artifact_zip_sha256": "f027590215a62c7cf234f180393b58daa33468a26ac92c422f3ee7b0fb366f7a",
+  "logs_zip_sha256": "cace321310c767d625c17078ef5380532f28ac378443c99e1db915806b41b637",
+  "results_sha256": "a6ca9ed6bd34349e4a59b4ea37c53f351bbb948cb8d08e29f68943d3221361a4",
+  "audit_notes_sha256_before_unmasking": "c3f17d7440c2d437a4f69e9e16d105993883ac66cac8a60e08efdaafc0b95193",
+  "scope": "development agreement under supplemented public formal model, not native CounterBench/real-world causation/full-abduction efficacy",
+  "selection_sha256": "8efa7bc092c8eb9cf53c9cf797a9a00a7c7f02453475f3ac796b6fd20b4c75ee",
+  "completed_count": 8,
+  "agreement_counts": {
+    "C": 2,
+    "P": 2,
+    "D": 7
+  },
+  "invalid_counts": {
+    "C": 2,
+    "P": 2,
+    "D": 0
+  },
+  "paired": {
+    "D_vs_P": {
+      "left_only": [
+        "cf-dev-01",
+        "cf-dev-02",
+        "cf-dev-04",
+        "cf-dev-06",
+        "cf-dev-08"
+      ],
+      "right_only": [],
+      "both_agree": [
+        "cf-dev-05",
+        "cf-dev-07"
+      ],
+      "both_disagree": [
+        "cf-dev-03"
+      ]
+    },
+    "D_vs_C": {
+      "left_only": [
+        "cf-dev-01",
+        "cf-dev-02",
+        "cf-dev-04",
+        "cf-dev-06",
+        "cf-dev-08"
+      ],
+      "right_only": [],
+      "both_agree": [
+        "cf-dev-05",
+        "cf-dev-07"
+      ],
+      "both_disagree": [
+        "cf-dev-03"
+      ]
+    },
+    "P_vs_C": {
+      "left_only": [],
+      "right_only": [],
+      "both_agree": [
+        "cf-dev-05",
+        "cf-dev-07"
+      ],
+      "both_disagree": [
+        "cf-dev-01",
+        "cf-dev-02",
+        "cf-dev-03",
+        "cf-dev-04",
+        "cf-dev-06",
+        "cf-dev-08"
+      ]
+    }
+  },
+  "metrics": {
+    "C": {
+      "calls": 8,
+      "input_chars": 15300,
+      "output_chars": 3310,
+      "provider_wall_seconds": 10.490708,
+      "rated_cost_usd": 0.00214157,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "D": {
+      "calls": 8,
+      "input_chars": 39682,
+      "output_chars": 1994,
+      "provider_wall_seconds": 8.621417,
+      "rated_cost_usd": 0.0039447,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "P": {
+      "calls": 8,
+      "input_chars": 16780,
+      "output_chars": 2993,
+      "provider_wall_seconds": 9.914095,
+      "rated_cost_usd": 0.00211834,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "TOTAL": {
+      "calls": 24,
+      "char_as_token_peak_usd_upper_bound": 0.031485,
+      "input_chars": 71762,
+      "output_chars": 8297,
+      "provider_response_models": [
+        "deepseek-flash"
+      ],
+      "provider_wall_seconds": 29.02622,
+      "rated_cost_usd": 0.00820461
+    }
+  },
+  "authorization_cap_usd": 0.1,
+  "authorization_variable_after_run": "0",
+  "failures": [],
+  "cases": [
+    {
+      "case_id": "cf-dev-01",
+      "source_sha256": "83c52f59cdf579ba6f22afa967404c59e59d10d06c5627b4ec46146e78da84bc",
+      "question_sha256": "1eecd19f75dfc8ca3fb35aa8cef63e4878bade3688feb8f4a6e2369b27cdba6d",
+      "state_sha256": "f8b219d0d1f04d6716d4b3a0325d54d9d755c5aecff44d2aef515bcb45021d83",
+      "adapted_expected_result": "NO",
+      "masked_answer_to_arm": {
+        "1": "C",
+        "2": "D",
+        "3": "P"
+      },
+      "masked_notes": {
+        "1": "Unsupported: invents additional exogenous variables downstream of complete equations.",
+        "2": "Supported complete-chain intervention result NO.",
+        "3": "Invalid length; result UNKNOWN contradicts own concluding NO; preserve failure."
+      },
+      "arms": {
+        "C": {
+          "agrees_with_declared_model": false,
+          "answer": {
+            "reason": "The chain Glent→Razz→Pex→Zurn→Melf→Zlim is stipulated, but only Glent=1 is given factually. Other exogenous variables are unconstrained, so Zlim's value under Glent=0 is not determined by the stated equations alone.",
+            "result": "UNKNOWN"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"UNKNOWN\", \"reason\": \"The chain Glent→Razz→Pex→Zurn→Melf→Zlim is stipulated, but only Glent=1 is given factually. Other exogenous variables are unconstrained, so Zlim's value under Glent=0 is not determined by the stated equations alone.\"}",
+          "response_sha256": "ef88f2402ea3db6e8920021403b43dab42bf86b2266260deb92d046d59f34528"
+        },
+        "D": {
+          "agrees_with_declared_model": true,
+          "answer": {
+            "reason": "Under the declared complete Boolean model, Zlim = Melf = Zurn = Pex = Razz = Glent. Intervening Glent=0 forces the entire chain to 0, so Zlim=0 in all compatible contexts.",
+            "result": "NO"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"NO\", \"reason\": \"Under the declared complete Boolean model, Zlim = Melf = Zurn = Pex = Razz = Glent. Intervening Glent=0 forces the entire chain to 0, so Zlim=0 in all compatible contexts.\"}",
+          "response_sha256": "564b0744f86259608066131fe11706f9ee0d23a0c8b6a3c35a16302a6186ac69"
+        },
+        "P": {
+          "agrees_with_declared_model": false,
+          "answer": null,
+          "invalid_reason": "invalid bounded result/reason",
+          "raw_response": "{\"result\": \"UNKNOWN\", \"reason\": \"The model only gives a causal chain Glent→Razz→Pex→Zurn→Melf→Zlim. With Glent=1 factually and intervention Glent=0, the chain predicts Zlim=0, but the factual observation Glent=1 is consistent. However, no equation is given for Glent itself, so its exogenous context is unconstrained; the intervention sets Glent=0, and the downstream chain yields Zlim=0 deterministically. Wait—this seems YES/NO? Let's re-evaluate: all equations are deterministic, so intervention Glent=0 forces Razz=0, Pex=0, Zurn=0, Melf=0, Zlim=0. Thus target=0 in all compatible contexts. So result should be NO, not UNKNOWN.\"}",
+          "response_sha256": "ef341b9e3170625fad55b2dff05d332ec3d06aab5e6ceaca1dcebd2d1713139b"
+        }
+      },
+      "calculation": {
+        "status": "DETERMINATE",
+        "possible_values": [
+          0
+        ],
+        "world_count": 1
+      },
+      "archive_reconstruction_verified": true
+    },
+    {
+      "case_id": "cf-dev-02",
+      "source_sha256": "0370d182b508b92a6b6d84f57e3c7cb1928c248de55bee5f097cd2501601e283",
+      "question_sha256": "1989bb8c636159ccd3b96320d67ecea13df97ada98d96d5af206d5289177405a",
+      "state_sha256": "a4aa5afbf25837e590e26bae83e6e02ccbb1def20bdb0957a974dd48757a95ca",
+      "adapted_expected_result": "YES",
+      "masked_answer_to_arm": {
+        "1": "P",
+        "2": "C",
+        "3": "D"
+      },
+      "masked_notes": {
+        "1": "OR arithmetic wrong (1 OR 0 is 1); mixes factual/alternative difference with between-context ambiguity.",
+        "2": "Unsupported: Splee is endogenous with equation, not unconstrained after intervention.",
+        "3": "Supported negation and OR trace gives YES."
+      },
+      "arms": {
+        "C": {
+          "agrees_with_declared_model": false,
+          "answer": {
+            "reason": "Model gives no equation for Nuv; Nuv=1 factual and Nuv=0 intervention are compatible. Chain: Nuv=1 -> Splee=1 -> Blen=1 -> Druk=0; Plog = Druk OR Splee = 1 -> Skrim=1 -> Wrox=1. With Nuv=0, Splee unconstrained, so Wrox may differ. Underdetermined.",
+            "result": "UNKNOWN"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\":\"UNKNOWN\",\"reason\":\"Model gives no equation for Nuv; Nuv=1 factual and Nuv=0 intervention are compatible. Chain: Nuv=1 -> Splee=1 -> Blen=1 -> Druk=0; Plog = Druk OR Splee = 1 -> Skrim=1 -> Wrox=1. With Nuv=0, Splee unconstrained, so Wrox may differ. Underdetermined.\"}",
+          "response_sha256": "01a9e5384c835c9398101cd5c3e55944632fb9f5bc1493912c8164bb8731a7bf"
+        },
+        "D": {
+          "agrees_with_declared_model": true,
+          "answer": {
+            "reason": "Under the declared model, intervening Nuv=0 makes Splee=0, Blen=0, Druk=1, Plog=1, Skrim=1, Wrox=1. The single compatible trace yields Wrox=1, so the counterfactual target occurs.",
+            "result": "YES"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"YES\", \"reason\": \"Under the declared model, intervening Nuv=0 makes Splee=0, Blen=0, Druk=1, Plog=1, Skrim=1, Wrox=1. The single compatible trace yields Wrox=1, so the counterfactual target occurs.\"}",
+          "response_sha256": "f676a2cd2ea0947d41e5bba5a5cd654a59e56e3fa2d443e621fe01a8a88b2195"
+        },
+        "P": {
+          "agrees_with_declared_model": false,
+          "answer": {
+            "reason": "Factual Nuv=1 gives Splee=1, Blen=1, Druk=0, Plog=1, Skrim=1, Wrox=1. Intervening Nuv=0 makes Splee=0, Blen=0, Druk=1, Plog=0 (since Druk=1 OR Splee=0), Skrim=0, Wrox=0. Thus target differs, so not all compatible contexts yield same outcome.",
+            "result": "UNKNOWN"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"UNKNOWN\", \"reason\": \"Factual Nuv=1 gives Splee=1, Blen=1, Druk=0, Plog=1, Skrim=1, Wrox=1. Intervening Nuv=0 makes Splee=0, Blen=0, Druk=1, Plog=0 (since Druk=1 OR Splee=0), Skrim=0, Wrox=0. Thus target differs, so not all compatible contexts yield same outcome.\"}",
+          "response_sha256": "bea41d8ce09ddb5538a768c6a14f9cba329216395f8c01c8fc2cff56fc7c6c36"
+        }
+      },
+      "calculation": {
+        "status": "DETERMINATE",
+        "possible_values": [
+          1
+        ],
+        "world_count": 1
+      },
+      "archive_reconstruction_verified": true
+    },
+    {
+      "case_id": "cf-dev-03",
+      "source_sha256": "72ff4efbabfda7ae92b0719961a9e7dbd9c77be505d2b99d959b8673cbb2307d",
+      "question_sha256": "b91f07c59ad6005726c5e23fbce6124a68fcb8581e76baefe3f3807a509989cd",
+      "state_sha256": "811e6942179f55aa33812693e25619195244ef356dc67e13af45e1dd93023296",
+      "adapted_expected_result": "YES",
+      "masked_answer_to_arm": {
+        "1": "D",
+        "2": "P",
+        "3": "C"
+      },
+      "masked_notes": {
+        "1": "Result NO conflicts with correct reason/trace YES; retain disagreement.",
+        "2": "Invents exogenous Vank and incorrect factual Klep=1; complete equation forbids this.",
+        "3": "Treats endogenous Vank as unconstrained; unsupported."
+      },
+      "arms": {
+        "C": {
+          "agrees_with_declared_model": false,
+          "answer": {
+            "reason": "The model gives no equation for Praf, so Praf is exogenous. Intervening Praf=0 changes the factual context, but the target Klep depends on the chain through Vank, Scud, Wrenk, Yobb, Glim, Spog, Torb. With Praf=0, Vank is not caused, so its value is unconstrained; thus Klep is not determined. Different compatible contexts can yield different Klep outcomes.",
+            "result": "UNKNOWN"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"UNKNOWN\", \"reason\": \"The model gives no equation for Praf, so Praf is exogenous. Intervening Praf=0 changes the factual context, but the target Klep depends on the chain through Vank, Scud, Wrenk, Yobb, Glim, Spog, Torb. With Praf=0, Vank is not caused, so its value is unconstrained; thus Klep is not determined. Different compatible contexts can yield different Klep outcomes.\"}",
+          "response_sha256": "e277705b9a61e79e358a3680eb92ad35e4ea59273ce31883341a262ad074e303"
+        },
+        "D": {
+          "agrees_with_declared_model": false,
+          "answer": {
+            "reason": "Under the declared model, Praf=0 makes Vank=0, Scud=0, Wrenk=0, Yobb=0, Glim=0, Spog=1, Torb=1, Klep=1. The conditional calculation reports target value 1 for intervention Praf=0, so Klep would occur; thus the answer to 'Would Klep occur if not Praf' is YES, not NO. Wait—query asks target=1 after intervention; result should be YES.",
+            "result": "NO"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"NO\", \"reason\": \"Under the declared model, Praf=0 makes Vank=0, Scud=0, Wrenk=0, Yobb=0, Glim=0, Spog=1, Torb=1, Klep=1. The conditional calculation reports target value 1 for intervention Praf=0, so Klep would occur; thus the answer to 'Would Klep occur if not Praf' is YES, not NO. Wait—query asks target=1 after intervention; result should be YES.\"}",
+          "response_sha256": "80a64b16776239e143eee993c406c06031dcbf727e9e468045c9d4afe7fa6ac8"
+        },
+        "P": {
+          "agrees_with_declared_model": false,
+          "answer": {
+            "reason": "Factual Praf=1 gives chain to Klep=1. Intervening Praf=0 removes Praf's causal influence, but Vank is exogenous and unconstrained; it may still be 1 or 0, yielding different Klep outcomes. Thus target is underdetermined.",
+            "result": "UNKNOWN"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"UNKNOWN\", \"reason\": \"Factual Praf=1 gives chain to Klep=1. Intervening Praf=0 removes Praf's causal influence, but Vank is exogenous and unconstrained; it may still be 1 or 0, yielding different Klep outcomes. Thus target is underdetermined.\"}",
+          "response_sha256": "373e3c9f98eea48c40332207166508dc5a1cbf2d322d6b2a025c452b433e1454"
+        }
+      },
+      "calculation": {
+        "status": "DETERMINATE",
+        "possible_values": [
+          1
+        ],
+        "world_count": 1
+      },
+      "archive_reconstruction_verified": true
+    },
+    {
+      "case_id": "cf-dev-04",
+      "source_sha256": "32251782b701005fd2c01055ff939eedfd4647acf06a14414edc11ab3d30b694",
+      "question_sha256": "1989bb8c636159ccd3b96320d67ecea13df97ada98d96d5af206d5289177405a",
+      "state_sha256": "e22832fba62e47358f433188d1fff93ca3c7a40fe54afe7f914ef57e6ac22521",
+      "adapted_expected_result": "NO",
+      "masked_answer_to_arm": {
+        "1": "D",
+        "2": "P",
+        "3": "C"
+      },
+      "masked_notes": {
+        "1": "Supported AND/chain intervention gives NO.",
+        "2": "Correct computed values but invalid conceptual inference of UNKNOWN from factual/alternative difference.",
+        "3": "Invalid length; invents unconstrained Splee/factual ambiguity despite complete equation."
+      },
+      "arms": {
+        "C": {
+          "agrees_with_declared_model": false,
+          "answer": null,
+          "invalid_reason": "invalid bounded result/reason",
+          "raw_response": "{\"result\":\"UNKNOWN\",\"reason\":\"Under the stipulated model, Wrox depends on Skrim←Plog←Druk←Blen←(Splee AND Nuv). With Nuv=0, Blen=0, so Druk=0, Plog=0, Skrim=0, Wrox=0. But Splee is caused by Nuv, so with Nuv=0, Splee=0; no inconsistency. However, the query asks about intervening Nuv=0 while factual Nuv=1. The factual observation Nuv=1 is compatible, but Splee is unconstrained by observations and its value under Nuv=1 is not given; thus Wrox in the factual world is underdetermined. The intervention Nuv=0 yields Wrox=0, but the question compares to factual Nuv=1, where Wrox may be 0 or 1 depending on Splee. Hence UNKNOWN.\"}",
+          "response_sha256": "c48f828e46243d19011170ef6c0058ce5b026080d2111b9b6e94a00c2f3c8897"
+        },
+        "D": {
+          "agrees_with_declared_model": true,
+          "answer": {
+            "reason": "Under the declared model, intervening Nuv=0 makes Splee=0, Blen=0, Druk=0, Plog=0, Skrim=0, and Wrox=0. The sole compatible trace yields target Wrox=0, so all compatible contexts give NO.",
+            "result": "NO"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"NO\", \"reason\": \"Under the declared model, intervening Nuv=0 makes Splee=0, Blen=0, Druk=0, Plog=0, Skrim=0, and Wrox=0. The sole compatible trace yields target Wrox=0, so all compatible contexts give NO.\"}",
+          "response_sha256": "9907abd51e74edaf868ce089e8bf49ea07cdee7d533acc941c9c634c24b7a2fc"
+        },
+        "P": {
+          "agrees_with_declared_model": false,
+          "answer": {
+            "reason": "Factual Nuv=1 gives Splee=1, Blen=1, Druk=1, Plog=1, Skrim=1, Wrox=1. Intervening Nuv=0 makes Splee=0, Blen=0, Druk=0, Plog=0, Skrim=0, Wrox=0. Since factual and intervened outcomes differ, the counterfactual target is not determined as YES or NO under the stated model.",
+            "result": "UNKNOWN"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"UNKNOWN\", \"reason\": \"Factual Nuv=1 gives Splee=1, Blen=1, Druk=1, Plog=1, Skrim=1, Wrox=1. Intervening Nuv=0 makes Splee=0, Blen=0, Druk=0, Plog=0, Skrim=0, Wrox=0. Since factual and intervened outcomes differ, the counterfactual target is not determined as YES or NO under the stated model.\"}",
+          "response_sha256": "39195862629b89e508df21c2517c4b4ea19227c28a121de47c316633eaa80ae2"
+        }
+      },
+      "calculation": {
+        "status": "DETERMINATE",
+        "possible_values": [
+          0
+        ],
+        "world_count": 1
+      },
+      "archive_reconstruction_verified": true
+    },
+    {
+      "case_id": "cf-dev-05",
+      "source_sha256": "9818c2844b5648baec1615a200e5acb24995c1af9c385f530e7e0ed8592029c2",
+      "question_sha256": "d86d019047447d5e3a644d23e36ce717469492bdd7f76f072091c13fa68471ea",
+      "state_sha256": "0bf52fb9170aadc96fbcb209621f8419232594d69d62a1c91bab6060be764ca2",
+      "adapted_expected_result": "UNKNOWN",
+      "masked_answer_to_arm": {
+        "1": "P",
+        "2": "C",
+        "3": "D"
+      },
+      "masked_notes": {
+        "1": "Correct contradiction ultimately; preliminary Blaf unconstrained wording wrong under full declared model.",
+        "2": "Supported factual inconsistency, UNKNOWN.",
+        "3": "Supported factual inconsistency/no compatible contexts, UNKNOWN."
+      },
+      "arms": {
+        "C": {
+          "agrees_with_declared_model": true,
+          "answer": {
+            "reason": "Observed Trune=1 contradicts the stipulated chain: Ziklo=1 causes Blaf=1, which causes Trune=0. Inconsistent observations make the target outcome under intervention indeterminate.",
+            "result": "UNKNOWN"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"UNKNOWN\", \"reason\": \"Observed Trune=1 contradicts the stipulated chain: Ziklo=1 causes Blaf=1, which causes Trune=0. Inconsistent observations make the target outcome under intervention indeterminate.\"}",
+          "response_sha256": "e2b50d2d916f2383e889550559d828de48c6f7525894deffdd0462534f45e868"
+        },
+        "D": {
+          "agrees_with_declared_model": true,
+          "answer": {
+            "reason": "Observations are inconsistent: Ziklo=1 implies Blaf=1, so Trune=not(Blaf)=0, contradicting observed Trune=1. With inconsistent factual observations, no compatible context exists, so the intervention result is UNKNOWN.",
+            "result": "UNKNOWN"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"UNKNOWN\", \"reason\": \"Observations are inconsistent: Ziklo=1 implies Blaf=1, so Trune=not(Blaf)=0, contradicting observed Trune=1. With inconsistent factual observations, no compatible context exists, so the intervention result is UNKNOWN.\"}",
+          "response_sha256": "a0018a3c2c168b2f6b4cdb87e66eb5de5ed18df12a8f10b1fc64373b73ad9656"
+        },
+        "P": {
+          "agrees_with_declared_model": true,
+          "answer": {
+            "reason": "Observed Trune=1 contradicts Blaf causes not Trune only if Blaf=1, but Blaf is unconstrained; Ziklo=1 gives Blaf=1, so Trune should be 0, contradicting Trune=1. Inconsistent observations, so UNKNOWN.",
+            "result": "UNKNOWN"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"UNKNOWN\", \"reason\": \"Observed Trune=1 contradicts Blaf causes not Trune only if Blaf=1, but Blaf is unconstrained; Ziklo=1 gives Blaf=1, so Trune should be 0, contradicting Trune=1. Inconsistent observations, so UNKNOWN.\"}",
+          "response_sha256": "3d746bca693c09fef9c6e42c8bc777969cd48b3fed0f71673c54fe5edac2776b"
+        }
+      },
+      "calculation": {
+        "status": "INCONSISTENT_OBSERVATIONS",
+        "possible_values": [],
+        "world_count": 0
+      },
+      "archive_reconstruction_verified": true
+    },
+    {
+      "case_id": "cf-dev-06",
+      "source_sha256": "f5ab9ea3a25803adaf2c826b887c2c7cb639b403fc0a832d386f04c16dce4e63",
+      "question_sha256": "1989bb8c636159ccd3b96320d67ecea13df97ada98d96d5af206d5289177405a",
+      "state_sha256": "851807e117006763b088c1be3d0ae3e1176fb51c4c020a72edc2a3cba5cb17ce",
+      "adapted_expected_result": "YES",
+      "masked_answer_to_arm": {
+        "1": "C",
+        "2": "P",
+        "3": "D"
+      },
+      "masked_notes": {
+        "1": "UNKNOWN conflicts with correct final YES; denies explicit factual assumption supplied to all arms.",
+        "2": "UNKNOWN conflicts with correct reason YES.",
+        "3": "Supported shared observed roots produce YES."
+      },
+      "arms": {
+        "C": {
+          "agrees_with_declared_model": false,
+          "answer": {
+            "reason": "Observed Blen=1, Plog=1, Nuv=1. Nuv=1 implies Splee=1, so Druk=1 (Splee OR Blen). Thus Wrox=1 factually. Intervening Nuv=0 makes Splee=0, but Blen=1 still makes Druk=1, so Wrox=1. However, the source only states observed Blen and Plog, not Nuv=1; Nuv is unconstrained exogenous, so factual contexts with Nuv=0 also exist, giving Wrox=1. All compatible contexts yield Wrox=1, so result should be YES, not UNKNOWN. Correction: YES.",
+            "result": "UNKNOWN"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\":\"UNKNOWN\",\"reason\":\"Observed Blen=1, Plog=1, Nuv=1. Nuv=1 implies Splee=1, so Druk=1 (Splee OR Blen). Thus Wrox=1 factually. Intervening Nuv=0 makes Splee=0, but Blen=1 still makes Druk=1, so Wrox=1. However, the source only states observed Blen and Plog, not Nuv=1; Nuv is unconstrained exogenous, so factual contexts with Nuv=0 also exist, giving Wrox=1. All compatible contexts yield Wrox=1, so result should be YES, not UNKNOWN. Correction: YES.\"}",
+          "response_sha256": "df18a5c684e8db7cf210eccbda2d6ef1683f6eb1a819026a4cd19cb8161a1fb1"
+        },
+        "D": {
+          "agrees_with_declared_model": true,
+          "answer": {
+            "reason": "Under the declared model, Wrox = Druk AND Plog, Druk = Splee OR Blen, Splee = Nuv. With Blen=1 and Plog=1, Druk=1 regardless of Nuv, so Wrox=1 in both factual (Nuv=1) and intervened (Nuv=0) worlds.",
+            "result": "YES"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"YES\", \"reason\": \"Under the declared model, Wrox = Druk AND Plog, Druk = Splee OR Blen, Splee = Nuv. With Blen=1 and Plog=1, Druk=1 regardless of Nuv, so Wrox=1 in both factual (Nuv=1) and intervened (Nuv=0) worlds.\"}",
+          "response_sha256": "1c98c8180ae1e0e7d87c5227cdde605ccfc61bf988d429f6ee9c20824351e855"
+        },
+        "P": {
+          "agrees_with_declared_model": false,
+          "answer": {
+            "reason": "Observed Blen=1, Plog=1, Nuv=1. Equations: Splee=Nuv, Druk=Splee OR Blen, Wrox=Druk AND Plog. Factual: Splee=1, Druk=1, Wrox=1. Intervene Nuv=0: Splee=0, Druk=0 OR 1=1, Wrox=1 AND 1=1. Target=1. No inconsistency; result YES.",
+            "result": "UNKNOWN"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"UNKNOWN\", \"reason\": \"Observed Blen=1, Plog=1, Nuv=1. Equations: Splee=Nuv, Druk=Splee OR Blen, Wrox=Druk AND Plog. Factual: Splee=1, Druk=1, Wrox=1. Intervene Nuv=0: Splee=0, Druk=0 OR 1=1, Wrox=1 AND 1=1. Target=1. No inconsistency; result YES.\"}",
+          "response_sha256": "4b2a7a6f66fec4c3e3ca86bea7af98acf8928f38c62a4933b46bb8fdd80bded7"
+        }
+      },
+      "calculation": {
+        "status": "DETERMINATE",
+        "possible_values": [
+          1
+        ],
+        "world_count": 1
+      },
+      "archive_reconstruction_verified": true
+    },
+    {
+      "case_id": "cf-dev-07",
+      "source_sha256": "4feb4af22492bb8933255d187b2ebe5cfb6fd8f58f3e93b6d233efcad3dd0427",
+      "question_sha256": "1eecd19f75dfc8ca3fb35aa8cef63e4878bade3688feb8f4a6e2369b27cdba6d",
+      "state_sha256": "6fa2a4d3f3c8b2179b8d040019cfcb7c133ca8a5043db45432d8669e6d79147d",
+      "adapted_expected_result": "UNKNOWN",
+      "masked_answer_to_arm": {
+        "1": "D",
+        "2": "C",
+        "3": "P"
+      },
+      "masked_notes": {
+        "1": "Supported no compatible contexts from contradiction, UNKNOWN.",
+        "2": "Correct factual contradiction; underdetermined wording imprecise versus inconsistent.",
+        "3": "Supported factual inconsistency, UNKNOWN."
+      },
+      "arms": {
+        "C": {
+          "agrees_with_declared_model": true,
+          "answer": {
+            "reason": "Observed Zurn=1 contradicts the stipulated chain: Glent=1 causes Razz=1, Pex=1, and Pex causes not Zurn, so Zurn should be 0. Inconsistent observations make the target underdetermined.",
+            "result": "UNKNOWN"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"UNKNOWN\", \"reason\": \"Observed Zurn=1 contradicts the stipulated chain: Glent=1 causes Razz=1, Pex=1, and Pex causes not Zurn, so Zurn should be 0. Inconsistent observations make the target underdetermined.\"}",
+          "response_sha256": "3b1a00a041f8d2bd2018ec9496a47b44cf7abf850035b053fd03308ea95a92ae"
+        },
+        "D": {
+          "agrees_with_declared_model": true,
+          "answer": {
+            "reason": "Observations are inconsistent: Glent=1 implies Razz=1, Pex=1, so Zurn=not(Pex)=0, contradicting observed Zurn=1. With inconsistent factual constraints, the conditional model yields no compatible context, so target outcome is undetermined.",
+            "result": "UNKNOWN"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"UNKNOWN\", \"reason\": \"Observations are inconsistent: Glent=1 implies Razz=1, Pex=1, so Zurn=not(Pex)=0, contradicting observed Zurn=1. With inconsistent factual constraints, the conditional model yields no compatible context, so target outcome is undetermined.\"}",
+          "response_sha256": "7c2429f952b91972bf2bd777b8bd7ee5b2f259f461996e84f22aa20daec3a1a1"
+        },
+        "P": {
+          "agrees_with_declared_model": true,
+          "answer": {
+            "reason": "Observed Zurn=1 contradicts Pex=1 (since Pex causes not Zurn) while Glent=1 forces Pex=1. Inconsistent observations, so UNKNOWN.",
+            "result": "UNKNOWN"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"UNKNOWN\", \"reason\": \"Observed Zurn=1 contradicts Pex=1 (since Pex causes not Zurn) while Glent=1 forces Pex=1. Inconsistent observations, so UNKNOWN.\"}",
+          "response_sha256": "8e5bcc5f8571688cb7615e55fab4e208b5500b4affab361ef1ddecc415ad56fa"
+        }
+      },
+      "calculation": {
+        "status": "INCONSISTENT_OBSERVATIONS",
+        "possible_values": [],
+        "world_count": 0
+      },
+      "archive_reconstruction_verified": true
+    },
+    {
+      "case_id": "cf-dev-08",
+      "source_sha256": "6123c4de607f4157799771f32c5a4d10f36cb6ebfd8e4b97b3b3ebcdf1d27b0a",
+      "question_sha256": "1eecd19f75dfc8ca3fb35aa8cef63e4878bade3688feb8f4a6e2369b27cdba6d",
+      "state_sha256": "ff054dda638292dcf436ba19db4868ee787fc7cb7078176d427f2e816668499c",
+      "adapted_expected_result": "YES",
+      "masked_answer_to_arm": {
+        "1": "D",
+        "2": "C",
+        "3": "P"
+      },
+      "masked_notes": {
+        "1": "Supported Razz held fixed, OR chain YES.",
+        "2": "Truncated invalid JSON; leading UNKNOWN conflicts with reason YES; preserve failure.",
+        "3": "Invalid length; leading UNKNOWN conflicts with reason YES; preserve failure."
+      },
+      "arms": {
+        "C": {
+          "agrees_with_declared_model": false,
+          "answer": null,
+          "invalid_reason": "invalid answer JSON",
+          "raw_response": "{\"result\": \"UNKNOWN\", \"reason\": \"Observed Glent=1, Razz=1. Pex=Glent OR Razz=1, so Zurn=1, Melf=1, Zlim=1 factually. Intervening Glent=0 leaves Razz=1, so Pex=1 and Zlim=1. However, the query asks about 'not Glent instead of Glent' while Razz remains observed; under the model this yields Zlim=1, but the source only states 'We observed Razz' without explicitly asserting Glent=1 as an observation. The factual assumption Glent=1 is given, but the intervention is well-defined. No inconsistency. Yet the target outcome is determined: Zlim=1. Wait—re-evaluate: explicit_factual_assumptions include Glent=1, Razz=1. Intervention Glent=0. Razz stays 1. Pex=1. Zlim=1. So result should be YES. But the question phrasing 'Would Zlim occur if not Glent instead of Glent?' is counterfactual; under the model, yes. However, the source says 'We observed Razz' only, not Glent",
+          "response_sha256": "61a4cec23fb180e026cab68d9f07a6a94fe2a8e1dce93765e9f0541f3cb8763e"
+        },
+        "D": {
+          "agrees_with_declared_model": true,
+          "answer": {
+            "reason": "Under the declared model, Zlim = Melf = Zurn = Pex = (Glent or Razz). With Razz=1 held fixed, Pex=1 regardless of Glent, so Zlim=1 even after intervening Glent=0. The conditional calculation gives a determinate value 1.",
+            "result": "YES"
+          },
+          "invalid_reason": null,
+          "raw_response": "{\"result\": \"YES\", \"reason\": \"Under the declared model, Zlim = Melf = Zurn = Pex = (Glent or Razz). With Razz=1 held fixed, Pex=1 regardless of Glent, so Zlim=1 even after intervening Glent=0. The conditional calculation gives a determinate value 1.\"}",
+          "response_sha256": "93bac5e7f5cb57895b2670cda3f292ca5aaf29e9dd9a53d3985c17e7c7dd86ea"
+        },
+        "P": {
+          "agrees_with_declared_model": false,
+          "answer": null,
+          "invalid_reason": "invalid bounded result/reason",
+          "raw_response": "{\"result\": \"UNKNOWN\", \"reason\": \"Observed Glent=1 and Razz=1. Intervening Glent=0 leaves Razz=1, so Pex=1 via Razz, hence Zurn=1, Melf=1, Zlim=1. However, the factual observation Glent=1 is inconsistent with the intervention's alternative context only if Glent is exogenous; but Glent has no equation, so it is exogenous and can be set to 0. The model is consistent, and the target is determined as 1. Wait—re-evaluate: The query asks 'Would Zlim occur if not Glent instead of Glent?' with explicit intervention Glent=0. Since Razz=1 is observed and Razz is an alternative parent of Pex, Pex remains 1. Thus Zlim=1. But the factual observation Glent=1 is not contradicted because Glent is exogenous. So result should be YES. However, the source says 'We observed Razz' but the explicit factual assumptions include Glent=1 and Razz=1. No inconsistency. Therefore YES.\"}",
+          "response_sha256": "05594435ed1098321bcce201d3b5d85bcdc67c1607e988dc8dc9a845d30bc084"
+        }
+      },
+      "calculation": {
+        "status": "DETERMINATE",
+        "possible_values": [
+          1
+        ],
+        "world_count": 1
+      },
+      "archive_reconstruction_verified": true
+    }
+  ],
+  "audit_limits": [
+    "Known source-derived formal reference outcomes before model run; supplementary Boolean contract visible to every arm",
+    "Reviewer not independent human; traces and style may disclose arm identities",
+    "Audit does not rescue invalid outputs or conflicting result fields"
+  ],
+  "longmemeval": "sealed provider-unconsumed",
+  "future_full_abduction": "requires qualified external source, generic executable baseline, separately scoped owner approval; CounterBench not sufficient"
+}
