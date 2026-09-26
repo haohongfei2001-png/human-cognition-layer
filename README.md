@@ -46,7 +46,7 @@ HCL 首先要求认知表示和更新本身在事实、信息边界、时间关�
 
 当前 canonical 阶段：
 
-**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 frozen generic-tool development signal**
+**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 generic-tool development signal; v0.10 argumentation candidate staged**
 
 v0.5 保持冻结，作为显式 stance / revision / provenance / persistent-state 基础。v0.6 已经真正增加了一层人物信息视角与 belief evidence runtime，而不是继续只做 memory infrastructure。
 
@@ -370,3 +370,36 @@ See [closure](reports/HCL_V09_CAUSAL_COUNTERFACTUAL_FINAL_DEVELOPMENT_CLOSURE.md
 and [receipt](reports/HCL_V09_COUNTERBENCH_DEV_V01_RECEIPT.json).
 Next: qualify genuinely informative latent-abduction sources and competent
 generic executable comparison; leave consumed CounterBench families.
+
+
+## Post-v0.9 follow-through and v0.10 minimal argumentation candidate
+
+PR #87 closure merged as `16c6c60db90241b2ed43a3372ce87dc55e261b98`;
+exact-main preflight 36266465248 passed. v0.9 full-abduction source audit
+found unsupported arithmetic/domain and instruction conflicts; that efficacy
+step remains unqualified/deferred, not PASS. No consumed case tuning or fresh
+code/math calls. v0.9 freezes its narrow generic-tool development signal.
+
+Select conflict/argument acceptance as a bounded conceptual/philosophical
+building block. `hcl/v10` computes grounded/complete/preferred/stable Dung
+acceptance, preserves cycles and multiple extensions, and separates formal
+labels from moral/world/private truth. It reuses source/access/bitemporal
+boundaries; missing/private/future graphs yield no trace. No natural-language
+attack mining, value hierarchy, ASPIC+ priority or PMPM semantics is claimed.
+12 runtime + 5 utility tests (including all 512 three-node graphs) join existing
+regressions: 126 passed locally. This is correctness, not efficacy.
+
+A source-qualified four-public-author-example C/P/generic-tool-T diagnostic
+is fixed on MIT PyArg revision f907bac94cbdd663839300b3b7523d4d958ff36f.
+Four distinct renamed graph families, three tiny three-node examples and one
+five-node example; source assertions visible, no blinded/fresh/native benchmark
+claim. Do not relabel internal synthetic gains or eight related completions as
+independent external evidence. Generic executor/runtime outputs must agree;
+no duplicate paid D/G arm or specialized architecture claim.
+
+See direction audit, minimal-runtime and PyArg utility docs. 12-call package
+requires separate USD 0.05 authorization; planning cap USD 0.0426. No v0.10
+provider call; cost variable unset, trigger absent. v0.9 variable zero;
+LongMemEval sealed. All actual inputs/state/calculations/raw answers archived.
+
+**Current gate: V10_PROVIDER_FREE_CI_THEN_SEPARATE_DEVELOPMENT_AUTHORIZATION_USD_0_05**.

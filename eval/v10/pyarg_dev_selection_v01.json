@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "assignment": "af",
+      "case_id": "arg-dev-01",
+      "family_sha256": "bb91259222eca40d6e0de2e7042caa03896f7d56fd3e6e903a73fcb45aec7eb6",
+      "method": "test_af_complete_semantics",
+      "semantics": "grounded",
+      "source_file_sha256": "042eddb4d7e2ce29af8c9403ccf8c315b4cc511c2fa8d0582e750024a8ce1520",
+      "source_path": "src/py_arg_tests/test_af_complete_semantics.py",
+      "source_sha256": "270adf53d00bfce882de4f8d170f0df3f6481b065b4344f8901278c4bbfcf7cc"
+    },
+    {
+      "assignment": "af1",
+      "case_id": "arg-dev-02",
+      "family_sha256": "92d05c22d5bc9d7372265f1e7bfec1a219fe32289ebce420c2b898aabc6db601",
+      "method": "test_ac_example_4",
+      "semantics": "complete",
+      "source_file_sha256": "4985affc9d468b8432be8ff6a9a7250fb54b5323b05ad6f81d3d1cfbd1b57b3f",
+      "source_path": "src/py_arg_tests/test_incomplete_argumentation_framework.py",
+      "source_sha256": "56494a47f6e5546e295dec30f7438a4aba89720131ce42b721a3abae603ca56b"
+    },
+    {
+      "assignment": "af",
+      "case_id": "arg-dev-03",
+      "family_sha256": "3486e08525d4c17bedb315bb1c3d06c98038c14db707fa589ac1d90c2f6a9c8d",
+      "method": "test_three_argument_example",
+      "semantics": "grounded",
+      "source_file_sha256": "649d20725245d64e3c72bb9393b1c6ed2b30b2f7358d00b79a577777062f6110",
+      "source_path": "src/py_arg_tests/test_af_from_scratch.py",
+      "source_sha256": "c0cd0a519252de45071d6a4ef34b4684a38171dfb80e39373acbb836ba5a78b9"
+    },
+    {
+      "assignment": "af",
+      "case_id": "arg-dev-04",
+      "family_sha256": "f33a4f511490bcb8aad34db43843750751e8796f4f05d3c00667a8cebcbaa5b5",
+      "method": "test_construct_af",
+      "semantics": "complete",
+      "source_file_sha256": "607b86304a6748c94ac09b027734437244cd8ae8ac60d8c7e19457ecce4ff701",
+      "source_path": "src/py_arg_tests/test_af_canonical_constructions.py",
+      "source_sha256": "378fc50b7d4e321a097d5bca5207d1393a26aa8dc1b5718206b7f904c7400dc0"
+    }
+  ],
+  "format": "hcl-v10-pyarg-author-example-dev-v01",
+  "license": "MIT",
+  "repo": "DaphneOdekerken/PyArg",
+  "revision": "f907bac94cbdd663839300b3b7523d4d958ff36f",
+  "scope": "four source-inspected public author examples, not native benchmark/fresh or natural-language efficacy"
+}
