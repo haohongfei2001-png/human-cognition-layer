@@ -6,7 +6,7 @@ Human Cognition Layer (HCL)
 
 ## Current phase
 
-**HCL v0.6 frozen RETAIN; v0.7 fresh pilot complete and frozen SIMPLIFY**
+**HCL v0.6 frozen RETAIN; v0.7 frozen SIMPLIFY; v0.8 affect candidate provider-free staged**
 
 ## Core doctrine
 
@@ -5411,3 +5411,40 @@ operational receipt:
 `reports/HCL_V07_SAGA_FRESH_V01_RECEIPT.json`.
 
 **Current gate: V07_FROZEN_SIMPLIFY_NEXT_CAPABILITY_DIRECTION_AUDIT**
+
+
+## Post-v0.7 direction audit and v0.8 minimal affect candidate
+
+PR #79 merged v0.7 closure as main `dd1cd8bd8cc5376fdc0c90aceafff197688db64c`;
+exact-main regression `36261199377` passed. No SAGA tuning continues.
+
+The short capability-direction audit selected evidence-constrained affect and
+appraisal, based on published process-level gaps and reuse of existing
+provenance, goals and perspective. This is a candidate research direction,
+not a verified stable deficit of the current DeepSeek alias. No later version
+sequence is fixed. See `docs/HCL_POST_V07_CAPABILITY_DIRECTION_AUDIT_V01.md`.
+
+`hcl/v08` now distinguishes reported emotions, expressions, inferred feelings,
+third-party attributions, bounded appraisals and character uncertainty. It
+preserves mixed feelings, explicit revision and visible goal links. Semantic
+context excludes future/private records and hidden relation pointers; source
+quotes, actor binding, chronology, batch atomicity and replay are validated.
+The module wraps v0.7/v0.6 rather than replacing them. Independent synthetic
+fixtures and existing regressions passed locally (93 tests).
+
+Only after minimal correctness, the source audit pinned 1,000 CAREBench
+first-person records and froze eight narrative-hash-selected development
+sources. Only the public narrative enters models; hidden responses, emotion
+labels, ratings, persona, demographics, chat and identity are withheld. The
+adapted C/P/D package has no official benchmark or private-emotion accuracy
+score; paired source-grounding review is predeclared. Raw source text is not
+committed. `docs/HCL_V08_CAREBENCH_DEVELOPMENT_UTILITY_V01.md` records source
+and fairness limits.
+
+The v0.8 check is staged behind a separate **USD 0.25** hard cap (40 calls;
+262,000 input/112,000 output chars; shared pre-request usage ledger). Its
+trigger is absent and authorization variable unset. The previous owner
+approval was expressly for the completed v0.7 fresh pilot. No v0.8 provider
+call or external utility claim exists; LongMemEval remains sealed.
+
+**Current gate: V08_PROVIDER_FREE_CI_THEN_SEPARATE_DEVELOPMENT_AUTHORIZATION_USD_0_25**

@@ -1,0 +1,52 @@
+{
+  "format": "hcl-v08-carebench-dev-selection-v01",
+  "salt": "HCL-V08-CAREBENCH-DEV-V01",
+  "selected": [
+    {
+      "case_id": "care-dev-01",
+      "narrative_sha256": "f6c9eda88decd1a419be4faa5526164b5f28f8549c39ecf1dbc442f18896a105",
+      "source_key_sha256": "044bc25b5b2e32dbfa30f023a2ea3afc708456454174585a9826b2cd8132007b"
+    },
+    {
+      "case_id": "care-dev-02",
+      "narrative_sha256": "0d2ff5c5827c67c848893a2749e59ed9f5942dcef1fae9193880bd814c9bdb05",
+      "source_key_sha256": "b221e95d3ac5d8ce371487951cff9899f751b9383e996cd3e8c76650466ec979"
+    },
+    {
+      "case_id": "care-dev-03",
+      "narrative_sha256": "4ec9788a7d1968349f0737d1ef69791736cca2c251d64e820d09a1049173c463",
+      "source_key_sha256": "7dc8e5253c3a5036d89a79f8a80562a62e6beeee3bfbe4a3da1c7dc09a7068f4"
+    },
+    {
+      "case_id": "care-dev-04",
+      "narrative_sha256": "1411a3777ee4f0a722070884d303ed087fc0e08544a8fbbf515a0bdbd7d28993",
+      "source_key_sha256": "9430c58ede0c8b1ebbeed0c1799f71ef2c7b553b0d9c921be6c932297c5e69a5"
+    },
+    {
+      "case_id": "care-dev-05",
+      "narrative_sha256": "17cdc819e40eb50df659264c2c41dbc88c0323ff04a2c7ed59d55f9a37a23f93",
+      "source_key_sha256": "17dc63ed08fe469c3d11ed26f58960ef2608c56bcfb4e764367d1b44eaf35796"
+    },
+    {
+      "case_id": "care-dev-06",
+      "narrative_sha256": "cba21cddcd8f743f207df32d0c24446d6a6c4473eace8b705b78eb6b2d2ed06d",
+      "source_key_sha256": "c5569d9ddd03896bc46869380449ee95383092d429a75687949ff6e71dc45926"
+    },
+    {
+      "case_id": "care-dev-07",
+      "narrative_sha256": "6cf5fc2cc9ec9cff97a0f18a8c030be02160694c9a4876d28ec02053c8f1e9aa",
+      "source_key_sha256": "0185472ee7478a6efb6bdc7f2a6124b599b82a092a1f2457e8f41f1577fe7bf2"
+    },
+    {
+      "case_id": "care-dev-08",
+      "narrative_sha256": "63da43103feb866754b510bb6ae74060506a490d9b9297bf1321aadd7f259fa9",
+      "source_key_sha256": "fdf3b4b189f6672576da1bcbced42404aa7f674bbf5a348aad495bb4c5caf019"
+    }
+  ],
+  "selected_count": 8,
+  "selection_method": "salted narrative-hash ordering; source length 80..1500 chars; exact narrative dedup; source-only; no outcome-based selection",
+  "source_commit": "8b4135219d493c4aaa2474beeefed11779c66890",
+  "source_path": "first_person.json",
+  "source_repo": "zhaoyuesun/CAREBecnch",
+  "source_sha256": "93b410dab0ea3f40796f6e02bf4cb8085898670a340fe2a6f10f154593d6d05c"
+}
