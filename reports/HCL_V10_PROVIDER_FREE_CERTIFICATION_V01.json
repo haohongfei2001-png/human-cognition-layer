@@ -1,0 +1,51 @@
+{
+  "candidate_head": "24433bab13a9b268fe2c4aea7fcb1f08eb6f27ce",
+  "candidate_pr": 88,
+  "cost_authorization_variable": "unset",
+  "exact_head_runs": [
+    36267385275,
+    36267385200
+  ],
+  "exact_main_runs": [
+    36267427109,
+    36267427155
+  ],
+  "file_sha256": {
+    ".github/workflows/hcl-v10-argumentation-provider-free.yml": "a23821d637039a9339eba03af28b6a5e5f33e76dcfe871b2d67ad94a5b316226",
+    ".github/workflows/hcl-v10-pyarg-dev-v01-once.yml": "fc74bc6cb52ff28c0d1cd7681766b4ce9a86742fd2c9bd6d7d31bbd4cdb1daa3",
+    "docs/HCL_POST_V09_CAPABILITY_DIRECTION_AUDIT_V01.md": "11e7f3646edc5560cc9213b842066b8ee06bd5e6008c46a8b245aa3c68cde999",
+    "docs/HCL_V10_ARGUMENTATION_MINIMAL_RUNTIME_V01.md": "1ad2914a4e77ab2dfd9e90fd1391dfe0a11fc7d8c289cd406f76ae78f61f97c7",
+    "docs/HCL_V10_PYARG_DEVELOPMENT_UTILITY_V01.md": "1209774da07128138e8d37c6b8a1c30b2eb0a937c5379f953eaee9fe24e2ffd2",
+    "eval/v10/PYARG_LICENSE.txt": "005876ed568efdb23dd8b0c063bd27bf4e1ab59bbdbe6c99b8fb7917bdd6fb83",
+    "eval/v10/pyarg_dev_selection_v01.json": "5a2c77183f4c0ab1bda465c6738ac72586cb00879b6245b35d26d0609c3f39d5",
+    "hcl/v10/__init__.py": "9088390a1b1409db2c563ee2c6ce4fa181ddf5bf6b8605a3f6e28f1b2cb1cd0f",
+    "hcl/v10/runtime.py": "43f09c0da8ffd261f40d834fe211cae2d8dfa01f53f91360d4906532f7ffb962",
+    "scripts/prepare_v10_pyarg_dev_v01.py": "bd6d34cf58a0536bf19764c29db624ebee05d6eb3b16939ded3b5a1aa5969201",
+    "scripts/run_v10_pyarg_dev_v01.py": "9b174cad20d1aae12a9f85e0c1e0ae5da9e1003632b73fa8e499f78f393e1d9a",
+    "tests/test_v10_argumentation_runtime.py": "435e62815244638fa3821333c452c565bcb96ebc11300032532f1ad9b7538e13",
+    "tests/test_v10_pyarg_dev_v01.py": "aed74efe36da78b018c6fe5da26b611cdffbdc5a41db9fc9f0660c87f205096b"
+  },
+  "format": "hcl-v10-provider-free-certification-v01",
+  "independent_three_node_graphs": 512,
+  "input_chars": {
+    "C": 7829,
+    "P": 8417,
+    "T": 20957
+  },
+  "longmemeval": "sealed provider-unconsumed",
+  "main_logs_zip_sha256": "15017f4a8282a59fcc4f1369f745c6467a398c824aad54bb399db4cdbf9eb57a",
+  "main_sha": "fbf5342d90b885ffca32ed06017c2921072a3947",
+  "one_shot_trigger": "absent",
+  "paid_workflow_runs": 0,
+  "planning_peak_char_as_token_usd": 0.0426,
+  "proposed_separate_owner_cap_usd": 0.05,
+  "provider_calls": 0,
+  "runtime_regressions": 126,
+  "scope": "bounded conditional Dung formal labels and four public-author examples; no natural-language/moral/psychological efficacy or architecture superiority",
+  "selection_sha256": "5a2c77183f4c0ab1bda465c6738ac72586cb00879b6245b35d26d0609c3f39d5",
+  "source_cases": 4,
+  "source_native_assertions": "visible during source audit, excluded from input/scoring; no fresh/blinded benchmark claim",
+  "source_revision": "f907bac94cbdd663839300b3b7523d4d958ff36f",
+  "status": "PASS_CORRECTNESS_AND_STAGED_UTILITY_ONLY",
+  "v09_cost_variable": "0"
+}

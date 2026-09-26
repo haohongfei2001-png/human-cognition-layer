@@ -5601,3 +5601,20 @@ provider call; cost variable unset, trigger absent. v0.9 variable zero;
 LongMemEval sealed. All actual inputs/state/calculations/raw answers archived.
 
 **Current gate: V10_PROVIDER_FREE_CI_THEN_SEPARATE_DEVELOPMENT_AUTHORIZATION_USD_0_05**.
+
+
+## v0.10 exact-main provider-free certification
+
+PR #88 merged as `fbf5342d90b885ffca32ed06017c2921072a3947`. Exact-main
+v0.10 preflight 36267427109 passed all four pinned source digests, selection,
+zero-provider comparative validation, and 126 runtime/utility regressions.
+Exact-main v0.6 preflight 36267427155 also passed. Receipt:
+`reports/HCL_V10_PROVIDER_FREE_CERTIFICATION_V01.json`.
+
+This certifies bounded correctness/staging only; the public author fixtures
+have visible source assertions, tiny graphs and no structural novelty/fresh
+claim. C/P/generic-tool-T efficacy remains untested. 12-call proposal requires
+separate USD 0.05 cap; variable unset, trigger absent, paid workflow runs zero.
+Completed v0.9 authorization zero; LongMemEval sealed. No new account or plan.
+
+**Current gate: SEPARATE_OWNER_AUTHORIZATION_FOR_V10_FOUR_EXAMPLES_USD_0_05**.
