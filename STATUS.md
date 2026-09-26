@@ -5448,3 +5448,21 @@ approval was expressly for the completed v0.7 fresh pilot. No v0.8 provider
 call or external utility claim exists; LongMemEval remains sealed.
 
 **Current gate: V08_PROVIDER_FREE_CI_THEN_SEPARATE_DEVELOPMENT_AUTHORIZATION_USD_0_25**
+
+
+## v0.8 exact-main provider-free certification
+
+PR #80 merged as main `f81aa762e83fcdf1e1ae7382c4c7c596dae48bdf`.
+Exact-main v0.8 preflight `36262423871` passed the pinned CAREBench digest,
+eight-case source-only selection, zero-provider runner and 93 v0.4–v0.8
+regressions. Exact-main v0.6 comparative preflight `36262423873` also passed.
+The candidate runtime and its provider-free utility package are certified;
+external v0.8 utility remains untested.
+
+`HCL_V08_CAREBENCH_DEV_COST_AUTHORIZED_USD` remains unset and its one-shot
+trigger absent. The completed v0.7 fresh variable is zero. No new provider
+credential or plan was purchased, no v0.8 provider call occurred, and
+LongMemEval remains sealed. The next step is the concrete eight-case C/P/D
+development run with its separately scoped USD 0.25 cap.
+
+**Current gate: SEPARATE_OWNER_AUTHORIZATION_FOR_V08_CAREBENCH_DEV_USD_0_25**

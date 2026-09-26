@@ -144,7 +144,8 @@ v0.6.1 已在 main `0bf56af7baf305ca3bebb9035c4a989794a50eb8` 完成 provider-fr
 
 下一块选择 v0.8 Evidence-Constrained Affect & Appraisal：区分本人报告、
 外在表现、他人归因和可能情绪，支持混合感受、情境评价、明确修订及视角边界。
-最小 runtime 和语义适配器已实现，本地 93 项相关回归通过；这仅证明状态规则，
+最小 runtime 和语义适配器已实现；main `f81aa762e83fcdf1e1ae7382c4c7c596dae48bdf`
+上的无模型调用检查与 93 项回归通过。这仅证明状态规则，
 尚未证明当前基础模型有稳定缺口或 HCL 带来外部增量。
 见 [direction audit](docs/HCL_POST_V07_CAPABILITY_DIRECTION_AUDIT_V01.md) 与
 [runtime contract](docs/HCL_V08_AFFECT_APPRAISAL_MINIMAL_RUNTIME_V01.md)。
@@ -157,7 +158,7 @@ v0.6.1 已在 main `0bf56af7baf305ca3bebb9035c4a989794a50eb8` 完成 provider-fr
 
 当前 gate：
 
-**V08_PROVIDER_FREE_CI_THEN_SEPARATE_DEVELOPMENT_AUTHORIZATION_USD_0_25**
+**SEPARATE_OWNER_AUTHORIZATION_FOR_V08_CAREBENCH_DEV_USD_0_25**
 
 ## Intellectual-property boundary
 
