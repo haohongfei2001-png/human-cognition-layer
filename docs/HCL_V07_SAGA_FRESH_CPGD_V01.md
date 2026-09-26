@@ -1,6 +1,6 @@
 # HCL v0.7 Fresh SAGA C/P/G/D Pilot v0.1
 
-Status: **SOURCE SELECTION AND PROVIDER-FREE PACKAGE STAGED / NO FRESH PROVIDER CALL**
+Status: **FROZEN PROTOCOL / ONE FRESH RUN COMPLETE / NO FURTHER FRESH RELAUNCH**
 
 ## Question and frozen source
 
@@ -100,3 +100,13 @@ main commit; pinned source digest; immutable selection; and provider-free
 regressions before any paid request. Artifacts store IDs, hashes, arm answers
 and operational evidence. Raw SAGA stories and crowd goal text are not
 committed to the HCL repository.
+
+
+## Execution receipt (added after the frozen protocol)
+
+The authorization boundary above describes the package at protocol freeze.
+The owner separately authorized USD 0.50 on 2026-09-27. First-attempt run
+`36260603724` completed 16/16 and the authorization variable was reset to zero.
+The one-shot trigger is retained as historical consumed-run evidence. No
+selection, mechanism, prompt or frozen score was tuned after outcomes. See
+`reports/HCL_V07_INTENTION_MOTIVATION_FINAL_DEVELOPMENT_CLOSURE.md`.

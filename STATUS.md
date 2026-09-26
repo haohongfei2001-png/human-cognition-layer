@@ -6,7 +6,7 @@ Human Cognition Layer (HCL)
 
 ## Current phase
 
-**HCL v0.6 fresh comparative pilot provider-free certified; v0.7 intention runtime provider-free certified**
+**HCL v0.6 frozen RETAIN; v0.7 fresh pilot complete and frozen SIMPLIFY**
 
 ## Core doctrine
 
@@ -5378,3 +5378,36 @@ regression `36167509422` all passed. The fresh trigger and authorization
 variable are still absent; the validation slice has not been provider-consumed.
 
 **Current gate: SEPARATE_OWNER_AUTHORIZATION_FOR_V07_SAGA_FRESH_USD_0_50**
+
+
+## HCL v0.7 fresh result and final development closure
+
+The owner separately authorized the USD 0.50 fresh pilot on 2026-09-27
+(Asia/Shanghai). Trigger-only PR #78 merged as main
+`37c3939a4cd3ca177a6c20fcca01fd53fc966d4b`; first-attempt run `36260603724`
+completed SUCCESS, 16/16 stories. Artifact `10911849154`, downloaded ZIP
+SHA-256 `6113bd11212f57b91c6eab3587da0f31ea847984220c9dc0fef1f402c7f3ad76`.
+
+Predeclared source-tier agreement C/P/G/D: **14/16, 14/16, 14/16, 15/16**.
+Paired D-only/P-only: 1/0; D-only/G-only: 2/1. Method-masked diagnostic review
+before aggregate inspection found a D goal overclaim hidden by tier agreement
+and ambiguous source-tier boundaries. This was one agent's review, not
+independent human adjudication. D produced semantic evidence in 5/16 stories;
+its sole D-over-P tier win had zero such evidence, so specialized mechanism
+causality is unestablished. Three invalid semantic rows were dropped while all
+80 source events survived; no answer JSON was invalid.
+
+147 calls, 260,536 input and 14,463 output characters, 119.15549 seconds
+provider wall time, **USD 0.02074411 peak-rated ledger**, below the authorized
+cap. The fresh authorization variable is reset to zero. All 16 story families
+are consumed; LongMemEval remains sealed.
+
+Final decision: **SIMPLIFY** to the already tested common source-evidence and
+uncertainty instruction. P's extra reminder has no net observed advantage over
+C. Keep the typed runtime as auditable infrastructure, with no specialized
+utility claim, SAGA tuning, or further fresh relaunch. Full case audit and
+operational receipt:
+`reports/HCL_V07_INTENTION_MOTIVATION_FINAL_DEVELOPMENT_CLOSURE.md` and
+`reports/HCL_V07_SAGA_FRESH_V01_RECEIPT.json`.
+
+**Current gate: V07_FROZEN_SIMPLIFY_NEXT_CAPABILITY_DIRECTION_AUDIT**
