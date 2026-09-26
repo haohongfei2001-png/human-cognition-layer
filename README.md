@@ -46,7 +46,7 @@ HCL 首先要求认知表示和更新本身在事实、信息边界、时间关�
 
 当前 canonical 阶段：
 
-**HCL v0.6 frozen with RETAIN; v0.7 frozen with SIMPLIFY**
+**HCL v0.6 frozen RETAIN; v0.7 frozen SIMPLIFY; v0.8 affect candidate staged**
 
 v0.5 保持冻结，作为显式 stance / revision / provenance / persistent-state 基础。v0.6 已经真正增加了一层人物信息视角与 belief evidence runtime，而不是继续只做 memory infrastructure。
 
@@ -98,7 +98,7 @@ D **30/32**；D 相对 G 的独占修正/退化为 **8/0**，相对 P 为 **12/1
 [pilot protocol](docs/HCL_V06_FANTOM_CPGD_FRESH_V01.md) 与
 [development case audit](reports/HCL_V06_FANTOM_CPD_V01_CASE_AUDIT.md)。
 
-下一块真实 cognition capability 已开始：v0.7 Evidence-Constrained Intention
+v0.7 已完成并冻结：Evidence-Constrained Intention
 & Motivation。最小 runtime 区分明确意图、目标、行动、推测动机及他人归因，
 并支持证据约束的修订、完成、放弃和未决状态。已通过 provider-free correctness 和一次外部 fresh pilot；默认方法已简化为证据与不确定性提示。
 事件级语义提取器只接受原始事件中的精确证据片段，并在无效输出时 fail closed；
@@ -123,7 +123,7 @@ v0.7 的首个小型外部开发验证已冻结为 12 条 SAGA 公开叙事的 C
 已消费样本上扩展它。两次费用账本合计 **USD 0.01297945**，未触及授权上限；
 见 [repair closure](reports/HCL_V07_SAGA_DEV_V01_REPAIR_CLOSURE.md)。
 
-独立的 16 条 SAGA 验证叙事 C/P/G/D 方案已作为无模型调用的准备工作冻结，
+独立的 16 条 SAGA 验证叙事 C/P/G/D 方案在模型调用前冻结，
 包含完整通用叙事结构 G、与开发集全量故事 ID 不重合的来源校验、
 预先声明的配对分析和单独 USD 0.50 费用上限。
 main `42f95450061da8b1c54a7205b62fb66f55e4c3ed` 上的无模型调用检查已通过。
@@ -142,9 +142,22 @@ v0.6.1 已在 main `0bf56af7baf305ca3bebb9035c4a989794a50eb8` 完成 provider-fr
 
 本轮没有为了“修复后分数”重跑 8 个已消费 FANToM conversation；v0.6.1 的新增边界只通过独立 synthetic correctness 验证。
 
+下一块选择 v0.8 Evidence-Constrained Affect & Appraisal：区分本人报告、
+外在表现、他人归因和可能情绪，支持混合感受、情境评价、明确修订及视角边界。
+最小 runtime 和语义适配器已实现，本地 93 项相关回归通过；这仅证明状态规则，
+尚未证明当前基础模型有稳定缺口或 HCL 带来外部增量。
+见 [direction audit](docs/HCL_POST_V07_CAPABILITY_DIRECTION_AUDIT_V01.md) 与
+[runtime contract](docs/HCL_V08_AFFECT_APPRAISAL_MINIMAL_RUNTIME_V01.md)。
+
+8 条 CAREBench 公开本人叙事的开发比较 C/P/D 已冻结，模型只读取公开叙事，
+不会读取人口资料、人格、情绪标签或隐藏评价。
+这不产生官方 CAREBench 成绩或私人情绪真值分数。
+[development protocol](docs/HCL_V08_CAREBENCH_DEVELOPMENT_UTILITY_V01.md)
+设单独 USD 0.25 上限；目前无 v0.8 模型调用，授权变量和触发记录均未设置。
+
 当前 gate：
 
-**V07_FROZEN_SIMPLIFY_NEXT_CAPABILITY_DIRECTION_AUDIT**
+**V08_PROVIDER_FREE_CI_THEN_SEPARATE_DEVELOPMENT_AUTHORIZATION_USD_0_25**
 
 ## Intellectual-property boundary
 
