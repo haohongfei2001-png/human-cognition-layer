@@ -46,7 +46,7 @@ HCL 首先要求认知表示和更新本身在事实、信息边界、时间关�
 
 当前 canonical 阶段：
 
-**HCL v0.6 frozen with RETAIN; v0.7 intention runtime in provider-free development**
+**HCL v0.6 frozen with RETAIN; v0.7 frozen with SIMPLIFY**
 
 v0.5 保持冻结，作为显式 stance / revision / provenance / persistent-state 基础。v0.6 已经真正增加了一层人物信息视角与 belief evidence runtime，而不是继续只做 memory infrastructure。
 
@@ -100,7 +100,7 @@ D **30/32**；D 相对 G 的独占修正/退化为 **8/0**，相对 P 为 **12/1
 
 下一块真实 cognition capability 已开始：v0.7 Evidence-Constrained Intention
 & Motivation。最小 runtime 区分明确意图、目标、行动、推测动机及他人归因，
-并支持证据约束的修订、完成、放弃和未决状态。当前已通过 provider-free correctness，外部效用仍未验证；
+并支持证据约束的修订、完成、放弃和未决状态。已通过 provider-free correctness 和一次外部 fresh pilot；默认方法已简化为证据与不确定性提示。
 事件级语义提取器只接受原始事件中的精确证据片段，并在无效输出时 fail closed；
 见 [runtime contract](docs/HCL_V07_INTENTION_MOTIVATION_MINIMAL_RUNTIME_V01.md)
 与 [external benchmark audit](docs/HCL_V07_EXTERNAL_BENCHMARK_AUDIT_V01.md)。
@@ -127,7 +127,13 @@ v0.7 的首个小型外部开发验证已冻结为 12 条 SAGA 公开叙事的 C
 包含完整通用叙事结构 G、与开发集全量故事 ID 不重合的来源校验、
 预先声明的配对分析和单独 USD 0.50 费用上限。
 main `42f95450061da8b1c54a7205b62fb66f55e4c3ed` 上的无模型调用检查已通过。
-目前尚无 fresh 模型调用或效能结果；执行需要另行授权。
+经 2026-09-27 单独授权，运行 `36260603724` 已完成 16/16。
+预声明来源分级一致数 C/P/G/D 为 **14/16、14/16、14/16、15/16**；
+它不等于目标解释正确数，D 仍有分数未反映的过度归因。D 相对 P 的唯一
+分级优势没有结构化意图证据，不能归因于专门机制。最终 **SIMPLIFY**：
+默认采用共同的来源证据与不确定性提示，typed runtime 保留供审计。
+费用账本 USD 0.02074411，授权变量已归零，16 条故事现已消费。
+见 [v0.7 final closure](reports/HCL_V07_INTENTION_MOTIVATION_FINAL_DEVELOPMENT_CLOSURE.md)。
 见 [fresh protocol](docs/HCL_V07_SAGA_FRESH_CPGD_V01.md)。
 
 v0.6.1 已在 main `0bf56af7baf305ca3bebb9035c4a989794a50eb8` 完成 provider-free certification：
@@ -138,7 +144,7 @@ v0.6.1 已在 main `0bf56af7baf305ca3bebb9035c4a989794a50eb8` 完成 provider-fr
 
 当前 gate：
 
-**SEPARATE_OWNER_AUTHORIZATION_FOR_V07_SAGA_FRESH_USD_0_50**
+**V07_FROZEN_SIMPLIFY_NEXT_CAPABILITY_DIRECTION_AUDIT**
 
 ## Intellectual-property boundary
 

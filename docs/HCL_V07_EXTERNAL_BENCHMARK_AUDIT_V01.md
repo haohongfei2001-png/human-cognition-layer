@@ -1,6 +1,6 @@
 # HCL v0.7 External Benchmark Audit v0.1
 
-Status: **SOURCE AUDIT / DEVELOPMENT REPAIR COMPLETE / NO FRESH EFFICACY**
+Status: **SOURCE AUDIT / DEVELOPMENT AND FRESH PILOT COMPLETE / SAGA CLOSED**
 
 The source-sufficiency audit has now produced a 12-story, development-only
 C/P/D protocol in `docs/HCL_V07_SAGA_DEVELOPMENT_UTILITY_V01.md`. Its first
@@ -17,9 +17,11 @@ Repair run `36165111831` completed 12/12; see
 `reports/HCL_V07_SAGA_DEV_V01_REPAIR_CLOSURE.md`. The case review was
 arm-masked after aggregate scores were seen, so it is diagnostic rather than
 an independent blinded rating. Source-tier agreement favored the thin P
-instruction over the mostly empty D semantic state. No fresh v0.7 benchmark
-result exists, and the selected development story families are excluded from
-future fresh evidence.
+instruction over the mostly empty D semantic state. The disjoint 16-story fresh run `36260603724` is now complete. Source-tier
+agreement alone is not full goal correctness; final decision is SIMPLIFY,
+without specialized mechanism causality. All development and selected fresh
+story families are consumed. See
+`reports/HCL_V07_INTENTION_MOTIVATION_FINAL_DEVELOPMENT_CLOSURE.md`.
 
 The v0.7 capability is intention, goal and action reasoning under an evidence
 constraint. A label inferred from a hidden character plan is not automatically
