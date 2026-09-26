@@ -46,7 +46,7 @@ HCL 首先要求认知表示和更新本身在事实、信息边界、时间关�
 
 当前 canonical 阶段：
 
-**HCL v0.6 frozen RETAIN; v0.7 frozen SIMPLIFY; v0.8 affect candidate staged**
+**HCL v0.6 frozen RETAIN; v0.7 frozen SIMPLIFY; v0.8 frozen SIMPLIFY**
 
 v0.5 保持冻结，作为显式 stance / revision / provenance / persistent-state 基础。v0.6 已经真正增加了一层人物信息视角与 belief evidence runtime，而不是继续只做 memory infrastructure。
 
@@ -328,3 +328,14 @@ HCL v0.3 baseline (FROZEN)
 当前原则是：**先形成研究机制，再让榜单证明它；不让榜单错题反向定义认知模块。**
 
 不要从 README 推断某个实验仍在运行或已经结束；**实时执行状态始终以 [STATUS.md](STATUS.md) 为唯一事实源。**
+
+## v0.8 development closure
+
+Eight source-only CAREBench development cases completed C/P/D in run
+`36263323431`. The predeclared material-error diagnostic found no two-case D
+increment; P had one exact-quote format failure where D had zero typed claims.
+Decision **SIMPLIFY** to strong source-evidence/uncertainty prompting.
+35 calls, USD 0.02153166 peak-rated usage; authorization closed. This is no
+official benchmark or private-emotion accuracy claim. Full source audit,
+ambiguities and state-receipt limitation:
+[final closure](reports/HCL_V08_AFFECT_APPRAISAL_FINAL_DEVELOPMENT_CLOSURE.md).

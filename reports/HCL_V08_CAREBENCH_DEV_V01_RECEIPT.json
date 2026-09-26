@@ -1,0 +1,334 @@
+{
+  "artifact_id": 10913375300,
+  "artifact_zip_sha256": "3f83e2577907d1e1949353c7235283316feae2ed10a85c9dc14b1c90f95d281d",
+  "attempt": 1,
+  "audit_notes_sha256_before_unmasking": "f8f464a3b20aaabee012744a16152574830dbfa6520364fb0d5c0fb0fe740592",
+  "authorization_cap_usd": 0.25,
+  "authorization_variable_after_run": "0",
+  "cases": [
+    {
+      "ambiguity_arms": [],
+      "case_id": "care-dev-01",
+      "diagnosis": "All three preserve direct reported pride and source goal importance. Positive congruence hypotheses in 1/2 are appropriately inferred; 3 omits this optional inference.",
+      "invalid_reasons": {},
+      "masked_answer_to_arm": {
+        "1": "P",
+        "2": "C",
+        "3": "D"
+      },
+      "material_error_arms": [],
+      "narrative_sha256": "f6c9eda88decd1a419be4faa5526164b5f28f8549c39ecf1dbc442f18896a105",
+      "response_sha256": {
+        "C": "4fde27781a271fa5bcb3b0a10bf1c6c22647beaec8ab8cca1224503a96dae921",
+        "D": "ba3336e7629e57aca508eb53b0659e50958a56894507d660cb6d8242b585c7e0",
+        "P": "610af26a585fdffd6134e8923f51b96cbf6d22766d34747f23ca3de4ec6420ef"
+      },
+      "state_audit": {
+        "repair_count": 0,
+        "semantic_evidence_count": 2,
+        "semantic_failures": [],
+        "source_reports": 1
+      },
+      "state_sha256": "a04e58e6c799c7d2ebc7b19b66a67ccac05fdf1416e1d1fc3990d9192b3678bf"
+    },
+    {
+      "ambiguity_arms": [
+        "D",
+        "C",
+        "P"
+      ],
+      "case_id": "care-dev-02",
+      "diagnosis": "All preserve upset/distance and helping goal; 1 also preserves hope in appraisal/uncertainty. Hope as emotion versus epistemic attitude and direct low-certainty appraisal from ineffectual consoling words are conceptual ambiguities; the full source does express hope and limited efficacy. No unique latent feeling asserted.",
+      "invalid_reasons": {},
+      "masked_answer_to_arm": {
+        "1": "D",
+        "2": "C",
+        "3": "P"
+      },
+      "material_error_arms": [],
+      "narrative_sha256": "0d2ff5c5827c67c848893a2749e59ed9f5942dcef1fae9193880bd814c9bdb05",
+      "response_sha256": {
+        "C": "19f7c4a1915e5984aa91269cd133d729e00cda9ad90a45bc95d0c016a8a96750",
+        "D": "9b64a701960b9458375c2d95df071896fbd5570bc87f6fb6219d423ec5e037b7",
+        "P": "6096debd0e6c4df69a4f91b3ed44717c7ef455e8c118e24a5f5ddada3a9a9cbf"
+      },
+      "state_audit": {
+        "repair_count": 0,
+        "semantic_evidence_count": 6,
+        "semantic_failures": [],
+        "source_reports": 1
+      },
+      "state_sha256": "f3c6a79d50a755da3802d872825f16c3db02d2c3dedc8eb9a9f120e26c4ef175"
+    },
+    {
+      "ambiguity_arms": [],
+      "case_id": "care-dev-03",
+      "diagnosis": "All preserve anger, stress and metaphorical depleted feeling, distinguish episodes and mark goal obstruction as inferred. Limited control is a permissible hypothesis in 1/2, not a reported private feeling.",
+      "invalid_reasons": {},
+      "masked_answer_to_arm": {
+        "1": "C",
+        "2": "P",
+        "3": "D"
+      },
+      "material_error_arms": [],
+      "narrative_sha256": "4ec9788a7d1968349f0737d1ef69791736cca2c251d64e820d09a1049173c463",
+      "response_sha256": {
+        "C": "8e210457bd1405d3393eecc0af7c973e02c6366fc5792bb744b5184564a56169",
+        "D": "be38480d9ea23219f9644c373ab08b45c58076443bb6e0bb67a6dc608a5ed4ba",
+        "P": "c36d1a405c2e1bd77f1f165114d5588848cb1b3bf5c447545405679e592ae206"
+      },
+      "state_audit": {
+        "repair_count": 0,
+        "semantic_evidence_count": 4,
+        "semantic_failures": [],
+        "source_reports": 1
+      },
+      "state_sha256": "96b9466b07956e04c801a60b0d4920b4ee26ca36d49225a24fae1107045495bb"
+    },
+    {
+      "ambiguity_arms": [
+        "C",
+        "D",
+        "P"
+      ],
+      "case_id": "care-dev-04",
+      "diagnosis": "All preserve discouragement/stress; 1 adds permissible inferred worry. Direct appraisal dimensions from outcomes/doctor-helpfulness are interpretive. 3 places directly reported need for answers in emotion field: category confusion, not invented feeling, and not counted as a new post-hoc error criterion.",
+      "invalid_reasons": {},
+      "masked_answer_to_arm": {
+        "1": "C",
+        "2": "D",
+        "3": "P"
+      },
+      "material_error_arms": [],
+      "narrative_sha256": "1411a3777ee4f0a722070884d303ed087fc0e08544a8fbbf515a0bdbd7d28993",
+      "response_sha256": {
+        "C": "e53c6bd9f3e5eab8339f22016cb308a7624962607bd27d0bc9f794f32411c746",
+        "D": "35c472556e52f24bb277d6b98f57a2f6fbe9e9ef5e49d34e2bf22c69a39e241a",
+        "P": "356dd98ea8f9487901d4b26387ec967f66162d9f2359eaaa364f66d2ced54692"
+      },
+      "state_audit": {
+        "repair_count": 0,
+        "semantic_evidence_count": 5,
+        "semantic_failures": [],
+        "source_reports": 1
+      },
+      "state_sha256": "2f5931a8bd40b02bdb1a4e8930af61d890ea7c75c20d59c1e6ab773e775d11dc"
+    },
+    {
+      "ambiguity_arms": [
+        "D",
+        "C",
+        "P"
+      ],
+      "case_id": "care-dev-05",
+      "diagnosis": "All keep awkwardness/caught-in-middle in conflict and qualify later relief as inferred, rather than outcome proving private feeling. All classify peacemaking desire as emotion and direct goal incongruence from mediator position; category/dimension ambiguities retained without relabeling as latent-feeling errors.",
+      "invalid_reasons": {},
+      "masked_answer_to_arm": {
+        "1": "D",
+        "2": "C",
+        "3": "P"
+      },
+      "material_error_arms": [],
+      "narrative_sha256": "17cdc819e40eb50df659264c2c41dbc88c0323ff04a2c7ed59d55f9a37a23f93",
+      "response_sha256": {
+        "C": "6d9dc430d3fe48179433cccfbe099b5ced0cee6eb486ad76a955f4a6b111e508",
+        "D": "9f49af17becef9d38c5b0cdc6566ebc4ee1f09f55016494f507e3d604e1657ff",
+        "P": "c94b3d077d86c793f895d4e9727ada72a8b206b8d3fcc61cf7c8a5bbde726611"
+      },
+      "state_audit": {
+        "repair_count": 1,
+        "semantic_evidence_count": 0,
+        "semantic_failures": [
+          {
+            "error": "appraisal requires a bounded dimension",
+            "error_type": "V08ExtractionError"
+          }
+        ],
+        "source_reports": 1
+      },
+      "state_sha256": "d648656c23a8dd687583d74126e33020bcb14efe391e03d2f6958ac88f001e94"
+    },
+    {
+      "ambiguity_arms": [
+        "D"
+      ],
+      "case_id": "care-dev-06",
+      "diagnosis": "All correctly preserve self-reported sadness and do not assign other person's emotionality to author. 1/2 use inferred obstruction/control. 3 uses stated desire for understanding as GOAL_CONGRUENCE rather than relevance and mediator position as relevance: dimension mismatch without a false unique emotion.",
+      "invalid_reasons": {},
+      "masked_answer_to_arm": {
+        "1": "P",
+        "2": "C",
+        "3": "D"
+      },
+      "material_error_arms": [],
+      "narrative_sha256": "cba21cddcd8f743f207df32d0c24446d6a6c4473eace8b705b78eb6b2d2ed06d",
+      "response_sha256": {
+        "C": "f3a7fa1018cfb3835c797aaf3583d541ad0d9921c8b5f4fdb8880a88d8e4210f",
+        "D": "02ce8e5d6b447b7a1ec1e49e86905b55b31ecb6b43fc80e97c52ca08dc9ebfa9",
+        "P": "34d4f12d4dbbf727412aaf772266f9b8c377ed5ed5e5bdf557d4a332ba4b8114"
+      },
+      "state_audit": {
+        "repair_count": 1,
+        "semantic_evidence_count": 3,
+        "semantic_failures": [],
+        "source_reports": 1
+      },
+      "state_sha256": "69b0ae463bd38e2c22bd4b935f30776541551f7c85d5a85a51965ce4e65ee497"
+    },
+    {
+      "ambiguity_arms": [
+        "C",
+        "P",
+        "D"
+      ],
+      "case_id": "care-dev-07",
+      "diagnosis": "All raw outputs preserve doubt/unsettled feelings despite positive outcome; no direct joy/relief invented. Acceptance-as-emotion and direct mixed goal congruence are conceptual boundaries. 2 fails exact quote validation because its appraisal quote lowercases source sentence initial It; retain invalid output, no repair or rescoring.",
+      "invalid_reasons": {
+        "P": "claim lacks exact source quote"
+      },
+      "masked_answer_to_arm": {
+        "1": "C",
+        "2": "P",
+        "3": "D"
+      },
+      "material_error_arms": [],
+      "narrative_sha256": "6cf5fc2cc9ec9cff97a0f18a8c030be02160694c9a4876d28ec02053c8f1e9aa",
+      "response_sha256": {
+        "C": "5d985441896f9bc17ed400f1f6cfc61d372b87b6cb0af4469343a72e55b1163f",
+        "D": "85a350b04c51d93370844777ad1dfe01de9463cd1ec8daf06bf796e641e74717",
+        "P": "c6d649a871fcf2184fb5a49bdafd56cb34872bad1445ce4e4eac8070782718cf"
+      },
+      "state_audit": {
+        "repair_count": 1,
+        "semantic_evidence_count": 0,
+        "semantic_failures": [
+          {
+            "error": "expression is observed behavior, not a direct mental report",
+            "error_type": "V08ExtractionError"
+          }
+        ],
+        "source_reports": 1
+      },
+      "state_sha256": "d648656c23a8dd687583d74126e33020bcb14efe391e03d2f6958ac88f001e94"
+    },
+    {
+      "ambiguity_arms": [
+        "D"
+      ],
+      "case_id": "care-dev-08",
+      "diagnosis": "All preserve direct mad/sad and keep partner sadness off author's emotion list. 3 says no evidence for goal relevance despite narrator's stated counting aim: an overbroad negative appraisal statement, recorded separately; not retrofitted into the frozen material-error definition. Other subject/control dimension choices remain qualified diagnostic issues.",
+      "invalid_reasons": {},
+      "masked_answer_to_arm": {
+        "1": "C",
+        "2": "P",
+        "3": "D"
+      },
+      "material_error_arms": [],
+      "narrative_sha256": "63da43103feb866754b510bb6ae74060506a490d9b9297bf1321aadd7f259fa9",
+      "response_sha256": {
+        "C": "219480cf33c74ac0189a4291de9c735ab20869aa8c66acb6b4c9677b458862ac",
+        "D": "cdeeb50a7402a6639180fc085faee7deb66a3dde90cabe859609610111b324fb",
+        "P": "71a12c04728d56f86970233abf72383e03ca1eeef334e75581936186c4d2571e"
+      },
+      "state_audit": {
+        "repair_count": 0,
+        "semantic_evidence_count": 4,
+        "semantic_failures": [],
+        "source_reports": 1
+      },
+      "state_sha256": "55848201b11b111f63f8beb1143baf2801697be6bc452b11c7fda9a81967b0ed"
+    }
+  ],
+  "completed_count": 8,
+  "decision": "SIMPLIFY",
+  "execution_sha": "6a1a807d009d052d5afc6a80511c82167744a2a4",
+  "failures": [],
+  "format": "hcl-v08-carebench-dev-receipt-v01",
+  "format_invalid_counts": {
+    "C": 0,
+    "D": 0,
+    "P": 1
+  },
+  "limitations": [
+    "single-agent diagnostic, no independent human adjudication",
+    "source-inspected development cases, no official benchmark or private-emotion score",
+    "actual typed state rows not archived; count/hash cannot establish semantic entailment or causality",
+    "alias is not immutable checkpoint",
+    "small narrative-length-filtered selection does not establish stable base-model gap"
+  ],
+  "longmemeval": "sealed provider-unconsumed",
+  "material_error_discordances": {
+    "D_vs_C": [
+      0,
+      0
+    ],
+    "D_vs_P": [
+      0,
+      0
+    ],
+    "P_vs_C": [
+      0,
+      0
+    ]
+  },
+  "metrics": {
+    "C": {
+      "calls": 8,
+      "input_chars": 12142,
+      "output_chars": 10744,
+      "provider_wall_seconds": 13.705237,
+      "rated_cost_usd": 0.0043293,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "D": {
+      "calls": 8,
+      "input_chars": 31204,
+      "output_chars": 9883,
+      "provider_wall_seconds": 14.31162,
+      "rated_cost_usd": 0.00566471,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "P": {
+      "calls": 8,
+      "input_chars": 13318,
+      "output_chars": 10130,
+      "provider_wall_seconds": 14.759096,
+      "rated_cost_usd": 0.0042201,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "SEMANTIC": {
+      "calls": 11,
+      "input_chars": 34704,
+      "output_chars": 18410,
+      "provider_wall_seconds": 21.649686,
+      "rated_cost_usd": 0.00731755,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "TOTAL": {
+      "calls": 35,
+      "char_as_token_peak_usd_upper_bound": 0.086411,
+      "input_chars": 91368,
+      "output_chars": 49167,
+      "provider_response_models": [
+        "deepseek-flash"
+      ],
+      "provider_wall_seconds": 64.425639,
+      "rated_cost_usd": 0.02153166
+    }
+  },
+  "parent_sha": "0b77dd6180938567a70270d1a0cdfdec5fdb7a08",
+  "review": "single-agent arm-masked source-grounding diagnostic before aggregate comparison; no human annotations visible; answer styles may reveal methods",
+  "run_id": 36263323431,
+  "scope": "development source-grounding evidence, not official CAREBench or private-emotion accuracy",
+  "selection_sha256": "65060aa1656dfd9fbc0a8a43fef7dfe406c0975aca4fda8f56ad531604314bbf",
+  "status": "SUCCESS",
+  "trigger_pr": 82
+}
