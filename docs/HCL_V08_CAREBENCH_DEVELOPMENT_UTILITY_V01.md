@@ -1,6 +1,10 @@
 # HCL v0.8 CAREBench Source-Grounded Development Utility v0.1
 
-Status: **FROZEN PROVIDER-FREE PACKAGE / NO v0.8 PROVIDER CALL**
+Status: **HISTORICAL FROZEN PROTOCOL / EXECUTED / SIMPLIFY**
+
+Run `36263323431` consumed all eight development narratives. Current result and
+closure: `reports/HCL_V08_AFFECT_APPRAISAL_FINAL_DEVELOPMENT_CLOSURE.md`.
+The original selection, caps and rubric below are preserved as pre-run history.
 
 ## Source and task
 

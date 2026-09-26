@@ -5466,3 +5466,28 @@ LongMemEval remains sealed. The next step is the concrete eight-case C/P/D
 development run with its separately scoped USD 0.25 cap.
 
 **Current gate: SEPARATE_OWNER_AUTHORIZATION_FOR_V08_CAREBENCH_DEV_USD_0_25**
+
+
+## v0.8 authorized development run and final freeze
+
+PR #82 merged the exact-parent one-shot trigger as
+`6a1a807d009d052d5afc6a80511c82167744a2a4`. Run `36263323431` succeeded,
+attempt 1, 8/8 C/P/D development cases. Artifact `10913375300` digest verified.
+35 calls / 91,368 input / 49,167 output chars / 64.425639 provider seconds /
+USD 0.02153166 peak-rated ledger, within USD 0.25. Authorization variable zero.
+All eight narrative and source-key families are development-consumed.
+
+Single-agent arm-masked source review before aggregate comparison detected no
+predeclared material errors in C/P/D; discordances 0/0. This is a narrow
+diagnostic, not perfect accuracy: appraisal/affect category ambiguities and
+D's overbroad negative statement in 08 are preserved. P had one exact-quote
+format failure in 07, where D had zero semantic evidence. D constructed 24 rows
+in six sources; two persistent semantic failures retained their full reports.
+The artifact has hashes/counts, not typed rows, limiting causal diagnosis.
+
+Final **SIMPLIFY** to the existing strong C evidence/uncertainty instruction;
+no specialized affect utility claim, tuning or fresh CAREBench expansion.
+See `reports/HCL_V08_AFFECT_APPRAISAL_FINAL_DEVELOPMENT_CLOSURE.md` and
+`reports/HCL_V08_CAREBENCH_DEV_V01_RECEIPT.json`. LongMemEval remains sealed.
+
+**Current gate: V08_FROZEN_SIMPLIFY_NEXT_CAPABILITY_DIRECTION_AUDIT**
