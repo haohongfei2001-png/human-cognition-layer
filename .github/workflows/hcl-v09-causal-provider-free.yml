@@ -1,0 +1,39 @@
+name: HCL v0.9 Causal Provider-Free Preflight
+on:
+  pull_request:
+    paths:
+      - "hcl/v09/**"
+      - "scripts/*v09*"
+      - "tests/test_v09*"
+      - "eval/v09/**"
+      - ".github/workflows/hcl-v09*.yml"
+  push:
+    branches: [main]
+    paths:
+      - "hcl/v09/**"
+      - "scripts/*v09*"
+      - "tests/test_v09*"
+      - "eval/v09/**"
+      - ".github/workflows/hcl-v09*.yml"
+permissions:
+  contents: read
+jobs:
+  provider-free:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install "pandas>=2.2,<3" "openai==2.14.0"
+      - name: Verify pinned public development source
+        run: |
+          mkdir -p .cache
+          curl --fail --location --retry 0 'https://huggingface.co/datasets/CounterBench/CounterBench/resolve/c6225dfa00b7a89ccfeae67797b9a6d80e48e44c/data_balanced_alpha_V1.json' -o .cache/counterbench-alpha.json
+          echo '39f935a48fb997869c1e4488c9a2b902dc08acd876da557c675722c269391a76  .cache/counterbench-alpha.json' | sha256sum -c -
+          python scripts/prepare_v09_counterbench_dev_v01.py --source .cache/counterbench-alpha.json
+          python scripts/run_v09_counterbench_dev_v01.py --source .cache/counterbench-alpha.json --validate-only
+      - name: Causal capability and previous runtime regressions
+        run: |
+          python -m unittest -v tests.test_v09_causal_runtime tests.test_v09_counterbench_dev_v01 tests.test_v08_affect_runtime tests.test_v08_carebench_dev_v01 tests.test_v07_semantic tests.test_v07_intention_runtime tests.test_v06_perspective_belief_runtime tests.test_v05_current_stance tests.test_v05_routed_semantic tests.test_v05_semantic_runtime tests.test_v04_runtime tests.test_v04_perspective tests.test_v04_recovery

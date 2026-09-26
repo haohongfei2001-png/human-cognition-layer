@@ -5491,3 +5491,38 @@ See `reports/HCL_V08_AFFECT_APPRAISAL_FINAL_DEVELOPMENT_CLOSURE.md` and
 `reports/HCL_V08_CAREBENCH_DEV_V01_RECEIPT.json`. LongMemEval remains sealed.
 
 **Current gate: V08_FROZEN_SIMPLIFY_NEXT_CAPABILITY_DIRECTION_AUDIT**
+
+
+## Post-v0.8 audit and v0.9 minimal causal candidate
+
+PR #83 v0.8 SIMPLIFY closure merged as `98115af8511df8252064da4eb207c9a443d19f19`;
+exact-main regression `36263721472` passed. No CAREBench tuning continues.
+
+Selected bounded evidence-constrained causal/counterfactual reasoning as a
+conceptual reasoning candidate. This is a generic exact-model tool, not a new
+psychological ontology or a verified stable current-provider gap.
+`hcl/v09` reuses EventRecord/v0.6 access and bitemporal source views, validates
+acyclic Boolean models and source quotes, preserves compatible factual contexts,
+replaces intervened equations and returns all possible alternative outcomes.
+It separates determinate, underdetermined and inconsistent evidence without
+asserting hypothetical consequences as observed/private truth.
+
+Twelve independent runtime and four utility tests join existing regressions: 109
+passed locally. After minimal correctness, CounterBench source audit found
+ordinary-wording equation ambiguity, source contradictions and insufficient
+latent-abduction coverage. Stage only a transparently supplemented eight-source
+C/P/tool-D development comparison, not original benchmark/full causal efficacy.
+Native selected labels remain withheld; graph5 viewer exposures excluded.
+Actual source-scoped state and computation traces are archived by the runner.
+The public source reference oracle independently checks complete assignments.
+
+Documents: `docs/HCL_POST_V08_CAPABILITY_DIRECTION_AUDIT_V01.md`,
+`docs/HCL_V09_CAUSAL_COUNTERFACTUAL_MINIMAL_RUNTIME_V01.md`,
+`docs/HCL_V09_COUNTERBENCH_DEVELOPMENT_UTILITY_V01.md`.
+
+24-call package has USD 0.10 shared ledger cap and USD 0.0696 peak planning
+bound. No v0.9 provider call; authorization unset, trigger absent. Completed
+v0.8 authorization remains zero, LongMemEval sealed. The prior approval covered
+v0.8 only; this provider-backed comparison needs separately scoped approval.
+
+**Current gate: V09_PROVIDER_FREE_CI_THEN_SEPARATE_DEVELOPMENT_AUTHORIZATION_USD_0_10**
