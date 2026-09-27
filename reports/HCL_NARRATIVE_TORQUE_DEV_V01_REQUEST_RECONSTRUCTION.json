@@ -1,0 +1,30 @@
+{
+  "scope": "Reconstructed from frozen v01 function and immutable artifact source; not provider-captured request or rejection body",
+  "case_id": "docid_XIN_ENG_20051115.0405_sentid_9",
+  "actual_request_shape_from_frozen_code": {
+    "messages": [
+      {
+        "role": "system",
+        "content": "From only the full public passage, construct a PARTIAL generic strict-before graph independent of any question. Return exactly events and before TOP-LEVEL keys. events is a list of at most 8 distinct objects with exactly id, quote, occurrence; quote is the minimal exact event mention, occurrence its zero-based exact-occurrence index. before is a list of at most 16 objects with exactly earlier, later, quote, occurrence. earlier/later are event ids; quote is an exact source phrase supporting STRICT order. Omit uncertain orders and overlaps; do not infer order from sentence order. Quotations do not themselves prove correct semantic interpretation. No gold, candidate events, questions or native labels are supplied. Do not assume omitted events/edges are absent or simultaneous. No markdown or extra keys."
+      },
+      {
+        "role": "user",
+        "content": "{\"source\": {\"passage\": \"\\\"This represents a serious situation: poverty, exclusion and inequality, far from improving, have worsened,\\\" the secretary general added. Wagner said he is in favor of a new kind of international relations that will respond to development targets with \\\"social equality.\\\"\", \"scope\": \"PUBLIC_TEXT_READING_NOT_CURRENT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}}"
+      }
+    ],
+    "model": "deepseek-flash",
+    "max_tokens": 1536,
+    "temperature": 0,
+    "seed": 42,
+    "extra_body": {
+      "thinking": {
+        "type": "disabled"
+      }
+    },
+    "response_format": {
+      "type": "json_object"
+    }
+  },
+  "input_chars": 1185,
+  "json_word_present": false
+}

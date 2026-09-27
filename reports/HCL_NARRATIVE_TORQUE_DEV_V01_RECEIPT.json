@@ -1,0 +1,74 @@
+{
+  "run_id": 36313558843,
+  "trigger_pr": 99,
+  "execution_sha": "4d4a1d8f0c1d6b3004a00f57673086a19a360f4a",
+  "conclusion": "failure",
+  "decision": "INVALID_TRANSPORT_UTILITY_INCONCLUSIVE",
+  "scores": null,
+  "attempted_requests": 1,
+  "successful_responses": 0,
+  "answer_calls": 0,
+  "source_graph_calls": 1,
+  "paid_source_submission_ids": [
+    "docid_XIN_ENG_20051115.0405_sentid_9"
+  ],
+  "development_families_frozen": [
+    "docid_XIN_ENG_20051115.0405_sentid_9",
+    "docid_AFP_ENG_20061216.0046_sentid_5",
+    "docid_AFP_ENG_19970413.0281_sentid_0",
+    "docid_AFP_ENG_19970418.0168_sentid_5"
+  ],
+  "exposure_caveat": "Only first passage submitted to provider. All four sources/questions/native references saved in original artifact; conservatively all four fixed families remain development/non-fresh for repair. No replacement family.",
+  "cloud_preflight_tests": 30,
+  "cost_reserved_upper_usd": 0.0025059,
+  "invoice_cost_usd": null,
+  "legacy_char_peak_diagnostic_usd": 0.000356,
+  "legacy_char_peak_diagnostic_limitation": "Known chars only; zero returned output does not certify billing cost and this is smaller than charged full request reservation.",
+  "metrics": {
+    "C": {
+      "calls": 0,
+      "input_chars": 0,
+      "output_chars": 0,
+      "provider_wall_seconds": 0.0,
+      "rated_cost_usd": 0.0,
+      "response_models": []
+    },
+    "P": {
+      "calls": 0,
+      "input_chars": 0,
+      "output_chars": 0,
+      "provider_wall_seconds": 0.0,
+      "rated_cost_usd": 0.0,
+      "response_models": []
+    },
+    "T": {
+      "calls": 1,
+      "input_chars": 1185,
+      "output_chars": 0,
+      "provider_wall_seconds": 0.709721,
+      "rated_cost_usd": 0.0025059,
+      "response_models": []
+    },
+    "TOTAL": {
+      "calls": 1,
+      "input_chars": 1185,
+      "output_chars": 0,
+      "provider_wall_seconds": 0.709721,
+      "provider_response_models": [],
+      "rated_cost_usd": 0.0025059,
+      "char_as_token_peak_usd_upper_bound": 0.000356
+    }
+  },
+  "authorization_reset_verified": "0",
+  "artifact_id": 10929692753,
+  "artifact_digest": "sha256:a9f35b5784108aac6813d0ec20cbb292d3addd9bbf764e4fe0af0fc30e1daa0e",
+  "zip_sha256": "a9f35b5784108aac6813d0ec20cbb292d3addd9bbf764e4fe0af0fc30e1daa0e",
+  "logs_zip_sha256": "df611f46ae516591932c58e2b9306f051f254f6cbbd90561c6276424d8172342",
+  "files_sha256": {
+    "RESULTS": "3d6ed601d57cbbc386c370daf93084362eeaa7d7ffb7210d31277442cc90bb7a"
+  },
+  "root_cause_observation": "BadRequestError only; original exception body/status/code not retained. Frozen first JSON-mode request lacks json in either actual message; violates official prompt requirement. This is a supported transport defect, not an exclusive proven provider rejection cause.",
+  "source_url": "https://api-docs.deepseek.com/guides/json_mode/",
+  "source_review_date": "2026-09-27",
+  "LongMemEval_consumed": false
+}

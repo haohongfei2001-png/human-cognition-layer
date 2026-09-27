@@ -1,3 +1,5 @@
+> COMPLETED INVALID: one rejected graph request, no successful response/answer calls; utility INCONCLUSIVE, authorization zero. See `reports/HCL_NARRATIVE_TORQUE_DEV_V01_INVALID_TRANSPORT_CLOSURE.md`. Historical frozen protocol below unchanged.
+
 # Generic narrative event-order development v01
 
 Status: source, generic tool and four-case C/P/T development package frozen; **zero paid authorization**. No source/question/gold text displayed and no model calls. This adds a conditional exact ordering capability, not demonstrated external utility or a new specialized cognition ontology.
