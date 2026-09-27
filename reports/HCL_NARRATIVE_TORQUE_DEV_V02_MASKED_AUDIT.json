@@ -1,0 +1,75 @@
+{
+  "audit_order": "Read shuffled full public sources/questions, raw answers and graphs before references/aggregates/arm mapping. Save notes/hash before unmask.",
+  "limitation": "Single-agent, not independent human blind. Graph reveals generic-tool identity; readout prose can reveal methods. V01 reconstruction inspected first source request but no gold/outcomes used for repairs.",
+  "cases": {
+    "A": {
+      "source_reading": "Dismissal presupposes reports already existed. Reports concern an increase/firing; turbulence is ongoing context which motivated alleged diversion, but source does not formally date all onsets. Candidate prior occurrences include firing/increase and turbulence; reference not inspected.",
+      "answers": "Answer1 turbulence is context-supported but omits possible report-mentioned events. Answer2 returns dismissed while reason explicitly denies it preceded reports, internally inconsistent. Answer3 absent due invalid graph.",
+      "graph_edge_audit": [
+        {
+          "edge": "e2<e1",
+          "assessment": "Supported: existing reports are the object of later dismissal."
+        },
+        {
+          "edge": "e4<e3",
+          "assessment": "Ongoing turbulence plausibly motivates diversion, not explicit separate temporal onsets. Evidence quote is not an exact source substring: intervening closing quotation prevents copied phrase. Ordinary extraction fidelity failure; no parser rescue."
+        }
+      ],
+      "semantic_gain_credit": "None: missing tool readout."
+    },
+    "B": {
+      "source_reading": "Villager killings caused retaliatory truck looting. Retaliation describes that looting, not an earlier separate event. Planned investigation is prospective, and an added statement is current; strict completed-event ordering depends on reporting time, not displayed sequence.",
+      "answers": "Answers1 and3 correctly state looting is retaliation yet still return looting itself; answer3 also returns an overlong compound mention. Answer2 incorrectly describes looting as following retaliation. All fail strict after versus same-event distinction in ordinary reading; no repaired score assigned.",
+      "graph_edge_audit": [
+        {
+          "edge": "e3<e4",
+          "assessment": "Killings before resulting looting is supported by sparking."
+        },
+        {
+          "edge": "e3<e5",
+          "assessment": "Same supported killing-to-looting relation. e4/e5 are overlapping references to one looting event, not independent event identities; exact source offsets alone do not validate unique semantic identity."
+        }
+      ],
+      "semantic_gain_credit": "None apparent: tool graph repeats a source relation without correcting answer distinction."
+    },
+    "C": {
+      "source_reading": "Reported opposition and hostile policy are states, potentially already ongoing when Hill responded. Present perfect made clear can refer to prior communication. Reporting a state does not cause that state to begin. Exact onset may remain uncertain.",
+      "answers": "Answers1 and3 return responded while reasons say no anchor qualifies; self-contradictory to before Hill responded. Answer2 no readout because invalid graph.",
+      "graph_edge_audit": [
+        {
+          "edge": "e1<e2",
+          "assessment": "Unsupported: responding that US was opposed does not establish response before opposition."
+        },
+        {
+          "edge": "e3<e4",
+          "assessment": "Unsupported: making a policy clear does not establish communication before the policy."
+        },
+        {
+          "edge": "e3<e5",
+          "assessment": "Present perfect could support earlier making-clear before current speech, but evidence is invented ellipsis, not exact source quote."
+        },
+        {
+          "edge": "e4<e5",
+          "assessment": "Policy may already be ongoing, but onset not explicit; evidence is invented ellipsis, fails fidelity."
+        }
+      ],
+      "semantic_gain_credit": "None: invalid graph, no correction of source reading."
+    },
+    "D": {
+      "source_reading": "Have worsened reports completed/ongoing worsening before the secretary general statement. Passage does not independently date secretary-general added relative to Wagner said or establish their identity; ordering must not simply follow sentence presentation. Future response is a proposed relation, not completed actual event.",
+      "answers": "All select worsened, a plausible prior development. Some reasons explicitly appeal to presentation order; that is insufficient evidence for two speakers chronology. No different source-semantic ability apparent.",
+      "graph_edge_audit": [
+        {
+          "edge": "e1<e2",
+          "assessment": "Supported: have worsened reports prior worsening at utterance time."
+        },
+        {
+          "edge": "e4<e5",
+          "assessment": "Only conditional/proposed future response relative to current favor; no evidence it occurs. Must not turn hypothetical future into actual completed strict order."
+        }
+      ],
+      "semantic_gain_credit": "None apparent: all readouts choose same source word."
+    }
+  },
+  "decision_before_unmask": "No clear tool correction visible; two extraction fidelity failures and source/event identity/semantic limitations need separate accounting. No shared output ambiguity found, no runtime alteration warranted. Native annotation retained even if post-unmask disagreement."
+}

@@ -1,0 +1,99 @@
+{
+  "decision": "SIMPLIFY_TO_THIN_PROCEDURE_NO_GENERIC_TOOL_INCREMENT",
+  "scope": "same-four-family non-fresh transport repair, not native/full/fresh efficacy or broad cognition",
+  "run_id": 36320236243,
+  "execution_sha": "791006b374b170f201f4df774e431b957caefe96",
+  "trigger_pr": 101,
+  "status": "SUCCESS",
+  "strict_correct": {
+    "C": 0,
+    "P": 1,
+    "T": 0
+  },
+  "denominator": 4,
+  "invalid": {
+    "C": 0,
+    "P": 0,
+    "T": 2
+  },
+  "paired": {
+    "C": {
+      "T_only": 0,
+      "baseline_only": 0,
+      "both_correct": 0,
+      "both_wrong": 4
+    },
+    "P": {
+      "T_only": 0,
+      "baseline_only": 1,
+      "both_correct": 0,
+      "both_wrong": 3
+    }
+  },
+  "source_semantic_tool_gains": 0,
+  "metrics": {
+    "C": {
+      "calls": 4,
+      "input_chars": 4826,
+      "output_chars": 1225,
+      "provider_wall_seconds": 4.767113,
+      "rated_cost_usd": 0.0006612,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "P": {
+      "calls": 4,
+      "input_chars": 5682,
+      "output_chars": 1227,
+      "provider_wall_seconds": 5.054471,
+      "rated_cost_usd": 0.0007068,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "T": {
+      "calls": 6,
+      "input_chars": 12386,
+      "output_chars": 3057,
+      "provider_wall_seconds": 8.185786,
+      "rated_cost_usd": 0.0020166,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "TOTAL": {
+      "calls": 14,
+      "input_chars": 22894,
+      "output_chars": 5509,
+      "provider_wall_seconds": 18.00737,
+      "provider_response_models": [
+        "deepseek-flash"
+      ],
+      "rated_cost_usd": 0.0033846,
+      "char_as_token_peak_usd_upper_bound": 0.013479
+    }
+  },
+  "cloud_preflight_tests": 39,
+  "artifact_id": 10932720141,
+  "artifact_digest": "sha256:cbab17ca912a3bdfb0ee4bec95196d96c0b233e7d45095d2bd0a3cf3c45115da",
+  "zip_sha256": "cbab17ca912a3bdfb0ee4bec95196d96c0b233e7d45095d2bd0a3cf3c45115da",
+  "logs_zip_sha256": "e35ab7da3fc9066d15dc0ab5a724797f9a33d5d4997f2853b510322d5c0881fa",
+  "file_sha256": {
+    "RESULTS": "9420c951eae6c60456412caded1e3c42918ddcb58f0420adfc1287c4163cac01",
+    "MASKED_AUDIT": "655581009889bfd818eaca8b6e69ebc7438ece98f6f17bc0921d1c43024ab810",
+    "ARM_MAP": "194996be302a327ecb86793d3ba0197b527092280ecc736d8e474c6538ef663a",
+    "VERIFICATION": "df803247ca572c85385671c60b189e96a68da73336b458e9d4a2b8adb22ff9d1"
+  },
+  "authorization_reset_verified": "0",
+  "masking_limit": "Single-agent answer/case masking; graph reveals tool identity, styles may reveal answer arms. No independent human blind. Notes saved before unmask.",
+  "native_annotations_unchanged": true,
+  "v01_original_preserved": true,
+  "v01_reservation_usd": 0.0025059,
+  "v02_usage_rated_usd": 0.0033846,
+  "cumulative_ledger_usd": 0.0058905,
+  "cumulative_attempted_calls": 15,
+  "cumulative_successful_responses": 14,
+  "cumulative_invoice_usd": null,
+  "LongMemEval_consumed": false
+}

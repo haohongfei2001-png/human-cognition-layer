@@ -1,0 +1,26 @@
+name: HCL Conceptual Quantifier Provider-Free Source and Witness Preflight
+on:
+  pull_request:
+    paths: ["hcl/quantified_logic.py", "scripts/*quantifier*", "scripts/reasoning_probe_backend.py", "tests/test_quantif*", "eval/conceptual/**", "docs/HCL_CONCEPTUAL*", "reports/HCL_CONCEPTUAL*", "requirements-conceptual.txt", ".github/workflows/hcl-conceptual*.yml", ".github/workflows/hcl-quantifier*.yml"]
+  push:
+    branches: [main]
+    paths: ["hcl/quantified_logic.py", "scripts/*quantifier*", "scripts/reasoning_probe_backend.py", "tests/test_quantif*", "eval/conceptual/**", "docs/HCL_CONCEPTUAL*", "reports/HCL_CONCEPTUAL*", "requirements-conceptual.txt", ".github/workflows/hcl-conceptual*.yml", ".github/workflows/hcl-quantifier*.yml"]
+permissions:
+  contents: read
+jobs:
+  provider-free:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install "pandas>=2.2,<3" "openai==2.14.0" "z3-solver==4.15.4.0"
+      - name: Verify fixed public source and zero-call plan
+        run: |
+          mkdir -p .cache/logicskills
+          curl --fail --location --retry 0 'https://raw.githubusercontent.com/brianrabern/LogicSkills/31b175699127b766e64eb0c550893396404f665b/Assessors/symbolization/questions_symbolization_english.json' -o .cache/logicskills/english.json
+          echo '6c39b461f428536f7b0870b2179cee216d59d7bf4122b213aee85ff5b44d7fe8  .cache/logicskills/english.json' | sha256sum -c -
+          python scripts/run_quantifier_logicskills_dev_v01.py --source-file .cache/logicskills/english.json --validate-only
+          python -m unittest -v tests.test_quantified_logic tests.test_quantifier_logicskills_dev_v01

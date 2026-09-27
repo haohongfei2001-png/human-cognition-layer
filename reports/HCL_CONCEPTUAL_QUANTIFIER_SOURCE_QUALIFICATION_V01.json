@@ -1,0 +1,44 @@
+{
+  "revision": "31b175699127b766e64eb0c550893396404f665b",
+  "path": "Assessors/symbolization/questions_symbolization_english.json",
+  "bytes": 88614,
+  "sha256": "6c39b461f428536f7b0870b2179cee216d59d7bf4122b213aee85ff5b44d7fe8",
+  "items": 300,
+  "language": "english",
+  "all_reference_formula_grammar_coverage": 300,
+  "coverage_scope": "whole-file syntax only, no text/gold displayed, no selection by outcome/reference",
+  "public_example_seen_excluded_ids": [
+    11131
+  ],
+  "paper_example_seen_excluded_sentence": "A human chased a donkey that chased it",
+  "selection_hash": "b6863a5d3d4b49dde75ce20a6eb67a1567ea78d6f693467137fdec6767db1f31",
+  "source_license": "CC-BY-4.0 data; MIT code; paper CC-BY-SA4 separate",
+  "calls": 0,
+  "selected_source_text_displayed": false,
+  "selected_reference_displayed": false,
+  "current_deepseek_gap": "UNKNOWN; no same-alias strong thinking result yet",
+  "paper_summary": "Conventional instruction models lag on symbolization/countermodels, reasoning-tuned models do substantially better. Do not call this stable modern-model gap.",
+  "candidate": "generic scoped-quantifier/formal-equivalence/finite-witness verifier, conditional correctness only",
+  "protocol": "four independent generated controlled-English inputs; C/P thinking-enabled high, eight calls max, separately proposed USD0.05",
+  "rejected_alternatives": {
+    "CogNarr": "New narrative cognitive-process annotation paper appears promising; public licensed row source not located from primary material, participant imagination/perception labels require evidence audit. No rows consumed or paid source assumed.",
+    "NarrativeTrack": "Video entity-tracking changes modality/resource budget; not a cheap text probe on current backend.",
+    "OpenIKLR": "Open-world extra premise sourcing and LLM fact verification confound evidence firewall; do not import assumptions as established source facts.",
+    "full_LogicSkills": "Full3-task/native scorer uses paid answer extractor/normalizer; do not claim native score for strict JSON/no-extractor four-case symbolization screen."
+  },
+  "primary_urls": [
+    "https://arxiv.org/abs/2602.06533v3",
+    "https://github.com/brianrabern/LogicSkills",
+    "https://api-docs.deepseek.com/guides/thinking_mode/",
+    "https://api-docs.deepseek.com/api/create-chat-completion/",
+    "https://api-docs.deepseek.com/quick_start/pricing/"
+  ],
+  "provider_docs_checked_date": "2026-09-27",
+  "peak_flash_rates_per_m": {
+    "cache_hit": 0.006,
+    "cache_miss": 0.3,
+    "output": 1.2
+  },
+  "provider_scope": "requested alias deepseek-flash; official pricing labels current V4.1 but no immutable runtime-weights claim; retain actual response alias and usage",
+  "LongMemEval_consumed": false
+}
