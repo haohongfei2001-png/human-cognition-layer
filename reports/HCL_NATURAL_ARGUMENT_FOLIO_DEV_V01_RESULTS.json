@@ -1,0 +1,598 @@
+{
+  "format": "hcl-natural-argument-folio-dev-v01",
+  "scope": "Older public v0.0 provisional native human-annotation agreement; source-first audit required, not corrected/latest/full/fresh/ground-truth cognition efficacy",
+  "status": "SUCCESS",
+  "selection_sha256": "c75fee6b3ec2e3d7ba99d37ba9f1bcff5d5a1c9422a31c35840506dc8950c01b",
+  "results": [
+    {
+      "row_index": 193,
+      "story_sha256": "529461b5befebed30b9103c3a17315b7ec3868bf2f0f8b653750ff7330a0d285",
+      "source_sha256": "63ef8e7284beee5bb8a9237c4ee38e500eb3c07bf5d14b4a6771522c77f113ec",
+      "source": {
+        "premises": [
+          "Events are either happy or sad.",
+          "At least one event is happy. "
+        ],
+        "conclusion": "All events are sad.",
+        "scope": "CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH"
+      },
+      "arms": {
+        "C": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer."
+            },
+            {
+              "role": "user",
+              "content": "{\"conclusion\": \"All events are sad.\", \"premises\": [\"Events are either happy or sad.\", \"At least one event is happy. \"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"conclusion\": \"All events are sad.\", \"premises\": [\"Events are either happy or sad.\", \"At least one event is happy. \"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "{\"label\":\"False\"}",
+            "response_sha256": "89fba78fb06b05d6a38a632797c9574b66e88189f0f259ebc105df1566750d0f",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 1377,
+            "reasoning_sha256": "cc38f85319c4419bee94dab12f4563450b44f49c3bc0b2511cdf0ae6259bbe39",
+            "usage": {
+              "prompt_tokens": 236,
+              "completion_tokens": 309,
+              "reasoning_tokens": 303,
+              "cache_hit_tokens": 0,
+              "cache_miss_tokens": 236
+            },
+            "finish_reason": "stop",
+            "rated_cost_usd": 0.0004416
+          },
+          "answer": {
+            "label": "False"
+          },
+          "invalid_reason": null,
+          "native_agreement": true,
+          "reference_error": null
+        },
+        "P": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer. Track which individuals and quantifiers each premise concerns, and distinguish the stated relation from its converse. Check whether the conclusion or its negation actually follows; consider a consistent alternative interpretation before claiming entailment. Do not invent existential assumptions or equate all named individuals. This procedure supplies no reference label or formalization."
+            },
+            {
+              "role": "user",
+              "content": "{\"conclusion\": \"All events are sad.\", \"premises\": [\"Events are either happy or sad.\", \"At least one event is happy. \"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer. Track which individuals and quantifiers each premise concerns, and distinguish the stated relation from its converse. Check whether the conclusion or its negation actually follows; consider a consistent alternative interpretation before claiming entailment. Do not invent existential assumptions or equate all named individuals. This procedure supplies no reference label or formalization."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"conclusion\": \"All events are sad.\", \"premises\": [\"Events are either happy or sad.\", \"At least one event is happy. \"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "{\"label\":\"Uncertain\"}",
+            "response_sha256": "4195a9b1f4231acd5f7a05657fa40b5ff509cd528fc0bf320f9317822291c1bc",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 4522,
+            "reasoning_sha256": "0a0ca0c4ef1e06dc0e0102afa057fc9ff2aa53aaed339e1dd9778ea9f89ef1e9",
+            "usage": {
+              "prompt_tokens": 296,
+              "completion_tokens": 971,
+              "reasoning_tokens": 964,
+              "cache_hit_tokens": 128,
+              "cache_miss_tokens": 168
+            },
+            "finish_reason": "stop",
+            "rated_cost_usd": 0.001216368
+          },
+          "answer": {
+            "label": "Uncertain"
+          },
+          "invalid_reason": null,
+          "native_agreement": false,
+          "reference_error": null
+        }
+      },
+      "native_annotation": {
+        "label": "False",
+        "premises-FOL": [
+          "\u2200x (Event(x) \u2192 Happy(x) \u2295 Sad(x))",
+          "\u2203x (Event(x) \u2227 Happy(x)) "
+        ],
+        "conclusion-FOL": "\u2200x (Event(x) \u2192 Sad(x))"
+      }
+    },
+    {
+      "row_index": 73,
+      "story_sha256": "b87816f07b68d166796416d410b39275f1f81f81e2e0983f6420c0221eaa0eef",
+      "source_sha256": "610733e63cced6a8237eefbaebfaf12a66fb2bca924318d921627a22cca66250",
+      "source": {
+        "premises": [
+          "All growth companies\u2019 stocks are volatile.",
+          "If the stock price is volatile, then it is not suitable for a retirement fund.",
+          "Some companies\u2019 stocks are growth companies\u2019 stocks.",
+          "All mature companies\u2019 stocks are suitable for a retirement fund.",
+          "KO is a mature company\u2019s stock."
+        ],
+        "conclusion": "If KO is a growth company\u2019s stock or if its price is volatile, then KO is neither a company\u2019s stock nor is its price volatile.",
+        "scope": "CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH"
+      },
+      "arms": {
+        "C": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer."
+            },
+            {
+              "role": "user",
+              "content": "{\"conclusion\": \"If KO is a growth company\\u2019s stock or if its price is volatile, then KO is neither a company\\u2019s stock nor is its price volatile.\", \"premises\": [\"All growth companies\\u2019 stocks are volatile.\", \"If the stock price is volatile, then it is not suitable for a retirement fund.\", \"Some companies\\u2019 stocks are growth companies\\u2019 stocks.\", \"All mature companies\\u2019 stocks are suitable for a retirement fund.\", \"KO is a mature company\\u2019s stock.\"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"conclusion\": \"If KO is a growth company\\u2019s stock or if its price is volatile, then KO is neither a company\\u2019s stock nor is its price volatile.\", \"premises\": [\"All growth companies\\u2019 stocks are volatile.\", \"If the stock price is volatile, then it is not suitable for a retirement fund.\", \"Some companies\\u2019 stocks are growth companies\\u2019 stocks.\", \"All mature companies\\u2019 stocks are suitable for a retirement fund.\", \"KO is a mature company\\u2019s stock.\"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "{\"label\":\"True\"}",
+            "response_sha256": "f7df165ccc9131ebd36c9fe0677bc6fc5b769da08002566e750a6631863fd838",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 4496,
+            "reasoning_sha256": "b34715db19aee9298dbb99b8ea72fa5c9e942842f0aa537f5f8d42f426dee25f",
+            "usage": {
+              "prompt_tokens": 320,
+              "completion_tokens": 1073,
+              "reasoning_tokens": 1067,
+              "cache_hit_tokens": 128,
+              "cache_miss_tokens": 192
+            },
+            "finish_reason": "stop",
+            "rated_cost_usd": 0.001345968
+          },
+          "answer": {
+            "label": "True"
+          },
+          "invalid_reason": null,
+          "native_agreement": true,
+          "reference_error": null
+        },
+        "P": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer. Track which individuals and quantifiers each premise concerns, and distinguish the stated relation from its converse. Check whether the conclusion or its negation actually follows; consider a consistent alternative interpretation before claiming entailment. Do not invent existential assumptions or equate all named individuals. This procedure supplies no reference label or formalization."
+            },
+            {
+              "role": "user",
+              "content": "{\"conclusion\": \"If KO is a growth company\\u2019s stock or if its price is volatile, then KO is neither a company\\u2019s stock nor is its price volatile.\", \"premises\": [\"All growth companies\\u2019 stocks are volatile.\", \"If the stock price is volatile, then it is not suitable for a retirement fund.\", \"Some companies\\u2019 stocks are growth companies\\u2019 stocks.\", \"All mature companies\\u2019 stocks are suitable for a retirement fund.\", \"KO is a mature company\\u2019s stock.\"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer. Track which individuals and quantifiers each premise concerns, and distinguish the stated relation from its converse. Check whether the conclusion or its negation actually follows; consider a consistent alternative interpretation before claiming entailment. Do not invent existential assumptions or equate all named individuals. This procedure supplies no reference label or formalization."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"conclusion\": \"If KO is a growth company\\u2019s stock or if its price is volatile, then KO is neither a company\\u2019s stock nor is its price volatile.\", \"premises\": [\"All growth companies\\u2019 stocks are volatile.\", \"If the stock price is volatile, then it is not suitable for a retirement fund.\", \"Some companies\\u2019 stocks are growth companies\\u2019 stocks.\", \"All mature companies\\u2019 stocks are suitable for a retirement fund.\", \"KO is a mature company\\u2019s stock.\"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "{\"label\":\"True\"}",
+            "response_sha256": "f7df165ccc9131ebd36c9fe0677bc6fc5b769da08002566e750a6631863fd838",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 12018,
+            "reasoning_sha256": "2682dd389dabbae7bfde0270351403ffb4e978d00bd42de25d1c9d51676cb489",
+            "usage": {
+              "prompt_tokens": 380,
+              "completion_tokens": 2952,
+              "reasoning_tokens": 2946,
+              "cache_hit_tokens": 128,
+              "cache_miss_tokens": 252
+            },
+            "finish_reason": "stop",
+            "rated_cost_usd": 0.003618768
+          },
+          "answer": {
+            "label": "True"
+          },
+          "invalid_reason": null,
+          "native_agreement": true,
+          "reference_error": null
+        }
+      },
+      "native_annotation": {
+        "label": "True",
+        "premises-FOL": [
+          "\u2200x (GrowthCompanies\u2019Stocks(x) \u2192 PriceVolatile(x))",
+          " \u2200x (PriceVolatile(x) \u2192 \u00acSuitableForRetirementRund(x)) ",
+          " \u2203x (Companies\u2019Stocks(x) \u2227 GrowthCompanies\u2019Stocks(x))",
+          " \u2200x (MatureCompanies\u2019Stocks(x) \u2192 SuitableForRetirementRund(x))",
+          " MatureCompanies\u2019Stocks(kO)"
+        ],
+        "conclusion-FOL": "GrowthCompanies\u2019Stocks(kO) \u2228 PriceVolatile(kO) \u2192 \u00acCompanies\u2019Stocks(kO) \u2228 \u00acPriceVolatile(kO)"
+      }
+    },
+    {
+      "row_index": 128,
+      "story_sha256": "c46787b06fb2e49315bfccd97bf6ec1e50a2bf06a0bd91159e76f97018fbb02f",
+      "source_sha256": "1b4993da84ec737746447e22f918a16bf6c3139c8fc03ea07e0d32cc52f5b713",
+      "source": {
+        "premises": [
+          "All people who have a wedding are people who have at least one child.",
+          "All people who travel to Paris for their honeymoon are people who have a wedding.",
+          "All weddings that occur in July belong to people who travel to Paris for their honeymoon.",
+          "Some weddings in July are well-attended.",
+          "If John has at least one child, then John does not travel to Paris for his honeymoon and does not have a wedding.",
+          "If John has a wedding that is well-attended, then John has a wedding in July or, if not, then John travels to Paris for their honeymoon. "
+        ],
+        "conclusion": "John has a wedding that is well-attended.",
+        "scope": "CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH"
+      },
+      "arms": {
+        "C": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer."
+            },
+            {
+              "role": "user",
+              "content": "{\"conclusion\": \"John has a wedding that is well-attended.\", \"premises\": [\"All people who have a wedding are people who have at least one child.\", \"All people who travel to Paris for their honeymoon are people who have a wedding.\", \"All weddings that occur in July belong to people who travel to Paris for their honeymoon.\", \"Some weddings in July are well-attended.\", \"If John has at least one child, then John does not travel to Paris for his honeymoon and does not have a wedding.\", \"If John has a wedding that is well-attended, then John has a wedding in July or, if not, then John travels to Paris for their honeymoon. \"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"conclusion\": \"John has a wedding that is well-attended.\", \"premises\": [\"All people who have a wedding are people who have at least one child.\", \"All people who travel to Paris for their honeymoon are people who have a wedding.\", \"All weddings that occur in July belong to people who travel to Paris for their honeymoon.\", \"Some weddings in July are well-attended.\", \"If John has at least one child, then John does not travel to Paris for his honeymoon and does not have a wedding.\", \"If John has a wedding that is well-attended, then John has a wedding in July or, if not, then John travels to Paris for their honeymoon. \"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "{\"label\":\"False\"}",
+            "response_sha256": "89fba78fb06b05d6a38a632797c9574b66e88189f0f259ebc105df1566750d0f",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 4279,
+            "reasoning_sha256": "bdcd37d6443510ee6b7a43a8bd0aed0b02d8df057306f8dc6171165f822265e9",
+            "usage": {
+              "prompt_tokens": 349,
+              "completion_tokens": 1122,
+              "reasoning_tokens": 1116,
+              "cache_hit_tokens": 128,
+              "cache_miss_tokens": 221
+            },
+            "finish_reason": "stop",
+            "rated_cost_usd": 0.0014134679999999998
+          },
+          "answer": {
+            "label": "False"
+          },
+          "invalid_reason": null,
+          "native_agreement": true,
+          "reference_error": null
+        },
+        "P": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer. Track which individuals and quantifiers each premise concerns, and distinguish the stated relation from its converse. Check whether the conclusion or its negation actually follows; consider a consistent alternative interpretation before claiming entailment. Do not invent existential assumptions or equate all named individuals. This procedure supplies no reference label or formalization."
+            },
+            {
+              "role": "user",
+              "content": "{\"conclusion\": \"John has a wedding that is well-attended.\", \"premises\": [\"All people who have a wedding are people who have at least one child.\", \"All people who travel to Paris for their honeymoon are people who have a wedding.\", \"All weddings that occur in July belong to people who travel to Paris for their honeymoon.\", \"Some weddings in July are well-attended.\", \"If John has at least one child, then John does not travel to Paris for his honeymoon and does not have a wedding.\", \"If John has a wedding that is well-attended, then John has a wedding in July or, if not, then John travels to Paris for their honeymoon. \"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer. Track which individuals and quantifiers each premise concerns, and distinguish the stated relation from its converse. Check whether the conclusion or its negation actually follows; consider a consistent alternative interpretation before claiming entailment. Do not invent existential assumptions or equate all named individuals. This procedure supplies no reference label or formalization."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"conclusion\": \"John has a wedding that is well-attended.\", \"premises\": [\"All people who have a wedding are people who have at least one child.\", \"All people who travel to Paris for their honeymoon are people who have a wedding.\", \"All weddings that occur in July belong to people who travel to Paris for their honeymoon.\", \"Some weddings in July are well-attended.\", \"If John has at least one child, then John does not travel to Paris for his honeymoon and does not have a wedding.\", \"If John has a wedding that is well-attended, then John has a wedding in July or, if not, then John travels to Paris for their honeymoon. \"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "{\"label\":\"False\"}",
+            "response_sha256": "89fba78fb06b05d6a38a632797c9574b66e88189f0f259ebc105df1566750d0f",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 5597,
+            "reasoning_sha256": "2af5fff8590f782b3737a4dbe978a122ceec310b2294940875869233f93caefb",
+            "usage": {
+              "prompt_tokens": 409,
+              "completion_tokens": 1457,
+              "reasoning_tokens": 1451,
+              "cache_hit_tokens": 128,
+              "cache_miss_tokens": 281
+            },
+            "finish_reason": "stop",
+            "rated_cost_usd": 0.0018334679999999998
+          },
+          "answer": {
+            "label": "False"
+          },
+          "invalid_reason": null,
+          "native_agreement": true,
+          "reference_error": null
+        }
+      },
+      "native_annotation": {
+        "label": "False",
+        "premises-FOL": [
+          "\u2200x (Wedding(x) \u2192 Child(x))",
+          "\u2200x (Paris(x) \u2192 Wedding(x))",
+          "\u2200x (July(x) \u2192 Paris(x))",
+          "\u2203x (July(x) \u2227 WellAttended(x))",
+          "Child(john) \u2192 \u00ac(Paris(john) \u2227 Wedding(john))",
+          "WellAttended(john) \u2192 July(john) \u2295 Paris(john)"
+        ],
+        "conclusion-FOL": "WellAttended(john)"
+      }
+    },
+    {
+      "row_index": 137,
+      "story_sha256": "11b2189aa9591fea7e7b5d63417e47493794e33dada1adc2d1f01ea4d3267329",
+      "source_sha256": "e4f83418b2b1d469d6928acb57522a115be88d7c6c590c450ded4adc40cb3e96",
+      "source": {
+        "premises": [
+          "Plungers suck.",
+          "Vacuums suck.",
+          "Vampires suck.",
+          "Space is a vacuum.",
+          "A duster is a household appliance that doesn't suck."
+        ],
+        "conclusion": "If something is a household appliance, it sucks.",
+        "scope": "CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH"
+      },
+      "arms": {
+        "C": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer."
+            },
+            {
+              "role": "user",
+              "content": "{\"conclusion\": \"If something is a household appliance, it sucks.\", \"premises\": [\"Plungers suck.\", \"Vacuums suck.\", \"Vampires suck.\", \"Space is a vacuum.\", \"A duster is a household appliance that doesn't suck.\"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"conclusion\": \"If something is a household appliance, it sucks.\", \"premises\": [\"Plungers suck.\", \"Vacuums suck.\", \"Vampires suck.\", \"Space is a vacuum.\", \"A duster is a household appliance that doesn't suck.\"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "{\"label\":\"False\"}",
+            "response_sha256": "89fba78fb06b05d6a38a632797c9574b66e88189f0f259ebc105df1566750d0f",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 709,
+            "reasoning_sha256": "d965dd14605c09364dbbc5542b72117b3f6f25a8a869fbcc4d0d7fdb5761c635",
+            "usage": {
+              "prompt_tokens": 261,
+              "completion_tokens": 155,
+              "reasoning_tokens": 149,
+              "cache_hit_tokens": 0,
+              "cache_miss_tokens": 261
+            },
+            "finish_reason": "stop",
+            "rated_cost_usd": 0.00026430000000000003
+          },
+          "answer": {
+            "label": "False"
+          },
+          "invalid_reason": null,
+          "native_agreement": true,
+          "reference_error": null
+        },
+        "P": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer. Track which individuals and quantifiers each premise concerns, and distinguish the stated relation from its converse. Check whether the conclusion or its negation actually follows; consider a consistent alternative interpretation before claiming entailment. Do not invent existential assumptions or equate all named individuals. This procedure supplies no reference label or formalization."
+            },
+            {
+              "role": "user",
+              "content": "{\"conclusion\": \"If something is a household appliance, it sucks.\", \"premises\": [\"Plungers suck.\", \"Vacuums suck.\", \"Vampires suck.\", \"Space is a vacuum.\", \"A duster is a household appliance that doesn't suck.\"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Read all supplied natural-language premises and the conclusion. Treat premises as stipulated in this task, not verified world facts. Classify the conclusion: True if it follows, False if its negation follows, Uncertain if neither follows. Absence of support does not establish False. Respect quantifiers, named individuals, clause scope and negation. Use only supplied premises, no external factual/moral/private-mental assumptions. Return exactly one JSON object with only label, one of True, False, Uncertain. No extra fields, prose or markdown. Output syntax example only: {\"label\":\"Uncertain\"}; this is not the answer. Track which individuals and quantifiers each premise concerns, and distinguish the stated relation from its converse. Check whether the conclusion or its negation actually follows; consider a consistent alternative interpretation before claiming entailment. Do not invent existential assumptions or equate all named individuals. This procedure supplies no reference label or formalization."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"conclusion\": \"If something is a household appliance, it sucks.\", \"premises\": [\"Plungers suck.\", \"Vacuums suck.\", \"Vampires suck.\", \"Space is a vacuum.\", \"A duster is a household appliance that doesn't suck.\"], \"scope\": \"CONDITIONAL_NL_ARGUMENT_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "{\"label\":\"False\"}",
+            "response_sha256": "89fba78fb06b05d6a38a632797c9574b66e88189f0f259ebc105df1566750d0f",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 752,
+            "reasoning_sha256": "d2cbfdeed7fb2e2b5f7d64ba702450dc9ebd3f145206d39f4bd24158638fdc22",
+            "usage": {
+              "prompt_tokens": 321,
+              "completion_tokens": 164,
+              "reasoning_tokens": 158,
+              "cache_hit_tokens": 128,
+              "cache_miss_tokens": 193
+            },
+            "finish_reason": "stop",
+            "rated_cost_usd": 0.000255468
+          },
+          "answer": {
+            "label": "False"
+          },
+          "invalid_reason": null,
+          "native_agreement": true,
+          "reference_error": null
+        }
+      },
+      "native_annotation": {
+        "label": "False",
+        "premises-FOL": [
+          "\u2200x (Plunger(x) \u2192 Suck(x))",
+          "\u2200x (Vacuum(x) \u2192 Suck(x))",
+          "\u2200x (Vampire(x) \u2192 Suck(x))",
+          "Vacuum(space)",
+          "HouseHoldApp(duster) \u2227 \u00ac Suck(duster)"
+        ],
+        "conclusion-FOL": "\u2200x (HouseHoldApp(x) \u2192 Suck(x))"
+      }
+    }
+  ],
+  "failures": [],
+  "metrics": {
+    "C": {
+      "calls": 4,
+      "rated_cost_usd": 0.0034653359999999994,
+      "wall_seconds": 15.468063635
+    },
+    "P": {
+      "calls": 4,
+      "rated_cost_usd": 0.006924072,
+      "wall_seconds": 28.54721306399999
+    }
+  },
+  "total_ledger_usd": 0.010389408
+}

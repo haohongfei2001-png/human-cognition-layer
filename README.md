@@ -18,6 +18,8 @@ v0.10 格式修复完成：四例 non-fresh development repair 的 C/P/T = 1/4�
 
 量词筛查已关闭：推理开启的直接方法和薄提示均3/4，无新增正确例；两者同一例最终输出为空，不能推断语义能力失败。采用简单直接方法，预算归零。见 [closure](reports/HCL_CONCEPTUAL_QUANTIFIER_FINAL_DEVELOPMENT_CLOSURE.md)。显式论证反例构造比较也已关闭：直接模型/薄提示/通用工具4/4、3/4、4/4，唯一差异是薄提示多返回字段，语义新增为零；采用直接方法并离开四例。8次调用，保守计价USD0.020525304；临时授权已到期，执行配置额度关闭。见 [closure](reports/HCL_ARGUMENT_COUNTERMODEL_FINAL_DEVELOPMENT_CLOSURE.md)。
 
+自然语言论证标注审计已关闭：原始 C/P 标注一致数4/4、3/4，但唯一差异来自“either-or”的包含/排他歧义，另有形式标注与原文不一致，因此 **UTILITY_INCONCLUSIVE**，不能视为能力差异。8次调用，保守计价USD0.010389408，授权关闭；四组样本冻结并离开。见 [closure](reports/HCL_NATURAL_ARGUMENT_FOLIO_FINAL_DEVELOPMENT_CLOSURE.md)。新增 [显式多解读论证检查](docs/HCL_ARGUMENT_READING_CERTIFICATES_V01.md) 仅为无需付费的条件正确性工具，不宣称模型效用。
+
 ## Research thesis
 
 **The base model is replaceable. The cognition layer is the asset.**

@@ -1,0 +1,215 @@
+{
+  "status": "SUCCESS",
+  "calls": {
+    "C": 4,
+    "P": 4
+  },
+  "native_agreement": {
+    "C": 4,
+    "P": 3
+  },
+  "strict_invalid": {
+    "C": 0,
+    "P": 0
+  },
+  "usage_rated_usd": {
+    "C": 0.0034653359999999994,
+    "P": 0.006924072
+  },
+  "total_ledger_usd": 0.010389408,
+  "input_utf8bytes": {
+    "C": 4204,
+    "P": 5764
+  },
+  "reasoning_plus_final_chars": {
+    "C": 10928,
+    "P": 22960
+  },
+  "source_sha256": "6922c988ef10987bd6545568ee8e63e897af80994591fa20539767da58f8e3d1",
+  "manifest_sha256": "c75fee6b3ec2e3d7ba99d37ba9f1bcff5d5a1c9422a31c35840506dc8950c01b",
+  "cases": [
+    {
+      "row_index": 193,
+      "native_annotation": {
+        "label": "False",
+        "premises-FOL": [
+          "\u2200x (Event(x) \u2192 Happy(x) \u2295 Sad(x))",
+          "\u2203x (Event(x) \u2227 Happy(x)) "
+        ],
+        "conclusion-FOL": "\u2200x (Event(x) \u2192 Sad(x))"
+      },
+      "arms": {
+        "C": {
+          "answer": {
+            "label": "False"
+          },
+          "native_agreement": true,
+          "strict_invalid": null,
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 236,
+            "completion_tokens": 309,
+            "reasoning_tokens": 303,
+            "cache_hit_tokens": 0,
+            "cache_miss_tokens": 236
+          }
+        },
+        "P": {
+          "answer": {
+            "label": "Uncertain"
+          },
+          "native_agreement": false,
+          "strict_invalid": null,
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 296,
+            "completion_tokens": 971,
+            "reasoning_tokens": 964,
+            "cache_hit_tokens": 128,
+            "cache_miss_tokens": 168
+          }
+        }
+      }
+    },
+    {
+      "row_index": 73,
+      "native_annotation": {
+        "label": "True",
+        "premises-FOL": [
+          "\u2200x (GrowthCompanies\u2019Stocks(x) \u2192 PriceVolatile(x))",
+          " \u2200x (PriceVolatile(x) \u2192 \u00acSuitableForRetirementRund(x)) ",
+          " \u2203x (Companies\u2019Stocks(x) \u2227 GrowthCompanies\u2019Stocks(x))",
+          " \u2200x (MatureCompanies\u2019Stocks(x) \u2192 SuitableForRetirementRund(x))",
+          " MatureCompanies\u2019Stocks(kO)"
+        ],
+        "conclusion-FOL": "GrowthCompanies\u2019Stocks(kO) \u2228 PriceVolatile(kO) \u2192 \u00acCompanies\u2019Stocks(kO) \u2228 \u00acPriceVolatile(kO)"
+      },
+      "arms": {
+        "C": {
+          "answer": {
+            "label": "True"
+          },
+          "native_agreement": true,
+          "strict_invalid": null,
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 320,
+            "completion_tokens": 1073,
+            "reasoning_tokens": 1067,
+            "cache_hit_tokens": 128,
+            "cache_miss_tokens": 192
+          }
+        },
+        "P": {
+          "answer": {
+            "label": "True"
+          },
+          "native_agreement": true,
+          "strict_invalid": null,
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 380,
+            "completion_tokens": 2952,
+            "reasoning_tokens": 2946,
+            "cache_hit_tokens": 128,
+            "cache_miss_tokens": 252
+          }
+        }
+      }
+    },
+    {
+      "row_index": 128,
+      "native_annotation": {
+        "label": "False",
+        "premises-FOL": [
+          "\u2200x (Wedding(x) \u2192 Child(x))",
+          "\u2200x (Paris(x) \u2192 Wedding(x))",
+          "\u2200x (July(x) \u2192 Paris(x))",
+          "\u2203x (July(x) \u2227 WellAttended(x))",
+          "Child(john) \u2192 \u00ac(Paris(john) \u2227 Wedding(john))",
+          "WellAttended(john) \u2192 July(john) \u2295 Paris(john)"
+        ],
+        "conclusion-FOL": "WellAttended(john)"
+      },
+      "arms": {
+        "C": {
+          "answer": {
+            "label": "False"
+          },
+          "native_agreement": true,
+          "strict_invalid": null,
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 349,
+            "completion_tokens": 1122,
+            "reasoning_tokens": 1116,
+            "cache_hit_tokens": 128,
+            "cache_miss_tokens": 221
+          }
+        },
+        "P": {
+          "answer": {
+            "label": "False"
+          },
+          "native_agreement": true,
+          "strict_invalid": null,
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 409,
+            "completion_tokens": 1457,
+            "reasoning_tokens": 1451,
+            "cache_hit_tokens": 128,
+            "cache_miss_tokens": 281
+          }
+        }
+      }
+    },
+    {
+      "row_index": 137,
+      "native_annotation": {
+        "label": "False",
+        "premises-FOL": [
+          "\u2200x (Plunger(x) \u2192 Suck(x))",
+          "\u2200x (Vacuum(x) \u2192 Suck(x))",
+          "\u2200x (Vampire(x) \u2192 Suck(x))",
+          "Vacuum(space)",
+          "HouseHoldApp(duster) \u2227 \u00ac Suck(duster)"
+        ],
+        "conclusion-FOL": "\u2200x (HouseHoldApp(x) \u2192 Suck(x))"
+      },
+      "arms": {
+        "C": {
+          "answer": {
+            "label": "False"
+          },
+          "native_agreement": true,
+          "strict_invalid": null,
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 261,
+            "completion_tokens": 155,
+            "reasoning_tokens": 149,
+            "cache_hit_tokens": 0,
+            "cache_miss_tokens": 261
+          }
+        },
+        "P": {
+          "answer": {
+            "label": "False"
+          },
+          "native_agreement": true,
+          "strict_invalid": null,
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 321,
+            "completion_tokens": 164,
+            "reasoning_tokens": 158,
+            "cache_hit_tokens": 128,
+            "cache_miss_tokens": 193
+          }
+        }
+      }
+    }
+  ],
+  "source_scoring": "Original provisional human annotations preserved; source-first audit separately determines utility. No relabel/rescore."
+}
