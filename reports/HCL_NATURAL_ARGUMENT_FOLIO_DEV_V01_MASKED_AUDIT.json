@@ -1,0 +1,40 @@
+{
+  "stage": "SOURCE_FIRST_BEFORE_NATIVE_LABEL_FORMALIZATION_ARM_IDENTITY_OR_AGGREGATE_UNMASK",
+  "method": "Single-agent randomized case/arm masking, not independent human blind. Raw final labels only; no hidden model reasoning access or mechanism attribution.",
+  "source_license": "FOLIO source and source-derived audit adaptations CC BY-SA 4.0; Yale-LILY/FOLIO contributors; additions distinguished; no endorsement.",
+  "cases": {
+    "A": {
+      "source_reading": "Either happy or sad is ambiguous between inclusive disjunction and exclusive categories. At least one happy event alone does not refute all sad events under inclusive disjunction: one happy-and-sad event makes all events sad, whereas one happy-only event refutes it. Hence Uncertain under inclusive reading. Under exclusive disjunction, the happy witness is not sad, so False.",
+      "conditional_label": {"inclusive_either_or": "Uncertain", "exclusive_either_or": "False"},
+      "answer_1": "Source-supported under inclusive reading, not uniquely determined across ordinary readings.",
+      "answer_2": "Source-supported under exclusive reading, not uniquely determined across ordinary readings.",
+      "premise_consistency": "Both readings have consistent models; no need to invoke inconsistency/explosion.",
+      "unresolved_ambiguity": true,
+      "utility": "INCONCLUSIVE regardless of native label; preserve both interpretations and original annotation agreement, no answer correction or semantic gain credit."
+    },
+    "B": {
+      "source_reading": "The supplied duster exists as a household appliance and does not suck. It is an explicit counterexample to every household appliance sucking. Other categories and space supply no needed inference.",
+      "conditional_label": "False",
+      "answers": "Both labels supported by the explicit counterexample.",
+      "assumptions": "Ordinary existential reading of 'A duster is a household appliance that does not suck'; no outside facts about appliances or vampires.",
+      "unresolved_ambiguity": false
+    },
+    "C": {
+      "source_reading": "If John had any wedding, the first premise implies a child; the fifth premise then implies no wedding. Thus John has no wedding in any consistent classical interpretation, so he has no well-attended wedding. Some July weddings can belong to other people and do not force a John wedding. The last conditional does not assert its antecedent.",
+      "conditional_label": "False",
+      "answers": "Both labels source-supported.",
+      "assumptions": "Consistent classical inference, ordinary well-attended-wedding implies having a wedding; no invented John identity with owners of existential weddings.",
+      "premise_consistency": "Assign John no child/wedding/Paris and give some other person a well-attended July wedding, child and Paris honeymoon. All premises can hold.",
+      "unresolved_ambiguity": false
+    },
+    "D": {
+      "source_reading": "KO is mature, hence suitable. Volatility would imply not suitable, so in any consistent classical reading KO is not volatile. A growth stock would be volatile, so KO is not a growth stock. The conclusion's growth-or-volatile antecedent is false, making its material conditional True even though KO is a company stock.",
+      "conditional_label": "True",
+      "answers": "Both labels source-supported for the task's classical conditional inference.",
+      "assumptions": "Material implication and classical consistency; no claim that ordinary investment or conversational advice is vacuously informative, and no actual-world statement about KO.",
+      "premise_consistency": "A separate growth stock can be volatile and unsuitable; KO mature, suitable and nonvolatile.",
+      "unresolved_ambiguity": false
+    }
+  },
+  "pre_unmask_decision": "UTILITY_INCONCLUSIVE: case A unresolved inclusive/exclusive natural-language reading. Do not relabel, rescore, exclude, retry or claim thin-procedure semantic improvement. Freeze and leave all four families."
+}

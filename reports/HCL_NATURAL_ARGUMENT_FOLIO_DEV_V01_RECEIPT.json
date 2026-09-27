@@ -1,0 +1,51 @@
+{
+  "decision": "UTILITY_INCONCLUSIVE",
+  "execution_status": "SUCCESS",
+  "run_id": 36343112969,
+  "run_attempt": 1,
+  "execution_main": "d905a82716b94412da0e06bb0ad8c82337c18952",
+  "grant_pr": 109,
+  "sole_trigger_pr": 110,
+  "provider_calls": 8,
+  "native_agreement": {
+    "C": 4,
+    "P": 3
+  },
+  "strict_invalid": {
+    "C": 0,
+    "P": 0
+  },
+  "native_paired": {
+    "P_only": 0,
+    "C_only": 1
+  },
+  "semantic_gain_credit": {
+    "C": 0,
+    "P": 0
+  },
+  "rated_peak_usd": 0.010389408,
+  "confirmed_invoice": false,
+  "source_sha256": "6922c988ef10987bd6545568ee8e63e897af80994591fa20539767da58f8e3d1",
+  "selection_sha256": "c75fee6b3ec2e3d7ba99d37ba9f1bcff5d5a1c9422a31c35840506dc8950c01b",
+  "artifact_id": 10939267326,
+  "artifact_zip_sha256": "73f4b123b0ad09a8251c240b007ad0ea6772cf20bdb77551de96e19bd69c499d",
+  "masked_notes_sha256": "1a720a79603a2b3be6d4c04a5cb8ef287fd648e7c246b828b42a2649f086db5e",
+  "source_license": "CC BY-SA 4.0; Yale-LILY/FOLIO contributors; added responses/audits distinguished; no endorsement; eval/conceptual/FOLIO_SOURCE_LICENSE.txt and FOLIO_ATTRIBUTION.md",
+  "scoring_changes": false,
+  "families_consumed": [
+    193,
+    73,
+    128,
+    137
+  ],
+  "freeze_and_leave": true,
+  "retry_calls": 0,
+  "job_local_grant_expired": true,
+  "dormant_grant_after_closure": 0,
+  "no_actions_variable_activated": true,
+  "leftover_transferred": false,
+  "longmemeval_consumed": false,
+  "cloud_prepaid_tests": 22,
+  "new_correctness_only_argument_reading_tests": 8,
+  "next_paid_authorization": null
+}

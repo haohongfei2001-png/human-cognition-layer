@@ -1,3 +1,5 @@
+> Historical before-run protocol. Independently authorized v01 completed8 calls; native C/P4/4,3/4, source ambiguity =>UTILITY_INCONCLUSIVE, original annotations unchanged. Budget closed and four families left. See final development closure.
+
 # Natural-language argument reading — frozen provisional development v01
 
 Status: provider-free preparation, **zero model calls**, no selected source question/native annotation displayed. Previous explicit-formal countermodel candidate closes SIMPLIFY and leaves its four consumed families. No expanding a specialized symbolic/mental ontology. This independent task reads ordinary premise sentences rather than receiving gold formalization. Existing evidence/source separation and metered reasoning backend reused; no native-FOL inference arm.
