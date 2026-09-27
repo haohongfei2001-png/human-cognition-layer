@@ -14,9 +14,9 @@ jobs:
     timeout-minutes: 30
     env:
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-      # Unapproved new scope: dormant job-local grant0 until owner authorization.
+      # Owner authorized frozen four-family C/P audit: <=8 calls and USD0.05 once.
       # Original single-trigger history and attempt guards remain unchanged.
-      HCL_NATURAL_ARGUMENT_FOLIO_DEV_COST_AUTHORIZED_USD: "0"
+      HCL_NATURAL_ARGUMENT_FOLIO_DEV_COST_AUTHORIZED_USD: "0.05"
       HCL_NATURAL_ARGUMENT_FOLIO_DEV_RUN_ONCE_TOKEN: HCL_NATURAL_ARGUMENT_FOLIO_DEV_V01_ONCE
     steps:
       - uses: actions/checkout@v4
