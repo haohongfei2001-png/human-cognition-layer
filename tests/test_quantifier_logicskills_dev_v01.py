@@ -51,3 +51,11 @@ class QuantifierProbeTests(unittest.TestCase):
    def complete(self,m):return {'raw_response':'{"formula":"∀x(Fx→Gx)"}','reasoning_chars':1}
   with patch.object(r,'equivalent',return_value={'status':'UNKNOWN'}):rows,fail=r.execute([self.item()],[{'id':0,'form':'∀x(Fx→Gx)'}],{a:B() for a in ['C','P']})
   self.assertFalse(fail);self.assertEqual(rows[0]['arms']['C']['semantic_verification']['status'],'UNKNOWN')
+
+ def test_scorer_exception_preserves_every_paid_final(self):
+  calls=[]
+  class B:
+   def complete(self,m):calls.append(m);return {'raw_response':'{"formula":"∀x(Fx→Gx)"}','reasoning_chars':1}
+  with patch.object(r,'equivalent',side_effect=RuntimeError('NEVER_ARCHIVE_ERROR_BODY')):
+   rows,fail=r.execute([self.item()],[{'id':0,'form':'∀x(Fx→Gx)'}],{a:B() for a in ['C','P']})
+  self.assertFalse(fail);self.assertEqual(len(calls),2);self.assertTrue(all(v['response']['raw_response'] and v['semantic_verification']['status']=='SCORER_ERROR' for v in rows[0]['arms'].values()));self.assertNotIn('NEVER_ARCHIVE_ERROR_BODY',json.dumps(rows))

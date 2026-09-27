@@ -71,10 +71,14 @@ def execute(items,data,backends):
  # First native-form lookup only after ALL attempted provider calls have ended.
  byid={v['id']:v for v in data}
  for row in rows:
-  row['reference_formula']=byid[row['id']]['form'];target=parse(row['reference_formula'])
+  try:
+   row['reference_formula']=byid[row['id']]['form'];target=parse(row['reference_formula']);reference_error=None
+  except Exception as exc:row.setdefault('reference_formula',None);target=None;reference_error=type(exc).__name__
   for a,v in row['arms'].items():
-   if v['answer']:
-    ast=parse(v['answer']['formula']);v['semantic_verification']=equivalent(ast,target)
+   if reference_error:v['semantic_verification']={'status':'SCORER_ERROR','error_type':reference_error}
+   elif v['answer']:
+    try:ast=parse(v['answer']['formula']);v['semantic_verification']=equivalent(ast,target)
+    except Exception as exc:v['semantic_verification']={'status':'SCORER_ERROR','error_type':type(exc).__name__}
    else:v['semantic_verification']={'status':'INVALID_OR_NOT_COMPLETED'}
  return rows,fail
 
@@ -87,7 +91,7 @@ def main():
  if float(os.getenv('HCL_QUANTIFIER_LOGICSKILLS_DEV_COST_AUTHORIZED_USD') or 0)<CAP:raise RuntimeError('separate quantifier authorization required')
  key=os.getenv('DEEPSEEK_API_KEY')
  if not key:raise RuntimeError('existing credential unavailable')
- ledger=BudgetLedger(cap_usd=CAP);bs={v:ReasoningBackend(key,ledger) for v in ['C','P']};rows,fail=execute(items,data,bs);models={v['response']['response_model'] for row in rows for v in row['arms'].values() if v['response'] and v['response']['response_model']};unknown=[row['id'] for row in rows if any(v['semantic_verification']['status']=='UNKNOWN' for v in row['arms'].values())]
+ ledger=BudgetLedger(cap_usd=CAP);bs={v:ReasoningBackend(key,ledger) for v in ['C','P']};rows,fail=execute(items,data,bs);models={v['response']['response_model'] for row in rows for v in row['arms'].values() if v['response'] and v['response']['response_model']};unknown=[row['id'] for row in rows if any(v['semantic_verification']['status'] in ('UNKNOWN','SCORER_ERROR') for v in row['arms'].values())]
  if len(models)>1:fail.append({'error_type':'ProviderModelDrift'})
  status='PARTIAL_DEVELOPMENT_CONSUMED' if fail else 'SCORING_INCONCLUSIVE' if unknown else 'SUCCESS'
  result={'format':f['format'],'scope':f['scope'],'status':status,'selection_sha256':sha(MANIFEST.read_bytes()),'results':rows,'failures':fail,'scorer_unknown_ids':unknown,'metrics':{a:{'calls':b.calls,'rated_cost_usd':b.cost,'wall_seconds':b.wall} for a,b in bs.items()},'total_ledger_usd':ledger.spent_usd};a.out.parent.mkdir(parents=True,exist_ok=True);a.out.write_text(json.dumps(result,indent=2)+'\n');print(json.dumps({'status':status,'calls':sum(b.calls for b in bs.values()),'ledger_usd':ledger.spent_usd}));return 0 if status=='SUCCESS' else 1
