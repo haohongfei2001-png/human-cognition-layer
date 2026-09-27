@@ -4,12 +4,14 @@
 
 ## Merged engineering and exact-main evidence
 
-| PR | Main SHA | Exact-head v1 CI | Exact-main v1 CI |
+| PR | Main SHA | PR-associated merge-candidate v1 CI | Exact-main v1 CI |
 |---|---|---|---|
 | [112](https://github.com/haohongfei2001-png/human-cognition-layer/pull/112) registry | d7ef836dd0dc8ebd409f2bc92f218b1e6caf24aa | [36346339283](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36346339283) PASS | [36346501198](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36346501198) PASS |
 | [113](https://github.com/haohongfei2001-png/human-cognition-layer/pull/113) runtime integration | 9070bbcf518b5aa69b92502949998413e0960d1d | [36347015261](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36347015261) PASS | [36347078900](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36347078900) PASS |
 
-Runtime exact-main six groups: v1 `36347078900`, v0.6 preflight `36347078899`, v0.10 preflight `36347078904`, quantifier `36347078879`, countermodel `36347078980`, FOLIO `36347078930`; all SUCCESS on the same runtime SHA. The dedicated suite contains **42 v1** and **176 historical** tests. Evidence: `HCL_V1_PROVIDER_FREE_CERTIFICATION.json`. Final certification/source-audit handoff is a later documentation/CI-receipt commit; the v1 workflow emits that exact commit's SHA/run ID/test counts/runtime digest in its `hcl-v1-provider-free-certification` artifact. Current main SHA comes from GitHub, never an assumed historical SHA.
+Runtime exact-main six groups: v1 `36347078900`, v0.6 preflight `36347078899`, v0.10 preflight `36347078904`, quantifier `36347078879`, countermodel `36347078980`, FOLIO `36347078930`; all SUCCESS on the same runtime SHA. The dedicated suite contains **42 v1** and **176 historical** tests. Evidence: `HCL_V1_PROVIDER_FREE_CERTIFICATION.json`. PR #114 merged the certification/source-audit handoff as `e49f141375c5ace6f29b36560d81d8ba2fa19cd8`. Artifact inspection then exposed GitHub default PR merge-ref checkout: the earlier PR-associated checks certify their merge-candidate trees, not literal head checkout. The follow-up workflow explicitly checks out the PR head SHA and records actual `git rev-parse HEAD` separately from the synthetic GitHub event SHA; latest exact-head and exact-main certification comes from this corrected workflow. Historical run evidence is preserved without upgrading the earlier checks.
+
+Final certification checkout repair is a later CI-only commit; the v1 workflow emits that exact commit's SHA/run ID/test counts/runtime digest in its `hcl-v1-provider-free-certification` artifact. Current main SHA comes from GitHub, never an assumed historical SHA.
 
 ## Executable architecture
 
