@@ -8,7 +8,9 @@ Human Cognition Layer (HCL) 是一个面向**复杂人类认知建模、状态�
 
 **Canonical live state:** [STATUS.md](STATUS.md)
 
-v0.10 四例运行已关闭：共享输出契约有歧义，12 个答案均格式无效，不能作为能力成绩。原始证据永久保留；独立 v02 格式修复已准备，仅能做 non-fresh development repair，需新单独预算。详见 [closure](reports/HCL_V10_ARGUMENTATION_FINAL_DEVELOPMENT_CLOSURE.md)。
+v0.10 格式修复完成：四例 non-fresh development repair 的 C/P/T = 1/4、1/4、4/4，工具新增正确 3 例、反向退步 0 例。保留通用精确工具的有限开发信号，冻结并离开这些已消费样本；原协议无效证据保留，费用授权已关闭。详见 [closure](reports/HCL_V10_PYARG_DEV_V02_REPAIR_CLOSURE.md)。
+
+后续已准备间接回答理解的八例 C/P 开发筛查包（尚未调用），比较强直接回答与薄语用提示。详见 [protocol](docs/HCL_PRAGMATICS_CIRCA_DEVELOPMENT_V01.md)。
 
 ## Research thesis
 
@@ -48,7 +50,7 @@ HCL 首先要求认知表示和更新本身在事实、信息边界、时间关�
 
 当前 canonical 阶段：
 
-**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 generic-tool development signal; v0.10 utility INVALID; non-fresh output-contract repair staged**
+**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 generic-tool development signal; v0.10 frozen non-fresh generic-tool development signal**
 
 v0.5 保持冻结，作为显式 stance / revision / provenance / persistent-state 基础。v0.6 已经真正增加了一层人物信息视角与 belief evidence runtime，而不是继续只做 memory infrastructure。
 

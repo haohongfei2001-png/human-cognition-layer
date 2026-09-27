@@ -1,3 +1,5 @@
+> Historical frozen v02 protocol: execution completed, 12 valid-format responses, strict C/P/T=1/4,1/4,4/4, RETAIN_GENERIC_TOOL_DEVELOPMENT_SIGNAL_ONLY. Authorization reset to zero; no rerun. See v02 repair closure.
+
 # Frozen v0.10 v02 non-fresh output-contract repair
 
 V01 is scientifically invalid because the shared instruction ambiguously placed reason at labelling level, while the parser required top-level reason. See final development closure and immutable actual-results archive. V02 repairs only this general serialization defect. It does not repair formal reasoning, normalize invalid responses into scores, change graph algorithms or use post-hoc per-case rules.

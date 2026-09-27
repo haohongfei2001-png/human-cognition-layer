@@ -1,0 +1,26 @@
+{
+  "scope": "Single-agent masked-label review before arm map/aggregate. Previous consumed graphs and v01 outcomes visible; styles may reveal arms. Non-fresh, no independent blind or gold claim.",
+  "cases": {
+    "arg-dev-01": {
+      "1": "Wrong: d should IN when its only attacker c OUT; misses b defense/reinstatement. Format valid.",
+      "2": "Same wrong reinstatement; valid format.",
+      "3": "Correct b,d IN and c OUT, reason traces b defeating c; conditional formal scope explicit."
+    },
+    "arg-dev-02": {
+      "1": "Wrong complete alternatives: includes d OUT with e UNDEC (no IN attacker) and c,d IN conflict d->c; omits a,c,e alternative. Reason even says d attacks c makes c IN. Valid format.",
+      "2": "Correct all three complete alternatives. Explanation says remaining-node extensions {},{c,e},{d}, shorthand relative to already-IN a; not full-graph empty extension. Minor imprecision preserves b/c reference although b already OUT. Conditional scope preserved.",
+      "3": "Wrong four alternatives; c IN despite d UNDEC and c,d IN conflict. Omits e-IN alternative. Valid format."
+    },
+    "arg-dev-03": {
+      "1": "Correct empty grounded IN and all UNDEC, defense accurate.",
+      "2": "Correct all UNDEC, no forced IN.",
+      "3": "Correct all UNDEC, conditional formal scope explicit."
+    },
+    "arg-dev-04": {
+      "1": "Wrong extra a,c-IN alternative ignores a->c; reason falsely calls pair conflict-free.",
+      "2": "Correct unique a-IN complete labelling; contains all defended nodes, no world/private-belief claim.",
+      "3": "Wrong extra a,c-IN alternative and contradictory b-UNDEC reason versus b-OUT label; ignores a->c."
+    }
+  },
+  "format_observation": "All 12 appear to obey repaired top-level contract. Do not alter scorer or rescue reasoning errors."
+}

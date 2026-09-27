@@ -1,0 +1,50 @@
+{
+  "format": "hcl-pragmatics-circa-development-v01",
+  "source_repo": "google-research-datasets/circa",
+  "revision": "02ad965518ab2fbd8bb24463d312ebb03bac5368",
+  "data_sha256": "98454df6b716dd7ff5f83a3db298849f05414688e81c2ee21b8e5a548ed897aa",
+  "salt": "HCL-PRAGMATICS-CIRCA-DEV-V01",
+  "scope": "eight source-only-selected public crowd-authored dialogue readings; initial method screen, not fresh efficacy or private mental truth",
+  "excluded_contexts": [
+    "food preferences",
+    "music preferences"
+  ],
+  "excluded_exposed_reply_fragments": [
+    "go to bed",
+    "starving"
+  ],
+  "cases": [
+    {
+      "id": "15529",
+      "source_sha256": "46590747895b9b03416ae3fabb8ac31d87b34273e09618ff7918fb56fd50118a"
+    },
+    {
+      "id": "8792",
+      "source_sha256": "b7ac8dcefceeff6053fb8cb73208163b1eaa1c8e1e97c089ec2da190abacd07e"
+    },
+    {
+      "id": "24783",
+      "source_sha256": "299673a6fd42cdfcf6f85a6a2c63302feff20c942d1b792d4bf5d2640fcf5e18"
+    },
+    {
+      "id": "32043",
+      "source_sha256": "c7229b77211cd294d6822334c353251183ad10d4ff5f67c8f38d0fe0da5dee80"
+    },
+    {
+      "id": "27381",
+      "source_sha256": "fd40948069aa1a032798557372463660d6818c784cebb89ed58ce07dbf380234"
+    },
+    {
+      "id": "4559",
+      "source_sha256": "cb07363d40e41230800bc28a0bcbaedfb72cf547d9c04dcc2e3e9e75f6674f28"
+    },
+    {
+      "id": "31426",
+      "source_sha256": "e8a126bfbec26621f4d04b33126461884fb2754c54821ad744fc732e069c7222"
+    },
+    {
+      "id": "9966",
+      "source_sha256": "1bc19153972848f2e0945c63c973ceaca6b2ddbaa86062f752b1f9f15a29ce22"
+    }
+  ]
+}

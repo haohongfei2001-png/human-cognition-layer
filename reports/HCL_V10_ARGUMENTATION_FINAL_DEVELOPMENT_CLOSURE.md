@@ -1,3 +1,9 @@
+# Current v0.10 decision after v02 repair
+
+**RETAIN_GENERIC_TOOL_DEVELOPMENT_SIGNAL_ONLY**. Non-fresh v02 strict C/P/T = 1/4, 1/4, 4/4; paired T/P and T/C gains 3/0, zero invalids. See `HCL_V10_PYARG_DEV_V02_REPAIR_CLOSURE.md` and `HCL_V10_PYARG_DEV_V02_RECEIPT.json`. Both paid authorization variables are zero. This is a tiny public-author-example development signal for the simpler generic exact tool, not fresh efficacy or specialized architecture advantage. Leave the four consumed families and continue provider-free independent-source qualification.
+
+## Historical v01 invalid closure (preserved)
+
 # v0.10 public-author-example v01 closure — invalid utility protocol
 
 ## Decision
