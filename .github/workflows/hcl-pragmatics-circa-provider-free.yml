@@ -1,10 +1,10 @@
 name: HCL Pragmatic Interpretation Source and Request Preflight
 on:
   pull_request:
-    paths: ["hcl/pragmatics.py", "scripts/*pragmatics*", "tests/*pragmatics*", "eval/pragmatics/**", "docs/HCL_PRAGMATICS*", ".github/workflows/hcl-pragmatics*.yml"]
+    paths: ["hcl/pragmatics.py", "scripts/*pragmatics*", "tests/*pragmatics*", "eval/pragmatics/**", "docs/HCL_PRAGMATICS*", "reports/HCL_PRAGMATICS*", ".github/workflows/hcl-pragmatics*.yml"]
   push:
     branches: [main]
-    paths: ["hcl/pragmatics.py", "scripts/*pragmatics*", "tests/*pragmatics*", "eval/pragmatics/**", "docs/HCL_PRAGMATICS*", ".github/workflows/hcl-pragmatics*.yml"]
+    paths: ["hcl/pragmatics.py", "scripts/*pragmatics*", "tests/*pragmatics*", "eval/pragmatics/**", "docs/HCL_PRAGMATICS*", "reports/HCL_PRAGMATICS*", ".github/workflows/hcl-pragmatics*.yml"]
 permissions:
   contents: read
 jobs:
