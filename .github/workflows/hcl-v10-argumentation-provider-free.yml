@@ -2,6 +2,7 @@ name: HCL v0.10 Argumentation Provider-Free Preflight
 on:
   pull_request:
     paths:
+      - "README.md"
       - "scripts/*argument_countermodel*"
       - "tests/test_argument_countermodel*"
       - "docs/HCL_ARGUMENT*"
@@ -41,6 +42,7 @@ on:
   push:
     branches: [main]
     paths:
+      - "README.md"
       - "scripts/*argument_countermodel*"
       - "tests/test_argument_countermodel*"
       - "docs/HCL_ARGUMENT*"

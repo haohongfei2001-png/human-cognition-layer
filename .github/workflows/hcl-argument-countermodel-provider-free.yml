@@ -1,10 +1,10 @@
 name: HCL Formal Argument Countermodel Provider-Free Source and Witness Preflight
 on:
   pull_request:
-    paths: ["hcl/quantified_logic.py", "scripts/*argument_countermodel*", "scripts/reasoning_probe_backend.py", "tests/test_argument_countermodel*", "eval/conceptual/**", "docs/HCL_ARGUMENT*", "reports/HCL_ARGUMENT*", "requirements-conceptual.txt", ".github/workflows/hcl-argument*.yml", ".github/workflows/hcl-quantifier*.yml"]
+    paths: ["README.md", "hcl/quantified_logic.py", "scripts/*argument_countermodel*", "scripts/reasoning_probe_backend.py", "tests/test_argument_countermodel*", "eval/conceptual/**", "docs/HCL_ARGUMENT*", "reports/HCL_ARGUMENT*", "requirements-conceptual.txt", ".github/workflows/hcl-argument*.yml", ".github/workflows/hcl-quantifier*.yml"]
   push:
     branches: [main]
-    paths: ["hcl/quantified_logic.py", "scripts/*argument_countermodel*", "scripts/reasoning_probe_backend.py", "tests/test_argument_countermodel*", "eval/conceptual/**", "docs/HCL_ARGUMENT*", "reports/HCL_ARGUMENT*", "requirements-conceptual.txt", ".github/workflows/hcl-argument*.yml", ".github/workflows/hcl-quantifier*.yml"]
+    paths: ["README.md", "hcl/quantified_logic.py", "scripts/*argument_countermodel*", "scripts/reasoning_probe_backend.py", "tests/test_argument_countermodel*", "eval/conceptual/**", "docs/HCL_ARGUMENT*", "reports/HCL_ARGUMENT*", "requirements-conceptual.txt", ".github/workflows/hcl-argument*.yml", ".github/workflows/hcl-quantifier*.yml"]
 permissions:
   contents: read
 jobs:

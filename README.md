@@ -16,7 +16,7 @@ v0.10 格式修复完成：四例 non-fresh development repair 的 C/P/T = 1/4�
 
 叙事时间顺序开发重跑已关闭：C/P/T 为0/4、1/4、0/4，工具两例引用提取无效，没有新增正确例；采用更简单的薄提示，冻结工具并离开四例。实际14次调用，计价约USD0.00338，授权归零；原请求失败与标注分歧保留。见 [closure](reports/HCL_NARRATIVE_TORQUE_FINAL_DEVELOPMENT_CLOSURE.md)。
 
-下一方向已免费准备量词与反例核验能力，冻结四个独立的受控英语逻辑情境。直接方法和薄提示均开启推理，先检验强基线下是否仍有增量；尚未调用，独立提案最多8次、USD0.05。见 [protocol](docs/HCL_CONCEPTUAL_QUANTIFIER_DEVELOPMENT_V01.md)。
+量词筛查已关闭：推理开启的直接方法和薄提示均3/4，无新增正确例；两者同一例最终输出为空，不能推断语义能力失败。采用简单直接方法，预算归零。见 [closure](reports/HCL_CONCEPTUAL_QUANTIFIER_FINAL_DEVELOPMENT_CLOSURE.md)。后续显式论证反例构造的直接模型/薄提示/通用工具比较已冻结，零调用；独立新预算最多8次、USD0.05。见 [protocol](docs/HCL_ARGUMENT_COUNTERMODEL_DEVELOPMENT_V01.md)。
 
 ## Research thesis
 
