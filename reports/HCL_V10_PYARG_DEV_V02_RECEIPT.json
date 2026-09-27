@@ -1,0 +1,99 @@
+{
+  "format": "hcl-v10-nonfresh-contract-repair-v02-closure-receipt",
+  "execution_main": "44f9e9af238a29042a6597545dfe32f998e95955",
+  "parent_main": "22a4098015f08391c42949742ad8c6033193db70",
+  "trigger_pr": 92,
+  "run_id": 36296105815,
+  "artifact_id": 10923753442,
+  "artifact_sha256": "bb86c892c04e4e2def52c7b6ea7ac26c98b49f942cc7b8ced22dc6e669f75eb8",
+  "logs_sha256": "72d5cc02e1a0fbd6b9345b75c3453ea7a4d8beb298318cebee8c2e246c6ae65a",
+  "actual_results_sha256": "3bfabc94c1813c3a89840986196ad62644b96e2f203a0e2e169186ab96e0b986",
+  "masked_audit_sha256_before_unmask": "7de37af36148e8033a59bfb3774a121acbb32707ca174909fa81e9d3fa4b8c3a",
+  "source_manifest_sha256": "5a2c77183f4c0ab1bda465c6738ac72586cb00879b6245b35d26d0609c3f39d5",
+  "source_revision": "f907bac94cbdd663839300b3b7523d4d958ff36f",
+  "scientific_scope": "NON_FRESH_PUBLIC_AUTHOR_EXAMPLE_DEVELOPMENT_REPAIR",
+  "status": "SUCCESS",
+  "decision": "RETAIN_GENERIC_TOOL_DEVELOPMENT_SIGNAL_ONLY",
+  "strict_agreement": {
+    "C": 1,
+    "P": 1,
+    "T": 4
+  },
+  "invalids": {
+    "C": 0,
+    "P": 0,
+    "T": 0
+  },
+  "T_vs_P": {
+    "T_only": 3,
+    "P_only": 0,
+    "both_agree": 1,
+    "both_disagree": 0
+  },
+  "T_vs_C": {
+    "T_only": 3,
+    "C_only": 0,
+    "both_agree": 1,
+    "both_disagree": 0
+  },
+  "gain_cases": [
+    "arg-dev-01",
+    "arg-dev-02",
+    "arg-dev-04"
+  ],
+  "all_agree_case": "arg-dev-03",
+  "metrics": {
+    "C": {
+      "calls": 4,
+      "input_chars": 8541,
+      "output_chars": 1524,
+      "provider_wall_seconds": 5.827437,
+      "rated_cost_usd": 0.0012345,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "P": {
+      "calls": 4,
+      "input_chars": 9129,
+      "output_chars": 1550,
+      "provider_wall_seconds": 5.010517,
+      "rated_cost_usd": 0.0013197,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "T": {
+      "calls": 4,
+      "input_chars": 21669,
+      "output_chars": 1534,
+      "provider_wall_seconds": 5.146774,
+      "rated_cost_usd": 0.0024882,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "TOTAL": {
+      "calls": 12,
+      "char_as_token_peak_usd_upper_bound": 0.017331,
+      "input_chars": 39339,
+      "output_chars": 4608,
+      "provider_response_models": [
+        "deepseek-flash"
+      ],
+      "provider_wall_seconds": 15.984728,
+      "rated_cost_usd": 0.0050424
+    }
+  },
+  "cloud_preflight_tests": 39,
+  "reconstructed_actual_records": 4,
+  "reconstructed_response_hashes": 12,
+  "repairs_or_provider_retries_within_v02": 0,
+  "v01_and_v02_paid_authorizations_after_run_usd": 0,
+  "longmemeval_provider_calls": 0,
+  "cumulative_v01_v02": {
+    "calls": 24,
+    "rated_cost_usd": 0.0100452,
+    "char_as_token_peak_cost_upper_usd": 0.034293
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "scope": "provider-free metadata audit, no qualified fresh formal pilot",
+  "iccma": {
+    "record": "8348039",
+    "license_metadata": "cc-by-4.0",
+    "metadata_sha256": "a39d6224897643755a338326bda78025700fdb3f9a584aa50cef24277aca280a",
+    "zip_index_sha256": "d1108e0e0d9d50aa76499404286d4e53ca8e9a458d7a66c3b9665c22a18581f2",
+    "entry_count": 1463,
+    "main_af_entries": 329,
+    "index_bytes_transferred": 161288,
+    "raw_graphs_read": 0,
+    "native_queries_or_results_read": 0,
+    "qualified_in_cap_graphs": 0
+  },
+  "circa": {
+    "revision": "02ad965518ab2fbd8bb24463d312ebb03bac5368",
+    "source_sha256": "98454df6b716dd7ff5f83a3db298849f05414688e81c2ee21b8e5a548ed897aa",
+    "selection_sha256": "a66b19f9096cafb424566fb09ad1f73f5b650f6e8475c67d03c584b3406bbd8f",
+    "selected_native_annotations_inspected": false,
+    "provider_calls": 0,
+    "budget_authorization_usd": 0
+  }
+}

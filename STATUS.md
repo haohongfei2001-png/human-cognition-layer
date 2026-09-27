@@ -6,15 +6,15 @@ Human Cognition Layer (HCL)
 
 ## Current phase
 
-**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 generic-tool development signal; v0.10 utility protocol INVALID; non-fresh contract repair staged**
+**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 generic-tool development signal; v0.10 frozen generic-tool signal from non-fresh contract repair**
 
 ## v0.10 current result and concrete next action
 
-V01 cloud run `36295445865` completed twelve calls at reported USD 0.0050028. Shared output wording ambiguously located reason; all twelve outputs failed the frozen strict format. Scientific utility is **INVALID / inconclusive**, not a capability zero score or evidence of C/P/T equivalence. REVISE/DEMOTE pending one minimal non-fresh output-contract repair. Actual outputs and scored failures are immutable, four author-example families permanently development-consumed, no fresh pilot or architecture expansion authorized.
+V01 utility is permanently INVALID_OUTPUT_CONTRACT_UTILITY_INCONCLUSIVE: shared output wording ambiguous, 12 strict invalids. V02 independently authorized non-fresh output-contract repair run `36296105815` completed 12 calls, strict C/P/T **1/4, 1/4, 4/4**, zero invalids. T/P and T/C gains **3/0** supported by actual source-bound calculations. Decision **RETAIN_GENERIC_TOOL_DEVELOPMENT_SIGNAL_ONLY**; freeze runtime and leave the four consumed PyArg author-example families. No specialized/fresh/native benchmark/general cognition claim.
 
-The v02 runner and cloud workflow are staged with explicit top-level reason, unchanged runtime/source/questions/scoring, independent zero authorization, 12-call / USD 0.05 cap. Provider-free request-path regressions verify the repair, not LLM success. Only separate owner budget approval blocks actual v02 execution; no unused v01 budget carries forward. LongMemEval remains untouched.
+V02 rated cost USD **0.0050424**, char bound **0.017331**; cumulative v01+v02 USD **0.0100452**, 24 calls. Both authorization variables zero. Full actual inputs/states/raw responses/hashes and masked-before-unmask notes archived; v01 preserved without rescue. LongMemEval untouched.
 
-See `reports/HCL_V10_ARGUMENTATION_FINAL_DEVELOPMENT_CLOSURE.md`, `reports/HCL_V10_PYARG_DEV_V01_RECEIPT.json`, `docs/HCL_V10_PYARG_DEVELOPMENT_REPAIR_V02.md`. Historical staged candidate/preflight sections below describe the before-run state, superseded by this result.
+Provider-free follow-through audited ICCMA, ArgBench and pragmatic sources. No in-cap independent formal pilot qualified. A simple Circa indirect-answer C/P development screen is staged: eight source-only-selected dialogue contexts, sixteen calls, separately capped USD 0.05, authorization zero. No stable current-model gap or efficacy claim; no specialized architecture expansion. See `docs/HCL_POST_V10_CAPABILITY_DIRECTION_AUDIT_V01.md` and `docs/HCL_PRAGMATICS_CIRCA_DEVELOPMENT_V01.md`. No fresh paid experiment is frozen yet. See `reports/HCL_V10_PYARG_DEV_V02_REPAIR_CLOSURE.md` and `reports/HCL_V10_PYARG_DEV_V02_RECEIPT.json`. Before-run sections below are historical, superseded by this result.
 
 ## Core doctrine
 
