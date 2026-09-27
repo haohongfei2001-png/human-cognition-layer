@@ -39,3 +39,62 @@ class ValueTests(unittest.TestCase):
             after=select();self.assertEqual(before,after);self.assertEqual(len({x["id"] for x in before}),8)
             self.assertTrue(all("\n" in x["source"]["situation"] and "\n" in x["source"]["character_description"] for x in before))
             self.assertFalse(set(x["id"] for x in before)&set(str(i) for i in range(20)))
+
+    def test_partial_case_preserves_successful_first_arm_and_never_retries(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            f = root / "source.tsv"
+            x = {"id":"test", "situation":"A public choice.", "action":"Choose the first plan."}
+            with f.open("w") as out:
+                w = csv.DictWriter(out, fieldnames=list(x), delimiter="\t")
+                w.writeheader()
+                w.writerow(x)
+            item = {"id": "test", "source": source_view(x, "A gives both priorities equal regard."), "source_sha256": "s"}
+            m = root / "manifest"
+            m.write_text(json.dumps(r.manifest([item])))
+            calls = []
+
+            class Fake:
+                def __init__(self, b, *, name, caps):
+                    self.name = name
+
+                def complete_json(self, messages, **kwargs):
+                    calls.append(self.name)
+                    if self.name == "P":
+                        raise RuntimeError("uncertain transport")
+                    return json.dumps(
+                        {
+                            "label": "No",
+                            "reason": "A deliberately wrong but valid answer.",
+                        }
+                    )
+
+            metrics = {"TOTAL": {"provider_response_models": ["fake"]}}
+            env = {
+                "GITHUB_ACTIONS": "true",
+                "GITHUB_RUN_ATTEMPT": "1",
+                "HCL_VALUE_CLASH_DEV_RUN_ONCE_TOKEN": r.TOKEN,
+                "HCL_VALUE_CLASH_DEV_COST_AUTHORIZED_USD": "0.15",
+                "DEEPSEEK_API_KEY": "fake",
+            }
+            dest = root / "results.json"
+            with patch.object(r, "MANIFEST", m), patch.object(
+                r, "select", return_value=[item]
+            ), patch.object(r, "CappedBackend", Fake), patch.object(
+                r, "OneCallDeepSeekBackend", return_value=None
+            ), patch.object(
+                r, "_metrics", return_value=metrics
+            ), patch(
+                "sys.argv",
+                ["runner", "--source-file", str(f), "--execute", "--out", str(dest)],
+            ), patch.dict(
+                r.os.environ, env, clear=True
+            ):
+                self.assertEqual(r.main(), 1)
+            saved = json.loads(dest.read_text())
+            self.assertEqual(calls, ["C", "P"])
+            self.assertEqual(saved["status"], "PARTIAL_DEVELOPMENT_CONSUMED")
+            self.assertEqual(saved["results"][0]["arms"]["C"]["answer"]["label"], "No")
+            self.assertFalse(
+                saved["results"][0]["arms"]["C"]["agrees_with_intended_reference"]
+            )

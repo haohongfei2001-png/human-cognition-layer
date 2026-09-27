@@ -112,6 +112,7 @@ def main():
     if bound > CAP:
         raise ValueError("planning cap unsafe")
     if args.freeze:
+        MANIFEST.parent.mkdir(parents=True, exist_ok=True)
         MANIFEST.write_text(json.dumps(m, indent=2) + "\n")
         print(
             json.dumps(
