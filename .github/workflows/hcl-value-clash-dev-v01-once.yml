@@ -33,7 +33,7 @@ jobs:
           if git log --format=%H '${{ github.event.before }}' -- .github/HCL_VALUE_CLASH_DEV_V01_TRIGGER | grep -q .; then exit 1; fi
           python - <<'PY'
           import os
-          assert float(os.getenv('HCL_VALUE_CLASH_DEV_COST_AUTHORIZED_USD') or '0') >= 0.15
+          assert float(os.getenv('HCL_VALUE_CLASH_DEV_COST_AUTHORIZED_USD') or '0') >= 0.05
           assert os.getenv('DEEPSEEK_API_KEY')
           PY
       - run: python -m pip install "pandas>=2.2,<3" "openai==2.14.0"

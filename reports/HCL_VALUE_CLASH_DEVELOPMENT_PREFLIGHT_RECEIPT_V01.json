@@ -1,0 +1,15 @@
+{
+  "run": 36305634727,
+  "artifact": 10926888506,
+  "digest": "sha256:8517df23c579bf716086754be5c59b37340a8484ea1170b6771b5d751e3f5cb0",
+  "manifest_sha256": "3e9ea8db79d768b18c4026cc0858288eaa563eb4517b1d0c1d7efadab383d965",
+  "source_sha256": "d8f36e232670f3e20762258994930ac10b7f47e2360a461f1cd87ec72ccb92f3",
+  "provider_calls": 0,
+  "frozen_input_chars": {
+    "C": 34717,
+    "P": 38637
+  },
+  "final_cap_usd": 0.05,
+  "final_planning_upper_usd": 0.0432,
+  "paid_authorization_usd": 0
+}

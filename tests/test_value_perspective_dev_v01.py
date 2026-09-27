@@ -74,7 +74,7 @@ class ValueTests(unittest.TestCase):
                 "GITHUB_ACTIONS": "true",
                 "GITHUB_RUN_ATTEMPT": "1",
                 "HCL_VALUE_CLASH_DEV_RUN_ONCE_TOKEN": r.TOKEN,
-                "HCL_VALUE_CLASH_DEV_COST_AUTHORIZED_USD": "0.15",
+                "HCL_VALUE_CLASH_DEV_COST_AUTHORIZED_USD": "0.05",
                 "DEEPSEEK_API_KEY": "fake",
             }
             dest = root / "results.json"

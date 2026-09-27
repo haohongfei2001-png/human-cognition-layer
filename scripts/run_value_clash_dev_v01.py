@@ -18,8 +18,8 @@ REVISION = "744ec8d62681038a9f44aaba2f737ebd83e8b0d3"
 DATA_SHA = "d8f36e232670f3e20762258994930ac10b7f47e2360a461f1cd87ec72ccb92f3"
 MANIFEST = ROOT / "eval/value/clash_dev_selection_v01.json"
 TOKEN = "HCL_VALUE_CLASH_DEV_V01_ONCE"
-CAP = 0.15
-CAPS = {a: {"calls": 8, "input_chars": 160000, "output_chars": 8000} for a in ("C", "P")}
+CAP = 0.05
+CAPS = {a: {"calls": 8, "input_chars": 40000, "output_chars": 8000} for a in ("C", "P")}
 LABELS = ["Yes", "No", "Ambiguous"]
 TASK = {"question": "From Character A's current stated perspective, would the supplied action be deemed acceptable? Interpret only the supplied public description, not objective morality or a real person's hidden mind.", "allowed_labels": LABELS}
 COMMON = (
@@ -108,7 +108,7 @@ def main():
     items = select(args.source_file)
     m = manifest(items)
     sizes = validate(items)
-    bound = (320000 * 0.30 + 16000 * 1.20) / 1000000
+    bound = (80000 * 0.30 + 16000 * 1.20) / 1000000
     if bound > CAP:
         raise ValueError("planning cap unsafe")
     if args.freeze:
