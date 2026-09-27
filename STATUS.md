@@ -12,13 +12,17 @@ Base model first. Use the minimum evidence-grounded capability set only when nee
 
 ## Engineering state
 
-- V1-00 capability registry merged in PR #112; exact-head run 36346339283 PASS; main `d7ef836dd0dc8ebd409f2bc92f218b1e6caf24aa`, exact-main run 36346501198 PASS.
-- V1-01/V1-02/V1-03/V1-04/V1-05: router, sparse context, evidence vocabulary, unified answer path and deterministic cost classes implemented; pending exact-head integration certification.
-- V1-06/V1-07: independent synthetic integration and frozen v0.4–v0.10 provider-free regression CI configured; counts/results will be recorded after execution.
-- V1-08: clean runtime import boundary; historical modules/harnesses remain in place, outside default routing.
-- V1-09: external integrated source audit not yet started; engineering certification precedes source qualification.
+**V1-00 through V1-08 COMPLETE / PROVIDER-FREE CERTIFIED.**
 
-Runtime: `hcl/v1`; [inventory](docs/HCL_V1_CAPABILITY_REGISTRY.md); [router and API](docs/HCL_V1_COGNITION_ROUTER.md). The answer adapter performs one model call; v1 schedules zero extraction calls. Optional typed context needs validated upstream semantic evidence; access metadata is not automatically mined from prose. This is a working foundation, not an external efficacy claim.
+- PR #112: executable registry with 22 capabilities and inactive-capability rejection. Registry main `d7ef836dd0dc8ebd409f2bc92f218b1e6caf24aa`, exact-main run 36346501198 PASS.
+- PR #113: deterministic router, sparse context, unified evidence hierarchy, minimal answer execution, generic tools, cost classes and import boundary. Runtime main `9070bbcf518b5aa69b92502949998413e0960d1d`, exact-main run [36347078900](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36347078900) PASS.
+- **42 v1 + 176 frozen v0.4–v0.10 provider-free tests = 218 PASS**. All six existing exact-main workflow groups passed. No historical benchmark/provider experiment was rerun.
+- An integration test exposed hidden proposition names in zero-support historical belief estimates; v1 removes them without changing the frozen v0.6 runtime or weakening the test.
+- V1-09: two-source public qualification audit completed, including eight source-only DREAM dialogue families. **No qualified integrated selection**; no frozen fresh/paid C/P/G/H package. Source exposure and candidate limitations are recorded in the protocol.
+
+Runtime: `hcl/v1`; [inventory](docs/HCL_V1_CAPABILITY_REGISTRY.md); [router/API](docs/HCL_V1_COGNITION_ROUTER.md); [source audit and evaluation design](docs/HCL_V1_INTEGRATED_EVALUATION_PROTOCOL.md); [handoff](reports/HCL_V1_INTEGRATION_FINAL_CLOSURE.md); [runtime receipt](reports/HCL_V1_PROVIDER_FREE_CERTIFICATION.json).
+
+The answer adapter performs one model call; v1 schedules zero extraction calls. Optional typed context requires validated upstream semantic evidence; access metadata is not automatically mined from prose. The deterministic bilingual router has finite vocabulary; injected historical state is caller-managed. This is a working foundation, not external efficacy. The final handoff commit's exact SHA, counts and CI receipt are also emitted by the v1 workflow artifact for that commit, avoiding a self-referential static SHA in this file.
 
 ## Historical capability dispositions
 
@@ -37,4 +41,6 @@ Historical closure reports under `reports/` remain unmodified. No benchmark, pai
 
 ## Sole next gate
 
-**HCL_V1_PROVIDER_FREE_INTEGRATION_CERTIFICATION** — exact-head CI, merge, exact-main CI, then independent integrated source qualification. No owner action is needed for current engineering work. Provider spend this round: **USD 0**.
+**HCL_V1_INTEGRATED_SOURCE_QUALIFICATION** — independently auditable, permitted native tasks requiring two substantive cognitive operations, with source/gold and exposure ledger. Engineering certification is complete; the bounded source screen did not qualify such a selection. The evaluation design is ready; a fresh C/P/G/H executable protocol and concrete cost authorization are not yet frozen. Do not advance to paid execution or invent another capability/benchmark version to fill this gap.
+
+No owner action is currently required. A budget request is appropriate only after full source/package freeze, at `HCL_V1_INTEGRATED_EVAL_OWNER_BUDGET_AUTHORIZATION`. Provider spend this round: **USD 0**. LongMemEval remains fully sealed/deprioritized.

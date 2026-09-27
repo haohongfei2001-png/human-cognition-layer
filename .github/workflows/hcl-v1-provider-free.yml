@@ -18,7 +18,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install 'pandas>=2.2,<3' 'openai==2.14.0' 'z3-solver==4.15.4.0'
       - name: Provider-free v1 integration tests
-        run: python -m unittest discover -s tests -p 'test_v1_*.py' -v
+        run: python -m unittest discover -s tests -p 'test_v1_*.py' -v 2>&1 | tee v1-integration.log
       - name: Frozen v0.4 through v0.10 provider-free regressions
         run: >-
           python -m unittest -v
@@ -29,5 +29,35 @@ jobs:
           tests.test_v07_intention_runtime tests.test_v07_semantic tests.test_v07_generic_narrative
           tests.test_v08_affect_runtime tests.test_v09_causal_runtime tests.test_v10_argumentation_runtime
           tests.test_quantified_logic tests.test_argument_readings
+          2>&1 | tee v1-historical.log
       - name: Compile clean runtime boundary
         run: python -m compileall -q hcl/v1
+      - name: Record exact-SHA provider-free certification
+        run: |
+          python - <<'PYCODE'
+          import hashlib, json, os, pathlib, re
+          root = pathlib.Path('.')
+          counts = {}
+          for label, filename in [('v1', 'v1-integration.log'), ('historical', 'v1-historical.log')]:
+              content = pathlib.Path(filename).read_text()
+              match = re.search(r'Ran (\d+) tests', content)
+              if not match or not re.search(r'^OK$', content, re.M):
+                  raise SystemExit('missing successful test receipt')
+              counts[label] = int(match.group(1))
+          digest = hashlib.sha256()
+          for path in sorted(root.glob('hcl/**/*.py')):
+              digest.update(str(path).encode() + b'\0' + path.read_bytes())
+          receipt = dict(schema='hcl-v1-provider-free-certification-v1', sha=os.environ['GITHUB_SHA'],
+              run_id=os.environ['GITHUB_RUN_ID'], event=os.environ['GITHUB_EVENT_NAME'],
+              counts=counts, runtime_sha256=digest.hexdigest(), provider_calls=0,
+              provider_spend_usd=0, scope='CORRECTNESS_NOT_EXTERNAL_UTILITY',
+              longmemeval='SEALED_NOT_IN_TEST_SELECTION')
+          pathlib.Path('hcl-v1-certification.json').write_text(json.dumps(receipt, indent=2) + '\n')
+          PYCODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hcl-v1-provider-free-certification
+          path: |
+            hcl-v1-certification.json
+            v1-integration.log
+            v1-historical.log
