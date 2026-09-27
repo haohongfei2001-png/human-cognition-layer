@@ -1,10 +1,10 @@
 name: HCL Conceptual Quantifier Provider-Free Source and Witness Preflight
 on:
   pull_request:
-    paths: ["hcl/quantified_logic.py", "scripts/*quantifier*", "scripts/reasoning_probe_backend.py", "tests/test_quantif*", "eval/conceptual/**", "docs/HCL_CONCEPTUAL*", "reports/HCL_CONCEPTUAL*", "requirements-conceptual.txt", ".github/workflows/hcl-conceptual*.yml", ".github/workflows/hcl-quantifier*.yml"]
+    paths: ["README.md", "hcl/quantified_logic.py", "scripts/*quantifier*", "scripts/reasoning_probe_backend.py", "tests/test_quantif*", "eval/conceptual/**", "docs/HCL_CONCEPTUAL*", "reports/HCL_CONCEPTUAL*", "requirements-conceptual.txt", ".github/workflows/hcl-conceptual*.yml", ".github/workflows/hcl-quantifier*.yml"]
   push:
     branches: [main]
-    paths: ["hcl/quantified_logic.py", "scripts/*quantifier*", "scripts/reasoning_probe_backend.py", "tests/test_quantif*", "eval/conceptual/**", "docs/HCL_CONCEPTUAL*", "reports/HCL_CONCEPTUAL*", "requirements-conceptual.txt", ".github/workflows/hcl-conceptual*.yml", ".github/workflows/hcl-quantifier*.yml"]
+    paths: ["README.md", "hcl/quantified_logic.py", "scripts/*quantifier*", "scripts/reasoning_probe_backend.py", "tests/test_quantif*", "eval/conceptual/**", "docs/HCL_CONCEPTUAL*", "reports/HCL_CONCEPTUAL*", "requirements-conceptual.txt", ".github/workflows/hcl-conceptual*.yml", ".github/workflows/hcl-quantifier*.yml"]
 permissions:
   contents: read
 jobs:

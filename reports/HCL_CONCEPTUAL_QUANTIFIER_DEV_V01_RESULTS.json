@@ -1,0 +1,547 @@
+{
+  "format": "hcl-quantifier-logicskills-dev-v01",
+  "scope": "four source-only-selected controlled-language development inputs; no natural discourse/full/native/fresh efficacy claim",
+  "status": "SUCCESS",
+  "selection_sha256": "b6863a5d3d4b49dde75ce20a6eb67a1567ea78d6f693467137fdec6767db1f31",
+  "results": [
+    {
+      "id": 6071,
+      "source": {
+        "input": "Sentence:\n\nNot all donkeys ate if and only if every monkey chased Hazel.\n\nAbbreviations:\n\nM: [1] is a donkey\nI: [1] ate\nO: [1] is a monkey\nR: [1] chased [2]\nc: Hazel",
+        "scope": "CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH"
+      },
+      "source_sha256": "bd7ad622749b21718f262c1d420b2126d3088014508755f57ca20baa24504870",
+      "arms": {
+        "C": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer."
+            },
+            {
+              "role": "user",
+              "content": "{\"input\": \"Sentence:\\n\\nNot all donkeys ate if and only if every monkey chased Hazel.\\n\\nAbbreviations:\\n\\nM: [1] is a donkey\\nI: [1] ate\\nO: [1] is a monkey\\nR: [1] chased [2]\\nc: Hazel\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"input\": \"Sentence:\\n\\nNot all donkeys ate if and only if every monkey chased Hazel.\\n\\nAbbreviations:\\n\\nM: [1] is a donkey\\nI: [1] ate\\nO: [1] is a monkey\\nR: [1] chased [2]\\nc: Hazel\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "{\"formula\":\"(\u00ac\u2200x(Mx\u2192Ix)\u2194\u2200y(Oy\u2192Ryc))\"}",
+            "response_sha256": "54da4b46881c8f698481b4c3beee2576e9c7819729ea32a121b8ffbb1cbb3443",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 3244,
+            "reasoning_sha256": "e39c5c00e2c0ff594f537ec99244ce1d6cb5257ea5fa57c192f83dfc5eadee6b",
+            "usage": {
+              "prompt_tokens": 319,
+              "completion_tokens": 961,
+              "reasoning_tokens": 935,
+              "cache_hit_tokens": 0,
+              "cache_miss_tokens": 319
+            },
+            "finish_reason": "stop",
+            "rated_cost_usd": 0.0012489
+          },
+          "answer": {
+            "formula": "(\u00ac\u2200x(Mx\u2192Ix)\u2194\u2200y(Oy\u2192Ryc))"
+          },
+          "invalid_reason": null,
+          "semantic_verification": {
+            "status": "EQUIVALENT",
+            "scope": "FULL_FOL_FORMAL_INPUT_ONLY",
+            "reason_unknown": null
+          }
+        },
+        "P": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer. Individuate each constant and bound variable, track which quantifier binds every occurrence, and preserve clause scope under negation. Do not interchange forall-exists with exists-forall. Consider a small counterexample to competing readings, then translate the stated sentence without adding existence or assuming distinct named objects. This procedure does not supply a reference formula."
+            },
+            {
+              "role": "user",
+              "content": "{\"input\": \"Sentence:\\n\\nNot all donkeys ate if and only if every monkey chased Hazel.\\n\\nAbbreviations:\\n\\nM: [1] is a donkey\\nI: [1] ate\\nO: [1] is a monkey\\nR: [1] chased [2]\\nc: Hazel\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer. Individuate each constant and bound variable, track which quantifier binds every occurrence, and preserve clause scope under negation. Do not interchange forall-exists with exists-forall. Consider a small counterexample to competing readings, then translate the stated sentence without adding existence or assuming distinct named objects. This procedure does not supply a reference formula."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"input\": \"Sentence:\\n\\nNot all donkeys ate if and only if every monkey chased Hazel.\\n\\nAbbreviations:\\n\\nM: [1] is a donkey\\nI: [1] ate\\nO: [1] is a monkey\\nR: [1] chased [2]\\nc: Hazel\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "{\"formula\":\"(\u00ac\u2200x(Mx\u2192Ix)\u2194\u2200y(Oy\u2192Ryc))\"}",
+            "response_sha256": "54da4b46881c8f698481b4c3beee2576e9c7819729ea32a121b8ffbb1cbb3443",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 5137,
+            "reasoning_sha256": "a30c2d7cb95490eab84ef1764cbb95507c73d02d9d1b01603790513d731de763",
+            "usage": {
+              "prompt_tokens": 388,
+              "completion_tokens": 1524,
+              "reasoning_tokens": 1498,
+              "cache_hit_tokens": 0,
+              "cache_miss_tokens": 388
+            },
+            "finish_reason": "stop",
+            "rated_cost_usd": 0.0019452
+          },
+          "answer": {
+            "formula": "(\u00ac\u2200x(Mx\u2192Ix)\u2194\u2200y(Oy\u2192Ryc))"
+          },
+          "invalid_reason": null,
+          "semantic_verification": {
+            "status": "EQUIVALENT",
+            "scope": "FULL_FOL_FORMAL_INPUT_ONLY",
+            "reason_unknown": null
+          }
+        }
+      },
+      "reference_formula": "(\u2203x(Mx\u2227\u00acIx)\u2194\u2200x(Ox\u2192Rxc))"
+    },
+    {
+      "id": 4475,
+      "source": {
+        "input": "Sentence:\n\nIf every monkey chased Lewis, then every monkey kicked Lewis.\n\nAbbreviations:\n\nO: [1] is a monkey\nR: [1] chased [2]\nb: Lewis\nQ: [1] kicked [2]",
+        "scope": "CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH"
+      },
+      "source_sha256": "c606d0dabb5d27b3f59dac52c6421b5d2c9c6cec2f0649be3a831bca6b97fde6",
+      "arms": {
+        "C": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer."
+            },
+            {
+              "role": "user",
+              "content": "{\"input\": \"Sentence:\\n\\nIf every monkey chased Lewis, then every monkey kicked Lewis.\\n\\nAbbreviations:\\n\\nO: [1] is a monkey\\nR: [1] chased [2]\\nb: Lewis\\nQ: [1] kicked [2]\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"input\": \"Sentence:\\n\\nIf every monkey chased Lewis, then every monkey kicked Lewis.\\n\\nAbbreviations:\\n\\nO: [1] is a monkey\\nR: [1] chased [2]\\nb: Lewis\\nQ: [1] kicked [2]\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "{\"formula\":\"(\u2200x(Ox\u2192Rxb)\u2192\u2200y(Oy\u2192Qyb))\"}",
+            "response_sha256": "c1eededb3d1c26cac89b79a6b9b20b3b165b5620e9030fa33d35e473f3fa1123",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 1455,
+            "reasoning_sha256": "a4e1ff7926556c41876e53a6f6c977e0e975ec8546d4025ecfeb5d0222ffee3e",
+            "usage": {
+              "prompt_tokens": 310,
+              "completion_tokens": 413,
+              "reasoning_tokens": 390,
+              "cache_hit_tokens": 0,
+              "cache_miss_tokens": 310
+            },
+            "finish_reason": "stop",
+            "rated_cost_usd": 0.0005885999999999999
+          },
+          "answer": {
+            "formula": "(\u2200x(Ox\u2192Rxb)\u2192\u2200y(Oy\u2192Qyb))"
+          },
+          "invalid_reason": null,
+          "semantic_verification": {
+            "status": "EQUIVALENT",
+            "scope": "FULL_FOL_FORMAL_INPUT_ONLY",
+            "reason_unknown": null
+          }
+        },
+        "P": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer. Individuate each constant and bound variable, track which quantifier binds every occurrence, and preserve clause scope under negation. Do not interchange forall-exists with exists-forall. Consider a small counterexample to competing readings, then translate the stated sentence without adding existence or assuming distinct named objects. This procedure does not supply a reference formula."
+            },
+            {
+              "role": "user",
+              "content": "{\"input\": \"Sentence:\\n\\nIf every monkey chased Lewis, then every monkey kicked Lewis.\\n\\nAbbreviations:\\n\\nO: [1] is a monkey\\nR: [1] chased [2]\\nb: Lewis\\nQ: [1] kicked [2]\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer. Individuate each constant and bound variable, track which quantifier binds every occurrence, and preserve clause scope under negation. Do not interchange forall-exists with exists-forall. Consider a small counterexample to competing readings, then translate the stated sentence without adding existence or assuming distinct named objects. This procedure does not supply a reference formula."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"input\": \"Sentence:\\n\\nIf every monkey chased Lewis, then every monkey kicked Lewis.\\n\\nAbbreviations:\\n\\nO: [1] is a monkey\\nR: [1] chased [2]\\nb: Lewis\\nQ: [1] kicked [2]\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "{\"formula\":\"(\u2200x(Ox\u2192Rxb)\u2192\u2200x(Ox\u2192Qxb))\"}",
+            "response_sha256": "66fc472a3395cd62abab83f505b52c95e2e4a2b39b1efe02abfeca67f28051c0",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 1748,
+            "reasoning_sha256": "9c474198a07b389edf19d64a18209473d81d1800b49e278e2bbdf1fa2b0b5533",
+            "usage": {
+              "prompt_tokens": 379,
+              "completion_tokens": 493,
+              "reasoning_tokens": 470,
+              "cache_hit_tokens": 128,
+              "cache_miss_tokens": 251
+            },
+            "finish_reason": "stop",
+            "rated_cost_usd": 0.0006676680000000001
+          },
+          "answer": {
+            "formula": "(\u2200x(Ox\u2192Rxb)\u2192\u2200x(Ox\u2192Qxb))"
+          },
+          "invalid_reason": null,
+          "semantic_verification": {
+            "status": "EQUIVALENT",
+            "scope": "FULL_FOL_FORMAL_INPUT_ONLY",
+            "reason_unknown": null
+          }
+        }
+      },
+      "reference_formula": "(\u2200x(Ox\u2192Rxb)\u2192\u2200x(Ox\u2192Qxb))"
+    },
+    {
+      "id": 5303,
+      "source": {
+        "input": "Sentence:\n\nNot all monkeys ate just in case Hazel isn't hungry.\n\nAbbreviations:\n\nO: [1] is a monkey\nI: [1] ate\nL: [1] is hungry\nc: Hazel",
+        "scope": "CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH"
+      },
+      "source_sha256": "94e7fedca11ec63cd2899f925eeac2e91119447af451ed5e90b1f8a831a68742",
+      "arms": {
+        "C": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer."
+            },
+            {
+              "role": "user",
+              "content": "{\"input\": \"Sentence:\\n\\nNot all monkeys ate just in case Hazel isn't hungry.\\n\\nAbbreviations:\\n\\nO: [1] is a monkey\\nI: [1] ate\\nL: [1] is hungry\\nc: Hazel\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"input\": \"Sentence:\\n\\nNot all monkeys ate just in case Hazel isn't hungry.\\n\\nAbbreviations:\\n\\nO: [1] is a monkey\\nI: [1] ate\\nL: [1] is hungry\\nc: Hazel\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "",
+            "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 16057,
+            "reasoning_sha256": "20f4eb53b2602429ab3400fec1f0a9619074aafb12b81433a56b52b67c5b1620",
+            "usage": {
+              "prompt_tokens": 307,
+              "completion_tokens": 4096,
+              "reasoning_tokens": 4096,
+              "cache_hit_tokens": 0,
+              "cache_miss_tokens": 307
+            },
+            "finish_reason": "length",
+            "rated_cost_usd": 0.0050073
+          },
+          "answer": null,
+          "invalid_reason": "invalid formula output",
+          "semantic_verification": {
+            "status": "INVALID_OR_NOT_COMPLETED"
+          }
+        },
+        "P": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer. Individuate each constant and bound variable, track which quantifier binds every occurrence, and preserve clause scope under negation. Do not interchange forall-exists with exists-forall. Consider a small counterexample to competing readings, then translate the stated sentence without adding existence or assuming distinct named objects. This procedure does not supply a reference formula."
+            },
+            {
+              "role": "user",
+              "content": "{\"input\": \"Sentence:\\n\\nNot all monkeys ate just in case Hazel isn't hungry.\\n\\nAbbreviations:\\n\\nO: [1] is a monkey\\nI: [1] ate\\nL: [1] is hungry\\nc: Hazel\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer. Individuate each constant and bound variable, track which quantifier binds every occurrence, and preserve clause scope under negation. Do not interchange forall-exists with exists-forall. Consider a small counterexample to competing readings, then translate the stated sentence without adding existence or assuming distinct named objects. This procedure does not supply a reference formula."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"input\": \"Sentence:\\n\\nNot all monkeys ate just in case Hazel isn't hungry.\\n\\nAbbreviations:\\n\\nO: [1] is a monkey\\nI: [1] ate\\nL: [1] is hungry\\nc: Hazel\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "",
+            "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 15470,
+            "reasoning_sha256": "6dca3a5eb87fe041621461834c38ff7b013a09b97a78c7a89abec47a897353cc",
+            "usage": {
+              "prompt_tokens": 376,
+              "completion_tokens": 4096,
+              "reasoning_tokens": 4096,
+              "cache_hit_tokens": 128,
+              "cache_miss_tokens": 248
+            },
+            "finish_reason": "length",
+            "rated_cost_usd": 0.004990367999999999
+          },
+          "answer": null,
+          "invalid_reason": "invalid formula output",
+          "semantic_verification": {
+            "status": "INVALID_OR_NOT_COMPLETED"
+          }
+        }
+      },
+      "reference_formula": "(\u2203x(Ox\u2227\u00acIx)\u2194\u00acLc)"
+    },
+    {
+      "id": 5927,
+      "source": {
+        "input": "Sentence:\n\nNot all donkeys drank if and only if no monkeys saw Lewis.\n\nAbbreviations:\n\nM: [1] is a donkey\nH: [1] drank\nO: [1] is a monkey\nP: [1] saw [2]\nb: Lewis",
+        "scope": "CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH"
+      },
+      "source_sha256": "c756ea714813c928c00633acd4cb80cdf2b55390bb9ecd0309662ee311beaaf9",
+      "arms": {
+        "C": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer."
+            },
+            {
+              "role": "user",
+              "content": "{\"input\": \"Sentence:\\n\\nNot all donkeys drank if and only if no monkeys saw Lewis.\\n\\nAbbreviations:\\n\\nM: [1] is a donkey\\nH: [1] drank\\nO: [1] is a monkey\\nP: [1] saw [2]\\nb: Lewis\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"input\": \"Sentence:\\n\\nNot all donkeys drank if and only if no monkeys saw Lewis.\\n\\nAbbreviations:\\n\\nM: [1] is a donkey\\nH: [1] drank\\nO: [1] is a monkey\\nP: [1] saw [2]\\nb: Lewis\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "{\"formula\":\"(\u00ac\u2200s(Ms\u2192Hs)\u2194\u00ac\u2203t(Ot\u2227Ptb))\"}",
+            "response_sha256": "6d101bb15f0fa36e1497ed4470130e7044e55da8f91f0fbea6e7dcf6ba4875b4",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 4486,
+            "reasoning_sha256": "058c7d56d59358e74f2d05ce469cbc1804434f8c546c1332799f2d139ce7c835",
+            "usage": {
+              "prompt_tokens": 319,
+              "completion_tokens": 1304,
+              "reasoning_tokens": 1277,
+              "cache_hit_tokens": 0,
+              "cache_miss_tokens": 319
+            },
+            "finish_reason": "stop",
+            "rated_cost_usd": 0.0016605
+          },
+          "answer": {
+            "formula": "(\u00ac\u2200s(Ms\u2192Hs)\u2194\u00ac\u2203t(Ot\u2227Ptb))"
+          },
+          "invalid_reason": null,
+          "semantic_verification": {
+            "status": "EQUIVALENT",
+            "scope": "FULL_FOL_FORMAL_INPUT_ONLY",
+            "reason_unknown": null
+          }
+        },
+        "P": {
+          "actual_messages": [
+            {
+              "role": "system",
+              "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer. Individuate each constant and bound variable, track which quantifier binds every occurrence, and preserve clause scope under negation. Do not interchange forall-exists with exists-forall. Consider a small counterexample to competing readings, then translate the stated sentence without adding existence or assuming distinct named objects. This procedure does not supply a reference formula."
+            },
+            {
+              "role": "user",
+              "content": "{\"input\": \"Sentence:\\n\\nNot all donkeys drank if and only if no monkeys saw Lewis.\\n\\nAbbreviations:\\n\\nM: [1] is a donkey\\nH: [1] drank\\nO: [1] is a monkey\\nP: [1] saw [2]\\nb: Lewis\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+            }
+          ],
+          "response": {
+            "actual_request": {
+              "model": "deepseek-flash",
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Translate the full controlled-English sentence using exactly the supplied abbreviation key. This is formal sentence meaning, not private psychology or world knowledge. Consider all quantifier scopes and clause attachments carefully. Return exactly one JSON object with only formula, a single formula string; no other keys or markdown. Example of output SYNTAX only: {\"formula\":\"\u2200xFx\"}. Grammar: uppercase one-letter unary/binary predicate followed by one/two lowercase terms; variables s..z, constants a..r; negation \u00ac, quantifiers \u2200 or \u2203 directly bind a variable followed by formula; binary forms (formula\u2227formula), (formula\u2228formula), (formula\u2192formula), (formula\u2194formula). No equality, free variables, invented key symbols, brackets or English. The example is not the answer. Individuate each constant and bound variable, track which quantifier binds every occurrence, and preserve clause scope under negation. Do not interchange forall-exists with exists-forall. Consider a small counterexample to competing readings, then translate the stated sentence without adding existence or assuming distinct named objects. This procedure does not supply a reference formula."
+                },
+                {
+                  "role": "user",
+                  "content": "{\"input\": \"Sentence:\\n\\nNot all donkeys drank if and only if no monkeys saw Lewis.\\n\\nAbbreviations:\\n\\nM: [1] is a donkey\\nH: [1] drank\\nO: [1] is a monkey\\nP: [1] saw [2]\\nb: Lewis\", \"scope\": \"CONTROLLED_FORMAL_SYMBOLIZATION_NOT_PRIVATE_MENTAL_OR_WORLD_TRUTH\"}"
+                }
+              ],
+              "max_tokens": 4096,
+              "reasoning_effort": "high",
+              "top_p": 1,
+              "extra_body": {
+                "thinking": {
+                  "type": "enabled"
+                }
+              },
+              "response_format": {
+                "type": "json_object"
+              }
+            },
+            "raw_response": "{\"formula\":\"(\u00ac\u2200s(Ms\u2192Hs)\u2194\u00ac\u2203t(Ot\u2227Ptb))\"}",
+            "response_sha256": "6d101bb15f0fa36e1497ed4470130e7044e55da8f91f0fbea6e7dcf6ba4875b4",
+            "response_model": "deepseek-flash",
+            "reasoning_chars": 6995,
+            "reasoning_sha256": "b7dd8355a70c380803254414ce589070bd3214ffae80877a5a80b14d9f0da576",
+            "usage": {
+              "prompt_tokens": 388,
+              "completion_tokens": 2022,
+              "reasoning_tokens": 1995,
+              "cache_hit_tokens": 128,
+              "cache_miss_tokens": 260
+            },
+            "finish_reason": "stop",
+            "rated_cost_usd": 0.0025051680000000003
+          },
+          "answer": {
+            "formula": "(\u00ac\u2200s(Ms\u2192Hs)\u2194\u00ac\u2203t(Ot\u2227Ptb))"
+          },
+          "invalid_reason": null,
+          "semantic_verification": {
+            "status": "EQUIVALENT",
+            "scope": "FULL_FOL_FORMAL_INPUT_ONLY",
+            "reason_unknown": null
+          }
+        }
+      },
+      "reference_formula": "(\u2203x(Mx\u2227\u00acHx)\u2194\u00ac\u2203x(Ox\u2227Pxb))"
+    }
+  ],
+  "failures": [],
+  "scorer_unknown_ids": [],
+  "metrics": {
+    "C": {
+      "calls": 4,
+      "rated_cost_usd": 0.0085053,
+      "wall_seconds": 34.17061416800004
+    },
+    "P": {
+      "calls": 4,
+      "rated_cost_usd": 0.010108404,
+      "wall_seconds": 39.58398427999998
+    }
+  },
+  "total_ledger_usd": 0.018613703999999995
+}

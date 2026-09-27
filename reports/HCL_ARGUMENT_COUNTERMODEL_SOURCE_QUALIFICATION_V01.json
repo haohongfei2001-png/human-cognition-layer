@@ -1,0 +1,27 @@
+{
+  "source": "https://github.com/brianrabern/LogicSkills",
+  "revision": "31b175699127b766e64eb0c550893396404f665b",
+  "path": "Assessors/human/formatted_countermodel_questions.json",
+  "git_blob": "46545e904d22827f9d07a73cc23caa16bd70ca4e",
+  "bytes": 265181,
+  "sha256": "cd57f6d31afa19e83e48e087b22db4296a7ef9f56ff83aa3324f39a62cef60c0",
+  "rows": 300,
+  "schema": "dict: source id -> public formatted formal argument task",
+  "data_license": "CC BY4.0; official dataset README/card",
+  "human_folder_not_human_narrative": "This is a human-facing format of generated formal arguments, not human-annotated psychological truth. Every task explicitly asks for a countermodel of an invalid argument over fixed domain [0,1,2]; this task specification is public input, not withheld outcome leakage. No native witness/reference model is present in this file.",
+  "exposed_format_example_excluded": "62d4f6152155aa29",
+  "source_only_selection": "frozen salt/hash ordering, four distinct complete public argument tasks, parse validation only; no tool/native/provider success filtering",
+  "manifest_sha256": "67840e20f836b889e0faa5a9e1069a83c712a991971edae9cf4684b591a251c7",
+  "source_argument_parse_coverage": 300,
+  "selected_provider_calls": 0,
+  "selected_solver_witnesses_computed": 0,
+  "same_provider_strong_reasoning_gap": "UNKNOWN; external source/paper does not establish current deepseek-flash deficit",
+  "scope": "Explicit formal counterexample construction only. Not NL formalization/narrative/social/philosophical judgement efficacy. Existing symbolic verifier used as an openly generic T baseline, not specialized HCL.",
+  "alternative_FOLIO": "Original FOLIO human-written natural premises are potentially relevant, but recent 2606.02837 reports incorrect formalizations/ambiguous wording; corrected release/license not qualified here. Search displayed one v0.0 validation example; treat that example as development-exposed, never fresh. Do not change existing gold to solve this concern.",
+  "primary_links": [
+    "https://arxiv.org/abs/2602.06533v3",
+    "https://aclanthology.org/2024.emnlp-main.1229/",
+    "https://arxiv.org/abs/2606.02837"
+  ],
+  "LongMemEval_consumed": false
+}

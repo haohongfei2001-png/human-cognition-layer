@@ -1,0 +1,87 @@
+{
+  "status": "SUCCESS",
+  "calls": {
+    "C": 4,
+    "P": 4
+  },
+  "correct": {
+    "C": 3,
+    "P": 3
+  },
+  "invalid": {
+    "C": 1,
+    "P": 1
+  },
+  "unknown": [],
+  "successful_usage_rated_usd": 0.018613703999999995,
+  "total_ledger_usd": 0.018613703999999995,
+  "input_utf8bytes": {
+    "C": 4181,
+    "P": 5745
+  },
+  "reasoning_plus_final_chars": {
+    "C": 25354,
+    "P": 29462
+  },
+  "cases": [
+    {
+      "id": 6071,
+      "checks": {
+        "C": {
+          "status": "EQUIVALENT",
+          "scope": "FULL_FOL_FORMAL_INPUT_ONLY",
+          "reason_unknown": null
+        },
+        "P": {
+          "status": "EQUIVALENT",
+          "scope": "FULL_FOL_FORMAL_INPUT_ONLY",
+          "reason_unknown": null
+        }
+      }
+    },
+    {
+      "id": 4475,
+      "checks": {
+        "C": {
+          "status": "EQUIVALENT",
+          "scope": "FULL_FOL_FORMAL_INPUT_ONLY",
+          "reason_unknown": null
+        },
+        "P": {
+          "status": "EQUIVALENT",
+          "scope": "FULL_FOL_FORMAL_INPUT_ONLY",
+          "reason_unknown": null
+        }
+      }
+    },
+    {
+      "id": 5303,
+      "checks": {
+        "C": {
+          "status": "INVALID"
+        },
+        "P": {
+          "status": "INVALID"
+        }
+      }
+    },
+    {
+      "id": 5927,
+      "checks": {
+        "C": {
+          "status": "EQUIVALENT",
+          "scope": "FULL_FOL_FORMAL_INPUT_ONLY",
+          "reason_unknown": null
+        },
+        "P": {
+          "status": "EQUIVALENT",
+          "scope": "FULL_FOL_FORMAL_INPUT_ONLY",
+          "reason_unknown": null
+        }
+      }
+    }
+  ],
+  "source_sha256": "6c39b461f428536f7b0870b2179cee216d59d7bf4122b213aee85ff5b44d7fe8",
+  "manifest_sha256": "b6863a5d3d4b49dde75ce20a6eb67a1567ea78d6f693467137fdec6767db1f31",
+  "claims": "Development-only controlled-English instrument; no full benchmark or psychology efficacy"
+}
