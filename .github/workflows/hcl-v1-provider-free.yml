@@ -17,4 +17,4 @@ jobs:
         with:
           python-version: '3.12'
       - name: Provider-free registry tests
-        run: python -m unittest discover -s tests -p 'test_v1*.py' -v
+        run: python -m unittest discover -s tests -p 'test_v1_*.py' -v
