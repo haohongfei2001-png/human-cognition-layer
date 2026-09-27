@@ -1,3 +1,5 @@
+> Historical v01 protocol: execution is closed and utility INVALID_OUTPUT_CONTRACT_UTILITY_INCONCLUSIVE. See final development closure and v02 repair protocol. Original v01 contract and scored failures are preserved.
+
 # v0.10 four public author-example development diagnostic
 
 Status: provider-free package; **zero v0.10 provider calls**.

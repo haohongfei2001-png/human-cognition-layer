@@ -6,7 +6,15 @@ Human Cognition Layer (HCL)
 
 ## Current phase
 
-**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 generic-tool development signal; v0.10 argumentation candidate staged**
+**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 generic-tool development signal; v0.10 utility protocol INVALID; non-fresh contract repair staged**
+
+## v0.10 current result and concrete next action
+
+V01 cloud run `36295445865` completed twelve calls at reported USD 0.0050028. Shared output wording ambiguously located reason; all twelve outputs failed the frozen strict format. Scientific utility is **INVALID / inconclusive**, not a capability zero score or evidence of C/P/T equivalence. REVISE/DEMOTE pending one minimal non-fresh output-contract repair. Actual outputs and scored failures are immutable, four author-example families permanently development-consumed, no fresh pilot or architecture expansion authorized.
+
+The v02 runner and cloud workflow are staged with explicit top-level reason, unchanged runtime/source/questions/scoring, independent zero authorization, 12-call / USD 0.05 cap. Provider-free request-path regressions verify the repair, not LLM success. Only separate owner budget approval blocks actual v02 execution; no unused v01 budget carries forward. LongMemEval remains untouched.
+
+See `reports/HCL_V10_ARGUMENTATION_FINAL_DEVELOPMENT_CLOSURE.md`, `reports/HCL_V10_PYARG_DEV_V01_RECEIPT.json`, `docs/HCL_V10_PYARG_DEVELOPMENT_REPAIR_V02.md`. Historical staged candidate/preflight sections below describe the before-run state, superseded by this result.
 
 ## Core doctrine
 

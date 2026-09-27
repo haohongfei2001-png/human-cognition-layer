@@ -8,6 +8,8 @@ Human Cognition Layer (HCL) 是一个面向**复杂人类认知建模、状态�
 
 **Canonical live state:** [STATUS.md](STATUS.md)
 
+v0.10 四例运行已关闭：共享输出契约有歧义，12 个答案均格式无效，不能作为能力成绩。原始证据永久保留；独立 v02 格式修复已准备，仅能做 non-fresh development repair，需新单独预算。详见 [closure](reports/HCL_V10_ARGUMENTATION_FINAL_DEVELOPMENT_CLOSURE.md)。
+
 ## Research thesis
 
 **The base model is replaceable. The cognition layer is the asset.**
