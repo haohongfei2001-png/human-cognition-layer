@@ -1,0 +1,38 @@
+{
+  "scope": "Single-agent source-first shuffled-case/arm-masked audit before opening actual mapping, references or aggregates. Developer previously knew category-label allocation/balance; source prose and styles can reveal category/arm. This is not independent human blinding. No score/parser rescue or reference replacement.",
+  "cases": {
+    "A": {
+      "1": "No follows explicit invariability of inclusion over reputation; refusal is motivated solely by being seen with an ethnic group. Source-described tension, not independently inferred true affect.",
+      "2": "Same source-supported No; correctly separates secondary reputation from dominant inclusion."
+    },
+    "B": {
+      "1": "Yes follows explicit town-principles dominance over prior good deeds and inconvenience. No subjective moral verdict needed.",
+      "2": "Same source-supported Yes; quiet tension was explicitly in profile, not inferred private truth."
+    },
+    "C": {
+      "1": "Yes is a plausible intended reading: patient-care goal maintained despite doubt; proposed program intended to improve care. Source does not guarantee actual benefit or settle all staff-trust constraints; likely reading only.",
+      "2": "Strict invalid answer; raw JSON appears syntactically well formed with Yes, but reason exceeds the frozen 500-character limit. Same substantive intended reading, no semantic gain inferred from compliant versus noncompliant serialization. Do not rescue/retry."
+    },
+    "D": {
+      "1": "No is plausible under the constructed priority contrast. However financial efficiency is not logically equivalent to rejecting all funded equity programs; actual lifetime costs/efficiency comparison unstated. Keep boundary between intended reading and universal moral/economic conclusion.",
+      "2": "Same plausible intended No with same unsupported strong claim that supporting activism directly conflicts with efficiency. Not an independently proven financial fact."
+    },
+    "E": {
+      "1": "Unconditional Yes not established: source presents investigative benefit and unresolved racial bias risk; profile balances fairness and efficiency without prioritizing one. Absence of explicit rejection does not show acceptance. Ambiguous supported without assuming equal values always cause indecision.",
+      "2": "Reason is conditional can-be-acceptable-if-fair but label Yes unconditional; fair implementation was not established. Same unresolved source conflict, no semantic improvement."
+    },
+    "F": {
+      "1": "Invents job-security dominance and A accepting loyalty as honesty. Ann's pressure/rationalization is not A's stated moral endorsement. Public A balances job security with integrity; no conflict resolution given. Ambiguous plausible.",
+      "2": "Same unsupported priority inference; harmonious balance does not imply approving fabricated expense claims. No source-grounded gain."
+    },
+    "G": {
+      "1": "Ambiguous source-supported: current profile explicitly favors neither safety/privacy nor truthful photography, source poses direct conflict with no endorsed resolution. Revision from privacy-only to equal regard preserved.",
+      "2": "Same source-supported Ambiguous; no claim that all equal-value cases automatically indecisive."
+    },
+    "H": {
+      "1": "Conflates Rachel's observed shipping practice with Character A's stated willingness. A's profile supplies no such action or acceptance of data-loss risk. Both competitive edge and highest quality stated; no permitted tradeoff established. Ambiguous plausible, not objective moral verdict.",
+      "2": "Less explicit identity conflation, but still assumes competitive necessity and data-loss risk meet A's acceptable quality standard. Source does not resolve A's preferences over this tradeoff; unconditional Yes unsupported."
+    }
+  },
+  "provisional_conclusion": "All seven valid paired labels are identical. E/F/H have shared source-reading problems; A/B/G clear agreement; C has one strict invalid despite same raw label; D has intended-reading versus logical-necessity caveat. No observed source-supported thin-method semantic rescue in masked inspection."
+}

@@ -12,7 +12,9 @@ v0.10 格式修复完成：四例 non-fresh development repair 的 C/P/T = 1/4�
 
 间接回答开发筛查已关闭：八例中六例可评分，C/P 均为 5/6，无新增正确例，采用更简单的强直接回答。16 次调用费用约 USD 0.0029，授权归零；两例无多数标注和一例标注分歧完整保留。详见 [closure](reports/HCL_PRAGMATICS_CIRCA_FINAL_DEVELOPMENT_CLOSURE.md)。
 
-下一方向已冻结人物价值冲突／变化的八例开发筛查：比较强直接回答和薄方法，标签字段隔离，尚未付费调用，需另行授权 USD 0.05。见 [protocol](docs/HCL_VALUE_CLASH_DEVELOPMENT_V01.md)。
+人物价值冲突开发筛查也已关闭：严格 C/P 为 4/8、5/8，唯一新增正确例来自输出长度合规，语义新增为零，因此采用直接方法。16 次调用费用约 USD 0.0061，授权归零。详见 [closure](reports/HCL_VALUE_CLASH_FINAL_DEVELOPMENT_CLOSURE.md)。
+
+下一方向：已准备来源可追溯的通用叙事时间顺序工具，保留未知顺序和冲突，并冻结四个 TORQUE 开发情境的 C/P/T 比较包。尚无外部效用结论，尚未调用；独立上限 USD 0.10。见 [protocol](docs/HCL_NARRATIVE_ORDER_DEVELOPMENT_V01.md)。
 
 ## Research thesis
 
