@@ -1,3 +1,5 @@
+> Historical research doctrine. v1 activation policy is superseded by `HCL_V1_COGNITION_ROUTER.md` and current `STATUS.md`: base model first, minimal on-demand capability selection. Frozen historical evaluation treatments and receipts remain unchanged.
+
 # Module-First Doctrine
 
 ## Core thesis
