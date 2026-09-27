@@ -14,7 +14,7 @@ v0.10 格式修复完成：四例 non-fresh development repair 的 C/P/T = 1/4�
 
 人物价值冲突开发筛查也已关闭：严格 C/P 为 4/8、5/8，唯一新增正确例来自输出长度合规，语义新增为零，因此采用直接方法。16 次调用费用约 USD 0.0061，授权归零。详见 [closure](reports/HCL_VALUE_CLASH_FINAL_DEVELOPMENT_CLOSURE.md)。
 
-下一方向：已准备来源可追溯的通用叙事时间顺序工具，保留未知顺序和冲突，并冻结四个 TORQUE 开发情境的 C/P/T 比较包。尚无外部效用结论，尚未调用；独立上限 USD 0.10。见 [protocol](docs/HCL_NARRATIVE_ORDER_DEVELOPMENT_V01.md)。
+叙事时间顺序 v01 请求被 API 拒绝：一次图构建请求，无有效返回，无可比较成绩；保留 INCONCLUSIVE 证据，授权归零。已免费修复 JSON 请求格式与失败记录并冻结同四例 non-fresh 重跑方案，最多16次、新上限 USD0.10。见 [closure](reports/HCL_NARRATIVE_TORQUE_DEV_V01_INVALID_TRANSPORT_CLOSURE.md) 与 [repair](docs/HCL_NARRATIVE_ORDER_TRANSPORT_REPAIR_V02.md)。
 
 ## Research thesis
 
@@ -410,4 +410,4 @@ requires separate USD 0.05 authorization; planning cap USD 0.0426. No v0.10
 provider call; cost variable unset, trigger absent. v0.9 variable zero;
 LongMemEval sealed. All actual inputs/state/calculations/raw answers archived.
 
-**Current gate: V10_PROVIDER_FREE_CI_THEN_SEPARATE_DEVELOPMENT_AUTHORIZATION_USD_0_05**.
+**Historical gate (superseded): V10_PROVIDER_FREE_CI_THEN_SEPARATE_DEVELOPMENT_AUTHORIZATION_USD_0_05**.

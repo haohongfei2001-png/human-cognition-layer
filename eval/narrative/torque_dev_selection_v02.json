@@ -1,0 +1,30 @@
+{
+  "format": "hcl-narrative-torque-development-v02",
+  "revision": "ab27019cc6a317fde3c879900499f02acce8b16d",
+  "data_sha256": "7a8dd84c984f28a5284bdfda57b447218e1269cd2eaf05b5e173394fc1522434",
+  "salt": "HCL-NARRATIVE-ORDER-TORQUE-DEVELOPMENT-V01",
+  "scope": "non-fresh transport repair of four frozen v01 development sources/questions; no efficacy or provider-gap proof",
+  "question_filter": "non-default and before/after/earlier/later surface terms; no gold/outcome filtering",
+  "cases": [
+    {
+      "id": "docid_XIN_ENG_20051115.0405_sentid_9",
+      "source_sha256": "8b0e7f3d23aa1987693ce532f8883edd1869cb53dcf0867808ba8d2ba14fdb91",
+      "question_sha256": "31e71693541bec7138689f7cc420f933330b83a36cf67c3ba981195c7c25faf2"
+    },
+    {
+      "id": "docid_AFP_ENG_20061216.0046_sentid_5",
+      "source_sha256": "41729e9f3a8e8d99b37f574568cce966e13122ef2a6d91778190e581f3127960",
+      "question_sha256": "7b7449f6ac7e3e52cd8e2a1606cfc502b42ce667a7d0b44d724362a60334b9e0"
+    },
+    {
+      "id": "docid_AFP_ENG_19970413.0281_sentid_0",
+      "source_sha256": "050ae68fd010cdd3319dfc88f04a0aeefeae2c697ff93d1ff4409fb1d20717c0",
+      "question_sha256": "75d45541935f44e3b097ad4f4d6935220b92297d92853bc0f8f97172f7479308"
+    },
+    {
+      "id": "docid_AFP_ENG_19970418.0168_sentid_5",
+      "source_sha256": "ad45878c33ba1486fadd771140fadb9e3fb94251a64c533225d7a02c586c3ca4",
+      "question_sha256": "0aaa881cf0e4e2dfaa5c33c9243bbc63e951ea2952635f04b0b22adf845068ac"
+    }
+  ]
+}
