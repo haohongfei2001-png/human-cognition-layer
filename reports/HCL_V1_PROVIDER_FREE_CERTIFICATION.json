@@ -1,0 +1,78 @@
+{
+  "schema": "hcl-v1-runtime-certification-v1",
+  "certified_runtime_main_sha": "9070bbcf518b5aa69b92502949998413e0960d1d",
+  "merged_prs": [
+    112,
+    113
+  ],
+  "v1_tests": 42,
+  "historical_tests": 176,
+  "total_tests": 218,
+  "exact_main_runs": [
+    {
+      "conclusion": "success",
+      "databaseId": 36347078980,
+      "headSha": "9070bbcf518b5aa69b92502949998413e0960d1d",
+      "name": "HCL Formal Argument Countermodel Provider-Free Source and Witness Preflight",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 36347078899,
+      "headSha": "9070bbcf518b5aa69b92502949998413e0960d1d",
+      "name": "HCL v0.6 FANToM C/P/G/D Fresh Provider-Free Preflight",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 36347078879,
+      "headSha": "9070bbcf518b5aa69b92502949998413e0960d1d",
+      "name": "HCL Conceptual Quantifier Provider-Free Source and Witness Preflight",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 36347078930,
+      "headSha": "9070bbcf518b5aa69b92502949998413e0960d1d",
+      "name": "HCL Natural Argument FOLIO Provider-Free Source and Firewall Preflight",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 36347078904,
+      "headSha": "9070bbcf518b5aa69b92502949998413e0960d1d",
+      "name": "HCL v0.10 Argumentation Provider-Free Preflight",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 36347078900,
+      "headSha": "9070bbcf518b5aa69b92502949998413e0960d1d",
+      "name": "HCL v1 Provider-Free Integration",
+      "status": "completed"
+    }
+  ],
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_DEPRIORITIZED_UNMODIFIED",
+  "source_audit": {
+    "state": "NO_QUALIFIED_INTEGRATED_SELECTION",
+    "bigtom_revision": "fe647d680bddb69f738519313bed625f9e93b549",
+    "dream_revision": "bb64644c209cb6497bb9e13244fbf220c900a740",
+    "dream_dev_sha256": "9d5af2e580d809c73872a7dd43fe93d0b07c6f6086b04a9a9a1917603009d961",
+    "dream_source_exposed_families": [
+      "21-43",
+      "9-70",
+      "14-83",
+      "12-281",
+      "5-149",
+      "20-55",
+      "16-158",
+      "1-34"
+    ],
+    "gold_displayed_or_used_for_selection": false,
+    "provider_consumed_families": []
+  },
+  "next_gate": "HCL_V1_INTEGRATED_SOURCE_QUALIFICATION",
+  "owner_action_required": false
+}
