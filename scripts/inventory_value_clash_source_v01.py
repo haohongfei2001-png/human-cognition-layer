@@ -1,9 +1,9 @@
 """Provider-free source inventory; no cases, labels or character prose printed."""
-import argparse,csv,hashlib,json
+import argparse,csv,hashlib,json,io
 from pathlib import Path
 PIN='744ec8d62681038a9f44aaba2f737ebd83e8b0d3'
 def inventory(path):
- data=path.read_bytes();rows=list(csv.DictReader(data.decode('utf-8-sig').splitlines()))
+ data=path.read_bytes();rows=list(csv.DictReader(io.StringIO(data.decode('utf-8-sig'))))
  assert len(rows)==345 and len({r['id'] for r in rows})==345
  required={'id','situation','action','topic','source'}
  assert required<=set(rows[0])

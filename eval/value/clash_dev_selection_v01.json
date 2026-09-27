@@ -1,0 +1,53 @@
+{
+  "format": "hcl-value-clash-development-v01",
+  "source_repo": "launch/CLASH",
+  "revision": "744ec8d62681038a9f44aaba2f737ebd83e8b0d3",
+  "data_sha256": "d8f36e232670f3e20762258994930ac10b7f47e2360a461f1cd87ec72ccb92f3",
+  "salt": "HCL-VALUE-CLASH-DEVELOPMENT-V01",
+  "scope": "eight disjoint public constructed-character readings; category-balanced development method screen, not fresh efficacy or real mental truth",
+  "profile_allocation": [
+    "character - simple, ambiguous",
+    "character - swayed, yes",
+    "character - half-shift accept, ambiguous",
+    "character - false-shift, no",
+    "character - simple, ambiguous",
+    "character - swayed, no",
+    "character - half-shift unaccept, ambiguous",
+    "character - false-shift, yes"
+  ],
+  "exclude_first_csv_rows": 20,
+  "cases": [
+    {
+      "id": "61-john",
+      "source_sha256": "090c9dd05a4969ee7b761f9873ac92b9602dea5a064ff9dffecb1dfd429a6321"
+    },
+    {
+      "id": "31-scug",
+      "source_sha256": "26628678b66d8d197d33bc60cac5d73c79a668a325939d6b72361da0d1997147"
+    },
+    {
+      "id": "69-medeng",
+      "source_sha256": "c4a66f87467aad7b61ebe9122935e409a0425fb1e5d22bbf1c4aaeb730f9b92f"
+    },
+    {
+      "id": "93-ama",
+      "source_sha256": "649a15447f9f51dab9d09cb4fa90f2c0815af7907cd0f06acd879b27fcba3b3c"
+    },
+    {
+      "id": "19-scub",
+      "source_sha256": "b996eb8343df51b6dcbc6e5b7dfb1d525c39b8acf13c4ec128f685ec7639e166"
+    },
+    {
+      "id": "43-scug",
+      "source_sha256": "e200a9d5bef762ace27b47a2cb2780d85a24098626f0cbff417f513aa7a58b36"
+    },
+    {
+      "id": "17-medeng",
+      "source_sha256": "1c1710fa950831574bd8dc9ce9a25ed97495c98f58629fa553a26f1e1b42c72e"
+    },
+    {
+      "id": "685-ama",
+      "source_sha256": "af204abd3abf9245b8ec1fdfcf8d46f7121ecfe448fd006d0abf2bb1d9518e16"
+    }
+  ]
+}

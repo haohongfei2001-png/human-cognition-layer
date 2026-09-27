@@ -1,10 +1,10 @@
 name: HCL Value Perspective Public Source Inventory (Zero Provider Calls)
 on:
   pull_request:
-    paths: ["scripts/*value_clash*", "docs/HCL_VALUE*", ".github/workflows/hcl-value-clash-source-provider-free.yml"]
+    paths: ["hcl/value_perspective.py", "tests/test_value_perspective*", "eval/value/**", "scripts/*value_clash*", "docs/HCL_VALUE*", "reports/HCL_VALUE*", ".github/workflows/hcl-value-clash-source-provider-free.yml"]
   push:
     branches: [main]
-    paths: ["scripts/*value_clash*", "docs/HCL_VALUE*", ".github/workflows/hcl-value-clash-source-provider-free.yml"]
+    paths: ["hcl/value_perspective.py", "tests/test_value_perspective*", "eval/value/**", "scripts/*value_clash*", "docs/HCL_VALUE*", "reports/HCL_VALUE*", ".github/workflows/hcl-value-clash-source-provider-free.yml"]
 permissions:
   contents: read
 jobs:
@@ -16,13 +16,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - run: python -m pip install "pandas>=2.2,<3" "openai==2.14.0"
       - name: Inspect metadata without displaying case prose or references
         run: |
           mkdir -p .cache/clash
           curl --fail --location --retry 0 --connect-timeout 10 --max-time 60 'https://huggingface.co/datasets/launch/CLASH/resolve/744ec8d62681038a9f44aaba2f737ebd83e8b0d3/dataset.csv' -o .cache/clash/dataset.csv
+          python scripts/run_value_clash_dev_v01.py --source-file .cache/clash/dataset.csv --validate-only > .cache/clash/preflight.json
+          python -m unittest -v tests.test_value_perspective_dev_v01
           python scripts/inventory_value_clash_source_v01.py --source-file .cache/clash/dataset.csv --output .cache/clash/inventory.json
       - uses: actions/upload-artifact@v4
         with:
           name: hcl-value-clash-source-inventory-v01
-          path: .cache/clash/inventory.json
+          path: |
+            .cache/clash/inventory.json
+            .cache/clash/preflight.json
+            eval/value/clash_dev_selection_v01.json
           retention-days: 90

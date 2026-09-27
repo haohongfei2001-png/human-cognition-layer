@@ -12,6 +12,8 @@ v0.10 格式修复完成：四例 non-fresh development repair 的 C/P/T = 1/4�
 
 间接回答开发筛查已关闭：八例中六例可评分，C/P 均为 5/6，无新增正确例，采用更简单的强直接回答。16 次调用费用约 USD 0.0029，授权归零；两例无多数标注和一例标注分歧完整保留。详见 [closure](reports/HCL_PRAGMATICS_CIRCA_FINAL_DEVELOPMENT_CLOSURE.md)。
 
+下一方向已冻结人物价值冲突／变化的八例开发筛查：比较强直接回答和薄方法，标签字段隔离，尚未付费调用，需另行授权 USD 0.05。见 [protocol](docs/HCL_VALUE_CLASH_DEVELOPMENT_V01.md)。
+
 ## Research thesis
 
 **The base model is replaceable. The cognition layer is the asset.**
