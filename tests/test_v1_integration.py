@@ -128,7 +128,7 @@ class LayerTests(unittest.TestCase):
         self.assertEqual(own.context.belief[0]['status'],'AFFIRMED')
         self.assertEqual(own.context.explicit_intention[0]['goal_key'],'resign')
         self.assertEqual(own.context.affect_evidence,[])
-        self.assertNotIn('promotion',str(hidden.messages))
+        self.assertNotIn('resign',str(hidden.messages))
     def test_shared_affect_runtime_direct_report_only_when_selected(self):
         runtime=HCLV08Runtime();source=event(text='I feel relieved.')
         runtime.ingest_event(source)

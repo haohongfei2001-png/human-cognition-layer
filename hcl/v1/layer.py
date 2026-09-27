@@ -81,24 +81,37 @@ class HCLCognitionLayer:
                 # estimates remain a separate evidence-about-belief channel.
                 context.perspective = {'target_actor': target, 'observer_actor': request.observer_actor,
                                        'order': projected.perspective_order, 'event_ids': list(view.event_ids)}
-                context.belief = [b.as_dict() for b in projected.belief_estimates]
+                context.belief = [b.as_dict() for b in projected.belief_estimates
+                    if any((b.basis_evidence_ids, b.unresolved_challenge_evidence_ids,
+                            b.indirect_support_evidence_ids, b.indirect_counter_evidence_ids))]
+                # Historical v0.6 enumerates global proposition names even when
+                # an observer has zero supporting evidence. Never serialize
+                # those hidden/future names into the observer answer context.
                 if not context.belief:
                     context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT', 'reason': 'no committed belief evidence; exposure is not acceptance'})
             if 'intention' in plan.optional_capabilities:
                 projected = intentions.answer_context(target, observer_agent_id=request.observer_actor, **scope)
-                context.explicit_intention = [dict(row, evidence_level=evidence_level(row['provenance'])) for row in projected['intention_evidence']]
+                context.explicit_intention = [dict(row, evidence_level=('MODEL_INFERENCE' if row['signal'] == 'INFERRED_MOTIVATION' else evidence_level(row['provenance']))) for row in projected['intention_evidence']]
                 if not context.explicit_intention:
                     context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT', 'reason': 'no committed intention evidence; use source cautiously'})
             if 'affect' in plan.optional_capabilities:
                 if self.affects is not None:
                     projected = self.affects.answer_context(target, observer_agent_id=request.observer_actor or target, **scope)
-                    context.affect_evidence = projected['current_evidence']
+                    context.affect_evidence = [dict(row, evidence_level=('MODEL_INFERENCE' if row['strength'] == 'INFERRED' else evidence_level(row['provenance']))) for row in projected['current_evidence']]
                 if not context.affect_evidence:
                     context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT', 'reason': 'no committed affect evidence; action does not prove feeling'})
         context.evidence = [event_row(e) for e in visible]
         context.provenance = [{'source_event_id': e.event_id, 'source_id': e.source_id,
                                'actor_id': e.actor_id, 'evidence_level': 'SYSTEM_UNKNOWN',
                                'note': 'raw source; no private-state attribution inferred'} for e in visible]
+        support_ids = {eid for row in context.belief for key in (
+            'basis_evidence_ids', 'unresolved_challenge_evidence_ids',
+            'indirect_support_evidence_ids', 'indirect_counter_evidence_ids') for eid in row[key]}
+        context.provenance.extend({'evidence_id': row.evidence_id,
+            'source_event_id': row.source_event_id, 'source_agent_id': row.source_agent_id,
+            'evidence_level': evidence_level(row.evidence_kind.value),
+            'channel': 'evidence_about_belief_not_character_information'}
+            for row in perspectives.belief_evidence if row.evidence_id in support_ids)
         context.actors = sorted({a for a in (target, request.observer_actor) if a})
         context.unsupported_inferences = ['action implies motive', 'action implies private emotion',
                                           'information exposure implies belief revision',
