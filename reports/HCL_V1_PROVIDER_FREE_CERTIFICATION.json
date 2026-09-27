@@ -74,5 +74,7 @@
     "provider_consumed_families": []
   },
   "next_gate": "HCL_V1_INTEGRATED_SOURCE_QUALIFICATION",
-  "owner_action_required": false
+  "owner_action_required": false,
+  "historical_pr_check_scope": "GITHUB_PR_MERGE_CANDIDATE_NOT_LITERAL_HEAD_CHECKOUT",
+  "final_checkout_policy": "EXPLICIT_PR_HEAD_SHA_AND_ACTUAL_CHECKOUT_RECEIPT"
 }

@@ -13,6 +13,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -35,7 +37,7 @@ jobs:
       - name: Record exact-SHA provider-free certification
         run: |
           python - <<'PYCODE'
-          import hashlib, json, os, pathlib, re
+          import hashlib, json, os, pathlib, re, subprocess
           root = pathlib.Path('.')
           counts = {}
           for label, filename in [('v1', 'v1-integration.log'), ('historical', 'v1-historical.log')]:
@@ -47,7 +49,8 @@ jobs:
           digest = hashlib.sha256()
           for path in sorted(root.glob('hcl/**/*.py')):
               digest.update(str(path).encode() + b'\0' + path.read_bytes())
-          receipt = dict(schema='hcl-v1-provider-free-certification-v1', sha=os.environ['GITHUB_SHA'],
+          receipt = dict(schema='hcl-v1-provider-free-certification-v1', sha=subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+              workflow_event_sha=os.environ['GITHUB_SHA'],
               run_id=os.environ['GITHUB_RUN_ID'], event=os.environ['GITHUB_EVENT_NAME'],
               counts=counts, runtime_sha256=digest.hexdigest(), provider_calls=0,
               provider_spend_usd=0, scope='CORRECTNESS_NOT_EXTERNAL_UTILITY',

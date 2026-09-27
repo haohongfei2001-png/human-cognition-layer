@@ -35,7 +35,7 @@ All eight complete dialogue families are now **SOURCE_AUDIT_EXPOSED / NOT_PROVID
 
 ## Predeclared design for a future qualified source
 
-The unit is an unchanged native source plus native question/options. Each selected task must independently and audibly require at least two substantive cognitive operations, such as perspective/belief together with explicitly grounded intention or narrative/social integration. Bookkeeping/provenance does not count as a second cognition capability. No HCL-specific task rewriting, hidden generator truth or forced unique natural-language formalization.
+The unit is an unchanged native source plus native question/options. Each selected task must independently and auditably require at least two substantive cognitive operations, such as perspective/belief together with explicitly grounded intention or narrative/social integration. Bookkeeping/provenance does not count as a second cognition capability. No HCL-specific task rewriting, hidden generator truth or forced unique natural-language formalization.
 
 Freeze before any provider call: repository/data revision and license, exact source digest, source-only selection rule and identities, family-level exposure exclusions, item-level source/native semantic audit, target/observer/time interpretation, output contract, all four arm inputs, model identity and pricing/caps, scoring and masked source-first audit rules. If natural-language access or mental-state extraction is required, it must be source-grounded, auditable and separately counted. No oracle state for H. Any upstream normalization/access metadata must be the same public-source asset available to G; interpretation assumptions cannot be hidden privileges.
 
