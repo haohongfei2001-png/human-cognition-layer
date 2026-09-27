@@ -1,0 +1,69 @@
+{
+  "run": 36311038251,
+  "conclusion": "success",
+  "artifact": 10929256369,
+  "digest": "sha256:1bcca8d582e80f4cc2e8155a1bc7a4282e86988defac2177b18723e282cb4572",
+  "budget_after": 0,
+  "execution_sha": "8cff4ece6b54f76111153eeffe2ffa81b3275015",
+  "trigger_pr": 97,
+  "decision": "SIMPLIFY_DIRECT_METHOD_NO_SEMANTIC_INCREMENT",
+  "strict_C": 4,
+  "strict_P": 5,
+  "denominator": 8,
+  "P_only": 1,
+  "C_only": 0,
+  "both_correct": 4,
+  "both_wrong": 3,
+  "P_only_source_semantic_gains": 0,
+  "C_invalid": 1,
+  "P_invalid": 0,
+  "raw_labels_identical_pairs": 8,
+  "one_invalid_case_id": "685-ama",
+  "invalid_reason_chars": 640,
+  "frozen_reason_char_limit": 500,
+  "masked_notes_sha256": "f8c5fef62425c9f66d04bb89ed23de5b1e8e733b42cc409835d49c6fb2c3119b",
+  "masking_limitation": "Single-agent; developer knew category-label allocation, prose/styles may reveal categories/arms; not independent human blind",
+  "selection_sha256": "3e9ea8db79d768b18c4026cc0858288eaa563eb4517b1d0c1d7efadab383d965",
+  "file_sha256": {
+    "RESULTS": "71a42bd27ca896d93938ba93b0c2be0521e0d1ab199036345a5dc1c457506623",
+    "MASKED_AUDIT": "f8c5fef62425c9f66d04bb89ed23de5b1e8e733b42cc409835d49c6fb2c3119b",
+    "ARM_MAP": "9419bb3db2be8abb2c0ac0c4ec0787e48f919bc99c46d31b2ae36442ba36ee4c"
+  },
+  "metrics": {
+    "C": {
+      "calls": 8,
+      "input_chars": 34717,
+      "output_chars": 3662,
+      "provider_wall_seconds": 10.278626,
+      "rated_cost_usd": 0.0029913,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "P": {
+      "calls": 8,
+      "input_chars": 38637,
+      "output_chars": 3462,
+      "provider_wall_seconds": 10.865779,
+      "rated_cost_usd": 0.0031365,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "TOTAL": {
+      "calls": 16,
+      "input_chars": 73354,
+      "output_chars": 7124,
+      "provider_wall_seconds": 21.144405,
+      "provider_response_models": [
+        "deepseek-flash"
+      ],
+      "rated_cost_usd": 0.0061278,
+      "char_as_token_peak_usd_upper_bound": 0.030555
+    }
+  },
+  "cloud_preflight_tests": 25,
+  "logs_zip_sha256": "32aa446413860ba31468485c7994d1105fe922df0e3c6d2f78301eaba08acf4d",
+  "paid_calls_after_run": 0,
+  "LongMemEval_consumed": false
+}

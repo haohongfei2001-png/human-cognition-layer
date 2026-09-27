@@ -1,0 +1,17 @@
+{
+  "source_revision": "ab27019cc6a317fde3c879900499f02acce8b16d",
+  "data_sha256": "7a8dd84c984f28a5284bdfda57b447218e1269cd2eaf05b5e173394fc1522434",
+  "bytes": 2250044,
+  "dev_passages": 145,
+  "dev_questions": 1483,
+  "native_char_offset_mentions_validated": 3502,
+  "duplicate_surface_mention_questions": 123,
+  "answer_offsets_are_character_half_open_intervals": true,
+  "selected_source_question_gold_displayed": false,
+  "model_calls": 0,
+  "authorization_usd": 0,
+  "current_provider_gap_established": false,
+  "scope": "public text temporal ordering; no private-state truth",
+  "license": "Apache-2.0",
+  "selected_manifest_sha256": "f8190eb1fe233ce7f0375b5427053427aac883da91a997ba7f95a912591cc8ce"
+}
