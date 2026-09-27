@@ -1,0 +1,83 @@
+{
+  "format": "hcl-v10-pyarg-dev-v01-closure-receipt",
+  "execution_main": "0661daf832cc3e80c3150500e13d0a6c66eb0b1c",
+  "parent_main": "882441bf4758266f2f19c4b86f196d5b2a96b0b9",
+  "trigger_pr": 90,
+  "run_id": 36295445865,
+  "artifact_id": 10923568209,
+  "artifact_sha256": "b17b50c14145418949f57f673f562ea12cc4e41a003aee00458a0b82429358bb",
+  "logs_sha256": "10b44e20a27905c9b9c60df2ec1f975500bcb7713d003c4a067e5779c57b78b4",
+  "actual_results_sha256": "c53c67190a84855a2f1653e443c6b0f0c4860f9613d30c498d0fcc4be29e3b03",
+  "masked_audit_sha256_before_unmask": "ab5a83c9e543cdf9b4125d48c6146452dfb7a539f24a82726d4a7c4e78af32f3",
+  "source_manifest_sha256": "5a2c77183f4c0ab1bda465c6738ac72586cb00879b6245b35d26d0609c3f39d5",
+  "source_revision": "f907bac94cbdd663839300b3b7523d4d958ff36f",
+  "actions_execution_status": "SUCCESS",
+  "scientific_status": "INVALID_OUTPUT_CONTRACT_UTILITY_INCONCLUSIVE",
+  "decision": "REVISE_DEMOTE_NO_EFFICACY_CLAIM_PENDING_ONE_NONFRESH_CONTRACT_REPAIR",
+  "strict_agreement": {
+    "C": 0,
+    "P": 0,
+    "T": 0
+  },
+  "invalids": {
+    "C": 4,
+    "P": 4,
+    "T": 4
+  },
+  "T_vs_P": {
+    "T_only": 0,
+    "P_only": 0,
+    "both_agree": 0,
+    "both_disagree": 4
+  },
+  "metrics": {
+    "C": {
+      "calls": 4,
+      "input_chars": 7829,
+      "output_chars": 1559,
+      "provider_wall_seconds": 5.069232,
+      "rated_cost_usd": 0.0012429,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "P": {
+      "calls": 4,
+      "input_chars": 8417,
+      "output_chars": 1688,
+      "provider_wall_seconds": 5.297833,
+      "rated_cost_usd": 0.0012885,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "T": {
+      "calls": 4,
+      "input_chars": 20957,
+      "output_chars": 1587,
+      "provider_wall_seconds": 5.167129,
+      "rated_cost_usd": 0.0024714,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "TOTAL": {
+      "calls": 12,
+      "char_as_token_peak_usd_upper_bound": 0.016962,
+      "input_chars": 37203,
+      "output_chars": 4834,
+      "provider_response_models": [
+        "deepseek-flash"
+      ],
+      "provider_wall_seconds": 15.534194,
+      "rated_cost_usd": 0.0050028
+    }
+  },
+  "cloud_preflight_tests": 36,
+  "reconstructed_actual_records": 4,
+  "reconstructed_response_hashes": 12,
+  "paid_authorization_after_run_usd": 0,
+  "repair_authorization_usd": 0,
+  "repairs_or_provider_retries": 0,
+  "longmemeval_provider_calls": 0
+}

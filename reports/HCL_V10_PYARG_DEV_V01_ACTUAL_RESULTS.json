@@ -1,0 +1,1809 @@
+{
+  "completed_count": 4,
+  "failures": [],
+  "format": "hcl-v10-public-pyarg-example-dev-result-v01",
+  "metrics": {
+    "C": {
+      "calls": 4,
+      "input_chars": 7829,
+      "output_chars": 1559,
+      "provider_wall_seconds": 5.069232,
+      "rated_cost_usd": 0.0012429,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "P": {
+      "calls": 4,
+      "input_chars": 8417,
+      "output_chars": 1688,
+      "provider_wall_seconds": 5.297833,
+      "rated_cost_usd": 0.0012885,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "T": {
+      "calls": 4,
+      "input_chars": 20957,
+      "output_chars": 1587,
+      "provider_wall_seconds": 5.167129,
+      "rated_cost_usd": 0.0024714,
+      "response_models": [
+        "deepseek-flash"
+      ]
+    },
+    "TOTAL": {
+      "calls": 12,
+      "char_as_token_peak_usd_upper_bound": 0.016962,
+      "input_chars": 37203,
+      "output_chars": 4834,
+      "provider_response_models": [
+        "deepseek-flash"
+      ],
+      "provider_wall_seconds": 15.534194,
+      "rated_cost_usd": 0.0050028
+    }
+  },
+  "results": [
+    {
+      "actual_arm_inputs": {
+        "C": {
+          "declared_graph": {
+            "arguments": [
+              "b",
+              "c",
+              "d"
+            ],
+            "attacks": [
+              [
+                "b",
+                "c"
+              ],
+              [
+                "c",
+                "d"
+              ],
+              [
+                "d",
+                "c"
+              ]
+            ]
+          },
+          "query": {
+            "semantics": "grounded",
+            "task": "return all requested labellings"
+          },
+          "source": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\n        b = Argument('b')\n        c = Argument('c')\n        d = Argument('d')\n        arguments = [b, c, d]\n        defeats = [Defeat(b, c), Defeat(c, d), Defeat(d, c)]\n        af = AbstractArgumentationFramework('af', arguments, defeats)\nDECLARED GRAPH:\n{\"arguments\": [\"b\", \"c\", \"d\"], \"attacks\": [[\"b\", \"c\"], [\"c\", \"d\"], [\"d\", \"c\"]]}"
+        },
+        "P": {
+          "declared_graph": {
+            "arguments": [
+              "b",
+              "c",
+              "d"
+            ],
+            "attacks": [
+              [
+                "b",
+                "c"
+              ],
+              [
+                "c",
+                "d"
+              ],
+              [
+                "d",
+                "c"
+              ]
+            ]
+          },
+          "query": {
+            "semantics": "grounded",
+            "task": "return all requested labellings"
+          },
+          "source": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\n        b = Argument('b')\n        c = Argument('c')\n        d = Argument('d')\n        arguments = [b, c, d]\n        defeats = [Defeat(b, c), Defeat(c, d), Defeat(d, c)]\n        af = AbstractArgumentationFramework('af', arguments, defeats)\nDECLARED GRAPH:\n{\"arguments\": [\"b\", \"c\", \"d\"], \"attacks\": [[\"b\", \"c\"], [\"c\", \"d\"], [\"d\", \"c\"]]}"
+        },
+        "T": {
+          "conditional_computation": {
+            "credulous": null,
+            "framework_id": "arg-dev-01",
+            "grounded": {
+              "IN": [
+                "b",
+                "d"
+              ],
+              "OUT": [
+                "c"
+              ],
+              "UNDEC": []
+            },
+            "grounded_steps": [
+              {
+                "defended": [
+                  "b"
+                ],
+                "in": [],
+                "step": 0
+              },
+              {
+                "defended": [
+                  "b",
+                  "d"
+                ],
+                "in": [
+                  "b"
+                ],
+                "step": 1
+              },
+              {
+                "defended": [
+                  "b",
+                  "d"
+                ],
+                "in": [
+                  "b",
+                  "d"
+                ],
+                "step": 2
+              }
+            ],
+            "labellings": [
+              {
+                "IN": [
+                  "b",
+                  "d"
+                ],
+                "OUT": [
+                  "c"
+                ],
+                "UNDEC": []
+              }
+            ],
+            "not_moral_verdict": true,
+            "not_private_mental_truth": true,
+            "not_world_truth": true,
+            "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+            "semantics": "grounded",
+            "skeptical": null,
+            "source_event_id": "arg-dev-01",
+            "status": "EXTENSIONS_AVAILABLE",
+            "target": null
+          },
+          "declared_graph": {
+            "arguments": [
+              "b",
+              "c",
+              "d"
+            ],
+            "attacks": [
+              [
+                "b",
+                "c"
+              ],
+              [
+                "c",
+                "d"
+              ],
+              [
+                "d",
+                "c"
+              ]
+            ]
+          },
+          "generic_tool_labellings": [
+            {
+              "IN": [
+                "b",
+                "d"
+              ],
+              "OUT": [
+                "c"
+              ],
+              "UNDEC": []
+            }
+          ],
+          "query": {
+            "semantics": "grounded",
+            "task": "return all requested labellings"
+          },
+          "source": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\n        b = Argument('b')\n        c = Argument('c')\n        d = Argument('d')\n        arguments = [b, c, d]\n        defeats = [Defeat(b, c), Defeat(c, d), Defeat(d, c)]\n        af = AbstractArgumentationFramework('af', arguments, defeats)\nDECLARED GRAPH:\n{\"arguments\": [\"b\", \"c\", \"d\"], \"attacks\": [[\"b\", \"c\"], [\"c\", \"d\"], [\"d\", \"c\"]]}",
+          "source_only_state": {
+            "frameworks": [
+              {
+                "arguments": [
+                  {
+                    "argument_id": "b",
+                    "evidence_text": "\"b\""
+                  },
+                  {
+                    "argument_id": "c",
+                    "evidence_text": "\"c\""
+                  },
+                  {
+                    "argument_id": "d",
+                    "evidence_text": "\"d\""
+                  }
+                ],
+                "attacks": [
+                  {
+                    "attacker": "b",
+                    "evidence_text": "[\"b\", \"c\"]",
+                    "target": "c"
+                  },
+                  {
+                    "attacker": "c",
+                    "evidence_text": "[\"c\", \"d\"]",
+                    "target": "d"
+                  },
+                  {
+                    "attacker": "d",
+                    "evidence_text": "[\"d\", \"c\"]",
+                    "target": "c"
+                  }
+                ],
+                "framework_id": "arg-dev-01",
+                "scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+                "source_event_id": "arg-dev-01"
+              }
+            ],
+            "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+            "source_view": {
+              "event_ids": [
+                "arg-dev-01"
+              ],
+              "event_time": null,
+              "events": [
+                {
+                  "actor_id": null,
+                  "event_id": "arg-dev-01",
+                  "metadata": {
+                    "argumentation_scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+                    "chronology": "INGESTION_PLACEHOLDER",
+                    "reader_only": true
+                  },
+                  "observer_ids": [],
+                  "raw_text": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\n        b = Argument('b')\n        c = Argument('c')\n        d = Argument('d')\n        arguments = [b, c, d]\n        defeats = [Defeat(b, c), Defeat(c, d), Defeat(d, c)]\n        af = AbstractArgumentationFramework('af', arguments, defeats)\nDECLARED GRAPH:\n{\"arguments\": [\"b\", \"c\", \"d\"], \"attacks\": [[\"b\", \"c\"], [\"c\", \"d\"], [\"d\", \"c\"]]}",
+                  "recipient_ids": [],
+                  "recorded_at": "2026-01-01T00:00:00+00:00",
+                  "source_id": "PyArg-public-author-example",
+                  "valid_time": "2026-01-01T00:00:00+00:00"
+                }
+              ],
+              "knowledge_cutoff": null,
+              "order": 1,
+              "target_agent_id": "__hcl_system_reader__",
+              "viewer_agent_id": "__hcl_system_reader__"
+            },
+            "status": "DECLARED_FRAMEWORK_AVAILABLE"
+          }
+        }
+      },
+      "arms": {
+        "C": {
+          "agrees_with_declared_graph": false,
+          "answer": null,
+          "invalid_reason": "invalid bounded answer",
+          "raw_response": "{\"labellings\":[{\"IN\":[\"b\"],\"OUT\":[\"c\"],\"UNDEC\":[\"d\"],\"reason\":\"Grounded extension: b is unattacked, so IN; b attacks c, so c OUT; c and d attack each other, and c is OUT, so d is not defended and remains UNDEC.\"}]}",
+          "response_sha256": "3f308c67c171c75d13a43738d5c1968c12ec3e37de7431964c697d3c2709a4a9"
+        },
+        "P": {
+          "agrees_with_declared_graph": false,
+          "answer": null,
+          "invalid_reason": "invalid bounded answer",
+          "raw_response": "{\"labellings\":[{\"IN\":[\"b\"],\"OUT\":[\"c\"],\"UNDEC\":[\"d\"],\"reason\":\"Grounded: b unattacked so IN; b attacks c so c OUT; c attacks d and d attacks c, but c is OUT, so d is not reinstated and remains UNDEC. This is the least complete labelling.\"}]}",
+          "response_sha256": "99d3b75e9a3becc21bcfff9a0eb6f52559512da5825c3f9fb64d8314845401fd"
+        },
+        "T": {
+          "agrees_with_declared_graph": false,
+          "answer": null,
+          "invalid_reason": "invalid labelling fields",
+          "raw_response": "{\"labellings\":[{\"IN\":[\"b\",\"d\"],\"OUT\":[\"c\"],\"UNDEC\":[],\"reason\":\"Grounded (least complete) extension: b is unattacked, so IN; b attacks c, so c OUT; c and d attack each other, but d is defended by b (b attacks c, c attacks d), so d IN. No UNDEC nodes remain.\"}],\"reason\":\"Grounded semantics yields the unique least complete labelling for the declared complete graph.\"}",
+          "response_sha256": "a50f380da7f5629473dc42ab0ebd3b5248dd0a22373c51f45b1a1151a025876d"
+        }
+      },
+      "case_id": "arg-dev-01",
+      "conditional_computation": {
+        "credulous": null,
+        "framework_id": "arg-dev-01",
+        "grounded": {
+          "IN": [
+            "b",
+            "d"
+          ],
+          "OUT": [
+            "c"
+          ],
+          "UNDEC": []
+        },
+        "grounded_steps": [
+          {
+            "defended": [
+              "b"
+            ],
+            "in": [],
+            "step": 0
+          },
+          {
+            "defended": [
+              "b",
+              "d"
+            ],
+            "in": [
+              "b"
+            ],
+            "step": 1
+          },
+          {
+            "defended": [
+              "b",
+              "d"
+            ],
+            "in": [
+              "b",
+              "d"
+            ],
+            "step": 2
+          }
+        ],
+        "labellings": [
+          {
+            "IN": [
+              "b",
+              "d"
+            ],
+            "OUT": [
+              "c"
+            ],
+            "UNDEC": []
+          }
+        ],
+        "not_moral_verdict": true,
+        "not_private_mental_truth": true,
+        "not_world_truth": true,
+        "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+        "semantics": "grounded",
+        "skeptical": null,
+        "source_event_id": "arg-dev-01",
+        "status": "EXTENSIONS_AVAILABLE",
+        "target": null
+      },
+      "family_sha256": "bb91259222eca40d6e0de2e7042caa03896f7d56fd3e6e903a73fcb45aec7eb6",
+      "generic_tool_labellings": [
+        {
+          "IN": [
+            "b",
+            "d"
+          ],
+          "OUT": [
+            "c"
+          ],
+          "UNDEC": []
+        }
+      ],
+      "query": {
+        "semantics": "grounded",
+        "task": "return all requested labellings"
+      },
+      "source_file_sha256": "042eddb4d7e2ce29af8c9403ccf8c315b4cc511c2fa8d0582e750024a8ce1520",
+      "source_only_state": {
+        "frameworks": [
+          {
+            "arguments": [
+              {
+                "argument_id": "b",
+                "evidence_text": "\"b\""
+              },
+              {
+                "argument_id": "c",
+                "evidence_text": "\"c\""
+              },
+              {
+                "argument_id": "d",
+                "evidence_text": "\"d\""
+              }
+            ],
+            "attacks": [
+              {
+                "attacker": "b",
+                "evidence_text": "[\"b\", \"c\"]",
+                "target": "c"
+              },
+              {
+                "attacker": "c",
+                "evidence_text": "[\"c\", \"d\"]",
+                "target": "d"
+              },
+              {
+                "attacker": "d",
+                "evidence_text": "[\"d\", \"c\"]",
+                "target": "c"
+              }
+            ],
+            "framework_id": "arg-dev-01",
+            "scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+            "source_event_id": "arg-dev-01"
+          }
+        ],
+        "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+        "source_view": {
+          "event_ids": [
+            "arg-dev-01"
+          ],
+          "event_time": null,
+          "events": [
+            {
+              "actor_id": null,
+              "event_id": "arg-dev-01",
+              "metadata": {
+                "argumentation_scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+                "chronology": "INGESTION_PLACEHOLDER",
+                "reader_only": true
+              },
+              "observer_ids": [],
+              "raw_text": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\n        b = Argument('b')\n        c = Argument('c')\n        d = Argument('d')\n        arguments = [b, c, d]\n        defeats = [Defeat(b, c), Defeat(c, d), Defeat(d, c)]\n        af = AbstractArgumentationFramework('af', arguments, defeats)\nDECLARED GRAPH:\n{\"arguments\": [\"b\", \"c\", \"d\"], \"attacks\": [[\"b\", \"c\"], [\"c\", \"d\"], [\"d\", \"c\"]]}",
+              "recipient_ids": [],
+              "recorded_at": "2026-01-01T00:00:00+00:00",
+              "source_id": "PyArg-public-author-example",
+              "valid_time": "2026-01-01T00:00:00+00:00"
+            }
+          ],
+          "knowledge_cutoff": null,
+          "order": 1,
+          "target_agent_id": "__hcl_system_reader__",
+          "viewer_agent_id": "__hcl_system_reader__"
+        },
+        "status": "DECLARED_FRAMEWORK_AVAILABLE"
+      },
+      "source_sha256": "270adf53d00bfce882de4f8d170f0df3f6481b065b4344f8901278c4bbfcf7cc",
+      "state_sha256": "468d9e5526b81f607764dbced62614fc0c3a9720a180f0d52510cc81b50d789c"
+    },
+    {
+      "actual_arm_inputs": {
+        "C": {
+          "declared_graph": {
+            "arguments": [
+              "a",
+              "b",
+              "c",
+              "d",
+              "e"
+            ],
+            "attacks": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "b",
+                "c"
+              ],
+              [
+                "c",
+                "b"
+              ],
+              [
+                "d",
+                "c"
+              ],
+              [
+                "d",
+                "e"
+              ],
+              [
+                "e",
+                "d"
+              ]
+            ]
+          },
+          "query": {
+            "semantics": "complete",
+            "task": "return all requested labellings"
+          },
+          "source": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\na = Argument('a')\nb = Argument('b')\nc = Argument('c')\nd = Argument('d')\ne = Argument('e')\nab = Defeat(a, b)\nbc = Defeat(b, c)\ncb = Defeat(c, b)\ndc = Defeat(d, c)\nde = Defeat(d, e)\ned = Defeat(e, d)\n        af1 = AbstractArgumentationFramework(\n            arguments=[a, b, c, d, e],\n            defeats=[ab, bc, cb, dc, de, ed]\n        )\nDECLARED GRAPH:\n{\"arguments\": [\"a\", \"b\", \"c\", \"d\", \"e\"], \"attacks\": [[\"a\", \"b\"], [\"b\", \"c\"], [\"c\", \"b\"], [\"d\", \"c\"], [\"d\", \"e\"], [\"e\", \"d\"]]}"
+        },
+        "P": {
+          "declared_graph": {
+            "arguments": [
+              "a",
+              "b",
+              "c",
+              "d",
+              "e"
+            ],
+            "attacks": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "b",
+                "c"
+              ],
+              [
+                "c",
+                "b"
+              ],
+              [
+                "d",
+                "c"
+              ],
+              [
+                "d",
+                "e"
+              ],
+              [
+                "e",
+                "d"
+              ]
+            ]
+          },
+          "query": {
+            "semantics": "complete",
+            "task": "return all requested labellings"
+          },
+          "source": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\na = Argument('a')\nb = Argument('b')\nc = Argument('c')\nd = Argument('d')\ne = Argument('e')\nab = Defeat(a, b)\nbc = Defeat(b, c)\ncb = Defeat(c, b)\ndc = Defeat(d, c)\nde = Defeat(d, e)\ned = Defeat(e, d)\n        af1 = AbstractArgumentationFramework(\n            arguments=[a, b, c, d, e],\n            defeats=[ab, bc, cb, dc, de, ed]\n        )\nDECLARED GRAPH:\n{\"arguments\": [\"a\", \"b\", \"c\", \"d\", \"e\"], \"attacks\": [[\"a\", \"b\"], [\"b\", \"c\"], [\"c\", \"b\"], [\"d\", \"c\"], [\"d\", \"e\"], [\"e\", \"d\"]]}"
+        },
+        "T": {
+          "conditional_computation": {
+            "credulous": null,
+            "framework_id": "arg-dev-02",
+            "grounded": {
+              "IN": [
+                "a"
+              ],
+              "OUT": [
+                "b"
+              ],
+              "UNDEC": [
+                "c",
+                "d",
+                "e"
+              ]
+            },
+            "grounded_steps": [
+              {
+                "defended": [
+                  "a"
+                ],
+                "in": [],
+                "step": 0
+              },
+              {
+                "defended": [
+                  "a"
+                ],
+                "in": [
+                  "a"
+                ],
+                "step": 1
+              }
+            ],
+            "labellings": [
+              {
+                "IN": [
+                  "a"
+                ],
+                "OUT": [
+                  "b"
+                ],
+                "UNDEC": [
+                  "c",
+                  "d",
+                  "e"
+                ]
+              },
+              {
+                "IN": [
+                  "a",
+                  "c",
+                  "e"
+                ],
+                "OUT": [
+                  "b",
+                  "d"
+                ],
+                "UNDEC": []
+              },
+              {
+                "IN": [
+                  "a",
+                  "d"
+                ],
+                "OUT": [
+                  "b",
+                  "c",
+                  "e"
+                ],
+                "UNDEC": []
+              }
+            ],
+            "not_moral_verdict": true,
+            "not_private_mental_truth": true,
+            "not_world_truth": true,
+            "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+            "semantics": "complete",
+            "skeptical": null,
+            "source_event_id": "arg-dev-02",
+            "status": "EXTENSIONS_AVAILABLE",
+            "target": null
+          },
+          "declared_graph": {
+            "arguments": [
+              "a",
+              "b",
+              "c",
+              "d",
+              "e"
+            ],
+            "attacks": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "b",
+                "c"
+              ],
+              [
+                "c",
+                "b"
+              ],
+              [
+                "d",
+                "c"
+              ],
+              [
+                "d",
+                "e"
+              ],
+              [
+                "e",
+                "d"
+              ]
+            ]
+          },
+          "generic_tool_labellings": [
+            {
+              "IN": [
+                "a"
+              ],
+              "OUT": [
+                "b"
+              ],
+              "UNDEC": [
+                "c",
+                "d",
+                "e"
+              ]
+            },
+            {
+              "IN": [
+                "a",
+                "c",
+                "e"
+              ],
+              "OUT": [
+                "b",
+                "d"
+              ],
+              "UNDEC": []
+            },
+            {
+              "IN": [
+                "a",
+                "d"
+              ],
+              "OUT": [
+                "b",
+                "c",
+                "e"
+              ],
+              "UNDEC": []
+            }
+          ],
+          "query": {
+            "semantics": "complete",
+            "task": "return all requested labellings"
+          },
+          "source": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\na = Argument('a')\nb = Argument('b')\nc = Argument('c')\nd = Argument('d')\ne = Argument('e')\nab = Defeat(a, b)\nbc = Defeat(b, c)\ncb = Defeat(c, b)\ndc = Defeat(d, c)\nde = Defeat(d, e)\ned = Defeat(e, d)\n        af1 = AbstractArgumentationFramework(\n            arguments=[a, b, c, d, e],\n            defeats=[ab, bc, cb, dc, de, ed]\n        )\nDECLARED GRAPH:\n{\"arguments\": [\"a\", \"b\", \"c\", \"d\", \"e\"], \"attacks\": [[\"a\", \"b\"], [\"b\", \"c\"], [\"c\", \"b\"], [\"d\", \"c\"], [\"d\", \"e\"], [\"e\", \"d\"]]}",
+          "source_only_state": {
+            "frameworks": [
+              {
+                "arguments": [
+                  {
+                    "argument_id": "a",
+                    "evidence_text": "\"a\""
+                  },
+                  {
+                    "argument_id": "b",
+                    "evidence_text": "\"b\""
+                  },
+                  {
+                    "argument_id": "c",
+                    "evidence_text": "\"c\""
+                  },
+                  {
+                    "argument_id": "d",
+                    "evidence_text": "\"d\""
+                  },
+                  {
+                    "argument_id": "e",
+                    "evidence_text": "\"e\""
+                  }
+                ],
+                "attacks": [
+                  {
+                    "attacker": "a",
+                    "evidence_text": "[\"a\", \"b\"]",
+                    "target": "b"
+                  },
+                  {
+                    "attacker": "b",
+                    "evidence_text": "[\"b\", \"c\"]",
+                    "target": "c"
+                  },
+                  {
+                    "attacker": "c",
+                    "evidence_text": "[\"c\", \"b\"]",
+                    "target": "b"
+                  },
+                  {
+                    "attacker": "d",
+                    "evidence_text": "[\"d\", \"c\"]",
+                    "target": "c"
+                  },
+                  {
+                    "attacker": "d",
+                    "evidence_text": "[\"d\", \"e\"]",
+                    "target": "e"
+                  },
+                  {
+                    "attacker": "e",
+                    "evidence_text": "[\"e\", \"d\"]",
+                    "target": "d"
+                  }
+                ],
+                "framework_id": "arg-dev-02",
+                "scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+                "source_event_id": "arg-dev-02"
+              }
+            ],
+            "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+            "source_view": {
+              "event_ids": [
+                "arg-dev-02"
+              ],
+              "event_time": null,
+              "events": [
+                {
+                  "actor_id": null,
+                  "event_id": "arg-dev-02",
+                  "metadata": {
+                    "argumentation_scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+                    "chronology": "INGESTION_PLACEHOLDER",
+                    "reader_only": true
+                  },
+                  "observer_ids": [],
+                  "raw_text": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\na = Argument('a')\nb = Argument('b')\nc = Argument('c')\nd = Argument('d')\ne = Argument('e')\nab = Defeat(a, b)\nbc = Defeat(b, c)\ncb = Defeat(c, b)\ndc = Defeat(d, c)\nde = Defeat(d, e)\ned = Defeat(e, d)\n        af1 = AbstractArgumentationFramework(\n            arguments=[a, b, c, d, e],\n            defeats=[ab, bc, cb, dc, de, ed]\n        )\nDECLARED GRAPH:\n{\"arguments\": [\"a\", \"b\", \"c\", \"d\", \"e\"], \"attacks\": [[\"a\", \"b\"], [\"b\", \"c\"], [\"c\", \"b\"], [\"d\", \"c\"], [\"d\", \"e\"], [\"e\", \"d\"]]}",
+                  "recipient_ids": [],
+                  "recorded_at": "2026-01-01T00:00:00+00:00",
+                  "source_id": "PyArg-public-author-example",
+                  "valid_time": "2026-01-01T00:00:00+00:00"
+                }
+              ],
+              "knowledge_cutoff": null,
+              "order": 1,
+              "target_agent_id": "__hcl_system_reader__",
+              "viewer_agent_id": "__hcl_system_reader__"
+            },
+            "status": "DECLARED_FRAMEWORK_AVAILABLE"
+          }
+        }
+      },
+      "arms": {
+        "C": {
+          "agrees_with_declared_graph": false,
+          "answer": null,
+          "invalid_reason": "invalid bounded answer",
+          "raw_response": "{\"labellings\":[{\"IN\":[\"a\",\"d\"],\"OUT\":[\"b\",\"c\",\"e\"],\"UNDEC\":[],\"reason\":\"a unattacked IN; a attacks b so b OUT; d IN (unattacked); d attacks c and e so c,e OUT; b,c mutual attack resolved by b OUT; d/e mutual attack resolved by d IN, e OUT.\"},{\"IN\":[\"a\",\"e\"],\"OUT\":[\"b\",\"d\"],\"UNDEC\":[\"c\"],\"reason\":\"a IN; b OUT; e IN (unattacked); e attacks d so d OUT; d attacks c but d OUT so c not OUT; b attacks c but b OUT; c attacks b but b already OUT; c defended by nobody, not attacked by IN, so UNDEC.\"},{\"IN\":[\"a\"],\"OUT\":[\"b\"],\"UNDEC\":[\"c\",\"d\",\"e\"],\"reason\":\"a IN; b OUT; c attacked by b (OUT) and d (UNDEC), not defended, UNDEC; d/e mutual attack, neither defended by IN, both UNDEC; d attacks c but d UNDEC so c remains UNDEC.\"}]}",
+          "response_sha256": "5d0659fe4f7701555afbee7e1b904c66b653d9a6907215d772d7cdcdfd0616e5"
+        },
+        "P": {
+          "agrees_with_declared_graph": false,
+          "answer": null,
+          "invalid_reason": "invalid bounded answer",
+          "raw_response": "{\"labellings\":[{\"IN\":[\"a\",\"d\"],\"OUT\":[\"b\",\"c\",\"e\"],\"UNDEC\":[],\"reason\":\"a unattacked IN; d unattacked IN. a attacks b so b OUT. d attacks c and e so c,e OUT. b/c cycle irrelevant since b OUT; e/d cycle resolved by d IN attacking e.\"},{\"IN\":[\"a\",\"e\"],\"OUT\":[\"b\",\"d\"],\"UNDEC\":[\"c\"],\"reason\":\"a unattacked IN. e IN defends itself against d by attacking d, so d OUT. a attacks b so b OUT. c attacked by b(OUT) and d(OUT), defended by b? b OUT so c not defended; c attacks b, b OUT, c remains UNDEC.\"},{\"IN\":[\"a\"],\"OUT\":[\"b\"],\"UNDEC\":[\"c\",\"d\",\"e\"],\"reason\":\"a unattacked IN, attacks b so b OUT. c attacked by b(OUT) and d(UNDEC); not defended. d/e mutual attack unresolved. c/b cycle unresolved. No further IN forced.\"}]}",
+          "response_sha256": "2e601efc7f783abe7a6ebb50a1afc3eb06af109c0a26dc84f3c1a2bbf559df1d"
+        },
+        "T": {
+          "agrees_with_declared_graph": false,
+          "answer": null,
+          "invalid_reason": "invalid bounded answer",
+          "raw_response": "{\"labellings\":[{\"IN\":[\"a\"],\"OUT\":[\"b\"],\"UNDEC\":[\"c\",\"d\",\"e\"],\"reason\":\"Grounded/least complete extension: a is unattacked and IN; a attacks b so b is OUT. The b-c cycle and d-e cycle are not defended by IN, so c, d, e remain UNDEC.\"},{\"IN\":[\"a\",\"c\",\"e\"],\"OUT\":[\"b\",\"d\"],\"UNDEC\":[],\"reason\":\"Complete extension: a IN attacks b OUT. c IN attacks b, and b OUT cannot attack c; d is OUT because e attacks d, and e IN attacks d. Conflict-free and defends all members.\"},{\"IN\":[\"a\",\"d\"],\"OUT\":[\"b\",\"c\",\"e\"],\"UNDEC\":[],\"reason\":\"Complete extension: a IN attacks b OUT. d IN attacks c and e, making c and e OUT; b OUT cannot attack c. Conflict-free and defends all members.\"}]}",
+          "response_sha256": "6fee8d63d171d12849df0e56133fa291c2afda8299e0ce1176a0ded8f7922341"
+        }
+      },
+      "case_id": "arg-dev-02",
+      "conditional_computation": {
+        "credulous": null,
+        "framework_id": "arg-dev-02",
+        "grounded": {
+          "IN": [
+            "a"
+          ],
+          "OUT": [
+            "b"
+          ],
+          "UNDEC": [
+            "c",
+            "d",
+            "e"
+          ]
+        },
+        "grounded_steps": [
+          {
+            "defended": [
+              "a"
+            ],
+            "in": [],
+            "step": 0
+          },
+          {
+            "defended": [
+              "a"
+            ],
+            "in": [
+              "a"
+            ],
+            "step": 1
+          }
+        ],
+        "labellings": [
+          {
+            "IN": [
+              "a"
+            ],
+            "OUT": [
+              "b"
+            ],
+            "UNDEC": [
+              "c",
+              "d",
+              "e"
+            ]
+          },
+          {
+            "IN": [
+              "a",
+              "c",
+              "e"
+            ],
+            "OUT": [
+              "b",
+              "d"
+            ],
+            "UNDEC": []
+          },
+          {
+            "IN": [
+              "a",
+              "d"
+            ],
+            "OUT": [
+              "b",
+              "c",
+              "e"
+            ],
+            "UNDEC": []
+          }
+        ],
+        "not_moral_verdict": true,
+        "not_private_mental_truth": true,
+        "not_world_truth": true,
+        "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+        "semantics": "complete",
+        "skeptical": null,
+        "source_event_id": "arg-dev-02",
+        "status": "EXTENSIONS_AVAILABLE",
+        "target": null
+      },
+      "family_sha256": "92d05c22d5bc9d7372265f1e7bfec1a219fe32289ebce420c2b898aabc6db601",
+      "generic_tool_labellings": [
+        {
+          "IN": [
+            "a"
+          ],
+          "OUT": [
+            "b"
+          ],
+          "UNDEC": [
+            "c",
+            "d",
+            "e"
+          ]
+        },
+        {
+          "IN": [
+            "a",
+            "c",
+            "e"
+          ],
+          "OUT": [
+            "b",
+            "d"
+          ],
+          "UNDEC": []
+        },
+        {
+          "IN": [
+            "a",
+            "d"
+          ],
+          "OUT": [
+            "b",
+            "c",
+            "e"
+          ],
+          "UNDEC": []
+        }
+      ],
+      "query": {
+        "semantics": "complete",
+        "task": "return all requested labellings"
+      },
+      "source_file_sha256": "4985affc9d468b8432be8ff6a9a7250fb54b5323b05ad6f81d3d1cfbd1b57b3f",
+      "source_only_state": {
+        "frameworks": [
+          {
+            "arguments": [
+              {
+                "argument_id": "a",
+                "evidence_text": "\"a\""
+              },
+              {
+                "argument_id": "b",
+                "evidence_text": "\"b\""
+              },
+              {
+                "argument_id": "c",
+                "evidence_text": "\"c\""
+              },
+              {
+                "argument_id": "d",
+                "evidence_text": "\"d\""
+              },
+              {
+                "argument_id": "e",
+                "evidence_text": "\"e\""
+              }
+            ],
+            "attacks": [
+              {
+                "attacker": "a",
+                "evidence_text": "[\"a\", \"b\"]",
+                "target": "b"
+              },
+              {
+                "attacker": "b",
+                "evidence_text": "[\"b\", \"c\"]",
+                "target": "c"
+              },
+              {
+                "attacker": "c",
+                "evidence_text": "[\"c\", \"b\"]",
+                "target": "b"
+              },
+              {
+                "attacker": "d",
+                "evidence_text": "[\"d\", \"c\"]",
+                "target": "c"
+              },
+              {
+                "attacker": "d",
+                "evidence_text": "[\"d\", \"e\"]",
+                "target": "e"
+              },
+              {
+                "attacker": "e",
+                "evidence_text": "[\"e\", \"d\"]",
+                "target": "d"
+              }
+            ],
+            "framework_id": "arg-dev-02",
+            "scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+            "source_event_id": "arg-dev-02"
+          }
+        ],
+        "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+        "source_view": {
+          "event_ids": [
+            "arg-dev-02"
+          ],
+          "event_time": null,
+          "events": [
+            {
+              "actor_id": null,
+              "event_id": "arg-dev-02",
+              "metadata": {
+                "argumentation_scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+                "chronology": "INGESTION_PLACEHOLDER",
+                "reader_only": true
+              },
+              "observer_ids": [],
+              "raw_text": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\na = Argument('a')\nb = Argument('b')\nc = Argument('c')\nd = Argument('d')\ne = Argument('e')\nab = Defeat(a, b)\nbc = Defeat(b, c)\ncb = Defeat(c, b)\ndc = Defeat(d, c)\nde = Defeat(d, e)\ned = Defeat(e, d)\n        af1 = AbstractArgumentationFramework(\n            arguments=[a, b, c, d, e],\n            defeats=[ab, bc, cb, dc, de, ed]\n        )\nDECLARED GRAPH:\n{\"arguments\": [\"a\", \"b\", \"c\", \"d\", \"e\"], \"attacks\": [[\"a\", \"b\"], [\"b\", \"c\"], [\"c\", \"b\"], [\"d\", \"c\"], [\"d\", \"e\"], [\"e\", \"d\"]]}",
+              "recipient_ids": [],
+              "recorded_at": "2026-01-01T00:00:00+00:00",
+              "source_id": "PyArg-public-author-example",
+              "valid_time": "2026-01-01T00:00:00+00:00"
+            }
+          ],
+          "knowledge_cutoff": null,
+          "order": 1,
+          "target_agent_id": "__hcl_system_reader__",
+          "viewer_agent_id": "__hcl_system_reader__"
+        },
+        "status": "DECLARED_FRAMEWORK_AVAILABLE"
+      },
+      "source_sha256": "56494a47f6e5546e295dec30f7438a4aba89720131ce42b721a3abae603ca56b",
+      "state_sha256": "4ba84a243f0b89198c00f85f584db5ec0865efb5ade5c5797be1cb01bbae8c91"
+    },
+    {
+      "actual_arm_inputs": {
+        "C": {
+          "declared_graph": {
+            "arguments": [
+              "a",
+              "b",
+              "c"
+            ],
+            "attacks": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "b",
+                "a"
+              ],
+              [
+                "b",
+                "c"
+              ]
+            ]
+          },
+          "query": {
+            "semantics": "grounded",
+            "task": "return all requested labellings"
+          },
+          "source": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\n        a = Argument('a')\n        b = Argument('b')\n        c = Argument('c')\n        arguments = [a, b, c]\n        defeats = [Defeat(a, b), Defeat(b, a), Defeat(b, c)]\n        af = AbstractArgumentationFramework('af', arguments, defeats)\nDECLARED GRAPH:\n{\"arguments\": [\"a\", \"b\", \"c\"], \"attacks\": [[\"a\", \"b\"], [\"b\", \"a\"], [\"b\", \"c\"]]}"
+        },
+        "P": {
+          "declared_graph": {
+            "arguments": [
+              "a",
+              "b",
+              "c"
+            ],
+            "attacks": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "b",
+                "a"
+              ],
+              [
+                "b",
+                "c"
+              ]
+            ]
+          },
+          "query": {
+            "semantics": "grounded",
+            "task": "return all requested labellings"
+          },
+          "source": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\n        a = Argument('a')\n        b = Argument('b')\n        c = Argument('c')\n        arguments = [a, b, c]\n        defeats = [Defeat(a, b), Defeat(b, a), Defeat(b, c)]\n        af = AbstractArgumentationFramework('af', arguments, defeats)\nDECLARED GRAPH:\n{\"arguments\": [\"a\", \"b\", \"c\"], \"attacks\": [[\"a\", \"b\"], [\"b\", \"a\"], [\"b\", \"c\"]]}"
+        },
+        "T": {
+          "conditional_computation": {
+            "credulous": null,
+            "framework_id": "arg-dev-03",
+            "grounded": {
+              "IN": [],
+              "OUT": [],
+              "UNDEC": [
+                "a",
+                "b",
+                "c"
+              ]
+            },
+            "grounded_steps": [
+              {
+                "defended": [],
+                "in": [],
+                "step": 0
+              }
+            ],
+            "labellings": [
+              {
+                "IN": [],
+                "OUT": [],
+                "UNDEC": [
+                  "a",
+                  "b",
+                  "c"
+                ]
+              }
+            ],
+            "not_moral_verdict": true,
+            "not_private_mental_truth": true,
+            "not_world_truth": true,
+            "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+            "semantics": "grounded",
+            "skeptical": null,
+            "source_event_id": "arg-dev-03",
+            "status": "EXTENSIONS_AVAILABLE",
+            "target": null
+          },
+          "declared_graph": {
+            "arguments": [
+              "a",
+              "b",
+              "c"
+            ],
+            "attacks": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "b",
+                "a"
+              ],
+              [
+                "b",
+                "c"
+              ]
+            ]
+          },
+          "generic_tool_labellings": [
+            {
+              "IN": [],
+              "OUT": [],
+              "UNDEC": [
+                "a",
+                "b",
+                "c"
+              ]
+            }
+          ],
+          "query": {
+            "semantics": "grounded",
+            "task": "return all requested labellings"
+          },
+          "source": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\n        a = Argument('a')\n        b = Argument('b')\n        c = Argument('c')\n        arguments = [a, b, c]\n        defeats = [Defeat(a, b), Defeat(b, a), Defeat(b, c)]\n        af = AbstractArgumentationFramework('af', arguments, defeats)\nDECLARED GRAPH:\n{\"arguments\": [\"a\", \"b\", \"c\"], \"attacks\": [[\"a\", \"b\"], [\"b\", \"a\"], [\"b\", \"c\"]]}",
+          "source_only_state": {
+            "frameworks": [
+              {
+                "arguments": [
+                  {
+                    "argument_id": "a",
+                    "evidence_text": "\"a\""
+                  },
+                  {
+                    "argument_id": "b",
+                    "evidence_text": "\"b\""
+                  },
+                  {
+                    "argument_id": "c",
+                    "evidence_text": "\"c\""
+                  }
+                ],
+                "attacks": [
+                  {
+                    "attacker": "a",
+                    "evidence_text": "[\"a\", \"b\"]",
+                    "target": "b"
+                  },
+                  {
+                    "attacker": "b",
+                    "evidence_text": "[\"b\", \"a\"]",
+                    "target": "a"
+                  },
+                  {
+                    "attacker": "b",
+                    "evidence_text": "[\"b\", \"c\"]",
+                    "target": "c"
+                  }
+                ],
+                "framework_id": "arg-dev-03",
+                "scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+                "source_event_id": "arg-dev-03"
+              }
+            ],
+            "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+            "source_view": {
+              "event_ids": [
+                "arg-dev-03"
+              ],
+              "event_time": null,
+              "events": [
+                {
+                  "actor_id": null,
+                  "event_id": "arg-dev-03",
+                  "metadata": {
+                    "argumentation_scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+                    "chronology": "INGESTION_PLACEHOLDER",
+                    "reader_only": true
+                  },
+                  "observer_ids": [],
+                  "raw_text": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\n        a = Argument('a')\n        b = Argument('b')\n        c = Argument('c')\n        arguments = [a, b, c]\n        defeats = [Defeat(a, b), Defeat(b, a), Defeat(b, c)]\n        af = AbstractArgumentationFramework('af', arguments, defeats)\nDECLARED GRAPH:\n{\"arguments\": [\"a\", \"b\", \"c\"], \"attacks\": [[\"a\", \"b\"], [\"b\", \"a\"], [\"b\", \"c\"]]}",
+                  "recipient_ids": [],
+                  "recorded_at": "2026-01-01T00:00:00+00:00",
+                  "source_id": "PyArg-public-author-example",
+                  "valid_time": "2026-01-01T00:00:00+00:00"
+                }
+              ],
+              "knowledge_cutoff": null,
+              "order": 1,
+              "target_agent_id": "__hcl_system_reader__",
+              "viewer_agent_id": "__hcl_system_reader__"
+            },
+            "status": "DECLARED_FRAMEWORK_AVAILABLE"
+          }
+        }
+      },
+      "arms": {
+        "C": {
+          "agrees_with_declared_graph": false,
+          "answer": null,
+          "invalid_reason": "invalid bounded answer",
+          "raw_response": "{\"labellings\":[{\"IN\":[],\"OUT\":[],\"UNDEC\":[\"a\",\"b\",\"c\"],\"reason\":\"Grounded extension is empty: a and b attack each other, so neither is defended by the empty set; c is attacked by b, which is not OUT, so c is also undecided.\"}]}",
+          "response_sha256": "4b507fdf927a3306507e93b7b3eeb53b8f4f93ff95052ff7742042b4901d66ce"
+        },
+        "P": {
+          "agrees_with_declared_graph": false,
+          "answer": null,
+          "invalid_reason": "invalid bounded answer",
+          "raw_response": "{\"labellings\":[{\"IN\":[],\"OUT\":[],\"UNDEC\":[\"a\",\"b\",\"c\"],\"reason\":\"Grounded least complete extension is empty: a and b attack each other, so neither is defended by the empty set; c is attacked by b, which is not OUT, so c is also undecided. No node is forced IN or OUT.\"}]}",
+          "response_sha256": "bfa837af8c197a8c02d1654a21b9234ac369654ff59e5e373a5e392a7d735558"
+        },
+        "T": {
+          "agrees_with_declared_graph": false,
+          "answer": null,
+          "invalid_reason": "invalid bounded answer",
+          "raw_response": "{\"labellings\":[{\"IN\":[],\"OUT\":[],\"UNDEC\":[\"a\",\"b\",\"c\"],\"reason\":\"Grounded (least complete) extension is empty: a and b attack each other, so neither is defended by the empty set; c is attacked by b and not defended. No node is IN, so no node is OUT; all three remain UNDEC.\"}]}",
+          "response_sha256": "7a7eabc531f30d3fca8e1dd660d68312c0a40c119cdba847dc05228d8853cef5"
+        }
+      },
+      "case_id": "arg-dev-03",
+      "conditional_computation": {
+        "credulous": null,
+        "framework_id": "arg-dev-03",
+        "grounded": {
+          "IN": [],
+          "OUT": [],
+          "UNDEC": [
+            "a",
+            "b",
+            "c"
+          ]
+        },
+        "grounded_steps": [
+          {
+            "defended": [],
+            "in": [],
+            "step": 0
+          }
+        ],
+        "labellings": [
+          {
+            "IN": [],
+            "OUT": [],
+            "UNDEC": [
+              "a",
+              "b",
+              "c"
+            ]
+          }
+        ],
+        "not_moral_verdict": true,
+        "not_private_mental_truth": true,
+        "not_world_truth": true,
+        "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+        "semantics": "grounded",
+        "skeptical": null,
+        "source_event_id": "arg-dev-03",
+        "status": "EXTENSIONS_AVAILABLE",
+        "target": null
+      },
+      "family_sha256": "3486e08525d4c17bedb315bb1c3d06c98038c14db707fa589ac1d90c2f6a9c8d",
+      "generic_tool_labellings": [
+        {
+          "IN": [],
+          "OUT": [],
+          "UNDEC": [
+            "a",
+            "b",
+            "c"
+          ]
+        }
+      ],
+      "query": {
+        "semantics": "grounded",
+        "task": "return all requested labellings"
+      },
+      "source_file_sha256": "649d20725245d64e3c72bb9393b1c6ed2b30b2f7358d00b79a577777062f6110",
+      "source_only_state": {
+        "frameworks": [
+          {
+            "arguments": [
+              {
+                "argument_id": "a",
+                "evidence_text": "\"a\""
+              },
+              {
+                "argument_id": "b",
+                "evidence_text": "\"b\""
+              },
+              {
+                "argument_id": "c",
+                "evidence_text": "\"c\""
+              }
+            ],
+            "attacks": [
+              {
+                "attacker": "a",
+                "evidence_text": "[\"a\", \"b\"]",
+                "target": "b"
+              },
+              {
+                "attacker": "b",
+                "evidence_text": "[\"b\", \"a\"]",
+                "target": "a"
+              },
+              {
+                "attacker": "b",
+                "evidence_text": "[\"b\", \"c\"]",
+                "target": "c"
+              }
+            ],
+            "framework_id": "arg-dev-03",
+            "scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+            "source_event_id": "arg-dev-03"
+          }
+        ],
+        "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+        "source_view": {
+          "event_ids": [
+            "arg-dev-03"
+          ],
+          "event_time": null,
+          "events": [
+            {
+              "actor_id": null,
+              "event_id": "arg-dev-03",
+              "metadata": {
+                "argumentation_scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+                "chronology": "INGESTION_PLACEHOLDER",
+                "reader_only": true
+              },
+              "observer_ids": [],
+              "raw_text": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\n        a = Argument('a')\n        b = Argument('b')\n        c = Argument('c')\n        arguments = [a, b, c]\n        defeats = [Defeat(a, b), Defeat(b, a), Defeat(b, c)]\n        af = AbstractArgumentationFramework('af', arguments, defeats)\nDECLARED GRAPH:\n{\"arguments\": [\"a\", \"b\", \"c\"], \"attacks\": [[\"a\", \"b\"], [\"b\", \"a\"], [\"b\", \"c\"]]}",
+              "recipient_ids": [],
+              "recorded_at": "2026-01-01T00:00:00+00:00",
+              "source_id": "PyArg-public-author-example",
+              "valid_time": "2026-01-01T00:00:00+00:00"
+            }
+          ],
+          "knowledge_cutoff": null,
+          "order": 1,
+          "target_agent_id": "__hcl_system_reader__",
+          "viewer_agent_id": "__hcl_system_reader__"
+        },
+        "status": "DECLARED_FRAMEWORK_AVAILABLE"
+      },
+      "source_sha256": "c0cd0a519252de45071d6a4ef34b4684a38171dfb80e39373acbb836ba5a78b9",
+      "state_sha256": "c8cebfb312de9b95b90b0a8f3796058615927a68dbbbaacdbacb35ad4eea01fa"
+    },
+    {
+      "actual_arm_inputs": {
+        "C": {
+          "declared_graph": {
+            "arguments": [
+              "a",
+              "b",
+              "c"
+            ],
+            "attacks": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "a",
+                "c"
+              ],
+              [
+                "b",
+                "c"
+              ]
+            ]
+          },
+          "query": {
+            "semantics": "complete",
+            "task": "return all requested labellings"
+          },
+          "source": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\n        a = Argument('a')\n        b = Argument('b')\n        c = Argument('c')\n        def1 = Defeat(a, b)\n        def2 = Defeat(a, c)\n        def3 = Defeat(b, c)\n        af = AbstractArgumentationFramework('', arguments=[a, b, c], defeats=[def1, def2, def3])\nDECLARED GRAPH:\n{\"arguments\": [\"a\", \"b\", \"c\"], \"attacks\": [[\"a\", \"b\"], [\"a\", \"c\"], [\"b\", \"c\"]]}"
+        },
+        "P": {
+          "declared_graph": {
+            "arguments": [
+              "a",
+              "b",
+              "c"
+            ],
+            "attacks": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "a",
+                "c"
+              ],
+              [
+                "b",
+                "c"
+              ]
+            ]
+          },
+          "query": {
+            "semantics": "complete",
+            "task": "return all requested labellings"
+          },
+          "source": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\n        a = Argument('a')\n        b = Argument('b')\n        c = Argument('c')\n        def1 = Defeat(a, b)\n        def2 = Defeat(a, c)\n        def3 = Defeat(b, c)\n        af = AbstractArgumentationFramework('', arguments=[a, b, c], defeats=[def1, def2, def3])\nDECLARED GRAPH:\n{\"arguments\": [\"a\", \"b\", \"c\"], \"attacks\": [[\"a\", \"b\"], [\"a\", \"c\"], [\"b\", \"c\"]]}"
+        },
+        "T": {
+          "conditional_computation": {
+            "credulous": null,
+            "framework_id": "arg-dev-04",
+            "grounded": {
+              "IN": [
+                "a"
+              ],
+              "OUT": [
+                "b",
+                "c"
+              ],
+              "UNDEC": []
+            },
+            "grounded_steps": [
+              {
+                "defended": [
+                  "a"
+                ],
+                "in": [],
+                "step": 0
+              },
+              {
+                "defended": [
+                  "a"
+                ],
+                "in": [
+                  "a"
+                ],
+                "step": 1
+              }
+            ],
+            "labellings": [
+              {
+                "IN": [
+                  "a"
+                ],
+                "OUT": [
+                  "b",
+                  "c"
+                ],
+                "UNDEC": []
+              }
+            ],
+            "not_moral_verdict": true,
+            "not_private_mental_truth": true,
+            "not_world_truth": true,
+            "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+            "semantics": "complete",
+            "skeptical": null,
+            "source_event_id": "arg-dev-04",
+            "status": "EXTENSIONS_AVAILABLE",
+            "target": null
+          },
+          "declared_graph": {
+            "arguments": [
+              "a",
+              "b",
+              "c"
+            ],
+            "attacks": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "a",
+                "c"
+              ],
+              [
+                "b",
+                "c"
+              ]
+            ]
+          },
+          "generic_tool_labellings": [
+            {
+              "IN": [
+                "a"
+              ],
+              "OUT": [
+                "b",
+                "c"
+              ],
+              "UNDEC": []
+            }
+          ],
+          "query": {
+            "semantics": "complete",
+            "task": "return all requested labellings"
+          },
+          "source": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\n        a = Argument('a')\n        b = Argument('b')\n        c = Argument('c')\n        def1 = Defeat(a, b)\n        def2 = Defeat(a, c)\n        def3 = Defeat(b, c)\n        af = AbstractArgumentationFramework('', arguments=[a, b, c], defeats=[def1, def2, def3])\nDECLARED GRAPH:\n{\"arguments\": [\"a\", \"b\", \"c\"], \"attacks\": [[\"a\", \"b\"], [\"a\", \"c\"], [\"b\", \"c\"]]}",
+          "source_only_state": {
+            "frameworks": [
+              {
+                "arguments": [
+                  {
+                    "argument_id": "a",
+                    "evidence_text": "\"a\""
+                  },
+                  {
+                    "argument_id": "b",
+                    "evidence_text": "\"b\""
+                  },
+                  {
+                    "argument_id": "c",
+                    "evidence_text": "\"c\""
+                  }
+                ],
+                "attacks": [
+                  {
+                    "attacker": "a",
+                    "evidence_text": "[\"a\", \"b\"]",
+                    "target": "b"
+                  },
+                  {
+                    "attacker": "a",
+                    "evidence_text": "[\"a\", \"c\"]",
+                    "target": "c"
+                  },
+                  {
+                    "attacker": "b",
+                    "evidence_text": "[\"b\", \"c\"]",
+                    "target": "c"
+                  }
+                ],
+                "framework_id": "arg-dev-04",
+                "scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+                "source_event_id": "arg-dev-04"
+              }
+            ],
+            "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+            "source_view": {
+              "event_ids": [
+                "arg-dev-04"
+              ],
+              "event_time": null,
+              "events": [
+                {
+                  "actor_id": null,
+                  "event_id": "arg-dev-04",
+                  "metadata": {
+                    "argumentation_scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+                    "chronology": "INGESTION_PLACEHOLDER",
+                    "reader_only": true
+                  },
+                  "observer_ids": [],
+                  "raw_text": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\n        a = Argument('a')\n        b = Argument('b')\n        c = Argument('c')\n        def1 = Defeat(a, b)\n        def2 = Defeat(a, c)\n        def3 = Defeat(b, c)\n        af = AbstractArgumentationFramework('', arguments=[a, b, c], defeats=[def1, def2, def3])\nDECLARED GRAPH:\n{\"arguments\": [\"a\", \"b\", \"c\"], \"attacks\": [[\"a\", \"b\"], [\"a\", \"c\"], [\"b\", \"c\"]]}",
+                  "recipient_ids": [],
+                  "recorded_at": "2026-01-01T00:00:00+00:00",
+                  "source_id": "PyArg-public-author-example",
+                  "valid_time": "2026-01-01T00:00:00+00:00"
+                }
+              ],
+              "knowledge_cutoff": null,
+              "order": 1,
+              "target_agent_id": "__hcl_system_reader__",
+              "viewer_agent_id": "__hcl_system_reader__"
+            },
+            "status": "DECLARED_FRAMEWORK_AVAILABLE"
+          }
+        }
+      },
+      "arms": {
+        "C": {
+          "agrees_with_declared_graph": false,
+          "answer": null,
+          "invalid_reason": "invalid bounded answer",
+          "raw_response": "{\"labellings\":[{\"IN\":[\"a\"],\"OUT\":[\"b\",\"c\"],\"UNDEC\":[],\"reason\":\"a is unattacked, so it is IN in every complete extension. a attacks b and c, so both are OUT. No node is left undecided.\"},{\"IN\":[\"a\",\"c\"],\"OUT\":[\"b\"],\"UNDEC\":[],\"reason\":\"a is unattacked and IN. c is defended by a against b, so c is IN. b is attacked by a, so b is OUT. This is admissible and contains every node it defends.\"}]}",
+          "response_sha256": "a2ebf879343fcfa7e7863c20d118985f33454eeb6818085b5b3d3a0e8ab659d1"
+        },
+        "P": {
+          "agrees_with_declared_graph": false,
+          "answer": null,
+          "invalid_reason": "invalid bounded answer",
+          "raw_response": "{\"labellings\":[{\"IN\":[\"a\"],\"OUT\":[\"b\",\"c\"],\"UNDEC\":[],\"reason\":\"a is unattacked, so IN. a attacks b and c, so both OUT. b attacks c but c already OUT; no conflict. This is admissible and contains all nodes it defends, hence complete.\"},{\"IN\":[\"a\",\"c\"],\"OUT\":[\"b\"],\"UNDEC\":[],\"reason\":\"a is unattacked, so IN. a attacks b, so b OUT. c is defended by a against b, so c IN. Conflict-free, defends all members, and contains every defended node, hence complete.\"}]}",
+          "response_sha256": "a06d7867c0f896440268128c78f53d850f2d6f9708825b40e07999bac115f91b"
+        },
+        "T": {
+          "agrees_with_declared_graph": false,
+          "answer": null,
+          "invalid_reason": "invalid bounded answer",
+          "raw_response": "{\"labellings\":[{\"IN\":[\"a\"],\"OUT\":[\"b\",\"c\"],\"UNDEC\":[],\"reason\":\"a is unattacked, so IN. a attacks b and c, so both OUT. No other complete extension exists: any admissible set must include a (it is defended by the empty set), and then b,c are attacked by IN and thus OUT.\"}]}",
+          "response_sha256": "babfa37967fd4c23a21af08a31b124a26bd954842c32fc3171ae6d9570aab954"
+        }
+      },
+      "case_id": "arg-dev-04",
+      "conditional_computation": {
+        "credulous": null,
+        "framework_id": "arg-dev-04",
+        "grounded": {
+          "IN": [
+            "a"
+          ],
+          "OUT": [
+            "b",
+            "c"
+          ],
+          "UNDEC": []
+        },
+        "grounded_steps": [
+          {
+            "defended": [
+              "a"
+            ],
+            "in": [],
+            "step": 0
+          },
+          {
+            "defended": [
+              "a"
+            ],
+            "in": [
+              "a"
+            ],
+            "step": 1
+          }
+        ],
+        "labellings": [
+          {
+            "IN": [
+              "a"
+            ],
+            "OUT": [
+              "b",
+              "c"
+            ],
+            "UNDEC": []
+          }
+        ],
+        "not_moral_verdict": true,
+        "not_private_mental_truth": true,
+        "not_world_truth": true,
+        "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+        "semantics": "complete",
+        "skeptical": null,
+        "source_event_id": "arg-dev-04",
+        "status": "EXTENSIONS_AVAILABLE",
+        "target": null
+      },
+      "family_sha256": "f33a4f511490bcb8aad34db43843750751e8796f4f05d3c00667a8cebcbaa5b5",
+      "generic_tool_labellings": [
+        {
+          "IN": [
+            "a"
+          ],
+          "OUT": [
+            "b",
+            "c"
+          ],
+          "UNDEC": []
+        }
+      ],
+      "query": {
+        "semantics": "complete",
+        "task": "return all requested labellings"
+      },
+      "source_file_sha256": "607b86304a6748c94ac09b027734437244cd8ae8ac60d8c7e19457ecce4ff701",
+      "source_only_state": {
+        "frameworks": [
+          {
+            "arguments": [
+              {
+                "argument_id": "a",
+                "evidence_text": "\"a\""
+              },
+              {
+                "argument_id": "b",
+                "evidence_text": "\"b\""
+              },
+              {
+                "argument_id": "c",
+                "evidence_text": "\"c\""
+              }
+            ],
+            "attacks": [
+              {
+                "attacker": "a",
+                "evidence_text": "[\"a\", \"b\"]",
+                "target": "b"
+              },
+              {
+                "attacker": "a",
+                "evidence_text": "[\"a\", \"c\"]",
+                "target": "c"
+              },
+              {
+                "attacker": "b",
+                "evidence_text": "[\"b\", \"c\"]",
+                "target": "c"
+              }
+            ],
+            "framework_id": "arg-dev-04",
+            "scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+            "source_event_id": "arg-dev-04"
+          }
+        ],
+        "scope": "CONDITIONAL_ON_DECLARED_COMPLETE_GRAPH",
+        "source_view": {
+          "event_ids": [
+            "arg-dev-04"
+          ],
+          "event_time": null,
+          "events": [
+            {
+              "actor_id": null,
+              "event_id": "arg-dev-04",
+              "metadata": {
+                "argumentation_scope": "DECLARED_COMPLETE_ARGUMENTATION_FRAMEWORK",
+                "chronology": "INGESTION_PLACEHOLDER",
+                "reader_only": true
+              },
+              "observer_ids": [],
+              "raw_text": "This is an explicit complete Dung argumentation framework, not a moral verdict, world truth, or private belief. Arguments are atomic nodes; the listed directed attacks are all attacks. A set attacks a node if one of its members attacks it. A set defends a node if it attacks every attacker of that node. An admissible set is conflict-free and defends every member. A complete extension is an admissible set containing every node it defends. The grounded extension is the least complete extension. IN is the extension, OUT all nodes it attacks, UNDEC the rest. Return every requested labelling exactly; preserve cycles and multiple complete extensions without forcing a winner.\nPUBLIC CONSTRUCTOR DECLARATIONS:\n        a = Argument('a')\n        b = Argument('b')\n        c = Argument('c')\n        def1 = Defeat(a, b)\n        def2 = Defeat(a, c)\n        def3 = Defeat(b, c)\n        af = AbstractArgumentationFramework('', arguments=[a, b, c], defeats=[def1, def2, def3])\nDECLARED GRAPH:\n{\"arguments\": [\"a\", \"b\", \"c\"], \"attacks\": [[\"a\", \"b\"], [\"a\", \"c\"], [\"b\", \"c\"]]}",
+              "recipient_ids": [],
+              "recorded_at": "2026-01-01T00:00:00+00:00",
+              "source_id": "PyArg-public-author-example",
+              "valid_time": "2026-01-01T00:00:00+00:00"
+            }
+          ],
+          "knowledge_cutoff": null,
+          "order": 1,
+          "target_agent_id": "__hcl_system_reader__",
+          "viewer_agent_id": "__hcl_system_reader__"
+        },
+        "status": "DECLARED_FRAMEWORK_AVAILABLE"
+      },
+      "source_sha256": "378fc50b7d4e321a097d5bca5207d1393a26aa8dc1b5718206b7f904c7400dc0",
+      "state_sha256": "1877353a56e6997f404d39d9b403b17275a5d80cc4a3f0e3b7bab4b0f841ba80"
+    }
+  ],
+  "scope": "four public-author-example development agreement under declared graphs, not a benchmark, fresh efficacy, natural-language argument mining, moral verdict or specialized architecture gain",
+  "selection_sha256": "5a2c77183f4c0ab1bda465c6738ac72586cb00879b6245b35d26d0609c3f39d5",
+  "started_case_ids": [
+    "arg-dev-01",
+    "arg-dev-02",
+    "arg-dev-03",
+    "arg-dev-04"
+  ],
+  "status": "SUCCESS"
+}

@@ -6,7 +6,15 @@ Human Cognition Layer (HCL)
 
 ## Current phase
 
-**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 generic-tool development signal; v0.10 argumentation candidate staged**
+**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 generic-tool development signal; v0.10 utility protocol INVALID; non-fresh contract repair staged**
+
+## v0.10 current result and concrete next action
+
+V01 cloud run `36295445865` completed twelve calls at reported USD 0.0050028. Shared output wording ambiguously located reason; all twelve outputs failed the frozen strict format. Scientific utility is **INVALID / inconclusive**, not a capability zero score or evidence of C/P/T equivalence. REVISE/DEMOTE pending one minimal non-fresh output-contract repair. Actual outputs and scored failures are immutable, four author-example families permanently development-consumed, no fresh pilot or architecture expansion authorized.
+
+The v02 runner and cloud workflow are staged with explicit top-level reason, unchanged runtime/source/questions/scoring, independent zero authorization, 12-call / USD 0.05 cap. Provider-free request-path regressions verify the repair, not LLM success. Only separate owner budget approval blocks actual v02 execution; no unused v01 budget carries forward. LongMemEval remains untouched.
+
+See `reports/HCL_V10_ARGUMENTATION_FINAL_DEVELOPMENT_CLOSURE.md`, `reports/HCL_V10_PYARG_DEV_V01_RECEIPT.json`, `docs/HCL_V10_PYARG_DEVELOPMENT_REPAIR_V02.md`. Historical staged candidate/preflight sections below describe the before-run state, superseded by this result.
 
 ## Core doctrine
 
@@ -5570,7 +5578,7 @@ LongMemEval remains sealed. Historical pre-execution gates below/above are
 superseded by this closure.
 
 
-## Post-v0.9 follow-through and v0.10 minimal argumentation candidate
+## Historical before-run: post-v0.9 follow-through and v0.10 candidate
 
 PR #87 closure merged as `16c6c60db90241b2ed43a3372ce87dc55e261b98`;
 exact-main preflight 36266465248 passed. v0.9 full-abduction source audit
@@ -5600,10 +5608,10 @@ requires separate USD 0.05 authorization; planning cap USD 0.0426. No v0.10
 provider call; cost variable unset, trigger absent. v0.9 variable zero;
 LongMemEval sealed. All actual inputs/state/calculations/raw answers archived.
 
-**Current gate: V10_PROVIDER_FREE_CI_THEN_SEPARATE_DEVELOPMENT_AUTHORIZATION_USD_0_05**.
+**Historical gate (superseded): V10_PROVIDER_FREE_CI_THEN_SEPARATE_DEVELOPMENT_AUTHORIZATION_USD_0_05**.
 
 
-## v0.10 exact-main provider-free certification
+## Historical before-run: v0.10 exact-main provider-free certification
 
 PR #88 merged as `fbf5342d90b885ffca32ed06017c2921072a3947`. Exact-main
 v0.10 preflight 36267427109 passed all four pinned source digests, selection,
@@ -5617,4 +5625,4 @@ claim. C/P/generic-tool-T efficacy remains untested. 12-call proposal requires
 separate USD 0.05 cap; variable unset, trigger absent, paid workflow runs zero.
 Completed v0.9 authorization zero; LongMemEval sealed. No new account or plan.
 
-**Current gate: SEPARATE_OWNER_AUTHORIZATION_FOR_V10_FOUR_EXAMPLES_USD_0_05**.
+**Historical gate (superseded): SEPARATE_OWNER_AUTHORIZATION_FOR_V10_FOUR_EXAMPLES_USD_0_05**.

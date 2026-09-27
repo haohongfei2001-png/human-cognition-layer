@@ -1,0 +1,26 @@
+{
+  "audit_scope": "Single-agent masked-label review before reading arm map or aggregate. Not independently blinded: author assertions and formal preflight were previously visible, styles can reveal tool arm. No format rescue.",
+  "cases": {
+    "arg-dev-01": {
+      "1": "Correct reinstatement b,d IN; c OUT. Extra nested reason violates exact row fields despite top-level reason.",
+      "2": "Wrong reinstatement: d should IN once its only attacker c is OUT. Missing top-level reason and extra nested reason.",
+      "3": "Same reinstatement error and malformed envelope."
+    },
+    "arg-dev-02": {
+      "1": "Three correct complete labellings, but all reasons nested and top-level reason absent. Grounded c UNDEC due d UNDEC, e choice reinstates c.",
+      "2": "Second alternative leaves c UNDEC despite both attackers b,d OUT; d called unattacked despite e->d. Invalid envelope.",
+      "3": "Same missing c reinstatement; d/e incorrectly described as unattacked. Invalid envelope."
+    },
+    "arg-dev-03": {
+      "1": "Correct all UNDEC; malformed envelope.",
+      "2": "Correct all UNDEC; malformed envelope.",
+      "3": "Correct all UNDEC; malformed envelope."
+    },
+    "arg-dev-04": {
+      "1": "Correct unique complete labelling a IN and b,c OUT. Reason incorrectly says any admissible set must include a; empty admissible is possible. Malformed envelope.",
+      "2": "Extra alternative a,c IN violates a->c conflict. Malformed envelope.",
+      "3": "Same extra conflicting alternative a,c IN. Malformed envelope."
+    }
+  },
+  "protocol_defect": "COMMON sentence ambiguously attaches reason to each labelling; parser requires top-level reason only. All responses violate exact schema. Count every response invalid and do not treat aggregate as cognition efficacy evidence."
+}

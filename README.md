@@ -8,6 +8,8 @@ Human Cognition Layer (HCL) 是一个面向**复杂人类认知建模、状态�
 
 **Canonical live state:** [STATUS.md](STATUS.md)
 
+v0.10 四例运行已关闭：共享输出契约有歧义，12 个答案均格式无效，不能作为能力成绩。原始证据永久保留；独立 v02 格式修复已准备，仅能做 non-fresh development repair，需新单独预算。详见 [closure](reports/HCL_V10_ARGUMENTATION_FINAL_DEVELOPMENT_CLOSURE.md)。
+
 ## Research thesis
 
 **The base model is replaceable. The cognition layer is the asset.**
@@ -46,7 +48,7 @@ HCL 首先要求认知表示和更新本身在事实、信息边界、时间关�
 
 当前 canonical 阶段：
 
-**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 generic-tool development signal; v0.10 argumentation candidate staged**
+**HCL v0.6 frozen RETAIN; v0.7/v0.8 frozen SIMPLIFY; v0.9 generic-tool development signal; v0.10 utility INVALID; non-fresh output-contract repair staged**
 
 v0.5 保持冻结，作为显式 stance / revision / provenance / persistent-state 基础。v0.6 已经真正增加了一层人物信息视角与 belief evidence runtime，而不是继续只做 memory infrastructure。
 
@@ -372,7 +374,7 @@ Next: qualify genuinely informative latent-abduction sources and competent
 generic executable comparison; leave consumed CounterBench families.
 
 
-## Post-v0.9 follow-through and v0.10 minimal argumentation candidate
+## Historical before-run: post-v0.9 follow-through and v0.10 candidate
 
 PR #87 closure merged as `16c6c60db90241b2ed43a3372ce87dc55e261b98`;
 exact-main preflight 36266465248 passed. v0.9 full-abduction source audit
