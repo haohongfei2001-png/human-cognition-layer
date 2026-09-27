@@ -10,7 +10,7 @@ Human Cognition Layer (HCL) 是一个面向**复杂人类认知建模、状态�
 
 v0.10 格式修复完成：四例 non-fresh development repair 的 C/P/T = 1/4、1/4、4/4，工具新增正确 3 例、反向退步 0 例。保留通用精确工具的有限开发信号，冻结并离开这些已消费样本；原协议无效证据保留，费用授权已关闭。详见 [closure](reports/HCL_V10_PYARG_DEV_V02_REPAIR_CLOSURE.md)。
 
-后续已准备间接回答理解的八例 C/P 开发筛查包（尚未调用），比较强直接回答与薄语用提示。详见 [protocol](docs/HCL_PRAGMATICS_CIRCA_DEVELOPMENT_V01.md)。
+间接回答开发筛查已关闭：八例中六例可评分，C/P 均为 5/6，无新增正确例，采用更简单的强直接回答。16 次调用费用约 USD 0.0029，授权归零；两例无多数标注和一例标注分歧完整保留。详见 [closure](reports/HCL_PRAGMATICS_CIRCA_FINAL_DEVELOPMENT_CLOSURE.md)。
 
 ## Research thesis
 

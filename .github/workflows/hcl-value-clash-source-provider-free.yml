@@ -1,0 +1,28 @@
+name: HCL Value Perspective Public Source Inventory (Zero Provider Calls)
+on:
+  pull_request:
+    paths: ["scripts/*value_clash*", "docs/HCL_VALUE*", ".github/workflows/hcl-value-clash-source-provider-free.yml"]
+  push:
+    branches: [main]
+    paths: ["scripts/*value_clash*", "docs/HCL_VALUE*", ".github/workflows/hcl-value-clash-source-provider-free.yml"]
+permissions:
+  contents: read
+jobs:
+  source-inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Inspect metadata without displaying case prose or references
+        run: |
+          mkdir -p .cache/clash
+          curl --fail --location --retry 0 --connect-timeout 10 --max-time 60 'https://huggingface.co/datasets/launch/CLASH/resolve/744ec8d62681038a9f44aaba2f737ebd83e8b0d3/dataset.csv' -o .cache/clash/dataset.csv
+          python scripts/inventory_value_clash_source_v01.py --source-file .cache/clash/dataset.csv --output .cache/clash/inventory.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hcl-value-clash-source-inventory-v01
+          path: .cache/clash/inventory.json
+          retention-days: 90

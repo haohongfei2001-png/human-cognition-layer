@@ -1,0 +1,38 @@
+{
+  "scope": "Single-agent masked-arm and hidden-native-reference source audit before arm map, per-case references and aggregate. No selected source/reference had been displayed earlier. Response styles may reveal arms; not an independent human blind. No answer is rescued or relabelled.",
+  "cases": {
+    "15529": {
+      "1": "Yes supported by enthusiastic invitation acceptance; travel context eagerness is mild interpretation, not known private emotion.",
+      "2": "Yes supported directly; no unstated mental facts."
+    },
+    "8792": {
+      "1": "Conditional yes is plausible for when client meetings require travel. Any-travel question also permits unqualified Yes, so retain category ambiguity; only is inferred from when rather than quoted.",
+      "2": "Same plausible conditional reading and categorical ambiguity; no unique private intention claimed."
+    },
+    "24783": {
+      "1": "No is a plausible conversational implication of not knowing author, not logical proof of never reading a book. Explicit communicative scope limits assertion.",
+      "2": "Same plausible No, uses direct implication language more strongly than warranted by pure logic, but asks likely dialogue interpretation."
+    },
+    "32043": {
+      "1": "Yes plausible positive acceptance, no explicit condition.",
+      "2": "Yes plausible acceptance; accurately notes sometime leaves timing open without converting that into a condition."
+    },
+    "27381": {
+      "1": "Invents a condition out of uncertainty about continuity. Residence in Mayfair presently answers still in London affirmatively under ordinary place knowledge; no contingent condition in reply. Label should plausibly Yes, not yes-subject-to-conditions.",
+      "2": "Yes supported by Mayfair-as-London background relation. Still relies on conversational presupposition/continuity, not known private state."
+    },
+    "4559": {
+      "1": "Probably no is a plausible hedged implication from hating musicals to theater preference, but subset does not entail full-class dislike. Could allow mixed/uncertain interpretation. Explicitly preserves non-musical alternative.",
+      "2": "Same hedge and alternative preserved; no true mental state asserted beyond quoted attitude."
+    },
+    "31426": {
+      "1": "No supported by rough versus good reputation contrast in ordinary context.",
+      "2": "Same No, source-grounded."
+    },
+    "9966": {
+      "1": "No supported by denying other-job presupposition; no unnecessary mind inference.",
+      "2": "Same No; accurately identifies premise correction, not a conditional answer."
+    }
+  },
+  "provisional_source_conclusion": "Seven masked pairs choose identical labels. Case27381 has one unsupported conditional label and one supported Yes. Cases8792/4559 remain label-boundary ambiguous; inspect native judgement distribution later without changing scores."
+}

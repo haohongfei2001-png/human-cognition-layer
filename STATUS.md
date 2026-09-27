@@ -14,7 +14,7 @@ V01 utility is permanently INVALID_OUTPUT_CONTRACT_UTILITY_INCONCLUSIVE: shared 
 
 V02 rated cost USD **0.0050424**, char bound **0.017331**; cumulative v01+v02 USD **0.0100452**, 24 calls. Both authorization variables zero. Full actual inputs/states/raw responses/hashes and masked-before-unmask notes archived; v01 preserved without rescue. LongMemEval untouched.
 
-Provider-free follow-through audited ICCMA, ArgBench and pragmatic sources. No in-cap independent formal pilot qualified. A simple Circa indirect-answer C/P development screen is staged: eight source-only-selected dialogue contexts, sixteen calls, separately capped USD 0.05, authorization zero. No stable current-model gap or efficacy claim; no specialized architecture expansion. See `docs/HCL_POST_V10_CAPABILITY_DIRECTION_AUDIT_V01.md` and `docs/HCL_PRAGMATICS_CIRCA_DEVELOPMENT_V01.md`. No fresh paid experiment is frozen yet. See `reports/HCL_V10_PYARG_DEV_V02_REPAIR_CLOSURE.md` and `reports/HCL_V10_PYARG_DEV_V02_RECEIPT.json`. Before-run sections below are historical, superseded by this result.
+Circa pragmatic development screen completed, run `36304588702`: eight contexts, six majority-scorable pairs; C/P **5/6, 5/6**, P-only/C-only **0/0**, invalid **0/0**. Two NA cases unscorable. **SIMPLIFY_DIRECT_METHOD_NO_INCREMENT**; strong C remains default, eight families consumed and left. 16 calls, rated USD **0.0028992**, authorization zero. Native/source disagreement retained without rescoring. See `reports/HCL_PRAGMATICS_CIRCA_FINAL_DEVELOPMENT_CLOSURE.md` and receipt. LongMemEval untouched. Provider-free next direction: value-perspective/temporal conflict source qualification; no efficacy claim or new paid authorization. Before-run sections below are historical.
 
 ## Core doctrine
 
