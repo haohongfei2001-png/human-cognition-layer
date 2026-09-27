@@ -1,0 +1,32 @@
+{
+  "format": "hcl-natural-argument-folio-dev-v01",
+  "revision": "5d7bb84c7edab3fb358e057d2807f19cf5cf5e2d",
+  "data_sha256": "6922c988ef10987bd6545568ee8e63e897af80994591fa20539767da58f8e3d1",
+  "salt": "HCL-NATURAL-ARGUMENT-FOLIO-DEVELOPMENT-V01",
+  "exposed_premise_substrings_excluded": [
+    "If people work in student jobs on campus"
+  ],
+  "scope": "Older public v0.0 provisional native human-annotation agreement; source-first audit required, not corrected/latest/full/fresh/ground-truth cognition efficacy",
+  "cases": [
+    {
+      "row_index": 193,
+      "story_sha256": "529461b5befebed30b9103c3a17315b7ec3868bf2f0f8b653750ff7330a0d285",
+      "source_sha256": "63ef8e7284beee5bb8a9237c4ee38e500eb3c07bf5d14b4a6771522c77f113ec"
+    },
+    {
+      "row_index": 73,
+      "story_sha256": "b87816f07b68d166796416d410b39275f1f81f81e2e0983f6420c0221eaa0eef",
+      "source_sha256": "610733e63cced6a8237eefbaebfaf12a66fb2bca924318d921627a22cca66250"
+    },
+    {
+      "row_index": 128,
+      "story_sha256": "c46787b06fb2e49315bfccd97bf6ec1e50a2bf06a0bd91159e76f97018fbb02f",
+      "source_sha256": "1b4993da84ec737746447e22f918a16bf6c3139c8fc03ea07e0d32cc52f5b713"
+    },
+    {
+      "row_index": 137,
+      "story_sha256": "11b2189aa9591fea7e7b5d63417e47493794e33dada1adc2d1f01ea4d3267329",
+      "source_sha256": "e4f83418b2b1d469d6928acb57522a115be88d7c6c590c450ded4adc40cb3e96"
+    }
+  ]
+}
