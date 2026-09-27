@@ -14,7 +14,9 @@ jobs:
     timeout-minutes: 30
     env:
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-      HCL_ARGUMENT_COUNTERMODEL_DEV_COST_AUTHORIZED_USD: ${{ vars.HCL_ARGUMENT_COUNTERMODEL_DEV_COST_AUTHORIZED_USD }}
+      # Owner authorized this exact frozen scope on 2026-09-27. The budget
+      # exists only in this first-attempt, sole-trigger job; no persistent grant.
+      HCL_ARGUMENT_COUNTERMODEL_DEV_COST_AUTHORIZED_USD: "0.05"
       HCL_ARGUMENT_COUNTERMODEL_DEV_RUN_ONCE_TOKEN: HCL_ARGUMENT_COUNTERMODEL_DEV_V01_ONCE
     steps:
       - uses: actions/checkout@v4
