@@ -1,0 +1,24 @@
+{
+  "revision": "5d7bb84c7edab3fb358e057d2807f19cf5cf5e2d",
+  "path": "data/v0.0/folio-validation.jsonl",
+  "git_blob": "06244bd10b37eac73cba7aca6c336e96011ace58",
+  "bytes": 173456,
+  "sha256": "6922c988ef10987bd6545568ee8e63e897af80994591fa20539767da58f8e3d1",
+  "rows": 204,
+  "license": "CC BY-SA4.0, upstream LICENSE, copied notice",
+  "schema": "premises NL list, conclusion NL, label, premises-FOL, conclusion-FOL; no stable story/example IDs in pinned v0.0 file",
+  "selection": "Four distinct exact NL-premise hashes; source-only deterministic story/question representative; no label/formal-annotation lookup. Exclude search-exposed campus/student-job premise family.",
+  "manifest_sha256": "c75fee6b3ec2e3d7ba99d37ba9f1bcff5d5a1c9422a31c35840506dc8950c01b",
+  "selected_model_calls": 0,
+  "selected_questions_or_native_outcomes_displayed": false,
+  "same_provider_strong_reasoning_gap": "UNKNOWN. Older academic scores do not establish current deepseek-flash deficit.",
+  "source_status": "PROVISIONAL_DEVELOPMENT_INSTRUMENT_ONLY; no corrected-data/latest/full/fresh/native truth claim",
+  "quality_concern": "Author README points to newer Hugging Face release; current HF/local network unavailable. 2606.02837 reports FOLIO annotation/wording concerns; exact version alignment not established, so do not assign its aggregate error rates to this pinned file. No human-reviewed corrected release/license pin located in inspected primary metadata.",
+  "primary_sources": [
+    "https://github.com/Yale-LILY/FOLIO",
+    "https://aclanthology.org/2024.emnlp-main.1229/",
+    "https://arxiv.org/abs/2606.02837"
+  ],
+  "native_label_scope": "Conditional premise-based annotation agreement, not real world or moral/psychological truth; any source/reference contradiction or irresolvable wording makes utility INCONCLUSIVE without relabeling/rescoring.",
+  "LongMemEval_consumed": false
+}

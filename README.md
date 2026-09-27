@@ -16,7 +16,7 @@ v0.10 格式修复完成：四例 non-fresh development repair 的 C/P/T = 1/4�
 
 叙事时间顺序开发重跑已关闭：C/P/T 为0/4、1/4、0/4，工具两例引用提取无效，没有新增正确例；采用更简单的薄提示，冻结工具并离开四例。实际14次调用，计价约USD0.00338，授权归零；原请求失败与标注分歧保留。见 [closure](reports/HCL_NARRATIVE_TORQUE_FINAL_DEVELOPMENT_CLOSURE.md)。
 
-量词筛查已关闭：推理开启的直接方法和薄提示均3/4，无新增正确例；两者同一例最终输出为空，不能推断语义能力失败。采用简单直接方法，预算归零。见 [closure](reports/HCL_CONCEPTUAL_QUANTIFIER_FINAL_DEVELOPMENT_CLOSURE.md)。后续显式论证反例构造的直接模型/薄提示/通用工具比较已冻结，零调用；独立新预算最多8次、USD0.05。见 [protocol](docs/HCL_ARGUMENT_COUNTERMODEL_DEVELOPMENT_V01.md)。
+量词筛查已关闭：推理开启的直接方法和薄提示均3/4，无新增正确例；两者同一例最终输出为空，不能推断语义能力失败。采用简单直接方法，预算归零。见 [closure](reports/HCL_CONCEPTUAL_QUANTIFIER_FINAL_DEVELOPMENT_CLOSURE.md)。显式论证反例构造比较也已关闭：直接模型/薄提示/通用工具4/4、3/4、4/4，唯一差异是薄提示多返回字段，语义新增为零；采用直接方法并离开四例。8次调用，保守计价USD0.020525304；临时授权已到期，执行配置额度关闭。见 [closure](reports/HCL_ARGUMENT_COUNTERMODEL_FINAL_DEVELOPMENT_CLOSURE.md)。
 
 ## Research thesis
 
@@ -416,4 +416,6 @@ LongMemEval sealed. All actual inputs/state/calculations/raw answers archived.
 
 量词符号化开发筛查已关闭：推理开启的直接模型与薄提示均3/4，新增正确例0；同一例两者均耗尽4096推理额度而最终输出为空，不能据此判为语义能力失败。采用简单直接方法，冻结薄提示并离开四例。8次调用，保守计价USD0.018613704，授权归零。见 [closure](reports/HCL_CONCEPTUAL_QUANTIFIER_FINAL_DEVELOPMENT_CLOSURE.md)。
 
-后续反例构造比较已准备：直接模型、薄提示与通用求解工具使用同一显式形式论证，独立验证所有前提真且结论假。当前零调用；新预算上限USD0.05（最多8次）须单独授权。此工具不等于自然语言哲学理解。见 [protocol](docs/HCL_ARGUMENT_COUNTERMODEL_DEVELOPMENT_V01.md)。
+显式论证反例构造比较也已关闭：直接模型/薄提示/通用工具4/4、3/4、4/4，唯一差异是薄提示多返回字段，语义新增为零；采用直接方法并离开四例。8次调用，保守计价USD0.020525304；临时授权已到期，执行配置额度关闭。见 [closure](reports/HCL_ARGUMENT_COUNTERMODEL_FINAL_DEVELOPMENT_CLOSURE.md)。
+
+自然语言论证阅读比较已免费准备：旧版公开FOLIO四个独立前提情境，直接模型与薄提示均开启推理。标注存在已报告的质量风险；发现原文/标注矛盾即判研究结论不确定，不改标注或分数。尚未调用，新预算最多8次、USD0.05须独立授权。见 [protocol](docs/HCL_NATURAL_ARGUMENT_FOLIO_DEVELOPMENT_V01.md)。

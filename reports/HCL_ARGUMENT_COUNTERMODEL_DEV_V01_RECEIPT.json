@@ -1,0 +1,78 @@
+{
+  "decision": "SIMPLIFY_STRONG_REASONING_DIRECT",
+  "scope": "Four explicit formal development countermodel tasks only, not natural-language interpretation/fresh/full/native/general cognition efficacy",
+  "run_id": 36325892597,
+  "run_attempt": 1,
+  "execution_sha": "daa17d7794106b65236e6571d97e39c6a0ac0d5f",
+  "trigger_pr": 107,
+  "authorization_transport_repair_pr": 106,
+  "authorization_transport_repair_sha": "472999a1d9c7b76dd090b9daf00295ab89278ced",
+  "strict_correct": {
+    "C": 4,
+    "P": 3,
+    "T": 4
+  },
+  "denominator": 4,
+  "strict_invalid": {
+    "C": 0,
+    "P": 1
+  },
+  "well_formed_semantic_failure": {
+    "C": 0,
+    "P": 0
+  },
+  "pairs": {
+    "T_vs_C": {
+      "gains": 0,
+      "reverses": 0
+    },
+    "T_vs_P": {
+      "gains": 1,
+      "reverses": 0
+    },
+    "P_vs_C": {
+      "gains": 0,
+      "reverses": 1
+    }
+  },
+  "source_semantic_tool_gains": {
+    "versus_C": 0,
+    "versus_P": 0
+  },
+  "calls": {
+    "C": 4,
+    "P": 4
+  },
+  "tool_provider_calls": 0,
+  "total_ledger_usd": 0.020525303999999998,
+  "metrics": {
+    "C": {
+      "calls": 4,
+      "rated_cost_usd": 0.009980699999999999,
+      "wall_seconds": 36.99746495499999
+    },
+    "P": {
+      "calls": 4,
+      "rated_cost_usd": 0.010544603999999999,
+      "wall_seconds": 39.36815196200001
+    }
+  },
+  "artifact_id": 10933178751,
+  "artifact_digest": "sha256:06c55febbf01651b97383c05e0bee733f39bf639738846b33212b3050d4d2eb9",
+  "zip_sha256": "06c55febbf01651b97383c05e0bee733f39bf639738846b33212b3050d4d2eb9",
+  "execution_job_log_sha256": "f877fe3aa258ca93785aa1dbfb79374080117945794ec1b7e1bf4cd7144c0675",
+  "files_sha256": {
+    "RESULTS": "2d1c734655f1dc8b20d7aa57efe56bedd75ec4b53d328d85c82e49c0f2bf4afe",
+    "MASKED_AUDIT": "bf8accf714a40cb79a3d4037af2635b67bc74964ef081a373dbcdf151dfb6090",
+    "ARM_MAP": "3e646b18b42c9ae350605d38ad8d0b9750bc53f84df55dd41765f88fa8b35863",
+    "VERIFICATION": "5af71655cb28416e9a4aa56e0720177af6cf0815a23148640fcdaf1ddb128bde",
+    "AUTH_GUARD_VERIFICATION": "b1cec5d7ac9ba9054930a782629fdefc6d81d0918e0e8a89b0e78df7cbb0f2d1"
+  },
+  "cloud_preflight_tests": 23,
+  "authorization_lifetime": "Literal0.05 job-local grant behind unchanged sole-trigger/first-attempt/exact-parent/history guards; expired when job completed2026-09-27T14:27:46Z. Closure sets dormant workflow grant0. Repository variable never activated. Local admin interface unavailable, so no fresh live variable-zero assertion.",
+  "no_successful_variable_write_attempt": true,
+  "masking": "Single-agent notes before unmask, not independent human blind",
+  "raw_hidden_reasoning_stored": false,
+  "invoice_usd": null,
+  "LongMemEval_consumed": false
+}

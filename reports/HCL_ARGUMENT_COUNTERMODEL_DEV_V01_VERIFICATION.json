@@ -1,0 +1,191 @@
+{
+  "status": "SUCCESS",
+  "calls": {
+    "C": 4,
+    "P": 4
+  },
+  "correct": {
+    "C": 4,
+    "P": 3,
+    "T": 4
+  },
+  "strict_invalid": {
+    "C": 0,
+    "P": 1
+  },
+  "well_formed_semantic_failure": {
+    "C": 0,
+    "P": 0
+  },
+  "usage_rated_usd": {
+    "C": 0.009980699999999999,
+    "P": 0.010544603999999999
+  },
+  "total_ledger_usd": 0.020525303999999998,
+  "input_utf8bytes": {
+    "C": 9062,
+    "P": 10550
+  },
+  "reasoning_plus_final_chars": {
+    "C": 20336,
+    "P": 22098
+  },
+  "source_sha256": "cd57f6d31afa19e83e48e087b22db4296a7ef9f56ff83aa3324f39a62cef60c0",
+  "manifest_sha256": "67840e20f836b889e0faa5a9e1069a83c712a991971edae9cf4684b591a251c7",
+  "cases": [
+    {
+      "id": "c3c7d8325b874497",
+      "independent_checks": {
+        "C": {
+          "scope": "FORMAL_INTERPRETATION_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH",
+          "premises": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "conclusion": false,
+          "is_countermodel": true
+        },
+        "P": {
+          "status": "STRICT_INVALID",
+          "finish_reason": "stop"
+        },
+        "T": {
+          "scope": "FORMAL_INTERPRETATION_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH",
+          "premises": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "conclusion": false,
+          "is_countermodel": true
+        }
+      }
+    },
+    {
+      "id": "70f7037236123e93",
+      "independent_checks": {
+        "C": {
+          "scope": "FORMAL_INTERPRETATION_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH",
+          "premises": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "conclusion": false,
+          "is_countermodel": true
+        },
+        "P": {
+          "scope": "FORMAL_INTERPRETATION_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH",
+          "premises": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "conclusion": false,
+          "is_countermodel": true
+        },
+        "T": {
+          "scope": "FORMAL_INTERPRETATION_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH",
+          "premises": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "conclusion": false,
+          "is_countermodel": true
+        }
+      }
+    },
+    {
+      "id": "b5aaf203c8b7534b",
+      "independent_checks": {
+        "C": {
+          "scope": "FORMAL_INTERPRETATION_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH",
+          "premises": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "conclusion": false,
+          "is_countermodel": true
+        },
+        "P": {
+          "scope": "FORMAL_INTERPRETATION_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH",
+          "premises": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "conclusion": false,
+          "is_countermodel": true
+        },
+        "T": {
+          "scope": "FORMAL_INTERPRETATION_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH",
+          "premises": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "conclusion": false,
+          "is_countermodel": true
+        }
+      }
+    },
+    {
+      "id": "4fd2a0dc6c24676a",
+      "independent_checks": {
+        "C": {
+          "scope": "FORMAL_INTERPRETATION_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH",
+          "premises": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "conclusion": false,
+          "is_countermodel": true
+        },
+        "P": {
+          "scope": "FORMAL_INTERPRETATION_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH",
+          "premises": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "conclusion": false,
+          "is_countermodel": true
+        },
+        "T": {
+          "scope": "FORMAL_INTERPRETATION_NOT_WORLD_OR_PRIVATE_MENTAL_TRUTH",
+          "premises": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "conclusion": false,
+          "is_countermodel": true
+        }
+      }
+    }
+  ],
+  "source_scoring": "Native reference model absent; independently evaluate all premises/conclusion in exact public formal task/domain. No NL oracle."
+}

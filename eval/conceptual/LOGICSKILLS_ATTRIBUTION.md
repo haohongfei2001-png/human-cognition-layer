@@ -9,3 +9,5 @@ Selected instrument is generated controlled-English/first-order logic, **not hum
 The v01 RESULTS archive now redistributes four exact controlled-English public inputs and unchanged native forms under CC BY4.0, with separately identified added model responses/proofs/audit. No upstream endorsement.
 
 Argument countermodel v01 uses the same pinned dataset under CC BY4.0, human-facing formatted300 formal tasks. Provider-free manifests contain ids/hashes only; future source-containing results retain these notices. Formal argument task is generated, not a human psychological annotation.
+
+Argument countermodel v01 RESULTS now redistributes four exact generated public formal tasks, clearly distinguished from added C/P outputs, generic solver witnesses and audits. CC BY4.0 attribution applies to source material; no upstream endorsement.
