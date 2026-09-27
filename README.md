@@ -413,3 +413,7 @@ provider call; cost variable unset, trigger absent. v0.9 variable zero;
 LongMemEval sealed. All actual inputs/state/calculations/raw answers archived.
 
 **Historical gate (superseded): V10_PROVIDER_FREE_CI_THEN_SEPARATE_DEVELOPMENT_AUTHORIZATION_USD_0_05**.
+
+量词符号化开发筛查已关闭：推理开启的直接模型与薄提示均3/4，新增正确例0；同一例两者均耗尽4096推理额度而最终输出为空，不能据此判为语义能力失败。采用简单直接方法，冻结薄提示并离开四例。8次调用，保守计价USD0.018613704，授权归零。见 [closure](reports/HCL_CONCEPTUAL_QUANTIFIER_FINAL_DEVELOPMENT_CLOSURE.md)。
+
+后续反例构造比较已准备：直接模型、薄提示与通用求解工具使用同一显式形式论证，独立验证所有前提真且结论假。当前零调用；新预算上限USD0.05（最多8次）须单独授权。此工具不等于自然语言哲学理解。见 [protocol](docs/HCL_ARGUMENT_COUNTERMODEL_DEVELOPMENT_V01.md)。

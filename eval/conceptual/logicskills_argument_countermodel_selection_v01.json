@@ -1,0 +1,28 @@
+{
+  "format": "hcl-argument-countermodel-dev-v01",
+  "revision": "31b175699127b766e64eb0c550893396404f665b",
+  "data_sha256": "cd57f6d31afa19e83e48e087b22db4296a7ef9f56ff83aa3324f39a62cef60c0",
+  "salt": "HCL-ARGUMENT-COUNTERMODEL-DEVELOPMENT-V01",
+  "excluded_format_example_ids": [
+    "62d4f6152155aa29"
+  ],
+  "scope": "Four development explicit formal countermodel tasks; no NL translation/fresh/general cognition claim",
+  "cases": [
+    {
+      "id": "c3c7d8325b874497",
+      "source_sha256": "e5dced6e15559da9cfebaa150ada40c3ce1312148d998768c30c59dae76f002f"
+    },
+    {
+      "id": "70f7037236123e93",
+      "source_sha256": "ea7e7faa725456ffdbbc2544187580dcbce46552f9f7f40eb78bf36062bec4ae"
+    },
+    {
+      "id": "b5aaf203c8b7534b",
+      "source_sha256": "9fa32d54d54e5d4fcac9a3cbe5d5c71bfc6db6c2a2034abebb1eb83f1ff8ca27"
+    },
+    {
+      "id": "4fd2a0dc6c24676a",
+      "source_sha256": "a0deaa1a559d7fe2208a9284a82cd3a4a5b795b47bda086bb4e1b82b6f3fdf1c"
+    }
+  ]
+}

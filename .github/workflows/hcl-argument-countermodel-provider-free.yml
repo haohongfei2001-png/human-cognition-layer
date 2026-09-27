@@ -1,0 +1,26 @@
+name: HCL Formal Argument Countermodel Provider-Free Source and Witness Preflight
+on:
+  pull_request:
+    paths: ["hcl/quantified_logic.py", "scripts/*argument_countermodel*", "scripts/reasoning_probe_backend.py", "tests/test_argument_countermodel*", "eval/conceptual/**", "docs/HCL_ARGUMENT*", "reports/HCL_ARGUMENT*", "requirements-conceptual.txt", ".github/workflows/hcl-argument*.yml", ".github/workflows/hcl-quantifier*.yml"]
+  push:
+    branches: [main]
+    paths: ["hcl/quantified_logic.py", "scripts/*argument_countermodel*", "scripts/reasoning_probe_backend.py", "tests/test_argument_countermodel*", "eval/conceptual/**", "docs/HCL_ARGUMENT*", "reports/HCL_ARGUMENT*", "requirements-conceptual.txt", ".github/workflows/hcl-argument*.yml", ".github/workflows/hcl-quantifier*.yml"]
+permissions:
+  contents: read
+jobs:
+  provider-free:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install "pandas>=2.2,<3" "openai==2.14.0" "z3-solver==4.15.4.0"
+      - name: Verify fixed public source and zero-call plan
+        run: |
+          mkdir -p .cache/logicskills
+          curl --fail --location --retry 0 'https://raw.githubusercontent.com/brianrabern/LogicSkills/31b175699127b766e64eb0c550893396404f665b/Assessors/human/formatted_countermodel_questions.json' -o .cache/logicskills/english.json
+          echo 'cd57f6d31afa19e83e48e087b22db4296a7ef9f56ff83aa3324f39a62cef60c0  .cache/logicskills/english.json' | sha256sum -c -
+          python scripts/run_argument_countermodel_dev_v01.py --source-file .cache/logicskills/english.json --validate-only
+          python -m unittest -v tests.test_quantified_logic tests.test_quantifier_logicskills_dev_v01 tests.test_argument_countermodel_dev_v01
