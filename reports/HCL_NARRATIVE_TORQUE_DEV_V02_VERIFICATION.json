@@ -1,0 +1,45 @@
+{
+  "strict_correct": {
+    "C": 0,
+    "P": 1,
+    "T": 0
+  },
+  "denominator": 4,
+  "invalid": {
+    "C": 0,
+    "P": 0,
+    "T": 2
+  },
+  "pairs": {
+    "C": {
+      "T_only": 0,
+      "baseline_only": 0,
+      "both_correct": 0,
+      "both_wrong": 4
+    },
+    "P": {
+      "T_only": 0,
+      "baseline_only": 1,
+      "both_correct": 0,
+      "both_wrong": 3
+    }
+  },
+  "calls": {
+    "C": 4,
+    "P": 4,
+    "T": 6
+  },
+  "graph_parse_errors": [
+    {
+      "id": "docid_AFP_ENG_20061216.0046_sentid_5",
+      "type": "ValueError",
+      "detail": "quote occurrence missing"
+    },
+    {
+      "id": "docid_AFP_ENG_19970413.0281_sentid_0",
+      "type": "ValueError",
+      "detail": "quote occurrence missing"
+    }
+  ],
+  "all_frozen_source_question_input_response_hashes_native_offsets_parser_and_accounting_verified": true
+}

@@ -1,0 +1,31 @@
+{
+  "format": "hcl-quantifier-logicskills-dev-v01",
+  "revision": "31b175699127b766e64eb0c550893396404f665b",
+  "data_sha256": "6c39b461f428536f7b0870b2179cee216d59d7bf4122b213aee85ff5b44d7fe8",
+  "salt": "HCL-CONCEPTUAL-QUANTIFIER-LOGICSKILLS-DEVELOPMENT-V01",
+  "excluded_public_format_example_ids": [
+    11131
+  ],
+  "excluded_public_paper_sentences": [
+    "A human chased a donkey that chased it"
+  ],
+  "scope": "four source-only-selected controlled-language development inputs; no natural discourse/full/native/fresh efficacy claim",
+  "cases": [
+    {
+      "id": 6071,
+      "source_sha256": "bd7ad622749b21718f262c1d420b2126d3088014508755f57ca20baa24504870"
+    },
+    {
+      "id": 4475,
+      "source_sha256": "c606d0dabb5d27b3f59dac52c6421b5d2c9c6cec2f0649be3a831bca6b97fde6"
+    },
+    {
+      "id": 5303,
+      "source_sha256": "94e7fedca11ec63cd2899f925eeac2e91119447af451ed5e90b1f8a831a68742"
+    },
+    {
+      "id": 5927,
+      "source_sha256": "c756ea714813c928c00633acd4cb80cdf2b55390bb9ecd0309662ee311beaaf9"
+    }
+  ]
+}

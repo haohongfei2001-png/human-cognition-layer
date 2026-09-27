@@ -14,7 +14,9 @@ v0.10 格式修复完成：四例 non-fresh development repair 的 C/P/T = 1/4�
 
 人物价值冲突开发筛查也已关闭：严格 C/P 为 4/8、5/8，唯一新增正确例来自输出长度合规，语义新增为零，因此采用直接方法。16 次调用费用约 USD 0.0061，授权归零。详见 [closure](reports/HCL_VALUE_CLASH_FINAL_DEVELOPMENT_CLOSURE.md)。
 
-叙事时间顺序 v01 请求被 API 拒绝：一次图构建请求，无有效返回，无可比较成绩；保留 INCONCLUSIVE 证据，授权归零。已免费修复 JSON 请求格式与失败记录并冻结同四例 non-fresh 重跑方案，最多16次、新上限 USD0.10。见 [closure](reports/HCL_NARRATIVE_TORQUE_DEV_V01_INVALID_TRANSPORT_CLOSURE.md) 与 [repair](docs/HCL_NARRATIVE_ORDER_TRANSPORT_REPAIR_V02.md)。
+叙事时间顺序开发重跑已关闭：C/P/T 为0/4、1/4、0/4，工具两例引用提取无效，没有新增正确例；采用更简单的薄提示，冻结工具并离开四例。实际14次调用，计价约USD0.00338，授权归零；原请求失败与标注分歧保留。见 [closure](reports/HCL_NARRATIVE_TORQUE_FINAL_DEVELOPMENT_CLOSURE.md)。
+
+下一方向已免费准备量词与反例核验能力，冻结四个独立的受控英语逻辑情境。直接方法和薄提示均开启推理，先检验强基线下是否仍有增量；尚未调用，独立提案最多8次、USD0.05。见 [protocol](docs/HCL_CONCEPTUAL_QUANTIFIER_DEVELOPMENT_V01.md)。
 
 ## Research thesis
 
