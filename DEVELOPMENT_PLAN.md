@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVE A / A01–A03 CORRECTNESS_VERIFIED / NEXT_READY=A04**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVE A COMPLETE / WAVE B READY / NEXT_READY=B01**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -90,7 +90,7 @@ Passing these checks means **safe enough to continue building**. It does not mea
 external efficacy, independent generalization or strong-model enhancement is
 established.
 
-## 5. Current Wave A — Unified Core and Ordinary Input
+## 5. Completed Wave A — Unified Core and Ordinary Input
 
 Wave A absorbs the generic semantic-preparation/native-entry work previously named
 EG01-A. The independent-source qualification, fair efficacy package and provider-
@@ -160,13 +160,13 @@ records, ordinary expressed-position comparison and actual final support/challen
 closure. Eight A03 tests plus fourteen A02 tests cover the five engineering
 obligations; see `docs/HCL_WAVE_A02_A03.md`.
 
-### A04 — Retained-capability adapters into the shared core — NEXT_READY
+### A04 — Retained-capability adapters into the shared core — CORRECTNESS_VERIFIED
 
 **CAPABILITY_DELTA:** retained v0.6 perspective/belief and CG03/04/05 operations
 can consume the same ordinary-source semantic material and preserve their distinct
 uncertainty/premise semantics.
 
-### A05 — First real cross-capability vertical slice
+### A05 — First real cross-capability vertical slice — CORRECTNESS_VERIFIED
 
 **CAPABILITY_DELTA:** one ordinary-source update propagates through at least two
 real cognition operations and changes only the dependent conclusions, with an
@@ -174,6 +174,25 @@ auditable actual state/input receipt.
 
 After A05, continue directly to Wave B unless a real correctness/safety dependency
 blocks it. Do not stop merely because no large efficacy experiment has been run.
+
+A04–A05 delivered the common-material adapter into real retained checkers,
+explicit translation assumptions, source-to-operation projection dependencies,
+stale-support answer rejection and one final-adapter call. The positive slice
+changes a concept check and the dependent belief/concept comparison while
+preserving unrelated Noor. See `docs/HCL_WAVE_A04_A05.md`. Live provider status
+remains unverified; this does not block Wave B construction.
+
+## 5b. Current Wave B — Dynamic Epistemic Cognition
+
+**B01 — NEXT_READY:** separate public expression, private-belief interpretation,
+exposure, understanding and knowledge claims; construct query-bounded nested
+mental propositions. Speech/exposure alone must not establish private belief or
+higher-order acceptance. Require a positive nested interpretation witness.
+
+Then B02 differentiated communication/access updates → B03 character revision
+versus analyst revision → B04 correlated reports, conflicts and bounded depth →
+B05 ordinary-input integration and local revision. Full contracts and dependencies
+remain in the Master Plan. No automatic per-package paid comparison.
 
 ## 6. Construction queue
 
@@ -329,14 +348,14 @@ defect is.
 
 ## 13. Current execution fact
 
-- Current wave: **Wave A — Unified Core and Ordinary Input**
+- Current wave: **Wave B — Dynamic Epistemic Cognition (READY)**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: A04_RETAINED_CAPABILITY_SHARED_CORE_ADAPTERS**
+- **NEXT_READY: B01_DISTINCT_EPISTEMIC_STATES_AND_BOUNDED_HIGHER_ORDER_PROPOSITIONS**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A03 actual provider calls / spend: **0 / USD 0**
+- A01–A05 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **A04**, then continue through the dependency-safe queue
+Work should continue at **B01**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
