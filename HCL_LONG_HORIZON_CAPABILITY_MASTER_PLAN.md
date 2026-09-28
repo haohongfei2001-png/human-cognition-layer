@@ -8,6 +8,17 @@
 
 > 目标：把可外挂于强基础模型的 Human Cognition Layer，建设成能从普通输入进行证据有界、视角敏感、可修订、跨能力组合推理的认知工作空间。先建设真实能力，再集中验证实际增益，最后审计权威榜单。架构是可证伪的设计方案，不是已经证实有效的认知理论，也不承诺某种可证明的能力上限。
 
+## 执行授权补充（最新 owner 指令）
+
+本计划本身不产生外部授权。采用之后 owner 已另行授予 DEFAULT AUTONOMY /
+DEFAULT APPROVAL：必要、合理、可审计、可逆的路线工作自主执行；现有
+provider/API/credential/billing 内正常且有必要的低成本开发调用无需逐次请示。
+限定次数、记录 usage/cost，不重复已回答的问题；A–C 仅必要 live-entry，
+Serious Independent Evaluation 主要在 G-ARCH 后。历史已消费 grant 和剩余预算
+不重新使用。新外部 onboarding/凭据、异常大额成本、隐私或许可等硬边界路径
+应 defer 并继续独立工作。本补充覆盖下文旧的逐次 owner spending gate，
+不改变能力、依赖、证据标准、G-HC/G-ARCH 或 LongMemEval 封存边界。
+
 ## 0. 决策摘要
 
 建议批准的方向不是“再增加一个 CG 检查器”，也不是“立刻验证所有已存在模块”，而是：
