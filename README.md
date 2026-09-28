@@ -2,7 +2,7 @@
 
 HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息、信念、视角和有来源的心理证据。**基础模型可以直接做好时，直接回答。** 简单提示足够时不调用复杂机制；精确计算采用通用工具；专门认知机制只保留得到增量证据支持的部分。
 
-当前阶段：**HCL Long-Horizon Capability Growth — Wave C**。A01–A05 共享证据、普通语义入口、解释修订和保留能力垂直整合已通过正确性验证；B01 已实现有作用域的高阶信念归因；B02 已实现三人差异化交流/接触视图；B03 已区分人物修订与分析者纠正旧记录；B04 已实现转述来源归组与有界高阶查询；B05 已完成分人物局部更新与概念/责任检查整合，Wave B 正确性构建完成；当前唯一 `NEXT_READY` 为 **C01 goal and plan objects**。POST-CG05 review 和全部历史 evidence disposition 保持原分类；EG01-A 的通用 semantic/native-entry 工作吸收到 Wave A，independent qualification 与 serious efficacy validation 后移到 G-ARCH 之后。唯一实时状态见 [STATUS.md](STATUS.md)，完整长期架构与 41 包路线见 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)，live 队列见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
+当前阶段：**HCL Long-Horizon Capability Growth — Wave C**。A01–A05 共享证据、普通语义入口、解释修订和保留能力垂直整合已通过正确性验证；B01 已实现有作用域的高阶信念归因；B02 已实现三人差异化交流/接触视图；B03 已区分人物修订与分析者纠正旧记录；B04 已实现转述来源归组与有界高阶查询；B05 已完成分人物局部更新与概念/责任检查整合，Wave B 正确性构建完成；C01 已实现目标/计划/机会的有来源联结；当前唯一 `NEXT_READY` 为 **C02 competing action explanations**。POST-CG05 review 和全部历史 evidence disposition 保持原分类；EG01-A 的通用 semantic/native-entry 工作吸收到 Wave A，independent qualification 与 serious efficacy validation 后移到 G-ARCH 之后。唯一实时状态见 [STATUS.md](STATUS.md)，完整长期架构与 41 包路线见 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)，live 队列见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
 
 - [普通人物问题与叙事入口](docs/HCL_V1_PERSON_QUESTION.md)：有来源、时间、访问与局部修订边界；单次回答，默认零提取调用。
 - [夜间 source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)：实际能力变化、证据限制、两个 deferred 冻结包。
@@ -135,3 +135,5 @@ authorized by this policy change.
 [B04 转述来源与冲突](docs/HCL_WAVE_B04.md)：复制不增加独立支持，人物明确不确定与系统缺证分开，高阶归因不脱离原来的说话者与模态。
 
 [B05 分人物整合与局部修订](docs/HCL_WAVE_B05.md)：只修改 Noor 的接触记录，会更新其高阶比较、概念和条件责任检查；Mira 与 Kai 的实际输入保持不变。
+
+[C01 目标、手段与计划](docs/HCL_WAVE_C01.md)：目标不自动选定计划；有来源的选定计划与机会可支持继续推进；放弃目标会改变依赖它的检查，结果不反推意图。
