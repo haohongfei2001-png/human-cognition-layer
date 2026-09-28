@@ -1,10 +1,12 @@
 """Deterministic semantic routing; no benchmark names or model extraction."""
 from dataclasses import dataclass, field
 from datetime import datetime
+from enum import Enum
 import re
 from typing import Any
 from hcl.v04.model import EventRecord
 from .capabilities import CostClass, resolve_dependencies
+from .narrative import query_actor
 
 
 @dataclass(frozen=True)
@@ -12,6 +14,12 @@ class ToolRequest:
     capability_id: str
     source_event_id: str
     inputs: dict[str, Any]
+
+
+class PerspectiveMode(str, Enum):
+    READER_ANALYSIS = 'READER_ANALYSIS'
+    CHARACTER_PERSPECTIVE = 'CHARACTER_PERSPECTIVE'
+    OBSERVER_ABOUT_TARGET = 'OBSERVER_ABOUT_TARGET'
 
 
 @dataclass(frozen=True)
@@ -25,6 +33,9 @@ class CognitionRequest:
     knowledge_cutoff: str | None = None
     tools: tuple[ToolRequest, ...] = ()
     max_context_chars: int = 24000
+    perspective_mode: PerspectiveMode | None = None
+    narrative: str | None = None
+    allow_semantic_preparation: bool = False
 
     def __post_init__(self):
         if not isinstance(self.query, str) or not self.query.strip() or len(self.query) > 16000:
@@ -44,6 +55,20 @@ class CognitionRequest:
                 raise ValueError('bounded actor ID required')
         if self.observer_actor and not self.target_actor:
             raise ValueError('second-order view requires target_actor')
+        if self.perspective_mode is not None and not isinstance(self.perspective_mode, PerspectiveMode):
+            raise ValueError('invalid perspective mode')
+        if self.perspective_mode == PerspectiveMode.CHARACTER_PERSPECTIVE and not self.target_actor:
+            raise ValueError('character perspective requires target_actor')
+        if self.perspective_mode == PerspectiveMode.OBSERVER_ABOUT_TARGET and not (self.target_actor and self.observer_actor):
+            raise ValueError('observer perspective requires observer_actor and target_actor')
+        if self.observer_actor and self.perspective_mode not in (None, PerspectiveMode.OBSERVER_ABOUT_TARGET):
+            raise ValueError('observer_actor requires observer perspective')
+        if self.narrative is not None and (not isinstance(self.narrative, str) or len(self.narrative) > 16000):
+            raise ValueError('bounded narrative text required')
+        if self.narrative is not None and (self.event_time or self.knowledge_cutoff):
+            raise ValueError('narrative sentence order cannot be mixed with calendar cutoffs; supply timed EventRecords')
+        if type(self.allow_semantic_preparation) is not bool:
+            raise ValueError('semantic preparation flag must be boolean')
         seen = {}
         for e in self.evidence:
             if e.event_id in seen and seen[e.event_id] != e:
@@ -70,6 +95,9 @@ class CognitionPlan:
     answer_provider_calls: int = 1
     max_context_chars: int = 24000
     blocked_tools: tuple[str, ...] = ()
+    perspective_mode: PerspectiveMode = PerspectiveMode.READER_ANALYSIS
+    explanation: bool = False
+    target_actor: str | None = None
 
     @property
     def direct(self):
@@ -78,7 +106,7 @@ class CognitionPlan:
 
 _PATTERNS = {
     'perspective': r'\b(knows?|knew|believes?|believed|belief|perspective|aware|unaware|heard|hear|learned|information asymmetry|access to information)\b|知道|相信|信念|视角|听到|信息不对称|得知',
-    'intention': r'\b(intention|intentions|intends?|motives?|motivation|goals?|plans?|planned|planning|wants?|wanted|aims?|why did|why does|why would)\b|意图|动机|目标|计划|打算|想要|为什么',
+    'intention': r'\b(intention|intentions|intends?|motives?|motivation|goals?|plans?|planned|planning|wants?|wanted|aims?)\b|意图|动机|目标|计划|打算|想要',
     'affect': r'\b(emotions?|feelings?|feels?|felt|angry|anger|happy|sad|afraid|appraisal|appraisals)\b|情绪|感受|感觉|生气|高兴|难过|害怕|评价',
     'causal': r'\b(counterfactual|intervene|intervention|causal propagation|structural causal)\b|\bif\b.*\b(had|would|were|did not|do not)\b|反事实|干预|如果.*(?:没|会|不)',
     'argumentation': r'\b(attack graph|attack relation|argumentation|grounded extension|stable extension|preferred extension|argument framework)\b|攻击关系|论证图|论证框架',
@@ -92,6 +120,13 @@ _TOOL_IDS = frozenset(('causal', 'argumentation', 'formal_verifier', 'countermod
 class CognitionRouter:
     def plan(self, request: CognitionRequest):
         query = request.query.lower()
+        target_actor = request.target_actor or query_actor(request.query)
+        mode = request.perspective_mode or (PerspectiveMode.OBSERVER_ABOUT_TARGET if request.observer_actor else
+            PerspectiveMode.CHARACTER_PERSPECTIVE if request.target_actor and (request.tools or re.search(
+                r'\b(what does .+ (?:know|believe|think|want)|what did .+ (?:know|believe|think|want)|from .+ perspective)\b|知道什么|从.+视角|以.+视角', query)
+            ) else PerspectiveMode.READER_ANALYSIS)
+        explanation = bool(target_actor and re.search(
+            r'\b(?:why did|why does|why would|explain .+ action|explanation of .+ action)\b|为什么.+(?:做|去|没|不|离开|参加)|解释.+(?:行为|行动)', query))
         selected = []
         optional = []
         tools = []
@@ -106,6 +141,9 @@ class CognitionRouter:
                     reasons['belief'] = 'evidence-bounded knowledge/belief projection'
                 else:
                     optional.append(cid)
+        if explanation:
+            selected.append('cg01_explanation')
+            reasons['cg01_explanation'] = 'bounded character-action explanation conditions'
         # Explicit source/time scopes must still be respected for factual tasks.
         if request.target_actor or request.event_time or request.knowledge_cutoff:
             selected.append('source_visibility')
@@ -130,4 +168,5 @@ class CognitionRouter:
                              'evidence_bounded' if closure else 'base_model_default', reasons,
                              CostClass.LOW if closure else CostClass.ZERO,
                              max_context_chars=request.max_context_chars,
-                             blocked_tools=tuple(blocked))
+                             blocked_tools=tuple(blocked), perspective_mode=mode,
+                             explanation=explanation, target_actor=target_actor)

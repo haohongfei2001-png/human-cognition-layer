@@ -1,0 +1,137 @@
+{
+  "schema": "hcl-cg01-external-development-package-v1",
+  "source": {
+    "title": "Short Stories Old and New",
+    "editor": "C. Alphonso Smith",
+    "publication_year": 1916,
+    "ebook_id": 10483,
+    "url": "https://www.gutenberg.org/cache/epub/10483/pg10483.txt",
+    "catalog": "https://www.gutenberg.org/ebooks/10483",
+    "license": "Project Gutenberg catalog: public domain in the USA",
+    "sha256": "14eef73227e014591aff4bf6bc217e6d030fa6daaf429742c0f6501172f5bb8e"
+  },
+  "selection": "Four predeclared source-only candidate-explanation questions across two story families; no native benchmark gold.",
+  "cases": [
+    {
+      "id": "necklace-invitation",
+      "family": "The Necklace",
+      "source_line_spans": [
+        [
+          8078,
+          8095
+        ]
+      ],
+      "excerpt": "Instead of being overcome with delight, as her husband expected, she\nthrew the invitation on the table with disdain, murmuring:\n\n\"What do you wish me to do with that?\"\n\n\"Why, my dear, I thought you would be pleased. You never go out, and\nthis is such a fine opportunity! I had awful trouble in getting it.\nEvery one wants to go; it is very select, and they are not giving many\ninvitations to clerks. You will see all the official world.\"\n\nShe looked at him with irritation, and said, impatiently:\n\n\"What do you expect me to put on my back if I go?\"\n\nHe had not thought of that. He stammered:\n\n\"Why, the dress you go to the theatre in. It seems all right to me.\"\n",
+      "excerpt_sha256": "6e3044e2dae6613a258cd758c7c10a6bf9cc10ad67cf7b5dcc010e913a18c301",
+      "candidate": "Mr. Loisel brought the invitation in order to humiliate Mathilde about lacking a suitable dress.",
+      "question": "At the moment he brought the invitation, how does the source bear on that candidate explanation?",
+      "target_actor": "Loisel",
+      "action_phrase": "bring the invitation",
+      "expected_status": "INVALIDATED",
+      "source_only_audit_basis": "He expected delight and the narrator explicitly says he had not thought of the dress problem.",
+      "exposure": "SOURCE_AUDIT_EXPOSED_NOT_PROVIDER_CONSUMED"
+    },
+    {
+      "id": "necklace-replacement",
+      "family": "The Necklace",
+      "source_line_spans": [
+        [
+          8295,
+          8319
+        ],
+        [
+          8428,
+          8445
+        ]
+      ],
+      "excerpt": "us time to turn around.\"\n\nShe wrote as he dictated.\n\n       *       *       *       *       *\n\nAt the end of a week they had lost all hope.\n\nAnd Loisel, looking five years older, declared:\n\n\"We must consider how to replace the necklace.\"\n\nThe next day they took the box which had contained it, and went to the\nplace of the jeweller whose name they found inside. He consulted his\nbooks.\n\n\"It was not I, madame, who sold the necklace; I must simply have\nfurnished the casket.\"\n\nThen they went from jeweller to jeweller, looking for an ornament like\nthe other, consulting their memories, both sick with grief and anguish.\n\nThey found, in a shop at the Palais Royal, a string of diamonds which\nseemed to them exactly what they were looking for. It was worth forty\nthousand francs.[*] They could have it for thirty-six thousand.\n[noncontiguous source span]\n\n\"I returned to you another exactly like it. These ten years we've been\npaying for it. You know it was not easy for us, who had nothing. At last\nit is over, and I am very glad.\"\n\nMadame Forestier was stunned.\n\n\"You say that you bought a diamond necklace to replace mine?\"\n\n\"Yes; you did not notice it, then? They were just alike.\"\n\nAnd she smiled with a proud and naïve pleasure.\n\nMadame Forestier, deeply moved, took both her hands.\n\n\"Oh, my poor Mathilde! Why, my necklace was paste. It was worth five\nhundred francs at most.\"\n",
+      "excerpt_sha256": "01ba663881fc64ac62d86a2820a842f256b82e84dd864ddf2300b1cf67948f02",
+      "candidate": "Mathilde bought an expensive diamond replacement because she already knew the borrowed necklace was paste.",
+      "question": "At the replacement decision, how does the source bear on that candidate explanation?",
+      "target_actor": "Mathilde",
+      "action_phrase": "buy a diamond replacement",
+      "expected_status": "UNRESOLVED",
+      "source_only_audit_basis": "Later revelation strongly challenges prior knowledge; do not claim an explicit first-learning timestamp or unique motive.",
+      "exposure": "SOURCE_AUDIT_EXPOSED_NOT_PROVIDER_CONSUMED"
+    },
+    {
+      "id": "magi-hair-sale",
+      "family": "The Gift of the Magi",
+      "source_line_spans": [
+        [
+          10032,
+          10059
+        ],
+        [
+          10098,
+          10109
+        ]
+      ],
+      "excerpt": "out the door and down the stairs to the street.\n\nWhere she stopped the sign read: \"Mme. Sofronie. Hair Goods of all\nKinds.\" One flight up Della ran, and collected herself, panting. Madame,\nlarge, too white, chilly, hardly looked the \"Sofronie.\"\n\n\"Will you buy my hair?\" asked Della.\n\n\"I buy hair,\" said Madame. \"Take yer hat off and let's have a sight at\nthe looks of it.\"\n\nDown rippled the brown cascade.\n\n\"Twenty dollars,\" said Madame, lifting the mass with a practised hand.\n\n\"Give it to me quick,\" said Della.\n\nOh, and the next two hours tripped by on rosy wings. Forget the hashed\nmetaphor. She was ransacking the stores for Jim's present.\n\nShe found it at last. It surely had been made for Jim and no one else.\nThere was no other like it in any of the stores, and she had turned all\nof them inside out. It was a platinum fob chain simple and chaste in\ndesign, properly proclaiming its value by substance alone and not by\nmeretricious ornamentation--as all good things should do. It was even\nworthy of The Watch. As soon as she saw it she knew that it must be\nJim's. It was like him. Quietness and value--the description applied to\nboth. Twenty-one dollars they took from her for it, and she hurried home\n[noncontiguous source span]\n\nDella wriggled off the table and went for him.\n\n\"Jim, darling,\" she cried, \"don't look at me that way. I had my hair cut\noff and sold it because I couldn't have lived through Christmas without\ngiving you a present. It'll grow out again--you won't mind, will you? I\njust had to do it. My hair grows awfully fast. Say 'Merry Christmas!'\nJim, and let's be happy. You don't know what a nice--what a beautiful,\nnice gift I've got for you.\"\n\n\"You've cut off your hair?\" asked Jim, laboriously, as if he had not\narrived at that patent fact yet even after the hardest mental labour.",
+      "excerpt_sha256": "58ad62e26daac012b6c04a5936f118db800ec2d65f49c3c25c866251e164f49b",
+      "candidate": "Della sold her hair to obtain money for a Christmas gift for Jim.",
+      "question": "At the hair sale, how do the source-grounded goal and opportunity conditions bear on that explanation?",
+      "target_actor": "Della",
+      "action_phrase": "sell her hair",
+      "expected_status": "CONSISTENT_CONDITIONAL",
+      "source_only_audit_basis": "The sale opportunity and Della’s later explicit explanation support the conditions, without proving a unique motive.",
+      "exposure": "SOURCE_AUDIT_EXPOSED_NOT_PROVIDER_CONSUMED"
+    },
+    {
+      "id": "magi-combs",
+      "family": "The Gift of the Magi",
+      "source_line_spans": [
+        [
+          10098,
+          10108
+        ],
+        [
+          10127,
+          10170
+        ]
+      ],
+      "excerpt": "\nDella wriggled off the table and went for him.\n\n\"Jim, darling,\" she cried, \"don't look at me that way. I had my hair cut\noff and sold it because I couldn't have lived through Christmas without\ngiving you a present. It'll grow out again--you won't mind, will you? I\njust had to do it. My hair grows awfully fast. Say 'Merry Christmas!'\nJim, and let's be happy. You don't know what a nice--what a beautiful,\nnice gift I've got for you.\"\n\n\"You've cut off your hair?\" asked Jim, laboriously, as if he had not\n[noncontiguous source span]\nyear--what is the difference? A mathematician or a wit would give you\nthe wrong answer. The magi brought valuable gifts, but that was not\namong them. This dark assertion will be illuminated later on.\n\nJim drew a package from his overcoat pocket and threw it upon the table.\n\n\"Don't make any mistake, Dell,\" he said, \"about me. I don't think\nthere's anything in the way of a haircut or a shave or a shampoo that\ncould make me like my girl any less. But if you'll unwrap that package\nyou may see why you had me going a while at first.\"\n\nWhite fingers and nimble tore at the string and paper. And then an\necstatic scream of joy; and then, alas! a quick feminine change to\nhysterical tears and wails, necessitating the immediate employment of\nall the comforting powers of the lord of the flat.\n\nFor there lay The Combs--the set of combs, side and back, that Della had\nworshipped for long in a Broadway window. Beautiful combs, pure tortoise\nshell, with jewelled rims--just the shade to wear in the beautiful\nvanished hair. They were expensive combs, she knew, and her heart had\nsimply craved and yearned over them without the least hope of\npossession. And now, they were hers, but the tresses that should have\nadorned the coveted adornments were gone.\n\nBut she hugged them to her bosom, and at length she was able to look up\nwith dim eyes and a smile and say: \"My hair grows so fast, Jim!\"\n\nAnd then Della leaped up like a little singed cat and cried, \"Oh, oh!\"\n\nJim had not yet seen his beautiful present. She held it out to him\neagerly upon her open palm. The dull precious metal seemed to flash with\na reflection of her bright and ardent spirit.\n\n\"Isn't it a dandy, Jim? I hunted all over town to find it. You'll have\nto look at the time a hundred times a day now. Give me your watch. I\nwant to see how it looks on it.\"\n\nInstead of obeying, Jim tumbled down on the couch and put his hands\nunder the back of his head and smiled. \"Dell,\" said he, \"let's put our\nChristmas presents away and keep 'em a while. They're too nice to use\njust at present. I sold the watch to get the money to buy your combs.\nAnd now suppose you put the chops on.\"\n\nThe magi, as you know, were wise men--wonderfully wise men--who brought",
+      "excerpt_sha256": "f88a79b142a7b45eaf22c825ed3a0517fb12c71bf9c5ccaf9593f48b4d3ab78f",
+      "candidate": "Jim bought the combs in order to mock Della for already having sold her hair.",
+      "question": "At the purchase, how does the source bear on the required prior-knowledge condition?",
+      "target_actor": "Jim",
+      "action_phrase": "buy the combs",
+      "expected_status": "UNRESOLVED",
+      "source_only_audit_basis": "Jim’s later reaction challenges prior knowledge; the source does not warrant inventing an exact first-learning time.",
+      "exposure": "SOURCE_AUDIT_EXPOSED_NOT_PROVIDER_CONSUMED"
+    }
+  ],
+  "arms": [
+    "C",
+    "P",
+    "G",
+    "H",
+    "H-new"
+  ],
+  "output_contract": {
+    "assessment": [
+      "INVALIDATED",
+      "CONSISTENT_CONDITIONAL",
+      "UNRESOLVED"
+    ],
+    "reason": "short source-grounded natural-language explanation",
+    "evidence_quote": "short exact excerpt",
+    "unknown_motive": "boolean"
+  },
+  "score": {
+    "assessment_match": 1,
+    "evidence_and_condition_grounding": 1,
+    "uncertainty_and_no_private_truth": 1,
+    "severe_boundary_error_zeroes_case": true
+  },
+  "provider_calls_max": 24,
+  "input_tokens_per_call_max": 16000,
+  "output_tokens_per_call_max": 2000,
+  "usd_hard_cap": 0.75,
+  "provider": "DeepSeek API",
+  "model": "deepseek-v4-pro",
+  "price_peak_usd_per_million": {
+    "input_cache_miss": 1.32,
+    "output": 3.96
+  }
+}
