@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVE A COMPLETE / WAVE B / B01 CORRECTNESS_VERIFIED / NEXT_READY=B02**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVE A COMPLETE / WAVE B / B01–B02 CORRECTNESS_VERIFIED / NEXT_READY=B03**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -195,12 +195,21 @@ Public expression is not private belief; private estimates carry an explicit
 unverified sincerity assumption. Fifteen targeted checks plus full regression;
 see `docs/HCL_WAVE_B01.md`. Efficacy remains UNTESTED.
 
-**B02 — NEXT_READY:** differentiated communication/access updates, including
+**B02 — CORRECTNESS_VERIFIED:** differentiated communication/access updates, including
 public/private delivery, missed/negated contact and three-person divergence.
 Availability must not automatically establish exposure, understanding or belief.
 
-Then B03 character revision
-versus analyst revision → B04 correlated reports, conflicts and bounded depth →
+B02 delivered three-person communication views, explicit positive/negative/later
+receipt handling, availability/addressing separation, pre-extraction projection
+and hidden-content non-interference. Twelve targeted tests plus full regression;
+see `docs/HCL_WAVE_B02.md`.
+
+**B03 — NEXT_READY:** character revision versus analyst revision; later evidence
+can correct the current interpretation of the past without changing what was
+available in an earlier knowledge snapshot. Preserve challenges, acceptance,
+rejection and supported alternatives distinctly.
+
+Then B04 correlated reports, conflicts and bounded depth →
 B05 ordinary-input integration and local revision. Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
 
@@ -360,12 +369,12 @@ defect is.
 
 - Current wave: **Wave B — Dynamic Epistemic Cognition**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: B02_DIFFERENTIATED_COMMUNICATION_AND_ACCESS_UPDATES**
+- **NEXT_READY: B03_CHARACTER_REVISION_VERSUS_ANALYST_REVISION**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A05/B01 actual provider calls / spend: **0 / USD 0**
+- A01–A05/B01–B02 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **B02**, then continue through the dependency-safe queue
+Work should continue at **B03**, then continue through the dependency-safe queue
 without asking for a new decision after every package.

@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**LONG-HORIZON CAPABILITY GROWTH — WAVE A COMPLETE / WAVE B / B01 CORRECTNESS_VERIFIED / NEXT_READY=B02**
+**LONG-HORIZON CAPABILITY GROWTH — WAVE A COMPLETE / WAVE B / B01–B02 CORRECTNESS_VERIFIED / NEXT_READY=B03**
 
 The long-horizon architecture and 41-package roadmap are canonical in
 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md).
@@ -17,7 +17,7 @@ A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
-**NEXT_READY: `B02_DIFFERENTIATED_COMMUNICATION_AND_ACCESS_UPDATES`**
+**NEXT_READY: `B03_CHARACTER_REVISION_VERSUS_ANALYST_REVISION`**
 
 A01 now provides shared versioned evidence, scoped source reports and
 interpretations, alternative support sets and rooted invalidation. A source
@@ -35,7 +35,7 @@ Actual final inputs carry support, challenges and retired source history. See
 
 State: **CORRECTNESS_VERIFIED / REPLAY_VERIFIED / UNTESTED / OPT_IN**.
 The local entry recognizes bounded explicit speech forms; open backend candidates
-remain semantically unverified. No real provider has been called in A01–A05/B01.
+remain semantically unverified. No real provider has been called in A01–A05/B01–B02.
 Historical efficacy dispositions are unchanged. A04–A05 connect retained v0.6/CG03/CG04/CG05 operations to the common material.
 Original quotes, derived representation and assumptions stay separate. A property
 revision changes the concept checker and its dependent belief/concept comparison;
@@ -47,8 +47,12 @@ claim. B01 now separates public expression, conditional private-belief interpret
 exposure, understanding and knowledge claims. Query-selected nested propositions
 preserve outer versus inner negation and compare a reported attribution with the
 subject's own expression without detaching inner private state. See
-[B01 witness](reports/HCL_WAVE_B01_WITNESS.json). B02 now implements differentiated
-communication/access updates.
+[B01 witness](reports/HCL_WAVE_B01_WITNESS.json). B02 now selects actor-visible evidence before semantic work using explicit
+communication/access paths. Public availability/addressing, actual reported
+receipt, missed contact, conflicting reports and explicit later receipt remain
+distinct. Three-person and hidden-content non-interference witnesses pass; see
+[B02](docs/HCL_WAVE_B02.md). B03 now separates character revision from analyst
+revision and late-disclosed evidence.
 
 ## Canonical development policy
 
@@ -153,7 +157,7 @@ Leaderboard selection is not active now.
 - LongMemEval: **SEALED / NOT ACCESSED**
 - Benchmark-specific logic authorized: **NO**
 - Leaderboard search/optimization: **OFF**
-- Current owner-only blocker: **NONE for B02 implementation**
+- Current owner-only blocker: **NONE for B03 implementation**
 
 ## Historical state and recovery
 
@@ -172,7 +176,7 @@ truthfully satisfied.
 A01 is verified by unit/negative-inference/composition/ordinary-input/historical
 checks in the existing exact-SHA v1 workflow. Its artifact includes an executable
 positive witness and actual prepared final inputs. Merge only after exact-head
-CI; continue B02 only after exact-main CI. GitHub run SHAs, rather than a
+CI; continue B03 only after exact-main CI. GitHub run SHAs, rather than a
 self-referential commit hash in this file, identify those receipts.
 
 A01 merged in PR #165 at `c5ad04a9e8eb30ab99255b05fca36a02644c6e2b`;
@@ -187,3 +191,6 @@ A04–A05 add the retained-operation witness to the same exact-SHA CI artifact.
 Wave A merged through PR #167 at `6e3c831c0ea4575aa517c0a1a4495472c7879ee3`;
 all six exact-main workflows passed, v1 run `36479195448` (382 + 176 tests).
 B01 retains the same engineering gate and evidence class.
+
+B01 merged in PR #168 at `61d2c446e5edd36994e1cb6d5184a73c03238ec8`;
+all six exact-main workflows passed, v1 run `36480655423` (397 + 176 tests).

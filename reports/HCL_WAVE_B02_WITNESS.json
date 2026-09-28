@@ -1,0 +1,170 @@
+{
+  "schema": "hcl-b02-positive-witness-v1",
+  "capability_delta": "The same communication yields three distinct source-bounded inputs; later explicit receipt changes Kai only and preserves the earlier snapshot.",
+  "original_source": "Mira said, \"I believe the gate is open.\"\nNarrator: Noor heard Mira's last statement.\nNarrator: Kai missed Mira's last statement.\nNarrator: Mira's last statement was publicly available.\nNoor said, \"I do not believe the gate is open.\"\nKai said, \"I am unsure whether the road is safe.\"",
+  "views": {
+    "Mira": {
+      "visible_source": "Mira said, \"I believe the gate is open.\"",
+      "authorizer_audit": [
+        {
+          "statement_line": 1,
+          "status": "OWN_EXPRESSION",
+          "relevant_access_proofs": [],
+          "content_transmitted": true,
+          "comprehension": "NOT_ESTABLISHED",
+          "acceptance": "NOT_ESTABLISHED",
+          "calendar_time": "NOT_ESTABLISHED"
+        },
+        {
+          "statement_line": 5,
+          "status": "EXPOSURE_UNKNOWN",
+          "relevant_access_proofs": [],
+          "content_transmitted": false,
+          "comprehension": "NOT_ESTABLISHED",
+          "acceptance": "NOT_ESTABLISHED",
+          "calendar_time": "NOT_ESTABLISHED"
+        },
+        {
+          "statement_line": 6,
+          "status": "EXPOSURE_UNKNOWN",
+          "relevant_access_proofs": [],
+          "content_transmitted": false,
+          "comprehension": "NOT_ESTABLISHED",
+          "acceptance": "NOT_ESTABLISHED",
+          "calendar_time": "NOT_ESTABLISHED"
+        }
+      ],
+      "actual_final_messages": [
+        {
+          "role": "system",
+          "content": "Distinguish public expression, conditional private-belief interpretation, exposure claims, understanding claims and knowledge claims. A claim of knowing p is not proof of p. A says p does not establish A privately believes p. Nested attribution cannot be detached into the inner person actual state. Outer denial is not inner denial. Sincerity assumptions are not established facts. Preserve source-local identity, unknowns and challenges; unsupported rows are history, not current support."
+        },
+        {
+          "role": "user",
+          "content": "{\"comparisons\": [], \"diagnostics\": [], \"epistemic_objects\": [{\"expression_id\": \"claim:d5d877262f90c6473987239898aa0407fd66cd0b0b6f24501720a35e1ca98ebc\", \"private_interpretation\": {\"assumptions\": [\"unverified-sincerity:225a214bfc63fcb5813a4d9fafa4a890850f83430d8f3c90230e4edfac2d3aad\"], \"claim_id\": \"claim:ed457197499875ef3ae9621678c867333200401d91f8a4d325d4c4af4c5ef7d0\", \"hypothesis\": {\"channel\": \"PRIVATE_BELIEF_HYPOTHESIS\", \"condition\": \"IF_THIS_EXPRESSION_SINCERELY_REPORTS_THE_SPEAKER_BELIEF\", \"content\": {\"attitude\": \"BELIEF\", \"content\": \"the gate is open\", \"holder\": \"Mira\", \"polarity\": \"AFFIRM\"}, \"epistemic_status\": \"DEFEASIBLE_NOT_CONFIRMED\"}, \"support_status\": \"SUPPORT_AVAILABLE\"}, \"public_expression\": {\"channel\": \"PUBLIC_EXPRESSION\", \"expressed_content\": {\"attitude\": \"BELIEF\", \"content\": \"the gate is open\", \"holder\": \"Mira\", \"polarity\": \"AFFIRM\"}, \"original_quote\": \"Mira said, \\\"I believe the gate is open.\\\"\", \"semantics\": \"REPORTED_EXPRESSION_NOT_ACTUAL_PRIVATE_STATE\", \"source_id\": \"view-source:34c8ac4eb65200b44279c5005496e86feac38601be07afc8c6f33453e5d76843\", \"source_span_id\": \"span:0b30d929beea959ae569b43b855adaa7b940fde1eb386cfdc7d2db34b914338f\", \"speaker\": \"Mira\"}, \"source_id\": \"view-source:34c8ac4eb65200b44279c5005496e86feac38601be07afc8c6f33453e5d76843\", \"speaker\": \"Mira\", \"support_status\": \"SUPPORT_AVAILABLE\"}], \"query\": \"What was expressed?\", \"query_projection\": [], \"selected_holder_path\": []}"
+        }
+      ]
+    },
+    "Noor": {
+      "visible_source": "Mira said, \"I believe the gate is open.\"\nNoor said, \"I do not believe the gate is open.\"",
+      "authorizer_audit": [
+        {
+          "statement_line": 1,
+          "status": "REPORTED_EXPOSURE",
+          "relevant_access_proofs": [
+            {
+              "source_line": 2,
+              "quote": "Narrator: Noor heard Mira's last statement.",
+              "actors": [
+                "Noor"
+              ],
+              "kind": "RECEIPT",
+              "source_kind": "EXPLICIT_NARRATOR_REPORT"
+            }
+          ],
+          "content_transmitted": true,
+          "comprehension": "NOT_ESTABLISHED",
+          "acceptance": "NOT_ESTABLISHED",
+          "calendar_time": "NOT_ESTABLISHED"
+        },
+        {
+          "statement_line": 5,
+          "status": "OWN_EXPRESSION",
+          "relevant_access_proofs": [],
+          "content_transmitted": true,
+          "comprehension": "NOT_ESTABLISHED",
+          "acceptance": "NOT_ESTABLISHED",
+          "calendar_time": "NOT_ESTABLISHED"
+        },
+        {
+          "statement_line": 6,
+          "status": "EXPOSURE_UNKNOWN",
+          "relevant_access_proofs": [],
+          "content_transmitted": false,
+          "comprehension": "NOT_ESTABLISHED",
+          "acceptance": "NOT_ESTABLISHED",
+          "calendar_time": "NOT_ESTABLISHED"
+        }
+      ],
+      "actual_final_messages": [
+        {
+          "role": "system",
+          "content": "Distinguish public expression, conditional private-belief interpretation, exposure claims, understanding claims and knowledge claims. A claim of knowing p is not proof of p. A says p does not establish A privately believes p. Nested attribution cannot be detached into the inner person actual state. Outer denial is not inner denial. Sincerity assumptions are not established facts. Preserve source-local identity, unknowns and challenges; unsupported rows are history, not current support."
+        },
+        {
+          "role": "user",
+          "content": "{\"comparisons\": [], \"diagnostics\": [], \"epistemic_objects\": [{\"expression_id\": \"claim:d1c256b4e2e087b5b7bda0103504b953348b4eef40445d97933694c1665ae46e\", \"private_interpretation\": {\"assumptions\": [\"unverified-sincerity:5991a49bc7947dbdf3a0a1aad067c682e5404e0ced48dc8ec4bbe5d952631eac\"], \"claim_id\": \"claim:86753bc4113b569f73b62ca2522eddcf058a6fd7395e3f5cb686689b78bc73d6\", \"hypothesis\": {\"channel\": \"PRIVATE_BELIEF_HYPOTHESIS\", \"condition\": \"IF_THIS_EXPRESSION_SINCERELY_REPORTS_THE_SPEAKER_BELIEF\", \"content\": {\"attitude\": \"BELIEF\", \"content\": \"the gate is open\", \"holder\": \"Mira\", \"polarity\": \"AFFIRM\"}, \"epistemic_status\": \"DEFEASIBLE_NOT_CONFIRMED\"}, \"support_status\": \"SUPPORT_AVAILABLE\"}, \"public_expression\": {\"channel\": \"PUBLIC_EXPRESSION\", \"expressed_content\": {\"attitude\": \"BELIEF\", \"content\": \"the gate is open\", \"holder\": \"Mira\", \"polarity\": \"AFFIRM\"}, \"original_quote\": \"Mira said, \\\"I believe the gate is open.\\\"\", \"semantics\": \"REPORTED_EXPRESSION_NOT_ACTUAL_PRIVATE_STATE\", \"source_id\": \"view-source:e3af1bb4cb13b9928c26d60b5125a56f503944ff134958f810d3332845d21d36\", \"source_span_id\": \"span:9fbfc929ae7b288b067ebd7cff1df636f002f3c753767a0f6458a7dea7a093a3\", \"speaker\": \"Mira\"}, \"source_id\": \"view-source:e3af1bb4cb13b9928c26d60b5125a56f503944ff134958f810d3332845d21d36\", \"speaker\": \"Mira\", \"support_status\": \"SUPPORT_AVAILABLE\"}, {\"expression_id\": \"claim:f59b4b17dd0cf0648c43d4e9914fd62f72171ddbd98c2049292b423a9076bd9a\", \"private_interpretation\": {\"assumptions\": [\"unverified-sincerity:0dd7307cb5bb41a59746982af9fa366b0114e9e5b33345578a25052c1c111b7d\"], \"claim_id\": \"claim:77cf2f7e9e84b04c138f2f566fb555eb835603d7a8093d115c1c0bf60b507082\", \"hypothesis\": {\"channel\": \"PRIVATE_BELIEF_HYPOTHESIS\", \"condition\": \"IF_THIS_EXPRESSION_SINCERELY_REPORTS_THE_SPEAKER_BELIEF\", \"content\": {\"attitude\": \"BELIEF\", \"content\": \"the gate is open\", \"holder\": \"Noor\", \"polarity\": \"DENY\"}, \"epistemic_status\": \"DEFEASIBLE_NOT_CONFIRMED\"}, \"support_status\": \"SUPPORT_AVAILABLE\"}, \"public_expression\": {\"channel\": \"PUBLIC_EXPRESSION\", \"expressed_content\": {\"attitude\": \"BELIEF\", \"content\": \"the gate is open\", \"holder\": \"Noor\", \"polarity\": \"DENY\"}, \"original_quote\": \"Noor said, \\\"I do not believe the gate is open.\\\"\", \"semantics\": \"REPORTED_EXPRESSION_NOT_ACTUAL_PRIVATE_STATE\", \"source_id\": \"view-source:e3af1bb4cb13b9928c26d60b5125a56f503944ff134958f810d3332845d21d36\", \"source_span_id\": \"span:85b4a65756c9b1a6487965ea8d8fb5e03185d164ac12106b55238a43913e0618\", \"speaker\": \"Noor\"}, \"source_id\": \"view-source:e3af1bb4cb13b9928c26d60b5125a56f503944ff134958f810d3332845d21d36\", \"speaker\": \"Noor\", \"support_status\": \"SUPPORT_AVAILABLE\"}], \"query\": \"What was expressed?\", \"query_projection\": [], \"selected_holder_path\": []}"
+        }
+      ]
+    },
+    "Kai": {
+      "visible_source": "Kai said, \"I am unsure whether the road is safe.\"",
+      "authorizer_audit": [
+        {
+          "statement_line": 1,
+          "status": "REPORTED_NON_EXPOSURE",
+          "relevant_access_proofs": [
+            {
+              "source_line": 3,
+              "quote": "Narrator: Kai missed Mira's last statement.",
+              "actors": [
+                "Kai"
+              ],
+              "kind": "NON_RECEIPT",
+              "source_kind": "EXPLICIT_NARRATOR_REPORT"
+            }
+          ],
+          "content_transmitted": false,
+          "comprehension": "NOT_ESTABLISHED",
+          "acceptance": "NOT_ESTABLISHED",
+          "calendar_time": "NOT_ESTABLISHED"
+        },
+        {
+          "statement_line": 5,
+          "status": "EXPOSURE_UNKNOWN",
+          "relevant_access_proofs": [],
+          "content_transmitted": false,
+          "comprehension": "NOT_ESTABLISHED",
+          "acceptance": "NOT_ESTABLISHED",
+          "calendar_time": "NOT_ESTABLISHED"
+        },
+        {
+          "statement_line": 6,
+          "status": "OWN_EXPRESSION",
+          "relevant_access_proofs": [],
+          "content_transmitted": true,
+          "comprehension": "NOT_ESTABLISHED",
+          "acceptance": "NOT_ESTABLISHED",
+          "calendar_time": "NOT_ESTABLISHED"
+        }
+      ],
+      "actual_final_messages": [
+        {
+          "role": "system",
+          "content": "Distinguish public expression, conditional private-belief interpretation, exposure claims, understanding claims and knowledge claims. A claim of knowing p is not proof of p. A says p does not establish A privately believes p. Nested attribution cannot be detached into the inner person actual state. Outer denial is not inner denial. Sincerity assumptions are not established facts. Preserve source-local identity, unknowns and challenges; unsupported rows are history, not current support."
+        },
+        {
+          "role": "user",
+          "content": "{\"comparisons\": [], \"diagnostics\": [], \"epistemic_objects\": [{\"expression_id\": \"claim:d86ce047d979cc2095551e1d0bc9c0b54e0b06c9e38b6951161e8701adc6a60e\", \"private_interpretation\": {\"assumptions\": [\"unverified-sincerity:32a62eac53b13cb3f77188b980f1d6de6dcd69fb1d2d59b7cee49aadaa9e0dae\"], \"claim_id\": \"claim:e697137aa089fe3fa01562cd7a117018f5ee9604f8a9a71c980c36b393da1ab5\", \"hypothesis\": {\"channel\": \"PRIVATE_BELIEF_HYPOTHESIS\", \"condition\": \"IF_THIS_EXPRESSION_SINCERELY_REPORTS_THE_SPEAKER_BELIEF\", \"content\": {\"attitude\": \"BELIEF\", \"content\": \"the road is safe\", \"holder\": \"Kai\", \"polarity\": \"UNCERTAIN\"}, \"epistemic_status\": \"DEFEASIBLE_NOT_CONFIRMED\"}, \"support_status\": \"SUPPORT_AVAILABLE\"}, \"public_expression\": {\"channel\": \"PUBLIC_EXPRESSION\", \"expressed_content\": {\"attitude\": \"BELIEF\", \"content\": \"the road is safe\", \"holder\": \"Kai\", \"polarity\": \"UNCERTAIN\"}, \"original_quote\": \"Kai said, \\\"I am unsure whether the road is safe.\\\"\", \"semantics\": \"REPORTED_EXPRESSION_NOT_ACTUAL_PRIVATE_STATE\", \"source_id\": \"view-source:7f75dfd25c87d91c70a374a6d79b8105cf21ef2c585e1cfbb8e19c8e2b1f5c9c\", \"source_span_id\": \"span:7011683e8b5cec35e88a4a2dde5a1ecaacdbd4b97f7de60233c12367feb6dc62\", \"speaker\": \"Kai\"}, \"source_id\": \"view-source:7f75dfd25c87d91c70a374a6d79b8105cf21ef2c585e1cfbb8e19c8e2b1f5c9c\", \"speaker\": \"Kai\", \"support_status\": \"SUPPORT_AVAILABLE\"}], \"query\": \"What was expressed?\", \"query_projection\": [], \"selected_holder_path\": []}"
+        }
+      ]
+    }
+  },
+  "later_kai_final_messages": [
+    {
+      "role": "system",
+      "content": "Distinguish public expression, conditional private-belief interpretation, exposure claims, understanding claims and knowledge claims. A claim of knowing p is not proof of p. A says p does not establish A privately believes p. Nested attribution cannot be detached into the inner person actual state. Outer denial is not inner denial. Sincerity assumptions are not established facts. Preserve source-local identity, unknowns and challenges; unsupported rows are history, not current support."
+    },
+    {
+      "role": "user",
+      "content": "{\"comparisons\": [], \"diagnostics\": [], \"epistemic_objects\": [{\"expression_id\": \"claim:9a0d109baec07634405241d6fd6bf8731f05d94158b9d882bbec3f9f14d22440\", \"private_interpretation\": {\"assumptions\": [\"unverified-sincerity:400d2ebc5a290bc8d162ad2028f796cee86624eeaef44f11d65f72ad6a7cedfd\"], \"claim_id\": \"claim:d63d55b0df5816613f9a0b161b033504b912ce3979d21ca2aa58e766953c8691\", \"hypothesis\": {\"channel\": \"PRIVATE_BELIEF_HYPOTHESIS\", \"condition\": \"IF_THIS_EXPRESSION_SINCERELY_REPORTS_THE_SPEAKER_BELIEF\", \"content\": {\"attitude\": \"BELIEF\", \"content\": \"the gate is open\", \"holder\": \"Mira\", \"polarity\": \"AFFIRM\"}, \"epistemic_status\": \"DEFEASIBLE_NOT_CONFIRMED\"}, \"support_status\": \"SUPPORT_AVAILABLE\"}, \"public_expression\": {\"channel\": \"PUBLIC_EXPRESSION\", \"expressed_content\": {\"attitude\": \"BELIEF\", \"content\": \"the gate is open\", \"holder\": \"Mira\", \"polarity\": \"AFFIRM\"}, \"original_quote\": \"Mira said, \\\"I believe the gate is open.\\\"\", \"semantics\": \"REPORTED_EXPRESSION_NOT_ACTUAL_PRIVATE_STATE\", \"source_id\": \"view-source:7f75dfd25c87d91c70a374a6d79b8105cf21ef2c585e1cfbb8e19c8e2b1f5c9c\", \"source_span_id\": \"span:cd78a93dd8168e79eca5b02ba6c50e85718f0ec4f567787f95765ecc91bf778f\", \"speaker\": \"Mira\"}, \"source_id\": \"view-source:7f75dfd25c87d91c70a374a6d79b8105cf21ef2c585e1cfbb8e19c8e2b1f5c9c\", \"speaker\": \"Mira\", \"support_status\": \"SUPPORT_AVAILABLE\"}, {\"expression_id\": \"claim:3e7d4a3ad91532b66c2c1433d731a7cd64ea0dfce4e68f2700d5a727ab8d63f7\", \"private_interpretation\": {\"assumptions\": [\"unverified-sincerity:8ac9694d9adcc907092907f8896e039a4c1245400ad299197b0601bb9b2a7b8a\"], \"claim_id\": \"claim:70b400f31a9731bc961daa8721ea141faca4aadb495d3788d04a73b81b0e3b55\", \"hypothesis\": {\"channel\": \"PRIVATE_BELIEF_HYPOTHESIS\", \"condition\": \"IF_THIS_EXPRESSION_SINCERELY_REPORTS_THE_SPEAKER_BELIEF\", \"content\": {\"attitude\": \"BELIEF\", \"content\": \"the road is safe\", \"holder\": \"Kai\", \"polarity\": \"UNCERTAIN\"}, \"epistemic_status\": \"DEFEASIBLE_NOT_CONFIRMED\"}, \"support_status\": \"SUPPORT_AVAILABLE\"}, \"public_expression\": {\"channel\": \"PUBLIC_EXPRESSION\", \"expressed_content\": {\"attitude\": \"BELIEF\", \"content\": \"the road is safe\", \"holder\": \"Kai\", \"polarity\": \"UNCERTAIN\"}, \"original_quote\": \"Kai said, \\\"I am unsure whether the road is safe.\\\"\", \"semantics\": \"REPORTED_EXPRESSION_NOT_ACTUAL_PRIVATE_STATE\", \"source_id\": \"view-source:7f75dfd25c87d91c70a374a6d79b8105cf21ef2c585e1cfbb8e19c8e2b1f5c9c\", \"source_span_id\": \"span:68fe6140fbf7a5955b47a4f93601b712044ed73241bc7ac922bdb78593d67ff9\", \"speaker\": \"Kai\"}, \"source_id\": \"view-source:7f75dfd25c87d91c70a374a6d79b8105cf21ef2c585e1cfbb8e19c8e2b1f5c9c\", \"speaker\": \"Kai\", \"support_status\": \"SUPPORT_AVAILABLE\"}], \"query\": \"What was expressed?\", \"query_projection\": [], \"selected_holder_path\": []}"
+    }
+  ],
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "implementation": "CORRECTNESS_VERIFIED",
+  "ordinary_input": "REPLAY_VERIFIED",
+  "efficacy": "UNTESTED",
+  "activation": "OPT_IN",
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
