@@ -147,7 +147,7 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**NIGHT-INTEGRATION-05 — retained ordinary belief preparation/composition**
+**NIGHT-INTEGRATION-06 — source-scoped belief/local-concept comparison**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
@@ -399,3 +399,24 @@ source-scoped composition comparison between expressed belief and local concept
 criteria, preserving disagreement/uncertainty without inferring shared meaning,
 private intention, correctness of the belief or moral truth. This is the unique
 next existing-capability integration task; no third candidate or owner paid gate.
+
+
+**NIGHT-INTEGRATION-05 — exact-head/main CERT PASS.** PR144 head47f0006,
+run36443534792; maina6df973cac86041644de8aaf0a2adcfc40c1adfa,
+run36443654867. Both226 v1 +176 historical =402 PASS, same runtime digest;
+all six groups PASS. [Receipt](reports/HCL_NIGHT_BELIEF_CERTIFICATION.json).
+
+**NIGHT-INTEGRATION-06 — IMPLEMENTED; correctness certification pending.**
+CAPABILITY_DELTA: explain a same-actor/context/item/term expressed belief's
+consistency, difference or unresolved relationship with local source criteria,
+with both evidence bases. No belief-to-truth, definition-to-shared-meaning or
+moral/private-intention promotion. Later properties/definitions or indirect
+reports cannot move the original self-report's time. Eleven new tests, including
+actual final messages, private hidden properties and backdated records.
+CG04/05 remain the only implemented-unvalidated candidates, READY/deferred;
+provider calls/spend tonight0/USD0, LongMemEval SEALED.
+After exact-head/main CI, the unique next implementation is a bounded ordinary-
+question entrypoint that selects existing belief/concept preparation and composed
+comparison from explicit actor/context/item/term question semantics, without
+caller-entered mental state, extra extraction or an added candidate. Ambiguous
+questions must refuse structured analysis and preserve authorized reader source.

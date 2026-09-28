@@ -1,0 +1,40 @@
+{
+  "schema": "hcl-night-belief-certification-v1",
+  "pr": 144,
+  "exact_head": {
+    "schema": "hcl-v1-provider-free-certification-v1",
+    "sha": "47f0006e61f65f6e3d6e869bcc26b3d99dfbb4de",
+    "workflow_event_sha": "d117ca1b1895c6ed7b5189452de86fefbb5e16a0",
+    "run_id": "36443534792",
+    "event": "pull_request",
+    "counts": {
+      "v1": 226,
+      "historical": 176
+    },
+    "runtime_sha256": "566b0e87e1c33053bf8b577616eb662349048fc993b98b8c4402d3a50f2c964e",
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "scope": "CORRECTNESS_NOT_EXTERNAL_UTILITY",
+    "longmemeval": "SEALED_NOT_IN_TEST_SELECTION"
+  },
+  "exact_main": {
+    "schema": "hcl-v1-provider-free-certification-v1",
+    "sha": "a6df973cac86041644de8aaf0a2adcfc40c1adfa",
+    "workflow_event_sha": "a6df973cac86041644de8aaf0a2adcfc40c1adfa",
+    "run_id": "36443654867",
+    "event": "push",
+    "counts": {
+      "v1": 226,
+      "historical": 176
+    },
+    "runtime_sha256": "566b0e87e1c33053bf8b577616eb662349048fc993b98b8c4402d3a50f2c964e",
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "scope": "CORRECTNESS_NOT_EXTERNAL_UTILITY",
+    "longmemeval": "SEALED_NOT_IN_TEST_SELECTION"
+  },
+  "total_tests_each": 402,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
