@@ -137,7 +137,7 @@ def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, ma
     The local path makes zero calls. Both paths feed the same validated core.
     """
     if (not isinstance(query, str) or not query.strip() or len(query) > 8000
-            or not isinstance(sources, tuple) or not 1 <= len(sources) <= 16
+            or not isinstance(sources, tuple) or not 0 <= len(sources) <= 16
             or not all(isinstance(s, AuthorizedText) for s in sources)
             or len({s.source_id for s in sources}) != len(sources)
             or type(max_candidates) is not int or not 1 <= max_candidates <= 128):

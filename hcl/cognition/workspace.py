@@ -122,7 +122,7 @@ class CognitionWorkspace:
     def prepare_semantic(self, query, *, source_ids, observer=None, backend=None):
         """Unified source preparation; access filtering precedes any backend call."""
         from .semantic import AuthorizedText, prepare_semantics
-        if (not isinstance(source_ids, tuple) or not source_ids
+        if (not isinstance(source_ids, tuple)
                 or len(set(source_ids)) != len(source_ids)
                 or any(s not in self._documents for s in source_ids)):
             raise ValueError('distinct registered sources required')
