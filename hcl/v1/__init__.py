@@ -24,3 +24,5 @@ from .cg05 import (ConceptDefinition, ConceptProperty, ConceptUse, ConceptCase,
 from .compact import compact_cognition_context, expand_cognition_context
 
 from .composition import (ComposedAnswer, ComposedAnswerReceipt, prepare_composed_answer, answer_composed)
+
+from .source_access import prepare_source_access, scope_source_access

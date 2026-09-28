@@ -8,6 +8,7 @@ from .context import (ANSWER_POLICY, RESPONSIBILITY_ANSWER_POLICY, PREFERENCE_AN
 from .router import CognitionPlan, CognitionRequest, CognitionRouter
 from .router import PerspectiveMode
 from .compact import compact_cognition_context, COMPACT_POLICY
+from .source_access import prepare_source_access, scope_source_access
 
 
 @dataclass(frozen=True)
@@ -255,6 +256,14 @@ class HCLCognitionLayer:
                     'definition_ids': [d.definition_id for d in concept_case.definitions] if concept_case else [],
                     'source_span_diagnostics': list(preparation.diagnostics)})
         input_evidence = request.evidence + parsed_events + social_events + responsibility_events + preference_events + concept_events
+        if request.narrative_access and input_evidence:
+            input_evidence, access_receipt = prepare_source_access(input_evidence)
+            preparation_audit['output'] = dict(preparation_audit.get('output') or {}, source_access=access_receipt)
+            preparation_audit['source_access_status'] = access_receipt['status']
+            if access_receipt['failure']:
+                preparation_audit['failure'] = access_receipt['failure']
+        input_evidence = scope_source_access(input_evidence, event_time=request.event_time,
+            knowledge_cutoff=request.knowledge_cutoff)
         if plan.explanation and len(input_evidence) > 24:
             raise ValueError('CG-01 accepts at most 24 evidence events')
         if plan.social_commitment and len(input_evidence) > 32:
@@ -474,6 +483,10 @@ class HCLCognitionLayer:
             policy += ' ' + PREFERENCE_ANSWER_POLICY
         if plan.concept_interpretation:
             policy += ' ' + CONCEPT_ANSWER_POLICY
+        if request.narrative_access or any(e.metadata.get('narrative_access_basis') for e in input_evidence):
+            policy += (' Access here is an exact narrated exposure claim, not a verified receipt or '
+                'proof of belief/understanding. Only explicitly delivered source text enters the '
+                'character view; unmentioned access stays unknown.')
         if request.compact_context:
             policy += ' ' + COMPACT_POLICY
         return PreparedAnswer(plan, context, ({'role': 'system', 'content': policy},

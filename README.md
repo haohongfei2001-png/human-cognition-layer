@@ -89,3 +89,5 @@ preserved. The next implementation package is
 - [无损 cognition context 压缩](docs/HCL_V1_CONTEXT_COMPACT.md)：保留完整来源与检查结果，在同一 context budget 下容纳更多已检查信息；默认冻结输入不变。
 
 - [同一来源的 capability composition](docs/HCL_V1_COMPOSITION.md)：偏好、局部概念和条件责任检查一起进入一次最终回答，各自保留来源与不确定性。
+
+- [显式叙事 access 准备](docs/HCL_V1_NARRATIVE_ACCESS.md)：从来源明确记录的接触句进入角色／观察者视角；接触不等于相信或理解。
