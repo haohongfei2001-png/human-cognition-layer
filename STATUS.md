@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**LONG-HORIZON CAPABILITY GROWTH — WAVE A / A00 COMPLETE / NEXT_READY=A01**
+**LONG-HORIZON CAPABILITY GROWTH — WAVE A / A01 CORRECTNESS_VERIFIED / NEXT_READY=A02**
 
 The long-horizon architecture and 41-package roadmap are canonical in
 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md).
@@ -17,11 +17,18 @@ A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
-**NEXT_READY: `A01_SHARED_EVIDENCE_SCOPE_INTERPRETATION_DEPENDENCY_CORE`**
+**NEXT_READY: `A02_UNIFIED_ORDINARY_SEMANTIC_PREPARATION`**
 
-A01 must provide a positive capability delta: shared source/scope/interpretation/
-dependency identity used by real cognition operations, with local invalidation and
-unaffected-scope preservation. It is not a schema-only task.
+A01 now provides shared versioned evidence, scoped source reports and
+interpretations, alternative support sets and rooted invalidation. A source
+correction changes Alice's actual retained belief/concept comparison while Bob's
+independent result remains identical without reexecution. See
+[implementation/witness](docs/HCL_WAVE_A01.md) and the executable
+[construction registry](hcl/cognition/registry.py).
+
+State: **CORRECTNESS_VERIFIED / REPLAY_VERIFIED / UNTESTED / OPT_IN**.
+The entry still uses the bounded v1 grammar; broader semantic entry is A02.
+No provider has been called for A01. Historical efficacy dispositions are unchanged.
 
 ## Canonical development policy
 
@@ -90,8 +97,10 @@ input reaches the real mechanism with valid source binding.
 It is not efficacy ranking, is not repeated every wave and cannot be labeled
 independent utility evidence.
 
-Any provider call/spend requires separate owner authorization. This canonical
-policy does not authorize it.
+The owner has separately granted default autonomy for necessary, bounded, normal-cost
+provider work using existing provider/API/credential/billing infrastructure.
+A00 itself granted none. A–C live-entry calls remain limited to concrete engineering
+questions; historical consumed grants remain closed and cannot transfer budget.
 
 ## Maturity gates
 
@@ -124,7 +133,7 @@ Leaderboard selection is not active now.
 - LongMemEval: **SEALED / NOT ACCESSED**
 - Benchmark-specific logic authorized: **NO**
 - Leaderboard search/optimization: **OFF**
-- Current owner-only blocker: **NONE for A01 provider-free engineering**
+- Current owner-only blocker: **NONE for A02 implementation**
 
 ## Historical state and recovery
 
@@ -137,3 +146,11 @@ Before each coherent slice Work must re-read remote `main`, this status and
 repair ordinary engineering failures without owner interruption, and advance to
 the next dependency-safe package when the current package's engineering exit is
 truthfully satisfied.
+
+## Execution verification
+
+A01 is verified by unit/negative-inference/composition/ordinary-input/historical
+checks in the existing exact-SHA v1 workflow. Its artifact includes an executable
+positive witness and actual prepared final inputs. Merge only after exact-head
+CI; continue A02 only after exact-main CI. GitHub run SHAs, rather than a
+self-referential commit hash in this file, identify those receipts.

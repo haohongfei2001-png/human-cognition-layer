@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVE A / A00 COMPLETE / NEXT_READY=A01**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVE A / A01 CORRECTNESS_VERIFIED / NEXT_READY=A02**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -111,7 +111,7 @@ This canonical adoption slice:
 - preserves all evidence dispositions, sealed data and closed budgets;
 - does not change runtime code or authorize provider execution.
 
-### A01 — Shared evidence / scope / interpretation / dependency core — NEXT_READY
+### A01 — Shared evidence / scope / interpretation / dependency core — CORRECTNESS_VERIFIED
 
 **CAPABILITY_DELTA:** the same source evidence can support multiple cognition
 operations through shared source, actor, time, scope, interpretation and dependency
@@ -132,7 +132,11 @@ Required behavior:
 
 No large ontology, database rewrite or new provider call is required.
 
-### A02 — Unified ordinary semantic-preparation entry
+Delivered: `hcl/cognition/`, retained-operation source revision, positive witness,
+14 targeted boundary/composition tests and full historical regression. A01 remains
+UNTESTED for efficacy; see `docs/HCL_WAVE_A01.md`.
+
+### A02 — Unified ordinary semantic-preparation entry — NEXT_READY
 
 **CAPABILITY_DELTA:** ordinary text can produce source-anchored candidate people,
 events, propositions, references and relations for the shared core without the
@@ -205,9 +209,11 @@ adapter smoke may be designed to answer only:
 It is not an efficacy ranking, is not C/P/G/H/H-new, is not repeated after every
 wave, and cannot be used as an external-utility claim.
 
-Any provider call, credential use or spend still requires separate explicit owner
-authorization. Without that authorization Work may continue dependency-safe
-provider-free engineering while marking live operational status unverified.
+Latest owner default authorization permits necessary, bounded normal development
+calls through existing provider/API/credential/billing infrastructure. Record calls,
+usage and actual or reasonably determined cost; do not repeat answered questions.
+New external setup and clearly abnormal cost are deferred while independent work
+continues. Old experiment grants and residual budgets remain closed.
 
 ## 8. Mandatory maturity shift
 
@@ -288,9 +294,12 @@ Work owns ordinary:
 One runtime boundary should have one active writer. Re-read remote `main`,
 `STATUS.md` and this live plan before each coherent slice.
 
-Owner approval remains required for new provider-backed spending, new credentials
-or paid accounts, training/large compute, changed private-data scope, unresolved
-license/privacy expansion, and leaderboard submission.
+Default autonomy now covers ordinary engineering, research/architecture choices
+and bounded normal provider development costs in existing infrastructure. It does
+not authorize expanded private-data scope, unclear licenses, access-control bypass,
+new legal commitments or identity disclosure. Defer paths needing new external
+onboarding/credentials or abnormal spending and continue independent work.
+Serious independent evaluation remains post-G-ARCH; evidence standards do not change.
 
 No old budget transfers. LongMemEval stays sealed.
 
@@ -313,12 +322,12 @@ defect is.
 
 - Current wave: **Wave A — Unified Core and Ordinary Input**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: A01_SHARED_EVIDENCE_SCOPE_INTERPRETATION_DEPENDENCY_CORE**
-- Provider-backed experiment authorized: **NO**
-- New provider spend authorized: **USD 0**
+- **NEXT_READY: A02_UNIFIED_ORDINARY_SEMANTIC_PREPARATION**
+- Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
+- A01 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should begin at **A01**, then continue through the dependency-safe queue
+Work should continue at **A02**, then continue through the dependency-safe queue
 without asking for a new decision after every package.

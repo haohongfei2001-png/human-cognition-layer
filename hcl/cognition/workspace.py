@@ -1,0 +1,128 @@
+"""Shared source revision drives real retained cognition, with bounded legacy entry.
+
+A01 deliberately reuses the v1 ordinary grammar. A02 supplies the extensible
+semantic entry. This adapter must not claim broad language understanding.
+"""
+from dataclasses import dataclass
+import json
+
+from hcl.v1 import HCLCognitionLayer, prepare_person_context
+from .core import ClaimKind, EvidenceCore, Scope, identity
+
+
+@dataclass(frozen=True)
+class OperationResult:
+    id: str
+    query: str
+    scope: Scope
+    source_versions: tuple[tuple[str, int], ...]
+    claim_ids: tuple[str, ...]
+    messages_json: str
+    preparation_json: str
+
+    @property
+    def messages(self):
+        return json.loads(self.messages_json)
+
+
+class CognitionWorkspace:
+    def __init__(self):
+        self.core = EvidenceCore()
+        self._documents = {}
+        self._versions = {}
+        self._spans = {}
+        self._version_spans = {}
+        self._cache = {}
+        self.executions = 0
+
+    def put_source(self, source_id, text, *, permitted_observers=()):
+        """Authorized analyst source, not evidence that any character received it."""
+        if source_id in self._documents and self._documents[source_id] == (text, permitted_observers):
+            return frozenset()
+        version = self._versions.get(source_id, 0) + 1
+        # Validate before withdrawing any previous version.
+        span = self.core.add_span(text, source_id=source_id, version=version,
+            permitted_observers=permitted_observers, order=max(1, len(text.splitlines())))
+        invalidated = frozenset().union(*(self.core.withdraw(k)
+            for k in self._version_spans.get(source_id, ())))
+        self._version_spans[source_id] = {span}
+        self._documents[source_id] = (text, permitted_observers)
+        self._versions[source_id] = version
+        self._spans[source_id] = span
+        return invalidated
+
+    def remove_source(self, source_id):
+        invalidated = frozenset().union(*(self.core.withdraw(k)
+            for k in self._version_spans.pop(source_id)))
+        self._spans.pop(source_id)
+        del self._documents[source_id]
+        return invalidated
+
+    def prepare(self, query, *, source_ids, through_order=None):
+        """Reader analysis only: exact v1 actor/access semantics stay in the adapter.
+
+        Whole selected documents are read dependencies, including absent evidence.
+        Adding text to one of them must invalidate the result even when it had no
+        positive support before. Unselected source changes do not rerun it.
+        """
+        if not isinstance(source_ids, tuple) or not 1 <= len(source_ids) <= 4 or len(set(source_ids)) != len(source_ids):
+            raise ValueError('one to four distinct ordered authorized sources required')
+        if any(s not in self._documents for s in source_ids):
+            raise ValueError('missing source cannot reuse a stale result')
+        if through_order is not None and (len(source_ids) != 1 or type(through_order) is not int or through_order < 1):
+            raise ValueError('statement snapshot requires one source and positive order')
+        key = identity('operation', query, source_ids, through_order)
+        versions = tuple((s, self._versions[s]) for s in source_ids)
+        prior = self._cache.get(key)
+        if prior and prior.source_versions == versions:
+            return prior
+        narrative = '\n'.join(self._documents[s][0] for s in source_ids)
+        # No provider is created: prepare_person_context only prepares inputs.
+        prepared = prepare_person_context(HCLCognitionLayer(lambda _: None), query,
+            narrative, as_of_statement=through_order)
+        prep = prepared.preparation_receipt
+        selected = prep.get('question_entrypoint', {}).get('scope', {})
+        scope = Scope(actor=selected.get('actor'), context=selected.get('context'),
+            source_ids=source_ids, through_order=through_order)
+        # The legacy entry uses artificial timestamps solely for source order.
+        # No calendar/knowledge time is inferred into the shared scope.
+        roots = []
+        for source in source_ids:
+            roots.append(self.core.claim(scope, ClaimKind.SOURCE_REPORT,
+                dict(source_id=source, version=self._versions[source], authority='CALLER_AUTHORIZED_TEXT')))
+            span = self._spans[source]
+            if through_order is not None:
+                text = self._documents[source][0]
+                lines = text.splitlines(keepends=True)
+                if through_order > len(lines) or any(not line.strip() for line in lines):
+                    raise ValueError('snapshot requires unambiguous nonempty source lines')
+                end = sum(len(line) for line in lines[:through_order])
+                span = self.core.add_span(text, source_id=source, version=self._versions[source],
+                    end=end, order=through_order, permitted_observers=self._documents[source][1])
+                self._version_spans[source].add(span)
+            self.core.support(roots[-1], span)
+        stages = getattr(prepared, 'stages', (prepared,))
+        claims = []
+        for index, stage in enumerate(stages):
+            state = stage.context.as_dict()
+            result = self.core.claim(scope, ClaimKind.SYSTEM_INTERPRETATION,
+                dict(operation_index=index, state=state, source_versions=versions,
+                     semantic_boundary='RETAINED_V1_SOURCE_SCOPED_NOT_PRIVATE_OR_WORLD_TRUTH'))
+            self.core.support(result, *roots)
+            self.core.interpret(result, required_premises=tuple(roots),
+                unknown_conditions=('calendar_and_receipt_time_not_established',))
+            claims.append(result)
+        self.executions += 1
+        result = OperationResult(key, query, scope, versions, tuple(claims),
+            json.dumps(prepared.messages, ensure_ascii=False, sort_keys=True),
+            json.dumps(prep, ensure_ascii=False, sort_keys=True))
+        self._cache[key] = result
+        return result
+
+    def receipt(self, result):
+        return dict(schema='hcl-shared-operation-v1', operation_id=result.id,
+            source_versions=list(result.source_versions), claim_ids=list(result.claim_ids),
+            current=all(self._versions.get(s) == v and s in self._documents for s, v in result.source_versions),
+            actual_final_messages=result.messages, core=self.core.receipt(result.scope),
+            provider_calls=0, evidence_level='CORRECTNESS_ONLY',
+            ordinary_input='BOUNDED_LEGACY_GRAMMAR_PROVIDER_FREE', calendar_time='NOT_ESTABLISHED')

@@ -2,7 +2,7 @@
 
 HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息、信念、视角和有来源的心理证据。**基础模型可以直接做好时，直接回答。** 简单提示足够时不调用复杂机制；精确计算采用通用工具；专门认知机制只保留得到增量证据支持的部分。
 
-当前阶段：**HCL Long-Horizon Capability Growth — Wave A**。A00 canonical adoption 已完成；当前唯一 `NEXT_READY` 为 **A01 shared evidence / scope / interpretation / dependency core**。POST-CG05 review 和全部历史 evidence disposition 保持原分类；EG01-A 的通用 semantic/native-entry 工作吸收到 Wave A，independent qualification 与 serious efficacy validation 后移到 G-ARCH 之后。唯一实时状态见 [STATUS.md](STATUS.md)，完整长期架构与 41 包路线见 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)，live 队列见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
+当前阶段：**HCL Long-Horizon Capability Growth — Wave A**。A01 shared evidence/dependency core 已通过正确性验证；当前唯一 `NEXT_READY` 为 **A02 unified ordinary semantic preparation**。POST-CG05 review 和全部历史 evidence disposition 保持原分类；EG01-A 的通用 semantic/native-entry 工作吸收到 Wave A，independent qualification 与 serious efficacy validation 后移到 G-ARCH 之后。唯一实时状态见 [STATUS.md](STATUS.md)，完整长期架构与 41 包路线见 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)，live 队列见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
 
 - [普通人物问题与叙事入口](docs/HCL_V1_PERSON_QUESTION.md)：有来源、时间、访问与局部修订边界；单次回答，默认零提取调用。
 - [夜间 source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)：实际能力变化、证据限制、两个 deferred 冻结包。
@@ -119,3 +119,5 @@ independent generalization → strong-base/P/G/H comparison → cross-model tran
 optimization → Authoritative Leaderboard Target Audit → final leaderboard push.
 No provider spending, LongMemEval access or benchmark-specific runtime logic is
 authorized by this policy change.
+
+共享来源修订入口见 [A01](docs/HCL_WAVE_A01.md)：实际更新相关信念/词义比较，保留无关状态；仅 correctness evidence，普通入口仍限旧语法。最新 owner 默认授权允许现有 provider 基础设施内必要且有记录的正常开发调用；不重新开启历史已消费 grant。
