@@ -147,7 +147,7 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**NIGHT-INTEGRATION-08 — earlier source-order person/context snapshots**
+**NIGHT-INTEGRATION-09 — lossless shared preparation/access metadata**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
@@ -461,3 +461,25 @@ night0/USD0, LongMemEval SEALED. After exact-head/main CI, unique next work is
 lossless reduction of repeated shared policy/preparation metadata in composed
 final input, preserving every actor/source/time/access/uncertainty decision and
 all actual-state decoder checks. No third candidate or paid authorization gate.
+
+
+**NIGHT-INTEGRATION-08 — exact-head/main CERT PASS.** PR147 head0ba6f64,
+run36446430437; mainba0f4803b6e8d0d6c5a242d459748f5c8992c6b4,
+run36446683994. Both259 v1 +176 historical =435 PASS, matching runtime digest;
+both applicable groups PASS. [Receipt](reports/HCL_NIGHT_SOURCE_ORDER_CERTIFICATION.json).
+
+**NIGHT-INTEGRATION-09 — IMPLEMENTED; correctness certification pending.**
+CAPABILITY_DELTA: complete checked operation states fit a tighter total context
+budget through lossless per-stage preparation defaults and one shared access
+policy. Every source/actor/time/access/failure/uncertainty decision survives exact
+decoding; nonzero/missing/different-typed counts stay literal. Oldv1 decoder format
+remains accepted, invalid defaults fail closed. Seven new tests; full current
+suite266 v1, CI adds176 historical. Four-input complete-byte audit is committed;
+no token/cost/model utility extrapolation. Default frozen inputs stay unchanged.
+After exact-head/main CI, unique next implementation is ordinary explicit belief/
+conditional-responsibility composition with caller-scoped normative premises,
+using only retained v0.6 and development-only RETAIN CG03. Keep knowledge,
+foreseeability, control, intention and the caller premise separate from belief or
+outcome. Reuse existing checker/ordinary preparation, no third candidate, moral
+ontology or new paid run. CG04/05 stay deferred/unvalidated, calls/spend0/USD0,
+LongMemEval SEALED; no owner blocking gate.

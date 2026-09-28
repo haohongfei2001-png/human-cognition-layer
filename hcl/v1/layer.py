@@ -4,7 +4,7 @@ import hashlib
 import json
 from hcl.v04.model import EventRecord
 from .context import (ANSWER_POLICY, RESPONSIBILITY_ANSWER_POLICY, PREFERENCE_ANSWER_POLICY,
-                      CONCEPT_ANSWER_POLICY, CognitionContext, evidence_level, event_row)
+                      CONCEPT_ANSWER_POLICY, NARRATIVE_ACCESS_POLICY, CognitionContext, evidence_level, event_row)
 from .router import CognitionPlan, CognitionRequest, CognitionRouter
 from .router import PerspectiveMode
 from .compact import compact_cognition_context, COMPACT_POLICY
@@ -511,9 +511,7 @@ class HCLCognitionLayer:
         if request.belief_analysis:
             policy += ' ' + BELIEF_POLICY
         if request.narrative_access or any(e.metadata.get('narrative_access_basis') for e in input_evidence):
-            policy += (' Access here is an exact narrated exposure claim, not a verified receipt or '
-                'proof of belief/understanding. Only explicitly delivered source text enters the '
-                'character view; unmentioned access stays unknown.')
+            policy += ' ' + NARRATIVE_ACCESS_POLICY
         if request.compact_context:
             policy += ' ' + COMPACT_POLICY
         return PreparedAnswer(plan, context, ({'role': 'system', 'content': policy},
