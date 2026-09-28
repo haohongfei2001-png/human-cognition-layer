@@ -5,6 +5,8 @@ GitHub workflow keeps the owner grant at zero; execution requires a later,
 explicitly authorized cap plus a unique trigger commit.
 """
 import argparse
+from datetime import datetime, timezone
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -69,6 +71,22 @@ class DeepSeekProvider:
             usage.prompt_tokens * basis["input_cache_miss_usd_per_million"]
             + usage.completion_tokens * basis["output_usd_per_million"]
         ) / 1_000_000
+        usage_raw = usage.model_dump(mode="json")
+        hit = usage_raw.get("prompt_cache_hit_tokens")
+        miss = usage_raw.get("prompt_cache_miss_tokens")
+        # This is a published-rate estimate, separate from the unchanged
+        # frozen peak all-cache-miss reservation used to enforce the cap.
+        estimated_actual = None
+        if (type(hit) is int and type(miss) is int and
+                hit + miss == usage.prompt_tokens and type(response.created) is int):
+            created = datetime.fromtimestamp(response.created, timezone.utc)
+            peak = created.weekday() < 5 and (
+                1 <= created.hour < 4 or 6 <= created.hour < 10)
+            factor = 1.0 if peak else 0.5
+            estimated_actual = (
+                hit * 0.044 * factor + miss * basis["input_cache_miss_usd_per_million"] * factor
+                + usage.completion_tokens * basis["output_usd_per_million"] * factor
+            ) / 1_000_000
         return {
             "model": response.model,
             "raw": choice.message.content,
@@ -77,6 +95,9 @@ class DeepSeekProvider:
             "cost_usd": cost,
             "finish_reason": choice.finish_reason,
             "cost_basis": "REPOSITORY_FROZEN_DEEPSEEK_PEAK_ALL_CACHE_MISS",
+            "provider_price_estimated_cost_usd": estimated_actual,
+            "usage_raw": usage_raw,
+            "response_raw": response.model_dump(mode="json"),
         }
 
 
@@ -109,7 +130,14 @@ class BudgetLedger:
 
         self.calls += 1
         attempt = {
-            "messages": messages,
+            "request_raw": {
+                "endpoint": self.package["provider_endpoint"] + "/chat/completions",
+                "model": self.package["model"],
+                "messages": messages,
+                "max_tokens": self.package["maximum_output_tokens_per_call"],
+                "response_format": self.package["provider_request"]["response_format"],
+                "thinking": self.package["provider_request"]["thinking"],
+            },
             "pending_reservation_usd": reserve,
             "call_index": self.calls,
         }
@@ -161,8 +189,10 @@ def run_with_provider(provider, package, checkpoint=None):
                     "score": score_answer(case, response["raw"]),
                     "usage": {
                         key: response[key]
-                        for key in ("model", "input_tokens", "output_tokens", "cost_usd")
+                        for key in ("model", "input_tokens", "output_tokens", "cost_usd",
+                                    "provider_price_estimated_cost_usd", "usage_raw")
                     },
+                    "response_raw": response["response_raw"],
                     "final_messages": messages,
                     "preflight": case["preflight"] if arm in ("H", "H-new") else None,
                 }
@@ -216,6 +246,8 @@ def main():
         "git_sha": os.environ.get("GITHUB_SHA"),
         "run_id": os.environ.get("GITHUB_RUN_ID"),
         "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+        "authorized_baseline_sha": "86e1db9ecdb908cbe67bc561b878a0d37e4cb819",
+        "frozen_package_sha256": hashlib.sha256(PACKAGE.read_bytes()).hexdigest(),
         "provider": package["provider"],
         "model": package["model"],
         "model_version": package["model_version"],
