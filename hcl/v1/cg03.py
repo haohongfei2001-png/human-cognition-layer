@@ -149,7 +149,7 @@ _FACTOR_PATTERNS = {
     ResponsibilityFactor.CAUSAL_CONTRIBUTION: r'\b(caus(?:e|ed|es|ing)|led to|because of|contribut(?:e|ed|ion))\b|导致|造成|促成',
     ResponsibilityFactor.KNOWLEDGE: r'\b(knew|know|aware|learned|ignorant|unaware)\b|知道|知晓|不知',
     ResponsibilityFactor.FORESEEABILITY: r'\b(foresaw|foresee|predict(?:ed)?|expect(?:ed)?|anticipat(?:e|ed)|unforeseeable)\b|预见|预料|预计',
-    ResponsibilityFactor.CONTROL: r'\b(control(?:led)?|could (?:have )?(?:stop(?:ped)?|prevent(?:ed)?|avoid(?:ed)?)|able to (?:stop|prevent|avoid)|unable to (?:stop|prevent|avoid))\b|控制|阻止|避免',
+    ResponsibilityFactor.CONTROL: r"\b(control(?:led)?|could(?: not|n't)? (?:have )?(?:stop(?:ped)?|prevent(?:ed)?|avoid(?:ed)?)|able to (?:stop|prevent|avoid)|unable to (?:stop|prevent|avoid))\b|控制|阻止|避免",
     ResponsibilityFactor.STATED_INTENTION: r'\b(intend(?:ed)?|plan(?:ned)?|meant to|aim(?:ed)? to)\b|打算|意图|计划',
 }
 _RETROSPECTIVE = re.compile(r'\b(at the time|before the action|at the moment of the action)\b|当时|事前', re.I)
@@ -326,8 +326,10 @@ _BASE = datetime(2026, 1, 1, tzinfo=timezone.utc)
 
 
 def prepare_responsibility_narrative(narrative: str, target_actor: str,
-                                     premises: tuple[NarrativePremise, ...]) -> ResponsibilityPreparation:
+                                     premises: tuple[NarrativePremise, ...], *, premise_scope='ALL_SOURCE') -> ResponsibilityPreparation:
     """Parse a small ordered prose family; every accepted span is an exact line."""
+    if premise_scope not in ('ALL_SOURCE', 'FOCAL_EPISODE'):
+        raise ValueError('explicit caller premise source scope required')
     if (not isinstance(narrative, str) or not narrative.strip() or len(narrative) > 16000 or
         not isinstance(target_actor, str) or not target_actor.strip() or
         not isinstance(premises, tuple) or not 1 <= len(premises) <= 3 or
@@ -355,10 +357,16 @@ def prepare_responsibility_narrative(narrative: str, target_actor: str,
         events.append(EventRecord(f'cg03-{digest}-{index}', time, line,
             'authorized-responsibility-narrative-order', time, speaker,
             metadata={'reader_only': speaker is None}))
-    actions = [e for e in events if e.actor_id == target_actor and
+    from .cg05 import _FACT as concept_fact, _USE as concept_use
+    from .cg04 import _CONDITION as context_condition
+    foreign = {e.event_id for e in events if (
+        re.search(r'\b(?:believe|believes|believed|belief|prefer|prefers|preference|mean|means|meaning)\b', e.raw_text, re.I) or
+        concept_fact.fullmatch(e.raw_text) or concept_use.fullmatch(e.raw_text) or
+        context_condition.fullmatch(e.raw_text))}
+    actions = [e for e in events if e.event_id not in foreign and e.actor_id == target_actor and
                _ACTION.search(e.raw_text) and
                not re.search(_FACTOR_PATTERNS[ResponsibilityFactor.STATED_INTENTION], e.raw_text, re.I)]
-    outcomes = [e for e in events if e.actor_id is None and _OUTCOME.search(e.raw_text)]
+    outcomes = [e for e in events if e.event_id not in foreign and e.actor_id is None and _OUTCOME.search(e.raw_text)]
     if len(actions) != 1 or len(outcomes) != 1 or _time(outcomes[0].valid_time) < _time(actions[0].valid_time):
         return ResponsibilityPreparation((), None, 'action_or_outcome_ambiguous', ())
     action, outcome = actions[0], outcomes[0]
@@ -366,6 +374,13 @@ def prepare_responsibility_narrative(narrative: str, target_actor: str,
     diagnostics = []
     for index, source in enumerate(events, 1):
         if source in (action, outcome):
+            continue
+        # Local readings/properties and belief/preference assertions describe
+        # another operation. Their incidental factor words do not report the
+        # focal actor's action-time knowledge, control or intention. Mixed or
+        # partial mental assertions are equally unsafe as factor evidence.
+        if source.event_id in foreign:
+            diagnostics.append({'line': index, 'status': 'OTHER_OPERATION_NOT_RESPONSIBILITY_FACTOR'})
             continue
         matched = [factor for factor, pattern in _FACTOR_PATTERNS.items()
                    if re.search(pattern, source.raw_text, re.I)]
@@ -390,12 +405,17 @@ def prepare_responsibility_narrative(narrative: str, target_actor: str,
         claims.append(claim)
         diagnostics.append({'line': index, 'status': 'EXACT_SOURCE_FACTOR',
                             'claim_id': claim.claim_id, 'source_event_id': source.event_id})
-    basis = tuple(e.event_id for e in events)
+    def premise_basis(p):
+        if premise_scope == 'ALL_SOURCE':
+            return tuple(e.event_id for e in events)
+        required = {r.factor for r in p.requirements}
+        return tuple(dict.fromkeys((action.event_id, outcome.event_id,
+            *(c.source_event_id for c in claims if c.factor in required))))
     actors = tuple(dict.fromkeys([target_actor] +
         [e.actor_id for e in events if e.actor_id and e.actor_id != target_actor]))
     if len(actors) > 4:
         return ResponsibilityPreparation((), None, 'actor_bound_exceeded', tuple(diagnostics))
     case = ResponsibilityCase(actors, action.event_id, outcome.event_id,
-        tuple(NormativePremise(p.premise_id, p.text, basis, p.requirements)
+        tuple(NormativePremise(p.premise_id, p.text, premise_basis(p), p.requirements)
               for p in premises), tuple(claims))
     return ResponsibilityPreparation(tuple(events), case, None, tuple(diagnostics))

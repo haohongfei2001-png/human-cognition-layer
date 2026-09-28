@@ -856,3 +856,15 @@ regressions.
    external or prohibited action. Otherwise continue to the unique next item.
 10. Capability growth remains the ordering principle:
    **real human-cognition capability growth > external validation > leaderboard**.
+
+
+NIGHT-INTEGRATION-09 certified on PR148 head/main442 tests, both applicable groups
+PASS; four actual inputs53,143→52,328 bytes (-1.5336%), exact decoded cognition,
+not token/cost/utility evidence. NIGHT-INTEGRATION-10 implements ordinary retained
+belief/conditional-responsibility integration and general foreign-source factor/
+episode guards. Explicit caller episode scope retains every required factor source
+and existing time/access checks; default consumed cases remain identical. Certify
+head/main, then immediately continue section15 NIGHT-INTEGRATION-11 multi-source
+local revision composition. Preserve source authority/identity/order, before/after
+scoped state, conflict/uncertainty and complete provenance. No third candidate,
+new paid run or owner blocking gate. The section15 canonical queue remains fixed.

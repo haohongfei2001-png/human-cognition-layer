@@ -47,6 +47,7 @@ class CognitionRequest:
     responsibility_case: ResponsibilityCase | None = None
     responsibility_analysis: bool = False
     responsibility_premises: tuple[NarrativePremise, ...] = ()
+    responsibility_premise_scope: str = 'ALL_SOURCE'
     preference_case: PreferenceCase | None = None
     preference_analysis: bool = False
     preference_role: str | None = None
@@ -97,6 +98,9 @@ class CognitionRequest:
             raise ValueError('social analysis flag must be boolean')
         if type(self.responsibility_analysis) is not bool:
             raise ValueError('responsibility analysis flag must be boolean')
+        if (self.responsibility_premise_scope not in ('ALL_SOURCE', 'FOCAL_EPISODE') or
+            (self.responsibility_premise_scope != 'ALL_SOURCE' and not self.responsibility_analysis)):
+            raise ValueError('explicit ordinary responsibility premise scope required')
         if type(self.narrative_access) is not bool:
             raise ValueError('narrative access flag must be boolean')
         if type(self.belief_analysis) is not bool:

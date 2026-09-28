@@ -91,7 +91,7 @@ def prepare_belief_sources(events, *, viewer=SYSTEM_VIEWER, event_time=None, kno
             try:
                 row = decode_belief_source(text)
             except ValueError:
-                if re.search(r'\b(?:believe|believes|belief|unsure whether)\b', text):
+                if re.search(r'\b(?:believe|believes|belief|unsure whether)\b', text, re.I):
                     raise ValueError('unsupported_or_ambiguous_belief_source')
                 diagnostics.append(dict(source_event_id=event.event_id, status='NO_BELIEF_INFERRED'))
                 continue

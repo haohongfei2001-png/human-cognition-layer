@@ -505,3 +505,25 @@ gates; repair them and continue. External-only gates are recorded and bypassed
 for dependency-safe provider-free work. Do not create filler work merely to fill
 time; stop only when this queue is complete or all remaining work is genuinely
 owner/external/prohibited.
+
+
+**NIGHT-INTEGRATION-09 — exact-head/main CERT PASS.** PR148 head8382dd1,
+run36447628980; main90e98075123969df59e523da72a6f619cd08e374,
+run36447975654. Both266 v1 +176 historical =442 PASS, matching runtime digest;
+both applicable groups PASS. [Receipt](reports/HCL_NIGHT_SHARED_PREPARATION_CERTIFICATION.json).
+
+**NIGHT-INTEGRATION-10 — IMPLEMENTED; correctness certification pending.**
+CAPABILITY_DELTA: ordinary explicit questions compose RETAIN v0.6 expressed belief
+and development-only RETAIN CG03 conditional responsibility, from ordinary source
+and explicit caller normative requirements. Fix incidental planned/control/etc
+belief/meaning/property words becoming responsibility factors or action/outcome.
+Explicit negative control stays separate from unknown knowledge/foreseeability/
+intention. Caller FOCAL_EPISODE scope binds action/outcome plus required factor
+sources; all relevant privacy/time guards remain. Thirteen new tests and actual
+private-view messages committed. All four consumed CG03 default cases unchanged;
+CG04/05 frozen inputs/helpers unchanged. Calls/spend tonight0/USD0, LongMemEval
+SEALED, no third candidate or historical efficacy upgrade.
+After exact-head/main CI, continue NIGHT-INTEGRATION-11: multi-source local
+revision composition under section15, with explicit source authority/identity/order,
+source-bounded before/after state and complete provenance. No third candidate or
+new paid call; ordinary source-grounding repairs stay within this integration line.
