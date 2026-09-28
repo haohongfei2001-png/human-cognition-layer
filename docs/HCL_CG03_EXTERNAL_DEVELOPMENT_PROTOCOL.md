@@ -35,10 +35,15 @@ service tier without a tier parameter, thinking disabled, JSON response mode,
 512 maximum output tokens, 20 calls maximum and zero retries. The frozen
 repository peak all-cache-miss rate basis from CG-02 is USD 1.32/M input and
 USD 3.96/M output. It must be checked against the provider before a grant.
-The package reserves its serialized input bytes plus 1,000 framing tokens per
-call, yielding a conservative proposal below **USD 0.30**. The proposed hard
+The package reserves twice its serialized input bytes plus 1,000 framing tokens per
+call, yielding a conservative proposal of **USD 0.29634528**. The proposed hard
 cap is **USD 0.30**; no historical budget transfers. This is a proposal, not
 an active budget or permission to run. The dormant workflow grant is zero.
+Official model/pricing and chat-completion documentation were rechecked on
+2026-09-28: the proposed model version, non-thinking JSON mode and conservative
+peak rates match [DeepSeek model pricing](https://api-docs.deepseek.com/quick_start/pricing/)
+and [API contract](https://api-docs.deepseek.com/api/create-chat-completion/).
+Recheck again before any new paid grant if the provider facts have changed.
 
 Before any paid call, rerun package equality, source/treatment preflight and
 exact package hash checks on the authorized main SHA. Run exactly once after a

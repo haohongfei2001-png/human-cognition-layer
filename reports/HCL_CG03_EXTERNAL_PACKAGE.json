@@ -975,7 +975,8 @@
     }
   ],
   "conservative_framing_token_reserve_per_call": 1000,
-  "estimated_worst_case_usd_at_repository_frozen_rate": 0.18164784,
+  "conservative_input_token_reserve_per_byte": 2,
+  "estimated_worst_case_usd_at_repository_frozen_rate": 0.29634528000000004,
   "evidence_class": "HCL_AUTHORED_SYNTHETIC_DEVELOPMENT_ONLY",
   "execution_authorized": false,
   "historical_budget_transfer_usd": 0,

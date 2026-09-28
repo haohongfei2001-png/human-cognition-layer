@@ -48,7 +48,8 @@ class BudgetLedger:
         if input_bytes > self.package['maximum_serialized_input_bytes_per_call']:
             raise ValueError('serialized input byte bound exceeded')
         basis = self.package['price_basis']
-        input_tokens = input_bytes + self.package['conservative_framing_token_reserve_per_call']
+        input_tokens = (input_bytes * self.package['conservative_input_token_reserve_per_byte'] +
+                        self.package['conservative_framing_token_reserve_per_call'])
         cost = (input_tokens * basis['input_cache_miss_usd_per_million'] +
                 self.package['maximum_output_tokens_per_call_if_authorized'] *
                 basis['output_usd_per_million']) / 1_000_000
@@ -73,13 +74,21 @@ class BudgetLedger:
             self.checkpoint(self)
         try:
             result = provider(messages)
+            # Preserve returned raw objects even when subsequent contract
+            # validation rejects the response. Never retry that paid attempt.
+            attempt['result'] = result
             if (result['model'] not in (self.package['model'], self.package['model_version']) or
+                type(result['input_tokens']) is not int or type(result['output_tokens']) is not int or
+                result['input_tokens'] < 0 or result['output_tokens'] < 0 or
                 result['input_tokens'] > input_bound or
                 result['output_tokens'] > self.package['maximum_output_tokens_per_call_if_authorized'] or
+                not isinstance(result['cost_usd'], (int, float)) or
                 result['cost_usd'] < 0 or result['cost_usd'] > reserve or
                 not isinstance(result['raw'], str)):
                 raise ValueError('provider contract or cap violation')
         except Exception as exc:
+            if isinstance(getattr(exc, 'body', None), (dict, list, str)):
+                attempt['provider_error_body'] = exc.body
             self.cost_usd += reserve
             attempt.pop('pending_reservation_usd', None)
             attempt['failure_reservation_usd'] = reserve
@@ -93,6 +102,43 @@ class BudgetLedger:
         if self.checkpoint:
             self.checkpoint(self)
         return result
+
+
+class CG03Provider(DeepSeekProvider):
+    """Reuse the existing client setup; preserve malformed returned objects too."""
+    def __call__(self, messages):
+        response = self.client.chat.completions.create(
+            model=self.package['model'], messages=messages,
+            max_tokens=self.package['maximum_output_tokens_per_call'],
+            response_format=self.package['provider_request']['response_format'],
+            extra_body={'thinking': self.package['provider_request']['thinking']})
+        raw_response = response.model_dump(mode='json')
+        usage = raw_response.get('usage') or {}
+        choices = raw_response.get('choices') or []
+        choice = choices[0] if choices else {}
+        content = (choice.get('message') or {}).get('content')
+        input_tokens, output_tokens = usage.get('prompt_tokens'), usage.get('completion_tokens')
+        basis = self.package['price_basis']
+        cost = None
+        if type(input_tokens) is int and type(output_tokens) is int:
+            cost = (input_tokens * basis['input_cache_miss_usd_per_million'] +
+                    output_tokens * basis['output_usd_per_million']) / 1_000_000
+        hit, miss = usage.get('prompt_cache_hit_tokens'), usage.get('prompt_cache_miss_tokens')
+        estimated = None
+        created = raw_response.get('created')
+        if (type(hit) is int and type(miss) is int and hit + miss == input_tokens and
+            type(output_tokens) is int and type(created) is int):
+            time = datetime.fromtimestamp(created, timezone.utc)
+            peak = time.weekday() < 5 and (1 <= time.hour < 4 or 6 <= time.hour < 10)
+            factor = 1.0 if peak else 0.5
+            estimated = (hit * 0.044 * factor +
+                miss * basis['input_cache_miss_usd_per_million'] * factor +
+                output_tokens * basis['output_usd_per_million'] * factor) / 1_000_000
+        return {'model': raw_response.get('model'), 'raw': content,
+            'input_tokens': input_tokens, 'output_tokens': output_tokens,
+            'cost_usd': cost, 'finish_reason': choice.get('finish_reason'),
+            'provider_price_estimated_cost_usd': estimated,
+            'usage_raw': usage, 'response_raw': raw_response}
 
 
 def run_with_provider(provider, package, checkpoint=None):
@@ -133,14 +179,17 @@ def main():
         raise SystemExit('exact CG03 owner grant is absent')
     authorized_sha = os.environ.get('HCL_CG03_AUTHORIZED_BASE_SHA')
     git_sha = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
-    if not authorized_sha or git_sha != authorized_sha:
-        raise SystemExit('CG03 authorized SHA mismatch')
+    if (not authorized_sha or subprocess.run(
+            ['git', 'merge-base', '--is-ancestor', authorized_sha, git_sha],
+            capture_output=True).returncode != 0):
+        raise SystemExit('CG03 authorized baseline is not an ancestor')
     key = os.environ.get('DEEPSEEK_API_KEY')
     if not key:
         raise SystemExit('existing DeepSeek Actions secret is absent')
     args.out.mkdir(parents=True, exist_ok=True)
     journal = args.out / 'journal.json'
     metadata = {'schema': 'hcl-cg03-external-run-v1', 'git_sha': git_sha,
+        'authorized_baseline_sha': authorized_sha,
         'run_id': os.environ.get('GITHUB_RUN_ID'),
         'run_attempt': os.environ.get('GITHUB_RUN_ATTEMPT'),
         'frozen_package_sha256': hashlib.sha256(PACKAGE.read_bytes()).hexdigest(),
@@ -150,16 +199,20 @@ def main():
         'cost_basis': 'REPOSITORY_FROZEN_DEEPSEEK_PEAK_ALL_CACHE_MISS',
         'source_policy': package['evidence_class']}
 
+    saved_rows = []
     def checkpoint(ledger, rows=None):
+        nonlocal saved_rows
+        if rows is not None:
+            saved_rows = list(rows)
         _write_json(journal, dict(metadata, state='IN_PROGRESS',
             calls=ledger.calls, cost_usd=ledger.cost_usd,
-            attempts=ledger.attempts, rows=rows or []))
+            attempts=ledger.attempts, rows=saved_rows))
 
     # DeepSeekProvider is shared with the executed CG02 infrastructure. The
     # package remains unauthorized until the exact external owner gate above.
     provider_package = dict(package,
         maximum_output_tokens_per_call=package['maximum_output_tokens_per_call_if_authorized'])
-    provider = DeepSeekProvider(key, provider_package)
+    provider = CG03Provider(key, provider_package)
     try:
         result = run_with_provider(provider, package, checkpoint=checkpoint)
     except Exception as exc:

@@ -192,9 +192,9 @@ def build_package():
             'gold': gold, 'preflight': preflight,
             'preparation_receipt': h.preparation_receipt,
             'checked_state': checked, 'messages': messages})
-    # Byte length upper-bounds byte-level tokenization before modest message
-    # framing; reserve an extra 1,000 tokens per call in this proposal.
-    worst_case = ((total_message_bytes + 20 * 1000) * 1.32 +
+    # Reserve twice the serialized byte count plus 1,000 framing tokens per
+    # call. This is a conservative proposal, not a tokenizer or invoice claim.
+    worst_case = ((total_message_bytes * 2 + 20 * 1000) * 1.32 +
                   20 * 512 * 3.96) / 1_000_000
     if worst_case > 0.30:
         raise ValueError('proposed conservative reservation exceeds owner gate')
@@ -215,6 +215,7 @@ def build_package():
         'maximum_output_tokens_per_call_if_authorized': 512,
         'maximum_serialized_input_bytes_per_call': 16000,
         'total_serialized_input_bytes': total_message_bytes,
+        'conservative_input_token_reserve_per_byte': 2,
         'conservative_framing_token_reserve_per_call': 1000,
         'estimated_worst_case_usd_at_repository_frozen_rate': worst_case,
         'proposed_new_hard_cap_usd': 0.30,
