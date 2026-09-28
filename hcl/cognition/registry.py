@@ -2,6 +2,16 @@
 from types import MappingProxyType
 
 PACKAGES = MappingProxyType({
+    'A04': MappingProxyType(dict(
+        implementation='CORRECTNESS_VERIFIED', ordinary_input='REPLAY_VERIFIED',
+        efficacy='UNTESTED', activation='OPT_IN',
+        entrypoint='hcl.cognition.prepare_retained',
+        limitation='bounded literal adaptation or explicitly conditional open translation; no implicit person aliases')),
+    'A05': MappingProxyType(dict(
+        implementation='CORRECTNESS_VERIFIED', ordinary_input='REPLAY_VERIFIED',
+        efficacy='UNTESTED', activation='OPT_IN',
+        entrypoint='hcl.cognition.answer_retained',
+        limitation='shared retained vertical slice; real-provider operation remains unverified')),
     'A03': MappingProxyType(dict(
         implementation='CORRECTNESS_VERIFIED', ordinary_input='REPLAY_VERIFIED',
         efficacy='UNTESTED', activation='OPT_IN',

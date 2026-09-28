@@ -130,6 +130,7 @@ class EvidenceCore:
         self.interpretations = {}
         self.challenges = {}
         self.revisions = []
+        self.projections = {}
         self.withdrawn = set()
 
     def _room(self, key):
@@ -179,6 +180,23 @@ class EvidenceCore:
             raise ValueError('source report cannot be rooted in a system interpretation')
         self.dependencies[conclusion].add(tuple(sorted(supports)))
 
+    def project_claim(self, original, scope, kind, content):
+        """Explicit, auditable narrowing between shared material and an operation."""
+        source = self.claims[original].scope
+        if (kind == ClaimKind.SOURCE_REPORT or not set(scope.source_ids) <= set(source.source_ids)
+                or scope.observer != source.observer
+                or not set(source.assumptions) <= set(scope.assumptions)
+                or any(getattr(scope, key) != getattr(source, key)
+                       for key in ('event_time', 'access_time', 'record_time', 'through_order'))
+                or (source.actor is not None and scope.actor != source.actor)
+                or (source.context is not None and scope.context != source.context)):
+            raise ValueError('projection must narrow an accessible interpretation, never promote a source fact')
+        key = self.claim(scope, kind, content)
+        if key == original or (key in self.projections and self.projections[key] != original):
+            raise ValueError('projection identity must preserve its unique original')
+        self.projections[key] = original
+        return key
+
     def interpret(self, claim_id, *, required_premises=(), alternatives=(), unknown_conditions=()):
         if self.claims[claim_id].kind != ClaimKind.SYSTEM_INTERPRETATION:
             raise ValueError('interpretation must remain separate from source reports')
@@ -195,6 +213,7 @@ class EvidenceCore:
             added = {key for key, groups in self.dependencies.items()
                 if key not in live and key not in self.withdrawn
                 and any(set(group) <= live for group in groups)
+                and (key not in self.projections or self.projections[key] in live)
                 and set(self.interpretations.get(key, Interpretation(key)).required_premises) <= live}
             if not added:
                 return frozenset(live)
@@ -222,6 +241,7 @@ class EvidenceCore:
             added = {key for key, groups in self.dependencies.items()
                 if key in live and key not in clean and key not in attacked
                 and any(set(group) <= clean for group in groups)
+                and (key not in self.projections or self.projections[key] in clean)
                 and set(self.interpretations.get(key, Interpretation(key)).required_premises) <= clean}
             if not added:
                 break
@@ -267,7 +287,7 @@ class EvidenceCore:
             spans=[dict(id=k, **asdict(self.spans[k]), active=k in live)
                    for k in sorted(visible & self.spans.keys())],
             claims=[dict(id=c.id, kind=c.kind.value, content=c.content, grounded=c.id in live,
-                support_status=statuses[c.id], challenges=sorted(self.challenges.get(c.id, set()) & visible),
+                projection_of=self.projections.get(c.id), support_status=statuses[c.id], challenges=sorted(self.challenges.get(c.id, set()) & visible),
                 supports=[list(s) for s in sorted(self.dependencies[c.id]) if set(s) <= visible],
                 interpretation=asdict(self.interpretations[c.id]) if c.id in self.interpretations else None)
                 for c in sorted(claims, key=lambda c: c.id)],

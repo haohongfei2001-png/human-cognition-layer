@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**LONG-HORIZON CAPABILITY GROWTH — WAVE A / A01–A03 CORRECTNESS_VERIFIED / NEXT_READY=A04**
+**LONG-HORIZON CAPABILITY GROWTH — WAVE A COMPLETE / WAVE B READY / NEXT_READY=B01**
 
 The long-horizon architecture and 41-package roadmap are canonical in
 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md).
@@ -11,13 +11,13 @@ exact-SHA CI and immutable receipts remain the implementation/evidence facts.
 
 ## Current wave
 
-**Wave A — Unified Core and Ordinary Input**
+**Wave B — Dynamic Epistemic Cognition (READY)**
 
 A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
-**NEXT_READY: `A04_RETAINED_CAPABILITY_SHARED_CORE_ADAPTERS`**
+**NEXT_READY: `B01_DISTINCT_EPISTEMIC_STATES_AND_BOUNDED_HIGHER_ORDER_PROPOSITIONS`**
 
 A01 now provides shared versioned evidence, scoped source reports and
 interpretations, alternative support sets and rooted invalidation. A source
@@ -35,9 +35,15 @@ Actual final inputs carry support, challenges and retired source history. See
 
 State: **CORRECTNESS_VERIFIED / REPLAY_VERIFIED / UNTESTED / OPT_IN**.
 The local entry recognizes bounded explicit speech forms; open backend candidates
-remain semantically unverified. No real provider has been called in A01–A03.
-Historical efficacy dispositions are unchanged. A04 connects the retained
-operations to this common material rather than expanding their separate grammars.
+remain semantically unverified. No real provider has been called in A01–A05.
+Historical efficacy dispositions are unchanged. A04–A05 connect retained v0.6/CG03/CG04/CG05 operations to the common material.
+Original quotes, derived representation and assumptions stay separate. A property
+revision changes the concept checker and its dependent belief/concept comparison;
+Noor stays unchanged. Actual final-adapter inputs and the dependency graph are saved
+in [the A04–A05 witness](reports/HCL_WAVE_A04_A05_WITNESS.json).
+
+Wave A is correctness-verified, with no independent efficacy or live-provider
+claim. B01 now separates epistemic objects and adds bounded higher-order propositions.
 
 ## Canonical development policy
 
@@ -142,7 +148,7 @@ Leaderboard selection is not active now.
 - LongMemEval: **SEALED / NOT ACCESSED**
 - Benchmark-specific logic authorized: **NO**
 - Leaderboard search/optimization: **OFF**
-- Current owner-only blocker: **NONE for A04 implementation**
+- Current owner-only blocker: **NONE for B01 implementation**
 
 ## Historical state and recovery
 
@@ -161,10 +167,14 @@ truthfully satisfied.
 A01 is verified by unit/negative-inference/composition/ordinary-input/historical
 checks in the existing exact-SHA v1 workflow. Its artifact includes an executable
 positive witness and actual prepared final inputs. Merge only after exact-head
-CI; continue A04 only after exact-main CI. GitHub run SHAs, rather than a
+CI; continue B01 only after exact-main CI. GitHub run SHAs, rather than a
 self-referential commit hash in this file, identify those receipts.
 
 A01 merged in PR #165 at `c5ad04a9e8eb30ab99255b05fca36a02644c6e2b`;
 all six exact-main workflows passed. The v1 receipt in run `36476028258`
 records 346 integration + 176 historical tests, zero provider calls. A02–A03
 continue the same workflow with their own positive witnesses.
+
+A02–A03 merged in PR #166 at `b521c6e3122dfade4d91bd241d5e3d68d333805c`;
+all six exact-main workflows passed, v1 run `36477680033`.
+A04–A05 add the retained-operation witness to the same exact-SHA CI artifact.
