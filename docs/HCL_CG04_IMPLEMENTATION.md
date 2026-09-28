@@ -43,7 +43,9 @@ Conditions may join up to four `key is true/false` clauses with `and`.
 Narrator preference reports use the same third-person form as Bob's line but
 remain explicit narrator source claims. Revisions require an unambiguous earlier
 self statement with the named prior pair, same actor/role/context and strictly
-earlier event time. Repeated indistinguishable earlier pairs fail closed rather
+earlier event time, with the same explicit conditions. A conditional replacement
+cannot silently retire an unconditional statement outside its condition domain;
+changed guards fail closed in this first version. Repeated indistinguishable earlier pairs fail closed rather
 than being resolved by a hand-entered pointer. No condition persistence or
 retrospective current-state inference occurs outside the declared source scenario.
 

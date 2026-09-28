@@ -174,9 +174,10 @@ def _validate(case, events):
             prior = statements.get(s.supersedes_id)
             if (prior is None or prior.authority != 'DIRECT_SELF_REPORT' or
                 (s.actor_id, s.role, s.context) != (prior.actor_id, prior.role, prior.context) or
+                s.conditions != prior.conditions or
                 prior_pair != (prior.preferred, prior.over) or
                 _time(e.valid_time) <= _time(sources[prior.source_event_id].valid_time)):
-                raise ValueError('revision requires an earlier self statement in the same scope')
+                raise ValueError('revision requires an earlier self statement with the same scope and conditions')
             candidates = [p for p in case.statements if p.authority == 'DIRECT_SELF_REPORT' and
                 (p.actor_id, p.role, p.context, p.preferred, p.over) ==
                 (s.actor_id, s.role, s.context, *prior_pair) and

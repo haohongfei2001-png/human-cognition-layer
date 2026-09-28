@@ -146,6 +146,15 @@ class PreferenceChecks(unittest.TestCase):
         with self.assertRaises(ValueError):
             check_preferences(p.case, p.events[:2] + (earlier,))
 
+    def test_conditional_revision_cannot_silently_remove_an_unconditional_preference(self):
+        p = prepared(SELF + '.\nAlice: As medic in fieldwork, I now prefer speed over safety if rain is true instead of safety over speed.')
+        self.assertIsNone(p.case)
+        self.assertEqual(p.failure, 'invalid_or_ambiguous_preference_source')
+        valid = checked(SELF + ' if rain is true.\n'
+            'Alice: As medic in fieldwork, I now prefer speed over safety if rain is true instead of safety over speed.')
+        self.assertEqual([r['state'] for r in valid['statements']],
+            ['SUPERSEDED_LOCAL', 'CONDITION_UNRESOLVED'])
+
 
 class PreferenceViews(unittest.TestCase):
     def test_reader_character_observer_sources(self):
