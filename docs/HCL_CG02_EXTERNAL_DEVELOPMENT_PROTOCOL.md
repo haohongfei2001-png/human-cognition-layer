@@ -10,7 +10,7 @@ Every arm receives the same source task and strict JSON answer fields: act kind,
 
 ## Five arms and treatment
 
-All 20 calls, if separately authorized, would use the same `gpt-6-sol` model and default Standard service tier, at most 512 output tokens per call, without tools or retries.
+All 20 calls, if separately authorized, would reuse the repository's existing DeepSeek provider path: `DEEPSEEK_API_KEY`, endpoint `https://api.deepseek.com`, model `deepseek-v4-pro` / returned version `DeepSeek-V4-Pro-0813`, thinking disabled, JSON response format, at most 512 output tokens per call, without tools or retries. No new provider account, API key, credential, paid plan, or OpenAI API access is required.
 
 | Arm | Frozen input |
 |---|---|
@@ -28,4 +28,24 @@ The scorer accepts only a JSON object with exactly the seven predeclared fields.
 
 ## Proposed owner budget, not authorization
 
-[Official OpenAI API pricing](https://developers.openai.com/api/docs/pricing), checked 2026-09-28, lists `gpt-6-sol` Standard short-context at USD 1 per million input tokens and USD 5 per million output tokens. The frozen 20-call maximum, 8,000 input-token conservative bound per call and 512 output-token cap imply at most USD 0.2112 at those rates. Propose a **USD 0.30 hard cap** to allow for price/usage accounting variation. Stop before a call if projected usage would exceed that cap; no automatic retry or additional arm/case. Reconfirm model access and price before any later authorization is exercised. No historical CG-01 budget transfers, no new paid plan, and no call or spend are included in this freeze.
+The revised package deliberately reuses the same repository-frozen DeepSeek
+provider/model contract that successfully executed CG-01 rather than introducing
+a new OpenAI API dependency. The budget ledger uses the existing CG-01
+conservative peak all-cache-miss rating: USD 1.32 per million input tokens and
+USD 3.96 per million output tokens.
+
+With the frozen 20-call maximum, conservative 8,000-input-token bound per call
+and 512-output-token cap, the worst-case rated ceiling is **USD 0.2517504**.
+The proposed **USD 0.30 hard cap** therefore remains sufficient.
+
+The provider-free package itself does not execute any call. The existing
+GitHub Actions secret name is `DEEPSEEK_API_KEY`; this protocol does not request
+a new secret. Before any execution, the one-time runner must re-run the frozen
+package/treatment-presence test and reject any drift. No retry, additional case,
+additional arm, historical-budget transfer, new paid plan, or LongMemEval access
+is permitted.
+
+The only next gate remains
+`HCL_CG02_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION`. A later authorization must
+refer specifically to this revised DeepSeek-frozen package; the superseded
+`gpt-6-sol` package/provider assumption is not executable authorization.
