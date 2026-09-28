@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–B COMPLETE / WAVE C / C01 CORRECTNESS_VERIFIED / NEXT_READY=C02**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–B COMPLETE / WAVE C / C01–C02 CORRECTNESS_VERIFIED / NEXT_READY=C03**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -235,10 +235,16 @@ checks. C01 now provides a real goal/selected-plan/opportunity join, subgoal and
 plan lifecycle separation, and dependent update after goal abandonment. Twelve
 targeted checks plus full regression; see `docs/HCL_WAVE_C01.md`.
 
-**C02 — NEXT_READY:** competing action explanations with required knowledge, goals,
+**C02 — CORRECTNESS_VERIFIED:** competing action explanations with required knowledge, goals,
 opportunity and counterevidence; explicit action-time ignorance weakens the
-knowledge-dependent explanation without proving another motive. Then C03
-belief-dependent plans → C04 appraisal → C05 integration.
+knowledge-dependent explanation without proving another motive. C02 now reuses
+C01 pre-action goals and the conditional checker to preserve mixed explanations,
+source conflict and explicit negative evidence. Thirteen targeted checks plus full
+regression; see `docs/HCL_WAVE_C02.md`.
+
+**C03 — NEXT_READY:** belief-dependent plan feasibility and revision; distinguish
+character-subjective feasibility from a declared model, and do not infer value
+change from plan change. Then C04 appraisal → C05 integration.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -399,12 +405,12 @@ defect is.
 
 - Current wave: **Wave C — Goals, Plans and Appraisal**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: C02_COMPETING_ACTION_EXPLANATIONS**
+- **NEXT_READY: C03_BELIEF_DEPENDENT_PLAN_REVISION**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A05/B01–B05/C01 actual provider calls / spend: **0 / USD 0**
+- A01–A05/B01–B05/C01–C02 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **C02**, then continue through the dependency-safe queue
+Work should continue at **C03**, then continue through the dependency-safe queue
 without asking for a new decision after every package.

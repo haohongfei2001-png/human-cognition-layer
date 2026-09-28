@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**LONG-HORIZON CAPABILITY GROWTH — WAVES A–B COMPLETE / WAVE C / C01 CORRECTNESS_VERIFIED / NEXT_READY=C02**
+**LONG-HORIZON CAPABILITY GROWTH — WAVES A–B COMPLETE / WAVE C / C01–C02 CORRECTNESS_VERIFIED / NEXT_READY=C03**
 
 The long-horizon architecture and 41-package roadmap are canonical in
 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md).
@@ -17,7 +17,7 @@ A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
-**NEXT_READY: `C02_COMPETING_ACTION_EXPLANATIONS`**
+**NEXT_READY: `C03_BELIEF_DEPENDENT_PLAN_REVISION`**
 
 A01 now provides shared versioned evidence, scoped source reports and
 interpretations, alternative support sets and rooted invalidation. A source
@@ -35,7 +35,7 @@ Actual final inputs carry support, challenges and retired source history. See
 
 State: **CORRECTNESS_VERIFIED / REPLAY_VERIFIED / UNTESTED / OPT_IN**.
 The local entry recognizes bounded explicit speech forms; open backend candidates
-remain semantically unverified. No real provider has been called in A01–A05/B01–B05/C01.
+remain semantically unverified. No real provider has been called in A01–A05/B01–B05/C01–C02.
 Historical efficacy dispositions are unchanged. A04–A05 connect retained v0.6/CG03/CG04/CG05 operations to the common material.
 Original quotes, derived representation and assumptions stay separate. A property
 revision changes the concept checker and its dependent belief/concept comparison;
@@ -62,7 +62,10 @@ updates with actual nested, concept and conditional responsibility checks; chang
 Noor access preserves Mira and Kai without reexecution. See
 [B05](docs/HCL_WAVE_B05.md). Wave B construction is complete; C01 now joins explicit goals, selected plans and reported opportunities. Goal
 abandonment changes dependent pursuit without inventing plan abandonment; subgoal
-completion does not complete the parent. See [C01](docs/HCL_WAVE_C01.md). C02 is next.
+completion does not complete the parent. See [C01](docs/HCL_WAVE_C01.md). C02 now keeps multiple conditional action
+explanations and weakens knowledge-dependent candidates after explicit action-time
+ignorance evidence, without choosing a true motive. See [C02](docs/HCL_WAVE_C02.md).
+C03 is next.
 Live-provider efficacy remains unverified.
 
 ## Canonical development policy

@@ -4,7 +4,7 @@ from .workspace import CognitionWorkspace, OperationResult
 
 __all__ = ['Claim', 'ClaimKind', 'Dependency', 'EvidenceCore', 'Interpretation',
            'Scope', 'SourceSpan', 'CognitionWorkspace', 'OperationResult',
-           'AuthorizedText', 'SemanticResult', 'prepare_semantics', 'PositionAssessment', 'assess_positions', 'RetainedResult', 'prepare_retained', 'answer_retained', 'Attitude', 'MentalProposition', 'EpistemicBundle', 'prepare_epistemic', 'CommunicationScene', 'CommunicationView', 'RevisionTimeline', 'RevisionSnapshot', 'SourceRecord', 'ReportAssessment', 'prepare_reports', 'IntegratedScene', 'IntegratedSceneResult', 'AgencyResult', 'prepare_agency']
+           'AuthorizedText', 'SemanticResult', 'prepare_semantics', 'PositionAssessment', 'assess_positions', 'RetainedResult', 'prepare_retained', 'answer_retained', 'Attitude', 'MentalProposition', 'EpistemicBundle', 'prepare_epistemic', 'CommunicationScene', 'CommunicationView', 'RevisionTimeline', 'RevisionSnapshot', 'SourceRecord', 'ReportAssessment', 'prepare_reports', 'IntegratedScene', 'IntegratedSceneResult', 'AgencyResult', 'prepare_agency', 'ActionExplanations', 'prepare_explanations']
 
 from .semantic import AuthorizedText, SemanticResult, prepare_semantics
 
@@ -23,3 +23,5 @@ from .report_provenance import ReportAssessment, prepare_reports
 from .integrated_scene import IntegratedScene, IntegratedSceneResult
 
 from .agency import AgencyResult, prepare_agency
+
+from .action_explanations import ActionExplanations, prepare_explanations
