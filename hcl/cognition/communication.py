@@ -21,6 +21,7 @@ _RECEIPT = re.compile(rf"Narrator: (?P<actors>{_ACTORS}) (?P<later>later )?"
     rf"(?P<verb>heard|read|missed|did not hear|did not read) "
     rf"(?:(?P<speaker>{_NAME})'s last statement|the previous statement)\.")
 _AVAILABLE = re.compile(rf"Narrator: (?P<speaker>{_NAME})'s last statement was publicly available\.")
+_STATEMENT_REPORT = re.compile(rf"Narrator: {_NAME}'s statement (?:that .+ (?:is (?:true|false)|omitted that .+)|omitted that .+)\.")
 _SENT = re.compile(rf"Narrator: (?P<speaker>{_NAME}) sent (?:their|the) last statement privately to (?P<actors>{_ACTORS})\.")
 
 
@@ -105,7 +106,7 @@ class CommunicationScene:
             # Reader narration remains unavailable unless a separate explicit
             # receipt names the actor. Ambiguous access cues must not fall back
             # to generic narrator records and thereby evade access validation.
-            if narrator_record and re.search(r'\b(heard|hear|read|missed|sent|statement|available)\b', text, re.I):
+            if narrator_record and not _STATEMENT_REPORT.fullmatch(text) and re.search(r'\b(heard|hear|read|missed|sent|statement|available)\b', text, re.I):
                 raise ValueError('unsupported or ambiguous narrator access cue')
             if (event['assertion_scope'] != 'SOURCE_REPORT' or
                     (not narrator_record and event['speaker_candidates'] != [speaker])

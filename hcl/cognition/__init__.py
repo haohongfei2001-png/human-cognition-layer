@@ -35,3 +35,5 @@ from .agency_chain import AgencyChain, SemanticWorkspace, prepare_agency_chain
 from .commitments import CommitmentResult, prepare_commitment
 
 from .mutual_understanding import MutualUnderstanding, prepare_mutual_understanding
+
+from .strategic_communication import StrategicCommunication, prepare_strategic_communication
