@@ -28,6 +28,7 @@ class SemanticPreparation:
     model_id: str
     provider_calls: int
     cost_usd: float | None
+    source_span_diagnostics: tuple[str, ...] = ()
 
 
 def query_actor(query: str) -> str | None:

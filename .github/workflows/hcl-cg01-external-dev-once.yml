@@ -14,7 +14,8 @@ jobs:
     timeout-minutes: 30
     env:
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-      HCL_CG01_AUTHORIZED_CAP_USD: "0.75"
+      # The one-time owner grant expired when run 36392929956 completed.
+      HCL_CG01_AUTHORIZED_CAP_USD: "0"
       HCL_CG01_RUN_ONCE_TOKEN: HCL_CG01_EXTERNAL_DEV_20260928_ONCE
     steps:
       - uses: actions/checkout@v4
