@@ -1,9 +1,7 @@
 name: HCL CG-02 External Development Once
 
 on:
-  push:
-    branches: [main]
-    paths: [".github/HCL_CG02_EXTERNAL_DEV_TRIGGER"]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -18,8 +16,8 @@ jobs:
     timeout-minutes: 30
     env:
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-      # This grant applies only to the frozen DeepSeek package at the owner-named base.
-      HCL_CG02_AUTHORIZED_CAP_USD: "0.30"
+      # The one-time owner grant was consumed by run 36413088075.
+      HCL_CG02_AUTHORIZED_CAP_USD: "0"
       HCL_CG02_AUTHORIZED_BASE_SHA: 86e1db9ecdb908cbe67bc561b878a0d37e4cb819
       HCL_CG02_FROZEN_PACKAGE_SHA256: 6384b0925a191041de0478aa46cb69618502e553cb0c4f5838087f4a6c95c694
       HCL_CG02_RUN_ONCE_TOKEN: HCL_CG02_EXTERNAL_DEV_20260928_ONCE
