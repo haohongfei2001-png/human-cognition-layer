@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**CG04 / CG05 RETAIN_DEVELOPMENT_ONLY / CLOSED; ZERO PENDING SLOTS; POST-CG05 GAP REVIEW NEXT**
+**POST-CG05 REVIEW COMPLETE; CG03/04/05 DEVELOPMENT-ONLY RETAIN; INDEPENDENT GENERALIZATION PREPARATION; NO CG06**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -638,3 +638,11 @@ CG04 closure PR157 merged bc51049, all six exact-main groups PASS, 329 v1+176 hi
 ## CG05 source-first paid closure / current task
 
 Run36464819798, frozen runtimec7593bc/package9ade8288 and pinned adapter8a539144, 20 calls/0 retries, C21/P23/G21/H28/H-new23 of28. RETAIN_DEVELOPMENT_ONLY, bounded local criteria/uncertainty/counterexample protection; no independent/fresh evidence. Full raw requests/responses/usage/scorer/treatment and artifact hashes preserved. Conservative USD0.04263072, published-rate estimate USD0.018375456, invoice unavailable. Grant0, trigger deleted, workflow disabled, unused money extinguished. Zero pending candidate slots. Total newly authorized calls40, rated USD0.08211456, estimates USD0.035095808, budgets independent and now closed. LongMemEval SEALED. After exact-main closure CI, perform POST-CG05 CAPABILITY GAP REVIEW before creating any new contract/module; no automatic CG06 or leaderboard.
+
+## POST-CG05 canonical handoff / current next task
+
+CG05 closure PR159 merged b31d8c29f64e5a2b1d62462de0ff58729b743ac9; all six exact-head/main groups PASS, 332 v1+176 historical=508. CG04/CG05 both consumed and closed, workflow disabled/cap0, triggers absent. [CG05 certification](reports/HCL_CG05_CLOSURE_CERTIFICATION.json). [Short gap review](reports/HCL_POST_CG05_CAPABILITY_GAP_REVIEW.md) and [complete disposition/accounting inventory](reports/HCL_POST_CG05_CAPABILITY_DISPOSITIONS.json).
+
+No evidence currently isolates an unmet new human-cognition mechanism from ordinary preparation/integration limits. Do not create CG06. Independent generalization of retained v0.6/CG03/CG04/CG05 is the next evidence step. Zero-provider unchanged-native-question replay of eight previously source-exposed, never provider-consumed DREAM families gives0/8 specialized treatments; all safely refuse unsupported query scope. This is not model scoring, evidence of a base-model failure, fresh selection or proof that all DREAM is unsuitable. No paid external package is qualified/armed. Raw corpus stays outside repository under its non-commercial research license. [Actual readiness receipt](reports/HCL_POST_CG05_NATIVE_READINESS.json).
+
+**Unique next implementation task: EG01-A_SOURCE_FIRST_NATIVE_SEMANTIC_PREPARATION_AND_TREATMENT_QUALIFICATION_OF_RETAINED_CAPABILITIES.** Work on generic native-task/source actor/time/access preparation and an independent source-first family whose unchanged task actually uses retained capabilities; no gold/manual psychology, benchmark-specific rule or new ontology. New provider execution requires a separate later grant; none is requested/armed now. Existing paid packages are terminal consumed records, not pending proposals. Total this authorization40 calls/0 retries, rated USD0.08211456, rate estimate USD0.035095808, invoice unknown, no budget transfer. Candidate slots0. LongMemEval SEALED, leaderboard OFF, owner-only decision currently NONE.

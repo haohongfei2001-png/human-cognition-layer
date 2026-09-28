@@ -2,7 +2,7 @@
 
 HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息、信念、视角和有来源的心理证据。**基础模型可以直接做好时，直接回答。** 简单提示足够时不调用复杂机制；精确计算采用通用工具；专门认知机制只保留得到增量证据支持的部分。
 
-当前阶段：**HCL Capability Growth；CG-03 单次开发比较按 RETAIN 收口（仅 development evidence），CG-04 单次冻结比较已按 development-only RETAIN 收口；CG-05 也已按 development-only RETAIN 收口；夜间 NI-10..14 已实现：普通问题中的多来源修订、两人视角、信念/条件责任与多事件集成；交付以 exact-main provider-free CI 为准**。CG-02 的一次性开发比较已按 INCONCLUSIVE 结案；v1 integration foundation 已完成。唯一实时状态：[STATUS.md](STATUS.md)，长期执行计划见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
+当前阶段：**HCL Capability Growth；CG-03 单次开发比较按 RETAIN 收口（仅 development evidence），CG-04 单次冻结比较已按 development-only RETAIN 收口；CG-05 也已按 development-only RETAIN 收口；夜间 NI-10..14 已实现：普通问题中的多来源修订、两人视角、信念/条件责任与多事件集成；交付以 exact-main provider-free CI 为准**。CG-02 的一次性开发比较已按 INCONCLUSIVE 结案；v1 integration foundation 已完成。POST-CG05 gap review 选择独立外部泛化准备，不自动创建 CG-06。唯一实时状态：[STATUS.md](STATUS.md)，长期执行计划见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
 
 - [普通人物问题与叙事入口](docs/HCL_V1_PERSON_QUESTION.md)：有来源、时间、访问与局部修订边界；单次回答，默认零提取调用。
 - [夜间 source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)：实际能力变化、证据限制、两个 deferred 冻结包。
@@ -101,3 +101,5 @@ preserved. The next implementation package is
 - [普通问题入口](docs/HCL_V1_PERSON_QUESTION.md)：明确的中英文问题选择已有 belief／词义准备与来源比较，不需手工输入正确心理状态；含糊任务保留为未决。
 
 - [CG04 source-first closure](reports/HCL_CG04_EXTERNAL_DEVELOPMENT_CLOSURE.md) / [CG05 source-first closure](reports/HCL_CG05_EXTERNAL_DEVELOPMENT_CLOSURE.md)：两项 RETAIN 仅为 HCL-authored development evidence，独立外部泛化尚未建立；预算和 trigger 均关闭。
+
+- [POST-CG05 capability gap review](reports/HCL_POST_CG05_CAPABILITY_GAP_REVIEW.md)：当前新增机制证据不足以选择 CG06，下一项为已保留能力的独立外部泛化接入；首次零调用原问题检查0/8有专门 treatment，未创建付费包。

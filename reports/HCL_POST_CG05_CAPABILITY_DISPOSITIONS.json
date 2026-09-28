@@ -1,0 +1,137 @@
+{
+  "schema": "hcl-post-cg05-dispositions-v1",
+  "review_baseline": "b31d8c29f64e5a2b1d62462de0ff58729b743ac9",
+  "capabilities": [
+    {
+      "id": "v0.6",
+      "disposition": "RETAIN",
+      "evidence": "BOUNDED_HISTORICAL_EXTERNAL_DEVELOPMENT_FANTOM",
+      "scope": "source/access/time perspective and belief; not general efficacy"
+    },
+    {
+      "id": "CG-01",
+      "disposition": "SIMPLIFY",
+      "evidence": "ORDINARY_TEXT_CLOSED_CHECKER_UTILITY_INCONCLUSIVE",
+      "scope": "optional typed explanation-condition checks; no ordinary external increment"
+    },
+    {
+      "id": "CG-02",
+      "disposition": "INCONCLUSIVE",
+      "evidence": "CLOSED_MEASUREMENT_CONTRACT_FAILURE",
+      "scope": "bounded social act correctness only; no qualified utility"
+    },
+    {
+      "id": "CG-03",
+      "disposition": "RETAIN",
+      "evidence": "HCL_AUTHORED_SYNTHETIC_DEVELOPMENT_ONLY_NOT_INDEPENDENT_OR_FRESH",
+      "scope": "bounded optional source-grounded mechanism only",
+      "run_id": "36427668859",
+      "scores_out_of_28": {
+        "C": 19,
+        "P": 21,
+        "G": 20,
+        "H": 28,
+        "H-new": 23
+      },
+      "calls": 20,
+      "rated_usd": 0.0370062
+    },
+    {
+      "id": "CG-04",
+      "disposition": "RETAIN",
+      "evidence": "HCL_AUTHORED_SYNTHETIC_DEVELOPMENT_ONLY_NOT_INDEPENDENT_OR_FRESH",
+      "scope": "bounded optional source-grounded mechanism only",
+      "run_id": "36463463452",
+      "scores_out_of_28": {
+        "C": 26,
+        "P": 23,
+        "G": 25,
+        "H": 28,
+        "H-new": 26
+      },
+      "calls": 20,
+      "rated_usd": 0.039483840000000006
+    },
+    {
+      "id": "CG-05",
+      "disposition": "RETAIN",
+      "evidence": "HCL_AUTHORED_SYNTHETIC_DEVELOPMENT_ONLY_NOT_INDEPENDENT_OR_FRESH",
+      "scope": "bounded optional source-grounded mechanism only",
+      "run_id": "36464819798",
+      "scores_out_of_28": {
+        "C": 21,
+        "P": 23,
+        "G": 21,
+        "H": 28,
+        "H-new": 23
+      },
+      "calls": 20,
+      "rated_usd": 0.04263072
+    },
+    {
+      "id": "NI-10",
+      "implementation": "IMPLEMENTED_PROVIDER_FREE_CORRECTNESS_CERTIFIED",
+      "disposition": "INCONCLUSIVE",
+      "evidence": "EXTERNAL_UTILITY_UNTESTED_NOT_NEW_VALIDATED_FAMILY",
+      "capability_delta": "ordinary joint belief and conditional responsibility, no belief-to-knowledge promotion"
+    },
+    {
+      "id": "NI-11",
+      "implementation": "IMPLEMENTED_PROVIDER_FREE_CORRECTNESS_CERTIFIED",
+      "disposition": "INCONCLUSIVE",
+      "evidence": "EXTERNAL_UTILITY_UNTESTED_NOT_NEW_VALIDATED_FAMILY",
+      "capability_delta": "ordered source-record local revision, no revision between incomparable branches"
+    },
+    {
+      "id": "NI-12",
+      "implementation": "IMPLEMENTED_PROVIDER_FREE_CORRECTNESS_CERTIFIED",
+      "disposition": "INCONCLUSIVE",
+      "evidence": "EXTERNAL_UTILITY_UNTESTED_NOT_NEW_VALIDATED_FAMILY",
+      "capability_delta": "separate two-person accessible belief views, optional observer scope"
+    },
+    {
+      "id": "NI-13",
+      "implementation": "IMPLEMENTED_PROVIDER_FREE_CORRECTNESS_CERTIFIED",
+      "disposition": "INCONCLUSIVE",
+      "evidence": "EXTERNAL_UTILITY_UNTESTED_NOT_NEW_VALIDATED_FAMILY",
+      "capability_delta": "multi-event before/after composition of existing cognition operators"
+    },
+    {
+      "id": "NI-14",
+      "implementation": "IMPLEMENTED_PROVIDER_FREE_CORRECTNESS_CERTIFIED",
+      "disposition": "INCONCLUSIVE",
+      "evidence": "EXTERNAL_UTILITY_UNTESTED_NOT_NEW_VALIDATED_FAMILY",
+      "capability_delta": "unified ordinary entrypoint and explicit focal episode responsibility guards"
+    }
+  ],
+  "implemented_unvalidated_slots": 0,
+  "decision": "NO_NEW_CAPABILITY_SELECTED_INDEPENDENT_GENERALIZATION_FIRST",
+  "automatic_cg06": false,
+  "leaderboard": "NOT_STARTED_MATURITY_GATE_NOT_MET",
+  "new_authorization_accounting": {
+    "CG04": {
+      "calls": 20,
+      "rated_usd": 0.03948384,
+      "published_rate_estimated_usd": 0.016720352,
+      "invoice_usd": null,
+      "original_cap_usd": 0.3,
+      "remaining_grant_usd": 0
+    },
+    "CG05": {
+      "calls": 20,
+      "rated_usd": 0.04263072,
+      "published_rate_estimated_usd": 0.018375456,
+      "invoice_usd": null,
+      "original_cap_usd": 0.3,
+      "remaining_grant_usd": 0
+    },
+    "total_calls": 40,
+    "total_rated_usd": 0.08211456,
+    "total_published_rate_estimated_usd": 0.035095808,
+    "budget_transfer_usd": 0,
+    "additional_paid_calls_authorized": false
+  },
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "next_task": "EG01-A_SOURCE_FIRST_NATIVE_SEMANTIC_PREPARATION_AND_TREATMENT_QUALIFICATION_OF_RETAINED_CAPABILITIES",
+  "owner_decision_required_now": false
+}
