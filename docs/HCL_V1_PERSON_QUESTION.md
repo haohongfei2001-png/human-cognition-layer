@@ -125,3 +125,54 @@ CG04/05 inputs/helpers remain identical. This is prospective engineering
 correctness, not a rerun or new external efficacy. Existing CG03 stays development-
 only RETAIN; v0.6 retains its historical bounded evidence. No new candidate,
 provider call, grant/trigger, ontology or LongMemEval access.
+
+
+## Multiple authorized source records / local revision
+
+Failure: a single ordinary narrative could not preserve before/after supported
+state across distinct source records, and concatenation could silently impose an
+order or access basis. The simple alternative is separate evidence-bounded source
+answers. This integration reuses the same existing ordinary preparations for each
+explicit source path and combines their complete snapshots into one answer input.
+**CAPABILITY_DELTA:** one question can explain source-local belief/meaning/access/
+conditional-responsibility changes while keeping incomparable branches unresolved.
+
+```python
+from hcl.v1 import AuthorizedSourceRecord, prepare_source_revision
+prepared = prepare_source_revision(layer,
+    "Across sources, Explain Alice's belief.",
+    (AuthorizedSourceRecord('first', first_text, 'CALLER_AUTHORIZED'),
+     AuthorizedSourceRecord('revision', revision_text, 'CALLER_AUTHORIZED', 'first')))
+```
+
+Use `Across sources, <supported ordinary question>` or
+`按来源变化，<supported Chinese question>`. `answer_source_revision` uses the
+existing answer adapter once. No source library is searched and no extraction
+provider is called. Bounds:2–4 distinct records,24 lines/16,000 source characters
+in total; individual mechanisms retain their narrower limits.
+
+`CALLER_AUTHORIZED` is explicit permission for this request to process supplied
+text, not reliability, world truth, private-state gold or license certification.
+Every record requires an explicit identity. `after_source_id` must name an earlier
+supplied record; it declares one source-order path, not calendar or verified
+receipt time. Multiple roots/branches remain incomparable, with no merged state.
+Each snapshot starts fresh with only its own declared path; later material and
+exposure cannot backfill earlier views. Private views retain existing explicit
+narrated access requirements. A later visible exposure can support only the later
+view, not rewrite the earlier snapshot.
+
+Final input preserves all checked state in its existing lossless encoding, plus
+exact per-operation event→source-record/statement bindings. Explicit local belief
+or meaning revisions reuse existing scoped supersession. Opposite visible self
+assertions from distinct sources without explicit revision are marked unresolved
+source conflict; the retained runtime assertion is not an automatic resolution.
+Property/factor conflicts keep existing checker decisions. Hidden text and its
+binding do not enter private inputs. Raw record hashes are audited in receipts,
+not evidence of truth. Invalid authority/identity/order, nested scope or mixed
+statement scope refuses all-source/library fallback. Total snapshot/provenance
+budget overflow drops every snapshot together.
+
+Ten provider-free tests and actual before/after/private/conflict message receipts
+exercise the new path. This is integration correctness, not external efficacy.
+CG04/05 remain the only two implemented-unvalidated/deferred candidates; no paid
+call, new grant/trigger or LongMemEval access.

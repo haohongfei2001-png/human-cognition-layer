@@ -30,3 +30,5 @@ from .source_access import prepare_source_access, scope_source_access
 from .source_pool import pool_composed_sources, expand_composed_sources
 
 from .person_question import prepare_person_context, answer_person_context
+
+from .source_revision import AuthorizedSourceRecord, prepare_source_revision, answer_source_revision
