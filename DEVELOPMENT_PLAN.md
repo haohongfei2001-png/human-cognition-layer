@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–B COMPLETE / WAVE C / C01–C02 CORRECTNESS_VERIFIED / NEXT_READY=C03**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–B COMPLETE / WAVE C / C01–C03 CORRECTNESS_VERIFIED / NEXT_READY=C04**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -242,9 +242,15 @@ C01 pre-action goals and the conditional checker to preserve mixed explanations,
 source conflict and explicit negative evidence. Thirteen targeted checks plus full
 regression; see `docs/HCL_WAVE_C02.md`.
 
-**C03 — NEXT_READY:** belief-dependent plan feasibility and revision; distinguish
+**C03 — CORRECTNESS_VERIFIED:** belief-dependent plan feasibility and revision; distinguish
 character-subjective feasibility from a declared model, and do not infer value
-change from plan change. Then C04 appraisal → C05 integration.
+change from plan change. C03 now joins C01 plans with B03 belief revision and
+explicit model conditions; subjective support can coexist with model contradiction.
+Eleven targeted checks plus full regression; see `docs/HCL_WAVE_C03.md`.
+
+**C04 — NEXT_READY:** event/goal/control/certainty appraisal, mixed affect and
+reappraisal; expression, reported feeling and inferred appraisal must stay distinct.
+Then C05 integrated belief → plan → explanation → appraisal.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -405,12 +411,12 @@ defect is.
 
 - Current wave: **Wave C — Goals, Plans and Appraisal**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: C03_BELIEF_DEPENDENT_PLAN_REVISION**
+- **NEXT_READY: C04_GOAL_LINKED_APPRAISAL_AND_REAPPRAISAL**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A05/B01–B05/C01–C02 actual provider calls / spend: **0 / USD 0**
+- A01–A05/B01–B05/C01–C03 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **C03**, then continue through the dependency-safe queue
+Work should continue at **C04**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
