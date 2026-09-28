@@ -868,3 +868,13 @@ head/main, then immediately continue section15 NIGHT-INTEGRATION-11 multi-source
 local revision composition. Preserve source authority/identity/order, before/after
 scoped state, conflict/uncertainty and complete provenance. No third candidate,
 new paid run or owner blocking gate. The section15 canonical queue remains fixed.
+
+
+NI-10 certified on PR150 head/main455 tests, both applicable groups PASS.
+NI-11 implements multiple explicitly authorized source-record snapshots using
+existing ordinary preparations, explicit source paths and exact visible record/
+statement bindings. Before/after local revision and exposure remain separate;
+contradictory/incomparable sources remain unresolved, no calendar/receipt truth.
+Certify exact head/main, then immediately NI-12 source-bounded two-participant
+perspective contrast. Preserve section15 queue, historical evidence and freezes;
+only CG04/05 pending, no new paid provider calls or third module.

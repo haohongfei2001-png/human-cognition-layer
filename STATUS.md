@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**HCL night — NIGHT-INTEGRATION-10 queued after NI-09; CG-04/CG-05 frozen and deferred**
+**HCL night — NI-10 certified; NI-11 multi-source revision implemented, CI pending; CG-04/CG-05 deferred**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -527,3 +527,23 @@ After exact-head/main CI, continue NIGHT-INTEGRATION-11: multi-source local
 revision composition under section15, with explicit source authority/identity/order,
 source-bounded before/after state and complete provenance. No third candidate or
 new paid call; ordinary source-grounding repairs stay within this integration line.
+
+
+**NIGHT-INTEGRATION-10 — exact-head/main CERT PASS.** PR150 headeb66f990,
+run36451333022; main1f5a9273e14ad0240c794c4fe55f1fa413569ab3,
+run36451451272. Both279 v1 +176 historical =455 PASS, matching runtime digest;
+both applicable groups PASS. [Receipt](reports/HCL_NIGHT_BELIEF_RESPONSIBILITY_CERTIFICATION.json).
+
+**NIGHT-INTEGRATION-11 — IMPLEMENTED; correctness certification pending.**
+CAPABILITY_DELTA: one ordinary question over2–4 explicitly authorized source
+records preserves before/after belief, local meaning, access and conditional
+responsibility. Explicit source paths never become calendar/verified receipt
+claims; later content/exposure never backfills an earlier snapshot. Incomparable
+branches have no merged winner; unrevised opposite source assertions remain
+unresolved. Every visible operation/event keeps exact record/statement bindings
+through existing lossless encoding. Invalid/missing authority/order and total
+budget overflow refuse complete-library fallback. Ten new meaningful tests,
+actual compact/private/conflict inputs;289 v1 locally PASS. No third candidate,
+new paid call or evidence upgrade; CG04/05 unchanged/deferred, night0/USD0,
+LongMemEval SEALED. After exact-head/main CI, immediately NI-12: explicit two-
+participant perspective contrast under DEVELOPMENT_PLAN section15.
