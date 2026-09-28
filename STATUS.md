@@ -2,13 +2,13 @@
 
 ## Current phase
 
-**HCL night — NI-10..14 implemented; integrated provider-free closure; CG-04/CG-05 READY / DEFERRED_OWNER_AUTHORIZATION**
+**CG04 ONE-SHOT OWNER AUTHORIZED; CG05 SEPARATELY AUTHORIZED AFTER CG04 CLOSURE**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
 ## Canonical policy
 
-Capability growth is the development main line: **real human-cognition capability growth > external validation > leaderboard**. Base model first. Use the minimum evidence-grounded capability set only when needed. A simple prompt or generic exact tool is preferred when sufficient. Specialized mechanisms require incremental evidence. No automatic action-to-motive/emotion, narrator-to-character, exposure-to-revision, or computation-to-world-truth promotion. No new paid experiment is authorized; all historical budgets are closed. The canonical execution plan is [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md).
+Capability growth is the development main line: **real human-cognition capability growth > external validation > leaderboard**. Base model first. Use the minimum evidence-grounded capability set only when needed. A simple prompt or generic exact tool is preferred when sufficient. Specialized mechanisms require incremental evidence. No automatic action-to-motive/emotion, narrator-to-character, exposure-to-revision, or computation-to-world-truth promotion. Owner now authorizes exactly the frozen CG04 then CG05 comparisons, USD 0.30 each, independently. All historical budgets remain closed; no rerun or transfer. The canonical execution plan is [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md).
 
 ## Engineering state
 
@@ -624,3 +624,7 @@ new paid validation remains deferred without blocking already-available work.
 No owner-only decision is required for this delivery. The night closure condition
 is two pending candidates plus completion of all currently queued/identified
 provider-free integration/correctness work, not waiting for paid authorization.
+
+## Current serial authorization (supersedes prior deferred execution only)
+
+Owner baseline main 1185b981 authorizes CG04 once, then CG05 once only after CG04 closure, zero grant, removed trigger and exact-main CI. Sources, gold, prompts, scorer, arms, treatment and budgets remain frozen. CG04 runs certified 018afbc; CG05 will run certified c7593bc. Each has an independent USD 0.30/20-call/0-retry/512-token cap. Both retain synthetic development-only evidence scope. Freeze metadata stays immutable; separate control grants carry authorization. Post-CG05 gap review precedes any new capability; no automatic CG06. LongMemEval SEALED.

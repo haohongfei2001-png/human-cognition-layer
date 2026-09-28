@@ -24,7 +24,6 @@ class FrozenExecutionTests(unittest.TestCase):
 
     def test_default_zero_grant_cannot_reach_execution(self):
         self.assertNotEqual(self.guard().returncode, 0)
-        self.assertFalse(Path('.github/HCL_CG04_EXTERNAL_DEV_TRIGGER').exists())
         self.assertTrue(all(all(c['preflight'].values()) for c in replay_frozen_cg04()['cases']))
 
     def test_latest_runtime_or_retry_cannot_replace_the_explicit_frozen_grant(self):
@@ -32,8 +31,9 @@ class FrozenExecutionTests(unittest.TestCase):
         self.assertNotEqual(latest, BASE_SHA)
         self.assertNotEqual(self.guard('0.30', latest).returncode, 0)
         self.assertNotEqual(self.guard('0.30', BASE_SHA, '2').returncode, 0)
-        # Even a hypothetical exact grant has no unique trigger in this night.
-        self.assertNotEqual(self.guard('0.30', BASE_SHA).returncode, 0)
+        # An exact owner grant is still insufficient without its unique trigger.
+        if not Path('.github/HCL_CG04_EXTERNAL_DEV_TRIGGER').exists():
+            self.assertNotEqual(self.guard('0.30', BASE_SHA).returncode, 0)
 
 
 if __name__ == '__main__':

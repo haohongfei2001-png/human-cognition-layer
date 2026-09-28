@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG-03 DEVELOPMENT-ONLY RETAIN / CLOSED; CG-04 DEFERRED; CG-05 DEFERRED; NIGHT INTEGRATION ACTIVE**
+Status: **CANONICAL CAPABILITY-GROWTH PLAN; SERIAL FROZEN CG04 / CG05 OWNER AUTHORIZED; POST-CG05 GAP REVIEW NEXT**
 
 This file defines the live development direction for HCL. `STATUS.md` records
 current execution state; this file records the development strategy and the next
@@ -911,3 +911,9 @@ still occupy both unvalidated slots. Do not open a third large candidate or fill
 PR. Any further retained integration must address a concrete demonstrated failure
 and record its unique implementation task here. Paid proposals stay deferred,
 unchanged, and are never the sole reason to stop available independent work.
+
+## Current owner-authorized serial closure and gap review
+
+Superseding the night deferred paid gates only: execute frozen CG04 at certified 018afbc once under its separate USD 0.30 grant, close source-first, merge raw receipts/disposition/grant0/trigger deletion and certify exact main; then execute frozen CG05 at certified c7593bc once under its independent USD 0.30 grant. Each uses existing DeepSeek secret, frozen five arms/four authored cases, thinking disabled, 20 calls maximum, no retries, 512 output tokens. No transfer, rerun, additional samples or LongMemEval. No latest runtime substitution. Preflight runtime/package hashes, complete labels, fairness and actual H/H-new treatment before any paid request.
+
+After both closures, perform a short POST-CG05 CAPABILITY GAP REVIEW using current evidence, including NI10–14 correctness-only integration. Do not automatically create CG06. Write a new contract and provider-free implementation only for a clear falsifiable human-cognition gap. If no such gap is established, prioritize independent external generalization qualification of retained assets without additional paid execution. Leaderboard remains deferred until the existing maturity gate.
