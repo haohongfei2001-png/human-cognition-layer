@@ -1,0 +1,105 @@
+name: HCL CG-05 External Development Once
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/HCL_CG05_EXTERNAL_DEV_TRIGGER']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hcl-cg05-external-dev-once
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      # Independent owner CG05 grant: one frozen run after certified CG04 closure.
+      HCL_CG05_AUTHORIZED_CAP_USD: "0.30"
+      HCL_CG05_AUTHORIZED_BASE_SHA: c7593bcf5ef8199eb8f1adb3b6f96fb2a0367b94
+      HCL_CG05_FROZEN_RUNTIME_SHA: c7593bcf5ef8199eb8f1adb3b6f96fb2a0367b94
+      HCL_CG05_FROZEN_PACKAGE_SHA256: 9ade82883d7dd954b3b092af7b4501b679ca950bf0ca432f108bd35a29400dc7
+      HCL_CG05_EXECUTION_ADAPTER_SHA256: 8a539144d315b3aa5835fe3e90d6b4605aad3ec234fe06be8595093280b6ebd2
+      HCL_CG05_RUN_ONCE_TOKEN: HCL_CG05_EXTERNAL_DEV_OWNER_ONCE
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify unique trigger and owner grant
+        run: |
+          test "$GITHUB_RUN_ATTEMPT" = "1"
+          test "$HCL_CG05_AUTHORIZED_CAP_USD" = "0.30"
+          test "$HCL_CG05_AUTHORIZED_BASE_SHA" = "$HCL_CG05_FROZEN_RUNTIME_SHA"
+          git merge-base --is-ancestor "$HCL_CG05_AUTHORIZED_BASE_SHA" HEAD
+          test "$(git show -s --format=%P HEAD)" = "${{ github.event.before }}"
+          test "$(cat .github/HCL_CG05_EXTERNAL_DEV_TRIGGER)" = "${HCL_CG05_RUN_ONCE_TOKEN}|${{ github.event.before }}"
+          test "$(git diff --diff-filter=A --name-only '${{ github.event.before }}' "$GITHUB_SHA")" = ".github/HCL_CG05_EXTERNAL_DEV_TRIGGER"
+          test "$(git diff --name-only '${{ github.event.before }}' "$GITHUB_SHA")" = ".github/HCL_CG05_EXTERNAL_DEV_TRIGGER"
+          if git log --format=%H '${{ github.event.before }}' -- .github/HCL_CG05_EXTERNAL_DEV_TRIGGER | grep -q .; then exit 1; fi
+          echo "$HCL_CG05_FROZEN_PACKAGE_SHA256  reports/HCL_CG05_EXTERNAL_PACKAGE.json" | sha256sum -c -
+          test -n "$DEEPSEEK_API_KEY"
+          python - <<'PYCODE'
+          import json, pathlib
+          grant=json.loads(pathlib.Path('reports/HCL_CG04_OWNER_GRANT.json').read_text())
+          assert grant['state']=='CONSUMED_CLOSED' and grant['remaining_authorized_usd']==0
+          assert not pathlib.Path('.github/HCL_CG04_EXTERNAL_DEV_TRIGGER').exists()
+          cert=json.loads(pathlib.Path('reports/HCL_CG04_CLOSURE_CERTIFICATION.json').read_text())
+          assert cert['exact_main']['provider_calls']==0 and cert['all_six_exact_main_groups']=='PASS'
+          PYCODE
+
+      - name: Record control checkout separately from frozen execution
+        run: |
+          mkdir -p artifacts/hcl-cg05-external
+          python - <<'PYCODE'
+          import json, os, pathlib
+          pathlib.Path('artifacts/hcl-cg05-external/control-receipt.json').write_text(json.dumps(dict(
+              control_sha=os.environ['GITHUB_SHA'], control_before='${{ github.event.before }}',
+              run_id=os.environ['GITHUB_RUN_ID'], run_attempt=os.environ['GITHUB_RUN_ATTEMPT'],
+              authorized_runtime_sha=os.environ['HCL_CG05_AUTHORIZED_BASE_SHA'],
+              frozen_runtime_sha=os.environ['HCL_CG05_FROZEN_RUNTIME_SHA'],
+              frozen_package_sha256=os.environ['HCL_CG05_FROZEN_PACKAGE_SHA256'],
+              owner_grant_cap_usd=os.environ['HCL_CG05_AUTHORIZED_CAP_USD'],
+              execution_adapter_sha256=os.environ['HCL_CG05_EXECUTION_ADAPTER_SHA256']), indent=2) + '\n')
+          PYCODE
+
+      - name: Checkout immutable certified CG05 execution runtime
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.HCL_CG05_FROZEN_RUNTIME_SHA }}
+          path: frozen-cg05
+          fetch-depth: 0
+
+      - run: python -m pip install "openai==2.14.0"
+
+      - name: Stage pinned builders and transport, verify isolated certified runtime
+        run: python -m scripts.stage_cg05_execution --runtime-root frozen-cg05 --adapter-sha256 "$HCL_CG05_EXECUTION_ADAPTER_SHA256" --out artifacts/hcl-cg05-external/preflight.json
+
+      - name: Provider-free treatment-presence preflight
+        working-directory: frozen-cg05
+        run: |
+          test "$(git rev-parse HEAD)" = "$HCL_CG05_FROZEN_RUNTIME_SHA"
+          echo "$HCL_CG05_FROZEN_PACKAGE_SHA256  reports/HCL_CG05_EXTERNAL_PACKAGE.json" | sha256sum -c -
+          python scripts/cg05_external_package.py
+          python -m unittest -v tests.test_v1_cg05
+          python -m scripts.run_cg05_external_once --out ../artifacts/hcl-cg05-external --validate-only
+
+      - name: Execute one bounded DeepSeek comparison
+        working-directory: frozen-cg05
+        run: python -m scripts.run_cg05_external_once --out ../artifacts/hcl-cg05-external
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-cg05-external-${{ github.run_id }}
+          path: artifacts/hcl-cg05-external/
+          if-no-files-found: warn
+          retention-days: 90
