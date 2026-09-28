@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**HCL-CG-03 — Responsibility-Structure Explanation (next implementation)**
+**HCL-CG-03 — Responsibility-Structure Explanation (CG03-A implemented; CG03-B next)**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -147,13 +147,18 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**HCL_CG03_A_IMPLEMENTATION**
+**HCL_CG03_B_IMPLEMENTATION**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
 `DEVELOPMENT_PLAN.md` section 8 and bounded by
-[the CG-03 contract](docs/HCL_CG03_CAPABILITY_CONTRACT.md). No owner action is
-needed for provider-free implementation. Any new paid experiment requires new
+[the CG-03 contract](docs/HCL_CG03_CAPABILITY_CONTRACT.md). CG03-A provides a
+bounded typed action/outcome/actor/premise operation, explicit routing and
+reader/character/observer source projection. Its output states that all five
+responsibility factors and the normative conclusion remain unchecked; it makes
+no responsibility or blame finding. CG03-B is the next provider-free work: real
+source/time/access factor checks. No owner action is needed for that work.
+Any new paid experiment requires new
 authorization; historical budgets do not transfer.
 
 Leaderboard selection remains deferred until the maturity gate in

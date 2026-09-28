@@ -10,3 +10,4 @@ from .narrative import SemanticPreparation
 from .cg02 import (SocialActKind, SocialCondition, SocialAct,
                    ParticipantInterpretation, AccessStatement, check_social_exchange)
 from .social_narrative import SocialPreparation, prepare_social_narrative
+from .cg03 import NormativePremise, ResponsibilityCase

@@ -51,6 +51,7 @@ _ROWS = (
     _cap('belief', CapabilityType.CORE, 'hcl/v06/belief.py', 'FRESH_DEVELOPMENT_C11_P19_G22_D30_OF32_D_ONLY8_G_ONLY0', 'knowledge/belief/revision tasks only', ('perspective',)),
     _cap('cg01_explanation', CapabilityType.CORE, 'hcl/v1/cg01.py', 'PROVIDER_FREE_CORRECTNESS_ONLY', 'bounded action-explanation condition checks only', ('source_visibility', 'provenance', 'uncertainty'), status_override='IMPLEMENTED_UNVALIDATED'),
     _cap('cg02_social_commitment', CapabilityType.CORE, 'hcl/v1/cg02.py', 'PROVIDER_FREE_CORRECTNESS_ONLY', 'explicit bounded social-act and expectation checks only', ('source_visibility', 'provenance', 'uncertainty'), status_override='IMPLEMENTED_UNVALIDATED'),
+    _cap('cg03_responsibility_structure', CapabilityType.CORE, 'hcl/v1/cg03.py', 'CG03_A_TYPED_OPERATION_ONLY', 'explicit bounded responsibility case only; no factor or premise conclusion yet', ('source_visibility', 'provenance', 'uncertainty'), status_override='IN_PROGRESS'),
     _cap('intention', CapabilityType.OPTIONAL, 'hcl/v07/runtime.py', 'SIMPLIFY_NO_SPECIALIZED_UTILITY', 'explicit goal/plan query; source-grounded optional context', ('provenance', 'source_visibility', 'uncertainty')),
     _cap('goal', CapabilityType.OPTIONAL, 'hcl/v07/runtime.py:GoalEstimate', 'SIMPLIFY_NO_SPECIALIZED_UTILITY', 'explicit goals only', ('intention',)),
     _cap('motivation_evidence', CapabilityType.OPTIONAL, 'hcl/v07/runtime.py', 'SIMPLIFY_NO_SPECIALIZED_UTILITY', 'retain attribution as evidence, never invent motive', ('intention',)),
