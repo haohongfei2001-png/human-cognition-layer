@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**LONG-HORIZON CAPABILITY GROWTH — WAVES A–C COMPLETE / WAVE D / D01–D02 CORRECTNESS_VERIFIED / NEXT_READY=D03**
+**LONG-HORIZON CAPABILITY GROWTH — WAVES A–C COMPLETE / WAVE D / D01–D03 CORRECTNESS_VERIFIED / NEXT_READY=D04**
 
 The long-horizon architecture and 41-package roadmap are canonical in
 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md).
@@ -17,7 +17,7 @@ A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
-**NEXT_READY: `D03_COMPETING_STRATEGIC_COMMUNICATION_EXPLANATIONS`**
+**NEXT_READY: `D04_MISUNDERSTANDING_LOCALIZATION_AND_REVISION`**
 
 A01 now provides shared versioned evidence, scoped source reports and
 interpretations, alternative support sets and rooted invalidation. A source
@@ -35,7 +35,7 @@ Actual final inputs carry support, challenges and retired source history. See
 
 State: **CORRECTNESS_VERIFIED / REPLAY_VERIFIED / UNTESTED / OPT_IN**.
 The local entry recognizes bounded explicit speech forms; open backend candidates
-remain semantically unverified. No real provider has been called in A01–A05/B01–B05/C01–C05/D01–D02.
+remain semantically unverified. No real provider has been called in A01–A05/B01–B05/C01–C05/D01–D03.
 Historical efficacy dispositions are unchanged. A04–A05 connect retained v0.6/CG03/CG04/CG05 operations to the common material.
 Original quotes, derived representation and assumptions stay separate. A property
 revision changes the concept checker and its dependent belief/concept comparison;
@@ -69,7 +69,7 @@ C03 now separates reported-belief plan support from declared-model conditions;
 belief revision changes the dependent check, and plan replacement does not imply
 a value change. See [C03](docs/HCL_WAVE_C03.md). C04 now links source goals and appraisals, preserves mixed reports and anchored
 reappraisal, and keeps expression/control/certainty claims separate from actual
-feeling or knowledge. See [C04](docs/HCL_WAVE_C04.md). C05 now joins action-time plan support to conditional explanations while keeping later belief and appraisal separate. See [C05](docs/HCL_WAVE_C05.md). D01 now distinguishes conditional-promise lifecycle, delivery, acceptance and expectations without backfilling later receipt. See [D01](docs/HCL_WAVE_D01.md). D02 now checks finite mutual acknowledgment and source-anchored meaning revision without inferring common knowledge. See [D02](docs/HCL_WAVE_D02.md). D03 is next.
+feeling or knowledge. See [C04](docs/HCL_WAVE_C04.md). C05 now joins action-time plan support to conditional explanations while keeping later belief and appraisal separate. See [C05](docs/HCL_WAVE_C05.md). D01 now distinguishes conditional-promise lifecycle, delivery, acceptance and expectations without backfilling later receipt. See [D01](docs/HCL_WAVE_D01.md). D02 now checks finite mutual acknowledgment and source-anchored meaning revision without inferring common knowledge. See [D02](docs/HCL_WAVE_D02.md). D03 now compares source-conditioned communication explanations, separating literal truth, belief, knowledge claims, goals and received information needs. See [D03](docs/HCL_WAVE_D03.md). D04 is next.
 Live-provider efficacy remains unverified.
 
 ## Canonical development policy
