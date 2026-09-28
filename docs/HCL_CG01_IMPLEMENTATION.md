@@ -1,7 +1,9 @@
 # HCL-CG-01 implementation and provider-free boundary
 
-Status: **IMPLEMENTED_UNVALIDATED**. Correctness tests do not establish an
-external model improvement or a true private motive.
+Status: **PROVIDER-FREE IMPLEMENTED; EXTERNAL ORDINARY-TEXT PATH SIMPLIFIED**.
+Correctness tests do not establish an external model improvement or a true
+private motive. The one-time development [closure](../reports/HCL_CG01_EXTERNAL_DEVELOPMENT_CLOSURE.md)
+found no attributable CG-01 increment.
 
 ## User-visible capability delta
 
@@ -57,6 +59,12 @@ Invalid output fails closed. Its full input/output stay in
 observer final-model context. No provider adapter is bundled and no paid call is
 made by the default path.
 
+After the external run, a generic provider-free repair made the external
+adapter align only unique whitespace variants to exact source spans, derive
+event order from those spans, reject unanchored events and dependent claims,
+and preserve paid extraction output/cost when validation fails. These changes
+do not alter the consumed run or establish external utility.
+
 The typed `check_explanations` and `revise_explanations` APIs accept validated
 `ExplanationCandidate` and `ConditionFact` records for richer upstream semantic
 preparation. They enforce event/source identity, action time, bounded actors and
@@ -79,5 +87,7 @@ At most 4 actors, 24 events, 3 named candidates and 2 update points. No new
 database, personality profile, trust score, relationship graph, emotion ontology
 or rational-choice optimizer. This deterministic preparer covers a small explicit
 grammar; it is not general narrative understanding. The final answer model must
-still obey the evidence policy. The external C/P/G/H/H-new comparison remains
-required to decide whether CG-01 adds value beyond simpler methods.
+still obey the evidence policy. The completed C/P/G/H/H-new comparison showed
+no end-to-end gain: semantic preparation failed for all four cases and H/H-new
+were identical. Prefer a simple prompt for this ordinary-text task class;
+keep the checker optional for source-validated typed evidence.

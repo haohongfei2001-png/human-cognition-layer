@@ -9,6 +9,7 @@ from datetime import datetime, timedelta, timezone
 import hashlib
 import json
 from pathlib import Path
+import re
 
 from hcl.v04.model import EventRecord
 from hcl.v1 import (ConditionFact, ConditionKind, CognitionRequest,
@@ -109,44 +110,102 @@ def semantic_messages(payload):
             {'role': 'user', 'content': json.dumps(payload, ensure_ascii=False)}]
 
 
-def parse_semantic(raw, model_id, cost_usd, provider_calls=1):
+def _exact_source_span(quote, source):
+    """Return a unique contiguous source span, tolerating only whitespace layout."""
+    if not isinstance(quote, str) or not quote.strip():
+        raise ValueError('empty semantic quote')
+    if quote in source and source.count(quote) == 1:
+        return quote
+    pattern = r'\s+'.join(re.escape(part) for part in quote.split())
+    matches = list(re.finditer(pattern, source))
+    if len(matches) != 1:
+        raise ValueError('semantic quote is absent or ambiguous in source')
+    return matches[0].group(0)
+
+
+def parse_semantic(raw, model_id, cost_usd, source_text, provider_calls=1):
     data = json.loads(raw)
     if (len(data['events']) > 8 or len(data['candidates']) > 3 or
         len(data['facts']) > 12 or
         sum(len(e['quote']) for e in data['events']) > 4000):
         raise ValueError('external semantic output bounds exceeded')
     base = datetime(2026, 1, 1, tzinfo=timezone.utc)
-    events = []
+    anchored = []
+    diagnostics = []
+    seen_ids = set()
     for row in data['events']:
         order = row['order_index']
         if type(order) is not int or not 0 <= order < 24:
             raise ValueError('semantic event order invalid')
+        event_id = str(row['event_id'])
+        if event_id in seen_ids:
+            raise ValueError('duplicate semantic event id')
+        seen_ids.add(event_id)
+        try:
+            quote = _exact_source_span(row['quote'], source_text)
+        except ValueError:
+            diagnostics.append('rejected_unanchored_event:' + event_id)
+            continue
+        if quote != row['quote']:
+            diagnostics.append('whitespace_aligned_event:' + event_id)
+        anchored.append((source_text.index(quote), event_id, quote, row.get('actor_id')))
+    anchored.sort(key=lambda item: item[0])
+    events = []
+    for order, (_, event_id, quote, actor_id) in enumerate(anchored):
         stamp = (base + timedelta(seconds=order)).isoformat()
-        events.append(EventRecord(row['event_id'], stamp, row['quote'],
-            'cg01-external-source-span', stamp, row.get('actor_id'),
+        events.append(EventRecord(event_id, stamp, quote,
+            'cg01-external-source-span', stamp, actor_id,
             metadata={'reader_only': True}))
     by_id = {e.event_id: e for e in events}
     candidates = []
     for row in data['candidates']:
-        action = by_id[row['action_event_id']]
+        action_id = str(row['action_event_id'])
+        source_id = str(row['source_event_id'])
+        if action_id not in by_id or source_id not in by_id:
+            diagnostics.append('rejected_unanchored_candidate:' + str(row['candidate_id']))
+            continue
+        action = by_id[action_id]
         required = tuple(RequiredCondition(ConditionKind(r['kind']), r['key'])
                          for r in row['required'])
-        candidates.append(ExplanationCandidate(row['candidate_id'], row['target_actor'],
+        candidates.append(ExplanationCandidate(str(row['candidate_id']), row['target_actor'],
             action.event_id, action.valid_time, row['explanation'],
-            row['source_event_id'], required))
+            source_id, required))
     facts = []
     for row in data['facts']:
-        source = by_id[row['source_event_id']]
+        source_id = str(row['source_event_id'])
+        if source_id not in by_id:
+            diagnostics.append('rejected_unanchored_fact:' + str(row['fact_id']))
+            continue
+        source = by_id[source_id]
         if row['claim_time'] not in ('ACTION', 'SOURCE'):
             raise ValueError('unbounded semantic claim time')
+        if type(row['value']) is not bool:
+            raise ValueError('semantic fact value must be boolean')
+        if row['first_learning_after_action'] and not re.search(
+            r'\bfirst\s+(?:learned|heard|knew|discovered)\b.*\bafter\b',
+            source.raw_text, re.I | re.S,
+        ):
+            diagnostics.append('rejected_unsupported_first_learning:' + str(row['fact_id']))
+            continue
         action_time = candidates[0].action_time if candidates else source.valid_time
         first = source.valid_time if row['first_learning_after_action'] else None
-        facts.append(ConditionFact(row['fact_id'], source.event_id,
+        facts.append(ConditionFact(str(row['fact_id']), source.event_id,
             row['target_actor'], RequiredCondition(ConditionKind(row['kind']), row['key']),
             row['value'], action_time if row['claim_time'] == 'ACTION' else source.valid_time,
             FactAuthority(row['authority']), first))
+    from hcl.v1.cg01 import check_explanations
+    verified_candidates = []
+    for candidate in candidates:
+        try:
+            check_explanations((candidate,), (), events, mode='READER_ANALYSIS')
+        except ValueError:
+            diagnostics.append('rejected_unscoped_candidate:' + candidate.candidate_id)
+        else:
+            verified_candidates.append(candidate)
+    candidates = verified_candidates
     return SemanticPreparation(tuple(events), tuple(candidates), tuple(facts),
-                               raw, model_id, provider_calls, cost_usd)
+                               raw, model_id, provider_calls, cost_usd,
+                               tuple(diagnostics))
 
 
 class DeepSeekProvider:
@@ -262,7 +321,13 @@ def run_with_provider(provider, package=None, on_update=None):
         query = task_query(case)
         def semantic_preparer(payload):
             response = ledger.call(provider, semantic_messages(payload))
-            return parse_semantic(response['raw'], response['model'], response['cost_usd'])
+            try:
+                return parse_semantic(response['raw'], response['model'], response['cost_usd'],
+                                      payload['narrative'])
+            except (ValueError, KeyError, TypeError) as exc:
+                return SemanticPreparation((), (), (), response['raw'],
+                    response['model'], 1, response['cost_usd'],
+                    ('rejected_semantic_parse:' + type(exc).__name__,))
         layer = HCLCognitionLayer(lambda _: '', semantic_preparer=semantic_preparer)
         prepared = layer.prepare(CognitionRequest(query, narrative=case['excerpt'],
             target_actor=case['target_actor'], allow_semantic_preparation=True))

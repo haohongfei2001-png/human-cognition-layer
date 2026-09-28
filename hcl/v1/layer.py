@@ -76,6 +76,7 @@ class HCLCognitionLayer:
                     preparation_audit['failure'] = 'semantic_preparer_unavailable'
                 else:
                     preparation_audit['semantic_preparer_calls'] = 1
+                    result = None
                     try:
                         result = self.semantic_preparer(dict(preparation_audit['input']))
                         if not isinstance(result, SemanticPreparation):
@@ -105,11 +106,18 @@ class HCLCognitionLayer:
                         preparation_audit.update(method='explicit_semantic_preparer',
                             extraction_provider_calls=result.provider_calls,
                             extraction_spend_usd=result.cost_usd, model_id=result.model_id,
-                            output=result.raw_output)
+                            output=result.raw_output,
+                            source_span_diagnostics=list(result.source_span_diagnostics))
                     except (ValueError, TypeError, KeyError, AttributeError):
                         preparation_audit.update(failure='invalid_semantic_preparation',
-                            extraction_provider_calls=None, extraction_spend_usd=None,
-                            output=None)
+                            extraction_provider_calls=(result.provider_calls
+                                if isinstance(result, SemanticPreparation) else None),
+                            extraction_spend_usd=(result.cost_usd
+                                if isinstance(result, SemanticPreparation) else None),
+                            model_id=(result.model_id
+                                if isinstance(result, SemanticPreparation) else None),
+                            output=(result.raw_output
+                                if isinstance(result, SemanticPreparation) else None))
                     except Exception:
                         preparation_audit.update(failure='semantic_preparer_error',
                             extraction_provider_calls=None, extraction_spend_usd=None,

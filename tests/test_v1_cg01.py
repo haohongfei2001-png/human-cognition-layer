@@ -170,6 +170,22 @@ class OrdinaryNarrative(unittest.TestCase):
         self.assertEqual(prepared.preparation_receipt['input']['narrative'], 'Alice mailed a letter.')
         self.assertEqual(prepared.preparation_receipt['output'], 'source-anchored typed output')
 
+    def test_invalid_semantic_result_keeps_actual_paid_output_and_cost(self):
+        source = event('s', 'Invented source text.', 'Alice',
+                       metadata={'reader_only': True})
+        def prepare(_payload):
+            return SemanticPreparation((source,), (), (), 'raw model output',
+                'paid-model', 1, 0.002)
+        result = HCLCognitionLayer(lambda _: 'unused',
+            semantic_preparer=prepare).prepare(CognitionRequest(
+            'Why did Alice mail the letter?', narrative='Alice mailed a letter.',
+            target_actor='Alice', allow_semantic_preparation=True))
+        receipt = result.preparation_receipt
+        self.assertEqual(receipt['failure'], 'invalid_semantic_preparation')
+        self.assertEqual(receipt['output'], 'raw model output')
+        self.assertEqual(receipt['extraction_provider_calls'], 1)
+        self.assertEqual(receipt['extraction_spend_usd'], 0.002)
+
     def test_narrator_intention_is_reader_evidence_not_character_knowledge(self):
         runtime = HCLV07Runtime()
         narrator = event('n', 'Alice stated an intention to leave.', when=T1,

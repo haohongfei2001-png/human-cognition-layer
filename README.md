@@ -2,11 +2,11 @@
 
 HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息、信念、视角和有来源的心理证据。**基础模型可以直接做好时，直接回答。** 简单提示足够时不调用复杂机制；精确计算采用通用工具；专门认知机制只保留得到增量证据支持的部分。
 
-当前阶段：**HCL Capability Growth / CG-01**。v1 integration foundation 已完成；当前主线转向新增真实人物理解能力。唯一实时状态：[STATUS.md](STATUS.md)，长期与当前执行计划见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
+当前阶段：**HCL Capability Growth；CG-01 已按 SIMPLIFY 结案**。v1 integration foundation 已完成；下一能力工作包按现有计划的优先池确定。唯一实时状态：[STATUS.md](STATUS.md)，长期执行计划见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
 
 - [可执行 capability registry](docs/HCL_V1_CAPABILITY_REGISTRY.md)：核心、可选结构、通用工具、停用研究资产。
 - [Router / context / answer API](docs/HCL_V1_COGNITION_ROUTER.md)：确定性最小路由、有访问和时间边界的上下文、单次底座模型调用。
-- [Capability Growth development plan](DEVELOPMENT_PLAN.md)：真实能力增长优先于外部验证，当前工作包为 CG-01 人物行为的知识—选择约束解释。
+- [Capability Growth development plan](DEVELOPMENT_PLAN.md)：真实能力增长优先于外部验证；CG-01 的一次性开发验证和结案见 [报告](reports/HCL_CG01_EXTERNAL_DEVELOPMENT_CLOSURE.md)。
 - [集成评估来源审查与设计](docs/HCL_V1_INTEGRATED_EVALUATION_PROTOCOL.md)：保留为 external-validation backlog；不再阻塞新 capability implementation。
 - `hcl/v1` 不导入 benchmark runner，不自动提取私人心理状态，不调度额外模型提取调用。
 
@@ -20,16 +20,16 @@ answer = layer.answer(CognitionRequest('Alice 知道什么？', target_actor='Al
 
 Perspective/belief 是目前最强的专门认知资产：历史 fresh C/P/G/D 为 11/19/22/30 of 32，D-only/G-only 8/0，但仅是一模型的小规模证据。Intention/affect 保留为可选、有来源的结构；因果、论证、形式验证和多解读证书是条件计算工具。未提供验证后的语义证据时，字段保持空值，不自动生成动机或情绪。详见 API 文档。
 
-本轮 42 项 v1 集成与 176 项历史回归共 **218 项测试通过**，合并后六组 CI 全绿；执行证据见 [closure](reports/HCL_V1_INTEGRATION_FINAL_CLOSURE.md)。本轮只执行无需 provider 的验证。所有旧预算关闭；已消费样本不重跑；LongMemEval 32 行继续 sealed/deprioritized。集成外部评估先审查来源，不自行启动付费实验。正确性测试通过不等于外部效用已经证明。
+此前 v1 foundation 轮次的 42 项 v1 集成与 176 项历史回归共 **218 项测试通过**，合并后六组 CI 全绿；执行证据见 [closure](reports/HCL_V1_INTEGRATION_FINAL_CLOSURE.md)。该轮只执行无需 provider 的验证。所有旧预算关闭；已消费样本不重跑；LongMemEval 32 行继续 sealed/deprioritized。CG-01 的单次授权开发验证另见本页下方报告。正确性测试通过不等于外部效用已经证明。
 
 历史研究、实验结果和当时的 always-on 架构记录完整保留在 [pre-v1 README](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/README.md)、[历史 STATUS](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md) 与现有 `docs/`、`reports/`。它们不是当前 v1 激活政策。
 
 
-## Current capability-growth package
+## Completed capability-growth package
 
 **HCL-CG-01 — Perspective- and Choice-Constrained Character Explanation**
 
-The current objective is to move beyond storing what a character knew or believed:
+The implemented objective was to move beyond storing what a character knew or believed:
 HCL should be able to check whether an explanation of a character's action depends
 on knowledge, explicit goals or available choices that were actually supported at
 the action time, and revise only the affected explanation when later evidence
@@ -42,6 +42,10 @@ CG01-A/B/C now have a provider-free implementation: explicit reader/character/
 observer modes, source- and time-scoped explanation conditions, local revision,
 and an ordinary-text path with auditable final cognition context. See
 [implementation and limits](docs/HCL_CG01_IMPLEMENTATION.md). The capability is
-**IMPLEMENTED_UNVALIDATED**; external utility has not been established.
-The four-case [CG-01 external development package](docs/HCL_CG01_EXTERNAL_DEVELOPMENT_PROTOCOL.md)
-is frozen provider-free; paid execution awaits separate owner authorization.
+provider-free correct but has **no demonstrated external increment**. The
+one-time [CG-01 external development package](docs/HCL_CG01_EXTERNAL_DEVELOPMENT_PROTOCOL.md)
+ended in **SIMPLIFY** for ordinary-text use: all four semantic preparations
+failed source-span validation, so H/H-new did not exercise the checker.
+The [closure report](reports/HCL_CG01_EXTERNAL_DEVELOPMENT_CLOSURE.md)
+preserves the distinction between failed end-to-end use and inconclusive
+checker efficacy.

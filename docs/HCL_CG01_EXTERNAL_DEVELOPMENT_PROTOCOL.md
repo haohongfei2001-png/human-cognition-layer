@@ -1,7 +1,8 @@
 # CG-01 minimal external development package
 
-Status: **PROVIDER-FREE PACKAGE FROZEN; USD 0.75 OWNER GRANT RECEIVED;
-ONE-TIME EXECUTION PENDING**.
+Status: **ONE-TIME EXECUTION COMPLETE; PHASE E SIMPLIFY**. See the
+[closure report](../reports/HCL_CG01_EXTERNAL_DEVELOPMENT_CLOSURE.md) and
+[immutable raw receipt](../reports/HCL_CG01_EXTERNAL_RUN_36392929956.json).
 This is a four-case falsification probe, not a fresh benchmark, efficacy proof,
 leaderboard attempt or permission to spend. It follows CG01-A/B/C and their
 provider-free correctness checks.
@@ -89,7 +90,10 @@ trigger commit, and preserves a journal after every attempt. There is no
 scheduled trigger or retry. The runner records a conservative peak-price,
 all-cache-miss cost upper bound alongside token usage; the invoice can be lower.
 Provider-free tests cover package integrity, arm isolation, H-new ablation,
-metering, scoring, checkpointing and a full 24-call stub run. No provider
-execution has occurred as of this workflow preparation. After the one-time
-comparison, Phase E requires one RETAIN / SIMPLIFY / DEACTIVATE decision.
-Historical budgets do not transfer. LongMemEval remains sealed.
+metering, scoring, checkpointing and a full 24-call stub run. The authorized
+comparison completed at run 36392929956 with 24 calls and a USD 0.05900004
+conservative cost upper bound. All H preparations failed exact source-span
+validation, leaving H/H-new with identical final messages; Phase E chose
+SIMPLIFY for this ordinary-text task class, without a checker efficacy claim.
+The unused grant expired and the workflow is dormant at zero. Historical
+budgets do not transfer. LongMemEval remains sealed.

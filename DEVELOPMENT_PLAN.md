@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL CAPABILITY-GROWTH PLAN**
+Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG-01 CLOSED (SIMPLIFY)**
 
 This file defines the live development direction for HCL. `STATUS.md` records
 current execution state; this file records the development strategy and the next
@@ -98,7 +98,7 @@ Measurement failure and mechanism failure are separate. Ambiguous source labels,
 broken output contracts or unscorable references are **INCONCLUSIVE**, not
 evidence for or against cognition.
 
-## 4. Current main work package
+## 4. Completed main work package
 
 # HCL-CG-01 — Perspective- and Choice-Constrained Character Explanation
 
@@ -393,7 +393,7 @@ public reproducibility, community recognition and reasonable cost.
 Leaderboard position is a later **research result and reward**. It must never
 become the source of HCL capability design.
 
-## 10. Immediate execution order
+## 10. Completed CG-01 execution order
 
 The live work order is:
 
@@ -407,10 +407,19 @@ The live work order is:
    package without paid execution;
 6. stop only if the sole remaining step requires owner-paid authorization.
 
+Owner authorization was received for the frozen USD 0.75 package. The one-time
+run completed at Actions 36392929956, and Phase E selected SIMPLIFY for the
+ordinary-text task class. The specialized checker's efficacy remains
+inconclusive because the H arm's semantic preparation failed in all four cases.
+The exact evidence and provider-free repair are recorded in
+`reports/HCL_CG01_EXTERNAL_DEVELOPMENT_CLOSURE.md`. No unused authorization
+transfers. The next capability package must come from the existing priority
+pool in section 8 and state a new user-observable capability delta.
+
 The previous v1 integrated-source audit remains a useful validation backlog, but
 it is no longer the development blocker.
 
-The current development question is:
+The completed CG-01 development question was:
 
 > **What does HCL understand about a person after this package that it could not
 > reliably represent and check before?**
