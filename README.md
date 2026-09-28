@@ -2,14 +2,14 @@
 
 HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息、信念、视角和有来源的心理证据。**基础模型可以直接做好时，直接回答。** 简单提示足够时不调用复杂机制；精确计算采用通用工具；专门认知机制只保留得到增量证据支持的部分。
 
-当前阶段：**HCL Capability Growth；CG-03 单次开发比较按 RETAIN 收口（仅 development evidence），CG-04 单次冻结比较已按 development-only RETAIN 收口；CG-05 也已实现、认证和冻结；夜间 NI-10..14 已实现：普通问题中的多来源修订、两人视角、信念/条件责任与多事件集成；交付以 exact-main provider-free CI 为准**。CG-02 的一次性开发比较已按 INCONCLUSIVE 结案；v1 integration foundation 已完成。唯一实时状态：[STATUS.md](STATUS.md)，长期执行计划见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
+当前阶段：**HCL Capability Growth；CG-03 单次开发比较按 RETAIN 收口（仅 development evidence），CG-04 单次冻结比较已按 development-only RETAIN 收口；CG-05 也已按 development-only RETAIN 收口；夜间 NI-10..14 已实现：普通问题中的多来源修订、两人视角、信念/条件责任与多事件集成；交付以 exact-main provider-free CI 为准**。CG-02 的一次性开发比较已按 INCONCLUSIVE 结案；v1 integration foundation 已完成。唯一实时状态：[STATUS.md](STATUS.md)，长期执行计划见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
 
 - [普通人物问题与叙事入口](docs/HCL_V1_PERSON_QUESTION.md)：有来源、时间、访问与局部修订边界；单次回答，默认零提取调用。
 - [夜间 source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)：实际能力变化、证据限制、两个 deferred 冻结包。
 - [可执行 capability registry](docs/HCL_V1_CAPABILITY_REGISTRY.md)：核心、可选结构、通用工具、停用研究资产。
 - [Router / context / answer API](docs/HCL_V1_COGNITION_ROUTER.md)：确定性最小路由、有访问和时间边界的上下文、单次底座模型调用。
-- [Capability Growth development plan](DEVELOPMENT_PLAN.md)：真实能力增长优先于外部验证；当前工作包为已有能力集成；CG-04 已 development-only RETAIN；CG-05 将按独立一次性授权执行。
-- [CG-04 比较协议](docs/HCL_CG04_EXTERNAL_DEVELOPMENT_PROTOCOL.md)：四个合成开发案例、五臂、零重试、USD 0.30 未激活提案；旧预算不转移。
+- [Capability Growth development plan](DEVELOPMENT_PLAN.md)：真实能力增长优先于外部验证；当前工作包为已有能力集成；CG-04 已 development-only RETAIN；CG-05 同样 development-only RETAIN，两份授权均已关闭。
+- [CG-04 比较协议](docs/HCL_CG04_EXTERNAL_DEVELOPMENT_PROTOCOL.md)：四个合成开发案例、五臂、零重试、USD 0.30 单次授权已消费并关闭；旧预算不转移。
 - [CG-04 实现及边界](docs/HCL_CG04_IMPLEMENTATION.md)：有条件的显式偏好、局部修订与未解决冲突；普通文本入口零提取调用。
 - [CG-04 capability contract](docs/HCL_CG04_CAPABILITY_CONTRACT.md)：角色、情境、条件和局部偏好冲突；不建立全局价值权重。
 - [CG-03 capability contract](docs/HCL_CG03_CAPABILITY_CONTRACT.md)：在显式规范前提下区分因果贡献、知识、可预见性、控制与意图。
@@ -99,3 +99,5 @@ preserved. The next implementation package is
 - [普通文本接入已 RETAIN 的 belief/perspective](docs/HCL_V1_BELIEF_PREPARATION.md)：区分明确自述、间接归因、角色不确定和信息接触，并与已有能力合成一次回答输入；未新增外部效用证据。
 
 - [普通问题入口](docs/HCL_V1_PERSON_QUESTION.md)：明确的中英文问题选择已有 belief／词义准备与来源比较，不需手工输入正确心理状态；含糊任务保留为未决。
+
+- [CG04 source-first closure](reports/HCL_CG04_EXTERNAL_DEVELOPMENT_CLOSURE.md) / [CG05 source-first closure](reports/HCL_CG05_EXTERNAL_DEVELOPMENT_CLOSURE.md)：两项 RETAIN 仅为 HCL-authored development evidence，独立外部泛化尚未建立；预算和 trigger 均关闭。

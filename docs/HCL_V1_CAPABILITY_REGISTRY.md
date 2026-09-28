@@ -33,10 +33,12 @@ Canonical implementation: `hcl/v1/capabilities.py`. No inventory entry alone cau
 
 Perspective/belief is the strongest retained specialized component; its historical fresh development signal is bounded, not general efficacy. v0.7/v0.8 are optional evidence infrastructure. v0.9/v0.10 are generic exact tools, not psychological superiority. Quantifier/witness/reading tools have correctness certificates without external semantic increment. Consumed harnesses and sealed LongMemEval are outside the import boundary.
 
-CG-05 `cg05_local_concept`: OPTIONAL / IMPLEMENTED_UNVALIDATED; explicit speaker/context definitions and source-grounded applicability, counterexamples and local revision. Registry now contains 27 capabilities.
+CG-05 `cg05_local_concept`: OPTIONAL / RETAIN_DEVELOPMENT_ONLY; explicit speaker/context definitions and source-grounded applicability, counterexamples and local revision. Registry now contains 27 capabilities.
 
-CG-02 registry disposition is INCONCLUSIVE_CLOSED, reflecting the consumed source-first closure; CG-04 is now development-only RETAIN after its one consumed frozen comparison; CG-05 is the sole pending candidate until its separately authorized comparison closes. Lossless context transport is integration, not another capability candidate.
+CG-02 registry disposition is INCONCLUSIVE_CLOSED, reflecting the consumed source-first closure; CG-04 is now development-only RETAIN after its one consumed frozen comparison; CG-05 is now also development-only RETAIN after its separate consumed comparison. Zero active implemented-unvalidated candidate slots. Lossless context transport is integration, not another capability candidate.
 
 CG-01 registry disposition is SIMPLIFY_CLOSED for ordinary text, with optional source-validated typed checker efficacy inconclusive; no new pending candidate or historical reclassification.
 
 CG04 source-first closure: bounded optional RETAIN, C26/P23/G25/H28/H-new26 of28, authored development-only, 20 calls, conservative USD0.03948384. No independent generalization claim or automatic activation expansion. [Receipt/closure](../reports/HCL_CG04_EXTERNAL_DEVELOPMENT_CLOSURE.md).
+
+CG05 source-first closure: bounded optional RETAIN, C21/P23/G21/H28/H-new23 of28, authored development-only, 20 calls, conservative USD0.04263072. No independent generalization claim. NI10–14 remain provider-free correctness integrations with external utility INCONCLUSIVE, not five new validated cognition families. [Receipt/closure](../reports/HCL_CG05_EXTERNAL_DEVELOPMENT_CLOSURE.md).

@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL CAPABILITY-GROWTH PLAN; SERIAL FROZEN CG04 / CG05 OWNER AUTHORIZED; POST-CG05 GAP REVIEW NEXT**
+Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG04 / CG05 DEVELOPMENT-ONLY RETAIN / CLOSED; ZERO PENDING; POST-CG05 GAP REVIEW NEXT**
 
 This file defines the live development direction for HCL. `STATUS.md` records
 current execution state; this file records the development strategy and the next
@@ -349,7 +349,7 @@ unfrozen priority pool:
    explicit normative premises.
 3. **CG-04 DEVELOPMENT-ONLY RETAIN / CLOSED — Contextual value conflict and preference** — conditional preferences,
    role/context changes and unresolved value conflict; no global fixed weights.
-4. **CG-05 IMPLEMENTED_UNVALIDATED / DEFERRED — Concept interpretation in person/social context** — local definitions,
+4. **CG-05 DEVELOPMENT-ONLY RETAIN / CLOSED — Concept interpretation in person/social context** — local definitions,
    speaker-relative usage, applicability, counterexamples and multiple readings.
 
 Narrative/social integration should emerge across these capabilities rather than
@@ -921,3 +921,5 @@ After both closures, perform a short POST-CG05 CAPABILITY GAP REVIEW using curre
 CG04 serial closure completed source-first as RETAIN_DEVELOPMENT_ONLY (one frozen run36463463452; C26/P23/G25/H28/H-new26 of28), grant0/trigger deletion. One pending slot remains, CG05. Certify this closure on exact head/main, then immediately execute its separately authorized single frozen comparison. No automatic next module: POST-CG05 gap review follows.
 
 CG04 closure exact-main bc51049 certified all six workflow groups. Current serial task: one CG05 run under its independent grant after activation exact-main CI; certified c7593bc runtime and frozen package9ade8288, with new transport infrastructure only. POST-CG05 gap review remains mandatory before new capability/module.
+
+CG05 source-first closure RETAIN_DEVELOPMENT_ONLY (single frozen run36464819798; C21/P23/G21/H28/H-new23 of28), grant0/trigger deletion/workflow disabled. No remaining implemented-unvalidated slots. Current unique task after exact-head/main CI: POST-CG05 CAPABILITY GAP REVIEW against actual dispositions and NI10–14 correctness-only integration, before any new capability contract. No CG06 by version progression, no fresh/independent upgrade, no new budget.
