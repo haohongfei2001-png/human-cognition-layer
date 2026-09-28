@@ -748,18 +748,18 @@ next_ready: B04
 本文件中当前状态以最终固定 SHA `310b667280769dc1b19c2a8e463e8f6171652cec` 为准。主要架构/运行时/历史报告在初始 SHA `b31d8c29f64e5a2b1d62462de0ff58729b743ac9` 读取，随后完整读取 PR160 差异，并重新读取最新 STATUS、DEVELOPMENT_PLAN 与 POST-CG05 review；PR160 没有修改 `hcl/` 运行时代码。下列相对路径按本文件将来位于 `docs/` 编排；本地阅读时可据仓库与 SHA 定位。历史文档中的当时状态不覆盖当前执行注册表与 canonical status。
 
 - **R1** — [STATUS.md](STATUS.md)、[DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)、[README.md](README.md)。
-- **R2** — [实际 capability registry](hcl/v1/capabilities.py)、[registry 文档](HCL_V1_CAPABILITY_REGISTRY.md)、[v1 router/architecture](HCL_V1_COGNITION_ROUTER.md)。
+- **R2** — [实际 capability registry](hcl/v1/capabilities.py)、[registry 文档](docs/HCL_V1_CAPABILITY_REGISTRY.md)、[v1 router/architecture](docs/HCL_V1_COGNITION_ROUTER.md)。
 - **R3** — PR #143–#159 中读取到的近期 PR 元数据、上述运行时基线前的近期 commits，以及 PR #160 的完整 diff；最终核对的最新合并为 #160。
 - **R4** — 初始运行时基线 b31d8c29 的六项 GitHub checks：`36465576385`、`36465576188`、`36465576206`、`36465576148`、`36465576241`、`36465576167`，均读取到 completed/success；未重跑。
-- **R5** — [普通问题入口与 NI10–14](HCL_V1_PERSON_QUESTION.md)、[NI 集成收口](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)。后者是当时的历史收口。
-- **R6** — [v1 composition](HCL_V1_COMPOSITION.md)。
-- **R7** — [CG01 实现](HCL_CG01_IMPLEMENTATION.md)、[CG01 closure](reports/HCL_CG01_EXTERNAL_DEVELOPMENT_CLOSURE.md)。
-- **R8** — [CG02 实现](HCL_CG02_IMPLEMENTATION.md)、[CG02 closure](reports/HCL_CG02_EXTERNAL_DEVELOPMENT_CLOSURE.md)、[CG03 实现](HCL_CG03_IMPLEMENTATION.md)、[CG03 closure](reports/HCL_CG03_EXTERNAL_DEVELOPMENT_CLOSURE.md)。
-- **R9** — [CG04 实现](HCL_CG04_IMPLEMENTATION.md)、[CG04 closure](reports/HCL_CG04_EXTERNAL_DEVELOPMENT_CLOSURE.md)。
-- **R10** — [CG05 contract](HCL_CG05_CAPABILITY_CONTRACT.md)、[CG05 closure](reports/HCL_CG05_EXTERNAL_DEVELOPMENT_CLOSURE.md)。
-- **R11** — [v0.5 stance](HCL_V05_CURRENT_STANCE_CORE_V01.md)、[v0.6 perspective/belief](HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_V01.md)。
-- **R12** — [v0.7 intention](HCL_V07_INTENTION_MOTIVATION_MINIMAL_RUNTIME_V01.md)、[v0.8 affect](HCL_V08_AFFECT_APPRAISAL_MINIMAL_RUNTIME_V01.md)。
-- **R13** — [v0.9 causal](HCL_V09_CAUSAL_COUNTERFACTUAL_MINIMAL_RUNTIME_V01.md)、[v0.10 argumentation](HCL_V10_ARGUMENTATION_MINIMAL_RUNTIME_V01.md)。
+- **R5** — [普通问题入口与 NI10–14](docs/HCL_V1_PERSON_QUESTION.md)、[NI 集成收口](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)。后者是当时的历史收口。
+- **R6** — [v1 composition](docs/HCL_V1_COMPOSITION.md)。
+- **R7** — [CG01 实现](docs/HCL_CG01_IMPLEMENTATION.md)、[CG01 closure](reports/HCL_CG01_EXTERNAL_DEVELOPMENT_CLOSURE.md)。
+- **R8** — [CG02 实现](docs/HCL_CG02_IMPLEMENTATION.md)、[CG02 closure](reports/HCL_CG02_EXTERNAL_DEVELOPMENT_CLOSURE.md)、[CG03 实现](docs/HCL_CG03_IMPLEMENTATION.md)、[CG03 closure](reports/HCL_CG03_EXTERNAL_DEVELOPMENT_CLOSURE.md)。
+- **R9** — [CG04 实现](docs/HCL_CG04_IMPLEMENTATION.md)、[CG04 closure](reports/HCL_CG04_EXTERNAL_DEVELOPMENT_CLOSURE.md)。
+- **R10** — [CG05 contract](docs/HCL_CG05_CAPABILITY_CONTRACT.md)、[CG05 closure](reports/HCL_CG05_EXTERNAL_DEVELOPMENT_CLOSURE.md)。
+- **R11** — [v0.5 stance](docs/HCL_V05_CURRENT_STANCE_CORE_V01.md)、[v0.6 perspective/belief](docs/HCL_V06_MINIMAL_PERSPECTIVE_BELIEF_RUNTIME_V01.md)。
+- **R12** — [v0.7 intention](docs/HCL_V07_INTENTION_MOTIVATION_MINIMAL_RUNTIME_V01.md)、[v0.8 affect](docs/HCL_V08_AFFECT_APPRAISAL_MINIMAL_RUNTIME_V01.md)。
+- **R13** — [v0.9 causal](docs/HCL_V09_CAUSAL_COUNTERFACTUAL_MINIMAL_RUNTIME_V01.md)、[v0.10 argumentation](docs/HCL_V10_ARGUMENTATION_MINIMAL_RUNTIME_V01.md)。
 - **R14** — 最新 [POST-CG05 gap review](reports/HCL_POST_CG05_CAPABILITY_GAP_REVIEW.md)、[native readiness receipt](reports/HCL_POST_CG05_NATIVE_READINESS.json)、[disposition inventory](reports/HCL_POST_CG05_CAPABILITY_DISPOSITIONS.json) 与 [provider-free reproducer](scripts/audit_post_cg05_native_readiness.py)，后面三项通过 PR160 完整 diff 核对；本轮没有运行 reproducer，也没有读取或重跑对应题库。
 
 **机制背景，而非 HCL 效力证据：**Sumers 等《Cognitive Architectures for Language Agents》，arXiv:2309.02427，提供记忆、动作空间与决策循环的架构视角；Doyle《A Truth Maintenance System》，MIT AI Memo 521 / Artificial Intelligence 12(3), 1979，DOI:10.1016/0004-3702(79)90008-0，说明记录理由与依赖驱动修订的通用思路。本轮核对原始研究摘要，不据此声称 HCL 新机制有效，也不把通用架构思想当作 HCL 的原创突破。
