@@ -1,6 +1,6 @@
 # HCL-CG-04 — Contextual Value Conflict and Preference
 
-Status: **CG04-A–D/CERT COMPLETE; CG04-E FROZEN; READY / DEFERRED_OWNER_AUTHORIZATION**
+Status: **RETAIN_DEVELOPMENT_ONLY / CLOSED; one frozen comparison consumed; no rerun**
 
 ## User-visible capability delta
 
@@ -75,3 +75,7 @@ provider-free PASS with identical runtime digest. See
 gates passing and a [prospective protocol](HCL_CG04_EXTERNAL_DEVELOPMENT_PROTOCOL.md).
 No paid call is authorized or executed. This certifies bounded correctness and
 treatment presence, not external utility or broad value understanding.
+
+## Consumed owner authorization / current disposition
+
+The owner separately authorized one frozen comparison from main1185b981. Run36463463452 executed certified runtime018afbc, not current runtime. Source-first disposition is RETAIN, development-only: C26/P23/G25/H28/H-new26 of28. The USD0.30 grant is consumed and closed, workflow cap0, trigger deleted, no transfer/rerun. Frozen package bytes and its original proposal metadata remain unchanged. [Complete closure](../reports/HCL_CG04_EXTERNAL_DEVELOPMENT_CLOSURE.md).

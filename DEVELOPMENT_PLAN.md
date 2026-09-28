@@ -347,7 +347,7 @@ unfrozen priority pool:
 2. **CG-03 CLOSED / DEVELOPMENT-ONLY RETAIN — Responsibility-structure explanation** — distinguish causal contribution,
    knowledge, foreseeability, control, intention and responsibility basis under
    explicit normative premises.
-3. **CG-04 IMPLEMENTED_UNVALIDATED / DEFERRED — Contextual value conflict and preference** — conditional preferences,
+3. **CG-04 DEVELOPMENT-ONLY RETAIN / CLOSED — Contextual value conflict and preference** — conditional preferences,
    role/context changes and unresolved value conflict; no global fixed weights.
 4. **CG-05 IMPLEMENTED_UNVALIDATED / DEFERRED — Concept interpretation in person/social context** — local definitions,
    speaker-relative usage, applicability, counterexamples and multiple readings.
@@ -917,3 +917,5 @@ unchanged, and are never the sole reason to stop available independent work.
 Superseding the night deferred paid gates only: execute frozen CG04 at certified 018afbc once under its separate USD 0.30 grant, close source-first, merge raw receipts/disposition/grant0/trigger deletion and certify exact main; then execute frozen CG05 at certified c7593bc once under its independent USD 0.30 grant. Each uses existing DeepSeek secret, frozen five arms/four authored cases, thinking disabled, 20 calls maximum, no retries, 512 output tokens. No transfer, rerun, additional samples or LongMemEval. No latest runtime substitution. Preflight runtime/package hashes, complete labels, fairness and actual H/H-new treatment before any paid request.
 
 After both closures, perform a short POST-CG05 CAPABILITY GAP REVIEW using current evidence, including NI10–14 correctness-only integration. Do not automatically create CG06. Write a new contract and provider-free implementation only for a clear falsifiable human-cognition gap. If no such gap is established, prioritize independent external generalization qualification of retained assets without additional paid execution. Leaderboard remains deferred until the existing maturity gate.
+
+CG04 serial closure completed source-first as RETAIN_DEVELOPMENT_ONLY (one frozen run36463463452; C26/P23/G25/H28/H-new26 of28), grant0/trigger deletion. One pending slot remains, CG05. Certify this closure on exact head/main, then immediately execute its separately authorized single frozen comparison. No automatic next module: POST-CG05 gap review follows.

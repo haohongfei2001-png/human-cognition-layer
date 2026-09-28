@@ -1,0 +1,10 @@
+{
+  "control_sha": "f6c76a6ae6169d78cfdd83242561f7449e4c618a",
+  "control_before": "c4ed314c0a5cb982fd4bc113ff44f929490c01b7",
+  "run_id": "36463463452",
+  "run_attempt": "1",
+  "authorized_runtime_sha": "018afbc93c645975d7f6f1077c8c8380635d9f2f",
+  "frozen_runtime_sha": "018afbc93c645975d7f6f1077c8c8380635d9f2f",
+  "frozen_package_sha256": "0ffcfdfae3d9d5130c96205f2247991d1d88a872edbb144b701ad01da3202ce9",
+  "owner_grant_cap_usd": "0.30"
+}

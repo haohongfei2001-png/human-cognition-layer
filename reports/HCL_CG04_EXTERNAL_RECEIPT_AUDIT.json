@@ -1,0 +1,90 @@
+{
+  "capability": "CG04",
+  "run_id": "36463463452",
+  "control": {
+    "control_sha": "f6c76a6ae6169d78cfdd83242561f7449e4c618a",
+    "control_before": "c4ed314c0a5cb982fd4bc113ff44f929490c01b7",
+    "run_id": "36463463452",
+    "run_attempt": "1",
+    "authorized_runtime_sha": "018afbc93c645975d7f6f1077c8c8380635d9f2f",
+    "frozen_runtime_sha": "018afbc93c645975d7f6f1077c8c8380635d9f2f",
+    "frozen_package_sha256": "0ffcfdfae3d9d5130c96205f2247991d1d88a872edbb144b701ad01da3202ce9",
+    "owner_grant_cap_usd": "0.30"
+  },
+  "runtime_sha256": "b700aaef4a27d6beda7b4abd79b6801d29947583adaa1dc00ca45b3f50ccd006",
+  "raw_results_sha256": "665e9f32e3c96c750575b2c69fdd09d4592edf2d9ed6148b034e3540ef2403fb",
+  "models": [
+    "deepseek-v4-pro"
+  ],
+  "all_receipt_checks": "PASS",
+  "summary": {
+    "C": {
+      "fields": 26,
+      "complete": 3,
+      "input_tokens": 1599,
+      "output_tokens": 576,
+      "rated_usd": 0.00439164,
+      "published_rate_estimate_usd": 0.0018691639999999998
+    },
+    "P": {
+      "fields": 23,
+      "complete": 1,
+      "input_tokens": 1751,
+      "output_tokens": 560,
+      "rated_usd": 0.00452892,
+      "published_rate_estimate_usd": 0.001529484
+    },
+    "G": {
+      "fields": 25,
+      "complete": 2,
+      "input_tokens": 1867,
+      "output_tokens": 574,
+      "rated_usd": 0.0047374800000000005,
+      "published_rate_estimate_usd": 0.0016337640000000002
+    },
+    "H": {
+      "fields": 28,
+      "complete": 4,
+      "input_tokens": 9063,
+      "output_tokens": 575,
+      "rated_usd": 0.014240160000000002,
+      "published_rate_estimate_usd": 0.006630096
+    },
+    "H-new": {
+      "fields": 26,
+      "complete": 3,
+      "input_tokens": 7031,
+      "output_tokens": 582,
+      "rated_usd": 0.01158564,
+      "published_rate_estimate_usd": 0.005057843999999999
+    }
+  },
+  "invoice_cost_usd": null,
+  "disposition": "RETAIN",
+  "evidence_class": "HCL_AUTHORED_SYNTHETIC_DEVELOPMENT_ONLY_NOT_INDEPENDENT_OR_FRESH",
+  "artifact": {
+    "id": 10988468609,
+    "node_id": "MDg6QXJ0aWZhY3QxMDk4ODQ2ODYwOQ==",
+    "name": "hcl-cg04-external-36463463452",
+    "size_in_bytes": 36389,
+    "url": "https://api.github.com/repos/haohongfei2001-png/human-cognition-layer/actions/artifacts/10988468609",
+    "archive_download_url": "https://api.github.com/repos/haohongfei2001-png/human-cognition-layer/actions/artifacts/10988468609/zip",
+    "expired": false,
+    "digest": "sha256:8dcd61ddc13ae265e5b3af07be77d2a1c880e37ef7c6fd98920bddfb96a106e6",
+    "created_at": "2026-09-28T18:12:36Z",
+    "updated_at": "2026-09-28T18:12:36Z",
+    "expires_at": "2026-12-27T18:11:42Z",
+    "workflow_run": {
+      "id": 36463463452,
+      "repository_id": 1376531166,
+      "head_repository_id": 1376531166,
+      "head_branch": "main",
+      "head_sha": "f6c76a6ae6169d78cfdd83242561f7449e4c618a"
+    }
+  },
+  "calls": 20,
+  "retries": 0,
+  "paid_rerun_allowed": false,
+  "remaining_grant_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
