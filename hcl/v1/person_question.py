@@ -12,6 +12,7 @@ from .context import ANSWER_POLICY, CognitionContext, event_row
 from .layer import HCLCognitionLayer, PreparedAnswer, AnswerReceipt
 from .router import CognitionRequest, CognitionPlan, PerspectiveMode
 from .composition import prepare_composed_answer, ComposedAnswer, ComposedAnswerReceipt
+from .compact import compact_cognition_context, COMPACT_POLICY
 
 _QUESTIONS = tuple((kind, re.compile(pattern)) for kind, pattern in (
     ('compare', rf"Compare (?P<actor>{_TERM})'s belief and meaning of (?P<term>{_TERM}) for (?P<item>{_TERM}) in (?P<context>{_TERM})[.?]?"),
@@ -33,15 +34,22 @@ def _refusal(query, narrative, mode, reason, *, max_context_chars):
         uncertainty=[dict(status='SYSTEM_INSUFFICIENT', reason=reason)],
         preparation=dict(method='bounded_ordinary_question_refusal', failure=reason,
                          extraction_provider_calls=0, answer_provider_calls=1))
-    if len(context.serialized()) > max_context_chars:
+    transmitted = compact_cognition_context(context.as_dict())
+    if len(json.dumps(transmitted, ensure_ascii=False, sort_keys=True)) > max_context_chars:
         context.evidence = []
         context.uncertainty.append(dict(status='SYSTEM_INSUFFICIENT', reason='context budget exceeded; narrow source'))
+        transmitted = compact_cognition_context(context.as_dict())
+        if len(json.dumps(transmitted, ensure_ascii=False, sort_keys=True)) > max_context_chars:
+            # The full audit stays in the receipt; don't let refusal metadata
+            # exceed the same transmitted-state budget as a successful path.
+            context.preparation = {}
+            transmitted = compact_cognition_context(context.as_dict())
     plan = CognitionPlan(True, resolve_dependencies(('evidence', 'uncertainty')), (), (),
         'evidence_bounded', {'uncertainty': reason}, CostClass.LOW,
         max_context_chars=max_context_chars, perspective_mode=mode)
-    messages = (dict(role='system', content=ANSWER_POLICY + ' Structured person analysis was not grounded; '
+    messages = (dict(role='system', content=ANSWER_POLICY + ' ' + COMPACT_POLICY + ' Structured person analysis was not grounded; '
         'use authorized reader text cautiously and say when the requested analysis is unsupported.'),
-        dict(role='user', content=json.dumps(dict(query=query, cognition_context=context.as_dict()), ensure_ascii=False, sort_keys=True)))
+        dict(role='user', content=json.dumps(dict(query=query, cognition_context=transmitted), ensure_ascii=False, sort_keys=True)))
     return PreparedAnswer(plan, context, messages, dict(method='bounded_ordinary_question_refusal',
         failure=reason, extraction_provider_calls=0, answer_provider_calls=1,
         actual_final_messages=list(messages), longmemeval='SEALED_NOT_ACCESSED'))

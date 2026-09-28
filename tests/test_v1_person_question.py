@@ -109,6 +109,12 @@ class PersonQuestionTests(unittest.TestCase):
         p = prepare_person_context(self.layer, 'Explain that person somehow', SOURCE * 20, max_context_chars=512)
         self.assertFalse(p.context.evidence)
         self.assertTrue(p.context.uncertainty)
+        transmitted = json.loads(p.messages[-1]['content'])['cognition_context']
+        self.assertLessEqual(len(json.dumps(transmitted, ensure_ascii=False, sort_keys=True)), 512)
+        p = prepare_person_context(self.layer, QUERY, SOURCE, max_context_chars=512,
+            perspective_mode=PerspectiveMode.OBSERVER_ABOUT_TARGET, observer_actor='Bob')
+        transmitted = json.loads(p.messages[-1]['content'])['cognition_context']
+        self.assertLessEqual(len(json.dumps(transmitted, ensure_ascii=False, sort_keys=True)), 512)
 
     def test_invalid_bound_flags_observer_and_persistent_state_rejected(self):
         for kwargs in ({'narrative_access': 1}, {'max_context_chars': 100}, {'perspective_mode': 'READER_ANALYSIS'},
