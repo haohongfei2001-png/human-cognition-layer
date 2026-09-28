@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVE A COMPLETE / WAVE B READY / NEXT_READY=B01**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVE A COMPLETE / WAVE B / B01 CORRECTNESS_VERIFIED / NEXT_READY=B02**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -184,12 +184,22 @@ remains unverified; this does not block Wave B construction.
 
 ## 5b. Current Wave B — Dynamic Epistemic Cognition
 
-**B01 — NEXT_READY:** separate public expression, private-belief interpretation,
+**B01 — CORRECTNESS_VERIFIED:** separate public expression, private-belief interpretation,
 exposure, understanding and knowledge claims; construct query-bounded nested
 mental propositions. Speech/exposure alone must not establish private belief or
 higher-order acceptance. Require a positive nested interpretation witness.
 
-Then B02 differentiated communication/access updates → B03 character revision
+B01 delivered bounded nested modal trees, ordinary-query holder selection, a real
+attribution/subject-report join, scoped negation and dependency-local withdrawal.
+Public expression is not private belief; private estimates carry an explicit
+unverified sincerity assumption. Fifteen targeted checks plus full regression;
+see `docs/HCL_WAVE_B01.md`. Efficacy remains UNTESTED.
+
+**B02 — NEXT_READY:** differentiated communication/access updates, including
+public/private delivery, missed/negated contact and three-person divergence.
+Availability must not automatically establish exposure, understanding or belief.
+
+Then B03 character revision
 versus analyst revision → B04 correlated reports, conflicts and bounded depth →
 B05 ordinary-input integration and local revision. Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -348,14 +358,14 @@ defect is.
 
 ## 13. Current execution fact
 
-- Current wave: **Wave B — Dynamic Epistemic Cognition (READY)**
+- Current wave: **Wave B — Dynamic Epistemic Cognition**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: B01_DISTINCT_EPISTEMIC_STATES_AND_BOUNDED_HIGHER_ORDER_PROPOSITIONS**
+- **NEXT_READY: B02_DIFFERENTIATED_COMMUNICATION_AND_ACCESS_UPDATES**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A05 actual provider calls / spend: **0 / USD 0**
+- A01–A05/B01 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **B01**, then continue through the dependency-safe queue
+Work should continue at **B02**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
