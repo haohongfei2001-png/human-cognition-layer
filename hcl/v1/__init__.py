@@ -14,3 +14,6 @@ from .cg03 import (NormativePremise, ResponsibilityCase, ResponsibilityFactor,
                    ClaimAuthority, FactorRequirement, FactorClaim,
                    NarrativePremise, ResponsibilityPreparation,
                    check_responsibility, prepare_responsibility_narrative)
+from .cg04 import (PreferenceCondition, PreferenceStatement, ContextConditionClaim,
+                   PreferenceCase, PreferencePreparation, project_preferences,
+                   check_preferences, prepare_preference_narrative)

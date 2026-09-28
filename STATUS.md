@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**HCL-CG-04 — Contextual Value Conflict and Preference (CG04-A next)**
+**HCL-CG-04 — Contextual Value Conflict and Preference (A–D implemented; CERT next)**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -147,7 +147,7 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**CG04-A — explicit contextual-preference operation**
+**CG04-CERT — provider-free contextual-preference certification**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
@@ -197,3 +197,11 @@ Leaderboard selection remains deferred until the maturity gate in
 `DEVELOPMENT_PLAN.md` is met. Historical CG-01 provider charge remains bounded
 by **USD 0.05900004** on conservative published peak all-cache-miss rates; no new
 CG-02 provider spend is authorized. LongMemEval remains fully sealed/deprioritized.
+
+CG04-A–D are now implemented with an explicit v1 operation, complete-line source
+validation, role/context-bound conditions, attributed reports, explicit local
+revision, unresolved pair/cycle conflict and a bounded ordinary-text path.
+[Implementation limits](docs/HCL_CG04_IMPLEMENTATION.md) and debug/ablation
+boundaries are explicit. 23 targeted CG-04 checks and all 141 v1 tests pass
+locally at zero provider calls; exact PR-head/main certification is pending.
+No external utility claim or new paid authorization follows.
