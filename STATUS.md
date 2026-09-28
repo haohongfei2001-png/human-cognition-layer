@@ -170,9 +170,10 @@ and [package](reports/HCL_CG03_EXTERNAL_PACKAGE.json) fix four HCL-authored
 synthetic development cases, the C/P/G/H/H-new inputs, identical output schema
 and label vocabulary across arms, strict scorer, source-first decision rule and
 H/H-new treatment-presence receipts. The package SHA-256 is
-`24fdb22f96cc15ac6594904b79356009b4456ee38dddbc90373e4fb46716fc55`.
+`e76c0fa13bc9c9f4f9c1de9f5986791621e3cd6e9bbdcf0f7d018463d00876e8`.
 Preflight passes with **zero provider calls**. The new one-time proposal uses
-existing DeepSeek infrastructure, a proposed USD 0.30 hard cap and **no
+existing DeepSeek infrastructure, a conservative two-tokens-per-byte plus
+framing/output reservation of USD **0.29634528**, a proposed USD 0.30 hard cap and **no
 historical budget transfer**; its workflow grant is **0**, and no trigger exists.
 The only remaining CG-03 external-development action requires a new, explicit
 owner authorization after price revalidation. Any eventual result remains

@@ -1,7 +1,10 @@
 """Provider-free CG03 runner receipt and cap tests; fake provider only."""
 import unittest
+from unittest.mock import patch
+from types import SimpleNamespace
 
-from scripts.run_cg03_external_once import BudgetLedger, load_frozen_package, run_with_provider
+from scripts.run_cg03_external_once import (BudgetLedger, CG03Provider,
+    load_frozen_package, run_with_provider, main)
 
 
 class CG03RunnerTests(unittest.TestCase):
@@ -48,6 +51,47 @@ class CG03RunnerTests(unittest.TestCase):
             ledger.call(lambda messages: called.append(messages),
                         package['cases'][0]['messages']['C'])
         self.assertEqual(called, [])
+
+    def test_failed_response_is_preserved_and_not_retried(self):
+        package = load_frozen_package()
+        ledger = BudgetLedger(package)
+        called = []
+        raw = {'model': 'unexpected-model', 'choices': [{'message': {'content': '{}'}}]}
+
+        def fake_provider(messages):
+            called.append(messages)
+            return {'model': 'unexpected-model', 'raw': '{}', 'input_tokens': 100,
+                'output_tokens': 5, 'cost_usd': 0.0001518,
+                'response_raw': raw}
+
+        with self.assertRaisesRegex(ValueError, 'provider contract'):
+            ledger.call(fake_provider, package['cases'][0]['messages']['C'])
+        self.assertEqual(len(called), 1)
+        self.assertEqual(ledger.calls, 1)
+        self.assertEqual(ledger.attempts[0]['result']['response_raw'], raw)
+        self.assertGreater(ledger.attempts[0]['failure_reservation_usd'], 0)
+
+    def test_malformed_raw_response_is_preserved(self):
+        package = load_frozen_package()
+        provider = object.__new__(CG03Provider)
+        provider.package = dict(package, maximum_output_tokens_per_call=512)
+        raw = {'model': 'deepseek-v4-pro', 'choices': [], 'usage': None}
+        response = SimpleNamespace(model_dump=lambda **kwargs: raw)
+        provider.client = SimpleNamespace(chat=SimpleNamespace(completions=
+            SimpleNamespace(create=lambda **kwargs: response)))
+        ledger = BudgetLedger(package)
+        with self.assertRaisesRegex(ValueError, 'provider contract'):
+            ledger.call(provider, package['cases'][0]['messages']['C'])
+        self.assertEqual(ledger.attempts[0]['result']['response_raw'], raw)
+        self.assertEqual(ledger.calls, 1)
+
+    def test_absent_grant_stops_before_provider_construction(self):
+        with patch.dict('os.environ', {}, clear=True), patch(
+                'sys.argv', ['run', '--out', 'unused']), patch(
+                'scripts.run_cg03_external_once.CG03Provider') as provider:
+            with self.assertRaisesRegex(SystemExit, 'owner grant is absent'):
+                main()
+            provider.assert_not_called()
 
 
 if __name__ == '__main__':
