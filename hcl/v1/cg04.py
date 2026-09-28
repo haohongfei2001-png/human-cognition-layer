@@ -325,6 +325,19 @@ def prepare_preference_narrative(narrative, actor_id, role, context):
             try:
                 row, authority, _ = _decode(line)
             except ValueError:
+                # Complete concept definitions are another operation's source,
+                # even when their explicit revision contains 'instead of'.
+                from .cg05 import _decode as decode_concept, _criteria as concept_criteria
+                try:
+                    concept, _, _ = decode_concept(line)
+                    concept_criteria(concept['criteria'])
+                    if concept.get('old'):
+                        concept_criteria(concept['old'])
+                except ValueError:
+                    pass
+                else:
+                    diagnostics.append({'line': i, 'source_event_id': eid, 'status': 'CONCEPT_NOT_PREFERENCE'})
+                    continue
                 # Partial preference/revision syntax cannot silently disappear.
                 if re.search(r'\b(prefer|prefers|preference|instead of)\b', line):
                     raise ValueError('unsupported or ambiguous preference line')

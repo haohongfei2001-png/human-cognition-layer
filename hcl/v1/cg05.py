@@ -6,7 +6,8 @@ import re
 
 from hcl.v04.model import EventRecord
 from hcl.v06.perspective import event_accessible_to, viewer_can_establish_target_access
-from .cg04 import _TERM, _label, _time, PreferenceCondition, _requirements
+from .cg04 import (_TERM, _label, _time, PreferenceCondition, _requirements,
+                   _CONDITION as _PREFERENCE_CONDITION, _decode as _decode_preference)
 
 _SELF = re.compile(rf'(?P<actor>{_TERM}): In (?P<context>{_TERM}), by (?P<term>{_TERM}) I mean (?P<criteria>.+)\.')
 _REVISION = re.compile(rf'(?P<actor>{_TERM}): In (?P<context>{_TERM}), I now use (?P<term>{_TERM}) to mean (?P<criteria>.+?) instead of (?P<old>.+)\.')
@@ -286,6 +287,19 @@ def prepare_concept_narrative(narrative, actor_id, context, term, item):
     try:
         for i, line in enumerate(lines, 1):
             eid = events[i - 1].event_id
+            # A context condition belongs to CG04, not to an item's concept
+            # properties or to a fictional speaker named Narrator.
+            if _PREFERENCE_CONDITION.fullmatch(line):
+                diagnostics.append(dict(line=i, status='CONTEXT_CONDITION_NOT_CONCEPT_PROPERTY'))
+                continue
+            try:
+                preference, _, _ = _decode_preference(line)
+                _requirements(preference['conditions'])
+            except ValueError:
+                pass
+            else:
+                diagnostics.append(dict(line=i, status='PREFERENCE_NOT_CONCEPT_DEFINITION'))
+                continue
             fact, use = _FACT.fullmatch(line), _USE.fullmatch(line)
             if fact:
                 properties.append(ConceptProperty(eid, line, fact['context'], fact['item'], fact['key'], fact['value'] == 'true'))
