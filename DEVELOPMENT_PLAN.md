@@ -692,3 +692,14 @@ meaning revisions or narrated exposure cannot change what an earlier view was
 supported to contain. Explicit source statement order only, no calendar-time or
 verified receipt claim. Preserve default freezes and historical evidence; only
 CG04/05 pending, no new paid calls or third candidate, no owner blocking gate.
+
+
+NIGHT-INTEGRATION-07 certified on PR146 final head/main425 tests, all six groups
+PASS. NIGHT-INTEGRATION-08 implements explicit earlier source-order snapshots of
+ordinary person/context questions. No future revision/exposure/invalid semantic
+line enters an earlier preparation; scope metadata is budgeted, invalid scopes
+refuse whole-source fallback. Certify head/main, then reduce repeated shared
+policy/preparation metadata in composed final input losslessly, keeping all
+source/actor/time/access/uncertainty decisions and historical/default frozen inputs.
+CG04/05 are the two pending candidates; no third module, new paid call, owner
+blocking gate, source hunt or leaderboard.
