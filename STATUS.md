@@ -147,7 +147,7 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**NIGHT-INTEGRATION-01 — lossless context compaction for retained cognition**
+**NIGHT-INTEGRATION-02 — same-source capability composition**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
@@ -299,3 +299,23 @@ CG02 registry metadata now says INCONCLUSIVE_CLOSED, matching its existing
 closure; it is not counted as a pending new candidate. New calls/spend: 0/USD0.
 After exact-head/main CI the unique next implementation is source-projected
 cross-capability composition, not a third module. No owner decision required.
+
+
+**NIGHT-INTEGRATION-01 — exact-head/main CERT PASS.** PR #139 head c443051,
+run 36437324076; main 4725466e719320e88c97b3286e89ede22475dc79,
+run 36437814406. Both passed 183 v1 +176 historical =359 tests and all six CI
+groups. [Receipt](reports/HCL_NIGHT_CONTEXT_CERTIFICATION.json).
+
+**NIGHT-INTEGRATION-02 — implemented; CERT in progress.** CAPABILITY_DELTA:
+one ordinary source now reaches one final answer with actual scoped preference,
+concept and conditional responsibility checks together, preserving each operation's
+uncertainty and refusing cross-operation promotion. One adapter answer, zero
+extraction; ten composition tests, including private typed views and local revision.
+A source grammar collision exposed a real preparation defect: context conditions
+were parsed as concept usage and concept revisions as malformed preferences.
+Generic domain separation is repaired; every frozen default input/treatment
+remains identical. [Implementation](docs/HCL_V1_COMPOSITION.md).
+After exact-head/main CI, the unique next implementation is bounded, explicitly
+source-grounded semantic preparation/access integration for existing operations,
+without inferred private state or a third unvalidated module. Provider calls/spend
+remain 0/USD0, LongMemEval sealed, no owner-only development blocker.

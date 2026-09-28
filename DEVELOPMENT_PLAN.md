@@ -614,3 +614,14 @@ No token/cost/utility extrapolation or frozen-input changes. Certify exact
 head/main, then immediately implement source-projected cross-capability
 composition from ordinary input. Keep CG04/05 as the two deferred candidates;
 CG02 is INCONCLUSIVE_CLOSED, CG03 development-only RETAIN. No new paid gate.
+
+
+NIGHT-INTEGRATION-01 certified: PR139 head/main359 tests, all six groups PASS.
+NIGHT-INTEGRATION-02 implements actual same-source composition of existing
+preference/concept/responsibility operations into one final answer, without
+semantic bridges or added candidate. Ordinary paths execute all checks; private
+views require identical typed source/time/access, and per-operation failure stays
+unresolved. Fix complete foreign-domain grammar collisions generically while
+preserving exact frozen default inputs. Certify head/main, then continue bounded
+source-grounded semantic preparation/access integration for existing operations.
+No third candidate, new paid call, source hunt or owner gate.
