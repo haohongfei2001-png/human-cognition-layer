@@ -1,6 +1,6 @@
 # CG-05 — Concept Interpretation in Person/Social Context
 
-Status: **A–D IMPLEMENTED_UNVALIDATED; CERT in progress; provider calls 0**
+Status: **A–D/CERT COMPLETE; E READY / DEFERRED_OWNER_AUTHORIZATION; provider calls 0**
 
 ## CAPABILITY_DELTA / minimal brief
 
@@ -64,3 +64,25 @@ implemented-unvalidated candidates, continue existing capability integration,
 semantic preparation and context/cost work; do not open a third large module.
 LongMemEval remains sealed. Synthetic development cases cannot become independent
 or fresh external evidence.
+
+
+## Certification and frozen development proposal
+
+PR #137 exact head 699fe3dc39d47e5701ffce027f26b6863eb43b13, run 36435067793;
+main c7593bcf5ef8199eb8f1adb3b6f96fb2a0367b94, run 36435439212. Both record
+171 v1 + 176 historical = 347 PASS, identical runtime digest, zero provider
+calls/spend; all six exact-head/main workflow groups passed.
+[Receipt](../reports/HCL_CG05_PROVIDER_FREE_CERTIFICATION.json).
+
+E freezes four repository-authored public synthetic development narratives,
+seven-field strict typed scorer and identical five-arm task/labels. All four H
+preflights pass and H-new removes only executed checked CG-05 state. Package
+SHA-256: `9ade82883d7dd954b3b092af7b4501b679ca950bf0ca432f108bd35a29400dc7`. Frozen runtime replay
+uses certified main c7593bc; current default-case inputs must remain compatible.
+[Protocol](HCL_CG05_EXTERNAL_DEVELOPMENT_PROTOCOL.md).
+
+The separate, unauthorized proposal uses existing DeepSeek/model/secret, default
+tier, thinking disabled, 20 calls/0 retries/512 output tokens, USD 0.30 hard cap;
+conservative reservation USD 0.29537640. No trigger, active grant or paid run.
+The evidence disposition stays IMPLEMENTED_UNVALIDATED. These authored cases
+can yield development evidence only. Continue retained integration and cost work.

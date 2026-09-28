@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**HCL-CG-05 — Local Concept Interpretation (A–D implemented; CERT in progress)**
+**HCL night — CG-04/CG-05 frozen and deferred; retained integration next**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -147,7 +147,7 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**CG05-CERT — provider-free correctness and ordinary-text integration**
+**NIGHT-INTEGRATION-01 — lossless context compaction for retained cognition**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
@@ -258,3 +258,24 @@ implementation task is retained-capability integration and context/cost
 reduction, not a third module. CG-02 remains closed INCONCLUSIVE and CG-03 remains
 development-only RETAIN. New provider calls/spend tonight: **0 / USD 0**.
 LongMemEval: **SEALED_NOT_ACCESSED**. No owner input is needed for this work.
+
+
+**CG05-CERT — PASS / E — READY / DEFERRED_OWNER_AUTHORIZATION.**
+PR #137 exact-head run [36435067793](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36435067793)
+and exact-main c7593bc run [36435439212](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36435439212)
+both passed 347 tests with runtime digest
+`4760aeb40ed6103c78efb844ee491c32451333158d5bd9bb532c3e8708fd473a`.
+All six workflow groups passed at both SHAs. E freezes four synthetic cases and
+fair five-arm actual messages; every treatment-presence gate passes.
+Package SHA-256 `9ade82883d7dd954b3b092af7b4501b679ca950bf0ca432f108bd35a29400dc7`; proposal
+20 calls/0 retries/USD 0.30; conservative reservation USD 0.29537640.
+[Protocol](docs/HCL_CG05_EXTERNAL_DEVELOPMENT_PROTOCOL.md). Frozen runtime replay
+uses certified c7593bc and frozen builder hashes. No grant or trigger exists.
+
+Two pending candidates: CG-04 and CG-05, both IMPLEMENTED_UNVALIDATED. Do not open
+CG-06. **Unique next implementation task:** lossless context compaction so more
+source-grounded cognition fits a bounded final-answer context, preserving all
+actor/time/access/uncertainty and premise distinctions. Default/frozen inputs
+stay unchanged; compact output is explicit and round-trip auditable. Then
+cross-capability composition/semantic preparation. No owner input needed.
+Night provider calls/spend remain 0 / USD 0; LongMemEval remains sealed.
