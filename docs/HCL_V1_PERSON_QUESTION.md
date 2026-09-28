@@ -210,3 +210,46 @@ metadata refuses reader fallback. Total context budget drops both views together
 Ten meaningful tests and actual private/public/observer input receipts exercise
 these boundaries; all prior frozen/default inputs remain compatible. Integration
 correctness only; no third candidate, provider execution or historical upgrade.
+
+
+## Bounded ordinary multi-event narrative
+
+Failure: source-line snapshots did not expose event identity or allow an ordinary
+compound question to combine local role preference with belief/meaning. The simple
+alternative is separate event answers. This integration reads explicit event
+sections of one authorized narrative, then reuses existing preparations and
+source-path snapshots; no new cognitive checker or ontology is added.
+**CAPABILITY_DELTA:** one ordinary question can follow belief, local meaning and
+role preference changes through a short narrative, with event-bound provenance.
+
+Source syntax is2–4 unique `Event briefing:` / `事件 briefing：` sections, each
+followed by existing complete ordinary source lines (total24 lines/16,000 chars).
+`prepare_narrative_context` / `answer_narrative_context` accept
+`Across events, <compound question>` / `按事件变化，<compound question>`, or
+`At event decision, <compound question>` / `截至事件 decision，<compound question>`.
+Supported compound forms include existing belief/meaning comparison and belief/
+conditional responsibility, plus ordinary belief/preference, meaning/preference
+and belief/meaning/preference questions. For example:
+
+```
+Across events, Explain Alice's belief and preferences as medic in team.
+Across events, Explain Alice's belief, meaning of fair for proposal and preferences as medic in team.
+按事件变化，解释 Alice 在 team 中的信念、对 proposal 的 fair 词义与 medic 角色偏好。
+```
+
+Only the question-justified2–3 existing operations run; source presence does not
+activate every capability. Missing selected state remains unresolved. Local
+belief/definition/preference revision preserves other actor/context/role state.
+Choice/action does not establish preference or intention. A selected earlier
+event excludes later semantic content before preparation. Event labels define
+sections/source order only, not calendar time, independently authored records or
+verified receipt. Snapshot source IDs name event sections, and all per-operation
+source/statement bindings survive lossless final encoding. Private exposure still
+uses exact source/access checks; later exposure changes only the later view.
+Invalid/missing event boundary, duplicate identity, unknown selected event, mixed
+statement/event scope or oversized total state refuses whole-narrative fallback.
+No model call in preparation; answer adapter once, no extraction/provider API.
+
+Ten meaningful tests and actual early/current/minimum-operation input receipts
+exercise the real behavior. Engineering integration correctness only, unchanged
+frozen inputs and dispositions; CG04/05 remain the two deferred candidates.

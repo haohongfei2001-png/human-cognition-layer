@@ -887,3 +887,13 @@ exposure is not shared belief; unauthorized observer source stays hidden.
 Certify exact head/main then immediately NI-13 bounded multi-event integration;
 select only existing operations justified by the question/source. No third module,
 paid calls or frozen/consumed evidence changes; preserve section15 continuation.
+
+
+NI-12 certified on PR152 head/main475 tests, both applicable groups PASS.
+NI-13 implements explicit ordinary event-section integration and minimum existing
+belief/meaning/preference/responsibility composition. Before/after local revision,
+visible event/source bindings and private exposure stay scoped; invalid selected
+event never falls back to the whole narrative. Certify head/main, then NI-14
+ordinary Chinese/English integration robustness, reproduced source-grounding
+failures and one complete provider-free integrated closure. Preserve section15,
+CG04/05 freezes/history, zero new paid calls and no third candidate.
