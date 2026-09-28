@@ -4,7 +4,7 @@ import hashlib
 import json
 from hcl.v04.model import EventRecord
 from .context import (ANSWER_POLICY, RESPONSIBILITY_ANSWER_POLICY, PREFERENCE_ANSWER_POLICY,
-                      CognitionContext, evidence_level, event_row)
+                      CONCEPT_ANSWER_POLICY, CognitionContext, evidence_level, event_row)
 from .router import CognitionPlan, CognitionRequest, CognitionRouter
 from .router import PerspectiveMode
 
@@ -32,7 +32,7 @@ class HCLCognitionLayer:
     """
     def __init__(self, base_model, *, intentions=None, affects=None, router=None,
                  semantic_preparer=None, social_checker_enabled=True,
-                 responsibility_checker_enabled=True, preference_checker_enabled=True):
+                 responsibility_checker_enabled=True, preference_checker_enabled=True, concept_checker_enabled=True):
         if affects is not None:
             if intentions is not None and affects.intentions is not intentions:
                 raise ValueError('affect and intention runtimes must share state')
@@ -51,6 +51,9 @@ class HCLCognitionLayer:
         if type(preference_checker_enabled) is not bool:
             raise ValueError('preference checker switch must be boolean')
         self.preference_checker_enabled = preference_checker_enabled
+        if type(concept_checker_enabled) is not bool:
+            raise ValueError('concept checker switch must be boolean')
+        self.concept_checker_enabled = concept_checker_enabled
 
     def prepare(self, request: CognitionRequest):
         plan = self.router.plan(request)
@@ -67,6 +70,7 @@ class HCLCognitionLayer:
         from .cg02 import check_social_exchange
         from .cg03 import check_responsibility, prepare_responsibility_narrative
         from .cg04 import check_preferences, project_preferences, prepare_preference_narrative
+        from .cg05 import prepare_concept_narrative, project_concepts, check_concepts
         from .narrative import SemanticPreparation, prepare_narrative
         from .social_narrative import SocialPreparation, prepare_social_narrative
         from .tools import execute_tool
@@ -237,7 +241,19 @@ class HCLCognitionLayer:
                     'statement_ids': [s.statement_id for s in preference_case.statements] if preference_case else [],
                     'diagnostics': list(preparation.diagnostics)},
                 time_basis='line_order_not_calendar_time')
-        input_evidence = request.evidence + parsed_events + social_events + responsibility_events + preference_events
+        concept_case, concept_events = request.concept_case, ()
+        if request.concept_analysis:
+            preparation = prepare_concept_narrative(request.narrative, plan.target_actor,
+                request.concept_context, request.concept_term, request.concept_item)
+            concept_events, concept_case = preparation.events, preparation.case
+            preparation_audit.update(method='bounded_deterministic_concept_narrative',
+                failure=preparation.failure, time_basis='line_order_not_calendar_time',
+                input={'narrative': request.narrative, 'target_actor': plan.target_actor,
+                    'context': request.concept_context, 'term': request.concept_term, 'item': request.concept_item},
+                output={'event_ids': [e.event_id for e in concept_events],
+                    'definition_ids': [d.definition_id for d in concept_case.definitions] if concept_case else [],
+                    'source_span_diagnostics': list(preparation.diagnostics)})
+        input_evidence = request.evidence + parsed_events + social_events + responsibility_events + preference_events + concept_events
         if plan.explanation and len(input_evidence) > 24:
             raise ValueError('CG-01 accepts at most 24 evidence events')
         if plan.social_commitment and len(input_evidence) > 32:
@@ -266,7 +282,7 @@ class HCLCognitionLayer:
                 target = mentioned[0]
         # A person task with no unambiguous actor must fail closed, never use
         # the system view as if it were a character view.
-        person_task = plan.contextual_preference or plan.social_commitment or plan.responsibility_structure or any(c in plan.capabilities for c in ('perspective', 'intention', 'affect'))
+        person_task = plan.concept_interpretation or plan.contextual_preference or plan.social_commitment or plan.responsibility_structure or any(c in plan.capabilities for c in ('perspective', 'intention', 'affect'))
         scope = {'event_time': request.event_time, 'knowledge_cutoff': request.knowledge_cutoff}
         context = CognitionContext(temporal_scope=scope, perspective_mode=plan.perspective_mode.value)
         if request.narrative and plan.explanation and not candidates and not preparation_audit['failure']:
@@ -394,6 +410,19 @@ class HCLCognitionLayer:
             elif plan.contextual_preference:
                 context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT',
                     'capability': 'cg04_contextual_preference', 'reason': 'no unambiguous explicit preference source'})
+            if plan.concept_interpretation and concept_case:
+                concept_scope = dict(mode=plan.perspective_mode.value, observer_actor=request.observer_actor,
+                    event_time=request.event_time, knowledge_cutoff=request.knowledge_cutoff)
+                projected = project_concepts(concept_case, input_evidence, **concept_scope)
+                context.concepts = {'case_input': projected,
+                    'checked': check_concepts(concept_case, input_evidence, **concept_scope)
+                        if self.concept_checker_enabled else {}}
+                if not projected['definitions']:
+                    context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT',
+                        'capability': 'cg05_local_concept', 'reason': 'no source-visible definition'})
+            elif plan.concept_interpretation:
+                context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT',
+                    'capability': 'cg05_local_concept', 'reason': 'no unambiguous explicit definition'})
         context.evidence = [event_row(e) for e in visible]
         context.provenance = [{'source_event_id': e.event_id, 'source_id': e.source_id,
                                'actor_id': e.actor_id, 'evidence_level': 'SYSTEM_UNKNOWN',
@@ -440,6 +469,8 @@ class HCLCognitionLayer:
                   if plan.responsibility_structure else ANSWER_POLICY)
         if plan.contextual_preference:
             policy += ' ' + PREFERENCE_ANSWER_POLICY
+        if plan.concept_interpretation:
+            policy += ' ' + CONCEPT_ANSWER_POLICY
         return PreparedAnswer(plan, context, ({'role': 'system', 'content': policy},
                                               {'role': 'user', 'content': payload}), preparation_audit)
 

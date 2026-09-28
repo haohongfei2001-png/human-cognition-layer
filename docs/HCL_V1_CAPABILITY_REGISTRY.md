@@ -32,3 +32,5 @@ Canonical implementation: `hcl/v1/capabilities.py`. No inventory entry alone cau
 | longmemeval_sealed | INACTIVE_RESEARCH_ONLY / FROZEN | `eval/v05/` | SEALED_DEPRIORITIZED_32_ROWS | never access/trigger/consume; new owner scope required |  | ZERO | SYSTEM_INSUFFICIENT; preserve evidence; no inferred private truth |
 
 Perspective/belief is the strongest retained specialized component; its historical fresh development signal is bounded, not general efficacy. v0.7/v0.8 are optional evidence infrastructure. v0.9/v0.10 are generic exact tools, not psychological superiority. Quantifier/witness/reading tools have correctness certificates without external semantic increment. Consumed harnesses and sealed LongMemEval are outside the import boundary.
+
+CG-05 `cg05_local_concept`: OPTIONAL / IMPLEMENTED_UNVALIDATED; explicit speaker/context definitions and source-grounded applicability, counterexamples and local revision. Registry now contains 27 capabilities.

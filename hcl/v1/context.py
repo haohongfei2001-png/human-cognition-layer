@@ -70,6 +70,7 @@ class CognitionContext:
     social: dict = field(default_factory=dict)
     responsibility: dict = field(default_factory=dict)
     preferences: dict = field(default_factory=dict)
+    concepts: dict = field(default_factory=dict)
 
     def as_dict(self):
         row = asdict(self)
@@ -78,6 +79,8 @@ class CognitionContext:
             del row['responsibility']
         if not row['preferences']:
             del row['preferences']
+        if not row['concepts']:
+            del row['concepts']
         return row
 
     def serialized(self):
@@ -121,4 +124,14 @@ PREFERENCE_ANSWER_POLICY = (
     'an explicit same-scope reference. Never infer global weights, a transitive '
     'ranking, a moral winner, or values from a choice. Unchecked context '
     'requires source/time/access/condition and revision checks before use.'
+)
+
+
+CONCEPT_ANSWER_POLICY = (
+    'Concept definitions are local source expressions bound to their speaker and context. '
+    'Check an item only against that stated reading and accessible source properties; '
+    'unknown properties remain unknown. Explicit counterexamples challenge applicability '
+    'without rewriting the definition. Revision is explicit and scope-local. Different '
+    'readings do not establish misunderstanding or deception. Never promote a local '
+    'definition into shared meaning, private belief, universal moral truth or an ontology.'
 )

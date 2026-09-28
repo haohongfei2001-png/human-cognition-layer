@@ -7,7 +7,8 @@ import unittest
 from unittest.mock import patch
 
 from scripts.cg04_external_package import build_package, PACKAGE, score_answer
-from scripts.run_cg04_external_once import load_frozen_package, main, run_with_provider
+from scripts.run_cg04_external_once import load_frozen_package as active_load, main, run_with_provider
+from scripts.frozen_cg04_replay import replay_frozen_cg04 as load_frozen_package
 
 
 class CG04PackageTests(unittest.TestCase):
@@ -38,6 +39,11 @@ class CG04PackageTests(unittest.TestCase):
         self.assertIn('CONDITION_UNRESOLVED', coverage)
         self.assertTrue(any(c['checked_state']['conflict_state'] == 'UNRESOLVED_CONFLICT' for c in package['cases']))
 
+    def test_current_mechanism_preserves_every_frozen_input(self):
+        current, frozen = build_package(), load_frozen_package()
+        self.assertEqual(current['cases'], frozen['cases'])
+        self.assertEqual(current['frozen_engineering_sha256'], frozen['frozen_engineering_sha256'])
+
     def test_frozen_scorer_nested_type_and_extra_claim(self):
         c = load_frozen_package()['cases'][0]
         bad = dict(c['gold'], choice_implies_enduring_value=0)
@@ -50,11 +56,12 @@ class CG04PackageTests(unittest.TestCase):
     def test_package_drift_stops_before_provider_construction(self):
         with patch('scripts.run_cg04_external_once.build_package', return_value={}):
             with self.assertRaises(ValueError):
-                load_frozen_package()
+                active_load()
 
     def test_absent_new_grant_and_old_budget_cannot_construct_provider(self):
         with tempfile.TemporaryDirectory() as folder, patch.dict(os.environ,
                 {'HCL_CG03_AUTHORIZED_CAP_USD': '0.30'}, clear=True), \
+                patch('scripts.run_cg04_external_once.build_package', return_value=load_frozen_package()), \
                 patch('sys.argv', ['run', '--out', folder]), \
                 patch('scripts.run_cg04_external_once.CG03Provider') as provider:
             with self.assertRaises(SystemExit):
