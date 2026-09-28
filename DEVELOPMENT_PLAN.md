@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–D COMPLETE / WAVE E / NEXT_READY=E01**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–D COMPLETE / WAVE E / E01–E02 CORRECTNESS_VERIFIED / NEXT_READY=E03**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -292,9 +292,19 @@ See `docs/HCL_WAVE_D05.md`.
 
 ## 5e. Current Wave E — Relationship, Identity, Role and Value Dynamics
 
-**E01 — NEXT_READY:** domain-scoped relationship evidence: who regards whom,
+**E01 — CORRECTNESS_VERIFIED:** domain-scoped relationship evidence: who regards whom,
 concerning what, and with which support. Capability trust does not become moral
-trust; one person's view does not become a reciprocal view.
+trust; one person's view does not become a reciprocal view. Eleven targeted
+checks cover scope, reason support and explicit revision.
+
+**E02 — CORRECTNESS_VERIFIED:** information/control/stated-choice alternatives
+for failure, separate apology receipt and reported forgiveness. Thirteen targeted
+checks plus combined composition; E01 and E02 ship as one coherent relationship
+work package. See `docs/HCL_WAVE_E01_E02.md`.
+
+**E03 — NEXT_READY:** separate self-narrative, third-party identity attribution,
+role requirements, behavior and personal endorsement; role occupancy does not
+imply endorsement of every role norm.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -455,12 +465,12 @@ defect is.
 
 - Current wave: **Wave E — Relationship, Identity, Role and Value Dynamics**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: E01_DOMAIN_SCOPED_RELATIONSHIP_EVIDENCE**
+- **NEXT_READY: E03_SELF_NARRATIVE_ROLE_IDENTITY_BOUNDARIES**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A05/B01–B05/C01–C05/D01–D05 actual provider calls / spend: **0 / USD 0**
+- A01–A05/B01–B05/C01–C05/D01–D05/E01–E02 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **E01**, then continue through the dependency-safe queue
+Work should continue at **E03**, then continue through the dependency-safe queue
 without asking for a new decision after every package.

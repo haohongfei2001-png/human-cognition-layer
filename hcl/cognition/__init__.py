@@ -41,3 +41,6 @@ from .strategic_communication import StrategicCommunication, prepare_strategic_c
 from .misunderstanding import MisunderstandingResult, prepare_misunderstanding
 
 from .joint_plan import JointPlanResult, prepare_joint_plan
+
+from .relationships import RelationshipResult, prepare_relationship
+from .relational_conflict import RelationalConflict, prepare_relational_conflict
