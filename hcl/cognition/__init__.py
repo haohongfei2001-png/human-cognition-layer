@@ -4,7 +4,7 @@ from .workspace import CognitionWorkspace, OperationResult
 
 __all__ = ['Claim', 'ClaimKind', 'Dependency', 'EvidenceCore', 'Interpretation',
            'Scope', 'SourceSpan', 'CognitionWorkspace', 'OperationResult',
-           'AuthorizedText', 'SemanticResult', 'prepare_semantics', 'PositionAssessment', 'assess_positions', 'RetainedResult', 'prepare_retained', 'answer_retained', 'Attitude', 'MentalProposition', 'EpistemicBundle', 'prepare_epistemic', 'CommunicationScene', 'CommunicationView']
+           'AuthorizedText', 'SemanticResult', 'prepare_semantics', 'PositionAssessment', 'assess_positions', 'RetainedResult', 'prepare_retained', 'answer_retained', 'Attitude', 'MentalProposition', 'EpistemicBundle', 'prepare_epistemic', 'CommunicationScene', 'CommunicationView', 'RevisionTimeline', 'RevisionSnapshot', 'SourceRecord']
 
 from .semantic import AuthorizedText, SemanticResult, prepare_semantics
 
@@ -15,3 +15,5 @@ from .retained import RetainedResult, prepare_retained, answer_retained
 from .epistemic import Attitude, MentalProposition, EpistemicBundle, prepare_epistemic
 
 from .communication import CommunicationScene, CommunicationView
+
+from .revision_time import RevisionTimeline, RevisionSnapshot, SourceRecord

@@ -2,7 +2,7 @@
 
 HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息、信念、视角和有来源的心理证据。**基础模型可以直接做好时，直接回答。** 简单提示足够时不调用复杂机制；精确计算采用通用工具；专门认知机制只保留得到增量证据支持的部分。
 
-当前阶段：**HCL Long-Horizon Capability Growth — Wave B**。A01–A05 共享证据、普通语义入口、解释修订和保留能力垂直整合已通过正确性验证；B01 已实现有作用域的高阶信念归因；B02 已实现三人差异化交流/接触视图；当前唯一 `NEXT_READY` 为 **B03 character revision versus analyst revision**。POST-CG05 review 和全部历史 evidence disposition 保持原分类；EG01-A 的通用 semantic/native-entry 工作吸收到 Wave A，independent qualification 与 serious efficacy validation 后移到 G-ARCH 之后。唯一实时状态见 [STATUS.md](STATUS.md)，完整长期架构与 41 包路线见 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)，live 队列见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
+当前阶段：**HCL Long-Horizon Capability Growth — Wave B**。A01–A05 共享证据、普通语义入口、解释修订和保留能力垂直整合已通过正确性验证；B01 已实现有作用域的高阶信念归因；B02 已实现三人差异化交流/接触视图；B03 已区分人物修订与分析者纠正旧记录；当前唯一 `NEXT_READY` 为 **B04 correlated reports and bounded depth**。POST-CG05 review 和全部历史 evidence disposition 保持原分类；EG01-A 的通用 semantic/native-entry 工作吸收到 Wave A，independent qualification 与 serious efficacy validation 后移到 G-ARCH 之后。唯一实时状态见 [STATUS.md](STATUS.md)，完整长期架构与 41 包路线见 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)，live 队列见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
 
 - [普通人物问题与叙事入口](docs/HCL_V1_PERSON_QUESTION.md)：有来源、时间、访问与局部修订边界；单次回答，默认零提取调用。
 - [夜间 source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)：实际能力变化、证据限制、两个 deferred 冻结包。
@@ -129,3 +129,5 @@ authorized by this policy change.
 [B01 高阶认知对象](docs/HCL_WAVE_B01.md)：区别人物对他人信念的归因与对方自己的表态，保留内外层否定、听闻/理解/知识主张及私人信念假设的边界。
 
 [B02 交流与信息路径](docs/HCL_WAVE_B02.md)：公开/定向发送不等于收到，收到不等于理解或相信；提取前选择可见文本，保留迟到接触与早期快照的区别。
+
+[B03 修订与获知时间](docs/HCL_WAVE_B03.md)：后来纠正旧记录可修订当前对过去的解释，但不污染当时可得的证据；人物明确修订仍需同一人物的早期支持。

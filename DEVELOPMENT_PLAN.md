@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVE A COMPLETE / WAVE B / B01–B02 CORRECTNESS_VERIFIED / NEXT_READY=B03**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVE A COMPLETE / WAVE B / B01–B03 CORRECTNESS_VERIFIED / NEXT_READY=B04**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -204,12 +204,17 @@ receipt handling, availability/addressing separation, pre-extraction projection
 and hidden-content non-interference. Twelve targeted tests plus full regression;
 see `docs/HCL_WAVE_B02.md`.
 
-**B03 — NEXT_READY:** character revision versus analyst revision; later evidence
+**B03 — CORRECTNESS_VERIFIED:** character revision versus analyst revision; later evidence
 can correct the current interpretation of the past without changing what was
 available in an earlier knowledge snapshot. Preserve challenges, acceptance,
 rejection and supported alternatives distinctly.
 
-Then B04 correlated reports, conflicts and bounded depth →
+B03 delivered bitemporal source corrections, explicitly anchored character revision,
+challenge/acceptance/rejection handling and ordinary-dialogue snapshots with actual
+dependency receipts. Fourteen targeted checks plus full regression; see
+`docs/HCL_WAVE_B03.md`.
+
+**B04 — NEXT_READY:** correlated reports, conflicts and bounded depth →
 B05 ordinary-input integration and local revision. Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
 
@@ -369,12 +374,12 @@ defect is.
 
 - Current wave: **Wave B — Dynamic Epistemic Cognition**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: B03_CHARACTER_REVISION_VERSUS_ANALYST_REVISION**
+- **NEXT_READY: B04_CORRELATED_REPORTS_AND_BOUNDED_DEPTH**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A05/B01–B02 actual provider calls / spend: **0 / USD 0**
+- A01–A05/B01–B03 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **B03**, then continue through the dependency-safe queue
+Work should continue at **B04**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
