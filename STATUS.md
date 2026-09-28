@@ -147,7 +147,7 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**NIGHT-INTEGRATION-04 — lossless composed-source pooling**
+**NIGHT-FREEZE-COMPATIBILITY — dormant frozen execution repair**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
@@ -362,3 +362,22 @@ main and frozen-runtime checkouts, then continue source-validated preparation an
 composition of retained v0.6 belief/perspective. This is the unique next existing-
 capability integration path; no third candidate or new paid validation. Night
 provider calls/spend remain 0/USD0, LongMemEval sealed, no owner-only blocker.
+
+
+**NIGHT-INTEGRATION-04 — exact-head/main CERT PASS.** PR #142 head d0922bb,
+run36440860812; main1482c876924bad226d37c5f901241ee743c5c345,
+run36441173090. Both212 v1 +176 historical =388 PASS, matching runtime digest;
+all six groups PASS. [Receipt](reports/HCL_NIGHT_SOURCE_POOL_CERTIFICATION.json).
+
+**NIGHT-FREEZE-COMPATIBILITY — dormant execution repair.** CG04 control/main
+and actual frozen execution checkouts are explicitly separated; a future grant
+must bind exact certified runtime018afbc/package0ffcfdf and no migration occurs.
+All source/gold/prompts/scorer/arms/treatment/helpers are unchanged. Original
+preflight executes at the frozen checkout. Grant0/baseUNAUTHORIZED/no trigger,
+no dispatch/call. Executed guard tests reject default budget, latest-runtime
+replacement, retry and missing unique trigger. This preserves reproducibility,
+not a new capability delta or outcome. Immediately next implementation is source-
+validated ordinary belief preparation/composition using RETAIN v0.6, without
+exposure-to-belief or reported-belief-to-knowledge/world truth promotion.
+Night remains ongoing, two pending candidates only, calls/spend0/USD0,
+LongMemEval sealed, no owner-only development blocker.
