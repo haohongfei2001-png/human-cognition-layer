@@ -180,11 +180,12 @@ class DeepSeekProvider:
 
 
 class BudgetLedger:
-    def __init__(self, package):
+    def __init__(self, package, on_update=None):
         self.package = package
         self.calls = 0
         self.cost_usd = 0.0
         self.attempts = []
+        self.on_update = on_update
 
     def call(self, provider, messages):
         # UTF-8 bytes upper-bound token count for this English-only package.
@@ -201,8 +202,10 @@ class BudgetLedger:
         self.calls += 1
         config = dict(self.package['provider_request'], model=self.package['model'])
         attempt = {'messages': messages, 'max_output_tokens': self.package['output_tokens_per_call_max'],
-                   'provider_request': config}
+                   'provider_request': config, 'pending_reservation_usd': reserve}
         self.attempts.append(attempt)
+        if self.on_update is not None:
+            self.on_update(self)
         try:
             result = provider(messages, self.package['output_tokens_per_call_max'], config)
             if (result['model'] not in (self.package['model'], self.package['model_version']) or
@@ -211,13 +214,20 @@ class BudgetLedger:
                 result['cost_usd'] < 0 or result['cost_usd'] > reserve or
                 not isinstance(result['raw'], str)):
                 raise ValueError('provider contract or cap violation')
-            attempt['result'] = result
-            self.cost_usd += result['cost_usd']
-            return result
-        except Exception:
+        except Exception as exc:
             self.cost_usd += reserve  # failure consumes full reservation
+            attempt.pop('pending_reservation_usd')
             attempt['failure_reservation_usd'] = reserve
+            attempt['failure_type'] = type(exc).__name__
+            if self.on_update is not None:
+                self.on_update(self)
             raise
+        attempt.pop('pending_reservation_usd')
+        attempt['result'] = result
+        self.cost_usd += result['cost_usd']
+        if self.on_update is not None:
+            self.on_update(self)
+        return result
 
 
 def score_output(raw, case):
@@ -238,11 +248,16 @@ def score_output(raw, case):
                 'source_first_human_audit_required': True}
 
 
-def run_with_provider(provider, package=None):
+def run_with_provider(provider, package=None, on_update=None):
     """Execute only when an owner-authorized caller injects a paid adapter."""
     package = package or load_package()
-    ledger = BudgetLedger(package)
     rows = []
+    def checkpoint(ledger):
+        if on_update is not None:
+            on_update({'rows': rows, 'calls': ledger.calls,
+                       'cost_usd': ledger.cost_usd, 'attempts': ledger.attempts,
+                       'scope': 'DEVELOPMENT_NOT_FRESH_HOLDOUT'})
+    ledger = BudgetLedger(package, on_update=checkpoint)
     for case in package['cases']:
         query = task_query(case)
         def semantic_preparer(payload):
@@ -259,5 +274,6 @@ def run_with_provider(provider, package=None):
                          'score': score_output(response['raw'], case),
                          'preparation_receipt': prepared.preparation_receipt if arm == 'H' else None,
                          'final_messages': messages})
+            checkpoint(ledger)
     return {'rows': rows, 'calls': ledger.calls, 'cost_usd': ledger.cost_usd,
             'attempts': ledger.attempts, 'scope': 'DEVELOPMENT_NOT_FRESH_HOLDOUT'}

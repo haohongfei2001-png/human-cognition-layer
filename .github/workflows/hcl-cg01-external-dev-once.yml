@@ -1,0 +1,52 @@
+name: HCL CG-01 External Development Once
+on:
+  push:
+    branches: [main]
+    paths: [".github/HCL_CG01_EXTERNAL_DEV_TRIGGER"]
+permissions:
+  contents: read
+concurrency:
+  group: hcl-cg01-external-dev-once
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      HCL_CG01_AUTHORIZED_CAP_USD: "0.75"
+      HCL_CG01_RUN_ONCE_TOKEN: HCL_CG01_EXTERNAL_DEV_20260928_ONCE
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify unique trigger and owner grant
+        run: |
+          test "$GITHUB_RUN_ATTEMPT" = "1"
+          test "$(git show -s --format=%P HEAD)" = "${{ github.event.before }}"
+          test "$(cat .github/HCL_CG01_EXTERNAL_DEV_TRIGGER)" = "${HCL_CG01_RUN_ONCE_TOKEN}|${{ github.event.before }}"
+          test "$(git diff --diff-filter=A --name-only '${{ github.event.before }}' "$GITHUB_SHA")" = ".github/HCL_CG01_EXTERNAL_DEV_TRIGGER"
+          test "$(git diff --name-only '${{ github.event.before }}' "$GITHUB_SHA")" = ".github/HCL_CG01_EXTERNAL_DEV_TRIGGER"
+          if git log --format=%H '${{ github.event.before }}' -- .github/HCL_CG01_EXTERNAL_DEV_TRIGGER | grep -q .; then exit 1; fi
+          test "$HCL_CG01_AUTHORIZED_CAP_USD" = "0.75"
+          test -n "$DEEPSEEK_API_KEY"
+      - run: python -m pip install 'pandas>=2.2,<3' 'openai==2.14.0' 'z3-solver==4.15.4.0'
+      - name: Pin source and run provider-free preflight
+        run: |
+          mkdir -p .cache/cg01
+          curl --fail --location --retry 0 'https://www.gutenberg.org/cache/epub/10483/pg10483.txt' -o .cache/cg01/source.txt
+          echo '14eef73227e014591aff4bf6bc217e6d030fa6daaf429742c0f6501172f5bb8e  .cache/cg01/source.txt' | sha256sum -c -
+          python -m scripts.run_cg01_external_once --source-file .cache/cg01/source.txt --out artifacts/hcl-cg01-external --validate-only
+          python -m unittest -v tests.test_v1_cg01_package
+      - name: Execute one bounded comparison
+        run: python -m scripts.run_cg01_external_once --source-file .cache/cg01/source.txt --out artifacts/hcl-cg01-external
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-cg01-external-${{ github.run_id }}
+          path: artifacts/hcl-cg01-external/
+          if-no-files-found: warn
+          retention-days: 90

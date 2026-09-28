@@ -56,12 +56,12 @@ The previous `HCL_V1_INTEGRATED_SOURCE_QUALIFICATION` remains a useful **externa
 
 The bounded C/P/G/H/H-new external development package is frozen. Do not make paid calls without separate owner authorization.
 
-All provider-free CG-01 implementation, regression, source/package, scorer, ablation and metering work is complete. The sole next step is a separately authorized paid external development comparison. The frozen handoff is: two story families / four source-audit-exposed cases from Project Gutenberg eBook 10483 (source SHA256 `14eef73227e014591aff4bf6bc217e6d030fa6daaf429742c0f6501172f5bb8e`, catalog public domain in the USA); DeepSeek API `deepseek-v4-pro`, non-thinking JSON; C/P/G/H/H-new; 4 preparation + 20 answer calls maximum; 16,000 input and 2,000 output tokens per call; USD **0.75 hard cap** using peak all-cache-miss pricing; deterministic status/quote checks plus masked source-first semantic audit. The expected evidence value is to falsify unsupported explanation claims and test whether any H gain over P/G disappears in H-new. Four cases cannot establish broad efficacy. No paid call is authorized or executed.
+All provider-free CG-01 implementation, regression, source/package, scorer, ablation and metering work is complete. The sole next step is the owner-authorized paid external development comparison. The frozen handoff is: two story families / four source-audit-exposed cases from Project Gutenberg eBook 10483 (source SHA256 `14eef73227e014591aff4bf6bc217e6d030fa6daaf429742c0f6501172f5bb8e`, catalog public domain in the USA); DeepSeek API `deepseek-v4-pro`, non-thinking JSON; C/P/G/H/H-new; 4 preparation + 20 answer calls maximum; 16,000 input and 2,000 output tokens per call; USD **0.75 hard cap** using peak all-cache-miss pricing; deterministic status/quote checks plus masked source-first semantic audit. The expected evidence value is to falsify unsupported explanation claims and test whether any H gain over P/G disappears in H-new. Four cases cannot establish broad efficacy. No paid call has yet been executed.
 
 The current engineering milestone is:
 
-**HCL_CG01_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION**
+**HCL_CG01_EXTERNAL_VALIDATION_AUTHORIZED_EXECUTION_PENDING**
 
-Owner action required: approve or reject the specific USD 0.75 maximum external development package above. Historical budgets do not transfer. Do not execute a paid provider call without separate authorization.
+Owner approval for this exact USD 0.75 package was received on 2026-09-28. The one-time cloud workflow and durable receipt are being prepared; no provider call has yet been made. Historical budgets do not transfer.
 
 Leaderboard selection is explicitly deferred until the maturity gate in `DEVELOPMENT_PLAN.md` is met. Provider spend this round: **USD 0**. LongMemEval remains fully sealed/deprioritized.
