@@ -657,3 +657,15 @@ package must implement source-validated ordinary belief preparation/composition
 for RETAIN v0.6, with actor/source/time/access and uncertainty boundaries and no
 new capability candidate, new provider API or paid call. Do not add another
 validation-only package before that implementation.
+
+
+NIGHT-FREEZE-COMPATIBILITY certified on PR143:390 tests, both applicable groups
+PASS, grant0/no trigger. NIGHT-INTEGRATION-05 implements source-bound ordinary
+preparation into RETAIN v0.6 and real belief/concept/preference composition. New
+source/actor/time/access/revision checks preserve uncertainty and block exposure-
+to-acceptance, indirect-to-private and belief-to-truth promotion; all frozen default
+inputs stay identical. Certify exact head/main, then implement source-scoped
+comparison of expressed belief and existing local concept criteria. Explain a
+bounded mismatch without automatically concluding the belief is false, the local
+meaning is shared, or any moral premise is true. Keep only CG04/05 pending; zero
+new paid run or third module, no benchmark/source search or owner gate.

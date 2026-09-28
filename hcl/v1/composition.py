@@ -37,9 +37,10 @@ def _operation(plan):
     active = [name for name, yes in (
         ('responsibility', plan.responsibility_structure),
         ('preferences', plan.contextual_preference),
+        ('belief', plan.belief_preparation),
         ('concepts', plan.concept_interpretation)) if yes]
     if len(active) != 1:
-        raise ValueError('composition requires explicit existing CG03/04/05 operations')
+        raise ValueError('composition requires explicit retained belief or existing CG03/04/05 operations')
     return active[0]
 
 

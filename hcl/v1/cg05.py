@@ -289,6 +289,14 @@ def prepare_concept_narrative(narrative, actor_id, context, term, item):
     try:
         for i, line in enumerate(lines, 1):
             eid = events[i - 1].event_id
+            from .belief_preparation import decode_belief_source
+            try:
+                decode_belief_source(line)
+            except ValueError:
+                pass
+            else:
+                diagnostics.append(dict(line=i, status='BELIEF_NOT_CONCEPT_DEFINITION'))
+                continue
             # A context condition belongs to CG04, not to an item's concept
             # properties or to a fictional speaker named Narrator.
             if _PREFERENCE_CONDITION.fullmatch(line):
