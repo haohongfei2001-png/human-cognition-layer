@@ -147,7 +147,7 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**NIGHT-INTEGRATION-06 — source-scoped belief/local-concept comparison**
+**NIGHT-INTEGRATION-07 — ordinary question entrypoint into existing cognition**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
@@ -420,3 +420,24 @@ question entrypoint that selects existing belief/concept preparation and compose
 comparison from explicit actor/context/item/term question semantics, without
 caller-entered mental state, extra extraction or an added candidate. Ambiguous
 questions must refuse structured analysis and preserve authorized reader source.
+
+
+**NIGHT-INTEGRATION-06 — exact-head/main CERT PASS.** PR145 headbbe49e7,
+run36444353205; mainb29bb01a1c64c06352032bc3480c0ddb6f99e3b8,
+run36444505097. Both237 v1 +176 historical =413 PASS, matching runtime digest;
+both applicable groups PASS. [Receipt](reports/HCL_NIGHT_COMPARISON_CERTIFICATION.json).
+
+**NIGHT-INTEGRATION-07 — IMPLEMENTED; correctness certification pending.**
+CAPABILITY_DELTA: ordinary explicit person/context questions select retained
+belief and existing local-concept preparation/comparison, without caller-entered
+correct mental state or operation flags. Source alone supplies belief/meaning;
+unsupported questions refuse structured analysis, preserve authorized reader
+source only, and never transfer it into a private fallback. Bounded English/
+Chinese task grammar, request-local state, one final answer/zero extraction calls.
+Twelve new tests; all frozen default inputs unchanged. CG04/05 are the only two
+IMPLEMENTED_UNVALIDATED deferred candidates, calls/spend tonight0/USD0,
+LongMemEval SEALED. After exact-head/main CI the unique next implementation is
+source-order snapshot support for these ordinary questions, preserving what was
+supported before later belief/meaning revisions or later exposure. Explicit
+statement order is not a calendar-time or real receipt claim. No third candidate,
+new provider call, benchmark/source hunt or owner gate.

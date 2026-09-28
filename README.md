@@ -95,3 +95,5 @@ preserved. The next implementation package is
 - [组合来源池](docs/HCL_V1_COMPOSED_SOURCE_POOL.md)：来源投影后只压缩重复存储，保持每项操作的 access 链接；更紧预算下仍保留完整检查。
 
 - [普通文本接入已 RETAIN 的 belief/perspective](docs/HCL_V1_BELIEF_PREPARATION.md)：区分明确自述、间接归因、角色不确定和信息接触，并与已有能力合成一次回答输入；未新增外部效用证据。
+
+- [普通问题入口](docs/HCL_V1_PERSON_QUESTION.md)：明确的中英文问题选择已有 belief／词义准备与来源比较，不需手工输入正确心理状态；含糊任务保留为未决。
