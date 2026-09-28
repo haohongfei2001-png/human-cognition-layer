@@ -549,3 +549,10 @@ Certify provider-free on exact head and main, then freeze one fair treatment-
 presence package. No benchmark/source hunt, ontology expansion or new paid
 experiment is part of implementation. Stop for a new owner grant only when
 paid validation is the sole remaining action; all previous grants remain closed.
+
+CG04-A–D implementation is now present; current milestone is **CG04-CERT**.
+The executable operation checks source/actor/role/context, accessible conditions,
+explicit scope-local revisions and unresolved conflicts. The narrow ordinary
+English prose grammar requires no gold or hand-entered private value state.
+See [implementation](docs/HCL_CG04_IMPLEMENTATION.md); certify exact head/main
+before freezing CG04-E. No paid execution is authorized.

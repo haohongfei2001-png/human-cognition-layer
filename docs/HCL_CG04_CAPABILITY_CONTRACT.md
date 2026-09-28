@@ -1,6 +1,6 @@
 # HCL-CG-04 — Contextual Value Conflict and Preference
 
-Status: **SELECTED FROM CANONICAL POOL; CG04-A NEXT; PROVIDER-FREE ONLY**
+Status: **CG04-A–D IMPLEMENTED; CG04-CERT NEXT; PROVIDER-FREE ONLY**
 
 ## User-visible capability delta
 
@@ -40,6 +40,8 @@ the same scope remain a conflict, not a reason to invent a hidden priority.
   the same actor/role/context, and later source time. Preserve other scopes.
 - No inferred preference, transitive global ranking, majority vote or automatic
   moral winner. Uncompared alternatives stay unresolved.
+
+Implementation and bounded grammar: [HCL_CG04_IMPLEMENTATION.md](HCL_CG04_IMPLEMENTATION.md).
 
 ## Canonical execution order
 

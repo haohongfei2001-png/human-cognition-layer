@@ -69,12 +69,15 @@ class CognitionContext:
     preparation: dict = field(default_factory=dict)
     social: dict = field(default_factory=dict)
     responsibility: dict = field(default_factory=dict)
+    preferences: dict = field(default_factory=dict)
 
     def as_dict(self):
         row = asdict(self)
         # Preserve the sealed CG-02 message contract for unrelated tasks.
         if not row['responsibility']:
             del row['responsibility']
+        if not row['preferences']:
+            del row['preferences']
         return row
 
     def serialized(self):
@@ -108,4 +111,14 @@ RESPONSIBILITY_ANSWER_POLICY = (
     'normative truth. Until source/time/access factors and premises have been '
     'checked, do not conclude responsibility, blame, liability or intention '
     'from an action or outcome. Say which checks are still missing.'
+)
+
+PREFERENCE_ANSWER_POLICY = (
+    'Preferences are explicit source expressions local to actor, role, context '
+    'and condition, not lasting private values or moral truth. The requested '
+    'role/context is a caller scenario, not an observed role. Preserve unknown '
+    'conditions, third-party attribution and unresolved conflict. Revise only '
+    'an explicit same-scope reference. Never infer global weights, a transitive '
+    'ranking, a moral winner, or values from a choice. Unchecked context '
+    'requires source/time/access/condition and revision checks before use.'
 )
