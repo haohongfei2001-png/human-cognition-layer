@@ -1,6 +1,6 @@
 # HCL-CG-03 Capability Contract — Responsibility-Structure Explanation
 
-Status: **ACTIVE / CG03-A IMPLEMENTED; CG03-B PROVIDER-FREE IMPLEMENTATION NEXT**
+Status: **ACTIVE / CG03-A–D PROVIDER-FREE IMPLEMENTED; CG03-CERT NEXT**
 
 This package is the next candidate in `DEVELOPMENT_PLAN.md` section 8. Its
 purpose is a real, user-visible reasoning distinction: given authorized source
@@ -33,13 +33,18 @@ conditional computations from v0.9 into observed world truth.
    requested view. It marks all factors and the conclusion unresolved.
 2. **CG03-B:** Execute source/time/access checks for causal contribution,
    knowledge, foreseeability, control and stated intention. Preserve unknown
-   and competing evidence; do not infer intent from outcome.
+   and competing evidence; do not infer intent from outcome. Implemented with
+   exact source quotes, action-time claims, access projection and explicit
+   attribution and contradiction receipts.
 3. **CG03-C:** Evaluate only the supplied normative premises conditionally.
    Distinguish supported factual factors from a premise-dependent responsibility
    conclusion, including counterexamples and unresolved prerequisites.
+   Implemented with typed requirements scoped to premise source IDs; no
+   universal moral or legal verdict is emitted.
 4. **CG03-D:** Add a conservative ordinary-text path with source anchoring,
    actual prepared state and final messages in debug receipts; failed parsing
-   closes to uncertainty.
+   closes to uncertainty. Implemented as a bounded ordered-prose grammar with
+   no provider extraction and an explicit treatment ablation.
 5. **CG03-CERT:** Provider-free positive, negative, perspective/privacy and
    historical regression certification on exact PR head and merged main.
 6. **CG03-E:** Only after CERT, freeze a small C/P/G/H/H-new development package

@@ -31,7 +31,8 @@ class HCLCognitionLayer:
     Without an injected runtime each request gets isolated transient state.
     """
     def __init__(self, base_model, *, intentions=None, affects=None, router=None,
-                 semantic_preparer=None, social_checker_enabled=True):
+                 semantic_preparer=None, social_checker_enabled=True,
+                 responsibility_checker_enabled=True):
         if affects is not None:
             if intentions is not None and affects.intentions is not intentions:
                 raise ValueError('affect and intention runtimes must share state')
@@ -44,6 +45,9 @@ class HCLCognitionLayer:
         if type(social_checker_enabled) is not bool:
             raise ValueError('social checker switch must be boolean')
         self.social_checker_enabled = social_checker_enabled
+        if type(responsibility_checker_enabled) is not bool:
+            raise ValueError('responsibility checker switch must be boolean')
+        self.responsibility_checker_enabled = responsibility_checker_enabled
 
     def prepare(self, request: CognitionRequest):
         plan = self.router.plan(request)
@@ -58,6 +62,7 @@ class HCLCognitionLayer:
         from hcl.v06 import SYSTEM_VIEWER
         from .cg01 import check_explanations
         from .cg02 import check_social_exchange
+        from .cg03 import check_responsibility, prepare_responsibility_narrative
         from .narrative import SemanticPreparation, prepare_narrative
         from .social_narrative import SocialPreparation, prepare_social_narrative
         from .tools import execute_tool
@@ -193,7 +198,27 @@ class HCLCognitionLayer:
                     except Exception:
                         preparation_audit.update(failure='social_semantic_preparer_error',
                             extraction_provider_calls=None, extraction_spend_usd=None, output=None)
-        input_evidence = request.evidence + parsed_events + social_events
+        responsibility_case = request.responsibility_case
+        responsibility_events = ()
+        if request.responsibility_analysis:
+            prepared_responsibility = prepare_responsibility_narrative(
+                request.narrative, plan.target_actor, request.responsibility_premises)
+            responsibility_events = prepared_responsibility.events
+            responsibility_case = prepared_responsibility.case
+            preparation_audit.update(method='bounded_deterministic_responsibility_narrative',
+                failure=prepared_responsibility.failure,
+                input={'query': request.query, 'narrative': request.narrative,
+                    'target_actor': plan.target_actor,
+                    'premises': [{'premise_id': p.premise_id, 'text': p.text,
+                        'requirements': [{'factor': r.factor.value, 'value': r.value}
+                                         for r in p.requirements]}
+                                 for p in request.responsibility_premises]},
+                output={'event_ids': [e.event_id for e in responsibility_events],
+                    'claim_ids': [c.claim_id for c in responsibility_case.claims]
+                        if responsibility_case else [],
+                    'source_span_diagnostics': list(prepared_responsibility.source_span_diagnostics)},
+                time_basis='line_order_not_calendar_time')
+        input_evidence = request.evidence + parsed_events + social_events + responsibility_events
         if plan.explanation and len(input_evidence) > 24:
             raise ValueError('CG-01 accepts at most 24 evidence events')
         if plan.social_commitment and len(input_evidence) > 32:
@@ -302,30 +327,40 @@ class HCLCognitionLayer:
                 if not context.social['checked_act_count'] or not context.social['checked_expectation_count']:
                     context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT',
                         'reason': 'no source-grounded social act and reported expectation both checked'})
-            if plan.responsibility_structure:
-                case = request.responsibility_case
+            if plan.responsibility_structure and responsibility_case:
+                case = responsibility_case
                 visible_ids = {e.event_id for e in visible}
                 required_ids = {case.action_event_id, case.outcome_event_id}
                 required_ids.update(eid for p in case.premises for eid in p.basis_event_ids)
                 if required_ids <= visible_ids:
-                    context.responsibility = {
-                        'status': 'INPUT_VALIDATED_FACTORS_UNCHECKED',
+                    case_input = {
                         'focal_actor': target,
-                        'actor_ids': list(case.actor_ids),
+                        'actor_ids': [a for a in case.actor_ids if a == target or
+                                      any(e.actor_id == a for e in visible)],
                         'action_event_id': case.action_event_id,
                         'outcome_event_id': case.outcome_event_id,
                         'premises': [{'premise_id': p.premise_id, 'text': p.text,
                                       'basis_event_ids': list(p.basis_event_ids),
+                                      'requirements': [{'factor': r.factor.value,
+                                                        'value': r.value} for r in p.requirements],
                                       'authority': 'CALLER_SUPPLIED_CONDITIONAL'}
                                      for p in case.premises],
-                        'unchecked_factors': ['causal_contribution', 'knowledge',
-                            'foreseeability', 'control', 'stated_intention'],
-                        'conclusion': 'UNRESOLVED',
                     }
+                    context.responsibility = {'case_input': case_input,
+                        'checked': check_responsibility(case, input_evidence,
+                            target_actor=target, mode=plan.perspective_mode.value,
+                            observer_actor=request.observer_actor,
+                            event_time=request.event_time,
+                            knowledge_cutoff=request.knowledge_cutoff)
+                            if self.responsibility_checker_enabled else {}}
                 else:
                     context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT',
                         'capability': 'cg03_responsibility_structure',
                         'reason': 'action, outcome or premise source absent from bounded view'})
+            elif plan.responsibility_structure:
+                context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT',
+                    'capability': 'cg03_responsibility_structure',
+                    'reason': 'ordinary source did not yield one anchored action and outcome'})
         context.evidence = [event_row(e) for e in visible]
         context.provenance = [{'source_event_id': e.event_id, 'source_id': e.source_id,
                                'actor_id': e.actor_id, 'evidence_level': 'SYSTEM_UNKNOWN',
