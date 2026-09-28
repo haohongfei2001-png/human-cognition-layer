@@ -1,6 +1,6 @@
 # HCL-CG-02 Capability Contract
 
-Status: **PLANNED / ACTIVE DEVELOPMENT PACKAGE**
+Status: **PROVIDER-FREE A-D/CERT/E COMPLETE; EXTERNAL OWNER AUTHORIZATION GATE**
 
 Work package: **HCL-CG-02 — Social Commitment, Expectation and Misunderstanding**
 
