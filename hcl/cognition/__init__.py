@@ -3,4 +3,9 @@ from .core import Claim, ClaimKind, Dependency, EvidenceCore, Interpretation, Sc
 from .workspace import CognitionWorkspace, OperationResult
 
 __all__ = ['Claim', 'ClaimKind', 'Dependency', 'EvidenceCore', 'Interpretation',
-           'Scope', 'SourceSpan', 'CognitionWorkspace', 'OperationResult']
+           'Scope', 'SourceSpan', 'CognitionWorkspace', 'OperationResult',
+           'AuthorizedText', 'SemanticResult', 'prepare_semantics', 'PositionAssessment', 'assess_positions']
+
+from .semantic import AuthorizedText, SemanticResult, prepare_semantics
+
+from .positions import PositionAssessment, assess_positions

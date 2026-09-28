@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVE A / A01 CORRECTNESS_VERIFIED / NEXT_READY=A02**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVE A / A01–A03 CORRECTNESS_VERIFIED / NEXT_READY=A04**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -136,22 +136,31 @@ Delivered: `hcl/cognition/`, retained-operation source revision, positive witnes
 14 targeted boundary/composition tests and full historical regression. A01 remains
 UNTESTED for efficacy; see `docs/HCL_WAVE_A01.md`.
 
-### A02 — Unified ordinary semantic-preparation entry — NEXT_READY
+### A02 — Unified ordinary semantic-preparation entry — CORRECTNESS_VERIFIED
 
 **CAPABILITY_DELTA:** ordinary text can produce source-anchored candidate people,
 events, propositions, references and relations for the shared core without the
 user choosing internal operation flags or supplying the correct mental state.
 
-This absorbs the generic native-task/source actor/time/access preparation part of
-EG01-A. It must not add DREAM-, benchmark-, case-ID- or gold-specific rules.
+Delivered: `prepare_semantics` / `CognitionWorkspace.prepare_semantic` provides
+source-local entity, speech-event, proposition, reference and relation candidates;
+explicit first-person binding, source filtering before backend invocation and
+separate structure/quote/semantic diagnostics. The replaceable backend is tested
+with replay; no live efficacy claim. Generic entry work from EG01-A is absorbed
+without benchmark/case/gold-specific logic.
 
-### A03 — Support, challenge, alternatives and invalidation propagation
+### A03 — Support, challenge, alternatives and invalidation propagation — CORRECTNESS_VERIFIED
 
 **CAPABILITY_DELTA:** HCL can revise its own interpretations locally when supporting
 evidence is challenged, withdrawn or replaced, without rewriting source facts or
 unrelated state.
 
-### A04 — Retained-capability adapters into the shared core
+Delivered: rooted challenges, clean alternative support, analyst replacement
+records, ordinary expressed-position comparison and actual final support/challenge
+closure. Eight A03 tests plus fourteen A02 tests cover the five engineering
+obligations; see `docs/HCL_WAVE_A02_A03.md`.
+
+### A04 — Retained-capability adapters into the shared core — NEXT_READY
 
 **CAPABILITY_DELTA:** retained v0.6 perspective/belief and CG03/04/05 operations
 can consume the same ordinary-source semantic material and preserve their distinct
@@ -322,12 +331,12 @@ defect is.
 
 - Current wave: **Wave A — Unified Core and Ordinary Input**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: A02_UNIFIED_ORDINARY_SEMANTIC_PREPARATION**
+- **NEXT_READY: A04_RETAINED_CAPABILITY_SHARED_CORE_ADAPTERS**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01 actual provider calls / spend: **0 / USD 0**
+- A01–A03 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **A02**, then continue through the dependency-safe queue
+Work should continue at **A04**, then continue through the dependency-safe queue
 without asking for a new decision after every package.

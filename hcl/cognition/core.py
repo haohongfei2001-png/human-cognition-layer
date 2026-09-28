@@ -128,6 +128,8 @@ class EvidenceCore:
         self.claims = {}
         self.dependencies = {}
         self.interpretations = {}
+        self.challenges = {}
+        self.revisions = []
         self.withdrawn = set()
 
     def _room(self, key):
@@ -198,6 +200,56 @@ class EvidenceCore:
                 return frozenset(live)
             live.update(added)
 
+    def challenge(self, interpretation, evidence):
+        if (self.claims[interpretation].kind != ClaimKind.SYSTEM_INTERPRETATION
+                or evidence not in self.claims
+                or self.claims[interpretation].scope != self.claims[evidence].scope
+                or interpretation == evidence):
+            raise ValueError('same-scope evidence must challenge an interpretation, never overwrite source')
+        self.challenges.setdefault(interpretation, set()).add(evidence)
+
+    def support_statuses(self):
+        """Challenge propagation is skeptical; clean alternative supports survive.
+
+        A live challenge marks a dispute, not a proven negation. No oscillating
+        negation-as-failure: grounded challenge existence is separate from whether
+        its own interpretation is disputed. Mutually challenged readings stay open.
+        """
+        live = self.grounded()
+        attacked = {k for k, evidence in self.challenges.items() if evidence & live}
+        clean = (set(self.spans) - self.withdrawn) & live
+        while True:
+            added = {key for key, groups in self.dependencies.items()
+                if key in live and key not in clean and key not in attacked
+                and any(set(group) <= clean for group in groups)
+                and set(self.interpretations.get(key, Interpretation(key)).required_premises) <= clean}
+            if not added:
+                break
+            clean.update(added)
+        return {key: ('UNSUPPORTED' if key not in live else
+                      'CHALLENGED' if key in attacked else
+                      'DEPENDENCY_CONTESTED' if key not in clean else 'SUPPORT_AVAILABLE')
+                for key in self.claims}
+
+    def replace_interpretation(self, old, new, *, reasons):
+        """Explicit analyst revision, not an event in a person's private mind."""
+        if (not reasons or old == new or any(k not in self.claims for k in (old, new, *reasons))
+                or self.claims[old].kind != ClaimKind.SYSTEM_INTERPRETATION
+                or self.claims[new].kind != ClaimKind.SYSTEM_INTERPRETATION
+                or any(self.claims[k].scope != self.claims[old].scope for k in (new, *reasons))):
+            raise ValueError('scoped supported replacement and revision evidence required')
+        live = self.grounded()
+        if old not in live or new not in live or not set(reasons) <= live:
+            raise ValueError('replacement requires available evidence')
+        # A replacement cannot survive solely on the interpretation it replaces.
+        self.withdrawn.add(old)
+        if new not in self.grounded() or not set(reasons) <= self.grounded():
+            self.withdrawn.remove(old)
+            raise ValueError('replacement or reason depends on retired interpretation')
+        self.revisions.append(dict(old=old, new=new, reasons=tuple(reasons),
+            kind='ANALYST_INTERPRETATION_REVISION_NOT_CHARACTER_CHANGE'))
+        return live - self.grounded()
+
     def withdraw(self, key):
         if key not in self.spans and key not in self.claims:
             raise ValueError('unknown evidence identity')
@@ -207,6 +259,7 @@ class EvidenceCore:
 
     def receipt(self, scope):
         live = self.grounded()
+        statuses = self.support_statuses()
         claims = [c for c in self.claims.values() if c.scope == scope]
         visible = {k for k, span in self.spans.items() if span.permits(scope)}
         visible.update(c.id for c in claims)
@@ -214,7 +267,9 @@ class EvidenceCore:
             spans=[dict(id=k, **asdict(self.spans[k]), active=k in live)
                    for k in sorted(visible & self.spans.keys())],
             claims=[dict(id=c.id, kind=c.kind.value, content=c.content, grounded=c.id in live,
+                support_status=statuses[c.id], challenges=sorted(self.challenges.get(c.id, set()) & visible),
                 supports=[list(s) for s in sorted(self.dependencies[c.id]) if set(s) <= visible],
                 interpretation=asdict(self.interpretations[c.id]) if c.id in self.interpretations else None)
                 for c in sorted(claims, key=lambda c: c.id)],
+            revisions=[r for r in self.revisions if r['old'] in visible and r['new'] in visible],
             grounding_semantics='LIVE_RECORDED_DERIVATION_NOT_TRUTH')
