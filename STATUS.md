@@ -104,16 +104,26 @@ C/P/G/H/H-new inputs](reports/HCL_CG02_EXTERNAL_PACKAGE.json), with
 [protocol and score rule](docs/HCL_CG02_EXTERNAL_DEVELOPMENT_PROTOCOL.md).
 All four H cases passed source, checked-act, checked-expectation, H-state,
 H-new-ablation and final-input-difference gates without provider calls.
-The maximum future experiment would be 20 calls with a proposed USD 0.30 hard
-cap; it has **not** run and its budget is **not** approved.
+
+The provider contract was subsequently corrected before any paid execution:
+CG-02 now reuses the repository's existing `DEEPSEEK_API_KEY`,
+`deepseek-v4-pro` / `DeepSeek-V4-Pro-0813`, thinking disabled and JSON
+response mode. The superseded `gpt-6-sol` / new-`OPENAI_API_KEY` assumption
+must not be executed. No new account, credential or provider is required.
+Using the same repository-frozen conservative DeepSeek peak-price basis as CG-01,
+20 calls at the frozen per-call bounds have a worst-case rated ceiling of
+**USD 0.2517504**, within the unchanged proposed **USD 0.30 hard cap**.
+
+A dormant one-shot DeepSeek runner/workflow is present but keeps its owner grant
+at zero and has no trigger file. It cannot execute until a later explicit owner
+authorization is encoded separately. No CG-02 provider call has run.
 
 The current engineering milestone is:
 
 **HCL_CG02_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION**
 
 Provider-free implementation, certification and package freeze are complete.
-The only remaining CG-02 action is owner authorization of the separately
-proposed paid comparison. Historical budgets do not transfer.
+The only remaining CG-02 action is owner authorization of the **revised existing-DeepSeek frozen package**. The earlier authorization discussion for the superseded OpenAI-provider assumption does not transfer. Historical budgets do not transfer.
 
 Leaderboard selection remains deferred until the maturity gate in
 `DEVELOPMENT_PLAN.md` is met. Historical CG-01 provider charge remains bounded
