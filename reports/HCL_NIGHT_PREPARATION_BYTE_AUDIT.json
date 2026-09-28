@@ -1,0 +1,46 @@
+{
+  "schema": "hcl-night-preparation-byte-audit-v1",
+  "source_class": "HCL_AUTHORED_SYNTHETIC_PROVIDER_FREE_INTEGRATION",
+  "baseline": "CURRENT_SAME_TASK_WITHOUT_PER_STAGE_DEFAULT_ENCODING_ACCESS_POLICY_SHARED_IN_BOTH",
+  "rows": [
+    {
+      "case": "responsibility_preference_concept_reader",
+      "before_complete_input_bytes": 20341,
+      "after_complete_input_bytes": 20000,
+      "decoded_cognition_identical": true,
+      "before_encoding": "hcl-composed-source-pool-v1",
+      "after_encoding": "hcl-composed-source-pool-v2"
+    },
+    {
+      "case": "preference_concept_private",
+      "before_complete_input_bytes": 10532,
+      "after_complete_input_bytes": 10374,
+      "decoded_cognition_identical": true,
+      "before_encoding": "hcl-composed-source-pool-v1",
+      "after_encoding": "hcl-composed-source-pool-v2"
+    },
+    {
+      "case": "belief_concept_reader",
+      "before_complete_input_bytes": 10918,
+      "after_complete_input_bytes": 10760,
+      "decoded_cognition_identical": true,
+      "before_encoding": "hcl-composed-source-pool-v1",
+      "after_encoding": "hcl-composed-source-pool-v2"
+    },
+    {
+      "case": "belief_concept_private",
+      "before_complete_input_bytes": 11352,
+      "after_complete_input_bytes": 11194,
+      "decoded_cognition_identical": true,
+      "before_encoding": "hcl-composed-source-pool-v1",
+      "after_encoding": "hcl-composed-source-pool-v2"
+    }
+  ],
+  "total_before_bytes": 53143,
+  "total_after_bytes": 52328,
+  "reduction_percent": 1.5336,
+  "scope": "SERIALIZED_BYTES_NOT_TOKEN_COST_OR_MODEL_UTILITY",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

@@ -703,3 +703,15 @@ policy/preparation metadata in composed final input losslessly, keeping all
 source/actor/time/access/uncertainty decisions and historical/default frozen inputs.
 CG04/05 are the two pending candidates; no third module, new paid call, owner
 blocking gate, source hunt or leaderboard.
+
+
+NIGHT-INTEGRATION-08 certified on PR147 head/main435 tests, both applicable groups
+PASS. NIGHT-INTEGRATION-09 implements lossless per-stage provider-free preparation
+default encoding and shared access policy, with strict backward decoding and
+budget/byte checks; no cognition/access selection. Certify head/main, then add
+ordinary explicit belief/conditional-responsibility composition using existing
+RETAIN v0.6 and development-only RETAIN CG03 with explicit caller normative
+premises. Belief/received information/outcome must not establish action-time
+knowledge, foreseeability, control, intention or moral truth. Existing source/
+time/access checks and default freezes stay unchanged. No third candidate, new
+paid call, ontology, benchmark/source hunt or blocking owner gate; CG04/05 deferred.

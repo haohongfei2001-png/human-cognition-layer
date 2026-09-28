@@ -109,6 +109,12 @@ ANSWER_POLICY = (
     ' promise-breaking, trust change, relationship status, or blame.'
 )
 
+NARRATIVE_ACCESS_POLICY = (
+    'Access here is an exact narrated exposure claim, not a verified receipt or '
+    'proof of belief/understanding. Only explicitly delivered source text enters the '
+    'character view; unmentioned access stays unknown.'
+)
+
 RESPONSIBILITY_ANSWER_POLICY = (
     'A responsibility case contains caller-supplied premises, not established '
     'normative truth. Until source/time/access factors and premises have been '

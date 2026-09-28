@@ -4,8 +4,8 @@ from datetime import datetime
 import json
 
 from .compact import compact_cognition_context, COMPACT_POLICY
-from .context import ANSWER_POLICY
-from .source_pool import pool_composed_sources, POOL_POLICY
+from .context import ANSWER_POLICY, NARRATIVE_ACCESS_POLICY
+from .source_pool import pool_composed_sources, POOL_POLICY, PREPARATION_POLICY, ENCODING_WITH_PREPARATION
 from .layer import HCLCognitionLayer
 from .router import CognitionRequest, PerspectiveMode
 
@@ -109,7 +109,7 @@ def _compare_belief_concepts(stages, operations):
 
 
 def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, compact_context=True, pool_sources=False,
-                            compare_belief_concepts=False):
+                            compare_belief_concepts=False, pool_preparation=True):
     """Prepare 2–3 existing operations, from a common source, with no model calls."""
     if not isinstance(layer, HCLCognitionLayer):
         raise ValueError('existing cognition layer required')
@@ -119,7 +119,7 @@ def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, 
         not all(isinstance(r, CognitionRequest) for r in requests)):
         raise ValueError('two or three bounded existing operation requests required')
     if (type(max_context_chars) is not int or not 512 <= max_context_chars <= 64000 or
-        any(type(flag) is not bool for flag in (compact_context, pool_sources, compare_belief_concepts))):
+        any(type(flag) is not bool for flag in (compact_context, pool_sources, compare_belief_concepts, pool_preparation))):
         raise ValueError('bounded composition context and explicit encoding required')
     first = requests[0]
     if not first.target_actor or not (first.narrative or first.evidence):
@@ -156,7 +156,7 @@ def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, 
     if compare_belief_concepts:
         state['belief_concept_comparison'] = _compare_belief_concepts(stages, operations)
     if pool_sources:
-        state = pool_composed_sources(state)
+        state = pool_composed_sources(state, preparation_defaults=pool_preparation)
     serialized = json.dumps(state, ensure_ascii=False, sort_keys=True)
     failure = None
     if len(serialized) > max_context_chars:
@@ -166,13 +166,18 @@ def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, 
             uncertainty=[dict(status='SYSTEM_INSUFFICIENT', reason='composition context budget exceeded; narrow the shared source')])
     policies = tuple(dict.fromkeys(p.messages[0]['content'] for p in stages))
     # One policy per actual operation, avoiding multiple copies of shared policy.
-    additions = [p.removeprefix(ANSWER_POLICY).strip() for p in policies]
+    shared_access = any(NARRATIVE_ACCESS_POLICY in p for p in policies)
+    additions = [p.removeprefix(ANSWER_POLICY).replace(NARRATIVE_ACCESS_POLICY, '').strip() for p in policies]
     policy = ANSWER_POLICY + ' ' + ' '.join(a for a in additions if a) + ' ' + COMPOSITION_POLICY
+    if shared_access:
+        policy += ' ' + NARRATIVE_ACCESS_POLICY
     if compact_context:
         # A compact stage may already carry this policy; include it once only.
         policy = policy.replace(COMPACT_POLICY, '').strip() + ' ' + COMPACT_POLICY
     if 'source_pool_encoding' in state:
         policy += ' ' + POOL_POLICY
+    if state.get('source_pool_encoding') == ENCODING_WITH_PREPARATION:
+        policy += ' ' + PREPARATION_POLICY
     if compare_belief_concepts:
         policy += ' ' + COMPARISON_POLICY
     messages = (dict(role='system', content=policy), dict(role='user', content=json.dumps(

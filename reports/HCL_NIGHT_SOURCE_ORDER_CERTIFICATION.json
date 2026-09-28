@@ -1,0 +1,41 @@
+{
+  "schema": "hcl-night-source-order-certification-v1",
+  "pr": 147,
+  "exact_head": {
+    "schema": "hcl-v1-provider-free-certification-v1",
+    "sha": "0ba6f64e02dbafca484d4c4dad8882d9eb29215b",
+    "workflow_event_sha": "001f7f8557442416a4cb582a6e7371002c69635b",
+    "run_id": "36446430437",
+    "event": "pull_request",
+    "counts": {
+      "v1": 259,
+      "historical": 176
+    },
+    "runtime_sha256": "36d9d913cbf423c9dee1ed5dae49ce04fa999e6cbb4e182ee6f1dd516a220f90",
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "scope": "CORRECTNESS_NOT_EXTERNAL_UTILITY",
+    "longmemeval": "SEALED_NOT_IN_TEST_SELECTION"
+  },
+  "exact_main": {
+    "schema": "hcl-v1-provider-free-certification-v1",
+    "sha": "ba0f4803b6e8d0d6c5a242d459748f5c8992c6b4",
+    "workflow_event_sha": "ba0f4803b6e8d0d6c5a242d459748f5c8992c6b4",
+    "run_id": "36446683994",
+    "event": "push",
+    "counts": {
+      "v1": 259,
+      "historical": 176
+    },
+    "runtime_sha256": "36d9d913cbf423c9dee1ed5dae49ce04fa999e6cbb4e182ee6f1dd516a220f90",
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "scope": "CORRECTNESS_NOT_EXTERNAL_UTILITY",
+    "longmemeval": "SEALED_NOT_IN_TEST_SELECTION"
+  },
+  "total_tests_each": 435,
+  "workflow_groups": "BOTH_APPLICABLE_PASS",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
