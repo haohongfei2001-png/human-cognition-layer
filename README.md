@@ -2,11 +2,13 @@
 
 HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息、信念、视角和有来源的心理证据。**基础模型可以直接做好时，直接回答。** 简单提示足够时不调用复杂机制；精确计算采用通用工具；专门认知机制只保留得到增量证据支持的部分。
 
-当前阶段：**HCL Capability Growth；CG-01 已按 SIMPLIFY 结案**。v1 integration foundation 已完成；下一能力工作包按现有计划的优先池确定。唯一实时状态：[STATUS.md](STATUS.md)，长期执行计划见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
+当前阶段：**HCL Capability Growth；CG-02 Social Commitment, Expectation and Misunderstanding 已启动**。CG-01 已按 SIMPLIFY 结案；v1 integration foundation 已完成。唯一实时状态：[STATUS.md](STATUS.md)，长期执行计划见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
 
 - [可执行 capability registry](docs/HCL_V1_CAPABILITY_REGISTRY.md)：核心、可选结构、通用工具、停用研究资产。
 - [Router / context / answer API](docs/HCL_V1_COGNITION_ROUTER.md)：确定性最小路由、有访问和时间边界的上下文、单次底座模型调用。
-- [Capability Growth development plan](DEVELOPMENT_PLAN.md)：真实能力增长优先于外部验证；CG-01 的一次性开发验证和结案见 [报告](reports/HCL_CG01_EXTERNAL_DEVELOPMENT_CLOSURE.md)。
+- [Capability Growth development plan](DEVELOPMENT_PLAN.md)：真实能力增长优先于外部验证；当前工作包为 CG-02。
+- [CG-02 capability contract](docs/HCL_CG02_CAPABILITY_CONTRACT.md)：社会承诺、期待与误解的最小能力边界、阶段和 treatment-presence gate。
+- CG-01 的一次性开发验证和结案见 [报告](reports/HCL_CG01_EXTERNAL_DEVELOPMENT_CLOSURE.md)。
 - [集成评估来源审查与设计](docs/HCL_V1_INTEGRATED_EVALUATION_PROTOCOL.md)：保留为 external-validation backlog；不再阻塞新 capability implementation。
 - `hcl/v1` 不导入 benchmark runner，不自动提取私人心理状态，不调度额外模型提取调用。
 
@@ -49,3 +51,21 @@ failed source-span validation, so H/H-new did not exercise the checker.
 The [closure report](reports/HCL_CG01_EXTERNAL_DEVELOPMENT_CLOSURE.md)
 preserves the distinction between failed end-to-end use and inconclusive
 checker efficacy.
+
+
+## Active capability-growth package
+
+**HCL-CG-02 — Social Commitment, Expectation and Misunderstanding**
+
+CG-02 aims to distinguish what a proposal/request/acceptance/conditional
+commitment actually expressed from what different participants had evidence to
+understand or expect. It reuses v0.6 perspective/access boundaries and must not
+become a trust score, relationship graph, personality model or moral-blame
+classifier.
+
+The canonical scope and execution order are in
+[docs/HCL_CG02_CAPABILITY_CONTRACT.md](docs/HCL_CG02_CAPABILITY_CONTRACT.md) and
+[DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md). No paid CG-02 experiment is
+authorized. Before any future budget request, provider-free preflight must prove
+that H actually executes the CG-02 treatment and H/H-new final inputs differ
+because of it.
