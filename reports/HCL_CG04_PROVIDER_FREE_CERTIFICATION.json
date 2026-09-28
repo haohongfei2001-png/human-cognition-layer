@@ -1,0 +1,42 @@
+{
+  "schema": "hcl-cg04-provider-free-certification-v1",
+  "implementation_pr": 135,
+  "exact_head": {
+    "schema": "hcl-v1-provider-free-certification-v1",
+    "sha": "ca6f36434275b97b9ed15aaba3f1423f33ed8aa2",
+    "workflow_event_sha": "0d3764604e11b1eef3c0a2532d22045f3701a3a1",
+    "run_id": "36430264670",
+    "event": "pull_request",
+    "counts": {
+      "v1": 142,
+      "historical": 176
+    },
+    "runtime_sha256": "b700aaef4a27d6beda7b4abd79b6801d29947583adaa1dc00ca45b3f50ccd006",
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "scope": "CORRECTNESS_NOT_EXTERNAL_UTILITY",
+    "longmemeval": "SEALED_NOT_IN_TEST_SELECTION"
+  },
+  "exact_main": {
+    "schema": "hcl-v1-provider-free-certification-v1",
+    "sha": "88b5cfbefaae51793998a9e2685e11f30a22a241",
+    "workflow_event_sha": "88b5cfbefaae51793998a9e2685e11f30a22a241",
+    "run_id": "36430479680",
+    "event": "push",
+    "counts": {
+      "v1": 142,
+      "historical": 176
+    },
+    "runtime_sha256": "b700aaef4a27d6beda7b4abd79b6801d29947583adaa1dc00ca45b3f50ccd006",
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "scope": "CORRECTNESS_NOT_EXTERNAL_UTILITY",
+    "longmemeval": "SEALED_NOT_IN_TEST_SELECTION"
+  },
+  "total_tests_each": 318,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "scope": "BOUNDED_CORRECTNESS_NOT_EXTERNAL_UTILITY",
+  "implementation_limits": "docs/HCL_CG04_IMPLEMENTATION.md"
+}

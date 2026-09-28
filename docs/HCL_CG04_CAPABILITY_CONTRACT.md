@@ -1,6 +1,6 @@
 # HCL-CG-04 — Contextual Value Conflict and Preference
 
-Status: **CG04-A–D IMPLEMENTED; CG04-CERT NEXT; PROVIDER-FREE ONLY**
+Status: **CG04-A–D/CERT COMPLETE; CG04-E FROZEN; NEW OWNER GRANT REQUIRED**
 
 ## User-visible capability delta
 
@@ -64,3 +64,13 @@ and paid validation is the sole remaining action, stop at
 **HCL_CG04_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION** with a new concrete proposal.
 CG-03's consumed authorization and unused money do not transfer. No new paid
 experiment is authorized; LongMemEval remains sealed.
+
+## Current evidence
+
+PR #135 exact-head and exact-main receipts both record 142 v1 + 176 historical
+provider-free PASS with identical runtime digest. See
+[certification](../reports/HCL_CG04_PROVIDER_FREE_CERTIFICATION.json). CG04-E is
+[frozen](../reports/HCL_CG04_EXTERNAL_PACKAGE.json), with all four treatment
+gates passing and a [prospective protocol](HCL_CG04_EXTERNAL_DEVELOPMENT_PROTOCOL.md).
+No paid call is authorized or executed. This certifies bounded correctness and
+treatment presence, not external utility or broad value understanding.
