@@ -8,7 +8,7 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 - [夜间 source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)：实际能力变化、证据限制、两个 deferred 冻结包。
 - [可执行 capability registry](docs/HCL_V1_CAPABILITY_REGISTRY.md)：核心、可选结构、通用工具、停用研究资产。
 - [Router / context / answer API](docs/HCL_V1_COGNITION_ROUTER.md)：确定性最小路由、有访问和时间边界的上下文、单次底座模型调用。
-- [Capability Growth development plan](DEVELOPMENT_PLAN.md)：真实能力增长优先于外部验证；当前工作包为已有能力集成；CG-04 已 development-only RETAIN；CG-05 同样 development-only RETAIN，两份授权均已关闭。
+- [Long-Horizon Capability Master Plan](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)：canonical 最终 capability architecture、Levels、Waves A–H、41 个 work packages、G-HC/G-ARCH、serious evaluation、cross-model、optimization 与 leaderboard phase。\n- [Live development plan](DEVELOPMENT_PLAN.md)：只保存当前 wave、执行队列、superseded policies 与 `NEXT_READY`。
 - [CG-04 比较协议](docs/HCL_CG04_EXTERNAL_DEVELOPMENT_PROTOCOL.md)：四个合成开发案例、五臂、零重试、USD 0.30 单次授权已消费并关闭；旧预算不转移。
 - [CG-04 实现及边界](docs/HCL_CG04_IMPLEMENTATION.md)：有条件的显式偏好、局部修订与未解决冲突；普通文本入口零提取调用。
 - [CG-04 capability contract](docs/HCL_CG04_CAPABILITY_CONTRACT.md)：角色、情境、条件和局部偏好冲突；不建立全局价值权重。
@@ -103,3 +103,18 @@ preserved. The next implementation package is
 - [CG04 source-first closure](reports/HCL_CG04_EXTERNAL_DEVELOPMENT_CLOSURE.md) / [CG05 source-first closure](reports/HCL_CG05_EXTERNAL_DEVELOPMENT_CLOSURE.md)：两项 RETAIN 仅为 HCL-authored development evidence，独立外部泛化尚未建立；预算和 trigger 均关闭。
 
 - [POST-CG05 capability gap review](reports/HCL_POST_CG05_CAPABILITY_GAP_REVIEW.md)：当前新增机制证据不足以选择 CG06，下一项为已保留能力的独立外部泛化接入；首次零调用原问题检查0/8有专门 treatment，未创建付费包。
+
+
+## Long-horizon development policy
+
+The architecture-building main line is now Wave A through Wave H. Correctness,
+safety and integration smoke tests allow dependent development to continue, but
+do not establish external efficacy. Per-capability mandatory provider-backed
+five-arm validation, per-capability benchmark search and the old two-unvalidated-
+candidate ceiling no longer block architecture growth.
+
+After H05, G-ARCH is a mandatory gear shift into Serious Independent Evaluation:
+independent generalization → strong-base/P/G/H comparison → cross-model transfer →
+optimization → Authoritative Leaderboard Target Audit → final leaderboard push.
+No provider spending, LongMemEval access or benchmark-specific runtime logic is
+authorized by this policy change.
