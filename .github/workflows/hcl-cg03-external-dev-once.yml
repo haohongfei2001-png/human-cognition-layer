@@ -18,9 +18,9 @@ jobs:
     timeout-minutes: 30
     env:
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-      # Owner authorized this frozen CG-03 package once; no rerun or budget transfer.
-      HCL_CG03_AUTHORIZED_CAP_USD: "0.30"
-      HCL_CG03_AUTHORIZED_BASE_SHA: 1c784d87c104e5a0056eddfa92bd7862133c59bc
+      # CG-03 run 36427668859 is consumed; grant closed and trigger removed.
+      HCL_CG03_AUTHORIZED_CAP_USD: "0"
+      HCL_CG03_AUTHORIZED_BASE_SHA: CLOSED_36427668859
       HCL_CG03_FROZEN_PACKAGE_SHA256: e76c0fa13bc9c9f4f9c1de9f5986791621e3cd6e9bbdcf0f7d018463d00876e8
       HCL_CG03_RUN_ONCE_TOKEN: HCL_CG03_EXTERNAL_DEV_OWNER_ONCE
     steps:

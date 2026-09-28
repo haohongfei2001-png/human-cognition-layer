@@ -1,8 +1,15 @@
-# HCL-CG-03 external development protocol — frozen provider-free proposal
+# HCL-CG-03 external development protocol — consumed frozen comparison
 
-**No paid execution is authorized.** This protocol and the companion
-`reports/HCL_CG03_EXTERNAL_PACKAGE.json` freeze one development comparison
-for a future owner decision. The four source narratives are HCL-authored
+**One authorized run consumed; no rerun or additional spending authorized.**
+Owner authorized the frozen package on `main@1c784d87c104e5a0056eddfa92bd7862133c59bc`
+with a USD 0.30 hard cap. [Run 36427668859](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36427668859)
+completed 20 calls once at USD 0.03700620 conservative rating; source-first
+[closure](../reports/HCL_CG03_EXTERNAL_DEVELOPMENT_CLOSURE.md) selects
+**RETAIN, development evidence only**. The workflow grant is reset to zero
+and the trigger removed. The proposal and prospective rules below are preserved
+as the rules fixed before execution.
+
+This protocol and `reports/HCL_CG03_EXTERNAL_PACKAGE.json` froze that one comparison. The four source narratives are HCL-authored
 synthetic development cases, publicly exposed with their gold and prompts.
 They cannot establish independent, fresh or broad social/moral competence.
 LongMemEval remains sealed.

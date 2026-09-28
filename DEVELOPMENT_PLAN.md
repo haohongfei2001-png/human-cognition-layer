@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG-02 INCONCLUSIVE / CLOSED; CG-03 ACTIVE**
+Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG-03 DEVELOPMENT-ONLY RETAIN / CLOSED; CG-04 ACTIVE**
 
 This file defines the live development direction for HCL. `STATUS.md` records
 current execution state; this file records the development strategy and the next
@@ -337,16 +337,17 @@ Do not:
 Do not freeze these as mandatory versions. Re-evaluate after each capability package.
 
 The first candidate was **selected as CG-02** and is now closed as
-INCONCLUSIVE for this development package. The next listed candidate is selected
-as CG-03. The remaining entries stay an unfrozen priority pool:
+INCONCLUSIVE for this development package. CG-03 has now closed with a bounded synthetic development RETAIN signal.
+The next listed candidate is selected as CG-04; remaining entries stay an
+unfrozen priority pool:
 
 1. **CG-02 CLOSED / INCONCLUSIVE — Social commitment and misunderstanding explanation** — proposals, requests,
    acceptance, commitments, conditions, who received/understood what; avoid trust
    scores and large relationship graphs.
-2. **CG-03 ACTIVE — Responsibility-structure explanation** — distinguish causal contribution,
+2. **CG-03 CLOSED / DEVELOPMENT-ONLY RETAIN — Responsibility-structure explanation** — distinguish causal contribution,
    knowledge, foreseeability, control, intention and responsibility basis under
    explicit normative premises.
-3. **Contextual value conflict and preference** — conditional preferences,
+3. **CG-04 ACTIVE — Contextual value conflict and preference** — conditional preferences,
    role/context changes and unresolved value conflict; no global fixed weights.
 4. **Concept interpretation in person/social context** — local definitions,
    speaker-relative usage, applicability, counterexamples and multiple readings.
@@ -501,7 +502,7 @@ The current development question is:
 > conditionally committed, while explaining why different people formed different
 > expectations without inventing private motives or moral blame?**
 
-## 12. Active work package: HCL-CG-03
+## 12. Completed work package: HCL-CG-03
 
 **Responsibility-structure explanation** is the next candidate from section 8.
 The user-observable delta is to explain how an actor's causal contribution,
@@ -521,13 +522,30 @@ and merged main `2aeda0188eb64728735e3cd6c0b049f9ed329e6e`
 zero provider calls/spend and LongMemEval sealed. The other five main workflow
 groups passed too. This certifies provider-free correctness, not external utility.
 
-**CG03-E** now freezes four HCL-authored synthetic development cases and a fair
-C/P/G/H/H-new comparison with all treatment-presence gates passing at zero
-provider calls. The exact package, predeclared scorer and prospective source-first
-closure rule are in [the protocol](docs/HCL_CG03_EXTERNAL_DEVELOPMENT_PROTOCOL.md)
-and [package](reports/HCL_CG03_EXTERNAL_PACKAGE.json). No provider experiment,
-sealed LongMemEval use or leaderboard selection is part of this freeze. The
-only remaining CG-03 external-development step is a **new owner-authorized**
-one-time paid comparison under a separately activated hard cap. Historical
-budgets do not transfer; a positive synthetic result would remain development
-evidence only.
+**CG03-E** executed the owner-authorized frozen comparison once at
+[run 36427668859](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36427668859).
+The source-first [closure](reports/HCL_CG03_EXTERNAL_DEVELOPMENT_CLOSURE.md)
+selects **RETAIN, development evidence only**: H 28/28, P 21/28, G 20/28,
+H-new 23/28. All treatment gates passed; H avoided substantive source/time/
+attribution/premise promotions, with H-new supporting attribution. This is four
+HCL-authored synthetic cases, not independent/fresh evidence or broad moral
+competence. H cost 4.34x P; keep it explicit and optional. The 20-call,
+zero-retry run rated USD 0.03700620 under the USD 0.30 cap. Budget and trigger
+are closed; no rerun or historical budget transfer is authorized.
+
+## 13. Active work package: HCL-CG-04
+
+**Contextual value conflict and preference** is the next candidate from section 8.
+Its [canonical bounded contract](docs/HCL_CG04_CAPABILITY_CONTRACT.md) specifies
+one visible delta: explain which explicit preferences apply in an actor's chosen
+role/context, what depends on unresolved conditions, and what remains conflicted,
+without constructing global fixed value weights or inferring lasting values from
+a choice. Explicit local revision must preserve unaffected roles and contexts.
+
+Execution order is **CG04-A → CG04-B → CG04-C → CG04-D → CG04-CERT → CG04-E**.
+Begin with the minimal real operation, then source/time/access checks, conditional
+applicability, local revision/conflict and a conservative ordinary-text path.
+Certify provider-free on exact head and main, then freeze one fair treatment-
+presence package. No benchmark/source hunt, ontology expansion or new paid
+experiment is part of implementation. Stop for a new owner grant only when
+paid validation is the sole remaining action; all previous grants remain closed.
