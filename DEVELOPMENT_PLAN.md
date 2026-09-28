@@ -715,3 +715,144 @@ premises. Belief/received information/outcome must not establish action-time
 knowledge, foreseeability, control, intention or moral truth. Existing source/
 time/access checks and default freezes stay unchanged. No third candidate, new
 paid call, ontology, benchmark/source hunt or blocking owner gate; CG04/05 deferred.
+
+
+## 15. Authorized continuous night queue after NIGHT-INTEGRATION-09
+
+This queue extends the existing provider-free integration line without opening a
+third implemented-but-unvalidated capability candidate. It exists to prevent the
+manager from stopping merely because one bounded integration PR completed while
+there is still a concrete dependency-safe capability delta available.
+
+The fixed continuation order is:
+
+### NIGHT-INTEGRATION-10 — belief + conditional-responsibility composition
+
+CAPABILITY_DELTA: an ordinary explicit question can combine retained source-scoped
+belief/perspective with the existing CG-03 responsibility-structure checker under
+explicit caller normative premises, while keeping belief, received information,
+action-time knowledge, foreseeability, control, intention, causal contribution
+and normative premise distinct.
+
+Requirements:
+- reuse existing v0.6 retained belief/perspective and CG-03 checker/runtime;
+- ordinary input must not require caller-entered hidden mental-state gold;
+- responsibility conclusions remain conditional on explicit premises;
+- belief, outcome or later evidence must not silently establish knowledge,
+  foreseeability, control, intention, blame or moral truth;
+- preserve source/time/access/revision boundaries and current refusal behavior;
+- one final answer call, zero new extraction/provider calls by default;
+- no new capability candidate, ontology, benchmark/source hunt or paid grant.
+
+After exact-head/main correctness certification, continue immediately to
+NIGHT-INTEGRATION-11.
+
+### NIGHT-INTEGRATION-11 — multi-source local revision composition
+
+CAPABILITY_DELTA: one ordinary question can combine multiple explicitly authorized
+source records for the same actor/context and preserve which belief, meaning,
+access or conditional-responsibility state was supported before and after a local
+revision.
+
+Requirements:
+- source identity and ordering remain explicit; source order is not silently
+  promoted to calendar time or verified receipt time;
+- later source content cannot backfill earlier actor knowledge/access;
+- contradictory or incomparable sources remain unresolved rather than averaged;
+- revision changes only the scoped actor/context/item/term/factor it actually
+  addresses;
+- complete provenance for every retained state survives final-input compaction;
+- invalid/missing source authority fails closed without whole-library fallback.
+
+After exact-head/main correctness certification, continue immediately to
+NIGHT-INTEGRATION-12.
+
+### NIGHT-INTEGRATION-12 — source-bounded perspective contrast
+
+CAPABILITY_DELTA: an ordinary question can compare two explicitly named
+participants' supported views of the same event/claim while preserving separate
+public evidence, private exposure, belief, uncertainty and unknown state.
+
+Requirements:
+- A's evidence/access/belief is never copied to B without an explicit shared
+  source/access basis;
+- narrator knowledge is not character knowledge;
+- reported belief is not world truth;
+- disagreement does not imply deception, irrationality, relationship state or
+  moral blame;
+- the final answer exposes the evidence boundary needed to understand the
+  contrast without leaking unauthorized private reader material.
+
+After exact-head/main correctness certification, continue immediately to
+NIGHT-INTEGRATION-13.
+
+### NIGHT-INTEGRATION-13 — bounded multi-event narrative integration
+
+CAPABILITY_DELTA: HCL can answer an ordinary question over a short multi-event
+narrative requiring at least two existing cognition operations together, while
+preserving actor, event, source, access, revision and uncertainty boundaries.
+
+Use only already-retained/implemented mechanisms where applicable: perspective /
+belief, social commitment/expectation, responsibility structure, local concept,
+preference/value conflict and generic exact tools. This is integration, not a new
+large module.
+
+Requirements:
+- bounded provider-free development fixtures first;
+- no automatic activation of every operation;
+- select the minimum operation set justified by the question and source;
+- later events cannot rewrite earlier views except through explicit scoped
+  revision;
+- no action-to-motive/emotion, exposure-to-belief, computation-to-world-truth or
+  conditional-premise-to-moral-truth promotion;
+- context compaction must remain lossless for all selected cognition decisions.
+
+After exact-head/main correctness certification, continue immediately to
+NIGHT-INTEGRATION-14.
+
+### NIGHT-INTEGRATION-14 — ordinary-question robustness and integrated closure
+
+CAPABILITY_DELTA: the integrated HCL path remains usable from ordinary Chinese and
+English questions across the supported person/context/narrative forms without
+caller knowledge of internal operation names.
+
+Audit and improve only demonstrated integration failures involving:
+- explicit actor/context/item/term/event selection;
+- negation and local revision;
+- source-order scopes;
+- two-participant perspective contrast;
+- multi-source conflict/uncertainty;
+- bounded multi-event composition;
+- refusal/fallback privacy;
+- total context budget and exact state decoding.
+
+Do not count more tests, schemas or compression alone as the capability delta.
+Any code change must repair a reproduced correctness/usability failure or enable a
+user-observable integrated behavior. Finish with one provider-free integrated
+closure receipt covering the complete NI-10..14 line and the frozen historical
+regressions.
+
+### Continuous-execution rules for NI-10..14
+
+1. Remote `main`, this plan, `STATUS.md`, exact-SHA CI and immutable receipts
+   are the source of truth.
+2. Keep one writer for the active integration boundary. Merge/certify a stable
+   slice before moving its writer to the next slice.
+3. Ordinary bugs, test failures, review findings, CI failures and harness defects
+   are manager-owned. Diagnose, repair and continue without owner interruption.
+4. External/provider/paid/device/private-data gates do not block dependency-safe
+   provider-free engineering. Record them truthfully as deferred and continue.
+5. No new paid call, credential, permission, provider account, benchmark hunt,
+   leaderboard target, LongMemEval access or third unvalidated capability
+   candidate is authorized by this queue.
+6. Do not change consumed evidence, frozen CG04/CG05 messages, scorers or grants
+   to manufacture a positive result.
+7. Do not weaken/delete tests, hide failures, truncate evidence, or create
+   validation-only/filler PRs merely to keep the manager busy.
+8. If one numbered item is already satisfied by current `main`, record the
+   evidence and advance; do not reimplement it.
+9. The night may stop before an arbitrary wall-clock duration only when NI-10..14
+   are truthfully complete or every remaining item depends on an owner-only,
+   external or prohibited action. Otherwise continue to the unique next item.
+10. Capability growth remains the ordering principle:
+   **real human-cognition capability growth > external validation > leaderboard**.

@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**HCL night — CG-04/CG-05 frozen and deferred; retained integration next**
+**HCL night — NIGHT-INTEGRATION-10 queued after NI-09; CG-04/CG-05 frozen and deferred**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -483,3 +483,25 @@ foreseeability, control, intention and the caller premise separate from belief o
 outcome. Reuse existing checker/ordinary preparation, no third candidate, moral
 ontology or new paid run. CG04/05 stay deferred/unvalidated, calls/spend0/USD0,
 LongMemEval SEALED; no owner blocking gate.
+
+
+## Authorized continuous integration queue — NI-10 through NI-14
+
+Owner-authorized continuation is registered in
+[DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md), section 15. After NIGHT-INTEGRATION-09
+exact-head/main certification, the unique provider-free queue is:
+
+`NI-10 belief + conditional responsibility`
+→ `NI-11 multi-source local revision`
+→ `NI-12 perspective contrast`
+→ `NI-13 bounded multi-event narrative integration`
+→ `NI-14 ordinary-question robustness + integrated closure`.
+
+This queue does not authorize a third capability candidate, paid/provider
+execution, new credential/account/permission, benchmark or leaderboard search,
+LongMemEval access, or alteration of frozen/consumed evidence. CG04/CG05 remain
+implemented-unvalidated and deferred. Ordinary engineering failures are not owner
+gates; repair them and continue. External-only gates are recorded and bypassed
+for dependency-safe provider-free work. Do not create filler work merely to fill
+time; stop only when this queue is complete or all remaining work is genuinely
+owner/external/prohibited.
