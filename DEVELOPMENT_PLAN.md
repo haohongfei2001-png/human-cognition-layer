@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG-01 CLOSED (SIMPLIFY)**
+Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG-02 ACTIVE**
 
 This file defines the live development direction for HCL. `STATUS.md` records
 current execution state; this file records the development strategy and the next
@@ -334,11 +334,11 @@ Do not:
 
 ## 8. Candidate pool after CG-01
 
-Do not freeze these as mandatory versions. Re-evaluate after CG-01 evidence.
+Do not freeze these as mandatory versions. Re-evaluate after each capability package.
 
-Current priority pool:
+The first candidate is now **selected as CG-02** and removed from the unfrozen pool:
 
-1. **Social commitment and misunderstanding explanation** — proposals, requests,
+1. **CG-02 ACTIVE — Social commitment and misunderstanding explanation** — proposals, requests,
    acceptance, commitments, conditions, who received/understood what; avoid trust
    scores and large relationship graphs.
 2. **Responsibility-structure explanation** — distinguish causal contribution,
@@ -423,3 +423,70 @@ The completed CG-01 development question was:
 
 > **What does HCL understand about a person after this package that it could not
 > reliably represent and check before?**
+
+
+## 11. Active work package: HCL-CG-02
+
+# HCL-CG-02 — Social Commitment, Expectation and Misunderstanding
+
+Canonical contract: [docs/HCL_CG02_CAPABILITY_CONTRACT.md](docs/HCL_CG02_CAPABILITY_CONTRACT.md).
+
+### User-observable capability delta
+
+CG-02 should let HCL preserve the difference between what a social act actually
+expressed and what different participants had evidence to understand or expect.
+
+For example, if A says "If I finish by Friday, I can go with you" and B later
+states "A promised to go Friday", HCL should preserve the source act as
+conditional, track whether B had access to the condition, and explain any mismatch
+without automatically inferring lying, betrayal, promise-breaking, bad intent,
+trust change or relationship status.
+
+### Development principle
+
+CG-02 is deliberately narrower than a general relationship/social-cognition
+module. It must not become a trust graph, friend/enemy classifier, personality
+model or broad speech-act ontology.
+
+Reuse v0.6 perspective/access boundaries and the v1 reader/character/observer
+modes. Build only the minimum new operations needed to ground social acts,
+preserve explicit conditions and compare participant expectations.
+
+### Immediate execution order
+
+1. **CG02-A** — add the smallest explicit social-commitment/misunderstanding
+   operation to v1 without disturbing direct routing.
+2. **CG02-B** — implement source/time/access-scoped proposal/request/
+   acceptance/refusal/conditional-commitment/withdrawal checking.
+3. **CG02-C** — implement participant expectation comparison and bounded
+   misunderstanding explanation.
+4. **CG02-D** — add ordinary-text semantic preparation with auditable actual state
+   and fail-closed source anchoring.
+5. **CG02-CERT** — provider-free correctness and all relevant historical
+   regressions.
+6. **CG02-E** — freeze a bounded C/P/G/H/H-new external development package, but
+   make no paid call without owner authorization.
+
+### Hard treatment-presence gate
+
+The CG-01 external run paid for H and H-new even though failed semantic
+preparation made their final inputs identical. CG-02 must not repeat that.
+
+Before any owner budget request, every selected H case must pass a provider-free
+preflight proving:
+
+- source-valid semantic preparation;
+- at least one grounded CG-02 social act;
+- at least one actual CG-02 condition/expectation check;
+- checked state present in H;
+- that state/mechanism removed as intended in H-new;
+- final H and H-new model inputs observably differ because of the treatment.
+
+If the treatment is not present, the external package is not ready for paid
+authorization.
+
+The current development question is:
+
+> **Can HCL preserve what was actually proposed, requested, accepted or
+> conditionally committed, while explaining why different people formed different
+> expectations without inventing private motives or moral blame?**
