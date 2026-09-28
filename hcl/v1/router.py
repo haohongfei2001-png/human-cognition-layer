@@ -58,6 +58,7 @@ class CognitionRequest:
     concept_term: str | None = None
     concept_item: str | None = None
     compact_context: bool = False
+    narrative_access: bool = False
 
     def __post_init__(self):
         if not isinstance(self.query, str) or not self.query.strip() or len(self.query) > 16000:
@@ -95,6 +96,11 @@ class CognitionRequest:
             raise ValueError('social analysis flag must be boolean')
         if type(self.responsibility_analysis) is not bool:
             raise ValueError('responsibility analysis flag must be boolean')
+        if type(self.narrative_access) is not bool:
+            raise ValueError('narrative access flag must be boolean')
+        if self.narrative_access and (self.narrative is None or not (
+                self.responsibility_analysis or self.preference_analysis or self.concept_analysis)):
+            raise ValueError('explicit narrative access needs an existing ordinary operation')
         if type(self.compact_context) is not bool:
             raise ValueError('compact context flag must be boolean')
         if type(self.concept_analysis) is not bool:

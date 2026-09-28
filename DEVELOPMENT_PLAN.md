@@ -625,3 +625,14 @@ unresolved. Fix complete foreign-domain grammar collisions generically while
 preserving exact frozen default inputs. Certify head/main, then continue bounded
 source-grounded semantic preparation/access integration for existing operations.
 No third candidate, new paid call, source hunt or owner gate.
+
+
+NIGHT-INTEGRATION-02 certified on PR140 head/main: 369 tests, all six groups PASS.
+NIGHT-INTEGRATION-03 adds optional exact-source narrated exposure preparation to
+existing operations and ordinary private composition. No exposure-to-belief or
+narrator-world-to-character promotion. Earlier event/record views cannot consume
+later delivery receipts; default freezes remain identical. Certify head/main,
+then implement lossless shared source-record pooling in composed final context,
+with explicit per-operation access links and no inferred semantic bridge.
+CG04/05 remain the only two implemented-unvalidated candidates. CG01/02 closed
+registry metadata now matches their historical source-first dispositions.

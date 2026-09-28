@@ -56,7 +56,7 @@ def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, 
     first = requests[0]
     if not first.target_actor or not (first.narrative or first.evidence):
         raise ValueError('one focal actor and authorized shared source required')
-    signature = lambda r: (r.target_actor, r.observer_actor, r.event_time, r.knowledge_cutoff, r.narrative, r.evidence)
+    signature = lambda r: (r.target_actor, r.observer_actor, r.event_time, r.knowledge_cutoff, r.narrative, r.evidence, r.narrative_access)
     if any(signature(r) != signature(first) for r in requests):
         raise ValueError('operations must share exact actor, observer, source and time scope')
     if any(r.allow_semantic_preparation or r.tools for r in requests):
@@ -69,7 +69,7 @@ def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, 
     # Existing prose paths have different historical speaker-access assumptions.
     # Do not infer an access channel while joining them: ordinary input is reader
     # analysis; private views need shared validated typed EventRecords.
-    if first.narrative and mode != PerspectiveMode.READER_ANALYSIS:
+    if first.narrative and mode != PerspectiveMode.READER_ANALYSIS and not first.narrative_access:
         raise ValueError('ordinary composition requires reader analysis; private views need typed access')
     if layer.intentions is not None or layer.affects is not None:
         raise ValueError('composition requires request-local state; injected persistent views need explicit scoped integration')

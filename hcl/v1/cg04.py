@@ -199,6 +199,8 @@ def _validate(case, events):
 def project_preferences(case, events, *, mode='READER_ANALYSIS', observer_actor=None,
                         event_time=None, knowledge_cutoff=None):
     """A: validate input then project source before any statement is serialized."""
+    from .source_access import scope_source_access
+    events = scope_source_access(events, event_time=event_time, knowledge_cutoff=knowledge_cutoff)
     sources = _validate(case, events)
     if mode not in ('READER_ANALYSIS', 'CHARACTER_PERSPECTIVE', 'OBSERVER_ABOUT_TARGET'):
         raise ValueError('invalid preference perspective')

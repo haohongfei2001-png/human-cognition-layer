@@ -36,3 +36,7 @@ foreign grammar separation, partial failure, mixed actor/source/view refusal,
 private typed views, hidden condition/property IDs, duplicate operation rejection
 and total-budget failure. No broad model-utility claim or new candidate/module.
 CG04 and CG05 remain the only two deferred implemented-unvalidated candidates.
+
+Private ordinary composition can now opt into exact narrated access with
+`narrative_access=True` on every operation; see HCL_V1_NARRATIVE_ACCESS.md.
+Without that opt-in, shared validated typed EventRecords remain required.

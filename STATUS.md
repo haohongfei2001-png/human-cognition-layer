@@ -147,7 +147,7 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**NIGHT-INTEGRATION-02 — same-source capability composition**
+**NIGHT-INTEGRATION-03 — explicit narrated access preparation**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
@@ -319,3 +319,26 @@ After exact-head/main CI, the unique next implementation is bounded, explicitly
 source-grounded semantic preparation/access integration for existing operations,
 without inferred private state or a third unvalidated module. Provider calls/spend
 remain 0/USD0, LongMemEval sealed, no owner-only development blocker.
+
+
+**NIGHT-INTEGRATION-02 — exact-head/main CERT PASS.** PR #140 final head
+f2754c8 (run 36438705568), main 27695beeeba7fda9d55eacea54d4e2ad139a58e8
+(run 36438969596): 193 v1 +176 historical =369 PASS, same runtime digest,
+all six workflow groups passed. [Receipt](reports/HCL_NIGHT_COMPOSITION_CERTIFICATION.json).
+
+**NIGHT-INTEGRATION-03 — implemented; CERT in progress.** CAPABILITY_DELTA:
+ordinary source with exact narrated delivery clauses can now support character/
+observer preference and concept composition without caller-entered access state.
+Reported exposure remains distinct from belief/understanding/world truth. Missing
+or ambiguous access stays unknown; later receipts cannot enter earlier event or
+record views. Source anchors and public/receiver promotion are checked. Twelve
+new boundary/ordinary-composition tests; default frozen cases remain identical.
+[Implementation](docs/HCL_V1_NARRATIVE_ACCESS.md). CG01 registry now records its
+existing SIMPLIFY_CLOSED, retaining optional typed checker efficacy as inconclusive;
+CG02 INCONCLUSIVE_CLOSED and CG03 development-only RETAIN are unchanged.
+
+After exact-head/main CI the unique next implementation is lossless pooling of
+repeated source records in composed final input, preserving operation access links
+and complete cognition under a tighter budget. No third candidate, new paid run,
+credential, source hunt or owner-only blocker. Night calls/spend: 0/USD0; sealed
+LongMemEval not accessed. Night remains ongoing.
