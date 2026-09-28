@@ -18,8 +18,10 @@ jobs:
     timeout-minutes: 30
     env:
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-      # Dormant until a separate owner authorization explicitly grants USD 0.30.
-      HCL_CG02_AUTHORIZED_CAP_USD: "0"
+      # This grant applies only to the frozen DeepSeek package at the owner-named base.
+      HCL_CG02_AUTHORIZED_CAP_USD: "0.30"
+      HCL_CG02_AUTHORIZED_BASE_SHA: 86e1db9ecdb908cbe67bc561b878a0d37e4cb819
+      HCL_CG02_FROZEN_PACKAGE_SHA256: 6384b0925a191041de0478aa46cb69618502e553cb0c4f5838087f4a6c95c694
       HCL_CG02_RUN_ONCE_TOKEN: HCL_CG02_EXTERNAL_DEV_20260928_ONCE
     steps:
       - uses: actions/checkout@v4
@@ -33,12 +35,14 @@ jobs:
       - name: Verify unique trigger and owner grant
         run: |
           test "$GITHUB_RUN_ATTEMPT" = "1"
+          git merge-base --is-ancestor "$HCL_CG02_AUTHORIZED_BASE_SHA" HEAD
           test "$(git show -s --format=%P HEAD)" = "${{ github.event.before }}"
           test "$(cat .github/HCL_CG02_EXTERNAL_DEV_TRIGGER)" = "${HCL_CG02_RUN_ONCE_TOKEN}|${{ github.event.before }}"
           test "$(git diff --diff-filter=A --name-only '${{ github.event.before }}' "$GITHUB_SHA")" = ".github/HCL_CG02_EXTERNAL_DEV_TRIGGER"
           test "$(git diff --name-only '${{ github.event.before }}' "$GITHUB_SHA")" = ".github/HCL_CG02_EXTERNAL_DEV_TRIGGER"
           if git log --format=%H '${{ github.event.before }}' -- .github/HCL_CG02_EXTERNAL_DEV_TRIGGER | grep -q .; then exit 1; fi
           test "$HCL_CG02_AUTHORIZED_CAP_USD" = "0.30"
+          echo "$HCL_CG02_FROZEN_PACKAGE_SHA256  reports/HCL_CG02_EXTERNAL_PACKAGE.json" | sha256sum -c -
           test -n "$DEEPSEEK_API_KEY"
 
       - run: python -m pip install "openai==2.14.0"
