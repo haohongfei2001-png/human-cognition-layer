@@ -147,7 +147,7 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**NIGHT-FREEZE-COMPATIBILITY — dormant frozen execution repair**
+**NIGHT-INTEGRATION-05 — retained ordinary belief preparation/composition**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
@@ -381,3 +381,21 @@ validated ordinary belief preparation/composition using RETAIN v0.6, without
 exposure-to-belief or reported-belief-to-knowledge/world truth promotion.
 Night remains ongoing, two pending candidates only, calls/spend0/USD0,
 LongMemEval sealed, no owner-only development blocker.
+
+
+**NIGHT-INTEGRATION-05 — IMPLEMENTED; correctness certification pending.**
+CAPABILITY_DELTA: ordinary source self-report/denial/uncertainty/attribution and
+local revision now enter RETAIN v0.6, alongside existing concept/preference state
+in one actual final answer input. Exposure is not acceptance, indirect attribution
+is not private belief, source belief is not knowledge/world/moral truth. Revision
+anchors obey actor/context/access/event/record scope; absent anchors do not create
+old state. No third capability candidate or paid package is added.
+Twelve new tests + existing regressions pass locally:226 v1; CI runs176 historical
+checks too. Prior PR143 exact-main1aab093238900a0ffc4f25bd62db1e6b1fa1a9be,
+run36442402242 records390 PASS; both applicable workflow groups PASS.
+CG04/05 package bytes remain frozen/deferred. Provider calls/spend tonight0/USD0;
+LongMemEval SEALED. Immediately after exact-head/main CI, implement a small
+source-scoped composition comparison between expressed belief and local concept
+criteria, preserving disagreement/uncertainty without inferring shared meaning,
+private intention, correctness of the belief or moral truth. This is the unique
+next existing-capability integration task; no third candidate or owner paid gate.

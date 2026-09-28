@@ -327,6 +327,14 @@ def prepare_preference_narrative(narrative, actor_id, role, context):
             try:
                 row, authority, _ = _decode(line)
             except ValueError:
+                from .belief_preparation import decode_belief_source
+                try:
+                    decode_belief_source(line)
+                except ValueError:
+                    pass
+                else:
+                    diagnostics.append({'line': i, 'source_event_id': eid, 'status': 'BELIEF_NOT_PREFERENCE'})
+                    continue
                 # Complete concept definitions are another operation's source,
                 # even when their explicit revision contains 'instead of'.
                 from .cg05 import _decode as decode_concept, _criteria as concept_criteria

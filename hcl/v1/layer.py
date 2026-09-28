@@ -58,6 +58,8 @@ class HCLCognitionLayer:
         self.concept_checker_enabled = concept_checker_enabled
 
     def prepare(self, request: CognitionRequest):
+        if request.belief_analysis and self.intentions is not None:
+            raise ValueError('ordinary belief preparation requires request-local retained state')
         plan = self.router.plan(request)
         if plan.direct:
             # No runtime construction/projection, extraction, or tool invocation.
@@ -75,6 +77,8 @@ class HCLCognitionLayer:
         from .cg05 import prepare_concept_narrative, project_concepts, check_concepts
         from .narrative import SemanticPreparation, prepare_narrative
         from .social_narrative import SocialPreparation, prepare_social_narrative
+        from .belief_preparation import (belief_narrative_events, prepare_belief_sources,
+                                         SourceBeliefBackend, BELIEF_POLICY)
         from .tools import execute_tool
         parsed_events = candidates = facts = ()
         preparation_audit = {'method': 'caller_typed_evidence', 'semantic_preparer_calls': 0,
@@ -255,7 +259,9 @@ class HCLCognitionLayer:
                 output={'event_ids': [e.event_id for e in concept_events],
                     'definition_ids': [d.definition_id for d in concept_case.definitions] if concept_case else [],
                     'source_span_diagnostics': list(preparation.diagnostics)})
-        input_evidence = request.evidence + parsed_events + social_events + responsibility_events + preference_events + concept_events
+        belief_events = (belief_narrative_events(request.narrative)
+            if request.belief_analysis and request.narrative else ())
+        input_evidence = request.evidence + parsed_events + social_events + responsibility_events + preference_events + concept_events + belief_events
         if request.narrative_access and input_evidence:
             input_evidence, access_receipt = prepare_source_access(input_evidence)
             preparation_audit['output'] = dict(preparation_audit.get('output') or {}, source_access=access_receipt)
@@ -285,6 +291,25 @@ class HCLCognitionLayer:
                 raise ValueError('duplicate input evidence ID')
         for event in input_evidence:
             intentions.ingest_event(event)
+        if request.belief_analysis:
+            semantic_viewer = (SYSTEM_VIEWER if plan.perspective_mode == PerspectiveMode.READER_ANALYSIS
+                else request.observer_actor or plan.target_actor)
+            preparation = prepare_belief_sources(input_evidence, viewer=semantic_viewer,
+                event_time=request.event_time, knowledge_cutoff=request.knowledge_cutoff)
+            event_map = {e.event_id: e for e in input_evidence}
+            committed = []
+            for eid, payload in preparation.payloads:
+                event = event_map[eid]
+                result = perspectives.ingest_event(event, SourceBeliefBackend(event, payload))
+                committed.extend(row.evidence_id for row in result.belief_evidence)
+            preparation_audit.update(method='bounded_source_preparation_into_retained_v06',
+                failure=preparation.failure or preparation_audit['failure'],
+                input={'narrative': request.narrative, 'target_actor': plan.target_actor,
+                    'event_ids': list(event_map)},
+                output=dict(preparation_audit.get('output') or {},
+                    belief_evidence_ids=committed, diagnostics=list(preparation.diagnostics)),
+                local_validator_calls=len(preparation.payloads),
+                time_basis='line_order_not_calendar_time' if request.narrative else 'caller_supplied_event_times')
         target = plan.target_actor
         if target is None:
             mentioned = [a for a in perspectives.known_agents if a != SYSTEM_VIEWER and a.lower() in request.query.lower().split()]
@@ -483,6 +508,8 @@ class HCLCognitionLayer:
             policy += ' ' + PREFERENCE_ANSWER_POLICY
         if plan.concept_interpretation:
             policy += ' ' + CONCEPT_ANSWER_POLICY
+        if request.belief_analysis:
+            policy += ' ' + BELIEF_POLICY
         if request.narrative_access or any(e.metadata.get('narrative_access_basis') for e in input_evidence):
             policy += (' Access here is an exact narrated exposure claim, not a verified receipt or '
                 'proof of belief/understanding. Only explicitly delivered source text enters the '

@@ -1,0 +1,27 @@
+{
+  "schema": "hcl-night-frozen-execution-certification-v1",
+  "pr": 143,
+  "exact_head_sha": "5adb012a37f2ed3a05a48290aa375fb2b7a11e0f",
+  "exact_head_run_id": 36441844995,
+  "exact_main": {
+    "schema": "hcl-v1-provider-free-certification-v1",
+    "sha": "1aab093238900a0ffc4f25bd62db1e6b1fa1a9be",
+    "workflow_event_sha": "1aab093238900a0ffc4f25bd62db1e6b1fa1a9be",
+    "run_id": "36442402242",
+    "event": "push",
+    "counts": {
+      "v1": 214,
+      "historical": 176
+    },
+    "runtime_sha256": "3cef9a6debda3eea89888b4bd4019d799eaad6b85eba12700da400c86595689b",
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "scope": "CORRECTNESS_NOT_EXTERNAL_UTILITY",
+    "longmemeval": "SEALED_NOT_IN_TEST_SELECTION"
+  },
+  "total_tests_each": 390,
+  "scope": "PRESERVATION_NOT_CAPABILITY_OR_PAID_EVIDENCE",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

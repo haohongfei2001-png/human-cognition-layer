@@ -59,6 +59,7 @@ class CognitionRequest:
     concept_item: str | None = None
     compact_context: bool = False
     narrative_access: bool = False
+    belief_analysis: bool = False
 
     def __post_init__(self):
         if not isinstance(self.query, str) or not self.query.strip() or len(self.query) > 16000:
@@ -98,8 +99,18 @@ class CognitionRequest:
             raise ValueError('responsibility analysis flag must be boolean')
         if type(self.narrative_access) is not bool:
             raise ValueError('narrative access flag must be boolean')
+        if type(self.belief_analysis) is not bool:
+            raise ValueError('belief preparation flag must be boolean')
+        if self.belief_analysis and (not self.target_actor or
+            bool(self.narrative) == bool(self.evidence) or len(self.evidence) > 24 or
+            self.allow_semantic_preparation or self.tools or
+            self.social_analysis or self.social_acts or self.social_interpretations or self.social_access_statements or
+            self.responsibility_analysis or self.responsibility_case is not None or
+            self.preference_analysis or self.preference_case is not None or
+            self.concept_analysis or self.concept_case is not None):
+            raise ValueError('belief preparation requires one focal ordinary-source operation')
         if self.narrative_access and (self.narrative is None or not (
-                self.responsibility_analysis or self.preference_analysis or self.concept_analysis)):
+                self.belief_analysis or self.responsibility_analysis or self.preference_analysis or self.concept_analysis)):
             raise ValueError('explicit narrative access needs an existing ordinary operation')
         if type(self.compact_context) is not bool:
             raise ValueError('compact context flag must be boolean')
@@ -210,6 +221,7 @@ class CognitionPlan:
     responsibility_structure: bool = False
     contextual_preference: bool = False
     concept_interpretation: bool = False
+    belief_preparation: bool = False
     target_actor: str | None = None
 
     @property
@@ -239,13 +251,14 @@ class CognitionRouter:
                 r'\b(what does .+ (?:know|believe|think|want)|what did .+ (?:know|believe|think|want)|from .+ perspective)\b|知道什么|从.+视角|以.+视角', query)
             ) else PerspectiveMode.READER_ANALYSIS)
         concept = request.concept_case is not None or request.concept_analysis
+        belief = request.belief_analysis
         preference = request.preference_case is not None or request.preference_analysis
         responsibility = not preference and (request.responsibility_case is not None or request.responsibility_analysis)
-        social = bool(not concept and not preference and not responsibility and target_actor and (request.social_analysis or request.social_acts or
+        social = bool(not belief and not concept and not preference and not responsibility and target_actor and (request.social_analysis or request.social_acts or
             request.social_interpretations or request.social_access_statements or re.search(
             r'\b(?:promis(?:e|ed|es)|commit(?:ment|ted)?|propos(?:e|al|ed)|request(?:ed)?|accept(?:ed|ance)?|refus(?:e|ed|al)|withdraw(?:al|n)?|misunderstand(?:ing)?|expect(?:s|ed|ation|ations)?)\b|承诺|提议|请求|接受|拒绝|撤回|误解|期待',
             query)))
-        explanation = bool(not concept and not preference and not responsibility and not social and target_actor and re.search(
+        explanation = bool(not belief and not concept and not preference and not responsibility and not social and target_actor and re.search(
             r'\b(?:why did|why does|why would|explain .+ action|explanation of .+ action)\b|为什么.+(?:做|去|没|不|离开|参加)|解释.+(?:行为|行动)', query))
         selected = []
         optional = []
@@ -253,7 +266,7 @@ class CognitionRouter:
         blocked = []
         reasons = {}
         for cid in ('perspective', 'intention', 'affect'):
-            if not concept and not preference and not responsibility and re.search(_PATTERNS[cid], query):
+            if not belief and not concept and not preference and not responsibility and re.search(_PATTERNS[cid], query):
                 selected.append(cid)
                 reasons[cid] = 'explicit task semantics; no inference from incidental evidence'
                 if cid == 'perspective':
@@ -261,6 +274,10 @@ class CognitionRouter:
                     reasons['belief'] = 'evidence-bounded knowledge/belief projection'
                 else:
                     optional.append(cid)
+        if belief:
+            selected.extend(('perspective', 'belief'))
+            reasons['perspective'] = 'explicit retained belief preparation with source/access scope'
+            reasons['belief'] = 'bounded ordinary-source preparation into retained v0.6'
         if explanation:
             selected.append('cg01_explanation')
             reasons['cg01_explanation'] = 'bounded character-action explanation conditions'
@@ -290,7 +307,7 @@ class CognitionRouter:
                 tools.append(cid)
                 selected.append(cid)
                 reasons[cid] = 'explicit source-scoped exact operation; validate assumptions before execution'
-            elif not concept and re.search(_PATTERNS[cid], query):
+            elif not belief and not concept and re.search(_PATTERNS[cid], query):
                 blocked.append(cid)
                 reasons[cid] = 'task needs an exact tool but no declared formal input supplied'
                 selected.append('uncertainty')
@@ -306,4 +323,5 @@ class CognitionRouter:
                              explanation=explanation, social_commitment=social,
                              responsibility_structure=responsibility,
                              contextual_preference=preference, concept_interpretation=concept,
+                             belief_preparation=belief,
                              target_actor=target_actor)
