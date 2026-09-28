@@ -40,3 +40,35 @@ CG04 and CG05 remain the only two deferred implemented-unvalidated candidates.
 Private ordinary composition can now opt into exact narrated access with
 `narrative_access=True` on every operation; see HCL_V1_NARRATIVE_ACCESS.md.
 Without that opt-in, shared validated typed EventRecords remain required.
+
+
+## Optional belief/local-concept comparison
+
+Failure: composing two checked states leaves the final model to invent their
+relationship, potentially treating a belief as world truth or applying later
+concept definitions to an earlier self-report. The simple alternative is the
+existing policy with separately prepared states. With
+`compare_belief_concepts=True`, a small join explains only a same-actor,
+same-context/item/term source relationship and records both source bases.
+**CAPABILITY_DELTA:** HCL can now explain where an explicitly expressed belief
+is consistent with, differs from, or cannot be compared with that person's
+explicit local criteria, without declaring the belief false or a moral truth.
+
+Only affirmed SELF_REPORT plus DIRECT_SELF_REPORT local definition may establish
+consistency/difference. Denial does not assert an opposite; uncertainty, indirect
+reports, narrator belief assertions, hidden/unknown/conflicting sources remain
+unresolved. No synonym or term equivalence is invented. Multiple readings are
+kept per definition; no winner or shared meaning is selected.
+
+Both event and record times of definition/property/application sources must be
+no later than the actual self-report source. The unchanged v0.6 estimate's
+`last_valid_time` can include later indirect evidence; this join deliberately
+uses the actual direct basis timestamp, preventing hindsight promotion. Every
+basis is already projected in its own operation's access boundary. Total budget
+refusal removes comparison and operation state together. Default inputs stay
+unchanged. Remove/simplify the join if these source boundaries cannot be kept or
+future authorized evaluation finds no utility beyond separate states.
+
+Eleven provider-free tests and a committed actual-message example certify
+engineering correctness, not external utility. No third capability candidate,
+paid run, new ontology or historical evidence upgrade.

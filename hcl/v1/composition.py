@@ -1,5 +1,6 @@
 """Compose existing source-scoped operations; never infer bridges between them."""
 from dataclasses import dataclass
+from datetime import datetime
 import json
 
 from .compact import compact_cognition_context, COMPACT_POLICY
@@ -16,6 +17,15 @@ COMPOSITION_POLICY = (
     'A responsibility explanation remains conditional on that operation caller '
     'premise. Failure or missing state in one operation is unresolved, not support '
     'from another. Never transfer evidence across operation access boundaries.'
+)
+
+COMPARISON_POLICY = (
+    'belief_concept_comparison compares an explicitly expressed self-report '
+    'with the same actor/context/item/term local criteria only. Consistency or '
+    'difference describes source assertions, never whether a private belief is '
+    'true, a shared meaning, irrationality, deception, intention or moral truth. '
+    'Later definitions/properties cannot establish a mismatch at an earlier '
+    'self-report. Missing, conflicting, indirect or hidden evidence stays unresolved.'
 )
 
 
@@ -44,7 +54,62 @@ def _operation(plan):
     return active[0]
 
 
-def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, compact_context=True, pool_sources=False):
+def _compare_belief_concepts(stages, operations):
+    """Explain existing source states; never promote evidence across operations."""
+    if 'belief' not in operations or 'concepts' not in operations:
+        raise ValueError('explicit comparison requires retained belief and concept stages')
+    belief = stages[operations.index('belief')].context
+    concept = stages[operations.index('concepts')].context
+    checked = concept.concepts.get('checked', {})
+    scenario = checked.get('scenario', {})
+    focal = concept.concepts.get('case_input', {}).get('actor_id')
+    rows = []
+    parse = lambda stamp: datetime.fromisoformat(stamp.replace('Z', '+00:00'))
+    for b in belief.belief:
+        if (b['subject_agent_id'] != focal or
+            b['proposition_key'] != '/'.join(scenario.get(k, '') for k in ('context', 'item', 'term'))):
+            continue
+        # Basis must be an available self-report, not a narrator/private-state
+        # attribution or a later indirect report that updates last_valid_time.
+        provenance = [p for p in belief.provenance if p.get('evidence_id') in b['basis_evidence_ids']]
+        source_ids = [p['source_event_id'] for p in provenance if p['evidence_level'] == 'DIRECT_SELF_REPORT']
+        sources = [e for e in belief.evidence if e['event_id'] in source_ids and e['actor_id'] == focal]
+        for d in checked.get('readings', []):
+            if (d['definition_id'] not in checked.get('focal_reading_ids', []) or
+                d['actor_id'] != focal or d['authority'] != 'DIRECT_SELF_REPORT'):
+                continue
+            basis = [d['source_event_id']]
+            basis.extend(eid for c in d['criterion_checks'] for eid in c['source_event_ids'])
+            basis.extend(d['application_source_ids'])
+            concept_sources = [e for e in concept.evidence if e['event_id'] in basis]
+            relation = 'UNRESOLVED_SOURCE_COMPARISON'
+            if b['status'] == 'AFFIRMED' and sources and len(provenance) == len(sources):
+                report_time = max(parse(e['valid_time']) for e in sources)
+                report_record = max(parse(e['recorded_at']) for e in sources)
+                if len({e['event_id'] for e in concept_sources}) != len(set(basis)):
+                    relation = 'UNRESOLVED_SOURCE_COMPARISON'
+                elif any(parse(e['valid_time']) > report_time or parse(e['recorded_at']) > report_record for e in concept_sources):
+                    relation = 'LATER_CONTEXT_NOT_EVIDENCE_OF_EARLIER_BELIEF'
+                elif d['state'] == 'CRITERIA_MET':
+                    relation = 'CONSISTENT_WITH_LOCAL_SOURCE_CRITERIA'
+                elif d['state'] == 'CRITERIA_NOT_MET':
+                    relation = 'DIFFERS_FROM_LOCAL_SOURCE_CRITERIA'
+                elif d['state'] == 'DECLARED_COUNTEREXAMPLE':
+                    relation = 'DIFFERS_FROM_EXPLICIT_LOCAL_APPLICATION'
+            rows.append(dict(actor_id=focal, context=scenario['context'], item=scenario['item'], term=scenario['term'],
+                belief_status=b['status'], belief_basis_evidence_ids=list(b['basis_evidence_ids']),
+                belief_source_event_ids=[e['event_id'] for e in sources],
+                definition_id=d['definition_id'], concept_state=d['state'],
+                concept_source_event_ids=list(dict.fromkeys(basis)), relation=relation,
+                scope='SOURCE_COMPARISON_NOT_PRIVATE_WORLD_OR_MORAL_TRUTH'))
+    return dict(status='SOURCE_SCOPED_COMPARISON' if rows else 'NO_COMPARABLE_VISIBLE_SELF_REPORT_AND_LOCAL_READING',
+        reading_relation=checked.get('reading_relation', 'NO_SOURCE_READING'),
+        rows=rows, unsupported_inferences=['belief is false', 'shared meaning', 'deception', 'irrationality',
+            'private intention', 'moral truth'])
+
+
+def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, compact_context=True, pool_sources=False,
+                            compare_belief_concepts=False):
     """Prepare 2–3 existing operations, from a common source, with no model calls."""
     if not isinstance(layer, HCLCognitionLayer):
         raise ValueError('existing cognition layer required')
@@ -53,7 +118,8 @@ def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, 
     if (not isinstance(requests, tuple) or not 2 <= len(requests) <= 3 or
         not all(isinstance(r, CognitionRequest) for r in requests)):
         raise ValueError('two or three bounded existing operation requests required')
-    if type(max_context_chars) is not int or not 512 <= max_context_chars <= 64000 or type(compact_context) is not bool or type(pool_sources) is not bool:
+    if (type(max_context_chars) is not int or not 512 <= max_context_chars <= 64000 or
+        any(type(flag) is not bool for flag in (compact_context, pool_sources, compare_belief_concepts))):
         raise ValueError('bounded composition context and explicit encoding required')
     first = requests[0]
     if not first.target_actor or not (first.narrative or first.evidence):
@@ -87,6 +153,8 @@ def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, 
         temporal_scope={'event_time': first.event_time, 'knowledge_cutoff': first.knowledge_cutoff},
         operation_contexts=[dict(operation=op, cognition_context=row) for op, row in zip(operations, contexts)],
         cross_operation_inference='NO_AUTOMATIC_CONCEPT_PREFERENCE_INTENTION_OR_MORAL_PROMOTION')
+    if compare_belief_concepts:
+        state['belief_concept_comparison'] = _compare_belief_concepts(stages, operations)
     if pool_sources:
         state = pool_composed_sources(state)
     serialized = json.dumps(state, ensure_ascii=False, sort_keys=True)
@@ -105,6 +173,8 @@ def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, 
         policy = policy.replace(COMPACT_POLICY, '').strip() + ' ' + COMPACT_POLICY
     if 'source_pool_encoding' in state:
         policy += ' ' + POOL_POLICY
+    if compare_belief_concepts:
+        policy += ' ' + COMPARISON_POLICY
     messages = (dict(role='system', content=policy), dict(role='user', content=json.dumps(
         {'query': query, 'composed_cognition': state}, ensure_ascii=False, sort_keys=True)))
     receipt = dict(method='existing_capability_composition', operations=list(operations),

@@ -669,3 +669,15 @@ comparison of expressed belief and existing local concept criteria. Explain a
 bounded mismatch without automatically concluding the belief is false, the local
 meaning is shared, or any moral premise is true. Keep only CG04/05 pending; zero
 new paid run or third module, no benchmark/source search or owner gate.
+
+
+NIGHT-INTEGRATION-05 certified on PR144 head/main402 tests, all six groups PASS.
+NIGHT-INTEGRATION-06 implements explicit source-scoped comparison of retained
+belief with existing concept readings, preserving actual source timestamp and
+all unresolved/indirect/access boundaries. Certify head/main; then add a bounded
+ordinary-question entrypoint selecting these existing preparations/composition
+from explicit actor/context/item/term semantics. No supplied correct mental state,
+extra extraction, synonym/ontology inference or third candidate. Ambiguous tasks
+keep authorized reader source with structured analysis unresolved. CG04/05
+freezes stay unchanged/deferred; continue provider-free implementation, no owner
+paid gate or leaderboard/source hunting.
