@@ -8,7 +8,7 @@ from hcl.v04.model import EventRecord
 from .capabilities import CostClass, resolve_dependencies
 from .narrative import query_actor
 from .cg02 import SocialAct, ParticipantInterpretation, AccessStatement
-from .cg03 import ResponsibilityCase
+from .cg03 import ResponsibilityCase, NarrativePremise
 
 
 @dataclass(frozen=True)
@@ -43,6 +43,8 @@ class CognitionRequest:
     social_interpretations: tuple[ParticipantInterpretation, ...] = ()
     social_access_statements: tuple[AccessStatement, ...] = ()
     responsibility_case: ResponsibilityCase | None = None
+    responsibility_analysis: bool = False
+    responsibility_premises: tuple[NarrativePremise, ...] = ()
 
     def __post_init__(self):
         if not isinstance(self.query, str) or not self.query.strip() or len(self.query) > 16000:
@@ -78,6 +80,17 @@ class CognitionRequest:
             raise ValueError('semantic preparation flag must be boolean')
         if type(self.social_analysis) is not bool:
             raise ValueError('social analysis flag must be boolean')
+        if type(self.responsibility_analysis) is not bool:
+            raise ValueError('responsibility analysis flag must be boolean')
+        if self.responsibility_analysis:
+            if (self.responsibility_case is not None or not self.target_actor or
+                self.narrative is None or self.evidence or
+                not isinstance(self.responsibility_premises, tuple) or
+                not 1 <= len(self.responsibility_premises) <= 3 or
+                not all(isinstance(p, NarrativePremise) for p in self.responsibility_premises)):
+                raise ValueError('ordinary responsibility path needs actor, narrative and typed caller premises')
+        elif self.responsibility_premises:
+            raise ValueError('narrative premises require responsibility analysis')
         if (not isinstance(self.social_acts, tuple) or len(self.social_acts) > 6 or
             not all(isinstance(act, SocialAct) for act in self.social_acts)):
             raise ValueError('bounded typed social acts required')
@@ -105,6 +118,7 @@ class CognitionRequest:
             event_ids = {e.event_id for e in self.evidence}
             required = {case.action_event_id, case.outcome_event_id}
             required.update(eid for premise in case.premises for eid in premise.basis_event_ids)
+            required.update(claim.source_event_id for claim in case.claims)
             if not required <= event_ids:
                 raise ValueError('responsibility case references missing source event')
             action = next(e for e in self.evidence if e.event_id == case.action_event_id)
@@ -168,7 +182,7 @@ class CognitionRouter:
             PerspectiveMode.CHARACTER_PERSPECTIVE if request.target_actor and (request.tools or re.search(
                 r'\b(what does .+ (?:know|believe|think|want)|what did .+ (?:know|believe|think|want)|from .+ perspective)\b|知道什么|从.+视角|以.+视角', query)
             ) else PerspectiveMode.READER_ANALYSIS)
-        responsibility = request.responsibility_case is not None
+        responsibility = request.responsibility_case is not None or request.responsibility_analysis
         social = bool(not responsibility and target_actor and (request.social_analysis or request.social_acts or
             request.social_interpretations or request.social_access_statements or re.search(
             r'\b(?:promis(?:e|ed|es)|commit(?:ment|ted)?|propos(?:e|al|ed)|request(?:ed)?|accept(?:ed|ance)?|refus(?:e|ed|al)|withdraw(?:al|n)?|misunderstand(?:ing)?|expect(?:s|ed|ation|ations)?)\b|承诺|提议|请求|接受|拒绝|撤回|误解|期待',

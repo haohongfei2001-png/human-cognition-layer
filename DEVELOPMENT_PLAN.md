@@ -510,10 +510,12 @@ responsibility basis **under an explicit normative premise**. A causal link or
 bad outcome alone must not become intent, blame or a universal moral verdict.
 
 The bounded [CG-03 capability contract](docs/HCL_CG03_CAPABILITY_CONTRACT.md)
-sets the A → B → C → D → CERT → E implementation order. **CG03-A** now has an
-actual bounded v1 typed operation with source-visible input projection and no
-premature factor or responsibility conclusion. The immediate milestone is
-**CG03-B**, source/time/access factor checks. Provider-free
+sets the A → B → C → D → CERT → E implementation order. **CG03-A–D** now have
+the bounded typed operation, source/time/access factor checks, conditional
+caller-premise evaluation and a conservative exact-line ordinary-text path.
+The immediate milestone is **CG03-CERT**, provider-free exact-head/main
+certification and historical regressions; then **CG03-E** freezes a fair
+C/P/G/H/H-new development package without paid execution. Provider-free
 implementation comes before external package work. No CG-02 rerun, new paid
 experiment, sealed LongMemEval use or leaderboard selection is part of this
 transition.
