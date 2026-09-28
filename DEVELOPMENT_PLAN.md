@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–B COMPLETE / WAVE C / C01–C04 CORRECTNESS_VERIFIED / NEXT_READY=C05**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–C COMPLETE / WAVE D / NEXT_READY=D01**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -254,9 +254,14 @@ C04 now reuses v0.8 to preserve mixed feeling reports, explicit reappraisal and
 current goal-sensitive checks without inferring an actual emotion. Fourteen
 targeted checks plus full regression; see `docs/HCL_WAVE_C04.md`.
 
-**C05 — NEXT_READY:** integrated belief → plan → conditional action explanation
+**C05 — CORRECTNESS_VERIFIED:** integrated belief → plan → conditional action explanation
 → appraisal; a changed premise updates dependent checks while unsupported
-emotion remains a hypothesis or unknown, never a certain label.
+emotion remains a hypothesis or unknown, never a certain label. Thirteen targeted
+checks cover actual dependency changes, action-time boundaries, access, source
+revision and shared extraction. See `docs/HCL_WAVE_C05.md`.
+
+**D01 — NEXT_READY:** social acts and commitment lifecycle, separating original
+words, conditions, receipt, acceptance, expectation, withdrawal and fulfillment.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -417,12 +422,12 @@ defect is.
 
 - Current wave: **Wave C — Goals, Plans and Appraisal**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: C05_INTEGRATED_AGENCY_AND_APPRAISAL**
+- **NEXT_READY: D01_SOCIAL_ACT_AND_COMMITMENT_LIFECYCLE**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A05/B01–B05/C01–C04 actual provider calls / spend: **0 / USD 0**
+- A01–A05/B01–B05/C01–C05 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **C05**, then continue through the dependency-safe queue
+Work should continue at **D01**, then continue through the dependency-safe queue
 without asking for a new decision after every package.

@@ -29,3 +29,5 @@ from .action_explanations import ActionExplanations, prepare_explanations
 from .plan_feasibility import PlanFeasibility, prepare_plan_feasibility
 
 from .appraisal import AppraisalResult, prepare_appraisal
+
+from .agency_chain import AgencyChain, SemanticWorkspace, prepare_agency_chain

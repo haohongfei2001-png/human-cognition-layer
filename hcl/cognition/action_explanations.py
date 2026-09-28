@@ -214,7 +214,8 @@ def prepare_explanations(workspace, query, *, source_id, observer=None):
         claims.append(claim)
         results.append(dict(result, claim_id=claim))
     payload = dict(query=query, actor=actor, action=action, original_source=original,
-        action_quote=action_span.quote, source_events=[asdict(e) for e in events], explanations=results, conditions=[asdict(f) for f in facts], condition_claims=fact_claims,
+        action_quote=action_span.quote, action_source_span_id=core.claims[action_candidate].content['source_span_id'],
+        action_source_start=action_span.start, action_source_end=action_span.end, source_events=[asdict(e) for e in events], explanations=results, conditions=[asdict(f) for f in facts], condition_claims=fact_claims,
         diagnostics=diagnostics, hypothesis_set='NON_EXHAUSTIVE_NON_EXCLUSIVE',
         winning_motive='NOT_INFERRED', source_order_time='CONDITIONAL_NOT_VERIFIED_CHRONOLOGY',
         c01_prefix=agency_payload, dependency_claim_ids=claims, provider_calls=0, policy=_POLICY)

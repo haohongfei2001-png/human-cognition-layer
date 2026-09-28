@@ -2,6 +2,11 @@
 from types import MappingProxyType
 
 PACKAGES = MappingProxyType({
+    'C05': MappingProxyType(dict(
+        implementation='CORRECTNESS_VERIFIED', ordinary_input='REPLAY_VERIFIED',
+        efficacy='UNTESTED', activation='OPT_IN',
+        entrypoint='hcl.cognition.prepare_agency_chain',
+        limitation='source-order conditional plan/explanation joins; no unique motive, inferred emotion or independent efficacy')),
     'C04': MappingProxyType(dict(
         implementation='CORRECTNESS_VERIFIED', ordinary_input='REPLAY_VERIFIED',
         efficacy='UNTESTED', activation='OPT_IN',
