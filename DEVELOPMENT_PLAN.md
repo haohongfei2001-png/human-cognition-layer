@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–B COMPLETE / WAVE C / C01–C03 CORRECTNESS_VERIFIED / NEXT_READY=C04**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–B COMPLETE / WAVE C / C01–C04 CORRECTNESS_VERIFIED / NEXT_READY=C05**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -248,9 +248,15 @@ change from plan change. C03 now joins C01 plans with B03 belief revision and
 explicit model conditions; subjective support can coexist with model contradiction.
 Eleven targeted checks plus full regression; see `docs/HCL_WAVE_C03.md`.
 
-**C04 — NEXT_READY:** event/goal/control/certainty appraisal, mixed affect and
+**C04 — CORRECTNESS_VERIFIED:** event/goal/control/certainty appraisal, mixed affect and
 reappraisal; expression, reported feeling and inferred appraisal must stay distinct.
-Then C05 integrated belief → plan → explanation → appraisal.
+C04 now reuses v0.8 to preserve mixed feeling reports, explicit reappraisal and
+current goal-sensitive checks without inferring an actual emotion. Fourteen
+targeted checks plus full regression; see `docs/HCL_WAVE_C04.md`.
+
+**C05 — NEXT_READY:** integrated belief → plan → conditional action explanation
+→ appraisal; a changed premise updates dependent checks while unsupported
+emotion remains a hypothesis or unknown, never a certain label.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -411,12 +417,12 @@ defect is.
 
 - Current wave: **Wave C — Goals, Plans and Appraisal**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: C04_GOAL_LINKED_APPRAISAL_AND_REAPPRAISAL**
+- **NEXT_READY: C05_INTEGRATED_AGENCY_AND_APPRAISAL**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A05/B01–B05/C01–C03 actual provider calls / spend: **0 / USD 0**
+- A01–A05/B01–B05/C01–C04 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **C04**, then continue through the dependency-safe queue
+Work should continue at **C05**, then continue through the dependency-safe queue
 without asking for a new decision after every package.

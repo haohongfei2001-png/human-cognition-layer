@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**LONG-HORIZON CAPABILITY GROWTH — WAVES A–B COMPLETE / WAVE C / C01–C03 CORRECTNESS_VERIFIED / NEXT_READY=C04**
+**LONG-HORIZON CAPABILITY GROWTH — WAVES A–B COMPLETE / WAVE C / C01–C04 CORRECTNESS_VERIFIED / NEXT_READY=C05**
 
 The long-horizon architecture and 41-package roadmap are canonical in
 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md).
@@ -17,7 +17,7 @@ A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
-**NEXT_READY: `C04_GOAL_LINKED_APPRAISAL_AND_REAPPRAISAL`**
+**NEXT_READY: `C05_INTEGRATED_AGENCY_AND_APPRAISAL`**
 
 A01 now provides shared versioned evidence, scoped source reports and
 interpretations, alternative support sets and rooted invalidation. A source
@@ -35,7 +35,7 @@ Actual final inputs carry support, challenges and retired source history. See
 
 State: **CORRECTNESS_VERIFIED / REPLAY_VERIFIED / UNTESTED / OPT_IN**.
 The local entry recognizes bounded explicit speech forms; open backend candidates
-remain semantically unverified. No real provider has been called in A01–A05/B01–B05/C01–C03.
+remain semantically unverified. No real provider has been called in A01–A05/B01–B05/C01–C04.
 Historical efficacy dispositions are unchanged. A04–A05 connect retained v0.6/CG03/CG04/CG05 operations to the common material.
 Original quotes, derived representation and assumptions stay separate. A property
 revision changes the concept checker and its dependent belief/concept comparison;
@@ -67,7 +67,9 @@ explanations and weakens knowledge-dependent candidates after explicit action-ti
 ignorance evidence, without choosing a true motive. See [C02](docs/HCL_WAVE_C02.md).
 C03 now separates reported-belief plan support from declared-model conditions;
 belief revision changes the dependent check, and plan replacement does not imply
-a value change. See [C03](docs/HCL_WAVE_C03.md). C04 is next.
+a value change. See [C03](docs/HCL_WAVE_C03.md). C04 now links source goals and appraisals, preserves mixed reports and anchored
+reappraisal, and keeps expression/control/certainty claims separate from actual
+feeling or knowledge. See [C04](docs/HCL_WAVE_C04.md). C05 is next.
 Live-provider efficacy remains unverified.
 
 ## Canonical development policy
