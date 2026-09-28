@@ -176,3 +176,37 @@ Ten provider-free tests and actual before/after/private/conflict message receipt
 exercise the new path. This is integration correctness, not external efficacy.
 CG04/05 remain the only two implemented-unvalidated/deferred candidates; no paid
 call, new grant/trigger or LongMemEval access.
+
+
+## Two-participant source-bounded contrast
+
+Failure: composing actor-local state does not itself justify comparing two minds;
+one participant's exposure/self-report could be copied to the other. A simple
+alternative is two evidence-bounded answers. This integration independently
+projects retained v0.6 belief/perspective for two explicitly named participants,
+then transmits both complete source-bounded states to one final answer.
+**CAPABILITY_DELTA:** an ordinary question can compare supported participant views
+while exposing distinct public/nonpublic evidence, self-report and unknown state.
+
+`prepare_perspective_contrast(layer, "Contrast Alice and Bob's views of proposal
+as fair in team.", ordinary_source)` or `比较 Alice 与 Bob 在 team 中对 proposal
+是否 fair 的视角。`; `answer_perspective_contrast` calls the existing adapter once.
+Default views are independent character projections, requiring existing exact
+narrated exposure syntax. `observer_actor='Carol'` restricts each view to what
+Carol can establish; unauthorized reader text is never a fallback. Typed raw
+EventRecords can preserve explicit upstream public/access and event/record-time
+metadata, with no caller mental-state gold. Public declarations are not verified
+world truth or delivery receipts. Ordinary text does not invent public status.
+
+Shared available source IDs mean access basis, not shared acceptance. The relation
+compares only direct self-report stances about the exact context/item/term; narrator
+or third-party estimates remain reported source evidence. Unknown system evidence
+is not character uncertainty. Explicit self uncertainty remains distinct from
+missing evidence. Differences imply no deception, irrationality, relationship
+state, motive or moral blame. Statement-prefix selection occurs before both views;
+typed event/record cutoffs exclude later content separately. Invalid actor/scope/
+metadata refuses reader fallback. Total context budget drops both views together.
+
+Ten meaningful tests and actual private/public/observer input receipts exercise
+these boundaries; all prior frozen/default inputs remain compatible. Integration
+correctness only; no third candidate, provider execution or historical upgrade.
