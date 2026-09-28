@@ -2,13 +2,13 @@
 
 ## Current phase
 
-**CG04 RETAIN_DEVELOPMENT_ONLY / CLOSED / EXACT-MAIN CI PASS; CG05 ONE-SHOT OWNER AUTHORIZED**
+**CG04 / CG05 RETAIN_DEVELOPMENT_ONLY / CLOSED; ZERO PENDING SLOTS; POST-CG05 GAP REVIEW NEXT**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
 ## Canonical policy
 
-Capability growth is the development main line: **real human-cognition capability growth > external validation > leaderboard**. Base model first. Use the minimum evidence-grounded capability set only when needed. A simple prompt or generic exact tool is preferred when sufficient. Specialized mechanisms require incremental evidence. No automatic action-to-motive/emotion, narrator-to-character, exposure-to-revision, or computation-to-world-truth promotion. Owner now authorizes exactly the frozen CG04 then CG05 comparisons, USD 0.30 each, independently. All historical budgets remain closed; no rerun or transfer. The canonical execution plan is [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md).
+Capability growth is the development main line: **real human-cognition capability growth > external validation > leaderboard**. Base model first. Use the minimum evidence-grounded capability set only when needed. A simple prompt or generic exact tool is preferred when sufficient. Specialized mechanisms require incremental evidence. No automatic action-to-motive/emotion, narrator-to-character, exposure-to-revision, or computation-to-world-truth promotion. The owner-authorized frozen CG04 and CG05 comparisons are both consumed and closed. All grants are zero; no paid run, rerun or budget transfer is currently authorized. The canonical execution plan is [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md).
 
 ## Engineering state
 
@@ -634,3 +634,7 @@ Owner baseline main 1185b981 authorizes CG04 once, then CG05 once only after CG0
 Run36463463452, frozen runtime018afbc and package0ffcfdfa, 20 calls/0 retries, C26/P23/G25/H28/H-new26 of28. RETAIN_DEVELOPMENT_ONLY, bounded optional applicability/unknown-condition protection; no independent or fresh evidence. Raw requests/responses, usage, final inputs, treatment preflight and artifact hashes preserved. Conservative USD0.03948384, published-rate estimate USD0.016720352, invoice unavailable. Grant0, trigger deleted, unused money extinguished. Only CG05 remains implemented-unvalidated. Immediately after this closure exact-main CI, activate and execute CG05 once with its independent USD0.30 authorization and certified c7593bc runtime. No new samples/reruns; LongMemEval SEALED.
 
 CG04 closure PR157 merged bc51049, all six exact-main groups PASS, 329 v1+176 historical. CG04 workflow disabled, grant0 and trigger absent. CG05 now has its separate single-run grant and hash-pinned transport adapter; full cognition runtime remains certified c7593bc, frozen builders/scorer/messages unchanged. [CG04 closure certification](reports/HCL_CG04_CLOSURE_CERTIFICATION.json). After exact-main CG05 activation CI, create one unique trigger; source-first closure follows immediately.
+
+## CG05 source-first paid closure / current task
+
+Run36464819798, frozen runtimec7593bc/package9ade8288 and pinned adapter8a539144, 20 calls/0 retries, C21/P23/G21/H28/H-new23 of28. RETAIN_DEVELOPMENT_ONLY, bounded local criteria/uncertainty/counterexample protection; no independent/fresh evidence. Full raw requests/responses/usage/scorer/treatment and artifact hashes preserved. Conservative USD0.04263072, published-rate estimate USD0.018375456, invoice unavailable. Grant0, trigger deleted, workflow disabled, unused money extinguished. Zero pending candidate slots. Total newly authorized calls40, rated USD0.08211456, estimates USD0.035095808, budgets independent and now closed. LongMemEval SEALED. After exact-main closure CI, perform POST-CG05 CAPABILITY GAP REVIEW before creating any new contract/module; no automatic CG06 or leaderboard.

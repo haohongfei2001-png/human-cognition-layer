@@ -1,6 +1,6 @@
 # CG-05 — Concept Interpretation in Person/Social Context
 
-Status: **A–D/CERT COMPLETE; E READY / DEFERRED_OWNER_AUTHORIZATION; provider calls 0**
+Status: **RETAIN_DEVELOPMENT_ONLY / CLOSED; one frozen comparison consumed; no rerun**
 
 ## CAPABILITY_DELTA / minimal brief
 
@@ -86,3 +86,7 @@ tier, thinking disabled, 20 calls/0 retries/512 output tokens, USD 0.30 hard cap
 conservative reservation USD 0.29537640. No trigger, active grant or paid run.
 The evidence disposition stays IMPLEMENTED_UNVALIDATED. These authored cases
 can yield development evidence only. Continue retained integration and cost work.
+
+## Consumed owner authorization / current disposition
+
+Owner baseline main1185b981 separately authorized one frozen comparison. Run36464819798 executed certified runtimec7593bc and immutable builders/scorer/messages; no latest runtime. Source-first disposition RETAIN, development-only: C21/P23/G21/H28/H-new23 of28. USD0.30 grant consumed/closed, workflow disabled/cap0, trigger removed, no transfer/rerun. Frozen package bytes and original proposal metadata remain unchanged. [Complete closure](../reports/HCL_CG05_EXTERNAL_DEVELOPMENT_CLOSURE.md).

@@ -1,0 +1,11 @@
+{
+  "control_sha": "b9850d64489b0c999f9ced63d021816ccca1e9bc",
+  "control_before": "bdfaca21448dcf639adc9fc20cd3c9b239ec648a",
+  "run_id": "36464819798",
+  "run_attempt": "1",
+  "authorized_runtime_sha": "c7593bcf5ef8199eb8f1adb3b6f96fb2a0367b94",
+  "frozen_runtime_sha": "c7593bcf5ef8199eb8f1adb3b6f96fb2a0367b94",
+  "frozen_package_sha256": "9ade82883d7dd954b3b092af7b4501b679ca950bf0ca432f108bd35a29400dc7",
+  "owner_grant_cap_usd": "0.30",
+  "execution_adapter_sha256": "8a539144d315b3aa5835fe3e90d6b4605aad3ec234fe06be8595093280b6ebd2"
+}

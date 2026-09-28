@@ -18,9 +18,9 @@ jobs:
     timeout-minutes: 30
     env:
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-      # Independent owner CG05 grant: one frozen run after certified CG04 closure.
-      HCL_CG05_AUTHORIZED_CAP_USD: "0.30"
-      HCL_CG05_AUTHORIZED_BASE_SHA: c7593bcf5ef8199eb8f1adb3b6f96fb2a0367b94
+      # CG05 one-shot grant consumed and closed; no rerun.
+      HCL_CG05_AUTHORIZED_CAP_USD: "0"
+      HCL_CG05_AUTHORIZED_BASE_SHA: UNAUTHORIZED
       HCL_CG05_FROZEN_RUNTIME_SHA: c7593bcf5ef8199eb8f1adb3b6f96fb2a0367b94
       HCL_CG05_FROZEN_PACKAGE_SHA256: 9ade82883d7dd954b3b092af7b4501b679ca950bf0ca432f108bd35a29400dc7
       HCL_CG05_EXECUTION_ADAPTER_SHA256: 8a539144d315b3aa5835fe3e90d6b4605aad3ec234fe06be8595093280b6ebd2

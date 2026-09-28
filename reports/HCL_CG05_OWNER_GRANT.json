@@ -1,7 +1,7 @@
 {
   "schema": "hcl-cg05-owner-grant-v1",
   "owner_instruction_baseline": "1185b98101c88b641194ff05b651eb3f2ce7af7b",
-  "state": "AUTHORIZED_ONE_UNUSED_ATTEMPT",
+  "state": "CONSUMED_CLOSED",
   "calls": 20,
   "retries": 0,
   "output_tokens_per_call": 512,
@@ -26,8 +26,16 @@
     "invoice_cost": "NOT_AVAILABLE_FROM_COMPLETION_API"
   },
   "longmemeval": "SEALED_NOT_ACCESSED",
-  "cap_usd": 0.3,
   "execution_adapter_sha256": "8a539144d315b3aa5835fe3e90d6b4605aad3ec234fe06be8595093280b6ebd2",
   "preceding_cg04_closure_main_sha": "bc51049ce10b098547cb2875a62c6f01f77993e7",
-  "transferable_to_any_other_run": false
+  "transferable_to_any_other_run": false,
+  "original_authorized_cap_usd": 0.3,
+  "remaining_authorized_usd": 0,
+  "provider_calls_executed": 20,
+  "rated_cost_usd": 0.04263072,
+  "published_rate_estimated_cost_usd": 0.018375456,
+  "invoice_cost_usd": null,
+  "run_id": "36464819798",
+  "trigger": "DELETED_BY_CLOSURE",
+  "unused_budget": "EXTINGUISHED_NOT_TRANSFERABLE"
 }

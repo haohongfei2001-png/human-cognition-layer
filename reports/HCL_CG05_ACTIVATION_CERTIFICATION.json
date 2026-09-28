@@ -1,0 +1,38 @@
+{
+  "schema": "hcl-cg05-activation-certification-v1",
+  "activation_pr": 158,
+  "exact_head": {
+    "schema": "hcl-v1-provider-free-certification-v1",
+    "sha": "04cbeb2ee01bf3f25abcd11967e346e75f2e875d",
+    "workflow_event_sha": "b220fefedc16558dc5c0ab29ef0a6981b0b46f7f",
+    "run_id": "36464575046",
+    "event": "pull_request",
+    "counts": {
+      "v1": 332,
+      "historical": 176
+    },
+    "runtime_sha256": "b11aa081f54f845c7644510753e7485fc03a27098463a2651516cee1dd5ebff3",
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "scope": "CORRECTNESS_NOT_EXTERNAL_UTILITY",
+    "longmemeval": "SEALED_NOT_IN_TEST_SELECTION"
+  },
+  "exact_main": {
+    "schema": "hcl-v1-provider-free-certification-v1",
+    "sha": "bdfaca21448dcf639adc9fc20cd3c9b239ec648a",
+    "workflow_event_sha": "bdfaca21448dcf639adc9fc20cd3c9b239ec648a",
+    "run_id": "36464696603",
+    "event": "push",
+    "counts": {
+      "v1": 332,
+      "historical": 176
+    },
+    "runtime_sha256": "b11aa081f54f845c7644510753e7485fc03a27098463a2651516cee1dd5ebff3",
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "scope": "CORRECTNESS_NOT_EXTERNAL_UTILITY",
+    "longmemeval": "SEALED_NOT_IN_TEST_SELECTION"
+  },
+  "all_applicable_exact_head_main": "PASS",
+  "frozen_runtime_sha": "c7593bcf5ef8199eb8f1adb3b6f96fb2a0367b94"
+}

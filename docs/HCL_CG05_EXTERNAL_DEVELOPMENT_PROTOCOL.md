@@ -1,6 +1,6 @@
 # CG-05 frozen synthetic development comparison
 
-**READY / DEFERRED_OWNER_AUTHORIZATION. No active grant, trigger or provider run.**
+Status: **RETAIN_DEVELOPMENT_ONLY / CLOSED; one frozen comparison consumed; no rerun**
 
 Four public HCL-authored synthetic cases: speaker-local criteria differ; unknown
 properties plus third-party attribution; explicit local revision preserving
@@ -50,3 +50,7 @@ No case switching, rerun, additional sample, automatic new spending or independe
 claim. Even RETAIN is development evidence only. During this night, preserve
 this package deferred and continue integration/cost/preparation work with the
 existing two candidates; do not open a third large unvalidated module.
+
+## Consumed owner authorization / current disposition
+
+Owner baseline main1185b981 separately authorized one frozen comparison. Run36464819798 executed certified runtimec7593bc and immutable builders/scorer/messages; no latest runtime. Source-first disposition RETAIN, development-only: C21/P23/G21/H28/H-new23 of28. USD0.30 grant consumed/closed, workflow disabled/cap0, trigger removed, no transfer/rerun. Frozen package bytes and original proposal metadata remain unchanged. [Complete closure](../reports/HCL_CG05_EXTERNAL_DEVELOPMENT_CLOSURE.md).
