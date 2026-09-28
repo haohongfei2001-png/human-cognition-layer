@@ -2,11 +2,12 @@
 
 HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息、信念、视角和有来源的心理证据。**基础模型可以直接做好时，直接回答。** 简单提示足够时不调用复杂机制；精确计算采用通用工具；专门认知机制只保留得到增量证据支持的部分。
 
-当前阶段：**HCL Capability Growth；CG-02 Social Commitment, Expectation and Misunderstanding 已启动**。CG-01 已按 SIMPLIFY 结案；v1 integration foundation 已完成。唯一实时状态：[STATUS.md](STATUS.md)，长期执行计划见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
+当前阶段：**HCL Capability Growth；CG-03 Responsibility-Structure Explanation 开始实现**。CG-02 的一次性开发比较已按 INCONCLUSIVE 结案；v1 integration foundation 已完成。唯一实时状态：[STATUS.md](STATUS.md)，长期执行计划见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
 
 - [可执行 capability registry](docs/HCL_V1_CAPABILITY_REGISTRY.md)：核心、可选结构、通用工具、停用研究资产。
 - [Router / context / answer API](docs/HCL_V1_COGNITION_ROUTER.md)：确定性最小路由、有访问和时间边界的上下文、单次底座模型调用。
-- [Capability Growth development plan](DEVELOPMENT_PLAN.md)：真实能力增长优先于外部验证；当前工作包为 CG-02。
+- [Capability Growth development plan](DEVELOPMENT_PLAN.md)：真实能力增长优先于外部验证；当前工作包为 CG-03。
+- [CG-03 capability contract](docs/HCL_CG03_CAPABILITY_CONTRACT.md)：在显式规范前提下区分因果贡献、知识、可预见性、控制与意图。
 - [CG-02 capability contract](docs/HCL_CG02_CAPABILITY_CONTRACT.md)：社会承诺、期待与误解的最小能力边界、阶段和 treatment-presence gate。
 - CG-01 的一次性开发验证和结案见 [报告](reports/HCL_CG01_EXTERNAL_DEVELOPMENT_CLOSURE.md)。
 - [集成评估来源审查与设计](docs/HCL_V1_INTEGRATED_EVALUATION_PROTOCOL.md)：保留为 external-validation backlog；不再阻塞新 capability implementation。
@@ -53,7 +54,7 @@ preserves the distinction between failed end-to-end use and inconclusive
 checker efficacy.
 
 
-## Active capability-growth package
+## Completed CG-02 development package
 
 **HCL-CG-02 — Social Commitment, Expectation and Misunderstanding**
 
@@ -65,16 +66,14 @@ classifier.
 
 The canonical scope and execution order are in
 [docs/HCL_CG02_CAPABILITY_CONTRACT.md](docs/HCL_CG02_CAPABILITY_CONTRACT.md) and
-[DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md). No paid CG-02 experiment is
-authorized. Before any future budget request, provider-free preflight must prove
-that H actually executes the CG-02 treatment and H/H-new final inputs differ
-because of it.
+[DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md). Its one-time DeepSeek comparison
+passed treatment-presence preflight and is closed as **INCONCLUSIVE** after
+[source-first review](reports/HCL_CG02_EXTERNAL_DEVELOPMENT_CLOSURE.md).
 
 The source-grounded A-D runtime path is described in
 [docs/HCL_CG02_IMPLEMENTATION.md](docs/HCL_CG02_IMPLEMENTATION.md). It checks
 explicit conditions, source access and reported expectations; its ordinary-text
-grammar is narrow and fails closed. Provider-free A-D/CERT is complete on main;
-the [CG-02 external development protocol](docs/HCL_CG02_EXTERNAL_DEVELOPMENT_PROTOCOL.md)
-and [frozen five-arm package](reports/HCL_CG02_EXTERNAL_PACKAGE.json) pass the
-treatment-presence preflight without provider calls. Paid validation awaits the
-owner gate recorded in [STATUS.md](STATUS.md).
+grammar is narrow and fails closed. The [frozen five-arm package](reports/HCL_CG02_EXTERNAL_PACKAGE.json)
+and [full raw receipt](reports/HCL_CG02_EXTERNAL_RUN_36413088075.json) are
+preserved. The next implementation package is
+[CG-03 responsibility-structure explanation](docs/HCL_CG03_CAPABILITY_CONTRACT.md).

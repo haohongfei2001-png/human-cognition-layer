@@ -1,6 +1,6 @@
 # HCL-CG-02 Capability Contract
 
-Status: **PROVIDER-FREE A-D/CERT/E COMPLETE; EXTERNAL OWNER AUTHORIZATION GATE**
+Status: **PROVIDER-FREE COMPLETE; ONE EXTERNAL DEVELOPMENT RUN INCONCLUSIVE / CLOSED**
 
 Work package: **HCL-CG-02 — Social Commitment, Expectation and Misunderstanding**
 
@@ -241,3 +241,8 @@ The paid gate, if reached, is:
 **HCL_CG02_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION**
 
 LongMemEval remains sealed and is unrelated to CG-02.
+
+The single later owner-authorized DeepSeek run and source-first disposition are
+recorded in [the Phase E closure](../reports/HCL_CG02_EXTERNAL_DEVELOPMENT_CLOSURE.md).
+That grant was consumed and closed. This contract remains the historical scope;
+it does not authorize another paid comparison.

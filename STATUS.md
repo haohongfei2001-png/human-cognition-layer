@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**HCL-CG-02 — Social Commitment, Expectation and Misunderstanding**
+**HCL-CG-03 — Responsibility-Structure Explanation (next implementation)**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -62,7 +62,7 @@ CG-01 remains **SIMPLIFY / CLOSED** for ordinary-text use; its deterministic che
 
 ## Active capability-growth work
 
-**CG-02 — PROVIDER-FREE A-D, CERT AND E COMPLETE; PAID VALIDATION GATED.**
+**CG-02 — SOURCE-FIRST INCONCLUSIVE / CLOSED FOR THIS DEVELOPMENT PACKAGE.**
 
 Canonical contract: [docs/HCL_CG02_CAPABILITY_CONTRACT.md](docs/HCL_CG02_CAPABILITY_CONTRACT.md).
 
@@ -114,23 +114,47 @@ Using the same repository-frozen conservative DeepSeek peak-price basis as CG-01
 20 calls at the frozen per-call bounds have a worst-case rated ceiling of
 **USD 0.2517504**, within the unchanged proposed **USD 0.30 hard cap**.
 
-A dormant one-shot DeepSeek runner/workflow is present but keeps its owner grant
-at zero and has no trigger file. It cannot execute until a later explicit owner
-authorization is encoded separately. No CG-02 provider call has run.
+A dormant one-shot DeepSeek workflow remains for historical reproducibility,
+with its grant reset to zero and the trigger removed. The single authorized
+CG-02 run is consumed; no rerun is authorized.
 
 Provider refreeze PR #123 merged as `1c08a059815a82c7eea0804212e2ce74c50c5084`.
 Its exact-head provider-free checks passed before merge. The first merge-push CI
 attempts failed during dependency installation before any HCL test executed;
-this is treated as CI transport/dependency failure rather than capability
-evidence. A follow-up exact-main certification is being emitted without changing
-the frozen package, provider contract, treatment, budget or runtime logic.
+this was CI transport/dependency failure rather than capability evidence.
+Follow-up main `86e1db9ecdb908cbe67bc561b878a0d37e4cb819` completed the
+provider-free certification with successful [v1 run 36410904352](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36410904352).
+
+Owner-authorized DeepSeek [run 36413088075](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36413088075)
+used the exact frozen package and all 20 C/P/G/H/H-new calls once, with no
+retry and no LongMemEval access. All four H cases passed treatment-presence
+preflight. [Full raw receipt](reports/HCL_CG02_EXTERNAL_RUN_36413088075.json)
+records 13,353 input and 1,648 output tokens, actual model IDs, raw API
+requests/responses, scores and usage. Conservative rated cost was USD
+**0.02415204** versus the USD 0.30 hard cap; the usage/time-based provider
+price estimate was USD **0.01125938**, not a verified invoice. Artifact ID
+10966520253; receipt SHA-256
+`ca271347f343647f190d2c9ba55140865421ff13d79aaebdd46250b308e9b972`.
+
+The [source-first Phase E closure](reports/HCL_CG02_EXTERNAL_DEVELOPMENT_CLOSURE.md)
+selects **INCONCLUSIVE**. Strict exact-field scores were H 24/28, H-new 9/28,
+P 7/28 and G 9/28, but the P/G task inputs omitted several required enum
+values that H's checked context supplied. The small HCL-authored synthetic set
+therefore does not establish a qualified specialized increment. No case, gold,
+prompt, scorer or treatment was changed or rerun. CG-02's deterministic checker
+remains an optional source-valid correctness component; external utility remains
+unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**HCL_CG02_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION**
+**HCL_CG03_A_IMPLEMENTATION**
 
-Provider-free implementation, certification and package freeze are complete.
-The only remaining CG-02 action is owner authorization of the **revised existing-DeepSeek frozen package**. The earlier authorization discussion for the superseded OpenAI-provider assumption does not transfer. Historical budgets do not transfer.
+CG-02's one-time authorization, budget and trigger are closed. The next
+capability-first package is responsibility-structure explanation, selected from
+`DEVELOPMENT_PLAN.md` section 8 and bounded by
+[the CG-03 contract](docs/HCL_CG03_CAPABILITY_CONTRACT.md). No owner action is
+needed for provider-free implementation. Any new paid experiment requires new
+authorization; historical budgets do not transfer.
 
 Leaderboard selection remains deferred until the maturity gate in
 `DEVELOPMENT_PLAN.md` is met. Historical CG-01 provider charge remains bounded

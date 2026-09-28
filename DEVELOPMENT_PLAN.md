@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG-02 PROVIDER-FREE COMPLETE / PAID GATE**
+Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG-02 INCONCLUSIVE / CLOSED; CG-03 ACTIVE**
 
 This file defines the live development direction for HCL. `STATUS.md` records
 current execution state; this file records the development strategy and the next
@@ -336,12 +336,14 @@ Do not:
 
 Do not freeze these as mandatory versions. Re-evaluate after each capability package.
 
-The first candidate is now **selected as CG-02** and removed from the unfrozen pool:
+The first candidate was **selected as CG-02** and is now closed as
+INCONCLUSIVE for this development package. The next listed candidate is selected
+as CG-03. The remaining entries stay an unfrozen priority pool:
 
-1. **CG-02 ACTIVE — Social commitment and misunderstanding explanation** — proposals, requests,
+1. **CG-02 CLOSED / INCONCLUSIVE — Social commitment and misunderstanding explanation** — proposals, requests,
    acceptance, commitments, conditions, who received/understood what; avoid trust
    scores and large relationship graphs.
-2. **Responsibility-structure explanation** — distinguish causal contribution,
+2. **CG-03 ACTIVE — Responsibility-structure explanation** — distinguish causal contribution,
    knowledge, foreseeability, control, intention and responsibility basis under
    explicit normative premises.
 3. **Contextual value conflict and preference** — conditional preferences,
@@ -425,7 +427,7 @@ The completed CG-01 development question was:
 > reliably represent and check before?**
 
 
-## 11. Active work package: HCL-CG-02
+## 11. Completed work package: HCL-CG-02
 
 # HCL-CG-02 — Social Commitment, Expectation and Misunderstanding
 
@@ -467,10 +469,13 @@ preserve explicit conditions and compare participant expectations.
 6. **CG02-E** — freeze a bounded C/P/G/H/H-new external development package, but
    make no paid call without owner authorization.
 
-Execution state: A-D and CERT are complete on exact-head and merged-main
-provider-free CI; E freezes the four-case five-arm package. The canonical next
-gate is `HCL_CG02_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION`, not a new capability
-direction. See `STATUS.md` for exact receipts and budget status.
+Execution state: A-D and CERT completed on exact-head and merged-main
+provider-free CI; E froze the four-case five-arm package. Owner-authorized
+DeepSeek run 36413088075 executed once and the source-first closure selected
+**INCONCLUSIVE** because the frozen strict scorer was biased by uneven enum
+label exposure. The treatment was present and no source/case was replaced.
+The grant and trigger are closed; no rerun is authorized. See `STATUS.md` and
+`reports/HCL_CG02_EXTERNAL_DEVELOPMENT_CLOSURE.md` for exact evidence.
 
 ### Hard treatment-presence gate
 
@@ -495,3 +500,18 @@ The current development question is:
 > **Can HCL preserve what was actually proposed, requested, accepted or
 > conditionally committed, while explaining why different people formed different
 > expectations without inventing private motives or moral blame?**
+
+## 12. Active work package: HCL-CG-03
+
+**Responsibility-structure explanation** is the next candidate from section 8.
+The user-observable delta is to explain how an actor's causal contribution,
+knowledge, foreseeability, control and stated intention bear on a particular
+responsibility basis **under an explicit normative premise**. A causal link or
+bad outcome alone must not become intent, blame or a universal moral verdict.
+
+The bounded [CG-03 capability contract](docs/HCL_CG03_CAPABILITY_CONTRACT.md)
+sets the A → B → C → D → CERT → E implementation order. The immediate milestone
+is **CG03-A**, an actual v1 operation and typed input surface. Provider-free
+implementation comes before external package work. No CG-02 rerun, new paid
+experiment, sealed LongMemEval use or leaderboard selection is part of this
+transition.
