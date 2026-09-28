@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**LONG-HORIZON CAPABILITY GROWTH — WAVE A COMPLETE / WAVE B / B01–B03 CORRECTNESS_VERIFIED / NEXT_READY=B04**
+**LONG-HORIZON CAPABILITY GROWTH — WAVE A COMPLETE / WAVE B / B01–B04 CORRECTNESS_VERIFIED / NEXT_READY=B05**
 
 The long-horizon architecture and 41-package roadmap are canonical in
 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md).
@@ -17,7 +17,7 @@ A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
-**NEXT_READY: `B04_CORRELATED_REPORTS_AND_BOUNDED_DEPTH`**
+**NEXT_READY: `B05_INTEGRATED_EPISTEMIC_REVISION`**
 
 A01 now provides shared versioned evidence, scoped source reports and
 interpretations, alternative support sets and rooted invalidation. A source
@@ -35,7 +35,7 @@ Actual final inputs carry support, challenges and retired source history. See
 
 State: **CORRECTNESS_VERIFIED / REPLAY_VERIFIED / UNTESTED / OPT_IN**.
 The local entry recognizes bounded explicit speech forms; open backend candidates
-remain semantically unverified. No real provider has been called in A01–A05/B01–B03.
+remain semantically unverified. No real provider has been called in A01–A05/B01–B04.
 Historical efficacy dispositions are unchanged. A04–A05 connect retained v0.6/CG03/CG04/CG05 operations to the common material.
 Original quotes, derived representation and assumptions stay separate. A property
 revision changes the concept checker and its dependent belief/concept comparison;
@@ -54,7 +54,10 @@ distinct. Three-person and hidden-content non-interference witnesses pass; see
 [B02](docs/HCL_WAVE_B02.md). B03 separates reported character revision from analyst source correction. Late
 disclosure changes the current interpretation of the past without changing the
 earlier known-at snapshot; source corrections remove unsupported revision anchors
-while preserving unrelated people. See [B03](docs/HCL_WAVE_B03.md). B04 is next.
+while preserving unrelated people. See [B03](docs/HCL_WAVE_B03.md). B04 now contracts copied reports into
+source-related families, preserves report conflict without majority voting, and
+separates character uncertainty from system missing evidence. Three-holder queries
+keep reporting and nested belief scopes; see [B04](docs/HCL_WAVE_B04.md). B05 is next.
 
 ## Canonical development policy
 
