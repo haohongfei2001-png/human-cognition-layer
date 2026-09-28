@@ -2,13 +2,13 @@
 
 ## Current phase
 
-**HCL-V1-CAPABILITY-CONSOLIDATION-AND-COGNITION-ROUTER — v1 integration foundation**
+**HCL-CG-01 — Perspective- and Choice-Constrained Character Explanation**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
 ## Canonical policy
 
-Base model first. Use the minimum evidence-grounded capability set only when needed. A simple prompt or generic exact tool is preferred when sufficient. Specialized mechanisms require incremental evidence. No automatic action-to-motive/emotion, narrator-to-character, exposure-to-revision, or computation-to-world-truth promotion. No new paid experiment is authorized; all historical budgets are closed.
+Capability growth is the development main line: **real human-cognition capability growth > external validation > leaderboard**. Base model first. Use the minimum evidence-grounded capability set only when needed. A simple prompt or generic exact tool is preferred when sufficient. Specialized mechanisms require incremental evidence. No automatic action-to-motive/emotion, narrator-to-character, exposure-to-revision, or computation-to-world-truth promotion. No new paid experiment is authorized; all historical budgets are closed. The canonical execution plan is [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md).
 
 ## Engineering state
 
@@ -40,8 +40,22 @@ The answer adapter performs one model call; v1 schedules zero extraction calls. 
 
 Historical closure reports under `reports/` remain unmodified. No benchmark, paid workflow, authorization variable, credential, private thought material, plan or account was changed in this round.
 
-## Sole next gate
+## Current capability-growth work
 
-**HCL_V1_INTEGRATED_SOURCE_QUALIFICATION** — independently auditable, permitted native tasks requiring two substantive cognitive operations, with source/gold and exposure ledger. Engineering certification is complete; the bounded source screen did not qualify such a selection. The evaluation design is ready; a fresh C/P/G/H executable protocol and concrete cost authorization are not yet frozen. Do not advance to paid execution or invent another capability/benchmark version to fill this gap.
+The previous `HCL_V1_INTEGRATED_SOURCE_QUALIFICATION` remains a useful **external-validation backlog**, but it is no longer the sole development blocker. The main line now follows [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md).
 
-No owner action is currently required. A budget request is appropriate only after full source/package freeze, at `HCL_V1_INTEGRATED_EVAL_OWNER_BUDGET_AUTHORIZATION`. Provider spend this round: **USD 0**. LongMemEval remains fully sealed/deprioritized.
+**CG01-A** — correct v1 routing and explicitly separate READER_ANALYSIS / CHARACTER_PERSPECTIVE / OBSERVER_ABOUT_TARGET.
+
+**CG01-B** — implement executable knowledge/goal/opportunity condition checking for bounded character-action explanations, with temporal and perspective scope, explicit contradiction and local invalidation.
+
+**CG01-C** — connect ordinary authorized narrative to the v1 answer path and preserve the actual cognition state supplied to the answer model.
+
+After A+B+C and provider-free certification, prepare one bounded C/P/G/H/H-new external development package. Do not make paid calls without separate owner authorization.
+
+The current engineering milestone is:
+
+**HCL_CG01_A_B_IMPLEMENTATION**
+
+No owner action is currently required for provider-free implementation. A budget request becomes appropriate only after a concrete external package is fully frozen, at `HCL_CG01_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION`.
+
+Leaderboard selection is explicitly deferred until the maturity gate in `DEVELOPMENT_PLAN.md` is met. Provider spend this round: **USD 0**. LongMemEval remains fully sealed/deprioritized.
