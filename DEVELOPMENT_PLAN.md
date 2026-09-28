@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG-03 DEVELOPMENT-ONLY RETAIN / CLOSED; CG-04 DEFERRED; CG-05 ACTIVE**
+Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG-03 DEVELOPMENT-ONLY RETAIN / CLOSED; CG-04 DEFERRED; CG-05 DEFERRED; NIGHT INTEGRATION ACTIVE**
 
 This file defines the live development direction for HCL. `STATUS.md` records
 current execution state; this file records the development strategy and the next
@@ -349,7 +349,7 @@ unfrozen priority pool:
    explicit normative premises.
 3. **CG-04 IMPLEMENTED_UNVALIDATED / DEFERRED — Contextual value conflict and preference** — conditional preferences,
    role/context changes and unresolved value conflict; no global fixed weights.
-4. **CG-05 ACTIVE — Concept interpretation in person/social context** — local definitions,
+4. **CG-05 IMPLEMENTED_UNVALIDATED / DEFERRED — Concept interpretation in person/social context** — local definitions,
    speaker-relative usage, applicability, counterexamples and multiple readings.
 
 Narrative/social integration should emerge across these capabilities rather than
@@ -594,3 +594,13 @@ Do not change consumed evidence, paid grants or frozen messages to optimize cost
 Continue until the night end conditions supplied by the owner hold; paid owner
 authorization alone is never a development stop reason. Preserve canonical main,
 PRs, exact-main CI, deltas, dispositions, frozen proposals and unique next task.
+
+
+CG05-CERT is complete on PR #137 exact head and c7593bc exact main: 347 provider-
+free tests, same runtime digest, all six workflow groups PASS. CG05-E is READY /
+DEFERRED_OWNER_AUTHORIZATION (20 calls/0 retries/USD 0.30 proposal, reservation
+USD 0.29537640). No paid execution/grant/trigger. CG-04/CG-05 are the two pending
+candidates. The unique next implementation is NIGHT-INTEGRATION-01: explicit
+lossless context compaction for retained cognition and bounded ordinary input;
+then cross-capability composition. Preserve every frozen default input and
+historical evidence; do not open a third new candidate or ask for paid approval.
