@@ -62,7 +62,7 @@ CG-01 remains **SIMPLIFY / CLOSED** for ordinary-text use; its deterministic che
 
 ## Active capability-growth work
 
-**CG-02 — ACTIVE / PLANNED FOR IMPLEMENTATION.**
+**CG-02 — ACTIVE / A-D IMPLEMENTED; CERTIFICATION PENDING EXACT-HEAD AND MAIN CI.**
 
 Canonical contract: [docs/HCL_CG02_CAPABILITY_CONTRACT.md](docs/HCL_CG02_CAPABILITY_CONTRACT.md).
 
@@ -86,9 +86,17 @@ valid unless provider-free preflight proves the selected H cases actually execut
 the CG-02 treatment and that H/H-new final inputs differ because of that
 treatment.
 
+The A-D implementation adds the explicit v1 social route, source/time/access
+checker, participant expectation comparison and a narrow provider-free
+ordinary-dialogue path. See [implementation and limits](docs/HCL_CG02_IMPLEMENTATION.md).
+Local provider-free checks pass 93 v1 and 176 frozen historical tests. These are
+correctness checks only; exact-head/main CI certification and the E external
+package freeze remain pending. No CG-02 provider call or LongMemEval access
+occurred.
+
 The current engineering milestone is:
 
-**HCL_CG02_A_B_IMPLEMENTATION**
+**HCL_CG02_CERT_PROVIDER_FREE_PENDING_CI**
 
 No owner action is required for provider-free implementation. Any later paid
 comparison requires a newly frozen package and

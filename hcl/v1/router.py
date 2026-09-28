@@ -7,6 +7,7 @@ from typing import Any
 from hcl.v04.model import EventRecord
 from .capabilities import CostClass, resolve_dependencies
 from .narrative import query_actor
+from .cg02 import SocialAct, ParticipantInterpretation, AccessStatement
 
 
 @dataclass(frozen=True)
@@ -36,6 +37,10 @@ class CognitionRequest:
     perspective_mode: PerspectiveMode | None = None
     narrative: str | None = None
     allow_semantic_preparation: bool = False
+    social_analysis: bool = False
+    social_acts: tuple[SocialAct, ...] = ()
+    social_interpretations: tuple[ParticipantInterpretation, ...] = ()
+    social_access_statements: tuple[AccessStatement, ...] = ()
 
     def __post_init__(self):
         if not isinstance(self.query, str) or not self.query.strip() or len(self.query) > 16000:
@@ -69,6 +74,24 @@ class CognitionRequest:
             raise ValueError('narrative sentence order cannot be mixed with calendar cutoffs; supply timed EventRecords')
         if type(self.allow_semantic_preparation) is not bool:
             raise ValueError('semantic preparation flag must be boolean')
+        if type(self.social_analysis) is not bool:
+            raise ValueError('social analysis flag must be boolean')
+        if (not isinstance(self.social_acts, tuple) or len(self.social_acts) > 6 or
+            not all(isinstance(act, SocialAct) for act in self.social_acts)):
+            raise ValueError('bounded typed social acts required')
+        if (not isinstance(self.social_interpretations, tuple) or
+            len(self.social_interpretations) > 12 or
+            not all(isinstance(row, ParticipantInterpretation)
+                    for row in self.social_interpretations)):
+            raise ValueError('bounded typed social interpretations required')
+        if (not isinstance(self.social_access_statements, tuple) or
+            len(self.social_access_statements) > 8 or
+            not all(isinstance(row, AccessStatement)
+                    for row in self.social_access_statements)):
+            raise ValueError('bounded typed social access statements required')
+        if (self.social_analysis or self.social_acts or self.social_interpretations or
+            self.social_access_statements) and not self.target_actor:
+            raise ValueError('social analysis requires explicit target_actor')
         seen = {}
         for e in self.evidence:
             if e.event_id in seen and seen[e.event_id] != e:
@@ -97,6 +120,7 @@ class CognitionPlan:
     blocked_tools: tuple[str, ...] = ()
     perspective_mode: PerspectiveMode = PerspectiveMode.READER_ANALYSIS
     explanation: bool = False
+    social_commitment: bool = False
     target_actor: str | None = None
 
     @property
@@ -125,7 +149,11 @@ class CognitionRouter:
             PerspectiveMode.CHARACTER_PERSPECTIVE if request.target_actor and (request.tools or re.search(
                 r'\b(what does .+ (?:know|believe|think|want)|what did .+ (?:know|believe|think|want)|from .+ perspective)\b|知道什么|从.+视角|以.+视角', query)
             ) else PerspectiveMode.READER_ANALYSIS)
-        explanation = bool(target_actor and re.search(
+        social = bool(target_actor and (request.social_analysis or request.social_acts or
+            request.social_interpretations or request.social_access_statements or re.search(
+            r'\b(?:promis(?:e|ed|es)|commit(?:ment|ted)?|propos(?:e|al|ed)|request(?:ed)?|accept(?:ed|ance)?|refus(?:e|ed|al)|withdraw(?:al|n)?|misunderstand(?:ing)?|expect(?:s|ed|ation|ations)?)\b|承诺|提议|请求|接受|拒绝|撤回|误解|期待',
+            query)))
+        explanation = bool(not social and target_actor and re.search(
             r'\b(?:why did|why does|why would|explain .+ action|explanation of .+ action)\b|为什么.+(?:做|去|没|不|离开|参加)|解释.+(?:行为|行动)', query))
         selected = []
         optional = []
@@ -144,6 +172,9 @@ class CognitionRouter:
         if explanation:
             selected.append('cg01_explanation')
             reasons['cg01_explanation'] = 'bounded character-action explanation conditions'
+        if social:
+            selected.append('cg02_social_commitment')
+            reasons['cg02_social_commitment'] = 'explicit bounded social act and expectation analysis'
         # Explicit source/time scopes must still be respected for factual tasks.
         if request.target_actor or request.event_time or request.knowledge_cutoff:
             selected.append('source_visibility')
@@ -169,4 +200,5 @@ class CognitionRouter:
                              CostClass.LOW if closure else CostClass.ZERO,
                              max_context_chars=request.max_context_chars,
                              blocked_tools=tuple(blocked), perspective_mode=mode,
-                             explanation=explanation, target_actor=target_actor)
+                             explanation=explanation, social_commitment=social,
+                             target_actor=target_actor)

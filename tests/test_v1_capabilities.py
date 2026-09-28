@@ -3,7 +3,7 @@ from hcl.v1.capabilities import CAPABILITIES, CapabilityType, resolve_dependenci
 
 class RegistryTests(unittest.TestCase):
     def test_unique_ids_locations_and_evidence(self):
-        self.assertEqual(len(CAPABILITIES), 23)
+        self.assertEqual(len(CAPABILITIES), 24)
         for cid, cap in CAPABILITIES.items():
             self.assertEqual(cid, cap.capability_id)
             self.assertTrue(cap.implementation and cap.evidence_level and cap.failure_behavior)
