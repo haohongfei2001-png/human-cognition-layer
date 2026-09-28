@@ -33,3 +33,5 @@ from .appraisal import AppraisalResult, prepare_appraisal
 from .agency_chain import AgencyChain, SemanticWorkspace, prepare_agency_chain
 
 from .commitments import CommitmentResult, prepare_commitment
+
+from .mutual_understanding import MutualUnderstanding, prepare_mutual_understanding

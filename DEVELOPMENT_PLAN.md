@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–C COMPLETE / WAVE D / D01 CORRECTNESS_VERIFIED / NEXT_READY=D02**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–C COMPLETE / WAVE D / D01–D02 CORRECTNESS_VERIFIED / NEXT_READY=D03**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -267,8 +267,14 @@ words, conditions, receipt, acceptance, expectation, withdrawal and fulfillment.
 Fourteen targeted checks plus full regression; source-time receipt is checked at
 each expectation. See `docs/HCL_WAVE_D01.md`.
 
-**D02 — NEXT_READY:** bounded mutual understanding and explicit confirmation/repair;
+**D02 — CORRECTNESS_VERIFIED:** bounded mutual understanding and explicit confirmation/repair;
 both hearing an utterance is not mutually acknowledged shared understanding.
+Thirteen targeted checks plus full regression; original receipt, back-report
+receipt and final confirmation receipt are checked separately. See `docs/HCL_WAVE_D02.md`.
+
+**D03 — NEXT_READY:** competing benign error, deliberate falsehood, concealment
+and literally true but potentially misleading communication explanations; false
+content alone never establishes deception.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -429,12 +435,12 @@ defect is.
 
 - Current wave: **Wave D — Social and Strategic Cognition**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: D02_BOUNDED_MUTUAL_UNDERSTANDING_AND_REPAIR**
+- **NEXT_READY: D03_COMPETING_STRATEGIC_COMMUNICATION_EXPLANATIONS**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A05/B01–B05/C01–C05/D01 actual provider calls / spend: **0 / USD 0**
+- A01–A05/B01–B05/C01–C05/D01–D02 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **D02**, then continue through the dependency-safe queue
+Work should continue at **D03**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
