@@ -85,3 +85,5 @@ preserved. The next implementation package is
 [CG-03 responsibility-structure explanation](docs/HCL_CG03_CAPABILITY_CONTRACT.md).
 
 - [CG-05 capability contract](docs/HCL_CG05_CAPABILITY_CONTRACT.md)：按说话者和语境检查局部定义、适用条件、反例与修订；零新增付费调用。
+
+- [无损 cognition context 压缩](docs/HCL_V1_CONTEXT_COMPACT.md)：保留完整来源与检查结果，在同一 context budget 下容纳更多已检查信息；默认冻结输入不变。

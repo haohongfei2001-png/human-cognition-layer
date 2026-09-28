@@ -57,6 +57,7 @@ class CognitionRequest:
     concept_context: str | None = None
     concept_term: str | None = None
     concept_item: str | None = None
+    compact_context: bool = False
 
     def __post_init__(self):
         if not isinstance(self.query, str) or not self.query.strip() or len(self.query) > 16000:
@@ -94,6 +95,8 @@ class CognitionRequest:
             raise ValueError('social analysis flag must be boolean')
         if type(self.responsibility_analysis) is not bool:
             raise ValueError('responsibility analysis flag must be boolean')
+        if type(self.compact_context) is not bool:
+            raise ValueError('compact context flag must be boolean')
         if type(self.concept_analysis) is not bool:
             raise ValueError('concept analysis flag must be boolean')
         if self.concept_analysis or self.concept_case is not None:

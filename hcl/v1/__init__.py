@@ -20,3 +20,5 @@ from .cg04 import (PreferenceCondition, PreferenceStatement, ContextConditionCla
 
 from .cg05 import (ConceptDefinition, ConceptProperty, ConceptUse, ConceptCase,
                    ConceptPreparation, project_concepts, check_concepts, prepare_concept_narrative)
+
+from .compact import compact_cognition_context, expand_cognition_context

@@ -547,7 +547,7 @@ Begin with the minimal real operation, then source/time/access checks, condition
 applicability, local revision/conflict and a conservative ordinary-text path.
 Certify provider-free on exact head and main, then freeze one fair treatment-
 presence package. No benchmark/source hunt, ontology expansion or new paid
-experiment is part of implementation. Stop for a new owner grant only when
+experiment is part of implementation. During the authorized night, defer a new owner grant when
 paid validation is the sole remaining action; all previous grants remain closed.
 
 CG04-A–D and CERT are complete: exact head `ca6f36434275b97b9ed15aaba3f1423f33ed8aa2`
@@ -564,7 +564,7 @@ The dormant runner/workflow reuse the existing DeepSeek client/cap ledger and
 propose a new USD 0.30 hard cap for at most 20 calls, zero retries. The conservative
 reservation is USD 0.29543184; historical budgets do not transfer. No trigger
 exists and the grant is zero. Only paid validation remains, so the live milestone
-is **HCL_CG04_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION**. Do not execute without
+is **READY / DEFERRED_OWNER_AUTHORIZATION** during the night. Do not execute without
 a new explicit owner grant. Any outcome remains synthetic development evidence,
 not independent/fresh evidence or a broad value-cognition claim.
 
@@ -604,3 +604,13 @@ candidates. The unique next implementation is NIGHT-INTEGRATION-01: explicit
 lossless context compaction for retained cognition and bounded ordinary input;
 then cross-capability composition. Preserve every frozen default input and
 historical evidence; do not open a third new candidate or ask for paid approval.
+
+
+NIGHT-INTEGRATION-01 is implemented: explicit lossless source/case references and
+shared provenance columns let complete checked cognition fit a previously
+insufficient answer-context budget. Twelve existing development inputs are
+round-trip identical; total serialized input bytes shrink 8.33% including policy.
+No token/cost/utility extrapolation or frozen-input changes. Certify exact
+head/main, then immediately implement source-projected cross-capability
+composition from ordinary input. Keep CG04/05 as the two deferred candidates;
+CG02 is INCONCLUSIVE_CLOSED, CG03 development-only RETAIN. No new paid gate.
