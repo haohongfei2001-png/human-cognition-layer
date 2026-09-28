@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–C COMPLETE / WAVE D / NEXT_READY=D01**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–C COMPLETE / WAVE D / D01 CORRECTNESS_VERIFIED / NEXT_READY=D02**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -226,7 +226,7 @@ Noor-dependent nested, concept and conditional-control checks while reusing Mira
 and Kai outputs; ordinary input and actual final-adapter receipt are preserved.
 Eleven targeted checks plus full regression; see `docs/HCL_WAVE_B05.md`.
 
-## 5c. Current Wave C — Goals, Plans and Appraisal
+## 5c. Completed Wave C — Goals, Plans and Appraisal
 
 **C01 — CORRECTNESS_VERIFIED:** source-bounded goals/subgoals, means, plans, conditions,
 opportunities, completion and abandonment. Keep stated intention distinct from
@@ -260,8 +260,15 @@ emotion remains a hypothesis or unknown, never a certain label. Thirteen targete
 checks cover actual dependency changes, action-time boundaries, access, source
 revision and shared extraction. See `docs/HCL_WAVE_C05.md`.
 
-**D01 — NEXT_READY:** social acts and commitment lifecycle, separating original
+## 5d. Current Wave D — Social and Strategic Cognition
+
+**D01 — CORRECTNESS_VERIFIED:** social acts and commitment lifecycle, separating original
 words, conditions, receipt, acceptance, expectation, withdrawal and fulfillment.
+Fourteen targeted checks plus full regression; source-time receipt is checked at
+each expectation. See `docs/HCL_WAVE_D01.md`.
+
+**D02 — NEXT_READY:** bounded mutual understanding and explicit confirmation/repair;
+both hearing an utterance is not mutually acknowledged shared understanding.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -420,14 +427,14 @@ defect is.
 
 ## 13. Current execution fact
 
-- Current wave: **Wave C — Goals, Plans and Appraisal**
+- Current wave: **Wave D — Social and Strategic Cognition**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: D01_SOCIAL_ACT_AND_COMMITMENT_LIFECYCLE**
+- **NEXT_READY: D02_BOUNDED_MUTUAL_UNDERSTANDING_AND_REPAIR**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A05/B01–B05/C01–C05 actual provider calls / spend: **0 / USD 0**
+- A01–A05/B01–B05/C01–C05/D01 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **D01**, then continue through the dependency-safe queue
+Work should continue at **D02**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
