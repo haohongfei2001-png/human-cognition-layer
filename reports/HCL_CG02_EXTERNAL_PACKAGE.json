@@ -685,21 +685,21 @@
   "owner_gate": "HCL_CG02_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION",
   "price_basis": {
     "basis": "existing repository-frozen CG-01 DeepSeek peak-price contract",
-    "source_package": "reports/HCL_CG01_EXTERNAL_PACKAGE.json",
     "input_cache_miss_usd_per_million": 1.32,
-    "output_usd_per_million": 3.96
+    "output_usd_per_million": 3.96,
+    "source_package": "reports/HCL_CG01_EXTERNAL_PACKAGE.json"
   },
   "proposed_hard_cap_usd": 0.3,
   "provider": "deepseek",
   "provider_endpoint": "https://api.deepseek.com",
   "provider_request": {
-    "thinking": {
-      "type": "disabled"
-    },
+    "max_retries": 0,
     "response_format": {
       "type": "json_object"
     },
-    "max_retries": 0
+    "thinking": {
+      "type": "disabled"
+    }
   },
   "purpose": "bounded paired development probe; no broad efficacy or freshness claim",
   "retries": 0,
