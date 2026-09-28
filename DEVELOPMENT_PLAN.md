@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–C COMPLETE / WAVE D / D01–D04 CORRECTNESS_VERIFIED / NEXT_READY=D05**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–D COMPLETE / WAVE E / NEXT_READY=E01**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -260,7 +260,7 @@ emotion remains a hypothesis or unknown, never a certain label. Thirteen targete
 checks cover actual dependency changes, action-time boundaries, access, source
 revision and shared extraction. See `docs/HCL_WAVE_C05.md`.
 
-## 5d. Current Wave D — Social and Strategic Cognition
+## 5d. Completed Wave D — Social and Strategic Cognition
 
 **D01 — CORRECTNESS_VERIFIED:** social acts and commitment lifecycle, separating original
 words, conditions, receipt, acceptance, expectation, withdrawal and fulfillment.
@@ -284,9 +284,17 @@ the original commitment or automatically restore trust. Twelve targeted checks
 plus full regression; actual source-rooted interpretation replacement and historical
 meaning checks are exercised. See `docs/HCL_WAVE_D04.md`.
 
-**D05 — NEXT_READY:** three-party cooperation, bounded authorization and joint
+**D05 — CORRECTNESS_VERIFIED:** three-party cooperation, bounded authorization and joint
 plans under sourced local rules; distinct audiences and third-party reports must
-not become an omniscient group actor.
+not become an omniscient group actor. Fifteen targeted checks plus full regression;
+new permission, revocation and selective receipt change coordination checks.
+See `docs/HCL_WAVE_D05.md`.
+
+## 5e. Current Wave E — Relationship, Identity, Role and Value Dynamics
+
+**E01 — NEXT_READY:** domain-scoped relationship evidence: who regards whom,
+concerning what, and with which support. Capability trust does not become moral
+trust; one person's view does not become a reciprocal view.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -445,14 +453,14 @@ defect is.
 
 ## 13. Current execution fact
 
-- Current wave: **Wave D — Social and Strategic Cognition**
+- Current wave: **Wave E — Relationship, Identity, Role and Value Dynamics**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: D05_MULTIPARTY_JOINT_PLANS_AND_AUTHORITY**
+- **NEXT_READY: E01_DOMAIN_SCOPED_RELATIONSHIP_EVIDENCE**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A05/B01–B05/C01–C05/D01–D04 actual provider calls / spend: **0 / USD 0**
+- A01–A05/B01–B05/C01–C05/D01–D05 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **D05**, then continue through the dependency-safe queue
+Work should continue at **E01**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
