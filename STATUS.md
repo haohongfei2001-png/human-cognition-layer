@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**HCL night — NI-10 certified; NI-11 multi-source revision implemented, CI pending; CG-04/CG-05 deferred**
+**HCL night — NI-11 certified; NI-12 perspective contrast implemented, CI pending; CG-04/CG-05 deferred**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -547,3 +547,22 @@ actual compact/private/conflict inputs;289 v1 locally PASS. No third candidate,
 new paid call or evidence upgrade; CG04/05 unchanged/deferred, night0/USD0,
 LongMemEval SEALED. After exact-head/main CI, immediately NI-12: explicit two-
 participant perspective contrast under DEVELOPMENT_PLAN section15.
+
+
+**NIGHT-INTEGRATION-11 — exact-head/main CERT PASS.** PR151 head3a50a158,
+run36452293275; main5e58b99025604ee0fffaaf7553cee055259ab4b5,
+run36452455568. Both289 v1 +176 historical =465 PASS, matching runtime digest;
+both applicable groups PASS. [Receipt](reports/HCL_NIGHT_SOURCE_REVISION_CERTIFICATION.json).
+
+**NIGHT-INTEGRATION-12 — IMPLEMENTED; correctness certification pending.**
+CAPABILITY_DELTA: ordinary English/Chinese questions compare two independently
+source-projected participant views of one claim. Public declarations/nonpublic
+exposure, direct self-report, indirect/narrator attribution, character uncertainty
+and missing system evidence stay separate. Shared source availability never
+creates shared acceptance; observer views exclude unauthorized private reader
+material. Exact statement/event/record scopes and whole-budget refusal preserve
+both views together. Ten new tests and actual final-input receipts;299 v1 locally
+PASS. CG04/05 remain the two deferred candidates; no new paid call/ontology or
+historical evidence upgrade, night0/USD0, LongMemEval SEALED. After exact-head/main
+CI, immediately NI-13 bounded multi-event narrative integration using a minimum
+question-justified set of existing operations, under section15.

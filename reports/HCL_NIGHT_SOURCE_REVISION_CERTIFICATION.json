@@ -1,0 +1,41 @@
+{
+  "schema": "hcl-night-source-revision-certification-v1",
+  "pr": 151,
+  "exact_head": {
+    "schema": "hcl-v1-provider-free-certification-v1",
+    "sha": "3a50a1588b8770f29e75f7651b438d80bd7bdbca",
+    "workflow_event_sha": "a76a88e8d7d266aadd59e3370b00b96dfd493617",
+    "run_id": "36452293275",
+    "event": "pull_request",
+    "counts": {
+      "v1": 289,
+      "historical": 176
+    },
+    "runtime_sha256": "5d16e7064ecb2a9b1e54916714637433369876113b5987e614544e2d5fc60756",
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "scope": "CORRECTNESS_NOT_EXTERNAL_UTILITY",
+    "longmemeval": "SEALED_NOT_IN_TEST_SELECTION"
+  },
+  "exact_main": {
+    "schema": "hcl-v1-provider-free-certification-v1",
+    "sha": "5e58b99025604ee0fffaaf7553cee055259ab4b5",
+    "workflow_event_sha": "5e58b99025604ee0fffaaf7553cee055259ab4b5",
+    "run_id": "36452455568",
+    "event": "push",
+    "counts": {
+      "v1": 289,
+      "historical": 176
+    },
+    "runtime_sha256": "5d16e7064ecb2a9b1e54916714637433369876113b5987e614544e2d5fc60756",
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "scope": "CORRECTNESS_NOT_EXTERNAL_UTILITY",
+    "longmemeval": "SEALED_NOT_IN_TEST_SELECTION"
+  },
+  "total_tests_each": 465,
+  "workflow_groups": "BOTH_APPLICABLE_PASS",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

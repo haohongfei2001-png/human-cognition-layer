@@ -878,3 +878,12 @@ contradictory/incomparable sources remain unresolved, no calendar/receipt truth.
 Certify exact head/main, then immediately NI-12 source-bounded two-participant
 perspective contrast. Preserve section15 queue, historical evidence and freezes;
 only CG04/05 pending, no new paid provider calls or third module.
+
+
+NI-11 certified on PR151 head/main465 tests, both applicable groups PASS.
+NI-12 implements source-bounded independent two-participant contrast via retained
+v0.6, ordinary question selection and existing access/cutoff projection. Shared
+exposure is not shared belief; unauthorized observer source stays hidden.
+Certify exact head/main then immediately NI-13 bounded multi-event integration;
+select only existing operations justified by the question/source. No third module,
+paid calls or frozen/consumed evidence changes; preserve section15 continuation.

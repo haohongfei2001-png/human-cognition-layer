@@ -32,3 +32,5 @@ from .source_pool import pool_composed_sources, expand_composed_sources
 from .person_question import prepare_person_context, answer_person_context
 
 from .source_revision import AuthorizedSourceRecord, prepare_source_revision, answer_source_revision
+
+from .perspective_contrast import prepare_perspective_contrast, answer_perspective_contrast
