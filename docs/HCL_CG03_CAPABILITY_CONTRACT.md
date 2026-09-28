@@ -1,6 +1,6 @@
 # HCL-CG-03 Capability Contract — Responsibility-Structure Explanation
 
-Status: **A–D AND CERT PROVIDER-FREE COMPLETE; CG03-E FROZEN PROPOSAL / NEW OWNER GRANT REQUIRED**
+Status: **A–D/CERT COMPLETE; CG03-E EXECUTED ONCE / DEVELOPMENT-ONLY RETAIN; GRANT CLOSED**
 
 This package is the next candidate in `DEVELOPMENT_PLAN.md` section 8. Its
 purpose is a real, user-visible reasoning distinction: given authorized source
@@ -54,8 +54,9 @@ conditional computations from v0.9 into observed world truth.
    with treatment-presence preflight. Frozen as four public HCL-authored
    synthetic development cases; every H case passes source, factor, premise,
    H-state, H-new ablation and final-input-difference gates. All arms receive
-   the same output labels and explicit caller rule. No paid call without a new
-   owner grant; the dormant workflow grant is zero.
+   the same output labels and explicit caller rule. Owner-authorized DeepSeek run 36427668859 consumed the package once.
+   Source-first closure selects development-only RETAIN; the grant is closed.
+   No rerun or independent/fresh efficacy claim is authorized.
 
 The CG-02 result is development-only and INCONCLUSIVE for external utility.
 It does not license a broad social or moral claim, and no CG-02 rerun is part of

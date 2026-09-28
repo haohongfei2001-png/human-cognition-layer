@@ -2,14 +2,16 @@
 
 HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息、信念、视角和有来源的心理证据。**基础模型可以直接做好时，直接回答。** 简单提示足够时不调用复杂机制；精确计算采用通用工具；专门认知机制只保留得到增量证据支持的部分。
 
-当前阶段：**HCL Capability Growth；CG-03 provider-free 已认证、开发比较包已冻结，等待新的 owner 付费授权**。CG-02 的一次性开发比较已按 INCONCLUSIVE 结案；v1 integration foundation 已完成。唯一实时状态：[STATUS.md](STATUS.md)，长期执行计划见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
+当前阶段：**HCL Capability Growth；CG-03 单次开发比较按 RETAIN 收口（仅 development evidence），进入 CG-04 情境价值冲突与偏好**。CG-02 的一次性开发比较已按 INCONCLUSIVE 结案；v1 integration foundation 已完成。唯一实时状态：[STATUS.md](STATUS.md)，长期执行计划见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
 
 - [可执行 capability registry](docs/HCL_V1_CAPABILITY_REGISTRY.md)：核心、可选结构、通用工具、停用研究资产。
 - [Router / context / answer API](docs/HCL_V1_COGNITION_ROUTER.md)：确定性最小路由、有访问和时间边界的上下文、单次底座模型调用。
-- [Capability Growth development plan](DEVELOPMENT_PLAN.md)：真实能力增长优先于外部验证；当前工作包为 CG-03。
+- [Capability Growth development plan](DEVELOPMENT_PLAN.md)：真实能力增长优先于外部验证；当前工作包为 CG-04。
+- [CG-04 capability contract](docs/HCL_CG04_CAPABILITY_CONTRACT.md)：角色、情境、条件和局部偏好冲突；不建立全局价值权重。
 - [CG-03 capability contract](docs/HCL_CG03_CAPABILITY_CONTRACT.md)：在显式规范前提下区分因果贡献、知识、可预见性、控制与意图。
 - [CG-03 实现及边界](docs/HCL_CG03_IMPLEMENTATION.md)：来源、时间、访问与规范前提分离；保守文本入口。
-- [CG-03 开发比较协议](docs/HCL_CG03_EXTERNAL_DEVELOPMENT_PROTOCOL.md)：四例五臂、公平输出格式、treatment-presence 和未激活的预算提案。
+- [CG-03 开发比较协议](docs/HCL_CG03_EXTERNAL_DEVELOPMENT_PROTOCOL.md)：四例五臂、公平输出格式、treatment-presence 和已消费的单次比较规则。
+- [CG-03 source-first closure](reports/HCL_CG03_EXTERNAL_DEVELOPMENT_CLOSURE.md)：H 28/28、P 21/28、G 20/28、H-new 23/28；仅四个合成开发案例，授权和 trigger 已关闭。
 - [CG-02 capability contract](docs/HCL_CG02_CAPABILITY_CONTRACT.md)：社会承诺、期待与误解的最小能力边界、阶段和 treatment-presence gate。
 - CG-01 的一次性开发验证和结案见 [报告](reports/HCL_CG01_EXTERNAL_DEVELOPMENT_CLOSURE.md)。
 - [集成评估来源审查与设计](docs/HCL_V1_INTEGRATED_EVALUATION_PROTOCOL.md)：保留为 external-validation backlog；不再阻塞新 capability implementation。

@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**HCL-CG-03 — Responsibility-Structure Explanation (provider-free certified; E frozen)**
+**HCL-CG-04 — Contextual Value Conflict and Preference (CG04-A next)**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -147,7 +147,7 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**HCL_CG03_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION**
+**CG04-A — explicit contextual-preference operation**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
@@ -165,19 +165,33 @@ and merged main `2aeda0188eb64728735e3cd6c0b049f9ed329e6e`
 each passed 111 v1 + 176 historical tests with the same runtime digest, zero
 provider calls/spend and LongMemEval sealed. [Certification receipt](reports/HCL_CG03_PROVIDER_FREE_CERTIFICATION.json).
 
-**CG03-E provider-free freeze:** [protocol](docs/HCL_CG03_EXTERNAL_DEVELOPMENT_PROTOCOL.md)
-and [package](reports/HCL_CG03_EXTERNAL_PACKAGE.json) fix four HCL-authored
-synthetic development cases, the C/P/G/H/H-new inputs, identical output schema
-and label vocabulary across arms, strict scorer, source-first decision rule and
-H/H-new treatment-presence receipts. The package SHA-256 is
+**CG03-E — RETAIN / CLOSED, DEVELOPMENT EVIDENCE ONLY.** Owner authorized the
+frozen package on `main@1c784d87c104e5a0056eddfa92bd7862133c59bc` once. [Run
+36427668859](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36427668859)
+executed 20 DeepSeek calls with zero retries. Every preflight passed again and
+all inputs matched package SHA-256
 `e76c0fa13bc9c9f4f9c1de9f5986791621e3cd6e9bbdcf0f7d018463d00876e8`.
-Preflight passes with **zero provider calls**. The new one-time proposal uses
-existing DeepSeek infrastructure, a conservative two-tokens-per-byte plus
-framing/output reservation of USD **0.29634528**, a proposed USD 0.30 hard cap and **no
-historical budget transfer**; its workflow grant is **0**, and no trigger exists.
-The only remaining CG-03 external-development action requires a new, explicit
-owner authorization after price revalidation. Any eventual result remains
-development evidence, never independent/fresh evidence.
+[Full raw receipt](reports/HCL_CG03_EXTERNAL_RUN_36427668859.json) records
+22,464 input / 1,857 output tokens, actual model IDs, raw requests/responses,
+scorer results and H/H-new treatment receipts. Conservative rated cost:
+**USD 0.03700620** under USD 0.30; usage/time/cache-based estimate:
+USD 0.01768646, not a verified invoice. Artifact ID 10972111450; ZIP SHA-256
+`cf7601f702564dca780e9ad4c679cb9b0b8cbdddd3174d5d4340ef6f3816faaf`.
+
+[Source-first closure](reports/HCL_CG03_EXTERNAL_DEVELOPMENT_CLOSURE.md) selects
+**RETAIN** for the explicit optional checker: H 28/28 versus P 21/28, G 20/28,
+H-new 23/28, with substantive time/attribution/premise safeguards and ablation
+support. H costs 4.34x P; this does not meet the eventual typical-cost maturity
+target or justify default activation. Four HCL-authored synthetic cases provide
+**development evidence only**, never independent/fresh external efficacy or
+broad moral cognition. The grant is closed at zero, trigger removed and automatic
+paid triggering disabled; no rerun or budget transfer is authorized.
+
+The next capability from section 8 is **CG-04 contextual value conflict and
+preference**, with [bounded contract](docs/HCL_CG04_CAPABILITY_CONTRACT.md).
+Execute A → B → C → D → CERT → E provider-free: actor/role/context-bound
+preferences, explicit conditions, scope-local revisions and unresolved conflict;
+no global fixed weights or inferred lasting values from observed choices.
 
 Leaderboard selection remains deferred until the maturity gate in
 `DEVELOPMENT_PLAN.md` is met. Historical CG-01 provider charge remains bounded

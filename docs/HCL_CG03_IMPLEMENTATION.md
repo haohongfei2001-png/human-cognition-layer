@@ -39,7 +39,11 @@ The source checker is a bounded claim checker. Exact phrase and authority
 validation do not prove that a source claim is true, or that the caller's
 normative premise is sound. `SUPPORTED_CLAIM` and
 `CONDITIONALLY_SUPPORTED_ON_SOURCE_CLAIMS` must be read with those limits.
-No specialized external utility has yet been established.
+The one-time synthetic development comparison selects RETAIN for this bounded
+mechanism, with H 28/28 versus P 21/28, G 20/28 and H-new 23/28. This is a
+development signal, not independent/fresh external utility or broad moral
+competence. The component remains explicit and optional, including because
+H cost about 4.34 times P. See the source-first closure.
 
 For an ablation, `responsibility_checker_enabled=False` leaves the same case
 input and caller premise in context while removing only the checked factor and
