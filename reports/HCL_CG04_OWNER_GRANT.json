@@ -1,0 +1,30 @@
+{
+  "schema": "hcl-cg04-owner-grant-v1",
+  "owner_instruction_baseline": "1185b98101c88b641194ff05b651eb3f2ce7af7b",
+  "state": "AUTHORIZED_ONE_UNUSED_ATTEMPT",
+  "cap_usd": 0.3,
+  "calls": 20,
+  "retries": 0,
+  "output_tokens_per_call": 512,
+  "frozen_runtime_sha": "018afbc93c645975d7f6f1077c8c8380635d9f2f",
+  "frozen_package_sha256": "0ffcfdfae3d9d5130c96205f2247991d1d88a872edbb144b701ad01da3202ce9",
+  "provider": "deepseek",
+  "model": "deepseek-v4-pro",
+  "thinking": "disabled",
+  "service_tier": "provider_default_no_tier_parameter",
+  "historical_budget_transfer_usd": 0,
+  "transferable_to_cg05_or_any_other_run": false,
+  "frozen_package_keeps_original_proposal_metadata": true,
+  "official_pricing": {
+    "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+    "retrieved_utc": "2026-09-28T18:07:22.121291+00:00",
+    "html_sha256": "210f102275ccf1a6542f08a3bc9e4b4c7c83278cb74b35217bffa112df6363b2",
+    "model_version": "DeepSeek-V4-Pro-0813",
+    "peak_input_cache_hit": 0.044,
+    "peak_input_cache_miss": 1.32,
+    "peak_output": 3.96,
+    "off_peak_factor": 0.5,
+    "invoice_cost": "NOT_AVAILABLE_FROM_COMPLETION_API"
+  },
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
