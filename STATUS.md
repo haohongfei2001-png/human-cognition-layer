@@ -118,6 +118,13 @@ A dormant one-shot DeepSeek runner/workflow is present but keeps its owner grant
 at zero and has no trigger file. It cannot execute until a later explicit owner
 authorization is encoded separately. No CG-02 provider call has run.
 
+Provider refreeze PR #123 merged as `1c08a059815a82c7eea0804212e2ce74c50c5084`.
+Its exact-head provider-free checks passed before merge. The first merge-push CI
+attempts failed during dependency installation before any HCL test executed;
+this is treated as CI transport/dependency failure rather than capability
+evidence. A follow-up exact-main certification is being emitted without changing
+the frozen package, provider contract, treatment, budget or runtime logic.
+
 The current engineering milestone is:
 
 **HCL_CG02_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION**
