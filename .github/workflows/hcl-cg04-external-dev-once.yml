@@ -18,9 +18,9 @@ jobs:
     timeout-minutes: 30
     env:
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-      # Owner authorized one frozen CG04 run; independent of CG05, no reuse.
-      HCL_CG04_AUTHORIZED_CAP_USD: "0.30"
-      HCL_CG04_AUTHORIZED_BASE_SHA: 018afbc93c645975d7f6f1077c8c8380635d9f2f
+      # CG04 one-shot grant consumed and closed; no rerun.
+      HCL_CG04_AUTHORIZED_CAP_USD: "0"
+      HCL_CG04_AUTHORIZED_BASE_SHA: UNAUTHORIZED
       HCL_CG04_FROZEN_RUNTIME_SHA: 018afbc93c645975d7f6f1077c8c8380635d9f2f
       HCL_CG04_FROZEN_PACKAGE_SHA256: 0ffcfdfae3d9d5130c96205f2247991d1d88a872edbb144b701ad01da3202ce9
       HCL_CG04_RUN_ONCE_TOKEN: HCL_CG04_EXTERNAL_DEV_OWNER_ONCE

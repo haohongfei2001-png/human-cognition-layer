@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**CG04 ONE-SHOT OWNER AUTHORIZED; CG05 SEPARATELY AUTHORIZED AFTER CG04 CLOSURE**
+**CG04 RETAIN_DEVELOPMENT_ONLY / CLOSED; CG05 SINGLE FROZEN COMPARISON NEXT AFTER EXACT-MAIN CI**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -628,3 +628,7 @@ provider-free integration/correctness work, not waiting for paid authorization.
 ## Current serial authorization (supersedes prior deferred execution only)
 
 Owner baseline main 1185b981 authorizes CG04 once, then CG05 once only after CG04 closure, zero grant, removed trigger and exact-main CI. Sources, gold, prompts, scorer, arms, treatment and budgets remain frozen. CG04 runs certified 018afbc; CG05 will run certified c7593bc. Each has an independent USD 0.30/20-call/0-retry/512-token cap. Both retain synthetic development-only evidence scope. Freeze metadata stays immutable; separate control grants carry authorization. Post-CG05 gap review precedes any new capability; no automatic CG06. LongMemEval SEALED.
+
+## CG04 source-first paid closure / current serial task
+
+Run36463463452, frozen runtime018afbc and package0ffcfdfa, 20 calls/0 retries, C26/P23/G25/H28/H-new26 of28. RETAIN_DEVELOPMENT_ONLY, bounded optional applicability/unknown-condition protection; no independent or fresh evidence. Raw requests/responses, usage, final inputs, treatment preflight and artifact hashes preserved. Conservative USD0.03948384, published-rate estimate USD0.016720352, invoice unavailable. Grant0, trigger deleted, unused money extinguished. Only CG05 remains implemented-unvalidated. Immediately after this closure exact-main CI, activate and execute CG05 once with its independent USD0.30 authorization and certified c7593bc runtime. No new samples/reruns; LongMemEval SEALED.

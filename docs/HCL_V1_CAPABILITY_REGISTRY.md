@@ -35,6 +35,8 @@ Perspective/belief is the strongest retained specialized component; its historic
 
 CG-05 `cg05_local_concept`: OPTIONAL / IMPLEMENTED_UNVALIDATED; explicit speaker/context definitions and source-grounded applicability, counterexamples and local revision. Registry now contains 27 capabilities.
 
-CG-02 registry disposition is INCONCLUSIVE_CLOSED, reflecting the consumed source-first closure; CG-04 and CG-05 are the two active implemented-unvalidated candidates. Lossless context transport is integration, not another capability candidate.
+CG-02 registry disposition is INCONCLUSIVE_CLOSED, reflecting the consumed source-first closure; CG-04 is now development-only RETAIN after its one consumed frozen comparison; CG-05 is the sole pending candidate until its separately authorized comparison closes. Lossless context transport is integration, not another capability candidate.
 
 CG-01 registry disposition is SIMPLIFY_CLOSED for ordinary text, with optional source-validated typed checker efficacy inconclusive; no new pending candidate or historical reclassification.
+
+CG04 source-first closure: bounded optional RETAIN, C26/P23/G25/H28/H-new26 of28, authored development-only, 20 calls, conservative USD0.03948384. No independent generalization claim or automatic activation expansion. [Receipt/closure](../reports/HCL_CG04_EXTERNAL_DEVELOPMENT_CLOSURE.md).

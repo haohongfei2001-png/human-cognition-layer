@@ -117,3 +117,7 @@ migration. The control and execution receipts upload together.
 Current cap is still 0 and base UNAUTHORIZED, no trigger exists; this repair does
 not authorize or execute any call. Revalidate model/prices before a future owner
 grant. Current default-case compatibility and isolated freeze replay stay mandatory.
+
+## Consumed owner authorization / current disposition
+
+The owner separately authorized one frozen comparison from main1185b981. Run36463463452 executed certified runtime018afbc, not current runtime. Source-first disposition is RETAIN, development-only: C26/P23/G25/H28/H-new26 of28. The USD0.30 grant is consumed and closed, workflow cap0, trigger deleted, no transfer/rerun. Frozen package bytes and its original proposal metadata remain unchanged. [Complete closure](../reports/HCL_CG04_EXTERNAL_DEVELOPMENT_CLOSURE.md).
