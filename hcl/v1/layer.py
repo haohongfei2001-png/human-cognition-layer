@@ -7,6 +7,7 @@ from .context import (ANSWER_POLICY, RESPONSIBILITY_ANSWER_POLICY, PREFERENCE_AN
                       CONCEPT_ANSWER_POLICY, CognitionContext, evidence_level, event_row)
 from .router import CognitionPlan, CognitionRequest, CognitionRouter
 from .router import PerspectiveMode
+from .compact import compact_cognition_context, COMPACT_POLICY
 
 
 @dataclass(frozen=True)
@@ -458,25 +459,30 @@ class HCLCognitionLayer:
         for cid in plan.blocked_tools:
             context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT', 'capability': cid,
                                         'reason': 'declared exact inputs unavailable; no automatic formalization'})
-        payload = self._payload(request.query, context)
-        if len(context.serialized()) > request.max_context_chars:
+        payload = self._payload(request.query, context, compact=request.compact_context)
+        transmitted_context = (compact_cognition_context(context.as_dict())
+            if request.compact_context else context.as_dict())
+        if len(json.dumps(transmitted_context, ensure_ascii=False, sort_keys=True)) > request.max_context_chars:
             # Do not arbitrarily truncate a source or promote partial evidence.
             context = CognitionContext(temporal_scope=scope, actors=context.actors,
                 perspective_mode=plan.perspective_mode.value,
                 uncertainty=[{'status': 'SYSTEM_INSUFFICIENT', 'reason': 'context budget exceeded; request a narrower source/time scope'}])
-            payload = self._payload(request.query, context)
+            payload = self._payload(request.query, context, compact=request.compact_context)
         policy = (ANSWER_POLICY + ' ' + RESPONSIBILITY_ANSWER_POLICY
                   if plan.responsibility_structure else ANSWER_POLICY)
         if plan.contextual_preference:
             policy += ' ' + PREFERENCE_ANSWER_POLICY
         if plan.concept_interpretation:
             policy += ' ' + CONCEPT_ANSWER_POLICY
+        if request.compact_context:
+            policy += ' ' + COMPACT_POLICY
         return PreparedAnswer(plan, context, ({'role': 'system', 'content': policy},
                                               {'role': 'user', 'content': payload}), preparation_audit)
 
     @staticmethod
-    def _payload(query, context):
-        return json.dumps({'query': query, 'cognition_context': context.as_dict()}, ensure_ascii=False, sort_keys=True)
+    def _payload(query, context, *, compact=False):
+        row = compact_cognition_context(context.as_dict()) if compact else context.as_dict()
+        return json.dumps({'query': query, 'cognition_context': row}, ensure_ascii=False, sort_keys=True)
 
     def answer(self, query, *, debug=False, **kwargs):
         request = query if isinstance(query, CognitionRequest) else CognitionRequest(query, **kwargs)

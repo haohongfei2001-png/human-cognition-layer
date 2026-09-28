@@ -252,7 +252,7 @@ social-concept meanings by speaker/context, check source properties and explicit
 counterexamples, retain multiple readings and scope-local revision. Ordinary
 text reaches actual final cognition state without hand-entered mental state or
 provider extraction. [Contract/brief](docs/HCL_CG05_CAPABILITY_CONTRACT.md).
-Certification next; then fair five-arm freeze and defer paid validation. These
+Certification and fair five-arm freeze are complete; paid validation is deferred. These
 are the only two active unvalidated candidates. Afterwards the unique next
 implementation task is retained-capability integration and context/cost
 reduction, not a third module. CG-02 remains closed INCONCLUSIVE and CG-03 remains
@@ -279,3 +279,23 @@ actor/time/access/uncertainty and premise distinctions. Default/frozen inputs
 stay unchanged; compact output is explicit and round-trip auditable. Then
 cross-capability composition/semantic preparation. No owner input needed.
 Night provider calls/spend remain 0 / USD 0; LongMemEval remains sealed.
+
+
+**CG05-E freeze merged / exact-main PASS.** PR #138 head
+4eabf2656d1ee52ece5d793de183eaac7aeb47f7 (run 36436266252) and main
+5a7b2ddf84bfa2fe0b91076f78dfb3e67e966cb0 (run 36436527346) each passed
+175 v1 + 176 historical = 351 tests; all six workflow groups passed.
+[Freeze receipt](reports/HCL_CG05_FREEZE_CERTIFICATION.json).
+
+**NIGHT-INTEGRATION-01 — implemented; certification in progress.**
+CAPABILITY_DELTA: source-grounded checked cognition can fit a context budget
+that previously refused it. Explicit lossless source/case references and shared
+provenance columns preserve every factor, premise and uncertainty; hidden or
+redacted references cannot be resurrected. Twelve CG03/04/05 inputs round-trip
+exactly and complete input bytes fall 8.33%, including codec policy. No token,
+billed-cost or model-utility claim. Defaults and every frozen input stay equal.
+[Implementation](docs/HCL_V1_CONTEXT_COMPACT.md).
+CG02 registry metadata now says INCONCLUSIVE_CLOSED, matching its existing
+closure; it is not counted as a pending new candidate. New calls/spend: 0/USD0.
+After exact-head/main CI the unique next implementation is source-projected
+cross-capability composition, not a third module. No owner decision required.

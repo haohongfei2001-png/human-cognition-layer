@@ -1,0 +1,110 @@
+{
+  "schema": "hcl-context-byte-audit-v1",
+  "evidence_class": "PROVIDER_FREE_ENGINEERING_NOT_MODEL_UTILITY",
+  "rows": [
+    {
+      "case_index": 0,
+      "capability": "CG03",
+      "full_input_bytes": 12231,
+      "compact_input_bytes": 11032,
+      "saved_bytes": 1199,
+      "lossless": true
+    },
+    {
+      "case_index": 1,
+      "capability": "CG03",
+      "full_input_bytes": 9005,
+      "compact_input_bytes": 8527,
+      "saved_bytes": 478,
+      "lossless": true
+    },
+    {
+      "case_index": 2,
+      "capability": "CG03",
+      "full_input_bytes": 8510,
+      "compact_input_bytes": 8214,
+      "saved_bytes": 296,
+      "lossless": true
+    },
+    {
+      "case_index": 3,
+      "capability": "CG03",
+      "full_input_bytes": 8455,
+      "compact_input_bytes": 8178,
+      "saved_bytes": 277,
+      "lossless": true
+    },
+    {
+      "case_index": 4,
+      "capability": "CG04",
+      "full_input_bytes": 8908,
+      "compact_input_bytes": 8035,
+      "saved_bytes": 873,
+      "lossless": true
+    },
+    {
+      "case_index": 5,
+      "capability": "CG04",
+      "full_input_bytes": 7261,
+      "compact_input_bytes": 6931,
+      "saved_bytes": 330,
+      "lossless": true
+    },
+    {
+      "case_index": 6,
+      "capability": "CG04",
+      "full_input_bytes": 9569,
+      "compact_input_bytes": 8285,
+      "saved_bytes": 1284,
+      "lossless": true
+    },
+    {
+      "case_index": 7,
+      "capability": "CG04",
+      "full_input_bytes": 9591,
+      "compact_input_bytes": 8424,
+      "saved_bytes": 1167,
+      "lossless": true
+    },
+    {
+      "case_index": 8,
+      "capability": "CG05",
+      "full_input_bytes": 9137,
+      "compact_input_bytes": 8276,
+      "saved_bytes": 861,
+      "lossless": true
+    },
+    {
+      "case_index": 9,
+      "capability": "CG05",
+      "full_input_bytes": 8215,
+      "compact_input_bytes": 7549,
+      "saved_bytes": 666,
+      "lossless": true
+    },
+    {
+      "case_index": 10,
+      "capability": "CG05",
+      "full_input_bytes": 10002,
+      "compact_input_bytes": 8780,
+      "saved_bytes": 1222,
+      "lossless": true
+    },
+    {
+      "case_index": 11,
+      "capability": "CG05",
+      "full_input_bytes": 7670,
+      "compact_input_bytes": 7285,
+      "saved_bytes": 385,
+      "lossless": true
+    }
+  ],
+  "total_full_bytes": 108554,
+  "total_compact_bytes": 99516,
+  "reduction_fraction": 0.08325810195847227,
+  "byte_measure": "utf8 serialized complete model messages including policy overhead",
+  "token_cost_claim": "NOT_MEASURED_NO_PAID_CALL",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
