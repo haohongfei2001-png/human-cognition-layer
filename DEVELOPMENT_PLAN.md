@@ -897,3 +897,17 @@ event never falls back to the whole narrative. Certify head/main, then NI-14
 ordinary Chinese/English integration robustness, reproduced source-grounding
 failures and one complete provider-free integrated closure. Preserve section15,
 CG04/05 freezes/history, zero new paid calls and no third candidate.
+
+
+NI-13 certified on PR153 head/main485 tests, both applicable groups PASS.
+NI-14 completes one ordinary bilingual entrypoint and repairs reproduced source/
+actor/predicate/action/outcome-reference failures, preserving uncertainty and every
+historical default/frozen input. Integrated local closure327+176=503 PASS with
+five actual final-input probes. Accept delivery only after exact-head/main CI
+matches the closure runtime; final GitHub handoff supplies actual SHA/run/hash.
+Section15 NI10–14 implementation queue is complete; no currently queued/identified
+provider-free implementation remains after exact-main certification. CG04/CG05
+still occupy both unvalidated slots. Do not open a third large candidate or filler
+PR. Any further retained integration must address a concrete demonstrated failure
+and record its unique implementation task here. Paid proposals stay deferred,
+unchanged, and are never the sole reason to stop available independent work.

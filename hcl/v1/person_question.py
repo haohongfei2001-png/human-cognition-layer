@@ -16,20 +16,25 @@ from .composition import prepare_composed_answer, ComposedAnswer, ComposedAnswer
 from .compact import compact_cognition_context, COMPACT_POLICY
 
 _QUESTIONS = tuple((kind, re.compile(pattern)) for kind, pattern in (
+    ('preference', rf"Explain (?P<actor>{_TERM})'s preferences as (?P<role>{_TERM}) in (?P<context>{_TERM})[.?]?"),
+    ('preference', rf'解释 (?P<actor>{_TERM}) 在 (?P<context>{_TERM}) 中的 (?P<role>{_TERM}) 角色偏好[。？]?'),
     ('belief_preference', rf"Explain (?P<actor>{_TERM})'s belief and preferences as (?P<role>{_TERM}) in (?P<context>{_TERM})[.?]?"),
     ('belief_preference', rf'解释 (?P<actor>{_TERM}) 在 (?P<context>{_TERM}) 中的信念与 (?P<role>{_TERM}) 角色偏好[。？]?'),
     ('concept_preference', rf"Explain (?P<actor>{_TERM})'s meaning of (?P<term>{_TERM}) for (?P<item>{_TERM}) and preferences as (?P<role>{_TERM}) in (?P<context>{_TERM})[.?]?"),
+    ('concept_preference', rf'解释 (?P<actor>{_TERM}) 在 (?P<context>{_TERM}) 中对 (?P<item>{_TERM}) 的 (?P<term>{_TERM}) 词义与 (?P<role>{_TERM}) 角色偏好[。？]?'),
     ('belief_concept_preference', rf"Explain (?P<actor>{_TERM})'s belief, meaning of (?P<term>{_TERM}) for (?P<item>{_TERM}) and preferences as (?P<role>{_TERM}) in (?P<context>{_TERM})[.?]?"),
     ('belief_concept_preference', rf'解释 (?P<actor>{_TERM}) 在 (?P<context>{_TERM}) 中的信念、对 (?P<item>{_TERM}) 的 (?P<term>{_TERM}) 词义与 (?P<role>{_TERM}) 角色偏好[。？]?'),
     ('belief_responsibility', rf"Explain (?P<actor>{_TERM})'s belief and conditional responsibility[.?]?"),
     ('belief_responsibility', rf'解释 (?P<actor>{_TERM}) 的信念与条件责任依据[。？]?'),
     ('responsibility', rf"Explain (?P<actor>{_TERM})'s conditional responsibility[.?]?"),
+    ('responsibility', rf'解释 (?P<actor>{_TERM}) 的条件责任依据[。？]?'),
     ('compare', rf"Compare (?P<actor>{_TERM})'s belief and meaning of (?P<term>{_TERM}) for (?P<item>{_TERM}) in (?P<context>{_TERM})[.?]?"),
     ('compare', rf'比较 (?P<actor>{_TERM}) 在 (?P<context>{_TERM}) 中对 (?P<item>{_TERM}) 是否 (?P<term>{_TERM}) 的信念与词义标准[。？]?'),
     ('belief', rf"Explain (?P<actor>{_TERM})'s belief[.?]?"),
     ('belief', rf'What does (?P<actor>{_TERM}) believe[.?]?'),
     ('belief', rf'解释 (?P<actor>{_TERM}) 的信念[。？]?'),
     ('concept', rf"Interpret (?P<actor>{_TERM})'s meaning of (?P<term>{_TERM}) for (?P<item>{_TERM}) in (?P<context>{_TERM})[.?]?"),
+    ('concept', rf'解释 (?P<actor>{_TERM}) 在 (?P<context>{_TERM}) 中对 (?P<item>{_TERM}) 的 (?P<term>{_TERM}) 词义[。？]?'),
 ))
 
 
@@ -106,8 +111,6 @@ def prepare_person_context(layer, query, narrative, *, perspective_mode=Perspect
         raise ValueError('request-local cognition layer required')
     if not isinstance(query, str) or not query.strip() or len(query) > 16000:
         raise ValueError('bounded nonempty ordinary question required')
-    if not isinstance(narrative, str) or not narrative.strip() or len(narrative) > 16000:
-        raise ValueError('bounded nonempty ordinary source required')
     if (not isinstance(perspective_mode, PerspectiveMode) or type(narrative_access) is not bool or
         type(max_context_chars) is not int or not 512 <= max_context_chars <= 64000):
         raise ValueError('explicit perspective, access flag and bounded context required')
@@ -122,6 +125,36 @@ def prepare_person_context(layer, query, narrative, *, perspective_mode=Perspect
         len({p.premise_id for p in responsibility_premises}) != len(responsibility_premises) or
         premise_scope not in ('ALL_SOURCE', 'FOCAL_EPISODE')):
         raise ValueError('bounded distinct caller normative premises and explicit source scope required')
+    query = query.strip()
+    # One ordinary entrypoint selects the already-certified integration surfaces.
+    # Lazy imports prevent module initialization cycles; recursive inner questions
+    # contain no outer source/event/contrast wrapper.
+    delegated = dict(perspective_mode=perspective_mode, max_context_chars=max_context_chars,
+        observer_actor=observer_actor, narrative_access=narrative_access,
+        responsibility_premises=responsibility_premises, premise_scope=premise_scope)
+    if as_of_statement is not None:
+        delegated['as_of_statement'] = as_of_statement
+    if query.startswith(('Across sources, ', '按来源变化，')):
+        from .source_revision import prepare_source_revision
+        return prepare_source_revision(layer, query, narrative, **delegated)
+    if query.startswith(('Across events, ', '按事件变化，', 'At event ', '截至事件 ')):
+        from .narrative_question import prepare_narrative_context
+        return prepare_narrative_context(layer, query, narrative, **delegated)
+    from .perspective_contrast import _QUESTIONS as contrast_questions, prepare_perspective_contrast
+    candidate = (re.fullmatch(r'At statement ([1-9][0-9]?), (.+)', query) or
+                 re.fullmatch(r'截至第 ([1-9][0-9]?) 条陈述，(.+)', query))
+    contrast_query = candidate[2] if candidate else query
+    if any(p.fullmatch(contrast_query) for p in contrast_questions):
+        if responsibility_premises or premise_scope != 'ALL_SOURCE':
+            raise ValueError('caller premise requires an explicit responsibility question')
+        if perspective_mode != PerspectiveMode.READER_ANALYSIS and not narrative_access:
+            return _refusal(query, '', perspective_mode,
+                'private_question_requires_explicit_source_access_preparation',
+                max_context_chars=max_context_chars, preserve_reader_source=False)
+        return prepare_perspective_contrast(layer, query, narrative, observer_actor=observer_actor,
+            as_of_statement=as_of_statement, max_context_chars=max_context_chars)
+    if not isinstance(narrative, str) or not narrative.strip() or len(narrative) > 16000:
+        raise ValueError('bounded nonempty ordinary source required')
     original_query, original_source = query, narrative
     prefix = (re.fullmatch(r'At statement ([1-9][0-9]?), (.+)', query.strip()) or
               re.fullmatch(r'截至第 ([1-9][0-9]?) 条陈述，(.+)', query.strip()))
@@ -181,7 +214,7 @@ def prepare_person_context(layer, query, narrative, *, perspective_mode=Perspect
     if responsibility:
         requests.append(CognitionRequest(query, responsibility_analysis=True,
             responsibility_premises=responsibility_premises, responsibility_premise_scope=premise_scope, **common))
-    if kind in ('belief_preference', 'concept_preference', 'belief_concept_preference'):
+    if kind in ('preference', 'belief_preference', 'concept_preference', 'belief_concept_preference'):
         requests.append(CognitionRequest(query, preference_analysis=True,
             preference_role=task['role'], preference_context=task['context'], **common))
     prepared = (prepare_composed_answer(layer, query, tuple(requests), max_context_chars=max_context_chars,

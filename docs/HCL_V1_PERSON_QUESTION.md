@@ -253,3 +253,50 @@ No model call in preparation; answer adapter once, no extraction/provider API.
 Ten meaningful tests and actual early/current/minimum-operation input receipts
 exercise the real behavior. Engineering integration correctness only, unchanged
 frozen inputs and dispositions; CG04/05 remain the two deferred candidates.
+
+
+## Unified ordinary entrypoint / NI-14
+
+Reproduced failures: existing Chinese concept/conditional-responsibility forms
+refused valid tasks; callers still had to choose different integration APIs; an
+unsupported nested source/contrast task could reach the wrong decoder. The unified
+`prepare_person_context` / `answer_person_context` now selects these existing
+surfaces from the ordinary question. Source-record tuples still require explicit
+`Across sources` scope and CALLER_AUTHORIZED authority; event narratives require
+explicit event scope. Reader/private fallback and private access opt-in remain
+unchanged. No internal operation flag or hidden mental gold is required.
+
+**CAPABILITY_DELTA:** ordinary English/Chinese questions now use one entrypoint for
+single/combined belief, local meaning, role preference, conditional responsibility,
+authorized source revision, participant contrast and event integration. New Chinese
+forms include `解释 Alice 的条件责任依据。`, `解释 Alice 在 team 中对 proposal 的
+fair 词义。`, `解释 Alice 在 team 中的 medic 角色偏好。` and `解释 Alice 在 team
+中对 proposal 的 fair 词义与 medic 角色偏好。`. Actor/source labels stay literal;
+this is bounded grammar, not unrestricted language or an ontology.
+
+CG03 source grounding repairs preserve the full source asserted subject/predicate:
+actor headers, quotations, hypothetical clauses, selected quote substrings and
+another actor occurring as an object cannot establish a direct mental factor.
+Positive/negative direct statements and explicit indirect attributions remain
+separate. Object negation with unresolved factor polarity stays unknown. Reported/
+hypothetical action/outcome clauses cannot anchor an episode. Existing limited
+Chinese explicit self/action/outcome clauses remain usable; no automatic motive,
+emotion, knowledge or moral truth.
+
+The explicit FOCAL_EPISODE ordinary path additionally requires literal action/
+outcome reference for its factor claims. Expecting a kettle to boil, controlling
+a bus, or intending to close a gate cannot support foreseeability/control/intention
+for a different opening/escape episode. Missing literal links remain unresolved;
+there is no implicit latch→gate, synonym, world or ontology bridge. This English
+literal-reference path remains deliberately narrow; unsupported Chinese/complex
+references stay unknown. ALL_SOURCE keeps the historical bounded source-claim
+classification contract, including its weaker relevance assumptions; it is not
+proof that every statement refers to the focal object/outcome. Consumed default
+cases and all frozen messages/gold/scorers remain byte-for-byte compatible.
+
+Eighteen new meaningful tests repair reproduced usability/source/episode failures
+and exercise unified actual final inputs, actor/time/access, negation/revision,
+refusal/privacy and total budget. The integrated closure contains five actual
+model-input probes covering NI10–14,327 v1 +176 historical local PASS and matching
+runtime/frozen-package hashes. Probe adapters are local stubs, not model reasoning
+or external evidence. Exact PR-head/main CI artifacts are the delivery authority.

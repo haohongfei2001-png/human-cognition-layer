@@ -153,8 +153,59 @@ _FACTOR_PATTERNS = {
     ResponsibilityFactor.STATED_INTENTION: r'\b(intend(?:ed)?|plan(?:ned)?|meant to|aim(?:ed)? to)\b|打算|意图|计划',
 }
 _RETROSPECTIVE = re.compile(r'\b(at the time|before the action|at the moment of the action)\b|当时|事前', re.I)
-_NEGATIVE = re.compile(r'\b(did not|didn.t|could not|couldn.t|was not|wasn.t|unable to|unaware|unforeseeable|never|not)\b|不知道|无法|不能|没有|未能|无意', re.I)
+_NEGATIVE = re.compile(r'\b(did not|didn.t|could not|couldn.t|was not|wasn.t|unable to|unaware|unforeseeable|never|not|no)\b|不知道|无法|不能|没有|未能|无意', re.I)
 _LATER_LEARNING = re.compile(r'\b(later learned|learned .{0,80} after(?:ward| the action)|only learned after)\b|后来才知道|事后才知道', re.I)
+
+_ASSERTED_PREDICATES = {
+    ResponsibilityFactor.KNOWLEDGE: r'(?:(?:did not|didn.t|never) )?(?:knew|know|learned)|(?:was|am) (?:not )?(?:aware|unaware|ignorant)',
+    ResponsibilityFactor.FORESEEABILITY: r'(?:(?:did not|didn.t|never) )?(?:foresaw|foresee|expected|expect|predicted|predict|anticipated|anticipate)',
+    ResponsibilityFactor.CONTROL: r"could(?: not|n't)? (?:have )?(?:stopped|stop|prevented|prevent|avoided|avoid|control)|(?:was|am) (?:not )?(?:able|unable) to (?:stop|prevent|avoid)|(?:had|have) (?:no )?control|controlled|control",
+    ResponsibilityFactor.STATED_INTENTION: r'(?:(?:did not|didn.t|never) )?(?:intended|intend|planned|plan|meant to|aimed to|aim to)',
+    ResponsibilityFactor.CAUSAL_CONTRIBUTION: r'(?:(?:did not|didn.t|never) )?(?:caused|cause|led to|contributed to)',
+}
+_CHINESE_PREDICATES = {
+    ResponsibilityFactor.KNOWLEDGE: r'不知道|不知|知道|知晓',
+    ResponsibilityFactor.FORESEEABILITY: r'(?:没有|未能|无法|不能)?(?:预见|预料|预计)',
+    ResponsibilityFactor.CONTROL: r'(?:无法|不能|能够|能)?(?:控制|阻止|避免)',
+    ResponsibilityFactor.STATED_INTENTION: r'(?:没有|无)?(?:打算|意图|计划)',
+    ResponsibilityFactor.CAUSAL_CONTRIBUTION: r'(?:没有)?(?:导致|造成|促成)',
+}
+
+
+def _assertion_body(source):
+    body = source.raw_text.strip()
+    header = re.match(r'^([A-Za-z][A-Za-z0-9_-]{0,63}):\s+', body)
+    if header:
+        if header[1] != (source.actor_id or 'Narrator'):
+            raise ValueError('source header actor mismatch')
+        body = body[header.end():]
+    # A bounded asserted clause, not a quote, hypothesis or alternative sentence.
+    if (re.search(r'\b(if|unless|would|might|perhaps|hypothetically)\b|如果|假如|可能|也许', body, re.I) or
+        re.search(r'["“”]|[.;]\s+\S|\b(but|however)\b', body, re.I)):
+        raise ValueError('factor requires an asserted source clause')
+    return re.sub(r'^(?:at the time|before the action|at the moment of the action)[, ]*|^(?:当时|事前)', '', body, flags=re.I)
+
+
+def _asserted_factor_polarity(claim, source):
+    body = _assertion_body(source)
+    actor = re.escape(claim.actor_id)
+    subject = rf'(?:I|{actor})' if claim.authority == ClaimAuthority.DIRECT_SELF_REPORT else actor
+    predicate = _ASSERTED_PREDICATES[claim.factor]
+    prefix = re.match(rf'^{subject}\b\s+(?:{predicate})\b', body, re.I)
+    if not prefix and claim.authority != ClaimAuthority.DIRECT_SELF_REPORT:
+        prefix = re.match(rf'^{actor}\b\s+(?:said|stated|reported|claimed|told)\s+(?:that )?'
+            rf'(?:she|he|they|I|{actor})\s+(?:{predicate})\b', body, re.I)
+    if not prefix and claim.factor == ResponsibilityFactor.CAUSAL_CONTRIBUTION:
+        prefix = re.match(rf"^{subject}(?:'s)?\s+(?:opening|closing|pressing|removal|release|action)"
+            rf'(?:\s+[A-Za-z-]+){{0,8}}?\s+(?:{predicate})\b', body, re.I)
+    if not prefix:
+        chinese_subject = rf'(?:我|{actor})' if claim.authority == ClaimAuthority.DIRECT_SELF_REPORT else actor
+        prefix = re.match(rf'^{chinese_subject}\s*(?:{_CHINESE_PREDICATES[claim.factor]})', body)
+    if prefix is None:
+        raise ValueError('source subject/predicate does not assert this actor factor')
+    if bool(_NEGATIVE.search(body)) != bool(_NEGATIVE.search(prefix[0])):
+        raise ValueError('factor object/second polarity is unresolved')
+    return not bool(_NEGATIVE.search(prefix[0]))
 
 
 def _validate_claim(claim, case, events):
@@ -182,6 +233,12 @@ def _validate_claim(claim, case, events):
             raise ValueError('self report actor mismatch')
     elif source.actor_id in (None, claim.actor_id) or claim.actor_id.lower() not in claim.quote.lower():
         raise ValueError('third-party attribution invalid')
+    # Validate the complete source, so a selected quote cannot hide its subject,
+    # hypothesis, second clause or opposite polarity outside that span.
+    if (sum(bool(re.search(pattern, source.raw_text, re.I)) for pattern in _FACTOR_PATTERNS.values()) != 1 or
+        len(re.findall(_FACTOR_PATTERNS[claim.factor], source.raw_text, re.I)) != 1 or
+        claim.value != _asserted_factor_polarity(claim, source)):
+        raise ValueError('factor lacks one source-grounded asserted subject/polarity')
     if (claim.factor == ResponsibilityFactor.STATED_INTENTION and
         claim.authority != ClaimAuthority.DIRECT_SELF_REPORT and
         not re.search(r'\b(said|stated|reported|claimed|told)\b|说|表示|声称', claim.quote, re.I)):
@@ -324,6 +381,53 @@ _ACTION = re.compile(r'\b(opened|closed|pressed|removed|sent|gave|took|turned|mo
 _OUTCOME = re.compile(r'\b(escaped|failed|broke|died|occurred|happened|was lost|was injured|was damaged)\b|逃走|失败|受伤|损坏', re.I)
 _BASE = datetime(2026, 1, 1, tzinfo=timezone.utc)
 
+_ACTION_FORMS = {
+    'opened': ('open', 'opened', 'opening'), 'closed': ('close', 'closed', 'closing'),
+    'pressed': ('press', 'pressed', 'pressing'), 'removed': ('remove', 'removed', 'removal'),
+    'sent': ('send', 'sent', 'sending'), 'gave': ('give', 'gave', 'giving'),
+    'took': ('take', 'took', 'taking'), 'turned': ('turn', 'turned', 'turning'),
+    'moved': ('move', 'moved', 'moving'), 'released': ('release', 'released', 'releasing'),
+    'switched': ('switch', 'switched', 'switching'),
+}
+_OUTCOME_FORMS = {
+    'escaped': ('escape', 'escaped', 'escaping'), 'failed': ('fail', 'failed', 'failure'),
+    'broke': ('break', 'broke', 'broken'), 'died': ('die', 'died', 'death'),
+    'occurred': ('occur', 'occurred'), 'happened': ('happen', 'happened'),
+    'was lost': ('lost', 'loss'), 'was injured': ('injured', 'injury'),
+    'was damaged': ('damaged', 'damage'),
+}
+
+
+def _literal_episode_reference(claim, source, action, outcome):
+    """Explicit focal scope uses literal source referents, never an ontology link.
+
+    Retained ALL_SOURCE cases keep their historical claim-classification contract.
+    Unnamed/ambiguous objects cannot be linked by an incidental factor keyword.
+    """
+    words = lambda text: set(re.findall(r'[a-z]+', text.lower()))
+    stop = {'i', 'the', 'a', 'an', 'at', 'time', 'was', 'were', 'is', 'it', 'then', claim.actor_id.lower()}
+    body, result = _assertion_body(action), _assertion_body(outcome)
+    verb, effect = _ACTION.search(body), _OUTCOME.search(result)
+    if not verb or not effect:
+        return False
+    action_forms = set(_ACTION_FORMS.get(verb[0].lower(), ()))
+    effect_forms = set(_OUTCOME_FORMS.get(effect[0].lower(), ()))
+    objects = words(body[verb.end():]) - stop
+    subjects = words(result[:effect.start()]) - stop
+    stated = words(_assertion_body(source))
+    action_named = bool(objects and objects <= stated)
+    outcome_named = bool(subjects and subjects <= stated and effect_forms & stated)
+    if claim.factor == ResponsibilityFactor.STATED_INTENTION:
+        return bool(action_named and action_forms & stated)
+    if claim.factor == ResponsibilityFactor.FORESEEABILITY:
+        return outcome_named
+    if claim.factor == ResponsibilityFactor.CAUSAL_CONTRIBUTION:
+        return bool(action_named and action_forms & stated and outcome_named)
+    if claim.factor == ResponsibilityFactor.CONTROL:
+        return bool(action_named or ('opening' in stated and 'opened' == verb[0].lower()) or
+                    ('closing' in stated and 'closed' == verb[0].lower()))
+    return action_named  # knowledge requires explicit focal object, no latch→gate assumption
+
 
 def prepare_responsibility_narrative(narrative: str, target_actor: str,
                                      premises: tuple[NarrativePremise, ...], *, premise_scope='ALL_SOURCE') -> ResponsibilityPreparation:
@@ -363,10 +467,23 @@ def prepare_responsibility_narrative(narrative: str, target_actor: str,
         re.search(r'\b(?:believe|believes|believed|belief|prefer|prefers|preference|mean|means|meaning)\b', e.raw_text, re.I) or
         concept_fact.fullmatch(e.raw_text) or concept_use.fullmatch(e.raw_text) or
         context_condition.fullmatch(e.raw_text))}
+    def asserted_action(e):
+        try:
+            body = _assertion_body(e)
+        except ValueError:
+            return False
+        return bool(re.match(rf'^(?:I|{re.escape(target_actor)})\s+(?:opened|closed|pressed|removed|sent|gave|took|turned|moved|released|switched)\b|^(?:我|{re.escape(target_actor)})\s*(?:打开|关闭|按下|移走|释放)', body, re.I))
+    def asserted_outcome(e):
+        try:
+            body = _assertion_body(e)
+        except ValueError:
+            return False
+        return bool(_OUTCOME.search(body) and not re.search(
+            r'\b(said|stated|reported|claimed|told|knew|expected|intended|planned)\b|说|表示|声称|知道|打算', body, re.I))
     actions = [e for e in events if e.event_id not in foreign and e.actor_id == target_actor and
-               _ACTION.search(e.raw_text) and
+               asserted_action(e) and
                not re.search(_FACTOR_PATTERNS[ResponsibilityFactor.STATED_INTENTION], e.raw_text, re.I)]
-    outcomes = [e for e in events if e.event_id not in foreign and e.actor_id is None and _OUTCOME.search(e.raw_text)]
+    outcomes = [e for e in events if e.event_id not in foreign and e.actor_id is None and asserted_outcome(e)]
     if len(actions) != 1 or len(outcomes) != 1 or _time(outcomes[0].valid_time) < _time(actions[0].valid_time):
         return ResponsibilityPreparation((), None, 'action_or_outcome_ambiguous', ())
     action, outcome = actions[0], outcomes[0]
@@ -396,6 +513,9 @@ def prepare_responsibility_narrative(narrative: str, target_actor: str,
             action.event_id, source.event_id, source.raw_text, action.valid_time,
             not bool(_NEGATIVE.search(source.raw_text)), authority)
         try:
+            if premise_scope == 'FOCAL_EPISODE' and not _literal_episode_reference(claim, source, action, outcome):
+                diagnostics.append({'line': index, 'status': 'FACTOR_EPISODE_REFERENCE_UNRESOLVED'})
+                continue
             _validate_claim(claim, ResponsibilityCase((target_actor,), action.event_id,
                 outcome.event_id, (NormativePremise('temporary', 'temporary',
                 (action.event_id,)),)), {e.event_id: e for e in events})
