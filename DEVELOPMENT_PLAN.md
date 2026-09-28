@@ -226,7 +226,7 @@ Noor-dependent nested, concept and conditional-control checks while reusing Mira
 and Kai outputs; ordinary input and actual final-adapter receipt are preserved.
 Eleven targeted checks plus full regression; see `docs/HCL_WAVE_B05.md`.
 
-## 5c. Current Wave C — Goals, Plans and Appraisal
+## 5c. Completed Wave C — Goals, Plans and Appraisal
 
 **C01 — CORRECTNESS_VERIFIED:** source-bounded goals/subgoals, means, plans, conditions,
 opportunities, completion and abandonment. Keep stated intention distinct from
@@ -259,6 +259,8 @@ targeted checks plus full regression; see `docs/HCL_WAVE_C04.md`.
 emotion remains a hypothesis or unknown, never a certain label. Thirteen targeted
 checks cover actual dependency changes, action-time boundaries, access, source
 revision and shared extraction. See `docs/HCL_WAVE_C05.md`.
+
+## 5d. Current Wave D — Social and Strategic Cognition
 
 **D01 — CORRECTNESS_VERIFIED:** social acts and commitment lifecycle, separating original
 words, conditions, receipt, acceptance, expectation, withdrawal and fulfillment.
@@ -425,7 +427,7 @@ defect is.
 
 ## 13. Current execution fact
 
-- Current wave: **Wave C — Goals, Plans and Appraisal**
+- Current wave: **Wave D — Social and Strategic Cognition**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
 - **NEXT_READY: D02_BOUNDED_MUTUAL_UNDERSTANDING_AND_REPAIR**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**

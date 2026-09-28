@@ -11,7 +11,7 @@ exact-SHA CI and immutable receipts remain the implementation/evidence facts.
 
 ## Current wave
 
-**Wave C — Goals, Plans and Appraisal**
+**Wave D — Social and Strategic Cognition**
 
 A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
