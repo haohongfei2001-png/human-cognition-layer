@@ -3,7 +3,8 @@ from dataclasses import dataclass
 import hashlib
 import json
 from hcl.v04.model import EventRecord
-from .context import ANSWER_POLICY, CognitionContext, evidence_level, event_row
+from .context import (ANSWER_POLICY, RESPONSIBILITY_ANSWER_POLICY,
+                      CognitionContext, evidence_level, event_row)
 from .router import CognitionPlan, CognitionRequest, CognitionRouter
 from .router import PerspectiveMode
 
@@ -221,7 +222,7 @@ class HCLCognitionLayer:
                 target = mentioned[0]
         # A person task with no unambiguous actor must fail closed, never use
         # the system view as if it were a character view.
-        person_task = plan.social_commitment or any(c in plan.capabilities for c in ('perspective', 'intention', 'affect'))
+        person_task = plan.social_commitment or plan.responsibility_structure or any(c in plan.capabilities for c in ('perspective', 'intention', 'affect'))
         scope = {'event_time': request.event_time, 'knowledge_cutoff': request.knowledge_cutoff}
         context = CognitionContext(temporal_scope=scope, perspective_mode=plan.perspective_mode.value)
         if request.narrative and plan.explanation and not candidates and not preparation_audit['failure']:
@@ -301,6 +302,30 @@ class HCLCognitionLayer:
                 if not context.social['checked_act_count'] or not context.social['checked_expectation_count']:
                     context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT',
                         'reason': 'no source-grounded social act and reported expectation both checked'})
+            if plan.responsibility_structure:
+                case = request.responsibility_case
+                visible_ids = {e.event_id for e in visible}
+                required_ids = {case.action_event_id, case.outcome_event_id}
+                required_ids.update(eid for p in case.premises for eid in p.basis_event_ids)
+                if required_ids <= visible_ids:
+                    context.responsibility = {
+                        'status': 'INPUT_VALIDATED_FACTORS_UNCHECKED',
+                        'focal_actor': target,
+                        'actor_ids': list(case.actor_ids),
+                        'action_event_id': case.action_event_id,
+                        'outcome_event_id': case.outcome_event_id,
+                        'premises': [{'premise_id': p.premise_id, 'text': p.text,
+                                      'basis_event_ids': list(p.basis_event_ids),
+                                      'authority': 'CALLER_SUPPLIED_CONDITIONAL'}
+                                     for p in case.premises],
+                        'unchecked_factors': ['causal_contribution', 'knowledge',
+                            'foreseeability', 'control', 'stated_intention'],
+                        'conclusion': 'UNRESOLVED',
+                    }
+                else:
+                    context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT',
+                        'capability': 'cg03_responsibility_structure',
+                        'reason': 'action, outcome or premise source absent from bounded view'})
         context.evidence = [event_row(e) for e in visible]
         context.provenance = [{'source_event_id': e.event_id, 'source_id': e.source_id,
                                'actor_id': e.actor_id, 'evidence_level': 'SYSTEM_UNKNOWN',
@@ -343,7 +368,9 @@ class HCLCognitionLayer:
                 perspective_mode=plan.perspective_mode.value,
                 uncertainty=[{'status': 'SYSTEM_INSUFFICIENT', 'reason': 'context budget exceeded; request a narrower source/time scope'}])
             payload = self._payload(request.query, context)
-        return PreparedAnswer(plan, context, ({'role': 'system', 'content': ANSWER_POLICY},
+        policy = (ANSWER_POLICY + ' ' + RESPONSIBILITY_ANSWER_POLICY
+                  if plan.responsibility_structure else ANSWER_POLICY)
+        return PreparedAnswer(plan, context, ({'role': 'system', 'content': policy},
                                               {'role': 'user', 'content': payload}), preparation_audit)
 
     @staticmethod

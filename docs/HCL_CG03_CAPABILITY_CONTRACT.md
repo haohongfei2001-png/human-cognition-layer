@@ -1,6 +1,6 @@
 # HCL-CG-03 Capability Contract — Responsibility-Structure Explanation
 
-Status: **ACTIVE / CG03-A PROVIDER-FREE IMPLEMENTATION NEXT**
+Status: **ACTIVE / CG03-A IMPLEMENTED; CG03-B PROVIDER-FREE IMPLEMENTATION NEXT**
 
 This package is the next candidate in `DEVELOPMENT_PLAN.md` section 8. Its
 purpose is a real, user-visible reasoning distinction: given authorized source
@@ -28,7 +28,9 @@ conditional computations from v0.9 into observed world truth.
 
 1. **CG03-A:** Add a bounded explicit responsibility-analysis operation to v1,
    with typed actor/action/outcome/premise input and reader/character/observer
-   scope. Ordinary unrelated tasks stay direct.
+   scope. Ordinary unrelated tasks stay direct. Implemented: the typed case
+   projects only when action, outcome and premise source IDs are visible in the
+   requested view. It marks all factors and the conclusion unresolved.
 2. **CG03-B:** Execute source/time/access checks for causal contribution,
    knowledge, foreseeability, control and stated intention. Preserve unknown
    and competing evidence; do not infer intent from outcome.

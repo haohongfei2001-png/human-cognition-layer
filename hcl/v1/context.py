@@ -68,9 +68,14 @@ class CognitionContext:
     open_unknown_candidate: dict = field(default_factory=dict)
     preparation: dict = field(default_factory=dict)
     social: dict = field(default_factory=dict)
+    responsibility: dict = field(default_factory=dict)
 
     def as_dict(self):
-        return asdict(self)
+        row = asdict(self)
+        # Preserve the sealed CG-02 message contract for unrelated tasks.
+        if not row['responsibility']:
+            del row['responsibility']
+        return row
 
     def serialized(self):
         return json.dumps(self.as_dict(), ensure_ascii=False, sort_keys=True)
@@ -96,4 +101,11 @@ ANSWER_POLICY = (
     ' expectation from the source act. Missing access does not prove ignorance;'
     ' access does not prove understanding. Do not infer deception, betrayal,'
     ' promise-breaking, trust change, relationship status, or blame.'
+)
+
+RESPONSIBILITY_ANSWER_POLICY = (
+    'A responsibility case contains caller-supplied premises, not established '
+    'normative truth. Until source/time/access factors and premises have been '
+    'checked, do not conclude responsibility, blame, liability or intention '
+    'from an action or outcome. Say which checks are still missing.'
 )

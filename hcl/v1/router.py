@@ -8,6 +8,7 @@ from hcl.v04.model import EventRecord
 from .capabilities import CostClass, resolve_dependencies
 from .narrative import query_actor
 from .cg02 import SocialAct, ParticipantInterpretation, AccessStatement
+from .cg03 import ResponsibilityCase
 
 
 @dataclass(frozen=True)
@@ -41,6 +42,7 @@ class CognitionRequest:
     social_acts: tuple[SocialAct, ...] = ()
     social_interpretations: tuple[ParticipantInterpretation, ...] = ()
     social_access_statements: tuple[AccessStatement, ...] = ()
+    responsibility_case: ResponsibilityCase | None = None
 
     def __post_init__(self):
         if not isinstance(self.query, str) or not self.query.strip() or len(self.query) > 16000:
@@ -92,6 +94,22 @@ class CognitionRequest:
         if (self.social_analysis or self.social_acts or self.social_interpretations or
             self.social_access_statements) and not self.target_actor:
             raise ValueError('social analysis requires explicit target_actor')
+        if self.responsibility_case is not None:
+            case = self.responsibility_case
+            if not isinstance(case, ResponsibilityCase):
+                raise ValueError('typed responsibility case required')
+            if not self.target_actor or self.target_actor not in case.actor_ids:
+                raise ValueError('responsibility case requires focal target_actor in actor_ids')
+            if len(self.evidence) > 24:
+                raise ValueError('CG-03 accepts at most 24 source events')
+            event_ids = {e.event_id for e in self.evidence}
+            required = {case.action_event_id, case.outcome_event_id}
+            required.update(eid for premise in case.premises for eid in premise.basis_event_ids)
+            if not required <= event_ids:
+                raise ValueError('responsibility case references missing source event')
+            action = next(e for e in self.evidence if e.event_id == case.action_event_id)
+            if action.actor_id != self.target_actor:
+                raise ValueError('focal action source actor mismatch')
         seen = {}
         for e in self.evidence:
             if e.event_id in seen and seen[e.event_id] != e:
@@ -121,6 +139,7 @@ class CognitionPlan:
     perspective_mode: PerspectiveMode = PerspectiveMode.READER_ANALYSIS
     explanation: bool = False
     social_commitment: bool = False
+    responsibility_structure: bool = False
     target_actor: str | None = None
 
     @property
@@ -149,11 +168,12 @@ class CognitionRouter:
             PerspectiveMode.CHARACTER_PERSPECTIVE if request.target_actor and (request.tools or re.search(
                 r'\b(what does .+ (?:know|believe|think|want)|what did .+ (?:know|believe|think|want)|from .+ perspective)\b|知道什么|从.+视角|以.+视角', query)
             ) else PerspectiveMode.READER_ANALYSIS)
-        social = bool(target_actor and (request.social_analysis or request.social_acts or
+        responsibility = request.responsibility_case is not None
+        social = bool(not responsibility and target_actor and (request.social_analysis or request.social_acts or
             request.social_interpretations or request.social_access_statements or re.search(
             r'\b(?:promis(?:e|ed|es)|commit(?:ment|ted)?|propos(?:e|al|ed)|request(?:ed)?|accept(?:ed|ance)?|refus(?:e|ed|al)|withdraw(?:al|n)?|misunderstand(?:ing)?|expect(?:s|ed|ation|ations)?)\b|承诺|提议|请求|接受|拒绝|撤回|误解|期待',
             query)))
-        explanation = bool(not social and target_actor and re.search(
+        explanation = bool(not responsibility and not social and target_actor and re.search(
             r'\b(?:why did|why does|why would|explain .+ action|explanation of .+ action)\b|为什么.+(?:做|去|没|不|离开|参加)|解释.+(?:行为|行动)', query))
         selected = []
         optional = []
@@ -161,7 +181,7 @@ class CognitionRouter:
         blocked = []
         reasons = {}
         for cid in ('perspective', 'intention', 'affect'):
-            if re.search(_PATTERNS[cid], query):
+            if not responsibility and re.search(_PATTERNS[cid], query):
                 selected.append(cid)
                 reasons[cid] = 'explicit task semantics; no inference from incidental evidence'
                 if cid == 'perspective':
@@ -175,6 +195,9 @@ class CognitionRouter:
         if social:
             selected.append('cg02_social_commitment')
             reasons['cg02_social_commitment'] = 'explicit bounded social act and expectation analysis'
+        if responsibility:
+            selected.append('cg03_responsibility_structure')
+            reasons['cg03_responsibility_structure'] = 'explicit bounded action, outcome and premise operation'
         # Explicit source/time scopes must still be respected for factual tasks.
         if request.target_actor or request.event_time or request.knowledge_cutoff:
             selected.append('source_visibility')
@@ -201,4 +224,5 @@ class CognitionRouter:
                              max_context_chars=request.max_context_chars,
                              blocked_tools=tuple(blocked), perspective_mode=mode,
                              explanation=explanation, social_commitment=social,
+                             responsibility_structure=responsibility,
                              target_actor=target_actor)
