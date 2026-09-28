@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**HCL night — NI-12 certified; NI-13 multi-event integration implemented, CI pending; CG-04/CG-05 deferred**
+**HCL night — NI-10..14 implemented; integrated provider-free closure; CG-04/CG-05 READY / DEFERRED_OWNER_AUTHORIZATION**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -586,3 +586,41 @@ candidate, paid call or history upgrade; CG04/05 still deferred, night0/USD0,
 LongMemEval SEALED. After exact-head/main CI, immediately NI-14 ordinary bilingual
 question robustness and source-grounding repairs, then integrated closure under
 section15. No owner blocking gate.
+
+
+**NIGHT-INTEGRATION-13 — exact-head/main CERT PASS.** PR153 headdafb4d23,
+run36453917674; mainf7acf1e9386f19d357b407bcec216af6e8901292,
+run36454160591. Both309 v1 +176 historical =485 PASS, matching runtime digest;
+both applicable groups PASS. [Receipt](reports/HCL_NIGHT_NARRATIVE_EVENTS_CERTIFICATION.json).
+
+**NIGHT-INTEGRATION-14 — IMPLEMENTATION COMPLETE / INTEGRATED PROVIDER-FREE CLOSURE.**
+CAPABILITY_DELTA: one ordinary bilingual entrypoint prepares existing single/
+combined person cognition, authorized source revisions, two participant views and
+multi-event state without internal operation selection or caller mental-state
+gold. Fix reproduced Chinese routing and nested-decoder failures. CG03 full-source
+subject/predicate/polarity guards prevent wrong-person/quote/hypothesis promotion;
+explicit FOCAL_EPISODE literal references prevent unrelated object/outcome factors
+or opposite actions supporting the focal episode. Missing links/polarity remain
+unknown, no world/ontology bridge. Positive/negative direct and explicit indirect
+claims stay distinct; historical default cases remain identical.
+
+Eighteen new meaningful tests;327 v1 +176 frozen historical =503 local PASS;
+five actual local adapter/input probes cover the full NI10–14 line. Delivery is
+accepted only with this runtime's exact PR-head/main CI PASS artifacts; the final
+canonical GitHub handoff records the actual SHAs, run IDs and artifact digest.
+[Integrated closure](reports/HCL_NIGHT_INTEGRATED_CLOSURE.json),
+[source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md).
+
+Only CG04/CG05 remain implemented-unvalidated, both frozen/deferred. CG01 SIMPLIFY,
+CG02 INCONCLUSIVE/CLOSED, CG03 development-only RETAIN, v0.6 bounded historical
+RETAIN; no independent/fresh or broad capability upgrade. Calls/spend during this
+night0/USD0; no grant, trigger, credential/account/plan/budget transfer; LongMemEval
+SEALED. All section15 implementation and reproduced integration failures are
+closed subject to exact CI, not a claim every conceivable future integration is
+finished. Unique next implementation task: **NONE_QUEUED_PROVIDER_FREE_AFTER_NI14
+EXACT_MAIN_CI**. Do not create filler or a third unvalidated large candidate.
+Future work needs a concrete dependency-safe task recorded in the canonical plan;
+new paid validation remains deferred without blocking already-available work.
+No owner-only decision is required for this delivery. The night closure condition
+is two pending candidates plus completion of all currently queued/identified
+provider-free integration/correctness work, not waiting for paid authorization.

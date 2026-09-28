@@ -7,7 +7,7 @@ import re
 from .belief_preparation import decode_belief_source
 from .compact import expand_cognition_context
 from .composition import ComposedAnswer, ComposedAnswerReceipt
-from .person_question import prepare_person_context, _refusal
+from .person_question import prepare_person_context, _refusal, _QUESTIONS
 from .router import PerspectiveMode
 from .source_pool import expand_composed_sources
 
@@ -135,6 +135,8 @@ def prepare_source_revision(layer, query, sources, *, perspective_mode=Perspecti
         return refuse('explicit_source_revision_question_required')
     if inner.startswith(('At statement', '截至第', 'Across sources', '按来源变化')):
         return refuse('nested_source_revision_scope')
+    if not any(p.fullmatch(inner.strip()) for _, p in _QUESTIONS):
+        return refuse('unsupported_or_mixed_source_revision_task')
     stages, snapshots = [], []
     for source in sources:
         path = paths[source.source_id]

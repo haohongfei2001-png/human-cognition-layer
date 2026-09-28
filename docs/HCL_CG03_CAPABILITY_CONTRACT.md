@@ -81,3 +81,17 @@ basis. Missing/hidden relevant evidence remains unresolved; no moral truth,
 private intention or character rule acceptance is inferred. See the ordinary
 question API and its provider-free integration receipt. No new paid experiment,
 independent/fresh evidence, third candidate or default activation is claimed.
+
+
+## NI-14 prospective ordinary source grounding
+
+Full-source asserted subject/predicate/polarity now prevents actor headers,
+subspan quotes, hypotheses and other-person objects becoming focal direct factors.
+Reported/hypothetical actions/outcomes cannot anchor an ordinary episode.
+Explicit FOCAL_EPISODE scope additionally requires bounded literal references to
+the focal action/object and outcome where applicable; unrelated kettle/bus/closing
+clauses remain unknown. Missing implicit references are unresolved, not an ontology
+link. This is optional prospective integration correctness. ALL_SOURCE preserves
+its historical claim-classification/relevance assumptions; neither scope proves
+private knowledge, actual-world intention or moral truth. All consumed four-case
+inputs/gold/scorer and historical development-only RETAIN closure remain unchanged.
