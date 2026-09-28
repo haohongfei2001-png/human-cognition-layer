@@ -681,3 +681,14 @@ extra extraction, synonym/ontology inference or third candidate. Ambiguous tasks
 keep authorized reader source with structured analysis unresolved. CG04/05
 freezes stay unchanged/deferred; continue provider-free implementation, no owner
 paid gate or leaderboard/source hunting.
+
+
+NIGHT-INTEGRATION-06 certified on PR145 head/main413 tests, both applicable groups
+PASS. NIGHT-INTEGRATION-07 implements a bounded ordinary-question entrypoint into
+existing belief/concept/comparison preparation, with no caller mental gold or
+extra extraction. Ambiguous private questions refuse reader-source transfer.
+Certify exact head/main, then implement source-order snapshots so later belief/
+meaning revisions or narrated exposure cannot change what an earlier view was
+supported to contain. Explicit source statement order only, no calendar-time or
+verified receipt claim. Preserve default freezes and historical evidence; only
+CG04/05 pending, no new paid calls or third candidate, no owner blocking gate.
