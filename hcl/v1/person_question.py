@@ -24,13 +24,13 @@ _QUESTIONS = tuple((kind, re.compile(pattern)) for kind, pattern in (
 ))
 
 
-def _refusal(query, narrative, mode, reason, *, max_context_chars):
+def _refusal(query, narrative, mode, reason, *, max_context_chars, preserve_reader_source=True):
     """Preserve only the authorized reader source; never guess a private view."""
     stamp = datetime(2026, 1, 1, tzinfo=timezone.utc).isoformat()
     event = EventRecord('question-source-' + hashlib.sha256(narrative.encode()).hexdigest()[:12],
         stamp, narrative, 'authorized-ordinary-question-source', stamp, metadata={'reader_only': True})
     context = CognitionContext(perspective_mode=mode.value,
-        evidence=[event_row(event)] if mode == PerspectiveMode.READER_ANALYSIS else [],
+        evidence=[event_row(event)] if preserve_reader_source and mode == PerspectiveMode.READER_ANALYSIS else [],
         uncertainty=[dict(status='SYSTEM_INSUFFICIENT', reason=reason)],
         preparation=dict(method='bounded_ordinary_question_refusal', failure=reason,
                          extraction_provider_calls=0, answer_provider_calls=1))
@@ -55,8 +55,39 @@ def _refusal(query, narrative, mode, reason, *, max_context_chars):
         actual_final_messages=list(messages), longmemeval='SEALED_NOT_ACCESSED'))
 
 
+def _attach_source_scope(prepared, original_query, source_receipt, *, max_context_chars):
+    payload = json.loads(prepared.messages[-1]['content'])
+    key = 'composed_cognition' if isinstance(prepared, ComposedAnswer) else 'cognition_context'
+    scope = dict(kind='SOURCE_STATEMENT_ORDER_ONLY', through_statement=source_receipt['through_statement'],
+                 calendar_time='NOT_ESTABLISHED')
+    payload['query'], payload['source_order_scope'] = original_query, scope
+    context = prepared.context if isinstance(prepared, PreparedAnswer) else None
+    extra = len(json.dumps(scope, ensure_ascii=False, sort_keys=True))
+    exceeded = len(json.dumps(payload[key], ensure_ascii=False, sort_keys=True)) + extra > max_context_chars
+    if exceeded:
+        uncertainty = [dict(status='SYSTEM_INSUFFICIENT', reason='source-order context budget exceeded; narrow source')]
+        if key == 'composed_cognition':
+            payload[key] = dict(focal_actor=payload[key].get('focal_actor'),
+                perspective_mode=payload[key]['perspective_mode'], operation_contexts=[], uncertainty=uncertainty)
+        else:
+            context = CognitionContext(perspective_mode=context.perspective_mode, uncertainty=uncertainty)
+            payload[key] = compact_cognition_context(context.as_dict())
+    messages = (dict(role='system', content=prepared.messages[0]['content'] +
+        ' This snapshot includes only the explicitly selected source statements. '
+        'Event timestamps encode statement order, not calendar time or verified receipt time. '
+        'Later revisions and exposure are absent from this view; absent evidence stays unknown.'),
+        dict(role='user', content=json.dumps(payload, ensure_ascii=False, sort_keys=True)))
+    receipt = dict(prepared.preparation_receipt, source_selection=source_receipt,
+        actual_final_messages=list(messages))
+    if exceeded:
+        receipt['failure'] = 'source_order_context_budget_exceeded'
+    return replace(prepared, messages=messages, preparation_receipt=receipt,
+                   **({'context': context} if isinstance(prepared, PreparedAnswer) else {}))
+
+
 def prepare_person_context(layer, query, narrative, *, perspective_mode=PerspectiveMode.READER_ANALYSIS,
-                           observer_actor=None, narrative_access=False, max_context_chars=48000):
+                           observer_actor=None, narrative_access=False, max_context_chars=48000,
+                           as_of_statement=None):
     """Ordinary question + ordinary source -> existing prepared cognition state.
 
     Question grammar selects operation/scenario, never correct mental states.
@@ -75,6 +106,39 @@ def prepare_person_context(layer, query, narrative, *, perspective_mode=Perspect
         _label(observer_actor)
     if (perspective_mode == PerspectiveMode.OBSERVER_ABOUT_TARGET) != (observer_actor is not None):
         raise ValueError('observer perspective requires one explicit observer')
+    if as_of_statement is not None and (type(as_of_statement) is not int or not 1 <= as_of_statement <= 24):
+        raise ValueError('source statement scope must be an integer from1 to24')
+    original_query, original_source = query, narrative
+    prefix = (re.fullmatch(r'At statement ([1-9][0-9]?), (.+)', query.strip()) or
+              re.fullmatch(r'截至第 ([1-9][0-9]?) 条陈述，(.+)', query.strip()))
+    if prefix:
+        index = int(prefix[1])
+        if as_of_statement is not None and as_of_statement != index:
+            return _refusal(query, narrative, perspective_mode, 'conflicting_source_order_scope',
+                max_context_chars=max_context_chars, preserve_reader_source=False)
+        as_of_statement, query = index, prefix[2]
+        if query.startswith(('At statement', '截至第')):
+            return _refusal(original_query, narrative, perspective_mode, 'nested_source_order_scope',
+                max_context_chars=max_context_chars, preserve_reader_source=False)
+    elif query.strip().startswith(('At statement', '截至第')):
+        return _refusal(query, narrative, perspective_mode, 'unsupported_source_order_scope',
+            max_context_chars=max_context_chars, preserve_reader_source=False)
+    if as_of_statement is not None:
+        lines = [line.strip() for line in narrative.splitlines() if line.strip()]
+        if not 1 <= as_of_statement <= len(lines) <= 24 or any(len(line) > 2000 for line in lines):
+            return _refusal(original_query, narrative, perspective_mode, 'source_order_scope_out_of_bounds',
+                max_context_chars=max_context_chars, preserve_reader_source=False)
+        narrative = '\n'.join(lines[:as_of_statement])
+        selection = dict(method='EXPLICIT_AUTHORIZED_SOURCE_PREFIX', through_statement=as_of_statement,
+            original_source_sha256=hashlib.sha256(original_source.encode()).hexdigest(),
+            selected_source_sha256=hashlib.sha256(narrative.encode()).hexdigest(),
+            source_statement_numbers=list(range(1, as_of_statement + 1)),
+            calendar_time='NOT_ESTABLISHED', future_source_enters_preparation=False)
+        # Re-enter once with the scoped source and plain operation question.
+        # No semantic work has run on the original/future source.
+        prepared = prepare_person_context(layer, query, narrative, perspective_mode=perspective_mode,
+            observer_actor=observer_actor, narrative_access=narrative_access, max_context_chars=max_context_chars)
+        return _attach_source_scope(prepared, original_query, selection, max_context_chars=max_context_chars)
     matches = [(kind, match.groupdict()) for kind, pattern in _QUESTIONS
                if (match := pattern.fullmatch(query.strip()))]
     if len(matches) != 1 or matches[0][1]['actor'] == 'Narrator':

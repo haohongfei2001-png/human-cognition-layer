@@ -147,7 +147,7 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**NIGHT-INTEGRATION-07 — ordinary question entrypoint into existing cognition**
+**NIGHT-INTEGRATION-08 — earlier source-order person/context snapshots**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
@@ -441,3 +441,23 @@ source-order snapshot support for these ordinary questions, preserving what was
 supported before later belief/meaning revisions or later exposure. Explicit
 statement order is not a calendar-time or real receipt claim. No third candidate,
 new provider call, benchmark/source hunt or owner gate.
+
+
+**NIGHT-INTEGRATION-07 — exact-head/main CERT PASS.** PR146 final head9c55a57,
+run36445515626; mainea68db6a9082dbb2cd1ca1be902565c4a27a21da,
+run36445717940. Both249 v1 +176 historical =425 PASS, matching runtime digest;
+all six groups PASS. [Receipt](reports/HCL_NIGHT_QUESTION_CERTIFICATION.json).
+
+**NIGHT-INTEGRATION-08 — IMPLEMENTED; correctness certification pending.**
+CAPABILITY_DELTA: explicit ordinary earlier questions prepare only authorized
+source prefixes, preserving earlier belief/meaning/access before later revision
+or exposure. Future malformed semantic lines cannot poison the valid earlier
+scope. Selected/original source hashes are audited, future-source digest absent
+from final input. Statement order is not calendar or verified receipt time.
+Invalid/nested/conflicting scopes reject whole-reader fallback; state+scope budget
+is checked. Ten new meaningful tests; default frozen inputs stay identical.
+CG04/05 remain the two deferred implemented-unvalidated candidates. Calls/spend
+night0/USD0, LongMemEval SEALED. After exact-head/main CI, unique next work is
+lossless reduction of repeated shared policy/preparation metadata in composed
+final input, preserving every actor/source/time/access/uncertainty decision and
+all actual-state decoder checks. No third candidate or paid authorization gate.
