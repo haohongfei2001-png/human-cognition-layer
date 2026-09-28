@@ -1,4 +1,5 @@
 {
+  "actions_secret_name": "DEEPSEEK_API_KEY",
   "arms": [
     "C",
     "P",
@@ -673,24 +674,35 @@
       "source_sha256": "918362975cae902a3578f515fdc36585e7739033f1ca507df24ff57756b45efe"
     }
   ],
-  "estimated_worst_case_usd": 0.2112,
+  "estimated_worst_case_usd": 0.2517504,
   "execution_authorized": false,
   "longmemeval": "SEALED_NOT_ACCESSED",
   "maximum_input_tokens_per_call": 8000,
   "maximum_output_tokens_per_call": 512,
   "maximum_provider_calls": 20,
-  "model": "gpt-6-sol",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
   "owner_gate": "HCL_CG02_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION",
   "price_basis": {
-    "as_of": "2026-09-28",
-    "standard_short_context_input_usd_per_million": 1.0,
-    "standard_short_context_output_usd_per_million": 5.0,
-    "url": "https://developers.openai.com/api/docs/pricing"
+    "basis": "existing repository-frozen CG-01 DeepSeek peak-price contract",
+    "source_package": "reports/HCL_CG01_EXTERNAL_PACKAGE.json",
+    "input_cache_miss_usd_per_million": 1.32,
+    "output_usd_per_million": 3.96
   },
   "proposed_hard_cap_usd": 0.3,
+  "provider": "deepseek",
+  "provider_endpoint": "https://api.deepseek.com",
+  "provider_request": {
+    "thinking": {
+      "type": "disabled"
+    },
+    "response_format": {
+      "type": "json_object"
+    },
+    "max_retries": 0
+  },
   "purpose": "bounded paired development probe; no broad efficacy or freshness claim",
   "retries": 0,
   "schema": "hcl-cg02-external-package-v1",
-  "service_tier": "default_standard",
   "source_policy": "Four newly authored, public in-repository development dialogues; no third-party source or sealed benchmark."
 }
