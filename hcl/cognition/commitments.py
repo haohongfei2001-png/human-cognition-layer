@@ -15,7 +15,7 @@ _QUERY = re.compile(rf"What is the status of (?P<speaker>{_NAME})'s promise to (
 _PROMISE = re.compile(rf'I promise (?P<recipient>{_NAME}) to (?P<action>.+?) if (?P<condition>.+)')
 _RESPONSE = re.compile(rf"I (?P<kind>accept|refuse) (?P<speaker>{_NAME})'s promise to (?P<action>.+)")
 _END = re.compile(rf'I (?P<kind>withdraw|fulfilled) my promise to (?P<recipient>{_NAME}) to (?P<action>.+)')
-_EXPECT = re.compile(rf'I expect (?P<speaker>{_NAME}) to (?P<action>.+?)(?: if (?P<condition>.+))?')
+_EXPECT = re.compile(rf'I (?:now )?expect (?P<speaker>{_NAME}) to (?P<action>.+?)(?: if (?P<condition>.+))?')
 _FACT = re.compile(r'It is (?P<value>true|false) that (?P<condition>.+)')
 _POLICY = ('Original conditional commitment, delivery, acceptance, expectation, withdrawal '
     'and reported fulfillment are separate. Hearing does not prove comprehension, '
