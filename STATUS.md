@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**HCL night — NI-11 certified; NI-12 perspective contrast implemented, CI pending; CG-04/CG-05 deferred**
+**HCL night — NI-12 certified; NI-13 multi-event integration implemented, CI pending; CG-04/CG-05 deferred**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -566,3 +566,23 @@ PASS. CG04/05 remain the two deferred candidates; no new paid call/ontology or
 historical evidence upgrade, night0/USD0, LongMemEval SEALED. After exact-head/main
 CI, immediately NI-13 bounded multi-event narrative integration using a minimum
 question-justified set of existing operations, under section15.
+
+
+**NIGHT-INTEGRATION-12 — exact-head/main CERT PASS.** PR152 head7e3f8fdd,
+run36453086517; maindca3d064f564db9653675cd4e2a1e680895a5b45,
+run36453234208. Both299 v1 +176 historical =475 PASS, matching runtime digest;
+both applicable groups PASS. [Receipt](reports/HCL_NIGHT_PERSPECTIVE_CONTRAST_CERTIFICATION.json).
+
+**NIGHT-INTEGRATION-13 — IMPLEMENTED; correctness certification pending.**
+CAPABILITY_DELTA: an ordinary compound question over a short explicitly event-
+sectioned narrative follows real local belief/meaning/role-preference revisions,
+with before/after checked state and exact event/source bindings. Select only the
+requested2–3 existing operations; absence remains unresolved, choice never supplies
+preference/intention. Earlier event selection excludes future malformed semantic
+content/revision/access. Event order is not calendar/verified receipt; private
+projection and whole-budget refusal remain enforced. Ten new tests, actual
+current/early/minimum-operation inputs;309 v1 locally PASS. No new cognitive
+candidate, paid call or history upgrade; CG04/05 still deferred, night0/USD0,
+LongMemEval SEALED. After exact-head/main CI, immediately NI-14 ordinary bilingual
+question robustness and source-grounding repairs, then integrated closure under
+section15. No owner blocking gate.

@@ -16,6 +16,11 @@ from .composition import prepare_composed_answer, ComposedAnswer, ComposedAnswer
 from .compact import compact_cognition_context, COMPACT_POLICY
 
 _QUESTIONS = tuple((kind, re.compile(pattern)) for kind, pattern in (
+    ('belief_preference', rf"Explain (?P<actor>{_TERM})'s belief and preferences as (?P<role>{_TERM}) in (?P<context>{_TERM})[.?]?"),
+    ('belief_preference', rf'解释 (?P<actor>{_TERM}) 在 (?P<context>{_TERM}) 中的信念与 (?P<role>{_TERM}) 角色偏好[。？]?'),
+    ('concept_preference', rf"Explain (?P<actor>{_TERM})'s meaning of (?P<term>{_TERM}) for (?P<item>{_TERM}) and preferences as (?P<role>{_TERM}) in (?P<context>{_TERM})[.?]?"),
+    ('belief_concept_preference', rf"Explain (?P<actor>{_TERM})'s belief, meaning of (?P<term>{_TERM}) for (?P<item>{_TERM}) and preferences as (?P<role>{_TERM}) in (?P<context>{_TERM})[.?]?"),
+    ('belief_concept_preference', rf'解释 (?P<actor>{_TERM}) 在 (?P<context>{_TERM}) 中的信念、对 (?P<item>{_TERM}) 的 (?P<term>{_TERM}) 词义与 (?P<role>{_TERM}) 角色偏好[。？]?'),
     ('belief_responsibility', rf"Explain (?P<actor>{_TERM})'s belief and conditional responsibility[.?]?"),
     ('belief_responsibility', rf'解释 (?P<actor>{_TERM}) 的信念与条件责任依据[。？]?'),
     ('responsibility', rf"Explain (?P<actor>{_TERM})'s conditional responsibility[.?]?"),
@@ -168,17 +173,20 @@ def prepare_person_context(layer, query, narrative, *, perspective_mode=Perspect
         observer_actor=observer_actor, narrative_access=narrative_access,
         max_context_chars=max_context_chars, compact_context=True)
     requests = []
-    if kind in ('belief', 'compare', 'belief_responsibility'):
+    if kind in ('belief', 'compare', 'belief_responsibility', 'belief_preference', 'belief_concept_preference'):
         requests.append(CognitionRequest(query, belief_analysis=True, **common))
-    if kind in ('concept', 'compare'):
+    if kind in ('concept', 'compare', 'concept_preference', 'belief_concept_preference'):
         requests.append(CognitionRequest(query, concept_analysis=True,
             concept_context=task['context'], concept_term=task['term'], concept_item=task['item'], **common))
     if responsibility:
         requests.append(CognitionRequest(query, responsibility_analysis=True,
             responsibility_premises=responsibility_premises, responsibility_premise_scope=premise_scope, **common))
+    if kind in ('belief_preference', 'concept_preference', 'belief_concept_preference'):
+        requests.append(CognitionRequest(query, preference_analysis=True,
+            preference_role=task['role'], preference_context=task['context'], **common))
     prepared = (prepare_composed_answer(layer, query, tuple(requests), max_context_chars=max_context_chars,
         pool_sources=True, compare_belief_concepts=(kind == 'compare'))
-        if kind in ('compare', 'belief_responsibility') else layer.prepare(requests[0]))
+        if len(requests) > 1 else layer.prepare(requests[0]))
     receipt = dict(prepared.preparation_receipt, question_entrypoint=dict(method='bounded_explicit_task_scope',
         operation=kind, scope=task, source_of_mental_state='ORDINARY_SOURCE_NOT_QUESTION_OR_CALLER_GOLD'),
         actual_final_messages=list(prepared.messages))
