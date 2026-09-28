@@ -39,3 +39,5 @@ from .mutual_understanding import MutualUnderstanding, prepare_mutual_understand
 from .strategic_communication import StrategicCommunication, prepare_strategic_communication
 
 from .misunderstanding import MisunderstandingResult, prepare_misunderstanding
+
+from .joint_plan import JointPlanResult, prepare_joint_plan
