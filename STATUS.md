@@ -50,16 +50,18 @@ The previous `HCL_V1_INTEGRATED_SOURCE_QUALIFICATION` remains a useful **externa
 
 **CG01-C — IMPLEMENTED_UNVALIDATED.** A conservative ordinary English narrative path prepares finite candidates without caller-entered mental state and preserves actual source, perspective, candidate, condition and final-message content in debug receipts. The grammar is deliberately bounded; unrecognized cases fail closed. See [implementation limits](docs/HCL_CG01_IMPLEMENTATION.md).
 
-**CG01-CERT — local provider-free correctness passed:** 59 v1 tests and 176 selected frozen historical regressions (235 total), with zero provider experiments. Exact PR-head and main CI receipts remain to be recorded before claiming remote certification.
+**CG01-CERT — PROVIDER-FREE CERTIFIED.** PR #117 exact head `b0fbca3df69eec36d16a8a0616caca36d2f99dc0`, [run 36388937743](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36388937743); merged code tree on main `9c28284c4fe2935adbc5ddb6ade92ae9f063d014`, [run 36389075682](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36389075682). Both receipts record 59 v1 tests + 176 frozen historical regressions = **235 PASS**, provider calls/spend 0, and LongMemEval sealed. All six exact-main workflow groups passed. This certifies correctness, not external benefit.
 
 **CG01-D — provider-free package frozen:** four source-audit-exposed cases from two public-domain story families, with C/P/G/H/H-new arms, exact source digest, scorer, masked audit rubric, 24-call maximum and USD 0.75 proposed hard cap. No paid call has been made. See [protocol](docs/HCL_CG01_EXTERNAL_DEVELOPMENT_PROTOCOL.md) and [package](reports/HCL_CG01_EXTERNAL_PACKAGE.json).
 
-After A+B+C and provider-free certification, prepare one bounded C/P/G/H/H-new external development package. Do not make paid calls without separate owner authorization.
+The bounded C/P/G/H/H-new external development package is frozen. Do not make paid calls without separate owner authorization.
+
+All provider-free CG-01 implementation, regression, source/package, scorer, ablation and metering work is complete. The sole next step is a separately authorized paid external development comparison. The frozen handoff is: two story families / four source-audit-exposed cases from Project Gutenberg eBook 10483 (source SHA256 `14eef73227e014591aff4bf6bc217e6d030fa6daaf429742c0f6501172f5bb8e`, catalog public domain in the USA); DeepSeek API `deepseek-v4-pro`, non-thinking JSON; C/P/G/H/H-new; 4 preparation + 20 answer calls maximum; 16,000 input and 2,000 output tokens per call; USD **0.75 hard cap** using peak all-cache-miss pricing; deterministic status/quote checks plus masked source-first semantic audit. The expected evidence value is to falsify unsupported explanation claims and test whether any H gain over P/G disappears in H-new. Four cases cannot establish broad efficacy. No paid call is authorized or executed.
 
 The current engineering milestone is:
 
-**HCL_CG01_CERT_EXACT_HEAD_CI_PENDING**
+**HCL_CG01_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION**
 
-No owner action is currently required for provider-free implementation. A budget request becomes appropriate only after a concrete external package is fully frozen, at `HCL_CG01_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION`.
+Owner action required: approve or reject the specific USD 0.75 maximum external development package above. Historical budgets do not transfer. Do not execute a paid provider call without separate authorization.
 
 Leaderboard selection is explicitly deferred until the maturity gate in `DEVELOPMENT_PLAN.md` is met. Provider spend this round: **USD 0**. LongMemEval remains fully sealed/deprioritized.
