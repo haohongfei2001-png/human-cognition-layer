@@ -101,10 +101,18 @@ class CommunicationScene:
                 raise ValueError('unsupported or ambiguous communication source; no inferred audience')
             event = events[0]['content']
             speaker = event['speaker_surface']
-            if (event['assertion_scope'] != 'SOURCE_REPORT' or event['speaker_candidates'] != [speaker]
+            narrator_record = speaker == 'Narrator' and text.startswith('Narrator:')
+            # Reader narration remains unavailable unless a separate explicit
+            # receipt names the actor. Ambiguous access cues must not fall back
+            # to generic narrator records and thereby evade access validation.
+            if narrator_record and re.search(r'\b(heard|hear|read|missed|sent|statement|available)\b', text, re.I):
+                raise ValueError('unsupported or ambiguous narrator access cue')
+            if (event['assertion_scope'] != 'SOURCE_REPORT' or
+                    (not narrator_record and event['speaker_candidates'] != [speaker])
                     or not re.fullmatch(_NAME, speaker)):
                 raise ValueError('explicit actual speaker required')
-            all_actors.add(speaker)
+            if not narrator_record:
+                all_actors.add(speaker)
             statement = dict(line=number, text=text, speaker=speaker, proofs=[])
             statements.append(statement)
             last[speaker] = statement
@@ -144,8 +152,8 @@ class CommunicationScene:
                 stamp = (datetime(2026, 1, 1, tzinfo=timezone.utc) + timedelta(seconds=index)).isoformat()
                 event = EventRecord(identity('visible-message', actor, index, statement['text']),
                     stamp, statement['text'], identity('view-source', self.source_id, actor), stamp,
-                    actor_id=statement['speaker'], recipient_ids=(actor,),
-                    metadata={'reader_only': False, 'public': False,
+                    actor_id=None if statement['speaker'] == 'Narrator' else statement['speaker'], recipient_ids=(actor,),
+                    metadata={'reader_only': False, 'public': False, 'narrator': statement['speaker'] == 'Narrator',
                               'time_semantics': 'VISIBLE_SOURCE_ORDER_ONLY', 'access_state': status})
                 if not event_accessible_to(event, actor):
                     raise ValueError('retained perspective policy rejected projected event')

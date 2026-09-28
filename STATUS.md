@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**LONG-HORIZON CAPABILITY GROWTH — WAVE A COMPLETE / WAVE B / B01–B04 CORRECTNESS_VERIFIED / NEXT_READY=B05**
+**LONG-HORIZON CAPABILITY GROWTH — WAVES A–B COMPLETE / WAVE C / NEXT_READY=C01**
 
 The long-horizon architecture and 41-package roadmap are canonical in
 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md).
@@ -11,13 +11,13 @@ exact-SHA CI and immutable receipts remain the implementation/evidence facts.
 
 ## Current wave
 
-**Wave B — Dynamic Epistemic Cognition**
+**Wave C — Goals, Plans and Appraisal**
 
 A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
-**NEXT_READY: `B05_INTEGRATED_EPISTEMIC_REVISION`**
+**NEXT_READY: `C01_GOAL_AND_PLAN_OBJECTS`**
 
 A01 now provides shared versioned evidence, scoped source reports and
 interpretations, alternative support sets and rooted invalidation. A source
@@ -35,7 +35,7 @@ Actual final inputs carry support, challenges and retired source history. See
 
 State: **CORRECTNESS_VERIFIED / REPLAY_VERIFIED / UNTESTED / OPT_IN**.
 The local entry recognizes bounded explicit speech forms; open backend candidates
-remain semantically unverified. No real provider has been called in A01–A05/B01–B04.
+remain semantically unverified. No real provider has been called in A01–A05/B01–B05.
 Historical efficacy dispositions are unchanged. A04–A05 connect retained v0.6/CG03/CG04/CG05 operations to the common material.
 Original quotes, derived representation and assumptions stay separate. A property
 revision changes the concept checker and its dependent belief/concept comparison;
@@ -57,7 +57,11 @@ earlier known-at snapshot; source corrections remove unsupported revision anchor
 while preserving unrelated people. See [B03](docs/HCL_WAVE_B03.md). B04 now contracts copied reports into
 source-related families, preserves report conflict without majority voting, and
 separates character uncertainty from system missing evidence. Three-holder queries
-keep reporting and nested belief scopes; see [B04](docs/HCL_WAVE_B04.md). B05 is next.
+keep reporting and nested belief scopes; see [B04](docs/HCL_WAVE_B04.md). B05 now integrates observer-local
+updates with actual nested, concept and conditional responsibility checks; changing
+Noor access preserves Mira and Kai without reexecution. See
+[B05](docs/HCL_WAVE_B05.md). Wave B construction is complete; C01 starts source-bounded
+goal and plan objects. Live-provider efficacy remains unverified.
 
 ## Canonical development policy
 

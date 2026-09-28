@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVE A COMPLETE / WAVE B / B01–B04 CORRECTNESS_VERIFIED / NEXT_READY=B05**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–B COMPLETE / WAVE C / NEXT_READY=C01**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -182,7 +182,7 @@ changes a concept check and the dependent belief/concept comparison while
 preserving unrelated Noor. See `docs/HCL_WAVE_A04_A05.md`. Live provider status
 remains unverified; this does not block Wave B construction.
 
-## 5b. Current Wave B — Dynamic Epistemic Cognition
+## 5b. Completed Wave B — Dynamic Epistemic Cognition
 
 **B01 — CORRECTNESS_VERIFIED:** separate public expression, private-belief interpretation,
 exposure, understanding and knowledge claims; construct query-bounded nested
@@ -220,8 +220,21 @@ and system missing evidence stay distinct. Bounded three-holder queries preserve
 outer/inner modality. Fourteen targeted checks plus full regression; see
 `docs/HCL_WAVE_B04.md`.
 
-**B05 — NEXT_READY:** ordinary-input multi-person/higher-order integration, local
-access revision and retained concept/responsibility operations. Full contracts and dependencies
+**B05 — CORRECTNESS_VERIFIED:** ordinary-input multi-person/higher-order integration, local
+access revision and retained concept/responsibility operations. B05 now updates
+Noor-dependent nested, concept and conditional-control checks while reusing Mira
+and Kai outputs; ordinary input and actual final-adapter receipt are preserved.
+Eleven targeted checks plus full regression; see `docs/HCL_WAVE_B05.md`.
+
+## 5c. Current Wave C — Goals, Plans and Appraisal
+
+**C01 — NEXT_READY:** source-bounded goals/subgoals, means, plans, conditions,
+opportunities, completion and abandonment. Keep stated intention distinct from
+observed behavior and later outcome. Reuse v0.7/v0.8 thin structures and conditional
+checks; require an ordinary-input positive goal/plan witness. Then C02 competing
+action explanations → C03 belief-dependent plans → C04 appraisal → C05 integration.
+
+Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
 
 ## 6. Construction queue
@@ -378,14 +391,14 @@ defect is.
 
 ## 13. Current execution fact
 
-- Current wave: **Wave B — Dynamic Epistemic Cognition**
+- Current wave: **Wave C — Goals, Plans and Appraisal**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: B05_INTEGRATED_EPISTEMIC_REVISION**
+- **NEXT_READY: C01_GOAL_AND_PLAN_OBJECTS**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A05/B01–B04 actual provider calls / spend: **0 / USD 0**
+- A01–A05/B01–B05 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **B05**, then continue through the dependency-safe queue
+Work should continue at **C01**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
