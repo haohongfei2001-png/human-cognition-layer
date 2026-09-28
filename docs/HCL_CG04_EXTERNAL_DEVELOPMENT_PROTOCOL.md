@@ -101,3 +101,19 @@ main 018afbc93c645975d7f6f1077c8c8380635d9f2f for frozen replay. Current develop
 must not be silently used in that paid comparison. The owner explicitly allows
 next provider-free capability work before paid closure during this night. No
 new calls, budget transfer, source/gold/prompt/scorer/arm/treatment changes.
+
+
+## Dormant execution checkout repair
+
+Continued implementation changes current main's runtime digest. The dormant
+workflow therefore verifies authorization/unique trigger/package on the control
+checkout, records its SHA/run/before separately, then checks out certified frozen
+runtime 018afbc93c645975d7f6f1077c8c8380635d9f2f in `frozen-cg04`. All original
+package/helper hashes, preflight, scorer and paid runner execute there. A future
+grant must explicitly name this frozen runtime/package and cap; its base SHA must
+match the pinned runtime. No latest-runtime substitution or automatic grant
+migration. The control and execution receipts upload together.
+
+Current cap is still 0 and base UNAUTHORIZED, no trigger exists; this repair does
+not authorize or execute any call. Revalidate model/prices before a future owner
+grant. Current default-case compatibility and isolated freeze replay stay mandatory.

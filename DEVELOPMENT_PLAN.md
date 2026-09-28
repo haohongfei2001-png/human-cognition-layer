@@ -647,3 +647,13 @@ stay identical. Certify head/main, preserve deferred frozen-runtime execution
 reproducibility, then integrate source-validated preparation for retained v0.6
 belief/perspective with existing operations. No third candidate, extra paid call,
 private data, ontology, source hunt or owner gate.
+
+
+NIGHT-INTEGRATION-04 certified on PR142 head/main388 tests; all six groups PASS.
+Repair dormant CG04 execution to separate current control/authorization SHA from
+its immutable certified execution SHA; cap stays0, no trigger/call, package and
+helpers untouched. This is one preservation-only package. The immediate next
+package must implement source-validated ordinary belief preparation/composition
+for RETAIN v0.6, with actor/source/time/access and uncertainty boundaries and no
+new capability candidate, new provider API or paid call. Do not add another
+validation-only package before that implementation.

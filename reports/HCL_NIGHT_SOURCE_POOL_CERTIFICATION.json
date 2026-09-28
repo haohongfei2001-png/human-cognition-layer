@@ -1,0 +1,40 @@
+{
+  "schema": "hcl-night-source-pool-certification-v1",
+  "pr": 142,
+  "exact_head": {
+    "schema": "hcl-v1-provider-free-certification-v1",
+    "sha": "d0922bb5fe4229052b3d840a949f5054aaf60306",
+    "workflow_event_sha": "2b3b8c326e5a57b890e3287c39c56c44673f7d5a",
+    "run_id": "36440860812",
+    "event": "pull_request",
+    "counts": {
+      "v1": 212,
+      "historical": 176
+    },
+    "runtime_sha256": "3cef9a6debda3eea89888b4bd4019d799eaad6b85eba12700da400c86595689b",
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "scope": "CORRECTNESS_NOT_EXTERNAL_UTILITY",
+    "longmemeval": "SEALED_NOT_IN_TEST_SELECTION"
+  },
+  "exact_main": {
+    "schema": "hcl-v1-provider-free-certification-v1",
+    "sha": "1482c876924bad226d37c5f901241ee743c5c345",
+    "workflow_event_sha": "1482c876924bad226d37c5f901241ee743c5c345",
+    "run_id": "36441173090",
+    "event": "push",
+    "counts": {
+      "v1": 212,
+      "historical": 176
+    },
+    "runtime_sha256": "3cef9a6debda3eea89888b4bd4019d799eaad6b85eba12700da400c86595689b",
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "scope": "CORRECTNESS_NOT_EXTERNAL_UTILITY",
+    "longmemeval": "SEALED_NOT_IN_TEST_SELECTION"
+  },
+  "total_tests_each": 388,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
