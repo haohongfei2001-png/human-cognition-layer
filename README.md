@@ -8,7 +8,8 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 - [夜间 source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)：实际能力变化、证据限制、两个 deferred 冻结包。
 - [可执行 capability registry](docs/HCL_V1_CAPABILITY_REGISTRY.md)：核心、可选结构、通用工具、停用研究资产。
 - [Router / context / answer API](docs/HCL_V1_COGNITION_ROUTER.md)：确定性最小路由、有访问和时间边界的上下文、单次底座模型调用。
-- [Long-Horizon Capability Master Plan](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)：canonical 最终 capability architecture、Levels、Waves A–H、41 个 work packages、G-HC/G-ARCH、serious evaluation、cross-model、optimization 与 leaderboard phase。\n- [Live development plan](DEVELOPMENT_PLAN.md)：只保存当前 wave、执行队列、superseded policies 与 `NEXT_READY`。
+- [Long-Horizon Capability Master Plan](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)：canonical 最终 capability architecture、Levels、Waves A–H、41 个 work packages、G-HC/G-ARCH、serious evaluation、cross-model、optimization 与 leaderboard phase。
+- [Live development plan](DEVELOPMENT_PLAN.md)：只保存当前 wave、执行队列、superseded policies 与 `NEXT_READY`。
 - [CG-04 比较协议](docs/HCL_CG04_EXTERNAL_DEVELOPMENT_PROTOCOL.md)：四个合成开发案例、五臂、零重试、USD 0.30 单次授权已消费并关闭；旧预算不转移。
 - [CG-04 实现及边界](docs/HCL_CG04_IMPLEMENTATION.md)：有条件的显式偏好、局部修订与未解决冲突；普通文本入口零提取调用。
 - [CG-04 capability contract](docs/HCL_CG04_CAPABILITY_CONTRACT.md)：角色、情境、条件和局部偏好冲突；不建立全局价值权重。
