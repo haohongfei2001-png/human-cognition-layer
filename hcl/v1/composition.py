@@ -4,6 +4,7 @@ import json
 
 from .compact import compact_cognition_context, COMPACT_POLICY
 from .context import ANSWER_POLICY
+from .source_pool import pool_composed_sources, POOL_POLICY
 from .layer import HCLCognitionLayer
 from .router import CognitionRequest, PerspectiveMode
 
@@ -42,7 +43,7 @@ def _operation(plan):
     return active[0]
 
 
-def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, compact_context=True):
+def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, compact_context=True, pool_sources=False):
     """Prepare 2–3 existing operations, from a common source, with no model calls."""
     if not isinstance(layer, HCLCognitionLayer):
         raise ValueError('existing cognition layer required')
@@ -51,7 +52,7 @@ def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, 
     if (not isinstance(requests, tuple) or not 2 <= len(requests) <= 3 or
         not all(isinstance(r, CognitionRequest) for r in requests)):
         raise ValueError('two or three bounded existing operation requests required')
-    if type(max_context_chars) is not int or not 512 <= max_context_chars <= 64000 or type(compact_context) is not bool:
+    if type(max_context_chars) is not int or not 512 <= max_context_chars <= 64000 or type(compact_context) is not bool or type(pool_sources) is not bool:
         raise ValueError('bounded composition context and explicit encoding required')
     first = requests[0]
     if not first.target_actor or not (first.narrative or first.evidence):
@@ -85,6 +86,8 @@ def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, 
         temporal_scope={'event_time': first.event_time, 'knowledge_cutoff': first.knowledge_cutoff},
         operation_contexts=[dict(operation=op, cognition_context=row) for op, row in zip(operations, contexts)],
         cross_operation_inference='NO_AUTOMATIC_CONCEPT_PREFERENCE_INTENTION_OR_MORAL_PROMOTION')
+    if pool_sources:
+        state = pool_composed_sources(state)
     serialized = json.dumps(state, ensure_ascii=False, sort_keys=True)
     failure = None
     if len(serialized) > max_context_chars:
@@ -99,6 +102,8 @@ def prepare_composed_answer(layer, query, requests, *, max_context_chars=48000, 
     if compact_context:
         # A compact stage may already carry this policy; include it once only.
         policy = policy.replace(COMPACT_POLICY, '').strip() + ' ' + COMPACT_POLICY
+    if 'source_pool_encoding' in state:
+        policy += ' ' + POOL_POLICY
     messages = (dict(role='system', content=policy), dict(role='user', content=json.dumps(
         {'query': query, 'composed_cognition': state}, ensure_ascii=False, sort_keys=True)))
     receipt = dict(method='existing_capability_composition', operations=list(operations),

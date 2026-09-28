@@ -636,3 +636,14 @@ then implement lossless shared source-record pooling in composed final context,
 with explicit per-operation access links and no inferred semantic bridge.
 CG04/05 remain the only two implemented-unvalidated candidates. CG01/02 closed
 registry metadata now matches their historical source-first dispositions.
+
+
+NIGHT-INTEGRATION-03 certified on PR141 head/main381 tests, all six groups PASS.
+NIGHT-INTEGRATION-04 implements lossless composed source-record pooling so every
+checked operation fits a tighter total context budget without selective evidence
+or shared-access inference. Actual input round trip, privacy, actor/event/record,
+reference integrity and whole-budget refusal are tested; direct frozen inputs
+stay identical. Certify head/main, preserve deferred frozen-runtime execution
+reproducibility, then integrate source-validated preparation for retained v0.6
+belief/perspective with existing operations. No third candidate, extra paid call,
+private data, ontology, source hunt or owner gate.

@@ -147,7 +147,7 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**NIGHT-INTEGRATION-03 — explicit narrated access preparation**
+**NIGHT-INTEGRATION-04 — lossless composed-source pooling**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
@@ -342,3 +342,23 @@ repeated source records in composed final input, preserving operation access lin
 and complete cognition under a tighter budget. No third candidate, new paid run,
 credential, source hunt or owner-only blocker. Night calls/spend: 0/USD0; sealed
 LongMemEval not accessed. Night remains ongoing.
+
+
+**NIGHT-INTEGRATION-03 — exact-head/main CERT PASS.** PR #141 head d9a1412,
+run 36439907605; main 73eca3f0183b2ec9c3055896fc3d3bb875fb6dea,
+run 36440392096. Both 205 v1 +176 historical =381 PASS, same runtime digest;
+all six workflow groups passed. [Receipt](reports/HCL_NIGHT_ACCESS_CERTIFICATION.json).
+
+**NIGHT-INTEGRATION-04 — implemented; CERT in progress.** CAPABILITY_DELTA:
+the complete three-operation cognition context fits a tighter budget through
+lossless source storage pooling. Per-operation source IDs, actor/event/record
+scope and access links stay unchanged. Seven new useful/private/time/tamper/
+budget tests; complete integrated input bytes shrink 4.91% including policy,
+with no billed-token or model-efficacy claim. [Implementation](docs/HCL_V1_COMPOSED_SOURCE_POOL.md).
+Default frozen CG04/05 inputs and engineering hashes remain identical.
+
+After exact-head/main CI, preserve deferred-package reproducibility across current
+main and frozen-runtime checkouts, then continue source-validated preparation and
+composition of retained v0.6 belief/perspective. This is the unique next existing-
+capability integration path; no third candidate or new paid validation. Night
+provider calls/spend remain 0/USD0, LongMemEval sealed, no owner-only blocker.
