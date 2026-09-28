@@ -26,3 +26,5 @@ from .compact import compact_cognition_context, expand_cognition_context
 from .composition import (ComposedAnswer, ComposedAnswerReceipt, prepare_composed_answer, answer_composed)
 
 from .source_access import prepare_source_access, scope_source_access
+
+from .source_pool import pool_composed_sources, expand_composed_sources

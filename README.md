@@ -91,3 +91,5 @@ preserved. The next implementation package is
 - [同一来源的 capability composition](docs/HCL_V1_COMPOSITION.md)：偏好、局部概念和条件责任检查一起进入一次最终回答，各自保留来源与不确定性。
 
 - [显式叙事 access 准备](docs/HCL_V1_NARRATIVE_ACCESS.md)：从来源明确记录的接触句进入角色／观察者视角；接触不等于相信或理解。
+
+- [组合来源池](docs/HCL_V1_COMPOSED_SOURCE_POOL.md)：来源投影后只压缩重复存储，保持每项操作的 access 链接；更紧预算下仍保留完整检查。

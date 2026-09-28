@@ -1,0 +1,13 @@
+{
+  "schema": "hcl-source-pool-byte-audit-v1",
+  "evidence_class": "PROVIDER_FREE_INTEGRATION_NOT_MODEL_UTILITY",
+  "unpooled_complete_input_bytes": 21392,
+  "pooled_complete_input_bytes": 20341,
+  "reduction_fraction": 0.0491305160807779,
+  "policy_overhead_included": true,
+  "actor_time_source_and_operation_links": "UNCHANGED_LOSSLESS",
+  "token_cost_claim": "NOT_MEASURED",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
