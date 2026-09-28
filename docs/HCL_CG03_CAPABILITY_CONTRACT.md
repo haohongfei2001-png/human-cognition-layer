@@ -1,6 +1,6 @@
 # HCL-CG-03 Capability Contract — Responsibility-Structure Explanation
 
-Status: **ACTIVE / CG03-A–D PROVIDER-FREE IMPLEMENTED; CG03-CERT NEXT**
+Status: **A–D AND CERT PROVIDER-FREE COMPLETE; CG03-E FROZEN PROPOSAL / NEW OWNER GRANT REQUIRED**
 
 This package is the next candidate in `DEVELOPMENT_PLAN.md` section 8. Its
 purpose is a real, user-visible reasoning distinction: given authorized source
@@ -47,8 +47,15 @@ conditional computations from v0.9 into observed world truth.
    no provider extraction and an explicit treatment ablation.
 5. **CG03-CERT:** Provider-free positive, negative, perspective/privacy and
    historical regression certification on exact PR head and merged main.
+   Complete: 111 v1 and 176 historical tests passed on both exact code trees,
+   with identical runtime digest, zero provider calls/spend and LongMemEval
+   sealed. See `reports/HCL_CG03_PROVIDER_FREE_CERTIFICATION.json`.
 6. **CG03-E:** Only after CERT, freeze a small C/P/G/H/H-new development package
-   with treatment-presence preflight. No paid call without a new owner grant.
+   with treatment-presence preflight. Frozen as four public HCL-authored
+   synthetic development cases; every H case passes source, factor, premise,
+   H-state, H-new ablation and final-input-difference gates. All arms receive
+   the same output labels and explicit caller rule. No paid call without a new
+   owner grant; the dormant workflow grant is zero.
 
 The CG-02 result is development-only and INCONCLUSIVE for external utility.
 It does not license a broad social or moral claim, and no CG-02 rerun is part of

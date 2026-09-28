@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**HCL-CG-03 — Responsibility-Structure Explanation (A–D implemented; CERT next)**
+**HCL-CG-03 — Responsibility-Structure Explanation (provider-free certified; E frozen)**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -147,7 +147,7 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**HCL_CG03_CERT_PROVIDER_FREE**
+**HCL_CG03_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
@@ -158,10 +158,25 @@ under caller premises and a conservative exact-line prose path. Claims remain
 claims; third-party attribution, later knowledge, contested evidence and
 unmet conditions cannot silently become intention, responsibility or moral
 truth. [Implementation limits](docs/HCL_CG03_IMPLEMENTATION.md) are explicit.
-Exact-head/main provider-free certification is next, followed by a fair frozen
-CG03-E H/H-new treatment-presence package. No owner action is needed for that work.
-Any new paid experiment requires new
-authorization; historical budgets do not transfer.
+**CG03-CERT passed:** exact PR head `086fdbd819174505eb862e466177a5b90669b358`
+([run 36421176120](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36421176120))
+and merged main `2aeda0188eb64728735e3cd6c0b049f9ed329e6e`
+([run 36421279622](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36421279622))
+each passed 111 v1 + 176 historical tests with the same runtime digest, zero
+provider calls/spend and LongMemEval sealed. [Certification receipt](reports/HCL_CG03_PROVIDER_FREE_CERTIFICATION.json).
+
+**CG03-E provider-free freeze:** [protocol](docs/HCL_CG03_EXTERNAL_DEVELOPMENT_PROTOCOL.md)
+and [package](reports/HCL_CG03_EXTERNAL_PACKAGE.json) fix four HCL-authored
+synthetic development cases, the C/P/G/H/H-new inputs, identical output schema
+and label vocabulary across arms, strict scorer, source-first decision rule and
+H/H-new treatment-presence receipts. The package SHA-256 is
+`24fdb22f96cc15ac6594904b79356009b4456ee38dddbc90373e4fb46716fc55`.
+Preflight passes with **zero provider calls**. The new one-time proposal uses
+existing DeepSeek infrastructure, a proposed USD 0.30 hard cap and **no
+historical budget transfer**; its workflow grant is **0**, and no trigger exists.
+The only remaining CG-03 external-development action requires a new, explicit
+owner authorization after price revalidation. Any eventual result remains
+development evidence, never independent/fresh evidence.
 
 Leaderboard selection remains deferred until the maturity gate in
 `DEVELOPMENT_PLAN.md` is met. Historical CG-01 provider charge remains bounded
