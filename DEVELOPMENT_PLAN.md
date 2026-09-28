@@ -513,9 +513,21 @@ The bounded [CG-03 capability contract](docs/HCL_CG03_CAPABILITY_CONTRACT.md)
 sets the A → B → C → D → CERT → E implementation order. **CG03-A–D** now have
 the bounded typed operation, source/time/access factor checks, conditional
 caller-premise evaluation and a conservative exact-line ordinary-text path.
-The immediate milestone is **CG03-CERT**, provider-free exact-head/main
-certification and historical regressions; then **CG03-E** freezes a fair
-C/P/G/H/H-new development package without paid execution. Provider-free
-implementation comes before external package work. No CG-02 rerun, new paid
-experiment, sealed LongMemEval use or leaderboard selection is part of this
-transition.
+**CG03-CERT** passed on exact PR head `086fdbd819174505eb862e466177a5b90669b358`
+([run 36421176120](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36421176120))
+and merged main `2aeda0188eb64728735e3cd6c0b049f9ed329e6e`
+([run 36421279622](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36421279622)):
+111 v1 + 176 historical tests passed on both, with identical runtime digest,
+zero provider calls/spend and LongMemEval sealed. The other five main workflow
+groups passed too. This certifies provider-free correctness, not external utility.
+
+**CG03-E** now freezes four HCL-authored synthetic development cases and a fair
+C/P/G/H/H-new comparison with all treatment-presence gates passing at zero
+provider calls. The exact package, predeclared scorer and prospective source-first
+closure rule are in [the protocol](docs/HCL_CG03_EXTERNAL_DEVELOPMENT_PROTOCOL.md)
+and [package](reports/HCL_CG03_EXTERNAL_PACKAGE.json). No provider experiment,
+sealed LongMemEval use or leaderboard selection is part of this freeze. The
+only remaining CG-03 external-development step is a **new owner-authorized**
+one-time paid comparison under a separately activated hard cap. Historical
+budgets do not transfer; a positive synthetic result would remain development
+evidence only.

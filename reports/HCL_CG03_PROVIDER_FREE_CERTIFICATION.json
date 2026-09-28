@@ -1,0 +1,23 @@
+{
+  "schema": "hcl-cg03-provider-free-certification-v1",
+  "capability_stages": ["CG03-A", "CG03-B", "CG03-C", "CG03-D", "CG03-CERT"],
+  "head": {
+    "sha": "086fdbd819174505eb862e466177a5b90669b358",
+    "run_id": "36421176120",
+    "v1_tests_passed": 111,
+    "historical_tests_passed": 176
+  },
+  "main": {
+    "sha": "2aeda0188eb64728735e3cd6c0b049f9ed329e6e",
+    "run_id": "36421279622",
+    "v1_tests_passed": 111,
+    "historical_tests_passed": 176
+  },
+  "runtime_sha256_both": "1e1a106be82ce26a70173b456b1ef4d6ee3a62c719351a7f3f016d5e0deff7ec",
+  "other_exact_main_workflow_groups": 5,
+  "other_exact_main_workflow_groups_status": "PASS",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_IN_TEST_SELECTION",
+  "scope": "PROVIDER_FREE_CORRECTNESS_NOT_EXTERNAL_UTILITY"
+}

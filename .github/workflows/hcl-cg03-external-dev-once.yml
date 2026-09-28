@@ -1,0 +1,65 @@
+name: HCL CG-03 External Development Once
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/HCL_CG03_EXTERNAL_DEV_TRIGGER']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hcl-cg03-external-dev-once
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      # No CG-03 paid experiment is authorized. A new owner grant is required.
+      HCL_CG03_AUTHORIZED_CAP_USD: "0"
+      HCL_CG03_AUTHORIZED_BASE_SHA: UNAUTHORIZED
+      HCL_CG03_FROZEN_PACKAGE_SHA256: 24fdb22f96cc15ac6594904b79356009b4456ee38dddbc90373e4fb46716fc55
+      HCL_CG03_RUN_ONCE_TOKEN: HCL_CG03_EXTERNAL_DEV_OWNER_ONCE
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify unique trigger and owner grant
+        run: |
+          test "$GITHUB_RUN_ATTEMPT" = "1"
+          test "$HCL_CG03_AUTHORIZED_CAP_USD" = "0.30"
+          git merge-base --is-ancestor "$HCL_CG03_AUTHORIZED_BASE_SHA" HEAD
+          test "$(git show -s --format=%P HEAD)" = "${{ github.event.before }}"
+          test "$(cat .github/HCL_CG03_EXTERNAL_DEV_TRIGGER)" = "${HCL_CG03_RUN_ONCE_TOKEN}|${{ github.event.before }}"
+          test "$(git diff --diff-filter=A --name-only '${{ github.event.before }}' "$GITHUB_SHA")" = ".github/HCL_CG03_EXTERNAL_DEV_TRIGGER"
+          test "$(git diff --name-only '${{ github.event.before }}' "$GITHUB_SHA")" = ".github/HCL_CG03_EXTERNAL_DEV_TRIGGER"
+          if git log --format=%H '${{ github.event.before }}' -- .github/HCL_CG03_EXTERNAL_DEV_TRIGGER | grep -q .; then exit 1; fi
+          echo "$HCL_CG03_FROZEN_PACKAGE_SHA256  reports/HCL_CG03_EXTERNAL_PACKAGE.json" | sha256sum -c -
+          test -n "$DEEPSEEK_API_KEY"
+
+      - run: python -m pip install "openai==2.14.0"
+
+      - name: Provider-free treatment-presence preflight
+        run: |
+          python scripts/cg03_external_package.py
+          python -m unittest -v tests.test_v1_cg03_package tests.test_v1_cg03_runner
+          python -m scripts.run_cg03_external_once --out artifacts/hcl-cg03-external --validate-only
+
+      - name: Execute one bounded DeepSeek comparison
+        run: python -m scripts.run_cg03_external_once --out artifacts/hcl-cg03-external
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-cg03-external-${{ github.run_id }}
+          path: artifacts/hcl-cg03-external/
+          if-no-files-found: warn
+          retention-days: 90
