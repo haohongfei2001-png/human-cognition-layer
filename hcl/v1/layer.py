@@ -216,7 +216,8 @@ class HCLCognitionLayer:
         responsibility_events = ()
         if request.responsibility_analysis:
             prepared_responsibility = prepare_responsibility_narrative(
-                request.narrative, plan.target_actor, request.responsibility_premises)
+                request.narrative, plan.target_actor, request.responsibility_premises,
+                premise_scope=request.responsibility_premise_scope)
             responsibility_events = prepared_responsibility.events
             responsibility_case = prepared_responsibility.case
             preparation_audit.update(method='bounded_deterministic_responsibility_narrative',
@@ -232,6 +233,8 @@ class HCLCognitionLayer:
                         if responsibility_case else [],
                     'source_span_diagnostics': list(prepared_responsibility.source_span_diagnostics)},
                 time_basis='line_order_not_calendar_time')
+            if request.responsibility_premise_scope != 'ALL_SOURCE':
+                preparation_audit['input']['premise_source_scope'] = request.responsibility_premise_scope
         preference_case = request.preference_case
         preference_events = ()
         if request.preference_analysis:
@@ -510,6 +513,10 @@ class HCLCognitionLayer:
             policy += ' ' + CONCEPT_ANSWER_POLICY
         if request.belief_analysis:
             policy += ' ' + BELIEF_POLICY
+        if request.responsibility_premise_scope == 'FOCAL_EPISODE':
+            policy += (' The caller explicitly scopes the normative premise to the focal action/outcome '
+                'and required factor-source episode. Factor claims are still independently source/time/access checked; '
+                'this scope does not imply that the character accepts the rule or that it is moral truth.')
         if request.narrative_access or any(e.metadata.get('narrative_access_basis') for e in input_evidence):
             policy += ' ' + NARRATIVE_ACCESS_POLICY
         if request.compact_context:

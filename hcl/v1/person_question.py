@@ -8,6 +8,7 @@ import re
 from hcl.v04.model import EventRecord
 from .capabilities import CostClass, resolve_dependencies
 from .cg04 import _TERM, _label
+from .cg03 import NarrativePremise
 from .context import ANSWER_POLICY, CognitionContext, event_row
 from .layer import HCLCognitionLayer, PreparedAnswer, AnswerReceipt
 from .router import CognitionRequest, CognitionPlan, PerspectiveMode
@@ -15,6 +16,9 @@ from .composition import prepare_composed_answer, ComposedAnswer, ComposedAnswer
 from .compact import compact_cognition_context, COMPACT_POLICY
 
 _QUESTIONS = tuple((kind, re.compile(pattern)) for kind, pattern in (
+    ('belief_responsibility', rf"Explain (?P<actor>{_TERM})'s belief and conditional responsibility[.?]?"),
+    ('belief_responsibility', rf'解释 (?P<actor>{_TERM}) 的信念与条件责任依据[。？]?'),
+    ('responsibility', rf"Explain (?P<actor>{_TERM})'s conditional responsibility[.?]?"),
     ('compare', rf"Compare (?P<actor>{_TERM})'s belief and meaning of (?P<term>{_TERM}) for (?P<item>{_TERM}) in (?P<context>{_TERM})[.?]?"),
     ('compare', rf'比较 (?P<actor>{_TERM}) 在 (?P<context>{_TERM}) 中对 (?P<item>{_TERM}) 是否 (?P<term>{_TERM}) 的信念与词义标准[。？]?'),
     ('belief', rf"Explain (?P<actor>{_TERM})'s belief[.?]?"),
@@ -87,7 +91,7 @@ def _attach_source_scope(prepared, original_query, source_receipt, *, max_contex
 
 def prepare_person_context(layer, query, narrative, *, perspective_mode=PerspectiveMode.READER_ANALYSIS,
                            observer_actor=None, narrative_access=False, max_context_chars=48000,
-                           as_of_statement=None):
+                           as_of_statement=None, responsibility_premises=(), premise_scope='ALL_SOURCE'):
     """Ordinary question + ordinary source -> existing prepared cognition state.
 
     Question grammar selects operation/scenario, never correct mental states.
@@ -108,6 +112,11 @@ def prepare_person_context(layer, query, narrative, *, perspective_mode=Perspect
         raise ValueError('observer perspective requires one explicit observer')
     if as_of_statement is not None and (type(as_of_statement) is not int or not 1 <= as_of_statement <= 24):
         raise ValueError('source statement scope must be an integer from1 to24')
+    if (not isinstance(responsibility_premises, tuple) or len(responsibility_premises) > 3 or
+        not all(isinstance(p, NarrativePremise) for p in responsibility_premises) or
+        len({p.premise_id for p in responsibility_premises}) != len(responsibility_premises) or
+        premise_scope not in ('ALL_SOURCE', 'FOCAL_EPISODE')):
+        raise ValueError('bounded distinct caller normative premises and explicit source scope required')
     original_query, original_source = query, narrative
     prefix = (re.fullmatch(r'At statement ([1-9][0-9]?), (.+)', query.strip()) or
               re.fullmatch(r'截至第 ([1-9][0-9]?) 条陈述，(.+)', query.strip()))
@@ -137,7 +146,8 @@ def prepare_person_context(layer, query, narrative, *, perspective_mode=Perspect
         # Re-enter once with the scoped source and plain operation question.
         # No semantic work has run on the original/future source.
         prepared = prepare_person_context(layer, query, narrative, perspective_mode=perspective_mode,
-            observer_actor=observer_actor, narrative_access=narrative_access, max_context_chars=max_context_chars)
+            observer_actor=observer_actor, narrative_access=narrative_access, max_context_chars=max_context_chars,
+            responsibility_premises=responsibility_premises, premise_scope=premise_scope)
         return _attach_source_scope(prepared, original_query, selection, max_context_chars=max_context_chars)
     matches = [(kind, match.groupdict()) for kind, pattern in _QUESTIONS
                if (match := pattern.fullmatch(query.strip()))]
@@ -145,6 +155,12 @@ def prepare_person_context(layer, query, narrative, *, perspective_mode=Perspect
         return _refusal(query, narrative, perspective_mode, 'unsupported_or_ambiguous_question_scope',
             max_context_chars=max_context_chars)
     kind, task = matches[0]
+    responsibility = kind in ('responsibility', 'belief_responsibility')
+    if not responsibility and (responsibility_premises or premise_scope != 'ALL_SOURCE'):
+        raise ValueError('caller premise requires an explicit responsibility question')
+    if responsibility and not responsibility_premises:
+        return _refusal(query, narrative, perspective_mode, 'explicit_caller_normative_premise_required',
+            max_context_chars=max_context_chars)
     if perspective_mode != PerspectiveMode.READER_ANALYSIS and not narrative_access:
         return _refusal(query, narrative, perspective_mode, 'private_question_requires_explicit_source_access_preparation',
             max_context_chars=max_context_chars)
@@ -152,13 +168,17 @@ def prepare_person_context(layer, query, narrative, *, perspective_mode=Perspect
         observer_actor=observer_actor, narrative_access=narrative_access,
         max_context_chars=max_context_chars, compact_context=True)
     requests = []
-    if kind in ('belief', 'compare'):
+    if kind in ('belief', 'compare', 'belief_responsibility'):
         requests.append(CognitionRequest(query, belief_analysis=True, **common))
     if kind in ('concept', 'compare'):
         requests.append(CognitionRequest(query, concept_analysis=True,
             concept_context=task['context'], concept_term=task['term'], concept_item=task['item'], **common))
+    if responsibility:
+        requests.append(CognitionRequest(query, responsibility_analysis=True,
+            responsibility_premises=responsibility_premises, responsibility_premise_scope=premise_scope, **common))
     prepared = (prepare_composed_answer(layer, query, tuple(requests), max_context_chars=max_context_chars,
-        pool_sources=True, compare_belief_concepts=True) if kind == 'compare' else layer.prepare(requests[0]))
+        pool_sources=True, compare_belief_concepts=(kind == 'compare'))
+        if kind in ('compare', 'belief_responsibility') else layer.prepare(requests[0]))
     receipt = dict(prepared.preparation_receipt, question_entrypoint=dict(method='bounded_explicit_task_scope',
         operation=kind, scope=task, source_of_mental_state='ORDINARY_SOURCE_NOT_QUESTION_OR_CALLER_GOLD'),
         actual_final_messages=list(prepared.messages))

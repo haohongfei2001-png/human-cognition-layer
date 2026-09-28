@@ -83,3 +83,45 @@ Ten provider-free tests cover actual single-call input, early revisions/exposure
 future malformed source, source hashes, Chinese prefix, strict scope refusal and
 budget. Engineering correctness only; all prior evidence dispositions and frozen
 packages remain unchanged, no paid calls or third candidate.
+
+
+## Retained belief and conditional responsibility
+
+Failure: ordinary question selection did not compose retained belief with CG03;
+an incidental predicate such as `I believe gate is planned` could also become a
+stated-intention factor through CG03's legacy keyword path. The simple alternative
+is the base evidence-bounded policy. The entrypoint now selects existing
+preparations; CG03 excludes belief/preference/meaning/property source from factor
+or action/outcome anchoring. Explicit negative control (`could not have stopped`)
+is grounded as a negative control claim, independently of other factors.
+**CAPABILITY_DELTA:** HCL can prepare an expressed belief and a caller-dependent
+responsibility explanation together, without treating a belief, concept property,
+outcome or later learning as action-time knowledge/control/intention/moral truth.
+
+Questions: `Explain Alice's belief and conditional responsibility.`,
+`解释 Alice 的信念与条件责任依据。`, or
+`Explain Alice's conditional responsibility.`. Supply existing typed
+`responsibility_premises=(NarrativePremise(...),)`; these are explicit caller
+normative requirements, not correct mental state. Missing premises refuse the
+structured responsibility conclusion, never import a model's moral view.
+
+Default `premise_scope='ALL_SOURCE'` preserves the historical CG03 source contract.
+An explicit `premise_scope='FOCAL_EPISODE'` instead binds each caller rule to its
+focal action/outcome and the source claims for its required factors. This retains
+all required factor witnesses and their actor/time/access checks, while unrelated
+belief lines, factors and delivery-cue rows do not become normative evidence.
+It never implies the actor accepts the rule or that the rule is moral truth.
+The lower-level `responsibility_premise_scope` request flag exposes the same
+explicit choice on the existing ordinary CG03 path. Private views still require
+source-grounded narrated access; hidden relevant basis refuses the case, hidden
+unrelated factors stay unknown. Source-order snapshots propagate the caller rule
+and scope, excluding future action/outcome/factor/exposure state.
+
+Thirteen new provider-free tests cover actual private/reader model input, actor/
+source classes, indirect vs direct intention, explicit knowledge, negative control,
+later learning, source-order, missing premises and selective visible rule basis.
+All current default CG03 cases are identical to the consumed frozen package;
+CG04/05 inputs/helpers remain identical. This is prospective engineering
+correctness, not a rerun or new external efficacy. Existing CG03 stays development-
+only RETAIN; v0.6 retains its historical bounded evidence. No new candidate,
+provider call, grant/trigger, ontology or LongMemEval access.

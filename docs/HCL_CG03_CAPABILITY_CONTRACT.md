@@ -62,3 +62,22 @@ The CG-02 result is development-only and INCONCLUSIVE for external utility.
 It does not license a broad social or moral claim, and no CG-02 rerun is part of
 this package. LongMemEval remains sealed; benchmark or leaderboard selection is
 not the CG-03 main line.
+
+
+### Provider-free retained integration during night development
+
+The ordinary-question entrypoint composes source-expressed belief with the existing
+conditional responsibility operation. Complete or partial belief/preference/meaning
+expressions and local properties cannot anchor action/outcome/factor state through
+incidental keywords. Explicit negative control clauses remain negative control
+claims. These prospective source guards do not change any of the four consumed
+default-case inputs or their historical disposition.
+
+Default premise source scope remains ALL_SOURCE. A caller may explicitly choose
+FOCAL_EPISODE to bind each rule to action/outcome plus all claim sources for its
+required factors. Required evidence still passes the existing source/time/access
+checker; unrelated mental assertions, factors and delivery cues do not become rule
+basis. Missing/hidden relevant evidence remains unresolved; no moral truth,
+private intention or character rule acceptance is inferred. See the ordinary
+question API and its provider-free integration receipt. No new paid experiment,
+independent/fresh evidence, third candidate or default activation is claimed.
