@@ -67,6 +67,7 @@ class CognitionContext:
     explanations: list[dict] = field(default_factory=list)
     open_unknown_candidate: dict = field(default_factory=dict)
     preparation: dict = field(default_factory=dict)
+    social: dict = field(default_factory=dict)
 
     def as_dict(self):
         return asdict(self)
@@ -90,4 +91,9 @@ ANSWER_POLICY = (
     'knowledge, goal, or opportunity condition is contradicted, weaken that '
     'candidate only. Missing access evidence is unknown, not proof of ignorance. '
     'Keep an open unknown explanation when evidence does not settle the action.'
+    ' A social act is what source evidence supports, not a private intention or'
+    ' moral verdict. Preserve explicit conditions and distinguish each reported'
+    ' expectation from the source act. Missing access does not prove ignorance;'
+    ' access does not prove understanding. Do not infer deception, betrayal,'
+    ' promise-breaking, trust change, relationship status, or blame.'
 )

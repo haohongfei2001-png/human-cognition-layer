@@ -69,3 +69,9 @@ The canonical scope and execution order are in
 authorized. Before any future budget request, provider-free preflight must prove
 that H actually executes the CG-02 treatment and H/H-new final inputs differ
 because of it.
+
+The source-grounded A-D runtime path is described in
+[docs/HCL_CG02_IMPLEMENTATION.md](docs/HCL_CG02_IMPLEMENTATION.md). It checks
+explicit conditions, source access and reported expectations; its ordinary-text
+grammar is narrow and fails closed. Provider-free certification and the external
+package freeze remain the next steps.

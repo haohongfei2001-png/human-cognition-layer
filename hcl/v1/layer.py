@@ -30,7 +30,7 @@ class HCLCognitionLayer:
     Without an injected runtime each request gets isolated transient state.
     """
     def __init__(self, base_model, *, intentions=None, affects=None, router=None,
-                 semantic_preparer=None):
+                 semantic_preparer=None, social_checker_enabled=True):
         if affects is not None:
             if intentions is not None and affects.intentions is not intentions:
                 raise ValueError('affect and intention runtimes must share state')
@@ -40,6 +40,9 @@ class HCLCognitionLayer:
         self.affects = affects
         self.router = router or CognitionRouter()
         self.semantic_preparer = semantic_preparer
+        if type(social_checker_enabled) is not bool:
+            raise ValueError('social checker switch must be boolean')
+        self.social_checker_enabled = social_checker_enabled
 
     def prepare(self, request: CognitionRequest):
         plan = self.router.plan(request)
@@ -53,7 +56,9 @@ class HCLCognitionLayer:
         from hcl.v07 import HCLV07Runtime
         from hcl.v06 import SYSTEM_VIEWER
         from .cg01 import check_explanations
+        from .cg02 import check_social_exchange
         from .narrative import SemanticPreparation, prepare_narrative
+        from .social_narrative import SocialPreparation, prepare_social_narrative
         from .tools import execute_tool
         parsed_events = candidates = facts = ()
         preparation_audit = {'method': 'caller_typed_evidence', 'semantic_preparer_calls': 0,
@@ -122,9 +127,76 @@ class HCLCognitionLayer:
                         preparation_audit.update(failure='semantic_preparer_error',
                             extraction_provider_calls=None, extraction_spend_usd=None,
                             output=None)
-        input_evidence = request.evidence + parsed_events
+        social_events = ()
+        social_acts = request.social_acts
+        social_interpretations = request.social_interpretations
+        social_access = request.social_access_statements
+        if plan.social_commitment and request.narrative:
+            prepared_social = prepare_social_narrative(request.narrative)
+            social_events = prepared_social.events
+            social_acts = social_acts + prepared_social.acts
+            social_interpretations = social_interpretations + prepared_social.interpretations
+            social_access = social_access + prepared_social.access_statements
+            preparation_audit.update(method='bounded_deterministic_social_narrative',
+                input={'query': request.query, 'narrative': request.narrative,
+                       'target_actor': plan.target_actor, 'perspective_mode': plan.perspective_mode.value},
+                output={'event_ids': [e.event_id for e in social_events],
+                        'act_ids': [a.act_id for a in social_acts],
+                        'interpretation_ids': [i.interpretation_id for i in social_interpretations]},
+                time_basis='line_order_not_calendar_time')
+            if not social_acts and request.allow_semantic_preparation:
+                if self.semantic_preparer is None:
+                    preparation_audit['failure'] = 'semantic_preparer_unavailable'
+                else:
+                    preparation_audit['semantic_preparer_calls'] = 1
+                    result = None
+                    try:
+                        result = self.semantic_preparer(dict(preparation_audit['input']))
+                        if not isinstance(result, SocialPreparation):
+                            raise ValueError('invalid social preparation output')
+                        if (type(result.provider_calls) is not int or result.provider_calls < 0 or
+                            not isinstance(result.raw_output, str) or len(result.raw_output) > 64000 or
+                            not isinstance(result.model_id, str) or not result.model_id or
+                            (result.cost_usd is not None and
+                             (not isinstance(result.cost_usd, (int, float)) or result.cost_usd < 0)) or
+                            len(result.events) > 32 or len(result.acts) > 6 or
+                            len(result.interpretations) > 12 or len(result.access_statements) > 8):
+                            raise ValueError('social preparation bounds exceeded')
+                        # Every event must be a complete authorized source line,
+                        # with speaker/recipient claims visible in that line.
+                        lines = [line.strip() for line in request.narrative.splitlines() if line.strip()]
+                        positions = [lines.index(e.raw_text) if e.raw_text in lines else -1 for e in result.events]
+                        if (any(pos < 0 for pos in positions) or positions != sorted(set(positions)) or
+                            any(e.actor_id and not e.raw_text.startswith(e.actor_id) for e in result.events) or
+                            any(recipient not in e.raw_text for e in result.events
+                                for recipient in e.recipient_ids)):
+                            raise ValueError('unanchored social preparation event')
+                        check_social_exchange(result.acts, result.interpretations,
+                            result.access_statements, result.events)
+                        social_events, social_acts, social_interpretations, social_access = (
+                            result.events, result.acts, result.interpretations,
+                            result.access_statements)
+                        preparation_audit.update(method='explicit_social_semantic_preparer',
+                            extraction_provider_calls=result.provider_calls,
+                            extraction_spend_usd=result.cost_usd, model_id=result.model_id,
+                            output=result.raw_output,
+                            source_span_diagnostics=list(result.source_span_diagnostics))
+                    except (ValueError, TypeError, KeyError, AttributeError):
+                        preparation_audit.update(failure='invalid_social_semantic_preparation',
+                            extraction_provider_calls=(result.provider_calls
+                                if isinstance(result, SocialPreparation) else None),
+                            extraction_spend_usd=(result.cost_usd
+                                if isinstance(result, SocialPreparation) else None),
+                            model_id=(result.model_id if isinstance(result, SocialPreparation) else None),
+                            output=(result.raw_output if isinstance(result, SocialPreparation) else None))
+                    except Exception:
+                        preparation_audit.update(failure='social_semantic_preparer_error',
+                            extraction_provider_calls=None, extraction_spend_usd=None, output=None)
+        input_evidence = request.evidence + parsed_events + social_events
         if plan.explanation and len(input_evidence) > 24:
             raise ValueError('CG-01 accepts at most 24 evidence events')
+        if plan.social_commitment and len(input_evidence) > 32:
+            raise ValueError('CG-02 accepts at most 32 source events')
         explanation_rows = (check_explanations(candidates, facts, input_evidence,
             mode=plan.perspective_mode.value, observer_actor=request.observer_actor,
             event_time=request.event_time, knowledge_cutoff=request.knowledge_cutoff)
@@ -149,7 +221,7 @@ class HCLCognitionLayer:
                 target = mentioned[0]
         # A person task with no unambiguous actor must fail closed, never use
         # the system view as if it were a character view.
-        person_task = any(c in plan.capabilities for c in ('perspective', 'intention', 'affect'))
+        person_task = plan.social_commitment or any(c in plan.capabilities for c in ('perspective', 'intention', 'affect'))
         scope = {'event_time': request.event_time, 'knowledge_cutoff': request.knowledge_cutoff}
         context = CognitionContext(temporal_scope=scope, perspective_mode=plan.perspective_mode.value)
         if request.narrative and plan.explanation and not candidates and not preparation_audit['failure']:
@@ -221,6 +293,14 @@ class HCLCognitionLayer:
                         'reason': 'no action and candidate explanation anchored by the bounded narrative grammar'})
                 context.open_unknown_candidate = {'status': 'OPEN',
                     'reason': 'other explanations remain possible; no unique motive inferred'}
+            if plan.social_commitment and self.social_checker_enabled:
+                context.social = check_social_exchange(social_acts, social_interpretations,
+                    social_access, input_evidence, mode=plan.perspective_mode.value,
+                    target_actor=target, observer_actor=request.observer_actor,
+                    event_time=request.event_time, knowledge_cutoff=request.knowledge_cutoff)
+                if not context.social['checked_act_count'] or not context.social['checked_expectation_count']:
+                    context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT',
+                        'reason': 'no source-grounded social act and reported expectation both checked'})
         context.evidence = [event_row(e) for e in visible]
         context.provenance = [{'source_event_id': e.event_id, 'source_id': e.source_id,
                                'actor_id': e.actor_id, 'evidence_level': 'SYSTEM_UNKNOWN',
