@@ -2,7 +2,7 @@
 
 HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息、信念、视角和有来源的心理证据。**基础模型可以直接做好时，直接回答。** 简单提示足够时不调用复杂机制；精确计算采用通用工具；专门认知机制只保留得到增量证据支持的部分。
 
-当前阶段：**HCL Long-Horizon Capability Growth — Wave D**。A01–A05 共享证据、普通语义入口、解释修订和保留能力垂直整合已通过正确性验证；B01 已实现有作用域的高阶信念归因；B02 已实现三人差异化交流/接触视图；B03 已区分人物修订与分析者纠正旧记录；B04 已实现转述来源归组与有界高阶查询；B05 已完成分人物局部更新与概念/责任检查整合，Wave B 正确性构建完成；C01 已实现目标/计划/机会的有来源联结；C02 已实现带前提与反证的竞争行动解释；C03 已区分人物信念下的计划支持与声明模型条件；C04 已实现目标相关评价与有来源的重新评价；C05 已把行动时信念/计划与条件解释联结，后来的信念和评价分开；D01 已区分条件承诺、接收、接受、撤回和履行报告；当前唯一 `NEXT_READY` 为 **D02 bounded mutual understanding and repair**。POST-CG05 review 和全部历史 evidence disposition 保持原分类；EG01-A 的通用 semantic/native-entry 工作吸收到 Wave A，independent qualification 与 serious efficacy validation 后移到 G-ARCH 之后。唯一实时状态见 [STATUS.md](STATUS.md)，完整长期架构与 41 包路线见 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)，live 队列见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
+当前阶段：**HCL Long-Horizon Capability Growth — Wave D**。A01–A05 共享证据、普通语义入口、解释修订和保留能力垂直整合已通过正确性验证；B01 已实现有作用域的高阶信念归因；B02 已实现三人差异化交流/接触视图；B03 已区分人物修订与分析者纠正旧记录；B04 已实现转述来源归组与有界高阶查询；B05 已完成分人物局部更新与概念/责任检查整合，Wave B 正确性构建完成；C01 已实现目标/计划/机会的有来源联结；C02 已实现带前提与反证的竞争行动解释；C03 已区分人物信念下的计划支持与声明模型条件；C04 已实现目标相关评价与有来源的重新评价；C05 已把行动时信念/计划与条件解释联结，后来的信念和评价分开；D01 已区分条件承诺、接收、接受、撤回和履行报告；D02 已区分听到与有限相互确认，并保留意思修订；当前唯一 `NEXT_READY` 为 **D03 competing strategic communication explanations**。POST-CG05 review 和全部历史 evidence disposition 保持原分类；EG01-A 的通用 semantic/native-entry 工作吸收到 Wave A，independent qualification 与 serious efficacy validation 后移到 G-ARCH 之后。唯一实时状态见 [STATUS.md](STATUS.md)，完整长期架构与 41 包路线见 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)，live 队列见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
 
 - [普通人物问题与叙事入口](docs/HCL_V1_PERSON_QUESTION.md)：有来源、时间、访问与局部修订边界；单次回答，默认零提取调用。
 - [夜间 source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)：实际能力变化、证据限制、两个 deferred 冻结包。
@@ -147,3 +147,5 @@ authorized by this policy change.
 [C05 行动解释与评价整合](docs/HCL_WAVE_C05.md)：纠正行动前信念会改变计划依赖的解释，后来获知不倒填过去，也不自动推断情绪。
 
 [D01 条件承诺生命周期](docs/HCL_WAVE_D01.md)：条件未知、条件不成立、未收到条件和主动撤回分别解释；后来的接收不倒填早先期待。
+
+[D02 有限相互确认](docs/HCL_WAVE_D02.md)：原话、回述、确认及各自接收链分开；后来澄清不会自动更新另一方，也不产生无限共同知识。
