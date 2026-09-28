@@ -119,6 +119,24 @@ class CognitionWorkspace:
         self._cache[key] = result
         return result
 
+    def prepare_semantic(self, query, *, source_ids, observer=None, backend=None):
+        """Unified source preparation; access filtering precedes any backend call."""
+        from .semantic import AuthorizedText, prepare_semantics
+        if (not isinstance(source_ids, tuple) or not source_ids
+                or len(set(source_ids)) != len(source_ids)
+                or any(s not in self._documents for s in source_ids)):
+            raise ValueError('distinct registered sources required')
+        sources = tuple(AuthorizedText(s, self._documents[s][0], self._versions[s],
+            self._documents[s][1], index) for index, s in enumerate(source_ids, 1))
+        result = prepare_semantics(query, sources, core=self.core,
+            scope=Scope(observer=observer, source_ids=source_ids), backend=backend)
+        for root_id in result.root_ids:
+            for supports in self.core.dependencies[root_id]:
+                for span in supports:
+                    source_id = self.core.spans[span].source_id
+                    self._version_spans[source_id].add(span)
+        return result
+
     def receipt(self, result):
         return dict(schema='hcl-shared-operation-v1', operation_id=result.id,
             source_versions=list(result.source_versions), claim_ids=list(result.claim_ids),

@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**LONG-HORIZON CAPABILITY GROWTH — WAVE A / A01 CORRECTNESS_VERIFIED / NEXT_READY=A02**
+**LONG-HORIZON CAPABILITY GROWTH — WAVE A / A01–A03 CORRECTNESS_VERIFIED / NEXT_READY=A04**
 
 The long-horizon architecture and 41-package roadmap are canonical in
 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md).
@@ -17,7 +17,7 @@ A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
-**NEXT_READY: `A02_UNIFIED_ORDINARY_SEMANTIC_PREPARATION`**
+**NEXT_READY: `A04_RETAINED_CAPABILITY_SHARED_CORE_ADAPTERS`**
 
 A01 now provides shared versioned evidence, scoped source reports and
 interpretations, alternative support sets and rooted invalidation. A source
@@ -26,9 +26,18 @@ independent result remains identical without reexecution. See
 [implementation/witness](docs/HCL_WAVE_A01.md) and the executable
 [construction registry](hcl/cognition/registry.py).
 
+A02–A03 now extend the core to ordinary reported dialogue, first-person speaker
+binding, ambiguous-reference alternatives, separate quote/semantic validation,
+and source-local expression support/challenge/retraction. Withdrawing Mira's
+counterstatement restores the supported public expression while Noor is unchanged.
+Actual final inputs carry support, challenges and retired source history. See
+[A02–A03 implementation and witnesses](docs/HCL_WAVE_A02_A03.md).
+
 State: **CORRECTNESS_VERIFIED / REPLAY_VERIFIED / UNTESTED / OPT_IN**.
-The entry still uses the bounded v1 grammar; broader semantic entry is A02.
-No provider has been called for A01. Historical efficacy dispositions are unchanged.
+The local entry recognizes bounded explicit speech forms; open backend candidates
+remain semantically unverified. No real provider has been called in A01–A03.
+Historical efficacy dispositions are unchanged. A04 connects the retained
+operations to this common material rather than expanding their separate grammars.
 
 ## Canonical development policy
 
@@ -133,7 +142,7 @@ Leaderboard selection is not active now.
 - LongMemEval: **SEALED / NOT ACCESSED**
 - Benchmark-specific logic authorized: **NO**
 - Leaderboard search/optimization: **OFF**
-- Current owner-only blocker: **NONE for A02 implementation**
+- Current owner-only blocker: **NONE for A04 implementation**
 
 ## Historical state and recovery
 
@@ -152,5 +161,10 @@ truthfully satisfied.
 A01 is verified by unit/negative-inference/composition/ordinary-input/historical
 checks in the existing exact-SHA v1 workflow. Its artifact includes an executable
 positive witness and actual prepared final inputs. Merge only after exact-head
-CI; continue A02 only after exact-main CI. GitHub run SHAs, rather than a
+CI; continue A04 only after exact-main CI. GitHub run SHAs, rather than a
 self-referential commit hash in this file, identify those receipts.
+
+A01 merged in PR #165 at `c5ad04a9e8eb30ab99255b05fca36a02644c6e2b`;
+all six exact-main workflows passed. The v1 receipt in run `36476028258`
+records 346 integration + 176 historical tests, zero provider calls. A02–A03
+continue the same workflow with their own positive witnesses.
