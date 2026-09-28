@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**HCL-CG-01 — Perspective- and Choice-Constrained Character Explanation**
+**HCL-CG-02 — Social Commitment, Expectation and Misunderstanding**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -23,7 +23,7 @@ Capability growth is the development main line: **real human-cognition capabilit
 
 Runtime: `hcl/v1`; [inventory](docs/HCL_V1_CAPABILITY_REGISTRY.md); [router/API](docs/HCL_V1_COGNITION_ROUTER.md); [source audit and evaluation design](docs/HCL_V1_INTEGRATED_EVALUATION_PROTOCOL.md); [handoff](reports/HCL_V1_INTEGRATION_FINAL_CLOSURE.md); [runtime receipt](reports/HCL_V1_PROVIDER_FREE_CERTIFICATION.json).
 
-The answer adapter performs one model call; default v1 schedules zero extraction calls. CG-01 may use one explicitly opted-in semantic-preparation adapter call, recording its input, output and cost separately. Optional typed context requires validated upstream semantic evidence; access metadata is not automatically mined from prose. The deterministic bilingual router has finite vocabulary; injected historical state is caller-managed. This is a working foundation, not external efficacy. The final handoff commit's exact SHA, counts and CI receipt are also emitted by the v1 workflow artifact for that commit, avoiding a self-referential static SHA in this file.
+The answer adapter performs one model call; default v1 schedules zero extraction calls. Optional capability packages may use an explicitly opted-in semantic-preparation adapter call, recording its input, output and cost separately. Optional typed context requires validated upstream semantic evidence; access metadata is not automatically mined from prose. The deterministic bilingual router has finite vocabulary; injected historical state is caller-managed. This is a working foundation, not external efficacy. The final handoff commit's exact SHA, counts and CI receipt are also emitted by the v1 workflow artifact for that commit, avoiding a self-referential static SHA in this file.
 
 ## Historical capability dispositions
 
@@ -58,10 +58,44 @@ The previous `HCL_V1_INTEGRATED_SOURCE_QUALIFICATION` remains a useful **externa
 
 The generic provider-free repair now aligns only unique whitespace variants to exact source spans, rejects unanchored events and dependent claims, uses source order, and preserves paid extraction output/cost on validation failure. These prospective fixes do not change the consumed run. No rerun or new paid package is authorized; the unused grant is closed at zero. LongMemEval remains sealed.
 
+CG-01 remains **SIMPLIFY / CLOSED** for ordinary-text use; its deterministic checker remains optional for source-validated typed evidence, with specialized efficacy inconclusive because the paid H arm never exercised it.
+
+## Active capability-growth work
+
+**CG-02 — ACTIVE / PLANNED FOR IMPLEMENTATION.**
+
+Canonical contract: [docs/HCL_CG02_CAPABILITY_CONTRACT.md](docs/HCL_CG02_CAPABILITY_CONTRACT.md).
+
+CG-02 targets a new social-cognition capability: preserve what a proposal, request,
+acceptance, refusal, conditional commitment or withdrawal actually expressed;
+track which conditions each participant could access; compare participant
+expectations; and explain bounded misunderstandings without automatically
+inferring deception, betrayal, trust change, relationship status or moral blame.
+
+Execution order:
+
+- **CG02-A** — v1 operation/routing surface;
+- **CG02-B** — grounded social-act and condition checker;
+- **CG02-C** — participant expectation/misunderstanding comparison;
+- **CG02-D** — bounded ordinary-text semantic preparation;
+- **CG02-CERT** — provider-free certification and regressions;
+- **CG02-E** — provider-free freeze of C/P/G/H/H-new external package.
+
+The CG-01 lesson is now a hard validation gate: no paid authorization request is
+valid unless provider-free preflight proves the selected H cases actually execute
+the CG-02 treatment and that H/H-new final inputs differ because of that
+treatment.
+
 The current engineering milestone is:
 
-**HCL_CG01_PHASE_E_SIMPLIFY_CLOSED**
+**HCL_CG02_A_B_IMPLEMENTATION**
 
-The next capability package must follow the priority pool and constraints in `DEVELOPMENT_PLAN.md`; none is frozen here. No owner action is required for this completed CG-01 package. Any new paid validation needs a new frozen scope and authorization. Historical budgets do not transfer.
+No owner action is required for provider-free implementation. Any later paid
+comparison requires a newly frozen package and
+`HCL_CG02_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION`. Historical budgets do not
+transfer.
 
-Leaderboard selection is explicitly deferred until the maturity gate in `DEVELOPMENT_PLAN.md` is met. Provider charge is bounded by **USD 0.05900004** on conservative published peak all-cache-miss rates; the actual invoice was not available. LongMemEval remains fully sealed/deprioritized.
+Leaderboard selection remains deferred until the maturity gate in
+`DEVELOPMENT_PLAN.md` is met. Historical CG-01 provider charge remains bounded
+by **USD 0.05900004** on conservative published peak all-cache-miss rates; no new
+CG-02 provider spend is authorized. LongMemEval remains fully sealed/deprioritized.
