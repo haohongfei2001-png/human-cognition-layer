@@ -71,6 +71,7 @@ class PackagePreflight(unittest.TestCase):
 
     def test_full_runner_with_provider_free_stub(self):
         package = load_package()
+        checkpoints = []
         def stub(messages, max_output_tokens, config):
             self.assertEqual(config['response_format']['type'], 'json_object')
             extraction = 'Extract only source-anchored conditions' in messages[0]['content']
@@ -79,10 +80,27 @@ class PackagePreflight(unittest.TestCase):
                    '"evidence_quote":"","unknown_motive":true}')
             return {'model': package['model'], 'raw': raw, 'input_tokens': 100,
                     'output_tokens': 20, 'cost_usd': 0.0}
-        receipt = run_with_provider(stub, package)
+        receipt = run_with_provider(stub, package,
+                                    on_update=lambda snapshot: checkpoints.append(
+                                        (snapshot['calls'], len(snapshot['rows']))))
         self.assertEqual(receipt['calls'], 24)
         self.assertEqual(len(receipt['rows']), 20)
         self.assertEqual(receipt['cost_usd'], 0.0)
+        self.assertEqual(checkpoints[-1], (24, 20))
+        self.assertIn((1, 0), checkpoints)
+
+    def test_failed_provider_call_is_charged_and_checkpointed(self):
+        package = load_package()
+        checkpoints = []
+        ledger = BudgetLedger(package, on_update=lambda current: checkpoints.append(
+            (current.calls, current.cost_usd, current.attempts[-1].get('failure_type'))))
+        def failed(_messages, _max_output_tokens, _config):
+            raise RuntimeError('simulated provider failure')
+        with self.assertRaises(RuntimeError):
+            ledger.call(failed, [{'role': 'user', 'content': 'small'}])
+        self.assertEqual(ledger.calls, 1)
+        self.assertEqual(checkpoints[-1][2], 'RuntimeError')
+        self.assertGreater(ledger.cost_usd, 0)
 
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 # CG-01 minimal external development package
 
-Status: **PROVIDER-FREE PACKAGE FROZEN; PAID EXECUTION NOT AUTHORIZED**.
+Status: **PROVIDER-FREE PACKAGE FROZEN; USD 0.75 OWNER GRANT RECEIVED;
+ONE-TIME EXECUTION PENDING**.
 This is a four-case falsification probe, not a fresh benchmark, efficacy proof,
 leaderboard attempt or permission to spend. It follows CG01-A/B/C and their
 provider-free correctness checks.
@@ -81,11 +82,14 @@ requires a newly frozen cap, never silent expansion.
 
 The implementation is [provider-injectable](../scripts/cg01_external_package.py):
 the DeepSeek adapter requires an explicitly supplied API key, and importing or
-preflighting the package makes no provider call. There is no credential lookup,
-paid CLI or scheduled trigger. The runner records a conservative peak-price,
+preflighting the package makes no provider call. The owner authorized this
+specific package and USD 0.75 ceiling on 2026-09-28. The one-time Actions
+workflow receives the existing repository secret, checks a unique first-attempt
+trigger commit, and preserves a journal after every attempt. There is no
+scheduled trigger or retry. The runner records a conservative peak-price,
 all-cache-miss cost upper bound alongside token usage; the invoice can be lower.
 Provider-free tests cover package integrity, arm isolation, H-new ablation,
-metering, scoring and a full 24-call stub run. No provider execution has occurred.
-The next gate after exact-head provider-free CI is
-`HCL_CG01_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION`. Historical budgets do not
-transfer. LongMemEval remains sealed.
+metering, scoring, checkpointing and a full 24-call stub run. No provider
+execution has occurred as of this workflow preparation. After the one-time
+comparison, Phase E requires one RETAIN / SIMPLIFY / DEACTIVATE decision.
+Historical budgets do not transfer. LongMemEval remains sealed.
