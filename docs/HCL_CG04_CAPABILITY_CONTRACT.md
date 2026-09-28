@@ -1,6 +1,6 @@
 # HCL-CG-04 — Contextual Value Conflict and Preference
 
-Status: **CG04-A–D/CERT COMPLETE; CG04-E FROZEN; NEW OWNER GRANT REQUIRED**
+Status: **CG04-A–D/CERT COMPLETE; CG04-E FROZEN; READY / DEFERRED_OWNER_AUTHORIZATION**
 
 ## User-visible capability delta
 
@@ -60,8 +60,9 @@ Implementation and bounded grammar: [HCL_CG04_IMPLEMENTATION.md](HCL_CG04_IMPLEM
    from the executed CG-04 checks. No source hunt or leaderboard work.
 
 If provider-free implementation, certification and package freeze are complete
-and paid validation is the sole remaining action, stop at
-**HCL_CG04_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION** with a new concrete proposal.
+and paid validation is the sole remaining action, preserve the existing proposal
+as **READY / DEFERRED_OWNER_AUTHORIZATION** during the owner-authorized night,
+and immediately continue provider-free work under DEVELOPMENT_PLAN section 14.
 CG-03's consumed authorization and unused money do not transfer. No new paid
 experiment is authorized; LongMemEval remains sealed.
 

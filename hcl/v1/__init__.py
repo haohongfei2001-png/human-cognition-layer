@@ -17,3 +17,6 @@ from .cg03 import (NormativePremise, ResponsibilityCase, ResponsibilityFactor,
 from .cg04 import (PreferenceCondition, PreferenceStatement, ContextConditionClaim,
                    PreferenceCase, PreferencePreparation, project_preferences,
                    check_preferences, prepare_preference_narrative)
+
+from .cg05 import (ConceptDefinition, ConceptProperty, ConceptUse, ConceptCase,
+                   ConceptPreparation, project_concepts, check_concepts, prepare_concept_narrative)

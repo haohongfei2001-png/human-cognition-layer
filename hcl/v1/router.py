@@ -10,6 +10,7 @@ from .narrative import query_actor
 from .cg02 import SocialAct, ParticipantInterpretation, AccessStatement
 from .cg03 import ResponsibilityCase, NarrativePremise
 from .cg04 import PreferenceCase
+from .cg05 import ConceptCase
 
 
 @dataclass(frozen=True)
@@ -51,6 +52,12 @@ class CognitionRequest:
     preference_role: str | None = None
     preference_context: str | None = None
 
+    concept_case: ConceptCase | None = None
+    concept_analysis: bool = False
+    concept_context: str | None = None
+    concept_term: str | None = None
+    concept_item: str | None = None
+
     def __post_init__(self):
         if not isinstance(self.query, str) or not self.query.strip() or len(self.query) > 16000:
             raise ValueError('bounded nonempty query required')
@@ -87,6 +94,22 @@ class CognitionRequest:
             raise ValueError('social analysis flag must be boolean')
         if type(self.responsibility_analysis) is not bool:
             raise ValueError('responsibility analysis flag must be boolean')
+        if type(self.concept_analysis) is not bool:
+            raise ValueError('concept analysis flag must be boolean')
+        if self.concept_analysis or self.concept_case is not None:
+            if (not self.target_actor or self.preference_analysis or self.preference_case is not None or
+                self.responsibility_analysis or self.responsibility_case is not None or
+                self.social_analysis or self.social_acts or self.social_interpretations or self.social_access_statements):
+                raise ValueError('concept operation requires one explicit focal operation')
+            if self.concept_analysis:
+                if (self.concept_case is not None or self.narrative is None or self.evidence or
+                    not all(isinstance(v, str) for v in (self.concept_context, self.concept_term, self.concept_item))):
+                    raise ValueError('ordinary concept path needs narrative and explicit scenario')
+            elif (not isinstance(self.concept_case, ConceptCase) or
+                  self.concept_case.actor_id != self.target_actor or self.narrative is not None or len(self.evidence) > 24):
+                raise ValueError('typed concept case and focal actor required')
+        elif any(v is not None for v in (self.concept_context, self.concept_term, self.concept_item)):
+            raise ValueError('concept scenario requires explicit operation')
         if type(self.preference_analysis) is not bool:
             raise ValueError('preference analysis flag must be boolean')
         if self.preference_analysis or self.preference_case is not None:
@@ -177,6 +200,7 @@ class CognitionPlan:
     social_commitment: bool = False
     responsibility_structure: bool = False
     contextual_preference: bool = False
+    concept_interpretation: bool = False
     target_actor: str | None = None
 
     @property
@@ -205,13 +229,14 @@ class CognitionRouter:
             PerspectiveMode.CHARACTER_PERSPECTIVE if request.target_actor and (request.tools or re.search(
                 r'\b(what does .+ (?:know|believe|think|want)|what did .+ (?:know|believe|think|want)|from .+ perspective)\b|知道什么|从.+视角|以.+视角', query)
             ) else PerspectiveMode.READER_ANALYSIS)
+        concept = request.concept_case is not None or request.concept_analysis
         preference = request.preference_case is not None or request.preference_analysis
         responsibility = not preference and (request.responsibility_case is not None or request.responsibility_analysis)
-        social = bool(not preference and not responsibility and target_actor and (request.social_analysis or request.social_acts or
+        social = bool(not concept and not preference and not responsibility and target_actor and (request.social_analysis or request.social_acts or
             request.social_interpretations or request.social_access_statements or re.search(
             r'\b(?:promis(?:e|ed|es)|commit(?:ment|ted)?|propos(?:e|al|ed)|request(?:ed)?|accept(?:ed|ance)?|refus(?:e|ed|al)|withdraw(?:al|n)?|misunderstand(?:ing)?|expect(?:s|ed|ation|ations)?)\b|承诺|提议|请求|接受|拒绝|撤回|误解|期待',
             query)))
-        explanation = bool(not preference and not responsibility and not social and target_actor and re.search(
+        explanation = bool(not concept and not preference and not responsibility and not social and target_actor and re.search(
             r'\b(?:why did|why does|why would|explain .+ action|explanation of .+ action)\b|为什么.+(?:做|去|没|不|离开|参加)|解释.+(?:行为|行动)', query))
         selected = []
         optional = []
@@ -219,7 +244,7 @@ class CognitionRouter:
         blocked = []
         reasons = {}
         for cid in ('perspective', 'intention', 'affect'):
-            if not preference and not responsibility and re.search(_PATTERNS[cid], query):
+            if not concept and not preference and not responsibility and re.search(_PATTERNS[cid], query):
                 selected.append(cid)
                 reasons[cid] = 'explicit task semantics; no inference from incidental evidence'
                 if cid == 'perspective':
@@ -240,6 +265,10 @@ class CognitionRouter:
             selected.append('cg04_contextual_preference')
             optional.append('cg04_contextual_preference')
             reasons['cg04_contextual_preference'] = 'explicit actor/role/context preference operation'
+        if concept:
+            selected.append('cg05_local_concept')
+            optional.append('cg05_local_concept')
+            reasons['cg05_local_concept'] = 'explicit speaker/context concept interpretation'
         # Explicit source/time scopes must still be respected for factual tasks.
         if request.target_actor or request.event_time or request.knowledge_cutoff:
             selected.append('source_visibility')
@@ -252,7 +281,7 @@ class CognitionRouter:
                 tools.append(cid)
                 selected.append(cid)
                 reasons[cid] = 'explicit source-scoped exact operation; validate assumptions before execution'
-            elif re.search(_PATTERNS[cid], query):
+            elif not concept and re.search(_PATTERNS[cid], query):
                 blocked.append(cid)
                 reasons[cid] = 'task needs an exact tool but no declared formal input supplied'
                 selected.append('uncertainty')
@@ -267,5 +296,5 @@ class CognitionRouter:
                              blocked_tools=tuple(blocked), perspective_mode=mode,
                              explanation=explanation, social_commitment=social,
                              responsibility_structure=responsibility,
-                             contextual_preference=preference,
+                             contextual_preference=preference, concept_interpretation=concept,
                              target_actor=target_actor)

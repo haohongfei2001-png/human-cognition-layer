@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG-03 DEVELOPMENT-ONLY RETAIN / CLOSED; CG-04 ACTIVE**
+Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG-03 DEVELOPMENT-ONLY RETAIN / CLOSED; CG-04 DEFERRED; CG-05 ACTIVE**
 
 This file defines the live development direction for HCL. `STATUS.md` records
 current execution state; this file records the development strategy and the next
@@ -347,9 +347,9 @@ unfrozen priority pool:
 2. **CG-03 CLOSED / DEVELOPMENT-ONLY RETAIN — Responsibility-structure explanation** — distinguish causal contribution,
    knowledge, foreseeability, control, intention and responsibility basis under
    explicit normative premises.
-3. **CG-04 ACTIVE — Contextual value conflict and preference** — conditional preferences,
+3. **CG-04 IMPLEMENTED_UNVALIDATED / DEFERRED — Contextual value conflict and preference** — conditional preferences,
    role/context changes and unresolved value conflict; no global fixed weights.
-4. **Concept interpretation in person/social context** — local definitions,
+4. **CG-05 ACTIVE — Concept interpretation in person/social context** — local definitions,
    speaker-relative usage, applicability, counterexamples and multiple readings.
 
 Narrative/social integration should emerge across these capabilities rather than
@@ -567,3 +567,30 @@ exists and the grant is zero. Only paid validation remains, so the live mileston
 is **HCL_CG04_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION**. Do not execute without
 a new explicit owner grant. Any outcome remains synthetic development evidence,
 not independent/fresh evidence or a broad value-cognition claim.
+
+
+## 14. Authorized night continuation / CG-05
+
+The owner authorized NO-BLOCKING-OWNER-GATE unattended development on 2026-09-28.
+This overrides historical stop-at-paid wording for the night without authorizing
+any spending. CG-04 is READY / DEFERRED_OWNER_AUTHORIZATION with its existing
+package and budget proposal unchanged; grant 0, trigger absent. Frozen runtime
+replay stays pinned to main 018afbc; current-runtime tests separately prove exact
+case/input compatibility. No automatic migration of a future paid grant.
+
+The next section-8 candidate is selected as CG-05. Execute A → B → C → D → CERT → E
+under [the minimal contract](docs/HCL_CG05_CAPABILITY_CONTRACT.md). CAPABILITY_DELTA:
+check local concept usage by speaker/context, explicit criteria/counterexamples,
+multiple readings and local revision without universal/shared/private truth.
+A–D are implemented; certify exact head/main, freeze fair ordinary-text five-arm
+inputs if needed, then defer paid execution. No source hunt or leaderboard work.
+
+At most two implemented-but-unvalidated candidates: CG-04 and CG-05. Once both
+freezes are ready, do not open a third large module. The unique next implementation
+package is integration of retained source/perspective/responsibility safeguards,
+source-grounded semantic preparation and less duplicated answer context, with
+provider-free integrated cases. Record an actual CAPABILITY_DELTA in each package.
+Do not change consumed evidence, paid grants or frozen messages to optimize cost.
+Continue until the night end conditions supplied by the owner hold; paid owner
+authorization alone is never a development stop reason. Preserve canonical main,
+PRs, exact-main CI, deltas, dispositions, frozen proposals and unique next task.

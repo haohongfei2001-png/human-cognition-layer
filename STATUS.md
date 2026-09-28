@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**HCL-CG-04 — Contextual Value Conflict and Preference (provider-free certified; E frozen)**
+**HCL-CG-05 — Local Concept Interpretation (A–D implemented; CERT in progress)**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -147,7 +147,7 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**HCL_CG04_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION**
+**CG05-CERT — provider-free correctness and ordinary-text integration**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
@@ -228,3 +228,33 @@ proposed **USD 0.30 hard cap**. The workflow grant is **0**, with no trigger;
 no CG-04 paid run is authorized. Historical unused budgets do not transfer.
 Implementation, certification and freeze are complete; only a separately
 owner-authorized paid comparison remains. Any result is development evidence only.
+
+
+## Authorized unattended night — 2026-09-28
+
+**NO-BLOCKING-OWNER-GATE**: new spending stays unauthorized. A completed
+provider-free capability whose only remaining step is paid validation is frozen
+as **READY / DEFERRED_OWNER_AUTHORIZATION**; continue independent implementation.
+One active writer, one coherent PR; exact-head CI → merge → exact-main CI.
+
+CG-04 remains **IMPLEMENTED_UNVALIDATED / READY / DEFERRED_OWNER_AUTHORIZATION**.
+No independent CG-04 grant exists. Package bytes/hash, sources, gold, prompts,
+scorer, arms and treatment remain unchanged at
+`0ffcfdfae3d9d5130c96205f2247991d1d88a872edbb144b701ad01da3202ce9`.
+Frozen replay uses certified `main@018afbc93c645975d7f6f1077c8c8380635d9f2f`;
+current-runtime regression separately requires every frozen case's actual input
+and checked treatment to remain identical. Latest runtime is not silently
+substituted into a future paid run. Proposal: 20 calls/0 retries/USD 0.30,
+reservation USD 0.29543184; grant 0, trigger absent, calls/spend 0.
+
+**CG05-A–D — IMPLEMENTED_UNVALIDATED**. CAPABILITY_DELTA: distinguish local
+social-concept meanings by speaker/context, check source properties and explicit
+counterexamples, retain multiple readings and scope-local revision. Ordinary
+text reaches actual final cognition state without hand-entered mental state or
+provider extraction. [Contract/brief](docs/HCL_CG05_CAPABILITY_CONTRACT.md).
+Certification next; then fair five-arm freeze and defer paid validation. These
+are the only two active unvalidated candidates. Afterwards the unique next
+implementation task is retained-capability integration and context/cost
+reduction, not a third module. CG-02 remains closed INCONCLUSIVE and CG-03 remains
+development-only RETAIN. New provider calls/spend tonight: **0 / USD 0**.
+LongMemEval: **SEALED_NOT_ACCESSED**. No owner input is needed for this work.

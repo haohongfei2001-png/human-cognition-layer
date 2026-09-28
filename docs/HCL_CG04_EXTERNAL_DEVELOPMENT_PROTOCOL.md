@@ -91,3 +91,13 @@ typical-cost/maturity gate require broader later evidence. Close grant and trigg
 preserve raw receipts and canonical status/plan, and continue to the next existing
 capability candidate only after this source-first closure. Any further spending
 requires a new owner authorization.
+
+
+## Night deferral (2026-09-28)
+
+READY / DEFERRED_OWNER_AUTHORIZATION. The package and prospective decision rules
+above are unchanged; no paid run/grant exists. Preserve the certified runtime at
+main 018afbc93c645975d7f6f1077c8c8380635d9f2f for frozen replay. Current development
+must not be silently used in that paid comparison. The owner explicitly allows
+next provider-free capability work before paid closure during this night. No
+new calls, budget transfer, source/gold/prompt/scorer/arm/treatment changes.
