@@ -550,9 +550,20 @@ presence package. No benchmark/source hunt, ontology expansion or new paid
 experiment is part of implementation. Stop for a new owner grant only when
 paid validation is the sole remaining action; all previous grants remain closed.
 
-CG04-A–D implementation is now present; current milestone is **CG04-CERT**.
-The executable operation checks source/actor/role/context, accessible conditions,
-explicit scope-local revisions and unresolved conflicts. The narrow ordinary
-English prose grammar requires no gold or hand-entered private value state.
-See [implementation](docs/HCL_CG04_IMPLEMENTATION.md); certify exact head/main
-before freezing CG04-E. No paid execution is authorized.
+CG04-A–D and CERT are complete: exact head `ca6f36434275b97b9ed15aaba3f1423f33ed8aa2`
+and merged main `88b5cfbefaae51793998a9e2685e11f30a22a241` each passed 142 v1
+and 176 frozen historical tests with identical runtime digest and zero provider
+calls. See [certification](reports/HCL_CG04_PROVIDER_FREE_CERTIFICATION.json) and
+[bounded implementation](docs/HCL_CG04_IMPLEMENTATION.md).
+
+CG04-E freezes four synthetic development cases, all five inputs, a fair shared
+output contract, strict typed field scorer and treatment-presence receipts at
+zero provider calls. The [protocol](docs/HCL_CG04_EXTERNAL_DEVELOPMENT_PROTOCOL.md)
+predeclares source-first RETAIN / SIMPLIFY / DEACTIVATE / INCONCLUSIVE closure.
+The dormant runner/workflow reuse the existing DeepSeek client/cap ledger and
+propose a new USD 0.30 hard cap for at most 20 calls, zero retries. The conservative
+reservation is USD 0.29543184; historical budgets do not transfer. No trigger
+exists and the grant is zero. Only paid validation remains, so the live milestone
+is **HCL_CG04_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION**. Do not execute without
+a new explicit owner grant. Any outcome remains synthetic development evidence,
+not independent/fresh evidence or a broad value-cognition claim.

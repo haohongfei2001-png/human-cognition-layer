@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**HCL-CG-04 — Contextual Value Conflict and Preference (A–D implemented; CERT next)**
+**HCL-CG-04 — Contextual Value Conflict and Preference (provider-free certified; E frozen)**
 
 This file is the single live status. Historical statuses, gates, budgets and always-on policies are superseded; their complete record remains at [pre-v1 main c6b0eca](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md). Current remote main and exact-SHA CI remain the code facts.
 
@@ -147,7 +147,7 @@ unresolved. This is development evidence only, not fresh/independent evidence.
 
 The current engineering milestone is:
 
-**CG04-CERT — provider-free contextual-preference certification**
+**HCL_CG04_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION**
 
 CG-02's one-time authorization, budget and trigger are closed. The next
 capability-first package is responsibility-structure explanation, selected from
@@ -198,10 +198,33 @@ Leaderboard selection remains deferred until the maturity gate in
 by **USD 0.05900004** on conservative published peak all-cache-miss rates; no new
 CG-02 provider spend is authorized. LongMemEval remains fully sealed/deprioritized.
 
-CG04-A–D are now implemented with an explicit v1 operation, complete-line source
-validation, role/context-bound conditions, attributed reports, explicit local
-revision, unresolved pair/cycle conflict and a bounded ordinary-text path.
-[Implementation limits](docs/HCL_CG04_IMPLEMENTATION.md) and debug/ablation
-boundaries are explicit. 23 targeted CG-04 checks and all 141 v1 tests pass
-locally at zero provider calls; exact PR-head/main certification is pending.
-No external utility claim or new paid authorization follows.
+**CG04-A–D / CERT — provider-free certified.** [PR #135](https://github.com/haohongfei2001-png/human-cognition-layer/pull/135)
+exact head `ca6f36434275b97b9ed15aaba3f1423f33ed8aa2`
+([run 36430264670](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36430264670))
+and main `88b5cfbefaae51793998a9e2685e11f30a22a241`
+([run 36430479680](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36430479680))
+both passed 142 v1 + 176 historical = **318 tests** with runtime digest
+`b700aaef4a27d6beda7b4abd79b6801d29947583adaa1dc00ca45b3f50ccd006`,
+zero provider calls/spend and LongMemEval sealed. All six head/main workflow
+groups passed. [Certification receipt](reports/HCL_CG04_PROVIDER_FREE_CERTIFICATION.json).
+
+The operation checks complete-line source/actor/authority, role/context-bound
+conditions, attribution, explicit same-condition-domain local revisions and
+unresolved pair/cycle conflict. A bounded ordinary-text path records actual
+preparation/state/final messages without extraction calls. Source claims do not
+prove lasting values, sincerity or moral truth; choices do not create preferences.
+[Implementation limits](docs/HCL_CG04_IMPLEMENTATION.md) remain explicit.
+
+**CG04-E — frozen provider-free proposal.** [Protocol](docs/HCL_CG04_EXTERNAL_DEVELOPMENT_PROTOCOL.md)
+and [package](reports/HCL_CG04_EXTERNAL_PACKAGE.json) fix four public
+HCL-authored synthetic development cases with identical task/output vocabulary
+across C/P/G/H/H-new. All four treatment-presence preflights pass, and final
+H/H-new inputs differ solely by the executed checked state. The frozen package
+SHA-256 is `0ffcfdfae3d9d5130c96205f2247991d1d88a872edbb144b701ad01da3202ce9`.
+Existing DeepSeek infrastructure is reused; no API/account/credential/plan is added.
+The new proposal is 20 calls maximum, zero retries, thinking disabled, 512 output
+tokens, provider default tier, conservative reservation **USD 0.29543184** and
+proposed **USD 0.30 hard cap**. The workflow grant is **0**, with no trigger;
+no CG-04 paid run is authorized. Historical unused budgets do not transfer.
+Implementation, certification and freeze are complete; only a separately
+owner-authorized paid comparison remains. Any result is development evidence only.
