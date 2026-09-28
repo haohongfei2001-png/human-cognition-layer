@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–C COMPLETE / WAVE D / D01–D03 CORRECTNESS_VERIFIED / NEXT_READY=D04**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–C COMPLETE / WAVE D / D01–D04 CORRECTNESS_VERIFIED / NEXT_READY=D05**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -278,9 +278,15 @@ content alone never establishes deception. Fourteen targeted checks plus full
 regression; exact statement omission anchors and source-time premise checks
 prevent arbitrary strategy attribution. See `docs/HCL_WAVE_D03.md`.
 
-**D04 — NEXT_READY:** localize and revise misunderstanding through access, local
+**D04 — CORRECTNESS_VERIFIED:** localize and revise misunderstanding through access, local
 meaning, omitted conditions and role expectations; clarification must not rewrite
-the original commitment or automatically restore trust.
+the original commitment or automatically restore trust. Twelve targeted checks
+plus full regression; actual source-rooted interpretation replacement and historical
+meaning checks are exercised. See `docs/HCL_WAVE_D04.md`.
+
+**D05 — NEXT_READY:** three-party cooperation, bounded authorization and joint
+plans under sourced local rules; distinct audiences and third-party reports must
+not become an omniscient group actor.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -441,12 +447,12 @@ defect is.
 
 - Current wave: **Wave D — Social and Strategic Cognition**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: D04_MISUNDERSTANDING_LOCALIZATION_AND_REVISION**
+- **NEXT_READY: D05_MULTIPARTY_JOINT_PLANS_AND_AUTHORITY**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A05/B01–B05/C01–C05/D01–D03 actual provider calls / spend: **0 / USD 0**
+- A01–A05/B01–B05/C01–C05/D01–D04 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **D04**, then continue through the dependency-safe queue
+Work should continue at **D05**, then continue through the dependency-safe queue
 without asking for a new decision after every package.

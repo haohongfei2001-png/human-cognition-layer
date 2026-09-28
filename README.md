@@ -2,7 +2,7 @@
 
 HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息、信念、视角和有来源的心理证据。**基础模型可以直接做好时，直接回答。** 简单提示足够时不调用复杂机制；精确计算采用通用工具；专门认知机制只保留得到增量证据支持的部分。
 
-当前阶段：**HCL Long-Horizon Capability Growth — Wave D**。A01–A05 共享证据、普通语义入口、解释修订和保留能力垂直整合已通过正确性验证；B01 已实现有作用域的高阶信念归因；B02 已实现三人差异化交流/接触视图；B03 已区分人物修订与分析者纠正旧记录；B04 已实现转述来源归组与有界高阶查询；B05 已完成分人物局部更新与概念/责任检查整合，Wave B 正确性构建完成；C01 已实现目标/计划/机会的有来源联结；C02 已实现带前提与反证的竞争行动解释；C03 已区分人物信念下的计划支持与声明模型条件；C04 已实现目标相关评价与有来源的重新评价；C05 已把行动时信念/计划与条件解释联结，后来的信念和评价分开；D01 已区分条件承诺、接收、接受、撤回和履行报告；D02 已区分听到与有限相互确认，并保留意思修订；D03 已实现受证据约束的竞争交流解释；当前唯一 `NEXT_READY` 为 **D04 misunderstanding localization and revision**。POST-CG05 review 和全部历史 evidence disposition 保持原分类；EG01-A 的通用 semantic/native-entry 工作吸收到 Wave A，independent qualification 与 serious efficacy validation 后移到 G-ARCH 之后。唯一实时状态见 [STATUS.md](STATUS.md)，完整长期架构与 41 包路线见 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)，live 队列见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
+当前阶段：**HCL Long-Horizon Capability Growth — Wave D**。A01–A05 共享证据、普通语义入口、解释修订和保留能力垂直整合已通过正确性验证；B01 已实现有作用域的高阶信念归因；B02 已实现三人差异化交流/接触视图；B03 已区分人物修订与分析者纠正旧记录；B04 已实现转述来源归组与有界高阶查询；B05 已完成分人物局部更新与概念/责任检查整合，Wave B 正确性构建完成；C01 已实现目标/计划/机会的有来源联结；C02 已实现带前提与反证的竞争行动解释；C03 已区分人物信念下的计划支持与声明模型条件；C04 已实现目标相关评价与有来源的重新评价；C05 已把行动时信念/计划与条件解释联结，后来的信念和评价分开；D01 已区分条件承诺、接收、接受、撤回和履行报告；D02 已区分听到与有限相互确认，并保留意思修订；D03 已实现受证据约束的竞争交流解释；D04 已联结误解因素和明确的期待修订；当前唯一 `NEXT_READY` 为 **D05 multiparty joint plans and authority**。POST-CG05 review 和全部历史 evidence disposition 保持原分类；EG01-A 的通用 semantic/native-entry 工作吸收到 Wave A，independent qualification 与 serious efficacy validation 后移到 G-ARCH 之后。唯一实时状态见 [STATUS.md](STATUS.md)，完整长期架构与 41 包路线见 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)，live 队列见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
 
 - [普通人物问题与叙事入口](docs/HCL_V1_PERSON_QUESTION.md)：有来源、时间、访问与局部修订边界；单次回答，默认零提取调用。
 - [夜间 source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)：实际能力变化、证据限制、两个 deferred 冻结包。
@@ -151,3 +151,5 @@ authorized by this policy change.
 [D02 有限相互确认](docs/HCL_WAVE_D02.md)：原话、回述、确认及各自接收链分开；后来澄清不会自动更新另一方，也不产生无限共同知识。
 
 [D03 竞争交流解释](docs/HCL_WAVE_D03.md)：假话不自动等于欺骗；信念、知情报告、目标、遗漏与信息需求分别检查，真话也可保留条件性的隐瞒疑点。
+
+[D04 误解因素与解释修订](docs/HCL_WAVE_D04.md)：接收、条件、局部词义和角色期待分别保留；明确的新期待更新解释，但不重写原承诺或自动恢复信任。
