@@ -73,5 +73,8 @@ because of it.
 The source-grounded A-D runtime path is described in
 [docs/HCL_CG02_IMPLEMENTATION.md](docs/HCL_CG02_IMPLEMENTATION.md). It checks
 explicit conditions, source access and reported expectations; its ordinary-text
-grammar is narrow and fails closed. Provider-free certification and the external
-package freeze remain the next steps.
+grammar is narrow and fails closed. Provider-free A-D/CERT is complete on main;
+the [CG-02 external development protocol](docs/HCL_CG02_EXTERNAL_DEVELOPMENT_PROTOCOL.md)
+and [frozen five-arm package](reports/HCL_CG02_EXTERNAL_PACKAGE.json) pass the
+treatment-presence preflight without provider calls. Paid validation awaits the
+owner gate recorded in [STATUS.md](STATUS.md).

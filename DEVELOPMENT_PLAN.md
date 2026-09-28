@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG-02 ACTIVE**
+Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG-02 PROVIDER-FREE COMPLETE / PAID GATE**
 
 This file defines the live development direction for HCL. `STATUS.md` records
 current execution state; this file records the development strategy and the next
@@ -466,6 +466,11 @@ preserve explicit conditions and compare participant expectations.
    regressions.
 6. **CG02-E** — freeze a bounded C/P/G/H/H-new external development package, but
    make no paid call without owner authorization.
+
+Execution state: A-D and CERT are complete on exact-head and merged-main
+provider-free CI; E freezes the four-case five-arm package. The canonical next
+gate is `HCL_CG02_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION`, not a new capability
+direction. See `STATUS.md` for exact receipts and budget status.
 
 ### Hard treatment-presence gate
 

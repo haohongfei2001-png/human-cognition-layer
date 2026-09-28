@@ -62,7 +62,7 @@ CG-01 remains **SIMPLIFY / CLOSED** for ordinary-text use; its deterministic che
 
 ## Active capability-growth work
 
-**CG-02 — ACTIVE / A-D IMPLEMENTED; CERTIFICATION PENDING EXACT-HEAD AND MAIN CI.**
+**CG-02 — PROVIDER-FREE A-D, CERT AND E COMPLETE; PAID VALIDATION GATED.**
 
 Canonical contract: [docs/HCL_CG02_CAPABILITY_CONTRACT.md](docs/HCL_CG02_CAPABILITY_CONTRACT.md).
 
@@ -89,19 +89,31 @@ treatment.
 The A-D implementation adds the explicit v1 social route, source/time/access
 checker, participant expectation comparison and a narrow provider-free
 ordinary-dialogue path. See [implementation and limits](docs/HCL_CG02_IMPLEMENTATION.md).
-Local provider-free checks pass 93 v1 and 176 frozen historical tests. These are
-correctness checks only; exact-head/main CI certification and the E external
-package freeze remain pending. No CG-02 provider call or LongMemEval access
-occurred.
+PR [#121](https://github.com/haohongfei2001-png/human-cognition-layer/pull/121)
+exact head `54bc3e99a4850ba2dabe525020747e730957982d`,
+[run 36399944493](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36399944493),
+and merged main `ec02f8e5b8056dfb28e329afc0c2e834fefee7a8`,
+[run 36400034483](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/36400034483),
+both record 93 v1 + 176 frozen historical = **269 provider-free PASS**,
+the same runtime digest, zero provider calls/spend and LongMemEval sealed.
+The other five exact-main workflow groups also passed. This certifies
+correctness and treatment presence, not external efficacy.
+
+CG02-E freezes [four public HCL-authored development dialogues and all five
+C/P/G/H/H-new inputs](reports/HCL_CG02_EXTERNAL_PACKAGE.json), with
+[protocol and score rule](docs/HCL_CG02_EXTERNAL_DEVELOPMENT_PROTOCOL.md).
+All four H cases passed source, checked-act, checked-expectation, H-state,
+H-new-ablation and final-input-difference gates without provider calls.
+The maximum future experiment would be 20 calls with a proposed USD 0.30 hard
+cap; it has **not** run and its budget is **not** approved.
 
 The current engineering milestone is:
 
-**HCL_CG02_CERT_PROVIDER_FREE_PENDING_CI**
+**HCL_CG02_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION**
 
-No owner action is required for provider-free implementation. Any later paid
-comparison requires a newly frozen package and
-`HCL_CG02_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION`. Historical budgets do not
-transfer.
+Provider-free implementation, certification and package freeze are complete.
+The only remaining CG-02 action is owner authorization of the separately
+proposed paid comparison. Historical budgets do not transfer.
 
 Leaderboard selection remains deferred until the maturity gate in
 `DEVELOPMENT_PLAN.md` is met. Historical CG-01 provider charge remains bounded
