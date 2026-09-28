@@ -32,26 +32,22 @@
       "exposure": "SOURCE_AUDIT_EXPOSED_NOT_PROVIDER_CONSUMED"
     },
     {
-      "id": "necklace-replacement",
+      "id": "necklace-dress-offer",
       "family": "The Necklace",
       "source_line_spans": [
         [
-          8295,
-          8319
-        ],
-        [
-          8428,
-          8445
+          8098,
+          8132
         ]
       ],
-      "excerpt": "us time to turn around.\"\n\nShe wrote as he dictated.\n\n       *       *       *       *       *\n\nAt the end of a week they had lost all hope.\n\nAnd Loisel, looking five years older, declared:\n\n\"We must consider how to replace the necklace.\"\n\nThe next day they took the box which had contained it, and went to the\nplace of the jeweller whose name they found inside. He consulted his\nbooks.\n\n\"It was not I, madame, who sold the necklace; I must simply have\nfurnished the casket.\"\n\nThen they went from jeweller to jeweller, looking for an ornament like\nthe other, consulting their memories, both sick with grief and anguish.\n\nThey found, in a shop at the Palais Royal, a string of diamonds which\nseemed to them exactly what they were looking for. It was worth forty\nthousand francs.[*] They could have it for thirty-six thousand.\n[noncontiguous source span]\n\n\"I returned to you another exactly like it. These ten years we've been\npaying for it. You know it was not easy for us, who had nothing. At last\nit is over, and I am very glad.\"\n\nMadame Forestier was stunned.\n\n\"You say that you bought a diamond necklace to replace mine?\"\n\n\"Yes; you did not notice it, then? They were just alike.\"\n\nAnd she smiled with a proud and naïve pleasure.\n\nMadame Forestier, deeply moved, took both her hands.\n\n\"Oh, my poor Mathilde! Why, my necklace was paste. It was worth five\nhundred francs at most.\"\n",
-      "excerpt_sha256": "01ba663881fc64ac62d86a2820a842f256b82e84dd864ddf2300b1cf67948f02",
-      "candidate": "Mathilde bought an expensive diamond replacement because she already knew the borrowed necklace was paste.",
-      "question": "At the replacement decision, how does the source bear on that candidate explanation?",
-      "target_actor": "Mathilde",
-      "action_phrase": "buy a diamond replacement",
-      "expected_status": "UNRESOLVED",
-      "source_only_audit_basis": "Later revelation strongly challenges prior knowledge; do not claim an explicit first-learning timestamp or unique motive.",
+      "excerpt": "corners of her mouth. He stuttered:\n\n\"What's the matter? What's the matter?\"\n\nBy a violent effort she subdued her feelings and replied in a calm\nvoice, as she wiped her wet cheeks:\n\n\"Nothing. Only I have no dress and consequently I cannot go to this\nball. Give your invitation to some friend whose wife has better clothes\nthan I.\"\n\nHe was in despair, but began again:\n\n\"Let us see, Mathilde. How much would it cost, a suitable dress, which\nyou could wear again on future occasions, something very simple?\"\n\nShe reflected for some seconds, computing the cost, and also wondering\nwhat sum she could ask without bringing down upon herself an immediate\nrefusal and an astonished exclamation from the economical clerk.\n\nAt last she answered hesitatingly:\n\n\"I don't know exactly, but it seems to me that with four hundred francs\nI could manage.\"\n\nHe turned a trifle pale, for he had been saving just that sum to buy a\ngun and treat himself to a little hunting trip the following summer, in\nthe country near Nanterre, with a few friends who went there to shoot\nlarks on Sundays.\n\nHowever, he said:\n\n\"Well, I think I can give you four hundred francs. But see that you have\na pretty dress.\"\n",
+      "excerpt_sha256": "d5f588c6ad5096a072b855528a0200514027639e92e69bec76bf82f83376bf20",
+      "candidate": "Loisel offered four hundred francs to make it possible for Mathilde to buy a dress for the ball.",
+      "question": "At the offer, how do the explicit purpose and available savings bear on that explanation?",
+      "target_actor": "Loisel",
+      "action_phrase": "offer money for a dress",
+      "expected_status": "CONSISTENT_CONDITIONAL",
+      "source_only_audit_basis": "He asks the dress cost, has saved that exact sum, and offers it for a dress; the source does not prove a unique deeper motive.",
       "exposure": "SOURCE_AUDIT_EXPOSED_NOT_PROVIDER_CONSUMED"
     },
     {
@@ -130,6 +126,16 @@
   "usd_hard_cap": 0.75,
   "provider": "DeepSeek API",
   "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "provider_request": {
+    "thinking": {
+      "type": "disabled"
+    },
+    "response_format": {
+      "type": "json_object"
+    },
+    "max_retries": 0
+  },
   "price_peak_usd_per_million": {
     "input_cache_miss": 1.32,
     "output": 3.96

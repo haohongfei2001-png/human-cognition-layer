@@ -41,8 +41,9 @@ class PackagePreflight(unittest.TestCase):
     def test_metered_adapter_ceiling(self):
         package = load_package()
         ledger = BudgetLedger(package)
-        def stub(messages, max_output_tokens):
+        def stub(messages, max_output_tokens, config):
             self.assertEqual(max_output_tokens, 2000)
+            self.assertEqual(config['thinking']['type'], 'disabled')
             return {'model': package['model'], 'raw': '{}',
                     'input_tokens': 10, 'output_tokens': 2, 'cost_usd': 0.00001}
         for _ in range(24):
@@ -70,7 +71,8 @@ class PackagePreflight(unittest.TestCase):
 
     def test_full_runner_with_provider_free_stub(self):
         package = load_package()
-        def stub(messages, max_output_tokens):
+        def stub(messages, max_output_tokens, config):
+            self.assertEqual(config['response_format']['type'], 'json_object')
             extraction = 'Extract only source-anchored conditions' in messages[0]['content']
             raw = ('{"events":[],"candidates":[],"facts":[]}' if extraction else
                    '{"assessment":"UNRESOLVED","reason":"insufficient",'

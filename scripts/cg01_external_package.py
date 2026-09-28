@@ -1,7 +1,7 @@
-"""Provider-free package preflight and injectable CG-01 development runner.
+"""Provider-free preflight and opt-in CG-01 development runner.
 
-No provider SDK, credential lookup, or executable paid CLI lives here. A future
-owner-authorized caller must inject a metered provider adapter explicitly.
+Importing this module never reads credentials or calls a provider. A future
+owner-authorized caller must inject an explicit provider adapter and key.
 """
 from copy import deepcopy
 from dataclasses import replace
@@ -149,6 +149,36 @@ def parse_semantic(raw, model_id, cost_usd, provider_calls=1):
                                raw, model_id, provider_calls, cost_usd)
 
 
+class DeepSeekProvider:
+    """Explicitly constructed adapter; no environment or credential lookup."""
+    def __init__(self, api_key, package=None):
+        if not isinstance(api_key, str) or not api_key:
+            raise ValueError('explicit API key required')
+        from openai import OpenAI
+        self.client = OpenAI(api_key=api_key, base_url='https://api.deepseek.com',
+                             max_retries=0, timeout=120)
+        self.package = package or load_package()
+
+    def __call__(self, messages, max_output_tokens, config):
+        response = self.client.chat.completions.create(
+            model=config['model'], messages=messages, max_tokens=max_output_tokens,
+            response_format=config['response_format'],
+            extra_body={'thinking': config['thinking']})
+        choice = response.choices[0]
+        usage = response.usage
+        if usage is None or not isinstance(choice.message.content, str):
+            raise ValueError('missing provider usage or output')
+        peak = self.package['price_peak_usd_per_million']
+        # Conservative all-cache-miss peak rating; actual bill may be lower.
+        rated = (usage.prompt_tokens * peak['input_cache_miss'] +
+                 usage.completion_tokens * peak['output']) / 1_000_000
+        return {'model': response.model, 'raw': choice.message.content,
+                'input_tokens': usage.prompt_tokens,
+                'output_tokens': usage.completion_tokens,
+                'cost_usd': rated, 'finish_reason': choice.finish_reason,
+                'cost_basis': 'PEAK_ALL_INPUT_CACHE_MISS_UPPER_BOUND'}
+
+
 class BudgetLedger:
     def __init__(self, package):
         self.package = package
@@ -169,11 +199,13 @@ class BudgetLedger:
         if self.cost_usd + reserve > self.package['usd_hard_cap']:
             raise ValueError('USD hard cap exceeded')
         self.calls += 1
-        attempt = {'messages': messages, 'max_output_tokens': self.package['output_tokens_per_call_max']}
+        config = dict(self.package['provider_request'], model=self.package['model'])
+        attempt = {'messages': messages, 'max_output_tokens': self.package['output_tokens_per_call_max'],
+                   'provider_request': config}
         self.attempts.append(attempt)
         try:
-            result = provider(messages, self.package['output_tokens_per_call_max'])
-            if (result['model'] != self.package['model'] or
+            result = provider(messages, self.package['output_tokens_per_call_max'], config)
+            if (result['model'] not in (self.package['model'], self.package['model_version']) or
                 result['input_tokens'] > self.package['input_tokens_per_call_max'] or
                 result['output_tokens'] > self.package['output_tokens_per_call_max'] or
                 result['cost_usd'] < 0 or result['cost_usd'] > reserve or

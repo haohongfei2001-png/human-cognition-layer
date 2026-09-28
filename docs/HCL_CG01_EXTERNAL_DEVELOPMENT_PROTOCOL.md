@@ -21,9 +21,9 @@ each. All four have been read during source audit and are marked
 `SOURCE_AUDIT_EXPOSED_NOT_PROVIDER_CONSUMED`. They must never be described as
 unexposed/fresh. No native benchmark labels or hidden author intentions are used.
 One case has an explicit narrator denial of a required prior-awareness
-condition; one has a directly stated goal and available transaction; two
-challenge tempting prior-knowledge attributions without a source-grounded
-first-learning timestamp. Source-only judgments concern whether each candidate
+condition; two have directly stated purposes and available resources or
+transactions; one challenges a tempting prior-knowledge attribution without a
+source-grounded first-learning timestamp. Source-only judgments concern whether each candidate
 explanation's requirements are supported, contradicted or unresolved. They do
 not claim a single true motive.
 
@@ -64,8 +64,11 @@ establish broad utility.
 
 ## Frozen meter and owner gate
 
-Proposed provider/model: existing DeepSeek API, `deepseek-v4-pro` (DeepSeek
-V4 Pro). Its [published peak rates](https://api-docs.deepseek.com/quick_start/pricing/)
+Proposed provider/model: existing DeepSeek API, `deepseek-v4-pro` (documented
+version `DeepSeek-V4-Pro-0813`). Every request explicitly uses non-thinking
+mode and JSON output with no retry, per the
+[official API contract](https://api-docs.deepseek.com/api/create-chat-completion/).
+Its [published peak rates](https://api-docs.deepseek.com/quick_start/pricing/)
 at package freeze are USD 1.32 per million input cache-miss tokens and USD 3.96
 per million output tokens. The cap is **24 calls total**: 4 preparation calls
 and 20 answers; **16,000 input and 2,000 output tokens per call**. Assuming every
@@ -77,7 +80,10 @@ must be rechecked before any authorized execution; a price or model change
 requires a newly frozen cap, never silent expansion.
 
 The implementation is [provider-injectable](../scripts/cg01_external_package.py):
-there is no provider SDK call, credential lookup, paid CLI or scheduled trigger.
+the DeepSeek adapter requires an explicitly supplied API key, and importing or
+preflighting the package makes no provider call. There is no credential lookup,
+paid CLI or scheduled trigger. The runner records a conservative peak-price,
+all-cache-miss cost upper bound alongside token usage; the invoice can be lower.
 Provider-free tests cover package integrity, arm isolation, H-new ablation,
 metering, scoring and a full 24-call stub run. No provider execution has occurred.
 The next gate after exact-head provider-free CI is
