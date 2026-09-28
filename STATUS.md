@@ -23,7 +23,7 @@ Capability growth is the development main line: **real human-cognition capabilit
 
 Runtime: `hcl/v1`; [inventory](docs/HCL_V1_CAPABILITY_REGISTRY.md); [router/API](docs/HCL_V1_COGNITION_ROUTER.md); [source audit and evaluation design](docs/HCL_V1_INTEGRATED_EVALUATION_PROTOCOL.md); [handoff](reports/HCL_V1_INTEGRATION_FINAL_CLOSURE.md); [runtime receipt](reports/HCL_V1_PROVIDER_FREE_CERTIFICATION.json).
 
-The answer adapter performs one model call; v1 schedules zero extraction calls. Optional typed context requires validated upstream semantic evidence; access metadata is not automatically mined from prose. The deterministic bilingual router has finite vocabulary; injected historical state is caller-managed. This is a working foundation, not external efficacy. The final handoff commit's exact SHA, counts and CI receipt are also emitted by the v1 workflow artifact for that commit, avoiding a self-referential static SHA in this file.
+The answer adapter performs one model call; default v1 schedules zero extraction calls. CG-01 may use one explicitly opted-in semantic-preparation adapter call, recording its input, output and cost separately. Optional typed context requires validated upstream semantic evidence; access metadata is not automatically mined from prose. The deterministic bilingual router has finite vocabulary; injected historical state is caller-managed. This is a working foundation, not external efficacy. The final handoff commit's exact SHA, counts and CI receipt are also emitted by the v1 workflow artifact for that commit, avoiding a self-referential static SHA in this file.
 
 ## Historical capability dispositions
 
@@ -44,17 +44,21 @@ Historical closure reports under `reports/` remain unmodified. No benchmark, pai
 
 The previous `HCL_V1_INTEGRATED_SOURCE_QUALIFICATION` remains a useful **external-validation backlog**, but it is no longer the sole development blocker. The main line now follows [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md).
 
-**CG01-A** — correct v1 routing and explicitly separate READER_ANALYSIS / CHARACTER_PERSPECTIVE / OBSERVER_ABOUT_TARGET.
+**CG01-A — IMPLEMENTED.** Generic `why` / `为什么` no longer activates intention by itself. READER_ANALYSIS / CHARACTER_PERSPECTIVE / OBSERVER_ABOUT_TARGET are explicit in the v1 request, plan and answer context.
 
-**CG01-B** — implement executable knowledge/goal/opportunity condition checking for bounded character-action explanations, with temporal and perspective scope, explicit contradiction and local invalidation.
+**CG01-B — IMPLEMENTED.** The bounded `hcl/v1/cg01.py` checker tests source, action time, perspective availability, explicit knowledge/goal/opportunity conditions, contradiction and local revision. Unknown conditions remain unknown.
 
-**CG01-C** — connect ordinary authorized narrative to the v1 answer path and preserve the actual cognition state supplied to the answer model.
+**CG01-C — IMPLEMENTED_UNVALIDATED.** A conservative ordinary English narrative path prepares finite candidates without caller-entered mental state and preserves actual source, perspective, candidate, condition and final-message content in debug receipts. The grammar is deliberately bounded; unrecognized cases fail closed. See [implementation limits](docs/HCL_CG01_IMPLEMENTATION.md).
+
+**CG01-CERT — local provider-free correctness passed:** 59 v1 tests and 176 selected frozen historical regressions (235 total), with zero provider experiments. Exact PR-head and main CI receipts remain to be recorded before claiming remote certification.
+
+**CG01-D — provider-free package frozen:** four source-audit-exposed cases from two public-domain story families, with C/P/G/H/H-new arms, exact source digest, scorer, masked audit rubric, 24-call maximum and USD 0.75 proposed hard cap. No paid call has been made. See [protocol](docs/HCL_CG01_EXTERNAL_DEVELOPMENT_PROTOCOL.md) and [package](reports/HCL_CG01_EXTERNAL_PACKAGE.json).
 
 After A+B+C and provider-free certification, prepare one bounded C/P/G/H/H-new external development package. Do not make paid calls without separate owner authorization.
 
 The current engineering milestone is:
 
-**HCL_CG01_A_B_IMPLEMENTATION**
+**HCL_CG01_CERT_EXACT_HEAD_CI_PENDING**
 
 No owner action is currently required for provider-free implementation. A budget request becomes appropriate only after a concrete external package is fully frozen, at `HCL_CG01_EXTERNAL_VALIDATION_OWNER_AUTHORIZATION`.
 

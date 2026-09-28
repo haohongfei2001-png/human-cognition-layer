@@ -63,6 +63,10 @@ class CognitionContext:
     uncertainty: list[dict] = field(default_factory=list)
     tool_results: list[ConditionalToolResult] = field(default_factory=list)
     unsupported_inferences: list[str] = field(default_factory=list)
+    perspective_mode: str = 'READER_ANALYSIS'
+    explanations: list[dict] = field(default_factory=list)
+    open_unknown_candidate: dict = field(default_factory=dict)
+    preparation: dict = field(default_factory=dict)
 
     def as_dict(self):
         return asdict(self)
@@ -81,5 +85,9 @@ ANSWER_POLICY = (
     'prove private motives or emotions. Tool results are conditional on supplied '
     'assumptions, not observed/world/private/moral truth; alternative readings '
     'have no automatic winner. Say when evidence is insufficient. Keep internal '
-    'schema/status identifiers out of the final answer unless debugging is requested.'
+    'schema/status identifiers out of the final answer unless debugging is requested. '
+    'An explanation candidate is a possibility, not a true motive. If a required '
+    'knowledge, goal, or opportunity condition is contradicted, weaken that '
+    'candidate only. Missing access evidence is unknown, not proof of ignorance. '
+    'Keep an open unknown explanation when evidence does not settle the action.'
 )

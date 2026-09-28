@@ -1,10 +1,10 @@
 name: HCL v1 Provider-Free Integration
 on:
   pull_request:
-    paths: ['hcl/**', 'tests/test_v1*', '.github/workflows/hcl-v1-provider-free.yml', 'docs/HCL_V1*', 'reports/HCL_V1*', 'README.md', 'STATUS.md']
+    paths: ['hcl/**', 'tests/test_v1*', 'scripts/cg01_external_package.py', '.github/workflows/hcl-v1-provider-free.yml', 'docs/HCL_V1*', 'docs/HCL_CG01*', 'reports/HCL_V1*', 'reports/HCL_CG01*', 'README.md', 'STATUS.md']
   push:
     branches: [main]
-    paths: ['hcl/**', 'tests/test_v1*', '.github/workflows/hcl-v1-provider-free.yml', 'docs/HCL_V1*', 'reports/HCL_V1*', 'README.md', 'STATUS.md']
+    paths: ['hcl/**', 'tests/test_v1*', 'scripts/cg01_external_package.py', '.github/workflows/hcl-v1-provider-free.yml', 'docs/HCL_V1*', 'docs/HCL_CG01*', 'reports/HCL_V1*', 'reports/HCL_CG01*', 'README.md', 'STATUS.md']
 permissions:
   contents: read
 jobs:

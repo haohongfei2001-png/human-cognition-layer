@@ -37,3 +37,11 @@ changes those conditions.
 
 Implementation order and stop rules are canonical in [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md).
 Leaderboard work is deferred until the recorded maturity gate is met.
+
+CG01-A/B/C now have a provider-free implementation: explicit reader/character/
+observer modes, source- and time-scoped explanation conditions, local revision,
+and an ordinary-text path with auditable final cognition context. See
+[implementation and limits](docs/HCL_CG01_IMPLEMENTATION.md). The capability is
+**IMPLEMENTED_UNVALIDATED**; external utility has not been established.
+The four-case [CG-01 external development package](docs/HCL_CG01_EXTERNAL_DEVELOPMENT_PROTOCOL.md)
+is frozen provider-free; paid execution awaits separate owner authorization.

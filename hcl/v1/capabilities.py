@@ -34,8 +34,8 @@ class Capability:
         return asdict(self)
 
 
-def _cap(cid, kind, implementation, evidence, policy, deps=(), cost=CostClass.LOW):
-    status = {CapabilityType.CORE: 'RETAIN', CapabilityType.OPTIONAL: 'SIMPLIFY',
+def _cap(cid, kind, implementation, evidence, policy, deps=(), cost=CostClass.LOW, status_override=None):
+    status = status_override or {CapabilityType.CORE: 'RETAIN', CapabilityType.OPTIONAL: 'SIMPLIFY',
               CapabilityType.TOOL: 'CONDITIONAL_TOOL_ONLY', CapabilityType.INACTIVE: 'FROZEN'}[kind]
     return Capability(cid, kind, status, implementation, evidence, policy, deps, cost)
 
@@ -49,6 +49,7 @@ _ROWS = (
     _cap('uncertainty', CapabilityType.CORE, 'hcl/v06/belief.py', 'FOUNDATION_CORRECTNESS', 'missing system evidence is not character uncertainty', ('evidence',)),
     _cap('perspective', CapabilityType.CORE, 'hcl/v06/runtime.py:HCLV06Runtime', 'FRESH_DEVELOPMENT_C11_P19_G22_D30_OF32_D_ONLY8_G_ONLY0', 'information access/asymmetry/second-order tasks only', ('source_visibility', 'provenance', 'uncertainty')),
     _cap('belief', CapabilityType.CORE, 'hcl/v06/belief.py', 'FRESH_DEVELOPMENT_C11_P19_G22_D30_OF32_D_ONLY8_G_ONLY0', 'knowledge/belief/revision tasks only', ('perspective',)),
+    _cap('cg01_explanation', CapabilityType.CORE, 'hcl/v1/cg01.py', 'PROVIDER_FREE_CORRECTNESS_ONLY', 'bounded action-explanation condition checks only', ('source_visibility', 'provenance', 'uncertainty'), status_override='IMPLEMENTED_UNVALIDATED'),
     _cap('intention', CapabilityType.OPTIONAL, 'hcl/v07/runtime.py', 'SIMPLIFY_NO_SPECIALIZED_UTILITY', 'explicit goal/plan query; source-grounded optional context', ('provenance', 'source_visibility', 'uncertainty')),
     _cap('goal', CapabilityType.OPTIONAL, 'hcl/v07/runtime.py:GoalEstimate', 'SIMPLIFY_NO_SPECIALIZED_UTILITY', 'explicit goals only', ('intention',)),
     _cap('motivation_evidence', CapabilityType.OPTIONAL, 'hcl/v07/runtime.py', 'SIMPLIFY_NO_SPECIALIZED_UTILITY', 'retain attribution as evidence, never invent motive', ('intention',)),
