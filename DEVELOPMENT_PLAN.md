@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG04 / CG05 DEVELOPMENT-ONLY RETAIN / CLOSED; ZERO PENDING; POST-CG05 GAP REVIEW NEXT**
+Status: **CANONICAL CAPABILITY-GROWTH PLAN; CG03/04/05 DEVELOPMENT-ONLY RETAIN / CLOSED; ZERO PENDING; INDEPENDENT GENERALIZATION PREPARATION; NO CG06**
 
 This file defines the live development direction for HCL. `STATUS.md` records
 current execution state; this file records the development strategy and the next
@@ -923,3 +923,11 @@ CG04 serial closure completed source-first as RETAIN_DEVELOPMENT_ONLY (one froze
 CG04 closure exact-main bc51049 certified all six workflow groups. Current serial task: one CG05 run under its independent grant after activation exact-main CI; certified c7593bc runtime and frozen package9ade8288, with new transport infrastructure only. POST-CG05 gap review remains mandatory before new capability/module.
 
 CG05 source-first closure RETAIN_DEVELOPMENT_ONLY (single frozen run36464819798; C21/P23/G21/H28/H-new23 of28), grant0/trigger deletion/workflow disabled. No remaining implemented-unvalidated slots. Current unique task after exact-head/main CI: POST-CG05 CAPABILITY GAP REVIEW against actual dispositions and NI10–14 correctness-only integration, before any new capability contract. No CG06 by version progression, no fresh/independent upgrade, no new budget.
+
+## POST-CG05 evidence decision and unique next work
+
+[Short review](reports/HCL_POST_CG05_CAPABILITY_GAP_REVIEW.md): no clear new mechanism-level human-cognition gap is established by current evidence. No CG06 contract/module is selected. CG03/04/05 RETAIN is synthetic development-only; NI10–14 external utility remains INCONCLUSIVE, although provider-free integration is implemented. v0.6 remains the sole bounded independent-source historical development signal among these assets. Neither schemas/tests nor three authored comparison packs satisfy maturity.
+
+Proceed with **EG01-A_SOURCE_FIRST_NATIVE_SEMANTIC_PREPARATION_AND_TREATMENT_QUALIFICATION_OF_RETAINED_CAPABILITIES**: unchanged independent source/native task, source-first semantic qualification, generic ordinary task/actor/time/access preparation, actual treatment receipts, fair C/P/G/H and mechanism-only H-new if a specific incremental component is assessed. Never supply manual correct psychological states, count narrator reports as self reports, rewrite questions to HCL labels, or privilege H over G. The initial bounded zero-provider audit of the already exposed DREAM families is0/8 native specialized treatment; no package qualifies for payment. This diagnoses an entrypoint scope limit, not a demonstrated base-model cognition failure; do not automatically promote it to a new capability family. No repeated source hunt/score-driven selection. Work on concrete generic preparation and source applicability, preserving base-model-first behavior.
+
+Before any later paid validation, freeze only after native task semantic validity and actual treatment presence/fairness pass. Externally authored public data may be independent without being fresh; track exposure honestly. Previous BigToM hidden-generator-label concerns and DREAM composition/license limits remain valid. Do not rerun consumed families or access LongMemEval. All new paid work requires a separate later authorization; the two USD0.30 grants are now zero and cannot transfer. Leaderboard remains behind section9 maturity gate.
