@@ -19,6 +19,14 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [ACL v8 developer-blind semantic diagnostic](reports/HCL_I02_ACL_CPG_V8_DEVELOPER_REVIEW/CLOSURE.md)
+has now reviewed all three frozen C/P/G-final outputs by opaque ID before
+unblinding: C 6/8, P 7/8, G-final 8/8 on four prespecified source obligations.
+The same implementer performed the review, and the rubric does not exhaust
+all unsupported claims. This is **development diagnostic evidence only**;
+strong comparator semantic qualification remains `INCONCLUSIVE`, with no H
+answer or efficacy evidence. No additional provider call or spend occurred.
+
 The [exact-commit repository exposure screen](docs/HCL_I02_REPOSITORY_EXPOSURE_SNAPSHOT.md)
 now checks a proposed source against tracked UTF-8 text before the existing
 source-first gates. On remote main `7758180cb29b65ad1b925ecad801a4b6fc8d07f0`,

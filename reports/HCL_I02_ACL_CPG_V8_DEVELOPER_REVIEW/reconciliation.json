@@ -1,0 +1,40 @@
+{
+  "case_id": "acl-ethics-abstract-3-development",
+  "packet_sha256": "381aa2422f4a96afffa2b748f788461b0cd386f72eaf798b2039a4c7814ac19d",
+  "schema": "hcl-i02-blind-review-reconciliation-v1",
+  "scores_by_phase": {
+    "C": {
+      "case_id": "acl-ethics-abstract-3-development",
+      "critical_failures": [],
+      "earned": 6,
+      "eligible": true,
+      "opaque_output_id": "output-45e0c981edd552db3fa84e3492068776",
+      "possible": 8,
+      "rubric_sha256": "61fdb600c2047a090020e59e12c82b0f28472ee6f9483177f1939c2bbac7a3d6",
+      "semantic_fraction": 0.75,
+      "unresolved_credit": 0
+    },
+    "G_final": {
+      "case_id": "acl-ethics-abstract-3-development",
+      "critical_failures": [],
+      "earned": 8,
+      "eligible": true,
+      "opaque_output_id": "output-e5ffb6d096396b3d3e8a0860538edf19",
+      "possible": 8,
+      "rubric_sha256": "61fdb600c2047a090020e59e12c82b0f28472ee6f9483177f1939c2bbac7a3d6",
+      "semantic_fraction": 1.0,
+      "unresolved_credit": 0
+    },
+    "P": {
+      "case_id": "acl-ethics-abstract-3-development",
+      "critical_failures": [],
+      "earned": 7,
+      "eligible": true,
+      "opaque_output_id": "output-d2a3d1699888647c7199a605dda41bab",
+      "possible": 8,
+      "rubric_sha256": "61fdb600c2047a090020e59e12c82b0f28472ee6f9483177f1939c2bbac7a3d6",
+      "semantic_fraction": 0.875,
+      "unresolved_credit": 0
+    }
+  }
+}
