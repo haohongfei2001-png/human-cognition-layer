@@ -126,14 +126,21 @@ def _anchor(source, proposal):
     if not isinstance(quote, str) or not quote or len(quote) > 4000:
         raise ValueError('missing_or_oversize_quote')
     start = proposal.get('start')
-    if start is None:
-        positions = [m.start() for m in re.finditer(re.escape(quote), source.text)]
-        if len(positions) != 1:
-            raise ValueError('missing_or_ambiguous_quote')
-        start = positions[0]
-    if type(start) is not int or start < 0 or source.text[start:start + len(quote)] != quote:
+    if start is not None and (type(start) is not int or start < 0):
         raise ValueError('quote_offset_mismatch')
-    return start, start + len(quote)
+    if start is not None and source.text[start:start + len(quote)] == quote:
+        return start, start + len(quote), quote, None
+    # The source, never the model, supplies the definitive offset. Correct an
+    # erroneous supplied position only when the *entire* quote is unique and
+    # exact. Duplicate quotations remain ambiguous without a valid offset.
+    positions = [m.start() for m in re.finditer(re.escape(quote), source.text)]
+    if len(positions) != 1:
+        raise ValueError('missing_or_ambiguous_quote' if start is None else 'quote_offset_mismatch')
+    derived = positions[0]
+    normalization = (dict(submitted_start=start, derived_start=derived,
+        rule='UNIQUE_EXACT_SOURCE_QUOTE_OVERRIDES_SUPPLIED_OFFSET')
+        if start is not None else None)
+    return derived, derived + len(quote), quote, normalization
 
 
 def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, max_candidates=64):
@@ -191,7 +198,8 @@ def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, ma
                 or not isinstance(proposal.get('content'), dict)):
             raise ValueError('invalid_candidate_structure_or_source')
         source = by_id[proposal['source_id']]
-        start, end = _anchor(source, proposal)
+        start, end, source_quote, anchor_normalization = _anchor(source, proposal)
+        proposal = dict(proposal, quote=source_quote, start=start)
         json.dumps(proposal['content'], allow_nan=False)
         submitted = None
         if proposal['kind'] == 'event' and set(proposal['content']) == {'speaker_surface', 'utterance'}:
@@ -203,8 +211,8 @@ def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, ma
                 proposal = dict(proposal, content=literal[0]['content'])
         verified = any(p['kind'] == proposal['kind'] and p['content'] == proposal['content']
             and p['start'] == start and p['quote'] == proposal['quote'] for p in canonical[source.source_id])
-        validated.append((source, proposal, start, end, verified, submitted))
-    for source, proposal, start, end, verified, submitted in validated:
+        validated.append((source, proposal, start, end, verified, submitted, anchor_normalization))
+    for source, proposal, start, end, verified, submitted, anchor_normalization in validated:
         span = core.add_span(source.text, source_id=source.source_id, version=source.version,
             start=start, end=end, order=source.order, permitted_observers=source.permitted_observers,
             event_time=source.event_time, access_time=source.access_time, record_time=source.record_time)
@@ -217,6 +225,8 @@ def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, ma
         if submitted is not None:
             content['source_derived_event_envelope'] = dict(submitted_content=submitted,
                 normalization='EXACT_LITERAL_SPEAKER_UTTERANCE_WITH_SOURCE_METADATA')
+        if anchor_normalization is not None:
+            content['source_derived_anchor'] = anchor_normalization
         claim = core.claim(scope, ClaimKind.SYSTEM_INTERPRETATION, content)
         support_roots = [root]
         if verified and proposal['kind'] == 'relation':
@@ -236,7 +246,8 @@ def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, ma
             unknown_conditions=(() if verified else ('semantic_support_requires_review',)))
         ids.append(claim)
         roots.append(root)
-        diagnostics.append(dict(claim_id=claim, **content['validation']))
+        diagnostics.append(dict(claim_id=claim, **content['validation'],
+            source_derived_anchor=anchor_normalization))
         final.append(dict(claim_id=claim, **content, source_quote=proposal['quote']))
     messages = [dict(role='system', content=_POLICY + ' BOUNDED_LITERAL_FORM confirms syntax and '
         'speaker binding only; no sincerity, private belief, knowledge, world truth or event chronology '
