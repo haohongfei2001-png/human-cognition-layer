@@ -13,6 +13,7 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 - [I02 通用 G 工作区 v5](docs/HCL_I02_GENERIC_WORKSPACE_V5.md)：补上有版本的引文记忆、暂定证据关系和回答步骤；不改变 C/P 或历史运行，仍待真实模型语义校准。
 - [I02 EPC C/P/G v5 一次性开发校准收口](reports/HCL_I02_EPC_CPG_V5_CLOSURE.md)：3 次调用、零重试；G-map 达到冻结输出上限并截断，G-final 未运行，G 语义未合格。原始回执已保存，授权关闭；H 未运行，不计独立确认。
 - [I02 G v6 紧凑通用比较器](docs/HCL_I02_GENERIC_WORKSPACE_V6.md)：对 G 的来源索引与中间输出加上可执行界限；保留完整原文与 C/P 输入。后续 KPU 开发运行的 G-map 引文超过冻结单行长度，G-final 未调用，语义仍未合格。
+- [I02 G v7 通用证据工作区](docs/HCL_I02_GENERIC_WORKSPACE_V7.md)：在整体输出界限和逐条准确来源校验下容纳较长完整引文，保留 C/P、公平普通输入及历史 v6 结论；仅 provider-free，尚无新模型语义证据。
 - [I02 KPU C/P/G v6 开发校准收口](reports/HCL_I02_KPU_CPG_V6_CLOSURE.md)：独立作者 CC BY 案例的一次性运行用去 C/P/G-map 三次调用；G 引文真实但全部超过冻结单行长度，G-final 未调用，P 引文格式也未过 scorer。原始回执已保存，授权与 trigger 关闭；案例只作开发证据，不作独立确认或 HCL 效力证据。
 - [I02 来源权利与隐私筛查 v3](docs/HCL_I02_RIGHTS_PRIVACY_SOURCE_SCREEN_V3.md)：两个已暴露来源系统被明确拒绝，新增独立于历史冻结包的 URL、许可与隐私门禁；没有合格确认案例或新调用。
 - [I02 开放教材有界筛查](docs/HCL_I02_OER_BOUNDED_SCREEN.md)：SQuALITY、TRU/Rebus 与 Ethics Bowl 案例的具体许可、任务适配和已读暴露分别记录，尚无合格独立样本。

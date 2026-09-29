@@ -56,6 +56,14 @@ checks. It preserves C/P and the full source. Its later KPU development
 G-map call failed the frozen per-quote length bound, so its model semantics
 remain unqualified; G-final made no call.
 
+A separately versioned [G v7 generic workspace](docs/HCL_I02_GENERIC_WORKSPACE_V7.md)
+now accepts exact full-sentence source spans under the same 3,500-byte total
+map budget and inherited 1,500-character exact-quote safety bound. It keeps
+C/P and complete ordinary source input unchanged, and preserves revision,
+negative-inference and historical v6 checks. Provider-free construction only:
+0 v7 model calls, no G semantic qualification or HCL efficacy claim. Continue
+I02 unexposed source qualification; do not reuse the consumed KPU item.
+
 A bounded [rights/privacy source screen](docs/HCL_I02_RIGHTS_PRIVACY_SOURCE_SCREEN_V3.md)
 rejects the OpenStax *Organizational Behavior* book because its publisher
 restricts LLM ingestion, and an Open Oregon refugee-family activity because

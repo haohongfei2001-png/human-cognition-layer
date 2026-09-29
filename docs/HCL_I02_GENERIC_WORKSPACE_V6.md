@@ -4,8 +4,8 @@ Historical construction note: the later [KPU source-first closure](../reports/HC
 records one G-map provider call with exact but overlong quotations. The frozen
 v6 run was closed without a G-final call or semantic qualification.
 
-**Status: provider-free candidate / model semantics unqualified / zero new
-provider calls.** The consumed EPC v5 run failed because the G-map model used
+**Historical construction status: provider-free candidate / model semantics
+unqualified / zero v6 calls at this construction point.** The consumed EPC v5 run failed because the G-map model used
 all 1,024 frozen output tokens for 16 quoted rows and stopped mid-JSON. That
 run and its grant remain closed. This separately versioned candidate addresses
 only the generic comparator's map interface; it does not modify HCL runtime or
@@ -21,8 +21,8 @@ rejects extra/oracle fields, duplicate keys, bad endpoints, invented quotes
 and unsupported operations. Failed replacement maps erase prior accepted
 state. Source revisions invalidate the map and its dependent links before a
 final answer. G-final retains the complete original source and the same four
-answer fields as C/P. Two G calls would be charged if this candidate were
-later executed; no call was made here.
+answer fields as C/P. The later KPU v6 calibration charged one G-map call;
+the rejected map prevented G-final, as the closure records.
 
 The limits are chosen to make a normal eight-span map fit the old output scale,
 but provider-free tests cannot prove a model will comply or that eight spans
