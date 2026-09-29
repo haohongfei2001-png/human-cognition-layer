@@ -4,6 +4,7 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 
 当前阶段：**Serious Independent Evaluation，I02 来源及比较臂资格审查**。Waves A–H 完成 provider-free 正确性构建；G-ARCH 经一次有界真实普通输入运行，通过架构与入口准备门槛，原始回执及限制见 [source-first closure](reports/HCL_G_ARCH_ENTRY_CLOSURE.md) 和 [gate](docs/HCL_G_ARCH_GATE.md)。I02 的[普通叙事信息状态 v2 接入](docs/HCL_I02_INFORMATION_STATE_V2_REPAIR.md)已在公开校准案例上通过无 provider 的 H/H-new treatment-presence 和公平性检查；早期 C/P/G 校准曾因 G-map 格式失败，后续 ACL v8 开发运行通过接口但语义资格仍未确立。这尚未证明独立泛化或强模型增益。当前按 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md) 和 [I01 evaluation contract](docs/HCL_I01_EVALUATION_CONTRACT.md) 做独立来源与公平比较资格审查。LongMemEval 保持封存，leaderboard 尚未启动。
 
+- [I02 匿名评审 v2 交接](docs/HCL_I02_BLIND_REVIEW_V2.md)：揭盲前强制完整剩余断言审查；真实 ACL 回执完成无 provider 流程验证，尚无独立语义评审。
 - [I02 剩余断言审查补充](docs/HCL_I02_RESIDUAL_CLAIM_AUDIT.md)：可审计预设义务外的无依据严重断言；仅评估接口改进，不提升历史分数或独立证据。
 - [I02 ACL C/P/G v8 一次性开发校准结案](reports/HCL_I02_ACL_ETHICS_CPG_V8_CLOSURE.md)：四次原生推理调用与精确引文接口通过，零重试，估算 USD 0.02662506／峰时 USD 0.05325012；合成开发来源不能证明独立泛化或 HCL 增益，盲式语义比较尚未合格，授权已关闭。
 - [I02 ACL v8 开发者匿名语义审查](reports/HCL_I02_ACL_CPG_V8_DEVELOPER_REVIEW/CLOSURE.md)：冻结四项来源优先义务下，C/P/G-final 分别为 6/8、7/8、8/8；审查者也是实现者，不能视为独立盲评或跨任务比较臂资格。
