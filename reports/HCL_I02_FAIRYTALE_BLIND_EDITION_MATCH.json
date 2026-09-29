@@ -1,0 +1,18 @@
+{
+  "book_normalized_words": 74685,
+  "confirmation_qualified": false,
+  "exact_normalized_contiguous_match": true,
+  "gutenberg_edition_sha256": "a17eec00fcaaba3d8e3496945486a3be8a984cbb694d4f6db0f4616e782af115",
+  "gutenberg_edition_url": "https://www.gutenberg.org/cache/epub/4018/pg4018.txt",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "provider_calls": 0,
+  "publisher_story_git_blob": "ad5754d177a8e85ff9800896d8c7f592d32fe883",
+  "publisher_story_sha256": "d4c92d2c038bae6ff535e051cad53d9ee4092bb49e3ecdd2a13ef6c5bb961891",
+  "publisher_story_url": "https://raw.githubusercontent.com/uci-soe/FairytaleQAData/a24ddc17364666b7c13a425b9970c87368b03417/data-by-origin/section-stories/japanese-fairybook/bamboo-cutter-moon-child-story.csv",
+  "questions_or_answers_read": false,
+  "schema": "hcl-i02-fairytale-blind-edition-match-v1",
+  "source_content_handling": "PROCESSED_IN_MEMORY_ONLY_NOT_DISPLAYED_OR_COMMITTED",
+  "story_normalized_words": 5800,
+  "story_sections": 43,
+  "story_text_returned": false
+}
