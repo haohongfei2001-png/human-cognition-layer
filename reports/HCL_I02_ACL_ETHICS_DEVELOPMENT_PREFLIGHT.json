@@ -1,0 +1,22 @@
+{
+  "cpg_model_semantics_qualified": false,
+  "full_ordinary_input_equal_for_cpg": true,
+  "g_final_original_source_present": true,
+  "h_direct": true,
+  "h_hnew_calls_allowed": false,
+  "h_runtime_sha256": "7ff7c52e114f1060c798bd23a1eca8b76cc6c7919419b90dd4b4e060aa21d267",
+  "h_selected_capabilities": [],
+  "h_specialized_treatment_present": false,
+  "independent_confirmation_qualified": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "obligations_file_sha256": "e3fba8d5688a4408aeca389e47fcdc1b54957c8aac371e46e58288ca16063b8d",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "question_sha256": "653992830b23fef2fea55039e493885aa1059b95b707e5e84946612e8477ce51",
+  "rights_verified_for_development": true,
+  "schema": "hcl-i02-acl-ethics-development-preflight-v1",
+  "source_file_sha256": "09a501f1ecf50f31e96659b6fa22637d14ce2ce3e7cf12b400820c9574e45a50",
+  "source_first_obligation_count": 4,
+  "source_sha256": "127cf23ee554c575b5c35c94c4d5468f5f1abae14d7cb15195f31ca22e602bc1",
+  "source_valid": true
+}
