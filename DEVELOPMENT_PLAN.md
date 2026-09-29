@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01–H05 CORRECTNESS_VERIFIED / G-ARCH STRUCTURALLY_READY / LIVE ENTRY NEXT_READY**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01–H05 CORRECTNESS_VERIFIED / G-ARCH PASS_ARCHITECTURE_READY_FOR_SERIOUS_EVALUATION / I01 NEXT_READY**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -346,9 +346,9 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **H05 — CORRECTNESS_VERIFIED:** one difficult question now selects a source-local B03/C03/D04/E05/F03/H04 chain and F05 cross-chapter reported conflict, preserving unresolved cross-source identity and record-time revision. A simple narrator question selects H01 direct lookup. Eight targeted tests, 100-event pressure case, ordinary witness and exact final input; see `docs/HCL_WAVE_H05.md`.
 
-**G-ARCH — STRUCTURALLY_READY / OPERATIONAL_INPUT_UNVERIFIED:** the post-H05 matrix is in `docs/HCL_G_ARCH_PRELIM_ASSESSMENT.md`. Unique exact source quotes now correct bad supplied offsets with a recorded source-derived span; provider-free replay of the closed E03 raw response reaches the final-input path. E03 remains failed. A fresh one-shot DeepSeek Flash operational smoke is frozen with two calls maximum, zero retries and a USD 0.04 hard cap; no trigger exists yet.
+**G-ARCH — PASS_ARCHITECTURE_READY_FOR_SERIOUS_EVALUATION:** the one-shot live entry at main `5f14b829ee6247389bc326eb14736342723de2d0` completed two DeepSeek Flash calls, with six exact unique source quotations, five bounded offset repairs and checked state in the actual final input. Source-first closure, raw requests/responses, usage, cost estimate, hashes and limitations are in `reports/HCL_G_ARCH_ENTRY_CLOSURE.md`; the seven-criterion decision is in `docs/HCL_G_ARCH_GATE.md`. This is an authored functional smoke, not independent efficacy. The USD 0.04 grant is closed, E03 remains failed/closed, and no second trigger is authorized.
 
-**G-ARCH live entry — NEXT_READY:** certify this repair/package on exact main, merge the sole trigger, review raw extraction/final receipt source-first, then decide the operational gate. The trigger is a one-time main change, not a request to reuse E03 authorization. Only a successful real ordinary extraction and final call can satisfy this requirement; subsequent serious independent evaluation remains post-G-ARCH.
+**I01 — NEXT_READY:** freeze the architecture surface and serious evaluation question before independent source qualification or confirmation results. The freeze must specify ordinary-input tasks, source/actor/time/access boundaries, fair strong C/P/G/H and attribution comparisons, full cost and refusal accounting, the independence split, and stop/simplify criteria. The main line is now Serious Independent Evaluation; no new capability module or leaderboard optimization is opened by this gate.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -507,14 +507,15 @@ defect is.
 
 ## 13. Current execution fact
 
-- Current wave: **Wave H — Hard Human Cognition Integration**
+- Current wave: **I — Serious Independent Evaluation**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: G_ARCH_ONE_SHOT_LIVE_ENTRY_CONFIRMATION**
+- **NEXT_READY: I01_ARCHITECTURE_AND_EVALUATION_QUESTION_FREEZE**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
-- Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
+- G-ARCH one-shot: **2 extraction/final calls, 0 retries, peak-rated USD 0.00159300, conservative guard USD 0.00590436 / USD 0.04 cap; CLOSED / NO RERUN**. [Receipt/closure](reports/HCL_G_ARCH_ENTRY_CLOSURE.md).
+- Independent qualification active: **I01 FREEZE NEXT; NO CONFIRMATION RESULT INSPECTED**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **G-ARCH live entry confirmation**, then continue through the dependency-safe queue
+Work should continue at **I01 evaluation freeze**, then continue through the dependency-safe queue
 without asking for a new decision after every package.

@@ -1,0 +1,117 @@
+{
+  "schema": "hcl-g-arch-entry-source-first-audit-v1",
+  "run_id": "36551001816",
+  "sha": "5f14b829ee6247389bc326eb14736342723de2d0",
+  "artifact_id": 11024906326,
+  "artifact_digest": "sha256:6e241b96f9466aeb0cd0d9b00f1d394ceaee44c09ff45b61fe9aac682855cc42",
+  "package_sha256": "7a39e6d56f36c859da89d915c49f8f36a97f09bebef076b03cc56b844c551530",
+  "runtime_sha256": "a5ebfa38b47c5d2afb713e7a805dcf44955872474628891bc414eed931b2ee1a",
+  "raw_receipt_sha256": "018a53aec80501f216e07f8bf0c78d69a4037e40c1402044f199744e6381a6f4",
+  "provider_free_preflight_sha256": "210926757ff2299c836f8c12019ba52e2f3e3d776483bdbf540f4ef44642633f",
+  "frozen_package_file_sha256": "c1ea9afdd4b38088056e19a50dfba2824ebd33985a0c0e6a8c4af6b45706bd40",
+  "raw_extraction_anchors": [
+    {
+      "source_id": "authored-ordinary-entry-functional",
+      "original_quote": "Mira said, \"In team, I see myself as careful.\"",
+      "submitted_start": 0,
+      "derived_start": 0,
+      "exact_unique": true,
+      "semantic_support": "BOUNDED_LITERAL_FORM"
+    },
+    {
+      "source_id": "authored-ordinary-entry-functional",
+      "original_quote": "Noor said, \"In team, I see Mira as careless.\"",
+      "submitted_start": 45,
+      "derived_start": 47,
+      "exact_unique": true,
+      "semantic_support": "BOUNDED_LITERAL_FORM"
+    },
+    {
+      "source_id": "authored-ordinary-entry-functional",
+      "original_quote": "Narrator: In team, Mira serves as reviewer.",
+      "submitted_start": 92,
+      "derived_start": 93,
+      "exact_unique": true,
+      "semantic_support": "BOUNDED_LITERAL_FORM"
+    },
+    {
+      "source_id": "authored-ordinary-entry-functional",
+      "original_quote": "Narrator: In team, a reviewer is required to check every patch.",
+      "submitted_start": 141,
+      "derived_start": 137,
+      "exact_unique": true,
+      "semantic_support": "BOUNDED_LITERAL_FORM"
+    },
+    {
+      "source_id": "authored-ordinary-entry-functional",
+      "original_quote": "Narrator: In team, Mira did not check every patch.",
+      "submitted_start": 207,
+      "derived_start": 201,
+      "exact_unique": true,
+      "semantic_support": "BOUNDED_LITERAL_FORM"
+    },
+    {
+      "source_id": "authored-ordinary-entry-functional",
+      "original_quote": "Mira said, \"In team, I reject the requirement for a reviewer to check every patch.\"",
+      "submitted_start": 261,
+      "derived_start": 252,
+      "exact_unique": true,
+      "semantic_support": "BOUNDED_LITERAL_FORM"
+    }
+  ],
+  "source_derived_offset_repairs": 5,
+  "final_model_input_equals_prepared_state": true,
+  "grounded_role_status": "REPORTED_OCCUPANT",
+  "final_output_fields": [
+    "others_attribution",
+    "personal_endorsement",
+    "reported_behavior",
+    "role_occupancy",
+    "role_requirement",
+    "self_description",
+    "unresolved"
+  ],
+  "model_ids": [
+    "deepseek-flash",
+    "deepseek-flash"
+  ],
+  "usages": [
+    {
+      "completion_tokens": 532,
+      "prompt_tokens": 429,
+      "total_tokens": 961,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 256
+      },
+      "prompt_cache_hit_tokens": 256,
+      "prompt_cache_miss_tokens": 173
+    },
+    {
+      "completion_tokens": 305,
+      "prompt_tokens": 1533,
+      "total_tokens": 1838,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      },
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 1533
+    }
+  ],
+  "provider_calls": 2,
+  "retries": 0,
+  "rated_peak_cost_usd": 0.0015929999999999998,
+  "estimated_provider_cost_usd": 0.001517736,
+  "conservative_guard_cost_usd": 0.00590436,
+  "actual_invoice_cost_usd": null,
+  "cap_usd": 0.04,
+  "authorization_remaining_usd": 0,
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RERUN",
+  "operational_input": "PASS_BOUNDED_AUTHORED_FUNCTIONAL_SMOKE",
+  "independent_efficacy": "UNTESTED",
+  "historical_e03": "FAILED_CLOSED_UNCHANGED",
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

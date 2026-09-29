@@ -1,24 +1,24 @@
-"""G-ARCH entry repair and one-shot package stay provider-free in CI."""
+"""The completed G-ARCH entry receipt stays auditable without reopening its freeze."""
 import json
 import unittest
 
-from scripts.run_g_arch_entry_once import build_package, load_package, preflight
+from pathlib import Path
+
+from scripts.audit_g_arch_entry import audit
 
 
 class GArchEntryTests(unittest.TestCase):
-    def test_package_preflight_replays_actual_failed_response_without_call(self):
-        package = load_package()
-        receipt = preflight(package)
-        self.assertEqual(receipt['status'], 'PASS_PROVIDER_FREE')
-        self.assertEqual(receipt['provider_calls'], 0)
-        self.assertEqual(len(receipt['safe_unique_source_offset_repairs']), 5)
-        self.assertEqual(receipt['live_entry'], 'NOT_YET_VERIFIED')
-        self.assertEqual(receipt['historical_run'], 'FAILED_CLOSED_NO_NEW_CALL')
-        self.assertEqual(receipt['historical_actual_response_replay']['cognition_state']['role_status'],
-            'REPORTED_OCCUPANT')
+    def test_source_first_receipt_is_closed_and_anchored(self):
+        receipt = audit()
+        self.assertEqual(receipt['operational_input'], 'PASS_BOUNDED_AUTHORED_FUNCTIONAL_SMOKE')
+        self.assertEqual(receipt['source_derived_offset_repairs'], 5)
+        self.assertEqual(len(receipt['raw_extraction_anchors']), 6)
+        self.assertTrue(receipt['final_model_input_equals_prepared_state'])
+        self.assertEqual(receipt['historical_e03'], 'FAILED_CLOSED_UNCHANGED')
+        self.assertEqual(receipt['authorization_remaining_usd'], 0)
 
     def test_bound_budget_and_closed_old_grant(self):
-        package = build_package()
+        package = json.loads(Path('reports/HCL_G_ARCH_ENTRY_PACKAGE.json').read_text())
         self.assertEqual(package['maximum_provider_calls'], 2)
         self.assertEqual(package['budget_cap_usd'], 0.04)
         self.assertEqual(package['provider_request']['max_retries'], 0)
