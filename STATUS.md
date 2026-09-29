@@ -19,6 +19,13 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [FairytaleQA annotation evidence check](docs/HCL_I02_FAIRYTALE_ANNOTATION_RIGHTS.md)
+pins the selected publisher commit's expert-authorship statements and root
+Apache 2.0 license by SHA256/Git blob. This narrows the question provenance
+gap but does not verify provider processing geography, item semantics or
+long-character task fit. The case remains **NOT MODEL INPUT ALLOWED / NOT
+CONFIRMATION QUALIFIED**; no story, question or answer text was exposed.
+
 The [I02 lineage v2 guard](docs/HCL_I02_SOURCE_LINEAGE.md) now rejects
 declared confirmation author/template/writing systems matching five
 historically exposed systems (CogToM, SOTOPIA-Hard, FANToM, Hi-ToM, SAGA),

@@ -13,6 +13,7 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 - [I02 FairytaleQA 元数据候选](docs/HCL_I02_FAIRYTALE_METADATA_CANDIDATE.md)：按固定目录规则锁定一条较长外部故事及专家问题；后续已做盲式版本及题型标签核对，正文、题目和答案文本均未展示，不可送模型。
 - [I02 盲式版本核对](docs/HCL_I02_FAIRYTALE_BLIND_PROVENANCE.md)：已证明候选故事全文标准化后连续匹配固定 Gutenberg 版本；只输出哈希和统计，没有展示正文或查看问题答案，案例仍未合格。
 - [I02 FairytaleQA 题型元数据核对](docs/HCL_I02_FAIRYTALE_QUESTION_TAG_AUDIT.md)：固定题目文件仅统计出版社标签；61 题中 6 题为总览，且没有总览人物／感受标签。长篇人物发展任务适配尚未证明，未查看题目或答案文本，案例仍不合格。
+- [I02 FairytaleQA 标注来源与许可边界](docs/HCL_I02_FAIRYTALE_ANNOTATION_RIGHTS.md)：固定作者仓库对专家标注和根目录 Apache 2.0 许可的原始证据；provider 处理地点、题目语义及任务适配仍未核实，不开放模型输入。
 - [夜间 source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)：实际能力变化、证据限制、两个 deferred 冻结包。
 - [可执行 capability registry](docs/HCL_V1_CAPABILITY_REGISTRY.md)：核心、可选结构、通用工具、停用研究资产。
 - [Router / context / answer API](docs/HCL_V1_COGNITION_ROUTER.md)：确定性最小路由、有访问和时间边界的上下文、单次底座模型调用。
