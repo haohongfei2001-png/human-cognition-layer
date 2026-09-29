@@ -1,0 +1,7 @@
+ONE_USE_CPG_V8_DEVELOPMENT_CALIBRATION
+base_main_sha=3f2b021ecf646e3a6bb1e6b1184fbfbe888872f0
+package_sha256=53d24a6c53ce7677fa44bdd938d74a942af32cb63683520d3d1e217c8b475d52
+provider=deepseek
+maximum_calls=4
+hard_cap_usd=0.24
+no_retry=true
