@@ -113,6 +113,16 @@ class GenericWorkspaceV5Tests(unittest.TestCase):
         self.assertTrue(all(row['source_version'] == 2
                             for row in state['source_index']))
 
+    def test_failed_replacement_map_cannot_reuse_previous_valid_state(self):
+        workspace = GenericEvidenceWorkspace(self.prepared['ordinary_payload'])
+        workspace.ingest(json.dumps(MAP))
+        with self.assertRaisesRegex(ValueError, 'absent or ambiguous'):
+            invalid = json.loads(json.dumps(MAP))
+            invalid['source_index'][0]['quote'] = 'Unsupported replacement.'
+            workspace.ingest(json.dumps(invalid))
+        with self.assertRaisesRegex(ValueError, 'absent or stale'):
+            workspace.snapshot()
+
 
 if __name__ == '__main__':
     unittest.main()

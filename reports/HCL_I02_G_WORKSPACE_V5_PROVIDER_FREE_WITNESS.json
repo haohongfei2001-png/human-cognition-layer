@@ -1,6 +1,6 @@
 {
   "schema": "hcl-i02-generic-workspace-v5-provider-free-witness",
-  "script_sha256": "422be7ed5c61933ed103c48da3e0a49ed22a7ed858eaa2e79558319882eacf88",
+  "script_sha256": "e6719bb57cd4738bb6af578cc38aaeee31579b99933ebc8691ef08fbe70c87d6",
   "source_id": "synthetic-source",
   "source_sha256": "79d30b87d660a86fde90ad95b99af55077bbf1b35202c5e3b316b77d703c88b8",
   "question": "What did Mira know when she chose the road?",

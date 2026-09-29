@@ -88,6 +88,10 @@ class GenericEvidenceWorkspace:
             self._mapped_versions = None
 
     def ingest(self, raw_map):
+        # A failed replacement map must not leave a previously accepted map
+        # available to a later final-answer call on this workspace instance.
+        self._map = None
+        self._mapped_versions = None
         if not isinstance(raw_map, str) or not 2 <= len(raw_map) <= 60000:
             raise ValueError('bounded generic map response required')
         try:
