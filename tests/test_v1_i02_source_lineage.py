@@ -86,7 +86,8 @@ class SourceLineageTests(unittest.TestCase):
              'squality-gutenberg-63833-catalog-summary',
              'tru-social-contract-development-screen',
              'ethics-bowl-canada-harm-case-search-exposure',
-             'rebus-kao-social-contract-development-screen'})
+             'rebus-kao-social-contract-development-screen',
+             'epc-glass-safety-development-screen'})
         with self.assertRaisesRegex(ValueError, 'screened source system'):
             require_confirmation_disjoint(candidate(
                 template_id='quality-v1.0.1-human-mcq-questions'))
@@ -104,6 +105,11 @@ class SourceLineageTests(unittest.TestCase):
                 template_id='ethics-bowl-canada-what-is-harm-case-discussion'))
         with self.assertRaisesRegex(ValueError, 'screened source author'):
             require_confirmation_disjoint(candidate(author_id='ya-yun-sherry-kao'))
+        with self.assertRaisesRegex(ValueError, 'screened source system'):
+            require_confirmation_disjoint(candidate(
+                writing_system_id='epc-engineering-ethics-case-studies'))
+        with self.assertRaisesRegex(ValueError, 'screened source author'):
+            require_confirmation_disjoint(candidate(author_id='sarah-jayne-hitt'))
 
     def test_exact_exposed_content_cannot_pass_under_renamed_lineage(self):
         lineage = load_lineage()

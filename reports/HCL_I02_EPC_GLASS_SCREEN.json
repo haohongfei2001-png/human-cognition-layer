@@ -1,0 +1,53 @@
+{
+  "schema": "hcl-i02-epc-glass-development-screen-v1",
+  "publisher_url": "https://epc.ac.uk/toolkit/case-study-glass-safety-in-a-heritage-building-conversion/",
+  "publisher_page_sha256": "0ae6240ab3ed0fc67b1a463e9b5dcc35cf47c51acf929ee441d22f3f6903d15e",
+  "publisher_date": "2022-02-21",
+  "original_author_count": 6,
+  "page_license": "CC_BY_SA_4_0_PAGE_NOTICE",
+  "source_selection": "PUBLISHER_SUMMARY_AND_DILEMMA_PART_ONE_ONLY",
+  "summary_paragraph_count": 1,
+  "part_one_paragraph_count": 3,
+  "excluded_material": [
+    "learning_and_teaching_notes",
+    "external_professional_codes_and_links",
+    "part_two_outcome",
+    "role_play_and_facilitator_aids"
+  ],
+  "native_question": "FIRST_DISCUSSION_QUESTION_AFTER_PART_ONE",
+  "source_first_obligations": [
+    "Changed standards are source-reported; actual legal noncompliance is not established.",
+    "Cost and schedule are explicit pressures, not proof of malicious intent.",
+    "Contractor asks engineer to withhold safety findings; disclosure has not yet occurred in part one.",
+    "Risk probability is the contractor’s assessment, not a measured fact.",
+    "A moral or professional duty needs an explicit conditional premise; no external code may be silently imported."
+  ],
+  "ordinary_input_coverage": {
+    "schema": "hcl-i02-ordinary-input-coverage-v1",
+    "question_sha256": "5a2a0cd2aadab9729a0050e31a9599ec0a629de1280617f0d56ab1a95c707fcb",
+    "source_id": "epc-glass-safety-part-one-2022",
+    "source_sha256": "67d84d40b4a543e5eb1fda291360f701f66cb542b0f92838b1ab2cc19d51cda0",
+    "source_chars": 2669,
+    "hcl_runtime_sha256": "7ff7c52e114f1060c798bd23a1eca8b76cc6c7919419b90dd4b4e060aa21d267",
+    "comparator_candidate": "C_P_G_V3_PROVIDER_FREE_UNQUALIFIED",
+    "c_p_g_complete_source": true,
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "longmemeval": "SEALED_NOT_ACCESSED",
+    "h_entry": "ACCEPTED_PROVIDER_FREE",
+    "h_failure_type": null,
+    "h_failure_reason": null,
+    "h_complete_source_in_final_input": true,
+    "h_final_input_sha256": "0f84fd27d6376fe7264390b7653398325ef151912b4e46efc696d7dcd2eb278d"
+  },
+  "h_route_direct": true,
+  "h_selected_capabilities": [],
+  "h_context_present": false,
+  "case_or_reference_gold_opened": false,
+  "qualified_confirmation_case": false,
+  "qualified_provider_input": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "disposition": "DEVELOPMENT_EXPOSED_SOURCE_SCREEN_H_DIRECT_NO_COGNITION_TREATMENT"
+}

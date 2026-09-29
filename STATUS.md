@@ -19,6 +19,14 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [EPC glass safety development screen](docs/HCL_I02_EPC_GLASS_SCREEN.md)
+checked one independently authored, natively open ethics question against its
+publisher scenario and CC BY-SA page notice. The ordinary H entry kept the
+complete source but selected a direct answer with no cognition state, so it
+cannot establish CG03 or G-wave treatment. The case/system is now
+development-exposed in the lineage guard, with zero calls/spend and no
+provider/confirmation qualification.
+
 The [complete-source input coverage audit](docs/HCL_I02_LONG_INPUT_COVERAGE.md)
 finds all 25 pinned SQuALITY dev stories above H's 16,000-character ordinary
 narrative gate while C/P/G accept the same complete sources under 64,000.
