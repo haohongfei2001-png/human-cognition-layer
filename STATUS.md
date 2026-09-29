@@ -19,6 +19,14 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [FairytaleQA section-span check](docs/HCL_I02_FAIRYTALE_SECTION_SPAN.md)
+shows its six summary questions each reference only two nearby sections
+of the 43-section story (five spans of one, one span of two), with no
+summary character/feeling tag. This does not prove the questions are bad,
+but it does **not qualify the preselected source for I01's long character
+development family**. Preserve the screened source and move I02 source
+qualification elsewhere without substituting cases based on H outcomes.
+
 The [FairytaleQA annotation evidence check](docs/HCL_I02_FAIRYTALE_ANNOTATION_RIGHTS.md)
 pins the selected publisher commit's expert-authorship statements and root
 Apache 2.0 license by SHA256/Git blob. This narrows the question provenance
