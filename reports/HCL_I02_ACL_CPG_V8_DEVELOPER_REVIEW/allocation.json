@@ -1,0 +1,10 @@
+{
+  "case_id": "acl-ethics-abstract-3-development",
+  "opaque_to_phase": {
+    "output-45e0c981edd552db3fa84e3492068776": "C",
+    "output-d2a3d1699888647c7199a605dda41bab": "P",
+    "output-e5ffb6d096396b3d3e8a0860538edf19": "G_final"
+  },
+  "packet_sha256": "381aa2422f4a96afffa2b748f788461b0cd386f72eaf798b2039a4c7814ac19d",
+  "schema": "hcl-i02-blind-allocation-key-v1"
+}

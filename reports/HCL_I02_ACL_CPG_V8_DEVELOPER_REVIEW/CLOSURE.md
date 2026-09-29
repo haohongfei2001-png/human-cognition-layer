@@ -1,0 +1,17 @@
+# ACL v8 developer-blind semantic diagnostic
+
+**Disposition:** `INCONCLUSIVE` for strong-comparator semantic qualification. This is a supplement to the consumed [ACL v8 run closure](../HCL_I02_ACL_ETHICS_CPG_V8_CLOSURE.md), not a rerun or a new HCL efficacy comparison. The development source and four source-first obligations were frozen before the original model outputs. H/H-new made no calls.
+
+**EVALUATION_CAPABILITY_DELTA:** the frozen raw provider receipt has now passed through the actual opaque-output review and reconciliation path, producing auditable judgments tied to original source and output excerpts. The prior packet smoke only established that the interface worked. **HCL cognition CAPABILITY_DELTA:** none.
+
+## Procedure and evidence
+
+The [packet](packet.json) was generated from the immutable [raw receipt](../HCL_I02_ACL_ETHICS_CPG_V8_RUN_36611355531/raw_receipt.json) and [source-first obligations](../HCL_I02_ACL_ETHICS_SOURCE_FIRST_OBLIGATIONS.json). The allocation key was written separately and not opened until all three [judgment records](reviews.json) were saved. The pre-reveal review file SHA256 was `9c10967e27bbc9bf98889b028b4a9a26894fc42e8ce633ea51ceccabc718f10b`. The [allocation](allocation.json) and [reconciliation](reconciliation.json) are now public for audit. This agent was also the implementer and had prior access to high-level diagnostics. Consequently the procedure is **arm-masked developer review, not independent blind review**, and the numbers cannot qualify comparator semantics or confirm HCL gain.
+
+The frozen four-obligation scorer yields C **6/8**, P **7/8**, G-final **8/8**. C explicitly left pay and working conditions unknown but did not explicitly mark worker consent unknown. C and P inferred governance or external-audit restrictions from mere API availability; the source establishes availability only. G-final qualified API concerns and named unknown terms and safeguards. All three treated public access as a licensing question rather than proof of permission, and none used reported model performance as ethical clearance. The [review records](reviews.json) contain each exact output excerpt and rationale; unresolved earns zero.
+
+The rubric is narrow. It does not resolve every potentially unsupported severity claim about copyright, labor or environmental impact in these answers. A favorable 8/8 on four obligations is **not** full semantic correctness. One HCL-authored synthetic development abstract, one provider family and a non-independent reviewer cannot establish a strong C/P/G set across the four I01 families. No H result exists on this case, so no H-over-C/P/G or mechanism attribution is possible. Do not select a new case to chase a preferred result or transfer the closed grant.
+
+**Verification:** the stored packet is bound to the raw receipt and source-first manifest; the complete reviews re-reconcile to the stored scores; changing an output excerpt fails the checker. Ten focused historical and new provider-free tests passed locally. This supplement made **0 provider calls, 0 retries and USD 0 spend**. The original four ACL calls and their closed budget remain solely in the prior closure. LongMemEval remained sealed.
+
+**NEXT_READY:** `I02_UNEXPOSED_SOURCE_QUALIFICATION`. Qualify independent rights-clear source systems and an independent source-first reviewer; freeze a broader comparator/scorer package before any confirmation outcomes. Preserve the current ACL scores as development diagnostics only.

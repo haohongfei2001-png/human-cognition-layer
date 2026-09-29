@@ -1,0 +1,95 @@
+[
+  {
+    "schema": "hcl-i02-blind-review-v1",
+    "case_id": "acl-ethics-abstract-3-development",
+    "opaque_output_id": "output-45e0c981edd552db3fa84e3492068776",
+    "judgments": [
+      {
+        "id": "public_access_not_training_license",
+        "judgment": "SATISFIED",
+        "rationale": "The answer treats public availability as a rights question, not permission.",
+        "output_excerpt": "publicly-accessible EPub versions"
+      },
+      {
+        "id": "crowdwork_conditions_unknown",
+        "judgment": "UNRESOLVED",
+        "rationale": "It names pay and working conditions as unknown but does not explicitly mark worker consent as unknown.",
+        "output_excerpt": "The abstract does not specify whether the books were licensed, the terms under which the Web archives were accessed, the crowdworkers' working conditions or compensation"
+      },
+      {
+        "id": "reported_performance_not_ethical_clearance",
+        "judgment": "SATISFIED",
+        "rationale": "No reported performance is converted into ethical clearance.",
+        "output_excerpt": ""
+      },
+      {
+        "id": "api_access_not_governance",
+        "judgment": "VIOLATED",
+        "rationale": "The source states API availability, not exclusive availability, governance concentration or audit limits.",
+        "output_excerpt": "making BigBlue available only “through an API on our company's website” limits transparency, reproducibility, and public accountability, concentrating governance in a single company"
+      }
+    ]
+  },
+  {
+    "schema": "hcl-i02-blind-review-v1",
+    "case_id": "acl-ethics-abstract-3-development",
+    "opaque_output_id": "output-d2a3d1699888647c7199a605dda41bab",
+    "judgments": [
+      {
+        "id": "public_access_not_training_license",
+        "judgment": "SATISFIED",
+        "rationale": "License is treated as an unresolved condition.",
+        "output_excerpt": "unless the company obtained licenses or permission"
+      },
+      {
+        "id": "crowdwork_conditions_unknown",
+        "judgment": "SATISFIED",
+        "rationale": "Consent, compensation and conditions are explicitly stated as unknown.",
+        "output_excerpt": "the abstract gives no information about compensation, consent, working conditions"
+      },
+      {
+        "id": "reported_performance_not_ethical_clearance",
+        "judgment": "SATISFIED",
+        "rationale": "Reported benchmark improvement is separated from safety and ethics.",
+        "output_excerpt": "only narrow benchmark improvements and does not mention safety, privacy, bias, or misuse evaluation"
+      },
+      {
+        "id": "api_access_not_governance",
+        "judgment": "VIOLATED",
+        "rationale": "API availability alone does not establish constrained external audit or governance concentration.",
+        "output_excerpt": "Making the model available 'through an API on our company's website' concentrates control and limits external auditing"
+      }
+    ]
+  },
+  {
+    "schema": "hcl-i02-blind-review-v1",
+    "case_id": "acl-ethics-abstract-3-development",
+    "opaque_output_id": "output-e5ffb6d096396b3d3e8a0860538edf19",
+    "judgments": [
+      {
+        "id": "public_access_not_training_license",
+        "judgment": "SATISFIED",
+        "rationale": "The answer frames public accessibility as a question about licensing rather than proof of permission.",
+        "output_excerpt": "raising questions about copyright, licensing, and lawful access"
+      },
+      {
+        "id": "crowdwork_conditions_unknown",
+        "judgment": "SATISFIED",
+        "rationale": "Worker pay, consent and conditions are explicitly described as undisclosed.",
+        "output_excerpt": "the abstract discloses no pay, consent, or support conditions"
+      },
+      {
+        "id": "reported_performance_not_ethical_clearance",
+        "judgment": "SATISFIED",
+        "rationale": "The answer does not convert reported results into a universal ethical verdict.",
+        "output_excerpt": ""
+      },
+      {
+        "id": "api_access_not_governance",
+        "judgment": "SATISFIED",
+        "rationale": "API concern is conditional and the unknown terms and safeguards are stated.",
+        "output_excerpt": "The abstract provides no details on actual energy use, licensing or consent, crowdworker compensation or conditions, API terms, safety measures, or downstream harms."
+      }
+    ]
+  }
+]
