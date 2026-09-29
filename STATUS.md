@@ -19,6 +19,16 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [narrative source boundary screen](docs/HCL_I02_NARRATIVE_SOURCE_BOUNDARY.md)
+found that a preselected NarrativeQA story's 30 native questions were mostly
+short fact retrieval; eight native reference answers and bounded story content
+were viewed for development screening. Two Narrative Crossroads teacher modules
+include prewritten wants/fears and sample responses that must not enter ordinary
+model inputs. The lineage guard now excludes these exposed question/source
+systems, related story authors and exact pinned source content even under
+renamed IDs. This is an evaluation safety gain, **not** a qualified I01 case or
+HCL answer gain. Zero calls/spend; unexposed source qualification remains next.
+
 The [bounded QuALITY screen](docs/HCL_I02_QUALITY_BOUNDED_SCREEN.md) pinned
 an external development article and found direct CC BY 4.0 notices for the
 publisher text and dataset questions. Its first writer's nine questions are

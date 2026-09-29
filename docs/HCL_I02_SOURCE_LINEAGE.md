@@ -65,6 +65,16 @@ also needs reviewer procedure and case obligations fixed before confirmation.
 No new provider call, data-row download, LongMemEval access or HCL runtime
 change occurred in this package.
 
+The later [narrative source boundary screen](HCL_I02_NARRATIVE_SOURCE_BOUNDARY.md)
+adds the development-exposed *Amy Foster* NarrativeQA questions and four
+native reference-answer pairs, plus two Narrative Crossroads teacher modules
+whose wants/fears and sample responses would be oracle-like model input.
+It records related original story authors as well as question-system authors.
+The guard now also rejects an exact recorded source-text digest even if a
+candidate invents new lineage IDs; differently formatted or paraphrased copies
+still require the independent repository-wide provenance audit. No item was
+qualified or sent to a provider.
+
 **EVALUATION_DELTA:** changing a row ID or omitting historical rows from a
 future catalog no longer makes the two I02 and five named pre-I02
 author/template/writing systems eligible for confirmation in the I02 guard. **HCL answer
