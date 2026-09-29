@@ -58,6 +58,9 @@ class SourceQualificationV4Tests(unittest.TestCase):
             path.write_text(json.dumps(manifest))
             with self.assertRaisesRegex(ValueError, 'exposure identity drift'):
                 load_fingerprints(path)
+        with self.assertRaises(TypeError):
+            require_qualified_confirmation_source_v4(
+                self.freeze, case(), audit(), fingerprints={'exposed': []})
 
 
 if __name__ == '__main__':
