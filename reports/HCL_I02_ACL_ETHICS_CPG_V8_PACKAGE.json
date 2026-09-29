@@ -1,0 +1,118 @@
+{
+  "authorization": "OWNER_DEFAULT_EXISTING_PROVIDER_NORMAL_BOUNDED_COST",
+  "budget_cap_usd": 0.24,
+  "call_specs": {
+    "C": {
+      "max_tokens": 8192,
+      "model": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "reasoning_effort": "high",
+      "response_format": {
+        "type": "json_object"
+      },
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "G_final": {
+      "max_tokens": 8192,
+      "model": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "reasoning_effort": "high",
+      "response_format": {
+        "type": "json_object"
+      },
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "G_map": {
+      "max_tokens": 8192,
+      "model": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "reasoning_effort": "high",
+      "response_format": {
+        "type": "json_object"
+      },
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "P": {
+      "max_tokens": 8192,
+      "model": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "reasoning_effort": "high",
+      "response_format": {
+        "type": "json_object"
+      },
+      "thinking": {
+        "type": "enabled"
+      }
+    }
+  },
+  "confirmation_items_inspected": 0,
+  "execution_files": {
+    ".github/workflows/hcl-i02-acl-ethics-cpg-v8-once.yml": "452d74bbcba8bd76af8d7a0b73c4deef1a9ed497fa5fc6f03cc3057c9746918f",
+    "reports/HCL_I01_EVALUATION_FREEZE.json": "d744929084509d2f6363bcff9c89dc52a5509925a6229c462be20c0bb00d198e",
+    "reports/HCL_I02_ACL_ETHICS_DEVELOPMENT_SOURCE.json": "09a501f1ecf50f31e96659b6fa22637d14ce2ce3e7cf12b400820c9574e45a50",
+    "reports/HCL_I02_ACL_ETHICS_EXPOSURE_OVERLAY.json": "d1a81891ddbcad8e16f4d3fe6f8e2e1992d1a282076cf4967bc046edccc310ec",
+    "reports/HCL_I02_ACL_ETHICS_SOURCE_FIRST_OBLIGATIONS.json": "e3fba8d5688a4408aeca389e47fcdc1b54957c8aac371e46e58288ca16063b8d",
+    "reports/HCL_I02_EXPOSURE_LINEAGE.json": "fe4fbb7fbed0ef6bf9e2eab9a9490b58eae6ae866f956f0d356d7b841a7d7900",
+    "reports/HCL_I02_SCREENED_SYSTEMS_V3.json": "1bc4ef5740e6c77f97a7abf0fc6ad00d743297d0d23f665cde5f033eecd0d247",
+    "reports/HCL_I02_SEMANTIC_SCORER_FREEZE.json": "61fdb600c2047a090020e59e12c82b0f28472ee6f9483177f1939c2bbac7a3d6",
+    "reports/HCL_I02_SOURCE_FINGERPRINTS_V4.json": "96f2b6b1154c436ef3d4e3e914adbd5119e6daf179322dcdd63423315d4daf07",
+    "scripts/i02_acl_ethics_development_preflight.py": "a66e7fd4c31b4a815d3fa607e1cbac5dba426e3d18c3e6cabd3c6ba259909fdd",
+    "scripts/i02_acl_ethics_exposure_overlay.py": "608b3a2234e2666ad38456d7871a2223ead138cb53a0912f2d7caeb4d02d9148",
+    "scripts/i02_source_lineage.py": "69c1baba0a27ddf494f11b9eeee1270f3bba1fd110ed9c5babe5340921f39e90",
+    "scripts/i02_source_qualification_v3.py": "b12dea4e9bdbb6904923b4a5b9d8e73f2ec1fd3e3ca2edec19e8db1a908a46e3",
+    "scripts/i02_source_qualification_v4.py": "0f0cfc25416ceef12feba5dfc19685d5648b67029062045d55b6aec997da77ef",
+    "scripts/run_i02_acl_ethics_cpg_v8_once.py": "b58674bbd3f7d9c0b2675bfa8bfb938a597a8cde0e4f9528cf5f1915610bf9f8",
+    "scripts/run_i02_comparator_calibration_once.py": "c3676942814eefd02bdee0270390bc986ca86491eab1f911e622316bd681cdf8",
+    "scripts/serious_eval_arms.py": "a94cb6d2af171c8b4efc2596b2b27df914d6cc49695dd1c1979948dded31868c",
+    "scripts/serious_eval_arms_v2.py": "d354fcc1408d42fb5fb1ab70abc34579aba93b20033af888864d4bf78e29a4dd",
+    "scripts/serious_eval_arms_v3.py": "0984ae6121234645f2552bcf181d993766d10eb76e7b49ccbffc2454cdc0e54f",
+    "scripts/serious_eval_arms_v4.py": "3a4bbf6061967205067582b53f5dde6197326d662185ddb90a4447b5353dc144",
+    "scripts/serious_eval_arms_v8.py": "054bd98c0e0890a4a0e88782a57c2a84c8205bb626d5fdd47ba202d3cdb25911",
+    "scripts/serious_eval_contract.py": "d415af270dfff20139130768cdf462f9eb0d8080e3ed152f2e3adb9f18ba1a9f",
+    "scripts/serious_eval_generic_workspace_v5.py": "e6719bb57cd4738bb6af578cc38aaeee31579b99933ebc8691ef08fbe70c87d6",
+    "scripts/serious_eval_generic_workspace_v6.py": "4825cf7935611976604e4a4aea84dc62d3b5c4dd3f3ee1b0010a48c7703430f8",
+    "scripts/serious_eval_generic_workspace_v7.py": "68333b9cdc6ed2de64a7013da4748fd6ea072173e94fde0684378a985e4a96e2",
+    "scripts/serious_eval_semantic_score.py": "3e47b6f836151e41ec07f1afa98b9304c879db2003f7d37d379e21414c481853"
+  },
+  "execution_sha256": "6de65954bf2154498c6273a4bfa64c3926974f1b6f6a0505ca48020fbd8539b6",
+  "h_arm_calls": 0,
+  "hcl_runtime_sha256": "7ff7c52e114f1060c798bd23a1eca8b76cc6c7919419b90dd4b4e060aa21d267",
+  "historical_budget_transfer": false,
+  "hnew_arm_calls": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "maximum_map_bytes": 3500,
+  "maximum_provider_calls": 4,
+  "model": "deepseek-v4-pro",
+  "model_family": "DeepSeek-V4-Pro-0813",
+  "obligations_file_sha256": "e3fba8d5688a4408aeca389e47fcdc1b54957c8aac371e46e58288ca16063b8d",
+  "peak_rates_usd_per_million": {
+    "cache_hit": 0.044,
+    "input": 1.32,
+    "output": 3.96
+  },
+  "phases": [
+    "C",
+    "P",
+    "G_map",
+    "G_final"
+  ],
+  "price_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "price_verified_date": "2026-09-29",
+  "provider": "deepseek",
+  "provider_endpoint": "https://api.deepseek.com",
+  "purpose": "ONE_ACL_SYNTHETIC_DEVELOPMENT_SOURCE_STRONG_CPG_INTERFACE_CALIBRATION",
+  "question_origin": "ADAPTED_NATIVE_ACTIVITY_DEVELOPMENT_ONLY",
+  "question_sha256": "653992830b23fef2fea55039e493885aa1059b95b707e5e84946612e8477ce51",
+  "retries": 0,
+  "schema": "hcl-i02-acl-ethics-cpg-v8-calibration-v1",
+  "service_tier": "provider_default_no_tier_parameter",
+  "source_distribution": "ACL_EACL_2023_SYNTHETIC_ABSTRACTS_DEVELOPMENT_EXPOSED",
+  "source_file_sha256": "09a501f1ecf50f31e96659b6fa22637d14ce2ce3e7cf12b400820c9574e45a50",
+  "source_sha256": "127cf23ee554c575b5c35c94c4d5468f5f1abae14d7cb15195f31ca22e602bc1"
+}

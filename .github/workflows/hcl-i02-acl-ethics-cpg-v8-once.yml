@@ -1,0 +1,65 @@
+name: HCL I02 One-Time ACL Ethics CPG v8 Development Calibration
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/HCL_I02_ACL_ETHICS_CPG_V8_TRIGGER']
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      execute: ${{ steps.one_shot.outputs.execute }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: one_shot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ ! -f .github/HCL_I02_ACL_ETHICS_CPG_V8_TRIGGER ]; then
+            echo 'execute=no' >> "$GITHUB_OUTPUT"
+            echo 'Trigger removal recorded; no provider job.'
+            exit 0
+          fi
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-i02-acl-ethics-cpg-v8-once.yml/runs?event=push&per_page=100" > /tmp/hcl-i02-acl-cpg-v8-runs.json
+          python - <<'PY'
+          import json, os
+          runs = json.load(open('/tmp/hcl-i02-acl-cpg-v8-runs.json'))['workflow_runs']
+          assert len(runs) == 1 and str(runs[0]['id']) == os.environ['GITHUB_RUN_ID']
+          PY
+          echo 'execute=yes' >> "$GITHUB_OUTPUT"
+
+  calibration:
+    needs: gate
+    if: needs.gate.outputs.execute == 'yes'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned existing client
+        run: python -m pip install 'openai==2.14.0'
+      - name: Source-first, runtime, fairness and all-phase cost preflight
+        run: python scripts/run_i02_acl_ethics_cpg_v8_once.py --preflight --output i02-acl-ethics-cpg-v8-preflight.json
+      - name: One bounded strong CPG development calibration
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          HCL_I02_ACL_ETHICS_CPG_V8_AUTHORIZED: ONE_CALIBRATION_ONLY
+        run: python scripts/run_i02_acl_ethics_cpg_v8_once.py --execute --output i02-acl-ethics-cpg-v8-receipt.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-i02-acl-ethics-cpg-v8-${{ github.run_id }}
+          path: |
+            i02-acl-ethics-cpg-v8-preflight.json
+            i02-acl-ethics-cpg-v8-receipt.json
+            reports/HCL_I02_ACL_ETHICS_CPG_V8_PACKAGE.json
+            reports/HCL_I02_ACL_ETHICS_DEVELOPMENT_SOURCE.json
+            reports/HCL_I02_ACL_ETHICS_SOURCE_FIRST_OBLIGATIONS.json
