@@ -7,6 +7,8 @@ import unittest
 from scripts.i02_musr_calibration import FIRST_GROUP_SHA256
 from scripts.run_i02_comparator_calibration_once import Ledger, build_package, load_package
 
+FROZEN_PACKAGE = json.loads(Path('reports/HCL_I02_COMPARATOR_CALIBRATION_PACKAGE.json').read_text())
+
 
 class ComparatorCalibrationTests(unittest.TestCase):
     def test_four_call_rehearsal_preserves_raw_and_refuses_rerun(self):
@@ -27,7 +29,13 @@ class ComparatorCalibrationTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as folder:
             output = Path(folder) / 'receipt.json'
-            ledger = Ledger(load_package(), output)
+            # The consumed runner belongs to the old frozen runtime. Its
+            # package bytes remain replayable, but load_package must refuse
+            # the subsequently amended current runtime.
+            self.assertEqual(build_package(), FROZEN_PACKAGE)
+            with self.assertRaisesRegex(ValueError, 'disclosed I02 amendment'):
+                load_package()
+            ledger = Ledger(FROZEN_PACKAGE, output)
             for phase in ('C', 'P', 'G_map', 'G_final'):
                 ledger.call(phase, [dict(role='user', content='authored source')], fake)
             receipt = ledger.receipt
@@ -38,7 +46,7 @@ class ComparatorCalibrationTests(unittest.TestCase):
             self.assertEqual(len(json.loads(output.read_text())['attempts']), 4)
             self.assertTrue(all(a['response_raw'] for a in receipt['attempts']))
             with self.assertRaisesRegex(ValueError, 'rerun'):
-                Ledger(load_package(), output)
+                Ledger(FROZEN_PACKAGE, output)
             self.assertEqual(len(calls), 4)
 
     def test_pre_call_hard_cap_blocks_transport(self):

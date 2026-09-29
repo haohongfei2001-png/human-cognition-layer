@@ -293,9 +293,9 @@ class CognitionRouter:
             reasons['perspective'] = 'explicit retained belief preparation with source/access scope'
             reasons['belief'] = 'bounded ordinary-source preparation into retained v0.6'
         if information and not request.observer_actor:
-            # The ablated arm keeps the same provenance/uncertainty scaffold.
-            # Only the checked observation mechanism is removed.
-            selected.extend(('provenance', 'uncertainty'))
+            # The ablated arm keeps all foundation dependencies. Only the
+            # checked observation mechanism is removed.
+            selected.extend(('source_visibility', 'provenance', 'uncertainty'))
         information_state = bool(self.information_state_enabled and information and not request.observer_actor and
             request.perspective_mode != PerspectiveMode.OBSERVER_ABOUT_TARGET and
             not (belief or concept or preference or responsibility or social))

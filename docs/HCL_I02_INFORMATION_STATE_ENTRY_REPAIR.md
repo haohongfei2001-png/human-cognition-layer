@@ -1,5 +1,9 @@
 # I02 — ordinary information-state entry repair
 
+This document records the historical v1 boundary. The subsequent general
+[v2 ordinary-access repair](HCL_I02_INFORMATION_STATE_V2_REPAIR.md) adds a
+conservative local pronoun path and has a separate runtime amendment.
+
 **CAPABILITY_DELTA:** An ordinary search question over prose now causes HCL to
 check an explicitly named person's reported observation of an object location.
 The final model input carries the exact source quote and offsets, observer,

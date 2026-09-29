@@ -1,0 +1,17 @@
+{
+  "schema": "hcl-i02-runtime-amendment-v2",
+  "reason": "GENERAL_INFORMATION_STATE_LOCAL_PRONOUN_AND_FAIR_ABLATION_REPAIR",
+  "historical_i01_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "i02_v2_repair_base_main_sha": "29eb7d4889d3fa9146ed83d2185c5e4329ff0570",
+  "previous_hcl_runtime_sha256": "acb1caf054a7c156a9841092201bef44669513aba2e42fe59c401eb67e837b61",
+  "amended_hcl_runtime_sha256": "7ff7c52e114f1060c798bd23a1eca8b76cc6c7919419b90dd4b4e060aa21d267",
+  "calibration_only": true,
+  "confirmation_items_inspected": 0,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "historical_i02_calibration_run_id": 36561878435,
+  "historical_i02_calibration_calls": 3,
+  "historical_i02_calibration_budget_state": "CLOSED_NO_TRANSFER_NO_RERUN",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "boundary": "I01 and v1 I02 freezes remain immutable. This versioned provider-free ordinary-entry and ablation repair is not independent efficacy evidence."
+}
