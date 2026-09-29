@@ -1,0 +1,35 @@
+{
+  "attribute1_counts": {
+    "action": 25,
+    "causal relationship": 21,
+    "character": 5,
+    "feeling": 4,
+    "outcome resolution": 4,
+    "prediction": 1,
+    "setting": 1
+  },
+  "confirmation_qualified": false,
+  "item_semantic_audit": "NOT_STARTED",
+  "local_or_summary_counts": {
+    "local": 55,
+    "summary": 6
+  },
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "model_input_allowed": false,
+  "native_answer_text_returned": false,
+  "provider_calls": 0,
+  "publisher_question_git_blob": "a8b6251f1826940eef45b4ba7abef8a05089778e",
+  "publisher_question_sha256": "54a03fb11936d2363371ecbeb74f08695680fffd699507f9db0fcd7f5fb92f13",
+  "question_count": 61,
+  "question_file_processed_for_tags": true,
+  "question_text_returned": false,
+  "schema": "hcl-i02-fairytale-question-tag-audit-v1",
+  "source_text_returned": false,
+  "summary_attribute1_counts": {
+    "action": 1,
+    "causal relationship": 5
+  },
+  "summary_character_or_feeling_tagged_count": 0,
+  "task_family": "LONG_CHARACTER_DEVELOPMENT",
+  "task_family_fit": "UNPROVEN_BY_METADATA"
+}
