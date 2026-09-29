@@ -1,0 +1,29 @@
+{
+  "all_phase_peak_reservation_usd": 0.11841456,
+  "answer_fields": [
+    "answer",
+    "source_citations",
+    "uncertainty",
+    "assumptions"
+  ],
+  "case_id": "361dea54d9d272c294f11f6d313aaecc37971ade2181dfe872d65d1d29b7950a",
+  "h_native_treatment": "FAIL_ABSENT_NOT_EVALUATED",
+  "input_equal": true,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "package_sha256": "41d00a57678a75ccc867a34606bd3082c656e96dbd3ac1f47836338d7810f28c",
+  "phase_max_input_token_bounds": [
+    14538,
+    15726,
+    14922,
+    34538
+  ],
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "question_sha256": "b10b975c46ee5b4faecda9c9010ea1932d4ae3d56be4ebf70f1e03cce15ee9e4",
+  "schema": "hcl-i02-cpg-calibration-preflight-v1",
+  "source_file_sha256": "98cd17d2c9ea53664e274365e901c90dfcaa40d17547dfbd369f1cd26fd2a81c",
+  "source_group_sha256": "bd0aacf84d7bc7d7fd1fa4114dd05b17aa0c5f2c433d452dfd01b06f7b562d96",
+  "source_semantics": "FIRST_NATIVE_QUESTION_SOURCE_PLAUSIBLE_NOT_PRIVATE_TRUTH",
+  "source_text_sha256": "bd0aacf84d7bc7d7fd1fa4114dd05b17aa0c5f2c433d452dfd01b06f7b562d96",
+  "status": "PASS_PROVIDER_FREE_CPG_ONLY"
+}

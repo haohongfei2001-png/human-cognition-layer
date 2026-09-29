@@ -1,6 +1,8 @@
 # I02 — one-use C/P/G functional calibration
 
-Status: **FROZEN / NOT EXECUTED**. This is a calibration of baseline interfaces,
+Status: **EXECUTED ONCE / FAILED G-MAP SHAPE / CLOSED_NO_RERUN**; see the
+[source-first closure](../reports/HCL_I02_CPG_CALIBRATION_CLOSURE.md).
+This is a calibration of baseline interfaces,
 not an H comparison or independent efficacy experiment. The single input is
 the first already exposed question from the first narrative group of the
 [author-team TAUR-Lab/MuSR Hugging Face CC BY 4.0 distribution](https://huggingface.co/datasets/TAUR-Lab/MuSR).
