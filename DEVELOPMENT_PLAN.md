@@ -348,7 +348,7 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **G-ARCH — STRUCTURALLY_READY / OPERATIONAL_INPUT_UNVERIFIED:** the post-H05 matrix is in `docs/HCL_G_ARCH_PRELIM_ASSESSMENT.md`. Unique exact source quotes now correct bad supplied offsets with a recorded source-derived span; provider-free replay of the closed E03 raw response reaches the final-input path. E03 remains failed. A fresh one-shot DeepSeek Flash operational smoke is frozen with two calls maximum, zero retries and a USD 0.04 hard cap; no trigger exists yet.
 
-**G-ARCH live entry — NEXT_READY:** certify this repair/package on exact main, create the sole trigger, review raw extraction/final receipt source-first, then decide the operational gate. Only a successful real ordinary extraction and final call can satisfy this requirement; subsequent serious independent evaluation remains post-G-ARCH.
+**G-ARCH live entry — NEXT_READY:** certify this repair/package on exact main, merge the sole trigger, review raw extraction/final receipt source-first, then decide the operational gate. The trigger is a one-time main change, not a request to reuse E03 authorization. Only a successful real ordinary extraction and final call can satisfy this requirement; subsequent serious independent evaluation remains post-G-ARCH.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
