@@ -1,0 +1,20 @@
+{
+  "schema": "hcl-i02-acl-ethics-development-source-v1",
+  "source_url": "https://github.com/acl-org/ethics-tutorial/blob/582bcc6c68f9f53d23912ea19892a9b2e74264c7/abstracts/3.txt",
+  "repository_commit": "582bcc6c68f9f53d23912ea19892a9b2e74264c7",
+  "repository_blob_sha": "3328c30f0bf41956ce61dad617785bc2e4936ec6",
+  "rights_evidence_url": "https://github.com/acl-org/ethics-tutorial/blob/582bcc6c68f9f53d23912ea19892a9b2e74264c7/README.md",
+  "license": "CC BY 4.0",
+  "attribution": "Luciana Benotti, Karën Fort, Min-Yen Kan, and Yulia Tsvetkov; EACL 2023 Understanding Ethics in NLP Authoring and Reviewing",
+  "source_system": "acl-eacl-2023-ethics-tutorial-synthetic-abstracts",
+  "development_exposed": true,
+  "confirmation_qualified": false,
+  "source_id": "acl-ethics-tutorial-abstract-3",
+  "source_text": "In this paper, we present the largest existing language model as of today (989 trillion parameters, dataset of 968 Pb), BigBlue. We trained it using not only freely available Web content, but also Web archives and publicly-accessible EPub versions of all the books of the commercial Amazonia bookshop web storefront. The best results were obtained using reinforcement learning with human feedback (RLHF) coming from crowdworkers. The model improves the state-of-the-art in Natural Language Processing (NLP) in most tasks, including sentiment analysis (+0.02 F-measure), dependency syntax (+0.015 UAS), named-entity recognition (+0.05 F-measure), etc. BigBlue is available through an API on our company's  website. \n",
+  "ordinary_question": "Critique the ethical issues raised by this research abstract.",
+  "question_origin": "ADAPTED_FROM_NATIVE_GROUP_CRITIQUE_ACTIVITY_NOT_VERBATIM_NATIVE_QUESTION",
+  "provider_calls": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "native_activity_document_blob": "a5a2fef8a28a45db792bb4f9233420c761485ba5",
+  "native_activity_instruction": "Use this document to co-construct your thoughts on these abstracts."
+}

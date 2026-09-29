@@ -19,6 +19,15 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+An [ACL Ethics Tutorial synthetic abstract](docs/HCL_I02_ACL_ETHICS_DEVELOPMENT_SOURCE.md)
+is now pinned as one exact rights-reviewed **C/P/G development** input with
+four pre-output source-first obligations. The provider-free receipt verifies
+ordinary C/P/G equality and shows H goes direct with zero cognition treatment;
+therefore H/H-new are not eligible on this case. All six abstracts and the
+shared author/template system are development-exposed and excluded from unseen
+confirmation by a versioned overlay that preserves consumed lineage hashes.
+No provider call, independent confirmation or HCL answer gain occurred.
+
 The [v8 strong comparator candidate](docs/HCL_I02_STRONG_COMPARATOR_V8.md)
 now has an executable, identical native thinking configuration for C/P/G and
 an exact `source_id`/`quote` citation instruction for each final answer arm.
