@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G / G01–G03 CORRECTNESS_VERIFIED / G04 NEXT_READY**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G / G01–G04 CORRECTNESS_VERIFIED / G05 NEXT_READY**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -330,7 +330,9 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **G03 — CORRECTNESS_VERIFIED:** ordinary authorized text now yields local necessary/sufficient/typical criteria, explicit counterexamples, actor/context comparison and non-retroactive revision. Twelve tests and ordinary positive witness; see `docs/HCL_WAVE_G03.md`.
 
-**G04 — NEXT_READY:** split abstract arguments and philosophical questions into explicit premises, counterexamples, conditional formalization, analogy relations and pivotal disagreements. Separate factual, conceptual and value disputes without declaring one universal moral conclusion.
+**G04 — CORRECTNESS_VERIFIED:** ordinary opposed arguments now separate source-reported fact challenges, G03 concept readings and explicit value conflicts, retaining bounded conditional premise maps, targeted counterexamples and analogy proposals. Twelve tests and ordinary witness; see `docs/HCL_WAVE_G04.md`.
+
+**G05 — NEXT_READY:** compare controlled changes to one normative premise, concept reading or counterfactual assumption; identify conclusions that change, remain robust or stay unresolved without editing source evidence to force consistency.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -491,12 +493,12 @@ defect is.
 
 - Current wave: **Wave G — Moral, Conceptual and Philosophical Integration**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: G04_ABSTRACT_ARGUMENT_AND_PHILOSOPHICAL_DISAGREEMENT**
+- **NEXT_READY: G05_PREMISE_CONCEPT_COUNTERFACTUAL_SENSITIVITY**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **G04**, then continue through the dependency-safe queue
+Work should continue at **G05**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
