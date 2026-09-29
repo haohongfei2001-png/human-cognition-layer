@@ -10,6 +10,7 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 - [I02 QuALITY 有界来源筛查](docs/HCL_I02_QUALITY_BOUNDED_SCREEN.md)：外部文章与人工题的许可有直接来源；固定开发文章九题仍不足以证明深层概念任务适配，已读来源纳入暴露边界，不送模型。
 - [I02 叙事来源边界](docs/HCL_I02_NARRATIVE_SOURCE_BOUNDARY.md)：NarrativeQA 开发题和教学模块已读材料纳入暴露记录；教学模块的人物状态表及示例回答不得作为普通来源输入，尚无合格独立案例。
 - [I02 G 中间证据边界 v4](docs/HCL_I02_G_WORKSPACE_V4_BOUNDARY.md)：比较臂的引用图只允许来源 ID、原文引用和未决问题进入最终模型输入；仍待真实模型语义校准。
+- [I02 通用 G 工作区 v5](docs/HCL_I02_GENERIC_WORKSPACE_V5.md)：补上有版本的引文记忆、暂定证据关系和回答步骤；不改变 C/P 或历史运行，仍待真实模型语义校准。
 - [I02 开放教材有界筛查](docs/HCL_I02_OER_BOUNDED_SCREEN.md)：SQuALITY、TRU/Rebus 与 Ethics Bowl 案例的具体许可、任务适配和已读暴露分别记录，尚无合格独立样本。
 
 - [普通人物问题与叙事入口](docs/HCL_V1_PERSON_QUESTION.md)：有来源、时间、访问与局部修订边界；单次回答，默认零提取调用。
