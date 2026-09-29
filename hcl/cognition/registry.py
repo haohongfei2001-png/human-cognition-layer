@@ -2,6 +2,11 @@
 from types import MappingProxyType
 
 PACKAGES = MappingProxyType({
+    'H02': MappingProxyType(dict(
+        implementation='CORRECTNESS_VERIFIED', ordinary_input='REPLAY_VERIFIED',
+        efficacy='UNTESTED', activation='OPT_IN',
+        entrypoint='hcl.cognition.DiscriminatingEvidenceWorkspace',
+        limitation='finite exact-narrator premise retrieval across distinct argument/evidence sources; no exhaustive evidence, verified fact, private motive or winner')),
     'H01': MappingProxyType(dict(
         implementation='CORRECTNESS_VERIFIED', ordinary_input='REPLAY_VERIFIED',
         efficacy='UNTESTED', activation='OPT_IN',

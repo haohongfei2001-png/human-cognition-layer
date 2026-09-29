@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01 CORRECTNESS_VERIFIED / H02 NEXT_READY**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01–H02 CORRECTNESS_VERIFIED / H03 NEXT_READY**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -338,7 +338,9 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **H01 — CORRECTNESS_VERIFIED:** ordinary single-fact questions now take an exact narrator-source path; concept, opposed-argument and hypothetical questions execute only G03, G03→G04 or G03→G04→G05 respectively under explicit depth/branch/operation/provider budgets. Twelve tests and same-source four-path witness; see `docs/HCL_WAVE_H01.md`.
 
-**H02 — NEXT_READY:** maintain finite rival explanations and retrieve source evidence that actually changes support, excludes a candidate or sharpens uncertainty. Stop when another retrieval has no information gain; do not loop or search endlessly.
+**H02 — CORRECTNESS_VERIFIED:** two opposed source arguments now retrieve separately authorized F01 evidence; exact narrator support/counterevidence changes premise status, third-party speech remains attribution only, and no-gain retrieval stops. Fourteen tests and ordinary before/after witness; see `docs/HCL_WAVE_H02.md`.
+
+**H03 — NEXT_READY:** build an actual cross-capability execution graph so a source correction propagates through belief, plan, interaction explanation and relationship/responsibility support where dependent, while unrelated interpretations remain unchanged.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -499,12 +501,12 @@ defect is.
 
 - Current wave: **Wave H — Hard Human Cognition Integration**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: H02_RIVAL_EXPLANATIONS_AND_DISCRIMINATING_EVIDENCE**
+- **NEXT_READY: H03_CROSS_CAPABILITY_SUPPORT_AND_COUNTEREVIDENCE_PROPAGATION**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **H02**, then continue through the dependency-safe queue
+Work should continue at **H03**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
