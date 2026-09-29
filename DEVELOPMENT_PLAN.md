@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G / G01 CORRECTNESS_VERIFIED / G02 NEXT_READY**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G / G01–G02 CORRECTNESS_VERIFIED / G03 NEXT_READY**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -326,7 +326,9 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **G01 — CORRECTNESS_VERIFIED:** ordinary user and source text produces typed but conditional premise candidates, distinguishing user-supplied, explicitly analyst-adopted, source-reported institution and character origins. Only completely parsed adopted/user conditions can bridge to CG03. Eleven tests and positive witness; see `docs/HCL_WAVE_G01.md`.
 
-**G02 — NEXT_READY:** connect causal contribution, action-time knowledge, foreseeability, control, stated intention, alternatives and individual/collective responsibility under explicit G01 premises. Outcome harm must not imply malice or sole responsibility.
+**G02 — CORRECTNESS_VERIFIED:** one ordinary G01 rule feeds separate CG03 action-time factor checks for up to four actors; a narrow separately adopted collective rule can compare two actors and an explicit joint report without inferring group mind, private intention or world feasibility. Thirteen tests and ordinary positive witness; see `docs/HCL_WAVE_G02.md`.
+
+**G03 — NEXT_READY:** compare local concept necessary/sufficient criteria, typical uses, counterexamples, context differences and explicit revision. Same word/different reading and different word/same reading require source evidence; later concept change must not rewrite old commitments or evaluations.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -487,12 +489,12 @@ defect is.
 
 - Current wave: **Wave G — Moral, Conceptual and Philosophical Integration**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: G02_ACTION_TIME_RESPONSIBILITY_COMPOSITION**
+- **NEXT_READY: G03_LOCAL_CONCEPT_CRITERIA_AND_REVISION**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **G02**, then continue through the dependency-safe queue
+Work should continue at **G03**, then continue through the dependency-safe queue
 without asking for a new decision after every package.

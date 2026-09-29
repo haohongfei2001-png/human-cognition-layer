@@ -1,0 +1,682 @@
+{
+  "schema": "hcl-g02-positive-witness-v1",
+  "capability_delta": "Separate actor-level CG03 factors from source-reported alternatives and a separately adopted collective condition; changing Bob control evidence changes only Bob and the conditional group result.",
+  "ordinary_question": "For this analysis, responsibility requires causal contribution and control. For this analysis, collective responsibility requires each participant to satisfy the individual rule.",
+  "ordinary_sources": {
+    "Alice": "Alice: I opened the gate.\nNarrator: The animals escaped.\nNarrator: Alice opening the gate caused the animals to escape.\nNarrator: At the time Alice could have stopped the opening.\nAlice: At the time I could have closed the gate instead of opening the gate.",
+    "Bob": "Bob: I opened the gate.\nNarrator: The animals escaped.\nNarrator: Bob opening the gate caused the animals to escape.\nNarrator: At the time Bob could have stopped the opening.\nBob: At the time I could have closed the gate instead of opening the gate."
+  },
+  "joint_source": "Narrator: Alice and Bob jointly opened the gate.",
+  "before_correction": {
+    "actors": [
+      "Alice",
+      "Bob"
+    ],
+    "collective": {
+      "caller_rule": "For this analysis, collective responsibility requires each participant to satisfy the individual rule.",
+      "group_mind": "NOT_INFERRED",
+      "joint_report": {
+        "quote": "Narrator: Alice and Bob jointly opened the gate.",
+        "source_id": "joint",
+        "source_version": 1
+      },
+      "reported_participation": "SOURCE_REPORTED_NOT_WORLD_VERIFIED",
+      "status": "CONDITIONALLY_SUPPORTED_ON_REPORTED_JOINT_ACTION_AND_INDIVIDUAL_CLAIMS"
+    },
+    "efficacy": "UNTESTED",
+    "individuals": [
+      {
+        "action_quote": "Alice: I opened the gate.",
+        "actor": "Alice",
+        "alternatives": [
+          {
+            "end": 256,
+            "option": "closed the gate",
+            "quote": "Alice: At the time I could have closed the gate instead of opening the gate.",
+            "replaced": "opening the gate",
+            "source_id": "alice",
+            "source_version": 1,
+            "start": 180,
+            "status": "SOURCE_REPORTED_OPTION_NOT_VERIFIED_FEASIBILITY"
+          }
+        ],
+        "checked": {
+          "action_event_id": "cg03-240798cfd80f-1",
+          "conclusion": "PREMISE_DEPENDENT_ONLY",
+          "factors": [
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "CAUSAL_CONTRIBUTION",
+              "state": "SUPPORTED_CLAIM",
+              "support": [
+                {
+                  "about_time": "2026-01-01T00:00:01+00:00",
+                  "authority": "EXPLICIT_NARRATOR",
+                  "claim_id": "claim-3",
+                  "quote": "Narrator: Alice opening the gate caused the animals to escape.",
+                  "source_event_id": "cg03-240798cfd80f-3",
+                  "target_actor": "Alice",
+                  "value": true
+                }
+              ],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "KNOWLEDGE",
+              "state": "UNKNOWN",
+              "support": [],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "FORESEEABILITY",
+              "state": "UNKNOWN",
+              "support": [],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "CONTROL",
+              "state": "SUPPORTED_CLAIM",
+              "support": [
+                {
+                  "about_time": "2026-01-01T00:00:01+00:00",
+                  "authority": "EXPLICIT_NARRATOR",
+                  "claim_id": "claim-4",
+                  "quote": "Narrator: At the time Alice could have stopped the opening.",
+                  "source_event_id": "cg03-240798cfd80f-4",
+                  "target_actor": "Alice",
+                  "value": true
+                }
+              ],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "STATED_INTENTION",
+              "state": "UNKNOWN",
+              "support": [],
+              "third_party_attributions": []
+            }
+          ],
+          "focal_actor": "Alice",
+          "other_relevant_facts": "OPEN_UNKNOWN",
+          "outcome_event_id": "cg03-240798cfd80f-2",
+          "premise_assessments": [
+            {
+              "authority": "CALLER_SUPPLIED_CONDITIONAL",
+              "basis_event_ids": [
+                "cg03-240798cfd80f-1",
+                "cg03-240798cfd80f-2",
+                "cg03-240798cfd80f-3",
+                "cg03-240798cfd80f-4"
+              ],
+              "premise_id": "g01-premise:f4d6ab62a215bef019f7e369e2bcf4067ff7737eed0dc82ce3eedfa077936481",
+              "requirements": [
+                {
+                  "factor": "CAUSAL_CONTRIBUTION",
+                  "factor_state": "SUPPORTED_CLAIM",
+                  "required_value": true,
+                  "result": "MET_BY_SOURCE_CLAIM",
+                  "source_claim_ids": [
+                    "claim-3"
+                  ]
+                },
+                {
+                  "factor": "CONTROL",
+                  "factor_state": "SUPPORTED_CLAIM",
+                  "required_value": true,
+                  "result": "MET_BY_SOURCE_CLAIM",
+                  "source_claim_ids": [
+                    "claim-4"
+                  ]
+                }
+              ],
+              "result": "CONDITIONALLY_SUPPORTED_ON_SOURCE_CLAIMS",
+              "scope": "PREMISE_DEPENDENT_EXPLANATION_NOT_MORAL_OR_LEGAL_VERDICT",
+              "text": "responsibility requires causal contribution and control"
+            }
+          ],
+          "status": "SOURCE_FACTORS_CHECKED"
+        },
+        "diagnostics": [
+          {
+            "claim_id": "claim-3",
+            "line": 3,
+            "source_event_id": "cg03-240798cfd80f-3",
+            "status": "EXACT_SOURCE_FACTOR"
+          },
+          {
+            "claim_id": "claim-4",
+            "line": 4,
+            "source_event_id": "cg03-240798cfd80f-4",
+            "status": "EXACT_SOURCE_FACTOR"
+          }
+        ],
+        "independent_world_truth": "NOT_ESTABLISHED",
+        "outcome_quote": "Narrator: The animals escaped.",
+        "source": {
+          "source_id": "alice",
+          "version": 1
+        },
+        "status": "SOURCE_FACTORS_CHECKED"
+      },
+      {
+        "action_quote": "Bob: I opened the gate.",
+        "actor": "Bob",
+        "alternatives": [
+          {
+            "end": 248,
+            "option": "closed the gate",
+            "quote": "Bob: At the time I could have closed the gate instead of opening the gate.",
+            "replaced": "opening the gate",
+            "source_id": "bob",
+            "source_version": 1,
+            "start": 174,
+            "status": "SOURCE_REPORTED_OPTION_NOT_VERIFIED_FEASIBILITY"
+          }
+        ],
+        "checked": {
+          "action_event_id": "cg03-e1353c5cff9d-1",
+          "conclusion": "PREMISE_DEPENDENT_ONLY",
+          "factors": [
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "CAUSAL_CONTRIBUTION",
+              "state": "SUPPORTED_CLAIM",
+              "support": [
+                {
+                  "about_time": "2026-01-01T00:00:01+00:00",
+                  "authority": "EXPLICIT_NARRATOR",
+                  "claim_id": "claim-3",
+                  "quote": "Narrator: Bob opening the gate caused the animals to escape.",
+                  "source_event_id": "cg03-e1353c5cff9d-3",
+                  "target_actor": "Bob",
+                  "value": true
+                }
+              ],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "KNOWLEDGE",
+              "state": "UNKNOWN",
+              "support": [],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "FORESEEABILITY",
+              "state": "UNKNOWN",
+              "support": [],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "CONTROL",
+              "state": "SUPPORTED_CLAIM",
+              "support": [
+                {
+                  "about_time": "2026-01-01T00:00:01+00:00",
+                  "authority": "EXPLICIT_NARRATOR",
+                  "claim_id": "claim-4",
+                  "quote": "Narrator: At the time Bob could have stopped the opening.",
+                  "source_event_id": "cg03-e1353c5cff9d-4",
+                  "target_actor": "Bob",
+                  "value": true
+                }
+              ],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "STATED_INTENTION",
+              "state": "UNKNOWN",
+              "support": [],
+              "third_party_attributions": []
+            }
+          ],
+          "focal_actor": "Bob",
+          "other_relevant_facts": "OPEN_UNKNOWN",
+          "outcome_event_id": "cg03-e1353c5cff9d-2",
+          "premise_assessments": [
+            {
+              "authority": "CALLER_SUPPLIED_CONDITIONAL",
+              "basis_event_ids": [
+                "cg03-e1353c5cff9d-1",
+                "cg03-e1353c5cff9d-2",
+                "cg03-e1353c5cff9d-3",
+                "cg03-e1353c5cff9d-4"
+              ],
+              "premise_id": "g01-premise:f4d6ab62a215bef019f7e369e2bcf4067ff7737eed0dc82ce3eedfa077936481",
+              "requirements": [
+                {
+                  "factor": "CAUSAL_CONTRIBUTION",
+                  "factor_state": "SUPPORTED_CLAIM",
+                  "required_value": true,
+                  "result": "MET_BY_SOURCE_CLAIM",
+                  "source_claim_ids": [
+                    "claim-3"
+                  ]
+                },
+                {
+                  "factor": "CONTROL",
+                  "factor_state": "SUPPORTED_CLAIM",
+                  "required_value": true,
+                  "result": "MET_BY_SOURCE_CLAIM",
+                  "source_claim_ids": [
+                    "claim-4"
+                  ]
+                }
+              ],
+              "result": "CONDITIONALLY_SUPPORTED_ON_SOURCE_CLAIMS",
+              "scope": "PREMISE_DEPENDENT_EXPLANATION_NOT_MORAL_OR_LEGAL_VERDICT",
+              "text": "responsibility requires causal contribution and control"
+            }
+          ],
+          "status": "SOURCE_FACTORS_CHECKED"
+        },
+        "diagnostics": [
+          {
+            "claim_id": "claim-3",
+            "line": 3,
+            "source_event_id": "cg03-e1353c5cff9d-3",
+            "status": "EXACT_SOURCE_FACTOR"
+          },
+          {
+            "claim_id": "claim-4",
+            "line": 4,
+            "source_event_id": "cg03-e1353c5cff9d-4",
+            "status": "EXACT_SOURCE_FACTOR"
+          }
+        ],
+        "independent_world_truth": "NOT_ESTABLISHED",
+        "outcome_quote": "Narrator: The animals escaped.",
+        "source": {
+          "source_id": "bob",
+          "version": 1
+        },
+        "status": "SOURCE_FACTORS_CHECKED"
+      }
+    ],
+    "known_at": null,
+    "observer": "Analyst",
+    "outcome_alignment": "SAME_SOURCE_WORDING_NOT_INDEPENDENT_CORROBORATION",
+    "policy": "Responsibility is conditional on an explicit caller rule. Separate causal contribution, action-time knowledge, foreseeability, control and stated intention for each actor. A harmful outcome does not establish malice, a unique responsible actor, or collective responsibility. A reported alternative is not verified feasible. A joint-action report does not create a group mind. Repeated outcome wording across actor sources is one comparison anchor, not independent corroboration. CG03 source-order timestamps are not real calendar time.",
+    "premise_candidates": [
+      {
+        "actor": null,
+        "authority": "CONDITIONAL_NOT_MORAL_TRUTH",
+        "declared_day": null,
+        "executable_as_caller_condition": true,
+        "origin": "USER_SUPPLIED",
+        "parse_status": "PARSED_CONJUNCTIVE_FACTORS",
+        "premise_id": "g01-premise:f4d6ab62a215bef019f7e369e2bcf4067ff7737eed0dc82ce3eedfa077936481",
+        "private_endorsement": "NOT_INFERRED",
+        "requirements": [
+          {
+            "factor": "CAUSAL_CONTRIBUTION",
+            "value": true
+          },
+          {
+            "factor": "CONTROL",
+            "value": true
+          }
+        ],
+        "rule_text": "responsibility requires causal contribution and control",
+        "source": null
+      }
+    ],
+    "question": "For this analysis, responsibility requires causal contribution and control. For this analysis, collective responsibility requires each participant to satisfy the individual rule.",
+    "schema": "hcl-g02-responsibility-composition-v1",
+    "shared_outcome_quote": "Narrator: The animals escaped.",
+    "temporal_semantics": "CG03_SOURCE_ORDER_AND_EXPLICIT_ACTION_TIME_WORDING_NOT_CALENDAR_PROOF",
+    "verdict": "NO_MORAL_OR_LEGAL_TRUTH"
+  },
+  "after_correction": {
+    "actors": [
+      "Alice",
+      "Bob"
+    ],
+    "collective": {
+      "caller_rule": "For this analysis, collective responsibility requires each participant to satisfy the individual rule.",
+      "group_mind": "NOT_INFERRED",
+      "joint_report": {
+        "quote": "Narrator: Alice and Bob jointly opened the gate.",
+        "source_id": "joint",
+        "source_version": 1
+      },
+      "reported_participation": "SOURCE_REPORTED_NOT_WORLD_VERIFIED",
+      "status": "UNRESOLVED_INDIVIDUAL_FACTORS"
+    },
+    "efficacy": "UNTESTED",
+    "individuals": [
+      {
+        "action_quote": "Alice: I opened the gate.",
+        "actor": "Alice",
+        "alternatives": [
+          {
+            "end": 256,
+            "option": "closed the gate",
+            "quote": "Alice: At the time I could have closed the gate instead of opening the gate.",
+            "replaced": "opening the gate",
+            "source_id": "alice",
+            "source_version": 1,
+            "start": 180,
+            "status": "SOURCE_REPORTED_OPTION_NOT_VERIFIED_FEASIBILITY"
+          }
+        ],
+        "checked": {
+          "action_event_id": "cg03-240798cfd80f-1",
+          "conclusion": "PREMISE_DEPENDENT_ONLY",
+          "factors": [
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "CAUSAL_CONTRIBUTION",
+              "state": "SUPPORTED_CLAIM",
+              "support": [
+                {
+                  "about_time": "2026-01-01T00:00:01+00:00",
+                  "authority": "EXPLICIT_NARRATOR",
+                  "claim_id": "claim-3",
+                  "quote": "Narrator: Alice opening the gate caused the animals to escape.",
+                  "source_event_id": "cg03-240798cfd80f-3",
+                  "target_actor": "Alice",
+                  "value": true
+                }
+              ],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "KNOWLEDGE",
+              "state": "UNKNOWN",
+              "support": [],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "FORESEEABILITY",
+              "state": "UNKNOWN",
+              "support": [],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "CONTROL",
+              "state": "SUPPORTED_CLAIM",
+              "support": [
+                {
+                  "about_time": "2026-01-01T00:00:01+00:00",
+                  "authority": "EXPLICIT_NARRATOR",
+                  "claim_id": "claim-4",
+                  "quote": "Narrator: At the time Alice could have stopped the opening.",
+                  "source_event_id": "cg03-240798cfd80f-4",
+                  "target_actor": "Alice",
+                  "value": true
+                }
+              ],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "STATED_INTENTION",
+              "state": "UNKNOWN",
+              "support": [],
+              "third_party_attributions": []
+            }
+          ],
+          "focal_actor": "Alice",
+          "other_relevant_facts": "OPEN_UNKNOWN",
+          "outcome_event_id": "cg03-240798cfd80f-2",
+          "premise_assessments": [
+            {
+              "authority": "CALLER_SUPPLIED_CONDITIONAL",
+              "basis_event_ids": [
+                "cg03-240798cfd80f-1",
+                "cg03-240798cfd80f-2",
+                "cg03-240798cfd80f-3",
+                "cg03-240798cfd80f-4"
+              ],
+              "premise_id": "g01-premise:f4d6ab62a215bef019f7e369e2bcf4067ff7737eed0dc82ce3eedfa077936481",
+              "requirements": [
+                {
+                  "factor": "CAUSAL_CONTRIBUTION",
+                  "factor_state": "SUPPORTED_CLAIM",
+                  "required_value": true,
+                  "result": "MET_BY_SOURCE_CLAIM",
+                  "source_claim_ids": [
+                    "claim-3"
+                  ]
+                },
+                {
+                  "factor": "CONTROL",
+                  "factor_state": "SUPPORTED_CLAIM",
+                  "required_value": true,
+                  "result": "MET_BY_SOURCE_CLAIM",
+                  "source_claim_ids": [
+                    "claim-4"
+                  ]
+                }
+              ],
+              "result": "CONDITIONALLY_SUPPORTED_ON_SOURCE_CLAIMS",
+              "scope": "PREMISE_DEPENDENT_EXPLANATION_NOT_MORAL_OR_LEGAL_VERDICT",
+              "text": "responsibility requires causal contribution and control"
+            }
+          ],
+          "status": "SOURCE_FACTORS_CHECKED"
+        },
+        "diagnostics": [
+          {
+            "claim_id": "claim-3",
+            "line": 3,
+            "source_event_id": "cg03-240798cfd80f-3",
+            "status": "EXACT_SOURCE_FACTOR"
+          },
+          {
+            "claim_id": "claim-4",
+            "line": 4,
+            "source_event_id": "cg03-240798cfd80f-4",
+            "status": "EXACT_SOURCE_FACTOR"
+          }
+        ],
+        "independent_world_truth": "NOT_ESTABLISHED",
+        "outcome_quote": "Narrator: The animals escaped.",
+        "source": {
+          "source_id": "alice",
+          "version": 1
+        },
+        "status": "SOURCE_FACTORS_CHECKED"
+      },
+      {
+        "action_quote": "Bob: I opened the gate.",
+        "actor": "Bob",
+        "alternatives": [
+          {
+            "end": 190,
+            "option": "closed the gate",
+            "quote": "Bob: At the time I could have closed the gate instead of opening the gate.",
+            "replaced": "opening the gate",
+            "source_id": "bob",
+            "source_version": 2,
+            "start": 116,
+            "status": "SOURCE_REPORTED_OPTION_NOT_VERIFIED_FEASIBILITY"
+          }
+        ],
+        "checked": {
+          "action_event_id": "cg03-f854ff79021d-1",
+          "conclusion": "PREMISE_DEPENDENT_ONLY",
+          "factors": [
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "CAUSAL_CONTRIBUTION",
+              "state": "SUPPORTED_CLAIM",
+              "support": [
+                {
+                  "about_time": "2026-01-01T00:00:01+00:00",
+                  "authority": "EXPLICIT_NARRATOR",
+                  "claim_id": "claim-3",
+                  "quote": "Narrator: Bob opening the gate caused the animals to escape.",
+                  "source_event_id": "cg03-f854ff79021d-3",
+                  "target_actor": "Bob",
+                  "value": true
+                }
+              ],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "KNOWLEDGE",
+              "state": "UNKNOWN",
+              "support": [],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "FORESEEABILITY",
+              "state": "UNKNOWN",
+              "support": [],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "CONTROL",
+              "state": "UNKNOWN",
+              "support": [],
+              "third_party_attributions": []
+            },
+            {
+              "contradiction": [],
+              "epistemic_scope": "EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH",
+              "factor": "STATED_INTENTION",
+              "state": "UNKNOWN",
+              "support": [],
+              "third_party_attributions": []
+            }
+          ],
+          "focal_actor": "Bob",
+          "other_relevant_facts": "OPEN_UNKNOWN",
+          "outcome_event_id": "cg03-f854ff79021d-2",
+          "premise_assessments": [
+            {
+              "authority": "CALLER_SUPPLIED_CONDITIONAL",
+              "basis_event_ids": [
+                "cg03-f854ff79021d-1",
+                "cg03-f854ff79021d-2",
+                "cg03-f854ff79021d-3"
+              ],
+              "premise_id": "g01-premise:f4d6ab62a215bef019f7e369e2bcf4067ff7737eed0dc82ce3eedfa077936481",
+              "requirements": [
+                {
+                  "factor": "CAUSAL_CONTRIBUTION",
+                  "factor_state": "SUPPORTED_CLAIM",
+                  "required_value": true,
+                  "result": "MET_BY_SOURCE_CLAIM",
+                  "source_claim_ids": [
+                    "claim-3"
+                  ]
+                },
+                {
+                  "factor": "CONTROL",
+                  "factor_state": "UNKNOWN",
+                  "required_value": true,
+                  "result": "UNRESOLVED",
+                  "source_claim_ids": []
+                }
+              ],
+              "result": "UNRESOLVED",
+              "scope": "PREMISE_DEPENDENT_EXPLANATION_NOT_MORAL_OR_LEGAL_VERDICT",
+              "text": "responsibility requires causal contribution and control"
+            }
+          ],
+          "status": "SOURCE_FACTORS_CHECKED"
+        },
+        "diagnostics": [
+          {
+            "claim_id": "claim-3",
+            "line": 3,
+            "source_event_id": "cg03-f854ff79021d-3",
+            "status": "EXACT_SOURCE_FACTOR"
+          }
+        ],
+        "independent_world_truth": "NOT_ESTABLISHED",
+        "outcome_quote": "Narrator: The animals escaped.",
+        "source": {
+          "source_id": "bob",
+          "version": 2
+        },
+        "status": "SOURCE_FACTORS_CHECKED"
+      }
+    ],
+    "known_at": null,
+    "observer": "Analyst",
+    "outcome_alignment": "SAME_SOURCE_WORDING_NOT_INDEPENDENT_CORROBORATION",
+    "policy": "Responsibility is conditional on an explicit caller rule. Separate causal contribution, action-time knowledge, foreseeability, control and stated intention for each actor. A harmful outcome does not establish malice, a unique responsible actor, or collective responsibility. A reported alternative is not verified feasible. A joint-action report does not create a group mind. Repeated outcome wording across actor sources is one comparison anchor, not independent corroboration. CG03 source-order timestamps are not real calendar time.",
+    "premise_candidates": [
+      {
+        "actor": null,
+        "authority": "CONDITIONAL_NOT_MORAL_TRUTH",
+        "declared_day": null,
+        "executable_as_caller_condition": true,
+        "origin": "USER_SUPPLIED",
+        "parse_status": "PARSED_CONJUNCTIVE_FACTORS",
+        "premise_id": "g01-premise:f4d6ab62a215bef019f7e369e2bcf4067ff7737eed0dc82ce3eedfa077936481",
+        "private_endorsement": "NOT_INFERRED",
+        "requirements": [
+          {
+            "factor": "CAUSAL_CONTRIBUTION",
+            "value": true
+          },
+          {
+            "factor": "CONTROL",
+            "value": true
+          }
+        ],
+        "rule_text": "responsibility requires causal contribution and control",
+        "source": null
+      }
+    ],
+    "question": "For this analysis, responsibility requires causal contribution and control. For this analysis, collective responsibility requires each participant to satisfy the individual rule.",
+    "schema": "hcl-g02-responsibility-composition-v1",
+    "shared_outcome_quote": "Narrator: The animals escaped.",
+    "temporal_semantics": "CG03_SOURCE_ORDER_AND_EXPLICIT_ACTION_TIME_WORDING_NOT_CALENDAR_PROOF",
+    "verdict": "NO_MORAL_OR_LEGAL_TRUTH"
+  },
+  "actual_final_model_messages": [
+    {
+      "role": "system",
+      "content": "Responsibility is conditional on an explicit caller rule. Separate causal contribution, action-time knowledge, foreseeability, control and stated intention for each actor. A harmful outcome does not establish malice, a unique responsible actor, or collective responsibility. A reported alternative is not verified feasible. A joint-action report does not create a group mind. Repeated outcome wording across actor sources is one comparison anchor, not independent corroboration. CG03 source-order timestamps are not real calendar time."
+    },
+    {
+      "role": "user",
+      "content": "{\"actors\": [\"Alice\", \"Bob\"], \"collective\": {\"caller_rule\": \"For this analysis, collective responsibility requires each participant to satisfy the individual rule.\", \"group_mind\": \"NOT_INFERRED\", \"joint_report\": {\"quote\": \"Narrator: Alice and Bob jointly opened the gate.\", \"source_id\": \"joint\", \"source_version\": 1}, \"reported_participation\": \"SOURCE_REPORTED_NOT_WORLD_VERIFIED\", \"status\": \"UNRESOLVED_INDIVIDUAL_FACTORS\"}, \"efficacy\": \"UNTESTED\", \"individuals\": [{\"action_quote\": \"Alice: I opened the gate.\", \"actor\": \"Alice\", \"alternatives\": [{\"end\": 256, \"option\": \"closed the gate\", \"quote\": \"Alice: At the time I could have closed the gate instead of opening the gate.\", \"replaced\": \"opening the gate\", \"source_id\": \"alice\", \"source_version\": 1, \"start\": 180, \"status\": \"SOURCE_REPORTED_OPTION_NOT_VERIFIED_FEASIBILITY\"}], \"checked\": {\"action_event_id\": \"cg03-240798cfd80f-1\", \"conclusion\": \"PREMISE_DEPENDENT_ONLY\", \"factors\": [{\"contradiction\": [], \"epistemic_scope\": \"EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH\", \"factor\": \"CAUSAL_CONTRIBUTION\", \"state\": \"SUPPORTED_CLAIM\", \"support\": [{\"about_time\": \"2026-01-01T00:00:01+00:00\", \"authority\": \"EXPLICIT_NARRATOR\", \"claim_id\": \"claim-3\", \"quote\": \"Narrator: Alice opening the gate caused the animals to escape.\", \"source_event_id\": \"cg03-240798cfd80f-3\", \"target_actor\": \"Alice\", \"value\": true}], \"third_party_attributions\": []}, {\"contradiction\": [], \"epistemic_scope\": \"EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH\", \"factor\": \"KNOWLEDGE\", \"state\": \"UNKNOWN\", \"support\": [], \"third_party_attributions\": []}, {\"contradiction\": [], \"epistemic_scope\": \"EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH\", \"factor\": \"FORESEEABILITY\", \"state\": \"UNKNOWN\", \"support\": [], \"third_party_attributions\": []}, {\"contradiction\": [], \"epistemic_scope\": \"EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH\", \"factor\": \"CONTROL\", \"state\": \"SUPPORTED_CLAIM\", \"support\": [{\"about_time\": \"2026-01-01T00:00:01+00:00\", \"authority\": \"EXPLICIT_NARRATOR\", \"claim_id\": \"claim-4\", \"quote\": \"Narrator: At the time Alice could have stopped the opening.\", \"source_event_id\": \"cg03-240798cfd80f-4\", \"target_actor\": \"Alice\", \"value\": true}], \"third_party_attributions\": []}, {\"contradiction\": [], \"epistemic_scope\": \"EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH\", \"factor\": \"STATED_INTENTION\", \"state\": \"UNKNOWN\", \"support\": [], \"third_party_attributions\": []}], \"focal_actor\": \"Alice\", \"other_relevant_facts\": \"OPEN_UNKNOWN\", \"outcome_event_id\": \"cg03-240798cfd80f-2\", \"premise_assessments\": [{\"authority\": \"CALLER_SUPPLIED_CONDITIONAL\", \"basis_event_ids\": [\"cg03-240798cfd80f-1\", \"cg03-240798cfd80f-2\", \"cg03-240798cfd80f-3\", \"cg03-240798cfd80f-4\"], \"premise_id\": \"g01-premise:f4d6ab62a215bef019f7e369e2bcf4067ff7737eed0dc82ce3eedfa077936481\", \"requirements\": [{\"factor\": \"CAUSAL_CONTRIBUTION\", \"factor_state\": \"SUPPORTED_CLAIM\", \"required_value\": true, \"result\": \"MET_BY_SOURCE_CLAIM\", \"source_claim_ids\": [\"claim-3\"]}, {\"factor\": \"CONTROL\", \"factor_state\": \"SUPPORTED_CLAIM\", \"required_value\": true, \"result\": \"MET_BY_SOURCE_CLAIM\", \"source_claim_ids\": [\"claim-4\"]}], \"result\": \"CONDITIONALLY_SUPPORTED_ON_SOURCE_CLAIMS\", \"scope\": \"PREMISE_DEPENDENT_EXPLANATION_NOT_MORAL_OR_LEGAL_VERDICT\", \"text\": \"responsibility requires causal contribution and control\"}], \"status\": \"SOURCE_FACTORS_CHECKED\"}, \"diagnostics\": [{\"claim_id\": \"claim-3\", \"line\": 3, \"source_event_id\": \"cg03-240798cfd80f-3\", \"status\": \"EXACT_SOURCE_FACTOR\"}, {\"claim_id\": \"claim-4\", \"line\": 4, \"source_event_id\": \"cg03-240798cfd80f-4\", \"status\": \"EXACT_SOURCE_FACTOR\"}], \"independent_world_truth\": \"NOT_ESTABLISHED\", \"outcome_quote\": \"Narrator: The animals escaped.\", \"source\": {\"source_id\": \"alice\", \"version\": 1}, \"status\": \"SOURCE_FACTORS_CHECKED\"}, {\"action_quote\": \"Bob: I opened the gate.\", \"actor\": \"Bob\", \"alternatives\": [{\"end\": 190, \"option\": \"closed the gate\", \"quote\": \"Bob: At the time I could have closed the gate instead of opening the gate.\", \"replaced\": \"opening the gate\", \"source_id\": \"bob\", \"source_version\": 2, \"start\": 116, \"status\": \"SOURCE_REPORTED_OPTION_NOT_VERIFIED_FEASIBILITY\"}], \"checked\": {\"action_event_id\": \"cg03-f854ff79021d-1\", \"conclusion\": \"PREMISE_DEPENDENT_ONLY\", \"factors\": [{\"contradiction\": [], \"epistemic_scope\": \"EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH\", \"factor\": \"CAUSAL_CONTRIBUTION\", \"state\": \"SUPPORTED_CLAIM\", \"support\": [{\"about_time\": \"2026-01-01T00:00:01+00:00\", \"authority\": \"EXPLICIT_NARRATOR\", \"claim_id\": \"claim-3\", \"quote\": \"Narrator: Bob opening the gate caused the animals to escape.\", \"source_event_id\": \"cg03-f854ff79021d-3\", \"target_actor\": \"Bob\", \"value\": true}], \"third_party_attributions\": []}, {\"contradiction\": [], \"epistemic_scope\": \"EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH\", \"factor\": \"KNOWLEDGE\", \"state\": \"UNKNOWN\", \"support\": [], \"third_party_attributions\": []}, {\"contradiction\": [], \"epistemic_scope\": \"EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH\", \"factor\": \"FORESEEABILITY\", \"state\": \"UNKNOWN\", \"support\": [], \"third_party_attributions\": []}, {\"contradiction\": [], \"epistemic_scope\": \"EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH\", \"factor\": \"CONTROL\", \"state\": \"UNKNOWN\", \"support\": [], \"third_party_attributions\": []}, {\"contradiction\": [], \"epistemic_scope\": \"EXPLICIT_SOURCE_CLAIMS_NOT_PRIVATE_OR_WORLD_TRUTH\", \"factor\": \"STATED_INTENTION\", \"state\": \"UNKNOWN\", \"support\": [], \"third_party_attributions\": []}], \"focal_actor\": \"Bob\", \"other_relevant_facts\": \"OPEN_UNKNOWN\", \"outcome_event_id\": \"cg03-f854ff79021d-2\", \"premise_assessments\": [{\"authority\": \"CALLER_SUPPLIED_CONDITIONAL\", \"basis_event_ids\": [\"cg03-f854ff79021d-1\", \"cg03-f854ff79021d-2\", \"cg03-f854ff79021d-3\"], \"premise_id\": \"g01-premise:f4d6ab62a215bef019f7e369e2bcf4067ff7737eed0dc82ce3eedfa077936481\", \"requirements\": [{\"factor\": \"CAUSAL_CONTRIBUTION\", \"factor_state\": \"SUPPORTED_CLAIM\", \"required_value\": true, \"result\": \"MET_BY_SOURCE_CLAIM\", \"source_claim_ids\": [\"claim-3\"]}, {\"factor\": \"CONTROL\", \"factor_state\": \"UNKNOWN\", \"required_value\": true, \"result\": \"UNRESOLVED\", \"source_claim_ids\": []}], \"result\": \"UNRESOLVED\", \"scope\": \"PREMISE_DEPENDENT_EXPLANATION_NOT_MORAL_OR_LEGAL_VERDICT\", \"text\": \"responsibility requires causal contribution and control\"}], \"status\": \"SOURCE_FACTORS_CHECKED\"}, \"diagnostics\": [{\"claim_id\": \"claim-3\", \"line\": 3, \"source_event_id\": \"cg03-f854ff79021d-3\", \"status\": \"EXACT_SOURCE_FACTOR\"}], \"independent_world_truth\": \"NOT_ESTABLISHED\", \"outcome_quote\": \"Narrator: The animals escaped.\", \"source\": {\"source_id\": \"bob\", \"version\": 2}, \"status\": \"SOURCE_FACTORS_CHECKED\"}], \"known_at\": null, \"observer\": \"Analyst\", \"outcome_alignment\": \"SAME_SOURCE_WORDING_NOT_INDEPENDENT_CORROBORATION\", \"policy\": \"Responsibility is conditional on an explicit caller rule. Separate causal contribution, action-time knowledge, foreseeability, control and stated intention for each actor. A harmful outcome does not establish malice, a unique responsible actor, or collective responsibility. A reported alternative is not verified feasible. A joint-action report does not create a group mind. Repeated outcome wording across actor sources is one comparison anchor, not independent corroboration. CG03 source-order timestamps are not real calendar time.\", \"premise_candidates\": [{\"actor\": null, \"authority\": \"CONDITIONAL_NOT_MORAL_TRUTH\", \"declared_day\": null, \"executable_as_caller_condition\": true, \"origin\": \"USER_SUPPLIED\", \"parse_status\": \"PARSED_CONJUNCTIVE_FACTORS\", \"premise_id\": \"g01-premise:f4d6ab62a215bef019f7e369e2bcf4067ff7737eed0dc82ce3eedfa077936481\", \"private_endorsement\": \"NOT_INFERRED\", \"requirements\": [{\"factor\": \"CAUSAL_CONTRIBUTION\", \"value\": true}, {\"factor\": \"CONTROL\", \"value\": true}], \"rule_text\": \"responsibility requires causal contribution and control\", \"source\": null}], \"question\": \"For this analysis, responsibility requires causal contribution and control. For this analysis, collective responsibility requires each participant to satisfy the individual rule.\", \"schema\": \"hcl-g02-responsibility-composition-v1\", \"shared_outcome_quote\": \"Narrator: The animals escaped.\", \"temporal_semantics\": \"CG03_SOURCE_ORDER_AND_EXPLICIT_ACTION_TIME_WORDING_NOT_CALENDAR_PROOF\", \"verdict\": \"NO_MORAL_OR_LEGAL_TRUTH\"}"
+    }
+  ],
+  "implementation": "CORRECTNESS_VERIFIED",
+  "ordinary_input": "REPLAY_VERIFIED",
+  "efficacy": "UNTESTED",
+  "activation": "OPT_IN",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
