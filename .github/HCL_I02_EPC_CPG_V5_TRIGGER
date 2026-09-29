@@ -1,0 +1,6 @@
+HCL I02 EPC C/P/G v5 development calibration: ONE EXECUTION ONLY
+Frozen package SHA256: 9cab1a0c4e23dbfc27725313956f92b2c533c7a51ecdca435a1d6d3ff231d228
+Package main baseline: 93856d4b390f89cc767ba9cd2fa4d6bfd4dab5d3
+Existing DeepSeek credential; at most 4 calls; 0 retries; USD 0.15 hard cap.
+No H call, no confirmation item, no LongMemEval, no historical grant transfer.
+Remove this trigger after the one raw receipt and source-first closure.
