@@ -19,6 +19,14 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [bounded OER screen](docs/HCL_I02_OER_BOUNDED_SCREEN.md) separated a
+SQuALITY story's USA-only Gutenberg status from its human-response license,
+and chapter-wide CC BY notices from a separately attributed CC BY-NC-SA
+ethics case. Visible catalog/chapter/question text is in the lineage firewall.
+TRU's discussion questions did not supply a clean source-bounded I01 abstract
+concept case. No source was approved for provider input or unseen confirmation;
+zero calls/spend. I02 remains next.
+
 The [G workspace v4 boundary](docs/HCL_I02_G_WORKSPACE_V4_BOUNDARY.md)
 rejects undeclared per-quote fields, duplicate JSON keys and malformed or
 oversized map entries before the generic comparator's final model input. A

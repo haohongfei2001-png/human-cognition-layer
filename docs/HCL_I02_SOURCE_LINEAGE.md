@@ -75,6 +75,14 @@ candidate invents new lineage IDs; differently formatted or paraphrased copies
 still require the independent repository-wide provenance audit. No item was
 qualified or sent to a provider.
 
+The [bounded OER screen](HCL_I02_OER_BOUNDED_SCREEN.md) additionally records
+the first SQuALITY/Gutenberg catalog-summary exposure and the TRU/Rebus
+social-contract chapters plus an Ethics Bowl Canada case displayed by a
+publisher-indexed result. The case-specific noncommercial license cannot be
+replaced by a different chapter's CC BY notice. These authors and question
+systems are development-screened; the exact first SQuALITY story digest is
+also in the guard. No broader SQuALITY question text was displayed.
+
 **EVALUATION_DELTA:** changing a row ID or omitting historical rows from a
 future catalog no longer makes the two I02 and five named pre-I02
 author/template/writing systems eligible for confirmation in the I02 guard. **HCL answer
