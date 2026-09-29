@@ -56,3 +56,5 @@ from .episodic import EpisodicIndex, EpisodicRetrieval
 from .narrative_time import NarrativeEpisode, NarrativeSnapshot, NarrativeTimeline, parse_narrative_episodes
 
 from .evidence_closure import EvidenceClosure, EvidenceClosureIndex
+
+from .character_development import CharacterDevelopmentComparison, compare_character_development
