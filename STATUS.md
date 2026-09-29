@@ -19,6 +19,15 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [exact-commit repository exposure screen](docs/HCL_I02_REPOSITORY_EXPOSURE_SNAPSHOT.md)
+now checks a proposed source against tracked UTF-8 text before the existing
+source-first gates. On remote main `7758180cb29b65ad1b925ecad801a4b6fc8d07f0`,
+it rejected the already exposed KPU source from its development file, raw
+receipt and runner while excluding 29 LongMemEval-named paths from content
+access. This is a provider-free negative screen of one snapshot, not a full
+history audit or independent source qualification. **0 new qualified cases,
+0 provider calls and 0 HCL answer gain.**
+
 The [blind source-first review packet](docs/HCL_I02_BLIND_REVIEW_PACKET.md)
 now verifies a completed raw receipt against frozen source obligations and
 hands opaque final answers to an independent reviewer while withholding the
