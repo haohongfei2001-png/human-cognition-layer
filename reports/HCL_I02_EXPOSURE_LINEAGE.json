@@ -97,7 +97,13 @@
       "native_labels_opened": 0,
       "item_level_source_validity": "NOT_AUDITED",
       "task_fit": "NOT_QUALIFIED_FOR_I01_ABSTRACT_CONCEPT_PHILOSOPHY",
-      "model_input_allowed": false
+      "model_input_allowed": false,
+      "source_sha256s": [
+        "39c0ccb719315261a1b671fb06ed4df769a1b83e846d26e76dcd19904079df30"
+      ],
+      "related_author_ids": [
+        "geraldine-bedell"
+      ]
     },
     {
       "id": "gutenberg-hannes-bok-62314-catalog-summary",
@@ -112,6 +118,54 @@
       "item_level_source_validity": "NOT_AUDITED",
       "task_fit": "UNDETERMINED",
       "model_input_allowed": false
+    },
+    {
+      "id": "narrativeqa-amy-foster-development-screen",
+      "status": "NATIVE_REFERENCE_ANSWERS_EXPOSED_DEVELOPMENT_ONLY",
+      "writing_system_id": "narrativeqa-original-story-human-short-answer-qa",
+      "author_id": "narrativeqa-question-writer-system",
+      "template_id": "narrativeqa-qaps-v1-short-answer",
+      "related_author_ids": [
+        "joseph-conrad"
+      ],
+      "publisher_url": "https://github.com/google-deepmind/narrativeqa",
+      "primary_text_url": "https://www.gutenberg.org/ebooks/495",
+      "publisher_commit": "904246f6d1fe99a99a08a03501fe3e619af2cee5",
+      "documents_csv_sha256": "6dffa4cc0b5c9963fe3a097c87f04aa7767da36627500cc7a0d69e2405e1144a",
+      "qaps_csv_sha256": "990b02af0b5280de210f0e6b80f43b3fab80dc6de630c4d5059a1b7131c26e38",
+      "content_rows_seen_at_least": 30,
+      "native_labels_opened": 8,
+      "exposure_note": "The 30 Amy Foster question texts, two native reference answers for four selected questions, Gutenberg catalog summary and bounded original-story snippets were displayed to the implementer. No arm or model call occurred. The source system and original author are development-exposed, never unseen confirmation.",
+      "item_level_source_validity": "NOT_AUDITED",
+      "task_fit": "NATIVE_QUESTIONS_PREDOMINANTLY_FACT_RETRIEVAL_NOT_I01_LONG_CHARACTER_WITNESS",
+      "model_input_allowed": false
+    },
+    {
+      "id": "narrative-crossroads-two-modules-development-screen",
+      "status": "PEDAGOGICAL_ORACLE_GUIDE_EXPOSED_DEVELOPMENT_ONLY",
+      "writing_system_id": "narrative-crossroads-character-threshold-module",
+      "author_id": "geoffrey-sperl-narrative-crossroads",
+      "template_id": "narrative-crossroads-three-lenses-threshold-guide",
+      "related_author_ids": [
+        "richard-connell",
+        "hector-hugh-munro-saki"
+      ],
+      "source_sha256s": [
+        "2dad52d13d80532af5c5f345bece3dea9e8abe2abccf726f2d30c05bd8d86fbe"
+      ],
+      "publisher_url": "https://narrativecrossroads.org/practice/modules/",
+      "primary_text_url": "https://www.gutenberg.org/ebooks/1477",
+      "content_rows_seen_at_least": 2,
+      "native_labels_opened": 0,
+      "oracle_sample_responses_opened_at_least": 2,
+      "exposure_note": "Both teacher modules, including prewritten character wants/fears, threshold interpretations and sample responses, were opened. The Most Dangerous Game public story beginning and The Interlopers story collection were also opened. Module mental-state tables and samples are editorial aids, not ordinary source or arm input. No case, arm, model call or scorer result was created.",
+      "item_level_source_validity": "NOT_AUDITED",
+      "task_fit": "UNDETERMINED_EXTERNAL_PEDAGOGICAL_GUIDE_NOT_NATIVE_I01_QA",
+      "model_input_allowed": false,
+      "module_pdf_sha256s": {
+        "NC_Interlopers.pdf": "819773028b5ec6ccbf2056c69a2eb75fb6ecb88415f4c1a832052a87af8f462b",
+        "NC_MDG.pdf": "aa77e46d0383fcc6f8006651301011482ea3676ac399a05836fbee361fb79b22"
+      }
     }
   ]
 }

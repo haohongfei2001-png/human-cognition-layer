@@ -4,6 +4,7 @@ This supplements the I01 catalog guard. It checks known earlier exposures even
 when a future catalog contains only confirmation cases, not calibration cases.
 """
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -50,16 +51,38 @@ def load_lineage(path=LINEAGE):
         'SEARCH_SNIPPET_EXPOSED_TASK_FIT_UNAUDITED_NOT_CONFIRMATION_QUALIFIED',
         'PUBLISHER_CONTENT_AND_QUESTIONS_EXPOSED_NOT_CONFIRMATION_QUALIFIED',
         'PUBLIC_CATALOG_SUMMARY_EXPOSED_NOT_CONFIRMATION_QUALIFIED',
+        'NATIVE_REFERENCE_ANSWERS_EXPOSED_DEVELOPMENT_ONLY',
+        'PEDAGOGICAL_ORACLE_GUIDE_EXPOSED_DEVELOPMENT_ONLY',
     }
+    screened_ids = set()
     for row in lineage.get('screened_not_qualified', []):
-        if (row.get('status') not in screened_statuses or
-                row.get('content_rows_seen_at_least', 0) < 1 or
-                row.get('native_labels_opened') != 0 or
+        if (not isinstance(row, dict) or not isinstance(row.get('id'), str) or
+                not row['id'] or row['id'] in ids or row['id'] in screened_ids or
+                row.get('status') not in screened_statuses or
+                type(row.get('content_rows_seen_at_least')) is not int or
+                row['content_rows_seen_at_least'] < 1 or
+                type(row.get('native_labels_opened')) is not int or
+                row['native_labels_opened'] < 0 or
                 row.get('model_input_allowed') is not False or
                 row.get('item_level_source_validity') != 'NOT_AUDITED'):
             raise ValueError('screened source cannot be promoted by metadata')
+        screened_ids.add(row['id'])
+        has_answers = row['status'] == 'NATIVE_REFERENCE_ANSWERS_EXPOSED_DEVELOPMENT_ONLY'
+        if has_answers != (row['native_labels_opened'] > 0):
+            raise ValueError('native answer exposure status inconsistent')
         if any(not row.get(key) for key in ('writing_system_id', 'author_id', 'template_id')):
             raise ValueError('screened source lineage missing')
+        related = row.get('related_author_ids', [])
+        if (not isinstance(related, list) or
+                any(not isinstance(value, str) or not value for value in related) or
+                len(set(related)) != len(related)):
+            raise ValueError('screened related author lineage invalid')
+        hashes = row.get('source_sha256s', [])
+        if (not isinstance(hashes, list) or
+                any(not isinstance(value, str) or len(value) != 64 or
+                    any(ch not in '0123456789abcdef' for ch in value)
+                    for value in hashes) or len(set(hashes)) != len(hashes)):
+            raise ValueError('screened source digests invalid')
     return lineage
 
 
@@ -76,6 +99,8 @@ def require_confirmation_disjoint(candidate, lineage=None):
         raise ValueError('confirmation split required')
     if any(not isinstance(candidate.get(k), str) or not candidate[k] for k in IDENTITY_FIELDS):
         raise ValueError('complete source lineage identity required')
+    if not isinstance(candidate.get('source_text'), str) or not candidate['source_text'].strip():
+        raise ValueError('ordinary source text required for exposed-content check')
     for exposed in lineage['exposed_systems']:
         for key in IDENTITY_FIELDS:
             if candidate[key] == exposed[key]:
@@ -88,6 +113,11 @@ def require_confirmation_disjoint(candidate, lineage=None):
         for key in ('writing_system_id', 'author_id', 'template_id'):
             if candidate[key] == screened[key]:
                 raise ValueError(f'{key} reuses screened source system {screened["id"]}')
+        if candidate['author_id'] in screened.get('related_author_ids', []):
+            raise ValueError(f'author_id reuses screened source author {screened["id"]}')
+        if (hashlib.sha256(candidate['source_text'].encode()).hexdigest() in
+                screened.get('source_sha256s', [])):
+            raise ValueError(f'source_text reuses screened source content {screened["id"]}')
     if candidate.get('repository_wide_exposure_audit') != 'PASS_DISJOINT':
         raise ValueError('repository-wide historical exposure audit required')
     if candidate.get('source_license_status') != 'VERIFIED_FOR_THIS_EVALUATION':

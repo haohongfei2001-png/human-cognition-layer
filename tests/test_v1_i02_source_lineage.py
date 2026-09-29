@@ -1,6 +1,7 @@
 """Known calibration exposure is excluded even from confirmation-only catalogs."""
 
 import json
+import hashlib
 import unittest
 from pathlib import Path
 
@@ -79,13 +80,50 @@ class SourceLineageTests(unittest.TestCase):
         self.assertEqual({x['id'] for x in lineage['screened_not_qualified']},
             {'hendrycks-ethics-author-team-hf',
              'quality-nesta-women-on-the-march-dev',
-             'gutenberg-hannes-bok-62314-catalog-summary'})
+             'gutenberg-hannes-bok-62314-catalog-summary',
+             'narrativeqa-amy-foster-development-screen',
+             'narrative-crossroads-two-modules-development-screen'})
         with self.assertRaisesRegex(ValueError, 'screened source system'):
             require_confirmation_disjoint(candidate(
                 template_id='quality-v1.0.1-human-mcq-questions'))
         with self.assertRaisesRegex(ValueError, 'screened source system'):
             require_confirmation_disjoint(candidate(
                 author_id='hannes-bok-original-author'))
+        with self.assertRaisesRegex(ValueError, 'screened source author'):
+            require_confirmation_disjoint(candidate(
+                author_id='joseph-conrad'))
+        with self.assertRaisesRegex(ValueError, 'screened source author'):
+            require_confirmation_disjoint(candidate(
+                author_id='hector-hugh-munro-saki'))
+
+    def test_exact_exposed_content_cannot_pass_under_renamed_lineage(self):
+        lineage = load_lineage()
+        quality = next(x for x in lineage['screened_not_qualified']
+            if x['id'] == 'quality-nesta-women-on-the-march-dev')
+        report = json.loads(Path('reports/HCL_I02_QUALITY_BOUNDED_SCREEN.json').read_text())
+        self.assertEqual(quality['source_sha256s'], [report['selected_article_sha256']])
+        synthetic = 'The same exposed original text under an invented author.'
+        screened = {'id': 'synthetic-exposure', 'source_sha256s': [
+            hashlib.sha256(synthetic.encode()).hexdigest()],
+            'writing_system_id': 'other-system', 'author_id': 'other-author',
+            'template_id': 'other-template'}
+        lineage['screened_not_qualified'].append(screened)
+        with self.assertRaisesRegex(ValueError, 'source_text reuses screened source content'):
+            require_confirmation_disjoint(candidate(source_text=synthetic), lineage)
+        self.assertTrue(require_confirmation_disjoint(candidate(), lineage))
+
+    def test_exposure_receipt_rejects_invalid_and_duplicated_screen_metadata(self):
+        lineage = json.loads(Path('reports/HCL_I02_EXPOSURE_LINEAGE.json').read_text())
+        screened = lineage['screened_not_qualified']
+        self.assertEqual(8, next(x for x in screened if x['id'].startswith('narrativeqa'))[
+            'native_labels_opened'])
+        screened.append(dict(screened[0]))
+        from tempfile import TemporaryDirectory
+        with TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'lineage.json'
+            path.write_text(json.dumps(lineage))
+            with self.assertRaisesRegex(ValueError, 'screened source cannot be promoted'):
+                load_lineage(path)
 
     def test_independent_shape_still_requires_separate_actual_rights_and_semantic_audit(self):
         row = candidate()

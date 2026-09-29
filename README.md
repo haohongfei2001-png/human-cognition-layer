@@ -6,6 +6,7 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 
 - [I02 受限覆盖报告](docs/HCL_I02_RESTRICTED_COVERAGE_REPORT.md)：可执行校验器如实报告少于四任务／三来源体系的目录，同时保留完整成熟度门槛；不开放 provider 输入或声称效力。
 - [I02 QuALITY 有界来源筛查](docs/HCL_I02_QUALITY_BOUNDED_SCREEN.md)：外部文章与人工题的许可有直接来源；固定开发文章九题仍不足以证明深层概念任务适配，已读来源纳入暴露边界，不送模型。
+- [I02 叙事来源边界](docs/HCL_I02_NARRATIVE_SOURCE_BOUNDARY.md)：NarrativeQA 开发题和教学模块已读材料纳入暴露记录；教学模块的人物状态表及示例回答不得作为普通来源输入，尚无合格独立案例。
 
 - [普通人物问题与叙事入口](docs/HCL_V1_PERSON_QUESTION.md)：有来源、时间、访问与局部修订边界；单次回答，默认零提取调用。
 - [I02 C/P/G 一次性校准结案](reports/HCL_I02_CPG_CALIBRATION_CLOSURE.md)：3 次调用后 G-map 格式失败，G-final 未运行；完整 raw receipt 已保存，授权关闭，不测 H 增益。

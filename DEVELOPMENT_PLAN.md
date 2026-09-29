@@ -512,6 +512,7 @@ defect is.
 - Current wave: **I — Serious Independent Evaluation**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
 - **NEXT_READY: I02_UNEXPOSED_SOURCE_QUALIFICATION**
+- A [bounded narrative source screen](docs/HCL_I02_NARRATIVE_SOURCE_BOUNDARY.md) records development exposure of NarrativeQA *Amy Foster* questions/reference answers and Narrative Crossroads teacher modules. Teacher character profiles/sample responses are editorial aids, not ordinary source. The executable lineage guard rejects related story authors and exact screened source digests even when declared IDs change. No I01 item or model input qualified, no calls/spend; continue genuinely unexposed provenance, native task fit and rights screening.
 - A [bounded QuALITY development-source screen](docs/HCL_I02_QUALITY_BOUNDED_SCREEN.md) found direct CC BY notices but rejected the preselected article as an I01 abstract concept/philosophy witness; exposed article/questions and a separate catalog plot summary are recorded in the lineage firewall. Zero new model-qualified or confirmation-qualified sources; continue truly unexposed source qualification without switching rows for H outcomes.
 - I02 structural catalog audit can now report restricted family/source-system coverage without granting provider or efficacy qualification; the full I01 four-family/three-system gate remains enforced. See [restricted coverage report](docs/HCL_I02_RESTRICTED_COVERAGE_REPORT.md).
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
