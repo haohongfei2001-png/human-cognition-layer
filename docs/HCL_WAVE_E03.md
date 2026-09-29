@@ -52,3 +52,7 @@ At implementation freeze it has not executed: calls/spend **0 / USD 0**. A failu
 will be saved without retry. The workflow is disabled after the attempt, and the
 source-first receipt will be committed with subsequent substantive work.
 LongMemEval remains sealed. NEXT_READY: E04 contextual values and partial orders.
+
+Subsequent live result: **FAILED/CLOSED** after one extraction call, no final call.
+See [source-first closure](../reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
+The implementation-freeze zero-call statement above is historical, not current.

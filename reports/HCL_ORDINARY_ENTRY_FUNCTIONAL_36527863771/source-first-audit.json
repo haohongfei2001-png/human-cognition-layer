@@ -1,0 +1,44 @@
+{
+  "json_parse": "PASS",
+  "source_anchor_audit": [
+    {
+      "start": 0,
+      "quote": "Mira said, \"In team, I see myself as careful.\"",
+      "quote_occurs": true,
+      "offset_matches": true
+    },
+    {
+      "start": 45,
+      "quote": "Noor said, \"In team, I see Mira as careless.\"",
+      "quote_occurs": true,
+      "offset_matches": false
+    },
+    {
+      "start": 94,
+      "quote": "Narrator: In team, Mira serves as reviewer.",
+      "quote_occurs": true,
+      "offset_matches": false
+    },
+    {
+      "start": 143,
+      "quote": "Narrator: In team, a reviewer is required to check every patch.",
+      "quote_occurs": true,
+      "offset_matches": false
+    },
+    {
+      "start": 210,
+      "quote": "Narrator: In team, Mira did not check every patch.",
+      "quote_occurs": true,
+      "offset_matches": false
+    },
+    {
+      "start": 267,
+      "quote": "Mira said, \"In team, I reject the requirement for a reviewer to check every patch.\"",
+      "quote_occurs": true,
+      "offset_matches": false
+    }
+  ],
+  "failure": "quote_offset_mismatch",
+  "final_model_call": false,
+  "provider_calls_for_audit": 0
+}
