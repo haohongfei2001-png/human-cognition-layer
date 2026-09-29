@@ -56,6 +56,11 @@ def load_lineage(path=LINEAGE):
     }
     screened_ids = set()
     for row in lineage.get('screened_not_qualified', []):
+        if not isinstance(row, dict):
+            raise ValueError('screened source cannot be promoted by metadata')
+        calibration_only = row.get('calibration_model_input_only') is True
+        validity = ('PRELIMINARY_DEVELOPMENT_SOURCE_FIRST' if calibration_only
+                    else 'NOT_AUDITED')
         if (not isinstance(row, dict) or not isinstance(row.get('id'), str) or
                 not row['id'] or row['id'] in ids or row['id'] in screened_ids or
                 row.get('status') not in screened_statuses or
@@ -63,8 +68,11 @@ def load_lineage(path=LINEAGE):
                 row['content_rows_seen_at_least'] < 1 or
                 type(row.get('native_labels_opened')) is not int or
                 row['native_labels_opened'] < 0 or
-                row.get('model_input_allowed') is not False or
-                row.get('item_level_source_validity') != 'NOT_AUDITED'):
+                row.get('model_input_allowed') is not calibration_only or
+                row.get('item_level_source_validity') != validity or
+                (calibration_only and (row.get('confirmation_qualified') is not False or
+                    not isinstance(row.get('calibration_rights_package_path'), str) or
+                    not Path(row['calibration_rights_package_path']).is_file()))):
             raise ValueError('screened source cannot be promoted by metadata')
         screened_ids.add(row['id'])
         has_answers = row['status'] == 'NATIVE_REFERENCE_ANSWERS_EXPOSED_DEVELOPMENT_ONLY'
@@ -84,6 +92,27 @@ def load_lineage(path=LINEAGE):
                     for value in hashes) or len(set(hashes)) != len(hashes)):
             raise ValueError('screened source digests invalid')
     return lineage
+
+
+def require_development_calibration_input(candidate, lineage=None):
+    """Only the exact source of an explicitly approved development row may run."""
+    if (not isinstance(candidate, dict) or candidate.get('split') != 'CALIBRATION' or
+            not isinstance(candidate.get('source_text'), str)):
+        raise ValueError('development calibration case required')
+    lineage = lineage or load_lineage()
+    source_hash = hashlib.sha256(candidate['source_text'].encode()).hexdigest()
+    for row in lineage.get('screened_not_qualified', []):
+        if (row.get('calibration_model_input_only') is True and
+                row.get('model_input_allowed') is True and
+                candidate.get('writing_system_id') == row.get('writing_system_id') and
+                candidate.get('author_id') == row.get('author_id') and
+                candidate.get('template_id') == row.get('template_id') and
+                source_hash in row.get('source_sha256s', []) and
+                candidate.get('source_group_id') == source_hash and
+                candidate.get('source_license_status') == 'VERIFIED_FOR_THIS_EVALUATION' and
+                candidate.get('source_access_status') == 'AUTHORIZED_FOR_EVERY_ARM'):
+            return True
+    raise ValueError('source or rights not approved for this development calibration')
 
 
 def require_confirmation_disjoint(candidate, lineage=None):
