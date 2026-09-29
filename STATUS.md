@@ -19,21 +19,25 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
-An exact-source [EPC C/P/G v5 development protocol](docs/HCL_I02_EPC_CPG_V5_PROTOCOL.md)
-is frozen with publisher attribution, native open question, five source-first
-obligations, complete-input fairness, four calls maximum, zero retries and a
-separate USD 0.15 hard cap. Provider-free preflight passes; the one-use trigger
-is now queued in PR #237, with no call before merge. The case is approved
-only for this development calibration, never unseen confirmation. H's direct
-route has no cognition treatment and is not called.
+The exact-source [EPC C/P/G v5 development calibration](reports/HCL_I02_EPC_CPG_V5_CLOSURE.md)
+ran once from PR #237/main `e277d91663fabc50b8ead8b28b65f6572b239558`
+after its provider-free gate passed. Run `36596194865` made C, P and G-map calls
+with no retry; G-map hit the frozen 1,024-token ceiling and ended mid-JSON, so
+G-final was not called. Full raw receipt is saved. The grant is **CLOSED / NO
+RERUN / NO TRANSFER**; USD 0.00552090 estimated, USD 0.01104180 rated peak,
+actual invoice unavailable, under its USD 0.15 cap. C/P responses show partial
+source grounding but omit vague-record uncertainty. The comparator remains
+**INTERFACE FAILED / SEMANTICALLY UNQUALIFIED**; the case is development-exposed,
+not unseen confirmation. H's direct route has no cognition treatment and was
+not called. Next work remains I02 source qualification and a separately
+versioned provider-free G interface repair.
 
 The [G v5 generic workspace](docs/HCL_I02_GENERIC_WORKSPACE_V5.md) adds
 source-versioned exact quote memory, provisional evidence relations and
 bounded answer steps to the candidate generic comparator. C/P stay byte-for-
 byte v3; G keeps the full ordinary source and two charged calls. Synthetic
-provider-free checks pass, but G's actual model competence remains unqualified
-until separate development calibration. No HCL runtime or historical result
-changed; zero calls/spend.
+provider-free checks pass, but its first independent development calibration
+failed at the map output boundary. No HCL runtime or historical result changed.
 
 The [EPC glass safety development screen](docs/HCL_I02_EPC_GLASS_SCREEN.md)
 checked one independently authored, natively open ethics question against its

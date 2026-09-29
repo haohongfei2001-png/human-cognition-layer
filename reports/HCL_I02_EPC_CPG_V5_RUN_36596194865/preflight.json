@@ -1,0 +1,83 @@
+{
+  "all_phase_peak_reservation_usd": 0.08573136,
+  "global_source_first_obligations": [
+    {
+      "id": "normative_premise_conditional",
+      "required_behavior": "AVOID_UNCONDITIONAL_MORAL_OR_LEGAL_VERDICT",
+      "weight": 3
+    },
+    {
+      "id": "no_outside_code_as_source",
+      "required_behavior": "AVOID_IMPORTING_EXTERNAL_PROFESSIONAL_CODE",
+      "weight": 3
+    }
+  ],
+  "h_ordinary_route": "DIRECT_NO_COGNITION_TREATMENT_NOT_EXECUTED",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "package_sha256": "9cab1a0c4e23dbfc27725313956f92b2c533c7a51ecdca435a1d6d3ff231d228",
+  "page_license": "CC_BY_SA_4_0",
+  "phase_max_input_token_bounds": [
+    8758,
+    11078,
+    10370,
+    24758
+  ],
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "publisher_attribution": [
+    "Sarah Jayne Hitt",
+    "Matthew Studley",
+    "Darian Meacham",
+    "Nik Whitehead",
+    "Mike Bramhall",
+    "Isobel Grimley"
+  ],
+  "question_sha256": "5a2a0cd2aadab9729a0050e31a9599ec0a629de1280617f0d56ab1a95c707fcb",
+  "same_question_and_complete_source": true,
+  "schema": "hcl-i02-epc-cpg-v5-preflight-v1",
+  "source_first_obligation_anchors": [
+    {
+      "id": "changed_safety_standards_not_proved_violation",
+      "length": 93,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "ab20f89475589df5bd393fdb20dfbfa7a8293e5946fd25faf03808d2420431f0",
+      "start": 1631,
+      "weight": 3
+    },
+    {
+      "id": "developer_cost_pressure_not_malicious_motive",
+      "length": 75,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "235ff1662796b73b34816621f460fdaf190467fe09563ee0821529d94b20b7d7",
+      "start": 1467,
+      "weight": 2
+    },
+    {
+      "id": "contractor_risk_assessment_not_measured_probability",
+      "length": 87,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "b56ff9ec852704668e6cb053dff30abb82c557bc8c07ede0ee7ea932bc45501c",
+      "start": 2471,
+      "weight": 2
+    },
+    {
+      "id": "request_to_withhold_not_actual_concealment",
+      "length": 67,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "c6bd083507bde8bf4edbe3bc5f6bc61064f6648f300c84b143cd4a56986a7740",
+      "start": 2559,
+      "weight": 3
+    },
+    {
+      "id": "vague_records_preserve_uncertainty",
+      "length": 21,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "b3332edbf336fa4b126d762297a0223db865f3b8dec07a17afa5e3af301019de",
+      "start": 1404,
+      "weight": 2
+    }
+  ],
+  "source_selection": "PUBLISHER_SUMMARY_AND_DILEMMA_PART_ONE_ONLY",
+  "source_sha256": "67d84d40b4a543e5eb1fda291360f701f66cb542b0f92838b1ab2cc19d51cda0",
+  "status": "PASS_SOURCE_FIRST_CPG_ONLY"
+}

@@ -11,7 +11,7 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 - [I02 叙事来源边界](docs/HCL_I02_NARRATIVE_SOURCE_BOUNDARY.md)：NarrativeQA 开发题和教学模块已读材料纳入暴露记录；教学模块的人物状态表及示例回答不得作为普通来源输入，尚无合格独立案例。
 - [I02 G 中间证据边界 v4](docs/HCL_I02_G_WORKSPACE_V4_BOUNDARY.md)：比较臂的引用图只允许来源 ID、原文引用和未决问题进入最终模型输入；仍待真实模型语义校准。
 - [I02 通用 G 工作区 v5](docs/HCL_I02_GENERIC_WORKSPACE_V5.md)：补上有版本的引文记忆、暂定证据关系和回答步骤；不改变 C/P 或历史运行，仍待真实模型语义校准。
-- [I02 EPC C/P/G v5 一次性开发校准协议](docs/HCL_I02_EPC_CPG_V5_PROTOCOL.md)：精确来源、原生题、许可与来源优先义务已冻结；最多四次、零重试、USD 0.15 独立硬上限；不运行 H、不计独立确认。
+- [I02 EPC C/P/G v5 一次性开发校准收口](reports/HCL_I02_EPC_CPG_V5_CLOSURE.md)：3 次调用、零重试；G-map 达到冻结输出上限并截断，G-final 未运行，G 语义未合格。原始回执已保存，授权关闭；H 未运行，不计独立确认。
 - [I02 开放教材有界筛查](docs/HCL_I02_OER_BOUNDED_SCREEN.md)：SQuALITY、TRU/Rebus 与 Ethics Bowl 案例的具体许可、任务适配和已读暴露分别记录，尚无合格独立样本。
 
 - [普通人物问题与叙事入口](docs/HCL_V1_PERSON_QUESTION.md)：有来源、时间、访问与局部修订边界；单次回答，默认零提取调用。
