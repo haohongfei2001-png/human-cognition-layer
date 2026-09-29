@@ -19,6 +19,13 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The I02 snapshot qualification gate now rejects a caller-supplied older
+commit when the checkout HEAD has since exposed that source. Historical
+diagnostic scans remain available, while qualification binds to the current
+checkout before the existing rights and lineage checks. This provider-free
+repair closes a stale-revision bypass; it does not qualify a source or prove
+full repository history. No provider call or spend occurred.
+
 The [ACL v8 developer-blind semantic diagnostic](reports/HCL_I02_ACL_CPG_V8_DEVELOPER_REVIEW/CLOSURE.md)
 has now reviewed all three frozen C/P/G-final outputs by opaque ID before
 unblinding: C 6/8, P 7/8, G-final 8/8 on four prespecified source obligations.
