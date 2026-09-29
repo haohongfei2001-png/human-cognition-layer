@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–E COMPLETE / WAVE F / F01–F02 CORRECTNESS_VERIFIED / NEXT_READY=F03**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–E COMPLETE / WAVE F / F01–F03 CORRECTNESS_VERIFIED / NEXT_READY=F04**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -316,7 +316,9 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **F02 — CORRECTNESS_VERIFIED:** source-declared story, recall, disclosure, local narrative order and system-record axes, with unique challenge/receipt links and access-safe historical views. Nineteen tests and positive witness; see `docs/HCL_WAVE_F02.md`.
 
-**F03 — NEXT_READY:** select complete support, challenge, alternatives and revision basis for conclusions, and recompute incrementally.
+**F03 — CORRECTNESS_VERIFIED:** full selected recorded evidence closure with alternative and joint support, challenge, revision and selective cache reuse. Ten tests and ordinary positive witness; see `docs/HCL_WAVE_F03.md`.
+
+**F04 — NEXT_READY:** compare competing explanations of apparent character development while separating knowledge, goal/value change, role pressure and strategic reports.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -477,12 +479,12 @@ defect is.
 
 - Current wave: **Wave F — Long-Horizon Narrative Cognition**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: F03_EVIDENCE_CLOSURE_INCREMENTAL_RECOMPUTATION**
+- **NEXT_READY: F04_COMPETING_CHARACTER_DEVELOPMENT_EXPLANATIONS**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **F03**, then continue through the dependency-safe queue
+Work should continue at **F04**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
