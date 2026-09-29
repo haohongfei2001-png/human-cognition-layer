@@ -71,6 +71,7 @@ class CognitionContext:
     responsibility: dict = field(default_factory=dict)
     preferences: dict = field(default_factory=dict)
     concepts: dict = field(default_factory=dict)
+    information_state: dict = field(default_factory=dict)
 
     def as_dict(self):
         row = asdict(self)
@@ -81,6 +82,8 @@ class CognitionContext:
             del row['preferences']
         if not row['concepts']:
             del row['concepts']
+        if not row['information_state']:
+            del row['information_state']
         return row
 
     def serialized(self):

@@ -11,6 +11,7 @@ from .cg02 import SocialAct, ParticipantInterpretation, AccessStatement
 from .cg03 import ResponsibilityCase, NarrativePremise
 from .cg04 import PreferenceCase
 from .cg05 import ConceptCase
+from .information_state import information_query
 
 
 @dataclass(frozen=True)
@@ -226,6 +227,7 @@ class CognitionPlan:
     contextual_preference: bool = False
     concept_interpretation: bool = False
     belief_preparation: bool = False
+    information_state: bool = False
     target_actor: str | None = None
 
     @property
@@ -247,9 +249,17 @@ _TOOL_IDS = frozenset(('causal', 'argumentation', 'formal_verifier', 'countermod
 
 
 class CognitionRouter:
+    def __init__(self, *, information_state_enabled=True):
+        if type(information_state_enabled) is not bool:
+            raise ValueError('information-state switch must be boolean')
+        self.information_state_enabled = information_state_enabled
+
     def plan(self, request: CognitionRequest):
         query = request.query.lower()
-        target_actor = request.target_actor or query_actor(request.query)
+        information = information_query(request.query) if request.narrative else None
+        if information and request.target_actor and request.target_actor.casefold() != information[0].casefold():
+            raise ValueError('information question actor conflicts with explicit target actor')
+        target_actor = request.target_actor or query_actor(request.query) or (information[0] if information else None)
         mode = request.perspective_mode or (PerspectiveMode.OBSERVER_ABOUT_TARGET if request.observer_actor else
             PerspectiveMode.CHARACTER_PERSPECTIVE if request.target_actor and (request.tools or re.search(
                 r'\b(what does .+ (?:know|believe|think|want)|what did .+ (?:know|believe|think|want)|from .+ perspective)\b|知道什么|从.+视角|以.+视角', query)
@@ -282,6 +292,16 @@ class CognitionRouter:
             selected.extend(('perspective', 'belief'))
             reasons['perspective'] = 'explicit retained belief preparation with source/access scope'
             reasons['belief'] = 'bounded ordinary-source preparation into retained v0.6'
+        if information and not request.observer_actor:
+            # The ablated arm keeps the same provenance/uncertainty scaffold.
+            # Only the checked observation mechanism is removed.
+            selected.extend(('provenance', 'uncertainty'))
+        information_state = bool(self.information_state_enabled and information and not request.observer_actor and
+            request.perspective_mode != PerspectiveMode.OBSERVER_ABOUT_TARGET and
+            not (belief or concept or preference or responsibility or social))
+        if information_state:
+            selected.append('information_state')
+            reasons['information_state'] = 'named actor/object search task with source-checked explicit observation'
         if explanation:
             selected.append('cg01_explanation')
             reasons['cg01_explanation'] = 'bounded character-action explanation conditions'
@@ -328,4 +348,5 @@ class CognitionRouter:
                              responsibility_structure=responsibility,
                              contextual_preference=preference, concept_interpretation=concept,
                              belief_preparation=belief,
+                             information_state=information_state,
                              target_actor=target_actor)

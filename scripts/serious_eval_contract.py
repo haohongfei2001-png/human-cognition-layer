@@ -9,6 +9,7 @@ from pathlib import Path
 
 
 FREEZE = Path('reports/HCL_I01_EVALUATION_FREEZE.json')
+AMENDMENT = Path('reports/HCL_I02_RUNTIME_AMENDMENT.json')
 ARMS = ('C', 'P', 'G', 'H')
 FAMILIES = ('LONG_CHARACTER_DEVELOPMENT', 'MULTIPARTY_INFORMATION_STRATEGY',
     'RESPONSIBILITY_VALUE_INTEGRATION', 'ABSTRACT_CONCEPT_PHILOSOPHY')
@@ -24,6 +25,24 @@ def runtime_digest(root=Path('.')):
         for path in files}
     return hashlib.sha256(json.dumps(rows, sort_keys=True,
         separators=(',', ':')).encode()).hexdigest()
+
+
+def validate_runtime_amendment(freeze, amendment, *, current_digest=None):
+    """Keep I01 immutable while pinning a disclosed repair before confirmation."""
+    validate_freeze(freeze)
+    if (amendment.get('schema') != 'hcl-i02-runtime-amendment-v1' or
+            amendment.get('reason') != 'GENERAL_ORDINARY_INFORMATION_STATE_ENTRY_REPAIR' or
+            amendment.get('previous_hcl_runtime_sha256') != freeze['hcl_runtime_sha256'] or
+            amendment.get('historical_i01_main_sha') != freeze['architecture_main_sha'] or
+            amendment.get('calibration_only') is not True or
+            amendment.get('confirmation_items_inspected') != 0 or
+            amendment.get('provider_calls') != 0 or
+            amendment.get('longmemeval') != 'SEALED_NOT_ACCESSED'):
+        raise ValueError('invalid I02 runtime amendment')
+    digest = current_digest or runtime_digest()
+    if amendment.get('amended_hcl_runtime_sha256') != digest:
+        raise ValueError('current runtime differs from disclosed I02 amendment')
+    return True
 
 
 def validate_freeze(freeze):
@@ -122,6 +141,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
     freeze = json.loads(FREEZE.read_text())
     validate_freeze(freeze)
-    if args.check_current_runtime and runtime_digest() != freeze['hcl_runtime_sha256']:
-        raise ValueError('current runtime differs from I01 architecture freeze')
+    if args.check_current_runtime:
+        if AMENDMENT.exists():
+            validate_runtime_amendment(freeze, json.loads(AMENDMENT.read_text()))
+        elif runtime_digest() != freeze['hcl_runtime_sha256']:
+            raise ValueError('current runtime differs from I01 architecture freeze')
     print('I01_FREEZE_VALID')

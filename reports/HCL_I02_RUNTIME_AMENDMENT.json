@@ -1,0 +1,14 @@
+{
+  "schema": "hcl-i02-runtime-amendment-v1",
+  "reason": "GENERAL_ORDINARY_INFORMATION_STATE_ENTRY_REPAIR",
+  "historical_i01_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "i02_repair_base_main_sha": "f92403e2a48aa22e2c401cf96b820eb9e581fc41",
+  "previous_hcl_runtime_sha256": "f047e61dfeb9cd51e4ebe2f045be0249251d0478ef3d256fd22787ff84ccc7f8",
+  "amended_hcl_runtime_sha256": "0be5badd0720ffff218d13d0e9fd0610bae3cac83c8fea81edeb872f3f9d5f31",
+  "calibration_only": true,
+  "confirmation_items_inspected": 0,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "boundary": "I01 remains immutable. This runtime is an openly disclosed provider-free repair for general named observation, not a frozen independent efficacy result."
+}
