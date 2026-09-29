@@ -1,0 +1,22 @@
+{
+  "schema": "hcl-i02-musr-calibration-source-audit-v1",
+  "upstream": "https://huggingface.co/datasets/TAUR-Lab/MuSR/resolve/7c365b439a222150f317764d4f16ae6c96d7d94a/object_placements.csv",
+  "sha256": "98cd17d2c9ea53664e274365e901c90dfcaa40d17547dfbd369f1cd26fd2a81c",
+  "bytes": 1304234,
+  "rows": 256,
+  "independent_narrative_groups": 64,
+  "questions_per_group": 4,
+  "first_group_source_sha256": "bd0aacf84d7bc7d7fd1fa4114dd05b17aa0c5f2c433d452dfd01b06f7b562d96",
+  "calibration_exposed_row_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "native_labels_in_provider_input": false,
+  "confirmation_rows_semantically_inspected": false,
+  "provider_calls": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "source_semantic_status": "FIRST_GROUP_PARTIAL_SECOND_QUESTION_UNCERTAIN",
+  "source_use": "CALIBRATION_ONLY_NOT_CONFIRMATION"
+}
