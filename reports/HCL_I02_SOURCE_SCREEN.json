@@ -1,0 +1,41 @@
+{
+  "schema": "hcl-i02-source-screen-v1",
+  "phase": "METADATA_SCREEN_NOT_CONTENT_QUALIFICATION",
+  "provider_calls": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "qualified_sources": 0,
+  "sources": [
+    {
+      "source_id": "openstax-introduction-philosophy-2022",
+      "status": "REJECTED_EXPLICIT_AI_INPUT_RESTRICTION",
+      "primary_url": "https://openstax.org/books/introduction-philosophy/pages/1-introduction",
+      "rights_evidence_url": "https://openstax.org/books/introduction-philosophy/pages/1-introduction",
+      "metadata_finding": "The official attribution section states CC BY-NC-SA conditions and separately requires prior written permission for ingestion into large-language-model or generative-AI offerings. Do not send this text or its review questions to the provider.",
+      "explicit_ai_use_prohibition": true,
+      "license_verified_for_use": false,
+      "content_opened_for_case_selection": false
+    },
+    {
+      "source_id": "gutenberg-persuasion-105",
+      "status": "DEFERRED_JURISDICTION_RIGHTS_CHECK",
+      "primary_url": "https://www.gutenberg.org/ebooks/105",
+      "rights_evidence_url": "https://www.gutenberg.org/ebooks/105",
+      "metadata_finding": "Official catalog marks the book public domain in the USA; the Gutenberg notice asks users outside the USA to check local law. This screen does not establish rights for all evaluation locations or model input.",
+      "explicit_ai_use_prohibition": null,
+      "license_verified_for_use": false,
+      "content_opened_for_case_selection": false
+    },
+    {
+      "source_id": "musr-object-placements-b1f4d416",
+      "status": "PROVISIONAL_REQUIRES_DATA_RIGHTS_AND_ITEM_AUDIT",
+      "primary_url": "https://github.com/Zayne-sprague/MuSR/tree/b1f4d4168a9cfc6760e8b74d728e4516023dfaa5/datasets",
+      "rights_evidence_url": "https://github.com/Zayne-sprague/MuSR/blob/b1f4d4168a9cfc6760e8b74d728e4516023dfaa5/LICENSE",
+      "upstream_commit": "b1f4d4168a9cfc6760e8b74d728e4516023dfaa5",
+      "upstream_blob": "bc083672c66a0fca5fa7de6b43a062e9a38ec3f5",
+      "metadata_finding": "Official repository is MIT-marked and publishes a 5 MB object-placement file; README says its narratives were generated using ChatGPT/GPT-4. The repo license wording and actual item/source validity have not yet been confirmed for this intended model-input use. No row or gold was selected.",
+      "explicit_ai_use_prohibition": null,
+      "license_verified_for_use": false,
+      "content_opened_for_case_selection": false
+    }
+  ]
+}
