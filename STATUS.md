@@ -19,6 +19,14 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [blind source-first review packet](docs/HCL_I02_BLIND_REVIEW_PACKET.md)
+now verifies a completed raw receipt against frozen source obligations and
+hands opaque final answers to an independent reviewer while withholding the
+arm key and provider traces. Full review reconciliation fails closed on
+missing or changed judgments. The ACL receipt supplies a provider-free
+positive witness; **no blind semantic review or independent confirmation has
+occurred**. This is evaluation-process correctness, not HCL answer gain.
+
 The [ACL C/P/G v8 source-first closure](reports/HCL_I02_ACL_ETHICS_CPG_V8_CLOSURE.md)
 records one DeepSeek Pro thinking-high run: C, P, G-map and G-final each
 completed once with exact citations, 4 calls/0 retries, estimated USD
@@ -38,11 +46,11 @@ confirmation by a versioned overlay that preserves consumed lineage hashes.
 No provider call, independent confirmation or HCL answer gain occurred.
 
 The [v8 strong comparator candidate](docs/HCL_I02_STRONG_COMPARATOR_V8.md)
-now has an executable, identical native thinking configuration for C/P/G and
-an exact `source_id`/`quote` citation instruction for each final answer arm.
-This addresses a scorer-shape defect and the prior non-thinking C weakness in
-provider-free preparation only. No v8 model semantics, independent case or
-HCL answer gain is qualified; all historical prompts and runs remain frozen.
+now has one completed ACL synthetic development interface run in its separate
+[source-first closure](reports/HCL_I02_ACL_ETHICS_CPG_V8_CLOSURE.md). The
+native thinking configuration and exact citation shape worked on that input;
+C/P/G model semantics across task families, independent cases and HCL answer
+gain remain unqualified. Historical prompts and runs remain frozen.
 
 The [v4 exact-content exposure guard](docs/HCL_I02_EXACT_SOURCE_FINGERPRINT_V4.md)
 now rejects the consumed KPU case even under a mirror URL and renamed lineage
