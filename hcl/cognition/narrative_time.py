@@ -173,7 +173,7 @@ class NarrativeTimeline:
 
     def snapshot(self,*,story_through,disclosed_through,known_at,observer=None,character=None,max_events=64):
         story_day,disclosure_day=_day(story_through),_day(disclosed_through)
-        if type(max_events)is not int or not 1<=max_events<=128 or (character is not None and (not isinstance(character,str) or not character)):
+        if type(max_events)is not int or not 1<=max_events<=self.max_episodes or (character is not None and (not isinstance(character,str) or not character)):
             raise ValueError('bounded temporal projection required')
         selected=self._select(known_at,observer)
         selected_by_id={record['source_id']:record for record in selected}
