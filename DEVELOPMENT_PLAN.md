@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G / G01–G04 CORRECTNESS_VERIFIED / G05 NEXT_READY**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G / G01–G05 CORRECTNESS_VERIFIED / G-HC NEXT_READY**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -332,7 +332,9 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **G04 — CORRECTNESS_VERIFIED:** ordinary opposed arguments now separate source-reported fact challenges, G03 concept readings and explicit value conflicts, retaining bounded conditional premise maps, targeted counterexamples and analogy proposals. Twelve tests and ordinary witness; see `docs/HCL_WAVE_G04.md`.
 
-**G05 — NEXT_READY:** compare controlled changes to one normative premise, concept reading or counterfactual assumption; identify conclusions that change, remain robust or stay unresolved without editing source evidence to force consistency.
+**G05 — CORRECTNESS_VERIFIED:** ordinary independent one-factor questions now compare fact-premise, local concept-reading and explicit value-premise changes across G04 source arguments, retaining structurally unaffected paths and unresolved truth. Twelve tests and ordinary witness; see `docs/HCL_WAVE_G05.md`.
+
+**G-HC — NEXT_READY:** certify substantive A–G multi-operation composition, bounded high-order mental state distinctions, ordinary-input connectivity, long-horizon source handling, local revision, and absence of known severe actor/source/time/access defects before entering Wave H.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -493,12 +495,12 @@ defect is.
 
 - Current wave: **Wave G — Moral, Conceptual and Philosophical Integration**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: G05_PREMISE_CONCEPT_COUNTERFACTUAL_SENSITIVITY**
+- **NEXT_READY: G_HC_HARD_COGNITION_READY_GATE**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **G05**, then continue through the dependency-safe queue
+Work should continue at **G-HC**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
