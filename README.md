@@ -10,8 +10,9 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 - [I02 来源优先语义评分 v1](docs/HCL_I02_SEMANTIC_SCORER.md)：冻结通用评审维度、原文引文校验与盲评计分接口；不自动判定语义真伪，也不代表 HCL 答案能力或独立效力提升。
 - [I02 校准来源暴露边界](docs/HCL_I02_SOURCE_LINEAGE.md)：已校准的 MuSR、Moral Stories 作者／模板／写作体系不能换行号进入独立确认集；第三来源的元数据审查也没有产生合格确认案例。
 - [I02 通用比较臂 v3](docs/HCL_I02_CPG_V3_REPAIR.md)：P/G 的来源清单把明确目标与未知的伤害意图分开；保留 C 和共同输入。仅无 provider 正确性，尚未确认模型表现。
-- [I02 FairytaleQA 元数据候选](docs/HCL_I02_FAIRYTALE_METADATA_CANDIDATE.md)：按固定目录规则锁定一条较长外部故事及专家问题；正文、题目和答案未打开，来源版本及权利仍待核对，不可送模型。
+- [I02 FairytaleQA 元数据候选](docs/HCL_I02_FAIRYTALE_METADATA_CANDIDATE.md)：按固定目录规则锁定一条较长外部故事及专家问题；后续已做盲式版本及题型标签核对，正文、题目和答案文本均未展示，不可送模型。
 - [I02 盲式版本核对](docs/HCL_I02_FAIRYTALE_BLIND_PROVENANCE.md)：已证明候选故事全文标准化后连续匹配固定 Gutenberg 版本；只输出哈希和统计，没有展示正文或查看问题答案，案例仍未合格。
+- [I02 FairytaleQA 题型元数据核对](docs/HCL_I02_FAIRYTALE_QUESTION_TAG_AUDIT.md)：固定题目文件仅统计出版社标签；61 题中 6 题为总览，且没有总览人物／感受标签。长篇人物发展任务适配尚未证明，未查看题目或答案文本，案例仍不合格。
 - [夜间 source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)：实际能力变化、证据限制、两个 deferred 冻结包。
 - [可执行 capability registry](docs/HCL_V1_CAPABILITY_REGISTRY.md)：核心、可选结构、通用工具、停用研究资产。
 - [Router / context / answer API](docs/HCL_V1_COGNITION_ROUTER.md)：确定性最小路由、有访问和时间边界的上下文、单次底座模型调用。

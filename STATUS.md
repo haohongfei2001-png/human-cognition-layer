@@ -19,9 +19,17 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
-The [FairytaleQA blind provenance receipt](docs/HCL_I02_FAIRYTALE_BLIND_PROVENANCE.md) shows the preselected story's 5,800 normalized words match one contiguous excerpt of pinned Gutenberg #4018 exactly. Source and book hashes plus publisher Git blob are saved; no story text was returned to the implementer and no questions or answers were opened. This supports a narrow source-edition/rights inference, but question rights, item semantics, model novelty and I01's remaining source/arm freezes are unresolved. The candidate is still **NOT CONFIRMATION QUALIFIED**.
+The [FairytaleQA question-tag screen](docs/HCL_I02_FAIRYTALE_QUESTION_TAG_AUDIT.md)
+processed the pinned question file only for publisher categories, without
+displaying question or answer text. Only six of 61 items are tagged summary;
+none is tagged summary character/feeling. The long-character-development
+family fit is **UNPROVEN BY METADATA**, so the preselected story remains
+**NOT QUALIFIED** for provider input or confirmation. Length alone is not
+task evidence; no case was substituted or tested on H outcomes.
 
-The [FairytaleQA metadata candidate](docs/HCL_I02_FAIRYTALE_METADATA_CANDIDATE.md) preselects one 5,731-word Japanese fairy-tale story and its external expert questions by a fixed metadata rule. Exact publisher commit, metadata and file blobs are pinned; story, questions and native answers remain unopened. Publisher licensing and a likely old translation have primary-source evidence, but exact edition matching, adaptation/question rights and task validity are unresolved. It remains **NOT QUALIFIED FOR MODEL INPUT OR CONFIRMATION**. Next compare provenance without exposing held-out content, then finish I02's broader four-family/source/model/scorer freeze.
+The [FairytaleQA blind provenance receipt](docs/HCL_I02_FAIRYTALE_BLIND_PROVENANCE.md) shows the preselected story's 5,800 normalized words match one contiguous excerpt of pinned Gutenberg #4018 exactly. Source and book hashes plus publisher Git blob are saved; no story text was returned to the implementer. The subsequent tag screen processed question-file metadata only; question/answer text has not been inspected. This supports a narrow source-edition/rights inference, but question rights, item semantics, model novelty and I01's remaining source/arm freezes are unresolved. The candidate is still **NOT CONFIRMATION QUALIFIED**.
+
+The [FairytaleQA metadata candidate](docs/HCL_I02_FAIRYTALE_METADATA_CANDIDATE.md) preselects one 5,731-word Japanese fairy-tale story and its external expert questions by a fixed metadata rule. Exact publisher commit, metadata and file blobs are pinned; story and question/answer text remain undisplayed, while the question file has been processed for category tags. Edition matching is complete; question rights, task fit and item semantics are unresolved. It remains **NOT QUALIFIED FOR MODEL INPUT OR CONFIRMATION**. Continue I02's broader four-family/source/model/scorer freeze without using this candidate as a passed family witness.
 
 The [I02 C/P/G v3 provider-free candidate](docs/HCL_I02_CPG_V3_REPAIR.md) repairs a generic comparator preparation omission found in the second exposed calibration: P/G explicitly inventory reported goals before saying a different intention is unknown. C, ordinary inputs, G call accounting, final answer fields and old frozen prompts stay stable. An ordinary synthetic witness saves all final candidate messages. This is **not provider-qualified** and makes no HCL efficacy claim; the next actual step is still unexposed source qualification.
 
