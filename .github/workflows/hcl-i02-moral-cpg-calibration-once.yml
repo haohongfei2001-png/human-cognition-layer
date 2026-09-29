@@ -1,0 +1,63 @@
+name: HCL I02 One-Time Moral Stories CPG Calibration
+on:
+  push:
+    branches: [main]
+    paths: ['.github/HCL_I02_MORAL_CPG_CALIBRATION_TRIGGER']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: hcl-i02-moral-cpg-calibration-once
+  cancel-in-progress: false
+jobs:
+  calibration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reject repeated workflow runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test -f .github/HCL_I02_MORAL_CPG_CALIBRATION_TRIGGER
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-i02-moral-cpg-calibration-once.yml/runs?event=push&per_page=100" > /tmp/hcl-i02-moral-cpg-runs.json
+          python - <<'PY'
+          import json, os
+          runs = json.load(open('/tmp/hcl-i02-moral-cpg-runs.json'))['workflow_runs']
+          assert len(runs) == 1 and str(runs[0]['id']) == os.environ['GITHUB_RUN_ID']
+          PY
+      - name: Install existing provider client
+        run: python -m pip install openai==2.14.0
+      - name: Download pinned author-team calibration source once
+        run: |
+          python - <<'PY'
+          import hashlib, urllib.request
+          from pathlib import Path
+          from scripts.i02_moral_calibration import UPSTREAM, SOURCE_SHA256
+          raw = urllib.request.urlopen(UPSTREAM, timeout=45).read()
+          assert hashlib.sha256(raw).hexdigest() == SOURCE_SHA256
+          Path('i02-moral-stories-calibration.jsonl').write_bytes(raw)
+          PY
+      - name: Provider-free package, source and cost preflight
+        run: python scripts/run_i02_moral_cpg_calibration_once.py --preflight --output i02-moral-cpg-preflight.json
+      - name: One bounded CPG calibration
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          HCL_I02_MORAL_CPG_AUTHORIZED: ONE_CALIBRATION_ONLY
+        run: python scripts/run_i02_moral_cpg_calibration_once.py --execute --output i02-moral-cpg-receipt.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-i02-moral-cpg-calibration-${{ github.run_id }}
+          path: |
+            i02-moral-cpg-preflight.json
+            i02-moral-cpg-receipt.json
+            reports/HCL_I02_MORAL_CPG_CALIBRATION_PACKAGE.json
+          if-no-files-found: error

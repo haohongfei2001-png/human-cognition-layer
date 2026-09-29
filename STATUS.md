@@ -17,7 +17,9 @@ A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
-**NEXT_READY: `I02_SOURCE_AND_COMPARATOR_QUALIFICATION`**
+**NEXT_READY: `I02_MORAL_CPG_ONESHOT_TRIGGER`**
+
+I02 has frozen a [second-source C/P/G functional calibration](docs/HCL_I02_MORAL_CPG_CALIBRATION_PROTOCOL.md) on the first Moral Stories record, fixed before content inspection. The author-team MIT distribution is pinned by commit and full-file/first-record hashes. Only that first record is development-exposed; alternative actions are not merged into one timeline or promoted from source norm to moral truth. The provider-free source, C/P/G fairness, G-map v2 and USD 0.06 budget preflight passed; the four-call DeepSeek Pro run is **NOT YET EXECUTED**. H/H-new are excluded; this is comparator functionality, not H efficacy. The prior MuSR C/P/G grant stays closed.
 
 The [I02 v2 implementation](docs/HCL_I02_INFORMATION_STATE_V2_REPAIR.md) has a positive ordinary-input capability delta: a local, unique named antecedent can ground a following location-first pronoun observation with exact source spans and explicit binding uncertainty. The exposed native MuSR calibration input now passes provider-free H/H-new treatment-presence and fairness checks: one checked observation, same question/source/other context, only `information_state` removed in H-new. This is **CORRECTNESS_ONLY_UNVALIDATED**, not a new efficacy result. A new G-map candidate separates the intermediate workspace contract from final answer fields but is not yet provider-qualified. The v1 frozen run, failure and USD 0.12 closed grant remain immutable. Next qualify independent source diversity and strong C/P/G on calibration material without rereading confirmation answers or reusing that spent run.
 

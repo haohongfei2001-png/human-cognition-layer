@@ -1,0 +1,62 @@
+{
+  "authorization": "OWNER_DEFAULT_EXISTING_PROVIDER_NORMAL_BOUNDED_COST",
+  "budget_cap_usd": 0.06,
+  "calibration_case_id": "37TD41K0AI7TYQGNUFTSCYCNT25SCN",
+  "calibration_first_line_sha256": "47412695b214e8ba181d8cc8376001d84e3077436e181834b1b9c5d99b456cb9",
+  "calibration_row_index": 0,
+  "confirmation_items_inspected": 0,
+  "execution_files": {
+    ".github/workflows/hcl-i02-moral-cpg-calibration-once.yml": "05c9a813928538d6951569901d5a392eb40239a293edced136ee9fbc507f0558",
+    "scripts/i02_moral_calibration.py": "88e2bf26d2b8796ea12007be007b421e4e70fb29d966588dd5682a5039081cb4",
+    "scripts/run_i02_comparator_calibration_once.py": "c3676942814eefd02bdee0270390bc986ca86491eab1f911e622316bd681cdf8",
+    "scripts/run_i02_moral_cpg_calibration_once.py": "ae8d0169872432342355e13650d419c691d353db7c9f43f56ca305ff2a8ffbd7",
+    "scripts/serious_eval_arms.py": "a94cb6d2af171c8b4efc2596b2b27df914d6cc49695dd1c1979948dded31868c",
+    "scripts/serious_eval_arms_v2.py": "d354fcc1408d42fb5fb1ab70abc34579aba93b20033af888864d4bf78e29a4dd",
+    "scripts/serious_eval_contract.py": "d415af270dfff20139130768cdf462f9eb0d8080e3ed152f2e3adb9f18ba1a9f"
+  },
+  "execution_sha256": "e67bcad8b03bdc85ba403d6ec86d7e18f259a750a45ef4860096523a3243d568",
+  "h_arm_calls": 0,
+  "hcl_runtime_sha256": "7ff7c52e114f1060c798bd23a1eca8b76cc6c7919419b90dd4b4e060aa21d267",
+  "historical_budget_transfer": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "maximum_map_bytes": 3000,
+  "maximum_output_tokens": {
+    "C": 768,
+    "G_final": 768,
+    "G_map": 1024,
+    "P": 768
+  },
+  "maximum_provider_calls": 4,
+  "model": "deepseek-v4-pro",
+  "model_family": "DeepSeek-V4-Pro-0813",
+  "native_gold_in_provider_input": false,
+  "original_moral_immoral_field_names_in_model_input": false,
+  "peak_rates_usd_per_million": {
+    "cache_hit": 0.044,
+    "input": 1.32,
+    "output": 3.96
+  },
+  "phases": [
+    "C",
+    "P",
+    "G_map",
+    "G_final"
+  ],
+  "price_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "price_verified_date": "2026-09-29",
+  "provider": "deepseek",
+  "provider_endpoint": "https://api.deepseek.com",
+  "purpose": "ONE_EXPOSED_SECOND_SOURCE_CPG_FUNCTIONAL_CALIBRATION_NO_H_EFFICACY",
+  "response_format": {
+    "type": "json_object"
+  },
+  "retries": 0,
+  "schema": "hcl-i02-moral-cpg-calibration-v1",
+  "service_tier": "provider_default_no_tier_parameter",
+  "source_commit": "b830cf56eb00bc4edd1860dd544a192216eb3587",
+  "source_distribution": "demelin/moral_stories author-team Hugging Face MIT",
+  "source_file_sha256": "98a62d4a083e02ba234ca3d4f2312df6c337ef10cd3f12dcf917a2957ba59c10",
+  "source_url": "https://huggingface.co/datasets/demelin/moral_stories/resolve/b830cf56eb00bc4edd1860dd544a192216eb3587/data/moral_stories_full.jsonl",
+  "temperature": 0,
+  "thinking": "disabled"
+}

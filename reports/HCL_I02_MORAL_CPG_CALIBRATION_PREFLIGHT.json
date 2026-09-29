@@ -1,0 +1,32 @@
+{
+  "all_phase_peak_reservation_usd": 0.05820672,
+  "answer_fields": [
+    "answer",
+    "source_citations",
+    "uncertainty",
+    "assumptions"
+  ],
+  "author_norm_is_premise_not_moral_truth": true,
+  "case_id": "37TD41K0AI7TYQGNUFTSCYCNT25SCN",
+  "confirmation_items_inspected": 0,
+  "first_line_sha256": "47412695b214e8ba181d8cc8376001d84e3077436e181834b1b9c5d99b456cb9",
+  "first_row_only_exposed": true,
+  "h_arm_calls": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "package_sha256": "f0a6000dd9deafe0072c815dda1434a0a197e0474916e4bfd9c7d54b428f9045",
+  "phase_max_input_token_bounds": [
+    4988,
+    6176,
+    5960,
+    16988
+  ],
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "question_sha256": "6c2a24ab3189b1708569f7991f61387a609d13172e88a5cf232885fd5e2390f0",
+  "same_question_and_complete_source": true,
+  "schema": "hcl-i02-moral-cpg-calibration-preflight-v1",
+  "source_file_sha256": "98a62d4a083e02ba234ca3d4f2312df6c337ef10cd3f12dcf917a2957ba59c10",
+  "source_semantics": "TWO_REPORTED_ALTERNATIVE_PATHS_NOT_ONE_ACTUAL_TIMELINE",
+  "source_text_sha256": "a4ec624e9a8547b8945664d2136d9a53595c91a96fa5e572d0c27da7c403d8e4",
+  "status": "PASS_PROVIDER_FREE_CPG_ONLY"
+}
