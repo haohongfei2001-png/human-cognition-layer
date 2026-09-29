@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–E COMPLETE / WAVE F / F01–F04 CORRECTNESS_VERIFIED / NEXT_READY=F05**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G / G01 NEXT_READY**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -310,7 +310,7 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **E05 — CORRECTNESS_VERIFIED:** linked relationship–identity–role–value comparisons and source revision updates; twelve tests and positive witness. See `docs/HCL_WAVE_E05.md`.
 
-## 5f. Current Wave F — Long-Horizon Narrative Cognition
+## 5f. Completed Wave F — Long-Horizon Narrative Cognition
 
 **F01 — CORRECTNESS_VERIFIED:** episodic source recovery by event/person/proposition/transition/dependency with exact extracts, access filtering and versioned invalidation. Thirteen tests and positive witness; see `docs/HCL_WAVE_F01.md`.
 
@@ -320,7 +320,11 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **F04 — CORRECTNESS_VERIFIED:** one authorized dated chapter yields simultaneous source-anchored explanations of apparent action change, separating reported knowledge, explicit goal/value revision, role pressure and audience strategy without inferring private cause or moral character. Fourteen tests and ordinary positive witness; see `docs/HCL_WAVE_F04.md`.
 
-**F05 — NEXT_READY:** integrate long, multi-source and branching narrative views with conflict and time replay; run provider-free scale and complexity smoke without treating throughput as comprehension evidence.
+**F05 — CORRECTNESS_VERIFIED:** branch-specific, authorized multi-chapter replay preserves opposed source reports, three time cutoffs, historical corrections and F04 development comparisons. Eleven tests, ordinary positive witness and 12-actor/120-event provider-free scale smoke; see `docs/HCL_WAVE_F05.md`. The scale check is not comprehension evidence.
+
+## 5g. Current Wave G — Moral, Conceptual and Philosophical Integration
+
+**G01 — NEXT_READY:** propose normative-premise candidates from ordinary source text, separating user-supplied premises, character endorsement, institutional rule reports and analyst-adopted conditional frameworks. Do not require a prefilled `FactorRequirement` or promote a framework to moral truth.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -479,14 +483,14 @@ defect is.
 
 ## 13. Current execution fact
 
-- Current wave: **Wave F — Long-Horizon Narrative Cognition**
+- Current wave: **Wave G — Moral, Conceptual and Philosophical Integration**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: F05_LONG_NARRATIVE_INTEGRATION**
+- **NEXT_READY: G01_SOURCE_ORIGIN_NORMATIVE_PREMISES**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **F05**, then continue through the dependency-safe queue
+Work should continue at **G01**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
