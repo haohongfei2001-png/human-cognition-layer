@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01 NEXT_READY**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01 CORRECTNESS_VERIFIED / H02 NEXT_READY**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -336,7 +336,9 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **G-HC — PASS_PROVIDER_FREE:** same ordinary scene composes G03 concept reading, G04 source argument and G05 sensitivity across a source correction while an unrelated argument remains semantically stable. B01/B02 mental-object distinctions, F05 long-source replay, ACL/time refusal and budget failure were reviewed; live efficacy remains unverified and the earlier E03 live-entry anchor refusal is preserved. See `docs/HCL_G_HC_GATE.md`.
 
-**H01 — NEXT_READY:** query-directed planner selects people, temporal scope, disagreement and the smallest sufficient operations under explicit depth/branch/call budgets. Ordinary single-fact questions must take the simple path; complex questions must select needed operations without module stacking.
+**H01 — CORRECTNESS_VERIFIED:** ordinary single-fact questions now take an exact narrator-source path; concept, opposed-argument and hypothetical questions execute only G03, G03→G04 or G03→G04→G05 respectively under explicit depth/branch/operation/provider budgets. Twelve tests and same-source four-path witness; see `docs/HCL_WAVE_H01.md`.
+
+**H02 — NEXT_READY:** maintain finite rival explanations and retrieve source evidence that actually changes support, excludes a candidate or sharpens uncertainty. Stop when another retrieval has no information gain; do not loop or search endlessly.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -497,12 +499,12 @@ defect is.
 
 - Current wave: **Wave H — Hard Human Cognition Integration**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: H01_QUERY_DIRECTED_PLANNER**
+- **NEXT_READY: H02_RIVAL_EXPLANATIONS_AND_DISCRIMINATING_EVIDENCE**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **H01**, then continue through the dependency-safe queue
+Work should continue at **H02**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
