@@ -60,3 +60,5 @@ from .evidence_closure import EvidenceClosure, EvidenceClosureIndex
 from .character_development import CharacterDevelopmentComparison, compare_character_development
 
 from .long_narrative import NarrativeCorpus, NarrativeReplay, BranchComparison
+
+from .normative_premises import NormativePremiseWorkspace, NormativePreparation
