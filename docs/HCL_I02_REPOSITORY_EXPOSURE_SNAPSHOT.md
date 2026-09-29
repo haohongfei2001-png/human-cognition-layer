@@ -10,4 +10,14 @@
 
 **Boundary:** `TEXT_SNAPSHOT_NO_MATCH` only says the candidate did not match scanned UTF-8 text in that one exact commit under the 12-word window rule. Binary files, large files, earlier Git history, public model training, related writing systems, licensing, privacy, item semantics and blind reviewer independence are outside this screen. The older `PASS_DISJOINT` historical assertion and source-first rights/semantic review remain required. A snapshot miss cannot by itself promote any item to independent confirmation or authorize a model call. LongMemEval content is never read.
 
+**Current-checkout repair:** the standalone diagnostic may inspect any pinned
+commit, but the v5 *qualification* wrapper now requires its requested commit
+to equal the checkout's `HEAD` before scanning. A caller can no longer select
+an older clean commit while the current checkout contains the candidate
+source. A synthetic two-commit regression proves the old-revision attempt
+fails, the current exposed commit fails, and an unexposed source still reaches
+the older rights/lineage gate. This does not turn `HEAD` into a repository-wide
+history audit; the qualification runner must still use the exact canonical
+checkout and independently validate the historical exposure assertion.
+
 **Next:** qualify a genuinely unexposed source system with independently checked rights, privacy, native question semantics and historical disjointness. Preserve the source before comparator outputs and use the already frozen blind review interface. Do not recycle exposed KPU, ACL, MuSR or other screened systems.

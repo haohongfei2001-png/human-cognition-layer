@@ -10,6 +10,8 @@ from scripts.i02_source_qualification_v5 import require_qualified_confirmation_s
 
 SOURCE = ('A researcher told a colleague about the warning before the meeting '
           'but the director learned about it only after the meeting ended.')
+UNSEEN = ('The orchestra postponed its outdoor concert when sudden rain damaged '
+          'the electrical equipment, and volunteers moved the chairs indoors.')
 
 
 def git(repo, *args):
@@ -69,9 +71,13 @@ class ExposureSnapshotTests(unittest.TestCase):
                 require_qualified_confirmation_source_v5({}, {'source_text': SOURCE},
                                                          {}, self.repo, current)
             older.assert_not_called()
+            with self.assertRaisesRegex(ValueError, 'current checkout HEAD'):
+                require_qualified_confirmation_source_v5(
+                    {}, {'source_text': SOURCE}, {}, self.repo, self.initial)
+            older.assert_not_called()
             receipt = require_qualified_confirmation_source_v5(
-                {}, {'source_text': SOURCE}, {}, self.repo, self.initial)
-            self.assertEqual(receipt['repository_commit'], self.initial)
+                {}, {'source_text': UNSEEN}, {}, self.repo, 'HEAD')
+            self.assertEqual(receipt['repository_commit'], current)
             older.assert_called_once()
 
 

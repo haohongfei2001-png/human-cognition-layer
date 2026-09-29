@@ -21,6 +21,10 @@ def _git(repo, *args):
                           stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout
 
 
+def resolve_commit(repo, revision):
+    return _git(repo, 'rev-parse', '--verify', f'{revision}^{{commit}}').decode().strip()
+
+
 def _windows(value):
     words = re.findall(r'\w+', value.casefold(), flags=re.UNICODE)
     return {hashlib.sha256('\x1f'.join(words[i:i + WINDOW]).encode()).hexdigest()
@@ -30,7 +34,7 @@ def _windows(value):
 def audit_snapshot(repo, revision, source):
     """Return exposure evidence without copying source text into the receipt."""
     repo = Path(repo)
-    commit = _git(repo, 'rev-parse', '--verify', f'{revision}^{{commit}}').decode().strip()
+    commit = resolve_commit(repo, revision)
     if not isinstance(source, str) or not source.strip():
         raise ValueError('nonempty candidate source required')
     candidate = _windows(source)
