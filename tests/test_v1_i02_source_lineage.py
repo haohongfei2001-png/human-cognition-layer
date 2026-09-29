@@ -74,6 +74,19 @@ class SourceLineageTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'template_id reuses'):
             require_confirmation_disjoint(row)
 
+    def test_bounded_source_screens_are_not_unseen_confirmation(self):
+        lineage = load_lineage()
+        self.assertEqual({x['id'] for x in lineage['screened_not_qualified']},
+            {'hendrycks-ethics-author-team-hf',
+             'quality-nesta-women-on-the-march-dev',
+             'gutenberg-hannes-bok-62314-catalog-summary'})
+        with self.assertRaisesRegex(ValueError, 'screened source system'):
+            require_confirmation_disjoint(candidate(
+                template_id='quality-v1.0.1-human-mcq-questions'))
+        with self.assertRaisesRegex(ValueError, 'screened source system'):
+            require_confirmation_disjoint(candidate(
+                author_id='hannes-bok-original-author'))
+
     def test_independent_shape_still_requires_separate_actual_rights_and_semantic_audit(self):
         row = candidate()
         self.assertTrue(validate_candidate(FREEZE, row))

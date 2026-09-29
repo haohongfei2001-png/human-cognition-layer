@@ -19,6 +19,16 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [bounded QuALITY screen](docs/HCL_I02_QUALITY_BOUNDED_SCREEN.md) pinned
+an external development article and found direct CC BY 4.0 notices for the
+publisher text and dataset questions. Its first writer's nine questions are
+human-rated answerable, but none has a majority requiring at least a third of
+the article, and a source-first read shows mainly author-position prompts.
+This is **not** a qualified I01 abstract concept/philosophy witness. The
+article/questions were viewed, so the source system is calibration-screened,
+not unseen confirmation; a separate Gutenberg catalog plot summary exposure
+is also recorded. No options/gold, model input, provider call or spend.
+
 The [restricted catalog coverage report](docs/HCL_I02_RESTRICTED_COVERAGE_REPORT.md)
 now audits valid partial I02 catalogs while retaining the full four-family,
 three-system structural maturity gate. It rejects unfair inputs and split

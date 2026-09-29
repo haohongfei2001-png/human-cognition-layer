@@ -5,6 +5,7 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 当前阶段：**Serious Independent Evaluation，I02 来源及比较臂资格审查**。Waves A–H 完成 provider-free 正确性构建；G-ARCH 经一次有界真实普通输入运行，通过架构与入口准备门槛，原始回执及限制见 [source-first closure](reports/HCL_G_ARCH_ENTRY_CLOSURE.md) 和 [gate](docs/HCL_G_ARCH_GATE.md)。I02 的[普通叙事信息状态 v2 接入](docs/HCL_I02_INFORMATION_STATE_V2_REPAIR.md)已在公开校准案例上通过无 provider 的 H/H-new treatment-presence 和公平性检查；C/P/G 一次性校准则因 G-map 格式失败结案。这尚未证明独立泛化或强模型增益。当前按 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md) 和 [I01 evaluation contract](docs/HCL_I01_EVALUATION_CONTRACT.md) 做独立来源与公平比较资格审查。LongMemEval 保持封存，leaderboard 尚未启动。
 
 - [I02 受限覆盖报告](docs/HCL_I02_RESTRICTED_COVERAGE_REPORT.md)：可执行校验器如实报告少于四任务／三来源体系的目录，同时保留完整成熟度门槛；不开放 provider 输入或声称效力。
+- [I02 QuALITY 有界来源筛查](docs/HCL_I02_QUALITY_BOUNDED_SCREEN.md)：外部文章与人工题的许可有直接来源；固定开发文章九题仍不足以证明深层概念任务适配，已读来源纳入暴露边界，不送模型。
 
 - [普通人物问题与叙事入口](docs/HCL_V1_PERSON_QUESTION.md)：有来源、时间、访问与局部修订边界；单次回答，默认零提取调用。
 - [I02 C/P/G 一次性校准结案](reports/HCL_I02_CPG_CALIBRATION_CLOSURE.md)：3 次调用后 G-map 格式失败，G-final 未运行；完整 raw receipt 已保存，授权关闭，不测 H 增益。

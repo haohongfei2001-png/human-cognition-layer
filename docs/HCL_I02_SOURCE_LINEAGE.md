@@ -45,6 +45,17 @@ That system is conservatively marked *screened, not unseen confirmation*.
 MIT metadata also does not settle actual task fit or item semantics. The
 source was not promoted or used for a call.
 
+A later [bounded QuALITY screen](HCL_I02_QUALITY_BOUNDED_SCREEN.md) opened
+one CC BY-marked Nesta publisher article and the first writer's nine
+development question texts. It did not open options or gold and did not call
+a provider. Source-first task fit failed for I01 abstract concept/philosophy,
+so the article and its question template are added to the screened exclusion
+list. A Gutenberg catalog's automated plot summary for a separate Hannes Bok
+story was also visible and is recorded there. Neither is an unseen
+confirmation source. The executable guard rejects their declared author,
+template or writing-system identities; the required repository-wide audit
+still must verify that any future catalog declares identities honestly.
+
 The registry is deliberately scoped to **these known I02 and pre-I02
 exposures**, not a claim that every historical HCL experiment has been
 audited. A real I03 package
