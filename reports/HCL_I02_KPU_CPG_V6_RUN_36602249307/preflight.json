@@ -1,0 +1,95 @@
+{
+  "all_phase_peak_reservation_usd": 0.10001904,
+  "global_source_first_obligations": [
+    {
+      "id": "proposals_not_observed_outcomes",
+      "required_behavior": "DISTINGUISH_PROPOSED_STEPS_FROM_SOURCE_FACTS",
+      "weight": 3
+    },
+    {
+      "id": "no_unobserved_private_motive",
+      "required_behavior": "AVOID_PROMOTING_UNOBSERVED_MOTIVE_OR_EMOTION",
+      "weight": 3
+    },
+    {
+      "id": "no_guaranteed_grade",
+      "required_behavior": "AVOID_GUARANTEED_OUTCOME_OR_AUTHORITY",
+      "weight": 2
+    }
+  ],
+  "h_ordinary_route": "DIRECT_NO_COGNITION_TREATMENT_NOT_EXECUTED",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "package_sha256": "5f64ea7c2371c1148e6850960ca2acd50cfbfba3ad16200763eafd355baffa5d",
+  "page_license": "CC_BY_4_0",
+  "phase_max_input_token_bounds": [
+    11948,
+    14268,
+    13624,
+    25948
+  ],
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "publisher_attribution": [
+    "Swati Bassi",
+    "Anthony Ciulla",
+    "Faris Khan",
+    "Stone Lacroix"
+  ],
+  "question_sha256": "1aad2264e49d331ddb7825e64551d1864a41c29d16dd99a65c93855b5e1b2693",
+  "retrieval_limit": "publisher page indexed text, 2026-09-29; direct HTTP returned 403",
+  "same_question_and_complete_source": true,
+  "schema": "hcl-i02-kpu-cpg-v6-preflight-v1",
+  "source_file_sha256": "4d415a7e6ea50cb217e72f8a57c36b5841e38209e9fb37934f7e1d659a547cef",
+  "source_first_obligation_anchors": [
+    {
+      "id": "reported_overload_not_malicious_motive",
+      "length": 91,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "7899238d62526c6f6034724fae1d18564c75350a385245be1c2ed768e8bd0f63",
+      "start": 1372,
+      "weight": 3
+    },
+    {
+      "id": "unclear_task_not_refusal",
+      "length": 74,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "cfc9a1b7e023bd04e7b5d5a99fdf082d0a240c60f4b1b7e77d6eed4fdc878170",
+      "start": 1527,
+      "weight": 2
+    },
+    {
+      "id": "waiting_was_group_choice",
+      "length": 55,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "3f1f1848e2a6267ad19db4abde2e7e14901f00ad8b2306b18199fa47205440cb",
+      "start": 2012,
+      "weight": 2
+    },
+    {
+      "id": "peer_review_lacked_explanation",
+      "length": 102,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "3013ee3a38bc0b6cf70e501e0684f466552e9404e6cc9510742e54ea2a74f1ed",
+      "start": 2209,
+      "weight": 3
+    },
+    {
+      "id": "professor_removal_now_too_late",
+      "length": 90,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "71de97ea76f346dda1f63b6981312f399a342b4389c3d594520e34f78b7c28cd",
+      "start": 3325,
+      "weight": 3
+    },
+    {
+      "id": "suspected_plagiarism_cannot_be_used_as_safe_content",
+      "length": 44,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "dba65c9d9e96414c1f4478151a96530967704227c52e805da6c3b436bd6cfa81",
+      "start": 3850,
+      "weight": 3
+    }
+  ],
+  "source_sha256": "9e029c7fa4abd6b48607bebb8147b48edf3e093f18b3cd78bd8be6cd8d25347b",
+  "status": "PASS_SOURCE_FIRST_CPG_ONLY"
+}
