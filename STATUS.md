@@ -19,6 +19,14 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [I02 blind-review v2 handoff](docs/HCL_I02_BLIND_REVIEW_V2.md)
+requires residual-claim coverage and exact excerpts before arm allocation reveal.
+The real ACL raw receipt crosses the opaque handoff; an unsupported private
+intent added to an otherwise reviewed output becomes ineligible. This is
+provider-free evaluation workflow capability, not an independent semantic
+review or HCL answer gain. MeetingToM media rights/access and SQuALITY H
+source-length failures remain unresolved; no confirmation source or paid call.
+
 The [I02 residual-claim audit supplement](docs/HCL_I02_RESIDUAL_CLAIM_AUDIT.md)
 now requires an arm-blind reviewer to record exact output excerpts and
 source support for material claims outside frozen obligations. A synthetic
