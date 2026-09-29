@@ -1,0 +1,6 @@
+KPU CPG v6 one-use development calibration
+base_main_sha=3b486f4fa639783de188c565708be9f6ffaa02f4
+package_sha256=5f64ea7c2371c1148e6850960ca2acd50cfbfba3ad16200763eafd355baffa5d
+maximum_calls=4
+retries=0
+budget_cap_usd=0.15
