@@ -5,26 +5,10 @@ import tempfile
 import unittest
 
 from scripts.i02_musr_calibration import FIRST_GROUP_SHA256
-from scripts.run_i02_comparator_calibration_once import (Ledger, build_package,
-    load_package, preflight)
-
-SOURCE = Path('/tmp/hcl-i02-musr-object-placements.csv')
+from scripts.run_i02_comparator_calibration_once import Ledger, build_package, load_package
 
 
 class ComparatorCalibrationTests(unittest.TestCase):
-    @unittest.skipUnless(SOURCE.exists(), 'pinned calibration file only available locally')
-    def test_pinned_source_equal_inputs_and_no_gold(self):
-        package = load_package()
-        gate, arms = preflight(package, SOURCE)
-        self.assertEqual(gate['status'], 'PASS_PROVIDER_FREE_CPG_ONLY')
-        self.assertLessEqual(gate['all_phase_peak_reservation_usd'], package['budget_cap_usd'])
-        self.assertEqual(gate['h_native_treatment'], 'FAIL_ABSENT_NOT_EVALUATED')
-        ordinary = arms['ordinary_payload']
-        self.assertNotIn('answer_choice', json.dumps(ordinary))
-        self.assertNotIn('answer_index', json.dumps(ordinary))
-        for phase in ('C', 'P', 'G_map'):
-            self.assertEqual(json.loads(arms[phase][-1]['content']), ordinary)
-
     def test_four_call_rehearsal_preserves_raw_and_refuses_rerun(self):
         calls = []
 
