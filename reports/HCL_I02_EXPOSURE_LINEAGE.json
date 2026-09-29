@@ -166,6 +166,74 @@
         "NC_Interlopers.pdf": "819773028b5ec6ccbf2056c69a2eb75fb6ecb88415f4c1a832052a87af8f462b",
         "NC_MDG.pdf": "aa77e46d0383fcc6f8006651301011482ea3676ac399a05836fbee361fb79b22"
       }
+    },
+    {
+      "id": "squality-gutenberg-63833-catalog-summary",
+      "status": "PUBLIC_CATALOG_SUMMARY_EXPOSED_NOT_CONFIRMATION_QUALIFIED",
+      "writing_system_id": "gutenberg-63833-jinx-ship-original-story",
+      "author_id": "alfred-coppel",
+      "template_id": "gutenberg-63833-original-story",
+      "publisher_url": "https://www.gutenberg.org/ebooks/63833",
+      "dataset_repo_url": "https://github.com/nyu-mll/SQuALITY",
+      "dataset_commit": "dc08d4f574639d773bc64ef3ab3527043108fb4e",
+      "dataset_dev_sha256": "e9cbb1daff74b70a6cd15641ba2f602a925761759200a17c9225aca90018a42b",
+      "source_sha256s": [
+        "76c4918cf3a615968f60a60d48e05fdeb400d13bdec92225c44a489608b540b2"
+      ],
+      "content_rows_seen_at_least": 1,
+      "native_labels_opened": 0,
+      "exposure_note": "The first SQuALITY dev record was processed for metadata and its Gutenberg catalog automatically generated a plot summary visible to the implementer. Dataset story/question/response text was not displayed. Its original author died in 2004 and Gutenberg states public domain in the USA; cross-region model processing rights are not established. This exact story/author is not unseen confirmation.",
+      "item_level_source_validity": "NOT_AUDITED",
+      "task_fit": "UNDETERMINED_NO_QUESTION_TEXT_VIEWED",
+      "model_input_allowed": false
+    },
+    {
+      "id": "tru-social-contract-development-screen",
+      "status": "PUBLISHER_CONTENT_AND_QUESTIONS_EXPOSED_NOT_CONFIRMATION_QUALIFIED",
+      "writing_system_id": "tru-introduction-to-ethics-social-contract-chapter",
+      "author_id": "calum-mccracken",
+      "template_id": "tru-introduction-to-ethics-2024-discussion-questions",
+      "related_author_ids": [
+        "ya-yun-sherry-kao"
+      ],
+      "publisher_url": "https://introductiontoethicsversion2.pressbooks.tru.ca/chapter/social-contract-theory/",
+      "content_rows_seen_at_least": 1,
+      "native_labels_opened": 0,
+      "exposure_note": "The social-contract chapter and four discussion questions were visible. The chapter declares CC BY 4.0 except otherwise noted and adapts the Rebus Ya-Yun Kao chapter. The four questions include opinion/external-knowledge prompts and one needing a different copyrighted story not supplied as authorized source. No fixed I01 source-bounded item or model input was approved.",
+      "item_level_source_validity": "NOT_AUDITED",
+      "task_fit": "NOT_QUALIFIED_AS_SOURCE_BOUNDED_I01_ABSTRACT_CONCEPT_WITNESS",
+      "model_input_allowed": false
+    },
+    {
+      "id": "ethics-bowl-canada-harm-case-search-exposure",
+      "status": "PUBLISHER_CONTENT_AND_QUESTIONS_EXPOSED_NOT_CONFIRMATION_QUALIFIED",
+      "writing_system_id": "ethics-bowl-canada-2023-24-case-set",
+      "author_id": "sophia-whicher",
+      "template_id": "ethics-bowl-canada-what-is-harm-case-discussion",
+      "related_author_ids": [
+        "ethics-bowl-canada-case-development-committee"
+      ],
+      "publisher_url": "https://introductiontoethics.pressbooks.tru.ca/chapter/ethics-bowl-case-what-is-it-to-harm-someone-the-sneaky-cheater-and-other/",
+      "content_rows_seen_at_least": 1,
+      "native_labels_opened": 0,
+      "exposure_note": "A publisher-indexed search result displayed the case narrative and four discussion questions. Case-specific attribution says CC BY-NC-SA 4.0, unlike the CC BY 4.0 notice on a separate textbook chapter. Paid-provider rights and exception scope were not cleared; no model input. This writing system is development-exposed.",
+      "item_level_source_validity": "NOT_AUDITED",
+      "task_fit": "POTENTIAL_ABSTRACT_CONCEPT_BUT_RIGHTS_NOT_CLEARED",
+      "model_input_allowed": false
+    },
+    {
+      "id": "rebus-kao-social-contract-development-screen",
+      "status": "PUBLISHER_CONTENT_AND_QUESTIONS_EXPOSED_NOT_CONFIRMATION_QUALIFIED",
+      "writing_system_id": "rebus-introduction-to-philosophy-ethics-2019",
+      "author_id": "ya-yun-sherry-kao",
+      "template_id": "rebus-chapter-4-central-question",
+      "publisher_url": "https://press.rebus.community/intro-to-phil-ethics/chapter/whats-in-it-for-me-on-egoism-and-social-contract-theory/",
+      "content_rows_seen_at_least": 1,
+      "native_labels_opened": 0,
+      "exposure_note": "Original chapter prose, its central question, and author license notice were visible during source screening. Rebus declares chapter CC BY 4.0 except where otherwise noted. The question is embedded in an explanatory chapter, with no separate native open-answer evaluation or item audit. Development-screened, not unseen confirmation.",
+      "item_level_source_validity": "NOT_AUDITED",
+      "task_fit": "UNDETERMINED_SOURCE_BOUNDED_ABSTRACT_CONCEPT_CALIBRATION_ONLY",
+      "model_input_allowed": false
     }
   ]
 }
