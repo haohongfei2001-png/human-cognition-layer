@@ -1,5 +1,5 @@
 {
-  "amended_hcl_runtime_sha256": "0be5badd0720ffff218d13d0e9fd0610bae3cac83c8fea81edeb872f3f9d5f31",
+  "amended_hcl_runtime_sha256": "acb1caf054a7c156a9841092201bef44669513aba2e42fe59c401eb67e837b61",
   "capability_delta": "ordinary named observation enters a source-checked actor information view",
   "evidence_class": "HCL_AUTHORED_PROVIDER_FREE_CORRECTNESS_NOT_INDEPENDENT_EFFICACY",
   "h_capabilities": [

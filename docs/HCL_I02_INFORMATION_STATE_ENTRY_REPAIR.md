@@ -19,7 +19,9 @@ ablation and a fail-closed paid treatment gate. There are zero extraction calls.
 This is a deliberately bounded repair. The complete-clause local grammar accepts
 only named observers in direct seeing statements and explicit locations. It
 does not bind pronouns, infer visibility from proximity, infer knowledge from
-action, or promote source order to event chronology. A reported observation
+action, or promote source order to event chronology. An explicit character
+view receives the named observation but no reader-only later movement or raw
+story text. A reported observation
 does not establish private belief, current world location, or future behavior.
 Source text stays available to the base model as data. The new capability is
 **CORRECTNESS_ONLY_UNVALIDATED**, not evidence of independent efficacy.

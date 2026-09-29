@@ -4,7 +4,7 @@
   "source_group_sha256": "bd0aacf84d7bc7d7fd1fa4114dd05b17aa0c5f2c433d452dfd01b06f7b562d96",
   "calibration_case_id": "361dea54d9d272c294f11f6d313aaecc37971ade2181dfe872d65d1d29b7950a",
   "architecture_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
-  "evaluated_hcl_runtime_sha256": "0be5badd0720ffff218d13d0e9fd0610bae3cac83c8fea81edeb872f3f9d5f31",
+  "evaluated_hcl_runtime_sha256": "acb1caf054a7c156a9841092201bef44669513aba2e42fe59c401eb67e837b61",
   "entry": "HCLCognitionLayer.prepare(CognitionRequest(ordinary_question,narrative))",
   "direct": false,
   "selected_capabilities": [

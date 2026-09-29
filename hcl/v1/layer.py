@@ -328,6 +328,11 @@ class HCLCognitionLayer:
             query_actor, query_item = information_query(request.query)
             context.information_state = check_information_state(
                 request.narrative, query_actor, query_item)
+            if plan.perspective_mode != PerspectiveMode.READER_ANALYSIS:
+                # The character may receive only its explicitly reported
+                # observation, never reader-only later movements or raw story.
+                context.information_state['source_movements'] = []
+                context.information_state['later_source_movement_without_observation_evidence'] = None
             preparation_audit.update(method='bounded_source_reported_information_state',
                 input={'query': request.query, 'narrative': request.narrative},
                 output={'checked_observation_count': context.information_state['checked_observation_count']},
@@ -511,7 +516,8 @@ class HCLCognitionLayer:
             context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT', 'capability': cid,
                                         'reason': 'declared exact inputs unavailable; no automatic formalization'})
         payload = self._payload(request.query, context, compact=request.compact_context)
-        if request.narrative and information_query(request.query):
+        if (request.narrative and information_query(request.query) and
+                plan.perspective_mode == PerspectiveMode.READER_ANALYSIS):
             row = json.loads(payload)
             row['narrative'] = request.narrative
             payload = json.dumps(row, ensure_ascii=False, sort_keys=True)

@@ -4,7 +4,7 @@ import unittest
 
 from hcl.v1 import CognitionRequest, HCLCognitionLayer
 from hcl.v1.information_state import check_information_state, information_query
-from hcl.v1.router import CognitionRouter
+from hcl.v1.router import CognitionRouter, PerspectiveMode
 from scripts.i02_native_treatment_preflight import require_treatment
 
 
@@ -82,6 +82,18 @@ class InformationStateTests(unittest.TestCase):
                          {'information_state'})
         self.assertNotIn('information_state', json.loads(ablated.messages[-1]['content'])['cognition_context'])
         self.assertEqual(prepared.preparation_receipt['answer_provider_calls'], 1)
+
+    def test_character_view_does_not_receive_reader_only_later_move(self):
+        request = CognitionRequest(QUESTION, narrative=SOURCE, target_actor='Alice',
+            perspective_mode=PerspectiveMode.CHARACTER_PERSPECTIVE)
+        prepared = self.layer.prepare(request)
+        payload = json.loads(prepared.messages[-1]['content'])
+        self.assertNotIn('narrative', payload)
+        self.assertNotIn('shelf', prepared.messages[-1]['content'])
+        state = payload['cognition_context']['information_state']
+        self.assertEqual(state['last_reported_observation']['location'], 'drawer')
+        self.assertEqual(state['source_movements'], [])
+        self.assertIsNone(state['later_source_movement_without_observation_evidence'])
 
     def test_paid_gate_requires_checked_state_not_just_router_activation(self):
         receipt = dict(provider_calls=0, native_gold_used=False,
