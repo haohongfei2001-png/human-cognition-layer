@@ -511,7 +511,7 @@ defect is.
 
 - Current wave: **I — Serious Independent Evaluation**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: I02_SOURCE_AND_COMPARATOR_QUALIFICATION**
+- **NEXT_READY: I02_MORAL_CPG_ONESHOT_TRIGGER**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - G-ARCH one-shot: **2 extraction/final calls, 0 retries, peak-rated USD 0.00159300, conservative guard USD 0.00590436 / USD 0.04 cap; CLOSED / NO RERUN**. [Receipt/closure](reports/HCL_G_ARCH_ENTRY_CLOSURE.md).
@@ -520,6 +520,6 @@ defect is.
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-The [general v2 ordinary information-state repair](docs/HCL_I02_INFORMATION_STATE_V2_REPAIR.md) now passes provider-free treatment presence and H/H-new structural fairness on the exposed native item. The G-map v2 interface is provider-free only and unqualified. Work should continue independent source diversity, item semantic audit and strong C/P/G qualification. The spent first-group calibration is closed and cannot be rerun; no H efficacy scoring or I03 confirmation access yet.
+The [general v2 ordinary information-state repair](docs/HCL_I02_INFORMATION_STATE_V2_REPAIR.md) now passes provider-free treatment presence and H/H-new structural fairness on the exposed native item. The G-map v2 interface is provider-free only and unqualified. Work should merge the [Moral Stories second-source C/P/G calibration freeze](docs/HCL_I02_MORAL_CPG_CALIBRATION_PROTOCOL.md), issue its unique trigger after exact-main CI, and close its one-use source-first receipt. Then continue independent source diversity, item semantic audit and strong C/P/G qualification. The spent MuSR first-group calibration remains closed and cannot be rerun; no H efficacy scoring or I03 confirmation access yet.
 The dependency-safe queue continues
 without asking for a new decision after every package.
