@@ -1,6 +1,6 @@
 # I02 ACL ethics C/P/G v8: one-use development calibration
 
-**State:** frozen provider-free package; paid run not yet executed. This is a
+**State:** one-use run completed and closed; see [source-first closure](../reports/HCL_I02_ACL_ETHICS_CPG_V8_CLOSURE.md). This is a
 single short, independently authored **synthetic development** source, not
 unseen confirmation, H efficacy, or broad comparator qualification. The
 [source-first case](HCL_I02_ACL_ETHICS_DEVELOPMENT_SOURCE.md) and four
