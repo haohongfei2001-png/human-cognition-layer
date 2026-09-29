@@ -36,6 +36,22 @@
       "explicit_ai_use_prohibition": null,
       "license_verified_for_use": false,
       "content_opened_for_case_selection": false
+    },
+    {
+      "source_id": "taur-musr-hf-object-placements-7c365b4",
+      "status": "CALIBRATION_ONLY_ITEM_AUDIT_PARTIAL",
+      "primary_url": "https://huggingface.co/datasets/TAUR-Lab/MuSR",
+      "rights_evidence_url": "https://huggingface.co/datasets/TAUR-Lab/MuSR",
+      "distribution_url": "https://huggingface.co/datasets/TAUR-Lab/MuSR/resolve/7c365b439a222150f317764d4f16ae6c96d7d94a/object_placements.csv",
+      "upstream_commit": "7c365b439a222150f317764d4f16ae6c96d7d94a",
+      "source_sha256": "98cd17d2c9ea53664e274365e901c90dfcaa40d17547dfbd369f1cd26fd2a81c",
+      "metadata_finding": "Author-team Hugging Face distribution declares CC BY 4.0 for the dataset. Exact CSV is 256 native QA rows clustered into 64 narratives with four questions each. First narrative and two questions were semantically inspected for calibration only; the second answer depends on perceptual assumptions and is not certified as unique truth. No confirmation result viewed.",
+      "explicit_ai_use_prohibition": false,
+      "license_verified_for_use": true,
+      "item_level_source_validity": "FIRST_GROUP_PARTIAL_SECOND_QUESTION_UNCERTAIN",
+      "historical_exposure": "FIRST_GROUP_EXPOSED_CALIBRATION_ONLY",
+      "content_opened_for_case_selection": true,
+      "provider_calls": 0
     }
   ]
 }
