@@ -1,0 +1,17 @@
+{
+  "schema": "hcl-i02-semantic-scorer-v1",
+  "answer_fields": ["answer", "assumptions", "source_citations", "uncertainty"],
+  "unresolved_credit": 0,
+  "invalid_citation": "INELIGIBLE",
+  "dimensions": {
+    "SUPPORTED_CONTENT": {"weight": 2, "description": "State explicit source content needed for the question, including a reported goal even when a harmful intention remains unproved."},
+    "ACTOR_TIME_ACCESS": {"weight": 3, "description": "Keep actor, event time, access and later knowledge distinct; no hidden-source promotion."},
+    "ALTERNATIVE_SCOPE": {"weight": 3, "description": "Do not combine conditional or mutually exclusive source paths into one actual timeline."},
+    "INFERENCE_BOUNDARY": {"weight": 3, "description": "Do not promote outcome, cause, third-party report or behavior into certain private belief, motive, intention or responsibility."},
+    "NORMATIVE_PREMISE": {"weight": 3, "description": "Attribute a reported norm or value to its source and apply it conditionally, without declaring universal moral truth."},
+    "COUNTEREVIDENCE": {"weight": 2, "description": "Preserve relevant conflict, alternatives and decisive counterevidence instead of selecting a convenient explanation."},
+    "CONCEPT_SCOPE": {"weight": 2, "description": "Track whose definition, domain, counterexample and revision are in force for an abstract concept."},
+    "CALIBRATED_UNCERTAINTY": {"weight": 1, "description": "State genuine uncertainty precisely without erasing explicit source facts or inventing certainty."}
+  },
+  "audit_policy": "Source auditor freezes case obligations before any arm output. Reviewer sees source, output and opaque ID without arm identity. Each obligation gets SATISFIED, VIOLATED or UNRESOLVED; unresolved earns zero. This code validates evidence and arithmetic, not semantic truth."
+}
