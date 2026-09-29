@@ -50,3 +50,5 @@ from .identity_roles import IdentityRoleResult, prepare_identity_roles
 from .contextual_values import ContextualValues, prepare_contextual_values
 
 from .relationship_dynamics import RelationshipDynamicsResult, RelationshipDynamicsWorkspace, prepare_relationship_dynamics
+
+from .episodic import EpisodicIndex, EpisodicRetrieval
