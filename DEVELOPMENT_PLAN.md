@@ -512,6 +512,7 @@ defect is.
 - Current wave: **I — Serious Independent Evaluation**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
 - **NEXT_READY: I02_UNEXPOSED_SOURCE_QUALIFICATION**
+- A [bounded QuALITY development-source screen](docs/HCL_I02_QUALITY_BOUNDED_SCREEN.md) found direct CC BY notices but rejected the preselected article as an I01 abstract concept/philosophy witness; exposed article/questions and a separate catalog plot summary are recorded in the lineage firewall. Zero new model-qualified or confirmation-qualified sources; continue truly unexposed source qualification without switching rows for H outcomes.
 - I02 structural catalog audit can now report restricted family/source-system coverage without granting provider or efficacy qualification; the full I01 four-family/three-system gate remains enforced. See [restricted coverage report](docs/HCL_I02_RESTRICTED_COVERAGE_REPORT.md).
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).

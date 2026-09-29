@@ -46,9 +46,13 @@ def load_lineage(path=LINEAGE):
         if (not isinstance(evidence, str) or not evidence.startswith('docs/') or
                 not Path(evidence).is_file() or not row.get('basis')):
             raise ValueError('historical exposure evidence missing')
+    screened_statuses = {
+        'SEARCH_SNIPPET_EXPOSED_TASK_FIT_UNAUDITED_NOT_CONFIRMATION_QUALIFIED',
+        'PUBLISHER_CONTENT_AND_QUESTIONS_EXPOSED_NOT_CONFIRMATION_QUALIFIED',
+        'PUBLIC_CATALOG_SUMMARY_EXPOSED_NOT_CONFIRMATION_QUALIFIED',
+    }
     for row in lineage.get('screened_not_qualified', []):
-        if (row.get('status') !=
-                'SEARCH_SNIPPET_EXPOSED_TASK_FIT_UNAUDITED_NOT_CONFIRMATION_QUALIFIED' or
+        if (row.get('status') not in screened_statuses or
                 row.get('content_rows_seen_at_least', 0) < 1 or
                 row.get('native_labels_opened') != 0 or
                 row.get('model_input_allowed') is not False or

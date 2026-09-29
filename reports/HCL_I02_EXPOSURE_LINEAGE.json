@@ -83,6 +83,35 @@
       "item_level_source_validity": "NOT_AUDITED",
       "task_fit": "UNDETERMINED",
       "model_input_allowed": false
+    },
+    {
+      "id": "quality-nesta-women-on-the-march-dev",
+      "status": "PUBLISHER_CONTENT_AND_QUESTIONS_EXPOSED_NOT_CONFIRMATION_QUALIFIED",
+      "writing_system_id": "quality-v1.0.1-nesta-opinion-article",
+      "author_id": "geraldine-bedell-nesta-article",
+      "template_id": "quality-v1.0.1-human-mcq-questions",
+      "publisher_url": "https://thelongandshort.org/society/can-women-do-politics-differently",
+      "screen_receipt": "reports/HCL_I02_QUALITY_BOUNDED_SCREEN.json",
+      "content_rows_seen_at_least": 1,
+      "exposure_note": "Publisher article body and the selected development writer's nine question texts were opened for source-first task-fit screening; native options and gold were not opened. This author/article and question system are not unseen confirmation.",
+      "native_labels_opened": 0,
+      "item_level_source_validity": "NOT_AUDITED",
+      "task_fit": "NOT_QUALIFIED_FOR_I01_ABSTRACT_CONCEPT_PHILOSOPHY",
+      "model_input_allowed": false
+    },
+    {
+      "id": "gutenberg-hannes-bok-62314-catalog-summary",
+      "status": "PUBLIC_CATALOG_SUMMARY_EXPOSED_NOT_CONFIRMATION_QUALIFIED",
+      "writing_system_id": "hannes-bok-stranger-from-space-story",
+      "author_id": "hannes-bok-original-author",
+      "template_id": "gutenberg-62314-original-story",
+      "publisher_url": "https://www.gutenberg.org/ebooks/62314",
+      "content_rows_seen_at_least": 1,
+      "exposure_note": "Project Gutenberg catalog displayed an automatically generated plot summary during source screening; no QuALITY question, option or gold for this story was opened. Exclude this exact story/author from unseen confirmation.",
+      "native_labels_opened": 0,
+      "item_level_source_validity": "NOT_AUDITED",
+      "task_fit": "UNDETERMINED",
+      "model_input_allowed": false
     }
   ]
 }
