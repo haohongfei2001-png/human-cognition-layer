@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from scripts.run_i02_acl_ethics_cpg_v8_once import (
     build_package, execute, load_package, preflight)
@@ -32,6 +33,17 @@ def provider_responses(g_map=MAP, p_answer=ANSWER):
 
 
 class AclEthicsCpgV8Tests(unittest.TestCase):
+    def setUp(self):
+        # Rehearse the consumed package at its recorded v2 runtime identity.
+        # Current-runtime execution remains refused by the unmodified runner.
+        old = json.loads(Path('reports/HCL_I02_ACL_ETHICS_CPG_V8_PACKAGE.json').read_text())[
+            'hcl_runtime_sha256']
+        for target in ('scripts.run_i02_acl_ethics_cpg_v8_once.runtime_digest',
+                       'scripts.i02_acl_ethics_development_preflight.runtime_digest'):
+            active = patch(target, return_value=old)
+            active.start()
+            self.addCleanup(active.stop)
+
     def test_frozen_package_and_all_phase_provider_free_preflight(self):
         package = load_package()
         self.assertEqual(package, build_package())

@@ -46,7 +46,10 @@ class NativeTreatmentTests(unittest.TestCase):
             require_treatment(POST_REPAIR)
 
     def test_new_runtime_has_source_grounded_fair_provider_free_treatment(self):
-        self.assertEqual(POST_REPAIR_V2['evaluated_hcl_runtime_sha256'], runtime_digest())
+        self.assertEqual(POST_REPAIR_V2['evaluated_hcl_runtime_sha256'],
+            json.loads(Path('reports/HCL_I02_RUNTIME_AMENDMENT_V2.json').read_text())[
+                'amended_hcl_runtime_sha256'])
+        self.assertNotEqual(POST_REPAIR_V2['evaluated_hcl_runtime_sha256'], runtime_digest())
         self.assertEqual(POST_REPAIR_V2['checked_observation_count'], 1)
         self.assertTrue(POST_REPAIR_V2['source_quote_span_valid'])
         self.assertTrue(POST_REPAIR_V2['h_hnew_same_question_and_source'])

@@ -36,7 +36,10 @@ class InputCoverageTests(unittest.TestCase):
         self.assertEqual(len(RECEIPT['dev_source_lengths']), 25)
         self.assertTrue(all(16000 < length < 64000
                             for length in RECEIPT['dev_source_lengths']))
-        self.assertEqual(RECEIPT['hcl_runtime_sha256'], runtime_digest())
+        self.assertEqual(RECEIPT['hcl_runtime_sha256'],
+            json.loads(Path('reports/HCL_I02_RUNTIME_AMENDMENT_V2.json').read_text())[
+                'amended_hcl_runtime_sha256'])
+        self.assertNotEqual(RECEIPT['hcl_runtime_sha256'], runtime_digest())
         self.assertEqual(RECEIPT['qualified_cases'], 0)
         self.assertEqual(RECEIPT['provider_calls'], 0)
 

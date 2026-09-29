@@ -1,0 +1,14 @@
+{
+  "schema": "hcl-i02-runtime-amendment-v3",
+  "reason": "GENERAL_COMPLETE_LONG_SOURCE_LOCAL_EVIDENCE_ENTRY",
+  "historical_i01_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "previous_hcl_runtime_sha256": "7ff7c52e114f1060c798bd23a1eca8b76cc6c7919419b90dd4b4e060aa21d267",
+  "amended_hcl_runtime_sha256": "3d39af825f9bf37d831faf8b3afa8628208bd6b73c5373ce0d49fb34063039aa",
+  "calibration_only": true,
+  "confirmation_items_inspected": 0,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "specialized_cognition_treatment_claimed": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "boundary": "A new ordinary long-source entry uses local anchored candidates and sends the complete source. Historical v1/v2 runtime pins and receipts remain immutable. No independent efficacy or specialized H treatment is claimed."
+}

@@ -153,7 +153,19 @@ def prepare_person_context(layer, query, narrative, *, perspective_mode=Perspect
                 max_context_chars=max_context_chars, preserve_reader_source=False)
         return prepare_perspective_contrast(layer, query, narrative, observer_actor=observer_actor,
             as_of_statement=as_of_statement, max_context_chars=max_context_chars)
-    if not isinstance(narrative, str) or not narrative.strip() or len(narrative) > 16000:
+    if isinstance(narrative, str) and len(narrative) > 16000:
+        if perspective_mode != PerspectiveMode.READER_ANALYSIS or observer_actor is not None:
+            return _refusal(query, '', perspective_mode,
+                'long_source_private_view_requires_explicit_access_preparation',
+                max_context_chars=max_context_chars, preserve_reader_source=False)
+        if as_of_statement is not None or responsibility_premises or premise_scope != 'ALL_SOURCE':
+            return _refusal(query, '', perspective_mode,
+                'long_source_statement_or_normative_scope_not_prepared',
+                max_context_chars=max_context_chars, preserve_reader_source=False)
+        from .long_source_question import prepare_long_source_context
+        return prepare_long_source_context(query, narrative,
+            max_context_chars=max_context_chars)
+    if not isinstance(narrative, str) or not narrative.strip():
         raise ValueError('bounded nonempty ordinary source required')
     original_query, original_source = query, narrative
     prefix = (re.fullmatch(r'At statement ([1-9][0-9]?), (.+)', query.strip()) or

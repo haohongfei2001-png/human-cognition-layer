@@ -1,0 +1,20 @@
+{
+  "candidate_count": 47,
+  "dataset_file_sha256": "e9cbb1daff74b70a6cd15641ba2f602a925761759200a17c9225aca90018a42b",
+  "development_only": true,
+  "final_input_chars": 53382,
+  "final_input_sha256": "9418e6004bc61cb9a082c2521334743fefd5e05e90f2c608f4146a4c0bdfc001",
+  "independent_confirmation_qualified": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "passage_id": "63401",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "question_sha256": "215bd6f2912f3bae63b97f43e28637586cd786812d98524cb1b3abfcdd88062c",
+  "rights_for_provider_input": "UNVERIFIED_NO_PAID_USE",
+  "runtime_sha256": "3d39af825f9bf37d831faf8b3afa8628208bd6b73c5373ce0d49fb34063039aa",
+  "schema": "hcl-i02-long-source-development-smoke-v1",
+  "source_chars": 24920,
+  "source_complete_in_final_input": true,
+  "source_sha256": "9236a89a751dc88671c4042a3cd18afe42245353f9468bba3953ae9686a34589",
+  "specialized_cognition_treatment": false
+}
