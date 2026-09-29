@@ -19,6 +19,14 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [G v5 generic workspace](docs/HCL_I02_GENERIC_WORKSPACE_V5.md) adds
+source-versioned exact quote memory, provisional evidence relations and
+bounded answer steps to the candidate generic comparator. C/P stay byte-for-
+byte v3; G keeps the full ordinary source and two charged calls. Synthetic
+provider-free checks pass, but G's actual model competence remains unqualified
+until separate development calibration. No HCL runtime or historical result
+changed; zero calls/spend.
+
 The [EPC glass safety development screen](docs/HCL_I02_EPC_GLASS_SCREEN.md)
 checked one independently authored, natively open ethics question against its
 publisher scenario and CC BY-SA page notice. The ordinary H entry kept the
