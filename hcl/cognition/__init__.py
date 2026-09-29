@@ -4,6 +4,7 @@ from .workspace import CognitionWorkspace, OperationResult
 
 __all__ = ['Claim', 'ClaimKind', 'Dependency', 'EvidenceCore', 'Interpretation',
            'Scope', 'SourceSpan', 'CognitionWorkspace', 'OperationResult',
+           'ConceptCriteriaWorkspace', 'ConceptCriteriaPreparation',
            'AuthorizedText', 'SemanticResult', 'prepare_semantics', 'PositionAssessment', 'assess_positions', 'RetainedResult', 'prepare_retained', 'answer_retained', 'Attitude', 'MentalProposition', 'EpistemicBundle', 'prepare_epistemic', 'CommunicationScene', 'CommunicationView', 'RevisionTimeline', 'RevisionSnapshot', 'SourceRecord', 'ReportAssessment', 'prepare_reports', 'IntegratedScene', 'IntegratedSceneResult', 'AgencyResult', 'prepare_agency', 'ActionExplanations', 'prepare_explanations', 'PlanFeasibility', 'prepare_plan_feasibility', 'AppraisalResult', 'prepare_appraisal']
 
 from .semantic import AuthorizedText, SemanticResult, prepare_semantics
@@ -64,3 +65,5 @@ from .long_narrative import NarrativeCorpus, NarrativeReplay, BranchComparison
 from .normative_premises import NormativePremiseWorkspace, NormativePreparation
 
 from .responsibility_composition import ResponsibilityCompositionWorkspace, ResponsibilityComposition
+
+from .concept_criteria import ConceptCriteriaWorkspace, ConceptCriteriaPreparation
