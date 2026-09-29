@@ -19,12 +19,14 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
-The [ACL C/P/G v8 one-use protocol](docs/HCL_I02_ACL_ETHICS_CPG_V8_PROTOCOL.md)
-is now frozen provider-free on the exact development-only abstract: DeepSeek
-Pro native thinking-high, four calls maximum, zero retries and a separate
-USD 0.24 cap. The all-phase peak reservation passes before transport; raw
-request/response and usage receipts are required. The one-use trigger is staged in PR #250; no v8 provider call has yet been
-made and no comparator or HCL efficacy result is claimed. H/H-new remain excluded by the observed direct route.
+The [ACL C/P/G v8 source-first closure](reports/HCL_I02_ACL_ETHICS_CPG_V8_CLOSURE.md)
+records one DeepSeek Pro thinking-high run: C, P, G-map and G-final each
+completed once with exact citations, 4 calls/0 retries, estimated USD
+0.02662506 and peak-rated USD 0.05325012 under a separate USD 0.24 cap.
+The synthetic development source cannot qualify independent confirmation or
+HCL efficacy. Blind semantic scoring is unavailable; diagnostics expose
+unsupported C/P API inferences and G-map support edges. The grant is closed
+with zero remaining, and the trigger is removed. H/H-new had zero calls.
 
 An [ACL Ethics Tutorial synthetic abstract](docs/HCL_I02_ACL_ETHICS_DEVELOPMENT_SOURCE.md)
 is now pinned as one exact rights-reviewed **C/P/G development** input with
