@@ -1,0 +1,8 @@
+HCL G-ARCH one-shot functional entry
+package_sha256=7a39e6d56f36c859da89d915c49f8f36a97f09bebef076b03cc56b844c551530
+certified_main=1ae1ba20e017aa18360d18dfc96860d5e040a3ec
+max_provider_calls=2
+retries=0
+hard_cap_usd=0.04
+prior_e03_grant=CLOSED_NO_TRANSFER
+longmemeval=SEALED_NOT_ACCESSED

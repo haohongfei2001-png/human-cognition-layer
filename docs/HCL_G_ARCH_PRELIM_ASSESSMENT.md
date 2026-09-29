@@ -11,7 +11,7 @@ This is a post-H05 assessment, not a G-ARCH pass or an efficacy result.
 | Long narrative | F05 branch/time/conflict replay and 12-actor/120-event engineering smoke; H05 joins a source-local answer with relevant opposed chapter reports without proving cross-source identity. Provider-free pass with source-local limit. |
 | Semantic boundaries | Actor/source/time/access, challenge, quote, uncertainty and assumption tests pass in local/replay CI. Unique exact quotation may override a wrong supplied offset with a receipt. Duplicate or absent quotations still refuse. No absolute semantic correctness claim. |
 | Selection/budget | Direct tasks bypass hard operations; hard tasks have event, conflict, closure and context bounds. H02 stops on no-gain evidence; no truncation of key counterreports. Provider-free pass. |
-| Auditable freeze | Exact source, prompt/runner, model, no-thinking setting, cap, source/version semantics and runtime hashes are frozen in [the package](../reports/HCL_G_ARCH_ENTRY_PACKAGE.json). Provider-free replay and package check are saved in [the preflight](../reports/HCL_G_ARCH_ENTRY_PREFLIGHT.json). Trigger does not yet exist. |
+| Auditable freeze | Exact source, prompt/runner, model, no-thinking setting, cap, source/version semantics and runtime hashes are frozen in [the package](../reports/HCL_G_ARCH_ENTRY_PACKAGE.json). Provider-free replay and package check are saved in [the preflight](../reports/HCL_G_ARCH_ENTRY_PREFLIGHT.json). The sole trigger is introduced in a separate PR after the repair package passed exact-main CI; its result remains pending. |
 
 The repair accepts a wrong optional offset only when the full submitted quote
 occurs exactly once in the authorized source. It derives the actual span from
@@ -37,6 +37,5 @@ LongMemEval remains SEALED/NOT_ACCESSED. This authored case is an operational
 smoke, not independent evidence. No leaderboard work is authorized by this
 assessment.
 
-**NEXT_READY:** exact-main certify this repair/package, then create the sole
-trigger and review its raw operational receipt. If live entry or final call
+**NEXT_READY:** merge the sole trigger, then review its raw operational receipt. If live entry or final call
 fails, repair the concrete defect without reusing this one-shot run.
