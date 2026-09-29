@@ -7,13 +7,15 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from hcl.v1 import CognitionRequest, HCLCognitionLayer
 from scripts.i02_musr_calibration import FIRST_GROUP_SHA256, calibration_candidate, parse_pinned
+from scripts.serious_eval_contract import runtime_digest
 
 
 def require_treatment(receipt):
     if (receipt.get('provider_calls') != 0 or receipt.get('native_gold_used') is not False or
             receipt.get('longmemeval') != 'SEALED_NOT_ACCESSED' or
             receipt.get('specialized_treatment_present') is not True or
-            receipt.get('cognition_context_present') is not True):
+            receipt.get('cognition_context_present') is not True or
+            receipt.get('checked_observation_count', 0) < 1):
         raise ValueError('H treatment-presence gate failed; no paid comparison')
     return True
 
@@ -32,18 +34,23 @@ def audit(source_file):
     if actual_user_input['narrative'] != candidate['source_text'] or (
             actual_user_input['query'] != candidate['question']):
         raise ValueError('H ordinary input drift')
+    checked = ((prepared.context.information_state.get('checked_observation_count', 0))
+               if prepared.context is not None else 0)
+    treatment = bool(checked and 'information_state' in prepared.plan.capabilities)
     return dict(schema='hcl-i02-native-treatment-preflight-v1',
         source_file_sha256=hashlib.sha256(Path(source_file).read_bytes()).hexdigest(),
         source_group_sha256=FIRST_GROUP_SHA256,
         calibration_case_id=candidate['case_id'],
         architecture_main_sha='636c6fe849dfba641d03df2813d0e568a1835300',
+        evaluated_hcl_runtime_sha256=runtime_digest(),
         entry='HCLCognitionLayer.prepare(CognitionRequest(ordinary_question,narrative))',
         direct=direct, selected_capabilities=list(prepared.plan.capabilities),
         cognition_context_present=prepared.context is not None,
+        checked_observation_count=checked,
         source_and_question_preserved_in_final_input=True,
-        specialized_treatment_present=bool(prepared.plan.capabilities and prepared.context is not None),
-        disposition=('FAIL_TREATMENT_ABSENT_NO_PAID_COMPARISON' if direct else
-            'REVIEW_COGNITION_TREATMENT_BEFORE_ANY_PAID_COMPARISON'),
+        specialized_treatment_present=treatment,
+        disposition=('FAIL_TREATMENT_ABSENT_NO_PAID_COMPARISON' if not treatment else
+            'REVIEW_CHECKED_TREATMENT_BEFORE_ANY_PAID_COMPARISON'),
         provider_calls=0, provider_spend_usd=0,
         native_gold_used=False, longmemeval='SEALED_NOT_ACCESSED')
 

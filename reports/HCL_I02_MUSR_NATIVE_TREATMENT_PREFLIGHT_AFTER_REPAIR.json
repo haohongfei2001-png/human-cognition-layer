@@ -1,0 +1,28 @@
+{
+  "schema": "hcl-i02-native-treatment-preflight-v1",
+  "source_file_sha256": "98cd17d2c9ea53664e274365e901c90dfcaa40d17547dfbd369f1cd26fd2a81c",
+  "source_group_sha256": "bd0aacf84d7bc7d7fd1fa4114dd05b17aa0c5f2c433d452dfd01b06f7b562d96",
+  "calibration_case_id": "361dea54d9d272c294f11f6d313aaecc37971ade2181dfe872d65d1d29b7950a",
+  "architecture_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "evaluated_hcl_runtime_sha256": "acb1caf054a7c156a9841092201bef44669513aba2e42fe59c401eb67e837b61",
+  "entry": "HCLCognitionLayer.prepare(CognitionRequest(ordinary_question,narrative))",
+  "direct": false,
+  "selected_capabilities": [
+    "evidence",
+    "provenance",
+    "temporal",
+    "actor_source",
+    "source_visibility",
+    "uncertainty",
+    "information_state"
+  ],
+  "cognition_context_present": true,
+  "checked_observation_count": 0,
+  "source_and_question_preserved_in_final_input": true,
+  "specialized_treatment_present": false,
+  "disposition": "FAIL_TREATMENT_ABSENT_NO_PAID_COMPARISON",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "native_gold_used": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

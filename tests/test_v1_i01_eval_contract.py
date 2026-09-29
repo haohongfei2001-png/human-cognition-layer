@@ -5,10 +5,12 @@ import unittest
 from pathlib import Path
 
 from scripts.serious_eval_contract import (ARMS, FAMILIES, FIELDS,
-    runtime_digest, validate_candidate, validate_catalog, validate_freeze)
+    runtime_digest, validate_candidate, validate_catalog, validate_freeze,
+    validate_runtime_amendment)
 
 
 FREEZE = json.loads(Path('reports/HCL_I01_EVALUATION_FREEZE.json').read_text())
+AMENDMENT = json.loads(Path('reports/HCL_I02_RUNTIME_AMENDMENT.json').read_text())
 
 
 def case(n, family, split='CONFIRMATION'):
@@ -30,7 +32,8 @@ def case(n, family, split='CONFIRMATION'):
 class I01EvaluationContractTests(unittest.TestCase):
     def test_positive_freeze_and_four_family_composition(self):
         self.assertTrue(validate_freeze(FREEZE))
-        self.assertEqual(FREEZE['hcl_runtime_sha256'], runtime_digest())
+        self.assertTrue(validate_runtime_amendment(FREEZE, AMENDMENT))
+        self.assertNotEqual(FREEZE['hcl_runtime_sha256'], runtime_digest())
         self.assertTrue(validate_catalog(FREEZE,
             [case(i, family) for i, family in enumerate(FAMILIES)]))
 
@@ -83,6 +86,16 @@ class I01EvaluationContractTests(unittest.TestCase):
         changed['task_families'].pop()
         with self.assertRaisesRegex(ValueError, 'four prespecified'):
             validate_freeze(changed)
+
+    def test_runtime_amendment_cannot_hide_another_runtime_change(self):
+        changed = copy.deepcopy(AMENDMENT)
+        changed['amended_hcl_runtime_sha256'] = '0' * 64
+        with self.assertRaisesRegex(ValueError, 'disclosed I02 amendment'):
+            validate_runtime_amendment(FREEZE, changed)
+        changed = copy.deepcopy(AMENDMENT)
+        changed['confirmation_items_inspected'] = 1
+        with self.assertRaisesRegex(ValueError, 'invalid I02 runtime amendment'):
+            validate_runtime_amendment(FREEZE, changed)
 
 
 if __name__ == '__main__':

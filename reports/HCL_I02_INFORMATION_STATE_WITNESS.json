@@ -1,0 +1,44 @@
+{
+  "amended_hcl_runtime_sha256": "acb1caf054a7c156a9841092201bef44669513aba2e42fe59c401eb67e837b61",
+  "capability_delta": "ordinary named observation enters a source-checked actor information view",
+  "evidence_class": "HCL_AUTHORED_PROVIDER_FREE_CORRECTNESS_NOT_INDEPENDENT_EFFICACY",
+  "h_capabilities": [
+    "evidence",
+    "provenance",
+    "temporal",
+    "actor_source",
+    "source_visibility",
+    "uncertainty",
+    "information_state"
+  ],
+  "h_final_messages_sha256": "ccc04b72e134c61566c198ca7f87d3f0e7215de285ffaaadd23d321e856efa81",
+  "h_new_capabilities": [
+    "evidence",
+    "provenance",
+    "temporal",
+    "actor_source",
+    "source_visibility",
+    "uncertainty"
+  ],
+  "h_new_final_messages_sha256": "93ff0cef1337d6e595351f31da564716592f92b663e379142c41c751e539b1f5",
+  "input_source_sha256": "f671e95569f56a1aefa6f499de642e95fb17c37bab714d59e3d32c0622928a06",
+  "later_source_movement_without_observation_evidence": true,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "no_private_belief_or_predicted_search_assertion": true,
+  "observation": {
+    "access": "EXPLICIT_NAMED_OBSERVATION",
+    "assertion": "SOURCE_REPORT_NOT_VERIFIED_WORLD_TRUTH",
+    "item": "key",
+    "location": "drawer",
+    "narrative_position": 2,
+    "observer": "Alice",
+    "source_end": 71,
+    "source_quote": "Alice saw Bea put the key in the drawer.",
+    "source_start": 31,
+    "time_basis": "NARRATIVE_ORDER_ONLY"
+  },
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "question": "Where would Alice look for the key?",
+  "schema": "hcl-i02-information-state-provider-free-witness-v1"
+}

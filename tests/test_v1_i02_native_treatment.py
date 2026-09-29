@@ -4,9 +4,11 @@ import unittest
 from pathlib import Path
 
 from scripts.i02_native_treatment_preflight import require_treatment
+from scripts.serious_eval_contract import runtime_digest
 
 
 RECEIPT = json.loads(Path('reports/HCL_I02_MUSR_NATIVE_TREATMENT_PREFLIGHT.json').read_text())
+POST_REPAIR = json.loads(Path('reports/HCL_I02_MUSR_NATIVE_TREATMENT_PREFLIGHT_AFTER_REPAIR.json').read_text())
 
 
 class NativeTreatmentTests(unittest.TestCase):
@@ -29,7 +31,16 @@ class NativeTreatmentTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'no paid comparison'):
             require_treatment(row)
         row['provider_calls'] = 0
+        row['checked_observation_count'] = 1
         self.assertTrue(require_treatment(row))
+
+    def test_amended_runtime_still_has_no_checked_native_treatment(self):
+        self.assertEqual(POST_REPAIR['evaluated_hcl_runtime_sha256'], runtime_digest())
+        self.assertEqual(POST_REPAIR['checked_observation_count'], 0)
+        self.assertFalse(POST_REPAIR['specialized_treatment_present'])
+        self.assertEqual(POST_REPAIR['disposition'], 'FAIL_TREATMENT_ABSENT_NO_PAID_COMPARISON')
+        with self.assertRaisesRegex(ValueError, 'no paid comparison'):
+            require_treatment(POST_REPAIR)
 
 
 if __name__ == '__main__':

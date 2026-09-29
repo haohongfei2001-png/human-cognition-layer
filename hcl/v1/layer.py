@@ -79,6 +79,7 @@ class HCLCognitionLayer:
         from .social_narrative import SocialPreparation, prepare_social_narrative
         from .belief_preparation import (belief_narrative_events, prepare_belief_sources,
                                          SourceBeliefBackend, BELIEF_POLICY)
+        from .information_state import information_query, check_information_state
         from .tools import execute_tool
         parsed_events = candidates = facts = ()
         preparation_audit = {'method': 'caller_typed_evidence', 'semantic_preparer_calls': 0,
@@ -323,6 +324,24 @@ class HCLCognitionLayer:
         person_task = plan.concept_interpretation or plan.contextual_preference or plan.social_commitment or plan.responsibility_structure or any(c in plan.capabilities for c in ('perspective', 'intention', 'affect'))
         scope = {'event_time': request.event_time, 'knowledge_cutoff': request.knowledge_cutoff}
         context = CognitionContext(temporal_scope=scope, perspective_mode=plan.perspective_mode.value)
+        if plan.information_state:
+            query_actor, query_item = information_query(request.query)
+            context.information_state = check_information_state(
+                request.narrative, query_actor, query_item)
+            if plan.perspective_mode != PerspectiveMode.READER_ANALYSIS:
+                # The character may receive only its explicitly reported
+                # observation, never reader-only later movements or raw story.
+                context.information_state['source_movements'] = []
+                context.information_state['later_source_movement_without_observation_evidence'] = None
+            preparation_audit.update(method='bounded_source_reported_information_state',
+                input={'query': request.query, 'narrative': request.narrative},
+                output={'checked_observation_count': context.information_state['checked_observation_count']},
+                time_basis='narrative_order_not_verified_event_time')
+            if not context.information_state['checked_observation_count']:
+                preparation_audit['failure'] = 'no_explicit_named_observation'
+                context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT',
+                    'capability': 'information_state',
+                    'reason': 'no source-anchored named observation; current location and private belief unresolved'})
         if request.narrative and plan.explanation and not candidates and not preparation_audit['failure']:
             preparation_audit['failure'] = 'no_action_anchor'
         context.preparation = {key: value for key, value in preparation_audit.items()
@@ -497,6 +516,11 @@ class HCLCognitionLayer:
             context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT', 'capability': cid,
                                         'reason': 'declared exact inputs unavailable; no automatic formalization'})
         payload = self._payload(request.query, context, compact=request.compact_context)
+        if (request.narrative and information_query(request.query) and
+                plan.perspective_mode == PerspectiveMode.READER_ANALYSIS):
+            row = json.loads(payload)
+            row['narrative'] = request.narrative
+            payload = json.dumps(row, ensure_ascii=False, sort_keys=True)
         transmitted_context = (compact_cognition_context(context.as_dict())
             if request.compact_context else context.as_dict())
         if len(json.dumps(transmitted_context, ensure_ascii=False, sort_keys=True)) > request.max_context_chars:
@@ -513,6 +537,12 @@ class HCLCognitionLayer:
             policy += ' ' + CONCEPT_ANSWER_POLICY
         if request.belief_analysis:
             policy += ' ' + BELIEF_POLICY
+        if plan.information_state:
+            policy += (' Source-reported named observation establishes only reported access to a '
+                'location in narrative order. A movement without explicit named observation '
+                'does not update that actor. Do not turn last reported observation into '
+                'private belief, current world location, or predicted search behavior. '
+                'Unreported access is unknown, not evidence of ignorance.')
         if request.responsibility_premise_scope == 'FOCAL_EPISODE':
             policy += (' The caller explicitly scopes the normative premise to the focal action/outcome '
                 'and required factor-source episode. Factor claims are still independently source/time/access checked; '

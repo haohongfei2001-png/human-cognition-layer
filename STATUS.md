@@ -17,7 +17,9 @@ A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
-**NEXT_READY: `I02_NATIVE_INFORMATION_STATE_ENTRY_REPAIR`**
+**NEXT_READY: `I02_SOURCE_AND_COMPARATOR_QUALIFICATION`**
+
+I02 now has a bounded [ordinary information-state entry repair](docs/HCL_I02_INFORMATION_STATE_ENTRY_REPAIR.md): an explicitly named observation of an object location enters the actual final cognition input with exact source spans, separate from a later source-reported movement. This is a positive provider-free capability delta, **CORRECTNESS_ONLY_UNVALIDATED**. The unchanged I01 freeze has a disclosed [runtime amendment](reports/HCL_I02_RUNTIME_AMENDMENT.json). The [post-repair native calibration preflight](reports/HCL_I02_MUSR_NATIVE_TREATMENT_PREFLIGHT_AFTER_REPAIR.json) still finds zero checked observations on the exposed MuSR item, so its paid treatment gate remains closed. No gold or confirmation item was used; zero provider calls/spend for I02 repair. Continue independent source and C/P/G qualification without scoring a treatment-free H arm.
 
 A01 now provides shared versioned evidence, scoped source reports and
 interpretations, alternative support sets and rooted invalidation. A source
