@@ -3,13 +3,25 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from scripts.run_i02_kpu_cpg_v6_once import (
-    MAX_MAP_BYTES, SOURCE, SOURCE_ID, build_package, execute, load_package,
+    MAX_MAP_BYTES, PACKAGE, SOURCE, SOURCE_ID, build_package, execute, load_package,
     preflight)
 
 
 class KpuCpgV6FreezeTests(unittest.TestCase):
+    def setUp(self):
+        # Keep old package rehearsal distinct from the current v3 runtime.
+        old = json.loads(PACKAGE.read_text())['hcl_runtime_sha256']
+        for target, replacement in (
+                ('scripts.run_i02_kpu_cpg_v6_once.runtime_digest', lambda: old),
+                ('scripts.run_i02_kpu_cpg_v6_once.validate_runtime_amendment_v2',
+                 lambda *args, **kwargs: True)):
+            active = patch(target, replacement)
+            active.start()
+            self.addCleanup(active.stop)
+
     def test_source_first_freeze_and_ordinary_fairness(self):
         package = load_package()
         self.assertEqual(package, build_package())
