@@ -17,7 +17,7 @@ A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
-**NEXT_READY: `I01_ARCHITECTURE_AND_EVALUATION_QUESTION_FREEZE`**
+**NEXT_READY: `I02_INDEPENDENT_SOURCE_AND_COMPARATOR_QUALIFICATION`**
 
 A01 now provides shared versioned evidence, scoped source reports and
 interpretations, alternative support sets and rooted invalidation. A source
@@ -34,6 +34,8 @@ Actual final inputs carry support, challenges and retired source history. See
 [A02–A03 implementation and witnesses](docs/HCL_WAVE_A02_A03.md).
 
 State: **CORRECTNESS_VERIFIED / REPLAY_VERIFIED / UNTESTED / OPT_IN**.
+I01 froze the complete HCL evaluation question and architecture at main `636c6fe849dfba641d03df2813d0e568a1835300`. The provider-free [evaluation contract](docs/HCL_I01_EVALUATION_CONTRACT.md) and [executable guard](scripts/serious_eval_contract.py) reject authored sources, unequal arm inputs, oracle state and split leakage before comparison. No independent case, model comparator or efficacy outcome is qualified yet; I02 is next.
+
 The local entry recognizes bounded explicit speech forms; open backend candidates
 remain semantically unverified. The separate E03 ordinary-entry live check made one extraction call and failed strict source anchoring; no final call or live success. Rated USD 0.00076710; remaining authorization zero. See [functional closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md). Provider-free construction evidence remains separate.
 Historical efficacy dispositions are unchanged. A04–A05 connect retained v0.6/CG03/CG04/CG05 operations to the common material.
@@ -175,7 +177,7 @@ Leaderboard selection is not active now.
 - LongMemEval: **SEALED / NOT ACCESSED**
 - Benchmark-specific logic authorized: **NO**
 - Leaderboard search/optimization: **OFF**
-- Current owner-only blocker: **NONE for I01 provider-free evaluation freeze**
+- Current owner-only blocker: **NONE for I02 provider-free qualification**
 
 ## Historical state and recovery
 

@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01–H05 CORRECTNESS_VERIFIED / G-ARCH PASS_ARCHITECTURE_READY_FOR_SERIOUS_EVALUATION / I01 NEXT_READY**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01–H05 CORRECTNESS_VERIFIED / G-ARCH PASS_ARCHITECTURE_READY_FOR_SERIOUS_EVALUATION / I01 FROZEN / I02 NEXT_READY**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -348,7 +348,9 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **G-ARCH — PASS_ARCHITECTURE_READY_FOR_SERIOUS_EVALUATION:** the one-shot live entry at main `5f14b829ee6247389bc326eb14736342723de2d0` completed two DeepSeek Flash calls, with six exact unique source quotations, five bounded offset repairs and checked state in the actual final input. Source-first closure, raw requests/responses, usage, cost estimate, hashes and limitations are in `reports/HCL_G_ARCH_ENTRY_CLOSURE.md`; the seven-criterion decision is in `docs/HCL_G_ARCH_GATE.md`. This is an authored functional smoke, not independent efficacy. The USD 0.04 grant is closed, E03 remains failed/closed, and no second trigger is authorized.
 
-**I01 — NEXT_READY:** freeze the architecture surface and serious evaluation question before independent source qualification or confirmation results. The freeze must specify ordinary-input tasks, source/actor/time/access boundaries, fair strong C/P/G/H and attribution comparisons, full cost and refusal accounting, the independence split, and stop/simplify criteria. The main line is now Serious Independent Evaluation; no new capability module or leaderboard optimization is opened by this gate.
+**I01 — FROZEN:** `docs/HCL_I01_EVALUATION_CONTRACT.md` and `reports/HCL_I01_EVALUATION_FREEZE.json` fix the main architecture surface, question, four families, fair C/P/G/H input/output shape, source independence split, attribution obligations and no-outcome boundary. The provider-free guard rejects authored/unauthorized/unequal/oracle candidates; six tests witness it. No cognition gain or independent efficacy is claimed.
+
+**I02 — NEXT_READY:** qualify actual independent source provenance, license and access plus competent C/P/G comparators. Freeze model IDs, prompt/scaffold implementations, scorer rubric, sample size and cost/latency bands before confirmation. Do not view confirmation outcomes to tune H.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -509,13 +511,13 @@ defect is.
 
 - Current wave: **I — Serious Independent Evaluation**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: I01_ARCHITECTURE_AND_EVALUATION_QUESTION_FREEZE**
+- **NEXT_READY: I02_INDEPENDENT_SOURCE_AND_COMPARATOR_QUALIFICATION**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - G-ARCH one-shot: **2 extraction/final calls, 0 retries, peak-rated USD 0.00159300, conservative guard USD 0.00590436 / USD 0.04 cap; CLOSED / NO RERUN**. [Receipt/closure](reports/HCL_G_ARCH_ENTRY_CLOSURE.md).
-- Independent qualification active: **I01 FREEZE NEXT; NO CONFIRMATION RESULT INSPECTED**
+- Independent qualification active: **I01 FROZEN / I02 NEXT; NO CONFIRMATION RESULT INSPECTED**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **I01 evaluation freeze**, then continue through the dependency-safe queue
+Work should continue at **I02 independent source and comparator qualification**, then continue through the dependency-safe queue
 without asking for a new decision after every package.

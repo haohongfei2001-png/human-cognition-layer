@@ -1,0 +1,48 @@
+{
+  "schema": "hcl-i01-independent-evaluation-freeze-v1",
+  "stage": "I01_QUESTION_AND_ARCHITECTURE_FROZEN_NO_OUTCOMES",
+  "architecture_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "architecture_tree_sha": "818f13ad01d438be21e3a18683d5d5340efa8b24",
+  "hcl_runtime_sha256": "f047e61dfeb9cd51e4ebe2f045be0249251d0478ef3d256fd22787ff84ccc7f8",
+  "evaluation_question": "Does the frozen complete HCL improve evidence-bounded human-cognition answers from ordinary questions and authorized source text over the best qualified strong base, prompt, and competent generic scaffold, with attributable benefit and acceptable reverse harm and full cost?",
+  "scope": "FULL_ORDINARY_INPUT_TO_FINAL_ANSWER_INCLUDING_EXTRACTION_ROUTING_RETRIEVAL_REVISION_AND_REFUSAL",
+  "task_families": [
+    "LONG_CHARACTER_DEVELOPMENT",
+    "MULTIPARTY_INFORMATION_STRATEGY",
+    "RESPONSIBILITY_VALUE_INTEGRATION",
+    "ABSTRACT_CONCEPT_PHILOSOPHY"
+  ],
+  "minimum_independent_writing_systems": 3,
+  "minimum_independent_model_families": 2,
+  "primary_arms": [
+    "C",
+    "P",
+    "G",
+    "H"
+  ],
+  "attribution_arms": [
+    "H_MENTAL_MECHANISM_ABLATION",
+    "H_FLAT_COMPOSITION_ABLATION"
+  ],
+  "answer_fields": [
+    "answer",
+    "source_citations",
+    "uncertainty",
+    "assumptions"
+  ],
+  "primary_outcome": "BLIND_SOURCE_AUDITED_SEMANTIC_SUCCESS_WITH_COVERAGE_AND_CRITICAL_ERROR_REPORTING",
+  "paired_unit": "QUESTION_WITHIN_SOURCE_GROUP",
+  "cluster_unit": "INDEPENDENT_SOURCE_WRITING_SYSTEM",
+  "source_policy": "INDEPENDENT_NON_HCL_AUTHOR_WITH_VERIFIED_LICENSE_AND_EVERY_ARM_AUTHORIZED_ACCESS",
+  "development_case_policy": "HCL_AUTHORED_FIXTURES_ARE_DEVELOPMENT_ONLY",
+  "split_policy": "NO_SOURCE_AUTHOR_TEMPLATE_OR_WRITING_SYSTEM_LEAKAGE_FROM_CALIBRATION_TO_CONFIRMATION",
+  "hardness_policy": "CALIBRATE_FROM_TASK_REQUIREMENT_AND_C_P_G_ONLY_NEVER_H_CONFIRMATION_RESULTS",
+  "confirmation_visibility": "SEALED_UNTIL_FREEZE_AND_CALIBRATION",
+  "scoring_state": "OBLIGATIONS_FROZEN_RUBRIC_AND_N_AFTER_I02_BEFORE_CONFIRMATION",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "historical_budget_transfer": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "qualification_state": "C_P_G_SOURCES_MODELS_SCORER_NOT_YET_QUALIFIED",
+  "maturity_gate": "MASTER_PLAN_SECTION_11_3_NOT_CLAIMED"
+}
