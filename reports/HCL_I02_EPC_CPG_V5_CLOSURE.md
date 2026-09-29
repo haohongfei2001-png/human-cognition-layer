@@ -44,6 +44,13 @@ cost is unavailable, not zero. Both recorded estimates are below the separate
 USD 0.15 hard cap. The grant is `CLOSED_NO_TRANSFER_NO_RERUN`, remaining
 authorization USD 0. No historical balance was transferred.
 
+Removing the one-use trigger in PR #238 caused GitHub's push path filter to
+schedule a second workflow shell, run `36597173841`, on the deletion commit.
+It failed at the first guard (`test -f` for the absent trigger), before client
+installation, preflight or provider execution: **zero additional calls and
+zero additional spend**. It is a rejected deletion event, not a rerun of the
+calibration. The six ordinary exact-main checks on that commit passed.
+
 ## Source-first reading against the frozen obligations
 
 | Frozen source boundary | C | P | G |

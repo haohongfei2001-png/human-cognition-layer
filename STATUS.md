@@ -32,6 +32,15 @@ not unseen confirmation. H's direct route has no cognition treatment and was
 not called. Next work remains I02 source qualification and a separately
 versioned provider-free G interface repair.
 
+The removal push scheduled a second workflow shell on main
+`bdfd13c37ff347ece4e1b358b32db5138c5ef9a8`; run `36597173841` failed
+at its missing-trigger guard before any provider step, with zero extra calls.
+All six ordinary exact-main checks passed. A separately versioned
+[G v6 compact workspace](docs/HCL_I02_GENERIC_WORKSPACE_V6.md) now has
+provider-free source, revision, negative-inference, composition and historical
+checks. It preserves C/P and the full source, but is still model-semantically
+unqualified and has made no new provider call.
+
 The [G v5 generic workspace](docs/HCL_I02_GENERIC_WORKSPACE_V5.md) adds
 source-versioned exact quote memory, provisional evidence relations and
 bounded answer steps to the candidate generic comparator. C/P stay byte-for-
