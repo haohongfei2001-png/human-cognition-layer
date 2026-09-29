@@ -1,0 +1,55 @@
+{
+  "authorization": "OWNER_DEFAULT_EXISTING_PROVIDER_NORMAL_BOUNDED_COST",
+  "budget_cap_usd": 0.12,
+  "calibration_row_index": 0,
+  "calibration_source_group_sha256": "bd0aacf84d7bc7d7fd1fa4114dd05b17aa0c5f2c433d452dfd01b06f7b562d96",
+  "confirmation_items_inspected": 0,
+  "execution_files": {
+    ".github/workflows/hcl-i02-comparator-calibration-once.yml": "a2f9adc5f584c1591704be0110865ef0b6595fdd34b3de20355f00195bf84e6d",
+    "scripts/i02_musr_calibration.py": "2d4461f8375c29426674ef4714ac5f27561b5406fcf7c3e27721f1947bcd1090",
+    "scripts/run_i02_comparator_calibration_once.py": "c3676942814eefd02bdee0270390bc986ca86491eab1f911e622316bd681cdf8",
+    "scripts/serious_eval_arms.py": "a94cb6d2af171c8b4efc2596b2b27df914d6cc49695dd1c1979948dded31868c"
+  },
+  "execution_sha256": "6064a2319aaa66401b7f57935ae9f43102b36b5bcf1fa937ed5e8e3b3bb4bc7c",
+  "h_arm_calls": 0,
+  "hcl_runtime_sha256": "acb1caf054a7c156a9841092201bef44669513aba2e42fe59c401eb67e837b61",
+  "historical_budget_transfer": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "maximum_map_bytes": 5000,
+  "maximum_output_tokens": {
+    "C": 768,
+    "G_final": 768,
+    "G_map": 1024,
+    "P": 768
+  },
+  "maximum_provider_calls": 4,
+  "model": "deepseek-v4-pro",
+  "model_family": "DeepSeek-V4-Pro-0813",
+  "native_gold_in_provider_input": false,
+  "peak_rates_usd_per_million": {
+    "cache_hit": 0.044,
+    "input": 1.32,
+    "output": 3.96
+  },
+  "phases": [
+    "C",
+    "P",
+    "G_map",
+    "G_final"
+  ],
+  "price_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "price_verified_date": "2026-09-29",
+  "provider": "deepseek",
+  "provider_endpoint": "https://api.deepseek.com",
+  "purpose": "ONE_EXPOSED_SOURCE_CPG_FUNCTIONAL_CALIBRATION_NO_H_EFFICACY",
+  "response_format": {
+    "type": "json_object"
+  },
+  "retries": 0,
+  "schema": "hcl-i02-cpg-calibration-v1",
+  "service_tier": "provider_default_no_tier_parameter",
+  "source_distribution": "TAUR-Lab/MuSR Hugging Face CC BY 4.0",
+  "source_file_sha256": "98cd17d2c9ea53664e274365e901c90dfcaa40d17547dfbd369f1cd26fd2a81c",
+  "temperature": 0,
+  "thinking": "disabled"
+}
