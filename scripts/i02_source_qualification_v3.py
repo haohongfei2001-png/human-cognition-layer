@@ -16,6 +16,7 @@ SCREENS = Path('reports/HCL_I02_SCREENED_SYSTEMS_V3.json')
 REASONS = {
     'PUBLISHER_PROHIBITS_LLM_INGESTION_WITHOUT_PERMISSION',
     'IDENTIFIABLE_SENSITIVE_FAMILY_HISTORY_NOT_CLEARED',
+    'DEVELOPMENT_CALIBRATION_SOURCE_EXPOSED_NOT_CONFIRMATION',
 }
 
 
@@ -35,7 +36,7 @@ def load_screens(path=SCREENS):
             data.get('longmemeval') != 'SEALED_NOT_ACCESSED'):
         raise ValueError('v3 source screen receipt invalid')
     rows = data.get('screened')
-    if not isinstance(rows, list) or len(rows) != 2:
+    if not isinstance(rows, list) or len(rows) != 3:
         raise ValueError('v3 source screens incomplete')
     seen = set()
     for row in rows:
@@ -46,7 +47,12 @@ def load_screens(path=SCREENS):
                 not row['writing_system_id'] or
                 not _https_url(row.get('publisher_url_prefix')) or
                 not _https_url(row.get('evidence_url')) or
-                row.get('model_input_allowed') is not False or
+                row.get('model_input_allowed') is not (
+                    row['reason'] ==
+                    'DEVELOPMENT_CALIBRATION_SOURCE_EXPOSED_NOT_CONFIRMATION') or
+                row.get('calibration_model_input_only', False) is not (
+                    row['reason'] ==
+                    'DEVELOPMENT_CALIBRATION_SOURCE_EXPOSED_NOT_CONFIRMATION') or
                 row.get('confirmation_qualified') is not False):
             raise ValueError('invalid v3 source screen')
         seen.add(row['id'])

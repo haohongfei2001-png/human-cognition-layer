@@ -61,7 +61,7 @@ class SourceQualificationV3Tests(unittest.TestCase):
 
     def test_screened_publisher_and_sensitive_source_cannot_be_renamed(self):
         screens = load_screens()['screened']
-        self.assertEqual(len(screens), 2)
+        self.assertEqual(len(screens), 3)
         for row in screens:
             blocked = case()
             blocked['source_url'] = row['publisher_url_prefix'] + 'renamed-row'

@@ -1,0 +1,145 @@
+{
+  "authorization": "OWNER_DEFAULT_EXISTING_PROVIDER_NORMAL_BOUNDED_COST",
+  "budget_cap_usd": 0.15,
+  "confirmation_items_inspected": 0,
+  "execution_files": {
+    ".github/workflows/hcl-i02-kpu-cpg-v6-once.yml": "c443f97965de9f045b059cceff652c4e9f54f8fd3ee4191bb055011706977c8b",
+    "reports/HCL_I02_KPU_CONFLICT_DEVELOPMENT_SOURCE.json": "4d415a7e6ea50cb217e72f8a57c36b5841e38209e9fb37934f7e1d659a547cef",
+    "reports/HCL_I02_SCREENED_SYSTEMS_V3.json": "1bc4ef5740e6c77f97a7abf0fc6ad00d743297d0d23f665cde5f033eecd0d247",
+    "scripts/i02_input_coverage.py": "e17728e5aa116d4ea7eab134e68ffd371678bae0254e611602d43e2eafa1c6fe",
+    "scripts/i02_source_qualification_v3.py": "b12dea4e9bdbb6904923b4a5b9d8e73f2ec1fd3e3ca2edec19e8db1a908a46e3",
+    "scripts/run_i02_comparator_calibration_once.py": "c3676942814eefd02bdee0270390bc986ca86491eab1f911e622316bd681cdf8",
+    "scripts/run_i02_kpu_cpg_v6_once.py": "6939272e1ce2f6d97fcb7c56ccb8e89ea7929a0de40f167b227c3d419664151e",
+    "scripts/serious_eval_arms.py": "a94cb6d2af171c8b4efc2596b2b27df914d6cc49695dd1c1979948dded31868c",
+    "scripts/serious_eval_arms_v2.py": "d354fcc1408d42fb5fb1ab70abc34579aba93b20033af888864d4bf78e29a4dd",
+    "scripts/serious_eval_arms_v3.py": "0984ae6121234645f2552bcf181d993766d10eb76e7b49ccbffc2454cdc0e54f",
+    "scripts/serious_eval_arms_v4.py": "3a4bbf6061967205067582b53f5dde6197326d662185ddb90a4447b5353dc144",
+    "scripts/serious_eval_contract.py": "d415af270dfff20139130768cdf462f9eb0d8080e3ed152f2e3adb9f18ba1a9f",
+    "scripts/serious_eval_generic_workspace_v5.py": "e6719bb57cd4738bb6af578cc38aaeee31579b99933ebc8691ef08fbe70c87d6",
+    "scripts/serious_eval_generic_workspace_v6.py": "4825cf7935611976604e4a4aea84dc62d3b5c4dd3f3ee1b0010a48c7703430f8"
+  },
+  "execution_sha256": "aed9d4b38f851f9fcc0a9f2df89a4aeeb78633a035573a92f7477c1525e81704",
+  "global_source_first_obligations": [
+    {
+      "id": "proposals_not_observed_outcomes",
+      "required_behavior": "DISTINGUISH_PROPOSED_STEPS_FROM_SOURCE_FACTS",
+      "weight": 3
+    },
+    {
+      "id": "no_unobserved_private_motive",
+      "required_behavior": "AVOID_PROMOTING_UNOBSERVED_MOTIVE_OR_EMOTION",
+      "weight": 3
+    },
+    {
+      "id": "no_guaranteed_grade",
+      "required_behavior": "AVOID_GUARANTEED_OUTCOME_OR_AUTHORITY",
+      "weight": 2
+    }
+  ],
+  "h_arm_calls": 0,
+  "hcl_runtime_sha256": "7ff7c52e114f1060c798bd23a1eca8b76cc6c7919419b90dd4b4e060aa21d267",
+  "historical_budget_transfer": false,
+  "license": "CC_BY_4_0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "maximum_map_bytes": 3500,
+  "maximum_output_tokens": {
+    "C": 768,
+    "G_final": 768,
+    "G_map": 1024,
+    "P": 768
+  },
+  "maximum_provider_calls": 4,
+  "model": "deepseek-v4-pro",
+  "model_family": "DeepSeek-V4-Pro-0813",
+  "native_question": "FIRST_QUESTIONS_TO_THINK_ABOUT_AFTER_CASE",
+  "original_authors": [
+    "Swati Bassi",
+    "Anthony Ciulla",
+    "Faris Khan",
+    "Stone Lacroix"
+  ],
+  "peak_rates_usd_per_million": {
+    "cache_hit": 0.044,
+    "input": 1.32,
+    "output": 3.96
+  },
+  "phases": [
+    "C",
+    "P",
+    "G_map",
+    "G_final"
+  ],
+  "price_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "price_verified_date": "2026-09-29",
+  "provider": "deepseek",
+  "provider_endpoint": "https://api.deepseek.com",
+  "purpose": "ONE_KPU_DEVELOPMENT_SOURCE_CPG_V6_COMPARATOR_CALIBRATION_NO_H_EFFICACY",
+  "question_sha256": "1aad2264e49d331ddb7825e64551d1864a41c29d16dd99a65c93855b5e1b2693",
+  "response_format": {
+    "type": "json_object"
+  },
+  "retries": 0,
+  "retrieval_limit": "publisher page indexed text, 2026-09-29; direct HTTP returned 403",
+  "schema": "hcl-i02-kpu-cpg-v6-calibration-v1",
+  "service_tier": "provider_default_no_tier_parameter",
+  "source_distribution": "KPU_BUSINESS_COMMUNICATION_CASE_DEVELOPMENT_EXPOSED",
+  "source_file_sha256": "4d415a7e6ea50cb217e72f8a57c36b5841e38209e9fb37934f7e1d659a547cef",
+  "source_first_obligation_anchors": [
+    {
+      "id": "reported_overload_not_malicious_motive",
+      "length": 91,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "7899238d62526c6f6034724fae1d18564c75350a385245be1c2ed768e8bd0f63",
+      "start": 1372,
+      "weight": 3
+    },
+    {
+      "id": "unclear_task_not_refusal",
+      "length": 74,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "cfc9a1b7e023bd04e7b5d5a99fdf082d0a240c60f4b1b7e77d6eed4fdc878170",
+      "start": 1527,
+      "weight": 2
+    },
+    {
+      "id": "waiting_was_group_choice",
+      "length": 55,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "3f1f1848e2a6267ad19db4abde2e7e14901f00ad8b2306b18199fa47205440cb",
+      "start": 2012,
+      "weight": 2
+    },
+    {
+      "id": "peer_review_lacked_explanation",
+      "length": 102,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "3013ee3a38bc0b6cf70e501e0684f466552e9404e6cc9510742e54ea2a74f1ed",
+      "start": 2209,
+      "weight": 3
+    },
+    {
+      "id": "professor_removal_now_too_late",
+      "length": 90,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "71de97ea76f346dda1f63b6981312f399a342b4389c3d594520e34f78b7c28cd",
+      "start": 3325,
+      "weight": 3
+    },
+    {
+      "id": "suspected_plagiarism_cannot_be_used_as_safe_content",
+      "length": 44,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "dba65c9d9e96414c1f4478151a96530967704227c52e805da6c3b436bd6cfa81",
+      "start": 3850,
+      "weight": 3
+    }
+  ],
+  "source_first_review_before_model_output": true,
+  "source_id": "kpu-conflict-management-case-2020",
+  "source_selection": "Publisher case Background through Where you are now; supplementary worksheets and teaching aids excluded",
+  "source_sha256": "9e029c7fa4abd6b48607bebb8147b48edf3e093f18b3cd78bd8be6cd8d25347b",
+  "source_url": "https://kpu.pressbooks.pub/businesscomms/chapter/case-conflict-management/",
+  "temperature": 0,
+  "thinking": "disabled"
+}

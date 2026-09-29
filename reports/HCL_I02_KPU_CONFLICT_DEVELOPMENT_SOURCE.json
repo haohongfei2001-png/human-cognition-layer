@@ -1,0 +1,27 @@
+{
+  "schema": "hcl-i02-kpu-conflict-development-source-v1",
+  "source_url": "https://kpu.pressbooks.pub/businesscomms/chapter/case-conflict-management/",
+  "source_selection": "Publisher case Background through Where you are now; supplementary worksheets and teaching aids excluded",
+  "source_retrieval": "publisher page indexed text, 2026-09-29; direct HTTP returned 403",
+  "source_license": "CC BY 4.0",
+  "source_license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "case_authors": [
+    "Swati Bassi",
+    "Anthony Ciulla",
+    "Faris Khan",
+    "Stone Lacroix"
+  ],
+  "book_compilers": [
+    "Melissa Ashman",
+    "Arley Cruthers",
+    "Sarah Duncan",
+    "John Grant",
+    "Karen Inkster Vance",
+    "Panteli Tritchew"
+  ],
+  "development_exposed": true,
+  "source_text": "## Background\n\nYou are a student at Kwantlen Polytechnic University and are currently taking four first-year-level classes. In one of your classes, you have a 12-week-long group project where your task is to write-up a twelve-page report and create a PowerPoint presentation on a given topic for the class. A rough draft of the written report (worth 5%) is due on week 10, the final report (worth 15%) is due on week 11, and the presentation (worth 10%) is due on week 12.\n\nIn total, this project is worth 30% of your final grade. You are assigned a group consisting of 5 other students: Mathew, Seth, Sebastian, Amelia and Brian.\n\n## Tools for ensuring fair teamwork\n\n\n\nPeer review sheets, to be submitted to the professor, are to be completed in weeks 4, 8 and 12 to demonstrate division of work and bring to light any critical issues within your team. The professor also says at the beginning of the semester that if someone was contributing nothing towards the group project and that if he was talked to, he may take action and remove that person from the group.\n\n## Group dynamics\n\nIn the beginning, everything seems to be moving fine. Everyone is attending the meetings after classes and communicating effectively with one another. At the third meeting, the work is split up based on everyone’s preferences. However, some small issues begin to surface after week 3. Mathew says he has other obligations to fulfill and other classes are too stressful for him leaving his portion of the project incomplete.\n\nHe also states he is unclear about his given task and believes he will be of minimal help. Additionally, Seth and Sebastian are procrastinating and are following Mathew out of their commitments.\n\nThis leaves only you, Amelia and Brian to still do your respective portions of the project. Recognizing this, a separate group chat on WhatsApp is created consisting of you, Amelia and Brian to further discuss how to handle these issues. It is decided that since there is time to spare, you would simply wait this out and hope Mathew makes time for this class.\n\nIn week 4, when you notice the attitudes of the three students has not changed, the three of you decide to give Mathew, Seth and Sebastian 0/5 on their peer review assessments. However, you do not give any qualitative feedback explaining why.\n\nWeek 7 is your one-week reading break. It is discussed with the entire group beforehand that everyone must do thorough research on their sections before they return to class for week 8. When the week 8 meeting arrives, you, Amelia and Brian are prepared with information on your respective parts. Seth and Sebastian come to the meeting empty-handed and Mathew informs the group last-minute that he is unable to make it to the meeting.\n\nIn the peer review assessment for this week, the three of you provide the same negative feedback regarding Mathew, Seth and Sebastian as you did in week 4.\n\nIt is week 9 and you, Amelia and Brian decided to finish the rough draft on your own that is due next week. During the break of the week 10 class, an argument breaks out in front of the class which escalates to Brian lashing out at Mathew, Seth and Sebastian for failing to contribute to the project. On the same day, you, Amelia and Brian attempt to talk to the professor as a last resort option. He informs you that there is nothing he can do as it is too late in the semester to remove them from the group.\n\nHe further advises you that waiting until the end of the semester to bring this issue to the professor personally was not a good idea as he would have rearranged the groups earlier in the semester. You come back to class to find Mathew, Seth and Sebastian attempting to be productive and contribute their respective parts; however, they are working on parts that have already been completed as well as presenting work that has been clearly plagiarised using unreliable sources.\n\n## Where you are now\n\n\n\nIt is week 10 and your team has a rough draft of the report completed thus far. Unfortunately, it is apparent that the quality of the report is not up to par and has suffered tremendously in areas assigned to and neglected by Mathew, Seth and Sebastian.",
+  "native_question": "At this point, what steps can you take to ensure the best outcome for your report and presentation?",
+  "provider_calls": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
