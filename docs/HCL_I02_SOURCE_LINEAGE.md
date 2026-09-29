@@ -1,6 +1,6 @@
 # I02 — exposed calibration systems and confirmation firewall
 
-Status: **KNOWN EXPOSURES PINNED / ZERO CONFIRMATION SYSTEMS QUALIFIED**.
+Status: **KNOWN I02 AND HISTORICAL EXPOSURES PINNED / ZERO CONFIRMATION SYSTEMS QUALIFIED**.
 The [lineage receipt](../reports/HCL_I02_EXPOSURE_LINEAGE.json) records the
 two I02 source systems that entered paid C/P/G calibration. The
 [executable guard](../scripts/i02_source_lineage.py) composes I01's ordinary
@@ -20,6 +20,18 @@ exposure audit, rights, source-first item validity and equal arm access. These
 assertions need external evidence; passing this function is not proof that
 they are true.
 
+The v2 lineage receipt now also imports five historically exposed systems
+already documented before I02: CogToM, SOTOPIA-Hard, FANToM, Hi-ToM and SAGA.
+The [v0.4 exposure register](HCL_V04_EVALUATION_EXPOSURE_REGISTER.md)
+records prior CogToM use, all SOTOPIA-Hard environment templates, earlier
+FANToM conversations and Hi-ToM rows. Later [FANToM](HCL_V06_FANTOM_CPGD_FRESH_V01.md)
+and [SAGA](HCL_V07_SAGA_FRESH_CPGD_V01.md) provider pilots exposed further
+author-team material. I01's stronger writing-system split means an unseen
+row within those systems cannot be called an independent confirmation
+system. The guard checks exact declared author, template and writing-system
+identities from the receipt; provenance still must verify that a new source
+has been identified honestly.
+
 A bounded metadata screen checked the author-team
 [ETHICS repository](https://github.com/hendrycks/ethics), its
 [MIT repository license](https://github.com/hendrycks/ethics/blob/master/LICENSE)
@@ -33,17 +45,18 @@ That system is conservatively marked *screened, not unseen confirmation*.
 MIT metadata also does not settle actual task fit or item semantics. The
 source was not promoted or used for a call.
 
-The registry is deliberately scoped to **known I02 exposures**, not a claim
-that every historical HCL experiment has been audited. A real I03 package
+The registry is deliberately scoped to **these known I02 and pre-I02
+exposures**, not a claim that every historical HCL experiment has been
+audited. A real I03 package
 must complete the repository-wide audit and protect truly unexposed source
 systems before any outcome is viewed. The [source-first semantic scorer](HCL_I02_SEMANTIC_SCORER.md)
 also needs reviewer procedure and case obligations fixed before confirmation.
 No new provider call, data-row download, LongMemEval access or HCL runtime
 change occurred in this package.
 
-**EVALUATION_DELTA:** changing a row ID or omitting calibration cases from a
-future catalog no longer makes the two exposed author/template/writing
-systems eligible for confirmation in the I02 guard. **HCL answer
+**EVALUATION_DELTA:** changing a row ID or omitting historical rows from a
+future catalog no longer makes the two I02 and five named pre-I02
+author/template/writing systems eligible for confirmation in the I02 guard. **HCL answer
 CAPABILITY_DELTA:** none; the current phase is independent evaluation.
 
 **NEXT_READY:** find and verify an unexposed independent source system with

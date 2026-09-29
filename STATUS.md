@@ -19,6 +19,13 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [I02 lineage v2 guard](docs/HCL_I02_SOURCE_LINEAGE.md) now rejects
+declared confirmation author/template/writing systems matching five
+historically exposed systems (CogToM, SOTOPIA-Hard, FANToM, Hi-ToM, SAGA),
+in addition to the two I02 calibration systems and screened ETHICS system.
+This is a bounded known-exposure firewall, not a completed repository-wide
+audit or a qualified independent case.
+
 The [FairytaleQA question-tag screen](docs/HCL_I02_FAIRYTALE_QUESTION_TAG_AUDIT.md)
 processed the pinned question file only for publisher categories, without
 displaying question or answer text. Only six of 61 items are tagged summary;

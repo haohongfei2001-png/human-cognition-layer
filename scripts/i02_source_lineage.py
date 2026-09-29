@@ -10,14 +10,15 @@ from pathlib import Path
 
 LINEAGE = Path('reports/HCL_I02_EXPOSURE_LINEAGE.json')
 IDENTITY_FIELDS = ('writing_system_id', 'author_id', 'template_id', 'source_group_id')
+SYSTEM_FIELDS = ('writing_system_id', 'author_id', 'template_id')
 
 
 def load_lineage(path=LINEAGE):
     lineage = json.loads(Path(path).read_text())
-    if (lineage.get('schema') != 'hcl-i02-exposure-lineage-v1' or
+    if (lineage.get('schema') != 'hcl-i02-exposure-lineage-v2' or
             lineage.get('longmemeval') != 'SEALED_NOT_ACCESSED' or
             lineage.get('scope') !=
-                'KNOWN_I02_PROVIDER_EXPOSED_CALIBRATION_SYSTEMS_NOT_EXHAUSTIVE_HISTORICAL_AUDIT'):
+                'KNOWN_I02_AND_PRE_I02_EXPOSURES_NOT_EXHAUSTIVE_REPOSITORY_AUDIT'):
         raise ValueError('lineage receipt invalid')
     rows = lineage.get('exposed_systems')
     if not isinstance(rows, list) or len(rows) < 2:
@@ -31,6 +32,20 @@ def load_lineage(path=LINEAGE):
             raise ValueError('exposure lineage fields missing')
         if not isinstance(row.get('calibration_run_id'), int) or not row.get('closure'):
             raise ValueError('immutable run/closure receipt missing')
+    historical = lineage.get('historical_exposed_systems')
+    if not isinstance(historical, list) or len(historical) < 5:
+        raise ValueError('known pre-I02 historical exposure systems missing')
+    for row in historical:
+        if not isinstance(row, dict) or not row.get('id') or row['id'] in ids:
+            raise ValueError('historical exposure identity invalid')
+        ids.add(row['id'])
+        if any(not isinstance(row.get(key), str) or not row[key]
+               for key in SYSTEM_FIELDS):
+            raise ValueError('historical source-system lineage missing')
+        evidence = row.get('evidence')
+        if (not isinstance(evidence, str) or not evidence.startswith('docs/') or
+                not Path(evidence).is_file() or not row.get('basis')):
+            raise ValueError('historical exposure evidence missing')
     for row in lineage.get('screened_not_qualified', []):
         if (row.get('status') !=
                 'SEARCH_SNIPPET_EXPOSED_TASK_FIT_UNAUDITED_NOT_CONFIRMATION_QUALIFIED' or
@@ -61,6 +76,10 @@ def require_confirmation_disjoint(candidate, lineage=None):
         for key in IDENTITY_FIELDS:
             if candidate[key] == exposed[key]:
                 raise ValueError(f'{key} reuses exposed calibration system {exposed["id"]}')
+    for exposed in lineage['historical_exposed_systems']:
+        for key in SYSTEM_FIELDS:
+            if candidate[key] == exposed[key]:
+                raise ValueError(f'{key} reuses historical source system {exposed["id"]}')
     for screened in lineage.get('screened_not_qualified', []):
         for key in ('writing_system_id', 'author_id', 'template_id'):
             if candidate[key] == screened[key]:
