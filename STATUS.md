@@ -23,7 +23,7 @@ An exact-source [EPC C/P/G v5 development protocol](docs/HCL_I02_EPC_CPG_V5_PROT
 is frozen with publisher attribution, native open question, five source-first
 obligations, complete-input fairness, four calls maximum, zero retries and a
 separate USD 0.15 hard cap. Provider-free preflight passes; the one-use trigger
-is absent, so calls/spend remain zero for this package. The case is approved
+is now queued in PR #237, with no call before merge. The case is approved
 only for this development calibration, never unseen confirmation. H's direct
 route has no cognition treatment and is not called.
 
