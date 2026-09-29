@@ -234,6 +234,31 @@
       "item_level_source_validity": "NOT_AUDITED",
       "task_fit": "UNDETERMINED_SOURCE_BOUNDED_ABSTRACT_CONCEPT_CALIBRATION_ONLY",
       "model_input_allowed": false
+    },
+    {
+      "id": "epc-glass-safety-development-screen",
+      "status": "PUBLISHER_CONTENT_AND_QUESTIONS_EXPOSED_NOT_CONFIRMATION_QUALIFIED",
+      "writing_system_id": "epc-engineering-ethics-case-studies",
+      "author_id": "epc-glass-safety-six-authors",
+      "template_id": "epc-engineering-ethics-two-part-case-studies",
+      "related_author_ids": [
+        "sarah-jayne-hitt",
+        "matthew-studley",
+        "darian-meacham",
+        "nik-whitehead",
+        "mike-bramhall",
+        "isobel-grimley"
+      ],
+      "publisher_url": "https://epc.ac.uk/toolkit/case-study-glass-safety-in-a-heritage-building-conversion/",
+      "source_sha256s": [
+        "67d84d40b4a543e5eb1fda291360f701f66cb542b0f92838b1ab2cc19d51cda0"
+      ],
+      "content_rows_seen_at_least": 1,
+      "native_labels_opened": 0,
+      "exposure_note": "Publisher case, summary, two-part dilemma and native discussion questions were displayed for development screening. The summary-plus-part-one ordinary source and first post-part-one native question were entered into a provider-free H route check. No model call, reference answer or gold was used. This case, author team and writing system are no longer unseen confirmation.",
+      "item_level_source_validity": "NOT_AUDITED",
+      "task_fit": "PRELIMINARY_RESPONSIBILITY_VALUE_OPEN_QUESTION_H_DIRECT_NO_TREATMENT",
+      "model_input_allowed": false
     }
   ]
 }
