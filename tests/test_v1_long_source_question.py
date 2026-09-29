@@ -19,8 +19,7 @@ class LongSourceQuestionTests(unittest.TestCase):
 
     def test_positive_complete_source_and_literal_anchored_belief(self):
         source = story()
-        prepared = prepare_person_context(self.layer, self.question, source,
-                                          max_context_chars=64000)
+        prepared = prepare_person_context(self.layer, self.question, source)
         payload = json.loads(prepared.messages[-1]['content'])
         self.assertEqual(payload['query'], self.question)
         self.assertEqual(payload['sources'][0]['text'], source)
@@ -64,10 +63,16 @@ class LongSourceQuestionTests(unittest.TestCase):
         short = prepare_person_context(self.layer, self.question, 'Mara said "I believe it."')
         self.assertNotEqual(short.preparation_receipt['method'],
                             'complete_long_source_local_evidence_v1')
+        with self.assertRaisesRegex(ValueError, 'final context budget'):
+            prepare_person_context(self.layer, self.question, story(),
+                                   max_context_chars=20000)
 
     def test_real_development_smoke_receipt_has_no_efficacy_promotion(self):
         receipt = json.loads(Path('reports/HCL_I02_LONG_SOURCE_ENTRY_DEVELOPMENT_SMOKE.json').read_text())
-        self.assertEqual(receipt['runtime_sha256'], runtime_digest())
+        self.assertEqual(receipt['runtime_sha256'],
+            json.loads(Path('reports/HCL_I02_RUNTIME_AMENDMENT_V3.json').read_text())[
+                'amended_hcl_runtime_sha256'])
+        self.assertNotEqual(receipt['runtime_sha256'], runtime_digest())
         self.assertTrue(receipt['source_complete_in_final_input'])
         self.assertGreater(receipt['source_chars'], 16000)
         self.assertFalse(receipt['specialized_cognition_treatment'])
