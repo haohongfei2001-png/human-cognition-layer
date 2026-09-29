@@ -1,6 +1,8 @@
 # I02 KPU conflict case: one-use C/P/G v6 development calibration
 
-**State:** frozen package and provider-free preflight passed; paid trigger absent.
+**Historical frozen protocol:** provider-free preflight passed before the
+one-use run. The [source-first closure](../reports/HCL_I02_KPU_CPG_V6_CLOSURE.md)
+records its result and closed authorization; the trigger is now absent.
 This is a comparator calibration on a development-exposed independent-author
 source, not I03 confirmation and not an HCL efficacy experiment. H's actual
 ordinary path is direct, with no cognition context; H and H-new receive zero

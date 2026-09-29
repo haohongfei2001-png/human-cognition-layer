@@ -1,5 +1,9 @@
 # I02 — compact G v6 generic comparator candidate
 
+Historical construction note: the later [KPU source-first closure](../reports/HCL_I02_KPU_CPG_V6_CLOSURE.md)
+records one G-map provider call with exact but overlong quotations. The frozen
+v6 run was closed without a G-final call or semantic qualification.
+
 **Status: provider-free candidate / model semantics unqualified / zero new
 provider calls.** The consumed EPC v5 run failed because the G-map model used
 all 1,024 frozen output tokens for 16 quoted rows and stopped mid-JSON. That

@@ -19,15 +19,19 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
-The [KPU conflict case C/P/G v6 development package](docs/HCL_I02_KPU_CPG_V6_PROTOCOL.md)
-fixes an independently authored CC BY 4.0 multi-party case and its first
-native question before model output. Provider-free fairness, H direct/no-
-treatment and USD 0.15/4-call reservation preflight passed. This source is
-development-exposed and direct publisher HTTP returned 403; it is not unseen
-confirmation. The unique trigger is armed in PR #242 for one frozen run; KPU
-provider calls/spend are still 0 before its merge, and H/H-new have 0 planned
-calls. No H efficacy claim follows. The trigger and budget must close after
-the run.
+The [KPU conflict case C/P/G v6 development calibration](reports/HCL_I02_KPU_CPG_V6_CLOSURE.md)
+ran once from PR #242/main `8f6e2adc72b1ebf5801aa6485402f40a624eb089`
+after exact package/runtime, complete-source fairness, H direct-route and cost
+preflight passed. Run `36602249307` made C, P and G-map calls, zero retries;
+G-map returned exact but overlong source quotes and failed the frozen per-row
+bound, so G-final received zero calls. P's citations also fail the frozen
+singular-quote shape. The raw artifact and source-first review are preserved;
+G is **INTERFACE FAILED / SEMANTICALLY UNQUALIFIED**, C/P are not fully
+source-qualified, and H/H-new were never called. Estimated USD 0.00680460,
+rated peak USD 0.01360920, actual invoice unavailable, below the independent
+USD 0.15 cap. The grant is **CLOSED / NO TRANSFER / NO RERUN**, the one-use
+trigger is removed. The KPU source is development-exposed, not unseen
+confirmation; there is no H efficacy result.
 
 The exact-source [EPC C/P/G v5 development calibration](reports/HCL_I02_EPC_CPG_V5_CLOSURE.md)
 ran once from PR #237/main `e277d91663fabc50b8ead8b28b65f6572b239558`
@@ -48,8 +52,9 @@ at its missing-trigger guard before any provider step, with zero extra calls.
 All six ordinary exact-main checks passed. A separately versioned
 [G v6 compact workspace](docs/HCL_I02_GENERIC_WORKSPACE_V6.md) now has
 provider-free source, revision, negative-inference, composition and historical
-checks. It preserves C/P and the full source, but is still model-semantically
-unqualified and has made no new provider call.
+checks. It preserves C/P and the full source. Its later KPU development
+G-map call failed the frozen per-quote length bound, so its model semantics
+remain unqualified; G-final made no call.
 
 A bounded [rights/privacy source screen](docs/HCL_I02_RIGHTS_PRIVACY_SOURCE_SCREEN_V3.md)
 rejects the OpenStax *Organizational Behavior* book because its publisher
