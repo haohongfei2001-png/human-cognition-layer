@@ -1,0 +1,11 @@
+hcl-i02-moral-cpg-calibration-unique-trigger-v1
+frozen_package_sha256=f0a6000dd9deafe0072c815dda1434a0a197e0474916e4bfd9c7d54b428f9045
+source_file_sha256=98a62d4a083e02ba234ca3d4f2312df6c337ef10cd3f12dcf917a2957ba59c10
+first_line_sha256=47412695b214e8ba181d8cc8376001d84e3077436e181834b1b9c5d99b456cb9
+frozen_package_main_sha=125bfdf039ee45963012d378971945de6200d05d
+phases=C,P,G_map,G_final
+maximum_provider_calls=4
+retries=0
+usd_hard_cap=0.06
+h_calls=0
+longmemeval=SEALED_NOT_ACCESSED
