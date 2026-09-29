@@ -8,7 +8,9 @@ adds a SHA256 exact-source check before invoking the unchanged v3 rights,
 privacy, historical-lineage and ordinary-input checks. The
 [fingerprint receipt](../reports/HCL_I02_SOURCE_FINGERPRINTS_V4.json)
 pins the historical KPU source file, its text digest, run ID and closure.
-Changing that receipt or the underlying file fails closed. The KPU source
+The public v4 qualification call always loads that pinned receipt; callers
+cannot supply an empty replacement fingerprint table. Changing the receipt
+or underlying file fails closed. The KPU source
 is CC BY 4.0, but its eligibility for **development calibration only** does
 not become confirmation eligibility under a mirror.
 

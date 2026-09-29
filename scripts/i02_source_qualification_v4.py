@@ -50,9 +50,9 @@ def load_fingerprints(path=FINGERPRINTS):
 
 
 def require_qualified_confirmation_source_v4(freeze, candidate, audit,
-                                             lineage=None, fingerprints=None):
+                                             lineage=None):
     """Reject an exact exposed source even under a mirror and renamed IDs."""
-    fingerprints = fingerprints or load_fingerprints()
+    fingerprints = load_fingerprints()
     if not isinstance(candidate, dict) or not isinstance(candidate.get('source_text'), str):
         raise ValueError('ordinary source text required for exposure check')
     source_hash = hashlib.sha256(candidate['source_text'].encode()).hexdigest()
