@@ -1,0 +1,26 @@
+{
+  "schema": "hcl-i02-screened-systems-v3",
+  "scope": "ADDITIONAL_NEGATIVE_SOURCE_SCREENS_NO_CONFIRMATION_QUALIFICATION",
+  "screened": [
+    {
+      "id": "openstax-organizational-behavior-ai-restriction",
+      "publisher_url_prefix": "https://openstax.org/books/organizational-behavior/",
+      "writing_system_id": "openstax-organizational-behavior-critical-thinking-cases",
+      "reason": "PUBLISHER_PROHIBITS_LLM_INGESTION_WITHOUT_PERMISSION",
+      "evidence_url": "https://openstax.org/books/organizational-behavior/pages/13-critical-thinking-case",
+      "model_input_allowed": false,
+      "confirmation_qualified": false
+    },
+    {
+      "id": "openoregon-esther-refugee-story-privacy",
+      "publisher_url_prefix": "https://openoregon.pressbooks.pub/contempfamilies2e/chapter/oo4-8/",
+      "writing_system_id": "openoregon-contemporary-families-esther-story",
+      "reason": "IDENTIFIABLE_SENSITIVE_FAMILY_HISTORY_NOT_CLEARED",
+      "evidence_url": "https://openoregon.pressbooks.pub/contempfamilies2e/chapter/oo4-8/",
+      "model_input_allowed": false,
+      "confirmation_qualified": false
+    }
+  ],
+  "model_provider_calls": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
