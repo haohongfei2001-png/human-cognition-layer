@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G / G01–G02 CORRECTNESS_VERIFIED / G03 NEXT_READY**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G / G01–G03 CORRECTNESS_VERIFIED / G04 NEXT_READY**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -328,7 +328,9 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **G02 — CORRECTNESS_VERIFIED:** one ordinary G01 rule feeds separate CG03 action-time factor checks for up to four actors; a narrow separately adopted collective rule can compare two actors and an explicit joint report without inferring group mind, private intention or world feasibility. Thirteen tests and ordinary positive witness; see `docs/HCL_WAVE_G02.md`.
 
-**G03 — NEXT_READY:** compare local concept necessary/sufficient criteria, typical uses, counterexamples, context differences and explicit revision. Same word/different reading and different word/same reading require source evidence; later concept change must not rewrite old commitments or evaluations.
+**G03 — CORRECTNESS_VERIFIED:** ordinary authorized text now yields local necessary/sufficient/typical criteria, explicit counterexamples, actor/context comparison and non-retroactive revision. Twelve tests and ordinary positive witness; see `docs/HCL_WAVE_G03.md`.
+
+**G04 — NEXT_READY:** split abstract arguments and philosophical questions into explicit premises, counterexamples, conditional formalization, analogy relations and pivotal disagreements. Separate factual, conceptual and value disputes without declaring one universal moral conclusion.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -489,12 +491,12 @@ defect is.
 
 - Current wave: **Wave G — Moral, Conceptual and Philosophical Integration**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: G03_LOCAL_CONCEPT_CRITERIA_AND_REVISION**
+- **NEXT_READY: G04_ABSTRACT_ARGUMENT_AND_PHILOSOPHICAL_DISAGREEMENT**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **G03**, then continue through the dependency-safe queue
+Work should continue at **G04**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
