@@ -19,6 +19,15 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [I02 residual-claim audit supplement](docs/HCL_I02_RESIDUAL_CLAIM_AUDIT.md)
+now requires an arm-blind reviewer to record exact output excerpts and
+source support for material claims outside frozen obligations. A synthetic
+otherwise-perfect 11/11 answer with an unsupported private-intention claim
+becomes ineligible. Historical scores and receipts remain unchanged; reviewer
+completeness and semantic truth are not established by code. This is an
+evaluation capability, not HCL answer gain. Zero new calls or spend; no
+confirmation source qualified.
+
 The I02 snapshot qualification gate now rejects a caller-supplied older
 commit when the checkout HEAD has since exposed that source. Historical
 diagnostic scans remain available, while qualification binds to the current
