@@ -41,6 +41,14 @@ provider-free source, revision, negative-inference, composition and historical
 checks. It preserves C/P and the full source, but is still model-semantically
 unqualified and has made no new provider call.
 
+A bounded [rights/privacy source screen](docs/HCL_I02_RIGHTS_PRIVACY_SOURCE_SCREEN_V3.md)
+rejects the OpenStax *Organizational Behavior* book because its publisher
+restricts LLM ingestion, and an Open Oregon refugee-family activity because
+potentially identifiable sensitive history has not been cleared. Its new v3
+gate composes the frozen v2 lineage with URL, source/question hashes, explicit
+model-use permission and privacy audit assertions. Both systems are
+development-exposed; no real independent item or provider call was qualified.
+
 The [G v5 generic workspace](docs/HCL_I02_GENERIC_WORKSPACE_V5.md) adds
 source-versioned exact quote memory, provisional evidence relations and
 bounded answer steps to the candidate generic comparator. C/P stay byte-for-
