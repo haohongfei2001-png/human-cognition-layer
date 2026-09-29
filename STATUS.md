@@ -19,6 +19,14 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [I02 v4 default-entry correction](docs/HCL_I02_COMPLETE_LONG_SOURCE_ENTRY.md)
+passes the full authorized source into final input for all 25 pinned,
+development-exposed SQuALITY dev stories without an explicit context override.
+Six have zero local literal candidates, and this is input coverage rather than
+answer quality. The caller's explicit smaller bound remains enforced. Zero
+provider calls/spend; independent source rights and C/P/G competence remain
+unqualified.
+
 The [I02 long-source ordinary-entry repair](docs/HCL_I02_COMPLETE_LONG_SOURCE_ENTRY.md)
 now carries a complete 24,920-character development story and locally anchored
 reported-speech candidates into the final model input, where the prior ordinary
@@ -33,8 +41,9 @@ requires residual-claim coverage and exact excerpts before arm allocation reveal
 The real ACL raw receipt crosses the opaque handoff; an unsupported private
 intent added to an otherwise reviewed output becomes ineligible. This is
 provider-free evaluation workflow capability, not an independent semantic
-review or HCL answer gain. MeetingToM media rights/access and SQuALITY H
-source-length failures remain unresolved; no confirmation source or paid call.
+review or HCL answer gain. MeetingToM media rights/access remain unresolved;
+the historical SQuALITY H source-length failure has the v4 provider-free input
+repair above, without source qualification or a paid comparison.
 
 The [I02 residual-claim audit supplement](docs/HCL_I02_RESIDUAL_CLAIM_AUDIT.md)
 now requires an arm-blind reviewer to record exact output excerpts and

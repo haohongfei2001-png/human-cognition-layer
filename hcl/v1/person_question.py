@@ -100,7 +100,7 @@ def _attach_source_scope(prepared, original_query, source_receipt, *, max_contex
 
 
 def prepare_person_context(layer, query, narrative, *, perspective_mode=PerspectiveMode.READER_ANALYSIS,
-                           observer_actor=None, narrative_access=False, max_context_chars=48000,
+                           observer_actor=None, narrative_access=False, max_context_chars=None,
                            as_of_statement=None, responsibility_premises=(), premise_scope='ALL_SOURCE'):
     """Ordinary question + ordinary source -> existing prepared cognition state.
 
@@ -111,6 +111,9 @@ def prepare_person_context(layer, query, narrative, *, perspective_mode=Perspect
         raise ValueError('request-local cognition layer required')
     if not isinstance(query, str) or not query.strip() or len(query) > 16000:
         raise ValueError('bounded nonempty ordinary question required')
+    if max_context_chars is None:
+        max_context_chars = (64000 if isinstance(narrative, str) and len(narrative) > 16000
+                             else 48000)
     if (not isinstance(perspective_mode, PerspectiveMode) or type(narrative_access) is not bool or
         type(max_context_chars) is not int or not 512 <= max_context_chars <= 64000):
         raise ValueError('explicit perspective, access flag and bounded context required')

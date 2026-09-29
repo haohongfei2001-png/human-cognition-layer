@@ -45,3 +45,17 @@ genuinely independent, rights-cleared cases and qualified C/P/G comparators.
 **NEXT_READY:** `I02_UNEXPOSED_SOURCE_QUALIFICATION`. This repair changes one
 ordinary input behavior and makes the long-input failure observable as a
 versioned improvement; it does not decide H efficacy or the I03 freeze.
+
+## Default-entry correction (v4)
+
+The v3 ordinary path needed an explicit 64,000-character final-context ceiling
+on some long sources. The [v4 amendment](../reports/HCL_I02_RUNTIME_AMENDMENT_V4.json)
+now chooses that ceiling when a caller leaves the context budget unspecified
+and supplies more than 16,000 source characters. A caller's explicit smaller
+ceiling remains a hard bound; short-source defaults stay 48,000. In a
+[provider-free default-entry audit](../reports/HCL_I02_LONG_SOURCE_DEFAULT_COVERAGE_V4.json),
+all 25 pinned, already development-exposed SQuALITY dev stories (22,559–38,795
+characters) reached final input whole with zero extraction calls. Six produced
+no local literal candidates, so this result is **input coverage only**, not
+successful cognitive analysis or an independent evaluation. No story text,
+native answer or gold is stored in the receipt.

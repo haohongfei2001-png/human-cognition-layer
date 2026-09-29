@@ -354,6 +354,8 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 The [complete long-source ordinary-entry repair](docs/HCL_I02_COMPLETE_LONG_SOURCE_ENTRY.md) adds a chained v3 runtime amendment: a 24,920-character already exposed development story now reaches final input whole with source-anchored literal candidates and no extraction call. Historical v1/v2 receipts remain pinned; no specialized H treatment, independent source qualification or answer gain is claimed. I02 source-first rights and C/P/G competence remain NEXT_READY.
 
+The chained v4 default-entry correction preserves an explicit caller context limit while allowing all 25 pinned, already development-exposed SQuALITY dev sources (22,559–38,795 characters) through the ordinary default entry with complete final-source coverage. Six produce no local literal candidates; zero paid calls, independent source qualification or answer-efficacy results. Continue I02 source qualification and fair comparator preparation; do not recycle the exposed SQuALITY writing system as unseen confirmation.
+
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
 

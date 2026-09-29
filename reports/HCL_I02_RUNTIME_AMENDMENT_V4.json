@@ -1,0 +1,14 @@
+{
+  "schema": "hcl-i02-runtime-amendment-v4",
+  "reason": "DEFAULT_COMPLETE_LONG_SOURCE_CONTEXT_BUDGET",
+  "historical_i01_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "previous_hcl_runtime_sha256": "3d39af825f9bf37d831faf8b3afa8628208bd6b73c5373ce0d49fb34063039aa",
+  "amended_hcl_runtime_sha256": "fbd854ce98d88ef3d57ce976e5a56bded548186133049b1bbbe6adb958b26b68",
+  "calibration_only": true,
+  "confirmation_items_inspected": 0,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "specialized_cognition_treatment_claimed": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "boundary": "For long ordinary sources, the default final-context ceiling is 64000 characters; an explicit caller ceiling is preserved. Short defaults and all consumed runtime/package pins remain unchanged."
+}
