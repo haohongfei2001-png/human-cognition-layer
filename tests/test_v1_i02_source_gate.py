@@ -17,7 +17,8 @@ class SourceGateTests(unittest.TestCase):
         self.assertEqual(SCREEN['qualified_sources'], 0)
         self.assertEqual(SCREEN['provider_calls'], 0)
         for row in SCREEN['sources']:
-            self.assertFalse(row['content_opened_for_case_selection'])
+            self.assertNotEqual(row['status'], SAFE_STATUS)
+            self.assertFalse(row.get('confirmation_content_opened', False))
             with self.assertRaisesRegex(ValueError, 'not qualified'):
                 require_qualified(SCREEN, row['source_id'])
 
