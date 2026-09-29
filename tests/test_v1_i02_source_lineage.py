@@ -39,12 +39,24 @@ class SourceLineageTests(unittest.TestCase):
         lineage = load_lineage()
         self.assertEqual({x['calibration_run_id'] for x in lineage['exposed_systems']},
                          {36561878435, 36566850936})
+        self.assertEqual({x['id'] for x in lineage['historical_exposed_systems']},
+                         {'cogtom-historical', 'sotopia-hard-historical',
+                          'fantom-historical', 'hitom-historical', 'saga-historical'})
         self.assertGreaterEqual(lineage['screened_not_qualified'][0]['content_rows_seen_at_least'], 1)
         with self.assertRaisesRegex(ValueError, 'screened source system'):
             require_confirmation_disjoint(candidate(
                 writing_system_id='hendrycks-ethics-short-scenario-system',
                 author_id='hendrycks-ethics-original-authors',
                 source_license_status='PROVISIONAL_METADATA_ONLY'))
+
+    def test_historical_fresh_label_cannot_requalify_exposed_writing_system(self):
+        for exposed in load_lineage()['historical_exposed_systems']:
+            with self.subTest(system=exposed['id']):
+                row = candidate(writing_system_id=exposed['writing_system_id'],
+                                source_group_id='previously-unseen-row-in-same-system')
+                self.assertTrue(validate_candidate(FREEZE, row))
+                with self.assertRaisesRegex(ValueError, 'historical source system'):
+                    validate_i02_confirmation_candidate(FREEZE, row)
 
     def test_different_musr_row_still_reuses_exposed_writing_system(self):
         row = candidate(writing_system_id='TAUR_MUSR_OBJECT_PLACEMENT_GENERATED_NARRATIVE',

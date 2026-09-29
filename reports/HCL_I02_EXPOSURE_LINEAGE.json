@@ -1,6 +1,6 @@
 {
-  "schema": "hcl-i02-exposure-lineage-v1",
-  "scope": "KNOWN_I02_PROVIDER_EXPOSED_CALIBRATION_SYSTEMS_NOT_EXHAUSTIVE_HISTORICAL_AUDIT",
+  "schema": "hcl-i02-exposure-lineage-v2",
+  "scope": "KNOWN_I02_AND_PRE_I02_EXPOSURES_NOT_EXHAUSTIVE_REPOSITORY_AUDIT",
   "longmemeval": "SEALED_NOT_ACCESSED",
   "exposed_systems": [
     {
@@ -20,6 +20,48 @@
       "source_group_id": "37TD41K0AI7TYQGNUFTSCYCNT25SCN",
       "calibration_run_id": 36566850936,
       "closure": "reports/HCL_I02_MORAL_CPG_CALIBRATION_CLOSURE.md"
+    }
+  ],
+  "historical_exposed_systems": [
+    {
+      "id": "cogtom-historical",
+      "writing_system_id": "COGTOM_HISTORICAL_TASK_SYSTEM",
+      "author_id": "COGTOM_ORIGINAL_AUTHORS",
+      "template_id": "COGTOM_BENCHMARK_FAMILY",
+      "evidence": "docs/HCL_V04_EVALUATION_EXPOSURE_REGISTER.md",
+      "basis": "200_GROUP_BASELINE_100_GROUP_EXPERIMENT_ADDITIONAL_REGRESSION"
+    },
+    {
+      "id": "sotopia-hard-historical",
+      "writing_system_id": "SOTOPIA_HARD_ENVIRONMENT_SYSTEM",
+      "author_id": "SOTOPIA_HARD_ORIGINAL_AUTHORS",
+      "template_id": "SOTOPIA_HARD_ALL_ENVIRONMENT_TEMPLATES",
+      "evidence": "docs/HCL_V04_EVALUATION_EXPOSURE_REGISTER.md",
+      "basis": "ALL_ENVIRONMENT_TEMPLATES_SEEN"
+    },
+    {
+      "id": "fantom-historical",
+      "writing_system_id": "FANTOM_CONVERSATION_SYSTEM",
+      "author_id": "SKYWALKER023_FANTOM_AUTHOR_TEAM",
+      "template_id": "FANTOM_CONVERSATION_QA",
+      "evidence": "docs/HCL_V06_FANTOM_CPGD_FRESH_V01.md",
+      "basis": "V01_V02_AND_V06_FRESH_PROVIDER_EXPOSURE"
+    },
+    {
+      "id": "hitom-historical",
+      "writing_system_id": "HI_TOM_STORY_SYSTEM",
+      "author_id": "HI_TOM_ORIGINAL_AUTHORS",
+      "template_id": "HI_TOM_STORY_QA",
+      "evidence": "docs/HCL_V04_EVALUATION_EXPOSURE_REGISTER.md",
+      "basis": "60_SELECTED_ROWS_PROVIDER_EXECUTION_BEGAN"
+    },
+    {
+      "id": "saga-historical",
+      "writing_system_id": "SAIUMBC_SAGA_STORY_SYSTEM",
+      "author_id": "SAIUMBC_SAGA_AUTHOR_TEAM",
+      "template_id": "SAGA_FIVE_SENTENCE_GOAL_STORIES",
+      "evidence": "docs/HCL_V07_SAGA_FRESH_CPGD_V01.md",
+      "basis": "DEVELOPMENT_AND_FRESH_PROVIDER_EXPOSURE"
     }
   ],
   "screened_not_qualified": [

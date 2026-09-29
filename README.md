@@ -8,7 +8,7 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 - [I02 C/P/G 一次性校准结案](reports/HCL_I02_CPG_CALIBRATION_CLOSURE.md)：3 次调用后 G-map 格式失败，G-final 未运行；完整 raw receipt 已保存，授权关闭，不测 H 增益。
 - [I02 第二来源 C/P/G 校准结案](reports/HCL_I02_MORAL_CPG_CALIBRATION_CLOSURE.md)：Moral Stories 首条开发样本完成四次调用；G-map v2 接口通过，但比较臂遗漏明确的安全目标，语义资格未通过。授权关闭，不调用 H/H-new，不声称独立效力。
 - [I02 来源优先语义评分 v1](docs/HCL_I02_SEMANTIC_SCORER.md)：冻结通用评审维度、原文引文校验与盲评计分接口；不自动判定语义真伪，也不代表 HCL 答案能力或独立效力提升。
-- [I02 校准来源暴露边界](docs/HCL_I02_SOURCE_LINEAGE.md)：已校准的 MuSR、Moral Stories 作者／模板／写作体系不能换行号进入独立确认集；第三来源的元数据审查也没有产生合格确认案例。
+- [I02 来源暴露边界](docs/HCL_I02_SOURCE_LINEAGE.md)：MuSR、Moral Stories 及五个历史用过的来源体系不能换行号进入独立确认集；仍需完整历史审计，尚无合格确认案例。
 - [I02 通用比较臂 v3](docs/HCL_I02_CPG_V3_REPAIR.md)：P/G 的来源清单把明确目标与未知的伤害意图分开；保留 C 和共同输入。仅无 provider 正确性，尚未确认模型表现。
 - [I02 FairytaleQA 元数据候选](docs/HCL_I02_FAIRYTALE_METADATA_CANDIDATE.md)：按固定目录规则锁定一条较长外部故事及专家问题；后续已做盲式版本及题型标签核对，正文、题目和答案文本均未展示，不可送模型。
 - [I02 盲式版本核对](docs/HCL_I02_FAIRYTALE_BLIND_PROVENANCE.md)：已证明候选故事全文标准化后连续匹配固定 Gutenberg 版本；只输出哈希和统计，没有展示正文或查看问题答案，案例仍未合格。
