@@ -44,3 +44,5 @@ from .joint_plan import JointPlanResult, prepare_joint_plan
 
 from .relationships import RelationshipResult, prepare_relationship
 from .relational_conflict import RelationalConflict, prepare_relational_conflict
+
+from .identity_roles import IdentityRoleResult, prepare_identity_roles

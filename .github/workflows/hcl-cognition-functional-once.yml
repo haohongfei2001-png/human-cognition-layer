@@ -1,0 +1,57 @@
+name: HCL Ordinary Entry One-Time Functional Smoke
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact certified main SHA
+        required: true
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: hcl-ordinary-entry-functional-once
+  cancel-in-progress: false
+jobs:
+  functional:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.expected_sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check exact SHA and unique first dispatch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
+        run: |
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          test "$GITHUB_SHA" = "$EXPECTED_SHA"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-cognition-functional-once.yml/runs?event=workflow_dispatch&per_page=100" > /tmp/functional-runs.json
+          python - <<'PY'
+          import json, os
+          runs = json.load(open('/tmp/functional-runs.json'))['workflow_runs']
+          same = runs
+          assert same and str(min(same, key=lambda r: r['run_number'])['id']) == os.environ['GITHUB_RUN_ID'], 'one dispatch for this workflow; no rerun'
+          PY
+      - name: Install existing runtime dependencies
+        run: python -m pip install openai==2.14.0
+      - name: Frozen provider-free preflight
+        run: python scripts/run_cognition_functional_once.py --preflight --output functional-preflight.json
+      - name: Execute two-call functional pipeline
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          HCL_FUNCTIONAL_AUTHORIZED: ONE_NORMAL_DEVELOPMENT_RUN
+        run: python scripts/run_cognition_functional_once.py --execute --output functional-run.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-ordinary-entry-functional-${{ github.run_id }}
+          path: |
+            functional-preflight.json
+            functional-run.json
+            reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_PACKAGE.json
+          if-no-files-found: error

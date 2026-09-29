@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–D COMPLETE / WAVE E / E01–E02 CORRECTNESS_VERIFIED / NEXT_READY=E03**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–D COMPLETE / WAVE E / E01–E03 CORRECTNESS_VERIFIED / NEXT_READY=E04**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -302,9 +302,11 @@ for failure, separate apology receipt and reported forgiveness. Thirteen targete
 checks plus combined composition; E01 and E02 ship as one coherent relationship
 work package. See `docs/HCL_WAVE_E01_E02.md`.
 
-**E03 — NEXT_READY:** separate self-narrative, third-party identity attribution,
+**E03 — CORRECTNESS_VERIFIED:** separate self-narrative, third-party identity attribution,
 role requirements, behavior and personal endorsement; role occupancy does not
-imply endorsement of every role norm.
+imply endorsement of every role norm. Twelve targeted checks and a positive witness cover local revision and actual final inputs; see `docs/HCL_WAVE_E03.md`.
+
+**E04 — NEXT_READY:** contextual preferences, partial orders and value conflicts without global weights.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -465,12 +467,12 @@ defect is.
 
 - Current wave: **Wave E — Relationship, Identity, Role and Value Dynamics**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: E03_SELF_NARRATIVE_ROLE_IDENTITY_BOUNDARIES**
+- **NEXT_READY: E04_CONTEXTUAL_VALUES_PARTIAL_ORDERS**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A05/B01–B05/C01–C05/D01–D05/E01–E02 actual provider calls / spend: **0 / USD 0**
+- A01–A05/B01–B05/C01–C05/D01–D05/E01–E03 actual provider calls / spend: **0 / USD 0**
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **E03**, then continue through the dependency-safe queue
+Work should continue at **E04**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
