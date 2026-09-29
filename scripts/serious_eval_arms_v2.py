@@ -27,8 +27,9 @@ def prepare_primary_arms_v2(question, source_id, source_text):
     map_payload = dict(question=ordinary['question'], sources=ordinary['sources'],
         workspace_fields=['source_index', 'open_questions'],
         workspace_schema={
-            'source_index': [dict(source_id=source_id, quote='exact source substring')],
-            'open_questions': ['unresolved source or access question']})
+            'source_index': dict(type='array', items=dict(
+                source_id='authorized source ID', quote='exact source substring')),
+            'open_questions': dict(type='array', items='unresolved source or access question')})
     arms['G_map'] = [dict(role='system', content=_MAP_SYSTEM),
         dict(role='user', content=json.dumps(map_payload,
             ensure_ascii=False, sort_keys=True))]
