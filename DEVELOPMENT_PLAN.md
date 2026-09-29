@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01–H04 CORRECTNESS_VERIFIED / H05 NEXT_READY**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01–H05 CORRECTNESS_VERIFIED / G-ARCH NEXT_READY**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -344,7 +344,9 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **H04 — CORRECTNESS_VERIFIED:** a full bounded F03 selected closure now feeds a source-quoted conditional answer with a leading recorded explanation, unresolved alternatives, decisive counterevidence, scope and assumptions. It refuses truncated closure and never claims semantic judge correctness. Eight targeted tests and ordinary before/after witness; see `docs/HCL_WAVE_H04.md`.
 
-**H05 — NEXT_READY:** complete an integrated difficult task slice, resource pressure and simple-task regression. Deliver actual execution graph, source chain, revision diff, limits and efficacy-untested status. Then perform G-ARCH before serious independent evaluation.
+**H05 — CORRECTNESS_VERIFIED:** one difficult question now selects a source-local B03/C03/D04/E05/F03/H04 chain and F05 cross-chapter reported conflict, preserving unresolved cross-source identity and record-time revision. A simple narrator question selects H01 direct lookup. Eight targeted tests, 100-event pressure case, ordinary witness and exact final input; see `docs/HCL_WAVE_H05.md`.
+
+**G-ARCH — NEXT_READY:** assess every canonical maturity criterion after H05. The earlier E03 live adapter smoke failed source anchoring, so no operational pass may be claimed from it. Repair a concrete input or architecture deficiency before `OPERATIONALLY_READY`, or remain structurally ready with an explicit limitation. The gate then controls Serious Independent Evaluation.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -505,12 +507,12 @@ defect is.
 
 - Current wave: **Wave H — Hard Human Cognition Integration**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: H05_INTEGRATED_DIFFICULT_SLICE_AND_ARCHITECTURE_MATURITY**
+- **NEXT_READY: G_ARCH_ARCHITECTURE_MATURITY_ASSESSMENT**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **H05**, then continue through the dependency-safe queue
+Work should continue at **G-ARCH**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
