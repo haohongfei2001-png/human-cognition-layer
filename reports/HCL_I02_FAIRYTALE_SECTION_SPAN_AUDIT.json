@@ -1,0 +1,21 @@
+{
+  "confirmation_qualified": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "maximum_summary_section_span": 2,
+  "model_input_allowed": false,
+  "provider_calls": 0,
+  "publisher_question_git_blob": "a8b6251f1826940eef45b4ba7abef8a05089778e",
+  "publisher_question_sha256": "54a03fb11936d2363371ecbeb74f08695680fffd699507f9db0fcd7f5fb92f13",
+  "question_or_answer_text_returned": false,
+  "schema": "hcl-i02-fairytale-section-span-audit-v1",
+  "source_section_count": 43,
+  "story_text_returned": false,
+  "summary_character_or_feeling_tagged_count": 0,
+  "summary_item_count": 6,
+  "summary_section_span_counts": {
+    "1": 5,
+    "2": 1
+  },
+  "task_family": "LONG_CHARACTER_DEVELOPMENT",
+  "task_family_fit": "NOT_SUPPORTED_BY_PUBLISHER_TAG_AND_SECTION_METADATA"
+}
