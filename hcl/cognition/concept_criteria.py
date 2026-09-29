@@ -210,6 +210,10 @@ class ConceptCriteriaWorkspace:
         payload = dict(schema='hcl-g03-local-concept-criteria-v1', question=question,
             source_id=self.source_id, source_version=self.version, observer=observer,
             cutoffs=cutoffs, through_order=through_order, readings=readings, relations=relations,
+            active_criteria=[dict(actor=key[0], context=key[1], term=key[2],
+                                  kind=row['kind'], criteria=[dict(feature=k, value=v) for k, v in row['criteria']],
+                                  source=row['source']) for key, rows in sorted(rules.items()) for row in rows
+                             if row['active']],
             applications=applications, equivalences=equivalences, diagnostics=diagnostics,
             line_order='SOURCE_LOCAL_NOT_CALENDAR_TIME', shared_meaning='NOT_INFERRED',
             moral_truth='NOT_INFERRED', prior_commitments='NOT_REWRITTEN', policy=_POLICY)
