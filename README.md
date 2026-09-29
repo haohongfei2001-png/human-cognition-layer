@@ -6,7 +6,8 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 
 - [I02 ACL C/P/G v8 一次性开发校准结案](reports/HCL_I02_ACL_ETHICS_CPG_V8_CLOSURE.md)：四次原生推理调用与精确引文接口通过，零重试，估算 USD 0.02662506／峰时 USD 0.05325012；合成开发来源不能证明独立泛化或 HCL 增益，盲式语义比较尚未合格，授权已关闭。
 - [I02 ACL 教学摘要开发来源](docs/HCL_I02_ACL_ETHICS_DEVELOPMENT_SOURCE.md)：固定外部作者 CC BY 合成摘要及来源优先义务；C/P/G 普通输入无 provider 门禁通过，H 实际直通；整套作者／模板不能算未见确认。
-- [I02 强比较器 v8 候选](docs/HCL_I02_STRONG_COMPARATOR_V8.md)：C/P/G 统一显式原生推理设置，最终引文结构与冻结评分器一致；仅 provider-free，仍未通过模型语义或独立来源资格。
+- [I02 来源优先盲评交接](docs/HCL_I02_BLIND_REVIEW_PACKET.md)：真实原始回执可生成匿名答案包，完整复核后才揭示比较臂；尚无独立盲评或效力结论。
+- [I02 强比较器 v8 候选](docs/HCL_I02_STRONG_COMPARATOR_V8.md)：C/P/G 原生推理和引文接口已在一条合成开发题上运行；跨任务语义能力与独立来源仍未合格。
 - [I02 受限覆盖报告](docs/HCL_I02_RESTRICTED_COVERAGE_REPORT.md)：可执行校验器如实报告少于四任务／三来源体系的目录，同时保留完整成熟度门槛；不开放 provider 输入或声称效力。
 - [I02 完整来源输入覆盖](docs/HCL_I02_LONG_INPUT_COVERAGE.md)：25 篇固定长故事均超过 H 普通入口长度上限；将拒绝记为观察结果，不截短来源或宣称合格样本。
 - [I02 EPC 工程伦理开发筛查](docs/HCL_I02_EPC_GLASS_SCREEN.md)：独立作者的原生伦理题有来源和许可回执，但 H 普通入口直通模型、无认知机制处理；已暴露材料不作独立确认。
