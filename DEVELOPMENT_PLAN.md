@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–D COMPLETE / WAVE E / E01–E03 CORRECTNESS_VERIFIED / NEXT_READY=E04**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–D COMPLETE / WAVE E / E01–E04 CORRECTNESS_VERIFIED / NEXT_READY=E05**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -306,7 +306,9 @@ work package. See `docs/HCL_WAVE_E01_E02.md`.
 role requirements, behavior and personal endorsement; role occupancy does not
 imply endorsement of every role norm. Twelve targeted checks and a positive witness cover local revision and actual final inputs; see `docs/HCL_WAVE_E03.md`.
 
-**E04 — NEXT_READY:** contextual preferences, partial orders and value conflicts without global weights.
+**E04 — CORRECTNESS_VERIFIED:** context-dependent choice comparisons, conditional partial-order paths, incomparable values and cross-role tension; reuses CG04 and E03. Thirteen tests and ordinary positive witness; see `docs/HCL_WAVE_E04.md`.
+
+**E05 — NEXT_READY:** relationship–identity–role–value cross-time composition and dependency updates.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -467,12 +469,12 @@ defect is.
 
 - Current wave: **Wave E — Relationship, Identity, Role and Value Dynamics**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: E04_CONTEXTUAL_VALUES_PARTIAL_ORDERS**
+- **NEXT_READY: E05_RELATIONSHIP_IDENTITY_ROLE_VALUE_COMPOSITION**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
-- A01–A05/B01–B05/C01–C05/D01–D05/E01–E03 actual provider calls / spend: **0 / USD 0**
+- Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **E04**, then continue through the dependency-safe queue
+Work should continue at **E05**, then continue through the dependency-safe queue
 without asking for a new decision after every package.

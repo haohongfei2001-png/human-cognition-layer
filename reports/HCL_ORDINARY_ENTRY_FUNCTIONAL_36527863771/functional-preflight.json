@@ -1,0 +1,174 @@
+{
+  "status": "PASS_PROVIDER_FREE",
+  "package_sha256": "34c400d591239a1851580ef7d5f724ef010eeae157dc5fdd0e88236b5d53ffd4",
+  "runtime_sha256": "20c2ea1c197b218d3aebd42f831d40d42dc0b8f34f949b6e719cc91c3df0b436",
+  "provider_calls": 0,
+  "preparation": {
+    "actual_final_messages": [
+      {
+        "role": "system",
+        "content": "Separate self-narrative, another person's identity attribution, sourced role occupancy, local requirements, reported behavior and personal endorsement. Role occupancy or compliance does not imply endorsement. A local rule/behavior tension does not prove a global identity, moral truth, hypocrisy or personality trait. Explicit self-description revision is source-local; an isolated behavior or a third-party label cannot rewrite it. Current endorsement does not backfill a prior behavior-time attitude. Source order is not verified chronology."
+      },
+      {
+        "role": "user",
+        "content": "{\"actor\": \"Mira\", \"actual_identity\": \"NOT_ESTABLISHED\", \"behavior_checks\": [{\"action\": \"check every patch\", \"body\": \"In team, Mira did not check every patch\", \"moral_verdict\": \"NOT_INFERRED\", \"narrator\": true, \"order\": 201, \"personal_endorsement\": \"NOT_INFERRED\", \"positive\": false, \"quote\": \"Narrator: In team, Mira did not check every patch.\", \"role_source_ids\": [\"claim:50b5bc022ad207c77fb961ba433b489effe2a3464016e05c21934075ff5cdeea\"], \"rule_source_ids\": [\"claim:ea217a6e02d3de050f4beee2e8b112d95c17af22a39e7fec887762da1d9f0944\"], \"source_claim_id\": \"claim:bd9b785858189053f257fa7fa4649bf2e75f2194cc8cca4738f60765c6411555\", \"speaker\": \"Narrator\", \"status\": \"DOES_NOT_MEET_DECLARED_REQUIREMENT\"}], \"context\": \"team\", \"current_self_descriptions\": [{\"authority\": \"SELF_NARRATIVE_NOT_ACTUAL_TRAIT\", \"body\": \"In team, I see myself as careful\", \"label\": \"careful\", \"narrator\": false, \"order\": 0, \"quote\": \"Mira said, \\\"In team, I see myself as careful.\\\"\", \"source_claim_id\": \"claim:eb65131543f73d229adff13f76dda2f7e9bf7be1e50e976b53796ee9552b5bf1\", \"speaker\": \"Mira\"}], \"dependency_claim_id\": \"claim:30b4cf6824d80fecaf9f50d2c46f25cd4501b07499c4f52fae910e88f22a2022\", \"diagnostics\": [], \"global_personality\": \"NOT_CREATED\", \"historical_self_descriptions\": [], \"identity_rewritten_from_behavior\": false, \"local_tension\": true, \"original_source\": \"Mira said, \\\"In team, I see myself as careful.\\\"\\nNoor said, \\\"In team, I see Mira as careless.\\\"\\nNarrator: In team, Mira serves as reviewer.\\nNarrator: In team, a reviewer is required to check every patch.\\nNarrator: In team, Mira did not check every patch.\\nMira said, \\\"In team, I reject the requirement for a reviewer to check every patch.\\\"\", \"other_identity_attributions\": [{\"authority\": \"THIRD_PARTY_IDENTITY_ATTRIBUTION\", \"body\": \"In team, I see Mira as careless\", \"label\": \"careless\", \"narrator\": false, \"order\": 47, \"quote\": \"Noor said, \\\"In team, I see Mira as careless.\\\"\", \"source_claim_id\": \"claim:457b5331f7bb737f1f26349727174d7bd82532479750457aba01c6387062a365\", \"speaker\": \"Noor\"}], \"policy\": \"Separate self-narrative, another person's identity attribution, sourced role occupancy, local requirements, reported behavior and personal endorsement. Role occupancy or compliance does not imply endorsement. A local rule/behavior tension does not prove a global identity, moral truth, hypocrisy or personality trait. Explicit self-description revision is source-local; an isolated behavior or a third-party label cannot rewrite it. Current endorsement does not backfill a prior behavior-time attitude. Source order is not verified chronology.\", \"query\": \"How does Mira's self-description relate to the reviewer role in team?\", \"requirement_endorsements\": [{\"action\": \"check every patch\", \"endorsement\": \"REJECTS\", \"reports\": [{\"action\": \"check every patch\", \"authority\": \"PERSONAL_REPORTED_POSITION\", \"body\": \"In team, I reject the requirement for a reviewer to check every patch\", \"narrator\": false, \"order\": 252, \"quote\": \"Mira said, \\\"In team, I reject the requirement for a reviewer to check every patch.\\\"\", \"source_claim_id\": \"claim:9521e0b4d700a7d485c72c4f21ff42643c4551c3d8a30e2222ef0eee46b4e307\", \"speaker\": \"Mira\", \"stance\": \"REJECTS\"}]}], \"role\": \"reviewer\", \"role_source_reports\": [{\"body\": \"In team, Mira serves as reviewer\", \"narrator\": true, \"order\": 93, \"quote\": \"Narrator: In team, Mira serves as reviewer.\", \"source_claim_id\": \"claim:50b5bc022ad207c77fb961ba433b489effe2a3464016e05c21934075ff5cdeea\", \"speaker\": \"Narrator\", \"value\": true}], \"role_status\": \"REPORTED_OCCUPANT\", \"source_requirements\": [{\"action\": \"check every patch\", \"authority\": \"SOURCE_LOCAL_REQUIREMENT_NOT_MORAL_TRUTH\", \"body\": \"In team, a reviewer is required to check every patch\", \"narrator\": true, \"order\": 137, \"quote\": \"Narrator: In team, a reviewer is required to check every patch.\", \"source_claim_id\": \"claim:ea217a6e02d3de050f4beee2e8b112d95c17af22a39e7fec887762da1d9f0944\", \"speaker\": \"Narrator\"}], \"unlinked_endorsement_reports\": []}"
+      },
+      {
+        "role": "user",
+        "content": "Answer the question using a JSON object with exactly these fields: self_description, others_attribution, role_occupancy, role_requirement, reported_behavior, personal_endorsement, unresolved. Use concise strings or lists. Keep reported source channels separate; explain uncertainty without inferring a global identity, moral truth or endorsement from role occupancy."
+      }
+    ],
+    "cognition_state": {
+      "actor": "Mira",
+      "actual_identity": "NOT_ESTABLISHED",
+      "behavior_checks": [
+        {
+          "action": "check every patch",
+          "body": "In team, Mira did not check every patch",
+          "moral_verdict": "NOT_INFERRED",
+          "narrator": true,
+          "order": 201,
+          "personal_endorsement": "NOT_INFERRED",
+          "positive": false,
+          "quote": "Narrator: In team, Mira did not check every patch.",
+          "role_source_ids": [
+            "claim:50b5bc022ad207c77fb961ba433b489effe2a3464016e05c21934075ff5cdeea"
+          ],
+          "rule_source_ids": [
+            "claim:ea217a6e02d3de050f4beee2e8b112d95c17af22a39e7fec887762da1d9f0944"
+          ],
+          "source_claim_id": "claim:bd9b785858189053f257fa7fa4649bf2e75f2194cc8cca4738f60765c6411555",
+          "speaker": "Narrator",
+          "status": "DOES_NOT_MEET_DECLARED_REQUIREMENT"
+        }
+      ],
+      "context": "team",
+      "current_self_descriptions": [
+        {
+          "authority": "SELF_NARRATIVE_NOT_ACTUAL_TRAIT",
+          "body": "In team, I see myself as careful",
+          "label": "careful",
+          "narrator": false,
+          "order": 0,
+          "quote": "Mira said, \"In team, I see myself as careful.\"",
+          "source_claim_id": "claim:eb65131543f73d229adff13f76dda2f7e9bf7be1e50e976b53796ee9552b5bf1",
+          "speaker": "Mira"
+        }
+      ],
+      "dependency_claim_id": "claim:30b4cf6824d80fecaf9f50d2c46f25cd4501b07499c4f52fae910e88f22a2022",
+      "diagnostics": [],
+      "global_personality": "NOT_CREATED",
+      "historical_self_descriptions": [],
+      "identity_rewritten_from_behavior": false,
+      "local_tension": true,
+      "original_source": "Mira said, \"In team, I see myself as careful.\"\nNoor said, \"In team, I see Mira as careless.\"\nNarrator: In team, Mira serves as reviewer.\nNarrator: In team, a reviewer is required to check every patch.\nNarrator: In team, Mira did not check every patch.\nMira said, \"In team, I reject the requirement for a reviewer to check every patch.\"",
+      "other_identity_attributions": [
+        {
+          "authority": "THIRD_PARTY_IDENTITY_ATTRIBUTION",
+          "body": "In team, I see Mira as careless",
+          "label": "careless",
+          "narrator": false,
+          "order": 47,
+          "quote": "Noor said, \"In team, I see Mira as careless.\"",
+          "source_claim_id": "claim:457b5331f7bb737f1f26349727174d7bd82532479750457aba01c6387062a365",
+          "speaker": "Noor"
+        }
+      ],
+      "policy": "Separate self-narrative, another person's identity attribution, sourced role occupancy, local requirements, reported behavior and personal endorsement. Role occupancy or compliance does not imply endorsement. A local rule/behavior tension does not prove a global identity, moral truth, hypocrisy or personality trait. Explicit self-description revision is source-local; an isolated behavior or a third-party label cannot rewrite it. Current endorsement does not backfill a prior behavior-time attitude. Source order is not verified chronology.",
+      "query": "How does Mira's self-description relate to the reviewer role in team?",
+      "requirement_endorsements": [
+        {
+          "action": "check every patch",
+          "endorsement": "REJECTS",
+          "reports": [
+            {
+              "action": "check every patch",
+              "authority": "PERSONAL_REPORTED_POSITION",
+              "body": "In team, I reject the requirement for a reviewer to check every patch",
+              "narrator": false,
+              "order": 252,
+              "quote": "Mira said, \"In team, I reject the requirement for a reviewer to check every patch.\"",
+              "source_claim_id": "claim:9521e0b4d700a7d485c72c4f21ff42643c4551c3d8a30e2222ef0eee46b4e307",
+              "speaker": "Mira",
+              "stance": "REJECTS"
+            }
+          ]
+        }
+      ],
+      "role": "reviewer",
+      "role_source_reports": [
+        {
+          "body": "In team, Mira serves as reviewer",
+          "narrator": true,
+          "order": 93,
+          "quote": "Narrator: In team, Mira serves as reviewer.",
+          "source_claim_id": "claim:50b5bc022ad207c77fb961ba433b489effe2a3464016e05c21934075ff5cdeea",
+          "speaker": "Narrator",
+          "value": true
+        }
+      ],
+      "role_status": "REPORTED_OCCUPANT",
+      "source_requirements": [
+        {
+          "action": "check every patch",
+          "authority": "SOURCE_LOCAL_REQUIREMENT_NOT_MORAL_TRUTH",
+          "body": "In team, a reviewer is required to check every patch",
+          "narrator": true,
+          "order": 137,
+          "quote": "Narrator: In team, a reviewer is required to check every patch.",
+          "source_claim_id": "claim:ea217a6e02d3de050f4beee2e8b112d95c17af22a39e7fec887762da1d9f0944",
+          "speaker": "Narrator"
+        }
+      ],
+      "unlinked_endorsement_reports": []
+    },
+    "extraction_backend_calls": 1,
+    "extraction_status": "BACKEND_PROPOSALS_NOT_SEMANTICALLY_CERTIFIED",
+    "semantic_diagnostics": [
+      {
+        "claim_id": "claim:eb65131543f73d229adff13f76dda2f7e9bf7be1e50e976b53796ee9552b5bf1",
+        "quotation": "EXACT",
+        "semantic_support": "BOUNDED_LITERAL_FORM",
+        "structure": "PASS"
+      },
+      {
+        "claim_id": "claim:457b5331f7bb737f1f26349727174d7bd82532479750457aba01c6387062a365",
+        "quotation": "EXACT",
+        "semantic_support": "BOUNDED_LITERAL_FORM",
+        "structure": "PASS"
+      },
+      {
+        "claim_id": "claim:50b5bc022ad207c77fb961ba433b489effe2a3464016e05c21934075ff5cdeea",
+        "quotation": "EXACT",
+        "semantic_support": "BOUNDED_LITERAL_FORM",
+        "structure": "PASS"
+      },
+      {
+        "claim_id": "claim:ea217a6e02d3de050f4beee2e8b112d95c17af22a39e7fec887762da1d9f0944",
+        "quotation": "EXACT",
+        "semantic_support": "BOUNDED_LITERAL_FORM",
+        "structure": "PASS"
+      },
+      {
+        "claim_id": "claim:bd9b785858189053f257fa7fa4649bf2e75f2194cc8cca4738f60765c6411555",
+        "quotation": "EXACT",
+        "semantic_support": "BOUNDED_LITERAL_FORM",
+        "structure": "PASS"
+      },
+      {
+        "claim_id": "claim:9521e0b4d700a7d485c72c4f21ff42643c4551c3d8a30e2222ef0eee46b4e307",
+        "quotation": "EXACT",
+        "semantic_support": "BOUNDED_LITERAL_FORM",
+        "structure": "PASS"
+      }
+    ],
+    "source_derived_candidate_ids": [
+      "claim:eb65131543f73d229adff13f76dda2f7e9bf7be1e50e976b53796ee9552b5bf1",
+      "claim:457b5331f7bb737f1f26349727174d7bd82532479750457aba01c6387062a365",
+      "claim:50b5bc022ad207c77fb961ba433b489effe2a3464016e05c21934075ff5cdeea",
+      "claim:ea217a6e02d3de050f4beee2e8b112d95c17af22a39e7fec887762da1d9f0944",
+      "claim:bd9b785858189053f257fa7fa4649bf2e75f2194cc8cca4738f60765c6411555",
+      "claim:9521e0b4d700a7d485c72c4f21ff42643c4551c3d8a30e2222ef0eee46b4e307"
+    ]
+  }
+}
