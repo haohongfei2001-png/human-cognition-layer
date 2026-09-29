@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G / G01 NEXT_READY**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G / G01 CORRECTNESS_VERIFIED / G02 NEXT_READY**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -324,7 +324,9 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 ## 5g. Current Wave G — Moral, Conceptual and Philosophical Integration
 
-**G01 — NEXT_READY:** propose normative-premise candidates from ordinary source text, separating user-supplied premises, character endorsement, institutional rule reports and analyst-adopted conditional frameworks. Do not require a prefilled `FactorRequirement` or promote a framework to moral truth.
+**G01 — CORRECTNESS_VERIFIED:** ordinary user and source text produces typed but conditional premise candidates, distinguishing user-supplied, explicitly analyst-adopted, source-reported institution and character origins. Only completely parsed adopted/user conditions can bridge to CG03. Eleven tests and positive witness; see `docs/HCL_WAVE_G01.md`.
+
+**G02 — NEXT_READY:** connect causal contribution, action-time knowledge, foreseeability, control, stated intention, alternatives and individual/collective responsibility under explicit G01 premises. Outcome harm must not imply malice or sole responsibility.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -485,12 +487,12 @@ defect is.
 
 - Current wave: **Wave G — Moral, Conceptual and Philosophical Integration**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: G01_SOURCE_ORIGIN_NORMATIVE_PREMISES**
+- **NEXT_READY: G02_ACTION_TIME_RESPONSIBILITY_COMPOSITION**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **G01**, then continue through the dependency-safe queue
+Work should continue at **G02**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
