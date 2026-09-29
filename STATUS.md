@@ -19,6 +19,14 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+An exact-source [EPC C/P/G v5 development protocol](docs/HCL_I02_EPC_CPG_V5_PROTOCOL.md)
+is frozen with publisher attribution, native open question, five source-first
+obligations, complete-input fairness, four calls maximum, zero retries and a
+separate USD 0.15 hard cap. Provider-free preflight passes; the one-use trigger
+is absent, so calls/spend remain zero for this package. The case is approved
+only for this development calibration, never unseen confirmation. H's direct
+route has no cognition treatment and is not called.
+
 The [G v5 generic workspace](docs/HCL_I02_GENERIC_WORKSPACE_V5.md) adds
 source-versioned exact quote memory, provisional evidence relations and
 bounded answer steps to the candidate generic comparator. C/P stay byte-for-

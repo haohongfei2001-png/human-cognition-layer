@@ -1,0 +1,130 @@
+{
+  "authorization": "OWNER_DEFAULT_EXISTING_PROVIDER_NORMAL_BOUNDED_COST",
+  "budget_cap_usd": 0.15,
+  "confirmation_items_inspected": 0,
+  "execution_files": {
+    ".github/workflows/hcl-i02-epc-cpg-v5-once.yml": "749b1cf9916213feb6fa41971f160a81fc559d3fc4f2bd006cb5865cda0befee",
+    "scripts/i02_input_coverage.py": "e17728e5aa116d4ea7eab134e68ffd371678bae0254e611602d43e2eafa1c6fe",
+    "scripts/i02_source_lineage.py": "69c1baba0a27ddf494f11b9eeee1270f3bba1fd110ed9c5babe5340921f39e90",
+    "scripts/run_i02_comparator_calibration_once.py": "c3676942814eefd02bdee0270390bc986ca86491eab1f911e622316bd681cdf8",
+    "scripts/run_i02_epc_cpg_v5_once.py": "9cac49278511431e6ad74358ce28d02b404dcd004e3611146b3af28976cdaa80",
+    "scripts/serious_eval_arms.py": "a94cb6d2af171c8b4efc2596b2b27df914d6cc49695dd1c1979948dded31868c",
+    "scripts/serious_eval_arms_v2.py": "d354fcc1408d42fb5fb1ab70abc34579aba93b20033af888864d4bf78e29a4dd",
+    "scripts/serious_eval_arms_v3.py": "0984ae6121234645f2552bcf181d993766d10eb76e7b49ccbffc2454cdc0e54f",
+    "scripts/serious_eval_arms_v4.py": "3a4bbf6061967205067582b53f5dde6197326d662185ddb90a4447b5353dc144",
+    "scripts/serious_eval_contract.py": "d415af270dfff20139130768cdf462f9eb0d8080e3ed152f2e3adb9f18ba1a9f",
+    "scripts/serious_eval_generic_workspace_v5.py": "e6719bb57cd4738bb6af578cc38aaeee31579b99933ebc8691ef08fbe70c87d6"
+  },
+  "execution_sha256": "702b908504e42e2410ef0dd2f7047364f49aeaaff70cc5b87c1b91ccfbccfc8b",
+  "global_source_first_obligations": [
+    {
+      "id": "normative_premise_conditional",
+      "required_behavior": "AVOID_UNCONDITIONAL_MORAL_OR_LEGAL_VERDICT",
+      "weight": 3
+    },
+    {
+      "id": "no_outside_code_as_source",
+      "required_behavior": "AVOID_IMPORTING_EXTERNAL_PROFESSIONAL_CODE",
+      "weight": 3
+    }
+  ],
+  "h_arm_calls": 0,
+  "hcl_runtime_sha256": "7ff7c52e114f1060c798bd23a1eca8b76cc6c7919419b90dd4b4e060aa21d267",
+  "historical_budget_transfer": false,
+  "license": "CC_BY_SA_4_0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "maximum_map_bytes": 4000,
+  "maximum_output_tokens": {
+    "C": 768,
+    "G_final": 768,
+    "G_map": 1024,
+    "P": 768
+  },
+  "maximum_provider_calls": 4,
+  "model": "deepseek-v4-pro",
+  "model_family": "DeepSeek-V4-Pro-0813",
+  "native_question": "FIRST_DISCUSSION_QUESTION_AFTER_PART_ONE",
+  "original_authors": [
+    "Sarah Jayne Hitt",
+    "Matthew Studley",
+    "Darian Meacham",
+    "Nik Whitehead",
+    "Mike Bramhall",
+    "Isobel Grimley"
+  ],
+  "peak_rates_usd_per_million": {
+    "cache_hit": 0.044,
+    "input": 1.32,
+    "output": 3.96
+  },
+  "phases": [
+    "C",
+    "P",
+    "G_map",
+    "G_final"
+  ],
+  "price_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "price_verified_date": "2026-09-29",
+  "provider": "deepseek",
+  "provider_endpoint": "https://api.deepseek.com",
+  "purpose": "ONE_EPC_DEVELOPMENT_SOURCE_CPG_V5_COMPARATOR_CALIBRATION_NO_H_EFFICACY",
+  "question_sha256": "5a2a0cd2aadab9729a0050e31a9599ec0a629de1280617f0d56ab1a95c707fcb",
+  "response_format": {
+    "type": "json_object"
+  },
+  "retries": 0,
+  "schema": "hcl-i02-epc-cpg-v5-calibration-v1",
+  "service_tier": "provider_default_no_tier_parameter",
+  "source_distribution": "EPC_GLASS_SAFETY_PUBLISHER_CASE_DEVELOPMENT_EXPOSED",
+  "source_first_obligation_anchors": [
+    {
+      "id": "changed_safety_standards_not_proved_violation",
+      "length": 93,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "ab20f89475589df5bd393fdb20dfbfa7a8293e5946fd25faf03808d2420431f0",
+      "start": 1631,
+      "weight": 3
+    },
+    {
+      "id": "developer_cost_pressure_not_malicious_motive",
+      "length": 75,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "235ff1662796b73b34816621f460fdaf190467fe09563ee0821529d94b20b7d7",
+      "start": 1467,
+      "weight": 2
+    },
+    {
+      "id": "contractor_risk_assessment_not_measured_probability",
+      "length": 87,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "b56ff9ec852704668e6cb053dff30abb82c557bc8c07ede0ee7ea932bc45501c",
+      "start": 2471,
+      "weight": 2
+    },
+    {
+      "id": "request_to_withhold_not_actual_concealment",
+      "length": 67,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "c6bd083507bde8bf4edbe3bc5f6bc61064f6648f300c84b143cd4a56986a7740",
+      "start": 2559,
+      "weight": 3
+    },
+    {
+      "id": "vague_records_preserve_uncertainty",
+      "length": 21,
+      "required_behavior": "STATE_AND_QUALIFY",
+      "sha256": "b3332edbf336fa4b126d762297a0223db865f3b8dec07a17afa5e3af301019de",
+      "start": 1404,
+      "weight": 2
+    }
+  ],
+  "source_first_review_before_model_output": true,
+  "source_id": "epc-glass-safety-part-one-2022",
+  "source_lineage_sha256": "fe4fbb7fbed0ef6bf9e2eab9a9490b58eae6ae866f956f0d356d7b841a7d7900",
+  "source_selection": "PUBLISHER_SUMMARY_AND_DILEMMA_PART_ONE_ONLY",
+  "source_sha256": "67d84d40b4a543e5eb1fda291360f701f66cb542b0f92838b1ab2cc19d51cda0",
+  "source_url": "https://epc.ac.uk/toolkit/case-study-glass-safety-in-a-heritage-building-conversion/",
+  "temperature": 0,
+  "thinking": "disabled"
+}

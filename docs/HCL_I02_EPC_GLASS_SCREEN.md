@@ -43,3 +43,10 @@ observed zero-treatment path cannot be mistaken for specialized efficacy.
 independent source-first case review. Calibrate C/P/G on separate development
 material without recycling consumed grants or using H outcomes to choose
 questions.
+
+Later calibration-only update: the exact selected source hash and native
+question have a separately frozen [C/P/G v5 protocol](HCL_I02_EPC_CPG_V5_PROTOCOL.md).
+Its attribution, five source-first obligations and one-use cost gate supersede
+this screen's earlier model-input hold for **development calibration only**.
+This case and writing system remain excluded from confirmation, and the
+original provider-free direct-route receipt is unchanged.

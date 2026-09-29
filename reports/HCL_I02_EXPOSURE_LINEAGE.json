@@ -255,10 +255,13 @@
       ],
       "content_rows_seen_at_least": 1,
       "native_labels_opened": 0,
-      "exposure_note": "Publisher case, summary, two-part dilemma and native discussion questions were displayed for development screening. The summary-plus-part-one ordinary source and first post-part-one native question were entered into a provider-free H route check. No model call, reference answer or gold was used. This case, author team and writing system are no longer unseen confirmation.",
-      "item_level_source_validity": "NOT_AUDITED",
-      "task_fit": "PRELIMINARY_RESPONSIBILITY_VALUE_OPEN_QUESTION_H_DIRECT_NO_TREATMENT",
-      "model_input_allowed": false
+      "exposure_note": "Publisher case, summary, two-part dilemma and native discussion questions were displayed for development screening. The summary-plus-part-one ordinary source and first post-part-one native question were entered into a provider-free H route check. No model call, reference answer or gold was used. This case, author team and writing system are no longer unseen confirmation. Later I02 source-first calibration review approved only the exact pinned summary-plus-part-one source for C/P/G development model input, with CC BY-SA attribution. This does not grant confirmation use, H treatment, or any other EPC source.",
+      "item_level_source_validity": "PRELIMINARY_DEVELOPMENT_SOURCE_FIRST",
+      "task_fit": "PRELIMINARY_RESPONSIBILITY_VALUE_OPEN_QUESTION_CPG_CALIBRATION_ONLY_H_DIRECT",
+      "model_input_allowed": true,
+      "calibration_model_input_only": true,
+      "calibration_rights_package_path": "reports/HCL_I02_EPC_CPG_V5_PACKAGE.json",
+      "confirmation_qualified": false
     }
   ]
 }

@@ -6,7 +6,8 @@ import unittest
 from pathlib import Path
 
 from scripts.i02_source_lineage import (
-    load_lineage, require_confirmation_disjoint, validate_i02_confirmation_candidate)
+    load_lineage, require_confirmation_disjoint,
+    require_development_calibration_input, validate_i02_confirmation_candidate)
 from scripts.serious_eval_contract import ARMS, FIELDS, validate_candidate
 
 
@@ -110,6 +111,28 @@ class SourceLineageTests(unittest.TestCase):
                 writing_system_id='epc-engineering-ethics-case-studies'))
         with self.assertRaisesRegex(ValueError, 'screened source author'):
             require_confirmation_disjoint(candidate(author_id='sarah-jayne-hitt'))
+
+    def test_epc_development_rights_are_exact_source_only_and_never_confirmation(self):
+        lineage = load_lineage()
+        epc = next(row for row in lineage['screened_not_qualified']
+            if row['id'] == 'epc-glass-safety-development-screen')
+        self.assertTrue(epc['calibration_model_input_only'])
+        self.assertFalse(epc['confirmation_qualified'])
+        self.assertTrue(Path(epc['calibration_rights_package_path']).is_file())
+        text = 'Synthetic source with the same shape, never a real EPC source.'
+        pretend = dict(epc, source_sha256s=[hashlib.sha256(text.encode()).hexdigest()])
+        fake_lineage = dict(lineage, screened_not_qualified=[pretend])
+        row = candidate(split='CALIBRATION', source_text=text,
+            source_group_id=pretend['source_sha256s'][0],
+            writing_system_id=pretend['writing_system_id'],
+            author_id=pretend['author_id'], template_id=pretend['template_id'])
+        self.assertTrue(require_development_calibration_input(row, fake_lineage))
+        for change in (dict(split='CONFIRMATION'),
+                       dict(source_text=text + ' changed'),
+                       dict(author_id='renamed-author')):
+            with self.subTest(change=change), self.assertRaisesRegex(
+                    ValueError, 'not approved|development calibration'):
+                require_development_calibration_input(dict(row, **change), fake_lineage)
 
     def test_exact_exposed_content_cannot_pass_under_renamed_lineage(self):
         lineage = load_lineage()
