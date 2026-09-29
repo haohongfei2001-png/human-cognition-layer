@@ -511,7 +511,7 @@ defect is.
 
 - Current wave: **I — Serious Independent Evaluation**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: I02_SOURCE_AND_COMPARATOR_QUALIFICATION**
+- **NEXT_READY: I02_CPG_CALIBRATION_ONESHOT_TRIGGER**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - G-ARCH one-shot: **2 extraction/final calls, 0 retries, peak-rated USD 0.00159300, conservative guard USD 0.00590436 / USD 0.04 cap; CLOSED / NO RERUN**. [Receipt/closure](reports/HCL_G_ARCH_ENTRY_CLOSURE.md).
@@ -519,5 +519,6 @@ defect is.
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **I02 independent source diversity, native item validity and competent C/P/G qualification**, then continue through the dependency-safe queue
+Work should merge the frozen [I02 C/P/G calibration protocol](docs/HCL_I02_CPG_CALIBRATION_PROTOCOL.md), execute its unique bounded trigger once, close the raw source-first receipt, then continue independent source diversity and comparator qualification. The native H treatment gate remains failed; no H efficacy scoring.
+The dependency-safe queue continues
 without asking for a new decision after every package.
