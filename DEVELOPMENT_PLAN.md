@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–E COMPLETE / WAVE F / F01 CORRECTNESS_VERIFIED / NEXT_READY=F02**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–E COMPLETE / WAVE F / F01–F02 CORRECTNESS_VERIFIED / NEXT_READY=F03**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -314,7 +314,9 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **F01 — CORRECTNESS_VERIFIED:** episodic source recovery by event/person/proposition/transition/dependency with exact extracts, access filtering and versioned invalidation. Thirteen tests and positive witness; see `docs/HCL_WAVE_F01.md`.
 
-**F02 — NEXT_READY:** separate story time, narrative order, recall time and disclosure time; preserve uncertain narrators and references.
+**F02 — CORRECTNESS_VERIFIED:** source-declared story, recall, disclosure, local narrative order and system-record axes, with unique challenge/receipt links and access-safe historical views. Nineteen tests and positive witness; see `docs/HCL_WAVE_F02.md`.
+
+**F03 — NEXT_READY:** select complete support, challenge, alternatives and revision basis for conclusions, and recompute incrementally.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -475,12 +477,12 @@ defect is.
 
 - Current wave: **Wave F — Long-Horizon Narrative Cognition**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: F02_NARRATIVE_TIME_AXES**
+- **NEXT_READY: F03_EVIDENCE_CLOSURE_INCREMENTAL_RECOMPUTATION**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **F02**, then continue through the dependency-safe queue
+Work should continue at **F03**, then continue through the dependency-safe queue
 without asking for a new decision after every package.

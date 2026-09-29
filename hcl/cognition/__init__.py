@@ -52,3 +52,5 @@ from .contextual_values import ContextualValues, prepare_contextual_values
 from .relationship_dynamics import RelationshipDynamicsResult, RelationshipDynamicsWorkspace, prepare_relationship_dynamics
 
 from .episodic import EpisodicIndex, EpisodicRetrieval
+
+from .narrative_time import NarrativeEpisode, NarrativeSnapshot, NarrativeTimeline, parse_narrative_episodes
