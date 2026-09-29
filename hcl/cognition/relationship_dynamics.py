@@ -87,7 +87,9 @@ def prepare_relationship_dynamics(workspace,query,*,source_id,observer=None):
             for r in view.get('native_check',{}).get('statements',[]) if r.get('supersedes_id')])
     payload=dict(query=query,actor=actor,assessor=assessor,role=role,context=context,
         failure=f,identity=i,values=v,relationship_interpretation=relation_explanation,
-        role_evaluation=role_evaluation,value_change_explanation=value_explanation,policy=_POLICY)
+        role_evaluation=role_evaluation,value_change_explanation=value_explanation,policy=_POLICY,
+        support_claim_ids=dict(failure=list(failure.claim_ids),identity=list(identity.claim_ids),
+            values=list(values.claim_ids)))
     dependencies=tuple(dict.fromkeys((*failure.claim_ids,*identity.claim_ids,*values.claim_ids)))
     claims=list(dependencies)
     if dependencies:
