@@ -1,6 +1,6 @@
 # I02 — second-source one-use C/P/G functional calibration
 
-Status: **FROZEN / NOT EXECUTED**. This package tests whether the repaired
+Status: **EXECUTED ONCE / CLOSED / NO RERUN**. The immutable [raw receipt and source-first closure](../reports/HCL_I02_MORAL_CPG_CALIBRATION_CLOSURE.md) record four calls, zero retries, estimated USD 0.00416724, and zero remaining authorization. This package tests whether the repaired
 generic source-map interface can actually operate beside C and P on a
 different independently authored source system. It is not an H comparison or
 independent HCL efficacy evidence. The only exposed record is the **first**

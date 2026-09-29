@@ -6,7 +6,7 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 
 - [普通人物问题与叙事入口](docs/HCL_V1_PERSON_QUESTION.md)：有来源、时间、访问与局部修订边界；单次回答，默认零提取调用。
 - [I02 C/P/G 一次性校准结案](reports/HCL_I02_CPG_CALIBRATION_CLOSURE.md)：3 次调用后 G-map 格式失败，G-final 未运行；完整 raw receipt 已保存，授权关闭，不测 H 增益。
-- [I02 第二来源 C/P/G 校准冻结](docs/HCL_I02_MORAL_CPG_CALIBRATION_PROTOCOL.md)：Moral Stories 首条开发样本；验证通用 map v2 的功能，不调用 H/H-new，不声称独立效力。
+- [I02 第二来源 C/P/G 校准结案](reports/HCL_I02_MORAL_CPG_CALIBRATION_CLOSURE.md)：Moral Stories 首条开发样本完成四次调用；G-map v2 接口通过，但比较臂遗漏明确的安全目标，语义资格未通过。授权关闭，不调用 H/H-new，不声称独立效力。
 - [夜间 source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)：实际能力变化、证据限制、两个 deferred 冻结包。
 - [可执行 capability registry](docs/HCL_V1_CAPABILITY_REGISTRY.md)：核心、可选结构、通用工具、停用研究资产。
 - [Router / context / answer API](docs/HCL_V1_COGNITION_ROUTER.md)：确定性最小路由、有访问和时间边界的上下文、单次底座模型调用。
