@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**LONG-HORIZON CAPABILITY GROWTH — WAVES A–D COMPLETE / WAVE E / E01–E04 CORRECTNESS_VERIFIED / NEXT_READY=E05**
+**LONG-HORIZON CAPABILITY GROWTH — WAVES A–E COMPLETE / WAVE F / NEXT_READY=F01**
 
 The long-horizon architecture and 41-package roadmap are canonical in
 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md).
@@ -11,13 +11,13 @@ exact-SHA CI and immutable receipts remain the implementation/evidence facts.
 
 ## Current wave
 
-**Wave E — Relationship, Identity, Role and Value Dynamics**
+**Wave F — Long-Horizon Narrative Cognition**
 
 A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
-**NEXT_READY: `E05_RELATIONSHIP_IDENTITY_ROLE_VALUE_COMPOSITION`**
+**NEXT_READY: `F01_EPISODIC_SOURCE_RETRIEVAL`**
 
 A01 now provides shared versioned evidence, scoped source reports and
 interpretations, alternative support sets and rooted invalidation. A source
@@ -69,7 +69,7 @@ C03 now separates reported-belief plan support from declared-model conditions;
 belief revision changes the dependent check, and plan replacement does not imply
 a value change. See [C03](docs/HCL_WAVE_C03.md). C04 now links source goals and appraisals, preserves mixed reports and anchored
 reappraisal, and keeps expression/control/certainty claims separate from actual
-feeling or knowledge. See [C04](docs/HCL_WAVE_C04.md). C05 now joins action-time plan support to conditional explanations while keeping later belief and appraisal separate. See [C05](docs/HCL_WAVE_C05.md). D01 now distinguishes conditional-promise lifecycle, delivery, acceptance and expectations without backfilling later receipt. See [D01](docs/HCL_WAVE_D01.md). D02 now checks finite mutual acknowledgment and source-anchored meaning revision without inferring common knowledge. See [D02](docs/HCL_WAVE_D02.md). D03 now compares source-conditioned communication explanations, separating literal truth, belief, knowledge claims, goals and received information needs. See [D03](docs/HCL_WAVE_D03.md). D04 now localizes expectation factors and revises the analyst explanation after explicit source revision, preserving the original promise. See [D04](docs/HCL_WAVE_D04.md). D05 now integrates three individual plans, endorsement receipts and source-local authority without a group mind. See [D05](docs/HCL_WAVE_D05.md). Wave D construction is complete; E01/E02 now keep regard directional and scoped, and compare failure/repair explanations without automatic blame or forgiveness. See [E01–E02](docs/HCL_WAVE_E01_E02.md). E03 now checks source-local role/behavior tension while keeping self-description, other attribution and personal endorsement separate. See [E03](docs/HCL_WAVE_E03.md). E04 now explains source-prefix choice differences through contextual applicability without inferring value change. See [E04](docs/HCL_WAVE_E04.md). E05 is next.
+feeling or knowledge. See [C04](docs/HCL_WAVE_C04.md). C05 now joins action-time plan support to conditional explanations while keeping later belief and appraisal separate. See [C05](docs/HCL_WAVE_C05.md). D01 now distinguishes conditional-promise lifecycle, delivery, acceptance and expectations without backfilling later receipt. See [D01](docs/HCL_WAVE_D01.md). D02 now checks finite mutual acknowledgment and source-anchored meaning revision without inferring common knowledge. See [D02](docs/HCL_WAVE_D02.md). D03 now compares source-conditioned communication explanations, separating literal truth, belief, knowledge claims, goals and received information needs. See [D03](docs/HCL_WAVE_D03.md). D04 now localizes expectation factors and revises the analyst explanation after explicit source revision, preserving the original promise. See [D04](docs/HCL_WAVE_D04.md). D05 now integrates three individual plans, endorsement receipts and source-local authority without a group mind. See [D05](docs/HCL_WAVE_D05.md). Wave D construction is complete; E01/E02 now keep regard directional and scoped, and compare failure/repair explanations without automatic blame or forgiveness. See [E01–E02](docs/HCL_WAVE_E01_E02.md). E03 now checks source-local role/behavior tension while keeping self-description, other attribution and personal endorsement separate. See [E03](docs/HCL_WAVE_E03.md). E04 now explains source-prefix choice differences through contextual applicability without inferring value change. See [E04](docs/HCL_WAVE_E04.md). E05 now propagates source-corrected failure factors through linked relationship and role explanations while retaining identity, attitude, preferences and independent domains. See [E05](docs/HCL_WAVE_E05.md). Wave E construction is complete; F01 is next.
 Live-provider efficacy remains unverified.
 
 ## Canonical development policy

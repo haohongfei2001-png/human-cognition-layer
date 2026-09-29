@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–D COMPLETE / WAVE E / E01–E04 CORRECTNESS_VERIFIED / NEXT_READY=E05**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–E COMPLETE / WAVE F / NEXT_READY=F01**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -290,7 +290,7 @@ not become an omniscient group actor. Fifteen targeted checks plus full regressi
 new permission, revocation and selective receipt change coordination checks.
 See `docs/HCL_WAVE_D05.md`.
 
-## 5e. Current Wave E — Relationship, Identity, Role and Value Dynamics
+## 5e. Completed Wave E — Relationship, Identity, Role and Value Dynamics
 
 **E01 — CORRECTNESS_VERIFIED:** domain-scoped relationship evidence: who regards whom,
 concerning what, and with which support. Capability trust does not become moral
@@ -308,7 +308,11 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **E04 — CORRECTNESS_VERIFIED:** context-dependent choice comparisons, conditional partial-order paths, incomparable values and cross-role tension; reuses CG04 and E03. Thirteen tests and ordinary positive witness; see `docs/HCL_WAVE_E04.md`.
 
-**E05 — NEXT_READY:** relationship–identity–role–value cross-time composition and dependency updates.
+**E05 — CORRECTNESS_VERIFIED:** linked relationship–identity–role–value comparisons and source revision updates; twelve tests and positive witness. See `docs/HCL_WAVE_E05.md`.
+
+## 5f. Current Wave F — Long-Horizon Narrative Cognition
+
+**F01 — NEXT_READY:** source-linked episodic retrieval by events, people, propositions, transitions and dependencies, preserving authorization and missing-evidence uncertainty.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -467,14 +471,14 @@ defect is.
 
 ## 13. Current execution fact
 
-- Current wave: **Wave E — Relationship, Identity, Role and Value Dynamics**
+- Current wave: **Wave F — Long-Horizon Narrative Cognition**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: E05_RELATIONSHIP_IDENTITY_ROLE_VALUE_COMPOSITION**
+- **NEXT_READY: F01_EPISODIC_SOURCE_RETRIEVAL**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **E05**, then continue through the dependency-safe queue
+Work should continue at **F01**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
