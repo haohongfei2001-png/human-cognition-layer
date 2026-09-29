@@ -324,6 +324,11 @@ class HCLCognitionLayer:
         person_task = plan.concept_interpretation or plan.contextual_preference or plan.social_commitment or plan.responsibility_structure or any(c in plan.capabilities for c in ('perspective', 'intention', 'affect'))
         scope = {'event_time': request.event_time, 'knowledge_cutoff': request.knowledge_cutoff}
         context = CognitionContext(temporal_scope=scope, perspective_mode=plan.perspective_mode.value)
+        if information_query(request.query) and request.narrative and not request.observer_actor:
+            # Shared task metadata belongs to both complete and ablated paths;
+            # checked observation state is the only treatment difference.
+            preparation_audit.update(method='ordinary_source_information_query',
+                time_basis='narrative_order_not_verified_event_time')
         if plan.information_state:
             query_actor, query_item = information_query(request.query)
             context.information_state = check_information_state(
@@ -333,10 +338,9 @@ class HCLCognitionLayer:
                 # observation, never reader-only later movements or raw story.
                 context.information_state['source_movements'] = []
                 context.information_state['later_source_movement_without_observation_evidence'] = None
-            preparation_audit.update(method='bounded_source_reported_information_state',
+            preparation_audit.update(
                 input={'query': request.query, 'narrative': request.narrative},
-                output={'checked_observation_count': context.information_state['checked_observation_count']},
-                time_basis='narrative_order_not_verified_event_time')
+                output={'checked_observation_count': context.information_state['checked_observation_count']})
             if not context.information_state['checked_observation_count']:
                 preparation_audit['failure'] = 'no_explicit_named_observation'
                 context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT',

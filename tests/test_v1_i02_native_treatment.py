@@ -3,12 +3,14 @@ import json
 import unittest
 from pathlib import Path
 
-from scripts.i02_native_treatment_preflight import require_treatment
+from scripts.i02_native_treatment_preflight import require_fair_treatment, require_treatment
 from scripts.serious_eval_contract import runtime_digest
 
 
 RECEIPT = json.loads(Path('reports/HCL_I02_MUSR_NATIVE_TREATMENT_PREFLIGHT.json').read_text())
 POST_REPAIR = json.loads(Path('reports/HCL_I02_MUSR_NATIVE_TREATMENT_PREFLIGHT_AFTER_REPAIR.json').read_text())
+AMENDMENT_V1 = json.loads(Path('reports/HCL_I02_RUNTIME_AMENDMENT.json').read_text())
+POST_REPAIR_V2 = json.loads(Path('reports/HCL_I02_MUSR_NATIVE_TREATMENT_PREFLIGHT_V2.json').read_text())
 
 
 class NativeTreatmentTests(unittest.TestCase):
@@ -35,12 +37,28 @@ class NativeTreatmentTests(unittest.TestCase):
         self.assertTrue(require_treatment(row))
 
     def test_amended_runtime_still_has_no_checked_native_treatment(self):
-        self.assertEqual(POST_REPAIR['evaluated_hcl_runtime_sha256'], runtime_digest())
+        self.assertEqual(POST_REPAIR['evaluated_hcl_runtime_sha256'],
+                         AMENDMENT_V1['amended_hcl_runtime_sha256'])
         self.assertEqual(POST_REPAIR['checked_observation_count'], 0)
         self.assertFalse(POST_REPAIR['specialized_treatment_present'])
         self.assertEqual(POST_REPAIR['disposition'], 'FAIL_TREATMENT_ABSENT_NO_PAID_COMPARISON')
         with self.assertRaisesRegex(ValueError, 'no paid comparison'):
             require_treatment(POST_REPAIR)
+
+    def test_new_runtime_has_source_grounded_fair_provider_free_treatment(self):
+        self.assertEqual(POST_REPAIR_V2['evaluated_hcl_runtime_sha256'], runtime_digest())
+        self.assertEqual(POST_REPAIR_V2['checked_observation_count'], 1)
+        self.assertTrue(POST_REPAIR_V2['source_quote_span_valid'])
+        self.assertTrue(POST_REPAIR_V2['h_hnew_same_question_and_source'])
+        self.assertTrue(POST_REPAIR_V2['h_hnew_same_other_context'])
+        self.assertTrue(POST_REPAIR_V2['h_hnew_only_information_state_capability_diff'])
+        self.assertTrue(POST_REPAIR_V2['h_hnew_final_input_different'])
+        self.assertEqual(POST_REPAIR_V2['provider_calls'], 0)
+        self.assertFalse(POST_REPAIR_V2['native_gold_used'])
+        self.assertTrue(require_fair_treatment(POST_REPAIR_V2))
+        unfair = dict(POST_REPAIR_V2, h_hnew_same_other_context=False)
+        with self.assertRaisesRegex(ValueError, 'fairness'):
+            require_fair_treatment(unfair)
 
 
 if __name__ == '__main__':

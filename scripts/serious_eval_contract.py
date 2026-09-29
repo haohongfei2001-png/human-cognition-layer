@@ -10,6 +10,7 @@ from pathlib import Path
 
 FREEZE = Path('reports/HCL_I01_EVALUATION_FREEZE.json')
 AMENDMENT = Path('reports/HCL_I02_RUNTIME_AMENDMENT.json')
+AMENDMENT_V2 = Path('reports/HCL_I02_RUNTIME_AMENDMENT_V2.json')
 ARMS = ('C', 'P', 'G', 'H')
 FAMILIES = ('LONG_CHARACTER_DEVELOPMENT', 'MULTIPARTY_INFORMATION_STRATEGY',
     'RESPONSIBILITY_VALUE_INTEGRATION', 'ABSTRACT_CONCEPT_PHILOSOPHY')
@@ -42,6 +43,33 @@ def validate_runtime_amendment(freeze, amendment, *, current_digest=None):
     digest = current_digest or runtime_digest()
     if amendment.get('amended_hcl_runtime_sha256') != digest:
         raise ValueError('current runtime differs from disclosed I02 amendment')
+    return True
+
+
+def validate_runtime_amendment_v2(freeze, amendment_v1, amendment_v2,
+                                  *, current_digest=None):
+    """Keep the first repair pin intact and require an explicit second link."""
+    validate_runtime_amendment(freeze, amendment_v1,
+        current_digest=amendment_v1.get('amended_hcl_runtime_sha256'))
+    if (amendment_v2.get('schema') != 'hcl-i02-runtime-amendment-v2' or
+            amendment_v2.get('reason') !=
+                'GENERAL_INFORMATION_STATE_LOCAL_PRONOUN_AND_FAIR_ABLATION_REPAIR' or
+            amendment_v2.get('historical_i01_main_sha') != freeze['architecture_main_sha'] or
+            amendment_v2.get('previous_hcl_runtime_sha256') !=
+                amendment_v1['amended_hcl_runtime_sha256'] or
+            amendment_v2.get('calibration_only') is not True or
+            amendment_v2.get('confirmation_items_inspected') != 0 or
+            amendment_v2.get('provider_calls') != 0 or
+            amendment_v2.get('provider_spend_usd') != 0 or
+            amendment_v2.get('historical_i02_calibration_run_id') != 36561878435 or
+            amendment_v2.get('historical_i02_calibration_calls') != 3 or
+            amendment_v2.get('historical_i02_calibration_budget_state') !=
+                'CLOSED_NO_TRANSFER_NO_RERUN' or
+            amendment_v2.get('longmemeval') != 'SEALED_NOT_ACCESSED'):
+        raise ValueError('invalid I02 v2 runtime amendment')
+    digest = current_digest or runtime_digest()
+    if amendment_v2.get('amended_hcl_runtime_sha256') != digest:
+        raise ValueError('current runtime differs from disclosed I02 v2 amendment')
     return True
 
 
@@ -142,7 +170,10 @@ if __name__ == '__main__':
     freeze = json.loads(FREEZE.read_text())
     validate_freeze(freeze)
     if args.check_current_runtime:
-        if AMENDMENT.exists():
+        if AMENDMENT_V2.exists():
+            validate_runtime_amendment_v2(freeze, json.loads(AMENDMENT.read_text()),
+                json.loads(AMENDMENT_V2.read_text()))
+        elif AMENDMENT.exists():
             validate_runtime_amendment(freeze, json.loads(AMENDMENT.read_text()))
         elif runtime_digest() != freeze['hcl_runtime_sha256']:
             raise ValueError('current runtime differs from I01 architecture freeze')
