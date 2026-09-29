@@ -19,6 +19,14 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [complete-source input coverage audit](docs/HCL_I02_LONG_INPUT_COVERAGE.md)
+finds all 25 pinned SQuALITY dev stories above H's 16,000-character ordinary
+narrative gate while C/P/G accept the same complete sources under 64,000.
+I01 counts H entry refusal as an observed outcome, not a reason to shorten or
+drop a case. The executable synthetic audit records rejection and prevents a
+false acceptance label. No story/question/gold or provider call was used for
+this audit; no SQuALITY item or HCL efficacy result is qualified.
+
 The [bounded OER screen](docs/HCL_I02_OER_BOUNDED_SCREEN.md) separated a
 SQuALITY story's USA-only Gutenberg status from its human-response license,
 and chapter-wide CC BY notices from a separately attributed CC BY-NC-SA
