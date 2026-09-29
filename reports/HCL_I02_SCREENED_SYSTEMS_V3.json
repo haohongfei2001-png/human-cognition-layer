@@ -19,6 +19,16 @@
       "evidence_url": "https://openoregon.pressbooks.pub/contempfamilies2e/chapter/oo4-8/",
       "model_input_allowed": false,
       "confirmation_qualified": false
+    },
+    {
+      "id": "kpu-conflict-management-development-exposed",
+      "publisher_url_prefix": "https://kpu.pressbooks.pub/businesscomms/chapter/case-conflict-management/",
+      "writing_system_id": "kpu-business-communication-case-scenarios",
+      "reason": "DEVELOPMENT_CALIBRATION_SOURCE_EXPOSED_NOT_CONFIRMATION",
+      "evidence_url": "https://kpu.pressbooks.pub/businesscomms/chapter/case-conflict-management/",
+      "model_input_allowed": true,
+      "calibration_model_input_only": true,
+      "confirmation_qualified": false
     }
   ],
   "model_provider_calls": 0,

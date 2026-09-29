@@ -1,6 +1,7 @@
 # I02 — bounded rights and privacy source screen v3
 
-**Outcome: two systems rejected; zero independent items qualified.** This
+**Outcome: two systems rejected for model use; one is development-only; zero
+independent items qualified.** This
 screen was made before any provider input or answer inspection. It records
 source-system exposure and introduces a fail-closed qualification wrapper
 without changing the historical v2 lineage file, which is hashed into a
@@ -24,7 +25,11 @@ is development-exposed and **not approved for model input or unseen
 confirmation**. No additional private person material was collected.
 
 The [versioned screen receipt](../reports/HCL_I02_SCREENED_SYSTEMS_V3.json)
-contains URLs, writing-system IDs and rejection reasons, not case text,
+also records the KPU conflict-management case as development-exposed. Its
+selected native question routes H directly without cognition treatment; only
+a separately frozen C/P/G development calibration may use that case, and it
+cannot become unseen confirmation. The receipt contains URLs, writing-system
+IDs and eligibility reasons, not case text,
 questions or labels. The [v3 guard](../scripts/i02_source_qualification_v3.py)
 composes the historical exposure check with a canonical HTTPS source URL and
 source-first audit binding: exact source/question hashes, a license evidence
@@ -39,8 +44,9 @@ reviewer assertions; code cannot itself prove that a rights or privacy review
 was sound.
 
 **EVALUATION_DELTA:** a positive CC license can no longer silently promote
-these two exposed systems through the new I02 source gate when provider-use
-terms or privacy remain unresolved. **HCL answer CAPABILITY_DELTA:** none.
+either rejected system when provider-use terms or privacy remain unresolved;
+the separately exposed KPU system is also blocked from confirmation.
+**HCL answer CAPABILITY_DELTA:** none.
 **Provider calls/spend:** 0 / USD 0. **LongMemEval:** sealed. Continue with
 genuinely unexposed, rights-clear source systems and native questions; do not
 substitute these rejected rows under new names.
