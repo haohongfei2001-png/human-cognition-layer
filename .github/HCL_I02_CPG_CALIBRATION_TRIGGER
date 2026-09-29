@@ -1,0 +1,10 @@
+hcl-i02-cpg-calibration-unique-trigger-v1
+frozen_package_sha256=41d00a57678a75ccc867a34606bd3082c656e96dbd3ac1f47836338d7810f28c
+source_file_sha256=98cd17d2c9ea53664e274365e901c90dfcaa40d17547dfbd369f1cd26fd2a81c
+frozen_package_main_sha=60780fcdcbd2d7a30683f2054dbebce590e7a7e0
+phases=C,P,G_map,G_final
+maximum_provider_calls=4
+retries=0
+usd_hard_cap=0.12
+h_calls=0
+longmemeval=SEALED_NOT_ACCESSED
