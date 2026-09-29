@@ -19,6 +19,15 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [I02 long-source ordinary-entry repair](docs/HCL_I02_COMPLETE_LONG_SOURCE_ENTRY.md)
+now carries a complete 24,920-character development story and locally anchored
+reported-speech candidates into the final model input, where the prior ordinary
+entry rejected it. The v3 runtime amendment preserves historical pins. This is
+provider-free source/evidence coverage, not a specialized H treatment or answer
+gain. The development source lacks cleared geographic model-input rights and
+is excluded from unseen confirmation. Zero calls/spend; source qualification
+and strong comparator semantics remain open.
+
 The [I02 blind-review v2 handoff](docs/HCL_I02_BLIND_REVIEW_V2.md)
 requires residual-claim coverage and exact excerpts before arm allocation reveal.
 The real ACL raw receipt crosses the opaque handoff; an unsupported private

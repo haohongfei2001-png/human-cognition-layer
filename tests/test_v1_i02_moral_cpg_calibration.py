@@ -34,7 +34,9 @@ class MoralCPGCalibrationTests(unittest.TestCase):
         self.assertEqual(PACKAGE['retries'], 0)
         self.assertEqual(PACKAGE['h_arm_calls'], 0)
         self.assertEqual(PACKAGE['budget_cap_usd'], 0.06)
-        self.assertEqual(load_package(), PACKAGE)
+        # The historical one-use package cannot execute on a later H runtime.
+        with self.assertRaisesRegex(ValueError, 'disclosed I02 v2 amendment'):
+            load_package()
         raw, first = authored_raw()
         with patch.object(source, 'SOURCE_SHA256', hashlib.sha256(raw).hexdigest()), \
                 patch.object(source, 'FIRST_LINE_SHA256', hashlib.sha256(first).hexdigest()):

@@ -1,6 +1,7 @@
 """The one-use EPC calibration cannot drift into a different experiment."""
 import json
 import unittest
+from unittest.mock import patch
 
 from scripts.run_i02_epc_cpg_v5_once import (
     CAP_USD, GLOBAL_OBLIGATIONS, OBLIGATIONS, PACKAGE, QUESTION_SHA256, SOURCE_SHA256,
@@ -10,8 +11,13 @@ from scripts.run_i02_epc_cpg_v5_once import (
 class EpcCpgV5FreezeTests(unittest.TestCase):
     def test_current_package_pins_one_development_case_and_execution(self):
         package = json.loads(PACKAGE.read_text())
-        self.assertEqual(package, build_package())
-        self.assertEqual(package, load_package())
+        with patch('scripts.run_i02_epc_cpg_v5_once.runtime_digest',
+                   return_value=package['hcl_runtime_sha256']):
+            self.assertEqual(package, build_package())
+        # Consumed v5 remains pinned to its historical runtime; it must not be
+        # silently executable against a later I02 runtime amendment.
+        with self.assertRaisesRegex(ValueError, 'drift'):
+            load_package()
         self.assertEqual(package['source_sha256'], SOURCE_SHA256)
         self.assertEqual(package['question_sha256'], QUESTION_SHA256)
         self.assertEqual(package['source_first_obligation_anchors'], list(OBLIGATIONS))
