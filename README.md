@@ -16,6 +16,7 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 - [I02 G v7 通用证据工作区](docs/HCL_I02_GENERIC_WORKSPACE_V7.md)：在整体输出界限和逐条准确来源校验下容纳较长完整引文，保留 C/P、公平普通输入及历史 v6 结论；仅 provider-free，尚无新模型语义证据。
 - [I02 KPU C/P/G v6 开发校准收口](reports/HCL_I02_KPU_CPG_V6_CLOSURE.md)：独立作者 CC BY 案例的一次性运行用去 C/P/G-map 三次调用；G 引文真实但全部超过冻结单行长度，G-final 未调用，P 引文格式也未过 scorer。原始回执已保存，授权与 trigger 关闭；案例只作开发证据，不作独立确认或 HCL 效力证据。
 - [I02 来源权利与隐私筛查 v3](docs/HCL_I02_RIGHTS_PRIVACY_SOURCE_SCREEN_V3.md)：两个已暴露来源系统被明确拒绝，新增独立于历史冻结包的 URL、许可与隐私门禁；没有合格确认案例或新调用。
+- [I02 已暴露来源指纹 v4](docs/HCL_I02_EXACT_SOURCE_FINGERPRINT_V4.md)：KPU 已消费原文即使用镜像 URL 和新作者／模板 ID 也不能进入独立确认；不改历史冻结包，仍须单独做完整来源资格审核。
 - [I02 开放教材有界筛查](docs/HCL_I02_OER_BOUNDED_SCREEN.md)：SQuALITY、TRU/Rebus 与 Ethics Bowl 案例的具体许可、任务适配和已读暴露分别记录，尚无合格独立样本。
 
 - [普通人物问题与叙事入口](docs/HCL_V1_PERSON_QUESTION.md)：有来源、时间、访问与局部修订边界；单次回答，默认零提取调用。

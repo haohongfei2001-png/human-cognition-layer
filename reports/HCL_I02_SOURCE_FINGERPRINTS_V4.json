@@ -1,0 +1,18 @@
+{
+  "schema": "hcl-i02-exposed-source-fingerprints-v4",
+  "scope": "ADDITIONAL_EXACT_CONTENT_EXPOSURE_DENIAL_NOT_EXHAUSTIVE_AUDIT",
+  "exposed": [
+    {
+      "id": "kpu-conflict-management-development-calibration",
+      "source_file": "reports/HCL_I02_KPU_CONFLICT_DEVELOPMENT_SOURCE.json",
+      "source_file_sha256": "4d415a7e6ea50cb217e72f8a57c36b5841e38209e9fb37934f7e1d659a547cef",
+      "source_text_sha256": "9e029c7fa4abd6b48607bebb8147b48edf3e093f18b3cd78bd8be6cd8d25347b",
+      "publisher_url": "https://kpu.pressbooks.pub/businesscomms/chapter/case-conflict-management/",
+      "writing_system_id": "kpu-business-communication-case-scenarios",
+      "calibration_run_id": 36602249307,
+      "closure": "reports/HCL_I02_KPU_CPG_V6_CLOSURE.md",
+      "confirmation_qualified": false
+    }
+  ],
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

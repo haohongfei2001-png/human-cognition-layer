@@ -19,6 +19,13 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [v4 exact-content exposure guard](docs/HCL_I02_EXACT_SOURCE_FINGERPRINT_V4.md)
+now rejects the consumed KPU case even under a mirror URL and renamed lineage
+IDs, while composing the unchanged v3 rights/privacy and historical checks.
+This is provider-free source-boundary correctness, not a qualified new item,
+comparator result or HCL answer gain. The independent confirmation catalog
+still has zero qualified real items.
+
 The [KPU conflict case C/P/G v6 development calibration](reports/HCL_I02_KPU_CPG_V6_CLOSURE.md)
 ran once from PR #242/main `8f6e2adc72b1ebf5801aa6485402f40a624eb089`
 after exact package/runtime, complete-source fairness, H direct-route and cost
