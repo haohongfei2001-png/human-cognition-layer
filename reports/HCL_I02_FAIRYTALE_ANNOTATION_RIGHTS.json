@@ -1,0 +1,20 @@
+{
+  "annotation_license_scope": "ROOT_LICENSE_AND_AUTHORSHIP_EVIDENCE_PROVIDER_USE_REVIEW_PENDING",
+  "author_team_commit": "a24ddc17364666b7c13a425b9970c87368b03417",
+  "confirmation_qualified": false,
+  "expert_authored_questions_reported_by_publisher": true,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "model_input_allowed": false,
+  "provider_calls": 0,
+  "provider_processing_geography": "UNVERIFIED",
+  "publisher_license_git_blob": "b6076b10d587404f9f73a523876eecc1deaa47e0",
+  "publisher_license_sha256": "335d2c093cbb191de9693d87c9935f832a2442a67615a6e47ac71f74ccb4bd5d",
+  "publisher_readme_git_blob": "09fcb6ce539b670414fffc7a9fb1413102ba9a83",
+  "publisher_readme_sha256": "6787b4cdb8d70a2fc21c9daaf2ef5813037891d5ae3cf982de5aa5195b4dfd3e",
+  "question_semantics": "NOT_AUDITED",
+  "root_apache_2_license_pinned": true,
+  "schema": "hcl-i02-fairytale-annotation-rights-v1",
+  "story_question_or_answer_text_returned": false,
+  "task_family_fit": "UNPROVEN",
+  "underlying_story_rights": "SEPARATE_SCOPED_EDITION_MATCH_USA_CHINA_ONLY"
+}
