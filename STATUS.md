@@ -24,8 +24,10 @@ fixes an independently authored CC BY 4.0 multi-party case and its first
 native question before model output. Provider-free fairness, H direct/no-
 treatment and USD 0.15/4-call reservation preflight passed. This source is
 development-exposed and direct publisher HTTP returned 403; it is not unseen
-confirmation. The trigger is absent, KPU provider calls/spend are 0, and H/H-new
-have 0 planned calls. No H efficacy claim follows.
+confirmation. The unique trigger is armed in PR #242 for one frozen run; KPU
+provider calls/spend are still 0 before its merge, and H/H-new have 0 planned
+calls. No H efficacy claim follows. The trigger and budget must close after
+the run.
 
 The exact-source [EPC C/P/G v5 development calibration](reports/HCL_I02_EPC_CPG_V5_CLOSURE.md)
 ran once from PR #237/main `e277d91663fabc50b8ead8b28b65f6572b239558`
