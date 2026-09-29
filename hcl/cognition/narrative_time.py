@@ -12,6 +12,8 @@ from .workspace import CognitionWorkspace
 _NAME=r'(?:[A-Z][\w-]*|she|he|they|someone)'
 _DAY=r'\d{4}-\d{2}-\d{2}'
 _DIRECT=re.compile(rf'Narrator: On (?P<disclosure>{_DAY}), (?P<actor>{_NAME}) said, "(?P<body>[^"\n]+)"\.?')
+_ACTION=re.compile(rf'Narrator: On (?P<disclosure>{_DAY}), (?P<actor>{_NAME}) (?P<verb>did not|did) (?P<body>[^.\n]+)\.')
+_ROLE=re.compile(rf'Narrator: On (?P<disclosure>{_DAY}), (?P<actor>{_NAME}) became (?P<role>[A-Za-z][A-Za-z0-9_-]{{0,31}}) in (?P<context>[A-Za-z][A-Za-z0-9_-]{{0,31}})\.')
 _RECALL=re.compile(rf'Narrator: On (?P<disclosure>{_DAY}), (?P<reporter>{_NAME}) disclosed a recollection from (?P<recall>{_DAY}) of (?P<actor>{_NAME}) saying on (?P<story>{_DAY}), "(?P<body>[^"\n]+)"\.?')
 _CHALLENGE=re.compile(rf"Narrator: On (?P<disclosure>{_DAY}), (?P<challenger>{_NAME}) challenged (?P<reporter>{_NAME})'s recollection from (?P<recall>{_DAY}) of (?P<actor>{_NAME})'s statement on (?P<story>{_DAY})\.")
 _RECEIPT=re.compile(rf"Narrator: On (?P<disclosure>{_DAY}), (?P<viewer>{_NAME}) heard (?P<reporter>{_NAME})'s disclosure from (?P<reported>{_DAY})\.")
@@ -76,6 +78,12 @@ def parse_narrative_episodes(source_id,text,*,version=1,recorded_at):
             m=_DIRECT.fullmatch(quote)
             kind='DIRECT' if m else None
         if not m:
+            m=_ACTION.fullmatch(quote)
+            kind='ACTION' if m else None
+        if not m:
+            m=_ROLE.fullmatch(quote)
+            kind='ROLE' if m else None
+        if not m:
             if quote.strip():diagnostics.append(dict(narrative_order=order,start=offset,status='UNRESOLVED_TEMPORAL_FORM',quote=quote))
             offset+=len(line);continue
         row=m.groupdict();disclosure=_day(row['disclosure']);recall=_day(row.get('recall'))
@@ -90,8 +98,12 @@ def parse_narrative_episodes(source_id,text,*,version=1,recorded_at):
         authority={'RECOLLECTION':'ATTRIBUTED_RECOLLECTION_NOT_DIRECT_SELF_REPORT',
             'CHALLENGE':'SOURCE_REPORTED_CHALLENGE_NOT_FALSITY',
             'RECEIPT':'SOURCE_REPORTED_RECEIPT_NOT_BELIEF',
-            'DIRECT':'NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT'}[kind]
-        episodes.append(NarrativeEpisode(identity('narrative-episode',source_id,version,offset,quote),source_id,version,offset,offset+len(quote),quote,order,story,recall,disclosure,stamp,actor,reporter,row.get('body') or '',authority,
+            'DIRECT':'NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT',
+            'ACTION':'NARRATED_ACTION_NOT_VERIFIED_WORLD_FACT',
+            'ROLE':'NARRATED_ROLE_CHANGE_NOT_INFERRED_IDENTITY'}[kind]
+        content=(row.get('body') or '') if kind not in ('ACTION','ROLE') else (
+            f"{row['verb']} {row['body']}" if kind=='ACTION' else f"became {row['role']} in {row['context']}")
+        episodes.append(NarrativeEpisode(identity('narrative-episode',source_id,version,offset,quote),source_id,version,offset,offset+len(quote),quote,order,story,recall,disclosure,stamp,actor,reporter,content,authority,
             'UNRESOLVED_REFERENCE' if ambiguous else 'SOURCE_LOCAL_NAMES',chronology))
         offset+=len(line)
     if len(episodes)>128:raise ValueError('narrative episode bound exceeded')
@@ -164,6 +176,7 @@ class NarrativeTimeline:
         if type(max_events)is not int or not 1<=max_events<=128 or (character is not None and (not isinstance(character,str) or not character)):
             raise ValueError('bounded temporal projection required')
         selected=self._select(known_at,observer)
+        selected_by_id={record['source_id']:record for record in selected}
         workspace=CognitionWorkspace()
         for record in selected:
             workspace._versions[record['source_id']]=record['version']-1
@@ -207,10 +220,20 @@ class NarrativeTimeline:
             row['episodic_event_ref']=identity('episode',episode.source_id,episode.source_version,episode.start,episode.end)
             # The F01 event is local and must match exact source bytes and
             # the historical version chosen by the known-at snapshot.
-            indexed=episodic.fetch(row['episodic_event_ref'],observer=observer)
-            if indexed['excerpt']!=episode.quote:
-                raise ValueError('narrative and episodic source anchors differ')
-            row['source_span_id']=indexed['source_span_id']
+            if episode.authority in ('NARRATED_ACTION_NOT_VERIFIED_WORLD_FACT','NARRATED_ROLE_CHANGE_NOT_INFERRED_IDENTITY'):
+                # F01 indexes quoted speech. These additional dated narrative
+                # forms retain their exact F02 source span without pretending
+                # that the F01 speech index contains them.
+                row['episodic_event_ref']=None
+                source_record=selected_by_id[episode.source_id]
+                row['source_span_id']=workspace.core.add_span(source_record['text'],source_id=episode.source_id,
+                    version=episode.source_version,start=episode.start,end=episode.end,
+                    order=episode.narrative_order,permitted_observers=source_record['permitted_observers'])
+            else:
+                indexed=episodic.fetch(row['episodic_event_ref'],observer=observer)
+                if indexed['excerpt']!=episode.quote:
+                    raise ValueError('narrative and episodic source anchors differ')
+                row['source_span_id']=indexed['source_span_id']
             row['challenge_status']='CONTESTED_SOURCE_RECOLLECTION_NOT_FALSIFIED' if episode.episode_id in challenged else 'NO_EXPLICIT_CHALLENGE_IN_VIEW'
             row['linked_episode_id']=resolutions.get(episode.episode_id)
             receipt=receipt_links.get(episode.episode_id)

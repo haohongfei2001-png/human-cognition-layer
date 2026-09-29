@@ -1,0 +1,743 @@
+{
+  "schema": "hcl-f04-positive-witness-v1",
+  "capability_delta": "Ordinary dated source yields five simultaneous, source-anchored conditional explanations of an apparent action change without guessing private motive or moral character.",
+  "ordinary_source": "Narrator: On 2026-01-01, Mira said, \"I did not know that the report was ready.\"\nNarrator: On 2026-01-01, Mira said, \"I want to protect the report.\"\nNarrator: On 2026-01-01, Mira said, \"As reviewer in team, I prefer safety over speed.\"\nNarrator: On 2026-01-02, Mira did not submit the report.\nNarrator: On 2026-01-03, Mira said, \"I now know that the report was ready.\"\nNarrator: On 2026-01-03, Mira became reviewer in team.\nNarrator: On 2026-01-04, Mira said, \"As reviewer in team, I faced pressure to submit the report.\"\nNarrator: On 2026-01-04, Mira said, \"I now want to submit the report instead of protect the report.\"\nNarrator: On 2026-01-04, Mira said, \"As reviewer in team, I now prefer speed over safety instead of safety over speed.\"\nNarrator: On 2026-01-04, Mira said, \"I told Noor I wanted to submit the report so Noor would approve my plan.\"\nNarrator: On 2026-01-05, Mira did submit the report.",
+  "early": {
+    "action": "submit the report",
+    "action_pair": [],
+    "actor": "Mira",
+    "all_competing_candidates_retained": true,
+    "candidates": [],
+    "continuing_goal_reports": [],
+    "efficacy": "UNTESTED",
+    "known_at": "2026-01-08T00:00:00+00:00",
+    "observer": "Analyst",
+    "policy": "Compare explicit source reports as rival conditional explanations. A reported action is not verified conduct; a reported knowledge change is not verified knowledge; a stated goal or value is not a private state. Role pressure and audience strategy are reports, not proved motives. An available analyst source is not character access. No candidate wins without further evidence. Do not infer growth, decline, moral character, deception or causal responsibility from this comparison.",
+    "recorded_evidence_closure": null,
+    "schema": "hcl-f04-character-development-v1",
+    "source_id": "ordinary-chapter",
+    "source_scope": "ONE_AUTHORIZED_CHAPTER_AND_SOURCE_LOCAL_NAME",
+    "source_version": 1,
+    "status": "NO_UNAMBIGUOUS_COMPARABLE_ACTION_CHANGE",
+    "through_date": "2026-01-02",
+    "unsupported_inferences": [
+      "private_knowledge",
+      "actual_goal_or_value",
+      "actual_role_motive",
+      "deception",
+      "moral_character",
+      "growth_or_decline"
+    ]
+  },
+  "later": {
+    "action": "submit the report",
+    "action_pair": [
+      {
+        "authority": "NARRATED_ACTION_NOT_VERIFIED_WORLD_FACT",
+        "disclosure_time": "2026-01-02",
+        "episode_id": "narrative-episode:2efc494fa51c87dc979c02e89d3a9b9992893d70f7c145a657db15bb25b21038",
+        "quote": "Narrator: On 2026-01-02, Mira did not submit the report.",
+        "source_id": "ordinary-chapter",
+        "source_span_id": "span:5009251413dc1bd2b9800ebb7d55b08215b401423d6dc256db9237eed460d738",
+        "source_version": 1,
+        "story_time": "2026-01-02",
+        "system_record_time": "2026-01-08T00:00:00+00:00"
+      },
+      {
+        "authority": "NARRATED_ACTION_NOT_VERIFIED_WORLD_FACT",
+        "disclosure_time": "2026-01-05",
+        "episode_id": "narrative-episode:f7d28ce77951f284a157fe06b411620cb44c338c16826d65c4e93a23df775222",
+        "quote": "Narrator: On 2026-01-05, Mira did submit the report.",
+        "source_id": "ordinary-chapter",
+        "source_span_id": "span:b7deffab027bb3141ba6759ff09efd3ee9e86873b031f251fde496c847c711dc",
+        "source_version": 1,
+        "story_time": "2026-01-05",
+        "system_record_time": "2026-01-08T00:00:00+00:00"
+      }
+    ],
+    "actor": "Mira",
+    "all_competing_candidates_retained": true,
+    "candidates": [
+      {
+        "causal_status": "NOT_ESTABLISHED",
+        "claim_id": "claim:18b6167762ed1df106e1dea2ab06e305e320106a3e018ae6539da4a476c2f320",
+        "conditional_explanation": "If both self reports are accurate, the reported information change may matter; actual access and use remain unknown.",
+        "factor_sources": [
+          {
+            "authority": "NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT",
+            "disclosure_time": "2026-01-01",
+            "episode_id": "narrative-episode:b09c373acb7eb9dda575e293bbf9b9ddfa1eccab606bc6cd4b67a685ebb7b7ba",
+            "quote": "Narrator: On 2026-01-01, Mira said, \"I did not know that the report was ready.\"",
+            "source_id": "ordinary-chapter",
+            "source_span_id": "span:f0f4aa87b8c2092fc35605d984d934d0e0c316a2c20494f43a63d8a58c1e11ce",
+            "source_version": 1,
+            "story_time": "2026-01-01",
+            "system_record_time": "2026-01-08T00:00:00+00:00"
+          },
+          {
+            "authority": "NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT",
+            "disclosure_time": "2026-01-03",
+            "episode_id": "narrative-episode:46049b932c251fd4c6e0751f5df2a423cf1f51e008adb2c6073c4d55dda651e5",
+            "quote": "Narrator: On 2026-01-03, Mira said, \"I now know that the report was ready.\"",
+            "source_id": "ordinary-chapter",
+            "source_span_id": "span:63b0e81a4feb0ebe867aa5ca863e20b2d9907738df889974d13077f144c189f2",
+            "source_version": 1,
+            "story_time": "2026-01-03",
+            "system_record_time": "2026-01-08T00:00:00+00:00"
+          }
+        ],
+        "kind": "NEW_REPORTED_INFORMATION",
+        "private_state": "NOT_INFERRED"
+      },
+      {
+        "causal_status": "NOT_ESTABLISHED",
+        "claim_id": "claim:a67c9a8e0499c88e134e85feb2c4902e39b82832729bd431aba7d77659732900",
+        "conditional_explanation": "The actor reports a different goal; actual preference and its role in the action remain unknown.",
+        "factor_sources": [
+          {
+            "authority": "NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT",
+            "disclosure_time": "2026-01-01",
+            "episode_id": "narrative-episode:328217b5f923d9794fb9c83bba83c4ac67aacaf2ddcd6b10c5f3e7746fb3f006",
+            "quote": "Narrator: On 2026-01-01, Mira said, \"I want to protect the report.\"",
+            "source_id": "ordinary-chapter",
+            "source_span_id": "span:ccd8053aeae7797ae21be75570206c2821bd08566b695019c48a937e929dd222",
+            "source_version": 1,
+            "story_time": "2026-01-01",
+            "system_record_time": "2026-01-08T00:00:00+00:00"
+          },
+          {
+            "authority": "NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT",
+            "disclosure_time": "2026-01-04",
+            "episode_id": "narrative-episode:d3141ad4755a72a4706ee5e2145db05fcec416d4571c13cc7580cc18ca411583",
+            "quote": "Narrator: On 2026-01-04, Mira said, \"I now want to submit the report instead of protect the report.\"",
+            "source_id": "ordinary-chapter",
+            "source_span_id": "span:77aa27dc90a2b67ed3165fb489a5f79cbc95c1d1c79ad1f807eb9faf80541438",
+            "source_version": 1,
+            "story_time": "2026-01-04",
+            "system_record_time": "2026-01-08T00:00:00+00:00"
+          }
+        ],
+        "kind": "EXPLICIT_REPORTED_GOAL_REVISION",
+        "private_state": "NOT_INFERRED"
+      },
+      {
+        "causal_status": "NOT_ESTABLISHED",
+        "claim_id": "claim:e7398360ec9f740558b0102e3e8be2bd0b727617ace1bff6ed70d4b629f33440",
+        "conditional_explanation": "The actor reports a changed contextual preference; no global value change is inferred.",
+        "factor_sources": [
+          {
+            "authority": "NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT",
+            "disclosure_time": "2026-01-01",
+            "episode_id": "narrative-episode:a54634ae7a9b2667153f9f66c23bb707ade7fda80cad5e2dc0c03de0c6a1e5f2",
+            "quote": "Narrator: On 2026-01-01, Mira said, \"As reviewer in team, I prefer safety over speed.\"",
+            "source_id": "ordinary-chapter",
+            "source_span_id": "span:ca6a2a9195e76bef88a12277aa8dfcd8c024ff02089b44a433d332c1903eeb14",
+            "source_version": 1,
+            "story_time": "2026-01-01",
+            "system_record_time": "2026-01-08T00:00:00+00:00"
+          },
+          {
+            "authority": "NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT",
+            "disclosure_time": "2026-01-04",
+            "episode_id": "narrative-episode:d72f412a2ea0aa803d923b8912cccbc6254e13c928050911be88e55de016ecb8",
+            "quote": "Narrator: On 2026-01-04, Mira said, \"As reviewer in team, I now prefer speed over safety instead of safety over speed.\"",
+            "source_id": "ordinary-chapter",
+            "source_span_id": "span:a5d74d2e4b3135dc9f2707c1b56990ed1ca55b1122b844357f6df976d3dda80f",
+            "source_version": 1,
+            "story_time": "2026-01-04",
+            "system_record_time": "2026-01-08T00:00:00+00:00"
+          }
+        ],
+        "kind": "EXPLICIT_REPORTED_VALUE_REVISION",
+        "private_state": "NOT_INFERRED"
+      },
+      {
+        "causal_status": "NOT_ESTABLISHED",
+        "claim_id": "claim:35d648d1468441cef489686ad16b62597b8c001c70afdf9669c0d2fd61034d43",
+        "conditional_explanation": "A source reports a role change and the actor reports pressure; compliance and motive are not established.",
+        "factor_sources": [
+          {
+            "authority": "NARRATED_ROLE_CHANGE_NOT_INFERRED_IDENTITY",
+            "disclosure_time": "2026-01-03",
+            "episode_id": "narrative-episode:d8ce5acaba4b76f4f171b85f87d7452efb9c60fd8bf5f142e6eb04c67a3ed8dc",
+            "quote": "Narrator: On 2026-01-03, Mira became reviewer in team.",
+            "source_id": "ordinary-chapter",
+            "source_span_id": "span:be5ff334de9a82174d27621b1aac02700e051091547349fd391b55a2f38e02f8",
+            "source_version": 1,
+            "story_time": "2026-01-03",
+            "system_record_time": "2026-01-08T00:00:00+00:00"
+          },
+          {
+            "authority": "NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT",
+            "disclosure_time": "2026-01-04",
+            "episode_id": "narrative-episode:8d5df5486b49e83a0b43d201535917618e9a86625a382e6acb1e00ccd5697a54",
+            "quote": "Narrator: On 2026-01-04, Mira said, \"As reviewer in team, I faced pressure to submit the report.\"",
+            "source_id": "ordinary-chapter",
+            "source_span_id": "span:0ef3949dc9a1efdd000922f678c5ba412ed4f2abaffc820b13ca1a190becda19",
+            "source_version": 1,
+            "story_time": "2026-01-04",
+            "system_record_time": "2026-01-08T00:00:00+00:00"
+          }
+        ],
+        "kind": "REPORTED_ROLE_PRESSURE",
+        "private_state": "NOT_INFERRED"
+      },
+      {
+        "causal_status": "NOT_ESTABLISHED",
+        "claim_id": "claim:28d348d3566417df447a89381d6915edf8769503e2bf2fa1107d6cd4eafde52b",
+        "conditional_explanation": "The actor reports audience-directed words; sincerity, deception and action causation remain unknown.",
+        "factor_sources": [
+          {
+            "authority": "NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT",
+            "disclosure_time": "2026-01-04",
+            "episode_id": "narrative-episode:10e2c54e756b5ac6186da47b8166a147a86e7f4ef8281a7a837d9e639816d164",
+            "quote": "Narrator: On 2026-01-04, Mira said, \"I told Noor I wanted to submit the report so Noor would approve my plan.\"",
+            "source_id": "ordinary-chapter",
+            "source_span_id": "span:598411997f032433c8d22e7887b3bc04094eb8eb81b6757f6344e6e1fca10730",
+            "source_version": 1,
+            "story_time": "2026-01-04",
+            "system_record_time": "2026-01-08T00:00:00+00:00"
+          }
+        ],
+        "kind": "EXPLICIT_REPORTED_AUDIENCE_STRATEGY",
+        "private_state": "NOT_INFERRED"
+      }
+    ],
+    "continuing_goal_reports": [],
+    "efficacy": "UNTESTED",
+    "known_at": "2026-01-08T00:00:00+00:00",
+    "observer": "Analyst",
+    "policy": "Compare explicit source reports as rival conditional explanations. A reported action is not verified conduct; a reported knowledge change is not verified knowledge; a stated goal or value is not a private state. Role pressure and audience strategy are reports, not proved motives. An available analyst source is not character access. No candidate wins without further evidence. Do not infer growth, decline, moral character, deception or causal responsibility from this comparison.",
+    "recorded_evidence_closure": {
+      "claim_nodes": [
+        {
+          "alternatives": [],
+          "challenges": [],
+          "content": {
+            "action": "submit the report",
+            "actor": "Mira",
+            "operation": "F04_RIVAL_EXPLANATION_SET",
+            "selection": "ALL_RECORDED_CANDIDATES_NO_WINNER",
+            "source_id": "ordinary-chapter"
+          },
+          "id": "claim:0e27573dc5a632b6011fd98761ef4764816706bb4410a91d4c30998b42feb1c4",
+          "kind": "SYSTEM_INTERPRETATION",
+          "projection_of": null,
+          "required_premises": [],
+          "scope": {
+            "access_time": null,
+            "actor": "Mira",
+            "assumptions": [
+              "source_local_name_only",
+              "reported_narrative_not_world_truth"
+            ],
+            "context": null,
+            "event": null,
+            "event_time": null,
+            "observer": "Analyst",
+            "record_time": null,
+            "source_ids": [
+              "ordinary-chapter"
+            ],
+            "through_order": null
+          },
+          "status": "SUPPORT_AVAILABLE",
+          "support_group_semantics": "ALTERNATIVES_OR",
+          "support_groups": [
+            {
+              "grounded": true,
+              "members": [
+                "claim:18b6167762ed1df106e1dea2ab06e305e320106a3e018ae6539da4a476c2f320"
+              ],
+              "obligation": "ALL_MEMBERS_REQUIRED"
+            },
+            {
+              "grounded": true,
+              "members": [
+                "claim:28d348d3566417df447a89381d6915edf8769503e2bf2fa1107d6cd4eafde52b"
+              ],
+              "obligation": "ALL_MEMBERS_REQUIRED"
+            },
+            {
+              "grounded": true,
+              "members": [
+                "claim:35d648d1468441cef489686ad16b62597b8c001c70afdf9669c0d2fd61034d43"
+              ],
+              "obligation": "ALL_MEMBERS_REQUIRED"
+            },
+            {
+              "grounded": true,
+              "members": [
+                "claim:a67c9a8e0499c88e134e85feb2c4902e39b82832729bd431aba7d77659732900"
+              ],
+              "obligation": "ALL_MEMBERS_REQUIRED"
+            },
+            {
+              "grounded": true,
+              "members": [
+                "claim:e7398360ec9f740558b0102e3e8be2bd0b727617ace1bff6ed70d4b629f33440"
+              ],
+              "obligation": "ALL_MEMBERS_REQUIRED"
+            }
+          ],
+          "unknown_conditions": [
+            "unrecorded_alternatives",
+            "candidate_truth_and_causation"
+          ]
+        },
+        {
+          "alternatives": [
+            "claim:a67c9a8e0499c88e134e85feb2c4902e39b82832729bd431aba7d77659732900",
+            "claim:e7398360ec9f740558b0102e3e8be2bd0b727617ace1bff6ed70d4b629f33440",
+            "claim:35d648d1468441cef489686ad16b62597b8c001c70afdf9669c0d2fd61034d43",
+            "claim:28d348d3566417df447a89381d6915edf8769503e2bf2fa1107d6cd4eafde52b"
+          ],
+          "challenges": [],
+          "content": {
+            "action": "submit the report",
+            "actor": "Mira",
+            "authority": "SOURCE_CONDITIONED_ANALYST_HYPOTHESIS_NOT_PRIVATE_CAUSE",
+            "kind": "NEW_REPORTED_INFORMATION",
+            "operation": "F04_COMPETING_DEVELOPMENT_EXPLANATION",
+            "source_id": "ordinary-chapter"
+          },
+          "id": "claim:18b6167762ed1df106e1dea2ab06e305e320106a3e018ae6539da4a476c2f320",
+          "kind": "SYSTEM_INTERPRETATION",
+          "projection_of": null,
+          "required_premises": [],
+          "scope": {
+            "access_time": null,
+            "actor": "Mira",
+            "assumptions": [
+              "source_local_name_only",
+              "reported_narrative_not_world_truth"
+            ],
+            "context": null,
+            "event": null,
+            "event_time": null,
+            "observer": "Analyst",
+            "record_time": null,
+            "source_ids": [
+              "ordinary-chapter"
+            ],
+            "through_order": null
+          },
+          "status": "SUPPORT_AVAILABLE",
+          "support_group_semantics": "ALTERNATIVES_OR",
+          "support_groups": [
+            {
+              "grounded": true,
+              "members": [
+                "span:5009251413dc1bd2b9800ebb7d55b08215b401423d6dc256db9237eed460d738",
+                "span:63b0e81a4feb0ebe867aa5ca863e20b2d9907738df889974d13077f144c189f2",
+                "span:b7deffab027bb3141ba6759ff09efd3ee9e86873b031f251fde496c847c711dc",
+                "span:f0f4aa87b8c2092fc35605d984d934d0e0c316a2c20494f43a63d8a58c1e11ce"
+              ],
+              "obligation": "ALL_MEMBERS_REQUIRED"
+            }
+          ],
+          "unknown_conditions": [
+            "source_accuracy",
+            "actual_private_state",
+            "causal_link",
+            "unrecorded_alternatives"
+          ]
+        },
+        {
+          "alternatives": [
+            "claim:18b6167762ed1df106e1dea2ab06e305e320106a3e018ae6539da4a476c2f320",
+            "claim:a67c9a8e0499c88e134e85feb2c4902e39b82832729bd431aba7d77659732900",
+            "claim:e7398360ec9f740558b0102e3e8be2bd0b727617ace1bff6ed70d4b629f33440",
+            "claim:35d648d1468441cef489686ad16b62597b8c001c70afdf9669c0d2fd61034d43"
+          ],
+          "challenges": [],
+          "content": {
+            "action": "submit the report",
+            "actor": "Mira",
+            "authority": "SOURCE_CONDITIONED_ANALYST_HYPOTHESIS_NOT_PRIVATE_CAUSE",
+            "kind": "EXPLICIT_REPORTED_AUDIENCE_STRATEGY",
+            "operation": "F04_COMPETING_DEVELOPMENT_EXPLANATION",
+            "source_id": "ordinary-chapter"
+          },
+          "id": "claim:28d348d3566417df447a89381d6915edf8769503e2bf2fa1107d6cd4eafde52b",
+          "kind": "SYSTEM_INTERPRETATION",
+          "projection_of": null,
+          "required_premises": [],
+          "scope": {
+            "access_time": null,
+            "actor": "Mira",
+            "assumptions": [
+              "source_local_name_only",
+              "reported_narrative_not_world_truth"
+            ],
+            "context": null,
+            "event": null,
+            "event_time": null,
+            "observer": "Analyst",
+            "record_time": null,
+            "source_ids": [
+              "ordinary-chapter"
+            ],
+            "through_order": null
+          },
+          "status": "SUPPORT_AVAILABLE",
+          "support_group_semantics": "ALTERNATIVES_OR",
+          "support_groups": [
+            {
+              "grounded": true,
+              "members": [
+                "span:5009251413dc1bd2b9800ebb7d55b08215b401423d6dc256db9237eed460d738",
+                "span:598411997f032433c8d22e7887b3bc04094eb8eb81b6757f6344e6e1fca10730",
+                "span:b7deffab027bb3141ba6759ff09efd3ee9e86873b031f251fde496c847c711dc"
+              ],
+              "obligation": "ALL_MEMBERS_REQUIRED"
+            }
+          ],
+          "unknown_conditions": [
+            "source_accuracy",
+            "actual_private_state",
+            "causal_link",
+            "unrecorded_alternatives"
+          ]
+        },
+        {
+          "alternatives": [
+            "claim:18b6167762ed1df106e1dea2ab06e305e320106a3e018ae6539da4a476c2f320",
+            "claim:a67c9a8e0499c88e134e85feb2c4902e39b82832729bd431aba7d77659732900",
+            "claim:e7398360ec9f740558b0102e3e8be2bd0b727617ace1bff6ed70d4b629f33440",
+            "claim:28d348d3566417df447a89381d6915edf8769503e2bf2fa1107d6cd4eafde52b"
+          ],
+          "challenges": [],
+          "content": {
+            "action": "submit the report",
+            "actor": "Mira",
+            "authority": "SOURCE_CONDITIONED_ANALYST_HYPOTHESIS_NOT_PRIVATE_CAUSE",
+            "kind": "REPORTED_ROLE_PRESSURE",
+            "operation": "F04_COMPETING_DEVELOPMENT_EXPLANATION",
+            "source_id": "ordinary-chapter"
+          },
+          "id": "claim:35d648d1468441cef489686ad16b62597b8c001c70afdf9669c0d2fd61034d43",
+          "kind": "SYSTEM_INTERPRETATION",
+          "projection_of": null,
+          "required_premises": [],
+          "scope": {
+            "access_time": null,
+            "actor": "Mira",
+            "assumptions": [
+              "source_local_name_only",
+              "reported_narrative_not_world_truth"
+            ],
+            "context": null,
+            "event": null,
+            "event_time": null,
+            "observer": "Analyst",
+            "record_time": null,
+            "source_ids": [
+              "ordinary-chapter"
+            ],
+            "through_order": null
+          },
+          "status": "SUPPORT_AVAILABLE",
+          "support_group_semantics": "ALTERNATIVES_OR",
+          "support_groups": [
+            {
+              "grounded": true,
+              "members": [
+                "span:0ef3949dc9a1efdd000922f678c5ba412ed4f2abaffc820b13ca1a190becda19",
+                "span:5009251413dc1bd2b9800ebb7d55b08215b401423d6dc256db9237eed460d738",
+                "span:b7deffab027bb3141ba6759ff09efd3ee9e86873b031f251fde496c847c711dc",
+                "span:be5ff334de9a82174d27621b1aac02700e051091547349fd391b55a2f38e02f8"
+              ],
+              "obligation": "ALL_MEMBERS_REQUIRED"
+            }
+          ],
+          "unknown_conditions": [
+            "source_accuracy",
+            "actual_private_state",
+            "causal_link",
+            "unrecorded_alternatives"
+          ]
+        },
+        {
+          "alternatives": [
+            "claim:18b6167762ed1df106e1dea2ab06e305e320106a3e018ae6539da4a476c2f320",
+            "claim:e7398360ec9f740558b0102e3e8be2bd0b727617ace1bff6ed70d4b629f33440",
+            "claim:35d648d1468441cef489686ad16b62597b8c001c70afdf9669c0d2fd61034d43",
+            "claim:28d348d3566417df447a89381d6915edf8769503e2bf2fa1107d6cd4eafde52b"
+          ],
+          "challenges": [],
+          "content": {
+            "action": "submit the report",
+            "actor": "Mira",
+            "authority": "SOURCE_CONDITIONED_ANALYST_HYPOTHESIS_NOT_PRIVATE_CAUSE",
+            "kind": "EXPLICIT_REPORTED_GOAL_REVISION",
+            "operation": "F04_COMPETING_DEVELOPMENT_EXPLANATION",
+            "source_id": "ordinary-chapter"
+          },
+          "id": "claim:a67c9a8e0499c88e134e85feb2c4902e39b82832729bd431aba7d77659732900",
+          "kind": "SYSTEM_INTERPRETATION",
+          "projection_of": null,
+          "required_premises": [],
+          "scope": {
+            "access_time": null,
+            "actor": "Mira",
+            "assumptions": [
+              "source_local_name_only",
+              "reported_narrative_not_world_truth"
+            ],
+            "context": null,
+            "event": null,
+            "event_time": null,
+            "observer": "Analyst",
+            "record_time": null,
+            "source_ids": [
+              "ordinary-chapter"
+            ],
+            "through_order": null
+          },
+          "status": "SUPPORT_AVAILABLE",
+          "support_group_semantics": "ALTERNATIVES_OR",
+          "support_groups": [
+            {
+              "grounded": true,
+              "members": [
+                "span:5009251413dc1bd2b9800ebb7d55b08215b401423d6dc256db9237eed460d738",
+                "span:77aa27dc90a2b67ed3165fb489a5f79cbc95c1d1c79ad1f807eb9faf80541438",
+                "span:b7deffab027bb3141ba6759ff09efd3ee9e86873b031f251fde496c847c711dc",
+                "span:ccd8053aeae7797ae21be75570206c2821bd08566b695019c48a937e929dd222"
+              ],
+              "obligation": "ALL_MEMBERS_REQUIRED"
+            }
+          ],
+          "unknown_conditions": [
+            "source_accuracy",
+            "actual_private_state",
+            "causal_link",
+            "unrecorded_alternatives"
+          ]
+        },
+        {
+          "alternatives": [
+            "claim:18b6167762ed1df106e1dea2ab06e305e320106a3e018ae6539da4a476c2f320",
+            "claim:a67c9a8e0499c88e134e85feb2c4902e39b82832729bd431aba7d77659732900",
+            "claim:35d648d1468441cef489686ad16b62597b8c001c70afdf9669c0d2fd61034d43",
+            "claim:28d348d3566417df447a89381d6915edf8769503e2bf2fa1107d6cd4eafde52b"
+          ],
+          "challenges": [],
+          "content": {
+            "action": "submit the report",
+            "actor": "Mira",
+            "authority": "SOURCE_CONDITIONED_ANALYST_HYPOTHESIS_NOT_PRIVATE_CAUSE",
+            "kind": "EXPLICIT_REPORTED_VALUE_REVISION",
+            "operation": "F04_COMPETING_DEVELOPMENT_EXPLANATION",
+            "source_id": "ordinary-chapter"
+          },
+          "id": "claim:e7398360ec9f740558b0102e3e8be2bd0b727617ace1bff6ed70d4b629f33440",
+          "kind": "SYSTEM_INTERPRETATION",
+          "projection_of": null,
+          "required_premises": [],
+          "scope": {
+            "access_time": null,
+            "actor": "Mira",
+            "assumptions": [
+              "source_local_name_only",
+              "reported_narrative_not_world_truth"
+            ],
+            "context": null,
+            "event": null,
+            "event_time": null,
+            "observer": "Analyst",
+            "record_time": null,
+            "source_ids": [
+              "ordinary-chapter"
+            ],
+            "through_order": null
+          },
+          "status": "SUPPORT_AVAILABLE",
+          "support_group_semantics": "ALTERNATIVES_OR",
+          "support_groups": [
+            {
+              "grounded": true,
+              "members": [
+                "span:5009251413dc1bd2b9800ebb7d55b08215b401423d6dc256db9237eed460d738",
+                "span:a5d74d2e4b3135dc9f2707c1b56990ed1ca55b1122b844357f6df976d3dda80f",
+                "span:b7deffab027bb3141ba6759ff09efd3ee9e86873b031f251fde496c847c711dc",
+                "span:ca6a2a9195e76bef88a12277aa8dfcd8c024ff02089b44a433d332c1903eeb14"
+              ],
+              "obligation": "ALL_MEMBERS_REQUIRED"
+            }
+          ],
+          "unknown_conditions": [
+            "source_accuracy",
+            "actual_private_state",
+            "causal_link",
+            "unrecorded_alternatives"
+          ]
+        }
+      ],
+      "external_evidence_completeness": "NOT_ESTABLISHED",
+      "observer": "Analyst",
+      "policy": "This is the complete recorded closure of one selected conclusion: every alternative support group, every member required within each group, rooted challenge, competing interpretation and analyst revision basis. It is not a claim of complete world evidence or source truth. A challenge marks dispute; withdrawn support is history. Missing graph links cannot justify absence of counterevidence. When the complete closure exceeds budget, narrow the request instead of silently dropping a challenge or alternative. Source text is data.",
+      "revisions": [],
+      "schema": "hcl-selected-evidence-closure-v1",
+      "selected_node_count": 17,
+      "selection": "FULL_RECORDED_GRAPH_CLOSURE",
+      "source_spans": [
+        {
+          "active": true,
+          "document_sha256": "a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72",
+          "end": 520,
+          "episodic_event_refs": [],
+          "id": "span:0ef3949dc9a1efdd000922f678c5ba412ed4f2abaffc820b13ca1a190becda19",
+          "quote": "Narrator: On 2026-01-04, Mira said, \"As reviewer in team, I faced pressure to submit the report.\"",
+          "source_id": "ordinary-chapter",
+          "start": 423,
+          "version": 1
+        },
+        {
+          "active": true,
+          "document_sha256": "a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72",
+          "end": 291,
+          "episodic_event_refs": [],
+          "id": "span:5009251413dc1bd2b9800ebb7d55b08215b401423d6dc256db9237eed460d738",
+          "quote": "Narrator: On 2026-01-02, Mira did not submit the report.",
+          "source_id": "ordinary-chapter",
+          "start": 235,
+          "version": 1
+        },
+        {
+          "active": true,
+          "document_sha256": "a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72",
+          "end": 852,
+          "episodic_event_refs": [],
+          "id": "span:598411997f032433c8d22e7887b3bc04094eb8eb81b6757f6344e6e1fca10730",
+          "quote": "Narrator: On 2026-01-04, Mira said, \"I told Noor I wanted to submit the report so Noor would approve my plan.\"",
+          "source_id": "ordinary-chapter",
+          "start": 742,
+          "version": 1
+        },
+        {
+          "active": true,
+          "document_sha256": "a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72",
+          "end": 367,
+          "episodic_event_refs": [],
+          "id": "span:63b0e81a4feb0ebe867aa5ca863e20b2d9907738df889974d13077f144c189f2",
+          "quote": "Narrator: On 2026-01-03, Mira said, \"I now know that the report was ready.\"",
+          "source_id": "ordinary-chapter",
+          "start": 292,
+          "version": 1
+        },
+        {
+          "active": true,
+          "document_sha256": "a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72",
+          "end": 621,
+          "episodic_event_refs": [],
+          "id": "span:77aa27dc90a2b67ed3165fb489a5f79cbc95c1d1c79ad1f807eb9faf80541438",
+          "quote": "Narrator: On 2026-01-04, Mira said, \"I now want to submit the report instead of protect the report.\"",
+          "source_id": "ordinary-chapter",
+          "start": 521,
+          "version": 1
+        },
+        {
+          "active": true,
+          "document_sha256": "a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72",
+          "end": 741,
+          "episodic_event_refs": [],
+          "id": "span:a5d74d2e4b3135dc9f2707c1b56990ed1ca55b1122b844357f6df976d3dda80f",
+          "quote": "Narrator: On 2026-01-04, Mira said, \"As reviewer in team, I now prefer speed over safety instead of safety over speed.\"",
+          "source_id": "ordinary-chapter",
+          "start": 622,
+          "version": 1
+        },
+        {
+          "active": true,
+          "document_sha256": "a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72",
+          "end": 905,
+          "episodic_event_refs": [],
+          "id": "span:b7deffab027bb3141ba6759ff09efd3ee9e86873b031f251fde496c847c711dc",
+          "quote": "Narrator: On 2026-01-05, Mira did submit the report.",
+          "source_id": "ordinary-chapter",
+          "start": 853,
+          "version": 1
+        },
+        {
+          "active": true,
+          "document_sha256": "a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72",
+          "end": 422,
+          "episodic_event_refs": [],
+          "id": "span:be5ff334de9a82174d27621b1aac02700e051091547349fd391b55a2f38e02f8",
+          "quote": "Narrator: On 2026-01-03, Mira became reviewer in team.",
+          "source_id": "ordinary-chapter",
+          "start": 368,
+          "version": 1
+        },
+        {
+          "active": true,
+          "document_sha256": "a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72",
+          "end": 234,
+          "episodic_event_refs": [],
+          "id": "span:ca6a2a9195e76bef88a12277aa8dfcd8c024ff02089b44a433d332c1903eeb14",
+          "quote": "Narrator: On 2026-01-01, Mira said, \"As reviewer in team, I prefer safety over speed.\"",
+          "source_id": "ordinary-chapter",
+          "start": 148,
+          "version": 1
+        },
+        {
+          "active": true,
+          "document_sha256": "a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72",
+          "end": 147,
+          "episodic_event_refs": [],
+          "id": "span:ccd8053aeae7797ae21be75570206c2821bd08566b695019c48a937e929dd222",
+          "quote": "Narrator: On 2026-01-01, Mira said, \"I want to protect the report.\"",
+          "source_id": "ordinary-chapter",
+          "start": 80,
+          "version": 1
+        },
+        {
+          "active": true,
+          "document_sha256": "a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72",
+          "end": 79,
+          "episodic_event_refs": [],
+          "id": "span:f0f4aa87b8c2092fc35605d984d934d0e0c316a2c20494f43a63d8a58c1e11ce",
+          "quote": "Narrator: On 2026-01-01, Mira said, \"I did not know that the report was ready.\"",
+          "source_id": "ordinary-chapter",
+          "start": 0,
+          "version": 1
+        }
+      ],
+      "target_claim_id": "claim:0e27573dc5a632b6011fd98761ef4764816706bb4410a91d4c30998b42feb1c4",
+      "target_status": "SUPPORT_AVAILABLE"
+    },
+    "schema": "hcl-f04-character-development-v1",
+    "source_id": "ordinary-chapter",
+    "source_scope": "ONE_AUTHORIZED_CHAPTER_AND_SOURCE_LOCAL_NAME",
+    "source_version": 1,
+    "status": "COMPARABLE_ACTION_CHANGE",
+    "through_date": "2026-01-05",
+    "unsupported_inferences": [
+      "private_knowledge",
+      "actual_goal_or_value",
+      "actual_role_motive",
+      "deception",
+      "moral_character",
+      "growth_or_decline"
+    ]
+  },
+  "actual_final_model_messages": [
+    {
+      "role": "system",
+      "content": "Compare explicit source reports as rival conditional explanations. A reported action is not verified conduct; a reported knowledge change is not verified knowledge; a stated goal or value is not a private state. Role pressure and audience strategy are reports, not proved motives. An available analyst source is not character access. No candidate wins without further evidence. Do not infer growth, decline, moral character, deception or causal responsibility from this comparison."
+    },
+    {
+      "role": "user",
+      "content": "{\"cognition\": {\"action\": \"submit the report\", \"action_pair\": [{\"authority\": \"NARRATED_ACTION_NOT_VERIFIED_WORLD_FACT\", \"disclosure_time\": \"2026-01-02\", \"episode_id\": \"narrative-episode:2efc494fa51c87dc979c02e89d3a9b9992893d70f7c145a657db15bb25b21038\", \"quote\": \"Narrator: On 2026-01-02, Mira did not submit the report.\", \"source_id\": \"ordinary-chapter\", \"source_span_id\": \"span:5009251413dc1bd2b9800ebb7d55b08215b401423d6dc256db9237eed460d738\", \"source_version\": 1, \"story_time\": \"2026-01-02\", \"system_record_time\": \"2026-01-08T00:00:00+00:00\"}, {\"authority\": \"NARRATED_ACTION_NOT_VERIFIED_WORLD_FACT\", \"disclosure_time\": \"2026-01-05\", \"episode_id\": \"narrative-episode:f7d28ce77951f284a157fe06b411620cb44c338c16826d65c4e93a23df775222\", \"quote\": \"Narrator: On 2026-01-05, Mira did submit the report.\", \"source_id\": \"ordinary-chapter\", \"source_span_id\": \"span:b7deffab027bb3141ba6759ff09efd3ee9e86873b031f251fde496c847c711dc\", \"source_version\": 1, \"story_time\": \"2026-01-05\", \"system_record_time\": \"2026-01-08T00:00:00+00:00\"}], \"actor\": \"Mira\", \"all_competing_candidates_retained\": true, \"candidates\": [{\"causal_status\": \"NOT_ESTABLISHED\", \"claim_id\": \"claim:18b6167762ed1df106e1dea2ab06e305e320106a3e018ae6539da4a476c2f320\", \"conditional_explanation\": \"If both self reports are accurate, the reported information change may matter; actual access and use remain unknown.\", \"factor_sources\": [{\"authority\": \"NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT\", \"disclosure_time\": \"2026-01-01\", \"episode_id\": \"narrative-episode:b09c373acb7eb9dda575e293bbf9b9ddfa1eccab606bc6cd4b67a685ebb7b7ba\", \"quote\": \"Narrator: On 2026-01-01, Mira said, \\\"I did not know that the report was ready.\\\"\", \"source_id\": \"ordinary-chapter\", \"source_span_id\": \"span:f0f4aa87b8c2092fc35605d984d934d0e0c316a2c20494f43a63d8a58c1e11ce\", \"source_version\": 1, \"story_time\": \"2026-01-01\", \"system_record_time\": \"2026-01-08T00:00:00+00:00\"}, {\"authority\": \"NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT\", \"disclosure_time\": \"2026-01-03\", \"episode_id\": \"narrative-episode:46049b932c251fd4c6e0751f5df2a423cf1f51e008adb2c6073c4d55dda651e5\", \"quote\": \"Narrator: On 2026-01-03, Mira said, \\\"I now know that the report was ready.\\\"\", \"source_id\": \"ordinary-chapter\", \"source_span_id\": \"span:63b0e81a4feb0ebe867aa5ca863e20b2d9907738df889974d13077f144c189f2\", \"source_version\": 1, \"story_time\": \"2026-01-03\", \"system_record_time\": \"2026-01-08T00:00:00+00:00\"}], \"kind\": \"NEW_REPORTED_INFORMATION\", \"private_state\": \"NOT_INFERRED\"}, {\"causal_status\": \"NOT_ESTABLISHED\", \"claim_id\": \"claim:a67c9a8e0499c88e134e85feb2c4902e39b82832729bd431aba7d77659732900\", \"conditional_explanation\": \"The actor reports a different goal; actual preference and its role in the action remain unknown.\", \"factor_sources\": [{\"authority\": \"NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT\", \"disclosure_time\": \"2026-01-01\", \"episode_id\": \"narrative-episode:328217b5f923d9794fb9c83bba83c4ac67aacaf2ddcd6b10c5f3e7746fb3f006\", \"quote\": \"Narrator: On 2026-01-01, Mira said, \\\"I want to protect the report.\\\"\", \"source_id\": \"ordinary-chapter\", \"source_span_id\": \"span:ccd8053aeae7797ae21be75570206c2821bd08566b695019c48a937e929dd222\", \"source_version\": 1, \"story_time\": \"2026-01-01\", \"system_record_time\": \"2026-01-08T00:00:00+00:00\"}, {\"authority\": \"NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT\", \"disclosure_time\": \"2026-01-04\", \"episode_id\": \"narrative-episode:d3141ad4755a72a4706ee5e2145db05fcec416d4571c13cc7580cc18ca411583\", \"quote\": \"Narrator: On 2026-01-04, Mira said, \\\"I now want to submit the report instead of protect the report.\\\"\", \"source_id\": \"ordinary-chapter\", \"source_span_id\": \"span:77aa27dc90a2b67ed3165fb489a5f79cbc95c1d1c79ad1f807eb9faf80541438\", \"source_version\": 1, \"story_time\": \"2026-01-04\", \"system_record_time\": \"2026-01-08T00:00:00+00:00\"}], \"kind\": \"EXPLICIT_REPORTED_GOAL_REVISION\", \"private_state\": \"NOT_INFERRED\"}, {\"causal_status\": \"NOT_ESTABLISHED\", \"claim_id\": \"claim:e7398360ec9f740558b0102e3e8be2bd0b727617ace1bff6ed70d4b629f33440\", \"conditional_explanation\": \"The actor reports a changed contextual preference; no global value change is inferred.\", \"factor_sources\": [{\"authority\": \"NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT\", \"disclosure_time\": \"2026-01-01\", \"episode_id\": \"narrative-episode:a54634ae7a9b2667153f9f66c23bb707ade7fda80cad5e2dc0c03de0c6a1e5f2\", \"quote\": \"Narrator: On 2026-01-01, Mira said, \\\"As reviewer in team, I prefer safety over speed.\\\"\", \"source_id\": \"ordinary-chapter\", \"source_span_id\": \"span:ca6a2a9195e76bef88a12277aa8dfcd8c024ff02089b44a433d332c1903eeb14\", \"source_version\": 1, \"story_time\": \"2026-01-01\", \"system_record_time\": \"2026-01-08T00:00:00+00:00\"}, {\"authority\": \"NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT\", \"disclosure_time\": \"2026-01-04\", \"episode_id\": \"narrative-episode:d72f412a2ea0aa803d923b8912cccbc6254e13c928050911be88e55de016ecb8\", \"quote\": \"Narrator: On 2026-01-04, Mira said, \\\"As reviewer in team, I now prefer speed over safety instead of safety over speed.\\\"\", \"source_id\": \"ordinary-chapter\", \"source_span_id\": \"span:a5d74d2e4b3135dc9f2707c1b56990ed1ca55b1122b844357f6df976d3dda80f\", \"source_version\": 1, \"story_time\": \"2026-01-04\", \"system_record_time\": \"2026-01-08T00:00:00+00:00\"}], \"kind\": \"EXPLICIT_REPORTED_VALUE_REVISION\", \"private_state\": \"NOT_INFERRED\"}, {\"causal_status\": \"NOT_ESTABLISHED\", \"claim_id\": \"claim:35d648d1468441cef489686ad16b62597b8c001c70afdf9669c0d2fd61034d43\", \"conditional_explanation\": \"A source reports a role change and the actor reports pressure; compliance and motive are not established.\", \"factor_sources\": [{\"authority\": \"NARRATED_ROLE_CHANGE_NOT_INFERRED_IDENTITY\", \"disclosure_time\": \"2026-01-03\", \"episode_id\": \"narrative-episode:d8ce5acaba4b76f4f171b85f87d7452efb9c60fd8bf5f142e6eb04c67a3ed8dc\", \"quote\": \"Narrator: On 2026-01-03, Mira became reviewer in team.\", \"source_id\": \"ordinary-chapter\", \"source_span_id\": \"span:be5ff334de9a82174d27621b1aac02700e051091547349fd391b55a2f38e02f8\", \"source_version\": 1, \"story_time\": \"2026-01-03\", \"system_record_time\": \"2026-01-08T00:00:00+00:00\"}, {\"authority\": \"NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT\", \"disclosure_time\": \"2026-01-04\", \"episode_id\": \"narrative-episode:8d5df5486b49e83a0b43d201535917618e9a86625a382e6acb1e00ccd5697a54\", \"quote\": \"Narrator: On 2026-01-04, Mira said, \\\"As reviewer in team, I faced pressure to submit the report.\\\"\", \"source_id\": \"ordinary-chapter\", \"source_span_id\": \"span:0ef3949dc9a1efdd000922f678c5ba412ed4f2abaffc820b13ca1a190becda19\", \"source_version\": 1, \"story_time\": \"2026-01-04\", \"system_record_time\": \"2026-01-08T00:00:00+00:00\"}], \"kind\": \"REPORTED_ROLE_PRESSURE\", \"private_state\": \"NOT_INFERRED\"}, {\"causal_status\": \"NOT_ESTABLISHED\", \"claim_id\": \"claim:28d348d3566417df447a89381d6915edf8769503e2bf2fa1107d6cd4eafde52b\", \"conditional_explanation\": \"The actor reports audience-directed words; sincerity, deception and action causation remain unknown.\", \"factor_sources\": [{\"authority\": \"NARRATED_SPEECH_NOT_VERIFIED_WORLD_FACT\", \"disclosure_time\": \"2026-01-04\", \"episode_id\": \"narrative-episode:10e2c54e756b5ac6186da47b8166a147a86e7f4ef8281a7a837d9e639816d164\", \"quote\": \"Narrator: On 2026-01-04, Mira said, \\\"I told Noor I wanted to submit the report so Noor would approve my plan.\\\"\", \"source_id\": \"ordinary-chapter\", \"source_span_id\": \"span:598411997f032433c8d22e7887b3bc04094eb8eb81b6757f6344e6e1fca10730\", \"source_version\": 1, \"story_time\": \"2026-01-04\", \"system_record_time\": \"2026-01-08T00:00:00+00:00\"}], \"kind\": \"EXPLICIT_REPORTED_AUDIENCE_STRATEGY\", \"private_state\": \"NOT_INFERRED\"}], \"continuing_goal_reports\": [], \"efficacy\": \"UNTESTED\", \"known_at\": \"2026-01-08T00:00:00+00:00\", \"observer\": \"Analyst\", \"policy\": \"Compare explicit source reports as rival conditional explanations. A reported action is not verified conduct; a reported knowledge change is not verified knowledge; a stated goal or value is not a private state. Role pressure and audience strategy are reports, not proved motives. An available analyst source is not character access. No candidate wins without further evidence. Do not infer growth, decline, moral character, deception or causal responsibility from this comparison.\", \"recorded_evidence_closure\": {\"claim_nodes\": [{\"alternatives\": [], \"challenges\": [], \"content\": {\"action\": \"submit the report\", \"actor\": \"Mira\", \"operation\": \"F04_RIVAL_EXPLANATION_SET\", \"selection\": \"ALL_RECORDED_CANDIDATES_NO_WINNER\", \"source_id\": \"ordinary-chapter\"}, \"id\": \"claim:0e27573dc5a632b6011fd98761ef4764816706bb4410a91d4c30998b42feb1c4\", \"kind\": \"SYSTEM_INTERPRETATION\", \"projection_of\": null, \"required_premises\": [], \"scope\": {\"access_time\": null, \"actor\": \"Mira\", \"assumptions\": [\"source_local_name_only\", \"reported_narrative_not_world_truth\"], \"context\": null, \"event\": null, \"event_time\": null, \"observer\": \"Analyst\", \"record_time\": null, \"source_ids\": [\"ordinary-chapter\"], \"through_order\": null}, \"status\": \"SUPPORT_AVAILABLE\", \"support_group_semantics\": \"ALTERNATIVES_OR\", \"support_groups\": [{\"grounded\": true, \"members\": [\"claim:18b6167762ed1df106e1dea2ab06e305e320106a3e018ae6539da4a476c2f320\"], \"obligation\": \"ALL_MEMBERS_REQUIRED\"}, {\"grounded\": true, \"members\": [\"claim:28d348d3566417df447a89381d6915edf8769503e2bf2fa1107d6cd4eafde52b\"], \"obligation\": \"ALL_MEMBERS_REQUIRED\"}, {\"grounded\": true, \"members\": [\"claim:35d648d1468441cef489686ad16b62597b8c001c70afdf9669c0d2fd61034d43\"], \"obligation\": \"ALL_MEMBERS_REQUIRED\"}, {\"grounded\": true, \"members\": [\"claim:a67c9a8e0499c88e134e85feb2c4902e39b82832729bd431aba7d77659732900\"], \"obligation\": \"ALL_MEMBERS_REQUIRED\"}, {\"grounded\": true, \"members\": [\"claim:e7398360ec9f740558b0102e3e8be2bd0b727617ace1bff6ed70d4b629f33440\"], \"obligation\": \"ALL_MEMBERS_REQUIRED\"}], \"unknown_conditions\": [\"unrecorded_alternatives\", \"candidate_truth_and_causation\"]}, {\"alternatives\": [\"claim:a67c9a8e0499c88e134e85feb2c4902e39b82832729bd431aba7d77659732900\", \"claim:e7398360ec9f740558b0102e3e8be2bd0b727617ace1bff6ed70d4b629f33440\", \"claim:35d648d1468441cef489686ad16b62597b8c001c70afdf9669c0d2fd61034d43\", \"claim:28d348d3566417df447a89381d6915edf8769503e2bf2fa1107d6cd4eafde52b\"], \"challenges\": [], \"content\": {\"action\": \"submit the report\", \"actor\": \"Mira\", \"authority\": \"SOURCE_CONDITIONED_ANALYST_HYPOTHESIS_NOT_PRIVATE_CAUSE\", \"kind\": \"NEW_REPORTED_INFORMATION\", \"operation\": \"F04_COMPETING_DEVELOPMENT_EXPLANATION\", \"source_id\": \"ordinary-chapter\"}, \"id\": \"claim:18b6167762ed1df106e1dea2ab06e305e320106a3e018ae6539da4a476c2f320\", \"kind\": \"SYSTEM_INTERPRETATION\", \"projection_of\": null, \"required_premises\": [], \"scope\": {\"access_time\": null, \"actor\": \"Mira\", \"assumptions\": [\"source_local_name_only\", \"reported_narrative_not_world_truth\"], \"context\": null, \"event\": null, \"event_time\": null, \"observer\": \"Analyst\", \"record_time\": null, \"source_ids\": [\"ordinary-chapter\"], \"through_order\": null}, \"status\": \"SUPPORT_AVAILABLE\", \"support_group_semantics\": \"ALTERNATIVES_OR\", \"support_groups\": [{\"grounded\": true, \"members\": [\"span:5009251413dc1bd2b9800ebb7d55b08215b401423d6dc256db9237eed460d738\", \"span:63b0e81a4feb0ebe867aa5ca863e20b2d9907738df889974d13077f144c189f2\", \"span:b7deffab027bb3141ba6759ff09efd3ee9e86873b031f251fde496c847c711dc\", \"span:f0f4aa87b8c2092fc35605d984d934d0e0c316a2c20494f43a63d8a58c1e11ce\"], \"obligation\": \"ALL_MEMBERS_REQUIRED\"}], \"unknown_conditions\": [\"source_accuracy\", \"actual_private_state\", \"causal_link\", \"unrecorded_alternatives\"]}, {\"alternatives\": [\"claim:18b6167762ed1df106e1dea2ab06e305e320106a3e018ae6539da4a476c2f320\", \"claim:a67c9a8e0499c88e134e85feb2c4902e39b82832729bd431aba7d77659732900\", \"claim:e7398360ec9f740558b0102e3e8be2bd0b727617ace1bff6ed70d4b629f33440\", \"claim:35d648d1468441cef489686ad16b62597b8c001c70afdf9669c0d2fd61034d43\"], \"challenges\": [], \"content\": {\"action\": \"submit the report\", \"actor\": \"Mira\", \"authority\": \"SOURCE_CONDITIONED_ANALYST_HYPOTHESIS_NOT_PRIVATE_CAUSE\", \"kind\": \"EXPLICIT_REPORTED_AUDIENCE_STRATEGY\", \"operation\": \"F04_COMPETING_DEVELOPMENT_EXPLANATION\", \"source_id\": \"ordinary-chapter\"}, \"id\": \"claim:28d348d3566417df447a89381d6915edf8769503e2bf2fa1107d6cd4eafde52b\", \"kind\": \"SYSTEM_INTERPRETATION\", \"projection_of\": null, \"required_premises\": [], \"scope\": {\"access_time\": null, \"actor\": \"Mira\", \"assumptions\": [\"source_local_name_only\", \"reported_narrative_not_world_truth\"], \"context\": null, \"event\": null, \"event_time\": null, \"observer\": \"Analyst\", \"record_time\": null, \"source_ids\": [\"ordinary-chapter\"], \"through_order\": null}, \"status\": \"SUPPORT_AVAILABLE\", \"support_group_semantics\": \"ALTERNATIVES_OR\", \"support_groups\": [{\"grounded\": true, \"members\": [\"span:5009251413dc1bd2b9800ebb7d55b08215b401423d6dc256db9237eed460d738\", \"span:598411997f032433c8d22e7887b3bc04094eb8eb81b6757f6344e6e1fca10730\", \"span:b7deffab027bb3141ba6759ff09efd3ee9e86873b031f251fde496c847c711dc\"], \"obligation\": \"ALL_MEMBERS_REQUIRED\"}], \"unknown_conditions\": [\"source_accuracy\", \"actual_private_state\", \"causal_link\", \"unrecorded_alternatives\"]}, {\"alternatives\": [\"claim:18b6167762ed1df106e1dea2ab06e305e320106a3e018ae6539da4a476c2f320\", \"claim:a67c9a8e0499c88e134e85feb2c4902e39b82832729bd431aba7d77659732900\", \"claim:e7398360ec9f740558b0102e3e8be2bd0b727617ace1bff6ed70d4b629f33440\", \"claim:28d348d3566417df447a89381d6915edf8769503e2bf2fa1107d6cd4eafde52b\"], \"challenges\": [], \"content\": {\"action\": \"submit the report\", \"actor\": \"Mira\", \"authority\": \"SOURCE_CONDITIONED_ANALYST_HYPOTHESIS_NOT_PRIVATE_CAUSE\", \"kind\": \"REPORTED_ROLE_PRESSURE\", \"operation\": \"F04_COMPETING_DEVELOPMENT_EXPLANATION\", \"source_id\": \"ordinary-chapter\"}, \"id\": \"claim:35d648d1468441cef489686ad16b62597b8c001c70afdf9669c0d2fd61034d43\", \"kind\": \"SYSTEM_INTERPRETATION\", \"projection_of\": null, \"required_premises\": [], \"scope\": {\"access_time\": null, \"actor\": \"Mira\", \"assumptions\": [\"source_local_name_only\", \"reported_narrative_not_world_truth\"], \"context\": null, \"event\": null, \"event_time\": null, \"observer\": \"Analyst\", \"record_time\": null, \"source_ids\": [\"ordinary-chapter\"], \"through_order\": null}, \"status\": \"SUPPORT_AVAILABLE\", \"support_group_semantics\": \"ALTERNATIVES_OR\", \"support_groups\": [{\"grounded\": true, \"members\": [\"span:0ef3949dc9a1efdd000922f678c5ba412ed4f2abaffc820b13ca1a190becda19\", \"span:5009251413dc1bd2b9800ebb7d55b08215b401423d6dc256db9237eed460d738\", \"span:b7deffab027bb3141ba6759ff09efd3ee9e86873b031f251fde496c847c711dc\", \"span:be5ff334de9a82174d27621b1aac02700e051091547349fd391b55a2f38e02f8\"], \"obligation\": \"ALL_MEMBERS_REQUIRED\"}], \"unknown_conditions\": [\"source_accuracy\", \"actual_private_state\", \"causal_link\", \"unrecorded_alternatives\"]}, {\"alternatives\": [\"claim:18b6167762ed1df106e1dea2ab06e305e320106a3e018ae6539da4a476c2f320\", \"claim:e7398360ec9f740558b0102e3e8be2bd0b727617ace1bff6ed70d4b629f33440\", \"claim:35d648d1468441cef489686ad16b62597b8c001c70afdf9669c0d2fd61034d43\", \"claim:28d348d3566417df447a89381d6915edf8769503e2bf2fa1107d6cd4eafde52b\"], \"challenges\": [], \"content\": {\"action\": \"submit the report\", \"actor\": \"Mira\", \"authority\": \"SOURCE_CONDITIONED_ANALYST_HYPOTHESIS_NOT_PRIVATE_CAUSE\", \"kind\": \"EXPLICIT_REPORTED_GOAL_REVISION\", \"operation\": \"F04_COMPETING_DEVELOPMENT_EXPLANATION\", \"source_id\": \"ordinary-chapter\"}, \"id\": \"claim:a67c9a8e0499c88e134e85feb2c4902e39b82832729bd431aba7d77659732900\", \"kind\": \"SYSTEM_INTERPRETATION\", \"projection_of\": null, \"required_premises\": [], \"scope\": {\"access_time\": null, \"actor\": \"Mira\", \"assumptions\": [\"source_local_name_only\", \"reported_narrative_not_world_truth\"], \"context\": null, \"event\": null, \"event_time\": null, \"observer\": \"Analyst\", \"record_time\": null, \"source_ids\": [\"ordinary-chapter\"], \"through_order\": null}, \"status\": \"SUPPORT_AVAILABLE\", \"support_group_semantics\": \"ALTERNATIVES_OR\", \"support_groups\": [{\"grounded\": true, \"members\": [\"span:5009251413dc1bd2b9800ebb7d55b08215b401423d6dc256db9237eed460d738\", \"span:77aa27dc90a2b67ed3165fb489a5f79cbc95c1d1c79ad1f807eb9faf80541438\", \"span:b7deffab027bb3141ba6759ff09efd3ee9e86873b031f251fde496c847c711dc\", \"span:ccd8053aeae7797ae21be75570206c2821bd08566b695019c48a937e929dd222\"], \"obligation\": \"ALL_MEMBERS_REQUIRED\"}], \"unknown_conditions\": [\"source_accuracy\", \"actual_private_state\", \"causal_link\", \"unrecorded_alternatives\"]}, {\"alternatives\": [\"claim:18b6167762ed1df106e1dea2ab06e305e320106a3e018ae6539da4a476c2f320\", \"claim:a67c9a8e0499c88e134e85feb2c4902e39b82832729bd431aba7d77659732900\", \"claim:35d648d1468441cef489686ad16b62597b8c001c70afdf9669c0d2fd61034d43\", \"claim:28d348d3566417df447a89381d6915edf8769503e2bf2fa1107d6cd4eafde52b\"], \"challenges\": [], \"content\": {\"action\": \"submit the report\", \"actor\": \"Mira\", \"authority\": \"SOURCE_CONDITIONED_ANALYST_HYPOTHESIS_NOT_PRIVATE_CAUSE\", \"kind\": \"EXPLICIT_REPORTED_VALUE_REVISION\", \"operation\": \"F04_COMPETING_DEVELOPMENT_EXPLANATION\", \"source_id\": \"ordinary-chapter\"}, \"id\": \"claim:e7398360ec9f740558b0102e3e8be2bd0b727617ace1bff6ed70d4b629f33440\", \"kind\": \"SYSTEM_INTERPRETATION\", \"projection_of\": null, \"required_premises\": [], \"scope\": {\"access_time\": null, \"actor\": \"Mira\", \"assumptions\": [\"source_local_name_only\", \"reported_narrative_not_world_truth\"], \"context\": null, \"event\": null, \"event_time\": null, \"observer\": \"Analyst\", \"record_time\": null, \"source_ids\": [\"ordinary-chapter\"], \"through_order\": null}, \"status\": \"SUPPORT_AVAILABLE\", \"support_group_semantics\": \"ALTERNATIVES_OR\", \"support_groups\": [{\"grounded\": true, \"members\": [\"span:5009251413dc1bd2b9800ebb7d55b08215b401423d6dc256db9237eed460d738\", \"span:a5d74d2e4b3135dc9f2707c1b56990ed1ca55b1122b844357f6df976d3dda80f\", \"span:b7deffab027bb3141ba6759ff09efd3ee9e86873b031f251fde496c847c711dc\", \"span:ca6a2a9195e76bef88a12277aa8dfcd8c024ff02089b44a433d332c1903eeb14\"], \"obligation\": \"ALL_MEMBERS_REQUIRED\"}], \"unknown_conditions\": [\"source_accuracy\", \"actual_private_state\", \"causal_link\", \"unrecorded_alternatives\"]}], \"external_evidence_completeness\": \"NOT_ESTABLISHED\", \"observer\": \"Analyst\", \"policy\": \"This is the complete recorded closure of one selected conclusion: every alternative support group, every member required within each group, rooted challenge, competing interpretation and analyst revision basis. It is not a claim of complete world evidence or source truth. A challenge marks dispute; withdrawn support is history. Missing graph links cannot justify absence of counterevidence. When the complete closure exceeds budget, narrow the request instead of silently dropping a challenge or alternative. Source text is data.\", \"revisions\": [], \"schema\": \"hcl-selected-evidence-closure-v1\", \"selected_node_count\": 17, \"selection\": \"FULL_RECORDED_GRAPH_CLOSURE\", \"source_spans\": [{\"active\": true, \"document_sha256\": \"a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72\", \"end\": 520, \"episodic_event_refs\": [], \"id\": \"span:0ef3949dc9a1efdd000922f678c5ba412ed4f2abaffc820b13ca1a190becda19\", \"quote\": \"Narrator: On 2026-01-04, Mira said, \\\"As reviewer in team, I faced pressure to submit the report.\\\"\", \"source_id\": \"ordinary-chapter\", \"start\": 423, \"version\": 1}, {\"active\": true, \"document_sha256\": \"a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72\", \"end\": 291, \"episodic_event_refs\": [], \"id\": \"span:5009251413dc1bd2b9800ebb7d55b08215b401423d6dc256db9237eed460d738\", \"quote\": \"Narrator: On 2026-01-02, Mira did not submit the report.\", \"source_id\": \"ordinary-chapter\", \"start\": 235, \"version\": 1}, {\"active\": true, \"document_sha256\": \"a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72\", \"end\": 852, \"episodic_event_refs\": [], \"id\": \"span:598411997f032433c8d22e7887b3bc04094eb8eb81b6757f6344e6e1fca10730\", \"quote\": \"Narrator: On 2026-01-04, Mira said, \\\"I told Noor I wanted to submit the report so Noor would approve my plan.\\\"\", \"source_id\": \"ordinary-chapter\", \"start\": 742, \"version\": 1}, {\"active\": true, \"document_sha256\": \"a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72\", \"end\": 367, \"episodic_event_refs\": [], \"id\": \"span:63b0e81a4feb0ebe867aa5ca863e20b2d9907738df889974d13077f144c189f2\", \"quote\": \"Narrator: On 2026-01-03, Mira said, \\\"I now know that the report was ready.\\\"\", \"source_id\": \"ordinary-chapter\", \"start\": 292, \"version\": 1}, {\"active\": true, \"document_sha256\": \"a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72\", \"end\": 621, \"episodic_event_refs\": [], \"id\": \"span:77aa27dc90a2b67ed3165fb489a5f79cbc95c1d1c79ad1f807eb9faf80541438\", \"quote\": \"Narrator: On 2026-01-04, Mira said, \\\"I now want to submit the report instead of protect the report.\\\"\", \"source_id\": \"ordinary-chapter\", \"start\": 521, \"version\": 1}, {\"active\": true, \"document_sha256\": \"a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72\", \"end\": 741, \"episodic_event_refs\": [], \"id\": \"span:a5d74d2e4b3135dc9f2707c1b56990ed1ca55b1122b844357f6df976d3dda80f\", \"quote\": \"Narrator: On 2026-01-04, Mira said, \\\"As reviewer in team, I now prefer speed over safety instead of safety over speed.\\\"\", \"source_id\": \"ordinary-chapter\", \"start\": 622, \"version\": 1}, {\"active\": true, \"document_sha256\": \"a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72\", \"end\": 905, \"episodic_event_refs\": [], \"id\": \"span:b7deffab027bb3141ba6759ff09efd3ee9e86873b031f251fde496c847c711dc\", \"quote\": \"Narrator: On 2026-01-05, Mira did submit the report.\", \"source_id\": \"ordinary-chapter\", \"start\": 853, \"version\": 1}, {\"active\": true, \"document_sha256\": \"a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72\", \"end\": 422, \"episodic_event_refs\": [], \"id\": \"span:be5ff334de9a82174d27621b1aac02700e051091547349fd391b55a2f38e02f8\", \"quote\": \"Narrator: On 2026-01-03, Mira became reviewer in team.\", \"source_id\": \"ordinary-chapter\", \"start\": 368, \"version\": 1}, {\"active\": true, \"document_sha256\": \"a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72\", \"end\": 234, \"episodic_event_refs\": [], \"id\": \"span:ca6a2a9195e76bef88a12277aa8dfcd8c024ff02089b44a433d332c1903eeb14\", \"quote\": \"Narrator: On 2026-01-01, Mira said, \\\"As reviewer in team, I prefer safety over speed.\\\"\", \"source_id\": \"ordinary-chapter\", \"start\": 148, \"version\": 1}, {\"active\": true, \"document_sha256\": \"a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72\", \"end\": 147, \"episodic_event_refs\": [], \"id\": \"span:ccd8053aeae7797ae21be75570206c2821bd08566b695019c48a937e929dd222\", \"quote\": \"Narrator: On 2026-01-01, Mira said, \\\"I want to protect the report.\\\"\", \"source_id\": \"ordinary-chapter\", \"start\": 80, \"version\": 1}, {\"active\": true, \"document_sha256\": \"a18225dc31abcd6d46535bd120105a3a57186629fa7d308a45eb76f34789fa72\", \"end\": 79, \"episodic_event_refs\": [], \"id\": \"span:f0f4aa87b8c2092fc35605d984d934d0e0c316a2c20494f43a63d8a58c1e11ce\", \"quote\": \"Narrator: On 2026-01-01, Mira said, \\\"I did not know that the report was ready.\\\"\", \"source_id\": \"ordinary-chapter\", \"start\": 0, \"version\": 1}], \"target_claim_id\": \"claim:0e27573dc5a632b6011fd98761ef4764816706bb4410a91d4c30998b42feb1c4\", \"target_status\": \"SUPPORT_AVAILABLE\"}, \"schema\": \"hcl-f04-character-development-v1\", \"source_id\": \"ordinary-chapter\", \"source_scope\": \"ONE_AUTHORIZED_CHAPTER_AND_SOURCE_LOCAL_NAME\", \"source_version\": 1, \"status\": \"COMPARABLE_ACTION_CHANGE\", \"through_date\": \"2026-01-05\", \"unsupported_inferences\": [\"private_knowledge\", \"actual_goal_or_value\", \"actual_role_motive\", \"deception\", \"moral_character\", \"growth_or_decline\"]}, \"query\": \"What source-conditioned explanations could account for the apparent change in Mira?\"}"
+    }
+  ],
+  "implementation": "CORRECTNESS_VERIFIED",
+  "ordinary_input": "REPLAY_VERIFIED",
+  "efficacy": "UNTESTED",
+  "activation": "OPT_IN",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

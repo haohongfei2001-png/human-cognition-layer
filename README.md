@@ -2,7 +2,7 @@
 
 HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息、信念、视角和有来源的心理证据。**基础模型可以直接做好时，直接回答。** 简单提示足够时不调用复杂机制；精确计算采用通用工具；专门认知机制只保留得到增量证据支持的部分。
 
-当前阶段：**HCL Long-Horizon Capability Growth — Wave F**。Waves A–E 已完成正确性构建：共享证据/语义入口、动态认识状态、目标与行动解释、社会交流和多方协作。E01–E02 已联结有领域边界的关系证据与失败/修复解释；E03 已区分自我叙述、他人评价、角色要求、行为和个人认同；E04 已支持情境变化下的选择比较与条件偏序；E05 已联结关系、身份、角色与价值的证据更新；F01 已支持带权限与原文回连的事件检索；F02 已区分故事时间、回忆、披露与记录时间并追溯原文；F03 已支持选定结论的完整已记录证据闭包与局部重算；当前唯一 `NEXT_READY` 为 **F04 competing character development explanations**。这些实现仍为 correctness/replay evidence，独立效力验证安排在 G-ARCH 之后；历史 dispositions 不升级。实时状态见 [STATUS.md](STATUS.md)，长期架构与 41 包路线见 [Master Plan](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)，执行队列见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
+当前阶段：**HCL Long-Horizon Capability Growth — Wave F**。Waves A–E 已完成正确性构建：共享证据/语义入口、动态认识状态、目标与行动解释、社会交流和多方协作。E01–E02 已联结有领域边界的关系证据与失败/修复解释；E03 已区分自我叙述、他人评价、角色要求、行为和个人认同；E04 已支持情境变化下的选择比较与条件偏序；E05 已联结关系、身份、角色与价值的证据更新；F01 已支持带权限与原文回连的事件检索；F02 已区分故事时间、回忆、披露与记录时间并追溯原文；F03 已支持选定结论的完整已记录证据闭包与局部重算；F04 已能为表面行为变化保留有来源的竞争解释，同时拒绝无证据的动机或道德人格推断；当前唯一 `NEXT_READY` 为 **F05 long narrative integration**。这些实现仍为 correctness/replay evidence，独立效力验证安排在 G-ARCH 之后；历史 dispositions 不升级。实时状态见 [STATUS.md](STATUS.md)，长期架构与 41 包路线见 [Master Plan](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)，执行队列见 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)。
 
 - [普通人物问题与叙事入口](docs/HCL_V1_PERSON_QUESTION.md)：有来源、时间、访问与局部修订边界；单次回答，默认零提取调用。
 - [夜间 source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)：实际能力变化、证据限制、两个 deferred 冻结包。
