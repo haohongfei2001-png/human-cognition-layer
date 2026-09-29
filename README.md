@@ -9,6 +9,7 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 - [I02 第二来源 C/P/G 校准结案](reports/HCL_I02_MORAL_CPG_CALIBRATION_CLOSURE.md)：Moral Stories 首条开发样本完成四次调用；G-map v2 接口通过，但比较臂遗漏明确的安全目标，语义资格未通过。授权关闭，不调用 H/H-new，不声称独立效力。
 - [I02 来源优先语义评分 v1](docs/HCL_I02_SEMANTIC_SCORER.md)：冻结通用评审维度、原文引文校验与盲评计分接口；不自动判定语义真伪，也不代表 HCL 答案能力或独立效力提升。
 - [I02 校准来源暴露边界](docs/HCL_I02_SOURCE_LINEAGE.md)：已校准的 MuSR、Moral Stories 作者／模板／写作体系不能换行号进入独立确认集；第三来源的元数据审查也没有产生合格确认案例。
+- [I02 通用比较臂 v3](docs/HCL_I02_CPG_V3_REPAIR.md)：P/G 的来源清单把明确目标与未知的伤害意图分开；保留 C 和共同输入。仅无 provider 正确性，尚未确认模型表现。
 - [夜间 source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)：实际能力变化、证据限制、两个 deferred 冻结包。
 - [可执行 capability registry](docs/HCL_V1_CAPABILITY_REGISTRY.md)：核心、可选结构、通用工具、停用研究资产。
 - [Router / context / answer API](docs/HCL_V1_COGNITION_ROUTER.md)：确定性最小路由、有访问和时间边界的上下文、单次底座模型调用。
