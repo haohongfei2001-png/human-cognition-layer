@@ -19,6 +19,13 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [G workspace v4 boundary](docs/HCL_I02_G_WORKSPACE_V4_BOUNDARY.md)
+rejects undeclared per-quote fields, duplicate JSON keys and malformed or
+oversized map entries before the generic comparator's final model input. A
+synthetic ordinary-input witness preserves the same C/P/G prompts, complete
+source, final answer contract and G call accounting. This is provider-free
+comparison correctness only; no model competence or HCL efficacy claim.
+
 The [narrative source boundary screen](docs/HCL_I02_NARRATIVE_SOURCE_BOUNDARY.md)
 found that a preselected NarrativeQA story's 30 native questions were mostly
 short fact retrieval; eight native reference answers and bounded story content
