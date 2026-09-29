@@ -19,6 +19,13 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [v8 strong comparator candidate](docs/HCL_I02_STRONG_COMPARATOR_V8.md)
+now has an executable, identical native thinking configuration for C/P/G and
+an exact `source_id`/`quote` citation instruction for each final answer arm.
+This addresses a scorer-shape defect and the prior non-thinking C weakness in
+provider-free preparation only. No v8 model semantics, independent case or
+HCL answer gain is qualified; all historical prompts and runs remain frozen.
+
 The [v4 exact-content exposure guard](docs/HCL_I02_EXACT_SOURCE_FINGERPRINT_V4.md)
 now rejects the consumed KPU case even under a mirror URL and renamed lineage
 IDs, while composing the unchanged v3 rights/privacy and historical checks.
