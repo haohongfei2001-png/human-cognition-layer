@@ -23,8 +23,7 @@ verified private-belief truth. All four questions sharing this narrative are
 one calibration source group, never four independent samples. The source-only
 [parser and gold firewall](../scripts/i02_musr_calibration.py) pins bytes,
 enforces grouping, and strips native answer fields from the prepared arm input;
-its synthetic tests do not certify the dataset. No MuSR row has been sent to
-a provider.
+its synthetic tests do not certify the dataset. At the time of this initial screen no MuSR row had been sent to a provider. The later first-group C/P/G calibration is exposed and closed; see [its immutable closure](../reports/HCL_I02_CPG_CALIBRATION_CLOSURE.md).
 
 Historical HCL-authored cases and previously consumed benchmark rows remain
 development evidence. A source being independently published does not prove
