@@ -62,3 +62,5 @@ from .character_development import CharacterDevelopmentComparison, compare_chara
 from .long_narrative import NarrativeCorpus, NarrativeReplay, BranchComparison
 
 from .normative_premises import NormativePremiseWorkspace, NormativePreparation
+
+from .responsibility_composition import ResponsibilityCompositionWorkspace, ResponsibilityComposition
