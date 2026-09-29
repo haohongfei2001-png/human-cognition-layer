@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01–H05 CORRECTNESS_VERIFIED / G-ARCH NEXT_READY**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01–H05 CORRECTNESS_VERIFIED / G-ARCH STRUCTURALLY_READY / LIVE ENTRY NEXT_READY**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -346,7 +346,9 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **H05 — CORRECTNESS_VERIFIED:** one difficult question now selects a source-local B03/C03/D04/E05/F03/H04 chain and F05 cross-chapter reported conflict, preserving unresolved cross-source identity and record-time revision. A simple narrator question selects H01 direct lookup. Eight targeted tests, 100-event pressure case, ordinary witness and exact final input; see `docs/HCL_WAVE_H05.md`.
 
-**G-ARCH — NEXT_READY:** assess every canonical maturity criterion after H05. The earlier E03 live adapter smoke failed source anchoring, so no operational pass may be claimed from it. Repair a concrete input or architecture deficiency before `OPERATIONALLY_READY`, or remain structurally ready with an explicit limitation. The gate then controls Serious Independent Evaluation.
+**G-ARCH — STRUCTURALLY_READY / OPERATIONAL_INPUT_UNVERIFIED:** the post-H05 matrix is in `docs/HCL_G_ARCH_PRELIM_ASSESSMENT.md`. Unique exact source quotes now correct bad supplied offsets with a recorded source-derived span; provider-free replay of the closed E03 raw response reaches the final-input path. E03 remains failed. A fresh one-shot DeepSeek Flash operational smoke is frozen with two calls maximum, zero retries and a USD 0.04 hard cap; no trigger exists yet.
+
+**G-ARCH live entry — NEXT_READY:** certify this repair/package on exact main, create the sole trigger, review raw extraction/final receipt source-first, then decide the operational gate. Only a successful real ordinary extraction and final call can satisfy this requirement; subsequent serious independent evaluation remains post-G-ARCH.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -507,12 +509,12 @@ defect is.
 
 - Current wave: **Wave H — Hard Human Cognition Integration**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: G_ARCH_ARCHITECTURE_MATURITY_ASSESSMENT**
+- **NEXT_READY: G_ARCH_ONE_SHOT_LIVE_ENTRY_CONFIRMATION**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **G-ARCH**, then continue through the dependency-safe queue
+Work should continue at **G-ARCH live entry confirmation**, then continue through the dependency-safe queue
 without asking for a new decision after every package.

@@ -1,0 +1,53 @@
+name: HCL G-ARCH One-Time Ordinary Entry Functional Smoke
+on:
+  push:
+    branches: [main]
+    paths: ['.github/HCL_G_ARCH_ENTRY_TRIGGER']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: hcl-g-arch-entry-once
+  cancel-in-progress: false
+jobs:
+  functional:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: First and unique main trigger
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test -f .github/HCL_G_ARCH_ENTRY_TRIGGER
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-g-arch-entry-once.yml/runs?event=push&per_page=100" > /tmp/hcl-g-arch-entry-runs.json
+          python - <<'PY'
+          import json,os
+          runs=json.load(open('/tmp/hcl-g-arch-entry-runs.json'))['workflow_runs']
+          assert len(runs)==1 and str(runs[0]['id'])==os.environ['GITHUB_RUN_ID'], 'unique first trigger required'
+          PY
+      - name: Install existing runtime dependency
+        run: python -m pip install openai==2.14.0
+      - name: Provider-free package and historical response preflight
+        run: python scripts/run_g_arch_entry_once.py --preflight --output g-arch-entry-preflight.json
+      - name: Execute capped two-call pipeline once
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          HCL_G_ARCH_ENTRY_AUTHORIZED: ONE_BOUNDED_DEVELOPMENT_SMOKE
+        run: python scripts/run_g_arch_entry_once.py --execute --output g-arch-entry-run.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-g-arch-entry-${{ github.run_id }}
+          path: |
+            g-arch-entry-preflight.json
+            g-arch-entry-run.json
+            reports/HCL_G_ARCH_ENTRY_PACKAGE.json
+          if-no-files-found: error

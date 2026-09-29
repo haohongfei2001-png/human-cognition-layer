@@ -101,6 +101,36 @@ class SemanticEntryTests(unittest.TestCase):
             dict(candidates=[dict(proposal, start=15)]))))
         self.assertEqual(r.diagnostics[0]['quotation'], 'EXACT')
 
+    def test_unique_exact_quote_repairs_provider_offset_without_semantic_promotion(self):
+        text = 'Mira said, "I believe the gate is open."\nNoor said, "I am unsure whether the gate is open."'
+        quote = 'Noor said, "I am unsure whether the gate is open."'
+        source = AuthorizedText('s', text)
+        submitted = dict(source_id='s', quote=quote, start=0, kind='event',
+            content=dict(speaker_surface='Noor', utterance='I am unsure whether the gate is open.'))
+        core = EvidenceCore()
+        result = prepare_semantics('What was reported?', (source,), core=core,
+            backend=Replay(json.dumps(dict(candidates=[submitted]))))
+        anchored = core.claims[result.candidate_ids[0]].content
+        repair = anchored['source_derived_anchor']
+        self.assertEqual(repair['submitted_start'], 0)
+        self.assertEqual(repair['derived_start'], text.index(quote))
+        self.assertEqual(core.spans[anchored['source_span_id']].quote, quote)
+        self.assertEqual(result.diagnostics[0]['semantic_support'], 'BOUNDED_LITERAL_FORM')
+        self.assertEqual(result.raw_response, json.dumps(dict(candidates=[submitted])))
+        # Exact quotation and offset do not certify arbitrary mental content.
+        unsupported = dict(submitted, kind='proposition', content=dict(private_motive='deception'))
+        other = prepare_semantics('Why?', (source,), backend=Replay(
+            json.dumps(dict(candidates=[unsupported]))))
+        self.assertEqual(other.diagnostics[0]['semantic_support'], 'UNVERIFIED_CANDIDATE')
+
+    def test_offset_repair_refuses_duplicate_or_near_quote(self):
+        source = AuthorizedText('s', 'Mira said yes. Mira said yes.')
+        for quote in ('Mira said yes.', 'Mira said yess.'):
+            with self.assertRaises(ValueError):
+                prepare_semantics('What?', (source,), backend=Replay(json.dumps(dict(
+                    candidates=[dict(source_id='s', quote=quote, start=1,
+                        kind='event', content={})]))))
+
     def test_hidden_sources_filtered_before_backend_and_final_state(self):
         public = AuthorizedText('public', 'Mira said, "I believe the gate is open."', permitted_observers=('Noor',))
         secret = AuthorizedText('secret', 'Private secret of Kai', permitted_observers=('Mira',))
