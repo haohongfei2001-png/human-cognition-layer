@@ -81,9 +81,9 @@ class CognitiveExecutionGraph(RelationshipDynamicsWorkspace):
         interaction = prepare_misunderstanding(self,
             f"Explain {recipient}'s expectation of {actor}'s promise to {action} "
             f"in {context}, using {term} for {item}.", source_id=source_id, observer=observer)
-        relation = prepare_relationship_dynamics(self,
-            f"Explain how {recipient}'s view of {actor} relates to the {role} role "
-            f"and preferences in {context} after the failure to {action}.",
+        relation_query = (f"Explain how {recipient}'s view of {actor} relates to the {role} role "
+            f"and preferences in {context} after the failure to {action}.")
+        relation = prepare_relationship_dynamics(self, relation_query,
             source_id=source_id, observer=observer)
         matching = [p for p in plan.payload['plans'] if p['action'] == action]
         if len(matching) != 1 or interaction.payload.get('status') == 'SYSTEM_INSUFFICIENT' or not relation.claim_ids:
@@ -134,6 +134,7 @@ class CognitiveExecutionGraph(RelationshipDynamicsWorkspace):
                 role_evaluation=relation.payload['role_evaluation'],
                 dependency_claim_id=relation_id, changed='NOT_INFERRED'))
         payload = dict(question=question, actor=actor, recipient=recipient, action=action,
+            context=context, role=role, relationship_query=relation_query,
             source_id=source_id, source_version=self._versions[source_id], nodes=nodes,
             edges=[dict(from_claim=plan_id, to_claim=interaction_id, kind='CONDITIONAL_PLAN_EXPECTATION'),
                 dict(from_claim=interaction_id, to_claim=relation_id, kind='CONDITIONAL_EXPECTATION_RELATIONSHIP')],
