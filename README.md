@@ -4,6 +4,7 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 
 当前阶段：**Serious Independent Evaluation，I02 来源及比较臂资格审查**。Waves A–H 完成 provider-free 正确性构建；G-ARCH 经一次有界真实普通输入运行，通过架构与入口准备门槛，原始回执及限制见 [source-first closure](reports/HCL_G_ARCH_ENTRY_CLOSURE.md) 和 [gate](docs/HCL_G_ARCH_GATE.md)。I02 的[普通叙事信息状态 v2 接入](docs/HCL_I02_INFORMATION_STATE_V2_REPAIR.md)已在公开校准案例上通过无 provider 的 H/H-new treatment-presence 和公平性检查；C/P/G 一次性校准则因 G-map 格式失败结案。这尚未证明独立泛化或强模型增益。当前按 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md) 和 [I01 evaluation contract](docs/HCL_I01_EVALUATION_CONTRACT.md) 做独立来源与公平比较资格审查。LongMemEval 保持封存，leaderboard 尚未启动。
 
+- [I02 ACL C/P/G v8 一次性开发校准](docs/HCL_I02_ACL_ETHICS_CPG_V8_PROTOCOL.md)：原生推理四次以内、零重试、独立 USD 0.24 上限；仅冻结与无 provider preflight，尚未触发或得到模型证据。
 - [I02 ACL 教学摘要开发来源](docs/HCL_I02_ACL_ETHICS_DEVELOPMENT_SOURCE.md)：固定外部作者 CC BY 合成摘要及来源优先义务；C/P/G 普通输入无 provider 门禁通过，H 实际直通；整套作者／模板不能算未见确认。
 - [I02 强比较器 v8 候选](docs/HCL_I02_STRONG_COMPARATOR_V8.md)：C/P/G 统一显式原生推理设置，最终引文结构与冻结评分器一致；仅 provider-free，仍未通过模型语义或独立来源资格。
 - [I02 受限覆盖报告](docs/HCL_I02_RESTRICTED_COVERAGE_REPORT.md)：可执行校验器如实报告少于四任务／三来源体系的目录，同时保留完整成熟度门槛；不开放 provider 输入或声称效力。

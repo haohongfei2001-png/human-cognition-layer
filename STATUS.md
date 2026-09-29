@@ -19,6 +19,14 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [ACL C/P/G v8 one-use protocol](docs/HCL_I02_ACL_ETHICS_CPG_V8_PROTOCOL.md)
+is now frozen provider-free on the exact development-only abstract: DeepSeek
+Pro native thinking-high, four calls maximum, zero retries and a separate
+USD 0.24 cap. The all-phase peak reservation passes before transport; raw
+request/response and usage receipts are required. No trigger has been created,
+no v8 provider call has been made and no comparator or HCL efficacy result is
+claimed. H/H-new remain excluded by the observed direct route.
+
 An [ACL Ethics Tutorial synthetic abstract](docs/HCL_I02_ACL_ETHICS_DEVELOPMENT_SOURCE.md)
 is now pinned as one exact rights-reviewed **C/P/G development** input with
 four pre-output source-first obligations. The provider-free receipt verifies
