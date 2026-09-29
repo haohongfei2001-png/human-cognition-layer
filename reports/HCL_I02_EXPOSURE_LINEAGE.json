@@ -1,0 +1,46 @@
+{
+  "schema": "hcl-i02-exposure-lineage-v1",
+  "scope": "KNOWN_I02_PROVIDER_EXPOSED_CALIBRATION_SYSTEMS_NOT_EXHAUSTIVE_HISTORICAL_AUDIT",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "exposed_systems": [
+    {
+      "id": "musr-author-team-object-placement",
+      "writing_system_id": "TAUR_MUSR_OBJECT_PLACEMENT_GENERATED_NARRATIVE",
+      "author_id": "TAUR_LAB_MUSR",
+      "template_id": "MUSR_OBJECT_PLACEMENT",
+      "source_group_id": "bd0aacf84d7bc7d7fd1fa4114dd05b17aa0c5f2c433d452dfd01b06f7b562d96",
+      "calibration_run_id": 36561878435,
+      "closure": "reports/HCL_I02_CPG_CALIBRATION_CLOSURE.md"
+    },
+    {
+      "id": "moral-stories-author-team-full",
+      "writing_system_id": "moral-stories-crowdsourced-seven-sentence",
+      "author_id": "moral-stories-original-authors",
+      "template_id": "moral-stories-full-alternative-paths",
+      "source_group_id": "37TD41K0AI7TYQGNUFTSCYCNT25SCN",
+      "calibration_run_id": 36566850936,
+      "closure": "reports/HCL_I02_MORAL_CPG_CALIBRATION_CLOSURE.md"
+    }
+  ],
+  "screened_not_qualified": [
+    {
+      "id": "hendrycks-ethics-author-team-hf",
+      "status": "SEARCH_SNIPPET_EXPOSED_TASK_FIT_UNAUDITED_NOT_CONFIRMATION_QUALIFIED",
+      "writing_system_id": "hendrycks-ethics-short-scenario-system",
+      "author_id": "hendrycks-ethics-original-authors",
+      "template_id": "hendrycks-ethics-commonsense-scenarios",
+      "distribution_commit": "b8b47c589f8bee77175b8648e5497278b68da48a",
+      "card_sha256": "29f0e8b49953f7599366c446b3e89efb90d08faf73a7e2dfb04ef39595e41a34",
+      "publisher_card_url": "https://huggingface.co/datasets/hendrycks/ethics",
+      "author_repo_url": "https://github.com/hendrycks/ethics",
+      "author_repo_license_url": "https://github.com/hendrycks/ethics/blob/master/LICENSE",
+      "license_metadata": "MIT_ON_AUTHOR_REPOSITORY_AND_HF_CARD_SCOPE_REVIEW_PENDING",
+      "content_rows_seen_at_least": 1,
+      "exposure_note": "A public search-result snippet displayed one scenario text; its row identity is unknown. No data file was opened. Treat this source system as calibration-screened rather than unseen confirmation.",
+      "native_labels_opened": 0,
+      "item_level_source_validity": "NOT_AUDITED",
+      "task_fit": "UNDETERMINED",
+      "model_input_allowed": false
+    }
+  ]
+}
