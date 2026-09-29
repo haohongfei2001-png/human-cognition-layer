@@ -19,6 +19,14 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [restricted catalog coverage report](docs/HCL_I02_RESTRICTED_COVERAGE_REPORT.md)
+now audits valid partial I02 catalogs while retaining the full four-family,
+three-system structural maturity gate. It rejects unfair inputs and split
+leakage even for partial coverage, prints no source text, and grants no
+provider, source-rights or efficacy qualification. This is an executable
+evaluation-interface repair, not an HCL answer gain; zero independent sources
+are yet qualified.
+
 The [FairytaleQA section-span check](docs/HCL_I02_FAIRYTALE_SECTION_SPAN.md)
 shows its six summary questions each reference only two nearby sections
 of the 43-section story (five spans of one, one span of two), with no
