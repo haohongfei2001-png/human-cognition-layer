@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G / G01–G05 CORRECTNESS_VERIFIED / G-HC NEXT_READY**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01 NEXT_READY**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -322,7 +322,7 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **F05 — CORRECTNESS_VERIFIED:** branch-specific, authorized multi-chapter replay preserves opposed source reports, three time cutoffs, historical corrections and F04 development comparisons. Eleven tests, ordinary positive witness and 12-actor/120-event provider-free scale smoke; see `docs/HCL_WAVE_F05.md`. The scale check is not comprehension evidence.
 
-## 5g. Current Wave G — Moral, Conceptual and Philosophical Integration
+## 5g. Completed Wave G — Moral, Conceptual and Philosophical Integration
 
 **G01 — CORRECTNESS_VERIFIED:** ordinary user and source text produces typed but conditional premise candidates, distinguishing user-supplied, explicitly analyst-adopted, source-reported institution and character origins. Only completely parsed adopted/user conditions can bridge to CG03. Eleven tests and positive witness; see `docs/HCL_WAVE_G01.md`.
 
@@ -334,7 +334,9 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **G05 — CORRECTNESS_VERIFIED:** ordinary independent one-factor questions now compare fact-premise, local concept-reading and explicit value-premise changes across G04 source arguments, retaining structurally unaffected paths and unresolved truth. Twelve tests and ordinary witness; see `docs/HCL_WAVE_G05.md`.
 
-**G-HC — NEXT_READY:** certify substantive A–G multi-operation composition, bounded high-order mental state distinctions, ordinary-input connectivity, long-horizon source handling, local revision, and absence of known severe actor/source/time/access defects before entering Wave H.
+**G-HC — PASS_PROVIDER_FREE:** same ordinary scene composes G03 concept reading, G04 source argument and G05 sensitivity across a source correction while an unrelated argument remains semantically stable. B01/B02 mental-object distinctions, F05 long-source replay, ACL/time refusal and budget failure were reviewed; live efficacy remains unverified and the earlier E03 live-entry anchor refusal is preserved. See `docs/HCL_G_HC_GATE.md`.
+
+**H01 — NEXT_READY:** query-directed planner selects people, temporal scope, disagreement and the smallest sufficient operations under explicit depth/branch/call budgets. Ordinary single-fact questions must take the simple path; complex questions must select needed operations without module stacking.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
@@ -493,14 +495,14 @@ defect is.
 
 ## 13. Current execution fact
 
-- Current wave: **Wave G — Moral, Conceptual and Philosophical Integration**
+- Current wave: **Wave H — Hard Human Cognition Integration**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: G_HC_HARD_COGNITION_READY_GATE**
+- **NEXT_READY: H01_QUERY_DIRECTED_PLANNER**
 - Provider work: **BOUNDED NORMAL DEVELOPMENT UNDER LATEST OWNER DEFAULT AUTHORIZATION**
 - Long-horizon live-entry calls: **1 extraction / 0 final / 0 retries**; peak-rated **USD 0.00076710**, estimated **USD 0.00038355**, invoice unavailable. FAILED/CLOSED; no rerun, workflow disabled. [Receipt/closure](reports/HCL_ORDINARY_ENTRY_FUNCTIONAL_CLOSURE.md).
 - Independent qualification active: **DEFERRED UNTIL POST-G-ARCH SERIOUS EVALUATION**
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
-Work should continue at **G-HC**, then continue through the dependency-safe queue
+Work should continue at **H01**, then continue through the dependency-safe queue
 without asking for a new decision after every package.
