@@ -350,7 +350,7 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **I01 — FROZEN:** `docs/HCL_I01_EVALUATION_CONTRACT.md` and `reports/HCL_I01_EVALUATION_FREEZE.json` fix the main architecture surface, question, four families, fair C/P/G/H input/output shape, source independence split, attribution obligations and no-outcome boundary. The provider-free guard rejects authored/unauthorized/unequal/oracle candidates; six tests witness it. No cognition gain or independent efficacy is claimed.
 
-**I02 — NEXT_READY:** qualify actual independent source provenance, license and access plus competent C/P/G comparators. Freeze model IDs, prompt/scaffold implementations, scorer rubric, sample size and cost/latency bands before confirmation. Do not view confirmation outcomes to tune H.
+**I02 — NEXT_READY:** qualify actual independent source provenance, license and access plus competent C/P/G comparators. Freeze model IDs, prompt/scaffold implementations, scorer rubric, sample size and cost/latency bands before confirmation. Do not view confirmation outcomes to tune H. C/P/G provider-free comparator candidates now preserve identical ordinary inputs and answer fields; G has a separately charged generic source-map step and original source in final input. They remain unqualified until source, strong-model and calibration checks pass; see `docs/HCL_I02_COMPARATOR_PREPARATION.md`.
 
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
