@@ -19,13 +19,28 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [v3 native long-input interface closure](reports/HCL_I02_SOURCE_HOLDER_V3_CALIBRATION_CLOSURE.md)
+is **INCONCLUSIVE_INTERFACE_CONTRACT_FAILURE**, run 36708265295 on main
+`881628ff37411e934e87409acaa776bb419b9845`: complete JSON/finish stop and literal
+source anchors, but all five expectation fields were prose, failing the strict
+STATE/QUALIFY/AVOID enum. **1 call / 0 retries**, usage/clock estimate
+**USD 0.02909676**, peak rated USD 0.05819352; invoice unverified. Raw receipt,
+usage, hashes and diagnostics preserved; grant zero and trigger disabled, no rerun.
+The future-only typed v4 prompt contract clarifies fields without coercing old
+answers or changing the frozen receiver. 33 provider-free tests pass; v4 live
+behavior unverified. Authored repetitive fixture does not establish literary
+semantics, independent review, comparator qualification or H efficacy.
+Unique next task: distinct protected source/task qualification using the typed
+contract and source/rights/exposure gates; do not rerun consumed fixtures or
+Gilman/James. I02 remains NEXT_READY; historical dispositions unchanged.
+
 The [v3 long-input interface calibration freeze](docs/HCL_I02_SOURCE_HOLDER_V3_LONG_CALIBRATION.md)
 uses a **new authored 81,243-character / 804-line fixture**, complete ordinary
 question/input and native high thinking with line references. Expected literal
 anchors remain outside model input. **1 call / 0 retries / new USD 0.38 cap**,
 16,384 output tokens, conservative peak reservation USD 0.36697320; no ceiling
 escalation, old-source reopening or historical budget transfer. 0 calls at freeze.
-Thirty provider-free tests pass. After exact-head/main CI execute once and close;
+Thirty provider-free tests passed at freeze; the closure above supersedes readiness.
 any result is interface-only, never independent source, literary semantics,
 old-source failure repair, comparator competence or H efficacy proof.
 
@@ -40,8 +55,9 @@ source and binds source/question hashes while resolving deterministic line range
 locally, rather than making the reviewer reproduce exact quotes. 25 correctness/
 boundary/revision/composition/historical checks pass; the 80,958-character long
 witness reconstructs exactly. No live-capacity/cost/semantic improvement is proved.
-Unique next task: calibrate v3 on a new interface question without reopening
-Gilman or James, then continue I02 independent source/comparator qualification.
+Historical next task was the v3 calibration; it has now been consumed and closed
+as above. Continue distinct I02 source/comparator qualification without reopening
+Gilman or James.
 No new H capability/efficacy, confirmation qualification or historical disposition change.
 
 The [complete James development narrative audit freeze](docs/HCL_I02_JAMES_DEVELOPMENT_SOURCE_AUDIT.md)
