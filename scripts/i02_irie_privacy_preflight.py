@@ -5,6 +5,7 @@ from pathlib import Path
 from hcl.v1 import CognitionRequest, HCLCognitionLayer
 from scripts.serious_eval_arms_v8 import prepare_primary_arms_v8, prepare_generic_final_v8
 from scripts.serious_eval_contract import runtime_digest
+from scripts.serious_eval_semantic_score import validate_manifest, load_rubric
 
 SOURCE = Path('reports/HCL_I02_IRIE_PRIVACY_DEVELOPMENT_SOURCE.json')
 OBLIGATIONS = Path('reports/HCL_I02_IRIE_PRIVACY_SOURCE_FIRST_OBLIGATIONS.json')
@@ -26,10 +27,9 @@ def audit():
             item['expert_analysis_in_input'] or item['expert_analysis_displayed'] or
             item['longmemeval'] != 'SEALED_NOT_ACCESSED'):
         raise ValueError('source, rights or exposure boundary drift')
-    if (rubric['source_sha256'] != SOURCE_HASH or rubric['question_sha256'] != QUESTION_HASH or
-            rubric['frozen_before_provider_output'] is not True or rubric['expert_answer_used'] or
-            len(rubric['obligations']) != 3 or rubric['maximum_score'] != 6 or
-            any(not q or q not in source for o in rubric['obligations'] for q in o['source_quotes'])):
+    validate_manifest(rubric, load_rubric())
+    if (rubric['case_id'] != sid or rubric['sources'] != [dict(source_id=sid, text=source)] or
+            rubric['arm_output_seen'] is not False or len(rubric['obligations']) != 3):
         raise ValueError('source-first obligations drift')
     arms = prepare_primary_arms_v8(question, sid, source)
     expected = [dict(source_id=sid, text=source)]
@@ -38,7 +38,7 @@ def audit():
         if payload['question'] != question or payload['sources'] != expected:
             raise ValueError('ordinary input inequality')
     mock = json.dumps(dict(source_index=[dict(id='e1',source_id=sid,
-        quote=rubric['obligations'][0]['source_quotes'][0])],
+        quote=rubric['obligations'][0]['source_quotes'][0]['quote'])],
         relations=[],answer_plan=[],open_questions=[]))
     final = prepare_generic_final_v8(arms, mock)
     payload = json.loads(final[-1]['content'])

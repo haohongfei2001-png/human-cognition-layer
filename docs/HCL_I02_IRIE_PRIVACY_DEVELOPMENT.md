@@ -33,7 +33,8 @@ nonsharing; explain a conditional source-compatible mechanism or explicit narrow
 privacy concept; distinguish possible risks from observed harm and consent facts.
 Alternative explicit definitions are acceptable. No automatic moral truth or
 expert-answer matching is imposed. Exact quotations are mechanically checked;
-semantic judgments remain human/developer diagnostics unless independently reviewed.
+the unchanged I02 scorer assigns dimension weights 2/2/3 (maximum 7). Semantic
+judgments remain human/developer diagnostics unless independently reviewed.
 
 ## Ordinary input, fairness and treatment
 

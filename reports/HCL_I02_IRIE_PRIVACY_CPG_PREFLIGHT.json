@@ -1,7 +1,7 @@
 {
   "all_phase_peak_reservation_usd": 0.22278432,
   "longmemeval": "SEALED_NOT_ACCESSED",
-  "package_sha256": "f4980e30cb5e58191150f72963aa8e66a436f2e0f98dd9da0b963f333ee37faa",
+  "package_sha256": "204d6fc23dc13596f5fd8441992099e58f8a0a0887447aeca814fdb7fbe87495",
   "phase_bounds": {
     "C": {
       "input_token_bound": 13994,
@@ -40,7 +40,7 @@
     "h_specialized_treatment_present": false,
     "independent_confirmation_qualified": false,
     "longmemeval": "SEALED_NOT_ACCESSED",
-    "obligations_file_sha256": "fcf8077ea25fc75b6f3efbaeb97bf52d7e5ccb431b88d281e694cd652e9d5776",
+    "obligations_file_sha256": "2bd3b244f695c3eaffcdd4e4c3900f26333008a49c33d8849c9958ea4ad6f897",
     "provider_calls": 0,
     "provider_spend_usd": 0,
     "question_sha256": "6930600c3c5dc2cdede17f2a8186620648482b82f90d1b548e303e3c8a1e4191",

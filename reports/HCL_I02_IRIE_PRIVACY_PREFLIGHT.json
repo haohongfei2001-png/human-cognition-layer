@@ -1,7 +1,7 @@
 {
   "schema": "hcl-i02-irie-privacy-preflight-v1",
   "source_file_sha256": "af7b64c90885b864a017e1e8e584e9ec459ad62a63d5f9c3a8663f48e5da6784",
-  "obligations_file_sha256": "fcf8077ea25fc75b6f3efbaeb97bf52d7e5ccb431b88d281e694cd652e9d5776",
+  "obligations_file_sha256": "2bd3b244f695c3eaffcdd4e4c3900f26333008a49c33d8849c9958ea4ad6f897",
   "source_sha256": "84630476faa359a964021d4d4615a708627c1bbc052a92c3ac11e4c774330791",
   "question_sha256": "6930600c3c5dc2cdede17f2a8186620648482b82f90d1b548e303e3c8a1e4191",
   "source_valid": true,

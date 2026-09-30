@@ -57,7 +57,7 @@ def preflight(package):
     gate=audit()
     item=json.loads(SOURCE.read_text())
     arms=prepare_primary_arms_v8(item['ordinary_question'],item['source_id'],item['source_text'])
-    quote=json.loads(OBLIGATIONS.read_text())['obligations'][0]['source_quotes'][0]
+    quote=json.loads(OBLIGATIONS.read_text())['obligations'][0]['source_quotes'][0]['quote']
     mock=json.dumps(dict(source_index=[dict(id='e1',source_id=item['source_id'],quote=quote)],
         relations=[],answer_plan=[],open_questions=[]))
     messages={phase:arms[phase] for phase in ('C','P','G_map')}
