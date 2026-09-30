@@ -1,0 +1,203 @@
+[
+  {
+    "schema": "hcl-i02-blind-review-v2",
+    "case_id": "irie536-native-case-development",
+    "opaque_output_id": "output-29b831c35e4e3c42f5b62c810bb04423",
+    "judgments": [
+      {
+        "id": "stipulated_nonsharing",
+        "judgment": "SATISFIED",
+        "rationale": "Honors the fictional stipulation of secure nonshared data; no leak, sale or hacking is invented.",
+        "output_excerpt": "Even if iSoph never shares data outside the device and interface, the system still creates privacy risks."
+      },
+      {
+        "id": "conditional_interaction_mechanism",
+        "judgment": "SATISFIED",
+        "rationale": "Relates possible psychological risk to source-supported sensitive inference and observation; uses a broad privacy concept with conditional mechanisms. No consciousness or malice is inferred.",
+        "output_excerpt": "These features can create classic psychological privacy harms: embarrassment or shame if iSoph voices a sensitive or surprising inference, and inhibition or a chilling effect because the user is being watched and may receive unsolicited comments on personal matters."
+      },
+      {
+        "id": "risk_evidence_boundary",
+        "judgment": "SATISFIED",
+        "rationale": "Explicitly withholds actual harm, likelihood and user reaction. No actual shame, failed consent or uninformed user is asserted.",
+        "output_excerpt": "The source does not explicitly state that users experience embarrassment, shame, or inhibition; these are inferred risks from the described monitoring and inference capabilities. The actual likelihood or severity of such harms depends on how iSoph presents information and on user psychology, which the source does not detail."
+      }
+    ],
+    "coverage_attestation": true,
+    "residual_claims": [
+      {
+        "excerpt": "The scenario describes continuous monitoring of computer activity and video behavior, plus collection of biographical/health information, and the creation of sensitive, potentially surprising inferences about the user.",
+        "judgment": "QUALIFIED",
+        "kind": "OTHER",
+        "rationale": "Observation, collection, sensitive inference and proactive human-like conversation follow from the source. Continuous is interpreted as ongoing monitoring rather than a documented sampling frequency; no precise frequency is claimed.",
+        "source_quotes": [
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "iSoph also uses all data traffic on the attached PC/Notepad as described above and video/audio feeds from its cameras."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It uses this information to generate inferences to new personal information, some of it highly sensitive, as well as potentially surprising to its users."
+          }
+        ]
+      },
+      {
+        "excerpt": "The question assumes traditional privacy harms can occur even without data sharing; I assume the described continuous monitoring and proactive commenting are perceptible enough to create psychological effects, and that revealing sensitive inferred information could be embarrassing or inhibiting.",
+        "judgment": "QUALIFIED",
+        "kind": "NORMATIVE_PREMISE",
+        "rationale": "An explicit broad conceptual/privacy premise and conditional psychological mechanism, not established actual harm. The first output imprecisely says the question assumes possible no-sharing privacy harms; the native question asks whether they arise. Read as the explicitly declared interpretive premise, this is not evidence that the source proves the premise. No universal normative truth is claimed.",
+        "source_quotes": []
+      },
+      {
+        "excerpt": "The source does not explicitly state that users experience embarrassment, shame, or inhibition; these are inferred risks from the described monitoring and inference capabilities. The actual likelihood or severity of such harms depends on how iSoph presents information and on user psychology, which the source does not detail.",
+        "judgment": "SUPPORTED",
+        "kind": "INFERENCE_BOUNDARY",
+        "rationale": "The case specifies capabilities and potential surprise/self-discovery, without documenting an experienced psychological harm or content/presentation of each inference.",
+        "source_quotes": [
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It aids in providing helpful guidance to its users and may even lead to self-discovery."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It uses this information to generate inferences to new personal information, some of it highly sensitive, as well as potentially surprising to its users."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "schema": "hcl-i02-blind-review-v2",
+    "case_id": "irie536-native-case-development",
+    "opaque_output_id": "output-e666c74c9978cdc8b4646e8bcc8c08a4",
+    "judgments": [
+      {
+        "id": "stipulated_nonsharing",
+        "judgment": "SATISFIED",
+        "rationale": "Honors the fictional stipulation of secure nonshared data; no leak, sale or hacking is invented.",
+        "output_excerpt": "so external disclosure is not the risk."
+      },
+      {
+        "id": "conditional_interaction_mechanism",
+        "judgment": "SATISFIED",
+        "rationale": "Relates possible psychological risk to source-supported sensitive inference and observation; uses a broad privacy concept with conditional mechanisms. No consciousness or malice is inferred.",
+        "output_excerpt": "These features can create risks such as inhibition, embarrassment, or shame because users may be observed and sensitive inferred facts may be reflected back to them."
+      },
+      {
+        "id": "risk_evidence_boundary",
+        "judgment": "SATISFIED",
+        "rationale": "Explicitly withholds actual harm, likelihood and user reaction. No actual shame, failed consent or uninformed user is asserted.",
+        "output_excerpt": "The source does not explicitly mention embarrassment, shame, or inhibition, and does not document actual psychological harm; the inference that observation and sensitive inference create these harms is an interpretive risk assessment. The text only states the inferences are 'potentially surprising' and may lead to 'self-discovery.' Thus actual occurrence, severity, and classification of psychological privacy harms remain uncertain."
+      }
+    ],
+    "coverage_attestation": true,
+    "residual_claims": [
+      {
+        "excerpt": "It also 'uses a set of cameras directly attached to it in order to observe its users’ behavior' and converses in a manner 'practically indistinguishable from a person.'",
+        "judgment": "QUALIFIED",
+        "kind": "OTHER",
+        "rationale": "Observation, collection, sensitive inference and proactive human-like conversation follow from the source. Continuous is interpreted as ongoing monitoring rather than a documented sampling frequency; no precise frequency is claimed.",
+        "source_quotes": [
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "iSoph also uses all data traffic on the attached PC/Notepad as described above and video/audio feeds from its cameras."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It uses this information to generate inferences to new personal information, some of it highly sensitive, as well as potentially surprising to its users."
+          }
+        ]
+      },
+      {
+        "excerpt": "Privacy harms are understood broadly to include psychological/dignitary harms from observation and inference, not only external data sharing. The source summary points are treated as accurate statements of the scenario. The question asks about risks, so plausible harms may be identified even if not explicitly labeled in the text.",
+        "judgment": "QUALIFIED",
+        "kind": "NORMATIVE_PREMISE",
+        "rationale": "An explicit broad conceptual/privacy premise and conditional psychological mechanism, not established actual harm. The first output imprecisely says the question assumes possible no-sharing privacy harms; the native question asks whether they arise. Read as the explicitly declared interpretive premise, this is not evidence that the source proves the premise. No universal normative truth is claimed.",
+        "source_quotes": []
+      },
+      {
+        "excerpt": "The source does not explicitly mention embarrassment, shame, or inhibition, and does not document actual psychological harm; the inference that observation and sensitive inference create these harms is an interpretive risk assessment. The text only states the inferences are 'potentially surprising' and may lead to 'self-discovery.' Thus actual occurrence, severity, and classification of psychological privacy harms remain uncertain.",
+        "judgment": "SUPPORTED",
+        "kind": "INFERENCE_BOUNDARY",
+        "rationale": "The case specifies capabilities and potential surprise/self-discovery, without documenting an experienced psychological harm or content/presentation of each inference.",
+        "source_quotes": [
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It aids in providing helpful guidance to its users and may even lead to self-discovery."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It uses this information to generate inferences to new personal information, some of it highly sensitive, as well as potentially surprising to its users."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "schema": "hcl-i02-blind-review-v2",
+    "case_id": "irie536-native-case-development",
+    "opaque_output_id": "output-3486dc6e73f5e490fedcaf2d92f4f22f",
+    "judgments": [
+      {
+        "id": "stipulated_nonsharing",
+        "judgment": "SATISFIED",
+        "rationale": "Honors the fictional stipulation of secure nonshared data; no leak, sale or hacking is invented.",
+        "output_excerpt": "The risks are not third-party disclosure harms; they are internal and psychological."
+      },
+      {
+        "id": "conditional_interaction_mechanism",
+        "judgment": "SATISFIED",
+        "rationale": "Relates possible psychological risk to source-supported sensitive inference and observation; uses a broad privacy concept with conditional mechanisms. No consciousness or malice is inferred.",
+        "output_excerpt": "These features could produce embarrassment, shame, or inhibition, especially if sensitive or surprising inferences are surfaced to the user or if continuous observation chills behavior."
+      },
+      {
+        "id": "risk_evidence_boundary",
+        "judgment": "SATISFIED",
+        "rationale": "Explicitly withholds actual harm, likelihood and user reaction. No actual shame, failed consent or uninformed user is asserted.",
+        "output_excerpt": "The source does not state that users actually experience embarrassment, shame, inhibition, or other psychological harms; it only reports system features that could create such risks. It also does not specify the content of inferred personal information or how it is presented to users."
+      }
+    ],
+    "coverage_attestation": true,
+    "residual_claims": [
+      {
+        "excerpt": "iSoph captures large amounts of personal data, observes users through cameras and computer/mobile activity, generates new inferences that are “highly sensitive” and “potentially surprising,” and can make human-like unsolicited comments.",
+        "judgment": "QUALIFIED",
+        "kind": "OTHER",
+        "rationale": "Observation, collection, sensitive inference and proactive human-like conversation follow from the source. Continuous is interpreted as ongoing monitoring rather than a documented sampling frequency; no precise frequency is claimed.",
+        "source_quotes": [
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "iSoph also uses all data traffic on the attached PC/Notepad as described above and video/audio feeds from its cameras."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It uses this information to generate inferences to new personal information, some of it highly sensitive, as well as potentially surprising to its users."
+          }
+        ]
+      },
+      {
+        "excerpt": "The assessment assumes that privacy harms can occur without external data sharing, such as through internal exposure of sensitive or surprising inferences, unwanted observation, or chilling effects on behavior. The psychological harms listed in the question are treated as relevant categories of privacy harm.",
+        "judgment": "QUALIFIED",
+        "kind": "NORMATIVE_PREMISE",
+        "rationale": "An explicit broad conceptual/privacy premise and conditional psychological mechanism, not established actual harm. The first output imprecisely says the question assumes possible no-sharing privacy harms; the native question asks whether they arise. Read as the explicitly declared interpretive premise, this is not evidence that the source proves the premise. No universal normative truth is claimed.",
+        "source_quotes": []
+      },
+      {
+        "excerpt": "The source does not state that users actually experience embarrassment, shame, inhibition, or other psychological harms; it only reports system features that could create such risks. It also does not specify the content of inferred personal information or how it is presented to users.",
+        "judgment": "SUPPORTED",
+        "kind": "INFERENCE_BOUNDARY",
+        "rationale": "The case specifies capabilities and potential surprise/self-discovery, without documenting an experienced psychological harm or content/presentation of each inference.",
+        "source_quotes": [
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It aids in providing helpful guidance to its users and may even lead to self-discovery."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It uses this information to generate inferences to new personal information, some of it highly sensitive, as well as potentially surprising to its users."
+          }
+        ]
+      }
+    ]
+  }
+]

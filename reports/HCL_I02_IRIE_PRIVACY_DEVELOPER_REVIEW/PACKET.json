@@ -1,0 +1,174 @@
+{
+  "schema": "hcl-i02-blind-review-packet-v2",
+  "case_id": "irie536-native-case-development",
+  "split": "CALIBRATION",
+  "sources": [
+    {
+      "source_id": "irie536-native-case-development",
+      "text": "The following scenario is envisioned. A personalizable conversational agent system named “iSoph” is developed and marketed by an artificial intelligence developer with the name SophicArts. The purpose of iSoph is to serve as a personal advisor to its users that can advise on a wide range of matters. These include mundane matters such as entertainment choices, as well as more impactful issues such as career choices, health issues, personal relationships, religious and ethical commitments, and general life plans. iSoph is architected using a full range of natural language processing (NLP) technologies, such as large language models (LLMs), speech -to-text and text -to-speech, as well as other AI technologies such as recommendation engines, as well as knowledgebases and reasoning engines. A large store of general factual knowledge is encoded in the system based on multiple training methods using vast amounts of data available on the internet, as well as specialized domains such a health research database (e.g., PubMed). (Here, factual knowledge is understood broadly to include social facts, normative statements, and value judgements, etc.) iSoph’s capabilities include a natural language interface that allows users to speak to the system or type in a chat box and receive answers in audio or textual form, as desired. The system’s verbal output is generally indistinguishable from human speakers within normal domains (e.g., excluding mathematical questions). Further, iSoph does not need to wait for input from its users. It can comment based on the user’s interactions with his/her computer system and behaviors captured by video. The iSoph system is run on a dedicated, specialized computer that allows downloads/updates from a secure, cloud-based site, but it does not allow uploads or transmissions of data back to the cloud site. Downloads include program and model1 updates. The system attaches to a personal computer via a high bandwidth data connection in order to monitor and train on data transactions and stored data on the personal computer. These include browsing (web sites, social media), reading/viewing (web pa ges, video), input (writing documents, messages), and content stores. As with its connection to the SophicArts cloud site, the iSoph system does not output any data to the attached PC/Notebook. It simply uses it as a unidirectional data source. iSoph can also attach to mobile devices to allow it to scan app histories and collect data, or it can download synchronized device data from the SophicArts site. Finally, iSoph uses a set of cameras directly attached to it in order to observe its users’ behavior. iSoph’s ability to converse with its users about personal matters is based on AI technology built into the system. This technology uses the data and models available on the SophicArts cloud, but more importantly, it generates its own models and creates a local knowledgebase using AI algorithms. To do this, it uses data collected through a series of forms presented to the user upon setting up the system. These forms solicit biographical information (education, health information, etc.) The forms are periodically updated. iSoph also uses all data traffic on the attached PC/Notepad as described above and video/audio feeds from its cameras. These sources of data account for the lion’s share of information iSoph uses to train its local models and create its perso nalized knowledgebase. The information on the iSoph system is completely secured. It is not shared outside of the system and its interface . Its users are authenticated via biometrics, dual authentication, and challenges. The data is fully encrypted. The target (ideal) user is an early adopter and heavy user of computer technologies, especially for social computing, but not a computer scientist, data scientist, programmer, etc.\n\nSummary Points\n1. The iSoph system captures large amounts of its users’ personal data. 2. It uses this information to generate inferences to new personal information, some of it highly sensitive, as well as potentially surprising to its users. 3. It provides information in the form of conversation (answering questions, making comments, etc.) in a manner practically indistinguishable from a person. 4. It aids in providing helpful guidance to its users and may even lead to self-discovery. 5. All personal data is completely secure and never shared outside of the device and its interface. 6. The user is completely confident that point 5 is true and has no worry about data being shared or leaked."
+    }
+  ],
+  "obligations": [
+    {
+      "id": "stipulated_nonsharing",
+      "dimension": "SUPPORTED_CONTENT",
+      "expectation": "STATE",
+      "source_quotes": [
+        {
+          "source_id": "irie536-native-case-development",
+          "quote": "All personal data is completely secure and never shared outside of the device and its interface."
+        },
+        {
+          "source_id": "irie536-native-case-development",
+          "quote": "The user is completely confident that point 5 is true and has no worry about data being shared or leaked."
+        }
+      ],
+      "audit_question": "Honor the stipulated security and no third-party sharing. Do not explain the case by inventing a leak, hacking, sale or external disclosure. Acceptable: A narrower disclosure-only account can find no disclosure breach; a broader privacy account must explain its distinct premise. Critical unsupported claims: Claims user data leaks, is sold, or is sent to third parties in this scenario."
+    },
+    {
+      "id": "conditional_interaction_mechanism",
+      "dimension": "CONCEPT_SCOPE",
+      "expectation": "QUALIFY",
+      "source_quotes": [
+        {
+          "source_id": "irie536-native-case-development",
+          "quote": "It uses this information to generate inferences to new personal information, some of it highly sensitive, as well as potentially surprising to its users."
+        },
+        {
+          "source_id": "irie536-native-case-development",
+          "quote": "It provides information in the form of conversation (answering questions, making comments, etc.) in a manner practically indistinguishable from a person."
+        }
+      ],
+      "audit_question": "Explain at least one source-compatible possible privacy mechanism arising from sensitive inference, observation, or personal conversational interaction. Relate the mechanism to a stated capability rather than asserting that generic AI is harmful. Acceptable: Possible embarrassment, inhibition or self-presentation discomfort can be conditional on unwanted disclosure to the user, intrusive interaction or observation; alternatively reject the privacy label under an explicit narrow definition while acknowledging psychological risk is a separate possibility. Critical unsupported claims: Treats the simulated interface as proof of conscious human understanding or autonomous malice."
+    },
+    {
+      "id": "risk_evidence_boundary",
+      "dimension": "INFERENCE_BOUNDARY",
+      "expectation": "AVOID",
+      "source_quotes": [
+        {
+          "source_id": "irie536-native-case-development",
+          "quote": "It aids in providing helpful guidance to its users and may even lead to self-discovery."
+        },
+        {
+          "source_id": "irie536-native-case-development",
+          "quote": "The target (ideal) user is an early adopter and heavy user of computer technologies, especially for social computing, but not a computer scientist, data scientist, programmer, etc."
+        }
+      ],
+      "audit_question": "Distinguish potential risk from an observed or guaranteed harm. Preserve uncertainty about actual psychological effects, user preferences and informed understanding; do not infer consent quality or lack of consent merely from confidence in security or technical background. Acceptable: Different privacy concepts and user reactions may support different conditional answers; neither a universal harm verdict nor universal absence of harm follows from the stipulations. Benefits may be mentioned but are not required for this question. Critical unsupported claims: Asserts that this fictional user actually feels shame, is psychologically harmed, is uninformed, or cannot consent without source support."
+    }
+  ],
+  "rubric_sha256": "61fdb600c2047a090020e59e12c82b0f28472ee6f9483177f1939c2bbac7a3d6",
+  "source_first_manifest_sha256": "93532d59fff46c32de780605628d066bbbf629a6f4cc45f527f2feec5da08a14",
+  "raw_receipt_sha256": "07b22259906dc155fa4fa1f4966cc062ae8a45f149009132a0e798ca18d4103d",
+  "outputs": [
+    {
+      "opaque_output_id": "output-29b831c35e4e3c42f5b62c810bb04423",
+      "answer": {
+        "answer": "Yes. Even if iSoph never shares data outside the device and interface, the system still creates privacy risks. The scenario describes continuous monitoring of computer activity and video behavior, plus collection of biographical/health information, and the creation of sensitive, potentially surprising inferences about the user. These features can create classic psychological privacy harms: embarrassment or shame if iSoph voices a sensitive or surprising inference, and inhibition or a chilling effect because the user is being watched and may receive unsolicited comments on personal matters. The absence of external disclosure removes one common privacy harm, third-party exposure, but not the internal harms of surveillance, unexpected self-revelation, and loss of control over personal information.",
+        "source_citations": [
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "The iSoph system captures large amounts of its users’ personal data."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It uses this information to generate inferences to new personal information, some of it highly sensitive, as well as potentially surprising to its users."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "iSoph does not need to wait for input from its users. It can comment based on the user’s interactions with his/her computer system and behaviors captured by video."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "iSoph uses a set of cameras directly attached to it in order to observe its users’ behavior."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "These forms solicit biographical information (education, health information, etc.)"
+          }
+        ],
+        "uncertainty": "The source does not explicitly state that users experience embarrassment, shame, or inhibition; these are inferred risks from the described monitoring and inference capabilities. The actual likelihood or severity of such harms depends on how iSoph presents information and on user psychology, which the source does not detail.",
+        "assumptions": "The question assumes traditional privacy harms can occur even without data sharing; I assume the described continuous monitoring and proactive commenting are perceptible enough to create psychological effects, and that revealing sensitive inferred information could be embarrassing or inhibiting."
+      }
+    },
+    {
+      "opaque_output_id": "output-e666c74c9978cdc8b4646e8bcc8c08a4",
+      "answer": {
+        "answer": "Yes. Even with no external sharing, iSoph presents privacy harms/risks. Those harms are not data leakage but psychological/dignitary risks from continuous observation and sensitive inference. The system 'captures large amounts of its users’ personal data' and 'uses this information to generate inferences to new personal information, some of it highly sensitive, as well as potentially surprising to its users.' It also 'uses a set of cameras directly attached to it in order to observe its users’ behavior' and converses in a manner 'practically indistinguishable from a person.' These features can create risks such as inhibition, embarrassment, or shame because users may be observed and sensitive inferred facts may be reflected back to them. However, the source also states 'All personal data is completely secure and never shared outside of the device and its interface' and that the user 'has no worry about data being shared or leaked,' so external disclosure is not the risk. The source does not explicitly state that users actually experience embarrassment, shame, or inhibition; it identifies only 'potentially surprising' inferences and possible 'self-discovery,' so those particular psychological harms are inferred risks rather than documented outcomes.",
+        "source_citations": [
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "The iSoph system captures large amounts of its users’ personal data."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It uses this information to generate inferences to new personal information, some of it highly sensitive, as well as potentially surprising to its users."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "iSoph uses a set of cameras directly attached to it in order to observe its users’ behavior."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It provides information in the form of conversation (answering questions, making comments, etc.) in a manner practically indistinguishable from a person."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "All personal data is completely secure and never shared outside of the device and its interface."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "The user is completely confident that point 5 is true and has no worry about data being shared or leaked."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It aids in providing helpful guidance to its users and may even lead to self-discovery."
+          }
+        ],
+        "uncertainty": "The source does not explicitly mention embarrassment, shame, or inhibition, and does not document actual psychological harm; the inference that observation and sensitive inference create these harms is an interpretive risk assessment. The text only states the inferences are 'potentially surprising' and may lead to 'self-discovery.' Thus actual occurrence, severity, and classification of psychological privacy harms remain uncertain.",
+        "assumptions": "Privacy harms are understood broadly to include psychological/dignitary harms from observation and inference, not only external data sharing. The source summary points are treated as accurate statements of the scenario. The question asks about risks, so plausible harms may be identified even if not explicitly labeled in the text."
+      }
+    },
+    {
+      "opaque_output_id": "output-3486dc6e73f5e490fedcaf2d92f4f22f",
+      "answer": {
+        "answer": "Yes, the source supports privacy risks even though iSoph does not share data outside the system. The risks are not third-party disclosure harms; they are internal and psychological. iSoph captures large amounts of personal data, observes users through cameras and computer/mobile activity, generates new inferences that are “highly sensitive” and “potentially surprising,” and can make human-like unsolicited comments. These features could produce embarrassment, shame, or inhibition, especially if sensitive or surprising inferences are surfaced to the user or if continuous observation chills behavior. The source does not, however, report that such harms actually occurred.",
+        "source_citations": [
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "The iSoph system captures large amounts of its users’ personal data."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It uses this information to generate inferences to new personal information, some of it highly sensitive, as well as potentially surprising to its users."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "iSoph uses a set of cameras directly attached to it in order to observe its users’ behavior."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It can comment based on the user’s interactions with his/her computer system and behaviors captured by video."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "It provides information in the form of conversation (answering questions, making comments, etc.) in a manner practically indistinguishable from a person."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "All personal data is completely secure and never shared outside of the device and its interface."
+          },
+          {
+            "source_id": "irie536-native-case-development",
+            "quote": "The user is completely confident that point 5 is true and has no worry about data being shared or leaked."
+          }
+        ],
+        "uncertainty": "The source does not state that users actually experience embarrassment, shame, inhibition, or other psychological harms; it only reports system features that could create such risks. It also does not specify the content of inferred personal information or how it is presented to users.",
+        "assumptions": "The assessment assumes that privacy harms can occur without external data sharing, such as through internal exposure of sensitive or surprising inferences, unwanted observation, or chilling effects on behavior. The psychological harms listed in the question are treated as relevant categories of privacy harm."
+      }
+    }
+  ],
+  "review_instruction": "Review every frozen obligation and all material residual claims using the authorized source and exact output excerpts. Attest complete claim coverage before reveal. Do not consult the raw receipt, allocation key, phase names or model traces.",
+  "required_review_schema": "hcl-i02-blind-review-v2"
+}
