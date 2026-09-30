@@ -1,0 +1,36 @@
+{
+  "schema": "hcl-i02-protected-holder-provenance-v1",
+  "run_id": 36704349775,
+  "run_sha": "5d114ef3e1f0900c31337ca0a448ec7023548584",
+  "artifacts": [
+    {
+      "id": 11091402274,
+      "name": "hcl-i02-james-holder-protected-raw-36704349775",
+      "digest": "sha256:2b39c8cccf5b42468b35ce3e04b723f28d2d7526f53b9127bf5a994c2e6e8952"
+    },
+    {
+      "id": 11091327438,
+      "name": "hcl-i02-james-holder-metadata-36704349775",
+      "digest": "sha256:d6a7fa28cbdc3f8e699590bff602a9129570ae168d952f2c11b7bdde2518d0fa"
+    }
+  ],
+  "archive_path": "reports/protected/HCL_I02_JAMES_HOLDER_RAW_ARTIFACT.zip",
+  "archive_sha256": "2b39c8cccf5b42468b35ce3e04b723f28d2d7526f53b9127bf5a994c2e6e8952",
+  "raw_receipt_sha256": "da56e81f46b781fb926badfdca2b76372ec56f60cacc4c7e658563a51c7fb819",
+  "metadata_receipt_sha256": "e3207de7cdf7545e22f373842b0dddac88e78fa8c3d93f107acb676a84a2c4c6",
+  "raw_source_response_reasoning_or_quote_text_displayed": false,
+  "visibility": "ROLE_WITHHELD_RAW_CONTENT_NOT_CRYPTOGRAPHICALLY_SEALED; DEVELOPMENT_ONLY",
+  "confirmation_qualified": false,
+  "provider_calls": 1,
+  "retries": 0,
+  "conservative_reserved_usd": 0.30622679999999997,
+  "rated_peak_cost_usd": 0.09442752,
+  "estimated_actual_cost_usd": 0.04721376,
+  "actual_invoice_cost_usd": null,
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RERUN",
+  "authorization_remaining_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "archive_preservation_scope": "BINARY_AND_RAW_RECEIPT_HASH_ONLY",
+  "subsequent_control_audit": "PROVIDER_CONTROL_FIELDS_AND_TEXT_LENGTHS_ONLY; NO_SEMANTIC_TEXT_DISPLAY",
+  "source_exposure": "DEVELOPMENT_EXPOSED_BEFORE_RUN; NEVER_CONFIRMATION"
+}

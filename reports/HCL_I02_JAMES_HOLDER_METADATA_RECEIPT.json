@@ -1,0 +1,118 @@
+{
+  "actual_invoice_cost_usd": null,
+  "actual_model_id": "deepseek-v4-pro",
+  "authorization_remaining_usd": 0,
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RERUN",
+  "confirmation_qualified": false,
+  "conservative_reserved_usd": 0.30622679999999997,
+  "cpg_calls": 0,
+  "estimate_limit": "PUBLISHED_CLOCK_RATES; HOLIDAY_ADJUSTMENT_AND_INVOICE_NOT_VERIFIED",
+  "estimated_actual_cost_usd": 0.04721376,
+  "failure_type": "ValueError",
+  "h_calls": 0,
+  "hard_cap_usd": 0.32,
+  "independent_human_review": false,
+  "independent_model_family_judge": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "preflight": {
+    "input_token_bound": 182838,
+    "longmemeval": "SEALED_NOT_ACCESSED",
+    "package_sha256": "4c35efad415ba83d4b6fd76ad2007350a9183c6f25ecb0e5e907a07f9116fc3e",
+    "peak_reservation_usd": 0.30622679999999997,
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "request_sha256": "d2eada4c5b7e3f8bc1b3106401cb1b87e8e1e1481c1c900723bc772a98a8c583",
+    "schema": "hcl-i02-protected-holder-preflight-v1",
+    "source_gate": {
+      "complete_original_body": true,
+      "confirmation_qualified": false,
+      "h_entry_executed": false,
+      "history": {
+        "candidate_source_sha256": "2090d6458cd1f81d669a71a137f40a03996e99fff016c1a0c95cee77e278fe4a",
+        "checkout_head": "5d114ef3e1f0900c31337ca0a448ec7023548584",
+        "confirmation_qualified": false,
+        "longmemeval": "SEALED_NOT_ACCESSED",
+        "matches": [],
+        "schema": "hcl-i02-reachable-git-history-exposure-v1",
+        "scope": "CURRENTLY_REACHABLE_GIT_OBJECTS_NOT_DELETED_REFS_OR_MODEL_TRAINING",
+        "sealed_blob_ids_not_opened": 54,
+        "skipped_large_paths": [],
+        "skipped_nontext_blobs": 1,
+        "status": "REACHABLE_HISTORY_NO_TEXT_MATCH",
+        "unique_utf8_blobs_scanned": 2832
+      },
+      "longmemeval": "SEALED_NOT_ACCESSED",
+      "model_training_novelty": "UNKNOWN_PUBLIC_CANONICAL_ORIGINAL_WORK",
+      "native_gold_used": false,
+      "ordinary_input_sha256": "423d7cf0dffca3442dd1d556196de6271c011c901d15116dc3ea3b5073d2ff71",
+      "package_sha256": "506cb48194acdb68e294adc008d93829a9b22cde339bdec201125005565561ea",
+      "permission_scope": "DEVELOPMENT_SOURCE_HOLDER_AUDIT_ONLY_NOT_ARM_EXECUTION",
+      "provider_calls": 0,
+      "provider_spend_usd": 0,
+      "publisher_metadata": {
+        "authors": [
+          "James, Henry"
+        ],
+        "deathdates": [
+          "1916"
+        ],
+        "rights": [
+          "Public domain in the USA."
+        ],
+        "titles": [
+          "The Jolly Corner"
+        ]
+      },
+      "publisher_metadata_sha256": "fefc860212ae9459406800216a64d5d40edaf32a2d69486e3a9e785ffc4b823d",
+      "question_sha256": "483634f5740d8d3b387b36c15defa6d57390dc8febcdc3f9ba399591f2114377",
+      "raw_sha256": "c97205a1c4b5fe962e410ab09fcbb8faf3f663af15e63b59deaa5c7cbdf891d8",
+      "rights_scope": {
+        "CHINA": "AUTHOR_DIED_1916_ART23_LIFE_PLUS50_TERM_PASSED; AUTHORSHIP_INTEGRITY_RETAINED",
+        "UK": "AUTHOR_DIED_1916_LIFE_PLUS70_TERM_PASSED; NO_MODERN_EDITION_LAYOUT_CLAIM",
+        "USA": "PUBLISHER_PUBLIC_DOMAIN_DECLARATION",
+        "limits": "ORIGINAL_ENGLISH_AUTHOR_PROSE_ONLY; NO_GLOBAL_TRANSLATION_ANNOTATION_OR_MODERN_ADAPTATION_RIGHTS_CLAIM"
+      },
+      "schema": "hcl-i02-james-development-history-screen-v1",
+      "snapshot": {
+        "candidate_source_sha256": "2090d6458cd1f81d669a71a137f40a03996e99fff016c1a0c95cee77e278fe4a",
+        "confirmation_qualified": false,
+        "longmemeval": "SEALED_NOT_ACCESSED",
+        "matches": [],
+        "repository_commit": "5d114ef3e1f0900c31337ca0a448ec7023548584",
+        "schema": "hcl-i02-current-snapshot-exposure-screen-v1",
+        "scope": "EXACT_COMMIT_UTF8_TEXT_ONLY_NOT_GIT_HISTORY_OR_MODEL_TRAINING",
+        "sealed_paths_not_opened": 29,
+        "skipped_large_paths": [],
+        "skipped_nontext_paths": [
+          "reports/protected/HCL_I02_GILMAN_HOLDER_RAW_ARTIFACT.zip"
+        ],
+        "status": "TEXT_SNAPSHOT_NO_MATCH",
+        "utf8_files_scanned": 1379
+      },
+      "source_characters": 80958,
+      "source_sha256": "2090d6458cd1f81d669a71a137f40a03996e99fff016c1a0c95cee77e278fe4a",
+      "source_text_displayed": true,
+      "source_used_for_runtime_repair": false,
+      "status": "READY_FOR_DEVELOPMENT_SOURCE_HOLDER_REVIEW",
+      "task_fit": "PENDING_SOURCE_FIRST_REVIEW"
+    },
+    "source_or_quote_text_displayed": false
+  },
+  "preliminary_review": null,
+  "provider_calls": 1,
+  "rated_peak_cost_usd": 0.09442752,
+  "raw_receipt_sha256": "da56e81f46b781fb926badfdca2b76372ec56f60cacc4c7e658563a51c7fb819",
+  "raw_source_or_quote_text_displayed": false,
+  "retries": 0,
+  "run_id": "36704349775",
+  "schema": "hcl-i02-source-holder-metadata-v1",
+  "sha": "5d114ef3e1f0900c31337ca0a448ec7023548584",
+  "status": "FAILED_NO_RETRY",
+  "usage": {
+    "completion_tokens": 16384,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 22384,
+    "prompt_tokens": 22384,
+    "total_tokens": 38768
+  }
+}

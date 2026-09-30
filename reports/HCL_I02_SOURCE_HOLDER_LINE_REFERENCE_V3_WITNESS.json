@@ -1,0 +1,16 @@
+{
+  "schema": "hcl-i02-source-line-reference-long-witness-v3",
+  "source_sha256": "2090d6458cd1f81d669a71a137f40a03996e99fff016c1a0c95cee77e278fe4a",
+  "source_characters": 80958,
+  "source_lines": 1317,
+  "full_reconstruction_exact": true,
+  "question_sha256": "483634f5740d8d3b387b36c15defa6d57390dc8febcdc3f9ba399591f2114377",
+  "model_input_sha256": "e1b77d902ba9e2f929fd91ef025ad75cda0260e425419ec8d646c0a5d036c37c",
+  "source_text_or_model_semantic_review_displayed": false,
+  "source_exposure": "DEVELOPMENT_EXPOSED",
+  "live_capacity_verified": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "confirmation_qualified": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
