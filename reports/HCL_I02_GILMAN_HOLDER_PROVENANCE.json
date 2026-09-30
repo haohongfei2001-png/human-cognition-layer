@@ -1,0 +1,35 @@
+{
+  "schema": "hcl-i02-protected-holder-provenance-v1",
+  "run_id": 36698203458,
+  "run_sha": "acccfa26565e6e7a82a2be33dc0a7ff60794ffee",
+  "artifacts": [
+    {
+      "id": 11089260775,
+      "name": "hcl-i02-gilman-holder-protected-raw-36698203458",
+      "digest": "sha256:4e43720c94484bb7c4194662ca64a72533fcfa983ec7d92101b6c10ccef740de"
+    },
+    {
+      "id": 11089240802,
+      "name": "hcl-i02-gilman-holder-metadata-36698203458",
+      "digest": "sha256:df2087352d362eb30bf585742b1e257976fafda83bb6a61f63eab7066c6ad4ff"
+    }
+  ],
+  "archive_path": "reports/protected/HCL_I02_GILMAN_HOLDER_RAW_ARTIFACT.zip",
+  "archive_sha256": "4e43720c94484bb7c4194662ca64a72533fcfa983ec7d92101b6c10ccef740de",
+  "raw_receipt_sha256": "8a9f327c8a5bfa1c10460c49dd94f78172ffb538e673ea9f83afff0e94979684",
+  "metadata_receipt_sha256": "525c4c89828b46f4fa711289ed65a0c3431c9dbc9de1d1e81f462586f24e558e",
+  "raw_source_response_reasoning_or_quote_text_displayed": false,
+  "visibility": "ROLE_WITHHELD_NOT_CRYPTOGRAPHICALLY_SEALED; DO_NOT_OPEN_BEFORE_FINAL_FREEZE",
+  "confirmation_qualified": false,
+  "provider_calls": 1,
+  "retries": 0,
+  "conservative_reserved_usd": 0.13181784,
+  "rated_peak_cost_usd": 0.04445892,
+  "estimated_actual_cost_usd": 0.04445892,
+  "actual_invoice_cost_usd": null,
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RERUN",
+  "authorization_remaining_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "archive_preservation_scope": "BINARY_AND_RAW_RECEIPT_HASH_ONLY",
+  "subsequent_control_audit": "PROVIDER_CONTROL_FIELDS_AND_TEXT_LENGTHS_ONLY; NO_SEMANTIC_TEXT_DISPLAY"
+}

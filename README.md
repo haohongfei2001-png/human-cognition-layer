@@ -224,8 +224,18 @@ qualification, task difficulty and model competence remain unresolved. Zero call
 
 ### I02 protected source-holder audit freeze
 
+The [protected source-holder audit closure](reports/HCL_I02_GILMAN_HOLDER_CLOSURE.md)
+is **INCONCLUSIVE — OUTPUT_CEILING_BEFORE_JSON**: run 36698203458 made exactly
+one DeepSeek call, zero retries, exhausted 8,192 completion tokens and returned
+no final JSON. Peak rated and usage/clock estimated cost: **USD 0.04445892**;
+invoice/holiday adjustment unverified. Raw binary receipt, metadata and control-only
+provenance are preserved; the grant is zero and the trigger is closed. No H/C/P/G
+call, source semantic verdict, confirmation qualification or H efficacy follows.
+The generic future-source capacity gate is provider-free and does not authorize
+or migrate this consumed run. Continue I02 source/comparator qualification.
+
 The [one-call protected source-holder audit freeze](docs/HCL_I02_GILMAN_SOURCE_HOLDER_AUDIT.md)
-is ready for exact-head/main CI before execution. The prior main source screen
+was ready at its historical freeze; the closure above supersedes execution readiness. The prior main source screen
 found no overlaps across 2,774 reachable text blobs / 1,337 snapshot files while
 skipping sealed objects. A separately frozen **source-only** automated review
 uses existing DeepSeek, high thinking, max 8,192 output tokens, **1 call / 0 retries /
