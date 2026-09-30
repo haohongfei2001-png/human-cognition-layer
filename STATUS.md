@@ -19,6 +19,19 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [v9 complete-source comparator envelope](docs/HCL_I02_FULL_SOURCE_ARMS_V9.md)
+implements ordinary C/P/G inputs up to500,000 total UTF8 source bytes, preserving
+complete source/question/output vocabulary. Short C/P policies remain v8-identical;
+G gets bounded32-item/24k-byte generic memory, versioned quotes/relations/plans and
+full-source final input.49 provider-free checks and an authored >217k-character
+ordinary-input witness pass; native thinking retained,0 calls/spend/grants.
+Old64k comparator and H48k refusals remain explicit; no H capability, live model,
+source semantics, independent confirmation or efficacy qualification. Future paid
+packages require separate context/reservation/model/budget freeze, not this helper.
+Unique next task: independently qualify protected source/item and blinded semantic
+review across fixed I01 families before new comparator calibration; no more paid
+source swaps for already-answered interface questions or consumed-case reruns.
+
 The [complete Gaskell source/task audit closure](reports/HCL_I02_GASKELL_HOLDER_CLOSURE.md)
 is **INCONCLUSIVE_INTERFACE_REFERENCE_BOUND**, run36712494305: complete JSON,
 correct source/question hashes and categorical enums, but multiple reconstructed
@@ -30,9 +43,9 @@ character source at its48k bound; this coverage outcome is retained.
 **SIMPLIFY_REFERENCE_INTERFACE**: future provider-free v5 uses the competent G
 1500-character quote bound;43 checks pass,0 calls/live proof,old receivers unchanged.
 No source semantics, independent confirmation, comparator or H efficacy qualification.
-Unique next implementation task: versioned full-source C/P/G envelope beyond the
-inherited64k cutoff, retaining strong native reasoning, workspace/cost bounds and
-H refusal. No further paid source swap or consumed-case reopening; continue I02.
+That full-source envelope implementation is now complete provider-free (v9 above);
+semantic qualification, H refusal and source-independent evaluation remain pending.
+No further paid source swap or consumed-case reopening; continue I02.
 
 The [complete Gaskell typed source/task audit freeze](docs/HCL_I02_GASKELL_TYPED_SOURCE_AUDIT.md)
 pins **217,526 characters / four complete parts**, a new ordinary development

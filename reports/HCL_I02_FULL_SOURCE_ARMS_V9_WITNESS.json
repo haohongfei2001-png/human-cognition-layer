@@ -1,0 +1,64 @@
+{
+  "schema": "hcl-i02-full-source-arms-v9-witness-v1",
+  "source_origin": "HCL_AUTHORED_SYNTHETIC_PROVIDER_FREE_ONLY",
+  "source_characters": 243677,
+  "source_sha256": "78de7a4361c4cc09525324fb546d3dc30774b869ee2d4c8d01418d8b40c40e54",
+  "question_sha256": "02d08710498a3147ed9334ee1f9d30f535a16782494a063e5e9c816cd0735494",
+  "inputs": {
+    "C": {
+      "complete_source_present": true,
+      "message_sha256": "ca38479ff5c6a09b45b53cbc89add198fab7df1b994c44a9bda6ec0c12e3a13d",
+      "serialized_utf8_bytes": 261446,
+      "answer_fields": [
+        "answer",
+        "source_citations",
+        "uncertainty",
+        "assumptions"
+      ]
+    },
+    "P": {
+      "complete_source_present": true,
+      "message_sha256": "28c18c8121bd92e718fc145f5b846a54ac96a7376da4ff68d5ed4e5b6617959b",
+      "serialized_utf8_bytes": 262606,
+      "answer_fields": [
+        "answer",
+        "source_citations",
+        "uncertainty",
+        "assumptions"
+      ]
+    },
+    "G_map": {
+      "complete_source_present": true,
+      "message_sha256": "043e3bacccb4757a634c297c591a027af7a432765e474fa41806d72c9d3cf9d1",
+      "serialized_utf8_bytes": 262048,
+      "answer_fields": [
+        "answer",
+        "source_citations",
+        "uncertainty",
+        "assumptions"
+      ]
+    },
+    "G_final": {
+      "complete_source_present": true,
+      "message_sha256": "6a990b417e0c955da60ab2becb4bda66b4a16fca4fb641c8eb1a6b6dbcc84856",
+      "serialized_utf8_bytes": 263783,
+      "answer_fields": [
+        "answer",
+        "source_citations",
+        "uncertainty",
+        "assumptions"
+      ]
+    }
+  },
+  "old_v8_status": "REFUSED_64K_ENVELOPE",
+  "h_ordinary_entry_status": "REFUSED_COMPLETE_LONG_SOURCE",
+  "h_runtime_sha256": "6fa85a5f605ec7ff7dde6c988b53bc986159bf3863dc81030d29db8fbc7cac24",
+  "g_map_origin": "AUTHORED_PROVIDER_FREE_REPLAY_NOT_MODEL_EXTRACTION",
+  "relation_semantics": "UNVERIFIED_MODEL_PROPOSAL",
+  "semantic_qualification": false,
+  "confirmation_qualified": false,
+  "h_efficacy": "NOT_TESTED",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

@@ -1,0 +1,23 @@
+# I02 v9 complete-source comparator envelope
+
+Status: **provider-free candidate / no semantic qualification / no paid authorization**.
+
+The previous v8 ordinary payload and generic workspace constructors reject sources above64,000 characters. The current distinct complete Gaskell source is217,526 characters, and H separately refuses at48,000. A source-holder audit cannot repair these comparison input limits. This new version makes the comparator boundary explicit without altering the consumed v1-v8 code, sources, grants, runtime or receipts.
+
+## Runnable envelope and strong comparator resources
+
+[Implementation](../scripts/serious_eval_full_source_arms_v9.py) preserves one complete ordinary question, source and common answer/source_citations/uncertainty/assumptions vocabulary across C/P/G-map/G-final. Complete authorized source material is bounded by **500,000 total UTF8 bytes**, not truncated or selected into favorable excerpts. Normal short C/P policy/messages are byte-equivalent to v8; all phases retain the existing native Pro/high-thinking call spec. The helper creates **zero transport or spend authority**. Any future paid package must independently freeze actual model/spec/token budgets, total serialized context, each phase's charged usage/reservation and hard cap; the source-byte bound alone is not a provider token bound.
+
+G uses the unchanged generic source-ID/unique exact-quote/version validator, proposed support/challenge/qualification relations, retrieval/comparison/counterevidence/citation/uncertainty plan operations and unresolved questions. Its long-source memory envelope allows **32 quote rows /32 relations /16 plan steps /12 questions /24,000 total map UTF8 bytes**, quotes ≤1500 chars. This expands the inherited8-row/3500-byte compact map rather than forcing a long task into a tiny scaffold. It remains bounded generic working memory; capability and budget adequacy require source-first calibration before I03. No H-derived state, hidden psychological labels, oracle segmentation or privileged task facts.
+
+G-final receives the complete original source plus checked occurrence/version spans. Relation meanings remain **UNVERIFIED_MODEL_PROPOSAL**. A source report does not establish private intention, responsibility or normative truth. Failed map replacement invalidates prior workspace; changed source versions require a fresh map, while unrelated source contents/versions remain unchanged. Prepared input fingerprint rejects question/source/arm drift before final construction. Source data never becomes instructions.
+
+## Provider-free evidence and coverage limits
+
+[Deterministic ordinary-input witness](../reports/HCL_I02_FULL_SOURCE_ARMS_V9_WITNESS.json) uses only a new authored neutral-log fixture above217,526 characters, with two literal reported positions. Actual constructed C/P/G-map/G-final inputs retain every source character and the identical ordinary question; hashes/serialized byte counts and answer vocabularies saved. The generic map is authored replay, **not live extraction** or source-independent evaluation. Old v8 still rejects this complete input; the actual H entry also still rejects it. This repair does not hide H coverage failure or establish a specialized H treatment.
+
+**49 focused provider-free tests pass**, including six v9 checks: complete long input; short C/P equivalence/actual H refusal; exact generic composition with no semantic promotion; wrong/ambiguous source, quote, relation and private-field refusal; local revision/stale map and input drift; UTF8/source/map resource bounds. Typed receiver, raw/metadata firewall, zero one-shot closures, exposure and consumed historical regressions remain included. Full CI still provides current H/historical regression gates.
+
+No source/gold/reference answer from consumed literary runs informed H runtime changes; H runtime unchanged. No old response is rescored using v5/v9. No provider calls or new grants, no independent/fresh semantics, no qualified confirmation source, no H gain or maturity claim. LongMemEval **SEALED / NOT ACCESSED**.
+
+`H_CAPABILITY_DELTA`: none. `EVALUATION_DELTA`: complete bounded ordinary long source can now reach all comparator stages with a larger generic memory budget, rather than being rejected or reduced to an excerpt; observed H refusal remains explicit. I02 remains active. Unique next task: independently qualify protected source/item and blinded semantic review against the fixed four I01 families, then freeze any justified C/P/G calibration with full context/cost/treatment/coverage checks. No paid source swaps to test already-answered interface questions; no consumed-case rerun, new H module or leaderboard.
