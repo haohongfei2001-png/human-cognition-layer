@@ -37,6 +37,19 @@ _QUESTIONS = tuple((kind, re.compile(pattern)) for kind, pattern in (
     ('concept', rf'解释 (?P<actor>{_TERM}) 在 (?P<context>{_TERM}) 中对 (?P<item>{_TERM}) 的 (?P<term>{_TERM}) 词义[。？]?'),
 ))
 
+_READER_ARGUMENT_TASK = re.compile(
+    r'\b(?:summari[sz]e|compare|contrast)\b.{0,180}\b(?:arguments?|positions?|claims?|reasons?|objections?|repl(?:y|ies))\b'
+    r'|\bwhat\b.{0,180}\b(?:disagree|difference)\b.{0,100}\b(?:about|between)\b', re.I | re.S)
+_PRIVATE_OR_NORMATIVE_TASK = re.compile(
+    r'\b(?:belie(?:f|ve|ves)|know|knows|knew|intentions?|motives?|feel(?:s|ings?)?|'
+    r'emotions?|guilt|guilty|blame|responsib(?:le|ility)|moral|morally|ought|should)\b', re.I)
+
+
+def _reader_argument_question(query):
+    """A narrow source-level fallback, not a guess at private state or moral truth."""
+    return bool(_READER_ARGUMENT_TASK.search(query) and
+                not _PRIVATE_OR_NORMATIVE_TASK.search(query))
+
 
 def _refusal(query, narrative, mode, reason, *, max_context_chars, preserve_reader_source=True):
     """Preserve only the authorized reader source; never guess a private view."""
@@ -71,10 +84,22 @@ def _refusal(query, narrative, mode, reason, *, max_context_chars, preserve_read
 
 def _attach_source_scope(prepared, original_query, source_receipt, *, max_context_chars):
     payload = json.loads(prepared.messages[-1]['content'])
-    key = 'composed_cognition' if isinstance(prepared, ComposedAnswer) else 'cognition_context'
     scope = dict(kind='SOURCE_STATEMENT_ORDER_ONLY', through_statement=source_receipt['through_statement'],
                  calendar_time='NOT_ESTABLISHED')
     payload['query'], payload['source_order_scope'] = original_query, scope
+    if 'sources' in payload:
+        messages = (dict(role='system', content=prepared.messages[0]['content'] +
+            ' This snapshot includes only the explicitly selected source statements. '
+            'Source order is not calendar time; absent later evidence stays unknown.'),
+            dict(role='user', content=json.dumps(payload, ensure_ascii=False, sort_keys=True)))
+        if len(json.dumps(messages, ensure_ascii=False)) > max_context_chars:
+            return _refusal(original_query, '', prepared.plan.perspective_mode,
+                'source_order_context_budget_exceeded', max_context_chars=max_context_chars,
+                preserve_reader_source=False)
+        receipt = dict(prepared.preparation_receipt, source_selection=source_receipt,
+            actual_final_messages=list(messages))
+        return replace(prepared, messages=messages, preparation_receipt=receipt)
+    key = 'composed_cognition' if isinstance(prepared, ComposedAnswer) else 'cognition_context'
     context = prepared.context if isinstance(prepared, PreparedAnswer) else None
     extra = len(json.dumps(scope, ensure_ascii=False, sort_keys=True))
     exceeded = len(json.dumps(payload[key], ensure_ascii=False, sort_keys=True)) + extra > max_context_chars
@@ -204,6 +229,18 @@ def prepare_person_context(layer, query, narrative, *, perspective_mode=Perspect
         return _attach_source_scope(prepared, original_query, selection, max_context_chars=max_context_chars)
     matches = [(kind, match.groupdict()) for kind, pattern in _QUESTIONS
                if (match := pattern.fullmatch(query.strip()))]
+    if not matches and _reader_argument_question(query):
+        if perspective_mode != PerspectiveMode.READER_ANALYSIS or observer_actor is not None:
+            return _refusal(query, '', perspective_mode,
+                'reader_argument_requires_reader_view', max_context_chars=max_context_chars,
+                preserve_reader_source=False)
+        if responsibility_premises or premise_scope != 'ALL_SOURCE':
+            return _refusal(query, '', perspective_mode,
+                'reader_argument_cannot_adopt_normative_premises',
+                max_context_chars=max_context_chars, preserve_reader_source=False)
+        from .long_source_question import prepare_reader_source_comparison
+        return prepare_reader_source_comparison(query, narrative,
+            max_context_chars=max_context_chars)
     if len(matches) != 1 or matches[0][1]['actor'] == 'Narrator':
         return _refusal(query, narrative, perspective_mode, 'unsupported_or_ambiguous_question_scope',
             max_context_chars=max_context_chars)

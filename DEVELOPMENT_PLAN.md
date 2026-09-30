@@ -356,6 +356,8 @@ The [complete long-source ordinary-entry repair](docs/HCL_I02_COMPLETE_LONG_SOUR
 
 The chained v4 default-entry correction preserves an explicit caller context limit while allowing all 25 pinned, already development-exposed SQuALITY dev sources (22,559–38,795 characters) through the ordinary default entry with complete final-source coverage. Six produce no local literal candidates; zero paid calls, independent source qualification or answer-efficacy results. Continue I02 source qualification and fair comparator preparation; do not recycle the exposed SQuALITY writing system as unseen confirmation.
 
+The [chained v5 reader argument entry](docs/HCL_I02_READER_ARGUMENT_ENTRY_V5.md) accepts a bounded public source-level disagreement question and preserves the whole short source in final input, repairing a generic unsupported-scope refusal and the source-order wrapper it exposed. A preselected external-author concept case supplied development-only entry evidence: source/question are now seen by the implementer, and provider use is held pending item-level quotation rights. This is input correctness, not H-specialized treatment or answer gain. Zero calls/spend. **NEXT_READY remains I02 independent source and comparator qualification**; do not promote this development system to confirmation.
+
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
 

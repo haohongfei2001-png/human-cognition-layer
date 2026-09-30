@@ -1,0 +1,14 @@
+{
+  "schema": "hcl-i02-runtime-amendment-v5",
+  "reason": "READER_SOURCE_ARGUMENT_ENTRY",
+  "historical_i01_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "previous_hcl_runtime_sha256": "fbd854ce98d88ef3d57ce976e5a56bded548186133049b1bbbe6adb958b26b68",
+  "amended_hcl_runtime_sha256": "e0133cf7d04bdfb5b7629e88eeeb921a6cb735097024bb846520161827468829",
+  "calibration_only": true,
+  "confirmation_items_inspected": 0,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "specialized_cognition_treatment_claimed": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "boundary": "A reader-only ordinary source argument question now retains the full source and local literal anchors instead of a generic unsupported-scope refusal. Private or normative questions remain refused; this does not establish HCL-specific cognition treatment or answer efficacy."
+}

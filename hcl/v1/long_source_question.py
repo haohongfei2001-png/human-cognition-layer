@@ -24,13 +24,12 @@ _POLICY = (
 )
 
 
-def prepare_long_source_context(query, source_text, *, source_id='ordinary-source',
-                                max_context_chars=64000):
-    """Prepare one complete 16k–48k source without model extraction or truncation."""
+def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
+                            min_source_chars, method):
     if (not isinstance(query, str) or not query.strip() or len(query) > 8000 or
-            not isinstance(source_text, str) or not 16000 < len(source_text) <= 48000 or
+            not isinstance(source_text, str) or not min_source_chars < len(source_text) <= 48000 or
             not isinstance(source_id, str) or not source_id or len(source_id) > 128 or
-            type(max_context_chars) is not int or not 20000 <= max_context_chars <= 128000):
+            type(max_context_chars) is not int or not 512 <= max_context_chars <= 128000):
         raise ValueError('bounded complete long source, question and context required')
     semantic = prepare_semantics(query, (AuthorizedText(source_id, source_text),))
     if semantic.backend_calls:
@@ -40,7 +39,11 @@ def prepare_long_source_context(query, source_text, *, source_id='ordinary-sourc
     payload = dict(query=query, sources=source, cognitive_candidates=candidates,
                    scope=asdict(semantic.scope),
                    candidate_status='LITERAL_SOURCE_CANDIDATES_NOT_PRIVATE_STATE')
-    messages = (dict(role='system', content=_POLICY),
+    policy = _POLICY + (' Compare only source-reported public claims and reasons. '
+        'A disagreement is a comparison of reported positions, not proof that '
+        'either position is true or a claim about either person\'s private state.'
+        if method == 'reader_source_argument_comparison_v1' else '')
+    messages = (dict(role='system', content=policy),
                 dict(role='user', content=json.dumps(payload, ensure_ascii=False, sort_keys=True)))
     if len(json.dumps(messages, ensure_ascii=False)) > max_context_chars:
         raise ValueError('complete long source exceeds final context budget')
@@ -50,10 +53,25 @@ def prepare_long_source_context(query, source_text, *, source_id='ordinary-sourc
                          'evidence_bounded', {'evidence': 'complete long source with literal anchors'},
                          CostClass.LOW, max_context_chars=max_context_chars,
                          perspective_mode=PerspectiveMode.READER_ANALYSIS)
-    receipt = dict(method='complete_long_source_local_evidence_v1',
+    receipt = dict(method=method,
                    source_id=source_id, source_sha256=hashlib.sha256(source_text.encode()).hexdigest(),
                    source_chars=len(source_text), candidate_count=len(candidates),
                    semantic_status=semantic.backend_status, extraction_provider_calls=0,
                    answer_provider_calls=1, specialized_cognition_treatment=False,
                    actual_final_messages=list(messages), longmemeval='SEALED_NOT_ACCESSED')
     return PreparedAnswer(plan, None, messages, receipt)
+
+
+def prepare_long_source_context(query, source_text, *, source_id='ordinary-source',
+                                max_context_chars=64000):
+    """Prepare one complete 16k–48k source without model extraction or truncation."""
+    return _prepare_source_context(query, source_text, source_id=source_id,
+        max_context_chars=max_context_chars, min_source_chars=16000,
+        method='complete_long_source_local_evidence_v1')
+
+
+def prepare_reader_source_comparison(query, source_text, *, max_context_chars=48000):
+    """Preserve ordinary prose for reader-level argument comparison only."""
+    return _prepare_source_context(query, source_text, source_id='ordinary-source',
+        max_context_chars=max_context_chars, min_source_chars=0,
+        method='reader_source_argument_comparison_v1')

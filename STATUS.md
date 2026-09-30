@@ -19,6 +19,17 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [I02 v5 reader argument entry](docs/HCL_I02_READER_ARGUMENT_ENTRY_V5.md)
+repairs an ordinary source-level disagreement question that previously entered
+a generic unsupported-scope refusal. The complete short source and query now
+reach final input, with local literal anchors when present; a statement-prefix
+wrapper bug found by the new path was repaired. This is provider-free input and
+evidence preparation, **not answer quality or specialized HCL efficacy**. A
+pinned independent-author open textbook case exposed during development shows
+the before/after entry change but is ineligible for unseen confirmation; its
+third-party quotation rights remain under review and it was not sent to a
+provider. Runtime v5 is chained to historical v4. Zero calls/spend.
+
 The [I02 v4 default-entry correction](docs/HCL_I02_COMPLETE_LONG_SOURCE_ENTRY.md)
 passes the full authorized source into final input for all 25 pinned,
 development-exposed SQuALITY dev stories without an explicit context override.

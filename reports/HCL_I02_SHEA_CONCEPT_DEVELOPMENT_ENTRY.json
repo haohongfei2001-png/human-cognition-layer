@@ -1,0 +1,31 @@
+{
+  "after_method": "reader_source_argument_comparison_v1",
+  "answer_quality_qualified": false,
+  "before_failure": "unsupported_or_ambiguous_question_scope",
+  "before_method": "bounded_ordinary_question_refusal",
+  "candidate_count": 0,
+  "confirmation_qualified": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "native_item_review": "DEVELOPMENT_EXPOSED_NOT_CONFIRMATION",
+  "native_question_count": 5,
+  "native_question_ordinal": 3,
+  "provider_calls": 0,
+  "provider_input_allowed": false,
+  "provider_spend_usd": 0,
+  "question_complete_in_final_input": true,
+  "question_sha256": "9a426a4eab2763b52a2ca09b57942665eac9083c59057ee13edb95f6d4a8892a",
+  "runtime_sha256": "e0133cf7d04bdfb5b7629e88eeeb921a6cb735097024bb846520161827468829",
+  "schema": "hcl-i02-shea-concept-development-entry-v1",
+  "source_chars": 4543,
+  "source_complete_in_final_input": true,
+  "source_html_sha256": "fd71952183ba87a7940fa9c46e8d14e0e5e16629d3f5122967cabee54bc688fb",
+  "source_repository_commit": "d4e3083647e97ed2d4bde094690aa921e1351029",
+  "source_sections": [
+    "the-lovelace-objection",
+    "turings-reply"
+  ],
+  "source_sha256": "713d52bc38e2dff67dd91c1580acbe1ad1236596a06e053aba4eaca2aca03bad",
+  "source_system_id": "brendan-shea-computing-concepts-v2-case-studies",
+  "specialized_cognition_treatment": false,
+  "third_party_quote_rights": "REQUIRES_ITEM_LEVEL_REVIEW_BEFORE_PROVIDER_INPUT"
+}
