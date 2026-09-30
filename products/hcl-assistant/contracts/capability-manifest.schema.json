@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HCL Assistant product capability manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "capabilities"],
+  "properties": {
+    "schema_version": {"const":"1.0"},
+    "capabilities": {"type":"array", "minItems":1, "items":{"$ref":"#/$defs/capability"}}
+  },
+  "$defs": {
+    "strings": {"type":"array","items":{"type":"string","minLength":1},"uniqueItems":true},
+    "capability": {
+      "type":"object", "additionalProperties":false,
+      "required":["capability_id","contract_version","supported_input","language","planned_languages","scope","output_objects","limitations","runtime_implementation","i06_disposition","product_activation_policy","evidence_status"],
+      "properties": {
+        "capability_id":{"type":"string","pattern":"^[a-z][a-z0-9_]+$"},
+        "contract_version":{"const":"1.0"},
+        "supported_input":{"$ref":"#/$defs/strings"},
+        "language":{"$ref":"#/$defs/strings"},
+        "planned_languages":{"$ref":"#/$defs/strings"},
+        "scope":{"type":"string","minLength":1},
+        "output_objects":{"$ref":"#/$defs/strings"},
+        "limitations":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},
+        "runtime_implementation":{"type":["object","null"],"required":["artifact_digest","interface_version","implementation_id"],"properties":{"artifact_digest":{"type":"string"},"interface_version":{"type":"string"},"implementation_id":{"type":"string"}}},
+        "i06_disposition":{"enum":["PENDING_I06","RETAIN","SIMPLIFY","GENERICIZE","DISABLE","REPLACE","INCONCLUSIVE"]},
+        "product_activation_policy":{"type":"object","additionalProperties":false,"required":["mode","production_enabled"],"properties":{"mode":{"enum":["MOCK_ONLY","DISABLED","EXPERIMENTAL","SCOPE_DEFAULT"]},"production_enabled":{"type":"boolean"}}},
+        "evidence_status":{"type":"string","minLength":1}
+      },
+      "allOf":[
+        {"if":{"properties":{"i06_disposition":{"const":"PENDING_I06"}}},"then":{"properties":{"runtime_implementation":{"type":"null"},"product_activation_policy":{"properties":{"mode":{"enum":["MOCK_ONLY","DISABLED"]},"production_enabled":{"const":false}}}}}},
+        {"if":{"properties":{"i06_disposition":{"const":"DISABLE"}}},"then":{"properties":{"product_activation_policy":{"properties":{"mode":{"const":"DISABLED"},"production_enabled":{"const":false}}}}}},
+        {"if":{"properties":{"product_activation_policy":{"properties":{"production_enabled":{"const":true}}}}},"then":{"properties":{"runtime_implementation":{"type":"object"},"language":{"minItems":1},"product_activation_policy":{"properties":{"mode":{"const":"SCOPE_DEFAULT"}}}}}}
+      ]
+    }
+  }
+}
