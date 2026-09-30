@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "product": "HCL Assistant",
+  "phase": "L0_CANONICAL",
+  "next_ready": "L1-01_EVENT_SOURCE_STATE_LEDGER",
+  "next_package_id": "L1-01",
+  "adoption_gate": "MERGED_MAIN_AND_EXACT_SHA_PLANNING_PASS",
+  "current_executor_stop_after": "L0-01",
+  "future_work_allowed_through": "L2-04",
+  "research_sequence": ["I02", "I03", "I04", "I05", "I06"],
+  "boundary": {
+    "hosting_repository": "haohongfei2001-png/human-cognition-layer",
+    "path": "products/hcl-assistant",
+    "target_repository": "haohongfei2001-png/hcl-assistant",
+    "physical_repository_split": false,
+    "mode": "ISOLATED_PRODUCT_APPLICATION_BOUNDARY",
+    "real_data_allowed": false,
+    "public_deployment_allowed": false,
+    "research_import_allowed": false
+  },
+  "invariants": {
+    "assistant_first": true,
+    "controller_required_for_production_answer": true,
+    "frontend_hcl_toggle": false,
+    "production_base_bypass": false,
+    "lab_compare_enabled_in_l2": false,
+    "hidden_chain_of_thought_storage": false,
+    "historical_model_output_is_independent_evidence": false,
+    "mock_may_be_relabelled_real": false,
+    "confirmation_material_allowed": false,
+    "max_provider_calls_l0_l2": 0
+  },
+  "packages": [
+    {"id":"L0-01","stage":"L0","depends_on":[],"state":"CANONICAL_PENDING_MERGE_CHECK","delta":"canonical contracts and setup"},
+    {"id":"L1-01","stage":"L1","depends_on":["L0-01"],"state":"READY_AFTER_ADOPTION_GATE","delta":"event source state ledger"},
+    {"id":"L1-02","stage":"L1","depends_on":["L1-01"],"state":"WAITING_DEPENDENCY","delta":"revision and historical dependencies"},
+    {"id":"L1-03","stage":"L1","depends_on":["L1-02"],"state":"WAITING_DEPENDENCY","delta":"privacy expiry and correction-aware retrieval"},
+    {"id":"L1-04","stage":"L1","depends_on":["L1-03"],"state":"WAITING_DEPENDENCY","delta":"always-on controller and run lifecycle"},
+    {"id":"L2-01","stage":"L2","depends_on":["L1-04"],"state":"WAITING_DEPENDENCY","delta":"desktop chat and text file flow"},
+    {"id":"L2-02","stage":"L2","depends_on":["L2-01"],"state":"WAITING_DEPENDENCY","delta":"multi-session synthetic cognition and natural synthesis"},
+    {"id":"L2-03","stage":"L2","depends_on":["L2-02"],"state":"WAITING_DEPENDENCY","delta":"Explain correction and memory controls"},
+    {"id":"L2-04","stage":"L2","depends_on":["L2-03"],"state":"WAITING_DEPENDENCY","delta":"Lab shell and integrated mock acceptance"}
+  ],
+  "l3_gates": ["PHYSICAL_PRODUCT_REPOSITORY_SPLIT", "I06_DISPOSITION", "PINNED_PERMITTED_RUNTIME_ARTIFACT", "PRODUCT_ADAPTER_SCOPE_VALIDATION", "EXPLICIT_EXECUTION_AND_DATA_AUTHORIZATION"],
+  "evidence": {"product_implementation":"NOT_IMPLEMENTED", "real_runtime":"NOT_INTEGRATED", "efficacy":"UNTESTED"}
+}

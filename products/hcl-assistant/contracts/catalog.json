@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "normative_document": "PRODUCT_CONTRACTS_V1.md",
+  "contracts": [
+    {"id":"interaction_controller","version":"1.0","required_input":["event","scope","expected_state_version","allowed_memory_scope","source_refs","model_resource_policy","idempotency_key"],"required_output":["run_id","state_version_before","state_version_after","accepted_change_ids","invalidated_state_ids","selected_context","route","selected_capability_ids","answer_preparation","explain_projection","operation_receipts","run_receipt","unresolved_updates","errors"]},
+    {"id":"context","version":"1.0","required":["record_id","kind","content","subject_refs","source_refs","origin","epistemic_status","valid_time","recorded_at","person_access_events","retention_policy","reuse_policy","provenance_roots","support_groups","challenges","assumptions","read_dependencies","revision","lifecycle_status"]},
+    {"id":"revision","version":"1.0","required":["action","target_ids","expected_state_version","reason","effective_time","request_actor","idempotency_key"]},
+    {"id":"answer_synthesis","version":"1.0","required":["snapshot_id","valid_context_refs","operation_output_refs","claim_bindings","material_uncertainties","coverage"]},
+    {"id":"explain_projection","version":"1.0","required":["answer_id","run_id","snapshot_id","judgment_basis","source_links","redactions"]},
+    {"id":"capability_manifest","version":"1.0","schema":"capability-manifest.schema.json","required":["capability_id","contract_version","supported_input","language","scope","output_objects","limitations","runtime_implementation","i06_disposition","product_activation_policy","evidence_status"]},
+    {"id":"run_receipt","version":"1.0","required":["run_id","attempt_id","surface","controller_receipt_id","snapshot_id","state_versions","mode","route","capabilities","operations","outcome","usage","errors"]}
+  ],
+  "enums": {
+    "context_kinds":["USER_REPORTED_EVENT","USER_GUESS","CHARACTER_SELF_REPORT","THIRD_PARTY_REPORT","SYSTEM_INTERPRETATION","HYPOTHETICAL","CONDITIONAL_RULE","CORRECTION","RETRACTION"],
+    "revision_actions":["ADD","CORRECT","RETRACT","SUPERSEDE","HYPOTHETICAL_BRANCH","STOP_USING","DELETE"],
+    "routes":["DIRECT","CONTEXT_ASSISTED","SELECTED_COGNITION","BOUNDED_RESPONSE","CLARIFY","BLOCKED"],
+    "memory_scopes":["TEMPORARY","CONVERSATION","TOPIC","EXPLICIT_CROSS_TOPIC"],
+    "outcomes":["COMPLETED","PARTIAL","UNRESOLVED","FAILED","REFUSED","CANCELLED","UNKNOWN"],
+    "dispositions":["PENDING_I06","RETAIN","SIMPLIFY","GENERICIZE","DISABLE","REPLACE","INCONCLUSIVE"]
+  },
+  "permission_dimensions":["ACCOUNT_DATA_ACCESS","PERSON_PERSPECTIVE_ACCESS","PERSISTENCE_REUSE_PERMISSION"],
+  "research_package_ids_are_product_keys": false,
+  "explain_new_model_calls_default": 0,
+  "uncalibrated_probability_claims_allowed": false,
+  "semantics_verified_by_schema": false
+}
