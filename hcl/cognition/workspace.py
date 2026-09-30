@@ -171,6 +171,20 @@ class CognitionWorkspace:
                     self._version_spans[source_id].add(span)
         return result
 
+    def prepare_reader_semantic(self, query, *, source_ids, observer=None,
+                                backend=None, max_chars=64000):
+        """Ordinary source analysis with explicitly conditional translations."""
+        from .retained import prepare_retained_reader
+        return prepare_retained_reader(self, query, source_ids=source_ids,
+            observer=observer, backend=backend, max_chars=max_chars)
+
+    def answer_reader_semantic(self, query, answer_backend, *, source_ids,
+                               observer=None, backend=None, max_chars=64000):
+        """Bounded opt-in extraction, then one current final answer; no retries."""
+        from .retained import answer_retained_reader
+        return answer_retained_reader(self, query, answer_backend, source_ids=source_ids,
+            observer=observer, backend=backend, max_chars=max_chars)
+
     def receipt(self, result):
         return dict(schema='hcl-shared-operation-v1', operation_id=result.id,
             source_versions=list(result.source_versions), claim_ids=list(result.claim_ids),

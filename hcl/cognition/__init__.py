@@ -18,7 +18,9 @@ from .semantic import AuthorizedText, SemanticResult, prepare_semantics
 
 from .positions import PositionAssessment, assess_positions
 
-from .retained import RetainedResult, prepare_retained, answer_retained
+from .retained import (RetainedResult, prepare_retained, answer_retained,
+                       prepare_retained_reader, answer_retained_reader)
+__all__ += ['prepare_retained_reader', 'answer_retained_reader']
 
 from .epistemic import Attitude, MentalProposition, EpistemicBundle, prepare_epistemic
 

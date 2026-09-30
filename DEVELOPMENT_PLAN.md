@@ -26,23 +26,25 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: GENERAL_NONLITERAL_CONDITIONAL_SEMANTIC_ENTRY**
+**NEXT_READY: BOUNDED_CURRENT_SEMANTIC_LIVE_ENTRY_CHECK**
 
-[Shared reader integrationv14](docs/HCL_DEVELOPMENT_SHARED_READER_V14.md)
-IMPLEMENTED_UNVALIDATED for utility: ordinary complete-reader B01/C01/C03 state now
-reaches the shared source revision graph and one final answer instead of crashing.
-Source correction revises the plan condition; stale/challenged states cannot answer.
-10 new correctness/negative/composition/snapshot/smoke checks, authored actual-state
-witness and57 focused/historical replay passes;0 new calls/spend. No broader semantic
-coverage, new module, private/moral truth or answer-gain claim. Cross-document generic
-identity join requires explicit binding. Current chained v14 preserves DRC001/v12
-and DRC002/v13 exact run archives, raw receipts, closed grants and old scoring.
+[Conditional reader entryv15](docs/HCL_DEVELOPMENT_CONDITIONAL_READER_V15.md)
+IMPLEMENTED_UNVALIDATED for utility: ordinary nonliteral text plus ordinary question
+can enter actual existing B01/C01/C03 checks as explicitly unverified, exact-source
+translation hypotheses. Original prose and all assumptions stay in final input;
+revision/challenge invalidates dependent results.10 new checks, authored actual-state
+witness and82 focused/historical passes;0 new live calls/spend. No verified semantics,
+private/world/moral truth, full long-source coverage or model answer-gain claim.
+Default reader remains0-extraction; legacy typed admission unchanged, no new module.
+Current chained v15 preserves both consumed DRC runtimes/raw receipts/closed grants.
 
-Immediate next extends existing A02/retained semantic entry for ordinary nonliteral
-prose using explicitly unverified conditional source translations, complete originals,
-actual checked final state and local revision. Provider-free positive/negative/
-composition/smoke/regression first; no new ontology or case-specific rules. Final
-confirmation source/reviewer absence does not block this development.
+Next freeze a bounded real existing-provider entry check: one previously uncalled
+authored input, max one extraction + one final call,0 retries/new small cap with
+explicit output-usage margin and complete cost/raw/conditional receipts. No Base/H
+efficacy or final-evidence claim, no old-run continuation or historical budget transfer.
+Then new fresh public development material can test current pipeline fairly, with
+freeze before responses and permanent final isolation. Reviewer/source perfection
+is not a daily development gate.
 
 DRC002 CLOSED/INCONCLUSIVE: unique run36784477632 at e92b75d9736af5c0b87ad66ecea20f3c30719db4
 stopped after11 calls when returned output8193 exceeded frozen8192.0 retries.
@@ -53,9 +55,9 @@ EstimatedUSD0.132035552, peak ratedUSD0.267664320, invoice unknown. Raw/input/us
 scorer/history/artifact hashes and125-file exact-runtime replay retained; grant0,
 trigger deleted, no continuation/rerun or budget transfer. Both new systems final-consumed.
 
-The generic shared-reader crash is repaired by v14; next is conditional nonliteral
-entry using existing mechanisms. Fresh development checks remain active, separate
-from final confirmation, with no reviewer/source global stop.
+The generic shared-reader crash is repaired by v14 and conditional nonliteral
+entry implemented by v15; real model entry/utility remain unvalidated. Fresh development
+checks remain active, separate from final confirmation, with no reviewer/source global stop.
 
 DRC001 CLOSED/development-only (Base14/20 vs HCL16/20;4 gains/2 harms, treatment0/20,
 attribution INCONCLUSIVE);40 calls, estimatedUSD0.104681456, invoice unknown; no rerun.
