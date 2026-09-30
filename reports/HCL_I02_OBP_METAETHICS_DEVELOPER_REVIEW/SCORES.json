@@ -1,0 +1,73 @@
+{
+  "schema": "hcl-i02-blind-review-reconciliation-v2",
+  "case_id": "obp0125-11-section7-native-q10-development",
+  "packet_sha256": "b5354b3b4eaeea381c7e01fef757273b0ec691f0c020bf9bc8bcaa9798a93339",
+  "scores_by_phase": {
+    "P": {
+      "schema": "hcl-i02-residual-reconciliation-v1",
+      "case_id": "obp0125-11-section7-native-q10-development",
+      "opaque_output_id": "output-dab58c7981f9fee67a312dc51431ab2b",
+      "source_first_score": {
+        "case_id": "obp0125-11-section7-native-q10-development",
+        "opaque_output_id": "output-dab58c7981f9fee67a312dc51431ab2b",
+        "rubric_sha256": "61fdb600c2047a090020e59e12c82b0f28472ee6f9483177f1939c2bbac7a3d6",
+        "earned": 7,
+        "possible": 7,
+        "semantic_fraction": 1.0,
+        "critical_failures": [],
+        "eligible": true,
+        "unresolved_credit": 0
+      },
+      "residual_claim_count": 2,
+      "unsupported_excerpts": [],
+      "unresolved_excerpts": [],
+      "severe_unsupported_excerpts": [],
+      "eligible": true,
+      "full_answer_semantics_qualified": false
+    },
+    "C": {
+      "schema": "hcl-i02-residual-reconciliation-v1",
+      "case_id": "obp0125-11-section7-native-q10-development",
+      "opaque_output_id": "output-2dfe06fd925c83df7c03a93a11231c34",
+      "source_first_score": {
+        "case_id": "obp0125-11-section7-native-q10-development",
+        "opaque_output_id": "output-2dfe06fd925c83df7c03a93a11231c34",
+        "rubric_sha256": "61fdb600c2047a090020e59e12c82b0f28472ee6f9483177f1939c2bbac7a3d6",
+        "earned": 7,
+        "possible": 7,
+        "semantic_fraction": 1.0,
+        "critical_failures": [],
+        "eligible": true,
+        "unresolved_credit": 0
+      },
+      "residual_claim_count": 2,
+      "unsupported_excerpts": [],
+      "unresolved_excerpts": [],
+      "severe_unsupported_excerpts": [],
+      "eligible": true,
+      "full_answer_semantics_qualified": false
+    },
+    "G_final": {
+      "schema": "hcl-i02-residual-reconciliation-v1",
+      "case_id": "obp0125-11-section7-native-q10-development",
+      "opaque_output_id": "output-c54fa3021387297e7af906b9e8f20e82",
+      "source_first_score": {
+        "case_id": "obp0125-11-section7-native-q10-development",
+        "opaque_output_id": "output-c54fa3021387297e7af906b9e8f20e82",
+        "rubric_sha256": "61fdb600c2047a090020e59e12c82b0f28472ee6f9483177f1939c2bbac7a3d6",
+        "earned": 7,
+        "possible": 7,
+        "semantic_fraction": 1.0,
+        "critical_failures": [],
+        "eligible": true,
+        "unresolved_credit": 0
+      },
+      "residual_claim_count": 2,
+      "unsupported_excerpts": [],
+      "unresolved_excerpts": [],
+      "severe_unsupported_excerpts": [],
+      "eligible": true,
+      "full_answer_semantics_qualified": false
+    }
+  }
+}

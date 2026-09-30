@@ -1,0 +1,10 @@
+{
+  "schema": "hcl-i02-blind-allocation-key-v2",
+  "case_id": "obp0125-11-section7-native-q10-development",
+  "packet_sha256": "b5354b3b4eaeea381c7e01fef757273b0ec691f0c020bf9bc8bcaa9798a93339",
+  "opaque_to_phase": {
+    "output-2dfe06fd925c83df7c03a93a11231c34": "C",
+    "output-dab58c7981f9fee67a312dc51431ab2b": "P",
+    "output-c54fa3021387297e7af906b9e8f20e82": "G_final"
+  }
+}

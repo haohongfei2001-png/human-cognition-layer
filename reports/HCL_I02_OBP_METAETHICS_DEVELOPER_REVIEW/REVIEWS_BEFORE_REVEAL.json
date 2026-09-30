@@ -1,0 +1,128 @@
+[
+  {
+    "schema": "hcl-i02-blind-review-v2",
+    "case_id": "obp0125-11-section7-native-q10-development",
+    "opaque_output_id": "output-dab58c7981f9fee67a312dc51431ab2b",
+    "judgments": [
+      {
+        "id": "error_theory_as_reported_position",
+        "judgment": "SATISFIED",
+        "rationale": "Attributes lack of moral truth-makers to the reported error-theorist position; distinguishes intending truth from achieving it, without collapsing into non-cognitivism or mere uncertainty.",
+        "output_excerpt": "The error-theorist would say that moral claims about stealing, such as “stealing is morally wrong,” are intended to be true but can never achieve truth because no moral properties exist as truth-makers for those claims."
+      },
+      {
+        "id": "nonmoral_opposition_not_approval",
+        "judgment": "SATISFIED",
+        "rationale": "Explicitly rejects entailment of approval and preserves may oppose/support scope for nonmoral reasons; does not assign a universal stance or private motive.",
+        "output_excerpt": "However, this does not entail a love of stealing: the error-theorist may oppose or support stealing on non-moral grounds such as legal, social, personal, or property-rights reasons."
+      },
+      {
+        "id": "theory_not_moral_truth_or_psychological_diagnosis",
+        "judgment": "SATISFIED",
+        "rationale": "Frames answer as source-reported theoretical exposition, not objective moral reality or diagnosis of an actual individual; no legal permission, guilt, harmful intent or approval is inferred.",
+        "output_excerpt": "I assume the source accurately represents the moral error theorist position described in the text and that the question refers to the moral error theorist discussed in this source."
+      }
+    ],
+    "coverage_attestation": true,
+    "residual_claims": [
+      {
+        "excerpt": "The source presents this as textbook guidance on how the moral error theorist would relate to the issue of stealing, not as a direct quotation from an error-theorist. The exact wording an error-theorist would use may vary, and the source does not provide a specific first-order moral recommendation beyond saying that moral claims about stealing cannot be true.",
+        "judgment": "QUALIFIED",
+        "kind": "INFERENCE_BOUNDARY",
+        "rationale": "Disclosed interpretive/source scope rather than a new source fact or individual mental state. The first output separates textbook exposition from a direct theorist quotation; the second limits uncertainty to supplied source; the third expressly withholds individual reasons and proof of theory. These are local qualifications, not independently verified expert claims.",
+        "source_quotes": []
+      },
+      {
+        "excerpt": "I assume the source accurately represents the moral error theorist position described in the text and that the question refers to the moral error theorist discussed in this source.",
+        "judgment": "QUALIFIED",
+        "kind": "INFERENCE_BOUNDARY",
+        "rationale": "Disclosed interpretive/source scope rather than a new source fact or individual mental state. The first output separates textbook exposition from a direct theorist quotation; the second limits uncertainty to supplied source; the third expressly withholds individual reasons and proof of theory. These are local qualifications, not independently verified expert claims.",
+        "source_quotes": []
+      }
+    ]
+  },
+  {
+    "schema": "hcl-i02-blind-review-v2",
+    "case_id": "obp0125-11-section7-native-q10-development",
+    "opaque_output_id": "output-2dfe06fd925c83df7c03a93a11231c34",
+    "judgments": [
+      {
+        "id": "error_theory_as_reported_position",
+        "judgment": "SATISFIED",
+        "rationale": "Attributes lack of moral truth-makers to the reported error-theorist position; distinguishes intending truth from achieving it, without collapsing into non-cognitivism or mere uncertainty.",
+        "output_excerpt": "The moral error theorist would say that moral claims about stealing, such as \"stealing is wrong,\" are intended to be true but can never achieve truth because no moral properties exist as truth-makers for those claims."
+      },
+      {
+        "id": "nonmoral_opposition_not_approval",
+        "judgment": "SATISFIED",
+        "rationale": "Explicitly rejects entailment of approval and preserves may oppose/support scope for nonmoral reasons; does not assign a universal stance or private motive.",
+        "output_excerpt": "However, this does not mean they approve of stealing; they may oppose or support stealing for non-moral reasons, such as legal, social, personal, or property-rights considerations."
+      },
+      {
+        "id": "theory_not_moral_truth_or_psychological_diagnosis",
+        "judgment": "SATISFIED",
+        "rationale": "Frames answer as source-reported theoretical exposition, not objective moral reality or diagnosis of an actual individual; no legal permission, guilt, harmful intent or approval is inferred.",
+        "output_excerpt": "The question refers to the moral error theorist as described in the provided source; 'error-theorist' is interpreted as the moral error theorist."
+      }
+    ],
+    "coverage_attestation": true,
+    "residual_claims": [
+      {
+        "excerpt": "None beyond what is explicitly stated in the provided source.",
+        "judgment": "QUALIFIED",
+        "kind": "INFERENCE_BOUNDARY",
+        "rationale": "Disclosed interpretive/source scope rather than a new source fact or individual mental state. The first output separates textbook exposition from a direct theorist quotation; the second limits uncertainty to supplied source; the third expressly withholds individual reasons and proof of theory. These are local qualifications, not independently verified expert claims.",
+        "source_quotes": []
+      },
+      {
+        "excerpt": "The question refers to the moral error theorist as described in the provided source; 'error-theorist' is interpreted as the moral error theorist.",
+        "judgment": "QUALIFIED",
+        "kind": "INFERENCE_BOUNDARY",
+        "rationale": "Disclosed interpretive/source scope rather than a new source fact or individual mental state. The first output separates textbook exposition from a direct theorist quotation; the second limits uncertainty to supplied source; the third expressly withholds individual reasons and proof of theory. These are local qualifications, not independently verified expert claims.",
+        "source_quotes": []
+      }
+    ]
+  },
+  {
+    "schema": "hcl-i02-blind-review-v2",
+    "case_id": "obp0125-11-section7-native-q10-development",
+    "opaque_output_id": "output-c54fa3021387297e7af906b9e8f20e82",
+    "judgments": [
+      {
+        "id": "error_theory_as_reported_position",
+        "judgment": "SATISFIED",
+        "rationale": "Attributes lack of moral truth-makers to the reported error-theorist position; distinguishes intending truth from achieving it, without collapsing into non-cognitivism or mere uncertainty.",
+        "output_excerpt": "The moral error theorist would say that stealing cannot be morally wrong in a truth-tracking sense, because moral claims about stealing are intended to be true but never achieve truth: no moral properties exist as truth-makers for those claims."
+      },
+      {
+        "id": "nonmoral_opposition_not_approval",
+        "judgment": "SATISFIED",
+        "rationale": "Explicitly rejects entailment of approval and preserves may oppose/support scope for nonmoral reasons; does not assign a universal stance or private motive.",
+        "output_excerpt": "This does not mean they approve of stealing; they may still oppose or support stealing for non-moral reasons such as legal, social/personal considerations or concern for others' property rights."
+      },
+      {
+        "id": "theory_not_moral_truth_or_psychological_diagnosis",
+        "judgment": "SATISFIED",
+        "rationale": "Frames answer as source-reported theoretical exposition, not objective moral reality or diagnosis of an actual individual; no legal permission, guilt, harmful intent or approval is inferred.",
+        "output_excerpt": "The question is taken to ask about the error-theorist position as described in the provided textbook source, and 'morality of stealing' is interpreted as whether stealing can be morally wrong or right in a truth-bearing sense."
+      }
+    ],
+    "coverage_attestation": true,
+    "residual_claims": [
+      {
+        "excerpt": "The source reports the error-theorist position generally, but it does not specify which non-moral reasons a particular error theorist would accept in a concrete case; therefore it remains uncertain whether a given error theorist would oppose or support a specific act of stealing. The source also presents a theoretical characterization, not an independent proof that this position is correct.",
+        "judgment": "QUALIFIED",
+        "kind": "INFERENCE_BOUNDARY",
+        "rationale": "Disclosed interpretive/source scope rather than a new source fact or individual mental state. The first output separates textbook exposition from a direct theorist quotation; the second limits uncertainty to supplied source; the third expressly withholds individual reasons and proof of theory. These are local qualifications, not independently verified expert claims.",
+        "source_quotes": []
+      },
+      {
+        "excerpt": "The question is taken to ask about the error-theorist position as described in the provided textbook source, and 'morality of stealing' is interpreted as whether stealing can be morally wrong or right in a truth-bearing sense.",
+        "judgment": "QUALIFIED",
+        "kind": "INFERENCE_BOUNDARY",
+        "rationale": "Disclosed interpretive/source scope rather than a new source fact or individual mental state. The first output separates textbook exposition from a direct theorist quotation; the second limits uncertainty to supplied source; the third expressly withholds individual reasons and proof of theory. These are local qualifications, not independently verified expert claims.",
+        "source_quotes": []
+      }
+    ]
+  }
+]
