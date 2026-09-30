@@ -1,0 +1,23 @@
+{
+  "schema": "hcl-i02-gaskell-closure-provenance-v1",
+  "run_id": 36712494305,
+  "run_sha": "c8bf7fecf859fd456f39b21482a809028824d037",
+  "raw_artifact_id": 11095000802,
+  "raw_artifact_sha256": "3a04515c9a66ef4e0f6171245d800b5a40f5ac1bc90f67da278de70fded22602",
+  "metadata_artifact_id": 11094821002,
+  "metadata_artifact_sha256": "7aaa586dda1217af6e5416aee3a224f253ce4dc3d4ecf63dac91a6fef9f981e9",
+  "raw_receipt_sha256": "a4fcfbf0ff702df2238b8c964f23072cd8ce01283d2afb2aacb79c02e5e22c66",
+  "role_withheld_archive_sha256": "3a04515c9a66ef4e0f6171245d800b5a40f5ac1bc90f67da278de70fded22602",
+  "provider_calls": 1,
+  "retries": 0,
+  "h_calls": 0,
+  "cpg_calls": 0,
+  "estimated_actual_cost_usd": 0.08119056,
+  "rated_peak_cost_usd": 0.16238112,
+  "actual_invoice_cost_usd": null,
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RERUN",
+  "authorization_remaining_usd": 0,
+  "confirmation_qualified": false,
+  "source_semantics_reviewed_by_implementer": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

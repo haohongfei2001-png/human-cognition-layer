@@ -1,0 +1,95 @@
+{
+  "input_token_bound": 746054,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "package_sha256": "0b806b4b458191a1136ed650b69661f40450822905628ebb2aa9e4c1bf788586",
+  "peak_reservation_usd": 1.04967192,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "request_sha256": "3c5306ca4b1965a29190ecbcef9081527f7d42fe811e9ebc533cb99a108f04fc",
+  "schema": "hcl-i02-protected-holder-preflight-v1",
+  "source_gate": {
+    "complete_original_body": true,
+    "confirmation_qualified": false,
+    "h_entry_executed": false,
+    "h_ordinary_entry_probe": {
+      "complete_source_not_truncated": true,
+      "final_messages_sha256": null,
+      "h_provider_calls": 0,
+      "refusal_type": "ValueError",
+      "runtime_sha256": "6fa85a5f605ec7ff7dde6c988b53bc986159bf3863dc81030d29db8fbc7cac24",
+      "source_characters": 217526,
+      "source_text_displayed": false,
+      "status": "REFUSED_COMPLETE_LONG_SOURCE"
+    },
+    "history": {
+      "candidate_source_sha256": "3a51cd3465537a94ab034d292435b23cfeaf822b9c2aa6addf66f33590a4ad91",
+      "checkout_head": "c8bf7fecf859fd456f39b21482a809028824d037",
+      "confirmation_qualified": false,
+      "longmemeval": "SEALED_NOT_ACCESSED",
+      "matches": [],
+      "schema": "hcl-i02-reachable-git-history-exposure-v1",
+      "scope": "CURRENTLY_REACHABLE_GIT_OBJECTS_NOT_DELETED_REFS_OR_MODEL_TRAINING",
+      "sealed_blob_ids_not_opened": 54,
+      "skipped_large_paths": [],
+      "skipped_nontext_blobs": 2,
+      "status": "REACHABLE_HISTORY_NO_TEXT_MATCH",
+      "unique_utf8_blobs_scanned": 2879
+    },
+    "longmemeval": "SEALED_NOT_ACCESSED",
+    "model_training_novelty": "UNKNOWN_PUBLIC_CANONICAL_ORIGINAL_WORK",
+    "native_gold_used": false,
+    "ordinary_input_sha256": "a08b08bd9287eb27e16868dc54f4779919df8b1f052a6e48b6989c59b9ad35cc",
+    "package_sha256": "3e198a2357124497333309bc7df22b43f57c833492f8718170d21d2afc3d9e7c",
+    "permission_scope": "DEVELOPMENT_SOURCE_HOLDER_AUDIT_ONLY_NOT_ARM_EXECUTION",
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "publisher_metadata": {
+      "authors": [
+        "Gaskell, Elizabeth Cleghorn"
+      ],
+      "deathdates": [
+        "1865"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "titles": [
+        "Cousin Phillis"
+      ]
+    },
+    "publisher_metadata_sha256": "bcbcb15658f9cfbc9ec71dac3cfdf8e445d3b8d63bc88cfae2ed3c1e6ebc21c3",
+    "question_sha256": "cdb79b4bc48d01d24824d0d898d4f176c8dd2ed6dc35b6ca987ca0c4402511b9",
+    "raw_sha256": "8fdafc01407ce9a54fa5b68135009d41f1eac1cdf71819b7bae03184d46a11eb",
+    "rights_scope": {
+      "CHINA": "AUTHOR_DIED_1865_ART23_LIFE_PLUS50_TERM_PASSED; AUTHORSHIP_INTEGRITY_RETAINED",
+      "UK": "AUTHOR_DIED_1865_LIFE_PLUS70_TERM_PASSED; NO_MODERN_EDITION_LAYOUT_CLAIM",
+      "USA": "PUBLISHER_PUBLIC_DOMAIN_DECLARATION",
+      "limits": "ORIGINAL_ENGLISH_AUTHOR_PROSE_ONLY; NO_GLOBAL_TRANSLATION_ANNOTATION_OR_MODERN_ADAPTATION_RIGHTS_CLAIM"
+    },
+    "schema": "hcl-i02-gaskell-development-history-screen-v1",
+    "snapshot": {
+      "candidate_source_sha256": "3a51cd3465537a94ab034d292435b23cfeaf822b9c2aa6addf66f33590a4ad91",
+      "confirmation_qualified": false,
+      "longmemeval": "SEALED_NOT_ACCESSED",
+      "matches": [],
+      "repository_commit": "c8bf7fecf859fd456f39b21482a809028824d037",
+      "schema": "hcl-i02-current-snapshot-exposure-screen-v1",
+      "scope": "EXACT_COMMIT_UTF8_TEXT_ONLY_NOT_GIT_HISTORY_OR_MODEL_TRAINING",
+      "sealed_paths_not_opened": 29,
+      "skipped_large_paths": [],
+      "skipped_nontext_paths": [
+        "reports/protected/HCL_I02_GILMAN_HOLDER_RAW_ARTIFACT.zip",
+        "reports/protected/HCL_I02_JAMES_HOLDER_RAW_ARTIFACT.zip"
+      ],
+      "status": "TEXT_SNAPSHOT_NO_MATCH",
+      "utf8_files_scanned": 1413
+    },
+    "source_characters": 217526,
+    "source_sha256": "3a51cd3465537a94ab034d292435b23cfeaf822b9c2aa6addf66f33590a4ad91",
+    "source_text_displayed": true,
+    "source_used_for_runtime_repair": false,
+    "status": "READY_FOR_DEVELOPMENT_SOURCE_HOLDER_REVIEW",
+    "task_fit": "PENDING_SOURCE_FIRST_REVIEW"
+  },
+  "source_or_quote_text_displayed": false
+}

@@ -1,0 +1,28 @@
+{
+  "run_id": 36712494305,
+  "finish_reason": "stop",
+  "actual_model": "deepseek-v4-pro",
+  "source_or_analysis_displayed": false,
+  "raw_receipt_sha256": "a4fcfbf0ff702df2238b8c964f23072cd8ce01283d2afb2aacb79c02e5e22c66",
+  "complete_json_decoded": true,
+  "source_id_matched": true,
+  "source_hash_matched": true,
+  "question_hash_matched": true,
+  "episode_count": 6,
+  "obligation_count": 4,
+  "categorical_expectations_valid": true,
+  "referenced_span_character_lengths": [
+    1036,
+    439,
+    643,
+    212,
+    1395,
+    1131,
+    1036,
+    1395,
+    643,
+    1131
+  ],
+  "strict_receiver_pass": false,
+  "receiver_static_error": "bounded nonempty exact source anchor required"
+}

@@ -390,6 +390,21 @@ No H entry, runtime repair, provider input or paid call is allowed by this packa
 Even a clean history receipt only makes source-first holder review ready; confirmation
 qualification, task difficulty and model competence remain unresolved. Zero calls/spend.
 
+The [complete Gaskell source/task audit closure](reports/HCL_I02_GASKELL_HOLDER_CLOSURE.md)
+is **INCONCLUSIVE_INTERFACE_REFERENCE_BOUND**, run36712494305: complete JSON,
+correct source/question hashes and categorical enums, but multiple reconstructed
+spans exceeded the frozen500-character ceiling. **1 call /0 retries**, usage/clock
+estimate **USD0.08119056**, peak rated USD0.16238112; invoice unverified. Raw ZIP,
+metadata, execution/source history, hashes and diagnostic preserved; grant zero,
+trigger disabled, no rerun/rescoring. Actual H entry refused the complete217,526-
+character source at its48k bound; this coverage outcome is retained.
+**SIMPLIFY_REFERENCE_INTERFACE**: future provider-free v5 uses the competent G
+1500-character quote bound;43 checks pass,0 calls/live proof,old receivers unchanged.
+No source semantics, independent confirmation, comparator or H efficacy qualification.
+Unique next implementation task: versioned full-source C/P/G envelope beyond the
+inherited64k cutoff, retaining strong native reasoning, workspace/cost bounds and
+H refusal. No further paid source swap or consumed-case reopening; continue I02.
+
 The [complete Gaskell typed source/task audit freeze](docs/HCL_I02_GASKELL_TYPED_SOURCE_AUDIT.md)
 pins **217,526 characters / four complete parts**, a new ordinary development
 question and typed v4 review. Frontmatter inspection exposed three narrative words;
@@ -399,10 +414,10 @@ Wharton publisher-synopsis preview. The actual H ordinary-entry refusal at the
 Existing DeepSeek/high/16,384 ceiling: **1 call / 0 retries / new USD1.10 hard cap**,
 conservative reservation USD1.04967192; no old-budget transfer. 39 provider-free
 checks pass; cloud full-history, exact-head/main and cap gates precede any call.
-0 calls/spend at freeze. Raw source/review remain role-withheld; automated PASS
+0 calls/spend at historical freeze; the closure above supersedes readiness. Raw source/review remain role-withheld; automated PASS
 is preliminary, not independent semantics/comparator/H efficacy evidence.
-Unique next task: execute this distinct frozen source-only typed review once
-and close; then continue I02 independent source/comparator qualification.
+The distinct frozen source-only review has been consumed and closed above.
+Continue I02 full-source comparator preparation and independent qualification.
 
 The [v3 native long-input interface closure](reports/HCL_I02_SOURCE_HOLDER_V3_CALIBRATION_CLOSURE.md)
 is **INCONCLUSIVE_INTERFACE_CONTRACT_FAILURE**, run 36708265295 on main
