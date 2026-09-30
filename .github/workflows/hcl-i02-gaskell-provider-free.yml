@@ -1,0 +1,27 @@
+name: HCL I02 Gaskell Protected Typed Review Provider-Free
+on:
+  pull_request:
+    paths: ['scripts/i02_gaskell_development_candidate.py', 'scripts/run_i02_gaskell_holder_once.py', 'scripts/i02_source_qualification_v11.py', 'tests/test_i02_gaskell_holder_once.py', 'reports/HCL_I02_GASKELL*', '.github/workflows/hcl-i02-gaskell*']
+  push:
+    branches: [main]
+    paths: ['scripts/i02_gaskell_development_candidate.py', 'scripts/run_i02_gaskell_holder_once.py', 'scripts/i02_source_qualification_v11.py', 'tests/test_i02_gaskell_holder_once.py', 'reports/HCL_I02_GASKELL*', '.github/workflows/hcl-i02-gaskell*']
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'z3-solver==4.15.1.0'
+      - run: python -m unittest tests.test_i02_gaskell_holder_once tests.test_i02_source_holder_typed_contract_v4 tests.test_i02_source_holder_line_index_v3 tests.test_i02_james_holder_once
+      - run: python -m scripts.run_i02_gaskell_holder_once --preflight --metadata gaskell-holder-preflight.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hcl-i02-gaskell-protected-provider-free-${{ github.run_id }}
+          path: gaskell-holder-preflight.json

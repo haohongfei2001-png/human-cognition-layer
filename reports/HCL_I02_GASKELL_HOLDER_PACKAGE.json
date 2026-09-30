@@ -1,0 +1,48 @@
+{
+  "authorization": "OWNER_DEFAULT_EXISTING_PROVIDER_NORMAL_BOUNDED_COST",
+  "budget_cap_usd": 1.1,
+  "confirmation_qualified": false,
+  "cpg_calls": 0,
+  "endpoint": "https://api.deepseek.com",
+  "execution_files": {
+    ".github/workflows/hcl-i02-gaskell-holder-once.yml": "27edb9de2015832609bae4b0911474b19abd5323b6c8cfdbf1d2b4b77f3dfe18",
+    "reports/HCL_I02_GASKELL_DEVELOPMENT_CANDIDATE.json": "3e198a2357124497333309bc7df22b43f57c833492f8718170d21d2afc3d9e7c",
+    "scripts/i02_exposure_history.py": "2dd4d840d4d76450a07713e163114f15c2f35960fb5a355ec798771fbcb4bbbf",
+    "scripts/i02_exposure_snapshot.py": "d71deeb1c48c32496f6244dc78297429ad71fc3dba4044ebafa65e820ab5485c",
+    "scripts/i02_gaskell_development_candidate.py": "6922252edc89c5ddd38d6aff25a03fb3199b8ad8938b8193567b68e5e03a4dc5",
+    "scripts/i02_source_holder_line_index_v3.py": "d1d83af9acbfaeb5d41b39fea6572d45c82b3b564fd069bd9934ac45eea7f87c",
+    "scripts/i02_source_holder_typed_contract_v4.py": "73afef65c5da34c1171795bc14e54062225cf860626671f952ee46aa2e2d6bfa",
+    "scripts/i02_source_qualification_v11.py": "6635748a3d7a1e12d676939c65e43fef8bf621ad7af9169c5652aa87b9e7dc08",
+    "scripts/run_i02_gaskell_holder_once.py": "c61d6332ba4e60ffa41a83cf916d21c2ec5f0f5b37b86d5ad5f156c2ecb935ac",
+    "tests/test_i02_gaskell_holder_once.py": "9480f49de6bbf296459e1fb87fda15c73578f543c22710111e44b3af81cb1567"
+  },
+  "h_calls": 0,
+  "h_runtime_sha256": "6fa85a5f605ec7ff7dde6c988b53bc986159bf3863dc81030d29db8fbc7cac24",
+  "historical_budget_transfer": false,
+  "independent_human_review": false,
+  "independent_model_family_judge": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "max_tokens": 16384,
+  "maximum_provider_calls": 1,
+  "model": "deepseek-v4-pro",
+  "model_version_publisher": "DeepSeek-V4-Pro-0813",
+  "permission_scope": "DEVELOPMENT_SOURCE_HOLDER_AUDIT_ONLY_NOT_ARM_EXECUTION_OR_CONFIRMATION",
+  "price_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "price_verified_date": "2026-09-30",
+  "purpose": "ONE_AUTOMATED_SOURCE_FIRST_TASK_FIT_AUDIT_NO_H_OR_ARM_OUTPUTS",
+  "question_sha256": "cdb79b4bc48d01d24824d0d898d4f176c8dd2ed6dc35b6ca987ca0c4402511b9",
+  "rates_peak_usd_per_million": {
+    "cache_hit": 0.044,
+    "input": 1.32,
+    "output": 3.96
+  },
+  "raw_visibility": "HELD_AWAY_FROM_IMPLEMENTER_BY_ROLE_NOT_CRYPTOGRAPHIC_SEAL",
+  "reasoning_effort": "high",
+  "retries": 0,
+  "schema": "hcl-i02-gaskell-development-holder-package-v1",
+  "service_tier": "provider_default_no_tier_parameter",
+  "source_sha256": "3a51cd3465537a94ab034d292435b23cfeaf822b9c2aa6addf66f33590a4ad91",
+  "thinking": {
+    "type": "enabled"
+  }
+}
