@@ -19,6 +19,23 @@ Serious Independent Evaluation 主要在 G-ARCH 后。历史已消费 grant 和�
 应 defer 并继续独立工作。本补充覆盖下文旧的逐次 owner spending gate，
 不改变能力、依赖、证据标准、G-HC/G-ARCH 或 LongMemEval 封存边界。
 
+## 最新验证节奏修订 — Owner 2026-10-01
+
+正式区分 **Development Reality Checks** 与 **Final Sealed Confirmation**。
+详见 [canonical two-track policy](docs/HCL_VALIDATION_TIERS_POLICY.md)。即日起恢复
+开发现实检验：新且合法的公开任务、冻结 subset / 模型配置 / 评分，strong Base
+与 current HCL 同底座公平普通输入优先；独立 reviewer、完美 confirmation 来源、
+P/G 工程和最终统计标准不再阻塞日常开发。查看过的题目/答案/结果立即标记
+DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION，可调试回归但不得进入最终
+独立确认。发现错误后做通用修复/覆盖改善/简化，不做单题规则，不改历史结论。
+
+§11 的严格独立来源、blind review、强比较器、ablation、cross-model 与统计标准
+属于能力基本冻结后的 Final Sealed Confirmation，保留其证明边界，不用来否定
+开发检验资格。G-ARCH 后先用真实 Development Reality Checks 驱动修复与能力成长，
+不以缺少最终 reviewer/source 宣布全局停滞。首批 DRC001 已冻结 SimpleToM/SocialIQA
+开发任务与 Base/HCL 两臂；旧 I02 dependency handoff 的全局停滞条件已 supersede。
+LongMemEval 继续 SEALED，leaderboard maturity gate 与旧 frozen receipts 不变。
+
 ## 0. 决策摘要
 
 建议批准的方向不是“再增加一个 CG 检查器”，也不是“立刻验证所有已存在模块”，而是：

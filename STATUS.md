@@ -2,7 +2,7 @@
 
 ## Current phase
 
-**SERIOUS INDEPENDENT EVALUATION — A–H CORRECTNESS_VERIFIED / G-HC PASS_PROVIDER_FREE / G-ARCH PASS_ARCHITECTURE_READY_FOR_SERIOUS_EVALUATION**
+**DEVELOPMENT REALITY CHECKS ACTIVE / FINAL CONFIRMATION DEFERRED — A–H CORRECTNESS_VERIFIED / G-HC PASS_PROVIDER_FREE / G-ARCH PASS_ARCHITECTURE_READY_FOR_SERIOUS_EVALUATION**
 
 The long-horizon architecture and 41-package roadmap are canonical in
 [HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md).
@@ -11,13 +11,37 @@ exact-SHA CI and immutable receipts remain the implementation/evidence facts.
 
 ## Current wave
 
-**I — Serious Independent Evaluation**
+**I — Development Reality Checks; Final Sealed Confirmation separately deferred**
 
 A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
-**NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
+## Current validation policy — owner amendment 2026-10-01
+
+**Development Reality Checks ACTIVE; Final Sealed Confirmation deferred until
+capability/configuration freeze.** [Canonical two-track policy](docs/HCL_VALIDATION_TIERS_POLICY.md)
+supersedes the former global I02 source/reviewer stop. First run strong Base vs
+current HCL on fresh legally usable development items with equal underlying model,
+complete source/question/options and a frozen subset/config/scorer. Independent
+reviewer, final source diversity, P/G/ablation/cross-family/confirmation power are
+not development admission gates. Preserve negative results, missing treatment and
+all H costs; repair general failures, never single-case rules. Every opened batch
+is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently excluded
+from final sealed material. Historical receipts/runtime/dispositions/grants stay
+unchanged. No LongMemEval access or leaderboard activation.
+
+**NEXT_READY: DRC001_FRESH_BASE_VS_HCL_REALITY_CHECK**
+
+DRC001: SimpleToM12 + SocialIQA8 native items, fixed hash-rank selection, current
+certified runtimev12, strong DeepSeek V4 Pro high thinking, equal8192 output ceilings,
+40 maximum calls,0 retries, separate USD2.25 hard cap, no old budget transfer.
+Source licenses/pins, gold-free input, actual H preparation, primary native-label
+agreement and source/history admission checks frozen before paid execution.
+No independent efficacy claim; long narrative/philosophy are not covered yet.
+
+## Historical I02 snapshots — evidence retained; global stop superseded
+
 
 The [2026-10-01 I02 dependency handoff](reports/HCL_I02_DEPENDENCY_HANDOFF_20261001.md)
 records PR285–289 merged and verified implementation main `a7675722eeffc44f6aa08a77893a797bf9e20eeb`

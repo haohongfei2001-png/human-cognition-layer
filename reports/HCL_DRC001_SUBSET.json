@@ -1,0 +1,336 @@
+{
+  "schema": "hcl-drc-subset-v1",
+  "batch": "DRC001",
+  "prior_history_baseline": "439d9363588ed8dea96f2c795b2f4b5d6c5e1c3c",
+  "selection_rule": "SHA256 fixed HCL-DRC-001-v1/ subset/native-ID rank; four each SimpleToM task, eight SocialIQA dev indices; not gold/model/H-route selected",
+  "pins": [
+    {
+      "dataset": "allenai/SimpleToM",
+      "subset": "mental-state-qa",
+      "url": "https://huggingface.co/datasets/allenai/SimpleToM/resolve/3b97c11760855c83e033f8fef04f80c7e1f55f15/mental-state-qa/test.jsonl",
+      "revision": "3b97c11760855c83e033f8fef04f80c7e1f55f15",
+      "sha256": "11cf6b4d59da493fc48490d528e378228484d77f78cc79c7c74753f3487cf777",
+      "records": 1147,
+      "license": "ODC-BY-1.0"
+    },
+    {
+      "dataset": "allenai/SimpleToM",
+      "subset": "behavior-qa",
+      "url": "https://huggingface.co/datasets/allenai/SimpleToM/resolve/3b97c11760855c83e033f8fef04f80c7e1f55f15/behavior-qa/test.jsonl",
+      "revision": "3b97c11760855c83e033f8fef04f80c7e1f55f15",
+      "sha256": "f8330faf307cf6d6157c04ef2147d11fa51e065348f8d8857cae6811d089f50f",
+      "records": 1147,
+      "license": "ODC-BY-1.0"
+    },
+    {
+      "dataset": "allenai/SimpleToM",
+      "subset": "judgment-qa",
+      "url": "https://huggingface.co/datasets/allenai/SimpleToM/resolve/3b97c11760855c83e033f8fef04f80c7e1f55f15/judgment-qa/test.jsonl",
+      "revision": "3b97c11760855c83e033f8fef04f80c7e1f55f15",
+      "sha256": "9e55ababc9946e8fdb310b948b56fec3b964ce50b624ce91ac1c1efb727e2b8d",
+      "records": 1147,
+      "license": "ODC-BY-1.0"
+    },
+    {
+      "dataset": "SocialIQA",
+      "subset": "dev",
+      "url": "https://maartensap.com/social-iqa/data/socialIQa_v1.4.tgz",
+      "sha256": "99a399d50f1a996388e94ab435ba0ceadc6b8ad9d90e6420358c962a4850d217",
+      "records": 1954,
+      "license": "CC-BY-4.0",
+      "license_sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "simpletom/mental-state-qa/KFC_bag_sev1_aware",
+      "dataset": "allenai/SimpleToM",
+      "subset": "mental-state-qa",
+      "native_id": "KFC_bag_sev1_aware",
+      "source": "Mary sealed a container of Michelin star Chinese congee in a KFC paper bag and brought the bag to school. Mary's classmate sees her walking to lunch with the sealed bag.",
+      "question": "Is Mary's classmate likely to be aware that \"Mary sealed a container of Michelin star Chinese congee in a KFC paper bag and brought the bag to school.\"?",
+      "choices": {
+        "A": "No",
+        "B": "Yes"
+      },
+      "gold": "A",
+      "native_row_sha256": "0187660e74259e538b492acbc2d3687b55a19ac5b29807dc81d5c07a4af82f80"
+    },
+    {
+      "case_id": "simpletom/mental-state-qa/gen1282_sev3_aware",
+      "dataset": "allenai/SimpleToM",
+      "subset": "mental-state-qa",
+      "native_id": "gen1282_sev3_aware",
+      "source": "The car rental company knowingly rents out cars with serious mechanical issues, putting customers at risk of accidents. The car rental customer picks up the car from the rental lot and drives off, trusting the company's claims.",
+      "question": "Is car rental customer likely to be aware that \"The car rental company knowingly rents out cars with serious mechanical issues, putting customers at risk of accidents.\"?",
+      "choices": {
+        "A": "No",
+        "B": "Yes"
+      },
+      "gold": "A",
+      "native_row_sha256": "bc1a2b9399c3d6a16d202eefedaa0100ef7a070ad8338a3a3442b0d85d649762"
+    },
+    {
+      "case_id": "simpletom/mental-state-qa/gen1133_sev3_aware",
+      "dataset": "allenai/SimpleToM",
+      "subset": "mental-state-qa",
+      "native_id": "gen1133_sev3_aware",
+      "source": "Anna's backpack contains highly radioactive material she stole from a nearby research facility. Tom sees Anna carefully placing her backpack in the trunk of her car after their hiking trip.",
+      "question": "Is Hiker, Tom likely to be aware that \"Anna's backpack contains highly radioactive material she stole from a nearby research facility.\"?",
+      "choices": {
+        "A": "Yes",
+        "B": "No"
+      },
+      "gold": "B",
+      "native_row_sha256": "3280baa1aacbb63dd7ccad0e22c9f1fe9ffdd5ebefa9d6f66a9b10c7f7ddef7d"
+    },
+    {
+      "case_id": "simpletom/mental-state-qa/gen280_sev3_aware",
+      "dataset": "allenai/SimpleToM",
+      "subset": "mental-state-qa",
+      "native_id": "gen280_sev3_aware",
+      "source": "The blood pressure monitor the doctor is recommending has a critical flaw that can cause it to deliver dangerously incorrect medication dosages for the patient's specific blood pressure condition, but the doctor doesn't disclose this risk to boost sales of the monitor. The doctor enthusiastically recommends the blood pressure monitor to the patient, touting its ease of use and advanced features.",
+      "question": "Is patient with high blood pressure likely to be aware that \"The blood pressure monitor the doctor is recommending has a critical flaw that can cause it to deliver dangerously incorrect medication dosages for the patient's specific blood pressure condition, but the doctor doesn't disclose this risk to boost sales of the monitor.\"?",
+      "choices": {
+        "A": "Yes",
+        "B": "No"
+      },
+      "gold": "B",
+      "native_row_sha256": "a92c01ae01406b6dd7955b5f9ec83caa28a6d61bb4a069d339d908d460018ab3"
+    },
+    {
+      "case_id": "simpletom/behavior-qa/gen1159_sev1_action",
+      "dataset": "allenai/SimpleToM",
+      "subset": "behavior-qa",
+      "native_id": "gen1159_sev1_action",
+      "source": "Kevin's book bag contains a small, harmless pet snake he's smuggling into the library. The librarian greets Kevin as he enters the library and places his book bag on a nearby table.",
+      "question": "What will the librarian likely do?",
+      "choices": {
+        "A": "continue with her regular duties, assuming Kevin is there to study or borrow books",
+        "B": "ask Kevin to leave the library immediately due to the no-pets policy"
+      },
+      "gold": "A",
+      "native_row_sha256": "6596e091b1f3d9e79d3ce2a32d12f63b2edc29cb8d598c2a9da01f404e4c57c8"
+    },
+    {
+      "case_id": "simpletom/behavior-qa/gen1239_sev3_action",
+      "dataset": "allenai/SimpleToM",
+      "subset": "behavior-qa",
+      "native_id": "gen1239_sev3_action",
+      "source": "The beauty store owner replaces the expensive active ingredients in their premium anti-aging creams with harmful, potentially toxic substances while maintaining the original packaging and price. Sarah and her friends, all skincare enthusiasts, excitedly browse through the selection of high-end anti-aging creams at their favorite beauty store.",
+      "question": "What will Sarah and her friends likely do upon finding the anti-aging creams?",
+      "choices": {
+        "A": "purchase the anti-aging creams, believing they are getting the premium ingredients as advertised",
+        "B": "immediately alert other customers in the store about the dangerous products and contact health authorities to investigate the store"
+      },
+      "gold": "A",
+      "native_row_sha256": "04f3329ed6c7501bf705c10b69300eab8287b6868f904c753e5cca2192cdc15a"
+    },
+    {
+      "case_id": "simpletom/behavior-qa/gen125_sev3_action",
+      "dataset": "allenai/SimpleToM",
+      "subset": "behavior-qa",
+      "native_id": "gen125_sev3_action",
+      "source": "Mia's opaque, reusable water bottle contains a liquid that is a dangerous chemical, not meant for ingestion. Mia's friend sees her taking the opaque, reusable water bottle out of her bag during lunch at school.",
+      "question": "What will Mia's friend likely do?",
+      "choices": {
+        "A": "Ask Mia if she could have a sip of her water.",
+        "B": "Warn others not to drink from Mia's bottle and inform a teacher or authority about the dangerous content."
+      },
+      "gold": "A",
+      "native_row_sha256": "4fcd3a1557f6ed9c016d7936a2c743bb6664a31946af84ebb42a68ce2e9fe519"
+    },
+    {
+      "case_id": "simpletom/behavior-qa/gen352_sev2_action",
+      "dataset": "allenai/SimpleToM",
+      "subset": "behavior-qa",
+      "native_id": "gen352_sev2_action",
+      "source": "The dry cleaning staff routinely wear customers' clothes before returning them. The dry cleaning store advertises their services, emphasizing their fast turnaround times and competitive prices.",
+      "question": "What will dry cleaning customers likely do?",
+      "choices": {
+        "A": "drop off their clothes to be dry cleaned",
+        "B": "complain to management and take their business elsewhere"
+      },
+      "gold": "A",
+      "native_row_sha256": "9c46c0e08fd41c6ebd722952c71c7050013aaa7a359bbbb0541e0780f6a5d670"
+    },
+    {
+      "case_id": "simpletom/judgment-qa/gen1553_sev3_judge",
+      "dataset": "allenai/SimpleToM",
+      "subset": "judgment-qa",
+      "native_id": "gen1553_sev3_judge",
+      "source": "Robert's sports bag contains a small explosive device he plans to detonate during the game. Robert's teammate watches him enter the locker room, place his sports bag in his locker, and begin warming up for the upcoming match.",
+      "question": "Next, Robert's teammate \"continue with his own pre-game routine and warm-up exercises\" and not \"immediately alert security and evacuate the premises to prevent a potential terrorist attack\". The behavior of Robert's teammate can be best described as: ",
+      "choices": {
+        "A": "Reasonable",
+        "B": "Not reasonable"
+      },
+      "gold": "A",
+      "native_row_sha256": "e6deea1fe760c3ddbd81feed8e0c8f49162ad27e90f723b2c3eb01c1b090575c"
+    },
+    {
+      "case_id": "simpletom/judgment-qa/gen1540_sev3_judge",
+      "dataset": "allenai/SimpleToM",
+      "subset": "judgment-qa",
+      "native_id": "gen1540_sev3_judge",
+      "source": "Sarah's purse contains evidence of embezzlement she plans to hand over to the authorities. Sarah's coworker notices her arriving at the office with her purse slung over her shoulder.",
+      "question": "Next, Sarah's coworker \"assume Sarah is starting her workday as usual\" and not \"assume Sarah is about to expose a major scandal involving embezzlement and alert the authorities\". The behavior of Sarah's coworker can be best described as: ",
+      "choices": {
+        "A": "Reasonable",
+        "B": "Not reasonable"
+      },
+      "gold": "A",
+      "native_row_sha256": "7990bc11a54cf8bf2544ddf9abe1b9f1c066bbfc29aa7486a8a43f3236fc30db"
+    },
+    {
+      "case_id": "simpletom/judgment-qa/gen1360_sev2_judge",
+      "dataset": "allenai/SimpleToM",
+      "subset": "judgment-qa",
+      "native_id": "gen1360_sev2_judge",
+      "source": "Sarah's colleague had been secretly taking expensive office supplies from the storage room and selling them online for personal profit. Sarah, meanwhile, was busy organizing a team-building event to improve workplace morale.",
+      "question": "Next, Sarah \"invite the colleague to help set up the event\" and not \"report the colleague's actions to the HR department\". The behavior of Sarah can be best described as: ",
+      "choices": {
+        "A": "Reasonable",
+        "B": "Not reasonable"
+      },
+      "gold": "A",
+      "native_row_sha256": "32783ab14085fc09aefd338aea701626e81c98ac81f50172754ceb8fc700751a"
+    },
+    {
+      "case_id": "simpletom/judgment-qa/gen6_sev3_judge",
+      "dataset": "allenai/SimpleToM",
+      "subset": "judgment-qa",
+      "native_id": "gen6_sev3_judge",
+      "source": "The olive oil bottle is filled with a poisonous chemical. Derek grabs the olive oil bottle off the shelf and proceeds to the self-checkout lane.",
+      "question": "Next, Derek \"scan the bottle and pay for it\" and not \"immediately notify store staff about the dangerous contents\". The behavior of Derek can be best described as: ",
+      "choices": {
+        "A": "Not reasonable",
+        "B": "Reasonable"
+      },
+      "gold": "B",
+      "native_row_sha256": "0919503ad6865e1543df6c647f56d5085fc6431952f8a07da9540d56e29717e3"
+    },
+    {
+      "case_id": "socialiqa/dev/1427",
+      "dataset": "SocialIQA",
+      "subset": "dev",
+      "native_id": "1427",
+      "source": "Aubrey met no one at the park despite scheduling a meeting there with their informant.",
+      "question": "What will the informant want to do next?",
+      "choices": {
+        "A": "schedule a new meeting",
+        "B": "tell Aubrey they won't be making it",
+        "C": "cancel the meeting"
+      },
+      "gold": "A",
+      "native_row_sha256": "5275005b8059d0f136c1a090ed2141970a9d72385d1ce649814e0e5814ddf773"
+    },
+    {
+      "case_id": "socialiqa/dev/91",
+      "dataset": "SocialIQA",
+      "subset": "dev",
+      "native_id": "91",
+      "source": "Alex took care of the children after school so that their parents could continue to work.",
+      "question": "What will Alex want to do next?",
+      "choices": {
+        "A": "go home",
+        "B": "play games with the kids",
+        "C": "fight the parents"
+      },
+      "gold": "B",
+      "native_row_sha256": "39d9d28b3971b5d58df85b46e6af74b706a6c8b022e76232ebc5b08ce338a1ba"
+    },
+    {
+      "case_id": "socialiqa/dev/336",
+      "dataset": "SocialIQA",
+      "subset": "dev",
+      "native_id": "336",
+      "source": "A big dog started chasing Tracy in the park so Tracy ran for their life to their car and jumped in to get away from the dog.",
+      "question": "How would Tracy feel afterwards?",
+      "choices": {
+        "A": "A person who was panicking",
+        "B": "tranquility",
+        "C": "shocked"
+      },
+      "gold": "A",
+      "native_row_sha256": "fb04ef82d99f0f8f98c2c0eff933e16e378dcece3c7d1a3cee5c5ea298341457"
+    },
+    {
+      "case_id": "socialiqa/dev/624",
+      "dataset": "SocialIQA",
+      "subset": "dev",
+      "native_id": "624",
+      "source": "Jordan talked behind Ash's back to say mean things about her.",
+      "question": "How would you describe Jordan?",
+      "choices": {
+        "A": "sneaky",
+        "B": "Two-faced",
+        "C": "Truthful"
+      },
+      "gold": "B",
+      "native_row_sha256": "0a9cd5d7608932ec5982a2766bd90673a705bb1f76fe7d85d1dff26a166fe097"
+    },
+    {
+      "case_id": "socialiqa/dev/1384",
+      "dataset": "SocialIQA",
+      "subset": "dev",
+      "native_id": "1384",
+      "source": "riley told lee to stay so that they could have a heart to heart.",
+      "question": "What will happen to Riley?",
+      "choices": {
+        "A": "be sad about the talk",
+        "B": "awkward about the conversation",
+        "C": "get something off their chest"
+      },
+      "gold": "C",
+      "native_row_sha256": "039d5048b83d30407839463eb655f4af743d600dbc0f5b99caacbb184db835a0"
+    },
+    {
+      "case_id": "socialiqa/dev/809",
+      "dataset": "SocialIQA",
+      "subset": "dev",
+      "native_id": "809",
+      "source": "Austin challenged Remy to a game of hide and seek outside in the woods.",
+      "question": "What will happen to Austin?",
+      "choices": {
+        "A": "win and find Remy",
+        "B": "get lost in the woods",
+        "C": "trip and fall on his face"
+      },
+      "gold": "B",
+      "native_row_sha256": "fa9f70cd68c04ebb25d63b170c0aff8d4cc757b1b1194ba949fbe5ed96f8cb7d"
+    },
+    {
+      "case_id": "socialiqa/dev/33",
+      "dataset": "SocialIQA",
+      "subset": "dev",
+      "native_id": "33",
+      "source": "Tracy threw a fit on the couch while watching the history channel because they got a lot of details wrong.",
+      "question": "Why did Tracy do this?",
+      "choices": {
+        "A": "tracy who has through watching the history channel",
+        "B": "prove that they know the truth",
+        "C": "tracy who has got alot of details wrong"
+      },
+      "gold": "B",
+      "native_row_sha256": "5092c165c72c4bf3e18fb62e9a72b5c0a1c77845aa40e59ddd9598bbbfe62aa4"
+    },
+    {
+      "case_id": "socialiqa/dev/299",
+      "dataset": "SocialIQA",
+      "subset": "dev",
+      "native_id": "299",
+      "source": "Addison liked to go and pick apples. They got apples the other day.",
+      "question": "How would you describe Addison?",
+      "choices": {
+        "A": "kind",
+        "B": "ruthless",
+        "C": "excited"
+      },
+      "gold": "C",
+      "native_row_sha256": "53c9d9ac58ebd146ccd418291c94fdc8e421ddce56df8deb217f8260d44e3b3d"
+    }
+  ],
+  "exposure_status": "DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION",
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

@@ -1,5 +1,29 @@
 # Human Cognition Layer
 
+## Current validation policy — owner amendment 2026-10-01
+
+**Development Reality Checks ACTIVE; Final Sealed Confirmation deferred until
+capability/configuration freeze.** [Canonical two-track policy](docs/HCL_VALIDATION_TIERS_POLICY.md)
+supersedes the former global I02 source/reviewer stop. First run strong Base vs
+current HCL on fresh legally usable development items with equal underlying model,
+complete source/question/options and a frozen subset/config/scorer. Independent
+reviewer, final source diversity, P/G/ablation/cross-family/confirmation power are
+not development admission gates. Preserve negative results, missing treatment and
+all H costs; repair general failures, never single-case rules. Every opened batch
+is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently excluded
+from final sealed material. Historical receipts/runtime/dispositions/grants stay
+unchanged. No LongMemEval access or leaderboard activation.
+
+**NEXT_READY: DRC001_FRESH_BASE_VS_HCL_REALITY_CHECK**
+
+DRC001: SimpleToM12 + SocialIQA8 native items, fixed hash-rank selection, current
+certified runtimev12, strong DeepSeek V4 Pro high thinking, equal8192 output ceilings,
+40 maximum calls,0 retries, separate USD2.25 hard cap, no old budget transfer.
+Source licenses/pins, gold-free input, actual H preparation, primary native-label
+agreement and source/history admission checks frozen before paid execution.
+No independent efficacy claim; long narrative/philosophy are not covered yet.
+
+
 HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息、信念、视角和有来源的心理证据。**基础模型可以直接做好时，直接回答。** 简单提示足够时不调用复杂机制；精确计算采用通用工具；专门认知机制只保留得到增量证据支持的部分。
 
 当前阶段：**Serious Independent Evaluation，I02 来源及比较臂资格审查**。Waves A–H 完成 provider-free 正确性构建；G-ARCH 经一次有界真实普通输入运行，通过架构与入口准备门槛，原始回执及限制见 [source-first closure](reports/HCL_G_ARCH_ENTRY_CLOSURE.md) 和 [gate](docs/HCL_G_ARCH_GATE.md)。I02 的[普通叙事信息状态 v2 接入](docs/HCL_I02_INFORMATION_STATE_V2_REPAIR.md)已在公开校准案例上通过无 provider 的 H/H-new treatment-presence 和公平性检查；早期 C/P/G 校准曾因 G-map 格式失败，后续 ACL v8 开发运行通过接口但语义资格仍未确立。这尚未证明独立泛化或强模型增益。当前按 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md) 和 [I01 evaluation contract](docs/HCL_I01_EVALUATION_CONTRACT.md) 做独立来源与公平比较资格审查。LongMemEval 保持封存，leaderboard 尚未启动。

@@ -1,6 +1,6 @@
 # HCL Development Plan
 
-Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01–H05 CORRECTNESS_VERIFIED / G-ARCH PASS_ARCHITECTURE_READY_FOR_SERIOUS_EVALUATION / I01 FROZEN / I02 NEXT_READY**
+Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01–H05 CORRECTNESS_VERIFIED / G-ARCH PASS_ARCHITECTURE_READY_FOR_SERIOUS_EVALUATION / I01 FROZEN FOR FINAL / DEVELOPMENT REALITY CHECKS ACTIVE**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
 maturity gates, serious evaluation standard, optimization sequence and leaderboard
@@ -11,6 +11,29 @@ This file is the live execution control plane. `STATUS.md` records current facts
 and evidence dispositions. Remote `main`, exact-SHA CI and immutable historical
 receipts remain the code/evidence facts. Historical closure documents remain
 evidence and are not rewritten as active development policy.
+
+## Current validation policy — owner amendment 2026-10-01
+
+**Development Reality Checks ACTIVE; Final Sealed Confirmation deferred until
+capability/configuration freeze.** [Canonical two-track policy](docs/HCL_VALIDATION_TIERS_POLICY.md)
+supersedes the former global I02 source/reviewer stop. First run strong Base vs
+current HCL on fresh legally usable development items with equal underlying model,
+complete source/question/options and a frozen subset/config/scorer. Independent
+reviewer, final source diversity, P/G/ablation/cross-family/confirmation power are
+not development admission gates. Preserve negative results, missing treatment and
+all H costs; repair general failures, never single-case rules. Every opened batch
+is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently excluded
+from final sealed material. Historical receipts/runtime/dispositions/grants stay
+unchanged. No LongMemEval access or leaderboard activation.
+
+**NEXT_READY: DRC001_FRESH_BASE_VS_HCL_REALITY_CHECK**
+
+DRC001: SimpleToM12 + SocialIQA8 native items, fixed hash-rank selection, current
+certified runtimev12, strong DeepSeek V4 Pro high thinking, equal8192 output ceilings,
+40 maximum calls,0 retries, separate USD2.25 hard cap, no old budget transfer.
+Source licenses/pins, gold-free input, actual H preparation, primary native-label
+agreement and source/history admission checks frozen before paid execution.
+No independent efficacy claim; long narrative/philosophy are not covered yet.
 
 ## 1. Objective and fixed priority
 
@@ -677,7 +700,7 @@ crosses to the implementer. Judge independence, semantic truth and difficulty
 remain unverified. No call has executed at this freeze. Continue I02; no owner
 permission request is needed under the current normal-cost autonomy policy.
 
-**I02 — NEXT_READY:** qualify independent source provenance, license and access plus competent C/P/G comparators. Freeze model IDs, prompt/scaffold implementations, scorer rubric, sample size and cost/latency bands before confirmation. Do not view confirmation outcomes to tune H. C/P/G share complete ordinary inputs and final answer fields; G has a separately charged generic source-map step and original source in final input. The [first-group MuSR calibration](reports/HCL_I02_CPG_CALIBRATION_CLOSURE.md) made C, P and G-map calls; G-map violated its shape contract, G-final was not called, and its unique authorization closed. The [second-source Moral Stories calibration](reports/HCL_I02_MORAL_CPG_CALIBRATION_CLOSURE.md) made C/P/G-map/G-final calls: G-map v2 worked, but all three final comparators missed an explicit security goal while correctly refusing unsupported harmful intent. Its USD 0.06 grant is closed, with no rerun. Neither exposed calibration qualifies comparator semantics across task families or H efficacy. Initial rights screening excludes OpenStax model input and holds Gutenberg and the distinct GitHub MuSR distribution pending rights checks; see `docs/HCL_I02_SOURCE_SCREEN.md`. Zero confirmation sources are qualified. A separately pinned CC BY 4.0 author-team MuSR CSV is **calibration-only**: 256 questions share 64 narratives; the first group is exposed and its second item has unresolved perceptual support. Complete item-level audit and independent-source diversity before confirmation; do not treat license metadata or generated gold as semantic truth. Both MuSR and Moral Stories author/template/writing systems are calibration-exposed, so their other rows cannot be treated as unseen confirmation under I01. The [ordinary information-state repair](docs/HCL_I02_INFORMATION_STATE_ENTRY_REPAIR.md) initially found zero checked observations on the exposed native question; its [v2 repair](docs/HCL_I02_INFORMATION_STATE_V2_REPAIR.md) now passes provider-free H/H-new treatment presence and structural fairness with a chained runtime amendment. This is correctness evidence only. The generic semantic scorer v1 now distinguishes a stated goal from unproved harmful intent in source-first review; next qualify source diversity and a protected confirmation split. Do not rerun either spent calibration or claim H efficacy.
+**I02 — DEFERRED_FINAL_CONFIRMATION (historical qualification queue):** qualify independent source provenance, license and access plus competent C/P/G comparators. Freeze model IDs, prompt/scaffold implementations, scorer rubric, sample size and cost/latency bands before confirmation. Do not view confirmation outcomes to tune H. C/P/G share complete ordinary inputs and final answer fields; G has a separately charged generic source-map step and original source in final input. The [first-group MuSR calibration](reports/HCL_I02_CPG_CALIBRATION_CLOSURE.md) made C, P and G-map calls; G-map violated its shape contract, G-final was not called, and its unique authorization closed. The [second-source Moral Stories calibration](reports/HCL_I02_MORAL_CPG_CALIBRATION_CLOSURE.md) made C/P/G-map/G-final calls: G-map v2 worked, but all three final comparators missed an explicit security goal while correctly refusing unsupported harmful intent. Its USD 0.06 grant is closed, with no rerun. Neither exposed calibration qualifies comparator semantics across task families or H efficacy. Initial rights screening excludes OpenStax model input and holds Gutenberg and the distinct GitHub MuSR distribution pending rights checks; see `docs/HCL_I02_SOURCE_SCREEN.md`. Zero confirmation sources are qualified. A separately pinned CC BY 4.0 author-team MuSR CSV is **calibration-only**: 256 questions share 64 narratives; the first group is exposed and its second item has unresolved perceptual support. Complete item-level audit and independent-source diversity before confirmation; do not treat license metadata or generated gold as semantic truth. Both MuSR and Moral Stories author/template/writing systems are calibration-exposed, so their other rows cannot be treated as unseen confirmation under I01. The [ordinary information-state repair](docs/HCL_I02_INFORMATION_STATE_ENTRY_REPAIR.md) initially found zero checked observations on the exposed native question; its [v2 repair](docs/HCL_I02_INFORMATION_STATE_V2_REPAIR.md) now passes provider-free H/H-new treatment presence and structural fairness with a chained runtime amendment. This is correctness evidence only. The generic semantic scorer v1 now distinguishes a stated goal from unproved harmful intent in source-first review; next qualify source diversity and a protected confirmation split. Do not rerun either spent calibration or claim H efficacy.
 
 The [complete long-source ordinary-entry repair](docs/HCL_I02_COMPLETE_LONG_SOURCE_ENTRY.md) adds a chained v3 runtime amendment: a 24,920-character already exposed development story now reaches final input whole with source-anchored literal candidates and no extraction call. Historical v1/v2 receipts remain pinned; no specialized H treatment, independent source qualification or answer gain is claimed. I02 source-first rights and C/P/G competence remain NEXT_READY.
 
@@ -846,7 +869,7 @@ defect is.
 
 - Current wave: **I — Serious Independent Evaluation**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **NEXT_READY: I02_UNEXPOSED_SOURCE_QUALIFICATION**
+- **Current execution task:** DRC001_FRESH_BASE_VS_HCL_REALITY_CHECK; I02 source/reviewer rules below describe historical final qualification, not a development run gate.
 - The [blind-review v2 handoff](docs/HCL_I02_BLIND_REVIEW_V2.md) composes the immutable v1 obligation score with residual-claim coverage before arm reveal. Real ACL raw receipt smoke and 19 provider-free tests pass, with no independent review or source qualified. MeetingToM needs separately licensed/accessed AMI media; SQuALITY long dev sources still fail H input. **Evaluation workflow delta only; HCL answer gain 0; calls/spend 0.** Continue rights-clear unexposed source qualification.
 - The [residual-claim audit supplement](docs/HCL_I02_RESIDUAL_CLAIM_AUDIT.md) disqualifies severe unsupported claims outside prespecified obligations while preserving frozen v1 scores. Synthetic positive, negative, source, identity and historical regressions pass provider-free; no independent reviewer or new confirmation source. **Evaluation capability delta only; HCL answer gain 0; calls/spend 0.** Continue unexposed source qualification.
 - The I02 [snapshot qualification gate](docs/HCL_I02_REPOSITORY_EXPOSURE_SNAPSHOT.md) now binds its revision to the checkout HEAD before scanning, closing a stale-revision bypass found during source screening. An old clean commit cannot hide a source present in the current checkout; the standalone historical diagnostic remains available. This is provider-free source-gate correctness, **not** a qualified source, full-history audit or HCL efficacy result. Continue genuinely unexposed source qualification.

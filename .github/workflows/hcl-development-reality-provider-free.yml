@@ -1,0 +1,21 @@
+name: HCL Development Reality Check Fairness and Final Isolation
+on:
+  pull_request:
+    paths: ['scripts/development*', 'tests/test_development*', 'reports/HCL_DRC*', 'reports/HCL_DEVELOPMENT*', 'docs/HCL_VALIDATION*', '.github/workflows/hcl-development*', '.github/frozen/hcl-drc*', 'hcl/**']
+  push:
+    branches: [main]
+    paths: ['scripts/development*', 'tests/test_development*', 'reports/HCL_DRC*', 'reports/HCL_DEVELOPMENT*', 'docs/HCL_VALIDATION*', '.github/workflows/hcl-development*', '.github/frozen/hcl-drc*', 'hcl/**']
+permissions:
+  contents: read
+jobs:
+  development-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest tests.test_development_reality_check tests.test_i02_rebus_kranak_exposure
+      - run: python -m scripts.development_reality_check --preflight --output /tmp/drc001-provider-free.json
