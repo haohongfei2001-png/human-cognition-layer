@@ -1,0 +1,29 @@
+name: HCL I02 Protected Gilman Source History
+on:
+  pull_request:
+    paths: ['scripts/i02_gilman_protected_candidate.py', 'tests/test_i02_gilman_protected_candidate.py', 'reports/HCL_I02_GILMAN*', '.github/workflows/hcl-i02-gilman-protected-history.yml']
+  push:
+    branches: [main]
+    paths: ['scripts/i02_gilman_protected_candidate.py', 'tests/test_i02_gilman_protected_candidate.py', 'reports/HCL_I02_GILMAN*', '.github/workflows/hcl-i02-gilman-protected-history.yml']
+permissions:
+  contents: read
+jobs:
+  protected_screen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Protected source and historical boundary checks
+        run: python -m unittest tests.test_i02_gilman_protected_candidate tests.test_i02_exposure_history tests.test_i02_native_choice_candidate
+      - name: Current reachable-history and snapshot metadata only
+        run: python -m scripts.i02_gilman_protected_candidate --output i02-gilman-protected-history.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hcl-i02-gilman-protected-history-${{ github.run_id }}
+          path: i02-gilman-protected-history.json

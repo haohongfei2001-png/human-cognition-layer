@@ -1,0 +1,61 @@
+{
+  "schema": "hcl-i02-gilman-protected-candidate-v1",
+  "main_sha": "530c935e9cc0780bd71b9a7b01c3a3a14d93474f",
+  "publisher_metadata_url": "https://www.gutenberg.org/ebooks/1952.rdf",
+  "publisher_metadata_sha256": "4ac05ad049d2401aeacb9375ac24708241249978bb2c5dcf200ea774fe0f1441",
+  "metadata": {
+    "titles": [
+      "The Yellow Wallpaper"
+    ],
+    "rights": [
+      "Public domain in the USA."
+    ],
+    "authors": [
+      "Gilman, Charlotte Perkins"
+    ],
+    "deathdates": [
+      "1935"
+    ]
+  },
+  "selection": "CONTINUE_PREVIOUSLY_METADATA_PINNED_COMPLETE_GILMAN_WORK; NO_H_WIN_SELECTION",
+  "source_sha256": "00b4236dc9b2b4215ace0af20da168e77cba5e9ba826c079b4714fb13abe2d49",
+  "source_characters": 31497,
+  "ordinary_question": "Across this story, how does the narrator's view of her husband change, and how much can we infer about his intentions from her account?",
+  "question_origin": "PREDECLARED_ORDINARY_QUESTION_NOT_NATIVE_NARRATIVEQA_QA",
+  "question_sha256": "ea91105e433f809327597b73b7ed6b342b588b52617e3fb2d35f4d124b312ffc",
+  "source_text_displayed": false,
+  "source_text_processed_for_metadata_only": true,
+  "native_question_or_answer_files_used": false,
+  "rights": "LIMITED_ORIGINAL_PROSE_TERM_REVIEW_US_CHINA_UK; NO_GLOBAL_OR_ADAPTATION_RIGHTS_CLAIM",
+  "family": "LONG_CHARACTER_DEVELOPMENT_CANDIDATE_NOT_QUALIFIED_BY_LENGTH",
+  "task_fit": "PENDING_SOURCE_FIRST_REVIEW_WITHOUT_H_OUTCOMES",
+  "h_entry_executed": false,
+  "runtime_changed_from_candidate": false,
+  "confirmation_qualified": false,
+  "provider_input_allowed": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "next": "CURRENT_HEAD_CLOUD_HISTORY_AND_SNAPSHOT_SCAN_THEN_SOURCE_FIRST_HOLDER_REVIEW; NO_H_OR_PROVIDER_CALLS_BY_THIS_PACKAGE",
+  "raw_url": "https://www.gutenberg.org/files/1952/1952-0.txt",
+  "raw_sha256": "a40cdaa300cd6850f2c18c2c8fd027339e53c9ed5ac0c01fe9cfe3b57cbca898",
+  "complete_body_recipe": "UTF8_SIG_DECODE; EXACT_UNIQUE_PG_1952_START_END; STRIP_OUTER_WHITESPACE_ONLY",
+  "source_id": "gilman-1952-original-complete-narrative-protected",
+  "author_id": "charlotte-perkins-gilman",
+  "writing_system_id": "gilman-original-english-psychological-fiction",
+  "source_group_id": "gilman-yellow-wallpaper-1892-complete",
+  "template_id": "independent-long-character-open-question-v1",
+  "rights_scope": {
+    "USA": "PUBLISHER_PUBLIC_DOMAIN_DECLARATION",
+    "CHINA": "NATURAL_AUTHOR_DIED_1935; ART23_LIFE_PLUS50_TERM_PASSED; AUTHORSHIP_INTEGRITY_RETAINED",
+    "UK": "AUTHOR_DIED_1935; ORDINARY_LIFE_PLUS70_TERM_PASSED; NO_MODERN_EDITION_LAYOUT_CLAIM",
+    "limits": "ORIGINAL_ENGLISH_PLAIN_TEXT_ONLY; NO_TRANSLATION_MODERN_CRITICISM_ANNOTATIONS_OR_IMAGES; SEMANTIC_ITEM_REVIEW_PENDING"
+  },
+  "rights_evidence_urls": [
+    "https://www.gutenberg.org/ebooks/1952.rdf",
+    "https://www.wipo.int/wipolex/en/legislation/details/21065",
+    "https://www.legislation.gov.uk/ukpga/1988/48/section/12"
+  ],
+  "attribution": "Charlotte Perkins Gilman, The Yellow Wallpaper; complete original English plain-text body, publisher ebook 1952. Outer PG wrapper and whitespace removed only. No claim that author or publisher endorses HCL.",
+  "source_independence_limit": "ORIGINAL_GILMAN_PROSE_NOT_NARRATIVEQA_QUESTIONS; QUESTION_IS_A_NEW_PREDECLARED_ORDINARY_TASK, NOT_PUBLISHER_NATIVE_OR_INDEPENDENT_HUMAN_GOLD"
+}
