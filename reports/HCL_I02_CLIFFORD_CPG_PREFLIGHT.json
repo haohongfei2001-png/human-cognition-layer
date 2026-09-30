@@ -1,15 +1,15 @@
 {
-  "all_phase_peak_reservation_usd": 1.25804184,
+  "all_phase_peak_reservation_usd": 1.32680856,
   "longmemeval": "SEALED_NOT_ACCESSED",
-  "package_sha256": "eed44a1a3daa3c29d9f4f9ca2a1c66cab5772dab61da9c94c68538864f9cdee7",
+  "package_sha256": "bf68a209acc596b7f8c21b7678934b58ce09a5c433928e4f7b18ed97cfbc88eb",
   "phase_bounds": {
     "C": {
       "input_token_bound": 126076,
       "reserved_usd": 0.2961816
     },
     "G_final": {
-      "input_token_bound": 178094,
-      "reserved_usd": 0.36484536
+      "input_token_bound": 230190,
+      "reserved_usd": 0.43361207999999996
     },
     "G_map": {
       "input_token_bound": 127280,

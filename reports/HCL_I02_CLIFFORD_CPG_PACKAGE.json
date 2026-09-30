@@ -1,6 +1,6 @@
 {
   "authorization": "OWNER_DEFAULT_EXISTING_PROVIDER_NORMAL_BOUNDED_COST",
-  "budget_cap_usd": 1.3,
+  "budget_cap_usd": 1.4,
   "call_specs": {
     "C": {
       "max_tokens": 32768,
@@ -105,7 +105,7 @@
     "scripts/i02_source_qualification_v4.py": "0f0cfc25416ceef12feba5dfc19685d5648b67029062045d55b6aec997da77ef",
     "scripts/i02_source_qualification_v9.py": "9af8abfbdfe388c948a3bbebd302d31d925da708ba601936c8c97fade07c270b",
     "scripts/run_i02_acl_ethics_cpg_v8_once.py": "b58674bbd3f7d9c0b2675bfa8bfb938a597a8cde0e4f9528cf5f1915610bf9f8",
-    "scripts/run_i02_clifford_cpg_once.py": "0655c176c6527b42c8773fb844cbfb289ff715fbeeeaa0a3389551a5978f402e",
+    "scripts/run_i02_clifford_cpg_once.py": "f985baf02c35bc5fb346f992724064381fa9931007616d002352afdca09cf3b0",
     "scripts/run_i02_comparator_calibration_once.py": "c3676942814eefd02bdee0270390bc986ca86491eab1f911e622316bd681cdf8",
     "scripts/run_i02_obp_metaethics_cpg_once.py": "23f2af688e4c8c5c78b2035a649b18f3ba1a2c569c617664820d2ff5b069d084",
     "scripts/serious_eval_arms.py": "a94cb6d2af171c8b4efc2596b2b27df914d6cc49695dd1c1979948dded31868c",
@@ -119,11 +119,11 @@
     "scripts/serious_eval_generic_workspace_v6.py": "4825cf7935611976604e4a4aea84dc62d3b5c4dd3f3ee1b0010a48c7703430f8",
     "scripts/serious_eval_generic_workspace_v7.py": "68333b9cdc6ed2de64a7013da4748fd6ea072173e94fde0684378a985e4a96e2",
     "scripts/serious_eval_semantic_score.py": "3e47b6f836151e41ec07f1afa98b9304c879db2003f7d37d379e21414c481853",
-    "tests/test_i02_clifford_cpg.py": "18123aed56b4bd89f3182f37080e64a0a23663d3d37983941a07d798f023cd6b",
+    "tests/test_i02_clifford_cpg.py": "1b57fe276198e7145e04449becd733aaad22cce42343fb4435c1275276794d76",
     "tests/test_i02_obp_metaethics.py": "6ddaea8d3f9ba684094af7d3b0ce4344317869eeefd6e14a36c672c6e3d17183",
     "tests/test_i02_obp_metaethics_cpg.py": "f915b5ed81800f843c81c48f3253ee25b0fc4c0328911801a6c0255363587eb8"
   },
-  "execution_sha256": "db3d8128c88b78c38546e03cdb08f5a3add94709fd86c30a0765427c356eee57",
+  "execution_sha256": "c707c607b3b244672962d3c4bd76460a5d21fdb61615a0a92a03443260c72bad",
   "h_arm_calls": 0,
   "hcl_runtime_sha256": "c7034fdc97d606867bf6688cc005837033b357155cd649ed187f41a32509579b",
   "historical_budget_transfer": false,

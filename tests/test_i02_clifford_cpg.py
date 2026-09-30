@@ -16,6 +16,20 @@ class CliffordCalibrationTests(unittest.TestCase):
         self.assertTrue(all(s['thinking']=={'type':'enabled'} and s['reasoning_effort']=='high' and s['max_tokens']==32768 for s in p['call_specs'].values()))
         self.assertEqual(p['maximum_provider_calls'],4);self.assertEqual(p['h_arm_calls'],0)
         self.assertFalse(g['source_gate']['h_specialized_treatment_present']);self.assertFalse(g['source_gate']['independent_confirmation_qualified'])
+    def test_nested_map_transport_fits_reserved_whole_run(self):
+        from scripts.serious_eval_full_source_arms_v9 import prepare_generic_final_v9,MAX_MAP_BYTES
+        from scripts.run_i02_acl_ethics_cpg_v8_once import _input_bound,_request
+        p=load_package();g,arms=preflight(p);text=json.loads(SOURCE.read_text())['source_text']
+        rows=[]
+        for i in range(15):
+            quote=text[100+i*2000:1450+i*2000]
+            self.assertEqual(text.count(quote),1)
+            rows.append(dict(id='e'+str(i+1),source_id='ordinary-source',quote=quote))
+        raw=json.dumps(dict(source_index=rows,relations=[],answer_plan=[],open_questions=[]))
+        self.assertLess(len(raw.encode()),MAX_MAP_BYTES)
+        final=prepare_generic_final_v9(arms,raw)
+        actual=_input_bound(_request(p['call_specs']['G_final'],final))
+        self.assertLessEqual(actual,g['phase_bounds']['G_final']['input_token_bound'])
     def test_pinned_complete_reconstruction_and_no_silent_normalization(self):
         rawpath=os.environ.get('HCL_CLIFFORD_RAW');rdfpath=os.environ.get('HCL_CLIFFORD_RDF')
         if not rawpath or not rdfpath:self.skipTest('pinned external edition unavailable locally; cloud required')
@@ -25,7 +39,7 @@ class CliffordCalibrationTests(unittest.TestCase):
             with self.assertRaises(ValueError):reconstruct(r,d)
     def test_drift_and_owner_grant_limits_fail_before_transport(self):
         p=load_package()
-        for field,v in [('budget_cap_usd',1.31),('maximum_provider_calls',5),('h_arm_calls',1),('hcl_runtime_sha256','bad')]:
+        for field,v in [('budget_cap_usd',1.41),('maximum_provider_calls',5),('h_arm_calls',1),('hcl_runtime_sha256','bad')]:
             q=copy.deepcopy(p);q[field]=v
             with self.assertRaises(ValueError):preflight(q)
         with self.assertRaises(ValueError):require_execution_grant(p)

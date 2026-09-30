@@ -41,8 +41,8 @@ Gregory’s separate rights hold remains unchanged.
 Existing **C/P/Gv9** gets equal complete ordinary source/question/output vocabulary;
 G-map and G-final remain separately charged, with original source also present in
 G-final. Native DeepSeek-V4-Pro-0813 thinking/high reasoning is retained for all four
-phases. **Maximum4 calls, zero retries, 32,768 output tokens/call, new USD1.30 hard cap**;
-all-phase conservative peak reservation is **USD1.25804184**. This separate generous
+phases. **Maximum4 calls, zero retries, 32,768 output tokens/call, new USD1.40 hard cap**;
+all-phase conservative peak reservation is **USD1.32680856**. This separate generous
 output reservation is not transferred legacy budget; actual usage/cache/clock cost,
 rated cost, raw requests/responses and model IDs are preserved. Current primary
 [provider pricing](https://api-docs.deepseek.com/quick_start/pricing/) was verified
@@ -50,7 +50,7 @@ rated cost, raw requests/responses and model IDs are preserved. Current primary
 
 The chained **v11 certified H runtime** is unchanged. Actual ordinary H preparation
 preserves the entire source but has **0 candidates / no checked specialized treatment**;
-H/H-new calls are forbidden, no model-efficacy comparison is implied. Nineteen local
+H/H-new calls are forbidden, no model-efficacy comparison is implied. Twenty local
 provider-free source/fairness, drift, negative quote, revision/composition, no-repeat,
 closed-budget, transport-failure and historical scorer checks pass. Stubs are not
 live or semantic evidence. Exact publisher reconstruction is required before transport.

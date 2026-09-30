@@ -12,7 +12,7 @@ PACKAGE=Path('reports/HCL_I02_CLIFFORD_CPG_PACKAGE.json')
 TEMPLATE=Path('.github/frozen/hcl-i02-clifford-cpg-once.yml')
 WORKFLOW=Path('.github/workflows/hcl-i02-clifford-cpg-once.yml')
 GRANT=Path('.github/HCL_I02_CLIFFORD_CPG_GRANT.json')
-CAP_USD=1.30
+CAP_USD=1.40
 OUTPUT_TOKENS=32768
 
 def build_package():
@@ -61,9 +61,10 @@ def preflight(p,raw=None,rdf=None):
     bounds={}
     for phase in PHASES:
         req=_request(p['call_specs'][phase],messages[phase]);bounds[phase]=dict(input_token_bound=_input_bound(req),reserved_usd=_reservation(req))
-    # Reserve the whole generic-map UTF8 bound, not only this mock map.
-    bounds['G_final']['input_token_bound']+=2*MAX_MAP_BYTES
-    bounds['G_final']['reserved_usd']+=2*MAX_MAP_BYTES*PEAK['input']/1000000
+    # Reserve full map after nested request JSON escaping, plus derived metadata;
+    # raw-map bytes alone undercount escaped quotes/newlines in final transport.
+    bounds['G_final']['input_token_bound']+=4*MAX_MAP_BYTES+4096
+    bounds['G_final']['reserved_usd']+=(4*MAX_MAP_BYTES+4096)*PEAK['input']/1000000
     worst=sum(x['reserved_usd'] for x in bounds.values())
     if worst>p['budget_cap_usd']:raise ValueError('whole-run peak reservation exceeds hard cap')
     return dict(schema='hcl-i02-clifford-cpg-preflight-v1',status='PASS_SOURCE_FIRST_COMPLETE_CPG_ONLY',package_sha256=digest(p),source_gate=gate,phase_bounds=bounds,all_phase_peak_reservation_usd=worst,provider_calls=0,provider_spend_usd=0,longmemeval='SEALED_NOT_ACCESSED'),arms

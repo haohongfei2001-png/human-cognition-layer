@@ -394,10 +394,10 @@ The [complete Clifford philosophical development calibration](docs/HCL_I02_CLIFF
 freezes a complete56,817-character original essay and a question fixed before the
 complete target read, with9 source-first obligations permitting multiple grounded
 critiques. Equal C/P/Gv9 complete inputs, native high thinking and generous32,768-token
-outputs are preflighted;19 provider-free checks pass. Current certified H preserves
+outputs are preflighted;20 provider-free checks pass. Current certified H preserves
 the source but has0 candidates/no specialized treatment, so H/H-new calls remain0.
-One new existing-provider grant allows at most4 C/P/G calls,0 retries, USD1.30 cap
-(peak worst reservation1.25804184), with no historical transfer. No call/outcome yet.
+One new existing-provider grant allows at most4 C/P/G calls,0 retries, USD1.40 cap
+(peak worst reservation1.32680856), with no historical transfer. No call/outcome yet.
 This is genuine comparator semantic calibration, not another source-holder interface
 retest. Implementer source/task/review is development only;0 confirmation qualified.
 v13 excludes the author/system/exact fingerprints; Gregory rights hold and all
