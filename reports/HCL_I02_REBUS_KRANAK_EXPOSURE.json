@@ -1,0 +1,26 @@
+{
+  "schema": "hcl-i02-rebus-kranak-development-exposure-v1",
+  "status": "DEVELOPMENT_EXPOSED_NOT_CONFIRMATION_QUALIFIED",
+  "authority_main": "a7675722eeffc44f6aa08a77893a797bf9e20eeb",
+  "author_id": "joseph-kranak",
+  "writing_system_id": "rebus-introduction-to-philosophy-ethics-2019",
+  "publisher_url": "https://press.rebus.community/intro-to-phil-ethics/chapter/kantian-deontology/",
+  "license_url": "https://press.rebus.community/intro-to-phil-ethics/back-matter/licensing-and-attribution-information/",
+  "exposure": "Primary chapter and book licensing information visible through web reader; author prose, attributed philosophical positions and embedded translation citations development-exposed. No protected confirmation task selected, native reference answer opened or model request prepared.",
+  "license_observation": "Original chapter declares CC BY 4.0 except otherwise noted. Embedded modern Kant/Schopenhauer translations need item-level exception review; no model-use clearance inferred from the chapter-level license.",
+  "native_task_fit": "NO_SEPARATE_NATIVE_OPEN_ANSWER_ITEM_QUALIFIED",
+  "existing_lineage": "Rebus writing system already excluded by reports/HCL_I02_EXPOSURE_LINEAGE.json; new author and URL explicitly excluded by source qualification v14.",
+  "raw_retrieval": {
+    "attempts": 1,
+    "result": "HTTP_403_NO_RETRY_NO_BYPASS",
+    "raw_html_sha256": null,
+    "body_sha256": null,
+    "pin_available": false
+  },
+  "model_input_allowed": false,
+  "confirmation_items_qualified": 0,
+  "provider_calls": 0,
+  "spend_usd": 0,
+  "limits": "Known identity/URL negative gate only; not an exact-body fingerprint, paraphrase detector, legal determination or exhaustive public-source audit.",
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

@@ -502,6 +502,21 @@ expansion, Gregory rights hold and LongMemEval SEALED preserved.
 
 ## I02 source-narrator attribution entry
 
+The [2026-10-01 I02 dependency handoff](reports/HCL_I02_DEPENDENCY_HANDOFF_20261001.md)
+records PR285–289 merged and verified implementation main `a7675722eeffc44f6aa08a77893a797bf9e20eeb`
+with11 exact-main checks SUCCESS. Existing B01/C01/C03 ordinary integration deltas
+remain correctness evidence, not independent efficacy.0 protected confirmation
+items and no available independent semantic reviewer: current I02 source/task/review
+qualification is an external dependency boundary, not a new paid owner gate.
+Independent reviewer/second-family onboarding is DEFERRED_EXTERNAL_SETUP; second
+family is a later transfer/maturity target, not required for every restricted study.
+No new live comparison is queued. Clifford3-call receipt remains CLOSED/INCONCLUSIVE,
+estimated USD0.122967108, invoice unavailable; this handoff adds0 calls/spend.
+Rebus/Kranak reading is development-exposed, not a new qualified task; one raw403,
+no bypass or invented hash. Future qualificationv14 rejects known author/URL/system
+and preserves old gates. No broad source-exhaustion claim, new module or leaderboard.
+LongMemEval SEALED. Unique next stays I02_UNEXPOSED_SOURCE_QUALIFICATION.
+
 The [v12 existing B01 narrator-report entry](docs/HCL_I02_NARRATOR_EPISTEMIC_ENTRY_V12.md)
 now separates a standalone named source-narrator mental attribution from the subject
 own expression in actual complete ordinary H input. Exact source-local REPORT wrapper,
