@@ -9,6 +9,7 @@ from scripts.serious_eval_contract import (ARMS, FAMILIES, FIELDS,
     validate_runtime_amendment, validate_runtime_amendment_v2)
 from scripts.i02_runtime_amendment_v3 import validate_runtime_amendment_v3
 from scripts.i02_runtime_amendment_v4 import validate_runtime_amendment_v4
+from scripts.i02_runtime_amendment_v5 import validate_runtime_amendment_v5
 
 
 FREEZE = json.loads(Path('reports/HCL_I01_EVALUATION_FREEZE.json').read_text())
@@ -16,6 +17,7 @@ AMENDMENT = json.loads(Path('reports/HCL_I02_RUNTIME_AMENDMENT.json').read_text(
 AMENDMENT_V2 = json.loads(Path('reports/HCL_I02_RUNTIME_AMENDMENT_V2.json').read_text())
 AMENDMENT_V3 = json.loads(Path('reports/HCL_I02_RUNTIME_AMENDMENT_V3.json').read_text())
 AMENDMENT_V4 = json.loads(Path('reports/HCL_I02_RUNTIME_AMENDMENT_V4.json').read_text())
+AMENDMENT_V5 = json.loads(Path('reports/HCL_I02_RUNTIME_AMENDMENT_V5.json').read_text())
 
 
 def case(n, family, split='CONFIRMATION'):
@@ -45,7 +47,10 @@ class I01EvaluationContractTests(unittest.TestCase):
             AMENDMENT_V2, AMENDMENT_V3,
             current_digest=AMENDMENT_V3['amended_hcl_runtime_sha256']))
         self.assertTrue(validate_runtime_amendment_v4(FREEZE, AMENDMENT,
-            AMENDMENT_V2, AMENDMENT_V3, AMENDMENT_V4))
+            AMENDMENT_V2, AMENDMENT_V3, AMENDMENT_V4,
+            current_digest=AMENDMENT_V4['amended_hcl_runtime_sha256']))
+        self.assertTrue(validate_runtime_amendment_v5(FREEZE, AMENDMENT,
+            AMENDMENT_V2, AMENDMENT_V3, AMENDMENT_V4, AMENDMENT_V5))
         self.assertNotEqual(FREEZE['hcl_runtime_sha256'], runtime_digest())
         self.assertTrue(validate_catalog(FREEZE,
             [case(i, family) for i, family in enumerate(FAMILIES)]))
@@ -129,7 +134,12 @@ class I01EvaluationContractTests(unittest.TestCase):
         changed['provider_calls'] = 1
         with self.assertRaisesRegex(ValueError, 'invalid I02 v4'):
             validate_runtime_amendment_v4(FREEZE, AMENDMENT, AMENDMENT_V2,
-                AMENDMENT_V3, changed)
+                AMENDMENT_V3, changed, current_digest=AMENDMENT_V4['amended_hcl_runtime_sha256'])
+        changed = copy.deepcopy(AMENDMENT_V5)
+        changed['confirmation_items_inspected'] = 1
+        with self.assertRaisesRegex(ValueError, 'invalid I02 v5'):
+            validate_runtime_amendment_v5(FREEZE, AMENDMENT, AMENDMENT_V2,
+                AMENDMENT_V3, AMENDMENT_V4, changed)
 
 
 if __name__ == '__main__':
