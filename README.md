@@ -224,6 +224,14 @@ qualification, task difficulty and model competence remain unresolved. Zero call
 
 ### I02 protected source-holder audit freeze
 
+The [native OBP concept C/P/G calibration freeze](docs/HCL_I02_OBP_METAETHICS_CPG_CALIBRATION.md)
+uses the unchanged exposed author-original unit and native question, with obligations
+frozen before outputs. Existing DeepSeek/high native reasoning, 16,384 output tokens
+per phase, **4 calls / 0 retries / new USD 0.35 cap**; peak whole-phase reservation
+USD 0.33817872. No old grant transfer, Gilman rerun, H calls or confirmation claim.
+No call at freeze. After exact-head/main CI, execute once and source-first close;
+this answers a distinct concept-comparator qualification question in I02.
+
 The [protected source-holder audit closure](reports/HCL_I02_GILMAN_HOLDER_CLOSURE.md)
 is **INCONCLUSIVE — OUTPUT_CEILING_BEFORE_JSON**: run 36698203458 made exactly
 one DeepSeek call, zero retries, exhausted 8,192 completion tokens and returned
