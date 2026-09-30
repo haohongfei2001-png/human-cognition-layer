@@ -154,7 +154,7 @@ def _anchor(source, proposal):
     return derived, derived + len(quote), quote, normalization
 
 
-def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, max_candidates=64, max_source_chars=64000, dialogue_blocks=False, modal_events_only=False, agency_events=False):
+def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, max_candidates=64, max_source_chars=64000, dialogue_blocks=False, modal_events_only=False, agency_events=False, belief_revision_events=False, model_declarations=False):
     """Ordinary question and authorized text, no caller-supplied mental-state labels.
 
     A backend implements complete_json(messages, max_tokens, temperature). At most
@@ -168,7 +168,8 @@ def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, ma
             or type(max_candidates) is not int or not 1 <= max_candidates <= 128
             or type(max_source_chars) is not int or not 1 <= max_source_chars <= 250000
             or type(dialogue_blocks) is not bool or type(modal_events_only) is not bool
-            or type(agency_events) is not bool or (agency_events and not modal_events_only)
+            or any(type(v) is not bool for v in (agency_events,belief_revision_events,model_declarations))
+            or ((agency_events or belief_revision_events or model_declarations) and not modal_events_only)
             or (modal_events_only and backend is not None)):
         raise ValueError('bounded ordinary query and distinct authorized sources required')
     core = EvidenceCore() if core is None else core
@@ -193,9 +194,13 @@ def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, ma
             # checker decides support. No quota truncation or source shortening.
             from .epistemic import _PREDICATE
             from .agency import is_agency_utterance
+            from .plan_feasibility import is_reported_belief_update, _MODEL
             proposals = [r for r in proposals if r['kind'] == 'event' and
                 (_PREDICATE.fullmatch(r['content']['utterance'].rstrip('.!?').strip()) or
-                 (agency_events and is_agency_utterance(r['content']['utterance'])))]
+                 (agency_events and is_agency_utterance(r['content']['utterance'])) or
+                 (belief_revision_events and is_reported_belief_update(r['content']['utterance'])) or
+                 (model_declarations and r['content']['speaker_surface']=='Narrator' and
+                  r['quote'].startswith('Narrator:') and _MODEL.fullmatch(r['content']['utterance'].rstrip('.!?'))))]
     elif visible:
         calls = 1
         raw = backend.complete_json(extraction, max_tokens=4096, temperature=0.0)

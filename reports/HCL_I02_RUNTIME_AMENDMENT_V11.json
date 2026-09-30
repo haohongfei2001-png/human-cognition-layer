@@ -1,0 +1,15 @@
+{
+  "schema": "hcl-i02-runtime-amendment-v11",
+  "reason": "EXISTING_C03_LONG_READER_COMPOSITION",
+  "historical_i01_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "previous_hcl_runtime_sha256": "49f2ad957993110b95e3f9daa1f2acbd97c57dc446ecb6f60704cf73704fb7da",
+  "amended_hcl_runtime_sha256": "c7034fdc97d606867bf6688cc005837033b357155cd649ed187f41a32509579b",
+  "development_only": true,
+  "confirmation_items_inspected": 0,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "answer_gain_claimed": false,
+  "new_cognition_module": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "boundary": "Existing C03 composes grounded C01 plans with reported belief/revision and explicit declared-model premises, preserving source order versus actual time, model versus world/private truth, actor/version/core/live support. Complete final source and all C01 anchors/support/conditional premises retained; full dependency graph remains in receipt. H-new removes only C03 and retains B01/C01/selection. Historical runtime/receipts/dispositions unchanged; no new module or independent efficacy."
+}
