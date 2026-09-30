@@ -523,7 +523,14 @@ class HCLCognitionLayer:
         # Prepared cognition never replaces the ordinary reader's source. Raw
         # narrative is carried only in an unrestricted reader view; observer and
         # explicitly access-scoped requests retain their checked source projection.
+        explicit_preparation = bool(request.target_actor or request.social_analysis or request.social_acts or
+            request.social_interpretations or request.social_access_statements or
+            request.responsibility_analysis or request.responsibility_case or
+            request.responsibility_premises or request.preference_analysis or
+            request.preference_case or request.concept_analysis or
+            request.concept_case or request.belief_analysis)
         carry_source = bool(request.narrative and
+            (not explicit_preparation or information_query(request.query)) and
             plan.perspective_mode == PerspectiveMode.READER_ANALYSIS and
             not request.observer_actor and not request.narrative_access)
         if carry_source:

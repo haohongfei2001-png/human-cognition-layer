@@ -3,7 +3,9 @@
 ## CAPABILITY_DELTA
 
 When the ordinary router activates mental-state cognition, H now retains the
-complete authorized narrative alongside its prepared cognition context. A base
+complete authorized narrative alongside its prepared cognition context for ordinary
+auto-routed requests. Explicitly selected focal-actor/preparation operations retain their
+declared projected-input contracts and frozen resource accounting. A base
 model can inspect source details that bounded extraction misses, and the prepared
 context cannot silently replace the input. This is an actual final-input capability
 and correctness repair, **not** demonstrated answer improvement or a new mechanism.
@@ -29,8 +31,9 @@ all ordinary-input checks without revealing text or native labels.
 - Compact and full context modes preserve the same source. A local source revision
   changes only its request; no cross-request state mutation.
 
-Six runtime tests cover positive carry, unknown mental state, option separation,
-local revision, observer/access boundary, whole-source budget refusal and compact
+Seven runtime tests cover positive carry, unknown mental state, option separation,
+local revision, observer/access boundary, explicit focal/preparation compatibility,
+whole-source budget refusal and compact
 composition. Four native-choice preparation checks cover complete options, drift,
 confirmation exclusion and actual before/after evidence. Existing v1 integration
 and historical regressions remain CI gates. No gold or provider output drove this

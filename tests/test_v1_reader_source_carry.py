@@ -39,6 +39,12 @@ class ReaderSourceCarryTests(unittest.TestCase):
         p=self.prepare('What does Mina know?',source,target_actor='Mina',narrative_access=True,belief_analysis=True)
         self.assertNotIn('narrative',json.loads(p.messages[-1]['content']))
 
+    def test_explicit_preparation_preserves_declared_projection_contract(self):
+        source='Mina: I promise Eva to return the book.'
+        p=self.prepare('Analyze the commitment.',source,social_analysis=True,target_actor='Mina')
+        self.assertIsNotNone(p.context)
+        self.assertNotIn('narrative',json.loads(p.messages[-1]['content']))
+
     def test_source_charged_to_bound_no_silent_partial_source(self):
         source='Mina walked out. '+('Unknown reasons. '*100)
         p=self.prepare('What does Mina intend?',source,max_context_chars=512)

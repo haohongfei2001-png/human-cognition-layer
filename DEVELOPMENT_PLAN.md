@@ -360,7 +360,7 @@ exposed source and its v7 disjointness exclusion. Next qualify protected disjoin
 source systems and independent semantic competence; never retune or rerun this case.
 
 The [v6 full reader-source carry](docs/HCL_I02_READER_SOURCE_CARRY_V6.md) repairs
-whole-source loss in a cognition-selected ordinary entry, with observer/access
+whole-source loss in a cognition-selected ordinary entry, with explicit focal/preparation compatibility, observer/access
 boundaries and a source-bearing context budget. A native-choice probe selected
 without semantic/label inspection supplies exact before/after input evidence;
 because it drove entry repair, v8 excludes the entire system from confirmation.

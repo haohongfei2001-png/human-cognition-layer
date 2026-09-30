@@ -22,7 +22,7 @@ code or upgrade any historical evidence.
 The [I02 v6 reader-source carry repair](docs/HCL_I02_READER_SOURCE_CARRY_V6.md)
 now preserves complete unrestricted reader narrative alongside selected cognition
 in actual final H input, rather than silently losing it after bounded extraction.
-Observer/access-scoped views remain projected; source counts toward the context
+Explicit focal/preparation and observer/access-scoped views retain their projections; source counts toward the context
 bound and overflow is a whole-source refusal. Exact v5/v6 probe hashes show the
 input delta with unchanged source, options and selected capabilities, not answer
 gain. The undisplayed native-choice source used for the repair is development-only
