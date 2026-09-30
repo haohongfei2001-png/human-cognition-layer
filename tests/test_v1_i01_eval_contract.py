@@ -50,7 +50,8 @@ class I01EvaluationContractTests(unittest.TestCase):
             AMENDMENT_V2, AMENDMENT_V3, AMENDMENT_V4,
             current_digest=AMENDMENT_V4['amended_hcl_runtime_sha256']))
         self.assertTrue(validate_runtime_amendment_v5(FREEZE, AMENDMENT,
-            AMENDMENT_V2, AMENDMENT_V3, AMENDMENT_V4, AMENDMENT_V5))
+            AMENDMENT_V2, AMENDMENT_V3, AMENDMENT_V4, AMENDMENT_V5,
+            current_digest=AMENDMENT_V5['amended_hcl_runtime_sha256']))
         self.assertNotEqual(FREEZE['hcl_runtime_sha256'], runtime_digest())
         self.assertTrue(validate_catalog(FREEZE,
             [case(i, family) for i, family in enumerate(FAMILIES)]))

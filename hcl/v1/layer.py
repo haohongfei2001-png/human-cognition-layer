@@ -520,14 +520,28 @@ class HCLCognitionLayer:
             context.uncertainty.append({'status': 'SYSTEM_INSUFFICIENT', 'capability': cid,
                                         'reason': 'declared exact inputs unavailable; no automatic formalization'})
         payload = self._payload(request.query, context, compact=request.compact_context)
-        if (request.narrative and information_query(request.query) and
-                plan.perspective_mode == PerspectiveMode.READER_ANALYSIS):
+        # Prepared cognition never replaces the ordinary reader's source. Raw
+        # narrative is carried only in an unrestricted reader view; observer and
+        # explicitly access-scoped requests retain their checked source projection.
+        explicit_preparation = bool(request.target_actor or request.social_analysis or request.social_acts or
+            request.social_interpretations or request.social_access_statements or
+            request.responsibility_analysis or request.responsibility_case or
+            request.responsibility_premises or request.preference_analysis or
+            request.preference_case or request.concept_analysis or
+            request.concept_case or request.belief_analysis)
+        carry_source = bool(request.narrative and
+            (not explicit_preparation or information_query(request.query)) and
+            plan.perspective_mode == PerspectiveMode.READER_ANALYSIS and
+            not request.observer_actor and not request.narrative_access)
+        if carry_source:
             row = json.loads(payload)
             row['narrative'] = request.narrative
             payload = json.dumps(row, ensure_ascii=False, sort_keys=True)
         transmitted_context = (compact_cognition_context(context.as_dict())
             if request.compact_context else context.as_dict())
-        if len(json.dumps(transmitted_context, ensure_ascii=False, sort_keys=True)) > request.max_context_chars:
+        context_size = (len(payload) if carry_source else
+            len(json.dumps(transmitted_context, ensure_ascii=False, sort_keys=True)))
+        if context_size > request.max_context_chars:
             # Do not arbitrarily truncate a source or promote partial evidence.
             context = CognitionContext(temporal_scope=scope, actors=context.actors,
                 perspective_mode=plan.perspective_mode.value,

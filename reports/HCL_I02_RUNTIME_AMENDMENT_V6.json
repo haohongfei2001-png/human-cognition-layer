@@ -1,0 +1,14 @@
+{
+  "schema": "hcl-i02-runtime-amendment-v6",
+  "reason": "COMPLETE_UNRESTRICTED_READER_SOURCE_CARRY",
+  "historical_i01_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "previous_hcl_runtime_sha256": "e0133cf7d04bdfb5b7629e88eeeb921a6cb735097024bb846520161827468829",
+  "amended_hcl_runtime_sha256": "6fa85a5f605ec7ff7dde6c988b53bc986159bf3863dc81030d29db8fbc7cac24",
+  "development_only": true,
+  "confirmation_items_inspected": 0,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "answer_gain_claimed": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "boundary": "Preserve full ordinary auto-routed reader narrative alongside checked cognition. Explicit focal-actor/preparation interfaces retain their projected contracts. Observer/access-scoped paths remain filtered. Count carried source in context bound; refuse whole context on overflow. Undisplayed native-choice probe remains development-only."
+}

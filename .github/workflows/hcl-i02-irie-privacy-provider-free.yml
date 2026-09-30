@@ -1,4 +1,4 @@
-name: HCL I02 IRIE Privacy Provider-Free Freeze
+name: HCL I02 Certified Replay and Reader Entry
 on:
   pull_request:
     paths: ['scripts/i02*', 'scripts/run_i02*', 'scripts/serious_eval*', 'tests/test_i02*', 'reports/HCL_I02*', '.github/workflows/hcl-i02-irie-privacy*', 'hcl/**']
@@ -12,16 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Native source, negative inference, composition and historical regressions
-        run: python -m unittest tests.test_i02_irie_privacy tests.test_i02_exposure_history tests.test_v1_reader_argument_question tests.test_i02_shea_development_case
-      - name: Frozen runtime and source-first fairness/reservation preflight
-        run: |
-          python -m scripts.i02_runtime_amendment_v5
-          python scripts/run_i02_irie_privacy_cpg_once.py --preflight --output i02-irie-privacy-cpg-preflight.json
-      - uses: actions/upload-artifact@v4
-        with:
-          name: hcl-i02-irie-privacy-provider-free-${{ github.sha }}
-          path: i02-irie-privacy-cpg-preflight.json
+      - name: Current source carry, negative inference and option boundary
+        run: python -m unittest tests.test_i02_native_choice_candidate tests.test_v1_reader_source_carry tests.test_v1_i01_eval_contract tests.test_i02_exposure_history tests.test_v1_reader_argument_question tests.test_i02_shea_development_case
+      - name: Current disclosed runtime
+        run: python -m scripts.i02_runtime_amendment_v6
+      - name: Consumed privacy package replay at certified v5 runtime
+        run: python -m scripts.i02_replay_irie_privacy_freeze

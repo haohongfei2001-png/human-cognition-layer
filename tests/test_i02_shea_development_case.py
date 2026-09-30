@@ -52,7 +52,8 @@ class SheaDevelopmentCaseTests(unittest.TestCase):
 
     def test_real_development_receipt_has_no_confirmation_or_provider_promotion(self):
         row = json.loads(Path('reports/HCL_I02_SHEA_CONCEPT_DEVELOPMENT_ENTRY.json').read_text())
-        self.assertEqual(row['runtime_sha256'], runtime_digest())
+        historical = json.loads(Path('reports/HCL_I02_RUNTIME_AMENDMENT_V5.json').read_text())
+        self.assertEqual(row['runtime_sha256'], historical['amended_hcl_runtime_sha256'])
         self.assertEqual(row['after_method'], 'reader_source_argument_comparison_v1')
         self.assertTrue(row['source_complete_in_final_input'])
         self.assertFalse(row['specialized_cognition_treatment'])

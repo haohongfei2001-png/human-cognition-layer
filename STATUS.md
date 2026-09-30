@@ -19,6 +19,19 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [I02 v6 reader-source carry repair](docs/HCL_I02_READER_SOURCE_CARRY_V6.md)
+now preserves complete unrestricted reader narrative alongside selected cognition
+in actual final H input, rather than silently losing it after bounded extraction.
+Explicit focal/preparation and observer/access-scoped views retain their projections; source counts toward the context
+bound and overflow is a whole-source refusal. Exact v5/v6 probe hashes show the
+input delta with unchanged source, options and selected capabilities, not answer
+gain. The initially undisplayed native-choice probe is development-only and excluded
+by v8. A subsequent source-first read found prospective-action/multiple-option
+ambiguity; native gold remains unseen, no I01 family qualifies and provider input
+is held. Zero calls/spend. The consumed IRIE run is replayed at its certified v5
+runtime, never migrated to v6. Independent source/comparator qualification remains
+next; no new confirmation source or H efficacy claim.
+
 The [native IRIE privacy-concept calibration closure](reports/HCL_I02_IRIE_PRIVACY_CPG_CLOSURE.md)
 records four strong C/P/G calls, zero retries, estimated/rated USD 0.06977652
 against a new USD 0.24 cap. All phases passed interface/exact-citation checks;
