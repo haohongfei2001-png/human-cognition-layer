@@ -1,0 +1,30 @@
+{
+  "schema": "hcl-i02-shared-source-reference-freeze-v1",
+  "purpose": "FUTURE_GENERIC_REFERENCE_RETRIEVAL_PROVIDER_FREE_ONLY",
+  "hcl_runtime_sha256": "c7034fdc97d606867bf6688cc005837033b357155cd649ed187f41a32509579b",
+  "execution_files": {
+    "scripts/serious_eval_source_reference_v1.py": "f8cc3c7d129ee556aaeaf3a9f93857661e4a7d54fad4e7585b05e45b1716d359",
+    "scripts/serious_eval_full_source_arms_v10.py": "8122292d272fc025ba6c65ba7a8e8112394ff8f314fd9ee22698733443c961bd",
+    "scripts/witness_i02_source_reference_v1.py": "156ebf542bfd1421e42968045c4947055c86daf0213b132c0ae54f85a9645c9e",
+    "tests/test_i02_source_reference_v1.py": "e7ff93fcc2ddffc0efa0db5bd3cc1e338a10a932bcf6ce68a90989b9304d1e69",
+    ".github/workflows/hcl-i02-source-reference-provider-free.yml": "d4beae5d7abe32732a3d88d2a4a7959f9cc26673d66b904733e345a760398df8"
+  },
+  "output_fields": [
+    "answer",
+    "source_citations",
+    "uncertainty",
+    "assumptions"
+  ],
+  "source_quote_char_bound": 1500,
+  "reference_count_bound": 32,
+  "source_utf8_byte_bound": 500000,
+  "map_utf8_byte_bound": 24000,
+  "shared_for_c_p_g_h": true,
+  "semantic_qualification": false,
+  "independent_confirmation_qualified": false,
+  "old_outputs_rescored": false,
+  "provider_calls_authorized": 0,
+  "provider_spend_authorized_usd": 0,
+  "grant_created": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

@@ -1,0 +1,36 @@
+name: HCL I02 Shared Exact Source Reference Provider-Free
+on:
+  pull_request:
+    paths: ['scripts/serious_eval_source_reference_v1.py', 'scripts/serious_eval_full_source_arms_v10.py', 'scripts/witness_i02_source_reference_v1.py', 'tests/test_i02_source_reference_v1.py', 'reports/HCL_I02_SOURCE_REFERENCE*', '.github/workflows/hcl-i02-source-reference-provider-free.yml']
+  push:
+    branches: [main]
+    paths: ['scripts/serious_eval_source_reference_v1.py', 'scripts/serious_eval_full_source_arms_v10.py', 'scripts/witness_i02_source_reference_v1.py', 'tests/test_i02_source_reference_v1.py', 'reports/HCL_I02_SOURCE_REFERENCE*', '.github/workflows/hcl-i02-source-reference-provider-free.yml']
+permissions:
+  contents: read
+jobs:
+  reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest tests.test_i02_source_reference_v1 tests.test_i02_full_source_arms_v9 tests.test_v1_i02_semantic_score tests.test_i02_clifford_closure
+      - name: Provider-free ordinary C/P/G/H reference witness
+        run: python -m scripts.witness_i02_source_reference_v1 --output i02-shared-reference-witness.json
+      - name: Frozen helper surface and unchanged H runtime
+        run: |
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          from scripts.serious_eval_contract import runtime_digest
+          f=json.load(open('reports/HCL_I02_SOURCE_REFERENCE_V1_FREEZE.json'))
+          assert runtime_digest()==f['hcl_runtime_sha256']
+          assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==h for p,h in f['execution_files'].items())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hcl-i02-shared-reference-${{ github.run_id }}
+          path: i02-shared-reference-witness.json

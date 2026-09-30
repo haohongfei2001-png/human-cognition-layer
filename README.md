@@ -489,3 +489,20 @@ contract/cases/receipts. Then continue I02 protected source/task, independent re
 strong comparators and actual ordinary H coverage. No new module/leaderboard;
 historical dispositions, Gregory rights hold and LongMemEval SEALED unchanged.
 
+
+## Future common source-reference resource
+
+The [future shared source-reference resource](docs/HCL_I02_SHARED_SOURCE_REFERENCE_V1.md)
+implements read-only unique whitespace-layout source-span retrieval for C/P/Gv10
+and actual ordinary H glue. Original source/version/SHA/offset/quote and raw proposals
+remain separate; this verifies location, never semantics.27 focused checks and an
+authored C/P/G/H ordinary witness pass: source/time/access/order, lexical/negation,
+ambiguity, bounds, stale/local revision, map/composition, context and historical gates.
+Complete sources, vocabulary/native reasoning and certified H runtimev11 unchanged;
+all arms share the resource.0 live calls/spend/grants,0 old outputs corrected/rescored.
+Clifford remains INCONCLUSIVE/ineligible, grant0/trigger removed; no source-holder
+paid retest, new module or efficacy upgrade. Unique next remains I02 protected
+source/task, independent semantic review and strong comparator qualification with
+actual ordinary H coverage before separately frozen comparison; no ontology/leaderboard
+expansion, Gregory rights hold and LongMemEval SEALED preserved.
+

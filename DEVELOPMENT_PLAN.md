@@ -390,6 +390,20 @@ No H entry, runtime repair, provider input or paid call is allowed by this packa
 Even a clean history receipt only makes source-first holder review ready; confirmation
 qualification, task difficulty and model competence remain unresolved. Zero calls/spend.
 
+The [future shared source-reference resource](docs/HCL_I02_SHARED_SOURCE_REFERENCE_V1.md)
+implements read-only unique whitespace-layout source-span retrieval for C/P/Gv10
+and actual ordinary H glue. Original source/version/SHA/offset/quote and raw proposals
+remain separate; this verifies location, never semantics.27 focused checks and an
+authored C/P/G/H ordinary witness pass: source/time/access/order, lexical/negation,
+ambiguity, bounds, stale/local revision, map/composition, context and historical gates.
+Complete sources, vocabulary/native reasoning and certified H runtimev11 unchanged;
+all arms share the resource.0 live calls/spend/grants,0 old outputs corrected/rescored.
+Clifford remains INCONCLUSIVE/ineligible, grant0/trigger removed; no source-holder
+paid retest, new module or efficacy upgrade. Unique next remains I02 protected
+source/task, independent semantic review and strong comparator qualification with
+actual ordinary H coverage before separately frozen comparison; no ontology/leaderboard
+expansion, Gregory rights hold and LongMemEval SEALED preserved.
+
 The [complete Clifford semantic development closure](reports/HCL_I02_CLIFFORD_CPG_CLOSURE.md)
 is **INCONCLUSIVE_INTERFACE_QUOTATION_ALIGNMENT**, run36741974004:3 calls/0 retries,
 estimated USD0.122967108, peak rated0.246424200, invoice unavailable. Native high
