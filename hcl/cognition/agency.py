@@ -36,8 +36,8 @@ class AgencyResult:
     def payload(self):
         return json.loads(self.payload_json)
 
-    def messages(self, workspace, *, max_chars=64000, include_sources=True):
-        if type(max_chars) is not int or not 1000 <= max_chars <= 128000 or type(include_sources) is not bool:
+    def messages(self, workspace, *, max_chars=64000, include_sources=True, include_evidence_graph=True):
+        if type(max_chars) is not int or not 1000 <= max_chars <= 128000 or type(include_sources) is not bool or type(include_evidence_graph) is not bool:
             raise ValueError('bounded agency context required')
         if any(s not in workspace._documents or workspace._versions[s] != version for s, version in self.source_versions):
             raise ValueError('agency source changed; recompute')
@@ -62,6 +62,16 @@ class AgencyResult:
         receipt['claims'] = [row for row in receipt['claims'] if row['id'] in selected]
         receipt['spans'] = [row for row in receipt['spans'] if row['id'] in selected]
         receipt['revisions'] = [row for row in receipt['revisions'] if row['old'] in selected and row['new'] in selected]
+        if not include_evidence_graph:
+            # Every source anchor and conditional premise survives; the complete
+            # derivation graph remains in the preparation audit, not repeated in
+            # model input beside the same grounded candidates and whole source.
+            receipt=dict(schema='hcl-c01-complete-anchor-projection-v1',scope=receipt['scope'],
+                spans=receipt['spans'],
+                claim_support_status={r['id']:r['support_status'] for r in receipt['claims']},
+                conditional_premises={r['id']:r['interpretation']['unknown_conditions']
+                    for r in receipt['claims'] if r['interpretation'] and r['interpretation']['unknown_conditions']},
+                grounding_semantics=receipt['grounding_semantics'])
         payload = self.payload
         if not include_sources:
             # The enclosing ordinary reader retains these exact whole sources.
@@ -91,14 +101,13 @@ def is_agency_utterance(body):
         for pattern in (_GOAL,_SUBGOAL,_PLAN,_PLAN_END,_OPPORTUNITY,_INTENT))
 
 
-def check_agency_candidates(workspace, query, semantic, *, source_id, actor, only_agency_events=False):
-    """Existing C01 on already grounded candidates; no second extraction or oracle."""
+def validate_agency_candidate_scope(workspace, query, semantic, *, source_id, actor):
     from .semantic import SemanticResult, _PRONOUNS
     from .core import EvidenceCore
     if (not isinstance(query,str) or not query.strip() or len(query)>8000
             or not isinstance(semantic,SemanticResult) or not isinstance(workspace.core,EvidenceCore)
             or not isinstance(actor,str) or not re.fullmatch(r'[A-Z][\w-]*(?: [A-Z][\w-]*)?',actor)
-            or actor.lower() in _PRONOUNS or type(only_agency_events) is not bool
+            or actor.lower() in _PRONOUNS
             or source_id not in workspace._documents
             or semantic.scope.source_ids not in ((),(source_id,))):
         raise ValueError('bounded grounded actor/source agency input required')
@@ -111,6 +120,14 @@ def check_agency_candidates(workspace, query, semantic, *, source_id, actor, onl
         if (span.source_id!=source_id or span.version!=workspace._versions[source_id]
                 or span.quote!=workspace._documents[source_id][0][span.start:span.end]):
             raise ValueError('agency candidate source version changed; recompute')
+
+
+def check_agency_candidates(workspace, query, semantic, *, source_id, actor, only_agency_events=False):
+    """Existing C01 on already grounded candidates; no second extraction or oracle."""
+    if type(only_agency_events) is not bool:
+        raise ValueError('explicit agency event selection required')
+    validate_agency_candidate_scope(workspace,query,semantic,source_id=source_id,actor=actor)
+    core=workspace.core
     runtime = HCLV07Runtime()
     events, diagnostics, operations, goal_evidence, plans, subgoals, opportunities, intentions = [], [], [], {}, {}, [], [], []
     last_goal_signal = {}

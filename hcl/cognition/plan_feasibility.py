@@ -2,11 +2,12 @@
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 import json
+import hashlib
 import re
 
-from .agency import prepare_agency
+from .agency import prepare_agency, AgencyResult, validate_agency_candidate_scope
 from .core import ClaimKind, identity
-from .revision_time import RevisionTimeline
+from .revision_time import RevisionTimeline, _REVISION, _CHALLENGE, _ACCEPT, _REJECT
 
 _QUERY = re.compile(r"Could (?P<actor>[A-Z][\w-]*)'s plans work under their beliefs and the declared model\?")
 _MODEL = re.compile(r'In the declared model, it is (?P<value>true|false) that (?P<proposition>.+)')
@@ -35,16 +36,27 @@ class PlanFeasibility:
     def payload(self):
         return json.loads(self.payload_json)
 
-    def messages(self, workspace, *, max_chars=64000):
-        if type(max_chars) is not int or not 1000 <= max_chars <= 128000:
+    def messages(self, workspace, *, max_chars=64000, include_sources=True):
+        if type(max_chars) is not int or not 1000 <= max_chars <= 128000 or type(include_sources) is not bool:
             raise ValueError('bounded plan context required')
         if any(s not in workspace._documents or workspace._versions[s] != v for s, v in self.source_versions):
             raise ValueError('plan evidence changed; recompute')
         statuses = workspace.core.support_statuses()
         if any(statuses.get(k) != 'SUPPORT_AVAILABLE' for k in self.claim_ids):
             raise ValueError('plan support is no longer available')
+        payload=self.payload
+        if not include_sources:
+            rows=payload.pop('original_sources')
+            payload['shared_source_references']=[dict(source_id=r['source_id'],version=r['version'],
+                source_sha256=hashlib.sha256(r['text'].encode()).hexdigest()) for r in rows]
+            agency=payload.pop('agency')
+            agency.pop('original_sources')
+            agency['shared_source_references']=payload['shared_source_references']
+            payload['shared_agency_reference']=dict(actor=agency['actor'],
+                source_references=payload['shared_source_references'],
+                cognition_sha256=hashlib.sha256(json.dumps(agency,ensure_ascii=False,sort_keys=True).encode()).hexdigest())
         messages = [dict(role='system', content=_POLICY), dict(role='user',
-            content=json.dumps(self.payload, ensure_ascii=False, sort_keys=True))]
+            content=json.dumps(payload, ensure_ascii=False, sort_keys=True))]
         if len(json.dumps(messages, ensure_ascii=False)) > max_chars:
             raise ValueError('plan context budget exceeded')
         return messages
@@ -57,20 +69,66 @@ def prepare_plan_feasibility(workspace, query, *, source_id, observer=None):
     actor = match['actor']
     agency = prepare_agency(workspace, f"What are {actor}'s goals and plans?", source_id=source_id, observer=observer)
     semantic = workspace.prepare_semantic(query, source_ids=(source_id,), observer=observer)
-    core, claims, rows = workspace.core, list(agency.claim_ids), []
+    return check_plan_candidates(workspace,query,semantic,agency,source_id=source_id,actor=actor)
+
+
+def is_reported_belief_update(body):
+    return isinstance(body,str) and any(p.fullmatch(body.rstrip('.!?'))
+        for p in (_REVISION,_CHALLENGE,_ACCEPT,_REJECT))
+
+
+def check_plan_candidates(workspace, query, semantic, agency, *, source_id, actor,
+                          relevant_events_only=False, dialogue_blocks=False):
+    """Reuse C03 joins on shared grounded C01 and ordinary source evidence."""
+    if type(relevant_events_only) is not bool or type(dialogue_blocks) is not bool:
+        raise ValueError('explicit bounded plan selection flags required')
+    validate_agency_candidate_scope(workspace,query,semantic,source_id=source_id,actor=actor)
+    core=workspace.core
+    if (not isinstance(agency,AgencyResult) or agency.scope!=semantic.scope
+            or agency.source_versions!=tuple((s,workspace._versions[s]) for s in semantic.scope.source_ids)
+            or agency.payload['actor']!=actor or any(k not in core.claims or core.claims[k].scope!=semantic.scope
+                for k in agency.claim_ids)):
+        raise ValueError('grounded current actor/source agency result required')
+    original_sources=[dict(source_id=s,version=v,text=workspace._documents[s][0]) for s,v in agency.source_versions]
+    if (agency.payload['original_sources']!=original_sources or
+            any(core.claims[k].content.get('actor')!=actor for k in agency.claim_ids)):
+        raise ValueError('agency payload source or actor differs from grounded claims')
+    for plan in agency.payload['plans']:
+        claim=core.claims.get(plan.get('claim_id'))
+        if (claim is None or claim.id not in agency.claim_ids or
+                claim.content.get('operation')!='GOAL_PLAN_OPPORTUNITY_JOIN' or
+                {k:v for k,v in plan.items() if k not in ('claim_id','source_claim_ids')}!=
+                {k:v for k,v in claim.content.items() if k not in ('operation','actor')}):
+            raise ValueError('agency plan state differs from grounded join')
+    agency.messages(workspace,include_sources=False,max_chars=128000)
+    claims,rows=list(agency.claim_ids),[]
+    statuses=core.support_statuses()
     for candidate in semantic.candidate_ids:
         content = core.claims[candidate].content
         if content['kind'] != 'event' or content['validation']['semantic_support'] != 'BOUNDED_LITERAL_FORM':
             continue
         row = content['proposal']
-        if row['assertion_scope'] != 'SOURCE_REPORT':
+        if row['assertion_scope'] != 'SOURCE_REPORT' or statuses[candidate]!='SUPPORT_AVAILABLE':
             continue
         span = core.spans[content['source_span_id']]
+        if relevant_events_only:
+            from .epistemic import parse_mental_proposition, MentalProposition, Attitude
+            body=row['utterance'].rstrip('.!?')
+            direct=row.get('speaker_candidates')==[actor] and row.get('speaker_surface')==actor
+            try:
+                tree=parse_mental_proposition(body,actor) if direct else None
+            except ValueError:
+                tree=None
+            belief=direct and ((isinstance(tree,MentalProposition) and tree.holder==actor
+                and tree.attitude==Attitude.BELIEF and isinstance(tree.content,str)) or is_reported_belief_update(body))
+            model_decl=row['speaker_surface']=='Narrator' and span.quote.startswith('Narrator:') and _MODEL.fullmatch(body)
+            if not (belief or model_decl):
+                continue
         rows.append((span.start, candidate, row, span))
     rows.sort(key=lambda row: row[0])
     if len(rows) > 16:
         raise ValueError('belief/model plan statement budget exceeded')
-    timeline = RevisionTimeline(identity('plan-belief-domain', source_id))
+    timeline = RevisionTimeline(identity('plan-belief-domain', source_id),dialogue_blocks=dialogue_blocks)
     model = []
     base = datetime(2026, 1, 1, tzinfo=timezone.utc)
     for index, (_, candidate, row, span) in enumerate(rows, 1):

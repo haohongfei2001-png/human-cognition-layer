@@ -390,6 +390,21 @@ No H entry, runtime repair, provider input or paid call is allowed by this packa
 Even a clean history receipt only makes source-first holder review ready; confirmation
 qualification, task difficulty and model competence remain unresolved. Zero calls/spend.
 
+The [v11 existing C03 long-reader composition](docs/HCL_I02_LONG_PLAN_COMPOSITION_V11.md)
+now joins shared C01 conditional plans with reported belief/revision and an explicit
+source-declared model in actual complete ordinary H input. The authored positive
+witness separates subjective plan support from model contradiction without knowing
+infeasibility, private truth or value change; explicit revision updates the dependent
+condition. H-new retains B01/C01/source/candidates/selection and removes C03 alone.
+128 focused plus 13 source/fairness checks pass. All C01 anchors/support statuses/
+conditional premises remain in final input; the full derivation graph stays in the
+receipt, and C03 references shared C01 state instead of duplicating it. Source and
+64k context bounds are unchanged. This is existing architecture integration with
+narrow literal coverage, not a new module or independent answer gain. Chained v11
+preserves historical runtimes/receipts. Zero calls/spend/grants; Gregory remains held
+with no checked treatment. Unique next task remains I02 protected source/task,
+blinded review and strong comparator qualification before frozen comparison.
+
 The [v10 existing C01 long-reader integration](docs/HCL_I02_LONG_AGENCY_INTEGRATION_V10.md)
 now carries checked reported goals, plans and opportunity joins into actual complete
 ordinary H input, using the same grounded source/core as B01. The authored positive

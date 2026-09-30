@@ -81,10 +81,11 @@ class RevisionSnapshot:
 
 class RevisionTimeline:
     """Append source versions; query event time separately from analyst record time."""
-    def __init__(self, source_id):
-        if not isinstance(source_id, str) or not source_id.strip() or len(source_id) > 200:
+    def __init__(self, source_id, *, dialogue_blocks=False):
+        if not isinstance(source_id, str) or not source_id.strip() or len(source_id) > 200 or type(dialogue_blocks) is not bool:
             raise ValueError('one explicit source-local identity domain required')
         self.source_id = source_id
+        self.dialogue_blocks = dialogue_blocks
         self._records = {}
 
     def record(self, record_id, text, *, event_time, recorded_at,
@@ -133,10 +134,11 @@ class RevisionTimeline:
             r.text, version=r.version, permitted_observers=(observer,) if observer else (), order=i, event_time=r.event_time,
             access_time=r.access_time, record_time=r.recorded_at) for i, r in enumerate(selected, 1))
         semantic = prepare_semantics('What self-reports and revisions are explicit?', sources,
-            core=core, scope=Scope(observer=observer, source_ids=tuple(s.source_id for s in sources)))
+            core=core, scope=Scope(observer=observer, source_ids=tuple(s.source_id for s in sources)),
+            dialogue_blocks=self.dialogue_blocks)
         evidence, transitions, diagnostics, prior, evidence_claims = [], [], [], {}, {}
         for record, source in zip(selected, sources):
-            rows = [r for r in _local_candidates(source) if r['kind'] == 'event']
+            rows = [r for r in _local_candidates(source,dialogue_blocks=self.dialogue_blocks) if r['kind'] == 'event']
             if (len(rows) != 1 or rows[0]['quote'].strip() != record.text.strip()
                     or rows[0]['content']['assertion_scope'] != 'SOURCE_REPORT'
                     or rows[0]['content']['speaker_surface'].lower() in _PRONOUNS):
