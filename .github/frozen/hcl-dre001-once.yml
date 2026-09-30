@@ -1,0 +1,45 @@
+name: HCL DRE001 One-Time Current Conditional Reader Entry
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  live-entry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unique first main run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$GITHUB_REF" = refs/heads/main
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-dre001-once.yml/runs?event=workflow_dispatch&per_page=100" > /tmp/dre001-runs.json
+          python - <<'PY'
+          import json,os
+          runs=json.load(open('/tmp/dre001-runs.json'))['workflow_runs']
+          assert len(runs)==1 and str(runs[0]['id'])==os.environ['GITHUB_RUN_ID']
+          PY
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'openai==2.14.0'
+      - name: Frozen provider-free gates before transport
+        run: |
+          python -m unittest tests.test_development_reader_live_entry
+          python -m scripts.development_reader_live_entry --preflight
+          python -m scripts.development_runtime_amendment_v15
+      - name: Two calls maximum; no retry; current conditional entry only
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          HCL_DRE001_AUTHORIZED: ONE_CURRENT_READER_ENTRY_ONLY
+        run: python -m scripts.development_reader_live_entry --execute --output dre001-receipt.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-dre001-${{ github.run_id }}
+          path: |
+            dre001-receipt.json
+            reports/HCL_DRE001_PACKAGE.json

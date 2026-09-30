@@ -31,25 +31,26 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: BOUNDED_CURRENT_SEMANTIC_LIVE_ENTRY_CHECK**
+**NEXT_READY: DRE001_FROZEN_LIVE_ENTRY_EXECUTION**
 
-[Conditional reader entryv15](docs/HCL_DEVELOPMENT_CONDITIONAL_READER_V15.md)
-IMPLEMENTED_UNVALIDATED for utility: ordinary nonliteral text plus ordinary question
-can enter actual existing B01/C01/C03 checks as explicitly unverified, exact-source
-translation hypotheses. Original prose and all assumptions stay in final input;
-revision/challenge invalidates dependent results.10 new checks, authored actual-state
-witness and82 focused/historical passes;0 new live calls/spend. No verified semantics,
-private/world/moral truth, full long-source coverage or model answer-gain claim.
-Default reader remains0-extraction; legacy typed admission unchanged, no new module.
-Current chained v15 preserves both consumed DRC runtimes/raw receipts/closed grants.
+[DRE001 frozen real entry](docs/HCL_DRE001_FROZEN_ENTRY_PROTOCOL.md): one previously
+uncalled HCL-authored development-exposed source/query, existing DeepSeek V4 Pro,
+max1 extraction +1 final call/0 retries, new USD0.30 cap/no historical transfer.
+Candidate thinking disabled/max4096; final high/max8192, explicit32 usage-token
+margin reserved per call. Actual source/conditional treatment/current state required
+before final call. No semantic-quality/Base-H/independent evidence claim.4 provider-free
+transport/gate checks pass. Unique dormant trigger/hash grant; execute once after
+exact-head/main CI, save raw/model/usage/cost/state/run/SHA/artifact, source-first
+closure/grant0/trigger deletion, then general entry/complexity work and fresh public
+reality checks. No final reviewer/source global stop, no consumed DRC continuation.
 
-Next freeze a bounded real existing-provider entry check: one previously uncalled
-authored input, max one extraction + one final call,0 retries/new small cap with
-explicit output-usage margin and complete cost/raw/conditional receipts. No Base/H
-efficacy or final-evidence claim, no old-run continuation or historical budget transfer.
-Then new fresh public development material can test current pipeline fairly, with
-freeze before responses and permanent final isolation. Reviewer/source perfection
-is not a daily development gate.
+Conditional reader v15 IMPLEMENTED_UNVALIDATED for utility:10 new checks, authored
+actual-state witness,82 focused passes; merged main40c3304f50819df80b3c7b0159773146f71eeb04
+has11 exact-main CI SUCCESS including1057v1/176 historical tests. Existing B01/C01/C03
+operate under explicitly unverified source translations; originals/revision/challenge
+preserved. No new module/private/world/moral truth/full-long-source or answer gain.
+Default reader0-extraction/legacy typed admission unchanged; both consumed DRC archives
+and closed grants preserved.
 
 DRC002 CLOSED/INCONCLUSIVE: unique run36784477632 at e92b75d9736af5c0b87ad66ecea20f3c30719db4
 stopped after11 calls when returned output8193 exceeded frozen8192.0 retries.
