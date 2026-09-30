@@ -1,0 +1,28 @@
+name: HCL I02 James Development Source Audit Provider-Free
+on:
+  pull_request:
+    paths: ['scripts/i02_james_development_candidate.py', 'scripts/run_i02_james_holder_once.py', 'scripts/i02_source_holder_review_v2.py', 'scripts/i02_source_qualification_v10.py', 'tests/test_i02_james_holder_once.py', 'reports/HCL_I02_JAMES*', '.github/workflows/hcl-i02-james*']
+  push:
+    branches: [main]
+    paths: ['scripts/i02_james_development_candidate.py', 'scripts/run_i02_james_holder_once.py', 'scripts/i02_source_holder_review_v2.py', 'scripts/i02_source_qualification_v10.py', 'tests/test_i02_james_holder_once.py', 'reports/HCL_I02_JAMES*', '.github/workflows/hcl-i02-james*']
+permissions:
+  contents: read
+jobs:
+  source_preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest tests.test_i02_james_holder_once tests.test_i02_gilman_holder_once tests.test_i02_source_holder_budget_v2 tests.test_i02_exposure_history
+      - name: Complete original bytes, source history, rights, cost metadata only
+        run: python -m scripts.run_i02_james_holder_once --preflight --metadata james-source-preflight.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hcl-i02-james-source-preflight-${{ github.run_id }}
+          path: james-source-preflight.json

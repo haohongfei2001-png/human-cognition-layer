@@ -1,0 +1,52 @@
+name: HCL I02 One-Time Protected James Development Source Audit
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: First unique main execution only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test ! -f .github/HCL_I02_JAMES_HOLDER_CLOSED
+          test "$GITHUB_REF" = refs/heads/main
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-i02-james-holder-once.yml/runs?event=workflow_dispatch&per_page=100" > /tmp/holder-runs.json
+          python - <<'PY'
+          import json, os
+          runs=json.load(open('/tmp/holder-runs.json'))['workflow_runs']
+          assert len(runs)==1 and str(runs[0]['id'])==os.environ['GITHUB_RUN_ID']
+          PY
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned existing client
+        run: python -m pip install 'openai==2.14.0'
+      - name: Current source/history and conservative cap preflight
+        run: python -m scripts.run_i02_james_holder_once --preflight --metadata james-holder-preflight.json
+      - name: One source-only automated preliminary review
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          HCL_I02_JAMES_HOLDER_AUTHORIZED: ONE_SOURCE_AUDIT_ONLY
+        run: python -m scripts.run_i02_james_holder_once --execute
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-i02-james-holder-metadata-${{ github.run_id }}
+          path: |
+            james-holder-preflight.json
+            james-holder-metadata.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-i02-james-holder-protected-raw-${{ github.run_id }}
+          path: james-holder-protected-raw.json

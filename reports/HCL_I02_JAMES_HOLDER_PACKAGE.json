@@ -1,0 +1,47 @@
+{
+  "authorization": "OWNER_DEFAULT_EXISTING_PROVIDER_NORMAL_BOUNDED_COST",
+  "budget_cap_usd": 0.32,
+  "confirmation_qualified": false,
+  "cpg_calls": 0,
+  "endpoint": "https://api.deepseek.com",
+  "execution_files": {
+    ".github/workflows/hcl-i02-james-holder-once.yml": "38f6ab920a90a8afd0661da5bbab0f2a5e7af7854d833a6f6436fa8650ae75a7",
+    "reports/HCL_I02_JAMES_DEVELOPMENT_CANDIDATE.json": "506cb48194acdb68e294adc008d93829a9b22cde339bdec201125005565561ea",
+    "scripts/i02_exposure_history.py": "2dd4d840d4d76450a07713e163114f15c2f35960fb5a355ec798771fbcb4bbbf",
+    "scripts/i02_exposure_snapshot.py": "d71deeb1c48c32496f6244dc78297429ad71fc3dba4044ebafa65e820ab5485c",
+    "scripts/i02_james_development_candidate.py": "47f6c0df88d85f71793e8611f40e3566d1cb461a890391de533f4752a7bec52d",
+    "scripts/i02_source_holder_review.py": "88b547e4076b277f26af9a13b2403d8070fbe463c86549569d2e2e18f25838b6",
+    "scripts/i02_source_holder_review_v2.py": "3aca0eb504ac50f6ec1db600a1ad5f0fb10151b72b68ccf209a39cc047d659e4",
+    "scripts/i02_source_qualification_v10.py": "29bb756792bbb0bbd5db22b9dd00c86ca441d9dcd6c86b1f23426244c587e9b6",
+    "scripts/run_i02_james_holder_once.py": "157e4a827f39850d33246f29ceaebdaad284cbbdf9c1bd41a2a6c748f3b1782e",
+    "tests/test_i02_james_holder_once.py": "b2b2dc9351890d444e47502f9e80cf433803d29977ad2b9d212662d796ac75ba"
+  },
+  "h_calls": 0,
+  "historical_budget_transfer": false,
+  "independent_human_review": false,
+  "independent_model_family_judge": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "max_tokens": 16384,
+  "maximum_provider_calls": 1,
+  "model": "deepseek-v4-pro",
+  "model_version_publisher": "DeepSeek-V4-Pro-0813",
+  "permission_scope": "DEVELOPMENT_SOURCE_HOLDER_AUDIT_ONLY_NOT_ARM_EXECUTION_OR_CONFIRMATION",
+  "price_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "price_verified_date": "2026-09-30",
+  "purpose": "ONE_AUTOMATED_SOURCE_FIRST_TASK_FIT_AUDIT_NO_H_OR_ARM_OUTPUTS",
+  "question_sha256": "483634f5740d8d3b387b36c15defa6d57390dc8febcdc3f9ba399591f2114377",
+  "rates_peak_usd_per_million": {
+    "cache_hit": 0.044,
+    "input": 1.32,
+    "output": 3.96
+  },
+  "raw_visibility": "HELD_AWAY_FROM_IMPLEMENTER_BY_ROLE_NOT_CRYPTOGRAPHIC_SEAL",
+  "reasoning_effort": "high",
+  "retries": 0,
+  "schema": "hcl-i02-james-development-holder-package-v1",
+  "service_tier": "provider_default_no_tier_parameter",
+  "source_sha256": "2090d6458cd1f81d669a71a137f40a03996e99fff016c1a0c95cee77e278fe4a",
+  "thinking": {
+    "type": "enabled"
+  }
+}
