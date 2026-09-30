@@ -1,0 +1,20 @@
+{
+  "schema": "hcl-i02-v3-long-interface-provenance-v1",
+  "run_id": 36708265295,
+  "run_sha": "881628ff37411e934e87409acaa776bb419b9845",
+  "artifact_id": 11092424677,
+  "artifact_sha256": "ada3f9c691501ea0624384c42ea8ccf7746fcab093aabb03c939283fc98dfc03",
+  "raw_receipt_sha256": "394c3bd871e462b3908ccf8a43c3f5412081ae8a0760ec510861b103eb07b3cc",
+  "provider_calls": 1,
+  "retries": 0,
+  "h_calls": 0,
+  "cpg_calls": 0,
+  "rated_peak_cost_usd": 0.058193520000000006,
+  "estimated_actual_cost_usd": 0.029096760000000003,
+  "actual_invoice_cost_usd": null,
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RERUN",
+  "authorization_remaining_usd": 0,
+  "source_origin": "HCL_AUTHORED_SYNTHETIC_TRANSPORT_FIXTURE",
+  "confirmation_qualified": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
