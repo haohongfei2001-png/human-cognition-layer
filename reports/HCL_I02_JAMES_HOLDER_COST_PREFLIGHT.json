@@ -1,0 +1,13 @@
+{
+  "confirmation_qualified": false,
+  "current_head_history_certified": false,
+  "input_token_bound": 182838,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "new_cap_usd": 0.32,
+  "peak_reservation_usd": 0.30622679999999997,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "question_sha256": "483634f5740d8d3b387b36c15defa6d57390dc8febcdc3f9ba399591f2114377",
+  "schema": "hcl-i02-james-cost-only-preflight-v1",
+  "source_sha256": "2090d6458cd1f81d669a71a137f40a03996e99fff016c1a0c95cee77e278fe4a"
+}
