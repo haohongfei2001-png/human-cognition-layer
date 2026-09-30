@@ -1,0 +1,285 @@
+{
+  "schema": "hcl-i02-clifford-quotation-diagnostic-v1",
+  "schema_changes": false,
+  "source_and_outputs_unchanged": true,
+  "normalization_for_failure_classification_only": true,
+  "old_outputs_rescored": false,
+  "phase_diagnostics": [
+    {
+      "phase": "C",
+      "finish_reason": "stop",
+      "json_shape_complete": true,
+      "citation_count": 9,
+      "strict_invalid_quotes": [
+        {
+          "row": 3,
+          "quote": "question of right or wrong has to do with the origin of his belief",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": 6,
+          "quote": "we have no right to believe a thing true because everybody says so,\r\nunless there are good grounds for believing that some one person at\r\nleast has the means of knowing what is true, and is speaking the\r\ntruth so far as he knows it.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        }
+      ],
+      "eligible": false,
+      "semantic_score": null
+    },
+    {
+      "phase": "P",
+      "finish_reason": "stop",
+      "json_shape_complete": true,
+      "citation_count": 16,
+      "strict_invalid_quotes": [
+        {
+          "row": 4,
+          "quote": "When an action is once done, it is right or wrong forever; no accidental\r\nfailure of its good or evil fruits can possibly alter that.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": 7,
+          "quote": "In order that we may have the right to accept his testimony as ground for\r\nbelieving what he says, we must have reasonable grounds for trusting\r\nhis veracity, that he is really trying to speak the truth so far as he\r\nknows it; his knowledge, that he has had opportunities of knowing the\r\ntruth about this matter; and his judgment, that he has made proper use\r\nof those opportunities in coming to the conclusion which he affirms.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        }
+      ],
+      "eligible": false,
+      "semantic_score": null
+    },
+    {
+      "phase": "G_map",
+      "finish_reason": "stop",
+      "json_shape_complete": true,
+      "citation_count": 31,
+      "strict_invalid_quotes": [
+        {
+          "row": "e1",
+          "quote": "He had acquired his belief not by honestly earning it in patient investigation, but by stifling his doubts. And although in the end he may have felt so sure about it that he could not think otherwise, yet inasmuch as he had knowingly and willingly worked himself into that frame of mind, he must be held responsible for it.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e2",
+          "quote": "Let us alter the case a little, and suppose that the ship was not unsound after all; that she made her voyage safely, and many others after it. Will that diminish the guilt of her owner? Not one jot. When an action is once done, it is right or wrong forever; no accidental failure of its good or evil fruits can possibly alter that.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e3",
+          "quote": "The question of right or wrong has to do with the origin of his belief, not the matter of it; not what it was, but how he got it; not whether it turned out to be true or false, but whether he had a right to believe on such evidence as was before him.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e4",
+          "quote": "For although they had sincerely and conscientiously believed in the charges they had made, yet they had no right to believe on such evidence as was before them. Their sincere convictions, instead of being honestly earned by patient inquiring, were stolen by listening to the voice of prejudice and passion.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e5",
+          "quote": "Let us vary this case also, and suppose, other things remaining as before, that a still more accurate investigation proved the accused to have been really guilty. Would this make any difference in the guilt of the accusers? Clearly not; the question is not whether their belief was true or false, but whether they entertained it on wrong grounds.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e6",
+          "quote": "It may be said, however, that in both of these supposed cases it is not the belief which is judged to be wrong, but the action following upon it.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e7",
+          "quote": "No man holding a strong belief on one side of a question, or even wishing to hold a belief on one side, can investigate it with such fairness and completeness as if he were really in doubt and unbiased; so that the existence of a belief not founded on fair inquiry unfits a man for the performance of this necessary duty.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e8",
+          "quote": "No real belief, however trifling and fragmentary it may seem, is ever truly insignificant; it prepares us to receive more of its like, confirms those which resembled it before, and weakens others; and so gradually it lays a stealthy train in our inmost thoughts, which may some day explode into overt action, and leave its stamp upon our character forever.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e9",
+          "quote": "And no one man's belief is in any case a private matter which concerns himself alone.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e10",
+          "quote": "Belief, that sacred faculty which prompts the decisions of our will, and knits into harmonious working all the compacted energies of our being, is ours not for ourselves, but for humanity.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e11",
+          "quote": "To sum up: it is wrong always, everywhere and for any one, to believe anything upon insufficient evidence.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e12",
+          "quote": "If a man, holding a belief which he was taught in childhood or persuaded of afterward, keeps down and pushes away any doubts which arise about it in his mind, purposely avoids the reading of books and the company of men that call in question or discuss it, and regards as impious those questions which cannot easily be asked without disturbing it--the life of that man is one long sin against mankind.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e13",
+          "quote": "'But,' says one, 'I am a busy man; I have no time for the long course of study which would be necessary to make me in any degree a competent judge of certain questions, or even able to understand the nature of the arguments.' Then he should have no time to believe.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e14",
+          "quote": "In order that we may have the right to accept his testimony as ground for believing what he says, we must have reasonable grounds for trusting his veracity, that he is really trying to speak the truth so far as he knows it; his knowledge, that he has had opportunities of knowing the truth about this matter; and his judgment, that he has made proper use of those opportunities in coming to the conclusion which he affirms.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e15",
+          "quote": "the character of Mohammed is excellent evidence that he was honest and spoke the truth so far as he knew it; but it is no evidence at all that he knew what the truth was.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e16",
+          "quote": "What means could he have of knowing that the form which appeared to him to be the angel Gabriel was not a hallucination, and that his apparent visit to Paradise was not a dream?",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e17",
+          "quote": "The goodness and greatness of a man do not justify us in accepting a belief upon the warrant of his authority, unless there are reasonable grounds for supposing that he knew the truth of what he was saying. And there can be no grounds for supposing that a man knows that which we, without ceasing to be men, could not be supposed to verify.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e18",
+          "quote": "If a chemist tells me, who am no chemist, that a certain substance can be made by putting together other substances in certain proportions and subjecting them to a known process, I am quite justified in believing this upon his authority, unless I know anything against his character or his judgment.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e19",
+          "quote": "But if my chemist tells me that an atom of oxygen has existed unaltered in weight and rate of vibration throughout all time, I have no right to believe this on his authority, for it is a thing which he cannot know without ceasing to be man.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e20",
+          "quote": "But if an old whaler tells us that the ice is three hundred feet thick all the way up to the Pole, we shall not be justified in believing him.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e21",
+          "quote": "the aggregate testimony of our neighbors is subject to the same conditions as the testimony of any one of them. Namely, we have no right to believe a thing true because everybody says so, unless there are good grounds for believing that some one person at least has the means of knowing what is true, and is speaking the truth so far as he knows it.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e22",
+          "quote": "A little reflection will show us that every belief, even the simplest and most fundamental, goes beyond experience when regarded as a guide to our actions.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e23",
+          "quote": "We may go beyond experience by assuming that what we do not know is like what we do know; or, in other words, we may add to our experience on the assumption of a uniformity in nature.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e24",
+          "quote": "No evidence, therefore, can justify us in believing the truth of a statement which is contrary to, or outside of, the uniformity of nature.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e25",
+          "quote": "We may believe what goes beyond our experience, only when it is inferred from that experience by the assumption that what we do not know is like what we know.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e26",
+          "quote": "We may believe the statement of another person, when there is reasonable ground for supposing that he knows the matter of which he speaks, and that he is speaking the truth so far as he knows it.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e27",
+          "quote": "It is wrong in all cases to believe on insufficient evidence; and where it is presumption to doubt and to investigate, there it is worse than presumption to believe.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e28",
+          "quote": "Moreover there are many cases in which it is our duty to act upon probabilities, although the evidence is not such as to justify present belief; because it is precisely by such action, and by observation of its fruits, that evidence is got which may justify future belief.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e29",
+          "quote": "There is no practical danger that such consequences will ever follow from scrupulous care and self-control in the matter of belief. Those men who have most nearly done their duty in this respect have found that certain great principles, and these most fitted for the guidance of life, have stood out more and more clearly in proportion to the care and honesty with which they were tested, and have acquired in this way a practical certainty.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e30",
+          "quote": "Let us suppose, then, that I, like Mohammed, go into desert places to fast and pray; what things can happen to me which will give me the right to believe that I am divinely inspired?",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        },
+        {
+          "row": "e31",
+          "quote": "Suppose that I get information, apparently from a celestial visitor, which upon being tested is found to be correct. I cannot be sure, in the first place, that the celestial visitor is not a figment of my own mind, and that the information did not come to me, unknown at the time to my consciousness, through some subtle channel of sense.",
+          "failure": "NOT_EXACT_FROZEN_SOURCE_SUBSTRING",
+          "whitespace_only_diagnostic_match": true,
+          "accepted_after_normalization": false
+        }
+      ],
+      "eligible": false,
+      "semantic_score": null
+    }
+  ],
+  "formal_semantic_score": null
+}

@@ -1,9 +1,10 @@
 {
   "schema": "hcl-i02-clifford-once-grant-v1",
-  "status": "READY",
+  "status": "CLOSED",
   "package_sha256": "bf68a209acc596b7f8c21b7678934b58ce09a5c433928e4f7b18ed97cfbc88eb",
-  "remaining_usd": 1.4,
-  "maximum_calls": 4,
+  "remaining_usd": 0,
+  "maximum_calls": 0,
   "retries": 0,
-  "historical_budget_transfer": false
+  "historical_budget_transfer": false,
+  "run_id": 36741974004
 }
