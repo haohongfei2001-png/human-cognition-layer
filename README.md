@@ -14,88 +14,18 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: DRC001_FRESH_BASE_VS_HCL_REALITY_CHECK**
+**NEXT_READY: DRC_GENERAL_ORDINARY_READER_ENTRY_REPAIR**
 
-DRC001: SimpleToM12 + SocialIQA8 native items, fixed hash-rank selection, current
-certified runtimev12, strong DeepSeek V4 Pro high thinking, equal8192 output ceilings,
-40 maximum calls,0 retries, separate USD2.25 hard cap, no old budget transfer.
-Source licenses/pins, gold-free input, actual H preparation, primary native-label
-agreement and source/history admission checks frozen before paid execution.
-No independent efficacy claim; long narrative/philosophy are not covered yet.
-
-
-HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息、信念、视角和有来源的心理证据。**基础模型可以直接做好时，直接回答。** 简单提示足够时不调用复杂机制；精确计算采用通用工具；专门认知机制只保留得到增量证据支持的部分。
-
-当前阶段：**Serious Independent Evaluation，I02 来源及比较臂资格审查**。Waves A–H 完成 provider-free 正确性构建；G-ARCH 经一次有界真实普通输入运行，通过架构与入口准备门槛，原始回执及限制见 [source-first closure](reports/HCL_G_ARCH_ENTRY_CLOSURE.md) 和 [gate](docs/HCL_G_ARCH_GATE.md)。I02 的[普通叙事信息状态 v2 接入](docs/HCL_I02_INFORMATION_STATE_V2_REPAIR.md)已在公开校准案例上通过无 provider 的 H/H-new treatment-presence 和公平性检查；早期 C/P/G 校准曾因 G-map 格式失败，后续 ACL v8 开发运行通过接口但语义资格仍未确立。这尚未证明独立泛化或强模型增益。当前按 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md) 和 [I01 evaluation contract](docs/HCL_I01_EVALUATION_CONTRACT.md) 做独立来源与公平比较资格审查。LongMemEval 保持封存，leaderboard 尚未启动。
-
-- [I02 普通 reader 全来源传递 v6](docs/HCL_I02_READER_SOURCE_CARRY_V6.md)：认知准备不再替代原始来源；保留 observer/access 边界与完整长度限额，原生选择题探针归开发证据、排除确认；旧付费运行按原认证版本重放，零新调用。
-- [I02 原生隐私概念开发校准收口](reports/HCL_I02_IRIE_PRIVACY_CPG_CLOSURE.md)：四次调用、零重试、估算 USD 0.06977652；C/P/G 开发者匿名诊断各 7/7，未证明独立泛化或 H 增益；预算关闭、来源暴露排除，继续 I02。
-- [I02 可达 Git 历史暴露门禁 v6](docs/HCL_I02_REACHABLE_HISTORY_SCREEN.md)：已删历史来源仍可被拦截；实际 KPU 负例命中三处，LongMemEval 对象只据元数据跳过，仍需独立来源与比较臂资格。零调用。
-- [I02 来源论点普通入口 v5](docs/HCL_I02_READER_ARGUMENT_ENTRY_V5.md)：修复短文本中公开论点比较被通用拒绝的问题；来源和题目完整进入最终输入，仍未证明专门机制或答案增益。开放教材候选已开发暴露、权利待核查，不作未见确认；零调用。
-- [I02 匿名评审 v2 交接](docs/HCL_I02_BLIND_REVIEW_V2.md)：揭盲前强制完整剩余断言审查；真实 ACL 回执完成无 provider 流程验证，尚无独立语义评审。
-- [I02 剩余断言审查补充](docs/HCL_I02_RESIDUAL_CLAIM_AUDIT.md)：可审计预设义务外的无依据严重断言；仅评估接口改进，不提升历史分数或独立证据。
-- [I02 ACL C/P/G v8 一次性开发校准结案](reports/HCL_I02_ACL_ETHICS_CPG_V8_CLOSURE.md)：四次原生推理调用与精确引文接口通过，零重试，估算 USD 0.02662506／峰时 USD 0.05325012；合成开发来源不能证明独立泛化或 HCL 增益，盲式语义比较尚未合格，授权已关闭。
-- [I02 ACL v8 开发者匿名语义审查](reports/HCL_I02_ACL_CPG_V8_DEVELOPER_REVIEW/CLOSURE.md)：冻结四项来源优先义务下，C/P/G-final 分别为 6/8、7/8、8/8；审查者也是实现者，不能视为独立盲评或跨任务比较臂资格。
-- [I02 ACL 教学摘要开发来源](docs/HCL_I02_ACL_ETHICS_DEVELOPMENT_SOURCE.md)：固定外部作者 CC BY 合成摘要及来源优先义务；C/P/G 普通输入无 provider 门禁通过，H 实际直通；整套作者／模板不能算未见确认。
-- [I02 来源优先盲评交接](docs/HCL_I02_BLIND_REVIEW_PACKET.md)：真实原始回执可生成匿名答案包，完整复核后才揭示比较臂；尚无独立盲评或效力结论。
-- [I02 强比较器 v8 候选](docs/HCL_I02_STRONG_COMPARATOR_V8.md)：C/P/G 原生推理和引文接口已在一条合成开发题上运行；跨任务语义能力与独立来源仍未合格。
-- [I02 受限覆盖报告](docs/HCL_I02_RESTRICTED_COVERAGE_REPORT.md)：可执行校验器如实报告少于四任务／三来源体系的目录，同时保留完整成熟度门槛；不开放 provider 输入或声称效力。
-- [I02 完整来源输入覆盖](docs/HCL_I02_LONG_INPUT_COVERAGE.md)：25 篇固定长故事均超过 H 普通入口长度上限；将拒绝记为观察结果，不截短来源或宣称合格样本。
-- [I02 EPC 工程伦理开发筛查](docs/HCL_I02_EPC_GLASS_SCREEN.md)：独立作者的原生伦理题有来源和许可回执，但 H 普通入口直通模型、无认知机制处理；已暴露材料不作独立确认。
-- [I02 QuALITY 有界来源筛查](docs/HCL_I02_QUALITY_BOUNDED_SCREEN.md)：外部文章与人工题的许可有直接来源；固定开发文章九题仍不足以证明深层概念任务适配，已读来源纳入暴露边界，不送模型。
-- [I02 叙事来源边界](docs/HCL_I02_NARRATIVE_SOURCE_BOUNDARY.md)：NarrativeQA 开发题和教学模块已读材料纳入暴露记录；教学模块的人物状态表及示例回答不得作为普通来源输入，尚无合格独立案例。
-- [I02 G 中间证据边界 v4](docs/HCL_I02_G_WORKSPACE_V4_BOUNDARY.md)：比较臂的引用图只允许来源 ID、原文引用和未决问题进入最终模型输入；仍待真实模型语义校准。
-- [I02 通用 G 工作区 v5](docs/HCL_I02_GENERIC_WORKSPACE_V5.md)：补上有版本的引文记忆、暂定证据关系和回答步骤；不改变 C/P 或历史运行，仍待真实模型语义校准。
-- [I02 EPC C/P/G v5 一次性开发校准收口](reports/HCL_I02_EPC_CPG_V5_CLOSURE.md)：3 次调用、零重试；G-map 达到冻结输出上限并截断，G-final 未运行，G 语义未合格。原始回执已保存，授权关闭；H 未运行，不计独立确认。
-- [I02 G v6 紧凑通用比较器](docs/HCL_I02_GENERIC_WORKSPACE_V6.md)：对 G 的来源索引与中间输出加上可执行界限；保留完整原文与 C/P 输入。后续 KPU 开发运行的 G-map 引文超过冻结单行长度，G-final 未调用，语义仍未合格。
-- [I02 G v7 通用证据工作区](docs/HCL_I02_GENERIC_WORKSPACE_V7.md)：在整体输出界限和逐条准确来源校验下容纳较长完整引文，保留 C/P、公平普通输入及历史 v6 结论；仅 provider-free，尚无新模型语义证据。
-- [I02 KPU C/P/G v6 开发校准收口](reports/HCL_I02_KPU_CPG_V6_CLOSURE.md)：独立作者 CC BY 案例的一次性运行用去 C/P/G-map 三次调用；G 引文真实但全部超过冻结单行长度，G-final 未调用，P 引文格式也未过 scorer。原始回执已保存，授权与 trigger 关闭；案例只作开发证据，不作独立确认或 HCL 效力证据。
-- [I02 来源权利与隐私筛查 v3](docs/HCL_I02_RIGHTS_PRIVACY_SOURCE_SCREEN_V3.md)：两个已暴露来源系统被明确拒绝，新增独立于历史冻结包的 URL、许可与隐私门禁；没有合格确认案例或新调用。
-- [I02 已暴露来源指纹 v4](docs/HCL_I02_EXACT_SOURCE_FINGERPRINT_V4.md)：KPU 已消费原文即使用镜像 URL 和新作者／模板 ID 也不能进入独立确认；不改历史冻结包，仍须单独做完整来源资格审核。
-- [I02 开放教材有界筛查](docs/HCL_I02_OER_BOUNDED_SCREEN.md)：SQuALITY、TRU/Rebus 与 Ethics Bowl 案例的具体许可、任务适配和已读暴露分别记录，尚无合格独立样本。
-
-- [普通人物问题与叙事入口](docs/HCL_V1_PERSON_QUESTION.md)：有来源、时间、访问与局部修订边界；单次回答，默认零提取调用。
-- [I02 C/P/G 一次性校准结案](reports/HCL_I02_CPG_CALIBRATION_CLOSURE.md)：3 次调用后 G-map 格式失败，G-final 未运行；完整 raw receipt 已保存，授权关闭，不测 H 增益。
-- [I02 第二来源 C/P/G 校准结案](reports/HCL_I02_MORAL_CPG_CALIBRATION_CLOSURE.md)：Moral Stories 首条开发样本完成四次调用；G-map v2 接口通过，但比较臂遗漏明确的安全目标，语义资格未通过。授权关闭，不调用 H/H-new，不声称独立效力。
-- [I02 来源优先语义评分 v1](docs/HCL_I02_SEMANTIC_SCORER.md)：冻结通用评审维度、原文引文校验与盲评计分接口；不自动判定语义真伪，也不代表 HCL 答案能力或独立效力提升。
-- [I02 来源暴露边界](docs/HCL_I02_SOURCE_LINEAGE.md)：MuSR、Moral Stories 及五个历史用过的来源体系不能换行号进入独立确认集；仍需完整历史审计，尚无合格确认案例。
-- [I02 通用比较臂 v3](docs/HCL_I02_CPG_V3_REPAIR.md)：P/G 的来源清单把明确目标与未知的伤害意图分开；保留 C 和共同输入。仅无 provider 正确性，尚未确认模型表现。
-- [I02 FairytaleQA 元数据候选](docs/HCL_I02_FAIRYTALE_METADATA_CANDIDATE.md)：按固定目录规则锁定一条较长外部故事及专家问题；后续已做盲式版本及题型标签核对，正文、题目和答案文本均未展示，不可送模型。
-- [I02 盲式版本核对](docs/HCL_I02_FAIRYTALE_BLIND_PROVENANCE.md)：已证明候选故事全文标准化后连续匹配固定 Gutenberg 版本；只输出哈希和统计，没有展示正文或查看问题答案，案例仍未合格。
-- [I02 FairytaleQA 题型元数据核对](docs/HCL_I02_FAIRYTALE_QUESTION_TAG_AUDIT.md)：固定题目文件仅统计出版社标签；61 题中 6 题为总览，且没有总览人物／感受标签。长篇人物发展任务适配尚未证明，未查看题目或答案文本，案例仍不合格。
-- [I02 FairytaleQA 标注来源与许可边界](docs/HCL_I02_FAIRYTALE_ANNOTATION_RIGHTS.md)：固定作者仓库对专家标注和根目录 Apache 2.0 许可的原始证据；provider 处理地点、题目语义及任务适配仍未核实，不开放模型输入。
-- [I02 FairytaleQA 章节跨度核对](docs/HCL_I02_FAIRYTALE_SECTION_SPAN.md)：六个总览题均只标注相邻附近两章，最大跨度为 43 章中的 2；该预选来源不符合当前长篇人物发展任务的元数据资格，不据此换题或声称 HCL 效力。
-- [夜间 source-first closure](reports/HCL_NIGHT_CAPABILITY_CLOSURE.md)：实际能力变化、证据限制、两个 deferred 冻结包。
-- [可执行 capability registry](docs/HCL_V1_CAPABILITY_REGISTRY.md)：核心、可选结构、通用工具、停用研究资产。
-- [Router / context / answer API](docs/HCL_V1_COGNITION_ROUTER.md)：确定性最小路由、有访问和时间边界的上下文、单次底座模型调用。
-- [Long-Horizon Capability Master Plan](HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md)：canonical 最终 capability architecture、Levels、Waves A–H、41 个 work packages、G-HC/G-ARCH、serious evaluation、cross-model、optimization 与 leaderboard phase。
-- [Live development plan](DEVELOPMENT_PLAN.md)：只保存当前 wave、执行队列、superseded policies 与 `NEXT_READY`。
-- [CG-04 比较协议](docs/HCL_CG04_EXTERNAL_DEVELOPMENT_PROTOCOL.md)：四个合成开发案例、五臂、零重试、USD 0.30 单次授权已消费并关闭；旧预算不转移。
-- [CG-04 实现及边界](docs/HCL_CG04_IMPLEMENTATION.md)：有条件的显式偏好、局部修订与未解决冲突；普通文本入口零提取调用。
-- [CG-04 capability contract](docs/HCL_CG04_CAPABILITY_CONTRACT.md)：角色、情境、条件和局部偏好冲突；不建立全局价值权重。
-- [CG-03 capability contract](docs/HCL_CG03_CAPABILITY_CONTRACT.md)：在显式规范前提下区分因果贡献、知识、可预见性、控制与意图。
-- [CG-03 实现及边界](docs/HCL_CG03_IMPLEMENTATION.md)：来源、时间、访问与规范前提分离；保守文本入口。
-- [CG-03 开发比较协议](docs/HCL_CG03_EXTERNAL_DEVELOPMENT_PROTOCOL.md)：四例五臂、公平输出格式、treatment-presence 和已消费的单次比较规则。
-- [CG-03 source-first closure](reports/HCL_CG03_EXTERNAL_DEVELOPMENT_CLOSURE.md)：H 28/28、P 21/28、G 20/28、H-new 23/28；仅四个合成开发案例，授权和 trigger 已关闭。
-- [CG-02 capability contract](docs/HCL_CG02_CAPABILITY_CONTRACT.md)：社会承诺、期待与误解的最小能力边界、阶段和 treatment-presence gate。
-- CG-01 的一次性开发验证和结案见 [报告](reports/HCL_CG01_EXTERNAL_DEVELOPMENT_CLOSURE.md)。
-- [集成评估来源审查与设计](docs/HCL_V1_INTEGRATED_EVALUATION_PROTOCOL.md)：保留为 external-validation backlog；不再阻塞新 capability implementation。
-- `hcl/v1` 不导入 benchmark runner，不自动提取私人心理状态，不调度额外模型提取调用。
-
-```python
-from hcl.v1 import HCLCognitionLayer, CognitionRequest
-
-# 可替换为调用者自行管理的真实模型接口；此例不调用 provider。
-layer = HCLCognitionLayer(lambda messages: '可用证据不足。')
-answer = layer.answer(CognitionRequest('Alice 知道什么？', target_actor='Alice'))
-```
-
-Perspective/belief 是目前最强的专门认知资产：历史 fresh C/P/G/D 为 11/19/22/30 of 32，D-only/G-only 8/0，但仅是一模型的小规模证据。Intention/affect 保留为可选、有来源的结构；因果、论证、形式验证和多解读证书是条件计算工具。未提供验证后的语义证据时，字段保持空值，不自动生成动机或情绪。详见 API 文档。
-
-此前 v1 foundation 轮次的 42 项 v1 集成与 176 项历史回归共 **218 项测试通过**，合并后六组 CI 全绿；执行证据见 [closure](reports/HCL_V1_INTEGRATION_FINAL_CLOSURE.md)。该轮只执行无需 provider 的验证。所有旧预算关闭；已消费样本不重跑；LongMemEval 32 行继续 sealed/deprioritized。CG-01 的单次授权开发验证另见本页下方报告。正确性测试通过不等于外部效用已经证明。
-
-历史研究、实验结果和当时的 always-on 架构记录完整保留在 [pre-v1 README](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/README.md)、[历史 STATUS](https://github.com/haohongfei2001-png/human-cognition-layer/blob/c6b0eca63295166ce4b2fb6984911b94ec90e349/STATUS.md) 与现有 `docs/`、`reports/`。它们不是当前 v1 激活政策。
-
+DRC001 completed at run36778124208 / SHA138a7a25dab6ab18e0800df3374475529a8c0ef7:
+strong Base14/20, current HCL16/20;4 paired gains/2 harms. Zero checked treatment
+in20 current ordinary preparations: mechanism attribution INCONCLUSIVE, restrictive
+reader wrapper SIMPLIFY/REPAIR. No final evidence or historical disposition upgrade.
+40 calls,0 retries, estimated USD0.104681456, rated peakUSD0.221775840; invoice unknown.
+Full raw/scorer/usage/state/history/artifact and certified replay retained; grant0,
+trigger removed, no rerun/transfer. [Source-first closure](reports/HCL_DRC001_SOURCE_FIRST_CLOSURE.md).
+Next implement general authorized reader entry using existing B01/C01/C03, preserve
+private/source/actor/time/normative boundaries, then choose a fresh development batch.
+Independent reviewer/perfect final source remains no daily development gate.
 
 ## Completed capability-growth package
 

@@ -31,14 +31,18 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: DRC001_FRESH_BASE_VS_HCL_REALITY_CHECK**
+**NEXT_READY: DRC_GENERAL_ORDINARY_READER_ENTRY_REPAIR**
 
-DRC001: SimpleToM12 + SocialIQA8 native items, fixed hash-rank selection, current
-certified runtimev12, strong DeepSeek V4 Pro high thinking, equal8192 output ceilings,
-40 maximum calls,0 retries, separate USD2.25 hard cap, no old budget transfer.
-Source licenses/pins, gold-free input, actual H preparation, primary native-label
-agreement and source/history admission checks frozen before paid execution.
-No independent efficacy claim; long narrative/philosophy are not covered yet.
+DRC001 completed at run36778124208 / SHA138a7a25dab6ab18e0800df3374475529a8c0ef7:
+strong Base14/20, current HCL16/20;4 paired gains/2 harms. Zero checked treatment
+in20 current ordinary preparations: mechanism attribution INCONCLUSIVE, restrictive
+reader wrapper SIMPLIFY/REPAIR. No final evidence or historical disposition upgrade.
+40 calls,0 retries, estimated USD0.104681456, rated peakUSD0.221775840; invoice unknown.
+Full raw/scorer/usage/state/history/artifact and certified replay retained; grant0,
+trigger removed, no rerun/transfer. [Source-first closure](reports/HCL_DRC001_SOURCE_FIRST_CLOSURE.md).
+Next implement general authorized reader entry using existing B01/C01/C03, preserve
+private/source/actor/time/normative boundaries, then choose a fresh development batch.
+Independent reviewer/perfect final source remains no daily development gate.
 
 ## Historical I02 snapshots — evidence retained; global stop superseded
 

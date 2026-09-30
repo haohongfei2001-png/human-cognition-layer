@@ -1,0 +1,83 @@
+{
+  "accuracy_claim_allowed": true,
+  "actual_invoice_cost_usd": null,
+  "arms": {
+    "Base": {
+      "actual_model_ids": [
+        "deepseek-v4-pro"
+      ],
+      "correct": 14,
+      "estimated_actual_cost_usd": 0.045917564,
+      "format_valid": 20,
+      "input_tokens": 5774,
+      "output_tokens": 21431,
+      "rated_peak_cost_usd": 0.09248844,
+      "scored": 20
+    },
+    "HCL": {
+      "actual_model_ids": [
+        "deepseek-v4-pro"
+      ],
+      "correct": 16,
+      "estimated_actual_cost_usd": 0.058763892000000005,
+      "format_valid": 20,
+      "input_tokens": 17404,
+      "output_tokens": 26847,
+      "rated_peak_cost_usd": 0.1292874,
+      "scored": 20
+    }
+  },
+  "budget_state": "CLOSED_NO_TRANSFER_NO_AUTOMATIC_RERUN",
+  "complete_20_paired_cases": true,
+  "estimated_actual_cost_usd": 0.10468145599999999,
+  "evidence_level": "DEVELOPMENT_ONLY_NOT_FINAL_INDEPENDENT_EVIDENCE",
+  "execution_status": "COMPLETED_DEVELOPMENT_ONLY",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "mechanism_attribution": "INCONCLUSIVE_NO_CHECKED_TREATMENT_PRESENT",
+  "ordinary_refusal_cases": 20,
+  "package_sha256": "513106aa136c9ba1fc59ac76c346fd55fa4e9c9c9ac4af3bb03db8f30b77f698",
+  "paired": {
+    "both_correct": 12,
+    "both_wrong": 2,
+    "hcl_gain": 4,
+    "hcl_harm": 2
+  },
+  "provider_calls": 40,
+  "rated_peak_cost_usd": 0.22177584000000006,
+  "raw_receipt_sha256": "45a0c9e6ff4feafdae8c37069ae3fc7cd3be3578a347cd36059390dbfdb40318",
+  "run_id": "36778124208",
+  "run_sha": "138a7a25dab6ab18e0800df3374475529a8c0ef7",
+  "runtime_sha256": "aa7fc08c1937ffef7eeb4dfa762c1f0e06eeb2bd414dcea71cde582b7b43e0c9",
+  "schema": "hcl-drc001-development-summary-v1",
+  "strata": {
+    "SocialIQA/dev": {
+      "Base_correct": 5,
+      "HCL_correct": 5,
+      "hcl_gain": 2,
+      "hcl_harm": 2,
+      "n": 8
+    },
+    "allenai/SimpleToM/behavior-qa": {
+      "Base_correct": 3,
+      "HCL_correct": 4,
+      "hcl_gain": 1,
+      "hcl_harm": 0,
+      "n": 4
+    },
+    "allenai/SimpleToM/judgment-qa": {
+      "Base_correct": 2,
+      "HCL_correct": 3,
+      "hcl_gain": 1,
+      "hcl_harm": 0,
+      "n": 4
+    },
+    "allenai/SimpleToM/mental-state-qa": {
+      "Base_correct": 4,
+      "HCL_correct": 4,
+      "hcl_gain": 0,
+      "hcl_harm": 0,
+      "n": 4
+    }
+  },
+  "treatment_present_cases": 0
+}
