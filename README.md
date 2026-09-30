@@ -14,20 +14,22 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: DRC002_FROZEN_NARRATIVE_CONCEPT_EXECUTION**
+**NEXT_READY: GENERAL_SHARED_READER_STATE_REVISION_REPAIR**
 
-DRC00213 development tasks frozen: six narrative perspective/time/world-rule/argument
-fixtures + full185917-character Hamlet arc-type subtask, and six hash-selected native
-MMLU-Pro philosophy test items. [Frozen protocol](docs/HCL_DRC002_DEVELOPMENT_PROTOCOL.md).
-Strong Base/current v13 HCL, same DeepSeek V4 Pro high thinking/8192 output ceiling;
-26 maximum calls,0 retries, new USD3 cap, all-call peak reservationUSD2.3613084.
-Actual H source preparation succeeds13/13, checked treatment0/13 disclosed; no
-mechanism attribution/full-benchmark/final evidence claim. No gold/route flags/COT
-in model inputs. Native and derived scoring scopes separated; annotation ambiguity
-preserved before output. New systems permanently DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION.
-Unique dormant trigger/hash grant; cloud source/history gates before paid transport.
-Execute once after exact-head/main CI, save raw/cost/state/artifact and source-first
-closure, grant0/trigger removal, then general defect-driven capability development.
+DRC002 CLOSED/INCONCLUSIVE: unique run36784477632 at e92b75d9736af5c0b87ad66ecea20f3c30719db4
+stopped after11 calls when returned output8193 exceeded frozen8192.0 retries.
+[Source-first closure](reports/HCL_DRC002_SOURCE_FIRST_CLOSURE.md): five complete
+narrative pairs Base2/5/HCL3/5, one unpaired H response;6/11 final responses truncated.
+No full-batch, philosophy, whole-play or mechanism gain claim; treatment0/13.
+EstimatedUSD0.132035552, peak ratedUSD0.267664320, invoice unknown. Raw/input/usage/
+scorer/history/artifact hashes and125-file exact-runtime replay retained; grant0,
+trigger deleted, no continuation/rerun or budget transfer. Both new systems final-consumed.
+
+Immediate implementation repairs the generic complete-reader shared-workspace crash,
+version/challenge invalidation and one-call final-state path using existing cognition.
+No automatic private truth, moral rule, or cross-document identity join. Provider-free
+implementation/correctness evidence first; future fresh development checks stay active
+and separate from sealed confirmation. Final reviewer/source absence is no daily gate.
 
 DRC001 CLOSED/development-only (Base14/20 vs HCL16/20;4 gains/2 harms, treatment0/20,
 attribution INCONCLUSIVE);40 calls, estimatedUSD0.104681456, invoice unknown; no rerun.

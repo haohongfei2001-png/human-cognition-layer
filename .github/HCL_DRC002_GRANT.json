@@ -1,10 +1,18 @@
 {
+  "actual_invoice_cost_usd": null,
   "batch": "DRC002",
+  "closure": "INCONCLUSIVE_INCOMPLETE_PROVIDER_OUTPUT_LIMIT",
+  "estimated_actual_cost_usd": 0.132035552,
   "historical_budget_transfer": false,
-  "maximum_calls": 26,
+  "maximum_calls": 0,
   "package_sha256": "fd4e55c4d50563374e5ba7c312a0268d027afa1533e4ecf165c0f976d5e9e081",
-  "remaining_usd": 3.0,
+  "provider_calls": 11,
+  "rated_peak_cost_usd": 0.26766432,
+  "remaining_usd": 0,
+  "rerun_authorized": false,
   "retries": 0,
+  "run_id": 36784477632,
+  "run_sha": "e92b75d9736af5c0b87ad66ecea20f3c30719db4",
   "schema": "hcl-drc-once-grant-v1",
-  "status": "READY"
+  "status": "CLOSED"
 }
