@@ -4,6 +4,7 @@ HCL 为基础模型增加按需的人类认知支持，帮助理解人物信息�
 
 当前阶段：**Serious Independent Evaluation，I02 来源及比较臂资格审查**。Waves A–H 完成 provider-free 正确性构建；G-ARCH 经一次有界真实普通输入运行，通过架构与入口准备门槛，原始回执及限制见 [source-first closure](reports/HCL_G_ARCH_ENTRY_CLOSURE.md) 和 [gate](docs/HCL_G_ARCH_GATE.md)。I02 的[普通叙事信息状态 v2 接入](docs/HCL_I02_INFORMATION_STATE_V2_REPAIR.md)已在公开校准案例上通过无 provider 的 H/H-new treatment-presence 和公平性检查；早期 C/P/G 校准曾因 G-map 格式失败，后续 ACL v8 开发运行通过接口但语义资格仍未确立。这尚未证明独立泛化或强模型增益。当前按 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md) 和 [I01 evaluation contract](docs/HCL_I01_EVALUATION_CONTRACT.md) 做独立来源与公平比较资格审查。LongMemEval 保持封存，leaderboard 尚未启动。
 
+- [I02 普通 reader 全来源传递 v6](docs/HCL_I02_READER_SOURCE_CARRY_V6.md)：认知准备不再替代原始来源；保留 observer/access 边界与完整长度限额，原生选择题探针归开发证据、排除确认；旧付费运行按原认证版本重放，零新调用。
 - [I02 原生隐私概念开发校准收口](reports/HCL_I02_IRIE_PRIVACY_CPG_CLOSURE.md)：四次调用、零重试、估算 USD 0.06977652；C/P/G 开发者匿名诊断各 7/7，未证明独立泛化或 H 增益；预算关闭、来源暴露排除，继续 I02。
 - [I02 可达 Git 历史暴露门禁 v6](docs/HCL_I02_REACHABLE_HISTORY_SCREEN.md)：已删历史来源仍可被拦截；实际 KPU 负例命中三处，LongMemEval 对象只据元数据跳过，仍需独立来源与比较臂资格。零调用。
 - [I02 来源论点普通入口 v5](docs/HCL_I02_READER_ARGUMENT_ENTRY_V5.md)：修复短文本中公开论点比较被通用拒绝的问题；来源和题目完整进入最终输入，仍未证明专门机制或答案增益。开放教材候选已开发暴露、权利待核查，不作未见确认；零调用。
