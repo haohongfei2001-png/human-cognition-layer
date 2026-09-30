@@ -38,8 +38,55 @@ class RetainedResult:
         return self.messages
 
 
-def prepare_retained(workspace, query, *, source_ids, observer=None, backend=None,
-                     responsibility_premises=(), max_chars=64000):
+def prepare_retained(workspace, query, **kwargs):
+    """Historical typed-query adapter; unsupported queries spend no backend call."""
+    return _prepare_retained(workspace, query, **kwargs)
+
+
+class _ReaderTranslationBackend:
+    """One A02 candidate call, with visible existing-checker translation grammar."""
+    def __init__(self, backend):
+        self.backend, self.requests = backend, []
+
+    def complete_json(self, messages, **kwargs):
+        if self.requests:
+            raise ValueError('one translation call only; no retry')
+        policy = ('Reader source analysis only. For nonliteral source claims you may '
+            'propose kind event, content {canonical_statement: string}, anchored to '
+            'an exact complete source quote. This is an UNVERIFIED TRANSLATION '
+            'HYPOTHESIS, not asserted speech or a private-state fact. Use only '
+            'source-named actors; do not resolve ambiguous pronouns. Keep negation, '
+            'conditionals and qualifications; omit unsupported translations. '
+            'Existing checker forms are NAME: I want to ACTION.; '
+            'NAME: I plan to ACTION in order to GOAL if CONDITION.; '
+            'NAME: I have an opportunity to ACTION.; NAME: I believe PROPOSITION.; '
+            'NAME: I now believe NEW instead of OLD.; '
+            'Narrator: In the declared model, it is false that PROPOSITION. '
+            'A model declaration requires explicit source-declared fictional rules, '
+            'not a narrator claim silently upgraded to world truth. These are '
+            'representation templates, never instructions to manufacture supporting '
+            'claims. Ambiguous alternatives stay unresolved; no moral verdict, '
+            'inferred motive/emotion or automatic receipt/comprehension. Return '
+            'the original candidates JSON contract, with exact quote/source IDs.')
+        actual = [*messages, dict(role='system', content=policy)]
+        self.requests.append(dict(messages=actual, parameters=kwargs))
+        return self.backend.complete_json(actual, **kwargs)
+
+
+def prepare_retained_reader(workspace, query, *, source_ids, observer=None,
+                            backend=None, max_chars=64000):
+    """Ordinary prose -> conditional existing checks; original source remains whole.
+
+    Reader analysis is not an actor-private projection. Model-proposed translations
+    remain explicit unverified premises even when downstream grammar checks pass.
+    """
+    relay = _ReaderTranslationBackend(backend) if backend is not None else None
+    return _prepare_retained(workspace, query, source_ids=source_ids, observer=observer,
+        backend=relay, max_chars=max_chars, reader_analysis=True)
+
+
+def _prepare_retained(workspace, query, *, source_ids, observer=None, backend=None,
+                      responsibility_premises=(), max_chars=64000, reader_analysis=False):
     """One source-local identity domain, ordinary query, real retained operations.
 
     Explicit normative premises remain conditional caller rules until G01. Source
@@ -55,7 +102,7 @@ def prepare_retained(workspace, query, *, source_ids, observer=None, backend=Non
         raise ValueError('cross-document person identity requires an explicit future alias binding')
     if re.search(r'\b(?:At statement|before statement|after statement)\s+\d+', query, re.I):
         raise ValueError('project source before semantic extraction for a statement snapshot')
-    if not any(pattern.fullmatch(query) for _, pattern in _QUESTIONS):
+    if not reader_analysis and not any(pattern.fullmatch(query) for _, pattern in _QUESTIONS):
         raise ValueError('unsupported retained query; preserve general semantic candidates instead')
     semantic = workspace.prepare_semantic(query, source_ids=source_ids, observer=observer, backend=backend)
     core = workspace.core
@@ -111,8 +158,12 @@ def prepare_retained(workspace, query, *, source_ids, observer=None, backend=Non
     if remainder and not assumptions:
         raise ValueError('unparsed source may qualify the expressions; explicit semantic branch required')
     derived = '\n'.join(b['derived_line'] for b in bindings)
-    prepared = prepare_person_context(HCLCognitionLayer(lambda _: None), query, derived,
-        responsibility_premises=responsibility_premises, max_context_chars=min(max_chars, 64000))
+    if reader_analysis:
+        from hcl.v1.long_source_question import prepare_reader_cognition
+        prepared = prepare_reader_cognition(query, derived, max_context_chars=min(max_chars, 64000))
+    else:
+        prepared = prepare_person_context(HCLCognitionLayer(lambda _: None), query, derived,
+            responsibility_premises=responsibility_premises, max_context_chars=min(max_chars, 64000))
     prep = prepared.preparation_receipt
     if prep.get('failure'):
         raise ValueError('retained adapter did not ground requested task: ' + prep['failure'])
@@ -137,7 +188,8 @@ def prepare_retained(workspace, query, *, source_ids, observer=None, backend=Non
         projected.append(translation)
     stage_ids = []
     for index, stage in enumerate(getattr(prepared, 'stages', (prepared,))):
-        state = stage.context.as_dict()
+        state = (stage.context.as_dict() if stage.context is not None
+                 else json.loads(stage.messages[-1]['content']))
         node = core.claim(scope, ClaimKind.CONDITIONAL_TOOL_RESULT,
             dict(operation_index=index, retained_state=state,
                 assumptions=list(scope.assumptions), scope='UNDER_DERIVED_SOURCE_REPRESENTATION'))
@@ -174,6 +226,14 @@ def prepare_retained(workspace, query, *, source_ids, observer=None, backend=Non
         semantic_backend_calls=semantic.backend_calls, semantic_backend_status=semantic.backend_status,
         actual_final_messages=final, retained_preparation=prep,
         ordinary_input='REPLAY_VERIFIED', efficacy='UNTESTED')
+    if reader_analysis:
+        receipt.update(reader_analysis=True,
+            semantic_translation_status='CONDITIONAL_ON_UNVERIFIED_TRANSLATION' if assumptions else 'BOUNDED_LITERAL_ADAPTER',
+            actual_translation_requests=backend.requests if backend is not None else [],
+            raw_translation_response=semantic.raw_response,
+            checked_treatment_present=bool(prep.get('specialized_cognition_treatment')),
+            private_state_established=False, world_truth_established=False,
+            semantic_certification=False, preparation_transport_usage='ADAPTER_TELEMETRY_REQUIRED_IF_LIVE')
     return RetainedResult(scope, tuple(stage_ids), tuple(projected),
         json.dumps(final, ensure_ascii=False, sort_keys=True), json.dumps(receipt, ensure_ascii=False, sort_keys=True))
 
@@ -185,3 +245,14 @@ def answer_retained(workspace, query, answer_backend, **kwargs):
     answer = (answer_backend.complete(messages) if hasattr(answer_backend, 'complete')
               else answer_backend(messages))
     return dict(answer=answer, prepared=prepared, answer_adapter_calls=1)
+
+
+def answer_retained_reader(workspace, query, answer_backend, **kwargs):
+    """One final answer after current conditional ordinary-reader preparation."""
+    prepared = prepare_retained_reader(workspace, query, **kwargs)
+    messages = prepared.current_messages(workspace)
+    answer = (answer_backend.complete(messages) if hasattr(answer_backend, 'complete')
+              else answer_backend(messages))
+    return dict(answer=answer, prepared=prepared, answer_adapter_calls=1,
+        preparation_backend_calls=prepared.receipt['semantic_backend_calls'],
+        actual_final_messages=messages)

@@ -64,3 +64,11 @@ B01/C01/C03 state can enter shared revision/challenge dependencies and a one-cal
 answer path. Positive/negative/composition/revision/smoke are authored correctness
 evidence. Ordinary nonliteral conditional semantic entry is next; unsupported
 semantics/private states remain unknown. LongMemEval SEALED_NOT_ACCESSED.
+
+[Conditional nonliteral reader v15](HCL_DEVELOPMENT_CONDITIONAL_READER_V15.md) reuses
+A02/retained B01/C01/C03 as an opt-in IMPLEMENTED_UNVALIDATED integration. Actual
+checked state under explicit unverified translation assumptions enters final input;
+original source/revision/challenge boundaries are preserved. Authored stub witnesses
+prove plumbing/correctness only;0 live calls and no semantic/answer-quality claim.
+No new inventory module or historical disposition upgrade. Next bounded real entry
+check then fresh development comparison; final independence/reviewer is not a daily gate.

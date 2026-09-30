@@ -1,0 +1,21 @@
+{
+  "amended_hcl_runtime_sha256": "18816b95e425659b1d45f04ed8ae2f8dd5a4a37208adb540d0dc9cc0805a1cf3",
+  "answer_gain_claimed": false,
+  "confirmation_items_inspected": 0,
+  "consumed_drc001_runtime_preserved": true,
+  "consumed_drc002_runtime_preserved": true,
+  "development_exposed_batches": [
+    "DRC001",
+    "DRC002"
+  ],
+  "development_only": true,
+  "historical_i01_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "new_cognition_module": false,
+  "previous_hcl_runtime_sha256": "caac81e29f55d52158f3ba67359964f5cbb68ad4174b0aed15552350676f3d64",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "reason": "GENERAL_NONLITERAL_CONDITIONAL_READER_ENTRY",
+  "schema": "hcl-development-runtime-amendment-v15",
+  "semantic_certification_claimed": false
+}
