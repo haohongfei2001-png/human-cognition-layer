@@ -358,6 +358,8 @@ The chained v4 default-entry correction preserves an explicit caller context lim
 
 The [chained v5 reader argument entry](docs/HCL_I02_READER_ARGUMENT_ENTRY_V5.md) accepts a bounded public source-level disagreement question and preserves the whole short source in final input, repairing a generic unsupported-scope refusal and the source-order wrapper it exposed. A preselected external-author concept case supplied development-only entry evidence: source/question are now seen by the implementer, and provider use is held pending item-level quotation rights. This is input correctness, not H-specialized treatment or answer gain. Zero calls/spend. **NEXT_READY remains I02 independent source and comparator qualification**; do not promote this development system to confirmation.
 
+The [v6 reachable-history exposure gate](docs/HCL_I02_REACHABLE_HISTORY_SCREEN.md) now refuses a candidate whose source appeared in a currently reachable older Git blob even if the current checkout no longer contains it. Actual `main@08900c63` KPU negative witness found three overlaps among 2,701 nonsealed text blobs; 54 LongMemEval blob IDs were identified by metadata and not opened. This is a bounded negative screen, not proof of independent freshness or answer gain. Continue I02 item-level rights/task review and strong comparator qualification; zero calls/spend.
+
 Full contracts and dependencies
 remain in the Master Plan. No automatic per-package paid comparison.
 
