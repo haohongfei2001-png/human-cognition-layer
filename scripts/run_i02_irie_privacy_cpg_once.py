@@ -24,7 +24,8 @@ def build_package():
     legacy=json.loads(Path('reports/HCL_I02_ACL_ETHICS_CPG_V8_PACKAGE.json').read_text())
     files=set(legacy['execution_files']) | {str(SOURCE),str(OBLIGATIONS),str(WORKFLOW),
         'scripts/i02_irie_privacy_preflight.py','scripts/i02_source_qualification_v7.py',
-        'scripts/run_i02_irie_privacy_cpg_once.py'}
+        'scripts/run_i02_irie_privacy_cpg_once.py','tests/test_i02_irie_privacy.py',
+        '.github/workflows/hcl-i02-irie-privacy-provider-free.yml'}
     hashes={p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in sorted(files)}
     return dict(schema='hcl-i02-irie-privacy-cpg-package-v1',
         purpose='ONE_NATIVE_PRIVACY_CONCEPT_DEVELOPMENT_CALIBRATION_NO_H_EFFICACY',
