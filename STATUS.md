@@ -19,6 +19,15 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [I02 v6 reachable-history screen](docs/HCL_I02_REACHABLE_HISTORY_SCREEN.md)
+now checks current Git refs before the prior snapshot and rights/lineage gates.
+On `main@08900c6331a9f15b40302200a7fac2edaaef62d1`, it detects three
+historical overlaps for the already consumed KPU source while skipping 54
+LongMemEval blob IDs before content reads. This is a negative exposure gate,
+not complete historical disjointness, new source qualification or HCL answer
+gain. Zero provider calls/spend; source and comparator qualification remain
+the next work.
+
 The [I02 v5 reader argument entry](docs/HCL_I02_READER_ARGUMENT_ENTRY_V5.md)
 repairs an ordinary source-level disagreement question that previously entered
 a generic unsupported-scope refusal. The complete short source and query now

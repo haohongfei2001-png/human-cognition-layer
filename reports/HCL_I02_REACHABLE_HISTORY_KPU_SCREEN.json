@@ -1,0 +1,37 @@
+{
+  "candidate_kind": "ALREADY_DEVELOPMENT_EXPOSED_KPU_NEGATIVE_WITNESS",
+  "candidate_source_sha256": "9e029c7fa4abd6b48607bebb8147b48edf3e093f18b3cd78bd8be6cd8d25347b",
+  "checkout_head": "08900c6331a9f15b40302200a7fac2edaaef62d1",
+  "confirmation_qualified": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "matches": [
+    {
+      "exact_blob_match": false,
+      "first_reachable_path": "reports/HCL_I02_KPU_CONFLICT_DEVELOPMENT_SOURCE.json",
+      "object_sha": "434d614dd14a2f66c7d149197e27d2bdf76242c5",
+      "shared_12_word_windows": 583
+    },
+    {
+      "exact_blob_match": false,
+      "first_reachable_path": "reports/HCL_I02_KPU_CPG_V6_RUN_36602249307/raw_receipt.json",
+      "object_sha": "5c2a651392000cb9a17d24262e552c9a9fb0c877",
+      "shared_12_word_windows": 598
+    },
+    {
+      "exact_blob_match": false,
+      "first_reachable_path": "scripts/run_i02_kpu_cpg_v6_once.py",
+      "object_sha": "58254f7d8cddfa92721acd75aba0caf751630a28",
+      "shared_12_word_windows": 24
+    }
+  ],
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "repository": "haohongfei2001-png/human-cognition-layer",
+  "schema": "hcl-i02-reachable-git-history-exposure-v1",
+  "scope": "CURRENTLY_REACHABLE_GIT_OBJECTS_NOT_DELETED_REFS_OR_MODEL_TRAINING",
+  "sealed_blob_ids_not_opened": 54,
+  "skipped_large_paths": [],
+  "skipped_nontext_blobs": 0,
+  "status": "REVIEW_REQUIRED",
+  "unique_utf8_blobs_scanned": 2701
+}
