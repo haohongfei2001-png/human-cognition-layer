@@ -25,9 +25,10 @@ in actual final H input, rather than silently losing it after bounded extraction
 Explicit focal/preparation and observer/access-scoped views retain their projections; source counts toward the context
 bound and overflow is a whole-source refusal. Exact v5/v6 probe hashes show the
 input delta with unchanged source, options and selected capabilities, not answer
-gain. The undisplayed native-choice source used for the repair is development-only
-and excluded by v8; item semantics/privacy remain unaudited and provider input is
-held. Zero calls/spend. The consumed IRIE run is replayed at its certified v5
+gain. The initially undisplayed native-choice probe is development-only and excluded
+by v8. A subsequent source-first read found prospective-action/multiple-option
+ambiguity; native gold remains unseen, no I01 family qualifies and provider input
+is held. Zero calls/spend. The consumed IRIE run is replayed at its certified v5
 runtime, never migrated to v6. Independent source/comparator qualification remains
 next; no new confirmation source or H efficacy claim.
 

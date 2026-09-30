@@ -1,0 +1,48 @@
+{
+  "schema": "hcl-i02-native-choice-development-item-audit-v1",
+  "publisher_commit": "4f491f0784ed31ef93a8837615fbc48f885cf78d",
+  "publisher_file": "data/Persuasion Story Task.jsonl",
+  "row_selection": "FIRST_ROW_ENGLISH_PRESELECTED_WITHOUT_SEMANTIC_OR_LABEL_FILTER",
+  "source_sha256": "621fd005dbc24b8ab5f2f59ae4875404354dfc54ec31163a8f3b2be9cbb60987",
+  "question_with_options_sha256": "56102b0c08e5b17a371d179695c9fbaa96132d5239762a19454123428d38a4c1",
+  "source_and_options_displayed_after_entry_repair": true,
+  "native_answer_displayed": false,
+  "native_answer_used": false,
+  "provider_outputs_seen": 0,
+  "reviewer": "IMPLEMENTER_SOURCE_FIRST_NOT_INDEPENDENT_EXTERNAL_REVIEW",
+  "development_only": true,
+  "confirmation_qualified": false,
+  "source_grounding": [
+    {
+      "kind": "NARRATOR_REPORTED_GOAL",
+      "quote": "Xiao Hong really, really wants to go to the amusement park today."
+    },
+    {
+      "kind": "FATHER_REPORTED_ASSESSMENT_NOT_WORLD_MEASUREMENT",
+      "quote": "I think there is a lot of noise in the amusement park."
+    }
+  ],
+  "item_privacy_review": "ORIGINAL_STYLIZED_FICTIONAL_FAMILY_SCENARIO_NO_IDENTIFIABLE_PRIVATE_PERSON_RECORDS",
+  "rights_evidence": "https://github.com/zhchen18/ToMBench/blob/4f491f0784ed31ef93a8837615fbc48f885cf78d/LICENSE",
+  "rights_review": "PUBLISHER_MIT_ORIGINAL_INVENTORY_EVALUATION_ONLY_NO_TRAINING",
+  "task_review": "RESTRICTED_PERSUASION_PLANNING_DIAGNOSTIC_NOT_I01_FAMILY_QUALIFICATION",
+  "native_question_issues": [
+    "Question asks how persuasion occurs although the source contains no completed persuasion; answer must remain a prospective possibility.",
+    "Several tactics may be plausible under additional premises; no unique source-determined option established.",
+    "Option A introduces noise-mitigation claims absent from the story; any evidence-gathering recommendation must be conditional.",
+    "Option C changes the child destination goal and asserts everyone happy; no source-supported actual emotional result.",
+    "Option D proposes weekday scheduling while the current goal is today, a Saturday; quieter times and outcome are unstated assumptions."
+  ],
+  "source_first_boundaries": [
+    "Do not promote the narrator-reported child goal into an actual successful persuasion.",
+    "Keep father reported noise assessment separate from measured park noise.",
+    "Do not treat candidate options as past events, proven facts or private emotions.",
+    "Preserve destination/today constraints and distinguish a compromise from satisfying them.",
+    "Do not use a native answer letter as unquestionable semantic truth."
+  ],
+  "provider_input_allowed": false,
+  "hold_reason": "NO_FROZEN_QUALIFIED_ITEM_OR_FAIR_MODEL_RUN_PACKAGE; NO_CALL_NEEDED_TO_ESTABLISH_SOURCE_LIMITATIONS",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

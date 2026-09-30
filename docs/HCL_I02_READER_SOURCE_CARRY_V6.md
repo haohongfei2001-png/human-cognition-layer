@@ -52,14 +52,19 @@ semantic or label filtering. File SHA-256
 `aefef5b6beb7097370cf3bc0c6503ed8caa495530297a4b184c4c31002e23169`;
 100 rows. Source, native question and all A/B/C/D options entered provider-free
 preparation; label, ability metadata and Chinese duplicate did not. Their text
-has not been displayed to the implementer. The current reachable-history scan at
+was not displayed during the entry probe. Subsequently, source and options were
+read for a [source-first item audit](../reports/HCL_I02_NATIVE_CHOICE_ITEM_SOURCE_AUDIT.json);
+the native answer remains undisplayed. The current reachable-history scan at
 `main@03c69f8cb19d7bd92460021f8057dca6a608614a` finds no 12-word source overlap,
 skipping sealed objects before content reads; this is not complete freshness proof.
 
 Because the probe was used to repair H entry, it is **development-only despite
 undisplayed text**. v8 source qualification excludes its writing system, template
-and author team. Task depth, source support, fictional-person privacy and native
-label semantics remain unaudited; model input remains disallowed. No confirmation
+and author team. The follow-up audit identifies a stylized fictional family scenario and explicit
+child goal/father reported noise assessment. It also identifies prospective-action
+and multiple-plausible-option ambiguity: noise reduction, quieter scheduling and
+everyone being happy are not established source facts. This does not qualify an
+I01 task family or a unique native gold; model input remains disallowed. No confirmation
 source has been qualified. Do not reuse it as an unseen holdout, tune rules to its
 options, consume its native answer or claim public-model training novelty.
 
