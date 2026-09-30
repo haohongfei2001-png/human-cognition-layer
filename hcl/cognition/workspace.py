@@ -164,6 +164,14 @@ class CognitionWorkspace:
             self._documents[s][1], index) for index, s in enumerate(source_ids, 1))
         result = prepare_semantics(query, sources, core=self.core,
             scope=Scope(observer=observer, source_ids=source_ids), backend=backend)
+        if any(s.source_id not in self._documents or self._versions[s.source_id] != s.version for s in sources):
+            # A callback/concurrent revision must not relabel old candidates with
+            # the new source version or leave their support active.
+            for root_id in result.root_ids:
+                for supports in self.core.dependencies[root_id]:
+                    for span in supports:
+                        self.core.withdraw(span)
+            raise ValueError('source changed during semantic preparation')
         for root_id in result.root_ids:
             for supports in self.core.dependencies[root_id]:
                 for span in supports:

@@ -79,3 +79,12 @@ result:5 derived statements misquoted as original (0/5 original matches), narrat
 prose mislabeled literal speech. Grant0/trigger removed; no rescore/rerun or historical
 disposition upgrade. General original/derived source-boundary repair is the next
 implementation task, before context-cost simplification/fresh development comparison.
+
+[Original source v16](HCL_DEVELOPMENT_ORIGINAL_SOURCE_V16.md) repairs this boundary:
+primary source/derived conditional state are separate and the one-call answer audit
+blocks non-original quotations, preserving raw output without replacement or retry.
+Revision during candidate extraction withdraws old support.11 new correctness checks,
+97 combined local passes,0 calls/spend. Anchor validity is provenance only, semantic
+adequacy UNASSESSED; utility remains IMPLEMENTED_UNVALIDATED/INCONCLUSIVE. No new
+capability28, historical disposition upgrade, old-run rescore or final evidence.
+Next general conditional context-cost reduction then fresh development checks.

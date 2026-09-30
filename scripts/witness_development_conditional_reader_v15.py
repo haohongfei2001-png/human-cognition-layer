@@ -33,7 +33,7 @@ def witness():
     backend = AuthoredBackend(rows)
     before = w.prepare_reader_semantic(QUERY, source_ids=('meeting',), backend=backend)
     p = json.loads(before.messages[-1]['content'])
-    plan = p['checked_plan_feasibility'][0]['plans'][0]
+    plan = p['conditional_cognition']['state']['checked_plan_feasibility'][0]['plans'][0]
     assert plan['subjective_feasibility'] == 'SUPPORTED_UNDER_REPORTED_BELIEFS'
     assert plan['model_condition_check'] == 'MODEL_CONDITION_CONTRADICTED'
     assert plan['deliberate_impossibility'] == 'NOT_INFERRED'
@@ -50,10 +50,10 @@ def witness():
     except ValueError: stale_blocked = True
     else: raise AssertionError('stale answer revived')
     final_calls = []; revised_backend = AuthoredBackend(revised_rows)
-    answered = w.answer_reader_semantic(QUERY, lambda m: final_calls.append(m) or 'Authored correctness stub.',
+    answered = w.answer_reader_semantic(QUERY, lambda m: final_calls.append(m) or json.dumps(dict(answer='Conditional source report.',source_citations=[SOURCE_LINES[0]],uncertainty='Unverified translations.',assumptions='No private/world truth.')),
         source_ids=('meeting',), backend=revised_backend)
     after = answered['prepared']
-    plan_after = json.loads(after.messages[-1]['content'])['checked_plan_feasibility'][0]['plans'][0]
+    plan_after = json.loads(after.messages[-1]['content'])['conditional_cognition']['state']['checked_plan_feasibility'][0]['plans'][0]
     assert plan_after['subjective_feasibility'] == 'CONTRADICTED_UNDER_REPORTED_BELIEFS'
     assert final_calls == [after.messages] and len(revised_backend.calls) == 1
     return dict(schema='hcl-development-conditional-reader-v15-witness-v1',

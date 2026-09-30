@@ -34,6 +34,6 @@ class FullLongSourceTests(unittest.TestCase):
         self.assertEqual(json.loads(after.messages[-1]['content'])['sources'][0]['text'],revised)
         with self.assertRaises(ValueError):prepare_person_context(self.layer(),Q,'Mina: report.',max_context_chars=512000)
     def test_amendment_chain_fails_drift_and_historical_link(self):
-        from scripts.development_runtime_amendment_v15 import validate_current
+        from scripts.development_runtime_amendment_v16 import validate_current
         self.assertTrue(validate_current())
 if __name__=='__main__':unittest.main()

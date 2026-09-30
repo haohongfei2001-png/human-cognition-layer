@@ -25,7 +25,8 @@ class Backend:
     def complete_json(self, messages, **kwargs):
         self.calls.append(dict(messages=messages,parameters=kwargs))
         return json.dumps(dict(candidates=self.rows))
-def payload(r): return json.loads(r.messages[-1]['content'])
+def payload(r):
+    body=json.loads(r.messages[-1]['content']);return dict(body,**body['conditional_cognition']['state'])
 
 class ConditionalReaderTests(unittest.TestCase):
     def workspace(self, source=SOURCE, observers=()):
@@ -96,7 +97,7 @@ class ConditionalReaderTests(unittest.TestCase):
 
     def test_exactly_one_translation_and_one_final_call_from_ordinary_input(self):
         b=Backend();calls=[]
-        r=self.workspace().answer_reader_semantic(QUERY,lambda m:calls.append(m) or 'correctness stub',source_ids=('meeting',),backend=b)
+        r=self.workspace().answer_reader_semantic(QUERY,lambda m:calls.append(m) or json.dumps(dict(answer='Source report only.',source_citations=[QUOTES[0]],uncertainty='Unverified translation.',assumptions='No private truth.')),source_ids=('meeting',),backend=b)
         self.assertEqual(len(b.calls),1);self.assertEqual(calls,[r['prepared'].messages])
         self.assertEqual(r['preparation_backend_calls'],1);self.assertEqual(r['answer_adapter_calls'],1)
         self.assertEqual(r['actual_final_messages'],calls[0])
