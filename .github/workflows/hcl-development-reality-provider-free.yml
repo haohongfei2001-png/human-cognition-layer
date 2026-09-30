@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m unittest tests.test_development_drc001_replay tests.test_development_drc002_replay tests.test_i02_rebus_kranak_exposure tests.test_development_reader_live_entry
+      - run: python -m unittest tests.test_development_drc001_replay tests.test_development_drc002_replay tests.test_i02_rebus_kranak_exposure tests.test_development_dre001_replay
       - run: python -m scripts.development_drc001_replay
       - run: python -m scripts.development_drc002_replay
-      - run: python -m scripts.development_reader_live_entry --preflight
+      - run: python -m scripts.development_dre001_replay

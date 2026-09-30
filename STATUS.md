@@ -31,26 +31,30 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: DRE001_FROZEN_LIVE_ENTRY_EXECUTION**
+**NEXT_READY: GENERAL_ORIGINAL_DERIVED_SOURCE_BOUNDARY_REPAIR**
 
-[DRE001 frozen real entry](docs/HCL_DRE001_FROZEN_ENTRY_PROTOCOL.md): one previously
-uncalled HCL-authored development-exposed source/query, existing DeepSeek V4 Pro,
-max1 extraction +1 final call/0 retries, new USD0.30 cap/no historical transfer.
-Candidate thinking disabled/max4096; final high/max8192, explicit32 usage-token
-margin reserved per call. Actual source/conditional treatment/current state required
-before final call. No semantic-quality/Base-H/independent evidence claim.4 provider-free
-transport/gate checks pass. Unique dormant trigger/hash grant; execute once after
-exact-head/main CI, save raw/model/usage/cost/state/run/SHA/artifact, source-first
-closure/grant0/trigger deletion, then general entry/complexity work and fresh public
-reality checks. No final reviewer/source global stop, no consumed DRC continuation.
+[DRE001 source-first closure](reports/HCL_DRE001_SOURCE_FIRST_CLOSURE.md): actual model
+entry/conditional treatment present, utility INCONCLUSIVE.2 calls/0 retries at
+14e24dcb43549b8bd28a78254a1d62e306a483f0/run36789819187; estimatedUSD0.011053020,
+peak ratedUSD0.022106040, invoice unknown. Five anchored unverified translations
+triggered existing B01/C01/C03 and reached final input, but final response used5
+**derived** lines as source quotations (0/5 original matches) and mislabeled narrator
+prose as a literal public-expression record. Raw frozen format-valid result remains
+unchanged; no efficacy/semantic certificate, output correction, rescore or rerun.
+Raw/state/model/usage/cost/graph/artifact and120-file exact-run replay retained;
+grant0/trigger removed/no historical transfer. Authored development only, never final.
 
-Conditional reader v15 IMPLEMENTED_UNVALIDATED for utility:10 new checks, authored
-actual-state witness,82 focused passes; merged main40c3304f50819df80b3c7b0159773146f71eeb04
-has11 exact-main CI SUCCESS including1057v1/176 historical tests. Existing B01/C01/C03
-operate under explicitly unverified source translations; originals/revision/challenge
-preserved. No new module/private/world/moral truth/full-long-source or answer gain.
-Default reader0-extraction/legacy typed admission unchanged; both consumed DRC archives
-and closed grants preserved.
+Immediate general repair separates primary original sources from conditional derived
+state and enforces original citation boundaries without inventing semantics/private
+truth. Positive/negative/composition/revision/ordinary smoke/historical tests first,
+0 new paid calls; no rerun of the consumed entry check. Then context/cost simplification
+and separately frozen fresh public reality checks. Final reviewer/source perfection
+is no daily development gate; no new ontology or leaderboard activity.
+
+Conditional reader v15 remains IMPLEMENTED_UNVALIDATED for utility: model entry is
+real, but this source-integrity failure must be repaired before broader effect claims.
+Shared reader v14/current runtime chain and all historical dispositions/frozen receipts
+preserved. Default reader0-extraction/legacy admission unchanged.
 
 DRC002 CLOSED/INCONCLUSIVE: unique run36784477632 at e92b75d9736af5c0b87ad66ecea20f3c30719db4
 stopped after11 calls when returned output8193 exceeded frozen8192.0 retries.

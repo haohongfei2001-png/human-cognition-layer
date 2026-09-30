@@ -72,3 +72,10 @@ original source/revision/challenge boundaries are preserved. Authored stub witne
 prove plumbing/correctness only;0 live calls and no semantic/answer-quality claim.
 No new inventory module or historical disposition upgrade. Next bounded real entry
 check then fresh development comparison; final independence/reviewer is not a daily gate.
+
+DRE001 real-entry receipt/run36789819187 confirms conditional mechanism presence,
+**not** utility/semantic quality. Utility stays INCONCLUSIVE; source-first negative
+result:5 derived statements misquoted as original (0/5 original matches), narrator
+prose mislabeled literal speech. Grant0/trigger removed; no rescore/rerun or historical
+disposition upgrade. General original/derived source-boundary repair is the next
+implementation task, before context-cost simplification/fresh development comparison.

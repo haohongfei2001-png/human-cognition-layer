@@ -1,10 +1,18 @@
 {
+  "actual_invoice_cost_usd": null,
   "authorization": "CURRENT_OWNER_BOUNDED_LOW_COST_EXISTING_PROVIDER_POLICY",
+  "closure": "REAL_ENTRY_PRESENT_SOURCE_BOUNDARY_REPAIR_REQUIRED_UTILITY_INCONCLUSIVE",
+  "estimated_actual_cost_usd": 0.01105302,
   "historical_budget_transfer": false,
-  "maximum_calls": 2,
+  "maximum_calls": 0,
   "package_sha256": "7837f528da02d4c3611e4ded0c1e9b202eac556627d87611e3a1e4ade08a49e3",
-  "remaining_usd": 0.3,
+  "provider_calls": 2,
+  "rated_peak_cost_usd": 0.02210604,
+  "remaining_usd": 0,
+  "rerun_authorized": false,
   "retries": 0,
+  "run_id": 36789819187,
+  "run_sha": "14e24dcb43549b8bd28a78254a1d62e306a483f0",
   "schema": "hcl-dre-once-grant-v1",
-  "status": "READY"
+  "status": "CLOSED"
 }
