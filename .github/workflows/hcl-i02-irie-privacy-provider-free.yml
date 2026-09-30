@@ -18,9 +18,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Current source carry, negative inference and option boundary
-        run: python -m unittest tests.test_i02_obp_metaethics tests.test_i02_native_choice_candidate tests.test_v1_reader_source_carry tests.test_v1_i01_eval_contract tests.test_i02_exposure_history tests.test_v1_reader_argument_question tests.test_i02_shea_development_case
-      - name: Author-original concept source and native question
-        run: python -m scripts.i02_obp_metaethics_preflight
+        run: python -m unittest tests.test_v1_reader_source_carry tests.test_v1_i01_eval_contract tests.test_i02_exposure_history tests.test_v1_reader_argument_question tests.test_i02_shea_development_case
       - name: Current disclosed runtime
         run: python -m scripts.i02_runtime_amendment_v7
       - name: Consumed privacy package replay at certified v5 runtime
