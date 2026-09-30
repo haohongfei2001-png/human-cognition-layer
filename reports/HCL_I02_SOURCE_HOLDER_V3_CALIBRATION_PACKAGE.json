@@ -1,0 +1,46 @@
+{
+  "authorization": "OWNER_DEFAULT_EXISTING_PROVIDER_NORMAL_BOUNDED_COST",
+  "budget_cap_usd": 0.38,
+  "confirmation_qualified": false,
+  "consumed_case_reopened": false,
+  "cpg_calls": 0,
+  "endpoint": "https://api.deepseek.com",
+  "execution_files": {
+    ".github/workflows/hcl-i02-source-holder-v3-calibration-once.yml": "651ebbcefc70284902eebe6832782fef5ca0444a8e73fce4423ba0978f3a0379",
+    "reports/HCL_I02_SOURCE_HOLDER_V3_CALIBRATION_FIXTURE.json": "22c0553adb5d4338dcc37443f307274efc60841165bccccb4f022df6ead42ece",
+    "scripts/i02_source_holder_line_index_v3.py": "d1d83af9acbfaeb5d41b39fea6572d45c82b3b564fd069bd9934ac45eea7f87c",
+    "scripts/i02_source_holder_v3_calibration_fixture.py": "bbf948f44f872cbac83e14ab40a7173afb704f955bb9a74fa6ea9e7bc497db78",
+    "scripts/run_i02_source_holder_v3_calibration_once.py": "4f3560fd958babbd612b63558baa95f206d435b224ff08d2acb376acd8a35f56",
+    "tests/test_i02_source_holder_v3_calibration.py": "51e9f7a288d5a932cf17b13a51af190f4522e6be4c02451df34a509569b3fcd1"
+  },
+  "fixture_file_sha256": "22c0553adb5d4338dcc37443f307274efc60841165bccccb4f022df6ead42ece",
+  "fixture_gold_in_provider_input": false,
+  "h_calls": 0,
+  "historical_budget_transfer": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "max_tokens": 16384,
+  "maximum_provider_calls": 1,
+  "model": "deepseek-v4-pro",
+  "price_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "price_verified_date": "2026-09-30",
+  "provider": "deepseek",
+  "publisher_model_version": "DeepSeek-V4-Pro-0813",
+  "purpose": "ONE_NATIVE_LONG_INPUT_LINE_REFERENCE_INTEROPERABILITY_CALIBRATION_NOT_INDEPENDENT_SOURCE",
+  "question_sha256": "8c88c1c0eef64b1520adc47b5d91cbf36d6a9fe0e9b03771cde8d2874ef4d4e9",
+  "rates_peak_usd_per_million": {
+    "cache_hit": 0.044,
+    "input": 1.32,
+    "output": 3.96
+  },
+  "reasoning_effort": "high",
+  "retries": 0,
+  "schema": "hcl-i02-v3-long-authored-interface-package-v1",
+  "semantic_truth_verified": false,
+  "service_tier": "provider_default_no_tier_parameter",
+  "source_origin": "HCL_AUTHORED_SYNTHETIC_TRANSPORT_FIXTURE",
+  "source_sha256": "db55b8994da235e1c1c3d825444f9aa860887615f950f1f665640f58da40abc2",
+  "thinking": {
+    "type": "enabled"
+  },
+  "timeout_seconds": 300
+}
