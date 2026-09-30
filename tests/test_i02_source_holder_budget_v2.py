@@ -22,6 +22,8 @@ class FutureBudgetTests(unittest.TestCase):
                            reserve_future_source_audit(a,.18)['peak_reservation_usd'])
         with self.assertRaises(ValueError):reserve_future_source_audit(b,.001)
         with self.assertRaises(ValueError):reserve_future_source_audit(a[:1],.18)
+        for invalid in [float("nan"), float("inf"), True]:
+            with self.assertRaises(ValueError):reserve_future_source_audit(a,invalid)
 
     def test_consumed_v1_freeze_and_budget_are_unchanged(self):
         p=load_package()

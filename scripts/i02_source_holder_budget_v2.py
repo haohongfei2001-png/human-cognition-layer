@@ -6,6 +6,7 @@ it does not establish model competence or authorize any new transport.
 """
 import hashlib
 import json
+import math
 
 MAX_OUTPUT_TOKENS = 16384
 CLIENT_TIMEOUT_SECONDS = 300
@@ -18,7 +19,7 @@ def reserve_future_source_audit(messages, cap_usd):
             any(not isinstance(m, dict) or set(m) != {'role', 'content'} or
                 not isinstance(m['content'], str) for m in messages) or
             [m['role'] for m in messages] != ['system', 'user'] or
-            not isinstance(cap_usd, (int, float)) or isinstance(cap_usd, bool) or cap_usd <= 0):
+            not isinstance(cap_usd, (int, float)) or isinstance(cap_usd, bool) or not math.isfinite(cap_usd) or cap_usd <= 0):
         raise ValueError('complete ordinary messages and positive new cap required')
     request = dict(model='deepseek-v4-pro', messages=messages, thinking=dict(type='enabled'),
         reasoning_effort='high', max_tokens=MAX_OUTPUT_TOKENS, response_format=dict(type='json_object'))
