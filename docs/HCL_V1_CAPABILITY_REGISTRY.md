@@ -45,3 +45,22 @@ CG04 source-first closure: bounded optional RETAIN, C26/P23/G25/H28/H-new26 of28
 CG05 source-first closure: bounded optional RETAIN, C21/P23/G21/H28/H-new23 of28, authored development-only, 20 calls, conservative USD0.04263072. No independent generalization claim. NI10–14 remain provider-free correctness integrations with external utility INCONCLUSIVE, not five new validated cognition families. [Receipt/closure](../reports/HCL_CG05_EXTERNAL_DEVELOPMENT_CLOSURE.md).
 
 [POST-CG05 disposition inventory](../reports/HCL_POST_CG05_CAPABILITY_DISPOSITIONS.json) includes v0.6, CG01–05 and NI10–14 without counting integration as new externally validated cognition. Current active unvalidated candidates0; new paid grants0.
+
+## Current development integration — owner validation amendment 2026-10-01
+
+The candidate-slot cap and per-capability immediate five-arm comparison are superseded
+by the Master Plan; counts above are historical POST-CG05 snapshots. Registry27 remains
+an executable inventory, not an external-validity count. A–H41/G-HC/G-ARCH carry
+correctness/architecture evidence, not broad efficacy. NI10–14 are integrations.
+
+Development Reality Checks are active; final sealed confirmation is separate and later.
+DRC001 is development-only/attribution INCONCLUSIVE, checked treatment0/20; DRC002 is
+INCONCLUSIVE/incomplete output-limit run, checked treatment0/13. Both grants closed,
+no rerun or final evidence upgrade. Historical v0.6/CG01–05 dispositions unchanged.
+
+[Shared reader v14](HCL_DEVELOPMENT_SHARED_READER_V14.md) is an
+IMPLEMENTED_UNVALIDATED utility integration, not capability28: ordinary actual
+B01/C01/C03 state can enter shared revision/challenge dependencies and a one-call
+answer path. Positive/negative/composition/revision/smoke are authored correctness
+evidence. Ordinary nonliteral conditional semantic entry is next; unsupported
+semantics/private states remain unknown. LongMemEval SEALED_NOT_ACCESSED.
