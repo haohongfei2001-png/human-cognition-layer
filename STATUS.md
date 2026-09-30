@@ -19,6 +19,16 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [protected original Gilman narrative candidate](docs/HCL_I02_GILMAN_PROTECTED_SOURCE_SCREEN.md)
+pins the complete 31,497-character original English body and a new ordinary
+question, without NarrativeQA questions/gold or implementer-visible story text.
+Limited US/China/UK original-prose term review is separate from semantic fit;
+there is no worldwide rights claim. A scoped cloud workflow applies existing
+current-HEAD reachable-history and snapshot screens after exact-byte reconstruction.
+No H entry, runtime repair, provider input or paid call is allowed by this package.
+Even a clean history receipt only makes source-first holder review ready; confirmation
+qualification, task difficulty and model competence remain unresolved. Zero calls/spend.
+
 The [OBP author-original metaethics source audit](docs/HCL_I02_OBP_METAETHICS_SOURCE_AUDIT.md)
 now clears a complete CC BY 4.0 author section and its native question 10 for
 **development calibration only**, after resolving the whole chapter’s quotation

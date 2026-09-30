@@ -208,3 +208,16 @@ exposed OBP author/writing system from confirmation. Zero provider calls/spend;
 confirmation source count remains zero. Continue protected disjoint source and
 comparator qualification without paying to retest this already verified input path.
 
+
+### I02 protected original-narrative candidate
+
+The [protected original Gilman narrative candidate](docs/HCL_I02_GILMAN_PROTECTED_SOURCE_SCREEN.md)
+pins the complete 31,497-character original English body and a new ordinary
+question, without NarrativeQA questions/gold or implementer-visible story text.
+Limited US/China/UK original-prose term review is separate from semantic fit;
+there is no worldwide rights claim. A scoped cloud workflow applies existing
+current-HEAD reachable-history and snapshot screens after exact-byte reconstruction.
+No H entry, runtime repair, provider input or paid call is allowed by this package.
+Even a clean history receipt only makes source-first holder review ready; confirmation
+qualification, task difficulty and model competence remain unresolved. Zero calls/spend.
+
