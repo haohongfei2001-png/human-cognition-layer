@@ -390,6 +390,19 @@ No H entry, runtime repair, provider input or paid call is allowed by this packa
 Even a clean history receipt only makes source-first holder review ready; confirmation
 qualification, task difficulty and model competence remain unresolved. Zero calls/spend.
 
+The [v8 existing B01 long-reader integration](docs/HCL_I02_LONG_EPISTEMIC_INTEGRATION_V8.md)
+now checks grounded explicit modal expressions in actual complete-source H input,
+including nested/outer scope and separate knowledge/exposure claims. H-new removes
+only checked B01 state/policy; source/query/candidates/output vocabulary remain equal.
+The authored ordinary-input witness and51 focused checks pass; pronouns, conditional
+speech, unverified candidates and private views do not gain unsupported states.
+This reuses existing architecture, no new cognition module. Treatment presence is
+now conditional on actual checked mental expressions; answer gain/independent
+semantics remain unproved. Historical v7/no-treatment and consumed receipts retain
+their original facts.0 calls/spend; chained v8 runtime. Unique next task remains
+I02 independent protected source/item, blinded semantic review and competent
+comparators with actual task treatment before any separately frozen comparison.
+
 The [v7 complete ordinary long-source entry repair](docs/HCL_I02_FULL_LONG_SOURCE_ENTRY_V7.md)
 allows whole unrestricted reader text up to250k characters/500k UTF8 bytes with
 actual512k serialized-context limits, unchanged semantic64k defaults unless

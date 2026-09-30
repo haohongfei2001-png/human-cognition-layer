@@ -1,13 +1,15 @@
 """Full-source, local evidence preparation for ordinary long text.
 
-This is a bounded entry repair. It does not assert that a source report is a
-private state, or that generic semantic preparation is a specialized HCL win.
+This bounded integration reuses the existing B01 modal checker on local evidence.
+A checked public expression is neither private-state truth nor answer-gain proof.
 """
 from dataclasses import asdict
 import hashlib
 import json
 
 from hcl.cognition.semantic import AuthorizedText, prepare_semantics
+from hcl.cognition.core import EvidenceCore
+from hcl.cognition.epistemic import MentalProposition, check_epistemic_candidates
 
 from .capabilities import CostClass, resolve_dependencies
 from .layer import PreparedAnswer
@@ -25,13 +27,16 @@ _POLICY = (
 
 
 def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
-                            min_source_chars, method):
+                            min_source_chars, method, epistemic_checks=False):
     if (not isinstance(query, str) or not query.strip() or len(query) > 8000 or
             not isinstance(source_text, str) or not min_source_chars < len(source_text) <= 250000 or
             not isinstance(source_id, str) or not source_id or len(source_id) > 128 or
             type(max_context_chars) is not int or not 512 <= max_context_chars <= 512000):
         raise ValueError('bounded complete long source, question and context required')
-    semantic = prepare_semantics(query, (AuthorizedText(source_id, source_text),),
+    if type(epistemic_checks) is not bool:
+        raise ValueError('explicit epistemic treatment flag required')
+    core = EvidenceCore()
+    semantic = prepare_semantics(query, (AuthorizedText(source_id, source_text),), core=core,
         max_source_chars=250000 if len(source_text)>48000 else 64000)
     if semantic.backend_calls:
         raise ValueError('long source local preparation unexpectedly called provider')
@@ -44,6 +49,14 @@ def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
         'A disagreement is a comparison of reported positions, not proof that '
         'either position is true or a claim about either person\'s private state.'
         if method == 'reader_source_argument_comparison_v1' else '')
+    checked_count = 0
+    if epistemic_checks:
+        bundle = check_epistemic_candidates(core, query, semantic)
+        checked_count = sum(isinstance(record.tree, MentalProposition) for record in bundle.records)
+        if checked_count:
+            checked_messages = bundle.messages(core, query, max_chars=max_context_chars)
+            payload['checked_epistemic'] = json.loads(checked_messages[-1]['content'])
+            policy += ' ' + checked_messages[0]['content'] + ' Narrative order does not establish event or receipt time.'
     messages = (dict(role='system', content=policy),
                 dict(role='user', content=json.dumps(payload, ensure_ascii=False, sort_keys=True)))
     if len(json.dumps(messages, ensure_ascii=False)) > max_context_chars:
@@ -58,19 +71,23 @@ def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
                    source_id=source_id, source_sha256=hashlib.sha256(source_text.encode()).hexdigest(),
                    source_chars=len(source_text), candidate_count=len(candidates),
                    semantic_status=semantic.backend_status, extraction_provider_calls=0,
-                   answer_provider_calls=1, specialized_cognition_treatment=False,
+                   answer_provider_calls=1, specialized_cognition_treatment=bool(checked_count),
+                   epistemic_treatment=dict(mechanism='B01_EXISTING_MODAL_SCOPE_CHECKER',
+                       enabled=epistemic_checks, checked_mental_expressions=checked_count,
+                       private_state_established=False, answer_gain_established=False),
                    actual_final_messages=list(messages), longmemeval='SEALED_NOT_ACCESSED')
     return PreparedAnswer(plan, None, messages, receipt)
 
 
 def prepare_long_source_context(query, source_text, *, source_id='ordinary-source',
-                                max_context_chars=None):
+                                max_context_chars=None, epistemic_checks=True):
     """Prepare one complete 16k–250k source without model extraction or truncation."""
     if max_context_chars is None:
         max_context_chars=512000 if isinstance(source_text,str) and len(source_text)>48000 else 64000
     return _prepare_source_context(query, source_text, source_id=source_id,
         max_context_chars=max_context_chars, min_source_chars=16000,
-        method='complete_long_source_local_evidence_v2' if isinstance(source_text,str) and len(source_text)>48000 else 'complete_long_source_local_evidence_v1')
+        method='complete_long_source_local_evidence_v2' if isinstance(source_text,str) and len(source_text)>48000 else 'complete_long_source_local_evidence_v1',
+        epistemic_checks=epistemic_checks)
 
 
 def prepare_reader_source_comparison(query, source_text, *, max_context_chars=48000):

@@ -372,3 +372,19 @@ crosses to the implementer. Judge independence, semantic truth and difficulty
 remain unverified. No call has executed at this freeze. Continue I02; no owner
 permission request is needed under the current normal-cost autonomy policy.
 
+
+### I02 existing B01 long-reader integration
+
+The [v8 existing B01 long-reader integration](docs/HCL_I02_LONG_EPISTEMIC_INTEGRATION_V8.md)
+now checks grounded explicit modal expressions in actual complete-source H input,
+including nested/outer scope and separate knowledge/exposure claims. H-new removes
+only checked B01 state/policy; source/query/candidates/output vocabulary remain equal.
+The authored ordinary-input witness and51 focused checks pass; pronouns, conditional
+speech, unverified candidates and private views do not gain unsupported states.
+This reuses existing architecture, no new cognition module. Treatment presence is
+now conditional on actual checked mental expressions; answer gain/independent
+semantics remain unproved. Historical v7/no-treatment and consumed receipts retain
+their original facts.0 calls/spend; chained v8 runtime. Unique next task remains
+I02 independent protected source/item, blinded semantic review and competent
+comparators with actual task treatment before any separately frozen comparison.
+

@@ -10,7 +10,7 @@ class FullLongSourceTests(unittest.TestCase):
         self.assertEqual(u['query'],Q);self.assertEqual(u['sources'][0]['text'],SOURCE)
         self.assertEqual(sum(r['kind']=='event' for r in u['cognitive_candidates']),2)
         self.assertGreaterEqual(p.preparation_receipt['candidate_count'],2)
-        self.assertFalse(p.preparation_receipt['specialized_cognition_treatment']);self.assertEqual(p.preparation_receipt['extraction_provider_calls'],0)
+        self.assertTrue(p.preparation_receipt['specialized_cognition_treatment']);self.assertEqual(p.preparation_receipt['extraction_provider_calls'],0)
         self.assertEqual(p.preparation_receipt['method'],'complete_long_source_local_evidence_v2')
         self.assertIn('not sincerity',p.messages[0]['content']);self.assertIn('private belief',p.messages[0]['content'])
     def test_default_semantic_bound_unchanged_and_explicit_local_bound_composes(self):
@@ -34,6 +34,6 @@ class FullLongSourceTests(unittest.TestCase):
         self.assertEqual(json.loads(after.messages[-1]['content'])['sources'][0]['text'],revised)
         with self.assertRaises(ValueError):prepare_person_context(self.layer(),Q,'Mina: report.',max_context_chars=512000)
     def test_amendment_chain_fails_drift_and_historical_link(self):
-        from scripts.i02_runtime_amendment_v7 import validate_current
+        from scripts.i02_runtime_amendment_v8 import validate_current
         self.assertTrue(validate_current())
 if __name__=='__main__':unittest.main()
