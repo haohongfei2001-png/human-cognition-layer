@@ -1,0 +1,15 @@
+{
+  "schema": "hcl-i02-runtime-amendment-v8",
+  "reason": "EXISTING_B01_LONG_READER_INTEGRATION",
+  "historical_i01_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "previous_hcl_runtime_sha256": "3d2f2b86633f936e0fd8f6fd02f74754369e2dd138953788ab185cc5dcbdeb5c",
+  "amended_hcl_runtime_sha256": "84eb8cfc3c4f9d448c75d9628d7cb0cd031c3a8c95aba3df80c7ac0b24a547ef",
+  "development_only": true,
+  "confirmation_items_inspected": 0,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "answer_gain_claimed": false,
+  "new_cognition_module": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "boundary": "Existing B01 grounded modal checks reuse local candidates in complete ordinary long reader input; explicit H-new disables only those checks. Narrow literal grammar, unknown sincerity/private-state/world truth/time and preserved historical runtimes. No efficacy or independent semantics claim."
+}

@@ -25,7 +25,7 @@ class LongSourceQuestionTests(unittest.TestCase):
         self.assertEqual(payload['sources'][0]['text'], source)
         self.assertEqual(prepared.preparation_receipt['method'],
                          'complete_long_source_local_evidence_v1')
-        self.assertFalse(prepared.preparation_receipt['specialized_cognition_treatment'])
+        self.assertTrue(prepared.preparation_receipt['specialized_cognition_treatment'])
         self.assertEqual(prepared.preparation_receipt['extraction_provider_calls'], 0)
         candidates = payload['cognitive_candidates']
         self.assertTrue(any(c['kind'] == 'proposition' and
@@ -42,12 +42,13 @@ class LongSourceQuestionTests(unittest.TestCase):
                          'long_source_private_view_requires_explicit_access_preparation')
         self.assertNotIn(source, json.dumps(prepared.messages))
 
-    def test_composition_question_does_not_invent_specialized_treatment(self):
+    def test_composition_question_does_not_invent_responsibility_treatment(self):
         prepared = prepare_person_context(self.layer,
             "Explain Mara's belief and conditional responsibility.", story(),
             max_context_chars=64000)
-        self.assertFalse(prepared.preparation_receipt['specialized_cognition_treatment'])
+        self.assertTrue(prepared.preparation_receipt['specialized_cognition_treatment'])
         self.assertIn('cognitive_candidates', prepared.messages[-1]['content'])
+        self.assertNotIn('responsibility_assessment', prepared.messages[-1]['content'])
 
     def test_local_revision_recomputes_exact_source(self):
         old = prepare_long_source_context(self.question, story(), max_context_chars=64000)

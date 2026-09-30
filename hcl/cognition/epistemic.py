@@ -9,7 +9,7 @@ from enum import Enum
 import json
 import re
 
-from .core import ClaimKind, Scope, identity
+from .core import ClaimKind, EvidenceCore, Scope, identity
 from .semantic import _PRONOUNS
 
 
@@ -214,9 +214,26 @@ class EpistemicBundle:
 
 
 def prepare_epistemic(workspace, query, *, source_ids, observer=None, max_depth=3):
-    path = _query_path(query)
     semantic = workspace.prepare_semantic(query, source_ids=source_ids, observer=observer)
-    core, records, diagnostics = workspace.core, [], []
+    return check_epistemic_candidates(workspace.core, query, semantic, max_depth=max_depth)
+
+
+def check_epistemic_candidates(core, query, semantic, *, max_depth=3):
+    """Reuse B01 checks on already grounded candidates, without re-extraction.
+
+    Source access filtering belongs to the original semantic preparation. A
+    candidate from another core/scope cannot enter this checked projection.
+    """
+    from .semantic import SemanticResult
+    if (not isinstance(core, EvidenceCore) or not isinstance(query, str) or not query.strip() or len(query)>8000
+            or not isinstance(semantic, SemanticResult)
+            or type(max_depth) is not int or not 1<=max_depth<=4):
+        raise ValueError('bounded grounded epistemic input required')
+    if any(key not in core.claims or core.claims[key].scope != semantic.scope
+            for key in semantic.candidate_ids + semantic.root_ids):
+        raise ValueError('epistemic candidates outside their grounded core or scope')
+    path = _query_path(query)
+    records, diagnostics = [], []
     status = core.support_statuses()
     for key in semantic.candidate_ids:
         content = core.claims[key].content
