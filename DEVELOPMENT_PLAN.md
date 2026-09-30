@@ -390,6 +390,21 @@ No H entry, runtime repair, provider input or paid call is allowed by this packa
 Even a clean history receipt only makes source-first holder review ready; confirmation
 qualification, task difficulty and model competence remain unresolved. Zero calls/spend.
 
+The [complete Gregory multiparty play review](docs/HCL_I02_GREGORY_MULTIPARTY_SOURCE_REVIEW.md)
+fixes a17,896-character native author unit and ordinary question before source-first
+implementer review. Seven literal obligations cover goals, recognition/access,
+counterfactual scope, speech/action conflict, reported norms, reciprocity and private
+inference limits.20 focused provider-free checks pass; C/P/G and actual H preserve
+complete equal ordinary source/task. Actual current H has0 candidates/checked mental
+expressions and **no specialized treatment** on this drama format; no grammar repair
+or efficacy claim. Whole author/system/task/fingerprint is development-excluded byv12.
+**DEFERRED_EMBEDDED_LYRIC_RIGHTS**: original drama term metadata does not fully resolve
+all quoted historical lyric versions/China scope. No provider input, paid package,
+trigger or grant;0 calls/spend. Source/task/review are development only, not independent
+expert semantics or confirmation. I02 remains NEXT_READY; resolve adequate primary
+rights/provenance or continue a separate safe family, plus blinded qualification
+before any comparison. Do not remove lyrics, recycle old grants or expand H modules.
+
 The [v8 existing B01 long-reader integration](docs/HCL_I02_LONG_EPISTEMIC_INTEGRATION_V8.md)
 now checks grounded explicit modal expressions in actual complete-source H input,
 including nested/outer scope and separate knowledge/exposure claims. H-new removes
