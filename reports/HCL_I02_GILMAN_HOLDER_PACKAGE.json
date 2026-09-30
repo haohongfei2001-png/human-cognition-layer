@@ -1,0 +1,45 @@
+{
+  "authorization": "OWNER_DEFAULT_EXISTING_PROVIDER_NORMAL_BOUNDED_COST",
+  "budget_cap_usd": 0.18,
+  "confirmation_qualified": false,
+  "cpg_calls": 0,
+  "endpoint": "https://api.deepseek.com",
+  "execution_files": {
+    ".github/workflows/hcl-i02-gilman-holder-once.yml": "e057764eef34bc76a49fe352b2826d886267a4ede45780def3861f7859c0431a",
+    "reports/HCL_I02_GILMAN_PROTECTED_CANDIDATE.json": "049004386187f2256ed81f6197fb18d255be4ea4a36ee52cf484f215259e0863",
+    "scripts/i02_exposure_history.py": "2dd4d840d4d76450a07713e163114f15c2f35960fb5a355ec798771fbcb4bbbf",
+    "scripts/i02_exposure_snapshot.py": "d71deeb1c48c32496f6244dc78297429ad71fc3dba4044ebafa65e820ab5485c",
+    "scripts/i02_gilman_protected_candidate.py": "aeb2c03322bfa30142077f5e8867a3c0ee620c9ab8bd2ea7ad6a433b1daad4c3",
+    "scripts/i02_source_holder_review.py": "88b547e4076b277f26af9a13b2403d8070fbe463c86549569d2e2e18f25838b6",
+    "scripts/run_i02_gilman_holder_once.py": "b001e8c1f15d4a469102a63231bf5ef66a11dc253e1f5cbefb50363e50fe5e2c",
+    "tests/test_i02_gilman_holder_once.py": "36fdee0a4bea4c6a855b021c0ea730ac5e77cbdeb6a03cdf2e1ecff92a50518c"
+  },
+  "h_calls": 0,
+  "historical_budget_transfer": false,
+  "independent_human_review": false,
+  "independent_model_family_judge": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "max_tokens": 8192,
+  "maximum_provider_calls": 1,
+  "model": "deepseek-v4-pro",
+  "model_version_publisher": "DeepSeek-V4-Pro-0813",
+  "permission_scope": "SOURCE_HOLDER_AUDIT_ONLY_NOT_ARM_EXECUTION_OR_CONFIRMATION",
+  "price_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "price_verified_date": "2026-09-30",
+  "purpose": "ONE_AUTOMATED_SOURCE_FIRST_TASK_FIT_AUDIT_NO_H_OR_ARM_OUTPUTS",
+  "question_sha256": "ea91105e433f809327597b73b7ed6b342b588b52617e3fb2d35f4d124b312ffc",
+  "rates_peak_usd_per_million": {
+    "cache_hit": 0.044,
+    "input": 1.32,
+    "output": 3.96
+  },
+  "raw_visibility": "HELD_AWAY_FROM_IMPLEMENTER_BY_ROLE_NOT_CRYPTOGRAPHIC_SEAL",
+  "reasoning_effort": "high",
+  "retries": 0,
+  "schema": "hcl-i02-gilman-protected-holder-package-v1",
+  "service_tier": "provider_default_no_tier_parameter",
+  "source_sha256": "00b4236dc9b2b4215ace0af20da168e77cba5e9ba826c079b4714fb13abe2d49",
+  "thinking": {
+    "type": "enabled"
+  }
+}

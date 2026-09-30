@@ -1,0 +1,73 @@
+{
+  "schema": "hcl-i02-gilman-protected-history-screen-v1",
+  "status": "READY_FOR_SOURCE_FIRST_HOLDER_REVIEW",
+  "package_sha256": "049004386187f2256ed81f6197fb18d255be4ea4a36ee52cf484f215259e0863",
+  "publisher_metadata": {
+    "titles": [
+      "The Yellow Wallpaper"
+    ],
+    "authors": [
+      "Gilman, Charlotte Perkins"
+    ],
+    "deathdates": [
+      "1935"
+    ],
+    "rights": [
+      "Public domain in the USA."
+    ]
+  },
+  "publisher_metadata_sha256": "4ac05ad049d2401aeacb9375ac24708241249978bb2c5dcf200ea774fe0f1441",
+  "raw_sha256": "a40cdaa300cd6850f2c18c2c8fd027339e53c9ed5ac0c01fe9cfe3b57cbca898",
+  "source_sha256": "00b4236dc9b2b4215ace0af20da168e77cba5e9ba826c079b4714fb13abe2d49",
+  "source_characters": 31497,
+  "question_sha256": "ea91105e433f809327597b73b7ed6b342b588b52617e3fb2d35f4d124b312ffc",
+  "ordinary_input_sha256": "e43645809dee0d9f5dfe967b441cb3822b5445d57101891b2c82c113e0383c76",
+  "complete_original_body": true,
+  "history": {
+    "schema": "hcl-i02-reachable-git-history-exposure-v1",
+    "checkout_head": "0f42dfea0fa6a4230ce2b23dd41654d21b20a199",
+    "candidate_source_sha256": "00b4236dc9b2b4215ace0af20da168e77cba5e9ba826c079b4714fb13abe2d49",
+    "status": "REACHABLE_HISTORY_NO_TEXT_MATCH",
+    "matches": [],
+    "unique_utf8_blobs_scanned": 2774,
+    "sealed_blob_ids_not_opened": 54,
+    "skipped_nontext_blobs": 0,
+    "skipped_large_paths": [],
+    "scope": "CURRENTLY_REACHABLE_GIT_OBJECTS_NOT_DELETED_REFS_OR_MODEL_TRAINING",
+    "confirmation_qualified": false,
+    "longmemeval": "SEALED_NOT_ACCESSED"
+  },
+  "snapshot": {
+    "schema": "hcl-i02-current-snapshot-exposure-screen-v1",
+    "repository_commit": "0f42dfea0fa6a4230ce2b23dd41654d21b20a199",
+    "candidate_source_sha256": "00b4236dc9b2b4215ace0af20da168e77cba5e9ba826c079b4714fb13abe2d49",
+    "status": "TEXT_SNAPSHOT_NO_MATCH",
+    "utf8_files_scanned": 1337,
+    "matches": [],
+    "skipped_nontext_paths": [],
+    "skipped_large_paths": [],
+    "sealed_paths_not_opened": 29,
+    "scope": "EXACT_COMMIT_UTF8_TEXT_ONLY_NOT_GIT_HISTORY_OR_MODEL_TRAINING",
+    "confirmation_qualified": false,
+    "longmemeval": "SEALED_NOT_ACCESSED"
+  },
+  "source_text_displayed": false,
+  "native_gold_used": false,
+  "h_entry_executed": false,
+  "source_used_for_runtime_repair": false,
+  "task_fit": "PENDING_INDEPENDENT_SOURCE_FIRST_REVIEW",
+  "model_training_novelty": "UNKNOWN_PUBLIC_CANONICAL_1892_WORK",
+  "rights_scope": {
+    "USA": "PUBLISHER_PUBLIC_DOMAIN_DECLARATION",
+    "CHINA": "NATURAL_AUTHOR_DIED_1935; ART23_LIFE_PLUS50_TERM_PASSED; AUTHORSHIP_INTEGRITY_RETAINED",
+    "UK": "AUTHOR_DIED_1935; ORDINARY_LIFE_PLUS70_TERM_PASSED; NO_MODERN_EDITION_LAYOUT_CLAIM",
+    "limits": "ORIGINAL_ENGLISH_PLAIN_TEXT_ONLY; NO_TRANSLATION_MODERN_CRITICISM_ANNOTATIONS_OR_IMAGES; SEMANTIC_ITEM_REVIEW_PENDING"
+  },
+  "confirmation_qualified": false,
+  "provider_input_allowed": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "github_run_id": "36695286100",
+  "github_sha": "0f42dfea0fa6a4230ce2b23dd41654d21b20a199"
+}

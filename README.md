@@ -221,3 +221,18 @@ No H entry, runtime repair, provider input or paid call is allowed by this packa
 Even a clean history receipt only makes source-first holder review ready; confirmation
 qualification, task difficulty and model competence remain unresolved. Zero calls/spend.
 
+
+### I02 protected source-holder audit freeze
+
+The [one-call protected source-holder audit freeze](docs/HCL_I02_GILMAN_SOURCE_HOLDER_AUDIT.md)
+is ready for exact-head/main CI before execution. The prior main source screen
+found no overlaps across 2,774 reachable text blobs / 1,337 snapshot files while
+skipping sealed objects. A separately frozen **source-only** automated review
+uses existing DeepSeek, high thinking, max 8,192 output tokens, **1 call / 0 retries /
+USD 0.18 cap**, worst peak reservation USD 0.13181784; no old budget transfer,
+H/C/P/G comparison or confirmation qualification. Raw source/quotes stay in a
+separate role-withheld artifact; only structural/provisional/usage/cost metadata
+crosses to the implementer. Judge independence, semantic truth and difficulty
+remain unverified. No call has executed at this freeze. Continue I02; no owner
+permission request is needed under the current normal-cost autonomy policy.
+
