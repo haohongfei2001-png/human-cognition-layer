@@ -242,6 +242,27 @@ def prepare_person_context(layer, query, narrative, *, perspective_mode=Perspect
         from .long_source_question import prepare_reader_source_comparison
         return prepare_reader_source_comparison(query, narrative,
             max_context_chars=max_context_chars)
+    if not matches:
+        if perspective_mode != PerspectiveMode.READER_ANALYSIS or observer_actor is not None:
+            return _refusal(query, '', perspective_mode,
+                'private_question_requires_explicit_source_access_preparation',
+                max_context_chars=max_context_chars, preserve_reader_source=False)
+        if responsibility_premises or premise_scope != 'ALL_SOURCE':
+            return _refusal(query, '', perspective_mode,
+                'explicit_responsibility_question_required_for_caller_premises',
+                max_context_chars=max_context_chars, preserve_reader_source=False)
+        if len(query) > 8000:
+            return _refusal(query, narrative, perspective_mode,
+                'reader_preparation_question_budget_exceeded', max_context_chars=max_context_chars)
+        from .long_source_question import prepare_reader_cognition
+        try:
+            return prepare_reader_cognition(query, narrative, max_context_chars=max_context_chars)
+        except ValueError as exc:
+            # Bound failure removes the entire local analysis; do not truncate a
+            # set of claims or let a partial checked workspace reach the model.
+            return _refusal(query, narrative, perspective_mode,
+                'reader_local_preparation_failed: ' + str(exc), max_context_chars=max_context_chars)
+
     if len(matches) != 1 or matches[0][1]['actor'] == 'Narrator':
         return _refusal(query, narrative, perspective_mode, 'unsupported_or_ambiguous_question_scope',
             max_context_chars=max_context_chars)

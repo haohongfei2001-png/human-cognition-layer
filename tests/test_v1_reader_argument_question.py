@@ -43,13 +43,16 @@ class ReaderArgumentQuestionTests(unittest.TestCase):
         self.assertEqual(payload['source_order_scope']['through_statement'], 1)
         self.assertNotIn('Pax replied', payload['sources'][0]['text'])
 
-    def test_private_normative_and_out_of_scope_questions_refuse(self):
+    def test_reader_private_normative_queries_do_not_establish_private_or_moral_truth(self):
         for query in ("Compare Nora and Pax's private beliefs about the warning.",
                       "Compare Nora and Pax's arguments about who is morally guilty.",
                       'Is Nora guilty?'):
             prepared = prepare_person_context(self.layer, query, SOURCE)
-            self.assertEqual(prepared.preparation_receipt['method'],
-                             'bounded_ordinary_question_refusal')
+            state = json.loads(prepared.messages[-1]['content'])
+            self.assertEqual(state['sources'][0]['text'], SOURCE)
+            self.assertFalse(prepared.preparation_receipt['specialized_cognition_treatment'])
+            self.assertFalse(prepared.preparation_receipt['agency_treatment']['private_intention_established'])
+            self.assertIn('responsibility', prepared.messages[0]['content'])
         private = prepare_person_context(self.layer, QUERY, SOURCE,
             perspective_mode=PerspectiveMode.CHARACTER_PERSPECTIVE)
         self.assertEqual(private.preparation_receipt['failure'],

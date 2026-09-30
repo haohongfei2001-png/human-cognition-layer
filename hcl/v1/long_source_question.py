@@ -169,3 +169,16 @@ def prepare_reader_source_comparison(query, source_text, *, max_context_chars=48
     return _prepare_source_context(query, source_text, source_id='ordinary-source',
         max_context_chars=max_context_chars, min_source_chars=0,
         method='reader_source_argument_comparison_v1')
+
+
+def prepare_reader_cognition(query, source_text, *, max_context_chars=48000,
+                             epistemic_checks=True, agency_checks=True, plan_checks=True):
+    """Generic reader entry reuses literal B01/C01/C03 regardless of question grammar.
+
+    No automatic private mental state or normative verdict is grounded. Unmatched
+    prose remains complete; zero local treatment is a coverage outcome.
+    """
+    return _prepare_source_context(query, source_text, source_id='ordinary-source',
+        max_context_chars=max_context_chars, min_source_chars=0,
+        method='complete_reader_source_local_cognition_v1',
+        epistemic_checks=epistemic_checks, agency_checks=agency_checks, plan_checks=plan_checks)
