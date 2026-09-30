@@ -52,7 +52,7 @@ _PREDICATE = re.compile(
     r'am uncertain whether|is uncertain whether|do not know|does not know|'
     r'do not understand|does not understand|did not hear|did not read|'
     r'believes|believe|thinks|think|knows|know|understands|understand|heard|read)\s+'
-    r'(?:that\s+)?(?P<content>.+)$')
+    r'(?:that\s+)?(?P<content>.+)$', re.S)
 
 
 def parse_mental_proposition(text, speaker, *, max_depth=3):
