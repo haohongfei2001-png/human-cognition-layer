@@ -1,13 +1,14 @@
 """Audit immutable one-run receipt/strict quotation closure; no transport or rescoring."""
 import hashlib,json,zipfile
 from pathlib import Path
-from scripts.run_i02_clifford_cpg_once import load_package,digest,GRANT,WORKFLOW,TEMPLATE
+from scripts.run_i02_clifford_cpg_once import digest,GRANT,WORKFLOW,TEMPLATE
 from scripts.i02_clifford_source import SOURCE,OBLIGATIONS
+from scripts.i02_clifford_certified_replay import load_certified_package
 from scripts.serious_eval_semantic_score import validate_answer
 from scripts.serious_eval_full_source_arms_v9 import prepare_primary_arms_v9,prepare_generic_final_v9
 BASE=Path('reports/HCL_I02_CLIFFORD_CPG')
 def audit():
-    p=load_package();r=json.loads(Path(str(BASE)+'_RAW_RECEIPT.json').read_text());c=json.loads(Path(str(BASE)+'_CLOSURE.json').read_text())
+    p=load_certified_package();r=json.loads(Path(str(BASE)+'_RAW_RECEIPT.json').read_text());c=json.loads(Path(str(BASE)+'_CLOSURE.json').read_text())
     raw=Path(str(BASE)+'_RAW_ARTIFACT.zip').read_bytes()
     if hashlib.sha256(raw).hexdigest()!=c['artifact_sha256'] or len(raw)!=185931:raise ValueError('raw ZIP digest/size drift')
     with zipfile.ZipFile(Path(str(BASE)+'_RAW_ARTIFACT.zip')) as z:

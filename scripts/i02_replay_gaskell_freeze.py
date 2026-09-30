@@ -1,8 +1,23 @@
 """Replay consumed Gaskell code/runtime against current negative history, zero transport."""
-import hashlib,io,json,os,subprocess,sys,tarfile,tempfile
+import hashlib,io,json,os,subprocess,sys,tarfile,tempfile,zipfile
 from pathlib import Path
 BASE='c8bf7fecf859fd456f39b21482a809028824d037'
 PACKAGE='reports/HCL_I02_GASKELL_HOLDER_PACKAGE.json'
+PUBLISHER_CACHE=Path('reports/HCL_I02_GASKELL_PINNED_PUBLISHER.zip')
+PUBLISHER_CACHE_SHA256='34be2aacfb9167d63fda175fbedc9b68fb319bbaf147beefbd1819061fdd6a4d'
+
+def pinned_publisher_material():
+    raw=PUBLISHER_CACHE.read_bytes()
+    if hashlib.sha256(raw).hexdigest()!=PUBLISHER_CACHE_SHA256:raise ValueError('pinned historical publisher archive drift')
+    with zipfile.ZipFile(io.BytesIO(raw)) as z:
+        if len(z.namelist())!=2 or set(z.namelist())!={'raw.txt','publisher.rdf'}:raise ValueError('publisher cache members drift')
+        body,rdf=z.read('raw.txt'),z.read('publisher.rdf')
+    # These are the original raw-data identities in the canonical one-run preflight.
+    expected=json.loads(Path('reports/HCL_I02_GASKELL_HOLDER_EXECUTION_PREFLIGHT.json').read_text())['source_gate']
+    if (hashlib.sha256(body).hexdigest()!=expected['raw_sha256'] or
+        hashlib.sha256(rdf).hexdigest()!=expected['publisher_metadata_sha256']):raise ValueError('historical publisher byte identities drift')
+    return body,rdf
+
 def replay(repository='.'):
     repository=Path(repository).resolve()
     def git(*args):return subprocess.check_output(['git','-C',str(repository),*args],timeout=30)
@@ -28,7 +43,22 @@ def replay(repository='.'):
         for name,expected in package['execution_files'].items():
             if hashlib.sha256(Path(folder,name).read_bytes()).hexdigest()!=expected:raise ValueError('certified Gaskell execution mismatch')
         subprocess.run([sys.executable,'-m','unittest','tests.test_i02_gaskell_holder_once','tests.test_i02_obp_metaethics','tests.test_i02_native_choice_candidate'],cwd=folder,env=env,check=True,timeout=60)
-        subprocess.run([sys.executable,'-m','scripts.run_i02_gaskell_holder_once','--preflight','--metadata','preflight.json'],cwd=folder,env=env,check=True,timeout=180)
+        body,rdf=pinned_publisher_material()
+        Path(folder,'pinned-publisher.txt').write_bytes(body);Path(folder,'pinned-publisher.rdf').write_bytes(rdf)
+        # Supply identical already-pinned external bytes to frozen code; no network,
+        # source rewrite, model call, code mutation or latest-runtime substitution.
+        program="""import runpy,sys
+from pathlib import Path
+from scripts import i02_gaskell_development_candidate as holder
+def cached(url):
+    if url==holder.RAW_URL:return Path('pinned-publisher.txt').read_bytes()
+    if url==holder.RDF_URL:return Path('pinned-publisher.rdf').read_bytes()
+    raise ValueError('no other historical publisher lookup allowed')
+holder.download=cached
+sys.argv=['certified-gaskell','--preflight','--metadata','preflight.json']
+runpy.run_module('scripts.run_i02_gaskell_holder_once',run_name='__main__')
+"""
+        subprocess.run([sys.executable,'-c',program],cwd=folder,env=env,check=True,timeout=180)
         subprocess.run([sys.executable,'-m','scripts.i02_obp_metaethics_preflight'],cwd=folder,env=env,check=True,timeout=30)
         gate=json.loads(Path(folder,'preflight.json').read_text());probe=gate['source_gate']['h_ordinary_entry_probe']
         if probe['runtime_sha256']!=package['h_runtime_sha256'] or probe['status']!='REFUSED_COMPLETE_LONG_SOURCE':raise ValueError('historical H source boundary replaced')

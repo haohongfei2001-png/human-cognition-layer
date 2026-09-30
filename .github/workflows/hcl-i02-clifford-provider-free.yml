@@ -31,7 +31,7 @@ jobs:
           HCL_CLIFFORD_RAW: /tmp/clifford.txt
           HCL_CLIFFORD_RDF: /tmp/clifford.rdf
         run: python -m unittest tests.test_i02_clifford_cpg tests.test_i02_full_source_arms_v9 tests.test_v1_i02_semantic_score
-      - run: python -m scripts.run_i02_clifford_cpg_once --preflight --raw /tmp/clifford.txt --rdf /tmp/clifford.rdf --output i02-clifford-preflight.json
+      - run: python -m scripts.i02_clifford_certified_replay > i02-clifford-preflight.json
       - uses: actions/upload-artifact@v4
         with:
           name: hcl-i02-clifford-provider-free-${{ github.run_id }}

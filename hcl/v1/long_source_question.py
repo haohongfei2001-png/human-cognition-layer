@@ -45,7 +45,7 @@ def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
     discovered = _local_candidates(ordinary_source, dialogue_blocks=True) if dialogue_blocks else ()
     semantic = prepare_semantics(query, (ordinary_source,), core=core,
         max_source_chars=250000 if len(source_text)>48000 else 64000,
-        dialogue_blocks=dialogue_blocks, modal_events_only=dialogue_blocks, agency_events=dialogue_blocks,belief_revision_events=dialogue_blocks,model_declarations=dialogue_blocks)
+        dialogue_blocks=dialogue_blocks, modal_events_only=dialogue_blocks, agency_events=dialogue_blocks,belief_revision_events=dialogue_blocks,model_declarations=dialogue_blocks,narrator_reports=True)
     if semantic.backend_calls:
         raise ValueError('long source local preparation unexpectedly called provider')
     source = json.loads(semantic.messages[-1]['content'])['sources']
@@ -61,6 +61,11 @@ def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
         'A disagreement is a comparison of reported positions, not proof that '
         'either position is true or a claim about either person\'s private state.'
         if method == 'reader_source_argument_comparison_v1' else '')
+    if any(r['proposal'].get('event_kind') == 'NARRATOR_MENTAL_REPORT' for r in candidates):
+        policy += (' A SOURCE_NARRATOR_ATTRIBUTION records the source reporting a named '
+            'person mental state, not that person speaking, not a verified private state '
+            'or a character with narrator knowledge. Keep its report wrapper; later '
+            'source order is not earlier character access or event time.')
     checked_count = 0
     if epistemic_checks:
         bundle = check_epistemic_candidates(core, query, semantic)

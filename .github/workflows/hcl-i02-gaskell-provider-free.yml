@@ -20,6 +20,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install 'z3-solver==4.15.1.0'
       - run: python -m unittest tests.test_i02_source_holder_typed_contract_v4 tests.test_i02_source_holder_line_index_v3 tests.test_i02_james_holder_once tests.test_i02_source_holder_reference_budget_v5
+      - run: python -m unittest tests.test_i02_gaskell_pinned_publisher
       - run: python -m scripts.i02_replay_gaskell_freeze > gaskell-holder-preflight.json
       - uses: actions/upload-artifact@v4
         with:

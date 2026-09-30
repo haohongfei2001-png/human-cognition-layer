@@ -1,0 +1,12 @@
+{
+  "status": "PASS_EXACT_CERTIFIED_RUNTIME_PREFLIGHT_ONLY",
+  "run_sha": "a8c2c3d08e0addbcf24dcfd247805c025c8cacab",
+  "archive_sha256": "848d5edf8ac0226020c100bb0a3885916229116ea6ec1b444b2b20009fa71aec",
+  "hcl_runtime_sha256": "c7034fdc97d606867bf6688cc005837033b357155cd649ed187f41a32509579b",
+  "package_sha256": "bf68a209acc596b7f8c21b7678934b58ce09a5c433928e4f7b18ed97cfbc88eb",
+  "latest_runtime_substituted": false,
+  "provider_calls": 0,
+  "closed_grant_required": true,
+  "outputs_rescored": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

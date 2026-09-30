@@ -1,0 +1,17 @@
+{
+  "schema": "hcl-i02-runtime-amendment-v12",
+  "reason": "EXISTING_B01_SOURCE_NARRATOR_ATTRIBUTION_ENTRY",
+  "historical_i01_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "previous_hcl_runtime_sha256": "c7034fdc97d606867bf6688cc005837033b357155cd649ed187f41a32509579b",
+  "amended_hcl_runtime_sha256": "aa7fc08c1937ffef7eeb4dfa762c1f0e06eeb2bd414dcea71cde582b7b43e0c9",
+  "development_only": true,
+  "confirmation_items_inspected": 0,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "answer_gain_claimed": false,
+  "new_cognition_module": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "boundary": "Standalone named source-narrator mental reports remain a source-local REPORT wrapper distinct from subject expression, sincerity/private/world truth, actual event/receipt time and C03 direct belief premises. Conditional, quoted, stage, pronoun, unsupported backend and bounded-depth cases fail closed. Default A02 unchanged; long H uses existing B01. Equal H/H-new candidates/full input, mechanism-only ablation; old runtime/package/receipts replay under exact certified files.",
+  "capability_delta": "Complete ordinary source now separates a literal named source-narrator mental attribution from the subject own public expression, without promoting either to private or world truth.",
+  "historical_certified_replay": "reports/HCL_I02_CLIFFORD_CERTIFIED_REPLAY.json"
+}
