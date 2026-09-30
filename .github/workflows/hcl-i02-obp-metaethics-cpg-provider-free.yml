@@ -1,0 +1,25 @@
+name: HCL I02 OBP Metaethics CPG Provider-Free
+on:
+  pull_request:
+    paths: ['scripts/run_i02_obp_metaethics_cpg_once.py', 'tests/test_i02_obp_metaethics_cpg.py', 'reports/HCL_I02_OBP_METAETHICS*', '.github/workflows/hcl-i02-obp-metaethics-cpg*']
+  push:
+    branches: [main]
+    paths: ['scripts/run_i02_obp_metaethics_cpg_once.py', 'tests/test_i02_obp_metaethics_cpg.py', 'reports/HCL_I02_OBP_METAETHICS*', '.github/workflows/hcl-i02-obp-metaethics-cpg*']
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest tests.test_i02_obp_metaethics_cpg tests.test_i02_obp_metaethics
+      - run: python -m scripts.run_i02_obp_metaethics_cpg_once --preflight --output obp-cpg-preflight.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hcl-i02-obp-cpg-provider-free-${{ github.run_id }}
+          path: obp-cpg-preflight.json

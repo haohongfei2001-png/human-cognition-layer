@@ -1,0 +1,44 @@
+name: HCL I02 One-Time OBP Metaethics CPG Development Calibration
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  calibration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unique first main run with no closed grant
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$GITHUB_REF" = refs/heads/main
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          test ! -f .github/HCL_I02_OBP_METAETHICS_CPG_CLOSED
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-i02-obp-metaethics-cpg-once.yml/runs?event=workflow_dispatch&per_page=100" > /tmp/hcl-obp-runs.json
+          python - <<'PY'
+          import json, os
+          runs=json.load(open('/tmp/hcl-obp-runs.json'))['workflow_runs']
+          assert len(runs)==1 and str(runs[0]['id'])==os.environ['GITHUB_RUN_ID']
+          PY
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'openai==2.14.0'
+      - name: Frozen source, fairness, runtime and whole-phase budget gate
+        run: python -m scripts.run_i02_obp_metaethics_cpg_once --preflight --output i02-obp-metaethics-cpg-preflight.json
+      - name: One bounded calibration; no retry or H calls
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          HCL_I02_OBP_METAETHICS_CPG_AUTHORIZED: ONE_CALIBRATION_ONLY
+        run: python -m scripts.run_i02_obp_metaethics_cpg_once --execute --output i02-obp-metaethics-cpg-receipt.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-i02-obp-metaethics-cpg-${{ github.run_id }}
+          path: |
+            i02-obp-metaethics-cpg-preflight.json
+            i02-obp-metaethics-cpg-receipt.json
+            reports/HCL_I02_OBP_METAETHICS_CPG_PACKAGE.json
