@@ -1,0 +1,10 @@
+{
+  "schema": "hcl-i02-blind-allocation-key-v2",
+  "case_id": "irie536-native-case-development",
+  "packet_sha256": "131bdd54f534ffde8dd14cb4707d7dcdf8d15d0ccff599e94226a3868303e5cd",
+  "opaque_to_phase": {
+    "output-29b831c35e4e3c42f5b62c810bb04423": "C",
+    "output-3486dc6e73f5e490fedcaf2d92f4f22f": "P",
+    "output-e666c74c9978cdc8b4646e8bcc8c08a4": "G_final"
+  }
+}

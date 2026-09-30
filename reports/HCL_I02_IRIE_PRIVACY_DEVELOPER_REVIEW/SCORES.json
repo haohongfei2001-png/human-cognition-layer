@@ -1,0 +1,73 @@
+{
+  "schema": "hcl-i02-blind-review-reconciliation-v2",
+  "case_id": "irie536-native-case-development",
+  "packet_sha256": "131bdd54f534ffde8dd14cb4707d7dcdf8d15d0ccff599e94226a3868303e5cd",
+  "scores_by_phase": {
+    "C": {
+      "schema": "hcl-i02-residual-reconciliation-v1",
+      "case_id": "irie536-native-case-development",
+      "opaque_output_id": "output-29b831c35e4e3c42f5b62c810bb04423",
+      "source_first_score": {
+        "case_id": "irie536-native-case-development",
+        "opaque_output_id": "output-29b831c35e4e3c42f5b62c810bb04423",
+        "rubric_sha256": "61fdb600c2047a090020e59e12c82b0f28472ee6f9483177f1939c2bbac7a3d6",
+        "earned": 7,
+        "possible": 7,
+        "semantic_fraction": 1.0,
+        "critical_failures": [],
+        "eligible": true,
+        "unresolved_credit": 0
+      },
+      "residual_claim_count": 3,
+      "unsupported_excerpts": [],
+      "unresolved_excerpts": [],
+      "severe_unsupported_excerpts": [],
+      "eligible": true,
+      "full_answer_semantics_qualified": false
+    },
+    "G_final": {
+      "schema": "hcl-i02-residual-reconciliation-v1",
+      "case_id": "irie536-native-case-development",
+      "opaque_output_id": "output-e666c74c9978cdc8b4646e8bcc8c08a4",
+      "source_first_score": {
+        "case_id": "irie536-native-case-development",
+        "opaque_output_id": "output-e666c74c9978cdc8b4646e8bcc8c08a4",
+        "rubric_sha256": "61fdb600c2047a090020e59e12c82b0f28472ee6f9483177f1939c2bbac7a3d6",
+        "earned": 7,
+        "possible": 7,
+        "semantic_fraction": 1.0,
+        "critical_failures": [],
+        "eligible": true,
+        "unresolved_credit": 0
+      },
+      "residual_claim_count": 3,
+      "unsupported_excerpts": [],
+      "unresolved_excerpts": [],
+      "severe_unsupported_excerpts": [],
+      "eligible": true,
+      "full_answer_semantics_qualified": false
+    },
+    "P": {
+      "schema": "hcl-i02-residual-reconciliation-v1",
+      "case_id": "irie536-native-case-development",
+      "opaque_output_id": "output-3486dc6e73f5e490fedcaf2d92f4f22f",
+      "source_first_score": {
+        "case_id": "irie536-native-case-development",
+        "opaque_output_id": "output-3486dc6e73f5e490fedcaf2d92f4f22f",
+        "rubric_sha256": "61fdb600c2047a090020e59e12c82b0f28472ee6f9483177f1939c2bbac7a3d6",
+        "earned": 7,
+        "possible": 7,
+        "semantic_fraction": 1.0,
+        "critical_failures": [],
+        "eligible": true,
+        "unresolved_credit": 0
+      },
+      "residual_claim_count": 3,
+      "unsupported_excerpts": [],
+      "unresolved_excerpts": [],
+      "severe_unsupported_excerpts": [],
+      "eligible": true,
+      "full_answer_semantics_qualified": false
+    }
+  }
+}

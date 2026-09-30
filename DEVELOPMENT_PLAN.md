@@ -350,13 +350,14 @@ imply endorsement of every role norm. Twelve targeted checks and a positive witn
 
 **I01 — FROZEN:** `docs/HCL_I01_EVALUATION_CONTRACT.md` and `reports/HCL_I01_EVALUATION_FREEZE.json` fix the main architecture surface, question, four families, fair C/P/G/H input/output shape, source independence split, attribution obligations and no-outcome boundary. The provider-free guard rejects authored/unauthorized/unequal/oracle candidates; six tests witness it. No cognition gain or independent efficacy is claimed.
 
-The [IRIE privacy-concept development freeze](docs/HCL_I02_IRIE_PRIVACY_DEVELOPMENT.md)
-provides a native conditional-privacy reasoning diagnostic with author CC BY 4.0
-rights, no expert answer, unchanged strong v8 C/P/G, full ordinary input and
-measured absent H treatment. Execute its separately bounded one-shot calibration
-only after exact freeze/preflight CI, then source-first closure and budget/trigger
-removal; never promote this exposed writing system to unseen confirmation.
-No source or comparator qualification is implied by provider-free PASS.
+The [IRIE native privacy-concept development closure](reports/HCL_I02_IRIE_PRIVACY_CPG_CLOSURE.md)
+completed once: four calls, zero retries, estimated/rated USD 0.06977652; its new
+USD 0.24 allocation is closed and trigger removed. All C/P/G interfaces and exact
+citations passed; developer opaque diagnostic is 7/7 for each final comparator.
+No independent review or broad semantic qualification is established, and H/H-new
+were not called because ordinary H has no specialized treatment. Preserve this
+exposed source and its v7 disjointness exclusion. Next qualify protected disjoint
+source systems and independent semantic competence; never retune or rerun this case.
 
 **I02 — NEXT_READY:** qualify independent source provenance, license and access plus competent C/P/G comparators. Freeze model IDs, prompt/scaffold implementations, scorer rubric, sample size and cost/latency bands before confirmation. Do not view confirmation outcomes to tune H. C/P/G share complete ordinary inputs and final answer fields; G has a separately charged generic source-map step and original source in final input. The [first-group MuSR calibration](reports/HCL_I02_CPG_CALIBRATION_CLOSURE.md) made C, P and G-map calls; G-map violated its shape contract, G-final was not called, and its unique authorization closed. The [second-source Moral Stories calibration](reports/HCL_I02_MORAL_CPG_CALIBRATION_CLOSURE.md) made C/P/G-map/G-final calls: G-map v2 worked, but all three final comparators missed an explicit security goal while correctly refusing unsupported harmful intent. Its USD 0.06 grant is closed, with no rerun. Neither exposed calibration qualifies comparator semantics across task families or H efficacy. Initial rights screening excludes OpenStax model input and holds Gutenberg and the distinct GitHub MuSR distribution pending rights checks; see `docs/HCL_I02_SOURCE_SCREEN.md`. Zero confirmation sources are qualified. A separately pinned CC BY 4.0 author-team MuSR CSV is **calibration-only**: 256 questions share 64 narratives; the first group is exposed and its second item has unresolved perceptual support. Complete item-level audit and independent-source diversity before confirmation; do not treat license metadata or generated gold as semantic truth. Both MuSR and Moral Stories author/template/writing systems are calibration-exposed, so their other rows cannot be treated as unseen confirmation under I01. The [ordinary information-state repair](docs/HCL_I02_INFORMATION_STATE_ENTRY_REPAIR.md) initially found zero checked observations on the exposed native question; its [v2 repair](docs/HCL_I02_INFORMATION_STATE_V2_REPAIR.md) now passes provider-free H/H-new treatment presence and structural fairness with a chained runtime amendment. This is correctness evidence only. The generic semantic scorer v1 now distinguishes a stated goal from unproved harmful intent in source-first review; next qualify source diversity and a protected confirmation split. Do not rerun either spent calibration or claim H efficacy.
 

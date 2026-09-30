@@ -19,15 +19,15 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
-The [native IRIE privacy-concept package](docs/HCL_I02_IRIE_PRIVACY_DEVELOPMENT.md)
-freezes an external-author fictional case and verbatim native question with three
-source-first obligations before model output. Full source/question equality and
-ordinary H direct/no-treatment boundaries pass provider-free checks. One new
-C/P/G-only development calibration is READY (four calls, zero retries, USD 0.24
-cap under default existing-provider permission); no historical grant is reused.
-No calls have occurred at this freeze. The development-exposed IRIE system and
-authors are excluded from confirmation by v7. This adds evaluation coverage,
-not a new H capability or independent efficacy.
+The [native IRIE privacy-concept calibration closure](reports/HCL_I02_IRIE_PRIVACY_CPG_CLOSURE.md)
+records four strong C/P/G calls, zero retries, estimated/rated USD 0.06977652
+against a new USD 0.24 cap. All phases passed interface/exact-citation checks;
+source-first developer opaque review scored each final arm 7/7 on the frozen
+three obligations. This is one-item development evidence, not independent review,
+across-family comparator qualification or H efficacy. H had no specialized
+treatment and received zero calls. Budget is closed with zero remaining, trigger
+removed, no rerun/transfer. IRIE authors/system are excluded by v7; zero confirmation
+sources qualified. Continue I02's disjoint sources and independent qualification.
 
 The [I02 v6 reachable-history screen](docs/HCL_I02_REACHABLE_HISTORY_SCREEN.md)
 now checks current Git refs before the prior snapshot and rights/lineage gates.
