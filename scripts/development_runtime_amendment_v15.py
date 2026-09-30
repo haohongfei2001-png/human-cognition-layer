@@ -4,7 +4,7 @@ from pathlib import Path
 from scripts.development_runtime_amendment_v14 import validate_current as validate_v14
 from scripts.serious_eval_contract import runtime_digest
 
-def validate_current():
+def validate_current(*, current_digest=None):
     previous = json.loads(Path('reports/HCL_DEVELOPMENT_RUNTIME_AMENDMENT_V14.json').read_text())
     pin = previous['amended_hcl_runtime_sha256']
     validate_v14(current_digest=pin)
@@ -12,7 +12,7 @@ def validate_current():
     if (v.get('schema') != 'hcl-development-runtime-amendment-v15'
             or v.get('reason') != 'GENERAL_NONLITERAL_CONDITIONAL_READER_ENTRY'
             or v.get('previous_hcl_runtime_sha256') != pin
-            or v.get('amended_hcl_runtime_sha256') != runtime_digest()
+            or v.get('amended_hcl_runtime_sha256') != (runtime_digest() if current_digest is None else current_digest)
             or v.get('historical_i01_main_sha') != previous['historical_i01_main_sha']
             or v.get('development_only') is not True
             or v.get('new_cognition_module') is not False

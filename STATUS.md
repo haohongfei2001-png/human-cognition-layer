@@ -31,7 +31,7 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: GENERAL_ORIGINAL_DERIVED_SOURCE_BOUNDARY_REPAIR**
+**NEXT_READY: GENERAL_CONDITIONAL_READER_CONTEXT_COST_REDUCTION**
 
 [DRE001 source-first closure](reports/HCL_DRE001_SOURCE_FIRST_CLOSURE.md): actual model
 entry/conditional treatment present, utility INCONCLUSIVE.2 calls/0 retries at
@@ -44,17 +44,22 @@ unchanged; no efficacy/semantic certificate, output correction, rescore or rerun
 Raw/state/model/usage/cost/graph/artifact and120-file exact-run replay retained;
 grant0/trigger removed/no historical transfer. Authored development only, never final.
 
-Immediate general repair separates primary original sources from conditional derived
-state and enforces original citation boundaries without inventing semantics/private
-truth. Positive/negative/composition/revision/ordinary smoke/historical tests first,
-0 new paid calls; no rerun of the consumed entry check. Then context/cost simplification
-and separately frozen fresh public reality checks. Final reviewer/source perfection
-is no daily development gate; no new ontology or leaderboard activity.
+[Original-source boundary v16](docs/HCL_DEVELOPMENT_ORIGINAL_SOURCE_V16.md) now
+separates primary original text from derived conditional state. Actual B01/C01/C03
+checks still reach final input. Original quotation audit blocks unsupported/derived
+citations or stale support, preserves raw output and never invents replacement
+citations. Source/version changes during extraction withdraw old candidate supports.
+Positive/negative/composition/revision/ordinary smoke/historical regression:11 new
+checks,97 combined local passes.0 new calls/spend; no DRE001 rescore/rerun or utility
+upgrade. Quote location is provenance only, semantic adequacy UNASSESSED.
 
-Conditional reader v15 remains IMPLEMENTED_UNVALIDATED for utility: model entry is
-real, but this source-integrity failure must be repaired before broader effect claims.
-Shared reader v14/current runtime chain and all historical dispositions/frozen receipts
-preserved. Default reader0-extraction/legacy admission unchanged.
+Conditional integration remains IMPLEMENTED_UNVALIDATED; actual model entry is real,
+but current answer utility is INCONCLUSIVE. Next reduce duplicated conditional state
+and opaque-ID overhead while retaining complete original source, actual conditions,
+revision/dependency/uncertainty boundaries. Then separately frozen fresh public
+Development Reality Checks; no final reviewer/source global stop. Runtime v16 chained
+through v15/v14; all consumed receipts/dispositions unchanged. No new ontology or
+leaderboard. Default reader0-extraction/legacy admission unchanged.
 
 DRC002 CLOSED/INCONCLUSIVE: unique run36784477632 at e92b75d9736af5c0b87ad66ecea20f3c30719db4
 stopped after11 calls when returned output8193 exceeded frozen8192.0 retries.

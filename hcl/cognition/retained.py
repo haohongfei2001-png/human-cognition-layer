@@ -210,6 +210,17 @@ def _prepare_retained(workspace, query, *, source_ids, observer=None, backend=No
         operation_ids=stage_ids, translation_ids=projected,
         unresolved_source_text=remainder,
         semantic_status='CONDITIONAL_ON_UNVERIFIED_TRANSLATION' if assumptions else 'BOUNDED_LITERAL_ADAPTER')
+    if reader_analysis:
+        binding = payload.pop('shared_semantic_binding')
+        # The representation passed to the checker is not a quotable source.
+        # Keep its complete audit under conditional authority, with originals in
+        # the primary source slot seen by the final answerer.
+        payload['derived_sources'] = payload.pop('sources')
+        payload = dict(query=query,
+            sources=[dict(source_id=source_ids[0], version=workspace._versions[source_ids[0]], text=raw)],
+            conditional_cognition=dict(authority='DERIVED_CONDITIONAL_TOOL_STATE_NOT_QUOTABLE_SOURCE',
+                validation_scope='DERIVED_GRAMMAR_ONLY_NOT_ORIGINAL_SEMANTIC_CERTIFICATE',
+                state=payload), shared_semantic_binding=binding)
     final = [dict(role='system', content=prepared.messages[0]['content'] +
         ' The retained state uses a DERIVED representation, not verbatim source. '
         'shared_semantic_binding gives original quotes and every translation. All outputs are '
@@ -218,6 +229,15 @@ def _prepare_retained(workspace, query, *, source_ids, observer=None, backend=No
         'Synthetic legacy dates encode only statement order. No actor receipt or comprehension '
         'is established by an authorized analyst projection.'),
         dict(role='user', content=json.dumps(payload, ensure_ascii=False, sort_keys=True))]
+    if reader_analysis:
+        final[0]['content'] += (' Only top-level sources contain quotable original text. '
+            'conditional_cognition.state and derived_sources are representations, not '
+            'verbatim utterances, narrator authority or new source evidence. A first-person '
+            'translation can stand for a narrator description; do not turn it into literal '
+            'speaking. source_citations must be original excerpts or objects with source_id, '
+            'quote and optional version/start. Do not cite translated lines as original quotes. '
+            'Return exactly answer, source_citations, uncertainty and assumptions in JSON. '
+            'Exact original anchors still do not certify interpretation or private/world truth.')
     if len(final[-1]['content']) > max_chars:
         raise ValueError('shared support and original-source context exceeds budget')
     receipt = dict(schema='hcl-retained-shared-adapter-v1', source_ids=list(source_ids),
@@ -251,8 +271,78 @@ def answer_retained_reader(workspace, query, answer_backend, **kwargs):
     """One final answer after current conditional ordinary-reader preparation."""
     prepared = prepare_retained_reader(workspace, query, **kwargs)
     messages = prepared.current_messages(workspace)
-    answer = (answer_backend.complete(messages) if hasattr(answer_backend, 'complete')
+    raw = (answer_backend.complete(messages) if hasattr(answer_backend, 'complete')
               else answer_backend(messages))
-    return dict(answer=answer, prepared=prepared, answer_adapter_calls=1,
+    audit = audit_original_citations(prepared, raw)
+    try:
+        prepared.current_messages(workspace)
+    except ValueError:
+        audit.update(status='STALE_OR_CHALLENGED_SUPPORT', deliverable=False)
+    # Preserve the raw answer separately; never silently replace its citations.
+    answer = raw if audit['deliverable'] else json.dumps(dict(
+        answer='I cannot support this answer from the supplied text.',
+        source_citations=[], uncertainty='The returned answer did not preserve reliable current source references.',
+        assumptions='No private state, world fact or moral judgment is established.'))
+    return dict(answer=answer, answer_raw=raw, source_citation_audit=audit,
+        prepared=prepared, answer_adapter_calls=1,
         preparation_backend_calls=prepared.receipt['semantic_backend_calls'],
         actual_final_messages=messages)
+
+
+def audit_original_citations(prepared, raw):
+    """Bounded original quotation location only, never semantic answer grading."""
+    result = dict(status='INVALID_ORIGINAL_CITATIONS', deliverable=False,
+        semantic_adequacy='UNASSESSED', semantic_certification=False, anchors=[],
+        raw_output_rewritten=False)
+    try:
+        if isinstance(raw, str) and len(raw) <= 128000:
+            obj = json.loads(raw)
+        elif isinstance(raw, dict):
+            obj = raw
+        else:
+            raise ValueError('bounded JSON answer required')
+        if (not isinstance(obj, dict) or set(obj) != {'answer','source_citations','uncertainty','assumptions'}
+                or not isinstance(obj['source_citations'], list) or len(obj['source_citations']) > 32
+                or not all(isinstance(obj[k], str) for k in ('uncertainty','assumptions'))):
+            raise ValueError('answer contract invalid')
+        sources = json.loads(prepared.messages[-1]['content'])['sources']
+        for citation in obj['source_citations']:
+            if isinstance(citation, str):
+                if len(sources) != 1:
+                    raise ValueError('explicit source ID required')
+                source, quote, offset = sources[0], citation, None
+            elif (isinstance(citation, dict) and {'source_id','quote'} <= set(citation)
+                    and set(citation) <= {'source_id','quote','version','start'}):
+                matched = [s for s in sources if s['source_id'] == citation['source_id']]
+                if len(matched) != 1:
+                    raise ValueError('unknown source ID')
+                source, quote, offset = matched[0], citation['quote'], citation.get('start')
+                if 'version' in citation and (type(citation['version']) is not int or citation['version'] != source['version']):
+                    raise ValueError('source version mismatch')
+            else:
+                raise ValueError('citation structure invalid')
+            if (not isinstance(quote, str) or not quote.strip() or len(quote) > 4000
+                    or offset is not None and (type(offset) is not int or offset < 0)):
+                raise ValueError('citation quote/offset invalid')
+            text = source['text']; mode = 'EXACT_ORIGINAL_QUOTE'
+            if offset is not None and text[offset:offset+len(quote)] == quote:
+                start, end = offset, offset+len(quote)
+            else:
+                spans = [(m.start(),m.end()) for m in re.finditer(re.escape(quote),text)]
+                if not spans:
+                    # Whitespace layout only, with the original authoritative
+                    # substring retained in the audit; no lexical repair.
+                    pattern = r'\s+'.join(re.escape(t) for t in re.split(r'\s+',quote.strip()))
+                    spans = [(m.start(),m.end()) for m in re.finditer(pattern,text)]
+                    mode = 'UNIQUE_WHITESPACE_LAYOUT_ONLY'
+                if len(spans) != 1:
+                    raise ValueError('missing or ambiguous original quotation')
+                start,end = spans[0]
+            result['anchors'].append(dict(source_id=source['source_id'],version=source['version'],
+                start=start,end=end,original_quote=text[start:end],submitted_quote=quote,
+                submitted_start=offset,location_rule=mode))
+        result.update(status='ORIGINAL_ANCHORS_LOCATED_SEMANTICS_UNASSESSED' if result['anchors']
+            else 'NO_CITATIONS_SEMANTICS_UNASSESSED',deliverable=True)
+    except (ValueError,TypeError,KeyError):
+        pass
+    return result
