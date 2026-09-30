@@ -1,0 +1,138 @@
+{
+  "schema": "hcl-i02-blind-review-packet-v2",
+  "case_id": "obp0125-11-section7-native-q10-development",
+  "split": "CALIBRATION",
+  "sources": [
+    {
+      "source_id": "obp0125-11-section7-native-q10-development",
+      "text": "AQA require you to understand how the various metaethical theories as discussed in Chapter 7 might be applied to the applied ethical issues on the specification, of which stealing is the first we have considered. Below, assuming some grasp of the theories from Chapter 7, we offer guidance as to how metaethical theories might relate to this issue. Much of the guidance below is easily applicable to the other applied ethical issues also discussed in the remaining three chapters. Cognitivism and Realism The combination of Cognitivism and Realism in this area would entail that moral claims about stealing are truth-apt propositions, expressing beliefs that will be made true by genuinely existing moral properties at least some of the time. For the utilitarian, moral claims regarding the ethical acceptability of individual actions will be made true by natural properties such as pleasure, happiness or preference satisfaction. For the intuitionist, the non-natural property of goodness will make some of our moral claims regarding stealing true. Cognitivism and Anti-Realism The moral error theorist believes that our moral claims regarding the ethics of stealing are intended to be true, but can never achieve truth because no moral properties exist as truth-makers for those moral claims. Importantly, just because the moral error theorist cannot endorse the claim that “stealing can be morally wrong at least sometimes”, this does not entail a love of stealing on their part. The moral error theorist may have a non-moral reason for opposing stealing on many occasions, or indeed supporting stealing on other occasions. Moral reasons are not the only reasons not to engage in stealing, as legal and social/personal reasons will also be a factor as they often speak against the wisdom of theft. Moral error theorists who care about the property rights of others, for example, may well strongly oppose stealing. Non-Cognitivism and Anti-Realism According to the simple non-cognitivist considered in this book, our moral utterances regarding stealing are not truth-apt because they are not expressions of belief; they are expressions of emotion or other non-truth-apt attitudes such as approval or disapproval. Thus, according to theories such as Emotivism and Prescriptivism, a phrase such as “stealing is wrong” expresses a negative emotional attitude towards stealing (Emotivism) or makes it clear that we do not want people to steal (Prescriptivism). Whichever non-cognitivist theory you prefer, the non-cognitivist position is defined by the commitment to the idea that the moral utterances do not reveal something true about the world and do not even try to describe features of the world. Therefore, we cannot criticise a thief as morally wrong when using this argument (something akin to the claim of the moral error theorist). However, if we adopt Prescriptivism, we might at least be able to criticise the thief for inconsistency if she speaks of the general wrongness of stealing whilst defending the rightness of stealing in her case. Despite this, one big worry for those interested in adopting a view like Emotivism or Prescriptivism is that it cheapens and eliminates the value of moral debate over the moral rightness of stealing, since we cannot defend our ethical claims as being genuinely true or false in the way that realist seeks to do and in the way that most people would wish to."
+    }
+  ],
+  "obligations": [
+    {
+      "id": "error_theory_as_reported_position",
+      "dimension": "SUPPORTED_CONTENT",
+      "expectation": "STATE",
+      "source_quotes": [
+        {
+          "source_id": "obp0125-11-section7-native-q10-development",
+          "quote": "The moral error theorist believes that our moral claims regarding the ethics of stealing are intended to be true, but can never achieve truth because no moral properties exist as truth-makers for those moral claims."
+        }
+      ],
+      "audit_question": "State the source-reported cognitivist/anti-realist position: moral claims purport to be true but lack moral-property truth-makers. Under this position stealing cannot be morally wrong (or right) as a genuine moral truth. Do not confuse error theory with merely uncertain verdicts, subjective moral truth or non-cognitivist utterances not attempting description."
+    },
+    {
+      "id": "nonmoral_opposition_not_approval",
+      "dimension": "CONCEPT_SCOPE",
+      "expectation": "QUALIFY",
+      "source_quotes": [
+        {
+          "source_id": "obp0125-11-section7-native-q10-development",
+          "quote": "Importantly, just because the moral error theorist cannot endorse the claim that “stealing can be morally wrong at least sometimes”, this does not entail a love of stealing on their part."
+        },
+        {
+          "source_id": "obp0125-11-section7-native-q10-development",
+          "quote": "Moral error theorists who care about the property rights of others, for example, may well strongly oppose stealing."
+        }
+      ],
+      "audit_question": "Explain that denying moral truth does not entail approval of theft: non-moral legal, social or personal reasons may support opposition. Preserve may/for-example scope; do not infer all error theorists have a particular motive or stance."
+    },
+    {
+      "id": "theory_not_moral_truth_or_psychological_diagnosis",
+      "dimension": "INFERENCE_BOUNDARY",
+      "expectation": "AVOID",
+      "source_quotes": [
+        {
+          "source_id": "obp0125-11-section7-native-q10-development",
+          "quote": "Moral reasons are not the only reasons not to engage in stealing, as legal and social/personal reasons will also be a factor as they often speak against the wisdom of theft."
+        }
+      ],
+      "audit_question": "Attribute error theory to the reported philosophical position, not established moral reality or the authors/answerer. Do not upgrade denial of moral truth to love of stealing, harmful intent, absence of personal reasons, legal permission, automatic guilt or an actual individual psychological state. Alternative criticisms are acceptable when explicitly distinguished from exposition."
+    }
+  ],
+  "rubric_sha256": "61fdb600c2047a090020e59e12c82b0f28472ee6f9483177f1939c2bbac7a3d6",
+  "source_first_manifest_sha256": "48073c5f69047566418e90bb89fe0e3cf43025a1d7eb4a582f054f1d7cca2e7b",
+  "raw_receipt_sha256": "2a98aa29102455c0d62581b02399b4c665df8d736186134fb00d814b415fa87d",
+  "outputs": [
+    {
+      "opaque_output_id": "output-dab58c7981f9fee67a312dc51431ab2b",
+      "answer": {
+        "answer": "The error-theorist would say that moral claims about stealing, such as “stealing is morally wrong,” are intended to be true but can never achieve truth because no moral properties exist as truth-makers for those claims. Therefore, the error-theorist cannot endorse the claim that stealing can be morally wrong at least sometimes. However, this does not entail a love of stealing: the error-theorist may oppose or support stealing on non-moral grounds such as legal, social, personal, or property-rights reasons.",
+        "source_citations": [
+          {
+            "source_id": "obp0125-11-section7-native-q10-development",
+            "quote": "The moral error theorist believes that our moral claims regarding the ethics of stealing are intended to be true, but can never achieve truth because no moral properties exist as truth-makers for those moral claims."
+          },
+          {
+            "source_id": "obp0125-11-section7-native-q10-development",
+            "quote": "this does not entail a love of stealing on their part"
+          },
+          {
+            "source_id": "obp0125-11-section7-native-q10-development",
+            "quote": "The moral error theorist may have a non-moral reason for opposing stealing on many occasions, or indeed supporting stealing on other occasions."
+          },
+          {
+            "source_id": "obp0125-11-section7-native-q10-development",
+            "quote": "Moral error theorists who care about the property rights of others, for example, may well strongly oppose stealing."
+          }
+        ],
+        "uncertainty": "The source presents this as textbook guidance on how the moral error theorist would relate to the issue of stealing, not as a direct quotation from an error-theorist. The exact wording an error-theorist would use may vary, and the source does not provide a specific first-order moral recommendation beyond saying that moral claims about stealing cannot be true.",
+        "assumptions": "I assume the source accurately represents the moral error theorist position described in the text and that the question refers to the moral error theorist discussed in this source."
+      }
+    },
+    {
+      "opaque_output_id": "output-2dfe06fd925c83df7c03a93a11231c34",
+      "answer": {
+        "answer": "The moral error theorist would say that moral claims about stealing, such as \"stealing is wrong,\" are intended to be true but can never achieve truth because no moral properties exist as truth-makers for those claims. Therefore, they cannot endorse the claim that stealing is morally wrong at least sometimes. However, this does not mean they approve of stealing; they may oppose or support stealing for non-moral reasons, such as legal, social, personal, or property-rights considerations.",
+        "source_citations": [
+          {
+            "source_id": "obp0125-11-section7-native-q10-development",
+            "quote": "The moral error theorist believes that our moral claims regarding the ethics of stealing are intended to be true, but can never achieve truth because no moral properties exist as truth-makers for those moral claims."
+          },
+          {
+            "source_id": "obp0125-11-section7-native-q10-development",
+            "quote": "Importantly, just because the moral error theorist cannot endorse the claim that “stealing can be morally wrong at least sometimes”, this does not entail a love of stealing on their part."
+          },
+          {
+            "source_id": "obp0125-11-section7-native-q10-development",
+            "quote": "The moral error theorist may have a non-moral reason for opposing stealing on many occasions, or indeed supporting stealing on other occasions."
+          }
+        ],
+        "uncertainty": "None beyond what is explicitly stated in the provided source.",
+        "assumptions": "The question refers to the moral error theorist as described in the provided source; 'error-theorist' is interpreted as the moral error theorist."
+      }
+    },
+    {
+      "opaque_output_id": "output-c54fa3021387297e7af906b9e8f20e82",
+      "answer": {
+        "answer": "The moral error theorist would say that stealing cannot be morally wrong in a truth-tracking sense, because moral claims about stealing are intended to be true but never achieve truth: no moral properties exist as truth-makers for those claims. They therefore cannot endorse the claim that stealing can be morally wrong at least sometimes. This does not mean they approve of stealing; they may still oppose or support stealing for non-moral reasons such as legal, social/personal considerations or concern for others' property rights.",
+        "source_citations": [
+          {
+            "source_id": "obp0125-11-section7-native-q10-development",
+            "quote": "The moral error theorist believes that our moral claims regarding the ethics of stealing are intended to be true, but can never achieve truth because no moral properties exist as truth-makers for those moral claims."
+          },
+          {
+            "source_id": "obp0125-11-section7-native-q10-development",
+            "quote": "Importantly, just because the moral error theorist cannot endorse the claim that “stealing can be morally wrong at least sometimes”, this does not entail a love of stealing on their part."
+          },
+          {
+            "source_id": "obp0125-11-section7-native-q10-development",
+            "quote": "The moral error theorist may have a non-moral reason for opposing stealing on many occasions, or indeed supporting stealing on other occasions."
+          },
+          {
+            "source_id": "obp0125-11-section7-native-q10-development",
+            "quote": "Moral reasons are not the only reasons not to engage in stealing, as legal and social/personal reasons will also be a factor as they often speak against the wisdom of theft."
+          },
+          {
+            "source_id": "obp0125-11-section7-native-q10-development",
+            "quote": "Moral error theorists who care about the property rights of others, for example, may well strongly oppose stealing."
+          }
+        ],
+        "uncertainty": "The source reports the error-theorist position generally, but it does not specify which non-moral reasons a particular error theorist would accept in a concrete case; therefore it remains uncertain whether a given error theorist would oppose or support a specific act of stealing. The source also presents a theoretical characterization, not an independent proof that this position is correct.",
+        "assumptions": "The question is taken to ask about the error-theorist position as described in the provided textbook source, and 'morality of stealing' is interpreted as whether stealing can be morally wrong or right in a truth-bearing sense."
+      }
+    }
+  ],
+  "review_instruction": "Review every frozen obligation and all material residual claims using the authorized source and exact output excerpts. Attest complete claim coverage before reveal. Do not consult the raw receipt, allocation key, phase names or model traces.",
+  "required_review_schema": "hcl-i02-blind-review-v2"
+}

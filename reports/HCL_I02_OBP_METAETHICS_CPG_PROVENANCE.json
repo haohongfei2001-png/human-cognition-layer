@@ -1,0 +1,21 @@
+{
+  "schema": "hcl-i02-obp-metaethics-cpg-provenance-v1",
+  "run_id": 36701264145,
+  "run_attempt": 1,
+  "run_sha": "1cf3109970ac1082a640287d2551dbcebdb7e953",
+  "artifact_id": 11089752999,
+  "artifact_sha256": "d3213569a7217dfb969a444769deaf2b8fa730df8ae772eed67e3db301cb59ba",
+  "raw_receipt_sha256": "e8ef4fb0449154323058c1abbb438013f320e55407b4e76cd082b2e968822685",
+  "provider_calls": 4,
+  "retries": 0,
+  "h_calls": 0,
+  "rated_peak_cost_usd": 0.05344284,
+  "estimated_actual_cost_usd": 0.026313099999999996,
+  "actual_invoice_cost_usd": null,
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RERUN",
+  "authorization_remaining_usd": 0,
+  "reviewer": "IMPLEMENTER; OPAQUE_OUTPUTS_BEFORE_ARM_REVEAL; NOT_INDEPENDENT_HUMAN_REVIEW",
+  "confirmation_qualified": false,
+  "h_efficacy": "NOT_TESTED",
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
