@@ -1,0 +1,15 @@
+{
+  "schema": "hcl-i02-irie-privacy-execution-lock-v1",
+  "freeze_main_sha": "844a79535dafb7947016142e045f9a61df8d761f",
+  "package_sha256": "8193d1f6f98384bfa227e5dfe9caa5bacea5e6cf40eca80d0767ae080ed160c9",
+  "package_file_sha256": "58297636a706fa16d26f04fe9517781e4a7824462667d5ee2d4b0efc2dbad9fb",
+  "authorization": "OWNER_DEFAULT_EXISTING_PROVIDER_NORMAL_BOUNDED_COST",
+  "maximum_provider_calls": 4,
+  "retries": 0,
+  "budget_cap_usd": 0.24,
+  "h_calls": 0,
+  "hnew_calls": 0,
+  "history_budget_transfer": false,
+  "run_policy": "ONE_TRIGGER_FIRST_RUN_AND_ATTEMPT_ONLY",
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
