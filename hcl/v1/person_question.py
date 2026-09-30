@@ -137,10 +137,11 @@ def prepare_person_context(layer, query, narrative, *, perspective_mode=Perspect
     if not isinstance(query, str) or not query.strip() or len(query) > 16000:
         raise ValueError('bounded nonempty ordinary question required')
     if max_context_chars is None:
-        max_context_chars = (64000 if isinstance(narrative, str) and len(narrative) > 16000
-                             else 48000)
+        max_context_chars = (512000 if isinstance(narrative, str) and len(narrative)>48000 else
+                             64000 if isinstance(narrative, str) and len(narrative)>16000 else 48000)
     if (not isinstance(perspective_mode, PerspectiveMode) or type(narrative_access) is not bool or
-        type(max_context_chars) is not int or not 512 <= max_context_chars <= 64000):
+        type(max_context_chars) is not int or not 512 <= max_context_chars <= (
+            512000 if isinstance(narrative,str) and len(narrative)>48000 else 64000)):
         raise ValueError('explicit perspective, access flag and bounded context required')
     if observer_actor is not None:
         _label(observer_actor)

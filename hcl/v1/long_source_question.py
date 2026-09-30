@@ -27,11 +27,12 @@ _POLICY = (
 def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
                             min_source_chars, method):
     if (not isinstance(query, str) or not query.strip() or len(query) > 8000 or
-            not isinstance(source_text, str) or not min_source_chars < len(source_text) <= 48000 or
+            not isinstance(source_text, str) or not min_source_chars < len(source_text) <= 250000 or
             not isinstance(source_id, str) or not source_id or len(source_id) > 128 or
-            type(max_context_chars) is not int or not 512 <= max_context_chars <= 128000):
+            type(max_context_chars) is not int or not 512 <= max_context_chars <= 512000):
         raise ValueError('bounded complete long source, question and context required')
-    semantic = prepare_semantics(query, (AuthorizedText(source_id, source_text),))
+    semantic = prepare_semantics(query, (AuthorizedText(source_id, source_text),),
+        max_source_chars=250000 if len(source_text)>48000 else 64000)
     if semantic.backend_calls:
         raise ValueError('long source local preparation unexpectedly called provider')
     source = json.loads(semantic.messages[-1]['content'])['sources']
@@ -63,11 +64,13 @@ def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
 
 
 def prepare_long_source_context(query, source_text, *, source_id='ordinary-source',
-                                max_context_chars=64000):
-    """Prepare one complete 16k–48k source without model extraction or truncation."""
+                                max_context_chars=None):
+    """Prepare one complete 16k–250k source without model extraction or truncation."""
+    if max_context_chars is None:
+        max_context_chars=512000 if isinstance(source_text,str) and len(source_text)>48000 else 64000
     return _prepare_source_context(query, source_text, source_id=source_id,
         max_context_chars=max_context_chars, min_source_chars=16000,
-        method='complete_long_source_local_evidence_v1')
+        method='complete_long_source_local_evidence_v2' if isinstance(source_text,str) and len(source_text)>48000 else 'complete_long_source_local_evidence_v1')
 
 
 def prepare_reader_source_comparison(query, source_text, *, max_context_chars=48000):

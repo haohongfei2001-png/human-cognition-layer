@@ -22,6 +22,6 @@ jobs:
       - name: Author-original concept source and native question
         run: python -m scripts.i02_obp_metaethics_preflight
       - name: Current disclosed runtime
-        run: python -m scripts.i02_runtime_amendment_v6
+        run: python -m scripts.i02_runtime_amendment_v7
       - name: Consumed privacy package replay at certified v5 runtime
         run: python -m scripts.i02_replay_irie_privacy_freeze
