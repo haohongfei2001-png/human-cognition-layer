@@ -390,6 +390,21 @@ No H entry, runtime repair, provider input or paid call is allowed by this packa
 Even a clean history receipt only makes source-first holder review ready; confirmation
 qualification, task difficulty and model competence remain unresolved. Zero calls/spend.
 
+The [v12 existing B01 narrator-report entry](docs/HCL_I02_NARRATOR_EPISTEMIC_ENTRY_V12.md)
+now separates a standalone named source-narrator mental attribution from the subject
+own expression in actual complete ordinary H input. Exact source-local REPORT wrapper,
+nested denial, knowledge/exposure/uncertainty and local correction remain scoped; no
+private/world truth or direct C03 belief premise is promoted. H-new retains complete
+source/task/candidates and removes B01 alone.15 new checks;120 combined local checks
+plus20 exact historical frozen checks pass. Narrow literal correctness only, not
+independent efficacy or a new module. Chained v12 leaves old packages untouched;
+Clifford193-file Git-verified certified replay uses its actual run SHA/runtime with
+closed grant/removed trigger, no latest substitution or rescoring. Bounded25-source
+SQuALITY dev metadata screen approves0 inputs/cases; source/question/reference text
+not displayed.0 new calls/spend. Independent reviewer/second family unavailable;
+I02 protected source/task and competent semantic comparators remain NEXT_READY.
+Historical dispositions/Gregory rights hold/LongMemEval SEALED unchanged.
+
 The [future shared source-reference resource](docs/HCL_I02_SHARED_SOURCE_REFERENCE_V1.md)
 implements read-only unique whitespace-layout source-span retrieval for C/P/Gv10
 and actual ordinary H glue. Original source/version/SHA/offset/quote and raw proposals
@@ -413,27 +428,20 @@ and source-first diagnostics retained. Whitespace-only diagnostic matches do not
 accept or rescore outputs. Implementer content observations are not independent or
 formal semantic scores;0 confirmation/competence/difficulty/H-effect qualified.
 Grant0, live trigger removed, no transfer/rerun/sample/source swap for this interface.
-Next implementation: generic provider-free unique-whitespace source-span locator for
-future references with exact source authority and equal arm resources; preserve old
-contract/cases/receipts. Then continue I02 protected source/task, independent review,
+The generic provider-free unique-whitespace source-span locator for future references
+was completed in PR288; old contracts/cases/receipts remain unchanged. Continue I02
+protected source/task, independent review,
 strong comparators and actual ordinary H coverage. No new module/leaderboard;
 historical dispositions, Gregory rights hold and LongMemEval SEALED unchanged.
 
 The [complete Clifford philosophical development calibration](docs/HCL_I02_CLIFFORD_COMPLETE_ESSAY_CALIBRATION.md)
-freezes a complete56,817-character original essay and a question fixed before the
-complete target read, with9 source-first obligations permitting multiple grounded
-critiques. Equal C/P/Gv9 complete inputs, native high thinking and generous32,768-token
-outputs are preflighted;20 provider-free checks pass. Current certified H preserves
-the source but has0 candidates/no specialized treatment, so H/H-new calls remain0.
-One new existing-provider grant allows at most4 C/P/G calls,0 retries, USD1.40 cap
-(peak worst reservation1.32680856), with no historical transfer. No call/outcome yet.
-This is genuine comparator semantic calibration, not another source-holder interface
-retest. Implementer source/task/review is development only;0 confirmation qualified.
-v13 excludes the author/system/exact fingerprints; Gregory rights hold and all
-historical dispositions stay fixed. After exact-head/main CI: dispatch once, preserve
-raw receipt and source-first close/grant0/trigger deletion; then continue I02 protected
-source/task, independent review and competent comparator qualification. No H expansion,
-leaderboard or LongMemEval access.
+was the immutable pre-execution freeze: complete56,817-character essay,9 source-first
+obligations, equal C/P/Gv9, native high thinking,32,768 output tokens and USD1.40 cap.
+It has since executed once and CLOSED as recorded above. Its original certified
+runtimev11/no-H-treatment preflight remains historical; current runtime changes do
+not alter it. No live authorization remains and no dispatch/rerun is allowed.
+Source/task/review remain development-only,0 independent confirmation qualified.
+Continue I02 protected source/task, independent review and competent comparators.
 
 The [v11 existing C03 long-reader composition](docs/HCL_I02_LONG_PLAN_COMPOSITION_V11.md)
 now joins shared C01 conditional plans with reported belief/revision and an explicit

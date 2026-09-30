@@ -1,10 +1,10 @@
 name: HCL I02 Clifford Immutable Closure and Closed Grant
 on:
   pull_request:
-    paths: ['scripts/i02_clifford_closure_audit.py', 'tests/test_i02_clifford_closure.py', 'reports/HCL_I02_CLIFFORD*', '.github/HCL_I02_CLIFFORD_CPG_GRANT.json', '.github/workflows/hcl-i02-clifford*']
+    paths: ['scripts/i02_clifford_closure_audit.py', 'scripts/i02_clifford_certified_replay.py', 'tests/test_i02_clifford_closure.py', 'reports/HCL_I02_CLIFFORD*', '.github/HCL_I02_CLIFFORD_CPG_GRANT.json', '.github/workflows/hcl-i02-clifford*']
   push:
     branches: [main]
-    paths: ['scripts/i02_clifford_closure_audit.py', 'tests/test_i02_clifford_closure.py', 'reports/HCL_I02_CLIFFORD*', '.github/HCL_I02_CLIFFORD_CPG_GRANT.json', '.github/workflows/hcl-i02-clifford*']
+    paths: ['scripts/i02_clifford_closure_audit.py', 'scripts/i02_clifford_certified_replay.py', 'tests/test_i02_clifford_closure.py', 'reports/HCL_I02_CLIFFORD*', '.github/HCL_I02_CLIFFORD_CPG_GRANT.json', '.github/workflows/hcl-i02-clifford*']
 permissions:
   contents: read
 jobs:

@@ -75,7 +75,52 @@ class SemanticResult:
         return json.loads(self.diagnostics_json)
 
 
-def _local_candidates(source, *, dialogue_blocks=False):
+def _narrator_report_candidates(source):
+    """Only complete standalone, named literal mental-report paragraphs.
+
+    The reporter is the source channel, never the named subject or an inferred
+    fictional character. No quoted, conditional, stage or first-person block is
+    promoted. This deliberately leaves ordinary indirect prose unresolved.
+    """
+    from .epistemic import _PREDICATE
+    reporter = 'SourceNarrator@' + identity('source-reporter', source.source_id)[-16:]
+    rows = []
+    cursor = quotes = opens = closes = brackets = fences = 0
+    suspended = False
+    for block in re.finditer(r'(?m)^[^\r\n]+(?:\r?\n[^\r\n]+)*', source.text):
+        quote = block.group()
+        fragment = quote.strip()
+        prefix = source.text[cursor:block.start()]
+        cursor = block.start()
+        quotes += prefix.count('"')
+        opens += prefix.count('\u201c')
+        closes += prefix.count('\u201d')
+        brackets += prefix.count('[') - prefix.count(']')
+        fences += prefix.count('```')
+        suspended = suspended or bool(re.search(r'\b(hypothetical|imagined|counterfactual|pretended)\b', prefix, re.I))
+        if (len(quote) > 4000 or not fragment.endswith(('.', '!', '?')) or
+                re.search(r'["\u201c\u201d\[\]_*]|\bI\b', fragment) or
+                quotes % 2 or opens > closes or brackets > 0 or fences % 2 or suspended):
+            continue
+        match = _PREDICATE.fullmatch(fragment.rstrip('.!?'))
+        if (not match or match['subject'].lower() in _PRONOUNS or
+                not re.fullmatch(_NAME, match['subject'])):
+            continue
+        # A paragraph containing multiple sentences is not a single attribution.
+        if re.search(r'[.!?]\s+\S', fragment[:-1]):
+            continue
+        rows.append(dict(source_id=source.source_id, quote=quote, start=block.start(),
+            kind='event', content=dict(speaker_surface=reporter,
+                speaker_candidates=[reporter], utterance=fragment,
+                event_kind='NARRATOR_MENTAL_REPORT', reporter_role='SOURCE_NARRATOR',
+                reported_holder=match['subject'], assertion_scope='SOURCE_REPORT',
+                identity_scope='SOURCE_LOCAL_REPORT_CHANNEL_NOT_CHARACTER',
+                order=source.order, event_time=source.event_time,
+                access_time=source.access_time, record_time=source.record_time)))
+    return rows
+
+
+def _local_candidates(source, *, dialogue_blocks=False, narrator_reports=False):
     """Syntax candidates; explicit first-person scope is the positive operation."""
     rows, used, known_speakers = [], set(), []
     matches = sorted([*_SPEECH.finditer(source.text), *_COLON.finditer(source.text),
@@ -129,6 +174,10 @@ def _local_candidates(source, *, dialogue_blocks=False):
                 modality='EXPRESSED_BELIEF_NOT_PRIVATE_TRUTH',
                 reference_binding='FIRST_PERSON_TO_EXPLICIT_SPEAKER' if named and not conditional else 'UNRESOLVED',
                 assertion_scope=event['assertion_scope'])))
+    if narrator_reports:
+        reports = _narrator_report_candidates(source)
+        rows.extend(r for r in reports if not any(start <= r['start'] < end for start, end in used))
+        rows.sort(key=lambda r: r['start'])
     return rows
 
 
@@ -154,7 +203,7 @@ def _anchor(source, proposal):
     return derived, derived + len(quote), quote, normalization
 
 
-def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, max_candidates=64, max_source_chars=64000, dialogue_blocks=False, modal_events_only=False, agency_events=False, belief_revision_events=False, model_declarations=False):
+def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, max_candidates=64, max_source_chars=64000, dialogue_blocks=False, modal_events_only=False, agency_events=False, belief_revision_events=False, model_declarations=False, narrator_reports=False):
     """Ordinary question and authorized text, no caller-supplied mental-state labels.
 
     A backend implements complete_json(messages, max_tokens, temperature). At most
@@ -168,7 +217,7 @@ def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, ma
             or type(max_candidates) is not int or not 1 <= max_candidates <= 128
             or type(max_source_chars) is not int or not 1 <= max_source_chars <= 250000
             or type(dialogue_blocks) is not bool or type(modal_events_only) is not bool
-            or any(type(v) is not bool for v in (agency_events,belief_revision_events,model_declarations))
+            or any(type(v) is not bool for v in (agency_events,belief_revision_events,model_declarations,narrator_reports))
             or ((agency_events or belief_revision_events or model_declarations) and not modal_events_only)
             or (modal_events_only and backend is not None)):
         raise ValueError('bounded ordinary query and distinct authorized sources required')
@@ -187,7 +236,7 @@ def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, ma
     calls, raw = 0, ''
     status = 'LOCAL_BOUNDED_SYNTAX'
     if backend is None:
-        proposals = [r for source in visible for r in _local_candidates(source, dialogue_blocks=dialogue_blocks)]
+        proposals = [r for source in visible for r in _local_candidates(source, dialogue_blocks=dialogue_blocks,narrator_reports=narrator_reports)]
         if modal_events_only:
             # Query-independent selection by the existing B01 public modal form.
             # Keep every eligible event, including unresolved actors/scopes; the
@@ -217,7 +266,7 @@ def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, ma
     if len(proposals) > max_candidates:
         raise ValueError('candidate_budget_exceeded_no_silent_truncation')
     by_id = {s.source_id: s for s in visible}
-    canonical = {s.source_id: _local_candidates(s, dialogue_blocks=dialogue_blocks) for s in visible}
+    canonical = {s.source_id: _local_candidates(s, dialogue_blocks=dialogue_blocks,narrator_reports=narrator_reports) for s in visible}
     ids, roots, diagnostics, final = [], [], [], []
     # Validate all structure/anchors first, so malformed output cannot partially mutate the core.
     validated = []

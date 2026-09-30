@@ -246,7 +246,8 @@ def check_epistemic_candidates(core, query, semantic, *, max_depth=3):
             diagnostics.append(dict(candidate_id=key, reason='unresolved_speaker_or_semantics'))
             continue
         speaker = row['speaker_surface']
-        if path and speaker not in (path[0], path[-1]):
+        narrator_report = row.get('event_kind') == 'NARRATOR_MENTAL_REPORT'
+        if path and speaker not in (path[0], path[-1]) and not narrator_report:
             continue
         try:
             tree = parse_mental_proposition(row['utterance'], speaker, max_depth=max_depth)
@@ -255,14 +256,14 @@ def check_epistemic_candidates(core, query, semantic, *, max_depth=3):
             continue
         span = core.spans[content['source_span_id']]
         expression = core.claim(semantic.scope, ClaimKind.SYSTEM_INTERPRETATION,
-            dict(channel='PUBLIC_EXPRESSION', speaker=speaker, source_id=span.source_id,
+            dict(channel='SOURCE_NARRATOR_ATTRIBUTION' if narrator_report else 'PUBLIC_EXPRESSION', speaker=speaker, source_id=span.source_id,
                 original_quote=span.quote, source_span_id=span.id,
                 expressed_content=tree.as_dict() if isinstance(tree, MentalProposition) else tree,
-                semantics='REPORTED_EXPRESSION_NOT_ACTUAL_PRIVATE_STATE'))
+                semantics='SOURCE_REPORTED_ATTRIBUTION_NOT_SUBJECT_EXPRESSION_OR_PRIVATE_TRUTH' if narrator_report else 'REPORTED_EXPRESSION_NOT_ACTUAL_PRIVATE_STATE'))
         core.support(expression, key)
         core.interpret(expression)
         private = None
-        if isinstance(tree, MentalProposition) and tree.attitude == Attitude.BELIEF and tree.holder == speaker:
+        if not narrator_report and isinstance(tree, MentalProposition) and tree.attitude == Attitude.BELIEF and tree.holder == speaker:
             assumption = identity('unverified-sincerity', expression)
             scope = Scope(**dict(asdict(semantic.scope), actor=speaker,
                 assumptions=semantic.scope.assumptions + (assumption,)))

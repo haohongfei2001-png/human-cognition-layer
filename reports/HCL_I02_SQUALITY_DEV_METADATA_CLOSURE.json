@@ -1,0 +1,493 @@
+{
+  "schema": "hcl-i02-squality-dev-bounded-metadata-closure-v1",
+  "status": "DEFERRED_JURISDICTION_AND_QUESTION_RIGHTS_NO_QUALIFIED_CASE",
+  "dataset_commit": "dc08d4f574639d773bc64ef3ab3527043108fb4e",
+  "dataset_file_sha256": "e9cbb1daff74b70a6cd15641ba2f602a925761759200a17c9225aca90018a42b",
+  "dataset_split": "dev",
+  "source_count": 25,
+  "metadata": [
+    {
+      "row": 0,
+      "passage_id": "63833",
+      "title": [
+        "Jinx Ship to the Rescue"
+      ],
+      "authors": [
+        "Coppel, Alfred"
+      ],
+      "death_years": [
+        "2004"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "52164bf4832b417842ab0ffd5f8576093c73457cdde2567bd575914740ff91bb"
+    },
+    {
+      "row": 1,
+      "passage_id": "63392",
+      "title": [
+        "Doorway to Kal-Jmar"
+      ],
+      "authors": [
+        "Knight, Damon",
+        "Anderson, Murphy"
+      ],
+      "death_years": [
+        "2002",
+        "2015"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "2be339b754939294b37a9f0330122fce77b5f8f9040a4248a75724c71f0b2ad3"
+    },
+    {
+      "row": 2,
+      "passage_id": "61146",
+      "title": [
+        "Retief of the Red-Tape Mountain"
+      ],
+      "authors": [
+        "Laumer, Keith",
+        "Gaughan, Jack"
+      ],
+      "death_years": [
+        "1993",
+        "1985"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "b9e603efd7320453fda56e593b27129d1f2633ea8d3370f2092a0d343b0ba25c"
+    },
+    {
+      "row": 3,
+      "passage_id": "61434",
+      "title": [
+        "Mightiest Qorn"
+      ],
+      "authors": [
+        "Laumer, Keith",
+        "Gaughan, Jack"
+      ],
+      "death_years": [
+        "1993",
+        "1985"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "073d4694250b068cf56022965d9b5831789af01319d76746766092f06dc8d705"
+    },
+    {
+      "row": 4,
+      "passage_id": "63473",
+      "title": [
+        "Dust Unto Dust"
+      ],
+      "authors": [
+        "Hinckley, Lyman D.",
+        "Freas, Kelly"
+      ],
+      "death_years": [
+        "2005"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "34f57874a8079df36a96bec4e957fe11046fc4cfc460f8ae98f6a28da6f569f4"
+    },
+    {
+      "row": 5,
+      "passage_id": "61467",
+      "title": [
+        "Muck Man"
+      ],
+      "authors": [
+        "Dodge, Fremont",
+        "Gaughan, Jack"
+      ],
+      "death_years": [
+        "1985"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "c032f455d2e9132cd2866ae3115d0d117e1403c0786538299b67492a01952c5a"
+    },
+    {
+      "row": 6,
+      "passage_id": "61285",
+      "title": [
+        "The Desert and the Stars"
+      ],
+      "authors": [
+        "Laumer, Keith",
+        "Gaughan, Jack"
+      ],
+      "death_years": [
+        "1993",
+        "1985"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "6a10dd98112560bd93a04927032b7574c9a3d1d8fbed502b5714d5c8565e4199"
+    },
+    {
+      "row": 7,
+      "passage_id": "51650",
+      "title": [
+        "Innocent at Large"
+      ],
+      "authors": [
+        "Anderson, Poul",
+        "Anderson, Karen",
+        "Wood, Wallace"
+      ],
+      "death_years": [
+        "2001",
+        "2018",
+        "1981"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "81f7e0b7cf1f23905d5b73543344956e88176a8c1aacf1a118061216408ef59e"
+    },
+    {
+      "row": 8,
+      "passage_id": "63916",
+      "title": [
+        "The Conjurer of Venus"
+      ],
+      "authors": [
+        "Troy, Conan T.",
+        "Freas, Kelly"
+      ],
+      "death_years": [
+        "2005"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "c755f5f62e97842a773550c66525810a5ad6dd6b1f2f80c1340b7d2a8a5c2745"
+    },
+    {
+      "row": 9,
+      "passage_id": "51150",
+      "title": [
+        "Venus is a Man's World"
+      ],
+      "authors": [
+        "Tenn, William",
+        "Fawcette, Gene"
+      ],
+      "death_years": [
+        "2010",
+        "1988"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "36c3cd5fcdd11f192a73e5a602a8ea53b61c79f88417b2c4fba3473c11755586"
+    },
+    {
+      "row": 10,
+      "passage_id": "63862",
+      "title": [
+        "Stalemate in Space"
+      ],
+      "authors": [
+        "Harness, Charles L.",
+        "McWilliams, Al"
+      ],
+      "death_years": [
+        "2005",
+        "1993"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "bd72c83fe0d0a57b3813e8a28cebf2ad320bf9ab04e50c19396b74831bdf5045"
+    },
+    {
+      "row": 11,
+      "passage_id": "51351",
+      "title": [
+        "The Spicy Sound of Success"
+      ],
+      "authors": [
+        "Harmon, Jim",
+        "Francis, Dick"
+      ],
+      "death_years": [
+        "2010"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "58ebd7070314629d1b7444d2490c300d69297b0ca3abf9c9dc118771222d30d7"
+    },
+    {
+      "row": 12,
+      "passage_id": "51267",
+      "title": [
+        "End as a Hero"
+      ],
+      "authors": [
+        "Laumer, Keith",
+        "Schelling, George"
+      ],
+      "death_years": [
+        "1993"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "9b8cf8797406ce2540770a79aa638c76d4cad53f318e52d06bfe903b5f75162c"
+    },
+    {
+      "row": 13,
+      "passage_id": "63150",
+      "title": [
+        "The Soul Eaters"
+      ],
+      "authors": [
+        "Conover, William",
+        "Ingels, Graham"
+      ],
+      "death_years": [
+        "1991"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "c7f9fb26f1c69974e1334c5d899e9e178a9e27e741969e6fe7f966af39c339a2"
+    },
+    {
+      "row": 14,
+      "passage_id": "50818",
+      "title": [
+        "How to Make Friends"
+      ],
+      "authors": [
+        "Harmon, Jim",
+        "West"
+      ],
+      "death_years": [
+        "2010"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "ac98bcdde7274384ed5984c55a8eba70eafff939ca04552485bb4ec48041ba68"
+    },
+    {
+      "row": 15,
+      "passage_id": "51274",
+      "title": [
+        "Ambition"
+      ],
+      "authors": [
+        "Bade, William L.",
+        "Woromay, Lawrence"
+      ],
+      "death_years": [
+        "2005",
+        "2007"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "f053a0a4d0dea59906beaceca8291ebfbf9c2e4bb5a7e60dc0e1e87b09999646"
+    },
+    {
+      "row": 16,
+      "passage_id": "63041",
+      "title": [
+        "Morgue Ship"
+      ],
+      "authors": [
+        "Bradbury, Ray",
+        "Doolin, Joseph"
+      ],
+      "death_years": [
+        "2012",
+        "1967"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "75e833d067459e967d0f28205035fa3a0ed1aa4e1453e3e1806956e85b5aadf0"
+    },
+    {
+      "row": 17,
+      "passage_id": "51362",
+      "title": [
+        "Lex"
+      ],
+      "authors": [
+        "Haggert, W. T.",
+        "Wood, Wallace"
+      ],
+      "death_years": [
+        "1981"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "47564f5916110e32f069624aded133148c58fef57be7f72cabae1476b6726c1b"
+    },
+    {
+      "row": 18,
+      "passage_id": "63616",
+      "title": [
+        "Hagerty's Enzymes"
+      ],
+      "authors": [
+        "Haley, A. L.",
+        "Eberle, Joseph"
+      ],
+      "death_years": [
+        "2006"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "85d7e3c5c4dce2de47eb5d94904d5c8e18ad626e2b2e9ca06b06853b99ded62a"
+    },
+    {
+      "row": 19,
+      "passage_id": "51413",
+      "title": [
+        "The Ignoble Savages"
+      ],
+      "authors": [
+        "Smith, Evelyn E.",
+        "Dillon, Diane",
+        "Dillon, Leo"
+      ],
+      "death_years": [
+        "2000",
+        "2012"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "97e7dac4cd349793cbebd3915bf600c178d5df8c6e11e28b478ef33f44f94310"
+    },
+    {
+      "row": 20,
+      "passage_id": "49897",
+      "title": [
+        "The Gravity Business"
+      ],
+      "authors": [
+        "Gunn, James E.",
+        "Ashman, William"
+      ],
+      "death_years": [
+        "2020"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "bf1fde4fb6e3d98bfb1cbead1d429d4db8306a0fd72a5aaf67f16fd130063941"
+    },
+    {
+      "row": 21,
+      "passage_id": "51687",
+      "title": [
+        "The Spy in the Elevator"
+      ],
+      "authors": [
+        "Westlake, Donald E.",
+        "West"
+      ],
+      "death_years": [
+        "2008"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "7cea5a1ec5787f68e23a36fb5c633bf8960c75fae0666ca5c7cce3d224f7f343"
+    },
+    {
+      "row": 22,
+      "passage_id": "30029",
+      "title": [
+        "Lost in Translation"
+      ],
+      "authors": [
+        "Janifer, Laurence M.",
+        "Schoenherr, John"
+      ],
+      "death_years": [
+        "2002",
+        "2010"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "4ac24ee4218e8d5addb093d6aef17ef601b339dd1628ab3797769fdfecb6f27a"
+    },
+    {
+      "row": 23,
+      "passage_id": "63401",
+      "title": [
+        "The Happy Castaway"
+      ],
+      "authors": [
+        "McDowell, Robert Emmett",
+        "Anderson, Murphy"
+      ],
+      "death_years": [
+        "1975",
+        "2015"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "ce0da2222a52fed2dcc7164b0817de34fe5bb79239284ea1d376ab6e78f7d9bc"
+    },
+    {
+      "row": 24,
+      "passage_id": "52855",
+      "title": [
+        "The Star-Sent Knaves"
+      ],
+      "authors": [
+        "Laumer, Keith",
+        "Gaughan, Jack"
+      ],
+      "death_years": [
+        "1993",
+        "1985"
+      ],
+      "rights": [
+        "Public domain in the USA."
+      ],
+      "rdf_sha256": "cebd105f4e53738ea131e9e91464554111a70e277cfa59b336dfa5c0033b3c0f"
+    }
+  ],
+  "creator_role_note": "RDF name/death arrays include authors and illustrators; do not infer a writing author death by combining them.",
+  "publisher_readme_url": "https://github.com/nyu-mll/SQuALITY/blob/dc08d4f574639d773bc64ef3ab3527043108fb4e/README.md",
+  "publisher_readme_sha256": "55c2378c1c182dece34431f9f0fcf6ab25a5e00fe558b12c608fb43d8313ec8e",
+  "findings": [
+    "Publisher summaries license is separate from story rights; question-specific license not independently established.",
+    "Public-domain-in-USA metadata is not an affirmative permission receipt for current cross-region model processing.",
+    "No author/illustrator exclusion, permission assumption, body trimming or H outcome selection applied.",
+    "Metadata screen ends here: no further rows/source swaps/paid calls authorized by this receipt."
+  ],
+  "source_question_or_reference_text_displayed": 0,
+  "native_labels_read": 0,
+  "source_selected": false,
+  "confirmation_qualified": false,
+  "provider_input_allowed": false,
+  "h_preparation_executed": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
