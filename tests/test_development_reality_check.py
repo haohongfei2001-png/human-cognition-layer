@@ -78,6 +78,7 @@ class DevelopmentRealityChecks(unittest.TestCase):
             baseline=git('rev-parse','HEAD').decode().strip()
             def audit(inventory,source):
                 self.assertEqual({p.name for p in Path(inventory).iterdir()},{'.git'})
+                self.assertEqual(subprocess.check_output(['git','-C',str(inventory),'config','core.abbrev']).decode().strip(),'40')
                 self.assertEqual(subprocess.check_output(['git','-C',str(inventory),'rev-parse','HEAD']).decode().strip(),baseline)
                 return {'matches':[],'status':'REACHABLE_HISTORY_NO_TEXT_MATCH'}
             case={'prior_history_baseline':baseline,'cases':[{'source':'ordinary authored source fixture'}]}

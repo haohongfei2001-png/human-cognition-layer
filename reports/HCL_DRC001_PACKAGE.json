@@ -14,11 +14,11 @@
     "reports/HCL_DRC001_SOCIALIQA_LICENSE.txt": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
     "reports/HCL_DRC001_SUBSET.json": "117ae5d374bb49ddc3fca98b8c0be3fd82a64f259d61cd03f48c07b9b0129cd6",
     "scripts/development_confirmation_firewall.py": "640f5ef64d54e578229eec76afeee42570d50210ba17b3401755396ea40d127f",
-    "scripts/development_reality_check.py": "cbf7cedc8cdea7d373689ae74235e908270973a50fdd264b837df8390082ea5b",
+    "scripts/development_reality_check.py": "0bbabae5e3d43ea824a4195a0c1808750f18475e7da3078987514099587fe8e5",
     "scripts/i02_exposure_history.py": "2dd4d840d4d76450a07713e163114f15c2f35960fb5a355ec798771fbcb4bbbf",
     "scripts/i02_exposure_snapshot.py": "d71deeb1c48c32496f6244dc78297429ad71fc3dba4044ebafa65e820ab5485c",
     "scripts/serious_eval_contract.py": "d415af270dfff20139130768cdf462f9eb0d8080e3ed152f2e3adb9f18ba1a9f",
-    "tests/test_development_reality_check.py": "0357afb14f840ff7bc1311bfe14287294931ce1e1f6600a87e28823bd79bddd2"
+    "tests/test_development_reality_check.py": "a1e56197dad2c88547c18f4d335ae69580581762f8ae64ded984d3fb0df978cf"
   },
   "historical_budget_transfer": false,
   "independent_reviewer_required": false,
