@@ -1,0 +1,12 @@
+{
+  "schema": "hcl-i02-protected-holder-preflight-v1",
+  "package_sha256": "420d224b9ca450f74105ce9321fa4664460a1b254ad3435615836066c6cd9266",
+  "request_sha256": "d8f13ebfd7021fc883a1dd96f0470373b811b1517a7f3ff28d4d086a8fd138a4",
+  "input_token_bound": 75286,
+  "peak_reservation_usd": 0.13181784,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "source_or_quote_text_displayed": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "scope": "COST_BOUND_ONLY_USING_PRIOR_VERIFIED_MAIN_METADATA; LIVE_CURRENT_HEAD_SCREEN_REQUIRED_BEFORE_TRANSPORT"
+}

@@ -19,6 +19,18 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [one-call protected source-holder audit freeze](docs/HCL_I02_GILMAN_SOURCE_HOLDER_AUDIT.md)
+is ready for exact-head/main CI before execution. The prior main source screen
+found no overlaps across 2,774 reachable text blobs / 1,337 snapshot files while
+skipping sealed objects. A separately frozen **source-only** automated review
+uses existing DeepSeek, high thinking, max 8,192 output tokens, **1 call / 0 retries /
+USD 0.18 cap**, worst peak reservation USD 0.13181784; no old budget transfer,
+H/C/P/G comparison or confirmation qualification. Raw source/quotes stay in a
+separate role-withheld artifact; only structural/provisional/usage/cost metadata
+crosses to the implementer. Judge independence, semantic truth and difficulty
+remain unverified. No call has executed at this freeze. Continue I02; no owner
+permission request is needed under the current normal-cost autonomy policy.
+
 The [protected original Gilman narrative candidate](docs/HCL_I02_GILMAN_PROTECTED_SOURCE_SCREEN.md)
 pins the complete 31,497-character original English body and a new ordinary
 question, without NarrativeQA questions/gold or implementer-visible story text.
