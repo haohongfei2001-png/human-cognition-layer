@@ -1,4 +1,4 @@
-import copy,json,os,tempfile,unittest
+import copy,json,os,tempfile,unittest,subprocess
 from pathlib import Path
 from unittest.mock import patch
 from scripts import development_reality_check as drc
@@ -66,6 +66,25 @@ class DevelopmentRealityChecks(unittest.TestCase):
         old=json.loads(Path('.github/HCL_I02_CLIFFORD_CPG_GRANT.json').read_text())
         self.assertEqual(old['status'],'CLOSED');self.assertEqual(old['maximum_calls'],0)
         self.assertEqual(drc.runtime_digest(),'aa7fc08c1937ffef7eeb4dfa762c1f0e06eeb2bd414dcea71cde582b7b43e0c9')
+
+    def test_history_inventory_does_not_materialize_checkout_files(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo=Path(tmp)/'source';repo.mkdir()
+            def git(*args):
+                return subprocess.check_output(['git','-C',str(repo),*args],stderr=subprocess.DEVNULL)
+            git('init');(repo/'ordinary-public-file.txt').write_text('a harmless public fixture')
+            git('add','ordinary-public-file.txt')
+            git('-c','user.name=HCL Fixture','-c','user.email=fixture@example.invalid','commit','-m','fixture')
+            baseline=git('rev-parse','HEAD').decode().strip()
+            def audit(inventory,source):
+                self.assertEqual({p.name for p in Path(inventory).iterdir()},{'.git'})
+                self.assertEqual(subprocess.check_output(['git','-C',str(inventory),'config','core.abbrev']).decode().strip(),'40')
+                self.assertEqual(subprocess.check_output(['git','-C',str(inventory),'rev-parse','HEAD']).decode().strip(),baseline)
+                return {'matches':[],'status':'REACHABLE_HISTORY_NO_TEXT_MATCH'}
+            case={'prior_history_baseline':baseline,'cases':[{'source':'ordinary authored source fixture'}]}
+            with patch.object(drc,'load_cases',return_value=case),patch('scripts.i02_exposure_history.audit_history',side_effect=audit):
+                result=drc.history_check(repo)
+                self.assertEqual(result['matches'],[])
 
     def test_foreign_model_gold_source_or_message_drift_refused(self):
         p=drc.build_package();self.assertFalse(p['independent_reviewer_required'])
