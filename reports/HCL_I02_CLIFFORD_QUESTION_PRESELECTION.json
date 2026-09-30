@@ -1,0 +1,11 @@
+{
+  "schema": "hcl-i02-clifford-question-preselection-v1",
+  "source": "William Kingdon Clifford, The Ethics of Belief, complete essay in Gutenberg 50189",
+  "ordinary_question": "Using the complete essay as your source, reconstruct and critically assess Clifford's account of when belief is justified and blameworthy. Explain how evidence, sincere conviction, outcomes, testimony, and inference beyond experience are related; distinguish examples and conditional alternatives from facts about actual people. Give one defensible objection and reply, making clear which premises are Clifford's and which are your own. Do not add biographical or world facts.",
+  "question_origin": "IMPLEMENTER_AUTHORED_BEFORE_COMPLETE_TARGET_READ_DEVELOPMENT_ONLY",
+  "question_sha256": "1fbd10ba151d92ba265cbd86c8e708e455f9fe53379a1e02efe8969e032ff41c",
+  "selection_basis": "FIXED_I01_ABSTRACT_CONCEPT_PHILOSOPHY_FAMILY_NOT_H_OUTCOMES",
+  "prior_exposure": "bounded search snippets/catalog and first different essay only; author now development-exposed",
+  "baseline_main": "0a7fabc39a71f829941be54343c340e8bcd74ad9",
+  "provider_calls": 0
+}

@@ -452,3 +452,22 @@ preserves historical runtimes/receipts. Zero calls/spend/grants; Gregory remains
 with no checked treatment. Unique next task remains I02 protected source/task,
 blinded review and strong comparator qualification before frozen comparison.
 
+
+## I02 complete-essay semantic calibration
+
+The [complete Clifford philosophical development calibration](docs/HCL_I02_CLIFFORD_COMPLETE_ESSAY_CALIBRATION.md)
+freezes a complete56,817-character original essay and a question fixed before the
+complete target read, with9 source-first obligations permitting multiple grounded
+critiques. Equal C/P/Gv9 complete inputs, native high thinking and generous32,768-token
+outputs are preflighted;19 provider-free checks pass. Current certified H preserves
+the source but has0 candidates/no specialized treatment, so H/H-new calls remain0.
+One new existing-provider grant allows at most4 C/P/G calls,0 retries, USD1.30 cap
+(peak worst reservation1.25804184), with no historical transfer. No call/outcome yet.
+This is genuine comparator semantic calibration, not another source-holder interface
+retest. Implementer source/task/review is development only;0 confirmation qualified.
+v13 excludes the author/system/exact fingerprints; Gregory rights hold and all
+historical dispositions stay fixed. After exact-head/main CI: dispatch once, preserve
+raw receipt and source-first close/grant0/trigger deletion; then continue I02 protected
+source/task, independent review and competent comparator qualification. No H expansion,
+leaderboard or LongMemEval access.
+

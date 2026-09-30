@@ -1,0 +1,9 @@
+{
+  "schema": "hcl-i02-clifford-once-grant-v1",
+  "status": "READY",
+  "package_sha256": "eed44a1a3daa3c29d9f4f9ca2a1c66cab5772dab61da9c94c68538864f9cdee7",
+  "remaining_usd": 1.3,
+  "maximum_calls": 4,
+  "retries": 0,
+  "historical_budget_transfer": false
+}

@@ -1,0 +1,38 @@
+name: HCL I02 Clifford Complete Essay Source and Strong Comparator Preflight
+on:
+  pull_request:
+    paths: ['hcl/**', 'scripts/i02_clifford*', 'scripts/i02_source_qualification_v13.py', 'scripts/run_i02_clifford*', 'scripts/serious_eval_full_source_arms_v9.py', 'reports/HCL_I02_CLIFFORD*', 'tests/test_i02_clifford*', '.github/**clifford*', '.github/workflows/hcl-i02-clifford*', '.github/frozen/hcl-i02-clifford*']
+  push:
+    branches: [main]
+    paths: ['hcl/**', 'scripts/i02_clifford*', 'scripts/i02_source_qualification_v13.py', 'scripts/run_i02_clifford*', 'scripts/serious_eval_full_source_arms_v9.py', 'reports/HCL_I02_CLIFFORD*', 'tests/test_i02_clifford*', '.github/**clifford*', '.github/workflows/hcl-i02-clifford*', '.github/frozen/hcl-i02-clifford*']
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download pinned public edition
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from scripts.i02_clifford_source import download_material
+          raw,rdf=download_material()
+          Path('/tmp/clifford.txt').write_bytes(raw)
+          Path('/tmp/clifford.rdf').write_bytes(rdf)
+          PY
+      - name: Source, fairness, unknown inference and no-repeat correctness
+        env:
+          HCL_CLIFFORD_RAW: /tmp/clifford.txt
+          HCL_CLIFFORD_RDF: /tmp/clifford.rdf
+        run: python -m unittest tests.test_i02_clifford_cpg tests.test_i02_full_source_arms_v9 tests.test_v1_i02_semantic_score
+      - run: python -m scripts.run_i02_clifford_cpg_once --preflight --raw /tmp/clifford.txt --rdf /tmp/clifford.rdf --output i02-clifford-preflight.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hcl-i02-clifford-provider-free-${{ github.run_id }}
+          path: i02-clifford-preflight.json

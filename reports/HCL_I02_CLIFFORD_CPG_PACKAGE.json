@@ -1,0 +1,162 @@
+{
+  "authorization": "OWNER_DEFAULT_EXISTING_PROVIDER_NORMAL_BOUNDED_COST",
+  "budget_cap_usd": 1.3,
+  "call_specs": {
+    "C": {
+      "max_tokens": 32768,
+      "model": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "reasoning_effort": "high",
+      "response_format": {
+        "type": "json_object"
+      },
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "G_final": {
+      "max_tokens": 32768,
+      "model": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "reasoning_effort": "high",
+      "response_format": {
+        "type": "json_object"
+      },
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "G_map": {
+      "max_tokens": 32768,
+      "model": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "reasoning_effort": "high",
+      "response_format": {
+        "type": "json_object"
+      },
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "P": {
+      "max_tokens": 32768,
+      "model": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "reasoning_effort": "high",
+      "response_format": {
+        "type": "json_object"
+      },
+      "thinking": {
+        "type": "enabled"
+      }
+    }
+  },
+  "comparison_rule": "SOURCE_FIRST_ACCEPTABLE_REASONING_MULTIPLE_CRITIQUES_NO_NORMATIVE_AGREEMENT_REQUIRED",
+  "confirmation_items_inspected": 0,
+  "execution_files": {
+    ".github/frozen/hcl-i02-clifford-cpg-once.yml": "695b22ad2c265a1e25328e22b43a5e6deb688ff396d809586015c76e6dee387c",
+    ".github/workflows/hcl-i02-acl-ethics-cpg-v8-once.yml": "452d74bbcba8bd76af8d7a0b73c4deef1a9ed497fa5fc6f03cc3057c9746918f",
+    ".github/workflows/hcl-i02-clifford-provider-free.yml": "ce0b6ccf7432bfa7d1af18d4ef295c4b2af70eb98f0a77ef97cf4843e318c4e1",
+    ".github/workflows/hcl-i02-obp-metaethics-cpg-once.yml": "667564ac218a2ef4c965776ae13276b92ab221ca95f53041d92c0087775480ad",
+    ".github/workflows/hcl-i02-obp-metaethics-cpg-provider-free.yml": "582736c0ac6eb7fe38ad26196161baeca0c6c6ee22246efc7688080e40a75aed",
+    "reports/HCL_I01_EVALUATION_FREEZE.json": "d744929084509d2f6363bcff9c89dc52a5509925a6229c462be20c0bb00d198e",
+    "reports/HCL_I02_ACL_ETHICS_DEVELOPMENT_SOURCE.json": "09a501f1ecf50f31e96659b6fa22637d14ce2ce3e7cf12b400820c9574e45a50",
+    "reports/HCL_I02_ACL_ETHICS_EXPOSURE_OVERLAY.json": "d1a81891ddbcad8e16f4d3fe6f8e2e1992d1a282076cf4967bc046edccc310ec",
+    "reports/HCL_I02_ACL_ETHICS_SOURCE_FIRST_OBLIGATIONS.json": "e3fba8d5688a4408aeca389e47fcdc1b54957c8aac371e46e58288ca16063b8d",
+    "reports/HCL_I02_CLIFFORD_DEVELOPMENT_SOURCE.json": "ba69220352cff7c2ee08ae36f1c64069f2280d352f15a727df474da1294b87ef",
+    "reports/HCL_I02_CLIFFORD_QUESTION_PRESELECTION.json": "ae794a0053361e24ae26fb20e3516ed72e84fa1342fe854286aa2533ac3f093c",
+    "reports/HCL_I02_CLIFFORD_SOURCE_FIRST_OBLIGATIONS.json": "b8a2b25ee1e669784c266b8077cb65b36d2a737050e79cc7fa766f3cacf2bb66",
+    "reports/HCL_I02_EXPOSURE_LINEAGE.json": "fe4fbb7fbed0ef6bf9e2eab9a9490b58eae6ae866f956f0d356d7b841a7d7900",
+    "reports/HCL_I02_OBP_METAETHICS_DEVELOPMENT_SOURCE.json": "10d12d6cb623da330321b6dc897f8c38919fbd05570bf9f5f887085914504950",
+    "reports/HCL_I02_OBP_METAETHICS_SOURCE_FIRST_OBLIGATIONS.json": "556553cc3065245283c7e3f5fc07adac60176d643e7deffebfff08d0e1b8ecc3",
+    "reports/HCL_I02_RUNTIME_AMENDMENT.json": "c03aae79984556a20c2f5239329f059d80b439b003b3e444a5a847d2fb1bcefe",
+    "reports/HCL_I02_RUNTIME_AMENDMENT_V10.json": "e483432ee1e28194934d7215ab3dc29e29d985009b87da6ea62819fef8c12409",
+    "reports/HCL_I02_RUNTIME_AMENDMENT_V11.json": "2e32feb199b14504b9f2c9a8841727a3bd427ea6cb1727a41a3f93dbed9643f8",
+    "reports/HCL_I02_RUNTIME_AMENDMENT_V2.json": "4afabbce214e40f1fe81747ce6843a87f98a45f47042f8be81a8f447b482aee2",
+    "reports/HCL_I02_RUNTIME_AMENDMENT_V3.json": "f767e4e2c40c998108742f5df0877ac81e6a4350fba64cb5db392210ee28412c",
+    "reports/HCL_I02_RUNTIME_AMENDMENT_V4.json": "e1bb08fe63cf4f52629a0aee17eaf692e0f59b943910b962ae6eb5cfa3b3c230",
+    "reports/HCL_I02_RUNTIME_AMENDMENT_V5.json": "22b2134e4daa7e80d3e5e258e33ee7438ff7afbac9b068060aad7bc75e59094b",
+    "reports/HCL_I02_RUNTIME_AMENDMENT_V6.json": "0262c058dee61a5a434bfff304bc3905d9a48f01ec8133b6ed7cd2884c718433",
+    "reports/HCL_I02_RUNTIME_AMENDMENT_V7.json": "b7fbb8e348bd57207ebb55868c683b4bc17de0100159149b8ea9758bc82c0934",
+    "reports/HCL_I02_RUNTIME_AMENDMENT_V8.json": "66b87a04894a5e0127382aaf0432d06d3973525d4cafd5de09ff9fef629ca82f",
+    "reports/HCL_I02_RUNTIME_AMENDMENT_V9.json": "eefb3dea24b387cc52581f08c9064fa8c85b3a45b84784054d80968626a61ab8",
+    "reports/HCL_I02_SCREENED_SYSTEMS_V3.json": "1bc4ef5740e6c77f97a7abf0fc6ad00d743297d0d23f665cde5f033eecd0d247",
+    "reports/HCL_I02_SEMANTIC_SCORER_FREEZE.json": "61fdb600c2047a090020e59e12c82b0f28472ee6f9483177f1939c2bbac7a3d6",
+    "reports/HCL_I02_SOURCE_FINGERPRINTS_V4.json": "96f2b6b1154c436ef3d4e3e914adbd5119e6daf179322dcdd63423315d4daf07",
+    "scripts/i02_acl_ethics_development_preflight.py": "a66e7fd4c31b4a815d3fa607e1cbac5dba426e3d18c3e6cabd3c6ba259909fdd",
+    "scripts/i02_acl_ethics_exposure_overlay.py": "608b3a2234e2666ad38456d7871a2223ead138cb53a0912f2d7caeb4d02d9148",
+    "scripts/i02_clifford_source.py": "952ae87181bbae06e304ab4da25a22cf0edda476d8f4916b1375eea4469f9c47",
+    "scripts/i02_obp_metaethics_preflight.py": "1ab67208c6b433ede874c2d4688e912016cbc24eecb45577093b97774747cf2d",
+    "scripts/i02_obp_metaethics_source.py": "f83fa25455b4ae774f645fd1d9fd223d6b3891ec40046f5668f7a19e0e69e763",
+    "scripts/i02_runtime_amendment_v10.py": "808f419ddec996db68b6ad319c28d269f842f6b41b4faf1d746b00de5c8c2b46",
+    "scripts/i02_runtime_amendment_v11.py": "e282064823c40bea4685dabc6bdd3892757733c61c501078319d30baa6799c48",
+    "scripts/i02_runtime_amendment_v3.py": "c4954233f8c6b2b6ee49910b4f8213a91071ed96348c114d795ff53c9da2ba63",
+    "scripts/i02_runtime_amendment_v4.py": "6d488a20c730d424aa125a0dc4bfb1df02125985b98c1ac5611d9b6dad5f132a",
+    "scripts/i02_runtime_amendment_v5.py": "660fefbc01bcc01e86a9ffb8c7fb140859e6de06800bf3e56e30a1528b487937",
+    "scripts/i02_runtime_amendment_v6.py": "7acbcd5be7aebe622e0cd1207cbe96f17605f0675157ed8c070077143fc7d3da",
+    "scripts/i02_runtime_amendment_v7.py": "ef8587cef93c2c6f4096ce8a7a1b8a2d3aa3fb408d23437ab2f601c213641fec",
+    "scripts/i02_runtime_amendment_v8.py": "5bfb7f4d23f1f0d21abd7e179c4e63735ef1288e8b005275727419ca59fa3e05",
+    "scripts/i02_runtime_amendment_v9.py": "5df66301b339d82b4e9486579cff21a4e8c3a90375c0047ef290bbd924a32fee",
+    "scripts/i02_source_lineage.py": "69c1baba0a27ddf494f11b9eeee1270f3bba1fd110ed9c5babe5340921f39e90",
+    "scripts/i02_source_qualification_v11.py": "6635748a3d7a1e12d676939c65e43fef8bf621ad7af9169c5652aa87b9e7dc08",
+    "scripts/i02_source_qualification_v12.py": "d4de3649a34b5f092b00fa44db3bd7d507cb9cb58a0221470d1617a839ba9424",
+    "scripts/i02_source_qualification_v13.py": "fa9afc62a740414fa0b862e982fc2d2f79364c6c9a867e1d35810328eeca48bb",
+    "scripts/i02_source_qualification_v3.py": "b12dea4e9bdbb6904923b4a5b9d8e73f2ec1fd3e3ca2edec19e8db1a908a46e3",
+    "scripts/i02_source_qualification_v4.py": "0f0cfc25416ceef12feba5dfc19685d5648b67029062045d55b6aec997da77ef",
+    "scripts/i02_source_qualification_v9.py": "9af8abfbdfe388c948a3bbebd302d31d925da708ba601936c8c97fade07c270b",
+    "scripts/run_i02_acl_ethics_cpg_v8_once.py": "b58674bbd3f7d9c0b2675bfa8bfb938a597a8cde0e4f9528cf5f1915610bf9f8",
+    "scripts/run_i02_clifford_cpg_once.py": "0655c176c6527b42c8773fb844cbfb289ff715fbeeeaa0a3389551a5978f402e",
+    "scripts/run_i02_comparator_calibration_once.py": "c3676942814eefd02bdee0270390bc986ca86491eab1f911e622316bd681cdf8",
+    "scripts/run_i02_obp_metaethics_cpg_once.py": "23f2af688e4c8c5c78b2035a649b18f3ba1a2c569c617664820d2ff5b069d084",
+    "scripts/serious_eval_arms.py": "a94cb6d2af171c8b4efc2596b2b27df914d6cc49695dd1c1979948dded31868c",
+    "scripts/serious_eval_arms_v2.py": "d354fcc1408d42fb5fb1ab70abc34579aba93b20033af888864d4bf78e29a4dd",
+    "scripts/serious_eval_arms_v3.py": "0984ae6121234645f2552bcf181d993766d10eb76e7b49ccbffc2454cdc0e54f",
+    "scripts/serious_eval_arms_v4.py": "3a4bbf6061967205067582b53f5dde6197326d662185ddb90a4447b5353dc144",
+    "scripts/serious_eval_arms_v8.py": "054bd98c0e0890a4a0e88782a57c2a84c8205bb626d5fdd47ba202d3cdb25911",
+    "scripts/serious_eval_contract.py": "d415af270dfff20139130768cdf462f9eb0d8080e3ed152f2e3adb9f18ba1a9f",
+    "scripts/serious_eval_full_source_arms_v9.py": "24eb1b4af01cd980a5ac10d8c52e9f4b4a8e2ecc80a1cf43a89e9297bc6432f9",
+    "scripts/serious_eval_generic_workspace_v5.py": "e6719bb57cd4738bb6af578cc38aaeee31579b99933ebc8691ef08fbe70c87d6",
+    "scripts/serious_eval_generic_workspace_v6.py": "4825cf7935611976604e4a4aea84dc62d3b5c4dd3f3ee1b0010a48c7703430f8",
+    "scripts/serious_eval_generic_workspace_v7.py": "68333b9cdc6ed2de64a7013da4748fd6ea072173e94fde0684378a985e4a96e2",
+    "scripts/serious_eval_semantic_score.py": "3e47b6f836151e41ec07f1afa98b9304c879db2003f7d37d379e21414c481853",
+    "tests/test_i02_clifford_cpg.py": "18123aed56b4bd89f3182f37080e64a0a23663d3d37983941a07d798f023cd6b",
+    "tests/test_i02_obp_metaethics.py": "6ddaea8d3f9ba684094af7d3b0ce4344317869eeefd6e14a36c672c6e3d17183",
+    "tests/test_i02_obp_metaethics_cpg.py": "f915b5ed81800f843c81c48f3253ee25b0fc4c0328911801a6c0255363587eb8"
+  },
+  "execution_sha256": "db3d8128c88b78c38546e03cdb08f5a3add94709fd86c30a0765427c356eee57",
+  "h_arm_calls": 0,
+  "hcl_runtime_sha256": "c7034fdc97d606867bf6688cc005837033b357155cd649ed187f41a32509579b",
+  "historical_budget_transfer": false,
+  "hnew_arm_calls": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "maximum_map_bytes": 24000,
+  "maximum_provider_calls": 4,
+  "model": "deepseek-v4-pro",
+  "model_family": "DeepSeek-V4-Pro-0813",
+  "obligations_file_sha256": "b8a2b25ee1e669784c266b8077cb65b36d2a737050e79cc7fa766f3cacf2bb66",
+  "peak_rates_usd_per_million": {
+    "cache_hit": 0.044,
+    "input": 1.32,
+    "output": 3.96
+  },
+  "phases": [
+    "C",
+    "P",
+    "G_map",
+    "G_final"
+  ],
+  "price_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "price_verified_date": "2026-09-30",
+  "provider": "deepseek",
+  "provider_endpoint": "https://api.deepseek.com",
+  "purpose": "ONE_COMPLETE_ESSAY_STRONG_CPG_SEMANTIC_DEVELOPMENT_CALIBRATION_NOT_INTERFACE_RETEST",
+  "question_origin": "IMPLEMENTER_AUTHORED_BEFORE_COMPLETE_TARGET_READ_DEVELOPMENT_ONLY",
+  "question_sha256": "1fbd10ba151d92ba265cbd86c8e708e455f9fe53379a1e02efe8969e032ff41c",
+  "retries": 0,
+  "schema": "hcl-i02-clifford-cpg-package-v1",
+  "semantic_review": "IMPLEMENTER_DEVELOPMENT_ONLY_INDEPENDENT_REVIEW_UNQUALIFIED",
+  "service_tier": "provider_default_no_tier_parameter",
+  "source_distribution": "COMPLETE_CLIFFORD_ORIGINAL_ESSAY_DEVELOPMENT_EXPOSED",
+  "source_file_sha256": "ba69220352cff7c2ee08ae36f1c64069f2280d352f15a727df474da1294b87ef",
+  "source_sha256": "ff0bdcb7dfc4bdcde98b37108cd33b40583adef83c8ff6eaee5f8d4025e65eaa"
+}
