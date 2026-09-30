@@ -1,0 +1,25 @@
+name: HCL I02 V3 Long Interface Provider-Free
+on:
+  pull_request:
+    paths: ['scripts/i02_source_holder_v3_calibration_fixture.py', 'scripts/run_i02_source_holder_v3_calibration_once.py', 'tests/test_i02_source_holder_v3_calibration.py', 'reports/HCL_I02_SOURCE_HOLDER_V3_CALIBRATION*', '.github/workflows/hcl-i02-source-holder-v3-calibration*']
+  push:
+    branches: [main]
+    paths: ['scripts/i02_source_holder_v3_calibration_fixture.py', 'scripts/run_i02_source_holder_v3_calibration_once.py', 'tests/test_i02_source_holder_v3_calibration.py', 'reports/HCL_I02_SOURCE_HOLDER_V3_CALIBRATION*', '.github/workflows/hcl-i02-source-holder-v3-calibration*']
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest tests.test_i02_source_holder_v3_calibration tests.test_i02_source_holder_line_index_v3
+      - run: python -m scripts.run_i02_source_holder_v3_calibration_once --preflight --output v3-long-interface-preflight.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hcl-i02-v3-long-interface-preflight-${{ github.run_id }}
+          path: v3-long-interface-preflight.json

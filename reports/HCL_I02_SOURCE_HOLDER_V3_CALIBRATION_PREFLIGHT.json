@@ -1,0 +1,20 @@
+{
+  "complete_source_reconstruction_exact": true,
+  "confirmation_qualified": false,
+  "fixture_gold_in_provider_input": false,
+  "independent_source": false,
+  "input_token_bound": 228858,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "package_sha256": "6da7adc134add7da1633d4b3a1b395dc59aaf1c90ecc98bc68576170d0984331",
+  "peak_reservation_usd": 0.3669732,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "question_sha256": "8c88c1c0eef64b1520adc47b5d91cbf36d6a9fe0e9b03771cde8d2874ef4d4e9",
+  "request_sha256": "1107379a10d348b4e48490490cfbc8dad6959f8ec7c9cbf2c24f61499526e8bd",
+  "schema": "hcl-i02-v3-long-interface-preflight-v1",
+  "source_characters": 81243,
+  "source_lines": 804,
+  "source_origin": "HCL_AUTHORED_SYNTHETIC_TRANSPORT_FIXTURE",
+  "source_sha256": "db55b8994da235e1c1c3d825444f9aa860887615f950f1f665640f58da40abc2",
+  "story_time_actor_semantics_qualified": false
+}

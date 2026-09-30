@@ -390,6 +390,16 @@ No H entry, runtime repair, provider input or paid call is allowed by this packa
 Even a clean history receipt only makes source-first holder review ready; confirmation
 qualification, task difficulty and model competence remain unresolved. Zero calls/spend.
 
+The [v3 long-input interface calibration freeze](docs/HCL_I02_SOURCE_HOLDER_V3_LONG_CALIBRATION.md)
+uses a **new authored 81,243-character / 804-line fixture**, complete ordinary
+question/input and native high thinking with line references. Expected literal
+anchors remain outside model input. **1 call / 0 retries / new USD 0.38 cap**,
+16,384 output tokens, conservative peak reservation USD 0.36697320; no ceiling
+escalation, old-source reopening or historical budget transfer. 0 calls at freeze.
+Thirty provider-free tests pass. After exact-head/main CI execute once and close;
+any result is interface-only, never independent source, literary semantics,
+old-source failure repair, comparator competence or H efficacy proof.
+
 The [complete James source-audit closure](reports/HCL_I02_JAMES_HOLDER_CLOSURE.md)
 is **INCONCLUSIVE — incomplete output at 16,384 tokens**, run 36704349775:
 **1 call / 0 retries**, usage/clock estimate **USD 0.04721376**, peak rated
