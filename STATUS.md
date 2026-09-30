@@ -19,6 +19,20 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [complete Gaskell typed source/task audit freeze](docs/HCL_I02_GASKELL_TYPED_SOURCE_AUDIT.md)
+pins **217,526 characters / four complete parts**, a new ordinary development
+question and typed v4 review. Frontmatter inspection exposed three narrative words;
+whole-author exclusion applies, never unseen confirmation. v11 also excludes a
+Wharton publisher-synopsis preview. The actual H ordinary-entry refusal at the
+48,000-character boundary must be retained, not fixed by shortening the source.
+Existing DeepSeek/high/16,384 ceiling: **1 call / 0 retries / new USD1.10 hard cap**,
+conservative reservation USD1.04967192; no old-budget transfer. 39 provider-free
+checks pass; cloud full-history, exact-head/main and cap gates precede any call.
+0 calls/spend at freeze. Raw source/review remain role-withheld; automated PASS
+is preliminary, not independent semantics/comparator/H efficacy evidence.
+Unique next task: execute this distinct frozen source-only typed review once
+and close; then continue I02 independent source/comparator qualification.
+
 The [v3 native long-input interface closure](reports/HCL_I02_SOURCE_HOLDER_V3_CALIBRATION_CLOSURE.md)
 is **INCONCLUSIVE_INTERFACE_CONTRACT_FAILURE**, run 36708265295 on main
 `881628ff37411e934e87409acaa776bb419b9845`: complete JSON/finish stop and literal
