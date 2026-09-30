@@ -1,52 +1,65 @@
 {
-  "schema": "hcl-development-benchmark-exposure-register-v1",
-  "purpose": "Development material must never enter final sealed confirmation",
   "entries": [
     {
       "dataset_id": "allenai/SimpleToM",
-      "writing_system_id": "allenai-simpletom-story-qa",
+      "first_exposure": "2026-10-01 DRC001 source/card screening; web viewer displayed examples; all accessed subsets excluded from final confirmation",
+      "license": "ODC-BY-1.0",
+      "publisher_url": "https://huggingface.co/datasets/allenai/SimpleToM",
       "status": [
         "DEVELOPMENT_EXPOSED",
         "CONSUMED_FOR_FINAL_CONFIRMATION"
       ],
-      "first_exposure": "2026-10-01 DRC001 source/card screening; web viewer displayed examples; all accessed subsets excluded from final confirmation",
-      "publisher_url": "https://huggingface.co/datasets/allenai/SimpleToM",
-      "license": "ODC-BY-1.0"
+      "writing_system_id": "allenai-simpletom-story-qa"
     },
     {
       "dataset_id": "SocialIQA",
-      "writing_system_id": "socialiqa-crowdsourced-social-interaction-qa",
+      "first_exposure": "2026-10-01 DRC001 source/card screening and pinned author dev release; all accessed dataset/source system excluded from final confirmation",
+      "license": "CC-BY-4.0",
+      "publisher_url": "https://maartensap.com/social-iqa/",
       "status": [
         "DEVELOPMENT_EXPOSED",
         "CONSUMED_FOR_FINAL_CONFIRMATION"
       ],
-      "first_exposure": "2026-10-01 DRC001 source/card screening and pinned author dev release; all accessed dataset/source system excluded from final confirmation",
-      "publisher_url": "https://maartensap.com/social-iqa/",
-      "license": "CC-BY-4.0"
+      "writing_system_id": "socialiqa-crowdsourced-social-interaction-qa"
+    },
+    {
+      "batch": "DRC002",
+      "dataset_id": "timothyshen/narrative-bench",
+      "exposure_utc": "2026-09-30T21:45:36.395581+00:00",
+      "final_confirmation": "CONSUMED_FOR_FINAL_CONFIRMATION",
+      "publisher_url": "https://github.com/timothyshen/narrative-bench",
+      "reason": "DRC002 source inspection and forthcoming task material; prior current-repository name audit no hit",
+      "status": "DEVELOPMENT_EXPOSED",
+      "writing_system_id": "creader-narrative-bench"
+    },
+    {
+      "batch": "DRC002",
+      "dataset_id": "TIGER-Lab/MMLU-Pro",
+      "exposure_utc": "2026-09-30T21:45:36.395872+00:00",
+      "final_confirmation": "CONSUMED_FOR_FINAL_CONFIRMATION",
+      "publisher_url": "https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro",
+      "reason": "DRC002 primary card opened; incidental native validation examples exposed; forthcoming test subset",
+      "status": "DEVELOPMENT_EXPOSED",
+      "writing_system_id": "mmlu-pro"
     }
   ],
-  "selected_source_sha256": [
-    "6c0bf60756b4627174d0446b483c92d5bda0752b3c51e4b0c8e7bd7ae2f2c084",
-    "0b8d8a834bce4657e428bd785d95ecd20bda81c3deb8c749cdfb0711c6ce12e7",
-    "8ce7133ade5c38ed7f810cf65359eeedd26a3f8e63380b8523faa15abae6ba12",
-    "e6915f278231c22dfc10dc315cce3dd7620d3d047206569dfd174895cfabf634",
-    "37da7f1be5ba022e7b04c2a786b88358535eba6ba2dbb21d472c586aff352215",
-    "9e44448dfcdb506761d2aace748e54e23dea83190e7d71eb24f34a4c8476c645",
-    "4a7c682ccd03270035670adc1da886f14421f78cd04835f28607bee9f769cbb2",
-    "37cbb3f362aff0694be179fd1b3c7a9abc1728af340248ebe202321a2e36e307",
-    "0bf9f67f76ad785b41752e6eaef01e67a97ead324c133523c3e38c91ce034fa4",
-    "90310fd77b2d89fed2225129b8ed1046aeafcddc086bc9d7e122759816d05c0f",
-    "be421fb12880870e0839a9620d30ff8a12a3db6087fe33542df114496c9fc3b4",
-    "c296e0f21e5b5d2a8679f6de31f388bccd606c2cca8ba3425fac6596f6af5af2",
-    "ee42f12689c6520fc383f03f23cfd85391bd4618de34309d86d173998e6c8561",
-    "5f0d8732b6460a90029d367e23b98412bedffd59d30ef62ddcd7ab4fe59393fa",
-    "7dea641ee2ff554aa748c276c795e79af2980de439039469e532b2989f9a0a2c",
-    "1100b3da29eee4474a70fed28bd81a46e1bb142650c2107803a8fb5a782660e5",
-    "0f6d27335353735f5b497f547cd0e138eb820cf25764ced293295835ee23dee3",
-    "d744b59ab6649f19fb6fd5709f793fc4034603a0b9b1d3e88d6ee5ae605157f1",
-    "41d0737272a8d150c6f1580dfdcb06fdf6943089143d1791be41a944bb0979be",
-    "f89f2ba879908ca81da95ed38c9d3f0529b4f2cb243a12419ed44382d2d187d1"
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "purpose": "Development material must never enter final sealed confirmation",
+  "raw_distribution_sha256": [
+    "08297ab29b7c675b229fead78bdebaa8559c0924e24036ed10c9417d9998bce3",
+    "0cc630a7cccbcc3a02620e1da620e29b1702e9b84f358fd3cd6d3a9926f3b206",
+    "0e24a191921c2f453518a537a8b2117bd137e7714d4ef1565e9ba06c1ecb9ad8",
+    "11cf6b4d59da493fc48490d528e378228484d77f78cc79c7c74753f3487cf777",
+    "36de9549d03d3930d2546c4f9bae00528224b609d12478fa5ad1d58491be90dd",
+    "8fbba3a618feb404af5b4de3f0a8d7f6165169a4c7bf6cc0bef0c58545103439",
+    "99a399d50f1a996388e94ab435ba0ceadc6b8ad9d90e6420358c962a4850d217",
+    "9e55ababc9946e8fdb310b948b56fec3b964ce50b624ce91ac1c1efb727e2b8d",
+    "acfffe050552dca332ad62dcdc7085a8eeaef0dbecfe18b0392d48f4e97dc46a",
+    "f7ed1204f01a3cbb17dafc9fc6f94c92d668344402cfe5a2bc4f1a08a6ae7b77",
+    "f8330faf307cf6d6157c04ef2147d11fa51e065348f8d8857cae6811d089f50f",
+    "ff42d5f01bb17d458370d86633535cafa1e2f38a1edd8d03f5cab1eb8a6afb51"
   ],
+  "schema": "hcl-development-benchmark-exposure-register-v1",
   "selected_question_sha256": [
     "e03dcd4d6b1b99be5f81526e3f65e0741ad396024264b3ad62e24465eb76fc64",
     "1f3b79800b43b81637fbe97b048e7b1a71e421d3a068abd4a08a9fdd79860854",
@@ -69,11 +82,39 @@
     "292ea9141244931b9cd223563a99964053812f7b034eee094cc15bec4d772501",
     "4334e0906d069680f3a15ba7dbde839dded2f60cb17cba1bc26e4c73ee95e650"
   ],
-  "raw_distribution_sha256": [
-    "11cf6b4d59da493fc48490d528e378228484d77f78cc79c7c74753f3487cf777",
-    "f8330faf307cf6d6157c04ef2147d11fa51e065348f8d8857cae6811d089f50f",
-    "9e55ababc9946e8fdb310b948b56fec3b964ce50b624ce91ac1c1efb727e2b8d",
-    "99a399d50f1a996388e94ab435ba0ceadc6b8ad9d90e6420358c962a4850d217"
-  ],
-  "longmemeval": "SEALED_NOT_ACCESSED"
+  "selected_source_sha256": [
+    "0b8d8a834bce4657e428bd785d95ecd20bda81c3deb8c749cdfb0711c6ce12e7",
+    "0bf9f67f76ad785b41752e6eaef01e67a97ead324c133523c3e38c91ce034fa4",
+    "0f6d27335353735f5b497f547cd0e138eb820cf25764ced293295835ee23dee3",
+    "1100b3da29eee4474a70fed28bd81a46e1bb142650c2107803a8fb5a782660e5",
+    "155bbaea4f32916f86f08f051a615789d14f8c0069222bf879dc70f2daad459c",
+    "2b7aa7161ee4861373cf509a3a937aefbf2314739546ac2a0cac50dc53f22b31",
+    "2d8ae9fc15cf056192a0101f5b9150f25fc7b6cea319ed7b6ae6407083ac8b01",
+    "37cbb3f362aff0694be179fd1b3c7a9abc1728af340248ebe202321a2e36e307",
+    "37da7f1be5ba022e7b04c2a786b88358535eba6ba2dbb21d472c586aff352215",
+    "41d0737272a8d150c6f1580dfdcb06fdf6943089143d1791be41a944bb0979be",
+    "4a7c682ccd03270035670adc1da886f14421f78cd04835f28607bee9f769cbb2",
+    "5018e03dc9108031e0469140a69ce1b4677ee665918840c26a8b15b291b0b9d4",
+    "5f0d8732b6460a90029d367e23b98412bedffd59d30ef62ddcd7ab4fe59393fa",
+    "63336cafef28d3a82d96dd80973a17219d9c3164add27fb5dc28c83ace836867",
+    "6c0bf60756b4627174d0446b483c92d5bda0752b3c51e4b0c8e7bd7ae2f2c084",
+    "70c76d0e9304f9244460b1c21725753aa3f7e0bdfc77656db69ff1a4d660b291",
+    "7dea641ee2ff554aa748c276c795e79af2980de439039469e532b2989f9a0a2c",
+    "8c5e69ff9c781f919eae868ef33bdece26cfcdddc14e3deca735952981ffd763",
+    "8ce7133ade5c38ed7f810cf65359eeedd26a3f8e63380b8523faa15abae6ba12",
+    "90310fd77b2d89fed2225129b8ed1046aeafcddc086bc9d7e122759816d05c0f",
+    "95666d65373188403525ef443aa035fb2a59f69b5bf1861d16a52ab2f886c14c",
+    "9a60c4126654c9e2fd2e1dfc387d66da5dc10237826738b05e197e09566fae87",
+    "9e44448dfcdb506761d2aace748e54e23dea83190e7d71eb24f34a4c8476c645",
+    "b52eb2cc22f63fe5a77aeb4482243c3393906377a87977d22bc74499c369c7f1",
+    "be421fb12880870e0839a9620d30ff8a12a3db6087fe33542df114496c9fc3b4",
+    "c0213aad9416dbc52964c3bf4a84f85d26f11ceaabd909900f8fce9d3d6def5d",
+    "c296e0f21e5b5d2a8679f6de31f388bccd606c2cca8ba3425fac6596f6af5af2",
+    "c3fd7e1b85ac7b04774b31cae5c76ca8a18aed64298aea2f38622a74fc9ff8d1",
+    "d744b59ab6649f19fb6fd5709f793fc4034603a0b9b1d3e88d6ee5ae605157f1",
+    "e6915f278231c22dfc10dc315cce3dd7620d3d047206569dfd174895cfabf634",
+    "ec043415709d50d7d39a7c27d2d1796f37bb1c035f717a35c96fd70cf2fa6bd9",
+    "ee42f12689c6520fc383f03f23cfd85391bd4618de34309d86d173998e6c8561",
+    "f89f2ba879908ca81da95ed38c9d3f0529b4f2cb243a12419ed44382d2d187d1"
+  ]
 }

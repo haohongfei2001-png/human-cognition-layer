@@ -31,25 +31,28 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: DRC002_FRESH_LONG_NARRATIVE_CONCEPT_REALITY_CHECK**
+**NEXT_READY: DRC002_FROZEN_NARRATIVE_CONCEPT_EXECUTION**
 
-DRC001 is CLOSED/development-only (Base14/20 vs HCL16/20;4 gains/2 harms,
-checked treatment0/20; attribution INCONCLUSIVE). Run36778124208,40 calls,0 retries;
-estimated USD0.104681456, rated peakUSD0.221775840, invoice unknown; grant0 and trigger
-removed. [Source-first closure](reports/HCL_DRC001_SOURCE_FIRST_CLOSURE.md).
+DRC00213 development tasks frozen: six narrative perspective/time/world-rule/argument
+fixtures + full185917-character Hamlet arc-type subtask, and six hash-selected native
+MMLU-Pro philosophy test items. [Frozen protocol](docs/HCL_DRC002_DEVELOPMENT_PROTOCOL.md).
+Strong Base/current v13 HCL, same DeepSeek V4 Pro high thinking/8192 output ceiling;
+26 maximum calls,0 retries, new USD3 cap, all-call peak reservationUSD2.3613084.
+Actual H source preparation succeeds13/13, checked treatment0/13 disclosed; no
+mechanism attribution/full-benchmark/final evidence claim. No gold/route flags/COT
+in model inputs. Native and derived scoring scopes separated; annotation ambiguity
+preserved before output. New systems permanently DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION.
+Unique dormant trigger/hash grant; cloud source/history gates before paid transport.
+Execute once after exact-head/main CI, save raw/cost/state/artifact and source-first
+closure, grant0/trigger removal, then general defect-driven capability development.
 
-[General ordinary reader entryv13](docs/HCL_DEVELOPMENT_READER_ENTRY_V13.md) reuses
-existing B01/C01/C03 for short source questions without fixed question grammar.
-11 new checks/69 local combined checks and positive composition/revision/smoke
-witness; private/source/actor/time/normative bounds preserved. IMPLEMENTED_UNVALIDATED,
-not answer gain. Consumed20-item provider-free regression preserves full inputs,
-refusal20→0 and bytes−45.8%, but treatment remains0; no rerun/rescoring/efficacy upgrade.
-Exact DRC001 runtime archive/input replay survives current runtime changes.
-
-Next admit new fresh legally usable development items, prioritizing long narrative
-and concept/philosophical gaps, use simplest equal-model Base/HCL inputs and freeze
-subset/model/scorer before calls. Final source/reviewer absence is no daily gate.
-LongMemEval SEALED. Historical CG/NI dispositions unchanged.
+DRC001 CLOSED/development-only (Base14/20 vs HCL16/20;4 gains/2 harms, treatment0/20,
+attribution INCONCLUSIVE);40 calls, estimatedUSD0.104681456, invoice unknown; no rerun.
+[Reader entryv13](docs/HCL_DEVELOPMENT_READER_ENTRY_V13.md) IMPLEMENTED_UNVALIDATED,
+positive authored composition/revision/smoke and11 new tests; native consumed input
+regression preserves full source, refusal20→0/bytes−45.8%, treatment still0/no gain claim.
+Historical CG/NI/I01/runtime/receipts immutable. Final reviewer/source absent is no
+daily gate; LongMemEval SEALED and leaderboard inactive.
 
 ## Historical I02 snapshots — evidence retained; global stop superseded
 

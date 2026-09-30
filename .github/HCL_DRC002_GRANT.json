@@ -1,0 +1,10 @@
+{
+  "batch": "DRC002",
+  "historical_budget_transfer": false,
+  "maximum_calls": 26,
+  "package_sha256": "fd4e55c4d50563374e5ba7c312a0268d027afa1533e4ecf165c0f976d5e9e081",
+  "remaining_usd": 3.0,
+  "retries": 0,
+  "schema": "hcl-drc-once-grant-v1",
+  "status": "READY"
+}

@@ -17,5 +17,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m unittest tests.test_development_drc001_replay tests.test_i02_rebus_kranak_exposure
+      - run: python -m unittest tests.test_development_drc001_replay tests.test_development_reality_batch tests.test_i02_rebus_kranak_exposure
       - run: python -m scripts.development_drc001_replay
+      - run: python -m scripts.development_reality_batch --preflight --history --output /tmp/drc002-provider-free.json
