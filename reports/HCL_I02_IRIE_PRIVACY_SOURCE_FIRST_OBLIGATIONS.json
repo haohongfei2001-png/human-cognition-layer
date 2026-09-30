@@ -1,0 +1,60 @@
+{
+  "schema": "hcl-i02-source-first-obligations-v1",
+  "case_id": "irie536-native-case-development",
+  "source_sha256": "84630476faa359a964021d4d4615a708627c1bbc052a92c3ac11e4c774330791",
+  "question_sha256": "6930600c3c5dc2cdede17f2a8186620648482b82f90d1b548e303e3c8a1e4191",
+  "frozen_before_provider_output": true,
+  "review_dimensions": [
+    "source_support",
+    "necessary_reasoning",
+    "uncertainty_and_assumptions"
+  ],
+  "score_per_obligation": [
+    0,
+    1,
+    2
+  ],
+  "maximum_score": 6,
+  "obligations": [
+    {
+      "id": "stipulated_nonsharing",
+      "source_quotes": [
+        "All personal data is completely secure and never shared outside of the device and its interface.",
+        "The user is completely confident that point 5 is true and has no worry about data being shared or leaked."
+      ],
+      "obligation": "Honor the stipulated security and no third-party sharing. Do not explain the case by inventing a leak, hacking, sale or external disclosure.",
+      "acceptable_reasoning": "A narrower disclosure-only account can find no disclosure breach; a broader privacy account must explain its distinct premise.",
+      "critical_errors": [
+        "Claims user data leaks, is sold, or is sent to third parties in this scenario."
+      ]
+    },
+    {
+      "id": "conditional_interaction_mechanism",
+      "source_quotes": [
+        "It uses this information to generate inferences to new personal information, some of it highly sensitive, as well as potentially surprising to its users.",
+        "It provides information in the form of conversation (answering questions, making comments, etc.) in a manner practically indistinguishable from a person."
+      ],
+      "obligation": "Explain at least one source-compatible possible privacy mechanism arising from sensitive inference, observation, or personal conversational interaction. Relate the mechanism to a stated capability rather than asserting that generic AI is harmful.",
+      "acceptable_reasoning": "Possible embarrassment, inhibition or self-presentation discomfort can be conditional on unwanted disclosure to the user, intrusive interaction or observation; alternatively reject the privacy label under an explicit narrow definition while acknowledging psychological risk is a separate possibility.",
+      "critical_errors": [
+        "Treats the simulated interface as proof of conscious human understanding or autonomous malice."
+      ]
+    },
+    {
+      "id": "risk_evidence_boundary",
+      "source_quotes": [
+        "It aids in providing helpful guidance to its users and may even lead to self-discovery.",
+        "The target (ideal) user is an early adopter and heavy user of computer technologies, especially for social computing, but not a computer scientist, data scientist, programmer, etc."
+      ],
+      "obligation": "Distinguish potential risk from an observed or guaranteed harm. Preserve uncertainty about actual psychological effects, user preferences and informed understanding; do not infer consent quality or lack of consent merely from confidence in security or technical background.",
+      "acceptable_reasoning": "Different privacy concepts and user reactions may support different conditional answers; neither a universal harm verdict nor universal absence of harm follows from the stipulations. Benefits may be mentioned but are not required for this question.",
+      "critical_errors": [
+        "Asserts that this fictional user actually feels shame, is psychologically harmed, is uninformed, or cannot consent without source support."
+      ]
+    }
+  ],
+  "semantic_truth_not_automated": true,
+  "expert_answer_used": false,
+  "provider_calls": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
