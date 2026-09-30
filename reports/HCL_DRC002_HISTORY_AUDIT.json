@@ -1,0 +1,14 @@
+{
+  "candidate_source_sha256": "ee548a476f2d5e74ff2a3add1ec0d7e76d811b350dbaa202d82e831f5a08277a",
+  "checkout_head": "9ab1d5e2b05083bdd16aed3f105ae4d40967f201",
+  "confirmation_qualified": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "matches": [],
+  "schema": "hcl-i02-reachable-git-history-exposure-v1",
+  "scope": "CURRENTLY_REACHABLE_GIT_OBJECTS_NOT_DELETED_REFS_OR_MODEL_TRAINING",
+  "sealed_blob_ids_not_opened": 44,
+  "skipped_large_paths": [],
+  "skipped_nontext_blobs": 8,
+  "status": "REACHABLE_HISTORY_NO_TEXT_MATCH",
+  "unique_utf8_blobs_scanned": 3032
+}

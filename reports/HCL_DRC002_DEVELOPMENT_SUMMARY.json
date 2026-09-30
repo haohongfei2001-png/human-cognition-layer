@@ -1,0 +1,272 @@
+{
+  "accuracy_claim_allowed": false,
+  "actual_invoice_cost_usd": null,
+  "arms": {
+    "Base": {
+      "actual_model_ids": [
+        "deepseek-v4-pro"
+      ],
+      "estimated_actual_cost_usd": 0.060197016,
+      "format_valid": 2,
+      "input_tokens": 6312,
+      "output_tokens": 28546,
+      "rated_peak_cost_usd": 0.12137400000000001,
+      "scored": 5
+    },
+    "HCL": {
+      "actual_model_ids": [
+        "deepseek-v4-pro"
+      ],
+      "estimated_actual_cost_usd": 0.071838536,
+      "format_valid": 3,
+      "input_tokens": 10899,
+      "output_tokens": 33309,
+      "rated_peak_cost_usd": 0.14629032,
+      "scored": 6
+    }
+  },
+  "budget_state": "CLOSED_NO_TRANSFER_NO_AUTOMATIC_RERUN",
+  "case_results": [
+    {
+      "Base_score": {
+        "correct": true,
+        "fn": 0,
+        "format_valid": true,
+        "fp": 0,
+        "prediction": [
+          {
+            "chapter_id": "pov-en-00",
+            "detector_id": "l2.pov-leak"
+          }
+        ],
+        "tp": 1,
+        "units": 1,
+        "units_correct": 1
+      },
+      "HCL_score": {
+        "correct": true,
+        "fn": 0,
+        "format_valid": true,
+        "fp": 0,
+        "prediction": [
+          {
+            "chapter_id": "pov-en-00",
+            "detector_id": "l2.pov-leak"
+          }
+        ],
+        "tp": 1,
+        "units": 1,
+        "units_correct": 1
+      },
+      "case_id": "narrative/pov-leak-en",
+      "dataset": "timothyshen/narrative-bench",
+      "gold": [
+        {
+          "chapter_id": "pov-en-00",
+          "detector_id": "l2.pov-leak"
+        }
+      ],
+      "kind": "guardian",
+      "outcome": "both_correct"
+    },
+    {
+      "Base_score": {
+        "correct": false,
+        "format_valid": false,
+        "units": 1,
+        "units_correct": 0
+      },
+      "HCL_score": {
+        "correct": true,
+        "fn": 0,
+        "format_valid": true,
+        "fp": 0,
+        "prediction": [
+          {
+            "chapter_id": "tv-en-ch2",
+            "detector_id": "l1.timeline-violation"
+          },
+          {
+            "chapter_id": "tv-en-ch3",
+            "detector_id": "l1.timeline-violation"
+          }
+        ],
+        "tp": 2,
+        "units": 1,
+        "units_correct": 1
+      },
+      "case_id": "narrative/timeline-violations-en",
+      "dataset": "timothyshen/narrative-bench",
+      "gold": [
+        {
+          "chapter_id": "tv-en-ch2",
+          "detector_id": "l1.timeline-violation"
+        },
+        {
+          "chapter_id": "tv-en-ch3",
+          "detector_id": "l1.timeline-violation"
+        }
+      ],
+      "kind": "guardian",
+      "outcome": "hcl_gain"
+    },
+    {
+      "Base_score": {
+        "correct": false,
+        "format_valid": false,
+        "units": 1,
+        "units_correct": 0
+      },
+      "HCL_score": {
+        "correct": false,
+        "format_valid": false,
+        "units": 1,
+        "units_correct": 0
+      },
+      "case_id": "narrative/world-constraints-en",
+      "dataset": "timothyshen/narrative-bench",
+      "gold": [
+        {
+          "chapter_id": "wc-en-ch1",
+          "detector_id": "l1.constraint-violation"
+        },
+        {
+          "chapter_id": "wc-en-ch2",
+          "detector_id": "l1.constraint-violation"
+        },
+        {
+          "chapter_id": "wc-en-ch3",
+          "detector_id": "l1.constraint-violation"
+        }
+      ],
+      "kind": "guardian",
+      "outcome": "both_wrong"
+    },
+    {
+      "Base_score": {
+        "correct": true,
+        "fn": 0,
+        "format_valid": true,
+        "fp": 0,
+        "prediction": [
+          {
+            "chapter_id": "arg-struct-en-00",
+            "detector_id": "l3.argument-structure"
+          }
+        ],
+        "tp": 1,
+        "units": 1,
+        "units_correct": 1
+      },
+      "HCL_score": {
+        "correct": true,
+        "fn": 0,
+        "format_valid": true,
+        "fp": 0,
+        "prediction": [
+          {
+            "chapter_id": "arg-struct-en-00",
+            "detector_id": "l3.argument-structure"
+          }
+        ],
+        "tp": 1,
+        "units": 1,
+        "units_correct": 1
+      },
+      "case_id": "narrative/l3-argument-structure-en",
+      "dataset": "timothyshen/narrative-bench",
+      "gold": [
+        {
+          "chapter_id": "arg-struct-en-00",
+          "detector_id": "l3.argument-structure"
+        }
+      ],
+      "kind": "guardian",
+      "outcome": "both_correct"
+    },
+    {
+      "Base_score": {
+        "correct": false,
+        "format_valid": false,
+        "units": 1,
+        "units_correct": 0
+      },
+      "HCL_score": {
+        "correct": false,
+        "format_valid": false,
+        "units": 1,
+        "units_correct": 0
+      },
+      "case_id": "narrative/hamlet-false-positive-traps",
+      "dataset": "timothyshen/narrative-bench",
+      "gold": [],
+      "kind": "guardian",
+      "outcome": "both_wrong"
+    }
+  ],
+  "complete_13_paired_cases": false,
+  "completed_pairs": 5,
+  "disposition": "INCONCLUSIVE_INCOMPLETE_PROVIDER_OUTPUT_LIMIT",
+  "estimated_actual_cost_usd": 0.132035552,
+  "evidence_level": "DEVELOPMENT_ONLY_NOT_FINAL_INDEPENDENT_EVIDENCE",
+  "execution_status": "FAILED_NO_RETRY",
+  "failure_observation": {
+    "guard_stopped_run": true,
+    "requested_max_tokens": 8192,
+    "returned_completion_tokens": 8193,
+    "usage_clamped": false
+  },
+  "full_benchmark_score_claim_allowed": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "mechanism_attribution": "INCONCLUSIVE_NO_CHECKED_TREATMENT_PRESENT",
+  "package_sha256": "fd4e55c4d50563374e5ba7c312a0268d027afa1533e4ecf165c0f976d5e9e081",
+  "paired": {
+    "both_correct": 2,
+    "both_wrong": 2,
+    "hcl_gain": 1
+  },
+  "provider_calls": 11,
+  "rated_peak_cost_usd": 0.26766432,
+  "raw_receipt_sha256": "9e940b0c0d82651d7d8d63651dbac2dfedcfcde53ad031a7e201fca70227c051",
+  "run_id": "36784477632",
+  "run_sha": "e92b75d9736af5c0b87ad66ecea20f3c30719db4",
+  "runtime_sha256": "3734ddcd74524cc91f3fc32f3350b148c6e358d47585fb6827c0483c51cdb761",
+  "schema": "hcl-drc002-development-summary-v1",
+  "semantic_accuracy_claim_allowed": false,
+  "strata": {
+    "timothyshen/narrative-bench/guardian": {
+      "Base_correct": 2,
+      "Base_units_correct": 2,
+      "HCL_correct": 3,
+      "HCL_units_correct": 3,
+      "hcl_gain": 1,
+      "hcl_harm": 0,
+      "n": 5,
+      "units": 5
+    }
+  },
+  "system_failures": [],
+  "treatment_present_cases": 0,
+  "truncated_responses": 6,
+  "uncalled_case_ids": [
+    "mmlupro/philosophy/10777",
+    "mmlupro/philosophy/10815",
+    "mmlupro/philosophy/10855",
+    "mmlupro/philosophy/11017",
+    "mmlupro/philosophy/11047",
+    "mmlupro/philosophy/11085",
+    "narrative/hamlet-fulltext"
+  ],
+  "unpaired_results": [
+    {
+      "arm": "HCL",
+      "case_id": "narrative/dream-red-chamber-false-positive-traps",
+      "score": {
+        "correct": false,
+        "format_valid": false,
+        "units": 1,
+        "units_correct": 0
+      }
+    }
+  ]
+}
