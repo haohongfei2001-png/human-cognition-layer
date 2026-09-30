@@ -1,0 +1,45 @@
+{
+  "schema": "hcl-i02-obp-metaethics-development-source-v1",
+  "source_id": "obp0125-11-section7-native-q10-development",
+  "source_text": "AQA require you to understand how the various metaethical theories as discussed in Chapter 7 might be applied to the applied ethical issues on the specification, of which stealing is the first we have considered. Below, assuming some grasp of the theories from Chapter 7, we offer guidance as to how metaethical theories might relate to this issue. Much of the guidance below is easily applicable to the other applied ethical issues also discussed in the remaining three chapters. Cognitivism and Realism The combination of Cognitivism and Realism in this area would entail that moral claims about stealing are truth-apt propositions, expressing beliefs that will be made true by genuinely existing moral properties at least some of the time. For the utilitarian, moral claims regarding the ethical acceptability of individual actions will be made true by natural properties such as pleasure, happiness or preference satisfaction. For the intuitionist, the non-natural property of goodness will make some of our moral claims regarding stealing true. Cognitivism and Anti-Realism The moral error theorist believes that our moral claims regarding the ethics of stealing are intended to be true, but can never achieve truth because no moral properties exist as truth-makers for those moral claims. Importantly, just because the moral error theorist cannot endorse the claim that “stealing can be morally wrong at least sometimes”, this does not entail a love of stealing on their part. The moral error theorist may have a non-moral reason for opposing stealing on many occasions, or indeed supporting stealing on other occasions. Moral reasons are not the only reasons not to engage in stealing, as legal and social/personal reasons will also be a factor as they often speak against the wisdom of theft. Moral error theorists who care about the property rights of others, for example, may well strongly oppose stealing. Non-Cognitivism and Anti-Realism According to the simple non-cognitivist considered in this book, our moral utterances regarding stealing are not truth-apt because they are not expressions of belief; they are expressions of emotion or other non-truth-apt attitudes such as approval or disapproval. Thus, according to theories such as Emotivism and Prescriptivism, a phrase such as “stealing is wrong” expresses a negative emotional attitude towards stealing (Emotivism) or makes it clear that we do not want people to steal (Prescriptivism). Whichever non-cognitivist theory you prefer, the non-cognitivist position is defined by the commitment to the idea that the moral utterances do not reveal something true about the world and do not even try to describe features of the world. Therefore, we cannot criticise a thief as morally wrong when using this argument (something akin to the claim of the moral error theorist). However, if we adopt Prescriptivism, we might at least be able to criticise the thief for inconsistency if she speaks of the general wrongness of stealing whilst defending the rightness of stealing in her case. Despite this, one big worry for those interested in adopting a view like Emotivism or Prescriptivism is that it cheapens and eliminates the value of moral debate over the moral rightness of stealing, since we cannot defend our ethical claims as being genuinely true or false in the way that realist seeks to do and in the way that most people would wish to.",
+  "ordinary_question": "What would the error-theorist say about the morality of stealing?",
+  "source_sha256": "268665309d08875af75ca4eceebdd9f367b474e0f86fdec27325af6476a4975e",
+  "question_sha256": "11207a82743bc39bd399f6dae90f0003c751f8ec9ebd733fd4045bb2e8e15ab1",
+  "publisher_url": "https://www.openbookpublishers.com/books/10.11647/obp.0125/chapters/10.11647/obp.0125.11",
+  "pdf_archive_url": "https://tile.loc.gov/storage-services/master/gdc/gdcebookspublic/20/19/45/25/98/2019452598/2019452598.pdf",
+  "pdf_sha256": "be913546c61c6627bfb861e3039b0147af7fb3717f9b1bee8fd6c3b33d980d52",
+  "authors": [
+    "Mark Dimmock",
+    "Andrew Fisher"
+  ],
+  "attribution": "Mark Dimmock and Andrew Fisher, Ethics for A-Level (Open Book Publishers, 2017), chapter 11 section 7; DOI 10.11647/OBP.0125, CC BY 4.0. PDF layout whitespace, page furniture and inherited bibliography footnote removed; no prose rewritten.",
+  "license": "CC BY 4.0",
+  "license_evidence_pdf_index": 4,
+  "source_unit": "COMPLETE_AUTHOR_ORIGINAL_SECTION_7_METAETHICS_AND_STEALING",
+  "source_print_pages": [
+    193,
+    194
+  ],
+  "source_pdf_indices": [
+    205,
+    206
+  ],
+  "native_question_print_page": 196,
+  "native_question_number": 10,
+  "question_origin": "NATIVE_PUBLISHER_QUESTION_WHITESPACE_ONLY",
+  "source_selection": "CHAPTER_11_SELECTED_BY_METADATA_BEFORE_SOURCE_READ; AUTHOR_ORIGINAL_SECTION_AND_ITS_EXPLICIT_NATIVE_QUESTION_SELECTED_BY_RIGHTS_AND_TASK_FIT_BEFORE_MODEL_OUTPUT",
+  "author_id": "dimmock-fisher",
+  "writing_system_id": "obp-dimmock-fisher-ethics-for-a-level-2017",
+  "template_id": "obp-native-philosophy-chapter-issue",
+  "family": "ABSTRACT_CONCEPT_PHILOSOPHY",
+  "privacy_review": "AUTHOR_CONCEPTUAL_EXPOSITION_NO_IDENTIFIABLE_PRIVATE_PERSON",
+  "rights_scope": "AUTHOR_ORIGINAL_PROSE_AND_NATIVE_QUESTION_ONLY; NO_MACINTYRE_RUSSELL_NIV_QUOTATIONS_OR_FAMILY_NEWS",
+  "provider_input_allowed": true,
+  "development_exposed": true,
+  "independent_confirmation_qualified": false,
+  "expert_gold_used": false,
+  "arm_outputs_seen": false,
+  "difficulty": "UNMEASURED_MAY_BE_BASELINE_SATURATED; NOT_ASSUMED_HARD",
+  "h_efficacy": "NOT_TESTED",
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

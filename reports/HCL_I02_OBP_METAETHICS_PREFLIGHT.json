@@ -1,0 +1,33 @@
+{
+  "schema": "hcl-i02-obp-metaethics-preflight-v1",
+  "source_file_sha256": "10d12d6cb623da330321b6dc897f8c38919fbd05570bf9f5f887085914504950",
+  "obligations_file_sha256": "556553cc3065245283c7e3f5fc07adac60176d643e7deffebfff08d0e1b8ecc3",
+  "source_sha256": "268665309d08875af75ca4eceebdd9f367b474e0f86fdec27325af6476a4975e",
+  "question_sha256": "11207a82743bc39bd399f6dae90f0003c751f8ec9ebd733fd4045bb2e8e15ab1",
+  "source_valid": true,
+  "rights_verified_for_development": true,
+  "source_unit_not_whole_chapter": true,
+  "native_question_number": 10,
+  "family_scope": "ABSTRACT_CONCEPT_PHILOSOPHY_CALIBRATION_ONLY",
+  "difficulty_qualified": false,
+  "broader_comparator_semantics_qualified": false,
+  "source_first_obligation_count": 3,
+  "full_ordinary_input_equal_for_cpg": true,
+  "g_final_original_source_present": true,
+  "h_runtime_sha256": "6fa85a5f605ec7ff7dde6c988b53bc986159bf3863dc81030d29db8fbc7cac24",
+  "h_direct": true,
+  "h_selected_capabilities": [],
+  "h_specialized_treatment_present": false,
+  "h_final_messages": [
+    {
+      "role": "user",
+      "content": "{\"query\": \"What would the error-theorist say about the morality of stealing?\", \"history\": [], \"evidence\": [], \"narrative\": \"AQA require you to understand how the various metaethical theories as discussed in Chapter 7 might be applied to the applied ethical issues on the specification, of which stealing is the first we have considered. Below, assuming some grasp of the theories from Chapter 7, we offer guidance as to how metaethical theories might relate to this issue. Much of the guidance below is easily applicable to the other applied ethical issues also discussed in the remaining three chapters. Cognitivism and Realism The combination of Cognitivism and Realism in this area would entail that moral claims about stealing are truth-apt propositions, expressing beliefs that will be made true by genuinely existing moral properties at least some of the time. For the utilitarian, moral claims regarding the ethical acceptability of individual actions will be made true by natural properties such as pleasure, happiness or preference satisfaction. For the intuitionist, the non-natural property of goodness will make some of our moral claims regarding stealing true. Cognitivism and Anti-Realism The moral error theorist believes that our moral claims regarding the ethics of stealing are intended to be true, but can never achieve truth because no moral properties exist as truth-makers for those moral claims. Importantly, just because the moral error theorist cannot endorse the claim that “stealing can be morally wrong at least sometimes”, this does not entail a love of stealing on their part. The moral error theorist may have a non-moral reason for opposing stealing on many occasions, or indeed supporting stealing on other occasions. Moral reasons are not the only reasons not to engage in stealing, as legal and social/personal reasons will also be a factor as they often speak against the wisdom of theft. Moral error theorists who care about the property rights of others, for example, may well strongly oppose stealing. Non-Cognitivism and Anti-Realism According to the simple non-cognitivist considered in this book, our moral utterances regarding stealing are not truth-apt because they are not expressions of belief; they are expressions of emotion or other non-truth-apt attitudes such as approval or disapproval. Thus, according to theories such as Emotivism and Prescriptivism, a phrase such as “stealing is wrong” expresses a negative emotional attitude towards stealing (Emotivism) or makes it clear that we do not want people to steal (Prescriptivism). Whichever non-cognitivist theory you prefer, the non-cognitivist position is defined by the commitment to the idea that the moral utterances do not reveal something true about the world and do not even try to describe features of the world. Therefore, we cannot criticise a thief as morally wrong when using this argument (something akin to the claim of the moral error theorist). However, if we adopt Prescriptivism, we might at least be able to criticise the thief for inconsistency if she speaks of the general wrongness of stealing whilst defending the rightness of stealing in her case. Despite this, one big worry for those interested in adopting a view like Emotivism or Prescriptivism is that it cheapens and eliminates the value of moral debate over the moral rightness of stealing, since we cannot defend our ethical claims as being genuinely true or false in the way that realist seeks to do and in the way that most people would wish to.\"}"
+    }
+  ],
+  "h_hnew_calls_allowed": false,
+  "cpg_model_semantics_qualified": false,
+  "independent_confirmation_qualified": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
