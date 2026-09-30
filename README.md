@@ -421,3 +421,18 @@ and remains DEFERRED_EMBEDDED_LYRIC_RIGHTS. Zero provider calls/spend/grants.
 Unique next task remains I02 protected source/task, blinded review and competent
 comparators; no confirmation upgrade, paid interface source swap or expansion.
 
+
+The [v10 existing C01 long-reader integration](docs/HCL_I02_LONG_AGENCY_INTEGRATION_V10.md)
+now carries checked reported goals, plans and opportunity joins into actual complete
+ordinary H input, using the same grounded source/core as B01. The authored positive
+witness distinguishes an active goal and selected plan from unavailable opportunity;
+local goal abandonment changes pursuit without automatically revoking the plan.
+H-new removes C01 alone, retaining B01/source/query/candidates/selection. 93 focused
+plus 13 source/fairness checks pass, including actor/time/access, conditional and
+outcome-to-intention limits, source-version revisions, bounds and one-answer smoke.
+This reuses existing architecture with narrow literal coverage, not a new module,
+independent answer gain or semantic qualification. Chained v10 preserves historical
+certified runtimes/receipts. Zero provider calls/spend/grants; Gregory remains held
+with no checked treatment. Unique next task remains I02 protected source/task,
+blinded review and strong comparators before separately frozen comparison.
+

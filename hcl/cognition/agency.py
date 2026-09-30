@@ -2,6 +2,7 @@
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 import json
+import hashlib
 import re
 
 from hcl.v04.model import EventRecord
@@ -35,8 +36,8 @@ class AgencyResult:
     def payload(self):
         return json.loads(self.payload_json)
 
-    def messages(self, workspace, *, max_chars=64000):
-        if type(max_chars) is not int or not 1000 <= max_chars <= 128000:
+    def messages(self, workspace, *, max_chars=64000, include_sources=True):
+        if type(max_chars) is not int or not 1000 <= max_chars <= 128000 or type(include_sources) is not bool:
             raise ValueError('bounded agency context required')
         if any(s not in workspace._documents or workspace._versions[s] != version for s, version in self.source_versions):
             raise ValueError('agency source changed; recompute')
@@ -61,8 +62,15 @@ class AgencyResult:
         receipt['claims'] = [row for row in receipt['claims'] if row['id'] in selected]
         receipt['spans'] = [row for row in receipt['spans'] if row['id'] in selected]
         receipt['revisions'] = [row for row in receipt['revisions'] if row['old'] in selected and row['new'] in selected]
+        payload = self.payload
+        if not include_sources:
+            # The enclosing ordinary reader retains these exact whole sources.
+            payload = dict(payload)
+            rows = payload.pop('original_sources')
+            payload['shared_source_references'] = [dict(source_id=r['source_id'], version=r['version'],
+                source_sha256=hashlib.sha256(r['text'].encode()).hexdigest()) for r in rows]
         messages = [dict(role='system', content=_POLICY), dict(role='user',
-            content=json.dumps(dict(cognition=self.payload, evidence=receipt),
+            content=json.dumps(dict(cognition=payload, evidence=receipt),
                 ensure_ascii=False, sort_keys=True))]
         if len(json.dumps(messages, ensure_ascii=False)) > max_chars:
             raise ValueError('agency context budget exceeded')
@@ -75,10 +83,39 @@ def prepare_agency(workspace, query, *, source_id, observer=None):
         raise ValueError('bounded explicit actor goal/plan question required')
     actor = match['actor']
     semantic = workspace.prepare_semantic(query, source_ids=(source_id,), observer=observer)
-    core, runtime = workspace.core, HCLV07Runtime()
+    return check_agency_candidates(workspace, query, semantic, source_id=source_id, actor=actor)
+
+
+def is_agency_utterance(body):
+    return isinstance(body,str) and any(pattern.fullmatch(body.rstrip('.!?').strip())
+        for pattern in (_GOAL,_SUBGOAL,_PLAN,_PLAN_END,_OPPORTUNITY,_INTENT))
+
+
+def check_agency_candidates(workspace, query, semantic, *, source_id, actor, only_agency_events=False):
+    """Existing C01 on already grounded candidates; no second extraction or oracle."""
+    from .semantic import SemanticResult, _PRONOUNS
+    from .core import EvidenceCore
+    if (not isinstance(query,str) or not query.strip() or len(query)>8000
+            or not isinstance(semantic,SemanticResult) or not isinstance(workspace.core,EvidenceCore)
+            or not isinstance(actor,str) or not re.fullmatch(r'[A-Z][\w-]*(?: [A-Z][\w-]*)?',actor)
+            or actor.lower() in _PRONOUNS or type(only_agency_events) is not bool
+            or source_id not in workspace._documents
+            or semantic.scope.source_ids not in ((),(source_id,))):
+        raise ValueError('bounded grounded actor/source agency input required')
+    core = workspace.core
+    if any(key not in core.claims or core.claims[key].scope!=semantic.scope
+            for key in semantic.candidate_ids+semantic.root_ids):
+        raise ValueError('agency candidates outside grounded core or scope')
+    for key in semantic.candidate_ids:
+        span=core.spans[core.claims[key].content['source_span_id']]
+        if (span.source_id!=source_id or span.version!=workspace._versions[source_id]
+                or span.quote!=workspace._documents[source_id][0][span.start:span.end]):
+            raise ValueError('agency candidate source version changed; recompute')
+    runtime = HCLV07Runtime()
     events, diagnostics, operations, goal_evidence, plans, subgoals, opportunities, intentions = [], [], [], {}, {}, [], [], []
     last_goal_signal = {}
     source_candidates = []
+    support_statuses = core.support_statuses()
     for key in semantic.candidate_ids:
         content = core.claims[key].content
         if content['kind'] != 'event':
@@ -86,6 +123,8 @@ def prepare_agency(workspace, query, *, source_id, observer=None):
         row = content['proposal']
         if (content['validation']['semantic_support'] != 'BOUNDED_LITERAL_FORM'
                 or row.get('assertion_scope') != 'SOURCE_REPORT'
+                or support_statuses[key] != 'SUPPORT_AVAILABLE'
+                or (only_agency_events and not is_agency_utterance(row.get('utterance')))
                 or row.get('speaker_candidates') != [actor] or row.get('speaker_surface') != actor):
             continue
         source_candidates.append((core.spans[content['source_span_id']].start, key, row, content['source_span_id']))
