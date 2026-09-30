@@ -59,7 +59,7 @@ class LongSourceQuestionTests(unittest.TestCase):
 
     def test_bounds_and_short_historical_path(self):
         with self.assertRaisesRegex(ValueError, 'bounded complete long source'):
-            prepare_long_source_context(self.question, story() * 3)
+            prepare_long_source_context(self.question, story() * 20)
         short = prepare_person_context(self.layer, self.question, 'Mara said "I believe it."')
         self.assertNotEqual(short.preparation_receipt['method'],
                             'complete_long_source_local_evidence_v1')

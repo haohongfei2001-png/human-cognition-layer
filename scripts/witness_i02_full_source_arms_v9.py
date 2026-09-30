@@ -23,7 +23,12 @@ def witness():
     def prohibited(_):raise AssertionError('provider-free witness cannot answer')
     try:prepare_person_context(HCLCognitionLayer(prohibited),question,source)
     except ValueError:h_status='REFUSED_COMPLETE_LONG_SOURCE'
-    else:raise AssertionError('H coverage boundary unexpectedly changed')
+    else:
+        h_prepared=prepare_person_context(HCLCognitionLayer(prohibited),question,source)
+        h_payload=json.loads(h_prepared.messages[-1]['content'])
+        assert h_payload['sources']==[dict(source_id='ordinary-source',version=1,text=source)]
+        assert h_prepared.preparation_receipt['specialized_cognition_treatment'] is False
+        h_status='PREPARED_COMPLETE_SOURCE_NO_SPECIALIZED_TREATMENT'
     return dict(schema='hcl-i02-full-source-arms-v9-witness-v1',source_origin='HCL_AUTHORED_SYNTHETIC_PROVIDER_FREE_ONLY',source_characters=len(source),source_sha256=hashlib.sha256(source.encode()).hexdigest(),question_sha256=hashlib.sha256(question.encode()).hexdigest(),inputs=rows,old_v8_status=old_status,h_ordinary_entry_status=h_status,h_runtime_sha256=runtime_digest(),g_map_origin='AUTHORED_PROVIDER_FREE_REPLAY_NOT_MODEL_EXTRACTION',relation_semantics='UNVERIFIED_MODEL_PROPOSAL',semantic_qualification=False,confirmation_qualified=False,h_efficacy='NOT_TESTED',provider_calls=0,provider_spend_usd=0,longmemeval='SEALED_NOT_ACCESSED')
 if __name__=='__main__':
     import argparse

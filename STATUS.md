@@ -19,6 +19,20 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [v7 complete ordinary long-source entry repair](docs/HCL_I02_FULL_LONG_SOURCE_ENTRY_V7.md)
+allows whole unrestricted reader text up to250k characters/500k UTF8 bytes with
+actual512k serialized-context limits, unchanged semantic64k defaults unless
+explicitly opted into the local long-reader path. No source/candidate truncation;
+private/time/norm scopes still refuse raw long views.29 focused checks pass.
+The current243,677-character authored witness and separate complete217,526-character
+Gaskell witness reach H input intact (26 literal Gaskell candidates); **specialized
+cognition treatment remains false**, semantic/answer gain unproved. Gaskell now
+used for development repair, never confirmation. Immutable v6/refusal/paid receipts
+retain exact certified replay; v7 amendment pins the new runtime.0 new calls/spend.
+Unique next task: independent protected source/item and blinded semantic review,
+strong comparators and actual treatment/coverage before new comparison; no more
+paid interface source swaps or old-task reruns. I02 remains NEXT_READY.
+
 The [v9 complete-source comparator envelope](docs/HCL_I02_FULL_SOURCE_ARMS_V9.md)
 implements ordinary C/P/G inputs up to500,000 total UTF8 source bytes, preserving
 complete source/question/output vocabulary. Short C/P policies remain v8-identical;

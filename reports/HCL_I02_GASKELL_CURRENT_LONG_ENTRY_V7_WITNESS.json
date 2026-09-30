@@ -1,0 +1,22 @@
+{
+  "schema": "hcl-i02-gaskell-current-long-entry-v7-provider-free-witness",
+  "source_sha256": "3a51cd3465537a94ab034d292435b23cfeaf822b9c2aa6addf66f33590a4ad91",
+  "source_characters": 217526,
+  "question_sha256": "cdb79b4bc48d01d24824d0d898d4f176c8dd2ed6dc35b6ca987ca0c4402511b9",
+  "runtime_sha256": "3d2f2b86633f936e0fd8f6fd02f74754369e2dd138953788ab185cc5dcbdeb5c",
+  "method": "complete_long_source_local_evidence_v2",
+  "full_source_present": true,
+  "candidate_count": 26,
+  "specialized_cognition_treatment": false,
+  "final_messages_sha256": "66677a332509a55734a9387b70be99e324a1381b2bf1100184f2fb86cf6edaba",
+  "serialized_context_characters": 253069,
+  "source_used_for_runtime_repair": true,
+  "source_text_or_review_displayed": false,
+  "confirmation_qualified": false,
+  "semantic_truth_verified": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "old_run_36712494305_unchanged": true,
+  "old_h_refusal_receipt_unchanged": true,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

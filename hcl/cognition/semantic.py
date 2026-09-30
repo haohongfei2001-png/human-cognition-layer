@@ -143,7 +143,7 @@ def _anchor(source, proposal):
     return derived, derived + len(quote), quote, normalization
 
 
-def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, max_candidates=64):
+def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, max_candidates=64, max_source_chars=64000):
     """Ordinary question and authorized text, no caller-supplied mental-state labels.
 
     A backend implements complete_json(messages, max_tokens, temperature). At most
@@ -154,14 +154,16 @@ def prepare_semantics(query, sources, *, core=None, scope=None, backend=None, ma
             or not isinstance(sources, tuple) or not 0 <= len(sources) <= 16
             or not all(isinstance(s, AuthorizedText) for s in sources)
             or len({s.source_id for s in sources}) != len(sources)
-            or type(max_candidates) is not int or not 1 <= max_candidates <= 128):
+            or type(max_candidates) is not int or not 1 <= max_candidates <= 128
+            or type(max_source_chars) is not int or not 1 <= max_source_chars <= 250000):
         raise ValueError('bounded ordinary query and distinct authorized sources required')
     core = EvidenceCore() if core is None else core
     scope = Scope(source_ids=tuple(s.source_id for s in sources)) if scope is None else scope
     if not isinstance(scope, Scope):
         raise ValueError('typed scope required')
     visible = tuple(s for s in sources if s.visible_to(scope))
-    if sum(len(s.text) for s in visible) > 64000:
+    if (sum(len(s.text) for s in visible) > max_source_chars or
+            sum(len(s.text.encode()) for s in visible) > 500000):
         raise ValueError('semantic input budget exceeded')
     # Do not leak hidden source identities into backend inputs or final receipt.
     scope = Scope(**dict(asdict(scope), source_ids=tuple(s.source_id for s in visible)))

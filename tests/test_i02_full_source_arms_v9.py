@@ -21,7 +21,7 @@ class FullSourceArmsTests(unittest.TestCase):
         old=prepare_primary_arms_v8(Q,'s',short);new=prepare_primary_arms_v9(Q,'s',short)
         for phase in ('C','P'):self.assertEqual(old[phase],new[phase])
         from scripts.witness_i02_full_source_arms_v9 import witness
-        got=witness();self.assertEqual(got['h_ordinary_entry_status'],'REFUSED_COMPLETE_LONG_SOURCE')
+        got=witness();self.assertEqual(got['h_ordinary_entry_status'],'PREPARED_COMPLETE_SOURCE_NO_SPECIALIZED_TREATMENT')
         self.assertEqual(got['old_v8_status'],'REFUSED_64K_ENVELOPE');self.assertEqual(got['provider_calls'],0)
         self.assertFalse(got['confirmation_qualified']);self.assertFalse(got['semantic_qualification'])
     def test_exact_generic_composition_and_no_source_to_private_state_promotion(self):

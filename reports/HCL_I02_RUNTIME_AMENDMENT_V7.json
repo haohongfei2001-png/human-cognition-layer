@@ -1,0 +1,15 @@
+{
+  "schema": "hcl-i02-runtime-amendment-v7",
+  "reason": "BOUNDED_COMPLETE_ORDINARY_LONG_SOURCE_ENTRY",
+  "historical_i01_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "previous_hcl_runtime_sha256": "6fa85a5f605ec7ff7dde6c988b53bc986159bf3863dc81030d29db8fbc7cac24",
+  "amended_hcl_runtime_sha256": "3d2f2b86633f936e0fd8f6fd02f74754369e2dd138953788ab185cc5dcbdeb5c",
+  "development_only": true,
+  "confirmation_items_inspected": 0,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "answer_gain_claimed": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "boundary": "Unrestricted ordinary long reader entry: complete source up to250000 characters/500000 UTF8 bytes; actual context<=512000 serialized characters. Semantic default64k stays unchanged; explicit local long-reader preparation permits250k. No candidate truncation; source/time/access/private-state boundaries preserved. Gaskell development source used only provider-free; historical paid runtime/receipt untouched.",
+  "specialized_cognition_treatment_claimed": false
+}
