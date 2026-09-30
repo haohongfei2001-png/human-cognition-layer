@@ -1,0 +1,142 @@
+{
+  "schema": "hcl-i02-clifford-source-first-content-diagnostic-v1",
+  "reviewer_scope": "IMPLEMENTER_UNBLINDED_DEVELOPMENT_ONLY_NOT_INDEPENDENT_EXPERT",
+  "obligations_frozen_before_outputs": true,
+  "raw_outputs_unchanged": true,
+  "formal_semantic_score": null,
+  "source_first_diagnostics": [
+    {
+      "phase": "C",
+      "obligation_id": "origin",
+      "diagnostic_status": "PRESENT",
+      "output_excerpt": "A belief is justified only when it has been honestly earned by patient investigation rather than produced by stifling doubt.",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "C",
+      "obligation_id": "counterfactual",
+      "diagnostic_status": "PARTIAL",
+      "output_excerpt": "if the ship arrives safely, the owner is not innocent but merely not found out",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "C",
+      "obligation_id": "action",
+      "diagnostic_status": "MISSING",
+      "output_excerpt": "",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "C",
+      "obligation_id": "social",
+      "diagnostic_status": "PRESENT",
+      "output_excerpt": "Belief is not a private whim; it guides action and is socially inherited",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "C",
+      "obligation_id": "authority",
+      "diagnostic_status": "PRESENT",
+      "output_excerpt": "the informant's veracity, knowledge, and judgment",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "C",
+      "obligation_id": "domain",
+      "diagnostic_status": "PARTIAL",
+      "output_excerpt": "The Mohammed/Buddha discussion is explicitly conditional",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "C",
+      "obligation_id": "tradition",
+      "diagnostic_status": "MISSING",
+      "output_excerpt": "",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "C",
+      "obligation_id": "induction",
+      "diagnostic_status": "PARTIAL",
+      "output_excerpt": "Inference beyond experience is legitimate only on the assumption of uniformity",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "C",
+      "obligation_id": "critique",
+      "diagnostic_status": "PRESENT",
+      "output_excerpt": "This added premise is mine, not Clifford's.",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "P",
+      "obligation_id": "origin",
+      "diagnostic_status": "PRESENT",
+      "output_excerpt": "even a sincere conviction cannot help",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "P",
+      "obligation_id": "counterfactual",
+      "diagnostic_status": "PARTIAL",
+      "output_excerpt": "When the ship is supposed safe, guilt is 'not one jot' less",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "P",
+      "obligation_id": "action",
+      "diagnostic_status": "PRESENT",
+      "output_excerpt": "He also allows action on probabilities without full belief where evidence is not yet sufficient",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "P",
+      "obligation_id": "social",
+      "diagnostic_status": "PRESENT",
+      "output_excerpt": "no belief is truly insignificant",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "P",
+      "obligation_id": "authority",
+      "diagnostic_status": "PRESENT",
+      "output_excerpt": "A good moral character is not enough",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "P",
+      "obligation_id": "domain",
+      "diagnostic_status": "PRESENT",
+      "output_excerpt": "the Arctic explorer's observed report is acceptable, but the old whaler's unsupported extrapolation about ice to the Pole is not",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "P",
+      "obligation_id": "tradition",
+      "diagnostic_status": "PARTIAL",
+      "output_excerpt": "it is not a set of propositions to accept but a store of questions, concepts, and methods to be tested",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "P",
+      "obligation_id": "induction",
+      "diagnostic_status": "PRESENT",
+      "output_excerpt": "within the range of human action and verification we may form actual beliefs, beyond it only hypotheses for asking questions",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    },
+    {
+      "phase": "P",
+      "obligation_id": "critique",
+      "diagnostic_status": "PRESENT",
+      "output_excerpt": "This objection's premise is my own/objector's, not Clifford's",
+      "formal_judgment": "NOT_SCORED_INELIGIBLE_CITATIONS"
+    }
+  ],
+  "limitations": [
+    "C lacks probability/action concession and tested tradition/concept revision; scope/domain and practical-versus-absolute induction treatment incomplete",
+    "P explicitly addresses probability/action and bounded testimony; later-guilty accuser variant and beneficence concept-revision example are not developed",
+    "Multiple well-reasoned critiques are permissible; observations are not agreement with evaluator values",
+    "No formal success fraction, difficulty certificate, blinded agreement, independent reviewer qualification or H effect"
+  ],
+  "no_semantic_upgrade_from_whitespace_diagnostic": true
+}
