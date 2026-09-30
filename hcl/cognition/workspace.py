@@ -24,6 +24,15 @@ class OperationResult:
     def messages(self):
         return json.loads(self.messages_json)
 
+    def current_messages(self, workspace):
+        """Answer only from the current, unchallenged source dependencies."""
+        if (any(s not in workspace._documents or workspace._versions[s] != v
+                for s, v in self.source_versions)
+                or any(workspace.core.support_statuses().get(k) != 'SUPPORT_AVAILABLE'
+                       for k in self.claim_ids)):
+            raise ValueError('prepared support changed; recompute before answering')
+        return self.messages
+
 
 class CognitionWorkspace:
     def __init__(self):
@@ -71,6 +80,10 @@ class CognitionWorkspace:
             raise ValueError('missing source cannot reuse a stale result')
         if through_order is not None and (len(source_ids) != 1 or type(through_order) is not int or through_order < 1):
             raise ValueError('statement snapshot requires one source and positive order')
+        if through_order is not None:
+            lines = self._documents[source_ids[0]][0].splitlines(keepends=True)
+            if through_order > len(lines) or any(not line.strip() for line in lines):
+                raise ValueError('snapshot requires unambiguous nonempty source lines')
         key = identity('operation', query, source_ids, through_order)
         versions = tuple((s, self._versions[s]) for s in source_ids)
         prior = self._cache.get(key)
@@ -84,6 +97,22 @@ class CognitionWorkspace:
         selected = prep.get('question_entrypoint', {}).get('scope', {})
         scope = Scope(actor=selected.get('actor'), context=selected.get('context'),
             source_ids=source_ids, through_order=through_order)
+        # Generic complete-source paths have no legacy context object. Preserve
+        # the actual wire state as preparation, never a private-state verdict.
+        stages = getattr(prepared, 'stages', (prepared,))
+        states = []
+        for stage in stages:
+            if stage.context is not None:
+                states.append((stage.context.as_dict(),
+                    'RETAINED_V1_SOURCE_SCOPED_NOT_PRIVATE_OR_WORLD_TRUTH'))
+            else:
+                if len(source_ids) != 1:
+                    raise ValueError('generic cognition across documents requires explicit identity binding')
+                payload = json.loads(stage.messages[-1]['content'])
+                if not isinstance(payload, dict) or not isinstance(payload.get('sources'), list):
+                    raise ValueError('complete reader prepared payload required')
+                states.append((payload,
+                    'PREPARED_READER_SOURCE_STATE_NOT_PRIVATE_OR_WORLD_TRUTH'))
         # The legacy entry uses artificial timestamps solely for source order.
         # No calendar/knowledge time is inferred into the shared scope.
         roots = []
@@ -94,20 +123,16 @@ class CognitionWorkspace:
             if through_order is not None:
                 text = self._documents[source][0]
                 lines = text.splitlines(keepends=True)
-                if through_order > len(lines) or any(not line.strip() for line in lines):
-                    raise ValueError('snapshot requires unambiguous nonempty source lines')
                 end = sum(len(line) for line in lines[:through_order])
                 span = self.core.add_span(text, source_id=source, version=self._versions[source],
                     end=end, order=through_order, permitted_observers=self._documents[source][1])
                 self._version_spans[source].add(span)
             self.core.support(roots[-1], span)
-        stages = getattr(prepared, 'stages', (prepared,))
         claims = []
-        for index, stage in enumerate(stages):
-            state = stage.context.as_dict()
+        for index, (state, boundary) in enumerate(states):
             result = self.core.claim(scope, ClaimKind.SYSTEM_INTERPRETATION,
                 dict(operation_index=index, state=state, source_versions=versions,
-                     semantic_boundary='RETAINED_V1_SOURCE_SCOPED_NOT_PRIVATE_OR_WORLD_TRUTH'))
+                     semantic_boundary=boundary))
             self.core.support(result, *roots)
             self.core.interpret(result, required_premises=tuple(roots),
                 unknown_conditions=('calendar_and_receipt_time_not_established',))
@@ -118,6 +143,15 @@ class CognitionWorkspace:
             json.dumps(prep, ensure_ascii=False, sort_keys=True))
         self._cache[key] = result
         return result
+
+    def answer(self, query, answer_backend, *, source_ids, through_order=None):
+        """One final answer call from current ordinary source preparation."""
+        result = self.prepare(query, source_ids=source_ids, through_order=through_order)
+        messages = result.current_messages(self)
+        answer = (answer_backend.complete(messages) if hasattr(answer_backend, 'complete')
+                  else answer_backend(messages))
+        return dict(answer=answer, prepared=result, answer_adapter_calls=1,
+                    actual_final_messages=messages, preparation_provider_calls=0)
 
     def prepare_semantic(self, query, *, source_ids, observer=None, backend=None):
         """Unified source preparation; access filtering precedes any backend call."""
@@ -140,7 +174,9 @@ class CognitionWorkspace:
     def receipt(self, result):
         return dict(schema='hcl-shared-operation-v1', operation_id=result.id,
             source_versions=list(result.source_versions), claim_ids=list(result.claim_ids),
-            current=all(self._versions.get(s) == v and s in self._documents for s, v in result.source_versions),
+            current=(all(self._versions.get(s) == v and s in self._documents for s, v in result.source_versions)
+                and all(self.core.support_statuses().get(k) == 'SUPPORT_AVAILABLE' for k in result.claim_ids)),
             actual_final_messages=result.messages, core=self.core.receipt(result.scope),
             provider_calls=0, evidence_level='CORRECTNESS_ONLY',
-            ordinary_input='BOUNDED_LEGACY_GRAMMAR_PROVIDER_FREE', calendar_time='NOT_ESTABLISHED')
+            ordinary_input=json.loads(result.preparation_json).get('method', 'SOURCE_SCOPED_PROVIDER_FREE'),
+            calendar_time='NOT_ESTABLISHED')
