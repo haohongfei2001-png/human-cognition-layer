@@ -26,18 +26,25 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: DRC_GENERAL_ORDINARY_READER_ENTRY_REPAIR**
+**NEXT_READY: DRC002_FRESH_LONG_NARRATIVE_CONCEPT_REALITY_CHECK**
 
-DRC001 completed at run36778124208 / SHA138a7a25dab6ab18e0800df3374475529a8c0ef7:
-strong Base14/20, current HCL16/20;4 paired gains/2 harms. Zero checked treatment
-in20 current ordinary preparations: mechanism attribution INCONCLUSIVE, restrictive
-reader wrapper SIMPLIFY/REPAIR. No final evidence or historical disposition upgrade.
-40 calls,0 retries, estimated USD0.104681456, rated peakUSD0.221775840; invoice unknown.
-Full raw/scorer/usage/state/history/artifact and certified replay retained; grant0,
-trigger removed, no rerun/transfer. [Source-first closure](reports/HCL_DRC001_SOURCE_FIRST_CLOSURE.md).
-Next implement general authorized reader entry using existing B01/C01/C03, preserve
-private/source/actor/time/normative boundaries, then choose a fresh development batch.
-Independent reviewer/perfect final source remains no daily development gate.
+DRC001 is CLOSED/development-only (Base14/20 vs HCL16/20;4 gains/2 harms,
+checked treatment0/20; attribution INCONCLUSIVE). Run36778124208,40 calls,0 retries;
+estimated USD0.104681456, rated peakUSD0.221775840, invoice unknown; grant0 and trigger
+removed. [Source-first closure](reports/HCL_DRC001_SOURCE_FIRST_CLOSURE.md).
+
+[General ordinary reader entryv13](docs/HCL_DEVELOPMENT_READER_ENTRY_V13.md) reuses
+existing B01/C01/C03 for short source questions without fixed question grammar.
+11 new checks/69 local combined checks and positive composition/revision/smoke
+witness; private/source/actor/time/normative bounds preserved. IMPLEMENTED_UNVALIDATED,
+not answer gain. Consumed20-item provider-free regression preserves full inputs,
+refusal20→0 and bytes−45.8%, but treatment remains0; no rerun/rescoring/efficacy upgrade.
+Exact DRC001 runtime archive/input replay survives current runtime changes.
+
+Next admit new fresh legally usable development items, prioritizing long narrative
+and concept/philosophical gaps, use simplest equal-model Base/HCL inputs and freeze
+subset/model/scorer before calls. Final source/reviewer absence is no daily gate.
+LongMemEval SEALED. Historical CG/NI dispositions unchanged.
 
 ## 1. Objective and fixed priority
 

@@ -1,0 +1,189 @@
+{
+  "evidence_level": "DEVELOPMENT_REGRESSION_ONLY_NOT_FRESH_CHECK_NOT_FINAL",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "outputs_rescored": false,
+  "provider_calls": 0,
+  "rows": [
+    {
+      "after_message_bytes": 2113,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3862,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "simpletom/mental-state-qa/KFC_bag_sev1_aware",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 2205,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3954,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "simpletom/mental-state-qa/gen1282_sev3_aware",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 2101,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3850,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "simpletom/mental-state-qa/gen1133_sev3_aware",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 2702,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 4451,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "simpletom/mental-state-qa/gen280_sev3_aware",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 2022,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3771,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "simpletom/behavior-qa/gen1159_sev1_action",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 2348,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 4097,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "simpletom/behavior-qa/gen1239_sev3_action",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 2049,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3798,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "simpletom/behavior-qa/gen125_sev3_action",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 1998,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3747,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "simpletom/behavior-qa/gen352_sev2_action",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 2397,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 4146,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "simpletom/judgment-qa/gen1553_sev3_judge",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 2328,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 4077,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "simpletom/judgment-qa/gen1540_sev3_judge",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 2236,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3985,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "simpletom/judgment-qa/gen1360_sev2_judge",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 2142,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3891,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "simpletom/judgment-qa/gen6_sev3_judge",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 1877,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3626,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "socialiqa/dev/1427",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 1835,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3584,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "socialiqa/dev/91",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 1868,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3617,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "socialiqa/dev/336",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 1780,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3529,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "socialiqa/dev/624",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 1832,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3581,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "socialiqa/dev/1384",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 1824,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3573,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "socialiqa/dev/809",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 1905,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3654,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "socialiqa/dev/33",
+      "checked_treatment": false,
+      "source_complete": true
+    },
+    {
+      "after_message_bytes": 1784,
+      "after_method": "complete_reader_source_local_cognition_v1",
+      "before_message_bytes": 3533,
+      "before_method": "bounded_ordinary_question_refusal",
+      "case_id": "socialiqa/dev/299",
+      "checked_treatment": false,
+      "source_complete": true
+    }
+  ],
+  "schema": "hcl-drc001-exposed-provider-free-entry-debug-v13"
+}

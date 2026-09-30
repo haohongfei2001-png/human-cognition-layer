@@ -104,9 +104,10 @@ class SourceOrderQuestionTests(unittest.TestCase):
 
     def test_unknown_question_after_valid_scope_preserves_only_reader_prefix(self):
         p = prepare_person_context(self.layer, 'At statement 1, Explain their secret motive.', SOURCE)
-        self.assertEqual(p.context.evidence[0]['raw_text'], D)
+        self.assertEqual(json.loads(p.messages[-1]['content'])['sources'][0]['text'], D)
         self.assertNotIn(F, p.messages[-1]['content'])
-        self.assertFalse(p.context.belief)
+        self.assertFalse(p.preparation_receipt['specialized_cognition_treatment'])
+        self.assertNotIn('checked_epistemic', json.loads(p.messages[-1]['content']))
 
     def test_ordinal_scope_is_counted_in_whole_state_budget(self):
         p = prepare_person_context(self.layer, QUERY, SOURCE, as_of_statement=3, max_context_chars=512)
