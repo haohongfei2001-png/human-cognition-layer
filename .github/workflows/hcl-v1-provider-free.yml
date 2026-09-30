@@ -43,6 +43,7 @@ jobs:
           python scripts/witness_retained_shared.py hcl-retained-shared-witness.json
           python scripts/witness_epistemic_objects.py hcl-epistemic-objects-witness.json
           python -m scripts.witness_i02_long_epistemic_v8 --output hcl-i02-long-epistemic-v8-witness.json
+          python -m scripts.witness_i02_typographic_dialogue_v9 --output hcl-i02-typographic-dialogue-v9-witness.json
           python scripts/witness_communication_views.py hcl-communication-views-witness.json
           python scripts/witness_revision_time.py hcl-revision-time-witness.json
           python scripts/witness_report_provenance.py hcl-report-provenance-witness.json
@@ -112,6 +113,7 @@ jobs:
             hcl-retained-shared-witness.json
             hcl-epistemic-objects-witness.json
             hcl-i02-long-epistemic-v8-witness.json
+            hcl-i02-typographic-dialogue-v9-witness.json
             hcl-communication-views-witness.json
             hcl-revision-time-witness.json
             hcl-report-provenance-witness.json

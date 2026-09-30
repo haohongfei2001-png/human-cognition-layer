@@ -7,7 +7,7 @@ from dataclasses import asdict
 import hashlib
 import json
 
-from hcl.cognition.semantic import AuthorizedText, prepare_semantics
+from hcl.cognition.semantic import AuthorizedText, prepare_semantics, _SCRIPT, _local_candidates
 from hcl.cognition.core import EvidenceCore
 from hcl.cognition.epistemic import MentalProposition, check_epistemic_candidates
 
@@ -36,8 +36,12 @@ def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
     if type(epistemic_checks) is not bool:
         raise ValueError('explicit epistemic treatment flag required')
     core = EvidenceCore()
-    semantic = prepare_semantics(query, (AuthorizedText(source_id, source_text),), core=core,
-        max_source_chars=250000 if len(source_text)>48000 else 64000)
+    dialogue_blocks = bool(_SCRIPT.search(source_text))
+    ordinary_source = AuthorizedText(source_id, source_text)
+    discovered = _local_candidates(ordinary_source, dialogue_blocks=True) if dialogue_blocks else ()
+    semantic = prepare_semantics(query, (ordinary_source,), core=core,
+        max_source_chars=250000 if len(source_text)>48000 else 64000,
+        dialogue_blocks=dialogue_blocks, modal_events_only=dialogue_blocks)
     if semantic.backend_calls:
         raise ValueError('long source local preparation unexpectedly called provider')
     source = json.loads(semantic.messages[-1]['content'])['sources']
@@ -45,6 +49,10 @@ def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
     payload = dict(query=query, sources=source, cognitive_candidates=candidates,
                    scope=asdict(semantic.scope),
                    candidate_status='LITERAL_SOURCE_CANDIDATES_NOT_PRIVATE_STATE')
+    if dialogue_blocks:
+        payload['candidate_selection'] = dict(rule='EXISTING_B01_EXPLICIT_MODAL_EVENTS_ONLY',
+            every_eligible_event_retained=True, complete_speech_analysis=False,
+            source_shortened=False, nonmodal_prose_available_in_complete_source=True)
     policy = _POLICY + (' Compare only source-reported public claims and reasons. '
         'A disagreement is a comparison of reported positions, not proof that '
         'either position is true or a claim about either person\'s private state.'
@@ -76,6 +84,13 @@ def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
                        enabled=epistemic_checks, checked_mental_expressions=checked_count,
                        private_state_established=False, answer_gain_established=False),
                    actual_final_messages=list(messages), longmemeval='SEALED_NOT_ACCESSED')
+    if dialogue_blocks:
+        receipt['dialogue_selection'] = dict(typographic_headings=True,
+            discovered_speech_events=sum(r['kind']=='event' for r in discovered),
+            selected_modal_candidates=len(candidates),
+            rule='EXISTING_B01_EXPLICIT_MODAL_EVENTS_ONLY',
+            every_eligible_event_retained=True, complete_speech_analysis=False)
+        receipt['method'] += '_typed_dialogue_modal_selection'
     return PreparedAnswer(plan, None, messages, receipt)
 
 

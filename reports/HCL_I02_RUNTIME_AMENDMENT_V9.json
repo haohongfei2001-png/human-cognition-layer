@@ -1,0 +1,15 @@
+{
+  "schema": "hcl-i02-runtime-amendment-v9",
+  "reason": "EXISTING_B01_TYPOGRAPHIC_DIALOGUE_ENTRY",
+  "historical_i01_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "previous_hcl_runtime_sha256": "84eb8cfc3c4f9d448c75d9628d7cb0cd031c3a8c95aba3df80c7ac0b24a547ef",
+  "amended_hcl_runtime_sha256": "ae1140954099302d3203da215e4521fac9e62b1663913ff9be7e832f09bf824c",
+  "development_only": true,
+  "confirmation_items_inspected": 0,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "answer_gain_claimed": false,
+  "new_cognition_module": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "boundary": "Existing B01 checks explicitly named typographic dialogue and exact line-wrapped modal expressions. Opt-in local modal-event selection keeps every eligible event and the complete source, never silently truncates quotas; no stage/quotation/private/access/chronology upgrade. Historical runtimes, consumed receipts and dispositions unchanged; no independent answer gain."
+}

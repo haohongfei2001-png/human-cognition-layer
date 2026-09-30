@@ -406,3 +406,18 @@ expert semantics or confirmation. I02 remains NEXT_READY; resolve adequate prima
 rights/provenance or continue a separate safe family, plus blinded qualification
 before any comparison. Do not remove lyrics, recycle old grants or expand H modules.
 
+
+The [v9 ordinary typographic dialogue entry](docs/HCL_I02_TYPOGRAPHIC_DIALOGUE_ENTRY_V9.md)
+reuses existing B01 on exact named, line-wrapped expressions in complete long H
+input. Query-independent modal selection retains every eligible event and all
+source text; H-new keeps selection/source/task and removes only checked B01 state.
+An authored positive witness preserves outer denial versus inner affirmation and
+separate knowledge claims; 73 focused plus 13 source/fairness checks pass. Pronouns,
+embedded directions/quotations, hypothetical scene framing, private access and
+candidate/context overflow do not gain unsupported state. This is narrow ordinary
+entry integration, not a new module, independent semantics or answer gain. Chained
+v9 preserves historical runtimes/receipts. Gregory still has no checked treatment
+and remains DEFERRED_EMBEDDED_LYRIC_RIGHTS. Zero provider calls/spend/grants.
+Unique next task remains I02 protected source/task, blinded review and competent
+comparators; no confirmation upgrade, paid interface source swap or expansion.
+
