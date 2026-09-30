@@ -1,0 +1,12 @@
+{
+  "schema": "hcl-i02-james-holder-control-audit-v1",
+  "finish_reason": "length",
+  "content_characters": 1602,
+  "reasoning_characters": 65818,
+  "raw_receipt_sha256": "da56e81f46b781fb926badfdca2b76372ec56f60cacc4c7e658563a51c7fb819",
+  "processing_scope": "CONTROL_FIELDS_AND_LENGTHS_ONLY_NO_SEMANTIC_TEXT_DISPLAY",
+  "source_exposure": "ALREADY_DEVELOPMENT_EXPOSED_BEFORE_RUN",
+  "semantic_judgment": "UNAVAILABLE",
+  "confirmation_qualified": false,
+  "h_efficacy": "NOT_TESTED"
+}

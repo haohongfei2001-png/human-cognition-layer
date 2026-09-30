@@ -1,10 +1,10 @@
 name: HCL I02 James Development Source Audit Provider-Free
 on:
   pull_request:
-    paths: ['scripts/i02_james_development_candidate.py', 'scripts/run_i02_james_holder_once.py', 'scripts/i02_source_holder_review_v2.py', 'scripts/i02_source_qualification_v10.py', 'tests/test_i02_james_holder_once.py', 'reports/HCL_I02_JAMES*', '.github/workflows/hcl-i02-james*']
+    paths: ['scripts/i02_james_development_candidate.py', 'scripts/run_i02_james_holder_once.py', 'scripts/i02_source_holder_review_v2.py', 'scripts/i02_source_holder_line_index_v3.py', 'tests/test_i02_source_holder_line_index_v3.py', 'reports/HCL_I02_SOURCE_HOLDER_LINE_REFERENCE_V3_WITNESS.json', 'scripts/i02_source_qualification_v10.py', 'tests/test_i02_james_holder_once.py', 'reports/HCL_I02_JAMES*', '.github/workflows/hcl-i02-james*']
   push:
     branches: [main]
-    paths: ['scripts/i02_james_development_candidate.py', 'scripts/run_i02_james_holder_once.py', 'scripts/i02_source_holder_review_v2.py', 'scripts/i02_source_qualification_v10.py', 'tests/test_i02_james_holder_once.py', 'reports/HCL_I02_JAMES*', '.github/workflows/hcl-i02-james*']
+    paths: ['scripts/i02_james_development_candidate.py', 'scripts/run_i02_james_holder_once.py', 'scripts/i02_source_holder_review_v2.py', 'scripts/i02_source_holder_line_index_v3.py', 'tests/test_i02_source_holder_line_index_v3.py', 'reports/HCL_I02_SOURCE_HOLDER_LINE_REFERENCE_V3_WITNESS.json', 'scripts/i02_source_qualification_v10.py', 'tests/test_i02_james_holder_once.py', 'reports/HCL_I02_JAMES*', '.github/workflows/hcl-i02-james*']
 permissions:
   contents: read
 jobs:
@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m unittest tests.test_i02_james_holder_once tests.test_i02_gilman_holder_once tests.test_i02_source_holder_budget_v2 tests.test_i02_exposure_history
+      - run: python -m unittest tests.test_i02_source_holder_line_index_v3 tests.test_i02_james_holder_once tests.test_i02_gilman_holder_once tests.test_i02_source_holder_budget_v2 tests.test_i02_exposure_history
       - name: Complete original bytes, source history, rights, cost metadata only
         run: python -m scripts.run_i02_james_holder_once --preflight --metadata james-source-preflight.json
       - uses: actions/upload-artifact@v4
