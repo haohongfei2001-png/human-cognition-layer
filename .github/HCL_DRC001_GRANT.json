@@ -2,7 +2,7 @@
   "schema": "hcl-drc-once-grant-v1",
   "status": "READY",
   "batch": "DRC001",
-  "package_sha256": "4486527a23d478079e8c038a68758a2f1d350ca342602ceac645a41dce089f7c",
+  "package_sha256": "232203f4c4eafd3965d5de3a26a57febcfa5ed89e3d44c6c2c9f14b83ff212cc",
   "remaining_usd": 2.25,
   "maximum_calls": 40,
   "retries": 0,

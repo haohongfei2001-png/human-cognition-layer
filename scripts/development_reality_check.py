@@ -156,7 +156,7 @@ def history_check(repository):
     joined='\n__DRC_SOURCE_BOUNDARY__\n'.join(r['source'] for r in load_cases()['cases'])
     with tempfile.TemporaryDirectory(prefix='hcl-drc-prior-history-') as tmp:
         def git(*args):subprocess.run(['git','-C',tmp,*args],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
-        git('init');git('fetch',str(Path(repository).resolve()),baseline);git('checkout','--detach',baseline)
+        git('init');git('fetch',str(Path(repository).resolve()),baseline);git('update-ref','HEAD',baseline)  # ref only: never materialize sealed paths
         result=audit_history(tmp,joined)
     save('drc001-history-audit.json',result)
     if result['matches']:raise ValueError('prior concrete source text overlap; review before transport: '+json.dumps(result['matches']))
