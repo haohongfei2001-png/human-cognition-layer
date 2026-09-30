@@ -1,0 +1,11 @@
+{
+  "pdf_sha256": "be913546c61c6627bfb861e3039b0147af7fb3717f9b1bee8fd6c3b33d980d52",
+  "source_sha256": "268665309d08875af75ca4eceebdd9f367b474e0f86fdec27325af6476a4975e",
+  "question_sha256": "11207a82743bc39bd399f6dae90f0003c751f8ec9ebd733fd4045bb2e8e15ab1",
+  "author_unit_reconstruction": "EXACT_NORMALIZED_MATCH",
+  "source_characters": 3408,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "confirmation_qualified": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

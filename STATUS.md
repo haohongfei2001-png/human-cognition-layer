@@ -19,6 +19,18 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [OBP author-original metaethics source audit](docs/HCL_I02_OBP_METAETHICS_SOURCE_AUDIT.md)
+now clears a complete CC BY 4.0 author section and its native question 10 for
+**development calibration only**, after resolving the whole chapter’s quotation
+and family-news boundary. Exact PDF reconstruction and three source-first
+obligations distinguish a reported error theory from moral truth and approval
+of theft. C/P/G keep complete equal inputs; actual H is direct with no specialized
+treatment. This developer source audit is not independent human review, a hard
+item certificate, model-semantic qualification or H efficacy. v9 excludes the
+exposed OBP author/writing system from confirmation. Zero provider calls/spend;
+confirmation source count remains zero. Continue protected disjoint source and
+comparator qualification without paying to retest this already verified input path.
+
 The [I02 v6 reader-source carry repair](docs/HCL_I02_READER_SOURCE_CARRY_V6.md)
 now preserves complete unrestricted reader narrative alongside selected cognition
 in actual final H input, rather than silently losing it after bounded extraction.

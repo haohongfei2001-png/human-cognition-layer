@@ -193,3 +193,18 @@ authorized by this policy change.
 [D05 多方计划与有限授权](docs/HCL_WAVE_D05.md)：分别保留各人的计划、同意和接收；来源规则下的授权不自动转授，也不产生全知的群体人物。
 
 [E01–E02 关系证据与冲突修复](docs/HCL_WAVE_E01_E02.md)：领域、方面和方向不混合；失败不自动归咎于恶意，收到道歉不自动表示原谅。
+
+### I02 author-original concept source boundary
+
+The [OBP author-original metaethics source audit](docs/HCL_I02_OBP_METAETHICS_SOURCE_AUDIT.md)
+now clears a complete CC BY 4.0 author section and its native question 10 for
+**development calibration only**, after resolving the whole chapter’s quotation
+and family-news boundary. Exact PDF reconstruction and three source-first
+obligations distinguish a reported error theory from moral truth and approval
+of theft. C/P/G keep complete equal inputs; actual H is direct with no specialized
+treatment. This developer source audit is not independent human review, a hard
+item certificate, model-semantic qualification or H efficacy. v9 excludes the
+exposed OBP author/writing system from confirmation. Zero provider calls/spend;
+confirmation source count remains zero. Continue protected disjoint source and
+comparator qualification without paying to retest this already verified input path.
+
