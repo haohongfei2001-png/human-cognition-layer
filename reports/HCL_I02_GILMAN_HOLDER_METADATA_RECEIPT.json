@@ -1,0 +1,116 @@
+{
+  "actual_invoice_cost_usd": null,
+  "actual_model_id": "deepseek-v4-pro",
+  "authorization_remaining_usd": 0,
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RERUN",
+  "confirmation_qualified": false,
+  "conservative_reserved_usd": 0.13181784,
+  "cpg_calls": 0,
+  "estimate_limit": "PUBLISHED_CLOCK_RATES; HOLIDAY_ADJUSTMENT_AND_INVOICE_NOT_VERIFIED",
+  "estimated_actual_cost_usd": 0.04445892,
+  "failure_type": "ValueError",
+  "h_calls": 0,
+  "hard_cap_usd": 0.18,
+  "independent_human_review": false,
+  "independent_model_family_judge": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "preflight": {
+    "input_token_bound": 75286,
+    "longmemeval": "SEALED_NOT_ACCESSED",
+    "package_sha256": "420d224b9ca450f74105ce9321fa4664460a1b254ad3435615836066c6cd9266",
+    "peak_reservation_usd": 0.13181784,
+    "provider_calls": 0,
+    "provider_spend_usd": 0,
+    "request_sha256": "d8f13ebfd7021fc883a1dd96f0470373b811b1517a7f3ff28d4d086a8fd138a4",
+    "schema": "hcl-i02-protected-holder-preflight-v1",
+    "source_gate": {
+      "complete_original_body": true,
+      "confirmation_qualified": false,
+      "h_entry_executed": false,
+      "history": {
+        "candidate_source_sha256": "00b4236dc9b2b4215ace0af20da168e77cba5e9ba826c079b4714fb13abe2d49",
+        "checkout_head": "acccfa26565e6e7a82a2be33dc0a7ff60794ffee",
+        "confirmation_qualified": false,
+        "longmemeval": "SEALED_NOT_ACCESSED",
+        "matches": [],
+        "schema": "hcl-i02-reachable-git-history-exposure-v1",
+        "scope": "CURRENTLY_REACHABLE_GIT_OBJECTS_NOT_DELETED_REFS_OR_MODEL_TRAINING",
+        "sealed_blob_ids_not_opened": 54,
+        "skipped_large_paths": [],
+        "skipped_nontext_blobs": 0,
+        "status": "REACHABLE_HISTORY_NO_TEXT_MATCH",
+        "unique_utf8_blobs_scanned": 2786
+      },
+      "longmemeval": "SEALED_NOT_ACCESSED",
+      "model_training_novelty": "UNKNOWN_PUBLIC_CANONICAL_1892_WORK",
+      "native_gold_used": false,
+      "ordinary_input_sha256": "e43645809dee0d9f5dfe967b441cb3822b5445d57101891b2c82c113e0383c76",
+      "package_sha256": "049004386187f2256ed81f6197fb18d255be4ea4a36ee52cf484f215259e0863",
+      "provider_calls": 0,
+      "provider_input_allowed": false,
+      "provider_spend_usd": 0,
+      "publisher_metadata": {
+        "authors": [
+          "Gilman, Charlotte Perkins"
+        ],
+        "deathdates": [
+          "1935"
+        ],
+        "rights": [
+          "Public domain in the USA."
+        ],
+        "titles": [
+          "The Yellow Wallpaper"
+        ]
+      },
+      "publisher_metadata_sha256": "4ac05ad049d2401aeacb9375ac24708241249978bb2c5dcf200ea774fe0f1441",
+      "question_sha256": "ea91105e433f809327597b73b7ed6b342b588b52617e3fb2d35f4d124b312ffc",
+      "raw_sha256": "a40cdaa300cd6850f2c18c2c8fd027339e53c9ed5ac0c01fe9cfe3b57cbca898",
+      "rights_scope": {
+        "CHINA": "NATURAL_AUTHOR_DIED_1935; ART23_LIFE_PLUS50_TERM_PASSED; AUTHORSHIP_INTEGRITY_RETAINED",
+        "UK": "AUTHOR_DIED_1935; ORDINARY_LIFE_PLUS70_TERM_PASSED; NO_MODERN_EDITION_LAYOUT_CLAIM",
+        "USA": "PUBLISHER_PUBLIC_DOMAIN_DECLARATION",
+        "limits": "ORIGINAL_ENGLISH_PLAIN_TEXT_ONLY; NO_TRANSLATION_MODERN_CRITICISM_ANNOTATIONS_OR_IMAGES; SEMANTIC_ITEM_REVIEW_PENDING"
+      },
+      "schema": "hcl-i02-gilman-protected-history-screen-v1",
+      "snapshot": {
+        "candidate_source_sha256": "00b4236dc9b2b4215ace0af20da168e77cba5e9ba826c079b4714fb13abe2d49",
+        "confirmation_qualified": false,
+        "longmemeval": "SEALED_NOT_ACCESSED",
+        "matches": [],
+        "repository_commit": "acccfa26565e6e7a82a2be33dc0a7ff60794ffee",
+        "schema": "hcl-i02-current-snapshot-exposure-screen-v1",
+        "scope": "EXACT_COMMIT_UTF8_TEXT_ONLY_NOT_GIT_HISTORY_OR_MODEL_TRAINING",
+        "sealed_paths_not_opened": 29,
+        "skipped_large_paths": [],
+        "skipped_nontext_paths": [],
+        "status": "TEXT_SNAPSHOT_NO_MATCH",
+        "utf8_files_scanned": 1345
+      },
+      "source_characters": 31497,
+      "source_sha256": "00b4236dc9b2b4215ace0af20da168e77cba5e9ba826c079b4714fb13abe2d49",
+      "source_text_displayed": false,
+      "source_used_for_runtime_repair": false,
+      "status": "READY_FOR_SOURCE_FIRST_HOLDER_REVIEW",
+      "task_fit": "PENDING_INDEPENDENT_SOURCE_FIRST_REVIEW"
+    },
+    "source_or_quote_text_displayed": false
+  },
+  "preliminary_review": null,
+  "provider_calls": 1,
+  "rated_peak_cost_usd": 0.04445892,
+  "raw_receipt_sha256": "8a9f327c8a5bfa1c10460c49dd94f78172ffb538e673ea9f83afff0e94979684",
+  "raw_source_or_quote_text_displayed": false,
+  "retries": 0,
+  "run_id": "36698203458",
+  "schema": "hcl-i02-source-holder-metadata-v1",
+  "sha": "acccfa26565e6e7a82a2be33dc0a7ff60794ffee",
+  "status": "FAILED_NO_RETRY",
+  "usage": {
+    "completion_tokens": 8192,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 9105,
+    "prompt_tokens": 9105,
+    "total_tokens": 17297
+  }
+}

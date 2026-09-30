@@ -1,0 +1,12 @@
+{
+  "schema": "hcl-i02-protected-holder-control-audit-v1",
+  "raw_receipt_sha256": "8a9f327c8a5bfa1c10460c49dd94f78172ffb538e673ea9f83afff0e94979684",
+  "finish_reason": "length",
+  "content_characters": 0,
+  "reasoning_characters": 34706,
+  "source_response_or_reasoning_text_displayed": false,
+  "processing_scope": "PROVIDER_CONTROL_FIELDS_AND_LENGTHS_ONLY; NO_SEMANTIC_REVIEW",
+  "semantic_judgment": "NOT_AVAILABLE",
+  "confirmation_qualified": false,
+  "h_efficacy": "NOT_TESTED"
+}

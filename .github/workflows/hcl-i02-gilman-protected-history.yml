@@ -1,10 +1,10 @@
 name: HCL I02 Protected Gilman Source History
 on:
   pull_request:
-    paths: ['scripts/i02_gilman_protected_candidate.py', 'scripts/i02_source_holder_review.py', 'scripts/run_i02_gilman_holder_once.py', 'tests/test_i02_gilman_holder_once.py', 'tests/test_i02_gilman_protected_candidate.py', 'reports/HCL_I02_GILMAN*', '.github/workflows/hcl-i02-gilman-protected-history.yml']
+    paths: ['scripts/i02_gilman_protected_candidate.py', 'scripts/i02_source_holder_review.py', 'scripts/i02_source_holder_budget_v2.py', 'tests/test_i02_source_holder_budget_v2.py', 'scripts/run_i02_gilman_holder_once.py', 'tests/test_i02_gilman_holder_once.py', 'tests/test_i02_gilman_protected_candidate.py', 'reports/HCL_I02_GILMAN*', '.github/workflows/hcl-i02-gilman-protected-history.yml']
   push:
     branches: [main]
-    paths: ['scripts/i02_gilman_protected_candidate.py', 'scripts/i02_source_holder_review.py', 'scripts/run_i02_gilman_holder_once.py', 'tests/test_i02_gilman_holder_once.py', 'tests/test_i02_gilman_protected_candidate.py', 'reports/HCL_I02_GILMAN*', '.github/workflows/hcl-i02-gilman-protected-history.yml']
+    paths: ['scripts/i02_gilman_protected_candidate.py', 'scripts/i02_source_holder_review.py', 'scripts/i02_source_holder_budget_v2.py', 'tests/test_i02_source_holder_budget_v2.py', 'scripts/run_i02_gilman_holder_once.py', 'tests/test_i02_gilman_holder_once.py', 'tests/test_i02_gilman_protected_candidate.py', 'reports/HCL_I02_GILMAN*', '.github/workflows/hcl-i02-gilman-protected-history.yml']
 permissions:
   contents: read
 jobs:
@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Protected source and historical boundary checks
-        run: python -m unittest tests.test_i02_gilman_holder_once tests.test_i02_gilman_protected_candidate tests.test_i02_exposure_history tests.test_i02_native_choice_candidate
+        run: python -m unittest tests.test_i02_source_holder_budget_v2 tests.test_i02_gilman_holder_once tests.test_i02_gilman_protected_candidate tests.test_i02_exposure_history tests.test_i02_native_choice_candidate
       - name: Current reachable-history and snapshot metadata only
         run: python -m scripts.i02_gilman_protected_candidate --output i02-gilman-protected-history.json
       - uses: actions/upload-artifact@v4
