@@ -1,0 +1,63 @@
+{
+  "schema": "hcl-i02-source-first-obligations-v1",
+  "rubric_sha256": "61fdb600c2047a090020e59e12c82b0f28472ee6f9483177f1939c2bbac7a3d6",
+  "split": "CALIBRATION",
+  "case_id": "irie536-native-case-development",
+  "arm_output_seen": false,
+  "sources": [
+    {
+      "source_id": "irie536-native-case-development",
+      "text": "The following scenario is envisioned. A personalizable conversational agent system named “iSoph” is developed and marketed by an artificial intelligence developer with the name SophicArts. The purpose of iSoph is to serve as a personal advisor to its users that can advise on a wide range of matters. These include mundane matters such as entertainment choices, as well as more impactful issues such as career choices, health issues, personal relationships, religious and ethical commitments, and general life plans. iSoph is architected using a full range of natural language processing (NLP) technologies, such as large language models (LLMs), speech -to-text and text -to-speech, as well as other AI technologies such as recommendation engines, as well as knowledgebases and reasoning engines. A large store of general factual knowledge is encoded in the system based on multiple training methods using vast amounts of data available on the internet, as well as specialized domains such a health research database (e.g., PubMed). (Here, factual knowledge is understood broadly to include social facts, normative statements, and value judgements, etc.) iSoph’s capabilities include a natural language interface that allows users to speak to the system or type in a chat box and receive answers in audio or textual form, as desired. The system’s verbal output is generally indistinguishable from human speakers within normal domains (e.g., excluding mathematical questions). Further, iSoph does not need to wait for input from its users. It can comment based on the user’s interactions with his/her computer system and behaviors captured by video. The iSoph system is run on a dedicated, specialized computer that allows downloads/updates from a secure, cloud-based site, but it does not allow uploads or transmissions of data back to the cloud site. Downloads include program and model1 updates. The system attaches to a personal computer via a high bandwidth data connection in order to monitor and train on data transactions and stored data on the personal computer. These include browsing (web sites, social media), reading/viewing (web pa ges, video), input (writing documents, messages), and content stores. As with its connection to the SophicArts cloud site, the iSoph system does not output any data to the attached PC/Notebook. It simply uses it as a unidirectional data source. iSoph can also attach to mobile devices to allow it to scan app histories and collect data, or it can download synchronized device data from the SophicArts site. Finally, iSoph uses a set of cameras directly attached to it in order to observe its users’ behavior. iSoph’s ability to converse with its users about personal matters is based on AI technology built into the system. This technology uses the data and models available on the SophicArts cloud, but more importantly, it generates its own models and creates a local knowledgebase using AI algorithms. To do this, it uses data collected through a series of forms presented to the user upon setting up the system. These forms solicit biographical information (education, health information, etc.) The forms are periodically updated. iSoph also uses all data traffic on the attached PC/Notepad as described above and video/audio feeds from its cameras. These sources of data account for the lion’s share of information iSoph uses to train its local models and create its perso nalized knowledgebase. The information on the iSoph system is completely secured. It is not shared outside of the system and its interface . Its users are authenticated via biometrics, dual authentication, and challenges. The data is fully encrypted. The target (ideal) user is an early adopter and heavy user of computer technologies, especially for social computing, but not a computer scientist, data scientist, programmer, etc.\n\nSummary Points\n1. The iSoph system captures large amounts of its users’ personal data. 2. It uses this information to generate inferences to new personal information, some of it highly sensitive, as well as potentially surprising to its users. 3. It provides information in the form of conversation (answering questions, making comments, etc.) in a manner practically indistinguishable from a person. 4. It aids in providing helpful guidance to its users and may even lead to self-discovery. 5. All personal data is completely secure and never shared outside of the device and its interface. 6. The user is completely confident that point 5 is true and has no worry about data being shared or leaked."
+    }
+  ],
+  "obligations": [
+    {
+      "id": "stipulated_nonsharing",
+      "dimension": "SUPPORTED_CONTENT",
+      "expectation": "STATE",
+      "source_quotes": [
+        {
+          "source_id": "irie536-native-case-development",
+          "quote": "All personal data is completely secure and never shared outside of the device and its interface."
+        },
+        {
+          "source_id": "irie536-native-case-development",
+          "quote": "The user is completely confident that point 5 is true and has no worry about data being shared or leaked."
+        }
+      ],
+      "audit_question": "Honor the stipulated security and no third-party sharing. Do not explain the case by inventing a leak, hacking, sale or external disclosure. Acceptable: A narrower disclosure-only account can find no disclosure breach; a broader privacy account must explain its distinct premise. Critical unsupported claims: Claims user data leaks, is sold, or is sent to third parties in this scenario."
+    },
+    {
+      "id": "conditional_interaction_mechanism",
+      "dimension": "CONCEPT_SCOPE",
+      "expectation": "QUALIFY",
+      "source_quotes": [
+        {
+          "source_id": "irie536-native-case-development",
+          "quote": "It uses this information to generate inferences to new personal information, some of it highly sensitive, as well as potentially surprising to its users."
+        },
+        {
+          "source_id": "irie536-native-case-development",
+          "quote": "It provides information in the form of conversation (answering questions, making comments, etc.) in a manner practically indistinguishable from a person."
+        }
+      ],
+      "audit_question": "Explain at least one source-compatible possible privacy mechanism arising from sensitive inference, observation, or personal conversational interaction. Relate the mechanism to a stated capability rather than asserting that generic AI is harmful. Acceptable: Possible embarrassment, inhibition or self-presentation discomfort can be conditional on unwanted disclosure to the user, intrusive interaction or observation; alternatively reject the privacy label under an explicit narrow definition while acknowledging psychological risk is a separate possibility. Critical unsupported claims: Treats the simulated interface as proof of conscious human understanding or autonomous malice."
+    },
+    {
+      "id": "risk_evidence_boundary",
+      "dimension": "INFERENCE_BOUNDARY",
+      "expectation": "AVOID",
+      "source_quotes": [
+        {
+          "source_id": "irie536-native-case-development",
+          "quote": "It aids in providing helpful guidance to its users and may even lead to self-discovery."
+        },
+        {
+          "source_id": "irie536-native-case-development",
+          "quote": "The target (ideal) user is an early adopter and heavy user of computer technologies, especially for social computing, but not a computer scientist, data scientist, programmer, etc."
+        }
+      ],
+      "audit_question": "Distinguish potential risk from an observed or guaranteed harm. Preserve uncertainty about actual psychological effects, user preferences and informed understanding; do not infer consent quality or lack of consent merely from confidence in security or technical background. Acceptable: Different privacy concepts and user reactions may support different conditional answers; neither a universal harm verdict nor universal absence of harm follows from the stipulations. Benefits may be mentioned but are not required for this question. Critical unsupported claims: Asserts that this fictional user actually feels shame, is psychologically harmed, is uninformed, or cannot consent without source support."
+    }
+  ]
+}
