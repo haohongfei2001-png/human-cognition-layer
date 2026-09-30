@@ -41,13 +41,16 @@ class TypographicDialogueTests(unittest.TestCase):
 
     def test_runtime_chain_rejects_new_digest_or_previous_digest_drift(self):
         from pathlib import Path
-        from scripts.i02_runtime_amendment_v9 import validate_runtime_amendment_v9,validate_current
+        from scripts.i02_runtime_amendment_v9 import validate_runtime_amendment_v9
+        from scripts.i02_runtime_amendment_v10 import validate_current
         self.assertTrue(validate_current())
         names=['HCL_I01_EVALUATION_FREEZE.json','HCL_I02_RUNTIME_AMENDMENT.json']+[f'HCL_I02_RUNTIME_AMENDMENT_V{i}.json' for i in range(2,10)]
         chain=[json.loads(Path('reports',n).read_text()) for n in names]
+        certified_v9=chain[-1]['amended_hcl_runtime_sha256']
+        self.assertTrue(validate_runtime_amendment_v9(*chain,current_digest=certified_v9))
         for field in ('amended_hcl_runtime_sha256','previous_hcl_runtime_sha256'):
             bad=copy.deepcopy(chain);bad[-1][field]='0'*64
-            with self.assertRaisesRegex(ValueError,'v9 runtime amendment'):validate_runtime_amendment_v9(*bad)
+            with self.assertRaisesRegex(ValueError,'v9 runtime amendment'):validate_runtime_amendment_v9(*bad,current_digest=certified_v9)
 
     def test_explicit_access_filter_and_no_event_time_from_layout(self):
         core=EvidenceCore();r=prepare_semantics(Q,(AuthorizedText('a','_Mina._ I believe the gate is open.',permitted_observers=('Mina',)),),core=core,scope=Scope(observer='Noor',source_ids=('a',)),dialogue_blocks=True,modal_events_only=True)

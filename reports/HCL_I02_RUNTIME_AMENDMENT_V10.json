@@ -1,0 +1,15 @@
+{
+  "schema": "hcl-i02-runtime-amendment-v10",
+  "reason": "EXISTING_C01_LONG_READER_INTEGRATION",
+  "historical_i01_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "previous_hcl_runtime_sha256": "ae1140954099302d3203da215e4521fac9e62b1663913ff9be7e832f09bf824c",
+  "amended_hcl_runtime_sha256": "49f2ad957993110b95e3f9daa1f2acbd97c57dc446ecb6f60704cf73704fb7da",
+  "development_only": true,
+  "confirmation_items_inspected": 0,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "answer_gain_claimed": false,
+  "new_cognition_module": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "boundary": "Existing C01 reuses already grounded shared ordinary-source candidates and retained goal projection; exact source/version/core binding, reported plan/opportunity joins and unknown private intent preserved. H-new disables C01 alone and retains B01, full source and selection. Historical runtimes/dispositions unchanged; no independent efficacy or source qualification."
+}
