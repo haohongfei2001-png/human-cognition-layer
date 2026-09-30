@@ -388,3 +388,21 @@ their original facts.0 calls/spend; chained v8 runtime. Unique next task remains
 I02 independent protected source/item, blinded semantic review and competent
 comparators with actual task treatment before any separately frozen comparison.
 
+
+### I02 complete multiparty source review
+
+The [complete Gregory multiparty play review](docs/HCL_I02_GREGORY_MULTIPARTY_SOURCE_REVIEW.md)
+fixes a17,896-character native author unit and ordinary question before source-first
+implementer review. Seven literal obligations cover goals, recognition/access,
+counterfactual scope, speech/action conflict, reported norms, reciprocity and private
+inference limits.20 focused provider-free checks pass; C/P/G and actual H preserve
+complete equal ordinary source/task. Actual current H has0 candidates/checked mental
+expressions and **no specialized treatment** on this drama format; no grammar repair
+or efficacy claim. Whole author/system/task/fingerprint is development-excluded byv12.
+**DEFERRED_EMBEDDED_LYRIC_RIGHTS**: original drama term metadata does not fully resolve
+all quoted historical lyric versions/China scope. No provider input, paid package,
+trigger or grant;0 calls/spend. Source/task/review are development only, not independent
+expert semantics or confirmation. I02 remains NEXT_READY; resolve adequate primary
+rights/provenance or continue a separate safe family, plus blinded qualification
+before any comparison. Do not remove lyrics, recycle old grants or expand H modules.
+

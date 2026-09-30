@@ -1,0 +1,122 @@
+{
+  "schema": "hcl-i02-gregory-source-first-obligation-seed-v1",
+  "rubric_sha256": "61fdb600c2047a090020e59e12c82b0f28472ee6f9483177f1939c2bbac7a3d6",
+  "split": "CALIBRATION",
+  "case_id": "gregory-rising-moon-complete-original-play",
+  "source_sha256": "712a9a29d5b8ab974342cf7b2b3c7ad72ae8df979a2ec0bb479b914919d5ce2e",
+  "question_sha256": "3a5961f20cb2c61669f5867e7667dd45c9e0185ddb5b9e7c35e2b23bcfdb1bc9",
+  "arm_output_seen": false,
+  "reviewer": "IMPLEMENTER_SOURCE_FIRST_ONLY_NOT_INDEPENDENT",
+  "obligations": [
+    {
+      "id": "stated_search_incentive_and_escape_aim",
+      "dimension": "SUPPORTED_CONTENT",
+      "expectation": "STATE",
+      "source_quotes": [
+        {
+          "source_id": "ordinary-source",
+          "quote": "A hundred pounds and promotion sure."
+        },
+        {
+          "source_id": "ordinary-source",
+          "quote": "I thought to do it with my tongue."
+        }
+      ],
+      "audit_question": "State the Sergeant's source-reported reward/promotion and duty considerations and the Man's expressly reported attempt to get through by talking. Do not omit supported aims merely to avoid unsupported psychological certainty."
+    },
+    {
+      "id": "recognition_and_other_police_access",
+      "dimension": "ACTOR_TIME_ACCESS",
+      "expectation": "QUALIFY",
+      "source_quotes": [
+        {
+          "source_id": "ordinary-source",
+          "quote": "It’s a pity I\r\nhad no chance of seeing him before he broke out of gaol."
+        },
+        {
+          "source_id": "ordinary-source",
+          "quote": "You are the man I am looking for."
+        },
+        {
+          "source_id": "ordinary-source",
+          "quote": "(_Sergeant puts hat and wig behind his back._)"
+        }
+      ],
+      "audit_question": "Separate initial lack of prior sight/recognition, later signal/disclosure and recognition, and X/B returning after the Man hides. Do not backfill early recognition or assume X/B learned the hidden identity from reader-visible stage directions. Treat threats initially reported by the Man as reports, not independently verified history."
+    },
+    {
+      "id": "counterfactual_role_swap",
+      "dimension": "ALTERNATIVE_SCOPE",
+      "expectation": "AVOID",
+      "source_quotes": [
+        {
+          "source_id": "ordinary-source",
+          "quote": "If it wasn’t for the sense I have, and for my\r\nwife and family, and for me joining the force the time I did, it might\r\nbe myself now would be after breaking gaol and hiding in the dark, and\r\nit might be him that’s hiding in the dark and that got out of gaol\r\nwould be sitting up where I am on this barrel"
+        }
+      ],
+      "audit_question": "Do not turn the Sergeant's expressed might/if role-swap thought into his actual past rebellion, guilt, permanent identity or literal timeline. A source-supported interpretation of shared possible life paths remains an interpretation."
+    },
+    {
+      "id": "concealment_and_choice_conflict",
+      "dimension": "COUNTEREVIDENCE",
+      "expectation": "STATE",
+      "source_quotes": [
+        {
+          "source_id": "ordinary-source",
+          "quote": "I am in the force. I will not let you pass."
+        },
+        {
+          "source_id": "ordinary-source",
+          "quote": "_Sergeant:_ (_After a pause._) No one."
+        },
+        {
+          "source_id": "ordinary-source",
+          "quote": "(_Sergeant gives them._)"
+        }
+      ],
+      "audit_question": "Preserve the contrast between declared refusal/duty and observed concealment, dismissal of colleagues, returned disguise and the Man's departure. Explain the action change without treating one speech as all later conduct or claiming the police had literally no agency."
+    },
+    {
+      "id": "reported_political_norm_not_moral_truth",
+      "dimension": "NORMATIVE_PREMISE",
+      "expectation": "AVOID",
+      "source_quotes": [
+        {
+          "source_id": "ordinary-source",
+          "quote": "Well, we have to do our duty in the force."
+        },
+        {
+          "source_id": "ordinary-source",
+          "quote": "I am a friend of Granuaile."
+        }
+      ],
+      "audit_question": "Attribute competing duty/political affiliation and its role in interpretation to the source/speakers. Do not score one political allegiance, legal duty or helping escape as automatic universal moral truth, guilt or worth."
+    },
+    {
+      "id": "future_reciprocity_is_conditional",
+      "dimension": "CALIBRATED_UNCERTAINTY",
+      "expectation": "QUALIFY",
+      "source_quotes": [
+        {
+          "source_id": "ordinary-source",
+          "quote": "Maybe\r\nI’ll be able to do as much for you when the small rise up and the big\r\nfall down"
+        }
+      ],
+      "audit_question": "Keep the Man's thank-you and maybe/when prospective reciprocity conditional. It is not an unconditional binding promise or evidence that a later repayment actually occurs."
+    },
+    {
+      "id": "no_permanent_private_motive_upgrade",
+      "dimension": "INFERENCE_BOUNDARY",
+      "expectation": "AVOID",
+      "source_quotes": [
+        {
+          "source_id": "ordinary-source",
+          "quote": "I\r\nwonder, now, am I as great a fool as I think I am?"
+        }
+      ],
+      "audit_question": "Allow grounded interpretations of fear, shared memory or sympathy and explicit observed concealment; do not assert one exhaustive private motive, universal trait, permanent conversion, mutual trust or remorse as certain solely from the outcome. Distinguish the final self-question from a settled psychological verdict."
+    }
+  ],
+  "semantic_truth_automatically_verified": false,
+  "provider_input_allowed": false
+}

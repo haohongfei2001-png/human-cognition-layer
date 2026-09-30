@@ -1,0 +1,38 @@
+name: HCL I02 Gregory Multiparty Source and Rights Hold
+on:
+  pull_request:
+    paths: ['hcl/**', 'scripts/i02_gregory_multiparty_source.py', 'scripts/i02_source_qualification_v12.py', 'tests/test_i02_gregory_multiparty_source.py', 'reports/HCL_I02_GREGORY*', '.github/workflows/hcl-i02-gregory*']
+  push:
+    branches: [main]
+    paths: ['hcl/**', 'scripts/i02_gregory_multiparty_source.py', 'scripts/i02_source_qualification_v12.py', 'tests/test_i02_gregory_multiparty_source.py', 'reports/HCL_I02_GREGORY*', '.github/workflows/hcl-i02-gregory*']
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch pinned public edition without printing or publishing source
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from scripts.i02_gregory_multiparty_source import download_material
+          raw,rdf=download_material()
+          Path('/tmp/gregory-raw.txt').write_bytes(raw)
+          Path('/tmp/gregory-rdf.xml').write_bytes(rdf)
+          PY
+      - name: Provider-free source, actor/time, fair inputs and held rights checks
+        env:
+          HCL_GREGORY_RAW: /tmp/gregory-raw.txt
+          HCL_GREGORY_RDF: /tmp/gregory-rdf.xml
+        run: python -m unittest tests.test_i02_gregory_multiparty_source tests.test_i02_full_source_arms_v9 tests.test_v1_long_epistemic_integration
+      - run: python -m scripts.i02_gregory_multiparty_source --raw /tmp/gregory-raw.txt --rdf /tmp/gregory-rdf.xml --output gregory-multiparty-source-preflight.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hcl-i02-gregory-multiparty-metadata-${{ github.run_id }}
+          path: gregory-multiparty-source-preflight.json
