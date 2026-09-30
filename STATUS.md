@@ -19,6 +19,22 @@ code or upgrade any historical evidence.
 
 **NEXT_READY: `I02_UNEXPOSED_SOURCE_QUALIFICATION`**
 
+The [complete Clifford philosophical development calibration](docs/HCL_I02_CLIFFORD_COMPLETE_ESSAY_CALIBRATION.md)
+freezes a complete56,817-character original essay and a question fixed before the
+complete target read, with9 source-first obligations permitting multiple grounded
+critiques. Equal C/P/Gv9 complete inputs, native high thinking and generous32,768-token
+outputs are preflighted;20 provider-free checks pass. Current certified H preserves
+the source but has0 candidates/no specialized treatment, so H/H-new calls remain0.
+One new existing-provider grant allows at most4 C/P/G calls,0 retries, USD1.40 cap
+(peak worst reservation1.32680856), with no historical transfer. No call/outcome yet.
+This is genuine comparator semantic calibration, not another source-holder interface
+retest. Implementer source/task/review is development only;0 confirmation qualified.
+v13 excludes the author/system/exact fingerprints; Gregory rights hold and all
+historical dispositions stay fixed. After exact-head/main CI: dispatch once, preserve
+raw receipt and source-first close/grant0/trigger deletion; then continue I02 protected
+source/task, independent review and competent comparator qualification. No H expansion,
+leaderboard or LongMemEval access.
+
 The [v11 existing C03 long-reader composition](docs/HCL_I02_LONG_PLAN_COMPOSITION_V11.md)
 now joins shared C01 conditional plans with reported belief/revision and an explicit
 source-declared model in actual complete ordinary H input. The authored positive
