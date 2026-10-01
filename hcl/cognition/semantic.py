@@ -10,7 +10,7 @@ import re
 
 from .core import ClaimKind, EvidenceCore, Scope, identity
 
-_NAME = r'(?!(?:Then|Later|Meanwhile|If|When|Unless|Perhaps)\b)(?:[A-Z][\w\u2019-]{0,39}(?: [A-Z][\w\u2019-]{0,39})?|she|he|they|someone)'
+_NAME = r'(?!(?:Then|Later|Meanwhile|If|When|Unless|Perhaps|Otherwise)\b)(?:[A-Z][\w\u2019-]{0,39}(?: [A-Z][\w\u2019-]{0,39})?|she|he|they|someone)'
 _SPEECH = re.compile(rf'(?P<speaker>{_NAME})\s+(?:said|says|stated|replied|wrote|added|explained)\s*[:,]?\s*["“](?P<body>[^"“”]+)["”]')
 _COLON = re.compile(rf'(?m)^(?P<speaker>{_NAME}):\s*(?P<body>[^\n]+)')
 # Explicit typographic dialogue labels are source-local speakers, not resolved identities.
@@ -75,6 +75,19 @@ class SemanticResult:
         return json.loads(self.diagnostics_json)
 
 
+def _literal_nonmental_context(fragment):
+    """Account for simple source narration only, without creating event/world claims.
+
+    A small syntactic bridge lets explicit mental reports coexist with ordinary
+    material narration. Unknown qualifications/mental or source-evaluation clauses
+    still refuse the whole additional path. This is not a semantic fact checker.
+    """
+    match=re.fullmatch(rf'(?P<actor>{_NAME})\s+(?:arrived|departed|entered|left|returned|opened|closed|moved|placed|walked)(?:\s+[A-Za-z][\w -]{{0,160}})?\.',fragment)
+    if not match or match['actor'].casefold() in _PRONOUNS:
+        return False
+    return not re.search(r'\b(?:if|unless|when|while|though|although|but|because|before|after|hypothetical|imagined|imaginary|counterfactual|pretended|perhaps|supposedly|allegedly|unreliable|mistaken|doubted|false|not|never|could|would|may|might|believes?|thinks?|knows?|understands?|heard|read|claims?|reports?|said|story|stories|narrative|account|according)\b',fragment,re.I)
+
+
 def _paragraph_narrator_report_candidates(source, reporter):
     """Additional complete report/speech paragraphs; no partial qualifier removal."""
     from .epistemic import _PREDICATE
@@ -99,7 +112,8 @@ def _paragraph_narrator_report_candidates(source, reporter):
             speech=_SPEECH.fullmatch(fragment.rstrip('.')) or _COLON.fullmatch(fragment)
             if (not speech or speech['speaker'].casefold() in _PRONOUNS
                     or not re.fullmatch(_NAME,speech['speaker'])):
-                return [] # all original fragments must be accounted for
+                if not _literal_nonmental_context(fragment):
+                    return [] # all original fragments accounted for; no partial qualifier removal
     return reports
 
 
