@@ -95,3 +95,9 @@ lossless identity transport/capacity integration, not capability28: user context
 114 combined local passes.0 calls/spend; no token-cost or answer utility measurement.
 Source anchors are not semantic certificates, utility IMPLEMENTED_UNVALIDATED;
 historical dispositions unchanged. Next fresh public Development Reality Checks.
+
+DRC003 source-first INCONCLUSIVE:4 agency pairs Base2/H2 of4, actual H treatment0;
+JSON-mode grader400 halted before any philosophy comparison. Source delivery audit
+has wrong expected versus actual fallback source-ID frame, not4 semantic harms.
+No raw rescore/rerun or historical capability upgrade. Grant0/trigger removed;
+next generic request/source-frame correctness, then ordinary source-bearing coverage.
