@@ -1,0 +1,85 @@
+# v25: ordinary-answer source-inference delivery boundary
+
+## Outcome and limits
+
+The actual ordinary-reader final input now distinguishes explicit reports from
+interpretive explanations. It preserves source actor/speaker, negation,
+qualification and time, asks that interpretive links identify their missing
+premises, and leaves alternatives unresolved unless the source excludes them.
+It explicitly separates action/outcome from stable traits, hidden motives and
+causal contribution/action-time knowledge/foreseeability/control/stated intention.
+These reuse existing provenance and responsibility-factor distinctions. There is
+no new personality ontology, cognition family, lexical story detector or item rule.
+
+This is a **delivery-policy repair**, not an automatic semantic audit. Its evidence
+status is **IMPLEMENTED_UNVALIDATED_DELIVERY_POLICY**. No real model answer has been
+generated or judged for v25. A deliberate test supplies an exact-quoted but
+unsupported trait claim: it remains citation-valid, with semantic certification
+false. Passing tests therefore cannot be presented as repaired model semantics,
+verified trait detection, efficacy, a new task gain or superior moral competence.
+A source report may still explicitly describe a motive; the policy preserves it
+as a report instead of suppressing mental content or certifying private truth.
+
+## Runtime scope
+
+Only `hcl/cognition/reader_entry.py` changes. The delivery policy is added after
+local/conditional path selection, so checked B01/B02/C01/C03 states, full source
+and source versions, query and opt-in translation assumptions remain intact.
+No local candidate or new checked cognition is fabricated. The policy is present
+on local no-state, actual-checked, conditional-translation and unusable-translation
+fallback paths. Explicit translation opt-in and at-most-one extraction stay intact.
+
+The returned snapshot retains its real prepared dependency object. Every current
+message read validates the original source revisions and inner claim challenges.
+Repeated preparation does not append the policy twice or mutate the cache. Receipt
+`actual_final_messages` describes the actual returned wire and records the added
+serialized-character count. These are characters, not measured provider tokens or
+invoice costs. Authored witness overhead is 803 serialized characters per input;
+no cost-saving claim is made. This deliberately supersedes current-wire size
+comparisons while preserving historical comparisons at their certified runtime.
+
+The local policy budget is checked before any opted-in extraction. A larger
+conditional result fails before a final answer if it exceeds the selected budget.
+The final JSON instruction is also included in the final-answer budget check before
+that answer adapter runs. Source text is never shortened to fit. An extraction
+already used to produce a larger conditional representation cannot be refunded;
+this version does not claim otherwise.
+
+## Provider-free evidence
+
+- 13 new tests cover independently authored action/self-report/third-party/denial/
+  time contrasts, actual B01/C01/C03 preservation, conditional and fallback paths,
+  exact receipt and wire, budget rejection, repetition/cache isolation, revision,
+  removal, inner challenge, runtime-digest rejection and honest semantic limits
+- The v25 witness compares six authored inputs to the Git-certified DRC008 v24
+  archive: source/query/checked user messages are identical, treatment accounting
+  is unchanged, and only the explicit delivery policy is added to the system wire
+- The unchanged v21/v24 cost witnesses are run against certified archived v24. Their original
+  empty-state size reductions and active-state exact equality assertions remain
+  intact; current v25 overhead is never substituted into those historical claims
+- The v25 runtime amendment validates the v24 chain and exact DRC008 archive;
+  nine consumed archives and all historical scores/grades remain immutable
+
+The machine-readable authored witness is
+`reports/HCL_DEVELOPMENT_SOURCE_INFERENCE_V25_WITNESS.json`. Exact-head CI, rather
+than this document, is the authoritative final integrated pass receipt.
+
+## Remaining work and boundaries
+
+Review the instruction contract and exact-head correctness evidence. A future
+fresh-source comparison must separately freeze complete fair inputs, native task
+measurement, actual treatment and all model/cost settings before output. The added
+policy can be simplified or removed if it adds overhead without useful benefit.
+Do not rerun DRC008, patch its grades, select tasks for a desired treatment, or
+interpret correct quotations as complete semantic support. This slice makes zero
+live provider calls, changes no consumed grant and adds no live trigger. Final
+Sealed Confirmation remains separate; LongMemEval sealed and leaderboard off.
+
+## Local verification notes
+
+The full v1 suite initially encountered 22 missing-history errors in a shallow
+clone; fetching reachable Git history resolved them without runtime changes.
+The historical v21 current-wire size assertion also failed with the new 803-character
+contract, as expected. Its assertion is unchanged and now runs on certified v24
+inside the v25 witness, along with v24's original cost/equality witness. This is
+not a claim that current v25 retains the historical per-input size reduction.

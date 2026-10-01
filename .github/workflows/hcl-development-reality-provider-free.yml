@@ -34,3 +34,7 @@ jobs:
       - run: python -m scripts.development_drc007_replay
       - run: python -m unittest tests.test_development_drc008_replay
       - run: python -m scripts.development_drc008_replay
+      - name: Current ordinary-source inference delivery and runtime boundary
+        run: |
+          python -m unittest tests.test_v1_source_inference_boundary
+          python -m scripts.development_runtime_amendment_v25

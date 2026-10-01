@@ -14,7 +14,30 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: GENERAL_ORDINARY_ANSWER_SOURCE_INFERENCE_BOUNDARY_REPAIR**
+## v25 current source-inference delivery slice
+
+**NEXT_READY: GENERAL_ORDINARY_ANSWER_SOURCE_INFERENCE_BOUNDARY_VERIFICATION**
+
+[Source-bounded explanation delivery v25](docs/HCL_DEVELOPMENT_SOURCE_INFERENCE_V25.md)
+adds an explicit report-versus-interpretation contract to the actual ordinary-reader
+wire for local, checked, conditional-translation and fallback paths. Original source,
+query, actor/time/checker states, checked-treatment accounting and dependency guards
+remain unchanged. Interpretive links need visible assumptions; action/outcome alone
+cannot supply stable traits, hidden motives or action-time responsibility factors.
+The contract cannot semantically verify a freeform answer: an exact-quoted but
+unsupported trait stub remains citation-valid and explicitly not semantic-certified.
+Provider-free tests verify delivery and failure boundaries only. Additional context
+is recorded in serialized characters; no token/cost reduction or answer gain claimed.
+
+Current classification: **IMPLEMENTED_UNVALIDATED_DELIVERY_POLICY**. This slice makes
+0 live model calls and creates no grant. All nine consumed runtime archives, raw
+answers, grades, sources and dispositions remain unchanged. Historical v21/v24 cost witnesses
+run against certified archived v24, without weakening its earlier equality or size
+claims. Next verify this slice on the exact PR head and review the general contract;
+fresh-task model validation remains separate and must freeze its own inputs/costs.
+LongMemEval stays SEALED; leaderboard stays off.
+
+## DRC008 preserved source-first closure
 
 [DRC008 source-first closure](reports/HCL_DRC008_SOURCE_FIRST_CLOSURE.md): INCONCLUSIVE,
 provisional paired judgeBase/H6/6,0gains/harms,checked treatment0/6;quotes/formatallpass.
