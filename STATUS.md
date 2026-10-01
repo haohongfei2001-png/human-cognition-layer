@@ -33,6 +33,13 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: GENERAL_ORDINARY_ANSWER_SOURCE_INFERENCE_BOUNDARY_REPAIR**
 
+[Advance development source preparation](docs/HCL_DEVELOPMENT_SOURCE_PREPARATION.md):
+six fixed MindGames rows have a rights-pinned, source-reviewed packet for future
+protocol preparation; two ToMBench task distributions retain native mismatch and
+unsupported-prediction findings and are deferred without row substitution.
+Full ordinary input is separated from gold/formal/model metadata; zero calls,
+zero grant, no final confirmation or I03–I05 completion claim.
+
 [Moral Stories source-first screen](docs/HCL_MORAL_STORIES_SOURCE_SCREEN.md):
 six deterministically selected native rows have no reachable-text history match,
 but source review identifies unstated-premise/outcome and normative ambiguity.

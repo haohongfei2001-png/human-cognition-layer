@@ -1,0 +1,313 @@
+{
+  "admitted_for_paid_execution": false,
+  "authorized_calls": 0,
+  "authorized_spend_usd": 0,
+  "base_main": "c59f618aa919434f2da8c14a602333bb1c2b1e4f",
+  "final_confirmation_qualified": false,
+  "independent_readonly_review": {
+    "provider_input_limit": "Future runner must select ordinary_input, never the metadata packet containing native_label",
+    "qualification": "DEVELOPMENT_TEAM_READONLY_NOT_FINAL_INDEPENDENT_EFFICACY",
+    "result": "NO_SCOPED_BLOCKER",
+    "scope": "Six native MindGames labels and six ToMBench source/label dispositions; ordinary input separation"
+  },
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "mindgames": {
+    "card_sha256": "0f91413e5c998307bc56f7a26568b8b6f141a71d2af9d0d0b5c7f41bf1842a87",
+    "cases": [
+      {
+        "answer_vocabulary": [
+          "entailment",
+          "not_entailment"
+        ],
+        "authorized_calls": 0,
+        "authorized_spend_usd": 0,
+        "confirmation_qualified": false,
+        "grade_rewritten": false,
+        "hypothesis_sha256": "6eb46ef1c5135fd6f34b61f22eb12c6710efa74b583c8b19b0af7cc62f5d253f",
+        "live_execution_enabled": false,
+        "model_output_seen": false,
+        "native_index": 3274,
+        "native_label": "not_entailment",
+        "native_row_sha256": "c5334d372b1b90e68bf5cf5920cd82234e75f47d9b76d39cd6e01edfff9fd20f",
+        "ordinary_input_sha256": "8a9fe0801917940c40dd1d1510bdbee8c6269a816d70803a3d0b7911460608e0",
+        "provider_calls": 0,
+        "review_note": "No observation or announcement settles the unseen card queried; the negative label is consistent under public-announcement semantics.",
+        "source_first_review": "CONSISTENT_UNDER_NATIVE_EPISTEMIC_CONVENTIONS",
+        "source_sha256": "5e964f56d33913f92afc231c9813b76d5d3c207c8d18191d9d82f08868ec03de"
+      },
+      {
+        "answer_vocabulary": [
+          "entailment",
+          "not_entailment"
+        ],
+        "authorized_calls": 0,
+        "authorized_spend_usd": 0,
+        "confirmation_qualified": false,
+        "grade_rewritten": false,
+        "hypothesis_sha256": "c384be603b400c1407613f917de5ae25be188d5c733f92177b679fff7c4f4d79",
+        "live_execution_enabled": false,
+        "model_output_seen": false,
+        "native_index": 41454,
+        "native_label": "entailment",
+        "native_row_sha256": "b0c6891f7e3120d9186b72940c647c2cabc801ce27fe0a1b43ede0cec1a1bfc6",
+        "ordinary_input_sha256": "492ac35742387b2701cf1ff895f76e160bc8829f6ad495a0408c220215f5e8eb",
+        "provider_calls": 0,
+        "review_note": "The observer is explicitly shown the queried card; the later announcement does not remove that observation.",
+        "source_first_review": "CONSISTENT_UNDER_NATIVE_EPISTEMIC_CONVENTIONS",
+        "source_sha256": "4010bccd347b32506267f2f33565e8951a7c57f019cd8a9eacf9fb8bc2dee5b1"
+      },
+      {
+        "answer_vocabulary": [
+          "entailment",
+          "not_entailment"
+        ],
+        "authorized_calls": 0,
+        "authorized_spend_usd": 0,
+        "confirmation_qualified": false,
+        "grade_rewritten": false,
+        "hypothesis_sha256": "a73e56b0f4288077f4da40e5291275b918684d681e8ae325a6f0723894ea1b7c",
+        "live_execution_enabled": false,
+        "model_output_seen": false,
+        "native_index": 41671,
+        "native_label": "not_entailment",
+        "native_row_sha256": "e616351080589d104d63203610655c55cc725b1cbcd82996020430da53b31aa5",
+        "ordinary_input_sha256": "b256bbe42257f6d6aef816af10c3ecf05406ec476cd4e9bc34ee61f8851bbf04",
+        "provider_calls": 0,
+        "review_note": "The asserted nested knowledge of nobody-red conflicts with the public someone-red announcement under factive knowledge.",
+        "source_first_review": "CONSISTENT_UNDER_NATIVE_EPISTEMIC_CONVENTIONS",
+        "source_sha256": "7f56361f0d59988e907554f5e9e9c3a3579dda3480b577014a7eb9e67aea181e"
+      },
+      {
+        "answer_vocabulary": [
+          "entailment",
+          "not_entailment"
+        ],
+        "authorized_calls": 0,
+        "authorized_spend_usd": 0,
+        "confirmation_qualified": false,
+        "grade_rewritten": false,
+        "hypothesis_sha256": "598110f52b0b61507ea93dc4fc9ec36f9e0f9edf8f774b931fdb3ea55912469e",
+        "live_execution_enabled": false,
+        "model_output_seen": false,
+        "native_index": 54915,
+        "native_label": "entailment",
+        "native_row_sha256": "9af0a562abd206c9b54665ee1402aa58850c2330115c35373740222f3465f2e7",
+        "ordinary_input_sha256": "e7ccaf1fc8d1d48189c1126b3b173d576fd1769067bbae4e0a75454833526d2b",
+        "provider_calls": 0,
+        "review_note": "The public someone-muddy announcement makes nobody-muddy false and known false; the nested know-whether claim is consistent under shared public-announcement semantics.",
+        "source_first_review": "CONSISTENT_UNDER_NATIVE_EPISTEMIC_CONVENTIONS",
+        "source_sha256": "a07f4b4d2df09168540690e992849734f67cb224e6b828c798561a373d81dd7b"
+      },
+      {
+        "answer_vocabulary": [
+          "entailment",
+          "not_entailment"
+        ],
+        "authorized_calls": 0,
+        "authorized_spend_usd": 0,
+        "confirmation_qualified": false,
+        "grade_rewritten": false,
+        "hypothesis_sha256": "c9ee1fee9590400ab7c9957fb3d550ff5b0b9562ac3b1c6fbe0ca3ec7aff6493",
+        "live_execution_enabled": false,
+        "model_output_seen": false,
+        "native_index": 65380,
+        "native_label": "entailment",
+        "native_row_sha256": "6d2cfdd7cbbbfe955a10d405c7d090701bba43c2a079f894b0a5fed7260b2179",
+        "ordinary_input_sha256": "1c5f00f1043542b05f03d2fc30c2d57bf0b4e07e69e00ad8f26d5e648f4b2e99",
+        "provider_calls": 0,
+        "review_note": "The named negative forehead fact is publicly announced; all know that all can settle it under the benchmark convention.",
+        "source_first_review": "CONSISTENT_UNDER_NATIVE_EPISTEMIC_CONVENTIONS",
+        "source_sha256": "42d2190cd17e3cf7e7ea4fc7a6d9d1c841328a7f90e00d9b60cbd6c7a4348d5c"
+      },
+      {
+        "answer_vocabulary": [
+          "entailment",
+          "not_entailment"
+        ],
+        "authorized_calls": 0,
+        "authorized_spend_usd": 0,
+        "confirmation_qualified": false,
+        "grade_rewritten": false,
+        "hypothesis_sha256": "3f7df2a8f42cf497d8b9b82e09740663fad7d573eca7511cb134c5ed1911dba2",
+        "live_execution_enabled": false,
+        "model_output_seen": false,
+        "native_index": 1556,
+        "native_label": "entailment",
+        "native_row_sha256": "6f437c699a149acf853f897ec99e5773c66d622e80ae777371cc0635dd690cab",
+        "ordinary_input_sha256": "b041aec995ebd6ba544e68909500426e2ab12b48caf0089d599f24ae002e2948",
+        "provider_calls": 0,
+        "review_note": "The public someone-muddy announcement settles the negated nobody-muddy proposition; repeated announcements add no contrary fact.",
+        "source_first_review": "CONSISTENT_UNDER_NATIVE_EPISTEMIC_CONVENTIONS",
+        "source_sha256": "7ba135f01c208c4dad7df414b83b74cc0ebf128ea41c823264d81c834dfabc98"
+      }
+    ],
+    "dataset_id": "sileod/mindgames",
+    "disposition": "SOURCE_PACKET_PREPARED_PENDING_OPERATIONAL_FREEZE",
+    "distribution": "data/train-00000-of-00001-29e951c428782278.parquet",
+    "distribution_rows": 11174,
+    "distribution_sha256": "093d3162baad0e6cb8dac5a1775c0cfc238f9b92e55ee92e3b4e059e94a14212",
+    "history": {
+      "authorized_spend_usd": 0,
+      "confirmation_qualified": false,
+      "history": {
+        "candidate_source_sha256": "6a93231852f50f5ee373d2a4fbf6370d551fe4d35e07da98dd03e8ad186cff2d",
+        "checkout_head": "c59f618aa919434f2da8c14a602333bb1c2b1e4f",
+        "confirmation_qualified": false,
+        "longmemeval": "SEALED_NOT_ACCESSED",
+        "matches": [],
+        "schema": "hcl-i02-reachable-git-history-exposure-v1",
+        "scope": "CURRENTLY_REACHABLE_GIT_OBJECTS_NOT_DELETED_REFS_OR_MODEL_TRAINING",
+        "sealed_blob_ids_not_opened": 54,
+        "skipped_large_paths": [],
+        "skipped_nontext_blobs": 26,
+        "status": "REACHABLE_HISTORY_NO_TEXT_MATCH",
+        "unique_utf8_blobs_scanned": 3708
+      },
+      "history_clear": true,
+      "limits": "CURRENTLY_REACHABLE_FULL_CHECKOUT_ONLY_NOT_DELETED_REFS_OR_MODEL_TRAINING",
+      "live_execution_enabled": false,
+      "maximum_authorized_calls": 0,
+      "provider_calls": 0,
+      "remaining_gates": [
+        "SOURCE_RIGHTS_AND_NATIVE_TASK_REVIEW",
+        "SUBSET_MODEL_SCORER_AND_INPUT_FREEZE",
+        "NEW_EXPLICIT_BOUNDED_BUDGET"
+      ],
+      "rights_verified": false,
+      "schema": "hcl-development-source-history-preflight-v1",
+      "source_qualified": false
+    },
+    "license": "Apache-2.0",
+    "limits": [
+      "Generated idealized modal-logic tasks, not real private mental states",
+      "Six rows are from one generation system, not six independent source systems",
+      "No HCL mechanism route or formal smcdel/pbcheck/gold/prediction/difficulty field in ordinary input",
+      "Native label agreement only; no philosophy/long-narrative/full cognition claim"
+    ],
+    "revision": "e378f4c70f66413a00c664373f4f43064b3ba752",
+    "selection": "first six native rows by SHA256 HCL-MINDGAMES-SOURCE-20261001/native-index before outputs; no difficulty, prediction, gold or treatment filtering",
+    "split": "train",
+    "writing_system_id": "sileod-dynamic-epistemic-mindgames"
+  },
+  "model_answers": [],
+  "operational_model_scorer_freeze": false,
+  "provider_calls": 0,
+  "schema": "hcl-development-source-preparation-v1",
+  "tombench": {
+    "cases": [
+      {
+        "distribution_sha256": "d72c8353aa5b65f35073d72808996b6f8e980f7683539e25510a251ed8f1dac2",
+        "grade_rewritten": false,
+        "model_output_seen": false,
+        "native_label": "B",
+        "native_row_index": 36,
+        "native_row_sha256": "f44385606f70d3dcd90a1165032dad6ad6f040358a7049482b277f4e9229c591",
+        "question_sha256": "52bfe985f3101d333beacc96c66202beb5c11cd7338112d498f1eaa67bb8a3e8",
+        "review_note": "Accidental action and missing understanding are explicit; correct-usage knowledge is a modest option elaboration, not a separately established private state.",
+        "source_first_review": "SUPPORTED_WITH_WORDING_CAVEAT",
+        "source_sha256": "caab184d76683c1084478e9d999c1c462c3f9d80e02a46342afc56d11976e6ae",
+        "task": "Discrepant Intentions"
+      },
+      {
+        "distribution_sha256": "d72c8353aa5b65f35073d72808996b6f8e980f7683539e25510a251ed8f1dac2",
+        "grade_rewritten": false,
+        "model_output_seen": false,
+        "native_label": "B",
+        "native_row_index": 8,
+        "native_row_sha256": "6923dbf7e1f899a233e2a35d24b9ea1ef5575d8e9039bd1a02afea05347daa78",
+        "question_sha256": "58c4e5a6250329a0873285970aff04f5a2174206e245d95c2b9188a568abea3d",
+        "review_note": "Coffee-shop narrative is paired with office-cleaning/scrap-paper options naming another person. Preserve label; do not score a source-grounded objection as model failure.",
+        "source_first_review": "REJECT_SOURCE_QUESTION_OPTION_MISMATCH",
+        "source_sha256": "d5d5c706456e32760cb3f2992b210053b39c493c7d05ce01626bcb92d3c59981",
+        "task": "Discrepant Intentions"
+      },
+      {
+        "distribution_sha256": "d72c8353aa5b65f35073d72808996b6f8e980f7683539e25510a251ed8f1dac2",
+        "grade_rewritten": false,
+        "model_output_seen": false,
+        "native_label": "B",
+        "native_row_index": 16,
+        "native_row_sha256": "e9e31a455ec4657663b21fca04003cd8436725d32e57210e037b4b8bcdc508c9",
+        "question_sha256": "332642fc6c493067ed29186eb09d6bd48a512373a9a6af09ea107548914f9185",
+        "review_note": "The narrative explicitly attributes the wrong seasoning to believing it was instructed, matching the unintended misunderstanding option.",
+        "source_first_review": "SUPPORTED",
+        "source_sha256": "20739d80694b75fc3be41bac134d730bb40d531dd1ac534f3b45089f8a355598",
+        "task": "Discrepant Intentions"
+      },
+      {
+        "distribution_sha256": "cb68348ef3eb53d7c6bf0e426b9279856264748b94f181ce042c91dcf56ba5af",
+        "grade_rewritten": false,
+        "model_output_seen": false,
+        "native_label": "C",
+        "native_row_index": 15,
+        "native_row_sha256": "75778a16b9b168de193e3add4b2642290f6efb6af3458bd6fc70ab6e8566a96e",
+        "question_sha256": "e85a4f0f614628619fd0f67aaf0906ab2d7545992561182bd1941af22751a17a",
+        "review_note": "Packing to leave is a plausible response to closing; no actual subsequent action is reported.",
+        "source_first_review": "PRAGMATIC_PREDICTION_ONLY",
+        "source_sha256": "cfb2d178190d83e1f242d3dee712f021f0ac8d2f894c85c2acec5cc7cbe05cd9",
+        "task": "Completion of Failed Actions"
+      },
+      {
+        "distribution_sha256": "cb68348ef3eb53d7c6bf0e426b9279856264748b94f181ce042c91dcf56ba5af",
+        "grade_rewritten": false,
+        "model_output_seen": false,
+        "native_label": "D",
+        "native_row_index": 6,
+        "native_row_sha256": "7be7e83bf9c7668c48f852f2d9141e75a3917cfa68578ba63e6bc1d463b54b5a",
+        "question_sha256": "6f8b3642cb826659a77318f3be18df76df060576060102c4285f9dba833d19ab",
+        "review_note": "Continuing work is plausible but the text does not settle the decision among competing goals and feasible options.",
+        "source_first_review": "AMBIGUOUS_ACTION_PREDICTION",
+        "source_sha256": "cde81166c6fae1477dd9adf0039acc80528af48c513c7dffa1d043befa1fa5c3",
+        "task": "Completion of Failed Actions"
+      },
+      {
+        "distribution_sha256": "cb68348ef3eb53d7c6bf0e426b9279856264748b94f181ce042c91dcf56ba5af",
+        "grade_rewritten": false,
+        "model_output_seen": false,
+        "native_label": "B",
+        "native_row_index": 17,
+        "native_row_sha256": "b5075981b398bb27d082683eb6bf348afceb8955bcd416a7c210348369a214eb",
+        "question_sha256": "b3b6fbc83cc9f124165cc68a0140c8eea9626b98a7da26255555e92b72226f26",
+        "review_note": "A low phone battery and no nearby socket do not establish going home; the source explicitly says the student remains in the library.",
+        "source_first_review": "UNSUPPORTED_NATIVE_PREDICTION",
+        "source_sha256": "92e7134b6233e83b03161fb11414ca37b6ae4241990ae28b88746150738ace39",
+        "task": "Completion of Failed Actions"
+      }
+    ],
+    "disposition": "DEFERRED_NATIVE_SOURCE_AND_LABEL_DEFECTS_NO_ROW_SUBSTITUTION",
+    "history": {
+      "authorized_spend_usd": 0,
+      "confirmation_qualified": false,
+      "history": {
+        "candidate_source_sha256": "337b0f7f269f4411e24abda673a3e79a1df9b8e1262422cd8e961dadf00257fa",
+        "checkout_head": "c59f618aa919434f2da8c14a602333bb1c2b1e4f",
+        "confirmation_qualified": false,
+        "longmemeval": "SEALED_NOT_ACCESSED",
+        "matches": [],
+        "schema": "hcl-i02-reachable-git-history-exposure-v1",
+        "scope": "CURRENTLY_REACHABLE_GIT_OBJECTS_NOT_DELETED_REFS_OR_MODEL_TRAINING",
+        "sealed_blob_ids_not_opened": 54,
+        "skipped_large_paths": [],
+        "skipped_nontext_blobs": 26,
+        "status": "REACHABLE_HISTORY_NO_TEXT_MATCH",
+        "unique_utf8_blobs_scanned": 3708
+      },
+      "history_clear": true,
+      "limits": "CURRENTLY_REACHABLE_FULL_CHECKOUT_ONLY_NOT_DELETED_REFS_OR_MODEL_TRAINING",
+      "live_execution_enabled": false,
+      "maximum_authorized_calls": 0,
+      "provider_calls": 0,
+      "remaining_gates": [
+        "SOURCE_RIGHTS_AND_NATIVE_TASK_REVIEW",
+        "SUBSET_MODEL_SCORER_AND_INPUT_FREEZE",
+        "NEW_EXPLICIT_BOUNDED_BUDGET"
+      ],
+      "rights_verified": false,
+      "schema": "hcl-development-source-history-preflight-v1",
+      "source_qualified": false
+    },
+    "license": "MIT_EVALUATION_ONLY_NO_TRAINING",
+    "revision": "4f491f0784ed31ef93a8837615fbc48f885cf78d",
+    "selection": "first 3 English rows per task by ascending SHA256 of HCL-SOURCE-PREP-20261001/task/zero-based-native-row-index; no answer/treatment/outcome filter"
+  }
+}
