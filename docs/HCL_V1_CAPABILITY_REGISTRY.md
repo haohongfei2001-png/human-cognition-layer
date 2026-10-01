@@ -132,3 +132,9 @@ Default generic extraction simplified; conditional use explicit opt-in.9new chec
 97 focused passes, authored v19→v20 positive composition/revision and consumed-input
 call avoidance (no answers rerun).0live calls/spend, utility IMPLEMENTED_UNVALIDATED;
 no new family or historical upgrade. Next fresh development reality check.
+
+DRC005 current v20 Base/H native development check:7/8vs8/8,onegain/0harms,
+checked treatment0/8,INCONCLUSIVE (unattributed small wrapper difference), no family
+upgrade.16calls/0extraction/0retry,peakUSD0.11298936/invoiceunknown,grant0/triggergone,
+exact128-file archive/raw preserved, development-exposed/final-consumed. Next general
+paragraph access integration and no-treatment context simplification.

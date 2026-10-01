@@ -26,5 +26,5 @@ jobs:
       - run: python -m scripts.development_drc003_replay
       - run: python -m unittest tests.test_development_drc004_replay tests.test_v1_adaptive_reader_entry
       - run: python -m scripts.development_drc004_replay
-      - run: python -m unittest tests.test_development_reality_batch005 tests.test_v1_ordinary_access_entry
-      - run: python -m scripts.development_reality_batch005 --preflight --publisher --history --output /tmp/drc005-provider-free.json
+      - run: python -m unittest tests.test_development_drc005_replay tests.test_v1_ordinary_access_entry
+      - run: python -m scripts.development_drc005_replay

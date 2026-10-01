@@ -1,0 +1,55 @@
+{
+  "Base_correct": 7,
+  "HCL_correct": 8,
+  "actual_invoice_cost_usd": null,
+  "actual_model_ids": [
+    "deepseek-v4-pro"
+  ],
+  "authorization_remaining_usd": 0,
+  "cases": 8,
+  "checked_H_treatment": 0,
+  "disposition": "INCONCLUSIVE",
+  "disposition_scope": "ONE_UNATTRIBUTED_WRAPPER_GAIN_NO_CHECKED_TREATMENT_SMALL_NATIVE_LABEL_SUBSET",
+  "estimate_limit": "Weekday/hour heuristic does not establish holiday invoice pricing; preserve raw estimate, peak conservative.",
+  "evidence": "DEVELOPMENT_EXPOSED_CONSUMED_FOR_FINAL_CONFIRMATION",
+  "extraction_calls": 0,
+  "gains": 1,
+  "harms": 0,
+  "historical_dispositions_upgraded": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "package_sha256": "a2f726a978cdca045ddcb0d16b30afca478066629bca5dfca9190c8139f22d74",
+  "phase_costs": {
+    "Base/answer": {
+      "calls": 8,
+      "estimated_cost_usd": 0.0488598,
+      "input_tokens": 3517,
+      "output_tokens": 11166,
+      "rated_peak_cost_usd": 0.0488598
+    },
+    "HCL/answer": {
+      "calls": 8,
+      "estimated_cost_usd": 0.061516312000000004,
+      "input_tokens": 5854,
+      "output_tokens": 14243,
+      "rated_peak_cost_usd": 0.06412956
+    }
+  },
+  "physical_model_snapshot_verified": false,
+  "provider_calls": 16,
+  "rated_peak_cost_usd": 0.11298936,
+  "raw_estimated_cost_usd": 0.11037611199999998,
+  "rerun_allowed": false,
+  "retries": 0,
+  "run_id": 36805101947,
+  "run_sha": "f026e913438224fa6f77e48d4e1b5274e2865fa9",
+  "runtime_sha256": "37609aa511d9717da7bc7ae344b9eddb4da40ea97edc4275a893ab87ac459d4a",
+  "schema": "hcl-drc005-development-summary-v1",
+  "source_delivery_valid": {
+    "Base": 8,
+    "HCL": 8
+  },
+  "usage": {
+    "input_tokens": 9371,
+    "output_tokens": 25409
+  }
+}

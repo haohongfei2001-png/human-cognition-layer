@@ -26,7 +26,21 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: DRC005_FROZEN_DEVELOPMENT_REALITY_CHECK**
+**NEXT_READY: ORDINARY_PARAGRAPH_ACCESS_AND_NO_TREATMENT_CONTEXT_SIMPLIFICATION**
+
+[DRC005 source-first closure](reports/HCL_DRC005_SOURCE_FIRST_CLOSURE.md): INCONCLUSIVE,
+Base7/8/H8/8,onegain/0harms,checked H treatment0/8. One native-label wrapper improvement
+cannot establish specialized attribution or broad efficacy. All16 actual-source/JSON
+outputs pass, semantic adequacy unverified.16calls/0extraction/0retry,peakUSD0.11298936,
+raw estimateUSD0.110376112,invoiceunknown. Hpeak~31%above Base. Grant0/trigger removed,
+128-file exact archive/raw receipts preserved; exposed material excluded from final.
+Next general paragraph B02 coverage and unsupported-input context simplification,
+whole sources/source-state boundaries retained. No gold/case patch, new ontology,
+old budget or rerun. LongMemEval SEALED; final reviewer/source is no daily gate.
+
+## DRC005 preserved execution freeze
+
+**Historical queue snapshot: DRC005_FROZEN_DEVELOPMENT_REALITY_CHECK**
 
 [DRC005 protocol](docs/HCL_DRC005_DEVELOPMENT_PROTOCOL.md) freezes8 concrete-new public
 ToMBench access/social-communication tasks, not a newly unseen writing system.
@@ -42,7 +56,7 @@ delete, then general coverage repair/simplification, accepting negative outcomes
 
 ## v20 preserved implementation snapshot
 
-**NEXT_READY: FRESH_REPORTED_ACCESS_DEVELOPMENT_REALITY_CHECK**
+**Historical queue snapshot: FRESH_REPORTED_ACCESS_DEVELOPMENT_REALITY_CHECK**
 
 [Ordinary access/simplification v20](docs/HCL_DEVELOPMENT_ORDINARY_ACCESS_V20.md)
 adds actual existing B02 reported information-route checks beside B01 from complete
@@ -644,7 +658,7 @@ Clifford193-file Git-verified certified replay uses its actual run SHA/runtime w
 closed grant/removed trigger, no latest substitution or rescoring. Bounded25-source
 SQuALITY dev metadata screen approves0 inputs/cases; source/question/reference text
 not displayed.0 new calls/spend. Independent reviewer/second family unavailable;
-I02 protected source/task and competent semantic comparators remain NEXT_READY.
+I02 protected source/task and competent semantic comparators were the historical pre-amendment queue.
 Historical dispositions/Gregory rights hold/LongMemEval SEALED unchanged.
 
 The [future shared source-reference resource](docs/HCL_I02_SHARED_SOURCE_REFERENCE_V1.md)
@@ -739,7 +753,7 @@ or efficacy claim. Whole author/system/task/fingerprint is development-excluded 
 **DEFERRED_EMBEDDED_LYRIC_RIGHTS**: original drama term metadata does not fully resolve
 all quoted historical lyric versions/China scope. No provider input, paid package,
 trigger or grant;0 calls/spend. Source/task/review are development only, not independent
-expert semantics or confirmation. I02 remains NEXT_READY; resolve adequate primary
+expert semantics or confirmation. Historical pre-amendment queue was I02; resolve adequate primary
 rights/provenance or continue a separate safe family, plus blinded qualification
 before any comparison. Do not remove lyrics, recycle old grants or expand H modules.
 
@@ -768,7 +782,7 @@ used for development repair, never confirmation. Immutable v6/refusal/paid recei
 retain exact certified replay; v7 amendment pins the new runtime.0 new calls/spend.
 Unique next task: independent protected source/item and blinded semantic review,
 strong comparators and actual treatment/coverage before new comparison; no more
-paid interface source swaps or old-task reruns. I02 remains NEXT_READY.
+paid interface source swaps or old-task reruns. Historical pre-amendment queue was I02.
 
 The [v9 complete-source comparator envelope](docs/HCL_I02_FULL_SOURCE_ARMS_V9.md)
 implements ordinary C/P/G inputs up to500,000 total UTF8 source bytes, preserving
@@ -825,7 +839,7 @@ behavior unverified. Authored repetitive fixture does not establish literary
 semantics, independent review, comparator qualification or H efficacy.
 Unique next task: distinct protected source/task qualification using the typed
 contract and source/rights/exposure gates; do not rerun consumed fixtures or
-Gilman/James. I02 remains NEXT_READY; historical dispositions unchanged.
+Gilman/James. Historical pre-amendment queue was I02; historical dispositions unchanged.
 
 The [v3 long-input interface calibration freeze](docs/HCL_I02_SOURCE_HOLDER_V3_LONG_CALIBRATION.md)
 uses a **new authored 81,243-character / 804-line fixture**, complete ordinary
@@ -906,11 +920,11 @@ permission request is needed under the current normal-cost autonomy policy.
 
 **I02 — DEFERRED_FINAL_CONFIRMATION (historical qualification queue):** qualify independent source provenance, license and access plus competent C/P/G comparators. Freeze model IDs, prompt/scaffold implementations, scorer rubric, sample size and cost/latency bands before confirmation. Do not view confirmation outcomes to tune H. C/P/G share complete ordinary inputs and final answer fields; G has a separately charged generic source-map step and original source in final input. The [first-group MuSR calibration](reports/HCL_I02_CPG_CALIBRATION_CLOSURE.md) made C, P and G-map calls; G-map violated its shape contract, G-final was not called, and its unique authorization closed. The [second-source Moral Stories calibration](reports/HCL_I02_MORAL_CPG_CALIBRATION_CLOSURE.md) made C/P/G-map/G-final calls: G-map v2 worked, but all three final comparators missed an explicit security goal while correctly refusing unsupported harmful intent. Its USD 0.06 grant is closed, with no rerun. Neither exposed calibration qualifies comparator semantics across task families or H efficacy. Initial rights screening excludes OpenStax model input and holds Gutenberg and the distinct GitHub MuSR distribution pending rights checks; see `docs/HCL_I02_SOURCE_SCREEN.md`. Zero confirmation sources are qualified. A separately pinned CC BY 4.0 author-team MuSR CSV is **calibration-only**: 256 questions share 64 narratives; the first group is exposed and its second item has unresolved perceptual support. Complete item-level audit and independent-source diversity before confirmation; do not treat license metadata or generated gold as semantic truth. Both MuSR and Moral Stories author/template/writing systems are calibration-exposed, so their other rows cannot be treated as unseen confirmation under I01. The [ordinary information-state repair](docs/HCL_I02_INFORMATION_STATE_ENTRY_REPAIR.md) initially found zero checked observations on the exposed native question; its [v2 repair](docs/HCL_I02_INFORMATION_STATE_V2_REPAIR.md) now passes provider-free H/H-new treatment presence and structural fairness with a chained runtime amendment. This is correctness evidence only. The generic semantic scorer v1 now distinguishes a stated goal from unproved harmful intent in source-first review; next qualify source diversity and a protected confirmation split. Do not rerun either spent calibration or claim H efficacy.
 
-The [complete long-source ordinary-entry repair](docs/HCL_I02_COMPLETE_LONG_SOURCE_ENTRY.md) adds a chained v3 runtime amendment: a 24,920-character already exposed development story now reaches final input whole with source-anchored literal candidates and no extraction call. Historical v1/v2 receipts remain pinned; no specialized H treatment, independent source qualification or answer gain is claimed. I02 source-first rights and C/P/G competence remain NEXT_READY.
+The [complete long-source ordinary-entry repair](docs/HCL_I02_COMPLETE_LONG_SOURCE_ENTRY.md) adds a chained v3 runtime amendment: a 24,920-character already exposed development story now reaches final input whole with source-anchored literal candidates and no extraction call. Historical v1/v2 receipts remain pinned; no specialized H treatment, independent source qualification or answer gain is claimed. I02 source-first rights and C/P/G competence were the historical pre-amendment queue.
 
 The chained v4 default-entry correction preserves an explicit caller context limit while allowing all 25 pinned, already development-exposed SQuALITY dev sources (22,559–38,795 characters) through the ordinary default entry with complete final-source coverage. Six produce no local literal candidates; zero paid calls, independent source qualification or answer-efficacy results. Continue I02 source qualification and fair comparator preparation; do not recycle the exposed SQuALITY writing system as unseen confirmation.
 
-The [chained v5 reader argument entry](docs/HCL_I02_READER_ARGUMENT_ENTRY_V5.md) accepts a bounded public source-level disagreement question and preserves the whole short source in final input, repairing a generic unsupported-scope refusal and the source-order wrapper it exposed. A preselected external-author concept case supplied development-only entry evidence: source/question are now seen by the implementer, and provider use is held pending item-level quotation rights. This is input correctness, not H-specialized treatment or answer gain. Zero calls/spend. **NEXT_READY remains I02 independent source and comparator qualification**; do not promote this development system to confirmation.
+The [chained v5 reader argument entry](docs/HCL_I02_READER_ARGUMENT_ENTRY_V5.md) accepts a bounded public source-level disagreement question and preserves the whole short source in final input, repairing a generic unsupported-scope refusal and the source-order wrapper it exposed. A preselected external-author concept case supplied development-only entry evidence: source/question are now seen by the implementer, and provider use is held pending item-level quotation rights. This is input correctness, not H-specialized treatment or answer gain. Zero calls/spend. **Historical pre-amendment queue was I02 independent source and comparator qualification**; do not promote this development system to confirmation.
 
 The [v6 reachable-history exposure gate](docs/HCL_I02_REACHABLE_HISTORY_SCREEN.md) now refuses a candidate whose source appeared in a currently reachable older Git blob even if the current checkout no longer contains it. Actual `main@08900c63` KPU negative witness found three overlaps among 2,701 nonsealed text blobs; 54 LongMemEval blob IDs were identified by metadata and not opened. This is a bounded negative screen, not proof of independent freshness or answer gain. Continue I02 item-level rights/task review and strong comparator qualification; zero calls/spend.
 
