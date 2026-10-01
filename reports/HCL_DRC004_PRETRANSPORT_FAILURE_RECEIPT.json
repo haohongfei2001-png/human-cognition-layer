@@ -1,0 +1,25 @@
+{
+  "DRC003_rerun": false,
+  "artifact_contents": [
+    "reports/HCL_DRC004_PACKAGE.json"
+  ],
+  "artifact_id": 11135387928,
+  "artifact_sha256": "6ee185c61b546117beb33dc4c8b8117fb6c4f3983bf9e95a727ef06f0d19f4b6",
+  "attempt": 1,
+  "evidence": "Action log fails at load_package before publisher/history/execution/client creation; raw model receipt does not exist; no model call inferred from code order and complete job log.",
+  "expected_runner": "scripts.development_reality_batch004",
+  "failure": "old frozen package/runtime drift gate correctly refused",
+  "invoked_runner": "scripts.development_reality_batch003",
+  "log_sha256": "47323d7c066bf424402b3ba27a29a61700cc39b4316140a010d7860fdf6cb10b",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "old_activation_closed": true,
+  "old_package_sha256": "b67b851c7962f6d43459b2236883d615c311aea71b93e959745fd3674a8d46bb",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "questions_answered": 0,
+  "recovery": "New certified entrypoint activation is first provider execution, not replay of answered questions; new package bounded by current owner low-cost policy, no old budget transfer.",
+  "run_id": 36801304134,
+  "run_sha": "0fabcff171382ec865ae9e723aca757dbc109b1d",
+  "schema": "hcl-drc004-pretransport-activation-failure-v1",
+  "status": "ABORTED_BEFORE_PROVIDER_CLIENT_AND_CREDENTIAL_READ"
+}

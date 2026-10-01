@@ -7,7 +7,7 @@ from scripts.provider_json_contract import validate_json_mode_request,provider_e
 from scripts.serious_eval_contract import runtime_digest
 from scripts.development_reality_check import digest,save,bound,costs,RATES,_strings
 SUBSET=Path('reports/HCL_DRC004_SUBSET.json');PACKAGE=Path('reports/HCL_DRC004_PACKAGE.json')
-GRANT=Path('.github/HCL_DRC004_GRANT.json');TEMPLATE=Path('.github/frozen/hcl-drc004-once.yml');WORKFLOW=Path('.github/workflows/hcl-drc004-once.yml')
+GRANT=Path('.github/HCL_DRC004_GRANT.json');TEMPLATE=Path('.github/frozen/hcl-drc004-once.yml');WORKFLOW=Path('.github/workflows/hcl-drc004-certified-once.yml')
 CAP=2.25;MARGIN=32;MAX_H_BYTES=36000
 POLICY=('Answer the supplied development task. Return exactly answer, source_citations, uncertainty and assumptions in one JSON object. '
  'answer is exactly one label from the complete supplied vocabulary. source_citations is an array (empty allowed) of original excerpts or '

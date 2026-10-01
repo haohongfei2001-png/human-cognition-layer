@@ -82,3 +82,19 @@ configuration/scope; no historical capability disposition upgrade. Close grant t
 delete live trigger, preserve exact runtime/archive/raw receipts, PR→head CI→merge→
 main CI. Then general evidence-driven capability repair or another fresh development
 batch. Final sealed confirmation remains separate/later; leaderboard inactive.
+
+## Pretransport activation repair (no provider rerun)
+
+Run36801304134 at0fabcff171382ec865ae9e723aca757dbc109b1d mistakenly invoked the
+old DRC003 runner, which refused its runtime/package before publisher/history,
+provider-client creation or key read.0 provider calls/spend/answers. Preserve the
+exact failed workflow/package/artifact and log in the [activation receipt](../reports/HCL_DRC004_PRETRANSPORT_FAILURE_RECEIPT.json).
+No DRC003 rerun or DRC004 model receipt exists. This is an engineering activation
+failure, not a Base/H result. The wrong live trigger is deleted. A corrected unique
+`hcl-drc004-certified-once.yml` invokes batch004, with a new entrypoint regression
+check and re-frozen execution hashes; source, questions, gold, prompts, scorer,
+arms, runtime and budget settings are unchanged.25 unit/entry/JSON checks pass.
+The new certified activation is the first provider execution for these questions,
+under current owner bounded low-cost authorization, never a used grant/remainder
+transfer.0 previous model spend; maximum24calls/0retry/USD2.25 still applies. No
+retry of a model request, repeated answer, enlarged budget or new owner gate.

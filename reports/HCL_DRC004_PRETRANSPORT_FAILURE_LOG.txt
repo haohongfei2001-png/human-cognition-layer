@@ -1,0 +1,27 @@
+development-check	New independent bounded grant, zero retries, no consumed rerun	﻿2026-10-01T01:29:13.2259885Z ##[group]Run python -m scripts.development_reality_batch003 --execute --history --publisher --output drc004-receipt.json
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.2260788Z ^[[36;1mpython -m scripts.development_reality_batch003 --execute --history --publisher --output drc004-receipt.json^[[0m
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.2301979Z shell: /usr/bin/bash -e {0}
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.2302364Z env:
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.2302837Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.2303374Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.2303928Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.2304467Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.2304904Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.2305398Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.2305990Z   DEEPSEEK_API_KEY: ***
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.2306365Z   HCL_DRC004_AUTHORIZED: ONE_FRESH_DEVELOPMENT_BATCH_ONLY
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.2306905Z ##[endgroup]
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.4763605Z Traceback (most recent call last):
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.4773596Z   File "<frozen runpy>", line 198, in _run_module_as_main
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.4774813Z   File "<frozen runpy>", line 88, in _run_code
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.4776361Z   File "/home/runner/work/human-cognition-layer/human-cognition-layer/scripts/development_reality_batch003.py", line 221, in <module>
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.4778266Z     if __name__=='__main__':main()
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.4779081Z                             ^^^^^^
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.4780548Z   File "/home/runner/work/human-cognition-layer/human-cognition-layer/scripts/development_reality_batch003.py", line 207, in main
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.4782236Z     p=load_package();gate=dict(package_sha256=digest(p),runtime_sha256=p['runtime_sha256'],provider_calls=0,source_equal_and_frozen=True,live_treatment='UNOBSERVED_UNTIL_ACTUAL_EXTRACTION',longmemeval='SEALED_NOT_ACCESSED')
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.4783363Z       ^^^^^^^^^^^^^^
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.4784326Z   File "/home/runner/work/human-cognition-layer/human-cognition-layer/scripts/development_reality_batch003.py", line 85, in load_package
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.4785420Z     if p!=build_package():raise ValueError('frozen package/runtime/source/scorer/profile drift')
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.4786209Z                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.4786851Z ValueError: frozen package/runtime/source/scorer/profile drift
+development-check	New independent bounded grant, zero retries, no consumed rerun	2026-10-01T01:29:13.4971200Z ##[error]Process completed with exit code 1.
