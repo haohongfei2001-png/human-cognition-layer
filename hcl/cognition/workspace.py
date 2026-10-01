@@ -221,3 +221,15 @@ class CognitionWorkspace:
             provider_calls=0, evidence_level='CORRECTNESS_ONLY',
             ordinary_input=json.loads(result.preparation_json).get('method', 'SOURCE_SCOPED_PROVIDER_FREE'),
             calendar_time='NOT_ESTABLISHED')
+
+    def prepare_reader_entry(self, query, *, source_ids, backend=None,
+                             max_chars=64000, compact_context=True):
+        """Adaptive ordinary analyst entry; local checks before optional extraction."""
+        from .reader_entry import prepare_reader_entry
+        return prepare_reader_entry(self, query, source_ids=source_ids, backend=backend,
+            max_chars=max_chars, compact_context=compact_context)
+
+    def answer_reader_entry(self, query, answer_backend, **kwargs):
+        """One final answer from the selected, current source-bearing reader state."""
+        from .reader_entry import answer_reader_entry
+        return answer_reader_entry(self, query, answer_backend, **kwargs)

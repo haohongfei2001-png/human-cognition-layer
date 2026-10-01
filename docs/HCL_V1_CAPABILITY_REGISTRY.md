@@ -109,3 +109,11 @@ B01/C01/C03 state with0 extraction/1 final call and revision invalidation. JSON-
 request guard prevents future driver400 without transport.14 new checks,132 combined
 local passes;0 calls/spend. Historical source/scorer/raw/dispositions unchanged;
 utility IMPLEMENTED_UNVALIDATED. Next general source-bearing ordinary entry coverage.
+
+[Adaptive reader v19](HCL_DEVELOPMENT_ADAPTIVE_READER_V19.md) selects existing
+B01/C01/C03 ordinary source state before optional extraction, preserves actual caller
+source/revision and receipts for at most one conditional attempt. No new registered
+family, private/world truth or historical upgrade.12 new checks/89 local passes,
+authored ordinary composition/revision witness,0 live calls/spend; utility
+IMPLEMENTED_UNVALIDATED pending fresh development comparison. All consumed archives
+and grants stay closed; no final gate blocks daily development.
