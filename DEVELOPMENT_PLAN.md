@@ -26,7 +26,22 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: DRC006_FROZEN_DEVELOPMENT_REALITY_CHECK**
+**NEXT_READY: GENERAL_MIXED_NARRATIVE_ATTRIBUTION_COVERAGE**
+
+[DRC006 source-first closure](reports/HCL_DRC006_SOURCE_FIRST_CLOSURE.md): INCONCLUSIVE,
+Base/P/H6/6,0gains/0harms,checked H treatment0/6. Strong Base ceiling/no actual
+mechanism admission; no efficacy or final/history upgrade.18calls/0extraction/0retry,
+9,254input/22,812output,peakUSD0.10255080/rawestimateUSD0.098630928/invoiceunknown.
+Hpeak~76%above Base without native accuracy gain. Grant0/triggergone,raw/hash/130-file
+exact archive preserved, all opened distribution development-exposed/final-consumed.
+Next general mixed narration/explicit attribution admission with existing B01 /
+C01/C03, all qualifications/source/actor/time/revision boundaries; no item templates,
+pronoun guessing, new ontology or consumed rerun. Final reviewer/source no daily
+gate; LongMemEval SEALED, leaderboard off.
+
+## DRC006 preserved execution freeze
+
+**Historical queue snapshot: DRC006_FROZEN_DEVELOPMENT_REALITY_CHECK**
 
 [DRC006 protocol](docs/HCL_DRC006_DEVELOPMENT_PROTOCOL.md): six concrete-new author
 BigToM native belief/access/action tasks, fixed pre-output hash selection; prior
