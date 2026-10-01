@@ -1,0 +1,126 @@
+{
+  "schema": "hcl-embedded-scene-cues-witness-v1",
+  "baseline_commit": "e4230dd46a47ecdc0940f168bbae36b3149968c6",
+  "current_runtime_sha256": "e540d6905332fbf36a3b2f727e608f6534b685dd123c37132b8f78a0ddbf3fc7",
+  "before": [
+    {
+      "case": "ordinary",
+      "source": "Noor said, “I believe the gate is clear.”",
+      "source_sha256": "5319fa6d9597f5019c06aeb5a434d6204123ba3ff7a26857f6a2321cfd4d6976",
+      "source_complete": true,
+      "checked_treatment_present": true,
+      "extraction_calls": 0
+    },
+    {
+      "case": "imagined",
+      "source": "The following conversation was imagined.\n\nNoor said, “I believe the gate is clear.”",
+      "source_sha256": "7fdc553513aa84ada78dc815c257d91b861b04805dc23ef37fbab9b1420b96eb",
+      "source_complete": true,
+      "checked_treatment_present": false,
+      "extraction_calls": 0
+    },
+    {
+      "case": "bracketed_actual",
+      "source": "The following conversation was imagined.\n\n[Direction. In reality, a bell rang.]\n\nNoor said, “I believe the gate is clear.”",
+      "source_sha256": "1fdc586364dd1ae66b113a5715cd19f331f347bd20c5bf714c17e58c1c7288f5",
+      "source_complete": true,
+      "checked_treatment_present": true,
+      "extraction_calls": 0
+    },
+    {
+      "case": "fenced_actual",
+      "source": "The following conversation was imagined.\n\n```\nIn reality, a bell rang.\n```\n\nNoor said, “I believe the gate is clear.”",
+      "source_sha256": "07f16137f167f3e09b9e1e01b6a06b9654f80ced03f1d663169445448464a4be",
+      "source_complete": true,
+      "checked_treatment_present": true,
+      "extraction_calls": 0
+    },
+    {
+      "case": "real_actual",
+      "source": "The following conversation was imagined.\n\nIn reality, a bell rang.\n\nNoor said, “I believe the gate is clear.”",
+      "source_sha256": "1f405a7c7eae735d086b60284a377096d0c453b6e5c911a41d798f10e1cd16da",
+      "source_complete": true,
+      "checked_treatment_present": true,
+      "extraction_calls": 0
+    },
+    {
+      "case": "bracketed_hypothetical",
+      "source": "[Example. This scene is hypothetical.]\n\nNoor said, “I believe the gate is clear.”",
+      "source_sha256": "2cfd9d5f7c2567fb39c5b2ae08c29afba31efd96359afc08374a85e0dd116b5b",
+      "source_complete": true,
+      "checked_treatment_present": false,
+      "extraction_calls": 0
+    },
+    {
+      "case": "fenced_hypothetical",
+      "source": "```\nThis scene is hypothetical.\n```\n\nNoor said, “I believe the gate is clear.”",
+      "source_sha256": "841497261a2b7bb25046ba08b1644661e2470ce952e6f5c5d15a60a0a8ea3972",
+      "source_complete": true,
+      "checked_treatment_present": false,
+      "extraction_calls": 0
+    }
+  ],
+  "after": [
+    {
+      "case": "ordinary",
+      "source": "Noor said, “I believe the gate is clear.”",
+      "source_sha256": "5319fa6d9597f5019c06aeb5a434d6204123ba3ff7a26857f6a2321cfd4d6976",
+      "source_complete": true,
+      "checked_treatment_present": true,
+      "extraction_calls": 0
+    },
+    {
+      "case": "imagined",
+      "source": "The following conversation was imagined.\n\nNoor said, “I believe the gate is clear.”",
+      "source_sha256": "7fdc553513aa84ada78dc815c257d91b861b04805dc23ef37fbab9b1420b96eb",
+      "source_complete": true,
+      "checked_treatment_present": false,
+      "extraction_calls": 0
+    },
+    {
+      "case": "bracketed_actual",
+      "source": "The following conversation was imagined.\n\n[Direction. In reality, a bell rang.]\n\nNoor said, “I believe the gate is clear.”",
+      "source_sha256": "1fdc586364dd1ae66b113a5715cd19f331f347bd20c5bf714c17e58c1c7288f5",
+      "source_complete": true,
+      "checked_treatment_present": false,
+      "extraction_calls": 0
+    },
+    {
+      "case": "fenced_actual",
+      "source": "The following conversation was imagined.\n\n```\nIn reality, a bell rang.\n```\n\nNoor said, “I believe the gate is clear.”",
+      "source_sha256": "07f16137f167f3e09b9e1e01b6a06b9654f80ced03f1d663169445448464a4be",
+      "source_complete": true,
+      "checked_treatment_present": false,
+      "extraction_calls": 0
+    },
+    {
+      "case": "real_actual",
+      "source": "The following conversation was imagined.\n\nIn reality, a bell rang.\n\nNoor said, “I believe the gate is clear.”",
+      "source_sha256": "1f405a7c7eae735d086b60284a377096d0c453b6e5c911a41d798f10e1cd16da",
+      "source_complete": true,
+      "checked_treatment_present": true,
+      "extraction_calls": 0
+    },
+    {
+      "case": "bracketed_hypothetical",
+      "source": "[Example. This scene is hypothetical.]\n\nNoor said, “I believe the gate is clear.”",
+      "source_sha256": "2cfd9d5f7c2567fb39c5b2ae08c29afba31efd96359afc08374a85e0dd116b5b",
+      "source_complete": true,
+      "checked_treatment_present": true,
+      "extraction_calls": 0
+    },
+    {
+      "case": "fenced_hypothetical",
+      "source": "```\nThis scene is hypothetical.\n```\n\nNoor said, “I believe the gate is clear.”",
+      "source_sha256": "841497261a2b7bb25046ba08b1644661e2470ce952e6f5c5d15a60a0a8ea3972",
+      "source_complete": true,
+      "checked_treatment_present": true,
+      "extraction_calls": 0
+    }
+  ],
+  "origin": "NEW_AUTHORED_PROVIDER_FREE_CORRECTNESS_CONTRASTS",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "answer_gain_claimed": false,
+  "native_task_utility_established": false
+}
