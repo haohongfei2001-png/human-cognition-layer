@@ -31,7 +31,30 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: GENERAL_REQUEST_AND_ACTUAL_SOURCE_FRAME_CORRECTNESS_REPAIR**
+**NEXT_READY: GENERAL_SOURCE_BEARING_READER_ENTRY_COVERAGE**
+
+[Actual source-frame/request boundary v18](docs/HCL_DEVELOPMENT_SOURCE_FRAME_V18.md)
+repairs generic measurement/delivery identity: source audit reads actual primary IDs,
+never assumes development-source or substitutes aliases. Opt-in ordinary guarded
+answer prepares real B01/C01/C03 composition with0 extraction/1 final call, preserves
+raw output and blocks bad citations or source revision/challenge. Source location
+is provenance only, semantics UNASSESSED; default/legacy API stays available.
+
+Future JSON-mode control-instruction guard rejects malformed grading requests before
+transport; available HTTP errors can be receipted without inventing missing usage/
+cost.14 new checks/132 combined local passes, authored positive/negative/composition/
+revision/ordinary smoke witness,0 new calls/spend. No DRC003 rerun/rescore or fake grade;
+all4 consumed archives/grants and historical capability dispositions unchanged.
+Utility IMPLEMENTED_UNVALIDATED, not broad human-cognition or independent evidence.
+
+Next source-bearing ordinary entry/selection/composition improvement with existing
+modules, then new frozen development items and fair strong Base/current H logging
+actual mechanism coverage and all cost. Prefer0-extraction supported paths; simplify
+unsupported-scope overhead. No final reviewer/source global stop, new ontology,
+LongMemEval access or leaderboard.
+
+## DRC003 preserved source-first closure
+
 
 [DRC003 source-first closure](reports/HCL_DRC003_SOURCE_FIRST_CLOSURE.md): INCONCLUSIVE,
 unique run36796422963 at2b2a2c85a3ccf1b5ab9902355c594a0e66a07294 stopped at a
@@ -47,9 +70,8 @@ cost/invoice unknown; known response estimateUSD0.021122948, peak
 ratedUSD0.044369160; failed400 cost unknown. Grant0/
 trigger removed, no historical transfer. All material development-exposed/final-consumed.
 
-Next general JSON-mode request preflight/error receipt and actual primary-source
-frame audit repair, then source-bearing ordinary-input coverage with new frozen
-development items. Simplify unsupported-scope preparation overhead; no single-item
+The request/source-frame repair is implemented in v18 above; source-bearing
+ordinary-input coverage and new frozen development items continue next. Simplify unsupported-scope preparation overhead; no single-item
 rules or historical capability upgrade. Final reviewer/source perfection is no
 global development gate. LongMemEval SEALED, leaderboard inactive.
 

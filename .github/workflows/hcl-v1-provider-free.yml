@@ -46,12 +46,13 @@ jobs:
           python -m scripts.witness_i02_typographic_dialogue_v9 --output hcl-i02-typographic-dialogue-v9-witness.json
           python -m scripts.witness_i02_long_agency_v10 --output hcl-i02-long-agency-v10-witness.json
           python -m scripts.witness_i02_long_plan_composition_v11 --output hcl-i02-long-plan-composition-v11-witness.json
-          python -m scripts.development_runtime_amendment_v17
+          python -m scripts.development_runtime_amendment_v18
           python -m scripts.witness_development_reader_entry_v13 --output hcl-development-reader-entry-v13-witness.json
           python -m scripts.witness_development_shared_reader_v14 --output hcl-development-shared-reader-v14-witness.json
           python -m scripts.witness_development_conditional_reader_v15 --output hcl-development-conditional-reader-v15-witness.json
           python -m scripts.witness_development_original_source_v16 --output hcl-development-original-source-v16-witness.json
           python -m scripts.witness_development_reader_cost_v17 --output hcl-development-reader-cost-v17-witness.json
+          python -m scripts.witness_development_source_frame_v18 --output hcl-development-source-frame-v18-witness.json
           python -m scripts.witness_i02_narrator_epistemic_v12 --output hcl-i02-narrator-epistemic-v12-witness.json
           python scripts/witness_communication_views.py hcl-communication-views-witness.json
           python scripts/witness_revision_time.py hcl-revision-time-witness.json
@@ -131,6 +132,7 @@ jobs:
             hcl-development-conditional-reader-v15-witness.json
             hcl-development-original-source-v16-witness.json
             hcl-development-reader-cost-v17-witness.json
+            hcl-development-source-frame-v18-witness.json
             hcl-communication-views-witness.json
             hcl-revision-time-witness.json
             hcl-report-provenance-witness.json
