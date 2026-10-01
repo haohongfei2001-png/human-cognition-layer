@@ -138,6 +138,32 @@ If v25 merely adds caution/length without reducing unsupported claims, or suppre
 explicit reports, its instruction overhead is a reason to simplify or remove it.
 Native-source validation remains necessary even if this diagnostic is positive.
 
+## Review correction: sealed-object identity after rename or copy
+
+Independent review found an inherited source-history helper defect: raw Git log
+used abbreviated object IDs, while content inventory used full IDs. A protected
+blob renamed to an ordinary path could therefore miss the object-identity guard.
+A synthetic-only regression reproduced the problem. Metadata-only inspection
+confirmed the pinned baseline's 44 protected blobs still carried protected path
+names, so this exact source receipt did not expose sealed content.
+
+The current `i02_exposure_history_v2.py` helper requests full object IDs with
+`git log --no-abbrev`. Three new
+synthetic tests cover default abbreviation, rename and copy, and fail immediately
+if the protected synthetic object's content-read command is attempted. Current
+history/snapshot/firewall/archive/runtime-validation helpers are pinned alongside
+the protocol. The exact baseline history receipt remains unchanged after the fix.
+No real sealed source content was used to reproduce or repair the guard.
+
+The legacy helper bytes are preserved because consumed Gilman/James/Gaskell
+execution packages pin them. SID001 imports only the corrected v2 audit. Fresh
+source work must use v2; v1 remains for historical reconstruction and is not a
+renamed-source safety guarantee. This scoped migration does not pretend that every
+old caller has been rewritten or that historical qualification was upgraded.
+Direct legacy holder tests can refuse current-runtime hash drift; their certified
+archive replay is the historical check. The Gaskell certified replay passes its
+16 tests and preserves the historical runtime rather than changing old pins.
+
 ## Verification and handoff gates
 
 Provider-free verification checks source/rubric anchors, full-source fairness,

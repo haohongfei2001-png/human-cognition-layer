@@ -142,7 +142,7 @@ def validate_exposure(corpus):
 
 
 def history_check(repository='.'):
-    from scripts.i02_exposure_history import audit_history
+    from scripts.i02_exposure_history_v2 import audit_history
     corpus = load_cases()
     joined = '\n__SYNTHETIC_CASE_BOUNDARY__\n'.join(r['source'] for r in corpus['cases'])
     with tempfile.TemporaryDirectory(prefix='hcl-sid001-prior-history-') as tmp:
@@ -213,6 +213,14 @@ def build_package():
         raise ValueError('proposed all-call peak reservation exceeds hard ceiling')
     paths = [CASES, RUBRIC, PRICING, HISTORY, REGISTER,
         Path('scripts/source_inference_synthetic_diagnostic.py'),
+        Path('scripts/i02_exposure_history_v2.py'),
+        Path('scripts/i02_exposure_snapshot.py'),
+        Path('scripts/development_confirmation_firewall.py'),
+        Path('scripts/development_drc008_replay.py'),
+        Path('scripts/development_runtime_amendment_v25.py'),
+        Path('reports/HCL_DEVELOPMENT_RUNTIME_AMENDMENT_V25.json'),
+        Path('scripts/serious_eval_contract.py'),
+        Path('tests/test_i02_exposure_history_v2.py'),
         Path('tests/test_source_inference_synthetic_diagnostic.py'),
         Path('docs/HCL_SOURCE_INFERENCE_SYNTHETIC_DIAGNOSTIC.md'),
         Path('.github/workflows/hcl-source-inference-synthetic-provider-free.yml')]
