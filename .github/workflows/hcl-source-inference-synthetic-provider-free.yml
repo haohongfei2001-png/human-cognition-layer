@@ -1,0 +1,57 @@
+name: HCL Source Inference Synthetic Freeze Provider-Free
+on:
+  pull_request:
+    paths:
+      - 'scripts/source_inference_synthetic_diagnostic.py'
+      - 'scripts/i02_exposure_history_v2.py'
+      - 'tests/test_i02_exposure_history_v2.py'
+      - 'tests/test_source_inference_synthetic_diagnostic.py'
+      - 'reports/source-inference-synthetic/**'
+      - 'reports/HCL_DEVELOPMENT_BENCHMARK_EXPOSURE_REGISTER.json'
+      - 'docs/HCL_SOURCE_INFERENCE_SYNTHETIC_DIAGNOSTIC.md'
+      - '.github/workflows/hcl-source-inference-synthetic-provider-free.yml'
+      - 'hcl/**'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/source_inference_synthetic_diagnostic.py'
+      - 'scripts/i02_exposure_history_v2.py'
+      - 'tests/test_i02_exposure_history_v2.py'
+      - 'tests/test_source_inference_synthetic_diagnostic.py'
+      - 'reports/source-inference-synthetic/**'
+      - 'reports/HCL_DEVELOPMENT_BENCHMARK_EXPOSURE_REGISTER.json'
+      - 'docs/HCL_SOURCE_INFERENCE_SYNTHETIC_DIAGNOSTIC.md'
+      - '.github/workflows/hcl-source-inference-synthetic-provider-free.yml'
+      - 'hcl/**'
+permissions:
+  contents: read
+jobs:
+  synthetic-freeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest tests.test_source_inference_synthetic_diagnostic tests.test_i02_exposure_history_v2 -v
+      - run: python -m scripts.source_inference_synthetic_diagnostic
+      - name: Check prior baseline history without opening sealed content
+        run: |
+          python - <<'PY'
+          from scripts.source_inference_synthetic_diagnostic import history_check
+          receipt = history_check()
+          assert not receipt['matches'] and not receipt['skipped_large_paths']
+          print(receipt['status'], receipt['checkout_head'])
+          PY
+      - name: Preserve all consumed runtime archives
+        run: >-
+          python -m unittest
+          tests.test_development_drc001_replay tests.test_development_drc002_replay
+          tests.test_development_dre001_replay tests.test_development_drc003_replay
+          tests.test_development_drc004_replay tests.test_development_drc005_replay
+          tests.test_development_drc006_replay tests.test_development_drc007_replay
+          tests.test_development_drc008_replay

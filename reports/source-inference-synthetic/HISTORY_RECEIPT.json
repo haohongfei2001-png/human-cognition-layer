@@ -1,0 +1,17 @@
+{
+  "candidate_source_sha256": "d3b3bcb5930bba2b3fe2ea643e2d76ec92fff47a841edff046279114927b781a",
+  "checkout_head": "bfa5545779852e9f6db2b0e43412fff784f6f149",
+  "confirmation_qualified": false,
+  "corpus_sha256": "efa43578739f6aecefcaf60d7864416be3b1b2e592f9e3f763363104645b0c10",
+  "limits": "Reachable published baseline text only; no deleted-ref, model-training, human-author or final-source independence claim.",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "matches": [],
+  "schema": "hcl-i02-reachable-git-history-exposure-v1",
+  "scope": "CURRENTLY_REACHABLE_GIT_OBJECTS_NOT_DELETED_REFS_OR_MODEL_TRAINING",
+  "sealed_blob_ids_not_opened": 44,
+  "selection": "ALL_TWELVE_AUTHOR_CASES_BEFORE_ANY_MODEL_OUTPUT_OR_TREATMENT_INSPECTION",
+  "skipped_large_paths": [],
+  "skipped_nontext_blobs": 26,
+  "status": "REACHABLE_HISTORY_NO_TEXT_MATCH",
+  "unique_utf8_blobs_scanned": 3494
+}

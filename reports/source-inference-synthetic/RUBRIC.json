@@ -1,0 +1,685 @@
+{
+  "application": [
+    "Assess propositions and distinctions, not exact answer phrasing or keyword overlap",
+    "Anchor quotations locate support in the supplied fiction; they are not claims about real-world events",
+    "A correct answer can be concise and combine multiple required propositions naturally",
+    "Acceptable hypotheses are optional and must remain explicitly conditional when mentioned",
+    "Important unresolved alternatives identify boundaries, not a checklist that every answer must recite",
+    "Required propositions about missing support can use the associated quotations to locate the limited evidence; absence claims are bounded by the complete source",
+    "Reported intentions may be accurately described as reports without proving private truth; directly narrated mental facts should be treated as facts within the fictional source"
+  ],
+  "cases": {
+    "original_synth_01": {
+      "acceptable_hypotheses": [
+        "Her chair-moving may have helped access and circulation; describe this as a plausible limited contribution rather than a demonstrated explanation of the whole opening",
+        "Ellis may have experience with Nora beyond this morning, but the source does not provide that experience"
+      ],
+      "forbidden_promotions": [
+        "Promote one successful opening or Ellis's praise into proof that Nora is consistently organized, reliable, selfless, or an expert organizer",
+        "Attribute arranging the tables or planning the session to Nora",
+        "Make Nora the sole cause of the on-time start",
+        "Erase her stated purpose by saying the source contains no information about her intention"
+      ],
+      "important_unresolved_alternatives": [
+        "How Nora usually organizes events",
+        "Whether Nora's changes affected the starting time, as opposed to comfort or access",
+        "Whether her reported reason exhausts her motives"
+      ],
+      "required_propositions": [
+        {
+          "anchor_quotes": [
+            "She moved three chairs away from a radiator and taped a handwritten arrow beside the entrance.",
+            "the opening session began on time"
+          ],
+          "dimension": "action_and_outcome",
+          "proposition": "Nora made specific physical changes before an on-time opening."
+        },
+        {
+          "anchor_quotes": [
+            "Nora replied, “I moved the chairs because I wanted people to reach the coat hooks.”"
+          ],
+          "dimension": "mental_state_and_attribution",
+          "proposition": "Access to the coat hooks is Nora's explicitly reported purpose for moving the chairs."
+        },
+        {
+          "anchor_quotes": [
+            "Ellis, the organizer, told a visitor, “Nora always knows how to make things run smoothly.”"
+          ],
+          "dimension": "identity_and_source",
+          "proposition": "The sweeping assessment of Nora is Ellis's praise, not an established history in the narrative."
+        },
+        {
+          "anchor_quotes": [
+            "She had not arranged the tables or planned the session.",
+            "The previous evening's dance instructor had left the tables in that position, and two volunteers had arrived early with the repair kits."
+          ],
+          "dimension": "causal_scope",
+          "proposition": "Other people and pre-existing arrangements also contributed to the opening conditions."
+        }
+      ]
+    },
+    "original_synth_02": {
+      "acceptable_hypotheses": [
+        "Concern for colleagues could coexist with her stated reason, but it is not established as her motive here",
+        "Her message could omit other reasons without becoming worthless as a report"
+      ],
+      "forbidden_promotions": [
+        "Treat Gareth's attribution as established access to Amina's motive",
+        "Treat Amina's message as independently verified, exhaustive private truth rather than a clear self-report",
+        "Infer that Amina cannot refuse requests, is habitually self-sacrificing, or has a mental-health condition",
+        "Conclude that nothing can be said about her reason despite her specific message"
+      ],
+      "important_unresolved_alternatives": [
+        "Whether she also wanted the extra pay or to help Gareth",
+        "Whether her account fully captures what she felt",
+        "Her reason for the earlier shift"
+      ],
+      "required_propositions": [
+        {
+          "anchor_quotes": [
+            "Amina, thirty-five, agreed to cover an extra evening at a small gym's reception desk.",
+            "Amina checked membership cards, folded the spare towels, and left at closing."
+          ],
+          "dimension": "action_and_outcome",
+          "proposition": "Amina accepted and worked the extra shift."
+        },
+        {
+          "anchor_quotes": [
+            "I took tonight because I couldn't face sitting alone after my argument with Joel. Having something to do sounded easier."
+          ],
+          "dimension": "mental_state_and_attribution",
+          "proposition": "Amina explicitly reported wanting activity rather than sitting alone after an argument; an answer should retain that available explanation as her account."
+        },
+        {
+          "anchor_quotes": [
+            "The manager, Gareth, thanked her in front of the adult staff and said, “She hates letting the team down.”",
+            "Gareth had not seen the message and did not ask why she had volunteered."
+          ],
+          "dimension": "identity_and_source",
+          "proposition": "The team-loyalty explanation comes from Gareth, who had not read her message or asked her reason."
+        },
+        {
+          "anchor_quotes": [
+            "Amina had covered one other extra shift that month, but nobody discussed her reason for that earlier shift."
+          ],
+          "dimension": "alternative_preservation",
+          "proposition": "The earlier shift supplies no stated motive that can settle this shift's explanation."
+        }
+      ]
+    },
+    "original_synth_03": {
+      "acceptable_hypotheses": [
+        "The delivery worker may have placed it directly on the shelf",
+        "A resident or the cleaner may have moved it there",
+        "Sol's account could be incomplete, but the source supplies no positive basis for alleging deception"
+      ],
+      "forbidden_promotions": [
+        "Credit Sol with moving this parcel merely because he carried a different box",
+        "Convert Victor's thank-you into independent confirmation of Sol's action",
+        "Declare Sol deceptive, unhelpful, or incapable of having helped on some other occasion",
+        "Assert that the parcel was first left in the rain or that any rescue occurred at all"
+      ],
+      "important_unresolved_alternatives": [
+        "Whether anyone moved the parcel after delivery",
+        "Who put it on the shelf and for what purpose",
+        "Whether it would otherwise have become wet"
+      ],
+      "required_propositions": [
+        {
+          "anchor_quotes": [
+            "found his cardboard parcel dry on the shelf inside the building's entrance"
+          ],
+          "dimension": "action_and_outcome",
+          "proposition": "Victor's parcel was found dry on the indoor shelf."
+        },
+        {
+          "anchor_quotes": [
+            "Sol probably rescued it. I saw him carrying a box through here.",
+            "Rina had been returning from the shops and had not read the label on that box."
+          ],
+          "dimension": "identity_and_source",
+          "proposition": "Rina's attribution to Sol is explicitly tentative and based on an unidentified box."
+        },
+        {
+          "anchor_quotes": [
+            "The box I carried was my replacement kettle. Your parcel was already on the shelf when I passed."
+          ],
+          "dimension": "identity_and_source",
+          "proposition": "Sol reports carrying his own kettle and seeing Victor's parcel already on the shelf."
+        },
+        {
+          "anchor_quotes": [
+            "The delivery notice on Victor's phone said only that the parcel had been left at the building.",
+            "Neither Victor nor Rina had seen the delivery."
+          ],
+          "dimension": "alternative_preservation",
+          "proposition": "The actual placer or mover is not identified by the observations or delivery notice."
+        }
+      ]
+    },
+    "original_synth_04": {
+      "acceptable_hypotheses": [
+        "Checking for updates earlier might have prevented the detour, if he had a reasonable opportunity and reason to do so",
+        "The changed room and the way the change was communicated may also have contributed to the delay"
+      ],
+      "forbidden_promotions": [
+        "Say Adrian knowingly or deliberately sent classmates to the wrong room",
+        "Make his later reading of the email knowledge he had at 8:25",
+        "Claim that lack of advance knowledge removes his practical causal contribution",
+        "Declare negligence, complete blamelessness, or inability to check messages as a settled fact",
+        "Attribute the room reassignment to Adrian"
+      ],
+      "important_unresolved_alternatives": [
+        "What message-checking duty, if any, Adrian had accepted",
+        "Whether earlier checking was feasible in the circumstances",
+        "What measures the coordinator took besides sending an email"
+      ],
+      "required_propositions": [
+        {
+          "anchor_quotes": [
+            "At 8:25 he placed his sign in the corridor and guided four classmates to Room 6.",
+            "The group spent ten minutes outside the locked door before another learner found them."
+          ],
+          "dimension": "action_and_outcome",
+          "proposition": "Adrian's sign and directions sent classmates to the wrong locked room and contributed to a delay."
+        },
+        {
+          "anchor_quotes": [
+            "Adrian did not read that email until 8:40.",
+            "Until he read the email, he believed the class was still meeting there."
+          ],
+          "dimension": "temporal_knowledge_and_control",
+          "proposition": "The narrative explicitly gives Adrian an outdated belief at the time of his directions, not knowledge of the move."
+        },
+        {
+          "anchor_quotes": [
+            "Adrian then checked his phone, changed the sign, and apologized."
+          ],
+          "dimension": "temporal_knowledge_and_control",
+          "proposition": "He corrected the sign after learning the new information; his later knowledge does not establish earlier knowledge."
+        },
+        {
+          "anchor_quotes": [
+            "He could change the corridor sign himself; only the coordinator could allocate rooms."
+          ],
+          "dimension": "causal_scope",
+          "proposition": "His control over the sign differs from the coordinator's control over room allocation."
+        },
+        {
+          "anchor_quotes": [
+            "using the coordinator's Monday message",
+            "The account does not say whether Adrian normally checked messages on his journey."
+          ],
+          "dimension": "alternative_preservation",
+          "proposition": "A firm judgment about avoidable fault requires expectations or opportunities the account does not settle."
+        }
+      ]
+    },
+    "original_synth_05": {
+      "acceptable_hypotheses": [
+        "A mistaken interpretation or insufficient checking is consistent with her account",
+        "A personal favor is logically possible, but the narrative does not establish it",
+        "Queue pressure may have influenced her checking, as she herself reports a desire to move the queue"
+      ],
+      "forbidden_promotions": [
+        "Infer close friendship from a nickname, smile, or shared course",
+        "Infer a knowingly unauthorized favor from the incorrect discount alone",
+        "Treat the supervisor's interpretation as Marisol's admitted purpose",
+        "Assert that Marisol certainly did not know the restriction from any other source",
+        "Erase the explicit self-report, or declare it certainly honest, exhaustive, or dishonest"
+      ],
+      "important_unresolved_alternatives": [
+        "The extent of their relationship beyond the course",
+        "Whether she knew the restriction by some route other than reading the reverse at that moment",
+        "Whether any other motive accompanied her stated purpose"
+      ],
+      "required_propositions": [
+        {
+          "anchor_quotes": [
+            "accepted a printed voucher for five euros off",
+            "its reverse restricted it to a different brand of coffee",
+            "The discount remained on the completed receipt."
+          ],
+          "dimension": "action_and_outcome",
+          "proposition": "Marisol accepted a voucher and the completed sale included a discount despite its brand restriction."
+        },
+        {
+          "anchor_quotes": [
+            "Marisol said, “I wanted to get the queue moving, and I thought it covered any coffee.”"
+          ],
+          "dimension": "mental_state_and_attribution",
+          "proposition": "Marisol reported a queue-clearing purpose and a belief that the voucher covered any coffee."
+        },
+        {
+          "anchor_quotes": [
+            "They had attended the same adult first-aid course the previous year; the account gives no other history between them.",
+            "The supervisor told another cashier that Marisol had “looked after a friend.”"
+          ],
+          "dimension": "identity_and_source",
+          "proposition": "Some prior acquaintance is established, but close friendship is not; the friend-favor characterization is the supervisor's."
+        },
+        {
+          "anchor_quotes": [
+            "Marisol did not turn the voucher over.",
+            "After the customer left, her supervisor noticed"
+          ],
+          "dimension": "temporal_knowledge_and_control",
+          "proposition": "Marisol did not inspect the reverse before accepting the voucher, and the supervisor noticed the restriction afterward."
+        },
+        {
+          "anchor_quotes": [
+            "Marisol had authority to accept valid vouchers but needed approval to make other price reductions."
+          ],
+          "dimension": "causal_scope",
+          "proposition": "Her authority covered valid vouchers, not unrestricted discretionary discounts."
+        }
+      ]
+    },
+    "original_synth_06": {
+      "acceptable_hypotheses": [
+        "Elise could have additional feelings about the criticism, but anger at the tutor is not established",
+        "The tutor's earlier advice could matter to her assessment of the vessel without making the cut retaliatory"
+      ],
+      "forbidden_promotions": [
+        "Equate disappointment about the collapse with anger at the tutor",
+        "Turn a deliberate physical cut into a demonstrated hostile message",
+        "Say the source supplies no motive because internal states cannot ever be known",
+        "Treat Ben's speculation as privileged knowledge",
+        "Conclude that Elise is generally destructive, unable to accept criticism, or unusually resilient from this scene"
+      ],
+      "important_unresolved_alternatives": [
+        "Whether Elise had any unreported anger or other feelings alongside the stated disappointment",
+        "Whether she agreed with the tutor's advice",
+        "Whether the remaining clay eventually became a usable planter"
+      ],
+      "required_propositions": [
+        {
+          "anchor_quotes": [
+            "With a wire, she cut away the top half and set it in the reclaim bucket.",
+            "She smoothed its edge and left it on the drying shelf."
+          ],
+          "dimension": "action_and_outcome",
+          "proposition": "Elise intentionally removed the collapsed upper part while keeping and working on the lower part."
+        },
+        {
+          "anchor_quotes": [
+            "She was disappointed by the collapse but wanted to preserve the solid lower section for a small planter."
+          ],
+          "dimension": "mental_state_and_attribution",
+          "proposition": "The narration positively supplies disappointment and a salvage purpose; these are explicit story facts, not merely unknowable private states."
+        },
+        {
+          "anchor_quotes": [
+            "The bottom can still become something I can use."
+          ],
+          "dimension": "mental_state_and_attribution",
+          "proposition": "Her spoken explanation is consistent with that supplied purpose."
+        },
+        {
+          "anchor_quotes": [
+            "Ben, another adult participant, whispered that she must be furious because the tutor had criticized the rim.",
+            "Ben did not ask her whether she was angry."
+          ],
+          "dimension": "identity_and_source",
+          "proposition": "Fury toward the tutor is Ben's inference, not something Elise says or the narration establishes."
+        }
+      ]
+    },
+    "original_synth_07": {
+      "acceptable_hypotheses": [
+        "Convenience, habit, keeping the bag off the ground, or wanting space are possible reasons, none established",
+        "Someone can criticize the effect of using a seat for a bag without claiming knowledge of a lifelong trait"
+      ],
+      "forbidden_promotions": [
+        "Promote temporarily occupying a seat into a stable selfish or uncaring character",
+        "Promote one immediate accommodation into proof of consistently considerate character",
+        "Invent disgust, contempt, disability awareness, or a desire to exclude other travelers",
+        "Treat the later passenger as a witness to the whole interaction",
+        "Use the free seats to prove the tote could not inconvenience anyone"
+      ],
+      "important_unresolved_alternatives": [
+        "Leon's reason for placing the tote there",
+        "Whether other travelers had wanted that particular seat before Mira asked",
+        "How Leon behaves in other situations"
+      ],
+      "required_propositions": [
+        {
+          "anchor_quotes": [
+            "sat on a station bench with a canvas tote on the place beside him",
+            "Leon immediately put the tote between his feet and shifted his coat away."
+          ],
+          "dimension": "action_and_outcome",
+          "proposition": "Leon occupied a bench place with his tote but immediately cleared it when Mira asked."
+        },
+        {
+          "anchor_quotes": [
+            "When Mira boarded her train, Leon put the tote back on the empty place.",
+            "two seats remained free at the far end of the bench"
+          ],
+          "dimension": "action_and_outcome",
+          "proposition": "He put the tote back after Mira left, and other seats were initially available."
+        },
+        {
+          "anchor_quotes": [
+            "A passenger across the platform remarked to his companion, “Some people don't care who needs a seat.”",
+            "That passenger had arrived after Mira stood up."
+          ],
+          "dimension": "identity_and_source",
+          "proposition": "The broad criticism came from a passenger who missed the request and Leon's response."
+        },
+        {
+          "anchor_quotes": [
+            "Leon's reason for putting the tote on the bench was never stated."
+          ],
+          "dimension": "mental_state_and_attribution",
+          "proposition": "The source does not state Leon's reason or establish a stable lack of concern."
+        }
+      ]
+    },
+    "original_synth_08": {
+      "acceptable_hypotheses": [
+        "Mateo's information plausibly helped the staff coordinate the return, consistent with his described contributions",
+        "Tomas may have named the staff member he remembered without knowing the full sequence"
+      ],
+      "forbidden_promotions": [
+        "Attribute physical retrieval, storage, the email, or the handover to Mateo",
+        "Treat Tomas's thank-you as more authoritative about the sequence than the narrated events",
+        "Assert that Mateo claimed all the credit or deliberately took it from colleagues",
+        "Withhold all causal credit merely because Mateo did not perform the final handover",
+        "Invent selfless or publicity-seeking motives"
+      ],
+      "important_unresolved_alternatives": [
+        "What Tomas knew about each employee's role when he posted",
+        "Whether Mateo ever read or corrected the post",
+        "The employees' reasons beyond the actions described"
+      ],
+      "required_propositions": [
+        {
+          "anchor_quotes": [
+            "Mateo, forty-six, noticed a blue scarf under a chair in the hotel lobby and pointed it out to Priya, the night clerk.",
+            "At breakfast, Mateo told Lena, the incoming clerk, where the scarf was."
+          ],
+          "dimension": "identity_and_source",
+          "proposition": "Mateo noticed the scarf, pointed it out to Priya, and later told Lena its location."
+        },
+        {
+          "anchor_quotes": [
+            "Priya picked it up and placed it behind the desk.",
+            "Priya matched that name to an adult guest's reservation and emailed him, signing the message “Priya, reception.”"
+          ],
+          "dimension": "identity_and_source",
+          "proposition": "Priya physically retrieved and stored it, identified a likely owner through the tag and reservation, and contacted him."
+        },
+        {
+          "anchor_quotes": [
+            "Tomas collected it from Lena that afternoon."
+          ],
+          "dimension": "identity_and_source",
+          "proposition": "Lena, rather than Mateo, handed it back when Tomas collected it."
+        },
+        {
+          "anchor_quotes": [
+            "The post said Mateo had found, stored, and returned the scarf.",
+            "Mateo had not seen Tomas collect it."
+          ],
+          "dimension": "causal_scope",
+          "proposition": "Mateo contributed to a multi-person recovery; Tomas's public thanks compresses and misassigns some actions."
+        },
+        {
+          "anchor_quotes": [
+            "Neither Mateo nor Priya explained why they had taken their respective steps."
+          ],
+          "dimension": "mental_state_and_attribution",
+          "proposition": "The practical contributions are clear even though the actors' private reasons are not supplied."
+        }
+      ]
+    },
+    "original_synth_09": {
+      "acceptable_hypotheses": [
+        "If those audience members relied on the flyers, the original date, schedule change, missed communication, and printing decision all form relevant parts of the causal chain",
+        "Bea may have acted from habit, distraction, or confusion, but no reason is supplied",
+        "Other announcements retaining the Friday date could also have affected the audience members"
+      ],
+      "forbidden_promotions": [
+        "Say Kiran knowingly advertised an obsolete date",
+        "Transfer Bea's rehearsal attendance or later knowledge to Kiran",
+        "Call Kiran the sole cause of the wrong-date publicity or claim he authorized the final printed version",
+        "Say Kiran had no causal connection at all merely because he lacked later information",
+        "Attribute sabotage, laziness, or dishonesty to Bea from the oversight alone",
+        "Assert that the two audience members definitely relied on these flyers rather than another Friday announcement"
+      ],
+      "important_unresolved_alternatives": [
+        "What information actually led the two audience members to come on Friday",
+        "Whether any agreed process required Kiran to recheck dates after submitting a draft",
+        "Why Bea overlooked the date and whether other publicity was updated"
+      ],
+      "required_propositions": [
+        {
+          "anchor_quotes": [
+            "drafted a flyer for his adult choir on Monday, using the Friday concert date the conductor, Freya, had given him",
+            "After two audience members arrived on Friday, Freya asked him about the error."
+          ],
+          "dimension": "action_and_outcome",
+          "proposition": "Kiran supplied the original Friday date in a draft; the printed old date was associated with two audience members arriving Friday."
+        },
+        {
+          "anchor_quotes": [
+            "using the Friday concert date the conductor, Freya, had given him",
+            "That was when he first learned the concert had moved."
+          ],
+          "dimension": "temporal_knowledge_and_control",
+          "proposition": "The draft matched the date supplied when he wrote it, and he learned of the change only after the Friday arrivals."
+        },
+        {
+          "anchor_quotes": [
+            "On Tuesday, Freya moved the concert to Thursday",
+            "Bea attended rehearsal but printed the old file on Wednesday without comparing its date to her notes.",
+            "She removed the word “draft” before printing."
+          ],
+          "dimension": "identity_and_source",
+          "proposition": "Freya changed the date; Bea printed the old draft and removed its draft label."
+        },
+        {
+          "anchor_quotes": [
+            "He put “draft” at the top and sent it to Bea, the publicity volunteer.",
+            "Kiran did not see the printed flyers.",
+            "Kiran was absent, and nobody sent him the change."
+          ],
+          "dimension": "causal_scope",
+          "proposition": "His draft is part of the chain, but sole responsibility or knowing publication cannot be assigned to him from this account."
+        },
+        {
+          "anchor_quotes": [
+            "The account does not explain why she overlooked the date."
+          ],
+          "dimension": "alternative_preservation",
+          "proposition": "Bea's reason for overlooking the date is unresolved despite her observable printing decisions."
+        }
+      ]
+    },
+    "original_synth_10": {
+      "acceptable_hypotheses": [
+        "Excess water, cold, both together, or another plant problem might account for the wilting",
+        "Owen's use of the tap contributed to water reaching the lettuce without establishing an intention to harm it",
+        "A prior inspection of the hose might have revealed the splitter, but its feasibility and expected necessity are unspecified"
+      ],
+      "forbidden_promotions": [
+        "Promote Nessa's accusation into established dislike or deliberate crop damage",
+        "Treat Owen's discovery at shutdown as knowledge he possessed when opening the tap",
+        "Treat temporal succession as proof that watering caused the wilting",
+        "Say the whole crop was ruined when only several wilted seedlings are described",
+        "Declare the cold snap the definite cause, or deny any possible contribution from watering",
+        "Equate lack of harmful intent with having no practical role in water reaching the plot"
+      ],
+      "important_unresolved_alternatives": [
+        "The cause and eventual severity of the wilting",
+        "Whether there was any prior interpersonal conflict",
+        "Whether Owen had a duty or practical reason to inspect the hose before following Ruth's request"
+      ],
+      "required_propositions": [
+        {
+          "anchor_quotes": [
+            "Owen, sixty-one, opened the allotment tap for twenty minutes",
+            "While the tap was running, water collected around Nessa's seedlings.",
+            "immediately disconnected the second branch"
+          ],
+          "dimension": "action_and_outcome",
+          "proposition": "Owen opened the tap and water reached the lettuce through a branch he later disconnected."
+        },
+        {
+          "anchor_quotes": [
+            "He believed the attached hose still led only to that bed.",
+            "Owen had neither seen the alteration nor been told about it."
+          ],
+          "dimension": "temporal_knowledge_and_control",
+          "proposition": "The narration gives Owen a belief that the hose served only the flowers and no awareness of the alteration beforehand."
+        },
+        {
+          "anchor_quotes": [
+            "following Ruth's request to water the communal flowers",
+            "Owen said, “I was trying to water the flowers.”",
+            "Nessa found several seedlings wilted and accused Owen of spoiling her crop because he disliked her."
+          ],
+          "dimension": "mental_state_and_attribution",
+          "proposition": "Watering the flowers is both the task he was following and his reported intention; dislike-driven damage is Nessa's accusation."
+        },
+        {
+          "anchor_quotes": [
+            "A cold snap followed overnight.",
+            "Nobody examined the plants closely enough to establish why they had wilted."
+          ],
+          "dimension": "causal_scope",
+          "proposition": "Watering and subsequent wilting are observed, but the source does not establish what caused the wilting or total loss of the crop."
+        }
+      ]
+    },
+    "original_synth_11": {
+      "acceptable_hypotheses": [
+        "Embarrassment is the explanation Daria herself gives and is consistent with the described incident",
+        "She could have had additional feelings without invalidating the fact that she reported liking the soup"
+      ],
+      "forbidden_promotions": [
+        "Treat quietness as proof of dislike, hostility, disgust, or a stable social trait",
+        "Use finishing the bowl as conclusive proof of enjoyment independently of her message",
+        "Say her motive is wholly unknown despite the specific self-report",
+        "Declare her report certainly deceptive or guarantee that it completely describes her feelings",
+        "Invent a facial expression, diagnosis, or conflict with Felix"
+      ],
+      "important_unresolved_alternatives": [
+        "Whether any other feeling also contributed to her quietness",
+        "Whether Felix ever learned her explanation",
+        "Whether other people noticed or cared about the dropped spoon"
+      ],
+      "required_propositions": [
+        {
+          "anchor_quotes": [
+            "her elbow knocked a spoon onto the floor",
+            "answered Felix's question about the soup with a quiet “Thanks.”",
+            "Daria finished her bowl before returning to work."
+          ],
+          "dimension": "action_and_outcome",
+          "proposition": "Daria knocked down a spoon, responded quietly, and finished her soup."
+        },
+        {
+          "anchor_quotes": [
+            "The soup was lovely. I went quiet because I was embarrassed about making a clatter when everyone had just settled down."
+          ],
+          "dimension": "mental_state_and_attribution",
+          "proposition": "Her later message explicitly reports enjoyment of the soup and embarrassment about the noise as the reason for going quiet."
+        },
+        {
+          "anchor_quotes": [
+            "Felix later told another colleague that Daria obviously disliked his cooking.",
+            "Felix had not seen that message."
+          ],
+          "dimension": "identity_and_source",
+          "proposition": "Dislike of the cooking is Felix's interpretation, offered without access to Daria's message."
+        },
+        {
+          "anchor_quotes": [
+            "Daria messaged a friend",
+            "the account includes no later conversation between Daria and Felix about lunch"
+          ],
+          "dimension": "alternative_preservation",
+          "proposition": "The report provides a clear available explanation while not independently verifying every private feeling."
+        }
+      ]
+    },
+    "original_synth_12": {
+      "acceptable_hypotheses": [
+        "The two motives can coexist even if the protective concern rested on a mistaken belief",
+        "Alana's interpretation may reflect the personal stake of her own recommendation, but her feelings and reasoning are not supplied",
+        "Privacy could benefit other members as well, without proving that it did"
+      ],
+      "forbidden_promotions": [
+        "Erase the explicitly narrated protective motive in favor of Alana's exclusive explanation",
+        "Erase the explicitly narrated self-interested motive to make Chen purely altruistic",
+        "Say all motives are unknowable despite direct narration",
+        "Retroactively give Chen knowledge of Ruth's later self-report at the meeting",
+        "Infer that Chen controlled the tally, knew Ruth's vote, or changed the winning book",
+        "Promote mixed motives in this event into a stable diagnosis of Chen's character"
+      ],
+      "important_unresolved_alternatives": [
+        "The relative weight of Chen's two motives",
+        "Whether anonymity changed anyone's vote or comfort",
+        "What Chen would have proposed had he known Ruth felt comfortable already"
+      ],
+      "required_propositions": [
+        {
+          "anchor_quotes": [
+            "He genuinely wanted Ruth, the newest member, to feel free to reject the chair's suggestion.",
+            "He also hoped to conceal his own vote against a novel recommended by his close friend Alana."
+          ],
+          "dimension": "mental_state_and_attribution",
+          "proposition": "The narration explicitly establishes both a genuine protective intention and a personal wish to conceal his own vote."
+        },
+        {
+          "anchor_quotes": [
+            "Chen told the group, “It might be easier for newcomers if nobody has to raise a hand.”",
+            "Alana subsequently called the ballot “just an excuse to hide his own choice,”"
+          ],
+          "dimension": "identity_and_source",
+          "proposition": "Chen's public explanation mentions newcomers, while Alana supplies the later claim that this was only an excuse."
+        },
+        {
+          "anchor_quotes": [
+            "A week later, Ruth told him she had felt comfortable disagreeing openly from the start.",
+            "Chen had believed otherwise during the meeting."
+          ],
+          "dimension": "temporal_knowledge_and_control",
+          "proposition": "Ruth's later account of her comfort does not erase Chen's stated earlier belief or motive."
+        },
+        {
+          "anchor_quotes": [
+            "The members agreed, and the chair collected the folded slips.",
+            "Chen did not count them and never learned how Ruth voted."
+          ],
+          "dimension": "action_and_outcome",
+          "proposition": "The group adopted the ballot; Chen did not count the votes or learn Ruth's vote."
+        },
+        {
+          "anchor_quotes": [
+            "He genuinely wanted Ruth",
+            "He also hoped to conceal his own vote"
+          ],
+          "dimension": "alternative_preservation",
+          "proposition": "On the supplied narration, an exclusively self-serving explanation is too narrow, without requiring either motive to be the dominant one."
+        }
+      ]
+    }
+  },
+  "cases_sha256": "efa43578739f6aecefcaf60d7864416be3b1b2e592f9e3f763363104645b0c10",
+  "common_dimensions": {
+    "action_and_outcome": "Preserve the concrete actions and outcomes supplied, including useful positive facts",
+    "alternative_preservation": "Retain important unresolved possibilities without asserting them as facts or requiring an exhaustive list",
+    "causal_scope": "Distinguish participation and temporal sequence from demonstrated causal contribution, sole causation, deliberate outcome, and normative blame",
+    "identity_and_source": "Keep actors, speakers, observers, and attributed claims attached to their actual sources",
+    "mental_state_and_attribution": "Distinguish directly narrated mental facts, a person's own report, and another person's interpretation; do not erase explicit support or promote it beyond its form",
+    "temporal_knowledge_and_control": "Keep action-time belief, information, authority, and ability separate from later discovery or another actor's control"
+  },
+  "hidden_means": "Evaluator-side only; withheld from answering inputs, not access-controlled or final-sealed evidence.",
+  "model_answer_outputs_seen": 0,
+  "paid_grader_calls": 0,
+  "schema": "hcl-source-inference-synthetic-rubric-v1",
+  "semantic_verdict": "REQUIRES_BLINDED_SOURCE_FIRST_REVIEW"
+}
