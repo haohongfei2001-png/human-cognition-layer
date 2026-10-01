@@ -138,3 +138,10 @@ checked treatment0/8,INCONCLUSIVE (unattributed small wrapper difference), no fa
 upgrade.16calls/0extraction/0retry,peakUSD0.11298936/invoiceunknown,grant0/triggergone,
 exact128-file archive/raw preserved, development-exposed/final-consumed. Next general
 paragraph access integration and no-treatment context simplification.
+
+[Paragraph access v21](HCL_DEVELOPMENT_PARAGRAPH_ACCESS_V21.md): ordinary complete
+paragraphs run existing B02+B01, exact original quote/order/revision mapping, no private
+state inference. Unsupported entries retain whole source/query/guard and omit dead
+candidate wire.7new/108focused passes, authored comparison/composition/revision witness,
+8consumed inputs-only wire reduction,0livecalls/spend. IMPLEMENTED_UNVALIDATED/no new
+family/bill or answer-gain claim; six archives/dispositions preserved, no final upgrade.

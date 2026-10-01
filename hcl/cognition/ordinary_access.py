@@ -7,12 +7,40 @@ import re
 from .communication import CommunicationScene
 from .semantic import _PRONOUNS
 
-_NAME=r'[A-Z][\w-]{0,39}(?: [A-Z][\w-]{0,39})?'
+_NAME=r'(?!(?:Then|Later|Meanwhile|If|When|Unless|Perhaps|Otherwise)\b)[A-Z][\w-]{0,39}(?: [A-Z][\w-]{0,39})?'
 _SPEECH=re.compile(rf'(?P<speaker>{_NAME}) (?:said|says|stated|replied|wrote|added|explained),? ["“](?P<body>[^"“”\r\n]+)["”]\.?')
 _RECEIPT=re.compile(rf'(?P<actor>{_NAME}) (?P<verb>later heard|later read|heard|read|did not hear|did not read) (?P<speaker>{_NAME})\x27s last statement\.')
 _AVAILABLE=re.compile(rf'(?P<speaker>{_NAME})\x27s last statement was publicly available\.')
 _ADDRESSED=re.compile(rf'(?P<speaker>{_NAME}) sent their last statement privately to (?P<actor>{_NAME})\.')
 
+
+def _source_fragments(text):
+    """Conservative complete source fragments; quotes never split into narration.
+
+    Periods outside paired quotes/newlines separate statements. Every resulting
+    nonempty fragment must still pass the existing whole-fragment syntax checker;
+    qualifiers/remainders cannot be discarded. Offsets refer to original text character positions.
+    """
+    start=0;closing=None;fragments=[]
+    for i,char in enumerate(text):
+        if closing is None and char in ('"','“'):
+            closing='"' if char=='"' else '”'
+        elif closing is not None and char==closing:
+            closing=None
+        elif char in ('”','“'):
+            raise ValueError('unbalanced quotation; no access normalization')
+        boundary=closing is None and (char=='\n' or char=='.' and (i+1==len(text) or text[i+1].isspace()))
+        # Speech may end at its closing quote; include a following outside period.
+        quote_boundary=(closing is None and char in ('"','”') and (i+1==len(text) or text[i+1].isspace()))
+        if boundary or quote_boundary:
+            raw=text[start:i+1];fragment=raw.strip()
+            if fragment:fragments.append((text.count('\n',0,start)+1,start+len(raw)-len(raw.lstrip()),fragment))
+            start=i+1
+    if closing is not None:raise ValueError('unclosed quotation; no access normalization')
+    raw=text[start:];fragment=raw.strip()
+    if fragment:fragments.append((text.count('\n',0,start)+1,start+len(raw)-len(raw.lstrip()),fragment))
+    if not 1<=len(fragments)<=80:raise ValueError('communication statement budget exceeded')
+    return fragments
 
 def prepare_ordinary_access(text, *, source_id, version):
     """Complete bounded explicit grammar only; unsupported input stays unresolved.
@@ -25,10 +53,7 @@ def prepare_ordinary_access(text, *, source_id, version):
     if (not isinstance(text,str) or not text.strip() or len(text)>64000
             or not isinstance(source_id,str) or not source_id or type(version)is not int or version<1):
         raise ValueError('bounded authorized original source/revision required')
-    lines=text.splitlines()
-    if not 1<=len(lines)<=80:
-        return dict(state=None,reason='COMMUNICATION_LINE_BUDGET',checked_operations=0)
-    aliases={};bindings=[];normalized=[];access_count=0;offset=0
+    aliases={};bindings=[];normalized=[];access_count=0
     def alias(name):
         if name.casefold() in _PRONOUNS:raise ValueError('ambiguous actor/reference remains unresolved')
         if name not in aliases:
@@ -36,9 +61,7 @@ def prepare_ordinary_access(text, *, source_id, version):
             aliases[name]='Person'+str(len(aliases)+1)
         return aliases[name]
     try:
-        for line_number,raw in enumerate(text.splitlines(keepends=True),1):
-            line=raw.rstrip('\r\n');fragment=line.strip();start=offset+len(line)-len(line.lstrip());offset+=len(raw)
-            if not fragment:continue
+        for line_number,start,fragment in _source_fragments(text):
             speech=_SPEECH.fullmatch(fragment)
             receipt=_RECEIPT.fullmatch(fragment)
             available=_AVAILABLE.fullmatch(fragment)
@@ -84,6 +107,7 @@ def prepare_ordinary_access(text, *, source_id, version):
         source_id=source_id,source_version=version,source_local_actor_aliases=aliases,
         original_quote_bindings=bindings,views=views,
         temporal_semantics='SOURCE_ORDER_ONLY_NOT_CALENDAR_OR_RETROACTIVE_ACCESS',
+        audit_coordinates='B02 source_line is derived statement ordinal, mapped by original_quote_bindings to exact original offsets/lines, never calendar time',
         representation_quotable=False,private_state_established=False,world_receipt_verified=False,
         semantic_certification=False,shared_exposure_establishes_shared_belief=False)
     return dict(state=state,reason=None,checked_operations=len(views))

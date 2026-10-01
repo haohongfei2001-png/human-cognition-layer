@@ -31,7 +31,24 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: ORDINARY_PARAGRAPH_ACCESS_AND_NO_TREATMENT_CONTEXT_SIMPLIFICATION**
+**NEXT_READY: GENERAL_ORDINARY_NARRATOR_ATTRIBUTION_STATE_ADMISSION**
+
+[Ordinary paragraph integration v21](docs/HCL_DEVELOPMENT_PARAGRAPH_ACCESS_V21.md):
+complete same-paragraph explicit reports now enter existing B02 beside B01, original
+quotes/offsets, source-local actors, full qualifications and revision preserved.
+No reported receipt→knowledge/comprehension/private/shared belief. Without checked
+state, omit unused candidate/audit wire while retaining whole source/query and
+original mental-truth guard.7new/108focused local passes; authored exact-v20→v21
+positive composition/source-cited stub/revision witness.8consumed preparations
+12,443→7,306wire chars,0answer reruns/score changes/livecalls/spend; no actual token/
+bill or answer-gain claim. IMPLEMENTED_UNVALIDATED, no new family or historical
+upgrade, six archives exact. Next general ordinary narrator attribution admission
+using existing operations; no memory/person ontology or automatic mental inference.
+Final reviewer/source is no daily gate; LongMemEval SEALED, leaderboard off.
+
+## DRC005 preserved source-first closure
+
+**Historical queue snapshot: ORDINARY_PARAGRAPH_ACCESS_AND_NO_TREATMENT_CONTEXT_SIMPLIFICATION**
 
 [DRC005 source-first closure](reports/HCL_DRC005_SOURCE_FIRST_CLOSURE.md): INCONCLUSIVE,
 Base7/8/H8/8,onegain/0harms,checked H treatment0/8. One native-label wrapper improvement

@@ -70,6 +70,14 @@ def _local(workspace, query, source_id, max_chars):
         preparation['specialized_cognition_treatment']=True
         preparation['method']+='_reported_access_integration'
         messages[0]=dict(role='system',content=messages[0]['content']+' Communication views use a source-local syntactic representation, not quotable original text. Reported receipt is not comprehension, acceptance, knowledge or private belief; availability/addressing and missing routes are not receipt or ignorance. Actor aliases are reversible local labels, not cross-source identities. Later source receipt cannot rewrite earlier non-receipt; source order is not calendar time.')
+    if not preparation.get('specialized_cognition_treatment'):
+        # No checked cognition was executed. Keep the complete original and the
+        # source/mental-truth guard, omit unexecuted candidate/audit wire payload.
+        payload=dict(query=query,sources=payload['sources'])
+        preparation['context_selection']='COMPLETE_SOURCE_NO_CHECKED_STATE_MINIMAL_WIRE'
+        preparation['unused_candidates_not_sent']=True
+    else:
+        preparation['context_selection']='ACTUAL_CHECKED_COGNITION_AND_COMPLETE_SOURCE'
     # The nested local checker uses statement order; the primary wire version
     # is the actual shared source revision, not a reset checker-local version.
     payload['sources'][0]['version'] = version
