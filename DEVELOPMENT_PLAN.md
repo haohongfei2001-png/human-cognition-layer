@@ -28,6 +28,13 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: GENERAL_ORDINARY_ANSWER_SOURCE_INFERENCE_BOUNDARY_REPAIR**
 
+[Qualified-speech scope repair](docs/HCL_QUALIFIED_SPEECH_SCOPE_REPAIR.md): the ordinary
+reader no longer promotes explicitly hypothetical/counterfactual quoted speech
+into actual public expressions or plan joins. Full source and offsets are retained;
+actual discussion of hypothetical examples remains supported. Provider-free
+source-scope correctness only, no model-answer gain or native-task utility claim.
+The merged final-input budget fix and all consumed evidence remain preserved.
+
 [DRC008 source-first closure](reports/HCL_DRC008_SOURCE_FIRST_CLOSURE.md): INCONCLUSIVE,
 provisional paired judgeBase/H6/6,0gains/harms,checked treatment0/6;quotes/formatallpass.
 Source-first review finds both import unsupported stock-story inborn nature,Base
