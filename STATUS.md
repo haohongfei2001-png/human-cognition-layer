@@ -31,7 +31,27 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: GENERAL_SOURCE_BEARING_READER_ENTRY_COVERAGE**
+**NEXT_READY: FRESH_ADAPTIVE_READER_DEVELOPMENT_REALITY_CHECK**
+
+[Adaptive ordinary reader v19](docs/HCL_DEVELOPMENT_ADAPTIVE_READER_V19.md) first
+selects actual B01/C01/C03 state from ordinary dialogue with0 extraction. Only absent
+local treatment permits one explicitly configured conditional translation attempt;
+unusable representation preserves complete original input and raw attempt receipt.
+Actual caller source ID/version, source/actor/time boundaries, revision/challenge,
+quote-only delivery and unknown private/world semantics remain explicit. No retry,
+truncation, new cognition module, ontology or historical disposition change.
+
+12 new checks/89 focused local integration/historical/archive passes and authored
+ordinary composition/revision witness;0 live calls/spend. Utility remains
+IMPLEMENTED_UNVALIDATED. Next select new legally usable concrete development items,
+freeze fair strong Base/current H configuration/scoring before outputs, run bounded
+comparison with actual treatment/all preparation cost, and preserve negatives. Final
+reviewer/source perfection is no development stop. Consumed experiments never rerun
+or regrade; LongMemEval SEALED, leaderboard inactive.
+
+## v18 preserved correctness snapshot
+
+
 
 [Actual source-frame/request boundary v18](docs/HCL_DEVELOPMENT_SOURCE_FRAME_V18.md)
 repairs generic measurement/delivery identity: source audit reads actual primary IDs,
