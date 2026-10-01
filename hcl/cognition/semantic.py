@@ -122,7 +122,7 @@ def _paragraph_narrator_report_candidates(source, reporter):
     return reports
 
 
-def _narrator_report_candidates(source):
+def _narrator_report_candidates(source, narration_context):
     """Only complete standalone, named literal mental-report paragraphs.
 
     The reporter is the source channel, never the named subject or an inferred
@@ -134,10 +134,17 @@ def _narrator_report_candidates(source):
     rows = []
     cursor = quotes = opens = closes = brackets = fences = 0
     suspended = False
+    actual_cues = []
+    for cue in _ACTUAL_SCENE.finditer(narration_context):
+        before = source.text[:cue.start()]
+        if before.count('[') > before.count(']') or before.count('```') % 2:
+            continue
+        actual_cues.append(cue.end())
     for block in re.finditer(r'(?m)^[^\r\n]+(?:\r?\n[^\r\n]+)*', source.text):
         quote = block.group()
         fragment = quote.strip()
         prefix = source.text[cursor:block.start()]
+        resumed = [end for end in actual_cues if cursor < end <= block.start()]
         cursor = block.start()
         quotes += prefix.count('"')
         opens += prefix.count('\u201c')
@@ -145,6 +152,13 @@ def _narrator_report_candidates(source):
         brackets += prefix.count('[') - prefix.count(']')
         fences += prefix.count('```')
         suspended = suspended or bool(re.search(r'\b(hypothetical|imagined|counterfactual|pretended)\b', prefix, re.I))
+        if resumed:
+            # A narrator-level transition ends the earlier imagined scope, but
+            # cannot restore reports before it or override a later qualifier.
+            # The shared view excludes speech bodies; directions/fences above
+            # cannot speak for the narrator either. Original anchors stay intact.
+            suspended = bool(re.search(r'\b(hypothetical|imagined|counterfactual|pretended)\b',
+                narration_context[resumed[-1]:block.start()], re.I))
         if (len(quote) > 4000 or not fragment.endswith(('.', '!', '?')) or
                 re.search(r'["\u201c\u201d\[\]_*]|\bI\b', fragment) or
                 quotes % 2 or opens > closes or brackets > 0 or fences % 2 or suspended):
@@ -267,7 +281,7 @@ def _local_candidates(source, *, dialogue_blocks=False, narrator_reports=False):
                 reference_binding='FIRST_PERSON_TO_EXPLICIT_SPEAKER' if named and not conditional else 'UNRESOLVED',
                 assertion_scope=event['assertion_scope'])))
     if narrator_reports:
-        reports = _narrator_report_candidates(source)
+        reports = _narrator_report_candidates(source, context)
         rows.extend(r for r in reports if not any(start <= r['start'] < end for start, end in used))
         rows.sort(key=lambda r: r['start'])
     return rows

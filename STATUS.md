@@ -33,6 +33,12 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: GENERAL_ORDINARY_ANSWER_SOURCE_INFERENCE_BOUNDARY_REPAIR**
 
+[Actual narrator-report resumption](docs/HCL_NARRATOR_ACTUAL_SCOPE_REPAIR.md):
+explicit narrator-level actual-scene transitions now restore later eligible
+literal reports while preserving hypothetical, speech, stage and fenced scopes.
+Source attributions remain distinct from private beliefs and plan premises.
+Provider-free correctness only; no prompt, paid call or answer-gain claim.
+
 [Qualified-speech scope repair](docs/HCL_QUALIFIED_SPEECH_SCOPE_REPAIR.md): the ordinary
 reader no longer promotes explicitly hypothetical/counterfactual quoted speech
 into actual public expressions or plan joins. Full source and offsets are retained;

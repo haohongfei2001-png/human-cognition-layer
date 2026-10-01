@@ -1,0 +1,122 @@
+{
+  "schema": "hcl-narrator-actual-scope-witness-v1",
+  "baseline_commit": "97b9bf187360860327ab573bae2217401b779ff0",
+  "current_runtime_sha256": "6241badfbd8edbc89e5ba09307857459f473b070da95fadf2d2c2600ef5c5a10",
+  "before": [
+    {
+      "case": "ordinary_report",
+      "source": "Noor believes the gate is clear.",
+      "source_sha256": "38666dc874feac2d8a2d316039412d39c50f9d3ce998017612c2126b00983798",
+      "source_complete": true,
+      "narrator_reports": 1,
+      "private_interpretations": 0,
+      "extraction_calls": 0
+    },
+    {
+      "case": "imagined_report",
+      "source": "The following conversation was imagined.\n\nNoor believes the gate is clear.",
+      "source_sha256": "72354610b0034a7f6dfcf5f193db6613c51ce2e3f3a37020b2c2337e1d3ccab7",
+      "source_complete": true,
+      "narrator_reports": 0,
+      "private_interpretations": 0,
+      "extraction_calls": 0
+    },
+    {
+      "case": "actual_resumption",
+      "source": "The following conversation was imagined.\n\nIn reality, a bell rang.\n\nNoor believes the gate is clear.",
+      "source_sha256": "b8c8fa215098f1b197ee07dedd0bbdb7547b8762a579d3a5978516dbe2f60932",
+      "source_complete": true,
+      "narrator_reports": 0,
+      "private_interpretations": 0,
+      "extraction_calls": 0
+    },
+    {
+      "case": "spoken_transition",
+      "source": "The following conversation was imagined.\n\nEva said, “In reality, a bell rang.”\n\nNoor believes the gate is clear.",
+      "source_sha256": "2e4c07ee0a4e067764646101b3bda61a8ef5bd051862d40c242658f347a0d010",
+      "source_complete": true,
+      "narrator_reports": 0,
+      "private_interpretations": 0,
+      "extraction_calls": 0
+    },
+    {
+      "case": "stage_transition",
+      "source": "The following conversation was imagined.\n\n[Direction. In reality, a bell rang.]\n\nNoor believes the gate is clear.",
+      "source_sha256": "193a9a2d59d82240e1de58da98560bc9961c4e502ecb14071e9960f05b6ed39d",
+      "source_complete": true,
+      "narrator_reports": 0,
+      "private_interpretations": 0,
+      "extraction_calls": 0
+    },
+    {
+      "case": "later_qualification",
+      "source": "The following conversation was imagined.\n\nIn reality, a bell rang.\n\nThis scene is hypothetical.\n\nNoor believes the gate is clear.",
+      "source_sha256": "db254b5610fa19fba1bf75f9d36054606724a6416f1f85670907f5674b76e767",
+      "source_complete": true,
+      "narrator_reports": 0,
+      "private_interpretations": 0,
+      "extraction_calls": 0
+    }
+  ],
+  "after": [
+    {
+      "case": "ordinary_report",
+      "source": "Noor believes the gate is clear.",
+      "source_sha256": "38666dc874feac2d8a2d316039412d39c50f9d3ce998017612c2126b00983798",
+      "source_complete": true,
+      "narrator_reports": 1,
+      "private_interpretations": 0,
+      "extraction_calls": 0
+    },
+    {
+      "case": "imagined_report",
+      "source": "The following conversation was imagined.\n\nNoor believes the gate is clear.",
+      "source_sha256": "72354610b0034a7f6dfcf5f193db6613c51ce2e3f3a37020b2c2337e1d3ccab7",
+      "source_complete": true,
+      "narrator_reports": 0,
+      "private_interpretations": 0,
+      "extraction_calls": 0
+    },
+    {
+      "case": "actual_resumption",
+      "source": "The following conversation was imagined.\n\nIn reality, a bell rang.\n\nNoor believes the gate is clear.",
+      "source_sha256": "b8c8fa215098f1b197ee07dedd0bbdb7547b8762a579d3a5978516dbe2f60932",
+      "source_complete": true,
+      "narrator_reports": 1,
+      "private_interpretations": 0,
+      "extraction_calls": 0
+    },
+    {
+      "case": "spoken_transition",
+      "source": "The following conversation was imagined.\n\nEva said, “In reality, a bell rang.”\n\nNoor believes the gate is clear.",
+      "source_sha256": "2e4c07ee0a4e067764646101b3bda61a8ef5bd051862d40c242658f347a0d010",
+      "source_complete": true,
+      "narrator_reports": 0,
+      "private_interpretations": 0,
+      "extraction_calls": 0
+    },
+    {
+      "case": "stage_transition",
+      "source": "The following conversation was imagined.\n\n[Direction. In reality, a bell rang.]\n\nNoor believes the gate is clear.",
+      "source_sha256": "193a9a2d59d82240e1de58da98560bc9961c4e502ecb14071e9960f05b6ed39d",
+      "source_complete": true,
+      "narrator_reports": 0,
+      "private_interpretations": 0,
+      "extraction_calls": 0
+    },
+    {
+      "case": "later_qualification",
+      "source": "The following conversation was imagined.\n\nIn reality, a bell rang.\n\nThis scene is hypothetical.\n\nNoor believes the gate is clear.",
+      "source_sha256": "db254b5610fa19fba1bf75f9d36054606724a6416f1f85670907f5674b76e767",
+      "source_complete": true,
+      "narrator_reports": 0,
+      "private_interpretations": 0,
+      "extraction_calls": 0
+    }
+  ],
+  "origin": "NEW_AUTHORED_PROVIDER_FREE_CORRECTNESS_CONTRASTS",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "answer_gain_claimed": false,
+  "native_task_utility_established": false
+}
