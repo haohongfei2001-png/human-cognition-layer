@@ -286,7 +286,7 @@ def answer_retained_reader(workspace, query, answer_backend, **kwargs):
     messages = prepared.current_messages(workspace)
     raw = (answer_backend.complete(messages) if hasattr(answer_backend, 'complete')
               else answer_backend(messages))
-    audit = audit_original_citations(prepared, raw)
+    audit = audit_supplied_source_citations(messages, raw)
     try:
         prepared.current_messages(workspace)
     except ValueError:
@@ -359,3 +359,72 @@ def audit_original_citations(prepared, raw):
     except (ValueError,TypeError,KeyError):
         pass
     return result
+
+
+def original_sources_from_messages(messages):
+    """Read actual primary input identity; never a guessed fixed/source alias ID."""
+    if not isinstance(messages, list) or not 1 <= len(messages) <= 32:
+        raise ValueError('bounded actual message frame required')
+    frames = []
+    for message in messages:
+        if not isinstance(message, dict) or message.get('role') != 'user':
+            continue
+        content = message.get('content')
+        if not isinstance(content, str) or len(content) > 512000:
+            raise ValueError('bounded original input required')
+        try:
+            payload = json.loads(content)
+        except ValueError:
+            continue
+        if not isinstance(payload, dict) or 'sources' not in payload:
+            continue
+        rows = payload['sources']
+        if not isinstance(rows, list) or not 1 <= len(rows) <= 16:
+            raise ValueError('primary original source list required')
+        frame = []
+        for row in rows:
+            if (not isinstance(row, dict) or not isinstance(row.get('source_id'), str)
+                    or not row['source_id'] or len(row['source_id']) > 128
+                    or type(row.get('version')) is not int or row['version'] < 1
+                    or not isinstance(row.get('text'), str) or not row['text']):
+                raise ValueError('invalid primary source identity/version/text')
+            frame.append(dict(source_id=row['source_id'],version=row['version'],text=row['text']))
+        if len({r['source_id'] for r in frame}) != len(frame) or sum(len(r['text']) for r in frame)>300000:
+            raise ValueError('duplicate or oversized primary source frame')
+        conditional = payload.get('conditional_cognition')
+        if isinstance(conditional,dict) and 'encoding' in conditional:
+            from hcl.v1.compact import expand_reader_context
+            payload = expand_reader_context(payload)
+        binding = payload.get('shared_semantic_binding')
+        if binding is not None:
+            # Pre-v16 derived-primary layouts are not original evidence. No
+            # automatic translation/alias substitution from a nested state.
+            original = binding.get('original_sources') if isinstance(binding,dict) else None
+            expected=[dict(source_id=r['source_id'],text=r['text']) for r in frame]
+            conditional=payload.get('conditional_cognition',{})
+            if not isinstance(conditional,dict) or original!=expected or conditional.get('authority')!='DERIVED_CONDITIONAL_TOOL_STATE_NOT_QUOTABLE_SOURCE':
+                raise ValueError('derived or inconsistent primary source frame')
+        frames.append(frame)
+    if not frames or any(f != frames[0] for f in frames):
+        raise ValueError('missing or ambiguous actual primary original frame')
+    return frames[0]
+
+
+def audit_supplied_source_citations(messages, raw):
+    """Common future Base/H audit against IDs actually supplied to each answerer.
+
+    No original source ID is guessed or silently aliased. This validates quotation
+    location only, not source truth, private states or philosophical correctness.
+    """
+    from types import SimpleNamespace
+    try:
+        sources=original_sources_from_messages(messages)
+        prepared=SimpleNamespace(messages=[dict(content=json.dumps(dict(sources=sources)))])
+        result=audit_original_citations(prepared,raw)
+        result['actual_primary_source_ids']=[s['source_id'] for s in sources]
+        result['source_identity_substituted']=False
+        return result
+    except (ValueError,TypeError,AttributeError):
+        return dict(status='INVALID_ACTUAL_ORIGINAL_SOURCE_FRAME',deliverable=False,
+            semantic_adequacy='UNASSESSED',semantic_certification=False,anchors=[],
+            raw_output_rewritten=False,source_identity_substituted=False)

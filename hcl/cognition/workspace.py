@@ -153,6 +153,25 @@ class CognitionWorkspace:
         return dict(answer=answer, prepared=result, answer_adapter_calls=1,
                     actual_final_messages=messages, preparation_provider_calls=0)
 
+    def answer_source_guarded(self, query, answer_backend, *, source_ids, through_order=None):
+        """Zero-extraction whole-reader answer with actual source IDs/raw preserved."""
+        from .retained import original_sources_from_messages, audit_supplied_source_citations
+        result=self.prepare(query,source_ids=source_ids,through_order=through_order)
+        messages=result.current_messages(self)
+        # Unsupported source-frame layouts fail before a final transport call.
+        original_sources_from_messages(messages)
+        messages=[*messages,dict(role='system',content='Return exactly answer, source_citations, uncertainty and assumptions in one JSON object. Quote only supplied original sources; no private, world or moral truth is established by a source citation.')]
+        raw=(answer_backend.complete(messages) if hasattr(answer_backend,'complete') else answer_backend(messages))
+        audit=audit_supplied_source_citations(messages,raw)
+        try: result.current_messages(self)
+        except ValueError: audit.update(status='STALE_OR_CHALLENGED_SUPPORT',deliverable=False)
+        answer=raw if audit['deliverable'] else json.dumps(dict(
+            answer='I cannot support this answer from the supplied text.',source_citations=[],
+            uncertainty='The returned answer did not preserve reliable current source references.',
+            assumptions='No private state, world fact or moral judgment is established.'))
+        return dict(answer=answer,answer_raw=raw,source_citation_audit=audit,prepared=result,
+            answer_adapter_calls=1,actual_final_messages=messages,preparation_provider_calls=0)
+
     def prepare_semantic(self, query, *, source_ids, observer=None, backend=None):
         """Unified source preparation; access filtering precedes any backend call."""
         from .semantic import AuthorizedText, prepare_semantics

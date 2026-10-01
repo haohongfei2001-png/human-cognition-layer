@@ -19,8 +19,9 @@ from .semantic import AuthorizedText, SemanticResult, prepare_semantics
 from .positions import PositionAssessment, assess_positions
 
 from .retained import (RetainedResult, prepare_retained, answer_retained,
-                       prepare_retained_reader, answer_retained_reader)
-__all__ += ['prepare_retained_reader', 'answer_retained_reader']
+                       prepare_retained_reader, answer_retained_reader,
+                       audit_supplied_source_citations, original_sources_from_messages)
+__all__ += ['prepare_retained_reader', 'answer_retained_reader', 'audit_supplied_source_citations', 'original_sources_from_messages']
 
 from .epistemic import Attitude, MentalProposition, EpistemicBundle, prepare_epistemic
 

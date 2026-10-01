@@ -101,3 +101,11 @@ JSON-mode grader400 halted before any philosophy comparison. Source delivery aud
 has wrong expected versus actual fallback source-ID frame, not4 semantic harms.
 No raw rescore/rerun or historical capability upgrade. Grant0/trigger removed;
 next generic request/source-frame correctness, then ordinary source-bearing coverage.
+
+[Source frame/request v18](HCL_DEVELOPMENT_SOURCE_FRAME_V18.md) is correctness/
+ordinary-reader integration, not capability28 or utility proof. Actual input source
+IDs now drive citation audit; optional source-guarded ordinary answer includes real
+B01/C01/C03 state with0 extraction/1 final call and revision invalidation. JSON-mode
+request guard prevents future driver400 without transport.14 new checks,132 combined
+local passes;0 calls/spend. Historical source/scorer/raw/dispositions unchanged;
+utility IMPLEMENTED_UNVALIDATED. Next general source-bearing ordinary entry coverage.
