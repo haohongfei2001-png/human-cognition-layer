@@ -1,0 +1,15 @@
+{
+  "actual_invoice_cost_unknown": true,
+  "advertised_snapshot": "DeepSeek-V4-Pro-0813",
+  "cost_estimates_not_invoices": true,
+  "html_sha256": "210f102275ccf1a6542f08a3bc9e4b4c7c83278cb74b35217bffa112df6363b2",
+  "model": "deepseek-v4-pro",
+  "off_peak_multiplier": 0.5,
+  "package_sha256": "2f7ac9009aa287d4eed93f792900fabb85e5d5e4a0d90acd0705e6c9a596a42e",
+  "peak_usd_per_million": {
+    "cache_hit": 0.044,
+    "input": 1.32,
+    "output": 3.96
+  },
+  "source_url": "https://api-docs.deepseek.com/quick_start/pricing"
+}
