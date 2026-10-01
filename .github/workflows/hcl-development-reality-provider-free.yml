@@ -1,10 +1,10 @@
 name: HCL Development Reality Check Fairness and Final Isolation
 on:
   pull_request:
-    paths: ['scripts/development*', 'tests/test_development*', 'reports/HCL_DRC*', 'reports/HCL_DEVELOPMENT*', 'docs/HCL_VALIDATION*', '.github/workflows/hcl-development*', '.github/frozen/hcl-drc*', 'hcl/**']
+    paths: ['scripts/i02_exposure_history_v2.py', 'scripts/i02_exposure_history_v3.py', 'tests/test_i02_exposure_history_v2.py', 'docs/HCL_CURRENT_SOURCE_HISTORY_GATE.md', 'scripts/development*', 'tests/test_development*', 'reports/HCL_DRC*', 'reports/HCL_DEVELOPMENT*', 'docs/HCL_VALIDATION*', '.github/workflows/hcl-development*', '.github/frozen/hcl-drc*', 'hcl/**']
   push:
     branches: [main]
-    paths: ['scripts/development*', 'tests/test_development*', 'reports/HCL_DRC*', 'reports/HCL_DEVELOPMENT*', 'docs/HCL_VALIDATION*', '.github/workflows/hcl-development*', '.github/frozen/hcl-drc*', 'hcl/**']
+    paths: ['scripts/i02_exposure_history_v2.py', 'scripts/i02_exposure_history_v3.py', 'tests/test_i02_exposure_history_v2.py', 'docs/HCL_CURRENT_SOURCE_HISTORY_GATE.md', 'scripts/development*', 'tests/test_development*', 'reports/HCL_DRC*', 'reports/HCL_DEVELOPMENT*', 'docs/HCL_VALIDATION*', '.github/workflows/hcl-development*', '.github/frozen/hcl-drc*', 'hcl/**']
 permissions:
   contents: read
 jobs:
@@ -18,6 +18,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Fresh source history guard (synthetic only, zero provider authority)
+        run: python -m unittest tests.test_i02_exposure_history_v2 tests.test_development_source_history
       - run: python -m unittest tests.test_development_drc001_replay tests.test_development_drc002_replay tests.test_i02_rebus_kranak_exposure tests.test_development_dre001_replay
       - run: python -m scripts.development_drc001_replay
       - run: python -m scripts.development_drc002_replay
