@@ -1,0 +1,263 @@
+{
+  "cases": [
+    {
+      "case_id": "community/ka_003",
+      "dataset": "CommunityToMSuite",
+      "gold": "no",
+      "native": {
+        "answer_aliases": [
+          "she does not know",
+          "no she does not",
+          "sara does not know"
+        ],
+        "category": "knowledge_attr",
+        "complexity": {
+          "belief_depth": 1,
+          "information_gap_type": "absence",
+          "num_agents": 2
+        },
+        "expected_answer": "no",
+        "explanation": "Sara is aware of the box but has no perceptual or testimonial access to its contents. Awareness of a container does not constitute knowledge of what is inside it.",
+        "id": "ka_003",
+        "name": "Inferred Contents",
+        "question": "Does Sara know that there is a gift card inside the box?",
+        "rubric": "A correct answer must indicate Sara does not know the box contains a gift card. She perceived the box but had no information that would let her infer or know its contents.",
+        "scenario": "Sara comes home and sees a sealed Amazon box on the porch addressed to her partner. The shipping label is fully covered by an opaque wrap, and the box is unmarked. Sara has no information about what was ordered. She brings it inside, leaves it sealed, and goes to make dinner. The box actually contains a birthday gift card that her partner ordered for a friend.",
+        "tier": "hard"
+      },
+      "native_file": "tom_benchmark/scenarios/knowledge_attr.json",
+      "native_row_index": 2,
+      "native_row_sha256": "a936309e7b648857f0c9d2c4960b1ff74d9fbc24e6a21624b0a17394d9523069",
+      "question": "Does Sara know that there is a gift card inside the box?",
+      "source": "Sara comes home and sees a sealed Amazon box on the porch addressed to her partner. The shipping label is fully covered by an opaque wrap, and the box is unmarked. Sara has no information about what was ordered. She brings it inside, leaves it sealed, and goes to make dinner. The box actually contains a birthday gift card that her partner ordered for a friend.",
+      "source_sha256": "5213c03e88d21d5eb0dff4fe2e1d26aceadc69c23d9d5626f89a96865aa6776f",
+      "task": {
+        "interpretation": "Native narrative/contextual prediction, not verified real private-state, motive or moral truth.",
+        "mode": "NATIVE_SHORT_FREEFORM_ANSWER"
+      }
+    },
+    {
+      "case_id": "community/ka_005",
+      "dataset": "CommunityToMSuite",
+      "gold": "no",
+      "native": {
+        "answer_aliases": [
+          "leo does not know",
+          "no he does not",
+          "he does not know",
+          "no he only believes it is 3pm",
+          "no, he has a false belief",
+          "no he is mistaken"
+        ],
+        "category": "knowledge_attr",
+        "complexity": {
+          "belief_depth": 2,
+          "information_gap_type": "false_information",
+          "num_agents": 3
+        },
+        "expected_answer": "no",
+        "explanation": "Knowledge requires the belief to be true. Leo's belief traces through a chain of testimony back to Ravi's error, so it is false; confidently believing something false is not knowing it.",
+        "id": "ka_005",
+        "name": "The Broken Telephone",
+        "question": "Does Leo know when the meeting is?",
+        "rubric": "A correct answer must indicate that Leo does not know when the meeting is. Leo confidently believes it is at 3pm, but the meeting is actually at 2pm, so his belief is false. A false belief — however confident and however it was acquired — is not knowledge.",
+        "scenario": "The team meeting is actually scheduled for 2pm. Ravi mistakenly believes it was moved to 3pm and confidently tells Sana, 'The meeting got pushed to 3pm.' Sana passes this along to Leo, who has no other source of information about the time. Leo now confidently expects the meeting at 3pm.",
+        "tier": "hard"
+      },
+      "native_file": "tom_benchmark/scenarios/knowledge_attr.json",
+      "native_row_index": 4,
+      "native_row_sha256": "7bbe896683b8788ac673ae434cadb73a3b955ffd2ec5f972a69e31d8f62beed9",
+      "question": "Does Leo know when the meeting is?",
+      "source": "The team meeting is actually scheduled for 2pm. Ravi mistakenly believes it was moved to 3pm and confidently tells Sana, 'The meeting got pushed to 3pm.' Sana passes this along to Leo, who has no other source of information about the time. Leo now confidently expects the meeting at 3pm.",
+      "source_sha256": "7ce05f3ba629d403050775decfd587bf77b7d4314ce31fb54d1fd54ff124c7b2",
+      "task": {
+        "interpretation": "Native narrative/contextual prediction, not verified real private-state, motive or moral truth.",
+        "mode": "NATIVE_SHORT_FREEFORM_ANSWER"
+      }
+    },
+    {
+      "case_id": "community/dec_004",
+      "dataset": "CommunityToMSuite",
+      "gold": "no",
+      "native": {
+        "answer_aliases": [
+          "no it is not cheating",
+          "no it is legitimate",
+          "no it is part of the game",
+          "not cheating",
+          "no it is allowed",
+          "no bluffing is fair",
+          "no it is a legitimate tactic"
+        ],
+        "category": "deception",
+        "complexity": {
+          "belief_depth": 2,
+          "information_gap_type": "deception",
+          "num_agents": 2
+        },
+        "expected_answer": "no",
+        "explanation": "Deception is only a moral or rule violation in contexts that presume honesty. Poker is a consensual, rule-governed game in which bluffing is anticipated and permitted, so the deception is legitimate within that frame.",
+        "id": "dec_004",
+        "name": "The Poker Bluff",
+        "question": "Is Wendy's bluff a form of cheating or an ethical violation of the game?",
+        "rubric": "A correct answer must indicate that Wendy's bluff is NOT cheating or an ethical violation — even though it is intentional deception, bluffing is an expected, rule-sanctioned part of poker that all players consent to. Answering that it is cheating or wrong is incorrect.",
+        "scenario": "During a friendly game of poker, Wendy is holding a weak hand. She keeps a calm, confident expression and pushes a large stack of chips forward as a bold raise, deliberately trying to make her opponent Carl believe her hand is strong so that he will fold. Carl folds, and Wendy wins the pot.",
+        "tier": "hard"
+      },
+      "native_file": "tom_benchmark/scenarios/deception.json",
+      "native_row_index": 3,
+      "native_row_sha256": "9e5e25b6ecbd282de3c7fed3f339a38ea168bbb77fea9005d29c46c73a7811b3",
+      "question": "Is Wendy's bluff a form of cheating or an ethical violation of the game?",
+      "source": "During a friendly game of poker, Wendy is holding a weak hand. She keeps a calm, confident expression and pushes a large stack of chips forward as a bold raise, deliberately trying to make her opponent Carl believe her hand is strong so that he will fold. Carl folds, and Wendy wins the pot.",
+      "source_sha256": "3c8f10063a38d968ce5130a2691a8c250f994ff1bd07f05dbd87e5b586194f7c",
+      "task": {
+        "interpretation": "Native narrative/contextual prediction, not verified real private-state, motive or moral truth.",
+        "mode": "NATIVE_SHORT_FREEFORM_ANSWER"
+      }
+    },
+    {
+      "case_id": "community/dec_005",
+      "dataset": "CommunityToMSuite",
+      "gold": "yes",
+      "native": {
+        "answer_aliases": [
+          "yes she is",
+          "yes she is deceiving him",
+          "yes it is a double bluff",
+          "yes she intends to deceive",
+          "yes despite telling the truth",
+          "yes it is deceptive"
+        ],
+        "category": "deception",
+        "complexity": {
+          "belief_depth": 3,
+          "information_gap_type": "deception",
+          "num_agents": 2
+        },
+        "expected_answer": "yes",
+        "explanation": "Deception hinges on intent to instill a false belief, not on literal falsehood. Nina exploits Sam's expectation that she lies, so her true statement is engineered to make him believe the chocolate is elsewhere — deception by way of the truth.",
+        "id": "dec_005",
+        "name": "The Double Bluff",
+        "question": "Is Nina trying to deceive Sam, even though what she said is literally true?",
+        "rubric": "A correct answer must indicate that Nina IS attempting to deceive Sam. Deception is defined by the intent to create a false belief (here: that the chocolate is NOT in the drawer), not by whether the literal words are false. This is a double bluff — using a true statement to mislead.",
+        "scenario": "Nina knows that her brother Sam is convinced she always lies about where she hides the last chocolate — so whatever spot she names, Sam searches everywhere except there. Today Nina hides the chocolate in the desk drawer. When Sam asks where it is, Nina says, truthfully, 'It's in the desk drawer.' She says this expecting Sam to assume she is lying and therefore avoid the drawer, leaving the chocolate safe.",
+        "tier": "expert"
+      },
+      "native_file": "tom_benchmark/scenarios/deception.json",
+      "native_row_index": 4,
+      "native_row_sha256": "3c379567853b223c5912dee9e612c9a69b1d840b73c7ac4e6e5a5dad57fbfafd",
+      "question": "Is Nina trying to deceive Sam, even though what she said is literally true?",
+      "source": "Nina knows that her brother Sam is convinced she always lies about where she hides the last chocolate — so whatever spot she names, Sam searches everywhere except there. Today Nina hides the chocolate in the desk drawer. When Sam asks where it is, Nina says, truthfully, 'It's in the desk drawer.' She says this expecting Sam to assume she is lying and therefore avoid the drawer, leaving the chocolate safe.",
+      "source_sha256": "9fbf63310f3c32cd278076655074c5899d739fa7288de845e52d1d67e4b3c86c",
+      "task": {
+        "interpretation": "Native narrative/contextual prediction, not verified real private-state, motive or moral truth.",
+        "mode": "NATIVE_SHORT_FREEFORM_ANSWER"
+      }
+    },
+    {
+      "case_id": "community/hob_004",
+      "dataset": "CommunityToMSuite",
+      "gold": "no",
+      "native": {
+        "answer_aliases": [
+          "no he does not",
+          "anil does not know that",
+          "no he doesn't",
+          "no anil does not know bea knows",
+          "no he has no way to know that"
+        ],
+        "category": "higher_order_beliefs",
+        "complexity": {
+          "belief_depth": 2,
+          "information_gap_type": "absence",
+          "num_agents": 2
+        },
+        "expected_answer": "no",
+        "explanation": "Shared first-order knowledge is not the same as second-order knowledge. Both know about the layoffs, but because neither has evidence about the other's awareness, Anil does not know that Bea knows.",
+        "id": "hob_004",
+        "name": "The Private Memos",
+        "question": "Does Anil know that Bea knows about the layoffs?",
+        "rubric": "A correct answer must indicate no. Anil knows about the layoffs himself, but he has no information about whether Bea received the memo, so he cannot know that Bea knows. This distinguishes both parties independently knowing a fact from one party knowing that the other knows it.",
+        "scenario": "Anil and Bea are coworkers. Each of them, separately and privately, received the same confidential memo announcing upcoming layoffs. Neither has any indication that the other one received it, and the two of them have never spoken about layoffs or memos at all.",
+        "tier": "hard"
+      },
+      "native_file": "tom_benchmark/scenarios/higher_order_beliefs.json",
+      "native_row_index": 3,
+      "native_row_sha256": "ba84aae9d149d594d0c564c9796f75fc509d0e7c0d214c3043b7d910bc76f36e",
+      "question": "Does Anil know that Bea knows about the layoffs?",
+      "source": "Anil and Bea are coworkers. Each of them, separately and privately, received the same confidential memo announcing upcoming layoffs. Neither has any indication that the other one received it, and the two of them have never spoken about layoffs or memos at all.",
+      "source_sha256": "33e15cff03cd1475a1479b50e5ea814456bb5f586a97b835548370021fc4dfc6",
+      "task": {
+        "interpretation": "Native narrative/contextual prediction, not verified real private-state, motive or moral truth.",
+        "mode": "NATIVE_SHORT_FREEFORM_ANSWER"
+      }
+    },
+    {
+      "case_id": "community/hob_005",
+      "dataset": "CommunityToMSuite",
+      "gold": "no",
+      "native": {
+        "answer_aliases": [
+          "no he does not",
+          "ken does not believe that",
+          "no ken does not",
+          "no he thinks only he and lara know",
+          "no, he believes only he and lara know it"
+        ],
+        "category": "higher_order_beliefs",
+        "complexity": {
+          "belief_depth": 3,
+          "information_gap_type": "absence",
+          "num_agents": 3
+        },
+        "expected_answer": "no",
+        "explanation": "Third-order reasoning about belief versus reality: the secret really did reach Mo, but Ken's belief state was never updated, so Ken does not believe Mo knows. Actual knowledge (Mo knows) and attributed knowledge (Ken's view) come apart.",
+        "id": "hob_005",
+        "name": "The Leaked Secret",
+        "question": "Does Ken believe that Mo knows the secret?",
+        "rubric": "A correct answer must indicate no. From Ken's perspective, only he and Lara know the secret; he is unaware Lara leaked it to Mo. Therefore Ken does not believe Mo knows — regardless of the fact that Mo actually does know.",
+        "scenario": "Ken tells Lara a secret and asks her to keep it strictly between the two of them. Lara agrees, but later quietly tells Mo the secret anyway. Ken has no idea that Lara told Mo, and continues to assume the secret is known only to himself and Lara. Mo, for his part, does not realize that Ken is unaware of the leak.",
+        "tier": "expert"
+      },
+      "native_file": "tom_benchmark/scenarios/higher_order_beliefs.json",
+      "native_row_index": 4,
+      "native_row_sha256": "30b41d682a06e0086c18489b7042a3cee2466dccc969f687caaaaf2305eea989",
+      "question": "Does Ken believe that Mo knows the secret?",
+      "source": "Ken tells Lara a secret and asks her to keep it strictly between the two of them. Lara agrees, but later quietly tells Mo the secret anyway. Ken has no idea that Lara told Mo, and continues to assume the secret is known only to himself and Lara. Mo, for his part, does not realize that Ken is unaware of the leak.",
+      "source_sha256": "be3a426ed331b50427ea6dabb22143c5c610e6a1446104641a967916a3e50217",
+      "task": {
+        "interpretation": "Native narrative/contextual prediction, not verified real private-state, motive or moral truth.",
+        "mode": "NATIVE_SHORT_FREEFORM_ANSWER"
+      }
+    }
+  ],
+  "final_confirmation": "CONSUMED_FOR_FINAL_CONFIRMATION",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "native_transform": "None: exact scenario/question/reference/aliases/rubric/explanation/native row retained. Only scenario/question/native freeform task format to answer arms; reference/aliases/rubric/explanation withheld.",
+  "pins": [
+    {
+      "dataset": "CommunityToMSuite",
+      "native_file": "tom_benchmark/scenarios/knowledge_attr.json",
+      "sha256": "1f69cb77def57e072d272d20cba306d46424e263605565ab20e6785cb9b59d7a",
+      "url": "https://raw.githubusercontent.com/jessholbrook/tom-benchmark/36d5e1bdf2aa05db89afc68375b1d93707908d00/tom_benchmark/scenarios/knowledge_attr.json"
+    },
+    {
+      "dataset": "CommunityToMSuite",
+      "native_file": "tom_benchmark/scenarios/deception.json",
+      "sha256": "df08bf6e042490de1b0189b78babbdeb703d7ff13707c214e7a65ffdc6b317a2",
+      "url": "https://raw.githubusercontent.com/jessholbrook/tom-benchmark/36d5e1bdf2aa05db89afc68375b1d93707908d00/tom_benchmark/scenarios/deception.json"
+    },
+    {
+      "dataset": "CommunityToMSuite",
+      "native_file": "tom_benchmark/scenarios/higher_order_beliefs.json",
+      "sha256": "095c88419be29945a8edc525c8f8484a7b8d7abda02b2a21c85f69ee3a0af52a",
+      "url": "https://raw.githubusercontent.com/jessholbrook/tom-benchmark/36d5e1bdf2aa05db89afc68375b1d93707908d00/tom_benchmark/scenarios/higher_order_beliefs.json"
+    }
+  ],
+  "prior_history_baseline": "7bdfe21f6fd1606c9ff809fb721c28e624b852f7",
+  "publisher_commit": "36d5e1bdf2aa05db89afc68375b1d93707908d00",
+  "schema": "hcl-drc007-subset-v1",
+  "selection": "Two author hard/expert tasks per knowledge_attr/deception/higher_order_beliefs by first SHA256(HCL-DRC007-v1/category/native-id); no output/gold/route/treatment filter.",
+  "source_limit": "Small community hand-crafted seed suite per publisher, not independent/human-verified/final evidence; possible model/pretraining/lineage influence unproved.",
+  "status": "DEVELOPMENT_EXPOSED"
+}

@@ -138,16 +138,28 @@
       "reason": "Publisher metadata/license/native control builder screened. CSV is headerless; first readline unexpectedly showed complete Noor row0 including gold. Row0 explicitly excluded from any new development subset. No prolific participant/expert/social_iqa data opened. Entire native BigToM CSV opened for fixed six-row development subset; all distribution excluded from final. No model generation/native builder execution or human participant data.",
       "status": "DEVELOPMENT_EXPOSED",
       "writing_system_id": "cicl-stanford/procedural-evals-tom"
+    },
+    {
+      "batch": "DRC007",
+      "dataset_id": "jessholbrook/tom-benchmark",
+      "final_confirmation": "CONSUMED_FOR_FINAL_CONFIRMATION",
+      "license": "MIT",
+      "publisher_url": "https://github.com/jessholbrook/tom-benchmark",
+      "reason": "Pre-register before reading publisher README/schema/scorer or potential examples. Public community development test candidate, no peer-review/human/pretraining independence claim; whole opened material excluded from final. No participant/private data or live model call. Three full hard/expert-bearing category distributions opened for fixed six native rows; these full distributions and all viewed examples/scorer/metadata remain excluded from final. Other category files not opened.",
+      "status": "DEVELOPMENT_EXPOSED",
+      "writing_system_id": "jessholbrook/tom-benchmark"
     }
   ],
   "longmemeval": "SEALED_NOT_ACCESSED",
   "purpose": "Development material must never enter final sealed confirmation",
   "raw_distribution_sha256": [
     "08297ab29b7c675b229fead78bdebaa8559c0924e24036ed10c9417d9998bce3",
+    "095c88419be29945a8edc525c8f8484a7b8d7abda02b2a21c85f69ee3a0af52a",
     "0cc630a7cccbcc3a02620e1da620e29b1702e9b84f358fd3cd6d3a9926f3b206",
     "0e24a191921c2f453518a537a8b2117bd137e7714d4ef1565e9ba06c1ecb9ad8",
     "11cf6b4d59da493fc48490d528e378228484d77f78cc79c7c74753f3487cf777",
     "1a5c38362c4c883b219381e24d7b51c1f60abd959f39b6dc3e977ca11d7abff8",
+    "1f69cb77def57e072d272d20cba306d46424e263605565ab20e6785cb9b59d7a",
     "27c2eeee3bb9fe6f0bb94276268daa86af196c32759fc77f5073093c3c3dfe1b",
     "36de9549d03d3930d2546c4f9bae00528224b609d12478fa5ad1d58491be90dd",
     "4d93b8e2fbd76e35d5f44315096f4d3b650eb7c41bbdb88cb30505a6fbad370a",
@@ -158,6 +170,7 @@
     "a14884fbff5b61d3fa194ab166764b553ab795fcb1359e69d1282eadf3011a46",
     "acfffe050552dca332ad62dcdc7085a8eeaef0dbecfe18b0392d48f4e97dc46a",
     "dda5b279b926eef0e0c440cef4ef68cbebbf82fc6c7b109b213c15c2f9d94804",
+    "df08bf6e042490de1b0189b78babbdeb703d7ff13707c214e7a65ffdc6b317a2",
     "ebaa524280c53aa3dbfb2b73502b120eeb71d03523a557c659275aebb2afd95a",
     "f0a1c6e12b9d9b8b5c936ea3383b24100ef28ed6610078c1fc7bd6769d7ef914",
     "f7ed1204f01a3cbb17dafc9fc6f94c92d668344402cfe5a2bc4f1a08a6ae7b77",

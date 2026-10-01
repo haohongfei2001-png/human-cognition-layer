@@ -1,0 +1,25 @@
+{
+  "live_treatment": "ACTUAL_LOCAL_PRECHECK_AND_OPTIONAL_EXTRACTION_OBSERVED_AT_EXECUTION",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "package_sha256": "98ed1b6f57f5ebabc7bd204debd4892366bad22f00f8a451e0aa754f62ea90b5",
+  "provider_calls": 0,
+  "publisher": [
+    {
+      "dataset": "CommunityToMSuite",
+      "native_rows_verified": true,
+      "sha256": "1f69cb77def57e072d272d20cba306d46424e263605565ab20e6785cb9b59d7a"
+    },
+    {
+      "dataset": "CommunityToMSuite",
+      "native_rows_verified": true,
+      "sha256": "df08bf6e042490de1b0189b78babbdeb703d7ff13707c214e7a65ffdc6b317a2"
+    },
+    {
+      "dataset": "CommunityToMSuite",
+      "native_rows_verified": true,
+      "sha256": "095c88419be29945a8edc525c8f8484a7b8d7abda02b2a21c85f69ee3a0af52a"
+    }
+  ],
+  "runtime_sha256": "89d9e8eb5ca0cece2cd26a8d29a65f994cda06a7dcb1fa5fbcfd9acefcb1364b",
+  "source_equal_and_frozen": true
+}
