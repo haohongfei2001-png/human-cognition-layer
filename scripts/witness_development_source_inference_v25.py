@@ -1,0 +1,142 @@
+"""Compare authored wires to certified v24; no provider or consumed-answer run."""
+import argparse
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import zipfile
+
+from hcl.cognition import CognitionWorkspace
+from hcl.cognition.reader_entry import _SOURCE_INFERENCE_POLICY
+from scripts.development_drc008_replay import ARCHIVE, validate_archive
+from scripts.development_runtime_amendment_v25 import validate_current
+
+QUERY = 'Explain source-supported action and mental reports while preserving uncertainty.'
+SOURCES = (
+    'Lena moved a crate. The lamp broke.',
+    'Lena said, "I intended to break the lamp." Lena moved a crate. The lamp broke.',
+    'Omar said, "Lena intended to break the lamp." Lena moved a crate. The lamp broke.',
+    'Lena denied intending to break the lamp. Later, Omar learned that the lamp broke.',
+    'Lena said, "I believe the corridor is clear." Omar heard Lena\'s last statement.',
+    'Lena believes the corridor is clear. Lena said, "I do not believe the corridor is clear." '
+    'Lena said, "I plan to carry the crate in order to clear the room if the corridor is clear."',
+)
+
+
+def witness():
+    validate_current()
+    cert = validate_archive()
+    env = dict(os.environ)
+    # Witnesses have no transport; also withhold ambient provider access from
+    # historical subprocesses rather than relying on the absence of invocation.
+    for key in list(env):
+        if key.endswith(('_API_KEY', '_AUTHORIZED')) or key == 'PYTHONPATH':
+            env.pop(key, None)
+    with tempfile.TemporaryDirectory(prefix='hcl-v25-certified-before-') as tmp:
+        with zipfile.ZipFile(ARCHIVE) as archive:
+            for name in cert['files']:
+                if name.startswith('hcl/') and name.endswith('.py'):
+                    path = Path(tmp) / name
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_bytes(archive.read(name))
+        code = ('import json,sys;sys.path.insert(0,sys.argv[1]);'
+                'from hcl.cognition import CognitionWorkspace;'
+                'data=json.load(sys.stdin);results=[];'
+                '\nfor source in data["sources"]:\n'
+                ' w=CognitionWorkspace();w.put_source("scene",source);'
+                'p=w.prepare_reader_entry(data["query"],source_ids=("scene",));'
+                'results.append(dict(messages=p.messages,receipt=p.receipt))\n'
+                'print(json.dumps(results))')
+        before = json.loads(subprocess.run([sys.executable, '-c', code, tmp],
+            input=json.dumps(dict(sources=SOURCES, query=QUERY)), text=True,
+            capture_output=True, check=True, env=env).stdout)
+        # Keep v24's unchanged historical witness executable against its exact
+        # consumed runtime, instead of weakening its byte-equality/cost claims.
+        historical = ('import json,sys;sys.path.insert(0,sys.argv[1]);'
+                      'from scripts.witness_development_empty_state_v24 import witness as v24;'
+                      'from scripts.witness_development_paragraph_access_v21 import witness as v21;'
+                      'print(json.dumps(dict(v21=v21(),v24=v24())))')
+        old_witness = json.loads(subprocess.run([sys.executable, '-c', historical, tmp],
+            text=True, capture_output=True, check=True, env=env).stdout)
+    rows = []
+    for source, old in zip(SOURCES, before):
+        w = CognitionWorkspace()
+        w.put_source('scene', source)
+        entry = w.prepare_reader_entry(QUERY, source_ids=('scene',))
+        assert entry.messages[1:] == old['messages'][1:]
+        assert entry.messages[0]['content'] == old['messages'][0]['content'] + ' ' + _SOURCE_INFERENCE_POLICY
+        assert entry.receipt['checked_treatment_present'] == old['receipt']['checked_treatment_present']
+        assert entry.current_messages(w) == entry.messages
+        rows.append(dict(source=source, before_messages=old['messages'],
+            actual_final_prepared_messages=entry.messages,
+            checked_treatment_present=entry.receipt['checked_treatment_present'],
+            boundary=entry.receipt['answer_inference_boundary'],
+            source_and_checked_wire_identical=True, extraction_calls=entry.receipt['extraction_calls']))
+    assert rows[-1]['checked_treatment_present']
+    assert 'checked_reported_communication' in json.loads(rows[-2]['actual_final_prepared_messages'][-1]['content'])
+    budget_workspace = CognitionWorkspace()
+    budget_workspace.put_source('scene', SOURCES[0])
+    prepared = budget_workspace.prepare_reader_entry(QUERY, source_ids=('scene',))
+    tight_budget = len(json.dumps(prepared.messages, ensure_ascii=False))
+    extraction_calls, answer_calls = [], []
+    class BudgetProbe:
+        def complete_json(self, *args, **kwargs):
+            extraction_calls.append(1)
+            return {'candidates': []}
+    try:
+        budget_workspace.answer_reader_entry(QUERY, lambda messages: answer_calls.append(messages),
+            source_ids=('scene',), backend=BudgetProbe(), allow_translation=True,
+            max_chars=tight_budget)
+    except ValueError as exc:
+        budget_failure = str(exc)
+    else:
+        raise AssertionError('known final-instruction budget shortage was not refused')
+    assert not extraction_calls and not answer_calls
+    raw = json.dumps(dict(answer='Only the reported action and outcome are supplied.',
+        source_citations=[dict(source_id='scene', version=1, quote=SOURCES[0])],
+        uncertainty='No trait or motive is established.', assumptions='Only supplied reports.'))
+    delivered = budget_workspace.answer_reader_entry(QUERY, lambda _: raw, source_ids=('scene',))
+    budget_receipt = dict(rejected_max_chars=tight_budget, refusal=budget_failure,
+        extraction_adapter_calls=0, final_answer_adapter_calls=0,
+        sufficient_budget_receipt=delivered['answer_context_budget'],
+        backend='LOCAL_STUB_ONLY', paid_cost_savings_claimed=False,
+        semantic_benefit_claimed=False)
+    capacity_source = 'Lena wrote "灯".\nThe crate stayed shut.'
+    capacity_workspace = CognitionWorkspace()
+    capacity_workspace.put_source('scene', capacity_source)
+    capacity_entry = capacity_workspace.prepare_reader_entry(QUERY, source_ids=('scene',))
+    intermediate = json.loads(capacity_entry.prepared.preparation_json)['actual_final_messages']
+    intermediate_chars = len(json.dumps(intermediate, ensure_ascii=False))
+    capacity_raw = json.dumps(dict(answer='Only the writing and crate are reported.',
+        source_citations=[dict(source_id='scene', version=1, quote=capacity_source)],
+        uncertainty='No mental state is established.', assumptions='Only source reports.'))
+    default_result = capacity_workspace.answer_reader_entry(QUERY, lambda _: capacity_raw, source_ids=('scene',))
+    capacity_result = capacity_workspace.answer_reader_entry(QUERY, lambda _: capacity_raw,
+        source_ids=('scene',), max_chars=intermediate_chars)
+    assert capacity_result['actual_final_messages'] == default_result['actual_final_messages']
+    assert capacity_result['answer_context_budget']['actual_message_characters'] < intermediate_chars
+    assert capacity_result['preparation_provider_calls'] == 0
+    capacity_receipt = dict(source=capacity_source,
+        unexecuted_intermediate_characters=intermediate_chars,
+        budget=capacity_result['answer_context_budget'], default_final_wire_preserved=True,
+        extraction_adapter_calls=0, backend='LOCAL_STUB_ONLY', semantic_benefit_claimed=False)
+    return dict(schema='hcl-source-inference-v25-witness', status='PASS_PROVIDER_FREE',
+        before_main_sha=cert['run_sha'], before_runtime_sha256=cert['runtime_sha256'],
+        capability_delta='Uniform source-bounded explanation instructions in the actual ordinary-reader final wire, without new semantic treatment or changed source/checker states.',
+        authored_contrasts=rows, historical_witnesses_on_certified_v24=old_witness,
+        final_instruction_budget_preflight=budget_receipt,
+        intermediate_capacity_preserved=capacity_receipt,
+        evidence='IMPLEMENTED_UNVALIDATED_DELIVERY_POLICY',
+        provider_calls=0, provider_spend_usd=0, answer_gain_claimed=False,
+        semantic_certification=False, cost_saving_claimed=False,
+        longmemeval='SEALED_NOT_ACCESSED')
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--output', required=True)
+    args = parser.parse_args()
+    Path(args.output).write_text(json.dumps(witness(), ensure_ascii=False, sort_keys=True, indent=2) + '\n')
+    print('SOURCE_INFERENCE_V25_PASS_PROVIDER_FREE')
