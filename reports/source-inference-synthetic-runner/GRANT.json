@@ -1,7 +1,14 @@
 {
+  "approval_message": "Sentinel_080af6f2b5ac8191a066eafd4ccafbc8",
+  "credential_reference": "github-actions:repository-secret:DEEPSEEK_API_KEY",
+  "extraction_calls": 0,
+  "hard_cap_usd": "2.50",
   "historical_grant_transfer": false,
-  "maximum_calls": 0,
-  "remaining_usd": 0,
+  "maximum_calls": 36,
+  "paid_judge_calls": 0,
+  "protocol_sha256": "3f06c553b8cdfc9cb9836e4500f260d84ef67815a8bab6223de6312bdf4e7332",
+  "retries": 0,
+  "runner_sha256": "6eaafecd57290c98f0fef9552881e70cbf97f6c807c1ef604d69eca4f9f74bcd",
   "schema": "hcl-sid001-one-off-grant-v1",
-  "status": "NOT_GRANTED"
+  "status": "READY"
 }
