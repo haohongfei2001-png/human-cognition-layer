@@ -40,18 +40,20 @@ comparisons while preserving historical comparisons at their certified runtime.
 
 The local policy budget is checked before any opted-in extraction. The answer
 entry reserves the exact serialized size of its fixed final JSON instruction,
-including the comma-space separator, before preparing or extracting anything.
+including the comma-space separator, before any optional extraction, at the actual prepared-message boundary.
+The temporary parser ceiling stays at the original configured limit: unexecuted
+candidate wire can be larger than the minimized delivered wire.
 Standalone preparation retains its existing budget meaning. Invalid or insufficient
 final budgets fail before extraction; exact-fit and one-character-short tests use
 the same Unicode JSON serialization as the actual wire. A final receipt records
-the configured limit, reservation, preparation allowance and actual final size.
+the configured limit, reservation, prepared-message allowance, original intermediate ceiling and actual final size.
 A larger, unpredictable conditional representation may still consume its one
 opted-in extraction before being refused; no final call or retry follows. Source
 text is never shortened to fit and no extraction refund is claimed.
 
 ## Provider-free evidence
 
-- 17 new tests cover independently authored action/self-report/third-party/denial/
+- 18 new tests cover independently authored action/self-report/third-party/denial/
   time contrasts, actual B01/C01/C03 preservation, conditional and fallback paths,
   exact receipt and wire, budget rejection, repetition/cache isolation, revision,
   removal, inner challenge, runtime-digest rejection and honest semantic limits
@@ -99,3 +101,10 @@ translation/fallback and default zero-extraction behavior. This is deterministic
 avoidance of a known impossible request, not measured invoice savings or an answer
 quality improvement. The original instruction text and final wire remain unchanged
 for admissible inputs.
+
+A subsequent capacity regression test covers a 2,222-character unexecuted parser
+intermediate whose final wire is only 1,540 characters. The first reservation
+implementation narrowed the whole parser ceiling and unnecessarily refused it.
+The corrected boundary keeps the original parser limit, while requiring the actual
+prepared wire plus reserved final instruction to fit before optional extraction.
+The exact example now succeeds under its original 2,222-character configured limit.

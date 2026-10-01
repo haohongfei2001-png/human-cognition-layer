@@ -143,6 +143,14 @@ def _local(workspace, query, source_id, max_chars):
 
 def prepare_reader_entry(workspace, query, *, source_ids, backend=None,
                          max_chars=64000, compact_context=True, allow_translation=False):
+    """Prepare standalone reader messages within the configured context budget."""
+    return _prepare_reader_entry(workspace, query, source_ids=source_ids, backend=backend,
+        max_chars=max_chars, compact_context=compact_context, allow_translation=allow_translation)
+
+
+def _prepare_reader_entry(workspace, query, *, source_ids, backend=None,
+                          max_chars=64000, compact_context=True, allow_translation=False,
+                          delivery_max_chars=None):
     """Local first; optional extraction requires allow_translation=True, no answer call.
 
     Invalid/stale support, unknown transport failure and budget errors in the
@@ -155,11 +163,14 @@ def prepare_reader_entry(workspace, query, *, source_ids, backend=None,
             or type(max_chars) is not int or not 512 <= max_chars <= 64000
             or type(compact_context) is not bool or type(allow_translation) is not bool):
         raise ValueError('one registered analyst source and bounded reader context required')
+    delivery_max_chars = max_chars if delivery_max_chars is None else delivery_max_chars
+    if type(delivery_max_chars) is not int or not 512 <= delivery_max_chars <= max_chars:
+        raise ValueError('bounded reader delivery context required')
     if re.search(r'\b(?:At statement|before statement|after statement)\s+\d+', query, re.I):
         raise ValueError('project source explicitly before adaptive reader statement snapshot')
     local = _local(workspace, query, source_ids[0], max_chars)
     # Check the final policy budget before even an explicitly opted-in extraction.
-    local_messages = _source_inference_messages(local.current_messages(workspace), max_chars)
+    local_messages = _source_inference_messages(local.current_messages(workspace), delivery_max_chars)
     prep = json.loads(local.preparation_json)
     receipt = dict(schema='hcl-adaptive-reader-entry-v1',
         source_versions=list(local.source_versions), selection='LOCAL_COMPLETE_SOURCE',
@@ -202,7 +213,7 @@ def prepare_reader_entry(workspace, query, *, source_ids, backend=None,
             extraction_requests=relay.requests, extraction_responses=relay.responses)
     selected.current_messages(workspace)
     messages = (local_messages if selected is local else
-                _source_inference_messages(selected.current_messages(workspace), max_chars))
+                _source_inference_messages(selected.current_messages(workspace), delivery_max_chars))
     receipt['answer_inference_boundary'] = dict(
         version='SOURCE_BOUNDED_EXPLANATION_V1',
         status='DELIVERY_INSTRUCTION_NOT_SEMANTIC_CHECK',
@@ -227,7 +238,11 @@ def answer_reader_entry(workspace, query, answer_backend, **kwargs):
     preparation_budget = max_chars - reserved_chars
     if preparation_budget < 512:
         raise ValueError('final answer contract leaves insufficient preparation budget')
-    entry = prepare_reader_entry(workspace, query, **dict(kwargs, max_chars=preparation_budget))
+    # Keep the original intermediate parser ceiling. Unexecuted candidate wire
+    # may be larger than the minimized actual messages, and must not reduce the
+    # accepted capacity when that actual final wire fits.
+    entry = _prepare_reader_entry(workspace, query, **kwargs,
+                                  delivery_max_chars=preparation_budget)
     messages = entry.current_messages(workspace)
     original_sources_from_messages(messages)
     messages = [*messages, final_instruction]
@@ -250,5 +265,6 @@ def answer_reader_entry(workspace, query, answer_backend, **kwargs):
         preparation_provider_calls=entry.receipt['extraction_calls'],
         answer_context_budget=dict(max_chars=max_chars,
             reserved_final_instruction_characters=reserved_chars,
-            preparation_budget_characters=preparation_budget,
+            prepared_message_budget_characters=preparation_budget,
+            intermediate_preparation_limit_characters=max_chars,
             actual_message_characters=actual_chars))

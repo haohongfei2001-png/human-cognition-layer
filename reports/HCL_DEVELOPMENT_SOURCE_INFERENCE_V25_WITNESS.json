@@ -215,8 +215,9 @@
     "semantic_benefit_claimed": false,
     "sufficient_budget_receipt": {
       "actual_message_characters": 1538,
+      "intermediate_preparation_limit_characters": 64000,
       "max_chars": 64000,
-      "preparation_budget_characters": 63763,
+      "prepared_message_budget_characters": 63763,
       "reserved_final_instruction_characters": 237
     }
   },
@@ -625,6 +626,21 @@
       "stale_source_refused": true,
       "status": "PASS_PROVIDER_FREE"
     }
+  },
+  "intermediate_capacity_preserved": {
+    "backend": "LOCAL_STUB_ONLY",
+    "budget": {
+      "actual_message_characters": 1549,
+      "intermediate_preparation_limit_characters": 2231,
+      "max_chars": 2231,
+      "prepared_message_budget_characters": 1994,
+      "reserved_final_instruction_characters": 237
+    },
+    "default_final_wire_preserved": true,
+    "extraction_adapter_calls": 0,
+    "semantic_benefit_claimed": false,
+    "source": "Lena wrote \"灯\".\nThe crate stayed shut.",
+    "unexecuted_intermediate_characters": 2231
   },
   "longmemeval": "SEALED_NOT_ACCESSED",
   "provider_calls": 0,

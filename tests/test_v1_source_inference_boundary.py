@@ -163,10 +163,10 @@ class SourceInferenceBoundaryTests(unittest.TestCase):
                 self.assertEqual(exact['preparation_provider_calls'], 0)
                 receipt = exact['answer_context_budget']
                 self.assertEqual(receipt['actual_message_characters'], budget)
-                self.assertEqual(receipt['preparation_budget_characters'],
+                self.assertEqual(receipt['prepared_message_budget_characters'],
                     len(json.dumps(exact['prepared'].messages, ensure_ascii=False)))
                 self.assertEqual(receipt['reserved_final_instruction_characters'],
-                    budget - receipt['preparation_budget_characters'])
+                    budget - receipt['prepared_message_budget_characters'])
                 with self.assertRaises(ValueError):
                     w.answer_reader_entry(QUERY, lambda m: calls.append(m), source_ids=('scene',),
                         backend=NoExtraction(), allow_translation=True, max_chars=budget - 1)
@@ -193,6 +193,27 @@ class SourceInferenceBoundaryTests(unittest.TestCase):
                     'CONDITIONAL_TRANSLATION' if translated else 'COMPLETE_SOURCE_AFTER_UNUSABLE_TRANSLATION')
                 self.assertLessEqual(result['answer_context_budget']['actual_message_characters'], 64000)
                 self.assertFalse(result['prepared'].receipt['semantic_certification'])
+
+    def test_reservation_preserves_larger_unexecuted_intermediate_capacity(self):
+        source = 'Lena wrote "灯".\nThe crate stayed shut.'
+        w = workspace(source)
+        prepared = w.prepare_reader_entry(QUERY, source_ids=('scene',))
+        intermediate = json.loads(prepared.prepared.preparation_json)['actual_final_messages']
+        budget = len(json.dumps(intermediate, ensure_ascii=False))
+        raw = json.dumps(dict(answer='Source report only.',
+            source_citations=[dict(source_id='scene', version=1, quote=source)],
+            uncertainty='No mental state established.', assumptions='No invented motive.'))
+        baseline = w.answer_reader_entry(QUERY, lambda _: raw, source_ids=('scene',))
+        self.assertGreater(budget, len(json.dumps(baseline['actual_final_messages'], ensure_ascii=False)))
+        calls = []
+        result = w.answer_reader_entry(QUERY, lambda m: calls.append(m) or raw,
+            source_ids=('scene',), backend=NoExtraction(), max_chars=budget)
+        self.assertEqual(calls, [baseline['actual_final_messages']])
+        self.assertEqual(result['preparation_provider_calls'], 0)
+        receipt = result['answer_context_budget']
+        self.assertEqual(receipt['intermediate_preparation_limit_characters'], budget)
+        self.assertLess(receipt['prepared_message_budget_characters'], budget)
+        self.assertLessEqual(receipt['actual_message_characters'], budget)
 
     def test_invalid_or_too_small_final_budgets_never_extract(self):
         for budget in (True, None, '64000', 511, 512, 64001):

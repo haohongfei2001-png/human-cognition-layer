@@ -103,11 +103,31 @@ def witness():
         sufficient_budget_receipt=delivered['answer_context_budget'],
         backend='LOCAL_STUB_ONLY', paid_cost_savings_claimed=False,
         semantic_benefit_claimed=False)
+    capacity_source = 'Lena wrote "灯".\nThe crate stayed shut.'
+    capacity_workspace = CognitionWorkspace()
+    capacity_workspace.put_source('scene', capacity_source)
+    capacity_entry = capacity_workspace.prepare_reader_entry(QUERY, source_ids=('scene',))
+    intermediate = json.loads(capacity_entry.prepared.preparation_json)['actual_final_messages']
+    intermediate_chars = len(json.dumps(intermediate, ensure_ascii=False))
+    capacity_raw = json.dumps(dict(answer='Only the writing and crate are reported.',
+        source_citations=[dict(source_id='scene', version=1, quote=capacity_source)],
+        uncertainty='No mental state is established.', assumptions='Only source reports.'))
+    default_result = capacity_workspace.answer_reader_entry(QUERY, lambda _: capacity_raw, source_ids=('scene',))
+    capacity_result = capacity_workspace.answer_reader_entry(QUERY, lambda _: capacity_raw,
+        source_ids=('scene',), max_chars=intermediate_chars)
+    assert capacity_result['actual_final_messages'] == default_result['actual_final_messages']
+    assert capacity_result['answer_context_budget']['actual_message_characters'] < intermediate_chars
+    assert capacity_result['preparation_provider_calls'] == 0
+    capacity_receipt = dict(source=capacity_source,
+        unexecuted_intermediate_characters=intermediate_chars,
+        budget=capacity_result['answer_context_budget'], default_final_wire_preserved=True,
+        extraction_adapter_calls=0, backend='LOCAL_STUB_ONLY', semantic_benefit_claimed=False)
     return dict(schema='hcl-source-inference-v25-witness', status='PASS_PROVIDER_FREE',
         before_main_sha=cert['run_sha'], before_runtime_sha256=cert['runtime_sha256'],
         capability_delta='Uniform source-bounded explanation instructions in the actual ordinary-reader final wire, without new semantic treatment or changed source/checker states.',
         authored_contrasts=rows, historical_witnesses_on_certified_v24=old_witness,
         final_instruction_budget_preflight=budget_receipt,
+        intermediate_capacity_preserved=capacity_receipt,
         evidence='IMPLEMENTED_UNVALIDATED_DELIVERY_POLICY',
         provider_calls=0, provider_spend_usd=0, answer_gain_claimed=False,
         semantic_certification=False, cost_saving_claimed=False,
