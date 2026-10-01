@@ -1,0 +1,18 @@
+{
+  "artifact_contents": [
+    "drc004-preflight.json",
+    "drc004-receipt.json",
+    "reports/HCL_DRC004_PACKAGE.json"
+  ],
+  "artifact_id": 11136592276,
+  "artifact_name": "hcl-drc004-36802177303",
+  "artifact_sha256": "0735ace8194b2d086f13921947ef78f85b5f17e76434fac656f27f4255192263",
+  "failed_activation_preserved": "reports/HCL_DRC004_PRETRANSPORT_FAILURE_RECEIPT.json",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "raw_receipt_sha256": "eded77081a5a007c2535c24f5aea4f8e200c2896fbe4ec64fad8a85e254a539b",
+  "raw_requests_responses_usage_cost_preserved": true,
+  "run_attempt": 1,
+  "run_id": 36802177303,
+  "run_sha": "dfc02f91ec10ebe6a0e5db5a7136cb3975bd4d97",
+  "schema": "hcl-drc004-artifact-receipt-v1"
+}

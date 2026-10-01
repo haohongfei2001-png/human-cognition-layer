@@ -24,9 +24,5 @@ jobs:
       - run: python -m scripts.development_dre001_replay
       - run: python -m unittest tests.test_provider_json_contract tests.test_development_drc003_replay
       - run: python -m scripts.development_drc003_replay
-      - run: python -m unittest tests.test_development_reality_batch004 tests.test_v1_adaptive_reader_entry
-      - run: python -m scripts.development_reality_batch004 --preflight --publisher --history --output drc004-source-preflight.json
-      - uses: actions/upload-artifact@v4
-        with:
-          name: hcl-drc004-source-preflight-${{ github.sha }}
-          path: drc004-source-preflight.json
+      - run: python -m unittest tests.test_development_drc004_replay tests.test_v1_adaptive_reader_entry
+      - run: python -m scripts.development_drc004_replay

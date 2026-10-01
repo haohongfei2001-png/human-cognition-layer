@@ -117,3 +117,10 @@ family, private/world truth or historical upgrade.12 new checks/89 local passes,
 authored ordinary composition/revision witness,0 live calls/spend; utility
 IMPLEMENTED_UNVALIDATED pending fresh development comparison. All consumed archives
 and grants stay closed; no final gate blocks daily development.
+
+DRC004 Base/current v19 H development diagnostic closed:5/8each,0gains/harms,
+actual checked treatment0/8,8unused extraction calls. SIMPLIFY unsupported-scope
+optional extraction; specialized efficacy INCONCLUSIVE. No historical capability
+upgrade/rejection or benchmark-specific rule.24calls/0retry,peakUSD0.12908808,invoice
+unknown; grant0/trigger removed, exact runtime/raw/archive preserved. Development
+material excluded from final. Next general ordinary access integration/simplification.

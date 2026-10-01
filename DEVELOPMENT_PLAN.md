@@ -26,7 +26,27 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: DRC004_FROZEN_BASE_VS_ADAPTIVE_HCL_EXECUTION**
+**NEXT_READY: SIMPLIFY_UNSUPPORTED_EXTRACTION_AND_ORDINARY_ACCESS_INTEGRATION**
+
+[DRC004 source-first closure](reports/HCL_DRC004_SOURCE_FIRST_CLOSURE.md): **SIMPLIFY**
+unsupported-scope extraction; unique successful run36802177303 atdfc02f91… returns
+Base5/8/H5/8,0gains/harms,actual treatment0/8.8 extraction calls add no usable checked
+mechanism; all16 raw finals and actual-source citation audits pass, interpretation
+unverified. Specialized efficacy INCONCLUSIVE, historical dispositions unchanged.
+Both arms assume a unique recent-toy referent and absent permission in underspecified
+source contexts. Preserve native gold/raw scores; no case-specific patch or rerun.
+
+24calls/0retry,18,453input/26,447output tokens; raw estimateUSD0.122064976, peak-rated
+USD0.129088080, actual invoiceunknown. H peakcost~53%above Base with no task gain.
+Grantclosed0/triggerdeleted;129-file exact runtime/archive, full raw receipt/artifact,
+and0-call failed activation preserved. All material development-exposed/final-consumed,
+LongMemEval SEALED, leaderboard off. Next explicit opt-in extraction simplification
+and ordinary source-reported communication/access integration using existing modules,
+then new development items; no final reviewer/source stop or new ontology.
+
+## DRC004 preserved execution freeze
+
+
 
 The first activation (run36801304134) failed before provider/client/key access:
 workflow invoked old batch003, whose frozen gate refused;0 calls/spend/answers.
