@@ -1,0 +1,15 @@
+{
+  "amended_hcl_runtime_sha256": "e540d6905332fbf36a3b2f727e608f6534b685dd123c37132b8f78a0ddbf3fc7",
+  "answer_gain_claimed": false,
+  "changed_runtime_files": [
+    "hcl/cognition/semantic.py"
+  ],
+  "development_only": true,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "new_prompt_instruction": false,
+  "previous_hcl_runtime_sha256": "6241badfbd8edbc89e5ba09307857459f473b070da95fadf2d2c2600ef5c5a10",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "reason": "KEEP_EMBEDDED_SCENE_CUES_OUT_OF_NARRATION",
+  "schema": "hcl-development-embedded-scene-amendment-v1"
+}

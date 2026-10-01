@@ -28,6 +28,12 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: GENERAL_ORDINARY_ANSWER_SOURCE_INFERENCE_BOUNDARY_REPAIR**
 
+[Embedded scene-cue isolation](docs/HCL_EMBEDDED_SCENE_CUES_REPAIR.md):
+bracketed directions and fenced examples cannot change the outer speech scene.
+The shared narrator-cue admission prevents both false actual restoration and false
+hypothetical suspension; original source and existing attribution limits remain.
+Provider-free correctness only; no model-answer benefit or new paid authority.
+
 [Actual narrator-report resumption](docs/HCL_NARRATOR_ACTUAL_SCOPE_REPAIR.md):
 explicit narrator-level actual-scene transitions now restore later eligible
 literal reports while preserving hypothetical, speech, stage and fenced scopes.

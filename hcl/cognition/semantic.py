@@ -122,6 +122,22 @@ def _paragraph_narrator_report_candidates(source, reporter):
     return reports
 
 
+def _narrator_scene_cues(narration_context):
+    """Scene declarations/transitions must belong to the narration channel.
+
+    Speech bodies are already masked without changing offsets. Bracketed
+    directions and fenced examples likewise cannot change the outer scene.
+    """
+    cues = []
+    for pattern, qualified in ((_SCENE_DECLARATION, True), (_ACTUAL_SCENE, False)):
+        for cue in pattern.finditer(narration_context):
+            before = narration_context[:cue.start()]
+            if before.count('[') > before.count(']') or before.count('```') % 2:
+                continue
+            cues.append((cue.end(), qualified))
+    return sorted(cues)
+
+
 def _narrator_report_candidates(source, narration_context):
     """Only complete standalone, named literal mental-report paragraphs.
 
@@ -134,12 +150,8 @@ def _narrator_report_candidates(source, narration_context):
     rows = []
     cursor = quotes = opens = closes = brackets = fences = 0
     suspended = False
-    actual_cues = []
-    for cue in _ACTUAL_SCENE.finditer(narration_context):
-        before = source.text[:cue.start()]
-        if before.count('[') > before.count(']') or before.count('```') % 2:
-            continue
-        actual_cues.append(cue.end())
+    actual_cues = [end for end, qualified in _narrator_scene_cues(narration_context)
+                   if not qualified]
     for block in re.finditer(r'(?m)^[^\r\n]+(?:\r?\n[^\r\n]+)*', source.text):
         quote = block.group()
         fragment = quote.strip()
@@ -224,8 +236,7 @@ def _local_candidates(source, *, dialogue_blocks=False, narrator_reports=False):
             # Its spoken scene vocabulary cannot qualify the next speaker.
             context[end - 1] = '.'
     context = ''.join(context)
-    scene_cues = sorted([(m.end(), True) for m in _SCENE_DECLARATION.finditer(context)] +
-                        [(m.end(), False) for m in _ACTUAL_SCENE.finditer(context)])
+    scene_cues = _narrator_scene_cues(context)
     previous = None
     for match in matches:
         if any(start <= match.start() < end for start, end in used):
