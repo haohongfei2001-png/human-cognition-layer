@@ -1,0 +1,15 @@
+{
+  "live_treatment": "ACTUAL_LOCAL_PRECHECK_AND_OPTIONAL_EXTRACTION_OBSERVED_AT_EXECUTION",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "package_sha256": "862d4bd15dc78af846498b933c959e0676358b5d7fa265b7e83b132ecc76a901",
+  "provider_calls": 0,
+  "publisher": [
+    {
+      "dataset": "Morables-PD",
+      "native_rows_verified": true,
+      "sha256": "5e6ca045c22711e9cd2dc2cb77a26dfd25782970c81afd0a9fcaabf5dca7c9e3"
+    }
+  ],
+  "runtime_sha256": "c8045636a66d216fdd4fe7e1f081eeddf430393fcfdc1ba7ec75a00ad14f7963",
+  "source_equal_and_frozen": true
+}

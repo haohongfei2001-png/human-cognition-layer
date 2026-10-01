@@ -26,7 +26,25 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: FRESH_CONCEPT_NORMATIVE_DEVELOPMENT_REALITY_CHECK**
+**NEXT_READY: DRC008_FROZEN_CONCEPT_NARRATIVE_DEVELOPMENT_REALITY_CHECK**
+
+[DRC008 protocol](docs/HCL_DRC008_DEVELOPMENT_PROTOCOL.md): six concrete-new first-hash
+Morables-PD native title/fable/annotated-lesson records, authorCC-BY-4.0/PD. Same strong
+Base/current certified v24 H,full original source,freeform task adaptation (not paper
+MCQ score),18calls max (12answers+6blind paired same-family grades),0extraction/0retry,
+new USD1.10hardcap including all graders/worst JSON-escaped Unicode answer reserve. Annotated
+moral withheld from answer arms, provisional CORRECT/PARTIAL/INCORRECT/UNCERTAIN
+measurement/format+original-quote audit separate; no objective moral truth or human /
+semantic certification. Actual H checked treatment0/6 disclosed.27localchecks,full
+cloud prior concrete history/publisher/runtime/exact-CI gates before one dispatch;
+whole viewed308triple/card development-exposed/final-consumed,not pretraining-unseen.
+MoCa/ETHICS unclear data-license routes deferred before data, no setup/owner gate.
+Immediately source-first close,grant0/delete trigger/archive and continue general
+semantic preparation. LongMemEval SEALED,leaderboard off,final confirmation separate.
+
+## v24 preserved implementation snapshot
+
+**Historical queue snapshot: FRESH_CONCEPT_NORMATIVE_DEVELOPMENT_REALITY_CHECK**
 
 [Explicit empty-state simplification v24](docs/HCL_DEVELOPMENT_EMPTY_STATE_V24.md):
 when no cognition check executed, actual final input now says so explicitly and

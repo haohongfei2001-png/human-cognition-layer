@@ -1,0 +1,140 @@
+{
+  "cases": [
+    {
+      "case_id": "perry_260",
+      "dataset": "Morables-PD",
+      "gold": "Do not let your fancy make you forget realities.",
+      "native": {
+        "moral": "Do not let your fancy make you forget realities.",
+        "story": "Roaming by the mountainside at sundown, a Wolf saw his own shadow become greatly extended and magnified, and he said to himself, 'Why should I, being of such an immense size and extending nearly an acre in length, be afraid of the Lion? Ought I not to be acknowledged as King of all the collected beasts?' While he was indulging in these proud thoughts, a Lion fell upon him and killed him. He exclaimed with a too late repentance, 'Wretched me! this overestimation of myself is the cause of my destruction.'",
+        "title": "The Wolf and his Shadow"
+      },
+      "native_alias": "perry_260",
+      "native_row_sha256": "250f46766c6bef05e005d8ff5291c55f4aa42e8c3b8637457ca85abe6534596f",
+      "question": "What main abstract lesson does this fable convey? Explain the link to its events while distinguishing a narrative interpretation from universal moral truth.",
+      "source": "Roaming by the mountainside at sundown, a Wolf saw his own shadow become greatly extended and magnified, and he said to himself, 'Why should I, being of such an immense size and extending nearly an acre in length, be afraid of the Lion? Ought I not to be acknowledged as King of all the collected beasts?' While he was indulging in these proud thoughts, a Lion fell upon him and killed him. He exclaimed with a too late repentance, 'Wretched me! this overestimation of myself is the cause of my destruction.'",
+      "source_sha256": "e60e6ff07a086e6187866a77725860207031833d451c57f1d629b25516e73282",
+      "task": {
+        "interpretation": "Recognize the author-annotated main lesson, not real private intentions, universal moral truth or a public full-benchmark score.",
+        "mode": "FREEFORM_NATIVE_MORAL_INFERENCE_DEVELOPMENT_ADAPTATION"
+      },
+      "title": "The Wolf and his Shadow"
+    },
+    {
+      "case_id": "abstemius_16",
+      "dataset": "Morables-PD",
+      "gold": "The shortest and surest way of doing things is best.",
+      "native": {
+        "moral": "The shortest and surest way of doing things is best.",
+        "story": "Once, a terrible storm blew at sea, and one sailor noticed that the rest of his companions were each praying to different saints. 'Be careful, my friends,' he said, 'what if we all drown before the messenger can deliver our message? Wouldn't it be better to pray directly to the one who can save us without any help?' With that, they turned their prayers to God himself, and the wind soon calmed.",
+        "title": "Seamen Praying to Saints"
+      },
+      "native_alias": "abstemius_16",
+      "native_row_sha256": "e326bc1bdb9048b31ee8cbf13a5fc6189186a6f12aa4b38a0650729587d417a7",
+      "question": "What main abstract lesson does this fable convey? Explain the link to its events while distinguishing a narrative interpretation from universal moral truth.",
+      "source": "Once, a terrible storm blew at sea, and one sailor noticed that the rest of his companions were each praying to different saints. 'Be careful, my friends,' he said, 'what if we all drown before the messenger can deliver our message? Wouldn't it be better to pray directly to the one who can save us without any help?' With that, they turned their prayers to God himself, and the wind soon calmed.",
+      "source_sha256": "4c9af46ff8a5306a58d26dfe07fe98a1b44877184e79c6ae8304d44ad833396b",
+      "task": {
+        "interpretation": "Recognize the author-annotated main lesson, not real private intentions, universal moral truth or a public full-benchmark score.",
+        "mode": "FREEFORM_NATIVE_MORAL_INFERENCE_DEVELOPMENT_ADAPTATION"
+      },
+      "title": "Seamen Praying to Saints"
+    },
+    {
+      "case_id": "abstemius_89",
+      "dataset": "Morables-PD",
+      "gold": "Educate your children in those arts which are capable of preserving them from want.",
+      "native": {
+        "moral": "Educate your children in those arts which are capable of preserving them from want.",
+        "story": "A Gnat, nearly frozen and hungry, went to a Bee-Hive on a cold morning to ask for help. The Gnat offered to teach music to the Bee's family in exchange for food and shelter. The Bee politely declined, saying, 'I teach all my children my own trade so they can earn a living through hard work.'",
+        "title": "A Gnat and a Bee"
+      },
+      "native_alias": "abstemius_89",
+      "native_row_sha256": "ff835e36697494f944f82e2f671242b9655ca0673e0520bfc454f9fbc734199f",
+      "question": "What main abstract lesson does this fable convey? Explain the link to its events while distinguishing a narrative interpretation from universal moral truth.",
+      "source": "A Gnat, nearly frozen and hungry, went to a Bee-Hive on a cold morning to ask for help. The Gnat offered to teach music to the Bee's family in exchange for food and shelter. The Bee politely declined, saying, 'I teach all my children my own trade so they can earn a living through hard work.'",
+      "source_sha256": "e98d4d178532d23938605557f27eb495e700f1e266de9979355cb42dc29009a4",
+      "task": {
+        "interpretation": "Recognize the author-annotated main lesson, not real private intentions, universal moral truth or a public full-benchmark score.",
+        "mode": "FREEFORM_NATIVE_MORAL_INFERENCE_DEVELOPMENT_ADAPTATION"
+      },
+      "title": "A Gnat and a Bee"
+    },
+    {
+      "case_id": "aesop_section_4_3",
+      "dataset": "Morables-PD",
+      "gold": "Vicious people cannot resist hurting others even when it is not in their own interests",
+      "native": {
+        "moral": "Vicious people cannot resist hurting others even when it is not in their own interests",
+        "story": "A scorpion and a frog meet on the bank of a stream and the scorpion asks the frog to carry him across on its back. The frog asks, 'How do I know you won't sting me?' The scorpion says, 'Because if I do, I will die too.' The frog is satisfied, and they set out, but in midstream, the scorpion stings the frog. The frog feels the onset of paralysis and starts to sink, knowing they both will drown.",
+        "title": "The Scorpion and the Frog"
+      },
+      "native_alias": "aesop_section_4_3",
+      "native_row_sha256": "72e4d0ab97fc0fa3ea81e67a9593de7ee4ce9edc1a80d0c6ae9396366cb222ba",
+      "question": "What main abstract lesson does this fable convey? Explain the link to its events while distinguishing a narrative interpretation from universal moral truth.",
+      "source": "A scorpion and a frog meet on the bank of a stream and the scorpion asks the frog to carry him across on its back. The frog asks, 'How do I know you won't sting me?' The scorpion says, 'Because if I do, I will die too.' The frog is satisfied, and they set out, but in midstream, the scorpion stings the frog. The frog feels the onset of paralysis and starts to sink, knowing they both will drown.",
+      "source_sha256": "58c81cb683e8166a2b624a6c7283b2c892da407ef14bbb240482867cb9fd4e34",
+      "task": {
+        "interpretation": "Recognize the author-annotated main lesson, not real private intentions, universal moral truth or a public full-benchmark score.",
+        "mode": "FREEFORM_NATIVE_MORAL_INFERENCE_DEVELOPMENT_ADAPTATION"
+      },
+      "title": "The Scorpion and the Frog"
+    },
+    {
+      "case_id": "aesop_section_4_87",
+      "dataset": "Morables-PD",
+      "gold": "Men often condemn others for what they see no wrong in doing themselves.",
+      "native": {
+        "moral": "Men often condemn others for what they see no wrong in doing themselves.",
+        "story": "A Wolf, passing by, saw some Shepherds in a hut eating a haunch of mutton for their dinner. Approaching them, he said,' What a clamor you would raise if I were to do as you are doing!'",
+        "title": "The Wolf and the Shepherds"
+      },
+      "native_alias": "aesop_section_4_87",
+      "native_row_sha256": "55d1e6c1a0470e0928f3a1999b992c354c3204bb9c5aab21bb485726aca881bf",
+      "question": "What main abstract lesson does this fable convey? Explain the link to its events while distinguishing a narrative interpretation from universal moral truth.",
+      "source": "A Wolf, passing by, saw some Shepherds in a hut eating a haunch of mutton for their dinner. Approaching them, he said,' What a clamor you would raise if I were to do as you are doing!'",
+      "source_sha256": "f354da2e03e8ee4ca75554e7cf29d110ee79e4263f0a8a2f726ff37f1b283868",
+      "task": {
+        "interpretation": "Recognize the author-annotated main lesson, not real private intentions, universal moral truth or a public full-benchmark score.",
+        "mode": "FREEFORM_NATIVE_MORAL_INFERENCE_DEVELOPMENT_ADAPTATION"
+      },
+      "title": "The Wolf and the Shepherds"
+    },
+    {
+      "case_id": "aesop_section_3_70",
+      "dataset": "Morables-PD",
+      "gold": "Stoop to conquer.",
+      "native": {
+        "moral": "Stoop to conquer.",
+        "story": "A Very Large Oak was uprooted by the wind and thrown across a stream. It fell among some Reeds, which it thus addressed: I wonder how you, who are so light and weak, are not entirely crushed by these strong winds. They replied, You fight and contend with the wind, and consequently you are destroyed; while we on the contrary bend before the least breath of air, and therefore remain unbroken, and escape.",
+        "title": "The Oak and the Reeds"
+      },
+      "native_alias": "aesop_section_3_70",
+      "native_row_sha256": "0df9c1a02a9a69d35a819d9392f695279efb8439abdf12febd10234071ec7e5a",
+      "question": "What main abstract lesson does this fable convey? Explain the link to its events while distinguishing a narrative interpretation from universal moral truth.",
+      "source": "A Very Large Oak was uprooted by the wind and thrown across a stream. It fell among some Reeds, which it thus addressed: I wonder how you, who are so light and weak, are not entirely crushed by these strong winds. They replied, You fight and contend with the wind, and consequently you are destroyed; while we on the contrary bend before the least breath of air, and therefore remain unbroken, and escape.",
+      "source_sha256": "359ccff82c981f80f5759114fad4b8a56f3aa228e94764e88bbfbc60b52516dc",
+      "task": {
+        "interpretation": "Recognize the author-annotated main lesson, not real private intentions, universal moral truth or a public full-benchmark score.",
+        "mode": "FREEFORM_NATIVE_MORAL_INFERENCE_DEVELOPMENT_ADAPTATION"
+      },
+      "title": "The Oak and the Reeds"
+    }
+  ],
+  "final_confirmation": "CONSUMED_FOR_FINAL_CONFIRMATION",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "native_transform": "Exact story/title/moral retained. Complete title/story with one shared freeform moral-inference question to answer arms; native annotated moral withheld. Public PD release lacks native MCQ distractors; task is freeform development adaptation, not the papers MCQ score.",
+  "pins": [
+    {
+      "dataset": "Morables-PD",
+      "sha256": "5e6ca045c22711e9cd2dc2cb77a26dfd25782970c81afd0a9fcaabf5dca7c9e3",
+      "url": "https://huggingface.co/datasets/cardiffnlp/Morables-PD/resolve/7547e7bcb60477a2aa05c6eacdb6d73e244f977c/Morables-PD.json"
+    }
+  ],
+  "prior_history_baseline": "a6f57984c1ab8fc299729894e6e9b8bc87de26e2",
+  "publisher_commit": "7547e7bcb60477a2aa05c6eacdb6d73e244f977c",
+  "schema": "hcl-drc008-subset-v1",
+  "selection": "First six SHA256(HCL-DRC008-v1/native-alias), no native moral/length/H-treatment/output filter.",
+  "source_limit": "Author cc-by-4.0/Public Domain parallel release, annotation checked per author card. Old literary/pretraining familiarity likely, exact reachable HCL-history absence only, no final writing-system independence, no universal moral truth.",
+  "status": "DEVELOPMENT_EXPOSED"
+}
