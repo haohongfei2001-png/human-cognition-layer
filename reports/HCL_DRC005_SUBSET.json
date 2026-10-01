@@ -1,0 +1,254 @@
+{
+  "cases": [
+    {
+      "case_id": "tombench/Percepts-Knowledge_Links/38",
+      "dataset": "zhchen18/ToMBench",
+      "gold": "B",
+      "license": "MIT",
+      "native_file": "data/Percepts-Knowledge Links.jsonl",
+      "native_row_index": 38,
+      "native_row_sha256": "22592897187800e293cf954ac4d1ed0f86fc2fb469f44696224bbecdb28de118",
+      "question": "Does Xiao Gang see anything in the crate?",
+      "scope": "NATIVE_ENGLISH_DEVELOPMENT_SUBSET_NOT_FULL_BENCHMARK_SCORE",
+      "source": "Xiao Hong and Xiao Gang are wandering in the smoking room. They see boxes and crates, and inside the box, they find zucchinis. Xiao Gang leaves the smoking room, and Xiao Hong moves the zucchinis to the crate.",
+      "source_sha256": "652447888932b402dee86946342e14dc8abb5f46eb364818a93b4840b531483d",
+      "task": {
+        "interpretation": "Native source-conditioned option agreement; narration is not literal speech or independently verified knowledge/private intention.",
+        "labels": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "options": {
+          "A": "Zucchinis",
+          "B": "Does not see",
+          "C": "Crates",
+          "D": "Boxes"
+        }
+      }
+    },
+    {
+      "case_id": "tombench/Percepts-Knowledge_Links/25",
+      "dataset": "zhchen18/ToMBench",
+      "gold": "A",
+      "license": "MIT",
+      "native_file": "data/Percepts-Knowledge Links.jsonl",
+      "native_row_index": 25,
+      "native_row_sha256": "17b881b15df2328ed22c1ec7ef99521766e15c9ed7c809098df3c4858c3afcfc",
+      "question": "Xiao Bei returns to the library, does Xiao Bei know where the cup is now?",
+      "scope": "NATIVE_ENGLISH_DEVELOPMENT_SUBSET_NOT_FULL_BENCHMARK_SCORE",
+      "source": "Xiao Hong and Xiao Bei are wandering in the library. They see briefcases and cabinets, and inside the briefcase, they find a cup. Xiao Bei leaves the library, and Xiao Hong moves the cup to the cabinet.",
+      "source_sha256": "d010a0aea30b38b0fd2117082172752a06204b3899f52ef127d65344e0f8f58d",
+      "task": {
+        "interpretation": "Native source-conditioned option agreement; narration is not literal speech or independently verified knowledge/private intention.",
+        "labels": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "options": {
+          "A": "Does not know",
+          "B": "Knows, in the backpack",
+          "C": "Knows, in the cabinet",
+          "D": "Knows, in the briefcase"
+        }
+      }
+    },
+    {
+      "case_id": "tombench/Percepts-Knowledge_Links/17",
+      "dataset": "zhchen18/ToMBench",
+      "gold": "A",
+      "license": "MIT",
+      "native_file": "data/Percepts-Knowledge Links.jsonl",
+      "native_row_index": 17,
+      "native_row_sha256": "ae0c59276c15bf9ddcb94fb83e9ee601a35e623b37a52112790db733a0eafbe2",
+      "question": "After Xiao Li returns to the parking lot, does Xiao Li know where the bananas are now?",
+      "scope": "NATIVE_ENGLISH_DEVELOPMENT_SUBSET_NOT_FULL_BENCHMARK_SCORE",
+      "source": "Xiao Bei and Xiao Li stroll in the parking lot, they see boxes and baskets, they find bananas and apples in the box, Xiao Li leaves the parking lot, Xiao Bei moves the bananas to the basket.",
+      "source_sha256": "d4479c50b983d8ad8a275c4391592bfda15db60fce82f6ea3696a4115f8d0f77",
+      "task": {
+        "interpretation": "Native source-conditioned option agreement; narration is not literal speech or independently verified knowledge/private intention.",
+        "labels": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "options": {
+          "A": "Does not know",
+          "B": "Knows, in the box",
+          "C": "Knows, in the handbag",
+          "D": "Knows, in the basket"
+        }
+      }
+    },
+    {
+      "case_id": "tombench/Percepts-Knowledge_Links/4",
+      "dataset": "zhchen18/ToMBench",
+      "gold": "D",
+      "license": "MIT",
+      "native_file": "data/Percepts-Knowledge Links.jsonl",
+      "native_row_index": 4,
+      "native_row_sha256": "9276d79ebfeeea8cfe239f2fdf1f3e4a53dbbec320b52c1f305010eeed14efb3",
+      "question": "What does Li Lei see in the briefcase?",
+      "scope": "NATIVE_ENGLISH_DEVELOPMENT_SUBSET_NOT_FULL_BENCHMARK_SCORE",
+      "source": "Yoyo and Li Lei are wandering in the basement. They see backpacks and briefcases, and inside the backpack, they find carrots. Li Lei leaves the basement, and Yoyo moves the carrots to the briefcase.",
+      "source_sha256": "fafd2bcd69d064ec0e11b455bf0dd5884d80e4ba2cdd360a23b4325e12fced6b",
+      "task": {
+        "interpretation": "Native source-conditioned option agreement; narration is not literal speech or independently verified knowledge/private intention.",
+        "labels": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "options": {
+          "A": "A vest",
+          "B": "Carrot",
+          "C": "A box",
+          "D": "Does not see"
+        }
+      }
+    },
+    {
+      "case_id": "tombench/Strange_Story_Task/17",
+      "dataset": "zhchen18/ToMBench",
+      "gold": "B",
+      "license": "MIT",
+      "native_file": "data/Strange Story Task.jsonl",
+      "native_row_index": 17,
+      "native_row_sha256": "0cdf19d68b04a1690f3ca787cba270737a00552496d6f024224708f6793cbfa1",
+      "question": "Why does Xiao Li say this?",
+      "scope": "NATIVE_ENGLISH_DEVELOPMENT_SUBSET_NOT_FULL_BENCHMARK_SCORE",
+      "source": "Xiao Li does his math homework in his room. His mom tells him to go to his aunt's house tonight. Xiao Li is busy doing his homework, only thinking about finishing it quickly, and casually agrees. At dinner, his dad asks, \"Are we going to your aunt's house tonight?\" Xiao Li says, \"No, we don't have plans.\"",
+      "source_sha256": "02f3761d504a9f0e0f6f8e07183c00e7f48615da6f766828b8a545f6fd14cf81",
+      "task": {
+        "interpretation": "Native source-conditioned option agreement; narration is not literal speech or independently verified knowledge/private intention.",
+        "labels": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "options": {
+          "A": "Xiao Li deliberately lies because he does not want to go to his aunt's house.",
+          "B": "Xiao Li forgets the plan his mother tells him because he focuses on his math homework.",
+          "C": "Xiao Li deliberately lies because he wants to continue doing homework.",
+          "D": "Xiao Li is busy thinking about eating and does not hear his mother's plan for tonight."
+        }
+      }
+    },
+    {
+      "case_id": "tombench/Strange_Story_Task/105",
+      "dataset": "zhchen18/ToMBench",
+      "gold": "A",
+      "license": "MIT",
+      "native_file": "data/Strange Story Task.jsonl",
+      "native_row_index": 105,
+      "native_row_sha256": "52faac2f48b093e6b04574075c5f628ba471ea060860b4408398f6ab22771d9d",
+      "question": "Why does Xiaoli want to watch a movie, but says she wants to have dinner with her family?",
+      "scope": "NATIVE_ENGLISH_DEVELOPMENT_SUBSET_NOT_FULL_BENCHMARK_SCORE",
+      "source": "Xiaoli does not watch movies for a long time, she gets invited by her friend to watch a movie today. Xiaoli's grandfather really likes to have dinner with the family. Tonight, Xiaoli's family celebrates her grandfather's birthday. Grandfather asks Xiaoli if she goes out tonight, Xiaoli says \"does not go out\".",
+      "source_sha256": "e74cfde0c8169d0aefb926fbd69fb1d0a0f203ccb4c04004f484c11560cea591",
+      "task": {
+        "interpretation": "Native source-conditioned option agreement; narration is not literal speech or independently verified knowledge/private intention.",
+        "labels": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "options": {
+          "A": "Because she does not want to disappoint her grandfather.",
+          "B": "Because she worries her friend cancels the plan.",
+          "C": "Because she actually prefers to be with her family.",
+          "D": "Because she does not like the movie she prepares to watch."
+        }
+      }
+    },
+    {
+      "case_id": "tombench/Strange_Story_Task/212",
+      "dataset": "zhchen18/ToMBench",
+      "gold": "B",
+      "license": "MIT",
+      "native_absent_option_labels": [
+        "C",
+        "D"
+      ],
+      "native_file": "data/Strange Story Task.jsonl",
+      "native_row_index": 212,
+      "native_row_sha256": "f24e27670d5d4beb3d56af1b81cb31464544ceb7c5be91e84082983b541881b7",
+      "option_normalization": "Native NaN indicates missing options, not invented labels/text. Full native row hash retained; supply all and only nonmissing native options identically.",
+      "question": "Does Aunt Wang tell the truth?",
+      "scope": "NATIVE_ENGLISH_DEVELOPMENT_SUBSET_NOT_FULL_BENCHMARK_SCORE",
+      "source": "Uncle Zhang prepares a special dish for the community's Spring Festival gathering. At the party, Aunt Wang tries this dish and feels something is off about the taste. When Uncle Zhang asks her opinion about the dish, Aunt Wang smiles and says this is one of the most delicious dishes she ever eats.",
+      "source_sha256": "16b3597a3d879d9c1677cd74de8298f6313c18a3dda60070b6985ac2a22a2db6",
+      "task": {
+        "interpretation": "Native source-conditioned option agreement; narration is not literal speech or independently verified knowledge/private intention.",
+        "labels": [
+          "A",
+          "B"
+        ],
+        "options": {
+          "A": "Yes",
+          "B": "No"
+        }
+      }
+    },
+    {
+      "case_id": "tombench/Strange_Story_Task/49",
+      "dataset": "zhchen18/ToMBench",
+      "gold": "B",
+      "license": "MIT",
+      "native_file": "data/Strange Story Task.jsonl",
+      "native_row_index": 49,
+      "native_row_sha256": "829356cf486e14e2969babedb668f362a9aeff16b64f8cf8017845338f489fa9",
+      "question": "Why does Li Ming answer like this?",
+      "scope": "NATIVE_ENGLISH_DEVELOPMENT_SUBSET_NOT_FULL_BENCHMARK_SCORE",
+      "source": "Li Ming and Xiao Hong are preparing to participate in the school's evening party, but Li Ming has forgotten the dance steps for his performance. When Xiao Hong asks him, \"How do we perform?\" Li Ming tries hard to remember and quickly answers, \"Of course, it's left turn, right turn, and then jump.\"",
+      "source_sha256": "5beac9a943260dafe72956cb302b745e0be9040d19d2991b358fb9d6e660719c",
+      "task": {
+        "interpretation": "Native source-conditioned option agreement; narration is not literal speech or independently verified knowledge/private intention.",
+        "labels": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "options": {
+          "A": "Li Ming does not want to tell Xiao Hong the specific steps of the dance.",
+          "B": "Li Ming forgets the dance steps of his dance performance.",
+          "C": "Li Ming intentionally provides incorrect information, wanting the performance to go wrong.",
+          "D": "Li Ming indeed thinks that turning left, turning right, jumping up are the correct performance steps."
+        }
+      }
+    }
+  ],
+  "evidence": "DEVELOPMENT_EXPOSED_CONSUMED_FOR_FINAL_CONFIRMATION",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "pins": [
+    {
+      "dataset": "zhchen18/ToMBench",
+      "eligible_rows": 40,
+      "native_file": "data/Percepts-Knowledge Links.jsonl",
+      "revision": "4f491f0784ed31ef93a8837615fbc48f885cf78d",
+      "selection": "first4 SHA256(HCL-DRC005-v1/task-name/zero-based-row-index); no label, outputs or treatment filter",
+      "sha256": "dda5b279b926eef0e0c440cef4ef68cbebbf82fc6c7b109b213c15c2f9d94804",
+      "url": "https://raw.githubusercontent.com/zhchen18/ToMBench/4f491f0784ed31ef93a8837615fbc48f885cf78d/data/Percepts-Knowledge%20Links.jsonl"
+    },
+    {
+      "dataset": "zhchen18/ToMBench",
+      "eligible_rows": 407,
+      "native_file": "data/Strange Story Task.jsonl",
+      "revision": "4f491f0784ed31ef93a8837615fbc48f885cf78d",
+      "selection": "first4 SHA256(HCL-DRC005-v1/task-name/zero-based-row-index); no label, outputs or treatment filter",
+      "sha256": "f0a1c6e12b9d9b8b5c936ea3383b24100ef28ed6610078c1fc7bd6769d7ef914",
+      "url": "https://raw.githubusercontent.com/zhchen18/ToMBench/4f491f0784ed31ef93a8837615fbc48f885cf78d/data/Strange%20Story%20Task.jsonl"
+    }
+  ],
+  "prior_history_baseline": "fc6439860ba8df7e10cd2b2c63f9aa1986573048",
+  "schema": "hcl-drc005-subset-v1",
+  "source_admission": "New concrete items and task distributions, not a new writing system; ToMBench already development-exposed. Prior reachable Git source history screened before any provider call; source training/model pretraining independence unproven."
+}
