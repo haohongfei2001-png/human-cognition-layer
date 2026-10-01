@@ -1,0 +1,11 @@
+{
+  "authorization": "CURRENT_OWNER_BOUNDED_LOW_COST_EXISTING_PROVIDER_POLICY",
+  "batch": "DRC006",
+  "historical_budget_transfer": false,
+  "maximum_calls": 18,
+  "package_sha256": "dac8adc5fb8591bc9ad9cef69756d4c3cc06a63fe3ab0c7f3b0632642fb33dba",
+  "remaining_usd": 0.8,
+  "retries": 0,
+  "schema": "hcl-drc-once-grant-v1",
+  "status": "READY"
+}

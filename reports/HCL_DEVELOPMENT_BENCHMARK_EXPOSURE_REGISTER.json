@@ -128,6 +128,16 @@
       "reason": "Two previously unopened Percepts-Knowledge Links/Strange Story Task distributions read for frozen development-only subset; author says evaluation only/no training. All opened distributions excluded from final, only new concrete-item history absence claimed.",
       "status": "DEVELOPMENT_EXPOSED",
       "writing_system_id": "zhchen18/ToMBench"
+    },
+    {
+      "batch": "DRC006",
+      "dataset_id": "cicl-stanford/procedural-evals-tom/BigToM",
+      "final_confirmation": "CONSUMED_FOR_FINAL_CONFIRMATION",
+      "license": "MIT",
+      "publisher_url": "https://github.com/cicl-stanford/procedural-evals-tom",
+      "reason": "Publisher metadata/license/native control builder screened. CSV is headerless; first readline unexpectedly showed complete Noor row0 including gold. Row0 explicitly excluded from any new development subset. No prolific participant/expert/social_iqa data opened. Entire native BigToM CSV opened for fixed six-row development subset; all distribution excluded from final. No model generation/native builder execution or human participant data.",
+      "status": "DEVELOPMENT_EXPOSED",
+      "writing_system_id": "cicl-stanford/procedural-evals-tom"
     }
   ],
   "longmemeval": "SEALED_NOT_ACCESSED",
@@ -145,6 +155,7 @@
     "99a399d50f1a996388e94ab435ba0ceadc6b8ad9d90e6420358c962a4850d217",
     "9e55ababc9946e8fdb310b948b56fec3b964ce50b624ce91ac1c1efb727e2b8d",
     "9ea4c7bfc2086d4ebaa2a31cc1993ea2774f72e642d7415dbb9c9c0e21ead94f",
+    "a14884fbff5b61d3fa194ab166764b553ab795fcb1359e69d1282eadf3011a46",
     "acfffe050552dca332ad62dcdc7085a8eeaef0dbecfe18b0392d48f4e97dc46a",
     "dda5b279b926eef0e0c440cef4ef68cbebbf82fc6c7b109b213c15c2f9d94804",
     "ebaa524280c53aa3dbfb2b73502b120eeb71d03523a557c659275aebb2afd95a",
