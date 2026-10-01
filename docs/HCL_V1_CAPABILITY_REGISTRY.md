@@ -88,3 +88,10 @@ Revision during candidate extraction withdraws old support.11 new correctness ch
 adequacy UNASSESSED; utility remains IMPLEMENTED_UNVALIDATED/INCONCLUSIVE. No new
 capability28, historical disposition upgrade, old-run rescore or final evidence.
 Next general conditional context-cost reduction then fresh development checks.
+
+[Conditional reader transport v17](HCL_DEVELOPMENT_READER_COST_V17.md) is optional
+lossless identity transport/capacity integration, not capability28: user context
+25888→22913 chars, unchanged original source/expanded state/dependencies;11 new checks,
+114 combined local passes.0 calls/spend; no token-cost or answer utility measurement.
+Source anchors are not semantic certificates, utility IMPLEMENTED_UNVALIDATED;
+historical dispositions unchanged. Next fresh public Development Reality Checks.

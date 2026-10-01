@@ -26,7 +26,23 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: GENERAL_CONDITIONAL_READER_CONTEXT_COST_REDUCTION**
+**NEXT_READY: FRESH_PUBLIC_DEVELOPMENT_REALITY_CHECK_BATCH_DRC003**
+
+[Conditional context transport v17](docs/HCL_DEVELOPMENT_READER_COST_V17.md) adds
+opt-in exact aliases for repeated opaque IDs plus JSON whitespace minification.
+Original text stays primary/literal; expanded conditions, uncertainty, source/time/
+access, actual B01/C01/C03 state and revision dependencies are exactly unchanged.
+Authored witness user context25888→22913 chars (11.49% smaller), complete
+messages30876→28390 bytes; smaller user-context budget now fits whole state.11 new
+checks/114 combined local passes,0 calls/spend; tokens/provider savings and answer
+quality unmeasured. Default/legacy wire unchanged, utility IMPLEMENTED_UNVALIDATED.
+
+Next bounded fresh public development selection: source-history/rights check, freeze
+subset/model/scorer before output, fair strong Base/current HCL ordinary complete
+inputs. Record all preparation calls/cost and actual absent/present treatment; permit
+negative results and general repair. No final reviewer/source global stop, consumed
+rerun, new module or leaderboard. Historical raw/dispositions unchanged.
+
 
 [DRE001 source-first closure](reports/HCL_DRE001_SOURCE_FIRST_CLOSURE.md): actual model
 entry/conditional treatment present, utility INCONCLUSIVE.2 calls/0 retries at
