@@ -1,0 +1,32 @@
+{
+  "amended_hcl_runtime_sha256": "89d9e8eb5ca0cece2cd26a8d29a65f994cda06a7dcb1fa5fbcfd9acefcb1364b",
+  "answer_gain_claimed": false,
+  "confirmation_items_inspected": 0,
+  "consumed_drc001_runtime_preserved": true,
+  "consumed_drc002_runtime_preserved": true,
+  "consumed_drc003_runtime_preserved": true,
+  "consumed_drc004_runtime_preserved": true,
+  "consumed_drc005_runtime_preserved": true,
+  "consumed_drc006_runtime_preserved": true,
+  "consumed_dre001_runtime_preserved": true,
+  "consumed_v16_source_boundary_preserved": true,
+  "development_exposed_batches": [
+    "DRC001",
+    "DRC002",
+    "DRE001",
+    "DRC003",
+    "DRC004",
+    "DRC005",
+    "DRC006"
+  ],
+  "development_only": true,
+  "historical_i01_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "new_cognition_module": false,
+  "previous_hcl_runtime_sha256": "bf10a42dd8ec7022c8af843bf44c000b1b1d23cce3fdb63076374974b0cd1b4f",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "reason": "GENERAL_MIXED_NARRATIVE_ATTRIBUTION_COVERAGE",
+  "schema": "hcl-development-runtime-amendment-v23",
+  "semantic_certification_claimed": false
+}

@@ -158,3 +158,10 @@ checked treatment0/6:INCONCLUSIVE (strong-Base ceiling/absent treatment), no fam
 or historical upgrade.18calls/0extraction/0retry,peakUSD0.10255080/invoiceunknown,
 grant0/triggergone,130-file exact archive/raw/hash; all opened distribution excluded
 from final. Next general mixed-narration attribution admission, no native-item patch.
+
+v23 CAPABILITY_DELTA: explicit named source-attribution/subject-expression comparison
+and conditional plan composition now work amidst bounded ordinary material context,
+without using context as world/private-state premise.8new/235focused correctness
+passes, exact-v22 authored source-cited stub/challenge/revision witness;0livecalls /
+spend, IMPLEMENTED_UNVALIDATED, no family/history/answer-evidence upgrade. Seven
+consumed archives exact; next fresh high-information development comparison.

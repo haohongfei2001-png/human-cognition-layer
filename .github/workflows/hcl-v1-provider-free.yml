@@ -46,7 +46,7 @@ jobs:
           python -m scripts.witness_i02_typographic_dialogue_v9 --output hcl-i02-typographic-dialogue-v9-witness.json
           python -m scripts.witness_i02_long_agency_v10 --output hcl-i02-long-agency-v10-witness.json
           python -m scripts.witness_i02_long_plan_composition_v11 --output hcl-i02-long-plan-composition-v11-witness.json
-          python -m scripts.development_runtime_amendment_v22
+          python -m scripts.development_runtime_amendment_v23
           python -m scripts.witness_development_reader_entry_v13 --output hcl-development-reader-entry-v13-witness.json
           python -m scripts.witness_development_shared_reader_v14 --output hcl-development-shared-reader-v14-witness.json
           python -m scripts.witness_development_conditional_reader_v15 --output hcl-development-conditional-reader-v15-witness.json
@@ -57,6 +57,7 @@ jobs:
           python -m scripts.witness_development_ordinary_access_v20 --output hcl-development-ordinary-access-v20-witness.json
           python -m scripts.witness_development_paragraph_access_v21 --output hcl-development-paragraph-access-v21-witness.json
           python -m scripts.witness_development_narrator_attribution_v22 --output hcl-development-narrator-attribution-v22-witness.json
+          python -m scripts.witness_development_mixed_narration_v23 --output hcl-development-mixed-narration-v23-witness.json
           python -m scripts.witness_i02_narrator_epistemic_v12 --output hcl-i02-narrator-epistemic-v12-witness.json
           python scripts/witness_communication_views.py hcl-communication-views-witness.json
           python scripts/witness_revision_time.py hcl-revision-time-witness.json
@@ -141,6 +142,7 @@ jobs:
             hcl-development-ordinary-access-v20-witness.json
             hcl-development-paragraph-access-v21-witness.json
             hcl-development-narrator-attribution-v22-witness.json
+            hcl-development-mixed-narration-v23-witness.json
             hcl-communication-views-witness.json
             hcl-revision-time-witness.json
             hcl-report-provenance-witness.json

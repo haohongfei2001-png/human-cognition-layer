@@ -31,7 +31,25 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: GENERAL_MIXED_NARRATIVE_ATTRIBUTION_COVERAGE**
+**NEXT_READY: FRESH_HIGH_INFORMATION_PUBLIC_DEVELOPMENT_REALITY_CHECK**
+
+[Mixed narration admission v23](docs/HCL_DEVELOPMENT_MIXED_NARRATION_V23.md): bounded
+ordinary material context no longer suppresses complete named narrator attribution;
+actual B01 subject-expression comparison/C01/C03 enters final input, without context
+or narrator→private belief/world feasibility. Unknown qualifications/pronouns/source
+assessment still refuse whole extra path. Complete source/offsets/current revision,
+actual shared claim/challenge dependency and negative inference boundaries retained.
+8new/235focused local passes, historical v22/v12 and authored exact-v22→v23 positive
+composition/source-cited stub/challenge/revision witness.0livecalls/spend,
+IMPLEMENTED_UNVALIDATED, no new family/history/answer-evidence upgrade. Seven consumed
+archives exact, DRC006 Base/P/H6/6/treatment0 remains INCONCLUSIVE/closed.
+Next fresh informative public ordinary tasks/frozen strong Base/current H (optional
+lightweight P), no solved-item reruns or native templates; final reviewer/source no
+daily gate. LongMemEval SEALED, leaderboard off.
+
+## DRC006 preserved closure snapshot
+
+**Historical queue snapshot: GENERAL_MIXED_NARRATIVE_ATTRIBUTION_COVERAGE**
 
 [DRC006 source-first closure](reports/HCL_DRC006_SOURCE_FIRST_CLOSURE.md): INCONCLUSIVE,
 Base/P/H6/6,0gains/0harms,checked H treatment0/6. Strong Base ceiling/no actual
