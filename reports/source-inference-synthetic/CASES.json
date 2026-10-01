@@ -1,0 +1,204 @@
+{
+  "author_metadata_clarification": "Provider-call absence refers to separately invoked external APIs; AI authorship is explicit. Source/question and rubric meanings are unchanged.",
+  "authored_date_utc": "2026-10-01",
+  "cases": [
+    {
+      "case_id": "original_synth_01",
+      "original_author_provenance": {
+        "author_role": "Fixture author separated from the runtime implementer for this assignment only",
+        "character_status": "All characters are fictional adults",
+        "consulted_material": "No runtime, existing benchmark cases, previous answers, repository reports, sibling conversations, external stories, or web sources were consulted",
+        "evaluation_status": "Development-exposed, agent-authored synthetic fixture; not human-authored, native benchmark, independent-writing-system, or final-sealed material",
+        "origin": "Original fictional text written from scratch for this assignment by an AI fixture-author agent",
+        "setting": "Community repair workshop"
+      },
+      "question": "What does the workshop's smooth opening tell us about Nora?",
+      "question_sha256": "88a95a362ebb8cb31e2fed282aa6512e046ecfdda3d23daa069487c1775f064d",
+      "source": "At a Saturday repair workshop, Nora, forty-one, found the community hall's folding tables already arranged in rows. She moved three chairs away from a radiator and taped a handwritten arrow beside the entrance. When the other adult volunteers arrived, nobody had to wait outside, and the opening session began on time. Ellis, the organizer, told a visitor, “Nora always knows how to make things run smoothly.” Nora replied, “I moved the chairs because I wanted people to reach the coat hooks.” She had not arranged the tables or planned the session. The previous evening's dance instructor had left the tables in that position, and two volunteers had arrived early with the repair kits. Nora spent the rest of the morning working at one table.",
+      "source_sha256": "44d8e7591d47f347d95b10f6438a8c9bf831cd1e1b81e61817f837fea57f807f"
+    },
+    {
+      "case_id": "original_synth_02",
+      "original_author_provenance": {
+        "author_role": "Fixture author separated from the runtime implementer for this assignment only",
+        "character_status": "All characters are fictional adults",
+        "consulted_material": "No runtime, existing benchmark cases, previous answers, repository reports, sibling conversations, external stories, or web sources were consulted",
+        "evaluation_status": "Development-exposed, agent-authored synthetic fixture; not human-authored, native benchmark, independent-writing-system, or final-sealed material",
+        "origin": "Original fictional text written from scratch for this assignment by an AI fixture-author agent",
+        "setting": "Gym reception shift"
+      },
+      "question": "Why did Amina take the extra reception shift?",
+      "question_sha256": "2b0c10677064a2fcbc5063c5efc185ed2e7eafb70355d7f4a9011e48b2a16798",
+      "source": "Amina, thirty-five, agreed to cover an extra evening at a small gym's reception desk. The manager, Gareth, thanked her in front of the adult staff and said, “She hates letting the team down.” Before the shift, Amina sent her sister a message: “I took tonight because I couldn't face sitting alone after my argument with Joel. Having something to do sounded easier.” Her sister answered with a heart. Amina checked membership cards, folded the spare towels, and left at closing. Gareth had not seen the message and did not ask why she had volunteered. Joel did not visit the gym that evening. Amina had covered one other extra shift that month, but nobody discussed her reason for that earlier shift.",
+      "source_sha256": "4cc2a3637c1475c8b59b25e6cce5e8c0057e280ee8b0c828548476d8137967fa"
+    },
+    {
+      "case_id": "original_synth_03",
+      "original_author_provenance": {
+        "author_role": "Fixture author separated from the runtime implementer for this assignment only",
+        "character_status": "All characters are fictional adults",
+        "consulted_material": "No runtime, existing benchmark cases, previous answers, repository reports, sibling conversations, external stories, or web sources were consulted",
+        "evaluation_status": "Development-exposed, agent-authored synthetic fixture; not human-authored, native benchmark, independent-writing-system, or final-sealed material",
+        "origin": "Original fictional text written from scratch for this assignment by an AI fixture-author agent",
+        "setting": "Apartment building parcel shelf"
+      },
+      "question": "Who deserves credit for keeping Victor's parcel dry?",
+      "question_sha256": "5a1f5773938187d815779e9533e650a9697294af7656e172a1b631001e59fa6c",
+      "source": "Victor, fifty, came home during heavy rain and found his cardboard parcel dry on the shelf inside the building's entrance. His adult neighbor Rina said, “Sol probably rescued it. I saw him carrying a box through here.” Rina had been returning from the shops and had not read the label on that box. Victor sent Sol, the caretaker, a thank-you message. Sol answered, “The box I carried was my replacement kettle. Your parcel was already on the shelf when I passed.” The delivery notice on Victor's phone said only that the parcel had been left at the building. It gave no location within the entrance. Neither Victor nor Rina had seen the delivery. Several residents and the cleaner had used the entrance that afternoon.",
+      "source_sha256": "cfef8f8f106858cba53667eac3315f86ab447513b347369b086f6d2863e90304"
+    },
+    {
+      "case_id": "original_synth_04",
+      "original_author_provenance": {
+        "author_role": "Fixture author separated from the runtime implementer for this assignment only",
+        "character_status": "All characters are fictional adults",
+        "consulted_material": "No runtime, existing benchmark cases, previous answers, repository reports, sibling conversations, external stories, or web sources were consulted",
+        "evaluation_status": "Development-exposed, agent-authored synthetic fixture; not human-authored, native benchmark, independent-writing-system, or final-sealed material",
+        "origin": "Original fictional text written from scratch for this assignment by an AI fixture-author agent",
+        "setting": "Adult evening language class"
+      },
+      "question": "How responsible was Adrian for sending the group to the wrong room?",
+      "question_sha256": "c99526b0b38d5b3846570393be2e709334ff4a537e8a5892bc71694e6dea60e7",
+      "source": "Adrian, twenty-nine, made a cardboard sign directing his adult language class to Room 6, using the coordinator's Monday message. On Tuesday evening, after Adrian had left home, the coordinator emailed that a plumbing problem had moved the class to Room 8. Adrian did not read that email until 8:40. At 8:25 he placed his sign in the corridor and guided four classmates to Room 6. Until he read the email, he believed the class was still meeting there. The group spent ten minutes outside the locked door before another learner found them. Adrian then checked his phone, changed the sign, and apologized. He could change the corridor sign himself; only the coordinator could allocate rooms. The account does not say whether Adrian normally checked messages on his journey.",
+      "source_sha256": "62f9abd70b926df76967aa49d19fcc53ad9828c2ed4a250eb581647b8d989f20"
+    },
+    {
+      "case_id": "original_synth_05",
+      "original_author_provenance": {
+        "author_role": "Fixture author separated from the runtime implementer for this assignment only",
+        "character_status": "All characters are fictional adults",
+        "consulted_material": "No runtime, existing benchmark cases, previous answers, repository reports, sibling conversations, external stories, or web sources were consulted",
+        "evaluation_status": "Development-exposed, agent-authored synthetic fixture; not human-authored, native benchmark, independent-writing-system, or final-sealed material",
+        "origin": "Original fictional text written from scratch for this assignment by an AI fixture-author agent",
+        "setting": "Supermarket checkout"
+      },
+      "question": "Was Marisol doing a friend a deliberate favor at the checkout?",
+      "question_sha256": "105879d5788a207c78c54a4f1b3dd1ab6bd54c67503fdb37b20d1742c198d04e",
+      "source": "Marisol, forty-four, scanned a customer's groceries and accepted a printed voucher for five euros off. The customer called her “Mari,” and she smiled. They had attended the same adult first-aid course the previous year; the account gives no other history between them. The queue was long, and Marisol did not turn the voucher over. After the customer left, her supervisor noticed that its reverse restricted it to a different brand of coffee. Marisol said, “I wanted to get the queue moving, and I thought it covered any coffee.” The discount remained on the completed receipt. The supervisor told another cashier that Marisol had “looked after a friend.” Marisol had authority to accept valid vouchers but needed approval to make other price reductions.",
+      "source_sha256": "f59eb57c238c8008b8f147c344685e8f9a9a677c72e0ccb6b5a115657547609d"
+    },
+    {
+      "case_id": "original_synth_06",
+      "original_author_provenance": {
+        "author_role": "Fixture author separated from the runtime implementer for this assignment only",
+        "character_status": "All characters are fictional adults",
+        "consulted_material": "No runtime, existing benchmark cases, previous answers, repository reports, sibling conversations, external stories, or web sources were consulted",
+        "evaluation_status": "Development-exposed, agent-authored synthetic fixture; not human-authored, native benchmark, independent-writing-system, or final-sealed material",
+        "origin": "Original fictional text written from scratch for this assignment by an AI fixture-author agent",
+        "setting": "Adult pottery studio"
+      },
+      "question": "Was Elise's cutting the pot an angry gesture at the tutor?",
+      "question_sha256": "2064d7daa95e19f988e5cf566c73af14bce214eaf22943b38ea7d1227b77e109",
+      "source": "Elise, thirty-eight, was shaping a tall clay vessel during an evening pottery session when its rim folded inward. She was disappointed by the collapse but wanted to preserve the solid lower section for a small planter. With a wire, she cut away the top half and set it in the reclaim bucket. Ben, another adult participant, whispered that she must be furious because the tutor had criticized the rim. The tutor had in fact suggested a thinner rim ten minutes earlier, but Elise had simply continued working. When asked about the cut, she said, “The bottom can still become something I can use.” She smoothed its edge and left it on the drying shelf. Ben did not ask her whether she was angry.",
+      "source_sha256": "44d67d674fb7fdbc407d1590645e87bc5e59f87df97b17d3844cf2ff07506735"
+    },
+    {
+      "case_id": "original_synth_07",
+      "original_author_provenance": {
+        "author_role": "Fixture author separated from the runtime implementer for this assignment only",
+        "character_status": "All characters are fictional adults",
+        "consulted_material": "No runtime, existing benchmark cases, previous answers, repository reports, sibling conversations, external stories, or web sources were consulted",
+        "evaluation_status": "Development-exposed, agent-authored synthetic fixture; not human-authored, native benchmark, independent-writing-system, or final-sealed material",
+        "origin": "Original fictional text written from scratch for this assignment by an AI fixture-author agent",
+        "setting": "Railway station waiting bench"
+      },
+      "question": "Is it fair to say Leon doesn't care about other passengers?",
+      "question_sha256": "be5ac654179854fa524e294dee116eda77822b00fb66baa818ee16e24082f9ed",
+      "source": "Leon, fifty-seven, sat on a station bench with a canvas tote on the place beside him. The platform was busy, although two seats remained free at the far end of the bench. He was looking up at the departure board when Mira, an adult traveler carrying a walking stick, asked to sit beside him. Leon immediately put the tote between his feet and shifted his coat away. They waited without speaking. When Mira boarded her train, Leon put the tote back on the empty place. A passenger across the platform remarked to his companion, “Some people don't care who needs a seat.” That passenger had arrived after Mira stood up. Leon's reason for putting the tote on the bench was never stated.",
+      "source_sha256": "58717d6bf192e63363257917424325fe082be57bcbd8c6e214dfeb673e6c593e"
+    },
+    {
+      "case_id": "original_synth_08",
+      "original_author_provenance": {
+        "author_role": "Fixture author separated from the runtime implementer for this assignment only",
+        "character_status": "All characters are fictional adults",
+        "consulted_material": "No runtime, existing benchmark cases, previous answers, repository reports, sibling conversations, external stories, or web sources were consulted",
+        "evaluation_status": "Development-exposed, agent-authored synthetic fixture; not human-authored, native benchmark, independent-writing-system, or final-sealed material",
+        "origin": "Original fictional text written from scratch for this assignment by an AI fixture-author agent",
+        "setting": "Hotel lost-property desk"
+      },
+      "question": "What part did Mateo play in returning Tomas's scarf?",
+      "question_sha256": "50b0c67f196041d4621908e8ffda794de4ccbc6269e8fbbcdac220981bd3831a",
+      "source": "Mateo, forty-six, noticed a blue scarf under a chair in the hotel lobby and pointed it out to Priya, the night clerk. Priya picked it up and placed it behind the desk. A luggage tag caught in its fringe carried the name Tomas Vale. Priya matched that name to an adult guest's reservation and emailed him, signing the message “Priya, reception.” At breakfast, Mateo told Lena, the incoming clerk, where the scarf was. Tomas collected it from Lena that afternoon. He later posted a thank-you naming Mateo, whose name he remembered from check-in. The post said Mateo had found, stored, and returned the scarf. Mateo had not seen Tomas collect it. Neither Mateo nor Priya explained why they had taken their respective steps.",
+      "source_sha256": "ab7ec9d3a5eac6e8ab0a24e7628dbfe54ea6ebf77bca06788371e76aa493f230"
+    },
+    {
+      "case_id": "original_synth_09",
+      "original_author_provenance": {
+        "author_role": "Fixture author separated from the runtime implementer for this assignment only",
+        "character_status": "All characters are fictional adults",
+        "consulted_material": "No runtime, existing benchmark cases, previous answers, repository reports, sibling conversations, external stories, or web sources were consulted",
+        "evaluation_status": "Development-exposed, agent-authored synthetic fixture; not human-authored, native benchmark, independent-writing-system, or final-sealed material",
+        "origin": "Original fictional text written from scratch for this assignment by an AI fixture-author agent",
+        "setting": "Amateur adult choir publicity"
+      },
+      "question": "Did Kiran cause people to arrive for the concert on the wrong evening?",
+      "question_sha256": "8c96277951754de3d09866f0166e4b5b5c586eaeb17ad3c2e014abcb1d1f8e17",
+      "source": "Kiran, thirty-two, drafted a flyer for his adult choir on Monday, using the Friday concert date the conductor, Freya, had given him. He put “draft” at the top and sent it to Bea, the publicity volunteer. On Tuesday, Freya moved the concert to Thursday and told the singers at rehearsal. Kiran was absent, and nobody sent him the change. Bea attended rehearsal but printed the old file on Wednesday without comparing its date to her notes. She removed the word “draft” before printing. Kiran did not see the printed flyers. After two audience members arrived on Friday, Freya asked him about the error. That was when he first learned the concert had moved. Bea acknowledged which file she had printed. The account does not explain why she overlooked the date.",
+      "source_sha256": "44be38fc360e20f64c7f7800712e42434af24d8d37cc53c85455265e54f2f17e"
+    },
+    {
+      "case_id": "original_synth_10",
+      "original_author_provenance": {
+        "author_role": "Fixture author separated from the runtime implementer for this assignment only",
+        "character_status": "All characters are fictional adults",
+        "consulted_material": "No runtime, existing benchmark cases, previous answers, repository reports, sibling conversations, external stories, or web sources were consulted",
+        "evaluation_status": "Development-exposed, agent-authored synthetic fixture; not human-authored, native benchmark, independent-writing-system, or final-sealed material",
+        "origin": "Original fictional text written from scratch for this assignment by an AI fixture-author agent",
+        "setting": "Community allotment watering"
+      },
+      "question": "Did Owen ruin Nessa's lettuce on purpose?",
+      "question_sha256": "0b25a05173f1f450bb8c6fe22397a68a643ebd872aa0ee28ae42664c1baa10a5",
+      "source": "Owen, sixty-one, opened the allotment tap for twenty minutes, following Ruth's request to water the communal flowers. He believed the attached hose still led only to that bed. Earlier that morning, Nessa had fitted a splitter that also fed her lettuce plot; Owen had neither seen the alteration nor been told about it. While the tap was running, water collected around Nessa's seedlings. Owen noticed the pooling when he went to close the tap and immediately disconnected the second branch. A cold snap followed overnight. The next afternoon, Nessa found several seedlings wilted and accused Owen of spoiling her crop because he disliked her. Owen said, “I was trying to water the flowers.” Nobody examined the plants closely enough to establish why they had wilted.",
+      "source_sha256": "0892a2fad9b35d9dd4b5936d4c6ece045d806ec33792d1586c86ff0028bb740a"
+    },
+    {
+      "case_id": "original_synth_11",
+      "original_author_provenance": {
+        "author_role": "Fixture author separated from the runtime implementer for this assignment only",
+        "character_status": "All characters are fictional adults",
+        "consulted_material": "No runtime, existing benchmark cases, previous answers, repository reports, sibling conversations, external stories, or web sources were consulted",
+        "evaluation_status": "Development-exposed, agent-authored synthetic fixture; not human-authored, native benchmark, independent-writing-system, or final-sealed material",
+        "origin": "Original fictional text written from scratch for this assignment by an AI fixture-author agent",
+        "setting": "Workplace canteen lunch"
+      },
+      "question": "What was behind Daria's quiet reaction to lunch?",
+      "question_sha256": "f81b1b31a6a9ae5efd8f7788b1b4eaae15898af62b952a9326addb9cf9de0015",
+      "source": "Daria, forty, accepted a bowl of soup that her adult colleague Felix had brought for the canteen's shared lunch. As she sat down, her elbow knocked a spoon onto the floor. She retrieved it, took two bites with a clean spoon, and answered Felix's question about the soup with a quiet “Thanks.” Felix later told another colleague that Daria obviously disliked his cooking. That afternoon, Daria messaged a friend: “The soup was lovely. I went quiet because I was embarrassed about making a clatter when everyone had just settled down.” Felix had not seen that message. Daria finished her bowl before returning to work. Nobody else described her expression, and the account includes no later conversation between Daria and Felix about lunch.",
+      "source_sha256": "739bd072edf8146641d01b92a06973c084a84e241922ae3d3e8c3723533e5d9c"
+    },
+    {
+      "case_id": "original_synth_12",
+      "original_author_provenance": {
+        "author_role": "Fixture author separated from the runtime implementer for this assignment only",
+        "character_status": "All characters are fictional adults",
+        "consulted_material": "No runtime, existing benchmark cases, previous answers, repository reports, sibling conversations, external stories, or web sources were consulted",
+        "evaluation_status": "Development-exposed, agent-authored synthetic fixture; not human-authored, native benchmark, independent-writing-system, or final-sealed material",
+        "origin": "Original fictional text written from scratch for this assignment by an AI fixture-author agent",
+        "setting": "Library adult reading group"
+      },
+      "question": "Was Chen only using Ruth as an excuse for the anonymous ballot?",
+      "question_sha256": "7521f496ea5ee0dad5482a89315eb73f6758c7eecd5425bb9e86ef4c90148495",
+      "source": "At an adult reading group's monthly meeting, Chen, fifty-two, suggested choosing the next book by anonymous paper ballot. He genuinely wanted Ruth, the newest member, to feel free to reject the chair's suggestion. He also hoped to conceal his own vote against a novel recommended by his close friend Alana. Chen told the group, “It might be easier for newcomers if nobody has to raise a hand.” The members agreed, and the chair collected the folded slips. Chen did not count them and never learned how Ruth voted. A week later, Ruth told him she had felt comfortable disagreeing openly from the start. Chen had believed otherwise during the meeting. Alana subsequently called the ballot “just an excuse to hide his own choice,” after Chen admitted that he had wanted privacy too.",
+      "source_sha256": "d156413ae3aefa53a3a30a54449340e209074d72c10c8004c788cde75026e483"
+    }
+  ],
+  "classification": "AGENT_AUTHORED_SYNTHETIC_DEVELOPMENT_DIAGNOSTIC",
+  "dataset_id": "HCL/SID001-original-synthetic-source-inference",
+  "final_confirmation": "CONSUMED_FOR_FINAL_CONFIRMATION",
+  "limits": [
+    "Exactly twelve original, fictional, adult-character cases in distinct ordinary settings",
+    "Agent-authored synthetic material, exposed during development",
+    "Role separation from the runtime implementer does not establish statistical independence or an independent writing system",
+    "Not a native benchmark, not human-authored material, and not a final-sealed evaluation set",
+    "Performance on these cases does not establish population-level accuracy, general utility, or broad validity",
+    "No external provider API calls, browsing, paid services or external stories were used for fixture creation; the text itself was generated by an AI author.",
+    "Rubrics are separated structurally in this file; they are not sealed or access-controlled by this artifact",
+    "Each source is complete for the question; missing details must not be filled by an imagined continuation"
+  ],
+  "rights_basis": "Original synthetic fiction generated for this project; no third-party source text consulted or reproduced; no external dataset license claimed.",
+  "schema": "hcl-source-inference-synthetic-cases-v1",
+  "source_author_artifact_sha256": "b55b9ff567d2d1c10874ea1876c873b1df5c86ff4c57a781756d231993b85266",
+  "source_selection": "ALL_TWELVE_AUTHOR_CASES_BEFORE_ANY_MODEL_OUTPUT_OR_TREATMENT_INSPECTION",
+  "writing_system_id": "assistant-authored-sid001-source-inference-20261001"
+}
