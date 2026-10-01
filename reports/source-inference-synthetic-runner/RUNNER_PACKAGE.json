@@ -1,0 +1,21 @@
+{
+  "all_slot_reservation_usd": "1.45776312",
+  "authority": "SEPARATE_EXACT_ONE_OFF_GRANT_REQUIRED; MANIFEST_CONFERS_NONE",
+  "credential_reference": "github-actions:repository-secret:DEEPSEEK_API_KEY",
+  "execution_file_sha256": {
+    ".github/frozen/hcl-sid001-once.yml": "b8862ca3067928d5bf5cba3af36d4e61f8b26efccd382add3933ca3abe0543b1",
+    ".github/workflows/hcl-source-inference-runner-provider-free.yml": "e36a68963c818f9560e9021f3ae59f2904ba8e11dbc50f3a96878b249be5686f",
+    "docs/HCL_SOURCE_INFERENCE_SYNTHETIC_RUNNER.md": "9fc9117a184044acfdce396c875469650fcdc500df2262a650ad84bea422eeeb",
+    "reports/source-inference-synthetic-runner/PRICING_REFRESH.json": "edd920999b48ecb5f0f7c0c53ba58967618edde180531c55df6e6d1baf02432c",
+    "scripts/run_source_inference_synthetic_once.py": "b364590e9826e1225ccb328f7dd4693428eed0ba5fe39f39f2f44cd7372b56bc",
+    "tests/test_source_inference_synthetic_runner.py": "7d3d9c958d4b27487f2807f9b5664a4d371cf50507ca3e66969584d52b0e72d6"
+  },
+  "extraction_calls": 0,
+  "hard_cap_usd": "2.50",
+  "maximum_answer_calls": 36,
+  "paid_judge_calls": 0,
+  "protocol_sha256": "3f06c553b8cdfc9cb9836e4500f260d84ef67815a8bab6223de6312bdf4e7332",
+  "retries": 0,
+  "schema": "hcl-sid001-runner-v1",
+  "slot_sha256": "17b6ee4f8c25d803bb9533e079610f781f69f6e938fe0798b0602780d3efaa36"
+}

@@ -1,0 +1,7 @@
+{
+  "historical_grant_transfer": false,
+  "maximum_calls": 0,
+  "remaining_usd": 0,
+  "schema": "hcl-sid001-one-off-grant-v1",
+  "status": "NOT_GRANTED"
+}
