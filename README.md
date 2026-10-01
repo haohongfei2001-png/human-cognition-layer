@@ -14,7 +14,24 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: FRESH_HIGH_INFORMATION_PUBLIC_DEVELOPMENT_REALITY_CHECK**
+**NEXT_READY: DRC007_FROZEN_HIGH_INFORMATION_DEVELOPMENT_REALITY_CHECK**
+
+[DRC007 protocol](docs/HCL_DRC007_DEVELOPMENT_PROTOCOL.md): six concrete-new hard/expert
+public community ToM knowledge/deception/higher-order tasks; original native source /
+question/reference/aliases/rubric retained, reference withheld from equal answer arms.
+Strong Base/current certified v23 H,same V4 Pro/high,12finalcalls/0extraction/0retry,
+new USD0.55cap/peak reserveUSD0.48461688. Unmodified author Layer1 freeform scorer,
+ambiguous UNSCORED/source/format audit separate; no semantic-certification claim.
+27local/source/scorer checks; cloud prior-history/exact-head/main CI before unique
+transport. Actual treatment0/6 disclosed, no isolated efficacy claim. Small community
+MIT development-exposed/final-consumed, no human/source/pretraining final independence.
+Hi-ToM/CogToM consumed,not rerun; RecToM unclear license,deferred without data. No new
+credential/setup,old budgets,LongMemEval,leaderboard or final reviewer/source daily
+stop. Immediately source-first close and continue general coverage/cost development.
+
+## v23 preserved implementation snapshot
+
+**Historical queue snapshot: FRESH_HIGH_INFORMATION_PUBLIC_DEVELOPMENT_REALITY_CHECK**
 
 [Mixed narration admission v23](docs/HCL_DEVELOPMENT_MIXED_NARRATION_V23.md): bounded
 ordinary material context no longer suppresses complete named narrator attribution;
