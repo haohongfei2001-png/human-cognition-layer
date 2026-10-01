@@ -152,3 +152,9 @@ and C01/C03 composition without narrator→own belief, denial→opposite or priv
 Actual shared source revision/checked claims support final input, inner challenge blocks
 it.8new/163focused checks, authored Git-v21 before/after composition/revision witness,
 0livecalls/spend, IMPLEMENTED_UNVALIDATED/no new family/history or efficacy upgrade.
+
+DRC006 certified v22 native BigToM development Base/P/H6/6,0gains/0harms,
+checked treatment0/6:INCONCLUSIVE (strong-Base ceiling/absent treatment), no family
+or historical upgrade.18calls/0extraction/0retry,peakUSD0.10255080/invoiceunknown,
+grant0/triggergone,130-file exact archive/raw/hash; all opened distribution excluded
+from final. Next general mixed-narration attribution admission, no native-item patch.
