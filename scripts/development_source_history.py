@@ -4,6 +4,7 @@ This gate is not a rights decision, freshness proof, final qualification or live
 experiment grant. Consumed replay packages keep their exact historical scanners.
 """
 import subprocess
+from pathlib import Path
 
 from scripts.i02_exposure_history_v3 import audit_history, _git
 
@@ -23,6 +24,19 @@ def screen_development_source(repository, source):
         partial = b''  # Git status 1 means no matching configuration key.
     if partial.strip():
         raise ValueError('partial/promisor repositories require complete local history before screening')
+    # Replacement/graft views can hide a former protected path without making
+    # Git call the checkout shallow. Reject the view before blob inventory.
+    if _git(repository, 'replace', '--list').strip():
+        raise ValueError('replacement history is unsupported for source screening')
+    graft_path = Path(_git(repository, 'rev-parse', '--git-path', 'info/grafts').decode().strip())
+    if not graft_path.is_absolute():
+        graft_path = Path(repository) / graft_path
+    try:
+        graft_path.lstat()
+    except FileNotFoundError:
+        pass
+    else:
+        raise ValueError('grafted history is unsupported for source screening')
     receipt = audit_history(repository, source)
     return dict(schema='hcl-development-source-history-preflight-v1',
         history=receipt,

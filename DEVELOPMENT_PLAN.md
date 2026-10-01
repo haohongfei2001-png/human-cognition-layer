@@ -37,7 +37,8 @@ This negative selection result does not adopt v25 or replace the canonical queue
 
 [Current source-history gate](docs/HCL_CURRENT_SOURCE_HISTORY_GATE.md): fresh
 provider-free source preparation uses full Git object IDs and merge-aware history,
-refusing shallow/partial repositories before blob inventory or content reads. Renamed/copied sealed objects remain excluded. This
+refusing shallow/partial or replacement/graft history views before blob inventory
+or content reads. Renamed/copied sealed objects remain excluded. This
 isolates the existing privacy guard from unadopted SID001 protocol/prompt branches;
 legacy consumed scanners and receipts remain immutable. A clean scan grants no
 rights, source qualification or provider spending.

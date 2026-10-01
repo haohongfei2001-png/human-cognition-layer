@@ -59,3 +59,18 @@ source/gold, private raw experiment output or LongMemEval content is read or
 published. Currently reachable history is the scope; deleted refs, model training
 and semantic independence are not proved. Canonical capability and evaluation
 priorities remain unchanged.
+
+## Follow-up: reject rewritten local history views
+
+A further synthetic regression reproduced a full, non-shallow checkout whose
+replacement commit hides the former protected path while retaining the same blob
+at an ordinary path. The body-read trap refused the attempted read. A legacy graft
+can similarly cut away the necessary ancestry. The fresh entry now rejects any
+replacement refs or existing graft metadata before calling the scanner. It reads
+only the metadata presence, not graft contents or protected blob bodies, and does
+not edit the caller's repository settings.
+
+Two real temporary-repository fixtures cover replacement and graft views. The
+combined current/v2/legacy guard suite now passes 16 tests; previously frozen
+scanner bytes and historical receipts remain unchanged. This is a targeted privacy
+precondition repair, not a new source qualification or model experiment.
