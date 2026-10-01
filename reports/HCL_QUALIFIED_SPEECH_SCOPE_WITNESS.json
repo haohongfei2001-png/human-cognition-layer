@@ -1,0 +1,155 @@
+{
+  "schema": "hcl-qualified-speech-scope-witness-v1",
+  "runtime_sha256": "93216d053af4f177a1d2a58802abfc5735086a8c0b53378bc7a8219d3708d5df",
+  "cases": [
+    {
+      "case": "ordinary_statement",
+      "source": "Eva said, “I believe the gate is clear.”",
+      "source_sha256": "eb3de1a6ce395c7eea3237aaef45527e2b98f7be26bed06757e9910408938009",
+      "source_complete": true,
+      "checked_treatment_present": true,
+      "checked_speakers": [
+        "Eva"
+      ],
+      "extraction_calls": 0
+    },
+    {
+      "case": "inline_hypothetical",
+      "source": "In a hypothetical scenario, Eva said, “I believe the gate is clear.”",
+      "source_sha256": "46d24d53eefb3733742caad75fc5bfa728e932e3954e2b2a78148f176e0db51e",
+      "source_complete": true,
+      "checked_treatment_present": false,
+      "checked_speakers": [],
+      "extraction_calls": 0
+    },
+    {
+      "case": "inline_counterfactual",
+      "source": "In a counterfactual scenario, Eva said, “I believe the gate is clear.”",
+      "source_sha256": "7f4679d44d6a8fc8ae822de3fe77971a8ce5f2b69a795b5be72b6720e18d84f4",
+      "source_complete": true,
+      "checked_treatment_present": false,
+      "checked_speakers": [],
+      "extraction_calls": 0
+    },
+    {
+      "case": "imagined_preamble",
+      "source": "The following conversation was imagined. Eva said, “I believe the gate is clear.”",
+      "source_sha256": "e8b0c5e0c752d69572e8c1e08d419b044d744bb4c72d250609ac5e08c177cc1d",
+      "source_complete": true,
+      "checked_treatment_present": false,
+      "checked_speakers": [],
+      "extraction_calls": 0
+    },
+    {
+      "case": "actual_discussion",
+      "source": "After reading a hypothetical example, Eva said, “I believe the gate is clear.”",
+      "source_sha256": "a48100e0be05b1656cdff3fb17839e2d0baa375ba42ab8383df20dfd1201e1c3",
+      "source_complete": true,
+      "checked_treatment_present": true,
+      "checked_speakers": [
+        "Eva"
+      ],
+      "extraction_calls": 0
+    },
+    {
+      "case": "actual_resumption",
+      "source": "The following conversation was imagined. Eva said, “I believe the gate is clear.” In reality, Noor said, “I believe the gate is blocked.”",
+      "source_sha256": "f42de4398840a3c45e08d40afb4f840a7008c24c3277feeca73070e2850ac9b5",
+      "source_complete": true,
+      "checked_treatment_present": true,
+      "checked_speakers": [
+        "Noor"
+      ],
+      "extraction_calls": 0
+    }
+  ],
+  "origin": "NEW_AUTHORED_PROVIDER_FREE_CORRECTNESS_CONTRASTS",
+  "provider_calls": 0,
+  "answer_calls": 0,
+  "provider_spend_usd": 0,
+  "semantic_answer_improvement_established": false,
+  "native_task_utility_established": false,
+  "scope": "BOUNDED_SOURCE_QUALIFICATION_NOT_GENERAL_DISCOURSE_UNDERSTANDING",
+  "before": {
+    "schema": "hcl-qualified-speech-scope-witness-v1",
+    "runtime_sha256": "2431e17380954451096aa3369b8860317e24e6be25250b6f7bc94fbc43b61ec9",
+    "cases": [
+      {
+        "case": "ordinary_statement",
+        "source": "Eva said, “I believe the gate is clear.”",
+        "source_sha256": "eb3de1a6ce395c7eea3237aaef45527e2b98f7be26bed06757e9910408938009",
+        "source_complete": true,
+        "checked_treatment_present": true,
+        "checked_speakers": [
+          "Eva"
+        ],
+        "extraction_calls": 0
+      },
+      {
+        "case": "inline_hypothetical",
+        "source": "In a hypothetical scenario, Eva said, “I believe the gate is clear.”",
+        "source_sha256": "46d24d53eefb3733742caad75fc5bfa728e932e3954e2b2a78148f176e0db51e",
+        "source_complete": true,
+        "checked_treatment_present": true,
+        "checked_speakers": [
+          "Eva"
+        ],
+        "extraction_calls": 0
+      },
+      {
+        "case": "inline_counterfactual",
+        "source": "In a counterfactual scenario, Eva said, “I believe the gate is clear.”",
+        "source_sha256": "7f4679d44d6a8fc8ae822de3fe77971a8ce5f2b69a795b5be72b6720e18d84f4",
+        "source_complete": true,
+        "checked_treatment_present": true,
+        "checked_speakers": [
+          "Eva"
+        ],
+        "extraction_calls": 0
+      },
+      {
+        "case": "imagined_preamble",
+        "source": "The following conversation was imagined. Eva said, “I believe the gate is clear.”",
+        "source_sha256": "e8b0c5e0c752d69572e8c1e08d419b044d744bb4c72d250609ac5e08c177cc1d",
+        "source_complete": true,
+        "checked_treatment_present": true,
+        "checked_speakers": [
+          "Eva"
+        ],
+        "extraction_calls": 0
+      },
+      {
+        "case": "actual_discussion",
+        "source": "After reading a hypothetical example, Eva said, “I believe the gate is clear.”",
+        "source_sha256": "a48100e0be05b1656cdff3fb17839e2d0baa375ba42ab8383df20dfd1201e1c3",
+        "source_complete": true,
+        "checked_treatment_present": true,
+        "checked_speakers": [
+          "Eva"
+        ],
+        "extraction_calls": 0
+      },
+      {
+        "case": "actual_resumption",
+        "source": "The following conversation was imagined. Eva said, “I believe the gate is clear.” In reality, Noor said, “I believe the gate is blocked.”",
+        "source_sha256": "f42de4398840a3c45e08d40afb4f840a7008c24c3277feeca73070e2850ac9b5",
+        "source_complete": true,
+        "checked_treatment_present": true,
+        "checked_speakers": [
+          "Eva",
+          "Noor"
+        ],
+        "extraction_calls": 0
+      }
+    ],
+    "origin": "NEW_AUTHORED_PROVIDER_FREE_CORRECTNESS_CONTRASTS",
+    "provider_calls": 0,
+    "answer_calls": 0,
+    "provider_spend_usd": 0,
+    "semantic_answer_improvement_established": false,
+    "native_task_utility_established": false,
+    "scope": "BOUNDED_SOURCE_QUALIFICATION_NOT_GENERAL_DISCOURSE_UNDERSTANDING"
+  },
+  "before_main_commit": "70db8a0866394fcfcda3397c2a5ee297e2797009",
+  "before_runtime_tree": "306a7ab5d819bedb5e2b377fcb18f93506a44efa"
+}

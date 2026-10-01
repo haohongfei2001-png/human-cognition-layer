@@ -40,7 +40,7 @@ class ReaderFinalBudgetTests(unittest.TestCase):
         exec(compile(text, str(ARCHIVE) + ':reader_entry.py', 'exec'), cls.old.__dict__)
 
     def test_current_amendment_and_wrong_digest(self):
-        from scripts.development_reader_final_budget_amendment import validate_current
+        from scripts.development_qualified_speech_amendment import validate_current
         self.assertTrue(validate_current())
         with self.assertRaises(ValueError):
             validate_current(current_digest='0' * 64)

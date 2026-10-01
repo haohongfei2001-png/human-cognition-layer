@@ -1,0 +1,15 @@
+{
+  "amended_hcl_runtime_sha256": "93216d053af4f177a1d2a58802abfc5735086a8c0b53378bc7a8219d3708d5df",
+  "answer_gain_claimed": false,
+  "changed_runtime_files": [
+    "hcl/cognition/semantic.py"
+  ],
+  "development_only": true,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "new_prompt_instruction": false,
+  "previous_hcl_runtime_sha256": "2431e17380954451096aa3369b8860317e24e6be25250b6f7bc94fbc43b61ec9",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "reason": "PRESERVE_EXPLICIT_HYPOTHETICAL_SPEECH_SCOPE",
+  "schema": "hcl-development-qualified-speech-amendment-v1"
+}
