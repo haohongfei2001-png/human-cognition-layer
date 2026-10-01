@@ -13,6 +13,18 @@ from .retained import (prepare_retained_reader, original_sources_from_messages,
                        audit_supplied_source_citations)
 
 
+_FINAL_ANSWER_POLICY = (
+    'Return exactly answer, source_citations, uncertainty and assumptions in one JSON object. '
+    'Quote only supplied original sources. Source provenance does not certify semantics, '
+    'private state or world truth.'
+)
+
+
+def _require_delivery_budget(messages, maximum):
+    if len(json.dumps(messages, ensure_ascii=False)) > maximum:
+        raise ValueError('complete reader final answer contract exceeds context budget; no truncation')
+
+
 @dataclass(frozen=True)
 class ReaderEntry:
     prepared: object
@@ -107,6 +119,14 @@ def _local(workspace, query, source_id, max_chars):
 
 def prepare_reader_entry(workspace, query, *, source_ids, backend=None,
                          max_chars=64000, compact_context=True, allow_translation=False):
+    """Standalone preparation retains the original message and parser budget."""
+    return _prepare_reader_entry(workspace, query, source_ids=source_ids, backend=backend,
+        max_chars=max_chars, compact_context=compact_context, allow_translation=allow_translation)
+
+
+def _prepare_reader_entry(workspace, query, *, source_ids, backend=None,
+                          max_chars=64000, compact_context=True, allow_translation=False,
+                          delivery_max_chars=None):
     """Local first; optional extraction requires allow_translation=True, no answer call.
 
     Invalid/stale support, unknown transport failure and budget errors in the
@@ -122,6 +142,10 @@ def prepare_reader_entry(workspace, query, *, source_ids, backend=None,
     if re.search(r'\b(?:At statement|before statement|after statement)\s+\d+', query, re.I):
         raise ValueError('project source explicitly before adaptive reader statement snapshot')
     local = _local(workspace, query, source_ids[0], max_chars)
+    # The unexecuted intermediate parser keeps max_chars. Only the actual
+    # selected messages must leave room for the fixed final instruction.
+    if delivery_max_chars is not None:
+        _require_delivery_budget(local.current_messages(workspace), delivery_max_chars)
     prep = json.loads(local.preparation_json)
     receipt = dict(schema='hcl-adaptive-reader-entry-v1',
         source_versions=list(local.source_versions), selection='LOCAL_COMPLETE_SOURCE',
@@ -163,16 +187,25 @@ def prepare_reader_entry(workspace, query, *, source_ids, backend=None,
         receipt.update(extraction_calls=len(relay.requests),
             extraction_requests=relay.requests, extraction_responses=relay.responses)
     selected.current_messages(workspace)
+    if delivery_max_chars is not None:
+        _require_delivery_budget(selected.messages, delivery_max_chars)
     receipt['actual_final_messages'] = selected.messages
     return ReaderEntry(selected, json.dumps(receipt, ensure_ascii=False, sort_keys=True))
 
 
 def answer_reader_entry(workspace, query, answer_backend, **kwargs):
     """One final call; source audit never rewrites raw output or retries."""
-    entry = prepare_reader_entry(workspace, query, **kwargs)
+    max_chars = kwargs.get('max_chars', 64000)
+    if type(max_chars) is not int or not 512 <= max_chars <= 64000:
+        raise ValueError('bounded reader final context budget required')
+    final_instruction = dict(role='system', content=_FINAL_ANSWER_POLICY)
+    reserved_chars = 2 + len(json.dumps(final_instruction, ensure_ascii=False))
+    entry = _prepare_reader_entry(workspace, query, **kwargs,
+        delivery_max_chars=max_chars - reserved_chars)
     messages = entry.current_messages(workspace)
     original_sources_from_messages(messages)
-    messages = [*messages, dict(role='system', content='Return exactly answer, source_citations, uncertainty and assumptions in one JSON object. Quote only supplied original sources. Source provenance does not certify semantics, private state or world truth.')]
+    messages = [*messages, final_instruction]
+    _require_delivery_budget(messages, max_chars)
     raw = (answer_backend.complete(messages) if hasattr(answer_backend, 'complete')
            else answer_backend(messages))
     audit = audit_supplied_source_citations(messages, raw)
@@ -186,4 +219,9 @@ def answer_reader_entry(workspace, query, answer_backend, **kwargs):
         assumptions='No private state, world fact or moral judgment is established.'))
     return dict(answer=answer, answer_raw=raw, source_citation_audit=audit,
         prepared=entry, actual_final_messages=messages, answer_adapter_calls=1,
-        preparation_provider_calls=entry.receipt['extraction_calls'])
+        preparation_provider_calls=entry.receipt['extraction_calls'],
+        answer_context_budget=dict(max_chars=max_chars,
+            reserved_final_instruction_characters=reserved_chars,
+            prepared_message_budget_characters=max_chars - reserved_chars,
+            intermediate_preparation_limit_characters=max_chars,
+            actual_message_characters=len(json.dumps(messages, ensure_ascii=False))))

@@ -1,0 +1,15 @@
+{
+  "amended_hcl_runtime_sha256": "2431e17380954451096aa3369b8860317e24e6be25250b6f7bc94fbc43b61ec9",
+  "answer_gain_claimed": false,
+  "changed_runtime_files": [
+    "hcl/cognition/reader_entry.py"
+  ],
+  "development_only": true,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "new_prompt_instruction": false,
+  "previous_hcl_runtime_sha256": "c8045636a66d216fdd4fe7e1f081eeddf430393fcfdc1ba7ec75a00ad14f7963",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "reason": "ENFORCE_FINAL_CONTEXT_LIMIT_WITH_UNCHANGED_V24_MESSAGE_CONTENT",
+  "schema": "hcl-development-reader-final-budget-amendment-v1"
+}
