@@ -128,6 +128,32 @@ class DevelopmentSourceHistoryTests(unittest.TestCase):
                     scan.assert_not_called()
                 git(self.root, 'config', '--unset', key)
 
+    def test_replaced_protected_history_refuses_before_blob_inventory(self):
+        self.commit('LongMemEval-synthetic-only.txt', SOURCE)
+        original = git(self.root, 'rev-parse', 'HEAD')
+        git(self.root, 'mv', 'LongMemEval-synthetic-only.txt', 'ordinary.txt')
+        git(self.root, 'commit', '-qm', 'synthetic rename')
+        tree = git(self.root, 'rev-parse', 'HEAD^{tree}')
+        replacement = subprocess.check_output(
+            ['git', '-C', str(self.root), 'commit-tree', tree],
+            input='synthetic replacement root\n', text=True).strip()
+        git(self.root, 'replace', original, replacement)
+        with patch.object(entry, 'audit_history') as scan:
+            with self.assertRaisesRegex(ValueError, 'replacement history'):
+                entry.screen_development_source(self.root, OTHER)
+            scan.assert_not_called()
+
+    def test_grafted_protected_history_refuses_before_blob_inventory(self):
+        self.commit('LongMemEval-synthetic-only.txt', SOURCE)
+        git(self.root, 'mv', 'LongMemEval-synthetic-only.txt', 'ordinary.txt')
+        git(self.root, 'commit', '-qm', 'synthetic rename')
+        graft = self.root / '.git' / 'info' / 'grafts'
+        graft.write_text(git(self.root, 'rev-parse', 'HEAD') + '\n')
+        with patch.object(entry, 'audit_history') as scan:
+            with self.assertRaisesRegex(ValueError, 'grafted history'):
+                entry.screen_development_source(self.root, OTHER)
+            scan.assert_not_called()
+
 
 if __name__ == '__main__':
     unittest.main()
