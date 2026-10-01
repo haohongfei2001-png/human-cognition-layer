@@ -1,0 +1,235 @@
+{
+  "cases": [
+    {
+      "case_id": "tombench/False_Belief_Task/211",
+      "dataset": "zhchen18/ToMBench",
+      "gold": "C",
+      "license": "MIT",
+      "native_file": "data/False Belief Task.jsonl",
+      "native_row_index": 211,
+      "native_row_sha256": "9cf124934d6b261f9b9bf54999ec37828942594cebb22c7ea617e7ccf2b2e0d2",
+      "question": "Where is the shirt before?",
+      "scope": "ENGLISH_NATIVE_OPTION_AGREEMENT_SUBSET_NOT_FULL_BENCHMARK_SCORE",
+      "source": "Xiao Gang and Zhang Wei are strolling on the terrace, they see a box and a drawer, they find a shirt in the box, Zhang Wei leaves the terrace, Xiao Gang moves the shirt to the drawer.",
+      "source_sha256": "695a9cd68fc66a2739e1cfa64afbed06f08721dac31befeb0ab5f6157c03d943",
+      "task": {
+        "interpretation": "Predict the dataset option under the supplied story; no actual private-state/world truth certificate.",
+        "labels": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "options": {
+          "A": "Drawer",
+          "B": "Handbag",
+          "C": "Box",
+          "D": "Basket"
+        }
+      }
+    },
+    {
+      "case_id": "tombench/False_Belief_Task/212",
+      "dataset": "zhchen18/ToMBench",
+      "gold": "A",
+      "license": "MIT",
+      "native_file": "data/False Belief Task.jsonl",
+      "native_row_index": 212,
+      "native_row_sha256": "ee4f2bd4a0fc87ded688280d3089c6853760562ac8dd25b5946f07b24151ea7a",
+      "question": "After Zhang Wei returns to the terrace, where does Xiao Gang look for the shirt?",
+      "scope": "ENGLISH_NATIVE_OPTION_AGREEMENT_SUBSET_NOT_FULL_BENCHMARK_SCORE",
+      "source": "Xiao Gang and Zhang Wei are strolling on the terrace, they see a box and a drawer, they find a shirt in the box, Zhang Wei leaves the terrace, Xiao Gang moves the shirt to the drawer.",
+      "source_sha256": "695a9cd68fc66a2739e1cfa64afbed06f08721dac31befeb0ab5f6157c03d943",
+      "task": {
+        "interpretation": "Predict the dataset option under the supplied story; no actual private-state/world truth certificate.",
+        "labels": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "options": {
+          "A": "Drawer",
+          "B": "Storage locker",
+          "C": "Backpack",
+          "D": "Box"
+        }
+      }
+    },
+    {
+      "case_id": "tombench/Knowledge-Attention_Links/7",
+      "dataset": "zhchen18/ToMBench",
+      "gold": "B",
+      "license": "MIT",
+      "native_file": "data/Knowledge-Attention Links.jsonl",
+      "native_row_index": 7,
+      "native_row_sha256": "0a8d6c0f0d2a863bc686e2d4ab746ba66542db0d7ce7794865c92376d62a9371",
+      "question": "What does Xiao Gang most likely do?",
+      "scope": "ENGLISH_NATIVE_OPTION_AGREEMENT_SUBSET_NOT_FULL_BENCHMARK_SCORE",
+      "source": "On a winter vacation night, Zhang Lei, Wang Li, and Xiao Gang play toys together at home. They first play with the first novel toy - a transforming robot, then they play with the second novel toy - colorful balloons. At this time, Zhang Lei says, \"I go to adjust the room's air conditioning temperature\", gets up and walks towards the air conditioner, and watches them continue to play. Wang Li says, \"Oh, he is there, it doesn't matter, but he still watches us, so we continue to play.\" Wang Li and Xiao Gang play with the third novel toy - an electric airplane. After playing, they put all three toys in a plate on the table. At this time, Zhang Lei comes back for a while, looks at the three toys in the tray, and excitedly says, \"Oh, look! Look at that toy!\", \"Xiao Gang, can you pass it to me?\"",
+      "source_sha256": "14b4de56f5a333a6b13914dfe56140f1a86cae5959b63cf9b3b1b914e5e45b46",
+      "task": {
+        "interpretation": "Predict the dataset option under the supplied story; no actual private-state/world truth certificate.",
+        "labels": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "options": {
+          "A": "Xiao Gang picks out the transforming robot and gives it to Zhang Lei",
+          "B": "Gang randomly picks a toy from the three toys and gives it to Zhang Lei",
+          "C": "Xiao Gang picks out the electric airplane and gives it to Zhang Lei",
+          "D": "Xiao Gang picks out the colorful balloon and gives it to Zhang Lei"
+        }
+      }
+    },
+    {
+      "case_id": "tombench/Knowledge-Attention_Links/5",
+      "dataset": "zhchen18/ToMBench",
+      "gold": "A",
+      "license": "MIT",
+      "native_file": "data/Knowledge-Attention Links.jsonl",
+      "native_row_index": 5,
+      "native_row_sha256": "f678efdc8bdafa2e2e2c3b8a15258016667e452cfeee75e9ab7333439ea2fe5c",
+      "question": "What does Xiao Li most likely do?",
+      "scope": "ENGLISH_NATIVE_OPTION_AGREEMENT_SUBSET_NOT_FULL_BENCHMARK_SCORE",
+      "source": "On a winter vacation evening, Li Juan, Wang Hao, and Xiao Li play toys together at home. They first play with the first novel toy - a light and shadow projector, then they play with the second novel toy - a wireless remote control car. At this time, Li Juan says, \"I go to adjust the curtains in the room\", she gets up and walks towards the curtains, and watches them continue to play. Wang Hao says, \"Oh, she is there, it does not matter, but she still watches us, so we continue to play.\" Wang Hao and Xiao Li play with the third novel toy - an intelligent flyer. After playing, they put all three toys in a plate on the table. After a while, Li Juan returns to the side of the objects, looks at the three toys in the plate, and excitedly says, \"Oh, look! Look at that toy!\", \"Xiao Li, can you pass it to me?\"",
+      "source_sha256": "3ae6f96e38cf126a6550c7aa76f0bd7ff6be3457dfbba1c8d34f5dbfe99f765e",
+      "task": {
+        "interpretation": "Predict the dataset option under the supplied story; no actual private-state/world truth certificate.",
+        "labels": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "options": {
+          "A": "Xiao Li randomly picks a toy from the three toys and gives it to Li Juan",
+          "B": "Xiao Li picks out the wireless remote control car and gives it to Li Juan",
+          "C": "Xiao Li picks out the intelligent flyer and gives it to Li Juan",
+          "D": "Xiao Li picks out the light and shadow projector and gives it to Li Juan"
+        }
+      }
+    },
+    {
+      "case_id": "normad/1519",
+      "dataset": "akhilayerukola/NormAd",
+      "gold": "no",
+      "license": "CC-BY-4.0",
+      "native_file": "normad_etiquette_final_data.csv",
+      "native_row_index": 1519,
+      "native_row_sha256": "9289940f934e4fcaf2deed3024db2a001bf915031d6221c7000cf966a177b0b3",
+      "question": "Under only the supplied Rule-of-Thumb, is the action in the situation socially acceptable?",
+      "scope": "NATIVE_RULE_OF_THUMB_LABEL_AGREEMENT_WITHOUT_COUNTRY_VALUE_BACKGROUND_NOT_MORAL_TRUTH_OR_FULL_BENCHMARK_SCORE",
+      "source": "Supplied contextual Rule-of-Thumb: It is correct to use the right hand, or both hands together, when passing objects.\nSituation: At a family gathering, Rachel needed to hand a gift to her uncle. She used her left hand to give it to him. Is what Rachel did acceptable?",
+      "source_sha256": "e9451c3c7033081484c1998d53d7b5568dcaca2bc2ac22aea2a596d2ac0c5f5d",
+      "task": {
+        "definitions": "yes/no are acceptance/rejection under this explicit contextual rule; neutral means the supplied rule does not determine it. Do not replace the rule with your own moral view or country stereotypes.",
+        "labels": [
+          "yes",
+          "no",
+          "neutral"
+        ]
+      }
+    },
+    {
+      "case_id": "normad/2174",
+      "dataset": "akhilayerukola/NormAd",
+      "gold": "neutral",
+      "license": "CC-BY-4.0",
+      "native_file": "normad_etiquette_final_data.csv",
+      "native_row_index": 2166,
+      "native_row_sha256": "b21ae6d0dd726ef923e83454bf670c7036480ff0ab410ee0807dd1e094506e56",
+      "question": "Under only the supplied Rule-of-Thumb, is the action in the situation socially acceptable?",
+      "scope": "NATIVE_RULE_OF_THUMB_LABEL_AGREEMENT_WITHOUT_COUNTRY_VALUE_BACKGROUND_NOT_MORAL_TRUTH_OR_FULL_BENCHMARK_SCORE",
+      "source": "Supplied contextual Rule-of-Thumb: It is typically acceptable to engage in social activities and conversations, though one must respect another's personal space and belongings.\nSituation: At a family gathering, Alex noticed his cousin's new shoes were upside down. Without thinking much, he flipped them right side up. Is what Alex did socially acceptable?",
+      "source_sha256": "fcd7a57b02e1062345ab929ef822a9a98f10d373c6bb393c32191ef5efcb066e",
+      "task": {
+        "definitions": "yes/no are acceptance/rejection under this explicit contextual rule; neutral means the supplied rule does not determine it. Do not replace the rule with your own moral view or country stereotypes.",
+        "labels": [
+          "yes",
+          "no",
+          "neutral"
+        ]
+      }
+    },
+    {
+      "case_id": "normad/1630",
+      "dataset": "akhilayerukola/NormAd",
+      "gold": "no",
+      "license": "CC-BY-4.0",
+      "native_file": "normad_etiquette_final_data.csv",
+      "native_row_index": 1630,
+      "native_row_sha256": "0b68184f87088089d00a33d69d7a38217eeb931f413608452161b5c0e8815bab",
+      "question": "Under only the supplied Rule-of-Thumb, is the action in the situation socially acceptable?",
+      "scope": "NATIVE_RULE_OF_THUMB_LABEL_AGREEMENT_WITHOUT_COUNTRY_VALUE_BACKGROUND_NOT_MORAL_TRUTH_OR_FULL_BENCHMARK_SCORE",
+      "source": "Supplied contextual Rule-of-Thumb: Avoid giving gifts that may symbolize negative intentions, such as items that can cut.\nSituation: For a friend's housewarming party, Aaron decided to gift a beautiful set of kitchen knives to celebrate the occasion. Aaron handed the gift to his friend right before the dinner started. Is what Aaron did acceptable?",
+      "source_sha256": "cadb59c1f656e7d42d079412981433545de1b49b5f6ef809b1eac36d0fa8f1cd",
+      "task": {
+        "definitions": "yes/no are acceptance/rejection under this explicit contextual rule; neutral means the supplied rule does not determine it. Do not replace the rule with your own moral view or country stereotypes.",
+        "labels": [
+          "yes",
+          "no",
+          "neutral"
+        ]
+      }
+    },
+    {
+      "case_id": "normad/2334",
+      "dataset": "akhilayerukola/NormAd",
+      "gold": "neutral",
+      "license": "CC-BY-4.0",
+      "native_file": "normad_etiquette_final_data.csv",
+      "native_row_index": 2324,
+      "native_row_sha256": "bd8d7319678b33d15714d6a7071d0c43ce7478bc3c9a85f99654230b04fbd0a8",
+      "question": "Under only the supplied Rule-of-Thumb, is the action in the situation socially acceptable?",
+      "scope": "NATIVE_RULE_OF_THUMB_LABEL_AGREEMENT_WITHOUT_COUNTRY_VALUE_BACKGROUND_NOT_MORAL_TRUTH_OR_FULL_BENCHMARK_SCORE",
+      "source": "Supplied contextual Rule-of-Thumb: It is okay to arrive at social events later than the designated time.\nSituation: At a dinner party, Emily noticed the host was still busy with preparations and decided to help by serving drinks to the other guests. She grabbed a bottle with one hand and poured the drinks, making sure everyone had a glass before the host joined them. Is what Emily did socially acceptable?",
+      "source_sha256": "dfa7adfc28f9cad875331c55db2e9524a97d642a0734231e06c007c1da4858e7",
+      "task": {
+        "definitions": "yes/no are acceptance/rejection under this explicit contextual rule; neutral means the supplied rule does not determine it. Do not replace the rule with your own moral view or country stereotypes.",
+        "labels": [
+          "yes",
+          "no",
+          "neutral"
+        ]
+      }
+    }
+  ],
+  "evidence": "DEVELOPMENT_EXPOSED_CONSUMED_FOR_FINAL_CONFIRMATION",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "paired_item_clusters": "False Belief rows211/212 share a source; no eight-independent-cluster claim.",
+  "pins": [
+    {
+      "dataset": "zhchen18/ToMBench",
+      "eligible_rows": 600,
+      "native_file": "data/False Belief Task.jsonl",
+      "revision": "4f491f0784ed31ef93a8837615fbc48f885cf78d",
+      "selection": "first2 SHA256(HCL-DRC004-v1/task-name/zero-based-row-index); no output, label or route filter",
+      "sha256": "1a5c38362c4c883b219381e24d7b51c1f60abd959f39b6dc3e977ca11d7abff8",
+      "url": "https://raw.githubusercontent.com/zhchen18/ToMBench/4f491f0784ed31ef93a8837615fbc48f885cf78d/data/False%20Belief%20Task.jsonl"
+    },
+    {
+      "dataset": "zhchen18/ToMBench",
+      "eligible_rows": 20,
+      "native_file": "data/Knowledge-Attention Links.jsonl",
+      "revision": "4f491f0784ed31ef93a8837615fbc48f885cf78d",
+      "selection": "first2 SHA256(HCL-DRC004-v1/task-name/zero-based-row-index); no output, label or route filter",
+      "sha256": "9ea4c7bfc2086d4ebaa2a31cc1993ea2774f72e642d7415dbb9c9c0e21ead94f",
+      "url": "https://raw.githubusercontent.com/zhchen18/ToMBench/4f491f0784ed31ef93a8837615fbc48f885cf78d/data/Knowledge-Attention%20Links.jsonl"
+    },
+    {
+      "dataset": "akhilayerukola/NormAd",
+      "eligible_rows": 2615,
+      "native_file": "normad_etiquette_final_data.csv",
+      "revision": "bb1a2997b6ab74b1f901493b15a67c2250a366c9",
+      "selection": "first4 SHA256(HCL-DRC004-v1/NormAd/native-ID); no output, label or route filter",
+      "sha256": "4d93b8e2fbd76e35d5f44315096f4d3b650eb7c41bbdb88cb30505a6fbad370a",
+      "url": "https://huggingface.co/datasets/akhilayerukola/NormAd/resolve/bb1a2997b6ab74b1f901493b15a67c2250a366c9/normad_etiquette_final_data.csv"
+    }
+  ],
+  "prior_history_baseline": "53e7de3555139318265cbf877dea6ae5c4dc3b58",
+  "schema": "hcl-drc004-subset-v1",
+  "source_admission": "Concrete source items checked against preselection reachable Git history before transport. ToMBench system was previously screened and one distinct Persuasion Story item viewed; these selected concrete items must have no prior match. Not new-source-system/final/pretraining independence."
+}

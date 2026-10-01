@@ -63,8 +63,9 @@ otherwise eligible Development Reality Check or general capability repair.
 
 ## 3. Execution priority and boundaries
 
-Current queue: **DRC001_FRESH_BASE_VS_HCL_REALITY_CHECK**, then source-first development
-closure and general error/coverage repairs, then a fresh development batch. I02
+Current queue is the unique **NEXT_READY in STATUS.md**. DRC001–003/DRE001 are
+consumed/closed; preserve their raw results and exact archives. Continue fresh
+development batches and general evidenced coverage repairs, never an old-task rerun. I02
 final qualification is deferred as a *final* prerequisite, not a global stop.
 Existing low-cost provider authorization remains bounded per new package; no old
 budget transfer, new account/credential/plan or major legal/privacy commitment.
