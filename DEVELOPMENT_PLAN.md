@@ -36,7 +36,8 @@ wire for local, checked, conditional-translation and fallback paths. Original so
 query, actor/time/checker states, checked-treatment accounting and dependency guards
 remain unchanged. Interpretive links need visible assumptions; action/outcome alone
 cannot supply stable traits, hidden motives or action-time responsibility factors.
-The contract cannot semantically verify a freeform answer: an exact-quoted but
+The answer entry reserves its known final JSON instruction before optional
+extraction. The contract cannot semantically verify a freeform answer: an exact-quoted but
 unsupported trait stub remains citation-valid and explicitly not semantic-certified.
 Provider-free tests verify delivery and failure boundaries only. Additional context
 is recorded in serialized characters; no token/cost reduction or answer gain claimed.

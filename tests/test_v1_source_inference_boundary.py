@@ -124,9 +124,85 @@ class SourceInferenceBoundaryTests(unittest.TestCase):
         entry = w.prepare_reader_entry(QUERY, source_ids=('scene',))
         budget = len(json.dumps(entry.messages, ensure_ascii=False))
         calls = []
-        with self.assertRaisesRegex(ValueError, 'final answer contract exceeds'):
+        with self.assertRaisesRegex(ValueError, 'context budget'):
             w.answer_reader_entry(QUERY, lambda m: calls.append(m), source_ids=('scene',), max_chars=budget)
         self.assertFalse(calls)
+
+    def test_known_final_instruction_is_reserved_before_opted_in_extraction(self):
+        w = workspace(SOURCE)
+        entry = w.prepare_reader_entry(QUERY, source_ids=('scene',))
+        budget = len(json.dumps(entry.messages, ensure_ascii=False))
+        rows = proposals()
+        for row in rows:
+            row['source_id'] = 'scene'
+        backend = Backend(rows)
+        calls = []
+        with self.assertRaisesRegex(ValueError, 'context budget'):
+            w.answer_reader_entry(QUERY, lambda m: calls.append(m), source_ids=('scene',),
+                backend=backend, allow_translation=True, max_chars=budget)
+        self.assertFalse(backend.calls)
+        self.assertFalse(calls)
+
+    def test_final_budget_exact_fit_and_one_character_short_preserve_wire(self):
+        # Unicode, escaping and the separating comma all use the same JSON
+        # serialization as the real final wire, not a token/byte estimate.
+        for source in (CONTRASTS[0], '风 moved a curtain. A cabinet remained shut.\n', CHECKED):
+            with self.subTest(source=source):
+                w = workspace(source)
+                raw = json.dumps(dict(answer='Source report only.',
+                    source_citations=[dict(source_id='scene', version=1, quote=source)],
+                    uncertainty='Private state unverified.', assumptions='No additional facts.'))
+                result = w.answer_reader_entry(QUERY, lambda _: raw, source_ids=('scene',), backend=NoExtraction())
+                messages = result['actual_final_messages']
+                budget = len(json.dumps(messages, ensure_ascii=False))
+                calls = []
+                exact = w.answer_reader_entry(QUERY, lambda m: calls.append(m) or raw,
+                    source_ids=('scene',), backend=NoExtraction(), max_chars=budget)
+                self.assertEqual(calls, [messages])
+                self.assertEqual(exact['answer_raw'], raw)
+                self.assertEqual(exact['preparation_provider_calls'], 0)
+                receipt = exact['answer_context_budget']
+                self.assertEqual(receipt['actual_message_characters'], budget)
+                self.assertEqual(receipt['preparation_budget_characters'],
+                    len(json.dumps(exact['prepared'].messages, ensure_ascii=False)))
+                self.assertEqual(receipt['reserved_final_instruction_characters'],
+                    budget - receipt['preparation_budget_characters'])
+                with self.assertRaises(ValueError):
+                    w.answer_reader_entry(QUERY, lambda m: calls.append(m), source_ids=('scene',),
+                        backend=NoExtraction(), allow_translation=True, max_chars=budget - 1)
+                self.assertEqual(len(calls), 1)
+
+    def test_sufficient_final_budget_preserves_opt_in_translation_and_fallback(self):
+        for translated in (False, True):
+            with self.subTest(translated=translated):
+                rows = proposals() if translated else []
+                for row in rows:
+                    row['source_id'] = 'scene'
+                backend = Backend(rows)
+                calls = []
+                raw = json.dumps(dict(answer='Conditional source report only.',
+                    source_citations=[dict(source_id='scene', version=1, quote=SOURCE)],
+                    uncertainty='Translation remains unverified.', assumptions='No private state.'))
+                result = workspace(SOURCE).answer_reader_entry(QUERY, lambda m: calls.append(m) or raw,
+                    source_ids=('scene',), backend=backend, allow_translation=True)
+                self.assertEqual(len(backend.calls), 1)
+                self.assertEqual(len(calls), 1)
+                self.assertEqual(result['preparation_provider_calls'], 1)
+                self.assertEqual(result['answer_raw'], raw)
+                self.assertEqual(result['prepared'].receipt['selection'],
+                    'CONDITIONAL_TRANSLATION' if translated else 'COMPLETE_SOURCE_AFTER_UNUSABLE_TRANSLATION')
+                self.assertLessEqual(result['answer_context_budget']['actual_message_characters'], 64000)
+                self.assertFalse(result['prepared'].receipt['semantic_certification'])
+
+    def test_invalid_or_too_small_final_budgets_never_extract(self):
+        for budget in (True, None, '64000', 511, 512, 64001):
+            with self.subTest(budget=budget):
+                calls = []
+                with self.assertRaises(ValueError):
+                    workspace(SOURCE).answer_reader_entry(QUERY, lambda m: calls.append(m),
+                        source_ids=('scene',), backend=NoExtraction(),
+                        allow_translation=True, max_chars=budget)
+                self.assertFalse(calls)
 
     def test_v25_amendment_rejects_runtime_drift(self):
         from scripts.development_runtime_amendment_v25 import validate_current

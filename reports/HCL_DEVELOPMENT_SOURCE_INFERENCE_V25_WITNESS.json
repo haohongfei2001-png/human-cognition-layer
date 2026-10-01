@@ -205,6 +205,21 @@
   "capability_delta": "Uniform source-bounded explanation instructions in the actual ordinary-reader final wire, without new semantic treatment or changed source/checker states.",
   "cost_saving_claimed": false,
   "evidence": "IMPLEMENTED_UNVALIDATED_DELIVERY_POLICY",
+  "final_instruction_budget_preflight": {
+    "backend": "LOCAL_STUB_ONLY",
+    "extraction_adapter_calls": 0,
+    "final_answer_adapter_calls": 0,
+    "paid_cost_savings_claimed": false,
+    "refusal": "complete reader source-inference contract exceeds context budget; no truncation",
+    "rejected_max_chars": 1301,
+    "semantic_benefit_claimed": false,
+    "sufficient_budget_receipt": {
+      "actual_message_characters": 1538,
+      "max_chars": 64000,
+      "preparation_budget_characters": 63763,
+      "reserved_final_instruction_characters": 237
+    }
+  },
   "historical_witnesses_on_certified_v24": {
     "v21": {
       "actual_final_messages": [

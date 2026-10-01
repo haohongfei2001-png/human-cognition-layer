@@ -29,6 +29,13 @@ _SOURCE_INFERENCE_POLICY = (
 )
 
 
+_FINAL_ANSWER_POLICY = (
+    'Return exactly answer, source_citations, uncertainty and assumptions in one JSON object. '
+    'Quote only supplied original sources. Source provenance does not certify semantics, '
+    'private state or world truth.'
+)
+
+
 def _source_inference_messages(messages, max_chars):
     """Append one instruction to the real selected wire, preserving source/state bytes."""
     if not messages or messages[0].get('role') != 'system':
@@ -209,11 +216,23 @@ def prepare_reader_entry(workspace, query, *, source_ids, backend=None,
 
 def answer_reader_entry(workspace, query, answer_backend, **kwargs):
     """One final call; source audit never rewrites raw output or retries."""
-    entry = prepare_reader_entry(workspace, query, **kwargs)
+    max_chars = kwargs.get('max_chars', 64000)
+    if type(max_chars) is not int or not 512 <= max_chars <= 64000:
+        raise ValueError('bounded reader final context budget required')
+    final_instruction = dict(role='system', content=_FINAL_ANSWER_POLICY)
+    # Appending to the nonempty prepared JSON list adds one comma-space plus
+    # the serialized message. Reserve this known overhead before any extraction.
+    # The budget unit is Unicode characters, matching preparation throughout.
+    reserved_chars = 2 + len(json.dumps(final_instruction, ensure_ascii=False))
+    preparation_budget = max_chars - reserved_chars
+    if preparation_budget < 512:
+        raise ValueError('final answer contract leaves insufficient preparation budget')
+    entry = prepare_reader_entry(workspace, query, **dict(kwargs, max_chars=preparation_budget))
     messages = entry.current_messages(workspace)
     original_sources_from_messages(messages)
-    messages = [*messages, dict(role='system', content='Return exactly answer, source_citations, uncertainty and assumptions in one JSON object. Quote only supplied original sources. Source provenance does not certify semantics, private state or world truth.')]
-    if len(json.dumps(messages, ensure_ascii=False)) > kwargs.get('max_chars', 64000):
+    messages = [*messages, final_instruction]
+    actual_chars = len(json.dumps(messages, ensure_ascii=False))
+    if actual_chars > max_chars:
         raise ValueError('complete reader final answer contract exceeds context budget; no truncation')
     raw = (answer_backend.complete(messages) if hasattr(answer_backend, 'complete')
            else answer_backend(messages))
@@ -228,4 +247,8 @@ def answer_reader_entry(workspace, query, answer_backend, **kwargs):
         assumptions='No private state, world fact or moral judgment is established.'))
     return dict(answer=answer, answer_raw=raw, source_citation_audit=audit,
         prepared=entry, actual_final_messages=messages, answer_adapter_calls=1,
-        preparation_provider_calls=entry.receipt['extraction_calls'])
+        preparation_provider_calls=entry.receipt['extraction_calls'],
+        answer_context_budget=dict(max_chars=max_chars,
+            reserved_final_instruction_characters=reserved_chars,
+            preparation_budget_characters=preparation_budget,
+            actual_message_characters=actual_chars))

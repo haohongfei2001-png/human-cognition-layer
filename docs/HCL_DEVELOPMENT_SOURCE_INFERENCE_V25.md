@@ -38,16 +38,20 @@ invoice costs. Authored witness overhead is 803 serialized characters per input;
 no cost-saving claim is made. This deliberately supersedes current-wire size
 comparisons while preserving historical comparisons at their certified runtime.
 
-The local policy budget is checked before any opted-in extraction. A larger
-conditional result fails before a final answer if it exceeds the selected budget.
-The final JSON instruction is also included in the final-answer budget check before
-that answer adapter runs. Source text is never shortened to fit. An extraction
-already used to produce a larger conditional representation cannot be refunded;
-this version does not claim otherwise.
+The local policy budget is checked before any opted-in extraction. The answer
+entry reserves the exact serialized size of its fixed final JSON instruction,
+including the comma-space separator, before preparing or extracting anything.
+Standalone preparation retains its existing budget meaning. Invalid or insufficient
+final budgets fail before extraction; exact-fit and one-character-short tests use
+the same Unicode JSON serialization as the actual wire. A final receipt records
+the configured limit, reservation, preparation allowance and actual final size.
+A larger, unpredictable conditional representation may still consume its one
+opted-in extraction before being refused; no final call or retry follows. Source
+text is never shortened to fit and no extraction refund is claimed.
 
 ## Provider-free evidence
 
-- 13 new tests cover independently authored action/self-report/third-party/denial/
+- 17 new tests cover independently authored action/self-report/third-party/denial/
   time contrasts, actual B01/C01/C03 preservation, conditional and fallback paths,
   exact receipt and wire, budget rejection, repetition/cache isolation, revision,
   removal, inner challenge, runtime-digest rejection and honest semantic limits
@@ -83,3 +87,15 @@ The historical v21 current-wire size assertion also failed with the new 803-char
 contract, as expected. Its assertion is unchanged and now runs on certified v24
 inside the v25 witness, along with v24's original cost/equality witness. This is
 not a claim that current v25 retains the historical per-input size reduction.
+
+## Review follow-up: reserve the known final instruction
+
+Independent review found that the initial v25 answer entry could perform one
+explicitly opted-in extraction when the local wire fit but its known final JSON
+instruction did not. The bounded follow-up reserves that fixed overhead before
+preparation. A synthetic regression now observes zero extraction and zero final
+adapter calls for that condition; sufficient budgets preserve one opted-in
+translation/fallback and default zero-extraction behavior. This is deterministic
+avoidance of a known impossible request, not measured invoice savings or an answer
+quality improvement. The original instruction text and final wire remain unchanged
+for admissible inputs.

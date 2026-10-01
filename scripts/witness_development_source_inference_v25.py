@@ -76,10 +76,38 @@ def witness():
             source_and_checked_wire_identical=True, extraction_calls=entry.receipt['extraction_calls']))
     assert rows[-1]['checked_treatment_present']
     assert 'checked_reported_communication' in json.loads(rows[-2]['actual_final_prepared_messages'][-1]['content'])
+    budget_workspace = CognitionWorkspace()
+    budget_workspace.put_source('scene', SOURCES[0])
+    prepared = budget_workspace.prepare_reader_entry(QUERY, source_ids=('scene',))
+    tight_budget = len(json.dumps(prepared.messages, ensure_ascii=False))
+    extraction_calls, answer_calls = [], []
+    class BudgetProbe:
+        def complete_json(self, *args, **kwargs):
+            extraction_calls.append(1)
+            return {'candidates': []}
+    try:
+        budget_workspace.answer_reader_entry(QUERY, lambda messages: answer_calls.append(messages),
+            source_ids=('scene',), backend=BudgetProbe(), allow_translation=True,
+            max_chars=tight_budget)
+    except ValueError as exc:
+        budget_failure = str(exc)
+    else:
+        raise AssertionError('known final-instruction budget shortage was not refused')
+    assert not extraction_calls and not answer_calls
+    raw = json.dumps(dict(answer='Only the reported action and outcome are supplied.',
+        source_citations=[dict(source_id='scene', version=1, quote=SOURCES[0])],
+        uncertainty='No trait or motive is established.', assumptions='Only supplied reports.'))
+    delivered = budget_workspace.answer_reader_entry(QUERY, lambda _: raw, source_ids=('scene',))
+    budget_receipt = dict(rejected_max_chars=tight_budget, refusal=budget_failure,
+        extraction_adapter_calls=0, final_answer_adapter_calls=0,
+        sufficient_budget_receipt=delivered['answer_context_budget'],
+        backend='LOCAL_STUB_ONLY', paid_cost_savings_claimed=False,
+        semantic_benefit_claimed=False)
     return dict(schema='hcl-source-inference-v25-witness', status='PASS_PROVIDER_FREE',
         before_main_sha=cert['run_sha'], before_runtime_sha256=cert['runtime_sha256'],
         capability_delta='Uniform source-bounded explanation instructions in the actual ordinary-reader final wire, without new semantic treatment or changed source/checker states.',
         authored_contrasts=rows, historical_witnesses_on_certified_v24=old_witness,
+        final_instruction_budget_preflight=budget_receipt,
         evidence='IMPLEMENTED_UNVALIDATED_DELIVERY_POLICY',
         provider_calls=0, provider_spend_usd=0, answer_gain_claimed=False,
         semantic_certification=False, cost_saving_claimed=False,
