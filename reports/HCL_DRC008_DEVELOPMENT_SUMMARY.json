@@ -1,0 +1,111 @@
+{
+  "actual_invoice_cost_usd": null,
+  "actual_model_ids": [
+    "deepseek-v4-pro"
+  ],
+  "authorization_remaining_usd": 0,
+  "cases": 6,
+  "checked_H_treatment": 0,
+  "disposition": "INCONCLUSIVE",
+  "disposition_scope": "NO_CHECKED_TREATMENT_SMALL_FREEFORM_DEVELOPMENT_ADAPTATION_SAME_FAMILY_JUDGE",
+  "evidence": "DEVELOPMENT_EXPOSED_CONSUMED_FOR_FINAL_CONFIRMATION",
+  "execution_status": "COMPLETED_DEVELOPMENT_ONLY",
+  "extraction_calls": 0,
+  "format_valid": {
+    "Base": 6,
+    "HCL": 6
+  },
+  "graded_two_arm_cases": 6,
+  "historical_dispositions_upgraded": false,
+  "independent_semantic_judge": false,
+  "known_usage": {
+    "input_tokens": 9363,
+    "output_tokens": 15036
+  },
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "native_reference_judged_correct": {
+    "Base": 6,
+    "HCL": 6
+  },
+  "native_verdicts": {
+    "Base": {
+      "CORRECT": 6,
+      "INCORRECT": 0,
+      "PARTIAL": 0,
+      "UNCERTAIN": 0
+    },
+    "HCL": {
+      "CORRECT": 6,
+      "INCORRECT": 0,
+      "PARTIAL": 0,
+      "UNCERTAIN": 0
+    }
+  },
+  "package_sha256": "862d4bd15dc78af846498b933c959e0676358b5d7fa265b7e83b132ecc76a901",
+  "paired_comparison": {
+    "evaluable_pair_count": 6,
+    "gains": 0,
+    "harms": 0,
+    "uncertainty_excluded_not_forced_wrong": true
+  },
+  "phase_costs": {
+    "BLINDED_PAIRED_JUDGE/grading": {
+      "calls": 6,
+      "estimated_cost_usd": 0.00422598,
+      "input_tokens": 3523,
+      "output_tokens": 960,
+      "rated_peak_cost_usd": 0.00845196
+    },
+    "Base/answer": {
+      "calls": 6,
+      "estimated_cost_usd": 0.015329908,
+      "input_tokens": 2704,
+      "output_tokens": 7171,
+      "rated_peak_cost_usd": 0.03196644
+    },
+    "HCL/answer": {
+      "calls": 6,
+      "estimated_cost_usd": 0.015088348000000001,
+      "input_tokens": 3136,
+      "output_tokens": 6905,
+      "rated_peak_cost_usd": 0.031483319999999995
+    }
+  },
+  "physical_model_snapshot_verified": false,
+  "provider_calls": 18,
+  "public_paper_MCQ_score": false,
+  "rated_peak_cost_usd": 0.07190172,
+  "raw_estimated_cost_usd": 0.034644236,
+  "rerun_allowed": false,
+  "retries": 0,
+  "run_id": 36815719113,
+  "run_sha": "eacf32c1a65be9290e7cb85cccd6ab4daa0903da",
+  "runtime_sha256": "c8045636a66d216fdd4fe7e1f081eeddf430393fcfdc1ba7ec75a00ad14f7963",
+  "schema": "hcl-drc008-development-summary-v1",
+  "source_delivery_valid": {
+    "Base": 6,
+    "HCL": 6
+  },
+  "source_first_observations": [
+    {
+      "arms": [
+        "Base",
+        "HCL"
+      ],
+      "case_id": "aesop_section_4_3",
+      "frozen_scores_changed": false,
+      "issue": "STOCK_STORY_TRAIT_AND_MOTIVE_COMPLETION_NOT_ESTABLISHED_BY_SUPPLIED_TEXT",
+      "scope": "Both import inherent/inborn nature; Base additionally contrasts fixed instinct/nature with deliberate betrayal without a source inner-state explanation. Literary interpretation may be hypothesized, but specific trait/motive and exclusion of alternatives are not certified by supplied events."
+    },
+    {
+      "arms": [
+        "HCL"
+      ],
+      "case_id": "perry_260",
+      "frozen_scores_changed": false,
+      "issue": "HCL_CARELESSNESS_IS_AN_ADDED_NARRATIVE_LINK",
+      "scope": "The source reports proud thoughts/attack and final overestimation statement, not explicit carelessness. Treat that link as interpretation, not an established internal causal explanation."
+    }
+  ],
+  "unknown_attempt_cost": false
+}

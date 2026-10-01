@@ -31,7 +31,24 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: DRC008_FROZEN_CONCEPT_NARRATIVE_DEVELOPMENT_REALITY_CHECK**
+**NEXT_READY: GENERAL_ORDINARY_ANSWER_SOURCE_INFERENCE_BOUNDARY_REPAIR**
+
+[DRC008 source-first closure](reports/HCL_DRC008_SOURCE_FIRST_CLOSURE.md): INCONCLUSIVE,
+provisional paired judgeBase/H6/6,0gains/harms,checked treatment0/6;quotes/formatallpass.
+Source-first review finds both import unsupported stock-story inborn nature,Base
+also excludes deliberate betrayal; H adds an unproved carelessness link elsewhere.
+Frozen grades unchanged; main-lesson correctness/citations do not certify explanation.
+18calls/0retry/0extraction,peakUSD0.07190172/rawestimateUSD0.034644236,invoiceunknown;
+gradercost separately preserved,small H output-cost difference not general savings.
+Grant0/triggergone,130-file exact runtime/raw/archive preserved,nine archives exact.
+Next general source-bounded ordinary-answer trait/motive inference handling using
+existing provenance/actor/time/responsibility factors; authored independent contrasts,
+no native item/title patch,ontology,rerun or score rewrite. Development tests ACTIVE,
+final confirmation separate,LongMemEval SEALED,leaderboard off.
+
+## DRC008 preserved execution freeze
+
+**Historical queue snapshot: DRC008_FROZEN_CONCEPT_NARRATIVE_DEVELOPMENT_REALITY_CHECK**
 
 [DRC008 protocol](docs/HCL_DRC008_DEVELOPMENT_PROTOCOL.md): six concrete-new first-hash
 Morables-PD native title/fable/annotated-lesson records, authorCC-BY-4.0/PD. Same strong

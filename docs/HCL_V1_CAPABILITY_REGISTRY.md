@@ -179,3 +179,13 @@ inference and composition witness.770→548 authored serialized characters is no
 provider tokens/invoice/answer-gain evidence.0calls/spend,
 IMPLEMENTED_UNVALIDATED_SIMPLIFICATION, eight consumed archives/history preserved.
 Next fresh concept/normative development comparison; final confirmation separate.
+
+DRC008 source-first dispositionINCONCLUSIVE: same-family main-lesson judgeBase/H6/6,
+no checked H treatment/no specialized gain, all quote locations valid. Both import
+stock inborn nature unsupported by supplied fable;Base also excludes deliberate
+betrayal;H adds an unproved carelessness explanation elsewhere. Qualitative source
+findings retained without frozen score changes.18calls/0retry/0extraction,
+peakUSD0.07190172/invoiceunknown;grant0/triggergone,130-file exact archive,nine total
+consumed archives preserved. No historical efficacy upgrade. Next general ordinary
+answer/source trait-motive boundary implementation on independent authored contrasts,
+no benchmark-specific rule/personality ontology,LongMemEval or answered rerun.
