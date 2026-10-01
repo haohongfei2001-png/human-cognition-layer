@@ -1,0 +1,25 @@
+{
+  "live_treatment": "ACTUAL_LOCAL_PRECHECK_AND_OPTIONAL_EXTRACTION_OBSERVED_AT_EXECUTION",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "package_sha256": "b67b851c7962f6d43459b2236883d615c311aea71b93e959745fd3674a8d46bb",
+  "provider_calls": 0,
+  "publisher": [
+    {
+      "dataset": "zhchen18/ToMBench",
+      "native_rows_verified": true,
+      "sha256": "1a5c38362c4c883b219381e24d7b51c1f60abd959f39b6dc3e977ca11d7abff8"
+    },
+    {
+      "dataset": "zhchen18/ToMBench",
+      "native_rows_verified": true,
+      "sha256": "9ea4c7bfc2086d4ebaa2a31cc1993ea2774f72e642d7415dbb9c9c0e21ead94f"
+    },
+    {
+      "dataset": "akhilayerukola/NormAd",
+      "native_rows_verified": true,
+      "sha256": "4d93b8e2fbd76e35d5f44315096f4d3b650eb7c41bbdb88cb30505a6fbad370a"
+    }
+  ],
+  "runtime_sha256": "64057e56fae31fbc70b506f22f5a1ec67bd68b5595bae2531a00ff8c9a9ed1c8",
+  "source_equal_and_frozen": true
+}

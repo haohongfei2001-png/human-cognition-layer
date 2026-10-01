@@ -26,7 +26,27 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: FRESH_ADAPTIVE_READER_DEVELOPMENT_REALITY_CHECK**
+**NEXT_READY: DRC004_FROZEN_BASE_VS_ADAPTIVE_HCL_EXECUTION**
+
+[DRC004 protocol](docs/HCL_DRC004_DEVELOPMENT_PROTOCOL.md) freezes8 public development
+items:4 ToMBench source/attention/fact-belief task rows and4 NormAd contextual-rule
+judgments. ToMBench source system was already screened; only concrete-item history
+absence is claimed/required here. All native fields/gold are preserved; NormAd only
+supplies its explicit Rule-of-Thumb/Story, never background scrape/country stereotype
+or moral truth. All material DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION.
+
+Current v19 adaptive HCL vs same strong DeepSeek V4 Pro/high reasoning, complete fair
+inputs/label vocabulary,8192 answer tokens, at most one optional H extraction, no
+model grader.24 calls maximum,0 retries,new independent USD2.25 hard cap, worst peak
+reservationUSD1.5872868.24 correctness checks pass locally; publisher/hash/whole input
+preflight passes; full prior reachable-history gate is required in cloud before any
+paid call. No final reviewer/perfect-source stop, new credential/plan, old budget or
+LongMemEval access. Immediately source-first close once, preserve negatives/raw/all
+cost and exact runtime, close grant/delete trigger, then continue general repair.
+
+## v19 preserved ordinary-entry snapshot
+
+
 
 [Adaptive ordinary reader v19](docs/HCL_DEVELOPMENT_ADAPTIVE_READER_V19.md) first
 selects actual B01/C01/C03 state from ordinary dialogue with0 extraction. Only absent
