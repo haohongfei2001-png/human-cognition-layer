@@ -30,6 +30,5 @@ jobs:
       - run: python -m scripts.development_drc005_replay
       - run: python -m unittest tests.test_development_drc006_replay
       - run: python -m scripts.development_drc006_replay
-      - run: python -m pip install 'pydantic==2.13.5'
-      - run: python -m unittest tests.test_development_reality_batch007
-      - run: python -m scripts.development_reality_batch007 --preflight --publisher --history --output drc007-source-preflight.json
+      - run: python -m unittest tests.test_development_drc007_replay
+      - run: python -m scripts.development_drc007_replay
