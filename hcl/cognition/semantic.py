@@ -75,6 +75,34 @@ class SemanticResult:
         return json.loads(self.diagnostics_json)
 
 
+def _paragraph_narrator_report_candidates(source, reporter):
+    """Additional complete report/speech paragraphs; no partial qualifier removal."""
+    from .epistemic import _PREDICATE
+    from .source_fragments import source_fragments
+    try:
+        fragments=source_fragments(source.text)
+    except ValueError:
+        return []
+    reports=[]
+    for line,start,fragment in fragments:
+        match=_PREDICATE.fullmatch(fragment.rstrip('.!?'))
+        if (match and match['subject'].casefold() not in _PRONOUNS
+                and re.fullmatch(_NAME,match['subject']) and not re.search(
+                    r'["“”\[\]_*]|\b(?:if|unless|hypothetical|imagined|counterfactual|pretended)\b',fragment,re.I)):
+            reports.append(dict(source_id=source.source_id,quote=fragment,start=start,
+                kind='event',content=dict(speaker_surface=reporter,speaker_candidates=[reporter],
+                    utterance=fragment,event_kind='NARRATOR_MENTAL_REPORT',reporter_role='SOURCE_NARRATOR',
+                    reported_holder=match['subject'],assertion_scope='SOURCE_REPORT',
+                    identity_scope='SOURCE_LOCAL_REPORT_CHANNEL_NOT_CHARACTER',order=source.order,
+                    event_time=source.event_time,access_time=source.access_time,record_time=source.record_time)))
+        else:
+            speech=_SPEECH.fullmatch(fragment.rstrip('.')) or _COLON.fullmatch(fragment)
+            if (not speech or speech['speaker'].casefold() in _PRONOUNS
+                    or not re.fullmatch(_NAME,speech['speaker'])):
+                return [] # all original fragments must be accounted for
+    return reports
+
+
 def _narrator_report_candidates(source):
     """Only complete standalone, named literal mental-report paragraphs.
 
@@ -117,6 +145,8 @@ def _narrator_report_candidates(source):
                 identity_scope='SOURCE_LOCAL_REPORT_CHANNEL_NOT_CHARACTER',
                 order=source.order, event_time=source.event_time,
                 access_time=source.access_time, record_time=source.record_time)))
+    existing={(r['start'],r['quote']) for r in rows}
+    rows.extend(r for r in _paragraph_narrator_report_candidates(source,reporter) if (r['start'],r['quote']) not in existing)
     return rows
 
 

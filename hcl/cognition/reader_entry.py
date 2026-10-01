@@ -56,7 +56,7 @@ def _local(workspace, query, source_id, max_chars):
         old.current_messages(workspace)
         return old
     raw = prepare_reader_cognition(query, source, source_id=source_id,
-                                   max_context_chars=max_chars)
+                                   max_context_chars=max_chars,workspace=workspace)
     messages = list(raw.messages)
     payload = json.loads(messages[-1]['content'])
     from .ordinary_access import prepare_ordinary_access
@@ -92,7 +92,7 @@ def _local(workspace, query, source_id, max_chars):
     claim = workspace.core.claim(scope, ClaimKind.SYSTEM_INTERPRETATION,
         dict(state=payload, source_versions=versions,
              semantic_boundary='SOURCE_REPORT_NOT_PRIVATE_OR_WORLD_TRUTH'))
-    workspace.core.support(claim, root)
+    workspace.core.support(claim, root, *preparation.get('shared_support_claim_ids',()))
     workspace.core.interpret(claim, required_premises=(root,),
         unknown_conditions=('calendar_and_receipt_time_not_established',))
     result = OperationResult(key, query, scope, versions, (claim,),

@@ -26,7 +26,7 @@ _POLICY = (
 
 
 def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
-                            min_source_chars, method, epistemic_checks=False, agency_checks=False, plan_checks=False):
+                            min_source_chars, method, epistemic_checks=False, agency_checks=False, plan_checks=False, workspace=None):
     if (not isinstance(query, str) or not query.strip() or len(query) > 8000 or
             not isinstance(source_text, str) or not min_source_chars < len(source_text) <= 250000 or
             not isinstance(source_id, str) or not source_id or len(source_id) > 128 or
@@ -37,15 +37,25 @@ def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
     from hcl.cognition.workspace import CognitionWorkspace
     from hcl.cognition.agency import check_agency_candidates, is_agency_utterance
     from hcl.cognition.plan_feasibility import check_plan_candidates
-    workspace = CognitionWorkspace()
-    workspace.put_source(source_id, source_text)
+    if workspace is None:
+        workspace=CognitionWorkspace();workspace.put_source(source_id,source_text)
+    elif (not isinstance(workspace,CognitionWorkspace) or source_id not in workspace._documents
+            or workspace._documents[source_id][0]!=source_text):
+        raise ValueError('shared reader requires the actual registered source, not substituted text')
+    source_version=workspace._versions[source_id]
     core = workspace.core
     dialogue_blocks = bool(_SCRIPT.search(source_text))
-    ordinary_source = AuthorizedText(source_id, source_text)
+    ordinary_source = AuthorizedText(source_id, source_text, version=source_version, permitted_observers=workspace._documents[source_id][1])
     discovered = _local_candidates(ordinary_source, dialogue_blocks=True) if dialogue_blocks else ()
     semantic = prepare_semantics(query, (ordinary_source,), core=core,
         max_source_chars=250000 if len(source_text)>48000 else 64000,
         dialogue_blocks=dialogue_blocks, modal_events_only=dialogue_blocks, agency_events=dialogue_blocks,belief_revision_events=dialogue_blocks,model_declarations=dialogue_blocks,narrator_reports=True)
+    if workspace._versions[source_id]!=source_version or workspace._documents[source_id][0]!=source_text:
+        raise ValueError('registered source changed during local cognition preparation')
+    for root_id in semantic.root_ids:
+        for supports in core.dependencies[root_id]:
+            workspace._version_spans[source_id].update(k for k in supports if k in core.spans)
+    shared_support=[]
     if semantic.backend_calls:
         raise ValueError('long source local preparation unexpectedly called provider')
     source = json.loads(semantic.messages[-1]['content'])['sources']
@@ -70,8 +80,19 @@ def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
     if epistemic_checks:
         bundle = check_epistemic_candidates(core, query, semantic)
         checked_count = sum(isinstance(record.tree, MentalProposition) for record in bundle.records)
+        shared_support.extend(r.expression_id for r in bundle.records)
         if checked_count:
-            checked_messages = bundle.messages(core, query, max_chars=max_context_chars)
+            narrator_pairs=sorted({(r.speaker,r.tree.content.holder) for r in bundle.records
+                if isinstance(r.tree,MentalProposition) and isinstance(r.tree.content,MentalProposition)
+                and core.claims[r.expression_id].content.get('channel')=='SOURCE_NARRATOR_ATTRIBUTION'})
+            comparisons=[]
+            if len(bundle.query_path)==2:comparisons.extend(bundle.compare_attribution(core,*bundle.query_path))
+            for reporter,subject in narrator_pairs:
+                comparisons.extend(bundle.compare_attribution(core,reporter,subject))
+            shared_support.extend(r['claim_id'] for r in comparisons)
+            checked_messages = bundle.messages(core, query, comparisons=comparisons, max_chars=max_context_chars)
+            if comparisons:
+                policy += ' Narrator attribution comparisons compare source reports to subject expressions only; contemporaneous private belief, sincerity and world truth are not established.'
             payload['checked_epistemic'] = json.loads(checked_messages[-1]['content'])
             policy += ' ' + checked_messages[0]['content'] + ' Narrative order does not establish event or receipt time.'
     agency_count = 0
@@ -90,6 +111,7 @@ def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
             result = check_agency_candidates(workspace,query,semantic,source_id=source_id,actor=actor,only_agency_events=True)
             if result.claim_ids:
                 agency_results.append(result)
+                shared_support.extend(result.claim_ids)
                 agency_audits.append(json.loads(result.messages(workspace,max_chars=128000,include_sources=False)[-1]['content']))
                 checked_messages = result.messages(workspace,max_chars=128000,include_sources=False,include_evidence_graph=False)
                 checked_agency.append(json.loads(checked_messages[-1]['content']))
@@ -109,6 +131,7 @@ def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
                 relevant_events_only=True,dialogue_blocks=dialogue_blocks)
             checked_messages=result.messages(workspace,max_chars=128000,include_sources=False)
             checked_plans.append(json.loads(checked_messages[-1]['content']))
+            shared_support.extend(result.claim_ids)
             plan_count += len(result.payload['plans'])
             if len(checked_plans)==1:
                 policy += ' '+checked_messages[0]['content']
@@ -118,13 +141,15 @@ def _prepare_source_context(query, source_text, *, source_id, max_context_chars,
                 dict(role='user', content=json.dumps(payload, ensure_ascii=False, sort_keys=True)))
     if len(json.dumps(messages, ensure_ascii=False)) > max_context_chars:
         raise ValueError('complete long source exceeds final context budget')
-    if source != [dict(source_id=source_id, version=1, text=source_text)]:
+    if source != [dict(source_id=source_id, version=source_version, text=source_text)]:
         raise ValueError('long source access or completeness changed')
     plan = CognitionPlan(True, resolve_dependencies(('evidence', 'uncertainty')), (), (),
                          'evidence_bounded', {'evidence': 'complete long source with literal anchors'},
                          CostClass.LOW, max_context_chars=max_context_chars,
                          perspective_mode=PerspectiveMode.READER_ANALYSIS)
     receipt = dict(method=method,
+                   shared_support_claim_ids=sorted(set(shared_support)),
+                   source_version=source_version,
                    source_id=source_id, source_sha256=hashlib.sha256(source_text.encode()).hexdigest(),
                    source_chars=len(source_text), candidate_count=len(candidates),
                    semantic_status=semantic.backend_status, extraction_provider_calls=0,
@@ -173,7 +198,7 @@ def prepare_reader_source_comparison(query, source_text, *, max_context_chars=48
 
 def prepare_reader_cognition(query, source_text, *, max_context_chars=48000,
                              epistemic_checks=True, agency_checks=True, plan_checks=True,
-                             source_id='ordinary-source'):
+                             source_id='ordinary-source', workspace=None):
     """Generic reader entry reuses literal B01/C01/C03 regardless of question grammar.
 
     No automatic private mental state or normative verdict is grounded. Unmatched
@@ -181,5 +206,5 @@ def prepare_reader_cognition(query, source_text, *, max_context_chars=48000,
     """
     return _prepare_source_context(query, source_text, source_id=source_id,
         max_context_chars=max_context_chars, min_source_chars=0,
-        method='complete_reader_source_local_cognition_v1',
+        method='complete_reader_source_local_cognition_v1',workspace=workspace,
         epistemic_checks=epistemic_checks, agency_checks=agency_checks, plan_checks=plan_checks)

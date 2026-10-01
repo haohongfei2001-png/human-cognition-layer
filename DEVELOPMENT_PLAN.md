@@ -26,7 +26,24 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: GENERAL_ORDINARY_NARRATOR_ATTRIBUTION_STATE_ADMISSION**
+**NEXT_READY: FRESH_POST_ADMISSION_DEVELOPMENT_REALITY_CHECK**
+
+[Ordinary narrator admission v22](docs/HCL_DEVELOPMENT_NARRATOR_ATTRIBUTION_V22.md):
+complete report/speech paragraph now enters actual source-narrator attribution vs
+subject-expression comparison, alongside C01/C03 without narrator→own plan belief.
+Denial is not belief in the opposite; uncertainty/private truth/time remain scoped.
+Actual shared current-source checks/claim dependencies mean inner challenge or
+source revision blocks final delivery; nested original anchors now use real version.
+8new/163focused local passes and authored exact-v21→v22 composition/challenge/revision /
+source-cited stub witness.0livecalls/spend, IMPLEMENTED_UNVALIDATED, no family/history/
+evidence upgrade; six consumed archives exact. Next fresh public developer-unseen
+items and strong Base/current H, optionally P for generic-wrapper attribution; no
+reused questions/budget, case rules or perfect confirmation/reviewer daily gate.
+LongMemEval SEALED, leaderboard off.
+
+## v21 preserved integration snapshot
+
+**Historical queue snapshot: GENERAL_ORDINARY_NARRATOR_ATTRIBUTION_STATE_ADMISSION**
 
 [Ordinary paragraph integration v21](docs/HCL_DEVELOPMENT_PARAGRAPH_ACCESS_V21.md):
 complete same-paragraph explicit reports now enter existing B02 beside B01, original
