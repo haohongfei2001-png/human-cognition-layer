@@ -1,0 +1,13 @@
+{
+  "html_sha256": "210f102275ccf1a6542f08a3bc9e4b4c7c83278cb74b35217bffa112df6363b2",
+  "http_status": 200,
+  "model": "deepseek-v4-pro",
+  "model_snapshot": "DeepSeek-V4-Pro-0813 advertised; physical snapshot not verified by alias",
+  "peak_rates_usd_per_million": {
+    "input_cache_miss": 1.32,
+    "output": 3.96
+  },
+  "rate_application": "conservative peak rates; invoice/actual usage not yet observed",
+  "retrieved_at": "2026-10-01T13:13:23.139641+00:00",
+  "url": "https://api-docs.deepseek.com/quick_start/pricing/"
+}

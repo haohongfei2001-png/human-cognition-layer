@@ -1,0 +1,27 @@
+name: HCL Source Inference Runner Provider-Free
+on:
+  pull_request:
+    paths:
+      - 'scripts/run_source_inference_synthetic_once.py'
+      - 'tests/test_source_inference_synthetic_runner.py'
+      - 'reports/source-inference-synthetic-runner/**'
+      - 'docs/HCL_SOURCE_INFERENCE_SYNTHETIC_RUNNER.md'
+      - '.github/frozen/hcl-sid001-once.yml'
+      - '.github/workflows/hcl-source-inference-runner-provider-free.yml'
+permissions:
+  contents: read
+jobs:
+  mocked-runner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest tests.test_source_inference_synthetic_runner tests.test_source_inference_synthetic_diagnostic tests.test_i02_exposure_history_v2 -v
+      - run: python -m scripts.run_source_inference_synthetic_once --preflight
+      - run: python -m scripts.run_source_inference_synthetic_once --dry-run --output /tmp/sid001-simulation

@@ -1,0 +1,50 @@
+name: HCL SID001 Approved One-Off Diagnostic
+on:
+  push:
+    branches: [codex/sid001-approved-once]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: hcl-sid001-approved-single-invocation
+  cancel-in-progress: false
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - name: Refuse duplicate invocation or rerun before any provider access
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$GITHUB_REF" = refs/heads/codex/sid001-approved-once
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-sid001-once.yml/runs?per_page=100" > /tmp/sid001-runs.json
+          python - <<'PY'
+          import json,os
+          from scripts.run_source_inference_synthetic_once import require_unique_run
+          require_unique_run(os.environ, json.load(open('/tmp/sid001-runs.json')))
+          PY
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'openai==2.14.0'
+      - name: Verify frozen request and runner pins
+        run: python -m scripts.run_source_inference_synthetic_once --preflight
+      - name: Exactly 36 answer slots under the approved single USD 2.50 cap
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: python -m scripts.run_source_inference_synthetic_once --execute --workflow-runs /tmp/sid001-runs.json --output sid001-results
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-sid001-${{ github.run_id }}
+          path: |
+            sid001-results/
+            reports/source-inference-synthetic-runner/
+            reports/source-inference-synthetic/PACKAGE.json
+          if-no-files-found: error
