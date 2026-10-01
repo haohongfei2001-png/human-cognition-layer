@@ -14,6 +14,22 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
+**NEXT_READY: DRC005_FROZEN_DEVELOPMENT_REALITY_CHECK**
+
+[DRC005 protocol](docs/HCL_DRC005_DEVELOPMENT_PROTOCOL.md) freezes8 concrete-new public
+ToMBench access/social-communication tasks, not a newly unseen writing system.
+Current v20 H vs same strong V4 Pro/high; complete source/question/native available
+choices,16 calls maximum,0 retries,zero extraction,new independent USD0.75 hard cap,
+peak reservationUSD0.67038576. Native missing choices preserved as absent, gold fixed.
+35 local checks/publisher/input/runtime preflight pass; cloud prior-history and
+exact-head/main CI required before unique dispatch. Local treatment0/8 is disclosed,
+not fabricated; tests simplified ordinary coverage/cost, no isolated B02 efficacy.
+All material development-exposed/final-consumed. No old budget, LongMemEval, final
+reviewer/source stop or leaderboard. Immediately source-first close, grant0/trigger
+delete, then general coverage repair/simplification, accepting negative outcomes.
+
+## v20 preserved implementation snapshot
+
 **NEXT_READY: FRESH_REPORTED_ACCESS_DEVELOPMENT_REALITY_CHECK**
 
 [Ordinary access/simplification v20](docs/HCL_DEVELOPMENT_ORDINARY_ACCESS_V20.md)
