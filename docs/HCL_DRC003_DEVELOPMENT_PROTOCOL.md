@@ -1,5 +1,7 @@
 # DRC003 — fresh public agency/philosophy development reality check
 
+**CLOSED / INCONCLUSIVE:** unique run stopped after14attempts at first grading HTTP400; see [immutable source-first closure](../reports/HCL_DRC003_SOURCE_FIRST_CLOSURE.md). Grant0/trigger removed; no rerun. Frozen profile below remains historical.
+
 **Evidence:** DEVELOPMENT ONLY / CONSUMED_FOR_FINAL_CONFIRMATION. No final
 independence, expert review, broad psychology, morality or full-benchmark score.
 No independent reviewer is required for this daily reality check.

@@ -1,0 +1,18 @@
+{
+  "actual_invoice_cost": "UNKNOWN",
+  "actual_usage": "NOT_RETURNED",
+  "attempt": 14,
+  "error_body": {
+    "error": {
+      "code": "invalid_request_error",
+      "message": "Prompt must contain the word 'json' in some form to use 'response_format' of type 'json_object'. (request_id: 0f1588fe-7776-4b4e-bebe-b16cb8315b7f)",
+      "param": null,
+      "type": "invalid_request_error"
+    }
+  },
+  "http_status": 400,
+  "old_raw_receipt_changed": false,
+  "origin": "SUPPLEMENTAL_GITHUB_ACTIONS_LOGS_SDK_STATUS_ERROR_NOT_PRIMARY_RECEIPT_REWRITE",
+  "response_headers": "NOT_SAVED_OR_RECOVERABLE_FROM_AVAILABLE_LOG",
+  "run_id": 36796422963
+}

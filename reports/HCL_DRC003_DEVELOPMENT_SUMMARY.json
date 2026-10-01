@@ -1,0 +1,42 @@
+{
+  "H_cases_observed": 4,
+  "actual_specialized_H_treatment": 0,
+  "attempted_provider_calls": 14,
+  "completed_agency_pairs": 4,
+  "disposition": "INCONCLUSIVE",
+  "failed_attempt_cost_unknown": true,
+  "generic_extraction": "SIMPLIFY_FOR_UNSUPPORTED_SCOPE_NO_UTILITY_SHOWN",
+  "historical_capability_dispositions_unchanged": true,
+  "input_tokens": 10735,
+  "known_successful_estimated_usd": 0.021122948,
+  "known_successful_peak_rated_usd": 0.04436916,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "output_tokens": 7626,
+  "philosophy": {
+    "grades_completed": 0,
+    "one_Base_answer": true,
+    "other_case_not_called": true,
+    "paired_comparison": false
+  },
+  "raw_common_delivery": {
+    "Base_valid": 4,
+    "HCL_valid": 0,
+    "invalid_comparison": true,
+    "reason": "Frozen audit expected development-source but actual H fallback supplies ordinary-source; all4 H quotations refer correctly to its actual supplied source. Preserve frozen audit outputs; no retrospective regrade."
+  },
+  "raw_native_agency": {
+    "Base_correct": 2,
+    "HCL_correct": 2,
+    "gains": 0,
+    "harms": 0,
+    "units": 4
+  },
+  "reserved_usd": 0.5887331999999998,
+  "retries": 0,
+  "run_id": 36796422963,
+  "schema": "hcl-drc003-source-first-summary-v1",
+  "status": "INCONCLUSIVE_INCOMPLETE_GRADER_REQUEST_CONTRACT_ERROR",
+  "successful_response_receipts": 13,
+  "total_actual_or_estimated_cost_usd": null,
+  "total_invoice_unknown": true
+}

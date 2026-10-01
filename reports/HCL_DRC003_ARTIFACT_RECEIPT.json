@@ -1,0 +1,11 @@
+{
+  "artifact_id": 11134046945,
+  "artifact_sha256": "5690975eaf830b0bce721f6713d345ab93ccebb5da208653b935f065b0e0e510",
+  "evidence": "DEVELOPMENT_ONLY_NEVER_FINAL",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "package_sha256": "2f7ac9009aa287d4eed93f792900fabb85e5d5e4a0d90acd0705e6c9a596a42e",
+  "raw_receipt_sha256": "ff0ad056871cfe7761cecb28c35aa23cbec7a05bca8d68d49f6262e96f7b9b34",
+  "run_id": 36796422963,
+  "run_sha": "2b2a2c85a3ccf1b5ab9902355c594a0e66a07294",
+  "runtime_sha256": "786d50865771933cce8240e83f6b59161db82091e2d3909ca5620ba2c8368a77"
+}

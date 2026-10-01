@@ -1,11 +1,13 @@
 {
+  "attempted_calls": 14,
   "authorization": "CURRENT_OWNER_BOUNDED_LOW_COST_EXISTING_PROVIDER_POLICY",
   "batch": "DRC003",
+  "consumed_run_id": 36796422963,
   "historical_budget_transfer": false,
-  "maximum_calls": 22,
+  "maximum_calls": 0,
   "package_sha256": "2f7ac9009aa287d4eed93f792900fabb85e5d5e4a0d90acd0705e6c9a596a42e",
-  "remaining_usd": 2.0,
+  "remaining_usd": 0,
   "retries": 0,
   "schema": "hcl-drc-once-grant-v1",
-  "status": "READY"
+  "status": "CLOSED"
 }

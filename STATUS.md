@@ -31,23 +31,27 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: DRC003_ONE_FROZEN_NATIVE_DEVELOPMENT_RUN**
+**NEXT_READY: GENERAL_REQUEST_AND_ACTUAL_SOURCE_FRAME_CORRECTNESS_REPAIR**
 
-[DRC003 frozen development protocol](docs/HCL_DRC003_DEVELOPMENT_PROTOCOL.md): four
-fresh public Social Chemistry action-agency tasks and two ACADREASON philosophy
-questions, source/rights/history and whole-input fairness gates before transport.
-Same strong DeepSeekV4Pro Base/current conditional H; all preparation/fallback/
-treatment absences saved, no manual psychological-state/gold input. Native agency
-label and anonymous same-family philosophy-checklist agreement, never moral truth
-or expert/final evidence. All opened systems registered development-exposed/final-consumed.
+[DRC003 source-first closure](reports/HCL_DRC003_SOURCE_FIRST_CLOSURE.md): INCONCLUSIVE,
+unique run36796422963 at2b2a2c85a3ccf1b5ab9902355c594a0e66a07294 stopped at a
+JSON-mode grading request missing the JSON keyword (HTTP400).14 attempts/13 full
+responses/0 retries; four agency pairs raw Base2/4/H2/4,0 gains/harms, treatment0/4.
+Worker-label disagreements are not private/moral truth. Frozen source-delivery
+Base4/H0 is invalid: auditor expected development-source, actual H supplied correct
+ordinary-source IDs. Do not count four fabricated harms or retrospectively regrade.
+No paired philosophy/checklist result; missing calls remain missing, no rerun.
 
-Package`2f7ac9009aa287d4eed93f792900fabb85e5d5e4a0d90acd0705e6c9a596a42e`, v17 runtime pinned; new independentUSD2.00 cap/max22calls/0retry,
-worst peak reservationUSD1.61848896, existing secret only,
-no historical budget transfer.0 calls at freeze. Unique run only after exact-head
-CI→merge→exact-main CI; source-first closure immediately, grant0/trigger removal.
-Then use observed generic errors/costs to implement or simplify; final reviewer/source
-perfection does not gate daily development. LongMemEval SEALED, no leaderboard.
+Complete raw/error/preflight/artifact/127-file exact-run archive retained. Total
+cost/invoice unknown; known response estimateUSD0.021122948, peak
+ratedUSD0.044369160; failed400 cost unknown. Grant0/
+trigger removed, no historical transfer. All material development-exposed/final-consumed.
 
+Next general JSON-mode request preflight/error receipt and actual primary-source
+frame audit repair, then source-bearing ordinary-input coverage with new frozen
+development items. Simplify unsupported-scope preparation overhead; no single-item
+rules or historical capability upgrade. Final reviewer/source perfection is no
+global development gate. LongMemEval SEALED, leaderboard inactive.
 
 [Conditional context transport v17](docs/HCL_DEVELOPMENT_READER_COST_V17.md) adds
 opt-in exact aliases for repeated opaque IDs plus JSON whitespace minification.
