@@ -14,7 +14,21 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: DRC005_FROZEN_DEVELOPMENT_REALITY_CHECK**
+**NEXT_READY: ORDINARY_PARAGRAPH_ACCESS_AND_NO_TREATMENT_CONTEXT_SIMPLIFICATION**
+
+[DRC005 source-first closure](reports/HCL_DRC005_SOURCE_FIRST_CLOSURE.md): INCONCLUSIVE,
+Base7/8/H8/8,onegain/0harms,checked H treatment0/8. One native-label wrapper improvement
+cannot establish specialized attribution or broad efficacy. All16 actual-source/JSON
+outputs pass, semantic adequacy unverified.16calls/0extraction/0retry,peakUSD0.11298936,
+raw estimateUSD0.110376112,invoiceunknown. Hpeak~31%above Base. Grant0/trigger removed,
+128-file exact archive/raw receipts preserved; exposed material excluded from final.
+Next general paragraph B02 coverage and unsupported-input context simplification,
+whole sources/source-state boundaries retained. No gold/case patch, new ontology,
+old budget or rerun. LongMemEval SEALED; final reviewer/source is no daily gate.
+
+## DRC005 preserved execution freeze
+
+**Historical queue snapshot: DRC005_FROZEN_DEVELOPMENT_REALITY_CHECK**
 
 [DRC005 protocol](docs/HCL_DRC005_DEVELOPMENT_PROTOCOL.md) freezes8 concrete-new public
 ToMBench access/social-communication tasks, not a newly unseen writing system.
@@ -30,7 +44,7 @@ delete, then general coverage repair/simplification, accepting negative outcomes
 
 ## v20 preserved implementation snapshot
 
-**NEXT_READY: FRESH_REPORTED_ACCESS_DEVELOPMENT_REALITY_CHECK**
+**Historical queue snapshot: FRESH_REPORTED_ACCESS_DEVELOPMENT_REALITY_CHECK**
 
 [Ordinary access/simplification v20](docs/HCL_DEVELOPMENT_ORDINARY_ACCESS_V20.md)
 adds actual existing B02 reported information-route checks beside B01 from complete
@@ -390,7 +404,7 @@ used for development repair, never confirmation. Immutable v6/refusal/paid recei
 retain exact certified replay; v7 amendment pins the new runtime.0 new calls/spend.
 Unique next task: independent protected source/item and blinded semantic review,
 strong comparators and actual treatment/coverage before new comparison; no more
-paid interface source swaps or old-task reruns. I02 remains NEXT_READY.
+paid interface source swaps or old-task reruns. Historical pre-amendment queue was I02.
 
 The [v9 complete-source comparator envelope](docs/HCL_I02_FULL_SOURCE_ARMS_V9.md)
 implements ordinary C/P/G inputs up to500,000 total UTF8 source bytes, preserving
@@ -447,7 +461,7 @@ behavior unverified. Authored repetitive fixture does not establish literary
 semantics, independent review, comparator qualification or H efficacy.
 Unique next task: distinct protected source/task qualification using the typed
 contract and source/rights/exposure gates; do not rerun consumed fixtures or
-Gilman/James. I02 remains NEXT_READY; historical dispositions unchanged.
+Gilman/James. Historical pre-amendment queue was I02; historical dispositions unchanged.
 
 The [v3 long-input interface calibration freeze](docs/HCL_I02_SOURCE_HOLDER_V3_LONG_CALIBRATION.md)
 uses a **new authored 81,243-character / 804-line fixture**, complete ordinary
@@ -556,7 +570,7 @@ or efficacy claim. Whole author/system/task/fingerprint is development-excluded 
 **DEFERRED_EMBEDDED_LYRIC_RIGHTS**: original drama term metadata does not fully resolve
 all quoted historical lyric versions/China scope. No provider input, paid package,
 trigger or grant;0 calls/spend. Source/task/review are development only, not independent
-expert semantics or confirmation. I02 remains NEXT_READY; resolve adequate primary
+expert semantics or confirmation. Historical pre-amendment queue was I02; resolve adequate primary
 rights/provenance or continue a separate safe family, plus blinded qualification
 before any comparison. Do not remove lyrics, recycle old grants or expand H modules.
 
@@ -683,6 +697,6 @@ Clifford193-file Git-verified certified replay uses its actual run SHA/runtime w
 closed grant/removed trigger, no latest substitution or rescoring. Bounded25-source
 SQuALITY dev metadata screen approves0 inputs/cases; source/question/reference text
 not displayed.0 new calls/spend. Independent reviewer/second family unavailable;
-I02 protected source/task and competent semantic comparators remain NEXT_READY.
+I02 protected source/task and competent semantic comparators were the historical pre-amendment queue.
 Historical dispositions/Gregory rights hold/LongMemEval SEALED unchanged.
 
