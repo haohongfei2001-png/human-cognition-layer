@@ -1,0 +1,175 @@
+{
+  "cases": [
+    {
+      "case_id": "socialchem/agency/4093dfe366184a2a",
+      "dataset": "mbforbes/social-chemistry-101",
+      "gold": "agency",
+      "kind": "label",
+      "license": "CC-BY-SA-4.0",
+      "native_fields_retained": [
+        "situation",
+        "action"
+      ],
+      "native_id": "rot/rocstories/f64834fb-b003-4373-b168-5643edb51178/sentence5/3IOEN3P9SAYJJE7ZR2D5MVLDCTR16A/89/3/14",
+      "native_row_sha256": "d9598f8472ab383fdfa62044a317c6945b1788d0b5b2420d1c6fafe98bfa24e3",
+      "question": "Is the action not liking some people something you do or control, or is it something you experience?",
+      "scope": "NATIVE_ACTION_AGENCY_LABEL_AGREEMENT_WITH_ADDED_ORIGINAL_SITUATION_CONTEXT_NOT_FULL_BENCHMARK_SCORE",
+      "source": "Situation: Moe ignored Rebecca because he didn't like her.\nAction: not liking some people",
+      "source_sha256": "7ade0ffa3e55e3011dfe0cd3dec448d5d1b98bee0cbaf4c65310adeb551c965c",
+      "task": {
+        "definition": "agency = something one does or controls; experience = something one experiences. Predict the supplied dataset annotation, not intent, culpability or moral truth.",
+        "labels": [
+          "agency",
+          "experience"
+        ]
+      }
+    },
+    {
+      "case_id": "socialchem/agency/b1f02ac38c9400f8",
+      "dataset": "mbforbes/social-chemistry-101",
+      "gold": "agency",
+      "kind": "label",
+      "license": "CC-BY-SA-4.0",
+      "native_fields_retained": [
+        "situation",
+        "action"
+      ],
+      "native_id": "rot/rocstories/09205bdb-a0c7-4f2b-a974-31783d301be8/sentence2/3E337GFOLCNOUE3U82KPVTB5897GN8/42/4/93",
+      "native_row_sha256": "874bd1ac2c2b0bfbb2f4b43c8aae1c9cf4ba773c687a95aadad4be5475abd8e6",
+      "question": "Is the action expecting people to bring food for later use something you do or control, or is it something you experience?",
+      "scope": "NATIVE_ACTION_AGENCY_LABEL_AGREEMENT_WITH_ADDED_ORIGINAL_SITUATION_CONTEXT_NOT_FULL_BENCHMARK_SCORE",
+      "source": "Situation: It was projected to be a long day, but Hana did not pack snacks.\nAction: expecting people to bring food for later use",
+      "source_sha256": "900a9ec6a1824cb723449dc075b8034ee44d8b9fca5be146dc81c886b0b3eb21",
+      "task": {
+        "definition": "agency = something one does or controls; experience = something one experiences. Predict the supplied dataset annotation, not intent, culpability or moral truth.",
+        "labels": [
+          "agency",
+          "experience"
+        ]
+      }
+    },
+    {
+      "case_id": "socialchem/agency/5a0631bd9249c7c4",
+      "dataset": "mbforbes/social-chemistry-101",
+      "gold": "experience",
+      "kind": "label",
+      "license": "CC-BY-SA-4.0",
+      "native_fields_retained": [
+        "situation",
+        "action"
+      ],
+      "native_id": "rot/rocstories/4854b04f-30e5-40bd-b5b8-a58e74ceb197/sentence3/3MD9PLUKKLTOLVYZYU8EG0RBMNJZND/129/5/127",
+      "native_row_sha256": "334dda71374d3bec1ec9c5bd0b72d6e87f20bcc4f025f2b2b252d932f680e575",
+      "question": "Is the action being offended when someone you work with declines an invitation to hang out. something you do or control, or is it something you experience?",
+      "scope": "NATIVE_ACTION_AGENCY_LABEL_AGREEMENT_WITH_ADDED_ORIGINAL_SITUATION_CONTEXT_NOT_FULL_BENCHMARK_SCORE",
+      "source": "Situation: She said she would contact me if the old work group went out.\nAction: being offended when someone you work with declines an invitation to hang out.",
+      "source_sha256": "f84366800123ccb3e4be8aba07f6985bbe188ca006ec911c12686001c8b964ab",
+      "task": {
+        "definition": "agency = something one does or controls; experience = something one experiences. Predict the supplied dataset annotation, not intent, culpability or moral truth.",
+        "labels": [
+          "agency",
+          "experience"
+        ]
+      }
+    },
+    {
+      "case_id": "socialchem/agency/333f920a3e0f16b3",
+      "dataset": "mbforbes/social-chemistry-101",
+      "gold": "agency",
+      "kind": "label",
+      "license": "CC-BY-SA-4.0",
+      "native_fields_retained": [
+        "situation",
+        "action"
+      ],
+      "native_id": "rot/rocstories/06cf6dc1-9885-480f-88ba-238552b6459f/sentence2/3EQHHY4HQV7K4PXO42O31CBJINXG57/42/2/145",
+      "native_row_sha256": "a42af54a62a1c04e60b2e5c382daeeb516ae333282450ea83c9fe304b545e219",
+      "question": "Is the action sharing a cabin with your friends. something you do or control, or is it something you experience?",
+      "scope": "NATIVE_ACTION_AGENCY_LABEL_AGREEMENT_WITH_ADDED_ORIGINAL_SITUATION_CONTEXT_NOT_FULL_BENCHMARK_SCORE",
+      "source": "Situation: He arrived and picked out a cabin to share with several of his friends.\nAction: sharing a cabin with your friends.",
+      "source_sha256": "fc3ed1ec510318bc20ed4007d32d7cd566c0b57a0078176608a59f9fa395510f",
+      "task": {
+        "definition": "agency = something one does or controls; experience = something one experiences. Predict the supplied dataset annotation, not intent, culpability or moral truth.",
+        "labels": [
+          "agency",
+          "experience"
+        ]
+      }
+    },
+    {
+      "case_id": "acadreason/philosophy/7",
+      "checklist": [
+        "1. Does the answer include content on the elements of ideological flaws and the Marxist affinities with radical realism?",
+        "2. Does the answer include content on strategies for debunking ideologies without appealing to moral norms?",
+        "3. Does the answer discuss whether a critique of ideologies should elide moral reflection?",
+        "4. Does the answer include perspectives on the limits of ideology critique of radical realists?",
+        "5. Does the answer include the view that ideology critique should reclaim moral concepts from their distortions?"
+      ],
+      "dataset": "OPPO-PersonalAI/Acadreason-benchmark",
+      "gold": "1.Elements of ideological flaws and the Marxist affinities with radical realism | Realists focus on practices of self-justification; that is, moments in which might makes right. When a regime resorts to overt coercion to bend the will of its subjects, ideologies have not fulfilled their function – their power lies in being a covert kind of influence, difficult to see. | The most radical members see good reasons to find ideal theories of justice ideologically suspicious. Their scepticism rooted, at least to some extent, in the being/consciousness doctrine of historical materialism. | Conclusion: Realists draw inspiration from Marx and critical theory, which is why they tend to endorse, roughly speaking, a conception of ideologically distorted beliefs, attitudes and desires as shaped and formed by powerful interests within contexts of inequality. | 2.Strategies for debunking ideologies without appealing to moral norms | Radical realists should be keen to avoid what Williams described as a 'vulgar Marxism' that rejects all moral ideas as unworldly prejudices. | Radical realists should want to say something more moderate, namely that moral theories that abstract from political facts risk being prejudice-ridden. | Feasibility can be fetishised, as radical realists could argue by drawing on Adorno. Conceptions of usefulness and comprehensibility will bear the stamp of the powers that be and might thus be delusional themselves, especially since we tend to have a poor grasp of when it is really impossible to do things differently. | For radical realists, critique of such ideological claims about necessity and nature can be powerful. It historicises concepts and ideas that claim to be universal. | Conclusion: It's a powerful strategy to criticize such ideological claims about necessity and nature. | 3.Doubts as to whether a critique of ideologies should elide moral reflection | An evident way to debunk legitimation stories without resorting to moral principles is to show that they contradict empirical facts. radical realists wish to reject the epistemic warrant of beliefs in light of the reasons to mistrust the circumstances under which they arose. They rely upon an epistemological theory of reliable verification: A belief is epistemically suspect if it depends on premises that originate from the same source by which it is supposed to be justified. | A particularly promising form of critique assesses the function of beliefs, appeals to concepts and institutions that justify and sustain a political and economic order. | In such cases, however, it becomes difficult to grasp in what sense critique can or should remain outside of the moral realm to address the cui bono question: Who benefits from certain beliefs being firmly held, and what are the implications of exposing this? | Critical Theory Test by Williams: The critical question is counterfactual: If the disadvantaged were to come to know 'properly' why they really hold a belief, 'would they give it up?'One begins with particular convictions and imagines reflective questions the disadvantaged might pose. A person following these reflective steps would realise they are in a precarious position to judge whether their trust in the official stories is justified. And practical consequences follow from such a process of enlightenment. | Conclusion: There are multiple ways in which schemes of political self-justification can be evaluated without rooting criticism in a moral normativity. | 4.Limits of ideology critique of radical realists | Realists claim they can achieve similar objectives as morality-based ideological critiques without the 'risks and complications introduced by moral premises'. But avoiding moral premises entails risks and complications of its own. It can give rise to an undialectical mode of thinking that dreams of closing off entire realms of reflection while maintaining a posture of value neutrality. | Raise three challenges to radical realists via Adorno: First, Realists do not say that the relativity of judgments to constellations of power is problematic in a moral sense. But mere mistrust of the content of beliefs and the purposes of practices, given that they are a product of motivated reasoning is not enough to discredit them. Second, Realists, given their desire for moral abstinence, might fail to account for the normative presuppositions that explain their critical attitude towards the effects of power. Third, knowledge about the true origin of beliefs as well as the pliable nature of the order of things is not only difficult to gain and appreciate; it would also not suffice to liberate us from illusions since ideologies serve multifarious deep-seated needs and desires. There is reason to question the explanatory power of the radical realist ideology critique and the extent to which it can serve as an 'instrument for agents'. | Revisiting Adorno's reflections on the elements of fascist propaganda: The function of fascist propaganda is a kind of wish-fulfillment or gratification. This distortive communication is amplified by forms of moralisation that organise the world along simple dichotomies of black and white, good and evil. Radical realists will have difficulty comprehensively criticising this kind of abuse, because it requires reflection on those moments of inversion in which the cruel comes to be seen as just, and anti-democratic wishes are cloaked as democratic. | Conclusion: The ideology critique of radical realists, which bypasses morality, has notable limitations. | 5. Ideology critique should reclaim moral concepts from their distortions | Moral anti-moralism: it holds that illusions of individual responsibility and equality of opportunity hide the oppressive and alienating aspects of capitalism, which allows misery to persist amid overflowing richness. | Adorno found talk of responsibility ideologically suspicious. It distracts from how individuals are constituted and constrained by market pressures and social coercion, hiding the fact that most kinds of economic difference arise from factors beyond their control. | Adorno's ideology critique is driven by the moral belief that all senseless suffering should be abolished, grounded in an empirical observation that should make us not feel at home in this world: The forces of production and our technological capabilities are developed to such an extent that it is materially possible that no one would have to go hungry anymore or be homeless. Still, millions live in misery, which creates a strong apologetic necessity to justify suffering that could be prevented. | Realists would be right to ask for justifications for the reflective standing of those able to discern abuses of moral concepts and lend a voice to suffering. Yet they would also have to concede the limits of their approach and acknowledge that there are kinds of radical criticism that only an experience-led, moral Ideologiekritik can make, even if that introduces complications. | Conclusion: Only on the basis of a moral anti-moralism can we detect how ideological distortions turn ideas of the good and just into a 'cover of evil'. | | Conclusion: Bringing early critical theory into a long-overdue conversation with the realist movement in political philosophy is productive. Unlike radical realists, however, Adorno thought that a crucial task of critical theory is to reveal how concepts such as freedom, responsibility and democracy can become apologetic instruments for the unacceptable. The latter requires a dialectical critique that rescues morality from moralism, which disguises the cruel as just and diverts our attention away from the real causes of suffering and pain.",
+      "kind": "philosophy",
+      "license": "Apache-2.0",
+      "native_id": "7",
+      "native_row_sha256": "3967e2a4f7f647cefe329b29404224928eb3c5b61f649c13f1833b13cbb76a16",
+      "question": "How to understand the radical realists' attempt to develop an empirically grounded ideology critique that eschews moral premises, in light of the connection between radical realism and the Frankfurt School, particularly Theodor W. Adorno?",
+      "scope": "NATIVE_AUTHOR_CHECKLIST_AGREEMENT_DEVELOPMENT_MODEL_JUDGE_NOT_EXPERT_TRUTH_OR_FULL_BENCHMARK_SCORE",
+      "source": "How to understand the radical realists' attempt to develop an empirically grounded ideology critique that eschews moral premises, in light of the connection between radical realism and the Frankfurt School, particularly Theodor W. Adorno?",
+      "source_sha256": "a5d7b5c4b718f2e6c68278c1e3f013ba6c9512a434cfb0ad40ccefebb2b891d5",
+      "task": {
+        "answer_type": "freeform explanation of the question",
+        "source_scope": "NATIVE_QUESTION_ONLY_NO_PAPER_HINTS_GOLD_OR_CHECKLIST; ordinary background knowledge permitted equally"
+      }
+    },
+    {
+      "case_id": "acadreason/philosophy/5",
+      "checklist": [
+        "1.Does the answer include content related to sharing moral understanding?",
+        "2.Does the answer include the view that the constitutive aim of interpersonal justification is shared moral understanding?",
+        "3.Does the answer include content on shared understanding in the context of interpersonal justification?",
+        "4.Does the answer include the view that an apology should aim to reflect a shared moral understanding of the wrong done to its recipient?",
+        "5.Does the answer include content on the Shared Understanding Condition of apology?"
+      ],
+      "dataset": "OPPO-PersonalAI/Acadreason-benchmark",
+      "gold": "1.give an account of what it takes for you and me to share moral understanding | 1.1 what it takes to have moral understanding | Understanding is a positive epistemic status that is graded along both objective and subjective dimensions. On the objective side of things, I understand something only if my conception of it is accurate. On the subjective side of things, I understand something only if I conceive of it in a way that makes sense to me. | You can know more than you understand. In the case of Immoral Debt, whereas Maya may understand why Madagascar’s external debt ought to have been abolished, Jared does not. His belief that the debt ought to have been abolished is not based in his own appreciation of the reasons that make it so. He doesn’t understand himself why that moral proposition is true. | Conclusion: Moral understanding is an epistemic achievement about moral matters. When you have moral understanding, you are getting things right: you represent moral reality in an accurate way. But in addition to this, you also represent that part of moral reality in a way that makes sense to you: your moral beliefs are themselves based directly in the reasons that make those beliefs true. | 1.2 Moral understanding that is shared between you and me | When you and I share moral understanding, not only do we have moral understanding in common, but the very fact of our having moral understanding in common is itself out in the open, in a shared space between you and me. We together acknowledge that we understand things the same way and in so doing we jointly commit to this way of understanding things. | The notion of a shared space: In the example, a hot day, from Charles Taylor, the sort of public space that communication makes possible is that it creates a “common vantage point from which we survey the world together”. When you and I share moral understanding, we survey moral considerations from such a common vantage point. | The basic idea is that sharing moral understanding is structurally like sharing the experience of a hot day, with two small differences. One is that understanding is itself a committal attitude. The other is that what enters a shared space between us when we share moral understanding is usually more complex. | 2.Within the central moral practices of interpersonal justification, we owe it to others to aim at sharing moral understanding with them. | one way to get at the nature of interpersonal justification is to ask ourselves what it aims at. That is, what is the constitutive aim of justifying your action to another person? | There are two complementary ways of thinking about constitutive aims. One is in terms of success conditions. If C is what it takes for some activity A to be successful, then C is the constitutive aim of A. The second way of thinking about constitutive aims is in terms of what it takes for an agent to count as performing the activity at all. | Delivery Model of interpersonal justification points that to justify your action to someone is just to give them the reasons why your action is right. | The Delivery Model runs into two major problems. First, the Delivery Model is unable to account for the fact that the duty to justify myself to you is specifically mine to carry out. Second, in the Delivery Model, it does not matter how you respond—whether you accept or reject the reasons I have provided, whether you call into question my way of describing the situation, whether you draw my attention to considerations you think I have overlooked, and so on. | Limitations of the Delivery Model: first, Delivery Model fails to account for the fact that the practice of interpersonal justification aims at a kind of uptake on the part of the addressee. Second, the Delivery Model is unable to make sense of why we engage in the practice of justifying ourselves to others, since it does not matter how you respond. | Our account of interpersonal justification, that is, should explain the personal character of the duty to justify ourselves to others, as well as the importance of the response of the agent to whom such a justification is addressed. | The constitutive aim of interpersonal justification is shared moral understanding, which can be called Shared Understanding Model. When I am justifying myself to you, what I am doing is trying to bring it about that you understand my reasons for acting as I did, and thereby why I was justified in acting as I did. On this picture, interpersonal justification overlaps with the process of making oneself understood. I put my reasons out in the open, the reasons I take to justify my action, in the hope that you will understand me as having acted reasonably, or on good grounds. In so doing, I aim for us to understand the reasons for which I acted in the same light, as reasons justifying what I did. | The Shared Understanding Model provides a unified explanation of our two desiderata. First, it can explain the observation that, when I owe you a justification for my action, that duty is specifically mine to carry out. Second, the view can also accommodate the observation that uptake matters to interpersonal justification—that whether I am successful in justifying myself to you depends on how you respond. | The Moral address view, as another alternative, points that the aim of interpersonal justification remains to deliver or provide a justification, with the caveat that this information. But it neglects the uptake at which interpersonal justification aims. | The Knowledge view, as another alternative, pointing that knowledge is the aim of interpersonal justification, avoids the problem of indifference. But it runs into a different problem: asking you to take my word for it that I was justified in acting as I did is something altogether very different from trying to justify my action to you. Knowledge can always be acquired on the basis of someone else’s authority, but trying to secure agreement by appeal to authority is antithetical to the practice of interpersonal justification. In justifying my action, I don’t appeal to my authority. I appeal to your judgment. | Conclusion: The constitutive aim of interpersonal justification is shared moral understanding. When explicating interpersonal justification, the Shared Understanding Model outperforms the Delivery Model, the Moral Address View, and the knowledge view. | 3.An apology should aim to reflect a shared moral understanding of the wrong done to its recipient. | Feeling Bad Model of apology: It says that a good apology is one that communicates that I feel (sufficiently) bad about what I did, where the nature of the bad feeling—guilt, remorse, contriteness—is whatever feeling is either constituted by or appropriate in light of the judgment that I did something wrong. | Limitations of the Feeling Bad Model: First, it makes it too easy to delegate the duty to apologize to third parties. Second, there is more to apologizing than merely expressing a sufficient amount of bad feeling. I am not off the hook when I unwittingly express feelings of remorse. | Moral address view: It suggests that the duty to apologize is a duty to respond to a | second-personal demand. It is thus a clear improvement on the Feeling Bad Model since it adequately explains the personal character of the duty to apologize. But it fails to account for the importance of the apologizee’s perspective on the wrong at issue. | Shared Understanding Condition on apology: It suggests that an apology should aim to reflect a shared moral understanding of the wrong done to its recipient. It built up from more elementary ones. First, in apologizing to you, I need to understand what I did wrong. Second, I need to understand what I did wrong in relation to you, from your perspective: I need to recognize the appropriateness of your reasons for resenting23 or otherwise objecting to what I did. Third, that very recognition of your reasons needs to be addressed to you: I need to acknowledge, to you, that your reasons for objecting to what I did are my reasons too. | The Advantages of the Shared Understanding Model: It provides a unified explanation of these two central features of apology. What explains why I must apologize myself, as well as why your perspective on the wrong matters, is one and the same fact: that an apology should try to bring about moral understanding that is shared between us. | Conclusion: When we owe an apology, what we owe is an apology that reflects a shared moral understanding of the wrong done to its recipient. | 5.Reasoning with the Unreasonable | A worry about the shared understanding: How could I be under a moral obligation even to try to bring it about that I share moral understanding with another person, when I know that my attempt to do so is all but certainly doomed to end in failure? It seems there is no duty to try to reach a shared moral understanding. | Two general observations about the view to meet the challenge: First, the duty to justify ourselves to others, or to apologize, is a directed duty: it is the logical flipside of another person’s claim or right against me that I act in a certain way. Second, The right to a justification or an apology is really a cluster of rights is to say that it includes rights to the performance of separate actions. | Conclusion: The duty to justify ourselves to others, or to apologize, is best construed as a cluster of duties, to which a cluster of claim-rights corresponds. Central among these rights is a right that those who owe us a justification or an apology try to reach a shared moral understanding with us. When a claim-holder is sufficiently unreasonable, however, they may thereby forfeit their claim that others try to reach a shared moral understanding with them, even if they retain the more minimal claim to be given a justification or offered an apology. | | Conclusion: We sometimes owe it to others to try to share moral understanding with them, the first based on the nature of interpersonal justification, the second on the norms of apology. Moral understanding that is shared with another person is important.",
+      "kind": "philosophy",
+      "license": "Apache-2.0",
+      "native_id": "5",
+      "native_row_sha256": "6b6c0b3a265917d949d09f3cff5f81680c3f4d228fd27cef03498d1282ab5ae4",
+      "question": "Why shared moral understanding is important?",
+      "scope": "NATIVE_AUTHOR_CHECKLIST_AGREEMENT_DEVELOPMENT_MODEL_JUDGE_NOT_EXPERT_TRUTH_OR_FULL_BENCHMARK_SCORE",
+      "source": "Why shared moral understanding is important?",
+      "source_sha256": "ea517b24110b9df37ac393efda74b8c67fe5148a451f0bb9f1d28e1fc7014b8f",
+      "task": {
+        "answer_type": "freeform explanation of the question",
+        "source_scope": "NATIVE_QUESTION_ONLY_NO_PAPER_HINTS_GOLD_OR_CHECKLIST; ordinary background knowledge permitted equally"
+      }
+    }
+  ],
+  "evidence_level": "DEVELOPMENT_ONLY_CONSUMED_FOR_FINAL_CONFIRMATION",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "pins": [
+    {
+      "dataset": "mbforbes/social-chemistry-101",
+      "eligible_rows": 8492,
+      "license": "CC-BY-SA-4.0",
+      "native_file": "social-chem-101.v1.0.tsv",
+      "revision": "116ead94d7e25dd8c02302c0642de63e99d50477",
+      "selection_rule": "first4 SHA256(HCL-DRC003-v1/social/rot-id/breakdown-worker-id), unique situation-short-id; area rocstories, split test, nonempty native agency label; no output/route filtering",
+      "sha256": "ebaa524280c53aa3dbfb2b73502b120eeb71d03523a557c659275aebb2afd95a",
+      "url": "https://storage.googleapis.com/ai2-mosaic-public/projects/social-chemistry/data/social-chem-101.zip"
+    },
+    {
+      "dataset": "OPPO-PersonalAI/Acadreason-benchmark",
+      "eligible_rows": 10,
+      "license": "Apache-2.0",
+      "native_file": "data/acadreason_benchmark.jsonl",
+      "revision": "829a311174b82973b67907c459d1b3b58608d7c4",
+      "selection_rule": "first2 SHA256(HCL-DRC003-v1/philosophy/task-id), native philosophy domain, no output/route filtering",
+      "sha256": "27c2eeee3bb9fe6f0bb94276268daa86af196c32759fc77f5073093c3c3dfe1b",
+      "url": "https://raw.githubusercontent.com/OPPO-PersonalAI/Acadreason-benchmark/829a311174b82973b67907c459d1b3b58608d7c4/data/acadreason_benchmark.jsonl"
+    }
+  ],
+  "prior_history_baseline": "aead0e7afbd1b90469380bd0044f5aaa417fda02",
+  "schema": "hcl-drc003-subset-v1",
+  "source_admission": "Prior current document/source/exposure-name search no HCL system hit; selected concrete history gate against pre-source baseline runs before paid transport; reachable-history only, no deleted-ref/model-training independence claim."
+}

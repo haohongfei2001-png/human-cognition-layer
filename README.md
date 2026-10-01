@@ -14,7 +14,23 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: FRESH_PUBLIC_DEVELOPMENT_REALITY_CHECK_BATCH_DRC003**
+**NEXT_READY: DRC003_ONE_FROZEN_NATIVE_DEVELOPMENT_RUN**
+
+[DRC003 frozen development protocol](docs/HCL_DRC003_DEVELOPMENT_PROTOCOL.md): four
+fresh public Social Chemistry action-agency tasks and two ACADREASON philosophy
+questions, source/rights/history and whole-input fairness gates before transport.
+Same strong DeepSeekV4Pro Base/current conditional H; all preparation/fallback/
+treatment absences saved, no manual psychological-state/gold input. Native agency
+label and anonymous same-family philosophy-checklist agreement, never moral truth
+or expert/final evidence. All opened systems registered development-exposed/final-consumed.
+
+Package`2f7ac9009aa287d4eed93f792900fabb85e5d5e4a0d90acd0705e6c9a596a42e`, v17 runtime pinned; new independentUSD2.00 cap/max22calls/0retry,
+worst peak reservationUSD1.61848896, existing secret only,
+no historical budget transfer.0 calls at freeze. Unique run only after exact-head
+CI→merge→exact-main CI; source-first closure immediately, grant0/trigger removal.
+Then use observed generic errors/costs to implement or simplify; final reviewer/source
+perfection does not gate daily development. LongMemEval SEALED, no leaderboard.
+
 
 [Conditional context transport v17](docs/HCL_DEVELOPMENT_READER_COST_V17.md) adds
 opt-in exact aliases for repeated opaque IDs plus JSON whitespace minification.

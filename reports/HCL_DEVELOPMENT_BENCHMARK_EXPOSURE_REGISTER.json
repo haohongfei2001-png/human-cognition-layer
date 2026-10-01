@@ -41,6 +41,33 @@
       "reason": "DRC002 primary card opened; incidental native validation examples exposed; forthcoming test subset",
       "status": "DEVELOPMENT_EXPOSED",
       "writing_system_id": "mmlu-pro"
+    },
+    {
+      "batch": "DRC003",
+      "dataset_id": "mbforbes/social-chemistry-101",
+      "final_confirmation": "CONSUMED_FOR_FINAL_CONFIRMATION",
+      "publisher_url": "https://github.com/mbforbes/social-chemistry-101",
+      "reason": "primary source README and distribution opened for DRC003 development only",
+      "status": "DEVELOPMENT_EXPOSED",
+      "writing_system_id": "mbforbes/social-chemistry-101"
+    },
+    {
+      "batch": "DRC003",
+      "dataset_id": "OPPO-PersonalAI/Acadreason-benchmark",
+      "final_confirmation": "CONSUMED_FOR_FINAL_CONFIRMATION",
+      "publisher_url": "https://github.com/OPPO-PersonalAI/Acadreason-benchmark",
+      "reason": "primary README/license and annotation distribution opened for DRC003 development only",
+      "status": "DEVELOPMENT_EXPOSED",
+      "writing_system_id": "OPPO-PersonalAI/Acadreason-benchmark"
+    },
+    {
+      "batch": "DRC003",
+      "dataset_id": "facebook/ExploreToM",
+      "final_confirmation": "CONSUMED_FOR_FINAL_CONFIRMATION",
+      "publisher_url": "https://huggingface.co/datasets/facebook/ExploreToM",
+      "reason": "metadata screen only; concrete items not read; choose permissive sources without assuming CC-BY-NC project-use eligibility",
+      "status": "DEVELOPMENT_EXPOSED",
+      "writing_system_id": "facebook/ExploreToM"
     }
   ],
   "longmemeval": "SEALED_NOT_ACCESSED",
@@ -50,11 +77,13 @@
     "0cc630a7cccbcc3a02620e1da620e29b1702e9b84f358fd3cd6d3a9926f3b206",
     "0e24a191921c2f453518a537a8b2117bd137e7714d4ef1565e9ba06c1ecb9ad8",
     "11cf6b4d59da493fc48490d528e378228484d77f78cc79c7c74753f3487cf777",
+    "27c2eeee3bb9fe6f0bb94276268daa86af196c32759fc77f5073093c3c3dfe1b",
     "36de9549d03d3930d2546c4f9bae00528224b609d12478fa5ad1d58491be90dd",
     "8fbba3a618feb404af5b4de3f0a8d7f6165169a4c7bf6cc0bef0c58545103439",
     "99a399d50f1a996388e94ab435ba0ceadc6b8ad9d90e6420358c962a4850d217",
     "9e55ababc9946e8fdb310b948b56fec3b964ce50b624ce91ac1c1efb727e2b8d",
     "acfffe050552dca332ad62dcdc7085a8eeaef0dbecfe18b0392d48f4e97dc46a",
+    "ebaa524280c53aa3dbfb2b73502b120eeb71d03523a557c659275aebb2afd95a",
     "f7ed1204f01a3cbb17dafc9fc6f94c92d668344402cfe5a2bc4f1a08a6ae7b77",
     "f8330faf307cf6d6157c04ef2147d11fa51e065348f8d8857cae6811d089f50f",
     "ff42d5f01bb17d458370d86633535cafa1e2f38a1edd8d03f5cab1eb8a6afb51"
@@ -99,13 +128,16 @@
     "63336cafef28d3a82d96dd80973a17219d9c3164add27fb5dc28c83ace836867",
     "6c0bf60756b4627174d0446b483c92d5bda0752b3c51e4b0c8e7bd7ae2f2c084",
     "70c76d0e9304f9244460b1c21725753aa3f7e0bdfc77656db69ff1a4d660b291",
+    "7ade0ffa3e55e3011dfe0cd3dec448d5d1b98bee0cbaf4c65310adeb551c965c",
     "7dea641ee2ff554aa748c276c795e79af2980de439039469e532b2989f9a0a2c",
     "8c5e69ff9c781f919eae868ef33bdece26cfcdddc14e3deca735952981ffd763",
     "8ce7133ade5c38ed7f810cf65359eeedd26a3f8e63380b8523faa15abae6ba12",
+    "900a9ec6a1824cb723449dc075b8034ee44d8b9fca5be146dc81c886b0b3eb21",
     "90310fd77b2d89fed2225129b8ed1046aeafcddc086bc9d7e122759816d05c0f",
     "95666d65373188403525ef443aa035fb2a59f69b5bf1861d16a52ab2f886c14c",
     "9a60c4126654c9e2fd2e1dfc387d66da5dc10237826738b05e197e09566fae87",
     "9e44448dfcdb506761d2aace748e54e23dea83190e7d71eb24f34a4c8476c645",
+    "a5d7b5c4b718f2e6c68278c1e3f013ba6c9512a434cfb0ad40ccefebb2b891d5",
     "b52eb2cc22f63fe5a77aeb4482243c3393906377a87977d22bc74499c369c7f1",
     "be421fb12880870e0839a9620d30ff8a12a3db6087fe33542df114496c9fc3b4",
     "c0213aad9416dbc52964c3bf4a84f85d26f11ceaabd909900f8fce9d3d6def5d",
@@ -113,8 +145,11 @@
     "c3fd7e1b85ac7b04774b31cae5c76ca8a18aed64298aea2f38622a74fc9ff8d1",
     "d744b59ab6649f19fb6fd5709f793fc4034603a0b9b1d3e88d6ee5ae605157f1",
     "e6915f278231c22dfc10dc315cce3dd7620d3d047206569dfd174895cfabf634",
+    "ea517b24110b9df37ac393efda74b8c67fe5148a451f0bb9f1d28e1fc7014b8f",
     "ec043415709d50d7d39a7c27d2d1796f37bb1c035f717a35c96fd70cf2fa6bd9",
     "ee42f12689c6520fc383f03f23cfd85391bd4618de34309d86d173998e6c8561",
-    "f89f2ba879908ca81da95ed38c9d3f0529b4f2cb243a12419ed44382d2d187d1"
+    "f84366800123ccb3e4be8aba07f6985bbe188ca006ec911c12686001c8b964ab",
+    "f89f2ba879908ca81da95ed38c9d3f0529b4f2cb243a12419ed44382d2d187d1",
+    "fc3ed1ec510318bc20ed4007d32d7cd566c0b57a0078176608a59f9fa395510f"
   ]
 }
