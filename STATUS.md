@@ -31,7 +31,23 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: EMPTY_STATE_RUNTIME_CONTEXT_SIMPLIFICATION**
+**NEXT_READY: FRESH_CONCEPT_NORMATIVE_DEVELOPMENT_REALITY_CHECK**
+
+[Explicit empty-state simplification v24](docs/HCL_DEVELOPMENT_EMPTY_STATE_V24.md):
+when no cognition check executed, actual final input now says so explicitly and
+uses the complete-source/private-world/original-quote guard. Authored input770→548
+serialized characters; no measured token/invoice/answer-gain claim. Actual checked
+B01/C01/C03 inputs remain exactly equal to archivedv23.7new tests/source-revision /
+negative inference/composition/source-cited stub and eight exact consumed archives
+pass.0livecalls/spend, IMPLEMENTED_UNVALIDATED_SIMPLIFICATION, no new family/history
+upgrade. Next concrete-new public concept/normative development tasks, same strong
+Base/current H, frozen input/model/scorer before outputs; no treatment/outcome-based
+selection, solved-item reruns or perfect final reviewer/source daily gate.
+LongMemEval SEALED, leaderboard off.
+
+## DRC007 preserved source-first closure snapshot
+
+**Historical queue snapshot: EMPTY_STATE_RUNTIME_CONTEXT_SIMPLIFICATION**
 
 [DRC007 source-first closure](reports/HCL_DRC007_SOURCE_FIRST_CLOSURE.md): INCONCLUSIVE,
 native Base/H6/6,0answergains/0harms,checked H treatment0/6. Original-source delivery
