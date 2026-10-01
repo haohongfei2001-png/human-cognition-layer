@@ -28,11 +28,11 @@ class AdaptiveReaderTests(unittest.TestCase):
   rows=proposals()
   for r in rows:r['source_id']='garden'
   backend=Backend(rows)
-  p=w.prepare_reader_entry(QUERY,source_ids=('garden',),backend=backend)
+  p=w.prepare_reader_entry(QUERY,source_ids=('garden',),backend=backend,allow_translation=True)
   self.assertEqual(p.receipt['selection'],'CONDITIONAL_TRANSLATION');self.assertEqual(p.receipt['extraction_calls'],1);self.assertEqual(len(p.receipt['extraction_requests']),1);self.assertTrue(p.receipt['checked_treatment_present'])
   payload=json.loads(p.messages[-1]['content']);self.assertEqual(payload['sources'][0]['text'],SOURCE);self.assertTrue(payload['shared_semantic_binding']['assumptions']);self.assertFalse(p.receipt['semantic_certification'])
  def test_empty_candidate_fallback_full_source_with_attempt_receipt(self):
-  w=self.workspace(SOURCE);p=w.prepare_reader_entry(QUERY,source_ids=('garden',),backend=Backend([]))
+  w=self.workspace(SOURCE);p=w.prepare_reader_entry(QUERY,source_ids=('garden',),backend=Backend([]),allow_translation=True)
   self.assertEqual(p.receipt['selection'],'COMPLETE_SOURCE_AFTER_UNUSABLE_TRANSLATION');self.assertFalse(p.receipt['checked_treatment_present']);self.assertEqual(p.receipt['extraction_calls'],1);self.assertEqual(len(p.receipt['extraction_responses']),1);self.assertEqual(json.loads(p.messages[-1]['content'])['sources'][0]['text'],SOURCE)
  def test_one_final_raw_delivery_actual_source_namespace(self):
   w=self.workspace();calls=[];output=raw('garden','I believe the gate is clear.')
@@ -50,12 +50,12 @@ class AdaptiveReaderTests(unittest.TestCase):
   w=self.workspace(SOURCE)
   class Changed:
    def complete_json(self,*a,**k):w.put_source('garden','Eva retracted the earlier report.');return {'candidates':[]}
-  with self.assertRaises(ValueError):w.prepare_reader_entry(QUERY,source_ids=('garden',),backend=Changed())
+  with self.assertRaises(ValueError):w.prepare_reader_entry(QUERY,source_ids=('garden',),backend=Changed(),allow_translation=True)
  def test_transport_failure_propagates_no_retry(self):
   w=self.workspace(SOURCE);calls=[]
   class Failed:
    def complete_json(self,*a,**k):calls.append(1);raise RuntimeError('provider transport unavailable')
-  with self.assertRaises(RuntimeError):w.prepare_reader_entry(QUERY,source_ids=('garden',),backend=Failed())
+  with self.assertRaises(RuntimeError):w.prepare_reader_entry(QUERY,source_ids=('garden',),backend=Failed(),allow_translation=True)
   self.assertEqual(len(calls),1)
  def test_bad_ids_and_revision_during_final_block_raw_not_rewrite(self):
   for revision in (False,True):

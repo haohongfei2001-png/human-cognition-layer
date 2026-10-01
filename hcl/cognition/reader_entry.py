@@ -59,10 +59,23 @@ def _local(workspace, query, source_id, max_chars):
                                    max_context_chars=max_chars)
     messages = list(raw.messages)
     payload = json.loads(messages[-1]['content'])
+    from .ordinary_access import prepare_ordinary_access
+    access=prepare_ordinary_access(source,source_id=source_id,version=version)
+    preparation=dict(raw.preparation_receipt)
+    preparation['communication_treatment']=dict(mechanism='B02_EXISTING_REPORTED_ACCESS_CHECKER',
+        checked_operations=access['checked_operations'],coverage_failure=access['reason'],
+        knowledge_established=False,comprehension_established=False,private_state_established=False)
+    if access['state'] is not None:
+        payload['checked_reported_communication']=access['state']
+        preparation['specialized_cognition_treatment']=True
+        preparation['method']+='_reported_access_integration'
+        messages[0]=dict(role='system',content=messages[0]['content']+' Communication views use a source-local syntactic representation, not quotable original text. Reported receipt is not comprehension, acceptance, knowledge or private belief; availability/addressing and missing routes are not receipt or ignorance. Actor aliases are reversible local labels, not cross-source identities. Later source receipt cannot rewrite earlier non-receipt; source order is not calendar time.')
     # The nested local checker uses statement order; the primary wire version
     # is the actual shared source revision, not a reset checker-local version.
     payload['sources'][0]['version'] = version
     messages[-1] = dict(role='user', content=json.dumps(payload, ensure_ascii=False, sort_keys=True))
+    if len(json.dumps(messages,ensure_ascii=False))>max_chars:
+        raise ValueError('complete reader and access state exceed context budget; no truncation')
     original_sources_from_messages(messages)
     scope = Scope(source_ids=(source_id,))
     root = workspace.core.claim(scope, ClaimKind.SOURCE_REPORT,
@@ -76,15 +89,15 @@ def _local(workspace, query, source_id, max_chars):
         unknown_conditions=('calendar_and_receipt_time_not_established',))
     result = OperationResult(key, query, scope, versions, (claim,),
         json.dumps(messages, ensure_ascii=False, sort_keys=True),
-        json.dumps(raw.preparation_receipt, ensure_ascii=False, sort_keys=True))
+        json.dumps(preparation, ensure_ascii=False, sort_keys=True))
     workspace.executions += 1
     workspace._cache[key] = result
     return result
 
 
 def prepare_reader_entry(workspace, query, *, source_ids, backend=None,
-                         max_chars=64000, compact_context=True):
-    """Local first; at most one explicit optional extraction, no answer call.
+                         max_chars=64000, compact_context=True, allow_translation=False):
+    """Local first; optional extraction requires allow_translation=True, no answer call.
 
     Invalid/stale support, unknown transport failure and budget errors in the
     local whole-source path propagate. An unusable optional representation is
@@ -94,7 +107,7 @@ def prepare_reader_entry(workspace, query, *, source_ids, backend=None,
             or not isinstance(source_ids, tuple) or len(source_ids) != 1
             or source_ids[0] not in workspace._documents
             or type(max_chars) is not int or not 512 <= max_chars <= 64000
-            or type(compact_context) is not bool):
+            or type(compact_context) is not bool or type(allow_translation) is not bool):
         raise ValueError('one registered analyst source and bounded reader context required')
     if re.search(r'\b(?:At statement|before statement|after statement)\s+\d+', query, re.I):
         raise ValueError('project source explicitly before adaptive reader statement snapshot')
@@ -107,9 +120,10 @@ def prepare_reader_entry(workspace, query, *, source_ids, backend=None,
         extraction_responses=[], extraction_failure=None,
         semantic_certification=False, private_state_established=False,
         world_truth_established=False, answer_gain_established=False,
-        source_shortened=False, retry_count=0)
+        source_shortened=False, retry_count=0, allow_translation=allow_translation,
+        translation_scope='EXPLICIT_OPT_IN_CONDITIONAL_REPRESENTATION' if allow_translation else 'DEFERRED_BY_DEFAULT_UNSUPPORTED_EXTRACTION_SIMPLIFICATION')
     selected = local
-    if not receipt['checked_treatment_present'] and backend is not None:
+    if not receipt['checked_treatment_present'] and backend is not None and allow_translation:
         relay = _OneTranslation(backend)
         try:
             conditional = prepare_retained_reader(workspace, query, source_ids=source_ids,

@@ -124,3 +124,11 @@ optional extraction; specialized efficacy INCONCLUSIVE. No historical capability
 upgrade/rejection or benchmark-specific rule.24calls/0retry,peakUSD0.12908808,invoice
 unknown; grant0/trigger removed, exact runtime/raw/archive preserved. Development
 material excluded from final. Next general ordinary access integration/simplification.
+
+[Ordinary reported access v20](HCL_DEVELOPMENT_ORDINARY_ACCESS_V20.md): B02 actor
+information routes now enter ordinary source final state alongside B01 with0extraction,
+original source/revision/alias bindings, no comprehension/knowledge/private promotion.
+Default generic extraction simplified; conditional use explicit opt-in.9new checks/
+97 focused passes, authored v19→v20 positive composition/revision and consumed-input
+call avoidance (no answers rerun).0live calls/spend, utility IMPLEMENTED_UNVALIDATED;
+no new family or historical upgrade. Next fresh development reality check.

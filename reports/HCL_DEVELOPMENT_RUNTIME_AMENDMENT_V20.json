@@ -1,0 +1,28 @@
+{
+  "amended_hcl_runtime_sha256": "37609aa511d9717da7bc7ae344b9eddb4da40ea97edc4275a893ab87ac459d4a",
+  "answer_gain_claimed": false,
+  "confirmation_items_inspected": 0,
+  "consumed_drc001_runtime_preserved": true,
+  "consumed_drc002_runtime_preserved": true,
+  "consumed_drc003_runtime_preserved": true,
+  "consumed_drc004_runtime_preserved": true,
+  "consumed_dre001_runtime_preserved": true,
+  "consumed_v16_source_boundary_preserved": true,
+  "development_exposed_batches": [
+    "DRC001",
+    "DRC002",
+    "DRE001",
+    "DRC003",
+    "DRC004"
+  ],
+  "development_only": true,
+  "historical_i01_main_sha": "636c6fe849dfba641d03df2813d0e568a1835300",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "new_cognition_module": false,
+  "previous_hcl_runtime_sha256": "64057e56fae31fbc70b506f22f5a1ec67bd68b5595bae2531a00ff8c9a9ed1c8",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "reason": "SIMPLIFY_UNSUPPORTED_EXTRACTION_AND_ORDINARY_ACCESS_INTEGRATION",
+  "schema": "hcl-development-runtime-amendment-v20",
+  "semantic_certification_claimed": false
+}
