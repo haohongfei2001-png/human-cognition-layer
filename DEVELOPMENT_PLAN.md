@@ -28,6 +28,13 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: GENERAL_ORDINARY_ANSWER_SOURCE_INFERENCE_BOUNDARY_REPAIR**
 
+[Current source-history gate](docs/HCL_CURRENT_SOURCE_HISTORY_GATE.md): fresh
+provider-free source preparation uses full Git object IDs and merge-aware history,
+refusing shallow/partial repositories before blob inventory or content reads. Renamed/copied sealed objects remain excluded. This
+isolates the existing privacy guard from unadopted SID001 protocol/prompt branches;
+legacy consumed scanners and receipts remain immutable. A clean scan grants no
+rights, source qualification or provider spending.
+
 [Embedded scene-cue isolation](docs/HCL_EMBEDDED_SCENE_CUES_REPAIR.md):
 bracketed directions and fenced examples cannot change the outer speech scene.
 The shared narrator-cue admission prevents both false actual restoration and false
