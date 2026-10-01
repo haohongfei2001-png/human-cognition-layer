@@ -171,3 +171,11 @@ actual H treatment0/6:INCONCLUSIVE,no family/history/semantic upgrade. Source de
 Base5/6vsH6/6,one failed joined-ellipsis/raw retained,unattributed.12calls/0extraction /
 0retry,peakUSD0.03094212/invoiceunknown,grant0/triggergone,134-file archive/raw/hash,
 all opened material final-consumed. Next generic empty-state context simplification.
+
+v24 CAPABILITY_DELTA: no executed cognition now explicitly disclosed to final model,
+with smaller complete-source/private-world/quote contract. Exact archivedv23 checked
+state input unchanged;7new tests/authored source-cited stub, revision, negative
+inference and composition witness.770→548 authored serialized characters is not
+provider tokens/invoice/answer-gain evidence.0calls/spend,
+IMPLEMENTED_UNVALIDATED_SIMPLIFICATION, eight consumed archives/history preserved.
+Next fresh concept/normative development comparison; final confirmation separate.
