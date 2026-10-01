@@ -14,7 +14,27 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: SIMPLIFY_UNSUPPORTED_EXTRACTION_AND_ORDINARY_ACCESS_INTEGRATION**
+**NEXT_READY: FRESH_REPORTED_ACCESS_DEVELOPMENT_REALITY_CHECK**
+
+[Ordinary access/simplification v20](docs/HCL_DEVELOPMENT_ORDINARY_ACCESS_V20.md)
+adds actual existing B02 reported information-route checks beside B01 from complete
+ordinary dialogue/receipt reports. Exact original quotes/full source/actor names and
+revision support remain; receipt/availability/addressing/conflict/later-source receipt
+never imply comprehension, acceptance, knowledge, private belief or calendar history.
+Unsupported qualifying prose stays unresolved, no partial access parse/truncation.
+
+Conditional extraction now requires explicitallow_translation=True, rather than
+paying whenever an arbitrary task lacks local treatment.9 new checks/97 focused
+local passes; authored same-source v19→v20 B02 delta/ordinary composition/revision
+witness,0 live calls/spend.8 consumed DRC004 inputs now prepare without extraction;
+no answer rerun, rescoring or actual bill-savings claim. Historical archives/grants/
+dispositions intact; utility IMPLEMENTED_UNVALIDATED. Next new concrete legally usable
+development material and fair Base/current H check, actual coverage/all cost/negatives;
+no final reviewer/source global gate, new ontology, LongMemEval or leaderboard.
+
+## DRC004 preserved negative development closure
+
+
 
 [DRC004 source-first closure](reports/HCL_DRC004_SOURCE_FIRST_CLOSURE.md): **SIMPLIFY**
 unsupported-scope extraction; unique successful run36802177303 atdfc02f91… returns

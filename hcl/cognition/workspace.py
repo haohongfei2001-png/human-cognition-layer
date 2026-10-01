@@ -223,11 +223,11 @@ class CognitionWorkspace:
             calendar_time='NOT_ESTABLISHED')
 
     def prepare_reader_entry(self, query, *, source_ids, backend=None,
-                             max_chars=64000, compact_context=True):
+                             max_chars=64000, compact_context=True, allow_translation=False):
         """Adaptive ordinary analyst entry; local checks before optional extraction."""
         from .reader_entry import prepare_reader_entry
         return prepare_reader_entry(self, query, source_ids=source_ids, backend=backend,
-            max_chars=max_chars, compact_context=compact_context)
+            max_chars=max_chars, compact_context=compact_context, allow_translation=allow_translation)
 
     def answer_reader_entry(self, query, answer_backend, **kwargs):
         """One final answer from the selected, current source-bearing reader state."""
