@@ -123,3 +123,95 @@ def expand_cognition_context(context):
         if slot in row:
             row[slot] = _quote_refs(row[slot], sources, expand=True)
     return row
+
+
+READER_ENCODING = 'hcl-reader-opaque-identity-v1'
+READER_COMPACT_POLICY = (
+    'Encoding hcl-reader-opaque-identity-v1: conditional_cognition.opaque_identity_refs '
+    'maps short @HCL_ID_n aliases to exact opaque identifiers. Resolve aliases in '
+    'conditional state and shared_semantic_binding keys/values before comparing '
+    'identities. Original sources, claims, conditions and uncertainty are unchanged. '
+    'Aliases add no evidence, access, semantic verification or quotable sources.'
+)
+
+
+def _reader_strings(value):
+    if isinstance(value, str):
+        yield value
+    elif isinstance(value, dict):
+        for key, row in value.items():
+            yield key
+            yield from _reader_strings(row)
+    elif isinstance(value, list):
+        for row in value:
+            yield from _reader_strings(row)
+
+
+def _replace_reader_ids(value, mapping):
+    if isinstance(value, str):
+        return mapping.get(value, value)
+    if isinstance(value, list):
+        return [_replace_reader_ids(v, mapping) for v in value]
+    if isinstance(value, dict):
+        row = {}
+        for key, item in value.items():
+            target = mapping.get(key, key)
+            if target in row:
+                raise ValueError('reader identity key collision')
+            row[target] = _replace_reader_ids(item, mapping)
+        return row
+    return value
+
+
+def compact_reader_context(payload):
+    """Optional lossless opaque-ID aliases; never compress original source text."""
+    import re
+    from collections import Counter
+    row = deepcopy(payload)
+    section = row['conditional_cognition']
+    if 'encoding' in section or 'opaque_identity_refs' in section:
+        raise ValueError('reader context already encoded')
+    target = dict(state=section['state'], binding=row['shared_semantic_binding'])
+    strings = list(_reader_strings(target))
+    # Reserved aliases must never overwrite a meaningful existing value/key.
+    if any(re.fullmatch(r'@HCL_ID_[0-9]+', s) for s in strings):
+        return row
+    counts = Counter(s for s in strings if re.fullmatch(r'(?:[a-z-]+:)?[0-9a-f]{64}', s))
+    table = {'@HCL_ID_' + str(i): s for i, s in enumerate(sorted(s for s, n in counts.items() if n > 1))}
+    if not table:
+        return row
+    replaced = _replace_reader_ids(target, {s: k for k, s in table.items()})
+    section.update(encoding=READER_ENCODING, opaque_identity_refs=table, state=replaced['state'])
+    row['shared_semantic_binding'] = replaced['binding']
+    if expand_reader_context(row) != payload:
+        raise ValueError('reader context encoding failed lossless round trip')
+    # No caller pays representation overhead when references do not save bytes.
+    if len(json.dumps(row, ensure_ascii=False)) >= len(json.dumps(payload, ensure_ascii=False)):
+        return deepcopy(payload)
+    return row
+
+
+def expand_reader_context(payload):
+    """Exact original payload, including all scope/time/condition/dependency IDs."""
+    import re
+    row = deepcopy(payload)
+    section = row['conditional_cognition']
+    if 'encoding' not in section:
+        if 'opaque_identity_refs' in section:
+            raise ValueError('reader table without encoding')
+        return row
+    if section.pop('encoding') != READER_ENCODING:
+        raise ValueError('unsupported reader context encoding')
+    table = section.pop('opaque_identity_refs', None)
+    if (not isinstance(table, dict) or len(table) > 4096
+            or any(not isinstance(k, str) or not re.fullmatch(r'@HCL_ID_[0-9]+', k)
+                   or not isinstance(v, str) or not re.fullmatch(r'(?:[a-z-]+:)?[0-9a-f]{64}', v)
+                   for k, v in table.items()) or len(set(table.values())) != len(table)):
+        raise ValueError('invalid opaque reader identity table')
+    target = dict(state=section['state'], binding=row['shared_semantic_binding'])
+    if any(re.fullmatch(r'@HCL_ID_[0-9]+', s) and s not in table for s in _reader_strings(target)):
+        raise ValueError('unbound reader identity alias')
+    restored = _replace_reader_ids(target, table)
+    section['state'] = restored['state']
+    row['shared_semantic_binding'] = restored['binding']
+    return row

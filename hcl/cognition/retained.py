@@ -74,7 +74,7 @@ class _ReaderTranslationBackend:
 
 
 def prepare_retained_reader(workspace, query, *, source_ids, observer=None,
-                            backend=None, max_chars=64000):
+                            backend=None, max_chars=64000, compact_context=False):
     """Ordinary prose -> conditional existing checks; original source remains whole.
 
     Reader analysis is not an actor-private projection. Model-proposed translations
@@ -82,11 +82,11 @@ def prepare_retained_reader(workspace, query, *, source_ids, observer=None,
     """
     relay = _ReaderTranslationBackend(backend) if backend is not None else None
     return _prepare_retained(workspace, query, source_ids=source_ids, observer=observer,
-        backend=relay, max_chars=max_chars, reader_analysis=True)
+        backend=relay, max_chars=max_chars, reader_analysis=True, compact_context=compact_context)
 
 
 def _prepare_retained(workspace, query, *, source_ids, observer=None, backend=None,
-                      responsibility_premises=(), max_chars=64000, reader_analysis=False):
+                      responsibility_premises=(), max_chars=64000, reader_analysis=False, compact_context=False):
     """One source-local identity domain, ordinary query, real retained operations.
 
     Explicit normative premises remain conditional caller rules until G01. Source
@@ -94,7 +94,7 @@ def _prepare_retained(workspace, query, *, source_ids, observer=None, backend=No
     """
     if (not isinstance(query, str) or not query.strip() or len(query) > 8000
             or not isinstance(source_ids, tuple) or type(max_chars) is not int
-            or not 512 <= max_chars <= 64000
+            or not 512 <= max_chars <= 64000 or type(compact_context) is not bool
             or not isinstance(responsibility_premises, tuple)
             or not all(isinstance(p, NarrativePremise) for p in responsibility_premises)):
         raise ValueError('bounded ordinary query, sources, context and explicit rule contract required')
@@ -160,7 +160,7 @@ def _prepare_retained(workspace, query, *, source_ids, observer=None, backend=No
     derived = '\n'.join(b['derived_line'] for b in bindings)
     if reader_analysis:
         from hcl.v1.long_source_question import prepare_reader_cognition
-        prepared = prepare_reader_cognition(query, derived, max_context_chars=min(max_chars, 64000))
+        prepared = prepare_reader_cognition(query, derived, max_context_chars=64000 if compact_context else max_chars)
     else:
         prepared = prepare_person_context(HCLCognitionLayer(lambda _: None), query, derived,
             responsibility_premises=responsibility_premises, max_context_chars=min(max_chars, 64000))
@@ -221,6 +221,10 @@ def _prepare_retained(workspace, query, *, source_ids, observer=None, backend=No
             conditional_cognition=dict(authority='DERIVED_CONDITIONAL_TOOL_STATE_NOT_QUOTABLE_SOURCE',
                 validation_scope='DERIVED_GRAMMAR_ONLY_NOT_ORIGINAL_SEMANTIC_CERTIFICATE',
                 state=payload), shared_semantic_binding=binding)
+    wire_before = len(json.dumps(payload, ensure_ascii=False, sort_keys=True))
+    if reader_analysis and compact_context:
+        from hcl.v1.compact import compact_reader_context
+        payload = compact_reader_context(payload)
     final = [dict(role='system', content=prepared.messages[0]['content'] +
         ' The retained state uses a DERIVED representation, not verbatim source. '
         'shared_semantic_binding gives original quotes and every translation. All outputs are '
@@ -228,7 +232,8 @@ def _prepare_retained(workspace, query, *, source_ids, observer=None, backend=No
         'translation hypotheses cannot establish private mental states or world truth. '
         'Synthetic legacy dates encode only statement order. No actor receipt or comprehension '
         'is established by an authorized analyst projection.'),
-        dict(role='user', content=json.dumps(payload, ensure_ascii=False, sort_keys=True))]
+        dict(role='user', content=json.dumps(payload, ensure_ascii=False, sort_keys=True,
+            **({'separators': (',', ':')} if compact_context else {})))]
     if reader_analysis:
         final[0]['content'] += (' Only top-level sources contain quotable original text. '
             'conditional_cognition.state and derived_sources are representations, not '
@@ -238,6 +243,9 @@ def _prepare_retained(workspace, query, *, source_ids, observer=None, backend=No
             'quote and optional version/start. Do not cite translated lines as original quotes. '
             'Return exactly answer, source_citations, uncertainty and assumptions in JSON. '
             'Exact original anchors still do not certify interpretation or private/world truth.')
+    if reader_analysis and payload['conditional_cognition'].get('encoding'):
+        from hcl.v1.compact import READER_COMPACT_POLICY
+        final[0]['content'] += ' ' + READER_COMPACT_POLICY
     if len(final[-1]['content']) > max_chars:
         raise ValueError('shared support and original-source context exceeds budget')
     receipt = dict(schema='hcl-retained-shared-adapter-v1', source_ids=list(source_ids),
@@ -248,6 +256,11 @@ def _prepare_retained(workspace, query, *, source_ids, observer=None, backend=No
         ordinary_input='REPLAY_VERIFIED', efficacy='UNTESTED')
     if reader_analysis:
         receipt.update(reader_analysis=True,
+            compact_context=compact_context,
+            transport_encoding=payload['conditional_cognition'].get('encoding', 'NONE'),
+            transport_context_chars_before=wire_before,
+            transport_context_chars_after=len(final[-1]['content']),
+            exact_payload_round_trip_verified=True,
             semantic_translation_status='CONDITIONAL_ON_UNVERIFIED_TRANSLATION' if assumptions else 'BOUNDED_LITERAL_ADAPTER',
             actual_translation_requests=backend.requests if backend is not None else [],
             raw_translation_response=semantic.raw_response,
