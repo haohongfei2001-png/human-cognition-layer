@@ -3,6 +3,8 @@ from pathlib import Path
 from scripts import development_reality_batch004 as m
 
 class Batch004Tests(unittest.TestCase):
+ def test_frozen_template_invokes_correct_batch_and_unique_certified_activation(self):
+  template=m.TEMPLATE.read_text();self.assertIn('python -m scripts.development_reality_batch004 --execute --history --publisher',template);self.assertNotIn('scripts.development_reality_batch003',template);self.assertIn('hcl-drc004-certified-once.yml/runs',template);self.assertEqual(m.WORKFLOW.name,'hcl-drc004-certified-once.yml')
  def test_package_all_possible_costs_call_limit_freeze_without_provider(self):
   p=m.build_package();self.assertLessEqual(p['maximum_provider_calls'],24);self.assertLessEqual(p['all_call_worst_peak_reservation_usd'],m.CAP);self.assertEqual(p['arms'],['Base','HCL']);self.assertEqual(p['retries'],0);self.assertFalse(p['historical_budget_transfer'])
  def test_whole_inputs_and_native_vocabulary_both_arms_no_gold_keys(self):

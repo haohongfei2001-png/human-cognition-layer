@@ -3,7 +3,7 @@
   "batch": "DRC004",
   "historical_budget_transfer": false,
   "maximum_calls": 24,
-  "package_sha256": "b67b851c7962f6d43459b2236883d615c311aea71b93e959745fd3674a8d46bb",
+  "package_sha256": "1cdb6e31457096c633c220d6eb3d920f09fc0d39281f6e75aba564ebd1933f16",
   "remaining_usd": 2.25,
   "retries": 0,
   "schema": "hcl-drc-once-grant-v1",

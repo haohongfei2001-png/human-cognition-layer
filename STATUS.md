@@ -33,6 +33,14 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: DRC004_FROZEN_BASE_VS_ADAPTIVE_HCL_EXECUTION**
 
+The first activation (run36801304134) failed before provider/client/key access:
+workflow invoked old batch003, whose frozen gate refused;0 calls/spend/answers.
+[Immutable activation receipt](reports/HCL_DRC004_PRETRANSPORT_FAILURE_RECEIPT.json)
+preserves original package/workflow/artifact/log. Wrong live trigger deleted;
+corrected certified trigger invokes batch004, execution re-frozen,25 checks pass.
+This is first provider execution, not rerun of answered questions or old budget
+transfer; source/gold/prompts/scorer/arms/runtime/budget settings unchanged.
+
 [DRC004 protocol](docs/HCL_DRC004_DEVELOPMENT_PROTOCOL.md) freezes8 public development
 items:4 ToMBench source/attention/fact-belief task rows and4 NormAd contextual-rule
 judgments. ToMBench source system was already screened; only concrete-item history

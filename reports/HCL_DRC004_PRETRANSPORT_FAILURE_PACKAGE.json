@@ -11,7 +11,7 @@
   "budget_cap_usd": 2.25,
   "evidence_level": "DEVELOPMENT_ONLY_NEVER_FINAL_INDEPENDENT",
   "execution_files": {
-    ".github/frozen/hcl-drc004-once.yml": "c3d219ad204c811a08dccbcc02a6a254f7843bfd5b2f829e7c34d7f5be2bf99f",
+    ".github/frozen/hcl-drc004-once.yml": "e6a08ef68212daf39c71e5e9edb2f76a77186274cd306d25ed2651fec0e1a591",
     "docs/HCL_VALIDATION_TIERS_POLICY.md": "39ec2dd118d735ce103217d2e64045bb0c3319da73db725dff8a47dbc3626457",
     "reports/HCL_DEVELOPMENT_BENCHMARK_EXPOSURE_REGISTER.json": "089c55a6449c1597bbf110c339665bc7af10ea7394cf6e6d2f7153431cb22beb",
     "reports/HCL_DRC004_NORMAD_LICENSE.txt": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661",
@@ -19,13 +19,13 @@
     "reports/HCL_DRC004_SUBSET.json": "32e5b33df0fdd387fd36276f26f9fe375c06c02845d35d67c739f538db1e44a4",
     "reports/HCL_DRC004_TOMBENCH_LICENSE.txt": "a1375025201710494880ff99b397d63b1680fd366072f4f1a5d0542be8362356",
     "reports/HCL_DRC004_TOMBENCH_PUBLISHER_README.md": "72f78bacebefb94d797279ff8e1a269ade7a5f756055c917d6a87fcd34bb2978",
-    "scripts/development_reality_batch004.py": "ac0f9d46f3dd3442b0b34ea79bf665db447c64e616c98a298a6bbc7e53e54f65",
+    "scripts/development_reality_batch004.py": "f9b8c76e6a53f19ff5a75aff9a41400472d62e780fbadc86bb3e8124381d2c7f",
     "scripts/development_reality_check.py": "0bbabae5e3d43ea824a4195a0c1808750f18475e7da3078987514099587fe8e5",
     "scripts/i02_exposure_history.py": "2dd4d840d4d76450a07713e163114f15c2f35960fb5a355ec798771fbcb4bbbf",
     "scripts/i02_exposure_snapshot.py": "d71deeb1c48c32496f6244dc78297429ad71fc3dba4044ebafa65e820ab5485c",
     "scripts/provider_json_contract.py": "90433083ccf923b6701895ef5022d0650e2cd7a682de116818ac526850386946",
     "scripts/serious_eval_contract.py": "d415af270dfff20139130768cdf462f9eb0d8080e3ed152f2e3adb9f18ba1a9f",
-    "tests/test_development_reality_batch004.py": "41c5c3e55de161b675e38258343367e1e2b107ed773e51a01c3f17462ff5f05e"
+    "tests/test_development_reality_batch004.py": "12154d3fe2b411f6c1dbc2fe30b7ee2c4f87559fd412ff28818420a0704cf2ac"
   },
   "historical_budget_transfer": false,
   "independent_reviewer_required": false,
