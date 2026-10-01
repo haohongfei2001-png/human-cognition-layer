@@ -148,6 +148,26 @@
       "reason": "Pre-register before reading publisher README/schema/scorer or potential examples. Public community development test candidate, no peer-review/human/pretraining independence claim; whole opened material excluded from final. No participant/private data or live model call. Three full hard/expert-bearing category distributions opened for fixed six native rows; these full distributions and all viewed examples/scorer/metadata remain excluded from final. Other category files not opened.",
       "status": "DEVELOPMENT_EXPOSED",
       "writing_system_id": "jessholbrook/tom-benchmark"
+    },
+    {
+      "batch": "DRC008",
+      "dataset_id": "hendrycks/ethics",
+      "final_confirmation": "CONSUMED_FOR_FINAL_CONFIRMATION",
+      "license": "MIT_REPOSITORY_DATA_SCOPE_PENDING_PRIMARY_CHECK",
+      "publisher_url": "https://github.com/hendrycks/ethics",
+      "reason": "Prior I02 metadata/snippet screen preserved; preregister before current README/license/native evaluator and potential examples. Concrete-new development-only subset pending exact history. Entire viewed distribution permanently excluded from final. No moral-truth/pretraining-independence claim.",
+      "status": "DEVELOPMENT_EXPOSED",
+      "writing_system_id": "hendrycks/ethics"
+    },
+    {
+      "batch": "DRC008",
+      "dataset_id": "cardiffnlp/Morables-PD",
+      "final_confirmation": "CONSUMED_FOR_FINAL_CONFIRMATION",
+      "license": "CC-BY-4.0_AUTHOR_PUBLIC_DOMAIN_RELEASE",
+      "publisher_url": "https://huggingface.co/datasets/cardiffnlp/Morables-PD",
+      "reason": "Preregister before card/native fables/morals inspection. Concrete-new development test candidate for narrative/conceptual moral interpretation, no automatic moral truth or final/pretraining-independence claim. All viewed distribution excluded permanently from final. Whole author PD JSON308 triples and card viewed; all excluded from final. Only fixed six first hashes used, no native MCQ or unlicensed original full release fetched.",
+      "status": "DEVELOPMENT_EXPOSED",
+      "writing_system_id": "morables-public-domain-fables"
     }
   ],
   "longmemeval": "SEALED_NOT_ACCESSED",
@@ -163,6 +183,7 @@
     "27c2eeee3bb9fe6f0bb94276268daa86af196c32759fc77f5073093c3c3dfe1b",
     "36de9549d03d3930d2546c4f9bae00528224b609d12478fa5ad1d58491be90dd",
     "4d93b8e2fbd76e35d5f44315096f4d3b650eb7c41bbdb88cb30505a6fbad370a",
+    "5e6ca045c22711e9cd2dc2cb77a26dfd25782970c81afd0a9fcaabf5dca7c9e3",
     "8fbba3a618feb404af5b4de3f0a8d7f6165169a4c7bf6cc0bef0c58545103439",
     "99a399d50f1a996388e94ab435ba0ceadc6b8ad9d90e6420358c962a4850d217",
     "9e55ababc9946e8fdb310b948b56fec3b964ce50b624ce91ac1c1efb727e2b8d",
