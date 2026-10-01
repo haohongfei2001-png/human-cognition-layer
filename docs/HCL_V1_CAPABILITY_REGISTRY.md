@@ -145,3 +145,10 @@ state inference. Unsupported entries retain whole source/query/guard and omit de
 candidate wire.7new/108focused passes, authored comparison/composition/revision witness,
 8consumed inputs-only wire reduction,0livecalls/spend. IMPLEMENTED_UNVALIDATED/no new
 family/bill or answer-gain claim; six archives/dispositions preserved, no final upgrade.
+
+[Ordinary narrator admission v22](HCL_DEVELOPMENT_NARRATOR_ATTRIBUTION_V22.md): complete
+report/speech paragraphs now enter existing actual B01 attribution/subject comparison
+and C01/C03 composition without narrator→own belief, denial→opposite or private truth.
+Actual shared source revision/checked claims support final input, inner challenge blocks
+it.8new/163focused checks, authored Git-v21 before/after composition/revision witness,
+0livecalls/spend, IMPLEMENTED_UNVALIDATED/no new family/history or efficacy upgrade.
