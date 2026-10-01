@@ -7,8 +7,8 @@
     ".github/workflows/hcl-source-inference-runner-provider-free.yml": "e36a68963c818f9560e9021f3ae59f2904ba8e11dbc50f3a96878b249be5686f",
     "docs/HCL_SOURCE_INFERENCE_SYNTHETIC_RUNNER.md": "9fc9117a184044acfdce396c875469650fcdc500df2262a650ad84bea422eeeb",
     "reports/source-inference-synthetic-runner/PRICING_REFRESH.json": "edd920999b48ecb5f0f7c0c53ba58967618edde180531c55df6e6d1baf02432c",
-    "scripts/run_source_inference_synthetic_once.py": "e9f0137ad234bebeef966555be58616b15dc957c36c1b3ba9e32d05a6f29c477",
-    "tests/test_source_inference_synthetic_runner.py": "0c55674bc4d4edb94e96506e1c8e863caf1120d00ab33bfaf5c186fb515204ab"
+    "scripts/run_source_inference_synthetic_once.py": "b364590e9826e1225ccb328f7dd4693428eed0ba5fe39f39f2f44cd7372b56bc",
+    "tests/test_source_inference_synthetic_runner.py": "7d3d9c958d4b27487f2807f9b5664a4d371cf50507ca3e66969584d52b0e72d6"
   },
   "extraction_calls": 0,
   "hard_cap_usd": "2.50",

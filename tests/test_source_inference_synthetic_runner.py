@@ -173,6 +173,24 @@ class RunnerTests(unittest.TestCase):
         self.assertTrue(all(not a['detail']['format_valid'] for a in receipt['attempts']))
         self.assertTrue(all(a['detail']['semantic_score'] is None for a in receipt['attempts']))
 
+    def test_nested_citation_shape_is_not_mislabeled_as_valid(self):
+        slot = self.plan[0]
+        raw = m.mock_response(slot['request'])
+        content = json.loads(raw['choices'][0]['message']['content'])
+        for citations in ([42], [{}], ['invented citation'], [{'source_id': 's', 'quote': 9}],
+                          [{'source_id': 's', 'quote': 'q', 'version': True}],
+                          [{'source_id': 's', 'quote': 'q', 'start': -1}],
+                          [{'source_id': 's', 'quote': 'q', 'extra': 'field'}]):
+            content['source_citations'] = citations
+            raw['choices'][0]['message']['content'] = json.dumps(content)
+            self.assertFalse(m.validate_response(raw, slot)['format_valid'])
+        # A shaped invented quote is format-valid, never semantic-certified.
+        content['source_citations'] = [{'source_id': 's', 'quote': 'invented', 'version': 1, 'start': 0}]
+        raw['choices'][0]['message']['content'] = json.dumps(content)
+        result = m.validate_response(raw, slot)
+        self.assertTrue(result['format_valid'])
+        self.assertIsNone(result['semantic_score'])
+
     def test_failed_reservation_write_prevents_transport(self):
         ledger = self.ledger()
         ledger.db.execute('PRAGMA query_only=ON')

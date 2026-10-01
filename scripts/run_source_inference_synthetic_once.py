@@ -130,6 +130,15 @@ def refresh_price():
     return dict(expected, reverified_at=datetime.now(timezone.utc).isoformat())
 
 
+def citation_shape(value):
+    # Shape only: quote grounding and explanatory support remain separate review.
+    return (isinstance(value, dict) and {'source_id', 'quote'} <= set(value)
+        and set(value) <= {'source_id', 'quote', 'version', 'start'}
+        and all(isinstance(value[k], str) and bool(value[k].strip()) for k in ('source_id', 'quote'))
+        and ('version' not in value or type(value['version']) is int and value['version'] >= 1)
+        and ('start' not in value or type(value['start']) is int and value['start'] >= 0))
+
+
 def validate_response(raw, slot):
     """Usage gates spending; format is recorded without silently dropping an arm."""
     if not isinstance(raw, dict):
@@ -148,7 +157,8 @@ def validate_response(raw, slot):
         valid = (choice['finish_reason'] == 'stop' and isinstance(obj, dict)
             and set(obj) == {'answer', 'source_citations', 'uncertainty', 'assumptions'}
             and all(isinstance(obj[k], str) for k in ('answer', 'uncertainty', 'assumptions'))
-            and bool(obj['answer'].strip()) and isinstance(obj['source_citations'], list))
+            and bool(obj['answer'].strip()) and isinstance(obj['source_citations'], list)
+            and all(citation_shape(c) for c in obj['source_citations']))
     except (KeyError, IndexError, TypeError, ValueError):
         pass
     return dict(rated_peak_usage_cost_usd=str(rated), format_valid=bool(valid),
