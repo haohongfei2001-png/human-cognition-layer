@@ -1,0 +1,177 @@
+{
+  "cases": [
+    {
+      "case_id": "bigtom/56/1_forward_belief_false_belief",
+      "condition": "false_belief",
+      "dataset": "BigToM",
+      "gold": "B",
+      "init_belief": 1,
+      "native_file": "data/bigtom/bigtom.csv",
+      "native_id": "0",
+      "native_row_index": 56,
+      "native_row_sha256": "c692c733ffad5796241d17aa5cab6d32b60a8a404e2e993660924fba0690fb3d",
+      "question": "Does Fatima believe the soil around the artifact is soft and loose or hardened?",
+      "source": "Fatima is an archaeologist working on a dig site in Egypt, searching for ancient artifacts. She wants to carefully excavate a small, fragile artifact she has discovered. Fatima observes that the soil around the artifact is soft and loose. She believes the soil around the artifact is soft and loose, allowing for easy excavation. Just as Fatima is about to begin excavating, a strong gust of wind blows through the site, hardening the soil around the artifact. Fatima does not notice the gust of wind or the change in the soil's condition.",
+      "source_sha256": "a9b68432c100f87a0886092fd3521ace2e0ff1796946395a9775dfa4b857accd",
+      "task": {
+        "interpretation": "Native narrative-conditioned option agreement; no verified private-state or world-truth claim.",
+        "labels": [
+          "A",
+          "B"
+        ],
+        "options": {
+          "A": "Fatima believes the soil around the artifact has hardened.",
+          "B": "Fatima believes the soil around the artifact is soft and loose."
+        }
+      },
+      "variable": "forward_belief"
+    },
+    {
+      "case_id": "bigtom/86/1_forward_action_true_belief",
+      "condition": "true_belief",
+      "dataset": "BigToM",
+      "gold": "A",
+      "init_belief": 1,
+      "native_file": "data/bigtom/bigtom.csv",
+      "native_id": "0",
+      "native_row_index": 86,
+      "native_row_sha256": "c74555a23864d7b6cf6ba01e3e1e6ce58996763e5fb047d64140c840aba50f9e",
+      "question": "What will Takeshi do?",
+      "source": "Takeshi is a fisherman in a small Japanese coastal town. Takeshi wants to catch a large number of fish to sell at the market and provide for his family. He notices that the sea is calm and the fish are abundant, making it a perfect day for fishing. Takeshi believes that the sea conditions are ideal for a successful fishing trip. However, a sudden underwater volcanic eruption nearby disrupts the marine life, causing the fish to scatter and flee the area. Takeshi senses the disturbance in the water caused by the volcanic eruption.",
+      "source_sha256": "5fabc5ffc7985cf0eaa05871ee6d9c36bd81cf5ee8c0b84cacf0abe7c503ee94",
+      "task": {
+        "interpretation": "Native narrative-conditioned option agreement; no verified private-state or world-truth claim.",
+        "labels": [
+          "A",
+          "B"
+        ],
+        "options": {
+          "A": "Takeshi will wait for the fish to return or try fishing in another area.",
+          "B": "Takeshi will go out on his boat to catch fish in the calm sea."
+        }
+      },
+      "variable": "forward_action"
+    },
+    {
+      "case_id": "bigtom/24/1_forward_belief_true_belief",
+      "condition": "true_belief",
+      "dataset": "BigToM",
+      "gold": "A",
+      "init_belief": 1,
+      "native_file": "data/bigtom/bigtom.csv",
+      "native_id": "0",
+      "native_row_index": 24,
+      "native_row_sha256": "7104e6f2b23a5f4a756aabf8fd9400ee5da6424903695470e81db22c8bc556ef",
+      "question": "Does Chi believe the sea is calm and inviting or rough and dangerous?",
+      "source": "Chi is a fisherman living on a small island in the South Pacific. Chi wants to go on a fishing trip to catch some fish for his family's dinner. The sea appears calm and inviting. Chi believes that the sea is calm and inviting. Suddenly, a strong storm rolls in, causing the sea to become rough and dangerous. Chi notices the storm and the change in the sea.",
+      "source_sha256": "4669e56870f6b9cace22e78961ed1fe639305b7047141914d8d8b8248be01514",
+      "task": {
+        "interpretation": "Native narrative-conditioned option agreement; no verified private-state or world-truth claim.",
+        "labels": [
+          "A",
+          "B"
+        ],
+        "options": {
+          "A": "Chi believes the sea is rough and dangerous.",
+          "B": "Chi believes the sea is calm and inviting."
+        }
+      },
+      "variable": "forward_belief"
+    },
+    {
+      "case_id": "bigtom/122/1_forward_action_false_belief",
+      "condition": "false_belief",
+      "dataset": "BigToM",
+      "gold": "B",
+      "init_belief": 1,
+      "native_file": "data/bigtom/bigtom.csv",
+      "native_id": "0",
+      "native_row_index": 122,
+      "native_row_sha256": "d760ff85a90473d986fd26324b02e988cc4e213c1e0cc0ff2e70eb2869a59090",
+      "question": "What will Laila do?",
+      "source": "Laila is walking through a beautiful park on a sunny day. Laila wants to take a picture of a stunning flowerbed she comes across. She sees that the flowers appear to be in full bloom, with vibrant colors. Laila believes the flowers are in full bloom. Suddenly, a heavy rainstorm hits the park, causing the flowers to wilt and lose their vibrancy. Laila does not notice the rainstorm's impact on the flowers.",
+      "source_sha256": "5ed16d1f95e8a1a2930d5f2754f5068374b6491aad7a19c983f0d70ed22232f2",
+      "task": {
+        "interpretation": "Native narrative-conditioned option agreement; no verified private-state or world-truth claim.",
+        "labels": [
+          "A",
+          "B"
+        ],
+        "options": {
+          "A": "Laila will wait for the flowers to recover before taking a picture.",
+          "B": "Laila will prepare to take a picture of the flowerbed."
+        }
+      },
+      "variable": "forward_action"
+    },
+    {
+      "case_id": "bigtom/42/1_forward_belief_false_belief",
+      "condition": "false_belief",
+      "dataset": "BigToM",
+      "gold": "B",
+      "init_belief": 1,
+      "native_file": "data/bigtom/bigtom.csv",
+      "native_id": "0",
+      "native_row_index": 42,
+      "native_row_sha256": "2dc4ddf69dffb273354606c7e9cf21761b22323a58618479e56bbd4b405b5d72",
+      "question": "Does Fatima believe she has high-quality paintbrushes or ruined paintbrushes in her studio?",
+      "source": "Fatima is a talented artist living in a small Moroccan village. Fatima wants to create a beautiful painting to donate for the local charity auction. She has a brand-new set of high-quality paintbrushes in her studio. Fatima believes she has a new set of high-quality paintbrushes in her studio. While she is away, her younger brother accidentally ruins the paintbrushes by using them for a school project with glue. Fatima does not notice the ruined paintbrushes.",
+      "source_sha256": "73e01fa63979ca87934067a2e61f1b69658cfa027bb51e154c7745d78f7bc6cd",
+      "task": {
+        "interpretation": "Native narrative-conditioned option agreement; no verified private-state or world-truth claim.",
+        "labels": [
+          "A",
+          "B"
+        ],
+        "options": {
+          "A": "Fatima believes the paintbrushes are ruined.",
+          "B": "Fatima believes she has high-quality paintbrushes in her studio."
+        }
+      },
+      "variable": "forward_belief"
+    },
+    {
+      "case_id": "bigtom/91/1_forward_action_true_belief",
+      "condition": "true_belief",
+      "dataset": "BigToM",
+      "gold": "A",
+      "init_belief": 1,
+      "native_file": "data/bigtom/bigtom.csv",
+      "native_id": "0",
+      "native_row_index": 91,
+      "native_row_sha256": "b351845aacc392aa0c46d6dafb4ebaa2fc5a272ef5794be5c07ad4e33cad12bf",
+      "question": "What will Kwame do?",
+      "source": "Kwame is a skilled woodcarver in a small village in Ghana. Kwame wants to create a beautiful wooden sculpture of an elephant for his friend's birthday. He selects a block of wood from his workshop that appears to be solid and strong. Kwame believes that the block of wood is sturdy and suitable for carving. However, as he begins to carve, he discovers a hidden pocket of termites inside the wood, rendering it unsuitable for his project. Kwame notices the termites inside the block of wood.",
+      "source_sha256": "73fdcc64331d2f0373489caf10d2873e09c1e27173c09e294ce42e8737193cad",
+      "task": {
+        "interpretation": "Native narrative-conditioned option agreement; no verified private-state or world-truth claim.",
+        "labels": [
+          "A",
+          "B"
+        ],
+        "options": {
+          "A": "Kwame will search for a new block of wood to use for the sculpture.",
+          "B": "Kwame will continue carving the elephant sculpture from the block of wood."
+        }
+      },
+      "variable": "forward_action"
+    }
+  ],
+  "final_confirmation": "CONSUMED_FOR_FINAL_CONFIRMATION",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "native_transform": "Author generate_conditions.py init_belief=1: first five period-delimited Story clauses plus native aware/not-aware sentence. A=author aware answer; B=author unaware answer, fixed order instead of author correct-first record order. Native question/answers/gold meaning unchanged.",
+  "pins": [
+    {
+      "dataset": "BigToM",
+      "native_file": "data/bigtom/bigtom.csv",
+      "sha256": "a14884fbff5b61d3fa194ab166764b553ab795fcb1359e69d1282eadf3011a46",
+      "url": "https://raw.githubusercontent.com/cicl-stanford/procedural-evals-tom/fe647d680bddb69f738519313bed625f9e93b549/data/bigtom/bigtom.csv"
+    }
+  ],
+  "prior_history_baseline": "81aa2b645fe6519c0db4ecc5bf637cca7bcb85e6",
+  "publisher_commit": "fe647d680bddb69f738519313bed625f9e93b549",
+  "schema": "hcl-drc006-subset-v1",
+  "selection": "First six SHA256(HCL-DRC006-v1/zero-based-row-index) excluding already-screened row0; fixed alternating forward-belief/action and predeclared condition array; no label/output/treatment filter.",
+  "status": "DEVELOPMENT_EXPOSED",
+  "writing_system": "PUBLIC_AUTHOR_LLM_PROCEDURAL_NOT_HUMAN_OR_FINAL_INDEPENDENT"
+}

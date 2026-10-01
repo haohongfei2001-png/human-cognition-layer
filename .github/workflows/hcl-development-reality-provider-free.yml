@@ -28,3 +28,5 @@ jobs:
       - run: python -m scripts.development_drc004_replay
       - run: python -m unittest tests.test_development_drc005_replay tests.test_v1_ordinary_access_entry
       - run: python -m scripts.development_drc005_replay
+      - run: python -m unittest tests.test_development_reality_batch006
+      - run: python -m scripts.development_reality_batch006 --preflight --publisher --history --output drc006-source-preflight.json

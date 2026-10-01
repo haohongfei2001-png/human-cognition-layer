@@ -31,7 +31,23 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: FRESH_POST_ADMISSION_DEVELOPMENT_REALITY_CHECK**
+**NEXT_READY: DRC006_FROZEN_DEVELOPMENT_REALITY_CHECK**
+
+[DRC006 protocol](docs/HCL_DRC006_DEVELOPMENT_PROTOCOL.md): six concrete-new author
+BigToM native belief/access/action tasks, fixed pre-output hash selection; prior
+screened row0 excluded. Current certified v22 H vs same strong V4 Pro/high and
+lightweight generic-policy P; complete equal source/question/native A-B labels.
+18final calls maximum,0extraction/0retry,new USD0.80 cap,peak reserveUSD0.74737344.
+27local checks/native publisher preflight pass; cloud baseline-history/exact-head /
+exact-main CI before unique dispatch. Actual local treatment0/6 openly retained,
+no isolated mechanism claim. Public model-authored/MIT, development-exposed and
+final-consumed; not final independent evidence. No private participant data, old
+budgets or LongMemEval. Immediate source-first closure and general implementation,
+no final reviewer/source daily stop or leaderboard.
+
+## v22 preserved implementation snapshot
+
+**Historical queue snapshot: FRESH_POST_ADMISSION_DEVELOPMENT_REALITY_CHECK**
 
 [Ordinary narrator admission v22](docs/HCL_DEVELOPMENT_NARRATOR_ATTRIBUTION_V22.md):
 complete report/speech paragraph now enters actual source-narrator attribution vs
