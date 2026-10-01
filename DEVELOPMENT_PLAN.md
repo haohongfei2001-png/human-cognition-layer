@@ -28,6 +28,13 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: GENERAL_ORDINARY_ANSWER_SOURCE_INFERENCE_BOUNDARY_REPAIR**
 
+[Moral Stories source-first screen](docs/HCL_MORAL_STORIES_SOURCE_SCREEN.md):
+six deterministically selected native rows have no reachable-text history match,
+but source review identifies unstated-premise/outcome and normative ambiguity.
+Candidate DEFERRED; native labels retained, no model answers or paid admission.
+Opened publisher/distribution lineage and exact selected hashes are final-consumed.
+This negative selection result does not adopt v25 or replace the canonical queue.
+
 [Current source-history gate](docs/HCL_CURRENT_SOURCE_HISTORY_GATE.md): fresh
 provider-free source preparation uses full Git object IDs and merge-aware history,
 refusing shallow/partial repositories before blob inventory or content reads. Renamed/copied sealed objects remain excluded. This

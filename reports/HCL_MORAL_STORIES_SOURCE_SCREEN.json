@@ -1,0 +1,125 @@
+{
+  "admitted_for_paid_execution": false,
+  "authorized_calls": 0,
+  "authorized_spend_usd": 0,
+  "builder_sha256": "7238f633eab0cbd9869a1abc4cf2c2267aac2b03a3a470d8de6e95ba8dddc155",
+  "cases": [
+    {
+      "grade_rewritten": false,
+      "model_output_seen": false,
+      "native_id": "3C5W7UE9CGOE3TED1ETTE2YR3JBMXK0",
+      "native_label": "0",
+      "native_row_sha256": "25971892b1f6f9030a5abbd323b7a16dec7c52d41b05f6c07c174ad53738385f",
+      "review_note": "Parental burden, agreement and capacity are not established merely by residence without rent.",
+      "source_first_review": "UNSTATED_PREMISE",
+      "source_sha256": "2799b41c87107001272a81830825779bc4511ac49183f1eb5ab59ac8c515e389"
+    },
+    {
+      "grade_rewritten": false,
+      "model_output_seen": false,
+      "native_id": "3TOK3KHVJUG8OHTYWH48C7A8W3DO7Y0",
+      "native_label": "0",
+      "native_row_sha256": "6422caaecbc170554ffef53d37a3c24b332b0007403c265604041450692e0ee7",
+      "review_note": "The described food play directly relates to the stated norm; this is not proof of universal moral truth.",
+      "source_first_review": "DIRECT_NORM_RELATION",
+      "source_sha256": "cf9a57cb927572d2c6d80dbe7a07eaf3296ef23b90956a36a75df954b64009fc"
+    },
+    {
+      "grade_rewritten": false,
+      "model_output_seen": false,
+      "native_id": "3I3WADAZ9R2T1DFF8OPBENWC3BE5OM1",
+      "native_label": "1",
+      "native_row_sha256": "880b3e1355e19c1550ed4053990e1c5db0927c85595b0aa9df59c6c23e19a993",
+      "review_note": "Omitting more offensive details does not specify the amount of cursing; a reasonable positive reading is not a factual guarantee.",
+      "source_first_review": "UNDERSPECIFIED_CRITERION",
+      "source_sha256": "4874d07bafd94aeea2360756113c49ec62f5f1bf154b6c98e7df248078ebc9c6"
+    },
+    {
+      "grade_rewritten": false,
+      "model_output_seen": false,
+      "native_id": "3HYA4D452SH7W3JZR24NTMKMRREF291",
+      "native_label": "1",
+      "native_row_sha256": "9e3642b2421b2ca01c2a8d3b8bed358c95ec98507f85b0e914662a19ca0f9be7",
+      "review_note": "Returning the dropped wallet directly relates to the stated norm.",
+      "source_first_review": "DIRECT_NORM_RELATION",
+      "source_sha256": "b24a7b4fadfdc23c97802d8e17a0ae5cf034651349b41e1a0716eb5ed497a113"
+    },
+    {
+      "grade_rewritten": false,
+      "model_output_seen": false,
+      "native_id": "39L1G8WVWRP5R6LAO337NULKX4N31I0",
+      "native_label": "0",
+      "native_row_sha256": "bc9ab42db3623320aa17e6e7b9d7fd7b9d58146cc98178f3c68794dbbb67e15a",
+      "review_note": "Criticism of dinner does not itself establish that the partner cries; alternative reasonable interpretations must not be forced into factual error.",
+      "source_first_review": "UNSTATED_OUTCOME",
+      "source_sha256": "861b6a4c0df5ff371969d04ef42250862da5a7853d4485182492fa3145ccd3e8"
+    },
+    {
+      "grade_rewritten": false,
+      "model_output_seen": false,
+      "native_id": "3YZ8UPK3VUK9D38RJKOSRZUBE24CU70",
+      "native_label": "0",
+      "native_row_sha256": "bbf8661dbd9d07e540ac892d4f392c3d9e79fe6d5087ddb16fe63c5e24e9b77f",
+      "review_note": "Secrecy relates to the declared norm, but that categorical relationship norm is not an independently established universal moral rule.",
+      "source_first_review": "DECLARED_NORM_ONLY",
+      "source_sha256": "bcb76830b08c9027103043efd340494904b77fb8e36c0d77be9ebee3c9cf81c8"
+    }
+  ],
+  "dataset_id": "demelin/moral_stories",
+  "disposition": "DEFERRED_AFTER_SOURCE_FIRST_REVIEW",
+  "distribution_bytes": 738243,
+  "distribution_rows": 2000,
+  "distribution_sha256": "e86eb0f93ab832a84c76e691c7d3fd5bc744e8ae3986cee6c02f41e26030765c",
+  "exposure_scope": "Publisher README/card/builder examples viewed; whole 2000-row distribution fetched and programmatically enumerated; six selected rows inspected. Entire dataset/writing system excluded from final confirmation.",
+  "final_confirmation": "CONSUMED_FOR_FINAL_CONFIRMATION",
+  "history_preflight": {
+    "authorized_spend_usd": 0,
+    "confirmation_qualified": false,
+    "history": {
+      "candidate_source_sha256": "1b6e329198d043c3a65c84132dc17d7ef91ba4b8ccb76756455ec17b214b8a5a",
+      "checkout_head": "58564f92c1b57ecfe65f87f2566e94ad8c0debf6",
+      "confirmation_qualified": false,
+      "longmemeval": "SEALED_NOT_ACCESSED",
+      "matches": [],
+      "schema": "hcl-i02-reachable-git-history-exposure-v1",
+      "scope": "CURRENTLY_REACHABLE_GIT_OBJECTS_NOT_DELETED_REFS_OR_MODEL_TRAINING",
+      "sealed_blob_ids_not_opened": 54,
+      "skipped_large_paths": [],
+      "skipped_nontext_blobs": 26,
+      "status": "REACHABLE_HISTORY_NO_TEXT_MATCH",
+      "unique_utf8_blobs_scanned": 3696
+    },
+    "history_clear": true,
+    "limits": "CURRENTLY_REACHABLE_FULL_CHECKOUT_ONLY_NOT_DELETED_REFS_OR_MODEL_TRAINING",
+    "live_execution_enabled": false,
+    "maximum_authorized_calls": 0,
+    "provider_calls": 0,
+    "remaining_gates": [
+      "SOURCE_RIGHTS_AND_NATIVE_TASK_REVIEW",
+      "SUBSET_MODEL_SCORER_AND_INPUT_FREEZE",
+      "NEW_EXPLICIT_BOUNDED_BUDGET"
+    ],
+    "rights_verified": false,
+    "schema": "hcl-development-source-history-preflight-v1",
+    "source_qualified": false
+  },
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "model_answers": [],
+  "native_input_mapping_frozen": false,
+  "provider_calls": 0,
+  "publisher_declared_license": "MIT",
+  "publisher_revision": "b830cf56eb00bc4edd1860dd544a192216eb3587",
+  "publisher_url": "https://huggingface.co/datasets/demelin/moral_stories",
+  "readme_sha256": "55cfa1d31376ecf889cd68c6f30d55d7d899286d8c6a24785125ebc31e39a29d",
+  "related_exposed_system": "Social Chemistry 101 norms; no final writing-system independence",
+  "rights_sources": [
+    "https://huggingface.co/datasets/demelin/moral_stories/blob/b830cf56eb00bc4edd1860dd544a192216eb3587/README.md",
+    "https://github.com/demelin/moral_stories/blob/master/LICENSE"
+  ],
+  "schema": "hcl-provider-free-source-candidate-screen-v1",
+  "scorer_frozen": false,
+  "selection": "First six ascending SHA256(HCL-FRESH-SOURCE-MS-v1/ + native ID), before model outputs; no label/route/treatment-based filtering.",
+  "semantic_truth_established": false,
+  "task_distribution": "data/classification/action+context/minimal_pairs/test.jsonl",
+  "writing_system_id": "demelin-moral-stories"
+}
