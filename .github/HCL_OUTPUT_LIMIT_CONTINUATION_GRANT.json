@@ -1,6 +1,10 @@
 {
+  "actual_invoice_cost_usd": null,
+  "aggregate_calls": 9,
   "aggregate_maximum_calls": 12,
   "aggregate_maximum_usd": "1.00",
+  "aggregate_reserved_usd": "0.51528576",
+  "aggregate_usage_rated_peak_usd": "0.17653680",
   "authorization_ref": "OWNER_CONFIRMED_2026_10_02_I02_NEW_1_USD_12_CALLS_OUTPUT_LIMIT_CONTINUATION",
   "campaign_authorization_ref": "OWNER_CONFIRMED_2026_10_02_I02_NEW_1_USD_12_CALLS",
   "closed_subrun_reopened": false,
@@ -11,8 +15,15 @@
   "prior_calls": 4,
   "prior_receipt_sha256": "768cf0a1b8d3c914bd048aa90e91a2f320f3b3e781902fe74ff7a5bbb1102d45",
   "prior_reserved_usd": "0.17547288",
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_usd": "0",
   "retries": 0,
+  "run_id": 37078347944,
   "schema": "hcl-output-limit-continuation-grant-v1",
-  "status": "READY",
-  "subrun_maximum_calls": 5
+  "status": "CLOSED_NO_TRANSFER_NO_RETRY",
+  "subrun_calls": 5,
+  "subrun_maximum_calls": 5,
+  "subrun_reserved_usd": "0.33981288",
+  "subrun_usage_rated_peak_usd": "0.11863236",
+  "unknown_cost_hold_usd": "0"
 }
