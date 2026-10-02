@@ -91,6 +91,15 @@ explicitly unsupported. Ten of 40 packages now have bounded adapters; full
 integration and model efficacy remain unverified. Historical evidence and closed
 grants are unchanged; zero provider calls/spend.
 
+[New bounded I02 diagnostic preparation](docs/HCL_BOUNDED_DIAGNOSTICS.md) freezes
+certified G05 runtime and three authored synthetic flows. Owner-confirmed new
+US$1/12-call ceiling ends 2026-10-03 08:00 UTC; no HCLA or old-grant transfer.
+The prepared schedule uses at most eight calls and US$0.64610304 worst-case
+reservation, with one controlled output-limit differential only after a validated
+length response. Grant PREPARED_REVIEW_REQUIRED; no live workflow/trigger or new
+model call yet. Historical grants remain closed; initial package review precedes
+activation. This is functional diagnosis, not efficacy evidence.
+
 ## Owner architecture amendment — 2026-10-02
 
 Every HCL-arm and ordinary product input must enter HCL orchestration. Internal

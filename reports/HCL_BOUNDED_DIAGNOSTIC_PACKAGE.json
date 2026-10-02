@@ -1,0 +1,94 @@
+{
+  "approved_maximum_calls": 12,
+  "approved_maximum_usd": "1.00",
+  "authorization_ref": "OWNER_CONFIRMED_2026_10_02_I02_NEW_1_USD_12_CALLS",
+  "base_calls": 0,
+  "case_inputs_sha256": "11ea9546482e5b091555d19fa2894d3ceef367232667711c418b39c27a42b229",
+  "cases": [
+    {
+      "case_id": "coordination_without_source",
+      "input_sha256": "b9907bf668b7282be93c48b9a8e4ec06f25302907c5ea4d670d0e3adb67cf5ff"
+    },
+    {
+      "case_id": "competing_public_goals",
+      "input_sha256": "0e75e14cac4b6c2e78a3bed93e07165fc5c5bda5cbd97ccccdfbdb8680bb6ceb"
+    },
+    {
+      "case_id": "conditional_argument_change",
+      "input_sha256": "435377148b7719ff8803d2a6d39548e01e002785d3abab67211cd810062a98f2"
+    }
+  ],
+  "certified_runtime_commit": "df0c5d3cdf60219ad0ceab8b25a7bf82ac8087be",
+  "cost_basis": "USAGE_RATED_PEAK_NOT_INVOICE",
+  "efficacy": "NOT_AN_EFFICACY_COMPARISON",
+  "execution_files": {
+    ".github/HCL_UNIVERSAL_DEVELOPMENT_RECIPIENT.pem": "2dc328611d0aa3a96d831e2365b15654ae494590e3e4da774cc3eefbe76c0ee3",
+    ".github/frozen/hcl-bounded-diagnostics-once.yml": "4f013e622349220e7f5861b79e19fdcbee28ad0731cbed5dacbc349d5fe1b38d",
+    "scripts/bounded_diagnostic_port.py": "16720c930139e66484ba86dc6238ad338c2eadf4e61317560dfe7902e8090a8a",
+    "scripts/bounded_diagnostic_protocol.py": "a11712be17046f6ec02409be6118820a18fe8a5b0426b14665e1510b6ecdfa3f",
+    "scripts/run_bounded_diagnostics.py": "3bd072cd550b9ee547ef245dfc128bb37f74a94b83e13b8bfd2e11310a40f638",
+    "scripts/run_universal_development.py": "52e28087964faedb25490d1084aafff67b52e8315268b6fa9bebb9033028e901",
+    "scripts/universal_development_protocol.py": "eeab4d1a1a54eff749ec51b0957d34e78b4373e6fffcdc7b403b76e0b1d72cfe",
+    "scripts/universal_encrypted_result.py": "89dccc796f14633c03763494ce4926ea42027fd393db30fd2056454f908ab29a",
+    "scripts/universal_launch_guard.py": "48e0057dcb3a018aa63824166a3c3cc0950baa56a5af03021c7eb2a101886875",
+    "tests/test_bounded_diagnostics.py": "c560185180c42eb350b4c276605b3ae4688c75637d8abb799bb3231789a051ab"
+  },
+  "expires_at": "2026-10-03T08:00:00Z",
+  "external_lookup_calls": 0,
+  "final_confirmation_qualified": false,
+  "grader_calls": 0,
+  "hcla_budget_transfer": false,
+  "historical_budget_transfer": false,
+  "historical_grant_sha256": {
+    ".github/HCL_PLANNING_DIAGNOSTIC_GRANT.json": "8bf8672930300fb2221ff4556f6c38d2ba8b290be78609184f7d2dc7e037f75d",
+    ".github/HCL_UNIVERSAL_DEVELOPMENT_GRANT.json": "8ec6f91e4f31167550388a2753457e4da464940e71281b3e44c493180602e4b6"
+  },
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "max_request_utf8_bytes": 18000,
+  "maximum_authorized_reservation_usd": "0.97726464",
+  "maximum_elapsed_seconds": 1800,
+  "maximum_schedule_reservation_usd": "0.64610304",
+  "maximum_wait_seconds": 180,
+  "model": "deepseek-v4-pro",
+  "model_snapshot": "RETURNED_ALIAS_NOT_PHYSICAL_SNAPSHOT_CERTIFICATION",
+  "output_margin": 32,
+  "output_policy": "ENCRYPTED_CONTENT_AND_ALLOWLIST_SCALARS_NO_PROVIDER_REASONING_TEXT_OR_RAW_ERRORS",
+  "phase_tokens": {
+    "answer": 8192,
+    "conditional_probe": 8192,
+    "planning": [
+      4096,
+      8192
+    ],
+    "probe": 4096
+  },
+  "pricing_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "pricing_verified_utc": "2026-10-02",
+  "probe_question_sha256": "7dec2350116c49cf47c3ed42ba0062897004f657bd1771ea29f583db2adaa6a7",
+  "probe_requests": {
+    "4096": {
+      "request_bytes": 9062,
+      "request_sha256": "9ad98cc6bc631e0ef862469d2cd01f94f2a591c444601b58e72ba0182ac6db4a",
+      "reservation_usd": "0.04297392"
+    },
+    "8192": {
+      "request_bytes": 9062,
+      "request_sha256": "99f462c9c3bd17af8f4a6513c164d0b362b202334dda633e8d55142bb757f0fc",
+      "reservation_usd": "0.05919408"
+    }
+  },
+  "progression": "VALID_PLAN_REQUIRED_NO_TRANSPORT_OR_SCHEMA_RETRY_NO_PROMPT_REPAIR",
+  "rates_usd_per_million": {
+    "input": "1.32",
+    "output": "3.96"
+  },
+  "reasoning_effort": "high",
+  "request_bound": "2_UTF8_SERIALIZED_REQUEST_BYTES_PLUS_2048",
+  "runtime_sha256": "ad67e85c9bd00cb23dd61825bf7c35790f72282754574da19612435e96839cfe",
+  "schedule": "ONE_4096_PROBE_THEN_ONLY_VALIDATED_LENGTH_MAY_ADMIT_ONE_8192_DIFFERENTIAL_THEN_THREE_HCL_FLOWS",
+  "scheduled_maximum_calls": 8,
+  "schema": "hcl-bounded-synthetic-diagnostic-package-v1",
+  "sdk_retries": 0,
+  "source_kind": "NEW_AUTHORED_SYNTHETIC_NO_REAL_PRIVATE_DATA",
+  "thinking": "enabled"
+}

@@ -21,3 +21,7 @@ logs/
 .DS_Store
 .vscode/
 .idea/
+
+# New bounded diagnostic receipt stays private; only ciphertext is uploaded.
+bounded-diagnostic-private/
+bounded-diagnostic.enc.json
