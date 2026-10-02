@@ -1,0 +1,47 @@
+name: HCL I02 New Bounded Synthetic Diagnostics
+on:
+  push:
+    branches: [main]
+    paths: ['.github/HCL_BOUNDED_DIAGNOSTIC_TRIGGER.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: hcl-i02-new-bounded-diagnostics-20261002
+  cancel-in-progress: false
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'openai==2.14.0' 'cryptography==50.0.0'
+      - name: Provider-free frozen diagnostic gates
+        run: python -m unittest tests.test_bounded_diagnostics tests.test_v1_deepseek_metered tests.test_universal_encrypted_result
+      - name: One new separately ledgered run before expiry
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-bounded-diagnostics-once.yml/runs?per_page=100" > /tmp/bounded-diagnostic-runs.json
+          python -m scripts.run_bounded_diagnostics --check-launch /tmp/bounded-diagnostic-runs.json
+      - name: Bounded planning diagnostic then conditional full flows
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: python -m scripts.run_bounded_diagnostics --execute
+      - name: Encrypt receipt without reasoning text or raw errors
+        if: always()
+        run: |
+          if test -f bounded-diagnostic-private/receipt.json; then
+            python -m scripts.universal_encrypted_result --receipt bounded-diagnostic-private/receipt.json --public-key .github/HCL_UNIVERSAL_DEVELOPMENT_RECIPIENT.pem --output bounded-diagnostic.enc.json
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-bounded-diagnostic-encrypted-${{ github.run_id }}
+          path: bounded-diagnostic.enc.json
+          if-no-files-found: warn
