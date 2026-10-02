@@ -1,0 +1,10 @@
+{
+  "authorization_ref": "OWNER_APPROVED_2026_10_02_NEW_2_50_18_CALLS",
+  "historical_budget_transfer": false,
+  "maximum_calls": 18,
+  "maximum_usd": "2.50",
+  "package_sha256": "5ce8f1a0428c6c821d3c540a90660f09014f05d78ea6bccd246c79a2c5728b20",
+  "retries": 0,
+  "schema": "hcl-universal-development-grant-v1",
+  "status": "READY"
+}
