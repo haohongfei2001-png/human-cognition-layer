@@ -1,0 +1,33 @@
+{
+  "answer_calls": 0,
+  "base_calls": 0,
+  "case_id": "society_without_source",
+  "execution_files": {
+    ".github/HCL_UNIVERSAL_DEVELOPMENT_RECIPIENT.pem": "2dc328611d0aa3a96d831e2365b15654ae494590e3e4da774cc3eefbe76c0ee3",
+    ".github/frozen/hcl-planning-diagnostic-once.yml": "3fa701edbffe8087b79cb497ecd1d241c9a0d1edbd29d16d4b5980b2294562bc",
+    "scripts/run_planning_diagnostic.py": "2c5b4a7ae8b24e37f39bec097b15bf3a199ac966b44089c6286746ff6744e16d",
+    "scripts/run_universal_development.py": "511d75f7915c4ad18d17ebfee2fd32dacd14aa772641d495d9056f838a542ada",
+    "scripts/universal_development_protocol.py": "eeab4d1a1a54eff749ec51b0957d34e78b4373e6fffcdc7b403b76e0b1d72cfe",
+    "scripts/universal_encrypted_result.py": "89dccc796f14633c03763494ce4926ea42027fd393db30fd2056454f908ab29a",
+    "scripts/universal_launch_guard.py": "48e0057dcb3a018aa63824166a3c3cc0950baa56a5af03021c7eb2a101886875",
+    "tests/test_planning_diagnostic.py": "e13af1bdab0fb60fbb6cd9c393dc482491ff16272b32eda52d2e1683a31f99dc"
+  },
+  "final_confirmation_qualified": false,
+  "grader_calls": 0,
+  "maximum_calls": 1,
+  "maximum_output_tokens": 4096,
+  "maximum_usd": "0.05",
+  "maximum_wait_seconds": 180,
+  "model": "deepseek-v4-pro",
+  "output_policy": "ENCRYPTED_CONTENT_AND_ALLOWLIST_DIAGNOSTICS_ONLY",
+  "reasoning_effort": "high",
+  "request_bytes": 9047,
+  "request_sha256": "ac155023d233e7806ba3ab4e015cd3a5d16fe1d5a27ed999903a635c095ef5b8",
+  "reservation_usd": "0.04293432",
+  "runtime_sha256": "5056a61bc1baa2c81a4c913c66c7e4cf1c9964df9c2cd41d9bea807a2afe5cb7",
+  "schema": "hcl-one-planning-diagnostic-package-v1",
+  "sdk_retries": 0,
+  "source_run_cause": "UNRESOLVED_NOT_RETROACTIVELY_IDENTIFIED",
+  "source_run_id": 37022979416,
+  "thinking": "enabled"
+}
