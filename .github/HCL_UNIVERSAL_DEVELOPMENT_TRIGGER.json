@@ -1,0 +1,7 @@
+{
+  "schema": "hcl-universal-single-launch-marker-v1",
+  "authorization_ref": "OWNER_APPROVED_2026_10_02_NEW_2_50_18_CALLS",
+  "package_sha256": "8c06a7f8688e12f42e8d8ae557210ff9713ee59d91ea2bf9f758b9767cc95486",
+  "grant_sha256": "99ac1ea0412e55a383711cc132d46182aea5cf2d5f33df04360faef2bba329e8",
+  "executor_commit": "5463c800f51e072605ae9f3b903db993b6a6dbe7"
+}
