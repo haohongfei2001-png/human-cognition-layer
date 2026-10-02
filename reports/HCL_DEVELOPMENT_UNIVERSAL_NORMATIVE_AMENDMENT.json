@@ -1,0 +1,16 @@
+{
+  "amended_hcl_runtime_sha256": "86dadf5bbcdbbb59dce68de453ac443575c0e7772edd412d5d16f3a63599a348",
+  "changed_runtime_files": [
+    "hcl/cognition/capability_catalog.py",
+    "hcl/cognition/universal_entry.py"
+  ],
+  "complete_capability_integration": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "model_planner_efficacy_verified": false,
+  "previous_hcl_runtime_sha256": "e90e6348eabd6d478bc30c1cb5762685191ad8335aefdfb1993ad23417523f7e",
+  "provider_calls_in_preparation": 0,
+  "provider_spend_usd": 0,
+  "reason": "EXISTING_G01_ORIGINAL_USER_CONDITION_ADAPTER",
+  "responsibility_verdict_added": false,
+  "schema": "hcl-development-universal-normative-amendment-v1"
+}

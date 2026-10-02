@@ -28,15 +28,16 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: UNIVERSAL_HCL_ENTRY_RETAINED_CAPABILITY_INTEGRATION**
 
-[HCL I02 approved universal development run](docs/HCL_I02_UNIVERSAL_DEVELOPMENT_RUN.md):
-new USD2.50 /18-call maximum approved, pending exact executor verification and
-one-shot launch. The owner also approved the exact package/grant/commit-bound
-marker route; manual and marker launches share one anti-replay gate. Six authored human-domain cases include a no-source Chinese
-question and multi-source values; internal HCL planning selects capabilities.
-All phase costs are included, zero retries/paid judges, no prior grant transfer.
-Only an encrypted result artifact may leave the job; raw answers remain private.
-Preparation has made no provider calls. This is constructed development evidence,
-not final confirmation or completed generalization.
+[HCL I02 universal development run](docs/HCL_I02_UNIVERSAL_DEVELOPMENT_RUN.md)
+37022979416 stopped after two provider invocations: Base returned, HCL planning
+failed. No complete pair or efficacy result exists. Its USD2.50 /18-call maximum
+grant is CLOSED_NO_TRANSFER_NO_RETRY with zero remaining authority; the active
+workflow was removed. This was a ceiling, not an actual-cost statement.
+[The separate one-call diagnostic](docs/HCL_I02_PLANNING_DIAGNOSTIC.md)
+37027133992 returned INCOMPLETE_ANSWER_NO_RETRY; exact finish reason was not
+retained. Its USD0.05 maximum grant is also closed and its active workflow removed.
+Both unknown-cost holds remain recorded. No further paid invocation is authorized;
+new work is provider-free unless a new exact package and grant are approved.
 
 [Universal ordinary-question entry](docs/HCL_UNIVERSAL_QUESTION_ENTRY.md) adds
 plain/no-source, instruction/source and multi-source planning/composition/review,
@@ -45,6 +46,14 @@ C02/G02 adapters. Model planner quality and complete family integration remain
 unverified/incomplete. Production has no installed transport or grant; all calls
 require explicit metered allowances and durable reservation for live ports.
 Provider-free correctness only; no paid execution or efficacy claim.
+
+[Bounded G01 ordinary-entry integration](docs/HCL_UNIVERSAL_NORMATIVE_ENTRY.md)
+adds the existing normative-premise preparer to internal selection, including
+source-free original user conditions. Planner interpretations cannot adopt rules;
+source reports and unadopted proposals stay distinct. Seven of 40 retained packages
+have bounded ordinary-entry adapters. A broad question can still yield no usable
+premise; this is no responsibility verdict, full-family or model-efficacy claim.
+Both historical grants remain closed; this batch made zero provider calls.
 
 ## Owner architecture amendment — 2026-10-02
 

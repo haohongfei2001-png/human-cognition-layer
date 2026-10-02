@@ -20,6 +20,6 @@ jobs:
       - name: Current source carry, negative inference and option boundary
         run: python -m unittest tests.test_v1_reader_source_carry tests.test_v1_i01_eval_contract tests.test_i02_exposure_history tests.test_v1_reader_argument_question tests.test_i02_shea_development_case tests.test_i02_rebus_kranak_exposure
       - name: Current disclosed runtime
-        run: python -m scripts.development_completion_metadata_amendment
+        run: python -m scripts.development_universal_normative_amendment
       - name: Consumed privacy package replay at certified v5 runtime
         run: python -m scripts.i02_replay_irie_privacy_freeze

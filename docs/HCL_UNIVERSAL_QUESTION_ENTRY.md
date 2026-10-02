@@ -12,7 +12,10 @@ The catalog reconciles all 40 runtime A–H packages with real callable retained
 implementations; A00 is governance. This corrects the older 28-entry v1 inventory.
 Catalog membership is not a claim that every family has a general-input adapter.
 B01/B02/C01/C03 reuse the source reader. C02 uses the current competing-explanation
-workspace and G02 uses the current responsibility-composition workspace. Other
+workspace and G02 uses the current responsibility-composition workspace. G01 uses
+the existing normative-premise workspace, taking possible caller conditions only
+from the original request, even when no source is supplied. It prepares premises,
+not a responsibility verdict. [G01 contract and limits](HCL_UNIVERSAL_NORMATIVE_ENTRY.md). Other
 selections return explicit adapter/prerequisite limits. The planner is a bounded
 model interface, not a hidden external regex gate or a claimed solved language
 understanding system. It receives the original question and current catalog,

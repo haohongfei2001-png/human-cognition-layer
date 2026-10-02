@@ -1,12 +1,9 @@
 """One separately authorized exact planning diagnostic; no Base or answer phase."""
 import hashlib,json,os,subprocess
-from dataclasses import asdict
 from decimal import Decimal
 from pathlib import Path
 from types import SimpleNamespace
 from hcl.cognition import CallAllowance,UniversalHCL
-from hcl.cognition.capability_catalog import CATALOG
-from hcl.cognition.universal_entry import PLANNER_POLICY
 from hcl.cognition.deepseek_metered import DeepSeekMeteredPort
 from scripts.serious_eval_contract import runtime_digest
 from scripts.universal_development_protocol import CASES,digest
@@ -22,16 +19,21 @@ MARKER=Path('.github/HCL_PLANNING_DIAGNOSTIC_TRIGGER.json')
 TEMPLATE=Path('.github/frozen/hcl-planning-diagnostic-once.yml')
 WORKFLOW=Path('.github/workflows/hcl-planning-diagnostic-once.yml')
 
+FROZEN_REQUEST=Path('.github/frozen/hcl-planning-diagnostic-request.json')
+
 def messages():
-    return [dict(role='system',content=PLANNER_POLICY),dict(role='user',content=json.dumps(dict(
-        question=CASES[0]['question'],sources=[],capability_inventory=[asdict(c)for c in CATALOG.values()]),ensure_ascii=False,sort_keys=True))]
+    # This closed diagnostic replays its historical request, not the evolving
+    # current capability inventory. Current orchestration uses the live catalog.
+    request=json.loads(FROZEN_REQUEST.read_text())
+    if digest(request)!=REQUEST_SHA:raise ValueError('HISTORICAL_REQUEST_FIXTURE_DRIFT')
+    return request['messages']
 
 def build_package():
     port=DeepSeekMeteredPort(SimpleNamespace(max_retries=0,base_url='https://api.deepseek.com',timeout=180))
     request,encoded=port.request('planning',messages())
     if digest(request)!=REQUEST_SHA or port.reservation_usd('planning',messages())!=RESERVE:
         raise ValueError('ORIGINAL_EXACT_REQUEST_AND_RESERVATION_REQUIRED')
-    files=['scripts/run_planning_diagnostic.py','tests/test_planning_diagnostic.py',str(TEMPLATE),
+    files=[str(FROZEN_REQUEST),'scripts/run_planning_diagnostic.py','tests/test_planning_diagnostic.py',str(TEMPLATE),
         'scripts/universal_launch_guard.py','scripts/run_universal_development.py','scripts/universal_development_protocol.py',
         'scripts/universal_encrypted_result.py','.github/HCL_UNIVERSAL_DEVELOPMENT_RECIPIENT.pem']
     return dict(schema='hcl-one-planning-diagnostic-package-v1',request_sha256=REQUEST_SHA,request_bytes=len(encoded),

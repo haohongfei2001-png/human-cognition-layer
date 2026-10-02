@@ -7,6 +7,7 @@ from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from decimal import Decimal
 import json
+import hashlib
 import threading
 from .capability_catalog import CATALOG
 from .deepseek_metered import safe_metered_failure_details
@@ -171,6 +172,40 @@ class UniversalHCL:
 
     def _execute(self, operation, original_question):
         cid=operation['capability'];ids=operation['source_ids'];question=operation['question']
+        if cid=='G01':
+            from .normative_premises import NormativePremiseWorkspace
+            workspace=NormativePremiseWorkspace()
+            for sid in ids:
+                row=self.sources[sid]
+                workspace.put_source(sid,row['text'],recorded_at=row['recorded_at'])
+                workspace.sources[sid]['version']=row['version']
+            # The original caller may supply a conditional rule. Planner rewrites
+            # and source reports can never adopt a framework on that caller's behalf.
+            prepared=workspace.prepare(original_question)
+            prepared.messages(workspace)
+            payload=prepared.payload
+            request_hash=hashlib.sha256(original_question.encode()).hexdigest()
+            request_id='original-user-request:'+request_hash
+            while request_id in self.sources:request_id='request:'+request_id
+            request_root=self.workspace.core.add_span(original_question,
+                source_id=request_id,version=1)
+            provenance=dict(input_kind='ORIGINAL_USER_REQUEST',sha256=request_hash,
+                span_id=request_root,start=0,end=len(original_question),
+                authority='ANALYSIS_CONDITION_NOT_WORLD_EVIDENCE')
+            scope=Scope(source_ids=(request_id,*ids),assumptions=(
+                'ORIGINAL_USER_RULE_IS_CONDITIONAL_NOT_WORLD_TRUTH',
+                'PROPOSED_FRAMEWORK_IS_NOT_ADOPTED'))
+            claim=self.workspace.core.claim(scope,ClaimKind.CONDITIONAL_TOOL_RESULT,
+                dict(operation='G01_NORMATIVE_PREMISE_PREPARATION',result=payload,
+                    request_provenance=provenance))
+            self.workspace.core.support(claim,request_root,
+                *(self.workspace._spans[sid]for sid in ids))
+            return dict(capability=cid,status='G01_PREMISES_PREPARED',executed=True,
+                result=payload,request_provenance=provenance,
+                executable_premise_count=sum(row['executable_as_caller_condition']
+                    for row in payload['candidates']),
+                responsibility_verdict_produced=False,semantic_certification=False,
+                support_claim_ids=[claim])
         if not ids:return dict(capability=cid,status='SOURCE_PREREQUISITE_UNAVAILABLE',executed=False)
         if cid in ('B01','B02','C01','C03'):
             if len(ids)!=1:return dict(capability=cid,status='SINGLE_SOURCE_ADAPTER_REQUIRES_EXPLICIT_SEPARATE_OPERATIONS',executed=False)
