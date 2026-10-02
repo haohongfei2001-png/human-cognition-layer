@@ -1,0 +1,18 @@
+{
+  "schema": "hcl-development-universal-argument-amendment-v1",
+  "previous_hcl_runtime_sha256": "026c918ef8937b1a6ea287b49a9b566c0f2df5cf5905d035cf729a6a365aac52",
+  "amended_hcl_runtime_sha256": "eb1d5fad80254bf7e546e41595509713dc4167bf4c7004556d076bf0bbaf7e09",
+  "changed_runtime_files": [
+    "hcl/cognition/argument_analysis.py",
+    "hcl/cognition/capability_catalog.py",
+    "hcl/cognition/universal_entry.py"
+  ],
+  "reason": "G04_SINGLE_SOURCE_ARGUMENT_ADAPTER_AND_EXPLICIT_NEGATION_GUARD",
+  "provider_calls_in_preparation": 0,
+  "provider_spend_usd": 0,
+  "complete_capability_integration": false,
+  "model_planner_efficacy_verified": false,
+  "argument_grammar_extended": false,
+  "verdict_added": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

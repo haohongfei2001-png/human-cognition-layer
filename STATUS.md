@@ -73,6 +73,15 @@ Eight of 40 packages now have bounded adapters. Grammar/bounds are unchanged;
 scripted wiring is not model selection quality, full integration or answer gain.
 Historical paid evidence/grants remain immutable; zero provider calls/spend.
 
+[Bounded G04 ordinary-entry integration](docs/HCL_UNIVERSAL_ARGUMENT_ENTRY.md)
+adds the retained single-source argument preparer with original-question and
+shared-revision support. A minimal explicit-negation guard fixes identical
+conclusions being misclassified as opposed. Premises, challenges, local concepts
+and stated value conflicts remain source-reported; no winner or verdict is
+chosen. Nine of 40 packages now have bounded adapters. Full integration and
+model efficacy remain unverified. Prior amendments/archives and closed grants
+are preserved byte-for-byte; zero provider calls/spend.
+
 ## Owner architecture amendment — 2026-10-02
 
 Every HCL-arm and ordinary product input must enter HCL orchestration. Internal

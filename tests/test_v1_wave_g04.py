@@ -1,7 +1,7 @@
 """G04 source-local philosophical argument boundaries and composition."""
 import unittest
 
-from hcl.cognition.argument_analysis import ArgumentWorkspace
+from hcl.cognition.argument_analysis import ArgumentWorkspace, _opposed
 
 
 TEXT = '''Narrator: In choice, Mira could leave.
@@ -46,6 +46,30 @@ class G04Tests(unittest.TestCase):
 Noor: In choice, I conclude choice is good because Mira could leave.'''
         view = workspace(text).prepare_argument('Compare claims', observer='Analyst').payload
         self.assertFalse(view['disagreements'])
+
+    def test_identical_claims_never_imply_opposition(self):
+        for claim in ('choice is free', 'choice is not free', 'not choice is free',
+                      'exit remains possible', 'notable choices matter'):
+            with self.subTest(claim=claim):
+                self.assertFalse(_opposed(claim, claim))
+                text = (f'Mira: In choice, I conclude {claim} because exit is possible.\n'
+                        f'Noor: In choice, I conclude {claim} because safety matters.')
+                view = workspace(text).prepare_argument('Compare claims', observer='Analyst').payload
+                self.assertEqual(len(view['arguments']), 2)
+                self.assertEqual(view['disagreements'], [])
+
+    def test_only_explicit_supported_negation_marks_opposition_symmetrically(self):
+        for left, right in (('choice is free', 'choice is not free'),
+                            ('exit remains possible', 'not exit remains possible')):
+            self.assertTrue(_opposed(left, right));self.assertTrue(_opposed(right, left))
+            for a, b in ((left, right), (right, left)):
+                text = (f'Mira: In choice, I conclude {a} because one premise.\n'
+                        f'Noor: In choice, I conclude {b} because another premise.')
+                view = workspace(text).prepare_argument('Compare claims', observer='Analyst').payload
+                self.assertEqual(len(view['disagreements']), 1)
+        for left, right in (('choice is free', 'choice is good'),
+                            ('exit remains possible', 'exit remains impossible')):
+            self.assertFalse(_opposed(left, right));self.assertFalse(_opposed(right, left))
 
     def test_unlocated_opposition_is_explicitly_unresolved(self):
         text = '''Mira: In choice, I conclude choice is free because Mira could leave.
