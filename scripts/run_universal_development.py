@@ -3,7 +3,7 @@ import hashlib,json,os,threading,time
 from decimal import Decimal
 from pathlib import Path
 from hcl.cognition import UniversalHCL,CallAllowance
-from hcl.cognition.deepseek_metered import DeepSeekMeteredPort,safe_metered_failure_code
+from hcl.cognition.deepseek_metered import DeepSeekMeteredPort,safe_metered_failure_details
 from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY
 from scripts.universal_development_protocol import CASES,ordinary,protocol,digest
 
@@ -127,13 +127,16 @@ def run(client,package,grant,directory):
                     messages=base_messages(case);reserve=port.reservation_usd('answer',messages)
                     attempt=dict(phase='answer',reserved_usd=reserve,status='RESERVED_BEFORE_CALL',provider_call=False,invocation_status='NOT_INVOKED')
                     port.journal(dict(attempts=[attempt]))
+                    inside_backend=False
                     try:
                         attempt.update(provider_call=True,invocation_status='INVOKED_OR_SEND_UNKNOWN')
+                        inside_backend=True
                         result=port.complete('answer',messages)
+                        inside_backend=False
                         attempt.update(status='RETURNED',actual_usd=result['actual_usd'],usage=result['usage'],invocation_status='RETURNED')
                         port.journal(dict(attempts=[attempt]));raw=result['text'];details=None
                     except Exception as error:
-                        attempt['failure_code']=safe_metered_failure_code(error)
+                        attempt.update(safe_metered_failure_details(error,reserve)if inside_backend else {'failure_code':'METERED_BACKEND_OR_JOURNAL_FAILED'})
                         attempt['status']='FAILED_OR_UNKNOWN_NO_RETRY';port.journal(dict(attempts=[attempt]));raise
                 else:
                     session=UniversalHCL()

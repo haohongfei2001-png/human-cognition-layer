@@ -9,7 +9,7 @@ from decimal import Decimal
 import json
 import threading
 from .capability_catalog import CATALOG
-from .deepseek_metered import safe_metered_failure_code
+from .deepseek_metered import safe_metered_failure_details
 from .workspace import CognitionWorkspace
 from .core import Scope, ClaimKind
 from .reader_entry import _FINAL_ANSWER_POLICY
@@ -91,11 +91,14 @@ class CallAllowance:
             provider_call=False,invocation_status='NOT_INVOKED',
             cost_basis='USAGE_RATED_PEAK_NOT_INVOICE' if getattr(backend,'cost_basis',None)=='USAGE_RATED_PEAK_NOT_INVOICE' else 'UNSPECIFIED_BACKEND_REPORTED_AMOUNT')
         self.attempts.append(attempt);self.reserved_usd+=reservation
+        inside_backend=False
         try:
             if self.journal:self.journal(dict(authorization_ref=self.authorization_ref,attempts=self.attempts,reserved_usd=str(self.reserved_usd)))
             attempt['provider_call']=not getattr(backend,'provider_free',False)
             attempt['invocation_status']='INVOKED_OR_SEND_UNKNOWN'
+            inside_backend=True
             result=backend.complete(phase,messages)
+            inside_backend=False
             if not isinstance(result,dict) or set(result)!={'text','actual_usd','usage'} or not isinstance(result['text'],str):
                 raise HCLBoundaryError('METERED_RESPONSE_REQUIRED')
             actual=Decimal(str(result['actual_usd']))
@@ -106,7 +109,7 @@ class CallAllowance:
             if len(result['text'])>(32000 if phase=='planning' else 64000):raise HCLBoundaryError('PLANNER_OR_ANSWER_OUTPUT_BOUND_EXCEEDED')
             return result['text']
         except Exception as error:
-            attempt['failure_code']=safe_metered_failure_code(error)
+            attempt.update(safe_metered_failure_details(error,reservation)if inside_backend else {'failure_code':'METERED_BACKEND_OR_JOURNAL_FAILED'})
             attempt['status']='FAILED_OR_UNKNOWN_NO_RETRY' if attempt['invocation_status']!='NOT_INVOKED' else 'RESERVATION_PERSISTENCE_FAILED_NO_CALL'
             self.closed=True
             if self.journal:
