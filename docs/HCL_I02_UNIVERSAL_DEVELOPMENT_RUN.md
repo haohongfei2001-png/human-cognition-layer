@@ -3,7 +3,7 @@
 The owner approved a new maximum USD 2.50, 18-call batch on 2026-10-02, after
 executor verification. This is a new grant; no closed historical balance is reused.
 No calls have occurred in preparation. Activation and execution require the frozen
-package, exact grant, first main workflow invocation/attempt and all local/hosted
+package, exact grant, single admitted main workflow invocation/attempt and all local/hosted
 verification. The current capability integration remains partial.
 
 ## Fixed task mix and fairness
@@ -63,7 +63,7 @@ cancellation or a refund**. The batch stops on any failed/unknown call. New call
 admission stops after30 minutes; the job has a35-minute hard limit. The single-run
 ledger uses atomic replacement and file/directory fsync before transport. Deadline,
 19th-call and USD-cap refusals admit no new call. Existing output-directory refusal
-and the workflow’s first-invocation/attempt gate prevent automated replay. Every
+and the workflow’s shared manual/marker first-run gate prevent automated replay. Every
 terminal result closes remaining authorization, including incomplete runs.
 
 ## Private result delivery
@@ -90,3 +90,20 @@ All constructed sources/queries are development-exposed and excluded from final
 confirmation. LongMemEval remains sealed and untouched. No credentials are
 created or moved; actual execution uses only the existing server-stored provider
 key in the legitimate one-shot workflow after verification.
+
+## Owner-approved automatic launch marker
+
+The owner approved starting this same run through the already authorized GitHub
+write route. The workflow also accepts a main-branch push changing only
+`.github/HCL_UNIVERSAL_DEVELOPMENT_TRIGGER.json`; ordinary merges do not match.
+The marker binds the exact package hash, exact READY-grant hash and reviewed
+executor parent commit. Its commit must have one parent and change only that
+marker path. This is an explicit launch action after executor CI, not an automatic
+paid trigger on normal source changes. No marker is part of the preparation PR.
+
+The gate reads all paginated workflow-run history across both `workflow_dispatch`
+and `push`. Only the earliest created run (stable ID tie-break) is admitted and
+only attempt1. A simultaneous manual/marker launch cannot authorize two runs.
+Immediately before creating the marker, check for any existing run and refrain
+from launching a duplicate. The grant, six cases, model,18-call/USD2.50 ceiling,
+no-retry policy and encrypted-only delivery are unchanged.

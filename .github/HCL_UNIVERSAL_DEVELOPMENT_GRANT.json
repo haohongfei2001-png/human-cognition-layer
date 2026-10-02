@@ -3,7 +3,7 @@
   "historical_budget_transfer": false,
   "maximum_calls": 18,
   "maximum_usd": "2.50",
-  "package_sha256": "5ce8f1a0428c6c821d3c540a90660f09014f05d78ea6bccd246c79a2c5728b20",
+  "package_sha256": "8c06a7f8688e12f42e8d8ae557210ff9713ee59d91ea2bf9f758b9767cc95486",
   "retries": 0,
   "schema": "hcl-universal-development-grant-v1",
   "status": "READY"
