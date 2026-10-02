@@ -35,7 +35,8 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 [HCL I02 approved universal development run](docs/HCL_I02_UNIVERSAL_DEVELOPMENT_RUN.md):
 new USD2.50 /18-call maximum approved, pending exact executor verification and
-one-shot dispatch. Six authored human-domain cases include a no-source Chinese
+one-shot launch. The owner also approved the exact package/grant/commit-bound
+marker route; manual and marker launches share one anti-replay gate. Six authored human-domain cases include a no-source Chinese
 question and multi-source values; internal HCL planning selects capabilities.
 All phase costs are included, zero retries/paid judges, no prior grant transfer.
 Only an encrypted result artifact may leave the job; raw answers remain private.

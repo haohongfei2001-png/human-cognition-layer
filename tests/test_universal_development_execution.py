@@ -84,5 +84,7 @@ class DevelopmentExecutionTests(unittest.TestCase):
         self.assertIn('path: universal-development-receipt.enc.json',text)
         self.assertNotIn('path: universal-development-private',text)
         self.assertIn('test "$GITHUB_RUN_ATTEMPT" = 1',text)
-        self.assertIn('assert len(runs)==1',text)
+        self.assertIn('scripts.universal_launch_guard --run-history',text)
+        self.assertIn('--paginate --slurp',text)
+        self.assertIn('paths: [".github/HCL_UNIVERSAL_DEVELOPMENT_TRIGGER.json"]',text)
         self.assertNotIn('PRIVATE KEY',text)

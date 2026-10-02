@@ -72,13 +72,15 @@
   "execution_authority": "SEPARATE_MATCHING_READY_GRANT_REQUIRED",
   "execution_files": {
     ".github/HCL_UNIVERSAL_DEVELOPMENT_RECIPIENT.pem": "2dc328611d0aa3a96d831e2365b15654ae494590e3e4da774cc3eefbe76c0ee3",
-    ".github/frozen/hcl-universal-development-once.yml": "97cd8b58bf3a5d211069014061c47232ebf84a9c686ae34f5bc53742828427f3",
+    ".github/frozen/hcl-universal-development-once.yml": "4f8f7e8e67985d5eabf271e3a0a7802c01d78a6cfd3ddc952756fbbdea5d7ff0",
     "reports/HCL_DEVELOPMENT_BENCHMARK_EXPOSURE_REGISTER.json": "5dffe4b46c3f62de5cce6f3818a36846cef09fa17903e532077b3bede1c2d109",
-    "scripts/run_universal_development.py": "6c8c2448bde121d3c2f0069827aed4fd8bba02e20706fc0d746da5325f7b7e2f",
+    "scripts/run_universal_development.py": "5011ed0024830fc28cf98ba6e403825e35ef815c8a3d9e534117bd0e085b4f19",
     "scripts/universal_development_protocol.py": "eeab4d1a1a54eff749ec51b0957d34e78b4373e6fffcdc7b403b76e0b1d72cfe",
     "scripts/universal_encrypted_result.py": "89dccc796f14633c03763494ce4926ea42027fd393db30fd2056454f908ab29a",
-    "tests/test_universal_development_execution.py": "116f8fe52a2bf829bd5968b092c81ae784a4f39c01f0a7267668d6385786076f",
+    "scripts/universal_launch_guard.py": "48e0057dcb3a018aa63824166a3c3cc0950baa56a5af03021c7eb2a101886875",
+    "tests/test_universal_development_execution.py": "41a4a3038349caf5dd33284593dc943c93f3e53e604ad3ea447152265e63d5f5",
     "tests/test_universal_encrypted_result.py": "3d5f3bab8fcd2bd487a74d5212fac44223227f03923bbf6197a5b01a162913f0",
+    "tests/test_universal_launch_guard.py": "cad17ec3f74664dbc45a48523db943504e23dac5d91c5f792c27f41ba8c2ef8e",
     "tests/test_v1_deepseek_metered.py": "b4e4efa942e081dc7b25f1225032343e2ebecfc7014b746b06cb5ff11b42592a"
   },
   "extraction_calls": 0,

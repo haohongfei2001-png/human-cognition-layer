@@ -1,6 +1,9 @@
 name: HCL I02 One Approved Universal Development Comparison
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [".github/HCL_UNIVERSAL_DEVELOPMENT_TRIGGER.json"]
 permissions:
   contents: read
   actions: read
@@ -15,25 +18,21 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Exactly first main invocation, never retry a consumed grant
+      - name: Exactly one main invocation across manual and marker routes
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           test "$GITHUB_REF" = refs/heads/main
           test "$GITHUB_RUN_ATTEMPT" = 1
-          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-universal-development-once.yml/runs?event=workflow_dispatch&per_page=100" > /tmp/universal-runs.json
-          python - <<'PY'
-          import json,os
-          runs=json.load(open('/tmp/universal-runs.json'))['workflow_runs']
-          assert len(runs)==1 and str(runs[0]['id'])==os.environ['GITHUB_RUN_ID']
-          PY
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-universal-development-once.yml/runs?per_page=100" > /tmp/universal-runs.json
+          python -m scripts.universal_launch_guard --run-history /tmp/universal-runs.json
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - run: python -m pip install 'openai==2.14.0' 'cryptography==50.0.0'
       - name: Frozen source, executor, encryption and runtime verification
         run: |
-          python -m unittest tests.test_v1_deepseek_metered tests.test_v1_universal_question tests.test_universal_development_execution tests.test_universal_encrypted_result
+          python -m unittest tests.test_v1_deepseek_metered tests.test_v1_universal_question tests.test_universal_development_execution tests.test_universal_encrypted_result tests.test_universal_launch_guard
           python -m scripts.development_metered_universal_amendment
       - name: Single newly approved capped comparison
         env:

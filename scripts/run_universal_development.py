@@ -47,7 +47,8 @@ def build_package():
            'tests/test_universal_development_execution.py','tests/test_v1_deepseek_metered.py',
            'scripts/universal_encrypted_result.py','tests/test_universal_encrypted_result.py',
            '.github/HCL_UNIVERSAL_DEVELOPMENT_RECIPIENT.pem',
-           'reports/HCL_DEVELOPMENT_BENCHMARK_EXPOSURE_REGISTER.json']
+           'reports/HCL_DEVELOPMENT_BENCHMARK_EXPOSURE_REGISTER.json',
+           'scripts/universal_launch_guard.py','tests/test_universal_launch_guard.py']
     proposed=protocol()
     for field in ('authorized_calls','authorized_spend_usd','live_execution_enabled'):proposed.pop(field)
     return dict(proposed,schema='hcl-universal-development-package-v1',
@@ -163,6 +164,8 @@ if __name__=='__main__':
         if os.environ.get('GITHUB_REF')!='refs/heads/main' or os.environ.get('GITHUB_RUN_ATTEMPT')!='1' or os.environ.get('HCL_UNIVERSAL_DEVELOPMENT_AUTHORIZED')!='ONE_NEW_2_50_18_CALL_BATCH':raise ValueError('UNIQUE_APPROVED_MAIN_EXECUTION_REQUIRED')
         if WORKFLOW.read_bytes()!=TEMPLATE.read_bytes():raise ValueError('FROZEN_WORKFLOW_REQUIRED')
         package=json.loads(PACKAGE.read_text());grant=json.loads(GRANT.read_text());require_grant(package,grant)
+        from scripts.universal_launch_guard import verify_execution_event
+        verify_execution_event(digest(package),digest(grant))
         # Public workflow logs must never contain request/response bodies.
         import logging
         logging.disable(logging.CRITICAL)
