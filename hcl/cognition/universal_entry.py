@@ -9,6 +9,7 @@ from decimal import Decimal
 import json
 import threading
 from .capability_catalog import CATALOG
+from .deepseek_metered import safe_metered_failure_code
 from .workspace import CognitionWorkspace
 from .core import Scope, ClaimKind
 from .reader_entry import _FINAL_ANSWER_POLICY
@@ -104,7 +105,8 @@ class CallAllowance:
             if self.journal:self.journal(dict(authorization_ref=self.authorization_ref,attempts=self.attempts,reserved_usd=str(self.reserved_usd)))
             if len(result['text'])>(32000 if phase=='planning' else 64000):raise HCLBoundaryError('PLANNER_OR_ANSWER_OUTPUT_BOUND_EXCEEDED')
             return result['text']
-        except Exception:
+        except Exception as error:
+            attempt['failure_code']=safe_metered_failure_code(error)
             attempt['status']='FAILED_OR_UNKNOWN_NO_RETRY' if attempt['invocation_status']!='NOT_INVOKED' else 'RESERVATION_PERSISTENCE_FAILED_NO_CALL'
             self.closed=True
             if self.journal:

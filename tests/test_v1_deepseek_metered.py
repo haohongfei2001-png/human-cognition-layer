@@ -48,6 +48,7 @@ class MeteredPortTests(unittest.TestCase):
         result=UniversalHCL().answer('Discuss cooperation.',planner_backend=port,answer_backend=port,allowance=allowance)
         self.assertEqual(len(client.calls),1);self.assertTrue(allowance.closed)
         self.assertNotIn('PRIVATE_PROVIDER_BODY',json.dumps(result));self.assertGreater(float(result['reserved_usd']),0)
+        self.assertEqual(result['provider_attempts'][0]['failure_code'],'PROVIDER_TRANSPORT_FAILURE_NO_RETRY')
 
     def test_zero_and_inconsistent_usage_are_not_free_success(self):
         for usage in [dict(prompt_tokens=0,completion_tokens=0),dict(prompt_tokens=100,completion_tokens=30,total_tokens=1)]:
@@ -82,3 +83,18 @@ class MeteredPortTests(unittest.TestCase):
             self.assertGreater(float(result['reserved_usd']),0)
             with self.assertRaises(MeteredPortError):port.reservation_usd('planning',[dict(role='user',content='Retry')])
         finally:release.set()
+
+    def test_fixed_failure_codes_survive_without_provider_bodies(self):
+        from hcl.cognition.deepseek_metered import safe_metered_failure_code
+        for code in ('PROVIDER_TRANSPORT_FAILURE_NO_RETRY','NUMERIC_USAGE_REQUIRED','INCOMPLETE_ANSWER_NO_RETRY'):
+            class SafeFailure(DeepSeekMeteredPort):
+                def complete(self,phase,messages):raise MeteredPortError(code)
+            port=SafeFailure(FakeClient());journal=[]
+            a=CallAllowance(2,'1','TEST',journal=lambda r:journal.append(json.loads(json.dumps(r))))
+            result=UniversalHCL().answer('Discuss cooperation.',planner_backend=port,answer_backend=port,allowance=a)
+            self.assertEqual(result['provider_attempts'][0]['failure_code'],code)
+            self.assertEqual(journal[-1]['attempts'][0]['failure_code'],code)
+            self.assertTrue(a.closed);self.assertGreater(float(result['reserved_usd']),0)
+        class Subclass(MeteredPortError):pass
+        for error in (MeteredPortError('PRIVATE_CANARY'),RuntimeError('PROVIDER_TRANSPORT_FAILURE_NO_RETRY'),Subclass('NUMERIC_USAGE_REQUIRED'),MeteredPortError('NUMERIC_USAGE_REQUIRED','PRIVATE_CANARY')):
+            self.assertEqual(safe_metered_failure_code(error),'METERED_BACKEND_OR_JOURNAL_FAILED')

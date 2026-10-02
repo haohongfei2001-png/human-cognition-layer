@@ -2,9 +2,31 @@
 
 The owner approved a new maximum USD 2.50, 18-call batch on 2026-10-02, after
 executor verification. This is a new grant; no closed historical balance is reused.
-No calls have occurred in preparation. Activation and execution require the frozen
-package, exact grant, single admitted main workflow invocation/attempt and all local/hosted
-verification. The current capability integration remains partial.
+The approved run has now stopped and its grant is closed. The current capability
+integration remains partial. The package and frozen workflow below are historical
+execution evidence; the active workflow has been removed and no retry is authorized.
+
+## Result and bounded follow-up
+
+[Run 37022979416](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/37022979416)
+on marker commit `531662640b09469bd3535aa1ce72aa03a9c50c21` passed launch and frozen
+executor gates. It stopped after two provider invocations on the first no-source
+Chinese case: Base returned; HCL planning failed. No complete Base/H pair exists,
+so this run supports no efficacy or comparative-quality conclusion.
+
+The encrypted artifact was downloaded, its ZIP SHA256 verified, and its package
+and recipient binding authenticated during local decryption. No raw answers were
+published. [Sanitized accounting](../reports/HCL_UNIVERSAL_DEVELOPMENT_RESULT_20261002.json):
+Base usage-rated peak cost USD0.01245684, planner cost unknown with its full
+USD0.04293432 hold retained; original total reservations USD0.08151528. These are
+not provider invoice amounts. All remaining authorization is closed, with no transfer.
+
+The persisted failure code was only `METERED_BACKEND_OR_JOURNAL_FAILED`; the
+specific transport/output/usage/journal cause was not retained and cannot be
+recovered honestly. A subsequent provider-free patch retains only exact internal,
+allowlisted failure codes in future receipts, with synthetic privacy regressions.
+It does not reclassify the historical failure or authorize another experiment.
+Any later paid comparison needs a separately frozen package and new approval.
 
 ## Fixed task mix and fairness
 

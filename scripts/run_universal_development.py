@@ -3,7 +3,7 @@ import hashlib,json,os,threading,time
 from decimal import Decimal
 from pathlib import Path
 from hcl.cognition import UniversalHCL,CallAllowance
-from hcl.cognition.deepseek_metered import DeepSeekMeteredPort
+from hcl.cognition.deepseek_metered import DeepSeekMeteredPort,safe_metered_failure_code
 from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY
 from scripts.universal_development_protocol import CASES,ordinary,protocol,digest
 
@@ -132,7 +132,8 @@ def run(client,package,grant,directory):
                         result=port.complete('answer',messages)
                         attempt.update(status='RETURNED',actual_usd=result['actual_usd'],usage=result['usage'],invocation_status='RETURNED')
                         port.journal(dict(attempts=[attempt]));raw=result['text'];details=None
-                    except Exception:
+                    except Exception as error:
+                        attempt['failure_code']=safe_metered_failure_code(error)
                         attempt['status']='FAILED_OR_UNKNOWN_NO_RETRY';port.journal(dict(attempts=[attempt]));raise
                 else:
                     session=UniversalHCL()

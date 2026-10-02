@@ -1,0 +1,23 @@
+{
+  "actual_invoice_cost_usd": null,
+  "base_known_plus_unknown_planner_hold_usd": "0.05539116",
+  "base_usage_rated_peak_usd": "0.01245684",
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RETRY",
+  "complete_base_h_pairs": 0,
+  "efficacy_claim": false,
+  "encrypted_artifact_id": 11233793894,
+  "encrypted_zip_sha256": "b18cd176465834434d648f4c988ece51596e68d7dbc220f26e0bb50ef3041734",
+  "failed_phase": "HCL_PLANNING",
+  "failure_reason": "METERED_BACKEND_OR_JOURNAL_FAILED",
+  "head_sha": "531662640b09469bd3535aa1ce72aa03a9c50c21",
+  "package_sha256": "8c06a7f8688e12f42e8d8ae557210ff9713ee59d91ea2bf9f758b9767cc95486",
+  "planner_cost_usd": null,
+  "planner_unknown_cost_reservation_usd": "0.04293432",
+  "provider_invocations": 2,
+  "raw_output_publication": false,
+  "run_id": 37022979416,
+  "schema": "hcl-universal-development-public-summary-v1",
+  "specific_cause": "NOT_RETAINED_UNRESOLVED",
+  "status": "FAILED_OR_INCOMPLETE_NO_RETRY",
+  "total_original_reservations_usd": "0.08151528"
+}

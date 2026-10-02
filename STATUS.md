@@ -33,15 +33,14 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: UNIVERSAL_HCL_ENTRY_RETAINED_CAPABILITY_INTEGRATION**
 
-[HCL I02 approved universal development run](docs/HCL_I02_UNIVERSAL_DEVELOPMENT_RUN.md):
-new USD2.50 /18-call maximum approved, pending exact executor verification and
-one-shot launch. The owner also approved the exact package/grant/commit-bound
-marker route; manual and marker launches share one anti-replay gate. Six authored human-domain cases include a no-source Chinese
-question and multi-source values; internal HCL planning selects capabilities.
-All phase costs are included, zero retries/paid judges, no prior grant transfer.
-Only an encrypted result artifact may leave the job; raw answers remain private.
-Preparation has made no provider calls. This is constructed development evidence,
-not final confirmation or completed generalization.
+[HCL I02 universal development run](docs/HCL_I02_UNIVERSAL_DEVELOPMENT_RUN.md)
+37022979416 stopped after two provider invocations: Base returned, HCL planning
+failed with a generic metered-backend/journal code. No complete pair or efficacy
+result exists. Grant CLOSED_NO_TRANSFER_NO_RETRY; active workflow removed.
+Base usage-rated peak USD0.01245684, planner unknown hold USD0.04293432; no invoice
+claim. Encrypted receipt verified and reviewed locally; raw output remains private.
+The bounded next engineering repair preserves only fixed allowlisted failure codes;
+no historical cause is inferred and no paid rerun is authorized.
 
 [Universal ordinary-question entry](docs/HCL_UNIVERSAL_QUESTION_ENTRY.md) adds
 plain/no-source, instruction/source and multi-source planning/composition/review,
