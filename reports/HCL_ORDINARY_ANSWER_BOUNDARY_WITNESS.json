@@ -1,0 +1,50 @@
+{
+  "cases": [
+    {
+      "case": "unsupported_trait",
+      "checked_treatment_present": false,
+      "extraction_calls": 0,
+      "quote_audit_status": "ORIGINAL_ANCHORS_LOCATED_SEMANTICS_UNASSESSED",
+      "raw_delivered_unchanged": true,
+      "semantic_certification": false,
+      "source": "Mira closed the workshop door. Theo waited outside.",
+      "stub_answer": "Mira closed the door because she is inherently spiteful."
+    },
+    {
+      "case": "reported_reason",
+      "checked_treatment_present": true,
+      "extraction_calls": 0,
+      "quote_audit_status": "ORIGINAL_ANCHORS_LOCATED_SEMANTICS_UNASSESSED",
+      "raw_delivered_unchanged": true,
+      "semantic_certification": false,
+      "source": "Mira said, “I intend to close the workshop door.”",
+      "stub_answer": "The source reports Mira expressing an intention to close the door."
+    },
+    {
+      "case": "reported_receipt",
+      "checked_treatment_present": true,
+      "extraction_calls": 0,
+      "quote_audit_status": "ORIGINAL_ANCHORS_LOCATED_SEMANTICS_UNASSESSED",
+      "raw_delivered_unchanged": true,
+      "semantic_certification": false,
+      "source": "Mira said, “The workshop door is closed.” Theo heard Mira's last statement.",
+      "stub_answer": "The source reports Theo hearing Mira's statement; this does not establish acceptance."
+    },
+    {
+      "case": "availability_only",
+      "checked_treatment_present": true,
+      "extraction_calls": 0,
+      "quote_audit_status": "ORIGINAL_ANCHORS_LOCATED_SEMANTICS_UNASSESSED",
+      "raw_delivered_unchanged": true,
+      "semantic_certification": false,
+      "source": "Mira said, “The workshop door is closed.” Mira's last statement was publicly available.",
+      "stub_answer": "Availability alone does not establish that Theo heard or accepted the statement."
+    }
+  ],
+  "conclusion": "EXACT_QUOTES_DO_NOT_CERTIFY_EXPLANATION; GENERAL_BOUNDARY_QUEUE_REMAINS_OPEN",
+  "model_failure_observed": false,
+  "provider_calls": 0,
+  "runtime_sha256": "7ade2dacaccca178d985661cc1e6683559052f2b3b3ab6cbf4e7ac506300f093",
+  "schema": "hcl-ordinary-answer-boundary-witness-v1",
+  "synthetic_stub_answers": true
+}
