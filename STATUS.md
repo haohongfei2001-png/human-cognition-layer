@@ -33,6 +33,14 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: UNIVERSAL_HCL_ENTRY_RETAINED_CAPABILITY_INTEGRATION**
 
+[Universal ordinary-question entry](docs/HCL_UNIVERSAL_QUESTION_ENTRY.md) adds
+plain/no-source, instruction/source and multi-source planning/composition/review,
+a callable inventory of all 40 current runtime A–H packages, and real current
+C02/G02 adapters. Model planner quality and complete family integration remain
+unverified/incomplete. Production has no installed transport or grant; all calls
+require explicit metered allowances and durable reservation for live ports.
+Provider-free correctness only; no paid execution or efficacy claim.
+
 ## Owner architecture amendment — 2026-10-02
 
 Every HCL-arm and ordinary product input must enter HCL orchestration. Internal
