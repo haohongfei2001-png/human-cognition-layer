@@ -1,0 +1,18 @@
+{
+  "amended_hcl_runtime_sha256": "b319e6091278e2b685174cce35c2795cd725d53811d78d8b06e52b8623dfb367",
+  "changed_runtime_files": [
+    "hcl/cognition/__init__.py",
+    "hcl/cognition/capability_catalog.py",
+    "hcl/cognition/universal_entry.py"
+  ],
+  "complete_capability_integration": false,
+  "historical_budget_transfer": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "model_planner_efficacy_verified": false,
+  "previous_hcl_runtime_sha256": "7ade2dacaccca178d985661cc1e6683559052f2b3b3ab6cbf4e7ac506300f093",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "provider_transport_installed": false,
+  "reason": "ORDINARY_QUESTION_PLANNING_AND_CURRENT_C02_G02_ADAPTERS",
+  "schema": "hcl-development-universal-question-amendment-v1"
+}

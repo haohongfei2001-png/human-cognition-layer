@@ -91,3 +91,7 @@ from .execution_graph import CognitiveExecutionGraph, CognitiveExecution
 from .answer_audit import AnswerAuditWorkspace, AuditedAnswer
 
 from .hard_cognition import HardCognitionSession, HardCognitionResult
+
+# Universal ordinary-question entry; no provider transport is installed by import.
+from .universal_entry import UniversalHCL, CallAllowance
+__all__ += ['UniversalHCL', 'CallAllowance']
