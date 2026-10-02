@@ -56,7 +56,7 @@ _ROWS = (
  ('H05','hard cognition','hard_cognition:HardCognitionSession'),
 )
 CATALOG={cid:RetainedCapability(cid,family,'hcl.cognition.'+path,
-    'BOUNDED_ORDINARY_ADAPTER' if cid in ('B01','B02','C01','C03','C02','G02','G01') else 'ADAPTER_REQUIRED')
+    'BOUNDED_ORDINARY_ADAPTER' if cid in ('B01','B02','C01','C03','C02','G02','G01','G03') else 'ADAPTER_REQUIRED')
     for cid,family,path in _ROWS}
 
 

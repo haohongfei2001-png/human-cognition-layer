@@ -207,6 +207,28 @@ class UniversalHCL:
                 responsibility_verdict_produced=False,semantic_certification=False,
                 support_claim_ids=[claim])
         if not ids:return dict(capability=cid,status='SOURCE_PREREQUISITE_UNAVAILABLE',executed=False)
+        if cid=='G03':
+            if len(ids)!=1:return dict(capability=cid,status='G03_REQUIRES_ONE_SOURCE',executed=False)
+            from .concept_criteria import ConceptCriteriaWorkspace
+            sid=ids[0];row=self.sources[sid]
+            workspace=ConceptCriteriaWorkspace(sid)
+            workspace.put_source(row['text'],recorded_at=row['recorded_at'])
+            # A fresh adapter must retain the shared source revision. The full
+            # original source is parsed; planner text never supplies criteria.
+            workspace.version=row['version']
+            prepared=workspace.prepare(original_question)
+            prepared.messages(workspace)
+            payload=prepared.payload
+            scope=Scope(source_ids=(sid,),assumptions=(
+                'SOURCE_LOCAL_CONCEPT_CRITERIA_NOT_WORLD_TRUTH',
+                'SOURCE_ORDER_NOT_CALENDAR_TIME'))
+            claim=self.workspace.core.claim(scope,ClaimKind.CONDITIONAL_TOOL_RESULT,
+                dict(operation='G03_CONCEPT_CRITERIA_PREPARATION',result=payload))
+            self.workspace.core.support(claim,self.workspace._spans[sid])
+            return dict(capability=cid,status='G03_CRITERIA_PREPARED',executed=True,
+                result=payload,active_criterion_count=len(payload['active_criteria']),
+                conditional_reading_count=len(payload['readings']),
+                semantic_certification=False,support_claim_ids=[claim])
         if cid in ('B01','B02','C01','C03'):
             if len(ids)!=1:return dict(capability=cid,status='SINGLE_SOURCE_ADAPTER_REQUIRES_EXPLICIT_SEPARATE_OPERATIONS',executed=False)
             entry=self.workspace.prepare_reader_entry(question,source_ids=tuple(ids),allow_translation=False)
