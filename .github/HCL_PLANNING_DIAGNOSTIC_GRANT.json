@@ -1,0 +1,10 @@
+{
+  "authorization_ref": "NEW_PLANNING_DIAGNOSTIC_2026_10_02_ONE_CALL_0_05",
+  "historical_budget_transfer": false,
+  "maximum_calls": 1,
+  "maximum_usd": "0.05",
+  "package_sha256": "79e7ad48d485c10795135b20890eac31f236d240020c30b902eeba3ff86bf3db",
+  "retries": 0,
+  "schema": "hcl-one-planning-diagnostic-grant-v1",
+  "status": "READY"
+}
