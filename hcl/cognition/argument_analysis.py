@@ -18,7 +18,10 @@ _POLICY = ('Arguments and narrator statements are source reports. A source-local
 def _opposed(left, right):
     if left == 'not ' + right or right == 'not ' + left:
         return True
-    return left.replace(' is not ', ' is ', 1) == right or right.replace(' is not ', ' is ', 1) == left
+    # Removing absent negation leaves identical affirmative claims unchanged.
+    # Only an explicit supported negation form can establish this narrow relation.
+    return ((' is not ' in left and left.replace(' is not ', ' is ', 1) == right) or
+            (' is not ' in right and right.replace(' is not ', ' is ', 1) == left))
 
 
 def _mentions(argument, term):

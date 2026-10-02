@@ -229,6 +229,28 @@ class UniversalHCL:
                 result=payload,active_criterion_count=len(payload['active_criteria']),
                 conditional_reading_count=len(payload['readings']),
                 semantic_certification=False,support_claim_ids=[claim])
+        if cid=='G04':
+            if len(ids)!=1:return dict(capability=cid,status='G04_REQUIRES_ONE_SOURCE',executed=False)
+            from .argument_analysis import ArgumentWorkspace
+            sid=ids[0];row=self.sources[sid]
+            workspace=ArgumentWorkspace(sid)
+            workspace.put_source(row['text'],recorded_at=row['recorded_at'])
+            # Parse the complete source with its shared revision. Planner text
+            # cannot supply premises, challenges, readings, priorities or a verdict.
+            workspace.version=row['version']
+            prepared=workspace.prepare_argument(original_question)
+            prepared.messages(workspace)
+            payload=prepared.payload
+            scope=Scope(source_ids=(sid,),assumptions=(
+                'SOURCE_LOCAL_ARGUMENTS_NOT_WORLD_TRUTH_OR_FORMAL_PROOF',
+                'SOURCE_ORDER_NOT_CALENDAR_TIME'))
+            claim=self.workspace.core.claim(scope,ClaimKind.CONDITIONAL_TOOL_RESULT,
+                dict(operation='G04_ARGUMENT_ANALYSIS_PREPARATION',result=payload))
+            self.workspace.core.support(claim,self.workspace._spans[sid])
+            return dict(capability=cid,status='G04_ARGUMENTS_PREPARED',executed=True,
+                result=payload,argument_count=len(payload['arguments']),
+                disagreement_count=len(payload['disagreements']),
+                verdict_produced=False,semantic_certification=False,support_claim_ids=[claim])
         if cid in ('B01','B02','C01','C03'):
             if len(ids)!=1:return dict(capability=cid,status='SINGLE_SOURCE_ADAPTER_REQUIRES_EXPLICIT_SEPARATE_OPERATIONS',executed=False)
             entry=self.workspace.prepare_reader_entry(question,source_ids=tuple(ids),allow_translation=False)
