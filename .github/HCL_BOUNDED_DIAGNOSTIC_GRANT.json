@@ -1,0 +1,12 @@
+{
+  "authorization_ref": "OWNER_CONFIRMED_2026_10_02_I02_NEW_1_USD_12_CALLS",
+  "expires_at": "2026-10-03T08:00:00Z",
+  "hcla_budget_transfer": false,
+  "historical_budget_transfer": false,
+  "maximum_calls": 12,
+  "maximum_usd": "1.00",
+  "package_sha256": "275b95be7e02dad67066d7d0ac8f1afc6c283d30a1f54cdf2f33143a25059b92",
+  "retries": 0,
+  "schema": "hcl-bounded-synthetic-diagnostic-grant-v1",
+  "status": "PREPARED_REVIEW_REQUIRED"
+}
