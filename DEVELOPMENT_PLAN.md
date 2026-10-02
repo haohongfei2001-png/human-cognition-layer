@@ -81,14 +81,17 @@ explicitly unsupported. Ten of 40 packages now have bounded adapters; full
 integration and model efficacy remain unverified. Historical evidence and closed
 grants are unchanged; zero provider calls/spend.
 
-[New bounded I02 diagnostic preparation](docs/HCL_BOUNDED_DIAGNOSTICS.md) freezes
-certified G05 runtime and three authored synthetic flows. Owner-confirmed new
-US$1/12-call ceiling ends 2026-10-03 08:00 UTC; no HCLA or old-grant transfer.
-The prepared schedule uses at most eight calls and US$0.64610304 worst-case
-reservation, with one controlled output-limit differential only after a validated
-length response. Package independently reviewed; new grant READY and exact workflow installed,
-with no launch marker or new model call yet. Historical grants remain closed;
-exact executor CI precedes the one authorized marker-only launch. This is functional diagnosis, not efficacy evidence.
+[New bounded I02 diagnostic closure](docs/HCL_BOUNDED_DIAGNOSTICS.md) records four
+calls and FULL_FLOW_FAILED_NO_RETRY. The fresh planning probe and one no-source
+flow completed, but no retained operation executed. Source-backed planning then
+returned length with empty content and all 4,096 completion tokens reported as
+reasoning; no answer or G05 flow followed. This diagnoses the new return only.
+Usage-rated peak USD0.05790444, retained reservations USD0.17547288, unknown hold0;
+invoice unknown. New grant now CLOSED_NO_TRANSFER_NO_RETRY, unused authority0,
+live workflow/marker removed, encrypted receipt preserved. Old grants unchanged;
+no HCLA transfer, efficacy claim or automatic retry. Any reviewed continuation
+must import these four calls/USD0.17547288 into the same owner USD1/12-call
+ceiling, leaving at most eight calls/USD0.82452712 through Oct3 08:00 UTC.
 
 ## Owner architecture amendment — 2026-10-02
 
