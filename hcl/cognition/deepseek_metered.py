@@ -30,6 +30,26 @@ def safe_metered_failure_code(error):
     return "METERED_BACKEND_OR_JOURNAL_FAILED"
 
 
+def safe_metered_failure_details(error,reservation):
+    """Keep only bounded enum/usage facts; never copy arbitrary exception metadata."""
+    result={'failure_code':safe_metered_failure_code(error)}
+    if type(error)is not MeteredPortError or result['failure_code']=='METERED_BACKEND_OR_JOURNAL_FAILED':return result
+    data=getattr(error,'diagnostics',None)
+    if not isinstance(data,dict):return result
+    count=data.get('choice_count')
+    if type(count)is int and 0<=count<=100:result['choice_count']=count
+    reasons=data.get('finish_reasons')
+    allowed={'stop','length','content_filter','tool_calls','function_call','OTHER_OR_MISSING'}
+    if isinstance(reasons,list)and len(reasons)<=10 and all(type(v)is str and v in allowed for v in reasons):result['finish_reasons']=list(reasons)
+    usage=data.get('usage')
+    if isinstance(usage,dict)and set(usage)=={'prompt_tokens','completion_tokens'} and all(type(v)is int and v>0 for v in usage.values()):
+        if usage['prompt_tokens']<=2*MAX_REQUEST_BYTES+2048 and usage['completion_tokens']<=max(OUTPUT_TOKENS.values())+OUTPUT_MARGIN:
+            rated=(usage['prompt_tokens']*INPUT_RATE+usage['completion_tokens']*OUTPUT_RATE)/1000000
+            if rated<=Decimal(str(reservation)):
+                result.update(usage=dict(usage),actual_usd=str(rated),invocation_status='RESPONSE_RETURNED_REJECTED')
+    return result
+
+
 class DeepSeekMeteredPort:
     provider_free=False
     cost_basis='USAGE_RATED_PEAK_NOT_INVOICE'
@@ -73,6 +93,7 @@ class DeepSeekMeteredPort:
         if identity not in self._quoted:raise MeteredPortError('EXACT_REQUEST_MUST_BE_RESERVED_FIRST')
         self._quoted.remove(identity)
         # No request/response bodies or exception text enter an error receipt.
+        diagnostics={}
         try:
             channel=queue.Queue(maxsize=1)
             def invoke():
@@ -99,7 +120,12 @@ class DeepSeekMeteredPort:
                 raise MeteredPortError('INCONSISTENT_USAGE_UNKNOWN_COST')
             if counts['prompt_tokens']>2*len(encoded)+2048 or counts['completion_tokens']>OUTPUT_TOKENS[phase]+OUTPUT_MARGIN:
                 raise MeteredPortError('USAGE_OUTSIDE_FROZEN_BOUND')
+            diagnostics['usage']=counts
             choices=raw.get('choices')
+            if isinstance(choices,list):
+                if len(choices)<=100:diagnostics['choice_count']=len(choices)
+                known={'stop','length','content_filter','tool_calls','function_call'}
+                diagnostics['finish_reasons']=[c.get('finish_reason') if isinstance(c,dict)and type(c.get('finish_reason'))is str and c['finish_reason']in known else 'OTHER_OR_MISSING' for c in choices[:10]]
             if not isinstance(choices,list)or len(choices)!=1 or choices[0].get('finish_reason')!='stop':raise MeteredPortError('INCOMPLETE_ANSWER_NO_RETRY')
             message=choices[0].get('message',{});text=message.get('content')
             if not isinstance(text,str)or len(text)>(32000 if phase=='planning'else 64000):raise MeteredPortError('CONTENT_BOUND_EXCEEDED')
@@ -107,5 +133,9 @@ class DeepSeekMeteredPort:
             # never returned. Cost is a conservative usage-rated peak estimate.
             rated=(counts['prompt_tokens']*INPUT_RATE+counts['completion_tokens']*OUTPUT_RATE)/1000000
             return dict(text=text,actual_usd=str(rated),usage=counts)
-        except MeteredPortError:raise
-        except Exception:raise MeteredPortError('PROVIDER_TRANSPORT_OR_SHAPE_FAILURE_NO_RETRY') from None
+        except MeteredPortError as error:
+            error.diagnostics=diagnostics
+            raise
+        except Exception:
+            error=MeteredPortError('PROVIDER_TRANSPORT_OR_SHAPE_FAILURE_NO_RETRY');error.diagnostics=diagnostics
+            raise error from None

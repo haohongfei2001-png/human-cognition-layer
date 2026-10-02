@@ -98,3 +98,33 @@ class MeteredPortTests(unittest.TestCase):
         class Subclass(MeteredPortError):pass
         for error in (MeteredPortError('PRIVATE_CANARY'),RuntimeError('PROVIDER_TRANSPORT_FAILURE_NO_RETRY'),Subclass('NUMERIC_USAGE_REQUIRED'),MeteredPortError('NUMERIC_USAGE_REQUIRED','PRIVATE_CANARY')):
             self.assertEqual(safe_metered_failure_code(error),'METERED_BACKEND_OR_JOURNAL_FAILED')
+
+    def test_rejected_completion_preserves_safe_status_and_validated_cost(self):
+        variants=[([],[],0),([dict(finish_reason='length',message={'content':'PRIVATE_OUTPUT','reasoning_content':'PRIVATE_REASONING'})],['length'],1),([dict(finish_reason='stop'),dict(finish_reason='content_filter')],['stop','content_filter'],2),([dict(finish_reason='PRIVATE_ERROR_BODY')],['OTHER_OR_MISSING'],1)]
+        for choices,reasons,count in variants:
+            class Rejected(FakeClient):
+                def create(self,**request):
+                    value=super().create(**request);value['choices']=choices;return value
+            client=Rejected();port=DeepSeekMeteredPort(client);saved=[]
+            a=CallAllowance(2,'1','TEST',journal=lambda r:saved.append(json.loads(json.dumps(r))))
+            r=UniversalHCL().answer('Discuss trust.',planner_backend=port,answer_backend=port,allowance=a)
+            row=r['provider_attempts'][0]
+            self.assertEqual(row['choice_count'],count);self.assertEqual(row['finish_reasons'],reasons)
+            self.assertEqual(row['actual_usd'],'0.0002508');self.assertEqual(row['invocation_status'],'RESPONSE_RETURNED_REJECTED')
+            self.assertEqual(row['usage'],dict(prompt_tokens=100,completion_tokens=30))
+            self.assertTrue(a.closed);self.assertEqual(len(client.calls),1);self.assertNotIn('PRIVATE_',json.dumps(r));self.assertNotIn('PRIVATE_',json.dumps(saved))
+    def test_failure_metadata_allowlist_rejects_spoofed_usage_and_text(self):
+        from hcl.cognition.deepseek_metered import safe_metered_failure_details
+        e=MeteredPortError('INCOMPLETE_ANSWER_NO_RETRY');e.diagnostics=dict(choice_count='PRIVATE_TEXT',finish_reasons=['PRIVATE_BODY'],usage={'prompt_tokens':1,'completion_tokens':1,'reasoning_content':'PRIVATE_REASONING'})
+        self.assertEqual(safe_metered_failure_details(e,'1'),{'failure_code':'INCOMPLETE_ANSWER_NO_RETRY'})
+        e.diagnostics=dict(usage={'prompt_tokens':100,'completion_tokens':30})
+        self.assertNotIn('actual_usd',safe_metered_failure_details(e,'0.000001'))
+
+    def test_journal_exception_cannot_spoof_returned_response_usage(self):
+        error=MeteredPortError('INCOMPLETE_ANSWER_NO_RETRY');error.diagnostics=dict(choice_count=1,finish_reasons=['length'],usage=dict(prompt_tokens=100,completion_tokens=30))
+        def fail(_):raise error
+        client=FakeClient();port=DeepSeekMeteredPort(client);a=CallAllowance(2,'1','TEST',journal=fail)
+        r=UniversalHCL().answer('Discuss trust.',planner_backend=port,answer_backend=port,allowance=a)
+        row=r['provider_attempts'][0]
+        self.assertEqual(client.calls,[]);self.assertFalse(row['provider_call']);self.assertEqual(row['invocation_status'],'NOT_INVOKED')
+        self.assertNotIn('actual_usd',row);self.assertNotIn('usage',row);self.assertNotIn('finish_reasons',row)

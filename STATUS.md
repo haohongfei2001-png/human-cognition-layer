@@ -42,6 +42,13 @@ claim. Encrypted receipt verified and reviewed locally; raw output remains priva
 The bounded next engineering repair preserves only fixed allowlisted failure codes;
 no historical cause is inferred and no paid rerun is authorized.
 
+[HCL I02 one-call planning diagnostic](docs/HCL_I02_PLANNING_DIAGNOSTIC.md)
+37027133992 used one separately approved call and returned
+INCOMPLETE_ANSWER_NO_RETRY. Exact finish reason was not retained; no valid plan,
+Base/answer call or efficacy result. Its new grant is now also closed, with the
+USD0.04293432 unknown-cost hold retained and its active workflow removed.
+No further paid invocation is authorized.
+
 [Universal ordinary-question entry](docs/HCL_UNIVERSAL_QUESTION_ENTRY.md) adds
 plain/no-source, instruction/source and multi-source planning/composition/review,
 a callable inventory of all 40 current runtime A–H packages, and real current

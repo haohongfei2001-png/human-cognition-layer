@@ -39,7 +39,7 @@ class PlanningDiagnosticTests(unittest.TestCase):
                 r=super().create(**request);r['choices'][0]['finish_reason']='length';return r
         client=Truncated();package=build_package()
         with tempfile.TemporaryDirectory()as root:r=run(client,package,grant(package),Path(root)/'one')
-        self.assertEqual(len(client.calls),1);self.assertEqual(r['failure_code'],'INCOMPLETE_ANSWER_NO_RETRY');self.assertNotIn('response_content',r)
+        self.assertEqual(len(client.calls),1);self.assertEqual(r['failure_code'],'INCOMPLETE_ANSWER_NO_RETRY');self.assertNotIn('response_content',r);self.assertEqual(r['attempts'][0]['finish_reasons'],['length']);self.assertIn('actual_usd',r['attempts'][0])
     def test_bad_plan_schema_is_distinct_from_transport_failure(self):
         class Invalid(FakeClient):
             def create(self,**request):
