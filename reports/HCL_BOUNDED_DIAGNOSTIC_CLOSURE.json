@@ -1,0 +1,187 @@
+{
+  "artifact_id": 11255134078,
+  "artifact_retention_expires_at": "2026-12-31T22:52:59Z",
+  "artifact_sha256": "50c8c55a259e09f9b4bdaa83e02150c8715b6d0d4d908d513398abba39e726bb",
+  "artifact_url": "https://api.github.com/repos/haohongfei2001-png/human-cognition-layer/actions/artifacts/11255134078",
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RETRY",
+  "calls": 4,
+  "calls_detail": [
+    {
+      "actual_usd": "0.0116226",
+      "call_id": "probe_4096:planning",
+      "failure_code": null,
+      "reserved_usd": "0.04297392",
+      "response_diagnostics": {
+        "choice_count": 1,
+        "content_chars": 1307,
+        "content_kind": "TEXT",
+        "content_utf8_bytes": 1307,
+        "finish_reasons": [
+          "stop"
+        ],
+        "reasoning_tokens": 1911,
+        "response_returned": true,
+        "usage": {
+          "completion_tokens": 2183,
+          "prompt_tokens": 2256
+        },
+        "usage_valid": true
+      },
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 2183,
+        "prompt_tokens": 2256
+      }
+    },
+    {
+      "actual_usd": "0.01804572",
+      "call_id": "coordination_without_source:planning",
+      "failure_code": null,
+      "reserved_usd": "0.04290792",
+      "response_diagnostics": {
+        "choice_count": 1,
+        "content_chars": 1859,
+        "content_kind": "TEXT",
+        "content_utf8_bytes": 1859,
+        "finish_reasons": [
+          "stop"
+        ],
+        "reasoning_tokens": 3440,
+        "response_returned": true,
+        "usage": {
+          "completion_tokens": 3807,
+          "prompt_tokens": 2250
+        },
+        "usage_valid": true
+      },
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 3807,
+        "prompt_tokens": 2250
+      }
+    },
+    {
+      "actual_usd": "0.00881364",
+      "call_id": "coordination_without_source:answer",
+      "failure_code": null,
+      "reserved_usd": "0.04519416",
+      "response_diagnostics": {
+        "choice_count": 1,
+        "content_chars": 3171,
+        "content_kind": "TEXT",
+        "content_utf8_bytes": 3171,
+        "finish_reasons": [
+          "stop"
+        ],
+        "reasoning_tokens": 1412,
+        "response_returned": true,
+        "usage": {
+          "completion_tokens": 1961,
+          "prompt_tokens": 794
+        },
+        "usage_valid": true
+      },
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 1961,
+        "prompt_tokens": 794
+      }
+    },
+    {
+      "actual_usd": "0.01942248",
+      "call_id": "competing_public_goals:planning",
+      "failure_code": "INCOMPLETE_ANSWER_NO_RETRY",
+      "reserved_usd": "0.04439688",
+      "response_diagnostics": {
+        "choice_count": 1,
+        "content_chars": 0,
+        "content_kind": "EMPTY",
+        "content_utf8_bytes": 0,
+        "finish_reasons": [
+          "length"
+        ],
+        "reasoning_tokens": 4096,
+        "response_returned": true,
+        "usage": {
+          "completion_tokens": 4096,
+          "prompt_tokens": 2426
+        },
+        "usage_valid": true
+      },
+      "status": "FAILED_OR_UNKNOWN_NO_RETRY",
+      "usage": {
+        "completion_tokens": 4096,
+        "prompt_tokens": 2426
+      }
+    }
+  ],
+  "ciphertext_mirrored_to_git": false,
+  "diagnostic_differential_calls": 0,
+  "efficacy_result": "NOT_MEASURED",
+  "execution_commit": "956f682ec9842dcacb598473f2435ce18940e8f6",
+  "executor_commit": "6303dc23df4ad7d857af41e7d7a065e981480da1",
+  "final_confirmation_qualified": false,
+  "hcla_budget_transfer": false,
+  "historical_budget_transfer": false,
+  "historical_failure_cause": "UNRESOLVED_NOT_RETROACTIVELY_IDENTIFIED",
+  "invoice_cost_usd": null,
+  "new_failure_observation": "SOURCE_BACKED_PLANNING_LENGTH_EMPTY_CONTENT_ALL_4096_COMPLETION_TOKENS_REPORTED_AS_REASONING",
+  "no_source_full_flows_completed": 1,
+  "package_sha256": "275b95be7e02dad67066d7d0ac8f1afc6c283d30a1f54cdf2f33143a25059b92",
+  "private_local_copy_verified": true,
+  "receipt_sha256": "768cf0a1b8d3c914bd048aa90e91a2f320f3b3e781902fe74ff7a5bbb1102d45",
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_usd": "0",
+  "reserved_usd": "0.17547288",
+  "results": [
+    {
+      "operations": [],
+      "stage": "probe_4096",
+      "status": "PLAN_SCHEMA_VALID"
+    },
+    {
+      "operations": [
+        {
+          "capability": "C01",
+          "checked_treatment_present": null,
+          "executed": false,
+          "status": "SOURCE_PREREQUISITE_UNAVAILABLE",
+          "variant_count": null
+        },
+        {
+          "capability": "C02",
+          "checked_treatment_present": null,
+          "executed": false,
+          "status": "SOURCE_PREREQUISITE_UNAVAILABLE",
+          "variant_count": null
+        },
+        {
+          "capability": "G02",
+          "checked_treatment_present": null,
+          "executed": false,
+          "status": "SOURCE_PREREQUISITE_UNAVAILABLE",
+          "variant_count": null
+        }
+      ],
+      "stage": "coordination_without_source",
+      "status": "ANSWERED_WITH_EXPLICIT_LIMITS"
+    },
+    {
+      "operations": [],
+      "stage": "competing_public_goals",
+      "status": "ORCHESTRATION_UNAVAILABLE_OR_FAILED"
+    }
+  ],
+  "retained_operations_executed": 0,
+  "run_id": 37074821910,
+  "run_url": "https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/37074821910",
+  "runtime_commit": "df0c5d3cdf60219ad0ceab8b25a7bf82ac8087be",
+  "runtime_sha256": "ad67e85c9bd00cb23dd61825bf7c35790f72282754574da19612435e96839cfe",
+  "schema": "hcl-bounded-diagnostic-closure-v1",
+  "selected_planning_tokens": 4096,
+  "source_backed_answer_gain": "NOT_ESTABLISHED",
+  "source_backed_full_flows_completed": 0,
+  "status": "FULL_FLOW_FAILED_NO_RETRY",
+  "unknown_cost_hold_usd": "0",
+  "usage_rated_usd": "0.05790444"
+}

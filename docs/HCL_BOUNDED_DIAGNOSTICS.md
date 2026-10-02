@@ -1,13 +1,37 @@
 # New bounded synthetic I02 diagnostics
 
-## Prepared for review; not launched
+## Terminal result and closed sub-run
 
-The owner confirmed a new, separate ceiling of **US$1 and 12 provider calls**,
-ending **2026-10-03 08:00 UTC**. The first bound reached stops admission. This is
-separate from HCLA's budget. Both older HCL grants remain byte-for-byte closed.
-The new grant is `PREPARED_REVIEW_REQUIRED`; no active paid workflow or trigger
-is installed by this preparation. Initial package review and exact executor CI
-must precede activation. This document reports no new live result.
+Run [37074821910](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/37074821910)
+terminated `FULL_FLOW_FAILED_NO_RETRY` after four calls. The 4,096-token planning
+probe returned a valid plan. One no-source full flow answered with explicit
+limits, but all three selected modules lacked source prerequisites, so no
+retained operation executed. The next source-backed planning call returned one
+choice with `finish_reason=length`, empty content, 4,096 completion tokens and
+4,096 reported reasoning tokens. That is new direct evidence of this call's
+output-budget exhaustion; it does not establish the cause of older failures.
+The source-backed answer and G05 flow were never called. No differential or retry
+was admitted because the bounded differential applied only to the initial probe.
+
+Usage-rated peak sum is **US$0.05790444**; full retained reservations are
+**US$0.17547288**. All four usage counts were validated, so the unknown-cost hold
+is zero; invoice cost is unknown. The closure report stores only the authorized GitHub Actions artifact link, ID,
+SHA-256 and sanitized scalar results. GitHub currently lists retention through
+2026-12-31 22:52:59 UTC; access/availability depend on repository permissions and
+artifact retention. No ciphertext is copied into Git. A verified local encrypted
+copy is kept privately, subject to workspace retention. Plaintext and the private
+recipient key stay outside the repository. The sub-run grant is now closed with
+zero reusable authority, and its live workflow and marker are removed. Both
+older grants remain closed and unchanged.
+
+The owner's campaign ceiling remains US$1 and 12 calls through 2026-10-03
+08:00 UTC. Any separately reviewed continuation must import these four consumed
+calls and US$0.17547288 held into one aggregate admission ledger, leaving at most
+eight calls and US$0.82452712. A new sub-run cannot reset that ceiling, reopen this
+grant, recycle its reservations or touch HCLA's budget. No further provider call
+is part of this closure.
+
+## Preserved frozen protocol
 
 The runtime is pinned to certified main
 `df0c5d3cdf60219ad0ceab8b25a7bf82ac8087be` (PR344), runtime digest

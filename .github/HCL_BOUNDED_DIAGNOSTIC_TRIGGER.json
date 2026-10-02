@@ -1,7 +1,0 @@
-{
-  "authorization_ref": "OWNER_CONFIRMED_2026_10_02_I02_NEW_1_USD_12_CALLS",
-  "executor_commit": "6303dc23df4ad7d857af41e7d7a065e981480da1",
-  "grant_sha256": "66687118812350e59fff201509cc3179453080d13448f663d2685dcef6870864",
-  "package_sha256": "275b95be7e02dad67066d7d0ac8f1afc6c283d30a1f54cdf2f33143a25059b92",
-  "schema": "hcl-bounded-diagnostic-single-launch-marker-v1"
-}
