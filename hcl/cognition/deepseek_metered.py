@@ -21,6 +21,15 @@ class MeteredPortError(RuntimeError):
     """Static safe code only, never provider exception bodies."""
 
 
+SAFE_METERED_FAILURE_CODES = frozenset(('BOUNDED_PHASE_MESSAGES_REQUIRED', 'CONTENT_BOUND_EXCEEDED', 'DEADLINE_SEND_UNKNOWN_NO_RETRY', 'EXACT_REQUEST_MUST_BE_RESERVED_FIRST', 'EXISTING_DEEPSEEK_DESTINATION_REQUIRED', 'FINITE_SDK_TIMEOUT_REQUIRED', 'FINITE_WALL_WAIT_REQUIRED', 'INCOMPLETE_ANSWER_NO_RETRY', 'INCONSISTENT_USAGE_UNKNOWN_COST', 'MODEL_ID_OUTSIDE_FREEZE', 'NUMERIC_USAGE_REQUIRED', 'PLAIN_MESSAGE_SCHEMA_REQUIRED', 'PORT_CLOSED_AFTER_UNKNOWN_DEADLINE', 'PROVIDER_TRANSPORT_FAILURE_NO_RETRY', 'PROVIDER_TRANSPORT_OR_SHAPE_FAILURE_NO_RETRY', 'REQUEST_BOUND_EXCEEDED_NO_TRUNCATION', 'USAGE_OUTSIDE_FROZEN_BOUND', 'ZERO_SDK_RETRIES_REQUIRED'))
+
+def safe_metered_failure_code(error):
+    """Only exact internal exception type and fixed enum may enter a receipt."""
+    if type(error) is MeteredPortError and len(error.args)==1 and type(error.args[0]) is str and error.args[0] in SAFE_METERED_FAILURE_CODES:
+        return error.args[0]
+    return "METERED_BACKEND_OR_JOURNAL_FAILED"
+
+
 class DeepSeekMeteredPort:
     provider_free=False
     cost_basis='USAGE_RATED_PEAK_NOT_INVOICE'

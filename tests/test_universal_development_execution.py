@@ -38,11 +38,12 @@ class DevelopmentExecutionTests(unittest.TestCase):
             self.assertEqual(receipt['status'],'FAILED_OR_INCOMPLETE_NO_RETRY')
             self.assertGreater(float(receipt['reserved_usd']),0)
             self.assertNotIn('PRIVATE_UPSTREAM_CANARY',json.dumps(receipt))
+            self.assertEqual(receipt['calls'][0]['failure_code'],'PROVIDER_TRANSPORT_FAILURE_NO_RETRY')
 
     def test_bad_grant_and_code_or_source_drift_prevent_calls(self):
         package=build_package();client=FakeClient()
         with tempfile.TemporaryDirectory()as root:
-            for changed in [dict(grant(package),maximum_calls=19),dict(grant(package),maximum_usd='3.00'),dict(grant(package),historical_budget_transfer=True)]:
+            for changed in [dict(grant(package),maximum_calls=19),dict(grant(package),maximum_usd='3.00'),dict(grant(package),historical_budget_transfer=True),dict(grant(package),status='CLOSED_NO_TRANSFER_NO_RETRY')]:
                 with self.assertRaises(ValueError):run(client,package,changed,Path(root)/'one-run')
             with self.assertRaises(ValueError):run(client,dict(package,maximum_calls=19),grant(package),Path(root)/'one-run')
             self.assertEqual(client.calls,[])

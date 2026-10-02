@@ -1,0 +1,15 @@
+{
+  "amended_hcl_runtime_sha256": "5056a61bc1baa2c81a4c913c66c7e4cf1c9964df9c2cd41d9bea807a2afe5cb7",
+  "changed_runtime_files": [
+    "hcl/cognition/deepseek_metered.py",
+    "hcl/cognition/universal_entry.py"
+  ],
+  "complete_capability_integration": false,
+  "historical_failure_cause": "UNRESOLVED_CANNOT_RETROACTIVELY_RECOVER",
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "model_planner_efficacy_verified": false,
+  "previous_hcl_runtime_sha256": "f8e0c2c15cba4c75f314046a822aa367c450f1c480e121acad1b2ba47df08253",
+  "provider_calls_in_preparation": 0,
+  "reason": "FIXED_ALLOWLIST_FAILURE_CODES_ONLY_NO_RAW_EXCEPTION",
+  "schema": "hcl-development-safe-failure-amendment-v1"
+}
