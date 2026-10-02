@@ -96,9 +96,9 @@ certified G05 runtime and three authored synthetic flows. Owner-confirmed new
 US$1/12-call ceiling ends 2026-10-03 08:00 UTC; no HCLA or old-grant transfer.
 The prepared schedule uses at most eight calls and US$0.64610304 worst-case
 reservation, with one controlled output-limit differential only after a validated
-length response. Grant PREPARED_REVIEW_REQUIRED; no live workflow/trigger or new
-model call yet. Historical grants remain closed; initial package review precedes
-activation. This is functional diagnosis, not efficacy evidence.
+length response. Package independently reviewed; new grant READY and exact workflow installed,
+with no launch marker or new model call yet. Historical grants remain closed;
+exact executor CI precedes the one authorized marker-only launch. This is functional diagnosis, not efficacy evidence.
 
 ## Owner architecture amendment — 2026-10-02
 
