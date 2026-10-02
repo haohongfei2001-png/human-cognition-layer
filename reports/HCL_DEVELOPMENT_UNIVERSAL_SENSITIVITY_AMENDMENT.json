@@ -1,0 +1,18 @@
+{
+  "schema": "hcl-development-universal-sensitivity-amendment-v1",
+  "previous_hcl_runtime_sha256": "eb1d5fad80254bf7e546e41595509713dc4167bf4c7004556d076bf0bbaf7e09",
+  "amended_hcl_runtime_sha256": "ad67e85c9bd00cb23dd61825bf7c35790f72282754574da19612435e96839cfe",
+  "changed_runtime_files": [
+    "hcl/cognition/capability_catalog.py",
+    "hcl/cognition/universal_entry.py"
+  ],
+  "reason": "EXISTING_G05_SINGLE_SOURCE_ORIGINAL_REQUEST_CONDITIONAL_ADAPTER",
+  "provider_calls_in_preparation": 0,
+  "provider_spend_usd": 0,
+  "complete_capability_integration": false,
+  "model_planner_efficacy_verified": false,
+  "sensitivity_grammar_changed": false,
+  "source_mutation_added": false,
+  "verdict_added": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

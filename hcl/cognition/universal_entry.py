@@ -251,6 +251,38 @@ class UniversalHCL:
                 result=payload,argument_count=len(payload['arguments']),
                 disagreement_count=len(payload['disagreements']),
                 verdict_produced=False,semantic_certification=False,support_claim_ids=[claim])
+        if cid=='G05':
+            if len(ids)!=1:return dict(capability=cid,status='G05_REQUIRES_ONE_SOURCE',executed=False)
+            from .argument_sensitivity import ArgumentSensitivityWorkspace
+            sid=ids[0];row=self.sources[sid]
+            workspace=ArgumentSensitivityWorkspace(sid)
+            workspace.put_source(row['text'],recorded_at=row['recorded_at'])
+            workspace.version=row['version']
+            # Hypotheticals belong to the original caller, never the planner or
+            # source. Retain both full-source and request authority as obligations.
+            prepared=workspace.compare(original_question)
+            prepared.messages(workspace)
+            payload=prepared.payload
+            request_hash=hashlib.sha256(original_question.encode()).hexdigest()
+            request_id='original-user-request:'+request_hash
+            while request_id in self.sources:request_id='request:'+request_id
+            request_root=self.workspace.core.add_span(original_question,
+                source_id=request_id,version=1)
+            provenance=dict(input_kind='ORIGINAL_USER_REQUEST',sha256=request_hash,
+                span_id=request_root,start=0,end=len(original_question),
+                authority='ANALYSIS_CONDITION_NOT_WORLD_EVIDENCE')
+            scope=Scope(source_ids=(request_id,sid),assumptions=(
+                'ORIGINAL_USER_HYPOTHETICAL_IS_CONDITIONAL_NOT_SOURCE_FACT',
+                'SOURCE_LOCAL_SENSITIVITY_NOT_WORLD_TRUTH_OR_CONCLUSION_FLIP',
+                'SOURCE_ORDER_NOT_CALENDAR_TIME'))
+            claim=self.workspace.core.claim(scope,ClaimKind.CONDITIONAL_TOOL_RESULT,
+                dict(operation='G05_ARGUMENT_SENSITIVITY_PREPARATION',result=payload,
+                    request_provenance=provenance))
+            self.workspace.core.support(claim,request_root,self.workspace._spans[sid])
+            return dict(capability=cid,status='G05_SENSITIVITY_PREPARED',executed=True,
+                result=payload,request_provenance=provenance,
+                variant_count=len(payload['variants']),source_modified=False,
+                verdict_produced=False,semantic_certification=False,support_claim_ids=[claim])
         if cid in ('B01','B02','C01','C03'):
             if len(ids)!=1:return dict(capability=cid,status='SINGLE_SOURCE_ADAPTER_REQUIRES_EXPLICIT_SEPARATE_OPERATIONS',executed=False)
             entry=self.workspace.prepare_reader_entry(question,source_ids=tuple(ids),allow_translation=False)

@@ -115,7 +115,7 @@ class UniversalNormativeTests(unittest.TestCase):
             row=session._execute(operation(cid,'Who is responsible?',[]),'Who is responsible?')
             self.assertFalse(row['executed']);self.assertEqual(row['status'],'SOURCE_PREREQUISITE_UNAVAILABLE')
         self.assertEqual(CATALOG['G01'].entry_readiness,'BOUNDED_ORDINARY_ADAPTER')
-        self.assertEqual(sum(c.entry_readiness=='BOUNDED_ORDINARY_ADAPTER' for c in CATALOG.values()),9)
+        self.assertEqual(sum(c.entry_readiness=='BOUNDED_ORDINARY_ADAPTER' for c in CATALOG.values()),10)
 
     def test_existing_rule_parser_limits_are_not_relaxed(self):
         _,_,result=self.execute('For this analysis, responsibility requires knowledge or control.')
@@ -148,7 +148,7 @@ class NormativeFreezeTests(unittest.TestCase):
     def test_amendment_preserves_historical_evidence_and_unrelated_runtime_guards(self):
         from pathlib import Path
         from unittest.mock import patch
-        from scripts.development_universal_argument_amendment import validate_current
+        from scripts.development_universal_sensitivity_amendment import validate_current
         self.assertTrue(validate_current())
         original=Path.read_bytes
         for changed in ('reports/HCL_DEVELOPMENT_COMPLETION_METADATA_AMENDMENT.json',
