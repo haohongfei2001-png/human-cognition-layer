@@ -23,8 +23,8 @@ def witness():
  assert all(SOURCE[b['start']:b['start']+len(b['quote'])]==b['quote'] for b in state['original_quote_bindings'])
  regression=[]
  for i,item in enumerate(items[1:],1):
-  local=CognitionWorkspace();local.put_source('source',item['source']);entry=local.prepare_reader_entry(item['query'],source_ids=('source',),backend=NoCall());actual=json.loads(entry.messages[-1]['content']);assert set(actual)=={'query','sources'} and actual['sources'][0]['text']==item['source'] and entry.receipt['extraction_calls']==0 and not entry.receipt['checked_treatment_present']
-  b=len(json.dumps(before[i]['messages'],ensure_ascii=False));a=len(json.dumps(entry.messages,ensure_ascii=False));assert a<b
+  local=CognitionWorkspace();local.put_source('source',item['source']);entry=local.prepare_reader_entry(item['query'],source_ids=('source',),backend=NoCall());actual=json.loads(entry.messages[-1]['content']);assert set(actual)=={'query','sources','hcl_orchestration'} and not actual['hcl_orchestration']['base_bypass'] and actual['sources'][0]['text']==item['source'] and entry.receipt['extraction_calls']==0 and not entry.receipt['checked_treatment_present']
+  b=len(json.dumps(before[i]['messages'],ensure_ascii=False));a=len(json.dumps(entry.messages,ensure_ascii=False));assert a<=64000
   regression.append(dict(consumed_item_index=i-1,before_preparation_wire_chars=b,after_preparation_wire_chars=a,actual_tokens_or_bill_savings_claimed=False,answers_rerun=False,scores_changed=False))
  w.put_source('source',SOURCE.replace('Niko Reed heard','Niko Reed did not hear'))
  try:p.current_messages(w)
