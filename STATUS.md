@@ -60,10 +60,18 @@ Provider-free correctness only; no paid execution or efficacy claim.
 [Bounded G01 ordinary-entry integration](docs/HCL_UNIVERSAL_NORMATIVE_ENTRY.md)
 adds the existing normative-premise preparer to internal selection, including
 source-free original user conditions. Planner interpretations cannot adopt rules;
-source reports and unadopted proposals stay distinct. Seven of 40 retained packages
-have bounded ordinary-entry adapters. A broad question can still yield no usable
-premise; this is no responsibility verdict, full-family or model-efficacy claim.
+source reports and unadopted proposals stay distinct. That batch brought bounded
+ordinary-entry adapters to seven of 40 retained packages. A broad question can
+still yield no usable premise; this is no responsibility verdict, full-family or model-efficacy claim.
 Both historical grants remain closed; this batch made zero provider calls.
+
+[Bounded G03 ordinary-entry integration](docs/HCL_UNIVERSAL_CONCEPT_ENTRY.md)
+adds the retained single-source concept-criteria preparer to internal selection.
+Exact source versions, conditional readings, unresolved forms and non-retroactive
+revision remain intact; shared source/support withdrawal invalidates the result.
+Eight of 40 packages now have bounded adapters. Grammar/bounds are unchanged;
+scripted wiring is not model selection quality, full integration or answer gain.
+Historical paid evidence/grants remain immutable; zero provider calls/spend.
 
 ## Owner architecture amendment — 2026-10-02
 
