@@ -72,6 +72,15 @@ chosen. Nine of 40 packages now have bounded adapters. Full integration and
 model efficacy remain unverified. Prior amendments/archives and closed grants
 are preserved byte-for-byte; zero provider calls/spend.
 
+[Bounded G05 ordinary-entry integration](docs/HCL_UNIVERSAL_SENSITIVITY_ENTRY.md)
+adds the unchanged retained single-source sensitivity preparer. Its three
+single-factor variants preserve source and shared revision; hypotheses come only
+from the original caller. Both full-source and original-request roots are required
+support, and withdrawing either invalidates the result. Broad requests remain
+explicitly unsupported. Ten of 40 packages now have bounded adapters; full
+integration and model efficacy remain unverified. Historical evidence and closed
+grants are unchanged; zero provider calls/spend.
+
 ## Owner architecture amendment — 2026-10-02
 
 Every HCL-arm and ordinary product input must enter HCL orchestration. Internal
