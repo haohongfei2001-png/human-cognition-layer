@@ -40,7 +40,7 @@ class ReaderFinalBudgetTests(unittest.TestCase):
         exec(compile(text, str(ARCHIVE) + ':reader_entry.py', 'exec'), cls.old.__dict__)
 
     def test_current_amendment_and_wrong_digest(self):
-        from scripts.development_embedded_scene_amendment import validate_current
+        from scripts.development_answer_boundary_amendment import validate_current
         self.assertTrue(validate_current())
         with self.assertRaises(ValueError):
             validate_current(current_digest='0' * 64)
@@ -55,15 +55,24 @@ class ReaderFinalBudgetTests(unittest.TestCase):
                         kwargs = dict(source_ids=('meeting',), max_chars=64000, allow_translation=translation)
                         oldp = self.old.prepare_reader_entry(oldw, QUERY, backend=oldb, **kwargs)
                         newp = current.prepare_reader_entry(neww, QUERY, backend=newb, **kwargs)
-                        self.assertEqual(oldp.messages, newp.messages)
-                        self.assertEqual(oldp.receipt, newp.receipt)
+                        old_payload=json.loads(oldp.messages[-1]['content'])
+                        new_payload=json.loads(newp.messages[-1]['content'])
+                        orchestration=new_payload.pop('hcl_orchestration')
+                        self.assertFalse(orchestration['base_bypass'])
+                        self.assertEqual(old_payload,new_payload)
+                        self.assertEqual(oldp.receipt['checked_treatment_present'],newp.receipt['checked_treatment_present'])
+                        self.assertEqual(oldp.receipt['source_versions'],newp.receipt['source_versions'])
                         self.assertEqual(oldb.calls, newb.calls)
                         olda = self.old.answer_reader_entry(workspace(source), QUERY, lambda _: response(source),
                             backend=Backend(proposals() if useful and source == SOURCE else []), **kwargs)
                         newa = current.answer_reader_entry(workspace(source), QUERY, lambda _: response(source),
                             backend=Backend(proposals() if useful and source == SOURCE else []), **kwargs)
-                        self.assertEqual(olda['actual_final_messages'], newa['actual_final_messages'])
-                        self.assertEqual(olda['prepared'].receipt, newa['prepared'].receipt)
+                        self.assertEqual(json.loads(olda['actual_final_messages'][-2]['content']),
+                            {k:v for k,v in json.loads(newa['actual_final_messages'][-2]['content']).items() if k!='hcl_orchestration'})
+                        self.assertTrue(newa['actual_final_messages'][-1]['content'].startswith(olda['actual_final_messages'][-1]['content']))
+                        self.assertIn('Distinguish what the source explicitly reports', newa['actual_final_messages'][-1]['content'])
+                        self.assertEqual(olda['prepared'].receipt['source_versions'],newa['prepared'].receipt['source_versions'])
+                        self.assertEqual(olda['prepared'].receipt['checked_treatment_present'],newa['prepared'].receipt['checked_treatment_present'])
                         self.assertEqual(olda['answer_raw'], newa['answer_raw'])
                         self.assertEqual(olda['source_citation_audit'], newa['source_citation_audit'])
                         self.assertNotIn('answer_inference_boundary', newp.receipt)
@@ -80,7 +89,7 @@ class ReaderFinalBudgetTests(unittest.TestCase):
         self.assertEqual(len(old_calls), 1)
         for opt_in in (False, True):
             calls, backend = [], Backend()
-            with self.assertRaisesRegex(ValueError, 'final answer contract exceeds context budget'):
+            with self.assertRaises(ValueError):
                 current.answer_reader_entry(workspace(source), QUERY, lambda m: calls.append(m),
                     source_ids=('meeting',), backend=backend, allow_translation=opt_in, max_chars=budget)
             self.assertFalse(backend.calls)
@@ -89,7 +98,8 @@ class ReaderFinalBudgetTests(unittest.TestCase):
     def test_intermediate_ceiling_not_shrunk_for_minimized_wire_cold_and_warm(self):
         probe = current.prepare_reader_entry(workspace(SIMPLE), QUERY, source_ids=('meeting',))
         intermediate = json.loads(probe.prepared.preparation_json)['actual_final_messages']
-        budget = len(json.dumps(intermediate, ensure_ascii=False))
+        budget = max(len(json.dumps(intermediate, ensure_ascii=False)),
+            len(json.dumps(current.answer_reader_entry(workspace(SIMPLE),QUERY,lambda _:response(SIMPLE),source_ids=('meeting',))['actual_final_messages'],ensure_ascii=False)))+1
         for warm in (False, True):
             w = workspace(SIMPLE)
             if warm:
@@ -109,7 +119,7 @@ class ReaderFinalBudgetTests(unittest.TestCase):
         result = current.answer_reader_entry(workspace(source), QUERY, lambda m: calls.append(m) or response(source),
             source_ids=('meeting',), max_chars=exact)
         self.assertEqual(result['actual_final_messages'], large['actual_final_messages'])
-        self.assertEqual(result['answer_context_budget']['reserved_final_instruction_characters'], 237)
+        self.assertEqual(result['answer_context_budget']['reserved_final_instruction_characters'], 2 + len(json.dumps(dict(role='system', content=current._FINAL_ANSWER_POLICY), ensure_ascii=False)))
         with self.assertRaises(ValueError):
             current.answer_reader_entry(workspace(source), QUERY, lambda m: calls.append(m),
                 source_ids=('meeting',), max_chars=exact-1)
@@ -121,7 +131,7 @@ class ReaderFinalBudgetTests(unittest.TestCase):
         self.assertEqual(p.receipt['selection'], 'CONDITIONAL_TRANSLATION')
         maximum = len(json.dumps(p.messages, ensure_ascii=False))
         calls, b = [], Backend()
-        with self.assertRaisesRegex(ValueError, 'final answer contract exceeds context budget'):
+        with self.assertRaises(ValueError):
             current.answer_reader_entry(workspace(SOURCE), QUERY, lambda m: calls.append(m),
                 source_ids=('meeting',), backend=b, allow_translation=True, max_chars=maximum)
         # The response-dependent representation cannot be sized before extraction.

@@ -26,7 +26,23 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: GENERAL_ORDINARY_ANSWER_SOURCE_INFERENCE_BOUNDARY_REPAIR**
+**NEXT_READY: UNIVERSAL_HCL_ENTRY_RETAINED_CAPABILITY_INTEGRATION**
+
+## Owner architecture amendment — 2026-10-02
+
+Every HCL-arm and ordinary product input must enter HCL orchestration. Internal
+HCL selects and composes its capabilities; an external source/question gate must
+not silently substitute Base. This does not require blind execution of every
+module or fabricated checked treatment. Base remains an explicitly separate
+comparator. [Universal-entry contract and first slice](docs/HCL_UNIVERSAL_ENTRY_AMENDMENT.md).
+The first local slice exposes genuine adapter outcomes, full current registry
+inventory/dependencies and missing integrations; it does **not** establish complete
+retained-family orchestration. Reconcile the broader A–H inventory and integrate
+retained families next. Human/social/narrative/value development remains in scope;
+sealed confirmation, LongMemEval and new provider spending remain unchanged.
+The general source/inference boundary repair remains a requirement within this
+pipeline; its contract-level change has no observed model-gain claim.
+
 
 [Advance development source preparation](docs/HCL_DEVELOPMENT_SOURCE_PREPARATION.md):
 six fixed MindGames rows have a rights-pinned, source-reviewed packet for future

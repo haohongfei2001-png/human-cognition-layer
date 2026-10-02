@@ -1,0 +1,191 @@
+{
+  "all_call_reservation_usd": "0.52258536",
+  "authorized_calls": 0,
+  "authorized_spend_usd": 0,
+  "base_main": "5cc6abcef4df46db7f36641614aaef5f5433a1e8",
+  "cases": [
+    {
+      "arm_order": [
+        "Base",
+        "HCL"
+      ],
+      "checked_treatment_present": false,
+      "native_index": 3274,
+      "native_row_sha256": "c5334d372b1b90e68bf5cf5920cd82234e75f47d9b76d39cd6e01edfff9fd20f",
+      "ordinary_input_sha256": "8a9fe0801917940c40dd1d1510bdbee8c6269a816d70803a3d0b7911460608e0",
+      "request_sha256": {
+        "Base": "7d34d86c43829050c8528745e385e8a1d04dd75d6cda3ddeac4a6751a60fe5a7",
+        "HCL": "b069cb3486901ca7b649b0bb7adb2b77a569fc854356a2c923fffda775e6d1a5"
+      },
+      "reservations": {
+        "Base": {
+          "input_token_bound": 4688,
+          "request_bytes": 1320,
+          "reservation_usd": "0.0387552"
+        },
+        "HCL": {
+          "input_token_bound": 12446,
+          "request_bytes": 5199,
+          "reservation_usd": "0.04899576"
+        }
+      }
+    },
+    {
+      "arm_order": [
+        "HCL",
+        "Base"
+      ],
+      "checked_treatment_present": false,
+      "native_index": 41454,
+      "native_row_sha256": "b0c6891f7e3120d9186b72940c647c2cabc801ce27fe0a1b43ede0cec1a1bfc6",
+      "ordinary_input_sha256": "492ac35742387b2701cf1ff895f76e160bc8829f6ad495a0408c220215f5e8eb",
+      "request_sha256": {
+        "Base": "027cad395d60c1727fb6242c2184b45f386dd37e656433d08b9c8b582d3bbaba",
+        "HCL": "096cc45563e75a0eec4419f7c2718d7bc4149ed745fb5699f65c45536cf475ed"
+      },
+      "reservations": {
+        "Base": {
+          "input_token_bound": 4498,
+          "request_bytes": 1225,
+          "reservation_usd": "0.0385044"
+        },
+        "HCL": {
+          "input_token_bound": 12258,
+          "request_bytes": 5105,
+          "reservation_usd": "0.0487476"
+        }
+      }
+    },
+    {
+      "arm_order": [
+        "Base",
+        "HCL"
+      ],
+      "checked_treatment_present": false,
+      "native_index": 41671,
+      "native_row_sha256": "e616351080589d104d63203610655c55cc725b1cbcd82996020430da53b31aa5",
+      "ordinary_input_sha256": "b256bbe42257f6d6aef816af10c3ecf05406ec476cd4e9bc34ee61f8851bbf04",
+      "request_sha256": {
+        "Base": "e28dbc4110c4e9fe9ab19db0b4ea8eb985f5fde3b94554ad247fb5841e4924c8",
+        "HCL": "bd82d13f14d28642c4c4bc4b888997b0569321b0eda7fe1fe254331b2442a388"
+      },
+      "reservations": {
+        "Base": {
+          "input_token_bound": 4292,
+          "request_bytes": 1122,
+          "reservation_usd": "0.03823248"
+        },
+        "HCL": {
+          "input_token_bound": 12084,
+          "request_bytes": 5018,
+          "reservation_usd": "0.04851792"
+        }
+      }
+    },
+    {
+      "arm_order": [
+        "HCL",
+        "Base"
+      ],
+      "checked_treatment_present": false,
+      "native_index": 54915,
+      "native_row_sha256": "9af0a562abd206c9b54665ee1402aa58850c2330115c35373740222f3465f2e7",
+      "ordinary_input_sha256": "e7ccaf1fc8d1d48189c1126b3b173d576fd1769067bbae4e0a75454833526d2b",
+      "request_sha256": {
+        "Base": "8ca8a1d80665bda19363c14d1050ed05770bdc8e585b87d51f3071f17d07ebc8",
+        "HCL": "98338f928291e0b85c2889e987d6f0b31abec9f6c70aa96da865c97ccb6e195b"
+      },
+      "reservations": {
+        "Base": {
+          "input_token_bound": 4196,
+          "request_bytes": 1074,
+          "reservation_usd": "0.03810576"
+        },
+        "HCL": {
+          "input_token_bound": 12004,
+          "request_bytes": 4978,
+          "reservation_usd": "0.04841232"
+        }
+      }
+    },
+    {
+      "arm_order": [
+        "Base",
+        "HCL"
+      ],
+      "checked_treatment_present": false,
+      "native_index": 65380,
+      "native_row_sha256": "6d2cfdd7cbbbfe955a10d405c7d090701bba43c2a079f894b0a5fed7260b2179",
+      "ordinary_input_sha256": "1c5f00f1043542b05f03d2fc30c2d57bf0b4e07e69e00ad8f26d5e648f4b2e99",
+      "request_sha256": {
+        "Base": "015787abf930c0ab79eabe18d39b5fce8df59ce2e9b65337550bcb6d0f7d2258",
+        "HCL": "9a90b3006be8edda5f142cfb45b47459b924de2afafb58e0e29434e06379d726"
+      },
+      "reservations": {
+        "Base": {
+          "input_token_bound": 4202,
+          "request_bytes": 1077,
+          "reservation_usd": "0.03811368"
+        },
+        "HCL": {
+          "input_token_bound": 12020,
+          "request_bytes": 4986,
+          "reservation_usd": "0.04843344"
+        }
+      }
+    },
+    {
+      "arm_order": [
+        "HCL",
+        "Base"
+      ],
+      "checked_treatment_present": false,
+      "native_index": 1556,
+      "native_row_sha256": "6f437c699a149acf853f897ec99e5773c66d622e80ae777371cc0635dd690cab",
+      "ordinary_input_sha256": "b041aec995ebd6ba544e68909500426e2ab12b48caf0089d599f24ae002e2948",
+      "request_sha256": {
+        "Base": "cd2775470f36d4abaf9e549520de513468f653de9ca4cd396f5a73b70b8f0ab7",
+        "HCL": "08bbcb0b8e6ccb6f43a3a7cf6b2b65561d70bbc33c8213d6dcced83d28326977"
+      },
+      "reservations": {
+        "Base": {
+          "input_token_bound": 4684,
+          "request_bytes": 1318,
+          "reservation_usd": "0.03874992"
+        },
+        "HCL": {
+          "input_token_bound": 12462,
+          "request_bytes": 5207,
+          "reservation_usd": "0.04901688"
+        }
+      }
+    }
+  ],
+  "common_policy_sha256": "23c8a51209df73df232781100e8dd2a2223c3fa0219f6f30c6d8fa3599904013",
+  "confirmation_qualified": false,
+  "extraction_calls": 0,
+  "grader_calls": 0,
+  "historical_budget_transfer": false,
+  "interpretation": "SIX_PAIRED_DEVELOPMENT_SMOKE_ONLY_NO_CAUSAL_OR_FINAL_CLAIM",
+  "live_execution_enabled": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "maximum_provider_calls": 12,
+  "maximum_request_bytes": 36000,
+  "model": "deepseek-v4-pro",
+  "model_snapshot": "ALIAS_ONLY_PHYSICAL_SNAPSHOT_UNVERIFIED",
+  "output_tokens": 8192,
+  "output_usage_margin": 32,
+  "proposed_cap_usd": "1.60",
+  "protocol_sha256": "697796a57f34cb985f14e891c8ce55dc04f98d9db3d26dc87ef364308f0f4eeb",
+  "rate_status": "EXISTING_PEAK_CEILING_REVERIFY_BEFORE_EXECUTION",
+  "rates_usd_per_million": {
+    "input": "1.32",
+    "output": "3.96"
+  },
+  "retries": 0,
+  "runtime_sha256": "7ade2dacaccca178d985661cc1e6683559052f2b3b3ab6cbf4e7ac506300f093",
+  "schema": "hcl-mindgames-development-protocol-v1",
+  "source_receipt_sha256": "6b6f8c473906bed35ce22c67b0aebbcf47fbe036f385f00fcb3af4d5099603aa",
+  "source_text_published": false,
+  "thinking": "enabled/high"
+}

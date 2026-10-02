@@ -1,0 +1,17 @@
+{
+  "amended_hcl_runtime_sha256": "7ade2dacaccca178d985661cc1e6683559052f2b3b3ab6cbf4e7ac506300f093",
+  "answer_gain_claimed": false,
+  "changed_runtime_files": [
+    "hcl/cognition/reader_entry.py",
+    "hcl/cognition/orchestration.py"
+  ],
+  "development_only": true,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "new_prompt_instruction": true,
+  "previous_hcl_runtime_sha256": "e540d6905332fbf36a3b2f727e608f6534b685dd123c37132b8f78a0ddbf3fc7",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "reason": "UNIVERSAL_ENTRY_FIRST_SLICE_AND_ANSWER_BOUNDARY",
+  "schema": "hcl-development-answer-boundary-amendment-v1",
+  "semantic_checker_added": false
+}
