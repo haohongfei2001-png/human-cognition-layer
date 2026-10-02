@@ -1,0 +1,7 @@
+{
+  "schema": "hcl-one-planning-diagnostic-marker-v1",
+  "authorization_ref": "NEW_PLANNING_DIAGNOSTIC_2026_10_02_ONE_CALL_0_05",
+  "package_sha256": "79e7ad48d485c10795135b20890eac31f236d240020c30b902eeba3ff86bf3db",
+  "grant_sha256": "251e1da3e359b47b9b12cbbc30fb635239cf1f80b698f8a71f6728d10ada65ac",
+  "executor_commit": "a9d6ba5e3ee1b6d8d249964f3496f454c9978b30"
+}
