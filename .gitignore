@@ -25,3 +25,5 @@ logs/
 # New bounded diagnostic receipt stays private; only ciphertext is uploaded.
 bounded-diagnostic-private/
 bounded-diagnostic.enc.json
+output-limit-private/
+output-limit.enc.json

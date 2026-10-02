@@ -1,0 +1,31 @@
+name: HCL Aggregate Output-Limit Continuation Provider-Free Gates
+on:
+  pull_request:
+    paths: ['scripts/output_limit*', 'scripts/run_output_limit_continuation.py', 'tests/test_output_limit_continuation.py', 'reports/HCL_OUTPUT_LIMIT*', '.github/HCL_OUTPUT_LIMIT*', '.github/frozen/hcl-output-limit*', '.github/workflows/hcl-output-limit*', 'docs/HCL_OUTPUT_LIMIT_CONTINUATION.md']
+  push:
+    branches: [main]
+    paths: ['scripts/output_limit*', 'scripts/run_output_limit_continuation.py', 'tests/test_output_limit_continuation.py', 'reports/HCL_OUTPUT_LIMIT*', '.github/HCL_OUTPUT_LIMIT*', '.github/frozen/hcl-output-limit*', '.github/workflows/hcl-output-limit*', 'docs/HCL_OUTPUT_LIMIT_CONTINUATION.md']
+permissions:
+  contents: read
+jobs:
+  provider-free-output-limit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'cryptography==50.0.0'
+      - run: python -m unittest tests.test_output_limit_continuation tests.test_bounded_diagnostics tests.test_v1_deepseek_metered tests.test_universal_encrypted_result
+      - run: python -m scripts.development_universal_sensitivity_amendment
+      - name: Frozen new package equals current executor and certified runtime
+        run: |
+          python - <<'PY'
+          import json
+          from scripts.run_output_limit_continuation import PACKAGE, build_package
+          assert json.loads(PACKAGE.read_text()) == build_package()
+          print('FROZEN_NEW_DIAGNOSTIC_PACKAGE_PASS_NO_PROVIDER_CALL')
+          PY
