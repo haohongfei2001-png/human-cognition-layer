@@ -1,0 +1,54 @@
+name: HCL I02 One Approved Universal Development Comparison
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: hcl-universal-development-one-approved-grant
+  cancel-in-progress: false
+jobs:
+  development:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Exactly first main invocation, never retry a consumed grant
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$GITHUB_REF" = refs/heads/main
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-universal-development-once.yml/runs?event=workflow_dispatch&per_page=100" > /tmp/universal-runs.json
+          python - <<'PY'
+          import json,os
+          runs=json.load(open('/tmp/universal-runs.json'))['workflow_runs']
+          assert len(runs)==1 and str(runs[0]['id'])==os.environ['GITHUB_RUN_ID']
+          PY
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'openai==2.14.0' 'cryptography==50.0.0'
+      - name: Frozen source, executor, encryption and runtime verification
+        run: |
+          python -m unittest tests.test_v1_deepseek_metered tests.test_v1_universal_question tests.test_universal_development_execution tests.test_universal_encrypted_result
+          python -m scripts.development_metered_universal_amendment
+      - name: Single newly approved capped comparison
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          HCL_UNIVERSAL_DEVELOPMENT_AUTHORIZED: ONE_NEW_2_50_18_CALL_BATCH
+        run: python -m scripts.run_universal_development --execute --output universal-development-private
+      - name: Encrypt receipt before artifact upload
+        if: always()
+        run: |
+          if test -f universal-development-private/receipt.json; then
+            python -m scripts.universal_encrypted_result --receipt universal-development-private/receipt.json --public-key .github/HCL_UNIVERSAL_DEVELOPMENT_RECIPIENT.pem --output universal-development-receipt.enc.json
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-i02-universal-encrypted-${{ github.run_id }}
+          path: universal-development-receipt.enc.json
+          if-no-files-found: warn

@@ -87,7 +87,8 @@ class CallAllowance:
         if not reservation.is_finite() or reservation<0 or self.reserved_usd+reservation>self.maximum_usd:
             raise HCLBoundaryError('COST_ALLOWANCE_EXHAUSTED')
         attempt=dict(phase=phase,reserved_usd=str(reservation),status='RESERVED_BEFORE_CALL',
-            provider_call=False,invocation_status='NOT_INVOKED')
+            provider_call=False,invocation_status='NOT_INVOKED',
+            cost_basis='USAGE_RATED_PEAK_NOT_INVOICE' if getattr(backend,'cost_basis',None)=='USAGE_RATED_PEAK_NOT_INVOICE' else 'UNSPECIFIED_BACKEND_REPORTED_AMOUNT')
         self.attempts.append(attempt);self.reserved_usd+=reservation
         try:
             if self.journal:self.journal(dict(authorization_ref=self.authorization_ref,attempts=self.attempts,reserved_usd=str(self.reserved_usd)))

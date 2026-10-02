@@ -28,6 +28,15 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: UNIVERSAL_HCL_ENTRY_RETAINED_CAPABILITY_INTEGRATION**
 
+[HCL I02 approved universal development run](docs/HCL_I02_UNIVERSAL_DEVELOPMENT_RUN.md):
+new USD2.50 /18-call maximum approved, pending exact executor verification and
+one-shot dispatch. Six authored human-domain cases include a no-source Chinese
+question and multi-source values; internal HCL planning selects capabilities.
+All phase costs are included, zero retries/paid judges, no prior grant transfer.
+Only an encrypted result artifact may leave the job; raw answers remain private.
+Preparation has made no provider calls. This is constructed development evidence,
+not final confirmation or completed generalization.
+
 [Universal ordinary-question entry](docs/HCL_UNIVERSAL_QUESTION_ENTRY.md) adds
 plain/no-source, instruction/source and multi-source planning/composition/review,
 a callable inventory of all 40 current runtime A–H packages, and real current

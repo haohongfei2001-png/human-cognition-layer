@@ -1,0 +1,15 @@
+{
+  "amended_hcl_runtime_sha256": "f8e0c2c15cba4c75f314046a822aa367c450f1c480e121acad1b2ba47df08253",
+  "changed_runtime_files": [
+    "hcl/cognition/universal_entry.py",
+    "hcl/cognition/deepseek_metered.py"
+  ],
+  "complete_capability_integration": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "model_planner_efficacy_verified": false,
+  "previous_hcl_runtime_sha256": "b319e6091278e2b685174cce35c2795cd725d53811d78d8b06e52b8623dfb367",
+  "provider_calls_in_preparation": 0,
+  "provider_spend_in_preparation_usd": 0,
+  "reason": "BOUNDED_EXISTING_CLIENT_PORT_WITH_CONTENT_ONLY_OUTPUT",
+  "schema": "hcl-development-metered-universal-amendment-v1"
+}

@@ -1,0 +1,124 @@
+{
+  "actual_requests_recorded_before_each_transport": true,
+  "all_call_maximum_reservation_usd": "2.24826624",
+  "approved_maximum_calls": 18,
+  "approved_maximum_usd": "2.50",
+  "base_calls": 6,
+  "base_request_messages_sha256": {
+    "competing_action_reasons": "47838c631361e2be20e790eae8a40a6f77605232317478e1ec683d6c5b33336a",
+    "conditional_responsibility": "66f0e74142b04be3cd321caeccf6c9353bab962b9f2c5d24cb77af0f8858fcf9",
+    "contextual_values_two_sources": "b7af834b0d601b60b940ce60a335a49b4bd6cbb97967eed4ebe5d733ce4a05c4",
+    "receipt_not_availability": "6c38f8ce03f08a0e2633674bf2bcbaa55a4c13d37c8c76856d8aef2fba41b515",
+    "reported_belief_change": "93a5ebe0b847c6793d0cbfb8a09331908ae02cab16e6bb5e39f3370191412802",
+    "society_without_source": "54acd74cbfab1fd5d525b65628411eda053c304bd27759ac0c702e0411ee665f"
+  },
+  "cases": [
+    {
+      "arm_order": [
+        "Base",
+        "HCL"
+      ],
+      "case_id": "society_without_source",
+      "ordinary_input_sha256": "5644065872268ebd7e9a983f9c4d21f5ce5338e5c7a470fe3e3c0ac4251c44cf",
+      "scoring": "SOURCE_FIRST_OPEN_ENDED_REVIEW_NOT_NUMERIC_ACCURACY"
+    },
+    {
+      "arm_order": [
+        "HCL",
+        "Base"
+      ],
+      "case_id": "reported_belief_change",
+      "ordinary_input_sha256": "1cae533f6270f9b8d02f473f4f4e5df628852bfbb5dcf57d1b3f308b6377c554",
+      "scoring": "EXACT_OPTION_AND_SEPARATE_SOURCE_FIRST_EXPLANATION"
+    },
+    {
+      "arm_order": [
+        "Base",
+        "HCL"
+      ],
+      "case_id": "receipt_not_availability",
+      "ordinary_input_sha256": "187435f22a53cfbc10ea08bface7ed83d90297e80de4c1f9e95b94632f6b7e30",
+      "scoring": "EXACT_OPTION_AND_SEPARATE_SOURCE_FIRST_EXPLANATION"
+    },
+    {
+      "arm_order": [
+        "HCL",
+        "Base"
+      ],
+      "case_id": "competing_action_reasons",
+      "ordinary_input_sha256": "758608e1063dba94c014230285e5e52f06b117c3500011c9059ca735b908c182",
+      "scoring": "EXACT_OPTION_AND_SEPARATE_SOURCE_FIRST_EXPLANATION"
+    },
+    {
+      "arm_order": [
+        "Base",
+        "HCL"
+      ],
+      "case_id": "conditional_responsibility",
+      "ordinary_input_sha256": "76ba82446681e59b4514a041ab05438a30f0311df42354952222cea3f045473b",
+      "scoring": "EXACT_OPTION_AND_SEPARATE_SOURCE_FIRST_EXPLANATION"
+    },
+    {
+      "arm_order": [
+        "HCL",
+        "Base"
+      ],
+      "case_id": "contextual_values_two_sources",
+      "ordinary_input_sha256": "e3baffa5a1a183711f41a24ebaceab6da91fecd62d3cca6a4a59a7164b12c599",
+      "scoring": "EXACT_OPTION_AND_SEPARATE_SOURCE_FIRST_EXPLANATION"
+    }
+  ],
+  "common_answer_contract_sha256": "f1cccbd6b9dd5474c9bfbb8f98328bed5b795907094d3919283351e103064d2f",
+  "execution_authority": "SEPARATE_MATCHING_READY_GRANT_REQUIRED",
+  "execution_files": {
+    ".github/HCL_UNIVERSAL_DEVELOPMENT_RECIPIENT.pem": "2dc328611d0aa3a96d831e2365b15654ae494590e3e4da774cc3eefbe76c0ee3",
+    ".github/frozen/hcl-universal-development-once.yml": "97cd8b58bf3a5d211069014061c47232ebf84a9c686ae34f5bc53742828427f3",
+    "reports/HCL_DEVELOPMENT_BENCHMARK_EXPOSURE_REGISTER.json": "5dffe4b46c3f62de5cce6f3818a36846cef09fa17903e532077b3bede1c2d109",
+    "scripts/run_universal_development.py": "6c8c2448bde121d3c2f0069827aed4fd8bba02e20706fc0d746da5325f7b7e2f",
+    "scripts/universal_development_protocol.py": "eeab4d1a1a54eff749ec51b0957d34e78b4373e6fffcdc7b403b76e0b1d72cfe",
+    "scripts/universal_encrypted_result.py": "89dccc796f14633c03763494ce4926ea42027fd393db30fd2056454f908ab29a",
+    "tests/test_universal_development_execution.py": "116f8fe52a2bf829bd5968b092c81ae784a4f39c01f0a7267668d6385786076f",
+    "tests/test_universal_encrypted_result.py": "3d5f3bab8fcd2bd487a74d5212fac44223227f03923bbf6197a5b01a162913f0",
+    "tests/test_v1_deepseek_metered.py": "b4e4efa942e081dc7b25f1225032343e2ebecfc7014b746b06cb5ff11b42592a"
+  },
+  "extraction_calls": 0,
+  "final_confirmation_qualified": false,
+  "grader_calls": 0,
+  "hcl_answer_calls": 6,
+  "hcl_planning_calls": 6,
+  "historical_budget_transfer": false,
+  "input_bound": "2_UTF8_SERIALIZED_REQUEST_BYTES_PLUS_2048",
+  "internal_planner_selects_capabilities": true,
+  "labels_and_rubrics_never_sent_to_provider": true,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "maximum_calls": 18,
+  "maximum_elapsed_seconds": 1800,
+  "maximum_request_bytes": 36000,
+  "missing_treatment_is_observed_outcome": true,
+  "model": "deepseek-v4-pro",
+  "model_snapshot": "RETURNED_ALIAS_NOT_PHYSICAL_SNAPSHOT_CERTIFICATION",
+  "no_source_answer_is_unsourced_model_knowledge": true,
+  "output_margin": 32,
+  "output_policy": "CONTENT_ONLY_NO_PROVIDER_REASONING_OR_RAW_EXCEPTIONS",
+  "phase_maximum_reservation_usd": {
+    "answer": "0.13031040",
+    "planning": "0.11409024"
+  },
+  "phase_output_tokens": {
+    "answer": 8192,
+    "planning": 4096
+  },
+  "planner_policy_sha256": "69ce5f3a3a979775c285d2c376885383bfad440f8aa7134b3400f1ca6767fd1e",
+  "proposed_cap_usd": "2.50",
+  "purpose": "CONSTRUCTED_FUNCTIONAL_DEVELOPMENT_COMPARISON_NOT_INDEPENDENT_GENERALIZATION",
+  "rates_usd_per_million": {
+    "input": "1.32",
+    "output": "3.96"
+  },
+  "retries": 0,
+  "runtime_sha256": "f8e0c2c15cba4c75f314046a822aa367c450f1c480e121acad1b2ba47df08253",
+  "schema": "hcl-universal-development-package-v1",
+  "scorer": "FIVE_EXACT_OPTIONS_AND_ONE_UNSCORED_OPEN_ENDED_CASE; EXPLANATION_REVIEW_SEPARATE",
+  "selection": "SIX_FIXED_HUMAN_DOMAIN_TASKS_BEFORE_OUTPUTS_NO_CAPABILITY_TRIGGER_FILTER",
+  "source_package_sha256": "a2758db77afbaef1ca4520a93f5431f8d256a998405543d37b9bc6d60f2d3dd5"
+}
