@@ -1,21 +1,49 @@
 # Aggregate-bound output-limit continuation
 
-## Reviewed and ready, not executed
+## Terminal result and closed sub-run
 
-This is a separately reviewed continuation of the same owner-approved **US$1 /
-12-call campaign through 2026-10-03 08:00 UTC**. It creates no new campaign budget
-and does not reopen the closed first sub-run. Before any admission it imports the
-verified receipt hash
-`768cf0a1b8d3c914bd048aa90e91a2f320f3b3e781902fe74ff7a5bbb1102d45`, four consumed calls
-and **US$0.17547288 retained reservations** from run 37074821910. Lower usage-rated
-cost does not release those reservations. Remaining campaign capacity is therefore
-at most eight calls / **US$0.82452712**. The prior closed grant stays unchanged.
+Run [37078347944](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/37078347944)
+finished the bounded sequence with five new calls. At 8192, the identical source
+planning request again returned `length`, empty content, 8192 completion tokens
+and 8192 reported reasoning tokens. The predeclared 16384 differential returned
+a schema-valid plan, and both subsequent answer flows completed. This shows
+functional progress in the tested sequence; sampling variability and the lack of
+an independent comparison do not support a deterministic threshold or efficacy claim.
 
-The fresh sub-run has passed independent review. Its separate grant is READY
-and the byte-exact frozen workflow is installed, but no launch marker or new
-provider call exists yet. Exact executor CI and one exact-parent marker launch
-remain required. This is an authored
-functional diagnostic, not a new benchmark, efficacy result or budget reset.
+Retained treatment remains limited: C02 rejected a freeform internal operation
+question in both flows; G02 executed once but returned `NO_ADOPTED_INDIVIDUAL_RULE`
+and `checked=null`. For the G05 case, the planner selected C02/G02 rather than
+G05, repeated one actor binding three times, and both operations were rejected.
+Actual G05 execution and substantive factor checks were zero. Saved exact plans
+remain in the original private encrypted receipt, with no item-specific rewrite.
+
+New usage-rated peak sum is US$0.11863236 and new full reservations are
+US$0.33981288. Including the earlier four calls, the campaign totals are **nine
+calls, US$0.17653680 peak usage estimate and US$0.51528576 full reservations**.
+All observed usage was validated; unknown-cost hold is zero, invoice unknown.
+The original US$1/12 ceiling therefore has at most three calls / US$0.48471424
+remaining until 2026-10-03 08:00 UTC. This closure does not authorize another
+sequence, reopen either sub-run or release prior holds.
+
+The new grant is closed and its live workflow/marker removed. Public evidence is
+sanitized scalar metadata and the existing artifact ID/link/hash in
+`reports/HCL_OUTPUT_LIMIT_CONTINUATION_CLOSURE.json`. GitHub currently lists that
+artifact's retention through 2026-12-31 23:36:03 UTC; access and availability depend
+on repository permissions and retention. A verified encrypted copy remains in
+private workspace storage, subject to workspace retention. No ciphertext or
+plaintext is mirrored into Git; the private recipient key is never published.
+
+Next is provider-free diagnosis and a general planner/adapter contract repair:
+expose truthful callable prerequisites and operation-question requirements, test
+independent synthetic counterexamples, and preserve source/actor/authority limits.
+Do not weaken parsers, tune to the observed cases, force G05, or equate a returned
+answer with checked treatment or an answer gain.
+
+## Preserved frozen protocol
+
+The tested runtime remained at the certified G05 digest. The sub-run imported
+prior receipt hash `768cf0a1b8d3c914bd048aa90e91a2f320f3b3e781902fe74ff7a5bbb1102d45`,
+four prior calls and US$0.17547288 full reservations. No prior grant was reopened.
 
 ## Evidence-driven comparison
 

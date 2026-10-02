@@ -1,7 +1,0 @@
-{
-  "authorization_ref": "OWNER_CONFIRMED_2026_10_02_I02_NEW_1_USD_12_CALLS_OUTPUT_LIMIT_CONTINUATION",
-  "executor_commit": "f8861081f4561a1dc2b15dad07b7bedf6a997e67",
-  "grant_sha256": "bf923a401ea5a48f221466e16dcdb7dc310c4969e28f620aea4c2303781995dc",
-  "package_sha256": "cb6bc49c756c7dd33aaad80ecdc1ee542287de7e01fdc326552c421d12770fbc",
-  "schema": "hcl-output-limit-single-launch-marker-v1"
-}
