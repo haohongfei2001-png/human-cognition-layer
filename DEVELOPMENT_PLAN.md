@@ -93,6 +93,16 @@ no HCLA transfer, efficacy claim or automatic retry. Any reviewed continuation
 must import these four calls/USD0.17547288 into the same owner USD1/12-call
 ceiling, leaving at most eight calls/USD0.82452712 through Oct3 08:00 UTC.
 
+[Reviewed aggregate output-limit continuation](docs/HCL_OUTPUT_LIMIT_CONTINUATION.md)
+imports the preceding four calls and USD0.17547288 full holds into the same owner
+USD1/12-call ceiling through 2026-10-03 08:00 UTC. It preserves the exact failed
+synthetic source request/model/high effort while testing 8192 planning tokens;
+only validated length admits one 16384 differential, then a G05 flow if admitted.
+Complete requests use the existing 36k production bound without truncation.
+At most five new/nine aggregate calls, aggregate worst reserve USD0.89190552.
+New sub-run grant READY after independent review; no marker or further call yet.
+Earlier sub-run/older grants remain closed; no budget reset, HCLA transfer or judge.
+
 ## Owner architecture amendment — 2026-10-02
 
 Every HCL-arm and ordinary product input must enter HCL orchestration. Internal
