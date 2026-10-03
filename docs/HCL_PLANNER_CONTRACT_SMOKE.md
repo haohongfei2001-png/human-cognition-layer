@@ -1,6 +1,47 @@
 # Two-call planner-contract functional smoke
 
-## Reviewed and ready, not launched
+## Terminal result and closed sub-run
+
+Run [37084124429](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/37084124429)
+used exactly two new calls. The planner naturally selected G05, and the retained
+adapter prepared one single-factor conditional variant. Its source was unchanged;
+source and original-request support remained conjunctive. The result removed
+stated support under the hypothetical premise, without proving a conclusion flip.
+This is one exposed-input functional observation, not selection generalization or
+efficacy.
+
+Both provider responses completed with validated usage. The final answer failed
+source review with `INVALID_ORIGINAL_CITATIONS` and is **not deliverable**. Both
+quotes matched exact contiguous original text, IDs, versions and start offsets;
+the returned citation objects included an unsupported `end` field. The shared
+answer policy did not enumerate citation element fields. An offline structural
+probe on a separate copy isolated that schema mismatch; no historical raw answer,
+citation or failed result was rewritten or upgraded. The validator remains intact.
+Next is a generic provider-free answer-interface completeness repair, with
+negative source/quotation tests and independent review.
+
+New usage-rated peak cost is US$0.02447412 and full reservations US$0.17635200.
+The campaign totals are **eleven calls, US$0.20101092 peak usage estimate and
+US$0.69163776 full reservations**. Unknown-cost hold is zero; invoice unknown.
+The original campaign has at most one call / US$0.30836224 left through
+2026-10-03 08:00 UTC. One call cannot fund another complete two-call flow. This
+closure authorizes no additional calls, releases no holds and reopens no sub-run.
+The new grant is CLOSED_NO_TRANSFER_NO_RETRY with zero remaining sub-run authority;
+its live workflow and marker are removed. All older grants remain closed.
+
+The first marker reference update was denied for missing trusted end-user
+payload/destination authorization. After the exact owner-confirmed existing
+DeepSeek synthetic-diagnostic request and answer were supplied, the same call was
+retried once and succeeded. No alternate execution route was used.
+
+Public evidence is limited to sanitized scalars and the existing authorized
+artifact metadata in `reports/HCL_PLANNER_CONTRACT_SMOKE_CLOSURE.json`. GitHub
+lists retention through 2027-01-01 00:56:26 UTC; availability and access depend on
+repository permissions and retention. The verified encrypted copy remains in
+private workspace storage, subject to workspace retention. Neither ciphertext,
+raw answer nor private key is mirrored into Git.
+
+## Preserved reviewed protocol
 
 This fresh package tests the adopted generic planner/catalog interface repair on
 the exact previously misrouted authored G05 input. It is a functional diagnostic
@@ -53,18 +94,17 @@ unique identities cannot be rearmed after invocation.
 
 ## Admission, evidence and privacy
 
-Independent review is complete. The new sub-run grant is READY and its exact
-frozen template is installed, but there is no launch marker or new provider call.
-Exact executor CI and one marker-only main push must still precede transport. Complete prior workflow history and attempt one are
-required; old grants cannot launch this sub-run. Only existing server-side DeepSeek
+Before the completed run, independent review and exact executor CI passed, the
+new sub-run grant was READY and the exact frozen template was installed. One
+marker-only main push launched transport. Complete prior workflow history and
+attempt one were required; old grants cannot launch this sub-run. Only existing server-side DeepSeek
 credentials are used. There is no provider switch or new persistent access.
 
 Requests/answer content use the existing verified encrypted-result path. Only
 allowlisted scalar diagnostics are retained from rejected responses; provider
-reasoning text and raw errors are excluded. A terminal public closure will retain
-sanitized outcomes plus the existing artifact ID/link/hash, with no ciphertext
-mirroring into Git. Unknown usage retains its whole reservation. After termination,
-close this grant and remove its live workflow/marker before any further sequence.
+reasoning text and raw errors are excluded. The terminal public closure retains sanitized outcomes plus the existing artifact
+ID/link/hash, with no ciphertext mirroring into Git. Unknown usage retains its
+whole reservation. This grant is closed and its live workflow/marker removed.
 
 Offline tests cover exact new serialization, actual scripted G05 preparation,
 negative selection, invalid/over-budget plans, incomplete 16384-token responses,

@@ -1,7 +1,0 @@
-{
-  "authorization_ref": "OWNER_CONFIRMED_2026_10_02_I02_NEW_1_USD_12_CALLS_PLANNER_CONTRACT_SMOKE",
-  "executor_commit": "b92ffebca93d6940eb73c0bf312359c4cf0eca5d",
-  "grant_sha256": "a2ca4a23992b1267bc6047a2d827f2540bdf2aeb311704dbb819cd19e3a7ae2c",
-  "package_sha256": "c7355135f3e68a6a049934142c350fae9c89744d3568cc2fa9b49f261ffb0209",
-  "schema": "hcl-planner-contract-smoke-marker-v1"
-}

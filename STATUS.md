@@ -125,14 +125,16 @@ selection efficacy and answer gain remain unverified. Historical paid packages,
 closed grants and receipts are pinned unchanged. Zero new calls/spend; the existing
 campaign still has nine calls/USD0.51528576 full holds, without budget reset.
 
-[Reviewed two-call planner-contract smoke](docs/HCL_PLANNER_CONTRACT_SMOKE.md)
-freezes the adopted interface repair on the unchanged previously misrouted
-synthetic input. It imports nine calls/USD0.51528576 full holds into the same
-owner USD1/12-call ceiling through 2026-10-03 08:00 UTC. At most two new/eleven
-aggregate calls; maximum cumulative reserve USD0.76504824. No forced capability,
-differential, retry or judge. Exact new request19599bytes; old quotes not reused.
-New grant READY after review and template installed; no marker/new call yet.
-A negative selection remains a result, never a reason to reroute or retry.
+[Closed two-call planner-contract smoke](docs/HCL_PLANNER_CONTRACT_SMOKE.md)
+records G05 naturally selected and one source-preserving conditional variant
+prepared. Final answer failed exact citation structure review because returned
+objects included an unsupported end field; raw evidence and rejection retained.
+Generic answer policy omitted citation element fields; next provider-free interface
+repair must keep the validator unchanged. Aggregate eleven calls, USD0.20101092
+peak usage estimate, USD0.69163776 full holds, unknown0/invoiceunknown. Sub-run
+closed with zero authority; live workflow/marker removed. One original campaign
+call remains, insufficient for a complete two-call flow; no further paid sequence.
+No generalization, efficacy or answer-gain claim; historical evidence stays pinned.
 
 ## Owner architecture amendment — 2026-10-02
 
