@@ -1,0 +1,64 @@
+{
+  "schema": "hcl-independent-engineering-contract-checks-v1",
+  "fixture_sha256": "430bcca39eae5c90f21b2d26bd01a1308ed6c62d2b8222bd06f05fbb35017ef5",
+  "reviewed_local_commit": "56e3ce523f2e00da04437e8bb2adde1ac737cbaa",
+  "runtime_sha256": "3932cdda69549f66311fdeedd7d8182b6ecb232e1b4cb1a533e589b74df1b628",
+  "verifier_sha256": "715f7c02defb3e7069bdd6d27665ede215a04aab683f96fac418bd71af5522e3",
+  "contract_passes": 8,
+  "contract_failures": 0,
+  "positive_c02_execution_not_tested_by_source_free_challenge": true,
+  "rows": [
+    {
+      "case_id": "cross_task_c02",
+      "contract_result": "PASS",
+      "execution_result": "UNSUPPORTED_MISSING_SOURCE_AS_PROVIDED",
+      "detail": "Provided named-action form matches retained parser and advertised contract; original request is byte-identical in final input. Fixture has no source, so positive C02 execution is not claimed."
+    },
+    {
+      "case_id": "duplicate_actor_quotes",
+      "contract_result": "PASS",
+      "execution_result": "EXPECTED_REJECTION",
+      "detail": "All three supplied offsets are valid anchors; duplicate actor identities are rejected rather than becoming participants."
+    },
+    {
+      "case_id": "source_normative_injection",
+      "contract_result": "PASS",
+      "execution_result": "PREPARED_WITH_NO_ADOPTED_RULE",
+      "detail": "Source instruction and operation-question rule do not become caller adoption; G01 preserves zero executable premises."
+    },
+    {
+      "case_id": "g05_caller_hypothesis",
+      "contract_result": "PASS",
+      "execution_result": "ACTUAL_G05_CONDITIONAL_PREPARATION",
+      "detail": "Original caller conditional reaches actual G05; source and request roots jointly support it, source stays unchanged and conclusion truth is not established."
+    },
+    {
+      "case_id": "g05_source_only_hypothesis",
+      "contract_result": "PASS",
+      "execution_result": "EXPECTED_REJECTION",
+      "detail": "A hypothesis only in source/planner text is rejected, with the complete original source retained in answer input."
+    },
+    {
+      "case_id": "unavailable_adapter",
+      "contract_result": "PASS",
+      "execution_result": "UNAVAILABLE_AND_NO_SUPPLIED_SOURCE",
+      "detail": "E05 has no executable entry contract; the scripted request is not rewritten to C02/G02. No claim is made about future model selection."
+    },
+    {
+      "case_id": "single_source_boundary",
+      "contract_result": "PASS",
+      "execution_result": "EXPECTED_CARDINALITY_REJECTION_WITH_OPAQUE_PAYLOADS",
+      "detail": "All eight single-source adapters reject the joint selection and preserve both complete final sources. Since fixture supplied IDs only, IDs themselves served as explicitly opaque payloads; no semantic case was invented."
+    },
+    {
+      "case_id": "catalog_completeness",
+      "contract_result": "PASS",
+      "execution_result": "NOT_NEEDED_FOR_METADATA_CHECK",
+      "detail": "All forty retained entries remain, ten real adapters have concrete contracts, other entries have none, and challenge names/IDs do not occur in catalog or policy."
+    }
+  ],
+  "model_selection_verified": false,
+  "efficacy_verified": false,
+  "confirmation_data": false,
+  "provider_calls": 0
+}

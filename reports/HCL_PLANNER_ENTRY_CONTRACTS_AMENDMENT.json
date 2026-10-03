@@ -1,0 +1,19 @@
+{
+  "schema": "hcl-planner-entry-contracts-amendment-v1",
+  "previous_hcl_runtime_sha256": "ad67e85c9bd00cb23dd61825bf7c35790f72282754574da19612435e96839cfe",
+  "amended_hcl_runtime_sha256": "3932cdda69549f66311fdeedd7d8182b6ecb232e1b4cb1a533e589b74df1b628",
+  "changed_runtime_files": [
+    "hcl/cognition/capability_catalog.py",
+    "hcl/cognition/universal_entry.py"
+  ],
+  "reason": "EXPOSE_EXISTING_ADAPTER_INPUT_CONTRACTS_WITHOUT_DISPATCH_OR_PARSER_CHANGE",
+  "parser_changed": false,
+  "dispatch_changed": false,
+  "model_or_token_settings_changed": false,
+  "provider_calls_in_preparation": 0,
+  "provider_spend_usd": 0,
+  "model_selection_efficacy_verified": false,
+  "complete_capability_integration": false,
+  "authorized_additional_calls": 0,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
