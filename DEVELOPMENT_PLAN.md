@@ -115,6 +115,15 @@ selection efficacy and answer gain remain unverified. Historical paid packages,
 closed grants and receipts are pinned unchanged. Zero new calls/spend; the existing
 campaign still has nine calls/USD0.51528576 full holds, without budget reset.
 
+[Reviewed two-call planner-contract smoke](docs/HCL_PLANNER_CONTRACT_SMOKE.md)
+freezes the adopted interface repair on the unchanged previously misrouted
+synthetic input. It imports nine calls/USD0.51528576 full holds into the same
+owner USD1/12-call ceiling through 2026-10-03 08:00 UTC. At most two new/eleven
+aggregate calls; maximum cumulative reserve USD0.76504824. No forced capability,
+differential, retry or judge. Exact new request19599bytes; old quotes not reused.
+New grant READY after review and template installed; no marker/new call yet.
+A negative selection remains a result, never a reason to reroute or retry.
+
 ## Owner architecture amendment — 2026-10-02
 
 Every HCL-arm and ordinary product input must enter HCL orchestration. Internal

@@ -1,0 +1,17 @@
+{
+  "aggregate_maximum_calls": 12,
+  "aggregate_maximum_usd": "1.00",
+  "authorization_ref": "OWNER_CONFIRMED_2026_10_02_I02_NEW_1_USD_12_CALLS_PLANNER_CONTRACT_SMOKE",
+  "campaign_authorization_ref": "OWNER_CONFIRMED_2026_10_02_I02_NEW_1_USD_12_CALLS",
+  "expires_at": "2026-10-03T08:00:00Z",
+  "hcla_budget_transfer": false,
+  "package_sha256": "c7355135f3e68a6a049934142c350fae9c89744d3568cc2fa9b49f261ffb0209",
+  "previous_grants_reopened": false,
+  "prior_calls": 9,
+  "prior_receipt_sha256": "5de9228f032deac21b2e93d407028c2a5f614575413125cf2626fc93a79deff9",
+  "prior_reserved_usd": "0.51528576",
+  "retries": 0,
+  "schema": "hcl-planner-contract-smoke-grant-v1",
+  "status": "READY",
+  "subrun_maximum_calls": 2
+}

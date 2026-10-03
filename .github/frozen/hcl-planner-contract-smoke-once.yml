@@ -1,0 +1,47 @@
+name: HCL I02 Two-Call Planner Contract Smoke
+on:
+  push:
+    branches: [main]
+    paths: ['.github/HCL_PLANNER_CONTRACT_SMOKE_TRIGGER.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: hcl-i02-planner-contract-smoke-20261003
+  cancel-in-progress: false
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'openai==2.14.0' 'cryptography==50.0.0'
+      - name: Provider-free frozen diagnostic gates
+        run: python -m unittest tests.test_planner_contract_smoke tests.test_v1_deepseek_metered tests.test_universal_encrypted_result
+      - name: One new separately ledgered run before expiry
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-planner-contract-smoke-once.yml/runs?per_page=100" > /tmp/planner-contract-smoke-runs.json
+          python -m scripts.run_planner_contract_smoke --check-launch /tmp/planner-contract-smoke-runs.json
+      - name: One unchanged-input HCL flow with selection recorded
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: python -m scripts.run_planner_contract_smoke --execute
+      - name: Encrypt receipt without reasoning text or raw errors
+        if: always()
+        run: |
+          if test -f planner-contract-smoke-private/receipt.json; then
+            python -m scripts.universal_encrypted_result --receipt planner-contract-smoke-private/receipt.json --public-key .github/HCL_UNIVERSAL_DEVELOPMENT_RECIPIENT.pem --output planner-contract-smoke.enc.json
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-planner-contract-smoke-encrypted-${{ github.run_id }}
+          path: planner-contract-smoke.enc.json
+          if-no-files-found: warn
