@@ -28,6 +28,15 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: UNIVERSAL_HCL_ENTRY_RETAINED_CAPABILITY_INTEGRATION**
 
+[Retained D02 finite acknowledgment](docs/HCL_UNIVERSAL_UNDERSTANDING_ENTRY.md)
+forwards complete native results and support under the exact returned summary
+target. Matching chains and explicit doubt remain distinct from unrelated summary
+claims, private comprehension or common knowledge. The D01/D02 scripted flow
+preserves receipt/history, revisions and exact original citations; new meanings
+without acknowledgment remain untreated. LF/CRLF admission prevents the known
+native line-index mismatch without rewriting source. No paid call or efficacy
+claim; standalone native format and B04 transport gaps remain explicit.
+
 [D01 source-line admission](docs/HCL_D01_SOURCE_LINE_BOUNDARY.md) now refuses
 non-LF/CRLF source separators before native execution, preserving original bytes.
 This prevents an unrelated own expression from becoming a false promise receipt
