@@ -72,7 +72,7 @@ _ROWS = (
 # An absent contract means the retained implementation has no ordinary-entry adapter.
 _UNUSED_BINDINGS='Not consumed by this adapter; use an empty bindings array.'
 _READER_LIMITS='One complete source; bounded literal-report reader with no invented source facts.'
-_MODEL_READER_LIMITS=' Optional semantic_candidates from the first model plan may feed the existing conditional reader. Only one B01/C01/C03 operation per plan may use this field; at most 24 exact-quote candidates. Derived statements remain unverified interpretations, never quotable sources.'
+_MODEL_READER_LIMITS=' Optional semantic_candidates from the first model plan may feed existing conditional preparation. Only one B01/C01/C02/C03 operation per plan may use this field; at most 24 exact-quote candidates. Derived actor labels retain exact source-named ASCII names of at most 32 characters; no invented aliases. Derived statements remain unverified interpretations, never quotable sources.'
 _CONCEPT_LIMITS='Source at most 16000 characters and 64 lines; original question at most 4000 characters.'
 _CONTRACTS = {
     cid:AdapterContract('OPERATION_QUESTION',1,1,_UNUSED_BINDINGS,(),question,_READER_LIMITS+(_MODEL_READER_LIMITS if cid in ('B01','C01','C03') else ' No semantic translation at this entry.'),
@@ -108,7 +108,7 @@ _CONTRACTS.update({
     'C02':AdapterContract('OPERATION_QUESTION',1,1,_UNUSED_BINDINGS,
         ('Why did <Actor> <verb and object>?',),
         'The internal question must exactly use the Why did form with one capitalized single-token actor and an explicit action plus object. A freeform request for competing explanations is not accepted. Interpret the user task into this form without changing its actor/action or asserting a true motive.',
-        'Operation question at most 8000 characters; action at most 300 characters; at most 20 accepted literal source rows and two supported goals.',
+        'Operation question at most 8000 characters; action at most 300 characters; at most 20 accepted literal source rows and two supported goals.'+_MODEL_READER_LIMITS,
         'Conditional, non-exhaustive explanations only; supported goals do not establish a unique actual motive. Unknown action/premises remain explicit.'),
     'G01':AdapterContract('ORIGINAL_USER_REQUEST',0,8,_UNUSED_BINDINGS,
         ('For this analysis, responsibility requires <conjunctive factors>.',

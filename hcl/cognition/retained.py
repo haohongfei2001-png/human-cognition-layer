@@ -45,8 +45,9 @@ def prepare_retained(workspace, query, **kwargs):
 
 class _ReaderTranslationBackend:
     """One A02 candidate call, with visible existing-checker translation grammar."""
-    def __init__(self, backend):
+    def __init__(self, backend, *, explanation_analysis=False):
         self.backend, self.requests = backend, []
+        self.explanation_analysis = explanation_analysis
 
     def complete_json(self, messages, **kwargs):
         if self.requests:
@@ -68,6 +69,14 @@ class _ReaderTranslationBackend:
             'claims. Ambiguous alternatives stay unresolved; no moral verdict, '
             'inferred motive/emotion or automatic receipt/comprehension. Return '
             'the original candidates JSON contract, with exact quote/source IDs.')
+        if self.explanation_analysis:
+            policy += (' For C02, preserve source-reported actions and explicit action-time references using '
+                'NAME: I did ACTION.; NAME: At the time, I knew about TOPIC.; '
+                'NAME: At the time, I did not know about TOPIC.; NAME: At the time, I could ACTION.; '
+                'NAME: At the time, I could not ACTION. A current or later report must not become an action-time claim. '
+                'For a negated action use I could choose to not ACTION or I could not choose to not ACTION; '
+                'non-action alone is not inability. '
+                'Keep competing goals and contradictions; no unique actual motive is established.')
         actual = [*messages, dict(role='system', content=policy)]
         self.requests.append(dict(messages=actual, parameters=kwargs))
         return self.backend.complete_json(actual, **kwargs)
@@ -85,8 +94,18 @@ def prepare_retained_reader(workspace, query, *, source_ids, observer=None,
         backend=relay, max_chars=max_chars, reader_analysis=True, compact_context=compact_context)
 
 
+def prepare_retained_explanations(workspace, query, *, source_ids, observer=None,
+                                  backend=None, max_chars=64000, compact_context=False):
+    """Existing C02 under anchored interpretation assumptions, never source-truth promotion."""
+    relay = _ReaderTranslationBackend(backend, explanation_analysis=True) if backend is not None else None
+    return _prepare_retained(workspace, query, source_ids=source_ids, observer=observer,
+        backend=relay, max_chars=max_chars, reader_analysis=True, compact_context=compact_context,
+        explanation_analysis=True)
+
+
 def _prepare_retained(workspace, query, *, source_ids, observer=None, backend=None,
-                      responsibility_premises=(), max_chars=64000, reader_analysis=False, compact_context=False):
+                      responsibility_premises=(), max_chars=64000, reader_analysis=False, compact_context=False,
+                      explanation_analysis=False):
     """One source-local identity domain, ordinary query, real retained operations.
 
     Explicit normative premises remain conditional caller rules until G01. Source
@@ -95,6 +114,7 @@ def _prepare_retained(workspace, query, *, source_ids, observer=None, backend=No
     if (not isinstance(query, str) or not query.strip() or len(query) > 8000
             or not isinstance(source_ids, tuple) or type(max_chars) is not int
             or not 512 <= max_chars <= 64000 or type(compact_context) is not bool
+            or type(explanation_analysis) is not bool or explanation_analysis and not reader_analysis
             or not isinstance(responsibility_premises, tuple)
             or not all(isinstance(p, NarrativePremise) for p in responsibility_premises)):
         raise ValueError('bounded ordinary query, sources, context and explicit rule contract required')
@@ -158,7 +178,23 @@ def _prepare_retained(workspace, query, *, source_ids, observer=None, backend=No
     if remainder and not assumptions:
         raise ValueError('unparsed source may qualify the expressions; explicit semantic branch required')
     derived = '\n'.join(b['derived_line'] for b in bindings)
-    if reader_analysis:
+    if explanation_analysis:
+        from types import SimpleNamespace
+        from .workspace import CognitionWorkspace
+        from .action_explanations import prepare_explanations
+        derived_workspace = CognitionWorkspace()
+        derived_workspace.put_source('derived-action-source', derived)
+        native = prepare_explanations(derived_workspace, query, source_id='derived-action-source')
+        native_messages = native.messages(derived_workspace, max_chars=64000 if compact_context else max_chars)
+        native_payload = native.payload
+        payload = dict(query=query, sources=[dict(source_id='derived-action-source',version=1,text=derived)],
+            checked_action_explanations=native_payload)
+        prepared = SimpleNamespace(context=None,
+            messages=[native_messages[0],dict(role='user',content=json.dumps(payload,ensure_ascii=False,sort_keys=True))],
+            preparation_receipt=dict(method='EXISTING_C02_UNDER_DERIVED_REPRESENTATION',
+                specialized_cognition_treatment=bool(native_payload.get('explanations')),
+                checked_explanation_count=len(native_payload.get('explanations',[])),provider_calls=0))
+    elif reader_analysis:
         from hcl.v1.long_source_question import prepare_reader_cognition
         prepared = prepare_reader_cognition(query, derived, max_context_chars=64000 if compact_context else max_chars)
     else:

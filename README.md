@@ -4,7 +4,7 @@
 
 [LLM-directed understanding and required HCL execution](docs/HCL_LLM_ROUTING_EXECUTION.md)
 lets the model interpret the request, select useful existing HCL operations and
-construct their arguments. One selected B01/C01/C03 operation can reuse anchored
+construct their arguments. One selected B01/C01/C02/C03 operation can reuse anchored
 interpretations from that same first planning response through the existing
 conditional tools, with no additional provider phase or native parser change.
 A final model answer requires an actual native HCL result, including an honest
@@ -14,6 +14,13 @@ checked treatment remain separate from invocation. Source authority, privacy and
 budget guards stay in force. New adapter expansion is deferred while the complete
 usable flow is verified. This does not require HCL to independently solve language
 understanding, and it authorizes no model spending.
+
+[C02 planned structured input](docs/HCL_C02_PLANNED_INPUT.md) now reuses the same
+source-anchored conditional bridge for the unchanged action-explanation tool.
+Action-time conditions, competing goals, source revisions and original-only
+citations remain explicit. This closes a demonstrated input-integration gap;
+remaining breadth work pauses for end-to-end readiness and a separately
+authorized live delivery check. No provider call or native parser change.
 
 ## Current validation policy — owner amendment 2026-10-01
 
@@ -29,7 +36,7 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: LLM_ROUTED_NATIVE_HCL_FULL_FLOW_VERIFICATION**
+**NEXT_READY: END_TO_END_READINESS_AND_LIVE_PREREQUISITES**
 
 [DRC008 source-first closure](reports/HCL_DRC008_SOURCE_FIRST_CLOSURE.md): INCONCLUSIVE,
 provisional paired judgeBase/H6/6,0gains/harms,checked treatment0/6;quotes/formatallpass.

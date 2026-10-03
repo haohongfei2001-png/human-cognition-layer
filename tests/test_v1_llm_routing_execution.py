@@ -163,7 +163,7 @@ class PlannedSemanticInputTests(unittest.TestCase):
         self.assertEqual(result['hcl_execution']['native_results'],1)
 
     def test_invalid_extra_family_multiple_inputs_and_structural_bounds_stop_before_native(self):
-        invalid=[plan(translated('C02')),plan(translated('B02')),plan(translated(),translated('B01')),
+        invalid=[plan(translated('D01')),plan(translated('B02')),plan(translated(),translated('B01')),
                  plan(translated(rows=[])),plan(translated(rows=proposals()*5))]
         for field,value in (('source_id','other'),('kind','event_wrong'),('content',{'canonical_statement':'Dana: I believe X.','authority':'SOURCE_REPORT'}),('start',True),('quote','x'*4001)):
             rows=proposals();rows[0][field]=value;invalid.append(plan(translated(rows=rows)))

@@ -1,0 +1,95 @@
+{
+  "actual_motive": "NOT_ESTABLISHED",
+  "additional_provider_phases": 0,
+  "all_historical_pin_values_and_bytes": "UNCHANGED_FROM_ADOPTED_BASE",
+  "authorized_additional_calls": 0,
+  "base_commit": "e47275f32bdc43268b223ee8d7eba03831e09ff0",
+  "candidate_list_reorders_source_history": false,
+  "competing_goals_and_negated_choice": "PASS_CONDITIONAL_NOT_UNIQUE_MOTIVE",
+  "conditional_input_families": [
+    "B01",
+    "C01",
+    "C02",
+    "C03"
+  ],
+  "current_or_later_knowledge_backfilled": false,
+  "efficacy_established": false,
+  "focused_status": "PASS",
+  "focused_tests": 70,
+  "full_combination_overflow": "STOP_BEFORE_ANSWER_NO_DROPPED_SOURCE_OR_CANDIDATES",
+  "gaskell_irie_certified_replays": "PASS_CACHED_AND_FROZEN_NO_NETWORK",
+  "historical_answers_rescored": false,
+  "historical_pins": 156,
+  "historical_regression_tests": 176,
+  "independent_review": "NO_RUNTIME_BLOCKER_FOUND_FINAL_COMMIT_SEAL_PENDING",
+  "inherited_pins": 151,
+  "local_v1_status": "PASS",
+  "local_v1_tests": 1478,
+  "log_sha256": {
+    "cached_replays": "5fa9c3607ad9299f6e78dd9015ed19f8556f01399a0dbd66a18bc61e2e9c54da",
+    "focused": "d2d57d8db3858bfb74e884c71fdce53a44c54e6878cda368a0b56504eda57195",
+    "offline_workflows": "82eb826e7cf501d8da2c6586ee726016f9d4c638c66d6980cfe9c4c1bced43aa",
+    "v1": "19527b7dcf9d9cc48f5343110753db5e7e5333c917460875c7b8f4712fd94236"
+  },
+  "maximum_candidates": 24,
+  "maximum_request_bytes": 36000,
+  "maximum_sources_per_translated_operation": 1,
+  "maximum_translated_operations": 1,
+  "metering_encryption_tests": 21,
+  "model_interpretation_quality_verified": false,
+  "native_action_agency_semantic_checker_and_transport_bytes": "UNCHANGED",
+  "native_c02_maximum_rows": 20,
+  "new_c02_test_methods": 18,
+  "offline_workflow_commands": 91,
+  "offline_workflow_status": "PASS_EXCEPT_HOSTED_ONLY_CERTIFICATION_ENVELOPE_NOT_RUN_LOCALLY",
+  "planning_request_hash_scope": "CAPTURED_ACTUAL_SOURCE_INGESTION_SNAPSHOT_INCLUDED_IN_WITNESS",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "remaining_local_source_gates": {
+    "clifford": "NOT_RERUN_PINNED_LOCAL_CACHE_UNAVAILABLE",
+    "gregory": "NOT_RERUN_PINNED_LOCAL_CACHE_UNAVAILABLE",
+    "new_fetch_performed": false,
+    "prior_fetch_cancellation_preserved": true
+  },
+  "remaining_scope": "PAUSE_BREADTH_CONSOLIDATE_END_TO_END_READINESS_AND_LIVE_PREREQUISITES",
+  "remote_publication": "NOT_STARTED_AT_LOCAL_CHECKPOINT",
+  "request_measurements": {
+    "original": {
+      "answer": {
+        "bytes": 23949,
+        "conservative_reservation_usd": "0.09849576",
+        "sha256": "1267ca0d58fd70ecfd5b0e1eec9ecad3ac1a0d8102df6c2cf920522392148f52"
+      },
+      "planning": {
+        "bytes": 29390,
+        "conservative_reservation_usd": "0.09663984",
+        "sha256": "3989ef8cba5e1bede2dd3b5cd5ed8122f67355b93413abd1aaca9e4eb585ccc7"
+      }
+    },
+    "revised_ignorance": {
+      "answer": {
+        "bytes": 24037,
+        "conservative_reservation_usd": "0.09872808",
+        "sha256": "66511f6833f80b27207dccc44d72f89337626652cc4eff93245adb0cd59968f8"
+      },
+      "planning": {
+        "bytes": 29398,
+        "conservative_reservation_usd": "0.09666096",
+        "sha256": "5f1dab3f46097a62c2ac380f497acfeb3b48ac6202d3d310795e2195f2dfbb77"
+      }
+    }
+  },
+  "required_hosted_gates": "ALL_SEVEN_EXACT_HEAD_AND_MAIN_INCLUDING_ACTUAL_CLIFFORD_GREGORY_PUBLISHER_BYTES",
+  "runtime_sha256": "38ee8c979847ccf68f32747d5485d0494274fdb65165d1bde7fe7a08fc4dc9a4",
+  "schedule_reservations_usd": {
+    "original": "0.19513560",
+    "revised_ignorance": "0.19538904"
+  },
+  "schema": "hcl-c02-planned-input-local-validation-v1",
+  "scripted_full_flow": "PASS_SCRIPTED_C02_FULL_FLOW_AND_REVISION_NOT_MODEL_QUALITY",
+  "source_boundary_tests": 9,
+  "source_only_citations": "PASS_DERIVED_CITATIONS_REJECTED_RAW_UNCHANGED",
+  "source_revision_and_candidate_or_projection_withdrawal": "PASS",
+  "token_defaults_changed": false,
+  "witness_sha256": "913d8e4bc04b34bececaaee2e33866efbbb607a1ba5ab2e27782690863842ee3"
+}
