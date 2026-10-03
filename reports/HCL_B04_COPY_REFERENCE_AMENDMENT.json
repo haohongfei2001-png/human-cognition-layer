@@ -1,0 +1,21 @@
+{
+  "schema": "hcl-b04-copy-reference-amendment-v1",
+  "previous_hcl_runtime_sha256": "f65ebbe7d8e0ee0de54c6c81dc838af112558da4c086b24eeaa08718d660e327",
+  "amended_hcl_runtime_sha256": "e7154168e3765fbdd248845bce9dc08fcd2c4960950e369100a05f73ed8a7174",
+  "changed_runtime_files": [
+    "hcl/cognition/report_provenance.py"
+  ],
+  "reason": "RESOLVE_LITERAL_LAST_NAMED_SPEECH_BEFORE_MENTAL_FILTERING",
+  "semantic_preparations_per_operation": 1,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "authorized_additional_calls": 0,
+  "adapter_added": false,
+  "grammar_expanded": false,
+  "source_or_report_budget_changed": false,
+  "scope_cue_classification_changed": false,
+  "known_copy_cue_scope_gap": "FENCED_AND_NARRATOR_HYPOTHETICAL_A02_CLASSIFICATION_DEFERRED",
+  "historical_answers_rescored": false,
+  "model_selection_efficacy_verified": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

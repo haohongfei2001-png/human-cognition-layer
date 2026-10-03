@@ -1,0 +1,42 @@
+{
+  "schema": "hcl-retained-entry-scope-blockers-v1",
+  "runtime_sha256": "e7154168e3765fbdd248845bce9dc08fcd2c4960950e369100a05f73ed8a7174",
+  "purpose": "AUTHORED_PROVIDER_FREE_DIAGNOSTIC_NO_MODEL_EFFICACY",
+  "provider_calls": 0,
+  "adapter_admission": "BLOCKED_PENDING_SHARED_SCOPE_REPAIR",
+  "fixed_by_current_literal_reference_repair": false,
+  "cases": [
+    {
+      "case_id": "fenced_copy_cue",
+      "source": "Noor said, \"Mira believes the gate is open.\"\nKai said, \"Mira believes the gate is open.\"\n```example\nNarrator: Kai's last statement repeats Noor's last statement.\n```",
+      "query": "What does Mira believe?",
+      "expected_family_count": 2,
+      "observed_family_count": 1,
+      "copy_cue_a02_scopes": [
+        "SOURCE_REPORT"
+      ],
+      "status": "UNRESOLVED_FAIL"
+    },
+    {
+      "case_id": "narrator_hypothetical_copy_cue",
+      "source": "Noor said, \"Mira believes the gate is open.\"\nKai said, \"Mira believes the gate is open.\"\nNarrator: In a hypothetical scene:\nNarrator: Kai's last statement repeats Noor's last statement.",
+      "query": "What does Mira believe?",
+      "expected_family_count": 2,
+      "observed_family_count": 1,
+      "copy_cue_a02_scopes": [
+        "SOURCE_REPORT"
+      ],
+      "status": "UNRESOLVED_FAIL"
+    },
+    {
+      "case_id": "fenced_c04_feeling",
+      "source": "```example\nMira said, \"I feel relieved about the delay.\"\n```",
+      "query": "How does Mira appraise the delay?",
+      "expected_reported_emotions": [],
+      "observed_reported_emotions": [
+        "relieved"
+      ],
+      "status": "UNRESOLVED_FAIL"
+    }
+  ]
+}

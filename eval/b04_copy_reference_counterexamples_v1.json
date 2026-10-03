@@ -1,0 +1,79 @@
+{
+  "schema": "hcl-b04-literal-last-statement-counterexamples-v1",
+  "runtime_commit": "7d1f42c7cd94e0b9184c0ed4654fd08e3cc80214",
+  "runtime_sha256": "f65ebbe7d8e0ee0de54c6c81dc838af112558da4c086b24eeaa08718d660e327",
+  "purpose": "AUTHORED_ENGINEERING_REFERENCE_CONTRACT_NOT_MODEL_EFFICACY",
+  "provider_calls": 0,
+  "cases": [
+    {
+      "case_id": "direct_copy",
+      "source": "Noor said, \"Mira believes the gate is open.\"\nKai said, \"Mira believes the gate is open.\"\nNarrator: Kai's last statement repeats Noor's last statement.",
+      "query": "What does Mira believe?",
+      "expected_contract": "ONE_REPORTED_FAMILY",
+      "baseline_observation": {
+        "status": "PREPARED",
+        "report_occurrences": 2,
+        "families": 1,
+        "relatedness": [
+          "REPORTED_SHARED_ORIGIN"
+        ]
+      }
+    },
+    {
+      "case_id": "intervening_origin_nonmental",
+      "source": "Noor said, \"Mira believes the gate is open.\"\nKai said, \"Mira believes the gate is open.\"\nNoor said, \"I prefer tea.\"\nNarrator: Kai's last statement repeats Noor's last statement.",
+      "query": "What does Mira believe?",
+      "expected_contract": "REJECT_UNRESOLVED_LAST_STATEMENT",
+      "baseline_observation": {
+        "status": "PREPARED",
+        "report_occurrences": 2,
+        "families": 1,
+        "relatedness": [
+          "REPORTED_SHARED_ORIGIN"
+        ]
+      }
+    },
+    {
+      "case_id": "intervening_copier_nonmental",
+      "source": "Noor said, \"Mira believes the gate is open.\"\nKai said, \"Mira believes the gate is open.\"\nKai said, \"I prefer tea.\"\nNarrator: Kai's last statement repeats Noor's last statement.",
+      "query": "What does Mira believe?",
+      "expected_contract": "REJECT_UNRESOLVED_LAST_STATEMENT",
+      "baseline_observation": {
+        "status": "PREPARED",
+        "report_occurrences": 2,
+        "families": 1,
+        "relatedness": [
+          "REPORTED_SHARED_ORIGIN"
+        ]
+      }
+    },
+    {
+      "case_id": "intervening_origin_unparsed_modal",
+      "source": "Noor said, \"Mira believes the gate is open.\"\nKai said, \"Mira believes the gate is open.\"\nNoor said, \"I believe Mira believes Kai believes Lena believes Sana believes the gate is open.\"\nNarrator: Kai's last statement repeats Noor's last statement.",
+      "query": "What does Mira believe?",
+      "expected_contract": "REJECT_UNRESOLVED_LAST_STATEMENT",
+      "baseline_observation": {
+        "status": "PREPARED",
+        "report_occurrences": 2,
+        "families": 1,
+        "relatedness": [
+          "REPORTED_SHARED_ORIGIN"
+        ]
+      }
+    },
+    {
+      "case_id": "intervening_other_actor",
+      "source": "Noor said, \"Mira believes the gate is open.\"\nKai said, \"Mira believes the gate is open.\"\nLena said, \"I prefer tea.\"\nNarrator: Kai's last statement repeats Noor's last statement.",
+      "query": "What does Mira believe?",
+      "expected_contract": "ONE_REPORTED_FAMILY",
+      "baseline_observation": {
+        "status": "PREPARED",
+        "report_occurrences": 2,
+        "families": 1,
+        "relatedness": [
+          "REPORTED_SHARED_ORIGIN"
+        ]
+      }
+    }
+  ]
+}

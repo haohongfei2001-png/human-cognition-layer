@@ -142,6 +142,14 @@ whitespace-only mode and raw rejected output remain explicit. Provider-free test
 and historical pins cover the narrow change; no model/efficacy claim or new calls.
 Campaign stays eleven calls/USD0.69163776 full holds, all sub-runs closed.
 
+[B04 literal copy-reference repair](docs/HCL_B04_COPY_REFERENCE_REPAIR.md)
+refuses falling back to an older mental report when the latest named utterance is
+nonmental/unsupported, with one shared semantic preparation and unchanged budgets.
+No adapter added. [Next-ready inventory](docs/HCL_RETAINED_ENTRY_NEXT_READY.md)
+records the remaining A02 fenced/hypothetical scope prerequisite and B04's42k native
+message gate; C04 is a conditional next candidate after scope repair. Historical
+paid failures and eleven-call/USD0.69163776 accounting remain unchanged.
+
 ## Owner architecture amendment — 2026-10-02
 
 Every HCL-arm and ordinary product input must enter HCL orchestration. Internal
