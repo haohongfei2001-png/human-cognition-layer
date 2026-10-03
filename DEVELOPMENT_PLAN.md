@@ -28,6 +28,13 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: UNIVERSAL_HCL_ENTRY_RETAINED_CAPABILITY_INTEGRATION**
 
+[B04 exact copy-cue consumption](docs/HCL_B04_SCOPE_CONSUMER.md) requires the
+eligible A02 event at the same source/revision/full-line occurrence and makes the
+relation depend on that cue and both antecedents. The two frozen embedded-cue
+failures now leave two report families; independent support remains unknown.
+Latest-utterance refusal, one semantic preparation and all budgets remain intact.
+No adapter, transport expansion, provider call or efficacy claim is added.
+
 [A02 structural scope isolation](docs/HCL_A02_STRUCTURAL_SCOPE.md) shares one
 offset-preserving containment/narration view across existing candidate paths.
 Embedded formatting remains ambiguous; explicit source-frame admission, B04

@@ -11,7 +11,7 @@ from unittest.mock import patch
 from hcl.cognition import CognitionWorkspace
 from hcl.cognition import semantic
 from scripts.development_narrator_actual_amendment import PREVIOUS_SEMANTIC_SHA
-from scripts.development_a02_structural_scope_amendment import validate_current
+from scripts.development_b04_scope_consumer_amendment import validate_current
 from scripts.serious_eval_contract import runtime_digest
 
 BASELINE = '97b9bf187360860327ab573bae2217401b779ff0'

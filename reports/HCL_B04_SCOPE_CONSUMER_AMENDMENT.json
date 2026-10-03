@@ -1,0 +1,25 @@
+{
+  "schema": "hcl-b04-scope-consumer-amendment-v1",
+  "previous_hcl_runtime_sha256": "f02e86a390ff4935851e9da28fad127d93379f2631a768072e2f7d4103c81c57",
+  "amended_hcl_runtime_sha256": "430d756b75eb808ba926275a1e93f08f8ffaab899053d6ad684d677ce4e18a71",
+  "changed_runtime_files": [
+    "hcl/cognition/report_provenance.py"
+  ],
+  "reason": "EXACT_ELIGIBLE_A02_COPY_CUE_OCCURRENCE_AND_CONJUNCTIVE_DEPENDENCIES",
+  "semantic_preparations_per_operation": 1,
+  "source_revision_and_full_line_span_required": true,
+  "bounded_literal_narrator_source_report_required": true,
+  "cue_and_both_antecedents_required": true,
+  "repeated_cue_occurrences_have_distinct_relation_ids": true,
+  "unsupported_cue_raw_fallback": false,
+  "latest_utterance_behavior_changed": false,
+  "candidate_or_copy_grammar_changed": false,
+  "source_or_transport_budget_changed": false,
+  "adapter_added": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "authorized_additional_calls": 0,
+  "historical_answers_rescored": false,
+  "model_selection_efficacy_verified": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

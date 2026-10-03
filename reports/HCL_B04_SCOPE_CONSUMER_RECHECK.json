@@ -1,0 +1,41 @@
+{
+  "schema": "hcl-b04-scope-consumer-recheck-v1",
+  "runtime_sha256": "430d756b75eb808ba926275a1e93f08f8ffaab899053d6ad684d677ce4e18a71",
+  "historical_report": "reports/HCL_RETAINED_ENTRY_SCOPE_BLOCKERS.json",
+  "historical_report_unchanged": true,
+  "cases": [
+    {
+      "case_id": "fenced_copy_cue",
+      "current_family_count": 2,
+      "expected_family_count": 2,
+      "status": "PASS",
+      "independent_support_count": null,
+      "cue_diagnostics": [
+        {
+          "end": 161,
+          "reason": "COPY_CUE_WITHOUT_ELIGIBLE_NARRATOR_EVENT",
+          "source_id": "scene",
+          "start": 100
+        }
+      ]
+    },
+    {
+      "case_id": "narrator_hypothetical_copy_cue",
+      "current_family_count": 2,
+      "expected_family_count": 2,
+      "status": "PASS",
+      "independent_support_count": null,
+      "cue_diagnostics": [
+        {
+          "end": 185,
+          "reason": "COPY_CUE_WITHOUT_ELIGIBLE_NARRATOR_EVENT",
+          "source_id": "scene",
+          "start": 124
+        }
+      ]
+    }
+  ],
+  "provider_calls": 0,
+  "efficacy_established": false,
+  "remaining_integration": "COMPLETE_RETAINED_STATE_TRANSPORT_AND_ADAPTER"
+}
