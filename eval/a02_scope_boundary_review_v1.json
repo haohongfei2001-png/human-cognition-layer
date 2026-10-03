@@ -1,0 +1,155 @@
+{
+  "schema": "hcl-a02-scope-boundary-review-v1",
+  "base_proposal_sha256": "d17355a0da81507560660ab24e01c072c1758ff30c5b5920ff762876c627e16a",
+  "baseline_commit": "7d1f42c7cd94e0b9184c0ed4654fd08e3cc80214",
+  "purpose": "ADDITIONAL_ENGINEERING_REVIEW_NOT_SEMANTIC_OR_MODEL_GOLD",
+  "provider_calls": 0,
+  "parser_edits": 0,
+  "cases": [
+    {
+      "case_id": "nested_direction",
+      "source": "[Outer direction.\n[Inner direction.]\nNoor said, \"I believe the gate is open.\"\n]",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_under_proposed_structural_contract": "CONDITIONAL_OR_EMBEDDED",
+      "baseline_observation": [
+        {
+          "start": 37,
+          "end": 77,
+          "assertion_scope": "SOURCE_REPORT"
+        }
+      ],
+      "baseline_status": "FAIL"
+    },
+    {
+      "case_id": "unclosed_quote_blocks_narrator_resumption",
+      "source": "\u201cQuoted passage without a closing mark.\nNarrator: In reality.\nNoor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_under_proposed_structural_contract": "CONDITIONAL_OR_EMBEDDED",
+      "baseline_observation": [
+        {
+          "start": 62,
+          "end": 102,
+          "assertion_scope": "CONDITIONAL_OR_EMBEDDED"
+        }
+      ],
+      "baseline_status": "PASS"
+    },
+    {
+      "case_id": "quoted_ticks_do_not_close_example_fence",
+      "source": "```example\nMira said, \"This literal ``` closes nothing.\"\nNoor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_under_proposed_structural_contract": "CONDITIONAL_OR_EMBEDDED",
+      "baseline_observation": [
+        {
+          "start": 57,
+          "end": 97,
+          "assertion_scope": "SOURCE_REPORT"
+        }
+      ],
+      "baseline_status": "FAIL"
+    },
+    {
+      "case_id": "inert_bracket_in_closed_fence_does_not_block_real_resumption",
+      "source": "The following scene is hypothetical.\n```example\n[ literal text\n```\nIn reality.\nNoor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_under_proposed_structural_contract": "SOURCE_REPORT",
+      "baseline_observation": [
+        {
+          "start": 79,
+          "end": 119,
+          "assertion_scope": "CONDITIONAL_OR_EMBEDDED"
+        }
+      ],
+      "baseline_status": "FAIL"
+    },
+    {
+      "case_id": "quoted_narrator_wording_does_not_resume",
+      "source": "The following scene is hypothetical.\nNarrator: The sign said \"In reality.\"\nNoor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_under_proposed_structural_contract": "CONDITIONAL_OR_EMBEDDED",
+      "baseline_observation": [
+        {
+          "start": 75,
+          "end": 115,
+          "assertion_scope": "CONDITIONAL_OR_EMBEDDED"
+        }
+      ],
+      "baseline_status": "PASS"
+    },
+    {
+      "case_id": "stray_closer_cannot_cancel_later_opener",
+      "source": "The following scene is hypothetical.\n]\n[Stage direction.\nIn reality.\nNoor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_under_proposed_structural_contract": "CONDITIONAL_OR_EMBEDDED",
+      "baseline_observation": [
+        {
+          "start": 69,
+          "end": 109,
+          "assertion_scope": "SOURCE_REPORT"
+        }
+      ],
+      "baseline_status": "FAIL"
+    },
+    {
+      "case_id": "inert_unmatched_quote_in_closed_fence",
+      "source": "```example\n\"an unclosed quote in example\n```\nNoor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_under_proposed_structural_contract": "SOURCE_REPORT",
+      "baseline_observation": [
+        {
+          "start": 45,
+          "end": 85,
+          "assertion_scope": "CONDITIONAL_OR_EMBEDDED"
+        }
+      ],
+      "baseline_status": "FAIL"
+    },
+    {
+      "case_id": "actual_speech_literal_bracket",
+      "source": "Mira said, \"I wrote an opening bracket: [.\"\nNoor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_under_proposed_structural_contract": "SOURCE_REPORT",
+      "baseline_observation": [
+        {
+          "start": 44,
+          "end": 84,
+          "assertion_scope": "SOURCE_REPORT"
+        }
+      ],
+      "baseline_status": "PASS"
+    },
+    {
+      "case_id": "actual_speech_literal_ticks",
+      "source": "Mira said, \"I wrote three backticks: ```.\"\nNoor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_under_proposed_structural_contract": "SOURCE_REPORT",
+      "baseline_observation": [
+        {
+          "start": 43,
+          "end": 83,
+          "assertion_scope": "SOURCE_REPORT"
+        }
+      ],
+      "baseline_status": "PASS"
+    }
+  ],
+  "decisions_required": [
+    {
+      "topic": "fence_length",
+      "boundary": "Four-backtick opener versus three-backtick candidate closer needs an explicit supported grammar; do not assume parity is sufficient."
+    },
+    {
+      "topic": "line_bounded_turn_recovery",
+      "boundary": "Whether an unmatched quotation in a colon-labelled actor turn carries into the next turn is not yet specified."
+    },
+    {
+      "topic": "literal_quote_character",
+      "boundary": "An inch mark or literal quote symbol in prose cannot be semantically distinguished by a raw quote counter without a declared syntax policy."
+    },
+    {
+      "topic": "source_frame_admission",
+      "boundary": "A caller-designated actual transcript formatted in a fence or actual stage directions are not intrinsically hypothetical. Structural E means embedded/unresolved for this path, not that speech never occurred."
+    }
+  ],
+  "interpretation_limit": "Containment isolation does not establish actual-world truth or semantic adequacy; original source stays available unchanged."
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "hcl-a02-existing-retained-scope-recheck-v1",
+  "runtime_sha256": "f02e86a390ff4935851e9da28fad127d93379f2631a768072e2f7d4103c81c57",
+  "original_report": "reports/HCL_RETAINED_ENTRY_SCOPE_BLOCKERS.json",
+  "original_report_unchanged": true,
+  "observations": [
+    {
+      "case_id": "fenced_copy_cue",
+      "a02_scope_status": "PASS_EMBEDDED",
+      "copy_cue_scopes": [
+        "CONDITIONAL_OR_EMBEDDED"
+      ],
+      "family_count": 1,
+      "expected_family_count": 2,
+      "consumer_status": "UNRESOLVED_FAIL_B04_CUE_CONSUMER_UNCHANGED"
+    },
+    {
+      "case_id": "narrator_hypothetical_copy_cue",
+      "a02_scope_status": "PASS_EMBEDDED",
+      "copy_cue_scopes": [
+        "CONDITIONAL_OR_EMBEDDED"
+      ],
+      "family_count": 1,
+      "expected_family_count": 2,
+      "consumer_status": "UNRESOLVED_FAIL_B04_CUE_CONSUMER_UNCHANGED"
+    },
+    {
+      "case_id": "fenced_c04_feeling",
+      "reported_emotions": [],
+      "status": "PASS_NO_UNCONDITIONAL_FEELING_REPORT"
+    }
+  ],
+  "provider_calls": 0,
+  "adapter_admission": "B04_CONSUMER_AND_COMPLETE_TRANSPORT_GATES_REMAIN",
+  "efficacy_established": false
+}

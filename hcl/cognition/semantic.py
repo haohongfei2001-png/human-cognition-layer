@@ -122,23 +122,114 @@ def _paragraph_narrator_report_candidates(source, reporter):
     return reports
 
 
-def _narrator_scene_cues(narration_context):
+def _narration_context(text, matches):
+    """Offset-preserving syntax isolation, not a real/hypothetical-world test.
+
+    Quotes, nested square brackets and line-bounded backtick fences are
+    containers. Their contents cannot change outer narration. Unclosed
+    containers remain embedded through EOF; an unmatched closer has no debt.
+    Existing colon/script actor turns are opaque, while an unembedded Narrator
+    colon label exposes its body to the existing narration-cue grammar.
+    """
+    context, embedded = list(text), bytearray(len(text))
+    turns = {m.start(): m for m in matches if m.re is not _SPEECH}
+    fence_lines = {m.start(): m for m in re.finditer(
+        r'(?m)^[ \t]*(`{3,})([^\r\n]*)(?:\r?\n|$)', text)}
+
+    def mask(start, end):
+        for pos in range(start, end):
+            context[pos] = '\n' if text[pos] == '\n' else ' '
+            embedded[pos] = 1
+
+    index, brackets, fence = 0, 0, 0
+    closing = None
+    while index < len(text):
+        line = fence_lines.get(index)
+        if fence:
+            if line and len(line[1]) >= fence and not line[2].strip():
+                mask(index, line.end())
+                index, fence = line.end(), 0
+            else:
+                mask(index, index + 1)
+                index += 1
+            continue
+        char = text[index]
+        if closing is not None:
+            mask(index, index + 1)
+            if char == closing:
+                # A coordinated turn retains its outer conditional sentence.
+                following = index + 1
+                while following < len(text) and text[following].isspace():
+                    following += 1
+                new_sentence = following == len(text) or text[following].isupper()
+                if not brackets:
+                    context[index] = ('.' if index and text[index - 1] in '.!?'
+                        and new_sentence else char)
+                closing = None
+            index += 1
+            continue
+        if line and '`' not in line[2]:
+            fence = len(line[1])
+            mask(index, line.end())
+            index = line.end()
+            continue
+        if char in ('"', '\u201c'):
+            closing = '"' if char == '"' else '\u201d'
+            mask(index, index + 1)
+        elif char == '[':
+            brackets += 1
+            mask(index, index + 1)
+        elif char == ']':
+            brackets = max(0, brackets - 1)
+            mask(index, index + 1)
+        elif brackets:
+            mask(index, index + 1)
+        elif index in turns:
+            turn = turns[index]
+            start, end = turn.span('body')
+            if turn.re is _COLON and turn['speaker'] == 'Narrator':
+                # Remove only the label from the cue view, not source/anchors.
+                context[index:start] = ' ' * (start - index)
+            else:
+                mask(start, end)
+                if end > start:
+                    context[end - 1] = '.'
+                index = end
+                continue
+        index += 1
+    # Recognized speaker names are labels, not narrator scene declarations.
+    # Mask only the cue view: candidate identity/containment/anchors stay intact.
+    for match in matches:
+        start, end = match.span('speaker')
+        context[start:end] = ' ' * (end - start)
+    return ''.join(context), embedded
+
+
+def _narrator_scene_cues(narration_context, embedded):
     """Scene declarations/transitions must belong to the narration channel.
 
-    Speech bodies are already masked without changing offsets. Bracketed
-    directions and fenced examples likewise cannot change the outer scene.
+    Speech bodies and structural containers are already masked without changing
+    offsets. Contained delimiters cannot leak into this outer channel.
     """
     cues = []
-    for pattern, qualified in ((_SCENE_DECLARATION, True), (_ACTUAL_SCENE, False)):
-        for cue in pattern.finditer(narration_context):
-            before = narration_context[:cue.start()]
-            if before.count('[') > before.count(']') or before.count('```') % 2:
+    scene_prefix = re.compile(_SCENE_PREFIX.pattern, re.I | re.M)
+    for pattern, qualified in ((scene_prefix, True), (_SCENE_DECLARATION, True), (_ACTUAL_SCENE, False)):
+        position = 0
+        while (cue := pattern.search(narration_context, position)) is not None:
+            # A terminal period may also open the next cue, even when this
+            # match is rejected. Advance monotonically without consuming it.
+            position = cue.end() - 1
+            # Masking a container must not manufacture a cue by deleting a
+            # qualification within its words/punctuation. Its leading sentence
+            # boundary/whitespace may follow a closed container normally.
+            body = re.sub(r'^[.!?\n"”]?\s*', '', cue.group())
+            if any(embedded[cue.end() - len(body):cue.end()]):
                 continue
             cues.append((cue.end(), qualified))
     return sorted(cues)
 
 
-def _narrator_report_candidates(source, narration_context):
+def _narrator_report_candidates(source, narration_context, embedded):
     """Only complete standalone, named literal mental-report paragraphs.
 
     The reporter is the source channel, never the named subject or an inferred
@@ -148,21 +239,16 @@ def _narrator_report_candidates(source, narration_context):
     from .epistemic import _PREDICATE
     reporter = 'SourceNarrator@' + identity('source-reporter', source.source_id)[-16:]
     rows = []
-    cursor = quotes = opens = closes = brackets = fences = 0
+    cursor = 0
     suspended = False
-    actual_cues = [end for end, qualified in _narrator_scene_cues(narration_context)
-                   if not qualified]
+    scene_cues = _narrator_scene_cues(narration_context, embedded)
+    actual_cues = [end for end, qualified in scene_cues if not qualified]
     for block in re.finditer(r'(?m)^[^\r\n]+(?:\r?\n[^\r\n]+)*', source.text):
         quote = block.group()
         fragment = quote.strip()
-        prefix = source.text[cursor:block.start()]
+        prefix = narration_context[cursor:block.start()]
         resumed = [end for end in actual_cues if cursor < end <= block.start()]
         cursor = block.start()
-        quotes += prefix.count('"')
-        opens += prefix.count('\u201c')
-        closes += prefix.count('\u201d')
-        brackets += prefix.count('[') - prefix.count(']')
-        fences += prefix.count('```')
         suspended = suspended or bool(re.search(r'\b(hypothetical|imagined|counterfactual|pretended)\b', prefix, re.I))
         if resumed:
             # A narrator-level transition ends the earlier imagined scope, but
@@ -171,9 +257,11 @@ def _narrator_report_candidates(source, narration_context):
             # cannot speak for the narrator either. Original anchors stay intact.
             suspended = bool(re.search(r'\b(hypothetical|imagined|counterfactual|pretended)\b',
                 narration_context[resumed[-1]:block.start()], re.I))
+        preceding_cues = [qualified for end, qualified in scene_cues if end <= block.start()]
+        suspended = suspended or bool(preceding_cues and preceding_cues[-1])
         if (len(quote) > 4000 or not fragment.endswith(('.', '!', '?')) or
                 re.search(r'["\u201c\u201d\[\]_*]|\bI\b', fragment) or
-                quotes % 2 or opens > closes or brackets > 0 or fences % 2 or suspended):
+                embedded[block.start() + len(quote) - len(quote.lstrip())] or suspended):
             continue
         match = _PREDICATE.fullmatch(fragment.rstrip('.!?'))
         if (not match or match['subject'].lower() in _PRONOUNS or
@@ -200,43 +288,8 @@ def _local_candidates(source, *, dialogue_blocks=False, narrator_reports=False):
     rows, used, known_speakers = [], set(), []
     matches = sorted([*_SPEECH.finditer(source.text), *_COLON.finditer(source.text),
         *(_SCRIPT.finditer(source.text) if dialogue_blocks else ())], key=lambda m: m.start())
-    first_heading = _SCRIPT.search(source.text) if dialogue_blocks else None
-    suspended_scene = bool(first_heading and re.search(
-        r'\b(hypothetical|imagined|counterfactual|pretended)\b',
-        source.text[:first_heading.start()], re.I))
-    # Preserve offsets while excluding quoted content from narration cues. A
-    # character discussing a hypothetical scene does not make the report itself
-    # hypothetical. This is a bounded syntax guard, not a discourse interpreter.
-    context = list(source.text)
-    closing = None
-    for index, char in enumerate(source.text):
-        if closing is None and char in ('"', '\u201c'):
-            closing = '"' if char == '"' else '\u201d'
-            context[index] = ' '
-        elif closing is not None:
-            context[index] = '\n' if char == '\n' else ' '
-            if char == closing:
-                # A comma/coordinated turn continues its outer sentence. A
-                # closing quote alone must not erase If/hypothetical scope.
-                following = index + 1
-                while following < len(source.text) and source.text[following].isspace():
-                    following += 1
-                new_sentence = (following == len(source.text) or source.text[following].isupper())
-                context[index] = ('.' if index and source.text[index - 1] in '.!?'
-                    and new_sentence else char)
-                closing = None
-    for match in matches:
-        if match.re is _SPEECH or context[match.start()] != source.text[match.start()]:
-            continue
-        start, end = match.span('body')
-        for index in range(start, end):
-            context[index] = '\n' if source.text[index] == '\n' else ' '
-        if end > start:
-            # Colon/script syntax delimits a whole turn even without a period.
-            # Its spoken scene vocabulary cannot qualify the next speaker.
-            context[end - 1] = '.'
-    context = ''.join(context)
-    scene_cues = _narrator_scene_cues(context)
+    context, embedded = _narration_context(source.text, matches)
+    scene_cues = _narrator_scene_cues(context, embedded)
     previous = None
     for match in matches:
         if any(start <= match.start() < end for start, end in used):
@@ -253,12 +306,17 @@ def _local_candidates(source, *, dialogue_blocks=False, narrator_reports=False):
             narration_prefix = re.split(r'[.!?\n]', context[:match.start()])[-1]
         conditional = bool(re.search(r'\b(if|unless|might|could|would|not|never|denied|imagined|pretended)\b', narration_prefix, re.I))
         preceding_cues = [qualified for end, qualified in scene_cues if end <= match.start()]
-        conditional = (conditional or context[match.start()] != source.text[match.start()]
+        conditional = (conditional or embedded[match.start()]
             or bool(_SCENE_PREFIX.match(narration_prefix))
             or bool(preceding_cues and preceding_cues[-1]))
         # Embedded directions, enclosing quotations or missing dialogue text cannot
         # establish an unconditional expression merely through a speaker heading.
         if match.re is _SCRIPT:
+            resumed = max((end for end, qualified in scene_cues
+                           if not qualified and end <= match.start()), default=0)
+            suspended_scene = bool(re.search(
+                r'\b(hypothetical|imagined|counterfactual|pretended)\b',
+                context[resumed:match.start()], re.I))
             conditional = conditional or suspended_scene or bool(re.search(r'[\[\]“”"_]', body)) or not body
         named = speaker.lower() not in _PRONOUNS
         candidates = [speaker] if named else list(known_speakers)
@@ -292,7 +350,7 @@ def _local_candidates(source, *, dialogue_blocks=False, narrator_reports=False):
                 reference_binding='FIRST_PERSON_TO_EXPLICIT_SPEAKER' if named and not conditional else 'UNRESOLVED',
                 assertion_scope=event['assertion_scope'])))
     if narrator_reports:
-        reports = _narrator_report_candidates(source, context)
+        reports = _narrator_report_candidates(source, context, embedded)
         rows.extend(r for r in reports if not any(start <= r['start'] < end for start, end in used))
         rows.sort(key=lambda r: r['start'])
     return rows
