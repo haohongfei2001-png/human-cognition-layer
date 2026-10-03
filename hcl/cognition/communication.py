@@ -62,9 +62,39 @@ class CommunicationScene:
                 or not isinstance(source_id, str) or not source_id):
             raise ValueError('bounded authorized narrative required')
         self.source_id = source_id
+        self._original = narrative
         self.lines = tuple(narrative.splitlines())
         if len(self.lines) > 80 or any(not s.strip() or len(s) > 4000 for s in self.lines):
             raise ValueError('one unambiguous statement/access cue per bounded source line')
+
+    def _prefix_events(self, cutoff):
+        # Preserve B02's existing per-line strip representation, but resolve A02
+        # scope once on the selected prefix. Map each whole line back to its
+        # original occurrence; neither duplicate text nor future lines can lend
+        # another occurrence authority.
+        texts, spans, offsets = [], [], []
+        original_start = canonical_start = 0
+        for original, raw in zip(self.lines[:cutoff], self._original.splitlines(keepends=True)):
+            text = original.strip()
+            start = original_start + len(original) - len(original.lstrip())
+            end = start + len(text)
+            if self._original[start:end] != text:
+                raise ValueError('communication source occurrence mismatch')
+            texts.append(text)
+            spans.append((start, end))
+            offsets.append(canonical_start)
+            original_start += len(raw)
+            canonical_start += len(text) + 1
+        source = AuthorizedText(self.source_id, '\n'.join(texts))
+        candidates = _local_candidates(source) if texts else ()
+        result = []
+        for text, offset, span in zip(texts, offsets, spans):
+            events = [p for p in candidates if p['kind'] == 'event'
+                and p['source_id'] == self.source_id and p['start'] == offset and p['quote'] == text]
+            if len(events) != 1 or self._original[span[0]:span[1]] != events[0]['quote']:
+                raise ValueError('unsupported or ambiguous communication source; no inferred audience')
+            result.append((events[0]['content'], span))
+        return result
 
     def view(self, actor, *, through_line=None):
         if not isinstance(actor, str) or not re.fullmatch(_NAME, actor) or actor.lower() in _PRONOUNS:
@@ -72,16 +102,23 @@ class CommunicationScene:
         cutoff = len(self.lines) if through_line is None else through_line
         if type(cutoff) is not int or not 0 <= cutoff <= len(self.lines):
             raise ValueError('valid source-line snapshot required')
+        prefix_events = self._prefix_events(cutoff)
         statements, last, all_actors = [], {}, {actor}
         for number, original in enumerate(self.lines[:cutoff], 1):
             text = original.strip()
+            event, source_span = prefix_events[number - 1]
+            source_report = event['assertion_scope'] == 'SOURCE_REPORT'
             cue = _RECEIPT.fullmatch(text) or _AVAILABLE.fullmatch(text) or _SENT.fullmatch(text)
             if cue:
+                if not source_report or event['speaker_surface'] != 'Narrator':
+                    raise ValueError('access cue requires an actual narrator source occurrence')
                 row = cue.groupdict()
                 speaker = row.get('speaker')
                 statement = last.get(speaker) if speaker else (statements[-1] if statements else None)
                 if statement is None or (speaker is None and statement['line'] != number - 1):
                     raise ValueError('access cue lacks an unambiguous preceding statement')
+                if not statement['source_report']:
+                    raise ValueError('access target requires an actual source occurrence')
                 actors = tuple(row.get('actors', '').split(' and ')) if row.get('actors') else ()
                 if len(set(actors)) != len(actors) or any(a.lower() in _PRONOUNS for a in actors):
                     raise ValueError('explicit distinct access recipients required')
@@ -96,11 +133,6 @@ class CommunicationScene:
                 statement['proofs'].append(dict(source_line=number, quote=original,
                     actors=actors, kind=kind, source_kind='EXPLICIT_NARRATOR_REPORT'))
                 continue
-            candidates = _local_candidates(AuthorizedText(self.source_id, text))
-            events = [p for p in candidates if p['kind'] == 'event']
-            if len(events) != 1 or events[0]['quote'] != text:
-                raise ValueError('unsupported or ambiguous communication source; no inferred audience')
-            event = events[0]['content']
             speaker = event['speaker_surface']
             narrator_record = speaker == 'Narrator' and text.startswith('Narrator:')
             # Reader narration remains unavailable unless a separate explicit
@@ -108,13 +140,15 @@ class CommunicationScene:
             # to generic narrator records and thereby evade access validation.
             if narrator_record and not _STATEMENT_REPORT.fullmatch(text) and re.search(r'\b(heard|hear|read|missed|sent|statement|available)\b', text, re.I):
                 raise ValueError('unsupported or ambiguous narrator access cue')
-            if (event['assertion_scope'] != 'SOURCE_REPORT' or
-                    (not narrator_record and event['speaker_candidates'] != [speaker])
+            if ((not narrator_record and event['speaker_candidates'] != [speaker])
                     or not re.fullmatch(_NAME, speaker)):
                 raise ValueError('explicit actual speaker required')
             if not narrator_record:
                 all_actors.add(speaker)
-            statement = dict(line=number, text=text, speaker=speaker, proofs=[])
+            # Ineligible statements remain ordered, untransmitted sentinels.
+            # Removing one would incorrectly resolve "last" to older speech.
+            statement = dict(line=number, text=text, speaker=speaker, proofs=[],
+                source_report=source_report, source_span=source_span)
             statements.append(statement)
             last[speaker] = statement
         if len(all_actors) > 8:
@@ -142,6 +176,8 @@ class CommunicationScene:
             else:
                 status = 'EXPOSURE_UNKNOWN'
             allowed = status in ('OWN_EXPRESSION', 'REPORTED_EXPOSURE', 'REPORTED_LATER_EXPOSURE')
+            if allowed and not statement['source_report']:
+                raise ValueError('visible expression requires an actual source occurrence')
             # Authorizer audit is separate from model inputs. No hidden body is
             # returned even here; a missing route is not a private belief state.
             audit.append(dict(statement_line=statement['line'], status=status,
