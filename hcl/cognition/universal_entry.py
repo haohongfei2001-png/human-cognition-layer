@@ -326,6 +326,9 @@ class UniversalHCL:
                         support_claim_ids=list(result.claim_ids))
         if cid=='D01':
             if len(ids)!=1:return dict(capability=cid,status='D01_REQUIRES_ONE_SOURCE',executed=False)
+            source=self.sources[ids[0]]['text']
+            if '\r' in source.replace('\r\n','') or any(c in source for c in '\v\f\x1c\x1d\x1e\x85\u2028\u2029'):
+                return dict(capability=cid,status='D01_REQUIRES_LF_OR_CRLF_SOURCE',executed=False)
             from .commitments import prepare_commitment
             result=prepare_commitment(self.workspace,question,source_id=ids[0])
             result.messages(self.workspace)

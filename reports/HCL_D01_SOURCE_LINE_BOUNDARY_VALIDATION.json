@@ -1,0 +1,61 @@
+{
+  "schema": "hcl-d01-source-line-boundary-local-validation-v1",
+  "base_commit": "3d611d0448a070f2441cf1aa8c5338d639cdea1d",
+  "runtime_sha256": "e1ce80691173efd9e76b5f3466d9d573fc9da7e5c7c125ce8003a8383118ca2d",
+  "local_v1_tests": 1425,
+  "local_v1_status": "PASS",
+  "new_test_methods": 4,
+  "pre_repair_admission_assertion_failures": 9,
+  "focused_tests": 46,
+  "historical_regressions": 176,
+  "source_boundary_tests": 9,
+  "metering_encryption_tests": 21,
+  "witness_commands": 67,
+  "offline_workflow_status": "PASS",
+  "gaskell_irie_certified_replays": "PASS",
+  "development_drc_dre_contracts": "PASS",
+  "compile_status": "PASS",
+  "historical_pins": 142,
+  "inherited_pins": 138,
+  "supported_source_separators": [
+    "LF",
+    "CRLF"
+  ],
+  "rejected_source_separators": [
+    "CR",
+    "VT",
+    "FF",
+    "U+001C",
+    "U+001D",
+    "U+001E",
+    "U+0085",
+    "U+2028",
+    "U+2029"
+  ],
+  "unsupported_native_calls": 0,
+  "original_source_bytes_preserved": true,
+  "selected_source_only": true,
+  "native_b02_wider_separator_behavior_unchanged": true,
+  "retained_native_format_gap": "REPRODUCED_UNREPAIRED_OUTSIDE_BOUNDED_ORDINARY_ENTRY",
+  "recheck_sha256": "a684570886e57e79cdebb142005dd8cdf53d879902ea7205611dea6b82027903",
+  "log_sha256": {
+    "before": "c4aafad58efde06895b60f8207c6aacec1f81ce1d50dcde91e42023197a3357e",
+    "full_v1": "dc40ea68762fb2d785e3fc2b396deddf3a3da51f24dc4838888669c0a59915f8",
+    "offline_workflow": "57a2a2c62a9f56024ecac2136af0794dfb4e286fa2c4e5fd537153aef14a7b79",
+    "gaskell_irie": "afa04786401d21f404e9cd8ee28ed20ee865a8fcf68b056a2e0dac4aafcaefc1",
+    "development_contract": "7148695d591b6922475c372c6613e25ff2cef32f3411cadc22c024187d07e5eb"
+  },
+  "remaining_local_source_gates": {
+    "clifford": "NOT_RERUN_PINNED_LOCAL_CACHE_LOST_AFTER_WORKSPACE_ROLLBACK",
+    "gregory": "NOT_RERUN_PINNED_LOCAL_CACHE_LOST_AFTER_WORKSPACE_ROLLBACK",
+    "prior_fetch_cancellation_preserved": true,
+    "new_fetch_performed": false
+  },
+  "required_hosted_gates": "UNCHANGED_EXACT_HEAD_AND_MAIN_REQUIRED_BEFORE_COMPLETION",
+  "new_adapter": false,
+  "provider_calls": 0,
+  "authorized_additional_calls": 0,
+  "historical_answers_rescored": false,
+  "remote_publication": "NOT_STARTED",
+  "efficacy_established": false
+}
