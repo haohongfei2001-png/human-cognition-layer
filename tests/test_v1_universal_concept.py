@@ -170,7 +170,7 @@ Mira: In team, proposal is not fair.'''
 
     def test_catalog_readiness_is_truthfully_partial(self):
         self.assertEqual(CATALOG['G03'].entry_readiness,'BOUNDED_ORDINARY_ADAPTER')
-        self.assertEqual(sum(c.entry_readiness=='BOUNDED_ORDINARY_ADAPTER' for c in CATALOG.values()),12)
+        self.assertEqual(sum(c.entry_readiness=='BOUNDED_ORDINARY_ADAPTER' for c in CATALOG.values()),13)
         session=UniversalHCL();session.put_source('scene',SOURCE)
         for cid in ('H01','H02'):
             row=session._execute(operation(cid,'Compare.',['scene']),QUESTION)
@@ -180,7 +180,7 @@ Mira: In team, proposal is not fair.'''
 class ConceptFreezeTests(unittest.TestCase):
     def test_amendment_preserves_previous_files_and_unrelated_runtime(self):
         from pathlib import Path
-        from scripts.development_b02_access_authority_amendment import validate_current
+        from scripts.development_universal_commitment_amendment import validate_current
         self.assertTrue(validate_current());original=Path.read_bytes
         for changed in ('reports/HCL_DEVELOPMENT_UNIVERSAL_NORMATIVE_AMENDMENT.json',
                         'scripts/development_universal_normative_amendment.py',

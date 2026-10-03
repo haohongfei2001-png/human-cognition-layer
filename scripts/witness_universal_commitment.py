@@ -1,4 +1,4 @@
-"""Complete scripted C04-to-C05 composition with action-time/current separation."""
+"""Scripted complete D01 lifecycle with original citations and no receipt backfill."""
 import argparse
 import hashlib
 import json
@@ -9,11 +9,12 @@ from hcl.cognition import UniversalHCL
 from hcl.cognition.deepseek_metered import DeepSeekMeteredPort
 from hcl.cognition.universal_entry import CallAllowance
 from scripts.development_universal_commitment_amendment import validate_current
-from scripts.witness_agency_chain import SOURCE,QUERY
+from scripts.witness_commitment import SOURCE, QUERY
 
-QUESTION='Explain the reported action using its plans and appraisal, without inferring a unique motive.'
-ACTION='Mira said, "I left the meeting."'
-LATER='Mira said, "I now believe it is false that the train is running instead of the train is running."'
+QUESTION='Describe the conditional promise and reported access history without inferring moral obligation or private understanding.'
+PROMISE=SOURCE.splitlines()[0]
+LATER="Narrator: Noor later heard Mira's last statement."
+WITHDRAWAL='Mira said, "I withdraw my promise to Noor to deliver the report."'
 
 
 class ScriptedPort:
@@ -29,18 +30,17 @@ class ScriptedPort:
     def complete(self,phase,messages):
         self.calls.append(phase)
         if phase=='planning':
-            chain=dict(capability='C05',question=QUERY,source_ids=['scene'],bindings=[])
-            operations=[dict(capability='C04',question='How does Mira appraise the delay?',source_ids=['scene'],bindings=[]),chain]
-            if self.overflow:operations.append(dict(chain))
-            value=dict(task='Keep action-time reasoning separate from current source state',operations=operations,
+            operation=dict(capability='D01',question=QUERY,source_ids=['scene'],bindings=[])
+            value=dict(task='Track conditional commitment and access without private knowledge inference',
+                operations=[dict(operation)for _ in range(3 if self.overflow else 1)],
                 limitations=['SCRIPTED_SELECTION_NOT_MODEL_PLANNING_EVIDENCE'])
         else:
             source=json.loads(messages[-1]['content'])['sources'][0]
-            value=dict(answer='The source reports the action; its conditional explanation does not establish a unique motive or actual emotion.',
-                source_citations=[dict(source_id=source['source_id'],version=source['version'],
-                    quote=ACTION,start=source['text'].index(ACTION))],
-                uncertainty='Later belief does not backfill the earlier source prefix.',
-                assumptions='Synthetic interface witness; source order is not verified calendar chronology.')
+            quote=source['text'].splitlines()[0]
+            value=dict(answer='The source reports a conditional promise. Receipt, expectation and withdrawal remain separate source reports.',
+                source_citations=[dict(source_id=source['source_id'],version=source['version'],quote=quote,start=0)],
+                uncertainty='Reported receipt does not establish private understanding or moral obligation.',
+                assumptions='Source order is not verified chronology; a later receipt cannot backfill an earlier expectation.')
         return dict(text=json.dumps(value),actual_usd='0',usage={})
 
 
@@ -57,27 +57,27 @@ def witness():
             final=json.loads(result['actual_final_messages'][-1]['content'])
             assert final['question']==QUESTION and final['sources'][0]['text']==session.sources['scene']['text']
         return result,port
-    before,first=answer();appraisal,chain=before['operations']
-    assert appraisal['checked_treatment_present'] and chain['checked_treatment_present']
-    assert set(appraisal['support_claim_ids'])&set(chain['support_claim_ids'])
-    assert chain['result']['explanations'][0]['disposition']=='CONDITIONALLY_SUPPORTED'
-    assert chain['result']['current_plans'][0]['model_condition_check']=='MODEL_CONDITION_CONTRADICTED'
-    assert chain['result']['appraisal']['reported_emotions']==[]
-    old_claims=set(appraisal['support_claim_ids']+chain['support_claim_ids'])
-    session.put_source('scene',SOURCE+'\n'+LATER)
+    before,first=answer();row=before['operations'][0];old_claims=row['support_claim_ids']
+    assert row['checked_treatment_present']
+    assert row['result']['commitment']['receipt']=='REPORTED_NON_EXPOSURE'
+    assert row['result']['commitment']['condition_status']=='UNKNOWN'
+    session.put_source('scene',SOURCE+'\n'+LATER+'\n'+WITHDRAWAL)
     old_status={key:session.workspace.core.support_statuses()[key]for key in old_claims}
     assert set(old_status.values())=={'UNSUPPORTED'}
-    after,second=answer();updated=after['operations'][1]['result']
-    assert updated['original_sources'][0]['version']==2
-    assert updated['current_plans'][0]['subjective_feasibility']=='CONTRADICTED_UNDER_REPORTED_BELIEFS'
-    assert updated['explanations'][0]['disposition']=='CONDITIONALLY_SUPPORTED'
-    span=session.workspace.core.spans[updated['action_time']['source_span_id']]
-    assert span.version==2 and span.quote==(SOURCE+'\n'+LATER)[:updated['action_time']['end']]
+    after,second=answer();value=after['operations'][0]['result']
+    assert value['commitment']['receipt']=='REPORTED_LATER_EXPOSURE'
+    assert value['commitment']['lifecycle']=='REPORTED_WITHDRAWN'
+    assert value['cg02_source_check']['expectation_comparisons'][0]['condition_receipt_at_expectation']=='REPORTED_NON_EXPOSURE'
+    assert value['commitment']['obligation']=='NOT_ESTABLISHED'
+    assert json.loads(after['actual_final_messages'][-1]['content'])['sources'][0]['version']==2
+    overflow_source=SOURCE.replace('the permit arrives','the permit arrives '+'before the deadline '*40)
+    session.put_source('scene',overflow_source)
     overflow,third=answer(True)
     assert third.calls==['planning'] and overflow['status']=='ORCHESTRATION_UNAVAILABLE_OR_FAILED'
     assert len(overflow['operations'])==3 and all(r['executed']for r in overflow['operations'])
+    assert all(r['result']['original_source']==overflow_source for r in overflow['operations'])
     assert 'answer' not in overflow
-    return dict(schema='hcl-universal-agency-chain-witness-v1',before=before,after=after,
+    return dict(schema='hcl-universal-commitment-witness-v1',before=before,after=after,
         combined_overflow=overflow,complete_request_measurements=dict(before=first.requests,after=second.requests),
         old_support_after_revision=old_status,model_planning='SCRIPTED_NOT_VERIFIED',
         semantic_certification=False,complete_capability_integration=False,provider_calls=0,

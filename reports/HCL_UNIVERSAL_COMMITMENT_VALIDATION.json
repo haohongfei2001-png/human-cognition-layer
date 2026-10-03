@@ -1,0 +1,70 @@
+{
+  "schema": "hcl-universal-commitment-local-validation-v1",
+  "base_commit": "11acaeea58d03faf53bd3e184dbf30ee4826b85a",
+  "runtime_sha256": "0638c2a372b95eb3befd3609455d019c497050a9293ac61a0d7e9d3d8a204c05",
+  "local_v1_tests": 1421,
+  "local_v1_status": "PASS",
+  "focused_adapter_native_catalog_tests": 42,
+  "new_integration_test_methods": 16,
+  "historical_regressions": 176,
+  "source_boundary_tests": 9,
+  "metering_encryption_tests": 21,
+  "witness_commands": 67,
+  "offline_workflow_status": "PASS",
+  "gaskell_irie_certified_replays": "PASS",
+  "development_drc_dre_contracts": "PASS",
+  "compile_status": "PASS",
+  "historical_pins": 138,
+  "descriptor_review_correction": "EXPLICIT_INHERITED_64_CANDIDATE_COMPLETE_LINE_AND_CG02_ACT_LIMITS_NO_NATIVE_CHANGE",
+  "complete_request_measurements": {
+    "before": {
+      "planning": {
+        "bytes": 23780,
+        "sha256": "0903960640f1c3b823a3f396ea1ec902e4d3642457327434faf7f81e26d201a1"
+      },
+      "answer": {
+        "bytes": 8221,
+        "sha256": "3be912bf772cb61e4f1cfbca55afdd9732b66ac2ce404764d4a5bd91b4ff9821"
+      }
+    },
+    "after": {
+      "planning": {
+        "bytes": 23906,
+        "sha256": "c121c5440beeff038f2c9819ff4d03949d115b014091f645c9eb0583dd21a340"
+      },
+      "answer": {
+        "bytes": 9412,
+        "sha256": "ae00b77a301f4a0d74972314554a437e3114fd8d24aeb93b0f320f69f8dd73be"
+      }
+    }
+  },
+  "complete_request_bound": 36000,
+  "source_citation_witness_status": "ORIGINAL_ANCHORS_LOCATED_SEMANTICS_UNASSESSED",
+  "late_receipt_backfills_earlier_expectation": false,
+  "old_support_after_revision": "UNSUPPORTED",
+  "combined_overflow_status": "ORCHESTRATION_UNAVAILABLE_OR_FAILED",
+  "combined_overflow_backend_calls": 1,
+  "combined_overflow_operations": 3,
+  "witness_sha256": "e885f00e62170be2b3b632db70a4c8ff5f0f072e099440bfc624c8a6090f2beb",
+  "log_sha256": {
+    "full_v1": "eaecf288d84ab43205ec9f54d0824d758dee5e92aefb33ef733c39ca9cc2de84",
+    "offline_workflow": "829eeae7617f2a5c47759257925cd6db6df3a6159f50e12fd85d8ba7067d1926",
+    "gaskell_irie": "378193613b0e56a9c0e2c38be0e89d25358fc9db164e75385928419a7d26b880",
+    "development_contract": "9221f4ba007c80231e22463851f887efb82ac338e90d66a9a1ff02a4cf8a3d8e"
+  },
+  "remaining_local_source_gates": {
+    "clifford": "NOT_RERUN_PINNED_LOCAL_CACHE_LOST_AFTER_WORKSPACE_ROLLBACK",
+    "gregory": "NOT_RERUN_PINNED_LOCAL_CACHE_LOST_AFTER_WORKSPACE_ROLLBACK",
+    "prior_fetch_cancellation_preserved": true,
+    "new_fetch_performed": false
+  },
+  "required_hosted_gates": "UNCHANGED_EXACT_HEAD_AND_MAIN_REQUIRED_BEFORE_COMPLETION",
+  "b04_entry_adapter": "DEFERRED_COMPLETE_EVIDENCE_TRANSPORT_GATE",
+  "provider_calls": 0,
+  "authorized_additional_calls": 0,
+  "native_grammar_cache_or_transport_changed": false,
+  "remote_publication": "NOT_STARTED",
+  "model_planning": "SCRIPTED_NOT_VERIFIED",
+  "efficacy_established": false,
+  "planning_request_hash_scope": "RECORDED_REQUEST_INCLUDING_ACTUAL_INGESTION_TIMESTAMP"
+}

@@ -324,6 +324,15 @@ class UniversalHCL:
             return dict(capability=cid,status='C05_EXECUTED',executed=True,result=payload,
                         checked_treatment_present=payload['status']=='CHECKED_CONDITIONAL_CHAIN' and bool(payload['explanations']),
                         support_claim_ids=list(result.claim_ids))
+        if cid=='D01':
+            if len(ids)!=1:return dict(capability=cid,status='D01_REQUIRES_ONE_SOURCE',executed=False)
+            from .commitments import prepare_commitment
+            result=prepare_commitment(self.workspace,question,source_id=ids[0])
+            result.messages(self.workspace)
+            payload=result.payload
+            return dict(capability=cid,status='D01_EXECUTED',executed=True,result=payload,
+                        checked_treatment_present=payload['status']=='CHECKED_CONDITIONAL_LIFECYCLE',
+                        support_claim_ids=list(result.claim_ids))
         if cid=='G02':
             from .responsibility_composition import ResponsibilityCompositionWorkspace
             workspace=ResponsibilityCompositionWorkspace();actors=[]
