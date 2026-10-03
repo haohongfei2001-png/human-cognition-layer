@@ -1,0 +1,42 @@
+{
+  "schema": "hcl-b04-scope-consumer-local-validation-v1",
+  "base_commit": "cd401bada515e94bc24825aa2f905c3a33d5095d",
+  "runtime_sha256": "430d756b75eb808ba926275a1e93f08f8ffaab899053d6ad684d677ce4e18a71",
+  "local_v1_tests": 1361,
+  "local_v1_status": "PASS",
+  "focused_b04_tests": 33,
+  "new_test_methods": 10,
+  "historical_regressions": 176,
+  "source_boundary_tests": 9,
+  "metering_encryption_tests": 21,
+  "witness_commands": 64,
+  "offline_workflow_status": "PASS",
+  "gaskell_irie_certified_replays": "PASS",
+  "development_drc_dre_contracts": "PASS",
+  "compile_status": "PASS",
+  "historical_pins": 121,
+  "independent_source_review": "EXACT_CUE_ADMISSION_AND_CONJUNCTIVE_OCCURRENCE_DEPENDENCIES_PASS",
+  "additional_independent_probes": [
+    "REPEATED_PREPARATION_ADDS_NO_CUE_FREE_SUPPORT_ALTERNATIVE",
+    "CUE_CHALLENGE_PROPAGATES_TO_RELATION_AND_FAMILY"
+  ],
+  "log_sha256": {
+    "full_v1": "2e712b442d5a87294bd1a36fed10bf3bd04a53a10db2645ccb3bc4f41bb4471b",
+    "offline_workflow": "fc8c8b8abc53fc59f9a1425f84b8f2cd2b278b248ec31ee02819b18a6fb05475",
+    "gaskell_irie": "f599d787c3f9273938e9f7309e12704ecd81ae35aa065e558d41db6529fbed3f",
+    "development_contract": "b026b0cc15240c615291d1b391ecc7ec80200ed8e5eaf7c5b849f65681d76bd0"
+  },
+  "remaining_local_source_gates": {
+    "clifford": "NOT_RERUN_PINNED_LOCAL_CACHE_LOST_AFTER_WORKSPACE_ROLLBACK",
+    "gregory": "NOT_RERUN_PINNED_LOCAL_CACHE_LOST_AFTER_WORKSPACE_ROLLBACK",
+    "prior_fetch_cancellation_preserved": true,
+    "new_fetch_performed": false
+  },
+  "required_hosted_gates": "UNCHANGED_EXACT_HEAD_AND_MAIN_REQUIRED_BEFORE_COMPLETION",
+  "provider_calls": 0,
+  "authorized_additional_calls": 0,
+  "adapter_added": false,
+  "transport_expanded": false,
+  "remote_publication": "NOT_STARTED",
+  "efficacy_established": false
+}

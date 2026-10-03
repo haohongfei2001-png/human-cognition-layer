@@ -116,17 +116,25 @@ def prepare_reports(workspace, query, *, source_id, observer=None, max_depth=3, 
     # nonmental or unsupported utterance must not revive an older parsed belief.
     by_span = {core.claims[r.expression_id].content['source_span_id']: r for r in records
         if core.claims[r.expression_id].content['channel'] == 'PUBLIC_EXPRESSION'}
-    statements = []
+    statements, cue_events = [], {}
+    status = core.support_statuses()
     for key in semantic.candidate_ids:
         content = core.claims[key].content
         if content.get('kind') != 'event':
             continue
         row = content['proposal']
+        span = core.spans[content['source_span_id']]
+        if (status[key] == 'SUPPORT_AVAILABLE'
+                and content['validation']['semantic_support'] == 'BOUNDED_LITERAL_FORM'
+                and row.get('event_kind') == 'SPEECH_REPORT'
+                and row.get('speaker_surface') == 'Narrator'
+                and row.get('assertion_scope') == 'SOURCE_REPORT'
+                and span.source_id == source_id and span.version == workspace._versions[source_id]):
+            cue_events.setdefault((span.start, span.end), set()).add(key)
         if (row.get('event_kind') != 'SPEECH_REPORT' or row.get('assertion_scope') != 'SOURCE_REPORT'
                 or row.get('speaker_surface') == 'Narrator'
                 or row.get('speaker_candidates') != [row.get('speaker_surface')]):
             continue
-        span = core.spans[content['source_span_id']]
         statements.append((span.start, span.end, row['speaker_surface'], span.id))
     statements.sort()
 
@@ -153,6 +161,19 @@ def prepare_reports(workspace, query, *, source_id, observer=None, max_depth=3, 
     for line in lines:
         match = _COPY.fullmatch(line.strip())
         if match:
+            # The cue is the complete prepared source-line event, including
+            # original trailing spaces/CRLF carriage return, never a text-only
+            # match to another occurrence or an unqualified raw-source fallback.
+            source_line = line.rstrip('\n')
+            candidates = [key for key in cue_events.get((offset, offset + len(source_line)), ())
+                if core.spans[core.claims[key].content['source_span_id']].quote == source_line]
+            if len(candidates) != 1:
+                diagnostics.append(dict(source_id=source_id, start=offset, end=offset + len(source_line),
+                    reason='COPY_CUE_WITHOUT_ELIGIBLE_NARRATOR_EVENT' if not candidates
+                        else 'COPY_CUE_AMBIGUOUS_PREPARED_EVENTS'))
+                offset += len(line)
+                continue
+            cue_candidate = candidates[0]
             copier, origin = match.groups()
             earlier = [r for r in statements if r[1] <= offset]
             last_left = next((r for r in reversed(earlier) if r[2] == copier), None)
@@ -174,8 +195,9 @@ def prepare_reports(workspace, query, *, source_id, observer=None, max_depth=3, 
             core.support(source, span)
             link = core.claim(bundle.scope, ClaimKind.SYSTEM_INTERPRETATION,
                 dict(relation='REPORTED_SHARED_ORIGIN', copier_expression=left.expression_id,
-                    origin_expression=right.expression_id, independence='NOT_ESTABLISHED'))
-            core.support(link, source, left.expression_id, right.expression_id)
+                    origin_expression=right.expression_id, cue_candidate_id=cue_candidate,
+                    independence='NOT_ESTABLISHED'))
+            core.support(link, source, cue_candidate, left.expression_id, right.expression_id)
             core.interpret(link, unknown_conditions=('copy_report_accuracy_not_established',))
             join(left.expression_id, right.expression_id)
             links.append((left.expression_id, right.expression_id, link))
