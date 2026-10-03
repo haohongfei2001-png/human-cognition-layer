@@ -1,0 +1,65 @@
+{
+  "schema": "hcl-universal-appraisal-local-validation-v1",
+  "base_commit": "2e93bebe2e5c7d0647989bd7eaaa4d25fdf4f185",
+  "runtime_sha256": "d5d9fc0cdb30eb4e8d828a0e7e04616e0737b2bb4ba2714952c0428c333ac551",
+  "local_v1_tests": 1378,
+  "local_v1_status": "PASS",
+  "focused_appraisal_catalog_tests": 43,
+  "new_integration_test_methods": 17,
+  "historical_regressions": 176,
+  "source_boundary_tests": 9,
+  "metering_encryption_tests": 21,
+  "witness_commands": 65,
+  "offline_workflow_status": "PASS",
+  "gaskell_irie_certified_replays": "PASS",
+  "development_drc_dre_contracts": "PASS",
+  "compile_status": "PASS",
+  "historical_pins": 126,
+  "independent_source_review": "EXISTING_NATIVE_PAYLOAD_POLICY_SUPPORT_AND_TREATMENT_FLAG_PASS",
+  "complete_request_measurements": {
+    "before": {
+      "planning": {
+        "bytes": 20921,
+        "sha256": "f7ce649918b9bd245c002aa623934a1576774eef62f42a723877c2f39c660d2c"
+      },
+      "answer": {
+        "bytes": 16862,
+        "sha256": "293fa7fb4d994f7488a9be1dc0642de7c0deeaa9f9e03d118726590863cae44e"
+      }
+    },
+    "after": {
+      "planning": {
+        "bytes": 20984,
+        "sha256": "571b7f7845d61d599f7609a5ee02defc23a0cf8a6a878f87713ed05101c989f8"
+      },
+      "answer": {
+        "bytes": 17827,
+        "sha256": "ec61ffcbe7fbd5c6567eeb25b3152c0ac7986e39066d51248211e31dab58c02f"
+      }
+    }
+  },
+  "complete_request_bound": 36000,
+  "overflow_behavior": "NO_TRUNCATION_PLANNING_OR_ANSWER_INVOCATION_PREVENTED_AT_REQUEST_VALIDATOR",
+  "source_citation_witness_status": "ORIGINAL_ANCHORS_LOCATED_SEMANTICS_UNASSESSED",
+  "witness_sha256": "81e5579286448534bb1d2bbeb2aba043d6e69024431df107273b13b496d03959",
+  "log_sha256": {
+    "full_v1": "f8c764ff4cf62533ce29d07e469b70510b71359e9e2917422c9ff94e9694fbaf",
+    "offline_workflow": "13f519302dd4041e2062f6fe63391b7dbaff6f2b95bd8394bbccf344fe9f9e57",
+    "gaskell_irie": "c868b94d65ff4379a4394530ba3ac9612a4627e9966653157fc5a19958daaeba",
+    "development_contract": "b103d27532e4387c1bb190c46f0b37b07f02b0f0a1c931d935904e13fa601320"
+  },
+  "remaining_local_source_gates": {
+    "clifford": "NOT_RERUN_PINNED_LOCAL_CACHE_LOST_AFTER_WORKSPACE_ROLLBACK",
+    "gregory": "NOT_RERUN_PINNED_LOCAL_CACHE_LOST_AFTER_WORKSPACE_ROLLBACK",
+    "prior_fetch_cancellation_preserved": true,
+    "new_fetch_performed": false
+  },
+  "required_hosted_gates": "UNCHANGED_EXACT_HEAD_AND_MAIN_REQUIRED_BEFORE_COMPLETION",
+  "b04_entry_adapter": "DEFERRED_COMPLETE_EVIDENCE_TRANSPORT_GATE",
+  "provider_calls": 0,
+  "authorized_additional_calls": 0,
+  "native_grammar_or_transport_changed": false,
+  "remote_publication": "NOT_STARTED",
+  "model_planning": "SCRIPTED_NOT_VERIFIED",
+  "efficacy_established": false
+}

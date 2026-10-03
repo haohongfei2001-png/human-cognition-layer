@@ -33,6 +33,14 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: UNIVERSAL_HCL_ENTRY_RETAINED_CAPABILITY_INTEGRATION**
 
+[Retained C04 ordinary appraisal](docs/HCL_UNIVERSAL_APPRAISAL_ENTRY.md) carries
+one complete source, native policy/evidence and shared support IDs into final
+composition. Mixed goals, direct feelings, expression and attribution remain
+distinct; empty appraisal evidence is not treatment. Revision/withdrawal and
+complete serialized-request bounds are preserved. Scripted wiring is verified;
+model selection and live answer efficacy remain unverified. B04 complete-evidence
+transport remains a separate gate. No provider call or new grant is added.
+
 [B04 exact copy-cue consumption](docs/HCL_B04_SCOPE_CONSUMER.md) requires the
 eligible A02 event at the same source/revision/full-line occurrence and makes the
 relation depend on that cue and both antecedents. The two frozen embedded-cue

@@ -306,6 +306,15 @@ class UniversalHCL:
             result.messages(self.workspace)
             return dict(capability=cid,status='C02_EXECUTED',executed=True,result=result.payload,
                         support_claim_ids=list(result.claim_ids))
+        if cid=='C04':
+            if len(ids)!=1:return dict(capability=cid,status='C04_REQUIRES_ONE_SOURCE',executed=False)
+            from .appraisal import prepare_appraisal
+            result=prepare_appraisal(self.workspace,question,source_id=ids[0])
+            result.messages(self.workspace)
+            payload=result.payload
+            return dict(capability=cid,status='C04_EXECUTED',executed=True,result=payload,
+                        checked_treatment_present=bool(payload['retained_v08']['current_evidence']),
+                        support_claim_ids=list(result.claim_ids))
         if cid=='G02':
             from .responsibility_composition import ResponsibilityCompositionWorkspace
             workspace=ResponsibilityCompositionWorkspace();actors=[]
