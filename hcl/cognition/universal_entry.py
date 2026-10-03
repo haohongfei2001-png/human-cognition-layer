@@ -133,6 +133,8 @@ class UniversalHCL:
         self.workspace=CognitionWorkspace();self.sources={}
 
     def put_source(self, source_id, text):
+        if not isinstance(source_id,str) or not source_id or len(source_id)>128:
+            raise HCLBoundaryError('source ID must be 1 to 128 Unicode characters; no aliasing')
         if source_id not in self.sources and len(self.sources)>=self.maximum_sources:
             raise HCLBoundaryError('source count exceeds bound; no silent source dropping')
         if not isinstance(text,str) or not text or sum(len(v['text'])for k,v in self.sources.items()if k!=source_id)+len(text)>self.maximum_source_chars:
