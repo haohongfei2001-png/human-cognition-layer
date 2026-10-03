@@ -1,0 +1,30 @@
+{
+  "schema": "hcl-universal-commitment-amendment-v1",
+  "previous_hcl_runtime_sha256": "f07df5b3402596459df4ca05b714d1d0209e8d3dd15d29a868cfca7377085e91",
+  "amended_hcl_runtime_sha256": "0638c2a372b95eb3befd3609455d019c497050a9293ac61a0d7e9d3d8a204c05",
+  "changed_runtime_files": [
+    "hcl/cognition/capability_catalog.py",
+    "hcl/cognition/universal_entry.py"
+  ],
+  "reason": "RETAINED_D01_COMPLETE_CONDITIONAL_COMMITMENT_SINGLE_SOURCE_ENTRY",
+  "question_origin": "OPERATION_QUESTION_WITH_ORIGINAL_OUTER_TASK_PRESERVED",
+  "checked_treatment_basis": "NATIVE_CHECKED_CONDITIONAL_LIFECYCLE",
+  "complete_native_payload_and_policy_preserved": true,
+  "shared_source_revisions_and_all_support_claim_ids": true,
+  "receipt_acceptance_expectation_withdrawal_and_fulfillment_separate": true,
+  "later_receipt_backfills_earlier_expectation": false,
+  "source_order_verified_chronology": false,
+  "obligation_or_private_understanding_established": false,
+  "native_parser_or_grammar_changed": false,
+  "communication_authority_or_cache_changed": false,
+  "source_or_transport_budget_changed": false,
+  "model_or_token_settings_changed": false,
+  "new_provider_subcalls": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "authorized_additional_calls": 0,
+  "historical_answers_rescored": false,
+  "model_selection_efficacy_verified": false,
+  "b04_entry_adapter": "DEFERRED_COMPLETE_EVIDENCE_TRANSPORT_GATE",
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

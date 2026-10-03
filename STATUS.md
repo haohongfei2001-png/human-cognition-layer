@@ -33,6 +33,14 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: UNIVERSAL_HCL_ENTRY_RETAINED_CAPABILITY_INTEGRATION**
 
+[Retained D01 ordinary commitment](docs/HCL_UNIVERSAL_COMMITMENT_ENTRY.md) exposes
+the existing single-source conditional promise lifecycle with complete native
+payload/policy and shared support. Receipt, acceptance, expectation, withdrawal
+and reported fulfillment stay distinct; later receipt cannot backfill history.
+Native row/candidate/act bounds and complete 36,000-byte transport remain explicit.
+Current and revised exact-citation scripted flows pass, while model selection and
+live benefit remain unverified. No native grammar, paid call or grant is changed.
+
 [B02 exact source-prefix authority](docs/HCL_B02_ACCESS_AUTHORITY.md) now guards
 access cues, their literal targets and own-expression admission using shared A02
 scope. Exact original occurrence mapping preserves whitespace and source offsets;

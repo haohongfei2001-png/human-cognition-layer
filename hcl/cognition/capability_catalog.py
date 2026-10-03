@@ -84,6 +84,11 @@ _CONTRACTS = {
     )
 }
 _CONTRACTS.update({
+    'D01':AdapterContract('OPERATION_QUESTION',1,1,_UNUSED_BINDINGS,
+        ("What is the status of <Speaker>'s promise to <Recipient> to <action>?",),
+        'Use the existing distinct source-named speaker/recipient promise-status form as an intent-preserving interpretation. Do not invent a promise, receipt, condition or response; keep the original outer question unchanged.',
+        'Question at most 8000 characters, action at most 200. Speaker and recipient are distinct single-token ASCII names, at most 32 characters starting uppercase; pronouns and Narrator are not actors. At most one matching conditional promise, 24 accepted source rows, six social acts, two withdrawals and two expectations for that promise. The shared 64-candidate semantic cap can bind before the row cap. Each nonblank line must contain one complete unambiguous statement or access cue. Native communication bounds remain 80 lines, 4000 characters per line, 64000 source characters and eight actors. Complete requests must fit the metered transport without truncation.',
+        'Keep original promise, condition reports, receipt, acceptance, expectation, withdrawal and reported fulfillment distinct. Missing condition evidence is unknown; later receipt never backfills an earlier expectation. No comprehension, verified outcome, obligation, blame or trust is established. Source order is not verified chronology. Missing conditional promise remains insufficient.'),
     'C05':AdapterContract('OPERATION_QUESTION',1,1,_UNUSED_BINDINGS,
         ('Why did <Actor> <action>, considering their plans and appraisal of <episode>?',),
         'Use exactly the existing actor/action/episode form as an intent-preserving internal interpretation. Keep the original outer question unchanged; do not invent an action, belief, plan or appraisal premise.',
