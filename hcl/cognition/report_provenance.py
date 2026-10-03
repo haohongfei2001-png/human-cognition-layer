@@ -4,7 +4,7 @@ import json
 import re
 
 from .core import ClaimKind, identity
-from .epistemic import Attitude, MentalProposition, _query_path, prepare_epistemic
+from .epistemic import Attitude, MentalProposition, _query_path, check_epistemic_candidates
 
 _COPY = re.compile(r"Narrator: ([A-Z][\w-]*)'s last statement (?:repeats|was copied from) ([A-Z][\w-]*)'s last statement\.")
 _POLICY = ('Report families describe provenance, not independent witnesses or vote weights. '
@@ -77,8 +77,9 @@ def prepare_reports(workspace, query, *, source_id, observer=None, max_depth=3, 
         raise ValueError('bounded named mental-state query required')
     # Generic extraction retains reporting channels before query selection; B01
     # parser includes at most three mental operators plus a reporting wrapper.
-    bundle = prepare_epistemic(workspace, 'Extract explicit reported mental propositions.',
-        source_ids=(source_id,), observer=observer, max_depth=max_depth + 1)
+    extraction_query = 'Extract explicit reported mental propositions.'
+    semantic = workspace.prepare_semantic(extraction_query, source_ids=(source_id,), observer=observer)
+    bundle = check_epistemic_candidates(workspace.core, extraction_query, semantic, max_depth=max_depth + 1)
     core = workspace.core
     diagnostics = list(bundle.diagnostics)
     records = [r for r in bundle.records if isinstance(r.tree, MentalProposition)]
@@ -111,7 +112,24 @@ def prepare_reports(workspace, query, *, source_id, observer=None, max_depth=3, 
     if len(lines) > 40:
         raise ValueError('source-line budget exceeded')
     spans = {r.expression_id: core.spans[core.claims[r.expression_id].content['source_span_id']] for r in records}
-    ordered = sorted(records, key=lambda r: spans[r.expression_id].start)
+    # Resolve literal last speech before filtering its mental content. A later
+    # nonmental or unsupported utterance must not revive an older parsed belief.
+    by_span = {core.claims[r.expression_id].content['source_span_id']: r for r in records
+        if core.claims[r.expression_id].content['channel'] == 'PUBLIC_EXPRESSION'}
+    statements = []
+    for key in semantic.candidate_ids:
+        content = core.claims[key].content
+        if content.get('kind') != 'event':
+            continue
+        row = content['proposal']
+        if (row.get('event_kind') != 'SPEECH_REPORT' or row.get('assertion_scope') != 'SOURCE_REPORT'
+                or row.get('speaker_surface') == 'Narrator'
+                or row.get('speaker_candidates') != [row.get('speaker_surface')]):
+            continue
+        span = core.spans[content['source_span_id']]
+        statements.append((span.start, span.end, row['speaker_surface'], span.id))
+    statements.sort()
+
     parent = {r.expression_id: r.expression_id for r in records}
     links = []
     def root(key):
@@ -136,9 +154,11 @@ def prepare_reports(workspace, query, *, source_id, observer=None, max_depth=3, 
         match = _COPY.fullmatch(line.strip())
         if match:
             copier, origin = match.groups()
-            earlier = [r for r in ordered if spans[r.expression_id].end <= offset]
-            left = next((r for r in reversed(earlier) if r.speaker == copier), None)
-            right = next((r for r in reversed(earlier) if r.speaker == origin), None)
+            earlier = [r for r in statements if r[1] <= offset]
+            last_left = next((r for r in reversed(earlier) if r[2] == copier), None)
+            last_right = next((r for r in reversed(earlier) if r[2] == origin), None)
+            left = by_span.get(last_left[3]) if last_left else None
+            right = by_span.get(last_right[3]) if last_right else None
             if (left is None or right is None or left == right
                     or spans[right.expression_id].start >= spans[left.expression_id].start):
                 raise ValueError('copy cue requires distinct preceding origin and later report')
