@@ -8,7 +8,7 @@ from types import SimpleNamespace
 from hcl.cognition import UniversalHCL
 from hcl.cognition.deepseek_metered import DeepSeekMeteredPort
 from hcl.cognition.universal_entry import CallAllowance
-from scripts.development_universal_commitment_amendment import validate_current
+from scripts.development_d01_source_line_amendment import validate_current
 from scripts.witness_commitment import SOURCE, QUERY
 
 QUESTION='Describe the conditional promise and reported access history without inferring moral obligation or private understanding.'

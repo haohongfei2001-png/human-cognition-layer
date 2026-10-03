@@ -28,6 +28,13 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: UNIVERSAL_HCL_ENTRY_RETAINED_CAPABILITY_INTEGRATION**
 
+[D01 source-line admission](docs/HCL_D01_SOURCE_LINE_BOUNDARY.md) now refuses
+non-LF/CRLF source separators before native execution, preserving original bytes.
+This prevents an unrelated own expression from becoming a false promise receipt
+through inconsistent native line numbering. The standalone retained format gap
+and B02's wider representation remain unchanged and explicit. No new adapter,
+parser, provider call, grant or historical rescore is added.
+
 [Retained D01 ordinary commitment](docs/HCL_UNIVERSAL_COMMITMENT_ENTRY.md) exposes
 the existing single-source conditional promise lifecycle with complete native
 payload/policy and shared support. Receipt, acceptance, expectation, withdrawal

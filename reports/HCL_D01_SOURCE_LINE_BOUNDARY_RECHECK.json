@@ -1,0 +1,89 @@
+{
+  "schema": "hcl-d01-source-line-recheck-v1",
+  "source_parts": [
+    "Noor said, \"Okay.\"",
+    "Mira said, \"I promise Noor to deliver the report if the permit arrives.\""
+  ],
+  "query": "What is the status of Mira's promise to Noor to deliver the report?",
+  "cases": [
+    {
+      "separator": "\n",
+      "native_receipt": "EXPOSURE_UNKNOWN",
+      "native_conditions_received": false,
+      "ordinary_status": "D01_EXECUTED",
+      "ordinary_executed": true
+    },
+    {
+      "separator": "\r\n",
+      "native_receipt": "EXPOSURE_UNKNOWN",
+      "native_conditions_received": false,
+      "ordinary_status": "D01_EXECUTED",
+      "ordinary_executed": true
+    },
+    {
+      "separator": "\r",
+      "native_receipt": "OWN_EXPRESSION",
+      "native_conditions_received": true,
+      "ordinary_status": "D01_REQUIRES_LF_OR_CRLF_SOURCE",
+      "ordinary_executed": false
+    },
+    {
+      "separator": "\u000b",
+      "native_receipt": "OWN_EXPRESSION",
+      "native_conditions_received": true,
+      "ordinary_status": "D01_REQUIRES_LF_OR_CRLF_SOURCE",
+      "ordinary_executed": false
+    },
+    {
+      "separator": "\f",
+      "native_receipt": "OWN_EXPRESSION",
+      "native_conditions_received": true,
+      "ordinary_status": "D01_REQUIRES_LF_OR_CRLF_SOURCE",
+      "ordinary_executed": false
+    },
+    {
+      "separator": "\u001c",
+      "native_receipt": "OWN_EXPRESSION",
+      "native_conditions_received": true,
+      "ordinary_status": "D01_REQUIRES_LF_OR_CRLF_SOURCE",
+      "ordinary_executed": false
+    },
+    {
+      "separator": "\u001d",
+      "native_receipt": "OWN_EXPRESSION",
+      "native_conditions_received": true,
+      "ordinary_status": "D01_REQUIRES_LF_OR_CRLF_SOURCE",
+      "ordinary_executed": false
+    },
+    {
+      "separator": "\u001e",
+      "native_receipt": "OWN_EXPRESSION",
+      "native_conditions_received": true,
+      "ordinary_status": "D01_REQUIRES_LF_OR_CRLF_SOURCE",
+      "ordinary_executed": false
+    },
+    {
+      "separator": "\u0085",
+      "native_receipt": "OWN_EXPRESSION",
+      "native_conditions_received": true,
+      "ordinary_status": "D01_REQUIRES_LF_OR_CRLF_SOURCE",
+      "ordinary_executed": false
+    },
+    {
+      "separator": "\u2028",
+      "native_receipt": "OWN_EXPRESSION",
+      "native_conditions_received": true,
+      "ordinary_status": "D01_REQUIRES_LF_OR_CRLF_SOURCE",
+      "ordinary_executed": false
+    },
+    {
+      "separator": "\u2029",
+      "native_receipt": "OWN_EXPRESSION",
+      "native_conditions_received": true,
+      "ordinary_status": "D01_REQUIRES_LF_OR_CRLF_SOURCE",
+      "ordinary_executed": false
+    }
+  ],
+  "retained_native_repaired": false,
+  "provider_calls": 0
+}
