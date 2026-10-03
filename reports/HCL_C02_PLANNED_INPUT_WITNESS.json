@@ -1,0 +1,84 @@
+{
+  "answer_tokens": 8192,
+  "authorized_additional_calls": 0,
+  "cases": {
+    "original": {
+      "additional_provider_phases": 0,
+      "conservative_schedule_reservation_usd": "0.19513560",
+      "dispositions": [
+        "CONDITIONALLY_SUPPORTED",
+        "WEAKENED_BY_COUNTEREVIDENCE",
+        "WEAKENED_BY_COUNTEREVIDENCE"
+      ],
+      "native_results": 1,
+      "original_citation_status": "ORIGINAL_ANCHORS_LOCATED_SEMANTICS_UNASSESSED",
+      "original_source_snapshot": {
+        "record_time_basis": "ACTUAL_INGESTION_NOT_EVENT_TIME",
+        "recorded_at": "2026-10-03T23:17:55.121252+00:00",
+        "source_id": "maintenance",
+        "text": "Kellan wanted to inspect the gauge.\nKellan had decided to open the valve to inspect the gauge.\nKellan reported that, at the time, Kellan knew about the valve.\nKellan reported that, at the time, Kellan could open the valve.\nKellan opened the valve.",
+        "version": 1
+      },
+      "prior_claims_withdrawn": false,
+      "provider_calls": 0,
+      "requests": {
+        "answer": {
+          "bytes": 23949,
+          "conservative_reservation_usd": "0.09849576",
+          "sha256": "1267ca0d58fd70ecfd5b0e1eec9ecad3ac1a0d8102df6c2cf920522392148f52"
+        },
+        "planning": {
+          "bytes": 29390,
+          "conservative_reservation_usd": "0.09663984",
+          "sha256": "3989ef8cba5e1bede2dd3b5cd5ed8122f67355b93413abd1aaca9e4eb585ccc7"
+        }
+      },
+      "source_version": 1,
+      "translation_assumptions": 5
+    },
+    "revised_ignorance": {
+      "additional_provider_phases": 0,
+      "conservative_schedule_reservation_usd": "0.19538904",
+      "dispositions": [
+        "WEAKENED_BY_COUNTEREVIDENCE",
+        "CONDITIONALLY_SUPPORTED",
+        "WEAKENED_BY_COUNTEREVIDENCE"
+      ],
+      "native_results": 1,
+      "original_citation_status": "ORIGINAL_ANCHORS_LOCATED_SEMANTICS_UNASSESSED",
+      "original_source_snapshot": {
+        "record_time_basis": "ACTUAL_INGESTION_NOT_EVENT_TIME",
+        "recorded_at": "2026-10-03T23:17:55.132571+00:00",
+        "source_id": "maintenance",
+        "text": "Kellan wanted to inspect the gauge.\nKellan had decided to open the valve to inspect the gauge.\nKellan reported that, at the time, Kellan did not know about the valve.\nKellan reported that, at the time, Kellan could open the valve.\nKellan opened the valve.",
+        "version": 2
+      },
+      "prior_claims_withdrawn": true,
+      "provider_calls": 0,
+      "requests": {
+        "answer": {
+          "bytes": 24037,
+          "conservative_reservation_usd": "0.09872808",
+          "sha256": "66511f6833f80b27207dccc44d72f89337626652cc4eff93245adb0cd59968f8"
+        },
+        "planning": {
+          "bytes": 29398,
+          "conservative_reservation_usd": "0.09666096",
+          "sha256": "5f1dab3f46097a62c2ac380f497acfeb3b48ac6202d3d310795e2195f2dfbb77"
+        }
+      },
+      "source_version": 2,
+      "translation_assumptions": 5
+    }
+  },
+  "efficacy_established": false,
+  "maximum_request_bytes": 36000,
+  "model_understanding_verified": false,
+  "native_action_explanations_sha256": "39fd7d6ce18959f726795b8e3b558fd05452dfa7d193b02ec7129d273511d305",
+  "native_parser_changed": false,
+  "planning_tokens": 4096,
+  "provider_calls": 0,
+  "runtime_sha256": "38ee8c979847ccf68f32747d5485d0494274fdb65165d1bde7fe7a08fc4dc9a4",
+  "schema": "hcl-c02-planned-input-witness-v1",
+  "status": "PASS_SCRIPTED_C02_FULL_FLOW_AND_REVISION_NOT_MODEL_QUALITY"
+}

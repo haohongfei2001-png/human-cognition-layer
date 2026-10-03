@@ -1,0 +1,47 @@
+{
+  "schema": "hcl-c02-planned-input-amendment-v1",
+  "previous_hcl_runtime_sha256": "cfcaeef7a3ecf8c878b569a2d554c15814129599febc56bcd288812c22dca097",
+  "amended_hcl_runtime_sha256": "38ee8c979847ccf68f32747d5485d0494274fdb65165d1bde7fe7a08fc4dc9a4",
+  "changed_runtime_files": [
+    "hcl/cognition/retained.py",
+    "hcl/cognition/universal_entry.py",
+    "hcl/cognition/capability_catalog.py"
+  ],
+  "reason": "EXISTING_C02_EXECUTION_UNDER_FIRST_PLANNER_SOURCE_INTERPRETATIONS",
+  "native_action_explanations_sha256": "39fd7d6ce18959f726795b8e3b558fd05452dfa7d193b02ec7129d273511d305",
+  "native_parsers_changed": false,
+  "conditional_input_families": [
+    "B01",
+    "C01",
+    "C02",
+    "C03"
+  ],
+  "maximum_translated_operations": 1,
+  "maximum_sources_per_translated_operation": 1,
+  "maximum_candidates": 24,
+  "native_c02_row_limit_preserved": 20,
+  "provider_phases": [
+    "planning",
+    "answer"
+  ],
+  "additional_provider_phases": 0,
+  "semantic_input_origin": "METERED_PLANNING_RESPONSE",
+  "translation_authority": "UNVERIFIED_TRANSLATION_HYPOTHESIS",
+  "original_sources_only_quotable": true,
+  "source_and_translation_withdrawal_preserved": true,
+  "source_order_is_calendar_time": false,
+  "later_knowledge_or_goals_backfill_action_time": false,
+  "winning_motive": "NOT_INFERRED",
+  "empty_result_is_checked_treatment": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "authorized_additional_calls": 0,
+  "historical_answers_rescored": false,
+  "model_interpretation_quality_verified": false,
+  "maximum_request_bytes": 36000,
+  "token_defaults_changed": false,
+  "capability_count_changed": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "existing_actor_label_contract_disclosed": "EXACT_SOURCE_NAMED_ASCII_AT_MOST_32_NO_INVENTED_ALIAS",
+  "existing_negated_action_choice_contract_disclosed": true
+}

@@ -11,12 +11,15 @@ composition and answer/source review. There is no Base shortcut.
 The [October 3 LLM-routing amendment](HCL_LLM_ROUTING_EXECUTION.md) supersedes
 this original entry document's permission to answer after empty or entirely
 unavailable operation plans. The model still interprets, selects and constructs
-bounded arguments; one B01/C01/C03 operation may also receive anchored conditional
+bounded arguments; one B01/C01/C02/C03 operation may also receive anchored conditional
 structured inputs from that first model response. A native HCL result must now
 precede the final answer call.
 Native insufficient evidence may inform a limited answer without becoming
 checked treatment. The original implementation and limitations below are
 retained as context, not permission for a no-execution answer.
+
+The [C02 structured-input extension](HCL_C02_PLANNED_INPUT.md) adds the existing
+action-explanation tool to this conditional input path without changing its parser.
 
 ## Original implementation and limits
 

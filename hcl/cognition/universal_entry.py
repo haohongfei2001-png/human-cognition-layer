@@ -54,15 +54,20 @@ PLANNER_POLICY = (
     'Do not force a capability because of a familiar ID or broad family name. Unsupported or empty preparation is not substantive checked treatment. '
     'Preserve the original task in all interpretations; do not replace it with an easier question. '
     'G02 may use a normative rule only if explicitly present in the original user request. '
-    'For at most ONE selected B01, C01 or C03 operation with one complete source, you may also supply semantic_candidates '
+    'For at most ONE selected B01, C01, C02 or C03 operation with one complete source, you may also supply semantic_candidates '
     'to translate ordinary source wording into existing structured tool inputs in this same planning response. '
     'semantic_candidates is an array of 1 to 24 objects with exactly source_id, quote, kind, content and optional start. '
     'kind must be event; content has exactly canonical_statement, a single line of at most 2000 characters. '
     'quote is an exact original substring of at most 4000 characters; optional start is its Unicode character offset. '
-    'Use only actors explicitly named in that quote; preserve negation, conditionals and qualifications, and leave ambiguous pronouns unresolved. '
+    'Use only actors explicitly named in that quote; derived actor labels must be exact ASCII names of at most 32 characters, with no invented aliases. '
+    'Preserve negation, conditionals and qualifications, and leave ambiguous pronouns unresolved. '
     'Existing forms are NAME: I want to ACTION.; NAME: I plan to ACTION in order to GOAL if CONDITION.; '
     'NAME: I have an opportunity to ACTION.; NAME: I believe PROPOSITION.; NAME: I now believe NEW instead of OLD.; '
     'Narrator: In the declared model, it is false that PROPOSITION. The last form requires an explicit source-declared fictional model. '
+    'For C02 also use NAME: I did ACTION.; NAME: At the time, I knew about TOPIC.; NAME: At the time, I did not know about TOPIC.; '
+    'NAME: At the time, I could ACTION.; NAME: At the time, I could not ACTION. Preserve explicit action-time references; never backfill them from current or later knowledge. '
+    'For a negated action, the existing choice forms are NAME: At the time, I could choose to not ACTION.; '
+    'NAME: At the time, I could not choose to not ACTION. Do not infer inability from non-action. '
     'These are UNVERIFIED TRANSLATION HYPOTHESES, never literal speech, source facts or private-state truth. '
     'Do not invent motives, emotion, receipt, comprehension or normative premises. All candidates and their full source remain visible to the answerer. '
     'Omit semantic_candidates when unnecessary; no automatic extraction call or retry will occur. '
@@ -196,7 +201,7 @@ class UniversalHCL:
             if not isinstance(ids,list)or len(ids)>8 or any(not isinstance(s,str) or s not in self.sources for s in ids)or len(set(ids))!=len(ids):raise HCLBoundaryError('unknown or duplicate source selection')
             if 'semantic_candidates'in operation:
                 translated+=1;rows=operation['semantic_candidates']
-                if (translated>1 or operation['capability']not in ('B01','C01','C03') or len(ids)!=1 or
+                if (translated>1 or operation['capability']not in ('B01','C01','C02','C03') or len(ids)!=1 or
                     not isinstance(rows,list)or not 1<=len(rows)<=24):raise HCLBoundaryError('invalid bounded task plan')
                 for row in rows:
                     if (not isinstance(row,dict)or not {'source_id','quote','kind','content'}<=set(row)or
@@ -353,6 +358,16 @@ class UniversalHCL:
                         support_claim_ids=list(entry.prepared.claim_ids))
         if cid=='C02':
             if len(ids)!=1:return dict(capability=cid,status='C02_REQUIRES_ONE_SOURCE',executed=False)
+            if 'semantic_candidates'in operation:
+                from .retained import prepare_retained_explanations
+                prepared=prepare_retained_explanations(self.workspace,question,source_ids=tuple(ids),
+                    backend=_PlannedSemanticInput(operation['semantic_candidates']),compact_context=True)
+                messages=prepared.current_messages(self.workspace)
+                return dict(capability=cid,status='EXISTING_CONDITIONAL_C02_EXECUTED',executed=True,
+                    result=json.loads(messages[-1]['content']),preparation_policy=messages[0]['content'],
+                    checked_treatment_present=prepared.receipt['checked_treatment_present'],
+                    support_claim_ids=list(prepared.operation_ids),semantic_input_origin='METERED_PLANNING_RESPONSE',
+                    semantic_certification=False,additional_provider_calls=0)
             from .action_explanations import prepare_explanations
             result=prepare_explanations(self.workspace,question,source_id=ids[0])
             result.messages(self.workspace)
