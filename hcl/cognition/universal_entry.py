@@ -315,6 +315,15 @@ class UniversalHCL:
             return dict(capability=cid,status='C04_EXECUTED',executed=True,result=payload,
                         checked_treatment_present=bool(payload['retained_v08']['current_evidence']),
                         support_claim_ids=list(result.claim_ids))
+        if cid=='C05':
+            if len(ids)!=1:return dict(capability=cid,status='C05_REQUIRES_ONE_SOURCE',executed=False)
+            from .agency_chain import prepare_agency_chain
+            result=prepare_agency_chain(self.workspace,question,source_id=ids[0])
+            result.messages(self.workspace)
+            payload=result.payload
+            return dict(capability=cid,status='C05_EXECUTED',executed=True,result=payload,
+                        checked_treatment_present=payload['status']=='CHECKED_CONDITIONAL_CHAIN' and bool(payload['explanations']),
+                        support_claim_ids=list(result.claim_ids))
         if cid=='G02':
             from .responsibility_composition import ResponsibilityCompositionWorkspace
             workspace=ResponsibilityCompositionWorkspace();actors=[]

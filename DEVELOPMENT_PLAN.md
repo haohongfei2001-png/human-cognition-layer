@@ -28,6 +28,15 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: UNIVERSAL_HCL_ENTRY_RETAINED_CAPABILITY_INTEGRATION**
 
+[Retained C05 ordinary composition](docs/HCL_UNIVERSAL_AGENCY_CHAIN_ENTRY.md)
+joins action-time plan checks, explanations and appraisal on the existing shared
+workspace. Full native payloads/policies and all support IDs reach final input;
+later belief cannot backfill earlier reasoning. A combined C04-to-C05 scripted
+flow fits the existing request bound; oversized combinations stop before answer
+without dropping evidence. Native parsing/caching and provider settings are
+unchanged. B04 transport and live selection/efficacy remain unresolved; no new
+provider call, grant or historical rescore is added.
+
 [Retained C04 ordinary appraisal](docs/HCL_UNIVERSAL_APPRAISAL_ENTRY.md) carries
 one complete source, native policy/evidence and shared support IDs into final
 composition. Mixed goals, direct feelings, expression and attribution remain

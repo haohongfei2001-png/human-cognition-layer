@@ -1,0 +1,69 @@
+{
+  "schema": "hcl-universal-agency-chain-local-validation-v1",
+  "base_commit": "3727ac6d0a57450c4fadac2ce91b28cb6b7485bd",
+  "runtime_sha256": "487eb33bf9adf6312f89c7f13957a1df55ab62c7d529432bf307ecd6effc64a1",
+  "local_v1_tests": 1391,
+  "local_v1_status": "PASS",
+  "focused_chain_plan_catalog_tests": 49,
+  "new_integration_test_methods": 13,
+  "historical_regressions": 176,
+  "source_boundary_tests": 9,
+  "metering_encryption_tests": 21,
+  "witness_commands": 66,
+  "offline_workflow_status": "PASS",
+  "gaskell_irie_certified_replays": "PASS",
+  "development_drc_dre_contracts": "PASS",
+  "compile_status": "PASS",
+  "historical_pins": 130,
+  "independent_source_review": "COMPLETE_NATIVE_POLICY_CLAIMS_PREFIX_AND_CURRENT_STATE_SEPARATION_PASS",
+  "test_specification_correction": "TWO_GOAL_LIMIT_COUNTS_ACTION_LINKED_SELECTED_PLAN_GOAL_EXPLANATIONS_NOT_BARE_GOALS",
+  "complete_request_measurements": {
+    "before": {
+      "planning": {
+        "bytes": 22518,
+        "sha256": "f3dfd63d5d02c5ef220de84206515831365d57e19a614dd3f258921b2292bdad"
+      },
+      "answer": {
+        "bytes": 27354,
+        "sha256": "ea74a17578ea8f72b197a6d954d6e8bdbf604cc833c8c2b1264aaa7c37a8ecd7"
+      }
+    },
+    "after": {
+      "planning": {
+        "bytes": 22624,
+        "sha256": "ab81cc48f5955c37fdb16847f532a9b1af2f9a555fc1e634695d9c9d59493942"
+      },
+      "answer": {
+        "bytes": 29164,
+        "sha256": "d42103a7d93a756296a3ba98457c59bddd5ec4d15bbef772fa18746a3fa81f0e"
+      }
+    }
+  },
+  "complete_request_bound": 36000,
+  "combined_c04_c05_status": "COMPLETE_NATIVE_PAYLOADS_AND_SHARED_SUPPORT_PASS",
+  "combined_overflow_status": "ORCHESTRATION_UNAVAILABLE_OR_FAILED",
+  "combined_overflow_backend_calls": 1,
+  "combined_overflow_operations": 3,
+  "source_citation_witness_status": "ORIGINAL_ANCHORS_LOCATED_SEMANTICS_UNASSESSED",
+  "witness_sha256": "bafe909cf62a728a7dd50c21f58b04b7f8a03eb66a95ab74d3ee1fdf24ddfaf9",
+  "log_sha256": {
+    "full_v1": "6dabdd353f802564f328d27af07d3a39aea7da8a1385140b92996ba8cceff64a",
+    "offline_workflow": "19c77704c5002d3a6eb238ff7d40ceee110efeb1b300912662d8216600ca473d",
+    "gaskell_irie": "81b65e976848eb7db4291b7acfcf5a7bc913b4383d38a69e4c4a0033725a9f37",
+    "development_contract": "7fc65c0e80936501a7459bc9a0cd92c11fcfdb1b10050624dc9e53781822dd73"
+  },
+  "remaining_local_source_gates": {
+    "clifford": "NOT_RERUN_PINNED_LOCAL_CACHE_LOST_AFTER_WORKSPACE_ROLLBACK",
+    "gregory": "NOT_RERUN_PINNED_LOCAL_CACHE_LOST_AFTER_WORKSPACE_ROLLBACK",
+    "prior_fetch_cancellation_preserved": true,
+    "new_fetch_performed": false
+  },
+  "required_hosted_gates": "UNCHANGED_EXACT_HEAD_AND_MAIN_REQUIRED_BEFORE_COMPLETION",
+  "b04_entry_adapter": "DEFERRED_COMPLETE_EVIDENCE_TRANSPORT_GATE",
+  "provider_calls": 0,
+  "authorized_additional_calls": 0,
+  "native_grammar_cache_or_transport_changed": false,
+  "remote_publication": "NOT_STARTED",
+  "model_planning": "SCRIPTED_NOT_VERIFIED",
+  "efficacy_established": false
+}
