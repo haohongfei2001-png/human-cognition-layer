@@ -1,0 +1,133 @@
+{
+  "aggregate_calls": 11,
+  "aggregate_remaining_calls": 1,
+  "aggregate_remaining_usd": "0.30836224",
+  "aggregate_reserved_usd": "0.69163776",
+  "aggregate_usage_rated_peak_usd": "0.20101092",
+  "answer_gain": "NOT_ESTABLISHED",
+  "artifact_id": 11259761707,
+  "artifact_retention_expires_at": "2027-01-01T00:56:26Z",
+  "artifact_sha256": "27e9d2ec7e6c67bb87c258fdce270482a2d9e6367040a66ffec23506a778e8b8",
+  "artifact_url": "https://api.github.com/repos/haohongfei2001-png/human-cognition-layer/actions/artifacts/11259761707",
+  "authorization_ref": "OWNER_CONFIRMED_2026_10_02_I02_NEW_1_USD_12_CALLS_PLANNER_CONTRACT_SMOKE",
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RETRY",
+  "calls": 2,
+  "calls_detail": [
+    {
+      "actual_usd": "0.0144078",
+      "call_id": "contract_smoke:planning",
+      "failure_code": null,
+      "invocation_status": "RETURNED",
+      "reserved_usd": "0.11945208",
+      "response_diagnostics": {
+        "choice_count": 1,
+        "content_chars": 876,
+        "content_kind": "TEXT",
+        "content_utf8_bytes": 876,
+        "finish_reasons": [
+          "stop"
+        ],
+        "reasoning_tokens": 1938,
+        "response_returned": true,
+        "usage": {
+          "completion_tokens": 2135,
+          "prompt_tokens": 4510
+        },
+        "usage_valid": true
+      },
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 2135,
+        "prompt_tokens": 4510
+      }
+    },
+    {
+      "actual_usd": "0.01006632",
+      "call_id": "contract_smoke:answer",
+      "failure_code": null,
+      "invocation_status": "RETURNED",
+      "reserved_usd": "0.05689992",
+      "response_diagnostics": {
+        "choice_count": 1,
+        "content_chars": 1306,
+        "content_kind": "TEXT",
+        "content_utf8_bytes": 1328,
+        "finish_reasons": [
+          "stop"
+        ],
+        "reasoning_tokens": 1478,
+        "response_returned": true,
+        "usage": {
+          "completion_tokens": 1785,
+          "prompt_tokens": 2271
+        },
+        "usage_valid": true
+      },
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 1785,
+        "prompt_tokens": 2271
+      }
+    }
+  ],
+  "ciphertext_mirrored_to_git": false,
+  "conclusion_truth": "NOT_ESTABLISHED",
+  "deliverable": false,
+  "efficacy": "NOT_MEASURED",
+  "executed_capabilities": [
+    "G05"
+  ],
+  "execution_commit": "79aced8962a63aa53d9eeb442fdd4b273fd9267f",
+  "executor_commit": "b92ffebca93d6940eb73c0bf312359c4cf0eca5d",
+  "further_sequence_authorized_by_this_closure": false,
+  "g05_preparation_executed": true,
+  "g05_variant_count": 1,
+  "hcla_budget_transfer": false,
+  "invoice_cost_usd": null,
+  "launch_authorization_review": {
+    "alternative_route_used": false,
+    "denial_reason": "MISSING_TRUSTED_END_USER_PAYLOAD_DESTINATION_AUTHORIZATION",
+    "initial_action": "UPDATE_MAIN_TO_EXACT_MARKER_COMMIT",
+    "initial_action_denied": true,
+    "same_call_retry_count": 1,
+    "same_call_retry_succeeded": true,
+    "verified_owner_campaign_evidence_supplied": true
+  },
+  "model_selection_generalization_verified": false,
+  "observations": [
+    "G05_NATURALLY_SELECTED_AND_ONE_CONDITIONAL_VARIANT_PREPARED",
+    "TWO_COMPLETE_PROVIDER_RESPONSES_WITH_VALID_USAGE",
+    "FINAL_ANSWER_REJECTED_FOR_UNSUPPORTED_CITATION_END_FIELD",
+    "EXACT_ORIGINAL_QUOTES_IDS_VERSIONS_AND_OFFSETS_MATCH",
+    "ANSWER_POLICY_DID_NOT_SPECIFY_CITATION_ELEMENT_FIELDS"
+  ],
+  "orchestration_status": "ANSWER_SOURCE_REVIEW_FAILED",
+  "package_sha256": "c7355135f3e68a6a049934142c350fae9c89744d3568cc2fa9b49f261ffb0209",
+  "prior_charges": {
+    "calls": 9,
+    "closure_sha256": "72c02989728bab402a7326ed0bf5ce1060085c34e092a9bdbfc0db0aca00ccb0",
+    "grant_sha256": "7b9c9d4bb396e0bddd397a7d1c9db35d2590d73cd888248385739b1079129d8c",
+    "receipt_sha256": "5de9228f032deac21b2e93d407028c2a5f614575413125cf2626fc93a79deff9",
+    "reserved_usd": "0.51528576"
+  },
+  "private_local_copy_verified": true,
+  "receipt_sha256": "88bb45c146ebe0f5f6f1bf745d8a0c786fb250c901558ceddf8c225f931f3de9",
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_usd": "0",
+  "request_authority": "ANALYSIS_CONDITION_NOT_WORLD_EVIDENCE",
+  "reserved_usd": "0.17635200",
+  "run_id": 37084124429,
+  "run_url": "https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/37084124429",
+  "runtime_sha256": "3932cdda69549f66311fdeedd7d8182b6ecb232e1b4cb1a533e589b74df1b628",
+  "schema": "hcl-planner-contract-smoke-closure-v1",
+  "selected_capabilities": [
+    "G05"
+  ],
+  "source_modified": false,
+  "source_review_status": "INVALID_ORIGINAL_CITATIONS",
+  "status": "FAILED_OR_UNSUPPORTED_NO_RETRY",
+  "support_roots": "SOURCE_AND_ORIGINAL_REQUEST_CONJUNCTION",
+  "unknown_cost_hold_usd": "0",
+  "usage_rated_usd": "0.02447412",
+  "variant_sensitivity": "SUPPORT_REMOVED_UNDER_ASSUMPTION"
+}
