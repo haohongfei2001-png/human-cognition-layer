@@ -1,0 +1,178 @@
+{
+  "schema": "hcl-a02-scope-proposal-engineering-fixtures-v1",
+  "baseline_commit": "7d1f42c7cd94e0b9184c0ed4654fd08e3cc80214",
+  "baseline_runtime_sha256": "f65ebbe7d8e0ee0de54c6c81dc838af112558da4c086b24eeaa08718d660e327",
+  "purpose": "SOURCE_SCOPE_CONTRACT_ONLY_NOT_SEMANTIC_OR_MODEL_GOLD",
+  "provider_calls": 0,
+  "original_source_unchanged": true,
+  "cases": [
+    {
+      "case_id": "actual_speech",
+      "source": "Noor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_assertion_scope": "SOURCE_REPORT",
+      "baseline_observation": [
+        {
+          "start": 0,
+          "end": 40,
+          "assertion_scope": "SOURCE_REPORT"
+        }
+      ],
+      "baseline_status": "PASS"
+    },
+    {
+      "case_id": "inline_condition",
+      "source": "If Noor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_assertion_scope": "CONDITIONAL_OR_EMBEDDED",
+      "baseline_observation": [
+        {
+          "start": 3,
+          "end": 43,
+          "assertion_scope": "CONDITIONAL_OR_EMBEDDED"
+        }
+      ],
+      "baseline_status": "PASS"
+    },
+    {
+      "case_id": "fenced_speech",
+      "source": "```example\nNoor said, \"I believe the gate is open.\"\n```",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_assertion_scope": "CONDITIONAL_OR_EMBEDDED",
+      "baseline_observation": [
+        {
+          "start": 11,
+          "end": 51,
+          "assertion_scope": "SOURCE_REPORT"
+        }
+      ],
+      "baseline_status": "FAIL"
+    },
+    {
+      "case_id": "bracketed_direction",
+      "source": "[Noor said, \"I believe the gate is open.\"]",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_assertion_scope": "CONDITIONAL_OR_EMBEDDED",
+      "baseline_observation": [
+        {
+          "start": 1,
+          "end": 41,
+          "assertion_scope": "SOURCE_REPORT"
+        }
+      ],
+      "baseline_status": "FAIL"
+    },
+    {
+      "case_id": "narrator_hypothetical",
+      "source": "Narrator: The following scene is hypothetical.\nNoor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_assertion_scope": "CONDITIONAL_OR_EMBEDDED",
+      "baseline_observation": [
+        {
+          "start": 47,
+          "end": 87,
+          "assertion_scope": "SOURCE_REPORT"
+        }
+      ],
+      "baseline_status": "FAIL"
+    },
+    {
+      "case_id": "bare_hypothetical_control",
+      "source": "The following scene is hypothetical.\nNoor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_assertion_scope": "CONDITIONAL_OR_EMBEDDED",
+      "baseline_observation": [
+        {
+          "start": 37,
+          "end": 77,
+          "assertion_scope": "CONDITIONAL_OR_EMBEDDED"
+        }
+      ],
+      "baseline_status": "PASS"
+    },
+    {
+      "case_id": "narrator_actual_resumption",
+      "source": "The following scene is hypothetical.\nNarrator: In reality.\nNoor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_assertion_scope": "SOURCE_REPORT",
+      "baseline_observation": [
+        {
+          "start": 59,
+          "end": 99,
+          "assertion_scope": "CONDITIONAL_OR_EMBEDDED"
+        }
+      ],
+      "baseline_status": "FAIL"
+    },
+    {
+      "case_id": "character_fake_resumption",
+      "source": "The following scene is hypothetical.\nMira said, \"In reality.\"\nNoor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_assertion_scope": "CONDITIONAL_OR_EMBEDDED",
+      "baseline_observation": [
+        {
+          "start": 62,
+          "end": 102,
+          "assertion_scope": "CONDITIONAL_OR_EMBEDDED"
+        }
+      ],
+      "baseline_status": "PASS"
+    },
+    {
+      "case_id": "fenced_fake_resumption",
+      "source": "The following scene is hypothetical.\n```example\nIn reality.\n```\nNoor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_assertion_scope": "CONDITIONAL_OR_EMBEDDED",
+      "baseline_observation": [
+        {
+          "start": 64,
+          "end": 104,
+          "assertion_scope": "CONDITIONAL_OR_EMBEDDED"
+        }
+      ],
+      "baseline_status": "PASS"
+    },
+    {
+      "case_id": "speaker_discusses_hypothetical",
+      "source": "Mira said, \"The following scene is hypothetical.\"\nNoor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_assertion_scope": "SOURCE_REPORT",
+      "baseline_observation": [
+        {
+          "start": 50,
+          "end": 90,
+          "assertion_scope": "SOURCE_REPORT"
+        }
+      ],
+      "baseline_status": "PASS"
+    },
+    {
+      "case_id": "unclosed_fence",
+      "source": "```example\nNoor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_assertion_scope": "CONDITIONAL_OR_EMBEDDED",
+      "baseline_observation": [
+        {
+          "start": 11,
+          "end": 51,
+          "assertion_scope": "SOURCE_REPORT"
+        }
+      ],
+      "baseline_status": "FAIL"
+    },
+    {
+      "case_id": "unclosed_direction",
+      "source": "[Noor said, \"I believe the gate is open.\"",
+      "probe_quote": "Noor said, \"I believe the gate is open.\"",
+      "expected_assertion_scope": "CONDITIONAL_OR_EMBEDDED",
+      "baseline_observation": [
+        {
+          "start": 1,
+          "end": 41,
+          "assertion_scope": "SOURCE_REPORT"
+        }
+      ],
+      "baseline_status": "FAIL"
+    }
+  ]
+}

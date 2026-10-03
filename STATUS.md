@@ -33,6 +33,13 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: UNIVERSAL_HCL_ENTRY_RETAINED_CAPABILITY_INTEGRATION**
 
+[A02 structural scope isolation](docs/HCL_A02_STRUCTURAL_SCOPE.md) shares one
+offset-preserving containment/narration view across existing candidate paths.
+Embedded formatting remains ambiguous; explicit source-frame admission, B04
+copy-cue consumption and complete retained-state transport remain separate gates.
+No adapter, provider call, historical rescore or efficacy claim is added. The
+runtime amendment preserves the adopted PR355 repair and all prior evidence.
+
 [HCL I02 universal development run](docs/HCL_I02_UNIVERSAL_DEVELOPMENT_RUN.md)
 37022979416 stopped after two provider invocations: Base returned, HCL planning
 failed with a generic metered-backend/journal code. No complete pair or efficacy

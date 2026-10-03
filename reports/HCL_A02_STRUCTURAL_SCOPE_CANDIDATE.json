@@ -1,0 +1,38 @@
+{
+  "schema": "hcl-a02-recovered-local-candidate-v1",
+  "disposition": "LOCAL_SOURCE_REVIEW_PENDING",
+  "base_commit": "a588cbc45400bea5e51078d1447a48f437972033",
+  "base_tree": "cfa7aa14a903623f6882c643bbf23e7244f6a5f0",
+  "base_exact_main_checks": "SEVEN_SUCCESS",
+  "previous_runtime_sha256": "e7154168e3765fbdd248845bce9dc08fcd2c4960950e369100a05f73ed8a7174",
+  "candidate_runtime_sha256": "d1964a8f2e47472a24dbcf55b67c89ae9a781122c4f5a95013d65f07669d16ab",
+  "changed_runtime_files": [
+    "hcl/cognition/semantic.py"
+  ],
+  "recovered_prior_candidate": "39d805354dc5c4b447f895cfa3b82fdd1216379b",
+  "recovered_prior_runtime_sha256": "847b332d2c50a2bf4488f0eadf53176464993a8c416a1fb1e1542a9c5e95f5df",
+  "recovery_proof": "OLD_B04_HASH_REPRODUCES_PRIOR_CANDIDATE_RUNTIME_EXACTLY",
+  "adopted_b04_file_unchanged": true,
+  "historical_pins_verified": 108,
+  "fixture_sha256": {
+    "eval/a02_scope_proposal_v1.json": "d17355a0da81507560660ab24e01c072c1758ff30c5b5920ff762876c627e16a",
+    "eval/a02_scope_boundary_review_v1.json": "7dd1904a7c832b02fc7f4f1fc807e0c96054f23ad99496cef256af7908461290"
+  },
+  "validation": {
+    "direct_test_methods": 19,
+    "direct_status": "PASS",
+    "frozen_cases": 21,
+    "frozen_case_status": "PASS",
+    "focused_a02_narrator_b04_tests": 71,
+    "focused_status": "PASS",
+    "full_suite": "PENDING_DEPENDENCY_RESTORATION_AND_RUNTIME_AMENDMENT",
+    "dependency_restoration": "POLL_CANCELLED_NO_PROCESS_OR_TARGET_EXIT_UNKNOWN",
+    "installation_retry": false,
+    "publication": "NOT_STARTED"
+  },
+  "provider_calls": 0,
+  "authorized_additional_calls": 0,
+  "source_text_or_schema_changed": false,
+  "formatting_establishes_hypothetical_world": false,
+  "answer_gain_established": false
+}

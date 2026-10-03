@@ -1,0 +1,47 @@
+{
+  "schema": "hcl-a02-structural-scope-local-validation-v1",
+  "base_commit": "a588cbc45400bea5e51078d1447a48f437972033",
+  "runtime_sha256": "f02e86a390ff4935851e9da28fad127d93379f2631a768072e2f7d4103c81c57",
+  "local_v1_tests": 1351,
+  "local_v1_status": "PASS",
+  "historical_regressions": 176,
+  "source_boundary_tests": 9,
+  "metering_encryption_tests": 21,
+  "witness_commands": 64,
+  "offline_workflow_status": "PASS",
+  "gaskell_irie_certified_replays": "PASS",
+  "development_drc_dre_contracts": "PASS",
+  "compile_status": "PASS",
+  "historical_pins": 113,
+  "log_sha256": {
+    "full_v1": "89f5040edda2053a036d362811c057e9122ac5f53f44a3089692aa137caf317f",
+    "offline_workflow": "899049a08ea1e6d34ff2f2b53a3e3629efdc7000015a8041af4c550527a1e5b4",
+    "gaskell_irie": "ff654683f9f53d974d11ae607a9dd113083908b37d44f612d1fd223fb8d99d42",
+    "development_contract": "3c116f5f087a2c57ff751bfd812b7573be83f3324413cc13c538580167336d39"
+  },
+  "remaining_local_source_gates": {
+    "clifford": "NOT_RERUN_PINNED_LOCAL_CACHE_LOST_AFTER_WORKSPACE_ROLLBACK",
+    "gregory": "NOT_RERUN_PINNED_LOCAL_CACHE_LOST_AFTER_WORKSPACE_ROLLBACK",
+    "prior_fetch_cancellation_preserved": true,
+    "new_fetch_performed": false
+  },
+  "dependency_restoration": {
+    "prior_polling": "AUTOMATIC_APPROVAL_REVIEW_CANCELLED_EXIT_UNKNOWN",
+    "readonly_resolution": "NO_PROCESS_NO_TARGET_NO_PACKAGES",
+    "authorized_subsequent_installations": 1,
+    "official_pins": {
+      "openai": "2.14.0",
+      "z3-solver": "4.15.4.0"
+    },
+    "status": "PASS"
+  },
+  "provider_calls": 0,
+  "authorized_additional_calls": 0,
+  "remote_publication": "NOT_STARTED",
+  "efficacy_established": false,
+  "direct_scope_test_methods": 25,
+  "focused_semantic_narrator_b04_tests": 77,
+  "original_a02_prefix_blocker": "PASS_SHARED_QUALIFIED_CUE_STATE_FOR_SPEECH_AND_NARRATOR_REPORTS",
+  "remaining_b04_consumer_blockers": 2,
+  "independent_source_review": "BOUNDED_SCOPE_AND_ACTOR_LABEL_ISOLATION_PASS"
+}

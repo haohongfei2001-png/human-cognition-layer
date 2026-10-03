@@ -180,7 +180,7 @@ Mira: In team, proposal is not fair.'''
 class ConceptFreezeTests(unittest.TestCase):
     def test_amendment_preserves_previous_files_and_unrelated_runtime(self):
         from pathlib import Path
-        from scripts.development_b04_copy_reference_amendment import validate_current
+        from scripts.development_a02_structural_scope_amendment import validate_current
         self.assertTrue(validate_current());original=Path.read_bytes
         for changed in ('reports/HCL_DEVELOPMENT_UNIVERSAL_NORMATIVE_AMENDMENT.json',
                         'scripts/development_universal_normative_amendment.py',

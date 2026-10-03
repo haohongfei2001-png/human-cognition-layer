@@ -5,7 +5,7 @@ from pathlib import Path
 
 from hcl.cognition import UniversalHCL
 from hcl.cognition.universal_entry import CallAllowance
-from scripts.development_b04_copy_reference_amendment import validate_current
+from scripts.development_a02_structural_scope_amendment import validate_current
 from scripts.witness_argument_sensitivity import SOURCE, QUESTION
 
 
