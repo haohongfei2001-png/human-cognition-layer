@@ -1,0 +1,20 @@
+{
+  "schema": "hcl-answer-citation-contract-amendment-v1",
+  "previous_hcl_runtime_sha256": "3932cdda69549f66311fdeedd7d8182b6ecb232e1b4cb1a533e589b74df1b628",
+  "amended_hcl_runtime_sha256": "6554c136562a112333071eda9ebb5a18bd1e51686b68a10f96647d4bf0cc331d",
+  "changed_runtime_files": [
+    "hcl/cognition/reader_entry.py"
+  ],
+  "reason": "DISCLOSE_EXISTING_ANSWER_CITATION_ELEMENT_CONTRACT",
+  "validator_changed": false,
+  "dispatch_changed": false,
+  "raw_output_rewriting_added": false,
+  "model_or_token_settings_changed": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "authorized_additional_calls": 0,
+  "historical_failed_answer_reclassified": false,
+  "answer_gain_established": false,
+  "model_compliance_verified": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
