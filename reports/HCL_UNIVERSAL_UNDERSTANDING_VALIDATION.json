@@ -1,0 +1,92 @@
+{
+  "schema": "hcl-universal-understanding-local-validation-v1",
+  "base_commit": "663ae72f07d6061f5c64770494e25eecc8e8378f",
+  "runtime_sha256": "071d5327b32903c96b6e397103b8715acd82a4974af4195e32f49f35ddd3b53d",
+  "local_v1_tests": 1443,
+  "local_v1_status": "PASS",
+  "focused_adapter_native_catalog_tests": 43,
+  "new_integration_test_methods": 18,
+  "historical_regressions": 176,
+  "source_boundary_tests": 9,
+  "metering_encryption_tests": 21,
+  "witness_commands": 68,
+  "offline_workflow_status": "PASS",
+  "gaskell_irie_certified_replays": "PASS",
+  "development_drc_dre_contracts": "PASS",
+  "compile_status": "PASS",
+  "historical_pins": 147,
+  "inherited_pins": 142,
+  "independent_runtime_review": "PASS_NO_BLOCKING_FINDINGS",
+  "treatment_basis": "EXACT_MATCH_IN_THIS_NATIVE_SUPPORTED_TARGET_CHAINS_OR_DOUBTS",
+  "summary_or_unrelated_chain_is_treatment": false,
+  "explicit_doubt": "NEGATIVE_SOURCE_REPORT_NOT_VALIDATED_RECEIPT_OR_PRIVATE_COMPREHENSION",
+  "source_admission": "LF_OR_CRLF_ONLY_ORIGINAL_BYTES_UNCHANGED",
+  "native_branch_specific_bounds_preserved": true,
+  "complete_request_measurements": {
+    "before": {
+      "planning": {
+        "bytes": 25789,
+        "sha256": "6d3ee603f86e2759fdd52c3d603a082cc4b4af083149ecda4b0b4b88ffe05a7d"
+      },
+      "answer": {
+        "bytes": 12942,
+        "sha256": "043eeeb897eb569addf0149120ce352056c749fc69d5c97b317afba945d7bcb9"
+      }
+    },
+    "after": {
+      "planning": {
+        "bytes": 25884,
+        "sha256": "acd2d56fef75cdefeb7ef0d0ed86f53863a1479b7177d14970b9a74db039d7be"
+      },
+      "answer": {
+        "bytes": 13694,
+        "sha256": "bf8b9506c70aecaea21c37b08eb99caf1527ee958a893eac47dabf53d06a7304"
+      }
+    },
+    "current_target_without_chain": {
+      "planning": {
+        "bytes": 25884,
+        "sha256": "acd2d56fef75cdefeb7ef0d0ed86f53863a1479b7177d14970b9a74db039d7be"
+      },
+      "answer": {
+        "bytes": 13707,
+        "sha256": "e7162fb146e58a22c3ea35a1ef00ef4e98a8900004823b092f12800280f75618"
+      }
+    }
+  },
+  "planning_request_hash_scope": "RECORDED_REQUEST_INCLUDING_ACTUAL_INGESTION_TIMESTAMP",
+  "complete_request_bound": 36000,
+  "combined_d01_d02_status": "COMPLETE_NATIVE_PAYLOADS_AND_SHARED_SUPPORT_PASS",
+  "initial_d01_receipt": "REPORTED_NON_EXPOSURE",
+  "initial_d02_status": "BOUNDED_MUTUALLY_ACKNOWLEDGED",
+  "revised_d02_status": "SUPERSEDED_MEANING",
+  "current_target_without_chain_status": "NO_COMPLETE_ACKNOWLEDGMENT_CHAIN",
+  "current_target_without_chain_treatment": false,
+  "old_support_after_revision": "UNSUPPORTED",
+  "combined_overflow_status": "ORCHESTRATION_UNAVAILABLE_OR_FAILED",
+  "combined_overflow_backend_calls": 1,
+  "combined_overflow_operations": 3,
+  "source_citation_witness_status": "ORIGINAL_ANCHORS_LOCATED_SEMANTICS_UNASSESSED",
+  "witness_sha256": "08ccfe16d3de2e8a3255e2352f686ac0d532e16b143d3ab2fa7802fc5896d423",
+  "log_sha256": {
+    "full_v1": "4c80cbbeb53fdec4b2a83bbf97943fd1512f1d4c8a0d2c944faee2a6f1e171b0",
+    "offline_workflow": "32d514d63319cd1c094f66c34c57120cd848abd7bc058c585237e003cbf848e4",
+    "gaskell_irie": "859121786e1b63bac1304d8a7d7118a995c29819e2b69fa9570f463daffd5ba3",
+    "development_contract": "5b20317a635eee604c3e3a62ef7f44cca9e4d2be76714f98a76ed2fb362e9b41"
+  },
+  "remaining_local_source_gates": {
+    "clifford": "NOT_RERUN_PINNED_LOCAL_CACHE_LOST_AFTER_WORKSPACE_ROLLBACK",
+    "gregory": "NOT_RERUN_PINNED_LOCAL_CACHE_LOST_AFTER_WORKSPACE_ROLLBACK",
+    "prior_fetch_cancellation_preserved": true,
+    "new_fetch_performed": false
+  },
+  "required_hosted_gates": "UNCHANGED_EXACT_HEAD_AND_MAIN_REQUIRED_BEFORE_COMPLETION",
+  "retained_native_format_gap": "UNREPAIRED_OUTSIDE_BOUNDED_ADAPTER",
+  "b04_entry_adapter": "DEFERRED_COMPLETE_EVIDENCE_TRANSPORT_GATE",
+  "provider_calls": 0,
+  "authorized_additional_calls": 0,
+  "native_grammar_cache_or_transport_changed": false,
+  "remote_publication": "NOT_STARTED",
+  "model_planning": "SCRIPTED_NOT_VERIFIED",
+  "efficacy_established": false
+}

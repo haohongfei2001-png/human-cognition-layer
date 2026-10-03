@@ -84,6 +84,11 @@ _CONTRACTS = {
     )
 }
 _CONTRACTS.update({
+    'D02':AdapterContract('OPERATION_QUESTION',1,1,_UNUSED_BINDINGS,
+        ('Do <Speaker> and <Recipient> share an acknowledged understanding that <content>?',),
+        'Use the retained distinct capitalized single-token participant/content question without inventing an interpretation, confirmation or receipt. Keep the original outer question unchanged.',
+        'LF or CRLF source separators only; other line separators are explicitly unsupported. Question at most 8000 characters, target content at most 250, 20 accepted rows and 64 semantic candidates. Source bounds remain 64000 characters, 80 nonblank lines and 4000 characters per line. Receipt-bearing views additionally require complete unambiguous lines, actual access cues and ASCII participant names of at most 32 characters with eight actors; doubt-only reports need not create a receipt view. Complete requests must fit the metered transport without truncation.',
+        'Treatment requires a chain or explicit doubt matching the supported native summary target, not execution or an unrelated summary. Doubt is negative source-report evidence, not a validated receipt chain. Keep receipt at interpretation, receipt at confirmation and current confirmation receipt distinct; later receipt cannot backfill history. No private comprehension, infinite common knowledge or restored trust. Preserve revised meanings and historical acknowledgments.'),
     'D01':AdapterContract('OPERATION_QUESTION',1,1,_UNUSED_BINDINGS,
         ("What is the status of <Speaker>'s promise to <Recipient> to <action>?",),
         'Use the existing distinct source-named speaker/recipient promise-status form as an intent-preserving interpretation. Do not invent a promise, receipt, condition or response; keep the original outer question unchanged.',

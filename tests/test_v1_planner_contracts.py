@@ -23,7 +23,7 @@ class PlannerContractTests(unittest.TestCase):
     def test_all_inventory_retained_and_current_adapters_have_contracts(self):
         self.assertTrue(validate_catalog());self.assertEqual(len(CATALOG),40)
         ready={cid for cid,c in CATALOG.items()if c.entry_contract is not None}
-        self.assertEqual(ready,{'B01','B02','C01','C02','C03','C04','C05','D01','G01','G02','G03','G04','G05'})
+        self.assertEqual(ready,{'B01','B02','C01','C02','C03','C04','C05','D01','D02','G01','G02','G03','G04','G05'})
         for cid,c in CATALOG.items():
             self.assertEqual(c.entry_readiness=='BOUNDED_ORDINARY_ADAPTER',c.entry_contract is not None)
             if c.entry_contract:
@@ -42,7 +42,7 @@ class PlannerContractTests(unittest.TestCase):
         self.assertEqual(r['provider_calls'],0)
 
     def test_question_origin_contract_matches_dispatch(self):
-        operation_question={'B01','B02','C01','C02','C03','C04','C05','D01'}
+        operation_question={'B01','B02','C01','C02','C03','C04','C05','D01','D02'}
         for cid,c in CATALOG.items():
             if c.entry_contract:
                 self.assertEqual(c.entry_contract.question_origin,
@@ -113,7 +113,7 @@ class PlannerContractTests(unittest.TestCase):
         self.assertEqual(len(CATALOG['G05'].entry_contract.question_forms),3)
 
     def test_single_source_contracts_do_not_merge_domains(self):
-        for cid in ('B01','B02','C01','C02','C03','C04','C05','D01','G03','G04','G05'):
+        for cid in ('B01','B02','C01','C02','C03','C04','C05','D01','D02','G03','G04','G05'):
             self.assertEqual((CATALOG[cid].entry_contract.minimum_sources,CATALOG[cid].entry_contract.maximum_sources),(1,1))
             session=UniversalHCL();session.put_source('a',ARGUMENT);session.put_source('b',ARGUMENT)
             result=session._execute(operation(cid,'Why did Ena open the folder?',['a','b']),'If Ena could revise were false, what changes?')

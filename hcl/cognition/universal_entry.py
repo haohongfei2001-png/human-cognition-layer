@@ -336,6 +336,19 @@ class UniversalHCL:
             return dict(capability=cid,status='D01_EXECUTED',executed=True,result=payload,
                         checked_treatment_present=payload['status']=='CHECKED_CONDITIONAL_LIFECYCLE',
                         support_claim_ids=list(result.claim_ids))
+        if cid=='D02':
+            if len(ids)!=1:return dict(capability=cid,status='D02_REQUIRES_ONE_SOURCE',executed=False)
+            source=self.sources[ids[0]]['text']
+            if '\r' in source.replace('\r\n','') or any(c in source for c in '\v\f\x1c\x1d\x1e\x85\u2028\u2029'):
+                return dict(capability=cid,status='D02_REQUIRES_LF_OR_CRLF_SOURCE',executed=False)
+            from .mutual_understanding import prepare_mutual_understanding
+            result=prepare_mutual_understanding(self.workspace,question,source_id=ids[0])
+            result.messages(self.workspace)
+            payload=result.payload;summary=payload.get('dependency_claim_id')
+            target=self.workspace.core.claims[summary].content['target'] if summary else None
+            treatment=target is not None and any(row['content']==target for row in payload['acknowledgment_chains']+payload['doubts'])
+            return dict(capability=cid,status='D02_EXECUTED',executed=True,result=payload,
+                        checked_treatment_present=treatment,support_claim_ids=list(result.claim_ids))
         if cid=='G02':
             from .responsibility_composition import ResponsibilityCompositionWorkspace
             workspace=ResponsibilityCompositionWorkspace();actors=[]

@@ -197,7 +197,7 @@ class UniversalSensitivityTests(unittest.TestCase):
 
     def test_catalog_is_truthfully_partial(self):
         self.assertEqual(CATALOG['G05'].entry_readiness,'BOUNDED_ORDINARY_ADAPTER')
-        self.assertEqual(sum(c.entry_readiness=='BOUNDED_ORDINARY_ADAPTER' for c in CATALOG.values()),13)
+        self.assertEqual(sum(c.entry_readiness=='BOUNDED_ORDINARY_ADAPTER' for c in CATALOG.values()),14)
         session=UniversalHCL();session.put_source('scene',SOURCE)
         for cid in ('H01','H02'):
             row=session._execute(operation(cid,QUESTION,['scene']),QUESTION)
@@ -207,7 +207,7 @@ class UniversalSensitivityTests(unittest.TestCase):
 class SensitivityFreezeTests(unittest.TestCase):
     def test_every_historical_amendment_rejects_tampering(self):
         from pathlib import Path
-        from scripts.development_d01_source_line_amendment import HISTORICAL_PINS, validate_current
+        from scripts.development_universal_understanding_amendment import HISTORICAL_PINS, validate_current
         original=Path.read_bytes;self.assertTrue(validate_current())
         for changed in HISTORICAL_PINS:
             with self.subTest(path=changed):
@@ -219,7 +219,7 @@ class SensitivityFreezeTests(unittest.TestCase):
 
     def test_runtime_drift_and_missing_membership_reject(self):
         from pathlib import Path
-        from scripts.development_d01_source_line_amendment import validate_current
+        from scripts.development_universal_understanding_amendment import validate_current
         original=Path.read_bytes
         for changed in ('hcl/cognition/argument_sensitivity.py','hcl/cognition/argument_analysis.py',
                         'hcl/cognition/core.py','hcl/cognition/universal_entry.py','hcl/cognition/capability_catalog.py'):
