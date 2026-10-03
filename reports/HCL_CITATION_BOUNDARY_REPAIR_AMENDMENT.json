@@ -1,0 +1,22 @@
+{
+  "schema": "hcl-citation-boundary-repair-amendment-v1",
+  "previous_hcl_runtime_sha256": "6554c136562a112333071eda9ebb5a18bd1e51686b68a10f96647d4bf0cc331d",
+  "amended_hcl_runtime_sha256": "f65ebbe7d8e0ee0de54c6c81dc838af112558da4c086b24eeaa08718d660e327",
+  "changed_runtime_files": [
+    "hcl/cognition/retained.py",
+    "hcl/cognition/universal_entry.py"
+  ],
+  "reason": "STRICT_ANSWER_TYPE_OVERLAP_AMBIGUITY_AND_SOURCE_ID_ADMISSION_ALIGNMENT",
+  "citation_field_schema_changed": false,
+  "unique_quote_relocation_changed": false,
+  "exact_offset_disambiguation_changed": false,
+  "whitespace_only_mode_changed": false,
+  "raw_output_rewriting_added": false,
+  "model_or_token_settings_changed": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "authorized_additional_calls": 0,
+  "historical_answers_rescored": false,
+  "answer_gain_established": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

@@ -304,6 +304,16 @@ def answer_retained_reader(workspace, query, answer_backend, **kwargs):
 
 def audit_original_citations(prepared, raw):
     """Bounded original quotation location only, never semantic answer grading."""
+    def locations(pattern, text):
+        # Lookahead includes overlapping occurrences. Two are enough to reject
+        # ambiguity; never build an unbounded list of repeated source matches.
+        spans = []
+        for match in re.finditer('(?=(' + pattern + '))', text):
+            spans.append(match.span(1))
+            if len(spans) == 2:
+                break
+        return spans
+
     result = dict(status='INVALID_ORIGINAL_CITATIONS', deliverable=False,
         semantic_adequacy='UNASSESSED', semantic_certification=False, anchors=[],
         raw_output_rewritten=False)
@@ -316,7 +326,7 @@ def audit_original_citations(prepared, raw):
             raise ValueError('bounded JSON answer required')
         if (not isinstance(obj, dict) or set(obj) != {'answer','source_citations','uncertainty','assumptions'}
                 or not isinstance(obj['source_citations'], list) or len(obj['source_citations']) > 32
-                or not all(isinstance(obj[k], str) for k in ('uncertainty','assumptions'))):
+                or not all(isinstance(obj[k], str) for k in ('answer','uncertainty','assumptions'))):
             raise ValueError('answer contract invalid')
         sources = json.loads(prepared.messages[-1]['content'])['sources']
         for citation in obj['source_citations']:
@@ -341,12 +351,12 @@ def audit_original_citations(prepared, raw):
             if offset is not None and text[offset:offset+len(quote)] == quote:
                 start, end = offset, offset+len(quote)
             else:
-                spans = [(m.start(),m.end()) for m in re.finditer(re.escape(quote),text)]
+                spans = locations(re.escape(quote), text)
                 if not spans:
                     # Whitespace layout only, with the original authoritative
                     # substring retained in the audit; no lexical repair.
                     pattern = r'\s+'.join(re.escape(t) for t in re.split(r'\s+',quote.strip()))
-                    spans = [(m.start(),m.end()) for m in re.finditer(pattern,text)]
+                    spans = locations(pattern, text)
                     mode = 'UNIQUE_WHITESPACE_LAYOUT_ONLY'
                 if len(spans) != 1:
                     raise ValueError('missing or ambiguous original quotation')

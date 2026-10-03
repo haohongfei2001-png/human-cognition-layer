@@ -8,7 +8,7 @@ from unittest.mock import patch
 from hcl.cognition import CognitionWorkspace, UniversalHCL
 from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY, answer_reader_entry
 from hcl.cognition.retained import audit_supplied_source_citations
-from scripts.development_answer_citation_contract_amendment import validate_current
+from scripts.development_citation_boundary_amendment import validate_current
 from tests.test_v1_universal_question import Stub, run
 
 SOURCE = 'Lin wrote the note.\nThe blue box stayed closed.'
@@ -166,11 +166,10 @@ class AnswerCitationContractTests(unittest.TestCase):
                 data=original(path)
                 return data+b' ' if str(path)==target else data
             with patch.object(Path,'read_bytes',read),self.assertRaises(ValueError):validate_current()
-        original_text=Path.read_text
-        def changed_reader(path,*args,**kwargs):
-            text=original_text(path,*args,**kwargs)
-            return text+'\nUNRELATED_RUNTIME_CHANGE = True\n' if str(path)=='hcl/cognition/reader_entry.py' else text
-        with patch.object(Path,'read_text',changed_reader),self.assertRaises(ValueError):validate_current()
+        def changed_reader(path):
+            data=original(path)
+            return data+b'\nUNRELATED_RUNTIME_CHANGE = True\n' if str(path)=='hcl/cognition/reader_entry.py' else data
+        with patch.object(Path,'read_bytes',changed_reader),self.assertRaises(ValueError):validate_current()
         report=json.loads(Path('reports/HCL_PLANNER_CONTRACT_SMOKE_CLOSURE.json').read_text())
         self.assertFalse(report['deliverable']);self.assertEqual(report['aggregate_calls'],11)
         self.assertEqual(report['receipt_sha256'],'88bb45c146ebe0f5f6f1bf745d8a0c786fb250c901558ceddf8c225f931f3de9')

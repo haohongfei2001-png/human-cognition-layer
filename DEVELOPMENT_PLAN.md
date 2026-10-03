@@ -134,6 +134,14 @@ contracts and exact full-message budget checks are provider-free; no live model
 compliance or efficacy result. Campaign remains eleven calls/USD0.69163776 held,
 with zero additional calls authorized by this source-only repair.
 
+[Citation and source-admission boundary repair](docs/HCL_CITATION_BOUNDARY_REPAIR.md)
+fixes three authored deterministic defects: overlapping quote ambiguity, missing
+legacy answer-string validation, and129-character source IDs admitted despite a
+128-character final boundary. Exact-offset disambiguation, unique relocation,
+whitespace-only mode and raw rejected output remain explicit. Provider-free tests
+and historical pins cover the narrow change; no model/efficacy claim or new calls.
+Campaign stays eleven calls/USD0.69163776 full holds, all sub-runs closed.
+
 ## Owner architecture amendment — 2026-10-02
 
 Every HCL-arm and ordinary product input must enter HCL orchestration. Internal
