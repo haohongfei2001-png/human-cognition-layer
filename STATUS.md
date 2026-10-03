@@ -136,6 +136,14 @@ closed with zero authority; live workflow/marker removed. One original campaign
 call remains, insufficient for a complete two-call flow; no further paid sequence.
 No generalization, efficacy or answer-gain claim; historical evidence stays pinned.
 
+[Explicit final-answer citation contract](docs/HCL_ANSWER_CITATION_CONTRACT.md)
+adds the existing citation element schema to the shared answer policy, including
+internal-anchor/output distinctions. Validator, relocation behavior, dispatch and
+all historical rejected answers remain unchanged. Authored positive/negative
+contracts and exact full-message budget checks are provider-free; no live model
+compliance or efficacy result. Campaign remains eleven calls/USD0.69163776 held,
+with zero additional calls authorized by this source-only repair.
+
 ## Owner architecture amendment — 2026-10-02
 
 Every HCL-arm and ordinary product input must enter HCL orchestration. Internal

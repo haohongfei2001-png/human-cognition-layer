@@ -23,7 +23,20 @@ _FINAL_ANSWER_POLICY = (
     'Useful ordinary inferences are allowed: identify the inference and its supporting premises, '
     'and put material unstated premises in assumptions. When the source leaves the cause open, '
     'keep plausible alternatives open in uncertainty instead of completing a familiar story '
-    'or excluding another motive without evidence.'
+    'or excluding another motive without evidence. '
+    'answer, uncertainty and assumptions must be strings. source_citations must be an array '
+    'of at most 32 entries. Use citation objects with required source_id and quote fields; '
+    'the only optional fields are version and start. Do not include end or any other field. '
+    'Internal prepared-state anchors are not output citation objects; do not copy their extra fields. '
+    'Copy source_id from the supplied original sources and quote a nonblank contiguous original '
+    'substring of at most 4000 characters, preserving exact wording. If included, version must '
+    'be the matching supplied integer source version, not a boolean. Omit start unless known; '
+    'a non-null start must be a nonnegative integer, not a boolean, specifying the zero-based '
+    'Unicode character offset in the original text, not a byte or UTF-16 offset. For repeated '
+    'quotations, supply the correct start and exact original substring. With exactly one supplied '
+    'source, a quote string alone is also accepted, but explicit source_id objects are preferred; '
+    'with multiple sources, each citation must identify its source. An empty citation array is allowed. '
+    'With no supplied original sources, source_citations must be empty.'
 )
 
 
