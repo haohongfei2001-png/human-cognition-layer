@@ -9,16 +9,23 @@ from scripts.universal_development_protocol import CASES,ordinary
 def grant(package):return dict(schema='hcl-universal-development-grant-v1',status='READY',package_sha256=digest(package),authorization_ref='OWNER_APPROVED_2026_10_02_NEW_2_50_18_CALLS',maximum_usd='2.50',maximum_calls=18,historical_budget_transfer=False,retries=0)
 
 class DevelopmentExecutionTests(unittest.TestCase):
-    def test_all_six_cases_use_internal_planner_with_every_phase_recorded(self):
+    def test_current_entry_stops_historical_harness_empty_plan_with_every_attempt_recorded(self):
         package=build_package();client=FakeClient()
         with tempfile.TemporaryDirectory()as root:
-            directory=Path(root)/'one-run';result=run(client,package,grant(package),directory)
-            self.assertEqual(len(client.calls),18);self.assertEqual(len(result['calls']),18)
-            self.assertEqual(sum(c['phase']=='planning'for c in result['calls']),6)
+            directory=Path(root)/'one-run'
+            with self.assertRaisesRegex(ValueError,'HCL_ORCHESTRATION_FAILED_NO_RETRY'):
+                run(client,package,grant(package),directory)
+            result=json.loads((directory/'receipt.json').read_text())
+            self.assertEqual(len(client.calls),2);self.assertEqual(len(result['calls']),2)
+            self.assertEqual(sum(c['phase']=='planning'for c in result['calls']),1)
             self.assertEqual(result['budget_state'],'CLOSED_NO_TRANSFER_NO_RETRY')
+            self.assertEqual(result['status'],'FAILED_OR_INCOMPLETE_NO_RETRY')
             self.assertLessEqual(float(result['reserved_usd']),2.5)
-            self.assertEqual(len(result['results']),12)
-            self.assertEqual(json.loads((directory/'receipt.json').read_text()),json.loads(json.dumps(result)))
+            self.assertEqual(len(result['results']),2)
+            hcl=result['results'][-1]['orchestration']
+            self.assertEqual(hcl['failure_reason'],'NATIVE_HCL_RESULT_REQUIRED_BEFORE_ANSWER')
+            self.assertEqual(hcl['hcl_execution']['native_results'],0)
+            self.assertNotIn('answer_raw',hcl)
             self.assertNotIn('HIDDEN_',json.dumps(result))
             for row in result['calls']:
                 self.assertEqual(row['request_sha256'],digest(row['request']))
@@ -26,7 +33,7 @@ class DevelopmentExecutionTests(unittest.TestCase):
                 for forbidden in ('expected_label','review_criteria','scoring'):
                     self.assertNotIn(forbidden,request)
             with self.assertRaises(FileExistsError):run(client,package,grant(package),directory)
-            self.assertEqual(len(client.calls),18)
+            self.assertEqual(len(client.calls),2)
 
     def test_unknown_call_closes_entire_batch_and_never_retries(self):
         package=build_package();client=FakeClient();client.failure='PRIVATE_UPSTREAM_CANARY'

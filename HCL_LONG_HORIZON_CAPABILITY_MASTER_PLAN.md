@@ -1,5 +1,20 @@
 # HCL Long-Horizon Capability Master Plan
 
+## Current implementation policy — owner correction 2026-10-03
+
+[LLM-directed understanding and required HCL execution](docs/HCL_LLM_ROUTING_EXECUTION.md)
+lets the model interpret the request, select useful existing HCL operations and
+construct their arguments. One selected B01/C01/C03 operation can reuse anchored
+interpretations from that same first planning response through the existing
+conditional tools, with no additional provider phase or native parser change.
+A final model answer requires an actual native HCL result, including an honest
+insufficient-evidence result; empty or entirely
+unavailable plans cannot silently continue to an answer. Selection accuracy and
+checked treatment remain separate from invocation. Source authority, privacy and
+budget guards stay in force. New adapter expansion is deferred while the complete
+usable flow is verified. This does not require HCL to independently solve language
+understanding, and it authorizes no model spending.
+
 **版本：Canonical 1.0 · 2026-09-29**  
 **仓库：`haohongfei2001-png/human-cognition-layer`**  
 **最终核对基线：`main@310b667280769dc1b19c2a8e463e8f6171652cec`（PR #160）**  

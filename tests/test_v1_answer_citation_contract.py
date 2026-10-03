@@ -8,8 +8,8 @@ from unittest.mock import patch
 from hcl.cognition import CognitionWorkspace, UniversalHCL
 from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY, answer_reader_entry
 from hcl.cognition.retained import audit_supplied_source_citations
-from scripts.development_universal_understanding_amendment import validate_current
-from tests.test_v1_universal_question import Stub, run
+from scripts.development_llm_routing_execution_amendment import validate_current
+from tests.test_v1_universal_question import Stub, operation, plan, run
 
 SOURCE = 'Lin wrote the note.\nThe blue box stayed closed.'
 SOURCES = [dict(source_id='record-a', version=3, text=SOURCE)]
@@ -29,8 +29,8 @@ def audit(citations, sources=SOURCES):
 
 
 class AnswerPort(Stub):
-    def __init__(self, citations):
-        super().__init__(); self.citations=citations
+    def __init__(self, citations, selected=None):
+        super().__init__(selected); self.citations=citations
     def complete(self, phase, frame):
         result=super().complete(phase, frame)
         if phase=='answer':result['text']=json.dumps(answer(self.citations))
@@ -126,7 +126,7 @@ class AnswerCitationContractTests(unittest.TestCase):
     def test_expanded_policy_reaches_universal_answer_without_changing_source_or_raw_result(self):
         session=UniversalHCL();session.put_source('record-a',SOURCE)
         citation=dict(source_id='record-a',quote=SOURCE,end=len(SOURCE))
-        port=AnswerPort([citation]);result=run(session,'What is directly reported?',port)
+        port=AnswerPort([citation],plan(operation('B01','What is directly reported?',['record-a'])));result=run(session,'What is directly reported?',port)
         self.assertEqual([phase for phase,_ in port.calls],['planning','answer'])
         self.assertIn(_FINAL_ANSWER_POLICY,port.calls[-1][1][0]['content'])
         self.assertEqual(json.loads(port.calls[-1][1][-1]['content'])['sources'][0]['text'],SOURCE)
@@ -137,7 +137,8 @@ class AnswerCitationContractTests(unittest.TestCase):
 
     def test_no_source_citations_empty_and_explicit_unsourced_path_remains(self):
         for citations,expected in (([],'ANSWERED_WITH_EXPLICIT_LIMITS'),([dict(source_id='invented',quote='fact')],'ANSWER_SOURCE_REVIEW_FAILED')):
-            port=AnswerPort(citations);result=run(UniversalHCL(),'Explain a concept.',port)
+            port=AnswerPort(citations,plan(operation('G01','Prepare the caller condition.',[])))
+            result=run(UniversalHCL(),'For this analysis, responsibility requires control.',port)
             self.assertEqual(result['status'],expected)
             self.assertIn('source_citations must be empty',port.calls[-1][1][0]['content'])
 

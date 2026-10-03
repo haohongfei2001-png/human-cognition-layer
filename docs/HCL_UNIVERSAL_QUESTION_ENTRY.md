@@ -6,7 +6,19 @@ to invent a source document for a question such as “分析人类社会”. Eve
 request uses internal planning, capability execution/explicit insufficiency,
 composition and answer/source review. There is no Base shortcut.
 
-## Current implementation and limits
+## Current owner correction
+
+The [October 3 LLM-routing amendment](HCL_LLM_ROUTING_EXECUTION.md) supersedes
+this original entry document's permission to answer after empty or entirely
+unavailable operation plans. The model still interprets, selects and constructs
+bounded arguments; one B01/C01/C03 operation may also receive anchored conditional
+structured inputs from that first model response. A native HCL result must now
+precede the final answer call.
+Native insufficient evidence may inform a limited answer without becoming
+checked treatment. The original implementation and limitations below are
+retained as context, not permission for a no-execution answer.
+
+## Original implementation and limits
 
 The catalog reconciles all 40 runtime A–H packages with real callable retained
 implementations; A00 is governance. This corrects the older 28-entry v1 inventory.

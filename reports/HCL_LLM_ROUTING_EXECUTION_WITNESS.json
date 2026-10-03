@@ -1,0 +1,100 @@
+{
+  "answer_tokens": 8192,
+  "authorized_additional_calls": 0,
+  "cases": {
+    "B01": {
+      "additional_provider_phases": 0,
+      "complete_schedule_reservation_usd": "0.22086768",
+      "native_results": 1,
+      "original_citation_status": "ORIGINAL_ANCHORS_LOCATED_SEMANTICS_UNASSESSED",
+      "original_source_snapshot": {
+        "record_time_basis": "ACTUAL_INGESTION_NOT_EVENT_TIME",
+        "recorded_at": "2026-10-03T22:24:44.493299+00:00",
+        "source_id": "meeting",
+        "text": "Dana expressed a desire to protect the gate.\nDana described a conditional plan to call Noor to protect the gate, provided the gate was clear.\nDana reported having the opportunity to call Noor.\nDana expressed confidence that the gate was clear.\nThe story explicitly stipulated a fictional model in which the gate was not clear.",
+        "version": 1
+      },
+      "provider_calls": 0,
+      "requests": {
+        "answer": {
+          "bytes": 34950,
+          "conservative_reservation_usd": "0.1275384",
+          "sha256": "086120a1c4b40178f53ef3273da2cbc13588a2171454e29885707920c0013090"
+        },
+        "planning": {
+          "bytes": 28136,
+          "conservative_reservation_usd": "0.09332928",
+          "sha256": "431d0b954850137ad0123321dc308074e9978a2049df4fc1bb2363e2028a5185"
+        }
+      },
+      "selected_family_checked": true,
+      "translation_assumptions": 5
+    },
+    "C01": {
+      "additional_provider_phases": 0,
+      "complete_schedule_reservation_usd": "0.22086768",
+      "native_results": 1,
+      "original_citation_status": "ORIGINAL_ANCHORS_LOCATED_SEMANTICS_UNASSESSED",
+      "original_source_snapshot": {
+        "record_time_basis": "ACTUAL_INGESTION_NOT_EVENT_TIME",
+        "recorded_at": "2026-10-03T22:24:44.511577+00:00",
+        "source_id": "meeting",
+        "text": "Dana expressed a desire to protect the gate.\nDana described a conditional plan to call Noor to protect the gate, provided the gate was clear.\nDana reported having the opportunity to call Noor.\nDana expressed confidence that the gate was clear.\nThe story explicitly stipulated a fictional model in which the gate was not clear.",
+        "version": 1
+      },
+      "provider_calls": 0,
+      "requests": {
+        "answer": {
+          "bytes": 34950,
+          "conservative_reservation_usd": "0.1275384",
+          "sha256": "6e8f0966f7e094f879d358cc3e52281ef586d0ccab4efbde722e97a71af6995b"
+        },
+        "planning": {
+          "bytes": 28136,
+          "conservative_reservation_usd": "0.09332928",
+          "sha256": "d0456e7ac3c2e7aac976f0273b597fece713570b5520c110676a88f652dbe59d"
+        }
+      },
+      "selected_family_checked": true,
+      "translation_assumptions": 5
+    },
+    "C03": {
+      "additional_provider_phases": 0,
+      "complete_schedule_reservation_usd": "0.22086768",
+      "native_results": 1,
+      "original_citation_status": "ORIGINAL_ANCHORS_LOCATED_SEMANTICS_UNASSESSED",
+      "original_source_snapshot": {
+        "record_time_basis": "ACTUAL_INGESTION_NOT_EVENT_TIME",
+        "recorded_at": "2026-10-03T22:24:44.526626+00:00",
+        "source_id": "meeting",
+        "text": "Dana expressed a desire to protect the gate.\nDana described a conditional plan to call Noor to protect the gate, provided the gate was clear.\nDana reported having the opportunity to call Noor.\nDana expressed confidence that the gate was clear.\nThe story explicitly stipulated a fictional model in which the gate was not clear.",
+        "version": 1
+      },
+      "provider_calls": 0,
+      "requests": {
+        "answer": {
+          "bytes": 34950,
+          "conservative_reservation_usd": "0.1275384",
+          "sha256": "7fb161bddfd38e6cfecdd8960e317fc407818c972e372bb31fc3575a733ac89c"
+        },
+        "planning": {
+          "bytes": 28136,
+          "conservative_reservation_usd": "0.09332928",
+          "sha256": "0da2f94a2e7bced18d24a46eb5126dc8ab813f8ad1a644e221861aa5eeaeafbc"
+        }
+      },
+      "selected_family_checked": true,
+      "translation_assumptions": 5
+    }
+  },
+  "efficacy_established": false,
+  "maximum_request_bytes": 36000,
+  "model_understanding_verified": false,
+  "planner_candidates_sha256": "ce485f86fed24affa1e33af1e1b27ca8f9f699746f6871aa4e635d1df97ec0ff",
+  "planning_tokens": 4096,
+  "provider_calls": 0,
+  "runtime_sha256": "cfcaeef7a3ecf8c878b569a2d554c15814129599febc56bcd288812c22dca097",
+  "schema": "hcl-llm-routing-execution-witness-v1",
+  "source_sha256": "8e0f51bd941761bcedfac36a49081c1ab34d1df6cffdaf011ad4db411b0213c3",
+  "status": "PASS_SCRIPTED_FULL_FLOW_NOT_MODEL_QUALITY"
+}

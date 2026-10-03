@@ -71,10 +71,11 @@ _ROWS = (
 # Descriptions of existing dispatch contracts, not new routing or parser rules.
 # An absent contract means the retained implementation has no ordinary-entry adapter.
 _UNUSED_BINDINGS='Not consumed by this adapter; use an empty bindings array.'
-_READER_LIMITS='One complete source; bounded literal-report reader with no semantic translation or invented source facts.'
+_READER_LIMITS='One complete source; bounded literal-report reader with no invented source facts.'
+_MODEL_READER_LIMITS=' Optional semantic_candidates from the first model plan may feed the existing conditional reader. Only one B01/C01/C03 operation per plan may use this field; at most 24 exact-quote candidates. Derived statements remain unverified interpretations, never quotable sources.'
 _CONCEPT_LIMITS='Source at most 16000 characters and 64 lines; original question at most 4000 characters.'
 _CONTRACTS = {
-    cid:AdapterContract('OPERATION_QUESTION',1,1,_UNUSED_BINDINGS,(),question,_READER_LIMITS,
+    cid:AdapterContract('OPERATION_QUESTION',1,1,_UNUSED_BINDINGS,(),question,_READER_LIMITS+(_MODEL_READER_LIMITS if cid in ('B01','C01','C03') else ' No semantic translation at this entry.'),
         'The shared reader may prepare multiple families. Only the selected family checked_treatment_present flag indicates its treatment; execution alone is not substantive support.')
     for cid,question in (
         ('B01','Ask about source-reported mental expressions or beliefs; reports do not establish private belief or world truth.'),
