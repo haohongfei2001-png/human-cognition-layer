@@ -106,6 +106,15 @@ most three calls/USD0.48471424 through Oct3 08UTC, not a new grant or retry lice
 Next provider-free planner/adapter contract diagnosis and general interface repair;
 no further paid sequence yet. Historic receipts, source and runtime pins preserved.
 
+[Planner-facing entry contract repair](docs/HCL_PLANNER_ENTRY_CONTRACTS.md) exposes
+truthful source/question/binding prerequisites for the ten existing adapters and
+removes the policy's C02/G02 emphasis. Retained parsers, dispatch, original-request
+authority, model and token limits are unchanged; no forced selection or new adapter.
+Normal provider-free tests exercise actual positive and negative contracts; model
+selection efficacy and answer gain remain unverified. Historical paid packages,
+closed grants and receipts are pinned unchanged. Zero new calls/spend; the existing
+campaign still has nine calls/USD0.51528576 full holds, without budget reset.
+
 ## Owner architecture amendment — 2026-10-02
 
 Every HCL-arm and ordinary product input must enter HCL orchestration. Internal
