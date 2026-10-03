@@ -84,6 +84,11 @@ _CONTRACTS = {
     )
 }
 _CONTRACTS.update({
+    'C05':AdapterContract('OPERATION_QUESTION',1,1,_UNUSED_BINDINGS,
+        ('Why did <Actor> <action>, considering their plans and appraisal of <episode>?',),
+        'Use exactly the existing actor/action/episode form as an intent-preserving internal interpretation. Keep the original outer question unchanged; do not invent an action, belief, plan or appraisal premise.',
+        'Question at most 8000 characters; one capitalized single-token actor, action at most 300 characters and episode at most 160. At most one matching action episode, two source-supported goal explanations, 16 accepted agency/belief rows and 20 explanation/appraisal source rows. Existing source bounds apply; complete requests must fit the metered transport without truncation.',
+        'Keep action-time source prefix and current source state separate; later belief cannot backfill earlier explanation. Source order is not verified chronology; declared-model failure is not character knowledge. No unique actual motive or private emotion is inferred. Missing action remains insufficient despite other claims.'),
     'C04':AdapterContract('OPERATION_QUESTION',1,1,_UNUSED_BINDINGS,
         ('How does <Actor> appraise <episode>?',),
         'Use exactly one capitalized single-token actor and an explicit episode in the How does appraisal form. Interpret the original task without changing its actor/episode or inventing a feeling; the unchanged original question remains in final composition.',

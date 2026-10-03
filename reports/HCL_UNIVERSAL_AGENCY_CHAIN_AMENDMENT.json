@@ -1,0 +1,31 @@
+{
+  "schema": "hcl-universal-agency-chain-amendment-v1",
+  "previous_hcl_runtime_sha256": "d5d9fc0cdb30eb4e8d828a0e7e04616e0737b2bb4ba2714952c0428c333ac551",
+  "amended_hcl_runtime_sha256": "487eb33bf9adf6312f89c7f13957a1df55ab62c7d529432bf307ecd6effc64a1",
+  "changed_runtime_files": [
+    "hcl/cognition/capability_catalog.py",
+    "hcl/cognition/universal_entry.py"
+  ],
+  "reason": "RETAINED_C05_COMPLETE_CONDITIONAL_CHAIN_SINGLE_SOURCE_ENTRY",
+  "question_origin": "OPERATION_QUESTION_WITH_ORIGINAL_OUTER_TASK_PRESERVED",
+  "checked_treatment_basis": "NATIVE_CHECKED_CONDITIONAL_CHAIN_WITH_NONEMPTY_EXPLANATIONS",
+  "complete_native_payload_and_policy_preserved": true,
+  "shared_source_revisions_and_all_support_claim_ids": true,
+  "action_prefix_original_source_version_preserved": true,
+  "later_belief_backfills_action": false,
+  "existing_workspace_full_source_local_preparations": 5,
+  "existing_workspace_derived_prefix_local_preparations": 2,
+  "parsing_count_scope": "CANONICAL_NINE_LINE_ACTION_PRESENT_FIXTURE",
+  "global_cache_or_workspace_changed": false,
+  "native_parser_or_grammar_changed": false,
+  "source_or_transport_budget_changed": false,
+  "model_or_token_settings_changed": false,
+  "new_provider_subcalls": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "authorized_additional_calls": 0,
+  "historical_answers_rescored": false,
+  "model_selection_efficacy_verified": false,
+  "b04_entry_adapter": "DEFERRED_COMPLETE_EVIDENCE_TRANSPORT_GATE",
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
