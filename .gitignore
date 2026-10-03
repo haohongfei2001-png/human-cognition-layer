@@ -27,3 +27,5 @@ bounded-diagnostic-private/
 bounded-diagnostic.enc.json
 output-limit-private/
 output-limit.enc.json
+planner-contract-smoke-private/
+planner-contract-smoke.enc.json
