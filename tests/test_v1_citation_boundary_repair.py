@@ -6,8 +6,8 @@ from hcl.cognition import CognitionWorkspace,UniversalHCL
 from hcl.cognition import retained
 from hcl.cognition.reader_entry import answer_reader_entry
 from hcl.cognition.universal_entry import HCLBoundaryError
-from scripts.development_universal_understanding_amendment import validate_current
-from tests.test_v1_universal_question import Stub,run
+from scripts.development_llm_routing_execution_amendment import validate_current
+from tests.test_v1_universal_question import Stub,operation,plan,run
 
 
 def response(answer='A source report.',citations=()):
@@ -21,7 +21,8 @@ def audit(source,quote,**fields):
 
 
 class AnswerPort(Stub):
-    def __init__(self,raw):super().__init__();self.raw=raw
+    def __init__(self,raw,source_id='s'):
+        super().__init__(plan(operation('B01','What is reported?',[source_id])));self.raw=raw
     def complete(self,phase,messages):
         result=super().complete(phase,messages)
         if phase=='answer':result['text']=self.raw
@@ -113,7 +114,7 @@ class CitationBoundaryRepairTests(unittest.TestCase):
             session=UniversalHCL();session.put_source(sid,'First source.');session.put_source(sid,'Current source.')
             self.assertEqual(list(session.sources),[sid]);self.assertEqual(session.sources[sid]['version'],2)
             raw=json.dumps(response(citations=[dict(source_id=sid,quote='Current source.',version=2)]))
-            port=AnswerPort(raw);result=run(session,'What is reported?',port)
+            port=AnswerPort(raw,sid);result=run(session,'What is reported?',port)
             self.assertEqual(result['status'],'ANSWERED_WITH_EXPLICIT_LIMITS')
             final=json.loads(port.calls[-1][1][-1]['content'])
             self.assertEqual(final['sources'],[dict(source_id=sid,version=2,text='Current source.')])

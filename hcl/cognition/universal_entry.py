@@ -17,6 +17,7 @@ from .reader_entry import _FINAL_ANSWER_POLICY
 from .retained import audit_supplied_source_citations
 
 _SAFE_FAILURE_CODES = frozenset(('CALL_ALLOWANCE_EXHAUSTED', 'CLOSED_OR_DUPLICATE_PHASE_NO_RETRY', 'COST_ALLOWANCE_EXHAUSTED', 'DURABLE_RESERVATION_JOURNAL_REQUIRED_FOR_PROVIDER', 'METERED_RESPONSE_REQUIRED', 'PLANNER_AND_ANSWER_BACKENDS_AND_TWO_CALL_ALLOWANCE_REQUIRED', 'PLANNER_OR_ANSWER_BACKEND_AND_ALLOWANCE_UNAVAILABLE', 'SOURCE_CHANGED_DURING_ORCHESTRATION', 'SUCCESSFUL_PLANNING_REQUIRED', 'USAGE_OUTSIDE_RESERVED_BOUND', 'answer exceeds bounded contract', 'bounded authorized input required', 'bounded bindings required', 'bounded context required', 'bounded interpreted question required', 'bounded planning plus answer allowance required', 'complete context exceeds budget; no truncation', 'complete sources exceed bound; no truncation', 'duplicate responsibility actor', 'invalid answer schema', 'invalid bounded task plan', 'invalid limitations', 'invented or stale source anchor', 'operation bound exceeded', 'ordinary nonempty question required', 'planning response exceeds bound', 'source count exceeds bound; no silent source dropping', 'unknown capability or operation fields', 'unknown or duplicate source selection', 'unsupported binding or source', 'METERED_BACKEND_OR_JOURNAL_FAILED', 'INVALID_USAGE_METADATA', 'ORCHESTRATION_FAILURE', 'CALL_ALREADY_IN_FLIGHT', 'SOURCE_SUPPORT_CHANGED', 'PLANNER_OR_ANSWER_OUTPUT_BOUND_EXCEEDED'))
+_SAFE_FAILURE_CODES = _SAFE_FAILURE_CODES | {'NATIVE_HCL_RESULT_REQUIRED_BEFORE_ANSWER'}
 
 class HCLBoundaryError(ValueError):
     def __init__(self, code):
@@ -34,12 +35,15 @@ def _safe_usage(value):
     return clean
 
 PLANNER_POLICY = (
-    'Plan the original human/social/narrative/value question inside HCL. Return JSON with '
+    'Use your language understanding to interpret the original human/social/narrative/value question, '
+    'choose relevant HCL operations and construct their intent-preserving arguments. Return JSON with '
     'exactly task, operations, limitations. task is your bounded interpretation, not a source fact. '
-    'operations is an array of at most three objects with exactly capability, question, source_ids, bindings. '
+    'operations is an array of at most three objects with capability, question, source_ids, bindings and no other fields except the optional semantic_candidates described below. '
     'Use the supplied current A-H inventory and each available entry_contract to choose only useful operations; do not execute every module blindly. '
     'A retained implementation with ADAPTER_REQUIRED is unavailable at this entry; state that limit instead of pretending it executed. '
-    'An empty operations array is valid when no supplied contract has useful prerequisites; ordinary unsourced analysis can still continue. '
+    'Select one to three useful available operations when their prerequisites permit. A final answer requires an actual native HCL result. '
+    'If no supplied contract is relevant or applicable, return empty operations and explain the gap; final-answer generation then stops. '
+    'Never select an irrelevant operation just to meet a call count. Native insufficient-evidence results may inform a limited answer, but do not count as checked treatment. '
     'Each binding has exactly role, source_id, start, quote. Quote exact supplied text at its character offset. '
     'Only role actor is accepted in this slice. Never invent sources, facts, normative rules, dates or authority. '
     'A source may be absent. General model knowledge is unsourced, not supplied evidence. '
@@ -50,7 +54,28 @@ PLANNER_POLICY = (
     'Do not force a capability because of a familiar ID or broad family name. Unsupported or empty preparation is not substantive checked treatment. '
     'Preserve the original task in all interpretations; do not replace it with an easier question. '
     'G02 may use a normative rule only if explicitly present in the original user request. '
+    'For at most ONE selected B01, C01 or C03 operation with one complete source, you may also supply semantic_candidates '
+    'to translate ordinary source wording into existing structured tool inputs in this same planning response. '
+    'semantic_candidates is an array of 1 to 24 objects with exactly source_id, quote, kind, content and optional start. '
+    'kind must be event; content has exactly canonical_statement, a single line of at most 2000 characters. '
+    'quote is an exact original substring of at most 4000 characters; optional start is its Unicode character offset. '
+    'Use only actors explicitly named in that quote; preserve negation, conditionals and qualifications, and leave ambiguous pronouns unresolved. '
+    'Existing forms are NAME: I want to ACTION.; NAME: I plan to ACTION in order to GOAL if CONDITION.; '
+    'NAME: I have an opportunity to ACTION.; NAME: I believe PROPOSITION.; NAME: I now believe NEW instead of OLD.; '
+    'Narrator: In the declared model, it is false that PROPOSITION. The last form requires an explicit source-declared fictional model. '
+    'These are UNVERIFIED TRANSLATION HYPOTHESES, never literal speech, source facts or private-state truth. '
+    'Do not invent motives, emotion, receipt, comprehension or normative premises. All candidates and their full source remain visible to the answerer. '
+    'Omit semantic_candidates when unnecessary; no automatic extraction call or retry will occur. '
     'limitations is an array of strings. No external lookup or provider subcalls.')
+
+
+class _PlannedSemanticInput:
+    """Replay already-metered planner arguments into the existing native adapter."""
+    def __init__(self,candidates):self.raw=json.dumps(dict(candidates=candidates));self.used=False
+    def complete_json(self,messages,**kwargs):
+        if self.used:raise ValueError('one planned semantic input only')
+        self.used=True
+        return self.raw
 
 
 @dataclass
@@ -161,12 +186,26 @@ class UniversalHCL:
             raise HCLBoundaryError('invalid bounded task plan')
         if not isinstance(value['limitations'],list) or len(value['limitations'])>12 or any(not isinstance(v,str)or len(v)>1000 for v in value['limitations']):raise HCLBoundaryError('invalid limitations')
         if not isinstance(value['operations'],list) or len(value['operations'])>3:raise HCLBoundaryError('operation bound exceeded')
+        translated=0
         for operation in value['operations']:
-            if not isinstance(operation,dict) or set(operation)!={'capability','question','source_ids','bindings'} or operation['capability'] not in CATALOG:
+            required={'capability','question','source_ids','bindings'}
+            if not isinstance(operation,dict) or not required<=set(operation) or set(operation)-required-{'semantic_candidates'} or operation['capability'] not in CATALOG:
                 raise HCLBoundaryError('unknown capability or operation fields')
             if not isinstance(operation['question'],str)or not 1<=len(operation['question'])<=8000:raise HCLBoundaryError('bounded interpreted question required')
             ids=operation['source_ids']
             if not isinstance(ids,list)or len(ids)>8 or any(not isinstance(s,str) or s not in self.sources for s in ids)or len(set(ids))!=len(ids):raise HCLBoundaryError('unknown or duplicate source selection')
+            if 'semantic_candidates'in operation:
+                translated+=1;rows=operation['semantic_candidates']
+                if (translated>1 or operation['capability']not in ('B01','C01','C03') or len(ids)!=1 or
+                    not isinstance(rows,list)or not 1<=len(rows)<=24):raise HCLBoundaryError('invalid bounded task plan')
+                for row in rows:
+                    if (not isinstance(row,dict)or not {'source_id','quote','kind','content'}<=set(row)or
+                        set(row)-{'source_id','quote','kind','content','start'}or row['source_id']!=ids[0]or row['kind']!='event'or
+                        not isinstance(row['quote'],str)or not 1<=len(row['quote'])<=4000 or
+                        not isinstance(row['content'],dict)or set(row['content'])!={'canonical_statement'}):raise HCLBoundaryError('invalid bounded task plan')
+                    line=row['content']['canonical_statement']
+                    if not isinstance(line,str)or not 1<=len(line)<=2000 or any(c in line for c in '\n\r\v\f\x1c\x1d\x1e\x85\u2028\u2029'):raise HCLBoundaryError('invalid bounded task plan')
+                    if 'start'in row and (type(row['start'])is not int or row['start']<0):raise HCLBoundaryError('invented or stale source anchor')
             bindings=operation['bindings']
             if not isinstance(bindings,list)or len(bindings)>8:raise HCLBoundaryError('bounded bindings required')
             for binding in bindings:
@@ -292,6 +331,19 @@ class UniversalHCL:
                 verdict_produced=False,semantic_certification=False,support_claim_ids=[claim])
         if cid in ('B01','B02','C01','C03'):
             if len(ids)!=1:return dict(capability=cid,status='SINGLE_SOURCE_ADAPTER_REQUIRES_EXPLICIT_SEPARATE_OPERATIONS',executed=False)
+            if 'semantic_candidates'in operation:
+                from .retained import prepare_retained_reader
+                prepared=prepare_retained_reader(self.workspace,question,source_ids=tuple(ids),
+                    backend=_PlannedSemanticInput(operation['semantic_candidates']),compact_context=True)
+                messages=prepared.current_messages(self.workspace);prep=prepared.receipt['retained_preparation']
+                family,field={'B01':('epistemic_treatment','checked_mental_expressions'),
+                    'C01':('agency_treatment','checked_operations'),'C03':('plan_feasibility_treatment','checked_plans')}[cid]
+                return dict(capability=cid,status='EXISTING_CONDITIONAL_READER_EXECUTED',executed=True,
+                    result=json.loads(messages[-1]['content']),preparation_policy=messages[0]['content'],
+                    checked_treatment_present=prep[family][field]>0,
+                    reader_any_checked_treatment_present=prepared.receipt['checked_treatment_present'],
+                    support_claim_ids=list(prepared.operation_ids),semantic_input_origin='METERED_PLANNING_RESPONSE',
+                    semantic_certification=False,additional_provider_calls=0)
             entry=self.workspace.prepare_reader_entry(question,source_ids=tuple(ids),allow_translation=False)
             return dict(capability=cid,status='EXISTING_READER_EXECUTED',executed=True,
                         result=json.loads(entry.messages[-1]['content']),
@@ -379,6 +431,8 @@ class UniversalHCL:
         receipt=dict(schema='hcl-universal-question-v1',status='STARTED',original_question=question,
             source_versions=versions,input_shape='QUESTION_ONLY' if not versions else 'QUESTION_WITH_SOURCE' if len(versions)==1 else 'QUESTION_WITH_MULTIPLE_SOURCES',
             base_bypass=False,complete_capability_integration=False,operations=[],provider_attempts=allowance.attempts,
+            hcl_execution=dict(status='NOT_STARTED',selected_operations=0,dispatched_operations=0,native_results=0,
+                selection_basis='LLM_BEST_EFFORT_NOT_SEMANTIC_CERTIFICATION',execution_is_treatment_proof=False),
             answer_gain_established=False)
         def bounded(messages):
             if len(json.dumps(messages,ensure_ascii=False))>maximum_context_chars:raise HCLBoundaryError('complete context exceeds budget; no truncation')
@@ -391,6 +445,7 @@ class UniversalHCL:
             self._current(versions,receipt['operations'])
             raw_plan=allowance.call(planner_backend,'planning',messages)
             self._current(versions,receipt['operations']);plan=self._validate_plan(raw_plan);receipt['plan']=plan
+            receipt['hcl_execution'].update(status='DISPATCHING',selected_operations=len(plan['operations']))
             for operation in plan['operations']:
                 self._current(versions,receipt['operations'])
                 try:result=self._execute(operation,question)
@@ -398,14 +453,22 @@ class UniversalHCL:
                     self._current(versions,receipt['operations'])
                     result=dict(capability=operation['capability'],status='ADAPTER_REJECTED_NOT_COMPLETED',executed=False,attempted=True,reason='SOURCE_OR_TYPED_PREREQUISITES_REJECTED')
                 receipt['operations'].append(result)
+                receipt['hcl_execution']['dispatched_operations']=len(receipt['operations'])
+                receipt['hcl_execution']['native_results']+=int(result.get('executed')is True and isinstance(result.get('result'),dict))
+            native_results=receipt['hcl_execution']['native_results']
+            receipt['hcl_execution'].update(status='NATIVE_RESULTS_RETURNED'if native_results else'NO_NATIVE_RESULT',
+                selected_operations=len(plan['operations']),dispatched_operations=len(receipt['operations']),native_results=native_results)
             self._current(versions,receipt['operations'])
+            if not native_results:raise HCLBoundaryError('NATIVE_HCL_RESULT_REQUIRED_BEFORE_ANSWER')
             final=bounded([dict(role='system',content=_FINAL_ANSWER_POLICY+' You are answering through HCL orchestration. '
                 'Use the original question; planned interpretations are conditional, not replacement user requests. '
+                'Use the actual HCL outcomes below. Native execution alone proves neither relevant checked treatment nor correct model interpretation. '
+                'An insufficient-evidence outcome limits the answer; never turn it into a positive checked result. '
                 'Explain material unsupported prerequisites without blanket refusal. With no supplied sources, '
                 'general knowledge and conceptual analysis are UNSOURCED_MODEL_KNOWLEDGE, not source-certified facts; '
                 'source_citations must then be empty. Do not invent evidence or pretend unavailable capabilities executed.'),
                 dict(role='user',content=json.dumps(dict(question=question,sources=[{k:r[k]for k in ('source_id','version','text')}for r in self.sources.values()],
-                    hcl_plan=plan,hcl_operations=receipt['operations'],knowledge_basis='SUPPLIED_SOURCES_AND_EXPLICIT_INTERPRETATION' if versions else 'UNSOURCED_MODEL_KNOWLEDGE'),ensure_ascii=False,sort_keys=True))])
+                    hcl_plan=plan,hcl_operations=receipt['operations'],hcl_execution=receipt['hcl_execution'],knowledge_basis='SUPPLIED_SOURCES_AND_EXPLICIT_INTERPRETATION' if versions else 'UNSOURCED_MODEL_KNOWLEDGE'),ensure_ascii=False,sort_keys=True))])
             receipt['actual_final_messages']=final
             raw=allowance.call(answer_backend,'answer',final);receipt['answer_raw']=raw
             self._current(versions,receipt['operations'])
@@ -419,6 +482,7 @@ class UniversalHCL:
             if audit['deliverable']:receipt['answer']=raw
         except Exception as exc:
             allowance.closed=True
+            if receipt['hcl_execution']['status']=='DISPATCHING':receipt['hcl_execution']['status']='DISPATCH_ABORTED'
             receipt.update(status='ORCHESTRATION_UNAVAILABLE_OR_FAILED',
                 failure_type='BOUNDARY_REJECTION' if isinstance(exc,HCLBoundaryError) else 'UNEXPECTED_OR_EXTERNAL_FAILURE',
                 failure_reason=exc.code if isinstance(exc,HCLBoundaryError) else 'ORCHESTRATION_FAILURE')

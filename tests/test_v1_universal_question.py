@@ -25,16 +25,15 @@ class UniversalQuestionTests(unittest.TestCase):
         self.assertIn('action_explanations',CATALOG['C02'].implementation)
         self.assertIn('responsibility_composition',CATALOG['G02'].implementation)
 
-    def test_plain_question_enters_hcl_with_unsourced_knowledge_label(self):
+    def test_plain_question_without_source_cannot_claim_a_source_bound_execution(self):
         stub=Stub(plan(operation('G04','分析人类社会',[])))
         result=run(UniversalHCL(),'分析人类社会',stub)
-        self.assertEqual(result['status'],'ANSWERED_WITH_EXPLICIT_LIMITS')
-        self.assertEqual([x[0]for x in stub.calls],['planning','answer'])
+        self.assertEqual(result['failure_reason'],'NATIVE_HCL_RESULT_REQUIRED_BEFORE_ANSWER')
+        self.assertEqual([x[0]for x in stub.calls],['planning'])
         self.assertEqual(result['input_shape'],'QUESTION_ONLY');self.assertFalse(result['base_bypass'])
-        final=json.loads(stub.calls[1][1][-1]['content'])
-        self.assertEqual(final['sources'],[]);self.assertEqual(final['knowledge_basis'],'UNSOURCED_MODEL_KNOWLEDGE')
+        self.assertNotIn('actual_final_messages',result);self.assertNotIn('answer',result)
         self.assertEqual(result['operations'][0]['status'],'SOURCE_PREREQUISITE_UNAVAILABLE')
-        self.assertEqual(result['provider_calls'],0);self.assertEqual(result['backend_calls'],2)
+        self.assertEqual(result['provider_calls'],0);self.assertEqual(result['backend_calls'],1)
 
     def test_missing_backend_or_allowance_never_pretends_to_plan(self):
         stub=Stub();s=UniversalHCL()
@@ -80,7 +79,7 @@ class UniversalQuestionTests(unittest.TestCase):
     def test_revision_during_planning_or_answer_blocks_delivery(self):
         for phase in ('planning','answer'):
             s=UniversalHCL();s.put_source('s','Mira spoke.')
-            stub=Stub(callback=lambda p:s.put_source('s','Mira stayed silent.')if p==phase else None)
+            stub=Stub(plan(operation('B01','What is reported?',['s'])),callback=lambda p:s.put_source('s','Mira stayed silent.')if p==phase else None)
             result=run(s,'What is supported?',stub)
             self.assertEqual(result['status'],'ORCHESTRATION_UNAVAILABLE_OR_FAILED')
             self.assertIn('SOURCE_CHANGED',result['failure_reason']);self.assertNotIn('answer',result)
@@ -97,12 +96,13 @@ class UniversalQuestionTests(unittest.TestCase):
 
     def test_live_port_needs_durable_reservation_before_any_call(self):
         class FakeLive(Stub):provider_free=False
-        backend=FakeLive();session=UniversalHCL();allowance=CallAllowance(2,0,'TEST_SYNTHETIC_LIVE_INTERFACE')
-        result=session.answer('Discuss cooperation.',planner_backend=backend,answer_backend=backend,allowance=allowance)
+        backend=FakeLive(plan(operation('G01','Prepare the caller rule.',[])));session=UniversalHCL();allowance=CallAllowance(2,0,'TEST_SYNTHETIC_LIVE_INTERFACE')
+        question='For this analysis, responsibility requires control.'
+        result=session.answer(question,planner_backend=backend,answer_backend=backend,allowance=allowance)
         self.assertEqual(backend.calls,[]);self.assertIn('JOURNAL_REQUIRED',result['failure_reason'])
         saved=[]
         allowance=CallAllowance(2,0,'TEST_SYNTHETIC_LIVE_INTERFACE',journal=lambda r:saved.append(json.loads(json.dumps(r))))
-        result=session.answer('Discuss cooperation.',planner_backend=backend,answer_backend=backend,allowance=allowance)
+        result=session.answer(question,planner_backend=backend,answer_backend=backend,allowance=allowance)
         self.assertEqual(saved[0]['attempts'][0]['status'],'RESERVED_BEFORE_CALL')
         self.assertEqual(saved[-1]['attempts'][-1]['status'],'RETURNED')
         self.assertEqual(result['provider_calls'],2)  # Interface accounting; this class performs no transport.
@@ -123,7 +123,7 @@ class UniversalQuestionTests(unittest.TestCase):
                 if phase=='answer':
                     obj=json.loads(result['text']);obj['source_citations']=['Fabricated quote'];result['text']=json.dumps(obj)
                 return result
-        result=run(UniversalHCL(),'分析人类社会',Forged())
+        result=run(UniversalHCL(),'For this analysis, responsibility requires control.',Forged(plan(operation('G01','Prepare the caller rule.',[]))))
         self.assertEqual(result['status'],'ANSWER_SOURCE_REVIEW_FAILED');self.assertNotIn('answer',result)
         self.assertIn('answer_raw',result)
 

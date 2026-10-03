@@ -15,9 +15,15 @@ class FakeClient:
 
 class MeteredPortTests(unittest.TestCase):
     def test_real_handler_path_fake_sdk_counts_two_calls_and_hides_reasoning(self):
-        client=FakeClient();port=DeepSeekMeteredPort(client);journal=[]
+        class NativePlanClient(FakeClient):
+            def create(self,**request):
+                value=super().create(**request)
+                if request['max_tokens']==4096:
+                    value['choices'][0]['message']['content']=json.dumps(dict(task='Prepare caller rule',operations=[dict(capability='G01',question='Prepare caller rule.',source_ids=[],bindings=[])],limitations=[]))
+                return value
+        client=NativePlanClient();port=DeepSeekMeteredPort(client);journal=[]
         allowance=CallAllowance(2,'1.00','SYNTHETIC_TEST_ONLY',journal=lambda r:journal.append(json.loads(json.dumps(r))))
-        result=UniversalHCL().answer('分析人类社会',planner_backend=port,answer_backend=port,allowance=allowance)
+        result=UniversalHCL().answer('For this analysis, responsibility requires control.',planner_backend=port,answer_backend=port,allowance=allowance)
         self.assertEqual(result['status'],'ANSWERED_WITH_EXPLICIT_LIMITS');self.assertEqual(len(client.calls),2)
         self.assertEqual(result['provider_calls'],2)  # Fake SDK only, zero network.
         self.assertNotIn('HIDDEN_',json.dumps(result));self.assertNotIn('HIDDEN_',json.dumps(journal))

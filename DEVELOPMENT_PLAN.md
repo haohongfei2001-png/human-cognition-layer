@@ -1,5 +1,20 @@
 # HCL Development Plan
 
+## Current implementation policy — owner correction 2026-10-03
+
+[LLM-directed understanding and required HCL execution](docs/HCL_LLM_ROUTING_EXECUTION.md)
+lets the model interpret the request, select useful existing HCL operations and
+construct their arguments. One selected B01/C01/C03 operation can reuse anchored
+interpretations from that same first planning response through the existing
+conditional tools, with no additional provider phase or native parser change.
+A final model answer requires an actual native HCL result, including an honest
+insufficient-evidence result; empty or entirely
+unavailable plans cannot silently continue to an answer. Selection accuracy and
+checked treatment remain separate from invocation. Source authority, privacy and
+budget guards stay in force. New adapter expansion is deferred while the complete
+usable flow is verified. This does not require HCL to independently solve language
+understanding, and it authorizes no model spending.
+
 Status: **CANONICAL LIVE EXECUTION PLAN — LONG-HORIZON CAPABILITY GROWTH / WAVES A–F COMPLETE / WAVE G COMPLETE / G-HC PASS_PROVIDER_FREE / WAVE H / H01–H05 CORRECTNESS_VERIFIED / G-ARCH PASS_ARCHITECTURE_READY_FOR_SERIOUS_EVALUATION / I01 FROZEN FOR FINAL / DEVELOPMENT REALITY CHECKS ACTIVE**
 
 The long-horizon capability architecture, levels, Waves A–H, all 41 work packages,
@@ -26,7 +41,7 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: UNIVERSAL_HCL_ENTRY_RETAINED_CAPABILITY_INTEGRATION**
+**NEXT_READY: LLM_ROUTED_NATIVE_HCL_FULL_FLOW_VERIFICATION**
 
 [Retained D02 finite acknowledgment](docs/HCL_UNIVERSAL_UNDERSTANDING_ENTRY.md)
 forwards complete native results and support under the exact returned summary

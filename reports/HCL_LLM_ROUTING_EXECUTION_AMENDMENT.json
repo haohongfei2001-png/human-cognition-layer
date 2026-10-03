@@ -1,0 +1,39 @@
+{
+  "schema": "hcl-llm-routing-execution-amendment-v1",
+  "previous_hcl_runtime_sha256": "071d5327b32903c96b6e397103b8715acd82a4974af4195e32f49f35ddd3b53d",
+  "amended_hcl_runtime_sha256": "cfcaeef7a3ecf8c878b569a2d554c15814129599febc56bcd288812c22dca097",
+  "changed_runtime_files": [
+    "hcl/cognition/universal_entry.py",
+    "hcl/cognition/capability_catalog.py"
+  ],
+  "reason": "LLM_PLANNED_SOURCE_ANCHORED_STRUCTURED_INPUT_WITH_REQUIRED_NATIVE_HCL_OUTCOME",
+  "initial_understanding": "LLM_BEST_EFFORT_NOT_DETERMINISTIC_PREREQUISITE",
+  "planner_arguments": "INTENT_PRESERVING_WITH_ORIGINAL_SOURCE_AND_CALLER_AUTHORITY",
+  "empty_or_unavailable_plan": "NO_ANSWER_CALL_NO_FORCED_OPERATION",
+  "native_insufficient_evidence": "LIMITED_ANSWER_ALLOWED_NOT_CHECKED_TREATMENT",
+  "execution_is_treatment_proof": false,
+  "selection_accuracy_verified": false,
+  "capability_catalog_changed": true,
+  "native_parser_or_grammar_changed": false,
+  "source_citation_or_authority_guards_changed": false,
+  "model_or_token_settings_changed": false,
+  "new_provider_subcalls": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "authorized_additional_calls": 0,
+  "historical_answers_rescored": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "conditional_input_families": [
+    "B01",
+    "C01",
+    "C03"
+  ],
+  "conditional_input_maximum_operations": 1,
+  "conditional_input_maximum_candidates": 24,
+  "semantic_input_origin": "FIRST_METERED_PLANNING_RESPONSE",
+  "additional_provider_phases": 0,
+  "native_conditional_adapter": "EXISTING_PREPARE_RETAINED_READER",
+  "derived_input_is_original_source": false,
+  "translation_semantics": "UNVERIFIED_MODEL_INTERPRETATION",
+  "native_parsers_changed": false
+}

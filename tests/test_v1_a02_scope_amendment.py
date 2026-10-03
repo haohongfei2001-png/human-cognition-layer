@@ -3,13 +3,13 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from scripts.development_universal_understanding_amendment import HISTORICAL_PINS, validate_current
+from scripts.development_llm_routing_execution_amendment import HISTORICAL_PINS, validate_current
 
 
 class ScopeAmendmentTests(unittest.TestCase):
     def test_prior_evidence_and_both_scope_fixture_hashes_are_pinned(self):
         self.assertTrue(validate_current())
-        self.assertEqual(len(HISTORICAL_PINS), 147)
+        self.assertEqual(len(HISTORICAL_PINS), 151)
         original = Path.read_bytes
         for target in ('reports/HCL_B04_COPY_REFERENCE_AMENDMENT.json',
                        'eval/a02_scope_proposal_v1.json',

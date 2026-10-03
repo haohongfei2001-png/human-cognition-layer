@@ -1,0 +1,94 @@
+{
+  "additional_provider_phases": 0,
+  "authorized_additional_calls": 0,
+  "base_commit": "f8c368e6a159f956006ec92062b1dae31da09462",
+  "complete_schedule_reservation_usd": "0.22086768",
+  "conditional_input_candidates_maximum": 24,
+  "conditional_input_families": [
+    "B01",
+    "C01",
+    "C03"
+  ],
+  "conditional_input_operations_maximum": 1,
+  "efficacy_established": false,
+  "focused_status": "PASS",
+  "focused_tests": 61,
+  "gaskell_irie_certified_replays": "PASS_CACHED_AND_FROZEN_NO_NETWORK",
+  "historical_answers_rescored": false,
+  "historical_pins": 151,
+  "historical_regression_tests": 176,
+  "independent_source_review": "NO_RUNTIME_BLOCKER_FOUND_FINAL_FREEZE_SEAL_PENDING",
+  "inherited_pin_values_and_file_bytes": "UNCHANGED",
+  "inherited_pins": 147,
+  "local_v1_status": "PASS",
+  "local_v1_tests": 1460,
+  "log_sha256": {
+    "focused": "4ffe0988d39b1a0d42e843b42125e303011209f7d398761f8dfc582c68844912",
+    "gaskell_irie": "1b6027ef140d69f870f22a044ab46770068ba3a2d4f13f77e86285ebc864a403",
+    "offline_workflows": "7f4cef52e15b9052110dea30df4a395ae87b76d02dcf7e0dee2c3506769b396a",
+    "v1": "5961841d5c7b5187c0fe77a58cb9bf12245aa8b10ad39afc908064fb63bfbaff"
+  },
+  "maximum_request_bytes": 36000,
+  "metering_encryption_tests": 21,
+  "model_interpretations": "UNVERIFIED_CONDITIONAL_INPUT_NOT_ORIGINAL_TRUTH",
+  "model_understanding_verified": false,
+  "native_grammar_or_parser_changed": false,
+  "offline_workflow_commands": 90,
+  "offline_workflow_status": "PASS_EXCEPT_HOSTED_ONLY_CERTIFICATION_ENVELOPE_NOT_RUN_LOCALLY",
+  "planning_request_hash_scope": "CAPTURED_ACTUAL_SOURCE_INGESTION_SNAPSHOT_INCLUDED_IN_WITNESS",
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "remaining_local_source_gates": {
+    "clifford": "NOT_RERUN_PINNED_LOCAL_CACHE_UNAVAILABLE",
+    "gregory": "NOT_RERUN_PINNED_LOCAL_CACHE_UNAVAILABLE",
+    "new_fetch_performed": false,
+    "prior_fetch_cancellation_preserved": true
+  },
+  "remaining_scope": "OTHER_FAMILIES_NOT_TRANSLATED_NO_SOURCE_GENERAL_TASKS_NOT_GUARANTEED",
+  "remote_publication": "NOT_STARTED_AT_LOCAL_CHECKPOINT",
+  "request_measurements": {
+    "B01": {
+      "answer": {
+        "bytes": 34950,
+        "conservative_reservation_usd": "0.1275384",
+        "sha256": "086120a1c4b40178f53ef3273da2cbc13588a2171454e29885707920c0013090"
+      },
+      "planning": {
+        "bytes": 28136,
+        "conservative_reservation_usd": "0.09332928",
+        "sha256": "431d0b954850137ad0123321dc308074e9978a2049df4fc1bb2363e2028a5185"
+      }
+    },
+    "C01": {
+      "answer": {
+        "bytes": 34950,
+        "conservative_reservation_usd": "0.1275384",
+        "sha256": "6e8f0966f7e094f879d358cc3e52281ef586d0ccab4efbde722e97a71af6995b"
+      },
+      "planning": {
+        "bytes": 28136,
+        "conservative_reservation_usd": "0.09332928",
+        "sha256": "d0456e7ac3c2e7aac976f0273b597fece713570b5520c110676a88f652dbe59d"
+      }
+    },
+    "C03": {
+      "answer": {
+        "bytes": 34950,
+        "conservative_reservation_usd": "0.1275384",
+        "sha256": "7fb161bddfd38e6cfecdd8960e317fc407818c972e372bb31fc3575a733ac89c"
+      },
+      "planning": {
+        "bytes": 28136,
+        "conservative_reservation_usd": "0.09332928",
+        "sha256": "0da2f94a2e7bced18d24a46eb5126dc8ab813f8ad1a644e221861aa5eeaeafbc"
+      }
+    }
+  },
+  "required_hosted_gates": "ALL_SEVEN_EXACT_HEAD_AND_MAIN_INCLUDING_CLIFFORD_GREGORY_PUBLISHER_BYTES",
+  "runtime_sha256": "cfcaeef7a3ecf8c878b569a2d554c15814129599febc56bcd288812c22dca097",
+  "schema": "hcl-llm-routing-execution-local-validation-v1",
+  "scripted_full_flow": "PASS_SCRIPTED_FULL_FLOW_NOT_MODEL_QUALITY",
+  "source_boundary_tests": 9,
+  "structured_tool_inputs_are_normal": true,
+  "witness_sha256": "2a61517ffc95a4c6cebaadd869250103cc11581a6e64d77dcefa3eda833758b7"
+}
