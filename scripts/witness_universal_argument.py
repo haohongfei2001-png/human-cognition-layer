@@ -6,7 +6,7 @@ from pathlib import Path
 from hcl.cognition import UniversalHCL
 from hcl.cognition.argument_analysis import _opposed
 from hcl.cognition.universal_entry import CallAllowance
-from scripts.development_b04_scope_consumer_amendment import validate_current
+from scripts.development_universal_appraisal_amendment import validate_current
 from scripts.witness_argument_analysis import SOURCE
 
 QUESTION = 'Map the reported disagreement without choosing a winner or asserting world truth.'

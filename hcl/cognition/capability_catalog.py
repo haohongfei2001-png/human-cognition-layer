@@ -84,6 +84,11 @@ _CONTRACTS = {
     )
 }
 _CONTRACTS.update({
+    'C04':AdapterContract('OPERATION_QUESTION',1,1,_UNUSED_BINDINGS,
+        ('How does <Actor> appraise <episode>?',),
+        'Use exactly one capitalized single-token actor and an explicit episode in the How does appraisal form. Interpret the original task without changing its actor/episode or inventing a feeling; the unchanged original question remains in final composition.',
+        'Question at most 8000 characters and episode at most 160. Existing semantic source bounds, 16 accepted actor literal rows through agency preparation, and 20 accepted appraisal source rows apply. Complete requests must fit the existing metered transport; no truncation.',
+        'Keep reported feelings, observed expressions, attributed judgments and goal-linked appraisal distinct. Source order is not verified event time. No actual emotion, control or knowledge is established. Empty C04 evidence or agency-only goals are not checked appraisal treatment; execution alone is insufficient.'),
     'C02':AdapterContract('OPERATION_QUESTION',1,1,_UNUSED_BINDINGS,
         ('Why did <Actor> <verb and object>?',),
         'The internal question must exactly use the Why did form with one capitalized single-token actor and an explicit action plus object. A freeform request for competing explanations is not accepted. Interpret the user task into this form without changing its actor/action or asserting a true motive.',

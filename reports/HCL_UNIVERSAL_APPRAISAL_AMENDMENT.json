@@ -1,0 +1,25 @@
+{
+  "schema": "hcl-universal-appraisal-amendment-v1",
+  "previous_hcl_runtime_sha256": "430d756b75eb808ba926275a1e93f08f8ffaab899053d6ad684d677ce4e18a71",
+  "amended_hcl_runtime_sha256": "d5d9fc0cdb30eb4e8d828a0e7e04616e0737b2bb4ba2714952c0428c333ac551",
+  "changed_runtime_files": [
+    "hcl/cognition/capability_catalog.py",
+    "hcl/cognition/universal_entry.py"
+  ],
+  "reason": "RETAINED_C04_COMPLETE_PAYLOAD_SINGLE_SOURCE_ORDINARY_ENTRY",
+  "question_origin": "OPERATION_QUESTION_WITH_ORIGINAL_OUTER_TASK_PRESERVED",
+  "checked_treatment_basis": "NONEMPTY_NATIVE_CURRENT_C04_EVIDENCE_NOT_AGENCY_CLAIMS",
+  "complete_native_payload_and_policy_preserved": true,
+  "shared_source_revisions_and_support_claim_ids": true,
+  "native_parser_or_grammar_changed": false,
+  "source_or_transport_budget_changed": false,
+  "model_or_token_settings_changed": false,
+  "new_provider_subcalls": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "authorized_additional_calls": 0,
+  "historical_answers_rescored": false,
+  "model_selection_efficacy_verified": false,
+  "b04_entry_adapter": "DEFERRED_COMPLETE_EVIDENCE_TRANSPORT_GATE",
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
