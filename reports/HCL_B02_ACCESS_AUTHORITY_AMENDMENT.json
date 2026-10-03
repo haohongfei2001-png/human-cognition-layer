@@ -1,0 +1,27 @@
+{
+  "schema": "hcl-b02-access-authority-amendment-v1",
+  "previous_hcl_runtime_sha256": "487eb33bf9adf6312f89c7f13957a1df55ab62c7d529432bf307ecd6effc64a1",
+  "amended_hcl_runtime_sha256": "f07df5b3402596459df4ca05b714d1d0209e8d3dd15d29a868cfca7377085e91",
+  "changed_runtime_files": [
+    "hcl/cognition/communication.py"
+  ],
+  "reason": "SHARED_PREFIX_A02_SCOPE_FOR_ACCESS_CUE_TARGET_AND_VISIBLE_EXPRESSION",
+  "selected_prefix_only": true,
+  "source_representation": "EXISTING_PER_LINE_STRIP_WITH_EXACT_ORIGINAL_OCCURRENCE_MAPPING",
+  "shared_local_candidate_calls_per_nonempty_view": 1,
+  "raw_access_cue_fallback": false,
+  "ineligible_statements": "ORDERED_UNTRANSMITTED_SENTINELS_NO_OLDER_FALLBACK",
+  "actual_resumption_preserved": true,
+  "original_proof_quotes_and_visible_event_identity_preserved": true,
+  "audit_shape_changed": false,
+  "native_d01_changed": false,
+  "semantic_parser_or_grammar_changed": false,
+  "source_actor_line_or_transport_budget_changed": false,
+  "adapter_added": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "authorized_additional_calls": 0,
+  "historical_answers_rescored": false,
+  "model_selection_efficacy_verified": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

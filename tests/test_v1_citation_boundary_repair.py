@@ -6,7 +6,7 @@ from hcl.cognition import CognitionWorkspace,UniversalHCL
 from hcl.cognition import retained
 from hcl.cognition.reader_entry import answer_reader_entry
 from hcl.cognition.universal_entry import HCLBoundaryError
-from scripts.development_universal_agency_chain_amendment import validate_current
+from scripts.development_b02_access_authority_amendment import validate_current
 from tests.test_v1_universal_question import Stub,run
 
 

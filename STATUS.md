@@ -33,6 +33,14 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: UNIVERSAL_HCL_ENTRY_RETAINED_CAPABILITY_INTEGRATION**
 
+[B02 exact source-prefix authority](docs/HCL_B02_ACCESS_AUTHORITY.md) now guards
+access cues, their literal targets and own-expression admission using shared A02
+scope. Exact original occurrence mapping preserves whitespace and source offsets;
+ineligible latest statements remain ordered and cannot expose older speech.
+Actual resumption and earlier snapshots remain supported. Native D01, A02 grammar,
+audit shape and budgets are unchanged; this is a prerequisite repair before a
+D01 ordinary adapter, not an additional adapter or efficacy result. No paid call.
+
 [Retained C05 ordinary composition](docs/HCL_UNIVERSAL_AGENCY_CHAIN_ENTRY.md)
 joins action-time plan checks, explanations and appraisal on the existing shared
 workspace. Full native payloads/policies and all support IDs reach final input;
