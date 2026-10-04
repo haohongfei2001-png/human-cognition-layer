@@ -1,0 +1,59 @@
+name: HCL consumed G05 delivery regression
+on:
+  push:
+    branches: [main]
+    paths: ['.github/HCL_CURRENT_FLOW_TRIGGER.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: hcl-current-flow-once-20261004
+  cancel-in-progress: false
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'openai==2.14.0' 'cryptography==50.0.0'
+      - name: Offline package and metering checks
+        run: python -m unittest tests.test_current_flow_diagnostic tests.test_v1_deepseek_metered tests.test_universal_encrypted_result tests.test_current_flow_public_evidence
+      - name: Existing provider secret presence only, zero paid calls
+        env:
+          SECRET_PRESENT: ${{ secrets.DEEPSEEK_API_KEY != '' }}
+        run: |
+          python - <<'PYCODE'
+          import json, os
+          from pathlib import Path
+          evidence = dict(run_id=os.environ['GITHUB_RUN_ID'], head_sha=os.environ['GITHUB_SHA'], existing_provider_secret='PRESENT' if os.environ['SECRET_PRESENT'] == 'true' else 'ABSENT')
+          Path('/tmp/current-flow-secret-presence.json').write_text(json.dumps(evidence))
+          print(json.dumps(evidence, sort_keys=True))
+          if evidence['existing_provider_secret'] != 'PRESENT': raise SystemExit(1)
+          PYCODE
+      - name: Single reviewed grant and complete run-history admission
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-current-flow-once.yml/runs?per_page=100" > /tmp/current-flow-runs.json
+          python -m scripts.run_current_flow_diagnostic --check-launch /tmp/current-flow-runs.json
+      - name: One bounded source-supported G05 delivery regression
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: python -m scripts.run_current_flow_diagnostic --execute
+      - name: Export scoped public synthetic final fields, never raw receipt
+        if: always()
+        run: |
+          if test -f current-flow-private/receipt.json; then
+            python -m scripts.current_flow_public_evidence --receipt current-flow-private/receipt.json --output current-flow-public.json
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-current-flow-public-${{ github.run_id }}
+          path: current-flow-public.json
+          if-no-files-found: warn
