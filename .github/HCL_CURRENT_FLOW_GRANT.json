@@ -1,14 +1,14 @@
 {
-  "approved_at": null,
-  "authorization_ref": null,
-  "authorized_calls": 0,
-  "authorized_usd": "0",
-  "expires_at": null,
+  "approved_at": "2026-10-04T11:34:27Z",
+  "authorization_ref": "OWNER_APPROVED_CURRENT_FLOW_PUBLIC_SYNTHETIC_20261004_113427",
+  "authorized_calls": 2,
+  "authorized_usd": "0.30",
+  "expires_at": "2026-10-05T11:34:27Z",
   "hcla_budget_transfer": false,
   "historical_budget_transfer": false,
   "package_sha256": "9405539c40cf2049539aa235ff87c5a267e95a0f25383274639c139a99bda318",
-  "public_output_scope": null,
+  "public_output_scope": "ONE_CONSUMED_G05_FINAL_FIELDS_CITATIONS_IDENTITY_USAGE_ONLY_SAME_HCL_REPOSITORY",
   "retries": 0,
   "schema": "hcl-current-flow-grant-v1",
-  "status": "PREPARED_NOT_AUTHORIZED"
+  "status": "READY"
 }
