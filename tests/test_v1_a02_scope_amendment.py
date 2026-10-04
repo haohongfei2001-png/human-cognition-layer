@@ -3,7 +3,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from scripts.development_nonblank_answer_amendment import HISTORICAL_PINS, validate_current
+from scripts.development_final_delivery_amendment import HISTORICAL_PINS, validate_current
 
 
 class ScopeAmendmentTests(unittest.TestCase):
