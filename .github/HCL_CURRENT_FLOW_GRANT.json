@@ -1,0 +1,14 @@
+{
+  "approved_at": null,
+  "authorization_ref": null,
+  "authorized_calls": 0,
+  "authorized_usd": "0",
+  "expires_at": null,
+  "hcla_budget_transfer": false,
+  "historical_budget_transfer": false,
+  "package_sha256": "9405539c40cf2049539aa235ff87c5a267e95a0f25383274639c139a99bda318",
+  "public_output_scope": null,
+  "retries": 0,
+  "schema": "hcl-current-flow-grant-v1",
+  "status": "PREPARED_NOT_AUTHORIZED"
+}

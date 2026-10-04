@@ -1,0 +1,14 @@
+{
+  "question": "If Tavi could decline were false, what changes?",
+  "schema": "hcl-current-flow-input-v1",
+  "source_status": "CONSUMED_SYNTHETIC_G05_FAILED_CITATION_REGRESSION",
+  "sources": [
+    {
+      "record_time_basis": "ACTUAL_INGESTION_NOT_EVENT_TIME",
+      "recorded_at": "2026-10-02T23:38:24.449552+00:00",
+      "source_id": "choice",
+      "text": "Narrator: In choice, Tavi could decline.\nTavi: In choice, I conclude choice is voluntary because Tavi could decline.",
+      "version": 1
+    }
+  ]
+}

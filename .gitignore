@@ -29,3 +29,7 @@ output-limit-private/
 output-limit.enc.json
 planner-contract-smoke-private/
 planner-contract-smoke.enc.json
+
+# Only the strict public synthetic whitelist may leave the runner.
+current-flow-private/
+current-flow-public.json
