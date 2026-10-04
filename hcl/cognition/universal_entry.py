@@ -443,7 +443,7 @@ class UniversalHCL:
         if not isinstance(question,str)or not 1<=len(question)<=8000:raise HCLBoundaryError('ordinary nonempty question required')
         if type(maximum_context_chars)is not int or not 1024<=maximum_context_chars<=256000:raise HCLBoundaryError('bounded context required')
         allowance=allowance or CallAllowance();versions=self._versions()
-        receipt=dict(schema='hcl-universal-question-v1',status='STARTED',original_question=question,
+        receipt=dict(schema='hcl-universal-question-v1',status='STARTED',final_delivery_code='NOT_REACHED',original_question=question,
             source_versions=versions,input_shape='QUESTION_ONLY' if not versions else 'QUESTION_WITH_SOURCE' if len(versions)==1 else 'QUESTION_WITH_MULTIPLE_SOURCES',
             base_bypass=False,complete_capability_integration=False,operations=[],provider_attempts=allowance.attempts,
             hcl_execution=dict(status='NOT_STARTED',selected_operations=0,dispatched_operations=0,native_results=0,
@@ -487,15 +487,24 @@ class UniversalHCL:
                     hcl_plan=plan,hcl_operations=receipt['operations'],hcl_execution=receipt['hcl_execution'],knowledge_basis='SUPPLIED_SOURCES_AND_EXPLICIT_INTERPRETATION' if versions else 'UNSOURCED_MODEL_KNOWLEDGE'),ensure_ascii=False,sort_keys=True))])
             receipt['actual_final_messages']=final
             raw=allowance.call(answer_backend,'answer',final);receipt['answer_raw']=raw
+            receipt['final_delivery_code']='RETURNED_UNVALIDATED'
             self._current(versions,receipt['operations'])
             if len(raw)>64000:raise HCLBoundaryError('answer exceeds bounded contract')
-            obj=json.loads(raw)
-            if not isinstance(obj,dict)or set(obj)!={'answer','source_citations','uncertainty','assumptions'}or any(not isinstance(obj[k],str)for k in ('answer','uncertainty','assumptions'))or not isinstance(obj['source_citations'],list):raise HCLBoundaryError('invalid answer schema')
-            if not obj['answer'].strip():raise HCLBoundaryError('NONBLANK_FINAL_ANSWER_REQUIRED')
+            try:obj=json.loads(raw)
+            except json.JSONDecodeError:
+                receipt['final_delivery_code']='JSON_INVALID'
+                raise  # Preserve the existing exception and failure classification.
+            if not isinstance(obj,dict)or set(obj)!={'answer','source_citations','uncertainty','assumptions'}or any(not isinstance(obj[k],str)for k in ('answer','uncertainty','assumptions'))or not isinstance(obj['source_citations'],list):
+                receipt['final_delivery_code']='SCHEMA_INVALID'
+                raise HCLBoundaryError('invalid answer schema')
+            if not obj['answer'].strip():
+                receipt['final_delivery_code']='ANSWER_BLANK'
+                raise HCLBoundaryError('NONBLANK_FINAL_ANSWER_REQUIRED')
             audit=(audit_supplied_source_citations(final,raw) if versions else dict(
                 status='NO_SUPPLIED_SOURCES_UNSOURCED_ANALYSIS',deliverable=not obj['source_citations'],semantic_certification=False))
             receipt['source_review']=audit
             receipt['status']='ANSWERED_WITH_EXPLICIT_LIMITS' if audit['deliverable'] else 'ANSWER_SOURCE_REVIEW_FAILED'
+            receipt['final_delivery_code']='DELIVERED' if audit['deliverable'] else 'SOURCE_REVIEW_REJECTED'
             if audit['deliverable']:receipt['answer']=raw
         except Exception as exc:
             allowance.closed=True
