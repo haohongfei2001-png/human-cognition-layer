@@ -3,11 +3,21 @@
   "authorization_ref": "OWNER_APPROVED_FOUR_COMPARISON_PUBLIC_SYNTHETIC_20261004_121358",
   "authorized_calls": 12,
   "authorized_usd": "1.28",
+  "closed_head_sha": "e9467de0a018e7e454092220d999712fb975236c",
+  "closed_run_id": "37202844362",
   "expires_at": "2026-10-05T12:13:58Z",
   "historical_budget_transfer": false,
+  "invoice_cost_usd": null,
   "package_sha256": "290e5c572d1d4e4b11ab1317469d08259b7d4da8e1314fea306c92b873ed058a",
+  "provider_calls": 12,
+  "public_artifact_id": 11304010732,
+  "public_artifact_sha256": "646153dfbde20dea80008cd2699d3d2073c97882fb91059d57ac6ab481eb9e79",
   "public_output_scope": "FOUR_EXACT_SYNTHETIC_CASES_EIGHT_UNCHANGED_FINAL_OUTPUTS_SAME_HCL_REPOSITORY",
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_usd": "0",
+  "reserved_usd": "1.27791840",
   "retries": 0,
   "schema": "hcl-four-comparison-grant-v1",
-  "status": "READY"
+  "status": "CLOSED_NO_TRANSFER_NO_RETRY",
+  "usage_rated_usd": "0.23635524"
 }
