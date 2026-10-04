@@ -1,0 +1,31 @@
+{
+  "schema": "hcl-nonblank-answer-amendment-v1",
+  "previous_hcl_runtime_sha256": "38ee8c979847ccf68f32747d5485d0494274fdb65165d1bde7fe7a08fc4dc9a4",
+  "amended_hcl_runtime_sha256": "90737b3ed772f65851553d8a673112eae50f2781185d8b5b4ccd127cdfb8663b",
+  "changed_runtime_files": [
+    "hcl/cognition/universal_entry.py"
+  ],
+  "reason": "REJECT_EMPTY_OR_UNICODE_WHITESPACE_ONLY_ORDINARY_FINAL_ANSWERS",
+  "entry": "UniversalHCL.answer",
+  "whitespace_definition": "PYTHON_STR_STRIP_UNICODE_WHITESPACE",
+  "failure_code": "NONBLANK_FINAL_ANSWER_REQUIRED",
+  "validation_after_existing_schema_check": true,
+  "raw_bounded_answer_preserved": true,
+  "returned_native_results_preserved": true,
+  "successful_reservations_and_usage_preserved": true,
+  "valid_nonblank_text_rewritten": false,
+  "source_citation_audit_changed": false,
+  "legacy_quote_location_audit_changed": false,
+  "provider_phases_changed": false,
+  "additional_provider_calls": 0,
+  "retries_added": 0,
+  "native_parsers_changed": false,
+  "model_or_token_defaults_changed": false,
+  "output_size_bounds_changed": false,
+  "provider_calls": 0,
+  "provider_spend_usd": 0,
+  "authorized_additional_calls": 0,
+  "historical_answers_rescored": false,
+  "semantic_answer_quality_certified": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}
