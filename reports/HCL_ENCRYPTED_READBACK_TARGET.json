@@ -1,0 +1,13 @@
+{
+  "archive_sha256": "27e9d2ec7e6c67bb87c258fdce270482a2d9e6367040a66ffec23506a778e8b8",
+  "artifact_id": 11259761707,
+  "artifact_name": "hcl-planner-contract-smoke-encrypted-37084124429",
+  "head_sha": "79aced8962a63aa53d9eeb442fdd4b273fd9267f",
+  "member_name": "planner-contract-smoke.enc.json",
+  "package_sha256": "c7355135f3e68a6a049934142c350fae9c89744d3568cc2fa9b49f261ffb0209",
+  "receipt_sha256": "88bb45c146ebe0f5f6f1bf745d8a0c786fb250c901558ceddf8c225f931f3de9",
+  "recipient_sha256": "b3594025c8e692403be395232f1250b0f8aa8899116e412b927d01b4733e7295",
+  "repository": "haohongfei2001-png/human-cognition-layer",
+  "run_id": 37084124429,
+  "schema": "hcl-encrypted-readback-expectations-v1"
+}
