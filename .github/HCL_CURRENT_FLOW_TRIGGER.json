@@ -1,0 +1,7 @@
+{
+  "schema": "hcl-current-flow-marker-v1",
+  "authorization_ref": "OWNER_APPROVED_CURRENT_FLOW_PUBLIC_SYNTHETIC_20261004_113427",
+  "package_sha256": "9405539c40cf2049539aa235ff87c5a267e95a0f25383274639c139a99bda318",
+  "grant_sha256": "348fc6e1d13844c312545a64f60b1ec8b981092cecddf9af82810efd4009fd6d",
+  "executor_commit": "a45fa22eebc71d7e7685cd6a80c00f65a7b69b48"
+}
