@@ -1,0 +1,147 @@
+{
+  "answer_tokens": 8192,
+  "authorization_ref": "OWNER_APPROVED_FOUR_COMPARISON_PUBLIC_SYNTHETIC_20261004_121358",
+  "baseline_commit": "22e626ef0744743ec706968ad294990855b31d5e",
+  "execution_files": {
+    ".github/frozen/hcl-four-comparison-once.yml": "c80e3a8169a77251dba6162fd4fa3dbe3ea1ee3da907aa666c9826c5b703c622",
+    ".github/frozen/hcl-four-comparison/README.md": "335b9f1d5285ab1e50324d5454481df80acc2dfdcfb8b1840bc7964e7a05b9cc",
+    ".github/frozen/hcl-four-comparison/SHA256SUMS": "5639dec02a3f2d7f20f823d0667635543280c94116215390202dd328f69f55f1",
+    ".github/frozen/hcl-four-comparison/inputs.json": "9f8a1a87c1d3e9d8ac96991920871192d3e1c5adab7ee51dfd3cdc90e503d942",
+    ".github/frozen/hcl-four-comparison/proposal.json": "612231909be22435224293525d8fdb8b2160b081618f1f0fd6f2974a25ee1079",
+    ".github/frozen/hcl-four-comparison/rubric.json": "4ec8e11ce3af7603aabcf744e64014145a36ddb760eb9840f9fb4cd82bf91629",
+    ".github/workflows/hcl-four-comparison-provider-free.yml": "ee15ace63f7e3427a1a8ec73482f362e66e7cb5b1e2be6f323d28b0425f0b0af",
+    "scripts/bounded_diagnostic_port.py": "16720c930139e66484ba86dc6238ad338c2eadf4e61317560dfe7902e8090a8a",
+    "scripts/bounded_diagnostic_protocol.py": "a11712be17046f6ec02409be6118820a18fe8a5b0426b14665e1510b6ecdfa3f",
+    "scripts/four_comparison_public.py": "bb492824cb16bf0b30b76345a18ccc95086f9daa99a59ee0339f52cd447e00c0",
+    "scripts/output_limit_port.py": "3bf22b5481eea36fefcad48cea6bcb4952d934b0ca529392ce7499f11f29afef",
+    "scripts/output_limit_protocol.py": "994b2c591e4bdcef903de870ae74696d8bfc409c57f225c932276d6d82bca9d7",
+    "scripts/run_four_comparison.py": "bc5cf93718b1874e1949771910bbd196ef3cf4f0d0e7436955d8ffc6419b5060",
+    "scripts/serious_eval_contract.py": "d415af270dfff20139130768cdf462f9eb0d8080e3ed152f2e3adb9f18ba1a9f",
+    "scripts/universal_launch_guard.py": "48e0057dcb3a018aa63824166a3c3cc0950baa56a5af03021c7eb2a101886875",
+    "tests/test_four_comparison.py": "b75cc18c38589ff2405d47b37d6190dc1081805785cc71b853123f1892855d1c"
+  },
+  "frozen_files_sha256": {
+    "README.md": "335b9f1d5285ab1e50324d5454481df80acc2dfdcfb8b1840bc7964e7a05b9cc",
+    "inputs.json": "9f8a1a87c1d3e9d8ac96991920871192d3e1c5adab7ee51dfd3cdc90e503d942",
+    "proposal.json": "612231909be22435224293525d8fdb8b2160b081618f1f0fd6f2974a25ee1079",
+    "rubric.json": "4ec8e11ce3af7603aabcf744e64014145a36ddb760eb9840f9fb4cd82bf91629"
+  },
+  "historical_budget_transfer": false,
+  "maximum_calls": 12,
+  "maximum_elapsed_seconds": 2700,
+  "maximum_hcl_answer_reservation_usd": "0.13031040",
+  "maximum_request_bytes": 36000,
+  "maximum_schedule_reservation_usd": "1.27791840",
+  "maximum_usd": "1.28",
+  "maximum_wait_seconds": 180,
+  "model": "deepseek-v4-pro",
+  "order": [
+    [
+      "D01",
+      "Base"
+    ],
+    [
+      "D01",
+      "HCL"
+    ],
+    [
+      "D02",
+      "HCL"
+    ],
+    [
+      "D02",
+      "Base"
+    ],
+    [
+      "D03",
+      "Base"
+    ],
+    [
+      "D03",
+      "HCL"
+    ],
+    [
+      "D04",
+      "HCL"
+    ],
+    [
+      "D04",
+      "Base"
+    ]
+  ],
+  "paid_judges": 0,
+  "planning_tokens": 16384,
+  "prior_closed_grant_sha256": "3ce66fd0533733689f611500060ce691cf5f8d43bec5ff3e63a2e3e042dea1c2",
+  "production_planning_tokens": 4096,
+  "public_output_scope": "FOUR_EXACT_SYNTHETIC_CASES_EIGHT_UNCHANGED_FINAL_OUTPUTS_SAME_HCL_REPOSITORY",
+  "repairs": 0,
+  "requests": {
+    "D01:Base:answer": {
+      "input_token_bound": 8094,
+      "max_tokens": 8192,
+      "messages_sha256": "7d876c0f9459f847660380296178f98d0a96533483b7a20b429411498340fe64",
+      "request_bytes": 3023,
+      "request_sha256": "5028d7f601b272a4d6a962fb8f32ff5c848fa16194c4bd77204bf9b280b73479",
+      "reservation_usd": "0.04325112"
+    },
+    "D01:HCL:planning": {
+      "input_token_bound": 61352,
+      "max_tokens": 16384,
+      "messages_sha256": "3b1ea9637c750bfd6565d04925a9de69e395ec0df9086555d1dcdffc46d576ff",
+      "request_bytes": 29652,
+      "request_sha256": "c7a0de3f416f7e804df0de8bdc0e53d903105102e162f0078279507b3fca666a",
+      "reservation_usd": "0.145992"
+    },
+    "D02:Base:answer": {
+      "input_token_bound": 8154,
+      "max_tokens": 8192,
+      "messages_sha256": "43a797392a32ee6785c922d10e802c850f590696c826b3cc0007f13b2334ec77",
+      "request_bytes": 3053,
+      "request_sha256": "45506f4b02f4e9223de2cfb5636e3f2d6b73b7c9b1703ae08168ef0e2620f81c",
+      "reservation_usd": "0.04333032"
+    },
+    "D02:HCL:planning": {
+      "input_token_bound": 61412,
+      "max_tokens": 16384,
+      "messages_sha256": "aa92403930c2528583b853f14c189a391e0f34c07f2abdf8f38d2e004a37dbf1",
+      "request_bytes": 29682,
+      "request_sha256": "6919dc8b2b23f07a8e5bafe358a78060e52619a5f4cb8dff17d3a0f92bf00f06",
+      "reservation_usd": "0.1460712"
+    },
+    "D03:Base:answer": {
+      "input_token_bound": 7984,
+      "max_tokens": 8192,
+      "messages_sha256": "10a6d626990e33ea3962d90fd4e0a2f0be18f9b36a2a005f24b773beb5bea75d",
+      "request_bytes": 2968,
+      "request_sha256": "07533889815749ec0e2be6aeafe2c26d4eea45376b212be87bb7e3db7eaa3762",
+      "reservation_usd": "0.04310592"
+    },
+    "D03:HCL:planning": {
+      "input_token_bound": 61242,
+      "max_tokens": 16384,
+      "messages_sha256": "1031aa0d1966b2dcff3b84a17d4cb3ef1c0a5be04167fa95609c46b9813ed74e",
+      "request_bytes": 29597,
+      "request_sha256": "d0bc0d204095aa781b599467469d59370921be920166eb62f931e635ae5673a9",
+      "reservation_usd": "0.1458468"
+    },
+    "D04:Base:answer": {
+      "input_token_bound": 8032,
+      "max_tokens": 8192,
+      "messages_sha256": "eaf7095f865146b2298b4e17b0f8f3656e7e1565847a0387e039cdf068e2e195",
+      "request_bytes": 2992,
+      "request_sha256": "52a9a2becb35dc693d160e481cbdb2733340f60ad734070868280ff92d99dce6",
+      "reservation_usd": "0.04316928"
+    },
+    "D04:HCL:planning": {
+      "input_token_bound": 61290,
+      "max_tokens": 16384,
+      "messages_sha256": "da4b1aacb85707743c7cc96ef1338febcec4750ecf50ccc9df8c79b177994b77",
+      "request_bytes": 29621,
+      "request_sha256": "98bef91cc0eaff82daceec7ec761eed02db75fb96230e2438484447ef669c7e1",
+      "reservation_usd": "0.14591016"
+    }
+  },
+  "retries": 0,
+  "runtime_sha256": "90737b3ed772f65851553d8a673112eae50f2781185d8b5b4ccd127cdfb8663b",
+  "schema": "hcl-four-comparison-package-v1"
+}

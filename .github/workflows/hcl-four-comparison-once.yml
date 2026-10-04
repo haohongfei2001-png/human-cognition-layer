@@ -1,0 +1,59 @@
+name: HCL one frozen four-case comparison
+on:
+  push:
+    branches: [main]
+    paths: ['.github/HCL_FOUR_COMPARISON_TRIGGER.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: hcl-four-comparison-once-20261004
+  cancel-in-progress: false
+jobs:
+  comparison:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'openai==2.14.0'
+      - name: Provider-free frozen batch gates
+        run: python -m unittest tests.test_four_comparison tests.test_v1_deepseek_metered
+      - name: Existing provider secret presence only, zero paid calls
+        env:
+          SECRET_PRESENT: ${{ secrets.DEEPSEEK_API_KEY != '' }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          evidence = dict(run_id=os.environ['GITHUB_RUN_ID'], head_sha=os.environ['GITHUB_SHA'], existing_provider_secret='PRESENT' if os.environ['SECRET_PRESENT'] == 'true' else 'ABSENT')
+          Path('/tmp/four-comparison-secret-presence.json').write_text(json.dumps(evidence))
+          print(json.dumps(evidence, sort_keys=True))
+          if evidence['existing_provider_secret'] != 'PRESENT': raise SystemExit(1)
+          PY
+      - name: Single new grant and complete workflow history
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-four-comparison-once.yml/runs?per_page=100" > /tmp/four-comparison-runs.json
+          python -m scripts.run_four_comparison --check-launch /tmp/four-comparison-runs.json
+      - name: One ordered bounded comparison with no retry
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: python -m scripts.run_four_comparison --execute
+      - name: Export authorized final fields and bounded metrics only
+        if: always()
+        run: |
+          if test -f four-comparison-private/receipt.json; then
+            python -m scripts.four_comparison_public --receipt four-comparison-private/receipt.json --output four-comparison-public.json
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-four-comparison-public-${{ github.run_id }}
+          path: four-comparison-public.json
+          if-no-files-found: warn

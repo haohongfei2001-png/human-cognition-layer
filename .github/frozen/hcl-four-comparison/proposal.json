@@ -1,0 +1,258 @@
+{
+  "authority": {
+    "authorized_calls": 0,
+    "authorized_usd": "0",
+    "historical_budget_transfer": false,
+    "new_owner_approval_required": true,
+    "old_grant": "CLOSED_NO_TRANSFER_NO_RETRY",
+    "prior_public_exception": "ONE_CONSUMED_G05_FINAL_FIELDS_CITATIONS_IDENTITY_USAGE_ONLY_SAME_HCL_REPOSITORY; DOES NOT COVER THIS BATCH",
+    "prior_result_role": "Consumed G05 citation regression only; not new evidence, reusable grant or I02 completion.",
+    "prior_run": 37200327609,
+    "provider_calls_made": 0,
+    "publications_made": 0
+  },
+  "budget": {
+    "admission": "Every exact request must be hashed, journaled and reserved before SDK invocation; one shared aggregate ledger enforces both 12 calls and the new hard cap. Per-stage caps and this full schedule bound also apply. No release/reuse of failed or unused allowance for other requests. Stop on unknown usage/cost/transport status; invoice stays null until externally verified.",
+    "cost_basis": "Conservative frozen-code usage-rated peak reservation; not actual invoice cost or a vendor guarantee of pricing.",
+    "currency": "USD",
+    "formula": "((2 * canonical_request_utf8_bytes + 2048) * 1.32 + (max_output_tokens + 32) * 3.96) / 1000000",
+    "max_calls_breakdown": {
+      "Base": 4,
+      "HCL_answer": 4,
+      "HCL_planning": 4
+    },
+    "maximum_each_hcl_answer_reservation_usd": "0.1303104",
+    "maximum_four_hcl_answers_reservation_usd": "0.5212416",
+    "maximum_full_run_reservation_usd": "1.27791840",
+    "output_token_margin": 32,
+    "proposed_new_owner_hard_cap_usd": "1.28",
+    "rates_usd_per_million": {
+      "input": "1.32",
+      "output": "3.96"
+    },
+    "requests": [
+      {
+        "base": {
+          "input_token_bound": 8094,
+          "max_tokens": 8192,
+          "messages_sha256": "7d876c0f9459f847660380296178f98d0a96533483b7a20b429411498340fe64",
+          "request_bytes": 3023,
+          "request_sha256": "5028d7f601b272a4d6a962fb8f32ff5c848fa16194c4bd77204bf9b280b73479",
+          "reservation_usd": "0.04325112"
+        },
+        "case_id": "D01",
+        "maximum_case_reservation_usd": "0.31955352",
+        "planning": {
+          "input_token_bound": 61352,
+          "max_tokens": 16384,
+          "messages_sha256": "3b1ea9637c750bfd6565d04925a9de69e395ec0df9086555d1dcdffc46d576ff",
+          "request_bytes": 29652,
+          "request_sha256": "c7a0de3f416f7e804df0de8bdc0e53d903105102e162f0078279507b3fca666a",
+          "reservation_usd": "0.145992"
+        }
+      },
+      {
+        "base": {
+          "input_token_bound": 8154,
+          "max_tokens": 8192,
+          "messages_sha256": "43a797392a32ee6785c922d10e802c850f590696c826b3cc0007f13b2334ec77",
+          "request_bytes": 3053,
+          "request_sha256": "45506f4b02f4e9223de2cfb5636e3f2d6b73b7c9b1703ae08168ef0e2620f81c",
+          "reservation_usd": "0.04333032"
+        },
+        "case_id": "D02",
+        "maximum_case_reservation_usd": "0.31971192",
+        "planning": {
+          "input_token_bound": 61412,
+          "max_tokens": 16384,
+          "messages_sha256": "aa92403930c2528583b853f14c189a391e0f34c07f2abdf8f38d2e004a37dbf1",
+          "request_bytes": 29682,
+          "request_sha256": "6919dc8b2b23f07a8e5bafe358a78060e52619a5f4cb8dff17d3a0f92bf00f06",
+          "reservation_usd": "0.1460712"
+        }
+      },
+      {
+        "base": {
+          "input_token_bound": 7984,
+          "max_tokens": 8192,
+          "messages_sha256": "10a6d626990e33ea3962d90fd4e0a2f0be18f9b36a2a005f24b773beb5bea75d",
+          "request_bytes": 2968,
+          "request_sha256": "07533889815749ec0e2be6aeafe2c26d4eea45376b212be87bb7e3db7eaa3762",
+          "reservation_usd": "0.04310592"
+        },
+        "case_id": "D03",
+        "maximum_case_reservation_usd": "0.31926312",
+        "planning": {
+          "input_token_bound": 61242,
+          "max_tokens": 16384,
+          "messages_sha256": "1031aa0d1966b2dcff3b84a17d4cb3ef1c0a5be04167fa95609c46b9813ed74e",
+          "request_bytes": 29597,
+          "request_sha256": "d0bc0d204095aa781b599467469d59370921be920166eb62f931e635ae5673a9",
+          "reservation_usd": "0.1458468"
+        }
+      },
+      {
+        "base": {
+          "input_token_bound": 8032,
+          "max_tokens": 8192,
+          "messages_sha256": "eaf7095f865146b2298b4e17b0f8f3656e7e1565847a0387e039cdf068e2e195",
+          "request_bytes": 2992,
+          "request_sha256": "52a9a2becb35dc693d160e481cbdb2733340f60ad734070868280ff92d99dce6",
+          "reservation_usd": "0.04316928"
+        },
+        "case_id": "D04",
+        "maximum_case_reservation_usd": "0.31938984",
+        "planning": {
+          "input_token_bound": 61290,
+          "max_tokens": 16384,
+          "messages_sha256": "da4b1aacb85707743c7cc96ef1338febcec4750ecf50ccc9df8c79b177994b77",
+          "request_bytes": 29621,
+          "request_sha256": "98bef91cc0eaff82daceec7ec761eed02db75fb96230e2438484447ef669c7e1",
+          "reservation_usd": "0.14591016"
+        }
+      }
+    ],
+    "rounding_headroom_usd": "0.00208160",
+    "unknown_hcl_answer_request_bytes": "Dynamic; cannot be known before planning/native execution. Reserve 36000 bytes for each of four possible HCL answers."
+  },
+  "created_at": "2026-10-04T12:10:04.485070+00:00",
+  "execution": {
+    "after_outputs": "Lock unchanged raw final fields and scores; report results including missing treatment, failures, losses and ties. Future repairs are a new separately reviewed task, never edits to this frozen batch.",
+    "arm_isolation": "New isolated session for each HCL case; same complete frozen source/question for both arms; neither arm sees the other output. Rubric/domain labels do not enter prompts. HCL uses unchanged normal planner inventory and runtime. No external retrieval or provider subcalls.",
+    "hcl_answer_gate": "Exactly one planning attempt. At most one answer attempt, only if unchanged UniversalHCL obtains an actual native result. An honest insufficient-evidence native result may proceed. Empty plans/all unavailable adapters have no Base fallback. Record absence/irrelevance of checked treatment, not a reason to replace the item.",
+    "local_failures": "Preserve and continue the predeclared remaining arms/items after known bounded content/schema/selection/adaptation failures when reservation, usage and transport status are known. Do not rerun or repair. Unknown send/deadline/usage/cost, model drift, source/runtime/hash drift or aggregate admission failure stops the batch; remaining arms are NOT_ATTEMPTED.",
+    "no_truncation": "An HCL answer request above 36000 bytes is an honest no-answer overflow. Never shorten source, policy, translations or operations to fit after observing results.",
+    "order": [
+      [
+        "D01",
+        "Base"
+      ],
+      [
+        "D01",
+        "HCL"
+      ],
+      [
+        "D02",
+        "HCL"
+      ],
+      [
+        "D02",
+        "Base"
+      ],
+      [
+        "D03",
+        "Base"
+      ],
+      [
+        "D03",
+        "HCL"
+      ],
+      [
+        "D04",
+        "HCL"
+      ],
+      [
+        "D04",
+        "Base"
+      ]
+    ],
+    "terminal": "After one ordered pass, any global stop, expiry or cancellation, close grant with remaining authorized calls/USD zero. No trigger rearming and no transfer to a follow-on batch."
+  },
+  "freeze": {
+    "base_payload": "question + sources containing only source_id/version/text + knowledge_basis=SUPPLIED_SOURCES_AND_EXPLICIT_INTERPRETATION",
+    "base_system_policy_append": " The answer field must contain a nonblank answer; state an evidence limitation explicitly rather than leaving it empty.",
+    "base_system_policy_sha256": "9b0209f3471495a2edf68910004f1378b4f8a4860ba7613cf8e208d18818e250",
+    "capability_inventory_sha256": "b59507264a4403879ac67fef766b33112cb1e504a5c968d336a917f0eaf649e9",
+    "common_final_policy_sha256": "7c9cf8374c8f12026890250ef4a977bc3f5a4728fc6d74ab024d65d46a9f0d02",
+    "inputs_file_sha256": "9f8a1a87c1d3e9d8ac96991920871192d3e1c5adab7ee51dfd3cdc90e503d942",
+    "main_commit": "22e626ef0744743ec706968ad294990855b31d5e",
+    "planner_policy_sha256": "aec0639bdec7341b51ecde8aa09f8f6b5a4724ebe55280e24afe147fae701f9b",
+    "planning_payload": "question + exact frozen source rows + [asdict(c) for c in CATALOG.values()] in unchanged catalog order",
+    "repository": "haohongfei2001-png/human-cognition-layer",
+    "rubric_file_sha256": "4ec8e11ce3af7603aabcf744e64014145a36ddb760eb9840f9fb4cd82bf91629",
+    "runtime_and_metering_files_sha256": {
+      "hcl/cognition/capability_catalog.py": "27823a49c18d84d0851bf7f828a94857cc5c9c74caf73cf9ca2c2ba7e8fdea54",
+      "hcl/cognition/deepseek_metered.py": "cc44617848918615b7fad9fb29a1006968f29454babd8fa08de377bccc727c7a",
+      "hcl/cognition/reader_entry.py": "9125524e4843849b41901142e7990ca404a7932f3199e04019b1de7a6dabd84f",
+      "hcl/cognition/retained.py": "f83240579ca0e8063d87903f273679a932be2360bc66c764986c0cce5560527e",
+      "hcl/cognition/universal_entry.py": "ae854eb6630474bdbf673239679652f477d8d4a9c6513ecffd2740d1b5ca67f3",
+      "scripts/bounded_diagnostic_port.py": "16720c930139e66484ba86dc6238ad338c2eadf4e61317560dfe7902e8090a8a",
+      "scripts/bounded_diagnostic_protocol.py": "a11712be17046f6ec02409be6118820a18fe8a5b0426b14665e1510b6ecdfa3f",
+      "scripts/output_limit_port.py": "3bf22b5481eea36fefcad48cea6bcb4952d934b0ca529392ce7499f11f29afef",
+      "scripts/output_limit_protocol.py": "994b2c591e4bdcef903de870ae74696d8bfc409c57f225c932276d6d82bca9d7",
+      "scripts/serious_eval_contract.py": "d415af270dfff20139130768cdf462f9eb0d8080e3ed152f2e3adb9f18ba1a9f"
+    },
+    "runtime_sha256": "90737b3ed772f65851553d8a673112eae50f2781185d8b5b4ccd127cdfb8663b",
+    "scope_of_freeze": "Sources/questions/rubric, runtime, common contract, model settings, request identities and rate envelope frozen now. No runner/trigger/grant is implemented by this proposal; a future bounded execution package still requires review before one launch.",
+    "serializer": "User message content: json.dumps(payload, ensure_ascii=False, sort_keys=True), default separators. Exact metered request: ensure_ascii=False, sort_keys=True, separators=(comma, colon), UTF-8. Requests are canonical metering representations, not a claim of byte-identical SDK HTTP framing."
+  },
+  "latency": {
+    "exclusions": "Exclude checkout/install/CI queue, credential presence checks, common file loading, score review, artifact encryption/publication and unrelated idle time equally for both arms.",
+    "failure_handling": "Give status and elapsed/censored-to-timeout duration for failed arms; never call a short failure a speed gain. At most four pairs, serial alternating order, no general latency or causal claim.",
+    "primary": "Arm wall time in monotonic seconds: start when the common frozen source/question is passed to a ready arm with client already initialized, before arm-specific source setup/serialization/reservation; stop after final schema/citation validation or terminal failure. HCL includes source setup, planner, local native work and answer. Base includes its corresponding source/prompt preparation and one answer.",
+    "secondary": "Record monotonic SDK-invocation-to-return/failure for each provider call, phase durations, and local HCL work; report sum and total wall time. Compare end-to-end arm wall times, not HCL final-call latency alone."
+  },
+  "public_output_approval_request": {
+    "destination": "Public evidence artifact and summary in the same GitHub repository haohongfei2001-png/human-cognition-layer, for this exact four-case batch only.",
+    "exclude": [
+      "Provider reasoning_content, raw provider envelopes, raw planning output, complete private receipts, secrets or authentication data.",
+      "Protected/confirmation/gold/sealed material, unrelated historical artifacts or other projects, or any output outside the exact four-case scope."
+    ],
+    "include": [
+      "These four original synthetic source texts/questions, version/text/request/rubric/package hashes and the frozen scoring criteria.",
+      "Unchanged canonical final answer/source_citations/uncertainty/assumptions for at most four Base and four HCL outputs; unavailable placeholders and fixed safe failure codes.",
+      "Model/runtime/run/commit identity; per-call usage, frozen-rate estimates/reservations, bounded timestamps/durations, call totals and closed-budget status.",
+      "Selected/executed/checked-treatment capability IDs and counts plus bounded source-first factual-review scores/reasons; no efficacy or I02 certification."
+    ],
+    "safety": "An explicit new limited public-output exception is required alongside the separate spending approval. No such approval is represented by this proposal."
+  },
+  "purpose": "TINY_ASSISTANT_AUTHORED_DEVELOPMENT_DIAGNOSTIC_NOT_FORMAL_EFFICACY_OR_I02_CERTIFICATION",
+  "schema": "hcl-fresh-four-local-proposal-v1",
+  "settings": {
+    "answer_content_character_bound": 64000,
+    "authorization_validity_maximum_seconds": 86400,
+    "base_answer_tokens": 8192,
+    "extraction_calls": 0,
+    "forced_capability_selection": false,
+    "hcl_answer_tokens": 8192,
+    "hcl_planning_tokens": 16384,
+    "judge_calls": 0,
+    "maximum_batch_elapsed_seconds": 2700,
+    "maximum_provider_calls": 12,
+    "maximum_request_bytes": 36000,
+    "maximum_wait_per_call_seconds": 180,
+    "model": "deepseek-v4-pro",
+    "model_temperature": "Unset in existing metered request for every call",
+    "planning_content_character_bound": 32000,
+    "production_planning_tokens_unchanged": 4096,
+    "provider": "Existing DeepSeek account and https://api.deepseek.com destination only",
+    "reasoning_effort": "high",
+    "replacement_items": 0,
+    "response_format": {
+      "type": "json_object"
+    },
+    "retries": 0,
+    "runtime_tuning_after_results": false,
+    "source_or_prompt_tuning_after_results": false,
+    "thinking": "enabled"
+  },
+  "status": "PREPARED_NOT_AUTHORIZED_NOT_EXECUTABLE",
+  "verification": {
+    "case_count": 4,
+    "citations_anchors_checked": true,
+    "exact_base_and_planning_requests_quoted_with_existing_OutputLimitPort": true,
+    "no_complete_method_called": true,
+    "no_credentials_read_or_created": true,
+    "no_sdk_client_constructed": true,
+    "protected_sources_read": 0,
+    "provider_calls": 0,
+    "provider_spend_usd": "0",
+    "repo_modified": false,
+    "source_versions": [
+      1,
+      1,
+      1,
+      1
+    ]
+  }
+}

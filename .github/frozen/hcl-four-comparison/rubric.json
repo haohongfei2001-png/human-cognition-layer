@@ -1,0 +1,203 @@
+{
+  "cases": {
+    "D01": {
+      "criteria": [
+        {
+          "anchors": [
+            "At 09:05, Ravi moved it to Room Elm",
+            "At 09:10, Inez told Bo"
+          ],
+          "id": "D01.1",
+          "requirement": "Distinguish the reported actual move to Elm from Inez's last expressed intention to attend at Cedar. Treat a continuing Cedar view at 09:12 as supported but defeasible, not a proven current private state."
+        },
+        {
+          "anchors": [
+            "the message was still undelivered at 09:12"
+          ],
+          "id": "D01.2",
+          "requirement": "State that the supplied log reports non-delivery by 09:12. Sending alone does not establish Inez received, understood, or accepted the update. Do not turn this into proof that no other information channel existed."
+        },
+        {
+          "anchors": [
+            "Ravi moved it to Room Elm"
+          ],
+          "id": "D01.3",
+          "requirement": "Ravi's moving the meeting supports the ordinary inference that he regards Elm as its location. Separate that inference from a direct belief report or certified private knowledge."
+        },
+        {
+          "anchors": [
+            "Ravi saw no reply from Inez",
+            "or that Ravi learned what Inez told Bo"
+          ],
+          "id": "D01.4",
+          "requirement": "Neither Ravi's knowledge of Inez's ignorance nor Inez's view of Ravi's knowledge is established. Reader access to the delivery log is not shown to be Ravi's access. No reply and Bo's presence do not create common knowledge."
+        }
+      ],
+      "critical_errors": [
+        "Says Inez learned of or accepted Elm because Ravi sent the message.",
+        "Claims Ravi knows Inez is unaware merely from the reader-visible log or lack of reply.",
+        "Claims their knowledge is mutual/common knowledge, or that the source proves all possible other information paths absent."
+      ],
+      "domain": "belief and perspective",
+      "useful_limit": "An answer can give a likely current view while explicitly retaining uncertainty; total refusal to infer anything loses the supported-content points."
+    },
+    "D02": {
+      "criteria": [
+        {
+          "anchors": [
+            "In a message written before turning it down",
+            "I need that evening to collect my aunt from the station"
+          ],
+          "id": "D02.1",
+          "requirement": "Preserve Jonah's prior statement about collecting his aunt and not leaving her waiting as the directly reported explanation, with stronger explicit support than the avoidance suggestion. A report of a reason is not proof of the unique actual motive."
+        },
+        {
+          "anchors": [
+            "A coworker later said Jonah had been arguing with the manager"
+          ],
+          "id": "D02.2",
+          "requirement": "The argument with the manager makes avoidance a plausible alternative or additional motive, but the coworker's later report does not establish the cause of this decision or exclude the pickup reason."
+        },
+        {
+          "anchors": [
+            "the record does not say whether Jonah saw that offer"
+          ],
+          "id": "D02.3",
+          "requirement": "The voucher does not establish Jonah knew he had a usable alternative, that he was free of constraints, or that he lied. Equally, non-acceptance does not prove inability or absence of options."
+        },
+        {
+          "anchors": [
+            "There is no account of what Jonah did that evening"
+          ],
+          "id": "D02.4",
+          "requirement": "Identify discriminating missing evidence tied to these alternatives, such as whether/when Jonah received the voucher and what he said about it, or contemporaneous evidence relating the refusal to the manager. Evidence of a pickup could corroborate events without proving exclusivity of motive."
+        }
+      ],
+      "critical_errors": [
+        "Certifies avoidance, dishonesty, hostility, or a stable negative trait as the actual motive.",
+        "Claims voucher knowledge or action-time ability/inability that is not in the source.",
+        "Erases the explicitly reported pickup reason as wholly unsupported, or declares it the only possible true motive."
+      ],
+      "domain": "action explanation",
+      "useful_limit": "Do not make both explanations equally supported just because motives are not directly observable; the source gives asymmetric evidence."
+    },
+    "D03": {
+      "criteria": [
+        {
+          "anchors": [
+            "That is an ambitious schedule.",
+            "Before we agree, I'd like a staffing estimate."
+          ],
+          "id": "D03.1",
+          "requirement": "Describe the observable sequence accurately: ambitious comment, cleanup staffing question, Vera's laughter/topic change, then the later request for a staffing estimate before agreement."
+        },
+        {
+          "anchors": [
+            "who would handle the final day's cleanup",
+            "Before we agree"
+          ],
+          "id": "D03.2",
+          "requirement": "Offer a defensible inference of practical concern or conditional caution about staffing/feasibility, grounded especially in the later email. This is not clear unconditional approval and not necessarily categorical rejection."
+        },
+        {
+          "anchors": [
+            "no tone of voice, prior relationship, or private comments"
+          ],
+          "id": "D03.3",
+          "requirement": "Explain why ridicule/sarcasm or rejection is not established; the ambiguous adjective and missing tone/context leave alternatives. Do not require treating all interpretations as equally likely."
+        },
+        {
+          "anchors": [
+            "Vera laughed and changed the subject"
+          ],
+          "id": "D03.4",
+          "requirement": "Vera's laughter and topic change do not settle whether she agreed, felt mocked, was amused, or wished to avoid the issue; distinguish these possibilities from observations."
+        }
+      ],
+      "critical_errors": [
+        "Claims Chen definitely mocked or rejected Vera or that the group agreed.",
+        "Claims Vera's laughter proves agreement, embarrassment, offense, or another private state.",
+        "Diagnoses personality or relationship quality from this exchange."
+      ],
+      "domain": "social interpretation",
+      "useful_limit": "A cautious interpretation can still be informative; a blanket statement that nothing at all is supported misses the concrete staffing concern."
+    },
+    "D04": {
+      "criteria": [
+        {
+          "anchors": [
+            "the courier had confirmed a Tuesday slot",
+            "all crates were already packed"
+          ],
+          "id": "D04.1",
+          "requirement": "Identify the baseline: the reported Tuesday slot, already-packed crates, and before-Friday objective give practical support to a Tuesday-dispatch recommendation; the source does not prove it uniquely best or guarantee arrival."
+        },
+        {
+          "anchors": [
+            "the courier had confirmed a Tuesday slot"
+          ],
+          "id": "D04.2",
+          "requirement": "Under the single stated change, the confirmed-slot premise is removed/reversed. The named courier's unavailable Tuesday slot can no longer support dispatch using that slot; do not infer that every possible Tuesday shipment is impossible."
+        },
+        {
+          "anchors": [
+            "the crates needed to arrive before the Friday opening",
+            "all crates were already packed"
+          ],
+          "id": "D04.3",
+          "requirement": "Keep the packed status and Friday requirement fixed in the hypothetical. Distinguish this hypothetical from a correction of the original source or an actual cancellation."
+        },
+        {
+          "anchors": [
+            "no transit time, no information about another courier, and no later slot"
+          ],
+          "id": "D04.4",
+          "requirement": "The deadline outcome remains undetermined: transit time and alternative slots/couriers are unspecified. Loss of one support does not prove all timely delivery impossible or prove an alternative will succeed."
+        }
+      ],
+      "critical_errors": [
+        "Claims Friday delivery is definitely impossible or definitely achievable.",
+        "Invents a later slot, courier, transit time, or says the source's lack of information proves those options do not exist.",
+        "Changes other facts, treats the hypothetical as an actual event, or concludes the whole recommendation is false solely because one reason was removed."
+      ],
+      "domain": "counterfactual sensitivity",
+      "useful_limit": "Distinguish the now-unusable specified slot from broader, unestablished alternatives. No single required stock phrase or conclusion label."
+    }
+  },
+  "common_delivery_checks": [
+    "Exactly answer, source_citations, uncertainty, assumptions in one JSON object. All except citations are strings; answer must be nonblank.",
+    "At most 32 source citations, validated by the unchanged audit_supplied_source_citations over complete original sources and exact versions/offsets. Empty citation array remains schema-allowed but normally earns traceability 0 for these source-backed tasks.",
+    "Do not normalize, repair, rewrite, truncate, or retry invalid output. Retain raw returned answer content privately and mark the reason for rejection. Provider reasoning_content is never retained or disclosed.",
+    "Apply the same schema, nonblank, citation, factuality and uncertainty checks to Base and HCL; do not reward HCL terminology or module count."
+  ],
+  "independent_review": {
+    "anonymization_limit": "Do not edit final fields to hide arm-specific phrases. If text reveals its arm, record imperfect blinding. Case author self-review is labeled implementer review, not independent validation.",
+    "disagreement": "If independent review is unavailable, retain pending review or explicitly labeled implementer-only scores; do not claim independence. Preserve conflicting reviews without changing the frozen rubric.",
+    "no_paid_judge_calls": true,
+    "procedure": "Give a source-first reviewer who did not author these cases the frozen source/question/rubric and anonymized final fields for all eight planned outcomes. Include unavailable placeholders. Do not supply arm labels, plans, module IDs, costs, latency, or expected winners. Lock scores/reasons before unmasking."
+  },
+  "inputs_file_sha256": "9f8a1a87c1d3e9d8ac96991920871192d3e1c5adab7ee51dfd3cdc90e503d942",
+  "model_prompt_exclusion": "No domain labels, criteria, critical errors, expected outputs, capability targets or rubric text enter either arm. The normal unchanged HCL capability inventory remains part of its planner prompt only.",
+  "schema": "hcl-fresh-four-source-first-rubric-v1",
+  "scoring": {
+    "acceptable_case": "At least 8/10, no critical error, a nonblank schema-valid answer, and the same source-citation audit passes.",
+    "availability": "A missing answer, transport/format failure, or HCL no-native-result outcome scores 0 for end-to-end usefulness and is separately marked unavailable. Content-only score is null for no answer, never silently dropped from the four-item denominator.",
+    "criteria_points": {
+      "0": "Missing, materially wrong, or contradicted by the answer.",
+      "1": "Substantially correct but incomplete, weakly grounded, or insufficiently qualified.",
+      "2": "Correct, sufficiently grounded in the source, and preserves the stated limit."
+    },
+    "hcl_treatment": "Report selected, executed and checked-treatment counts separately, then source-first relevance/faithfulness review. Invocation and valid citations do not certify treatment quality or semantic correctness.",
+    "interpretation": "Neither a tie nor an HCL gain/harm establishes efficacy, significance, generalization, causal attribution to a module, human-state truth, I02 completion, or production-default performance.",
+    "per_arm_maximum": 40,
+    "per_case_content_maximum": 8,
+    "per_case_maximum": 10,
+    "primary_reporting": "Show each arm/case content score, traceability score, critical-error flags, delivery/availability status, paired deltas and negative results. Total out of 40 is descriptive only.",
+    "traceability_points": {
+      "0": "No useful supporting original citation, fabricated/invalid citation, or citations substituted for substantive support.",
+      "1": "Valid exact citations support some material claims, with incomplete coverage or unclear fact/inference separation.",
+      "2": "Valid exact citations support the material factual premises; material inferences and hypothetical assumptions are explicitly separated."
+    }
+  },
+  "status": "FROZEN_BEFORE_LIVE_OUTPUTS"
+}
