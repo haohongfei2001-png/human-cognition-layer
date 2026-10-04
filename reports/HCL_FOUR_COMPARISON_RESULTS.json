@@ -1,0 +1,432 @@
+{
+  "blind_packets_sha256": "788eb9fbd8c325c0034fff33e5a2d3ce35071707709fc465036ecaba1706f58f",
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RETRY",
+  "canonical_gate_does_not_certify_semantics": true,
+  "canonical_gate_rechecked_using_unchanged_runtime": true,
+  "closure_main": "fbda17ff3d33164b1c35b32abdd3f0f8a3863288",
+  "head_sha": "e9467de0a018e7e454092220d999712fb975236c",
+  "independent_scores_sha256": "73a797141a3a7c8a0b7e45e87acf9c4d85301e63d14d38dc68950c22d0ad640c",
+  "invoice_cost_usd": null,
+  "limitations": "FOUR_ASSISTANT_AUTHORED_DEVELOPMENT_ITEMS; NOT I02, REPRESENTATIVE_EFFICACY, GENERALIZATION, MODULE_CAUSALITY OR PRODUCTION_DEFAULT_PERFORMANCE; HCL HAS EXTRA PLANNING COMPUTE; IMPERFECT_BLINDING; MISSING ANSWER REMAINS ZERO IN FOUR-CASE DENOMINATOR",
+  "public_evidence_sha256": "646153dfbde20dea80008cd2699d3d2073c97882fb91059d57ac6ab481eb9e79",
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_usd": "0",
+  "results": [
+    {
+      "acceptable": true,
+      "arm": "Base",
+      "arm_seconds": 36.47325205999999,
+      "canonical_delivery_gate": true,
+      "case_id": "D01",
+      "checked_treatment": [],
+      "content_score": 8,
+      "criteria": [
+        {
+          "id": "D01.1",
+          "points": 2,
+          "rationale": "Distinguishes Ravi's reported move to Elm from Inez's last expressed Cedar intention; the continuing Cedar view is presented as supported interpretation and defeasible in the uncertainty field."
+        },
+        {
+          "id": "D01.2",
+          "points": 2,
+          "rationale": "Correctly reports non-delivery at 09:12 and says there is no reported basis for learning the change, rather than proof that no other channel existed. The only-updates premise is expressly labeled an assumption."
+        },
+        {
+          "id": "D01.3",
+          "points": 2,
+          "rationale": "Grounds Ravi's likely Elm view in his moving the meeting and explicitly identifies the current belief attribution as interpretation rather than a direct private-state report."
+        },
+        {
+          "id": "D01.4",
+          "points": 2,
+          "rationale": "Leaves higher-order knowledge open, explicitly distinguishes the reader-visible delivery status from Ravi's knowledge, and does not infer common knowledge from no reply or Bo's presence."
+        }
+      ],
+      "critical_errors": [],
+      "executed_capabilities": [],
+      "failure_codes": [],
+      "maximum": 10,
+      "packet_id": "P03",
+      "provider_calls": 1,
+      "reserved_usd": "0.04325112",
+      "score": 10,
+      "sdk_seconds": 36.437073573999996,
+      "selected_capabilities": [],
+      "status": "ANSWER_ACCEPTED",
+      "traceability_rationale": "Exact citations cover the events, non-delivery, no reply, and information gaps; belief interpretations and the limited-channel assumption are explicitly qualified.",
+      "traceability_score": 2,
+      "usage_rated_usd": "0.01780812"
+    },
+    {
+      "acceptable": false,
+      "arm": "HCL",
+      "arm_seconds": 84.47944883199999,
+      "canonical_delivery_gate": false,
+      "case_id": "D01",
+      "checked_treatment": [],
+      "content_score": null,
+      "criteria": [
+        {
+          "id": "D01.1",
+          "points": null,
+          "rationale": "Not assessable: no canonical final answer. The missing outcome remains in the end-to-end denominator."
+        },
+        {
+          "id": "D01.2",
+          "points": null,
+          "rationale": "Not assessable: no canonical final answer. The missing outcome remains in the end-to-end denominator."
+        },
+        {
+          "id": "D01.3",
+          "points": null,
+          "rationale": "Not assessable: no canonical final answer. The missing outcome remains in the end-to-end denominator."
+        },
+        {
+          "id": "D01.4",
+          "points": null,
+          "rationale": "Not assessable: no canonical final answer. The missing outcome remains in the end-to-end denominator."
+        }
+      ],
+      "critical_errors": [],
+      "executed_capabilities": [
+        "B01",
+        "B02",
+        "D02"
+      ],
+      "failure_codes": [],
+      "maximum": 10,
+      "packet_id": "P04",
+      "provider_calls": 2,
+      "reserved_usd": "0.27630240",
+      "score": 0,
+      "sdk_seconds": 84.40033649600001,
+      "selected_capabilities": [
+        "B01",
+        "B02",
+        "D02"
+      ],
+      "status": "FINAL_SCHEMA_OR_CITATIONS_REJECTED",
+      "traceability_rationale": null,
+      "traceability_score": null,
+      "usage_rated_usd": "0.04542384"
+    },
+    {
+      "acceptable": true,
+      "arm": "Base",
+      "arm_seconds": 20.147407225000023,
+      "canonical_delivery_gate": true,
+      "case_id": "D02",
+      "checked_treatment": [],
+      "content_score": 7,
+      "criteria": [
+        {
+          "id": "D02.1",
+          "points": 2,
+          "rationale": "Preserves the pickup explanation as Jonah's stated reason and contrasts it with an inferred alternative, while allowing both or another reason. The cited original retains the message's temporal priority; the wording does not erase or uniquely certify the pickup reason."
+        },
+        {
+          "id": "D02.2",
+          "points": 1,
+          "rationale": "Correctly says the argument does not establish the decision's cause, but “the account reports ... a coworker's inferred motive” misattributes an avoidance inference to the coworker. The source reports only that the coworker said Jonah had been arguing."
+        },
+        {
+          "id": "D02.3",
+          "points": 2,
+          "rationale": "Treats whether Jonah saw or could use the voucher as missing discriminating evidence and does not assert knowledge, ability, inability, or dishonesty."
+        },
+        {
+          "id": "D02.4",
+          "points": 2,
+          "rationale": "Provides relevant missing evidence about pickup, voucher receipt/usability, argument timing, and Jonah's direct explanation; the uncertainty field preserves simultaneous or additional motives."
+        }
+      ],
+      "critical_errors": [],
+      "executed_capabilities": [],
+      "failure_codes": [],
+      "maximum": 10,
+      "packet_id": "P08",
+      "provider_calls": 1,
+      "reserved_usd": "0.04333032",
+      "score": 8,
+      "sdk_seconds": 20.114074232000007,
+      "selected_capabilities": [],
+      "status": "ANSWER_ACCEPTED",
+      "traceability_rationale": "The citation is exact and covers the underlying events, but it does not support the answer's attribution of an inferred avoidance motive to the coworker. That materially blurs reported fact and inference.",
+      "traceability_score": 1,
+      "usage_rated_usd": "0.00921492"
+    },
+    {
+      "acceptable": true,
+      "arm": "HCL",
+      "arm_seconds": 75.99053636000002,
+      "canonical_delivery_gate": true,
+      "case_id": "D02",
+      "checked_treatment": [],
+      "content_score": 8,
+      "criteria": [
+        {
+          "id": "D02.1",
+          "points": 2,
+          "rationale": "Preserves the prior pickup message as the directly reported reason, explicitly stronger than avoidance, while denying that it proves the unique actual motive."
+        },
+        {
+          "id": "D02.2",
+          "points": 2,
+          "rationale": "Separates the coworker's argument report from the reviewer's avoidance inference; it does not claim the coworker supplied a causal explanation."
+        },
+        {
+          "id": "D02.3",
+          "points": 2,
+          "rationale": "The voucher is only potentially helpful and explicitly contingent on Jonah seeing it; knowledge, usable alternatives, and dishonesty are not asserted."
+        },
+        {
+          "id": "D02.4",
+          "points": 2,
+          "rationale": "Identifies receipt of the voucher, actual pickup, timing of arguments, and contemporaneous evidence connecting avoidance to refusal. The remaining uncertainty preserves possible additional motives."
+        }
+      ],
+      "critical_errors": [],
+      "executed_capabilities": [
+        "C02"
+      ],
+      "failure_codes": [],
+      "maximum": 10,
+      "packet_id": "P01",
+      "provider_calls": 2,
+      "reserved_usd": "0.27638160",
+      "score": 10,
+      "sdk_seconds": 75.92363426900002,
+      "selected_capabilities": [
+        "C02"
+      ],
+      "status": "ANSWER_ACCEPTED",
+      "traceability_rationale": "All material factual premises are covered by exact original citations; stated reason, inference, conditional voucher relevance, and unknown actual motive are separated.",
+      "traceability_score": 2,
+      "usage_rated_usd": "0.03922116"
+    },
+    {
+      "acceptable": true,
+      "arm": "Base",
+      "arm_seconds": 29.378258539,
+      "canonical_delivery_gate": true,
+      "case_id": "D03",
+      "checked_treatment": [],
+      "content_score": 8,
+      "criteria": [
+        {
+          "id": "D03.1",
+          "points": 2,
+          "rationale": "Accurately describes the ambitious comment, cleanup question, laughter/topic change, and later staffing-estimate request; the complete cited sequence is intact."
+        },
+        {
+          "id": "D03.2",
+          "points": 2,
+          "rationale": "Gives a grounded practical-planning/conditional-caution reading, especially supported by the later estimate request, and labels the motive inference as an assumption."
+        },
+        {
+          "id": "D03.3",
+          "points": 2,
+          "rationale": "Explains that refusal or ridicule is not established and retains neutral caution, criticism, and resistance as possible readings given missing tone and context."
+        },
+        {
+          "id": "D03.4",
+          "points": 2,
+          "rationale": "Treats laughter/topic change as ambiguous observations. Saying there was no direct acceptance or rebuttal describes the reported behavior, not proof of agreement, discomfort, dismissal, or another private state."
+        }
+      ],
+      "critical_errors": [],
+      "executed_capabilities": [],
+      "failure_codes": [],
+      "maximum": 10,
+      "packet_id": "P06",
+      "provider_calls": 1,
+      "reserved_usd": "0.04310592",
+      "score": 10,
+      "sdk_seconds": 29.34310786100002,
+      "selected_capabilities": [],
+      "status": "ANSWER_ACCEPTED",
+      "traceability_rationale": "The complete exact citation covers the factual sequence and omissions; the practical-planning reading is identified as an interpretation with an explicit motive assumption.",
+      "traceability_score": 2,
+      "usage_rated_usd": "0.01204368"
+    },
+    {
+      "acceptable": true,
+      "arm": "HCL",
+      "arm_seconds": 104.87415876099999,
+      "canonical_delivery_gate": true,
+      "case_id": "D03",
+      "checked_treatment": [],
+      "content_score": 8,
+      "criteria": [
+        {
+          "id": "D03.1",
+          "points": 2,
+          "rationale": "Accurately preserves all reported actions and the later email; it does not substitute a private attitude for the observable exchange."
+        },
+        {
+          "id": "D03.2",
+          "points": 2,
+          "rationale": "Grounds a conditional feasibility/staffing reading in the cleanup question and before-agreement estimate request, without asserting unconditional approval or categorical rejection."
+        },
+        {
+          "id": "D03.3",
+          "points": 2,
+          "rationale": "Separates an ambiguous demanding-schedule assessment from proven refusal or mockery and explains the relevance of missing tone, relationship history, and private comments."
+        },
+        {
+          "id": "D03.4",
+          "points": 2,
+          "rationale": "Explicitly limits Vera's reaction to laughter and a topic change and leaves her interpretation and emotional response unsettled."
+        }
+      ],
+      "critical_errors": [],
+      "executed_capabilities": [
+        "B01",
+        "B02",
+        "C04"
+      ],
+      "failure_codes": [],
+      "maximum": 10,
+      "packet_id": "P07",
+      "provider_calls": 2,
+      "reserved_usd": "0.27615720",
+      "score": 10,
+      "sdk_seconds": 104.79469470100003,
+      "selected_capabilities": [
+        "B01",
+        "B02",
+        "C04"
+      ],
+      "status": "ANSWER_ACCEPTED",
+      "traceability_rationale": "Exact citations cover the material observations and omissions, while practical concern and possible private attitudes are separated from those observations.",
+      "traceability_score": 2,
+      "usage_rated_usd": "0.05244756"
+    },
+    {
+      "acceptable": true,
+      "arm": "Base",
+      "arm_seconds": 17.373083210000004,
+      "canonical_delivery_gate": true,
+      "case_id": "D04",
+      "checked_treatment": [],
+      "content_score": 8,
+      "criteria": [
+        {
+          "id": "D04.1",
+          "points": 2,
+          "rationale": "Identifies the confirmed slot as logistical support and preserves packed readiness and the before-Friday objective without claiming guaranteed or uniquely optimal delivery."
+        },
+        {
+          "id": "D04.2",
+          "points": 2,
+          "rationale": "Removes the specified Tuesday-slot premise. Read in the whole answer, “cannot be implemented as stated” concerns that reported logistical plan: the uncertainty field explicitly leaves alternative-courier or slot feasibility neither supported nor ruled out, so it does not establish universal Tuesday impossibility."
+        },
+        {
+          "id": "D04.3",
+          "points": 2,
+          "rationale": "Keeps packed crates and the Friday requirement fixed and explicitly treats slot loss as the counterfactual, not an actual cancellation or source correction."
+        },
+        {
+          "id": "D04.4",
+          "points": 2,
+          "rationale": "Explains that absent transit time and alternative logistics prevent either a success or impossibility conclusion about Friday."
+        }
+      ],
+      "critical_errors": [],
+      "executed_capabilities": [],
+      "failure_codes": [],
+      "maximum": 10,
+      "packet_id": "P02",
+      "provider_calls": 1,
+      "reserved_usd": "0.04316928",
+      "score": 10,
+      "sdk_seconds": 17.33793682099997,
+      "selected_capabilities": [],
+      "status": "ANSWER_ACCEPTED",
+      "traceability_rationale": "The complete exact source citation covers all factual premises; the single-change hypothetical and unestablished alternatives are explicitly separated.",
+      "traceability_score": 2,
+      "usage_rated_usd": "0.00725868"
+    },
+    {
+      "acceptable": true,
+      "arm": "HCL",
+      "arm_seconds": 102.39773974100001,
+      "canonical_delivery_gate": true,
+      "case_id": "D04",
+      "checked_treatment": [],
+      "content_score": 8,
+      "criteria": [
+        {
+          "id": "D04.1",
+          "points": 2,
+          "rationale": "Gives the stated confirmed-slot basis for Tuesday dispatch alongside packed crates and the before-Friday requirement, without guaranteeing delivery or claiming unique optimality."
+        },
+        {
+          "id": "D04.2",
+          "points": 2,
+          "rationale": "Replaces only availability of the reported slot and carefully says there is no reported usable Tuesday slot, not that every possible Tuesday shipment is impossible."
+        },
+        {
+          "id": "D04.3",
+          "points": 2,
+          "rationale": "Preserves packed status and deadline and distinguishes the stipulated hypothetical from the unchanged original report."
+        },
+        {
+          "id": "D04.4",
+          "points": 2,
+          "rationale": "Explicitly states that the source supports neither meeting nor missing the deadline because transit time, alternative couriers, and later slots are unspecified."
+        }
+      ],
+      "critical_errors": [],
+      "executed_capabilities": [
+        "G04",
+        "C03"
+      ],
+      "failure_codes": [],
+      "maximum": 10,
+      "packet_id": "P05",
+      "provider_calls": 2,
+      "reserved_usd": "0.27622056",
+      "score": 10,
+      "sdk_seconds": 102.326046711,
+      "selected_capabilities": [
+        "G04",
+        "C03"
+      ],
+      "status": "ANSWER_ACCEPTED",
+      "traceability_rationale": "Exact citations cover all logistical premises and source omissions; counterfactual replacement and unverified feasibility are explicit.",
+      "traceability_score": 2,
+      "usage_rated_usd": "0.05293728"
+    }
+  ],
+  "review_type": "INDEPENDENT_SOURCE_FIRST_BLIND_REVIEW_LOCKED_BEFORE_UNMASKING",
+  "run_id": "37202844362",
+  "schema": "hcl-four-comparison-locked-source-first-results-v1",
+  "scores_changed_after_unmasking": false,
+  "summary": {
+    "Base": {
+      "acceptable_cases": 4,
+      "arm_seconds_available_mean": 25.843000258500005,
+      "arm_seconds_mean_including_failure": 25.843000258500005,
+      "arm_seconds_total": 103.37200103400002,
+      "available_final_outputs": 4,
+      "maximum": 40,
+      "planned_cases": 4,
+      "provider_calls": 4,
+      "score": 38,
+      "usage_rated_usd": "0.04632540"
+    },
+    "HCL": {
+      "acceptable_cases": 3,
+      "arm_seconds_available_mean": 94.42081162066667,
+      "arm_seconds_mean_including_failure": 91.9354709235,
+      "arm_seconds_total": 367.741883694,
+      "available_final_outputs": 3,
+      "maximum": 40,
+      "planned_cases": 4,
+      "provider_calls": 8,
+      "score": 30,
+      "usage_rated_usd": "0.19002984"
+    }
+  }
+}

@@ -1,0 +1,839 @@
+{
+  "answer_tokens": 8192,
+  "arms": [
+    {
+      "arm": "Base",
+      "arm_seconds": 36.47325205999999,
+      "case_id": "D01",
+      "checked_treatment": [],
+      "checked_treatment_count": 0,
+      "citations_accepted": true,
+      "executed_capabilities": [],
+      "executed_capabilities_count": 0,
+      "final_answer_sha256": "fe5b92f32cbc1bf67b4a7ecfc94c8081c79e57cc28cc85df2dd1e912469e7e5d",
+      "final_fields": {
+        "answer": "At 09:12, the account supports that Inez viewed the meeting place as Room Cedar: she had read a printed notice at 09:00 saying the meeting would be in Cedar, and at 09:10 she told Bo she was going to Cedar; since Ravi's message was still undelivered at 09:12, there is no reported basis for her to have learned of the change. The account supports that Ravi viewed the meeting place as Room Elm, because he moved it there at 09:05. The account leaves open whether Inez knew Ravi had moved the meeting and whether she believed Ravi knew the original Cedar location. It also leaves open whether Ravi believed Inez knew of the new Elm location; he saw no reply, but the account does not say he knew the message was undelivered or that he learned what Inez told Bo.",
+        "assumptions": "Assuming the printed notice and Ravi's move are the only updates about the meeting place, and that an undelivered message means Inez had not received Ravi's change at 09:12. No other communication or awareness is assumed.",
+        "source_citations": [
+          {
+            "quote": "At 09:00, Inez read a printed notice saying the repair meeting would be in Room Cedar.",
+            "source_id": "meeting_notice",
+            "version": 1
+          },
+          {
+            "quote": "At 09:05, Ravi moved it to Room Elm and sent Inez a message.",
+            "source_id": "meeting_notice",
+            "version": 1
+          },
+          {
+            "quote": "A delivery log shows that the message was still undelivered at 09:12.",
+            "source_id": "meeting_notice",
+            "version": 1
+          },
+          {
+            "quote": "At 09:10, Inez told Bo, \"I'm going to Cedar for the repair meeting.\" Ravi saw no reply from Inez. Nothing in the account says that Bo saw the revised notice or that Ravi learned what Inez told Bo.",
+            "source_id": "meeting_notice",
+            "version": 1
+          }
+        ],
+        "uncertainty": "The account directly reports the events up to 09:12. The interpretation that each person holds those beliefs at 09:12 is based on the reported lack of message delivery and the absence of any statement that they received other information. The source explicitly leaves open some knowledge attributions, so those are not inferred."
+      },
+      "non_sdk_seconds": 0.03617848599999718,
+      "sdk_seconds": 36.437073573999996,
+      "selected_capabilities": [],
+      "selected_capabilities_count": 0,
+      "status": "ANSWER_ACCEPTED"
+    },
+    {
+      "arm": "HCL",
+      "arm_seconds": 84.47944883199999,
+      "case_id": "D01",
+      "checked_treatment": [],
+      "checked_treatment_count": 0,
+      "citations_accepted": false,
+      "executed_capabilities": [
+        "B01",
+        "B02",
+        "D02"
+      ],
+      "executed_capabilities_count": 3,
+      "final_answer_sha256": "632e04e6c853e398cb1ae4ce023a592785c78d2317307191a43969e1fbd95641",
+      "final_fields": null,
+      "non_sdk_seconds": 0.07911233599998013,
+      "sdk_seconds": 84.40033649600001,
+      "selected_capabilities": [
+        "B01",
+        "B02",
+        "D02"
+      ],
+      "selected_capabilities_count": 3,
+      "status": "FINAL_SCHEMA_OR_CITATIONS_REJECTED"
+    },
+    {
+      "arm": "HCL",
+      "arm_seconds": 75.99053636000002,
+      "case_id": "D02",
+      "checked_treatment": [],
+      "checked_treatment_count": 0,
+      "citations_accepted": true,
+      "executed_capabilities": [
+        "C02"
+      ],
+      "executed_capabilities_count": 1,
+      "final_answer_sha256": "846cc63c4876224108a60fe0f6019498a34544319ab3ddc715ffe0ff699cef82",
+      "final_fields": {
+        "answer": "The account offers direct support for the pickup explanation as Jonah's stated reason: before turning down the shift, he wrote that he needed that evening to collect his aunt and did not want to leave her waiting. This is a source-reported justification, though the account does not independently verify that he collected her or that no other motive existed. The avoidance explanation is less directly supported: a coworker later said Jonah had been arguing with the manager, but the source does not quote the coworker saying that the argument was why Jonah declined. Treating the decline as avoidance therefore requires an inference. The manager had offered a taxi voucher for the aunt, which could have addressed the pickup inconvenience if Jonah saw it, but the record explicitly does not say whether Jonah saw that offer. There is also no account of what Jonah did that evening, so behavior cannot confirm either explanation. Distinguishing evidence would include whether Jonah received or saw the voucher offer, whether the aunt actually needed and was collected, whether the reported arguments were connected to the shift timing, and any contemporaneous statement or action indicating he was avoiding the manager.",
+        "assumptions": "I treat the message as evidence of Jonah's stated reason at the time, not proof of his true motive. I also assume the coworker's report of arguing concerns a real argument, but not that it caused the decline. The relevance of the taxi voucher assumes the aunt needed transportation that evening; this is implied by Jonah's message but not independently confirmed.",
+        "source_citations": [
+          {
+            "quote": "Jonah turned down the extra workshop shift. In a message written before turning it down, he said, \"I need that evening to collect my aunt from the station, and I don't want to leave her waiting.\"",
+            "source_id": "extra_shift",
+            "start": 0,
+            "version": 1
+          },
+          {
+            "quote": "The manager had offered a taxi voucher for the aunt, but the record does not say whether Jonah saw that offer.",
+            "source_id": "extra_shift",
+            "version": 1
+          },
+          {
+            "quote": "A coworker later said Jonah had been arguing with the manager. There is no account of what Jonah did that evening.",
+            "source_id": "extra_shift",
+            "version": 1
+          }
+        ],
+        "uncertainty": "The source cannot establish Jonah's actual motive. The pickup explanation is his self-reported reason, not verified fact. The avoidance explanation is only inferential from a coworker's later report of arguing. It is unknown whether Jonah saw the taxi voucher or what he did that evening, so the account cannot confirm or rule out either explanation."
+      },
+      "non_sdk_seconds": 0.06690209100000288,
+      "sdk_seconds": 75.92363426900002,
+      "selected_capabilities": [
+        "C02"
+      ],
+      "selected_capabilities_count": 1,
+      "status": "ANSWER_ACCEPTED"
+    },
+    {
+      "arm": "Base",
+      "arm_seconds": 20.147407225000023,
+      "case_id": "D02",
+      "checked_treatment": [],
+      "checked_treatment_count": 0,
+      "citations_accepted": true,
+      "executed_capabilities": [],
+      "executed_capabilities_count": 0,
+      "final_answer_sha256": "90770a17069af66533d993b7a270371c1304351284141105b435967a35ad6dc4",
+      "final_fields": {
+        "answer": "The account offers a plausible stated reason—Jonah needed to collect his aunt and not leave her waiting—but it is not a full explanation because it leaves key facts unverified. The coworker's later report that Jonah had been arguing with the manager introduces an alternative motive (avoiding the manager), but the source does not say whether the coworker is reliable or whether the argument influenced the decision. The pickup explanation and the avoidance suggestion would be distinguished by evidence such as whether Jonah actually collected his aunt that evening, whether he saw or could have used the taxi voucher, the timing and seriousness of the argument, and any direct statement from Jonah about why he declined. As it stands, the account reports Jonah's stated reason and a coworker's inferred motive, but it does not establish which is true.",
+        "assumptions": "I assume the quoted message reflects Jonah's actual stated reason and that the coworker's report is relevant to the shift; I do not assume the coworker's statement is accurate or that the message was sincere. I also assume the question asks for an assessment of the source's explanatory power rather than a definitive motive.",
+        "source_citations": [
+          {
+            "quote": "Jonah turned down the extra workshop shift. In a message written before turning it down, he said, \"I need that evening to collect my aunt from the station, and I don't want to leave her waiting.\" The manager had offered a taxi voucher for the aunt, but the record does not say whether Jonah saw that offer. A coworker later said Jonah had been arguing with the manager. There is no account of what Jonah did that evening.",
+            "source_id": "extra_shift",
+            "start": 0,
+            "version": 1
+          }
+        ],
+        "uncertainty": "The causal explanation is unresolved: the source supplies Jonah's self-reported reason but no independent verification, and the coworker's statement is hearsay with no supporting details. It cannot be determined whether the pickup need, manager avoidance, both, or another reason explains the decline."
+      },
+      "non_sdk_seconds": 0.03333299300001613,
+      "sdk_seconds": 20.114074232000007,
+      "selected_capabilities": [],
+      "selected_capabilities_count": 0,
+      "status": "ANSWER_ACCEPTED"
+    },
+    {
+      "arm": "Base",
+      "arm_seconds": 29.378258539,
+      "case_id": "D03",
+      "checked_treatment": [],
+      "checked_treatment_count": 0,
+      "citations_accepted": true,
+      "executed_capabilities": [],
+      "executed_capabilities_count": 0,
+      "final_answer_sha256": "01eff91d7b24fc690d208a6fc938f9a352b2f1c6f0ff8226c8c22d2925316ac6",
+      "final_fields": {
+        "answer": "The most defensible reading is that Chen treated Vera's proposal as requiring more logistical planning, not that he rejected or ridiculed it. The source reports only that he called the schedule \"ambitious,\" asked about final-day cleanup, and later requested a staffing estimate before agreeing. Those moves are best read as cautious due diligence; they do not state refusal or mockery. Vera's laugh and subject change do not settle the meaning of Chen's response; they show she did not directly accept or rebut it in that moment, but the source provides no tone, relationship history, or private comments to confirm whether her laugh signified dismissal, discomfort, or something unrelated.",
+        "assumptions": "Interpreting Chen's questions and later email as concern about feasibility assumes that those actions are motivated by practical planning rather than some unstated objection, but the source does not explicitly state his motive.",
+        "source_citations": [
+          {
+            "quote": "After Vera proposed a three-day exhibition, Chen replied, \"That is an ambitious schedule.\" Chen then asked who would handle the final day's cleanup. Vera laughed and changed the subject. In a later email to the group, Chen wrote, \"Before we agree, I'd like a staffing estimate.\" The account gives no tone of voice, prior relationship, or private comments.",
+            "source_id": "exhibition_meeting",
+            "version": 1
+          }
+        ],
+        "uncertainty": "The key uncertainty is whether \"ambitious\" was meant as neutral caution, criticism, or resistance, and whether Vera's laugh was nervous, dismissive, or unrelated. Without tone or additional context, a conclusion that Chen rejected or ridiculed the proposal would go beyond the source."
+      },
+      "non_sdk_seconds": 0.03515067799997951,
+      "sdk_seconds": 29.34310786100002,
+      "selected_capabilities": [],
+      "selected_capabilities_count": 0,
+      "status": "ANSWER_ACCEPTED"
+    },
+    {
+      "arm": "HCL",
+      "arm_seconds": 104.87415876099999,
+      "case_id": "D03",
+      "checked_treatment": [],
+      "checked_treatment_count": 0,
+      "citations_accepted": true,
+      "executed_capabilities": [
+        "B01",
+        "B02",
+        "C04"
+      ],
+      "executed_capabilities_count": 3,
+      "final_answer_sha256": "da51a02b77915530402c716dfdefdf2aa6f03e8f63021e1b6a1c86374fa220d9",
+      "final_fields": {
+        "answer": "The most defensible reading is that Chen characterizes the three-day schedule as demanding and withholds immediate agreement while raising practical conditions, rather than clearly rejecting or ridiculing Vera. His reported words — \"That is an ambitious schedule\" — are an assessment of the schedule’s difficulty, not an unambiguous refusal or mockery. His follow-up question about cleanup and later email, \"Before we agree, I'd like a staffing estimate,\" further support a conditional/feasibility reading. The exchange does not establish rejection or ridicule because the source reports only the words and explicitly gives no tone of voice, prior relationship, or private comments. Vera’s reported reaction settles only that she laughed and changed the subject; it does not settle whether she interpreted Chen as rejecting or ridiculing her.",
+        "assumptions": "I assume the quoted words are accurately reported and interpret them literally; I do not infer private mental states from observed laughter or subject change, and source order is not treated as verified causal chronology.",
+        "source_citations": [
+          {
+            "quote": "Chen replied, \"That is an ambitious schedule.\"",
+            "source_id": "exhibition_meeting",
+            "version": 1
+          },
+          {
+            "quote": "Chen then asked who would handle the final day's cleanup.",
+            "source_id": "exhibition_meeting",
+            "version": 1
+          },
+          {
+            "quote": "Vera laughed and changed the subject.",
+            "source_id": "exhibition_meeting",
+            "version": 1
+          },
+          {
+            "quote": "In a later email to the group, Chen wrote, \"Before we agree, I'd like a staffing estimate.\"",
+            "source_id": "exhibition_meeting",
+            "version": 1
+          },
+          {
+            "quote": "The account gives no tone of voice, prior relationship, or private comments.",
+            "source_id": "exhibition_meeting",
+            "version": 1
+          }
+        ],
+        "uncertainty": "Because tone, prior relationship, and private comments are absent, the literal wording is not enough to prove rejection or ridicule. \"Ambitious\" may convey a demanding schedule, but it could also be read as polite skepticism; the source does not settle Chen's private attitude or Vera's interpretation. Vera's laughter and subject change are ambiguous and do not establish her emotional response."
+      },
+      "non_sdk_seconds": 0.07946405999996387,
+      "sdk_seconds": 104.79469470100003,
+      "selected_capabilities": [
+        "B01",
+        "B02",
+        "C04"
+      ],
+      "selected_capabilities_count": 3,
+      "status": "ANSWER_ACCEPTED"
+    },
+    {
+      "arm": "HCL",
+      "arm_seconds": 102.39773974100001,
+      "case_id": "D04",
+      "checked_treatment": [],
+      "checked_treatment_count": 0,
+      "citations_accepted": true,
+      "executed_capabilities": [
+        "G04",
+        "C03"
+      ],
+      "executed_capabilities_count": 2,
+      "final_answer_sha256": "6fd18a47fc5fa558253be203c7430b3b9086748e1485da1378c3c38a03d8e871",
+      "final_fields": {
+        "answer": "Under the counterfactual, the source-based support for Selma's recommendation to dispatch Tuesday weakens. Her note's stated basis was that the courier had confirmed a Tuesday slot, and if that slot is unavailable the plan no longer has a reported usable courier slot for Tuesday. The source can still say the crates were already packed and that the crates needed to arrive before the Friday opening. But the account gives no transit time, no information about another courier, and no later slot, so it cannot support a conclusion that the Friday deadline would still be met or that it would be missed. Meeting the Friday deadline is therefore unresolved from the source.",
+        "assumptions": "I treat the counterfactual as replacing the availability of the courier's Tuesday slot while keeping the other source statements unchanged. I do not assume a transit time, a later courier slot, an alternative courier, or that the crates could still arrive by Friday. I also treat the source's reports as reports, not verified facts.",
+        "source_citations": [
+          {
+            "quote": "Selma recommended dispatching the museum crates on Tuesday.",
+            "source_id": "museum_dispatch",
+            "version": 1
+          },
+          {
+            "quote": "Her note said the courier had confirmed a Tuesday slot and the crates needed to arrive before the Friday opening.",
+            "source_id": "museum_dispatch",
+            "version": 1
+          },
+          {
+            "quote": "The warehouse checklist said all crates were already packed.",
+            "source_id": "museum_dispatch",
+            "version": 1
+          },
+          {
+            "quote": "The account gives no transit time, no information about another courier, and no later slot.",
+            "source_id": "museum_dispatch",
+            "version": 1
+          }
+        ],
+        "uncertainty": "The source reports statements rather than establishing verified world truth or feasibility. Because no transit time, alternative courier, or later slot is given, and the counterfactual removes the only reported courier slot, the Friday-deadline outcome is indeterminate. If the counterfactual were read as adding 'unavailable' while also retaining the note's confirmed Tuesday slot, it would conflict; I interpret it as the Tuesday slot no longer being usable."
+      },
+      "non_sdk_seconds": 0.07169303000000582,
+      "sdk_seconds": 102.326046711,
+      "selected_capabilities": [
+        "G04",
+        "C03"
+      ],
+      "selected_capabilities_count": 2,
+      "status": "ANSWER_ACCEPTED"
+    },
+    {
+      "arm": "Base",
+      "arm_seconds": 17.373083210000004,
+      "case_id": "D04",
+      "checked_treatment": [],
+      "checked_treatment_count": 0,
+      "citations_accepted": true,
+      "executed_capabilities": [],
+      "executed_capabilities_count": 0,
+      "final_answer_sha256": "dad983fdbbed066499161ed8ecd34df82e683466574fc59fa765c60523c89c17",
+      "final_fields": {
+        "answer": "If the courier's Tuesday slot is unavailable while the other reported facts remain the same, the reported logistical basis for Selma's Tuesday recommendation is removed: the source says Selma recommended Tuesday dispatch and that her note said the courier had confirmed a Tuesday slot. With that slot gone, the recommendation cannot be implemented as stated, so its support weakens or collapses as to the Tuesday timing. The remaining reported facts—the crates are already packed and they needed to arrive before the Friday opening—still show readiness and the Friday arrival requirement. However, the source gives no transit time, no information about another courier, and no later slot, so those facts do not establish that the Friday deadline can still be met. At most, one could say the crates are packed and the Friday arrival requirement remains, but any later-slot or alternative-courier feasibility is an unsupported assumption.",
+        "assumptions": "The counterfactual removes only the reported Tuesday courier slot and leaves all other reported facts unchanged. The inference that support for Selma's recommendation weakens rests on treating the confirmed Tuesday slot as a reported basis for her Tuesday dispatch recommendation; no alternative logistics are assumed.",
+        "source_citations": [
+          {
+            "quote": "Selma recommended dispatching the museum crates on Tuesday. Her note said the courier had confirmed a Tuesday slot and the crates needed to arrive before the Friday opening. The warehouse checklist said all crates were already packed. The account gives no transit time, no information about another courier, and no later slot.",
+            "source_id": "museum_dispatch",
+            "start": 0,
+            "version": 1
+          }
+        ],
+        "uncertainty": "The source does not report transit time, alternative couriers, or later slots, so the effect on the Friday deadline is indeterminate. The counterfactual removes only the Tuesday slot; whether the deadline remains meetable through another slot or courier is neither supported nor ruled out by the supplied source."
+      },
+      "non_sdk_seconds": 0.035146389000033196,
+      "sdk_seconds": 17.33793682099997,
+      "selected_capabilities": [],
+      "selected_capabilities_count": 0,
+      "status": "ANSWER_ACCEPTED"
+    }
+  ],
+  "authorization_ref": "OWNER_APPROVED_FOUR_COMPARISON_PUBLIC_SYNTHETIC_20261004_121358",
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RETRY",
+  "calls": [
+    {
+      "arm": "Base",
+      "call_id": "D01:Base:answer",
+      "case_id": "D01",
+      "exact_request_reservation_usd": "0.04325112",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 3023,
+      "request_sha256": "5028d7f601b272a4d6a962fb8f32ff5c848fa16194c4bd77204bf9b280b73479",
+      "reserved_usd": "0.04325112",
+      "sdk_seconds": 36.437073573999996,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 4268,
+        "prompt_tokens": 687
+      },
+      "usage_rated_usd": "0.01780812"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "D01:HCL:planning",
+      "case_id": "D01",
+      "exact_request_reservation_usd": "0.145992",
+      "invocation_status": "RETURNED",
+      "phase": "planning",
+      "provider_call": true,
+      "request_bytes": 29652,
+      "request_sha256": "c7a0de3f416f7e804df0de8bdc0e53d903105102e162f0078279507b3fca666a",
+      "reserved_usd": "0.145992",
+      "sdk_seconds": 48.145674395,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 4556,
+        "prompt_tokens": 6584
+      },
+      "usage_rated_usd": "0.02673264"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "D01:HCL:answer",
+      "case_id": "D01",
+      "exact_request_reservation_usd": "0.0709896",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 13530,
+      "request_sha256": "f8aef806336be02eda9512cb287c136c8548600d3486d033f7264819fcb0b98a",
+      "reserved_usd": "0.13031040",
+      "sdk_seconds": 36.25466210100001,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 3580,
+        "prompt_tokens": 3420
+      },
+      "usage_rated_usd": "0.0186912"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "D02:HCL:planning",
+      "case_id": "D02",
+      "exact_request_reservation_usd": "0.1460712",
+      "invocation_status": "RETURNED",
+      "phase": "planning",
+      "provider_call": true,
+      "request_bytes": 29682,
+      "request_sha256": "6919dc8b2b23f07a8e5bafe358a78060e52619a5f4cb8dff17d3a0f92bf00f06",
+      "reserved_usd": "0.1460712",
+      "sdk_seconds": 45.81665153099999,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 4285,
+        "prompt_tokens": 6554
+      },
+      "usage_rated_usd": "0.02561988"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "D02:HCL:answer",
+      "case_id": "D02",
+      "exact_request_reservation_usd": "0.05028144",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 5686,
+      "request_sha256": "e9d2c202dab0fe56bc5973a7062b693ed736e6bac68359d6cd32a9cd3afc0538",
+      "reserved_usd": "0.13031040",
+      "sdk_seconds": 30.106982738000028,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 3023,
+        "prompt_tokens": 1235
+      },
+      "usage_rated_usd": "0.01360128"
+    },
+    {
+      "arm": "Base",
+      "call_id": "D02:Base:answer",
+      "case_id": "D02",
+      "exact_request_reservation_usd": "0.04333032",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 3053,
+      "request_sha256": "45506f4b02f4e9223de2cfb5636e3f2d6b73b7c9b1703ae08168ef0e2620f81c",
+      "reserved_usd": "0.04333032",
+      "sdk_seconds": 20.114074232000007,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 2108,
+        "prompt_tokens": 657
+      },
+      "usage_rated_usd": "0.00921492"
+    },
+    {
+      "arm": "Base",
+      "call_id": "D03:Base:answer",
+      "case_id": "D03",
+      "exact_request_reservation_usd": "0.04310592",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 2968,
+      "request_sha256": "07533889815749ec0e2be6aeafe2c26d4eea45376b212be87bb7e3db7eaa3762",
+      "reserved_usd": "0.04310592",
+      "sdk_seconds": 29.34310786100002,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 2827,
+        "prompt_tokens": 643
+      },
+      "usage_rated_usd": "0.01204368"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "D03:HCL:planning",
+      "case_id": "D03",
+      "exact_request_reservation_usd": "0.1458468",
+      "invocation_status": "RETURNED",
+      "phase": "planning",
+      "provider_call": true,
+      "request_bytes": 29597,
+      "request_sha256": "d0bc0d204095aa781b599467469d59370921be920166eb62f931e635ae5673a9",
+      "reserved_usd": "0.1458468",
+      "sdk_seconds": 77.90425778000002,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 7029,
+        "prompt_tokens": 6540
+      },
+      "usage_rated_usd": "0.03646764"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "D03:HCL:answer",
+      "case_id": "D03",
+      "exact_request_reservation_usd": "0.0794508",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 16735,
+      "request_sha256": "133c9cef7141033b06992378bf510f0546ba04effb13f6ee69b04ba3b17a5023",
+      "reserved_usd": "0.13031040",
+      "sdk_seconds": 26.890436921000003,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 2623,
+        "prompt_tokens": 4237
+      },
+      "usage_rated_usd": "0.01597992"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "D04:HCL:planning",
+      "case_id": "D04",
+      "exact_request_reservation_usd": "0.14591016",
+      "invocation_status": "RETURNED",
+      "phase": "planning",
+      "provider_call": true,
+      "request_bytes": 29621,
+      "request_sha256": "98bef91cc0eaff82daceec7ec761eed02db75fb96230e2438484447ef669c7e1",
+      "reserved_usd": "0.14591016",
+      "sdk_seconds": 65.173953015,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 6477,
+        "prompt_tokens": 6536
+      },
+      "usage_rated_usd": "0.03427644"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "D04:HCL:answer",
+      "case_id": "D04",
+      "exact_request_reservation_usd": "0.06307488",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 10532,
+      "request_sha256": "190cb83a0309120e9061cce48b367fc5dbb145638529f15856d84f4e66d98b4b",
+      "reserved_usd": "0.13031040",
+      "sdk_seconds": 37.15209369600001,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 3880,
+        "prompt_tokens": 2497
+      },
+      "usage_rated_usd": "0.01866084"
+    },
+    {
+      "arm": "Base",
+      "call_id": "D04:Base:answer",
+      "case_id": "D04",
+      "exact_request_reservation_usd": "0.04316928",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 2992,
+      "request_sha256": "52a9a2becb35dc693d160e481cbdb2733340f60ad734070868280ff92d99dce6",
+      "reserved_usd": "0.04316928",
+      "sdk_seconds": 17.33793682099997,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 1620,
+        "prompt_tokens": 639
+      },
+      "usage_rated_usd": "0.00725868"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "D01",
+      "question": "At 09:12, what does the account support about Inez's and Ravi's views of the meeting place, and what does it leave open about their views of each other's knowledge?",
+      "question_sha256": "5e566a2f2b6a2736ef4621f326cd8a1f797b109f61438ac7897021eeef65b5b8",
+      "source_record_sha256": "4ac2e570d0c3ca90866c4dcd54b7a0051beed7eba00fdc9242535eb90197c64b",
+      "source_text_sha256": "e9f23ea6181e400c091c100c3b809ef3c2db67efa230018b0a254a6d0fa5f74d",
+      "sources": [
+        {
+          "record_time_basis": "ACTUAL_INGESTION_NOT_EVENT_TIME",
+          "recorded_at": "2026-10-04T12:10:04.485219+00:00",
+          "source_id": "meeting_notice",
+          "text": "At 09:00, Inez read a printed notice saying the repair meeting would be in Room Cedar. At 09:05, Ravi moved it to Room Elm and sent Inez a message. A delivery log shows that the message was still undelivered at 09:12. At 09:10, Inez told Bo, \"I'm going to Cedar for the repair meeting.\" Ravi saw no reply from Inez. Nothing in the account says that Bo saw the revised notice or that Ravi learned what Inez told Bo.",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "case_id": "D02",
+      "question": "How well does the account explain why Jonah declined the shift? Compare the pickup explanation with the suggestion that he was avoiding the manager, and identify what would distinguish them.",
+      "question_sha256": "b353ce61bfb8294df30a16890de6e97caed790a9552968518857d29874d8e84a",
+      "source_record_sha256": "cf0b048021c63ec1adfbfafda624cc64368776867a75ea0badfc28175385ed1e",
+      "source_text_sha256": "16c0b96a65d763b4ebeaff4808a0ee7c56357766deb445a1487c0173cea45d72",
+      "sources": [
+        {
+          "record_time_basis": "ACTUAL_INGESTION_NOT_EVENT_TIME",
+          "recorded_at": "2026-10-04T12:10:04.485284+00:00",
+          "source_id": "extra_shift",
+          "text": "Jonah turned down the extra workshop shift. In a message written before turning it down, he said, \"I need that evening to collect my aunt from the station, and I don't want to leave her waiting.\" The manager had offered a taxi voucher for the aunt, but the record does not say whether Jonah saw that offer. A coworker later said Jonah had been arguing with the manager. There is no account of what Jonah did that evening.",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "case_id": "D03",
+      "question": "What is the most defensible reading of Chen's response? Does the exchange establish rejection or ridicule, and what, if anything, does Vera's reaction settle?",
+      "question_sha256": "0225cda202608348b5e3a3894b30122f2bdecf0793ea89f65c4da3858b1ef861",
+      "source_record_sha256": "c71953e0859e1af1fe59396ee2ab95c12e0d5abd0f72415211da686ff3f1e7bd",
+      "source_text_sha256": "db5df12fb3feee4ccdf0d330c880905d01ddb7a1c468e2db19afa0c2e2842972",
+      "sources": [
+        {
+          "record_time_basis": "ACTUAL_INGESTION_NOT_EVENT_TIME",
+          "recorded_at": "2026-10-04T12:10:04.485334+00:00",
+          "source_id": "exhibition_meeting",
+          "text": "After Vera proposed a three-day exhibition, Chen replied, \"That is an ambitious schedule.\" Chen then asked who would handle the final day's cleanup. Vera laughed and changed the subject. In a later email to the group, Chen wrote, \"Before we agree, I'd like a staffing estimate.\" The account gives no tone of voice, prior relationship, or private comments.",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "case_id": "D04",
+      "question": "Suppose the courier's Tuesday slot were unavailable while every other reported fact stayed the same. How would that change the support for Selma's recommendation, and what could still be said about meeting the Friday deadline?",
+      "question_sha256": "2315b81e00213abb7cf302449d139712ada4fde993305b73c0a79f07578988ca",
+      "source_record_sha256": "b2bfc6307fe5ee65c294683f0585c0a99e6bcaf9a84f38906d747b457e3d8036",
+      "source_text_sha256": "a858f83ca4aa76ea5ed4c4aa2434d481378d6fc86f212d7d00e30ae676f619b3",
+      "sources": [
+        {
+          "record_time_basis": "ACTUAL_INGESTION_NOT_EVENT_TIME",
+          "recorded_at": "2026-10-04T12:10:04.485375+00:00",
+          "source_id": "museum_dispatch",
+          "text": "Selma recommended dispatching the museum crates on Tuesday. Her note said the courier had confirmed a Tuesday slot and the crates needed to arrive before the Friday opening. The warehouse checklist said all crates were already packed. The account gives no transit time, no information about another courier, and no later slot.",
+          "version": 1
+        }
+      ]
+    }
+  ],
+  "cost_basis": "USAGE_RATED_PEAK_NOT_INVOICE_FULL_RESERVATION_RETAINED",
+  "efficacy_verified": false,
+  "elapsed_seconds": 471.12416652499996,
+  "existing_provider_secret": "PRESENT",
+  "frozen_files_sha256": {
+    "README.md": "335b9f1d5285ab1e50324d5454481df80acc2dfdcfb8b1840bc7964e7a05b9cc",
+    "inputs.json": "9f8a1a87c1d3e9d8ac96991920871192d3e1c5adab7ee51dfd3cdc90e503d942",
+    "proposal.json": "612231909be22435224293525d8fdb8b2160b081618f1f0fd6f2974a25ee1079",
+    "rubric.json": "4ec8e11ce3af7603aabcf744e64014145a36ddb760eb9840f9fb4cd82bf91629"
+  },
+  "head_sha": "e9467de0a018e7e454092220d999712fb975236c",
+  "i02_certified": false,
+  "invoice_cost_usd": null,
+  "limitations": "FOUR_ASSISTANT_AUTHORED_DEVELOPMENT_ITEMS_NO_GENERALIZATION_EXTRA_HCL_COMPUTE_IMPERFECT_BLINDING",
+  "model": "deepseek-v4-pro",
+  "package_sha256": "290e5c572d1d4e4b11ab1317469d08259b7d4da8e1314fea306c92b873ed058a",
+  "planning_tokens": 16384,
+  "production_planning_tokens": 4096,
+  "provider_calls": 12,
+  "public_output_scope": "FOUR_EXACT_SYNTHETIC_CASES_EIGHT_UNCHANGED_FINAL_OUTPUTS_SAME_HCL_REPOSITORY",
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_usd": "0",
+  "representative_accuracy": false,
+  "reserved_usd": "1.27791840",
+  "rubric": {
+    "cases": {
+      "D01": {
+        "criteria": [
+          {
+            "anchors": [
+              "At 09:05, Ravi moved it to Room Elm",
+              "At 09:10, Inez told Bo"
+            ],
+            "id": "D01.1",
+            "requirement": "Distinguish the reported actual move to Elm from Inez's last expressed intention to attend at Cedar. Treat a continuing Cedar view at 09:12 as supported but defeasible, not a proven current private state."
+          },
+          {
+            "anchors": [
+              "the message was still undelivered at 09:12"
+            ],
+            "id": "D01.2",
+            "requirement": "State that the supplied log reports non-delivery by 09:12. Sending alone does not establish Inez received, understood, or accepted the update. Do not turn this into proof that no other information channel existed."
+          },
+          {
+            "anchors": [
+              "Ravi moved it to Room Elm"
+            ],
+            "id": "D01.3",
+            "requirement": "Ravi's moving the meeting supports the ordinary inference that he regards Elm as its location. Separate that inference from a direct belief report or certified private knowledge."
+          },
+          {
+            "anchors": [
+              "Ravi saw no reply from Inez",
+              "or that Ravi learned what Inez told Bo"
+            ],
+            "id": "D01.4",
+            "requirement": "Neither Ravi's knowledge of Inez's ignorance nor Inez's view of Ravi's knowledge is established. Reader access to the delivery log is not shown to be Ravi's access. No reply and Bo's presence do not create common knowledge."
+          }
+        ],
+        "critical_errors": [
+          "Says Inez learned of or accepted Elm because Ravi sent the message.",
+          "Claims Ravi knows Inez is unaware merely from the reader-visible log or lack of reply.",
+          "Claims their knowledge is mutual/common knowledge, or that the source proves all possible other information paths absent."
+        ],
+        "domain": "belief and perspective",
+        "useful_limit": "An answer can give a likely current view while explicitly retaining uncertainty; total refusal to infer anything loses the supported-content points."
+      },
+      "D02": {
+        "criteria": [
+          {
+            "anchors": [
+              "In a message written before turning it down",
+              "I need that evening to collect my aunt from the station"
+            ],
+            "id": "D02.1",
+            "requirement": "Preserve Jonah's prior statement about collecting his aunt and not leaving her waiting as the directly reported explanation, with stronger explicit support than the avoidance suggestion. A report of a reason is not proof of the unique actual motive."
+          },
+          {
+            "anchors": [
+              "A coworker later said Jonah had been arguing with the manager"
+            ],
+            "id": "D02.2",
+            "requirement": "The argument with the manager makes avoidance a plausible alternative or additional motive, but the coworker's later report does not establish the cause of this decision or exclude the pickup reason."
+          },
+          {
+            "anchors": [
+              "the record does not say whether Jonah saw that offer"
+            ],
+            "id": "D02.3",
+            "requirement": "The voucher does not establish Jonah knew he had a usable alternative, that he was free of constraints, or that he lied. Equally, non-acceptance does not prove inability or absence of options."
+          },
+          {
+            "anchors": [
+              "There is no account of what Jonah did that evening"
+            ],
+            "id": "D02.4",
+            "requirement": "Identify discriminating missing evidence tied to these alternatives, such as whether/when Jonah received the voucher and what he said about it, or contemporaneous evidence relating the refusal to the manager. Evidence of a pickup could corroborate events without proving exclusivity of motive."
+          }
+        ],
+        "critical_errors": [
+          "Certifies avoidance, dishonesty, hostility, or a stable negative trait as the actual motive.",
+          "Claims voucher knowledge or action-time ability/inability that is not in the source.",
+          "Erases the explicitly reported pickup reason as wholly unsupported, or declares it the only possible true motive."
+        ],
+        "domain": "action explanation",
+        "useful_limit": "Do not make both explanations equally supported just because motives are not directly observable; the source gives asymmetric evidence."
+      },
+      "D03": {
+        "criteria": [
+          {
+            "anchors": [
+              "That is an ambitious schedule.",
+              "Before we agree, I'd like a staffing estimate."
+            ],
+            "id": "D03.1",
+            "requirement": "Describe the observable sequence accurately: ambitious comment, cleanup staffing question, Vera's laughter/topic change, then the later request for a staffing estimate before agreement."
+          },
+          {
+            "anchors": [
+              "who would handle the final day's cleanup",
+              "Before we agree"
+            ],
+            "id": "D03.2",
+            "requirement": "Offer a defensible inference of practical concern or conditional caution about staffing/feasibility, grounded especially in the later email. This is not clear unconditional approval and not necessarily categorical rejection."
+          },
+          {
+            "anchors": [
+              "no tone of voice, prior relationship, or private comments"
+            ],
+            "id": "D03.3",
+            "requirement": "Explain why ridicule/sarcasm or rejection is not established; the ambiguous adjective and missing tone/context leave alternatives. Do not require treating all interpretations as equally likely."
+          },
+          {
+            "anchors": [
+              "Vera laughed and changed the subject"
+            ],
+            "id": "D03.4",
+            "requirement": "Vera's laughter and topic change do not settle whether she agreed, felt mocked, was amused, or wished to avoid the issue; distinguish these possibilities from observations."
+          }
+        ],
+        "critical_errors": [
+          "Claims Chen definitely mocked or rejected Vera or that the group agreed.",
+          "Claims Vera's laughter proves agreement, embarrassment, offense, or another private state.",
+          "Diagnoses personality or relationship quality from this exchange."
+        ],
+        "domain": "social interpretation",
+        "useful_limit": "A cautious interpretation can still be informative; a blanket statement that nothing at all is supported misses the concrete staffing concern."
+      },
+      "D04": {
+        "criteria": [
+          {
+            "anchors": [
+              "the courier had confirmed a Tuesday slot",
+              "all crates were already packed"
+            ],
+            "id": "D04.1",
+            "requirement": "Identify the baseline: the reported Tuesday slot, already-packed crates, and before-Friday objective give practical support to a Tuesday-dispatch recommendation; the source does not prove it uniquely best or guarantee arrival."
+          },
+          {
+            "anchors": [
+              "the courier had confirmed a Tuesday slot"
+            ],
+            "id": "D04.2",
+            "requirement": "Under the single stated change, the confirmed-slot premise is removed/reversed. The named courier's unavailable Tuesday slot can no longer support dispatch using that slot; do not infer that every possible Tuesday shipment is impossible."
+          },
+          {
+            "anchors": [
+              "the crates needed to arrive before the Friday opening",
+              "all crates were already packed"
+            ],
+            "id": "D04.3",
+            "requirement": "Keep the packed status and Friday requirement fixed in the hypothetical. Distinguish this hypothetical from a correction of the original source or an actual cancellation."
+          },
+          {
+            "anchors": [
+              "no transit time, no information about another courier, and no later slot"
+            ],
+            "id": "D04.4",
+            "requirement": "The deadline outcome remains undetermined: transit time and alternative slots/couriers are unspecified. Loss of one support does not prove all timely delivery impossible or prove an alternative will succeed."
+          }
+        ],
+        "critical_errors": [
+          "Claims Friday delivery is definitely impossible or definitely achievable.",
+          "Invents a later slot, courier, transit time, or says the source's lack of information proves those options do not exist.",
+          "Changes other facts, treats the hypothetical as an actual event, or concludes the whole recommendation is false solely because one reason was removed."
+        ],
+        "domain": "counterfactual sensitivity",
+        "useful_limit": "Distinguish the now-unusable specified slot from broader, unestablished alternatives. No single required stock phrase or conclusion label."
+      }
+    },
+    "common_delivery_checks": [
+      "Exactly answer, source_citations, uncertainty, assumptions in one JSON object. All except citations are strings; answer must be nonblank.",
+      "At most 32 source citations, validated by the unchanged audit_supplied_source_citations over complete original sources and exact versions/offsets. Empty citation array remains schema-allowed but normally earns traceability 0 for these source-backed tasks.",
+      "Do not normalize, repair, rewrite, truncate, or retry invalid output. Retain raw returned answer content privately and mark the reason for rejection. Provider reasoning_content is never retained or disclosed.",
+      "Apply the same schema, nonblank, citation, factuality and uncertainty checks to Base and HCL; do not reward HCL terminology or module count."
+    ],
+    "independent_review": {
+      "anonymization_limit": "Do not edit final fields to hide arm-specific phrases. If text reveals its arm, record imperfect blinding. Case author self-review is labeled implementer review, not independent validation.",
+      "disagreement": "If independent review is unavailable, retain pending review or explicitly labeled implementer-only scores; do not claim independence. Preserve conflicting reviews without changing the frozen rubric.",
+      "no_paid_judge_calls": true,
+      "procedure": "Give a source-first reviewer who did not author these cases the frozen source/question/rubric and anonymized final fields for all eight planned outcomes. Include unavailable placeholders. Do not supply arm labels, plans, module IDs, costs, latency, or expected winners. Lock scores/reasons before unmasking."
+    },
+    "inputs_file_sha256": "9f8a1a87c1d3e9d8ac96991920871192d3e1c5adab7ee51dfd3cdc90e503d942",
+    "model_prompt_exclusion": "No domain labels, criteria, critical errors, expected outputs, capability targets or rubric text enter either arm. The normal unchanged HCL capability inventory remains part of its planner prompt only.",
+    "schema": "hcl-fresh-four-source-first-rubric-v1",
+    "scoring": {
+      "acceptable_case": "At least 8/10, no critical error, a nonblank schema-valid answer, and the same source-citation audit passes.",
+      "availability": "A missing answer, transport/format failure, or HCL no-native-result outcome scores 0 for end-to-end usefulness and is separately marked unavailable. Content-only score is null for no answer, never silently dropped from the four-item denominator.",
+      "criteria_points": {
+        "0": "Missing, materially wrong, or contradicted by the answer.",
+        "1": "Substantially correct but incomplete, weakly grounded, or insufficiently qualified.",
+        "2": "Correct, sufficiently grounded in the source, and preserves the stated limit."
+      },
+      "hcl_treatment": "Report selected, executed and checked-treatment counts separately, then source-first relevance/faithfulness review. Invocation and valid citations do not certify treatment quality or semantic correctness.",
+      "interpretation": "Neither a tie nor an HCL gain/harm establishes efficacy, significance, generalization, causal attribution to a module, human-state truth, I02 completion, or production-default performance.",
+      "per_arm_maximum": 40,
+      "per_case_content_maximum": 8,
+      "per_case_maximum": 10,
+      "primary_reporting": "Show each arm/case content score, traceability score, critical-error flags, delivery/availability status, paired deltas and negative results. Total out of 40 is descriptive only.",
+      "traceability_points": {
+        "0": "No useful supporting original citation, fabricated/invalid citation, or citations substituted for substantive support.",
+        "1": "Valid exact citations support some material claims, with incomplete coverage or unclear fact/inference separation.",
+        "2": "Valid exact citations support the material factual premises; material inferences and hypothetical assumptions are explicitly separated."
+      }
+    },
+    "status": "FROZEN_BEFORE_LIVE_OUTPUTS"
+  },
+  "run_id": "37202844362",
+  "runtime_sha256": "90737b3ed772f65851553d8a673112eae50f2781185d8b5b4ccd127cdfb8663b",
+  "schema": "hcl-four-comparison-public-evidence-v1",
+  "source_first_scoring": "PENDING_ANONYMIZED_REVIEW_BEFORE_UNMASKING",
+  "status": "COMPLETED_ONE_PASS",
+  "usage_complete": true,
+  "usage_rated_usd": "0.23635524"
+}

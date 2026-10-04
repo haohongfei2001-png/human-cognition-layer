@@ -1,0 +1,576 @@
+{
+  "schema": "hcl-four-source-first-independent-scores-v1",
+  "rubric_schema": "hcl-fresh-four-source-first-rubric-v1",
+  "rubric_status": "FROZEN_BEFORE_LIVE_OUTPUTS",
+  "source_packet_file": "anonymized-packets.json",
+  "source_packet_sha256": "788eb9fbd8c325c0034fff33e5a2d3ce35071707709fc465036ecaba1706f58f",
+  "frozen_rubric_inputs_file_sha256": "9f8a1a87c1d3e9d8ac96991920871192d3e1c5adab7ee51dfd3cdc90e503d942",
+  "review_type": "independent_source_first_blind_review",
+  "reviewer_did_not_author_cases": true,
+  "method": "Only anonymized-packets.json was read for experiment data. All final fields were considered together against the original source and frozen rubric. No external research, paid judge calls, repairs, retries, or answer reconstruction were used.",
+  "blinding": {
+    "arm_mapping_accessed": false,
+    "run_artifacts_accessed": false,
+    "costs_or_module_plans_accessed": false,
+    "arm_identities_assigned": false,
+    "imperfect_blinding": "Possible stylistic cues remain in the unchanged final fields, as warned by the packet. No arm identity was determined, assigned, or used."
+  },
+  "scores": [
+    {
+      "packet_id": "P01",
+      "case_id": "D02",
+      "availability": "FINAL_FIELDS_AVAILABLE",
+      "unavailable": false,
+      "unavailable_reason": null,
+      "criteria": [
+        {
+          "id": "D02.1",
+          "points": 2,
+          "rationale": "Preserves the prior pickup message as the directly reported reason, explicitly stronger than avoidance, while denying that it proves the unique actual motive."
+        },
+        {
+          "id": "D02.2",
+          "points": 2,
+          "rationale": "Separates the coworker's argument report from the reviewer's avoidance inference; it does not claim the coworker supplied a causal explanation."
+        },
+        {
+          "id": "D02.3",
+          "points": 2,
+          "rationale": "The voucher is only potentially helpful and explicitly contingent on Jonah seeing it; knowledge, usable alternatives, and dishonesty are not asserted."
+        },
+        {
+          "id": "D02.4",
+          "points": 2,
+          "rationale": "Identifies receipt of the voucher, actual pickup, timing of arguments, and contemporaneous evidence connecting avoidance to refusal. The remaining uncertainty preserves possible additional motives."
+        }
+      ],
+      "content_score": 8,
+      "content_maximum": 8,
+      "traceability_score": 2,
+      "traceability_maximum": 2,
+      "traceability_rationale": "All material factual premises are covered by exact original citations; stated reason, inference, conditional voucher relevance, and unknown actual motive are separated.",
+      "total": 10,
+      "maximum": 10,
+      "total_basis": "Sum of four frozen 0–2 content criteria and frozen 0–2 traceability score.",
+      "critical_failure": false,
+      "critical_errors": [],
+      "critical_error_assessment": "No listed case-critical error is established by the complete final fields.",
+      "delivery_gate": {
+        "status": "PASS_VISIBLE_CHECKS_CANONICAL_AUDIT_PENDING",
+        "schema_pass": true,
+        "nonblank_answer": true,
+        "citation_count": 3,
+        "exact_source_citation_check": "PASS",
+        "citation_checks": [
+          {
+            "source_id": "extra_shift",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          },
+          {
+            "source_id": "extra_shift",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          },
+          {
+            "source_id": "extra_shift",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          }
+        ],
+        "unchanged_canonical_audit": "NOT_RUN_BY_REVIEWER",
+        "rationale": "The allowed packet supports direct schema/type/nonblank/count checks and exact source ID, version, quote, and supplied-offset validation. The unchanged audit_supplied_source_citations implementation is not in the authorized input, so this review does not claim it was executed. Its existing or subsequent result must be joined without changing these locked content ratings."
+      },
+      "acceptable_case": null,
+      "acceptable_case_pending_reason": "Frozen acceptance requires the unchanged canonical source-citation audit to pass; that execution is not certified here.",
+      "meets_score_and_no_critical_error_threshold": true,
+      "acceptable_if_canonical_citation_audit_passes": true,
+      "rationale": "Accurate, grounded and appropriately limited across the four frozen criteria."
+    },
+    {
+      "packet_id": "P02",
+      "case_id": "D04",
+      "availability": "FINAL_FIELDS_AVAILABLE",
+      "unavailable": false,
+      "unavailable_reason": null,
+      "criteria": [
+        {
+          "id": "D04.1",
+          "points": 2,
+          "rationale": "Identifies the confirmed slot as logistical support and preserves packed readiness and the before-Friday objective without claiming guaranteed or uniquely optimal delivery."
+        },
+        {
+          "id": "D04.2",
+          "points": 2,
+          "rationale": "Removes the specified Tuesday-slot premise. Read in the whole answer, “cannot be implemented as stated” concerns that reported logistical plan: the uncertainty field explicitly leaves alternative-courier or slot feasibility neither supported nor ruled out, so it does not establish universal Tuesday impossibility."
+        },
+        {
+          "id": "D04.3",
+          "points": 2,
+          "rationale": "Keeps packed crates and the Friday requirement fixed and explicitly treats slot loss as the counterfactual, not an actual cancellation or source correction."
+        },
+        {
+          "id": "D04.4",
+          "points": 2,
+          "rationale": "Explains that absent transit time and alternative logistics prevent either a success or impossibility conclusion about Friday."
+        }
+      ],
+      "content_score": 8,
+      "content_maximum": 8,
+      "traceability_score": 2,
+      "traceability_maximum": 2,
+      "traceability_rationale": "The complete exact source citation covers all factual premises; the single-change hypothetical and unestablished alternatives are explicitly separated.",
+      "total": 10,
+      "maximum": 10,
+      "total_basis": "Sum of four frozen 0–2 content criteria and frozen 0–2 traceability score.",
+      "critical_failure": false,
+      "critical_errors": [],
+      "critical_error_assessment": "No listed case-critical error is established by the complete final fields.",
+      "delivery_gate": {
+        "status": "PASS_VISIBLE_CHECKS_CANONICAL_AUDIT_PENDING",
+        "schema_pass": true,
+        "nonblank_answer": true,
+        "citation_count": 1,
+        "exact_source_citation_check": "PASS",
+        "citation_checks": [
+          {
+            "source_id": "museum_dispatch",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          }
+        ],
+        "unchanged_canonical_audit": "NOT_RUN_BY_REVIEWER",
+        "rationale": "The allowed packet supports direct schema/type/nonblank/count checks and exact source ID, version, quote, and supplied-offset validation. The unchanged audit_supplied_source_citations implementation is not in the authorized input, so this review does not claim it was executed. Its existing or subsequent result must be joined without changing these locked content ratings."
+      },
+      "acceptable_case": null,
+      "acceptable_case_pending_reason": "Frozen acceptance requires the unchanged canonical source-citation audit to pass; that execution is not certified here.",
+      "meets_score_and_no_critical_error_threshold": true,
+      "acceptable_if_canonical_citation_audit_passes": true,
+      "rationale": "Accurate, grounded and appropriately limited across the four frozen criteria."
+    },
+    {
+      "packet_id": "P03",
+      "case_id": "D01",
+      "availability": "FINAL_FIELDS_AVAILABLE",
+      "unavailable": false,
+      "unavailable_reason": null,
+      "criteria": [
+        {
+          "id": "D01.1",
+          "points": 2,
+          "rationale": "Distinguishes Ravi's reported move to Elm from Inez's last expressed Cedar intention; the continuing Cedar view is presented as supported interpretation and defeasible in the uncertainty field."
+        },
+        {
+          "id": "D01.2",
+          "points": 2,
+          "rationale": "Correctly reports non-delivery at 09:12 and says there is no reported basis for learning the change, rather than proof that no other channel existed. The only-updates premise is expressly labeled an assumption."
+        },
+        {
+          "id": "D01.3",
+          "points": 2,
+          "rationale": "Grounds Ravi's likely Elm view in his moving the meeting and explicitly identifies the current belief attribution as interpretation rather than a direct private-state report."
+        },
+        {
+          "id": "D01.4",
+          "points": 2,
+          "rationale": "Leaves higher-order knowledge open, explicitly distinguishes the reader-visible delivery status from Ravi's knowledge, and does not infer common knowledge from no reply or Bo's presence."
+        }
+      ],
+      "content_score": 8,
+      "content_maximum": 8,
+      "traceability_score": 2,
+      "traceability_maximum": 2,
+      "traceability_rationale": "Exact citations cover the events, non-delivery, no reply, and information gaps; belief interpretations and the limited-channel assumption are explicitly qualified.",
+      "total": 10,
+      "maximum": 10,
+      "total_basis": "Sum of four frozen 0–2 content criteria and frozen 0–2 traceability score.",
+      "critical_failure": false,
+      "critical_errors": [],
+      "critical_error_assessment": "No listed case-critical error is established by the complete final fields.",
+      "delivery_gate": {
+        "status": "PASS_VISIBLE_CHECKS_CANONICAL_AUDIT_PENDING",
+        "schema_pass": true,
+        "nonblank_answer": true,
+        "citation_count": 4,
+        "exact_source_citation_check": "PASS",
+        "citation_checks": [
+          {
+            "source_id": "meeting_notice",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          },
+          {
+            "source_id": "meeting_notice",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          },
+          {
+            "source_id": "meeting_notice",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          },
+          {
+            "source_id": "meeting_notice",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          }
+        ],
+        "unchanged_canonical_audit": "NOT_RUN_BY_REVIEWER",
+        "rationale": "The allowed packet supports direct schema/type/nonblank/count checks and exact source ID, version, quote, and supplied-offset validation. The unchanged audit_supplied_source_citations implementation is not in the authorized input, so this review does not claim it was executed. Its existing or subsequent result must be joined without changing these locked content ratings."
+      },
+      "acceptable_case": null,
+      "acceptable_case_pending_reason": "Frozen acceptance requires the unchanged canonical source-citation audit to pass; that execution is not certified here.",
+      "meets_score_and_no_critical_error_threshold": true,
+      "acceptable_if_canonical_citation_audit_passes": true,
+      "rationale": "Accurate, grounded and appropriately limited across the four frozen criteria."
+    },
+    {
+      "packet_id": "P04",
+      "case_id": "D01",
+      "availability": "UNAVAILABLE_NO_CANONICAL_FINAL_OUTPUT",
+      "unavailable": true,
+      "unavailable_reason": "Packet explicitly supplies UNAVAILABLE_NO_CANONICAL_FINAL_OUTPUT with final_fields null. No missing answer is reconstructed or retried.",
+      "criteria": [
+        {
+          "id": "D01.1",
+          "points": null,
+          "rationale": "Not assessable: no canonical final answer. The missing outcome remains in the end-to-end denominator."
+        },
+        {
+          "id": "D01.2",
+          "points": null,
+          "rationale": "Not assessable: no canonical final answer. The missing outcome remains in the end-to-end denominator."
+        },
+        {
+          "id": "D01.3",
+          "points": null,
+          "rationale": "Not assessable: no canonical final answer. The missing outcome remains in the end-to-end denominator."
+        },
+        {
+          "id": "D01.4",
+          "points": null,
+          "rationale": "Not assessable: no canonical final answer. The missing outcome remains in the end-to-end denominator."
+        }
+      ],
+      "content_score": null,
+      "content_maximum": 8,
+      "traceability_score": null,
+      "traceability_maximum": 2,
+      "total": 0,
+      "maximum": 10,
+      "total_basis": "End-to-end usefulness is zero for an unavailable answer under the frozen availability rule; this is not a content-quality judgment.",
+      "critical_failure": false,
+      "critical_errors": [],
+      "critical_error_assessment": "Not assessable without an answer; no semantic critical error is invented.",
+      "delivery_gate": {
+        "status": "FAIL_UNAVAILABLE",
+        "schema_pass": false,
+        "nonblank_answer": false,
+        "citation_count": null,
+        "exact_source_citation_check": "NOT_ASSESSABLE",
+        "unchanged_canonical_audit": "NOT_RUN",
+        "rationale": "No canonical final JSON object or nonblank answer exists in the packet."
+      },
+      "acceptable_case": false,
+      "rationale": "Missing output scores 0/10 end to end and remains one of eight planned outcomes. Content-only score is null."
+    },
+    {
+      "packet_id": "P05",
+      "case_id": "D04",
+      "availability": "FINAL_FIELDS_AVAILABLE",
+      "unavailable": false,
+      "unavailable_reason": null,
+      "criteria": [
+        {
+          "id": "D04.1",
+          "points": 2,
+          "rationale": "Gives the stated confirmed-slot basis for Tuesday dispatch alongside packed crates and the before-Friday requirement, without guaranteeing delivery or claiming unique optimality."
+        },
+        {
+          "id": "D04.2",
+          "points": 2,
+          "rationale": "Replaces only availability of the reported slot and carefully says there is no reported usable Tuesday slot, not that every possible Tuesday shipment is impossible."
+        },
+        {
+          "id": "D04.3",
+          "points": 2,
+          "rationale": "Preserves packed status and deadline and distinguishes the stipulated hypothetical from the unchanged original report."
+        },
+        {
+          "id": "D04.4",
+          "points": 2,
+          "rationale": "Explicitly states that the source supports neither meeting nor missing the deadline because transit time, alternative couriers, and later slots are unspecified."
+        }
+      ],
+      "content_score": 8,
+      "content_maximum": 8,
+      "traceability_score": 2,
+      "traceability_maximum": 2,
+      "traceability_rationale": "Exact citations cover all logistical premises and source omissions; counterfactual replacement and unverified feasibility are explicit.",
+      "total": 10,
+      "maximum": 10,
+      "total_basis": "Sum of four frozen 0–2 content criteria and frozen 0–2 traceability score.",
+      "critical_failure": false,
+      "critical_errors": [],
+      "critical_error_assessment": "No listed case-critical error is established by the complete final fields.",
+      "delivery_gate": {
+        "status": "PASS_VISIBLE_CHECKS_CANONICAL_AUDIT_PENDING",
+        "schema_pass": true,
+        "nonblank_answer": true,
+        "citation_count": 4,
+        "exact_source_citation_check": "PASS",
+        "citation_checks": [
+          {
+            "source_id": "museum_dispatch",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          },
+          {
+            "source_id": "museum_dispatch",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          },
+          {
+            "source_id": "museum_dispatch",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          },
+          {
+            "source_id": "museum_dispatch",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          }
+        ],
+        "unchanged_canonical_audit": "NOT_RUN_BY_REVIEWER",
+        "rationale": "The allowed packet supports direct schema/type/nonblank/count checks and exact source ID, version, quote, and supplied-offset validation. The unchanged audit_supplied_source_citations implementation is not in the authorized input, so this review does not claim it was executed. Its existing or subsequent result must be joined without changing these locked content ratings."
+      },
+      "acceptable_case": null,
+      "acceptable_case_pending_reason": "Frozen acceptance requires the unchanged canonical source-citation audit to pass; that execution is not certified here.",
+      "meets_score_and_no_critical_error_threshold": true,
+      "acceptable_if_canonical_citation_audit_passes": true,
+      "rationale": "Accurate, grounded and appropriately limited across the four frozen criteria."
+    },
+    {
+      "packet_id": "P06",
+      "case_id": "D03",
+      "availability": "FINAL_FIELDS_AVAILABLE",
+      "unavailable": false,
+      "unavailable_reason": null,
+      "criteria": [
+        {
+          "id": "D03.1",
+          "points": 2,
+          "rationale": "Accurately describes the ambitious comment, cleanup question, laughter/topic change, and later staffing-estimate request; the complete cited sequence is intact."
+        },
+        {
+          "id": "D03.2",
+          "points": 2,
+          "rationale": "Gives a grounded practical-planning/conditional-caution reading, especially supported by the later estimate request, and labels the motive inference as an assumption."
+        },
+        {
+          "id": "D03.3",
+          "points": 2,
+          "rationale": "Explains that refusal or ridicule is not established and retains neutral caution, criticism, and resistance as possible readings given missing tone and context."
+        },
+        {
+          "id": "D03.4",
+          "points": 2,
+          "rationale": "Treats laughter/topic change as ambiguous observations. Saying there was no direct acceptance or rebuttal describes the reported behavior, not proof of agreement, discomfort, dismissal, or another private state."
+        }
+      ],
+      "content_score": 8,
+      "content_maximum": 8,
+      "traceability_score": 2,
+      "traceability_maximum": 2,
+      "traceability_rationale": "The complete exact citation covers the factual sequence and omissions; the practical-planning reading is identified as an interpretation with an explicit motive assumption.",
+      "total": 10,
+      "maximum": 10,
+      "total_basis": "Sum of four frozen 0–2 content criteria and frozen 0–2 traceability score.",
+      "critical_failure": false,
+      "critical_errors": [],
+      "critical_error_assessment": "No listed case-critical error is established by the complete final fields.",
+      "delivery_gate": {
+        "status": "PASS_VISIBLE_CHECKS_CANONICAL_AUDIT_PENDING",
+        "schema_pass": true,
+        "nonblank_answer": true,
+        "citation_count": 1,
+        "exact_source_citation_check": "PASS",
+        "citation_checks": [
+          {
+            "source_id": "exhibition_meeting",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          }
+        ],
+        "unchanged_canonical_audit": "NOT_RUN_BY_REVIEWER",
+        "rationale": "The allowed packet supports direct schema/type/nonblank/count checks and exact source ID, version, quote, and supplied-offset validation. The unchanged audit_supplied_source_citations implementation is not in the authorized input, so this review does not claim it was executed. Its existing or subsequent result must be joined without changing these locked content ratings."
+      },
+      "acceptable_case": null,
+      "acceptable_case_pending_reason": "Frozen acceptance requires the unchanged canonical source-citation audit to pass; that execution is not certified here.",
+      "meets_score_and_no_critical_error_threshold": true,
+      "acceptable_if_canonical_citation_audit_passes": true,
+      "rationale": "Accurate, grounded and appropriately limited across the four frozen criteria."
+    },
+    {
+      "packet_id": "P07",
+      "case_id": "D03",
+      "availability": "FINAL_FIELDS_AVAILABLE",
+      "unavailable": false,
+      "unavailable_reason": null,
+      "criteria": [
+        {
+          "id": "D03.1",
+          "points": 2,
+          "rationale": "Accurately preserves all reported actions and the later email; it does not substitute a private attitude for the observable exchange."
+        },
+        {
+          "id": "D03.2",
+          "points": 2,
+          "rationale": "Grounds a conditional feasibility/staffing reading in the cleanup question and before-agreement estimate request, without asserting unconditional approval or categorical rejection."
+        },
+        {
+          "id": "D03.3",
+          "points": 2,
+          "rationale": "Separates an ambiguous demanding-schedule assessment from proven refusal or mockery and explains the relevance of missing tone, relationship history, and private comments."
+        },
+        {
+          "id": "D03.4",
+          "points": 2,
+          "rationale": "Explicitly limits Vera's reaction to laughter and a topic change and leaves her interpretation and emotional response unsettled."
+        }
+      ],
+      "content_score": 8,
+      "content_maximum": 8,
+      "traceability_score": 2,
+      "traceability_maximum": 2,
+      "traceability_rationale": "Exact citations cover the material observations and omissions, while practical concern and possible private attitudes are separated from those observations.",
+      "total": 10,
+      "maximum": 10,
+      "total_basis": "Sum of four frozen 0–2 content criteria and frozen 0–2 traceability score.",
+      "critical_failure": false,
+      "critical_errors": [],
+      "critical_error_assessment": "No listed case-critical error is established by the complete final fields.",
+      "delivery_gate": {
+        "status": "PASS_VISIBLE_CHECKS_CANONICAL_AUDIT_PENDING",
+        "schema_pass": true,
+        "nonblank_answer": true,
+        "citation_count": 5,
+        "exact_source_citation_check": "PASS",
+        "citation_checks": [
+          {
+            "source_id": "exhibition_meeting",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          },
+          {
+            "source_id": "exhibition_meeting",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          },
+          {
+            "source_id": "exhibition_meeting",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          },
+          {
+            "source_id": "exhibition_meeting",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          },
+          {
+            "source_id": "exhibition_meeting",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          }
+        ],
+        "unchanged_canonical_audit": "NOT_RUN_BY_REVIEWER",
+        "rationale": "The allowed packet supports direct schema/type/nonblank/count checks and exact source ID, version, quote, and supplied-offset validation. The unchanged audit_supplied_source_citations implementation is not in the authorized input, so this review does not claim it was executed. Its existing or subsequent result must be joined without changing these locked content ratings."
+      },
+      "acceptable_case": null,
+      "acceptable_case_pending_reason": "Frozen acceptance requires the unchanged canonical source-citation audit to pass; that execution is not certified here.",
+      "meets_score_and_no_critical_error_threshold": true,
+      "acceptable_if_canonical_citation_audit_passes": true,
+      "rationale": "Accurate, grounded and appropriately limited across the four frozen criteria."
+    },
+    {
+      "packet_id": "P08",
+      "case_id": "D02",
+      "availability": "FINAL_FIELDS_AVAILABLE",
+      "unavailable": false,
+      "unavailable_reason": null,
+      "criteria": [
+        {
+          "id": "D02.1",
+          "points": 2,
+          "rationale": "Preserves the pickup explanation as Jonah's stated reason and contrasts it with an inferred alternative, while allowing both or another reason. The cited original retains the message's temporal priority; the wording does not erase or uniquely certify the pickup reason."
+        },
+        {
+          "id": "D02.2",
+          "points": 1,
+          "rationale": "Correctly says the argument does not establish the decision's cause, but “the account reports ... a coworker's inferred motive” misattributes an avoidance inference to the coworker. The source reports only that the coworker said Jonah had been arguing."
+        },
+        {
+          "id": "D02.3",
+          "points": 2,
+          "rationale": "Treats whether Jonah saw or could use the voucher as missing discriminating evidence and does not assert knowledge, ability, inability, or dishonesty."
+        },
+        {
+          "id": "D02.4",
+          "points": 2,
+          "rationale": "Provides relevant missing evidence about pickup, voucher receipt/usability, argument timing, and Jonah's direct explanation; the uncertainty field preserves simultaneous or additional motives."
+        }
+      ],
+      "content_score": 7,
+      "content_maximum": 8,
+      "traceability_score": 1,
+      "traceability_maximum": 2,
+      "traceability_rationale": "The citation is exact and covers the underlying events, but it does not support the answer's attribution of an inferred avoidance motive to the coworker. That materially blurs reported fact and inference.",
+      "total": 8,
+      "maximum": 10,
+      "total_basis": "Sum of four frozen 0–2 content criteria and frozen 0–2 traceability score.",
+      "critical_failure": false,
+      "critical_errors": [],
+      "critical_error_assessment": "No listed case-critical error is established by the complete final fields.",
+      "delivery_gate": {
+        "status": "PASS_VISIBLE_CHECKS_CANONICAL_AUDIT_PENDING",
+        "schema_pass": true,
+        "nonblank_answer": true,
+        "citation_count": 1,
+        "exact_source_citation_check": "PASS",
+        "citation_checks": [
+          {
+            "source_id": "extra_shift",
+            "version": 1,
+            "exact_quote_and_supplied_offset_match": true
+          }
+        ],
+        "unchanged_canonical_audit": "NOT_RUN_BY_REVIEWER",
+        "rationale": "The allowed packet supports direct schema/type/nonblank/count checks and exact source ID, version, quote, and supplied-offset validation. The unchanged audit_supplied_source_citations implementation is not in the authorized input, so this review does not claim it was executed. Its existing or subsequent result must be joined without changing these locked content ratings."
+      },
+      "acceptable_case": null,
+      "acceptable_case_pending_reason": "Frozen acceptance requires the unchanged canonical source-citation audit to pass; that execution is not certified here.",
+      "meets_score_and_no_critical_error_threshold": true,
+      "acceptable_if_canonical_citation_audit_passes": true,
+      "rationale": "The answer is useful and avoids any listed critical error, but it incorrectly attributes the avoidance inference to the coworker; this costs one content point and one traceability point."
+    }
+  ],
+  "summary": {
+    "planned_packet_count": 8,
+    "available_packet_count": 7,
+    "unavailable_packet_count": 1,
+    "end_to_end_total": 68,
+    "end_to_end_maximum": 80,
+    "available_content_total": 55,
+    "available_content_maximum": 56,
+    "available_traceability_total": 13,
+    "available_traceability_maximum": 14,
+    "semantic_critical_error_count": 0,
+    "visible_delivery_check_pass_count": 7,
+    "canonical_audit_execution_certified_by_this_review": false,
+    "interpretation": "Pooled totals are descriptive only and do not establish treatment efficacy, significance, generalization, module causality, human-state truth, I02 completion, or production-default performance. No arm-level aggregation or paired delta is possible without unmasking, which this reviewer did not perform."
+  },
+  "lock": {
+    "locked": true,
+    "declaration": "All eight packet ratings and reasons are locked before access to any arm mapping, run artifact, cost, latency, or module plan. No unmasking was performed. Later delivery-audit evidence may resolve the explicitly pending acceptance gate, but must not alter these locked ratings or reasons."
+  }
+}
