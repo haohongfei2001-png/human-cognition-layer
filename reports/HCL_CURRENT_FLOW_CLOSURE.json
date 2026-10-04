@@ -1,0 +1,58 @@
+{
+  "approved_at": "2026-10-04T11:34:27Z",
+  "artifact_id": 11302194591,
+  "artifact_zip_sha256": "f071eb4eff690dca5cc0edf2fccd46717871d29e4802063de9e215ee90763195",
+  "authorization_ref": "OWNER_APPROVED_CURRENT_FLOW_PUBLIC_SYNTHETIC_20261004_113427",
+  "citation_anchor_offsets": [
+    0,
+    41
+  ],
+  "closed_at": "2026-10-04T11:58:51.745272+00:00",
+  "cost_basis": "USAGE_RATED_PEAK_NOT_INVOICE_FULL_RESERVATION_RETAINED",
+  "diagnostic_planning_tokens": 16384,
+  "efficacy_certified": false,
+  "executed_capabilities": [
+    "G05"
+  ],
+  "executor_commit": "a45fa22eebc71d7e7685cd6a80c00f65a7b69b48",
+  "existing_secret": "PRESENT_TRUSTED_MAIN_BOOLEAN_ONLY",
+  "expires_at": "2026-10-05T11:34:27Z",
+  "generalization_certified": false,
+  "hcla_budget_transfer": false,
+  "head_sha": "398317588dbd2bcc20a53e1cb200de73ae081fa8",
+  "historical_budget_transfer": false,
+  "i02_certified": false,
+  "input_sha256": "561f54c04c71e0a61a0edfec1b36578b62f460a602025e73745703fdce068328",
+  "invoice_cost_usd": null,
+  "ordinary_planning_tokens": 4096,
+  "package_sha256": "9405539c40cf2049539aa235ff87c5a267e95a0f25383274639c139a99bda318",
+  "provider_calls": 2,
+  "public_evidence_sha256": "4039659d009267cd46d7d0b9aec49cdfa378e6de9dfba09945747c119390a4f6",
+  "ready_grant_sha256": "348fc6e1d13844c312545a64f60b1ec8b981092cecddf9af82810efd4009fd6d",
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_usd": "0",
+  "reserved_usd": "0.20594112",
+  "retry_authorized": false,
+  "run_id": "37200327609",
+  "run_url": "https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/37200327609",
+  "runtime_sha256": "90737b3ed772f65851553d8a673112eae50f2781185d8b5b4ccd127cdfb8663b",
+  "schema": "hcl-public-synthetic-g05-closure-v1",
+  "selected_capabilities": [
+    "G05"
+  ],
+  "source_and_original_request_supported": true,
+  "source_first_semantic_review": {
+    "criteria": [
+      "The original decline premise and reported because-support are both quoted from unchanged source choice version 1.",
+      "The actual answer correctly removes the stated support under the caller counterfactual.",
+      "It does not infer the conclusion is false, true, or that voluntariness is a verified world fact.",
+      "It preserves source-reported status and makes no source-text modification."
+    ],
+    "model_judge_calls": 0,
+    "raw_final_fields_rewritten": false,
+    "status": "PASS_FOR_THIS_CONSUMED_G05_CASE_ONLY"
+  },
+  "status": "COMPLETED_ONE_G05_REGRESSION_ONLY",
+  "usage_complete": true,
+  "usage_rated_usd": "0.02749032"
+}

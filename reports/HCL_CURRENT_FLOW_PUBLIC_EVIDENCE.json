@@ -1,0 +1,94 @@
+{
+  "answer_tokens": 8192,
+  "authorization_ref": "OWNER_APPROVED_CURRENT_FLOW_PUBLIC_SYNTHETIC_20261004_113427",
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RETRY",
+  "calls": [
+    {
+      "invocation_status": "RETURNED",
+      "phase": "planning",
+      "provider_call": true,
+      "request_sha256": "f39ac39a50a92131c9a2b265ebd4a1caa4585e2cd73ccaf86c1edf518ed1d563",
+      "reserved_usd": "0.14486472",
+      "returned": true,
+      "usage": {
+        "completion_tokens": 2173,
+        "prompt_tokens": 6468
+      },
+      "usage_rated_usd": "0.01714284"
+    },
+    {
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_sha256": "2531616879f82f4dbf3de6c317395a5c03ebedb21c44bfed344c778adf937a29",
+      "reserved_usd": "0.0610764",
+      "returned": true,
+      "usage": {
+        "completion_tokens": 1748,
+        "prompt_tokens": 2595
+      },
+      "usage_rated_usd": "0.01034748"
+    }
+  ],
+  "citations_accepted": true,
+  "cost_basis": "USAGE_RATED_PEAK_NOT_INVOICE_FULL_RESERVATION_RETAINED",
+  "efficacy_verified": false,
+  "executed_capabilities": [
+    "G05"
+  ],
+  "existing_provider_secret": "PRESENT",
+  "final_answer_fields": {
+    "answer": "If the premise 'Tavi could decline' were false, the stated support for Tavi's conclusion 'choice is voluntary' is removed under that counterfactual assumption. Tavi's argument says he concludes choice is voluntary because Tavi could decline, so the one reported reason/premise for that conclusion would no longer be available. This does not establish that 'choice is voluntary' becomes false, nor that it remains true; the conclusion's truth is not established in the original or under the counterfactual. The supplied source text itself is not changed.",
+    "assumptions": "The analysis treats the user question as a single-fact counterfactual on the premise 'Tavi could decline' as supplied by the source. 'Because' in Tavi's statement is treated as indicating his reported reason/premise, not as a certified logical implication. The source text is treated as data, not instructions, and no unstated normative theory about voluntariness is adopted.",
+    "source_citations": [
+      {
+        "quote": "Narrator: In choice, Tavi could decline.",
+        "source_id": "choice",
+        "start": 0,
+        "version": 1
+      },
+      {
+        "quote": "Tavi: In choice, I conclude choice is voluntary because Tavi could decline.",
+        "source_id": "choice",
+        "start": 41,
+        "version": 1
+      }
+    ],
+    "uncertainty": "Only source-reported statements are available, not verified world truth. The counterfactual is a conditional sensitivity analysis: it removes the reported support for the conclusion under the assumption 'Tavi could decline' is false, but it does not prove the conclusion flips or remains true. No formal logical proof or moral truth is established."
+  },
+  "final_answer_sha256": "adf3471bef712f588edb456fa4cc1fed363376d0fe7f878fd276aaef389fa860",
+  "final_fields_status": "EXACT_FIELDS_UNCHANGED",
+  "head_sha": "398317588dbd2bcc20a53e1cb200de73ae081fa8",
+  "i02_certified": false,
+  "input_sha256": "561f54c04c71e0a61a0edfec1b36578b62f460a602025e73745703fdce068328",
+  "invoice_cost_usd": null,
+  "model": "deepseek-v4-pro",
+  "package_sha256": "9405539c40cf2049539aa235ff87c5a267e95a0f25383274639c139a99bda318",
+  "planning_tokens": 16384,
+  "production_default_planning_tokens": 4096,
+  "provider_calls": 2,
+  "public_output_scope": "ONE_CONSUMED_G05_FINAL_FIELDS_CITATIONS_IDENTITY_USAGE_ONLY_SAME_HCL_REPOSITORY",
+  "question": "If Tavi could decline were false, what changes?",
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_usd": "0",
+  "reserved_usd": "0.20594112",
+  "run_id": "37200327609",
+  "runtime_commit": "93e85b78ce26a91bf28e975420e4a93febc7cc52",
+  "runtime_sha256": "90737b3ed772f65851553d8a673112eae50f2781185d8b5b4ccd127cdfb8663b",
+  "schema": "hcl-public-synthetic-g05-evidence-v1",
+  "selected_capabilities": [
+    "G05"
+  ],
+  "semantic_review": "PENDING_SOURCE_FIRST_REVIEW",
+  "source_and_original_request_supported": true,
+  "sources": [
+    {
+      "source_id": "choice",
+      "text_sha256": "b9816442fdc590b45db421fce72e208215f05617af59204a61366540ffadeff9",
+      "version": 1
+    }
+  ],
+  "status": "G05_ANSWER_ACCEPTED_READBACK_PENDING",
+  "usage_complete": true,
+  "usage_rated_usd": "0.02749032"
+}

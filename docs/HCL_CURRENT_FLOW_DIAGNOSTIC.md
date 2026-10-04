@@ -1,7 +1,8 @@
 # One public synthetic G05 functional verification
 
-Preparation status: code/package reviewed before grant activation; no marker means
-no provider execution. The default grant remains zero calls and zero dollars.
+Status: **COMPLETED_ONE_G05_REGRESSION_ONLY**. The one approved run finished;
+the grant is closed with zero remaining calls/dollars and no retry authority.
+The historical preparation/activation design below is retained for audit.
 
 ## Exact scope and owner exception
 
@@ -77,3 +78,22 @@ that involuntariness or the falsehood of the conclusion follows.
 Success certifies only this current consumed G05 regression and exact diagnostic
 configuration. It does not certify I02, generalization, or HCL efficacy. All old
 expired grants remain closed and no historical/HCLA budget transfers occur.
+
+## Actual result, 2026-10-04
+
+[Run 37200327609](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/37200327609)
+used exactly two provider calls after a trusted-main PRESENT result. The actual
+planner selected G05 and the runtime executed source-and-request-supported G05.
+The unchanged answer is readable in [the exact public evidence](../reports/HCL_CURRENT_FLOW_PUBLIC_EVIDENCE.json).
+Its two citations match source `choice`, version 1, offsets 0 and 41.
+
+Source-first review passes this case: removing the decline premise removes the
+reported support for “choice is voluntary”, without proving that conclusion false
+or true. The answer expressly leaves the supplied source unchanged.
+
+Complete usage at frozen peak rates is US$0.02749032 (not an invoice). The full
+conservative US$0.20594112 reservation is retained. Both responses returned.
+The grant is closed and no further call, retry, repair, Base or judge is authorized.
+This certifies only this consumed G05 case and diagnostic configuration, not I02,
+generalization, or efficacy. Full identity/fee review is in
+[the closure record](../reports/HCL_CURRENT_FLOW_CLOSURE.json).
