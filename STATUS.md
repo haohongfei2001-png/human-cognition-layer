@@ -32,6 +32,14 @@ A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
+[Exact encrypted-result readback](docs/HCL_ENCRYPTED_READBACK.md) adds a bounded,
+plaintext-silent local verifier using the unchanged encryption format. The real
+historical G05 artifact passes exact public ZIP/package/recipient and supplied
+GitHub run/head checks; actual private decryption and durable custody remain
+unverified. Scripted memory-only key tests are not custody or live evidence.
+Current-runtime two-call diagnostic refreeze and new bounded authority remain
+pending; old grants and runtime are unchanged.
+
 [Nonblank final-answer delivery](docs/HCL_NONBLANK_ANSWER.md) now rejects empty or
 Unicode-whitespace-only answer fields even after native execution and valid
 citations. Raw output and two-phase cost accounting remain unchanged; there is
