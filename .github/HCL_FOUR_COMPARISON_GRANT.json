@@ -1,0 +1,13 @@
+{
+  "approved_at": null,
+  "authorization_ref": null,
+  "authorized_calls": 0,
+  "authorized_usd": "0",
+  "expires_at": null,
+  "historical_budget_transfer": false,
+  "package_sha256": "290e5c572d1d4e4b11ab1317469d08259b7d4da8e1314fea306c92b873ed058a",
+  "public_output_scope": null,
+  "retries": 0,
+  "schema": "hcl-four-comparison-grant-v1",
+  "status": "PREPARED_NOT_AUTHORIZED"
+}

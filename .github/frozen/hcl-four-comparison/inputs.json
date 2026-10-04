@@ -1,0 +1,82 @@
+{
+  "cases": [
+    {
+      "case_id": "D01",
+      "question": "At 09:12, what does the account support about Inez's and Ravi's views of the meeting place, and what does it leave open about their views of each other's knowledge?",
+      "question_sha256": "5e566a2f2b6a2736ef4621f326cd8a1f797b109f61438ac7897021eeef65b5b8",
+      "source_record_sha256": "4ac2e570d0c3ca90866c4dcd54b7a0051beed7eba00fdc9242535eb90197c64b",
+      "source_text_sha256": "e9f23ea6181e400c091c100c3b809ef3c2db67efa230018b0a254a6d0fa5f74d",
+      "sources": [
+        {
+          "record_time_basis": "ACTUAL_INGESTION_NOT_EVENT_TIME",
+          "recorded_at": "2026-10-04T12:10:04.485219+00:00",
+          "source_id": "meeting_notice",
+          "text": "At 09:00, Inez read a printed notice saying the repair meeting would be in Room Cedar. At 09:05, Ravi moved it to Room Elm and sent Inez a message. A delivery log shows that the message was still undelivered at 09:12. At 09:10, Inez told Bo, \"I'm going to Cedar for the repair meeting.\" Ravi saw no reply from Inez. Nothing in the account says that Bo saw the revised notice or that Ravi learned what Inez told Bo.",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "case_id": "D02",
+      "question": "How well does the account explain why Jonah declined the shift? Compare the pickup explanation with the suggestion that he was avoiding the manager, and identify what would distinguish them.",
+      "question_sha256": "b353ce61bfb8294df30a16890de6e97caed790a9552968518857d29874d8e84a",
+      "source_record_sha256": "cf0b048021c63ec1adfbfafda624cc64368776867a75ea0badfc28175385ed1e",
+      "source_text_sha256": "16c0b96a65d763b4ebeaff4808a0ee7c56357766deb445a1487c0173cea45d72",
+      "sources": [
+        {
+          "record_time_basis": "ACTUAL_INGESTION_NOT_EVENT_TIME",
+          "recorded_at": "2026-10-04T12:10:04.485284+00:00",
+          "source_id": "extra_shift",
+          "text": "Jonah turned down the extra workshop shift. In a message written before turning it down, he said, \"I need that evening to collect my aunt from the station, and I don't want to leave her waiting.\" The manager had offered a taxi voucher for the aunt, but the record does not say whether Jonah saw that offer. A coworker later said Jonah had been arguing with the manager. There is no account of what Jonah did that evening.",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "case_id": "D03",
+      "question": "What is the most defensible reading of Chen's response? Does the exchange establish rejection or ridicule, and what, if anything, does Vera's reaction settle?",
+      "question_sha256": "0225cda202608348b5e3a3894b30122f2bdecf0793ea89f65c4da3858b1ef861",
+      "source_record_sha256": "c71953e0859e1af1fe59396ee2ab95c12e0d5abd0f72415211da686ff3f1e7bd",
+      "source_text_sha256": "db5df12fb3feee4ccdf0d330c880905d01ddb7a1c468e2db19afa0c2e2842972",
+      "sources": [
+        {
+          "record_time_basis": "ACTUAL_INGESTION_NOT_EVENT_TIME",
+          "recorded_at": "2026-10-04T12:10:04.485334+00:00",
+          "source_id": "exhibition_meeting",
+          "text": "After Vera proposed a three-day exhibition, Chen replied, \"That is an ambitious schedule.\" Chen then asked who would handle the final day's cleanup. Vera laughed and changed the subject. In a later email to the group, Chen wrote, \"Before we agree, I'd like a staffing estimate.\" The account gives no tone of voice, prior relationship, or private comments.",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "case_id": "D04",
+      "question": "Suppose the courier's Tuesday slot were unavailable while every other reported fact stayed the same. How would that change the support for Selma's recommendation, and what could still be said about meeting the Friday deadline?",
+      "question_sha256": "2315b81e00213abb7cf302449d139712ada4fde993305b73c0a79f07578988ca",
+      "source_record_sha256": "b2bfc6307fe5ee65c294683f0585c0a99e6bcaf9a84f38906d747b457e3d8036",
+      "source_text_sha256": "a858f83ca4aa76ea5ed4c4aa2434d481378d6fc86f212d7d00e30ae676f619b3",
+      "sources": [
+        {
+          "record_time_basis": "ACTUAL_INGESTION_NOT_EVENT_TIME",
+          "recorded_at": "2026-10-04T12:10:04.485375+00:00",
+          "source_id": "museum_dispatch",
+          "text": "Selma recommended dispatching the museum crates on Tuesday. Her note said the courier had confirmed a Tuesday slot and the crates needed to arrive before the Friday opening. The warehouse checklist said all crates were already packed. The account gives no transit time, no information about another courier, and no later slot.",
+          "version": 1
+        }
+      ]
+    }
+  ],
+  "created_at": "2026-10-04T12:10:04.485070+00:00",
+  "provenance": {
+    "author": "Assistant-authored original synthetic prose for this proposal",
+    "benchmark_items_reused": 0,
+    "development_exposure": "DEVELOPMENT_EXPOSED_CONSUMED_FOR_FINAL_CONFIRMATION_AT_AUTHORING",
+    "ingestion_note": "Each recorded_at is this local UniversalHCL.put_source ingestion time, not story event time. Preserve this frozen source row for future planning; do not replace it with a fresh timestamp.",
+    "novelty_limit": "Newly composed here; no protected sources or benchmark items used. No claim of exhaustive historical-text uniqueness or model-pretraining novelty.",
+    "protected_confirmation_gold_sealed_sources_read": 0,
+    "provider_calls": 0,
+    "provider_spend_usd": "0",
+    "source_license_status": "NEW_ORIGINAL_SYNTHETIC_TEXT_NO_THIRD_PARTY_SOURCE"
+  },
+  "schema": "hcl-fresh-four-local-inputs-v1",
+  "status": "LOCAL_PREPARATION_ONLY_NO_LIVE_AUTHORITY"
+}

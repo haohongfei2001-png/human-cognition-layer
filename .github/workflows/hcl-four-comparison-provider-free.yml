@@ -1,0 +1,32 @@
+name: HCL four-case comparison provider-free gates
+on:
+  pull_request:
+    paths: ['scripts/run_four_comparison.py', 'scripts/four_comparison_public.py', 'tests/test_four_comparison.py', '.github/frozen/hcl-four-comparison/**', '.github/frozen/hcl-four-comparison-once.yml', '.github/workflows/hcl-four-comparison*', '.github/HCL_FOUR_COMPARISON*', 'reports/HCL_FOUR_COMPARISON*', 'docs/HCL_FOUR_COMPARISON.md']
+  push:
+    branches: [main]
+    paths: ['scripts/run_four_comparison.py', 'scripts/four_comparison_public.py', 'tests/test_four_comparison.py', '.github/frozen/hcl-four-comparison/**', '.github/frozen/hcl-four-comparison-once.yml', '.github/workflows/hcl-four-comparison*', '.github/HCL_FOUR_COMPARISON*', 'reports/HCL_FOUR_COMPARISON*', 'docs/HCL_FOUR_COMPARISON.md']
+permissions:
+  contents: read
+jobs:
+  provider-free-four-comparison:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest tests.test_four_comparison tests.test_v1_deepseek_metered
+      - name: Frozen executor and zero- or exact-authority state
+        run: |
+          python - <<'PY'
+          import json
+          from scripts import run_four_comparison as r
+          package = json.loads(r.PACKAGE.read_text())
+          assert package == r.build_package()
+          grant = json.loads(r.GRANT.read_text())
+          assert grant in (r.expected_grant(package), r.expected_grant(package, True)) or (grant['status'] == 'CLOSED_NO_TRANSFER_NO_RETRY' and grant['remaining_authorized_calls'] == 0 and grant['remaining_authorized_usd'] == '0')
+          print('EXACT_FROZEN_PACKAGE_PASS_NO_PROVIDER_CALLS')
+          PY
