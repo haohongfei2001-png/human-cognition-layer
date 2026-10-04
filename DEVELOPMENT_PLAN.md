@@ -27,6 +27,12 @@ and evidence dispositions. Remote `main`, exact-SHA CI and immutable historical
 receipts remain the code/evidence facts. Historical closure documents remain
 evidence and are not rewritten as active development policy.
 
+[Nonblank final-answer delivery](docs/HCL_NONBLANK_ANSWER.md) now rejects empty or
+Unicode-whitespace-only answer fields even after native execution and valid
+citations. Raw output and two-phase cost accounting remain unchanged; there is
+no answer repair, retry or new provider call. This closes an observed delivery
+criterion gap without expanding capability coverage.
+
 [C02 planned structured input](docs/HCL_C02_PLANNED_INPUT.md) now reuses the same
 source-anchored conditional bridge for the unchanged action-explanation tool.
 Action-time conditions, competing goals, source revisions and original-only

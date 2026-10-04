@@ -17,7 +17,7 @@ from .reader_entry import _FINAL_ANSWER_POLICY
 from .retained import audit_supplied_source_citations
 
 _SAFE_FAILURE_CODES = frozenset(('CALL_ALLOWANCE_EXHAUSTED', 'CLOSED_OR_DUPLICATE_PHASE_NO_RETRY', 'COST_ALLOWANCE_EXHAUSTED', 'DURABLE_RESERVATION_JOURNAL_REQUIRED_FOR_PROVIDER', 'METERED_RESPONSE_REQUIRED', 'PLANNER_AND_ANSWER_BACKENDS_AND_TWO_CALL_ALLOWANCE_REQUIRED', 'PLANNER_OR_ANSWER_BACKEND_AND_ALLOWANCE_UNAVAILABLE', 'SOURCE_CHANGED_DURING_ORCHESTRATION', 'SUCCESSFUL_PLANNING_REQUIRED', 'USAGE_OUTSIDE_RESERVED_BOUND', 'answer exceeds bounded contract', 'bounded authorized input required', 'bounded bindings required', 'bounded context required', 'bounded interpreted question required', 'bounded planning plus answer allowance required', 'complete context exceeds budget; no truncation', 'complete sources exceed bound; no truncation', 'duplicate responsibility actor', 'invalid answer schema', 'invalid bounded task plan', 'invalid limitations', 'invented or stale source anchor', 'operation bound exceeded', 'ordinary nonempty question required', 'planning response exceeds bound', 'source count exceeds bound; no silent source dropping', 'unknown capability or operation fields', 'unknown or duplicate source selection', 'unsupported binding or source', 'METERED_BACKEND_OR_JOURNAL_FAILED', 'INVALID_USAGE_METADATA', 'ORCHESTRATION_FAILURE', 'CALL_ALREADY_IN_FLIGHT', 'SOURCE_SUPPORT_CHANGED', 'PLANNER_OR_ANSWER_OUTPUT_BOUND_EXCEEDED'))
-_SAFE_FAILURE_CODES = _SAFE_FAILURE_CODES | {'NATIVE_HCL_RESULT_REQUIRED_BEFORE_ANSWER'}
+_SAFE_FAILURE_CODES = _SAFE_FAILURE_CODES | {'NATIVE_HCL_RESULT_REQUIRED_BEFORE_ANSWER','NONBLANK_FINAL_ANSWER_REQUIRED'}
 
 class HCLBoundaryError(ValueError):
     def __init__(self, code):
@@ -477,6 +477,7 @@ class UniversalHCL:
             if not native_results:raise HCLBoundaryError('NATIVE_HCL_RESULT_REQUIRED_BEFORE_ANSWER')
             final=bounded([dict(role='system',content=_FINAL_ANSWER_POLICY+' You are answering through HCL orchestration. '
                 'Use the original question; planned interpretations are conditional, not replacement user requests. '
+                'The answer field must contain a nonblank answer; state an evidence limitation explicitly rather than leaving it empty. '
                 'Use the actual HCL outcomes below. Native execution alone proves neither relevant checked treatment nor correct model interpretation. '
                 'An insufficient-evidence outcome limits the answer; never turn it into a positive checked result. '
                 'Explain material unsupported prerequisites without blanket refusal. With no supplied sources, '
@@ -490,6 +491,7 @@ class UniversalHCL:
             if len(raw)>64000:raise HCLBoundaryError('answer exceeds bounded contract')
             obj=json.loads(raw)
             if not isinstance(obj,dict)or set(obj)!={'answer','source_citations','uncertainty','assumptions'}or any(not isinstance(obj[k],str)for k in ('answer','uncertainty','assumptions'))or not isinstance(obj['source_citations'],list):raise HCLBoundaryError('invalid answer schema')
+            if not obj['answer'].strip():raise HCLBoundaryError('NONBLANK_FINAL_ANSWER_REQUIRED')
             audit=(audit_supplied_source_citations(final,raw) if versions else dict(
                 status='NO_SUPPLIED_SOURCES_UNSOURCED_ANALYSIS',deliverable=not obj['source_citations'],semantic_certification=False))
             receipt['source_review']=audit

@@ -32,6 +32,12 @@ A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
+[Nonblank final-answer delivery](docs/HCL_NONBLANK_ANSWER.md) now rejects empty or
+Unicode-whitespace-only answer fields even after native execution and valid
+citations. Raw output and two-phase cost accounting remain unchanged; there is
+no answer repair, retry or new provider call. This closes an observed delivery
+criterion gap without expanding capability coverage.
+
 [C02 planned structured input](docs/HCL_C02_PLANNED_INPUT.md) now reuses the same
 source-anchored conditional bridge for the unchanged action-explanation tool.
 Action-time conditions, competing goals, source revisions and original-only
