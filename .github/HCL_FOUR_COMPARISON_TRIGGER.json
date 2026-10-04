@@ -1,0 +1,7 @@
+{
+  "authorization_ref": "OWNER_APPROVED_FOUR_COMPARISON_PUBLIC_SYNTHETIC_20261004_121358",
+  "executor_commit": "43a3fd68c167e438961d0904edc08b1b4c9129e4",
+  "grant_sha256": "08a4f0cf56cc3efda2360faf2971759a44f8f453693ae4011284f1fef6be54ff",
+  "package_sha256": "290e5c572d1d4e4b11ab1317469d08259b7d4da8e1314fea306c92b873ed058a",
+  "schema": "hcl-four-comparison-marker-v1"
+}
