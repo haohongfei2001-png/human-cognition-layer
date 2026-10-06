@@ -1,0 +1,167 @@
+{
+  "answer_tokens": 8192,
+  "authorization_ref": "OWNER_APPROVED_TWO_STAGE_CNY_REPLACEMENT_20261006_14_CALLS_14_CNY",
+  "case_substitution": false,
+  "currency": "CNY",
+  "execution_files": {
+    ".github/frozen/hcl-two-stage-20261006/cases.json": "3c794a715d4fa2d5ec97bba58f441feeef1d446dbb67a826d485f0dc031eb48b",
+    ".github/frozen/hcl-two-stage-20261006/cny-amendment.json": "e965bf7b22b25673d37a75a437c4abe47ff955ff1eb7b152e02c667f346e4d5c",
+    ".github/frozen/hcl-two-stage-20261006/proposal.json": "c64d7d372b686829584d0051add1a9d303a013e68aacccc73bdf9954b8c5713e",
+    ".github/frozen/hcl-two-stage-20261006/stage2-cny-once.yml": "57296af78006fdf5db0fd95a2a6603d79e35f108774c64ed27297443d080b3c6",
+    ".github/workflows/hcl-two-stage-cny-2-once.yml": "57296af78006fdf5db0fd95a2a6603d79e35f108774c64ed27297443d080b3c6",
+    "reports/HCL_TWO_STAGE_CNY_1_PACKAGE.json": "f3cd8fe15656e2bcd4cc3a3725bede33fd9a939bbcd34c2ef141dd88787e226e",
+    "scripts/bounded_diagnostic_port.py": "16720c930139e66484ba86dc6238ad338c2eadf4e61317560dfe7902e8090a8a",
+    "scripts/bounded_diagnostic_protocol.py": "a11712be17046f6ec02409be6118820a18fe8a5b0426b14665e1510b6ecdfa3f",
+    "scripts/output_limit_port.py": "3bf22b5481eea36fefcad48cea6bcb4952d934b0ca529392ce7499f11f29afef",
+    "scripts/output_limit_protocol.py": "994b2c591e4bdcef903de870ae74696d8bfc409c57f225c932276d6d82bca9d7",
+    "scripts/run_two_stage_once.py": "08bf04c880852931fd6d323099ef48a769e756918b5b610a79271f8a33d7b987",
+    "scripts/serious_eval_contract.py": "d415af270dfff20139130768cdf462f9eb0d8080e3ed152f2e3adb9f18ba1a9f",
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0",
+    "scripts/two_stage_public.py": "82b1403ea2ca5eb00c101b7891678ffdec0813c17b3278ee00abe1a23fea63aa",
+    "scripts/universal_launch_guard.py": "48e0057dcb3a018aa63824166a3c3cc0950baa56a5af03021c7eb2a101886875",
+    "tests/test_two_stage.py": "cc8ba57d670fbf5e443a1782e16ac3d68dc89170052ebad358c08294f90624bc",
+    "tests/test_two_stage_account.py": "ba9ead2497dc8e2828d731fb4fd7a8332e245e5f96e7d88b3c815943b8f4b4e0",
+    "tests/test_two_stage_review.py": "ef81025ace3c09433f1959b0c75a0d9334f8bd0a0007f6fec2d7eea38bfada36"
+  },
+  "frozen_files_sha256": {
+    "cases.json": "3c794a715d4fa2d5ec97bba58f441feeef1d446dbb67a826d485f0dc031eb48b",
+    "cny-amendment.json": "e965bf7b22b25673d37a75a437c4abe47ff955ff1eb7b152e02c667f346e4d5c",
+    "proposal.json": "c64d7d372b686829584d0051add1a9d303a013e68aacccc73bdf9954b8c5713e"
+  },
+  "maximum_aggregate_calls": 14,
+  "maximum_aggregate_cny": "14",
+  "maximum_calls": 12,
+  "maximum_cny": "12",
+  "maximum_each_answer_cny": "0.888480",
+  "maximum_each_planning_cny": "1.109664",
+  "maximum_elapsed_seconds": 2700,
+  "maximum_reference_usd": "1.70",
+  "maximum_request_bytes": 36000,
+  "maximum_schedule_reference_usd": "1.69348608",
+  "maximum_schedule_reservation_cny": "11.546496",
+  "maximum_wait_seconds": 180,
+  "model": "deepseek-v4-pro",
+  "order": [
+    [
+      "PAIR1",
+      "Base"
+    ],
+    [
+      "PAIR1",
+      "HCL"
+    ],
+    [
+      "PAIR2",
+      "HCL"
+    ],
+    [
+      "PAIR2",
+      "Base"
+    ],
+    [
+      "PAIR3",
+      "Base"
+    ],
+    [
+      "PAIR3",
+      "HCL"
+    ],
+    [
+      "PAIR4",
+      "HCL"
+    ],
+    [
+      "PAIR4",
+      "Base"
+    ]
+  ],
+  "planning_tokens": 16384,
+  "rates_cny": {
+    "input": "9.0",
+    "output": "27.0"
+  },
+  "reference_rates_usd": {
+    "input": "1.32",
+    "output": "3.96"
+  },
+  "requests": {
+    "PAIR1:Base:answer": {
+      "input_token_bound": 7914,
+      "max_tokens": 8192,
+      "messages_sha256": "e446c8180d268b9e124a88d5ee3f9369b390d90a743a4c160d57a26748120237",
+      "request_bytes": 2933,
+      "request_sha256": "fc7b4e8008a46e3f4bfbefa5cd274bc2b76498945cc2039925b965840c78d73c",
+      "reservation_cny": "0.293274",
+      "reservation_usd": "0.04301352"
+    },
+    "PAIR1:HCL:planning": {
+      "input_token_bound": 61064,
+      "max_tokens": 16384,
+      "messages_sha256": "bcbb42aa1eb025d1776a6300780d4d335bf373b130736c4126f68fc92a03606a",
+      "request_bytes": 29508,
+      "request_sha256": "d717cb1dd4fa8422e5024f695ea80aaede53567191879debd5c09904e1c4cca3",
+      "reservation_cny": "0.992808",
+      "reservation_usd": "0.14561184"
+    },
+    "PAIR2:Base:answer": {
+      "input_token_bound": 7812,
+      "max_tokens": 8192,
+      "messages_sha256": "8b3fe5d3cf18fb76aa731e4c25a1107b544432c34cd36515876f8d51d8fcaa57",
+      "request_bytes": 2882,
+      "request_sha256": "644f6af59f80ad25f7c197fc122fba1609102d29a106f2a9ef75d267b7b310c7",
+      "reservation_cny": "0.292356",
+      "reservation_usd": "0.04287888"
+    },
+    "PAIR2:HCL:planning": {
+      "input_token_bound": 60962,
+      "max_tokens": 16384,
+      "messages_sha256": "e2d578355603960893d9a389267806e7ed792ae246cd413460365b7c74512d1c",
+      "request_bytes": 29457,
+      "request_sha256": "fe8b40a6fbc684e3b9a0bb1d9e6fc562e07845891c020a7b86011c30404d1f5e",
+      "reservation_cny": "0.99189",
+      "reservation_usd": "0.1454772"
+    },
+    "PAIR3:Base:answer": {
+      "input_token_bound": 7806,
+      "max_tokens": 8192,
+      "messages_sha256": "9b9c34d05f2835a9507bcf72b5140bdade618d95154ce2de4b01e860bc744235",
+      "request_bytes": 2879,
+      "request_sha256": "f0a1f16e84a07c5b97cfa537e5bf530f4d7ad5e350634e4dca8e7246c17f34d5",
+      "reservation_cny": "0.292302",
+      "reservation_usd": "0.04287096"
+    },
+    "PAIR3:HCL:planning": {
+      "input_token_bound": 60956,
+      "max_tokens": 16384,
+      "messages_sha256": "1c39651da1995935cffb499db78608dff3d6ad31b3b38978508a2de880cdcf07",
+      "request_bytes": 29454,
+      "request_sha256": "b4a407e90acbd6de68088bae6824ec7631ad43231c2ed0f7b4188f7315e2ed71",
+      "reservation_cny": "0.991836",
+      "reservation_usd": "0.14546928"
+    },
+    "PAIR4:Base:answer": {
+      "input_token_bound": 7984,
+      "max_tokens": 8192,
+      "messages_sha256": "ff3afd86fea7dc8d57fdeab780b6d6f6cfbd2c96df9e679637c5e7122ad3b87b",
+      "request_bytes": 2968,
+      "request_sha256": "aadad85a2f4f54f5a60c988e0ef430c2af2bc2de938fd29108cd04df512d0dd3",
+      "reservation_cny": "0.293904",
+      "reservation_usd": "0.04310592"
+    },
+    "PAIR4:HCL:planning": {
+      "input_token_bound": 61134,
+      "max_tokens": 16384,
+      "messages_sha256": "62c946161748a7b5a5db53199c3a5d38f1c7d19c8e39ac20695da3ed28dd8127",
+      "request_bytes": 29543,
+      "request_sha256": "9e7e1f189975e0724fdef46ceab75ba345a515af3cc7f82560a57fe370d2860c",
+      "reservation_cny": "0.993438",
+      "reservation_usd": "0.14570424"
+    }
+  },
+  "retries": 0,
+  "runtime_sha256": "62bea96c481fcdde3bfb0af8707796d5afaebf1c9d051ace9bd0c82e236f2442",
+  "schema": "hcl-two-stage-cny-package-v1",
+  "stage": 2,
+  "usd_reference_only": true
+}

@@ -8,8 +8,12 @@
   "other_stage_budget_transfer": false,
   "package_sha256": "2195bfef7637aef22f4ce4a4451a6e211923bf84ad51f719777839efd4579f7c",
   "phase1_source_review_sha256": null,
+  "provider_calls": 0,
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_usd": "0",
   "retries": 0,
   "schema": "hcl-two-stage-grant-v1",
   "stage": 2,
-  "status": "PREPARED_NOT_AUTHORIZED"
+  "status": "SUPERSEDED_BY_CNY_REPLACEMENT_ZERO_MODEL_CALLS",
+  "superseded_by": "OWNER_APPROVED_TWO_STAGE_CNY_REPLACEMENT_20261006_14_CALLS_14_CNY"
 }

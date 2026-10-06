@@ -1,0 +1,75 @@
+{
+  "answer_tokens": 8192,
+  "authorization_ref": "OWNER_APPROVED_TWO_STAGE_CNY_REPLACEMENT_20261006_14_CALLS_14_CNY",
+  "case_substitution": false,
+  "currency": "CNY",
+  "execution_files": {
+    ".github/frozen/hcl-two-stage-20261006/cases.json": "3c794a715d4fa2d5ec97bba58f441feeef1d446dbb67a826d485f0dc031eb48b",
+    ".github/frozen/hcl-two-stage-20261006/cny-amendment.json": "e965bf7b22b25673d37a75a437c4abe47ff955ff1eb7b152e02c667f346e4d5c",
+    ".github/frozen/hcl-two-stage-20261006/proposal.json": "c64d7d372b686829584d0051add1a9d303a013e68aacccc73bdf9954b8c5713e",
+    ".github/frozen/hcl-two-stage-20261006/stage1-cny-once.yml": "cfcf608512d4ae736ea7f2e5d468fa43318d467fd621dda844deef0ead87b7eb",
+    ".github/workflows/hcl-two-stage-cny-1-once.yml": "cfcf608512d4ae736ea7f2e5d468fa43318d467fd621dda844deef0ead87b7eb",
+    "scripts/bounded_diagnostic_port.py": "16720c930139e66484ba86dc6238ad338c2eadf4e61317560dfe7902e8090a8a",
+    "scripts/bounded_diagnostic_protocol.py": "a11712be17046f6ec02409be6118820a18fe8a5b0426b14665e1510b6ecdfa3f",
+    "scripts/output_limit_port.py": "3bf22b5481eea36fefcad48cea6bcb4952d934b0ca529392ce7499f11f29afef",
+    "scripts/output_limit_protocol.py": "994b2c591e4bdcef903de870ae74696d8bfc409c57f225c932276d6d82bca9d7",
+    "scripts/run_two_stage_once.py": "08bf04c880852931fd6d323099ef48a769e756918b5b610a79271f8a33d7b987",
+    "scripts/serious_eval_contract.py": "d415af270dfff20139130768cdf462f9eb0d8080e3ed152f2e3adb9f18ba1a9f",
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0",
+    "scripts/two_stage_public.py": "82b1403ea2ca5eb00c101b7891678ffdec0813c17b3278ee00abe1a23fea63aa",
+    "scripts/universal_launch_guard.py": "48e0057dcb3a018aa63824166a3c3cc0950baa56a5af03021c7eb2a101886875",
+    "tests/test_two_stage.py": "cc8ba57d670fbf5e443a1782e16ac3d68dc89170052ebad358c08294f90624bc",
+    "tests/test_two_stage_account.py": "ba9ead2497dc8e2828d731fb4fd7a8332e245e5f96e7d88b3c815943b8f4b4e0",
+    "tests/test_two_stage_review.py": "ef81025ace3c09433f1959b0c75a0d9334f8bd0a0007f6fec2d7eea38bfada36"
+  },
+  "frozen_files_sha256": {
+    "cases.json": "3c794a715d4fa2d5ec97bba58f441feeef1d446dbb67a826d485f0dc031eb48b",
+    "cny-amendment.json": "e965bf7b22b25673d37a75a437c4abe47ff955ff1eb7b152e02c667f346e4d5c",
+    "proposal.json": "c64d7d372b686829584d0051add1a9d303a013e68aacccc73bdf9954b8c5713e"
+  },
+  "maximum_aggregate_calls": 14,
+  "maximum_aggregate_cny": "14",
+  "maximum_calls": 2,
+  "maximum_cny": "2",
+  "maximum_each_answer_cny": "0.888480",
+  "maximum_each_planning_cny": "1.109664",
+  "maximum_elapsed_seconds": 600,
+  "maximum_reference_usd": "0.30",
+  "maximum_request_bytes": 36000,
+  "maximum_schedule_reference_usd": "0.29306112",
+  "maximum_schedule_reservation_cny": "1.998144",
+  "maximum_wait_seconds": 180,
+  "model": "deepseek-v4-pro",
+  "order": [
+    [
+      "SMOKE1",
+      "HCL"
+    ]
+  ],
+  "planning_tokens": 16384,
+  "rates_cny": {
+    "input": "9.0",
+    "output": "27.0"
+  },
+  "reference_rates_usd": {
+    "input": "1.32",
+    "output": "3.96"
+  },
+  "requests": {
+    "SMOKE1:HCL:planning": {
+      "input_token_bound": 60630,
+      "max_tokens": 16384,
+      "messages_sha256": "468e48bb40466d8049d97d5d4ed986efce39dd14f2d81a73bb6bfd871e2d8db9",
+      "request_bytes": 29291,
+      "request_sha256": "89967e74e3b5d1aa4ea8d045c058358c1b766ec2348b9adf816d4050f2d4ec9b",
+      "reservation_cny": "0.988902",
+      "reservation_usd": "0.14503896"
+    }
+  },
+  "retries": 0,
+  "runtime_sha256": "62bea96c481fcdde3bfb0af8707796d5afaebf1c9d051ace9bd0c82e236f2442",
+  "schema": "hcl-two-stage-cny-package-v1",
+  "stage": 1,
+  "usd_reference_only": true
+}

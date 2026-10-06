@@ -5,8 +5,8 @@ import hashlib,json,os
 from pathlib import Path
 from urllib.request import Request,urlopen
 
-URL='https://api-docs.deepseek.com/quick_start/pricing/'
-RATES={'input':'1.32','output':'3.96','model':'deepseek-v4-pro','version':'DeepSeek-V4-Pro-0813'}
+URL='https://api-docs.deepseek.com/zh-cn/quick_start/pricing/'
+RATES={'currency':'CNY','input':'9.0','output':'27.0','model':'deepseek-v4-pro','version':'DeepSeek-V4-Pro-0813'}
 class Rows(HTMLParser):
     def __init__(self):super().__init__();self.rows=[];self.row=None;self.cell=None
     def handle_starttag(self,tag,attrs):
@@ -25,12 +25,12 @@ def parse_price(raw):
     text=' '.join(' '.join(row)for row in parser.rows)
     # Exact official model-column order and peak rows; fail rather than guess a
     # changed table, currency, alias, version, or discount schedule.
-    model=next((row for row in parser.rows if row and row[0]=='MODEL'),None)
+    model=next((row for row in parser.rows if row and row[0]=='模型'),None)
     if model is None or len(model)!=3 or not model[1].startswith('deepseek-flash')or model[2]!='deepseek-v4-pro':raise ValueError('OFFICIAL_MODEL_TABLE_CHANGED')
-    version=next((row for row in parser.rows if row and row[0]=='MODEL VERSION'),None)
+    version=next((row for row in parser.rows if row and row[0]=='模型版本'),None)
     if version is None or len(version)!=3 or version[2]!='DeepSeek-V4-Pro-0813':raise ValueError('OFFICIAL_MODEL_VERSION_CHANGED')
-    peaks=[row for row in parser.rows if row and row[0]=='PEAK']
-    if peaks!=[['PEAK','$0.006','$0.044'],['PEAK','$0.3','$1.32'],['PEAK','$1.2','$3.96']]:raise ValueError('OFFICIAL_PEAK_PRICE_CHANGED')
+    peaks=[row for row in parser.rows if row and row[0]=='高峰时段']
+    if peaks!=[['高峰时段','0.04元','0.30元'],['高峰时段','2元','9.0元'],['高峰时段','8元','27.0元']]:raise ValueError('OFFICIAL_PEAK_PRICE_CHANGED')
     return dict(RATES)
 
 def validate_price_evidence(row,identity,now):

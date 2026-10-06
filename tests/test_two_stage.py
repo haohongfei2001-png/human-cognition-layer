@@ -10,7 +10,7 @@ from scripts import run_two_stage_once as r
 from scripts import two_stage_public as public
 from tests.test_v1_deepseek_metered import FakeClient
 
-NOW=datetime(2026,10,6,18,tzinfo=timezone.utc)
+NOW=datetime(2026,10,6,19,tzinfo=timezone.utc)
 class Client(FakeClient):
     timeout=180
     def __init__(self,mutate=None,empty=False):super().__init__();self.mutate=mutate;self.empty=empty
@@ -31,7 +31,7 @@ def exported(result,package):
 
 def stage1_review(evidence):
     case=next(c for c in json.loads((r.ROOT/'cases.json').read_text())if c['id']=='SMOKE1')
-    return dict(schema='hcl-two-stage-phase1-source-review-v1',authorization_ref=r.AUTH,evidence_sha256=r.digest(evidence),source_sha256=case['source_sha256'],final_answer_sha256=evidence['arms'][0]['final_answer_sha256'],reviewer_role='INDEPENDENT_SOURCE_FIRST_AFTER_OUTPUT',criteria=[dict(id=i,passed=True,reason='Synthetic independent-check fixture, not an actual review.')for i in range(1,5)],overall_pass=True)
+    return dict(schema='hcl-two-stage-cny-phase1-source-review-v1',authorization_ref=r.AUTH,evidence_sha256=r.digest(evidence),source_sha256=case['source_sha256'],final_answer_sha256=evidence['arms'][0]['final_answer_sha256'],reviewer_role='INDEPENDENT_SOURCE_FIRST_AFTER_OUTPUT',criteria=[dict(id=i,passed=True,reason='Synthetic independent-check fixture, not an actual review.')for i in range(1,5)],overall_pass=True)
 
 def execute(client,stage=1,**kwargs):
     with ExitStack()as stack,tempfile.TemporaryDirectory()as directory:
@@ -47,11 +47,19 @@ def execute(client,stage=1,**kwargs):
 
 class TwoStageTests(unittest.TestCase):
     def tearDown(self):r.configure(1)
+    def test_public_receipt_currency_schema_and_reference_role_are_explicit(self):
+        result,package=execute(Client())
+        for field,value in [('schema','hcl-two-stage-private-receipt-v1'),('currency','USD'),('usd_reference_only',False)]:
+            with self.subTest(field=field):
+                changed=copy.deepcopy(result);changed[field]=value
+                with self.assertRaises(ValueError):exported(changed,package)
+                changed.pop(field)
+                with self.assertRaises(ValueError):exported(changed,package)
     def test_exact_static_requests_and_new_zero_grants(self):
         for stage,count in((1,1),(2,8)):
             r.configure(stage);package=r.build_package()
             self.assertEqual(len(package['requests']),count)
-            self.assertLessEqual(Decimal(package['maximum_schedule_reservation_usd']),r.CAP)
+            self.assertLessEqual(Decimal(package['maximum_schedule_reservation_cny']),r.CAP_CNY)
             self.assertEqual(json.loads(r.PACKAGE.read_text()),package)
             self.assertEqual(r.expected_grant(package)['authorized_calls'],0)
             with self.assertRaises(ValueError):r.require_grant(package,r.expected_grant(package),NOW)
@@ -61,6 +69,8 @@ class TwoStageTests(unittest.TestCase):
             client=Client();result,package=execute(client,stage)
             self.assertEqual(result['status'],'COMPLETED_ONE_PASS');self.assertEqual(len(client.calls),total)
             self.assertEqual(Decimal(result['reserved_usd']),r.MAX_SCHEDULE)
+            self.assertEqual(Decimal(result['reserved_cny']),r.MAX_SCHEDULE_CNY)
+            self.assertEqual(result['currency'],'CNY')
             self.assertTrue(all(a['status']=='ANSWER_ACCEPTED'for a in result['arms']))
             data=exported(result,package)
             self.assertEqual(data['provider_calls'],total);self.assertTrue(data['usage_complete'])
@@ -103,8 +113,8 @@ class TwoStageTests(unittest.TestCase):
                 if unknown=='transport':client.failure='PRIVATE_ERROR_CANARY'
                 result,package=execute(client,stage);out=exported(result,package)
                 self.assertEqual(len(client.calls),1);self.assertEqual(result['status'],'STOPPED_NO_RETRY')
-                self.assertFalse(out['usage_complete']);self.assertIsNone(out['usage_rated_usd'])
-                self.assertNotIn('PRIVATE_ERROR_CANARY',json.dumps(out));self.assertGreater(Decimal(out['reserved_usd']),0)
+                self.assertFalse(out['usage_complete']);self.assertIsNone(out['usage_rated_cny'])
+                self.assertNotIn('PRIVATE_ERROR_CANARY',json.dumps(out));self.assertGreater(Decimal(out['reserved_cny']),0)
     def test_finish_length_content_is_preserved_before_transport_validation(self):
         def mutate(value,index,request):
             if request['max_tokens']==8192:
