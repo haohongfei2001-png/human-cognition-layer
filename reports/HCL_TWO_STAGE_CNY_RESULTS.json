@@ -1,0 +1,80 @@
+{
+  "aggregate": {
+    "actual_final_answers": 8,
+    "conservative_authorization_reservations_cny": "12.656160",
+    "invoice_cost_cny": null,
+    "maximum_authorized_calls": 14,
+    "maximum_authorized_cny": "14",
+    "peak_usage_estimate_cny": "1.738854",
+    "provider_calls": 13,
+    "remaining_authorized_calls": 0,
+    "remaining_authorized_cny": "0"
+  },
+  "blind_review_count": 1,
+  "limitations": [
+    "Four authored English development cases, one run per arm and one blinded reviewer; no generalization or statistical efficacy claim.",
+    "Same source/question/model/high-thinking/final token cap and explicit-citation acceptance; HCL has additional planning and native work, so this is not compute-matched.",
+    "Planning cap is 16384 for this experiment; unchanged production planning default is 4096.",
+    "Known PAIR1 HCL request-size failure stays in its original denominator slot at zero; no retry, input truncation or replacement.",
+    "Costs are conservative peak-rate token estimates, not an account invoice. Reservation totals are authorization ledger bounds, not provider charges.",
+    "Historical four-case result and missing D01 raw data are unchanged; no historical root-cause conclusion."
+  ],
+  "model": "deepseek-v4-pro",
+  "packet_file_sha256": "86e8ad8128be86f5a16317aabaa60f868ec9bae21e341908abe168c27e89cfbe",
+  "per_case": [
+    {
+      "Base": 10,
+      "HCL": 0,
+      "case_id": "PAIR1",
+      "outcome": "BASE_HIGHER"
+    },
+    {
+      "Base": 10,
+      "HCL": 10,
+      "case_id": "PAIR2",
+      "outcome": "TIE"
+    },
+    {
+      "Base": 10,
+      "HCL": 9,
+      "case_id": "PAIR3",
+      "outcome": "BASE_HIGHER"
+    },
+    {
+      "Base": 10,
+      "HCL": 10,
+      "case_id": "PAIR4",
+      "outcome": "TIE"
+    }
+  ],
+  "runtime_sha256": "62bea96c481fcdde3bfb0af8707796d5afaebf1c9d051ace9bd0c82e236f2442",
+  "schema": "hcl-two-stage-cny-results-v1",
+  "score_lock_file_sha256": "c52e9dd2168a84b1a1dd4807e4909a4a39e258ffb963064bdf498109201b939f",
+  "score_lock_verified_at": "2026-10-06T19:13:08.801764+00:00",
+  "stage1_run_id": "37513945475",
+  "stage1_semantic_criteria_passed": 4,
+  "stage2_run_id": "37515534446",
+  "status": "COMPLETE_CLOSED_NO_RETRY",
+  "summary": {
+    "Base": {
+      "delivered": 4,
+      "maximum_score": 40,
+      "median_arm_seconds": 21.995476294499987,
+      "peak_usage_estimate_cny": "0.334746",
+      "planned_items": 4,
+      "provider_calls": 4,
+      "total_arm_seconds": 96.85040825400002,
+      "total_score": 40
+    },
+    "HCL": {
+      "delivered": 3,
+      "maximum_score": 40,
+      "median_arm_seconds": 73.01345979500002,
+      "peak_usage_estimate_cny": "1.172538",
+      "planned_items": 4,
+      "provider_calls": 7,
+      "total_arm_seconds": 283.11804484800007,
+      "total_score": 29
+    }
+  }
+}

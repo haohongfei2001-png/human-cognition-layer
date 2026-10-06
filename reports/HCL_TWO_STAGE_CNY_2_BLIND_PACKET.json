@@ -1,0 +1,236 @@
+{
+  "instructions": "Use only supplied source, question, fixed criteria and unchanged final answer. Each fact, boundary and traceability criterion is binary 0 or 1. Accept accurate semantic equivalents. Strict delivery failures receive total 0 and content-only NA; do not repair outputs. Rate all eight items with criterion-level reasons before labels are disclosed.",
+  "items": [
+    {
+      "blind_id": "OUTPUT-01",
+      "boundaries": [
+        "Do not infer indifference from non-delivery despite the supplied outage account.",
+        "Do not infer a stable reliability trait from this single episode.",
+        "Preserve the help intention as a report, without claiming it certifies actual private feeling or future conduct."
+      ],
+      "facts": [
+        "Mina expected a reply yesterday.",
+        "Jules is reported to have drafted a reply yesterday.",
+        "A service outage is the stated reason it was not delivered.",
+        "Jules reports still wanting to help; earlier interactions are absent from the source."
+      ],
+      "final_answer_sha256": "c466583b78bff5ac091003aa6d6c3f87b7c0883f98526ce4f5b3a9038d03e5b3",
+      "final_text": "{\n  \"answer\": \"The late reply does not establish that Jules is indifferent or generally unreliable. Reported outcome: Mina expected Jules to reply yesterday; the narrator reports that Jules drafted a reply yesterday, but a service outage prevented its delivery. Stated intention: Jules states, \\\"I still want to help Mina with the proposal.\\\" Unsupported personal conclusions: Any conclusion that Jules is indifferent or generally unreliable is unsupported because the delay is attributed to a service outage, Jules expresses continued willingness to help, and the source explicitly notes there are no earlier interactions to establish a pattern of unreliability.\",\n  \"source_citations\": [\n    {\n      \"source_id\": \"reply-record\",\n      \"version\": 1,\n      \"quote\": \"Mina: I expected Jules to reply yesterday.\",\n      \"start\": 0\n    },\n    {\n      \"source_id\": \"reply-record\",\n      \"version\": 1,\n      \"quote\": \"Narrator: Jules drafted a reply yesterday, but a service outage prevented its delivery.\",\n      \"start\": 43\n    },\n    {\n      \"source_id\": \"reply-record\",\n      \"version\": 1,\n      \"quote\": \"Jules: I still want to help Mina with the proposal.\",\n      \"start\": 131\n    },\n    {\n      \"source_id\": \"reply-record\",\n      \"version\": 1,\n      \"quote\": \"Narrator: This source contains no earlier interactions between Mina and Jules.\",\n      \"start\": 183\n    }\n  ],\n  \"uncertainty\": \"The source does not provide Jules's internal state or any prior interaction history. It cannot support a general trait such as indifference or unreliability; only one incident is reported.\",\n  \"assumptions\": \"The narrator's report of a service outage is taken as accurate. The source's statement that there are no earlier interactions is accepted as evidence of the absence of a reliability baseline.\"\n}",
+      "question": "Does the late reply establish that Jules is indifferent or generally unreliable? Separate the reported outcome, stated intention, and unsupported personal conclusions. Cite the supplied source.",
+      "source": {
+        "source_id": "reply-record",
+        "text": "Mina: I expected Jules to reply yesterday.\nNarrator: Jules drafted a reply yesterday, but a service outage prevented its delivery.\nJules: I still want to help Mina with the proposal.\nNarrator: This source contains no earlier interactions between Mina and Jules.",
+        "version": 1
+      },
+      "strict_delivery_accepted": true,
+      "traceability": [
+        "At least one correctly attributed relevant citation.",
+        "Central factual claims supported by those citations/source.",
+        "No quotation used to imply an unsupported mental/causal claim."
+      ]
+    },
+    {
+      "blind_id": "OUTPUT-02",
+      "boundaries": [
+        "Do not convert wanting to avoid noise into an established intention to avoid the meeting.",
+        "Do not use later knowledge as evidence of action-time knowledge.",
+        "Not knowing the date can support a possible explanation, not a uniquely proven causal story."
+      ],
+      "facts": [
+        "Noa reports missing the review meeting.",
+        "Noa reports not knowing the changed date at the time.",
+        "The team is reported not to have told Noa about the date change.",
+        "The stated avoidance desire concerns renovation noise; learning the date occurs later."
+      ],
+      "final_answer_sha256": "d875430a41ee39183561832b3b73e1e036f689c0c1cdadf600e22c4333e22af9",
+      "final_text": "{\n  \"answer\": \"From the supplied source, the only explanation with direct source support is that Noa missed the review meeting because she did not know it had moved to Thursday and the team had not told her about the date change. Noa explicitly says she did not know at the time and that she missed the meeting; the narrator explicitly says the team had not told her and that she learned the new date only after the missed meeting. This supports a lack-of-communication / lack-of-knowledge explanation. A separate possible but unsupported explanation is Noa's reported desire to avoid the loud renovation in the next room. The source reports that she wanted to avoid the renovation, but it does not connect that desire to the missed meeting or say she knew the meeting was Thursday and chose not to attend. Therefore this remains merely possible, not established as the reason. What cannot be concluded: the source does not establish Noa's actual private intention at the time of the missed meeting, including whether she intentionally missed the meeting, whether she intentionally avoided the meeting because of the renovation, or that any single motive was the actual cause. Because she reports not knowing the date and the narrator reports she learned it after the missed meeting, an inference that she deliberately skipped to avoid renovation would go beyond the source.\",\n  \"source_citations\": [\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"Noa: At the time, I did not know the review meeting had moved to Thursday.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"Noa: I missed the review meeting.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"Noa: I wanted to avoid the loud renovation in the next room.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"Narrator: The team had not told Noa about the date change.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"Narrator: After the missed meeting, Noa learned the new date.\"\n    }\n  ],\n  \"uncertainty\": \"The source reports statements from Noa and the narrator, but it does not explicitly state a causal explanation for why Noa missed the meeting. The operational why-query returned an insufficiency, and no checked belief or communication result is available to certify private intention or causal connection. Alternative explanations, including the renovation-avoidance motive and other unknown causes, remain open.\",\n  \"assumptions\": \"I treat Noa's and the narrator's statements as accurate source reports for source-based inference. I infer that the reported lack of knowledge/notification is offered as an explanation, but the source does not explicitly state the causal link, so that causal connection is an assumption. I assume the reported wish to avoid the loud renovation is a possible motive, not an established reason for missing the meeting. I do not assume access to private mental states beyond what is quoted.\"\n}",
+      "question": "What explanations for the missed meeting are supported or merely possible, and what cannot be concluded about Noa's intention at the time? Cite the supplied source.",
+      "source": {
+        "source_id": "review-record",
+        "text": "Noa: At the time, I did not know the review meeting had moved to Thursday.\nNoa: I missed the review meeting.\nNoa: I wanted to avoid the loud renovation in the next room.\nNarrator: The team had not told Noa about the date change.\nNarrator: After the missed meeting, Noa learned the new date.",
+        "version": 1
+      },
+      "strict_delivery_accepted": true,
+      "traceability": [
+        "At least one correctly attributed relevant citation.",
+        "Central factual claims supported by those citations/source.",
+        "No quotation used to imply an unsupported mental/causal claim."
+      ]
+    },
+    {
+      "blind_id": "OUTPUT-03",
+      "boundaries": [
+        "Do not certify Vale's current belief or knowledge from an earlier statement.",
+        "Do not equate a reported belief with independently established private knowledge.",
+        "Absence of a described message is not proof that no information arrived by any route."
+      ],
+      "facts": [
+        "The narrated current location is the south drawer.",
+        "Vale explicitly reported a north-drawer belief before leaving.",
+        "Inez explicitly reports a current south-drawer belief.",
+        "No later communication to Vale is described."
+      ],
+      "final_answer_sha256": "92319d73b2d34c1965d0d38305d7f470183556bc12368c1f2d656f513f44c651",
+      "final_text": "{\n  \"answer\": \"The source reports that Vale, before leaving, believed the blue folder was in the north drawer. It then reports that Inez moved the folder to the south drawer while Vale was away, and that Inez stated she believed the folder was now in the south drawer. After the move, the source establishes Inez's current reported belief that the folder is in the south drawer (consistent with the narrator's report of the move), but it does not establish Vale's knowledge or belief after the move. Vale's north-drawer statement is only an earlier pre-move report; because no later communication to Vale is described, the source provides no current mental state for Vale.\",\n  \"source_citations\": [\n    {\n      \"source_id\": \"folder-record\",\n      \"version\": 1,\n      \"quote\": \"Vale: Before leaving, I believe the blue folder is in the north drawer.\\nNarrator: Vale left the room.\\nNarrator: Inez then moved the folder to the south drawer while Vale was away.\\nInez: I believe the folder is now in the south drawer.\\nNarrator: No later communication to Vale is described.\"\n    }\n  ],\n  \"uncertainty\": \"The source does not describe whether Vale learned or inferred the new location, so Vale's post-move knowledge or belief is not established. It is possible that Vale's earlier belief remained unchanged or that Vale later guessed or learned independently, but the source does not say. Inez's post-move belief is explicitly reported as 'now in the south drawer,' so that part is established by her statement, assuming the statement is sincere.\",\n  \"assumptions\": \"The answer treats the narrator's statements as reports of the described move and the absence of later communication, and treats the quoted speech as reporting each person's stated belief at the time it was uttered. It does not assume any unstated change in Vale's belief.\"\n}",
+      "question": "What location does the source report, and what does it establish about Vale and Inez knowing or believing the location after the move? Distinguish earlier reports from current mental states. Cite the supplied source.",
+      "source": {
+        "source_id": "folder-record",
+        "text": "Vale: Before leaving, I believe the blue folder is in the north drawer.\nNarrator: Vale left the room.\nNarrator: Inez then moved the folder to the south drawer while Vale was away.\nInez: I believe the folder is now in the south drawer.\nNarrator: No later communication to Vale is described.",
+        "version": 1
+      },
+      "strict_delivery_accepted": true,
+      "traceability": [
+        "At least one correctly attributed relevant citation.",
+        "Central factual claims supported by those citations/source.",
+        "No quotation used to imply an unsupported mental/causal claim."
+      ]
+    },
+    {
+      "blind_id": "OUTPUT-04",
+      "boundaries": [
+        "Do not convert wanting to avoid noise into an established intention to avoid the meeting.",
+        "Do not use later knowledge as evidence of action-time knowledge.",
+        "Not knowing the date can support a possible explanation, not a uniquely proven causal story."
+      ],
+      "facts": [
+        "Noa reports missing the review meeting.",
+        "Noa reports not knowing the changed date at the time.",
+        "The team is reported not to have told Noa about the date change.",
+        "The stated avoidance desire concerns renovation noise; learning the date occurs later."
+      ],
+      "final_answer_sha256": "b79bde281875a6f567f659079fc716e69bcce8d22338042276c9870be635157a",
+      "final_text": "{\n  \"answer\": \"Supported: Noa was unaware of the date change. She states she did not know the review meeting had moved to Thursday; the narrator states the team had not told her and that she learned the new date after the missed meeting. This supports lack of notice as an explanation for the missed meeting. Merely possible: Noa wanted to avoid the loud renovation next door. The source reports this desire, but it does not connect it to the missed meeting as a cause, so its causal role is only possible. Cannot conclude: that at the time Noa intended to miss the meeting, that she knew the new date and deliberately skipped, or that her desire to avoid noise caused or motivated her absence.\",\n  \"source_citations\": [\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"At the time, I did not know the review meeting had moved to Thursday.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"I missed the review meeting.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"I wanted to avoid the loud renovation in the next room.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"The team had not told Noa about the date change.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"After the missed meeting, Noa learned the new date.\"\n    }\n  ],\n  \"uncertainty\": \"The source does not explicitly state why Noa missed the meeting; the connection between her lack of knowledge of the date change and the missed meeting is an ordinary inference, not an explicit causal statement. It is also unclear whether her reported wish to avoid the loud renovation applied to the meeting time or location or was an unrelated preference, and whether it played any causal role.\",\n  \"assumptions\": \"The quoted Noa and narrator statements are treated as reports about the same review meeting and are taken at face value. The inference that the date-change unawareness caused the missed meeting assumes that a person who did not know the meeting had moved would miss it for that reason. The possible noise-avoidance explanation assumes the renovation was relevant to the meeting context, which the source does not specify.\"\n}",
+      "question": "What explanations for the missed meeting are supported or merely possible, and what cannot be concluded about Noa's intention at the time? Cite the supplied source.",
+      "source": {
+        "source_id": "review-record",
+        "text": "Noa: At the time, I did not know the review meeting had moved to Thursday.\nNoa: I missed the review meeting.\nNoa: I wanted to avoid the loud renovation in the next room.\nNarrator: The team had not told Noa about the date change.\nNarrator: After the missed meeting, Noa learned the new date.",
+        "version": 1
+      },
+      "strict_delivery_accepted": true,
+      "traceability": [
+        "At least one correctly attributed relevant citation.",
+        "Central factual claims supported by those citations/source.",
+        "No quotation used to imply an unsupported mental/causal claim."
+      ]
+    },
+    {
+      "blind_id": "OUTPUT-05",
+      "boundaries": [
+        "Removing one support does not prove the opposite conclusion.",
+        "Do not remove the independent inspection support without a premise doing so.",
+        "Do not turn a conditional source argument into an independently verified real-world operational decision."
+      ],
+      "facts": [
+        "The source gives two stated supports for the same wait conclusion.",
+        "The warning-dependent support is removed under the proposed condition.",
+        "The incomplete-inspection support remains under the stated condition.",
+        "The original source is not rewritten by the hypothetical question."
+      ],
+      "final_answer_sha256": "aae28ada0897feed97f3e9378055a1dc918fada146cbfd3303f1e78a9656e7b3",
+      "final_text": "{\n  \"answer\": \"Under the counterfactual, the stated support “the storm warning is active” would be removed, because Toma’s first stated reason for waiting explicitly depends on that premise. The stated support “the engine inspection is incomplete” would remain, because the counterfactual keeps it unchanged and Toma gives it as a second stated reason for the same conclusion. The opposite conclusion—that the ferry should not wait—does not follow from the remaining stated support. In the supplied source, Toma concludes the ferry should wait from the incomplete engine inspection, so the remaining support still points toward the same conclusion, though the source reports the reasoning rather than providing a formal proof.\",\n  \"source_citations\": [\n    {\n      \"source_id\": \"harbor-argument\",\n      \"version\": 1,\n      \"quote\": \"Narrator: In harbor, the storm warning is active.\",\n      \"start\": 0\n    },\n    {\n      \"source_id\": \"harbor-argument\",\n      \"version\": 1,\n      \"quote\": \"Toma: In harbor, I conclude the ferry should wait because the storm warning is active.\",\n      \"start\": 50\n    },\n    {\n      \"source_id\": \"harbor-argument\",\n      \"version\": 1,\n      \"quote\": \"Narrator: In harbor, the engine inspection is incomplete.\",\n      \"start\": 137\n    },\n    {\n      \"source_id\": \"harbor-argument\",\n      \"version\": 1,\n      \"quote\": \"Toma: In harbor, I conclude the ferry should wait because the engine inspection is incomplete.\",\n      \"start\": 195\n    }\n  ],\n  \"uncertainty\": \"The source gives Toma’s stated reasons but does not provide a formal logical derivation or establish world truth. The removal/remaining classification is an inference from the stated premise mapping. Strict logical entailment to either conclusion is not certified by the source.\",\n  \"assumptions\": \"This assumes “opposite conclusion” means the ferry should not wait, and that counterfactually setting the storm warning not active removes only that stated support while the engine-inspection premise remains as reported.\"\n}",
+      "question": "Within this fictional argument only, suppose the storm warning were not active but the engine inspection remained incomplete. Which stated support would be removed, which would remain, and does the opposite conclusion follow? Cite the supplied source.",
+      "source": {
+        "source_id": "harbor-argument",
+        "text": "Narrator: In harbor, the storm warning is active.\nToma: In harbor, I conclude the ferry should wait because the storm warning is active.\nNarrator: In harbor, the engine inspection is incomplete.\nToma: In harbor, I conclude the ferry should wait because the engine inspection is incomplete.",
+        "version": 1
+      },
+      "strict_delivery_accepted": true,
+      "traceability": [
+        "At least one correctly attributed relevant citation.",
+        "Central factual claims supported by those citations/source.",
+        "No quotation used to imply an unsupported mental/causal claim."
+      ]
+    },
+    {
+      "blind_id": "OUTPUT-06",
+      "boundaries": [
+        "Do not certify Vale's current belief or knowledge from an earlier statement.",
+        "Do not equate a reported belief with independently established private knowledge.",
+        "Absence of a described message is not proof that no information arrived by any route."
+      ],
+      "facts": [
+        "The narrated current location is the south drawer.",
+        "Vale explicitly reported a north-drawer belief before leaving.",
+        "Inez explicitly reports a current south-drawer belief.",
+        "No later communication to Vale is described."
+      ],
+      "final_answer_sha256": null,
+      "final_text": null,
+      "question": "What location does the source report, and what does it establish about Vale and Inez knowing or believing the location after the move? Distinguish earlier reports from current mental states. Cite the supplied source.",
+      "source": {
+        "source_id": "folder-record",
+        "text": "Vale: Before leaving, I believe the blue folder is in the north drawer.\nNarrator: Vale left the room.\nNarrator: Inez then moved the folder to the south drawer while Vale was away.\nInez: I believe the folder is now in the south drawer.\nNarrator: No later communication to Vale is described.",
+        "version": 1
+      },
+      "strict_delivery_accepted": false,
+      "traceability": [
+        "At least one correctly attributed relevant citation.",
+        "Central factual claims supported by those citations/source.",
+        "No quotation used to imply an unsupported mental/causal claim."
+      ]
+    },
+    {
+      "blind_id": "OUTPUT-07",
+      "boundaries": [
+        "Removing one support does not prove the opposite conclusion.",
+        "Do not remove the independent inspection support without a premise doing so.",
+        "Do not turn a conditional source argument into an independently verified real-world operational decision."
+      ],
+      "facts": [
+        "The source gives two stated supports for the same wait conclusion.",
+        "The warning-dependent support is removed under the proposed condition.",
+        "The incomplete-inspection support remains under the stated condition.",
+        "The original source is not rewritten by the hypothetical question."
+      ],
+      "final_answer_sha256": "bed67181e1de343a3b7cd11c94e4a4a8b7374aaef30543bfdd665d184c85c341",
+      "final_text": "{\n  \"answer\": \"The stated support that would be removed is Toma's reason that the ferry should wait because the storm warning is active. The stated support that would remain is Toma's reason that the ferry should wait because the engine inspection is incomplete. The opposite conclusion (that the ferry should not wait) does not follow: the remaining stated support still supports waiting, and the source supplies no stated support for the opposite conclusion.\",\n  \"source_citations\": [\n    {\n      \"source_id\": \"harbor-argument\",\n      \"version\": 1,\n      \"quote\": \"Narrator: In harbor, the storm warning is active.\\nToma: In harbor, I conclude the ferry should wait because the storm warning is active.\\nNarrator: In harbor, the engine inspection is incomplete.\\nToma: In harbor, I conclude the ferry should wait because the engine inspection is incomplete.\",\n      \"start\": 0\n    }\n  ],\n  \"uncertainty\": \"The source does not state a rule for what follows when the storm warning is inactive; the counterfactual is supplied by the question. I treat 'opposite conclusion' as the ferry should not wait, but the source itself only gives reasons for waiting and gives no explicit inferential rule for negating the conclusion when one reason is removed.\",\n  \"assumptions\": \"I assume the two stated supports are independent, that removing the storm-warning support does not remove or weaken the engine-inspection support, and that the counterfactual supposition leaves the engine-inspection statement intact. I also assume the question is asking only about the support explicitly stated in the supplied source.\"\n}",
+      "question": "Within this fictional argument only, suppose the storm warning were not active but the engine inspection remained incomplete. Which stated support would be removed, which would remain, and does the opposite conclusion follow? Cite the supplied source.",
+      "source": {
+        "source_id": "harbor-argument",
+        "text": "Narrator: In harbor, the storm warning is active.\nToma: In harbor, I conclude the ferry should wait because the storm warning is active.\nNarrator: In harbor, the engine inspection is incomplete.\nToma: In harbor, I conclude the ferry should wait because the engine inspection is incomplete.",
+        "version": 1
+      },
+      "strict_delivery_accepted": true,
+      "traceability": [
+        "At least one correctly attributed relevant citation.",
+        "Central factual claims supported by those citations/source.",
+        "No quotation used to imply an unsupported mental/causal claim."
+      ]
+    },
+    {
+      "blind_id": "OUTPUT-08",
+      "boundaries": [
+        "Do not infer indifference from non-delivery despite the supplied outage account.",
+        "Do not infer a stable reliability trait from this single episode.",
+        "Preserve the help intention as a report, without claiming it certifies actual private feeling or future conduct."
+      ],
+      "facts": [
+        "Mina expected a reply yesterday.",
+        "Jules is reported to have drafted a reply yesterday.",
+        "A service outage is the stated reason it was not delivered.",
+        "Jules reports still wanting to help; earlier interactions are absent from the source."
+      ],
+      "final_answer_sha256": "f7dc1f0b244a74934deced6cc1d1ba61ce966da8c480ca6511c9cbe2c14c9dfd",
+      "final_text": "{\n  \"answer\": \"No. The late reply does not establish that Jules is indifferent or generally unreliable. Reported outcome: the source reports that Jules drafted a reply yesterday, but a service outage prevented its delivery. Stated intention: Jules says, \\\"I still want to help Mina with the proposal.\\\" Unsupported personal conclusions: the source contains no statement or mental expression that Jules is indifferent or generally unreliable, and the narrator explicitly says the source contains no earlier interactions between Mina and Jules, so the late reply supports no such trait conclusions.\",\n  \"source_citations\": [\n    {\n      \"source_id\": \"reply-record\",\n      \"version\": 1,\n      \"quote\": \"Jules drafted a reply yesterday, but a service outage prevented its delivery.\"\n    },\n    {\n      \"source_id\": \"reply-record\",\n      \"version\": 1,\n      \"quote\": \"I still want to help Mina with the proposal.\"\n    },\n    {\n      \"source_id\": \"reply-record\",\n      \"version\": 1,\n      \"quote\": \"This source contains no earlier interactions between Mina and Jules.\"\n    }\n  ],\n  \"uncertainty\": \"The source wording is clear about the reported delivery failure and stated intention, but no source-reported evidence bears on Jules's private mental state or general reliability. Any inference of indifference or unreliability would go beyond the supplied source.\",\n  \"assumptions\": \"I assume the supplied source is the complete relevant record and that no additional context is available to support character conclusions. I treat the narrator's report of the outage as the stated cause of the delivery delay, not as evidence about Jules's disposition.\"\n}",
+      "question": "Does the late reply establish that Jules is indifferent or generally unreliable? Separate the reported outcome, stated intention, and unsupported personal conclusions. Cite the supplied source.",
+      "source": {
+        "source_id": "reply-record",
+        "text": "Mina: I expected Jules to reply yesterday.\nNarrator: Jules drafted a reply yesterday, but a service outage prevented its delivery.\nJules: I still want to help Mina with the proposal.\nNarrator: This source contains no earlier interactions between Mina and Jules.",
+        "version": 1
+      },
+      "strict_delivery_accepted": true,
+      "traceability": [
+        "At least one correctly attributed relevant citation.",
+        "Central factual claims supported by those citations/source.",
+        "No quotation used to imply an unsupported mental/causal claim."
+      ]
+    }
+  ],
+  "rubric": {
+    "content": "Four predeclared facts, each1 point; accurate semantically equivalent answers accepted.",
+    "delivery_gate": "Exact allowed fields and types, nonblank answer, at least one explicit citation, original source audit including versions/location. Failure=0 end-to-end, content-only=NA; never rewrite to satisfy gate.",
+    "inference": "Three predeclared boundaries, each1 point.",
+    "traceability": "Three binary points: at least one correctly attributed relevant citation; central factual claims supported by those citations/source; no quotation used to imply an unsupported mental/causal claim."
+  },
+  "schema": "hcl-two-stage-blind-packet-v1"
+}

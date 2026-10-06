@@ -1,0 +1,516 @@
+{
+  "schema": "hcl-two-stage-blind-scores-v1",
+  "packet_sha256": "86e8ad8128be86f5a16317aabaa60f868ec9bae21e341908abe168c27e89cfbe",
+  "reviewer_role": "INDEPENDENT_SOURCE_FIRST_BLIND",
+  "ratings": [
+    {
+      "blind_id": "OUTPUT-01",
+      "final_answer_sha256": "c466583b78bff5ac091003aa6d6c3f87b7c0883f98526ce4f5b3a9038d03e5b3",
+      "delivery_accepted": true,
+      "facts": [
+        {
+          "criterion": "Mina expected a reply yesterday.",
+          "score": 1,
+          "reason": "The answer explicitly says Mina expected a reply yesterday."
+        },
+        {
+          "criterion": "Jules is reported to have drafted a reply yesterday.",
+          "score": 1,
+          "reason": "The answer attributes the drafted reply yesterday to the narrator."
+        },
+        {
+          "criterion": "A service outage is the stated reason it was not delivered.",
+          "score": 1,
+          "reason": "The answer identifies the service outage as the reported delivery obstacle."
+        },
+        {
+          "criterion": "Jules reports still wanting to help; earlier interactions are absent from the source.",
+          "score": 1,
+          "reason": "It quotes Jules wanting to help and states that no earlier interactions are supplied."
+        }
+      ],
+      "boundaries": [
+        {
+          "criterion": "Do not infer indifference from non-delivery despite the supplied outage account.",
+          "score": 1,
+          "reason": "It rejects indifference as an established conclusion and retains the outage account."
+        },
+        {
+          "criterion": "Do not infer a stable reliability trait from this single episode.",
+          "score": 1,
+          "reason": "It rejects general unreliability and notes the lack of an earlier pattern."
+        },
+        {
+          "criterion": "Preserve the help intention as a report, without claiming it certifies actual private feeling or future conduct.",
+          "score": 1,
+          "reason": "The intention is attributed to Jules, and uncertainty says the internal state is not supplied."
+        }
+      ],
+      "traceability": [
+        {
+          "criterion": "At least one correctly attributed relevant citation.",
+          "score": 1,
+          "reason": "The Mina quotation is correctly attributed to reply-record version 1; the other relevant quotations also match the source text."
+        },
+        {
+          "criterion": "Central factual claims supported by those citations/source.",
+          "score": 1,
+          "reason": "The expected reply, draft, outage, expressed intention, and absent history are all supported by the source."
+        },
+        {
+          "criterion": "No quotation used to imply an unsupported mental/causal claim.",
+          "score": 1,
+          "reason": "The quotations distinguish reported events and intention without certifying a disposition or future conduct."
+        }
+      ],
+      "total": 10,
+      "content_only_total": 10
+    },
+    {
+      "blind_id": "OUTPUT-02",
+      "final_answer_sha256": "d875430a41ee39183561832b3b73e1e036f689c0c1cdadf600e22c4333e22af9",
+      "delivery_accepted": true,
+      "facts": [
+        {
+          "criterion": "Noa reports missing the review meeting.",
+          "score": 1,
+          "reason": "It states and quotes Noa reporting that she missed the review meeting."
+        },
+        {
+          "criterion": "Noa reports not knowing the changed date at the time.",
+          "score": 1,
+          "reason": "It states and quotes Noa reporting that she did not know the changed date at the time."
+        },
+        {
+          "criterion": "The team is reported not to have told Noa about the date change.",
+          "score": 1,
+          "reason": "It attributes the absence of notification to the narrator and quotes that statement."
+        },
+        {
+          "criterion": "The stated avoidance desire concerns renovation noise; learning the date occurs later.",
+          "score": 1,
+          "reason": "It distinguishes the renovation-noise desire from meeting avoidance and places learning the date after the meeting."
+        }
+      ],
+      "boundaries": [
+        {
+          "criterion": "Do not convert wanting to avoid noise into an established intention to avoid the meeting.",
+          "score": 1,
+          "reason": "It explicitly says the noise-avoidance desire does not establish deliberate meeting avoidance."
+        },
+        {
+          "criterion": "Do not use later knowledge as evidence of action-time knowledge.",
+          "score": 1,
+          "reason": "It preserves the later learning time and rejects an inference that Noa knew the date when absent."
+        },
+        {
+          "criterion": "Not knowing the date can support a possible explanation, not a uniquely proven causal story.",
+          "score": 1,
+          "reason": "Despite the opening because wording, the complete response explicitly labels the causal link an assumption and says no single actual cause is established."
+        }
+      ],
+      "traceability": [
+        {
+          "criterion": "At least one correctly attributed relevant citation.",
+          "score": 1,
+          "reason": "All five relevant quotations are correctly attributed to review-record version 1 and match the source."
+        },
+        {
+          "criterion": "Central factual claims supported by those citations/source.",
+          "score": 1,
+          "reason": "The central event, knowledge, notification, desire, and timing claims are directly supported by the source."
+        },
+        {
+          "criterion": "No quotation used to imply an unsupported mental/causal claim.",
+          "score": 1,
+          "reason": "The response uses the quoted facts for a candidate explanation while explicitly qualifying the causal connection as unproven."
+        }
+      ],
+      "total": 10,
+      "content_only_total": 10
+    },
+    {
+      "blind_id": "OUTPUT-03",
+      "final_answer_sha256": "92319d73b2d34c1965d0d38305d7f470183556bc12368c1f2d656f513f44c651",
+      "delivery_accepted": true,
+      "facts": [
+        {
+          "criterion": "The narrated current location is the south drawer.",
+          "score": 1,
+          "reason": "It reports the narrated move to the south drawer and identifies that location as consistent with the current report."
+        },
+        {
+          "criterion": "Vale explicitly reported a north-drawer belief before leaving.",
+          "score": 1,
+          "reason": "It identifies Vale’s north-drawer statement as an earlier belief report before leaving."
+        },
+        {
+          "criterion": "Inez explicitly reports a current south-drawer belief.",
+          "score": 1,
+          "reason": "It explicitly identifies Inez’s current reported south-drawer belief."
+        },
+        {
+          "criterion": "No later communication to Vale is described.",
+          "score": 1,
+          "reason": "It says no later communication to Vale is described."
+        }
+      ],
+      "boundaries": [
+        {
+          "criterion": "Do not certify Vale's current belief or knowledge from an earlier statement.",
+          "score": 1,
+          "reason": "It explicitly says Vale’s earlier report does not establish the post-move belief or knowledge."
+        },
+        {
+          "criterion": "Do not equate a reported belief with independently established private knowledge.",
+          "score": 1,
+          "reason": "It describes Inez’s belief as reported and does not certify independently established private knowledge."
+        },
+        {
+          "criterion": "Absence of a described message is not proof that no information arrived by any route.",
+          "score": 1,
+          "reason": "It explicitly allows that Vale could have guessed or learned independently despite the missing communication account."
+        }
+      ],
+      "traceability": [
+        {
+          "criterion": "At least one correctly attributed relevant citation.",
+          "score": 1,
+          "reason": "The complete source quotation is correctly attributed to folder-record version 1."
+        },
+        {
+          "criterion": "Central factual claims supported by those citations/source.",
+          "score": 1,
+          "reason": "The locations, movement, belief reports, and missing described communication all match the source."
+        },
+        {
+          "criterion": "No quotation used to imply an unsupported mental/causal claim.",
+          "score": 1,
+          "reason": "The quotation is used to separate reported beliefs from an unknown current mental state."
+        }
+      ],
+      "total": 10,
+      "content_only_total": 10
+    },
+    {
+      "blind_id": "OUTPUT-04",
+      "final_answer_sha256": "b79bde281875a6f567f659079fc716e69bcce8d22338042276c9870be635157a",
+      "delivery_accepted": true,
+      "facts": [
+        {
+          "criterion": "Noa reports missing the review meeting.",
+          "score": 1,
+          "reason": "It discusses Noa’s missed meeting and includes the quotation in which she reports missing it."
+        },
+        {
+          "criterion": "Noa reports not knowing the changed date at the time.",
+          "score": 1,
+          "reason": "It explicitly states that Noa reported not knowing the meeting had moved to Thursday."
+        },
+        {
+          "criterion": "The team is reported not to have told Noa about the date change.",
+          "score": 1,
+          "reason": "It says the narrator reports the team had not told Noa."
+        },
+        {
+          "criterion": "The stated avoidance desire concerns renovation noise; learning the date occurs later.",
+          "score": 1,
+          "reason": "It preserves renovation noise as the object of the desire and learning the date as a later event."
+        }
+      ],
+      "boundaries": [
+        {
+          "criterion": "Do not convert wanting to avoid noise into an established intention to avoid the meeting.",
+          "score": 1,
+          "reason": "It explicitly rejects concluding that the noise desire caused or motivated the absence."
+        },
+        {
+          "criterion": "Do not use later knowledge as evidence of action-time knowledge.",
+          "score": 1,
+          "reason": "It distinguishes learning afterward from knowing the new date when the meeting was missed."
+        },
+        {
+          "criterion": "Not knowing the date can support a possible explanation, not a uniquely proven causal story.",
+          "score": 1,
+          "reason": "It labels the lack-of-notice explanation an inference and explicitly states that the source does not say why the meeting was missed."
+        }
+      ],
+      "traceability": [
+        {
+          "criterion": "At least one correctly attributed relevant citation.",
+          "score": 1,
+          "reason": "The relevant quotations are exact source excerpts attributed to review-record version 1."
+        },
+        {
+          "criterion": "Central factual claims supported by those citations/source.",
+          "score": 1,
+          "reason": "The central reported facts are supported by the cited source excerpts."
+        },
+        {
+          "criterion": "No quotation used to imply an unsupported mental/causal claim.",
+          "score": 1,
+          "reason": "It treats the causal link as an explicit assumption rather than something established by the quotations."
+        }
+      ],
+      "total": 10,
+      "content_only_total": 10
+    },
+    {
+      "blind_id": "OUTPUT-05",
+      "final_answer_sha256": "aae28ada0897feed97f3e9378055a1dc918fada146cbfd3303f1e78a9656e7b3",
+      "delivery_accepted": true,
+      "facts": [
+        {
+          "criterion": "The source gives two stated supports for the same wait conclusion.",
+          "score": 1,
+          "reason": "It identifies the active warning and incomplete inspection as two stated reasons for waiting."
+        },
+        {
+          "criterion": "The warning-dependent support is removed under the proposed condition.",
+          "score": 1,
+          "reason": "It says the warning-dependent support would be removed under the counterfactual."
+        },
+        {
+          "criterion": "The incomplete-inspection support remains under the stated condition.",
+          "score": 1,
+          "reason": "It says the incomplete-inspection support remains because that premise is unchanged."
+        },
+        {
+          "criterion": "The original source is not rewritten by the hypothetical question.",
+          "score": 1,
+          "reason": "It distinguishes the counterfactual change from the original supplied source and preserves the original quotations."
+        }
+      ],
+      "boundaries": [
+        {
+          "criterion": "Removing one support does not prove the opposite conclusion.",
+          "score": 1,
+          "reason": "It explicitly says the opposite conclusion does not follow from removal of the warning support."
+        },
+        {
+          "criterion": "Do not remove the independent inspection support without a premise doing so.",
+          "score": 1,
+          "reason": "It retains the independent inspection reason under the stated condition."
+        },
+        {
+          "criterion": "Do not turn a conditional source argument into an independently verified real-world operational decision.",
+          "score": 1,
+          "reason": "It limits the result to Toma’s reported reasoning and explicitly declines to establish world truth."
+        }
+      ],
+      "traceability": [
+        {
+          "criterion": "At least one correctly attributed relevant citation.",
+          "score": 1,
+          "reason": "The first quotation is correctly located and attributed to harbor-argument version 1; the quoted statements match the source."
+        },
+        {
+          "criterion": "Central factual claims supported by those citations/source.",
+          "score": 1,
+          "reason": "Both stated supports and their shared conclusion are directly supported by the source."
+        },
+        {
+          "criterion": "No quotation used to imply an unsupported mental/causal claim.",
+          "score": 1,
+          "reason": "The quotations are used to analyze stated reasons, without claiming a verified operational decision or private state."
+        }
+      ],
+      "total": 10,
+      "content_only_total": 10
+    },
+    {
+      "blind_id": "OUTPUT-06",
+      "final_answer_sha256": null,
+      "delivery_accepted": false,
+      "facts": [
+        {
+          "criterion": "The narrated current location is the south drawer.",
+          "score": null,
+          "reason": "No delivered final answer"
+        },
+        {
+          "criterion": "Vale explicitly reported a north-drawer belief before leaving.",
+          "score": null,
+          "reason": "No delivered final answer"
+        },
+        {
+          "criterion": "Inez explicitly reports a current south-drawer belief.",
+          "score": null,
+          "reason": "No delivered final answer"
+        },
+        {
+          "criterion": "No later communication to Vale is described.",
+          "score": null,
+          "reason": "No delivered final answer"
+        }
+      ],
+      "boundaries": [
+        {
+          "criterion": "Do not certify Vale's current belief or knowledge from an earlier statement.",
+          "score": null,
+          "reason": "No delivered final answer"
+        },
+        {
+          "criterion": "Do not equate a reported belief with independently established private knowledge.",
+          "score": null,
+          "reason": "No delivered final answer"
+        },
+        {
+          "criterion": "Absence of a described message is not proof that no information arrived by any route.",
+          "score": null,
+          "reason": "No delivered final answer"
+        }
+      ],
+      "traceability": [
+        {
+          "criterion": "At least one correctly attributed relevant citation.",
+          "score": null,
+          "reason": "No delivered final answer"
+        },
+        {
+          "criterion": "Central factual claims supported by those citations/source.",
+          "score": null,
+          "reason": "No delivered final answer"
+        },
+        {
+          "criterion": "No quotation used to imply an unsupported mental/causal claim.",
+          "score": null,
+          "reason": "No delivered final answer"
+        }
+      ],
+      "total": 0,
+      "content_only_total": "NA"
+    },
+    {
+      "blind_id": "OUTPUT-07",
+      "final_answer_sha256": "bed67181e1de343a3b7cd11c94e4a4a8b7374aaef30543bfdd665d184c85c341",
+      "delivery_accepted": true,
+      "facts": [
+        {
+          "criterion": "The source gives two stated supports for the same wait conclusion.",
+          "score": 1,
+          "reason": "It identifies Toma’s warning reason and inspection reason as supports for the same wait conclusion."
+        },
+        {
+          "criterion": "The warning-dependent support is removed under the proposed condition.",
+          "score": 1,
+          "reason": "It says the warning-based reason would be removed."
+        },
+        {
+          "criterion": "The incomplete-inspection support remains under the stated condition.",
+          "score": 1,
+          "reason": "It says the incomplete-inspection reason would remain."
+        },
+        {
+          "criterion": "The original source is not rewritten by the hypothetical question.",
+          "score": 1,
+          "reason": "It explicitly says the counterfactual comes from the question and keeps the original source quotation unchanged."
+        }
+      ],
+      "boundaries": [
+        {
+          "criterion": "Removing one support does not prove the opposite conclusion.",
+          "score": 1,
+          "reason": "It explicitly rejects inferring that the ferry should not wait."
+        },
+        {
+          "criterion": "Do not remove the independent inspection support without a premise doing so.",
+          "score": 1,
+          "reason": "It preserves the inspection support and states that removing the warning support does not remove it."
+        },
+        {
+          "criterion": "Do not turn a conditional source argument into an independently verified real-world operational decision.",
+          "score": 1,
+          "reason": "It restricts the analysis to the supplied source’s stated support and makes no real-world operational claim."
+        }
+      ],
+      "traceability": [
+        {
+          "criterion": "At least one correctly attributed relevant citation.",
+          "score": 1,
+          "reason": "The complete quotation is correctly attributed to harbor-argument version 1 at start 0."
+        },
+        {
+          "criterion": "Central factual claims supported by those citations/source.",
+          "score": 1,
+          "reason": "The source directly supports the two stated reasons and the shared waiting conclusion."
+        },
+        {
+          "criterion": "No quotation used to imply an unsupported mental/causal claim.",
+          "score": 1,
+          "reason": "It uses the quotation to analyze support relationships, without claiming additional mental or causal facts."
+        }
+      ],
+      "total": 10,
+      "content_only_total": 10
+    },
+    {
+      "blind_id": "OUTPUT-08",
+      "final_answer_sha256": "f7dc1f0b244a74934deced6cc1d1ba61ce966da8c480ca6511c9cbe2c14c9dfd",
+      "delivery_accepted": true,
+      "facts": [
+        {
+          "criterion": "Mina expected a reply yesterday.",
+          "score": 0,
+          "reason": "It does not state or quote Mina’s expectation of a reply yesterday; referring to a late reply does not supply that timing fact."
+        },
+        {
+          "criterion": "Jules is reported to have drafted a reply yesterday.",
+          "score": 1,
+          "reason": "It explicitly reports that Jules drafted a reply yesterday."
+        },
+        {
+          "criterion": "A service outage is the stated reason it was not delivered.",
+          "score": 1,
+          "reason": "It identifies the service outage as the reported reason delivery failed."
+        },
+        {
+          "criterion": "Jules reports still wanting to help; earlier interactions are absent from the source.",
+          "score": 1,
+          "reason": "It quotes Jules’s continued wish to help and states that the source contains no earlier interactions."
+        }
+      ],
+      "boundaries": [
+        {
+          "criterion": "Do not infer indifference from non-delivery despite the supplied outage account.",
+          "score": 1,
+          "reason": "It rejects indifference as established and retains the outage explanation."
+        },
+        {
+          "criterion": "Do not infer a stable reliability trait from this single episode.",
+          "score": 1,
+          "reason": "It rejects a general unreliability conclusion from the episode and absent history."
+        },
+        {
+          "criterion": "Preserve the help intention as a report, without claiming it certifies actual private feeling or future conduct.",
+          "score": 1,
+          "reason": "It attributes the intention to Jules’s statement and does not claim actual private feeling or future conduct."
+        }
+      ],
+      "traceability": [
+        {
+          "criterion": "At least one correctly attributed relevant citation.",
+          "score": 1,
+          "reason": "The relevant quotations are exact excerpts correctly attributed to reply-record version 1."
+        },
+        {
+          "criterion": "Central factual claims supported by those citations/source.",
+          "score": 1,
+          "reason": "The central draft, outage, expressed intention, and missing-history claims match the source."
+        },
+        {
+          "criterion": "No quotation used to imply an unsupported mental/causal claim.",
+          "score": 1,
+          "reason": "The quotations support reported events and intention without certifying a personal trait."
+        }
+      ],
+      "total": 9,
+      "content_only_total": 9
+    }
+  ],
+  "limitations": [
+    "One independent reviewer scored this packet.",
+    "This is a synthetic authored development sample.",
+    "These scores support no statistical or general efficacy claim."
+  ]
+}
