@@ -1,0 +1,42 @@
+{
+  "OUTPUT-01": {
+    "arm": "Base",
+    "case_id": "PAIR3",
+    "final_answer_sha256": "c466583b78bff5ac091003aa6d6c3f87b7c0883f98526ce4f5b3a9038d03e5b3"
+  },
+  "OUTPUT-02": {
+    "arm": "HCL",
+    "case_id": "PAIR2",
+    "final_answer_sha256": "d875430a41ee39183561832b3b73e1e036f689c0c1cdadf600e22c4333e22af9"
+  },
+  "OUTPUT-03": {
+    "arm": "Base",
+    "case_id": "PAIR1",
+    "final_answer_sha256": "92319d73b2d34c1965d0d38305d7f470183556bc12368c1f2d656f513f44c651"
+  },
+  "OUTPUT-04": {
+    "arm": "Base",
+    "case_id": "PAIR2",
+    "final_answer_sha256": "b79bde281875a6f567f659079fc716e69bcce8d22338042276c9870be635157a"
+  },
+  "OUTPUT-05": {
+    "arm": "HCL",
+    "case_id": "PAIR4",
+    "final_answer_sha256": "aae28ada0897feed97f3e9378055a1dc918fada146cbfd3303f1e78a9656e7b3"
+  },
+  "OUTPUT-06": {
+    "arm": "HCL",
+    "case_id": "PAIR1",
+    "final_answer_sha256": null
+  },
+  "OUTPUT-07": {
+    "arm": "Base",
+    "case_id": "PAIR4",
+    "final_answer_sha256": "bed67181e1de343a3b7cd11c94e4a4a8b7374aaef30543bfdd665d184c85c341"
+  },
+  "OUTPUT-08": {
+    "arm": "HCL",
+    "case_id": "PAIR3",
+    "final_answer_sha256": "f7dc1f0b244a74934deced6cc1d1ba61ce966da8c480ca6511c9cbe2c14c9dfd"
+  }
+}
