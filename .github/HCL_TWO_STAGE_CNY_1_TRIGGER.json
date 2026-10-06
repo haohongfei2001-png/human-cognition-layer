@@ -1,0 +1,8 @@
+{
+  "schema": "hcl-two-stage-cny-marker-v1",
+  "stage": 1,
+  "authorization_ref": "OWNER_APPROVED_TWO_STAGE_CNY_REPLACEMENT_20261006_14_CALLS_14_CNY",
+  "package_sha256": "57f4e04f192846c071e5f4bcadb5a91c34be11baccf5935e9df8748b9fc37964",
+  "grant_sha256": "4b62d39f07c9947175e941b08b5685ed55dca9b45a055bebfa7462c221376bb6",
+  "executor_commit": "07813e0e423566d57369dfa5aabcce2112a91a65"
+}
