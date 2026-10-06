@@ -1,0 +1,614 @@
+{
+  "answer_tokens": 8192,
+  "arms": [
+    {
+      "arm": "Base",
+      "arm_seconds": 22.657894490000004,
+      "case_id": "PAIR1",
+      "checked_treatment": [],
+      "citations_accepted": true,
+      "executed_capabilities": [],
+      "final_answer_sha256": "92319d73b2d34c1965d0d38305d7f470183556bc12368c1f2d656f513f44c651",
+      "final_fields": {
+        "answer": "The source reports that Vale, before leaving, believed the blue folder was in the north drawer. It then reports that Inez moved the folder to the south drawer while Vale was away, and that Inez stated she believed the folder was now in the south drawer. After the move, the source establishes Inez's current reported belief that the folder is in the south drawer (consistent with the narrator's report of the move), but it does not establish Vale's knowledge or belief after the move. Vale's north-drawer statement is only an earlier pre-move report; because no later communication to Vale is described, the source provides no current mental state for Vale.",
+        "assumptions": "The answer treats the narrator's statements as reports of the described move and the absence of later communication, and treats the quoted speech as reporting each person's stated belief at the time it was uttered. It does not assume any unstated change in Vale's belief.",
+        "source_citations": [
+          {
+            "quote": "Vale: Before leaving, I believe the blue folder is in the north drawer.\nNarrator: Vale left the room.\nNarrator: Inez then moved the folder to the south drawer while Vale was away.\nInez: I believe the folder is now in the south drawer.\nNarrator: No later communication to Vale is described.",
+            "source_id": "folder-record",
+            "version": 1
+          }
+        ],
+        "uncertainty": "The source does not describe whether Vale learned or inferred the new location, so Vale's post-move knowledge or belief is not established. It is possible that Vale's earlier belief remained unchanged or that Vale later guessed or learned independently, but the source does not say. Inez's post-move belief is explicitly reported as 'now in the south drawer,' so that part is established by her statement, assuming the statement is sincere."
+      },
+      "final_text": "{\n  \"answer\": \"The source reports that Vale, before leaving, believed the blue folder was in the north drawer. It then reports that Inez moved the folder to the south drawer while Vale was away, and that Inez stated she believed the folder was now in the south drawer. After the move, the source establishes Inez's current reported belief that the folder is in the south drawer (consistent with the narrator's report of the move), but it does not establish Vale's knowledge or belief after the move. Vale's north-drawer statement is only an earlier pre-move report; because no later communication to Vale is described, the source provides no current mental state for Vale.\",\n  \"source_citations\": [\n    {\n      \"source_id\": \"folder-record\",\n      \"version\": 1,\n      \"quote\": \"Vale: Before leaving, I believe the blue folder is in the north drawer.\\nNarrator: Vale left the room.\\nNarrator: Inez then moved the folder to the south drawer while Vale was away.\\nInez: I believe the folder is now in the south drawer.\\nNarrator: No later communication to Vale is described.\"\n    }\n  ],\n  \"uncertainty\": \"The source does not describe whether Vale learned or inferred the new location, so Vale's post-move knowledge or belief is not established. It is possible that Vale's earlier belief remained unchanged or that Vale later guessed or learned independently, but the source does not say. Inez's post-move belief is explicitly reported as 'now in the south drawer,' so that part is established by her statement, assuming the statement is sincere.\",\n  \"assumptions\": \"The answer treats the narrator's statements as reports of the described move and the absence of later communication, and treats the quoted speech as reporting each person's stated belief at the time it was uttered. It does not assume any unstated change in Vale's belief.\"\n}",
+      "non_sdk_seconds": 0.24343575200001055,
+      "sdk_seconds": 22.414458737999993,
+      "selected_capabilities": [],
+      "status": "ANSWER_ACCEPTED"
+    },
+    {
+      "arm": "HCL",
+      "arm_seconds": 34.382720073,
+      "case_id": "PAIR1",
+      "checked_treatment": [
+        "B01"
+      ],
+      "citations_accepted": false,
+      "executed_capabilities": [
+        "B01",
+        "B02"
+      ],
+      "final_answer_sha256": null,
+      "final_delivery_code": "NOT_REACHED",
+      "final_fields": null,
+      "final_text": null,
+      "native_results": 2,
+      "non_sdk_seconds": 0.3003022959999839,
+      "sdk_seconds": 34.08241777700002,
+      "selected_capabilities": [
+        "B01",
+        "B02"
+      ],
+      "status": "REQUEST_BOUND_EXCEEDED_NO_TRUNCATION"
+    },
+    {
+      "arm": "HCL",
+      "arm_seconds": 88.828052028,
+      "case_id": "PAIR2",
+      "checked_treatment": [],
+      "citations_accepted": true,
+      "executed_capabilities": [
+        "C02",
+        "B01",
+        "B02"
+      ],
+      "final_answer_sha256": "d875430a41ee39183561832b3b73e1e036f689c0c1cdadf600e22c4333e22af9",
+      "final_delivery_code": "DELIVERED",
+      "final_fields": {
+        "answer": "From the supplied source, the only explanation with direct source support is that Noa missed the review meeting because she did not know it had moved to Thursday and the team had not told her about the date change. Noa explicitly says she did not know at the time and that she missed the meeting; the narrator explicitly says the team had not told her and that she learned the new date only after the missed meeting. This supports a lack-of-communication / lack-of-knowledge explanation. A separate possible but unsupported explanation is Noa's reported desire to avoid the loud renovation in the next room. The source reports that she wanted to avoid the renovation, but it does not connect that desire to the missed meeting or say she knew the meeting was Thursday and chose not to attend. Therefore this remains merely possible, not established as the reason. What cannot be concluded: the source does not establish Noa's actual private intention at the time of the missed meeting, including whether she intentionally missed the meeting, whether she intentionally avoided the meeting because of the renovation, or that any single motive was the actual cause. Because she reports not knowing the date and the narrator reports she learned it after the missed meeting, an inference that she deliberately skipped to avoid renovation would go beyond the source.",
+        "assumptions": "I treat Noa's and the narrator's statements as accurate source reports for source-based inference. I infer that the reported lack of knowledge/notification is offered as an explanation, but the source does not explicitly state the causal link, so that causal connection is an assumption. I assume the reported wish to avoid the loud renovation is a possible motive, not an established reason for missing the meeting. I do not assume access to private mental states beyond what is quoted.",
+        "source_citations": [
+          {
+            "quote": "Noa: At the time, I did not know the review meeting had moved to Thursday.",
+            "source_id": "review-record",
+            "version": 1
+          },
+          {
+            "quote": "Noa: I missed the review meeting.",
+            "source_id": "review-record",
+            "version": 1
+          },
+          {
+            "quote": "Noa: I wanted to avoid the loud renovation in the next room.",
+            "source_id": "review-record",
+            "version": 1
+          },
+          {
+            "quote": "Narrator: The team had not told Noa about the date change.",
+            "source_id": "review-record",
+            "version": 1
+          },
+          {
+            "quote": "Narrator: After the missed meeting, Noa learned the new date.",
+            "source_id": "review-record",
+            "version": 1
+          }
+        ],
+        "uncertainty": "The source reports statements from Noa and the narrator, but it does not explicitly state a causal explanation for why Noa missed the meeting. The operational why-query returned an insufficiency, and no checked belief or communication result is available to certify private intention or causal connection. Alternative explanations, including the renovation-avoidance motive and other unknown causes, remain open."
+      },
+      "final_text": "{\n  \"answer\": \"From the supplied source, the only explanation with direct source support is that Noa missed the review meeting because she did not know it had moved to Thursday and the team had not told her about the date change. Noa explicitly says she did not know at the time and that she missed the meeting; the narrator explicitly says the team had not told her and that she learned the new date only after the missed meeting. This supports a lack-of-communication / lack-of-knowledge explanation. A separate possible but unsupported explanation is Noa's reported desire to avoid the loud renovation in the next room. The source reports that she wanted to avoid the renovation, but it does not connect that desire to the missed meeting or say she knew the meeting was Thursday and chose not to attend. Therefore this remains merely possible, not established as the reason. What cannot be concluded: the source does not establish Noa's actual private intention at the time of the missed meeting, including whether she intentionally missed the meeting, whether she intentionally avoided the meeting because of the renovation, or that any single motive was the actual cause. Because she reports not knowing the date and the narrator reports she learned it after the missed meeting, an inference that she deliberately skipped to avoid renovation would go beyond the source.\",\n  \"source_citations\": [\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"Noa: At the time, I did not know the review meeting had moved to Thursday.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"Noa: I missed the review meeting.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"Noa: I wanted to avoid the loud renovation in the next room.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"Narrator: The team had not told Noa about the date change.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"Narrator: After the missed meeting, Noa learned the new date.\"\n    }\n  ],\n  \"uncertainty\": \"The source reports statements from Noa and the narrator, but it does not explicitly state a causal explanation for why Noa missed the meeting. The operational why-query returned an insufficiency, and no checked belief or communication result is available to certify private intention or causal connection. Alternative explanations, including the renovation-avoidance motive and other unknown causes, remain open.\",\n  \"assumptions\": \"I treat Noa's and the narrator's statements as accurate source reports for source-based inference. I infer that the reported lack of knowledge/notification is offered as an explanation, but the source does not explicitly state the causal link, so that causal connection is an assumption. I assume the reported wish to avoid the loud renovation is a possible motive, not an established reason for missing the meeting. I do not assume access to private mental states beyond what is quoted.\"\n}",
+      "native_results": 3,
+      "non_sdk_seconds": 0.0573305130000108,
+      "sdk_seconds": 88.77072151499999,
+      "selected_capabilities": [
+        "C02",
+        "B01",
+        "B02"
+      ],
+      "status": "ANSWER_ACCEPTED"
+    },
+    {
+      "arm": "Base",
+      "arm_seconds": 39.21382323400002,
+      "case_id": "PAIR2",
+      "checked_treatment": [],
+      "citations_accepted": true,
+      "executed_capabilities": [],
+      "final_answer_sha256": "b79bde281875a6f567f659079fc716e69bcce8d22338042276c9870be635157a",
+      "final_fields": {
+        "answer": "Supported: Noa was unaware of the date change. She states she did not know the review meeting had moved to Thursday; the narrator states the team had not told her and that she learned the new date after the missed meeting. This supports lack of notice as an explanation for the missed meeting. Merely possible: Noa wanted to avoid the loud renovation next door. The source reports this desire, but it does not connect it to the missed meeting as a cause, so its causal role is only possible. Cannot conclude: that at the time Noa intended to miss the meeting, that she knew the new date and deliberately skipped, or that her desire to avoid noise caused or motivated her absence.",
+        "assumptions": "The quoted Noa and narrator statements are treated as reports about the same review meeting and are taken at face value. The inference that the date-change unawareness caused the missed meeting assumes that a person who did not know the meeting had moved would miss it for that reason. The possible noise-avoidance explanation assumes the renovation was relevant to the meeting context, which the source does not specify.",
+        "source_citations": [
+          {
+            "quote": "At the time, I did not know the review meeting had moved to Thursday.",
+            "source_id": "review-record",
+            "version": 1
+          },
+          {
+            "quote": "I missed the review meeting.",
+            "source_id": "review-record",
+            "version": 1
+          },
+          {
+            "quote": "I wanted to avoid the loud renovation in the next room.",
+            "source_id": "review-record",
+            "version": 1
+          },
+          {
+            "quote": "The team had not told Noa about the date change.",
+            "source_id": "review-record",
+            "version": 1
+          },
+          {
+            "quote": "After the missed meeting, Noa learned the new date.",
+            "source_id": "review-record",
+            "version": 1
+          }
+        ],
+        "uncertainty": "The source does not explicitly state why Noa missed the meeting; the connection between her lack of knowledge of the date change and the missed meeting is an ordinary inference, not an explicit causal statement. It is also unclear whether her reported wish to avoid the loud renovation applied to the meeting time or location or was an unrelated preference, and whether it played any causal role."
+      },
+      "final_text": "{\n  \"answer\": \"Supported: Noa was unaware of the date change. She states she did not know the review meeting had moved to Thursday; the narrator states the team had not told her and that she learned the new date after the missed meeting. This supports lack of notice as an explanation for the missed meeting. Merely possible: Noa wanted to avoid the loud renovation next door. The source reports this desire, but it does not connect it to the missed meeting as a cause, so its causal role is only possible. Cannot conclude: that at the time Noa intended to miss the meeting, that she knew the new date and deliberately skipped, or that her desire to avoid noise caused or motivated her absence.\",\n  \"source_citations\": [\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"At the time, I did not know the review meeting had moved to Thursday.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"I missed the review meeting.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"I wanted to avoid the loud renovation in the next room.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"The team had not told Noa about the date change.\"\n    },\n    {\n      \"source_id\": \"review-record\",\n      \"version\": 1,\n      \"quote\": \"After the missed meeting, Noa learned the new date.\"\n    }\n  ],\n  \"uncertainty\": \"The source does not explicitly state why Noa missed the meeting; the connection between her lack of knowledge of the date change and the missed meeting is an ordinary inference, not an explicit causal statement. It is also unclear whether her reported wish to avoid the loud renovation applied to the meeting time or location or was an unrelated preference, and whether it played any causal role.\",\n  \"assumptions\": \"The quoted Noa and narrator statements are treated as reports about the same review meeting and are taken at face value. The inference that the date-change unawareness caused the missed meeting assumes that a person who did not know the meeting had moved would miss it for that reason. The possible noise-avoidance explanation assumes the renovation was relevant to the meeting context, which the source does not specify.\"\n}",
+      "non_sdk_seconds": 0.0344672859999946,
+      "sdk_seconds": 39.17935594800002,
+      "selected_capabilities": [],
+      "status": "ANSWER_ACCEPTED"
+    },
+    {
+      "arm": "Base",
+      "arm_seconds": 21.33305809899997,
+      "case_id": "PAIR3",
+      "checked_treatment": [],
+      "citations_accepted": true,
+      "executed_capabilities": [],
+      "final_answer_sha256": "c466583b78bff5ac091003aa6d6c3f87b7c0883f98526ce4f5b3a9038d03e5b3",
+      "final_fields": {
+        "answer": "The late reply does not establish that Jules is indifferent or generally unreliable. Reported outcome: Mina expected Jules to reply yesterday; the narrator reports that Jules drafted a reply yesterday, but a service outage prevented its delivery. Stated intention: Jules states, \"I still want to help Mina with the proposal.\" Unsupported personal conclusions: Any conclusion that Jules is indifferent or generally unreliable is unsupported because the delay is attributed to a service outage, Jules expresses continued willingness to help, and the source explicitly notes there are no earlier interactions to establish a pattern of unreliability.",
+        "assumptions": "The narrator's report of a service outage is taken as accurate. The source's statement that there are no earlier interactions is accepted as evidence of the absence of a reliability baseline.",
+        "source_citations": [
+          {
+            "quote": "Mina: I expected Jules to reply yesterday.",
+            "source_id": "reply-record",
+            "start": 0,
+            "version": 1
+          },
+          {
+            "quote": "Narrator: Jules drafted a reply yesterday, but a service outage prevented its delivery.",
+            "source_id": "reply-record",
+            "start": 43,
+            "version": 1
+          },
+          {
+            "quote": "Jules: I still want to help Mina with the proposal.",
+            "source_id": "reply-record",
+            "start": 131,
+            "version": 1
+          },
+          {
+            "quote": "Narrator: This source contains no earlier interactions between Mina and Jules.",
+            "source_id": "reply-record",
+            "start": 183,
+            "version": 1
+          }
+        ],
+        "uncertainty": "The source does not provide Jules's internal state or any prior interaction history. It cannot support a general trait such as indifference or unreliability; only one incident is reported."
+      },
+      "final_text": "{\n  \"answer\": \"The late reply does not establish that Jules is indifferent or generally unreliable. Reported outcome: Mina expected Jules to reply yesterday; the narrator reports that Jules drafted a reply yesterday, but a service outage prevented its delivery. Stated intention: Jules states, \\\"I still want to help Mina with the proposal.\\\" Unsupported personal conclusions: Any conclusion that Jules is indifferent or generally unreliable is unsupported because the delay is attributed to a service outage, Jules expresses continued willingness to help, and the source explicitly notes there are no earlier interactions to establish a pattern of unreliability.\",\n  \"source_citations\": [\n    {\n      \"source_id\": \"reply-record\",\n      \"version\": 1,\n      \"quote\": \"Mina: I expected Jules to reply yesterday.\",\n      \"start\": 0\n    },\n    {\n      \"source_id\": \"reply-record\",\n      \"version\": 1,\n      \"quote\": \"Narrator: Jules drafted a reply yesterday, but a service outage prevented its delivery.\",\n      \"start\": 43\n    },\n    {\n      \"source_id\": \"reply-record\",\n      \"version\": 1,\n      \"quote\": \"Jules: I still want to help Mina with the proposal.\",\n      \"start\": 131\n    },\n    {\n      \"source_id\": \"reply-record\",\n      \"version\": 1,\n      \"quote\": \"Narrator: This source contains no earlier interactions between Mina and Jules.\",\n      \"start\": 183\n    }\n  ],\n  \"uncertainty\": \"The source does not provide Jules's internal state or any prior interaction history. It cannot support a general trait such as indifference or unreliability; only one incident is reported.\",\n  \"assumptions\": \"The narrator's report of a service outage is taken as accurate. The source's statement that there are no earlier interactions is accepted as evidence of the absence of a reliability baseline.\"\n}",
+      "non_sdk_seconds": 0.02369250099997089,
+      "sdk_seconds": 21.309365598,
+      "selected_capabilities": [],
+      "status": "ANSWER_ACCEPTED"
+    },
+    {
+      "arm": "HCL",
+      "arm_seconds": 57.19886756200003,
+      "case_id": "PAIR3",
+      "checked_treatment": [],
+      "citations_accepted": true,
+      "executed_capabilities": [
+        "B01",
+        "C01",
+        "B02"
+      ],
+      "final_answer_sha256": "f7dc1f0b244a74934deced6cc1d1ba61ce966da8c480ca6511c9cbe2c14c9dfd",
+      "final_delivery_code": "DELIVERED",
+      "final_fields": {
+        "answer": "No. The late reply does not establish that Jules is indifferent or generally unreliable. Reported outcome: the source reports that Jules drafted a reply yesterday, but a service outage prevented its delivery. Stated intention: Jules says, \"I still want to help Mina with the proposal.\" Unsupported personal conclusions: the source contains no statement or mental expression that Jules is indifferent or generally unreliable, and the narrator explicitly says the source contains no earlier interactions between Mina and Jules, so the late reply supports no such trait conclusions.",
+        "assumptions": "I assume the supplied source is the complete relevant record and that no additional context is available to support character conclusions. I treat the narrator's report of the outage as the stated cause of the delivery delay, not as evidence about Jules's disposition.",
+        "source_citations": [
+          {
+            "quote": "Jules drafted a reply yesterday, but a service outage prevented its delivery.",
+            "source_id": "reply-record",
+            "version": 1
+          },
+          {
+            "quote": "I still want to help Mina with the proposal.",
+            "source_id": "reply-record",
+            "version": 1
+          },
+          {
+            "quote": "This source contains no earlier interactions between Mina and Jules.",
+            "source_id": "reply-record",
+            "version": 1
+          }
+        ],
+        "uncertainty": "The source wording is clear about the reported delivery failure and stated intention, but no source-reported evidence bears on Jules's private mental state or general reliability. Any inference of indifference or unreliability would go beyond the supplied source."
+      },
+      "final_text": "{\n  \"answer\": \"No. The late reply does not establish that Jules is indifferent or generally unreliable. Reported outcome: the source reports that Jules drafted a reply yesterday, but a service outage prevented its delivery. Stated intention: Jules says, \\\"I still want to help Mina with the proposal.\\\" Unsupported personal conclusions: the source contains no statement or mental expression that Jules is indifferent or generally unreliable, and the narrator explicitly says the source contains no earlier interactions between Mina and Jules, so the late reply supports no such trait conclusions.\",\n  \"source_citations\": [\n    {\n      \"source_id\": \"reply-record\",\n      \"version\": 1,\n      \"quote\": \"Jules drafted a reply yesterday, but a service outage prevented its delivery.\"\n    },\n    {\n      \"source_id\": \"reply-record\",\n      \"version\": 1,\n      \"quote\": \"I still want to help Mina with the proposal.\"\n    },\n    {\n      \"source_id\": \"reply-record\",\n      \"version\": 1,\n      \"quote\": \"This source contains no earlier interactions between Mina and Jules.\"\n    }\n  ],\n  \"uncertainty\": \"The source wording is clear about the reported delivery failure and stated intention, but no source-reported evidence bears on Jules's private mental state or general reliability. Any inference of indifference or unreliability would go beyond the supplied source.\",\n  \"assumptions\": \"I assume the supplied source is the complete relevant record and that no additional context is available to support character conclusions. I treat the narrator's report of the outage as the stated cause of the delivery delay, not as evidence about Jules's disposition.\"\n}",
+      "native_results": 3,
+      "non_sdk_seconds": 0.06358834000002389,
+      "sdk_seconds": 57.13527922200001,
+      "selected_capabilities": [
+        "B01",
+        "C01",
+        "B02"
+      ],
+      "status": "ANSWER_ACCEPTED"
+    },
+    {
+      "arm": "HCL",
+      "arm_seconds": 102.708405185,
+      "case_id": "PAIR4",
+      "checked_treatment": [],
+      "citations_accepted": true,
+      "executed_capabilities": [
+        "G04"
+      ],
+      "final_answer_sha256": "aae28ada0897feed97f3e9378055a1dc918fada146cbfd3303f1e78a9656e7b3",
+      "final_delivery_code": "DELIVERED",
+      "final_fields": {
+        "answer": "Under the counterfactual, the stated support “the storm warning is active” would be removed, because Toma’s first stated reason for waiting explicitly depends on that premise. The stated support “the engine inspection is incomplete” would remain, because the counterfactual keeps it unchanged and Toma gives it as a second stated reason for the same conclusion. The opposite conclusion—that the ferry should not wait—does not follow from the remaining stated support. In the supplied source, Toma concludes the ferry should wait from the incomplete engine inspection, so the remaining support still points toward the same conclusion, though the source reports the reasoning rather than providing a formal proof.",
+        "assumptions": "This assumes “opposite conclusion” means the ferry should not wait, and that counterfactually setting the storm warning not active removes only that stated support while the engine-inspection premise remains as reported.",
+        "source_citations": [
+          {
+            "quote": "Narrator: In harbor, the storm warning is active.",
+            "source_id": "harbor-argument",
+            "start": 0,
+            "version": 1
+          },
+          {
+            "quote": "Toma: In harbor, I conclude the ferry should wait because the storm warning is active.",
+            "source_id": "harbor-argument",
+            "start": 50,
+            "version": 1
+          },
+          {
+            "quote": "Narrator: In harbor, the engine inspection is incomplete.",
+            "source_id": "harbor-argument",
+            "start": 137,
+            "version": 1
+          },
+          {
+            "quote": "Toma: In harbor, I conclude the ferry should wait because the engine inspection is incomplete.",
+            "source_id": "harbor-argument",
+            "start": 195,
+            "version": 1
+          }
+        ],
+        "uncertainty": "The source gives Toma’s stated reasons but does not provide a formal logical derivation or establish world truth. The removal/remaining classification is an inference from the stated premise mapping. Strict logical entailment to either conclusion is not certified by the source."
+      },
+      "final_text": "{\n  \"answer\": \"Under the counterfactual, the stated support “the storm warning is active” would be removed, because Toma’s first stated reason for waiting explicitly depends on that premise. The stated support “the engine inspection is incomplete” would remain, because the counterfactual keeps it unchanged and Toma gives it as a second stated reason for the same conclusion. The opposite conclusion—that the ferry should not wait—does not follow from the remaining stated support. In the supplied source, Toma concludes the ferry should wait from the incomplete engine inspection, so the remaining support still points toward the same conclusion, though the source reports the reasoning rather than providing a formal proof.\",\n  \"source_citations\": [\n    {\n      \"source_id\": \"harbor-argument\",\n      \"version\": 1,\n      \"quote\": \"Narrator: In harbor, the storm warning is active.\",\n      \"start\": 0\n    },\n    {\n      \"source_id\": \"harbor-argument\",\n      \"version\": 1,\n      \"quote\": \"Toma: In harbor, I conclude the ferry should wait because the storm warning is active.\",\n      \"start\": 50\n    },\n    {\n      \"source_id\": \"harbor-argument\",\n      \"version\": 1,\n      \"quote\": \"Narrator: In harbor, the engine inspection is incomplete.\",\n      \"start\": 137\n    },\n    {\n      \"source_id\": \"harbor-argument\",\n      \"version\": 1,\n      \"quote\": \"Toma: In harbor, I conclude the ferry should wait because the engine inspection is incomplete.\",\n      \"start\": 195\n    }\n  ],\n  \"uncertainty\": \"The source gives Toma’s stated reasons but does not provide a formal logical derivation or establish world truth. The removal/remaining classification is an inference from the stated premise mapping. Strict logical entailment to either conclusion is not certified by the source.\",\n  \"assumptions\": \"This assumes “opposite conclusion” means the ferry should not wait, and that counterfactually setting the storm warning not active removes only that stated support while the engine-inspection premise remains as reported.\"\n}",
+      "native_results": 1,
+      "non_sdk_seconds": 0.08361643299997468,
+      "sdk_seconds": 102.62478875200003,
+      "selected_capabilities": [
+        "G04"
+      ],
+      "status": "ANSWER_ACCEPTED"
+    },
+    {
+      "arm": "Base",
+      "arm_seconds": 13.645632431000024,
+      "case_id": "PAIR4",
+      "checked_treatment": [],
+      "citations_accepted": true,
+      "executed_capabilities": [],
+      "final_answer_sha256": "bed67181e1de343a3b7cd11c94e4a4a8b7374aaef30543bfdd665d184c85c341",
+      "final_fields": {
+        "answer": "The stated support that would be removed is Toma's reason that the ferry should wait because the storm warning is active. The stated support that would remain is Toma's reason that the ferry should wait because the engine inspection is incomplete. The opposite conclusion (that the ferry should not wait) does not follow: the remaining stated support still supports waiting, and the source supplies no stated support for the opposite conclusion.",
+        "assumptions": "I assume the two stated supports are independent, that removing the storm-warning support does not remove or weaken the engine-inspection support, and that the counterfactual supposition leaves the engine-inspection statement intact. I also assume the question is asking only about the support explicitly stated in the supplied source.",
+        "source_citations": [
+          {
+            "quote": "Narrator: In harbor, the storm warning is active.\nToma: In harbor, I conclude the ferry should wait because the storm warning is active.\nNarrator: In harbor, the engine inspection is incomplete.\nToma: In harbor, I conclude the ferry should wait because the engine inspection is incomplete.",
+            "source_id": "harbor-argument",
+            "start": 0,
+            "version": 1
+          }
+        ],
+        "uncertainty": "The source does not state a rule for what follows when the storm warning is inactive; the counterfactual is supplied by the question. I treat 'opposite conclusion' as the ferry should not wait, but the source itself only gives reasons for waiting and gives no explicit inferential rule for negating the conclusion when one reason is removed."
+      },
+      "final_text": "{\n  \"answer\": \"The stated support that would be removed is Toma's reason that the ferry should wait because the storm warning is active. The stated support that would remain is Toma's reason that the ferry should wait because the engine inspection is incomplete. The opposite conclusion (that the ferry should not wait) does not follow: the remaining stated support still supports waiting, and the source supplies no stated support for the opposite conclusion.\",\n  \"source_citations\": [\n    {\n      \"source_id\": \"harbor-argument\",\n      \"version\": 1,\n      \"quote\": \"Narrator: In harbor, the storm warning is active.\\nToma: In harbor, I conclude the ferry should wait because the storm warning is active.\\nNarrator: In harbor, the engine inspection is incomplete.\\nToma: In harbor, I conclude the ferry should wait because the engine inspection is incomplete.\",\n      \"start\": 0\n    }\n  ],\n  \"uncertainty\": \"The source does not state a rule for what follows when the storm warning is inactive; the counterfactual is supplied by the question. I treat 'opposite conclusion' as the ferry should not wait, but the source itself only gives reasons for waiting and gives no explicit inferential rule for negating the conclusion when one reason is removed.\",\n  \"assumptions\": \"I assume the two stated supports are independent, that removing the storm-warning support does not remove or weaken the engine-inspection support, and that the counterfactual supposition leaves the engine-inspection statement intact. I also assume the question is asking only about the support explicitly stated in the supplied source.\"\n}",
+      "non_sdk_seconds": 0.024220768000020598,
+      "sdk_seconds": 13.621411663000004,
+      "selected_capabilities": [],
+      "status": "ANSWER_ACCEPTED"
+    }
+  ],
+  "authorization_ref": "OWNER_APPROVED_TWO_STAGE_CNY_REPLACEMENT_20261006_14_CALLS_14_CNY",
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RETRY",
+  "calls": [
+    {
+      "arm": "Base",
+      "call_id": "PAIR1:Base:answer",
+      "case_id": "PAIR1",
+      "exact_request_reservation_cny": "0.293274",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 2933,
+      "request_sha256": "fc7b4e8008a46e3f4bfbefa5cd274bc2b76498945cc2039925b965840c78d73c",
+      "reserved_cny": "0.888480",
+      "sdk_seconds": 22.414458737999993,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 2636,
+        "prompt_tokens": 646
+      },
+      "usage_rated_cny": "0.076986"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "PAIR1:HCL:planning",
+      "case_id": "PAIR1",
+      "exact_request_reservation_cny": "0.992808",
+      "invocation_status": "RETURNED",
+      "phase": "planning",
+      "provider_call": true,
+      "request_bytes": 29508,
+      "request_sha256": "d717cb1dd4fa8422e5024f695ea80aaede53567191879debd5c09904e1c4cca3",
+      "reserved_cny": "1.109664",
+      "sdk_seconds": 34.08241777700002,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 3521,
+        "prompt_tokens": 6519
+      },
+      "usage_rated_cny": "0.153738"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "PAIR2:HCL:planning",
+      "case_id": "PAIR2",
+      "exact_request_reservation_cny": "0.99189",
+      "invocation_status": "RETURNED",
+      "phase": "planning",
+      "provider_call": true,
+      "request_bytes": 29457,
+      "request_sha256": "fe8b40a6fbc684e3b9a0bb1d9e6fc562e07845891c020a7b86011c30404d1f5e",
+      "reserved_cny": "1.109664",
+      "sdk_seconds": 55.68663269999999,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 6073,
+        "prompt_tokens": 6514
+      },
+      "usage_rated_cny": "0.222597"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "PAIR2:HCL:answer",
+      "case_id": "PAIR2",
+      "exact_request_reservation_cny": "0.453762",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 11849,
+      "request_sha256": "d9c623336a9f8e61de8a1ca3bded072edef67e030136cca8af3c0c921a0f05c0",
+      "reserved_cny": "0.888480",
+      "sdk_seconds": 33.084088815,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 3703,
+        "prompt_tokens": 3019
+      },
+      "usage_rated_cny": "0.127152"
+    },
+    {
+      "arm": "Base",
+      "call_id": "PAIR2:Base:answer",
+      "case_id": "PAIR2",
+      "exact_request_reservation_cny": "0.292356",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 2882,
+      "request_sha256": "644f6af59f80ad25f7c197fc122fba1609102d29a106f2a9ef75d267b7b310c7",
+      "reserved_cny": "0.888480",
+      "sdk_seconds": 39.17935594800002,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 4089,
+        "prompt_tokens": 641
+      },
+      "usage_rated_cny": "0.116172"
+    },
+    {
+      "arm": "Base",
+      "call_id": "PAIR3:Base:answer",
+      "case_id": "PAIR3",
+      "exact_request_reservation_cny": "0.292302",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 2879,
+      "request_sha256": "f0a1f16e84a07c5b97cfa537e5bf530f4d7ad5e350634e4dca8e7246c17f34d5",
+      "reserved_cny": "0.888480",
+      "sdk_seconds": 21.309365598,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 3207,
+        "prompt_tokens": 622
+      },
+      "usage_rated_cny": "0.092187"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "PAIR3:HCL:planning",
+      "case_id": "PAIR3",
+      "exact_request_reservation_cny": "0.991836",
+      "invocation_status": "RETURNED",
+      "phase": "planning",
+      "provider_call": true,
+      "request_bytes": 29454,
+      "request_sha256": "b4a407e90acbd6de68088bae6824ec7631ad43231c2ed0f7b4188f7315e2ed71",
+      "reserved_cny": "1.109664",
+      "sdk_seconds": 39.718238568000004,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 4620,
+        "prompt_tokens": 6495
+      },
+      "usage_rated_cny": "0.183195"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "PAIR3:HCL:answer",
+      "case_id": "PAIR3",
+      "exact_request_reservation_cny": "0.499824",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 14408,
+      "request_sha256": "c8acdf2178332eae2c66f2c5a9bec825d51d3936bbe463e3ad2a1ab38d3941ea",
+      "reserved_cny": "0.888480",
+      "sdk_seconds": 17.417040654000004,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 2059,
+        "prompt_tokens": 3636
+      },
+      "usage_rated_cny": "0.088317"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "PAIR4:HCL:planning",
+      "case_id": "PAIR4",
+      "exact_request_reservation_cny": "0.993438",
+      "invocation_status": "RETURNED",
+      "phase": "planning",
+      "provider_call": true,
+      "request_bytes": 29543,
+      "request_sha256": "9e7e1f189975e0724fdef46ceab75ba345a515af3cc7f82560a57fe370d2860c",
+      "reserved_cny": "1.109664",
+      "sdk_seconds": 81.21315902600003,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 9096,
+        "prompt_tokens": 6517
+      },
+      "usage_rated_cny": "0.304245"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "PAIR4:HCL:answer",
+      "case_id": "PAIR4",
+      "exact_request_reservation_cny": "0.41517",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 9705,
+      "request_sha256": "b1ea754c7a83712986d0a75ec030223fd6691ed95008b60705ae5832f8167d90",
+      "reserved_cny": "0.888480",
+      "sdk_seconds": 21.411629726,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 2646,
+        "prompt_tokens": 2428
+      },
+      "usage_rated_cny": "0.093294"
+    },
+    {
+      "arm": "Base",
+      "call_id": "PAIR4:Base:answer",
+      "case_id": "PAIR4",
+      "exact_request_reservation_cny": "0.293904",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 2968,
+      "request_sha256": "aadad85a2f4f54f5a60c988e0ef430c2af2bc2de938fd29108cd04df512d0dd3",
+      "reserved_cny": "0.888480",
+      "sdk_seconds": 13.621411663000004,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 1615,
+        "prompt_tokens": 644
+      },
+      "usage_rated_cny": "0.049401"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "PAIR1",
+      "question": "What location does the source report, and what does it establish about Vale and Inez knowing or believing the location after the move? Distinguish earlier reports from current mental states. Cite the supplied source.",
+      "sources": [
+        {
+          "recorded_at": "2026-10-06T17:32:48Z",
+          "source_id": "folder-record",
+          "text": "Vale: Before leaving, I believe the blue folder is in the north drawer.\nNarrator: Vale left the room.\nNarrator: Inez then moved the folder to the south drawer while Vale was away.\nInez: I believe the folder is now in the south drawer.\nNarrator: No later communication to Vale is described.",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "case_id": "PAIR2",
+      "question": "What explanations for the missed meeting are supported or merely possible, and what cannot be concluded about Noa's intention at the time? Cite the supplied source.",
+      "sources": [
+        {
+          "recorded_at": "2026-10-06T17:32:48Z",
+          "source_id": "review-record",
+          "text": "Noa: At the time, I did not know the review meeting had moved to Thursday.\nNoa: I missed the review meeting.\nNoa: I wanted to avoid the loud renovation in the next room.\nNarrator: The team had not told Noa about the date change.\nNarrator: After the missed meeting, Noa learned the new date.",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "case_id": "PAIR3",
+      "question": "Does the late reply establish that Jules is indifferent or generally unreliable? Separate the reported outcome, stated intention, and unsupported personal conclusions. Cite the supplied source.",
+      "sources": [
+        {
+          "recorded_at": "2026-10-06T17:32:48Z",
+          "source_id": "reply-record",
+          "text": "Mina: I expected Jules to reply yesterday.\nNarrator: Jules drafted a reply yesterday, but a service outage prevented its delivery.\nJules: I still want to help Mina with the proposal.\nNarrator: This source contains no earlier interactions between Mina and Jules.",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "case_id": "PAIR4",
+      "question": "Within this fictional argument only, suppose the storm warning were not active but the engine inspection remained incomplete. Which stated support would be removed, which would remain, and does the opposite conclusion follow? Cite the supplied source.",
+      "sources": [
+        {
+          "recorded_at": "2026-10-06T17:32:48Z",
+          "source_id": "harbor-argument",
+          "text": "Narrator: In harbor, the storm warning is active.\nToma: In harbor, I conclude the ferry should wait because the storm warning is active.\nNarrator: In harbor, the engine inspection is incomplete.\nToma: In harbor, I conclude the ferry should wait because the engine inspection is incomplete.",
+          "version": 1
+        }
+      ]
+    }
+  ],
+  "cost_basis": "NATIVE_CNY_PEAK_USAGE_ESTIMATE_NOT_INVOICE_FULL_RESERVATION_RETAINED",
+  "currency": "CNY",
+  "efficacy_verified": false,
+  "elapsed_seconds": 379.99134167799997,
+  "head_sha": "2f81c42237ed7df9dec83af8fee734f4881be9fa",
+  "i02_certified": false,
+  "invoice_cost_cny": null,
+  "limitations": "ONE_FUNCTIONAL_CASE_THEN_FOUR_AUTHORED_CASES_NOT_COMPUTE_MATCHED_NO_GENERALIZATION",
+  "model": "deepseek-v4-pro",
+  "package_sha256": "5e8b3c2247e20a0d22c59eac3134f3ebbf3a906561a487213e231f408485d965",
+  "planning_tokens": 16384,
+  "production_planning_tokens": 4096,
+  "provider_calls": 11,
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_cny": "0",
+  "reserved_cny": "10.658016",
+  "run_id": "37515534446",
+  "runtime_sha256": "62bea96c481fcdde3bfb0af8707796d5afaebf1c9d051ace9bd0c82e236f2442",
+  "schema": "hcl-two-stage-cny-public-evidence-v1",
+  "stage": 2,
+  "stage1_semantic_gate": "PREVIOUS_FIXED_PASS",
+  "status": "COMPLETED_ONE_PASS",
+  "usage_complete": true,
+  "usage_rated_cny": "1.507284"
+}
