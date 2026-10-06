@@ -1,16 +1,16 @@
 {
-  "approved_at": null,
-  "authorization_ref": null,
-  "authorized_calls": 0,
-  "authorized_cny": "0",
+  "approved_at": "2026-10-06T18:21:19Z",
+  "authorization_ref": "OWNER_APPROVED_TWO_STAGE_CNY_REPLACEMENT_20261006_14_CALLS_14_CNY",
+  "authorized_calls": 12,
+  "authorized_cny": "12",
   "currency": "CNY",
-  "expires_at": null,
+  "expires_at": "2026-10-07T17:32:48Z",
   "historical_budget_transfer": false,
   "other_stage_budget_transfer": false,
   "package_sha256": "5e8b3c2247e20a0d22c59eac3134f3ebbf3a906561a487213e231f408485d965",
-  "phase1_source_review_sha256": null,
+  "phase1_source_review_sha256": "319e21715276e16330d118cc17d0c08733cf58b8b2c079f76e611d0cf5099848",
   "retries": 0,
   "schema": "hcl-two-stage-cny-grant-v1",
   "stage": 2,
-  "status": "PREPARED_NOT_AUTHORIZED"
+  "status": "READY"
 }

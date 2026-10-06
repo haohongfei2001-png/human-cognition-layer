@@ -1,0 +1,31 @@
+{
+  "authorization_ref": "OWNER_APPROVED_TWO_STAGE_CNY_REPLACEMENT_20261006_14_CALLS_14_CNY",
+  "criteria": [
+    {
+      "id": 1,
+      "passed": true,
+      "reason": "The unchanged answer attributes Wednesday to Rowan and Thursday to Mara, matching the two source lines without swapping speakers."
+    },
+    {
+      "id": 2,
+      "passed": true,
+      "reason": "The answer explicitly describes the dates as expressed first-person belief reports and concludes that the supplied source cannot establish the actual seminar date; neither date is asserted as established fact."
+    },
+    {
+      "id": 3,
+      "passed": true,
+      "reason": "The answer explicitly states that no published schedule is included and that no external schedule or other evidence is supplied. In this source context, this satisfies the requirement to state that no authoritative schedule is available."
+    },
+    {
+      "id": 4,
+      "passed": true,
+      "reason": "All three explicit citations identify seminar-notes version 1 and quote exact original source lines, covering both speakers and the absence of a published schedule. The uncertainty field says the actual date remains unknown and distinguishes expressed reports from independently verified private beliefs."
+    }
+  ],
+  "evidence_sha256": "a4360f3be3650e832e87679fe8d81ced3f6346a0a53afc6edb31e118a106599a",
+  "final_answer_sha256": "f2ffc23e55d81ea3b1e3fc3dbff9b3aa891edfab752dd069cbfa038c7fac0aa7",
+  "overall_pass": true,
+  "reviewer_role": "INDEPENDENT_SOURCE_FIRST_AFTER_OUTPUT",
+  "schema": "hcl-two-stage-cny-phase1-source-review-v1",
+  "source_sha256": "f838f2124549772ae7e951f1bfd61413170bc27f668a81aaf2d27e56e6945c73"
+}

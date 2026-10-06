@@ -1,0 +1,129 @@
+{
+  "answer_tokens": 8192,
+  "arms": [
+    {
+      "arm": "HCL",
+      "arm_seconds": 43.524073767999994,
+      "case_id": "SMOKE1",
+      "checked_treatment": [
+        "B01"
+      ],
+      "citations_accepted": true,
+      "executed_capabilities": [
+        "B01"
+      ],
+      "final_answer_sha256": "f2ffc23e55d81ea3b1e3fc3dbff9b3aa891edfab752dd069cbfa038c7fac0aa7",
+      "final_delivery_code": "DELIVERED",
+      "final_fields": {
+        "answer": "The source reports two expressed beliefs: Rowan says, “I believe the seminar starts Wednesday,” and Mara says, “I believe the seminar starts Thursday.” The narrator also states, “No published schedule is included in this source.” Because the only date information consists of conflicting first-person belief reports and the source explicitly says no published schedule is included, the source cannot establish the actual seminar date.",
+        "assumptions": "Interpreting ‘I believe’ as an expression of each speaker’s stated belief; assuming the supplied source text is the complete relevant context.",
+        "source_citations": [
+          {
+            "quote": "Rowan: I believe the seminar starts Wednesday.",
+            "source_id": "seminar-notes",
+            "version": 1
+          },
+          {
+            "quote": "Mara: I believe the seminar starts Thursday.",
+            "source_id": "seminar-notes",
+            "version": 1
+          },
+          {
+            "quote": "Narrator: No published schedule is included in this source.",
+            "source_id": "seminar-notes",
+            "version": 1
+          }
+        ],
+        "uncertainty": "The source reports only what Rowan and Mara say they believe, not independently verified private beliefs. The reported beliefs conflict, and no external schedule or other evidence is supplied, so the actual seminar date remains unknown from this source."
+      },
+      "final_text": "{\n  \"answer\": \"The source reports two expressed beliefs: Rowan says, \\u201cI believe the seminar starts Wednesday,\\u201d and Mara says, \\u201cI believe the seminar starts Thursday.\\u201d The narrator also states, \\u201cNo published schedule is included in this source.\\u201d Because the only date information consists of conflicting first-person belief reports and the source explicitly says no published schedule is included, the source cannot establish the actual seminar date.\",\n  \"source_citations\": [\n    {\n      \"source_id\": \"seminar-notes\",\n      \"version\": 1,\n      \"quote\": \"Rowan: I believe the seminar starts Wednesday.\"\n    },\n    {\n      \"source_id\": \"seminar-notes\",\n      \"version\": 1,\n      \"quote\": \"Mara: I believe the seminar starts Thursday.\"\n    },\n    {\n      \"source_id\": \"seminar-notes\",\n      \"version\": 1,\n      \"quote\": \"Narrator: No published schedule is included in this source.\"\n    }\n  ],\n  \"uncertainty\": \"The source reports only what Rowan and Mara say they believe, not independently verified private beliefs. The reported beliefs conflict, and no external schedule or other evidence is supplied, so the actual seminar date remains unknown from this source.\",\n  \"assumptions\": \"Interpreting \\u2018I believe\\u2019 as an expression of each speaker\\u2019s stated belief; assuming the supplied source text is the complete relevant context.\"\n}",
+      "native_results": 1,
+      "non_sdk_seconds": 0.3751393669999885,
+      "sdk_seconds": 43.148934401000005,
+      "selected_capabilities": [
+        "B01"
+      ],
+      "status": "ANSWER_ACCEPTED"
+    }
+  ],
+  "authorization_ref": "OWNER_APPROVED_TWO_STAGE_CNY_REPLACEMENT_20261006_14_CALLS_14_CNY",
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RETRY",
+  "calls": [
+    {
+      "arm": "HCL",
+      "call_id": "SMOKE1:HCL:planning",
+      "case_id": "SMOKE1",
+      "exact_request_reservation_cny": "0.988902",
+      "invocation_status": "RETURNED",
+      "phase": "planning",
+      "provider_call": true,
+      "request_bytes": 29291,
+      "request_sha256": "89967e74e3b5d1aa4ea8d045c058358c1b766ec2348b9adf816d4050f2d4ec9b",
+      "reserved_cny": "1.109664",
+      "sdk_seconds": 31.397821265999994,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 3378,
+        "prompt_tokens": 6468
+      },
+      "usage_rated_cny": "0.149418"
+    },
+    {
+      "arm": "HCL",
+      "call_id": "SMOKE1:HCL:answer",
+      "case_id": "SMOKE1",
+      "exact_request_reservation_cny": "0.54891",
+      "invocation_status": "RETURNED",
+      "phase": "answer",
+      "provider_call": true,
+      "request_bytes": 17135,
+      "request_sha256": "f2d783ca4bad1522452785b7239b0e8ef2c6f0a3e16ece0360fac52fc533008b",
+      "reserved_cny": "0.888480",
+      "sdk_seconds": 11.751113135000011,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 1367,
+        "prompt_tokens": 5027
+      },
+      "usage_rated_cny": "0.082152"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "SMOKE1",
+      "question": "What does each person believe about the seminar date, and can this source establish the actual date? Cite the supplied source in your answer.",
+      "sources": [
+        {
+          "recorded_at": "2026-10-06T17:32:48Z",
+          "source_id": "seminar-notes",
+          "text": "Rowan: I believe the seminar starts Wednesday.\nMara: I believe the seminar starts Thursday.\nNarrator: No published schedule is included in this source.",
+          "version": 1
+        }
+      ]
+    }
+  ],
+  "cost_basis": "NATIVE_CNY_PEAK_USAGE_ESTIMATE_NOT_INVOICE_FULL_RESERVATION_RETAINED",
+  "currency": "CNY",
+  "efficacy_verified": false,
+  "elapsed_seconds": 43.61177701,
+  "head_sha": "0f37bc992112eaeed533d41574a46bd585e260f6",
+  "i02_certified": false,
+  "invoice_cost_cny": null,
+  "limitations": "ONE_FUNCTIONAL_CASE_THEN_FOUR_AUTHORED_CASES_NOT_COMPUTE_MATCHED_NO_GENERALIZATION",
+  "model": "deepseek-v4-pro",
+  "package_sha256": "57f4e04f192846c071e5f4bcadb5a91c34be11baccf5935e9df8748b9fc37964",
+  "planning_tokens": 16384,
+  "production_planning_tokens": 4096,
+  "provider_calls": 2,
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_cny": "0",
+  "reserved_cny": "1.998144",
+  "run_id": "37513945475",
+  "runtime_sha256": "62bea96c481fcdde3bfb0af8707796d5afaebf1c9d051ace9bd0c82e236f2442",
+  "schema": "hcl-two-stage-cny-public-evidence-v1",
+  "stage": 1,
+  "stage1_semantic_gate": "PENDING_INDEPENDENT_SOURCE_REVIEW",
+  "status": "COMPLETED_ONE_PASS",
+  "usage_complete": true,
+  "usage_rated_cny": "0.231570"
+}
