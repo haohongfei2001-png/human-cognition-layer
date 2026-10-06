@@ -1,0 +1,186 @@
+{
+  "api_tools": false,
+  "budget": {
+    "additional_payment_actions": "No top-up, subscription, credit purchase, new paid service, HCLA budget transfer or post-run reuse.",
+    "answer_call_max": "0.1303104",
+    "cny_reference": "13.544640 at independently published CNY9/27 peak rates; not an exchange-rate conversion, not a second spending pool.",
+    "currency": "USD",
+    "formula": "((2*canonical_request_utf8_bytes+2048)*1.32+(max_output_tokens+32)*3.96)/1000000",
+    "full_schedule_max": "1.98654720",
+    "planning_call_max": "0.16275072",
+    "rates_peak_per_million": {
+      "input": "1.32",
+      "output": "3.96"
+    },
+    "requested_hard_cap_usd": "2.00",
+    "reservation_basis": "Existing conservative code bound, not a new model-tokenizer guarantee or a verified invoice. Require exact request serialization and recheck official rates before launch.",
+    "rounding_headroom_usd": "0.01345280",
+    "stage1_cap_usd": "0.30",
+    "stage1_max": "0.29306112",
+    "stage2_cap_usd": "1.70",
+    "stage2_max": "1.69348608"
+  },
+  "completion_token_cap_scope": "Each phase max_tokens caps total generated completion, including reasoning tokens and visible final output together; no separate second thinking allowance.",
+  "created_at_utc": "2026-10-06T17:23:23.269293+00:00",
+  "endpoint": "https://api.deepseek.com",
+  "evidence": {
+    "content_retention_limit": "Final message.content is retained only within the predeclared 64000-character bound. Transport-unknown or missing-content outcomes remain absent with exact safe status and held cost, never reconstructed. Reasoning and complete provider envelopes are never persisted or published.",
+    "content_scope": "Five original fictional source/questions plus final answer content/citations/uncertainty/assumptions, fixed failure codes and usage/identity/timing summaries; no personal content.",
+    "existing_missing_output": "Historical D01 raw output is not reconstructed, rescored or claimed diagnosed.",
+    "maximum_final_texts": 9,
+    "publication": "No publication now. Proposed future approval explicitly covers the public GitHub repository haohongfei2001-png/human-cognition-layer for these five synthetic materials and at most nine unchanged final outputs plus bounded evidence only. If public-output permission is withheld, do not silently use GitHub logs/artifacts; establish a supported private result route before any API call.",
+    "publication_repository": "https://github.com/haohongfei2001-png/human-cognition-layer",
+    "publication_repository_visibility": "public; read-only verified 2026-10-06T17:27Z",
+    "raw_failure_retention": "Preserve bounded final message.content verbatim BEFORE schema validation, including malformed/noncanonical content, so a new delivery failure is diagnosable. This does not permit storing or sharing reasoning_content, raw plans, full provider envelopes, credentials or unrelated private receipts."
+  },
+  "files": {
+    "cases.json": "3c794a715d4fa2d5ec97bba58f441feeef1d446dbb67a826d485f0dc031eb48b",
+    "price-evidence.json": "ff3eb460069b3c194abcb2adfa90d10adf1ca9c123b20849ae58c02f34af1894"
+  },
+  "grants_created": 0,
+  "input_reservation_tokens": 74048,
+  "limitations": [
+    "Source cases use English and cannot validate general Chinese user experience.",
+    "Planning uses diagnostic16384 rather than ordinary4096; success does not certify the ordinary default path.",
+    "One run per arm is sensitive to stochastic sampling and provider alias/backend drift.",
+    "No equality of compute budget between arms.",
+    "No effect claim from local regression-test counts.",
+    "No HCLA activation or security-review work."
+  ],
+  "listed_model_version": "DeepSeek-V4-Pro-0813",
+  "live_execution_code_created": false,
+  "main_commit": "a961e00d75e766bda634cc972b6ea96b4a4f36f0",
+  "maximum_answer_tokens": 8192,
+  "maximum_planning_tokens": 16384,
+  "maximum_provider_calls": 14,
+  "maximum_request_utf8_bytes": 36000,
+  "model": "deepseek-v4-pro",
+  "new_authorized_provider_calls": 0,
+  "new_authorized_usd": "0",
+  "ordinary_default_planning_tokens_unchanged": 4096,
+  "output_token_margin": 32,
+  "preparation_gates": [
+    "Revalidate exact a961e00d runtime tree/hash and current official model/rates; no paid preflight.",
+    "Build a NEW isolated execution package, exact source/question/rubric/request hashes, one-run ledger and strict output allowlist; existing consumed runners cannot be reused.",
+    "Prove every static request fits36000bytes; reserve all dynamic HCL final requests at full36000bytes. If full source/policy/results exceed cap, fail that declared arm before dispatch, never trim.",
+    "Verify actual wire max_tokens caps combined generation and complete usage accounting with provider-free request tests; no default64K output.",
+    "Independent scope/budget/retention review and zero-provider tests before any activation.",
+    "Obtain explicit new per-run cost and data/publication approval. No grant/token/config/payment created by this proposal."
+  ],
+  "provider": "DeepSeek direct",
+  "provider_calls_made": 0,
+  "publication_made": false,
+  "reasoning_effort": "high",
+  "repository": "haohongfei2001-png/human-cognition-layer",
+  "response_format": {
+    "type": "json_object"
+  },
+  "runtime_sha256": "62bea96c481fcdde3bfb0af8707796d5afaebf1c9d051ace9bd0c82e236f2442",
+  "schema": "hcl-two-stage-local-proposal-v1",
+  "stage1": {
+    "call_order": [
+      "HCL planning",
+      "HCL answer if native result exists"
+    ],
+    "cases": [
+      "SMOKE1"
+    ],
+    "failure": "Any failed/unknown gate ends the entire two-stage authorization; stage2 remains NOT_ATTEMPTED. No repair/retry/extra sample.",
+    "interpretation": "One functional demonstration only; no comparison, reliability-rate or efficacy claim.",
+    "maximum_calls": 2,
+    "pass_gate": [
+      "Exact frozen runtime/request and allowed model identity.",
+      "At least one real native result from ordinary planner selection; no forced module or Base fallback.",
+      "Returned complete usage/cost and finish status, nonblank final answer, explicit citation objects, unchanged source audit and common strict consumer pass.",
+      "Source-first check satisfies all four predeclared SMOKE1 criteria."
+    ],
+    "purpose": "Current repaired path can select and execute native work and deliver one correct source-cited final answer."
+  },
+  "stage2": {
+    "calls": {
+      "Base": 4,
+      "HCL_answer": 4,
+      "HCL_planning": 4
+    },
+    "cases": [
+      "PAIR1",
+      "PAIR2",
+      "PAIR3",
+      "PAIR4"
+    ],
+    "fairness": "Same original source/question, same current explicit-citation meaning/shape policy and source-cited-answer acceptance for both arms; same provider, model alias, high thinking, 8192 final token cap. Fresh isolated session per arm; no other arm output, rubric or expected result in prompts. HCL alone has the disclosed 16384-token planning call; this is NOT compute-matched and cannot attribute causality to a module.",
+    "global_stop": "Unknown transmission/usage/cost, timeout, model drift, price increase, source/runtime/hash drift, unsafe/missing accounting, budget admission failure or user stop closes both stages; remaining slots NOT_ATTEMPTED.",
+    "interpretation": "At most a fresh assistant-authored development signal. Not a representative benchmark, no statistical significance/generalization, no module-causal claim, no I02 completion. Reusing old answered cases would be regression only; these new authored texts are not independent external evidence.",
+    "known_failure": "Known bounded content/schema/native-selection/overflow failures with complete accounting remain failures in their original slots; continue only other predeclared slots. No replacement, repair or retry.",
+    "maximum_calls": 12,
+    "metrics": [
+      "4/4 planned-item denominator for each arm; failed or missing final deliveries score0, content-only quality is NA.",
+      "Per-item and total blind source-first scores (0..10 each, total0..40).",
+      "All losses/ties/harms and valid-empty citation failures remain visible.",
+      "End-to-end arm latency includes HCL planning/native work plus final generation; record each call and total cost.",
+      "Native selected/executed/checked-treatment facts reported after score lock; invocation is not efficacy proof."
+    ],
+    "no_tuning": "All five sources, questions, criteria, execution order and acceptance/scoring rules frozen before stage1. No choosing or changing stage2 based on stage1 output.",
+    "order": [
+      [
+        "PAIR1",
+        "Base"
+      ],
+      [
+        "PAIR1",
+        "HCL"
+      ],
+      [
+        "PAIR2",
+        "HCL"
+      ],
+      [
+        "PAIR2",
+        "Base"
+      ],
+      [
+        "PAIR3",
+        "Base"
+      ],
+      [
+        "PAIR3",
+        "HCL"
+      ],
+      [
+        "PAIR4",
+        "HCL"
+      ],
+      [
+        "PAIR4",
+        "Base"
+      ]
+    ],
+    "rubric": {
+      "content": "Four predeclared facts, each1 point; accurate semantically equivalent answers accepted.",
+      "delivery_gate": "Exact allowed fields and types, nonblank answer, at least one explicit citation, original source audit including versions/location. Failure=0 end-to-end, content-only=NA; never rewrite to satisfy gate.",
+      "inference": "Three predeclared boundaries, each1 point.",
+      "traceability": "Three binary points: at least one correctly attributed relevant citation; central factual claims supported by those citations/source; no quotation used to imply an unsupported mental/causal claim."
+    },
+    "scoring": "One independent source-first reviewer sees source/question/rubric and unchanged final content under shuffled IDs, no arm label/capabilities/latency/cost; locks all eight ratings before unmasking. Reviewer must not author cases or alter expected criteria. No paid model judge calls."
+  },
+  "status": "PREPARED_ONLY_NOT_AUTHORIZED_NOT_EXECUTABLE",
+  "stopping": {
+    "application_retries": 0,
+    "authorization_lifetime_seconds_after_future_approval": 86400,
+    "close_remaining_to_zero_on_terminal": true,
+    "extraction_calls": 0,
+    "maximum_wait_per_call_seconds": 180,
+    "no_silent_input_truncation": true,
+    "one_pass_only": true,
+    "paid_judge_calls": 0,
+    "repair_calls": 0,
+    "sdk_retries": 0,
+    "stage1_send_window_seconds": 600,
+    "stage2_requires_stage1_pass": true,
+    "stage2_send_window_seconds": 2700,
+    "substitution_calls": 0,
+    "unknown_cost": "Retain full pre-send reservation, never classify as zero or reclaim it."
+  },
+  "thinking": "enabled",
+  "what_user_can_approve": "One new two-stage run on existing DeepSeek direct account, deepseek-v4-pro/high, <=14 total calls and <=US$2.00 total (.30 stage1,1.70 stage2 only after stage1 passes), five specified synthetic nonpersonal inputs; one pass/no retries/top-up; narrowly bounded synthetic final-output evidence in the public GitHub repository haohongfei2001-png/human-cognition-layer and a private user summary."
+}

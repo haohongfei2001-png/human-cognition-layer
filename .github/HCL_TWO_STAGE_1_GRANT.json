@@ -1,0 +1,15 @@
+{
+  "approved_at": null,
+  "authorization_ref": null,
+  "authorized_calls": 0,
+  "authorized_usd": "0",
+  "expires_at": null,
+  "historical_budget_transfer": false,
+  "other_stage_budget_transfer": false,
+  "package_sha256": "59880113f45246aac68a36cb5f4f7353ed4edd9faa9dc1f8d2107df45a25529c",
+  "phase1_source_review_sha256": null,
+  "retries": 0,
+  "schema": "hcl-two-stage-grant-v1",
+  "stage": 1,
+  "status": "PREPARED_NOT_AUTHORIZED"
+}

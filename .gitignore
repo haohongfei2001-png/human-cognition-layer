@@ -33,3 +33,7 @@ planner-contract-smoke.enc.json
 # Only the strict public synthetic whitelist may leave the runner.
 current-flow-private/
 current-flow-public.json
+
+# Bounded new-study receipts; only explicit public export may leave runner.
+two-stage-*-private/
+two-stage-*-public.json
