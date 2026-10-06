@@ -1,0 +1,6 @@
+{
+  "schema": "hcl-two-stage-account-readiness-marker-v1",
+  "purpose": "READ_ONLY_CURRENCY_AND_AVAILABILITY_NO_BALANCE_OUTPUT_NO_MODEL_CALL",
+  "authorization_ref": "OWNER_APPROVED_TWO_STAGE_20261006_173248_14_CALLS_2_USD",
+  "executor_commit": "34835a2515553cb0ae6862bdf6a1f1ca401c6732"
+}
