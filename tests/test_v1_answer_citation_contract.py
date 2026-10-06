@@ -6,9 +6,9 @@ import unittest
 from unittest.mock import patch
 
 from hcl.cognition import CognitionWorkspace, UniversalHCL
-from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY, answer_reader_entry
+from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY, _EXPLICIT_CITATION_FINAL_ANSWER_POLICY, answer_reader_entry
 from hcl.cognition.retained import audit_supplied_source_citations
-from scripts.development_final_delivery_amendment import validate_current
+from scripts.development_explicit_citation_amendment import validate_current
 from tests.test_v1_universal_question import Stub, operation, plan, run
 
 SOURCE = 'Lin wrote the note.\nThe blue box stayed closed.'
@@ -128,7 +128,7 @@ class AnswerCitationContractTests(unittest.TestCase):
         citation=dict(source_id='record-a',quote=SOURCE,end=len(SOURCE))
         port=AnswerPort([citation],plan(operation('B01','What is directly reported?',['record-a'])));result=run(session,'What is directly reported?',port)
         self.assertEqual([phase for phase,_ in port.calls],['planning','answer'])
-        self.assertIn(_FINAL_ANSWER_POLICY,port.calls[-1][1][0]['content'])
+        self.assertIn(_EXPLICIT_CITATION_FINAL_ANSWER_POLICY,port.calls[-1][1][0]['content'])
         self.assertEqual(json.loads(port.calls[-1][1][-1]['content'])['sources'][0]['text'],SOURCE)
         self.assertEqual(result['status'],'ANSWER_SOURCE_REVIEW_FAILED')
         self.assertFalse(result['source_review']['deliverable'])

@@ -13,7 +13,7 @@ from .capability_catalog import CATALOG
 from .deepseek_metered import safe_metered_failure_details
 from .workspace import CognitionWorkspace
 from .core import Scope, ClaimKind
-from .reader_entry import _FINAL_ANSWER_POLICY
+from .reader_entry import _EXPLICIT_CITATION_FINAL_ANSWER_POLICY
 from .retained import audit_supplied_source_citations
 
 _SAFE_FAILURE_CODES = frozenset(('CALL_ALLOWANCE_EXHAUSTED', 'CLOSED_OR_DUPLICATE_PHASE_NO_RETRY', 'COST_ALLOWANCE_EXHAUSTED', 'DURABLE_RESERVATION_JOURNAL_REQUIRED_FOR_PROVIDER', 'METERED_RESPONSE_REQUIRED', 'PLANNER_AND_ANSWER_BACKENDS_AND_TWO_CALL_ALLOWANCE_REQUIRED', 'PLANNER_OR_ANSWER_BACKEND_AND_ALLOWANCE_UNAVAILABLE', 'SOURCE_CHANGED_DURING_ORCHESTRATION', 'SUCCESSFUL_PLANNING_REQUIRED', 'USAGE_OUTSIDE_RESERVED_BOUND', 'answer exceeds bounded contract', 'bounded authorized input required', 'bounded bindings required', 'bounded context required', 'bounded interpreted question required', 'bounded planning plus answer allowance required', 'complete context exceeds budget; no truncation', 'complete sources exceed bound; no truncation', 'duplicate responsibility actor', 'invalid answer schema', 'invalid bounded task plan', 'invalid limitations', 'invented or stale source anchor', 'operation bound exceeded', 'ordinary nonempty question required', 'planning response exceeds bound', 'source count exceeds bound; no silent source dropping', 'unknown capability or operation fields', 'unknown or duplicate source selection', 'unsupported binding or source', 'METERED_BACKEND_OR_JOURNAL_FAILED', 'INVALID_USAGE_METADATA', 'ORCHESTRATION_FAILURE', 'CALL_ALREADY_IN_FLIGHT', 'SOURCE_SUPPORT_CHANGED', 'PLANNER_OR_ANSWER_OUTPUT_BOUND_EXCEEDED'))
@@ -475,7 +475,7 @@ class UniversalHCL:
                 selected_operations=len(plan['operations']),dispatched_operations=len(receipt['operations']),native_results=native_results)
             self._current(versions,receipt['operations'])
             if not native_results:raise HCLBoundaryError('NATIVE_HCL_RESULT_REQUIRED_BEFORE_ANSWER')
-            final=bounded([dict(role='system',content=_FINAL_ANSWER_POLICY+' You are answering through HCL orchestration. '
+            final=bounded([dict(role='system',content=_EXPLICIT_CITATION_FINAL_ANSWER_POLICY+' You are answering through HCL orchestration. '
                 'Use the original question; planned interpretations are conditional, not replacement user requests. '
                 'The answer field must contain a nonblank answer; state an evidence limitation explicitly rather than leaving it empty. '
                 'Use the actual HCL outcomes below. Native execution alone proves neither relevant checked treatment nor correct model interpretation. '
@@ -500,7 +500,18 @@ class UniversalHCL:
             if not obj['answer'].strip():
                 receipt['final_delivery_code']='ANSWER_BLANK'
                 raise HCLBoundaryError('NONBLANK_FINAL_ANSWER_REQUIRED')
-            audit=(audit_supplied_source_citations(final,raw) if versions else dict(
+            # Validate only: never fill a missing version/source, wrap a quote,
+            # drop a field, or rewrite the returned bytes to fit a consumer.
+            explicit=all(isinstance(c,dict) and {'source_id','version','quote'}<=set(c)
+                and set(c)<={'source_id','version','quote','start'}
+                and isinstance(c['source_id'],str) and isinstance(c['quote'],str)
+                and type(c['version']) is int
+                and ('start' not in c or type(c['start']) is int and c['start']>=0)
+                for c in obj['source_citations'])
+            audit=(dict(status='INVALID_EXPLICIT_CITATION_SHAPE',deliverable=False,
+                semantic_certification=False,anchors=[],raw_output_rewritten=False,
+                source_identity_substituted=False) if not explicit else
+                audit_supplied_source_citations(final,raw) if versions else dict(
                 status='NO_SUPPLIED_SOURCES_UNSOURCED_ANALYSIS',deliverable=not obj['source_citations'],semantic_certification=False))
             receipt['source_review']=audit
             receipt['status']='ANSWERED_WITH_EXPLICIT_LIMITS' if audit['deliverable'] else 'ANSWER_SOURCE_REVIEW_FAILED'

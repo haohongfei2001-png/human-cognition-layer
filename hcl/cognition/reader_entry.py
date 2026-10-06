@@ -13,7 +13,7 @@ from .retained import (prepare_retained_reader, original_sources_from_messages,
                        audit_supplied_source_citations)
 
 
-_FINAL_ANSWER_POLICY = (
+_FINAL_ANSWER_MEANING_POLICY = (
     'Return exactly answer, source_citations, uncertainty and assumptions in one JSON object. '
     'Quote only supplied original sources. Source provenance does not certify semantics, '
     'private state or world truth. '
@@ -24,6 +24,11 @@ _FINAL_ANSWER_POLICY = (
     'and put material unstated premises in assumptions. When the source leaves the cause open, '
     'keep plausible alternatives open in uncertainty instead of completing a familiar story '
     'or excluding another motive without evidence. '
+)
+
+# The historical reader contract remains byte-identical. UniversalHCL uses the
+# explicit-object contract below; neither path repairs a model's answer.
+_FINAL_ANSWER_POLICY = _FINAL_ANSWER_MEANING_POLICY + (
     'answer, uncertainty and assumptions must be strings. source_citations must be an array '
     'of at most 32 entries. Use citation objects with required source_id and quote fields; '
     'the only optional fields are version and start. Do not include end or any other field. '
@@ -36,6 +41,22 @@ _FINAL_ANSWER_POLICY = (
     'quotations, supply the correct start and exact original substring. With exactly one supplied '
     'source, a quote string alone is also accepted, but explicit source_id objects are preferred; '
     'with multiple sources, each citation must identify its source. An empty citation array is allowed. '
+    'With no supplied original sources, source_citations must be empty.'
+)
+
+_EXPLICIT_CITATION_FINAL_ANSWER_POLICY = _FINAL_ANSWER_MEANING_POLICY + (
+    'answer, uncertainty and assumptions must be strings. source_citations must be an array '
+    'of at most 32 entries. Every citation must be an object with required source_id, version '
+    'and quote fields; the only optional field is start. Do not include end or any other field. '
+    'Internal prepared-state anchors are not output citation objects; do not copy their extra fields. '
+    'Copy source_id and the matching integer version from the supplied original source. '
+    'Do not infer or invent either field. A version must not be a boolean. '
+    'Quote a nonblank contiguous original substring of at most 4000 characters, preserving exact wording. '
+    'Omit start unless known; if present it must be a nonnegative integer, not null or a boolean, '
+    'specifying the zero-based Unicode character offset in the original text, not a byte or UTF-16 offset. '
+    'For repeated quotations, supply the correct start and exact original substring. '
+    'A quote string alone is not a citation object, even with exactly one supplied source. '
+    'An empty citation array is allowed; state evidence limitations without inventing a citation. '
     'With no supplied original sources, source_citations must be empty.'
 )
 

@@ -1,0 +1,39 @@
+{
+  "amended_hcl_runtime_sha256": "62bea96c481fcdde3bfb0af8707796d5afaebf1c9d051ace9bd0c82e236f2442",
+  "answer_quality_improvement_claimed": false,
+  "authorized_additional_calls": 0,
+  "baseline_commit": "2fe35047ffb42327eb72817769300dfaecdeeda3",
+  "changed_runtime_files": [
+    "hcl/cognition/reader_entry.py",
+    "hcl/cognition/universal_entry.py"
+  ],
+  "citation_fields_fabricated": false,
+  "empty_citations_policy_unchanged": true,
+  "entry": "UniversalHCL.answer",
+  "existing_source_audit_unchanged": true,
+  "historical_answers_rescored": false,
+  "historical_d01_cause_identified": false,
+  "historical_executors_unchanged": true,
+  "legacy_reader_policy_value_unchanged": true,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "model_compliance_verified": false,
+  "model_or_token_defaults_changed": false,
+  "optional_citation_fields": [
+    "start"
+  ],
+  "previous_hcl_runtime_sha256": "14dbb5805858d41ade7ba1135a22ef6e3b1c4327ae7fad34173274d84b83166c",
+  "provider_calls": 0,
+  "provider_phases_changed": false,
+  "provider_spend_usd": 0,
+  "raw_answers_rewritten": false,
+  "reason": "ALIGN_UNIVERSAL_GENERATION_AND_EXPLICIT_CITATION_OBJECT_CONTRACT",
+  "required_citation_fields": [
+    "source_id",
+    "version",
+    "quote"
+  ],
+  "retries_added": 0,
+  "schema": "hcl-explicit-citation-contract-amendment-v1",
+  "start_null_allowed": false,
+  "strict_comparison_acceptance_unchanged": true
+}

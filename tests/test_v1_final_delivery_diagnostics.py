@@ -12,7 +12,9 @@ import unittest
 from unittest.mock import patch
 
 from hcl.cognition import universal_entry as current
-from scripts import development_final_delivery_amendment as amendment
+from scripts import development_explicit_citation_amendment as amendment
+from scripts import development_final_delivery_amendment as diagnostic_amendment
+from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY, _EXPLICIT_CITATION_FINAL_ANSWER_POLICY
 from scripts.run_four_comparison import accepted, final_fields
 
 SOURCE = 'Mara heard the notice.'
@@ -43,14 +45,15 @@ def raw_body(**changes):
 def baseline_module():
     amendment.validate_current()  # Also enforce unchanged dependencies in standalone paired runs.
     root = Path(__file__).resolve().parents[1]
-    raw = subprocess.check_output(['git', 'show', amendment.BASELINE + ':' + amendment.CHANGED], cwd=root)
-    if hashlib.sha256(raw).hexdigest() != amendment.PREVIOUS_FILE_SHA:
+    name = 'hcl/cognition/universal_entry.py'
+    raw = subprocess.check_output(['git', 'show', amendment.BASELINE + ':' + name], cwd=root)
+    if hashlib.sha256(raw).hexdigest() != amendment.PREVIOUS_FILES[name]:
         raise ValueError('exact previous ordinary runtime required')
     name = 'hcl.cognition._final_delivery_frozen_baseline'
     module = types.ModuleType(name)
     module.__package__ = 'hcl.cognition'
     sys.modules[name] = module
-    exec(compile(raw, amendment.BASELINE + ':' + amendment.CHANGED, 'exec'), module.__dict__)
+    exec(compile(raw, amendment.BASELINE + ':' + name, 'exec'), module.__dict__)
     return module
 
 
@@ -119,11 +122,31 @@ class FinalDeliveryTests(unittest.TestCase):
         raw = raw_body() if raw is None else raw
         before = execute(self.previous, raw, **options)
         after = execute(current, raw, **options)
-        self.assertEqual(set(after['receipt']) - set(before['receipt']), {'final_delivery_code'})
-        code = after['receipt'].pop('final_delivery_code')
+        self.assertEqual(set(after['receipt']), set(before['receipt']))
+        code = after['receipt']['final_delivery_code']
         self.assertIn(code, CODES)
         self.assertEqual(code, expected)
-        self.assertEqual(after, before)  # All old fields, raw bytes, prompts, calls and journals.
+        self.assertEqual(before['receipt']['final_delivery_code'], expected)
+        # Only the disclosed contract prefix changes. Original question, source,
+        # native state and the orchestration-policy suffix remain exact.
+        compared = copy.deepcopy(after)
+        frames = [messages for phase, messages in compared['calls'] if phase == 'answer']
+        if 'actual_final_messages' in compared['receipt']:
+            frames.append(compared['receipt']['actual_final_messages'])
+        for frame in frames:
+            policy = frame[0]['content']
+            self.assertTrue(policy.startswith(_EXPLICIT_CITATION_FINAL_ANSWER_POLICY))
+            frame[0]['content'] = _FINAL_ANSWER_POLICY + policy[len(_EXPLICIT_CITATION_FINAL_ANSWER_POLICY):]
+        # Malformed fields already refused by the source auditor now have a
+        # shape-specific refusal. Their failure outcome/raw bytes are unchanged.
+        if compared['receipt'].get('source_review', {}).get('status') == 'INVALID_EXPLICIT_CITATION_SHAPE':
+            self.assertFalse(before['receipt']['source_review']['deliverable'])
+            self.assertEqual(compared['receipt']['source_review'], dict(
+                status='INVALID_EXPLICIT_CITATION_SHAPE', deliverable=False,
+                semantic_certification=False, anchors=[], raw_output_rewritten=False,
+                source_identity_substituted=False))
+            compared['receipt']['source_review'] = before['receipt']['source_review']
+        self.assertEqual(compared, before)  # All other fields/raw output/calls/journals/holds.
         self.assertEqual(after['receipt']['provider_calls'], 0)
         self.assertLessEqual(len(after['calls']), 2)
         self.assertNotIn(CANARY, code)
@@ -195,12 +218,23 @@ class FinalDeliveryTests(unittest.TestCase):
         self.pair('ANSWER_BLANK', raw_body(answer=' ', source_citations=[]), sourced=False)
         self.pair('SOURCE_REVIEW_REJECTED', sourced=False)
 
-    def test_known_runtime_export_contract_differences_are_preserved_not_fixed(self):
+    def test_legacy_shapes_cannot_claim_delivery_under_the_explicit_contract(self):
         permitted = ([dict(source_id='s', quote=SOURCE)], [SOURCE],
                      [dict(source_id='s', version=1, quote=SOURCE, start=None)])
         for citations in permitted:
             raw = raw_body(source_citations=citations)
-            result = self.pair('DELIVERED', raw)
+            before = execute(self.previous, raw)
+            result = execute(current, raw)
+            self.assertEqual(before['receipt']['final_delivery_code'], 'DELIVERED')
+            self.assertEqual(result['receipt']['final_delivery_code'], 'SOURCE_REVIEW_REJECTED')
+            self.assertEqual(result['receipt']['source_review']['status'], 'INVALID_EXPLICIT_CITATION_SHAPE')
+            self.assertNotIn('answer', result['receipt'])
+            self.assertEqual(result['receipt']['answer_raw'], raw)
+            self.assertEqual(result['journal'], before['journal'])
+            self.assertEqual(result['attempts'], before['attempts'])
+            self.assertEqual(result['reserved_usd'], before['reserved_usd'])
+            self.assertEqual([phase for phase, _ in result['calls']], ['planning', 'answer'])
+            self.assertEqual(result['receipt']['provider_calls'], 0)
             self.assertIsNone(final_fields(raw))
             self.assertFalse(accepted(result['calls'][-1][1], raw))
         raw = raw_body(source_citations=[])
@@ -225,7 +259,7 @@ class FinalDeliveryAmendmentTests(unittest.TestCase):
     def test_current_runtime_and_consumed_history_are_pinned(self):
         self.assertTrue(amendment.validate_current())
         original = Path.read_bytes
-        for name in json.loads(amendment.PINS.read_text())['files_sha256']:
+        for name in json.loads(diagnostic_amendment.PINS.read_text())['files_sha256']:
             with self.subTest(path=name):
                 def drift(path):
                     raw = original(path)
@@ -238,7 +272,7 @@ class FinalDeliveryAmendmentTests(unittest.TestCase):
         original = Path.read_bytes
         def drift(path):
             raw = original(path)
-            return raw + b'\n' if path == amendment.PINS else raw
+            return raw + b'\n' if path == diagnostic_amendment.PINS else raw
         with patch.object(Path, 'read_bytes', drift):
             with self.assertRaisesRegex(ValueError, 'pin manifest drift'):
                 amendment.validate_current()
