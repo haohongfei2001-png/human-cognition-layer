@@ -1,0 +1,97 @@
+[
+  {
+    "criteria": [
+      "Attribute Wednesday to Rowan and Thursday to Mara, without swapping speakers.",
+      "Do not treat either belief as the established actual date.",
+      "State that the supplied source contains no authoritative schedule.",
+      "Use at least one valid explicit source citation; retain uncertainty."
+    ],
+    "id": "SMOKE1",
+    "question": "What does each person believe about the seminar date, and can this source establish the actual date? Cite the supplied source in your answer.",
+    "source": "Rowan: I believe the seminar starts Wednesday.\nMara: I believe the seminar starts Thursday.\nNarrator: No published schedule is included in this source.",
+    "source_id": "seminar-notes",
+    "source_sha256": "f838f2124549772ae7e951f1bfd61413170bc27f668a81aaf2d27e56e6945c73",
+    "stage": 1,
+    "version": 1
+  },
+  {
+    "boundaries": [
+      "Do not certify Vale's current belief or knowledge from an earlier statement.",
+      "Do not equate a reported belief with independently established private knowledge.",
+      "Absence of a described message is not proof that no information arrived by any route."
+    ],
+    "facts": [
+      "The narrated current location is the south drawer.",
+      "Vale explicitly reported a north-drawer belief before leaving.",
+      "Inez explicitly reports a current south-drawer belief.",
+      "No later communication to Vale is described."
+    ],
+    "id": "PAIR1",
+    "question": "What location does the source report, and what does it establish about Vale and Inez knowing or believing the location after the move? Distinguish earlier reports from current mental states. Cite the supplied source.",
+    "source": "Vale: Before leaving, I believe the blue folder is in the north drawer.\nNarrator: Vale left the room.\nNarrator: Inez then moved the folder to the south drawer while Vale was away.\nInez: I believe the folder is now in the south drawer.\nNarrator: No later communication to Vale is described.",
+    "source_id": "folder-record",
+    "source_sha256": "ebf65ce1c99b06df53b1af1a42b7f909088731361215cde9fe5dff7df373dc20",
+    "stage": 2,
+    "version": 1
+  },
+  {
+    "boundaries": [
+      "Do not convert wanting to avoid noise into an established intention to avoid the meeting.",
+      "Do not use later knowledge as evidence of action-time knowledge.",
+      "Not knowing the date can support a possible explanation, not a uniquely proven causal story."
+    ],
+    "facts": [
+      "Noa reports missing the review meeting.",
+      "Noa reports not knowing the changed date at the time.",
+      "The team is reported not to have told Noa about the date change.",
+      "The stated avoidance desire concerns renovation noise; learning the date occurs later."
+    ],
+    "id": "PAIR2",
+    "question": "What explanations for the missed meeting are supported or merely possible, and what cannot be concluded about Noa's intention at the time? Cite the supplied source.",
+    "source": "Noa: At the time, I did not know the review meeting had moved to Thursday.\nNoa: I missed the review meeting.\nNoa: I wanted to avoid the loud renovation in the next room.\nNarrator: The team had not told Noa about the date change.\nNarrator: After the missed meeting, Noa learned the new date.",
+    "source_id": "review-record",
+    "source_sha256": "9bf5118839395f7f5e73a16163d29665f88bc96d94bad5d6097bb4c95e35e895",
+    "stage": 2,
+    "version": 1
+  },
+  {
+    "boundaries": [
+      "Do not infer indifference from non-delivery despite the supplied outage account.",
+      "Do not infer a stable reliability trait from this single episode.",
+      "Preserve the help intention as a report, without claiming it certifies actual private feeling or future conduct."
+    ],
+    "facts": [
+      "Mina expected a reply yesterday.",
+      "Jules is reported to have drafted a reply yesterday.",
+      "A service outage is the stated reason it was not delivered.",
+      "Jules reports still wanting to help; earlier interactions are absent from the source."
+    ],
+    "id": "PAIR3",
+    "question": "Does the late reply establish that Jules is indifferent or generally unreliable? Separate the reported outcome, stated intention, and unsupported personal conclusions. Cite the supplied source.",
+    "source": "Mina: I expected Jules to reply yesterday.\nNarrator: Jules drafted a reply yesterday, but a service outage prevented its delivery.\nJules: I still want to help Mina with the proposal.\nNarrator: This source contains no earlier interactions between Mina and Jules.",
+    "source_id": "reply-record",
+    "source_sha256": "14d863838065e4de35a5c42e3d6a20e0d419b58c712baf8d762b88883e91687f",
+    "stage": 2,
+    "version": 1
+  },
+  {
+    "boundaries": [
+      "Removing one support does not prove the opposite conclusion.",
+      "Do not remove the independent inspection support without a premise doing so.",
+      "Do not turn a conditional source argument into an independently verified real-world operational decision."
+    ],
+    "facts": [
+      "The source gives two stated supports for the same wait conclusion.",
+      "The warning-dependent support is removed under the proposed condition.",
+      "The incomplete-inspection support remains under the stated condition.",
+      "The original source is not rewritten by the hypothetical question."
+    ],
+    "id": "PAIR4",
+    "question": "Within this fictional argument only, suppose the storm warning were not active but the engine inspection remained incomplete. Which stated support would be removed, which would remain, and does the opposite conclusion follow? Cite the supplied source.",
+    "source": "Narrator: In harbor, the storm warning is active.\nToma: In harbor, I conclude the ferry should wait because the storm warning is active.\nNarrator: In harbor, the engine inspection is incomplete.\nToma: In harbor, I conclude the ferry should wait because the engine inspection is incomplete.",
+    "source_id": "harbor-argument",
+    "source_sha256": "d0ff1a8c4574d31b8a05fbf3b8dbb0d05cc91d600bf60831271bdc68aba7a88e",
+    "stage": 2,
+    "version": 1
+  }
+]

@@ -1,0 +1,65 @@
+name: HCL two-stage 1 one approved invocation
+on:
+  push:
+    branches: [main]
+    paths: ['.github/HCL_TWO_STAGE_1_TRIGGER.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: hcl-two-stage-1-once-20261006
+  cancel-in-progress: false
+jobs:
+  verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'openai==2.14.0' 'z3-solver==4.15.4.0'
+      - name: Provider-free exact package and stage guards
+        run: python -m unittest tests.test_two_stage tests.test_two_stage_review tests.test_two_stage_account -v
+      - name: Official current peak pricing, no model call
+        run: python -m scripts.two_stage_price --output /tmp/hcl-two-stage-1-prices.json
+      - name: Existing provider secret presence only
+        env:
+          SECRET_PRESENT: ${{ secrets.DEEPSEEK_API_KEY != '' }}
+        run: |
+          python - <<'PYCODE'
+          import json,os
+          from pathlib import Path
+          evidence=dict(run_id=os.environ['GITHUB_RUN_ID'],head_sha=os.environ['GITHUB_SHA'],existing_provider_secret='PRESENT' if os.environ['SECRET_PRESENT']=='true' else 'ABSENT')
+          Path('/tmp/hcl-two-stage-1-secret-presence.json').write_text(json.dumps(evidence))
+          print(json.dumps(evidence,sort_keys=True))
+          if evidence['existing_provider_secret']!='PRESENT':raise SystemExit(1)
+          PYCODE
+      - name: Existing account currency and availability only, no model request
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: python -m scripts.two_stage_account --output /tmp/hcl-two-stage-1-account.json --require-usd
+      - name: Single stage history and exact marker admission
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-two-stage-1-once.yml/runs?per_page=100" > /tmp/hcl-two-stage-1-runs.json
+          python -m scripts.run_two_stage_once --stage 1 --check-launch /tmp/hcl-two-stage-1-runs.json
+      - name: One approved stage, zero SDK retries
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: python -m scripts.run_two_stage_once --stage 1 --execute
+      - name: Publish only approved synthetic final text and bounded evidence
+        if: always()
+        run: |
+          if test -f two-stage-1-private/receipt.json; then
+            python -m scripts.two_stage_public --stage 1 --receipt two-stage-1-private/receipt.json --output two-stage-1-public.json
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-two-stage-1-public-${{ github.run_id }}
+          path: two-stage-1-public.json
+          if-no-files-found: warn

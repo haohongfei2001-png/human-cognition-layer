@@ -1,0 +1,20 @@
+name: HCL two-stage read-only billing-currency preflight
+on:
+  push:
+    branches: [main]
+    paths: ['.github/HCL_TWO_STAGE_ACCOUNT_READINESS_TRIGGER.json']
+permissions:
+  contents: read
+jobs:
+  metadata-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: One existing-account GET, output no balances or credentials
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: python -m scripts.two_stage_account --output /tmp/hcl-two-stage-account-readiness.json
