@@ -22,7 +22,7 @@ from scripts import two_stage_public as public
 from tests.test_two_stage import Client, execute, exported
 
 
-NOW = datetime(2026, 10, 6, 17, 40, tzinfo=timezone.utc)
+NOW = datetime(2026, 10, 6, 19, tzinfo=timezone.utc)
 IDENTITY = dict(run_id='731', head_sha='a' * 40)
 REASONING_CANARY = 'PRIVATE_REASONING_CANARY_DO_NOT_RETAIN'
 ENVELOPE_CANARY = 'PRIVATE_ENVELOPE_CANARY_DO_NOT_RETAIN'
@@ -34,7 +34,7 @@ def phase1_package_read(package):
     original = Path.read_text
 
     def read(path, *args, **kwargs):
-        if path == Path('reports/HCL_TWO_STAGE_1_PACKAGE.json'):
+        if path == Path('reports/HCL_TWO_STAGE_CNY_1_PACKAGE.json'):
             return json.dumps(package)
         return original(path, *args, **kwargs)
 
@@ -53,18 +53,18 @@ def phase1_fixture():
         uncertainty='The actual seminar date is unresolved.',
         assumptions='Neither speaker is treated as an authoritative schedule.'), ensure_ascii=False)
     calls = []
-    for phase, reserve in [('planning', r.MAX_PLANNING), ('answer', r.MAX_ANSWER)]:
+    for phase, reserve in [('planning', r.MAX_PLANNING_CNY), ('answer', r.MAX_ANSWER_CNY)]:
         frozen = package['requests'].get('SMOKE1:HCL:' + phase)
         calls.append(dict(
             call_id='SMOKE1:HCL:' + phase, case_id='SMOKE1', arm='HCL', phase=phase,
             request_sha256=frozen['request_sha256'] if frozen else 'b' * 64,
             request_bytes=frozen['request_bytes'] if frozen else 12000,
-            reserved_usd=str(reserve),
-            exact_request_reservation_usd=frozen['reservation_usd'] if frozen else str(
-                ((2 * 12000 + 2048) * r.INPUT_RATE + (8192 + 32) * r.OUTPUT_RATE) / 1000000),
+            reserved_cny=str(reserve),
+            exact_request_reservation_cny=frozen['reservation_cny'] if frozen else str(
+                ((2 * 12000 + 2048) * r.CNY_INPUT_RATE + (8192 + 32) * r.CNY_OUTPUT_RATE) / 1000000),
             status='RETURNED', invocation_status='RETURNED', provider_call=True,
             usage=dict(prompt_tokens=100, completion_tokens=100),
-            usage_rated_usd=str((100 * r.INPUT_RATE + 100 * r.OUTPUT_RATE) / 1000000)))
+            usage_rated_cny=str((100 * r.CNY_INPUT_RATE + 100 * r.CNY_OUTPUT_RATE) / 1000000)))
     arm = dict(case_id='SMOKE1', arm='HCL', status='ANSWER_ACCEPTED',
                final_text=raw, final_fields=json.loads(raw),
                final_answer_sha256=hashlib.sha256(raw.encode()).hexdigest(),
@@ -72,18 +72,18 @@ def phase1_fixture():
                executed_capabilities=['B01'], checked_treatment=['B01'],
                native_results=1, final_delivery_code='DELIVERED')
     evidence = dict(
-        schema='hcl-two-stage-public-evidence-v1', stage=1, **IDENTITY,
+        schema='hcl-two-stage-cny-public-evidence-v1', currency='CNY', stage=1, **IDENTITY,
         authorization_ref=r.AUTH, package_sha256=r.digest(package), runtime_sha256=r.RUNTIME,
         model=r.MODEL, planning_tokens=16384, answer_tokens=8192, production_planning_tokens=4096,
         cases=[case], status='COMPLETED_ONE_PASS', calls=calls, arms=[arm],
-        provider_calls=2, reserved_usd=str(r.MAX_PLANNING + r.MAX_ANSWER), usage_complete=True,
-        usage_rated_usd=str(sum(Decimal(c['usage_rated_usd']) for c in calls)),
+        provider_calls=2, reserved_cny=str(r.MAX_PLANNING_CNY + r.MAX_ANSWER_CNY), usage_complete=True,
+        usage_rated_cny=str(sum(Decimal(c['usage_rated_cny']) for c in calls)),
         budget_state='CLOSED_NO_TRANSFER_NO_RETRY', remaining_authorized_calls=0,
-        remaining_authorized_usd='0', invoice_cost_usd=None, elapsed_seconds=1,
+        remaining_authorized_cny='0', invoice_cost_cny=None, elapsed_seconds=1,
         stage1_semantic_gate='PENDING_INDEPENDENT_SOURCE_REVIEW', efficacy_verified=False,
         i02_certified=False)
     review = dict(
-        schema='hcl-two-stage-phase1-source-review-v1', authorization_ref=r.AUTH,
+        schema='hcl-two-stage-cny-phase1-source-review-v1', authorization_ref=r.AUTH,
         evidence_sha256=r.digest(evidence), source_sha256=hashlib.sha256(source['text'].encode()).hexdigest(),
         final_answer_sha256=arm['final_answer_sha256'],
         reviewer_role='INDEPENDENT_SOURCE_FIRST_AFTER_OUTPUT', overall_pass=True,
@@ -165,7 +165,7 @@ class Phase1GateAdversarialTests(unittest.TestCase):
                        lambda e: e['calls'].reverse(),
                        lambda e: e['calls'].append(copy.deepcopy(e['calls'][0])),
                        lambda e: e.update(status='STOPPED_NO_RETRY'),
-                       lambda e: e.update(remaining_authorized_usd='0.01'),
+                       lambda e: e.update(remaining_authorized_cny='0.01'),
                        lambda e: e.update(remaining_authorized_calls=1)]:
             self.reject_evidence(mutate)
         for index in (0, 1):
@@ -174,10 +174,10 @@ class Phase1GateAdversarialTests(unittest.TestCase):
                            dict(usage={}), dict(usage=dict(prompt_tokens=True, completion_tokens=100)),
                            dict(usage=dict(prompt_tokens=100, completion_tokens=0)),
                            dict(usage=dict(prompt_tokens=100000, completion_tokens=100)),
-                           dict(usage_rated_usd='0'), dict(reserved_usd='0.01')]:
+                           dict(usage_rated_cny='0'), dict(reserved_cny='0.01')]:
                 with self.subTest(call=index, change=change):
                     self.reject_evidence(lambda e: e['calls'][index].update(change))
-        for field in ('usage', 'usage_rated_usd'):
+        for field in ('usage', 'usage_rated_cny'):
             self.reject_evidence(lambda e: e['calls'][0].pop(field))
 
     def test_model_phase_and_planning_request_identity_cannot_be_relabelled(self):
@@ -191,7 +191,7 @@ class Phase1GateAdversarialTests(unittest.TestCase):
                 self.reject_evidence(lambda e: e['calls'][0].update(change))
         self.reject_evidence(lambda e: e['calls'][0].pop('request_sha256'))
         self.reject_evidence(lambda e: e['calls'][1].update(request_sha256='not-a-hash'))
-        self.reject_evidence(lambda e: e['calls'][1].update(exact_request_reservation_usd='0'))
+        self.reject_evidence(lambda e: e['calls'][1].update(exact_request_reservation_cny='0'))
 
     def test_review_requires_exact_evidence_source_final_and_independent_role(self):
         for field, value in [('evidence_sha256', 'f' * 64), ('source_sha256', 'f' * 64),
@@ -243,11 +243,11 @@ class Phase1GateAdversarialTests(unittest.TestCase):
 class PricePreflightAdversarialTests(unittest.TestCase):
     @staticmethod
     def html():
-        return b'''<table><tr><th>MODEL</th><td>deepseek-flash</td><td>deepseek-v4-pro</td></tr>
-<tr><th>MODEL VERSION</th><td>flash</td><td>DeepSeek-V4-Pro-0813</td></tr>
-<tr><th>PEAK</th><td>$0.006</td><td>$0.044</td></tr>
-<tr><th>PEAK</th><td>$0.3</td><td>$1.32</td></tr>
-<tr><th>PEAK</th><td>$1.2</td><td>$3.96</td></tr></table>'''
+        return '''<table><tr><th>模型</th><td>deepseek-flash</td><td>deepseek-v4-pro</td></tr>
+<tr><th>模型版本</th><td>flash</td><td>DeepSeek-V4-Pro-0813</td></tr>
+<tr><th>高峰时段</th><td>0.04元</td><td>0.30元</td></tr>
+<tr><th>高峰时段</th><td>2元</td><td>9.0元</td></tr>
+<tr><th>高峰时段</th><td>8元</td><td>27.0元</td></tr></table>'''.encode()
 
     def evidence(self):
         return dict(**IDENTITY, url=price.URL, checked_at=NOW.isoformat(),
@@ -260,13 +260,13 @@ class PricePreflightAdversarialTests(unittest.TestCase):
     def test_price_model_column_version_currency_and_table_drift_fail_closed(self):
         raw = self.html()
         changes = [b'', b'x' * 512001, raw.decode(), b'\xff',
-                   raw.replace(b'$1.32', b'$1.33'), raw.replace(b'$3.96', b'$4.00'),
-                   raw.replace(b'$', b'CNY'), raw.replace(b'PEAK', b'OFF-PEAK'),
+                   raw.replace('9.0元'.encode(), '9.1元'.encode()), raw.replace('27.0元'.encode(), '28.0元'.encode()),
+                   raw.replace('元'.encode(), b'USD'), raw.replace('高峰时段'.encode(), '低峰时段'.encode()),
                    raw.replace(b'DeepSeek-V4-Pro-0813', b'DeepSeek-V4-Pro-1006'),
                    raw.replace(b'deepseek-v4-pro</td>', b'deepseek-chat</td>'),
                    raw.replace(b'<td>deepseek-flash</td><td>deepseek-v4-pro</td>',
                                b'<td>deepseek-v4-pro</td><td>deepseek-flash</td>'),
-                   raw.replace(b'</table>', b'<tr><td>PEAK</td><td>$0.3</td><td>$1.32</td></tr></table>')]
+                   raw.replace(b'</table>', '<tr><td>高峰时段</td><td>2元</td><td>9.0元</td></tr></table>'.encode())]
         for index, changed in enumerate(changes):
             with self.subTest(change=index), self.assertRaises((ValueError, UnicodeError)):
                 price.parse_price(changed)
@@ -291,6 +291,24 @@ class PricePreflightAdversarialTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             price.parse_price(raw)
 
+    def test_chinese_price_receipt_cannot_use_english_usd_table_or_rates(self):
+        self.assertEqual(price.URL, 'https://api-docs.deepseek.com/zh-cn/quick_start/pricing/')
+        self.assertEqual(price.RATES['currency'], 'CNY')
+        self.assertEqual((price.RATES['input'], price.RATES['output']), ('9.0', '27.0'))
+        wrong_prices = self.html().replace('9.0元'.encode(), '1.32元'.encode()).replace(
+            '27.0元'.encode(), '3.96元'.encode())
+        with self.assertRaises(ValueError):
+            price.parse_price(wrong_prices)
+        english = self.html().replace('模型版本'.encode(), b'MODEL VERSION').replace(
+            '模型'.encode(), b'MODEL').replace('高峰时段'.encode(), b'PEAK')
+        with self.assertRaises(ValueError):
+            price.parse_price(english)
+        for change in [dict(url='https://api-docs.deepseek.com/quick_start/pricing/'),
+                       dict(rates=dict(price.RATES, currency='USD')),
+                       dict(rates=dict(price.RATES, input='1.32', output='3.96'))]:
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                price.validate_price_evidence(dict(self.evidence(), **change), IDENTITY, NOW)
+
     def test_price_receipt_freshness_boundary_future_and_naive_time(self):
         for elapsed in (timedelta(0), timedelta(minutes=10)):
             evidence = dict(self.evidence(), checked_at=(NOW - elapsed).isoformat())
@@ -310,7 +328,7 @@ class AuthorizationAndLaunchAdversarialTests(unittest.TestCase):
     def test_prepared_historical_extended_or_cross_stage_grants_never_admit(self):
         bad = [r.expected_grant(self.package)]
         bad += [dict(self.grant, **change) for change in [
-            dict(authorization_ref='HISTORICAL_CONSUMED_GRANT'), dict(authorized_usd='2.00'),
+            dict(authorization_ref='HISTORICAL_CONSUMED_GRANT'), dict(authorized_cny='14'),
             dict(authorized_calls=14), dict(stage=2), dict(retries=1),
             dict(historical_budget_transfer=True), dict(other_stage_budget_transfer=True),
             dict(expires_at='2027-01-01T00:00:00Z'), dict(approved_at='2026-10-01T00:00:00Z')]]
@@ -320,8 +338,8 @@ class AuthorizationAndLaunchAdversarialTests(unittest.TestCase):
         r.require_grant(self.package, self.grant, NOW)
 
     def test_package_and_each_authorized_ceiling_are_exact(self):
-        for change in [dict(maximum_calls=3), dict(maximum_usd='0.31'),
-                       dict(maximum_aggregate_calls=15), dict(maximum_aggregate_usd='2.01'),
+        for change in [dict(maximum_calls=3), dict(maximum_cny='2.01'),
+                       dict(maximum_aggregate_calls=15), dict(maximum_aggregate_cny='14.01'),
                        dict(runtime_sha256='b' * 64), dict(planning_tokens=32768),
                        dict(answer_tokens=16384), dict(case_substitution=True)]:
             package = dict(self.package, **change)
@@ -357,7 +375,7 @@ class AuthorizationAndLaunchAdversarialTests(unittest.TestCase):
 
     def test_marker_history_attempt_event_parent_and_only_changed_path_are_bound(self):
         parent = 'c' * 40
-        marker = dict(schema='hcl-two-stage-marker-v1', stage=1, authorization_ref=r.AUTH,
+        marker = dict(schema='hcl-two-stage-cny-marker-v1', stage=1, authorization_ref=r.AUTH,
                       package_sha256=r.digest(self.package), grant_sha256=r.digest(self.grant),
                       executor_commit=parent)
         arguments = dict(run_id='731', attempt='1', runs=[dict(id=731, event='push', created_at=NOW.isoformat())],
@@ -381,10 +399,10 @@ class AuthorizationAndLaunchAdversarialTests(unittest.TestCase):
         r.configure(2)
         stage2 = r.build_package()
         self.assertEqual((stage1['maximum_calls'], stage2['maximum_calls']), (2, 12))
-        self.assertEqual((stage1['maximum_usd'], stage2['maximum_usd']), ('0.30', '1.70'))
-        total = sum(Decimal(p['maximum_schedule_reservation_usd']) for p in (stage1, stage2))
-        self.assertEqual(total, Decimal('1.98654720'))
-        self.assertLess(total, Decimal('2'))
+        self.assertEqual((stage1['maximum_cny'], stage2['maximum_cny']), ('2', '12'))
+        total = sum(Decimal(p['maximum_schedule_reservation_cny']) for p in (stage1, stage2))
+        self.assertEqual(total, Decimal('13.544640'))
+        self.assertLess(total, Decimal('14'))
         self.assertTrue(all(not r.expected_grant(p, True)['historical_budget_transfer'] for p in (stage1, stage2)))
 
 
@@ -421,14 +439,17 @@ class LedgerIsolationAdversarialTests(unittest.TestCase):
         planning, quote, size = self.planning()
         held = self.ledger.reserve('SMOKE1:HCL', 'planning', planning, quote, size)
         self.assertEqual(held, r.MAX_PLANNING)
-        self.ledger.value['calls'][0].update(status='RETURNED', usage_rated_usd='0.00000528')
+        self.ledger.value['calls'][0].update(status='RETURNED', usage_rated_usd='0.00000528',
+                                           usage_rated_cny='0.000036')
         answer, quote, size = self.answer()
         held = self.ledger.reserve('SMOKE1:HCL', 'answer', answer, quote, size)
         self.assertEqual(held, r.MAX_ANSWER)
         self.assertLess(quote, held)
         self.assertEqual(Decimal(self.ledger.value['reserved_usd']), r.MAX_PLANNING + r.MAX_ANSWER)
+        self.assertEqual(Decimal(self.ledger.value['reserved_cny']), r.MAX_PLANNING_CNY + r.MAX_ANSWER_CNY)
         self.ledger.close()
         self.assertEqual(self.ledger.value['remaining_authorized_usd'], '0')
+        self.assertEqual(self.ledger.value['remaining_authorized_cny'], '0')
         self.assertEqual(self.ledger.value['remaining_authorized_calls'], 0)
         self.assertEqual(self.ledger.value['budget_state'], 'CLOSED_NO_TRANSFER_NO_RETRY')
         with self.assertRaises(ValueError):
@@ -440,7 +461,8 @@ class LedgerIsolationAdversarialTests(unittest.TestCase):
             self.ledger.stopped = False
             self.ledger.value['calls'] = [] if status is None else [dict(
                 call_id='SMOKE1:HCL:planning', case_id='SMOKE1', status=status,
-                reserved_usd=str(r.MAX_PLANNING))]
+                reserved_usd=str(r.MAX_PLANNING), reserved_cny=str(r.MAX_PLANNING_CNY))]
+            self.ledger.value['reserved_cny'] = '0' if status is None else str(r.MAX_PLANNING_CNY)
             with self.subTest(status=status), self.assertRaises(ValueError):
                 self.ledger.reserve('SMOKE1:HCL', 'answer', answer, quote, size)
             self.assertTrue(self.ledger.stopped)
@@ -498,14 +520,18 @@ class LedgerIsolationAdversarialTests(unittest.TestCase):
             self.ledger.stopped = False
             self.ledger.value['calls'] = []
             self.ledger.value['reserved_usd'] = '0'
+            self.ledger.value['reserved_cny'] = '0'
             if field == 'stage_money':
                 self.ledger.value['reserved_usd'] = str(r.CAP)
             elif field == 'stage_call_count':
-                self.ledger.value['calls'] = [dict(call_id='reserved-' + str(i), case_id='OTHER',
-                                                 reserved_usd='0') for i in range(r.MAX_CALLS)]
+                self.ledger.value['calls'] = [dict(call_id='reserved-' + str(i) + ':Base:answer', case_id='OTHER',
+                                                 reserved_usd='0', reserved_cny=str(r.MAX_ANSWER_CNY))
+                                             for i in range(r.MAX_CALLS)]
+                self.ledger.value['reserved_cny'] = str(r.MAX_CALLS * r.MAX_ANSWER_CNY)
             else:
                 self.ledger.value['calls'] = [dict(call_id='SMOKE1:HCL:answer', case_id='SMOKE1',
-                                                 reserved_usd=str(r.MAX_SCHEDULE))]
+                                                 reserved_usd=str(r.MAX_SCHEDULE), reserved_cny=str(r.MAX_ANSWER_CNY))]
+                self.ledger.value['reserved_cny'] = str(r.MAX_ANSWER_CNY)
             original = copy.deepcopy(self.ledger.value['calls'])
             with self.subTest(field=field), self.assertRaises(ValueError):
                 self.ledger.reserve('SMOKE1:HCL', 'planning', request, quote, size)
@@ -597,8 +623,8 @@ class FinalRetentionAdversarialTests(unittest.TestCase):
         self.assertEqual(len(client.calls), 1)
         self.assertEqual(output['arms'][0]['final_text'], raw)
         self.assertFalse(output['usage_complete'])
-        self.assertIsNone(output['usage_rated_usd'])
-        self.assertEqual(Decimal(output['reserved_usd']), r.MAX_ANSWER)
+        self.assertIsNone(output['usage_rated_cny'])
+        self.assertEqual(Decimal(output['reserved_cny']), r.MAX_ANSWER_CNY)
         self.assertEqual(output['status'], 'STOPPED_NO_RETRY')
         self.assertTrue(all(a['status'] == 'NOT_ATTEMPTED' for a in output['arms'][1:]))
         self.assertNotIn('HIDDEN_', json.dumps(result))
@@ -673,6 +699,230 @@ class FinalRetentionAdversarialTests(unittest.TestCase):
                 self.assertEqual(result['remaining_authorized_calls'], 0)
             finally:
                 release.set()
+
+
+class NativeCNYIsolationAdversarialTests(unittest.TestCase):
+    """CNY is the sole authority; USD remains truthful adapter bookkeeping."""
+
+    def setUp(self):
+        r.configure(1)
+        self.package = r.build_package()
+
+    def ledger(self, stage=1):
+        r.configure(stage)
+        root = tempfile.TemporaryDirectory()
+        self.addCleanup(root.cleanup)
+        package = r.build_package()
+        ledger = r.Ledger(Path(root.name) / 'run', package,
+                          r.expected_grant(package, True, 'b' * 64 if stage == 2 else None),
+                          lambda: NOW, lambda: 0)
+        case_id, arm = r.ORDER[0]
+        ledger.active = case_id + ':' + arm
+        ledger.value['arms'] = [dict(case_id=case_id, arm=arm)]
+        return ledger, r.load_frozen()[0]['cases'][0], arm
+
+    def test_native_rates_and_hard_caps_are_exact_not_dollar_relabels(self):
+        self.assertEqual((r.CNY_INPUT_RATE, r.CNY_OUTPUT_RATE), (Decimal('9'), Decimal('27')))
+        self.assertEqual((r.INPUT_RATE, r.OUTPUT_RATE), (Decimal('1.32'), Decimal('3.96')))
+        self.assertEqual(r.MAX_PLANNING_CNY, Decimal('1.109664'))
+        self.assertEqual(r.MAX_ANSWER_CNY, Decimal('0.888480'))
+        self.assertEqual(r.TOTAL_CAP_CNY, Decimal('14'))
+        for stage, cap, full in [(1, '2', '1.998144'), (2, '12', '11.546496')]:
+            r.configure(stage)
+            package = r.build_package()
+            with self.subTest(stage=stage):
+                self.assertEqual(package['currency'], 'CNY')
+                self.assertIs(package['usd_reference_only'], True)
+                self.assertEqual(package['maximum_cny'], cap)
+                self.assertEqual(Decimal(package['maximum_schedule_reservation_cny']), Decimal(full))
+                self.assertEqual(package['maximum_aggregate_cny'], '14')
+                self.assertNotIn('maximum_usd', package)
+                self.assertNotIn('maximum_aggregate_usd', package)
+                self.assertEqual(Decimal(package['maximum_reference_usd']), r.CAP)
+                self.assertEqual(Decimal(package['maximum_schedule_reference_usd']), r.MAX_SCHEDULE)
+                for request in package['requests'].values():
+                    input_bound = 2 * request['request_bytes'] + 2048
+                    output_bound = request['max_tokens'] + 32
+                    native = (input_bound * Decimal('9') + output_bound * Decimal('27')) / 1000000
+                    reference = (input_bound * Decimal('1.32') + output_bound * Decimal('3.96')) / 1000000
+                    self.assertEqual(Decimal(request['reservation_cny']), native)
+                    self.assertEqual(Decimal(request['reservation_usd']), reference)
+                    self.assertNotEqual(native, reference)
+
+    def test_grant_requires_native_currency_no_usd_or_stage_headroom_transfer(self):
+        for stage, cap in ((1, '2'), (2, '12')):
+            r.configure(stage)
+            package = r.build_package()
+            grant = r.expected_grant(package, True, 'b' * 64 if stage == 2 else None)
+            self.assertEqual(grant['currency'], 'CNY')
+            self.assertEqual(grant['authorized_cny'], cap)
+            self.assertNotIn('authorized_usd', grant)
+            for change in [dict(currency='USD'), dict(authorized_cny='14'),
+                           dict(authorized_usd='2.00'), dict(historical_budget_transfer=True),
+                           dict(other_stage_budget_transfer=True),
+                           dict(authorized_cny=str(Decimal(cap) + Decimal('0.001856'))),
+                           dict(schema='hcl-two-stage-grant-v1'),
+                           dict(authorization_ref='OWNER_APPROVED_TWO_STAGE_20261006_173248_14_CALLS_2_USD')]:
+                with self.subTest(stage=stage, change=change), self.assertRaisesRegex(ValueError, 'EXACT_NEW_OWNER_GRANT'):
+                    r.require_grant(package, dict(grant, **change), NOW)
+            old_units = copy.deepcopy(grant)
+            old_units['authorized_usd'] = old_units.pop('authorized_cny')
+            with self.assertRaisesRegex(ValueError, 'EXACT_NEW_OWNER_GRANT'):
+                r.require_grant(package, old_units, NOW)
+
+    def test_cny_approval_does_not_extend_expiry_or_rewrite_frozen_input_time(self):
+        self.assertEqual(r.APPROVED, '2026-10-06T18:21:19Z')
+        self.assertEqual(r.EXPIRES, '2026-10-07T17:32:48Z')
+        self.assertEqual(r.FIXTURE_RECORDED_AT, '2026-10-06T17:32:48Z')
+        self.assertNotEqual(r.APPROVED, r.FIXTURE_RECORDED_AT)
+        with self.assertRaises(ValueError):
+            r.require_time(datetime(2026, 10, 6, 18, 21, 18, tzinfo=timezone.utc))
+        for stage in (1, 2):
+            r.configure(stage)
+            for case in r.load_frozen()[0]['cases']:
+                self.assertTrue(all(source['recorded_at'] == r.FIXTURE_RECORDED_AT for source in case['sources']))
+            self.assertEqual(str(r.PACKAGE), f'reports/HCL_TWO_STAGE_CNY_{stage}_PACKAGE.json')
+            self.assertEqual(str(r.GRANT), f'.github/HCL_TWO_STAGE_CNY_{stage}_GRANT.json')
+            self.assertEqual(str(r.MARKER), f'.github/HCL_TWO_STAGE_CNY_{stage}_TRIGGER.json')
+            self.assertIn(f'hcl-two-stage-cny-{stage}-once.yml', str(r.WORKFLOW))
+
+    def test_old_usd_grants_are_zero_superseded_and_cannot_authorize_cny(self):
+        for stage in (1, 2):
+            r.configure(stage)
+            package = r.build_package()
+            legacy = json.loads(Path(f'.github/HCL_TWO_STAGE_{stage}_GRANT.json').read_text())
+            with self.subTest(stage=stage):
+                self.assertEqual(legacy['status'], 'SUPERSEDED_BY_CNY_REPLACEMENT_ZERO_MODEL_CALLS')
+                self.assertEqual(legacy['authorized_calls'], 0)
+                self.assertEqual(legacy['authorized_usd'], '0')
+                self.assertEqual(legacy['provider_calls'], 0)
+                self.assertEqual(legacy['remaining_authorized_calls'], 0)
+                self.assertEqual(legacy['remaining_authorized_usd'], '0')
+                self.assertEqual(legacy['superseded_by'], r.AUTH)
+                with self.assertRaisesRegex(ValueError, 'EXACT_NEW_OWNER_GRANT'):
+                    r.require_grant(package, legacy, NOW)
+
+    def test_cny_cap_blocks_reservation_even_when_usd_reference_has_headroom(self):
+        for stage in (1, 2):
+            ledger, case, arm = self.ledger(stage)
+            phase = 'planning' if arm == 'HCL' else 'answer'
+            held_native = r.MAX_PLANNING_CNY if phase == 'planning' else r.MAX_ANSWER_CNY
+            client = Client()
+            port = r.Port(client, ledger, ledger.active)
+            prompt = r.messages(case, arm)
+            reference = Decimal(port.inner.reservation_usd(phase, prompt))
+            self.assertLess(reference, r.CAP)
+            with patch.object(r, 'CAP_CNY', held_native - Decimal('0.000001')):
+                with self.subTest(stage=stage), self.assertRaisesRegex(ValueError, 'CNY_CAP_EXCEEDED'):
+                    port.reservation_usd(phase, prompt)
+            self.assertEqual(client.calls, [])
+            self.assertEqual(ledger.value['calls'], [])
+            self.assertEqual(ledger.value['reserved_usd'], '0')
+            self.assertEqual(ledger.value['reserved_cny'], '0')
+            self.assertTrue(ledger.stopped)
+
+    def test_cny_cap_is_checked_again_after_reservation_before_sdk_dispatch(self):
+        for stage in (1, 2):
+            ledger, case, arm = self.ledger(stage)
+            phase = 'planning' if arm == 'HCL' else 'answer'
+            client = Client()
+            port = r.Port(client, ledger, ledger.active)
+            prompt = r.messages(case, arm)
+            port.reservation_usd(phase, prompt)
+            native_hold = Decimal(ledger.value['reserved_cny'])
+            reference_hold = Decimal(ledger.value['reserved_usd'])
+            self.assertLess(reference_hold, r.CAP)
+            with patch.object(r, 'CAP_CNY', native_hold - Decimal('0.000001')):
+                with self.subTest(stage=stage), self.assertRaisesRegex(ValueError, 'NATIVE_CNY_LEDGER_CAP_EXCEEDED'):
+                    port.complete(phase, prompt)
+            self.assertEqual(client.calls, [])
+            self.assertEqual(Decimal(ledger.value['reserved_cny']), native_hold)
+            self.assertEqual(Decimal(ledger.value['reserved_usd']), reference_hold)
+            self.assertEqual(ledger.value['calls'][0]['invocation_status'], 'NOT_INVOKED')
+
+    def test_stage2_aggregate_cny_gate_keeps_stage1_full_reservation(self):
+        ledger, case, arm = self.ledger(2)
+        client = Client()
+        port = r.Port(client, ledger, ledger.active)
+        prior_stage_hold = r.MAX_PLANNING_CNY + r.MAX_ANSWER_CNY
+        reduced_total = prior_stage_hold + r.MAX_ANSWER_CNY - Decimal('0.000001')
+        # USD's 1.70 reference and the stage-two CNY 12 limit both have
+        # headroom; the aggregate native gate alone must prevent dispatch.
+        with patch.object(r, 'TOTAL_CAP_CNY', reduced_total):
+            with self.assertRaisesRegex(ValueError, 'AGGREGATE_CNY_CAP_EXCEEDED'):
+                port.reservation_usd('answer', r.messages(case, arm))
+        self.assertEqual(client.calls, [])
+        self.assertEqual(ledger.value['calls'], [])
+
+    def test_native_hold_cannot_be_recycled_from_lower_known_usage_or_usd_value(self):
+        for replacement in ('usage', 'usd', 'zero'):
+            ledger, case, arm = self.ledger()
+            port = r.Port(Client(), ledger, ledger.active)
+            prompt = r.messages(case, arm)
+            port.reservation_usd('planning', prompt)
+            row = ledger.value['calls'][0]
+            row['usage_rated_cny'] = '0.000036'
+            native = row['usage_rated_cny'] if replacement == 'usage' else row['reserved_usd'] if replacement == 'usd' else '0'
+            row['reserved_cny'] = native
+            ledger.value['reserved_cny'] = native
+            with self.subTest(replacement=replacement), self.assertRaisesRegex(ValueError, 'NATIVE_CNY_RESERVATION_REQUIRED'):
+                ledger.admit()
+
+    def test_provider_usage_records_two_true_units_and_public_exposes_only_cny(self):
+        def mutate(value, index, request):
+            value['usage'].update(prompt_tokens=1234, completion_tokens=100, total_tokens=1334)
+        result, package = execute(Client(mutate))
+        output = exported(result, package)
+        native = (Decimal('1234') * 9 + 100 * 27) / 1000000
+        reference = (Decimal('1234') * Decimal('1.32') + 100 * Decimal('3.96')) / 1000000
+        self.assertNotEqual(native, reference)
+        self.assertEqual(result['currency'], 'CNY')
+        self.assertIs(result['usd_reference_only'], True)
+        self.assertEqual(output['currency'], 'CNY')
+        self.assertEqual(Decimal(output['usage_rated_cny']), 2 * native)
+        self.assertIsNone(output['invoice_cost_cny'])
+        for private, published in zip(result['calls'], output['calls'], strict=True):
+            self.assertEqual(Decimal(private['usage_rated_cny']), native)
+            self.assertEqual(Decimal(private['usage_rated_usd']), reference)
+            self.assertEqual(Decimal(published['usage_rated_cny']), native)
+            self.assertEqual(Decimal(private['reserved_cny']),
+                             r.MAX_PLANNING_CNY if private['phase'] == 'planning' else r.MAX_ANSWER_CNY)
+            self.assertEqual(Decimal(private['reserved_usd']),
+                             r.MAX_PLANNING if private['phase'] == 'planning' else r.MAX_ANSWER)
+        def check_keys(value):
+            if isinstance(value, dict):
+                for key, child in value.items():
+                    self.assertNotIn('usd', key.lower())
+                    check_keys(child)
+            elif isinstance(value, list):
+                for child in value:
+                    check_keys(child)
+        check_keys(output)
+
+    def test_public_export_refuses_wrong_or_missing_private_receipt_currency(self):
+        result, package = execute(Client())
+        for field, value in [('currency', 'USD'), ('currency', None), ('usd_reference_only', False)]:
+            changed = copy.deepcopy(result)
+            if value is None:
+                changed.pop(field)
+            else:
+                changed[field] = value
+            with self.subTest(field=field, value=value), self.assertRaises(ValueError):
+                exported(changed, package)
+
+    def test_phase1_cannot_pass_with_usd_evidence_or_usd_values_labelled_cny(self):
+        package, evidence, review = phase1_fixture()
+        mutations = [lambda e: e.update(currency='USD'), lambda e: e.pop('currency'),
+                     lambda e: e.update(schema='hcl-two-stage-public-evidence-v1'),
+                     lambda e: e.update(reserved_cny=str(r.MAX_PLANNING + r.MAX_ANSWER)),
+                     lambda e: e['calls'][0].update(reserved_cny=str(r.MAX_PLANNING)),
+                     lambda e: e['calls'][0].update(usage_rated_cny=str((100 * r.INPUT_RATE + 100 * r.OUTPUT_RATE) / 1000000))]
+        for mutate in mutations:
+            changed = copy.deepcopy(evidence)
+            mutate(changed)
+            changed_review = dict(review, evidence_sha256=r.digest(changed))
+            with phase1_package_read(package), self.assertRaises((ValueError, KeyError)):
+                public.validate_phase1_gate(changed, changed_review)
 
 
 if __name__ == '__main__':

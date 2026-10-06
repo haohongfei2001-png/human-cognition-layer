@@ -21,16 +21,24 @@ from scripts.serious_eval_contract import runtime_digest
 from scripts.universal_launch_guard import verify_run_history
 
 ROOT = Path('.github/frozen/hcl-two-stage-20261006')
-AUTH = 'OWNER_APPROVED_TWO_STAGE_20261006_173248_14_CALLS_2_USD'
-APPROVED = '2026-10-06T17:32:48Z'
+AUTH = 'OWNER_APPROVED_TWO_STAGE_CNY_REPLACEMENT_20261006_14_CALLS_14_CNY'
+APPROVED = '2026-10-06T18:21:19Z'  # Conservative received-at bound for the CNY replacement.
+FIXTURE_RECORDED_AT = '2026-10-06T17:32:48Z'
 EXPIRES = '2026-10-07T17:32:48Z'
 RUNTIME = '62bea96c481fcdde3bfb0af8707796d5afaebf1c9d051ace9bd0c82e236f2442'
 MAX_PLANNING = Decimal('0.16275072')
 MAX_ANSWER = Decimal('0.13031040')
+# The unchanged runtime adapter uses correctly denominated USD estimates only
+# as interface bookkeeping. The independent CNY ledger below is the authority.
+CNY_INPUT_RATE = Decimal('9.0')
+CNY_OUTPUT_RATE = Decimal('27.0')
+MAX_PLANNING_CNY = Decimal('1.109664')
+MAX_ANSWER_CNY = Decimal('0.888480')
+TOTAL_CAP_CNY = Decimal('14')
 WAIT = 180
-FROZEN_SHA = {'cases.json': '3c794a715d4fa2d5ec97bba58f441feeef1d446dbb67a826d485f0dc031eb48b', 'proposal.json': 'c64d7d372b686829584d0051add1a9d303a013e68aacccc73bdf9954b8c5713e'}
-PHASE1_EVIDENCE = Path('reports/HCL_TWO_STAGE_1_PUBLIC_EVIDENCE.json')
-PHASE1_REVIEW = Path('reports/HCL_TWO_STAGE_1_SOURCE_REVIEW.json')
+FROZEN_SHA = {'cases.json': '3c794a715d4fa2d5ec97bba58f441feeef1d446dbb67a826d485f0dc031eb48b', 'proposal.json': 'c64d7d372b686829584d0051add1a9d303a013e68aacccc73bdf9954b8c5713e', 'cny-amendment.json': 'e965bf7b22b25673d37a75a437c4abe47ff955ff1eb7b152e02c667f346e4d5c'}
+PHASE1_EVIDENCE = Path('reports/HCL_TWO_STAGE_CNY_1_PUBLIC_EVIDENCE.json')
+PHASE1_REVIEW = Path('reports/HCL_TWO_STAGE_CNY_1_SOURCE_REVIEW.json')
 KNOWN_RETURN_FAILURES = {'INCOMPLETE_ANSWER_NO_RETRY', 'CONTENT_BOUND_EXCEEDED'}
 KNOWN_HCL_FAILURES = {'invalid answer schema', 'NONBLANK_FINAL_ANSWER_REQUIRED', 'invalid bounded task plan',
  'invalid limitations','bounded bindings required','bounded interpreted question required','unknown capability or operation fields',
@@ -41,23 +49,29 @@ STAGE = None
 
 
 def configure(stage):
-    global STAGE, ORDER, CAP, MAX_CALLS, MAX_SCHEDULE, ELAPSED, PACKAGE, GRANT, MARKER, TEMPLATE, WORKFLOW, SECRET_CHECK
+    global STAGE, ORDER, CAP, CAP_CNY, MAX_CALLS, MAX_SCHEDULE, MAX_SCHEDULE_CNY, ELAPSED, PACKAGE, GRANT, MARKER, TEMPLATE, WORKFLOW, SECRET_CHECK
     if type(stage) is not int or stage not in (1, 2): raise ValueError('EXACT_STAGE_REQUIRED')
     STAGE = stage
     ORDER = [('SMOKE1','HCL')] if stage == 1 else [('PAIR1','Base'),('PAIR1','HCL'),('PAIR2','HCL'),('PAIR2','Base'),('PAIR3','Base'),('PAIR3','HCL'),('PAIR4','HCL'),('PAIR4','Base')]
+    # Correct USD reference ceilings retained only for the unchanged runtime interface.
     CAP = Decimal('0.30' if stage == 1 else '1.70'); MAX_CALLS = 2 if stage == 1 else 12
     MAX_SCHEDULE = MAX_PLANNING + MAX_ANSWER if stage == 1 else 4*MAX_PLANNING + 8*MAX_ANSWER
+    CAP_CNY = Decimal('2' if stage == 1 else '12')
+    MAX_SCHEDULE_CNY = MAX_PLANNING_CNY + MAX_ANSWER_CNY if stage == 1 else 4*MAX_PLANNING_CNY + 8*MAX_ANSWER_CNY
     ELAPSED = 600 if stage == 1 else 2700
-    PACKAGE = Path(f'reports/HCL_TWO_STAGE_{stage}_PACKAGE.json')
-    GRANT = Path(f'.github/HCL_TWO_STAGE_{stage}_GRANT.json')
-    MARKER = Path(f'.github/HCL_TWO_STAGE_{stage}_TRIGGER.json')
-    TEMPLATE = ROOT / f'stage{stage}-once.yml'
-    WORKFLOW = Path(f'.github/workflows/hcl-two-stage-{stage}-once.yml')
-    SECRET_CHECK = Path(f'/tmp/hcl-two-stage-{stage}-secret-presence.json')
+    PACKAGE = Path(f'reports/HCL_TWO_STAGE_CNY_{stage}_PACKAGE.json')
+    GRANT = Path(f'.github/HCL_TWO_STAGE_CNY_{stage}_GRANT.json')
+    MARKER = Path(f'.github/HCL_TWO_STAGE_CNY_{stage}_TRIGGER.json')
+    TEMPLATE = ROOT / f'stage{stage}-cny-once.yml'
+    WORKFLOW = Path(f'.github/workflows/hcl-two-stage-cny-{stage}-once.yml')
+    SECRET_CHECK = Path(f'/tmp/hcl-two-stage-cny-{stage}-secret-presence.json')
 
 
 def digest(value):
     return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+
+def cny_quote(request_bytes,max_tokens):
+    return ((2*request_bytes+2048)*CNY_INPUT_RATE+(max_tokens+32)*CNY_OUTPUT_RATE)/1000000
 
 def file_sha(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 def utcnow(): return datetime.now(timezone.utc)
@@ -75,7 +89,7 @@ def load_frozen():
     if STAGE not in (1,2): raise ValueError('EXACT_STAGE_REQUIRED')
     if any(file_sha(ROOT/name) != sha for name, sha in FROZEN_SHA.items()): raise ValueError('FROZEN_PROPOSAL_DRIFT')
     rows = json.loads((ROOT/'cases.json').read_text())
-    cases = [dict(case_id=c['id'], question=c['question'], sources=[dict(source_id=c['source_id'], version=c['version'], text=c['source'], recorded_at=APPROVED)]) for c in rows if c['stage']==STAGE]
+    cases = [dict(case_id=c['id'], question=c['question'], sources=[dict(source_id=c['source_id'], version=c['version'], text=c['source'], recorded_at=FIXTURE_RECORDED_AT)]) for c in rows if c['stage']==STAGE]
     return dict(cases=cases), json.loads((ROOT/'proposal.json').read_text())
 
 
@@ -100,16 +114,16 @@ def build_package():
         phases = [('HCL','planning')] if STAGE==1 else [('Base','answer'),('HCL','planning')]
         for arm, phase in phases:
             port=validator(); prompt=messages(case,arm); request,encoded=port.request(phase,prompt)
-            requests[case['case_id']+':'+arm+':'+phase] = dict(request_sha256=digest(request),messages_sha256=digest(prompt),request_bytes=len(encoded),reservation_usd=port.reservation_usd(phase,prompt),max_tokens=request['max_tokens'],input_token_bound=2*len(encoded)+2048)
+            requests[case['case_id']+':'+arm+':'+phase] = dict(request_sha256=digest(request),messages_sha256=digest(prompt),request_bytes=len(encoded),reservation_usd=port.reservation_usd(phase,prompt),reservation_cny=str(cny_quote(len(encoded),request['max_tokens'])),max_tokens=request['max_tokens'],input_token_bound=2*len(encoded)+2048)
     files = ['scripts/run_two_stage_once.py','scripts/two_stage_public.py','scripts/two_stage_price.py','scripts/two_stage_account.py','tests/test_two_stage.py','tests/test_two_stage_review.py','tests/test_two_stage_account.py','scripts/output_limit_port.py','scripts/bounded_diagnostic_port.py','scripts/bounded_diagnostic_protocol.py','scripts/output_limit_protocol.py','scripts/universal_launch_guard.py','scripts/serious_eval_contract.py',str(TEMPLATE),str(WORKFLOW)] + [str(ROOT/n)for n in FROZEN_SHA]
-    if STAGE==2:files.append('reports/HCL_TWO_STAGE_1_PACKAGE.json')
-    return dict(schema='hcl-two-stage-package-v1',stage=STAGE,authorization_ref=AUTH,runtime_sha256=RUNTIME,
-       frozen_files_sha256=FROZEN_SHA,requests=requests,order=[list(x)for x in ORDER],maximum_calls=MAX_CALLS,maximum_usd=str(CAP),maximum_schedule_reservation_usd=str(MAX_SCHEDULE),maximum_request_bytes=36000,maximum_wait_seconds=WAIT,maximum_elapsed_seconds=ELAPSED,
-       model=MODEL,planning_tokens=16384,answer_tokens=8192,maximum_each_planning_usd=str(MAX_PLANNING),maximum_each_answer_usd=str(MAX_ANSWER),rates=dict(input=str(INPUT_RATE),output=str(OUTPUT_RATE)),execution_files={name:file_sha(name)for name in files},retries=0,case_substitution=False,maximum_aggregate_calls=14,maximum_aggregate_usd='2.00')
+    if STAGE==2:files.append('reports/HCL_TWO_STAGE_CNY_1_PACKAGE.json')
+    return dict(schema='hcl-two-stage-cny-package-v1',currency='CNY',stage=STAGE,authorization_ref=AUTH,runtime_sha256=RUNTIME,
+       frozen_files_sha256=FROZEN_SHA,requests=requests,order=[list(x)for x in ORDER],maximum_calls=MAX_CALLS,maximum_cny=str(CAP_CNY),maximum_schedule_reservation_cny=str(MAX_SCHEDULE_CNY),usd_reference_only=True,maximum_reference_usd=str(CAP),maximum_schedule_reference_usd=str(MAX_SCHEDULE),maximum_request_bytes=36000,maximum_wait_seconds=WAIT,maximum_elapsed_seconds=ELAPSED,
+       model=MODEL,planning_tokens=16384,answer_tokens=8192,maximum_each_planning_cny=str(MAX_PLANNING_CNY),maximum_each_answer_cny=str(MAX_ANSWER_CNY),rates_cny=dict(input=str(CNY_INPUT_RATE),output=str(CNY_OUTPUT_RATE)),reference_rates_usd=dict(input=str(INPUT_RATE),output=str(OUTPUT_RATE)),execution_files={name:file_sha(name)for name in files},retries=0,case_substitution=False,maximum_aggregate_calls=14,maximum_aggregate_cny='14')
 
 
 def expected_grant(package,ready=False,review_sha=None):
-    return dict(schema='hcl-two-stage-grant-v1',stage=STAGE,status='READY'if ready else'PREPARED_NOT_AUTHORIZED',authorization_ref=AUTH if ready else None,approved_at=APPROVED if ready else None,expires_at=EXPIRES if ready else None,package_sha256=digest(package),authorized_calls=MAX_CALLS if ready else 0,authorized_usd=str(CAP)if ready else'0',phase1_source_review_sha256=review_sha if STAGE==2 and ready else None,retries=0,historical_budget_transfer=False,other_stage_budget_transfer=False)
+    return dict(schema='hcl-two-stage-cny-grant-v1',currency='CNY',stage=STAGE,status='READY'if ready else'PREPARED_NOT_AUTHORIZED',authorization_ref=AUTH if ready else None,approved_at=APPROVED if ready else None,expires_at=EXPIRES if ready else None,package_sha256=digest(package),authorized_calls=MAX_CALLS if ready else 0,authorized_cny=str(CAP_CNY)if ready else'0',phase1_source_review_sha256=review_sha if STAGE==2 and ready else None,retries=0,historical_budget_transfer=False,other_stage_budget_transfer=False)
 
 
 def require_time(now):
@@ -172,8 +186,8 @@ class Ledger:
         self.directory = Path(directory); self.directory.mkdir(mode=0o700, parents=True, exist_ok=False)
         self.path = self.directory / 'receipt.json'; self.clock = clock; self.monotonic = monotonic
         self.started = monotonic(); self.package = package; self.grant = grant; self.active = None; self.stopped = False
-        self.value = dict(schema='hcl-two-stage-private-receipt-v1', stage=STAGE, package_sha256=digest(package), authorization_ref=AUTH,
-                          status='RUNNING', calls=[], arms=[], reserved_usd='0', started_at=clock().isoformat())
+        self.value = dict(schema='hcl-two-stage-cny-private-receipt-v1', currency='CNY', usd_reference_only=True, stage=STAGE, package_sha256=digest(package), authorization_ref=AUTH,
+                          status='RUNNING', calls=[], arms=[], reserved_usd='0', reserved_cny='0', started_at=clock().isoformat())
         self.persist()
 
     def persist(self):
@@ -183,6 +197,7 @@ class Ledger:
             raise
 
     def admit(self):
+        self.validate_native_ledger()
         if self.stopped: raise ValueError('BATCH_STOPPED_NO_RETRY')
         require_time(self.clock())
         if self.monotonic() - self.started + WAIT >= ELAPSED: raise ValueError('BATCH_DEADLINE_SEND_MARGIN')
@@ -218,19 +233,43 @@ class Ledger:
                 raise ValueError('CASE_CAP_EXCEEDED')
             if len(self.value['calls']) >= MAX_CALLS or held + reserve > CAP or held + reserve > MAX_SCHEDULE:
                 raise ValueError('AGGREGATE_CAP_EXCEEDED')
+            reserve_cny=MAX_PLANNING_CNY if phase=='planning'else MAX_ANSWER_CNY
+            exact_cny=cny_quote(request_bytes,request['max_tokens'])
+            held_cny=Decimal(self.value['reserved_cny'])
+            held_case_cny=sum(Decimal(c['reserved_cny'])for c in self.value['calls']if c['case_id']==case)
+            case_cap_cny=MAX_PLANNING_CNY+MAX_ANSWER_CNY if STAGE==1 else MAX_PLANNING_CNY+2*MAX_ANSWER_CNY
+            if exact_cny>reserve_cny or held_case_cny+reserve_cny>case_cap_cny or held_cny+reserve_cny>CAP_CNY or held_cny+reserve_cny>MAX_SCHEDULE_CNY:raise ValueError('NATIVE_CNY_CAP_EXCEEDED')
+            prior_cny=Decimal('0')if STAGE==1 else MAX_PLANNING_CNY+MAX_ANSWER_CNY
+            if prior_cny+held_cny+reserve_cny>TOTAL_CAP_CNY:raise ValueError('AGGREGATE_CNY_CAP_EXCEEDED')
             self.value['calls'].append(dict(call_id=call_id, case_id=case, arm=arm, phase=phase,
-                request_sha256=digest(request), request_bytes=request_bytes, reserved_usd=str(reserve), exact_request_reservation_usd=str(exact_reserve),
+                request_sha256=digest(request), request_bytes=request_bytes, reserved_usd=str(reserve), exact_request_reservation_usd=str(exact_reserve), reserved_cny=str(reserve_cny),exact_request_reservation_cny=str(exact_cny),
                 status='RESERVED_BEFORE_CALL', invocation_status='NOT_INVOKED', provider_call=False))
-            self.value['reserved_usd'] = str(held + reserve); self.persist()
+            self.value['reserved_usd'] = str(held + reserve);self.value['reserved_cny']=str(held_cny+reserve_cny); self.persist()
             return reserve
         except Exception:
             self.stopped = True
             raise
 
+    def validate_native_ledger(self):
+        if self.value.get('currency')!='CNY'or self.value.get('usd_reference_only')is not True:raise ValueError('NATIVE_CNY_LEDGER_REQUIRED')
+        rows=self.value['calls'];total=Decimal('0')
+        if len(rows)>MAX_CALLS or len({row['call_id']for row in rows})!=len(rows):raise ValueError('NATIVE_CNY_CALL_LIMIT')
+        for row in rows:
+            case,arm,phase=row['call_id'].split(':')
+            if(case,arm)not in ORDER or phase not in('planning','answer')or(arm=='Base'and phase!='answer'):raise ValueError('NATIVE_CNY_DECLARED_PHASE_REQUIRED')
+            expected=MAX_PLANNING_CNY if phase=='planning'else MAX_ANSWER_CNY
+            held=Decimal(row['reserved_cny'])
+            if not held.is_finite()or held!=expected:raise ValueError('NATIVE_CNY_RESERVATION_REQUIRED')
+            total+=held
+        recorded=Decimal(self.value['reserved_cny'])
+        prior=Decimal('0')if STAGE==1 else MAX_PLANNING_CNY+MAX_ANSWER_CNY
+        if not recorded.is_finite()or recorded!=total or total>CAP_CNY or total>MAX_SCHEDULE_CNY or prior+total>TOTAL_CAP_CNY:raise ValueError('NATIVE_CNY_LEDGER_CAP_EXCEEDED')
+        return True
+
     def close(self):
         self.value.update(status='STOPPED_NO_RETRY' if self.stopped else 'COMPLETED_ONE_PASS',
                           finished_at=self.clock().isoformat(), elapsed_seconds=self.monotonic()-self.started,
-                          budget_state='CLOSED_NO_TRANSFER_NO_RETRY', remaining_authorized_calls=0, remaining_authorized_usd='0')
+                          budget_state='CLOSED_NO_TRANSFER_NO_RETRY', remaining_authorized_calls=0, remaining_authorized_usd='0',remaining_authorized_cny='0')
         self.stopped = True; self.persist()
 
 
@@ -296,8 +335,9 @@ class Port:
             data = self.inner.diagnostics
             if data.get('usage_valid') is True:
                 counts = data['usage']; rated = (counts['prompt_tokens']*INPUT_RATE + counts['completion_tokens']*OUTPUT_RATE)/1000000
-                if rated > Decimal(row['reserved_usd']): self.ledger.stopped = True
-                else: row.update(usage=counts, usage_rated_usd=str(rated))
+                rated_cny=(counts['prompt_tokens']*CNY_INPUT_RATE+counts['completion_tokens']*CNY_OUTPUT_RATE)/1000000
+                if rated > Decimal(row['reserved_usd']) or rated_cny>Decimal(row['reserved_cny']): self.ledger.stopped = True
+                else: row.update(usage=counts, usage_rated_usd=str(rated),usage_rated_cny=str(rated_cny))
             self.ledger.persist()
 
 
@@ -367,7 +407,7 @@ def run(client, package, grant, directory, *, clock=utcnow, monotonic=time.monot
 
 def verify_launch(run_id,attempt,runs,event,parent,paths,marker,package,grant,now):
     require_grant(package,grant,now);verify_run_history(run_id,attempt,runs)
-    expected=dict(schema='hcl-two-stage-marker-v1',stage=STAGE,authorization_ref=AUTH,package_sha256=digest(package),grant_sha256=digest(grant),executor_commit=parent)
+    expected=dict(schema='hcl-two-stage-cny-marker-v1',stage=STAGE,authorization_ref=AUTH,package_sha256=digest(package),grant_sha256=digest(grant),executor_commit=parent)
     if(event!='push'or not isinstance(parent,str)or len(parent)!=40 or any(c not in '0123456789abcdef'for c in parent)or paths!=[str(MARKER)]or marker!=expected):raise ValueError('ONE_MARKER_ONLY_LAUNCH_REQUIRED')
 
 
@@ -384,11 +424,11 @@ def main():
     identity=dict(run_id=os.environ['GITHUB_RUN_ID'],head_sha=os.environ['GITHUB_SHA'])
     if json.loads(SECRET_CHECK.read_text())!=dict(identity,existing_provider_secret='PRESENT'):raise ValueError('SAME_RUN_SECRET_CHECK_REQUIRED')
     from scripts.two_stage_price import validate_price_evidence
-    price_path=Path(f'/tmp/hcl-two-stage-{STAGE}-prices.json')
+    price_path=Path(f'/tmp/hcl-two-stage-cny-{STAGE}-prices.json')
     price=json.loads(price_path.read_text());validate_price_evidence(price,identity,utcnow())
     from scripts.two_stage_account import validate as validate_account
-    account=json.loads(Path(f'/tmp/hcl-two-stage-{STAGE}-account.json').read_text());validate_account(account,identity,utcnow())
-    expected=dict(identity,package_sha256=digest(package),grant_sha256=digest(grant),price_sha256=digest(price),account_sha256=digest(account));admission=Path(f'/tmp/hcl-two-stage-{STAGE}-admission.json')
+    account=json.loads(Path(f'/tmp/hcl-two-stage-cny-{STAGE}-account.json').read_text());validate_account(account,identity,utcnow())
+    expected=dict(identity,package_sha256=digest(package),grant_sha256=digest(grant),price_sha256=digest(price),account_sha256=digest(account));admission=Path(f'/tmp/hcl-two-stage-cny-{STAGE}-admission.json')
     if args.check_launch:
         pages=json.loads(Path(args.check_launch).read_text());history=[run for page in pages for run in page['workflow_runs']]
         ancestry=subprocess.check_output(['git','rev-list','--parents','-n','1','HEAD'],text=True).split()
@@ -403,7 +443,7 @@ def main():
         from openai import OpenAI
         key=os.environ.get('DEEPSEEK_API_KEY')
         if not key:raise ValueError('EXISTING_SECRET_UNAVAILABLE')
-        run(OpenAI(api_key=key,base_url='https://api.deepseek.com',max_retries=0,timeout=WAIT),package,grant,f'two-stage-{STAGE}-private')
+        run(OpenAI(api_key=key,base_url='https://api.deepseek.com',max_retries=0,timeout=WAIT),package,grant,f'two-stage-cny-{STAGE}-private')
         print('TWO_STAGE_TERMINATED_NO_RETRY')
 
 if __name__=='__main__':main()

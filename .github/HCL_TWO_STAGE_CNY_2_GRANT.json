@@ -1,0 +1,16 @@
+{
+  "approved_at": null,
+  "authorization_ref": null,
+  "authorized_calls": 0,
+  "authorized_cny": "0",
+  "currency": "CNY",
+  "expires_at": null,
+  "historical_budget_transfer": false,
+  "other_stage_budget_transfer": false,
+  "package_sha256": "5e8b3c2247e20a0d22c59eac3134f3ebbf3a906561a487213e231f408485d965",
+  "phase1_source_review_sha256": null,
+  "retries": 0,
+  "schema": "hcl-two-stage-cny-grant-v1",
+  "stage": 2,
+  "status": "PREPARED_NOT_AUTHORIZED"
+}
