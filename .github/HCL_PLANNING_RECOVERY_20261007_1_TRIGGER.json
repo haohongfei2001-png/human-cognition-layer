@@ -1,0 +1,9 @@
+{
+  "authorization_ref": "OWNER_APPROVED_HCL_PLANNING_RECOVERY_20261007_6_CALLS_6_CNY",
+  "executor_commit": "017aed2c0797108a42607289a3da87db8bb4948b",
+  "grant_commit": "796ba337d71f27c48f1c99a7e9222afe17c1bdd8",
+  "grant_sha256": "e5e69c766563587318b2854ea87c82da167d89cf3a3e2cf7237681dfa6e9a2b1",
+  "package_sha256": "807eb9fd05338f6003478d78ff7bd55acc075e6d0d4985bd9a45b01a3f924e06",
+  "schema": "hcl-planning-recovery-marker-proposal-v1",
+  "stage": 1
+}
