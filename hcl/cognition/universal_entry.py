@@ -120,8 +120,8 @@ PLANNER_POLICY = (
     'Do not force a capability because of a familiar ID or broad family name. Unsupported or empty preparation is not substantive checked treatment. '
     'Preserve the original task in all interpretations; do not replace it with an easier question. '
     'G02 may use a normative rule only if explicitly present in the original user request. '
-    'For at most ONE selected B01, C01, C02 or C03 operation with one complete source, you may also supply semantic_candidates '
-    'to translate ordinary source wording into existing structured tool inputs in this same planning response. '
+    'For ordinary prose outside native literal forms, construct faithful semantic_candidates for at most ONE relevant '
+    'B01/C01/C02/C03 operation with one complete source in this first planning response. Source IDs alone do not create typed premises. '
     'semantic_candidates is an array of 1 to 24 objects with exactly source_id, quote, kind, content and optional start. '
     'kind must be event; content has exactly canonical_statement, a single line of at most 2000 characters. '
     'quote is an exact original substring of at most 4000 characters; optional start is its Unicode character offset. '
@@ -140,7 +140,9 @@ PLANNER_POLICY = (
     'NAME: At the time, I could not choose to not ACTION. Do not infer inability from non-action. '
     'These are UNVERIFIED TRANSLATION HYPOTHESES, never literal speech, source facts or private-state truth. '
     'Do not invent motives, emotion, receipt, comprehension or normative premises. All candidates and their full source remain visible to the answerer. '
-    'Omit semantic_candidates when unnecessary; no automatic extraction call or retry will occur. '
+    'Omit semantic_candidates for already supported literal input or when no faithful supported translation is possible. '
+    'B02 and D02 do not accept semantic_candidates. Native readers are literal checkers, not another LLM. '
+    'No automatic extraction call or retry will occur. '
     'limitations is an array of strings. No external lookup or provider subcalls.')
 
 

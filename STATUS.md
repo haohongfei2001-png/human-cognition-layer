@@ -21,11 +21,16 @@ The current ordinary port uses an explicit [16,384-token planning allowance](doc
 with high thinking and an unchanged 8,192-token final allowance. Exact-request
 budget admission and usage bounds track this fixed configuration; there is no
 automatic upgrade or retry. Current runtime SHA256 is
-`e621355a10ad6d2da716ed64d244f6c3f69bdc0dcd59cf91673d7ba4b2b05cac`.
+`a3ace7e929e46a1aebd6cc5706c549abf930189fd032c54ab31298e3742b3672`.
 The source-version, trusted native-policy sharing, C03 pursuit and planner-contract
 repairs previously adopted through PR #381 remain unchanged. This configuration
 repair has provider-free regression coverage; no real model success under the new
 current default is established by those tests.
+The [existing semantic-input bridge contract](docs/HCL_SEMANTIC_BRIDGE_CONTRACT.md)
+now explicitly asks the first planner to construct faithful typed inputs for
+ordinary prose when its native literal forms do not already apply. This is a
+190-byte policy clarification, not a new parser or automatic second call. Actual
+model compliance and relevant native treatment remain unverified after this change.
 The [October 7 ordinary-default diagnostic](docs/HCL_RELIABILITY_20261007_RESULTS.md)
 ran once after the reviewed package and both owner approvals. Its first planning
 request consumed 4,096 completion tokens and returned an incomplete response;
@@ -151,16 +156,15 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: OFFLINE_EXISTING_SEMANTIC_INPUT_CONTRACT_REPAIR**
+**NEXT_READY: VERIFY_EXISTING_SEMANTIC_INPUT_CONTRACT_IN_LIVE_FLOW**
 
-Continue a minimal, general correction to planner-visible input contracts for the
-existing B01/C01/C02/C03 first-response semantic bridge. The actual model supplied
-only source IDs and operation questions, without the structured anchored premises
-needed for substantive treatment of this prose. Preserve the failed raw plan
-arguments and actual outputs; do not rewrite sources to fit a parser, force an
-irrelevant module or count reader execution as treatment. Existing source/quote,
-privacy, native execution and semantic gates remain. No second paid planning call
-or automatic retry; another real diagnostic requires new bounded authority.
+The first-planner contract clarification is implemented with provider-free
+regressions. Actual model compliance and useful native treatment must still be
+verified after exact-current CI and a new bounded approval. Both previous studies
+remain closed. Preserve their arguments and results; do not rewrite sources to
+fit a parser, force an irrelevant module or count reader execution as treatment.
+Existing source/quote, privacy, native execution and semantic gates remain.
+No second paid planning call, automatic retry or reused stage-two allowance.
 D02's empty bindings were valid and are not a diagnosed defect. Formal I02-I06
 remains incomplete.
 
