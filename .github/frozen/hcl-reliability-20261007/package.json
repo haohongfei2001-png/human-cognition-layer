@@ -1,0 +1,293 @@
+{
+  "authorization_ref": "OWNER_APPROVED_HCL_RELIABILITY_20261007_14_CALLS_12_CNY",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "configuration": {
+    "answer_tokens": 8192,
+    "approved_at_bound": "2026-10-07T03:39:28Z",
+    "authorization_ref": "OWNER_APPROVED_HCL_RELIABILITY_20261007_14_CALLS_12_CNY",
+    "case_replacement": false,
+    "currency": "CNY",
+    "executor_files": {
+      "hcl_reliability_candidate.py": "4e341d9a54c6b9dba5859b346d9e6be96e7181aa710485e5b9e769cf61e4869c",
+      "hcl_reliability_cli.py": "08d96d6dc4a0e3f3c0d690b7648e95e0d4681276ea2a9f18d531ed59274916d4",
+      "hcl_reliability_native_public.py": "ce14efa692af9014856669fa821f3f850f46bfda53eab96424ebaf24b7c9b99f",
+      "hcl_reliability_public.py": "2fcda94a7b2121d8b7ebfacb50d74156d285e9753d3c259e94a1241cc709fc7e",
+      "hcl_reliability_reviews.py": "65d476cc42d0040fe65a8c749720268c164a98b83ebe80463e0e334e6016ead6",
+      "tests/test_hcl_reliability_adapter.py": "0c3ed20537d27556c40e97e7c8a61bacea18604ed7ef89fe2b23a95157a459f5",
+      "tests/test_hcl_reliability_candidate.py": "13c58955ccb48ae112af35f6aa26c16f5ccc866833bbf549704dda0a90ce18d6",
+      "tests/test_hcl_reliability_native_regressions.py": "f7e684db016e7f45a6824103de2122b1c5ce29fac33908053e783f8e8400e18a",
+      "tests/test_hcl_reliability_revision3.py": "9f6befe9f1544f04047870c58d70fc97cb74e7d5a3a8b87e0f0dee2794490577"
+    },
+    "expires_at": "2026-10-07T14:00:00Z",
+    "fallback": false,
+    "maximum_aggregate_calls": 14,
+    "maximum_aggregate_cny": "12",
+    "maximum_final_characters": 64000,
+    "maximum_final_texts": 9,
+    "maximum_request_bytes": 36000,
+    "maximum_wait_seconds": 180,
+    "model_judge": false,
+    "openai_sdk_version": "2.14.0",
+    "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+    "phase_holds_cny": {
+      "answer": "0.888480",
+      "planning": "0.777888"
+    },
+    "planning_completion_includes_reasoning": true,
+    "planning_tokens": 4096,
+    "private_native_review_maximum_bytes": 1048576,
+    "public_native_maximum_case_records": 5,
+    "public_native_maximum_operations_per_record": 3,
+    "public_native_maximum_record_bytes": 1048576,
+    "public_native_requires_new_explicit_grant_permission": true,
+    "rates_cny": {
+      "input": "9",
+      "output": "27"
+    },
+    "reference_rates_usd": {
+      "input": "1.32",
+      "output": "3.96"
+    },
+    "replanning": false,
+    "request_retries": 0,
+    "requests": {
+      "reliability-20261007-pair-conveyor-exercise:Base:answer": {
+        "full_request_sha256": "4b6ce5426d44692efbc03e6927e853cd495529c3161c05b51e6f9f955fdf5e8d",
+        "full_request_utf8_bytes": 3909,
+        "max_tokens": 8192,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 1621,
+        "payload_value_utf8_bytes": {
+          "knowledge_basis": 46,
+          "question": 242,
+          "sources": 1280
+        },
+        "reservation_cny": "0.310842",
+        "reservation_usd": "0.04559016",
+        "serialized_messages_sha256": "bb1beb2462fabad95f1026675005f87b41f485756801608e3fc2aa6f10b60f5c",
+        "serialized_messages_utf8_bytes": 3755,
+        "within_request_bound": true
+      },
+      "reliability-20261007-pair-conveyor-exercise:HCL:planning": {
+        "full_request_sha256": "ec2711747b572c1a8fa04a02ccc99c72a2301a376b5a4914ae67b41b92cfc1c0",
+        "full_request_utf8_bytes": 30374,
+        "max_tokens": 4096,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 24257,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 22545,
+          "question": 242,
+          "sources": 1422
+        },
+        "reservation_cny": "0.67662",
+        "reservation_usd": "0.0992376",
+        "serialized_messages_sha256": "4d8f6c32287ec8e7e32dea5928bccc3b939a8fdfa90b5aeed30a5e2c010de67b",
+        "serialized_messages_utf8_bytes": 30220,
+        "within_request_bound": true
+      },
+      "reliability-20261007-pair-pottery-rack:Base:answer": {
+        "full_request_sha256": "4174b83ec4df324edcc6b4fe0d0da47168f9c9079050264587999d78aacf8573",
+        "full_request_utf8_bytes": 3105,
+        "max_tokens": 8192,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 819,
+        "payload_value_utf8_bytes": {
+          "knowledge_basis": 46,
+          "question": 141,
+          "sources": 579
+        },
+        "reservation_cny": "0.29637",
+        "reservation_usd": "0.0434676",
+        "serialized_messages_sha256": "60e5fcdbbf5562f58846280ece1c77073155acf42ac4ea8961f52cd58b307727",
+        "serialized_messages_utf8_bytes": 2951,
+        "within_request_bound": true
+      },
+      "reliability-20261007-pair-pottery-rack:HCL:planning": {
+        "full_request_sha256": "17103cec389b227a1fc6bbed3643552a9df264bf0f3133ee03cddb7fa9202950",
+        "full_request_utf8_bytes": 29570,
+        "max_tokens": 4096,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 23455,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 22545,
+          "question": 141,
+          "sources": 721
+        },
+        "reservation_cny": "0.662148",
+        "reservation_usd": "0.09711504",
+        "serialized_messages_sha256": "51c9727db413732da69550fa251396581b3d9ee56cf6956efed81de1a37b2fd0",
+        "serialized_messages_utf8_bytes": 29416,
+        "within_request_bound": true
+      },
+      "reliability-20261007-pair-sail-booth-explicit-actor:Base:answer": {
+        "full_request_sha256": "9dc01e5f8dfab6b8f509e44f45c77c02dae6fbf6bdeabe98f3855db3bfe19df9",
+        "full_request_utf8_bytes": 3161,
+        "max_tokens": 8192,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 887,
+        "payload_value_utf8_bytes": {
+          "knowledge_basis": 46,
+          "question": 176,
+          "sources": 612
+        },
+        "reservation_cny": "0.297378",
+        "reservation_usd": "0.04361544",
+        "serialized_messages_sha256": "ee42ee42ce75f69e601710928cdf988a91ffdb94da986bbb08bc3b6a6952bffc",
+        "serialized_messages_utf8_bytes": 3007,
+        "within_request_bound": true
+      },
+      "reliability-20261007-pair-sail-booth-explicit-actor:HCL:planning": {
+        "full_request_sha256": "6168b4768844cee81faeee70fbad8367d1d33967751ec5a4cae7b02279adb0f1",
+        "full_request_utf8_bytes": 29626,
+        "max_tokens": 4096,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 23523,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 22545,
+          "question": 176,
+          "sources": 754
+        },
+        "reservation_cny": "0.663156",
+        "reservation_usd": "0.09726288",
+        "serialized_messages_sha256": "ff93684b721b23078280c803b6b6ef6f909aed7ba0a8ef37d5494c771e0b066f",
+        "serialized_messages_utf8_bytes": 29472,
+        "within_request_bound": true
+      },
+      "reliability-20261007-pair-unloading:Base:answer": {
+        "full_request_sha256": "c7b946e38ce57152b69ab9065e40f34b3f1da7ef5f7e5aca5ff8e6a7763bf8e5",
+        "full_request_utf8_bytes": 4729,
+        "max_tokens": 8192,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 2423,
+        "payload_value_utf8_bytes": {
+          "knowledge_basis": 46,
+          "question": 181,
+          "sources": 2137
+        },
+        "reservation_cny": "0.325602",
+        "reservation_usd": "0.04775496",
+        "serialized_messages_sha256": "34ecfda9c3d63dfe68375d061a1c2ea2e09d2ffef27a697627346670286e24f9",
+        "serialized_messages_utf8_bytes": 4575,
+        "within_request_bound": true
+      },
+      "reliability-20261007-pair-unloading:HCL:planning": {
+        "full_request_sha256": "0af59757b48f4899251371f7e18857624f5ba45865caa5c7f75bb45bad5d212f",
+        "full_request_utf8_bytes": 31338,
+        "max_tokens": 4096,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 25195,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 22545,
+          "question": 181,
+          "sources": 2421
+        },
+        "reservation_cny": "0.693972",
+        "reservation_usd": "0.10178256",
+        "serialized_messages_sha256": "9673eb3f1741917df216477bee99d1ba26ea3f9ede5a528d58858dbf90709dae",
+        "serialized_messages_utf8_bytes": 31184,
+        "within_request_bound": true
+      },
+      "reliability-20261007-smoke-flute:HCL:planning": {
+        "full_request_sha256": "5d1d85113dba32f829c739908ee35673eb89aedccd936c702e7b45b5f6c0f7b6",
+        "full_request_utf8_bytes": 30338,
+        "max_tokens": 4096,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 24215,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 22545,
+          "question": 195,
+          "sources": 1427
+        },
+        "reservation_cny": "0.675972",
+        "reservation_usd": "0.09914256",
+        "serialized_messages_sha256": "9adf4a0e9493bce1ebb62d4eb2ad994951014e30c77bb93dd4a2cb0ac2c407f6",
+        "serialized_messages_utf8_bytes": 30184,
+        "within_request_bound": true
+      }
+    },
+    "runtime_sha256": "da8349d12f8d13001e565ccdc8dbd6933cdbff5d8ec3b6369823c01925a379e9",
+    "sdk_retries": 0,
+    "source_recorded_at": "2026-10-07T05:19:26.377856+00:00",
+    "source_recorded_at_basis": "FROZEN_PACKET_PREPARATION_TIMESTAMP_NOT_ACTUAL_INGESTION_OR_EVENT_TIME",
+    "stage_call_caps": {
+      "1": 2,
+      "2": 12
+    },
+    "stage_cny_caps": {
+      "1": "1.70",
+      "2": "10.30"
+    },
+    "stage_orders": {
+      "1": [
+        [
+          "reliability-20261007-smoke-flute",
+          "HCL"
+        ]
+      ],
+      "2": [
+        [
+          "reliability-20261007-pair-unloading",
+          "Base"
+        ],
+        [
+          "reliability-20261007-pair-unloading",
+          "HCL"
+        ],
+        [
+          "reliability-20261007-pair-pottery-rack",
+          "HCL"
+        ],
+        [
+          "reliability-20261007-pair-pottery-rack",
+          "Base"
+        ],
+        [
+          "reliability-20261007-pair-sail-booth-explicit-actor",
+          "Base"
+        ],
+        [
+          "reliability-20261007-pair-sail-booth-explicit-actor",
+          "HCL"
+        ],
+        [
+          "reliability-20261007-pair-conveyor-exercise",
+          "HCL"
+        ],
+        [
+          "reliability-20261007-pair-conveyor-exercise",
+          "Base"
+        ]
+      ]
+    },
+    "stage_reservation_cny": {
+      "1": "1.666368",
+      "2": "10.219392"
+    },
+    "stage_windows_seconds": {
+      "1": 600,
+      "2": 2700
+    },
+    "usd_reference_only": true,
+    "z3_solver_version": "4.15.4.0"
+  },
+  "currency": "CNY",
+  "independent_case_review_sha256": "804a6010a7401b186dd70efcb0dc753964e9b29b6ac091544bd43bba688a6eb7",
+  "independent_executor_review_sha256": "cfca4b879f5f954217e87e76db09a2946035b6c6d026933d794ed83f0cef35ea",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "planner_lifecycle_contracts_merge_commit": "cf43f8fe8f9705cfc570f34224beb3095d2ee8c5",
+  "pursuit_uncertainty_merge_commit": "92c8990e0c13983ada4b8b88a1480875019fd00e",
+  "read_only_reader_files": {
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0"
+  },
+  "runtime_commit": "cf43f8fe8f9705cfc570f34224beb3095d2ee8c5",
+  "runtime_sha256": "da8349d12f8d13001e565ccdc8dbd6933cdbff5d8ec3b6369823c01925a379e9",
+  "schema": "hcl-reliability-final-package-v1",
+  "source_guard_merge_commit": "8f6652c98b4cd0856e3e8d31f67ea73527ebd61d",
+  "status": "FROZEN_BEFORE_ANY_OUTPUT",
+  "trusted_native_policy_merge_commit": "61da904bd5de34a974316c0d8188f582d21b9646",
+  "workflow_files": {
+    ".github/workflows/hcl-reliability-20261007-1-once.yml": "b50ddaa8609ae77e4c6a22d773a77df1d8c4966fd068a233bf9348df97335c22",
+    ".github/workflows/hcl-reliability-20261007-2-once.yml": "9a661d1f5d22117038f8586886ecafbd06b0ce5930f59043c7c333890d2894f9"
+  }
+}
