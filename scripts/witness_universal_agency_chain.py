@@ -8,7 +8,7 @@ from types import SimpleNamespace
 from hcl.cognition import UniversalHCL
 from hcl.cognition.deepseek_metered import DeepSeekMeteredPort
 from hcl.cognition.universal_entry import CallAllowance
-from scripts.development_input_phase_contract_amendment import validate_current
+from scripts.development_executable_entry_amendment import validate_current
 from scripts.witness_agency_chain import SOURCE,QUERY
 
 QUESTION='Explain the reported action using its plans and appraisal, without inferring a unique motive.'

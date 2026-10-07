@@ -208,7 +208,7 @@ class SensitivityFreezeTests(unittest.TestCase):
     def test_every_historical_amendment_rejects_tampering(self):
         from pathlib import Path
         from scripts.development_explicit_citation_amendment import HISTORICAL_PINS
-        from scripts.development_input_phase_contract_amendment import validate_current
+        from scripts.development_executable_entry_amendment import validate_current
         original=Path.read_bytes;self.assertTrue(validate_current())
         for changed in HISTORICAL_PINS:
             with self.subTest(path=changed):
@@ -220,7 +220,7 @@ class SensitivityFreezeTests(unittest.TestCase):
 
     def test_runtime_drift_and_missing_membership_reject(self):
         from pathlib import Path
-        from scripts.development_input_phase_contract_amendment import validate_current
+        from scripts.development_executable_entry_amendment import validate_current
         original=Path.read_bytes
         for changed in ('hcl/cognition/argument_sensitivity.py','hcl/cognition/argument_analysis.py',
                         'hcl/cognition/core.py','hcl/cognition/universal_entry.py','hcl/cognition/capability_catalog.py'):

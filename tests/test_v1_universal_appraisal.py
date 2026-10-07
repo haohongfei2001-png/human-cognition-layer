@@ -75,7 +75,7 @@ class UniversalAppraisalTests(unittest.TestCase):
         session, port, _ = entry()
         inventory = json.loads(port.calls[0][1][-1]['content'])['capability_inventory']
         self.assertEqual(next(x for x in inventory if x['capability_id'] == 'C04'),
-                         json.loads(json.dumps(asdict(CATALOG['C04']))))
+                         json.loads(json.dumps({key:value for key,value in asdict(CATALOG['C04']).items() if key!='implementation'})))
         no_plan = Stub(plan())
         result = run(session, ORIGINAL, no_plan)
         self.assertEqual(result['operations'], [])

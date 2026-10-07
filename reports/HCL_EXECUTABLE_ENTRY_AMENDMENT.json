@@ -1,0 +1,45 @@
+{
+  "all_retained_ids_preserved": 40,
+  "amended_hcl_runtime_sha256": "50e62d02790f165d1d73fc3275fc6f795da7582b9f81143eaa7aa69806660d16",
+  "authorized_additional_calls": 0,
+  "automatic_retry": false,
+  "baseline_commit": "862a1a2d6b0d4a19a30867e98f4df32231fdcccb",
+  "case_id_gold_rubric_or_target_family_routing": false,
+  "changed_runtime_files": [
+    "hcl/cognition/executable_entry.py",
+    "hcl/cognition/universal_entry.py"
+  ],
+  "checked_caller_blocks_proven_missing_literal_syntax": true,
+  "full_callable_contracts_preserved": 14,
+  "historical_answers_rescored": false,
+  "historical_executors_unchanged": true,
+  "historical_grants_reopened": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "maximum_request_bytes": 36000,
+  "model_compliance_or_quality_verified": false,
+  "native_parser_or_result_semantics_changed": false,
+  "native_view_or_claim_prerun": false,
+  "necessary_syntax_reuses_existing_local_candidates_and_family_grammar": true,
+  "normal_evidence_limited_and_mixed_outcome_paths_preserved": true,
+  "phase_configuration": {
+    "answer": {
+      "max_tokens": 16384,
+      "reasoning_effort": "low"
+    },
+    "planning": {
+      "max_tokens": 16384,
+      "reasoning_effort": "high"
+    }
+  },
+  "planner_implementation_paths_and_null_contracts_omitted": true,
+  "positive_syntax_is_not_treatment": true,
+  "previous_hcl_runtime_sha256": "112cfcd6749bd5c4216aaf580ad3608da85bda5d4d5bc017ebb04ade27aa8e7f",
+  "provider_calls": 0,
+  "provider_phases_added": false,
+  "provider_spend_cny": 0,
+  "reason": "SHARED_SOURCE_VERSION_BOUND_ENTRY_MODE_ADMISSION",
+  "schema": "hcl-executable-entry-amendment-v1",
+  "semantic_candidates_remain_model_proposals": true,
+  "source_index_binds_same_original_source_snapshot": true,
+  "source_text_changed": false
+}

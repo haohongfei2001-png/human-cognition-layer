@@ -34,7 +34,7 @@ class PlannerContractTests(unittest.TestCase):
     def test_exact_contracts_reach_actual_planner_messages_and_do_not_force_operations(self):
         session=UniversalHCL();stub=Stub(plan());r=run(session,'Explain coordination limits in an orchestra.',stub)
         payload=json.loads(stub.calls[0][1][-1]['content'])
-        self.assertEqual(payload['capability_inventory'],json.loads(json.dumps([asdict(c)for c in CATALOG.values()])))
+        self.assertEqual(payload['capability_inventory'],json.loads(json.dumps([{key:value for key,value in asdict(c).items() if key!='implementation' and (key!='entry_contract' or value is not None)} for c in CATALOG.values()])))
         self.assertEqual(r['operations'],[]);self.assertEqual(r['failure_reason'],'NATIVE_HCL_RESULT_REQUIRED_BEFORE_ANSWER')
         self.assertEqual([phase for phase,_ in stub.calls],['planning'])
         self.assertIn('return empty operations',PLANNER_POLICY)
