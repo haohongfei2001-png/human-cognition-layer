@@ -1,0 +1,28 @@
+{
+  "approved_at_bound": "2026-10-07T19:45:33Z",
+  "authorization_ref": "OWNER_APPROVED_HCL_INPUT_PHASE_SMOKE_20261007_2_CALLS_2_30_CNY",
+  "authorized_calls": 2,
+  "authorized_cny": "2.30",
+  "currency": "CNY",
+  "executor_commit": "d47936f4c410ce9ff9dee6ef32c7068b25c23330",
+  "expires_at": null,
+  "historical_budget_transfer": false,
+  "other_stage_budget_transfer": false,
+  "package_sha256": "24134c0d0c78e22a1a2c3c4df3779fcd8944571831efeda0689c7ee327c62548",
+  "phase1_source_review_sha256": null,
+  "public_native_evidence_permission": {
+    "approval_message_ref": "Sentinel_f5033df85a788191be71bfb387c7df6e",
+    "authorization_ref": "OWNER_APPROVED_HCL_INPUT_PHASE_SMOKE_20261007_2_CALLS_2_30_CNY",
+    "destination": "https://github.com/haohongfei2001-png/human-cognition-layer",
+    "maximum_case_records": 1,
+    "maximum_operations_per_record": 3,
+    "maximum_record_utf8_bytes": 1048576,
+    "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+    "schema": "hcl-input-phase-smoke-native-public-permission-v1",
+    "scope": "ONE_FROZEN_REGRESSION_SMOKE_BOUNDED_SOURCE_VALIDATED_NATIVE_EVIDENCE"
+  },
+  "retries": 0,
+  "schema": "hcl-input-phase-smoke-new-grant-v1",
+  "stage": 1,
+  "status": "READY"
+}
