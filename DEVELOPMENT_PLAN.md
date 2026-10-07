@@ -42,8 +42,11 @@ executor, without a grant or trigger. Its canonical package SHA256 is
 `0d8530ce5c2838015141423aa97fa701752583fbdd9f83b97ccb90b383bec5e4`.
 The 98 executor tests and prior runtime tests establish provider-free correctness,
 not model planning, answer quality or final I02-I06 completion. This runtime has
-zero new live model calls; repository adoption/CI and the separate native-evidence
-disclosure permission remain prerequisites for the prepared diagnostic.
+zero new live model calls. Package adoption is complete in
+[PR #382](https://github.com/haohongfei2001-png/human-cognition-layer/pull/382),
+merged at `683330c8d1210b0e3b96297639f00de349d306cb`, with all three exact-head and
+exact-main checks passed, including the 98 hosted executor tests. The separate
+native-evidence disclosure permission remains pending; no grant or trigger exists.
 
 The [October 6 two-stage CNY experiment](docs/HCL_TWO_STAGE_CNY_20261006_RESULTS.md)
 is completed historical evidence on its separately frozen runtime
@@ -69,8 +72,9 @@ Planning remains 4,096 and final answers 8,192 tokens with the existing model/hi
 configuration; no retry, automatic token upgrade, replacement item or recharge.
 The absolute deadline is 2026-10-07 14:00 UTC. It is not yet activated: all four
 reliability repairs are adopted; the five cases, exact package and bounded executor
-have independent review. Repository integration/CI and permission for the minimal
-structured synthetic native evidence needed for source-first review remain pending.
+have independent review and package adoption/CI is complete. Permission for the
+minimal structured synthetic native evidence needed for source-first review remains
+pending; it must precede any new grant/marker activation or external provider work.
 Public workflow artifacts are not treated as private. Historical
 4,096-token source-planning truncation is a known risk, not proof every input
 fails. A failed smoke closes this diagnostic rather than silently switching to
@@ -113,11 +117,13 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: END_TO_END_READINESS_AND_LIVE_PREREQUISITES**
 
-Current provider-free work is to adopt the independently reviewed ordinary-default
-reliability package through exact-head/main CI. Its runtime repairs and case
-qualification are complete; no grant or trigger is present. Continue complete
-request/citation/revision checks and do not activate a live run until the separate
-native-evidence disclosure permission and all exact-package prerequisites are met. Statically unsupported candidate inputs must be replaced before freeze and
+The independently reviewed ordinary-default reliability package is adopted and
+its exact-head/main CI is complete. The next conditional step is the protected
+stage-one grant/marker and source-first smoke, only after explicit permission for
+the bounded native-evidence disclosure. No grant, trigger or provider invocation
+exists for this new diagnostic. Frozen cases, rules, runtime and package must remain fixed; ordinary
+provider-free engineering may continue without spending or evidence upgrades.
+Statically unsupported candidate inputs must be replaced before freeze and
 before any model output, without parser-specific source rewrites or weaker
 relevance gates. Ordinary engineering can
 continue without reopening a paid run. Historical failed outputs and scores stay
