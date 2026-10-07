@@ -1,0 +1,9 @@
+{
+  "authorization_ref": "OWNER_APPROVED_HCL_RELIABILITY_20261007_14_CALLS_12_CNY",
+  "executor_commit": "226778837f9fff4db1870ad5e0b7b9f984f09361",
+  "grant_commit": "49e2f30768cab8e8a51b342a004377b749112b7e",
+  "grant_sha256": "3bbcdab3fa8965f68d22b98b2388534c0ae68c46719fc9d0d7a7592579744850",
+  "package_sha256": "0d8530ce5c2838015141423aa97fa701752583fbdd9f83b97ccb90b383bec5e4",
+  "schema": "hcl-reliability-marker-proposal-v1",
+  "stage": 1
+}
