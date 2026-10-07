@@ -2,8 +2,9 @@
 
 ## Current implementation policy — owner correction 2026-10-03
 
-[LLM-directed understanding and required HCL execution](docs/HCL_LLM_ROUTING_EXECUTION.md)
-lets the model interpret the request, select useful existing HCL operations and
+[The initial LLM-directed routing amendment](docs/HCL_LLM_ROUTING_EXECUTION.md)
+and its [C02 planned-input extension](docs/HCL_C02_PLANNED_INPUT.md) let the model
+interpret the request, select useful existing HCL operations and
 construct their arguments. One selected B01/C01/C02/C03 operation can reuse anchored
 interpretations from that same first planning response through the existing
 conditional tools, with no additional provider phase or native parser change.
@@ -13,15 +14,21 @@ unavailable plans cannot silently continue to an answer. Selection accuracy and
 checked treatment remain separate from invocation. Source authority, privacy and
 budget guards stay in force. New adapter expansion is deferred while the complete
 usable flow is verified. This does not require HCL to independently solve language
-understanding, and it authorizes no model spending.
+understanding, and it authorizes no model spending. The initial amendment preserves
+its historical three-family scope and measurements; the C02 extension supplies the
+current fourth-family contract.
 
-[Final-context transport](docs/HCL_FINAL_CONTEXT_TRANSPORT.md) now removes only
+[The earlier final-context transport repair](docs/HCL_FINAL_CONTEXT_TRANSPORT.md) removed only
 structural JSON spaces and records local size-only diagnostics before final
 limits. Parsed source/plan/native-result values and real HCL execution remain
 unchanged; the 36,000-byte provider ceiling still rejects oversized requests.
 The new exact development runtime identity preserves consumed CNY executors,
 packages, closed grants and evidence. This is offline transport verification,
-not a new model evaluation or an answer-quality claim.
+not a new model evaluation or an answer-quality claim. The current entry also
+[preserves code-owned native policies and shares exact repeated complete
+policy/result pairs](docs/HCL_NATIVE_READER_POLICY.md) through explicit references.
+Expanded values and the full operation receipt remain intact; the earlier
+whitespace-only amendment is preserved as historical evidence.
 
 [Nonblank final-answer delivery](docs/HCL_NONBLANK_ANSWER.md) now rejects empty or
 Unicode-whitespace-only answer fields even after native execution and valid
@@ -51,6 +58,18 @@ from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: END_TO_END_READINESS_AND_LIVE_PREREQUISITES**
+
+The live queue and current evidence are in [STATUS.md](STATUS.md) and
+[DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md). The
+[October 7 ordinary-default reliability package](docs/HCL_RELIABILITY_20261007.md)
+is frozen and independently reviewed, with repository adoption/CI recorded in
+[PR #382](https://github.com/haohongfei2001-png/human-cognition-layer/pull/382).
+Its separate native-evidence disclosure permission remains pending; this README
+provides no spending or launch authority.
+
+## DRC008 preserved source-first closure snapshot
+
+**Historical queue snapshot; not the current execution queue.**
 
 [DRC008 source-first closure](reports/HCL_DRC008_SOURCE_FIRST_CLOSURE.md): INCONCLUSIVE,
 provisional paired judgeBase/H6/6,0gains/harms,checked treatment0/6;quotes/formatallpass.
