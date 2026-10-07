@@ -15,6 +15,34 @@ budget guards stay in force. New adapter expansion is deferred while the complet
 usable flow is verified. This does not require HCL to independently solve language
 understanding, and it authorizes no model spending.
 
+## Current execution snapshot — 2026-10-07
+
+This is a documentation correction, not a capability increment or a new
+evaluation. The current implementation baseline is
+`main@214ee4629347fedb5ea59f40dc14a99bcaf257d0` (PR #376), whose 12 exact-main
+checks passed. Its runtime SHA256 is
+`5e58ad59e7d048098978dbb45a11d714d1e54967286d7a552b765e8c017bb35f`.
+The final-context compaction and local size diagnostics are provider-free repairs;
+this new runtime has not had a live model evaluation.
+
+The [October 6 two-stage CNY experiment](docs/HCL_TWO_STAGE_CNY_20261006_RESULTS.md)
+is completed historical evidence on its separately frozen runtime
+`62bea96c481fcdde3bfb0af8707796d5afaebf1c9d051ace9bd0c82e236f2442`.
+Its complete-flow smoke passed. The four authored development pairs scored
+Base 40/40 and HCL 29/40: one HCL final request exceeded the unchanged 36,000-byte
+limit and one delivered answer omitted a relevant fact. There was no winning HCL
+pair or demonstrated answer-quality gain. PR #376 does not reconstruct the
+missing historical failed wire, rescore that run or prove the failures resolved
+in real model use. The experiment used a 16,384-token planner allowance; the
+ordinary 4,096-token default was not validated by it.
+
+The two CNY grants are **CLOSED_NO_TRANSFER_NO_RETRY**, with zero remaining calls
+and zero remaining money authority. The 13 calls' CNY 1.738854 usage-rated estimate
+is not a verified invoice; unused parts of the historical 14-call/CNY 14 ceiling
+are not reusable. Any new real model run needs a separately frozen bounded
+package and new explicit limited authorization. Earlier generic development
+authorization wording does not reopen these consumed grants.
+
 ## Current phase
 
 **DEVELOPMENT REALITY CHECKS ACTIVE / FINAL CONFIRMATION DEFERRED — A–H CORRECTNESS_VERIFIED / G-HC PASS_PROVIDER_FREE / G-ARCH PASS_ARCHITECTURE_READY_FOR_SERIOUS_EVALUATION**
@@ -32,13 +60,13 @@ A00 is complete through adoption of the canonical master plan and live-policy
 migration. It changes development governance only; it does not modify HCL runtime
 code or upgrade any historical evidence.
 
-[Exact encrypted-result readback](docs/HCL_ENCRYPTED_READBACK.md) adds a bounded,
-plaintext-silent local verifier using the unchanged encryption format. The real
-historical G05 artifact passes exact public ZIP/package/recipient and supplied
-GitHub run/head checks; actual private decryption and durable custody remain
-unverified. Scripted memory-only key tests are not custody or live evidence.
-Current-runtime two-call diagnostic refreeze and new bounded authority remain
-pending; old grants and runtime are unchanged.
+[Exact encrypted-result readback](docs/HCL_ENCRYPTED_READBACK.md) remains a
+historical G05 recovery path: ciphertext identity was checked, but that path's
+private decryption and durable key custody remain unverified. It is not the
+current global blocker. The later, explicitly authorized public synthetic-result
+route completed the October 6 smoke and paired experiment above. Neither that
+success nor scripted key tests establishes custody of the old private key; no
+old G05 diagnostic is automatically reactivated.
 
 [Final-context transport](docs/HCL_FINAL_CONTEXT_TRANSPORT.md) now removes only
 structural JSON spaces and records local size-only diagnostics before final
@@ -76,6 +104,29 @@ from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: END_TO_END_READINESS_AND_LIVE_PREREQUISITES**
+
+Current provider-free work is to verify complete input/result preservation,
+bounded final transport, source/citation and revision failure paths, and prepare a
+fresh current-runtime delivery/comparison package. Ordinary engineering can
+continue without reopening a paid run. Historical failed outputs and scores stay
+unchanged; actual post-repair model delivery and benefit require new authorized
+measurements.
+
+A00 plus the 40 A–H runtime packages have their declared construction/correctness
+status, not a product-completion percentage. The current
+[callable catalog](hcl/cognition/capability_catalog.py) has 14 bounded ordinary-entry
+adapters (B01/B02, C01–C05, D01/D02, G01–G05) and 26 `ADAPTER_REQUIRED` entries.
+The latter include reused A01–A05 foundation services, so they are not 26 absent
+algorithms. Broad adapter expansion remains deferred while usable end-to-end
+delivery is checked.
+
+I01 is a frozen evaluation contract, not a confirmation result; the configuration
+must be refrozen when the evaluated implementation is stable. Final I02 source
+and comparator qualification, I03 full comparison, I04 mechanism/integration
+ablation, I05 cross-model transfer and I06 source-first disposition are not
+complete. Optimization, authoritative target audit and permitted final submission
+come later. Final independent-source/reviewer requirements do not block ordinary
+development reality checks; they remain requirements for final confirmation.
 
 [Retained D02 finite acknowledgment](docs/HCL_UNIVERSAL_UNDERSTANDING_ENTRY.md)
 forwards complete native results and support under the exact returned summary
