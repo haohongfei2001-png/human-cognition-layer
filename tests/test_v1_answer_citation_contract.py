@@ -8,7 +8,7 @@ from unittest.mock import patch
 from hcl.cognition import CognitionWorkspace, UniversalHCL
 from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY, _EXPLICIT_CITATION_FINAL_ANSWER_POLICY, answer_reader_entry
 from hcl.cognition.retained import audit_supplied_source_citations
-from scripts.development_entry_readiness_amendment import validate_current
+from scripts.development_input_phase_contract_amendment import validate_current
 from tests.test_v1_universal_question import Stub, operation, plan, run
 
 SOURCE = 'Lin wrote the note.\nThe blue box stayed closed.'

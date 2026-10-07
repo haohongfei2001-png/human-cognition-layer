@@ -10,7 +10,7 @@ class FakeClient:
     def create(self,**request):
         self.calls.append(request)
         if self.failure:raise RuntimeError(self.failure)
-        content=(dict(task='Conceptual analysis',operations=[],limitations=['No supplied source.'])if request['max_tokens']==16384 else dict(answer='A conceptual analysis.',source_citations=[],uncertainty='Unsourced knowledge.',assumptions='No source facts supplied.'))
+        content=(dict(task='Conceptual analysis',operations=[],limitations=['No supplied source.'])if request['reasoning_effort']=='high' else dict(answer='A conceptual analysis.',source_citations=[],uncertainty='Unsourced knowledge.',assumptions='No source facts supplied.'))
         return dict(model=MODEL,choices=[dict(finish_reason='stop',message=dict(content=json.dumps(content),reasoning_content='HIDDEN_REASONING_CANARY'))],usage=dict(prompt_tokens=100,completion_tokens=30,reasoning_content='HIDDEN_USAGE_CANARY'))
 
 class MeteredPortTests(unittest.TestCase):
@@ -18,7 +18,7 @@ class MeteredPortTests(unittest.TestCase):
         class NativePlanClient(FakeClient):
             def create(self,**request):
                 value=super().create(**request)
-                if request['max_tokens']==16384:
+                if request['reasoning_effort']=='high':
                     value['choices'][0]['message']['content']=json.dumps(dict(task='Prepare caller rule',operations=[dict(capability='G01',question='Prepare caller rule.',source_ids=[],bindings=[])],limitations=[]))
                 return value
         client=NativePlanClient();port=DeepSeekMeteredPort(client);journal=[]
@@ -27,7 +27,7 @@ class MeteredPortTests(unittest.TestCase):
         self.assertEqual(result['status'],'ANSWERED_WITH_EXPLICIT_LIMITS');self.assertEqual(len(client.calls),2)
         self.assertEqual(result['provider_calls'],2)  # Fake SDK only, zero network.
         self.assertNotIn('HIDDEN_',json.dumps(result));self.assertNotIn('HIDDEN_',json.dumps(journal))
-        self.assertEqual([r['max_tokens']for r in client.calls],[16384,8192])
+        self.assertEqual([r['max_tokens']for r in client.calls],[16384,16384])
         self.assertTrue(all(r['model']==MODEL and r['extra_body']['thinking']['type']=='enabled'for r in client.calls))
 
     def test_no_retry_or_unbounded_client_is_admitted(self):

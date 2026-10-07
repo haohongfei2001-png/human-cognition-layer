@@ -134,7 +134,7 @@ class BoundedMetadataTests(unittest.TestCase):
         self.assertIs(_with_literal_entry_blockers(base,maximum_context_chars=limit),base)
         self.assertNotIn('literal_entry_blockers',json.loads(base[-1]['content']))
 
-    def test_original_frozen_request_hash_and_quote_are_unchanged_without_metadata(self):
+    def test_historical_request_is_pinned_and_current_no_hint_quote_matches_actual_request(self):
         folder=Path('.github/frozen/hcl-semantic-smoke-20261007')
         package=json.loads((folder/'package.json').read_text());packet=json.loads((folder/'cases.json').read_text())
         material=packet['cases'][0]['model_input']
@@ -142,12 +142,19 @@ class BoundedMetadataTests(unittest.TestCase):
         messages=planning_messages(sources);body=json.loads(messages[-1]['content']);body['question']=material['question'];messages[-1]['content']=json.dumps(body,ensure_ascii=False,sort_keys=True,separators=(',',':'))
         expected=package['configuration']['requests'][packet['cases'][0]['case_id']+':HCL:planning']
         request,wire=bounded_request('planning',messages)
-        self.assertEqual(hashlib.sha256(wire).hexdigest(),expected['full_request_sha256'])
-        self.assertEqual(len(wire),expected['full_request_utf8_bytes'])
+        # The new explicit input contract intentionally changes planning bytes.
+        # The original request reconstruction still runs at its exact closed
+        # runtime in development_entry_validation_history.
+        self.assertEqual(expected['full_request_sha256'],'b54c3ceba0faad8ac7955fc850fa4a330d191b6d2103069da7efc11ce6f1a68d')
+        self.assertEqual(expected['full_request_utf8_bytes'],30529)
+        self.assertIn('input_mode',request['messages'][0]['content'])
+        self.assertEqual(request['messages'],messages)
         self.assertEqual(request['max_tokens'],16384)
         port=DeepSeekMeteredPort(SimpleNamespace(max_retries=0,base_url='https://api.deepseek.com',timeout=60))
         self.assertEqual(port.request('planning',messages),(request,wire));self.assertEqual(port._quoted,set())
-        self.assertEqual(Decimal(port.reservation_usd('planning',messages)),Decimal(expected['reservation_usd']))
+        from hcl.cognition.deepseek_metered import INPUT_RATE, OUTPUT_RATE, OUTPUT_MARGIN
+        exact_quote=((2*len(wire)+2048)*INPUT_RATE+(request['max_tokens']+OUTPUT_MARGIN)*OUTPUT_RATE)/1000000
+        self.assertEqual(Decimal(port.reservation_usd('planning',messages)),exact_quote)
         quoted=set(port._quoted);bounded_request('planning',messages);self.assertEqual(port._quoted,quoted)
 
     def test_hints_do_not_reroute_count_as_native_or_block_honest_reader_answer(self):

@@ -13,7 +13,7 @@ from unittest.mock import patch
 
 from hcl.cognition import universal_entry as current
 from scripts import development_explicit_citation_amendment as amendment
-from scripts.development_entry_readiness_amendment import validate_current
+from scripts.development_input_phase_contract_amendment import validate_current
 from scripts import development_final_delivery_amendment as diagnostic_amendment
 from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY, _EXPLICIT_CITATION_FINAL_ANSWER_POLICY
 from scripts.run_four_comparison import accepted, final_fields
@@ -72,6 +72,8 @@ def execute(module, raw, *, event=None, sourced=True, invalid_plan=False, no_nat
         question = QUESTION if sourced else 'For this analysis, responsibility requires control.'
         operation = dict(capability='B01' if sourced else 'G01', question=question,
                          source_ids=['s'] if sourced else [], bindings=[])
+        if module is current and sourced:
+            operation['input_mode']='literal' # Exact current protocol tag; historical arguments remain unchanged.
         planner = json.dumps(dict(task='Source-bounded analysis', operations=[] if no_native else [operation], limitations=[]))
         if invalid_plan:
             planner = '{invalid planner JSON'
@@ -143,10 +145,16 @@ class FinalDeliveryTests(unittest.TestCase):
         # policies must match the real adapter before removing that added field
         # from the historical comparison view; arbitrary nested keys stay exact.
         compared = copy.deepcopy(after)
+        def remove_verified_input_mode(plan):
+            for operation in plan['operations']:
+                if operation['capability']=='B01':
+                    self.assertEqual(operation.pop('input_mode'),'literal')
+        if 'plan' in compared['receipt']:
+            remove_verified_input_mode(compared['receipt']['plan'])
         # Exact code-owned contract insertion plus structural JSON whitespace only.
         # Every parsed planning value is still compared with the pinned predecessor.
         marker = 'For C02 also use NAME: I did ACTION.; '
-        from scripts.development_entry_readiness_amendment import apply_reviewed_planner_contract
+        from scripts.development_input_phase_contract_amendment import apply_reviewed_planner_contract
         expected_policy = self.previous.PLANNER_POLICY.replace(marker, LIFECYCLE_CONTRACT_ADDITION + marker)
         self.assertEqual(current.PLANNER_POLICY, apply_reviewed_planner_contract(expected_policy))
         for phase, frame in compared['calls']:
@@ -182,6 +190,7 @@ class FinalDeliveryTests(unittest.TestCase):
             policy = policy[:-len(suffix)]
             frame[0]['content'] = _FINAL_ANSWER_POLICY + policy[len(_EXPLICIT_CITATION_FINAL_ANSWER_POLICY):]
             payload = expand_native_reader_contexts(payload)
+            remove_verified_input_mode(payload['hcl_plan'])
             self.remove_verified_reader_policy(payload['hcl_operations'])
             frame[-1]['content'] = json.dumps(payload, ensure_ascii=False, sort_keys=True)
         # Malformed fields already refused by the source auditor now have a

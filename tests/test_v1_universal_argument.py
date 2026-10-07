@@ -185,7 +185,7 @@ class ArgumentFreezeTests(unittest.TestCase):
     def test_every_historical_amendment_pin_rejects_tampering(self):
         from pathlib import Path
         from scripts.development_explicit_citation_amendment import HISTORICAL_PINS
-        from scripts.development_entry_readiness_amendment import validate_current
+        from scripts.development_input_phase_contract_amendment import validate_current
         original=Path.read_bytes
         for changed in HISTORICAL_PINS:
             with self.subTest(path=changed):
@@ -198,7 +198,7 @@ class ArgumentFreezeTests(unittest.TestCase):
 
     def test_amendment_preserves_previous_files_and_unrelated_runtime(self):
         from pathlib import Path
-        from scripts.development_entry_readiness_amendment import validate_current
+        from scripts.development_input_phase_contract_amendment import validate_current
         self.assertTrue(validate_current());original=Path.read_bytes
         for changed in ('reports/HCL_DEVELOPMENT_UNIVERSAL_CONCEPT_AMENDMENT.json',
                         'scripts/development_universal_concept_amendment.py',

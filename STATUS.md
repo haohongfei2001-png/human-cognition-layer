@@ -17,17 +17,21 @@ understanding, and it authorizes no model spending.
 
 ## Current execution snapshot — 2026-10-07
 
-The current ordinary port uses an explicit [16,384-token planning allowance](docs/HCL_ORDINARY_PLANNING_ALLOWANCE.md)
-with high thinking and an unchanged 8,192-token final allowance. Exact-request
-budget admission and usage bounds track this fixed configuration; there is no
+The current [explicit input and phase contract](docs/HCL_INPUT_PHASE_CONTRACT.md)
+requires literal/semantic/insufficient modes for B01/C01/C02/C03 model plans and
+checks semantic anchors before dispatch. Strict callers can require an actual
+checked result in an allowed family before paying for final generation; ordinary
+evidence-limited answers remain available. Planning is fixed at 16,384/high and
+final answering at 16,384/low. Exact-request admission tracks both bounds, with no
 automatic upgrade or retry. Current runtime SHA256 is
-`7bbbb74b9877f108bf8052cc252d588302a820f0b8d5d17a9177c76019def12b`.
+`112cfcd6749bd5c4216aaf580ad3608da85bda5d4d5bc017ebb04ade27aa8e7f`.
+This provider-free repair has no live model result. Prior grants remain closed.
 The [optional source-entry blockers](docs/HCL_ENTRY_READINESS.md) add only
 code-owned necessary input-condition observations for B02/D02. No blocker does
 not certify readiness. New metadata is omitted as a whole when it would exceed
 capacity, preserving original messages and the 36KB ceiling.
-The new [entry-routing smoke](docs/HCL_ENTRY_VALIDATION_20261007_RESULTS.md) on
-this current runtime failed end to end: it selected only B01, avoiding the declared
+The [entry-routing smoke](docs/HCL_ENTRY_VALIDATION_20261007_RESULTS.md) on prior
+runtime `7bbbb74b9877f108bf8052cc252d588302a820f0b8d5d17a9177c76019def12b` failed end to end: it selected only B01, avoiding the declared
 B02/D02 blockers, but omitted semantic_candidates and produced no checked native
 treatment. The final request was only 10,643 bytes, yet its 8,192-token/high-thinking
 response ended with length, provider-reported reasoning_tokens=8,192 and zero
@@ -41,10 +45,10 @@ The source-version, trusted native-policy sharing, C03 pursuit and planner-contr
 repairs previously adopted through PR #381 remain unchanged. This configuration
 repair has provider-free regression coverage; no real model success under the new
 current default is established by those tests.
-The [existing semantic-input bridge contract](docs/HCL_SEMANTIC_BRIDGE_CONTRACT.md)
-now explicitly asks the first planner to construct faithful typed inputs for
-ordinary prose when its native literal forms do not already apply. This is a
-190-byte policy clarification, not a new parser or automatic second call.
+The earlier [semantic-input bridge contract](docs/HCL_SEMANTIC_BRIDGE_CONTRACT.md)
+clarified first-response typed input construction for prose outside native literal
+forms. That historical 190-byte policy clarification added no parser or model
+phase; the current explicit-mode admission above now enforces input structure.
 The [single same-case semantic smoke](docs/HCL_SEMANTIC_SMOKE_20261007_RESULTS.md)
 now passed independent source-first review: all ten answer obligations, four
 smoke requirements and relevant real B01 treatment. The model supplied three

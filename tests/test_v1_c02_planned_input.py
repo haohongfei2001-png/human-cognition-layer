@@ -27,7 +27,7 @@ def candidates(quotes=QUOTES,lines=LINES):
 
 
 def selected(rows=None,query=QUERY):
-    return dict(operation('C02',query,['maintenance']),semantic_candidates=candidates()if rows is None else rows)
+    return dict(operation('C02',query,['maintenance']),input_mode='semantic',semantic_candidates=candidates()if rows is None else rows)
 
 
 def execute(quotes=QUOTES,lines=LINES,*,rows=None,bounded=False,query=QUERY):

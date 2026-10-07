@@ -118,7 +118,7 @@ class LLMRoutingExecutionTests(unittest.TestCase):
 
 
 def translated(cid='C01',rows=None):
-    return dict(operation(cid,PROSE_QUERY,['meeting']),semantic_candidates=proposals()if rows is None else rows)
+    return dict(operation(cid,PROSE_QUERY,['meeting']),input_mode='semantic',semantic_candidates=proposals()if rows is None else rows)
 
 
 class PlannedSemanticInputTests(unittest.TestCase):
@@ -184,7 +184,11 @@ class PlannedSemanticInputTests(unittest.TestCase):
                             (PROSE+'\n'+proposals()[0]['quote'],[proposals()[0]])):
             port=Stub(plan(translated(rows=rows)));result=run(self.session(source),PROSE_QUERY,port)
             self.assertEqual(len(port.calls),1);self.assertEqual(result['hcl_execution']['native_results'],0)
-            self.assertEqual(result['operations'][0]['status'],'ADAPTER_REJECTED_NOT_COMPLETED')
+            if rows[0]['quote'] not in source:
+                self.assertEqual(result['operations'],[])
+                self.assertEqual(result['failure_reason'],'invented or stale source anchor')
+            else:
+                self.assertEqual(result['operations'][0]['status'],'ADAPTER_REJECTED_NOT_COMPLETED')
 
     def test_model_interpretation_is_not_certified_even_when_source_anchor_is_valid(self):
         rows=[proposals()[0]];rows[0]['content']['canonical_statement']='Dana: I want to abandon the gate.'

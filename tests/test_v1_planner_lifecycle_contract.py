@@ -37,7 +37,7 @@ def perform(pairs):
     rows = [dict(source_id='workshop', quote=quote, kind='event',
                  content=dict(canonical_statement=statement)) for quote, statement in pairs]
     op = dict(operation('C01', "What are Pelo's goals and plans?", ['workshop']),
-              semantic_candidates=rows)
+              input_mode='semantic',semantic_candidates=rows)
     port = RequestBoundedStub(plan(op))
     result = run(session, QUESTION, port)
     expanded = expand_reader_context(result['operations'][0]['result'])

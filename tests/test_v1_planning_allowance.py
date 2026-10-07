@@ -38,13 +38,13 @@ class Client:
 
 
 class OrdinaryPlanningAllowanceTests(unittest.TestCase):
-    def test_default_is_explicit_16k_high_with_unchanged_final(self):
+    def test_defaults_are_explicit_16k_with_phase_specific_effort(self):
         port = DeepSeekMeteredPort(Client())
         messages = [dict(role='user', content='Complete source: 原文 🧠\nNo omissions.')]
-        for phase, expected in [('planning', 16384), ('answer', 8192)]:
+        for phase, expected in [('planning', 16384), ('answer', 16384)]:
             request, wire = port.request(phase, messages)
             self.assertEqual(request['max_tokens'], expected)
-            self.assertEqual(request['reasoning_effort'], 'high')
+            self.assertEqual(request['reasoning_effort'], 'high' if phase=='planning' else 'low')
             self.assertEqual(request['thinking'], {'type': 'enabled'})
             self.assertEqual(request['messages'], messages)
             self.assertEqual(json.loads(wire), request)
@@ -64,7 +64,7 @@ class OrdinaryPlanningAllowanceTests(unittest.TestCase):
         result = UniversalHCL().answer('For this analysis, responsibility requires control.',
             planner_backend=port, answer_backend=port, allowance=allowance)
         self.assertEqual(result['status'], 'ANSWERED_WITH_EXPLICIT_LIMITS')
-        self.assertEqual([x['max_tokens'] for x in client.calls], [16384, 8192])
+        self.assertEqual([x['max_tokens'] for x in client.calls], [16384, 16384])
         self.assertTrue(any(x['executed'] for x in result['operations']))
         self.assertNotIn('PRIVATE_REASONING_CANARY', json.dumps([result, journal]))
 
@@ -110,10 +110,10 @@ class OrdinaryPlanningAllowanceTests(unittest.TestCase):
             port.complete('planning', messages)
         self.assertEqual(len(client.calls), 1)
 
-    def test_answer_limit_is_not_expanded_with_planning(self):
-        client = Client(answer_tokens=8192 + 33); port = DeepSeekMeteredPort(client)
+    def test_fixed_answer_limit_rejects_usage_over_its_explicit_margin(self):
+        client = Client(answer_tokens=16384 + 33); port = DeepSeekMeteredPort(client)
         messages = [dict(role='user', content='Final source facts')]
         port.reservation_usd('answer', messages)
         with self.assertRaisesRegex(MeteredPortError, 'USAGE_OUTSIDE_FROZEN_BOUND'):
             port.complete('answer', messages)
-        self.assertEqual(client.calls[0]['max_tokens'], 8192)
+        self.assertEqual(client.calls[0]['max_tokens'], 16384)
