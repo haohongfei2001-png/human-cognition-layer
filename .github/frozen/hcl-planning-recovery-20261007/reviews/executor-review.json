@@ -1,0 +1,43 @@
+{
+  "case_canonical_packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "case_review_file_sha256": "9fea8a0f9b4bb12fc901ff4ea5ea9507e7bbf289897455d47c0a11ccad7c7a89",
+  "checks": {
+    "all_blockers_resolved": true,
+    "native_permission_required_before_external_work": true,
+    "provider_free_regressions_passed": true
+  },
+  "executor_files_sha256": {
+    "hcl_recovery_candidate.py": "e7ad9e3dc030cc817f31053a205739fe02d8a0aabe39a3d26a543e5619c5a33e",
+    "hcl_recovery_cli.py": "342c87cd27867b2ab5965a82d640454e5bc1094fe1b5ff94e8fc3bbaf3328bfe",
+    "hcl_recovery_native_public.py": "af9064d927181961fd9783cfb5cd2503d778010051a65caac644603e18bfa93c",
+    "hcl_recovery_public.py": "cf18e4961baf8d50bdd6ae4d1d99632721dd28eba8dad080335aaddf31988531",
+    "hcl_recovery_reviews.py": "7e13b24b843ef26992bc5da69eb2bf3ec49f45e46f6ab757ad2370da1c2b67d9",
+    "tests/test_hcl_recovery_adapter.py": "3b92a164302efd9f578a21b40091ae2c77ab31115b2d82b245c2c2b49925e165",
+    "tests/test_hcl_recovery_candidate.py": "9ad3957b0c590a617ffe3503f7ed747ec91c7dfe4cd22ca7d0c415776157eb95",
+    "tests/test_hcl_recovery_native_regressions.py": "3b8c5acfc07c19e1966a50445e83f8a250665b7e0af5c19a3f0f710282032ab9",
+    "tests/test_hcl_recovery_revision3.py": "694990f2fa6c9f3210adcf9e34028f5132a53b6af0fc7b46490e1024a4470833",
+    "tests/test_hcl_recovery_time_and_diagnostics.py": "d4e2a394f7560f7135c16c61e0414c5edec9153edfe369f963c25609077ee0f8"
+  },
+  "live_execution_authorized": false,
+  "read_only_reader_files_sha256": {
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0"
+  },
+  "reviewer_role": "INDEPENDENT_READ_ONLY_SECURITY_REVIEW",
+  "runtime_commit": "9c7a884ef041809f0f7c503c40892a62936959c7",
+  "runtime_sha256": "e621355a10ad6d2da716ed64d244f6c3f69bdc0dcd59cf91673d7ba4b2b05cac",
+  "schema": "hcl-planning-recovery-independent-executor-approval-v1",
+  "verdict": "PASS_FOR_BOUNDED_EXECUTOR_PACKAGE",
+  "verification": {
+    "account_queries": 0,
+    "credentials_read": false,
+    "provider_calls": 0,
+    "provider_free_tests_passed": 9,
+    "sdk_constructed": false
+  },
+  "workflow_files_sha256": {
+    ".github/workflows/hcl-planning-recovery-20261007-1-once.yml": "7268db3d25f04a438f5e603e9d6834dbd04382ec6f7b34ccdb556ad6f90b4fb6",
+    ".github/workflows/hcl-planning-recovery-20261007-2-once.yml": "e288ced7741e11af18fda1cf24e137029d19090ffecba32f308eb187054e2aeb"
+  }
+}
