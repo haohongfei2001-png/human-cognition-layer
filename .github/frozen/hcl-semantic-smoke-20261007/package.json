@@ -1,0 +1,119 @@
+{
+  "authorization_ref": "OWNER_APPROVED_HCL_SEMANTIC_SMOKE_20261007_2_CALLS_2_CNY",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "configuration": {
+    "answer_tokens": 8192,
+    "approved_at_bound": "2026-10-07T13:32:22Z",
+    "authorization_ref": "OWNER_APPROVED_HCL_SEMANTIC_SMOKE_20261007_2_CALLS_2_CNY",
+    "case_replacement": false,
+    "currency": "CNY",
+    "executor_files": {
+      "hcl_semantic_smoke_candidate.py": "607f13031d71c3c4998b06272c1fcaaccf280b22f683e7ed8302f17d5a4879af",
+      "hcl_semantic_smoke_cli.py": "e44d5a58613385cf2938cc6e33067b3f72691258a6d547cda8e4504d2ee649b5",
+      "hcl_semantic_smoke_native_public.py": "8bb0ea0676e0978110c843a365905b0c355b10859fac16971549768ef0afc21e",
+      "hcl_semantic_smoke_public.py": "f55cdb24c50d29373d3dd2638c459b77cbdbce72cdad71b325f6ea648e156e43",
+      "hcl_semantic_smoke_reviews.py": "8d9b6541fc0131d4e5f27a1f4799b394872c3f04420423492294e103f5fbf869",
+      "tests/test_hcl_semantic_smoke_adapter.py": "0a8c97ee5e50bda76850ca3b5e6c2483ff82c802879a06336d63c75486a262f5",
+      "tests/test_hcl_semantic_smoke_candidate.py": "6423539dc87764c6f25b5994d2a305f24ae3a07403631fdcf8e0786c0fddf087",
+      "tests/test_hcl_semantic_smoke_native_regressions.py": "9f386cb479b08251d59102b09e9a5f408d3fca81e6e3e002043a763dc53ac726",
+      "tests/test_hcl_semantic_smoke_revision3.py": "c15805fae80ea5531e801521b8f15695c05935b88f442c6869d3fefcdf86220e",
+      "tests/test_hcl_semantic_smoke_time_and_diagnostics.py": "bd021946e8f317fe194d71f5916950bfd9c0bfd1405b1dec783799547499d2ee"
+    },
+    "expires_at": null,
+    "fallback": false,
+    "maximum_aggregate_calls": 2,
+    "maximum_aggregate_cny": "2",
+    "maximum_final_characters": 64000,
+    "maximum_final_texts": 1,
+    "maximum_request_bytes": 36000,
+    "maximum_wait_seconds": 180,
+    "model_judge": false,
+    "openai_sdk_version": "2.14.0",
+    "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+    "phase_holds_cny": {
+      "answer": "0.888480",
+      "planning": "1.109664"
+    },
+    "planning_completion_includes_reasoning": true,
+    "planning_tokens": 16384,
+    "private_native_review_maximum_bytes": 1048576,
+    "public_native_maximum_case_records": 1,
+    "public_native_maximum_operations_per_record": 3,
+    "public_native_maximum_record_bytes": 1048576,
+    "public_native_requires_new_explicit_grant_permission": true,
+    "rates_cny": {
+      "input": "9",
+      "output": "27"
+    },
+    "reference_rates_usd": {
+      "input": "1.32",
+      "output": "3.96"
+    },
+    "replanning": false,
+    "request_retries": 0,
+    "requests": {
+      "reliability-20261007-smoke-flute:HCL:planning": {
+        "full_request_sha256": "b54c3ceba0faad8ac7955fc850fa4a330d191b6d2103069da7efc11ce6f1a68d",
+        "full_request_utf8_bytes": 30529,
+        "max_tokens": 16384,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 24215,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 22545,
+          "question": 195,
+          "sources": 1427
+        },
+        "reservation_cny": "1.011186",
+        "reservation_usd": "0.14830728",
+        "serialized_messages_sha256": "4e55dce69f9aab9733a3d9e4e3f644f310eec7e9c152fcf6f4c735c47653a223",
+        "serialized_messages_utf8_bytes": 30374,
+        "within_request_bound": true
+      }
+    },
+    "runtime_sha256": "a3ace7e929e46a1aebd6cc5706c549abf930189fd032c54ab31298e3742b3672",
+    "sdk_retries": 0,
+    "source_recorded_at": "2026-10-07T05:19:26.377856+00:00",
+    "source_recorded_at_basis": "FROZEN_PACKET_PREPARATION_TIMESTAMP_NOT_ACTUAL_INGESTION_OR_EVENT_TIME",
+    "stage_call_caps": {
+      "1": 2
+    },
+    "stage_cny_caps": {
+      "1": "2.00"
+    },
+    "stage_orders": {
+      "1": [
+        [
+          "reliability-20261007-smoke-flute",
+          "HCL"
+        ]
+      ]
+    },
+    "stage_reservation_cny": {
+      "1": "1.998144"
+    },
+    "stage_windows_seconds": {
+      "1": 600
+    },
+    "usd_reference_only": true,
+    "z3_solver_version": "4.15.4.0"
+  },
+  "currency": "CNY",
+  "independent_case_review_sha256": "1786d8f5b4a33ceb92c890d2cd95211e8452d9e34baf4e9dd2fc9a50efd8bcde",
+  "independent_executor_review_sha256": "338fd7398d5e4f6099c1111e44e8aa966d45c07a8aadfb69113ca685bb642e46",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "planner_lifecycle_contracts_merge_commit": "cf43f8fe8f9705cfc570f34224beb3095d2ee8c5",
+  "pursuit_uncertainty_merge_commit": "92c8990e0c13983ada4b8b88a1480875019fd00e",
+  "read_only_reader_files": {
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0"
+  },
+  "runtime_commit": "59a855a213c87cfdaadd3ece2241e9e4a286b42a",
+  "runtime_sha256": "a3ace7e929e46a1aebd6cc5706c549abf930189fd032c54ab31298e3742b3672",
+  "schema": "hcl-semantic-smoke-final-package-v1",
+  "source_guard_merge_commit": "8f6652c98b4cd0856e3e8d31f67ea73527ebd61d",
+  "status": "FROZEN_BEFORE_THIS_SEMANTIC_SMOKE_OUTPUT",
+  "trusted_native_policy_merge_commit": "61da904bd5de34a974316c0d8188f582d21b9646",
+  "workflow_files": {
+    ".github/workflows/hcl-semantic-smoke-20261007-1-once.yml": "6798051b7237c97362312f8695d1c2758cfe14fb6215848f6fdede0825de15ad"
+  }
+}

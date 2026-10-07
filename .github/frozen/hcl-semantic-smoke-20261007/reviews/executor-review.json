@@ -1,0 +1,42 @@
+{
+  "case_canonical_packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "case_review_file_sha256": "1786d8f5b4a33ceb92c890d2cd95211e8452d9e34baf4e9dd2fc9a50efd8bcde",
+  "checks": {
+    "all_blockers_resolved": true,
+    "native_permission_required_before_external_work": true,
+    "provider_free_regressions_passed": true
+  },
+  "executor_files_sha256": {
+    "hcl_semantic_smoke_candidate.py": "607f13031d71c3c4998b06272c1fcaaccf280b22f683e7ed8302f17d5a4879af",
+    "hcl_semantic_smoke_cli.py": "e44d5a58613385cf2938cc6e33067b3f72691258a6d547cda8e4504d2ee649b5",
+    "hcl_semantic_smoke_native_public.py": "8bb0ea0676e0978110c843a365905b0c355b10859fac16971549768ef0afc21e",
+    "hcl_semantic_smoke_public.py": "f55cdb24c50d29373d3dd2638c459b77cbdbce72cdad71b325f6ea648e156e43",
+    "hcl_semantic_smoke_reviews.py": "8d9b6541fc0131d4e5f27a1f4799b394872c3f04420423492294e103f5fbf869",
+    "tests/test_hcl_semantic_smoke_adapter.py": "0a8c97ee5e50bda76850ca3b5e6c2483ff82c802879a06336d63c75486a262f5",
+    "tests/test_hcl_semantic_smoke_candidate.py": "6423539dc87764c6f25b5994d2a305f24ae3a07403631fdcf8e0786c0fddf087",
+    "tests/test_hcl_semantic_smoke_native_regressions.py": "9f386cb479b08251d59102b09e9a5f408d3fca81e6e3e002043a763dc53ac726",
+    "tests/test_hcl_semantic_smoke_revision3.py": "c15805fae80ea5531e801521b8f15695c05935b88f442c6869d3fefcdf86220e",
+    "tests/test_hcl_semantic_smoke_time_and_diagnostics.py": "bd021946e8f317fe194d71f5916950bfd9c0bfd1405b1dec783799547499d2ee"
+  },
+  "live_execution_authorized": false,
+  "read_only_reader_files_sha256": {
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0"
+  },
+  "reviewer_role": "INDEPENDENT_READ_ONLY_SECURITY_REVIEW",
+  "runtime_commit": "59a855a213c87cfdaadd3ece2241e9e4a286b42a",
+  "runtime_sha256": "a3ace7e929e46a1aebd6cc5706c549abf930189fd032c54ab31298e3742b3672",
+  "schema": "hcl-semantic-smoke-independent-executor-approval-v1",
+  "verdict": "PASS_FOR_BOUNDED_EXECUTOR_PACKAGE",
+  "verification": {
+    "account_queries": 0,
+    "credentials_read": false,
+    "provider_calls": 0,
+    "provider_free_tests_passed": 112,
+    "sdk_constructed": false
+  },
+  "workflow_files_sha256": {
+    ".github/workflows/hcl-semantic-smoke-20261007-1-once.yml": "6798051b7237c97362312f8695d1c2758cfe14fb6215848f6fdede0825de15ad"
+  }
+}
