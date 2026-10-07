@@ -1,0 +1,44 @@
+{
+  "case_canonical_packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "case_review_file_sha256": "5d9a54a79b40162fa3f5839f2d673d3092a717e152f5186569a26b563193763e",
+  "checks": {
+    "all_blockers_resolved": true,
+    "native_permission_required_before_external_work": true,
+    "provider_free_regressions_passed": true
+  },
+  "executor_files_sha256": {
+    "hcl_entry_validation_candidate.py": "2587fa5dff98f674caa76ced2b58e38b661cf65ed069284d80e3be57df491a50",
+    "hcl_entry_validation_cli.py": "f60e42d206c0b6d7de43c17d265c12495d71d22ef17032d451b3b25287f9fdad",
+    "hcl_entry_validation_native_public.py": "89dd4bd3479dd7969a72cc04fb00066c3556183ea5b7bcc77a3ba4a0acb4d49b",
+    "hcl_entry_validation_public.py": "56467edcc43788527ad3154e257d4bd7868e16a1c6abcfbc05beed86ea916458",
+    "hcl_entry_validation_reviews.py": "ecb5bc0354245234f7b20e763b63b6e315563498739a41720ba82037f10dc7c1",
+    "tests/test_hcl_entry_validation_adapter.py": "eca7e58e582832eae214a66e6cbb9d6018cf10ebafa8a97475a945bbe4bbc65b",
+    "tests/test_hcl_entry_validation_candidate.py": "f807a51a2090a977ae5fd32c116e356779f375c6cb5fcd9fcad0dda1b4a9cc4f",
+    "tests/test_hcl_entry_validation_native_regressions.py": "339829dd716998304d12b176dbd0c0786539dfb06ebe938f98c5b8a04e540cff",
+    "tests/test_hcl_entry_validation_revision3.py": "aed8e9ce14c903c8911862db1a5afa0fc745a7009de34c438930092ad9bf26ad",
+    "tests/test_hcl_entry_validation_routing_gate.py": "8d50bc2388d45fc22e9645d310614989e65fc7919738380e28eb8b120be4fb5a",
+    "tests/test_hcl_entry_validation_time_and_diagnostics.py": "a48ab1a90f5dd88e95cefbef2224eb4129dc4eabba030bad3ae6b8b44ef714ff"
+  },
+  "live_execution_authorized": false,
+  "read_only_reader_files_sha256": {
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0"
+  },
+  "reviewer_role": "INDEPENDENT_READ_ONLY_SECURITY_REVIEW",
+  "runtime_commit": "fcb42a78b3b7f88ef71facb7b5323f3a5e2788ff",
+  "runtime_sha256": "7bbbb74b9877f108bf8052cc252d588302a820f0b8d5d17a9177c76019def12b",
+  "schema": "hcl-entry-validation-independent-executor-approval-v1",
+  "verdict": "PASS_FOR_BOUNDED_EXECUTOR_PACKAGE",
+  "verification": {
+    "account_queries": 0,
+    "credentials_read": false,
+    "provider_calls": 0,
+    "provider_free_tests_passed": 123,
+    "sdk_constructed": false
+  },
+  "workflow_files_sha256": {
+    ".github/workflows/hcl-entry-validation-20261007-1-once.yml": "1071f7fa64107b5d08c6d91816f101ee65a8fec32a6d8c6eecc5c354aa61a22c",
+    ".github/workflows/hcl-entry-validation-20261007-2-once.yml": "eb4ea583b4c5388c4102e7d22897db164ea94b2b9dbdbf0d75f0c950a291cfa8"
+  }
+}

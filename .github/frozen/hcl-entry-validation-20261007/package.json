@@ -1,0 +1,221 @@
+{
+  "authorization_ref": "OWNER_APPROVED_HCL_ENTRY_VALIDATION_20261007_6_CALLS_6_CNY",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "configuration": {
+    "answer_tokens": 8192,
+    "approved_at_bound": "2026-10-07T16:11:19Z",
+    "authorization_ref": "OWNER_APPROVED_HCL_ENTRY_VALIDATION_20261007_6_CALLS_6_CNY",
+    "case_replacement": false,
+    "currency": "CNY",
+    "declared_source_entry_blockers": {
+      "reliability-20261007-pair-conveyor-exercise": [
+        {
+          "capability": "B02",
+          "reason": "COMPLETE_SOURCE_ACCESS_LITERAL_FORMS_REQUIRED",
+          "source_id": "conveyor-exercise-record",
+          "version": 1
+        },
+        {
+          "capability": "D02",
+          "reason": "NONBLANK_BOUNDED_SOURCE_LINES_REQUIRED",
+          "source_id": "conveyor-exercise-record",
+          "version": 1
+        }
+      ],
+      "reliability-20261007-pair-sail-booth-explicit-actor": [
+        {
+          "capability": "B02",
+          "reason": "COMPLETE_SOURCE_ACCESS_LITERAL_FORMS_REQUIRED",
+          "source_id": "sail-booth-explicit-actor-log",
+          "version": 1
+        },
+        {
+          "capability": "D02",
+          "reason": "NONBLANK_BOUNDED_SOURCE_LINES_REQUIRED",
+          "source_id": "sail-booth-explicit-actor-log",
+          "version": 1
+        }
+      ],
+      "reliability-20261007-smoke-flute": [
+        {
+          "capability": "B02",
+          "reason": "COMPLETE_SOURCE_ACCESS_LITERAL_FORMS_REQUIRED",
+          "source_id": "flute-observer-record",
+          "version": 1
+        },
+        {
+          "capability": "D02",
+          "reason": "NONBLANK_BOUNDED_SOURCE_LINES_REQUIRED",
+          "source_id": "flute-observer-record",
+          "version": 1
+        }
+      ]
+    },
+    "entry_requirements": {
+      "absence_of_blocker_is_not_readiness": true,
+      "independent_source_review_still_required": true,
+      "known_blocker_selection_rule": "NO_SELECTED_OPERATION_MATCHES_DECLARED_SOURCE_VERSION_ENTRY_BLOCKER",
+      "known_failure_stops_after_original_complete_round": true,
+      "necessary_allowed_family_checked_treatment_required": true,
+      "source_validated_native_capture_required_before_next_case": true
+    },
+    "executor_files": {
+      "hcl_entry_validation_candidate.py": "2587fa5dff98f674caa76ced2b58e38b661cf65ed069284d80e3be57df491a50",
+      "hcl_entry_validation_cli.py": "f60e42d206c0b6d7de43c17d265c12495d71d22ef17032d451b3b25287f9fdad",
+      "hcl_entry_validation_native_public.py": "89dd4bd3479dd7969a72cc04fb00066c3556183ea5b7bcc77a3ba4a0acb4d49b",
+      "hcl_entry_validation_public.py": "56467edcc43788527ad3154e257d4bd7868e16a1c6abcfbc05beed86ea916458",
+      "hcl_entry_validation_reviews.py": "ecb5bc0354245234f7b20e763b63b6e315563498739a41720ba82037f10dc7c1",
+      "tests/test_hcl_entry_validation_adapter.py": "eca7e58e582832eae214a66e6cbb9d6018cf10ebafa8a97475a945bbe4bbc65b",
+      "tests/test_hcl_entry_validation_candidate.py": "f807a51a2090a977ae5fd32c116e356779f375c6cb5fcd9fcad0dda1b4a9cc4f",
+      "tests/test_hcl_entry_validation_native_regressions.py": "339829dd716998304d12b176dbd0c0786539dfb06ebe938f98c5b8a04e540cff",
+      "tests/test_hcl_entry_validation_revision3.py": "aed8e9ce14c903c8911862db1a5afa0fc745a7009de34c438930092ad9bf26ad",
+      "tests/test_hcl_entry_validation_routing_gate.py": "8d50bc2388d45fc22e9645d310614989e65fc7919738380e28eb8b120be4fb5a",
+      "tests/test_hcl_entry_validation_time_and_diagnostics.py": "a48ab1a90f5dd88e95cefbef2224eb4129dc4eabba030bad3ae6b8b44ef714ff"
+    },
+    "expires_at": null,
+    "fallback": false,
+    "maximum_aggregate_calls": 6,
+    "maximum_aggregate_cny": "6",
+    "maximum_final_characters": 64000,
+    "maximum_final_texts": 3,
+    "maximum_request_bytes": 36000,
+    "maximum_wait_seconds": 180,
+    "model_judge": false,
+    "openai_sdk_version": "2.14.0",
+    "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+    "phase_holds_cny": {
+      "answer": "0.888480",
+      "planning": "1.109664"
+    },
+    "planning_completion_includes_reasoning": true,
+    "planning_tokens": 16384,
+    "private_native_review_maximum_bytes": 1048576,
+    "public_native_maximum_case_records": 3,
+    "public_native_maximum_operations_per_record": 3,
+    "public_native_maximum_record_bytes": 1048576,
+    "public_native_requires_new_explicit_grant_permission": true,
+    "rates_cny": {
+      "input": "9",
+      "output": "27"
+    },
+    "reference_rates_usd": {
+      "input": "1.32",
+      "output": "3.96"
+    },
+    "replanning": false,
+    "request_retries": 0,
+    "requests": {
+      "reliability-20261007-pair-conveyor-exercise:HCL:planning": {
+        "full_request_sha256": "493c747e0f1ab8111098ab2a5171aa15078e0e08ea5a2bfe655ec015d1df0cd5",
+        "full_request_utf8_bytes": 31213,
+        "max_tokens": 16384,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 24535,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 22545,
+          "question": 242,
+          "sources": 1422
+        },
+        "reservation_cny": "1.023498",
+        "reservation_usd": "0.15011304",
+        "serialized_messages_sha256": "6d8a35bd8b2fe69d143675ec0863e0eb53a5b42cc11e67c989583fc0016b2682",
+        "serialized_messages_utf8_bytes": 31058,
+        "within_request_bound": true
+      },
+      "reliability-20261007-pair-sail-booth-explicit-actor:HCL:planning": {
+        "full_request_sha256": "6eff4285aadeb576b2996c63495d88d8cdda618a4194abf6f720ad9fe1d0e2d3",
+        "full_request_utf8_bytes": 30475,
+        "max_tokens": 16384,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 23811,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 22545,
+          "question": 176,
+          "sources": 754
+        },
+        "reservation_cny": "1.010214",
+        "reservation_usd": "0.14816472",
+        "serialized_messages_sha256": "2959a3db9f37898822a0c11cd7d5b215261f1151d5dd924b124eedb4428ec85e",
+        "serialized_messages_utf8_bytes": 30320,
+        "within_request_bound": true
+      },
+      "reliability-20261007-smoke-flute:HCL:planning": {
+        "full_request_sha256": "f2777abcf8a2c74e3cd36206e8eaad09f85f9475c5832e39a0edcf9c4655382a",
+        "full_request_utf8_bytes": 31171,
+        "max_tokens": 16384,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 24487,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 22545,
+          "question": 195,
+          "sources": 1427
+        },
+        "reservation_cny": "1.022742",
+        "reservation_usd": "0.15000216",
+        "serialized_messages_sha256": "6ae6c2eef1757c3f1a0f3530677362b7fbd5b4ebd4660583adca7a8565d10021",
+        "serialized_messages_utf8_bytes": 31016,
+        "within_request_bound": true
+      }
+    },
+    "runtime_sha256": "7bbbb74b9877f108bf8052cc252d588302a820f0b8d5d17a9177c76019def12b",
+    "sdk_retries": 0,
+    "source_recorded_at": "2026-10-07T05:19:26.377856+00:00",
+    "source_recorded_at_basis": "FROZEN_PACKET_PREPARATION_TIMESTAMP_NOT_ACTUAL_INGESTION_OR_EVENT_TIME",
+    "stage_call_caps": {
+      "1": 2,
+      "2": 4
+    },
+    "stage_cny_caps": {
+      "1": "2.00",
+      "2": "4.00"
+    },
+    "stage_orders": {
+      "1": [
+        [
+          "reliability-20261007-smoke-flute",
+          "HCL"
+        ]
+      ],
+      "2": [
+        [
+          "reliability-20261007-pair-sail-booth-explicit-actor",
+          "HCL"
+        ],
+        [
+          "reliability-20261007-pair-conveyor-exercise",
+          "HCL"
+        ]
+      ]
+    },
+    "stage_reservation_cny": {
+      "1": "1.998144",
+      "2": "3.996288"
+    },
+    "stage_windows_seconds": {
+      "1": 600,
+      "2": 1200
+    },
+    "usd_reference_only": true,
+    "z3_solver_version": "4.15.4.0"
+  },
+  "currency": "CNY",
+  "independent_case_review_sha256": "5d9a54a79b40162fa3f5839f2d673d3092a717e152f5186569a26b563193763e",
+  "independent_executor_review_sha256": "102ff74fbd137df3517c51d95ed7807165f1213dae1182b038acbce3217ea1b5",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "planner_lifecycle_contracts_merge_commit": "cf43f8fe8f9705cfc570f34224beb3095d2ee8c5",
+  "pursuit_uncertainty_merge_commit": "92c8990e0c13983ada4b8b88a1480875019fd00e",
+  "read_only_reader_files": {
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0"
+  },
+  "runtime_commit": "fcb42a78b3b7f88ef71facb7b5323f3a5e2788ff",
+  "runtime_sha256": "7bbbb74b9877f108bf8052cc252d588302a820f0b8d5d17a9177c76019def12b",
+  "schema": "hcl-entry-validation-final-package-v1",
+  "source_guard_merge_commit": "8f6652c98b4cd0856e3e8d31f67ea73527ebd61d",
+  "status": "FROZEN_BEFORE_THIS_ENTRY_VALIDATION_OUTPUT",
+  "trusted_native_policy_merge_commit": "61da904bd5de34a974316c0d8188f582d21b9646",
+  "workflow_files": {
+    ".github/workflows/hcl-entry-validation-20261007-1-once.yml": "1071f7fa64107b5d08c6d91816f101ee65a8fec32a6d8c6eecc5c354aa61a22c",
+    ".github/workflows/hcl-entry-validation-20261007-2-once.yml": "eb4ea583b4c5388c4102e7d22897db164ea94b2b9dbdbf0d75f0c950a291cfa8"
+  }
+}
