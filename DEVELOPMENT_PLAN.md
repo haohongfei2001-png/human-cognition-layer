@@ -37,10 +37,18 @@ automatic upgrade or retry. Current runtime SHA256 is
 The [optional source-entry blockers](docs/HCL_ENTRY_READINESS.md) add only
 code-owned necessary input-condition observations for B02/D02. No blocker does
 not certify readiness. New metadata is omitted as a whole when it would exceed
-capacity, preserving original messages and the 36KB ceiling. This slice is
-provider-free; the last real smoke below was frozen to runtime
-`a3ace7e929e46a1aebd6cc5706c549abf930189fd032c54ab31298e3742b3672`
-and does not establish model-selection improvement under the new metadata.
+capacity, preserving original messages and the 36KB ceiling.
+The new [entry-routing smoke](docs/HCL_ENTRY_VALIDATION_20261007_RESULTS.md) on
+this current runtime failed end to end: it selected only B01, avoiding the declared
+B02/D02 blockers, but omitted semantic_candidates and produced no checked native
+treatment. The final request was only 10,643 bytes, yet its 8,192-token/high-thinking
+response ended with length, provider-reported reasoning_tokens=8,192 and zero
+visible characters. No final answer was delivered. Two calls used a CNY 0.494334
+peak-rate estimate, not an invoice. The independent source-first review and frozen
+gate keep stage 2 closed; its four-call/CNY 4 allowance cannot fund another attempt.
+This exposed regression does not establish a causal model-selection improvement
+or explain why the model omitted candidates. The previous narrow pass below
+remains historical evidence on its separately frozen runtime.
 The source-version, trusted native-policy sharing, C03 pursuit and planner-contract
 repairs previously adopted through PR #381 remain unchanged. This configuration
 repair has provider-free regression coverage; no real model success under the new

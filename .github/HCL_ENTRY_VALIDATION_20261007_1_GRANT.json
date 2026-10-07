@@ -3,13 +3,19 @@
   "authorization_ref": "OWNER_APPROVED_HCL_ENTRY_VALIDATION_20261007_6_CALLS_6_CNY",
   "authorized_calls": 2,
   "authorized_cny": "2.00",
+  "closed_head_sha": "ea753add72b78705343a083a7e713a2a189f29e2",
+  "closed_reason": "STAGE1_INCOMPLETE_FINAL_AND_NO_RELEVANT_CHECKED_TREATMENT_STAGE2_NOT_ADOPTED",
+  "closed_run_id": "37659844666",
   "currency": "CNY",
   "executor_commit": "f4b9371e9fe2232deb9918c9116be4705b325957",
   "expires_at": null,
   "historical_budget_transfer": false,
+  "invoice_cost_cny": null,
+  "original_ready_grant_sha256": "19183217a5b43a62d126102674beeedd0cccae1710c3061dc0c2d035e8ec5c71",
   "other_stage_budget_transfer": false,
   "package_sha256": "cea6e1e6a5f7d25d71c3c54a58b17457b96e7d2cc023927160aa6991548fbdef",
   "phase1_source_review_sha256": null,
+  "provider_calls": 2,
   "public_native_evidence_permission": {
     "approval_message_ref": "Sentinel_4108089e6ca88191a84c9314e5adec84",
     "authorization_ref": "OWNER_APPROVED_HCL_ENTRY_VALIDATION_20261007_6_CALLS_6_CNY",
@@ -21,8 +27,12 @@
     "schema": "hcl-entry-validation-native-public-permission-v1",
     "scope": "THREE_FROZEN_REGRESSION_CASES_BOUNDED_SOURCE_VALIDATED_NATIVE_EVIDENCE"
   },
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_cny": "0",
+  "reserved_cny": "1.998144",
   "retries": 0,
   "schema": "hcl-entry-validation-new-grant-v1",
   "stage": 1,
-  "status": "READY"
+  "status": "CLOSED_NO_TRANSFER_NO_RETRY",
+  "usage_rated_cny": "0.494334"
 }
