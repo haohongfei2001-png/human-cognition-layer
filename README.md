@@ -60,12 +60,13 @@ unchanged. No LongMemEval access or leaderboard activation.
 **NEXT_READY: END_TO_END_READINESS_AND_LIVE_PREREQUISITES**
 
 The live queue and current evidence are in [STATUS.md](STATUS.md) and
-[DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md). The
-[October 7 ordinary-default reliability package](docs/HCL_RELIABILITY_20261007.md)
-is frozen and independently reviewed, with repository adoption/CI recorded in
-[PR #382](https://github.com/haohongfei2001-png/human-cognition-layer/pull/382).
-Its separate native-evidence disclosure permission remains pending; this README
-provides no spending or launch authority.
+[DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md). The current
+[executable entry contract](docs/HCL_EXECUTABLE_ENTRY_CONTRACT.md) describes
+source-bound input modes, ordinary evidence-limited answers and strict native
+admission. Historical experiment packages retain their own results and closed
+authorization records; they are not the current queue or permission state.
+Those packages and this README do not authorize another model run. Any new paid
+validation needs a separate bounded approval.
 
 ## DRC008 preserved source-first closure snapshot
 
