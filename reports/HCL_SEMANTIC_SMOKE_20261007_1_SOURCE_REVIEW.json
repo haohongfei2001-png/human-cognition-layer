@@ -1,0 +1,114 @@
+{
+  "all_selected_cases_and_rubrics_fixed_before_semantic_smoke_output": true,
+  "approved_native_evidence_sha256": "28ad16582fcb6582848b8da4165878ee190338434bb6b5aad043c3ccd332dd6e",
+  "authorization_ref": "OWNER_APPROVED_HCL_SEMANTIC_SMOKE_20261007_2_CALLS_2_CNY",
+  "critical_failure_tags": [],
+  "evidence_sha256": "75e897ed2ff467cde0cf64ce5c6e85ffdf8fce939331d1154b412a75534ce7c5",
+  "final_answer_sha256": "97d53f9a042b2e2dcc7d1551078e77b1f6c615eeeb8f4f08a9a57663c02b1118",
+  "gates": {
+    "all_key_facts_preserved": true,
+    "citations_and_complete_final_delivery_passed": true,
+    "complete_source_delivery_passed": true,
+    "inference_boundaries_preserved": true,
+    "relevant_native_execution_passed": true,
+    "trusted_native_policy_passed": true
+  },
+  "native_review_sha256": "b758d6b39122902c0582758f6bcd8fb4eedaf258c4d90d1cbef5d08ef605c4a0",
+  "obligations": [
+    {
+      "answer_evidence": "final_fields.answer distinguishes the lobby monitor from the facilitator tablet carrying the playback information and says the tablet faced away from Arun. source_citations[0] reproduces paragraph 2 exactly, including both different screen contents and tonight-only scope.",
+      "id": "K1",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 2: at 18:00 Bea and Jules read the tablet claim that tonight's flute is a prerecorded track; Arun's visible lobby monitor displayed only \"Restoration demonstration.\" The tablet faced away from him."
+    },
+    {
+      "answer_evidence": "final_fields.answer quotes Bea's attribution and briefing claim, then explicitly weakens that basis because she saw Arun looking at the lobby monitor without checking its information. source_citations[1] is the exact paragraph. B01 operation 1 binds this actual passage to an explicitly conditional Bea BELIEF containing an Arun KNOWLEDGE_CLAIM; it does not assert Arun's actual knowledge.",
+      "id": "K2",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 3: Bea tells Jules \"Arun knows the flute is playback. He watched the whole briefing.\" Her observed basis was Arun looking at the lobby monitor, whose contents she had not checked."
+    },
+    {
+      "answer_evidence": "final_fields.answer quotes both Arun's screen distinction and uncertainty, and states Bea had left before this statement. source_citations[2] reproduces the full paragraph exactly. The later shorthand \"Arun's denial\" is read in context as his denial of knowing, not a denial that playback is true; the full uncertainty quotation and uncertainty field preserve that boundary.",
+      "id": "K3",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 4: after Bea leaves at 18:03, Arun tells Jules he saw the lobby screen rather than the tablet and \"I still don't know whether the flute we're about to hear is live.\" Bea is outside and does not hear him."
+    },
+    {
+      "answer_evidence": "final_fields.answer says Jules's remark fits as a report of Bea's previously stated view, \"not as evidence that Arun knows or that Bea and Arun shared that understanding.\" source_citations[1] and [3] identify the supporting exchanges. B01 checked_epistemic.epistemic_objects[2].public_expression.expressed_content retains the nested Jules BELIEF / Bea BELIEF / Arun KNOWLEDGE_CLAIM tree; private interpretations remain conditional and unconfirmed.",
+      "id": "K4",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraphs 3 and 5: Bea previously attributes knowledge to Arun; at 18:05 Jules tells the director \"Bea thinks Arun knows that tonight's flute is playback.\" Bea and Arun are absent."
+    },
+    {
+      "answer_evidence": "final_fields.answer says the director cannot be told they are on the same page, distinguishes the two reported positions and the nested Jules report, and reports no shared acknowledgment. final_fields.assumptions rejects equating one person's attribution with shared understanding and disclaims sincere private knowledge. B01 public-expression semantics are REPORTED_EXPRESSION_NOT_ACTUAL_PRIVATE_STATE; conditional private hypotheses are DEFEASIBLE_NOT_CONFIRMED.",
+      "id": "I1",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraphs 3-5 distinguish Bea's attribution, Arun's own uncertainty, and Jules's report of Bea. These are distinct speech records, not independently inspected private states."
+    },
+    {
+      "answer_evidence": "final_fields.answer states the tablet faced away from Arun, Arun did not hear Bea's earlier statement, and Bea had left before his clarification. It adds no path conveying the tablet content to Arun or the clarification to Bea. source_citations[0]-[2] preserve the sightlines and hearing boundaries. B02 operation 2 explicitly has checked_treatment_present=false and NO_CHECKED_RESULT; the answer correctly does not present this access explanation as a checked B02 finding.",
+      "id": "I2",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraphs 2-4: Arun sees only the thin lobby display, the tablet faces away from him, he is too far away to hear Bea, and the absent Bea does not hear his clarification."
+    },
+    {
+      "answer_evidence": "final_fields.answer preserves the tonight-specific Jules quotation and the lack of any equipment check. final_fields.uncertainty says the record does not establish whether the audio was actually playback; final_fields.assumptions explicitly makes no playback-truth assumption. B01 shared_semantic_binding retains STATEMENT_ORDER_ONLY_NOT_CALENDAR_OR_RECEIPT_TIME, and its scope event_time/access_time are null. Explicit 18:00, 18:02, 18:03 and 18:05 remain available in exact final citations; no invented event/receipt times or cross-night generalization appears.",
+      "id": "I3",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 1 says the observer does not inspect the audio equipment; paragraph 2 limits the tablet claim to tonight's demonstration; paragraph 5 records no later exchange or equipment check."
+    },
+    {
+      "answer_evidence": "final_fields.source_citations[0] uses source_id flute-observer-record, version 1, and the exact complete paragraph 2. The screen/access explanation in final_fields.answer matches it. Every one of the four final citation quotes is an exact substring of this same source and version.",
+      "id": "C1",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 2 is the original passage identifying both screen contents, Arun's seat, and the tablet facing away. Source text SHA-256 is eb7fbe52cc1d86e3c09bb70d65ba086ef334e67431fa2c44cc0c74b956f9edd6."
+    },
+    {
+      "answer_evidence": "final_fields.source_citations[1], [2], [3] reproduce those respective exchanges exactly. final_fields.answer attaches each position to its correct speaker and recipient. It uses Arun's own statement for his uncertainty and explicitly refuses to use Jules's final attribution as evidence of Arun's knowledge.",
+      "id": "C2",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraphs 3, 4 and 5 are respectively Bea speaking to Jules at 18:02, Arun speaking to Jules after Bea leaves at 18:03, and Jules speaking to the director at 18:05."
+    },
+    {
+      "answer_evidence": "The nonblank four-field final JSON and exact original-source citation audit pass; final hash is 97d53f9a042b2e2dcc7d1551078e77b1f6c615eeeb8f4f08a9a57663c02b1118. No invented source, inspection, message or continuation appears. Complete sources match the frozen case; planning/final source-value byte sizes independently match 1427/1285. Frozen package verification and public native replay/capture binding pass. Delivery/policy review uses frozen execution code, request diagnostics and captured outputs; undisclosed full requests are not independently recaptured here. Scope is one previously exposed synthetic regression, without a Base comparison, population-efficacy finding or general-product certification.",
+      "id": "C3",
+      "passed": true,
+      "source_evidence": "The complete frozen version-1 source and packet were read before the output. Packet SHA-256 fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f is unchanged; freeze commit 1529fa4bb70f6d0d395040150989f3deb5931bd7 precedes and is an ancestor of actual run head a62f2954bb24a21101a9964094b9cef96911e0ca, with no frozen-package/runtime/workflow changes between them."
+    }
+  ],
+  "overall_pass": true,
+  "package_sha256": "4ef958ee9f31f8401c4af250b9381c3b5d787cee88eacc0bcaf1659d9f313665",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "relevant_native_capability_ids": [
+    "B01"
+  ],
+  "request_diagnostics_sha256": "d6d57e941944cc4b69a876f237b83363ebd1d48031bf96f474f7e0d85dc4b102",
+  "reviewer_role": "INDEPENDENT_SOURCE_FIRST_AFTER_OUTPUT",
+  "schema": "hcl-semantic-smoke-source-review-candidate-v1",
+  "smoke_semantics": [
+    {
+      "answer_evidence": "final_fields.answer preserves Bea's attribution without establishing Arun knows. In actual B01 operation 1, semantic_candidates[0] is anchored to Bea's exact speech; checked_epistemic.epistemic_objects[0] builds a Bea BELIEF containing an Arun KNOWLEDGE_CLAIM, marked as reported expression rather than actual private state. This is substantive treatment of the named target, not merely source echo or an unrelated checked flag. The added \"I believe\" is a disclosed translation hypothesis, not literal speech or a sincerity finding; original wording remains accessible.",
+      "id": "S1",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 3 supplies Bea's named attribution; paragraph 4 independently records Arun's uncertainty. The frozen gate permits relevant B01 treatment of that attribution, without requiring B01 to settle every access or truth question."
+    },
+    {
+      "answer_evidence": "final_fields.answer quotes \"I still don't know whether\" and states Bea had already left; source_citations[2] includes her non-receipt explicitly. Actual B01 semantic_candidates[1] preserves \"I still do not know whether\" within the translated Arun expression. The checked object retains that phrase as literal inner content with outer BELIEF/AFFIRM, not a formal proof of negative knowledge or a denial that playback is true. The final answer does not overclaim the checker or transmit the clarification to Bea.",
+      "id": "S2",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 4 explicitly reports Arun's uncertainty to Jules while Bea is outside and unable to hear him."
+    },
+    {
+      "answer_evidence": "final_fields.answer says the record \"weakens Bea's basis\" because she saw Arun watching the lobby monitor without checking its contents, while the playback tablet faced away from him. The exact citations preserve that the lobby displayed only \"Restoration demonstration.\" Thus her watching-to-knowing route is unsupported. B02 executed but returned NO_CHECKED_RESULT with reason \"unsupported source may qualify communication reports; no partial access parse\"; final_fields.uncertainty correctly states there is no checked B02 result. B01 is the sole relevant checked family credited.",
+      "id": "S3",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraphs 2-3 distinguish the generic lobby display from the playback tablet and show that Bea did not check what Arun's monitor displayed; paragraph 4 supplies Arun's explicit screen clarification."
+    },
+    {
+      "answer_evidence": "final_fields.answer explicitly distinguishes Jules's report of Bea from actual Arun knowledge or shared understanding, retaining tonight's scope. Actual B01 object 2 preserves Jules / Bea / Arun nesting and the inner content \"tonight's flute is playback\"; all derived states are conditional, not world truth. final_fields.uncertainty disclaims actual private knowledge, agreement and verified playback, and accurately notes D02 was not completed. The operation sequence is D02 rejected, B01 checked conditional expressions, B02 executed without checked access treatment; no broader capability or efficacy pass is implied.",
+      "id": "S4",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 5 gives Jules's nested report about Bea and Arun concerning tonight's flute, with neither Bea nor Arun present; paragraphs 1 and 5 exclude equipment verification."
+    }
+  ]
+}
