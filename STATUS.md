@@ -73,17 +73,23 @@ workflow artifacts are public evidence, not a private route. The exact response
 finish reason and reasoning/content breakdown were not exported, so no claim that
 all completion tokens were hidden reasoning is supported by the public record.
 
-A new [fixed-16K recovery package](docs/HCL_PLANNING_RECOVERY_20261007.md) is
-separately approved and prepared: at most CNY 6 / six calls, first CNY 2 / two calls
-on the same failed flute smoke, then only after every independent smoke gate passes
-CNY 4 / four calls on the unchanged sail and conveyor cases, HCL only. The owner
-removed the fixed calendar cutoff; `expires_at` is null while 600/1,200-second
-stage windows, 180-second per-request timeout/send margin and once-only launch
-remain. Package SHA256 is
-`807eb9fd05338f6003478d78ff7bd55acc075e6d0d4985bd9a45b01a3f924e06`.
-Its 106 offline tests and new target-bound case/executor reviews do not establish
-live success. At this preparation commit there is no new recovery grant, marker
-or provider call. No old allowance can be reused.
+The separate [fixed-16K recovery smoke](docs/HCL_PLANNING_RECOVERY_20261007_RESULTS.md)
+completed planning and delivered a cited final answer in two real model calls.
+The first response stopped normally at 4,129 completion tokens. Independent
+source-first review passed all ten answer obligations and all four smoke semantic
+checks, but **failed the required substantive native-treatment gate**: B01/B02
+executed only insufficient readers with zero checked treatment; D02 was rejected.
+A good source-based answer and two execution receipts are not effective HCL use.
+
+Actual run [37621140974](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/37621140974)
+on `a7baac5fe75349b85ac28bce2bae5e799b0070d6` used a CNY 0.323577 peak-rate token
+estimate (not an invoice), with the full CNY 1.998144 hold retained. The new grant
+and diagnostic are closed, with zero remaining authority. The conditional second
+stage was not granted or run; its four calls/CNY 4 cannot fund a retry. The earlier
+4K failure remains unchanged. This limited result establishes delivery for this
+one repaired-config run, not general reliability, answer gain or I02-I06 completion.
+The owner's removal of the calendar cutoff remains in force for ongoing development;
+it does not reopen either consumed experiment or create new spending authority.
 
 ## Current phase
 
@@ -145,15 +151,18 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: BOUNDED_FIXED_16K_PLANNING_RECOVERY**
+**NEXT_READY: OFFLINE_EXISTING_SEMANTIC_INPUT_CONTRACT_REPAIR**
 
-The failed 4K diagnostic remains closed. The fixed 16K ordinary configuration repair
-and the new CNY 6 bounded recovery are separate from it. After exact package
-adoption/CI, use the one-use E/G/M launch and source-first smoke gate. Any detected
-failure stops the new run without retry; stage two requires the actual complete
-smoke pass. Preserve all failed evidence, complete source facts, mandatory native
-execution and unchanged semantic/citation acceptance. No silent limit upgrade,
-case replacement or historical budget reuse. Formal I02-I06 remains incomplete.
+Continue a minimal, general correction to planner-visible input contracts for the
+existing B01/C01/C02/C03 first-response semantic bridge. The actual model supplied
+only source IDs and operation questions, without the structured anchored premises
+needed for substantive treatment of this prose. Preserve the failed raw plan
+arguments and actual outputs; do not rewrite sources to fit a parser, force an
+irrelevant module or count reader execution as treatment. Existing source/quote,
+privacy, native execution and semantic gates remain. No second paid planning call
+or automatic retry; another real diagnostic requires new bounded authority.
+D02's empty bindings were valid and are not a diagnosed defect. Formal I02-I06
+remains incomplete.
 
 A00 plus the 40 A–H runtime packages have their declared construction/correctness
 status, not a product-completion percentage. The current

@@ -1,0 +1,114 @@
+{
+  "all_selected_cases_and_rubrics_fixed_before_recovery_output": true,
+  "approved_native_evidence_sha256": "7cfea3de158058d33507dddc3155190e117ea57be8f2387b4d5f2ad9af7219bc",
+  "authorization_ref": "OWNER_APPROVED_HCL_PLANNING_RECOVERY_20261007_6_CALLS_6_CNY",
+  "critical_failure_tags": [
+    "RELEVANT_REAL_NATIVE_TREATMENT_ABSENT"
+  ],
+  "evidence_sha256": "35d57e2483f8a5a481927e946dbbb346e2fe99a14e76ac441a527285796d644d",
+  "final_answer_sha256": "b03385b84f71e6dae8ec8c7c9974d202347fd09486e2934544a3d3e1fde2150e",
+  "gates": {
+    "all_key_facts_preserved": true,
+    "citations_and_complete_final_delivery_passed": true,
+    "complete_source_delivery_passed": true,
+    "inference_boundaries_preserved": true,
+    "relevant_native_execution_passed": false,
+    "trusted_native_policy_passed": true
+  },
+  "native_review_sha256": "8cf5793fbb75595ab4194938531ff95598dde0c4f3e7a2240e9f4dbded5191a8",
+  "obligations": [
+    {
+      "answer_evidence": "The answer distinguishes the facilitator tablet's prerecorded-track claim from the thinner lobby-monitor content and says Arun could not see the tablet. Citation 1 is the exact paragraph.",
+      "id": "K1",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 2: Bea and Jules read the tablet saying tonight's flute is prerecorded; Arun's lobby monitor displayed only \"Restoration demonstration\" and the tablet faced away from him."
+    },
+    {
+      "answer_evidence": "The answer identifies Bea's statement as her attribution, explains its monitor-watching basis and her failure to check that monitor. Citation 2 preserves the exact whole-briefing assertion and its limitation.",
+      "id": "K2",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 3: Bea says \"Arun knows the flute is playback. He watched the whole briefing.\" Her basis was seeing Arun look at the monitor, whose contents she had not checked."
+    },
+    {
+      "answer_evidence": "The answer preserves Arun's uncertainty and the different screen, says Bea did not hear his later statement and identifies no reconciliation. Citation 3 reproduces the exact exchange.",
+      "id": "K3",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 4: Arun tells Jules he saw the lobby screen, not the tablet, and still does not know whether the flute is live. Bea is outside and does not hear him."
+    },
+    {
+      "answer_evidence": "The answer calls Jules's remark an accurate report of Bea's reported belief, expressly not evidence that Arun shares that understanding. Citations 2 and 4 identify both exchanges.",
+      "id": "K4",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraphs 3 and 5: Bea attributes knowledge to Arun; Jules later tells the director \"Bea thinks Arun knows that tonight's flute is playback.\" Neither Bea nor Arun is present."
+    },
+    {
+      "answer_evidence": "The answer says they are \"not shown to be on the same page,\" distinguishes all three reports, and its uncertainty field says the record does not establish private mental states.",
+      "id": "I1",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraphs 3-5 distinguish Bea's attribution, Arun's self-report and Jules's nested report of Bea."
+    },
+    {
+      "answer_evidence": "The answer does not transfer tablet information to Arun or his later clarification to Bea. It explicitly preserves both absent access paths.",
+      "id": "I2",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraphs 2-4: Arun lacks tablet access and cannot hear Bea's exchange; Bea has left before Arun's clarification."
+    },
+    {
+      "answer_evidence": "The answer consistently scopes its conclusion to tonight's flute audio. Its uncertainty field explicitly says the record cannot verify that the audio truly was prerecorded and distinguishes reported statements from private states.",
+      "id": "I3",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraphs 1, 2 and 5: the observer does not inspect equipment; the tablet claim concerns tonight's demonstration; no later exchange or equipment check is recorded."
+    },
+    {
+      "answer_evidence": "Citation 1 has source_id flute-observer-record, version 1 and the exact full paragraph. It supports the answer's screen-content and access claims.",
+      "id": "C1",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 2 is the complete source passage establishing both screen contents and the tablet sightline."
+    },
+    {
+      "answer_evidence": "Citations 2-4 reproduce the correct speaker/exchange passages. Jules's quote supports the nested report, while Arun's own quote supplies the evidence for his uncertainty.",
+      "id": "C2",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 3 is Bea speaking to Jules; paragraph 4 is Arun speaking to Jules; paragraph 5 is Jules speaking to the director about Bea's position."
+    },
+    {
+      "answer_evidence": "All four quotations are exact substrings of the supplied version; local frozen citation auditing accepts the unchanged final answer. The answer adds no equipment inspection, message or continuation. Final SHA-256 is b03385b84f71e6dae8ec8c7c9974d202347fd09486e2934544a3d3e1fde2150e. Final delivery is DELIVERED with finish_reason stop; source-preservation evidence is the pinned runtime guard, final source-field size and capture, not an independently disclosed full final request.",
+      "id": "C3",
+      "passed": true,
+      "source_evidence": "The complete frozen source has text SHA-256 eb7fbe52cc1d86e3c09bb70d65ba086ef334e67431fa2c44cc0c74b956f9edd6. The public source, native source roots and deterministic replay match source_id flute-observer-record at version 1. The frozen planner request matches the actual request hash; the frozen final reservation guard requires exact complete sources."
+    }
+  ],
+  "overall_pass": false,
+  "package_sha256": "807eb9fd05338f6003478d78ff7bd55acc075e6d0d4985bd9a45b01a3f924e06",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "relevant_native_capability_ids": [],
+  "request_diagnostics_sha256": "f226c31799f1c43218474eaf0d42f7b0cd1d3415e49c6bfe0b81271cdf5bd3b4",
+  "reviewer_role": "INDEPENDENT_SOURCE_FIRST_AFTER_OUTPUT",
+  "schema": "hcl-planning-recovery-source-review-candidate-v1",
+  "smoke_semantics": [
+    {
+      "answer_evidence": "The answer describes Bea's statement as her reported belief and denies that Jules's report establishes Arun's knowledge. This semantic requirement passes. Separately, B01 executed only its existing reader: checked_treatment_present=false, checked_operations=0, belief reason NO_ADMITTED_TYPED_PREMISES and status NO_CHECKED_RESULT. No semantic_candidates were supplied. This is not substantive relevant native treatment.",
+      "id": "S1",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 3 supports Bea's expressed attribution about Arun, not independently established knowledge in Arun."
+    },
+    {
+      "answer_evidence": "The answer preserves Arun's uncertainty and Bea's absence and says the record contains no reconciliation. It does not add unsupported transmission.",
+      "id": "S2",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 4 explicitly reports Arun's uncertainty to Jules while Bea is outside."
+    },
+    {
+      "answer_evidence": "The answer rejects Bea's stated inference from watching the monitor to knowing playback. This semantic requirement passes. Separately, B02's actual reader returns checked_operations=0, checked_treatment_present=false and perspective NO_CHECKED_RESULT with reason \"unsupported source may qualify communication reports; no partial access parse\". Source echo, relevant operation question and executed=true do not substantively treat the screen/conversation boundary. D02 has bindings=[] and ADAPTER_REJECTED_NOT_COMPLETED, executed=false.",
+      "id": "S3",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraphs 2-3 distinguish the tablet from the lobby monitor and show that Bea had not checked the monitor's contents."
+    },
+    {
+      "answer_evidence": "The answer keeps Jules's nested report distinct from shared understanding and verified playback, with tonight-only scope. It explicitly says \"no checked HCL treatment result was produced.\" The 16384-token planning allowance yielded finish_reason stop, 4129 completion tokens and an accepted complete final answer in this smoke only. It does not establish general reliability, relevant native treatment, efficacy or I02 certification.",
+      "id": "S4",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 5 is Jules's nested report of Bea's attribution, while paragraph 1 disclaims equipment inspection and paragraph 2 restricts the claim to tonight."
+    }
+  ]
+}
