@@ -41,8 +41,20 @@ current default is established by those tests.
 The [existing semantic-input bridge contract](docs/HCL_SEMANTIC_BRIDGE_CONTRACT.md)
 now explicitly asks the first planner to construct faithful typed inputs for
 ordinary prose when its native literal forms do not already apply. This is a
-190-byte policy clarification, not a new parser or automatic second call. Actual
-model compliance and relevant native treatment remain unverified after this change.
+190-byte policy clarification, not a new parser or automatic second call.
+The [single same-case semantic smoke](docs/HCL_SEMANTIC_SMOKE_20261007_RESULTS.md)
+now passed independent source-first review: all ten answer obligations, four
+smoke requirements and relevant real B01 treatment. The model supplied three
+anchored B01 candidates in its first response and delivered the final answer.
+B02 still had no checked result and D02 was rejected; no universal adapter or
+private-state certification is claimed. This one exposed regression has no Base
+comparison and does not establish general reliability, benefit or I02-I06.
+Run [37636110814](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/37636110814)
+made two calls with a CNY 0.509175 peak-rate usage estimate (not an invoice).
+Planning/final requests were 30,529/33,487 bytes within the unchanged 36,000 bound.
+The separate CNY 2 grant is closed with zero remaining authority; there is no
+second stage, retry or transfer of unused allowance.
+
 The [October 7 ordinary-default diagnostic](docs/HCL_RELIABILITY_20261007_RESULTS.md)
 ran once after the reviewed package and both owner approvals. Its first planning
 request consumed 4,096 completion tokens and returned an incomplete response;
@@ -143,17 +155,18 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: VERIFY_EXISTING_SEMANTIC_INPUT_CONTRACT_IN_LIVE_FLOW**
+**NEXT_READY: OFFLINE_LITERAL_ADAPTER_READINESS_REPAIR**
 
-The first-planner contract clarification is implemented with provider-free
-regressions. Actual model compliance and useful native treatment must still be
-verified after exact-current CI and a new bounded approval. Both previous studies
-remain closed. Preserve their arguments and results; do not rewrite sources to
-fit a parser, force an irrelevant module or count reader execution as treatment.
-Existing source/quote, privacy, native execution and semantic gates remain.
-No second paid planning call, automatic retry or reused stage-two allowance.
-D02's empty bindings were valid and are not a diagnosed defect. Formal I02-I06
-remains incomplete.
+The single exposed smoke now has independently reviewed relevant B01 treatment
+and complete source-grounded delivery. Continue a small provider-free correction
+to predictable unsupported literal-adapter selection or entry-readiness information,
+using the actual B02/D02 refusals and independent valid/invalid controls. Do not
+rewrite sources, invent candidates, force unrelated operations or block necessary
+model reasoning over the complete original source. D02 empty bindings were valid;
+its strict native source grammar and B02's ordinary access grammar are distinct.
+All three October 7 studies are closed. No second paid planning call, automatic
+retry or reused allowance; any further real diagnostic needs new bounded authority.
+Formal I02-I06 remains incomplete.
 
 A00 plus the 40 A–H runtime packages have their declared construction/correctness
 status, not a product-completion percentage. The current
