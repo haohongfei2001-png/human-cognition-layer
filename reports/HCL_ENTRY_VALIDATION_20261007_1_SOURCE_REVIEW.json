@@ -1,0 +1,113 @@
+{
+  "all_selected_cases_and_rubrics_fixed_before_entry_validation_output": true,
+  "approved_native_evidence_sha256": "9b12365b77be12d80f5a5ff7ce371b3b724a302036d4abaed3a23685de56d3dd",
+  "authorization_ref": "OWNER_APPROVED_HCL_ENTRY_VALIDATION_20261007_6_CALLS_6_CNY",
+  "critical_failure_tags": [],
+  "evidence_sha256": "89fbf23fcb72c8a8aad763cbb1ce7f5c0ddcc194fcab9476df491904b804d664",
+  "final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "gates": {
+    "all_key_facts_preserved": false,
+    "citations_and_complete_final_delivery_passed": false,
+    "complete_source_delivery_passed": true,
+    "inference_boundaries_preserved": false,
+    "known_source_entry_blockers_avoided": true,
+    "relevant_native_execution_passed": false,
+    "trusted_native_policy_passed": true
+  },
+  "native_review_sha256": "f764e7e7fdb72a4d38098f21e57b8d71c3045f0eb997b15d23eee368b322427c",
+  "obligations": [
+    {
+      "answer_evidence": "NOT_DEMONSTRATED_NO_FINAL_ANSWER: final_text is empty, final_fields is null, citations_accepted is false and final_delivery_code is NOT_REACHED. A failed delivery cannot satisfy this obligation. No contrary semantic assertion, hallucination or boundary crossing is inferred from an absent answer.",
+      "id": "K1",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1 paragraph 2: Bea and Jules read the tablet claim about tonight's prerecorded flute track; Arun's lobby monitor displayed only \"Restoration demonstration.\" The tablet faced away from him."
+    },
+    {
+      "answer_evidence": "NOT_DEMONSTRATED_NO_FINAL_ANSWER: final_text is empty, final_fields is null, citations_accepted is false and final_delivery_code is NOT_REACHED. A failed delivery cannot satisfy this obligation. No contrary semantic assertion, hallucination or boundary crossing is inferred from an absent answer. Actual B01 arguments contain bindings=[] and no semantic_candidates. The frozen ordinary-reader branch uses allow_translation=False; its belief operation returns NO_ADMITTED_TYPED_PREMISES and zero checked operations. Selecting/executing B01 therefore supplies no substantive checked treatment of this attribution.",
+      "id": "K2",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1 paragraph 3: Bea tells Jules \"Arun knows the flute is playback. He watched the whole briefing.\" She saw him looking at the lobby monitor but had not checked what it displayed."
+    },
+    {
+      "answer_evidence": "NOT_DEMONSTRATED_NO_FINAL_ANSWER: final_text is empty, final_fields is null, citations_accepted is false and final_delivery_code is NOT_REACHED. A failed delivery cannot satisfy this obligation. No contrary semantic assertion, hallucination or boundary crossing is inferred from an absent answer.",
+      "id": "K3",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1 paragraph 4: after Bea leaves, Arun tells Jules he saw the lobby screen rather than the tablet and \"I still don't know whether the flute we're about to hear is live.\" Bea is outside and does not hear him."
+    },
+    {
+      "answer_evidence": "NOT_DEMONSTRATED_NO_FINAL_ANSWER: final_text is empty, final_fields is null, citations_accepted is false and final_delivery_code is NOT_REACHED. A failed delivery cannot satisfy this obligation. No contrary semantic assertion, hallucination or boundary crossing is inferred from an absent answer.",
+      "id": "K4",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1 paragraphs 3 and 5: Bea earlier attributes knowledge to Arun; Jules later tells the director \"Bea thinks Arun knows that tonight's flute is playback.\" This is a nested report, not independent evidence of Arun's knowledge or agreement."
+    },
+    {
+      "answer_evidence": "NOT_DEMONSTRATED_NO_FINAL_ANSWER: final_text is empty, final_fields is null, citations_accepted is false and final_delivery_code is NOT_REACHED. A failed delivery cannot satisfy this obligation. No contrary semantic assertion, hallucination or boundary crossing is inferred from an absent answer.",
+      "id": "I1",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1 paragraphs 3-5 distinguish Bea's attribution, Arun's uncertainty report, and Jules's report of Bea. The observer does not inspect private mental states."
+    },
+    {
+      "answer_evidence": "NOT_DEMONSTRATED_NO_FINAL_ANSWER: final_text is empty, final_fields is null, citations_accepted is false and final_delivery_code is NOT_REACHED. A failed delivery cannot satisfy this obligation. No contrary semantic assertion, hallucination or boundary crossing is inferred from an absent answer.",
+      "id": "I2",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1 paragraphs 2-4: Arun sees the thin lobby display, the tablet faces away, he cannot hear Bea's exchange, and the absent Bea cannot hear his later clarification."
+    },
+    {
+      "answer_evidence": "NOT_DEMONSTRATED_NO_FINAL_ANSWER: final_text is empty, final_fields is null, citations_accepted is false and final_delivery_code is NOT_REACHED. A failed delivery cannot satisfy this obligation. No contrary semantic assertion, hallucination or boundary crossing is inferred from an absent answer.",
+      "id": "I3",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1 paragraphs 1, 2 and 5: the observer does not inspect the equipment, the tablet claim concerns tonight's demonstration, and no later exchange or equipment check is recorded."
+    },
+    {
+      "answer_evidence": "NOT_DEMONSTRATED_NO_FINAL_ANSWER: final_text is empty, final_fields is null, citations_accepted is false and final_delivery_code is NOT_REACHED. A failed delivery cannot satisfy this obligation. No contrary semantic assertion, hallucination or boundary crossing is inferred from an absent answer. The final request is reported as 10643 UTF-8 bytes, below the unchanged 36000-byte limit; this is not a request-size rejection. Answer response metadata reports finish_reason=length, completion_tokens=8192, provider_reported_reasoning_tokens=8192 and visible_content_characters=0. No hidden reasoning was inspected.",
+      "id": "C1",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1 paragraph 2 is the exact original passage for distinct screen contents and sightlines. Complete source text SHA-256: eb7fbe52cc1d86e3c09bb70d65ba086ef334e67431fa2c44cc0c74b956f9edd6."
+    },
+    {
+      "answer_evidence": "NOT_DEMONSTRATED_NO_FINAL_ANSWER: final_text is empty, final_fields is null, citations_accepted is false and final_delivery_code is NOT_REACHED. A failed delivery cannot satisfy this obligation. No contrary semantic assertion, hallucination or boundary crossing is inferred from an absent answer.",
+      "id": "C2",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1 paragraphs 3, 4 and 5 are respectively Bea speaking to Jules, Arun speaking to Jules after Bea leaves, and Jules speaking to the director. The last quotation cannot substitute for Arun's own report."
+    },
+    {
+      "answer_evidence": "NOT_DEMONSTRATED_NO_FINAL_ANSWER: final_text is empty, final_fields is null, citations_accepted is false and final_delivery_code is NOT_REACHED. A failed delivery cannot satisfy this obligation. No contrary semantic assertion, hallucination or boundary crossing is inferred from an absent answer. Source delivery and native-policy integrity gates are supported by the frozen code, actual source-value metrics (planning 1427/final 1285 bytes), full captured source, deterministic native replay and public capture/projection/receipt commitments. Undisclosed full requests, private receipt bytes and provider envelopes were not independently recaptured. Two provider calls cost an estimated 0.494334 CNY, not an invoice; the 1.998144 CNY holds are CLOSED_NO_TRANSFER_NO_RETRY with zero remaining authorization. Stage 2 must refuse. This exposed synthetic smoke supplies no efficacy or I02 certification.",
+      "id": "C3",
+      "passed": false,
+      "source_evidence": "The complete version-1 source and frozen packet fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f are unchanged. Freeze executor f4b9371e9fe2232deb9918c9116be4705b325957 precedes actual run head ea753add72b78705343a083a7e713a2a189f29e2; only grant and trigger files were added afterward."
+    }
+  ],
+  "overall_pass": false,
+  "package_sha256": "cea6e1e6a5f7d25d71c3c54a58b17457b96e7d2cc023927160aa6991548fbdef",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "relevant_native_capability_ids": [],
+  "request_diagnostics_sha256": "ed683d5165eee14d9b0c97afaf9eb45f860f1bdbf1bc7baba10dc881947f1d99",
+  "reviewer_role": "INDEPENDENT_SOURCE_FIRST_AFTER_OUTPUT",
+  "schema": "hcl-entry-validation-source-review-candidate-v1",
+  "smoke_semantics": [
+    {
+      "answer_evidence": "NOT_DEMONSTRATED_NO_FINAL_ANSWER: final_text is empty, final_fields is null, citations_accepted is false and final_delivery_code is NOT_REACHED. A failed delivery cannot satisfy this obligation. No contrary semantic assertion, hallucination or boundary crossing is inferred from an absent answer. Actual selected/executed capabilities are [B01], but checked_treatment=[] and relevant checked operations=0. No B01 semantic_candidates were supplied; no source anchor was fabricated, but none was supplied for a translated premise.",
+      "id": "S1",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1 paragraph 3 supports Bea's expressed attribution about Arun; it does not establish Arun's private knowledge. Frozen smoke requires substantive source-rooted treatment, not a prepared reader or source echo."
+    },
+    {
+      "answer_evidence": "NOT_DEMONSTRATED_NO_FINAL_ANSWER: final_text is empty, final_fields is null, citations_accepted is false and final_delivery_code is NOT_REACHED. A failed delivery cannot satisfy this obligation. No contrary semantic assertion, hallucination or boundary crossing is inferred from an absent answer.",
+      "id": "S2",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1 paragraph 4 explicitly records Arun's uncertainty to Jules while Bea is outside and does not hear it."
+    },
+    {
+      "answer_evidence": "NOT_DEMONSTRATED_NO_FINAL_ANSWER: final_text is empty, final_fields is null, citations_accepted is false and final_delivery_code is NOT_REACHED. A failed delivery cannot satisfy this obligation. No contrary semantic assertion, hallucination or boundary crossing is inferred from an absent answer. The actual routing avoids the declared B02 and D02 source-entry blockers (blocked_operation_indexes=[]); this narrow routing check passes. The B02 entry seen inside ordinary reader diagnostics is NO_CHECKED_RESULT, not an independently selected/executed B02 treatment. Avoiding blocked selections does not satisfy native relevance or this final-answer requirement.",
+      "id": "S3",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1 paragraphs 2-3 distinguish the lobby monitor from the tablet and undermine Bea's stated route from watching the monitor to knowing its absent playback information."
+    },
+    {
+      "answer_evidence": "NOT_DEMONSTRATED_NO_FINAL_ANSWER: final_text is empty, final_fields is null, citations_accepted is false and final_delivery_code is NOT_REACHED. A failed delivery cannot satisfy this obligation. No contrary semantic assertion, hallucination or boundary crossing is inferred from an absent answer.",
+      "id": "S4",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1 paragraphs 1-2 and 5 preserve Jules's nested report, lack of equipment inspection, and tonight-only scope; they do not establish agreement or independently verified playback."
+    }
+  ]
+}
