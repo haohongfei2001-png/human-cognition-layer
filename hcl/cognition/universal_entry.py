@@ -130,6 +130,10 @@ PLANNER_POLICY = (
     'Existing forms are NAME: I want to ACTION.; NAME: I plan to ACTION in order to GOAL if CONDITION.; '
     'NAME: I have an opportunity to ACTION.; NAME: I believe PROPOSITION.; NAME: I now believe NEW instead of OLD.; '
     'Narrator: In the declared model, it is false that PROPOSITION. The last form requires an explicit source-declared fictional model. '
+    'Goal/plan lifecycle forms also include NAME: I am considering a plan to ACTION in order to GOAL if CONDITION.; '
+    'NAME: I abandoned the plan to ACTION.; NAME: I completed the plan to ACTION.; '
+    'NAME: I abandoned my goal to GOAL.; NAME: I completed my goal to GOAL.; NAME: I am unsure whether to GOAL. '
+    'Keep goal and plan changes distinct. Consideration is not selection. Do not infer completion from an outcome. '
     'For C02 also use NAME: I did ACTION.; NAME: At the time, I knew about TOPIC.; NAME: At the time, I did not know about TOPIC.; '
     'NAME: At the time, I could ACTION.; NAME: At the time, I could not ACTION. Preserve explicit action-time references; never backfill them from current or later knowledge. '
     'For a negated action, the existing choice forms are NAME: At the time, I could choose to not ACTION.; '
@@ -529,7 +533,7 @@ class UniversalHCL:
             if planner_backend is None or answer_backend is None or not allowance.authorization_ref or allowance.maximum_calls-len(allowance.attempts)<2:
                 raise HCLBoundaryError('PLANNER_AND_ANSWER_BACKENDS_AND_TWO_CALL_ALLOWANCE_REQUIRED')
             messages=bounded([dict(role='system',content=PLANNER_POLICY),dict(role='user',content=json.dumps(dict(
-                question=question,sources=list(self.sources.values()),capability_inventory=[asdict(c)for c in CATALOG.values()]),ensure_ascii=False,sort_keys=True))])
+                question=question,sources=list(self.sources.values()),capability_inventory=[asdict(c)for c in CATALOG.values()]),ensure_ascii=False,sort_keys=True,separators=(',', ':')))])
             self._current(versions,receipt['operations'])
             raw_plan=allowance.call(planner_backend,'planning',messages)
             self._current(versions,receipt['operations']);plan=self._validate_plan(raw_plan);receipt['plan']=plan
