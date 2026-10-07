@@ -30,17 +30,21 @@ evidence and are not rewritten as active development policy.
 ## Current execution snapshot — 2026-10-07
 
 The latest completed pre-correction baseline is
-`main@cd3fa7fffbbfd2caa746812061a0def2edda90fe` (PR #377), whose two path-selected
-exact-main checks passed. The current [shared-source snapshot
-repair](docs/HCL_UNIVERSAL_SOURCE_SNAPSHOT.md) checks that each registered original
-source still has the same version and exact text in the backing workspace before
-native/final delivery can be accepted. Same-version derived state and unrelated
-workspace sources remain allowed; existing citation/support guards remain intact.
+`main@8f6652c98b4cd0856e3e8d31f67ea73527ebd61d` (PR #378), whose eight path-selected
+exact-main checks passed. Its shared-source version/text guard remains in place.
+The current [native-reader policy repair](docs/HCL_NATIVE_READER_POLICY.md) retains
+each B01/B02/C01/C03 ordinary adapter's code-owned policy beside its unchanged
+native result. Complete identical ordinary-reader result/policy pairs may be
+shared with explicit per-operation references and exact reconstruction; expanded
+receipts are unchanged. Source/model strings do not become policy. Code-owned
+scope/reference instructions preserve the final source/citation rules. Complete
+oversized requests still stop, while the existing three-result capacity fixture
+remains admissible without removing information.
 Its runtime SHA256 is
-`9f3ef69e16d21e5e17ab86725b2fa5696106e944cd646336c7ab6605056e1213`.
-This is provider-free correctness, not a capability or answer-quality gain. The
-PR #376 lossless final-context compaction remains in place. This new runtime has
-not had a live model evaluation; exact-head/main CI supplies adoption evidence.
+`c345acb8a19cbc906487313a789a2ce108d826a81ec7ee2a2e65e5e968544bae`.
+This is provider-free information preservation, not a capability or answer-quality
+gain. This runtime has no live model evaluation; exact-head/main CI supplies
+adoption evidence.
 
 The [October 6 two-stage CNY experiment](docs/HCL_TWO_STAGE_CNY_20261006_RESULTS.md)
 is completed historical evidence on its separately frozen runtime
@@ -56,9 +60,20 @@ ordinary 4,096-token default was not validated by it.
 The two CNY grants are **CLOSED_NO_TRANSFER_NO_RETRY**, with zero remaining calls
 and zero remaining money authority. The 13 calls' CNY 1.738854 usage-rated estimate
 is not a verified invoice; unused parts of the historical 14-call/CNY 14 ceiling
-are not reusable. Any new real model run needs a separately frozen bounded
-package and new explicit limited authorization. Earlier generic development
-authorization wording does not reopen these consumed grants.
+are not reusable. Earlier generic development authorization wording does not
+reopen these consumed grants.
+
+A separate October 7 owner approval permits a new ordinary-default diagnostic,
+not reuse of either old grant: at most 14 calls/CNY 12, first two calls/CNY 1.70,
+then only after the full smoke/source-first gate passes twelve calls/CNY 10.30.
+Planning remains 4,096 and final answers 8,192 tokens with the existing model/high
+configuration; no retry, automatic token upgrade, replacement item or recharge.
+The absolute deadline is 2026-10-07 14:00 UTC. It is not yet activated: both
+reliability repairs, a fresh exact runtime/package freeze and independent review
+of all five ordinary synthetic inputs/rules must be complete first. Historical
+4,096-token source-planning truncation is a known risk, not proof every input
+fails. A failed smoke closes this diagnostic rather than silently switching to
+the historical 16,384-token configuration.
 
 [Final-context transport](docs/HCL_FINAL_CONTEXT_TRANSPORT.md) now removes only
 structural JSON spaces and records local size-only diagnostics before final
@@ -97,11 +112,13 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: END_TO_END_READINESS_AND_LIVE_PREREQUISITES**
 
-Current provider-free work is to finish source-snapshot correctness acceptance,
-then preserve trusted native-reader policies beside their unchanged native results
-without promoting source/model text into policy. Continue bounded final transport,
-source/citation and revision checks, and prepare a fresh ordinary-default runtime
-delivery/comparison package after those repairs are independently accepted. Ordinary engineering can
+Current provider-free work is to finish native-policy correctness acceptance,
+then independently qualify and freeze the new ordinary-default diagnostic package.
+Source-snapshot acceptance is complete. Continue complete request/citation/revision
+checks; use no live authority until the remaining exact-package prerequisites are
+met. Statically unsupported candidate inputs must be replaced before freeze and
+before any model output, without parser-specific source rewrites or weaker
+relevance gates. Ordinary engineering can
 continue without reopening a paid run. Historical failed outputs and scores stay
 unchanged; actual post-repair model delivery and benefit require new authorized
 measurements.

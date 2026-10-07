@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from scripts import development_universal_source_amendment as amendment
+from scripts import development_native_reader_policy_amendment as amendment
 from scripts import run_two_stage_once as historical
 
 

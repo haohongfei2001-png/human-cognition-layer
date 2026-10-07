@@ -206,12 +206,14 @@ class PlannedExplanationInputTests(unittest.TestCase):
             self.assertEqual(json.loads(result['answer_raw'])['source_citations'][0]['quote'],quote)
 
     def test_compact_combination_fits_without_dropping_source_or_native_results(self):
+        from tests.test_v1_native_reader_policy import expand_native_reader_contexts
         s=UniversalHCL();s.put_source('maintenance',SOURCE)
         # The whole large original question is retained in planning and answer.
         original=ORIGINAL+' '+('Context remains explicit. '*250)
         port=RequestBoundedStub(plan(selected(),operation('C01',ORIGINAL,['maintenance']),operation('C03',ORIGINAL,['maintenance'])))
         result=run(s,original,port)
-        # Compact structural separators now fit this full synthetic request.
+        # Complete code-owned policies and repeated ordinary native data are
+        # shared exactly, keeping this prior 35,749-byte fixture admissible.
         # This is transport capacity, not evidence about model answer quality.
         self.assertEqual(len(port.calls),2);self.assertIn('answer',result)
         self.assertLessEqual(len(port.encoded['answer']),36000)
@@ -220,7 +222,7 @@ class PlannedExplanationInputTests(unittest.TestCase):
         self.assertEqual(len(result['operations']),3)
         final=json.loads(result['actual_final_messages'][-1]['content'])
         self.assertEqual(final['sources'][0]['text'],SOURCE);self.assertEqual(final['question'],original)
-        self.assertEqual(final['hcl_operations'],result['operations'])
+        self.assertEqual(expand_native_reader_contexts(final)['hcl_operations'],result['operations'])
 
 
 if __name__=='__main__':unittest.main()
