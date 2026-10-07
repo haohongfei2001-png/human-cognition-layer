@@ -17,20 +17,21 @@ understanding, and it authorizes no model spending.
 
 ## Current execution snapshot — 2026-10-07
 
-The latest merged pre-correction baseline is
-`main@92c8990e0c13983ada4b8b88a1480875019fd00e` (PR #380), whose eight exact-head
-and exact-main checks passed.
-Source-version consistency, complete code-owned native-policy/shared-context
-transport and [C03 pursuit uncertainty](docs/HCL_PLAN_PURSUIT_UNCERTAINTY.md) are
-preserved. The current [planner lifecycle contract repair](docs/HCL_PLANNER_LIFECYCLE_CONTRACT.md)
-exposes six existing goal/plan forms and their distinctions to the planning model.
-It changes fixed contract text and removes only structural planning-JSON spaces,
-with all parsed values and embedded string bytes preserved. Native grammar, routing,
-source text, final results and provider settings are unchanged. Its runtime SHA256 is
+The adopted runtime is `main@cf43f8fe8f9705cfc570f34224beb3095d2ee8c5` (PR #381),
+whose eight exact-head and exact-main checks passed. Source-version consistency,
+complete code-owned native-policy/shared-context transport,
+[C03 pursuit uncertainty](docs/HCL_PLAN_PURSUIT_UNCERTAINTY.md) and the
+[planner lifecycle/lossless JSON contract](docs/HCL_PLANNER_LIFECYCLE_CONTRACT.md)
+are adopted. Runtime SHA256 is
 `da8349d12f8d13001e565ccdc8dbd6933cdbff5d8ec3b6369823c01925a379e9`.
-This is provider-free API-contract correctness, not a new capability or demonstrated
-model-planning/answer-quality gain. This runtime has no live model evaluation;
-exact-head/main CI supplies adoption evidence.
+The [new ordinary-default diagnostic preparation](docs/HCL_RELIABILITY_20261007.md)
+freezes five independently qualified synthetic cases and a reviewed bounded
+executor, without a grant or trigger. Its canonical package SHA256 is
+`0d8530ce5c2838015141423aa97fa701752583fbdd9f83b97ccb90b383bec5e4`.
+The 98 executor tests and prior runtime tests establish provider-free correctness,
+not model planning, answer quality or final I02-I06 completion. This runtime has
+zero new live model calls; repository adoption/CI and the separate native-evidence
+disclosure permission remain prerequisites for the prepared diagnostic.
 
 The [October 6 two-stage CNY experiment](docs/HCL_TWO_STAGE_CNY_20261006_RESULTS.md)
 is completed historical evidence on its separately frozen runtime
@@ -54,12 +55,11 @@ not reuse of either old grant: at most 14 calls/CNY 12, first two calls/CNY 1.70
 then only after the full smoke/source-first gate passes twelve calls/CNY 10.30.
 Planning remains 4,096 and final answers 8,192 tokens with the existing model/high
 configuration; no retry, automatic token upgrade, replacement item or recharge.
-The absolute deadline is 2026-10-07 14:00 UTC. It is not yet activated: the
-source-version and native-policy repairs are adopted, but the current repair,
-fresh exact runtime/package freeze and independent review of all five ordinary
-synthetic inputs/rules must close first. Permission for the minimal structured
-synthetic native evidence needed for source-first review remains pending; public
-workflow artifacts are not treated as private. Historical
+The absolute deadline is 2026-10-07 14:00 UTC. It is not yet activated: all four
+reliability repairs are adopted; the five cases, exact package and bounded executor
+have independent review. Repository integration/CI and permission for the minimal
+structured synthetic native evidence needed for source-first review remain pending.
+Public workflow artifacts are not treated as private. Historical
 4,096-token source-planning truncation is a known risk, not proof every input
 fails. A failed smoke closes this diagnostic rather than silently switching to
 the historical 16,384-token configuration.
@@ -126,12 +126,11 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: END_TO_END_READINESS_AND_LIVE_PREREQUISITES**
 
-Current provider-free work is to finish planner-lifecycle contract acceptance,
-then independently qualify and freeze the new ordinary-default diagnostic package.
-Source-snapshot, native-policy/shared-context and pursuit-uncertainty repairs are
-merged. Continue complete request/citation/revision
-checks; use no live authority until the remaining exact-package prerequisites are
-met. Statically unsupported candidate inputs must be replaced before freeze and
+Current provider-free work is to adopt the independently reviewed ordinary-default
+reliability package through exact-head/main CI. Its runtime repairs and case
+qualification are complete; no grant or trigger is present. Continue complete
+request/citation/revision checks and do not activate a live run until the separate
+native-evidence disclosure permission and all exact-package prerequisites are met. Statically unsupported candidate inputs must be replaced before freeze and
 before any model output, without parser-specific source rewrites or weaker
 relevance gates. Ordinary engineering can
 continue without reopening a paid run. Historical failed outputs and scores stay

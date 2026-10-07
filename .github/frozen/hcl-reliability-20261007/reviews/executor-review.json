@@ -1,0 +1,42 @@
+{
+  "case_canonical_packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "case_review_file_sha256": "804a6010a7401b186dd70efcb0dc753964e9b29b6ac091544bd43bba688a6eb7",
+  "checks": {
+    "all_blockers_resolved": true,
+    "native_permission_required_before_external_work": true,
+    "provider_free_regressions_passed": true
+  },
+  "executor_files_sha256": {
+    "hcl_reliability_candidate.py": "4e341d9a54c6b9dba5859b346d9e6be96e7181aa710485e5b9e769cf61e4869c",
+    "hcl_reliability_cli.py": "08d96d6dc4a0e3f3c0d690b7648e95e0d4681276ea2a9f18d531ed59274916d4",
+    "hcl_reliability_native_public.py": "ce14efa692af9014856669fa821f3f850f46bfda53eab96424ebaf24b7c9b99f",
+    "hcl_reliability_public.py": "2fcda94a7b2121d8b7ebfacb50d74156d285e9753d3c259e94a1241cc709fc7e",
+    "hcl_reliability_reviews.py": "65d476cc42d0040fe65a8c749720268c164a98b83ebe80463e0e334e6016ead6",
+    "tests/test_hcl_reliability_adapter.py": "0c3ed20537d27556c40e97e7c8a61bacea18604ed7ef89fe2b23a95157a459f5",
+    "tests/test_hcl_reliability_candidate.py": "13c58955ccb48ae112af35f6aa26c16f5ccc866833bbf549704dda0a90ce18d6",
+    "tests/test_hcl_reliability_native_regressions.py": "f7e684db016e7f45a6824103de2122b1c5ce29fac33908053e783f8e8400e18a",
+    "tests/test_hcl_reliability_revision3.py": "9f6befe9f1544f04047870c58d70fc97cb74e7d5a3a8b87e0f0dee2794490577"
+  },
+  "live_execution_authorized": false,
+  "read_only_reader_files_sha256": {
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0"
+  },
+  "reviewer_role": "INDEPENDENT_READ_ONLY_SECURITY_REVIEW",
+  "runtime_commit": "cf43f8fe8f9705cfc570f34224beb3095d2ee8c5",
+  "runtime_sha256": "da8349d12f8d13001e565ccdc8dbd6933cdbff5d8ec3b6369823c01925a379e9",
+  "schema": "hcl-reliability-independent-executor-approval-v1",
+  "verdict": "PASS_FOR_BOUNDED_EXECUTOR_PACKAGE",
+  "verification": {
+    "account_queries": 0,
+    "credentials_read": false,
+    "provider_calls": 0,
+    "provider_free_tests_passed": 98,
+    "sdk_constructed": false
+  },
+  "workflow_files_sha256": {
+    ".github/workflows/hcl-reliability-20261007-1-once.yml": "b50ddaa8609ae77e4c6a22d773a77df1d8c4966fd068a233bf9348df97335c22",
+    ".github/workflows/hcl-reliability-20261007-2-once.yml": "9a661d1f5d22117038f8586886ecafbd06b0ce5930f59043c7c333890d2894f9"
+  }
+}
