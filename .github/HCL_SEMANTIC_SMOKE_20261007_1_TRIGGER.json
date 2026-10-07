@@ -1,0 +1,9 @@
+{
+  "authorization_ref": "OWNER_APPROVED_HCL_SEMANTIC_SMOKE_20261007_2_CALLS_2_CNY",
+  "executor_commit": "25c3fd1cd83bcfa5c95913ffdd8b7491af8ec992",
+  "grant_commit": "2130d36d8980bbf4d45b3467960b9bc7ccc8a471",
+  "grant_sha256": "12ad4277e318b4784174fc44d638e7c689ff1858a8a24c340cd610053b1e58f6",
+  "package_sha256": "4ef958ee9f31f8401c4af250b9381c3b5d787cee88eacc0bcaf1659d9f313665",
+  "schema": "hcl-semantic-smoke-marker-proposal-v1",
+  "stage": 1
+}
