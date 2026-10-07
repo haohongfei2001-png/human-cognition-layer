@@ -1,0 +1,28 @@
+{
+  "case_canonical_packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "checks": {
+    "native_admissibility_passed": true,
+    "native_capacity_passed": true,
+    "source_rubric_passed": true,
+    "unchanged_frozen_packet_and_regression_exposure_declared": true
+  },
+  "efficacy_claimed": false,
+  "evidence_sha256": {
+    "original_five_case_source_rubric_review": "804a6010a7401b186dd70efcb0dc753964e9b29b6ac091544bd43bba688a6eb7",
+    "prior_failed_smoke_regression_exposure": "e2d190fa9fe4de3a634e8545ab222caa4693dc6a101ee1281578413d963fbdfe",
+    "reviewed_manual_probe_script": "66298b5ccc8ac28703c29ec220c3d1fcc280578fcda972935ec0c890870a1e06",
+    "reviewed_manual_probes_same_runtime": "8dd0d18247355e328d76ab003137796fb922e12efc80cbf01b1e93a11fd0bdb4",
+    "reviewed_recovery_manifest": "0952005870ae24fef500d4b3af07bc53a9ad8e1cc1f4291819a8def6f196a0d3",
+    "unchanged_original_case_packet": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+    "verified_final_review_targets": "65b31303b59c8e7ad937c60b771423b01ba2a671c344b3a4e3153193e1d7751a",
+    "verified_recovery_configuration": "4d7aec57d02d18088f3b65cb85b9ef8871ebc65bab899bd92a8c9425394a8318"
+  },
+  "live_execution_authorized": false,
+  "provider_calls": 0,
+  "reviewer_role": "INDEPENDENT_REGRESSION_CASE_REVIEW_BEFORE_RECOVERY_OUTPUT",
+  "runtime_commit": "9c7a884ef041809f0f7c503c40892a62936959c7",
+  "runtime_sha256": "e621355a10ad6d2da716ed64d244f6c3f69bdc0dcd59cf91673d7ba4b2b05cac",
+  "schema": "hcl-planning-recovery-independent-case-review-v1",
+  "verdict": "PASS_FOR_BOUNDED_DEVELOPMENT_ONLY"
+}

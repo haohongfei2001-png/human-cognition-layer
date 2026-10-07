@@ -1,0 +1,270 @@
+{
+  "authorization_ref": "OWNER_APPROVED_HCL_PLANNING_RECOVERY_20261007_6_CALLS_6_CNY",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "configuration": {
+    "answer_tokens": 8192,
+    "approved_at_bound": "2026-10-07T11:18:39Z",
+    "authorization_ref": "OWNER_APPROVED_HCL_PLANNING_RECOVERY_20261007_6_CALLS_6_CNY",
+    "case_replacement": false,
+    "currency": "CNY",
+    "executor_files": {
+      "hcl_recovery_candidate.py": "e7ad9e3dc030cc817f31053a205739fe02d8a0aabe39a3d26a543e5619c5a33e",
+      "hcl_recovery_cli.py": "342c87cd27867b2ab5965a82d640454e5bc1094fe1b5ff94e8fc3bbaf3328bfe",
+      "hcl_recovery_native_public.py": "af9064d927181961fd9783cfb5cd2503d778010051a65caac644603e18bfa93c",
+      "hcl_recovery_public.py": "cf18e4961baf8d50bdd6ae4d1d99632721dd28eba8dad080335aaddf31988531",
+      "hcl_recovery_reviews.py": "7e13b24b843ef26992bc5da69eb2bf3ec49f45e46f6ab757ad2370da1c2b67d9",
+      "tests/test_hcl_recovery_adapter.py": "3b92a164302efd9f578a21b40091ae2c77ab31115b2d82b245c2c2b49925e165",
+      "tests/test_hcl_recovery_candidate.py": "9ad3957b0c590a617ffe3503f7ed747ec91c7dfe4cd22ca7d0c415776157eb95",
+      "tests/test_hcl_recovery_native_regressions.py": "3b8c5acfc07c19e1966a50445e83f8a250665b7e0af5c19a3f0f710282032ab9",
+      "tests/test_hcl_recovery_revision3.py": "694990f2fa6c9f3210adcf9e34028f5132a53b6af0fc7b46490e1024a4470833",
+      "tests/test_hcl_recovery_time_and_diagnostics.py": "d4e2a394f7560f7135c16c61e0414c5edec9153edfe369f963c25609077ee0f8"
+    },
+    "expires_at": null,
+    "fallback": false,
+    "maximum_aggregate_calls": 6,
+    "maximum_aggregate_cny": "6",
+    "maximum_final_characters": 64000,
+    "maximum_final_texts": 3,
+    "maximum_request_bytes": 36000,
+    "maximum_wait_seconds": 180,
+    "model_judge": false,
+    "openai_sdk_version": "2.14.0",
+    "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+    "phase_holds_cny": {
+      "answer": "0.888480",
+      "planning": "1.109664"
+    },
+    "planning_completion_includes_reasoning": true,
+    "planning_tokens": 16384,
+    "private_native_review_maximum_bytes": 1048576,
+    "public_native_maximum_case_records": 3,
+    "public_native_maximum_operations_per_record": 3,
+    "public_native_maximum_record_bytes": 1048576,
+    "public_native_requires_new_explicit_grant_permission": true,
+    "rates_cny": {
+      "input": "9",
+      "output": "27"
+    },
+    "reference_rates_usd": {
+      "input": "1.32",
+      "output": "3.96"
+    },
+    "replanning": false,
+    "request_retries": 0,
+    "requests": {
+      "reliability-20261007-pair-conveyor-exercise:Base:answer": {
+        "full_request_sha256": "4b6ce5426d44692efbc03e6927e853cd495529c3161c05b51e6f9f955fdf5e8d",
+        "full_request_utf8_bytes": 3909,
+        "max_tokens": 8192,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 1621,
+        "payload_value_utf8_bytes": {
+          "knowledge_basis": 46,
+          "question": 242,
+          "sources": 1280
+        },
+        "reservation_cny": "0.310842",
+        "reservation_usd": "0.04559016",
+        "serialized_messages_sha256": "bb1beb2462fabad95f1026675005f87b41f485756801608e3fc2aa6f10b60f5c",
+        "serialized_messages_utf8_bytes": 3755,
+        "within_request_bound": true
+      },
+      "reliability-20261007-pair-conveyor-exercise:HCL:planning": {
+        "full_request_sha256": "4147ed3b72e50c32b984a8a9898aca65874387ec25c8dc4d69c0468cf939927a",
+        "full_request_utf8_bytes": 30375,
+        "max_tokens": 16384,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 24257,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 22545,
+          "question": 242,
+          "sources": 1422
+        },
+        "reservation_cny": "1.008414",
+        "reservation_usd": "0.14790072",
+        "serialized_messages_sha256": "4d8f6c32287ec8e7e32dea5928bccc3b939a8fdfa90b5aeed30a5e2c010de67b",
+        "serialized_messages_utf8_bytes": 30220,
+        "within_request_bound": true
+      },
+      "reliability-20261007-pair-pottery-rack:Base:answer": {
+        "full_request_sha256": "4174b83ec4df324edcc6b4fe0d0da47168f9c9079050264587999d78aacf8573",
+        "full_request_utf8_bytes": 3105,
+        "max_tokens": 8192,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 819,
+        "payload_value_utf8_bytes": {
+          "knowledge_basis": 46,
+          "question": 141,
+          "sources": 579
+        },
+        "reservation_cny": "0.29637",
+        "reservation_usd": "0.0434676",
+        "serialized_messages_sha256": "60e5fcdbbf5562f58846280ece1c77073155acf42ac4ea8961f52cd58b307727",
+        "serialized_messages_utf8_bytes": 2951,
+        "within_request_bound": true
+      },
+      "reliability-20261007-pair-pottery-rack:HCL:planning": {
+        "full_request_sha256": "730a1546f1ead59ef6f3f069b9a472de11e86cfbbb3463e66aa9b02d1f81d9b6",
+        "full_request_utf8_bytes": 29571,
+        "max_tokens": 16384,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 23455,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 22545,
+          "question": 141,
+          "sources": 721
+        },
+        "reservation_cny": "0.993942",
+        "reservation_usd": "0.14577816",
+        "serialized_messages_sha256": "51c9727db413732da69550fa251396581b3d9ee56cf6956efed81de1a37b2fd0",
+        "serialized_messages_utf8_bytes": 29416,
+        "within_request_bound": true
+      },
+      "reliability-20261007-pair-sail-booth-explicit-actor:Base:answer": {
+        "full_request_sha256": "9dc01e5f8dfab6b8f509e44f45c77c02dae6fbf6bdeabe98f3855db3bfe19df9",
+        "full_request_utf8_bytes": 3161,
+        "max_tokens": 8192,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 887,
+        "payload_value_utf8_bytes": {
+          "knowledge_basis": 46,
+          "question": 176,
+          "sources": 612
+        },
+        "reservation_cny": "0.297378",
+        "reservation_usd": "0.04361544",
+        "serialized_messages_sha256": "ee42ee42ce75f69e601710928cdf988a91ffdb94da986bbb08bc3b6a6952bffc",
+        "serialized_messages_utf8_bytes": 3007,
+        "within_request_bound": true
+      },
+      "reliability-20261007-pair-sail-booth-explicit-actor:HCL:planning": {
+        "full_request_sha256": "897418ddfa1bf5a18ced50f1045b6afa359685a5a073b7d6631833b55e9d985b",
+        "full_request_utf8_bytes": 29627,
+        "max_tokens": 16384,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 23523,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 22545,
+          "question": 176,
+          "sources": 754
+        },
+        "reservation_cny": "0.99495",
+        "reservation_usd": "0.145926",
+        "serialized_messages_sha256": "ff93684b721b23078280c803b6b6ef6f909aed7ba0a8ef37d5494c771e0b066f",
+        "serialized_messages_utf8_bytes": 29472,
+        "within_request_bound": true
+      },
+      "reliability-20261007-pair-unloading:Base:answer": {
+        "full_request_sha256": "c7b946e38ce57152b69ab9065e40f34b3f1da7ef5f7e5aca5ff8e6a7763bf8e5",
+        "full_request_utf8_bytes": 4729,
+        "max_tokens": 8192,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 2423,
+        "payload_value_utf8_bytes": {
+          "knowledge_basis": 46,
+          "question": 181,
+          "sources": 2137
+        },
+        "reservation_cny": "0.325602",
+        "reservation_usd": "0.04775496",
+        "serialized_messages_sha256": "34ecfda9c3d63dfe68375d061a1c2ea2e09d2ffef27a697627346670286e24f9",
+        "serialized_messages_utf8_bytes": 4575,
+        "within_request_bound": true
+      },
+      "reliability-20261007-pair-unloading:HCL:planning": {
+        "full_request_sha256": "621102423b96508276f37c35c273447592269ef87933ca9d1a309d071c47bc96",
+        "full_request_utf8_bytes": 31339,
+        "max_tokens": 16384,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 25195,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 22545,
+          "question": 181,
+          "sources": 2421
+        },
+        "reservation_cny": "1.025766",
+        "reservation_usd": "0.15044568",
+        "serialized_messages_sha256": "9673eb3f1741917df216477bee99d1ba26ea3f9ede5a528d58858dbf90709dae",
+        "serialized_messages_utf8_bytes": 31184,
+        "within_request_bound": true
+      },
+      "reliability-20261007-smoke-flute:HCL:planning": {
+        "full_request_sha256": "7e5d2c4be0188b37a0bce699e0f54da0978cc2ad90ef9c6a8b85190059b0b979",
+        "full_request_utf8_bytes": 30339,
+        "max_tokens": 16384,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 24215,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 22545,
+          "question": 195,
+          "sources": 1427
+        },
+        "reservation_cny": "1.007766",
+        "reservation_usd": "0.14780568",
+        "serialized_messages_sha256": "9adf4a0e9493bce1ebb62d4eb2ad994951014e30c77bb93dd4a2cb0ac2c407f6",
+        "serialized_messages_utf8_bytes": 30184,
+        "within_request_bound": true
+      }
+    },
+    "runtime_sha256": "e621355a10ad6d2da716ed64d244f6c3f69bdc0dcd59cf91673d7ba4b2b05cac",
+    "sdk_retries": 0,
+    "source_recorded_at": "2026-10-07T05:19:26.377856+00:00",
+    "source_recorded_at_basis": "FROZEN_PACKET_PREPARATION_TIMESTAMP_NOT_ACTUAL_INGESTION_OR_EVENT_TIME",
+    "stage_call_caps": {
+      "1": 2,
+      "2": 4
+    },
+    "stage_cny_caps": {
+      "1": "2.00",
+      "2": "4.00"
+    },
+    "stage_orders": {
+      "1": [
+        [
+          "reliability-20261007-smoke-flute",
+          "HCL"
+        ]
+      ],
+      "2": [
+        [
+          "reliability-20261007-pair-sail-booth-explicit-actor",
+          "HCL"
+        ],
+        [
+          "reliability-20261007-pair-conveyor-exercise",
+          "HCL"
+        ]
+      ]
+    },
+    "stage_reservation_cny": {
+      "1": "1.998144",
+      "2": "3.996288"
+    },
+    "stage_windows_seconds": {
+      "1": 600,
+      "2": 1200
+    },
+    "usd_reference_only": true,
+    "z3_solver_version": "4.15.4.0"
+  },
+  "currency": "CNY",
+  "independent_case_review_sha256": "9fea8a0f9b4bb12fc901ff4ea5ea9507e7bbf289897455d47c0a11ccad7c7a89",
+  "independent_executor_review_sha256": "a1b7ea199d036d59e34b2ad17dc6fb2b84fb3069c18bdaf1fe2c2def05ee4aeb",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "planner_lifecycle_contracts_merge_commit": "cf43f8fe8f9705cfc570f34224beb3095d2ee8c5",
+  "pursuit_uncertainty_merge_commit": "92c8990e0c13983ada4b8b88a1480875019fd00e",
+  "read_only_reader_files": {
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0"
+  },
+  "runtime_commit": "9c7a884ef041809f0f7c503c40892a62936959c7",
+  "runtime_sha256": "e621355a10ad6d2da716ed64d244f6c3f69bdc0dcd59cf91673d7ba4b2b05cac",
+  "schema": "hcl-planning-recovery-final-package-v1",
+  "source_guard_merge_commit": "8f6652c98b4cd0856e3e8d31f67ea73527ebd61d",
+  "status": "FROZEN_BEFORE_THIS_RECOVERY_OUTPUT",
+  "trusted_native_policy_merge_commit": "61da904bd5de34a974316c0d8188f582d21b9646",
+  "workflow_files": {
+    ".github/workflows/hcl-planning-recovery-20261007-1-once.yml": "7268db3d25f04a438f5e603e9d6834dbd04382ec6f7b34ccdb556ad6f90b4fb6",
+    ".github/workflows/hcl-planning-recovery-20261007-2-once.yml": "e288ced7741e11af18fda1cf24e137029d19090ffecba32f308eb187054e2aeb"
+  }
+}

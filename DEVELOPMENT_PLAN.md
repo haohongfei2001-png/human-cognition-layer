@@ -85,6 +85,18 @@ workflow artifacts are public evidence, not a private route. The exact response
 finish reason and reasoning/content breakdown were not exported, so no claim that
 all completion tokens were hidden reasoning is supported by the public record.
 
+A new [fixed-16K recovery package](docs/HCL_PLANNING_RECOVERY_20261007.md) is
+separately approved and prepared: at most CNY 6 / six calls, first CNY 2 / two calls
+on the same failed flute smoke, then only after every independent smoke gate passes
+CNY 4 / four calls on the unchanged sail and conveyor cases, HCL only. The owner
+removed the fixed calendar cutoff; `expires_at` is null while 600/1,200-second
+stage windows, 180-second per-request timeout/send margin and once-only launch
+remain. Package SHA256 is
+`807eb9fd05338f6003478d78ff7bd55acc075e6d0d4985bd9a45b01a3f924e06`.
+Its 106 offline tests and new target-bound case/executor reviews do not establish
+live success. At this preparation commit there is no new recovery grant, marker
+or provider call. No old allowance can be reused.
+
 [Final-context transport](docs/HCL_FINAL_CONTEXT_TRANSPORT.md) now removes only
 structural JSON spaces and records local size-only diagnostics before final
 limits. Parsed source/plan/native-result values and real HCL execution remain
@@ -120,15 +132,15 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: OFFLINE_ORDINARY_PLANNER_RELIABILITY_DIAGNOSIS**
+**NEXT_READY: BOUNDED_FIXED_16K_PLANNING_RECOVERY**
 
-The ordinary-default smoke is failed and closed. Next is provider-free diagnosis
-of planning completion and a separately reviewed general repair, if supported by
-evidence. Preserve actual failed results, all frozen cases/rules/package/runtime
-and the unchanged native-execution requirement. Do not silently increase a frozen allowance,
-truncate sources, swap cases or disable HCL. Any new real model experiment requires
-new bounded authorization; neither the unused smoke allowance nor the unactivated
-comparison allowance can be reused. Formal I02-I06 remains incomplete.
+The failed 4K diagnostic remains closed. The fixed 16K ordinary configuration repair
+and the new CNY 6 bounded recovery are separate from it. After exact package
+adoption/CI, use the one-use E/G/M launch and source-first smoke gate. Any detected
+failure stops the new run without retry; stage two requires the actual complete
+smoke pass. Preserve all failed evidence, complete source facts, mandatory native
+execution and unchanged semantic/citation acceptance. No silent limit upgrade,
+case replacement or historical budget reuse. Formal I02-I06 remains incomplete.
 
 A00 plus the 40 A–H runtime packages have their declared construction/correctness
 status, not a product-completion percentage. The current
