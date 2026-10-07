@@ -14,7 +14,8 @@ MAX_REQUEST_BYTES=36000
 # A fixed ordinary request allowance, not a provider limit or automatic retry.
 # Thinking and visible planning share the completion allowance. Existing callers
 # must reserve this exact request before the SDK may send it.
-OUTPUT_TOKENS={'planning':16384,'answer':8192}
+OUTPUT_TOKENS={'planning':16384,'answer':16384}
+REASONING_EFFORT={'planning':'high','answer':'low'}
 OUTPUT_MARGIN=32
 INPUT_RATE=Decimal('1.32')
 OUTPUT_RATE=Decimal('3.96')
@@ -60,7 +61,7 @@ def bounded_request(phase, messages):
     if any(not isinstance(m,dict)or set(m)!={'role','content'}or m['role']not in ('system','user','assistant')or not isinstance(m['content'],str)for m in messages):
         raise MeteredPortError('PLAIN_MESSAGE_SCHEMA_REQUIRED')
     request=dict(model=MODEL,max_tokens=OUTPUT_TOKENS[phase],response_format={'type':'json_object'},
-        reasoning_effort='high',thinking={'type':'enabled'},messages=[{'role':m['role'],'content':m['content']}for m in messages])
+        reasoning_effort=REASONING_EFFORT[phase],thinking={'type':'enabled'},messages=[{'role':m['role'],'content':m['content']}for m in messages])
     encoded=json.dumps(request,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
     if len(encoded)>MAX_REQUEST_BYTES:raise MeteredPortError('REQUEST_BOUND_EXCEEDED_NO_TRUNCATION')
     return request,encoded

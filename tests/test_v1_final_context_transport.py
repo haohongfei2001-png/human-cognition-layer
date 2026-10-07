@@ -24,7 +24,7 @@ def session():
 
 
 def translated():
-    return dict(operation('B01', QUERY, ['meeting']), semantic_candidates=proposals())
+    return dict(operation('B01', QUERY, ['meeting']), input_mode='semantic',semantic_candidates=proposals())
 
 
 class FinalContextTransportTests(unittest.TestCase):

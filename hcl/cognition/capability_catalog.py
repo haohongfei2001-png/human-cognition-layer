@@ -72,7 +72,9 @@ _ROWS = (
 # An absent contract means the retained implementation has no ordinary-entry adapter.
 _UNUSED_BINDINGS='Not consumed by this adapter; use an empty bindings array.'
 _READER_LIMITS='One complete source; bounded literal-report reader with no invented source facts.'
-_MODEL_READER_LIMITS=' Optional semantic_candidates from the first model plan may feed existing conditional preparation. Only one B01/C01/C02/C03 operation per plan may use this field; at most 24 exact-quote candidates. Derived actor labels retain exact source-named ASCII names of at most 32 characters; no invented aliases. Derived statements remain unverified interpretations, never quotable sources.'
+READER_BRIDGE_CAPABILITIES=('B01','C01','C02','C03')
+READER_INPUT_MODES=('literal','semantic','insufficient')
+_MODEL_READER_LIMITS=' Required input_mode: literal (complete original source, no candidates), semantic (faithful source-anchored semantic_candidates under the planner contract), or insufficient (no faithful input; no native execution). Mode labels do not certify meaning.'
 _CONCEPT_LIMITS='Source at most 16000 characters and 64 lines; original question at most 4000 characters.'
 _CONTRACTS = {
     cid:AdapterContract('OPERATION_QUESTION',1,1,_UNUSED_BINDINGS,(),question,_READER_LIMITS+(_MODEL_READER_LIMITS if cid in ('B01','C01','C03') else ' No semantic translation at this entry.'),

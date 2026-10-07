@@ -16,7 +16,7 @@ def interpreted(cid, source, statements, question='What does the record support?
     session = UniversalHCL(); session.put_source('control', source)
     rows = [dict(source_id='control', quote=quote, kind='event',
         content=dict(canonical_statement=statement)) for quote, statement in statements]
-    op = dict(operation(cid, question, ['control']), semantic_candidates=rows)
+    op = dict(operation(cid, question, ['control']), input_mode='semantic',semantic_candidates=rows)
     port = RequestBoundedStub(plan(op)); result = run(session, question, port)
     return session, port, result
 

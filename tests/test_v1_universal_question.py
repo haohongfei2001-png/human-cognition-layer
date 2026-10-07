@@ -14,7 +14,10 @@ class Stub:
         value=self.plan if phase=='planning' else dict(answer='A bounded interpretation.',source_citations=[],uncertainty='Evidence limits remain.',assumptions='No world fact established.')
         return dict(text=json.dumps(value),actual_usd='0',usage=dict(offline_stub=True))
 
-def operation(cid,question,sources,bindings=()):return dict(capability=cid,question=question,source_ids=sources,bindings=list(bindings))
+def operation(cid,question,sources,bindings=()):
+    value=dict(capability=cid,question=question,source_ids=sources,bindings=list(bindings))
+    if cid in ('B01','C01','C02','C03'):value['input_mode']='literal'
+    return value
 def binding(source,actor):return dict(role='actor',source_id=source,start=0,quote=actor)
 def plan(*ops):return dict(task='Bounded source analysis',operations=list(ops),limitations=[])
 def run(session,question,stub):return session.answer(question,planner_backend=stub,answer_backend=stub,allowance=CallAllowance(2,0,'OFFLINE_TEST_ONLY'))

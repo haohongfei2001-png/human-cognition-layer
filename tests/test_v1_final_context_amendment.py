@@ -6,14 +6,14 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from scripts import development_entry_readiness_amendment as amendment
+from scripts import development_input_phase_contract_amendment as amendment
 from scripts import run_two_stage_once as historical
 
 
 class FinalContextAmendmentTests(unittest.TestCase):
     def test_exact_current_runtime_and_only_reviewed_file_are_accepted(self):
         self.assertTrue(amendment.validate_current())
-        self.assertEqual(set(amendment.REVIEWED_FILES), {'hcl/cognition/universal_entry.py','hcl/cognition/deepseek_metered.py','hcl/cognition/entry_readiness.py'})
+        self.assertEqual(set(amendment.REVIEWED_FILES), {'hcl/cognition/universal_entry.py','hcl/cognition/deepseek_metered.py','hcl/cognition/capability_catalog.py'})
         self.assertTrue(amendment.validate_current(current_digest=amendment.CURRENT_RUNTIME))
         for wrong in ('0' * 64, amendment.PREVIOUS_RUNTIME, ''):
             with self.assertRaisesRegex(ValueError, 'amendment drift'):

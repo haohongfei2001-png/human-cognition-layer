@@ -9,7 +9,7 @@ from decimal import Decimal
 import json
 import hashlib
 import threading
-from .capability_catalog import CATALOG
+from .capability_catalog import CATALOG, READER_BRIDGE_CAPABILITIES, READER_INPUT_MODES
 from .deepseek_metered import safe_metered_failure_details, bounded_request, MeteredPortError
 from .entry_readiness import literal_entry_blockers
 from .workspace import CognitionWorkspace
@@ -18,12 +18,31 @@ from .reader_entry import _EXPLICIT_CITATION_FINAL_ANSWER_POLICY
 from .retained import audit_supplied_source_citations
 
 _SAFE_FAILURE_CODES = frozenset(('CALL_ALLOWANCE_EXHAUSTED', 'CLOSED_OR_DUPLICATE_PHASE_NO_RETRY', 'COST_ALLOWANCE_EXHAUSTED', 'DURABLE_RESERVATION_JOURNAL_REQUIRED_FOR_PROVIDER', 'METERED_RESPONSE_REQUIRED', 'PLANNER_AND_ANSWER_BACKENDS_AND_TWO_CALL_ALLOWANCE_REQUIRED', 'PLANNER_OR_ANSWER_BACKEND_AND_ALLOWANCE_UNAVAILABLE', 'SOURCE_CHANGED_DURING_ORCHESTRATION', 'SUCCESSFUL_PLANNING_REQUIRED', 'USAGE_OUTSIDE_RESERVED_BOUND', 'answer exceeds bounded contract', 'bounded authorized input required', 'bounded bindings required', 'bounded context required', 'bounded interpreted question required', 'bounded planning plus answer allowance required', 'complete context exceeds budget; no truncation', 'complete sources exceed bound; no truncation', 'duplicate responsibility actor', 'invalid answer schema', 'invalid bounded task plan', 'invalid limitations', 'invented or stale source anchor', 'operation bound exceeded', 'ordinary nonempty question required', 'planning response exceeds bound', 'source count exceeds bound; no silent source dropping', 'unknown capability or operation fields', 'unknown or duplicate source selection', 'unsupported binding or source', 'METERED_BACKEND_OR_JOURNAL_FAILED', 'INVALID_USAGE_METADATA', 'ORCHESTRATION_FAILURE', 'CALL_ALREADY_IN_FLIGHT', 'SOURCE_SUPPORT_CHANGED', 'PLANNER_OR_ANSWER_OUTPUT_BOUND_EXCEEDED'))
-_SAFE_FAILURE_CODES = _SAFE_FAILURE_CODES | {'NATIVE_HCL_RESULT_REQUIRED_BEFORE_ANSWER','NONBLANK_FINAL_ANSWER_REQUIRED'}
+_SAFE_FAILURE_CODES = _SAFE_FAILURE_CODES | {'NATIVE_HCL_RESULT_REQUIRED_BEFORE_ANSWER','NONBLANK_FINAL_ANSWER_REQUIRED','EXPLICIT_READER_INPUT_MODE_REQUIRED','INVALID_READER_INPUT_MODE','REQUIRED_CHECKED_NATIVE_TREATMENT_ABSENT_BEFORE_ANSWER','INVALID_CHECKED_NATIVE_REQUIREMENT'}
 
 class HCLBoundaryError(ValueError):
     def __init__(self, code):
         self.code=code if code in _SAFE_FAILURE_CODES else "ORCHESTRATION_FAILURE"
         super().__init__(self.code)
+
+def _reader_input_mode(operation, *, require_explicit=False):
+    """Structural mode admission only, never inferred source meaning or treatment."""
+    bridge=operation['capability'] in READER_BRIDGE_CAPABILITIES
+    mode=operation.get('input_mode')
+    if not bridge:
+        if 'input_mode' in operation:raise HCLBoundaryError('INVALID_READER_INPUT_MODE')
+        return None
+    if mode is None and 'input_mode' not in operation:
+        if require_explicit:raise HCLBoundaryError('EXPLICIT_READER_INPUT_MODE_REQUIRED')
+        # Direct native APIs and historical caller fixtures retain their existing
+        # literal/semantic dispatch. Current model planning requires the tag.
+        return 'semantic' if 'semantic_candidates' in operation else 'literal'
+    if type(mode) is not str or mode not in READER_INPUT_MODES:
+        raise HCLBoundaryError('INVALID_READER_INPUT_MODE')
+    if (mode=='semantic') != ('semantic_candidates' in operation):
+        raise HCLBoundaryError('INVALID_READER_INPUT_MODE')
+    return mode
+
 
 def _safe_usage(value):
     if not isinstance(value,dict):raise HCLBoundaryError("INVALID_USAGE_METADATA")
@@ -134,7 +153,7 @@ PLANNER_POLICY = (
     'Use your language understanding to interpret the original human/social/narrative/value question, '
     'choose relevant HCL operations and construct their intent-preserving arguments. Return JSON with '
     'exactly task, operations, limitations. task is your bounded interpretation, not a source fact. '
-    'operations is an array of at most three objects with capability, question, source_ids, bindings and no other fields except the optional semantic_candidates described below. '
+    'operations is an array of at most three objects with capability, question, source_ids, bindings and only the input_mode/semantic_candidates fields allowed below. '
     'Use the supplied current A-H inventory and each available entry_contract to choose only useful operations; do not execute every module blindly. '
     'A retained implementation with ADAPTER_REQUIRED is unavailable at this entry; state that limit instead of pretending it executed. '
     'Select one to three useful available operations when their prerequisites permit. A final answer requires an actual native HCL result. '
@@ -150,6 +169,9 @@ PLANNER_POLICY = (
     'Do not force a capability because of a familiar ID or broad family name. Unsupported or empty preparation is not substantive checked treatment. '
     'Preserve the original task in all interpretations; do not replace it with an easier question. '
     'G02 may use a normative rule only if explicitly present in the original user request. '
+    'B01/C01/C02/C03 require input_mode: literal uses the complete original source without semantic_candidates; '
+    'semantic requires faithful source-anchored semantic_candidates now; insufficient records unavailable faithful input without native execution. '
+    'Other capabilities forbid input_mode. Never omit it or choose literal to avoid needed translation; the label certifies neither readiness nor meaning. '
     'For ordinary prose outside native literal forms, construct faithful semantic_candidates for at most ONE relevant '
     'B01/C01/C02/C03 operation with one complete source in this first planning response. Source IDs alone do not create typed premises. '
     'semantic_candidates is an array of 1 to 24 objects with exactly source_id, quote, kind, content and optional start. '
@@ -292,7 +314,7 @@ class UniversalHCL:
         if any(status.get(claim)!='SUPPORT_AVAILABLE' for operation in operations for claim in operation.get('support_claim_ids',())):
             raise HCLBoundaryError('SOURCE_SUPPORT_CHANGED')
 
-    def _validate_plan(self, raw):
+    def _validate_plan(self, raw, *, require_input_modes=False):
         if not isinstance(raw,str)or len(raw)>32000:raise HCLBoundaryError('planning response exceeds bound')
         value=json.loads(raw)
         if not isinstance(value,dict) or set(value)!={'task','operations','limitations'} or not isinstance(value['task'],str) or not 1<=len(value['task'])<=2000:
@@ -302,8 +324,9 @@ class UniversalHCL:
         translated=0
         for operation in value['operations']:
             required={'capability','question','source_ids','bindings'}
-            if not isinstance(operation,dict) or not required<=set(operation) or set(operation)-required-{'semantic_candidates'} or operation['capability'] not in CATALOG:
+            if not isinstance(operation,dict) or not required<=set(operation) or set(operation)-required-{'semantic_candidates','input_mode'} or operation['capability'] not in CATALOG:
                 raise HCLBoundaryError('unknown capability or operation fields')
+            _reader_input_mode(operation,require_explicit=require_input_modes)
             if not isinstance(operation['question'],str)or not 1<=len(operation['question'])<=8000:raise HCLBoundaryError('bounded interpreted question required')
             ids=operation['source_ids']
             if not isinstance(ids,list)or len(ids)>8 or any(not isinstance(s,str) or s not in self.sources for s in ids)or len(set(ids))!=len(ids):raise HCLBoundaryError('unknown or duplicate source selection')
@@ -319,6 +342,10 @@ class UniversalHCL:
                     line=row['content']['canonical_statement']
                     if not isinstance(line,str)or not 1<=len(line)<=2000 or any(c in line for c in '\n\r\v\f\x1c\x1d\x1e\x85\u2028\u2029'):raise HCLBoundaryError('invalid bounded task plan')
                     if 'start'in row and (type(row['start'])is not int or row['start']<0):raise HCLBoundaryError('invented or stale source anchor')
+                    source=self.sources[row['source_id']]['text'];quote=row['quote']
+                    if ('start' in row and source[row['start']:row['start']+len(quote)]!=quote
+                            or 'start' not in row and quote not in source):
+                        raise HCLBoundaryError('invented or stale source anchor')
             bindings=operation['bindings']
             if not isinstance(bindings,list)or len(bindings)>8:raise HCLBoundaryError('bounded bindings required')
             for binding in bindings:
@@ -331,6 +358,9 @@ class UniversalHCL:
 
     def _execute(self, operation, original_question):
         cid=operation['capability'];ids=operation['source_ids'];question=operation['question']
+        if _reader_input_mode(operation)=='insufficient':
+            return dict(capability=cid,status='EXPLICIT_READER_INPUT_INSUFFICIENT',executed=False,
+                checked_treatment_present=False,reason='PLANNER_REPORTED_NO_FAITHFUL_SUPPORTED_INPUT')
         if cid=='G01':
             from .normative_premises import NormativePremiseWorkspace
             workspace=NormativePremiseWorkspace()
@@ -481,6 +511,8 @@ class UniversalHCL:
             result=prepare_explanations(self.workspace,question,source_id=ids[0])
             result.messages(self.workspace)
             return dict(capability=cid,status='C02_EXECUTED',executed=True,result=result.payload,
+                        # Same real explanation-presence definition as the retained semantic C02 path.
+                        checked_treatment_present=bool(result.payload.get('explanations')),
                         support_claim_ids=list(result.claim_ids))
         if cid=='C04':
             if len(ids)!=1:return dict(capability=cid,status='C04_REQUIRES_ONE_SOURCE',executed=False)
@@ -548,9 +580,13 @@ class UniversalHCL:
         return dict(capability=cid,status='RETAINED_IMPLEMENTATION_REQUIRES_ENTRY_ADAPTER',executed=False,
                     implementation=CATALOG[cid].implementation)
 
-    def answer(self, question, *, planner_backend=None, answer_backend=None, allowance=None, maximum_context_chars=128000):
+    def answer(self, question, *, planner_backend=None, answer_backend=None, allowance=None, maximum_context_chars=128000, required_checked_capabilities=()):
         if not isinstance(question,str)or not 1<=len(question)<=8000:raise HCLBoundaryError('ordinary nonempty question required')
         if type(maximum_context_chars)is not int or not 1024<=maximum_context_chars<=256000:raise HCLBoundaryError('bounded context required')
+        if (not isinstance(required_checked_capabilities,tuple) or len(required_checked_capabilities)>len(CATALOG)
+                or any(type(cid) is not str or cid not in CATALOG for cid in required_checked_capabilities)
+                or len(set(required_checked_capabilities))!=len(required_checked_capabilities)):
+            raise HCLBoundaryError('INVALID_CHECKED_NATIVE_REQUIREMENT')
         allowance=allowance or CallAllowance();versions=self._versions()
         receipt=dict(schema='hcl-universal-question-v1',status='STARTED',final_delivery_code='NOT_REACHED',original_question=question,
             source_versions=versions,input_shape='QUESTION_ONLY' if not versions else 'QUESTION_WITH_SOURCE' if len(versions)==1 else 'QUESTION_WITH_MULTIPLE_SOURCES',
@@ -569,7 +605,7 @@ class UniversalHCL:
             messages=_with_literal_entry_blockers(messages,maximum_context_chars=maximum_context_chars)
             self._current(versions,receipt['operations'])
             raw_plan=allowance.call(planner_backend,'planning',messages)
-            self._current(versions,receipt['operations']);plan=self._validate_plan(raw_plan);receipt['plan']=plan
+            self._current(versions,receipt['operations']);plan=self._validate_plan(raw_plan,require_input_modes=True);receipt['plan']=plan
             receipt['hcl_execution'].update(status='DISPATCHING',selected_operations=len(plan['operations']))
             for operation in plan['operations']:
                 self._current(versions,receipt['operations'])
@@ -585,6 +621,12 @@ class UniversalHCL:
                 selected_operations=len(plan['operations']),dispatched_operations=len(receipt['operations']),native_results=native_results)
             self._current(versions,receipt['operations'])
             if not native_results:raise HCLBoundaryError('NATIVE_HCL_RESULT_REQUIRED_BEFORE_ANSWER')
+            # Optional caller-owned strict evaluation gate. Ordinary evidence-limited
+            # answers retain the existing native-result rule when no family is required.
+            if required_checked_capabilities and not any(
+                    row.get('capability') in required_checked_capabilities and row.get('executed') is True
+                    and row.get('checked_treatment_present') is True for row in receipt['operations']):
+                raise HCLBoundaryError('REQUIRED_CHECKED_NATIVE_TREATMENT_ABSENT_BEFORE_ANSWER')
             final_payload=dict(question=question,sources=[{k:r[k]for k in ('source_id','version','text')}for r in self.sources.values()],
                 hcl_plan=plan,hcl_operations=receipt['operations'],hcl_execution=receipt['hcl_execution'],knowledge_basis='SUPPLIED_SOURCES_AND_EXPLICIT_INTERPRETATION' if versions else 'UNSOURCED_MODEL_KNOWLEDGE')
             final_payload=_share_identical_native_reader_contexts(final_payload)

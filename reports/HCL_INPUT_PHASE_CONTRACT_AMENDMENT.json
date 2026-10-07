@@ -1,0 +1,56 @@
+{
+  "amended_hcl_runtime_sha256": "112cfcd6749bd5c4216aaf580ad3608da85bda5d4d5bc017ebb04ade27aa8e7f",
+  "authorized_additional_calls": 0,
+  "automatic_retry": false,
+  "baseline_commit": "27d2cdfa77436dcbc0511f47c6a0c23b0f6c2c65",
+  "caller_owned_checked_family_gate_optional": true,
+  "changed_runtime_files": [
+    "hcl/cognition/capability_catalog.py",
+    "hcl/cognition/deepseek_metered.py",
+    "hcl/cognition/universal_entry.py"
+  ],
+  "checked_gate_precedes_final_reservation": true,
+  "current_model_plan_requires_explicit_mode": true,
+  "historical_answers_rescored": false,
+  "historical_executors_unchanged": true,
+  "historical_grants_reopened": false,
+  "input_mode_certifies_semantics": false,
+  "insufficient_mode_claims_no_native_execution": true,
+  "literal_c02_checked_metadata_matches_existing_semantic_definition": true,
+  "literal_mode_preserves_complete_source": true,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "maximum_request_bytes": 36000,
+  "model_compliance_or_quality_verified": false,
+  "native_parser_or_result_semantics_changed": false,
+  "old_request_allowance_reused": false,
+  "ordinary_limited_answer_path_preserved": true,
+  "phase_configuration": {
+    "answer": {
+      "max_tokens": 16384,
+      "reasoning_effort": "low"
+    },
+    "planning": {
+      "max_tokens": 16384,
+      "reasoning_effort": "high"
+    }
+  },
+  "previous_hcl_runtime_sha256": "7bbbb74b9877f108bf8052cc252d588302a820f0b8d5d17a9177c76019def12b",
+  "provider_calls": 0,
+  "provider_phases_added": false,
+  "provider_spend_cny": 0,
+  "reader_families": [
+    "B01",
+    "C01",
+    "C02",
+    "C03"
+  ],
+  "reader_input_modes": [
+    "literal",
+    "semantic",
+    "insufficient"
+  ],
+  "reason": "EXPLICIT_READER_INPUT_MODE_AND_BOUNDED_PHASE_COMPLETION",
+  "schema": "hcl-input-phase-contract-amendment-v1",
+  "semantic_anchors_checked_before_dispatch": true,
+  "source_text_changed": false
+}
