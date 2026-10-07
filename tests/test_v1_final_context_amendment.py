@@ -6,14 +6,14 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from scripts import development_native_reader_policy_amendment as amendment
+from scripts import development_plan_pursuit_amendment as amendment
 from scripts import run_two_stage_once as historical
 
 
 class FinalContextAmendmentTests(unittest.TestCase):
     def test_exact_current_runtime_and_only_reviewed_file_are_accepted(self):
         self.assertTrue(amendment.validate_current())
-        self.assertEqual(set(amendment.REVIEWED_FILES), {'hcl/cognition/universal_entry.py'})
+        self.assertEqual(set(amendment.REVIEWED_FILES), {'hcl/cognition/plan_feasibility.py'})
         self.assertTrue(amendment.validate_current(current_digest=amendment.CURRENT_RUNTIME))
         for wrong in ('0' * 64, amendment.PREVIOUS_RUNTIME, ''):
             with self.assertRaisesRegex(ValueError, 'amendment drift'):
@@ -21,7 +21,7 @@ class FinalContextAmendmentTests(unittest.TestCase):
 
     def test_runtime_mutation_and_missing_membership_cannot_be_covered_by_supplied_digest(self):
         original = Path.read_bytes
-        for target in ('hcl/cognition/universal_entry.py', 'hcl/cognition/retained.py',
+        for target in ('hcl/cognition/plan_feasibility.py', 'hcl/cognition/universal_entry.py', 'hcl/cognition/retained.py',
                        'hcl/cognition/deepseek_metered.py'):
             def changed(path):
                 raw = original(path)
