@@ -34,6 +34,26 @@ def _safe_usage(value):
             clean[key]=number
     return clean
 
+
+def _final_context_metrics(payload, messages):
+    """Local size-only diagnostics, not the provider's complete request size.
+
+    Each field size measures its standalone compact JSON value; object keys and
+    punctuation belong to payload_utf8_bytes. Messages include JSON escaping of
+    content, but exclude the provider envelope. No source or plan text is copied.
+    """
+    def size(value):
+        return len(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8'))
+    try:
+        return dict(payload_utf8_bytes=len(messages[-1]['content'].encode('utf-8')),
+            serialized_messages_utf8_bytes=size(messages),
+            payload_value_utf8_bytes={key:size(payload[key]) for key in (
+                'question','sources','hcl_plan','hcl_operations','hcl_execution','knowledge_basis')})
+    except UnicodeEncodeError:
+        # Diagnostics must not change an existing non-UTF-8 offline stub path.
+        # The unchanged provider serializer remains responsible for admission.
+        return dict(utf8_encoding_available=False)
+
 PLANNER_POLICY = (
     'Use your language understanding to interpret the original human/social/narrative/value question, '
     'choose relevant HCL operations and construct their intent-preserving arguments. Return JSON with '
@@ -475,7 +495,9 @@ class UniversalHCL:
                 selected_operations=len(plan['operations']),dispatched_operations=len(receipt['operations']),native_results=native_results)
             self._current(versions,receipt['operations'])
             if not native_results:raise HCLBoundaryError('NATIVE_HCL_RESULT_REQUIRED_BEFORE_ANSWER')
-            final=bounded([dict(role='system',content=_EXPLICIT_CITATION_FINAL_ANSWER_POLICY+' You are answering through HCL orchestration. '
+            final_payload=dict(question=question,sources=[{k:r[k]for k in ('source_id','version','text')}for r in self.sources.values()],
+                hcl_plan=plan,hcl_operations=receipt['operations'],hcl_execution=receipt['hcl_execution'],knowledge_basis='SUPPLIED_SOURCES_AND_EXPLICIT_INTERPRETATION' if versions else 'UNSOURCED_MODEL_KNOWLEDGE')
+            final=[dict(role='system',content=_EXPLICIT_CITATION_FINAL_ANSWER_POLICY+' You are answering through HCL orchestration. '
                 'Use the original question; planned interpretations are conditional, not replacement user requests. '
                 'The answer field must contain a nonblank answer; state an evidence limitation explicitly rather than leaving it empty. '
                 'Use the actual HCL outcomes below. Native execution alone proves neither relevant checked treatment nor correct model interpretation. '
@@ -483,8 +505,9 @@ class UniversalHCL:
                 'Explain material unsupported prerequisites without blanket refusal. With no supplied sources, '
                 'general knowledge and conceptual analysis are UNSOURCED_MODEL_KNOWLEDGE, not source-certified facts; '
                 'source_citations must then be empty. Do not invent evidence or pretend unavailable capabilities executed.'),
-                dict(role='user',content=json.dumps(dict(question=question,sources=[{k:r[k]for k in ('source_id','version','text')}for r in self.sources.values()],
-                    hcl_plan=plan,hcl_operations=receipt['operations'],hcl_execution=receipt['hcl_execution'],knowledge_basis='SUPPLIED_SOURCES_AND_EXPLICIT_INTERPRETATION' if versions else 'UNSOURCED_MODEL_KNOWLEDGE'),ensure_ascii=False,sort_keys=True))])
+                dict(role='user',content=json.dumps(final_payload,ensure_ascii=False,sort_keys=True,separators=(',',':')))]
+            receipt['final_context_metrics']=_final_context_metrics(final_payload,final)
+            final=bounded(final)
             receipt['actual_final_messages']=final
             raw=allowance.call(answer_backend,'answer',final);receipt['answer_raw']=raw
             receipt['final_delivery_code']='RETURNED_UNVALIDATED'

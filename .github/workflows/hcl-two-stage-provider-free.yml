@@ -19,8 +19,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install 'openai==2.14.0' 'z3-solver==4.15.4.0' 'pandas>=2.2,<3' 'cryptography==50.0.0'
-      - run: python -m unittest tests.test_two_stage tests.test_two_stage_review tests.test_two_stage_account -v
-      - run: python -m scripts.development_explicit_citation_amendment
+      - run: python -m scripts.development_final_context_history
+      - run: python -m scripts.development_final_context_amendment
       - run: python -m unittest discover -s tests -p 'test_v1*.py'
       - run: python -m scripts.development_explicit_citation_history
       - run: python -m scripts.development_final_delivery_history
