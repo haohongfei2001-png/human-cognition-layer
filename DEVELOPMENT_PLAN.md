@@ -29,19 +29,20 @@ evidence and are not rewritten as active development policy.
 
 ## Current execution snapshot — 2026-10-07
 
-The latest completed pre-correction baseline is
-`main@61da904bd5de34a974316c0d8188f582d21b9646` (PR #379), whose eight path-selected
-exact-head and exact-main checks passed. Source-version consistency and complete
-code-owned native-policy/shared-context transport are adopted. The current
-[C03 pursuit-uncertainty repair](docs/HCL_PLAN_PURSUIT_UNCERTAINTY.md) keeps missing,
-uncertain or conflicted pursuit evidence unresolved instead of declaring negative
-pursuit. Explicit lifecycle/nonselection controls and all source/belief/model
-boundaries remain separate. It changes no extraction grammar or provider setting.
-Its runtime SHA256 is
-`c13a04ce24d0e830dc903614595124c63d80565226e3d8151c9e88bc3f8746ec`.
-This is provider-free correctness, not a new capability or answer-quality gain.
-This runtime has no live model evaluation; exact-head/main CI supplies adoption
-evidence.
+The latest merged pre-correction baseline is
+`main@92c8990e0c13983ada4b8b88a1480875019fd00e` (PR #380), whose eight exact-head
+and exact-main checks passed.
+Source-version consistency, complete code-owned native-policy/shared-context
+transport and [C03 pursuit uncertainty](docs/HCL_PLAN_PURSUIT_UNCERTAINTY.md) are
+preserved. The current [planner lifecycle contract repair](docs/HCL_PLANNER_LIFECYCLE_CONTRACT.md)
+exposes six existing goal/plan forms and their distinctions to the planning model.
+It changes fixed contract text and removes only structural planning-JSON spaces,
+with all parsed values and embedded string bytes preserved. Native grammar, routing,
+source text, final results and provider settings are unchanged. Its runtime SHA256 is
+`da8349d12f8d13001e565ccdc8dbd6933cdbff5d8ec3b6369823c01925a379e9`.
+This is provider-free API-contract correctness, not a new capability or demonstrated
+model-planning/answer-quality gain. This runtime has no live model evaluation;
+exact-head/main CI supplies adoption evidence.
 
 The [October 6 two-stage CNY experiment](docs/HCL_TWO_STAGE_CNY_20261006_RESULTS.md)
 is completed historical evidence on its separately frozen runtime
@@ -112,9 +113,10 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: END_TO_END_READINESS_AND_LIVE_PREREQUISITES**
 
-Current provider-free work is to finish pursuit-uncertainty correctness acceptance,
+Current provider-free work is to finish planner-lifecycle contract acceptance,
 then independently qualify and freeze the new ordinary-default diagnostic package.
-Source-snapshot and native-policy/shared-context acceptance are complete. Continue complete request/citation/revision
+Source-snapshot, native-policy/shared-context and pursuit-uncertainty repairs are
+merged. Continue complete request/citation/revision
 checks; use no live authority until the remaining exact-package prerequisites are
 met. Statically unsupported candidate inputs must be replaced before freeze and
 before any model output, without parser-specific source rewrites or weaker

@@ -13,11 +13,12 @@ from unittest.mock import patch
 
 from hcl.cognition import universal_entry as current
 from scripts import development_explicit_citation_amendment as amendment
-from scripts.development_plan_pursuit_amendment import validate_current
+from scripts.development_planner_lifecycle_amendment import validate_current
 from scripts import development_final_delivery_amendment as diagnostic_amendment
 from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY, _EXPLICIT_CITATION_FINAL_ANSWER_POLICY
 from scripts.run_four_comparison import accepted, final_fields
 from tests.test_v1_native_reader_policy import expand_native_reader_contexts
+from tests.test_v1_planner_lifecycle_contract import LIFECYCLE_CONTRACT_ADDITION
 
 SOURCE = 'Mara heard the notice.'
 QUESTION = 'What does the source report?'
@@ -142,6 +143,16 @@ class FinalDeliveryTests(unittest.TestCase):
         # policies must match the real adapter before removing that added field
         # from the historical comparison view; arbitrary nested keys stay exact.
         compared = copy.deepcopy(after)
+        # Exact code-owned contract insertion plus structural JSON whitespace only.
+        # Every parsed planning value is still compared with the pinned predecessor.
+        marker = 'For C02 also use NAME: I did ACTION.; '
+        self.assertEqual(current.PLANNER_POLICY, self.previous.PLANNER_POLICY.replace(
+            marker, LIFECYCLE_CONTRACT_ADDITION + marker))
+        for phase, frame in compared['calls']:
+            if phase == 'planning':
+                self.assertEqual(frame[0], dict(role='system', content=current.PLANNER_POLICY))
+                frame[0]['content'] = self.previous.PLANNER_POLICY
+                frame[-1]['content'] = json.dumps(json.loads(frame[-1]['content']), ensure_ascii=False, sort_keys=True)
         if 'final_context_metrics' in compared['receipt']:
             frame = compared['receipt']['actual_final_messages']
             self.assertEqual(compared['receipt'].pop('final_context_metrics'),

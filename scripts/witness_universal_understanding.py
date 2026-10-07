@@ -8,7 +8,7 @@ from types import SimpleNamespace
 from hcl.cognition import UniversalHCL
 from hcl.cognition.deepseek_metered import DeepSeekMeteredPort
 from hcl.cognition.universal_entry import CallAllowance
-from scripts.development_plan_pursuit_amendment import validate_current
+from scripts.development_planner_lifecycle_amendment import validate_current
 from scripts.witness_commitment import SOURCE as PROMISE_SOURCE, QUERY as PROMISE_QUERY
 from scripts.witness_mutual_understanding import SOURCE as ACK_SOURCE, QUERY
 
