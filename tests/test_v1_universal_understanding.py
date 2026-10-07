@@ -53,7 +53,7 @@ class UniversalUnderstandingTests(unittest.TestCase):
         self.assertEqual(contract.question_origin,'OPERATION_QUESTION')
         self.assertEqual((contract.minimum_sources,contract.maximum_sources),(1,1))
         inventory=json.loads(port.calls[0][1][-1]['content'])['capability_inventory']
-        self.assertEqual(next(r for r in inventory if r['capability_id']=='D02'),json.loads(json.dumps(asdict(CATALOG['D02']))))
+        self.assertEqual(next(r for r in inventory if r['capability_id']=='D02'),json.loads(json.dumps({key:value for key,value in asdict(CATALOG['D02']).items() if key!='implementation'})))
         self.assertEqual(run(session,ORIGINAL,Stub(plan()))['operations'],[])
 
     def test_missing_each_delivery_link_remains_incomplete_without_private_comprehension(self):

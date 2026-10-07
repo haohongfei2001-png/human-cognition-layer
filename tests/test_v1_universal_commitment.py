@@ -53,7 +53,7 @@ class UniversalCommitmentTests(unittest.TestCase):
         self.assertEqual(contract.question_forms, ("What is the status of <Speaker>'s promise to <Recipient> to <action>?",))
         session, port, _ = entry()
         inventory = json.loads(port.calls[0][1][-1]['content'])['capability_inventory']
-        self.assertEqual(next(x for x in inventory if x['capability_id'] == 'D01'), json.loads(json.dumps(asdict(CATALOG['D01']))))
+        self.assertEqual(next(x for x in inventory if x['capability_id'] == 'D01'), json.loads(json.dumps({key:value for key,value in asdict(CATALOG['D01']).items() if key!='implementation'})))
         self.assertEqual(run(session, ORIGINAL, Stub(plan()))['operations'], [])
 
     def test_condition_reports_keep_unknown_false_true_and_conflict_distinct(self):

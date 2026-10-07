@@ -29,13 +29,27 @@ evidence and are not rewritten as active development policy.
 
 ## Current execution snapshot — 2026-10-07
 
+The current [executable entry contract](docs/HCL_EXECUTABLE_ENTRY_CONTRACT.md)
+uses the same code-owned source/version conditions in planning and admission.
+Checked callers cannot select literal input when necessary native syntax is
+absent, or ignore known B02/D02 source blockers. Ordinary limited-evidence and
+mixed-outcome answers remain available; source syntax is not semantic support.
+All 40 retained IDs and 14 complete adapter contracts remain visible. Shared mode
+definitions and original-source index bindings preserve eight-source Unicode and
+near-limit wire capacity without dropping source text. This provider-free repair
+has no new live model result or paid authority. Its current runtime SHA256 is
+`50e62d02790f165d1d73fc3275fc6f795da7582b9f81143eaa7aa69806660d16`.
+The [explicit input and phase contract](docs/HCL_INPUT_PHASE_CONTRACT.md) below
+remains in force; its last live failure is historical evidence on runtime
+`112cfcd6749bd5c4216aaf580ad3608da85bda5d4d5bc017ebb04ade27aa8e7f`.
+
 The current [explicit input and phase contract](docs/HCL_INPUT_PHASE_CONTRACT.md)
 requires literal/semantic/insufficient modes for B01/C01/C02/C03 model plans and
 checks semantic anchors before dispatch. Strict callers can require an actual
 checked result in an allowed family before paying for final generation; ordinary
 evidence-limited answers remain available. Planning is fixed at 16,384/high and
 final answering at 16,384/low. Exact-request admission tracks both bounds, with no
-automatic upgrade or retry. Current runtime SHA256 is
+automatic upgrade or retry. Its frozen smoke runtime SHA256 is
 `112cfcd6749bd5c4216aaf580ad3608da85bda5d4d5bc017ebb04ade27aa8e7f`.
 The [single input-phase smoke](docs/HCL_INPUT_PHASE_SMOKE_20261007_RESULTS.md)
 now has a live failure on this runtime: B01 used literal mode without candidates,
@@ -47,13 +61,14 @@ CNY 0.209502 at the peak-rate estimate, not an invoice. No final answer was
 produced; the new CNY 2.30/two-call grant is closed with zero remaining authority.
 No second stage, retry or budget transfer is allowed. This verifies the stopping
 control, not accurate selection, useful native processing or end-to-end success.
-Provider-free work will align executable entry/mode contracts with code-owned
-necessary source conditions while preserving faithful semantic construction and
-honest insufficiency. Any further real call needs a new bounded approval.
-The [optional source-entry blockers](docs/HCL_ENTRY_READINESS.md) add only
-code-owned necessary input-condition observations for B02/D02. No blocker does
-not certify readiness. New metadata is omitted as a whole when it would exceed
-capacity, preserving original messages and the 36KB ceiling.
+The provider-free executable contract above aligns these entry/mode conditions
+while preserving faithful semantic construction and honest insufficiency. Its
+model-selection effect remains untested. Any further real call needs a new bounded approval.
+The earlier [optional source-entry blockers](docs/HCL_ENTRY_READINESS.md) supplied
+code-owned B02/D02 observations and could omit the whole optional group near the
+wire limit. The current executable contract incorporates those conditions with
+compact source-index bindings. No absence of a blocker certifies readiness; the
+36KB ceiling and complete original sources remain unchanged.
 The [entry-routing smoke](docs/HCL_ENTRY_VALIDATION_20261007_RESULTS.md) on prior
 runtime `7bbbb74b9877f108bf8052cc252d588302a820f0b8d5d17a9177c76019def12b` failed end to end: it selected only B01, avoiding the declared
 B02/D02 blockers, but omitted semantic_candidates and produced no checked native

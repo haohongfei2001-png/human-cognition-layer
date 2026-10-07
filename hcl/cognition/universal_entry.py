@@ -3,7 +3,7 @@
 No transport or credential is installed here. A caller must supply metered ports
 and an explicit allowance. Offline stubs establish control flow, not planner quality.
 """
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from decimal import Decimal
 import json
@@ -12,6 +12,7 @@ import threading
 from .capability_catalog import CATALOG, READER_BRIDGE_CAPABILITIES, READER_INPUT_MODES
 from .deepseek_metered import safe_metered_failure_details, bounded_request, MeteredPortError
 from .entry_readiness import literal_entry_blockers
+from .executable_entry import EntryContractError, executable_entry_contract, planner_inventory, validate_executable_operations
 from .workspace import CognitionWorkspace
 from .core import Scope, ClaimKind
 from .reader_entry import _EXPLICIT_CITATION_FINAL_ANSWER_POLICY
@@ -19,6 +20,7 @@ from .retained import audit_supplied_source_citations
 
 _SAFE_FAILURE_CODES = frozenset(('CALL_ALLOWANCE_EXHAUSTED', 'CLOSED_OR_DUPLICATE_PHASE_NO_RETRY', 'COST_ALLOWANCE_EXHAUSTED', 'DURABLE_RESERVATION_JOURNAL_REQUIRED_FOR_PROVIDER', 'METERED_RESPONSE_REQUIRED', 'PLANNER_AND_ANSWER_BACKENDS_AND_TWO_CALL_ALLOWANCE_REQUIRED', 'PLANNER_OR_ANSWER_BACKEND_AND_ALLOWANCE_UNAVAILABLE', 'SOURCE_CHANGED_DURING_ORCHESTRATION', 'SUCCESSFUL_PLANNING_REQUIRED', 'USAGE_OUTSIDE_RESERVED_BOUND', 'answer exceeds bounded contract', 'bounded authorized input required', 'bounded bindings required', 'bounded context required', 'bounded interpreted question required', 'bounded planning plus answer allowance required', 'complete context exceeds budget; no truncation', 'complete sources exceed bound; no truncation', 'duplicate responsibility actor', 'invalid answer schema', 'invalid bounded task plan', 'invalid limitations', 'invented or stale source anchor', 'operation bound exceeded', 'ordinary nonempty question required', 'planning response exceeds bound', 'source count exceeds bound; no silent source dropping', 'unknown capability or operation fields', 'unknown or duplicate source selection', 'unsupported binding or source', 'METERED_BACKEND_OR_JOURNAL_FAILED', 'INVALID_USAGE_METADATA', 'ORCHESTRATION_FAILURE', 'CALL_ALREADY_IN_FLIGHT', 'SOURCE_SUPPORT_CHANGED', 'PLANNER_OR_ANSWER_OUTPUT_BOUND_EXCEEDED'))
 _SAFE_FAILURE_CODES = _SAFE_FAILURE_CODES | {'NATIVE_HCL_RESULT_REQUIRED_BEFORE_ANSWER','NONBLANK_FINAL_ANSWER_REQUIRED','EXPLICIT_READER_INPUT_MODE_REQUIRED','INVALID_READER_INPUT_MODE','REQUIRED_CHECKED_NATIVE_TREATMENT_ABSENT_BEFORE_ANSWER','INVALID_CHECKED_NATIVE_REQUIREMENT'}
+_SAFE_FAILURE_CODES = _SAFE_FAILURE_CODES | {'UNAVAILABLE_ENTRY_NOT_SELECTABLE','SOURCE_ENTRY_NECESSARY_CONDITION_FAILED_BEFORE_NATIVE','LITERAL_ENTRY_NECESSARY_CONDITION_FAILED_BEFORE_NATIVE','TRUSTED_ENTRY_SOURCE_BINDING_CHANGED'}
 
 class HCLBoundaryError(ValueError):
     def __init__(self, code):
@@ -154,7 +156,10 @@ PLANNER_POLICY = (
     'choose relevant HCL operations and construct their intent-preserving arguments. Return JSON with '
     'exactly task, operations, limitations. task is your bounded interpretation, not a source fact. '
     'operations is an array of at most three objects with capability, question, source_ids, bindings and only the input_mode/semantic_candidates fields allowed below. '
-    'Use the supplied current A-H inventory and each available entry_contract to choose only useful operations; do not execute every module blindly. '
+    'Use the supplied A-H inventory, adapter entry_contract and code-owned executable_entry_contract to choose useful operations. '
+    'Contract source_index refers to the unchanged supplied sources array; operation source_ids still use the original IDs. '
+    'In CHECKED_NATIVE_REQUIRED mode, literal requires the capability in that source literal_syntax_capabilities, and any listed source_entry_blocker forbids that capability. '
+    'These necessary syntax conditions are not checked results or semantic relevance. A positive condition does not promise successful execution. '
     'A retained implementation with ADAPTER_REQUIRED is unavailable at this entry; state that limit instead of pretending it executed. '
     'Select one to three useful available operations when their prerequisites permit. A final answer requires an actual native HCL result. '
     'If no supplied contract is relevant or applicable, return empty operations and explain the gap; final-answer generation then stops. '
@@ -169,7 +174,7 @@ PLANNER_POLICY = (
     'Do not force a capability because of a familiar ID or broad family name. Unsupported or empty preparation is not substantive checked treatment. '
     'Preserve the original task in all interpretations; do not replace it with an easier question. '
     'G02 may use a normative rule only if explicitly present in the original user request. '
-    'B01/C01/C02/C03 require input_mode: literal uses the complete original source without semantic_candidates; '
+    'B01/C01/C02/C03 require input_mode: literal uses the complete original source without semantic_candidates and must be selectable for that source; '
     'semantic requires faithful source-anchored semantic_candidates now; insufficient records unavailable faithful input without native execution. '
     'Other capabilities forbid input_mode. Never omit it or choose literal to avoid needed translation; the label certifies neither readiness nor meaning. '
     'For ordinary prose outside native literal forms, construct faithful semantic_candidates for at most ONE relevant '
@@ -192,7 +197,8 @@ PLANNER_POLICY = (
     'NAME: At the time, I could not choose to not ACTION. Do not infer inability from non-action. '
     'These are UNVERIFIED TRANSLATION HYPOTHESES, never literal speech, source facts or private-state truth. '
     'Do not invent motives, emotion, receipt, comprehension or normative premises. All candidates and their full source remain visible to the answerer. '
-    'Omit semantic_candidates for already supported literal input or when no faithful supported translation is possible. '
+    'Use literal only for a selectable literal path; ordinary literal without typed premises yields evidence limits, not checked treatment. '
+    'When no faithful supported translation is possible, select insufficient rather than inventing candidates. '
     'B02 and D02 do not accept semantic_candidates. Native readers are literal checkers, not another LLM. '
     'No automatic extraction call or retry will occur. '
     'limitations is an array of strings. No external lookup or provider subcalls.')
@@ -600,12 +606,16 @@ class UniversalHCL:
         try:
             if planner_backend is None or answer_backend is None or not allowance.authorization_ref or allowance.maximum_calls-len(allowance.attempts)<2:
                 raise HCLBoundaryError('PLANNER_AND_ANSWER_BACKENDS_AND_TWO_CALL_ALLOWANCE_REQUIRED')
+            planning_sources=[dict(source) for source in self.sources.values()]
+            entry_contract=executable_entry_contract(planning_sources,require_checked=bool(required_checked_capabilities))
             messages=bounded([dict(role='system',content=PLANNER_POLICY),dict(role='user',content=json.dumps(dict(
-                question=question,sources=list(self.sources.values()),capability_inventory=[asdict(c)for c in CATALOG.values()]),ensure_ascii=False,sort_keys=True,separators=(',', ':')))])
-            messages=_with_literal_entry_blockers(messages,maximum_context_chars=maximum_context_chars)
+                question=question,sources=planning_sources,capability_inventory=planner_inventory(),
+                executable_entry_contract=entry_contract),ensure_ascii=False,sort_keys=True,separators=(',', ':')))])
             self._current(versions,receipt['operations'])
             raw_plan=allowance.call(planner_backend,'planning',messages)
             self._current(versions,receipt['operations']);plan=self._validate_plan(raw_plan,require_input_modes=True);receipt['plan']=plan
+            try:validate_executable_operations(plan['operations'],entry_contract,planning_sources)
+            except EntryContractError as exc:raise HCLBoundaryError(str(exc)) from None
             receipt['hcl_execution'].update(status='DISPATCHING',selected_operations=len(plan['operations']))
             for operation in plan['operations']:
                 self._current(versions,receipt['operations'])

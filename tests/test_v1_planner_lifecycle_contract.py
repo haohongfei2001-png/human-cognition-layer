@@ -56,17 +56,19 @@ class PlannerLifecycleContractTests(unittest.TestCase):
                 self.assertEqual(len(port.calls), 1)
                 self.assertEqual(result['failure_reason'], 'NATIVE_HCL_RESULT_REQUIRED_BEFORE_ANSWER')
                 content = port.calls[0][1][-1]['content']
+                inventory=[{key:value for key,value in asdict(c).items()
+                            if key!='implementation' and (key!='entry_contract' or value is not None)}
+                           for c in CATALOG.values()]
                 expected = dict(question=question, sources=list(session.sources.values()),
-                                capability_inventory=[asdict(c) for c in CATALOG.values()])
+                                capability_inventory=inventory)
                 actual = json.loads(content)
                 self.assertEqual({key: actual[key] for key in expected}, json.loads(json.dumps(expected)))
-                from hcl.cognition.entry_readiness import literal_entry_blockers
-                from hcl.cognition.universal_entry import _LITERAL_ENTRY_BLOCKER_POLICY
+                from hcl.cognition.executable_entry import executable_entry_contract
                 additions = set(actual) - set(expected)
-                self.assertEqual(additions, {'literal_entry_blockers'})
-                self.assertEqual(actual['literal_entry_blockers'], literal_entry_blockers(expected['sources']))
-                expected['literal_entry_blockers'] = actual['literal_entry_blockers']
-                self.assertEqual(port.calls[0][1][0]['content'], PLANNER_POLICY + _LITERAL_ENTRY_BLOCKER_POLICY)
+                self.assertEqual(additions, {'executable_entry_contract'})
+                self.assertEqual(actual['executable_entry_contract'], executable_entry_contract(expected['sources']))
+                expected['executable_entry_contract'] = actual['executable_entry_contract']
+                self.assertEqual(port.calls[0][1][0]['content'], PLANNER_POLICY)
                 self.assertEqual(json.loads(content)['sources'][0]['text'].encode(), text.encode())
                 request = json.loads(port.encoded['planning'])
                 self.assertEqual(request['messages'][-1]['content'], content)
@@ -88,8 +90,7 @@ class PlannerLifecycleContractTests(unittest.TestCase):
     def test_existing_lifecycle_forms_are_available_in_actual_planning_policy(self):
         _, _, port, _, _ = perform((GOAL, PLAN))
         self.assertEqual(port.calls[0][0], 'planning')
-        from hcl.cognition.universal_entry import _LITERAL_ENTRY_BLOCKER_POLICY
-        self.assertEqual(port.calls[0][1][0]['content'], PLANNER_POLICY + _LITERAL_ENTRY_BLOCKER_POLICY)
+        self.assertEqual(port.calls[0][1][0]['content'], PLANNER_POLICY)
         for form in FORMS:
             with self.subTest(form=form):
                 self.assertIn(form, PLANNER_POLICY)

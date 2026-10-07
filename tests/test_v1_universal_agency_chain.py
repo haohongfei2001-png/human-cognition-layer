@@ -60,7 +60,7 @@ class UniversalAgencyChainTests(unittest.TestCase):
         self.assertEqual(contract.question_forms,('Why did <Actor> <action>, considering their plans and appraisal of <episode>?',))
         session,port,_=entry()
         inventory=json.loads(port.calls[0][1][-1]['content'])['capability_inventory']
-        self.assertEqual(next(r for r in inventory if r['capability_id']=='C05'),json.loads(json.dumps(asdict(CATALOG['C05']))))
+        self.assertEqual(next(r for r in inventory if r['capability_id']=='C05'),json.loads(json.dumps({key:value for key,value in asdict(CATALOG['C05']).items() if key!='implementation'})))
         result=run(session,ORIGINAL,Stub(plan()))
         self.assertEqual(result['operations'],[])
         self.assertFalse(result['answer_gain_established'])

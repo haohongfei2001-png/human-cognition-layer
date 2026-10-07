@@ -96,8 +96,10 @@ class ExplicitInputModeTests(unittest.TestCase):
         self.assertFalse(result['operations'][0]['checked_treatment_present'])
 
     def test_strict_caller_requirement_stops_zero_treatment_before_final_reservation(self):
-        text='The observer records an ordinary scene without admitted typed mental premises.'
-        _,port,result=run([operation('literal')],text,required_checked_capabilities=('B01',))
+        # Literal syntax is present, but the actual query selects another holder.
+        # Necessary admission cannot replace the retained real-treatment gate.
+        text='Nora: I believe the lamp is blue.'
+        _,port,result=run([operation('literal',question='What does Ivo believe?')],text,required_checked_capabilities=('B01',))
         self.assertEqual([p for p,_ in port.calls],['planning'])
         self.assertEqual(result['reserved_attempts'],1)
         self.assertTrue(result['operations'][0]['executed'])
@@ -149,8 +151,8 @@ class ExplicitInputModeTests(unittest.TestCase):
         args['input_mode']='literal' # A disclosed diagnostic variant, never a repaired live plan.
         port=Scripted([args]);result=session.answer(evidence['cases'][0]['question'],planner_backend=port,answer_backend=port,
             allowance=CallAllowance(2,0,'OFFLINE_REPLAY_ONLY'),required_checked_capabilities=('B01',))
-        self.assertEqual(result['failure_reason'],'REQUIRED_CHECKED_NATIVE_TREATMENT_ABSENT_BEFORE_ANSWER')
-        self.assertEqual(len(port.calls),1);self.assertTrue(result['operations'][0]['executed'])
+        self.assertEqual(result['failure_reason'],'LITERAL_ENTRY_NECESSARY_CONDITION_FAILED_BEFORE_NATIVE')
+        self.assertEqual(len(port.calls),1);self.assertEqual(result['operations'],[])
 
 
     def test_previous_real_semantic_args_keep_identical_native_output_with_explicit_mode(self):

@@ -180,7 +180,7 @@ class BoundedMetadataTests(unittest.TestCase):
             if phase=='planning': session.put_source('control','Changed second narrative.')
         port=Stub(plan(operation('B02','What access is reported?',['control'])),callback=update)
         result=run(session,'What does the record support?',port)
-        hints=json.loads(port.calls[0][1][-1]['content'])['literal_entry_blockers']
+        hints=json.loads(port.calls[0][1][-1]['content'])['executable_entry_contract']['sources']
         self.assertTrue(all(x['version']==1 for x in hints))
         self.assertEqual(result['failure_reason'],'SOURCE_CHANGED_DURING_ORCHESTRATION')
         self.assertEqual(result['hcl_execution']['native_results'],0)

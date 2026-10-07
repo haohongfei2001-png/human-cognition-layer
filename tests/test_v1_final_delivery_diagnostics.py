@@ -13,7 +13,7 @@ from unittest.mock import patch
 
 from hcl.cognition import universal_entry as current
 from scripts import development_explicit_citation_amendment as amendment
-from scripts.development_input_phase_contract_amendment import validate_current
+from scripts.development_executable_entry_amendment import validate_current
 from scripts import development_final_delivery_amendment as diagnostic_amendment
 from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY, _EXPLICIT_CITATION_FINAL_ANSWER_POLICY
 from scripts.run_four_comparison import accepted, final_fields
@@ -151,15 +151,24 @@ class FinalDeliveryTests(unittest.TestCase):
                     self.assertEqual(operation.pop('input_mode'),'literal')
         if 'plan' in compared['receipt']:
             remove_verified_input_mode(compared['receipt']['plan'])
-        # Exact code-owned contract insertion plus structural JSON whitespace only.
-        # Every parsed planning value is still compared with the pinned predecessor.
+        # Verify the new source contract and the exact inventory projection before
+        # restoring only those documented wire differences in the historical view.
         marker = 'For C02 also use NAME: I did ACTION.; '
-        from scripts.development_input_phase_contract_amendment import apply_reviewed_planner_contract
+        from scripts.development_executable_entry_amendment import apply_reviewed_planner_contract
         expected_policy = self.previous.PLANNER_POLICY.replace(marker, LIFECYCLE_CONTRACT_ADDITION + marker)
         self.assertEqual(current.PLANNER_POLICY, apply_reviewed_planner_contract(expected_policy))
         for phase, frame in compared['calls']:
             if phase == 'planning':
                 payload = json.loads(frame[-1]['content'])
+                actual_contract = payload.pop('executable_entry_contract')
+                self.assertEqual(actual_contract, current.executable_entry_contract(payload['sources']))
+                from dataclasses import asdict
+                complete_inventory = json.loads(json.dumps([asdict(c) for c in current.CATALOG.values()]))
+                expected_inventory = [{key:value for key,value in row.items()
+                    if key!='implementation' and (key!='entry_contract' or value is not None)}
+                    for row in complete_inventory]
+                self.assertEqual(payload['capability_inventory'], expected_inventory)
+                payload['capability_inventory'] = complete_inventory
                 if 'literal_entry_blockers' in payload:
                     # Remove only the exactly reproduced code-owned optional group.
                     # All original parsed values remain in the predecessor comparison.
