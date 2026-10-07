@@ -30,21 +30,18 @@ evidence and are not rewritten as active development policy.
 ## Current execution snapshot — 2026-10-07
 
 The latest completed pre-correction baseline is
-`main@8f6652c98b4cd0856e3e8d31f67ea73527ebd61d` (PR #378), whose eight path-selected
-exact-main checks passed. Its shared-source version/text guard remains in place.
-The current [native-reader policy repair](docs/HCL_NATIVE_READER_POLICY.md) retains
-each B01/B02/C01/C03 ordinary adapter's code-owned policy beside its unchanged
-native result. Complete identical ordinary-reader result/policy pairs may be
-shared with explicit per-operation references and exact reconstruction; expanded
-receipts are unchanged. Source/model strings do not become policy. Code-owned
-scope/reference instructions preserve the final source/citation rules. Complete
-oversized requests still stop, while the existing three-result capacity fixture
-remains admissible without removing information.
+`main@61da904bd5de34a974316c0d8188f582d21b9646` (PR #379), whose eight path-selected
+exact-head and exact-main checks passed. Source-version consistency and complete
+code-owned native-policy/shared-context transport are adopted. The current
+[C03 pursuit-uncertainty repair](docs/HCL_PLAN_PURSUIT_UNCERTAINTY.md) keeps missing,
+uncertain or conflicted pursuit evidence unresolved instead of declaring negative
+pursuit. Explicit lifecycle/nonselection controls and all source/belief/model
+boundaries remain separate. It changes no extraction grammar or provider setting.
 Its runtime SHA256 is
-`c345acb8a19cbc906487313a789a2ce108d826a81ec7ee2a2e65e5e968544bae`.
-This is provider-free information preservation, not a capability or answer-quality
-gain. This runtime has no live model evaluation; exact-head/main CI supplies
-adoption evidence.
+`c13a04ce24d0e830dc903614595124c63d80565226e3d8151c9e88bc3f8746ec`.
+This is provider-free correctness, not a new capability or answer-quality gain.
+This runtime has no live model evaluation; exact-head/main CI supplies adoption
+evidence.
 
 The [October 6 two-stage CNY experiment](docs/HCL_TWO_STAGE_CNY_20261006_RESULTS.md)
 is completed historical evidence on its separately frozen runtime
@@ -68,9 +65,12 @@ not reuse of either old grant: at most 14 calls/CNY 12, first two calls/CNY 1.70
 then only after the full smoke/source-first gate passes twelve calls/CNY 10.30.
 Planning remains 4,096 and final answers 8,192 tokens with the existing model/high
 configuration; no retry, automatic token upgrade, replacement item or recharge.
-The absolute deadline is 2026-10-07 14:00 UTC. It is not yet activated: both
-reliability repairs, a fresh exact runtime/package freeze and independent review
-of all five ordinary synthetic inputs/rules must be complete first. Historical
+The absolute deadline is 2026-10-07 14:00 UTC. It is not yet activated: the
+source-version and native-policy repairs are adopted, but the current repair,
+fresh exact runtime/package freeze and independent review of all five ordinary
+synthetic inputs/rules must close first. Permission for the minimal structured
+synthetic native evidence needed for source-first review remains pending; public
+workflow artifacts are not treated as private. Historical
 4,096-token source-planning truncation is a known risk, not proof every input
 fails. A failed smoke closes this diagnostic rather than silently switching to
 the historical 16,384-token configuration.
@@ -112,9 +112,9 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: END_TO_END_READINESS_AND_LIVE_PREREQUISITES**
 
-Current provider-free work is to finish native-policy correctness acceptance,
+Current provider-free work is to finish pursuit-uncertainty correctness acceptance,
 then independently qualify and freeze the new ordinary-default diagnostic package.
-Source-snapshot acceptance is complete. Continue complete request/citation/revision
+Source-snapshot and native-policy/shared-context acceptance are complete. Continue complete request/citation/revision
 checks; use no live authority until the remaining exact-package prerequisites are
 met. Statically unsupported candidate inputs must be replaced before freeze and
 before any model output, without parser-specific source rewrites or weaker

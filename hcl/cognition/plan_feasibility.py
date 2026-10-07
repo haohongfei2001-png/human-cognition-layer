@@ -18,6 +18,14 @@ _POLICY = ('Compare conditional plan checks, not verified private beliefs or wor
     'the same as believing not-p. A plan revision does not establish a change of values. '
     'Source-order projection is not verified calendar chronology. Selected plan, '
     'reported goal, opportunity, belief and model condition remain separate.')
+_PURSUIT_POLICY = (' Missing, uncertain or conflicting pursuit evidence is unresolved, '
+    'not evidence of nonpursuit or infeasibility.')
+
+
+def _policy_for_plans(plans):
+    # Select only fixed code-owned text; never promote a payload policy string.
+    return _POLICY + (_PURSUIT_POLICY if any(
+        row['subjective_feasibility'] == 'PURSUIT_UNRESOLVED' for row in plans) else '')
 
 
 def _literal(text):
@@ -55,7 +63,7 @@ class PlanFeasibility:
             payload['shared_agency_reference']=dict(actor=agency['actor'],
                 source_references=payload['shared_source_references'],
                 cognition_sha256=hashlib.sha256(json.dumps(agency,ensure_ascii=False,sort_keys=True).encode()).hexdigest())
-        messages = [dict(role='system', content=_POLICY), dict(role='user',
+        messages = [dict(role='system', content=_policy_for_plans(payload['plans'])), dict(role='user',
             content=json.dumps(payload, ensure_ascii=False, sort_keys=True))]
         if len(json.dumps(messages, ensure_ascii=False)) > max_chars:
             raise ValueError('plan context budget exceeded')
@@ -180,8 +188,12 @@ def check_plan_candidates(workspace, query, semantic, agency, *, source_id, acto
             'DECLARED_CONDITION_MET' if model_values == {expected} else
             'DECLARED_CONDITION_CONTRADICTED' if model_values == {not expected} else 'UNKNOWN')
         eligible = plan['selection'] == 'REPORTED_SELECTED' and plan['goal_status'] == 'ACTIVE'
+        reported_nonpursuit = (plan['selection'] in (
+            'CONSIDERED_NOT_SELECTED', 'REPORTED_ABANDONED', 'REPORTED_COMPLETED')
+            or plan['goal_status'] in ('ABANDONED', 'COMPLETED'))
         opportunity = plan['opportunity']
-        subject_check = ('NOT_CURRENTLY_PURSUED' if not eligible else
+        subject_check = ('NOT_CURRENTLY_PURSUED' if reported_nonpursuit else
+            'PURSUIT_UNRESOLVED' if not eligible else
             'REPORTED_OPPORTUNITY_BLOCKED' if opportunity == 'REPORTED_UNAVAILABLE' else
             'OPPORTUNITY_UNRESOLVED' if opportunity != 'REPORTED_AVAILABLE' else
             'SUPPORTED_UNDER_REPORTED_BELIEFS' if subjective in ('NO_CONDITION', 'AFFIRMED_REQUIRED_CONDITION') else
@@ -209,5 +221,5 @@ def check_plan_candidates(workspace, query, semantic, agency, *, source_id, acto
         belief_transition_receipts=[dict({k: v for k, v in t.items() if k != 'dependency_claim_id'}, original_candidate_id=t['record_id']) for t in snapshot['transitions']],
         temporal_assumption='ORDINAL_SOURCE_ORDER_ADAPTER_NOT_REAL_CALENDAR_TIME',
         source_authority='ACCURATE_SELF_REPORT_AND_DECLARED_MODEL_ARE_CONDITIONS_NOT_FACTS',
-        provider_calls=0, policy=_POLICY)
+        provider_calls=0, policy=_policy_for_plans(results))
     return PlanFeasibility(semantic.scope, versions, json.dumps(payload, ensure_ascii=False, sort_keys=True), tuple(claims))
