@@ -1,0 +1,28 @@
+{
+  "approved_at_bound": "2026-10-07T16:11:19Z",
+  "authorization_ref": "OWNER_APPROVED_HCL_ENTRY_VALIDATION_20261007_6_CALLS_6_CNY",
+  "authorized_calls": 2,
+  "authorized_cny": "2.00",
+  "currency": "CNY",
+  "executor_commit": "f4b9371e9fe2232deb9918c9116be4705b325957",
+  "expires_at": null,
+  "historical_budget_transfer": false,
+  "other_stage_budget_transfer": false,
+  "package_sha256": "cea6e1e6a5f7d25d71c3c54a58b17457b96e7d2cc023927160aa6991548fbdef",
+  "phase1_source_review_sha256": null,
+  "public_native_evidence_permission": {
+    "approval_message_ref": "Sentinel_4108089e6ca88191a84c9314e5adec84",
+    "authorization_ref": "OWNER_APPROVED_HCL_ENTRY_VALIDATION_20261007_6_CALLS_6_CNY",
+    "destination": "https://github.com/haohongfei2001-png/human-cognition-layer",
+    "maximum_case_records": 3,
+    "maximum_operations_per_record": 3,
+    "maximum_record_utf8_bytes": 1048576,
+    "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+    "schema": "hcl-entry-validation-native-public-permission-v1",
+    "scope": "THREE_FROZEN_REGRESSION_CASES_BOUNDED_SOURCE_VALIDATED_NATIVE_EVIDENCE"
+  },
+  "retries": 0,
+  "schema": "hcl-entry-validation-new-grant-v1",
+  "stage": 1,
+  "status": "READY"
+}
