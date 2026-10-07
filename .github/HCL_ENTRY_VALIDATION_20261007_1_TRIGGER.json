@@ -1,0 +1,9 @@
+{
+  "authorization_ref": "OWNER_APPROVED_HCL_ENTRY_VALIDATION_20261007_6_CALLS_6_CNY",
+  "executor_commit": "f4b9371e9fe2232deb9918c9116be4705b325957",
+  "grant_commit": "5f6f4a333a7ae380bb553bd3e9a80e826738587b",
+  "grant_sha256": "19183217a5b43a62d126102674beeedd0cccae1710c3061dc0c2d035e8ec5c71",
+  "package_sha256": "cea6e1e6a5f7d25d71c3c54a58b17457b96e7d2cc023927160aa6991548fbdef",
+  "schema": "hcl-entry-validation-marker-proposal-v1",
+  "stage": 1
+}
