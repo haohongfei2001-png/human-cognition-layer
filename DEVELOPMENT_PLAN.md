@@ -33,7 +33,14 @@ The current ordinary port uses an explicit [16,384-token planning allowance](doc
 with high thinking and an unchanged 8,192-token final allowance. Exact-request
 budget admission and usage bounds track this fixed configuration; there is no
 automatic upgrade or retry. Current runtime SHA256 is
-`a3ace7e929e46a1aebd6cc5706c549abf930189fd032c54ab31298e3742b3672`.
+`7bbbb74b9877f108bf8052cc252d588302a820f0b8d5d17a9177c76019def12b`.
+The [optional source-entry blockers](docs/HCL_ENTRY_READINESS.md) add only
+code-owned necessary input-condition observations for B02/D02. No blocker does
+not certify readiness. New metadata is omitted as a whole when it would exceed
+capacity, preserving original messages and the 36KB ceiling. This slice is
+provider-free; the last real smoke below was frozen to runtime
+`a3ace7e929e46a1aebd6cc5706c549abf930189fd032c54ab31298e3742b3672`
+and does not establish model-selection improvement under the new metadata.
 The source-version, trusted native-policy sharing, C03 pursuit and planner-contract
 repairs previously adopted through PR #381 remain unchanged. This configuration
 repair has provider-free regression coverage; no real model success under the new
@@ -155,17 +162,17 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: OFFLINE_LITERAL_ADAPTER_READINESS_REPAIR**
+**NEXT_READY: VERIFY_OPTIONAL_ENTRY_BLOCKERS_IN_COMPLETE_FLOW**
 
-The single exposed smoke now has independently reviewed relevant B01 treatment
-and complete source-grounded delivery. Continue a small provider-free correction
-to predictable unsupported literal-adapter selection or entry-readiness information,
-using the actual B02/D02 refusals and independent valid/invalid controls. Do not
-rewrite sources, invent candidates, force unrelated operations or block necessary
-model reasoning over the complete original source. D02 empty bindings were valid;
-its strict native source grammar and B02's ordinary access grammar are distinct.
-All three October 7 studies are closed. No second paid planning call, automatic
-retry or reused allowance; any further real diagnostic needs new bounded authority.
+Necessary source-entry blocker observations are implemented with provider-free
+controls and exact capacity fallback. They do not promise valid selection or
+substantive native treatment. After independent review and exact-current CI,
+prepare the next bounded complete-flow diagnostic with source-first criteria and
+explicit new spending authority. Keep the complete original source, real native
+execution and honest insufficiency branches; do not rewrite sources, invent
+candidates, force unrelated operations or treat hints as evidence. The last passed
+single smoke remains evidence on its own prior frozen runtime. All three October 7
+studies are closed; no second planning phase, automatic retry or reused allowance.
 Formal I02-I06 remains incomplete.
 
 A00 plus the 40 A–H runtime packages have their declared construction/correctness

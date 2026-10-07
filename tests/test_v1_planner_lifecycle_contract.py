@@ -58,7 +58,15 @@ class PlannerLifecycleContractTests(unittest.TestCase):
                 content = port.calls[0][1][-1]['content']
                 expected = dict(question=question, sources=list(session.sources.values()),
                                 capability_inventory=[asdict(c) for c in CATALOG.values()])
-                self.assertEqual(json.loads(content), json.loads(json.dumps(expected)))
+                actual = json.loads(content)
+                self.assertEqual({key: actual[key] for key in expected}, json.loads(json.dumps(expected)))
+                from hcl.cognition.entry_readiness import literal_entry_blockers
+                from hcl.cognition.universal_entry import _LITERAL_ENTRY_BLOCKER_POLICY
+                additions = set(actual) - set(expected)
+                self.assertEqual(additions, {'literal_entry_blockers'})
+                self.assertEqual(actual['literal_entry_blockers'], literal_entry_blockers(expected['sources']))
+                expected['literal_entry_blockers'] = actual['literal_entry_blockers']
+                self.assertEqual(port.calls[0][1][0]['content'], PLANNER_POLICY + _LITERAL_ENTRY_BLOCKER_POLICY)
                 self.assertEqual(json.loads(content)['sources'][0]['text'].encode(), text.encode())
                 request = json.loads(port.encoded['planning'])
                 self.assertEqual(request['messages'][-1]['content'], content)
@@ -80,7 +88,8 @@ class PlannerLifecycleContractTests(unittest.TestCase):
     def test_existing_lifecycle_forms_are_available_in_actual_planning_policy(self):
         _, _, port, _, _ = perform((GOAL, PLAN))
         self.assertEqual(port.calls[0][0], 'planning')
-        self.assertEqual(port.calls[0][1][0]['content'], PLANNER_POLICY)
+        from hcl.cognition.universal_entry import _LITERAL_ENTRY_BLOCKER_POLICY
+        self.assertEqual(port.calls[0][1][0]['content'], PLANNER_POLICY + _LITERAL_ENTRY_BLOCKER_POLICY)
         for form in FORMS:
             with self.subTest(form=form):
                 self.assertIn(form, PLANNER_POLICY)
