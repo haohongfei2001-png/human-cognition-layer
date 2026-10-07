@@ -152,7 +152,7 @@ class NormativeFreezeTests(unittest.TestCase):
     def test_amendment_preserves_historical_evidence_and_unrelated_runtime_guards(self):
         from pathlib import Path
         from unittest.mock import patch
-        from scripts.development_semantic_bridge_contract_amendment import validate_current
+        from scripts.development_entry_readiness_amendment import validate_current
         self.assertTrue(validate_current())
         original=Path.read_bytes
         for changed in ('reports/HCL_DEVELOPMENT_COMPLETION_METADATA_AMENDMENT.json',

@@ -53,6 +53,18 @@ def safe_metered_failure_details(error,reservation):
     return result
 
 
+def bounded_request(phase, messages):
+    """Pure existing request serialization/admission; no client, ledger or network."""
+    if phase not in OUTPUT_TOKENS or not isinstance(messages,list)or not messages:
+        raise MeteredPortError('BOUNDED_PHASE_MESSAGES_REQUIRED')
+    if any(not isinstance(m,dict)or set(m)!={'role','content'}or m['role']not in ('system','user','assistant')or not isinstance(m['content'],str)for m in messages):
+        raise MeteredPortError('PLAIN_MESSAGE_SCHEMA_REQUIRED')
+    request=dict(model=MODEL,max_tokens=OUTPUT_TOKENS[phase],response_format={'type':'json_object'},
+        reasoning_effort='high',thinking={'type':'enabled'},messages=[{'role':m['role'],'content':m['content']}for m in messages])
+    encoded=json.dumps(request,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
+    if len(encoded)>MAX_REQUEST_BYTES:raise MeteredPortError('REQUEST_BOUND_EXCEEDED_NO_TRUNCATION')
+    return request,encoded
+
 class DeepSeekMeteredPort:
     provider_free=False
     cost_basis='USAGE_RATED_PEAK_NOT_INVOICE'
@@ -74,15 +86,7 @@ class DeepSeekMeteredPort:
 
     def request(self, phase, messages):
         self._validate_client()
-        if phase not in OUTPUT_TOKENS or not isinstance(messages,list)or not messages:
-            raise MeteredPortError('BOUNDED_PHASE_MESSAGES_REQUIRED')
-        if any(not isinstance(m,dict)or set(m)!={'role','content'}or m['role']not in ('system','user','assistant')or not isinstance(m['content'],str)for m in messages):
-            raise MeteredPortError('PLAIN_MESSAGE_SCHEMA_REQUIRED')
-        request=dict(model=MODEL,max_tokens=OUTPUT_TOKENS[phase],response_format={'type':'json_object'},
-            reasoning_effort='high',thinking={'type':'enabled'},messages=[{'role':m['role'],'content':m['content']}for m in messages])
-        encoded=json.dumps(request,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
-        if len(encoded)>MAX_REQUEST_BYTES:raise MeteredPortError('REQUEST_BOUND_EXCEEDED_NO_TRUNCATION')
-        return request,encoded
+        return bounded_request(phase, messages)
 
     def reservation_usd(self, phase, messages):
         _,encoded=self.request(phase,messages)

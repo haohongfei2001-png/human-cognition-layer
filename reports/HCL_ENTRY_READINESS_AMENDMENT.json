@@ -1,0 +1,48 @@
+{
+  "added_runtime_files": [
+    "hcl/cognition/entry_readiness.py"
+  ],
+  "amended_hcl_runtime_sha256": "7bbbb74b9877f108bf8052cc252d588302a820f0b8d5d17a9177c76019def12b",
+  "answer_quality_improvement_claimed": false,
+  "answer_tokens": 8192,
+  "authorized_additional_calls": 0,
+  "automatic_rerouting": false,
+  "automatic_retry": false,
+  "baseline_commit": "f5f48ad552fae28d6d3141cb1c73771df57a1b16",
+  "blocker_capabilities": [
+    "B02",
+    "D02"
+  ],
+  "changed_runtime_files": [
+    "hcl/cognition/deepseek_metered.py",
+    "hcl/cognition/entry_readiness.py",
+    "hcl/cognition/universal_entry.py"
+  ],
+  "historical_answers_rescored": false,
+  "historical_executors_unchanged": true,
+  "historical_grants_reopened": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "mandatory_native_result_preserved": true,
+  "maximum_request_bytes": 36000,
+  "model_selection_improvement_verified": false,
+  "native_parser_or_results_changed": false,
+  "native_receipts_created_by_hints": false,
+  "native_views_prerun": false,
+  "no_blocker_certifies_readiness": false,
+  "optional_metadata_all_or_none": true,
+  "original_messages_preserved_on_capacity_omission": true,
+  "original_no_hint_request_hash_preserved": true,
+  "planning_tokens": 16384,
+  "previous_hcl_runtime_sha256": "a3ace7e929e46a1aebd6cc5706c549abf930189fd032c54ab31298e3742b3672",
+  "provider_calls": 0,
+  "provider_phases_changed": false,
+  "provider_spend_cny": 0,
+  "pure_request_serializer_shared_with_existing_port": true,
+  "reason": "OPTIONAL_SOURCE_VERSION_BOUND_NECESSARY_LITERAL_ENTRY_BLOCKERS",
+  "same_parser_regex_objects_reused": true,
+  "schema": "hcl-entry-readiness-amendment-v1",
+  "serialization_touches_ledger": false,
+  "source_snapshot_guard_preserved": true,
+  "source_text_changed": false,
+  "source_version_bound": true
+}

@@ -10,7 +10,8 @@ import json
 import hashlib
 import threading
 from .capability_catalog import CATALOG
-from .deepseek_metered import safe_metered_failure_details
+from .deepseek_metered import safe_metered_failure_details, bounded_request, MeteredPortError
+from .entry_readiness import literal_entry_blockers
 from .workspace import CognitionWorkspace
 from .core import Scope, ClaimKind
 from .reader_entry import _EXPLICIT_CITATION_FINAL_ANSWER_POLICY
@@ -54,6 +55,35 @@ def _final_context_metrics(payload, messages):
         # Diagnostics must not change an existing non-UTF-8 offline stub path.
         # The unchanged provider serializer remains responsible for admission.
         return dict(utf8_encoding_available=False)
+
+
+
+_LITERAL_ENTRY_BLOCKER_POLICY = (
+    ' literal_entry_blockers are code-owned necessary-condition observations bound to source_id and version for B02/D02. '
+    'They are not source facts, semantic relevance, checked treatment or execution receipts. '
+    'No blocker does not certify an operation can work. Choose relevant supported operations; do not rewrite the source to remove a blocker. ')
+
+
+def _with_literal_entry_blockers(messages, *, maximum_context_chars):
+    """Optional bounded metadata; preserve the exact original message on omission."""
+    payload = json.loads(messages[-1]['content'])
+    blockers = literal_entry_blockers(payload['sources'])
+    if not blockers:
+        return messages
+    payload['literal_entry_blockers'] = blockers
+    augmented = [dict(role='system', content=messages[0]['content'] + _LITERAL_ENTRY_BLOCKER_POLICY),
+                 dict(role='user', content=json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(',', ':')))]
+    if len(json.dumps(augmented, ensure_ascii=False)) > maximum_context_chars:
+        return messages
+    try:
+        bounded_request('planning', augmented)
+    except UnicodeEncodeError:
+        return messages
+    except MeteredPortError as error:
+        if str(error) != 'REQUEST_BOUND_EXCEEDED_NO_TRUNCATION':
+            raise
+        return messages
+    return augmented
 
 
 _NATIVE_POLICY_SCOPE = (
@@ -536,6 +566,7 @@ class UniversalHCL:
                 raise HCLBoundaryError('PLANNER_AND_ANSWER_BACKENDS_AND_TWO_CALL_ALLOWANCE_REQUIRED')
             messages=bounded([dict(role='system',content=PLANNER_POLICY),dict(role='user',content=json.dumps(dict(
                 question=question,sources=list(self.sources.values()),capability_inventory=[asdict(c)for c in CATALOG.values()]),ensure_ascii=False,sort_keys=True,separators=(',', ':')))])
+            messages=_with_literal_entry_blockers(messages,maximum_context_chars=maximum_context_chars)
             self._current(versions,receipt['operations'])
             raw_plan=allowance.call(planner_backend,'planning',messages)
             self._current(versions,receipt['operations']);plan=self._validate_plan(raw_plan);receipt['plan']=plan

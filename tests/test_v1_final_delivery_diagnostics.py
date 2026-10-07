@@ -13,7 +13,7 @@ from unittest.mock import patch
 
 from hcl.cognition import universal_entry as current
 from scripts import development_explicit_citation_amendment as amendment
-from scripts.development_semantic_bridge_contract_amendment import validate_current
+from scripts.development_entry_readiness_amendment import validate_current
 from scripts import development_final_delivery_amendment as diagnostic_amendment
 from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY, _EXPLICIT_CITATION_FINAL_ANSWER_POLICY
 from scripts.run_four_comparison import accepted, final_fields
@@ -146,14 +146,24 @@ class FinalDeliveryTests(unittest.TestCase):
         # Exact code-owned contract insertion plus structural JSON whitespace only.
         # Every parsed planning value is still compared with the pinned predecessor.
         marker = 'For C02 also use NAME: I did ACTION.; '
-        from scripts.development_semantic_bridge_contract_amendment import apply_reviewed_planner_contract
+        from scripts.development_entry_readiness_amendment import apply_reviewed_planner_contract
         expected_policy = self.previous.PLANNER_POLICY.replace(marker, LIFECYCLE_CONTRACT_ADDITION + marker)
         self.assertEqual(current.PLANNER_POLICY, apply_reviewed_planner_contract(expected_policy))
         for phase, frame in compared['calls']:
             if phase == 'planning':
-                self.assertEqual(frame[0], dict(role='system', content=current.PLANNER_POLICY))
+                payload = json.loads(frame[-1]['content'])
+                if 'literal_entry_blockers' in payload:
+                    # Remove only the exactly reproduced code-owned optional group.
+                    # All original parsed values remain in the predecessor comparison.
+                    actual_blockers = payload.pop('literal_entry_blockers')
+                    self.assertEqual(actual_blockers, current.literal_entry_blockers(payload['sources']))
+                    base = [dict(role='system', content=current.PLANNER_POLICY),
+                            dict(role='user', content=json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(',', ':')))]
+                    self.assertEqual(frame, current._with_literal_entry_blockers(base, maximum_context_chars=128000))
+                else:
+                    self.assertEqual(frame[0], dict(role='system', content=current.PLANNER_POLICY))
                 frame[0]['content'] = self.previous.PLANNER_POLICY
-                frame[-1]['content'] = json.dumps(json.loads(frame[-1]['content']), ensure_ascii=False, sort_keys=True)
+                frame[-1]['content'] = json.dumps(payload, ensure_ascii=False, sort_keys=True)
         if 'final_context_metrics' in compared['receipt']:
             frame = compared['receipt']['actual_final_messages']
             self.assertEqual(compared['receipt'].pop('final_context_metrics'),
