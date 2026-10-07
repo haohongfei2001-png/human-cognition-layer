@@ -67,7 +67,7 @@ class NonblankAnswerTests(unittest.TestCase):
         class EmptySDK(FakeClient):
             def create(self,**request):
                 result=super().create(**request)
-                content=plan(operation('G01','Prepare the caller condition.',[]))if request['max_tokens']==4096 else body(' ',sourced=False)
+                content=plan(operation('G01','Prepare the caller condition.',[]))if request['max_tokens']==16384 else body(' ',sourced=False)
                 result['choices'][0]['message']['content']=json.dumps(content)
                 return result
         client=EmptySDK();port=DeepSeekMeteredPort(client);journal=[]

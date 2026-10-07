@@ -29,13 +29,15 @@ evidence and are not rewritten as active development policy.
 
 ## Current execution snapshot — 2026-10-07
 
-The adopted runtime is `main@cf43f8fe8f9705cfc570f34224beb3095d2ee8c5` (PR #381),
-whose eight exact-head and exact-main checks passed. Source-version consistency,
-complete code-owned native-policy/shared-context transport,
-[C03 pursuit uncertainty](docs/HCL_PLAN_PURSUIT_UNCERTAINTY.md) and the
-[planner lifecycle/lossless JSON contract](docs/HCL_PLANNER_LIFECYCLE_CONTRACT.md)
-are adopted. Runtime SHA256 is
-`da8349d12f8d13001e565ccdc8dbd6933cdbff5d8ec3b6369823c01925a379e9`.
+The current ordinary port uses an explicit [16,384-token planning allowance](docs/HCL_ORDINARY_PLANNING_ALLOWANCE.md)
+with high thinking and an unchanged 8,192-token final allowance. Exact-request
+budget admission and usage bounds track this fixed configuration; there is no
+automatic upgrade or retry. Current runtime SHA256 is
+`e621355a10ad6d2da716ed64d244f6c3f69bdc0dcd59cf91673d7ba4b2b05cac`.
+The source-version, trusted native-policy sharing, C03 pursuit and planner-contract
+repairs previously adopted through PR #381 remain unchanged. This configuration
+repair has provider-free regression coverage; no real model success under the new
+current default is established by those tests.
 The [October 7 ordinary-default diagnostic](docs/HCL_RELIABILITY_20261007_RESULTS.md)
 ran once after the reviewed package and both owner approvals. Its first planning
 request consumed 4,096 completion tokens and returned an incomplete response;
@@ -123,7 +125,7 @@ unchanged. No LongMemEval access or leaderboard activation.
 The ordinary-default smoke is failed and closed. Next is provider-free diagnosis
 of planning completion and a separately reviewed general repair, if supported by
 evidence. Preserve actual failed results, all frozen cases/rules/package/runtime
-and the unchanged native-execution requirement. Do not silently increase 4,096,
+and the unchanged native-execution requirement. Do not silently increase a frozen allowance,
 truncate sources, swap cases or disable HCL. Any new real model experiment requires
 new bounded authorization; neither the unused smoke allowance nor the unactivated
 comparison allowance can be reused. Formal I02-I06 remains incomplete.

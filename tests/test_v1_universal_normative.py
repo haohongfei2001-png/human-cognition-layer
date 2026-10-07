@@ -127,12 +127,16 @@ class NormativeFreezeTests(unittest.TestCase):
     def test_historical_request_stays_exact_and_closed_package_cannot_launch(self):
         from pathlib import Path
         from types import SimpleNamespace
-        from scripts.run_planning_diagnostic import messages,REQUEST_SHA,RESERVE,PACKAGE,GRANT,require_grant,digest
+        from decimal import Decimal
+        from scripts.run_planning_diagnostic import messages,REQUEST_SHA,RESERVE,PACKAGE,GRANT,FROZEN_REQUEST,require_grant,digest
         from hcl.cognition.deepseek_metered import DeepSeekMeteredPort
         client=SimpleNamespace(max_retries=0,base_url='https://api.deepseek.com',timeout=180)
         port=DeepSeekMeteredPort(client);request,encoded=port.request('planning',messages())
-        self.assertEqual(digest(request),REQUEST_SHA);self.assertEqual(len(encoded),9047)
-        self.assertEqual(port.reservation_usd('planning',messages()),RESERVE)
+        historical=json.loads(FROZEN_REQUEST.read_text())
+        self.assertEqual(digest(historical),REQUEST_SHA)
+        self.assertEqual(len(json.dumps(historical,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()),9047)
+        self.assertEqual(request,dict(historical,max_tokens=16384));self.assertEqual(len(encoded),9048)
+        self.assertGreater(Decimal(port.reservation_usd('planning',messages())),Decimal(RESERVE))
         with self.assertRaises(ValueError):require_grant(json.loads(PACKAGE.read_text()),json.loads(GRANT.read_text()))
         self.assertFalse(Path('.github/workflows/hcl-planning-diagnostic-once.yml').exists())
         self.assertFalse(Path('.github/workflows/hcl-universal-development-once.yml').exists())
@@ -148,7 +152,7 @@ class NormativeFreezeTests(unittest.TestCase):
     def test_amendment_preserves_historical_evidence_and_unrelated_runtime_guards(self):
         from pathlib import Path
         from unittest.mock import patch
-        from scripts.development_planner_lifecycle_amendment import validate_current
+        from scripts.development_planning_allowance_amendment import validate_current
         self.assertTrue(validate_current())
         original=Path.read_bytes
         for changed in ('reports/HCL_DEVELOPMENT_COMPLETION_METADATA_AMENDMENT.json',

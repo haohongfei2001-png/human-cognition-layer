@@ -11,7 +11,10 @@ import threading
 
 MODEL='deepseek-v4-pro'
 MAX_REQUEST_BYTES=36000
-OUTPUT_TOKENS={'planning':4096,'answer':8192}
+# A fixed ordinary request allowance, not a provider limit or automatic retry.
+# Thinking and visible planning share the completion allowance. Existing callers
+# must reserve this exact request before the SDK may send it.
+OUTPUT_TOKENS={'planning':16384,'answer':8192}
 OUTPUT_MARGIN=32
 INPUT_RATE=Decimal('1.32')
 OUTPUT_RATE=Decimal('3.96')
