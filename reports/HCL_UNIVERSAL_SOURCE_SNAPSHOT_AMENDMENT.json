@@ -1,0 +1,33 @@
+{
+  "amended_hcl_runtime_sha256": "9f3ef69e16d21e5e17ab86725b2fa5696106e944cd646336c7ab6605056e1213",
+  "answer_quality_improvement_claimed": false,
+  "authorized_additional_calls": 0,
+  "baseline_commit": "cd3fa7fffbbfd2caa746812061a0def2edda90fe",
+  "changed_runtime_files": [
+    "hcl/cognition/universal_entry.py"
+  ],
+  "context_limit_changed": false,
+  "entry": "UniversalHCL._current",
+  "historical_answers_rescored": false,
+  "historical_executors_unchanged": true,
+  "historical_failure_cause_identified": false,
+  "historical_grants_reopened": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "model_or_token_defaults_changed": false,
+  "native_dispatch_changed": false,
+  "native_payload_changed": false,
+  "original_citation_audit_changed": false,
+  "previous_hcl_runtime_sha256": "5e58ad59e7d048098978dbb45a11d714d1e54967286d7a552b765e8c017bb35f",
+  "provider_calls": 0,
+  "provider_envelope_changed": false,
+  "provider_phases_changed": false,
+  "provider_spend_cny": 0,
+  "reason": "RECHECK_SHARED_WORKSPACE_SOURCE_VERSION_AND_EXACT_TEXT",
+  "schema": "hcl-universal-source-snapshot-amendment-v1",
+  "source_identity_check_added": true,
+  "source_removal_fail_closed": true,
+  "source_text_changed": false,
+  "system_policy_changed": false,
+  "unrelated_workspace_sources_preserved": true,
+  "valid_same_version_derived_state_preserved": true
+}

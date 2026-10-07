@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from scripts import development_final_context_amendment as amendment
+from scripts import development_universal_source_amendment as amendment
 from scripts import run_two_stage_once as historical
 
 
@@ -53,7 +53,7 @@ class FinalContextAmendmentTests(unittest.TestCase):
                 self.assertEqual(grant['status'], 'CLOSED_NO_TRANSFER_NO_RETRY')
                 self.assertEqual(grant['remaining_authorized_calls'], 0)
                 self.assertEqual(grant['remaining_authorized_cny'], '0')
-                self.assertEqual(historical.RUNTIME, amendment.PREVIOUS_RUNTIME)
+                self.assertEqual(historical.RUNTIME, amendment.CONSUMED_CNY_RUNTIME)
                 self.assertNotEqual(historical.RUNTIME, amendment.CURRENT_RUNTIME)
                 with tempfile.TemporaryDirectory() as directory:
                     destination = Path(directory) / 'must-not-exist'
