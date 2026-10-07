@@ -1,0 +1,69 @@
+# No fixed calendar expiry; every send requires 180 seconds of remaining stage window.
+# Terminal export closes/reports existing holds only; it never resumes a consumed stage.
+# PROPOSAL ONLY. Copy only after final runtime/cases/review/permission freeze.
+name: HCL entry validation 20261007 stage 2 one approved invocation
+on:
+  push:
+    branches: [main]
+    paths: ['.github/HCL_ENTRY_VALIDATION_20261007_2_TRIGGER.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: hcl-entry-validation-20261007-2-once
+  cancel-in-progress: false
+env:
+  PYTHONPATH: .github/frozen/hcl-entry-validation-20261007/executor:.
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  verification:
+    if: github.repository == 'haohongfei2001-png/human-cognition-layer' && github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact existing diagnostic dependencies
+        run: python -m pip install 'openai==2.14.0' 'z3-solver==4.15.4.0'
+      - name: Verify final package, repaired runtime, new authority and publication permission
+        run: python -m hcl_entry_validation_cli --stage 2 --preflight
+      - name: Provider-free executor, disclosure and launch tests
+        run: python -m unittest discover -s .github/frozen/hcl-entry-validation-20261007/executor/tests -v
+      - name: Existing secret presence only
+        env:
+          SECRET_PRESENT: ${{ secrets.DEEPSEEK_API_KEY != '' }}
+        run: python -m hcl_entry_validation_cli --stage 2 --write-presence
+      - name: Exact-pinned official peak-price reader, no model call
+        run: python -m scripts.two_stage_price --output /tmp/hcl-entry-validation-20261007-2/prices.json
+      - name: Exact-pinned existing account readiness only, no model call
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: python -m scripts.two_stage_account --output /tmp/hcl-entry-validation-20261007-2/account.json --require-cny
+      - name: Complete workflow history and one-marker launch admission
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-entry-validation-20261007-2-once.yml/runs?per_page=100" > /tmp/hcl-entry-validation-20261007-2/runs.json
+          python -m hcl_entry_validation_cli --stage 2 --check-launch
+      - name: One bounded stage, same existing-account client and zero SDK retries
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: python -m hcl_entry_validation_cli --stage 2 --execute
+      - name: Close interrupted state and export only explicitly approved evidence
+        if: always()
+        run: |
+          if test -f hcl-entry-validation-20261007-2-private/receipt.json; then
+            python -m hcl_entry_validation_cli --stage 2 --export
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-entry-validation-20261007-2-approved-public-${{ github.run_id }}
+          path: hcl-entry-validation-20261007-2-public.json
+          if-no-files-found: warn
+# NEVER upload *-private/, native-review-private.json, SDK envelopes or raw logs.
