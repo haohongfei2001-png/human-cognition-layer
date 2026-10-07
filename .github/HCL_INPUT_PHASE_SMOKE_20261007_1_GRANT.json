@@ -3,13 +3,19 @@
   "authorization_ref": "OWNER_APPROVED_HCL_INPUT_PHASE_SMOKE_20261007_2_CALLS_2_30_CNY",
   "authorized_calls": 2,
   "authorized_cny": "2.30",
+  "closed_head_sha": "1615a5e649032d8227c46fa3e6cc3f97cff59bf7",
+  "closed_reason": "REQUIRED_CHECKED_NATIVE_ABSENT_STOPPED_BEFORE_FINAL_NO_RETRY",
+  "closed_run_id": "37683890181",
   "currency": "CNY",
   "executor_commit": "d47936f4c410ce9ff9dee6ef32c7068b25c23330",
   "expires_at": null,
   "historical_budget_transfer": false,
+  "invoice_cost_cny": null,
+  "original_ready_grant_sha256": "9cea04f8df923839fabf04b0084743bbf00eb6ae8792fd76410f6c1c7fe47f95",
   "other_stage_budget_transfer": false,
   "package_sha256": "24134c0d0c78e22a1a2c3c4df3779fcd8944571831efeda0689c7ee327c62548",
   "phase1_source_review_sha256": null,
+  "provider_calls": 1,
   "public_native_evidence_permission": {
     "approval_message_ref": "Sentinel_f5033df85a788191be71bfb387c7df6e",
     "authorization_ref": "OWNER_APPROVED_HCL_INPUT_PHASE_SMOKE_20261007_2_CALLS_2_30_CNY",
@@ -21,8 +27,12 @@
     "schema": "hcl-input-phase-smoke-native-public-permission-v1",
     "scope": "ONE_FROZEN_REGRESSION_SMOKE_BOUNDED_SOURCE_VALIDATED_NATIVE_EVIDENCE"
   },
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_cny": "0",
+  "reserved_cny": "1.109664",
   "retries": 0,
   "schema": "hcl-input-phase-smoke-new-grant-v1",
   "stage": 1,
-  "status": "READY"
+  "status": "CLOSED_NO_TRANSFER_NO_RETRY",
+  "usage_rated_cny": "0.209502"
 }
