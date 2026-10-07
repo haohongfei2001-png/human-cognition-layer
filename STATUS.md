@@ -24,17 +24,22 @@ complete code-owned native-policy/shared-context transport,
 [planner lifecycle/lossless JSON contract](docs/HCL_PLANNER_LIFECYCLE_CONTRACT.md)
 are adopted. Runtime SHA256 is
 `da8349d12f8d13001e565ccdc8dbd6933cdbff5d8ec3b6369823c01925a379e9`.
-The [new ordinary-default diagnostic preparation](docs/HCL_RELIABILITY_20261007.md)
-freezes five independently qualified synthetic cases and a reviewed bounded
-executor, without a grant or trigger. Its canonical package SHA256 is
+The [October 7 ordinary-default diagnostic](docs/HCL_RELIABILITY_20261007_RESULTS.md)
+ran once after the reviewed package and both owner approvals. Its first planning
+request consumed 4,096 completion tokens and returned an incomplete response;
+there was no native HCL execution and no final answer. The smoke failed and stopped
+without a retry. The four-pair comparison was not activated.
+
+The frozen package remains
 `0d8530ce5c2838015141423aa97fa701752583fbdd9f83b97ccb90b383bec5e4`.
-The 98 executor tests and prior runtime tests establish provider-free correctness,
-not model planning, answer quality or final I02-I06 completion. This runtime has
-zero new live model calls. Package adoption is complete in
-[PR #382](https://github.com/haohongfei2001-png/human-cognition-layer/pull/382),
-merged at `683330c8d1210b0e3b96297639f00de349d306cb`, with all three exact-head and
-exact-main checks passed, including the 98 hosted executor tests. The separate
-native-evidence disclosure permission remains pending; no grant or trigger exists.
+Its preparation/CI success establishes offline correctness only. The exact live
+run was [37610274523](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/37610274523)
+on `88b8e48c2ca989d15e7642172dfd68d056a4ff1d`. It made one model request:
+6,376 prompt and 4,096 completion tokens, CNY 0.167976 peak-rate usage estimate
+(not an invoice), with the full CNY 0.777888 authorization hold retained.
+The new grant is closed with zero remaining call or money authority; the unopened
+second stage and all unused ceiling amounts are unavailable for another attempt.
+This does not validate ordinary end-to-end reliability or final I02-I06.
 
 The [October 6 two-stage CNY experiment](docs/HCL_TWO_STAGE_CNY_20261006_RESULTS.md)
 is completed historical evidence on its separately frozen runtime
@@ -53,20 +58,18 @@ is not a verified invoice; unused parts of the historical 14-call/CNY 14 ceiling
 are not reusable. Earlier generic development authorization wording does not
 reopen these consumed grants.
 
-A separate October 7 owner approval permits a new ordinary-default diagnostic,
-not reuse of either old grant: at most 14 calls/CNY 12, first two calls/CNY 1.70,
-then only after the full smoke/source-first gate passes twelve calls/CNY 10.30.
-Planning remains 4,096 and final answers 8,192 tokens with the existing model/high
-configuration; no retry, automatic token upgrade, replacement item or recharge.
-The absolute deadline is 2026-10-07 14:00 UTC. It is not yet activated: all four
-reliability repairs are adopted; the five cases, exact package and bounded executor
-have independent review and package adoption/CI is complete. Permission for the
-minimal structured synthetic native evidence needed for source-first review remains
-pending; it must precede any new grant/marker activation or external provider work.
-Public workflow artifacts are not treated as private. Historical
-4,096-token source-planning truncation is a known risk, not proof every input
-fails. A failed smoke closes this diagnostic rather than silently switching to
-the historical 16,384-token configuration.
+The October 7 approval was a separate, bounded diagnostic: at most 14 calls/CNY 12,
+first two calls/CNY 1.70, then only after a complete smoke pass twelve calls/CNY 10.30.
+Both the fee approval and bounded synthetic native-evidence disclosure approval
+were verified before activation. Planning stayed 4,096/high, final allowance 8,192,
+and the complete request bound stayed 36,000 bytes. The first request was 30,338
+bytes, within that bound. Its incomplete planning return failed the smoke before
+native execution; no final request was sent. No retry, token/model upgrade,
+replacement case, recharge, or stage-two grant was created. The original absolute
+expiry was 2026-10-07 14:00 UTC; failure closed the diagnostic earlier. Public
+workflow artifacts are public evidence, not a private route. The exact response
+finish reason and reasoning/content breakdown were not exported, so no claim that
+all completion tokens were hidden reasoning is supported by the public record.
 
 ## Current phase
 
@@ -128,20 +131,15 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: END_TO_END_READINESS_AND_LIVE_PREREQUISITES**
+**NEXT_READY: OFFLINE_ORDINARY_PLANNER_RELIABILITY_DIAGNOSIS**
 
-The independently reviewed ordinary-default reliability package is adopted and
-its exact-head/main CI is complete. The next conditional step is the protected
-stage-one grant/marker and source-first smoke, only after explicit permission for
-the bounded native-evidence disclosure. No grant, trigger or provider invocation
-exists for this new diagnostic. Frozen cases, rules, runtime and package must remain fixed; ordinary
-provider-free engineering may continue without spending or evidence upgrades.
-Statically unsupported candidate inputs must be replaced before freeze and
-before any model output, without parser-specific source rewrites or weaker
-relevance gates. Ordinary engineering can
-continue without reopening a paid run. Historical failed outputs and scores stay
-unchanged; actual post-repair model delivery and benefit require new authorized
-measurements.
+The ordinary-default smoke is failed and closed. Next is provider-free diagnosis
+of planning completion and a separately reviewed general repair, if supported by
+evidence. Preserve actual failed results, all frozen cases/rules/package/runtime
+and the unchanged native-execution requirement. Do not silently increase 4,096,
+truncate sources, swap cases or disable HCL. Any new real model experiment requires
+new bounded authorization; neither the unused smoke allowance nor the unactivated
+comparison allowance can be reused. Formal I02-I06 remains incomplete.
 
 A00 plus the 40 A–H runtime packages have their declared construction/correctness
 status, not a product-completion percentage. The current

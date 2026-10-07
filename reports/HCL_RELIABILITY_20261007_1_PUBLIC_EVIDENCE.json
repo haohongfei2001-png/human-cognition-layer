@@ -1,0 +1,209 @@
+{
+  "answer_tokens": 8192,
+  "approved_native_evidence": {
+    "destination": "https://github.com/haohongfei2001-png/human-cognition-layer",
+    "package_sha256": "0d8530ce5c2838015141423aa97fa701752583fbdd9f83b97ccb90b383bec5e4",
+    "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+    "permission_sha256": "94cae314d6d9b2280be9cd86279377556709160b23190ec302e5ac0c8c065ede",
+    "receipt_sha256": "508fdd526b40788ab81c7437ae147a20a00c3003d7836ffe5e8f6d08d1936ece",
+    "record_count": 1,
+    "records": [
+      {
+        "actual_executed_count": 0,
+        "actual_operation_count": 0,
+        "arm": "HCL",
+        "case_id": "reliability-20261007-smoke-flute",
+        "native_projection_sha256": "284715c39ed9f910cba251008464c74abe3897a15687a95e9c32bf1bcde8c587",
+        "operations": [],
+        "original_question_sha256": "13f53d14251887388fd90c78b9f01dc745b0509490c0972e7ab478edba88c905",
+        "private_native_review_sha256": "fd09cbd25d00e81a95287934e63d009dfbf366805037d26765cc322578a6ee66",
+        "runtime_sha256": "da8349d12f8d13001e565ccdc8dbd6933cdbff5d8ec3b6369823c01925a379e9",
+        "schema": "hcl-reliability-approved-native-record-v1",
+        "source_roots": [
+          {
+            "source_id": "flute-observer-record",
+            "text_sha256": "eb7fbe52cc1d86e3c09bb70d65ba086ef334e67431fa2c44cc0c74b956f9edd6",
+            "version": 1
+          }
+        ]
+      }
+    ],
+    "reviewed_native_relevance": false,
+    "schema": "hcl-reliability-approved-native-evidence-v1",
+    "semantic_certification": false,
+    "stage": 1
+  },
+  "arms": [
+    {
+      "arm": "HCL",
+      "arm_seconds": 45.924734942,
+      "case_id": "reliability-20261007-smoke-flute",
+      "checked_treatment": [],
+      "citations_accepted": false,
+      "executed_capabilities": [],
+      "final_answer_sha256": null,
+      "final_delivery_code": "NOT_REACHED",
+      "final_fields": null,
+      "final_request_full_sha256": null,
+      "final_request_full_utf8_bytes": null,
+      "final_text": null,
+      "full_request_metrics_unavailable_reason": "ANSWER_PHASE_NOT_REACHED",
+      "native_projection_sha256": "284715c39ed9f910cba251008464c74abe3897a15687a95e9c32bf1bcde8c587",
+      "native_projection_status": "CAPTURED",
+      "native_results": 0,
+      "native_review_available": true,
+      "native_review_sha256": "fd09cbd25d00e81a95287934e63d009dfbf366805037d26765cc322578a6ee66",
+      "non_sdk_seconds": 0.5210097370000071,
+      "request_diagnostics": [
+        {
+          "full_request_sha256": "5d1d85113dba32f829c739908ee35673eb89aedccd936c702e7b45b5f6c0f7b6",
+          "full_request_utf8_bytes": 30338,
+          "maximum_request_bytes": 36000,
+          "payload_utf8_bytes": 24215,
+          "payload_value_utf8_bytes": {
+            "capability_inventory": 22545,
+            "question": 195,
+            "sources": 1427
+          },
+          "phase": "planning",
+          "serialized_messages_sha256": "9adf4a0e9493bce1ebb62d4eb2ad994951014e30c77bb93dd4a2cb0ac2c407f6",
+          "serialized_messages_utf8_bytes": 30184,
+          "within_request_bound": true
+        }
+      ],
+      "runtime_final_context_metrics": null,
+      "sdk_seconds": 45.40372520499999,
+      "selected_capabilities": [],
+      "status": "INCOMPLETE_ANSWER_NO_RETRY"
+    }
+  ],
+  "authorization_expiry_utc": "2026-10-07T14:00:00Z",
+  "authorization_ref": "OWNER_APPROVED_HCL_RELIABILITY_20261007_14_CALLS_12_CNY",
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RETRY",
+  "calls": [
+    {
+      "arm": "HCL",
+      "call_id": "reliability-20261007-smoke-flute:HCL:planning",
+      "case_id": "reliability-20261007-smoke-flute",
+      "exact_request_reservation_cny": "0.675972",
+      "failure_code": "INCOMPLETE_ANSWER_NO_RETRY",
+      "invocation_status": "RESPONSE_RETURNED_REJECTED",
+      "offline_transport_call": false,
+      "phase": "planning",
+      "provider_call": true,
+      "request_bytes": 30338,
+      "request_sha256": "5d1d85113dba32f829c739908ee35673eb89aedccd936c702e7b45b5f6c0f7b6",
+      "reserved_cny": "0.777888",
+      "sdk_seconds": 45.40372520499999,
+      "status": "RETURNED_REJECTED",
+      "usage": {
+        "completion_tokens": 4096,
+        "prompt_tokens": 6376
+      },
+      "usage_rated_cny": "0.167976"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "reliability-20261007-smoke-flute",
+      "question": "What can I tell the director about whether Bea and Arun are on the same page about tonight's flute audio? Explain how Jules's last remark fits the record, and point to the passages that matter.",
+      "sources": [
+        {
+          "record_time_basis": "FROZEN_PACKET_PREPARATION_TIMESTAMP_NOT_ACTUAL_INGESTION_OR_EVENT_TIME",
+          "recorded_at": "2026-10-07T05:19:26.377856+00:00",
+          "source_id": "flute-observer-record",
+          "text": "The following is the complete observer record for a fictional restoration demonstration. The observer records who could see or hear each exchange, but does not inspect the audio equipment.\n\nAt 18:00, Bea and Jules read the facilitator tablet. It said, \"For tonight's demonstration, the flute audio is a prerecorded track.\" The lobby monitor, visible from Arun's seat, displayed only \"Restoration demonstration.\" The facilitator tablet faced away from Arun, who stayed in his seat throughout this period.\n\nAt 18:02, Bea pointed toward Arun and told Jules, \"Arun knows the flute is playback. He watched the whole briefing.\" Bea had seen Arun looking at the lobby monitor; she had not checked which information it displayed. Jules heard her, but Arun was too far away to hear this exchange.\n\nBea left the room at 18:03. Arun then told Jules, \"I saw the lobby screen, not that tablet. I still don't know whether the flute we're about to hear is live.\" Jules heard him. Bea was outside and did not hear him.\n\nAt 18:05, Jules told the director, \"Bea thinks Arun knows that tonight's flute is playback.\" Arun and Bea were not present for this last conversation. No further exchange or equipment check is recorded.",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "case_id": "reliability-20261007-pair-unloading",
+      "question": "How should I reconcile Rowan's and Suki's conflicting unloading advice at 11:30? What can I say about each person's information by noon? Use the records to explain the difference.",
+      "sources": [
+        {
+          "record_time_basis": "FROZEN_PACKET_PREPARATION_TIMESTAMP_NOT_ACTUAL_INGESTION_OR_EVENT_TIME",
+          "recorded_at": "2026-10-07T05:19:26.377856+00:00",
+          "source_id": "unloading-briefing-record",
+          "text": "This is the complete morning briefing record for a fictional exhibition delivery.\n\nAt 09:00, Rowan and Suki read a manifest listing one amber box and three silver cases. The accompanying packing note said that amber boxes held unwrapped paper models and must stay under cover. Silver cases held washable foam props that could be unloaded in the open. Both acknowledged those packing instructions.\n\nAt 10:45, the dispatcher told Rowan, \"The amber box has been removed from this load. Everything currently on the truck is in silver cases.\" Rowan read the revised manifest and repeated the all-silver description. Suki had already gone to measure the covered entrance and did not receive or hear this update before 11:30.\n\nAt 11:30, with light rain falling, Rowan advised the crew, \"Use the open courtyard; this load is all silver cases.\" Suki advised, \"Use the covered entrance; the manifest I saw included an amber box.\" Neither had spoken to the other between the 10:45 update and these recommendations. The truck had not yet arrived.",
+          "version": 1
+        },
+        {
+          "record_time_basis": "FROZEN_PACKET_PREPARATION_TIMESTAMP_NOT_ACTUAL_INGESTION_OR_EVENT_TIME",
+          "recorded_at": "2026-10-07T05:19:26.377856+00:00",
+          "source_id": "dispatch-afternoon-record",
+          "text": "This is the complete later dispatch and message record for the same fictional delivery, ending at 12:00.\n\nAt 11:40, while the truck was still at the depot, two amber boxes were added to the load. The dispatcher posted, \"Change since my 10:45 message: two amber boxes are now on the truck as well as the silver cases. The amber boxes still hold unwrapped paper models. Please use the covered entrance.\" The dispatcher explicitly said the 10:45 all-silver description had been correct at the time it was sent.\n\nThe update reached Rowan's and Suki's devices at 11:42. At 11:47, Rowan opened it and replied, \"Read: two amber boxes added. I'll change my instruction to the covered entrance.\" The log records that Suki's device received the update, but contains no opening, read receipt, reply, or later statement from Suki. It does not record other ways she might have obtained information. At noon the truck was still en route, and no unloading was recorded.",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "case_id": "reliability-20261007-pair-pottery-rack",
+      "question": "How should I describe Asha's decision to turn the drying rack? Weigh Beno's claim against her earlier plan and what she knew before acting.",
+      "sources": [
+        {
+          "record_time_basis": "FROZEN_PACKET_PREPARATION_TIMESTAMP_NOT_ACTUAL_INGESTION_OR_EVENT_TIME",
+          "recorded_at": "2026-10-07T05:19:26.377856+00:00",
+          "source_id": "pottery-rack-log",
+          "text": "Fictional workshop log.\n\nAt 10:00, Asha said, \"I want both sides of the clay pieces to dry evenly. I've chosen to turn the drying rack to achieve that.\"\n\nAt 10:02, the wheel lock was released. Asha saw this and said, \"I can turn it now. Only the fronts face the warm air.\"\n\nAt 10:03, Asha turned the rack. Beno said, \"She did that to hide my pottery from visitors,\" but gave no evidence for that motive.\n\nThe log records neither whether the pieces dried evenly nor whether visitors saw less of Beno's pottery.",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "case_id": "reliability-20261007-pair-sail-booth-explicit-actor",
+      "question": "What should the booth coordinator understand about Nessa's goal and current plan at 10:30? Explain what the canceled panels and reserved printing slot do, and do not, settle.",
+      "sources": [
+        {
+          "record_time_basis": "FROZEN_PACKET_PREPARATION_TIMESTAMP_NOT_ACTUAL_INGESTION_OR_EVENT_TIME",
+          "recorded_at": "2026-10-07T05:19:26.377856+00:00",
+          "source_id": "sail-booth-explicit-actor-log",
+          "text": "Fictional booth log.\n\nNessa said she wanted visitors to compare three sail patterns at the same scale. Nessa chose cardboard panels for this comparison.\n\nWhen cardboard ran out, Nessa said she had canceled the panel plan she had chosen and still wanted the comparison. Nessa considered a tablet but did not choose it.\n\nNessa chose printed posters for the comparison if the feeder was repaired by eleven.\n\nAt 10:30, a printing slot was reserved, but the feeder was still jammed. No completed display or later repair result was recorded.",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "case_id": "reliability-20261007-pair-conveyor-exercise",
+      "question": "For this fictional exercise, should the coordinator count Mira's conveyor plan as workable before the round ends? Use the stated exercise rules, explain why Mira could think it would work, and assess whether the handcart changes the answer.",
+      "sources": [
+        {
+          "record_time_basis": "FROZEN_PACKET_PREPARATION_TIMESTAMP_NOT_ACTUAL_INGESTION_OR_EVENT_TIME",
+          "recorded_at": "2026-10-07T05:19:26.377856+00:00",
+          "source_id": "conveyor-exercise-record",
+          "text": "This is the complete record of a fictional tabletop logistics exercise at 12:20. The round ends at 12:45; nothing described here is a real equipment assessment.\n\nThe facilitator's declared model for this round says, \"Assume the conveyor cannot move the crate while its belt is wet. The belt remains wet until 13:00. These are fixed conditions of this round.\" The same exercise sheet says that a handcart could carry the crate through the side gate, but the side gate remains locked until 13:00. No other transport route is available in the round.\n\nAt 12:10, Mira said, \"My goal is to get the crate to the platform before the round ends. I have chosen to use the conveyor for that, provided its belt is dry. I believe the belt is dry now; the patch I looked at appeared dry.\" Her statement does not amend the facilitator's declared model.\n\nAt 12:15, the coordinator told Mira, \"The conveyor is free for you to use now, and the crate is beside it.\" Mira replied, \"Then I expect my conveyor plan to work before 12:45.\" The coordinator did not say that the belt was dry. By the 12:20 cutoff, no movement of the crate, opening of the side gate, revised exercise rule, or changed plan from Mira was recorded.",
+          "version": 1
+        }
+      ]
+    }
+  ],
+  "cost_basis": "CNY_PEAK_USAGE_ESTIMATE_NOT_INVOICE_FULL_HOLDS_RETAINED",
+  "currency": "CNY",
+  "efficacy_verified": false,
+  "elapsed_seconds": 46.02803835899999,
+  "head_sha": "88b8e48c2ca989d15e7642172dfd68d056a4ff1d",
+  "i02_certified": false,
+  "independent_semantic_gate": "PENDING_INDEPENDENT_SOURCE_FIRST_REVIEW",
+  "invoice_cost_cny": null,
+  "mode": "LIVE_EXISTING_ACCOUNT",
+  "model": "deepseek-v4-pro",
+  "native_publication_status": "AUTHORIZED_BOUNDED_NATIVE_EVIDENCE",
+  "offline_transport_calls": 0,
+  "package_sha256": "0d8530ce5c2838015141423aa97fa701752583fbdd9f83b97ccb90b383bec5e4",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "planning_tokens": 4096,
+  "provider_calls": 1,
+  "receipt_sha256": "508fdd526b40788ab81c7437ae147a20a00c3003d7836ffe5e8f6d08d1936ece",
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_cny": "0",
+  "reserved_cny": "0.777888",
+  "run_id": "37610274523",
+  "runtime_sha256": "da8349d12f8d13001e565ccdc8dbd6933cdbff5d8ec3b6369823c01925a379e9",
+  "schema": "hcl-reliability-public-evidence-v1",
+  "send_margin_seconds": 180,
+  "stage": 1,
+  "stage_window_seconds": 600,
+  "status": "STOPPED_NO_RETRY",
+  "usage_complete": true,
+  "usage_rated_cny": "0.167976"
+}
