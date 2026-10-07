@@ -13,7 +13,7 @@ from unittest.mock import patch
 
 from hcl.cognition import universal_entry as current
 from scripts import development_explicit_citation_amendment as amendment
-from scripts.development_planning_allowance_amendment import validate_current
+from scripts.development_semantic_bridge_contract_amendment import validate_current
 from scripts import development_final_delivery_amendment as diagnostic_amendment
 from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY, _EXPLICIT_CITATION_FINAL_ANSWER_POLICY
 from scripts.run_four_comparison import accepted, final_fields
@@ -146,8 +146,9 @@ class FinalDeliveryTests(unittest.TestCase):
         # Exact code-owned contract insertion plus structural JSON whitespace only.
         # Every parsed planning value is still compared with the pinned predecessor.
         marker = 'For C02 also use NAME: I did ACTION.; '
-        self.assertEqual(current.PLANNER_POLICY, self.previous.PLANNER_POLICY.replace(
-            marker, LIFECYCLE_CONTRACT_ADDITION + marker))
+        from scripts.development_semantic_bridge_contract_amendment import apply_reviewed_planner_contract
+        expected_policy = self.previous.PLANNER_POLICY.replace(marker, LIFECYCLE_CONTRACT_ADDITION + marker)
+        self.assertEqual(current.PLANNER_POLICY, apply_reviewed_planner_contract(expected_policy))
         for phase, frame in compared['calls']:
             if phase == 'planning':
                 self.assertEqual(frame[0], dict(role='system', content=current.PLANNER_POLICY))
