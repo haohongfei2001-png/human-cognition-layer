@@ -1,0 +1,31 @@
+{
+  "amended_hcl_runtime_sha256": "5e58ad59e7d048098978dbb45a11d714d1e54967286d7a552b765e8c017bb35f",
+  "answer_quality_improvement_claimed": false,
+  "authorized_additional_calls": 0,
+  "baseline_commit": "dbd7ba9fe9b8a2d4aa165f4e39a949b510cd1ee5",
+  "changed_runtime_files": [
+    "hcl/cognition/universal_entry.py"
+  ],
+  "context_limit_changed": false,
+  "diagnostics_persisted_by_historical_executor": false,
+  "diagnostics_scope": "LOCAL_FINAL_CONTEXT_NOT_PROVIDER_REQUEST",
+  "entry": "UniversalHCL.answer",
+  "historical_answers_rescored": false,
+  "historical_executors_unchanged": true,
+  "historical_failure_cause_identified": false,
+  "historical_grants_reopened": false,
+  "longmemeval": "SEALED_NOT_ACCESSED",
+  "model_or_token_defaults_changed": false,
+  "native_dispatch_changed": false,
+  "original_citation_audit_changed": false,
+  "parsed_payload_values_changed": false,
+  "previous_hcl_runtime_sha256": "62bea96c481fcdde3bfb0af8707796d5afaebf1c9d051ace9bd0c82e236f2442",
+  "provider_calls": 0,
+  "provider_envelope_changed": false,
+  "provider_phases_changed": false,
+  "provider_spend_usd": 0,
+  "reason": "COMPACT_FINAL_JSON_AND_LOCAL_SIZE_ONLY_DIAGNOSTICS",
+  "schema": "hcl-final-context-transport-amendment-v1",
+  "source_text_changed": false,
+  "system_policy_changed": false
+}

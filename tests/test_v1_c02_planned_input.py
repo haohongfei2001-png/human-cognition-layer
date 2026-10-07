@@ -205,17 +205,22 @@ class PlannedExplanationInputTests(unittest.TestCase):
             result=run(s,ORIGINAL,port);self.assertEqual(result['status'],expected)
             self.assertEqual(json.loads(result['answer_raw'])['source_citations'][0]['quote'],quote)
 
-    def test_complete_combination_overflow_never_drops_source_or_native_results(self):
+    def test_compact_combination_fits_without_dropping_source_or_native_results(self):
         s=UniversalHCL();s.put_source('maintenance',SOURCE)
         # The whole large original question is retained in planning and answer.
         original=ORIGINAL+' '+('Context remains explicit. '*250)
         port=RequestBoundedStub(plan(selected(),operation('C01',ORIGINAL,['maintenance']),operation('C03',ORIGINAL,['maintenance'])))
         result=run(s,original,port)
-        self.assertEqual(len(port.calls),1);self.assertNotIn('answer',result)
+        # Compact structural separators now fit this full synthetic request.
+        # This is transport capacity, not evidence about model answer quality.
+        self.assertEqual(len(port.calls),2);self.assertIn('answer',result)
+        self.assertLessEqual(len(port.encoded['answer']),36000)
+        self.assertEqual(result['hcl_execution']['native_results'],3)
         self.assertEqual(len(result['plan']['operations'][0]['semantic_candidates']),5)
         self.assertEqual(len(result['operations']),3)
         final=json.loads(result['actual_final_messages'][-1]['content'])
         self.assertEqual(final['sources'][0]['text'],SOURCE);self.assertEqual(final['question'],original)
+        self.assertEqual(final['hcl_operations'],result['operations'])
 
 
 if __name__=='__main__':unittest.main()

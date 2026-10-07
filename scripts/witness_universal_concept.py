@@ -5,7 +5,7 @@ from pathlib import Path
 
 from hcl.cognition import UniversalHCL
 from hcl.cognition.universal_entry import CallAllowance
-from scripts.development_explicit_citation_amendment import validate_current
+from scripts.development_final_context_amendment import validate_current
 
 SOURCE = '''Mira: In team, for fair consent is true is necessary.
 Mira: In team, for fair transparency is true is typical.

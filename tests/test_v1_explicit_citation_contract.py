@@ -17,6 +17,7 @@ from hcl.cognition.reader_entry import (
     _EXPLICIT_CITATION_FINAL_ANSWER_POLICY,
 )
 from scripts import development_explicit_citation_amendment as amendment
+from scripts.development_final_context_amendment import validate_current
 from scripts.run_four_comparison import accepted, final_fields
 from tests.test_v1_universal_question import Stub, operation, plan
 from tests.test_v1_final_delivery_diagnostics import Clock
@@ -225,7 +226,7 @@ class ExplicitCitationContractTests(unittest.TestCase):
             self.assertEqual(receipt['provider_calls'], 0)
 
     def test_current_contract_and_historical_freeze_reject_mutations(self):
-        self.assertTrue(amendment.validate_current())
+        self.assertTrue(validate_current())
         original = Path.read_bytes
         for target in (*amendment.REVIEWED_FILES, 'hcl/cognition/retained.py',
                        'scripts/run_four_comparison.py', 'scripts/four_comparison_public.py',
@@ -235,9 +236,9 @@ class ExplicitCitationContractTests(unittest.TestCase):
                     raw = original(path)
                     return raw + b' ' if str(path) == target else raw
                 with patch.object(Path, 'read_bytes', changed), self.assertRaises(ValueError):
-                    amendment.validate_current()
+                    validate_current()
         with self.assertRaises(ValueError):
-            amendment.validate_current(current_digest='0' * 64)
+            validate_current(current_digest='0' * 64)
 
 
 if __name__ == '__main__':

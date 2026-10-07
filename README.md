@@ -15,6 +15,14 @@ budget guards stay in force. New adapter expansion is deferred while the complet
 usable flow is verified. This does not require HCL to independently solve language
 understanding, and it authorizes no model spending.
 
+[Final-context transport](docs/HCL_FINAL_CONTEXT_TRANSPORT.md) now removes only
+structural JSON spaces and records local size-only diagnostics before final
+limits. Parsed source/plan/native-result values and real HCL execution remain
+unchanged; the 36,000-byte provider ceiling still rejects oversized requests.
+The new exact development runtime identity preserves consumed CNY executors,
+packages, closed grants and evidence. This is offline transport verification,
+not a new model evaluation or an answer-quality claim.
+
 [Nonblank final-answer delivery](docs/HCL_NONBLANK_ANSWER.md) now rejects empty or
 Unicode-whitespace-only answer fields even after native execution and valid
 citations. Raw output and two-phase cost accounting remain unchanged; there is

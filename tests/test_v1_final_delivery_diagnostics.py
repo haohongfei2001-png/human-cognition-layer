@@ -13,6 +13,7 @@ from unittest.mock import patch
 
 from hcl.cognition import universal_entry as current
 from scripts import development_explicit_citation_amendment as amendment
+from scripts.development_final_context_amendment import validate_current
 from scripts import development_final_delivery_amendment as diagnostic_amendment
 from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY, _EXPLICIT_CITATION_FINAL_ANSWER_POLICY
 from scripts.run_four_comparison import accepted, final_fields
@@ -43,7 +44,7 @@ def raw_body(**changes):
 
 
 def baseline_module():
-    amendment.validate_current()  # Also enforce unchanged dependencies in standalone paired runs.
+    validate_current()  # Also enforce unchanged dependencies in standalone paired runs.
     root = Path(__file__).resolve().parents[1]
     name = 'hcl/cognition/universal_entry.py'
     raw = subprocess.check_output(['git', 'show', amendment.BASELINE + ':' + name], cwd=root)
@@ -122,14 +123,18 @@ class FinalDeliveryTests(unittest.TestCase):
         raw = raw_body() if raw is None else raw
         before = execute(self.previous, raw, **options)
         after = execute(current, raw, **options)
-        self.assertEqual(set(after['receipt']), set(before['receipt']))
+        self.assertEqual(set(after['receipt']) - {'final_context_metrics'}, set(before['receipt']))
         code = after['receipt']['final_delivery_code']
         self.assertIn(code, CODES)
         self.assertEqual(code, expected)
         self.assertEqual(before['receipt']['final_delivery_code'], expected)
-        # Only the disclosed contract prefix changes. Original question, source,
-        # native state and the orchestration-policy suffix remain exact.
+        # Only the disclosed contract prefix, compact separators and local size
+        # metrics change. Parsed question/source/native-state values stay exact.
         compared = copy.deepcopy(after)
+        if 'final_context_metrics' in compared['receipt']:
+            frame = compared['receipt']['actual_final_messages']
+            self.assertEqual(compared['receipt'].pop('final_context_metrics'),
+                current._final_context_metrics(json.loads(frame[-1]['content']), frame))
         frames = [messages for phase, messages in compared['calls'] if phase == 'answer']
         if 'actual_final_messages' in compared['receipt']:
             frames.append(compared['receipt']['actual_final_messages'])
@@ -137,6 +142,8 @@ class FinalDeliveryTests(unittest.TestCase):
             policy = frame[0]['content']
             self.assertTrue(policy.startswith(_EXPLICIT_CITATION_FINAL_ANSWER_POLICY))
             frame[0]['content'] = _FINAL_ANSWER_POLICY + policy[len(_EXPLICIT_CITATION_FINAL_ANSWER_POLICY):]
+            frame[-1]['content'] = json.dumps(json.loads(frame[-1]['content']),
+                                               ensure_ascii=False, sort_keys=True)
         # Malformed fields already refused by the source auditor now have a
         # shape-specific refusal. Their failure outcome/raw bytes are unchanged.
         if compared['receipt'].get('source_review', {}).get('status') == 'INVALID_EXPLICIT_CITATION_SHAPE':
@@ -257,7 +264,7 @@ class FinalDeliveryTests(unittest.TestCase):
 
 class FinalDeliveryAmendmentTests(unittest.TestCase):
     def test_current_runtime_and_consumed_history_are_pinned(self):
-        self.assertTrue(amendment.validate_current())
+        self.assertTrue(validate_current())
         original = Path.read_bytes
         for name in json.loads(diagnostic_amendment.PINS.read_text())['files_sha256']:
             with self.subTest(path=name):
@@ -266,7 +273,7 @@ class FinalDeliveryAmendmentTests(unittest.TestCase):
                     return raw + b' ' if str(path) == name else raw
                 with patch.object(Path, 'read_bytes', drift):
                     with self.assertRaisesRegex(ValueError, 'historical amendment'):
-                        amendment.validate_current()
+                        validate_current()
 
     def test_new_pin_manifest_cannot_silently_rebaseline_history(self):
         original = Path.read_bytes
@@ -275,7 +282,7 @@ class FinalDeliveryAmendmentTests(unittest.TestCase):
             return raw + b'\n' if path == diagnostic_amendment.PINS else raw
         with patch.object(Path, 'read_bytes', drift):
             with self.assertRaisesRegex(ValueError, 'pin manifest drift'):
-                amendment.validate_current()
+                validate_current()
 
 
 if __name__ == '__main__':
