@@ -1,0 +1,28 @@
+{
+  "approved_at_bound": "2026-10-07T03:39:28Z",
+  "authorization_ref": "OWNER_APPROVED_HCL_RELIABILITY_20261007_14_CALLS_12_CNY",
+  "authorized_calls": 2,
+  "authorized_cny": "1.70",
+  "currency": "CNY",
+  "executor_commit": "226778837f9fff4db1870ad5e0b7b9f984f09361",
+  "expires_at": "2026-10-07T14:00:00Z",
+  "historical_budget_transfer": false,
+  "other_stage_budget_transfer": false,
+  "package_sha256": "0d8530ce5c2838015141423aa97fa701752583fbdd9f83b97ccb90b383bec5e4",
+  "phase1_source_review_sha256": null,
+  "public_native_evidence_permission": {
+    "approval_message_ref": "Sentinel_bba2cfdcf9ac81918e0713a19387a3c5",
+    "authorization_ref": "OWNER_APPROVED_HCL_RELIABILITY_20261007_14_CALLS_12_CNY",
+    "destination": "https://github.com/haohongfei2001-png/human-cognition-layer",
+    "maximum_case_records": 5,
+    "maximum_operations_per_record": 3,
+    "maximum_record_utf8_bytes": 1048576,
+    "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+    "schema": "hcl-reliability-native-public-permission-v1",
+    "scope": "FIVE_SYNTHETIC_CASES_BOUNDED_SOURCE_VALIDATED_NATIVE_EVIDENCE"
+  },
+  "retries": 0,
+  "schema": "hcl-reliability-new-grant-v1",
+  "stage": 1,
+  "status": "READY"
+}
