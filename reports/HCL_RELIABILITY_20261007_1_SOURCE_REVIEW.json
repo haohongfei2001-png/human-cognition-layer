@@ -1,0 +1,116 @@
+{
+  "schema": "hcl-reliability-source-review-candidate-v1",
+  "authorization_ref": "OWNER_APPROVED_HCL_RELIABILITY_20261007_14_CALLS_12_CNY",
+  "package_sha256": "0d8530ce5c2838015141423aa97fa701752583fbdd9f83b97ccb90b383bec5e4",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "evidence_sha256": "a634f5a65bbe8a61960de11991bcba88636b09cf928197ee8c55f5e887864e6d",
+  "final_answer_sha256": null,
+  "request_diagnostics_sha256": "94a0cd483b0307279f53f499c29aff4261e657b9e1de209b80ff8ccf386b4d72",
+  "native_review_sha256": "fd09cbd25d00e81a95287934e63d009dfbf366805037d26765cc322578a6ee66",
+  "approved_native_evidence_sha256": "8c3d9d1d2ee00a3fdb506c449cf448f481b5bae5ff1d15a53522b9ca44ab3081",
+  "reviewer_role": "INDEPENDENT_SOURCE_FIRST_AFTER_OUTPUT",
+  "all_five_cases_and_rubrics_frozen_before_any_output": true,
+  "gates": {
+    "complete_source_delivery_passed": false,
+    "trusted_native_policy_passed": false,
+    "relevant_native_execution_passed": false,
+    "all_key_facts_preserved": false,
+    "inference_boundaries_preserved": false,
+    "citations_and_complete_final_delivery_passed": false
+  },
+  "obligations": [
+    {
+      "id": "K1",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 2: Preserve the tablet's claim about tonight's flute and the lobby monitor's much thinner content; neither screen is interchangeable with the other.",
+      "answer_evidence": "No final answer was reached. This obligation was not demonstrated; no content-level semantic error is inferred."
+    },
+    {
+      "id": "K2",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 3: Identify Bea's expressed attribution that Arun knows the flute is playback, and its stated basis: she saw him watching the monitor and assumed he had watched the whole briefing.",
+      "answer_evidence": "No final answer was reached. This obligation was not demonstrated; no content-level semantic error is inferred."
+    },
+    {
+      "id": "K3",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 4: Preserve Arun's explicit report to Jules that he saw only the lobby screen and does not know whether the flute is live; Bea did not hear this report.",
+      "answer_evidence": "No final answer was reached. This obligation was not demonstrated; no content-level semantic error is inferred."
+    },
+    {
+      "id": "K4",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 3-5: Treat Jules's last remark as a nested report of Bea's position that is supported by her earlier speech, while distinguishing it from Jules saying that Arun actually knows or that they agree.",
+      "answer_evidence": "No final answer was reached. This obligation was not demonstrated; no content-level semantic error is inferred."
+    },
+    {
+      "id": "I1",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 3-5: Do not collapse Bea's attribution, Arun's self-report, and Jules's report of Bea into a single shared belief or verified state of private knowledge.",
+      "answer_evidence": "No final answer was reached. This obligation was not demonstrated; no content-level semantic error is inferred."
+    },
+    {
+      "id": "I2",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 2-4: Do not transfer the tablet's contents to Arun through his access to the lobby monitor, or transfer Arun's later clarification to the absent Bea.",
+      "answer_evidence": "No final answer was reached. This obligation was not demonstrated; no content-level semantic error is inferred."
+    },
+    {
+      "id": "I3",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 1-2 and 5: Keep both world-truth and scope limits: the observer did not verify the equipment, and the tablet claim concerns tonight's demonstration, not all flute performances.",
+      "answer_evidence": "No final answer was reached. This obligation was not demonstrated; no content-level semantic error is inferred."
+    },
+    {
+      "id": "C1",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 2: Ground the different screen contents and sightlines in the complete observer record, with an identifiable passage or accurate short quotation.",
+      "answer_evidence": "No final answer was reached. This obligation was not demonstrated; no content-level semantic error is inferred."
+    },
+    {
+      "id": "C2",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 3-5: Anchor each attributed position to the correct speaker and exchange; the final Jules quotation cannot serve as direct evidence of Arun's own view.",
+      "answer_evidence": "No final answer was reached. This obligation was not demonstrated; no content-level semantic error is inferred."
+    },
+    {
+      "id": "C3",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, complete source: Use only this supplied version and actual passages; do not invent equipment inspection, another message, a citation, or an omitted continuation.",
+      "answer_evidence": "No final answer was reached. This obligation was not demonstrated; no content-level semantic error is inferred."
+    }
+  ],
+  "smoke_semantics": [
+    {
+      "id": "S1",
+      "passed": false,
+      "source_evidence": "Frozen flute-observer-record@1: Bea's position is an attribution about Arun, supported by her speech but not established as his knowledge.",
+      "answer_evidence": "No final answer or native execution; requirement not demonstrated, not a claim of an observed wrong answer."
+    },
+    {
+      "id": "S2",
+      "passed": false,
+      "source_evidence": "Frozen flute-observer-record@1: Arun reports uncertainty to Jules; no unsupported transmission of that clarification to Bea is added.",
+      "answer_evidence": "No final answer or native execution; requirement not demonstrated, not a claim of an observed wrong answer."
+    },
+    {
+      "id": "S3",
+      "passed": false,
+      "source_evidence": "Frozen flute-observer-record@1: The monitor/tablet access difference defeats Bea's stated route from watching to knowing.",
+      "answer_evidence": "No final answer or native execution; requirement not demonstrated, not a claim of an observed wrong answer."
+    },
+    {
+      "id": "S4",
+      "passed": false,
+      "source_evidence": "Frozen flute-observer-record@1: Jules's nested report remains distinct from agreement or independently verified playback, with tonight-only scope.",
+      "answer_evidence": "No final answer or native execution; requirement not demonstrated, not a claim of an observed wrong answer."
+    }
+  ],
+  "relevant_native_capability_ids": [],
+  "critical_failure_tags": [
+    "PLANNING_RESPONSE_INCOMPLETE",
+    "NO_NATIVE_EXECUTION",
+    "NO_FINAL_DELIVERY"
+  ],
+  "overall_pass": false
+}
