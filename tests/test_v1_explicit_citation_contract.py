@@ -17,7 +17,7 @@ from hcl.cognition.reader_entry import (
     _EXPLICIT_CITATION_FINAL_ANSWER_POLICY,
 )
 from scripts import development_explicit_citation_amendment as amendment
-from scripts.development_planner_lifecycle_amendment import validate_current
+from scripts.development_planning_allowance_amendment import validate_current
 from scripts.run_four_comparison import accepted, final_fields
 from tests.test_v1_universal_question import Stub, operation, plan
 from tests.test_v1_final_delivery_diagnostics import Clock

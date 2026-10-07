@@ -42,7 +42,7 @@ class TypographicDialogueTests(unittest.TestCase):
     def test_runtime_chain_rejects_new_digest_or_previous_digest_drift(self):
         from pathlib import Path
         from scripts.i02_runtime_amendment_v9 import validate_runtime_amendment_v9
-        from scripts.development_planner_lifecycle_amendment import validate_current
+        from scripts.development_planning_allowance_amendment import validate_current
         self.assertTrue(validate_current())
         names=['HCL_I01_EVALUATION_FREEZE.json','HCL_I02_RUNTIME_AMENDMENT.json']+[f'HCL_I02_RUNTIME_AMENDMENT_V{i}.json' for i in range(2,10)]
         chain=[json.loads(Path('reports',n).read_text()) for n in names]
