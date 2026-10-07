@@ -27,6 +27,34 @@ and evidence dispositions. Remote `main`, exact-SHA CI and immutable historical
 receipts remain the code/evidence facts. Historical closure documents remain
 evidence and are not rewritten as active development policy.
 
+## Current execution snapshot — 2026-10-07
+
+This is a documentation correction, not a capability increment or a new
+evaluation. The current implementation baseline is
+`main@214ee4629347fedb5ea59f40dc14a99bcaf257d0` (PR #376), whose 12 exact-main
+checks passed. Its runtime SHA256 is
+`5e58ad59e7d048098978dbb45a11d714d1e54967286d7a552b765e8c017bb35f`.
+The final-context compaction and local size diagnostics are provider-free repairs;
+this new runtime has not had a live model evaluation.
+
+The [October 6 two-stage CNY experiment](docs/HCL_TWO_STAGE_CNY_20261006_RESULTS.md)
+is completed historical evidence on its separately frozen runtime
+`62bea96c481fcdde3bfb0af8707796d5afaebf1c9d051ace9bd0c82e236f2442`.
+Its complete-flow smoke passed. The four authored development pairs scored
+Base 40/40 and HCL 29/40: one HCL final request exceeded the unchanged 36,000-byte
+limit and one delivered answer omitted a relevant fact. There was no winning HCL
+pair or demonstrated answer-quality gain. PR #376 does not reconstruct the
+missing historical failed wire, rescore that run or prove the failures resolved
+in real model use. The experiment used a 16,384-token planner allowance; the
+ordinary 4,096-token default was not validated by it.
+
+The two CNY grants are **CLOSED_NO_TRANSFER_NO_RETRY**, with zero remaining calls
+and zero remaining money authority. The 13 calls' CNY 1.738854 usage-rated estimate
+is not a verified invoice; unused parts of the historical 14-call/CNY 14 ceiling
+are not reusable. Any new real model run needs a separately frozen bounded
+package and new explicit limited authorization. Earlier generic development
+authorization wording does not reopen these consumed grants.
+
 [Final-context transport](docs/HCL_FINAL_CONTEXT_TRANSPORT.md) now removes only
 structural JSON spaces and records local size-only diagnostics before final
 limits. Parsed source/plan/native-result values and real HCL execution remain
@@ -63,6 +91,29 @@ from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: END_TO_END_READINESS_AND_LIVE_PREREQUISITES**
+
+Current provider-free work is to verify complete input/result preservation,
+bounded final transport, source/citation and revision failure paths, and prepare a
+fresh current-runtime delivery/comparison package. Ordinary engineering can
+continue without reopening a paid run. Historical failed outputs and scores stay
+unchanged; actual post-repair model delivery and benefit require new authorized
+measurements.
+
+A00 plus the 40 A–H runtime packages have their declared construction/correctness
+status, not a product-completion percentage. The current
+[callable catalog](hcl/cognition/capability_catalog.py) has 14 bounded ordinary-entry
+adapters (B01/B02, C01–C05, D01/D02, G01–G05) and 26 `ADAPTER_REQUIRED` entries.
+The latter include reused A01–A05 foundation services, so they are not 26 absent
+algorithms. Broad adapter expansion remains deferred while usable end-to-end
+delivery is checked.
+
+I01 is a frozen evaluation contract, not a confirmation result; the configuration
+must be refrozen when the evaluated implementation is stable. Final I02 source
+and comparator qualification, I03 full comparison, I04 mechanism/integration
+ablation, I05 cross-model transfer and I06 source-first disposition are not
+complete. Optimization, authoritative target audit and permitted final submission
+come later. Final independent-source/reviewer requirements do not block ordinary
+development reality checks; they remain requirements for final confirmation.
 
 [Retained D02 finite acknowledgment](docs/HCL_UNIVERSAL_UNDERSTANDING_ENTRY.md)
 forwards complete native results and support under the exact returned summary
@@ -1527,11 +1578,11 @@ A failed CI job is an engineering problem, not an owner gate. A missing efficacy
 result is not a reason to stop available architecture work. A genuine semantic
 defect is.
 
-## 13. Current execution fact
+## 13. Historical execution snapshots — use the current queue above
 
-- Current wave: **I — Serious Independent Evaluation**
+- Historical pre-amendment wave: **I — Serious Independent Evaluation**
 - A00: **COMPLETE** through adoption of the long-horizon canonical plan
-- **Current execution task:** DRC001_FRESH_BASE_VS_HCL_REALITY_CHECK; I02 source/reviewer rules below describe historical final qualification, not a development run gate.
+- **Historical first development task:** DRC001_FRESH_BASE_VS_HCL_REALITY_CHECK is closed; the current next task is stated above. I02 source/reviewer rules below describe historical final qualification, not a development run gate.
 - The [blind-review v2 handoff](docs/HCL_I02_BLIND_REVIEW_V2.md) composes the immutable v1 obligation score with residual-claim coverage before arm reveal. Real ACL raw receipt smoke and 19 provider-free tests pass, with no independent review or source qualified. MeetingToM needs separately licensed/accessed AMI media; SQuALITY long dev sources still fail H input. **Evaluation workflow delta only; HCL answer gain 0; calls/spend 0.** Continue rights-clear unexposed source qualification.
 - The [residual-claim audit supplement](docs/HCL_I02_RESIDUAL_CLAIM_AUDIT.md) disqualifies severe unsupported claims outside prespecified obligations while preserving frozen v1 scores. Synthetic positive, negative, source, identity and historical regressions pass provider-free; no independent reviewer or new confirmation source. **Evaluation capability delta only; HCL answer gain 0; calls/spend 0.** Continue unexposed source qualification.
 - The I02 [snapshot qualification gate](docs/HCL_I02_REPOSITORY_EXPOSURE_SNAPSHOT.md) now binds its revision to the checkout HEAD before scanning, closing a stale-revision bypass found during source screening. An old clean commit cannot hide a source present in the current checkout; the standalone historical diagnostic remains available. This is provider-free source-gate correctness, **not** a qualified source, full-history audit or HCL efficacy result. Continue genuinely unexposed source qualification.
@@ -1560,7 +1611,7 @@ defect is.
 - G-ARCH one-shot: **2 extraction/final calls, 0 retries, peak-rated USD 0.00159300, conservative guard USD 0.00590436 / USD 0.04 cap; CLOSED / NO RERUN**. [Receipt/closure](reports/HCL_G_ARCH_ENTRY_CLOSURE.md).
 - I02 C/P/G one-shot: **3 calls (C, P, G-map), 0 retries, estimated USD 0.00367950, rated-peak USD 0.00735900 / USD 0.12 cap; FAILED SHAPE / CLOSED / NO RERUN**. G-final and H/H-new: **0 calls**. [Full raw receipt and source-first closure](reports/HCL_I02_CPG_CALIBRATION_CLOSURE.md).
 - I02 Moral Stories second-source C/P/G one-shot: **4 calls (C, P, G-map, G-final), 0 retries, estimated USD 0.00416724, rated-peak USD 0.00833448 / USD 0.06 cap; INTERFACE FUNCTIONAL / SEMANTICALLY UNQUALIFIED / CLOSED / NO RERUN**. H/H-new: **0 calls**. [Full raw receipt and source-first closure](reports/HCL_I02_MORAL_CPG_CALIBRATION_CLOSURE.md).
-- Independent qualification active: **I01 FROZEN / I02 NEXT; NO CONFIRMATION RESULT INSPECTED**
+- Historical final-qualification snapshot: **I01 FROZEN / I02 NEXT; NO CONFIRMATION RESULT INSPECTED**; current development checks follow the two-track policy above.
 - Leaderboard: **OFF**
 - LongMemEval: **SEALED / NOT ACCESSED**
 
