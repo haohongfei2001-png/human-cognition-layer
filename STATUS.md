@@ -17,13 +17,18 @@ understanding, and it authorizes no model spending.
 
 ## Current execution snapshot — 2026-10-07
 
-This is a documentation correction, not a capability increment or a new
-evaluation. The current implementation baseline is
-`main@214ee4629347fedb5ea59f40dc14a99bcaf257d0` (PR #376), whose 12 exact-main
-checks passed. Its runtime SHA256 is
-`5e58ad59e7d048098978dbb45a11d714d1e54967286d7a552b765e8c017bb35f`.
-The final-context compaction and local size diagnostics are provider-free repairs;
-this new runtime has not had a live model evaluation.
+The latest completed pre-correction baseline is
+`main@cd3fa7fffbbfd2caa746812061a0def2edda90fe` (PR #377), whose two path-selected
+exact-main checks passed. The current [shared-source snapshot
+repair](docs/HCL_UNIVERSAL_SOURCE_SNAPSHOT.md) checks that each registered original
+source still has the same version and exact text in the backing workspace before
+native/final delivery can be accepted. Same-version derived state and unrelated
+workspace sources remain allowed; existing citation/support guards remain intact.
+Its runtime SHA256 is
+`9f3ef69e16d21e5e17ab86725b2fa5696106e944cd646336c7ab6605056e1213`.
+This is provider-free correctness, not a capability or answer-quality gain. The
+PR #376 lossless final-context compaction remains in place. This new runtime has
+not had a live model evaluation; exact-head/main CI supplies adoption evidence.
 
 The [October 6 two-stage CNY experiment](docs/HCL_TWO_STAGE_CNY_20261006_RESULTS.md)
 is completed historical evidence on its separately frozen runtime
@@ -105,9 +110,11 @@ unchanged. No LongMemEval access or leaderboard activation.
 
 **NEXT_READY: END_TO_END_READINESS_AND_LIVE_PREREQUISITES**
 
-Current provider-free work is to verify complete input/result preservation,
-bounded final transport, source/citation and revision failure paths, and prepare a
-fresh current-runtime delivery/comparison package. Ordinary engineering can
+Current provider-free work is to finish source-snapshot correctness acceptance,
+then preserve trusted native-reader policies beside their unchanged native results
+without promoting source/model text into policy. Continue bounded final transport,
+source/citation and revision checks, and prepare a fresh ordinary-default runtime
+delivery/comparison package after those repairs are independently accepted. Ordinary engineering can
 continue without reopening a paid run. Historical failed outputs and scores stay
 unchanged; actual post-repair model delivery and benefit require new authorized
 measurements.

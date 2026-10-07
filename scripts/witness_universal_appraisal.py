@@ -8,7 +8,7 @@ from types import SimpleNamespace
 from hcl.cognition import UniversalHCL
 from hcl.cognition.deepseek_metered import DeepSeekMeteredPort
 from hcl.cognition.universal_entry import CallAllowance
-from scripts.development_final_context_amendment import validate_current
+from scripts.development_universal_source_amendment import validate_current
 
 QUESTION="How is the delay related to Mira's goals and reported feelings?"
 OPERATION_QUESTION='How does Mira appraise the delay?'

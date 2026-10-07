@@ -3,7 +3,7 @@ import argparse,hashlib,json
 from decimal import Decimal
 from pathlib import Path
 from hcl.cognition import UniversalHCL
-from scripts.development_final_context_amendment import validate_current
+from scripts.development_universal_source_amendment import validate_current
 from scripts.serious_eval_contract import runtime_digest
 from tests.test_v1_c02_planned_input import SOURCE,ORIGINAL,QUOTES,candidates,selected,state
 from tests.test_v1_universal_appraisal import RequestBoundedStub

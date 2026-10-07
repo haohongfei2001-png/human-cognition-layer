@@ -197,6 +197,12 @@ class UniversalHCL:
 
     def _current(self, versions, operations=()):
         if versions!=self._versions():raise HCLBoundaryError('SOURCE_CHANGED_DURING_ORCHESTRATION')
+        # The shared workspace is also a public source-revision entry. Its new
+        # grounded root must not certify the wrapper's older source snapshot.
+        if any(sid not in self.workspace._documents or self.workspace._versions.get(sid)!=version
+               or self.workspace._documents[sid][0]!=self.sources[sid]['text']
+               for sid,version in versions):
+            raise HCLBoundaryError('SOURCE_CHANGED_DURING_ORCHESTRATION')
         live=self.workspace.core.grounded()
         if any(self.workspace._spans[sid] not in live for sid,_ in versions):
             raise HCLBoundaryError('SOURCE_SUPPORT_CHANGED')
