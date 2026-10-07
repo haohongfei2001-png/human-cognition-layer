@@ -13,10 +13,11 @@ from unittest.mock import patch
 
 from hcl.cognition import universal_entry as current
 from scripts import development_explicit_citation_amendment as amendment
-from scripts.development_universal_source_amendment import validate_current
+from scripts.development_native_reader_policy_amendment import validate_current
 from scripts import development_final_delivery_amendment as diagnostic_amendment
 from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY, _EXPLICIT_CITATION_FINAL_ANSWER_POLICY
 from scripts.run_four_comparison import accepted, final_fields
+from tests.test_v1_native_reader_policy import expand_native_reader_contexts
 
 SOURCE = 'Mara heard the notice.'
 QUESTION = 'What does the source report?'
@@ -118,6 +119,15 @@ class FinalDeliveryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.previous = baseline_module()
+        session = current.UniversalHCL()
+        session.put_source('s', SOURCE)
+        cls.native_reader_policy = session.workspace.prepare_reader_entry(
+            QUESTION, source_ids=('s',), allow_translation=False).messages[0]['content']
+
+    def remove_verified_reader_policy(self, rows):
+        for row in rows:
+            if row.get('status') == 'EXISTING_READER_EXECUTED':
+                self.assertEqual(row.pop('preparation_policy'), self.native_reader_policy)
 
     def pair(self, expected, raw=None, **options):
         raw = raw_body() if raw is None else raw
@@ -128,22 +138,30 @@ class FinalDeliveryTests(unittest.TestCase):
         self.assertIn(code, CODES)
         self.assertEqual(code, expected)
         self.assertEqual(before['receipt']['final_delivery_code'], expected)
-        # Only the disclosed contract prefix, compact separators and local size
-        # metrics change. Parsed question/source/native-state values stay exact.
+        # Only explicitly verified transport/contract additions differ. Native
+        # policies must match the real adapter before removing that added field
+        # from the historical comparison view; arbitrary nested keys stay exact.
         compared = copy.deepcopy(after)
         if 'final_context_metrics' in compared['receipt']:
             frame = compared['receipt']['actual_final_messages']
             self.assertEqual(compared['receipt'].pop('final_context_metrics'),
                 current._final_context_metrics(json.loads(frame[-1]['content']), frame))
+        self.remove_verified_reader_policy(compared['receipt']['operations'])
         frames = [messages for phase, messages in compared['calls'] if phase == 'answer']
         if 'actual_final_messages' in compared['receipt']:
             frames.append(compared['receipt']['actual_final_messages'])
         for frame in frames:
             policy = frame[0]['content']
             self.assertTrue(policy.startswith(_EXPLICIT_CITATION_FINAL_ANSWER_POLICY))
+            payload = json.loads(frame[-1]['content'])
+            suffix = current._NATIVE_POLICY_SCOPE + (current._NATIVE_CONTEXT_REFERENCES
+                if 'native_reader_contexts' in payload else '')
+            self.assertTrue(policy.endswith(suffix))
+            policy = policy[:-len(suffix)]
             frame[0]['content'] = _FINAL_ANSWER_POLICY + policy[len(_EXPLICIT_CITATION_FINAL_ANSWER_POLICY):]
-            frame[-1]['content'] = json.dumps(json.loads(frame[-1]['content']),
-                                               ensure_ascii=False, sort_keys=True)
+            payload = expand_native_reader_contexts(payload)
+            self.remove_verified_reader_policy(payload['hcl_operations'])
+            frame[-1]['content'] = json.dumps(payload, ensure_ascii=False, sort_keys=True)
         # Malformed fields already refused by the source auditor now have a
         # shape-specific refusal. Their failure outcome/raw bytes are unchanged.
         if compared['receipt'].get('source_review', {}).get('status') == 'INVALID_EXPLICIT_CITATION_SHAPE':
