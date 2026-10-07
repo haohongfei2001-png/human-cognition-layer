@@ -25,7 +25,19 @@ evidence-limited answers remain available. Planning is fixed at 16,384/high and
 final answering at 16,384/low. Exact-request admission tracks both bounds, with no
 automatic upgrade or retry. Current runtime SHA256 is
 `112cfcd6749bd5c4216aaf580ad3608da85bda5d4d5bc017ebb04ade27aa8e7f`.
-This provider-free repair has no live model result. Prior grants remain closed.
+The [single input-phase smoke](docs/HCL_INPUT_PHASE_SMOKE_20261007_RESULTS.md)
+now has a live failure on this runtime: B01 used literal mode without candidates,
+B02 returned no checked treatment and D02 rejected the original source. Both
+source-entry blockers were present in the exact planning request. The strict
+native gate stopped before final reservation or dispatch, so the new final
+16,384/low configuration remains untested by this run. One planning call used
+CNY 0.209502 at the peak-rate estimate, not an invoice. No final answer was
+produced; the new CNY 2.30/two-call grant is closed with zero remaining authority.
+No second stage, retry or budget transfer is allowed. This verifies the stopping
+control, not accurate selection, useful native processing or end-to-end success.
+Provider-free work will align executable entry/mode contracts with code-owned
+necessary source conditions while preserving faithful semantic construction and
+honest insufficiency. Any further real call needs a new bounded approval.
 The [optional source-entry blockers](docs/HCL_ENTRY_READINESS.md) add only
 code-owned necessary input-condition observations for B02/D02. No blocker does
 not certify readiness. New metadata is omitted as a whole when it would exceed

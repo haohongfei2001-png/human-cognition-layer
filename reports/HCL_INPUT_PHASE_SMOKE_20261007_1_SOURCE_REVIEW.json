@@ -1,0 +1,115 @@
+{
+  "approved_native_evidence_sha256": "828190abf57bb84da74ffd2e4ccd1979bffb90b24c4ad973c6583c5f4d4f9775",
+  "authorization_ref": "OWNER_APPROVED_HCL_INPUT_PHASE_SMOKE_20261007_2_CALLS_2_30_CNY",
+  "critical_failure_tags": [
+    "RELEVANT_REAL_NATIVE_TREATMENT_ABSENT"
+  ],
+  "evidence_sha256": "2cccb0186a25cb4ccc967587be6355e6dab7f650b69860a0e4b4b419e216e1b4",
+  "final_answer_sha256": null,
+  "gates": {
+    "all_key_facts_preserved": false,
+    "citations_and_complete_final_delivery_passed": false,
+    "complete_source_delivery_passed": false,
+    "inference_boundaries_preserved": false,
+    "known_source_entry_blockers_avoided": false,
+    "relevant_native_execution_passed": false,
+    "trusted_native_policy_passed": false
+  },
+  "native_review_sha256": "08eb7261c8229fc3d709b201ab2f6a84445cd12af2732d37a9c21b73754e3a13",
+  "obligations": [
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL_ANSWER: final_text and final_fields are null; final_delivery_code is NOT_REACHED. passed=false means this final-answer obligation was not demonstrated, not that a contradictory or semantically wrong answer was observed. The planning request exactly matches the complete frozen source, and captured native outputs/policies replay exactly. End-to-end source-delivery and trusted-policy gates remain unproven because no final request was constructed; their false values do not assert planning-source or native-policy corruption.",
+      "id": "K1",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 2: the facilitator tablet says tonight's flute is prerecorded; the lobby monitor says only Restoration demonstration."
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL_ANSWER: final_text and final_fields are null; final_delivery_code is NOT_REACHED. passed=false means this final-answer obligation was not demonstrated, not that a contradictory or semantically wrong answer was observed. The frozen critical tag RELEVANT_REAL_NATIVE_TREATMENT_ABSENT denotes the observed absence of substantive checked native treatment: B01 literal and B02 executed unchecked; D02 was rejected. It is not an answer-contradiction tag.",
+      "id": "K2",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 3: Bea tells Jules Arun knows playback and watched the briefing; she saw him at the lobby monitor without checking its content."
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL_ANSWER: final_text and final_fields are null; final_delivery_code is NOT_REACHED. passed=false means this final-answer obligation was not demonstrated, not that a contradictory or semantically wrong answer was observed.",
+      "id": "K3",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 4: Arun tells Jules he saw the lobby screen rather than the tablet and remains unsure whether the flute is live; Bea is absent."
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL_ANSWER: final_text and final_fields are null; final_delivery_code is NOT_REACHED. passed=false means this final-answer obligation was not demonstrated, not that a contradictory or semantically wrong answer was observed.",
+      "id": "K4",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 3 and 5: Jules reports Bea's attribution, supported by her earlier speech, without independently establishing Arun's knowledge."
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL_ANSWER: final_text and final_fields are null; final_delivery_code is NOT_REACHED. passed=false means this final-answer obligation was not demonstrated, not that a contradictory or semantically wrong answer was observed.",
+      "id": "I1",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 3-5: Bea's attribution, Arun's uncertainty and Jules's nested report are distinct reported perspectives."
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL_ANSWER: final_text and final_fields are null; final_delivery_code is NOT_REACHED. passed=false means this final-answer obligation was not demonstrated, not that a contradictory or semantically wrong answer was observed.",
+      "id": "I2",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 2-4: Arun lacks the recorded tablet sightline; Bea does not hear his later clarification."
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL_ANSWER: final_text and final_fields are null; final_delivery_code is NOT_REACHED. passed=false means this final-answer obligation was not demonstrated, not that a contradictory or semantically wrong answer was observed.",
+      "id": "I3",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 1-2 and 5: the observer did not inspect equipment; the tablet claim concerns tonight's demonstration only."
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL_ANSWER: final_text and final_fields are null; final_delivery_code is NOT_REACHED. passed=false means this final-answer obligation was not demonstrated, not that a contradictory or semantically wrong answer was observed.",
+      "id": "C1",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 2 supplies the distinct screen contents and sightlines."
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL_ANSWER: final_text and final_fields are null; final_delivery_code is NOT_REACHED. passed=false means this final-answer obligation was not demonstrated, not that a contradictory or semantically wrong answer was observed.",
+      "id": "C2",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 3-5 identify each speaker and exchange; Jules's final quotation is not Arun's own statement."
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL_ANSWER: final_text and final_fields are null; final_delivery_code is NOT_REACHED. passed=false means this final-answer obligation was not demonstrated, not that a contradictory or semantically wrong answer was observed. There are no final citations to judge. No fabricated citation, equipment inspection or omitted continuation is alleged.",
+      "id": "C3",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1 is the sole complete frozen source, text SHA256 eb7fbe52cc1d86e3c09bb70d65ba086ef334e67431fa2c44cc0c74b956f9edd6."
+    }
+  ],
+  "overall_pass": false,
+  "package_sha256": "24134c0d0c78e22a1a2c3c4df3779fcd8944571831efeda0689c7ee327c62548",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "relevant_native_capability_ids": [],
+  "request_diagnostics_sha256": "b51d5e25238563e241ba6e8ad06bbed4ae3d481c4bd13e34e7a9bedcabec8c90",
+  "reviewer_role": "INDEPENDENT_SOURCE_FIRST_AFTER_OUTPUT",
+  "same_smoke_and_rules_fixed_before_input_phase_smoke_output": true,
+  "schema": "hcl-input-phase-smoke-source-review-candidate-v1",
+  "smoke_semantics": [
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL_ANSWER: final_text and final_fields are null; final_delivery_code is NOT_REACHED. passed=false means this final-answer obligation was not demonstrated, not that a contradictory or semantically wrong answer was observed. The configured 16,384-token low-effort final phase was never invoked and remains untested.",
+      "id": "S1",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 3 supports Bea's attribution about Arun, not established private knowledge."
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL_ANSWER: final_text and final_fields are null; final_delivery_code is NOT_REACHED. passed=false means this final-answer obligation was not demonstrated, not that a contradictory or semantically wrong answer was observed.",
+      "id": "S2",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 4 supplies Arun's uncertainty to Jules and Bea's absence."
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL_ANSWER: final_text and final_fields are null; final_delivery_code is NOT_REACHED. passed=false means this final-answer obligation was not demonstrated, not that a contradictory or semantically wrong answer was observed.",
+      "id": "S3",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 2-3 distinguish monitor/tablet access and defeat Bea's stated watching-to-knowing route."
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL_ANSWER: final_text and final_fields are null; final_delivery_code is NOT_REACHED. passed=false means this final-answer obligation was not demonstrated, not that a contradictory or semantically wrong answer was observed. All four smoke requirements are unassessed; zero demonstrated requirements is not a 0/4 semantic correctness score.",
+      "id": "S4",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 1-2 and 5 keep Jules's nested report distinct from agreement or verified playback, with tonight-only scope."
+    }
+  ]
+}
