@@ -1,0 +1,44 @@
+{
+  "case_canonical_packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "case_review_file_sha256": "c6dbd464923b8a338540653dbaeec6c2c367873129f4c55ad6cff47abd2fb60b",
+  "checks": {
+    "all_blockers_resolved": true,
+    "native_permission_required_before_external_work": true,
+    "provider_free_regressions_passed": true
+  },
+  "executor_files_sha256": {
+    "hcl_input_phase_smoke_candidate.py": "fd57de79aad20d0f971d152fec116f170f125957c780d14a5d838b3915d3ccb4",
+    "hcl_input_phase_smoke_cli.py": "164b3bd951fbe362a72dd6398746768ca46cdf73561707dd4f43c20644346f9f",
+    "hcl_input_phase_smoke_native_public.py": "5443c0e4fd021604f2a23a3083b002cc3386c3e488d01d50d79f7627c0265fb1",
+    "hcl_input_phase_smoke_public.py": "9fde4ceb28aaf710cb82a2027cdbfd8cc669eaf675b8a11625c7f5b8f008fbcc",
+    "hcl_input_phase_smoke_reviews.py": "f2028af908ffe7674d9db24e34ef27137d244d1d14a627e3efa34af14d832d1d",
+    "tests/test_hcl_input_phase_smoke_adapter.py": "36310825b4aa29c0668b331f50b9a2380777c31aad6d57271ca0f6c34062fcf5",
+    "tests/test_hcl_input_phase_smoke_candidate.py": "558a7fa7fe4086bbcd70dc811e077c24ab18dcadd4ea07b02f042eb7682d6fa3",
+    "tests/test_hcl_input_phase_smoke_native_regressions.py": "0f1999e3160a46418274af853fdbec248373a5c270341543d80bd6313d429fc8",
+    "tests/test_hcl_input_phase_smoke_prefinal_gate.py": "81cec91bcfa9809f63cb1255547abb0234fd82fa355904160edb3675f77bc480",
+    "tests/test_hcl_input_phase_smoke_revision3.py": "4f2702a99ff8cdd898ad0a6d38f3aa258edf16f807b431674bb220e19f7e2be2",
+    "tests/test_hcl_input_phase_smoke_routing_gate.py": "ca8695563688becc81fb90e477945ebf980b17dc904887e6dea5a15684395a46",
+    "tests/test_hcl_input_phase_smoke_time_and_diagnostics.py": "c15f072621eb9188fe3191a4f2e232eec387a428e05e16410082036db7b029b1"
+  },
+  "live_execution_authorized": false,
+  "read_only_reader_files_sha256": {
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0"
+  },
+  "reviewer_role": "INDEPENDENT_READ_ONLY_SECURITY_REVIEW",
+  "runtime_commit": "717843b222eb018366494b947b079363e63dba84",
+  "runtime_sha256": "112cfcd6749bd5c4216aaf580ad3608da85bda5d4d5bc017ebb04ade27aa8e7f",
+  "schema": "hcl-input-phase-smoke-independent-executor-approval-v1",
+  "verdict": "PASS_FOR_BOUNDED_EXECUTOR_PACKAGE",
+  "verification": {
+    "account_queries": 0,
+    "credentials_read": false,
+    "provider_calls": 0,
+    "provider_free_tests_passed": 123,
+    "sdk_constructed": false
+  },
+  "workflow_files_sha256": {
+    ".github/workflows/hcl-input-phase-smoke-20261007-1-once.yml": "200b23f99727426ab5ae32ba9137b6bc2f011c468c604aaf6c32d4ce628491ae"
+  }
+}

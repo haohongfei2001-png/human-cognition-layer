@@ -1,0 +1,26 @@
+{
+  "case_canonical_packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "checks": {
+    "added_routing_rule_fixed_before_output": true,
+    "native_admissibility_passed": true,
+    "native_capacity_passed": true,
+    "source_rubric_passed": true,
+    "unchanged_frozen_packet_and_regression_exposure_declared": true
+  },
+  "efficacy_claimed": false,
+  "evidence_sha256": {
+    "actual_executor_transport_control": "bef7444069fd626f962f139369eba7b3c2e59f72bd2a81c204636a6284171a8d",
+    "frozen_manifest": "5e0b58c849993c150ae8b3abd3b18f438e431b451b7c29fc2516d5f05010fa96",
+    "frozen_review_targets": "3cfa3e26a8637504bff8c4d9d4a1306004fc55eadae59e5e5de74fbf737494e3",
+    "independent_source_capacity_evidence": "db4ea9b2d34d7d79db64f8b03c4905d2be24d4c1a16684bc22eef2222e5c3dcc",
+    "manual_admissibility_probe": "d7d97fc972b8adb7859a1f1e0c3493860b455bb532368da81b4a48864902aea5"
+  },
+  "live_execution_authorized": false,
+  "provider_calls": 0,
+  "reviewer_role": "INDEPENDENT_REGRESSION_CASE_REVIEW_BEFORE_INPUT_PHASE_SMOKE_OUTPUT",
+  "runtime_commit": "717843b222eb018366494b947b079363e63dba84",
+  "runtime_sha256": "112cfcd6749bd5c4216aaf580ad3608da85bda5d4d5bc017ebb04ade27aa8e7f",
+  "schema": "hcl-input-phase-smoke-independent-case-review-v1",
+  "verdict": "PASS_FOR_BOUNDED_DEVELOPMENT_ONLY"
+}

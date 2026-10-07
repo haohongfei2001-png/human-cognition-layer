@@ -1,0 +1,151 @@
+{
+  "authorization_ref": "OWNER_APPROVED_HCL_INPUT_PHASE_SMOKE_20261007_2_CALLS_2_30_CNY",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "configuration": {
+    "answer_tokens": 16384,
+    "approved_at_bound": "2026-10-07T19:45:33Z",
+    "authorization_ref": "OWNER_APPROVED_HCL_INPUT_PHASE_SMOKE_20261007_2_CALLS_2_30_CNY",
+    "case_replacement": false,
+    "currency": "CNY",
+    "declared_source_entry_blockers": {
+      "reliability-20261007-smoke-flute": [
+        {
+          "capability": "B02",
+          "reason": "COMPLETE_SOURCE_ACCESS_LITERAL_FORMS_REQUIRED",
+          "source_id": "flute-observer-record",
+          "version": 1
+        },
+        {
+          "capability": "D02",
+          "reason": "NONBLANK_BOUNDED_SOURCE_LINES_REQUIRED",
+          "source_id": "flute-observer-record",
+          "version": 1
+        }
+      ]
+    },
+    "entry_requirements": {
+      "absence_of_blocker_is_not_readiness": true,
+      "actual_allowed_checked_native_required_before_final": true,
+      "independent_source_review_still_required": true,
+      "known_blocker_selection_rule": "NO_SELECTED_OPERATION_MATCHES_DECLARED_SOURCE_VERSION_ENTRY_BLOCKER",
+      "known_native_failure_stops_before_final_reservation": true,
+      "native_source_and_publication_integrity_required_before_final": true,
+      "necessary_allowed_family_checked_treatment_required": true,
+      "no_second_stage": true
+    },
+    "executor_files": {
+      "hcl_input_phase_smoke_candidate.py": "fd57de79aad20d0f971d152fec116f170f125957c780d14a5d838b3915d3ccb4",
+      "hcl_input_phase_smoke_cli.py": "164b3bd951fbe362a72dd6398746768ca46cdf73561707dd4f43c20644346f9f",
+      "hcl_input_phase_smoke_native_public.py": "5443c0e4fd021604f2a23a3083b002cc3386c3e488d01d50d79f7627c0265fb1",
+      "hcl_input_phase_smoke_public.py": "9fde4ceb28aaf710cb82a2027cdbfd8cc669eaf675b8a11625c7f5b8f008fbcc",
+      "hcl_input_phase_smoke_reviews.py": "f2028af908ffe7674d9db24e34ef27137d244d1d14a627e3efa34af14d832d1d",
+      "tests/test_hcl_input_phase_smoke_adapter.py": "36310825b4aa29c0668b331f50b9a2380777c31aad6d57271ca0f6c34062fcf5",
+      "tests/test_hcl_input_phase_smoke_candidate.py": "558a7fa7fe4086bbcd70dc811e077c24ab18dcadd4ea07b02f042eb7682d6fa3",
+      "tests/test_hcl_input_phase_smoke_native_regressions.py": "0f1999e3160a46418274af853fdbec248373a5c270341543d80bd6313d429fc8",
+      "tests/test_hcl_input_phase_smoke_prefinal_gate.py": "81cec91bcfa9809f63cb1255547abb0234fd82fa355904160edb3675f77bc480",
+      "tests/test_hcl_input_phase_smoke_revision3.py": "4f2702a99ff8cdd898ad0a6d38f3aa258edf16f807b431674bb220e19f7e2be2",
+      "tests/test_hcl_input_phase_smoke_routing_gate.py": "ca8695563688becc81fb90e477945ebf980b17dc904887e6dea5a15684395a46",
+      "tests/test_hcl_input_phase_smoke_time_and_diagnostics.py": "c15f072621eb9188fe3191a4f2e232eec387a428e05e16410082036db7b029b1"
+    },
+    "expires_at": null,
+    "fallback": false,
+    "maximum_aggregate_calls": 2,
+    "maximum_aggregate_cny": "2.30",
+    "maximum_final_characters": 64000,
+    "maximum_final_texts": 1,
+    "maximum_request_bytes": 36000,
+    "maximum_wait_seconds": 180,
+    "model_judge": false,
+    "openai_sdk_version": "2.14.0",
+    "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+    "phase_holds_cny": {
+      "answer": "1.109664",
+      "planning": "1.109664"
+    },
+    "planning_completion_includes_reasoning": true,
+    "planning_tokens": 16384,
+    "private_native_review_maximum_bytes": 1048576,
+    "public_native_maximum_case_records": 1,
+    "public_native_maximum_operations_per_record": 3,
+    "public_native_maximum_record_bytes": 1048576,
+    "public_native_requires_new_explicit_grant_permission": true,
+    "rates_cny": {
+      "input": "9",
+      "output": "27"
+    },
+    "reasoning_effort": {
+      "answer": "low",
+      "planning": "high"
+    },
+    "reference_rates_usd": {
+      "input": "1.32",
+      "output": "3.96"
+    },
+    "replanning": false,
+    "request_retries": 0,
+    "requests": {
+      "reliability-20261007-smoke-flute:HCL:planning": {
+        "full_request_sha256": "bb25e49ea78fd2542b1fa146f12606f806df3d3b4d307a399977ebcb42de71e1",
+        "full_request_utf8_bytes": 31035,
+        "max_tokens": 16384,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 23963,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 22021,
+          "question": 195,
+          "sources": 1427
+        },
+        "reservation_cny": "1.020294",
+        "reservation_usd": "0.14964312",
+        "serialized_messages_sha256": "807b13b910d8c02f137f882a356259549a27f29da1600cfb95ba3a51baf7d7fc",
+        "serialized_messages_utf8_bytes": 30880,
+        "within_request_bound": true
+      }
+    },
+    "runtime_sha256": "112cfcd6749bd5c4216aaf580ad3608da85bda5d4d5bc017ebb04ade27aa8e7f",
+    "sdk_retries": 0,
+    "source_recorded_at": "2026-10-07T05:19:26.377856+00:00",
+    "source_recorded_at_basis": "FROZEN_PACKET_PREPARATION_TIMESTAMP_NOT_ACTUAL_INGESTION_OR_EVENT_TIME",
+    "stage_call_caps": {
+      "1": 2
+    },
+    "stage_cny_caps": {
+      "1": "2.30"
+    },
+    "stage_orders": {
+      "1": [
+        [
+          "reliability-20261007-smoke-flute",
+          "HCL"
+        ]
+      ]
+    },
+    "stage_reservation_cny": {
+      "1": "2.219328"
+    },
+    "stage_windows_seconds": {
+      "1": 600
+    },
+    "usd_reference_only": true,
+    "z3_solver_version": "4.15.4.0"
+  },
+  "currency": "CNY",
+  "independent_case_review_sha256": "c6dbd464923b8a338540653dbaeec6c2c367873129f4c55ad6cff47abd2fb60b",
+  "independent_executor_review_sha256": "d3fe7e8631455a6a31ff74b98379e6f12ce4f085791154c47242cd1ba92c1521",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "planner_lifecycle_contracts_merge_commit": "cf43f8fe8f9705cfc570f34224beb3095d2ee8c5",
+  "pursuit_uncertainty_merge_commit": "92c8990e0c13983ada4b8b88a1480875019fd00e",
+  "read_only_reader_files": {
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0"
+  },
+  "runtime_commit": "717843b222eb018366494b947b079363e63dba84",
+  "runtime_sha256": "112cfcd6749bd5c4216aaf580ad3608da85bda5d4d5bc017ebb04ade27aa8e7f",
+  "schema": "hcl-input-phase-smoke-final-package-v1",
+  "source_guard_merge_commit": "8f6652c98b4cd0856e3e8d31f67ea73527ebd61d",
+  "status": "FROZEN_BEFORE_THIS_INPUT_PHASE_SMOKE_OUTPUT",
+  "trusted_native_policy_merge_commit": "61da904bd5de34a974316c0d8188f582d21b9646",
+  "workflow_files": {
+    ".github/workflows/hcl-input-phase-smoke-20261007-1-once.yml": "200b23f99727426ab5ae32ba9137b6bc2f011c468c604aaf6c32d4ce628491ae"
+  }
+}
