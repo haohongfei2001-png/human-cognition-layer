@@ -1,0 +1,123 @@
+{
+  "cases_file": ".github/frozen/hcl-entry-contract-smoke-20261008/cases.json",
+  "cases_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "expected_package": {
+    "actual_spend_cny": "0",
+    "answer_tokens": 16384,
+    "authorization_ref": "OFFLINE_DIAGNOSTIC_TEST_ONLY_NO_LIVE_AUTHORITY",
+    "case_replacement": false,
+    "declared_source_entry_blockers": {
+      "reliability-20261007-smoke-flute": [
+        {
+          "capability": "B02",
+          "reason": "COMPLETE_SOURCE_ACCESS_LITERAL_FORMS_REQUIRED",
+          "source_id": "flute-observer-record",
+          "version": 1
+        },
+        {
+          "capability": "D02",
+          "reason": "NONBLANK_BOUNDED_SOURCE_LINES_REQUIRED",
+          "source_id": "flute-observer-record",
+          "version": 1
+        }
+      ]
+    },
+    "entry_requirements": {
+      "absence_of_blocker_is_not_readiness": true,
+      "actual_allowed_checked_native_required_before_final": true,
+      "independent_source_review_still_required": true,
+      "known_blocker_selection_rule": "NO_SELECTED_OPERATION_MATCHES_DECLARED_SOURCE_VERSION_ENTRY_BLOCKER",
+      "known_native_failure_stops_before_final_reservation": true,
+      "native_source_and_publication_integrity_required_before_final": true,
+      "necessary_allowed_family_checked_treatment_required": true,
+      "no_second_stage": true
+    },
+    "fallback": false,
+    "implementation_files": {
+      "hcl_offline_diagnostic_export_v1.py": "189a76fea4b2c7b8872a94abe3232bcd46f286b6e54fe901112dc5b9ceb3799a",
+      "hcl_offline_diagnostic_public_v1.py": "64a5e6ec71f1801e35eb8ea274f996dc54c4b46f20fa17d40c04d50ae705167f",
+      "hcl_offline_diagnostic_reference.py": "fc7e36519762f79ea7229550b1e84faa7ea7cff3e8da74c2db74e339e7c12639"
+    },
+    "live_execution_authorized": false,
+    "maximum_aggregate_calls": 2,
+    "maximum_aggregate_cny": "2.30",
+    "maximum_final_characters": 64000,
+    "maximum_final_texts": 1,
+    "maximum_request_bytes": 36000,
+    "maximum_wait_seconds": 180,
+    "mode": "OFFLINE_SYNTHETIC_NO_PROVIDER",
+    "model_judge": false,
+    "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+    "phase_holds_cny": {
+      "answer": "1.109664",
+      "planning": "1.109664"
+    },
+    "planning_tokens": 16384,
+    "rates_cny": {
+      "input": "9",
+      "output": "27"
+    },
+    "reasoning_effort": {
+      "answer": "low",
+      "planning": "high"
+    },
+    "reference_helper_files": {
+      "hcl_entry_contract_smoke_candidate.py": "a609a39d44653fe2db9cbd4fa034f5fff1238b5d6d199a77dde01d13cafaae36",
+      "hcl_entry_contract_smoke_native_public.py": "9f3b1e17afbffeb4f1f834da22ad97e2eb30f93d7442b005f0c6821a62099a28",
+      "hcl_entry_contract_smoke_public.py": "7eef8df9cd472394ecb51ba2963b5ed8893e5929c263108233c19398ace77425"
+    },
+    "reference_rates_usd": {
+      "input": "1.32",
+      "output": "3.96"
+    },
+    "replanning": false,
+    "request_retries": 0,
+    "requests": {
+      "reliability-20261007-smoke-flute:HCL:planning": {
+        "full_request_sha256": "955c24a417e291e447d7723e1174945c13b1aa5a0038eaadf0aaa0e0c8bdae00",
+        "full_request_utf8_bytes": 28333,
+        "max_tokens": 16384,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 21218,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 18626,
+          "question": 195,
+          "sources": 1427
+        },
+        "reservation_cny": "0.971658",
+        "reservation_usd": "0.14250984",
+        "serialized_messages_sha256": "cb8a22982631afca1455e24a5479c29c70edec445604336776179c51f20818e9",
+        "serialized_messages_utf8_bytes": 28178,
+        "within_request_bound": true
+      }
+    },
+    "runtime_sha256": "f5d155b9a8f8efd8e94143ff622d955028f5b83f43a6f1e76c7e2fa033d06940",
+    "schema": "hcl-offline-diagnostic-package-v1",
+    "sdk_retries": 0,
+    "source_recorded_at": "2026-10-07T05:19:26.377856+00:00",
+    "source_recorded_at_basis": "FROZEN_PACKET_PREPARATION_TIMESTAMP_NOT_ACTUAL_INGESTION_OR_EVENT_TIME",
+    "stage_call_caps": {
+      "1": 2
+    },
+    "stage_cny_caps": {
+      "1": "2.30"
+    },
+    "stage_orders": {
+      "1": [
+        [
+          "reliability-20261007-smoke-flute",
+          "HCL"
+        ]
+      ]
+    },
+    "stage_reservation_cny": {
+      "1": "2.219328"
+    },
+    "stage_windows_seconds": {
+      "1": 600
+    }
+  },
+  "reference_commit": "5c6984598b25270f7a370263ab5eaaee02d8bd14",
+  "schema": "hcl-offline-current-smoke-preflight-v1",
+  "scope": "CURRENT_REQUEST_FREEZE_ONLY_NO_LIVE_AUTHORITY_OR_HISTORICAL_DIAGNOSIS"
+}

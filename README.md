@@ -57,13 +57,17 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: END_TO_END_READINESS_AND_LIVE_PREREQUISITES**
+**NEXT_READY: CURRENT_RUNTIME_COMPLETE_FLOW_DIAGNOSTIC**
 
 The live queue and current evidence are in [STATUS.md](STATUS.md) and
 [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md). The current
 [executable entry contract](docs/HCL_EXECUTABLE_ENTRY_CONTRACT.md) describes
 source-bound input modes, ordinary evidence-limited answers and strict native
-admission. Historical experiment packages retain their own results and closed
+admission. The [current offline diagnostic preflight](docs/HCL_OFFLINE_DIAGNOSTIC_EXPORT_V1.md)
+binds complete request identity and preserves safe failure codes through original
+receipt/native evidence. Earlier optional-blocker queue labels are historical;
+offline injected controls do not establish model success. Historical experiment
+packages retain their own results and closed
 authorization records; they are not the current queue or permission state.
 Those packages and this README do not authorize another model run. Any new paid
 validation needs a separate bounded approval.
