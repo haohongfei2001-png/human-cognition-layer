@@ -81,3 +81,42 @@ precise cause remains unknown. This establishes an offline diagnostic path, not
 model compliance, general reliability or I02-I06 completion. Any later real study
 still requires its own exact implementation/request/review freeze and new bounded
 owner approval; none is created by this change.
+
+## Current ordinary-request preflight
+
+`scripts/hcl_offline_diagnostic_preflight_v1.py` reuses this runner and exporter
+against the original, already exposed October 8 flute smoke. Its separate offline
+[manifest](../scripts/hcl_offline_diagnostic_preflight_v1.json) pins the original
+packet/rubric, current runtime, implementation helpers,
+complete request and phase configuration before fake transport or output creation.
+It reads the existing source packet without duplicating or rewriting its text.
+The current complete planning request is 28,333 UTF-8 bytes, below the unchanged
+36,000-byte limit; planning remains 16,384/high and answering 16,384/low.
+
+Fixed injected failure controls exercise one returned planning response, preserved
+safe code/stage, a closed planning hold, and no final reservation or dispatch.
+The preflight reloads the saved receipt and native capture independently, then
+requires their fresh export to match the supplied public evidence before checking
+review binding. It writes the safe public diagnosis before requiring a complete
+native capture. A receipt explicitly recording post-runtime capture failure may
+bind with no native artifact; a declared capture whose file is missing, malformed
+or replaced retains the diagnosis but rejects the source binding. A JSON-null file
+cannot stand in for an uncaptured artifact. Source, runtime, request, configuration
+or original-evidence drift must fail closed. These controls are simulations with zero actual spend;
+their review fixtures do not claim an independent semantic judgment. A correctly
+bound failed record still cannot pass the separate semantic success gate.
+
+Run the current-request checks with:
+
+```sh
+python -m unittest tests.test_hcl_offline_diagnostic_preflight_v1 -v
+```
+
+This preflight covers retention of a diagnostic that the runtime actually returns.
+It cannot reconstruct the old real run's lost reason, invent a diagnosis before
+runtime return, or demonstrate that a future model will select useful operations.
+Any future live integration must reuse this preservation order and bind its own
+reviewed implementation, exact requests and trusted original artifacts; its live
+transport and authority are not created here. New paid calls and public evidence
+require their own bounded approval. Historical packets, results and grants remain
+unchanged.

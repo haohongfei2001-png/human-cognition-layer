@@ -229,18 +229,20 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: VERIFY_OPTIONAL_ENTRY_BLOCKERS_IN_COMPLETE_FLOW**
+**NEXT_READY: CURRENT_RUNTIME_COMPLETE_FLOW_DIAGNOSTIC**
 
-Necessary source-entry blocker observations are implemented with provider-free
-controls and exact capacity fallback. They do not promise valid selection or
-substantive native treatment. After independent review and exact-current CI,
-prepare the next bounded complete-flow diagnostic with source-first criteria and
-explicit new spending authority. Keep the complete original source, real native
-execution and honest insufficiency branches; do not rewrite sources, invent
-candidates, force unrelated operations or treat hints as evidence. The last passed
-single smoke remains evidence on its own prior frozen runtime. All three October 7
-studies are closed; no second planning phase, automatic retry or reused allowance.
-Formal I02-I06 remains incomplete.
+The earlier optional-blocker task is historical. The current executable entry
+contract, safe runtime diagnostics and [offline diagnostic path](docs/HCL_OFFLINE_DIAGNOSTIC_EXPORT_V1.md)
+are the basis for the next complete-flow diagnostic. The current-request preflight
+pins original exposed sources, configuration and complete request identity, and
+checks failure-code retention against separately loaded receipt/native originals.
+Its injected offline failures are not historical model replies or evidence of
+selection accuracy. A future real study still needs its own exact implementation,
+request and review freeze and new bounded spending/publication authority.
+Keep the complete original source, real native execution and honest insufficiency;
+do not invent candidates, force unrelated operations or treat hints as evidence.
+All prior paid study authority is closed; no second planning phase, automatic retry
+or reused allowance is authorized. Formal I02-I06 remains incomplete.
 
 A00 plus the 40 A–H runtime packages have their declared construction/correctness
 status, not a product-completion percentage. The current
