@@ -57,10 +57,13 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: CURRENT_RUNTIME_COMPLETE_FLOW_DIAGNOSTIC**
+**NEXT_READY: DEVELOPMENT_REALITY_CHECK_PREPARATION**
 
 The live queue and current evidence are in [STATUS.md](STATUS.md) and
-[DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md). The current
+[DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md). The [single exposed diagnostic](docs/HCL_DIAGNOSTIC_SMOKE_20261008_RESULTS.md)
+passed its original source-first checks after two real calls; its grant is closed.
+Broader reliability, Base benefit and formal I02-I06 remain unproven.
+The next work is preparation under the existing development validation policy. The current
 [executable entry contract](docs/HCL_EXECUTABLE_ENTRY_CONTRACT.md) describes
 source-bound input modes, ordinary evidence-limited answers and strict native
 admission. The [current offline diagnostic preflight](docs/HCL_OFFLINE_DIAGNOSTIC_EXPORT_V1.md)

@@ -4,12 +4,18 @@
   "authorization_ref": "HCL_DIAGNOSTIC_SMOKE_20261008_1",
   "authorized_calls": 2,
   "authorized_cny": "2.30",
+  "closed_head_sha": "b0b15e6a3d7cc30738cd9db2aa37426ec306fc58",
+  "closed_reason": "ONE_EXPOSED_REGRESSION_COMPLETE_NO_RETRY_OR_NEXT_STAGE",
+  "closed_run_id": "37792143864",
   "currency": "CNY",
   "executor_commit": "316034d261f15d985e3735137520be4818d32079",
   "expires_at": null,
   "historical_budget_transfer": false,
+  "invoice_cost_cny": null,
+  "original_ready_grant_sha256": "aa141acecf70f79c2cd6ffab1e9a3835671684ae43a7ed0ef25d9a8ad2a76a47",
   "other_stage_budget_transfer": false,
   "package_sha256": "3ecadd43c73bd3b89e40ad744e2a0d553d8ecd9ab46a1f2e93ec34e1c4590df3",
+  "provider_calls": 2,
   "public_native_evidence_permission": {
     "approval_message_id": "Sentinel_5c7e13ffe0688191a2ba34b2791f2e65",
     "approved_at_bound": "2026-10-08T12:30:14Z",
@@ -29,8 +35,13 @@
     "schema": "hcl-diagnostic-smoke-public-permission-v1",
     "source_validated_native_arguments_and_results": true
   },
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_cny": "0",
+  "reserved_cny": "2.219328",
   "retries": 0,
   "schema": "hcl-diagnostic-smoke-new-grant-v1",
+  "source_review_sha256": "916a53f88c74a51d3a23e50d6880e14b5f15f6324737c984727b4f389f80a731",
   "stage": 1,
-  "status": "READY"
+  "status": "CLOSED_NO_TRANSFER_NO_RETRY",
+  "usage_rated_cny": "0.440415"
 }
