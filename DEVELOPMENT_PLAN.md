@@ -38,6 +38,12 @@ This is a provider-free interface repair, not a diagnosis of the prior real
 failure or evidence of improved model compliance. All paid grants are closed;
 no new call is authorized. Current runtime SHA256 is
 `f5d155b9a8f8efd8e94143ff622d955028f5b83f43a6f1e76c7e2fa033d06940`.
+A separate [offline diagnostic export](docs/HCL_OFFLINE_DIAGNOSTIC_EXPORT_V1.md)
+now carries those safe enums through actual fake transport, durable receipt,
+public projection and exact review binding. Failure identity remains separate
+from semantic success; the latter still requires complete native evidence and
+all original gates. This is offline control-flow coverage only, with no new live
+executor, paid authority or explanation of the historical missing failure code.
 
 The current [executable entry contract](docs/HCL_EXECUTABLE_ENTRY_CONTRACT.md)
 uses the same code-owned source/version conditions in planning and admission.
