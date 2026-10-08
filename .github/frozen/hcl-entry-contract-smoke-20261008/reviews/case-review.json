@@ -1,0 +1,30 @@
+{
+  "case_canonical_packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "checks": {
+    "added_routing_rule_fixed_before_output": true,
+    "native_admissibility_passed": true,
+    "native_capacity_passed": true,
+    "source_rubric_passed": true,
+    "unchanged_frozen_packet_and_regression_exposure_declared": true
+  },
+  "efficacy_claimed": false,
+  "evidence_sha256": {
+    "current_independent_source_capacity_evidence": "846055987c1c5fa0bc4b52e3f2a287ca96181a152067029e1c475459751e97fd",
+    "independent_source_capacity_reproduction": "5c5b29d7d6985ca0b6ce4d2764a1232bb4ebd34486324ebcfe1a762aef131c5d",
+    "independent_source_capacity_review": "16e875d82463ae2b715d0f2aeb5039542b96eb6dcf74816b467e30aaf4e032ba",
+    "preparation_manual_native_probe": "609c2f51b9f19e6be254830b9ee8a58595e9a1105988cce23a682b3ca42d8865",
+    "preparation_offline_executor_probe": "4e6a9eb4f2ec0b45508c715d66de06b2e07b4164115e13e20734bd8ac1f89b88",
+    "reviewed_configuration": "c2b6cfd24cc4834d6a7ddc081934f2f6a4ada20eca4105c3c3e27a516cce66ae",
+    "reviewed_manifest": "69c60b9a9a68ddeabc63dd866e1505336b134be43881c92ba40bb561f0267461",
+    "reviewed_targets": "c88b57d28001c51fbc71b7d536b7068ef8c284b49618f554771f96a32a23b0df",
+    "source_and_routing_30_regressions": "4f519bafc5baa85e456aaafe66fd7df250dd10af12ca720be16241d41681e9ab"
+  },
+  "live_execution_authorized": false,
+  "provider_calls": 0,
+  "reviewer_role": "INDEPENDENT_REGRESSION_CASE_REVIEW_BEFORE_ENTRY_CONTRACT_SMOKE_OUTPUT",
+  "runtime_commit": "9e507b945c179f148f8e78cb7dd559221b3ee732",
+  "runtime_sha256": "50e62d02790f165d1d73fc3275fc6f795da7582b9f81143eaa7aa69806660d16",
+  "schema": "hcl-entry-contract-smoke-independent-case-review-v1",
+  "verdict": "PASS_FOR_BOUNDED_DEVELOPMENT_ONLY"
+}
