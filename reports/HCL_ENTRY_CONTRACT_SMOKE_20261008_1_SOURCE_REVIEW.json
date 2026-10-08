@@ -1,0 +1,115 @@
+{
+  "approved_native_evidence_sha256": "99e4febd7941190fd77c51208a53c2ab2c0ac4a59ca2b6f47eb5af9e7340a979",
+  "authorization_ref": "OWNER_APPROVED_HCL_ENTRY_CONTRACT_SMOKE_20261008_2_CALLS_2_30_CNY",
+  "critical_failure_tags": [
+    "RELEVANT_REAL_NATIVE_TREATMENT_ABSENT"
+  ],
+  "evidence_sha256": "cf08729d0d273411ebd26a3497e07689fbe19d02db4f1d698de45428928ffa1b",
+  "final_answer_sha256": null,
+  "gates": {
+    "all_key_facts_preserved": false,
+    "citations_and_complete_final_delivery_passed": false,
+    "complete_source_delivery_passed": false,
+    "inference_boundaries_preserved": false,
+    "known_source_entry_blockers_avoided": true,
+    "relevant_native_execution_passed": false,
+    "trusted_native_policy_passed": false
+  },
+  "native_review_sha256": "390db8137f372badbb3d390f97c575dcc1513ddd1d403b31e4900ca10173b91a",
+  "obligations": [
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL: no answer was generated. passed=false means the obligation was not demonstrated, not that a generated answer was substantively incorrect.",
+      "id": "K1",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 2"
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL: no answer was generated. passed=false means the obligation was not demonstrated, not that a generated answer was substantively incorrect.",
+      "id": "K2",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 3"
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL: no answer was generated. passed=false means the obligation was not demonstrated, not that a generated answer was substantively incorrect.",
+      "id": "K3",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 4"
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL: no answer was generated. passed=false means the obligation was not demonstrated, not that a generated answer was substantively incorrect.",
+      "id": "K4",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 3-5"
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL: no answer was generated. passed=false means the obligation was not demonstrated, not that a generated answer was substantively incorrect.",
+      "id": "I1",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 3-5"
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL: no answer was generated. passed=false means the obligation was not demonstrated, not that a generated answer was substantively incorrect.",
+      "id": "I2",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 2-4"
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL: no answer was generated. passed=false means the obligation was not demonstrated, not that a generated answer was substantively incorrect.",
+      "id": "I3",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 1-2 and 5"
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL: no answer was generated. passed=false means the obligation was not demonstrated, not that a generated answer was substantively incorrect.",
+      "id": "C1",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 2"
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL: no answer was generated. passed=false means the obligation was not demonstrated, not that a generated answer was substantively incorrect.",
+      "id": "C2",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 3-5"
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL: no answer was generated. passed=false means the obligation was not demonstrated, not that a generated answer was substantively incorrect.",
+      "id": "C3",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, complete source"
+    }
+  ],
+  "overall_pass": false,
+  "package_sha256": "cb2ea842c2869cd233a80bcb9716efe94cf4181ee2af080b06cdbbfb489d89e2",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "relevant_native_capability_ids": [],
+  "request_diagnostics_sha256": "91bb1701f7cf075379aa4ca44e28f21346b1f9db31f2a75794be715365669119",
+  "reviewer_role": "INDEPENDENT_SOURCE_FIRST_AFTER_OUTPUT",
+  "same_smoke_and_rules_fixed_before_entry_contract_smoke_output": true,
+  "schema": "hcl-entry-contract-smoke-source-review-candidate-v1",
+  "smoke_semantics": [
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL: no answer was generated. passed=false means the obligation was not demonstrated, not that a generated answer was substantively incorrect.",
+      "id": "S1",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 3; the reported attribution is source material only."
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL: no answer was generated. passed=false means the obligation was not demonstrated, not that a generated answer was substantively incorrect.",
+      "id": "S2",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraph 4; the later report and access limits remain source material only."
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL: no answer was generated. passed=false means the obligation was not demonstrated, not that a generated answer was substantively incorrect.",
+      "id": "S3",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 2-3; screen contents and sightlines remain source material only."
+    },
+    {
+      "answer_evidence": "NOT_EVALUABLE_NO_FINAL: no answer was generated. passed=false means the obligation was not demonstrated, not that a generated answer was substantively incorrect.",
+      "id": "S4",
+      "passed": false,
+      "source_evidence": "flute-observer-record@1, paragraphs 1-2 and 5; nested attribution and scope remain source material only."
+    }
+  ]
+}

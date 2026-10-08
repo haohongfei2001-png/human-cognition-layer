@@ -1,0 +1,169 @@
+{
+  "answer_tokens": 16384,
+  "approved_native_evidence": {
+    "destination": "https://github.com/haohongfei2001-png/human-cognition-layer",
+    "package_sha256": "cb2ea842c2869cd233a80bcb9716efe94cf4181ee2af080b06cdbbfb489d89e2",
+    "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+    "permission_sha256": "9639a3b8e8268ba2e479d27331d9fe824661c12f980417bf544ff91a301a8a04",
+    "receipt_sha256": "a3637d3cfd147063648e3b564af67eec36dde76ad5e7339451a1e18ddef6c9bb",
+    "record_count": 1,
+    "records": [
+      {
+        "actual_executed_count": 0,
+        "actual_operation_count": 0,
+        "arm": "HCL",
+        "case_id": "reliability-20261007-smoke-flute",
+        "native_projection_sha256": "6a5f4d8debdc2d2847230ea46f9eacdddd15d98abf4d531f7e3722f0a9aa5545",
+        "operations": [],
+        "original_question_sha256": "13f53d14251887388fd90c78b9f01dc745b0509490c0972e7ab478edba88c905",
+        "private_native_review_sha256": "390db8137f372badbb3d390f97c575dcc1513ddd1d403b31e4900ca10173b91a",
+        "runtime_sha256": "50e62d02790f165d1d73fc3275fc6f795da7582b9f81143eaa7aa69806660d16",
+        "schema": "hcl-entry-contract-smoke-approved-native-record-v1",
+        "source_roots": [
+          {
+            "source_id": "flute-observer-record",
+            "text_sha256": "eb7fbe52cc1d86e3c09bb70d65ba086ef334e67431fa2c44cc0c74b956f9edd6",
+            "version": 1
+          }
+        ]
+      }
+    ],
+    "reviewed_native_relevance": false,
+    "schema": "hcl-entry-contract-smoke-approved-native-evidence-v1",
+    "semantic_certification": false,
+    "stage": 1
+  },
+  "arms": [
+    {
+      "arm": "HCL",
+      "arm_seconds": 138.820865128,
+      "case_id": "reliability-20261007-smoke-flute",
+      "checked_treatment": [],
+      "citations_accepted": false,
+      "entry_requirements": {
+        "allowed_family_checked_treatment_present": false,
+        "blocked_operation_indexes": [],
+        "evaluated_from_actual_capture": true,
+        "known_source_entry_blockers_avoided": true,
+        "semantic_relevance_or_quality_certified": false
+      },
+      "executed_capabilities": [],
+      "final_answer_sha256": null,
+      "final_delivery_code": "NOT_REACHED",
+      "final_fields": null,
+      "final_request_full_sha256": null,
+      "final_request_full_utf8_bytes": null,
+      "final_text": null,
+      "full_request_metrics_unavailable_reason": "ANSWER_PHASE_NOT_REACHED",
+      "native_integrity_status": "VALIDATED",
+      "native_projection_sha256": "6a5f4d8debdc2d2847230ea46f9eacdddd15d98abf4d531f7e3722f0a9aa5545",
+      "native_projection_status": "CAPTURED",
+      "native_results": 0,
+      "native_review_available": true,
+      "native_review_sha256": "390db8137f372badbb3d390f97c575dcc1513ddd1d403b31e4900ca10173b91a",
+      "non_sdk_seconds": 0.047676843000004965,
+      "request_diagnostics": [
+        {
+          "full_request_sha256": "947e2de2c71bd542cf877b45ea5dea85aeb08023393214bfe08e4bc2c8bf1913",
+          "full_request_utf8_bytes": 28338,
+          "maximum_request_bytes": 36000,
+          "payload_utf8_bytes": 21219,
+          "payload_value_utf8_bytes": {
+            "capability_inventory": 18627,
+            "question": 195,
+            "sources": 1427
+          },
+          "phase": "planning",
+          "serialized_messages_sha256": "f31f5dc8ac1f7a691bed00e627b8e2aefa33ae66366d831bc978e9a5af77276a",
+          "serialized_messages_utf8_bytes": 28183,
+          "within_request_bound": true
+        }
+      ],
+      "runtime_final_context_metrics": null,
+      "sdk_seconds": 138.773188285,
+      "selected_capabilities": [],
+      "status": "BOUNDED_HCL_SCHEMA_SELECTION_OR_ADAPTER_FAILURE"
+    }
+  ],
+  "authorization_expiry_utc": null,
+  "authorization_ref": "OWNER_APPROVED_HCL_ENTRY_CONTRACT_SMOKE_20261008_2_CALLS_2_30_CNY",
+  "budget_state": "CLOSED_NO_TRANSFER_NO_RETRY",
+  "calls": [
+    {
+      "arm": "HCL",
+      "call_id": "reliability-20261007-smoke-flute:HCL:planning",
+      "case_id": "reliability-20261007-smoke-flute",
+      "exact_request_reservation_cny": "0.971748",
+      "invocation_status": "RETURNED",
+      "offline_transport_call": false,
+      "phase": "planning",
+      "provider_call": true,
+      "request_bytes": 28338,
+      "request_sha256": "947e2de2c71bd542cf877b45ea5dea85aeb08023393214bfe08e4bc2c8bf1913",
+      "reserved_cny": "1.109664",
+      "response_metadata": {
+        "choice_count": 1,
+        "finish_reasons": [
+          "stop"
+        ],
+        "provider_reported_reasoning_tokens": 10168,
+        "visible_content_characters": 2219
+      },
+      "sdk_seconds": 138.773188285,
+      "status": "RETURNED",
+      "usage": {
+        "completion_tokens": 10676,
+        "prompt_tokens": 5911
+      },
+      "usage_rated_cny": "0.341451"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "reliability-20261007-smoke-flute",
+      "question": "What can I tell the director about whether Bea and Arun are on the same page about tonight's flute audio? Explain how Jules's last remark fits the record, and point to the passages that matter.",
+      "sources": [
+        {
+          "record_time_basis": "FROZEN_PACKET_PREPARATION_TIMESTAMP_NOT_ACTUAL_INGESTION_OR_EVENT_TIME",
+          "recorded_at": "2026-10-07T05:19:26.377856+00:00",
+          "source_id": "flute-observer-record",
+          "text": "The following is the complete observer record for a fictional restoration demonstration. The observer records who could see or hear each exchange, but does not inspect the audio equipment.\n\nAt 18:00, Bea and Jules read the facilitator tablet. It said, \"For tonight's demonstration, the flute audio is a prerecorded track.\" The lobby monitor, visible from Arun's seat, displayed only \"Restoration demonstration.\" The facilitator tablet faced away from Arun, who stayed in his seat throughout this period.\n\nAt 18:02, Bea pointed toward Arun and told Jules, \"Arun knows the flute is playback. He watched the whole briefing.\" Bea had seen Arun looking at the lobby monitor; she had not checked which information it displayed. Jules heard her, but Arun was too far away to hear this exchange.\n\nBea left the room at 18:03. Arun then told Jules, \"I saw the lobby screen, not that tablet. I still don't know whether the flute we're about to hear is live.\" Jules heard him. Bea was outside and did not hear him.\n\nAt 18:05, Jules told the director, \"Bea thinks Arun knows that tonight's flute is playback.\" Arun and Bea were not present for this last conversation. No further exchange or equipment check is recorded.",
+          "version": 1
+        }
+      ]
+    }
+  ],
+  "cost_basis": "CNY_PEAK_USAGE_ESTIMATE_NOT_INVOICE_FULL_HOLDS_RETAINED",
+  "currency": "CNY",
+  "efficacy_verified": false,
+  "elapsed_seconds": 138.82383213900002,
+  "head_sha": "b370e651b9e612f1138a4d27e14ade58a95fad25",
+  "i02_certified": false,
+  "independent_semantic_gate": "PENDING_INDEPENDENT_SOURCE_FIRST_REVIEW",
+  "invoice_cost_cny": null,
+  "mode": "LIVE_EXISTING_ACCOUNT",
+  "model": "deepseek-v4-pro",
+  "native_publication_status": "AUTHORIZED_BOUNDED_NATIVE_EVIDENCE",
+  "offline_transport_calls": 0,
+  "package_sha256": "cb2ea842c2869cd233a80bcb9716efe94cf4181ee2af080b06cdbbfb489d89e2",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "planning_tokens": 16384,
+  "provider_calls": 1,
+  "reasoning_effort": {
+    "answer": "low",
+    "planning": "high"
+  },
+  "receipt_sha256": "a3637d3cfd147063648e3b564af67eec36dde76ad5e7339451a1e18ddef6c9bb",
+  "remaining_authorized_calls": 0,
+  "remaining_authorized_cny": "0",
+  "reserved_cny": "1.109664",
+  "run_id": "37717484248",
+  "runtime_sha256": "50e62d02790f165d1d73fc3275fc6f795da7582b9f81143eaa7aa69806660d16",
+  "schema": "hcl-entry-contract-smoke-public-evidence-v1",
+  "send_margin_seconds": 180,
+  "stage": 1,
+  "stage_window_seconds": 600,
+  "status": "STOPPED_NO_RETRY",
+  "usage_complete": true,
+  "usage_rated_cny": "0.341451"
+}
