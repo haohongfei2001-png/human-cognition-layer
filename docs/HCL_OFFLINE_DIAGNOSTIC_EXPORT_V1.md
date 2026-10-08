@@ -120,3 +120,14 @@ reviewed implementation, exact requests and trusted original artifacts; its live
 transport and authority are not created here. New paid calls and public evidence
 require their own bounded approval. Historical packets, results and grants remain
 unchanged.
+
+## Shared implementation and separately bounded live entry
+
+The internal orchestration and validation helpers are shared with the separately
+reviewed [October 8 diagnostic adapter](HCL_DIAGNOSTIC_SMOKE_20261008.md).
+The public offline functions still accept only their exact fake client and offline
+package; no live mode, client factory or policy argument is exposed there. The
+live wrapper creates its own validated ledger only after new study admission.
+Its fixed identities and provider accounting are never relabeled as offline.
+The original packet, runtime and complete planning request remain unchanged;
+the current preflight's implementation hashes track this reviewed refactor.

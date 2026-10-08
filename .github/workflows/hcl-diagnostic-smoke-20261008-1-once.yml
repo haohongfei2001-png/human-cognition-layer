@@ -1,0 +1,69 @@
+# No fixed calendar expiry; every send requires 180 seconds of remaining stage window.
+# Terminal export closes/reports existing holds only; it never resumes a consumed stage.
+# Inert without the separately approved, exact one-use marker. Preparation creates no grant or marker.
+name: HCL diagnostic smoke 20261008 one approved invocation
+on:
+  push:
+    branches: [main]
+    paths: ['.github/HCL_DIAGNOSTIC_SMOKE_20261008_1_TRIGGER.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: hcl-diagnostic-smoke-20261008-1-once
+  cancel-in-progress: false
+env:
+  PYTHONPATH: .:tests
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  verification:
+    if: github.repository == 'haohongfei2001-png/human-cognition-layer' && github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact existing diagnostic dependencies
+        run: python -m pip install 'openai==2.14.0' 'z3-solver==4.15.4.0'
+      - name: Verify final package, repaired runtime, new authority and publication permission
+        run: python -m scripts.hcl_diagnostic_smoke_live_v1 --stage 1 --preflight
+      - name: Provider-free executor, disclosure and launch tests
+        run: python -m unittest tests.test_hcl_diagnostic_shared_core tests.test_hcl_offline_diagnostic_export_v1 tests.test_hcl_offline_diagnostic_preflight_v1 tests.test_hcl_diagnostic_smoke_live_v1 -v
+      - name: Existing secret presence only
+        env:
+          SECRET_PRESENT: ${{ secrets.DEEPSEEK_API_KEY != '' }}
+        run: python -m scripts.hcl_diagnostic_smoke_live_v1 --stage 1 --write-presence
+      - name: Exact-pinned official peak-price reader, no model call
+        run: python -m scripts.two_stage_price --output /tmp/hcl-diagnostic-smoke-20261008-1/prices.json
+      - name: Exact-pinned existing account readiness only, no model call
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: python -m scripts.two_stage_account --output /tmp/hcl-diagnostic-smoke-20261008-1/account.json --require-cny
+      - name: Complete workflow history and one-marker launch admission
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/hcl-diagnostic-smoke-20261008-1-once.yml/runs?per_page=100" > /tmp/hcl-diagnostic-smoke-20261008-1/runs.json
+          python -m scripts.hcl_diagnostic_smoke_live_v1 --stage 1 --check-launch
+      - name: One bounded stage, same existing-account client and zero SDK retries
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: python -m scripts.hcl_diagnostic_smoke_live_v1 --stage 1 --execute
+      - name: Close interrupted state and export only explicitly approved evidence
+        if: always()
+        run: |
+          if test -f hcl-diagnostic-smoke-20261008-1-private/receipt.json; then
+            python -m scripts.hcl_diagnostic_smoke_live_v1 --stage 1 --export
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hcl-diagnostic-smoke-20261008-1-approved-public-${{ github.run_id }}
+          path: hcl-diagnostic-smoke-20261008-1-public.json
+          if-no-files-found: warn
+# NEVER upload *-private/, native-review-private.json, SDK envelopes or raw logs.

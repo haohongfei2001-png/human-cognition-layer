@@ -16,7 +16,7 @@ from scripts.hcl_offline_diagnostic_reference import DIRECTORY
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = Path(__file__).with_suffix('.json')
-MANIFEST_SHA256 = 'd55c93bcd071f16a826133dfe7ba76e5882b67a3460128721638aec1b6863576'
+MANIFEST_SHA256 = '42d1005dbc03a1cea093ac777b23b73af4326b0add0e57db2aa83d591a06aa2a'
 CONTROLS = {
     'malformed_json': ('INVALID_PLANNING_JSON', 'PLANNING_RESPONSE_VALIDATION'),
     'invalid_typed_plan': ('operation bound exceeded', 'PLANNING_RESPONSE_VALIDATION'),

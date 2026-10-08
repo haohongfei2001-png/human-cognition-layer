@@ -178,6 +178,11 @@ class BoundedPort(_reference.BoundedPort):
 
 
 class Ledger(_reference.Ledger):
+    authorization_ref = AUTH
+
+    def make_port(self, client, arm_id):
+        return BoundedPort(client, self, arm_id)
+
     def __init__(self, directory, package, stage, clock, monotonic, *, offline=True):
         require_package(package)
         if offline is not True:
@@ -218,6 +223,17 @@ def run_offline(client, package, stage, directory, *, clock=lambda: datetime.now
 
 def _run(client, package, stage, directory, *, clock, monotonic):
     ledger = Ledger(directory, package, stage, clock, monotonic, offline=True)
+    return _run_with_ledger(ledger, client)
+
+
+def _run_with_ledger(ledger, client):
+    """Shared one-pass mechanics, reached only through a fixed admitting wrapper.
+
+    The wrapper owns package/client admission and constructs its trusted ledger;
+    this helper creates no authority, configuration, client or transport policy.
+    """
+    package = ledger.package
+    monotonic = ledger.monotonic
     cases = {c['case_id']: c for c in package.cases}
     try:
         for record in ledger.value['arms']:
@@ -226,7 +242,7 @@ def _run(client, package, stage, directory, *, clock, monotonic):
             case_id, arm = record['case_id'], record['arm']; case = cases[case_id]; arm_id = case_id + ':' + arm
             ledger.active = arm_id; start = monotonic(); port = None; runtime_returned = False
             try:
-                ledger.admit(); port = BoundedPort(client, ledger, arm_id)
+                ledger.admit(); port = ledger.make_port(client, arm_id)
                 if arm == 'Base':
                     prompt = messages(case, arm); port.reservation_usd('answer', prompt)
                     raw = port.complete('answer', prompt)['text']; good = accepted(prompt, raw)
@@ -235,7 +251,7 @@ def _run(client, package, stage, directory, *, clock, monotonic):
                     session = UniversalHCL()
                     for source in case['sources']:
                         session.put_source(source['source_id'], source['text']); session.sources[source['source_id']] = dict(source)
-                    allowance = CallAllowance(2, HOLD_USD['planning'] + HOLD_USD['answer'], AUTH, journal=port.journal)
+                    allowance = CallAllowance(2, HOLD_USD['planning'] + HOLD_USD['answer'], ledger.authorization_ref, journal=port.journal)
                     result = session.answer(case['question'], planner_backend=port, answer_backend=port, allowance=allowance, required_checked_capabilities=tuple(x['capability_id'] for x in next(c for c in package.packet['cases'] if c['case_id']==case_id)['private_evaluation']['predeclared_acceptable_relevant_native_operation_families']))
                     # Persist the helper's exact bounded result before capture/replay can fail.
                     # Null means no failed runtime receipt, never proof of treatment.

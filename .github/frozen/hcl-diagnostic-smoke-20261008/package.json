@@ -1,11 +1,14 @@
 {
-  "cases_file": ".github/frozen/hcl-entry-contract-smoke-20261008/cases.json",
-  "cases_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
-  "expected_package": {
-    "actual_spend_cny": "0",
+  "approval_message_id": "Sentinel_5c7e13ffe0688191a2ba34b2791f2e65",
+  "approved_at_bound": "2026-10-08T12:30:14Z",
+  "authorization_ref": "HCL_DIAGNOSTIC_SMOKE_20261008_1",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "configuration": {
     "answer_tokens": 16384,
-    "authorization_ref": "OFFLINE_DIAGNOSTIC_TEST_ONLY_NO_LIVE_AUTHORITY",
+    "approved_at_bound": "2026-10-08T12:30:14Z",
+    "authorization_ref": "HCL_DIAGNOSTIC_SMOKE_20261008_1",
     "case_replacement": false,
+    "currency": "CNY",
     "declared_source_entry_blockers": {
       "reliability-20261007-smoke-flute": [
         {
@@ -32,27 +35,26 @@
       "necessary_allowed_family_checked_treatment_required": true,
       "no_second_stage": true
     },
+    "expires_at": null,
     "fallback": false,
-    "implementation_files": {
-      "hcl_offline_diagnostic_export_v1.py": "b6a418f57bf3ea0d3af84efe0e8c26938959fb3c5cb6a197431252a5c6594d4d",
-      "hcl_offline_diagnostic_public_v1.py": "fe3eb7a80d3dfe5411ab9275176e35a7800939ee4fe9c49ebeedc4f6a3d79e6a",
-      "hcl_offline_diagnostic_reference.py": "fc7e36519762f79ea7229550b1e84faa7ea7cff3e8da74c2db74e339e7c12639"
-    },
-    "live_execution_authorized": false,
     "maximum_aggregate_calls": 2,
     "maximum_aggregate_cny": "2.30",
     "maximum_final_characters": 64000,
     "maximum_final_texts": 1,
     "maximum_request_bytes": 36000,
     "maximum_wait_seconds": 180,
-    "mode": "OFFLINE_SYNTHETIC_NO_PROVIDER",
     "model_judge": false,
+    "openai_sdk_version": "2.14.0",
     "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
     "phase_holds_cny": {
       "answer": "1.109664",
       "planning": "1.109664"
     },
+    "planning_completion_includes_reasoning": true,
     "planning_tokens": 16384,
+    "public_native_maximum_case_records": 1,
+    "public_native_maximum_operations_per_record": 3,
+    "public_native_maximum_record_bytes": 1048576,
     "rates_cny": {
       "input": "9",
       "output": "27"
@@ -92,7 +94,6 @@
       }
     },
     "runtime_sha256": "f5d155b9a8f8efd8e94143ff622d955028f5b83f43a6f1e76c7e2fa033d06940",
-    "schema": "hcl-offline-diagnostic-package-v1",
     "sdk_retries": 0,
     "source_recorded_at": "2026-10-07T05:19:26.377856+00:00",
     "source_recorded_at_basis": "FROZEN_PACKET_PREPARATION_TIMESTAMP_NOT_ACTUAL_INGESTION_OR_EVENT_TIME",
@@ -115,9 +116,35 @@
     },
     "stage_windows_seconds": {
       "1": 600
-    }
+    },
+    "usd_reference_only": true,
+    "z3_solver_version": "4.15.4.0"
   },
-  "reference_commit": "5c6984598b25270f7a370263ab5eaaee02d8bd14",
-  "schema": "hcl-offline-current-smoke-preflight-v1",
-  "scope": "CURRENT_REQUEST_FREEZE_ONLY_NO_LIVE_AUTHORITY_OR_HISTORICAL_DIAGNOSIS"
+  "currency": "CNY",
+  "implementation_files": {
+    "scripts/hcl_diagnostic_smoke_live_v1.py": "8f6851f1c7c4f66d52a17dafa8c828ab98af2947d41f84e306f1783c2a96c5fb",
+    "scripts/hcl_offline_diagnostic_export_v1.py": "b6a418f57bf3ea0d3af84efe0e8c26938959fb3c5cb6a197431252a5c6594d4d",
+    "scripts/hcl_offline_diagnostic_preflight_v1.json": "42d1005dbc03a1cea093ac777b23b73af4326b0add0e57db2aa83d591a06aa2a",
+    "scripts/hcl_offline_diagnostic_preflight_v1.py": "44a4b82cc644c0ab2afd14d74f8ad64f0783dbf1d9810dd7cf5e11b4d775a9d8",
+    "scripts/hcl_offline_diagnostic_public_v1.py": "fe3eb7a80d3dfe5411ab9275176e35a7800939ee4fe9c49ebeedc4f6a3d79e6a",
+    "scripts/hcl_offline_diagnostic_reference.py": "fc7e36519762f79ea7229550b1e84faa7ea7cff3e8da74c2db74e339e7c12639",
+    "tests/test_hcl_diagnostic_shared_core.py": "86303d6c93ce18ad7698bfe8bc5dc4648aaf6fa393d9821f0d655315c2561d24",
+    "tests/test_hcl_diagnostic_smoke_live_v1.py": "f1d990ad956e057d551bcd017a49f3326895212f787bc742d3444c41e94cb42b",
+    "tests/test_hcl_offline_diagnostic_export_v1.py": "19608ece35bfb303d6bdc706e38edd269f9fab8c617928489325bf3c41bd04a3",
+    "tests/test_hcl_offline_diagnostic_preflight_v1.py": "042e10c232de71afb78b3c03e829b85b45400818cd66963977632a651a44e5b0"
+  },
+  "independent_case_review_sha256": "4548c0dc7a5519fd8f668c908526a8e301081e7db4e3a4bc160fec1c6d0bacf8",
+  "independent_executor_review_sha256": "5a244c9f3aa6c3905461b50f69c3c6ad4e6e009135f6d44793e909c648afc361",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "read_only_reader_files": {
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0"
+  },
+  "runtime_commit": "226aae8e74bdfbfd7c398188c7154f2995994e7a",
+  "runtime_sha256": "f5d155b9a8f8efd8e94143ff622d955028f5b83f43a6f1e76c7e2fa033d06940",
+  "schema": "hcl-diagnostic-smoke-final-package-v1",
+  "status": "FROZEN_BEFORE_THIS_DIAGNOSTIC_SMOKE_OUTPUT",
+  "workflow_files": {
+    ".github/workflows/hcl-diagnostic-smoke-20261008-1-once.yml": "d711d5c8d15be035bde042da3172f8a247400ecfaa875094fd88187e464f8ad5"
+  }
 }
