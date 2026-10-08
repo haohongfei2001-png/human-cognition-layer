@@ -1,0 +1,44 @@
+{
+  "schema": "hcl-plan-diagnostics-amendment-v1",
+  "baseline_commit": "6c7c4cd0f736fb942558f4710f26329273af81b0",
+  "previous_hcl_runtime_sha256": "50e62d02790f165d1d73fc3275fc6f795da7582b9f81143eaa7aa69806660d16",
+  "amended_hcl_runtime_sha256": "f5d155b9a8f8efd8e94143ff622d955028f5b83f43a6f1e76c7e2fa033d06940",
+  "changed_runtime_files": [
+    "hcl/cognition/capability_catalog.py",
+    "hcl/cognition/universal_entry.py"
+  ],
+  "reason": "SAFE_FAILURE_STAGE_CODES_AND_UNIQUE_EXACT_ACTOR_QUOTE_BINDINGS",
+  "failure_details_are_code_owned_bounded_enums": true,
+  "provider_source_exception_or_reasoning_text_in_diagnostics": false,
+  "malformed_planning_json_has_specific_safe_code": true,
+  "missing_binding_offset_requires_unique_exact_named_source_match": true,
+  "overlapping_matches_count": true,
+  "supplied_wrong_offsets_are_never_repaired": true,
+  "unicode_character_offsets_not_bytes_or_normalized_text": true,
+  "existing_explicit_binding_semantics_unchanged": true,
+  "source_version_and_native_treatment_gates_preserved": true,
+  "native_adapter_or_semantic_candidate_parser_changed": false,
+  "planning_request_fixed_overhead_delta_bytes": -5,
+  "phase_configuration": {
+    "planning": {
+      "max_tokens": 16384,
+      "reasoning_effort": "high"
+    },
+    "answer": {
+      "max_tokens": 16384,
+      "reasoning_effort": "low"
+    }
+  },
+  "maximum_request_bytes": 36000,
+  "additional_provider_phases": 0,
+  "automatic_retry": false,
+  "historical_executors_unchanged": true,
+  "historical_grants_reopened": false,
+  "historical_outputs_rescored": false,
+  "previous_failure_cause_reconstructed": false,
+  "provider_calls": 0,
+  "provider_spend_cny": 0,
+  "authorized_additional_calls": 0,
+  "model_compliance_or_quality_verified": false,
+  "longmemeval": "SEALED_NOT_ACCESSED"
+}

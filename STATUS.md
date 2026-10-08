@@ -17,6 +17,16 @@ understanding, and it authorizes no model spending.
 
 ## Current execution snapshot — 2026-10-08
 
+The current [safe plan diagnostics and exact-quote bindings](docs/HCL_PLAN_DIAGNOSTICS_AND_BINDINGS.md)
+retain code-owned failure stages and allowlisted error codes without copying
+provider/source text. Actor bindings may omit offsets only for a unique exact
+quote in their named source; explicit wrong offsets and ambiguous matches still
+refuse. Original source/version, native-treatment and final-delivery gates remain.
+This is a provider-free interface repair, not a diagnosis of the prior real
+failure or evidence of improved model compliance. All paid grants are closed;
+no new call is authorized. Current runtime SHA256 is
+`f5d155b9a8f8efd8e94143ff622d955028f5b83f43a6f1e76c7e2fa033d06940`.
+
 The current [executable entry contract](docs/HCL_EXECUTABLE_ENTRY_CONTRACT.md)
 uses the same code-owned source/version conditions in planning and admission.
 Checked callers cannot select literal input when necessary native syntax is
@@ -24,7 +34,7 @@ absent, or ignore known B02/D02 source blockers. Ordinary limited-evidence and
 mixed-outcome answers remain available; source syntax is not semantic support.
 All 40 retained IDs and 14 complete adapter contracts remain visible. Shared mode
 definitions and original-source index bindings preserve eight-source Unicode and
-near-limit wire capacity without dropping source text. Its current runtime SHA256 is
+near-limit wire capacity without dropping source text. Its separately frozen smoke runtime SHA256 is
 `50e62d02790f165d1d73fc3275fc6f795da7582b9f81143eaa7aa69806660d16`.
 The [October 8 single smoke](docs/HCL_ENTRY_CONTRACT_SMOKE_20261008_RESULTS.md)
 failed after one returned planning call: zero native operations and no final
@@ -35,9 +45,9 @@ CNY 0.341451 is a peak-rate usage estimate, not an invoice; the separate CNY 2.3
 two-call grant is closed with zero remaining authority. No second call, retry or
 budget transfer is allowed. All ten answer obligations and four smoke checks
 remain unevaluated because no final exists. Final 16,384/low remains untested.
-No selection, end-to-end reliability or I02-I06 success is established. Next
-provider-free diagnosis must retain safe stage/error enums before attributing a
-specific failure or making another change. Any further real call needs new approval.
+No selection, end-to-end reliability or I02-I06 success is established. The safe
+diagnostic repair above cannot reconstruct that missing failure code. Any further
+real call needs new approval.
 The [explicit input and phase contract](docs/HCL_INPUT_PHASE_CONTRACT.md) below
 remains in force; its last live failure is historical evidence on runtime
 `112cfcd6749bd5c4216aaf580ad3608da85bda5d4d5bc017ebb04ade27aa8e7f`.
