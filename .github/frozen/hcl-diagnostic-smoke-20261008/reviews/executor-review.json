@@ -1,0 +1,47 @@
+{
+  "authorization_ref": "HCL_DIAGNOSTIC_SMOKE_20261008_1",
+  "checks": {
+    "all_blockers_resolved": true,
+    "native_permission_required_before_external_work": true,
+    "original_receipt_and_capture_bound": true,
+    "provider_free_regressions_passed": true
+  },
+  "live_execution_authorized": false,
+  "reviewer_role": "INDEPENDENT_READ_ONLY_SECURITY_REVIEW",
+  "schema": "hcl-diagnostic-smoke-independent-executor-approval-v1",
+  "targets": {
+    "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+    "case_review_file_sha256": "4548c0dc7a5519fd8f668c908526a8e301081e7db4e3a4bc160fec1c6d0bacf8",
+    "configuration_sha256": "a376f6948880c9a892723bc1a88d27af43d2ed99917d5d32d784a5760df8212f",
+    "implementation_files": {
+      "scripts/hcl_diagnostic_smoke_live_v1.py": "8f6851f1c7c4f66d52a17dafa8c828ab98af2947d41f84e306f1783c2a96c5fb",
+      "scripts/hcl_offline_diagnostic_export_v1.py": "b6a418f57bf3ea0d3af84efe0e8c26938959fb3c5cb6a197431252a5c6594d4d",
+      "scripts/hcl_offline_diagnostic_preflight_v1.json": "42d1005dbc03a1cea093ac777b23b73af4326b0add0e57db2aa83d591a06aa2a",
+      "scripts/hcl_offline_diagnostic_preflight_v1.py": "44a4b82cc644c0ab2afd14d74f8ad64f0783dbf1d9810dd7cf5e11b4d775a9d8",
+      "scripts/hcl_offline_diagnostic_public_v1.py": "fe3eb7a80d3dfe5411ab9275176e35a7800939ee4fe9c49ebeedc4f6a3d79e6a",
+      "scripts/hcl_offline_diagnostic_reference.py": "fc7e36519762f79ea7229550b1e84faa7ea7cff3e8da74c2db74e339e7c12639",
+      "tests/test_hcl_diagnostic_shared_core.py": "86303d6c93ce18ad7698bfe8bc5dc4648aaf6fa393d9821f0d655315c2561d24",
+      "tests/test_hcl_diagnostic_smoke_live_v1.py": "f1d990ad956e057d551bcd017a49f3326895212f787bc742d3444c41e94cb42b",
+      "tests/test_hcl_offline_diagnostic_export_v1.py": "19608ece35bfb303d6bdc706e38edd269f9fab8c617928489325bf3c41bd04a3",
+      "tests/test_hcl_offline_diagnostic_preflight_v1.py": "042e10c232de71afb78b3c03e829b85b45400818cd66963977632a651a44e5b0"
+    },
+    "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+    "read_only_reader_files": {
+      "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+      "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0"
+    },
+    "runtime_commit": "226aae8e74bdfbfd7c398188c7154f2995994e7a",
+    "runtime_sha256": "f5d155b9a8f8efd8e94143ff622d955028f5b83f43a6f1e76c7e2fa033d06940",
+    "workflow_files": {
+      ".github/workflows/hcl-diagnostic-smoke-20261008-1-once.yml": "d711d5c8d15be035bde042da3172f8a247400ecfaa875094fd88187e464f8ad5"
+    }
+  },
+  "verdict": "PASS_FOR_BOUNDED_EXECUTOR_PACKAGE",
+  "verification": {
+    "account_queries": 0,
+    "credentials_read": false,
+    "provider_calls": 0,
+    "provider_free_tests_passed": 127,
+    "sdk_constructed": false
+  }
+}

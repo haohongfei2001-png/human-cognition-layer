@@ -45,6 +45,14 @@ from semantic success; the latter still requires complete native evidence and
 all original gates. This is offline control-flow coverage only, with no new live
 executor, paid authority or explanation of the historical missing failure code.
 
+A separate [bounded diagnostic smoke](docs/HCL_DIAGNOSTIC_SMOKE_20261008.md)
+was approved on October 8 at 12:30:14 UTC, with a new independent CNY 2.30/two-call
+ceiling on the same exposed flute case. Its reviewed live adapter reuses the
+shared diagnostic chain; execution requires its own exact frozen package, new
+one-use grant and marker, passing CI, and fresh same-run price/account checks.
+Preparation itself makes no provider call. All earlier grants remain closed and
+unavailable for transfer; current-model reliability and I02-I06 remain unproven.
+
 The current [executable entry contract](docs/HCL_EXECUTABLE_ENTRY_CONTRACT.md)
 uses the same code-owned source/version conditions in planning and admission.
 Checked callers cannot select literal input when necessary native syntax is
