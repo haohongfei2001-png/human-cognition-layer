@@ -13,7 +13,7 @@ from unittest.mock import patch
 
 from hcl.cognition import universal_entry as current
 from scripts import development_explicit_citation_amendment as amendment
-from scripts.development_executable_entry_amendment import validate_current
+from scripts.development_plan_diagnostics_amendment import validate_current
 from scripts import development_final_delivery_amendment as diagnostic_amendment
 from hcl.cognition.reader_entry import _FINAL_ANSWER_POLICY, _EXPLICIT_CITATION_FINAL_ANSWER_POLICY
 from scripts.run_four_comparison import accepted, final_fields
@@ -136,7 +136,7 @@ class FinalDeliveryTests(unittest.TestCase):
         raw = raw_body() if raw is None else raw
         before = execute(self.previous, raw, **options)
         after = execute(current, raw, **options)
-        self.assertEqual(set(after['receipt']) - {'final_context_metrics'}, set(before['receipt']))
+        self.assertEqual(set(after['receipt']) - {'final_context_metrics', 'failure_stage'}, set(before['receipt']))
         code = after['receipt']['final_delivery_code']
         self.assertIn(code, CODES)
         self.assertEqual(code, expected)
@@ -145,6 +145,26 @@ class FinalDeliveryTests(unittest.TestCase):
         # policies must match the real adapter before removing that added field
         # from the historical comparison view; arbitrary nested keys stay exact.
         compared = copy.deepcopy(after)
+        if after['receipt']['status'] == 'ORCHESTRATION_UNAVAILABLE_OR_FAILED':
+            expected_stage = ('PLANNING_RESPONSE_VALIDATION' if options.get('invalid_plan') else
+                              'NATIVE_RESULT_ADMISSION' if options.get('no_native') else
+                              'FINAL_PROVIDER_ADMISSION' if expected == 'NOT_REACHED' else
+                              'FINAL_RESPONSE_VALIDATION')
+            self.assertEqual(compared['receipt'].pop('failure_stage'), expected_stage)
+            self.assertEqual(current.safe_orchestration_failure_details(after['receipt']),
+                             dict(stage=expected_stage, code=after['receipt']['failure_reason']))
+        else:
+            self.assertNotIn('failure_stage', after['receipt'])
+            self.assertIsNone(current.safe_orchestration_failure_details(after['receipt']))
+        if options.get('invalid_plan'):
+            # Refusal and all calls/holds stay identical; only the verified JSON
+            # diagnostic becomes specific instead of an unclassified exception.
+            self.assertEqual(compared['receipt']['failure_reason'], 'INVALID_PLANNING_JSON')
+            self.assertEqual(compared['receipt']['failure_type'], 'BOUNDARY_REJECTION')
+            self.assertEqual(before['receipt']['failure_reason'], 'ORCHESTRATION_FAILURE')
+            self.assertEqual(before['receipt']['failure_type'], 'UNEXPECTED_OR_EXTERNAL_FAILURE')
+            compared['receipt']['failure_reason'] = before['receipt']['failure_reason']
+            compared['receipt']['failure_type'] = before['receipt']['failure_type']
         def remove_verified_input_mode(plan):
             for operation in plan['operations']:
                 if operation['capability']=='B01':
@@ -154,7 +174,7 @@ class FinalDeliveryTests(unittest.TestCase):
         # Verify the new source contract and the exact inventory projection before
         # restoring only those documented wire differences in the historical view.
         marker = 'For C02 also use NAME: I did ACTION.; '
-        from scripts.development_executable_entry_amendment import apply_reviewed_planner_contract
+        from scripts.development_plan_diagnostics_amendment import apply_reviewed_planner_contract
         expected_policy = self.previous.PLANNER_POLICY.replace(marker, LIFECYCLE_CONTRACT_ADDITION + marker)
         self.assertEqual(current.PLANNER_POLICY, apply_reviewed_planner_contract(expected_policy))
         for phase, frame in compared['calls']:

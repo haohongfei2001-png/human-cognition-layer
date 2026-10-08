@@ -51,14 +51,24 @@ activation in another product, or empirical efficacy claim in this package.
 
 ## Source and premise boundaries
 
-A planned actor binding needs an exact quote, source ID and Unicode character
-start in one of its selected sources. Unknown IDs, invented anchors, extra schema
+A planned actor binding needs an exact quote and source ID in its selected
+sources. A missing start is resolved only when that exact quote occurs once in
+the named source, counting overlapping matches. Repeated quotes need an explicit
+Unicode character offset. Supplied offsets must match exactly and are never
+repaired; null, booleans and nonintegers are rejected. Text is not normalized,
+trimmed or searched in another source. Unknown IDs, invented anchors, extra schema
 fields and oversized plans are rejected before answer delivery. Planned question
 adaptations remain interpretations beside the original request, never new facts.
 G02 reads adopted rules only from the original user request, never a rewritten
 planner question. Ingestion timestamps are actual receipt time, not invented
 story-event dates. Temporary G02 workspaces preserve shared source revisions;
 C02/G02 result support remains linked to the shared original source roots.
+
+Failed orchestration receipts retain a code-owned failure stage and a bounded
+failure reason. `safe_orchestration_failure_details` projects only known enums,
+using UNKNOWN/ORCHESTRATION_FAILURE for unrecognized values. It includes no source,
+plan, provider exception or hidden reasoning and does not certify treatment or
+semantic quality. Historical receipts cannot acquire missing diagnostics later.
 
 Source revisions, withdrawn source roots and invalidated selected support claims
 are checked before final composition/call and after the answer returns. Raw final
