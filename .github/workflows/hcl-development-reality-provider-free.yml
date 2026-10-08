@@ -1,10 +1,10 @@
 name: HCL Development Reality Check Fairness and Final Isolation
 on:
   pull_request:
-    paths: ['scripts/i02_exposure_history_v2.py', 'scripts/i02_exposure_history_v3.py', 'tests/test_i02_exposure_history_v2.py', 'docs/HCL_CURRENT_SOURCE_HISTORY_GATE.md', 'docs/HCL_MORAL_STORIES_SOURCE_SCREEN.md', 'reports/HCL_MORAL_STORIES_SOURCE_SCREEN.json', 'scripts/development*', 'tests/test_development*', 'reports/HCL_DRC*', 'reports/HCL_DEVELOPMENT*', 'docs/HCL_VALIDATION*', '.github/workflows/hcl-development*', '.github/frozen/hcl-drc*', 'hcl/**']
+    paths: ['scripts/i02_exposure_history_v2.py', 'scripts/i02_exposure_history_v3.py', 'tests/test_i02_exposure_history_v2.py', 'docs/HCL_CURRENT_SOURCE_HISTORY_GATE.md', 'docs/HCL_MORAL_STORIES_SOURCE_SCREEN.md', 'reports/HCL_MORAL_STORIES_SOURCE_SCREEN.json', 'scripts/development*', 'tests/test_development*', 'reports/HCL_DRC*', 'reports/HCL_DEVELOPMENT*', 'docs/HCL_VALIDATION*', 'docs/HCL_DEVELOPMENT_COMPARISON_PREFLIGHT.md', '.github/workflows/hcl-development*', '.github/frozen/hcl-drc*', 'hcl/**']
   push:
     branches: [main]
-    paths: ['scripts/i02_exposure_history_v2.py', 'scripts/i02_exposure_history_v3.py', 'tests/test_i02_exposure_history_v2.py', 'docs/HCL_CURRENT_SOURCE_HISTORY_GATE.md', 'docs/HCL_MORAL_STORIES_SOURCE_SCREEN.md', 'reports/HCL_MORAL_STORIES_SOURCE_SCREEN.json', 'scripts/development*', 'tests/test_development*', 'reports/HCL_DRC*', 'reports/HCL_DEVELOPMENT*', 'docs/HCL_VALIDATION*', '.github/workflows/hcl-development*', '.github/frozen/hcl-drc*', 'hcl/**']
+    paths: ['scripts/i02_exposure_history_v2.py', 'scripts/i02_exposure_history_v3.py', 'tests/test_i02_exposure_history_v2.py', 'docs/HCL_CURRENT_SOURCE_HISTORY_GATE.md', 'docs/HCL_MORAL_STORIES_SOURCE_SCREEN.md', 'reports/HCL_MORAL_STORIES_SOURCE_SCREEN.json', 'scripts/development*', 'tests/test_development*', 'reports/HCL_DRC*', 'reports/HCL_DEVELOPMENT*', 'docs/HCL_VALIDATION*', 'docs/HCL_DEVELOPMENT_COMPARISON_PREFLIGHT.md', '.github/workflows/hcl-development*', '.github/frozen/hcl-drc*', 'hcl/**']
 permissions:
   contents: read
 jobs:
@@ -36,3 +36,5 @@ jobs:
       - run: python -m scripts.development_drc007_replay
       - run: python -m unittest tests.test_development_drc008_replay
       - run: python -m scripts.development_drc008_replay
+      - name: Strong Base and ordinary HCL comparison preflight (synthetic only)
+        run: python -m unittest tests.test_development_comparison_preflight_v1
