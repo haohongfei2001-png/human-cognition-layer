@@ -1,0 +1,9 @@
+{
+  "authorization_ref": "HCL_DIAGNOSTIC_SMOKE_20261008_1",
+  "executor_commit": "316034d261f15d985e3735137520be4818d32079",
+  "grant_commit": "1721158e4741b5d7cedc736a4129a401e197cbc9",
+  "grant_sha256": "aa141acecf70f79c2cd6ffab1e9a3835671684ae43a7ed0ef25d9a8ad2a76a47",
+  "package_sha256": "3ecadd43c73bd3b89e40ad744e2a0d553d8ecd9ab46a1f2e93ec34e1c4590df3",
+  "schema": "hcl-diagnostic-smoke-marker-proposal-v1",
+  "stage": 1
+}
