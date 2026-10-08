@@ -1,0 +1,44 @@
+{
+  "case_canonical_packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "case_review_file_sha256": "eb9de55138d895084123a3cd428d5662d33c7344ab1f364ea39f3252d1ad67df",
+  "checks": {
+    "all_blockers_resolved": true,
+    "native_permission_required_before_external_work": true,
+    "provider_free_regressions_passed": true
+  },
+  "executor_files_sha256": {
+    "hcl_entry_contract_smoke_candidate.py": "a609a39d44653fe2db9cbd4fa034f5fff1238b5d6d199a77dde01d13cafaae36",
+    "hcl_entry_contract_smoke_cli.py": "e93ccdc92239334914aff55679f13c8991c888a45eceae62e23f9eedf2b4a203",
+    "hcl_entry_contract_smoke_native_public.py": "9f3b1e17afbffeb4f1f834da22ad97e2eb30f93d7442b005f0c6821a62099a28",
+    "hcl_entry_contract_smoke_public.py": "7eef8df9cd472394ecb51ba2963b5ed8893e5929c263108233c19398ace77425",
+    "hcl_entry_contract_smoke_reviews.py": "589f85ef7b637575962a3d70d7a3f0537ad1c8b0ff3ea9b61e142364b77a5367",
+    "tests/test_hcl_entry_contract_smoke_adapter.py": "30d1c34c4ac01234a6b3acabfde0c0df2aea307a52758df3ae761deea16d2526",
+    "tests/test_hcl_entry_contract_smoke_candidate.py": "ff3f0456ac32a9ec5503b78d988deaf0a6be62dd44961f03b016ea7ba99bb66f",
+    "tests/test_hcl_entry_contract_smoke_native_regressions.py": "abcb1e6360c3072b8a111949883e18838eca2e7c81ea628f8ff44a91c3db36d0",
+    "tests/test_hcl_entry_contract_smoke_prefinal_gate.py": "8b2cdee75a9cb416f82fde89b555720957151426a3d1980e6d17e516de9d09fa",
+    "tests/test_hcl_entry_contract_smoke_revision3.py": "536817d77de6279b98dcc6c916a4ebcad79c116c0ee5438a01fbdf43a8a55962",
+    "tests/test_hcl_entry_contract_smoke_routing_gate.py": "128ec2b732b9dce6dcfeb5f3d90762e0f0b7de6126ba6d6e4922545cd5caae0d",
+    "tests/test_hcl_entry_contract_smoke_time_and_diagnostics.py": "93b7457613ff80608357f4a205fb5dfceebff70f3e469b71545453e0df2ea00d"
+  },
+  "live_execution_authorized": false,
+  "read_only_reader_files_sha256": {
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0"
+  },
+  "reviewer_role": "INDEPENDENT_READ_ONLY_SECURITY_REVIEW",
+  "runtime_commit": "9e507b945c179f148f8e78cb7dd559221b3ee732",
+  "runtime_sha256": "50e62d02790f165d1d73fc3275fc6f795da7582b9f81143eaa7aa69806660d16",
+  "schema": "hcl-entry-contract-smoke-independent-executor-approval-v1",
+  "verdict": "PASS_FOR_BOUNDED_EXECUTOR_PACKAGE",
+  "verification": {
+    "account_queries": 0,
+    "credentials_read": false,
+    "provider_calls": 0,
+    "provider_free_tests_passed": 125,
+    "sdk_constructed": false
+  },
+  "workflow_files_sha256": {
+    ".github/workflows/hcl-entry-contract-smoke-20261008-1-once.yml": "416b4a4dcddc20f95031c73618c7b185aa72164c11083082a4468276c0554d1f"
+  }
+}

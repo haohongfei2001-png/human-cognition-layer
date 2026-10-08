@@ -1,0 +1,151 @@
+{
+  "authorization_ref": "OWNER_APPROVED_HCL_ENTRY_CONTRACT_SMOKE_20261008_2_CALLS_2_30_CNY",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "configuration": {
+    "answer_tokens": 16384,
+    "approved_at_bound": "2026-10-08T00:10:20Z",
+    "authorization_ref": "OWNER_APPROVED_HCL_ENTRY_CONTRACT_SMOKE_20261008_2_CALLS_2_30_CNY",
+    "case_replacement": false,
+    "currency": "CNY",
+    "declared_source_entry_blockers": {
+      "reliability-20261007-smoke-flute": [
+        {
+          "capability": "B02",
+          "reason": "COMPLETE_SOURCE_ACCESS_LITERAL_FORMS_REQUIRED",
+          "source_id": "flute-observer-record",
+          "version": 1
+        },
+        {
+          "capability": "D02",
+          "reason": "NONBLANK_BOUNDED_SOURCE_LINES_REQUIRED",
+          "source_id": "flute-observer-record",
+          "version": 1
+        }
+      ]
+    },
+    "entry_requirements": {
+      "absence_of_blocker_is_not_readiness": true,
+      "actual_allowed_checked_native_required_before_final": true,
+      "independent_source_review_still_required": true,
+      "known_blocker_selection_rule": "NO_SELECTED_OPERATION_MATCHES_DECLARED_SOURCE_VERSION_ENTRY_BLOCKER",
+      "known_native_failure_stops_before_final_reservation": true,
+      "native_source_and_publication_integrity_required_before_final": true,
+      "necessary_allowed_family_checked_treatment_required": true,
+      "no_second_stage": true
+    },
+    "executor_files": {
+      "hcl_entry_contract_smoke_candidate.py": "a609a39d44653fe2db9cbd4fa034f5fff1238b5d6d199a77dde01d13cafaae36",
+      "hcl_entry_contract_smoke_cli.py": "e93ccdc92239334914aff55679f13c8991c888a45eceae62e23f9eedf2b4a203",
+      "hcl_entry_contract_smoke_native_public.py": "9f3b1e17afbffeb4f1f834da22ad97e2eb30f93d7442b005f0c6821a62099a28",
+      "hcl_entry_contract_smoke_public.py": "7eef8df9cd472394ecb51ba2963b5ed8893e5929c263108233c19398ace77425",
+      "hcl_entry_contract_smoke_reviews.py": "589f85ef7b637575962a3d70d7a3f0537ad1c8b0ff3ea9b61e142364b77a5367",
+      "tests/test_hcl_entry_contract_smoke_adapter.py": "30d1c34c4ac01234a6b3acabfde0c0df2aea307a52758df3ae761deea16d2526",
+      "tests/test_hcl_entry_contract_smoke_candidate.py": "ff3f0456ac32a9ec5503b78d988deaf0a6be62dd44961f03b016ea7ba99bb66f",
+      "tests/test_hcl_entry_contract_smoke_native_regressions.py": "abcb1e6360c3072b8a111949883e18838eca2e7c81ea628f8ff44a91c3db36d0",
+      "tests/test_hcl_entry_contract_smoke_prefinal_gate.py": "8b2cdee75a9cb416f82fde89b555720957151426a3d1980e6d17e516de9d09fa",
+      "tests/test_hcl_entry_contract_smoke_revision3.py": "536817d77de6279b98dcc6c916a4ebcad79c116c0ee5438a01fbdf43a8a55962",
+      "tests/test_hcl_entry_contract_smoke_routing_gate.py": "128ec2b732b9dce6dcfeb5f3d90762e0f0b7de6126ba6d6e4922545cd5caae0d",
+      "tests/test_hcl_entry_contract_smoke_time_and_diagnostics.py": "93b7457613ff80608357f4a205fb5dfceebff70f3e469b71545453e0df2ea00d"
+    },
+    "expires_at": null,
+    "fallback": false,
+    "maximum_aggregate_calls": 2,
+    "maximum_aggregate_cny": "2.30",
+    "maximum_final_characters": 64000,
+    "maximum_final_texts": 1,
+    "maximum_request_bytes": 36000,
+    "maximum_wait_seconds": 180,
+    "model_judge": false,
+    "openai_sdk_version": "2.14.0",
+    "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+    "phase_holds_cny": {
+      "answer": "1.109664",
+      "planning": "1.109664"
+    },
+    "planning_completion_includes_reasoning": true,
+    "planning_tokens": 16384,
+    "private_native_review_maximum_bytes": 1048576,
+    "public_native_maximum_case_records": 1,
+    "public_native_maximum_operations_per_record": 3,
+    "public_native_maximum_record_bytes": 1048576,
+    "public_native_requires_new_explicit_grant_permission": true,
+    "rates_cny": {
+      "input": "9",
+      "output": "27"
+    },
+    "reasoning_effort": {
+      "answer": "low",
+      "planning": "high"
+    },
+    "reference_rates_usd": {
+      "input": "1.32",
+      "output": "3.96"
+    },
+    "replanning": false,
+    "request_retries": 0,
+    "requests": {
+      "reliability-20261007-smoke-flute:HCL:planning": {
+        "full_request_sha256": "947e2de2c71bd542cf877b45ea5dea85aeb08023393214bfe08e4bc2c8bf1913",
+        "full_request_utf8_bytes": 28338,
+        "max_tokens": 16384,
+        "maximum_request_bytes": 36000,
+        "payload_utf8_bytes": 21219,
+        "payload_value_utf8_bytes": {
+          "capability_inventory": 18627,
+          "question": 195,
+          "sources": 1427
+        },
+        "reservation_cny": "0.971748",
+        "reservation_usd": "0.14252304",
+        "serialized_messages_sha256": "f31f5dc8ac1f7a691bed00e627b8e2aefa33ae66366d831bc978e9a5af77276a",
+        "serialized_messages_utf8_bytes": 28183,
+        "within_request_bound": true
+      }
+    },
+    "runtime_sha256": "50e62d02790f165d1d73fc3275fc6f795da7582b9f81143eaa7aa69806660d16",
+    "sdk_retries": 0,
+    "source_recorded_at": "2026-10-07T05:19:26.377856+00:00",
+    "source_recorded_at_basis": "FROZEN_PACKET_PREPARATION_TIMESTAMP_NOT_ACTUAL_INGESTION_OR_EVENT_TIME",
+    "stage_call_caps": {
+      "1": 2
+    },
+    "stage_cny_caps": {
+      "1": "2.30"
+    },
+    "stage_orders": {
+      "1": [
+        [
+          "reliability-20261007-smoke-flute",
+          "HCL"
+        ]
+      ]
+    },
+    "stage_reservation_cny": {
+      "1": "2.219328"
+    },
+    "stage_windows_seconds": {
+      "1": 600
+    },
+    "usd_reference_only": true,
+    "z3_solver_version": "4.15.4.0"
+  },
+  "currency": "CNY",
+  "independent_case_review_sha256": "eb9de55138d895084123a3cd428d5662d33c7344ab1f364ea39f3252d1ad67df",
+  "independent_executor_review_sha256": "ba91a4a2403361eb149e937f135d68d0b7378d27b95eac33dfbf880a7d082e06",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "planner_lifecycle_contracts_merge_commit": "cf43f8fe8f9705cfc570f34224beb3095d2ee8c5",
+  "pursuit_uncertainty_merge_commit": "92c8990e0c13983ada4b8b88a1480875019fd00e",
+  "read_only_reader_files": {
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0"
+  },
+  "runtime_commit": "9e507b945c179f148f8e78cb7dd559221b3ee732",
+  "runtime_sha256": "50e62d02790f165d1d73fc3275fc6f795da7582b9f81143eaa7aa69806660d16",
+  "schema": "hcl-entry-contract-smoke-final-package-v1",
+  "source_guard_merge_commit": "8f6652c98b4cd0856e3e8d31f67ea73527ebd61d",
+  "status": "FROZEN_BEFORE_THIS_ENTRY_CONTRACT_SMOKE_OUTPUT",
+  "trusted_native_policy_merge_commit": "61da904bd5de34a974316c0d8188f582d21b9646",
+  "workflow_files": {
+    ".github/workflows/hcl-entry-contract-smoke-20261008-1-once.yml": "416b4a4dcddc20f95031c73618c7b185aa72164c11083082a4468276c0554d1f"
+  }
+}

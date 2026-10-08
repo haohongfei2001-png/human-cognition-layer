@@ -1,0 +1,24 @@
+{
+  "case_canonical_packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "case_raw_file_sha256": "5f89c5de74111a3ae9a396ebc194c393684f851bb73ec2e42a42d2a48cc18409",
+  "checks": {
+    "all_five_cases_unscored_before_output": true,
+    "native_admissibility_passed": true,
+    "native_capacity_passed": true,
+    "source_rubric_passed": true
+  },
+  "efficacy_claimed": false,
+  "evidence_sha256": {
+    "final_frozen_timestamp_capacity_check": "e09421b8e447f05c39fcb75f5d124769b67539a8e340aa23d3a15321befcbbfa",
+    "final_runtime_independent_manual_probes": "b3756089c00d6d3ce51e3a74801a2f821bdc77cdc6cd4b29393e64b48d4ae64f",
+    "original_source_rubric_review": "60d3ef2dacbc8c00d0e1930b25d9f00a4a3030a8fa9c7025c88ae2493e75c992",
+    "original_v5_manual_probes": "1c8540a0337477dd54cdfc679b9dd0cd617f173aa839dfc6d4b260411870195b"
+  },
+  "live_execution_authorized": false,
+  "provider_calls": 0,
+  "reviewer_role": "INDEPENDENT_SOURCE_FIRST_PRE_OUTPUT",
+  "runtime_commit": "cf43f8fe8f9705cfc570f34224beb3095d2ee8c5",
+  "runtime_sha256": "da8349d12f8d13001e565ccdc8dbd6933cdbff5d8ec3b6369823c01925a379e9",
+  "schema": "hcl-reliability-independent-case-review-v1",
+  "verdict": "PASS_FOR_BOUNDED_DEVELOPMENT_ONLY"
+}
