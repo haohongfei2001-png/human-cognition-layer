@@ -33,13 +33,15 @@ from semantic success; the latter still requires complete native evidence and
 all original gates. This is offline control-flow coverage only, with no new live
 executor, paid authority or explanation of the historical missing failure code.
 
-A separate [bounded diagnostic smoke](docs/HCL_DIAGNOSTIC_SMOKE_20261008.md)
-was approved on October 8 at 12:30:14 UTC, with a new independent CNY 2.30/two-call
-ceiling on the same exposed flute case. Its reviewed live adapter reuses the
-shared diagnostic chain; execution requires its own exact frozen package, new
-one-use grant and marker, passing CI, and fresh same-run price/account checks.
-Preparation itself makes no provider call. All earlier grants remain closed and
-unavailable for transfer; current-model reliability and I02-I06 remain unproven.
+The separate [bounded diagnostic smoke](docs/HCL_DIAGNOSTIC_SMOKE_20261008_RESULTS.md)
+completed two real calls on the same exposed flute case. One source-anchored B01
+operation provided relevant conditional treatment, and the complete final passed
+independent review of all ten obligations and S1-S4. Planning 16,384/high and
+final 16,384/low both completed; the peak-rate usage estimate is CNY 0.440415,
+not an invoice. This proves one current-runtime regression path, not stable
+selection accuracy, Base benefit or I02-I06 completion. The new CNY 2.30 grant
+and all prior grants are closed with zero remaining authority; no retry, next
+stage or transfer is authorized.
 
 The current [executable entry contract](docs/HCL_EXECUTABLE_ENTRY_CONTRACT.md)
 uses the same code-owned source/version conditions in planning and admission.
@@ -58,8 +60,8 @@ the rejected field or establish that the model intended an empty selection.
 CNY 0.341451 is a peak-rate usage estimate, not an invoice; the separate CNY 2.30/
 two-call grant is closed with zero remaining authority. No second call, retry or
 budget transfer is allowed. All ten answer obligations and four smoke checks
-remain unevaluated because no final exists. Final 16,384/low remains untested.
-No selection, end-to-end reliability or I02-I06 success is established. The safe
+remain unevaluated because that historical run produced no final. It did not test
+final 16,384/low or establish selection, end-to-end reliability or I02-I06 success. The safe
 diagnostic repair above cannot reconstruct that missing failure code. Any further
 real call needs new approval.
 The [explicit input and phase contract](docs/HCL_INPUT_PHASE_CONTRACT.md) below
@@ -250,20 +252,21 @@ is DEVELOPMENT_EXPOSED / CONSUMED_FOR_FINAL_CONFIRMATION and permanently exclude
 from final sealed material. Historical receipts/runtime/dispositions/grants stay
 unchanged. No LongMemEval access or leaderboard activation.
 
-**NEXT_READY: CURRENT_RUNTIME_COMPLETE_FLOW_DIAGNOSTIC**
+**NEXT_READY: DEVELOPMENT_REALITY_CHECK_PREPARATION**
 
-The earlier optional-blocker task is historical. The current executable entry
-contract, safe runtime diagnostics and [offline diagnostic path](docs/HCL_OFFLINE_DIAGNOSTIC_EXPORT_V1.md)
-are the basis for the next complete-flow diagnostic. The current-request preflight
-pins original exposed sources, configuration and complete request identity, and
-checks failure-code retention against separately loaded receipt/native originals.
-Its injected offline failures are not historical model replies or evidence of
-selection accuracy. A future real study still needs its own exact implementation,
-request and review freeze and new bounded spending/publication authority.
-Keep the complete original source, real native execution and honest insufficiency;
-do not invent candidates, force unrelated operations or treat hints as evidence.
-All prior paid study authority is closed; no second planning phase, automatic retry
-or reused allowance is authorized. Formal I02-I06 remains incomplete.
+The [current-runtime diagnostic](docs/HCL_DIAGNOSTIC_SMOKE_20261008_RESULTS.md)
+is complete for one exposed case. The next work follows the existing two-track
+policy above: prepare fresh legally usable development items, a strong same-model
+Base comparison, full-source requests, frozen configuration and source-first
+scoring before any new output. This is preparation, not a new study grant or a
+formal I02-I06 milestone advance. The exposed flute case remains excluded from
+final sealed material. The [offline diagnostic path](docs/HCL_OFFLINE_DIAGNOSTIC_EXPORT_V1.md)
+and separately trusted receipt/native originals remain required for diagnosis.
+Keep complete sources, real native execution and honest insufficiency; do not
+invent candidates, force unrelated operations or treat hints as evidence.
+All paid authority is closed. Any further real study needs its own bounded
+spending/publication approval; no second planning phase, automatic retry or reused
+allowance is authorized. Formal I02-I06 remains incomplete.
 
 A00 plus the 40 A–H runtime packages have their declared construction/correctness
 status, not a product-completion percentage. The current

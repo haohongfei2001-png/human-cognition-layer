@@ -1,0 +1,114 @@
+{
+  "authorization_ref": "HCL_DIAGNOSTIC_SMOKE_20261008_1",
+  "critical_failure_tags": [],
+  "evidence_sha256": "70afcb277272b9e32dbc74f4a83563cce71496cb3cb9495b72ab9e3d27709df1",
+  "final_answer_sha256": "77fe7d058c24951c3356fc25c8ea218dca9bd737b209e0c6b9416360eaa35db2",
+  "gates": {
+    "all_key_facts_preserved": true,
+    "citations_and_complete_final_delivery_passed": true,
+    "complete_source_delivery_passed": true,
+    "inference_boundaries_preserved": true,
+    "known_source_entry_blockers_avoided": true,
+    "relevant_native_execution_passed": true,
+    "trusted_native_policy_passed": true
+  },
+  "native_review_sha256": "868f941e72619b20b3ff08505ffbdb49c61236a241acd977243722c2c1fd4a7d",
+  "obligations": [
+    {
+      "answer_evidence": "source_citations[0] reproduces that entire passage exactly, including both different screen texts and the tablet sightline. answer says Arun \"only saw the lobby screen\". The complete final preserves the two screens without equating their contents.",
+      "id": "K1",
+      "passed": true,
+      "source_evidence": "flute-observer-record@1 paragraph 2: the facilitator tablet says \"For tonight's demonstration, the flute audio is a prerecorded track.\" The lobby monitor displays only \"Restoration demonstration.\" The tablet faced away from Arun."
+    },
+    {
+      "answer_evidence": "answer identifies Bea's attribution and later calls it her \"expressed belief\". uncertainty says the attribution rests on \"the unchecked assumption that Arun saw the full briefing\"; source_citations[1] includes both Bea's speech and the observer's account of its basis. The private-belief disclaimer qualifies the shorthand \"Bea believes\".",
+      "id": "K2",
+      "passed": true,
+      "source_evidence": "Paragraph 3: Bea tells Jules \"Arun knows the flute is playback. He watched the whole briefing.\" She had seen him looking at the lobby monitor and had not checked its information."
+    },
+    {
+      "answer_evidence": "answer says Arun reports not knowing whether it is live and seeing only the lobby screen. source_citations[2] exactly preserves his statement, Jules hearing it, and Bea being outside and unable to hear it. uncertainty explicitly treats this as a reported statement.",
+      "id": "K3",
+      "passed": true,
+      "source_evidence": "Paragraph 4: Arun tells Jules \"I saw the lobby screen, not that tablet. I still don't know whether the flute we're about to hear is live.\" Jules heard him; Bea was outside and did not hear him."
+    },
+    {
+      "answer_evidence": "answer states \"Jules's 18:05 remark accurately reports Bea's expressed belief, but it does not confirm Arun's knowledge\". source_citations[1] and [3] provide the respective original exchanges. His report is evaluated as a faithful attribution, not an independent finding of agreement or knowledge.",
+      "id": "K4",
+      "passed": true,
+      "source_evidence": "Paragraphs 3 and 5: Bea first attributes knowledge to Arun; Jules later tells the director \"Bea thinks Arun knows that tonight's flute is playback.\" Bea and Arun were absent from that conversation."
+    },
+    {
+      "answer_evidence": "answer contrasts the attribution and self-report, concludes the record indicates they are not on the same page, and denies that Jules confirms Arun's knowledge. assumptions expressly says \"We do not assume that reported expressions directly reveal private beliefs or world facts.\" uncertainty again limits all statements to reports. Read together, the final does not assert verified private states.",
+      "id": "I1",
+      "passed": true,
+      "source_evidence": "Paragraphs 3-5 distinguish Bea's attribution, Arun's uncertain self-report and Jules's report about Bea. No source verifies private mental states."
+    },
+    {
+      "answer_evidence": "answer restricts Arun to the lobby screen; source_citations[0] retains the tablet facing away from him. source_citations[2] explicitly says Bea was outside and did not hear his clarification. No answer field transfers either piece of information across the missing access path.",
+      "id": "I2",
+      "passed": true,
+      "source_evidence": "Paragraphs 2-4: Arun sees the content-poor lobby monitor, not the facilitator tablet; his clarification occurs after Bea leaves and she does not hear it."
+    },
+    {
+      "answer_evidence": "uncertainty states the observer record does not verify equipment and \"The actual truth about the flute audio cannot be confirmed from this record.\" source_citations[0] says \"For tonight's demonstration\" and [3] says \"tonight's flute\". No generalization to other performances is made. Tonight-only scope is preserved in the cited content rather than re-stated in the short answer string.",
+      "id": "I3",
+      "passed": true,
+      "source_evidence": "Paragraph 1 says the observer does not inspect the audio equipment. Paragraph 2 limits the tablet claim to tonight's demonstration. Paragraph 5 records no further equipment check."
+    },
+    {
+      "answer_evidence": "source_citations[0] is an exact, unique substring of flute-observer-record version 1 starting at zero-based offset 190 and contains the entire paragraph needed to identify both screen contents and sightlines.",
+      "id": "C1",
+      "passed": true,
+      "source_evidence": "Paragraph 2 supplies both screen texts, Arun's seat and the tablet facing away from him."
+    },
+    {
+      "answer_evidence": "source_citations[1], [2] and [3] separately quote the correct exchanges. answer uses Arun's own quoted uncertainty for his self-report and explicitly says Jules's last remark does not confirm Arun's knowledge.",
+      "id": "C2",
+      "passed": true,
+      "source_evidence": "Paragraph 3 is Bea speaking to Jules, paragraph 4 is Arun speaking to Jules, and paragraph 5 is Jules reporting Bea's position to the director."
+    },
+    {
+      "answer_evidence": "All four source_citations objects use that source ID/version and unique exact source substrings. The final is complete valid four-field JSON, has SHA256 77fe7d058c24951c3356fc25c8ea218dca9bd737b209e0c6b9416360eaa35db2, and invents no additional message, equipment inspection or continuation.",
+      "id": "C3",
+      "passed": true,
+      "source_evidence": "The sole supplied source is complete flute-observer-record@1 with SHA256 eb7fbe52cc1d86e3c09bb70d65ba086ef334e67431fa2c44cc0c74b956f9edd6."
+    }
+  ],
+  "overall_pass": true,
+  "package_sha256": "3ecadd43c73bd3b89e40ad744e2a0d553d8ecd9ab46a1f2e93ec34e1c4590df3",
+  "packet_sha256": "fa39ec373700214c1280ea5413fa46cbfe006641d02a8a094757b87f05507e2f",
+  "relevant_native_capability_ids": [
+    "B01"
+  ],
+  "request_diagnostics_sha256": "ac76a72c6d3449ba1367347148f59f2d1bb62ba833739232b08460620da39c73",
+  "reviewer_role": "INDEPENDENT_SOURCE_FIRST_AFTER_OUTPUT",
+  "same_smoke_and_rules_fixed_before_entry_contract_smoke_output": true,
+  "schema": "hcl-diagnostic-smoke-source-review-v1",
+  "smoke_semantics": [
+    {
+      "answer_evidence": "answer labels Jules's referent \"Bea's expressed belief\" and says it does not confirm Arun's knowledge; uncertainty/assumptions disallow reading the expression as verified private belief. source_citations[1] supplies Bea's original attribution.",
+      "id": "S1",
+      "passed": true,
+      "source_evidence": "Paragraph 3 contains Bea's speech attributing knowledge to Arun, not independent evidence that he knows."
+    },
+    {
+      "answer_evidence": "answer preserves Arun's uncertainty and source_citations[2] preserves Jules hearing him and Bea not hearing him. No unsupported transmission or subsequent correction to Bea is asserted.",
+      "id": "S2",
+      "passed": true,
+      "source_evidence": "Paragraph 4 reports Arun's uncertainty to Jules after Bea leaves; Bea does not hear it."
+    },
+    {
+      "answer_evidence": "answer says Arun only saw the lobby screen and uncertainty calls Bea's full-briefing assumption unchecked. source_citations[0]-[1] preserve both contents, sightline and her mistaken route from watching to knowing. Together these reject that route; the answer does not grant Arun tablet knowledge.",
+      "id": "S3",
+      "passed": true,
+      "source_evidence": "Paragraphs 2-3 distinguish the tablet containing the playback claim from the lobby monitor containing only a demonstration title; Bea had not checked what Arun's monitor displayed."
+    },
+    {
+      "answer_evidence": "answer keeps Jules's remark as a report of Bea's expressed belief, denies confirmation of Arun's knowledge and finds no shared understanding in the record. uncertainty explicitly leaves actual audio truth unconfirmed. source_citations[0] and [3] retain tonight-only scope; no universal playback claim appears.",
+      "id": "S4",
+      "passed": true,
+      "source_evidence": "Paragraph 5 reports \"Bea thinks Arun knows that tonight's flute is playback\". Paragraphs 1-2 limit the evidence to tonight's demonstration and do not inspect equipment."
+    }
+  ]
+}
