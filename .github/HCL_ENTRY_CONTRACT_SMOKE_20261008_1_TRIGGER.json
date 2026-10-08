@@ -1,0 +1,9 @@
+{
+  "schema": "hcl-entry-contract-smoke-marker-proposal-v1",
+  "authorization_ref": "OWNER_APPROVED_HCL_ENTRY_CONTRACT_SMOKE_20261008_2_CALLS_2_30_CNY",
+  "stage": 1,
+  "package_sha256": "cb2ea842c2869cd233a80bcb9716efe94cf4181ee2af080b06cdbbfb489d89e2",
+  "grant_sha256": "3c4202973be714e7af1adf6594bdd6900823c74511fd078bf5e1e70a79e557b7",
+  "executor_commit": "0355622680cc4551e0d820f86c83c74c3ef60bff",
+  "grant_commit": "bc7cb0c5554f751b8299c7f451469bb2589a8fc9"
+}
