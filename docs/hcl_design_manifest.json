@@ -3187,7 +3187,23 @@
         "T30"
       ],
       "exit": "同一engine读取导入数据，旧grounded不升级为true；旧顺序日期不当真日期；提供可启动S2的稳定契约。S1真实模型完成标签仍需另行获准的功能证据。",
-      "not_required": "全部历史实验重新执行、一次搬完全部旧版本、先关闭所有旧Draft、完整S5兼容切换。"
+      "not_required": "全部历史实验重新执行、一次搬完全部旧版本、先关闭所有旧Draft、完整S5兼容切换。",
+      "status": "INTEGRATED_OFFLINE",
+      "evidence": {
+        "runtime_entry": "hcl/compat/workspace.py delegates HCL.run / HCL.stream; no old callbacks",
+        "migration": "hcl/memory/migrations/ (typed snapshots, deterministic mapping, immutable package, atomic side copy)",
+        "rollback": "schema2 namespace control; terminal LEGACY_READ_ONLY; existing connections fenced; new ledger retained",
+        "checks": "tests/test_unified_s13.py; unchanged S1.1/S1.2 and legacy behavior regressions",
+        "witness": "scripts/witness_unified_s13.py (exact commit, actual imported-source computation and rollback)",
+        "scope": "Applicable bounded offline portions of T20/T24/T30 only; old support is not truth, order is not calendar.",
+        "stage_complete": false,
+        "limits": [
+          "No global S5 legacy export cutover or complete historical migration.",
+          "Imported reports/interpretations are provenance, not executable S2 semantic IR.",
+          "Rollback is terminal; future reactivation requires a separately implemented full version/ACL/source/budget validation.",
+          "No provider, credentials, paid service, sealed data or effectiveness evidence."
+        ]
+      }
     },
     {
       "id": "S2.1",
@@ -3347,17 +3363,17 @@
   "current_execution": {
     "started_at_utc": "2026-10-11T20:31:00Z",
     "authority": "Owner explicitly authorized continued implementation, tests, PRs and verified merges under the approved S1–S7 plan.",
-    "base_main": "18402b66f27e51385d5d478d90deb8fd84390c16",
+    "base_main": "21b63e227ead583ded0575f2ab65b073ba26733c",
     "current_stage": "S1",
-    "delivered_slice": "S1.2",
+    "delivered_slice": "S1.3",
     "readiness": "INTEGRATED_OFFLINE",
     "stage_complete": false,
-    "next_slice": "S1.3",
+    "next_slice": "S2.1",
     "provider_calls": 0,
     "provider_spend_usd": "0",
     "sealed_content_reads": 0,
-    "scope": "同一真实有限模型闭环落SQLite事件账本与内容对象；精确依赖重基、跨连接共享模拟预算、持久化返回及显式重启恢复。",
-    "remaining": "S1.3有界迁移/兼容；查询与absence依赖、删除传播及全部后续S2–S7和完整T01–T32保持原范围。",
+    "scope": "有界旧typed快照幂等旁路导入、语义保真/quarantine、持久namespace回滚fence与同一engine兼容入口；导入原文继续驱动真实有限模型计算及回答。",
+    "remaining": "继续S2.1普通语言到实际计算再到回答；S1真实模型功能证据、S5全局旧域切换及全部S2–S7/T01–T32研究验收保持原范围。",
     "historical_boundary": "旧A–H/G-HC/G-ARCH、实验和closed grants保持原证据等级，不自动继承。",
     "validation": "本切片离线结果不等于完整验收族、S1阶段完成、LIVE_FUNCTIONAL或EFFECT_CONFIRMED。"
   }
