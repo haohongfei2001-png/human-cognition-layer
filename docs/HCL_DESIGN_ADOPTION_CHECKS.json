@@ -1,0 +1,295 @@
+{
+  "schema": "hcl-design-adoption-checks-v1",
+  "date": "2026-10-12",
+  "baseline": "58bfa17aed8da5773714309173438796b33491ec",
+  "scope": "DOCUMENT_CONTENT_AND_PLAN_CONSISTENCY_ONLY",
+  "result": "PASS",
+  "source_candidate_sha256": {
+    "HCL_SYSTEM_REDESIGN_REVIEW.md": "7aac6be78977fc48371ea144a0090665474f3d173a9b327c05ab4b7a2515f837",
+    "HCL_DESIGN_MANIFEST.json": "2e80fe99e9d6925cb6a140ab929c76bb251a8382d34e630a8b71189805cf9238",
+    "CODEX_HANDOFF.md": "8c70eb86a529ecb0e5c68b0e7c4c2aff5e4e0ba8e2759583613260ab7b07e40e"
+  },
+  "checked_payloads": {
+    "DEVELOPMENT_PLAN.md": {
+      "bytes": 1650,
+      "sha256": "32865edb7a83765e3241da4a84ee9052f29ee2f939694d207046168c1b6d296d",
+      "git_blob": "1bf39d91c7d3692d4eaa278b705e9d5b37fa1b29"
+    },
+    "HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md": {
+      "bytes": 886,
+      "sha256": "a6c2ab76231fd02cd66e2a887c4c99dbe7bfc1d90faf585301d636bf6a848ce8",
+      "git_blob": "9adc2326c3ca79d2aa60289021f83dba2045bae1"
+    },
+    "README.md": {
+      "bytes": 1449,
+      "sha256": "9af364bab71b65f138902a5564c8da15e51bce9351def3ef216125e1f3a91204",
+      "git_blob": "63678d0bebd01642626e222c50ef82fd194b6904"
+    },
+    "STATUS.md": {
+      "bytes": 1555,
+      "sha256": "29a4b27181a7dc8fdc7b0a795986a35e193df07ef51295a2a16f202e7d7131f2",
+      "git_blob": "9fb74a8a098b6f934080b74ab0cfe002c5295227"
+    },
+    "docs/HCL_CODEX_HANDOFF.md": {
+      "bytes": 13215,
+      "sha256": "bc9e3e88e5addc9ce5f8db770c7b77d90db6adbd76ed7b52c7f99390d2f931bd",
+      "git_blob": "c44f081357d1ca0700ab8abe452ce813b0719713"
+    },
+    "docs/HCL_SYSTEM_REDESIGN_SPEC.md": {
+      "bytes": 138125,
+      "sha256": "592e7282da8571807da1d9fac27383d97db5da6e9c4406f83d08eaa447366343",
+      "git_blob": "39f38d535dbfc13bdbd9a846d4846a86ba265384"
+    },
+    "docs/hcl_design_manifest.json": {
+      "bytes": 133297,
+      "sha256": "ebdbd0fcadf7d67e5335ce8c5a8c76471ffd22ec62781b8e00018c79fcb43288",
+      "git_blob": "9a444b15dd7a84277acbfbb44d30371b1805fdd3"
+    }
+  },
+  "checks": [
+    {
+      "check": "original_substantive_manifest_preserved",
+      "result": "PASS",
+      "detail": "All 15 substantive top-level sections equal original parsed JSON; no record/field reduction."
+    },
+    {
+      "check": "issues_complete_ids",
+      "result": "PASS",
+      "detail": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "P18",
+        "P19",
+        "P20",
+        "P21",
+        "P22",
+        "P23",
+        "P24",
+        "P25",
+        "P26",
+        "P27",
+        "P28",
+        "P29",
+        "P30",
+        "P31",
+        "P32",
+        "P33",
+        "P34",
+        "P35",
+        "P36",
+        "P37",
+        "P38"
+      ]
+    },
+    {
+      "check": "mechanisms_complete_ids",
+      "result": "PASS",
+      "detail": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15",
+        "M16"
+      ]
+    },
+    {
+      "check": "stages_complete_ids",
+      "result": "PASS",
+      "detail": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ]
+    },
+    {
+      "check": "acceptance_complete_ids",
+      "result": "PASS",
+      "detail": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "T11",
+        "T12",
+        "T13",
+        "T14",
+        "T15",
+        "T16",
+        "T17",
+        "T18",
+        "T19",
+        "T20",
+        "T21",
+        "T22",
+        "T23",
+        "T24",
+        "T25",
+        "T26",
+        "T27",
+        "T28",
+        "T29",
+        "T30",
+        "T31",
+        "T32"
+      ]
+    },
+    {
+      "check": "decisions_complete_ids",
+      "result": "PASS",
+      "detail": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "D6"
+      ]
+    },
+    {
+      "check": "references_resolve",
+      "result": "PASS",
+      "detail": "All P/M/S/T references resolve; migration rows included."
+    },
+    {
+      "check": "migration_scope_preserved",
+      "result": "PASS",
+      "detail": "61 unchanged migration records, including all 51 cognition files."
+    },
+    {
+      "check": "complete_spec_technical_body_preserved",
+      "result": "PASS",
+      "detail": "Full original body after review introduction unchanged, except canonical local names and redundant blank lines."
+    },
+    {
+      "check": "stage_dag_unchanged",
+      "result": "PASS",
+      "detail": {
+        "S1": [],
+        "S2": [
+          "S1"
+        ],
+        "S3": [
+          "S2"
+        ],
+        "S4": [
+          "S2"
+        ],
+        "S5": [
+          "S3",
+          "S4"
+        ],
+        "S6": [
+          "S5"
+        ],
+        "S7": [
+          "S6"
+        ]
+      }
+    },
+    {
+      "check": "S1_bounded_slices",
+      "result": "PASS",
+      "detail": "Only three working slices inside original stage, not extra phases."
+    },
+    {
+      "check": "S2_bounded_slices",
+      "result": "PASS",
+      "detail": "Only three working slices inside original stage, not extra phases."
+    },
+    {
+      "check": "parallel_ownership_disjoint",
+      "result": "PASS",
+      "detail": "S3/S4 owned paths disjoint; shared contracts core-owned; consumers require real algorithms before functional closure."
+    },
+    {
+      "check": "research_requires_algorithm_evidence",
+      "result": "PASS",
+      "detail": "Research and actual computation mandatory; schema/interface/mock is not functional completion."
+    },
+    {
+      "check": "all_defaults_accepted",
+      "result": "PASS",
+      "detail": "D1-D6 recommendations accepted without changed content."
+    },
+    {
+      "check": "authority_docs_only",
+      "result": "PASS",
+      "detail": "Design adoption only; implementation/paid/deployment require further authorization. Historical evidence not inherited."
+    },
+    {
+      "check": "no_false_implementation_status",
+      "result": "PASS",
+      "detail": "S1-S7 and T01-T32 retain unimplemented/unexecuted states."
+    },
+    {
+      "check": "github_full_payload_identity",
+      "result": "PASS",
+      "detail": {
+        "docs/HCL_SYSTEM_REDESIGN_SPEC.md": "39f38d535dbfc13bdbd9a846d4846a86ba265384",
+        "docs/HCL_CODEX_HANDOFF.md": "c44f081357d1ca0700ab8abe452ce813b0719713",
+        "docs/hcl_design_manifest.json": "9a444b15dd7a84277acbfbb44d30371b1805fdd3"
+      }
+    },
+    {
+      "check": "document_only_payload",
+      "result": "PASS",
+      "detail": "Seven plan/index documents plus one verification record; no code/workflow/grant."
+    },
+    {
+      "check": "canonical_document_links",
+      "result": "PASS",
+      "detail": {
+        "local_link_count": 18,
+        "all_resolved": true
+      }
+    },
+    {
+      "check": "git_diff_check",
+      "result": "PASS",
+      "detail": "git -c core.whitespace=-blank-at-eol,blank-at-eof,space-before-tab diff --cached --check passed (intentional Markdown hard-break spaces retained) in isolated document-only temporary index; no repository code executed."
+    }
+  ],
+  "limitations": [
+    "No cognition runtime tests or paid calls executed. No T01-T32 capability result claimed.",
+    "No sealed content, repository history content scan, provider credentials or deployment used.",
+    "Document PR becomes main policy only after merge; implementation requires further explicit approval.",
+    "Existing historical runtime, experiments and grants are not rewritten or requalified.",
+    "GitHub CI outcomes and final tree isolation are to be reported on the PR, not fabricated in this local record."
+  ]
+}
