@@ -1244,8 +1244,8 @@
       ],
       "exit": "公开入口的轻任务和至少一个旧认知操作在同一engine中实际运行；迁移/回滚与预算故障通过。进入真实功能完成需新批准的真实模型调用，离线只能记INTEGRATED_OFFLINE。",
       "blocked_policy": "未获收费授权时继续离线核心/领域开发，不反复创建批准包装；不给S1标记LIVE_FUNCTIONAL；独立分支不因effect未知停工。",
-      "status": "APPROVED_PLAN_NOT_STARTED",
-      "implementation_progress": "S1.1 integrated offline; S1.2 and S1.3 remain open. No full-stage functional completion."
+      "status": "IN_PROGRESS_OFFLINE",
+      "implementation_progress": "S1.1 and S1.2 integrated offline; S1.3 remains open. No full-stage functional completion."
     },
     {
       "id": "S2",
@@ -3149,7 +3149,23 @@
         "T29"
       ],
       "exit": "重启后回放一致；相关版本冲突被拒；无关修改可证明安全；发送未知不重发；没有读模型凭据或真实收费。",
-      "not_required": "分布式数据库、完整自主研究代理、百万字符压力和全部供应商接口。"
+      "not_required": "分布式数据库、完整自主研究代理、百万字符压力和全部供应商接口。",
+      "status": "INTEGRATED_OFFLINE",
+      "evidence": {
+        "runtime_entry": "hcl/api.py::HCL.run / HCL.stream / HCL.run_sync (same engine as S1.1)",
+        "durable_state": "hcl/memory/sqlite_store.py::SQLiteStateStore + hcl/memory/codec.py",
+        "shared_budget": "hcl/runtime/budget.py::TaskBudgetLedger; ModelGateway persists reservations before simulated transport",
+        "recovery": "hcl/runtime/recovery.py::RecoveryManager (explicit abandoned owner; no reconnect retry)",
+        "checks": "tests/test_unified_s12.py; original S1.1 and pure-logic regressions",
+        "witness": "scripts/witness_unified_s12.py (exact commit and runtime file hashes)",
+        "scope": "Applicable S1.2 slices of T21/T22/T28/T29 only; actual finite computation, storage/replay, isolated offline fault accounting.",
+        "stage_complete": false,
+        "limits": [
+          "Only positive exact dependencies and disjoint inference appends support rebase; query/absence indexes remain later work.",
+          "S1.3 migration/compatibility remains open; schema 1 refuses unknown newer schemas.",
+          "Only built-in offline model fixture; no network, credentials, paid provider or real semantic/effect evidence."
+        ]
+      }
     },
     {
       "id": "S1.3",
@@ -3331,17 +3347,17 @@
   "current_execution": {
     "started_at_utc": "2026-10-11T20:31:00Z",
     "authority": "Owner explicitly authorized continued implementation, tests, PRs and verified merges under the approved S1–S7 plan.",
-    "base_main": "52cccc0a496e5d11c4749e98ea8e5dd80ca4a170",
+    "base_main": "18402b66f27e51385d5d478d90deb8fd84390c16",
     "current_stage": "S1",
-    "delivered_slice": "S1.1",
+    "delivered_slice": "S1.2",
     "readiness": "INTEGRATED_OFFLINE",
     "stage_complete": false,
-    "next_slice": "S1.2",
+    "next_slice": "S1.3",
     "provider_calls": 0,
     "provider_spend_usd": "0",
     "sealed_content_reads": 0,
-    "scope": "同一入口、来源权限/快照、真实有限模型计算、计算值约束答案、轻任务及无网模拟端口。",
-    "remaining": "S1.2持久化/原子预算/恢复；S1.3有界迁移/兼容；全部后续S2–S7与完整T01–T32保持原范围。",
+    "scope": "同一真实有限模型闭环落SQLite事件账本与内容对象；精确依赖重基、跨连接共享模拟预算、持久化返回及显式重启恢复。",
+    "remaining": "S1.3有界迁移/兼容；查询与absence依赖、删除传播及全部后续S2–S7和完整T01–T32保持原范围。",
     "historical_boundary": "旧A–H/G-HC/G-ARCH、实验和closed grants保持原证据等级，不自动继承。",
     "validation": "本切片离线结果不等于完整验收族、S1阶段完成、LIVE_FUNCTIONAL或EFFECT_CONFIRMED。"
   }

@@ -1,4 +1,4 @@
-"""The single run/stream engine for the approved S1.1 scope.
+"""The single run/stream engine with optional S1.2 persistence and recovery.
 
 Legacy public entrypoints are retained unchanged until their planned migration;
 new requests never call their provider callbacks. No paid/live path exists here.
@@ -27,6 +27,8 @@ class Engine:
         self._logic = FiniteLogicOperator()
         self._assembler = AnswerAssembler()
         self._requests: set[tuple[str, str]] = set()
+        from hcl.runtime.budget import TaskBudgetLedger
+        self._ledger = TaskBudgetLedger(store) if store.durable else None
 
     def _admit(self, request: TaskRequest) -> None:
         if request.principal != self.principal:
@@ -69,10 +71,11 @@ class Engine:
             raise HCLFailure("INVALID_REQUEST", "admission", "INVALID_ISSUE_SOURCE", "issue.source_id",
                              "An issue source ID must be a string.")
         key = (request.session_id, request.request_id)
-        if key in self._requests:
+        if self._ledger is None and key in self._requests:
             raise HCLFailure("FAILED", "admission", "REQUEST_ALREADY_BOUND", "request_id",
                              "This request is already bound; it cannot silently execute again.")
-        self._requests.add(key)
+        if self._ledger is None:
+            self._requests.add(key)
 
     async def run(self, request: TaskRequest) -> TaskResult:
         if not isinstance(request, TaskRequest):
@@ -82,11 +85,25 @@ class Engine:
                    "request_id": request.request_id if type(request.request_id) is str else None,
                    "store_durable": self.store.durable,
                    "evidence_level": "INTEGRATED_OFFLINE_SLICE_ONLY"}
+        failure_receipt = dict(receipt)
         owns_current_call = False
         committed_revision = None
+        lease = None
+        snapshot = None
+        read_set = {}
         try:
             self._admit(request)
+            if self._ledger is not None:
+                replay = self._ledger.resume(request)
+                if replay is not None:
+                    self._ledger.validate_cached_delivery(request)
+                    return replay
             snapshot = self.store.snapshot(request.session_id, self.principal, request.source_handles)
+            if self._ledger is not None:
+                lease, replay = self._ledger.bind(request, snapshot)
+                if replay is not None:
+                    self._ledger.validate_cached_delivery(request)
+                    return replay
             results = ()
             read_set = snapshot.source_versions
             state_revision = snapshot.revision
@@ -111,18 +128,24 @@ class Engine:
             else:
                 # This lookup is reached only after type/auth/session/ACL checks.
                 # Denied requests never get a side channel into previous calls.
-                owns_current_call = self.gateway.call_state(
+                owns_current_call = self._ledger is None and self.gateway.call_state(
                     self.principal, request.session_id, request.request_id) is None
                 response = await self.gateway.generate(AuthorizedContext(snapshot, request.question),
-                                                       CallSpec(request.request_id, request.budget))
+                                                       CallSpec(request.request_id, request.budget, lease))
                 usage.update(mock_calls=1, request_bytes=response.request_bytes, output_bytes=response.output_bytes)
+                if response.resource_usage is not None:
+                    usage.update(response.resource_usage)
                 contract = self._assembler.offline_reply(response.visible_text)
             if len(contract.answer.encode("utf-8")) > request.budget.max_output_bytes:
                 raise HCLFailure("BUDGET_EXHAUSTED", "answer", "OUTPUT_BYTES_EXCEEDED", "budget.max_output_bytes",
                                  "The complete answer exceeds the output allowance.")
-            self.store.validate_snapshot(snapshot)
+            if self._ledger is not None:
+                self.store.validate_snapshot(snapshot, read_set)
+            else:
+                self.store.validate_snapshot(snapshot)
             self._assembler.validate(contract, results)
             receipt.update(
+                base_revision=snapshot.revision, commit_revision=state_revision,
                 source_versions=dict(snapshot.source_versions), access_epoch=snapshot.access_epoch,
                 rule_version=snapshot.rule_version, read_set=dict(read_set),
                 result_ids=tuple(result.result_id for result in results),
@@ -131,25 +154,42 @@ class Engine:
                 semantic_validation=contract.semantic_validation,
                 operation_ids=(self._logic.operation_id,) if results else (),
             )
-            return TaskResult(contract.answer, contract.claims, "COMPLETED", (), receipt, usage, state_revision)
+            result = TaskResult(contract.answer, contract.claims, "COMPLETED", (), receipt, usage, state_revision)
+            if self._ledger is not None:
+                self._ledger.finish(lease, snapshot, read_set, result)
+                self.store._checkpoint("task_finished")
+                self.store.validate_snapshot(snapshot, read_set)
+            return result
         except HCLFailure as error:
             # On failure/revocation do not export snapshot contents, source IDs,
             # candidate results, exception payloads, or partially checked prose.
+            receipt = dict(failure_receipt)
             call_state = (self.gateway.call_state(self.principal, request.session_id, request.request_id)
                           if owns_current_call else None)
             if call_state is not None:
                 receipt["mock_call_state"] = call_state
                 usage["mock_calls"] = int(call_state not in ("RESERVED_IN_MEMORY_ONLY", "FAILED"))
-            usage.update(error.resource_usage)
+            facts = dict(error.resource_usage)
+            if "mock_call_state" in facts:
+                receipt["mock_call_state"] = facts.pop("mock_call_state")
+            usage.update(facts)
             # A delivery-size refusal can follow a successful computation commit.
             # Expose its existence only when access remains valid, never on denial.
             if committed_revision is not None and error.status != "DENIED":
                 receipt["intermediate_commit_revision"] = committed_revision
             issue_id = (request.issue.issue_id if isinstance(request.issue, Issue)
                         and type(request.issue.issue_id) is str else "invalid_issue")
-            return TaskResult("", (), error.status, (issue_id,), receipt,
-                              usage, committed_revision if error.status != "DENIED" else None,
-                              (error.diagnostic,))
+            result = TaskResult("", (), error.status, (issue_id,), receipt,
+                                usage, committed_revision if error.status != "DENIED" else None,
+                                (error.diagnostic,))
+            if self._ledger is not None and lease is not None:
+                try:
+                    self._ledger.finish(lease, snapshot, read_set, result)
+                except HCLFailure:
+                    # The existing durable reservation remains. No recovery or
+                    # repeated transport is attempted merely to write a failure.
+                    pass
+            return result
 
     async def stream(self, request: TaskRequest):
         yield DeliveryEvent("status", "RUNNING")

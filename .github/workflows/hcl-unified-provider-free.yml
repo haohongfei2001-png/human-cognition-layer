@@ -7,6 +7,7 @@ on:
       - 'tests/test_quantified_logic.py'
       - 'tests/test_argument_readings.py'
       - 'scripts/witness_unified_s1.py'
+      - 'scripts/witness_unified_s12.py'
       - 'scripts/render_hcl_status.py'
       - 'docs/hcl_design_manifest.json'
       - 'requirements-conceptual.txt'
@@ -17,6 +18,7 @@ on:
       - 'hcl/**'
       - 'tests/test_unified*.py'
       - 'scripts/witness_unified_s1.py'
+      - 'scripts/witness_unified_s12.py'
       - 'scripts/render_hcl_status.py'
       - 'docs/hcl_design_manifest.json'
       - '.github/workflows/hcl-unified-provider-free.yml'
@@ -35,15 +37,19 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -r requirements-conceptual.txt
       - name: Actual local logic and unified boundary contracts
-        run: python -B -m unittest -v tests.test_unified_s1 tests.test_unified_plan tests.test_quantified_logic tests.test_argument_readings
+        run: python -B -m unittest -v tests.test_unified_s1 tests.test_unified_s12 tests.test_unified_plan tests.test_quantified_logic tests.test_argument_readings
       - name: Check generated current status and compile only runtime code
         run: |
           python -m scripts.render_hcl_status --check
           python -m compileall -q hcl/kernel hcl/memory hcl/models hcl/operators hcl/runtime hcl/api.py
           git diff --exit-code
       - name: Bind result-consumption witness to exact checked-out head
-        run: python -m scripts.witness_unified_s1 --output hcl-unified-s1-witness.json
+        run: |
+          python -m scripts.witness_unified_s1 --output hcl-unified-s1-witness.json
+          python -m scripts.witness_unified_s12 --output hcl-unified-s12-witness.json
       - uses: actions/upload-artifact@v4
         with:
           name: hcl-unified-s1-witness
-          path: hcl-unified-s1-witness.json
+          path: |
+            hcl-unified-s1-witness.json
+            hcl-unified-s12-witness.json
