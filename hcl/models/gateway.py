@@ -1,8 +1,8 @@
-"""A no-network model gateway for S1.1 contract and fault tests only.
+"""A no-network model gateway with memory-fixture or durable task accounting.
 
 There is deliberately no provider transport or credential loader. Reservations
-are process-local and cannot authorize live work or establish crash recovery.
-S1.2 supplies durable reservation/recovery before any live port is considered.
+on the SQLite backend commit before the simulated transport and share one task
+budget across connections. Neither backend authorizes live work.
 """
 from __future__ import annotations
 
@@ -35,6 +35,7 @@ class ModelReturn:
     request_bytes: int
     output_bytes: int
     evidence_level: str = "OFFLINE_FIXTURE_NOT_SEMANTIC_VALIDATION"
+    resource_usage: dict | None = None
 
 
 class ModelPort(Protocol):
@@ -76,6 +77,8 @@ class AuthorizedContext:
 class CallSpec:
     request_id: str
     allowance: BudgetSlice
+    task_lease: object | None = None
+    call_id: str = "response"
 
 
 class ModelGateway:
@@ -84,14 +87,18 @@ class ModelGateway:
         self._port = port if port is not None else OfflineModelPort()
         # Do not turn a capability claim or an arbitrary callback into authority.
         if type(self._port) is not OfflineModelPort:
-            raise ValueError("S1.1 supports only the built-in offline fixture port")
+            raise ValueError("Only the built-in offline fixture port is currently supported")
         self._calls: dict[tuple[Principal, str, str], str] = {}
+        from hcl.runtime.budget import TaskBudgetLedger
+        self._ledger = TaskBudgetLedger(store) if store.durable else None
 
     @property
     def capabilities(self) -> ProviderCapabilities:
         return self._port.describe()
 
     def call_state(self, principal: Principal, session_id: str, request_id: str) -> str | None:
+        if self._ledger is not None:
+            return self._ledger.state(principal, session_id, request_id)
         return self._calls.get((principal, session_id, request_id))
 
     async def generate(self, authorized_context: AuthorizedContext, call_spec: CallSpec) -> ModelReturn:
@@ -99,7 +106,7 @@ class ModelGateway:
         self._store.validate_snapshot(snapshot)
         allowance = call_spec.allowance
         key = (snapshot.principal, snapshot.session_id, call_spec.request_id)
-        if key in self._calls:
+        if self._ledger is None and key in self._calls:
             raise HCLFailure("FAILED", "model", "CALL_ALREADY_RESERVED", "request_id",
                              "This call is already reserved; automatic resending is forbidden.")
         if allowance.max_mock_calls < 1:
@@ -114,6 +121,8 @@ class ModelGateway:
         if request_bytes > allowance.max_request_bytes:
             raise HCLFailure("BUDGET_EXHAUSTED", "model", "REQUEST_BYTES_EXCEEDED",
                              "budget.max_request_bytes", "The complete request exceeds the byte allowance.")
+        if self._ledger is not None:
+            return await self._generate_durable(authorized_context, call_spec, serialized)
         self._calls[key] = "RESERVED_IN_MEMORY_ONLY"
         try:
             response = await self._port.generate(serialized)
@@ -141,3 +150,58 @@ class ModelGateway:
                              "budget.max_output_bytes", "The model return exceeds the output allowance.")
         self._store.validate_snapshot(snapshot)
         return ModelReturn(response, "stop", request_bytes, output_bytes)
+
+    async def _generate_durable(self, context, spec, serialized):
+        from hcl.runtime.budget import TaskLease, call_usage
+        if type(spec.task_lease) is not TaskLease or spec.task_lease.request_id != spec.request_id:
+            raise HCLFailure("DENIED", "model", "TASK_LEASE_REQUIRED", "call_spec.task_lease",
+                             "A persistent task lease is required before reserving a call.")
+        lease, call_id = spec.task_lease, spec.call_id
+        owned = False
+        try:
+            self._ledger.reserve(lease, context.snapshot, context.question, spec.allowance, call_id, serialized)
+            owned = True  # Returned only after the exclusive reservation committed.
+            self._store._checkpoint("call_reserved")
+            self._ledger.transition(lease, call_id, "RESERVED", "SEND_STARTED", snapshot=context.snapshot)
+            self._store._checkpoint("send_started")
+            response = await self._port.generate(serialized)
+            self._store._checkpoint("response_received")
+            self._ledger.transition(lease, call_id, "SEND_STARTED", "RETURNED", response=response)
+            self._store._checkpoint("return_persisted")
+            if type(response) is not str or not response.strip():
+                raise HCLFailure("FAILED", "model", "INVALID_MODEL_RETURN", "visible_text", "The model return must contain visible text.")
+            try:
+                output_bytes = len(response.encode("utf-8"))
+            except UnicodeEncodeError:
+                raise HCLFailure("FAILED", "model", "INVALID_MODEL_ENCODING", "visible_text", "The model return is not valid Unicode text.") from None
+            if output_bytes > spec.allowance.max_output_bytes:
+                raise HCLFailure("BUDGET_EXHAUSTED", "model", "OUTPUT_BYTES_EXCEEDED", "budget.max_output_bytes", "The model return exceeds its output allowance.")
+            self._store.validate_snapshot(context.snapshot)
+            row = self._ledger.transition(lease, call_id, "RETURNED", "RETURNED", validation_code="VALIDATED")
+            return ModelReturn(response, "stop", len(serialized.encode("utf-8")), output_bytes,
+                               resource_usage=call_usage(row))
+        except Exception as caught:
+            error = caught if isinstance(caught, HCLFailure) else HCLFailure(
+                "SEND_UNKNOWN", "model", "SEND_UNKNOWN", "transport",
+                "The simulated call could not establish a durable outcome; it will not be resent.")
+            if not owned:
+                raise error from None
+            try:
+                row = self._ledger.call(lease, call_id)
+                state = row["state"]
+                if state in ("RESERVED", "SEND_STARTED"):
+                    next_state = "FAILED_BEFORE_SEND" if state == "RESERVED" or error.diagnostic.code == "FAILED_BEFORE_SEND" else "UNKNOWN"
+                    row = self._ledger.transition(lease, call_id, state, next_state,
+                                                  validation_code=error.diagnostic.code)
+                elif state == "RETURNED":
+                    row = self._ledger.transition(lease, call_id, state, "VALIDATION_REJECTED",
+                                                  validation_code=error.diagnostic.code)
+                usage = dict(call_usage(row), mock_call_state=row["state"])
+            except HCLFailure:
+                # Persistent SEND_STARTED is recovered explicitly after the owner
+                # is abandoned. An unavailable ledger cannot certify zero usage.
+                usage = {"mock_calls": None, "held_mock_calls": 1, "mock_usage_unknown": True,
+                         "mock_call_state": "DURABLE_OUTCOME_UNAVAILABLE"}
+            raise HCLFailure(error.status, error.diagnostic.stage, error.diagnostic.code,
+                             error.diagnostic.field_path, error.diagnostic.message,
+                             resource_usage=usage) from None

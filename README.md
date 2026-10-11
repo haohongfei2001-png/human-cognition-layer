@@ -5,11 +5,11 @@
 
 用户已批准全系统整改v1.0、D1–D6推荐默认及后续连续实施。完整规格：[HCL_SYSTEM_REDESIGN_SPEC.md](docs/HCL_SYSTEM_REDESIGN_SPEC.md)；唯一结构化计划：[hcl_design_manifest.json](docs/hcl_design_manifest.json)；执行交接：[HCL_CODEX_HANDOFF.md](docs/HCL_CODEX_HANDOFF.md)。
 
-当前切片：**S1.1 / INTEGRATED_OFFLINE**。同一入口、来源权限/快照、真实有限模型计算、计算值约束答案、轻任务及无网模拟端口。
+当前切片：**S1.2 / INTEGRATED_OFFLINE**。同一真实有限模型闭环落SQLite事件账本与内容对象；精确依赖重基、跨连接共享模拟预算、持久化返回及显式重启恢复。
 
 本切片离线结果不等于完整验收族、S1阶段完成、LIVE_FUNCTIONAL或EFFECT_CONFIRMED。
 
-**NEXT_READY：S1.2**。S1.2持久化/原子预算/恢复；S1.3有界迁移/兼容；全部后续S2–S7与完整T01–T32保持原范围。
+**NEXT_READY：S1.3**。S1.3有界迁移/兼容；查询与absence依赖、删除传播及全部后续S2–S7和完整T01–T32保持原范围。
 
 [当前状态](STATUS.md)与[执行计划入口](DEVELOPMENT_PLAN.md)由同一manifest生成。本次模型调用数为0，未新增收费、部署或sealed访问权限。
 

@@ -31,7 +31,7 @@ def render(manifest):
     output['STATUS.md'] = generated + '# HCL 当前状态\n\n' + links + '\n\n' + (
         f"实施基线main：`{current['base_main']}`。\n\n" + status + '\n'
         'S1尚未完整完成。真实本地算子与模拟端口的离线接通不能证明真实模型语义能力。'
-        '每次运行的精确commit和代码文件hash由scripts/witness_unified_s1.py生成；'
+        '每次运行的精确commit和代码文件hash由对应scripts/witness_unified_s*.py生成；'
         'CI在准确PR head上执行，不将旧回归数量作为新能力完成率。\n\n'
         f"本轮provider_calls={current['provider_calls']}；provider_spend_usd={current['provider_spend_usd']}；"
         f"sealed_content_reads={current['sealed_content_reads']}。\n\n" + history + '\n'

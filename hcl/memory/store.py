@@ -1,8 +1,8 @@
-"""Single-writer in-memory store for S1.1, intentionally not durable.
+"""In-memory contract fixture plus the explicit SQLite backend factory.
 
 The host authenticates principals and provisions sessions/sources. Request text
-never provisions authority. S1.2 replaces this test store with a durable ledger;
-this implementation cannot establish crash recovery or persistent budgets.
+never provisions authority. StateStore.sqlite opens the S1.2 durable backend;
+the default fixture cannot establish crash recovery or persistent budgets.
 """
 from __future__ import annotations
 
@@ -34,6 +34,12 @@ class _Session:
 class StateStore:
     """In-memory implementation; administrative methods require session owner."""
     durable = False
+
+    @staticmethod
+    def sqlite(path):
+        """Open the durable backend; the default constructor stays a test fixture."""
+        from hcl.memory.sqlite_store import SQLiteStateStore
+        return SQLiteStateStore(path)
 
     def __init__(self) -> None:
         self._sessions: dict[str, _Session] = {}
