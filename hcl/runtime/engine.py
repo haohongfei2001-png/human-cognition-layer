@@ -1,0 +1,158 @@
+"""The single run/stream engine for the approved S1.1 scope.
+
+Legacy public entrypoints are retained unchanged until their planned migration;
+new requests never call their provider callbacks. No paid/live path exists here.
+"""
+from __future__ import annotations
+
+from dataclasses import fields
+
+from hcl.kernel.types import (
+    BudgetSlice, DeliveryEvent, HCLFailure, Issue, Principal, SCHEMA_VERSION,
+    SourceHandle, TaskRequest, TaskResult,
+)
+from hcl.memory.store import StateStore
+from hcl.models.gateway import AuthorizedContext, CallSpec, ModelGateway
+from hcl.operators.logic import FiniteLogicOperator
+from hcl.runtime.answer import AnswerAssembler
+
+
+class Engine:
+    def __init__(self, store: StateStore, principal: Principal, gateway: ModelGateway | None = None):
+        self.store = store
+        self.principal = principal  # Authenticated by the embedding host, not a source claim.
+        if gateway is not None and gateway._store is not store:
+            raise ValueError("The engine and gateway must share one state store")
+        self.gateway = gateway if gateway is not None else ModelGateway(store)
+        self._logic = FiniteLogicOperator()
+        self._assembler = AnswerAssembler()
+        self._requests: set[tuple[str, str]] = set()
+
+    def _admit(self, request: TaskRequest) -> None:
+        if request.principal != self.principal:
+            raise HCLFailure("DENIED", "admission", "PRINCIPAL_MISMATCH", "principal",
+                             "The request principal does not match the authenticated host identity.")
+        for name in ("request_id", "session_id", "question"):
+            value = getattr(request, name)
+            if not isinstance(value, str) or not value.strip():
+                raise HCLFailure("INVALID_REQUEST", "admission", "REQUIRED_FIELD", name,
+                                 "A nonempty request field is required.")
+            try:
+                value.encode("utf-8")
+            except UnicodeEncodeError:
+                raise HCLFailure("INVALID_REQUEST", "admission", "INVALID_TEXT_ENCODING", name,
+                                 "The request field must be valid Unicode text.") from None
+        if (request.output_contract != "natural-language-with-claims-v1"
+                or request.epistemic_profile not in ("balanced", "deep")):
+            raise HCLFailure("INVALID_REQUEST", "admission", "UNSUPPORTED_CONTRACT", "output_contract",
+                             "The requested contract or epistemic profile is unsupported.")
+        if not isinstance(request.budget, BudgetSlice) or any(
+                type(getattr(request.budget, item.name)) is not int or getattr(request.budget, item.name) < 0
+                for item in fields(BudgetSlice)):
+            raise HCLFailure("INVALID_REQUEST", "admission", "INVALID_BUDGET", "budget",
+                             "Budget limits must be nonnegative integers.")
+        if any(not isinstance(handle, SourceHandle) or not isinstance(handle.source_id, str)
+               or not handle.source_id or type(handle.version) is not int or handle.version < 1
+               for handle in request.source_handles):
+            raise HCLFailure("INVALID_REQUEST", "admission", "INVALID_HANDLE", "source_handles",
+                             "Versioned source handles are required.")
+        if not isinstance(request.issue, Issue):
+            raise HCLFailure("INVALID_REQUEST", "admission", "INVALID_ISSUE", "issue",
+                             "A typed issue is required.")
+        if request.issue.kind not in ("logic.check_interpretation", "source.report", "model.respond"):
+            raise HCLFailure("INVALID_REQUEST", "admission", "UNSUPPORTED_ISSUE", "issue.kind",
+                             "This issue is outside the implemented execution slice.")
+        if not isinstance(request.issue.issue_id, str) or not request.issue.issue_id:
+            raise HCLFailure("INVALID_REQUEST", "admission", "INVALID_ISSUE", "issue.issue_id",
+                             "A nonempty issue ID is required.")
+        if request.issue.source_id is not None and not isinstance(request.issue.source_id, str):
+            raise HCLFailure("INVALID_REQUEST", "admission", "INVALID_ISSUE_SOURCE", "issue.source_id",
+                             "An issue source ID must be a string.")
+        key = (request.session_id, request.request_id)
+        if key in self._requests:
+            raise HCLFailure("FAILED", "admission", "REQUEST_ALREADY_BOUND", "request_id",
+                             "This request is already bound; it cannot silently execute again.")
+        self._requests.add(key)
+
+    async def run(self, request: TaskRequest) -> TaskResult:
+        if not isinstance(request, TaskRequest):
+            raise TypeError("TaskRequest required")
+        usage = {"provider_calls": 0, "provider_spend_usd": "0", "mock_calls": 0, "local_evaluations": 0}
+        receipt = {"schema": SCHEMA_VERSION, "engine": "unified-engine-v1",
+                   "request_id": request.request_id if type(request.request_id) is str else None,
+                   "store_durable": self.store.durable,
+                   "evidence_level": "INTEGRATED_OFFLINE_SLICE_ONLY"}
+        owns_current_call = False
+        committed_revision = None
+        try:
+            self._admit(request)
+            snapshot = self.store.snapshot(request.session_id, self.principal, request.source_handles)
+            results = ()
+            read_set = snapshot.source_versions
+            state_revision = snapshot.revision
+            if request.issue.kind == "logic.check_interpretation":
+                operation = self._logic.run(snapshot, request.issue, request.budget)
+                results = operation.candidate_delta.new_inferences
+                contract = self._assembler.build(snapshot, (request.issue,), results)
+                read_set = operation.read_set
+                committed = self.store.commit(snapshot.revision, read_set, snapshot.access_epoch,
+                                              operation.candidate_delta)
+                if committed.result_ids != operation.result_refs:
+                    raise HCLFailure("FAILED", "commit", "COMMIT_RESULT_MISMATCH", "result_refs",
+                                     "The store did not commit the proposed computation identities.")
+                state_revision = committed.revision
+                committed_revision = committed.revision
+                usage.update(operation.resource_usage)
+            elif request.issue.kind == "source.report":
+                if not snapshot.immutable_views:
+                    raise HCLFailure("NEEDS_EVIDENCE", "answer", "NO_SOURCES", "source_handles",
+                                     "A source report needs an authorized source.")
+                contract = self._assembler.source_report(snapshot)
+            else:
+                # This lookup is reached only after type/auth/session/ACL checks.
+                # Denied requests never get a side channel into previous calls.
+                owns_current_call = self.gateway.call_state(
+                    self.principal, request.session_id, request.request_id) is None
+                response = await self.gateway.generate(AuthorizedContext(snapshot, request.question),
+                                                       CallSpec(request.request_id, request.budget))
+                usage.update(mock_calls=1, request_bytes=response.request_bytes, output_bytes=response.output_bytes)
+                contract = self._assembler.offline_reply(response.visible_text)
+            if len(contract.answer.encode("utf-8")) > request.budget.max_output_bytes:
+                raise HCLFailure("BUDGET_EXHAUSTED", "answer", "OUTPUT_BYTES_EXCEEDED", "budget.max_output_bytes",
+                                 "The complete answer exceeds the output allowance.")
+            self.store.validate_snapshot(snapshot)
+            self._assembler.validate(contract, results)
+            receipt.update(
+                source_versions=dict(snapshot.source_versions), access_epoch=snapshot.access_epoch,
+                rule_version=snapshot.rule_version, read_set=dict(read_set),
+                result_ids=tuple(result.result_id for result in results),
+                inference_values={result.result_id: result.values for result in results},
+                mechanical_validation=contract.mechanical_validation,
+                semantic_validation=contract.semantic_validation,
+                operation_ids=(self._logic.operation_id,) if results else (),
+            )
+            return TaskResult(contract.answer, contract.claims, "COMPLETED", (), receipt, usage, state_revision)
+        except HCLFailure as error:
+            # On failure/revocation do not export snapshot contents, source IDs,
+            # candidate results, exception payloads, or partially checked prose.
+            call_state = (self.gateway.call_state(self.principal, request.session_id, request.request_id)
+                          if owns_current_call else None)
+            if call_state is not None:
+                receipt["mock_call_state"] = call_state
+                usage["mock_calls"] = int(call_state not in ("RESERVED_IN_MEMORY_ONLY", "FAILED"))
+            usage.update(error.resource_usage)
+            # A delivery-size refusal can follow a successful computation commit.
+            # Expose its existence only when access remains valid, never on denial.
+            if committed_revision is not None and error.status != "DENIED":
+                receipt["intermediate_commit_revision"] = committed_revision
+            issue_id = (request.issue.issue_id if isinstance(request.issue, Issue)
+                        and type(request.issue.issue_id) is str else "invalid_issue")
+            return TaskResult("", (), error.status, (issue_id,), receipt,
+                              usage, committed_revision if error.status != "DENIED" else None,
+                              (error.diagnostic,))
+
+    async def stream(self, request: TaskRequest):
+        yield DeliveryEvent("status", "RUNNING")
+        # Exactly the same semantic path; no unchecked claim/token is published.
+        result = await self.run(request)
+        yield DeliveryEvent("result", result.status, result)
