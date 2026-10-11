@@ -8,6 +8,7 @@ on:
       - 'tests/test_argument_readings.py'
       - 'scripts/witness_unified_s1.py'
       - 'scripts/witness_unified_s12.py'
+      - 'scripts/witness_unified_s13.py'
       - 'scripts/render_hcl_status.py'
       - 'docs/hcl_design_manifest.json'
       - 'requirements-conceptual.txt'
@@ -19,6 +20,7 @@ on:
       - 'tests/test_unified*.py'
       - 'scripts/witness_unified_s1.py'
       - 'scripts/witness_unified_s12.py'
+      - 'scripts/witness_unified_s13.py'
       - 'scripts/render_hcl_status.py'
       - 'docs/hcl_design_manifest.json'
       - '.github/workflows/hcl-unified-provider-free.yml'
@@ -32,24 +34,27 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - run: python -m pip install -r requirements-conceptual.txt
       - name: Actual local logic and unified boundary contracts
-        run: python -B -m unittest -v tests.test_unified_s1 tests.test_unified_s12 tests.test_unified_plan tests.test_quantified_logic tests.test_argument_readings
+        run: python -B -m unittest -v tests.test_unified_s1 tests.test_unified_s12 tests.test_unified_s13 tests.test_unified_plan tests.test_quantified_logic tests.test_argument_readings
       - name: Check generated current status and compile only runtime code
         run: |
           python -m scripts.render_hcl_status --check
-          python -m compileall -q hcl/kernel hcl/memory hcl/models hcl/operators hcl/runtime hcl/api.py
+          python -m compileall -q hcl/kernel hcl/memory hcl/models hcl/operators hcl/runtime hcl/compat hcl/api.py
           git diff --exit-code
       - name: Bind result-consumption witness to exact checked-out head
         run: |
           python -m scripts.witness_unified_s1 --output hcl-unified-s1-witness.json
           python -m scripts.witness_unified_s12 --output hcl-unified-s12-witness.json
+          python -m scripts.witness_unified_s13 --output hcl-unified-s13-witness.json
       - uses: actions/upload-artifact@v4
         with:
           name: hcl-unified-s1-witness
           path: |
             hcl-unified-s1-witness.json
             hcl-unified-s12-witness.json
+            hcl-unified-s13-witness.json

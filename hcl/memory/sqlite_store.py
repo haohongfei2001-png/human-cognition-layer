@@ -54,9 +54,26 @@ class SQLiteStateStore:
         self._db.execute("PRAGMA journal_mode=WAL")
         self._db.execute("PRAGMA synchronous=FULL")
         version = self._db.execute("PRAGMA user_version").fetchone()[0]
-        if version not in (0, SCHEMA):
+        if version not in (0, SCHEMA, 2):
             self._db.close()
             raise ValueError("unsupported store schema; migration or rollback is required")
+        self._schema = version or SCHEMA
+        self._namespace_generation = None
+        self._version_bundle = None
+        if version == 2:
+            from hcl.memory.migrations.control import read_control, version_bundle
+            try:
+                control = read_control(self._db)
+                self._namespace_generation = control["generation"]
+                self._version_bundle = version_bundle()
+                if json.loads(control["versions"]) != self._version_bundle:
+                    raise ValueError("controlled namespace version mismatch")
+            except BaseException:
+                self._db.close()
+                raise
+            # A published controlled namespace must already have its schema.
+            # Never repair a partial import or downgrade it to schema 1.
+            return
         self._db.executescript("""
         CREATE TABLE IF NOT EXISTS sessions(session_id TEXT PRIMARY KEY, tenant TEXT NOT NULL,
           owner TEXT NOT NULL, members TEXT NOT NULL, revision INTEGER NOT NULL, epoch INTEGER NOT NULL, rule TEXT NOT NULL);
@@ -91,6 +108,11 @@ class SQLiteStateStore:
         with self._lock:
             try:
                 self._db.execute("BEGIN IMMEDIATE" if write else "BEGIN")
+                if self._db.execute("PRAGMA user_version").fetchone()[0] != self._schema:
+                    raise corrupt()
+                if self._namespace_generation is not None:
+                    from hcl.memory.migrations.control import validate_execution
+                    validate_execution(self._db, self._namespace_generation, self._version_bundle)
                 yield self._db
                 self._checkpoint("before_commit")
                 self._db.commit()
@@ -241,6 +263,12 @@ class SQLiteStateStore:
                 views[handle.source_id] = source
             return Snapshot(session_id, principal, session["revision"], session["epoch"], session["rule"],
                             {key: source.handle.version for key, source in views.items()}, {}, views)
+
+    def current_handles(self, session_id, principal, source_ids):
+        """Authorized current identities for the bounded compatibility adapter."""
+        with self._transaction() as db:
+            session = self._session(db, session_id, principal)
+            return tuple(self._source(db, session, principal, identifier(key)).handle for key in source_ids)
 
     def _validate_dependencies(self, db, session, principal, read_set, epoch, rule):
         version_map(read_set)
