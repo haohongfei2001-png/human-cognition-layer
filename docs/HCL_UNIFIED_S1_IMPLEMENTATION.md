@@ -57,6 +57,50 @@ unimplemented S2–S7 mechanisms.
 
 ## Reproduction
 
+### Diagnostic identity migration regression
+
+The exact-head v1 run at `12bf1a5bd47b8e45b4af8233346eed03dd72a928`
+[failed at the original diagnostic preflight](https://github.com/haohongfei2001-png/human-cognition-layer/actions/runs/38174369118)
+with `CURRENT_RUNTIME_DRIFT`. This was the expected rejection of an October 8
+whole-runtime identity by the new tree, not permission to rebase old pins. A
+local subsequent diagnostic check also reproduced two live-package identity
+failures (`FINAL_DIAGNOSTIC_CONFIGURATION_OR_RUNTIME_DRIFT` and the original
+runtime equality assertion). The unchanged historical guards remain active.
+
+`scripts.run_unified_diagnostic_regressions` accounts for all 51 original test
+IDs from the preflight/shared-core/live-diagnostic selection:
+
+- 39 existing shared-core, authority-negative and fake-transport behavior tests
+  execute on the current checkout without adaptation.
+- All 10 original exact-package preflight tests and the two whole-runtime live
+  identity methods execute on the fixed `52cccc0a` projection. Positive and
+  negative identity mutations are both retained. The original standalone
+  package/review verification also runs there.
+- Nine additional current tests preserve five original control assertion bodies
+  with a newly built, current-bound **offline test fixture**, plus a fresh-process
+  no-network/no-SDK control, fixture restoration, and original preflight/live
+  rejection checks. The five bodies include all fixed failure responses, receipt
+  persistence, original-binding mutations, native-capture failure and no retry.
+  Only the test-local `preflight` fixture is substituted; no live gate or old
+  manifest is edited. Fake reservations still validate the current runtime.
+
+The projection materializes only the old Python runtime and an explicit list of
+29 diagnostic code/test/helper/package/review files. No eval tree, paid grant,
+trigger, credentials or provider SDK is used. Every diagnostic file is required
+to remain byte-identical to the baseline, and the child rejects network/live
+imports. The JSON receipt enumerates both partitions and extra current tests;
+skips, missing IDs or changed partition sizes fail the runner. Historical output
+is separately labeled and never counts as new unified capability acceptance.
+
+The full downstream witness section (70 commands, including the 11 existing
+compatibility wrappers) was also executed locally with every exit code zero;
+the workflow still executes those original computations. This inventory avoids
+treating an early successful CI step as full-workflow completion.
+
+```
+python -B -m scripts.run_unified_diagnostic_regressions --output /tmp/hcl-diagnostic-partition.json
+```
+
 Use Python 3.12 and the existing `requirements-conceptual.txt` pin for full legacy
 logic regression (the explicit supplied-model path itself needs no Z3).
 
