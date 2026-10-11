@@ -21,7 +21,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install 'pandas>=2.2,<3' 'openai==2.14.0' 'z3-solver==4.15.4.0' 'cryptography==50.0.0'
       - name: Provider-free v1 integration tests
-        run: python -m unittest discover -s tests -p 'test_v1*.py' -v 2>&1 | tee v1-integration.log
+        run: python -m scripts.run_unified_legacy_regressions --output hcl-v1-partition.json 2>&1 | tee v1-integration.log
       - name: Offline source protocol and answer-boundary witness
         run: python -m unittest tests.test_development_mindgames_protocol tests.test_development_source_preparation tests.test_ordinary_answer_boundary_witness -v
       - name: Metered executor and private encrypted result gates
@@ -77,18 +77,18 @@ jobs:
           python -m scripts.witness_i02_typographic_dialogue_v9 --output hcl-i02-typographic-dialogue-v9-witness.json
           python -m scripts.witness_i02_long_agency_v10 --output hcl-i02-long-agency-v10-witness.json
           python -m scripts.witness_i02_long_plan_composition_v11 --output hcl-i02-long-plan-composition-v11-witness.json
-          python -m scripts.development_plan_diagnostics_amendment
-          python -m scripts.witness_c02_planned_input --output hcl-c02-planned-input-witness.json
-          python -m scripts.witness_llm_routing_execution --output hcl-llm-routing-execution-witness.json
-          python -m scripts.witness_universal_sensitivity --output hcl-universal-sensitivity-witness.json
-          python -m scripts.witness_universal_appraisal --output hcl-universal-appraisal-witness.json
-          python -m scripts.witness_universal_agency_chain --output hcl-universal-agency-chain-witness.json
-          python -m scripts.witness_universal_commitment --output hcl-universal-commitment-witness.json
-          python -m scripts.witness_universal_understanding --output hcl-universal-understanding-witness.json
-          python -m scripts.witness_universal_argument --output hcl-universal-argument-witness.json
-          python -m scripts.witness_universal_concept --output hcl-universal-concept-witness.json
-          python -m scripts.witness_embedded_scene_cues --output hcl-embedded-scene-cues-witness.json
-          python -m scripts.witness_narrator_actual_scope --output hcl-narrator-actual-scope-witness.json
+          python -c "from scripts.run_unified_legacy_regressions import validate_current_legacy_projection; validate_current_legacy_projection()"
+          python -m scripts.run_unified_legacy_regressions --witness scripts.witness_c02_planned_input --output hcl-c02-planned-input-witness.json
+          python -m scripts.run_unified_legacy_regressions --witness scripts.witness_llm_routing_execution --output hcl-llm-routing-execution-witness.json
+          python -m scripts.run_unified_legacy_regressions --witness scripts.witness_universal_sensitivity --output hcl-universal-sensitivity-witness.json
+          python -m scripts.run_unified_legacy_regressions --witness scripts.witness_universal_appraisal --output hcl-universal-appraisal-witness.json
+          python -m scripts.run_unified_legacy_regressions --witness scripts.witness_universal_agency_chain --output hcl-universal-agency-chain-witness.json
+          python -m scripts.run_unified_legacy_regressions --witness scripts.witness_universal_commitment --output hcl-universal-commitment-witness.json
+          python -m scripts.run_unified_legacy_regressions --witness scripts.witness_universal_understanding --output hcl-universal-understanding-witness.json
+          python -m scripts.run_unified_legacy_regressions --witness scripts.witness_universal_argument --output hcl-universal-argument-witness.json
+          python -m scripts.run_unified_legacy_regressions --witness scripts.witness_universal_concept --output hcl-universal-concept-witness.json
+          python -m scripts.run_unified_legacy_regressions --witness scripts.witness_embedded_scene_cues --output hcl-embedded-scene-cues-witness.json
+          python -m scripts.run_unified_legacy_regressions --witness scripts.witness_narrator_actual_scope --output hcl-narrator-actual-scope-witness.json
           python -m scripts.witness_qualified_speech_scope --output hcl-qualified-speech-scope-witness.json
           python -m scripts.witness_development_reader_entry_v13 --output hcl-development-reader-entry-v13-witness.json
           python -m scripts.witness_development_shared_reader_v14 --output hcl-development-shared-reader-v14-witness.json
@@ -153,6 +153,11 @@ jobs:
           digest = hashlib.sha256()
           for path in sorted(root.glob('hcl/**/*.py')):
               digest.update(str(path).encode() + b'\0' + path.read_bytes())
+          partition = json.loads(pathlib.Path('hcl-v1-partition.json').read_text())
+          if not partition['current_pass'] or not partition['historical_pass'] or partition['skipped_or_dropped_by_partition'] != 0:
+              raise SystemExit('legacy/current test partition did not pass')
+          counts['v1_historical_identity'] = partition['historical_identity']
+          counts['v1_discovered'] = partition['discovered']
           receipt = dict(schema='hcl-v1-provider-free-certification-v1', sha=subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
               workflow_event_sha=os.environ['GITHUB_SHA'],
               run_id=os.environ['GITHUB_RUN_ID'], event=os.environ['GITHUB_EVENT_NAME'],
@@ -166,6 +171,8 @@ jobs:
           name: hcl-v1-provider-free-certification
           path: |
             hcl-v1-certification.json
+            hcl-v1-partition.json
+            hcl-v1-partition.historical.log
             hcl-c02-planned-input-witness.json
             hcl-llm-routing-execution-witness.json
             hcl-universal-sensitivity-witness.json
