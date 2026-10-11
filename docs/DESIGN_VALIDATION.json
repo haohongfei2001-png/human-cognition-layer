@@ -1,0 +1,57 @@
+{
+  "schema": "hcl-design-freeze-checks-v1",
+  "date": "2026-10-12",
+  "baseline": "58bfa17aed8da5773714309173438796b33491ec",
+  "scope": "DOCUMENTS_ONLY_NOT_RUNTIME_OR_EFFECT",
+  "counts": {
+    "issues": 38,
+    "mechanisms": 16,
+    "stages": 7,
+    "acceptance": 32,
+    "migration": 61,
+    "decisions": 6
+  },
+  "checks": {
+    "original_spec_full_body_preserved": true,
+    "all_original_mechanism_fields_preserved": true,
+    "all_original_acceptance_fields_preserved": true,
+    "all_original_issue_and_migration_fields_preserved": true,
+    "all_stage_goals_dependencies_gates_preserved": true,
+    "D1_D6_recommended_defaults_approved": true,
+    "all_cross_references_valid": true,
+    "stage_DAG_acyclic": true,
+    "S1_S2_slices_bounded_and_mapped": true,
+    "S3_S4_ownership_disjoint_and_core_single_writer": true,
+    "exploratory_algorithm_completion_required": true,
+    "historical_evidence_not_upgraded": true,
+    "runtime_paid_deploy_sealed_authority_absent": true
+  },
+  "source_sha256": {
+    "HCL_SYSTEM_REDESIGN_REVIEW.md": "7aac6be78977fc48371ea144a0090665474f3d173a9b327c05ab4b7a2515f837",
+    "HCL_DESIGN_MANIFEST.json": "2e80fe99e9d6925cb6a140ab929c76bb251a8382d34e630a8b71189805cf9238",
+    "CODEX_HANDOFF.md": "8c70eb86a529ecb0e5c68b0e7c4c2aff5e4e0ba8e2759583613260ab7b07e40e"
+  },
+  "archive_original_blobs": {
+    "README.md": "99ce23da5e54d4e9105b3e884d0f6b1a6ad9a078",
+    "STATUS.md": "c6a597a37a7dc5a061346658cc81785afc6fc152",
+    "DEVELOPMENT_PLAN.md": "7a52d7a03e0e298af023e5a08dcc4e8aae4dea3e",
+    "HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md": "25fc771a3da04b3aced8cd1d20cdd2ec2a3f2df8"
+  },
+  "frozen_content_sha256": {
+    "docs/HCL_SYSTEM_REDESIGN_SPEC.md": "6bbdeeabcd6fd889d859ac354a3f8d2381fa63b137cd2f2c4326942222828409",
+    "docs/hcl_design_manifest.json": "fccfd46bc6461b19010a71eb829e58a0e4b002c6657f9189f3b12e9e07de7fd7",
+    "docs/HCL_CODEX_HANDOFF.md": "e57e1d36b19ab2587af37371777638f89a97a1016dfdd3a5551b886c3d52d4f4",
+    "README.md": "f684a70e6b7c7aa5b30d70eb6aad5f45420cb63174b783ae626e9249c1b02bb2",
+    "DEVELOPMENT_PLAN.md": "610528064431bd3dce552b88725bd735e8f7e8215972ece0377b3c9ccf93da8b",
+    "STATUS.md": "75ec419a0113d31846363f0d6a953ebf67b53963123e3e5b0ce443001b0147c7",
+    "HCL_LONG_HORIZON_CAPABILITY_MASTER_PLAN.md": "46eed4c4a984c3fce290d44f86f35890763e45d2deac7cad92107162b978c1cb",
+    "docs/history/pre-redesign-20261012/INDEX.md": "31281bb513cec3d2d9be19809b350d9bf0f043a5dff3bea2a4085a6f61d028f4"
+  },
+  "not_claimed": [
+    "runtime tests were rerun locally",
+    "live model success",
+    "cognitive efficacy",
+    "any S stage completed",
+    "independent peer review"
+  ]
+}
