@@ -30,8 +30,8 @@ class UnifiedPlanTests(unittest.TestCase):
         current = self.manifest['current_execution']
         self.assertEqual(current['readiness'], 'INTEGRATED_OFFLINE')
         self.assertFalse(current['stage_complete'])
-        self.assertEqual(current['next_slice'], 'S2.1')
-        self.assertEqual(current['delivered_slice'], 'S1.3')
+        self.assertEqual(current['next_slice'], 'S2.2')
+        self.assertEqual(current['delivered_slice'], 'S2.1')
         self.assertEqual(current['provider_calls'], 0)
         self.assertEqual(current['provider_spend_usd'], '0')
         self.assertEqual(current['sealed_content_reads'], 0)
