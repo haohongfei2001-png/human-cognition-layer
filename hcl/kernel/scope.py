@@ -41,4 +41,3 @@ def check_commit_contract(expected_revision, read_set, access_epoch, delta):
         raise failure("FAILED", "DELTA_CONTRACT_MISMATCH", "delta", "The commit contract is inconsistent.")
     if delta.rule_version != RULE_VERSION:
         raise failure("STALE_STATE", "RULE_VERSION_CHANGED", "rule_version", "The rule version is no longer current.")
-
