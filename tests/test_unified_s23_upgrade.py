@@ -102,11 +102,16 @@ class Crash(BaseException):
 
 
 class RuntimeUpgradeTests(unittest.TestCase):
+    baseline = BASELINE
+    code_hash = S22_CODE_HASH
+    file_count = 162
+    old_program = OLD_PROGRAM
+
     @classmethod
     def setUpClass(cls):
         cls.projection = tempfile.TemporaryDirectory()
         root = Path(cls.projection.name)
-        raw = subprocess.check_output(["git", "ls-tree", "-rz", BASELINE, "hcl"], cwd=ROOT)
+        raw = subprocess.check_output(["git", "ls-tree", "-rz", cls.baseline, "hcl"], cwd=ROOT)
         inventory = {}
         for row in raw.split(b"\0"):
             if not row:
@@ -129,8 +134,8 @@ class RuntimeUpgradeTests(unittest.TestCase):
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(body)
         if (
-            len(inventory) != 162
-            or sha256(codec.canonical(inventory).encode()).hexdigest() != S22_CODE_HASH
+            len(inventory) != cls.file_count
+            or sha256(codec.canonical(inventory).encode()).hexdigest() != cls.code_hash
         ):
             raise AssertionError("exact predecessor runtime inventory mismatch")
         cls.runtime = root
@@ -163,7 +168,7 @@ class RuntimeUpgradeTests(unittest.TestCase):
             "PYTHONNOUSERSITE": "1",
         }
         process = subprocess.Popen(
-            [sys.executable, "-u", "-c", OLD_PROGRAM, str(directory), str(schema)],
+            [sys.executable, "-u", "-c", self.old_program, str(directory), str(schema)],
             cwd=self.runtime,
             env=env,
             stdin=subprocess.PIPE,
@@ -176,7 +181,7 @@ class RuntimeUpgradeTests(unittest.TestCase):
         if not line:
             raise AssertionError(process.communicate(timeout=5)[1])
         metadata = json.loads(line)
-        self.assertEqual(metadata["bundle"]["code_sha256"], S22_CODE_HASH)
+        self.assertEqual(metadata["bundle"]["code_sha256"], self.code_hash)
         return Path(metadata["path"]), metadata, process
 
     @staticmethod

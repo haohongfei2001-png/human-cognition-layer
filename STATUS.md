@@ -3,13 +3,15 @@
 
 完整规格：[HCL_SYSTEM_REDESIGN_SPEC.md](docs/HCL_SYSTEM_REDESIGN_SPEC.md)；唯一结构化计划：[hcl_design_manifest.json](docs/hcl_design_manifest.json)；执行交接：[HCL_CODEX_HANDOFF.md](docs/HCL_CODEX_HANDOFF.md)。
 
-实施基线main：`8643a82cf909890879fb413f56a7ebe74a44334f`。
+实施基线main：`421e895562227141eb60b3e123363c1708685ee3`。
 
 当前切片：**S2.3 / INTEGRATED_OFFLINE**。预算化Issue图、实际并行算子、字段/来源反馈修复、完整外存与有界上下文、受控恢复和共同LocalModel协议接入同一engine。
 
 本切片证明注入候选下的真实离线预算执行、结果消费、修订和恢复；不证明开放语义/任务分解、跨块语义组合、完整性或S1/S2阶段完成。
 
-**NEXT_READY：S3 ∥ S4**。按已批准S3/M03–M09和S4/M10–M14推进依赖安全的领域实现；完整S1/S2实模功能、S5–S7及T01–T32研究目标全部保留。
+**NEXT_READY：S3 ∥ S4**。继续完整S3/M03–M09与并行S4/M10–M14；当前有限三机制是增量证据，不关闭阶段。完整S1/S2实模功能、S5–S7及T01–T32研究目标全部保留。
+
+**在建领域：**S3在建：同一执行图中的有限事件心智、共享信念驱动的行动动态规划和因果观察/干预计算已离线接通；完整M03/M05/M06及其余S3、S4仍待后续实现与验收。
 
 S1尚未完整完成。真实本地算子与模拟端口的离线接通不能证明真实模型语义能力。每次运行的精确commit和代码文件hash由对应scripts/witness_unified_s*.py生成；CI在准确PR head上执行，不将旧回归数量作为新能力完成率。
 

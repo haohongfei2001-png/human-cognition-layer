@@ -136,6 +136,8 @@ def _history(db, object_root):
 
 
 S22_CODE_HASH = "ff8d68236a625b575c4d39f4eabf7aeba7da034ae5277338d6a518b4723fecea"
+S23_CODE_HASH = "badb3f7745a21193f199c4224847ccc931e4079e1d545c17825762b651d2404f"
+REVISION_PREDECESSORS = frozenset((S22_CODE_HASH, S23_CODE_HASH))
 
 
 def _target_schema(schema):
@@ -150,8 +152,9 @@ def _validate_predecessor(db, schema, source_path):
     if schema in (3, 4):
         revision = control.read(db)
         bundle = json.loads(revision["versions"])
-        expected = {"schema": schema, "rules": RULE_VERSION, "indexes": {"revision": 1}, "code_sha256": S22_CODE_HASH}
+        expected = {"schema": schema, "rules": RULE_VERSION, "indexes": {"revision": 1}, "code_sha256": bundle.get("code_sha256")}
         if (revision["mode"] != control.ACTIVE or bundle != expected
+                or bundle.get("code_sha256") not in REVISION_PREDECESSORS
                 or revision["target_path"] != str(source_path)):
             raise ValueError("unsupported, relocated or inactive revision predecessor")
         if schema == 4:
@@ -166,7 +169,7 @@ def _validate_predecessor(db, schema, source_path):
         row["mode"] != LEGACY_ACTIVE
         or any(bundle.get(key) != value for key, value in expected.items())
         or set(bundle) != {"schema", "rules", "indexes", "code_sha256"}
-        or bundle["code_sha256"] not in PREDECESSOR_CODE_HASHES | {S22_CODE_HASH, version_bundle()["code_sha256"]}
+        or bundle["code_sha256"] not in PREDECESSOR_CODE_HASHES | REVISION_PREDECESSORS | {version_bundle()["code_sha256"]}
     ):
         raise ValueError("unsupported or inactive controlled predecessor")
 

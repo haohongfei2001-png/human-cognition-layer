@@ -65,6 +65,10 @@ class ContextCompiler:
             from hcl.semantics.revision import revision_context
 
             context = revision_context(empty, question)
+        elif purpose == "mental_compile":
+            from hcl.semantics.model_compiler import model_context
+
+            context = model_context(empty, question)
         elif purpose == "answer":
             context = dict(schema="hcl-bounded-answer-context-1", purpose="OFFLINE_EXPRESSION_ONLY")
         else:

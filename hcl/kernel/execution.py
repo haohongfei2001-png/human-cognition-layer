@@ -11,7 +11,9 @@ from types import MappingProxyType
 from .types import BudgetSlice, Issue, ResultField, freeze
 
 PROTOCOL = "hcl-execution-1"
-DIALECTS = frozenset({"finite-interpretation-1", "semantic-readings-1", "scoped-revision-1"})
+DIALECTS = frozenset(
+    {"finite-interpretation-1", "semantic-readings-1", "scoped-revision-1", "mental-scene-1"}
+)
 
 
 @dataclass(frozen=True)

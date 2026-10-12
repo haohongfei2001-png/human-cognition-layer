@@ -14,6 +14,7 @@ SUPPORTED_GOALS = frozenset(
         "logic.check_interpretation",
         "logic.compare_semantic_readings",
         "revision.evaluate",
+        "mental.simulate",
         "source.report",
         "model.respond",
     }
@@ -40,7 +41,12 @@ class IssuePlanner:
                     "The requested obligation has no installed executable operator.",
                 )
             requirements = []
-            if goal.kind in ("logic.compare_semantic_readings", "revision.evaluate", "model.respond"):
+            if goal.kind in (
+                "logic.compare_semantic_readings",
+                "revision.evaluate",
+                "mental.simulate",
+                "model.respond",
+            ):
                 requirements.append("compile" if goal.kind != "model.respond" else "respond")
             if goal.kind not in ("source.report", "model.respond"):
                 requirements.append("compute")
@@ -96,7 +102,10 @@ class IssuePlanner:
         """Specific data-derived repair obligations, not 'try harder'."""
         if error is not None:
             d = error.diagnostic
-            if d.stage in ("semantic_compile", "revision_compile") and error.status == "INVALID_REQUEST":
+            if (
+                d.stage in ("semantic_compile", "revision_compile", "model_compile")
+                and error.status == "INVALID_REQUEST"
+            ):
                 return dict(kind="REPRESENTATION_REPAIR", code=d.code, field=d.field_path)
             return None
         if result is None:
