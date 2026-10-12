@@ -114,6 +114,24 @@ class AnswerAssembler:
                     + str(tuple(relation["compatible_hypotheses"]))
                     + ". No symmetric or cross-dimension propagation."
                 )
+                for factor in relation["history"]:
+                    proof = factor.get("commitment_qualification")
+                    if proof is not None:
+                        lines.append(
+                            "Commitment-dependent factor "
+                            + factor["update_id"]
+                            + " at "
+                            + str(factor["at"])
+                            + ": "
+                            + factor["qualification"]
+                            + "; bookkeeping prefix="
+                            + str(proof["bookkeeping_prefix_status"])
+                            + "; conservative possible lifecycle states="
+                            + repr(tuple(proof["possible_statuses"]))
+                            + "; completion complete="
+                            + str(proof["state_completion_complete"])
+                            + ". Unproved fulfillment is not proof of nonfulfillment; unresolved factors are not applied as established evidence."
+                        )
             for role in model["roles"]:
                 lines.append(
                     "Role requirements at "

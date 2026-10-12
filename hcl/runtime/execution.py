@@ -5,6 +5,7 @@ are independently bounded projections. All writes remain in this controller.
 """
 
 from dataclasses import asdict, replace
+from collections.abc import Mapping
 from hashlib import sha256
 import asyncio
 import json
@@ -788,11 +789,26 @@ class ExecutionRunner:
                 resource_usage=result.usage,
             )
 
-    def _qualify_replay(self, request, replay):
-        """Reassemble pre-fix M04 delivery from unchanged committed evidence.
+    @staticmethod
+    def _contains_relationship_evidence(value):
+        pending = [value]
+        while pending:
+            item = pending.pop()
+            if isinstance(item, Mapping):
+                if item.get("kind") == "CONDITIONAL_RELATIONSHIP_MODEL":
+                    return True
+                pending.extend(item.values())
+            elif isinstance(item, (tuple, list)):
+                pending.extend(item)
+        return False
 
-        History stays byte-identical. No model/operator is reexecuted and no
-        accepted-operation digest is rewritten. Late ACL and capacity checks
+    def _qualify_replay(self, request, replay):
+        """Apply current certificate eligibility and scoped historical delivery.
+
+        History stays byte-identical. No model send, computational effect or
+        accepted-operation digest is rewritten. Pure bounded certificate checks
+        rederive their verification values without committing them. Pre-fix M04
+        qualification projects unchanged evidence. Late ACL and capacity checks
         happen on the actual newly qualified delivery in the caller.
         """
         old = [
@@ -803,9 +819,41 @@ class ExecutionRunner:
                 field.field == "domain_issues" for field in claim.used_result_fields
             )
         ]
-        if not old:
+        relationship_claims = [
+            claim
+            for claim in replay.claim_records
+            if claim.epistemic_status == "CONDITIONAL_FINITE_LONGITUDINAL_MODEL"
+            or any(
+                self._contains_relationship_evidence(field.value)
+                for field in claim.used_result_fields
+            )
+        ]
+        if not old and not relationship_claims:
             return replay
         try:
+            if relationship_claims:
+                ids = tuple(
+                    sorted(
+                        {
+                            field.result_id
+                            for claim in relationship_claims
+                            for field in claim.used_result_fields
+                        }
+                    )
+                )
+                if not ids or not set(ids) <= set(
+                    replay.execution_receipt.get("result_ids", ())
+                ):
+                    raise stopped("CACHED_RESULT_BINDING_INVALID")
+                results = self.ledger.delivery_inferences(request, ids)
+                # Current proof eligibility applies to historical deliveries too.
+                # Do not rewrite an old accepted effect or relabel a posterior
+                # whose numerical computation must change: fail closed and keep
+                # the historical object intact, allowing a fresh request.
+                for result in results:
+                    self.engine._assembler.compact_claim(result)
+            if not old:
+                return replay
             ids = tuple(
                 sorted(
                     {

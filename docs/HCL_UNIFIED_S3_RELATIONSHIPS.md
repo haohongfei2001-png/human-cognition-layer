@@ -190,3 +190,54 @@ provider calls, provider spend or sealed material are needed by this increment.
 The complete T11/T12/T27 research suite, open semantics, real-model functional
 verification, calibration and LIVE/effect evidence remain unestablished.
 Historical A–H/G-ARCH evidence is not promoted into full new capability proof.
+
+
+## Commitment-dependent evidence qualification
+
+A M07 bookkeeping status alone cannot establish a relationship update. Unknown
+fulfillment or an earlier uncertain latched activation can preserve several
+lifecycle states even when the original prefix label says ACTIVE or
+CONDITION_FALSE. The current producer consumes the actual M03 queries and
+receipts, keeps that original history, and qualifies the entire prefix using
+bounded Boolean marginal completions under the original lifecycle rules. This
+is a conservative Cartesian overapproximation, not joint-trajectory inference.
+Only an exhaustively settled matching condition can permit an otherwise
+established likelihood factor. An unresolved prerequisite is recorded and does
+not change the posterior as if it were evidence; dependent predictions remain
+unresolved. Known independent false prerequisites remain inapplicable.
+
+The existing metered condition unit covers the bounded prefix check; each
+uncertain completion consumes another shared local unit. Unfinished enumeration
+cannot certify its visited subset. Expanded/unresolved factors retain status
+possibilities, completeness/work, assumptions and a reference to their unchanged
+actual M07 original terms, fact queries and history. The final claim displays
+these qualifications. Existing fully definite factor values and accounting are
+retained. As elsewhere, these units are not a complete CPU-instruction count.
+
+The six-case qualification witness exercises false/true/unknown fulfillment,
+uncertain historical activation, budget and revoked replay. Tests also execute
+the exact pre-fix PR436 189-file runtime projection: its known certificates still
+validate, while its wrongly established unknown-fulfillment posterior cannot be
+consumed under current qualification. Historical objects remain byte-identical.
+Cached relationship deliveries, including enclosing claims referencing an actual
+relationship record, pass the current pure certificate gate before the final
+fresh ACL and capacity gate. An old numerical result that needs different
+computation fails closed; it is not relabelled as current or rewritten in place.
+A fresh request can recompute from the authorized source under the current
+mechanism. No provider send or computational effect occurs during certificate
+verification. These are synthetic compatibility fixtures, not a claim that the
+pre-fix unpublished runtime acquired current authority.
+
+The additional qualification has a real delivery cost. The original large
+five-episode unknown-history probe crosses its unchanged 1 MiB final-delivery
+limit and returns DELIVERY_CAPACITY without a claim; the same source with an
+explicit 4 MiB output allowance returns PARTIAL with the full qualified proof.
+No output limit, old runtime pin, evidence factor, or downstream assertion is
+relaxed to force a passing result. Full M09 and all research targets remain open.
+
+The qualification consumer replays only genuine M07 query instants through the
+requested evidence time. The finite timeline includes all declared mental events,
+acts, offers and deadlines. A consumer timestamp between those instants retains
+the preceding prefix; it does not create a new query-less lifecycle row or claim
+that absent query data establish `CONDITION_UNRESOLVED`. Unknown genuine query
+marginals still require the bounded conservative completion described above.

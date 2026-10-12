@@ -6,6 +6,7 @@ from fractions import Fraction
 from hashlib import sha256
 from itertools import product
 from hcl.kernel.types import Delta, HCLFailure, InferenceResult, OpResult, thaw
+from hcl.operators.commitment_qualification import commitment_condition
 from hcl.memory import codec
 from hcl.operators.agency import encoded, rational, solve_action_values
 from hcl.operators.epistemic import query_belief, EpistemicLimits
@@ -180,9 +181,11 @@ class RelationshipModelOperator:
                 for update in relation["updates"]:
                     event = source_events[update["event_id"]]
                     receipt = computed_events.get(event["id"])
+                    before_condition = used
                     check = condition(
                         update["at"], relation["observer"], update["condition"]
                     )
+                    condition_work = used - before_condition
                     event_known = (
                         receipt is not None
                         and receipt["computation"]["status"] == "APPLIED"
@@ -201,6 +204,7 @@ class RelationshipModelOperator:
                         elif tuple(check["possible_values"]) == (False,):
                             qualification = "INAPPLICABLE"
                     dependency = None
+                    qualification_proof = None
                     if update["commitment_id"] is not None:
                         commit = commitments.get(update["commitment_id"])
                         historical = (
@@ -211,13 +215,49 @@ class RelationshipModelOperator:
                             ]
                         )
                         dependency = None if not historical else historical[-1]
-                        if dependency is None or (
-                            commit.get("unresolved_from") is not None
-                            and commit["unresolved_from"] <= update["at"]
+                        # The existing metered condition unit also checks the
+                        # finite lifecycle prefix. Uncertain Boolean completions
+                        # consume additional shared units. No second M03 is run.
+                        proof = commitment_condition(
+                            dict(
+                                commitment_id=update["commitment_id"],
+                                at=update["at"],
+                                status=update["commitment_status"],
+                            ),
+                            record07["values"]["models"][0],
+                            record07["result_id"],
+                            max(0, limit - used) + condition_work,
+                        )
+                        used += max(0, proof["work"] - condition_work)
+                        if proof["possible_values"] == (False,):
+                            qualification = "INAPPLICABLE"
+                        elif (
+                            proof["possible_values"] != (True,)
+                            and qualification != "INAPPLICABLE"
                         ):
                             qualification = "UNRESOLVED"
-                        elif dependency["status"] != update["commitment_status"]:
-                            qualification = "INAPPLICABLE"
+                        # Preserve known legacy factor shapes/usage. The original
+                        # exact interaction history already witnesses definite
+                        # states; newly uncertain/expanded histories additionally
+                        # carry the full current qualification and its limits.
+                        if proof["frontier"] or proof["explored_completions"] > 1:
+                            qualification_proof = {
+                                key: value
+                                for key, value in proof.items()
+                                if key
+                                not in ("history", "original_terms", "evidence_events")
+                            }
+                            qualification_proof["bookkeeping_prefix_status"] = (
+                                None
+                                if proof["history"] is None
+                                else proof["history"]["status"]
+                            )
+                            qualification_proof["history_reference"] = dict(
+                                result_id=record07["result_id"],
+                                commitment_id=update["commitment_id"],
+                                through=update["at"],
+                                source="actual_interaction.values.models[0].commitments",
+                            )
                     # Display aliases cannot manufacture additional independent evidence.
                     fid = factor_identity(
                         mental["source_id"],
@@ -242,6 +282,8 @@ class RelationshipModelOperator:
                             assumption_environments=environments.get(update["at"], ()),
                         )
                     )
+                    if qualification_proof is not None:
+                        factors[-1]["commitment_qualification"] = qualification_proof
                 history = relationship_history(
                     {h["id"]: h for h in relation["hypotheses"]},
                     relation["prior"],
