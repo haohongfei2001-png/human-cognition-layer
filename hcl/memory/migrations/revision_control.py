@@ -99,3 +99,48 @@ def validate(db, expected, *, maintenance=False):
             "This revision namespace is not active.",
             "migration",
         )
+
+
+def continue_governance(
+    db, *, schema, upgrade_id, origin_schema, checkpoint, source_path, target_path
+):
+    """Rebind a verified unpublished successor without regenerating ownership.
+
+    No inventory backfill or table installation: erased history cannot be read
+    again, and every HMAC owner/tombstone/capsule identity uses the original salt.
+    """
+    from hcl.memory.governance import verify_inventory
+
+    old = read(db)
+    if old["mode"] != ACTIVE or schema not in (3, 4):
+        raise ValueError("active governed predecessor required")
+    verify_inventory(db)
+    binding = sha256(
+        codec.canonical(
+            [
+                old["governance_protocol"],
+                old["governance_salt"],
+                upgrade_id,
+                source_path,
+                target_path,
+            ]
+        ).encode()
+    ).hexdigest()
+    db.execute(
+        """UPDATE revision_control SET upgrade_id=?,origin_schema=?,checkpoint=?,source_path=?,target_path=?,
+                  mode=?,versions=?,governance_binding=? WHERE singleton=1""",
+        (
+            upgrade_id,
+            origin_schema,
+            checkpoint,
+            source_path,
+            target_path,
+            ACTIVE,
+            codec.canonical(version_bundle(schema=schema)),
+            binding,
+        ),
+    )
+    current = read(db)
+    if current["governance_salt"] != old["governance_salt"]:
+        raise ValueError("governance ownership changed")
+    verify_inventory(db)

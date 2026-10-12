@@ -114,7 +114,7 @@ class ExecutionRunner:
         return self.store.snapshot(request.session_id, request.principal, handles)
 
     def _initial(self, request):
-        goals, chunks = [], {}
+        goals, chunks, readings = [], {}, {}
         for goal in request.issue.goals:
             snapshot = self._snapshot(request, goal)
             if (
@@ -122,6 +122,14 @@ class ExecutionRunner:
                 > 4 * 1024 * 1024
             ):
                 raise stopped("EXECUTION_SOURCE_CAPACITY", "BUDGET_EXHAUSTED", "context")
+            if goal.kind == "literature.analyze":
+                from .reading_fragments import partition
+                from .reading_coordinator import initial_state
+                plan = partition(self.context, snapshot, request.question, "literature_compile", request.budget, self.gateway.capabilities)
+                goals.append(goal)
+                self.snapshots[goal.issue_id] = snapshot
+                readings[goal.issue_id] = initial_state(plan)
+                continue
             if goal.kind in (
                 "logic.compare_semantic_readings",
                 "revision.evaluate",
@@ -131,6 +139,7 @@ class ExecutionRunner:
                 "interaction.evaluate",
                 "affect.evaluate",
                 "relationship.evaluate",
+                "analogy.compare",
                 "model.respond",
             ):
                 purpose = {
@@ -142,6 +151,7 @@ class ExecutionRunner:
                     "interaction.evaluate": "interaction_compile",
                     "affect.evaluate": "affect_compile",
                     "relationship.evaluate": "relationship_compile",
+                    "analogy.compare": "concept_compile",
                     "model.respond": "answer",
                 }[goal.kind]
                 if type(goal) is RetrievalIssue:
@@ -153,7 +163,7 @@ class ExecutionRunner:
                     parts = self.context.chunks(
                         snapshot, request.question, purpose, request.budget, self.gateway.capabilities
                     )
-                if goal.kind in ("revision.evaluate", "mental.simulate", "argument.evaluate", "hypothesis.discover", "interaction.evaluate", "affect.evaluate", "relationship.evaluate") and len(parts) > 1:
+                if goal.kind in ("revision.evaluate", "mental.simulate", "argument.evaluate", "hypothesis.discover", "interaction.evaluate", "affect.evaluate", "relationship.evaluate", "analogy.compare") and len(parts) > 1:
                     # Cross-packet rule/identity IDs need a future composition
                     # compiler; never publish the final fragment as a full index.
                     raise stopped(
@@ -165,6 +175,7 @@ class ExecutionRunner:
                             "interaction.evaluate": "INTERACTION_COMPOSITION_CAPACITY",
                             "affect.evaluate": "AFFECT_COMPOSITION_CAPACITY",
                             "relationship.evaluate": "RELATIONSHIP_COMPOSITION_CAPACITY",
+                            "analogy.compare": "STRUCTURAL_COMPOSITION_CAPACITY",
                         }[goal.kind],
                         "BUDGET_EXHAUSTED",
                         "context",
@@ -189,6 +200,8 @@ class ExecutionRunner:
                 self.snapshots[goal.issue_id] = snapshot
         self.nodes = self.planner.expand(goals)
         for node in self.nodes.values():
+            if node["operation"] == "compile" and node["goal"].issue_id in readings:
+                node["reading"] = readings[node["goal"].issue_id]
             if node["operation"] in ("compile", "respond") and node["goal"].issue_id in chunks:
                 node["chunk"] = chunks[node["goal"].issue_id]
         self.counters = dict(
@@ -271,6 +284,25 @@ class ExecutionRunner:
         self.trace.append(dict(event="START", node=node["id"], operation=node["operation"]))
         self._save()
 
+    async def _compile_reading(self, request, node):
+        from .reading_coordinator import ReadingCoordinator
+        from hcl.semantics.literature_compiler import LiteratureCompiler
+        compiler = LiteratureCompiler()
+        if not hasattr(self, "_reading_coordinators"):
+            self._reading_coordinators = {}
+        coordinator = self._reading_coordinators.setdefault(node["id"], ReadingCoordinator(self, compiler.compile_fragment))
+        if not await coordinator.advance(request, node):
+            return False
+        candidates = coordinator.candidates(request, node)
+        snapshot = self.snapshots[node["goal"].issue_id]
+        program = compiler.compose(snapshot, candidates, request.budget)
+        ast = dict(question=request.question, plan=thaw(node["reading"]["plan"]), returns=[raw for chunk, raw in candidates])
+        assumptions = tuple(sorted({"fragment:"+str(f["fragment"])+":"+a for f in program["fragments"] for a in f["active_assumptions"]}))
+        unmodeled = tuple(sorted({s for f in program["fragments"] for s in f["unmodeled_segments"]}))
+        node["result"] = LocalModel("literature-proposal:"+sha256(codec.dumps(ast)).hexdigest(), "literature-model-1", ast,
+                                   snapshot.source_versions, assumptions, (), unmodeled)
+        return True
+
     async def _compile(self, request, node):
         goal, chunk = node["goal"], node["chunk"]
         snapshot = self.snapshots[goal.issue_id]
@@ -334,7 +366,7 @@ class ExecutionRunner:
                     residuals,
                 )
                 node["result"] = model
-            elif goal.kind in ("mental.simulate", "argument.evaluate", "hypothesis.discover", "interaction.evaluate", "affect.evaluate", "relationship.evaluate"):
+            elif goal.kind in ("mental.simulate", "argument.evaluate", "hypothesis.discover", "interaction.evaluate", "affect.evaluate", "relationship.evaluate", "analogy.compare"):
                 from hcl.semantics.model_compiler import LocalModelCompiler
 
                 from hcl.semantics.argument_compiler import ArgumentCompiler
@@ -342,12 +374,16 @@ class ExecutionRunner:
                 from hcl.semantics.interaction_compiler import InteractionCompiler
                 from hcl.semantics.affect_compiler import AffectCompiler
                 from hcl.semantics.relationship_compiler import RelationshipCompiler
+                from hcl.semantics.concept_compiler import ConceptCompiler
                 compiler = {"mental.simulate": LocalModelCompiler, "argument.evaluate": ArgumentCompiler,
-                            "hypothesis.discover": DiscoveryCompiler, "interaction.evaluate": InteractionCompiler, "affect.evaluate": AffectCompiler, "relationship.evaluate": RelationshipCompiler}[goal.kind]()
+                            "hypothesis.discover": DiscoveryCompiler, "interaction.evaluate": InteractionCompiler, "affect.evaluate": AffectCompiler, "relationship.evaluate": RelationshipCompiler, "analogy.compare": ConceptCompiler}[goal.kind]()
                 program = compiler.compile(snapshot, segments, raw, request.budget)
                 if goal.kind == "hypothesis.discover":
                     assumptions = tuple(sorted({a for c in (*program["contexts"], *(p["context"] for p in program["probes"])) for m in c["template"]["models"] for a in m["active_assumptions"]}))
                     residuals = tuple(program["unmodeled_segments"])
+                elif goal.kind == "analogy.compare":
+                    assumptions = tuple(sorted({a for model in (*program["models"], *program["inductions"]) for a in model["active_assumptions"]}))
+                    residuals = tuple(sorted({s for model in (*program["models"], *program["inductions"]) for s in model["unmodeled_segments"]}))
                 elif goal.kind in ("interaction.evaluate", "affect.evaluate", "relationship.evaluate"):
                     assumptions = tuple(sorted({a for model in program["models"] for a in model["mental"]["active_assumptions"]}))
                     residuals = tuple(sorted({s for model in program["models"] for s in model["mental"]["unmodeled_segments"]}))
@@ -355,8 +391,8 @@ class ExecutionRunner:
                     assumptions = tuple(sorted({a for model in program["models"] for a in model["active_assumptions"]}))
                     residuals = tuple(sorted({s for model in program["models"] for s in model["unmodeled_segments"]}))
                 node["result"] = LocalModel(
-                    {"mental.simulate":"mental-proposal:", "argument.evaluate":"argument-proposal:", "hypothesis.discover":"discovery-proposal:", "interaction.evaluate":"interaction-proposal:", "affect.evaluate":"affect-proposal:", "relationship.evaluate":"relationship-proposal:"}[goal.kind] + sha256(raw.encode()).hexdigest(),
-                    {"mental.simulate":"mental-scene-1", "argument.evaluate":"argument-model-1", "hypothesis.discover":"discovery-model-1", "interaction.evaluate":"interaction-model-1", "affect.evaluate":"affect-model-1", "relationship.evaluate":"relationship-model-1"}[goal.kind],
+                    {"mental.simulate":"mental-proposal:", "argument.evaluate":"argument-proposal:", "hypothesis.discover":"discovery-proposal:", "interaction.evaluate":"interaction-proposal:", "affect.evaluate":"affect-proposal:", "relationship.evaluate":"relationship-proposal:", "analogy.compare":"structural-proposal:"}[goal.kind] + sha256(raw.encode()).hexdigest(),
+                    {"mental.simulate":"mental-scene-1", "argument.evaluate":"argument-model-1", "hypothesis.discover":"discovery-model-1", "interaction.evaluate":"interaction-model-1", "affect.evaluate":"affect-model-1", "relationship.evaluate":"relationship-model-1", "analogy.compare":"structural-model-1"}[goal.kind],
                     dict(candidate=raw, segments=[asdict(s) for s in segments], question=request.question),
                     snapshot.source_versions,
                     assumptions,
@@ -566,7 +602,7 @@ class ExecutionRunner:
                 request.budget,
             )
             cost = len(forest.readings)
-        elif goal.kind in ("mental.simulate", "argument.evaluate", "hypothesis.discover", "interaction.evaluate", "affect.evaluate", "relationship.evaluate"):
+        elif goal.kind in ("mental.simulate", "argument.evaluate", "hypothesis.discover", "interaction.evaluate", "affect.evaluate", "relationship.evaluate", "literature.analyze", "analogy.compare"):
             compiled = self.nodes[node["requires"][0]]["result"]
             issue = ModelIssue(goal.issue_id, goal.kind, goal.source_id, compiled)
             cost = request.budget.max_local_evaluations - self.counters["local_reserved"]
@@ -575,7 +611,7 @@ class ExecutionRunner:
             snapshot = node["compute_snapshot"]
             cost = request.budget.max_local_evaluations - self.counters["local_reserved"]
         remaining = request.budget.max_local_evaluations - self.counters["local_reserved"]
-        if cost > remaining or (cost == 0 and goal.kind in ("revision.evaluate", "mental.simulate", "argument.evaluate", "hypothesis.discover", "interaction.evaluate", "affect.evaluate", "relationship.evaluate")):
+        if cost > remaining or (cost == 0 and goal.kind in ("revision.evaluate", "mental.simulate", "argument.evaluate", "hypothesis.discover", "interaction.evaluate", "affect.evaluate", "relationship.evaluate", "literature.analyze", "analogy.compare")):
             if any(
                 other is not node
                 and other["operation"] == "compute"
@@ -633,6 +669,8 @@ class ExecutionRunner:
         if obligation is None:
             return False
         target = node if node["operation"] == "compile" else self.nodes[node["requires"][0]]
+        if "reading" in target and target["reading"]["ordinal"] >= len(target["reading"]["records"]):
+            return False  # A cross-fragment composition error is not a packet repair.
         raw = target.get("raw_return", "")
         try:
             value = json.loads(
@@ -658,7 +696,7 @@ class ExecutionRunner:
             self.gateway.capabilities.model_id,
             self.snapshots[target["goal"].issue_id].source_versions,
             target["operation"],
-            [obligation, normalized],
+            ([obligation, normalized, target["reading"]["ordinal"]] if "reading" in target else [obligation, normalized]),
         )
         if key in target["progress"]:
             self.trace.append(dict(event="UNRESOLVED", goal=target["goal"].issue_id, code="NO_PROGRESS"))
@@ -667,6 +705,9 @@ class ExecutionRunner:
         if self.counters["feedback"] >= request.budget.max_feedback:
             return False
         self.counters["feedback"] += 1
+        if "reading" in target:
+            from .reading_coordinator import ReadingCoordinator
+            ReadingCoordinator.repair(target, obligation)
         target["feedback"] = (*target["feedback"], obligation)
         target["attempts"] += 1
         target["state"] = "PENDING"
@@ -717,7 +758,14 @@ class ExecutionRunner:
         try:
             self._tick(request, node)
             if node["operation"] in ("compile", "respond"):
-                await self._compile(request, node)
+                if "reading" in node:
+                    if not await self._compile_reading(request, node):
+                        node["state"] = "PENDING"
+                        self.trace.append(dict(event="READING_PROGRESS", node=node["id"], fragment=node["reading"]["ordinal"]))
+                        self._save()
+                        return
+                else:
+                    await self._compile(request, node)
             elif node["operation"] == "compute":
                 await self._compute(request, node)
                 if self._feedback(request, node):

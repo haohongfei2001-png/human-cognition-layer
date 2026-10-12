@@ -65,6 +65,12 @@ class ContextCompiler:
             from hcl.semantics.revision import revision_context
 
             context = revision_context(empty, question)
+        elif purpose == "concept_compile":
+            from hcl.semantics.concept_compiler import concept_context
+            context = concept_context(empty, question)
+        elif purpose == "literature_compile":
+            from hcl.semantics.literature_compiler import literature_context
+            context = literature_context(empty, question)
         elif purpose == "relationship_compile":
             from hcl.semantics.relationship_compiler import relationship_context
             context = relationship_context(empty, question)

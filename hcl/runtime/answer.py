@@ -14,6 +14,10 @@ class AnswerAssembler:
         return self._retrieval_boundary(self._base_claim(result), result)
 
     def _base_claim(self, result: InferenceResult) -> AnswerClaim:
+        if result.kind == "CONDITIONAL_STRUCTURAL_MAPPINGS":
+            return self._concept_claim(result)
+        if result.kind == "CONDITIONAL_NARRATIVE_MODEL":
+            return self._narrative_claim(result)
         if result.kind == "RECORDED_EVIDENCE_PACKET":
             view = result.values["retrieval"]
             text = "Retrieved original evidence within the recorded search scope:\n" + "\n".join(
@@ -60,6 +64,125 @@ class AnswerAssembler:
         return AnswerClaim(text, f"claim:{result.result_id}", fields,
                                   result.assumption_environments, result.counterevidence_ids,
                                   "EXACT_MODEL")
+
+    def _concept_claim(self, result):
+        from hcl.operators.concepts import verify_concepts
+        try:
+            expected = verify_concepts(result.values)
+            if type(result.premise_ids) is not tuple or tuple(sorted(result.premise_ids)) != tuple(sorted(expected["source_versions"])):
+                raise ValueError("structural inference source identities changed")
+            environments = set(expected["assumption_environments"])
+            local = result.values.get("local_model")
+            if local is not None:
+                if local["dialect"] != "structural-model-1":
+                    raise ValueError("structural dialect mismatch")
+                environments.update("local-model:" + local["model_id"] + ":assumption:" + str(i)
+                                    for i in range(len(local["domain_assumptions"])))
+            if set(result.assumption_environments) != environments or tuple(result.counterevidence_ids) != tuple(expected["counterevidence_ids"]):
+                raise ValueError("structural qualification changed")
+        except (ValueError, TypeError, KeyError, IndexError, RecursionError):
+            raise HCLFailure("FAILED", "answer", "STRUCTURAL_RESULT_MISMATCH", "values",
+                             "The structural delivery differs from its checked mapping and counterexamples.") from None
+        lines = ["Conditional relational analogies under explicit predicate interpretations. Roles and higher-order relations constrain each mapping; resemblance does not establish target truth."]
+        for model in expected["models"]:
+            lines.append("Model " + model["id"] + ": " + str(len(model["actual"]["mappings"])) + " checked mappings.")
+            for mapping in model["actual"]["mappings"]:
+                lines.append("Mapping " + mapping["mapping_id"] + ": " + repr(mapping["entities"]) + "; " + mapping["maximality"]
+                    + "; higher-order links=" + str(mapping["higher_order_links"]) + "; explicit counterexamples=" + str(mapping["explicit_counterexamples"]) + "; attribute mismatches=" + str(mapping["attribute_mismatches"])
+                    + "; ordering assumptions=" + repr(tuple(mapping["ordering_assumption_environments"])) + ".")
+                for prediction in mapping["predictions"]:
+                    lines.append("Hypothetical transfer " + prediction["base_fact"] + ": " + prediction["status"]
+                        + "; counterexample=" + str(prediction["counterexample_target_fact"]) + "; assumptions=" + repr(prediction["assumption_environments"]) + ".")
+        for concept in expected["inductions"]:
+            actual = concept["actual"]
+            lines.append("Proposed concept " + concept["concept_key"] + " version " + concept["version_id"]
+                + "; purpose=" + concept["purpose"] + "; " + ("UNCOMPUTED" if actual is None else actual["status"]) + ".")
+            if actual is not None:
+                lines.append("Actual typed generalization: " + repr(actual["pattern"]) + "; counterexamples=" + repr(tuple(actual["counterexample_ids"])))
+                for case in actual["examples"]:
+                    lines.append("Example " + case["id"] + ": " + case["status"] + "; assumptions=" + repr(tuple(case["assumption_environments"])) + ".")
+        if expected["issues"]:
+            lines.append("Unresolved: " + ", ".join(expected["issues"]) + ".")
+        lines.append("Open semantic alignment, unrestricted concept induction and interpretation completeness remain unverified.")
+        fields = ("models", "inductions", "issues", "source_bindings", "source_versions", "local_evaluations", "semantic_certified", "candidate_completeness", "scope")
+        return AnswerClaim(" ".join(lines), "claim:" + result.result_id,
+            tuple(ResultField(result.result_id,name,result.values[name]) for name in fields),
+            result.assumption_environments,result.counterevidence_ids,"CONDITIONAL_STRUCTURE_NOT_TARGET_TRUTH")
+
+    def _narrative_claim(self, result):
+        from hcl.operators.literature import verify_narrative
+        try:
+            verify_narrative(result.values)
+            if result.rule_version != result.values["rule_version"]:
+                raise ValueError("narrative rule context changed")
+            if type(result.premise_ids) is not tuple or tuple(sorted(result.premise_ids)) != tuple(sorted(result.values["source_versions"])):
+                raise ValueError("narrative inference source identities changed")
+            expected_envs = tuple(sorted(set(result.values["assumption_environments"]) |
+                                        {a for row in (*result.values["comparisons"],*result.values["analogies"],*result.values["characters"]) for a in row["assumption_environments"]}))
+            local = result.values.get("local_model")
+            if local is not None:
+                expected_envs += tuple("local-model:" + local["model_id"] + ":assumption:" + str(i)
+                                       for i in range(len(local["domain_assumptions"])))
+            if (expected_envs != result.assumption_environments or
+                    tuple(sorted({e for row in (*result.values["analogies"],*result.values["characters"]) for e in row["counterevidence_ids"]})) != result.counterevidence_ids):
+                raise ValueError("narrative result conditions changed")
+        except (ValueError, KeyError, TypeError, IndexError, RecursionError):
+            raise HCLFailure("FAILED", "answer", "NARRATIVE_RESULT_MISMATCH", "values",
+                             "The narrative delivery differs from its actual source-bound computation.") from None
+        value = result.values
+        lines = ["Conditional narrative reconstruction over the complete explicitly supplied source scope. "
+                 "Story chronology and source presentation remain separate; narrator and focalizer labels are proposed attributions."]
+        for row in value["story_queries"]:
+            lines.append("Story query " + str(row["fragment"]) + "/" + row["query_id"] + ": " + row["relation"]
+                         + "; assumptions=" + repr(tuple(row["assumptions"])) + ".")
+        for row in value["form"]["passages"]:
+            lines.append("Literal form of " + row["id"] + ": " + str(row["scanned_characters"]) + "/"
+                         + str(row["total_characters"]) + " code points scanned; " + row["status"] + ".")
+            for key,positions in row["motif_positions"].items():
+                lines.append("Literal " + repr(value["form"]["motifs"][key]) + ": " + str(len(positions))
+                             + " occurrences in the checked prefix, allowing overlap.")
+        for row in value["variants"]:
+            lines.append("Hypothetical " + row["kind"] + " " + row["id"] + ": recomputed literal form; "
+                         "semantic/emotional effect remains unestablished and the variant is not original evidence.")
+        for variant in value["variants"]:
+            if variant["kind"] == "REORDER":
+                contrast = variant["discourse_contrast"]
+                lines.append("Reordered declared occurrences: " + contrast["status"] + "; original event chronology is unchanged.")
+                for pair in contrast["changed_pairs"]:
+                    lines.append("Hypothetical presentation " + repr(tuple(pair["left"])) + " vs " + repr(tuple(pair["right"]))
+                        + ": " + pair["original_relation"] + " -> " + pair["hypothetical_relation"] + ".")
+                if contrast["unresolved_mentions"] or contrast["uncomputed_mentions"]:
+                    lines.append("Some declared mentions remain unresolved or uncomputed in the variant; no complete occurrence-order claim is made.")
+        for record in value["comparisons"]:
+            nested = InferenceResult(record["result_id"], record["kind"], record["values"],
+                                     tuple(record["assumption_environments"]), tuple(record["source_versions"]), (),
+                                     result.rule_version, "CONDITIONAL_MECHANISM_DISCOVERY")
+            lines.append("Declared interpretation comparison " + record["id"] + ": " + self._discovery_claim(nested).text)
+        for record in value["analogies"]:
+            nested = InferenceResult(record["result_id"],record["kind"],record["values"],tuple(record["assumption_environments"]),
+                tuple(record["source_versions"]),tuple(record["counterevidence_ids"]),result.rule_version,"CONDITIONAL_STRUCTURAL_MODEL")
+            lines.append("Passage structural reading " + record["local_id"] + ": " + self._concept_claim(nested).text)
+        for record in value["characters"]:
+            frame = record["frame"]
+            label = "Character reading " + record["local_id"] + " in declared frame " + str(frame["fragment"]) + "/" + frame["id"]
+            if record["status"] == "UNCOMPUTED":
+                lines.append(label + ": UNCOMPUTED; " + ", ".join(record["issues"]) + ".")
+                continue
+            nested = InferenceResult(record["result_id"],record["kind"],record["values"],tuple(record["assumption_environments"]),
+                tuple(record["source_versions"]),tuple(record["counterevidence_ids"]),result.rule_version,"CONDITIONAL_FINITE_LONGITUDINAL_MODEL")
+            lines.append(label + ": " + self._relationship_claim(nested).text)
+            lines.append("These source-bound character mechanisms do not establish a private mind, narrator reliability, literary theme or aesthetic merit.")
+        if value["comparison_issues"]:
+            lines.append("Comparison limitations: " + ", ".join(value["comparison_issues"]) + ".")
+        lines.append("Coverage: " + str(value["coverage"]["read_fragments"]) + " source packets; "
+                     + str(len(value["coverage"]["unmodeled_segments"])) + " unmodeled segments. "
+                     "Whole-text semantic completeness remains unverified.")
+        if value["issues"]:lines.append("Unresolved: " + ", ".join(value["issues"]) + ".")
+        names = ("story_queries", "story_constraints", "inactive_events", "unusable_orders", "frames", "mentions", "discourse_edges",
+                 "form", "variants", "coverage", "issues", "comparisons", "analogies", "characters", "rule_version", "comparison_issues", "local_evaluations", "semantic_certified", "candidate_completeness", "scope", "source_versions")
+        return AnswerClaim(" ".join(lines), "claim:" + result.result_id,
+                           tuple(ResultField(result.result_id, name, value[name]) for name in names),
+                           result.assumption_environments, result.counterevidence_ids, "CONDITIONAL_NARRATIVE_NOT_AESTHETIC_OR_AUTHOR_TRUTH")
 
     @staticmethod
     def _retrieval_boundary(claim, result):
@@ -814,7 +937,36 @@ class AnswerAssembler:
         checked = self._claim(result)
         projections = []
         value = result.values
-        if result.kind == "CONDITIONAL_AFFECT_MODEL":
+        if result.kind == "CONDITIONAL_NARRATIVE_MODEL":
+            text = checked.text
+            names = tuple(field.field for field in checked.used_result_fields if field.field not in ("comparisons","analogies","characters"))
+            for i, record in enumerate(value["comparisons"]):
+                keys = ("id", "input_identity", "result_id", "kind", "assumption_environments", "source_versions", "issues", "resource_usage")
+                projections.append(ProjectedResultField(result.result_id, "comparisons", {name:record[name] for name in keys}, (str(i),), keys))
+                nested = InferenceResult(record["result_id"],record["kind"],record["values"],tuple(record["assumption_environments"]),
+                                         tuple(record["source_versions"]),(),result.rule_version,"CONDITIONAL_MECHANISM_DISCOVERY")
+                for field in self.compact_claim(nested).used_result_fields:
+                    projections.append(ProjectedResultField(result.result_id,"comparisons",field.value,
+                        (str(i),"values",field.field,*getattr(field,"path",())),getattr(field,"selection",())))
+            for i, record in enumerate(value["analogies"]):
+                keys = ("id", "fragment", "local_id", "input_identity", "result_id", "kind", "assumption_environments", "counterevidence_ids", "source_versions", "issues", "resource_usage")
+                projections.append(ProjectedResultField(result.result_id,"analogies",{name:record[name] for name in keys},(str(i),),keys))
+                nested = InferenceResult(record["result_id"],record["kind"],record["values"],tuple(record["assumption_environments"]),
+                    tuple(record["source_versions"]),tuple(record["counterevidence_ids"]),result.rule_version,"CONDITIONAL_STRUCTURAL_MODEL")
+                for field in self.compact_claim(nested).used_result_fields:
+                    projections.append(ProjectedResultField(result.result_id,"analogies",field.value,
+                        (str(i),"values",field.field,*getattr(field,"path",())),getattr(field,"selection",())))
+            for i, record in enumerate(value["characters"]):
+                keys = ("id", "fragment", "local_id", "frame", "scope", "status", "input_identity", "result_id", "kind", "assumption_environments", "counterevidence_ids", "source_versions", "issues", "resource_usage")
+                projections.append(ProjectedResultField(result.result_id,"characters",{name:record[name] for name in keys},(str(i),),keys))
+                if record["status"] == "UNCOMPUTED":
+                    continue
+                nested = InferenceResult(record["result_id"],record["kind"],record["values"],tuple(record["assumption_environments"]),
+                    tuple(record["source_versions"]),tuple(record["counterevidence_ids"]),result.rule_version,"CONDITIONAL_FINITE_LONGITUDINAL_MODEL")
+                for field in self.compact_claim(nested).used_result_fields:
+                    projections.append(ProjectedResultField(result.result_id,"characters",field.value,
+                        (str(i),"values",field.field,*getattr(field,"path",())),getattr(field,"selection",())))
+        elif result.kind == "CONDITIONAL_AFFECT_MODEL":
             text = checked.text
             names = ("semantic_certified", "candidate_completeness", "scope", "source_versions")
             for i, model in enumerate(value["models"]):

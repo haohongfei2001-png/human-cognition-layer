@@ -63,9 +63,9 @@ class DiscoveryCompiler(SemanticCompiler):
             "The proposed explanation task exceeds its bounded compilation allowance.",
         )
 
-    def compile(self, snapshot, segments, raw_candidate, allowance):
+    def compile(self, snapshot, segments, raw_candidate, allowance, *, context_scopes=None):
         try:
-            return self._compile_discovery(snapshot, segments, raw_candidate, allowance)
+            return self._compile_discovery(snapshot, segments, raw_candidate, allowance, context_scopes)
         except (
             ValueError,
             TypeError,
@@ -78,7 +78,7 @@ class DiscoveryCompiler(SemanticCompiler):
         ):
             raise self._invalid() from None
 
-    def _compile_discovery(self, snapshot, segments, raw, allowance):
+    def _compile_discovery(self, snapshot, segments, raw, allowance, context_scopes=None):
         if type(raw) is not str or len(raw.encode()) > min(
             allowance.max_output_bytes, 1048576
         ):
@@ -154,9 +154,14 @@ class DiscoveryCompiler(SemanticCompiler):
                 if row["adapter"] == "mental-scene-1"
                 else ArgumentCompiler()
             )
+            selected = segments
+            if context_scopes is not None:
+                selected = context_scopes.get(row["id"], ())
+                if not selected or any(by_id.get(s.segment_id) != s for s in selected):
+                    raise self._invalid("context_source_scope")
             compiler.compile(
                 snapshot,
-                segments,
+                selected,
                 json.dumps(row["template"], ensure_ascii=False),
                 allowance,
             )
