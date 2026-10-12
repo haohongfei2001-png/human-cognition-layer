@@ -309,7 +309,7 @@ class AffectModelOperator:
                 "The conditional appraisal is outside its finite executable model.",
             ) from None
 
-    def _run(self, snapshot, issue, allowance, program):
+    def _run(self, snapshot, issue, allowance, program, *, shared_cognition=None):
         used = 0
         limit = allowance.max_local_evaluations
         outputs = []
@@ -337,17 +337,22 @@ class AffectModelOperator:
 
         for model in program["models"]:
             original = model["mental"]
-            trace = {}
-            times = {t for e in model["episodes"] for t in (e["before"], e["at"])}
-            operation = MentalSceneOperator()._run(
-                snapshot,
-                issue,
-                replace(allowance, max_local_evaluations=max(0, limit - used)),
-                dict(models=[original]),
-                trace=trace,
-                trace_times={original["id"]: tuple(sorted(times))},
-            )
-            used += operation.resource_usage["local_evaluations"]
+            if shared_cognition is None:
+                trace = {}
+                times = {t for e in model["episodes"] for t in (e["before"], e["at"])}
+                operation = MentalSceneOperator()._run(
+                    snapshot,
+                    issue,
+                    replace(allowance, max_local_evaluations=max(0, limit - used)),
+                    dict(models=[original]),
+                    trace=trace,
+                    trace_times={original["id"]: tuple(sorted(times))},
+                )
+                used += operation.resource_usage["local_evaluations"]
+            else:
+                operation, trace = shared_cognition[
+                    (original["source_id"], original["id"])
+                ].bind(snapshot, original)
             issues.extend(operation.issues)
             actual = operation.candidate_delta.new_inferences[0]
             mental = thaw(actual.values)["models"][0]
@@ -521,7 +526,7 @@ class AffectModelOperator:
         )
 
 
-def verify_affect(values):
+def verify_affect(values, *, shared_cognition=None):
     """Recompute finite dependencies before consuming any composed appraisal."""
     from hcl.operators.mental_scene import initial_model, event_model
     from hcl.operators.epistemic import update_perspectives
@@ -566,31 +571,46 @@ def verify_affect(values):
         ):
             raise ValueError("affect domain binding changed")
         limits = EpistemicLimits(max_depth=16)
-        cognitive, frontier = initial_model(original, limits)
-        effective = set(original["assumptions"])
-        if not effective <= set(original["active_assumptions"]):
-            cognitive = None
-        events = iter(sorted(original["events"], key=lambda e: e["at"]))
-        pending = next(events, None)
-        times = sorted(
-            {v["at"] for row in output["episodes"] for v in row["views"].values()}
-        )
-        states = {}
-        environments = {}
-        for at in times:
-            while pending is not None and pending["at"] <= at and cognitive is not None:
-                if not set(pending["assumptions"]) <= set(
-                    original["active_assumptions"]
+        if shared_cognition is not None:
+            bundle = shared_cognition[(original["source_id"], original["id"])]
+            if codec.canonical(thaw(bundle.original)) != canonical(original):
+                raise ValueError("shared affect cognition input mismatch")
+            nested = bundle.operation.candidate_delta.new_inferences[0]
+            if actual["result_id"] != nested.result_id or canonical(
+                actual["values"]
+            ) != canonical(nested.values):
+                raise ValueError("affect is not consuming the shared cognitive result")
+            states, environments = bundle.trace.get(original["id"], ({}, {}))
+        else:
+            cognitive, frontier = initial_model(original, limits)
+            effective = set(original["assumptions"])
+            if not effective <= set(original["active_assumptions"]):
+                cognitive = None
+            events = iter(sorted(original["events"], key=lambda e: e["at"]))
+            pending = next(events, None)
+            times = sorted(
+                {v["at"] for row in output["episodes"] for v in row["views"].values()}
+            )
+            states = {}
+            environments = {}
+            for at in times:
+                while (
+                    pending is not None
+                    and pending["at"] <= at
+                    and cognitive is not None
                 ):
-                    cognitive = None
-                    break
-                effective.update(pending["assumptions"])
-                cognitive, _ = update_perspectives(
-                    cognitive, event_model(pending, cognitive.agents), limits
-                )
-                pending = next(events, None)
-            states[at] = cognitive
-            environments[at] = tuple(sorted(effective))
+                    if not set(pending["assumptions"]) <= set(
+                        original["active_assumptions"]
+                    ):
+                        cognitive = None
+                        break
+                    effective.update(pending["assumptions"])
+                    cognitive, _ = update_perspectives(
+                        cognitive, event_model(pending, cognitive.agents), limits
+                    )
+                    pending = next(events, None)
+                states[at] = cognitive
+                environments[at] = tuple(sorted(effective))
         completed = {}
         for row in output["episodes"]:
             episode = next(e for e in model["episodes"] if e["id"] == row["episode_id"])

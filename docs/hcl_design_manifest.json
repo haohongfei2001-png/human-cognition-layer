@@ -1055,7 +1055,13 @@
       "stage": "S3",
       "evidence_status": "DESIGNED_NOT_HCL_VALIDATED",
       "start_stage": "S3",
-      "stage_semantics": "stage表示该机制主要完整交付阶段；start_stage表示公共基础首次接入；真实effect需S7另证"
+      "stage_semantics": "stage表示该机制主要完整交付阶段；start_stage表示公共基础首次接入；真实effect需S7另证",
+      "partial_implementation_evidence": {
+        "document": "docs/HCL_UNIFIED_S3_RELATIONSHIPS.md",
+        "witness": "scripts/witness_unified_relationship.py",
+        "complete": false,
+        "scope": "Bounded source-declared longitudinal mechanisms with actual shared cognition and downstream computations; complete M09/T11/T12/T27 obligations remain."
+      }
     },
     {
       "id": "M10",
@@ -3441,7 +3447,7 @@
   "current_execution": {
     "started_at_utc": "2026-10-11T20:31:00Z",
     "authority": "Owner explicitly authorized continued implementation, tests, PRs and verified merges under the approved S1–S7 plan.",
-    "base_main": "20f95f7110ddc5d24b597123e7892d7bbad35d7b",
+    "base_main": "0c7e9b866bc2aa82cc98420af82458059ec47f70",
     "current_stage": "S3 ∥ S4",
     "delivered_slice": "S2.3",
     "readiness": "INTEGRATED_OFFLINE",
@@ -3454,7 +3460,7 @@
     "remaining": "继续完整S3/M03–M09与并行S4/M10–M14；当前有限三机制是增量证据，不关闭阶段。完整S1/S2实模功能、S5–S7及T01–T32研究目标全部保留。",
     "historical_boundary": "旧A–H/G-HC/G-ARCH、实验和closed grants保持原证据等级，不自动继承。",
     "validation": "本切片证明注入候选下的真实离线预算执行、结果消费、修订和恢复；不证明开放语义/任务分解、跨块语义组合、完整性或S1/S2阶段完成。",
-    "active_work": "S3有限心智/行动/因果、M04共享发现、M07有限互动与S4有限论证已接通；M08有限条件评价在建：实际人物视角、逐目标后果/预期差/控制、应对优先级反馈、实际M05与假设后果、版本化再评价。归因/规范/身份及完整领域与研究退出仍开放。",
+    "active_work": "S3有限心智/行动/因果、M04共享发现、M07互动、M08评价与S4有限论证已接通；M09有界关系/角色/跨事件竞争模型在建：一次实际共享M03、真实M07履约与M08应对、M05预测、有向分维关系更新、角色调和和分段模型/Pareto比较。参数区间、开放候选、领域完整性及研究退出仍开放。",
     "domain_evidence": [
       {
         "stage": "S3",
@@ -3517,6 +3523,18 @@
         "checks": "tests/test_unified_s3_affect*.py",
         "witness": "scripts/witness_unified_affect.py",
         "scope": "Source-bound injected interpretations; actual M03 perspectives, goal consequence/expectation/control calculations, conditional priority feedback into M05 and hypothetical successor appraisal. No private emotion, calibrated human dynamics, attribution/norm/identity appraisal or full M08 proof."
+      },
+      {
+        "stage": "S3",
+        "mechanisms": [
+          "M09"
+        ],
+        "readiness": "INTEGRATED_OFFLINE_PARTIAL",
+        "stage_complete": false,
+        "document": "docs/HCL_UNIFIED_S3_RELATIONSHIPS.md",
+        "checks": "tests/test_unified_s3_relationship*.py",
+        "witness": "scripts/witness_unified_relationship.py",
+        "scope": "Source-bound injected finite longitudinal hypotheses; one actual shared M03 operation, M07 commitment and M08 coping dependencies, real M05 predictions, directed conditional relationship updates, role reconciliation and bounded segmented/Pareto comparison. No calibrated private trust or stable identity/value verdict, general interval parameters, open candidate discovery or full M09 proof."
       }
     ]
   }

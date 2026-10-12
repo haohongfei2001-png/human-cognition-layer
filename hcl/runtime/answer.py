@@ -11,6 +11,8 @@ from hcl.kernel.types import (
 
 class AnswerAssembler:
     def _claim(self, result: InferenceResult) -> AnswerClaim:
+        if result.kind == "CONDITIONAL_RELATIONSHIP_MODEL":
+            return self._relationship_claim(result)
         if result.kind == "CONDITIONAL_AFFECT_MODEL":
             return self._affect_claim(result)
         if result.kind == "CONDITIONAL_INTERACTION_MODEL":
@@ -48,6 +50,162 @@ class AnswerAssembler:
         return AnswerClaim(text, f"claim:{result.result_id}", fields,
                                   result.assumption_environments, result.counterevidence_ids,
                                   "EXACT_MODEL")
+
+    def _relationship_claim(self, result):
+        from hcl.operators.relationship_model import verify_relationships
+
+        try:
+            expected = verify_relationships(result.values)
+            assumptions = set(
+                expected.candidate_delta.new_inferences[0].assumption_environments
+            )
+            qualification = result.values.get("local_model")
+            if qualification is not None:
+                if qualification["dialect"] != "relationship-model-1":
+                    raise ValueError("wrong longitudinal dialect")
+                assumptions.update(
+                    "local-model:" + qualification["model_id"] + ":assumption:" + str(i)
+                    for i in range(len(qualification["domain_assumptions"]))
+                )
+            if set(result.assumption_environments) != assumptions:
+                raise ValueError("longitudinal assumptions changed")
+        except (
+            ValueError,
+            TypeError,
+            KeyError,
+            IndexError,
+            StopIteration,
+            ZeroDivisionError,
+            OverflowError,
+        ):
+            raise HCLFailure(
+                "FAILED",
+                "answer",
+                "RELATIONSHIP_RESULT_MISMATCH",
+                "models",
+                "Longitudinal claims differ from their actual cognitive and predictive dependencies.",
+            ) from None
+        lines = [
+            "Conditional directed relationship, role and longitudinal models. Hypothesis weights are source-model conditions, not calibrated private trust or a stable-character verdict."
+        ]
+        for model in result.values["models"]:
+            lines.append(
+                "Shared actual M03="
+                + model["cognition"]["actual"]["result_id"]
+                + "; M07="
+                + model["actual_interaction"]["result_id"]
+                + "; M08="
+                + model["actual_affect"]["result_id"]
+                + "."
+            )
+            for relation in model["relationships"]:
+                lines.append(
+                    "Relationship "
+                    + relation["observer"]
+                    + " to "
+                    + relation["target"]
+                    + " in "
+                    + relation["domain"]
+                    + "/"
+                    + relation["dimension"]
+                    + ": "
+                    + json.dumps(thaw(relation["weights"]), sort_keys=True)
+                    + "; compatible hypotheses="
+                    + str(tuple(relation["compatible_hypotheses"]))
+                    + ". No symmetric or cross-dimension propagation."
+                )
+                for factor in relation["history"]:
+                    proof = factor.get("commitment_qualification")
+                    if proof is not None:
+                        lines.append(
+                            "Commitment-dependent factor "
+                            + factor["update_id"]
+                            + " at "
+                            + str(factor["at"])
+                            + ": "
+                            + factor["qualification"]
+                            + "; bookkeeping prefix="
+                            + str(proof["bookkeeping_prefix_status"])
+                            + "; conservative possible lifecycle states="
+                            + repr(tuple(proof["possible_statuses"]))
+                            + "; completion complete="
+                            + str(proof["state_completion_complete"])
+                            + ". Unproved fulfillment is not proof of nonfulfillment; unresolved factors are not applied as established evidence."
+                        )
+            for role in model["roles"]:
+                lines.append(
+                    "Role requirements at "
+                    + str(role["at"])
+                    + ": "
+                    + json.dumps(thaw(role["branches"]), sort_keys=True)
+                    + "."
+                )
+            for narrative in model["identity_narratives"]:
+                lines.append(
+                    "Source "
+                    + narrative["kind"]
+                    + " by "
+                    + narrative["speaker"]
+                    + " about "
+                    + narrative["actor"]
+                    + ": "
+                    + narrative["content"]
+                    + ". This is not inferred identity truth."
+                )
+            search = model["longitudinal"]
+            lines.append(
+                "Actually recomputed longitudinal comparison: "
+                + search["status"]
+                + "; "
+                + search["global_comparison"]
+                + "; Pareto candidates="
+                + str(tuple(search["pareto_explored"]))
+                + "."
+            )
+            for trajectory in search["trajectories"]:
+                if trajectory["trajectory_id"] in search["pareto_explored"]:
+                    lines.append(
+                        "Candidate turns="
+                        + str(tuple(trajectory["change_points"]))
+                        + "; fit="
+                        + json.dumps(thaw(trajectory["profile"]), sort_keys=True)
+                        + "; structural complexity="
+                        + str(trajectory["complexity"])
+                        + "."
+                    )
+            lines.append(
+                "Hypothetical future predictions="
+                + json.dumps(thaw(model["preferred_forecasts"]), sort_keys=True)
+                + ". No observed action was replaced by a prediction."
+            )
+            if model["frontier"]:
+                lines.append("Unresolved: " + ", ".join(model["frontier"]) + ".")
+            for domain in ("actual_interaction", "actual_affect"):
+                if model[domain]["issues"]:
+                    lines.append(
+                        "Nested domain limitations: "
+                        + str(tuple(model[domain]["issues"]))
+                        + "."
+                    )
+        lines.append(
+            "Zero-change alternatives, counterevidence and correlated-report factors remain explicit. Candidate coverage, source interpretation, context independence and psychological calibration are not established."
+        )
+        return AnswerClaim(
+            " ".join(lines),
+            "claim:" + result.result_id,
+            tuple(
+                ResultField(result.result_id, name, result.values[name])
+                for name in (
+                    "models",
+                    "scope",
+                    "semantic_certified",
+                    "candidate_completeness",
+                )
+            ),
+            result.assumption_environments,
+            result.counterevidence_ids,
+            "CONDITIONAL_FINITE_LONGITUDINAL_MODEL",
+        )
 
     def _affect_claim(self, result):
         from hcl.operators.affect_model import verify_affect

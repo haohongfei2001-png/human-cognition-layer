@@ -3,7 +3,7 @@
 
 完整规格：[HCL_SYSTEM_REDESIGN_SPEC.md](docs/HCL_SYSTEM_REDESIGN_SPEC.md)；唯一结构化计划：[hcl_design_manifest.json](docs/hcl_design_manifest.json)；执行交接：[HCL_CODEX_HANDOFF.md](docs/HCL_CODEX_HANDOFF.md)。
 
-实施基线main：`20f95f7110ddc5d24b597123e7892d7bbad35d7b`。
+实施基线main：`0c7e9b866bc2aa82cc98420af82458059ec47f70`。
 
 当前切片：**S2.3 / INTEGRATED_OFFLINE**。预算化Issue图、实际并行算子、字段/来源反馈修复、完整外存与有界上下文、受控恢复和共同LocalModel协议接入同一engine。
 
@@ -11,7 +11,7 @@
 
 **NEXT_READY：S3 ∥ S4**。继续完整S3/M03–M09与并行S4/M10–M14；当前有限三机制是增量证据，不关闭阶段。完整S1/S2实模功能、S5–S7及T01–T32研究目标全部保留。
 
-**在建领域：**S3有限心智/行动/因果、M04共享发现、M07有限互动与S4有限论证已接通；M08有限条件评价在建：实际人物视角、逐目标后果/预期差/控制、应对优先级反馈、实际M05与假设后果、版本化再评价。归因/规范/身份及完整领域与研究退出仍开放。
+**在建领域：**S3有限心智/行动/因果、M04共享发现、M07互动、M08评价与S4有限论证已接通；M09有界关系/角色/跨事件竞争模型在建：一次实际共享M03、真实M07履约与M08应对、M05预测、有向分维关系更新、角色调和和分段模型/Pareto比较。参数区间、开放候选、领域完整性及研究退出仍开放。
 
 S1尚未完整完成。真实本地算子与模拟端口的离线接通不能证明真实模型语义能力。每次运行的精确commit和代码文件hash由对应scripts/witness_unified_s*.py生成；CI在准确PR head上执行，不将旧回归数量作为新能力完成率。
 
