@@ -44,3 +44,13 @@ class UnifiedPlanTests(unittest.TestCase):
         self.assertFalse(self.manifest['adoption']['runtime_code_change_authorized_this_run'])
         self.assertFalse(self.manifest['adoption']['paid_calls_authorized_this_run'])
         self.assertEqual(self.manifest['baseline'], '58bfa17aed8da5773714309173438796b33491ec')
+
+    def test_partial_domain_evidence_cannot_close_the_approved_stages(self):
+        current = self.manifest['current_execution']
+        self.assertEqual(current['current_stage'], 'S3 ∥ S4')
+        self.assertEqual(current['domain_evidence'][0]['mechanisms'], ['M03','M05','M06'])
+        self.assertFalse(current['domain_evidence'][0]['stage_complete'])
+        for row in self.manifest['mechanisms']:
+            if row['id'] in ('M03','M05','M06'):
+                self.assertFalse(row['partial_implementation_evidence']['complete'])
+                self.assertEqual(row['evidence_status'],'DESIGNED_NOT_HCL_VALIDATED')

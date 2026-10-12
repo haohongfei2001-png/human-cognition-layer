@@ -11,6 +11,8 @@ from hcl.kernel.types import (
 
 class AnswerAssembler:
     def _claim(self, result: InferenceResult) -> AnswerClaim:
+        if result.kind == "CONDITIONAL_COGNITIVE_MODEL":
+            return self._mental_claim(result)
         if result.kind == "CONDITIONAL_REVISION":
             return self._revision_claim(result)
         if result.kind == "CONDITIONAL_FOL":
@@ -38,6 +40,47 @@ class AnswerAssembler:
         return AnswerClaim(text, f"claim:{result.result_id}", fields,
                                   result.assumption_environments, result.counterevidence_ids,
                                   "EXACT_MODEL")
+
+    def _mental_claim(self, result):
+        values = result.values
+        if (values.get("semantic_certified") is not False
+                or values.get("candidate_completeness") != "NOT_ESTABLISHED"
+                or not isinstance(values.get("models"), tuple) or not values["models"]):
+            raise HCLFailure("FAILED", "answer", "COGNITIVE_RESULT_CONTRACT", "models",
+                             "The cognitive result does not satisfy the conditional model contract.")
+        lines = ["Conditional computations for source-bound proposed cognitive models."]
+        for model in values["models"]:
+            lines.append("Model " + model["model_id"] + " [" + model["frame_kind"] + "]:")
+            variables = {row["variable_id"]: row for row in model["shared_variables"]}
+            if model["inactive_assumptions"]:
+                lines.append("Withdrawn model assumptions: " + ", ".join(model["inactive_assumptions"]) + ".")
+            for query in model["beliefs"]:
+                lines.append("At " + str(query["at"]) + ", query " + query["query_id"] + " "
+                             + json.dumps(thaw(query["formula"]), ensure_ascii=False, sort_keys=True)
+                             + ": " + query["status"] + ", possible=" + str(tuple(query["possible_values"])) + ".")
+            for plan in model["plans"]:
+                from hcl.operators.agency import verify_plan_belief
+                if plan["status"] == "SOLVED" and not verify_plan_belief(
+                        variables.get(plan["belief_variable_id"]), plan):
+                    raise HCLFailure("FAILED", "answer", "COGNITIVE_DEPENDENCY_MISSING", "belief_variable_id",
+                                     "The action result lacks its actual computed belief dependency.")
+                lines.append("Plan " + plan["plan_id"] + ": " + plan["status"] + "; Q="
+                             + json.dumps(thaw(plan["q"]), ensure_ascii=False, sort_keys=True)
+                             + "; best=" + ", ".join(plan["best_actions"]) + ".")
+                if "policy" in plan:
+                    lines.append("Declared mixture predicts " + json.dumps(thaw(plan["policy"]["probabilities"]), sort_keys=True) + ".")
+            for causal in model["causal"]:
+                lines.append("Causal query " + causal["query_id"] + ": " + causal["status"]
+                             + "; possible=" + str(tuple(causal["possible_values"])) + ".")
+            if model["frontier"]:
+                lines.append("Unexplored: " + ", ".join(model["frontier"]) + ".")
+        lines.append("Results depend on proposed observation, persistence, goal and causal mechanisms; "
+                     "they are not private mental truth, semantic certification or calibrated human probabilities.")
+        fields = tuple(ResultField(result.result_id, key, values[key])
+                       for key in ("models", "semantic_certified", "candidate_completeness"))
+        return AnswerClaim(" ".join(lines), "claim:" + result.result_id, fields,
+                           result.assumption_environments, result.counterevidence_ids,
+                           "CONDITIONAL_COGNITIVE_MODEL_NOT_PRIVATE_TRUTH")
 
     def _semantic_claim(self, result):
         values = result.values
@@ -194,7 +237,7 @@ class AnswerAssembler:
             (
                 "MODEL_INTERPRETATIONS_UNVERIFIED"
                 if any(
-                    result.kind in ("CONDITIONAL_FOL", "CONDITIONAL_REVISION") for result in accepted_results
+                    result.kind in ("CONDITIONAL_FOL", "CONDITIONAL_REVISION", "CONDITIONAL_COGNITIVE_MODEL") for result in accepted_results
                 )
                 else "EXPLICIT_FORMAL_INPUT_ONLY"
             ),
@@ -242,7 +285,23 @@ class AnswerAssembler:
         checked = self._claim(result)
         projections = []
         value = result.values
-        if result.kind == "CONDITIONAL_FOL":
+        if result.kind == "CONDITIONAL_COGNITIVE_MODEL":
+            text = checked.text
+            names = ("semantic_certified", "candidate_completeness", "scope")
+            for i, model in enumerate(value["models"]):
+                keys = ("model_id", "source_id", "frame_kind", "assumptions", "inactive_assumptions", "unmodeled_segments", "frontier")
+                projections.append(ProjectedResultField(result.result_id, "models", {key:model[key] for key in keys}, (str(i),), keys))
+                selections = {
+                    "beliefs": ("query_id", "at", "formula", "status", "possible_values", "assumptions"),
+                    "shared_variables": ("variable_id", "actor", "at", "remaining_states", "remaining_world_ids", "status", "assumptions"),
+                    "plans": ("plan_id", "actor", "at", "belief_variable_id", "status", "q", "best_actions", "belief", "subjective_feasibility", "world_feasibility", "actual_possible_states", "planning_states", "state_bindings", "belief_world_bindings", "actual_world_bindings", "policy"),
+                    "causal": ("query_id", "status", "possible_values", "observations", "interventions", "scope", "identification"),
+                }
+                for field, selected in selections.items():
+                    for j, row in enumerate(model[field]):
+                        keys = tuple(key for key in selected if key in row)
+                        projections.append(ProjectedResultField(result.result_id, "models", {key:row[key] for key in keys}, (str(i), field, str(j)), keys))
+        elif result.kind == "CONDITIONAL_FOL":
             descriptions = []
             for i, row in enumerate(value["readings"]):
                 descriptions.append(row["id"] + " [" + row["frame_kind"] + "]: " + row["query_reading"]
