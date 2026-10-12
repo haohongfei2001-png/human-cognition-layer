@@ -11,6 +11,16 @@ from hcl.kernel.types import (
 
 class AnswerAssembler:
     def _claim(self, result: InferenceResult) -> AnswerClaim:
+        return self._retrieval_boundary(self._base_claim(result), result)
+
+    def _base_claim(self, result: InferenceResult) -> AnswerClaim:
+        if result.kind == "RECORDED_EVIDENCE_PACKET":
+            view = result.values["retrieval"]
+            text = "Retrieved original evidence within the recorded search scope:\n" + "\n".join(
+                row["source_id"] + "@" + str(row["version"]) + "[" + str(row["start"]) + ":" + str(row["end"]) + "]: " + row["text"]
+                for row in view["packet"]["segments"])
+            return AnswerClaim(text, "claim:" + result.result_id, (), result.assumption_environments,
+                               result.counterevidence_ids, "RECORDED_RETRIEVAL_NOT_TRUTH")
         if result.kind == "CONDITIONAL_RELATIONSHIP_MODEL":
             return self._relationship_claim(result)
         if result.kind == "CONDITIONAL_AFFECT_MODEL":
@@ -50,6 +60,38 @@ class AnswerAssembler:
         return AnswerClaim(text, f"claim:{result.result_id}", fields,
                                   result.assumption_environments, result.counterevidence_ids,
                                   "EXACT_MODEL")
+
+    @staticmethod
+    def _retrieval_boundary(claim, result):
+        if "retrieval" not in result.values or any(f.field == "retrieval" for f in claim.used_result_fields):
+            return claim
+        from dataclasses import replace
+        from hcl.kernel.retrieval import RETRIEVAL_VERSION
+        from hcl.operators.retrieval import retrieval_issues
+        view = result.values["retrieval"]
+        if view.get("schema") != RETRIEVAL_VERSION or view["coverage"]["semantic_completeness"] != "NOT_ESTABLISHED":
+            raise HCLFailure("FAILED", "answer", "RETRIEVAL_QUALIFICATION_INVALID", "retrieval",
+                             "Retrieval cannot establish semantic or world completeness.")
+        coverage = view["coverage"]
+        packet = view["packet"]["segments"]
+        expected_regions = tuple({name: row[name] for name in ("segment_id", "source_id", "version", "start", "end", "byte_start", "byte_end")}
+                                 for row in sorted(packet, key=lambda row: (row["source_id"], row["start"])))
+        if (tuple(coverage["read_regions"]) != expected_regions
+                or coverage["selected_characters"] != sum(len(row["text"]) for row in packet)
+                or coverage["whole_source_read"] != (not coverage["unread_regions"] and not coverage["unknown_regions"])
+                or coverage["recorded_closure_complete"] != (not coverage["missing_recorded_dependencies"] and not coverage["frontier"])):
+            raise HCLFailure("FAILED", "answer", "RETRIEVAL_COVERAGE_MISMATCH", "retrieval",
+                             "The retrieval coverage differs from its actual selected material and frontier.")
+        boundary = (" Retrieved " + str(len(coverage["read_regions"])) + " original regions; "
+                    + str(len(coverage["unread_regions"])) + " indexed unread ranges and "
+                    + str(len(coverage["unknown_regions"])) + " unindexed ranges remain. "
+                    + "Recorded graph closure complete=" + str(coverage["recorded_closure_complete"])
+                    + "; whole selected source scope read=" + str(coverage["whole_source_read"])
+                    + ". Retrieval routes are search intents; semantic completeness remains unverified.")
+        if retrieval_issues(view):
+            boundary += " Unresolved: " + ", ".join(retrieval_issues(view)) + "."
+        return replace(claim, text=claim.text+boundary,
+                       used_result_fields=(*claim.used_result_fields, ResultField(result.result_id, "retrieval", view)))
 
     def _relationship_claim(self, result):
         from hcl.operators.relationship_model import verify_relationships
@@ -915,9 +957,9 @@ class AnswerAssembler:
             if qualifications["fit_residuals"] or qualifications["unmodeled_observations"]:
                 text += (" Model fit residuals and unmodeled observations remain unresolved: "
                          + str(len(qualifications["fit_residuals"])) + "/" + str(len(qualifications["unmodeled_observations"])) + ".")
-        return AnswerClaim(text, checked.claim_id,
+        return self._retrieval_boundary(AnswerClaim(text, checked.claim_id,
                            tuple(ResultField(result.result_id, name, value[name]) for name in names) + tuple(projections),
-                           checked.support_envs, checked.counterevidence, checked.epistemic_status)
+                           checked.support_envs, checked.counterevidence, checked.epistemic_status), result)
 
     def validate_compact(self, contract, results):
         from hcl.kernel.execution import ProjectedResultField

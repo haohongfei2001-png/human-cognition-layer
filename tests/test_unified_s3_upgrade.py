@@ -176,13 +176,18 @@ class S23RuntimeUpgradeTests(previous.RuntimeUpgradeTests):
         for schema in (3, 4):
             with self.subTest(schema=schema):
                 source, old, process = self.old(schema, str(schema))
-                self.assertEqual(
-                    old["shapes"],
-                    {
-                        name: [f.name for f in fields(cls)]
-                        for name, cls in codec.CLASSES.items()
-                    },
-                )
+                current_shapes = {
+                    name: [f.name for f in fields(cls)]
+                    for name, cls in codec.CLASSES.items()
+                }
+                # M10 adds four disjoint tagged contracts; it must not change
+                # any historical class/field or silently allow arbitrary growth.
+                self.assertEqual(set(current_shapes) - set(old["shapes"]), {
+                    "RetrievalQuery", "RetrievalDependency", "RetrievalIssue", "EvidenceNode",
+                })
+                self.assertEqual(old["shapes"], {
+                    name: current_shapes[name] for name in old["shapes"]
+                })
                 target = RevisionCutover.upgrade(
                     source, self.root / ("graph" + str(schema)), self.owner
                 )
