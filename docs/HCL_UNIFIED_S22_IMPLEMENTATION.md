@@ -267,3 +267,11 @@ contracts and add valid/invalid temporal/identity/Bridge/default contrasts.
 A publication-rename fault test now targets the final destination explicitly
 so it still fails after the old writer fence rather than at the newly added
 earlier staging-directory rename. Original publication/hold assertions remain.
+
+A later contract audit also reproduced an exception escaping the program/watch
+snapshot race because one `HCLFailure` call omitted its stage field. The current
+race test performs a real peer source update between those snapshots, for both
+run and stream, and requires a source-free `STALE_STATE` result, retained call
+usage and zero resend. A static constructor-signature check covers every current
+runtime `HCLFailure` call; it is supplementary error-path coverage, not cognitive
+acceptance evidence.

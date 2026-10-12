@@ -373,6 +373,7 @@ class Engine:
                     if watched.query_dependencies[0] != snapshot.query_dependencies[0]:
                         raise HCLFailure(
                             "STALE_STATE",
+                            "revision",
                             "QUERY_DEPENDENCY_CHANGED",
                             "query_dependencies",
                             "The program changed while binding its query watches.",

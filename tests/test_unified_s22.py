@@ -1068,3 +1068,71 @@ class RevisionExecutionTests(unittest.TestCase):
         self.assertTrue(values["support_bits"]["frontier_unexplored"])
         self.assertTrue(values["support_bits"]["negative_support"])
         self.assertFalse(values["support_bits"]["positive_support"])
+
+    def test_query_watch_binding_race_returns_safe_failure_for_run_and_stream(self):
+        peer = StateStore.sqlite(self.path)
+        try:
+            for stream in (False, True):
+                source = self.default_source()
+                request = replace(self.request, request_id="watch-race-" + str(stream))
+                port = OfflineModelPort(json.dumps(self.candidate(source), ensure_ascii=False))
+                engine = HCL(self.store, principal=self.owner, gateway=ModelGateway(self.store, port))
+                original = self.store.query_snapshot
+                changed = False
+
+                def racing(session, principal, handles, queries):
+                    nonlocal changed
+                    if len(queries) > 1 and not changed:
+                        changed = True
+                        peer.put_source(
+                            "s", self.owner, "PRIVATE_RACE_SOURCE_" + str(stream), "PRIVATE_RACE_TEXT_CANARY"
+                        )
+                    return original(session, principal, handles, queries)
+
+                with patch.object(self.store, "query_snapshot", side_effect=racing):
+                    if stream:
+
+                        async def collect():
+                            return [event async for event in engine.stream(request)]
+
+                        events = asyncio.run(collect())
+                        self.assertEqual([event.kind for event in events], ["status", "result"])
+                        result = events[-1].result
+                    else:
+                        result = engine.run_sync(request)
+                self.assertTrue(changed)
+                self.assertEqual(result.status, "STALE_STATE")
+                self.assertEqual(result.diagnostics[0].stage, "revision")
+                self.assertEqual(result.diagnostics[0].code, "QUERY_DEPENDENCY_CHANGED")
+                self.assertFalse(result.answer)
+                self.assertNotIn("PRIVATE_RACE", repr(result))
+                self.assertNotIn("inference_values", result.execution_receipt)
+                self.assertEqual(port.attempts, 1)
+                self.assertEqual(result.usage["held_mock_calls"], 1)
+                replay = engine.run_sync(request)
+                self.assertFalse(replay.answer)
+                self.assertEqual(port.attempts, 1)
+                self.assertEqual(replay.usage["held_mock_calls"], 1)
+        finally:
+            peer.close()
+
+    def test_runtime_failure_constructors_supply_every_safe_diagnostic_field(self):
+        import ast
+
+        root = Path(__file__).resolve().parents[1] / "hcl"
+        count = 0
+        for path in root.rglob("*.py"):
+            for node in ast.walk(ast.parse(path.read_text())):
+                if (
+                    isinstance(node, ast.Call)
+                    and isinstance(node.func, ast.Name)
+                    and node.func.id == "HCLFailure"
+                ):
+                    self.assertFalse(any(isinstance(value, ast.Starred) for value in node.args), str(path))
+                    provided = len(node.args) + sum(
+                        item.arg in {"status", "stage", "code", "field_path", "message"}
+                        for item in node.keywords
+                    )
+                    self.assertEqual(provided, 5, (str(path), node.lineno))
+                    count += 1
+        self.assertGreater(count, 20)
