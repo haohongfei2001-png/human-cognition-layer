@@ -28,6 +28,31 @@ def identity(value):
     return sha256(canonical(value).encode()).hexdigest()
 
 
+def context_identity(context):
+    """Display labels do not create another condition or evidence factor."""
+    return identity({key: value for key, value in context.items() if key != "id"})
+
+
+def domain_conditions(actual):
+    return tuple(
+        dict(
+            result_id=r["result_id"],
+            context_hash=r.get("context_hash"),
+            assumption_environments=r.get("assumption_environments", ()),
+        )
+        for r in actual
+        if "result_id" in r
+    )
+
+
+def edit_evaluation(column):
+    if not column["actual_results"]:
+        return "UNCOMPUTED"
+    if any(c["relation"] in ("UNCOMPUTED", "UNMODELED") for c in column["cells"]):
+        return "PARTIALLY_RECOMPUTED"
+    return "RECOMPUTED"
+
+
 def program_hash(program):
     return identity({key: value for key, value in program.items() if key != "id"})
 
@@ -302,6 +327,7 @@ def discover(
     ):
         raise ValueError("bounded discovery budget required")
     contexts = {row["id"]: deepcopy(row) for row in contexts}
+    context_hashes = {key: context_identity(value) for key, value in contexts.items()}
     originals = identity([programs, observations, contexts, probes, grammar])
     columns, archive, edits, frontier = {}, {}, [], []
     used = 0
@@ -318,9 +344,10 @@ def discover(
         by_context, cells, actual = {}, [], []
         for observation in observations:
             context_id = observation["context_id"]
-            if context_id not in by_context:
+            context_key = context_hashes[context_id]
+            if context_key not in by_context:
                 if used >= max_evaluations:
-                    by_context[context_id] = dict(
+                    by_context[context_key] = dict(
                         predictions={}, status="UNCOMPUTED", work=0, actual_results=()
                     )
                     frontier.append("PREDICTION_BUDGET_FRONTIER")
@@ -336,9 +363,9 @@ def discover(
                     ):
                         raise ValueError("adapter resource accounting mismatch")
                     used += value["work"]
-                    by_context[context_id] = value
+                    by_context[context_key] = value
                     actual.extend(value["actual_results"])
-            computed = by_context[context_id]
+            computed = by_context[context_key]
             prediction = computed["predictions"].get(
                 observation["query_id"],
                 dict(
@@ -368,15 +395,7 @@ def discover(
             complexity=expression_size({k: v for k, v in program.items() if k != "id"}),
             work=sum(v["work"] for v in by_context.values()),
             actual_results=actual,
-            domain_conditions=tuple(
-                dict(
-                    result_id=r["result_id"],
-                    context_hash=r.get("context_hash"),
-                    assumption_environments=r.get("assumption_environments", ()),
-                )
-                for r in actual
-                if "result_id" in r
-            ),
+            domain_conditions=domain_conditions(actual),
         )
         return key
 
@@ -425,8 +444,11 @@ def discover(
         if len(proposals) > new_per_round:
             frontier.append("NEW_PROGRAM_BEAM_BOUND")
         for program, edit in proposals[:new_per_round]:
-            if column(program) is not None:
-                edits.append(edit)
+            child = column(program)
+            if child is not None:
+                edits.append(
+                    dict(edit, evaluation_status=edit_evaluation(columns[child]))
+                )
     retained = pareto_frontier(columns)
     classes = prediction_classes(columns, observations, scope)
     distinguishing = []
@@ -478,7 +500,9 @@ def discover(
                 incomplete.append(key)
                 continue
             predictions[key] = dict(
-                prediction=prediction, actual_results=value["actual_results"]
+                prediction=prediction,
+                actual_results=value["actual_results"],
+                domain_conditions=domain_conditions(value["actual_results"]),
             )
             groups.setdefault(
                 canonical(sorted(canonical(v) for v in prediction["values"])), []
@@ -507,6 +531,9 @@ def discover(
     return dict(
         operator_version=VERSION,
         programs=archive,
+        initial_program_hashes=tuple(
+            sorted({program_hash(p) for p in programs} & set(archive))
+        ),
         prediction_matrix=columns,
         pareto_programs=retained,
         prediction_classes=classes,

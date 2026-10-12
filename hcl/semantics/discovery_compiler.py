@@ -4,7 +4,12 @@ from dataclasses import asdict
 import json
 
 from hcl.kernel.types import HCLFailure, freeze, thaw
-from hcl.operators.abduction import evaluate_expression, expression_size, identity
+from hcl.operators.abduction import (
+    evaluate_expression,
+    expression_size,
+    identity,
+    context_identity,
+)
 from hcl.semantics.compiler import SemanticCompiler
 from hcl.semantics.model_compiler import LocalModelCompiler
 from hcl.semantics.argument_compiler import ArgumentCompiler
@@ -200,6 +205,9 @@ class DiscoveryCompiler(SemanticCompiler):
         # Repeated/derived reports are a connected provenance family, not
         # likelihood factors. Conflicting contents remain separate matrix rows.
         parents = {row["id"]: row["id"] for row in observations}
+        context_hashes = {
+            key: context_identity(value) for key, value in contexts.items()
+        }
 
         def root(key):
             while parents[key] != key:
@@ -221,11 +229,11 @@ class DiscoveryCompiler(SemanticCompiler):
                     other["factor_id"],
                 )
                 same_anchor = (
-                    row["context_id"],
+                    context_hashes[row["context_id"]],
                     row["query_id"],
                     sorted(row["segment_ids"]),
                 ) == (
-                    other["context_id"],
+                    context_hashes[other["context_id"]],
                     other["query_id"],
                     sorted(other["segment_ids"]),
                 )
@@ -254,7 +262,15 @@ class DiscoveryCompiler(SemanticCompiler):
             factor = "factor:" + identity(
                 [
                     sorted({key for row in rows for key in row["segment_ids"]}),
-                    sorted({(row["context_id"], row["query_id"]) for row in rows}),
+                    sorted(
+                        {
+                            (
+                                context_hashes[row["context_id"]],
+                                row["query_id"],
+                            )
+                            for row in rows
+                        }
+                    ),
                 ]
             )
             for row in rows:

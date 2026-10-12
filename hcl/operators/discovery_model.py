@@ -12,6 +12,9 @@ from hcl.operators.abduction import (
     evaluate_expression,
     identity,
     program_hash,
+    context_identity,
+    domain_conditions,
+    edit_evaluation,
 )
 from hcl.operators.mental_scene import MentalSceneOperator
 from hcl.operators.argument_model import ArgumentModelOperator
@@ -200,7 +203,7 @@ class DiscoveryModelOperator:
                 resource_usage=dict(operation.resource_usage),
                 issues=operation.issues,
                 program_hash=program_hash(hypothesis),
-                context_hash=identity(context),
+                context_hash=context_identity(context),
                 assumption_environments=inference.assumption_environments,
             )
             predictions = {
@@ -232,10 +235,10 @@ class DiscoveryModelOperator:
         )
         values.update(
             observations=data["observations"],
-            context_bindings={c["id"]: identity(c) for c in data["contexts"]},
+            context_bindings={c["id"]: context_identity(c) for c in data["contexts"]},
             probe_bindings={
                 p["id"]: dict(
-                    context_hash=identity(p["context"]), query_id=p["query_id"]
+                    context_hash=context_identity(p["context"]), query_id=p["query_id"]
                 )
                 for p in data["probes"]
             },
@@ -257,7 +260,23 @@ class DiscoveryModelOperator:
             + identity([issue.issue_id, dict(snapshot.source_versions), values]),
             KIND,
             values,
-            (),
+            tuple(
+                sorted(
+                    {
+                        a
+                        for col in values["prediction_matrix"].values()
+                        for r in col["actual_results"]
+                        for a in r["assumption_environments"]
+                    }
+                    | {
+                        a
+                        for probe in values["distinguishing_observations"]
+                        for item in probe["evaluations"].values()
+                        for r in item["actual_results"]
+                        for a in r["assumption_environments"]
+                    }
+                )
+            ),
             tuple(snapshot.source_versions),
             (),
             snapshot.rule_version,
@@ -398,6 +417,11 @@ def verify_discovery(values):
         )
     )
     for probe in data["distinguishing_observations"]:
+        if (
+            probe["hypothetical"] is not True
+            or probe["information_gain"] != "NOT_CALIBRATED"
+        ):
+            raise ValueError("hypothetical uncalibrated probe boundary missing")
         binding = data["probe_bindings"][probe["probe_id"]]
         if (
             probe["query_id"] != binding["query_id"]
@@ -413,6 +437,10 @@ def verify_discovery(values):
             selector = next(
                 p for p in programs[key]["predict"] if p["id"] == binding["query_id"]
             )
+            if codec.canonical(value["domain_conditions"]) != codec.canonical(
+                domain_conditions(value["actual_results"])
+            ):
+                raise ValueError("probe conditions mismatch")
             check_prediction(
                 value["prediction"],
                 value["actual_results"],
@@ -449,3 +477,91 @@ def verify_discovery(values):
         sorted({o["factor_id"] for o in observations})
     ):
         raise ValueError("factor registration mismatch")
+
+    initial = set(data["initial_program_hashes"])
+    if not initial or not initial <= set(programs):
+        raise ValueError("initial mechanism identity mismatch")
+    creation_round = {key: 0 for key in initial}
+    seen_children = set()
+    last_round = 0
+    for edit in data["edit_history"]:
+        parent_key, child_key = edit["parent_hash"], edit["child_hash"]
+        if (
+            parent_key not in programs
+            or child_key not in programs
+            or child_key in seen_children
+            or parent_key == child_key
+            or child_key in initial
+            or parent_key not in creation_round
+        ):
+            raise ValueError("invalid mechanism lineage")
+        seen_children.add(child_key)
+        if (
+            type(edit["round"]) is not int
+            or not 1 <= edit["round"] <= data["search"]["max_rounds"]
+        ):
+            raise ValueError("invalid mechanism edit round")
+        if edit["round"] < last_round or creation_round[parent_key] >= edit["round"]:
+            raise ValueError("invalid mechanism chronology")
+        last_round = creation_round[child_key] = edit["round"]
+        residuals = tuple(
+            sorted(
+                c["observation_id"]
+                for c in columns[parent_key]["cells"]
+                if c["relation"] != "EXPLAINED"
+            )
+        )
+        if not residuals or tuple(edit["residual_ids"]) != residuals:
+            raise ValueError("edit is not rooted in actual residuals")
+        proposed = deepcopy(programs[parent_key])
+        path, after = edit["path"], edit["after"]
+        if len(path) == 3 and path[0] == "observe" and path[2] == "when":
+            index = int(path[1])
+            old = proposed["observe"][index]["when"]
+            if (
+                index < 0
+                or expression_size(after) > data["grammar"]["max_expression_size"]
+            ):
+                raise ValueError("invalid channel edit bound")
+            allowed = []
+            for feature in data["grammar"]["observation_features"]:
+                term = {"feature": feature}
+                allowed.extend(
+                    [
+                        ("replace_channel", term),
+                        ("extend_channel", {"op": "or", "args": [old, term]}),
+                        ("restrict_channel", {"op": "and", "args": [old, term]}),
+                    ]
+                )
+            allowed.append(("negate_channel", {"op": "not", "args": [old]}))
+            if not any(
+                operation == edit["operation"]
+                and codec.canonical(value) == codec.canonical(after)
+                for operation, value in allowed
+            ):
+                raise ValueError("unregistered channel edit")
+            proposed["observe"][index]["when"] = after
+        elif (
+            len(path) == 2
+            and path[0] == "latent"
+            and edit["operation"] == "replace_latent"
+        ):
+            old = proposed["latent"][path[1]]
+            if not any(
+                codec.canonical(choice) == codec.canonical(after)
+                for choice in data["grammar"]["latent_domains"][path[1]]
+            ):
+                raise ValueError("undeclared parameter edit")
+            proposed["latent"][path[1]] = after
+        else:
+            raise ValueError("unregistered edit path")
+        if (
+            codec.canonical(old) != codec.canonical(edit["before"])
+            or program_hash(proposed) != child_key
+        ):
+            raise ValueError("edit differs from actual child mechanism")
+        if edit["evaluation_status"] != edit_evaluation(columns[child_key]):
+            raise ValueError("edit recomputation status mismatch")
+
+    if seen_children != set(programs) - initial:
+        raise ValueError("missing mechanism edit lineage")

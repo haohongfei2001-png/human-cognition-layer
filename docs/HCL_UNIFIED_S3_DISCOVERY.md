@@ -47,8 +47,11 @@ replace/extend/restrict/negate observation conditions and substitute declared
 latent values. It constructs new AST combinations rather than selecting among
 three canned explanations. Each edit records parent/child content hashes,
 changed path, old/new mechanism and the residual observation IDs that prompted
-it. All prior prediction obligations are rerun; original sources, observations
-and older candidate programs remain unchanged. A fully explained program is
+it. Consumption validates the declared grammar edit against both actual program
+hashes and the parent's computed residuals. Recomputed, partially recomputed and
+uncomputed proposals remain distinct; a resource cutoff cannot be described as
+a fully recomputed edit. All prior prediction obligations are scheduled again;
+original sources, observations and older candidate programs remain unchanged. A fully explained program is
 not edited merely to generate more text.
 
 This grammar does **not yet** invent new event-time ranges, identities, causal
@@ -69,7 +72,10 @@ Explicit retelling/derivation links and repeated context/query/source-span
 observations are registered in connected factor families. Contradictory reports
 are preserved as separate rows in their family. Distinct query obligations can
 share a sentence without becoming the same factor. Repeating a report does not
-increase evidence or trigger another evaluation of the same context. Cyclic
+increase evidence or trigger another evaluation of the same context. Context
+identity excludes only its display ID: exact structural aliases with renamed
+observation/factor labels share a factor and computation, while distinct query
+obligations and genuinely changed conditions remain distinct. Cyclic
 report lineage is invalid. Source groups and factors are not a proof of
 statistical independence; no likelihood multiplication or calibrated posterior
 is produced.
@@ -90,7 +96,10 @@ form partitions and a separating-pair count. Probe text is explicitly hypothetic
 not a new original observation; information gain is not numerically calibrated.
 Reward-4/reward-8 models can agree on the observed choice and diverge when a
 new hypothetical detour cost is computed. Current equivalence is never global
-identifiability.
+identifiability. Each observed fit and each prospective prediction carries its
+own actual domain assumption environments through compact delivery and answer
+text. Probe-only assumptions qualify that future prediction, not the observed
+fit; the outer claim also preserves the union of consumed conditions.
 
 ## Durable consumption, resource accounting and migration
 

@@ -68,15 +68,23 @@ class AnswerAssembler:
             lines.append("Program " + key[:12] + ": explained factors=" + str(len(column["profile"]["explained"]))
                          + ", contradicted=" + str(len(column["profile"]["contradicted"]))
                          + ", unmodeled/uncomputed=" + str(len(column["profile"]["unmodeled"])) + ".")
-        lines.append("Actually recomputed mechanism edits: " + str(len(values["edit_history"])) + ".")
+            for condition in column["domain_conditions"]:
+                lines.append("Observed-fit context " + condition["context_hash"][:12] + " is conditional on "
+                             + str(tuple(condition["assumption_environments"])) + ".")
+        computed_edits = sum(edit["evaluation_status"] == "RECOMPUTED" for edit in values["edit_history"])
+        lines.append("Actually recomputed mechanism edits: " + str(computed_edits) + "; proposed=" + str(len(values["edit_history"])) + ".")
         for probe in values["distinguishing_observations"]:
             lines.append("Hypothetical probe " + probe["probe_id"] + " separates " + str(probe["separated_pairs"])
                          + " computed candidate pairs; incomplete=" + str(len(probe["incomplete"])) + ".")
+            for key, prediction in probe["predictions"].items():
+                for condition in prediction["domain_conditions"]:
+                    lines.append("Hypothetical probe " + probe["probe_id"] + ", candidate " + key[:12]
+                                 + " is conditional on " + str(tuple(condition["assumption_environments"])) + ".")
         if values["frontier"]:
             lines.append("Unexplored: " + ", ".join(values["frontier"]) + ".")
         lines.append("Prediction equivalence concerns only the stated contexts and observations. "
                      "Source interpretation, mechanism truth and evidence independence remain unverified; no calibrated posterior is claimed.")
-        names = ("programs", "prediction_matrix", "pareto_programs", "prediction_classes", "edit_history",
+        names = ("programs", "initial_program_hashes", "prediction_matrix", "pareto_programs", "prediction_classes", "edit_history",
                  "distinguishing_observations", "frontier", "semantic_certified", "candidate_completeness")
         fields = tuple(ResultField(result.result_id,name,values[name]) for name in names)
         return AnswerClaim(" ".join(lines),"claim:"+result.result_id,fields,result.assumption_environments,
@@ -391,7 +399,7 @@ class AnswerAssembler:
         value = result.values
         if result.kind == "CONDITIONAL_MECHANISM_DISCOVERY":
             text = checked.text
-            names = ("programs", "pareto_programs", "prediction_classes", "edit_history", "observations",
+            names = ("programs", "initial_program_hashes", "pareto_programs", "prediction_classes", "edit_history", "observations",
                      "source_bindings", "context_bindings", "probe_bindings", "frontier", "semantic_certified", "candidate_completeness", "posterior",
                      "scope", "factor_independence", "evidence_factor_ids", "equivalence_scope", "unmodeled_segments")
             for key, column in value["prediction_matrix"].items():
@@ -404,7 +412,8 @@ class AnswerAssembler:
                                    {name:probe[name] for name in keys},(str(i),),keys))
                 for key, prediction in probe["predictions"].items():
                     projections.append(ProjectedResultField(result.result_id,"distinguishing_observations",
-                                       {"prediction":prediction["prediction"]},(str(i),"predictions",key),("prediction",)))
+                                       {"prediction":prediction["prediction"], "domain_conditions":prediction["domain_conditions"]},
+                                       (str(i),"predictions",key),("prediction","domain_conditions")))
         elif result.kind == "CONDITIONAL_ARGUMENT_ACCEPTANCE":
             text = checked.text
             names = ("semantic_certified", "candidate_completeness", "scope")

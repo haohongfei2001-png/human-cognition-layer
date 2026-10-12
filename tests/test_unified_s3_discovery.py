@@ -609,9 +609,20 @@ class DiscoveryExecutionTests(unittest.TestCase):
         self.assertEqual(
             actual.values["distinguishing_observations"][0]["separated_pairs"], 1
         )
-        for kind in ("separation", "context", "complexity", "cost"):
+        for kind in (
+            "separation",
+            "context",
+            "complexity",
+            "cost",
+            "hypothetical",
+            "information_gain",
+        ):
             values = thaw(actual.values)
-            if kind == "separation":
+            if kind == "hypothetical":
+                values["distinguishing_observations"][0]["hypothetical"] = False
+            elif kind == "information_gain":
+                values["distinguishing_observations"][0]["information_gain"] = 1
+            elif kind == "separation":
                 values["distinguishing_observations"][0]["separated_pairs"] = 20
             else:
                 column = next(iter(values["prediction_matrix"].values()))
@@ -623,3 +634,189 @@ class DiscoveryExecutionTests(unittest.TestCase):
                     column["work"] = 0
             with self.assertRaises(HCLFailure):
                 AnswerAssembler()._claim(replace(actual, values=values))
+
+    def test_context_display_alias_cannot_duplicate_evidence_or_solver_work(self):
+        candidate = self.candidate()
+        candidate["contexts"] = [candidate["contexts"][2]]
+        candidate["observations"] = [candidate["observations"][2]]
+        candidate["search"]["max_rounds"] = 0
+        candidate["unmodeled_segments"] = [
+            s.segment_id
+            for s in segment_snapshot(
+                self.store.snapshot("scene", self.owner, self.request.source_handles),
+                self.request.question,
+            )
+            if s.kind == "SOURCE"
+        ]
+        first, _ = self.run_candidate(candidate)
+        before = next(
+            r
+            for r in self.store.inferences("scene", self.owner)
+            if r.result_id in first.execution_receipt["result_ids"]
+        ).values
+        context = deepcopy(candidate["contexts"][0])
+        context["id"] = "display-alias"
+        observation = deepcopy(candidate["observations"][0])
+        observation.update(
+            id="renamed-observation",
+            context_id="display-alias",
+            factor_id="renamed-factor",
+            provenance_group="renamed-group",
+        )
+        candidate["contexts"].append(context)
+        candidate["observations"].append(observation)
+        second, _ = self.run_candidate(
+            candidate, replace(self.request, request_id="alias")
+        )
+        after = next(
+            r
+            for r in self.store.inferences("scene", self.owner)
+            if r.result_id in second.execution_receipt["result_ids"]
+        ).values
+        self.assertEqual(len(before["evidence_factor_ids"]), 1)
+        self.assertEqual(after["evidence_factor_ids"], before["evidence_factor_ids"])
+        self.assertEqual(after["local_evaluations"], before["local_evaluations"])
+        self.assertEqual(after["local_evaluations"], 3)
+
+    def test_probe_only_conditions_remain_local_and_survive_run_stream_replay(self):
+        import asyncio
+        from hcl.memory.store import StateStore
+
+        candidate = self.candidate()
+        candidate["search"]["max_rounds"] = 0
+        context = deepcopy(candidate["contexts"][2])
+        context["id"] = "conditional-probe"
+        probe_model = context["template"]["models"][0]
+        canary = "PROBE_SPECIAL_ASSUMPTION"
+        probe_model["assumptions"].append(canary)
+        probe_model["active_assumptions"].append(canary)
+        candidate["probes"] = [
+            dict(
+                id="conditional-probe",
+                context=context,
+                query_id="choice",
+                segment_ids=context["segment_ids"],
+            )
+        ]
+        result, _ = self.run_candidate(candidate)
+        self.assertEqual(result.status, "COMPLETED", result.diagnostics)
+        actual = next(
+            r
+            for r in self.store.inferences("scene", self.owner)
+            if r.result_id in result.execution_receipt["result_ids"]
+        )
+        self.assertNotIn(
+            canary,
+            str(
+                [
+                    c["domain_conditions"]
+                    for c in actual.values["prediction_matrix"].values()
+                ]
+            ),
+        )
+        self.assertIn(canary, result.answer)
+        self.assertIn(canary, actual.assumption_environments)
+        self.assertIn(canary, result.claim_records[0].support_envs)
+        from hcl.kernel.types import HCLFailure
+        from hcl.runtime.answer import AnswerAssembler
+
+        stripped = thaw(actual.values)
+        for predicted in stripped["distinguishing_observations"][0][
+            "predictions"
+        ].values():
+            predicted["domain_conditions"] = []
+        with self.assertRaises(HCLFailure):
+            AnswerAssembler()._claim(replace(actual, values=stripped))
+        fields = [
+            f
+            for claim in result.claim_records
+            for f in claim.used_result_fields
+            if f.field == "distinguishing_observations"
+        ]
+        self.assertIn(canary, str([thaw(f.value) for f in fields]))
+        fresh_port = OfflineModelPort(json.dumps(candidate, ensure_ascii=False))
+        fresh_client = HCL(
+            self.store,
+            principal=self.owner,
+            gateway=ModelGateway(self.store, fresh_port),
+        )
+        fresh_request = replace(self.request, request_id="probe-fresh-stream")
+
+        async def fresh_stream():
+            return [e async for e in fresh_client.stream(fresh_request)]
+
+        fresh = asyncio.run(fresh_stream())[-1].result
+        self.assertEqual(fresh.status, "COMPLETED", fresh.diagnostics)
+        self.assertIn(canary, fresh.answer)
+        self.assertIn(canary, fresh.claim_records[0].support_envs)
+        self.assertEqual(fresh_port.attempts, 1)
+        self.store.close()
+        self.store = StateStore.sqlite(self.scene.path, revision=True)
+        self.scene.store = self.store
+        port = OfflineModelPort("NEVER_SEND")
+        client = HCL(
+            self.store, principal=self.owner, gateway=ModelGateway(self.store, port)
+        )
+
+        async def stream():
+            return [e async for e in client.stream(self.request)]
+
+        replay = asyncio.run(stream())[-1].result
+        self.assertEqual(replay.answer, result.answer)
+        self.assertEqual(replay.claim_records, result.claim_records)
+        replay_run = client.run_sync(fresh_request)
+        self.assertEqual(replay_run.answer, fresh.answer)
+        self.assertEqual(replay_run.claim_records, fresh.claim_records)
+        self.assertEqual(port.attempts, 0)
+
+    def test_fabricated_edit_history_cannot_claim_recomputed_mechanism(self):
+        from hcl.kernel.types import HCLFailure
+        from hcl.runtime.answer import AnswerAssembler
+
+        result, _ = self.run_candidate()
+        actual = next(
+            r
+            for r in self.store.inferences("scene", self.owner)
+            if r.result_id in result.execution_receipt["result_ids"]
+        )
+        mutations = []
+        values = thaw(actual.values)
+        values["edit_history"].append(deepcopy(values["edit_history"][0]))
+        mutations.append(values)
+        values = thaw(actual.values)
+        values["edit_history"][0]["child_hash"] = "uncomputed-child"
+        mutations.append(values)
+        values = thaw(actual.values)
+        values["edit_history"][0]["residual_ids"] = ["invented-observation"]
+        mutations.append(values)
+        values = thaw(actual.values)
+        values["edit_history"][0]["after"] = {"const": True}
+        mutations.append(values)
+        for values in mutations:
+            with self.assertRaises(HCLFailure):
+                AnswerAssembler()._claim(replace(actual, values=values))
+
+    def test_uncomputed_edits_are_not_delivered_as_recomputed(self):
+        from hcl.kernel.types import HCLFailure
+        from hcl.runtime.answer import AnswerAssembler
+
+        result, _ = self.run_candidate(
+            request=replace(
+                self.request,
+                budget=replace(self.request.budget, max_local_evaluations=25),
+            )
+        )
+        self.assertEqual(result.status, "PARTIAL", result.diagnostics)
+        actual = next(
+            r
+            for r in self.store.inferences("scene", self.owner)
+            if r.result_id in result.execution_receipt["result_ids"]
+        )
+        edits = actual.values["edit_history"]
+        self.assertTrue(edits)
+        self.assertTrue(all(e["evaluation_status"] != "RECOMPUTED" for e in edits))
+        self.assertIn("Actually recomputed mechanism edits: 0;", result.answer)
+        forged = thaw(actual.values)
+        forged["edit_history"][0]["evaluation_status"] = "RECOMPUTED"
+        with self.assertRaises(HCLFailure):
+            AnswerAssembler()._claim(replace(actual, values=forged))

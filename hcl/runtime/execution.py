@@ -319,7 +319,7 @@ class ExecutionRunner:
                             "hypothesis.discover": DiscoveryCompiler}[goal.kind]()
                 program = compiler.compile(snapshot, segments, raw, request.budget)
                 if goal.kind == "hypothesis.discover":
-                    assumptions = tuple(sorted({a for c in program["contexts"] for m in c["template"]["models"] for a in m["active_assumptions"]}))
+                    assumptions = tuple(sorted({a for c in (*program["contexts"], *(p["context"] for p in program["probes"])) for m in c["template"]["models"] for a in m["active_assumptions"]}))
                     residuals = tuple(program["unmodeled_segments"])
                 else:
                     assumptions = tuple(sorted({a for model in program["models"] for a in model["active_assumptions"]}))
