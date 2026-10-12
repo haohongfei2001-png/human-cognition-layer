@@ -11,6 +11,8 @@ from hcl.kernel.types import (
 
 class AnswerAssembler:
     def _claim(self, result: InferenceResult) -> AnswerClaim:
+        if result.kind == "CONDITIONAL_INTERACTION_MODEL":
+            return self._interaction_claim(result)
         if result.kind == "CONDITIONAL_MECHANISM_DISCOVERY":
             return self._discovery_claim(result)
         if result.kind == "CONDITIONAL_ARGUMENT_ACCEPTANCE":
@@ -44,6 +46,53 @@ class AnswerAssembler:
         return AnswerClaim(text, f"claim:{result.result_id}", fields,
                                   result.assumption_environments, result.counterevidence_ids,
                                   "EXACT_MODEL")
+
+    def _interaction_claim(self, result):
+        from hcl.operators.interaction_model import verify_interaction
+        try:
+            verify_interaction(result.values)
+            mental_claims = {}
+            for model in result.values["models"]:
+                actual = model["actual_mental"]
+                mental_claims[(model["source_id"], model["model_id"])] = self._mental_claim(InferenceResult(actual["result_id"], actual["kind"], actual["values"],
+                                   tuple(actual["assumption_environments"]), tuple(actual["source_versions"]), (),
+                                   result.rule_version, "CONDITIONAL_FINITE_COGNITIVE_MODEL"))
+        except (ValueError, TypeError, KeyError, IndexError, StopIteration, ZeroDivisionError):
+            raise HCLFailure("FAILED", "answer", "INTERACTION_RESULT_MISMATCH", "models",
+                             "Interaction claims differ from actual perspectives, computations or lifecycle evidence.") from None
+        lines = ["Conditional interaction computations under source-bound interpretations and declared rules."]
+        for model in result.values["models"]:
+            lines.append("Model " + model["model_id"] + " [" + model["frame_kind"] + "]:")
+            lines.append(mental_claims[(model["source_id"], model["model_id"])].text)
+            lines.append("Domain assumptions=" + str(tuple(model["assumption_environments"])) + "; limitations=" + str(tuple(model["domain_issues"])) + ".")
+            for commitment in model["commitments"]:
+                lines.append("Original commitment " + commitment["commitment_id"] + " version " + commitment["original_version"]
+                             + ": " + commitment["status"] + "; conditional on=" + str(tuple(commitment["assumption_environments"])) + "; assumption status=" + commitment["assumption_status"] + "; history=" + str(tuple((r["at"], r["status"]) for r in commitment["history"])) + ".")
+                if commitment["invalid_acts"]:
+                    lines.append("Commitment act qualifications: " + json.dumps(thaw(commitment["invalid_acts"]),sort_keys=True) + ".")
+            if model["acknowledgments"].get("diagnostics"):
+                lines.append("Acknowledgment qualifications: " + json.dumps(thaw(model["acknowledgments"]["diagnostics"]),sort_keys=True) + ".")
+            for chain in model["acknowledgments"].get("chains", ()):
+                lines.append("Explicit acknowledgment depth=" + str(chain["depth"]) + "; delivered=" + str(chain["complete"])
+                             + "; participants=" + str(tuple(chain["participants"])) + "; root content=" + json.dumps(thaw(chain["root_content"]), sort_keys=True)
+                             + "; conditional on=" + str(tuple(chain["assumption_environments"])) + "; common knowledge is not established.")
+            for game in model["games"]:
+                lines.append("Message game " + game["game_id"] + ": " + game["status"] + "; conditional on=" + str(tuple(game.get("assumption_environments", ()))) + ".")
+                if game["status"] == "COMPUTED":
+                    computation = game["computation"]
+                    lines.append("Speaker-view conditional choices=" + json.dumps(thaw(computation["speaker"].get("policy", {})), sort_keys=True) + ".")
+                    for role in ("expected_listener", "actual_listener"):
+                        lines.append(role + " model: " + computation[role]["distribution"]["status"] + ".")
+                        for message, prediction in computation[role]["predictions"].items():
+                            lines.append(role + " after " + message + ": posterior=" + json.dumps(thaw(prediction["posterior"]), sort_keys=True)
+                                         + "; actual one-step Q=" + json.dumps(thaw(prediction["actions"]["q"]), sort_keys=True) + ".")
+            if model["frontier"]:
+                lines.append("Unexplored: " + ", ".join(model["frontier"]) + ".")
+        lines.append("Receipt, interpretation, acceptance and confirmation remain separate. These finite predictions do not establish actual intent, "
+                     "private understanding, calibrated human probabilities or a moral verdict.")
+        return AnswerClaim(" ".join(lines), "claim:" + result.result_id,
+                           tuple(ResultField(result.result_id, name, result.values[name]) for name in ("models", "semantic_certified", "candidate_completeness", "scope")),
+                           result.assumption_environments, result.counterevidence_ids, "CONDITIONAL_INTERACTION_NOT_PRIVATE_TRUTH")
 
     def _discovery_claim(self, result):
         from hcl.operators.discovery_model import verify_discovery, delivery_values
@@ -415,7 +464,21 @@ class AnswerAssembler:
         checked = self._claim(result)
         projections = []
         value = result.values
-        if result.kind == "CONDITIONAL_MECHANISM_DISCOVERY":
+        if result.kind == "CONDITIONAL_INTERACTION_MODEL":
+            text = checked.text
+            names = ("semantic_certified", "candidate_completeness", "scope", "source_versions")
+            for i, model in enumerate(value["models"]):
+                keys = ("model_id", "source_id", "frame_kind", "assumption_environments", "domain_issues", "shared_variables", "commitments", "games", "acknowledgments", "frontier")
+                projections.append(ProjectedResultField(result.result_id, "models", {name:model[name] for name in keys}, (str(i),), keys))
+                actual = model["actual_mental"]
+                nested = InferenceResult(actual["result_id"], actual["kind"], actual["values"],
+                                         tuple(actual["assumption_environments"]), tuple(actual["source_versions"]), (),
+                                         result.rule_version, "CONDITIONAL_FINITE_COGNITIVE_MODEL")
+                for field in self.compact_claim(nested).used_result_fields:
+                    projections.append(ProjectedResultField(result.result_id, "models", field.value,
+                                       (str(i), "actual_mental", "values", field.field, *getattr(field,"path",())),
+                                       getattr(field,"selection",())))
+        elif result.kind == "CONDITIONAL_MECHANISM_DISCOVERY":
             text = checked.text
             names = ("programs", "initial_program_hashes", "pareto_programs", "prediction_classes", "edit_history", "observations",
                      "source_bindings", "context_bindings", "probe_bindings", "domain_issues", "frontier", "semantic_certified", "candidate_completeness", "posterior",

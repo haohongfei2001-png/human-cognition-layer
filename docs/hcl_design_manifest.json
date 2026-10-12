@@ -3441,7 +3441,7 @@
   "current_execution": {
     "started_at_utc": "2026-10-11T20:31:00Z",
     "authority": "Owner explicitly authorized continued implementation, tests, PRs and verified merges under the approved S1–S7 plan.",
-    "base_main": "e5f70bbb2afcfef665c6e9d7a7d3da2bb612cc83",
+    "base_main": "e3a73062ebcb011b2db7b4ad4ece8136a9e655c8",
     "current_stage": "S3 ∥ S4",
     "delivered_slice": "S2.3",
     "readiness": "INTEGRATED_OFFLINE",
@@ -3454,7 +3454,7 @@
     "remaining": "继续完整S3/M03–M09与并行S4/M10–M14；当前有限三机制是增量证据，不关闭阶段。完整S1/S2实模功能、S5–S7及T01–T32研究目标全部保留。",
     "historical_boundary": "旧A–H/G-HC/G-ARCH、实验和closed grants保持原证据等级，不自动继承。",
     "validation": "本切片证明注入候选下的真实离线预算执行、结果消费、修订和恢复；不证明开放语义/任务分解、跨块语义组合、完整性或S1/S2阶段完成。",
-    "active_work": "S3有限心智/行动/因果与S4有限论证已接通；M04共享发现器在建：实际预测矩阵、来源因子、残差AST编辑、证据集合Pareto、当前预测等价与未来区分探测，经同一执行图消费。完整领域与研究退出仍开放。",
+    "active_work": "S3有限心智/行动/因果、M04共享发现与S4有限论证已接通；M07有限互动在建：实际个体视角、递归消息博弈、条件承诺与有限确认链，经同一执行图消费。完整领域与研究退出仍开放。",
     "domain_evidence": [
       {
         "stage": "S3",
@@ -3493,6 +3493,18 @@
         "checks": "tests/test_unified_s3_abduction.py; tests/test_unified_s3_discovery*.py; tests/test_unified_discovery_*.py",
         "witness": "scripts/witness_unified_discovery.py",
         "scope": "Shared bounded discovery with actual M03/M05/M06/M13 predictions and residual mechanism edits; injected source interpretations, incomplete grammar, no calibrated posterior or full M04 proof."
+      },
+      {
+        "stage": "S3",
+        "mechanisms": [
+          "M07"
+        ],
+        "readiness": "INTEGRATED_OFFLINE_PARTIAL",
+        "stage_complete": false,
+        "document": "docs/HCL_UNIFIED_S3_INTERACTION.md",
+        "checks": "tests/test_unified_s3_interaction*.py",
+        "witness": "scripts/witness_unified_interaction.py",
+        "scope": "Source-bound injected interpretations; actual finite M03 views, declared message games, M05 one-step Q and commitment/acknowledgment transitions. No private intent, human calibration, group institutional authority or full M07 proof."
       }
     ]
   }

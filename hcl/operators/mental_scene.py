@@ -139,7 +139,7 @@ class MentalSceneOperator:
                 "The declared cognitive model is outside its executable finite contract.",
             ) from None
 
-    def _run(self, snapshot, issue, allowance, program):
+    def _run(self, snapshot, issue, allowance, program, *, event_overrides=None, trace=None, trace_times=None):
         used = 0
         issues = []
         outputs = []
@@ -186,6 +186,7 @@ class MentalSceneOperator:
                 continue
             required_times = sorted(
                 {row["at"] for kind in ("queries", "plans") for row in proposal[kind]}
+                | set((trace_times or {}).get(proposal["id"], ()))
             )
             timeline = {}
             environments = {}
@@ -208,7 +209,7 @@ class MentalSceneOperator:
                         result["frontier"].append("COGNITIVE_BATCH_BUDGET_FRONTIER")
                         break
                     model, receipt = update_perspectives(
-                        model, event_model(pending, model.agents), limits
+                        model, (event_overrides or {}).get((proposal["id"], pending["id"]), event_model(pending, model.agents)), limits
                     )
                     result["events"].append(
                         dict(
@@ -229,6 +230,8 @@ class MentalSceneOperator:
                     pending = next(events, None)
                 timeline[point] = model
                 environments[point] = tuple(sorted(effective))
+            if trace is not None:
+                trace[proposal["id"]] = (timeline, environments)
             for query in proposal["queries"]:
                 mental = timeline[query["at"]]
                 if mental is None or not batch():
