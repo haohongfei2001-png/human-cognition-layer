@@ -7,5 +7,6 @@ from hcl.api import HCL
 from hcl.kernel.types import TaskRequest, TaskResult
 from hcl.kernel.dependencies import RevisionIssue
 from hcl.kernel.execution import ExecutionIssue, ExecutionBudget, LocalModel
+from hcl.kernel.retrieval import RetrievalQuery, RetrievalIssue
 
-__all__ = ["HCL", "TaskRequest", "TaskResult", "RevisionIssue", "ExecutionIssue", "ExecutionBudget", "LocalModel"]
+__all__ = ["HCL", "TaskRequest", "TaskResult", "RevisionIssue", "ExecutionIssue", "ExecutionBudget", "LocalModel", "RetrievalQuery", "RetrievalIssue"]

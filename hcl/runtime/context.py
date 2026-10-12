@@ -133,6 +133,19 @@ class ContextCompiler:
             total=chunk.total,
             composition="CHUNK_LOCAL_NOT_GLOBAL" if chunk.total > 1 else "SELECTED_SOURCE_SCOPE",
         )
+        from hcl.kernel.retrieval import RetrievalDependency
+        dependencies = getattr(snapshot, "query_dependencies", ())
+        if len(dependencies) == 1 and type(dependencies[0]) is RetrievalDependency:
+            view = snapshot.query_views["0"]
+            expected = {row["segment_id"] for row in view["packet"]["segments"]}
+            if len(checked) != len(expected) or {row.segment_id for row in checked} != expected:
+                raise HCLFailure("FAILED", "context", "RETRIEVAL_PACKET_CHANGED", "segments",
+                                 "The recorded retrieval closure cannot be silently dropped or expanded.")
+            from hcl.kernel.types import thaw
+            context["retrieval_coverage"] = thaw(view["coverage"])
+            context["retrieval_queries"] = dict(view["query"]["queries"])
+            context["retrieval_recorded_graph"] = thaw({name: view["packet"][name] for name in ("recorded_nodes", "edges", "support_semantics")})
+            context["retrieval_boundary"] = "RECORDED_SCOPE_ONLY_NOT_ALL_SOURCE_MATERIAL"
         if chunk.feedback is not None:
             # Feedback is data, cannot modify the requested operation or schema.
             feedback = dict(chunk.feedback)

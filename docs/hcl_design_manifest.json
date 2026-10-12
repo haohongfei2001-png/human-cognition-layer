@@ -1087,7 +1087,15 @@
       "stage": "S4",
       "evidence_status": "DESIGNED_NOT_HCL_VALIDATED",
       "start_stage": "S1",
-      "stage_semantics": "stage表示该机制主要完整交付阶段；start_stage表示公共基础首次接入；真实effect需S7另证"
+      "stage_semantics": "stage表示该机制主要完整交付阶段；start_stage表示公共基础首次接入；真实effect需S7另证",
+      "partial_implementation_evidence": {
+        "complete": false,
+        "readiness": "INTEGRATED_OFFLINE_PARTIAL",
+        "document": "docs/HCL_UNIFIED_S4_RETRIEVAL.md",
+        "checks": "tests/test_unified_s4_retrieval*.py",
+        "witness": "scripts/witness_unified_retrieval.py",
+        "scope": "Current-ACL-filtered original-region BM25 and sparse TF-IDF retrieval, actual recorded M13 graph closure, exact query dependencies, conditional FOL/argument packet consumption and durable recovery. Open semantic recall, active query synthesis, full memory governance/erasure, natural long-text and full M10 acceptance remain open."
+      }
     },
     {
       "id": "M11",
@@ -3460,7 +3468,7 @@
     "remaining": "继续完整S3/M03–M09与并行S4/M10–M14；当前有限三机制是增量证据，不关闭阶段。完整S1/S2实模功能、S5–S7及T01–T32研究目标全部保留。",
     "historical_boundary": "旧A–H/G-HC/G-ARCH、实验和closed grants保持原证据等级，不自动继承。",
     "validation": "本切片证明注入候选下的真实离线预算执行、结果消费、修订和恢复；不证明开放语义/任务分解、跨块语义组合、完整性或S1/S2阶段完成。",
-    "active_work": "S3有限心智/行动/因果、M04共享发现、M07互动、M08评价与S4有限论证已接通；M09有界关系/角色/跨事件竞争模型在建：一次实际共享M03、真实M07履约与M08应对、M05预测、有向分维关系更新、角色调和和分段模型/Pareto比较。参数区间、开放候选、领域完整性及研究退出仍开放。",
+    "active_work": "S3有限M03/M05/M06、M04共享发现、M07互动、M08评价、M09关系/角色/纵向模型与S4有限M13论证已接入同一runtime；M10在建：实际授权词法/向量检索、记录反证闭包、按需材料消费、查询失效与恢复。自然长文语义检索、全部记忆治理/隐私擦除和完整领域研究退出仍开放。",
     "domain_evidence": [
       {
         "stage": "S3",
@@ -3535,6 +3543,18 @@
         "checks": "tests/test_unified_s3_relationship*.py",
         "witness": "scripts/witness_unified_relationship.py",
         "scope": "Source-bound injected finite longitudinal hypotheses; one actual shared M03 operation, M07 commitment and M08 coping dependencies, real M05 predictions, directed conditional relationship updates, role reconciliation and bounded segmented/Pareto comparison. No calibrated private trust or stable identity/value verdict, general interval parameters, open candidate discovery or full M09 proof."
+      },
+      {
+        "stage": "S4",
+        "mechanisms": [
+          "M10"
+        ],
+        "readiness": "INTEGRATED_OFFLINE_PARTIAL",
+        "stage_complete": false,
+        "document": "docs/HCL_UNIFIED_S4_RETRIEVAL.md",
+        "checks": "tests/test_unified_s4_retrieval*.py",
+        "witness": "scripts/witness_unified_retrieval.py",
+        "scope": "Current-ACL-filtered original-region BM25 and sparse TF-IDF retrieval, actual recorded M13 graph closure, exact query dependencies, conditional FOL/argument packet consumption and durable recovery. Open semantic recall, active query synthesis, full memory governance/erasure, natural long-text and full M10 acceptance remain open."
       }
     ]
   }
