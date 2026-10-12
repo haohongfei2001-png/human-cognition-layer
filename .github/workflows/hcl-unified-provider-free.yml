@@ -10,6 +10,7 @@ on:
       - 'scripts/witness_unified_s12.py'
       - 'scripts/witness_unified_s13.py'
       - 'scripts/witness_unified_s21.py'
+      - 'scripts/witness_unified_s22.py'
       - 'scripts/render_hcl_status.py'
       - 'docs/hcl_design_manifest.json'
       - 'requirements-conceptual.txt'
@@ -23,6 +24,7 @@ on:
       - 'scripts/witness_unified_s12.py'
       - 'scripts/witness_unified_s13.py'
       - 'scripts/witness_unified_s21.py'
+      - 'scripts/witness_unified_s22.py'
       - 'scripts/render_hcl_status.py'
       - 'docs/hcl_design_manifest.json'
       - '.github/workflows/hcl-unified-provider-free.yml'
@@ -42,7 +44,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -r requirements-conceptual.txt
       - name: Actual local logic and unified boundary contracts
-        run: python -B -m unittest -v tests.test_unified_s1 tests.test_unified_s12 tests.test_unified_s13 tests.test_unified_s21 tests.test_unified_plan tests.test_quantified_logic tests.test_argument_readings
+        run: python -B -m unittest -v tests.test_unified_s1 tests.test_unified_s12 tests.test_unified_s13 tests.test_unified_s21 tests.test_unified_s22 tests.test_unified_s22_truth tests.test_unified_s22_temporal tests.test_unified_s22_scope tests.test_unified_s22_dependencies tests.test_unified_s22_upgrade tests.test_unified_plan tests.test_quantified_logic tests.test_argument_readings
       - name: Check generated current status and compile only runtime code
         run: |
           python -m scripts.render_hcl_status --check
@@ -54,6 +56,7 @@ jobs:
           python -m scripts.witness_unified_s12 --output hcl-unified-s12-witness.json
           python -m scripts.witness_unified_s13 --output hcl-unified-s13-witness.json
           python -m scripts.witness_unified_s21 --output hcl-unified-s21-witness.json
+          python -m scripts.witness_unified_s22 --output hcl-unified-s22-witness.json
       - uses: actions/upload-artifact@v4
         with:
           name: hcl-unified-s1-witness
@@ -62,3 +65,4 @@ jobs:
             hcl-unified-s12-witness.json
             hcl-unified-s13-witness.json
             hcl-unified-s21-witness.json
+            hcl-unified-s22-witness.json

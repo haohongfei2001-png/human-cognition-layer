@@ -4,6 +4,7 @@ from dataclasses import fields, is_dataclass
 import json
 
 from hcl.kernel import types
+from hcl.kernel.dependencies import IndexQuery, QueryDependency, QuerySnapshot, QueryDelta, RevisionIssue
 
 FORMAT = "hcl-content-object-1"
 CLASSES = {cls.__name__: cls for cls in (
@@ -11,7 +12,7 @@ CLASSES = {cls.__name__: cls for cls in (
     types.SourceDocument, types.BudgetSlice, types.Issue, types.TaskRequest,
     types.Diagnostic, types.InferenceResult, types.Snapshot, types.Delta,
     types.OpResult, types.ResultField, types.AnswerClaim, types.AnswerContract,
-    types.CommitResult, types.TaskResult,
+    types.CommitResult, types.TaskResult, RevisionIssue, IndexQuery, QueryDependency, QuerySnapshot, QueryDelta,
 )}
 
 

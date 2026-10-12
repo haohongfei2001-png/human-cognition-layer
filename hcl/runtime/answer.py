@@ -11,6 +11,8 @@ from hcl.kernel.types import (
 
 class AnswerAssembler:
     def _claim(self, result: InferenceResult) -> AnswerClaim:
+        if result.kind == "CONDITIONAL_REVISION":
+            return self._revision_claim(result)
         if result.kind == "CONDITIONAL_FOL":
             return self._semantic_claim(result)
         values = result.values
@@ -74,15 +76,129 @@ class AnswerAssembler:
         text = '\n'.join(lines)
         fields = tuple(ResultField(result.result_id, name, values[name])
                        for name in ('status', 'label', 'readings', 'semantic_certified', 'candidate_completeness'))
-        return AnswerClaim(text, 'claim:' + result.result_id, fields, result.assumption_environments,
-                           result.counterevidence_ids, 'CONDITIONAL_FORMAL_NOT_SEMANTIC_TRUTH')
+        return AnswerClaim(
+            text,
+            "claim:" + result.result_id,
+            fields,
+            result.assumption_environments,
+            result.counterevidence_ids,
+            "CONDITIONAL_FORMAL_NOT_SEMANTIC_TRUTH",
+        )
 
-    def build(self, snapshot: Snapshot, issues, accepted_results: tuple[InferenceResult, ...]) -> AnswerContract:
+    def _revision_claim(self, result):
+        values = result.values
+        bits = values.get("support_bits", {})
+        if (
+            values.get("semantic_certified") is not False
+            or values.get("candidate_completeness") != "NOT_ESTABLISHED"
+            or any(
+                type(bits.get(key)) is not bool
+                for key in ("positive_support", "negative_support", "frontier_unexplored")
+            )
+            or bits.get("epistemic_status") != "CONDITIONAL_SUPPORT_NOT_TRUTH_OR_ARGUMENT_ACCEPTANCE"
+        ):
+            raise HCLFailure(
+                "FAILED",
+                "answer",
+                "REVISION_RESULT_CONTRACT_INVALID",
+                "values",
+                "The conditional revision result does not satisfy its contract.",
+            )
+        positive, negative = values["query"]["positive"], values["query"]["negative"]
+        state = values["kernel_state"]
+        if (
+            bool(state["supports"][positive]) != bits["positive_support"]
+            or bool(state["supports"][negative]) != bits["negative_support"]
+            or bool({positive, negative} & set(state["frontier"])) != bits["frontier_unexplored"]
+        ):
+            raise HCLFailure(
+                "FAILED",
+                "answer",
+                "REVISION_SUPPORT_MISMATCH",
+                "values",
+                "Support fields differ from the actual rooted result.",
+            )
+        atom = values["claim_metadata"][positive]
+        label = atom["predicate"] + "(" + ", ".join(atom["arguments"]) + ")"
+        status = {
+            (True, False): "positive support only",
+            (False, True): "negative support only",
+            (True, True): "both positive and negative support; no explosion",
+            (False, False): "neither polarity has rooted support",
+        }
+        lines = [
+            "In the supplied scoped candidate program ["
+            + atom["frame_kind"]
+            + "] at "
+            + atom["at_point"]
+            + " for perspective "
+            + atom["perspective_id"]
+            + ", "
+            + label
+            + " has "
+            + status[(bits["positive_support"], bits["negative_support"])]
+            + "."
+        ]
+        if bits["frontier_unexplored"]:
+            lines.append("Relevant bounded search remains unexplored; missing support is not a disproof.")
+        if values["known_at"] is not None:
+            lines.append(
+                "Evidence was selected at recorded ledger revision "
+                + str(values["known_at"])
+                + " before checking event and agent-access time."
+            )
+        lines.append(
+            "Changed claims: "
+            + str(len(values["changed_claims"]))
+            + "; retained claims: "
+            + str(len(values["retained_claims"]))
+            + "."
+        )
+        if values["default_results"]:
+            lines.append(
+                "Default computations: " + ", ".join(sorted(set(values["default_results"].values()))) + "."
+            )
+        lines.append(
+            "These are conditional rooted results under proposed interpretations and assumptions, not established world truth, character belief, or language understanding."
+        )
+        fields = tuple(
+            ResultField(result.result_id, key, values[key])
+            for key in (
+                "support_bits",
+                "query",
+                "claim_metadata",
+                "known_at",
+                "changed_claims",
+                "retained_claims",
+                "default_results",
+                "semantic_certified",
+            )
+        )
+        return AnswerClaim(
+            " ".join(lines),
+            "claim:" + result.result_id,
+            fields,
+            result.assumption_environments,
+            result.counterevidence_ids,
+            "CONDITIONAL_REVISION_NOT_WORLD_OR_PRIVATE_TRUTH",
+        )
+
+    def build(
+        self, snapshot: Snapshot, issues, accepted_results: tuple[InferenceResult, ...]
+    ) -> AnswerContract:
         claims = tuple(self._claim(result) for result in accepted_results)
-        contract = AnswerContract("\n\n".join(claim.text for claim in claims), tuple(claims),
-                                  "RESULT_FIELDS_VERIFIED", "MODEL_INTERPRETATIONS_UNVERIFIED"
-                                  if any(result.kind == 'CONDITIONAL_FOL' for result in accepted_results)
-                                  else "EXPLICIT_FORMAL_INPUT_ONLY")
+        contract = AnswerContract(
+            "\n\n".join(claim.text for claim in claims),
+            tuple(claims),
+            "RESULT_FIELDS_VERIFIED",
+            (
+                "MODEL_INTERPRETATIONS_UNVERIFIED"
+                if any(
+                    result.kind in ("CONDITIONAL_FOL", "CONDITIONAL_REVISION") for result in accepted_results
+                )
+                else "EXPLICIT_FORMAL_INPUT_ONLY"
+            ),
+        )
         self.validate(contract, accepted_results)
         return contract
 
@@ -91,10 +207,13 @@ class AnswerAssembler:
         for claim in contract.claims:
             for used in claim.used_result_fields:
                 actual = by_id.get(used.result_id)
-                if (actual is None or used.field not in actual.values
-                        or type(actual.values[used.field]) is not type(used.value)
-                        or json.dumps(thaw(actual.values[used.field]), sort_keys=True)
-                        != json.dumps(thaw(used.value), sort_keys=True)):
+                if (
+                    actual is None
+                    or used.field not in actual.values
+                    or type(actual.values[used.field]) is not type(used.value)
+                    or json.dumps(thaw(actual.values[used.field]), sort_keys=True)
+                    != json.dumps(thaw(used.value), sort_keys=True)
+                ):
                     raise HCLFailure("FAILED", "answer", "RESULT_FIELD_MISMATCH", "used_result_fields",
                                      "An answer claim does not match the actual computation.")
         if results and contract.claims != tuple(self._claim(result) for result in results):

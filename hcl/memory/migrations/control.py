@@ -12,13 +12,13 @@ ACTIVE = "ACTIVE_NEW"
 READ_ONLY = "LEGACY_READ_ONLY"
 
 
-def version_bundle():
+def version_bundle(*, schema=NAMESPACE_SCHEMA):
     root = Path(__file__).resolve().parents[2]
     # Explicit runtime source only, never evaluation data, private packages or git history.
     files = {str(path.relative_to(root)): sha256(path.read_bytes()).hexdigest()
              for path in sorted(root.rglob("*.py"))}
     return {"code_sha256": sha256(codec.canonical(files).encode()).hexdigest(),
-            "schema": NAMESPACE_SCHEMA, "rules": RULE_VERSION, "indexes": {}}
+            "schema": schema, "rules": RULE_VERSION, "indexes": ({"revision":1} if schema in (3, 4) else {})}
 
 
 def blocked():

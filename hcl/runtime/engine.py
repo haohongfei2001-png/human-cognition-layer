@@ -34,6 +34,10 @@ class Engine:
             raise ValueError("typed semantic execution profile required")
         self._semantic = SemanticCompiler(semantic_profile)
         self._reading_logic = ReadingLogicOperator(semantic_profile)
+        from hcl.semantics.revision import RevisionCompiler
+        from hcl.operators.revision import RevisionOperator
+        self._revision_compiler = RevisionCompiler()
+        self._revision_operator = RevisionOperator()
         self._assembler = AnswerAssembler()
         self._requests: set[tuple[str, str]] = set()
         from hcl.runtime.budget import TaskBudgetLedger
@@ -41,48 +45,155 @@ class Engine:
 
     def _admit(self, request: TaskRequest) -> None:
         if request.principal != self.principal:
-            raise HCLFailure("DENIED", "admission", "PRINCIPAL_MISMATCH", "principal",
-                             "The request principal does not match the authenticated host identity.")
+            raise HCLFailure(
+                "DENIED",
+                "admission",
+                "PRINCIPAL_MISMATCH",
+                "principal",
+                "The request principal does not match the authenticated host identity.",
+            )
         for name in ("request_id", "session_id", "question"):
             value = getattr(request, name)
             if not isinstance(value, str) or not value.strip():
-                raise HCLFailure("INVALID_REQUEST", "admission", "REQUIRED_FIELD", name,
-                                 "A nonempty request field is required.")
+                raise HCLFailure(
+                    "INVALID_REQUEST",
+                    "admission",
+                    "REQUIRED_FIELD",
+                    name,
+                    "A nonempty request field is required.",
+                )
             try:
                 value.encode("utf-8")
             except UnicodeEncodeError:
-                raise HCLFailure("INVALID_REQUEST", "admission", "INVALID_TEXT_ENCODING", name,
-                                 "The request field must be valid Unicode text.") from None
-        if (request.output_contract != "natural-language-with-claims-v1"
-                or request.epistemic_profile not in ("balanced", "deep")):
-            raise HCLFailure("INVALID_REQUEST", "admission", "UNSUPPORTED_CONTRACT", "output_contract",
-                             "The requested contract or epistemic profile is unsupported.")
+                raise HCLFailure(
+                    "INVALID_REQUEST",
+                    "admission",
+                    "INVALID_TEXT_ENCODING",
+                    name,
+                    "The request field must be valid Unicode text.",
+                ) from None
+        if request.output_contract != "natural-language-with-claims-v1" or request.epistemic_profile not in (
+            "balanced",
+            "deep",
+        ):
+            raise HCLFailure(
+                "INVALID_REQUEST",
+                "admission",
+                "UNSUPPORTED_CONTRACT",
+                "output_contract",
+                "The requested contract or epistemic profile is unsupported.",
+            )
         if not isinstance(request.budget, BudgetSlice) or any(
-                type(getattr(request.budget, item.name)) is not int or getattr(request.budget, item.name) < 0
-                for item in fields(BudgetSlice)):
-            raise HCLFailure("INVALID_REQUEST", "admission", "INVALID_BUDGET", "budget",
-                             "Budget limits must be nonnegative integers.")
-        if any(not isinstance(handle, SourceHandle) or not isinstance(handle.source_id, str)
-               or not handle.source_id or type(handle.version) is not int or handle.version < 1
-               for handle in request.source_handles):
-            raise HCLFailure("INVALID_REQUEST", "admission", "INVALID_HANDLE", "source_handles",
-                             "Versioned source handles are required.")
+            type(getattr(request.budget, item.name)) is not int or getattr(request.budget, item.name) < 0
+            for item in fields(BudgetSlice)
+        ):
+            raise HCLFailure(
+                "INVALID_REQUEST",
+                "admission",
+                "INVALID_BUDGET",
+                "budget",
+                "Budget limits must be nonnegative integers.",
+            )
+        if any(
+            not isinstance(handle, SourceHandle)
+            or not isinstance(handle.source_id, str)
+            or not handle.source_id
+            or type(handle.version) is not int
+            or handle.version < 1
+            for handle in request.source_handles
+        ):
+            raise HCLFailure(
+                "INVALID_REQUEST",
+                "admission",
+                "INVALID_HANDLE",
+                "source_handles",
+                "Versioned source handles are required.",
+            )
+        if len({handle.source_id for handle in request.source_handles}) != len(request.source_handles):
+            raise HCLFailure(
+                "INVALID_REQUEST",
+                "admission",
+                "DUPLICATE_SOURCE",
+                "source_handles",
+                "A source was requested more than once.",
+            )
         if not isinstance(request.issue, Issue):
-            raise HCLFailure("INVALID_REQUEST", "admission", "INVALID_ISSUE", "issue",
-                             "A typed issue is required.")
-        if request.issue.kind not in ("logic.check_interpretation", "source.report", "model.respond", "logic.compare_semantic_readings"):
-            raise HCLFailure("INVALID_REQUEST", "admission", "UNSUPPORTED_ISSUE", "issue.kind",
-                             "This issue is outside the implemented execution slice.")
+            raise HCLFailure(
+                "INVALID_REQUEST", "admission", "INVALID_ISSUE", "issue", "A typed issue is required."
+            )
+        if request.issue.kind not in (
+            "logic.check_interpretation",
+            "source.report",
+            "model.respond",
+            "logic.compare_semantic_readings",
+            "revision.evaluate",
+        ):
+            raise HCLFailure(
+                "INVALID_REQUEST",
+                "admission",
+                "UNSUPPORTED_ISSUE",
+                "issue.kind",
+                "This issue is outside the implemented execution slice.",
+            )
+        if request.issue.kind == "revision.evaluate":
+            from hcl.kernel.dependencies import RevisionIssue
+
+            if (
+                type(request.issue) is not RevisionIssue
+                or not self.store.durable
+                or (
+                    request.issue.known_at is not None
+                    and (type(request.issue.known_at) is not int or request.issue.known_at < 0)
+                )
+            ):
+                raise HCLFailure(
+                    "INVALID_REQUEST",
+                    "admission",
+                    "INVALID_REVISION_ISSUE",
+                    "issue",
+                    "Revision requires a durable store and an explicitly bound optional recorded cutoff.",
+                )
         if not isinstance(request.issue.issue_id, str) or not request.issue.issue_id:
-            raise HCLFailure("INVALID_REQUEST", "admission", "INVALID_ISSUE", "issue.issue_id",
-                             "A nonempty issue ID is required.")
+            raise HCLFailure(
+                "INVALID_REQUEST",
+                "admission",
+                "INVALID_ISSUE",
+                "issue.issue_id",
+                "A nonempty issue ID is required.",
+            )
         if request.issue.source_id is not None and not isinstance(request.issue.source_id, str):
-            raise HCLFailure("INVALID_REQUEST", "admission", "INVALID_ISSUE_SOURCE", "issue.source_id",
-                             "An issue source ID must be a string.")
+            raise HCLFailure(
+                "INVALID_REQUEST",
+                "admission",
+                "INVALID_ISSUE_SOURCE",
+                "issue.source_id",
+                "An issue source ID must be a string.",
+            )
+        try:
+            for value in (
+                request.issue.issue_id,
+                request.issue.source_id,
+                *(handle.source_id for handle in request.source_handles),
+            ):
+                if value is not None:
+                    value.encode("utf-8")
+        except UnicodeEncodeError:
+            raise HCLFailure(
+                "INVALID_REQUEST",
+                "admission",
+                "INVALID_TEXT_ENCODING",
+                "source_handles/issue",
+                "Source and issue identifiers must be valid Unicode text.",
+            ) from None
         key = (request.session_id, request.request_id)
         if self._ledger is None and key in self._requests:
-            raise HCLFailure("FAILED", "admission", "REQUEST_ALREADY_BOUND", "request_id",
-                             "This request is already bound; it cannot silently execute again.")
+            raise HCLFailure(
+                "FAILED",
+                "admission",
+                "REQUEST_ALREADY_BOUND",
+                "request_id",
+                "This request is already bound; it cannot silently execute again.",
+            )
         if self._ledger is None:
             self._requests.add(key)
 
@@ -90,10 +201,13 @@ class Engine:
         if not isinstance(request, TaskRequest):
             raise TypeError("TaskRequest required")
         usage = {"provider_calls": 0, "provider_spend_usd": "0", "mock_calls": 0, "local_evaluations": 0}
-        receipt = {"schema": SCHEMA_VERSION, "engine": "unified-engine-v1",
-                   "request_id": request.request_id if type(request.request_id) is str else None,
-                   "store_durable": self.store.durable,
-                   "evidence_level": "INTEGRATED_OFFLINE_SLICE_ONLY"}
+        receipt = {
+            "schema": SCHEMA_VERSION,
+            "engine": "unified-engine-v1",
+            "request_id": request.request_id if type(request.request_id) is str else None,
+            "store_durable": self.store.durable,
+            "evidence_level": "INTEGRATED_OFFLINE_SLICE_ONLY",
+        }
         failure_receipt = dict(receipt)
         owns_current_call = False
         committed_revision = None
@@ -107,7 +221,8 @@ class Engine:
                 if replay is not None:
                     self._ledger.validate_cached_delivery(request)
                     return replay
-            snapshot = self.store.snapshot(request.session_id, self.principal, request.source_handles)
+            snapshot = (self.store.revision_snapshot(request.session_id,self.principal,request.source_handles,known_at=request.issue.known_at)
+                        if request.issue.kind=='revision.evaluate' else self.store.snapshot(request.session_id, self.principal, request.source_handles))
             if self._ledger is not None:
                 lease, replay = self._ledger.bind(request, snapshot)
                 if replay is not None:
@@ -154,6 +269,135 @@ class Engine:
                 if committed.result_ids != operation.result_refs:
                     raise HCLFailure("FAILED", "commit", "COMMIT_RESULT_MISMATCH", "result_refs",
                                      "The store did not commit the proposed computation identities.")
+                state_revision = committed_revision = committed.revision
+                unresolved = operation.issues
+                operation_ids = (operation.operation_id,)
+            elif request.issue.kind == "revision.evaluate":
+                from hashlib import sha256
+                from hcl.kernel.dependencies import QueryDelta, IndexQuery
+                from hcl.kernel.types import Delta, InferenceResult
+                from hcl.memory import codec
+                from hcl.semantics.segments import segment_snapshot
+
+                response = await self.gateway.generate(
+                    AuthorizedContext(snapshot, request.question, "revision_compile"),
+                    CallSpec(request.request_id, request.budget, lease),
+                )
+                usage.update(
+                    mock_calls=1, request_bytes=response.request_bytes, output_bytes=response.output_bytes
+                )
+                if response.resource_usage is not None:
+                    usage.update(response.resource_usage)
+                indexes, query = self._revision_compiler.compile(
+                    snapshot,
+                    segment_snapshot(snapshot, request.question),
+                    response.visible_text,
+                    request.budget,
+                )
+                # Each proposal retains ALL source inputs actually exposed in its
+                # extraction call. A span check alone cannot prove that model text
+                # did not copy another authorized source into this interpretation.
+                for index in indexes:
+                    identity = (
+                        "source-index:"
+                        + sha256(codec.dumps([index, snapshot.revision, request.request_id])).hexdigest()
+                    )
+                    indexed = InferenceResult(
+                        identity,
+                        "revision.source_index",
+                        index,
+                        (),
+                        (),
+                        (),
+                        snapshot.rule_version,
+                        "PROPOSED_SOURCE_BOUND_INDEX_ONLY",
+                    )
+                    if snapshot.historical_sources:
+                        source_queries = tuple(
+                            item for item in snapshot.query_dependencies if item.query.source_only
+                        )
+                        candidate = QueryDelta(
+                            snapshot.session_id,
+                            snapshot.principal,
+                            snapshot.revision,
+                            snapshot.access_epoch,
+                            snapshot.rule_version,
+                            {},
+                            (indexed,),
+                            source_queries,
+                        )
+                    else:
+                        candidate = Delta(
+                            snapshot.session_id,
+                            snapshot.principal,
+                            snapshot.revision,
+                            snapshot.access_epoch,
+                            snapshot.rule_version,
+                            snapshot.source_versions,
+                            (indexed,),
+                        )
+                    committed = self.store.commit(
+                        snapshot.revision, candidate.read_set, snapshot.access_epoch, candidate
+                    )
+                    committed_revision = committed.revision
+                # Leave the compilation snapshot and capture the actual current
+                # program/absence dependencies, including newly persisted IR.
+                snapshot = self.store.query_snapshot(
+                    request.session_id,
+                    self.principal,
+                    (),
+                    (IndexQuery({"kind": "program"}, history=True, known_at=request.issue.known_at),),
+                )
+                from hcl.semantics.revision import programs_from_view
+
+                queries = [snapshot.query_dependencies[0].query]
+                for program in programs_from_view(snapshot.query_views["0"]):
+                    for default in program["defaults"]:
+                        watch = IndexQuery(
+                            dict(default["query"]), history=True, known_at=request.issue.known_at
+                        )
+                        if watch not in queries:
+                            queries.append(watch)
+                if len(queries) > 64:
+                    raise HCLFailure(
+                        "BUDGET_EXHAUSTED",
+                        "revision",
+                        "ABSENCE_WATCH_BOUND",
+                        "defaults",
+                        "The bounded query-watch allowance was exceeded.",
+                    )
+                if len(queries) > 1:
+                    watched = self.store.query_snapshot(
+                        request.session_id, self.principal, (), tuple(queries)
+                    )
+                    if watched.query_dependencies[0] != snapshot.query_dependencies[0]:
+                        raise HCLFailure(
+                            "STALE_STATE",
+                            "revision",
+                            "QUERY_DEPENDENCY_CHANGED",
+                            "query_dependencies",
+                            "The program changed while binding its query watches.",
+                        )
+                    snapshot = watched
+                previous = self.store._revision_previous(snapshot, query, request.issue.known_at)
+                operation = self._revision_operator.run(
+                    snapshot, request.issue, request.budget, query, previous
+                )
+                usage.update(operation.resource_usage)
+                results = operation.candidate_delta.new_inferences
+                contract = self._assembler.build(snapshot, (request.issue,), results)
+                read_set = operation.read_set
+                committed = self.store.commit(
+                    snapshot.revision, read_set, snapshot.access_epoch, operation.candidate_delta
+                )
+                if committed.result_ids != operation.result_refs:
+                    raise HCLFailure(
+                        "FAILED",
+                        "commit",
+                        "COMMIT_RESULT_MISMATCH",
+                        "result_refs",
+                        "Committed revision results differ from their proposal.",
+                    )
                 state_revision = committed_revision = committed.revision
                 unresolved = operation.issues
                 operation_ids = (operation.operation_id,)
