@@ -19,6 +19,7 @@ SUPPORTED_GOALS = frozenset(
         "hypothesis.discover",
         "interaction.evaluate",
         "affect.evaluate",
+        "relationship.evaluate",
         "source.report",
         "model.respond",
     }
@@ -53,6 +54,7 @@ class IssuePlanner:
         "hypothesis.discover",
         "interaction.evaluate",
         "affect.evaluate",
+        "relationship.evaluate",
                 "model.respond",
             ):
                 requirements.append("compile" if goal.kind != "model.respond" else "respond")
@@ -111,7 +113,7 @@ class IssuePlanner:
         if error is not None:
             d = error.diagnostic
             if (
-                d.stage in ("semantic_compile", "revision_compile", "model_compile", "argument_compile", "discovery_compile", "interaction_compile", "affect_compile")
+                d.stage in ("semantic_compile", "revision_compile", "model_compile", "argument_compile", "discovery_compile", "interaction_compile", "affect_compile", "relationship_compile")
                 and error.status == "INVALID_REQUEST"
             ):
                 return dict(kind="REPRESENTATION_REPAIR", code=d.code, field=d.field_path)

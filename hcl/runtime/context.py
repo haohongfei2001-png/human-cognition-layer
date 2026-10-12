@@ -65,6 +65,9 @@ class ContextCompiler:
             from hcl.semantics.revision import revision_context
 
             context = revision_context(empty, question)
+        elif purpose == "relationship_compile":
+            from hcl.semantics.relationship_compiler import relationship_context
+            context = relationship_context(empty, question)
         elif purpose == "affect_compile":
             from hcl.semantics.affect_compiler import affect_context
             context = affect_context(empty, question)

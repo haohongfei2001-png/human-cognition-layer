@@ -240,6 +240,53 @@ def derived_game(game, plan, views, state_q, allowance):
     return output
 
 
+def prepare_interaction_cognition(model, extra_times=()):
+    """Pure source preparation for a single shared cognitive execution.
+
+    Interpretation is part of the actual event mechanism, not an annotation
+    that another domain may discard while retaining the same variable ID.
+    """
+    original = model["mental"]
+    augmented = deepcopy(original)
+    events = {event["id"]: event for event in original["events"]}
+    overrides = {}
+    for message in model["utterances"]:
+        for delivery in message["deliveries"]:
+            event = events[delivery["event_id"]]
+            overrides[(original["id"], event["id"])] = interpreted_event(
+                event,
+                delivery["readings"],
+                tuple(agent["id"] for agent in original["agents"]),
+            )
+    for commitment in model["commitments"]:
+        for at in relevant_times(model, commitment):
+            for field in ("condition", "outcome"):
+                augmented["queries"].append(
+                    dict(
+                        id=query_id(commitment, field, at),
+                        at=at,
+                        formula=commitment[field],
+                        segment_ids=commitment["segment_ids"],
+                    )
+                )
+    times = tuple(
+        sorted(
+            {
+                *extra_times,
+                *(game["at"] for game in model["games"]),
+                *(act["at"] for act in model["acts"] if act["at"] <= model["through"]),
+                *(
+                    events[delivery["event_id"]]["at"]
+                    for message in model["utterances"]
+                    for delivery in message["deliveries"]
+                    if events[delivery["event_id"]]["at"] <= model["through"]
+                ),
+            }
+        )
+    )
+    return augmented, overrides, times
+
+
 class InteractionModelOperator:
     def run(self, snapshot, issue, allowance, program):
         try:
@@ -261,63 +308,28 @@ class InteractionModelOperator:
                 "The conditional interaction is outside its executable finite model.",
             ) from None
 
-    def _run(self, snapshot, issue, allowance, program):
+    def _run(self, snapshot, issue, allowance, program, *, shared_cognition=None):
         used, outputs, issues = 0, [], []
         limit = allowance.max_local_evaluations
         for model in program["models"]:
             original = model["mental"]
-            augmented = deepcopy(original)
-            events = {e["id"]: e for e in original["events"]}
-            overrides = {}
-            for message in model["utterances"]:
-                for delivery in message["deliveries"]:
-                    event = events[delivery["event_id"]]
-                    overrides[(original["id"], event["id"])] = interpreted_event(
-                        event,
-                        delivery["readings"],
-                        tuple(a["id"] for a in original["agents"]),
-                    )
-            for c in model["commitments"]:
-                for at in relevant_times(model, c):
-                    for field in ("condition", "outcome"):
-                        augmented["queries"].append(
-                            dict(
-                                id=query_id(c, field, at),
-                                at=at,
-                                formula=c[field],
-                                segment_ids=c["segment_ids"],
-                            )
-                        )
-            trace = {}
-            operation = MentalSceneOperator()._run(
-                snapshot,
-                issue,
-                replace(allowance, max_local_evaluations=max(0, limit - used)),
-                dict(models=[augmented]),
-                event_overrides=overrides,
-                trace=trace,
-                trace_times={
-                    original["id"]: tuple(
-                        sorted(
-                            {
-                                *(g["at"] for g in model["games"]),
-                                *(
-                                    a["at"]
-                                    for a in model["acts"]
-                                    if a["at"] <= model["through"]
-                                ),
-                                *(
-                                    events[d["event_id"]]["at"]
-                                    for u in model["utterances"]
-                                    for d in u["deliveries"]
-                                    if events[d["event_id"]]["at"] <= model["through"]
-                                ),
-                            }
-                        )
-                    )
-                },
-            )
-            used += operation.resource_usage["local_evaluations"]
+            if shared_cognition is None:
+                augmented, overrides, times = prepare_interaction_cognition(model)
+                trace = {}
+                operation = MentalSceneOperator()._run(
+                    snapshot,
+                    issue,
+                    replace(allowance, max_local_evaluations=max(0, limit - used)),
+                    dict(models=[augmented]),
+                    event_overrides=overrides,
+                    trace=trace,
+                    trace_times={original["id"]: times},
+                )
+                used += operation.resource_usage["local_evaluations"]
+            else:
+                operation, trace = shared_cognition[
+                    (original["source_id"], original["id"])
+                ].bind(snapshot, original)
             issues.extend(operation.issues)
             actual = operation.candidate_delta.new_inferences[0]
             mental = thaw(actual.values)["models"][0]

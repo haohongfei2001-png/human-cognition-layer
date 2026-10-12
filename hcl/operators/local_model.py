@@ -94,7 +94,7 @@ class LocalModelOperator:
                 snapshot, segments, ast["candidate"], allowance
             )
             result = ReadingLogicOperator(self.semantic_profile).run(snapshot, issue, allowance, forest)
-        elif model.dialect in ("mental-scene-1", "argument-model-1", "discovery-model-1", "interaction-model-1", "affect-model-1"):
+        elif model.dialect in ("mental-scene-1", "argument-model-1", "discovery-model-1", "interaction-model-1", "affect-model-1", "relationship-model-1"):
             from hcl.semantics.model_compiler import LocalModelCompiler
             from hcl.operators.mental_scene import MentalSceneOperator
             from hcl.runtime.context import ContextChunk
@@ -103,7 +103,7 @@ class LocalModelOperator:
                 raise ValueError("source-bound mental model fields required")
             segments = tuple(SourceSegment(**row) for row in ast["segments"])
             sources = tuple(row for row in segments if row.kind == "SOURCE")
-            purpose = {"mental-scene-1":"mental_compile", "argument-model-1":"argument_compile", "discovery-model-1":"discovery_compile", "interaction-model-1":"interaction_compile", "affect-model-1":"affect_compile"}[model.dialect]
+            purpose = {"mental-scene-1":"mental_compile", "argument-model-1":"argument_compile", "discovery-model-1":"discovery_compile", "interaction-model-1":"interaction_compile", "affect-model-1":"affect_compile", "relationship-model-1":"relationship_compile"}[model.dialect]
             self.context.serialize(snapshot, ast["question"], ContextChunk(purpose, sources, 0, 1))
             if tuple(row for row in segments if row.kind == "QUESTION") != question_segments(
                 ast["question"]
@@ -117,10 +117,12 @@ class LocalModelOperator:
             from hcl.operators.interaction_model import InteractionModelOperator
             from hcl.semantics.affect_compiler import AffectCompiler
             from hcl.operators.affect_model import AffectModelOperator
+            from hcl.semantics.relationship_compiler import RelationshipCompiler
+            from hcl.operators.relationship_model import RelationshipModelOperator
             compiler = {"mental-scene-1":LocalModelCompiler, "argument-model-1":ArgumentCompiler,
-                        "discovery-model-1":DiscoveryCompiler, "interaction-model-1":InteractionCompiler, "affect-model-1":AffectCompiler}[model.dialect]()
+                        "discovery-model-1":DiscoveryCompiler, "interaction-model-1":InteractionCompiler, "affect-model-1":AffectCompiler, "relationship-model-1":RelationshipCompiler}[model.dialect]()
             operator = {"mental-scene-1":MentalSceneOperator, "argument-model-1":ArgumentModelOperator,
-                        "discovery-model-1":DiscoveryModelOperator, "interaction-model-1":InteractionModelOperator, "affect-model-1":AffectModelOperator}[model.dialect]()
+                        "discovery-model-1":DiscoveryModelOperator, "interaction-model-1":InteractionModelOperator, "affect-model-1":AffectModelOperator, "relationship-model-1":RelationshipModelOperator}[model.dialect]()
             program = compiler.compile(snapshot, segments, ast["candidate"], allowance)
             result = (operator.run(snapshot, issue, allowance, program, segments) if model.dialect == "discovery-model-1"
                       else operator.run(snapshot, issue, allowance, program))
@@ -170,11 +172,29 @@ class LocalModelOperator:
             fit_residuals=list(model.fit_residuals),
             unmodeled_observations=list(model.unmodeled_observations),
         )
+        # Content identity alone cannot identify a commit after an authorization
+        # or indexed-query dependency change. Bind only the top-level effect to
+        # its immutable Delta context; nested pure certificates remain reusable.
+        # Unrelated base-revision changes intentionally do not alter this identity.
+        from hcl.kernel.dependencies import QueryDelta, pack_dependencies
+
+        delta = result.candidate_delta
+        commit_context = dict(
+            schema="local-model-commit-identity-1",
+            session_id=delta.session_id,
+            principal=delta.principal,
+            access_epoch=delta.access_epoch,
+            rule_version=delta.rule_version,
+            dependencies=pack_dependencies(
+                delta.read_set,
+                delta.query_dependencies if type(delta) is QueryDelta else (),
+            ),
+        )
         inferences = tuple(
             replace(
                 value,
                 result_id="model-result:"
-                + sha256(codec.dumps([value.result_id, qualifications])).hexdigest(),
+                + sha256(codec.dumps([value.result_id, qualifications, commit_context])).hexdigest(),
                 values=dict(value.values, local_model=qualifications),
                 assumption_environments=tuple(
                     (
