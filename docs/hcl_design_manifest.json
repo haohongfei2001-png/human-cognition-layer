@@ -3268,7 +3268,23 @@
         "T22"
       ],
       "exit": "迟到证据更新相关结论而不污染早先人物视角；独立支持和无关人物保持；缺证结论遇新相关证据重算。",
-      "not_required": "穷举所有可能世界、无限高阶信念或全域统计效果。"
+      "not_required": "穷举所有可能世界、无限高阶信念或全域统计效果。",
+      "status": "INTEGRATED_OFFLINE",
+      "evidence": {
+        "runtime_entry": "HCL same engine: typed RevisionIssue / revision.evaluate on explicitly upgraded durable store",
+        "real_operator": "RevisionCompiler → RevisionOperator → actual rooted TruthKernel + TemporalForest + retractable IdentityGraph + checked Bridge",
+        "checks": "tests/test_unified_s22*.py; unchanged current legacy behavior and fixed historical identity partitions",
+        "witness": "scripts/witness_unified_s22.py (exact head/runtime hashes, actual late evidence/default/identity/time and historical replay)",
+        "scope": "Bounded offline portions of T02/T03/T21/T22 only. Supplied source interpretations are unverified model-port fixtures.",
+        "stage_complete": false,
+        "limits": [
+          "Open semantic extraction, source alignment, candidate completeness and private belief truth remain unestablished.",
+          "Nested viewpoint projection and temporal nogood-world branching explicitly remain unresolved; no world enumeration claim.",
+          "Whole pipeline is bounded but not fully incremental; only final rooted truth revision and semantic retention are demonstrated.",
+          "Schema side-copy preserves old event/object/task/call meanings; terminal fencing changes only deployment/control metadata and never reuses old grants.",
+          "No provider, new credentials, paid service, sealed material, live-functional or effect-confirmed evidence."
+        ]
+      }
     },
     {
       "id": "S2.3",
@@ -3379,18 +3395,18 @@
   "current_execution": {
     "started_at_utc": "2026-10-11T20:31:00Z",
     "authority": "Owner explicitly authorized continued implementation, tests, PRs and verified merges under the approved S1–S7 plan.",
-    "base_main": "de92d28279d8cb5b3e0ba407a12af0a9cde1fb7d",
+    "base_main": "9c739f3d65ac3d49277e6cb4001d904304e8dd9f",
     "current_stage": "S2",
-    "delivered_slice": "S2.1",
+    "delivered_slice": "S2.2",
     "readiness": "INTEGRATED_OFFLINE",
     "stage_complete": false,
-    "next_slice": "S2.2",
+    "next_slice": "S2.3",
     "provider_calls": 0,
     "provider_spend_usd": "0",
     "sealed_content_reads": 0,
-    "scope": "原文片段与候选语义IR接入同一engine，执行真实条件FOL、多读法和反模型回译；抽取端口仍是明确注入fixture。",
-    "remaining": "继续S2.2时间、显式Bridge、身份与撤回依赖；完整S1/S2实模功能、S3–S7及T01–T32研究目标全部保留。",
+    "scope": "持久化有界支持修订、相对时间、显式身份/Bridge与QueryDependency/AbsenceWatch接入同一engine；迟到与撤回证据实际重算，保留旧视角和独立支持。",
+    "remaining": "继续S2.3预算化动态执行、局部恢复与S3/S4共同接口冻结；完整S1/S2实模功能、S3–S7及T01–T32研究目标全部保留。",
     "historical_boundary": "旧A–H/G-HC/G-ARCH、实验和closed grants保持原证据等级，不自动继承。",
-    "validation": "本切片只证明离线候选到真实计算和回答消费，不证明开放自然语言抽取、语义对齐、读法完整性或S1/S2阶段完成。"
+    "validation": "本切片证明注入候选下的真实离线联合修订闭环，不证明开放语义抽取、完整性、私人信念真值或S1/S2阶段完成。"
   }
 }

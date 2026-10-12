@@ -3,13 +3,13 @@
 
 完整规格：[HCL_SYSTEM_REDESIGN_SPEC.md](docs/HCL_SYSTEM_REDESIGN_SPEC.md)；唯一结构化计划：[hcl_design_manifest.json](docs/hcl_design_manifest.json)；执行交接：[HCL_CODEX_HANDOFF.md](docs/HCL_CODEX_HANDOFF.md)。
 
-实施基线main：`de92d28279d8cb5b3e0ba407a12af0a9cde1fb7d`。
+实施基线main：`9c739f3d65ac3d49277e6cb4001d904304e8dd9f`。
 
-当前切片：**S2.1 / INTEGRATED_OFFLINE**。原文片段与候选语义IR接入同一engine，执行真实条件FOL、多读法和反模型回译；抽取端口仍是明确注入fixture。
+当前切片：**S2.2 / INTEGRATED_OFFLINE**。持久化有界支持修订、相对时间、显式身份/Bridge与QueryDependency/AbsenceWatch接入同一engine；迟到与撤回证据实际重算，保留旧视角和独立支持。
 
-本切片只证明离线候选到真实计算和回答消费，不证明开放自然语言抽取、语义对齐、读法完整性或S1/S2阶段完成。
+本切片证明注入候选下的真实离线联合修订闭环，不证明开放语义抽取、完整性、私人信念真值或S1/S2阶段完成。
 
-**NEXT_READY：S2.2**。继续S2.2时间、显式Bridge、身份与撤回依赖；完整S1/S2实模功能、S3–S7及T01–T32研究目标全部保留。
+**NEXT_READY：S2.3**。继续S2.3预算化动态执行、局部恢复与S3/S4共同接口冻结；完整S1/S2实模功能、S3–S7及T01–T32研究目标全部保留。
 
 S1尚未完整完成。真实本地算子与模拟端口的离线接通不能证明真实模型语义能力。每次运行的精确commit和代码文件hash由对应scripts/witness_unified_s*.py生成；CI在准确PR head上执行，不将旧回归数量作为新能力完成率。
 

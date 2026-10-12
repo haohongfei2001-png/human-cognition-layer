@@ -42,7 +42,7 @@ def corrupt():
 class SQLiteStateStore:
     durable = True
 
-    def __init__(self, path):
+    def __init__(self, path, *, revision=False):
         self.path = Path(path).resolve()
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.object_root = self.path.with_name(self.path.name + ".objects")
@@ -54,18 +54,33 @@ class SQLiteStateStore:
         self._db.execute("PRAGMA journal_mode=WAL")
         self._db.execute("PRAGMA synchronous=FULL")
         version = self._db.execute("PRAGMA user_version").fetchone()[0]
-        if version not in (0, SCHEMA, 2):
+        if version not in (0, SCHEMA, 2, 3, 4) or (revision and version in (1, 2)):
             self._db.close()
             raise ValueError("unsupported store schema; migration or rollback is required")
-        self._schema = version or SCHEMA
+        self._schema = version or (3 if revision else SCHEMA)
         self._namespace_generation = None
         self._version_bundle = None
-        if version == 2:
+        self._revision_control = None
+        if version in (3, 4):
+            from hcl.memory.migrations.revision_control import read
+            from hcl.memory.migrations.control import version_bundle
+
+            try:
+                self._revision_control = read(self._db)
+                if self._revision_control["target_path"] != str(self.path):
+                    raise ValueError("revision namespace is not at its published path")
+                if json.loads(self._revision_control["versions"]) != version_bundle(schema=version):
+                    raise ValueError("revision namespace version mismatch")
+                self._validate_layout()
+            except BaseException:
+                self._db.close()
+                raise
+        if version in (2, 4):
             from hcl.memory.migrations.control import read_control, version_bundle
             try:
                 control = read_control(self._db)
                 self._namespace_generation = control["generation"]
-                self._version_bundle = version_bundle()
+                self._version_bundle = version_bundle(schema=version)
                 if json.loads(control["versions"]) != self._version_bundle:
                     raise ValueError("controlled namespace version mismatch")
             except BaseException:
@@ -73,6 +88,8 @@ class SQLiteStateStore:
                 raise
             # A published controlled namespace must already have its schema.
             # Never repair a partial import or downgrade it to schema 1.
+            return
+        if version == 3:
             return
         self._db.executescript("""
         CREATE TABLE IF NOT EXISTS sessions(session_id TEXT PRIMARY KEY, tenant TEXT NOT NULL,
@@ -94,7 +111,31 @@ class SQLiteStateStore:
           revision INTEGER NOT NULL, kind TEXT NOT NULL, payload TEXT NOT NULL,
           previous_hash TEXT NOT NULL, event_hash TEXT NOT NULL);
         """)
-        self._db.execute(f"PRAGMA user_version={SCHEMA}")
+        if self._schema == 3:
+            from hcl.memory.migrations.revision_control import install, read
+
+            install(
+                self._db,
+                schema=3,
+                upgrade_id=uuid4().hex,
+                origin_schema=0,
+                checkpoint="",
+                source_path=str(self.path),
+                target_path=str(self.path),
+            )
+            self._revision_control = read(self._db)
+        self._db.execute(f"PRAGMA user_version={self._schema}")
+
+    def _validate_layout(self):
+        required = set(TABLE_KEYS) | {"events", "revision_control"}
+        tables = {row[0] for row in self._db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        if not required <= tables:
+            raise corrupt()
+        for table in TABLE_KEYS:
+            if not set(TABLE_KEYS[table]) <= {
+                row[1] for row in self._db.execute(f"PRAGMA table_info({table})")
+            }:
+                raise corrupt()
 
     def close(self):
         with self._lock:
@@ -110,6 +151,9 @@ class SQLiteStateStore:
                 self._db.execute("BEGIN IMMEDIATE" if write else "BEGIN")
                 if self._db.execute("PRAGMA user_version").fetchone()[0] != self._schema:
                     raise corrupt()
+                if self._revision_control is not None:
+                    from hcl.memory.migrations.revision_control import validate
+                    validate(self._db, self._revision_control)
                 if self._namespace_generation is not None:
                     from hcl.memory.migrations.control import validate_execution
                     validate_execution(self._db, self._namespace_generation, self._version_bundle)
@@ -264,6 +308,345 @@ class SQLiteStateStore:
             return Snapshot(session_id, principal, session["revision"], session["epoch"], session["rule"],
                             {key: source.handle.version for key, source in views.items()}, {}, views)
 
+    def _query_projection(self, db, session, principal, query):
+        from hcl.kernel.dependencies import INDEX_KIND, query_projection
+
+        if self._schema not in (3, 4):
+            raise failure(
+                "INVALID_REQUEST",
+                "REVISION_MIGRATION_REQUIRED",
+                "store",
+                "Revision execution requires the explicit upgraded store.",
+            )
+        visible = {
+            row["source_id"]: row["version"]
+            for row in db.execute("SELECT * FROM sources WHERE session_id=?", (session["session_id"],))
+            if principal.subject_id in json.loads(row["readers"])
+        }
+        source_history = self._source_history(db, session, principal) if query.history else ()
+        selected_versions = dict(visible)
+        if query.history:
+            selected_versions = {}
+            for item in source_history:
+                if query.known_at is None or item["recorded_at"] <= query.known_at:
+                    selected_versions[item["source_id"]] = max(
+                        item["source_version"], selected_versions.get(item["source_id"], 0)
+                    )
+        indexed, index_history = {}, []
+        rows = (
+            ()
+            if query.source_only
+            else db.execute(
+                "SELECT * FROM inferences WHERE session_id=? ORDER BY commit_revision DESC,result_id DESC",
+                (session["session_id"],),
+            )
+        )
+        for count, row in enumerate(rows):
+            if count >= 10000:
+                raise failure(
+                    "BUDGET_EXHAUSTED",
+                    "INDEX_SCAN_BOUND",
+                    "index",
+                    "The candidate index scan bound was reached.",
+                )
+            # Source-bearing objects are read only after the exact positive map
+            # proves current principal authorization, before inspecting kind.
+            try:
+                from hcl.kernel.dependencies import unpack_dependencies
+
+                positive, queries = unpack_dependencies(json.loads(row["read_set"]))
+            except (ValueError, TypeError):
+                raise corrupt() from None
+            if not all(selected_versions.get(key) == value for key, value in positive.items()):
+                continue
+            historical_binding = None
+            if queries:
+                if positive or len(queries) != 1 or not queries[0].query.source_only:
+                    continue
+                query_scope = queries[0].query.source_scope
+                if query_scope is None or not query_scope or not set(query_scope) <= set(visible):
+                    continue
+                # This branch reads source-event metadata only, never recursively
+                # scans index rows to validate a historical source-only selector.
+                historical = [
+                    item
+                    for item in self._source_history(db, session, principal)
+                    if item["source_id"] in query_scope and item["recorded_at"] <= queries[0].query.known_at
+                ]
+                if not historical:
+                    raise corrupt()
+                historical_binding = {}
+                for item in historical:
+                    key = item["source_id"]
+                    if (
+                        key not in historical_binding
+                        or item["source_version"] > historical_binding[key]["source_version"]
+                    ):
+                        historical_binding[key] = item
+                if any(
+                    selected_versions.get(key) != value["source_version"]
+                    for key, value in historical_binding.items()
+                ):
+                    continue
+                from hcl.kernel.dependencies import query_projection
+
+                token, _ = query_projection(queries[0].query, visible, {}, source_history=historical)
+                if token != queries[0]:
+                    raise corrupt()
+            result = self._get_object(row["object_hash"])
+            if type(result) is not InferenceResult or result.kind != INDEX_KIND:
+                continue
+            from hcl.kernel.dependencies import validate_source_index
+
+            values = validate_source_index(result.values)
+            source_id = values["source_id"]
+            if historical_binding is None:
+                if positive.get(source_id) != values["source_version"]:
+                    raise corrupt()
+            elif (
+                source_id not in historical_binding
+                or values["source_version"] != historical_binding[source_id]["source_version"]
+            ):
+                raise corrupt()
+            index_history.append((values, row["commit_revision"]))
+            if source_id not in indexed and values["source_version"] == visible[source_id]:
+                indexed[source_id] = values
+        try:
+            source_history = self._source_history(db, session, principal) if query.history else ()
+            return query_projection(
+                query, visible, indexed, index_history=index_history, source_history=source_history
+            )
+        except (ValueError, TypeError):
+            raise corrupt() from None
+
+    def _source_history(self, db, session, principal):
+        visible = {
+            row["source_id"]: dict(row)
+            for row in db.execute("SELECT * FROM sources WHERE session_id=?", (session["session_id"],))
+            if principal.subject_id in json.loads(row["readers"])
+        }
+        previous, first, latest = "", {}, {}
+        for number, event in enumerate(
+            db.execute("SELECT * FROM events WHERE session_id=? ORDER BY seq", (session["session_id"],))
+        ):
+            if number >= 100000:
+                raise failure(
+                    "BUDGET_EXHAUSTED",
+                    "SOURCE_HISTORY_BOUND",
+                    "history",
+                    "The source history scan bound was reached.",
+                )
+            digest = sha256(
+                codec.canonical(
+                    [
+                        session["session_id"],
+                        event["revision"],
+                        event["kind"],
+                        event["payload"],
+                        event["previous_hash"],
+                    ]
+                ).encode()
+            ).hexdigest()
+            if digest != event["event_hash"] or previous != event["previous_hash"]:
+                raise corrupt()
+            previous = digest
+            if event["kind"] != "sources":
+                continue
+            row = json.loads(event["payload"])
+            source_id = row["source_id"]
+            if source_id not in visible:
+                continue
+            key = (source_id, row["version"])
+            if key in first:
+                if row["object_hash"] != first[key]["object_hash"]:
+                    raise corrupt()
+            else:
+                if source_id in latest and row["version"] != latest[source_id]["version"] + 1:
+                    raise corrupt()
+                first[key] = {
+                    "source_id": source_id,
+                    "source_version": row["version"],
+                    "recorded_at": event["revision"],
+                    "object_hash": row["object_hash"],
+                    "event_hash": event["event_hash"],
+                }
+            latest[source_id] = row
+        if latest != visible:
+            raise corrupt()
+        return tuple(first.values())
+
+    def _historical_source(self, db, session, principal, binding):
+        source = self._source(db, session, principal, binding["source_id"])  # always CURRENT ACL
+        if binding not in self._source_history(db, session, principal):
+            raise corrupt()
+        content = self._get_object(binding["object_hash"])
+        return SourceDocument(
+            SourceHandle(binding["source_id"], binding["source_version"]),
+            content["text"],
+            source.access_policy,
+            content["formal_problem"],
+        )
+
+    def historical_snapshot(self, session_id, principal, source_handles, *, known_at):
+        from hcl.kernel.dependencies import IndexQuery, INDEX_VERSION, QuerySnapshot
+
+        if type(known_at) is not int or known_at < 0:
+            raise ValueError("explicit recorded cutoff required")
+        handles = tuple(source_handles)
+        query = IndexQuery({}, tuple(handle.source_id for handle in handles), True, known_at, True)
+        with self._transaction() as db:
+            session = self._session(db, session_id, principal)
+            if known_at > session["revision"]:
+                raise failure(
+                    "INVALID_REQUEST",
+                    "FUTURE_RECORDED_CUTOFF",
+                    "issue.known_at",
+                    "A future ledger cutoff cannot select historical evidence.",
+                    "admission",
+                )
+            dependency, view = self._query_projection(db, session, principal, query)
+            selected = {row["source_id"]: row for row in view["source_history"]}
+            views = {}
+            for handle in handles:
+                self._source(db, session, principal, handle.source_id)
+                if (
+                    handle.source_id not in selected
+                    or selected[handle.source_id]["source_version"] != handle.version
+                ):
+                    raise failure(
+                        "STALE_STATE",
+                        "HISTORICAL_SELECTION_CHANGED",
+                        "source_handles",
+                        "The exact source is not selected at this cutoff.",
+                    )
+                views[handle.source_id] = self._historical_source(
+                    db, session, principal, selected[handle.source_id]
+                )
+            return QuerySnapshot(
+                session_id,
+                principal,
+                session["revision"],
+                session["epoch"],
+                session["rule"],
+                {key: source.handle.version for key, source in views.items()},
+                {"revision": INDEX_VERSION},
+                views,
+                (dependency,),
+                {"0": view},
+                selected,
+            )
+
+    def query_snapshot(self, session_id, principal, source_handles, queries):
+        from hcl.kernel.dependencies import INDEX_VERSION, QuerySnapshot
+
+        queries = tuple(queries)
+        if not 1 <= len(queries) <= 64:
+            raise ValueError("bounded nonempty query set required")
+        # Build both positive content and absence/query coverage in one WAL view.
+        with self._transaction() as db:
+            session = self._session(db, session_id, principal)
+            views = {}
+            for handle in source_handles:
+                if type(handle) is not SourceHandle:
+                    raise ValueError("typed source handles required")
+                if handle.source_id in views:
+                    raise failure(
+                        "INVALID_REQUEST",
+                        "DUPLICATE_SOURCE",
+                        "source_handles",
+                        "A source was requested more than once.",
+                        "admission",
+                    )
+                source = self._source(db, session, principal, handle.source_id)
+                if source.handle != handle:
+                    raise failure(
+                        "STALE_STATE", "STALE_SOURCE", "source_handles", "A source version changed."
+                    )
+                views[handle.source_id] = source
+            dependencies, query_views = [], {}
+            for number, query in enumerate(queries):
+                dependency, projection = self._query_projection(db, session, principal, query)
+                dependencies.append(dependency)
+                query_views[str(number)] = projection
+            return QuerySnapshot(
+                session_id,
+                principal,
+                session["revision"],
+                session["epoch"],
+                session["rule"],
+                {key: source.handle.version for key, source in views.items()},
+                {"revision": INDEX_VERSION},
+                views,
+                tuple(dependencies),
+                query_views,
+            )
+
+    def revision_snapshot(self, session_id, principal, source_handles, *, known_at=None):
+        from hcl.kernel.dependencies import IndexQuery, QuerySnapshot
+
+        query = IndexQuery({"kind": "program"}, history=True, known_at=known_at)
+        if known_at is None:
+            return self.query_snapshot(session_id, principal, source_handles, (query,))
+        historical = self.historical_snapshot(session_id, principal, source_handles, known_at=known_at)
+        current = self.query_snapshot(session_id, principal, (), (query,))
+        snapshot = QuerySnapshot(
+            session_id,
+            principal,
+            current.revision,
+            current.access_epoch,
+            current.rule_version,
+            historical.source_versions,
+            current.index_versions,
+            historical.immutable_views,
+            current.query_dependencies + historical.query_dependencies,
+            {"0": current.query_views["0"], "1": historical.query_views["0"]},
+            historical.historical_sources,
+        )
+        self.validate_snapshot(snapshot)
+        return snapshot
+
+    def _revision_previous(self, snapshot, query, known_at):
+        from hcl.operators.revision import RESULT_KIND, VERSION
+
+        with self._transaction() as db:
+            session = self._validate_snapshot(db, snapshot)
+            for number, row in enumerate(
+                db.execute(
+                    "SELECT * FROM inferences WHERE session_id=? ORDER BY commit_revision DESC,result_id DESC",
+                    (snapshot.session_id,),
+                )
+            ):
+                if number >= 10000:
+                    raise failure(
+                        "BUDGET_EXHAUSTED",
+                        "REVISION_HISTORY_BOUND",
+                        "history",
+                        "The revision result scan bound was reached.",
+                    )
+                result = self._get_object(row["object_hash"])
+                if type(result) is not InferenceResult or result.kind != RESULT_KIND:
+                    continue
+                values = result.values
+                if (
+                    values.get("operator_version") != VERSION
+                    or values.get("query") != query
+                    or values.get("known_at") != known_at
+                    or values.get("principal")
+                    != {"tenant": snapshot.principal.tenant_id, "subject": snapshot.principal.subject_id}
+                ):
+                    continue
+                try:
+                    for binding in values["source_bindings"]:
+                        self._source(db, session, snapshot.principal, binding["source_id"])
+                except HCLFailure as error:
+                    if error.status == "DENIED":
+                        continue
+                    raise
+                # Internal recomputation only: stale content is never a delivery
+                # candidate and cannot bypass a fresh final dependency check.
+                return result
+        return None
+
     def current_handles(self, session_id, principal, source_ids):
         """Authorized current identities for the bounded compatibility adapter."""
         with self._transaction() as db:
@@ -271,7 +654,13 @@ class SQLiteStateStore:
             return tuple(self._source(db, session, principal, identifier(key)).handle for key in source_ids)
 
     def _validate_dependencies(self, db, session, principal, read_set, epoch, rule):
-        version_map(read_set)
+        from hcl.kernel.dependencies import unpack_dependencies
+        try:
+            read_set, queries = unpack_dependencies(read_set)
+        except (ValueError, TypeError):
+            raise corrupt() from None
+        if queries and self._schema not in (3, 4):
+            raise corrupt()
         if type(epoch) is not int or epoch != session["epoch"]:
             raise failure("DENIED", "ACCESS_EPOCH_CHANGED", "access_epoch", "Access changed; the prior snapshot cannot be used.", "access")
         if rule != session["rule"]:
@@ -281,11 +670,73 @@ class SQLiteStateStore:
             if source.handle.version != version:
                 raise failure("STALE_STATE", "READ_SET_CHANGED", "read_set", "An input read by the operation changed.")
 
+        for query in queries:
+            current, _ = self._query_projection(db, session, principal, query.query)
+            if current != query:
+                raise failure(
+                    "STALE_STATE",
+                    "QUERY_DEPENDENCY_CHANGED",
+                    "query_dependencies",
+                    "An indexed query or its coverage changed.",
+                )
+
+    def snapshot_dependencies(self, snapshot, read_set=None):
+        from hcl.kernel.dependencies import QuerySnapshot, pack_dependencies
+
+        positive = snapshot.source_versions if read_set is None else read_set
+        if type(snapshot) is QuerySnapshot:
+            positive = {
+                key: value for key, value in positive.items() if key not in snapshot.historical_sources
+            }
+        return pack_dependencies(
+            positive, snapshot.query_dependencies if type(snapshot) is QuerySnapshot else ()
+        )
+
     def _validate_snapshot(self, db, snapshot, read_set=None):
+        from hcl.kernel.dependencies import QuerySnapshot, INDEX_VERSION
         session = self._session(db, snapshot.session_id, snapshot.principal)
+        # Revocation is an access failure before any query comparison, including
+        # queries whose result disappears precisely because ACL filtering changed.
+        self._validate_dependencies(
+            db, session, snapshot.principal, {}, snapshot.access_epoch, snapshot.rule_version
+        )
+        indexed = type(snapshot) is QuerySnapshot
+        if indexed:
+            if self._schema not in (3, 4) or dict(snapshot.index_versions) != {"revision": INDEX_VERSION}:
+                raise corrupt()
+            expected_views = {}
+            for number, dependency in enumerate(snapshot.query_dependencies):
+                current, view = self._query_projection(db, session, snapshot.principal, dependency.query)
+                if current != dependency:
+                    raise failure(
+                        "STALE_STATE",
+                        "QUERY_DEPENDENCY_CHANGED",
+                        "query_dependencies",
+                        "An indexed query or its coverage changed.",
+                    )
+                expected_views[str(number)] = view
+            if snapshot.query_views != expected_views:
+                raise corrupt()
+            historical = {
+                row["source_id"]: row
+                for number, dependency in enumerate(snapshot.query_dependencies)
+                if dependency.query.source_only
+                for row in expected_views[str(number)]["source_history"]
+            }
+            if snapshot.historical_sources != historical:
+                raise corrupt()
+            if not set(historical) <= set(snapshot.source_versions):
+                raise corrupt()
+            for key, binding in historical.items():
+                if snapshot.source_versions[key] != binding["source_version"] or snapshot.immutable_views[
+                    key
+                ] != self._historical_source(db, session, snapshot.principal, binding):
+                    raise corrupt()
         dependencies = snapshot.source_versions if read_set is None else version_map(read_set)
+        if indexed:
+            dependencies = {key:value for key,value in dependencies.items() if key not in snapshot.historical_sources}
         if (type(snapshot.revision) is not int or snapshot.revision < 0 or snapshot.revision > session["revision"]
-                or snapshot.index_versions or set(snapshot.immutable_views) != set(snapshot.source_versions)
+                or (snapshot.index_versions and not indexed) or set(snapshot.immutable_views) != set(snapshot.source_versions)
                 or not set(dependencies) <= set(snapshot.source_versions)):
             raise failure("DENIED", "SNAPSHOT_CONTENT_MISMATCH", "snapshot", "The snapshot contract is invalid.", "access")
         self._validate_dependencies(db, session, snapshot.principal, dependencies, snapshot.access_epoch, snapshot.rule_version)
@@ -300,16 +751,49 @@ class SQLiteStateStore:
             self._validate_snapshot(db, snapshot, read_set)
 
     def commit(self, expected_revision, read_set, access_epoch, delta):
+        from hcl.kernel.dependencies import QueryDelta, INDEX_KIND, validate_source_index, pack_dependencies
         check_commit_contract(expected_revision, read_set, access_epoch, delta)
+        dependencies = pack_dependencies(read_set, delta.query_dependencies if type(delta) is QueryDelta else ())
         with self._transaction(True) as db:
             session = self._session(db, delta.session_id, delta.principal)
-            self._validate_dependencies(db, session, delta.principal, read_set, access_epoch, delta.rule_version)
+            self._validate_dependencies(db, session, delta.principal, dependencies, access_epoch, delta.rule_version)
             if expected_revision > session["revision"]:
                 raise failure("STALE_STATE", "FUTURE_REVISION", "base_revision", "A future base revision cannot commit.")
             for result in delta.new_inferences:
                 if type(result) is not InferenceResult or result.rule_version != delta.rule_version:
                     raise failure("FAILED", "INVALID_INFERENCE", "new_inferences", "Inference type and rules must match the delta.")
                 identifier(result.result_id)
+                if result.kind == INDEX_KIND:
+                    if self._schema not in (3, 4):
+                        raise failure(
+                            "INVALID_REQUEST",
+                            "REVISION_MIGRATION_REQUIRED",
+                            "store",
+                            "Revision execution requires the explicit upgraded store.",
+                        )
+                    try:
+                        index = validate_source_index(result.values)
+                    except (ValueError, TypeError):
+                        raise corrupt() from None
+                    if read_set.get(index["source_id"]) != index["source_version"]:
+                        # Only the explicit historical source selector can bind
+                        # a non-current source index; ordinary positives stay exact.
+                        if type(delta) is not QueryDelta or read_set:
+                            raise corrupt()
+                        historical = []
+                        for dependency in delta.query_dependencies:
+                            if not dependency.query.source_only:
+                                raise corrupt()
+                            _, projection = self._query_projection(
+                                db, session, delta.principal, dependency.query
+                            )
+                            historical.extend(projection["source_history"])
+                        if not any(
+                            (item["source_id"], item["source_version"])
+                            == (index["source_id"], index["source_version"])
+                            for item in historical
+                        ):
+                            raise corrupt()
             ids = [result.result_id for result in delta.new_inferences]
             if (len(ids) != len(set(ids)) or any(db.execute("SELECT 1 FROM inferences WHERE session_id=? AND result_id=?",
                 (delta.session_id, key)).fetchone() for key in ids)):
@@ -320,7 +804,7 @@ class SQLiteStateStore:
                 session["revision"] += 1
                 for result in delta.new_inferences:
                     self._record(db, "inferences", dict(session_id=delta.session_id, result_id=result.result_id,
-                        object_hash=self._put_object(result), read_set=codec.canonical(dict(read_set)), epoch=access_epoch,
+                        object_hash=self._put_object(result), read_set=codec.canonical(dependencies), epoch=access_epoch,
                         base_revision=expected_revision, commit_revision=session["revision"]), session["revision"])
                 self._record(db, "sessions", session, session["revision"])
             return CommitResult(session["revision"], tuple(ids))

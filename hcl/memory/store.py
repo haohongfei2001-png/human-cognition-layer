@@ -36,10 +36,10 @@ class StateStore:
     durable = False
 
     @staticmethod
-    def sqlite(path):
+    def sqlite(path, *, revision=False):
         """Open the durable backend; the default constructor stays a test fixture."""
         from hcl.memory.sqlite_store import SQLiteStateStore
-        return SQLiteStateStore(path)
+        return SQLiteStateStore(path, revision=revision)
 
     def __init__(self) -> None:
         self._sessions: dict[str, _Session] = {}

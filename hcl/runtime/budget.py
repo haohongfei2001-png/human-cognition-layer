@@ -38,11 +38,41 @@ class TaskBudgetLedger:
             raise failure("FAILED", "TASK_NOT_ACTIVE", "task", "This task cannot dispatch additional work.", "admission")
         return session, dict(row)
 
+    def _usage(self, db, key):
+        calls = list(db.execute("SELECT * FROM calls WHERE task_key=?", (key,)))
+        unknown = any(call["attempted"] is None for call in calls)
+        known = sum(call["attempted"] or 0 for call in calls)
+        usage = {
+            "mock_calls": None if unknown else known,
+            "observed_mock_calls": known,
+            "held_mock_calls": len(calls),
+            "mock_usage_unknown": unknown,
+            "estimated_request_bytes": sum(call["request_bytes"] for call in calls),
+            "replay_new_mock_calls": 0,
+        }
+        if len(calls) == 1:
+            usage["mock_call_state"] = calls[0]["state"]
+        return usage
+
+    def _replay_dependencies(self, db, request, session, row):
+        try:
+            self.store._validate_dependencies(
+                db, session, request.principal, json.loads(row["dependencies"]), row["epoch"], row["rule"]
+            )
+        except HCLFailure as error:
+            raise HCLFailure(
+                error.status,
+                error.diagnostic.stage,
+                error.diagnostic.code,
+                error.diagnostic.field_path,
+                error.diagnostic.message,
+                resource_usage=self._usage(db, row["task_key"]),
+            ) from None
+
     def _existing(self, db, request, session, row, fingerprint):
         if row["fingerprint"] != fingerprint:
             raise failure("INVALID_REQUEST", "REQUEST_FINGERPRINT_MISMATCH", "request_id", "The request identity is already bound to different input or limits.", "admission")
-        self.store._validate_dependencies(db, session, request.principal,
-            json.loads(row["dependencies"]), row["epoch"], row["rule"])
+        self._replay_dependencies(db,request,session,row)
         if row["state"] in ("COMPLETED", "FAILED") and row["result_hash"]:
             result = self.store._get_object(row["result_hash"])
             if type(result) is not TaskResult:
@@ -50,14 +80,7 @@ class TaskBudgetLedger:
             return replace(result, execution_receipt=dict(result.execution_receipt, replayed=True),
                            usage=dict(result.usage, replay_new_mock_calls=0))
         code = "TASK_IN_PROGRESS" if row["state"] == "ACTIVE" else "TASK_INTERRUPTED_NO_RESEND"
-        calls = list(db.execute("SELECT * FROM calls WHERE task_key=?", (row["task_key"],)))
-        unknown = any(call["attempted"] is None for call in calls)
-        known = sum(call["attempted"] or 0 for call in calls)
-        usage = {"mock_calls": None if unknown else known, "observed_mock_calls": known,
-                 "held_mock_calls": len(calls), "mock_usage_unknown": unknown,
-                 "estimated_request_bytes": sum(call["request_bytes"] for call in calls)}
-        if len(calls) == 1:
-            usage["mock_call_state"] = calls[0]["state"]
+        usage=self._usage(db,row['task_key'])
         raise HCLFailure("FAILED", "admission", code, "request_id", "The prior task cannot silently execute again.",
                          resource_usage=usage)
 
@@ -79,8 +102,7 @@ class TaskBudgetLedger:
             row = db.execute("SELECT * FROM tasks WHERE task_key=?", (key,)).fetchone()
             if row is None or row["fingerprint"] != fingerprint or row["state"] not in ("COMPLETED", "FAILED"):
                 raise failure("DENIED", "CACHED_DELIVERY_CHANGED", "task", "The cached delivery binding is no longer current.", "access")
-            self.store._validate_dependencies(db, session, request.principal,
-                json.loads(row["dependencies"]), row["epoch"], row["rule"])
+            self._replay_dependencies(db,request,session,row)
 
     def bind(self, request, snapshot):
         key = task_key(request.principal, request.session_id, request.request_id)
@@ -95,7 +117,7 @@ class TaskBudgetLedger:
                 subject=request.principal.subject_id, request_id=request.request_id, fingerprint=fingerprint,
                 request_hash=self.store._put_object(request), budget=codec.dumps(request.budget).decode(),
                 state="ACTIVE", owner_id=lease.owner_id, result_hash=None,
-                dependencies=codec.canonical(dict(snapshot.source_versions)), epoch=snapshot.access_epoch, rule=snapshot.rule_version)
+                dependencies=codec.canonical(self.store.snapshot_dependencies(snapshot)), epoch=snapshot.access_epoch, rule=snapshot.rule_version)
             self.store._record(db, "tasks", record, session["revision"])
             return lease, None
 
@@ -105,7 +127,7 @@ class TaskBudgetLedger:
             if result.status in ("COMPLETED", "PARTIAL"):
                 self.store._validate_snapshot(db, snapshot, read_set)
             row.update(state="COMPLETED" if result.status in ("COMPLETED", "PARTIAL") else "FAILED",
-                       result_hash=self.store._put_object(result), dependencies=codec.canonical(dict(read_set)))
+                       result_hash=self.store._put_object(result), dependencies=codec.canonical(self.store.snapshot_dependencies(snapshot, read_set)))
             self.store._record(db, "tasks", row, session["revision"])
 
     def reserve(self, lease, snapshot, question, allowance, call_id, serialized):
@@ -117,7 +139,7 @@ class TaskBudgetLedger:
             request = self.store._get_object(task["request_hash"])
             if (snapshot.session_id != lease.session_id or snapshot.principal != lease.principal
                     or question != request.question or allowance != request.budget
-                    or dict(snapshot.source_versions) != json.loads(task["dependencies"])):
+                    or self.store.snapshot_dependencies(snapshot) != json.loads(task["dependencies"])):
                 raise failure("DENIED", "TASK_CONTEXT_MISMATCH", "call_spec", "Call context or allowance differs from the bound task.", "access")
             if db.execute("SELECT 1 FROM calls WHERE task_key=? AND call_id=?", (lease.task_key, call_id)).fetchone():
                 raise failure("FAILED", "CALL_ALREADY_RESERVED", "call_id", "This call cannot be reserved or sent again.", "model")

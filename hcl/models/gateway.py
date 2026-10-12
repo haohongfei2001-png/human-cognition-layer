@@ -128,6 +128,13 @@ class ModelGateway:
             # Build only from the already authenticated snapshot. A caller cannot
             # attach arbitrary extra context or foreign source text to this mode.
             context["semantic_task"] = semantic_context(snapshot, authorized_context.question, authorized_context.semantic_profile)
+        elif authorized_context.purpose == "revision_compile":
+            from hcl.kernel.dependencies import QuerySnapshot
+            from hcl.semantics.revision import revision_context
+            if type(snapshot) is not QuerySnapshot:
+                raise HCLFailure("INVALID_REQUEST", "model", "REVISION_SNAPSHOT_REQUIRED", "snapshot",
+                                 "Revision candidates require an authorized indexed snapshot.")
+            context["revision_task"] = revision_context(snapshot, authorized_context.question)
         elif authorized_context.purpose != "answer":
             raise HCLFailure("INVALID_REQUEST", "model", "UNSUPPORTED_MODEL_PURPOSE", "purpose",
                              "The requested model purpose is not supported.")
