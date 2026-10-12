@@ -74,10 +74,15 @@ def _authorize(db, principal):
         raise ValueError("unsupported predecessor rule version")
 
 
-def _history(db, object_root):
+def _history(db, object_root, *, load_content=True):
     """Validate every old event/object and exact projection, without repairing it."""
-    previous, records, objects, events = {}, {key: {} for key in TABLE_KEYS}, set(), []
-    columns = {table: {row[1] for row in db.execute(f"PRAGMA table_info({table})")} for table in TABLE_KEYS}
+    from hcl.memory.erasure import event_keys, object_references, REDACTED
+    keys = event_keys(db)
+    if set(keys) != set(TABLE_KEYS):
+        from hcl.memory.governance import verify_inventory
+        verify_inventory(db)
+    previous, records, objects, events = {}, {key: {} for key in keys}, set(), []
+    columns = {table: {row[1] for row in db.execute(f"PRAGMA table_info({table})")} for table in keys}
     for event in db.execute("SELECT * FROM events ORDER BY seq"):
         if len(events) >= 100000:
             raise ValueError("explicit migration event bound exceeded")
@@ -88,28 +93,43 @@ def _history(db, object_root):
             codec.canonical([session, row["revision"], table, row["payload"], row["previous_hash"]]).encode()
         ).hexdigest()
         if (
-            table not in TABLE_KEYS
+            (table not in keys and table != REDACTED)
             or previous.get(session, "") != row["previous_hash"]
             or row["event_hash"] != digest
         ):
             raise corrupt()
         previous[session] = digest
         record = json.loads(row["payload"])
+        if table == REDACTED:
+            if record["session_id"] != session:
+                raise corrupt()
+            events.append(row)
+            continue
         if set(record) != columns[table] or record["session_id"] != session:
             raise corrupt()
-        records[table][tuple(record[key] for key in TABLE_KEYS[table])] = record
-        objects.update(record[key] for key in OBJECT_FIELDS & set(record) if record[key] is not None)
+        records[table][tuple(record[key] for key in keys[table])] = record
+        objects.update(object_references(table, record))
         events.append(row)
     for table, expected in records.items():
         actual = {
-            tuple(row[key] for key in TABLE_KEYS[table]): dict(row)
+            tuple(row[key] for key in keys[table]): dict(row)
             for row in db.execute(f"SELECT * FROM {table}")
         }
         if actual != expected:
             raise corrupt()
     tables = {row[0] for row in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-    if "namespace_control" in tables:
-        objects.add(read_control(db)["package_hash"])
+    namespace = read_control(db) if "namespace_control" in tables else None
+    legacy_package = namespace["package_hash"] if namespace else None
+    capsule_root = None
+    if legacy_package:
+        if "legacy_roots" in tables:
+            roots = list(db.execute("SELECT * FROM legacy_roots"))
+            if roots and (len(roots) != 1 or roots[0]["object_hash"] != legacy_package
+                          or roots[0]["session_id"] != namespace["session_id"]):
+                raise corrupt()
+            capsule_root = roots[0] if roots else None
+        objects.add(legacy_package)
+    erased = "source_tombstones" in tables and db.execute("SELECT 1 FROM source_tombstones LIMIT 1").fetchone() is not None
     size = 0
     for digest in sorted(objects):
         if (
@@ -118,16 +138,26 @@ def _history(db, object_root):
             or any(char not in "0123456789abcdef" for char in digest)
         ):
             raise corrupt()
+        if not load_content:
+            continue  # Published-target retry needs original metadata, not old raw bytes.
         path = object_root / digest
         if path.is_symlink() or not path.is_file() or path.stat().st_size > 4 * 1024 * 1024:
             raise corrupt()
         size += path.stat().st_size
         if size > 128 * 1024 * 1024:
             raise ValueError("explicit migration content bound exceeded")
+        if erased and digest == legacy_package and capsule_root is None:
+            # This unresolved mixed capsule is explicitly retained/blocked, not
+            # delivered or re-decoded after erasure. A later scoped conversion
+            # must separately validate its exact original bytes.
+            continue
         body = path.read_bytes()
         if sha256(body).hexdigest() != digest:
             raise corrupt()
-        codec.loads(body)
+        value = codec.loads(body)
+        if capsule_root is not None and digest == legacy_package:
+            from .capsules import validate_root
+            validate_root(value, namespace["namespace_id"], capsule_root["import_hash"])
     payload = {
         "events": events,
         "projections": {key: sorted(values.values(), key=codec.canonical) for key, values in records.items()},
@@ -144,7 +174,10 @@ M04_QUALIFIED_CODE_HASH = "d733606ff73ab7f923b082fb0c56ab195db235ded81667739588d
 M07_INTERACTION_CODE_HASH = "0143be82cb3f96b801abd79b86e2cd35f811645f8bce9497c3dd49863735b45a"
 M08_AFFECT_CODE_HASH = "596b7e52d66e320ab66cdf4a9ef87c3fee96af2e65559440e1df7bdf4d4590d8"
 M09_RELATIONSHIP_CODE_HASH = "c11fe822eee9df604ec02887638f8b7af323489317097a9b4ecf9375bcbcd510"
-REVISION_PREDECESSORS = frozenset((S22_CODE_HASH, S23_CODE_HASH, S3_FINITE_CODE_HASH, S4_ARGUMENT_CODE_HASH, M04_DISCOVERY_CODE_HASH, M04_QUALIFIED_CODE_HASH, M07_INTERACTION_CODE_HASH, M08_AFFECT_CODE_HASH, M09_RELATIONSHIP_CODE_HASH))
+# Development predecessor: replace the test commit with its verified identical
+# published main identity before this governance candidate can be published.
+M10_RETRIEVAL_CODE_HASH = "0cff907d511fc684251b4bcce902e5800b372885ed4b27bd8989f99c22fc436f"
+REVISION_PREDECESSORS = frozenset((S22_CODE_HASH, S23_CODE_HASH, S3_FINITE_CODE_HASH, S4_ARGUMENT_CODE_HASH, M04_DISCOVERY_CODE_HASH, M04_QUALIFIED_CODE_HASH, M07_INTERACTION_CODE_HASH, M08_AFFECT_CODE_HASH, M09_RELATIONSHIP_CODE_HASH, M10_RETRIEVAL_CODE_HASH))
 
 
 def _target_schema(schema):
@@ -157,9 +190,11 @@ def _validate_predecessor(db, schema, source_path):
     if schema == 1:
         return
     if schema in (3, 4):
-        revision = control.read(db)
+        revision = control.read_legacy(db)
         bundle = json.loads(revision["versions"])
         expected = {"schema": schema, "rules": RULE_VERSION, "indexes": {"revision": 1}, "code_sha256": bundle.get("code_sha256")}
+        if bundle.get("code_sha256") == M10_RETRIEVAL_CODE_HASH:
+            expected["indexes"] = {"revision": 1, "retrieval": "hcl-evidence-retrieval-1"}
         if (revision["mode"] != control.ACTIVE or bundle != expected
                 or bundle.get("code_sha256") not in REVISION_PREDECESSORS
                 or revision["target_path"] != str(source_path)):
@@ -245,7 +280,8 @@ class RevisionCutover:
             object_root = self.source.with_name(self.source.name + ".objects")
             if object_root.is_symlink():
                 raise ValueError("invalid predecessor object root")
-            checkpoint, objects, source_events = _history(db, object_root)
+            checkpoint, objects, source_events = _history(
+                db, object_root, load_content=not (schema == control.TERMINAL_SOURCE and self.directory.exists()))
             if schema in (1, 2, 3, 4):
                 if schema != intent["origin_schema"] or self.directory.exists():
                     raise ValueError("cutover source/target identity conflict")
@@ -303,6 +339,12 @@ class RevisionCutover:
                     "CREATE TABLE cutover_control(singleton INTEGER PRIMARY KEY CHECK(singleton=1), binding TEXT NOT NULL)"
                 )
                 db.execute("INSERT INTO cutover_control VALUES(1,?)", (codec.canonical(binding),))
+                if schema in (3, 4):
+                    # Old read-only helpers validated their own control but did
+                    # not inspect user_version. Terminally invalidate that old
+                    # reader contract too, so a chained ancestor export cannot
+                    # bypass the latest target's erasure/authorization fence.
+                    db.execute("UPDATE revision_control SET mode='TERMINAL_SOURCE' WHERE singleton=1")
                 db.execute(f"PRAGMA user_version={control.TERMINAL_SOURCE}")
                 db.commit()  # Every already-open old connection now fails its fence.
                 # Retake the terminal source's lock for the entire recovery /
@@ -314,6 +356,10 @@ class RevisionCutover:
                 binding = {key: value for key, value in intent.items() if key != "phase"}
                 if len(rows) != 1 or json.loads(rows[0][0]) != binding or checkpoint != intent["checkpoint"]:
                     raise ValueError("terminal source belongs to another exact cutover")
+                if intent["origin_schema"] in (3, 4):
+                    old_control = db.execute("SELECT mode FROM revision_control").fetchall()
+                    if len(old_control) != 1 or old_control[0][0] != "TERMINAL_SOURCE":
+                        raise ValueError("terminal predecessor reader fence is missing")
                 # Keep BEGIN IMMEDIATE until publication and receipt persistence.
             self._checkpoint("source_fenced")
             if not self.directory.exists():
@@ -323,10 +369,10 @@ class RevisionCutover:
                 copy = _connect(staged, write=True)
                 try:
                     copy.execute("BEGIN IMMEDIATE")
-                    if _history(copy, self.stage / "state.sqlite.objects")[0] != intent["checkpoint"]:
-                        raise corrupt()
                     stage_schema = copy.execute("PRAGMA user_version").fetchone()[0]
                     if stage_schema == control.UNPUBLISHED:
+                        if _history(copy, self.stage / "state.sqlite.objects")[0] != intent["checkpoint"]:
+                            raise corrupt()
                         if intent["origin_schema"] in (3, 4):
                             # Only this fully verified unpublished copy may replace
                             # its predecessor control. Original source metadata is
@@ -342,6 +388,16 @@ class RevisionCutover:
                             source_path=str(self.source),
                             target_path=str(self.path),
                         )
+                        from hcl.memory.governance import backfill
+                        salt = bytes.fromhex(control.read(copy)["governance_salt"])
+                        object_root = self.stage / "state.sqlite.objects"
+                        def read_original(digest):
+                            body = (object_root / digest).read_bytes()
+                            if sha256(body).hexdigest() != digest:
+                                raise corrupt()
+                            return codec.loads(body)
+                        backfill(copy, salt, read_original,
+                                 object_size=lambda digest: (object_root / digest).stat().st_size)
                         if intent["target_schema"] == 4:
                             copy.execute(
                                 "UPDATE namespace_control SET versions=? WHERE singleton=1",
@@ -350,6 +406,11 @@ class RevisionCutover:
                         copy.execute(f"PRAGMA user_version={intent['target_schema']}")
                     elif stage_schema != intent["target_schema"]:
                         raise ValueError("unknown unpublished schema")
+                    else:
+                        from hcl.memory.erasure import authorized_prefix
+                        _, _, staged_events = _history(copy, self.stage / "state.sqlite.objects")
+                        if not authorized_prefix(copy, source_events, staged_events):
+                            raise corrupt()
                     self._validate_target_identity(copy, intent)
                     copy.commit()
                 finally:
@@ -402,7 +463,8 @@ class RevisionCutover:
             db.execute("BEGIN")
             self._validate_target_identity(db, intent)
             _, _, events = _history(db, self.path.with_name(self.path.name + ".objects"))
-            if events[: len(source_events)] != source_events:
+            from hcl.memory.erasure import authorized_prefix
+            if not authorized_prefix(db, source_events, events):
                 raise corrupt()
             db.commit()
         finally:
@@ -417,6 +479,10 @@ class RevisionCutover:
         try:
             db.execute("BEGIN IMMEDIATE" if write else "BEGIN")
             _authorize(db, principal)
+            if (db.execute("PRAGMA user_version").fetchone()[0] not in (3, 4)
+                    or db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='cutover_control'").fetchone()):
+                raise failure("DENIED", "REVISION_NAMESPACE_FENCED", "namespace",
+                              "The namespace has been superseded by its terminal cutover.", "migration")
             row = control.read(db)
             if row["source_path"] != str(self.source) or row["target_path"] != str(self.path):
                 raise corrupt()
@@ -437,6 +503,12 @@ class RevisionCutover:
         )
 
     def _read_authorization(self, db, principal):
+        # Historical predecessor exports cannot resurrect locally erased bytes.
+        # A selective capsule export is required before this whole-ledger view
+        # can reopen after any source erasure.
+        if db.execute("SELECT 1 FROM source_tombstones LIMIT 1").fetchone():
+            raise failure("DENIED", "ERASED_HISTORICAL_EXPORT", "legacy_view",
+                          "The historical whole-ledger view contains erased material.", "governance")
         # Old read-only material must not resurrect access revoked on the target.
         if any(
             principal.subject_id not in json.loads(row["members"])
@@ -451,6 +523,20 @@ class RevisionCutover:
         tables = {row[0] for row in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
         if "namespace_control" in tables:
             row = read_control(db)
+            root = db.execute("SELECT * FROM legacy_roots WHERE session_id=?", (row["session_id"],)).fetchone()
+            if root:
+                if root["object_hash"] != row["package_hash"]:
+                    raise corrupt()
+                if any(principal.subject_id not in json.loads(value[key]) for value in db.execute(
+                        "SELECT readers,reader_ceiling FROM legacy_capsules WHERE kind='SOURCE'")
+                        for key in ("readers", "reader_ceiling")):
+                    raise denied()
+                body = (self.path.with_name(self.path.name + ".objects") / root["object_hash"]).read_bytes()
+                if sha256(body).hexdigest() != root["object_hash"]:
+                    raise corrupt()
+                from .capsules import validate_root
+                validate_root(codec.loads(body), row["namespace_id"], root["import_hash"])
+                return
             digest = row["package_hash"]
             body = (self.path.with_name(self.path.name + ".objects") / digest).read_bytes()
             if sha256(body).hexdigest() != digest:

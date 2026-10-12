@@ -31,8 +31,13 @@ class TaskBudgetLedger:
         session = self.store._session(db, lease.session_id, lease.principal)
         row = db.execute("SELECT * FROM tasks WHERE task_key=?", (lease.task_key,)).fetchone()
         if (row is None or row["session_id"] != lease.session_id or row["tenant"] != lease.principal.tenant_id
-                or row["subject"] != lease.principal.subject_id or row["request_id"] != lease.request_id
+                or row["subject"] != lease.principal.subject_id
+                or task_key(lease.principal, lease.session_id, lease.request_id) != lease.task_key
                 or row["owner_id"] != lease.owner_id):
+            raise failure("DENIED", "TASK_LEASE_DENIED", "task", "The task lease is not authorized.", "access")
+        from hcl.memory.erasure import erased_task
+        erased_task(self.store, db, row)
+        if row["request_id"] != lease.request_id:
             raise failure("DENIED", "TASK_LEASE_DENIED", "task", "The task lease is not authorized.", "access")
         if active and row["state"] != "ACTIVE":
             raise failure("FAILED", "TASK_NOT_ACTIVE", "task", "This task cannot dispatch additional work.", "admission")
@@ -55,6 +60,8 @@ class TaskBudgetLedger:
         return usage
 
     def _replay_dependencies(self, db, request, session, row):
+        from hcl.memory.erasure import erased_task
+        erased_task(self.store, db, row)
         try:
             self.store._validate_dependencies(
                 db, session, request.principal, json.loads(row["dependencies"]), row["epoch"], row["rule"]
@@ -100,6 +107,9 @@ class TaskBudgetLedger:
         with self.store._transaction() as db:
             session = self.store._session(db, request.session_id, request.principal)
             row = db.execute("SELECT * FROM tasks WHERE task_key=?", (key,)).fetchone()
+            if row is not None and row["fingerprint"] == fingerprint:
+                from hcl.memory.erasure import erased_task
+                erased_task(self.store, db, row)
             if row is None or row["fingerprint"] != fingerprint or row["state"] not in ("COMPLETED", "FAILED"):
                 raise failure("DENIED", "CACHED_DELIVERY_CHANGED", "task", "The cached delivery binding is no longer current.", "access")
             self._replay_dependencies(db,request,session,row)
@@ -115,7 +125,7 @@ class TaskBudgetLedger:
             lease = TaskLease(key, request.session_id, request.principal, request.request_id, self.store.owner_id)
             record = dict(task_key=key, session_id=request.session_id, tenant=request.principal.tenant_id,
                 subject=request.principal.subject_id, request_id=request.request_id, fingerprint=fingerprint,
-                request_hash=self.store._put_object(request), budget=codec.dumps(request.budget).decode(),
+                request_hash=self.store._put_content(request, session_id=request.session_id, context=snapshot), budget=codec.dumps(request.budget).decode(),
                 state="ACTIVE", owner_id=lease.owner_id, result_hash=None,
                 dependencies=codec.canonical(self.store.snapshot_dependencies(snapshot)), epoch=snapshot.access_epoch, rule=snapshot.rule_version)
             self.store._record(db, "tasks", record, session["revision"])
@@ -127,7 +137,8 @@ class TaskBudgetLedger:
             if result.status in ("COMPLETED", "PARTIAL"):
                 self.store._validate_snapshot(db, snapshot, read_set)
             row.update(state="COMPLETED" if result.status in ("COMPLETED", "PARTIAL") else "FAILED",
-                       result_hash=self.store._put_object(result), dependencies=codec.canonical(self.store.snapshot_dependencies(snapshot, read_set)))
+                       result_hash=self.store._put_content(result, session_id=lease.session_id, context=snapshot,
+                            owner=("task", lease.session_id, lease.task_key)), dependencies=codec.canonical(self.store.snapshot_dependencies(snapshot, read_set)))
             self.store._record(db, "tasks", row, session["revision"])
 
     def reserve(self, lease, snapshot, question, allowance, call_id, serialized):
@@ -155,7 +166,8 @@ class TaskBudgetLedger:
             if request_bytes > request.budget.max_request_bytes:
                 raise failure("BUDGET_EXHAUSTED", "REQUEST_BYTES_EXCEEDED", "budget.max_request_bytes", "The complete request exceeds its byte limit.", "model")
             row = dict(task_key=lease.task_key, call_id=call_id, session_id=lease.session_id, state="RESERVED",
-                owner_id=lease.owner_id, request_hash=self.store._put_object(serialized), response_hash=None,
+                owner_id=lease.owner_id, request_hash=self.store._put_content(serialized, session_id=lease.session_id, context=snapshot,
+                    owner=("task", lease.session_id, lease.task_key)), response_hash=None,
                 request_bytes=request_bytes, output_bytes=None, attempted=0, validation_code=None)
             self.store._record(db, "calls", row, session["revision"])
             return row
@@ -180,7 +192,8 @@ class TaskBudgetLedger:
             elif state == "FAILED_BEFORE_SEND":
                 row["attempted"] = 0
             elif state == "RETURNED" and expected == "SEND_STARTED":
-                row["response_hash"] = self.store._put_object(response)
+                row["response_hash"] = self.store._put_content(response, session_id=lease.session_id,
+                    owner=("task", lease.session_id, lease.task_key))
                 row["attempted"] = 1
                 if type(response) is str:
                     try:
