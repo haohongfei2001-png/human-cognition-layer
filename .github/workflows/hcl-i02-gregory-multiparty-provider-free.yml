@@ -1,10 +1,10 @@
 name: HCL I02 Gregory Multiparty Source and Rights Hold
 on:
   pull_request:
-    paths: ['hcl/**', 'scripts/i02_gregory_multiparty_source.py', 'scripts/i02_source_qualification_v12.py', 'tests/test_i02_gregory_multiparty_source.py', 'reports/HCL_I02_GREGORY*', '.github/workflows/hcl-i02-gregory*']
+    paths: ['hcl/**', 'scripts/retry_public_download.py', 'scripts/i02_gregory_multiparty_source.py', 'scripts/i02_source_qualification_v12.py', 'tests/test_i02_gregory_multiparty_source.py', 'reports/HCL_I02_GREGORY*', '.github/workflows/hcl-i02-gregory*']
   push:
     branches: [main]
-    paths: ['hcl/**', 'scripts/i02_gregory_multiparty_source.py', 'scripts/i02_source_qualification_v12.py', 'tests/test_i02_gregory_multiparty_source.py', 'reports/HCL_I02_GREGORY*', '.github/workflows/hcl-i02-gregory*']
+    paths: ['hcl/**', 'scripts/retry_public_download.py', 'scripts/i02_gregory_multiparty_source.py', 'scripts/i02_source_qualification_v12.py', 'tests/test_i02_gregory_multiparty_source.py', 'reports/HCL_I02_GREGORY*', '.github/workflows/hcl-i02-gregory*']
 permissions:
   contents: read
 jobs:
@@ -18,11 +18,13 @@ jobs:
         with:
           python-version: '3.12'
       - name: Fetch pinned public edition without printing or publishing source
+        timeout-minutes: 3
         run: |
           python - <<'PY'
           from pathlib import Path
           from scripts.i02_gregory_multiparty_source import download_material
-          raw,rdf=download_material()
+          from scripts.retry_public_download import retry_public_download
+          raw,rdf=retry_public_download(download_material)
           Path('/tmp/gregory-raw.txt').write_bytes(raw)
           Path('/tmp/gregory-rdf.xml').write_bytes(rdf)
           PY
