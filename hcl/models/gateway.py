@@ -44,26 +44,43 @@ class ModelPort(Protocol):
 
 class OfflineModelPort:
     """A supplied test response; no language comprehension is implied."""
-    def __init__(self, response: str = "Offline fixture response.", *, fault: str | None = None):
+    def __init__(self, response: str = "Offline fixture response.", *, fault: str | None = None,
+                 responses: tuple[str, ...] | None = None, context_tokens: int | None = None, output_tokens: int | None = None):
         if fault not in (None, "before_send", "send_unknown", "invalid_return"):
             raise ValueError("unknown fixture fault")
+        if responses is not None and (type(responses) not in (tuple, list) or not responses):
+            raise ValueError("a nonempty finite offline response sequence is required")
+        for cap in (context_tokens, output_tokens):
+            if cap is not None and (type(cap) is not int or cap < 1):
+                raise ValueError("positive declared fixture token capacity required")
+        self.responses = None if responses is None else tuple(responses)
+        self.context_tokens, self.output_tokens = context_tokens, output_tokens
+        self.contexts = []
         self.response = response
         self.fault = fault
         self.attempts = 0
 
     def describe(self) -> ProviderCapabilities:
-        return ProviderCapabilities("offline-fixture-v1", "simulation", network=False)
+        return ProviderCapabilities("offline-fixture-v1", "simulation", network=False,
+                                    context_tokens=self.context_tokens, output_tokens=self.output_tokens,
+                                    tokenizer="UTF8_BYTES_CONSERVATIVE_UPPER_BOUND")
 
     async def generate(self, serialized_context: str) -> str:
         if self.fault == "before_send":
             raise HCLFailure("FAILED", "model", "FAILED_BEFORE_SEND", "transport",
                              "The offline port failed before simulated sending.")
+        self.contexts.append(serialized_context)
         self.attempts += 1
         if self.fault == "send_unknown":
             raise HCLFailure("SEND_UNKNOWN", "model", "SEND_UNKNOWN", "transport",
                              "The simulated send outcome is unknown; it will not be retried.")
         if self.fault == "invalid_return":
             return None
+        if self.responses is not None:
+            if self.attempts > len(self.responses):
+                raise HCLFailure("FAILED", "model", "OFFLINE_FIXTURE_EXHAUSTED", "response",
+                                 "No further explicitly supplied fixture response exists.")
+            return self.responses[self.attempts - 1]
         return self.response
 
 
@@ -73,6 +90,7 @@ class AuthorizedContext:
     question: str
     purpose: str = "answer"
     semantic_profile: object = None
+    chunk: object = None
 
 
 @dataclass(frozen=True)
@@ -90,7 +108,8 @@ class ModelGateway:
         # Do not turn a capability claim or an arbitrary callback into authority.
         if type(self._port) is not OfflineModelPort:
             raise ValueError("Only the built-in offline fixture port is currently supported")
-        self._calls: dict[tuple[Principal, str, str], str] = {}
+        self._calls: dict[tuple[Principal, str, str, str], str] = {}
+        self._context_compiler = None
         from hcl.runtime.budget import TaskBudgetLedger
         self._ledger = TaskBudgetLedger(store) if store.durable else None
 
@@ -101,13 +120,13 @@ class ModelGateway:
     def call_state(self, principal: Principal, session_id: str, request_id: str) -> str | None:
         if self._ledger is not None:
             return self._ledger.state(principal, session_id, request_id)
-        return self._calls.get((principal, session_id, request_id))
+        return self._calls.get((principal, session_id, request_id, "response"))
 
     async def generate(self, authorized_context: AuthorizedContext, call_spec: CallSpec) -> ModelReturn:
         snapshot = authorized_context.snapshot
         self._store.validate_snapshot(snapshot)
         allowance = call_spec.allowance
-        key = (snapshot.principal, snapshot.session_id, call_spec.request_id)
+        key = (snapshot.principal, snapshot.session_id, call_spec.request_id, call_spec.call_id)
         if self._ledger is None and key in self._calls:
             raise HCLFailure("FAILED", "model", "CALL_ALREADY_RESERVED", "request_id",
                              "This call is already reserved; automatic resending is forbidden.")
@@ -115,6 +134,23 @@ class ModelGateway:
             raise HCLFailure("BUDGET_EXHAUSTED", "model", "MOCK_CALL_BUDGET", "budget.max_mock_calls",
                              "No offline model call was allowed for this task.")
         # Source contents are tagged as untrusted data, never as system policy.
+        if authorized_context.chunk is not None:
+            from hcl.kernel.execution import ExecutionBudget
+            from hcl.runtime.context import ContextCompiler, tokens_upper_bound
+            if type(allowance) is not ExecutionBudget:
+                raise HCLFailure("INVALID_REQUEST", "context", "EXECUTION_BUDGET_REQUIRED", "budget",
+                                 "Bounded contexts require explicit task execution limits.")
+            compiler = self._context_compiler
+            if compiler is None or compiler.semantic_profile != authorized_context.semantic_profile:
+                compiler = self._context_compiler = ContextCompiler(authorized_context.semantic_profile)
+            serialized = compiler.serialize(snapshot, authorized_context.question, authorized_context.chunk)
+            if tokens_upper_bound(serialized) > compiler.limit(allowance, self.capabilities):
+                raise HCLFailure("BUDGET_EXHAUSTED", "context", "CONTEXT_TOKENS_EXCEEDED", "context",
+                                 "The complete serialized packet exceeds its conservative token or byte bound.")
+            if self._ledger is None:
+                raise HCLFailure("INVALID_REQUEST", "context", "DURABLE_EXECUTION_REQUIRED", "store",
+                                 "Budgeted execution requires the persistent task ledger.")
+            return await self._generate_durable(authorized_context, call_spec, serialized)
         context = {"schema": "hcl-offline-context-1", "question": authorized_context.question,
                    "untrusted_sources": [
                        {"source_id": source.handle.source_id, "text": source.text}
@@ -198,6 +234,13 @@ class ModelGateway:
                 raise HCLFailure("FAILED", "model", "INVALID_MODEL_ENCODING", "visible_text", "The model return is not valid Unicode text.") from None
             if output_bytes > spec.allowance.max_output_bytes:
                 raise HCLFailure("BUDGET_EXHAUSTED", "model", "OUTPUT_BYTES_EXCEEDED", "budget.max_output_bytes", "The model return exceeds its output allowance.")
+            if context.chunk is not None:
+                caps = [spec.allowance.max_visible_output_tokens]
+                if self.capabilities.output_tokens is not None:
+                    caps.append(self.capabilities.output_tokens)
+                if output_bytes > min(caps):
+                    raise HCLFailure("BUDGET_EXHAUSTED", "model", "OUTPUT_TOKENS_EXCEEDED", "output",
+                                     "Visible output exceeds its conservative token bound.")
             self._store.validate_snapshot(context.snapshot)
             row = self._ledger.transition(lease, call_id, "RETURNED", "RETURNED", validation_code="VALIDATED")
             return ModelReturn(response, "stop", len(serialized.encode("utf-8")), output_bytes,

@@ -50,7 +50,7 @@ def read(db):
     if (
         row["singleton"] != 1
         or row["mode"] not in (ACTIVE, READ_ONLY)
-        or row["origin_schema"] not in (0, 1, 2)
+        or row["origin_schema"] not in (0, 1, 2, 3, 4)
     ):
         raise ValueError("invalid revision control")
     return row

@@ -6,5 +6,6 @@ not silently used as alternate paths by the new API.
 from hcl.api import HCL
 from hcl.kernel.types import TaskRequest, TaskResult
 from hcl.kernel.dependencies import RevisionIssue
+from hcl.kernel.execution import ExecutionIssue, ExecutionBudget, LocalModel
 
-__all__ = ["HCL", "TaskRequest", "TaskResult", "RevisionIssue"]
+__all__ = ["HCL", "TaskRequest", "TaskResult", "RevisionIssue", "ExecutionIssue", "ExecutionBudget", "LocalModel"]

@@ -235,3 +235,65 @@ class AnswerAssembler:
     def offline_reply(self, response: str) -> AnswerContract:
         claim = AnswerClaim(response, "offline-model-response", (), (), (), "UNVERIFIED_OFFLINE_FIXTURE")
         return AnswerContract(response, (claim,), "VISIBLE_RETURN_VERIFIED", "OFFLINE_FIXTURE_ONLY")
+
+    def compact_claim(self, result):
+        """Deterministic verified projection; full proof/model stays in the store."""
+        from hcl.kernel.execution import ProjectedResultField
+        checked = self._claim(result)
+        projections = []
+        value = result.values
+        if result.kind == "CONDITIONAL_FOL":
+            descriptions = []
+            for i, row in enumerate(value["readings"]):
+                descriptions.append(row["id"] + " [" + row["frame_kind"] + "]: " + row["query_reading"]
+                                    + "; " + row["status"] + "; label=" + str(row["label"]))
+                keys = ("id", "frame_kind", "query_reading", "status", "label")
+                projections.append(ProjectedResultField(result.result_id, "readings", {key: row[key] for key in keys},
+                                                        (str(i),), keys))
+            text = ("Supplied formal readings: " + value["status"] + "; conditional label=" + str(value["label"])
+                    + ". " + "; ".join(descriptions) + ". Semantic alignment and completeness remain unverified.")
+            names = ("status", "label", "semantic_certified", "candidate_completeness")
+        elif result.kind == "CONDITIONAL_REVISION":
+            positive = value["query"]["positive"]
+            atom = value["claim_metadata"][positive]
+            projections.append(ProjectedResultField(result.result_id, "claim_metadata", atom, (positive,)))
+            text = ("Conditional scoped program [" + atom["frame_kind"] + "] at " + atom["at_point"]
+                    + " for perspective " + atom["perspective_id"] + ": " + atom["predicate"]
+                    + "(" + ", ".join(atom["arguments"]) + "), positive=" + str(value["support_bits"]["positive_support"])
+                    + ", negative=" + str(value["support_bits"]["negative_support"])
+                    + ", frontier=" + str(value["support_bits"]["frontier_unexplored"])
+                    + "; recorded cutoff=" + str(value["known_at"])
+                    + ". Supplied-model support is not world or private mental truth; missing support is not disproof.")
+            names = ("support_bits", "query", "known_at", "semantic_certified", "candidate_completeness")
+        else:
+            text = checked.text
+            names = tuple(field.field for field in checked.used_result_fields)
+        if "local_model" in value:
+            names = (*names, "local_model")
+            qualifications = value["local_model"]
+            if qualifications["fit_residuals"] or qualifications["unmodeled_observations"]:
+                text += (" Model fit residuals and unmodeled observations remain unresolved: "
+                         + str(len(qualifications["fit_residuals"])) + "/" + str(len(qualifications["unmodeled_observations"])) + ".")
+        return AnswerClaim(text, checked.claim_id,
+                           tuple(ResultField(result.result_id, name, value[name]) for name in names) + tuple(projections),
+                           checked.support_envs, checked.counterevidence, checked.epistemic_status)
+
+    def validate_compact(self, contract, results):
+        from hcl.kernel.execution import ProjectedResultField
+        expected = tuple(self.compact_claim(result) for result in results)
+        if contract.claims != expected or contract.answer != "\n\n".join(claim.text for claim in expected):
+            raise HCLFailure("FAILED", "answer", "COMPACT_RESULT_MISMATCH", "claim_records",
+                             "The compact delivery differs from verified actual result fields.")
+        by_id = {result.result_id: result for result in results}
+        for claim in contract.claims:
+            for used in claim.used_result_fields:
+                actual = by_id[used.result_id].values[used.field]
+                if type(used) is ProjectedResultField:
+                    for key in used.path:
+                        actual = actual[int(key)] if isinstance(actual, tuple) else actual[key]
+                    if used.selection:
+                        from hcl.kernel.types import freeze
+                        actual = freeze({key: actual[key] for key in used.selection})
+                if actual != used.value or type(actual) is not type(used.value):
+                    raise HCLFailure("FAILED", "answer", "PROJECTED_FIELD_MISMATCH", "claim_records",
+                                     "The projected field is not an exact value of the accepted computation.")
