@@ -54,3 +54,10 @@ class UnifiedPlanTests(unittest.TestCase):
             if row['id'] in ('M03','M05','M06'):
                 self.assertFalse(row['partial_implementation_evidence']['complete'])
                 self.assertEqual(row['evidence_status'],'DESIGNED_NOT_HCL_VALIDATED')
+
+    def test_argument_increment_preserves_full_concept_and_reflection_obligations(self):
+        row=next(row for row in self.manifest['mechanisms'] if row['id']=='M13')
+        self.assertFalse(row['partial_implementation_evidence']['complete'])
+        self.assertEqual(row['evidence_status'],'DESIGNED_NOT_HCL_VALIDATED')
+        self.assertEqual(self.manifest['current_execution']['domain_evidence'][1]['mechanisms'],['M13'])
+        self.assertFalse(self.manifest['current_execution']['domain_evidence'][1]['stage_complete'])

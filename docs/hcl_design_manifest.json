@@ -1153,7 +1153,13 @@
       "stage": "S4",
       "evidence_status": "DESIGNED_NOT_HCL_VALIDATED",
       "start_stage": "S4",
-      "stage_semantics": "stage表示该机制主要完整交付阶段；start_stage表示公共基础首次接入；真实effect需S7另证"
+      "stage_semantics": "stage表示该机制主要完整交付阶段；start_stage表示公共基础首次接入；真实effect需S7另证",
+      "partial_implementation_evidence": {
+        "document": "docs/HCL_UNIFIED_S4_ARGUMENT_MODELS.md",
+        "witness": "scripts/witness_unified_s4.py",
+        "complete": false,
+        "scope": "Bounded structured argument and sensitivity mechanisms under injected source reconstructions; full original obligations remain."
+      }
     },
     {
       "id": "M14",
@@ -3429,7 +3435,7 @@
   "current_execution": {
     "started_at_utc": "2026-10-11T20:31:00Z",
     "authority": "Owner explicitly authorized continued implementation, tests, PRs and verified merges under the approved S1–S7 plan.",
-    "base_main": "421e895562227141eb60b3e123363c1708685ee3",
+    "base_main": "8e25a2c91dba20aea2f0128069b9ca7df69a724b",
     "current_stage": "S3 ∥ S4",
     "delivered_slice": "S2.3",
     "readiness": "INTEGRATED_OFFLINE",
@@ -3442,7 +3448,7 @@
     "remaining": "继续完整S3/M03–M09与并行S4/M10–M14；当前有限三机制是增量证据，不关闭阶段。完整S1/S2实模功能、S5–S7及T01–T32研究目标全部保留。",
     "historical_boundary": "旧A–H/G-HC/G-ARCH、实验和closed grants保持原证据等级，不自动继承。",
     "validation": "本切片证明注入候选下的真实离线预算执行、结果消费、修订和恢复；不证明开放语义/任务分解、跨块语义组合、完整性或S1/S2阶段完成。",
-    "active_work": "S3在建：同一执行图中的有限事件心智、共享信念驱动的行动动态规划和因果观察/干预计算已离线接通；完整M03/M05/M06及其余S3、S4仍待后续实现与验收。",
+    "active_work": "S3有限事件心智/共享信念行动DP/因果计算已离线接通；S4在建：结构化论证、攻击与优先defeat、grounded/有界preferred及真实最小撤回试验接入同一执行图。完整领域与阶段退出条件仍开放。",
     "domain_evidence": [
       {
         "stage": "S3",
@@ -3457,6 +3463,18 @@
         "checks": "tests/test_unified_s3_*.py",
         "witness": "scripts/witness_unified_s3.py",
         "scope": "Source-anchored injected mechanism candidates; real finite event/belief/planning/causal calculations and exact result-field consumption; no extraction/alignment/completeness or full mechanism proof."
+      },
+      {
+        "stage": "S4",
+        "mechanisms": [
+          "M13"
+        ],
+        "readiness": "INTEGRATED_OFFLINE_PARTIAL",
+        "stage_complete": false,
+        "document": "docs/HCL_UNIFIED_S4_ARGUMENT_MODELS.md",
+        "checks": "tests/test_unified_s4_*.py",
+        "witness": "scripts/witness_unified_s4.py",
+        "scope": "Source-anchored injected argument reconstructions; actual finite proof/defeat/acceptance and critical-retraction computations; no full M13, reconstruction, premise truth, conceptual feedback or reflective-equilibrium proof."
       }
     ]
   }

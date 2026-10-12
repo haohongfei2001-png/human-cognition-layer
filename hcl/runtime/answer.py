@@ -11,6 +11,8 @@ from hcl.kernel.types import (
 
 class AnswerAssembler:
     def _claim(self, result: InferenceResult) -> AnswerClaim:
+        if result.kind == "CONDITIONAL_ARGUMENT_ACCEPTANCE":
+            return self._argument_claim(result)
         if result.kind == "CONDITIONAL_COGNITIVE_MODEL":
             return self._mental_claim(result)
         if result.kind == "CONDITIONAL_REVISION":
@@ -40,6 +42,69 @@ class AnswerAssembler:
         return AnswerClaim(text, f"claim:{result.result_id}", fields,
                                   result.assumption_environments, result.counterevidence_ids,
                                   "EXACT_MODEL")
+
+    def _argument_claim(self, result):
+        values = result.values
+        if (values.get("semantic_certified") is not False
+                or values.get("candidate_completeness") != "NOT_ESTABLISHED"
+                or not isinstance(values.get("models"), tuple) or not values["models"]):
+            raise HCLFailure("FAILED", "answer", "ARGUMENT_RESULT_CONTRACT", "models",
+                             "The argument result lacks its conditional reconstruction boundary.")
+        from hcl.operators.argumentation import ACCEPTANCE_SCOPE
+        from hcl.semantics.argument_compiler import argument_source_segments
+        lines = ["Conditional acceptance under the reconstructed argument models, within finite acyclic proofs. "
+                 "Critical-edit minimality is limited to the declared retraction set."]
+        for model in values["models"]:
+            lines.append("Model " + model["model_id"] + " [" + model["frame_kind"] + "]:")
+            if model.get("acceptance_scope") != ACCEPTANCE_SCOPE or model.get("namespace_source_id") != model["source_id"]:
+                raise HCLFailure("FAILED", "answer", "ARGUMENT_RESULT_CONTRACT", "acceptance_scope",
+                                 "The argument result lacks its bounded proof and attribution scope.")
+            lines.append("Namespace source " + model["namespace_source_id"] + "; actual input sources: "
+                         + ", ".join(sorted(model["input_source_versions"])) + ".")
+            if model["excluded_circular_rules"]:
+                lines.append("Excluded circular proof rules: " + ", ".join(model["excluded_circular_rules"]) + ".")
+            arguments = {row["argument_id"]: row for row in model["arguments"]}
+            for row in arguments.values():
+                segments = argument_source_segments(model["source_records"], row["premises"], row["rules"])
+                if (segments != row["source_segment_ids"] or not segments
+                        or any(key not in model["source_bindings"] or model["source_bindings"][key]["kind"] != "SOURCE"
+                               for key in segments)):
+                    raise HCLFailure("FAILED", "answer", "ARGUMENT_PROVENANCE_MISMATCH", "source_segment_ids",
+                                     "Proof evidence does not match its actual source-bound records.")
+            for query in model["queries"]:
+                if query["status"] == "COMPLETE":
+                    positive = sorted(key for key, row in arguments.items()
+                                      if row["conclusion"] == query["literal"] and model["labels"].get(key) == "IN")
+                    opposed = sorted(key for key, row in arguments.items()
+                                     if all(row["conclusion"][k] == query["literal"][k] for k in ("atom", "scope", "kind"))
+                                     and row["conclusion"]["negative"] != query["literal"]["negative"]
+                                     and model["labels"].get(key) == "IN")
+                    if (tuple(positive) != query["accepted_arguments"] or tuple(opposed) != query["opposed_arguments"]
+                            or bool(positive) != query["positive_accepted"] or bool(opposed) != query["opposed_accepted"]):
+                        raise HCLFailure("FAILED", "answer", "ARGUMENT_ACCEPTANCE_MISMATCH", "queries",
+                                         "The claim does not match actual grounded argument labels.")
+                elif (query["positive_accepted"] is not None or query["opposed_accepted"] is not None
+                      or query["accepted_arguments"] or query["opposed_arguments"]):
+                    raise HCLFailure("FAILED", "answer", "ARGUMENT_ACCEPTANCE_MISMATCH", "queries",
+                                     "An unfinished computation cannot license acceptance values.")
+                lines.append("Query " + query["query_id"] + ": " + query["status"] + "; grounded accepted="
+                             + str(query["positive_accepted"]) + ", opposed=" + str(query["opposed_accepted"]) + ".")
+                if query["preferred"] is not None:
+                    lines.append("Preferred-extension search: " + query["preferred"]["status"] + ".")
+                if query["critical"] is not None:
+                    lines.append("Critical retractions: " + query["critical"]["status"] + "; edits="
+                                 + str(tuple(query["critical"]["edits"])) + ".")
+            if model["strict_conflicts"]:
+                lines.append("The strict reconstructed core is inconsistent; no explosive rule is added.")
+            if model["inactive_assumptions"]:
+                lines.append("Withdrawn assumptions: " + ", ".join(model["inactive_assumptions"]) + ".")
+            if model["frontier"]:
+                lines.append("Unexplored: " + ", ".join(model["frontier"]) + ".")
+        lines.append("Argument acceptance is conditional on source interpretation, premises, rules and priorities; "
+                     "it is not premise truth, philosophical truth or semantic certification.")
+        fields=tuple(ResultField(result.result_id,key,values[key]) for key in ("models","semantic_certified","candidate_completeness"))
+        return AnswerClaim(" ".join(lines),"claim:"+result.result_id,fields,result.assumption_environments,
+                           result.counterevidence_ids,"CONDITIONAL_ARGUMENT_ACCEPTANCE_NOT_TRUTH")
 
     def _mental_claim(self, result):
         values = result.values
@@ -237,7 +302,7 @@ class AnswerAssembler:
             (
                 "MODEL_INTERPRETATIONS_UNVERIFIED"
                 if any(
-                    result.kind in ("CONDITIONAL_FOL", "CONDITIONAL_REVISION", "CONDITIONAL_COGNITIVE_MODEL") for result in accepted_results
+                    result.kind in ("CONDITIONAL_FOL", "CONDITIONAL_REVISION", "CONDITIONAL_COGNITIVE_MODEL", "CONDITIONAL_ARGUMENT_ACCEPTANCE") for result in accepted_results
                 )
                 else "EXPLICIT_FORMAL_INPUT_ONLY"
             ),
@@ -285,7 +350,19 @@ class AnswerAssembler:
         checked = self._claim(result)
         projections = []
         value = result.values
-        if result.kind == "CONDITIONAL_COGNITIVE_MODEL":
+        if result.kind == "CONDITIONAL_ARGUMENT_ACCEPTANCE":
+            text = checked.text
+            names = ("semantic_certified", "candidate_completeness", "scope")
+            for i, model in enumerate(value["models"]):
+                keys=("model_id","source_id","frame_kind","assumptions","inactive_assumptions","unmodeled_segments",
+                      "frontier","labels","grounded","strict_conflicts","theory_consistency",
+                      "namespace_source_id","input_source_versions","source_bindings","source_records",
+                      "acceptance_scope","excluded_circular_rules","iterations")
+                projections.append(ProjectedResultField(result.result_id,"models",{key:model[key] for key in keys},(str(i),),keys))
+                for j, query in enumerate(model["queries"]):
+                    keys=tuple(query)
+                    projections.append(ProjectedResultField(result.result_id,"models",dict(query),(str(i),"queries",str(j)),keys))
+        elif result.kind == "CONDITIONAL_COGNITIVE_MODEL":
             text = checked.text
             names = ("semantic_certified", "candidate_completeness", "scope")
             for i, model in enumerate(value["models"]):

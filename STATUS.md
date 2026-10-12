@@ -3,7 +3,7 @@
 
 完整规格：[HCL_SYSTEM_REDESIGN_SPEC.md](docs/HCL_SYSTEM_REDESIGN_SPEC.md)；唯一结构化计划：[hcl_design_manifest.json](docs/hcl_design_manifest.json)；执行交接：[HCL_CODEX_HANDOFF.md](docs/HCL_CODEX_HANDOFF.md)。
 
-实施基线main：`421e895562227141eb60b3e123363c1708685ee3`。
+实施基线main：`8e25a2c91dba20aea2f0128069b9ca7df69a724b`。
 
 当前切片：**S2.3 / INTEGRATED_OFFLINE**。预算化Issue图、实际并行算子、字段/来源反馈修复、完整外存与有界上下文、受控恢复和共同LocalModel协议接入同一engine。
 
@@ -11,7 +11,7 @@
 
 **NEXT_READY：S3 ∥ S4**。继续完整S3/M03–M09与并行S4/M10–M14；当前有限三机制是增量证据，不关闭阶段。完整S1/S2实模功能、S5–S7及T01–T32研究目标全部保留。
 
-**在建领域：**S3在建：同一执行图中的有限事件心智、共享信念驱动的行动动态规划和因果观察/干预计算已离线接通；完整M03/M05/M06及其余S3、S4仍待后续实现与验收。
+**在建领域：**S3有限事件心智/共享信念行动DP/因果计算已离线接通；S4在建：结构化论证、攻击与优先defeat、grounded/有界preferred及真实最小撤回试验接入同一执行图。完整领域与阶段退出条件仍开放。
 
 S1尚未完整完成。真实本地算子与模拟端口的离线接通不能证明真实模型语义能力。每次运行的精确commit和代码文件hash由对应scripts/witness_unified_s*.py生成；CI在准确PR head上执行，不将旧回归数量作为新能力完成率。
 
