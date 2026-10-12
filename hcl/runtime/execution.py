@@ -120,6 +120,7 @@ class ExecutionRunner:
                 "mental.simulate",
                 "argument.evaluate",
                 "hypothesis.discover",
+                "interaction.evaluate",
                 "model.respond",
             ):
                 purpose = {
@@ -128,19 +129,20 @@ class ExecutionRunner:
                     "mental.simulate": "mental_compile",
                     "argument.evaluate": "argument_compile",
                     "hypothesis.discover": "discovery_compile",
+                    "interaction.evaluate": "interaction_compile",
                     "model.respond": "answer",
                 }[goal.kind]
                 parts = self.context.chunks(
                     snapshot, request.question, purpose, request.budget, self.gateway.capabilities
                 )
-                if goal.kind in ("revision.evaluate", "mental.simulate", "argument.evaluate", "hypothesis.discover") and len(parts) > 1:
+                if goal.kind in ("revision.evaluate", "mental.simulate", "argument.evaluate", "hypothesis.discover", "interaction.evaluate") and len(parts) > 1:
                     # Cross-packet rule/identity IDs need a future composition
                     # compiler; never publish the final fragment as a full index.
                     raise stopped(
                         (
                             "REVISION_COMPOSITION_CAPACITY"
                             if goal.kind == "revision.evaluate"
-                            else ("MENTAL_COMPOSITION_CAPACITY" if goal.kind == "mental.simulate" else ("ARGUMENT_COMPOSITION_CAPACITY" if goal.kind == "argument.evaluate" else "DISCOVERY_COMPOSITION_CAPACITY"))
+                            else ("MENTAL_COMPOSITION_CAPACITY" if goal.kind == "mental.simulate" else ("ARGUMENT_COMPOSITION_CAPACITY" if goal.kind == "argument.evaluate" else ("DISCOVERY_COMPOSITION_CAPACITY" if goal.kind == "hypothesis.discover" else "INTERACTION_COMPOSITION_CAPACITY")))
                         ),
                         "BUDGET_EXHAUSTED",
                         "context",
@@ -310,23 +312,27 @@ class ExecutionRunner:
                     residuals,
                 )
                 node["result"] = model
-            elif goal.kind in ("mental.simulate", "argument.evaluate", "hypothesis.discover"):
+            elif goal.kind in ("mental.simulate", "argument.evaluate", "hypothesis.discover", "interaction.evaluate"):
                 from hcl.semantics.model_compiler import LocalModelCompiler
 
                 from hcl.semantics.argument_compiler import ArgumentCompiler
                 from hcl.semantics.discovery_compiler import DiscoveryCompiler
+                from hcl.semantics.interaction_compiler import InteractionCompiler
                 compiler = {"mental.simulate": LocalModelCompiler, "argument.evaluate": ArgumentCompiler,
-                            "hypothesis.discover": DiscoveryCompiler}[goal.kind]()
+                            "hypothesis.discover": DiscoveryCompiler, "interaction.evaluate": InteractionCompiler}[goal.kind]()
                 program = compiler.compile(snapshot, segments, raw, request.budget)
                 if goal.kind == "hypothesis.discover":
                     assumptions = tuple(sorted({a for c in (*program["contexts"], *(p["context"] for p in program["probes"])) for m in c["template"]["models"] for a in m["active_assumptions"]}))
                     residuals = tuple(program["unmodeled_segments"])
+                elif goal.kind == "interaction.evaluate":
+                    assumptions = tuple(sorted({a for model in program["models"] for a in model["mental"]["active_assumptions"]}))
+                    residuals = tuple(sorted({s for model in program["models"] for s in model["mental"]["unmodeled_segments"]}))
                 else:
                     assumptions = tuple(sorted({a for model in program["models"] for a in model["active_assumptions"]}))
                     residuals = tuple(sorted({s for model in program["models"] for s in model["unmodeled_segments"]}))
                 node["result"] = LocalModel(
-                    {"mental.simulate":"mental-proposal:", "argument.evaluate":"argument-proposal:", "hypothesis.discover":"discovery-proposal:"}[goal.kind] + sha256(raw.encode()).hexdigest(),
-                    {"mental.simulate":"mental-scene-1", "argument.evaluate":"argument-model-1", "hypothesis.discover":"discovery-model-1"}[goal.kind],
+                    {"mental.simulate":"mental-proposal:", "argument.evaluate":"argument-proposal:", "hypothesis.discover":"discovery-proposal:", "interaction.evaluate":"interaction-proposal:"}[goal.kind] + sha256(raw.encode()).hexdigest(),
+                    {"mental.simulate":"mental-scene-1", "argument.evaluate":"argument-model-1", "hypothesis.discover":"discovery-model-1", "interaction.evaluate":"interaction-model-1"}[goal.kind],
                     dict(candidate=raw, segments=[asdict(s) for s in segments], question=request.question),
                     snapshot.source_versions,
                     assumptions,
@@ -533,7 +539,7 @@ class ExecutionRunner:
                 request.budget,
             )
             cost = len(forest.readings)
-        elif goal.kind in ("mental.simulate", "argument.evaluate", "hypothesis.discover"):
+        elif goal.kind in ("mental.simulate", "argument.evaluate", "hypothesis.discover", "interaction.evaluate"):
             compiled = self.nodes[node["requires"][0]]["result"]
             issue = ModelIssue(goal.issue_id, goal.kind, goal.source_id, compiled)
             cost = request.budget.max_local_evaluations - self.counters["local_reserved"]
@@ -542,7 +548,7 @@ class ExecutionRunner:
             snapshot = node["compute_snapshot"]
             cost = request.budget.max_local_evaluations - self.counters["local_reserved"]
         remaining = request.budget.max_local_evaluations - self.counters["local_reserved"]
-        if cost > remaining or (cost == 0 and goal.kind in ("revision.evaluate", "mental.simulate", "argument.evaluate", "hypothesis.discover")):
+        if cost > remaining or (cost == 0 and goal.kind in ("revision.evaluate", "mental.simulate", "argument.evaluate", "hypothesis.discover", "interaction.evaluate")):
             if any(
                 other is not node
                 and other["operation"] == "compute"
