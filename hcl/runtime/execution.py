@@ -141,11 +141,14 @@ class ExecutionRunner:
                     # Cross-packet rule/identity IDs need a future composition
                     # compiler; never publish the final fragment as a full index.
                     raise stopped(
-                        (
-                            "REVISION_COMPOSITION_CAPACITY"
-                            if goal.kind == "revision.evaluate"
-                            else ("MENTAL_COMPOSITION_CAPACITY" if goal.kind == "mental.simulate" else ("ARGUMENT_COMPOSITION_CAPACITY" if goal.kind == "argument.evaluate" else ("DISCOVERY_COMPOSITION_CAPACITY" if goal.kind == "hypothesis.discover" else "INTERACTION_COMPOSITION_CAPACITY")))
-                        ),
+                        {
+                            "revision.evaluate": "REVISION_COMPOSITION_CAPACITY",
+                            "mental.simulate": "MENTAL_COMPOSITION_CAPACITY",
+                            "argument.evaluate": "ARGUMENT_COMPOSITION_CAPACITY",
+                            "hypothesis.discover": "DISCOVERY_COMPOSITION_CAPACITY",
+                            "interaction.evaluate": "INTERACTION_COMPOSITION_CAPACITY",
+                            "affect.evaluate": "AFFECT_COMPOSITION_CAPACITY",
+                        }[goal.kind],
                         "BUDGET_EXHAUSTED",
                         "context",
                     )

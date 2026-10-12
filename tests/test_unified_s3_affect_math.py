@@ -224,6 +224,62 @@ class AffectMathTests(unittest.TestCase):
             self.assertEqual(Fraction(planning["q"]["repair"]), expected["good"])
             self.assertEqual(Fraction(planning["q"]["wait"]), expected["bad"])
 
+    def test_exact_alias_comparison_rejects_color_indistinguishable_cycles(self):
+        from copy import deepcopy
+        from hcl.operators.affect import compare_goal_models
+
+        states = list("abcdef")
+        six = dict(
+            states=states,
+            terminal=[],
+            utilities={s: "0" for s in states},
+            bindings={s: [] for s in states},
+            actions={
+                "go": dict(
+                    cost="0",
+                    enabled=states,
+                    feasible=states,
+                    transitions=dict(zip(states, states[1:] + states[:1])),
+                    observations={s: "same" for s in states},
+                )
+            },
+        )
+        two = deepcopy(six)
+        two["actions"]["go"]["transitions"] = dict(zip(states, list("bcaefd")))
+        self.assertEqual(
+            compare_goal_models(six, two, max_work=100)["status"], "DIFFERENT"
+        )
+        for bound in range(10):
+            result = compare_goal_models(six, two, max_work=bound)
+            self.assertLessEqual(result["work"], bound)
+            self.assertIn(result["status"], ("DIFFERENT", "UNRESOLVED"))
+            self.assertFalse(result["state_aliases"])
+        alias = deepcopy(six)
+        rename = {s: "alias-" + s for s in states}
+        alias.update(
+            states=list(rename.values()),
+            utilities={rename[s]: v for s, v in six["utilities"].items()},
+            bindings={rename[s]: [] for s in states},
+        )
+        a = alias["actions"]["go"]
+        a.update(
+            enabled=list(rename.values()),
+            feasible=list(rename.values()),
+            transitions={
+                rename[s]: rename[t]
+                for s, t in six["actions"]["go"]["transitions"].items()
+            },
+            observations={rename[s]: "renamed-class" for s in states},
+        )
+        result = compare_goal_models(six, alias, max_work=100)
+        self.assertEqual(result["status"], "EQUIVALENT")
+        self.assertEqual(len(set(result["state_aliases"].values())), 6)
+        # Splitting an observation class is a real model change.
+        a["observations"][rename["a"]] = "new-information"
+        self.assertEqual(
+            compare_goal_models(six, alias, max_work=100)["status"], "DIFFERENT"
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

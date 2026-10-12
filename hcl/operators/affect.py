@@ -264,7 +264,154 @@ def generate_affect_hypotheses(
     return tuple(results)
 
 
-def changed_goals(previous, current):
+def goal_model_description(plan, goal):
+    """Retain the complete finite goal/transition model without source labels."""
+    from hcl.memory import codec
+    from hcl.kernel.types import thaw
+
+    graph = plan["graph"]
+    return dict(
+        states=sorted(graph["states"]),
+        terminal=sorted(graph["terminal"]),
+        utilities={s: encoded(rational(v)) for s, v in goal["utilities"].items()},
+        bindings={
+            s: sorted(
+                codec.canonical(thaw(b["when"]))
+                for b in plan["bindings"]
+                if b["state"] == s
+            )
+            for s in graph["states"]
+        },
+        actions={
+            a["id"]: dict(
+                cost=encoded(rational(a["cost"])),
+                enabled=sorted(a["enabled"]),
+                feasible=sorted(a["feasible"]),
+                transitions=dict(a["transitions"]),
+                observations=dict(a["observations"]),
+            )
+            for a in graph["actions"]
+        },
+    )
+
+
+def compare_goal_models(left, right, *, max_work):
+    """Exact bounded state-alias isomorphism, not a color-histogram heuristic.
+
+    Every matched state preserves goal consequence, source predicate, terminality,
+    all labeled transitions/opportunities and the observation equivalence relation.
+    Raw state/observation symbols may change. Unexplored bijections stay unresolved.
+    """
+    from hcl.kernel.types import thaw
+
+    left, right = thaw(left), thaw(right)
+    work = 0
+
+    class Bound(Exception):
+        pass
+
+    def step():
+        nonlocal work
+        if work >= max_work:
+            raise Bound()
+        work += 1
+
+    def result(status, mapping=None):
+        return dict(
+            status=status,
+            state_aliases={} if mapping is None else mapping,
+            work=work,
+            scope="EXACT_FINITE_STATE_ALIAS_COMPARISON_NOT_OPEN_SEMANTIC_EQUIVALENCE",
+        )
+
+    try:
+        step()
+        if left == right:
+            return result("EQUIVALENT", {s: s for s in left["states"]})
+        if len(left["states"]) != len(right["states"]) or set(left["actions"]) != set(
+            right["actions"]
+        ):
+            return result("DIFFERENT")
+        actions = sorted(left["actions"])
+        if any(
+            left["actions"][a]["cost"] != right["actions"][a]["cost"] for a in actions
+        ):
+            return result("DIFFERENT")
+
+        def colors(model):
+            return {
+                s: (
+                    model["utilities"][s],
+                    s in model["terminal"],
+                    tuple(model["bindings"][s]),
+                    tuple(
+                        (
+                            s in model["actions"][a]["enabled"],
+                            s in model["actions"][a]["feasible"],
+                        )
+                        for a in actions
+                    ),
+                )
+                for s in model["states"]
+            }
+
+        lcolors, rcolors = colors(left), colors(right)
+        choices = {
+            s: tuple(t for t in right["states"] if lcolors[s] == rcolors[t])
+            for s in left["states"]
+        }
+        if any(not values for values in choices.values()):
+            return result("DIFFERENT")
+
+        def extend(mapping, reverse, first, target):
+            mapping, reverse = dict(mapping), dict(reverse)
+            pending = [(first, target)]
+            while pending:
+                s, t = pending.pop()
+                if s in mapping:
+                    if mapping[s] != t:
+                        return None
+                    continue
+                if t in reverse or lcolors[s] != rcolors[t]:
+                    return None
+                step()
+                for action in actions:
+                    a, b = left["actions"][action], right["actions"][action]
+                    if any(
+                        (a["observations"][s] == a["observations"][u])
+                        != (b["observations"][t] == b["observations"][v])
+                        for u, v in mapping.items()
+                    ):
+                        return None
+                    pending.append((a["transitions"][s], b["transitions"][t]))
+                mapping[s] = t
+                reverse[t] = s
+            return mapping, reverse
+
+        def search(mapping, reverse):
+            if len(mapping) == len(left["states"]):
+                return mapping
+            s = min(
+                (s for s in left["states"] if s not in mapping),
+                key=lambda s: sum(t not in reverse for t in choices[s]),
+            )
+            for t in choices[s]:
+                if t in reverse:
+                    continue
+                extended = extend(mapping, reverse, s, t)
+                if extended is not None:
+                    found = search(*extended)
+                    if found is not None:
+                        return found
+            return None
+
+        mapping = search({}, {})
+        return result("DIFFERENT" if mapping is None else "EQUIVALENT", mapping)
+    except Bound:
+        return result("UNRESOLVED")
+
+
+def changed_goals(previous, current, *, max_work):
     """Separate changed appraisal dimensions from newly acquired evidence.
 
     State-code/variable identities remain in both immutable profiles, but a renamed
@@ -281,6 +428,9 @@ def changed_goals(previous, current):
     def semantic(profile):
         result = thaw(profile)
         result.pop("source_variable_ids", None)
+        goal = result.pop("goal")
+        result["goal_identity"] = {key: goal[key] for key in ("id", "label")}
+        result.pop("goal_model")
         for row in result["control"].get("actions", {}).values():
             available = row.pop("subjective_available_states", ())
             feasible = row.pop("subjective_feasible_states", ())
@@ -292,8 +442,12 @@ def changed_goals(previous, current):
         return result
 
     rows = []
+    used = 0
+    frontier = set()
     for goal in sorted(set(before) | set(after)):
         old, new = before.get(goal), after.get(goal)
+        comparison = None
+        unresolved = ()
         if old is None or new is None:
             change = "ADDED" if old is None else "REMOVED"
             dimensions = tuple(sorted(semantic(new or old)))
@@ -304,19 +458,32 @@ def changed_goals(previous, current):
                 for key in sorted(set(left) | set(right))
                 if codec.canonical(left.get(key)) != codec.canonical(right.get(key))
             )
-            change = "REVISED" if dimensions else "UNCHANGED"
+            comparison = compare_goal_models(
+                old["goal_model"], new["goal_model"], max_work=max(0, max_work - used)
+            )
+            used += comparison["work"]
+            if comparison["status"] == "DIFFERENT":
+                dimensions = (*dimensions, "goal_model")
+            elif comparison["status"] == "UNRESOLVED":
+                unresolved = ("goal_model",)
+                frontier.add("AFFECT_GOAL_COMPARISON_FRONTIER")
+            change = (
+                "REVISED" if dimensions else "UNRESOLVED" if unresolved else "UNCHANGED"
+            )
         rows.append(
             dict(
                 goal_id=goal,
                 change=change,
                 changed_dimensions=dimensions,
+                unresolved_dimensions=unresolved,
+                goal_model_comparison=comparison,
                 evidence_changed=codec.canonical(thaw(old))
                 != codec.canonical(thaw(new)),
                 previous=old,
                 current=new,
             )
         )
-    return tuple(rows)
+    return dict(changes=tuple(rows), work=used, frontier=tuple(sorted(frontier)))
 
 
 def update_coping(model, profiles, utilities, priorities):

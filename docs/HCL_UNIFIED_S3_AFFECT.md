@@ -64,6 +64,14 @@ transition model. Goal revisions and analyst alternatives are explicit.
 Changed dimensions are recomputed; unchanged dimensions remain visible. New
 state/variable identities are retained as evidence changes without falsely
 claiming a changed appraisal when all consequences and opportunities are equal.
+State aliases are compared by a bounded exact bijection preserving every goal
+consequence, predicate binding, terminal state, labeled action transition, cost,
+opportunity and observation partition, including currently unreachable states.
+Observation symbols and source span labels may change without changing the model;
+original source evidence and the verified alias witness remain in the result.
+A matching color histogram alone is never an equivalence proof. Comparison work
+is charged to the shared local budget. Unexplored mappings retain UNRESOLVED
+and AFFECT_GOAL_COMPARISON_FRONTIER rather than an invented UNCHANGED.
 Analyst alternatives explicitly do not establish character reappraisal. All
 other reappraisal claims remain conditional on the source model.
 
@@ -84,7 +92,9 @@ zero-total priority branch is undefined, not a fabricated uniform priority.
 Derived rationals outside the existing planning numeric envelope retain a named
 frontier rather than being rounded or misreported as invalid input. Missing
 probabilities, partial cognitive views and finite work exhaustion propagate to
-PARTIAL output with visible limitations. If subjective planning is computed but
+PARTIAL output with visible limitations. Multi-packet affect input is rejected
+before sending with AFFECT_COMPOSITION_CAPACITY; this increment does not claim
+cross-packet affect compilation. If subjective planning is computed but
 a different designated-world plan reaches its budget frontier, subjective
 appraisal survives while actual feasibility stays unknown with its own frontier.
 Parameters are conditional inputs, not

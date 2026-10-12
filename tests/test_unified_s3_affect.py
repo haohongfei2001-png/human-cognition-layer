@@ -826,6 +826,228 @@ class AffectExecutionTests(unittest.TestCase):
                     )
                 )
 
+    def aliased_revision_candidate(self):
+        candidate = self.revised_candidate(received=False)
+        model = candidate["models"][0]
+        episode = model["episodes"][1]
+        episode["revision_kind"] = "ANALYST_REINTERPRETATION"
+        plan = model["mental"]["plans"][1]
+        names = {s: "renamed-" + s for s in plan["graph"]["states"]}
+
+        def rekey(values):
+            return {names[s]: v for s, v in values.items()}
+
+        for field in ("previous_weights", "current_weights"):
+            episode[field] = rekey(episode[field])
+        for goal in episode["goals"]:
+            goal["utilities"] = rekey(goal["utilities"])
+        plan["weights"] = rekey(plan["weights"])
+        for binding in plan["bindings"]:
+            binding["state"] = names[binding["state"]]
+        graph = plan["graph"]
+        for field in ("states", "terminal"):
+            graph[field] = [names[s] for s in graph[field]]
+        graph["utilities"] = rekey(graph["utilities"])
+        for action in graph["actions"]:
+            for field in ("enabled", "feasible"):
+                action[field] = [names[s] for s in action[field]]
+            action["transitions"] = {
+                names[s]: names[t] for s, t in action["transitions"].items()
+            }
+            action["observations"] = {
+                names[s]: "observation-alias-" + v
+                for s, v in action["observations"].items()
+            }
+        return candidate
+
+    def test_alias_only_reappraisal_preserves_goals_and_qualifies_replay(self):
+        import asyncio
+        from hcl.memory.store import StateStore
+        from hcl.semantics.segments import segment_snapshot
+
+        original_snapshot = self.store.snapshot(
+            "scene", self.owner, self.request.source_handles
+        )
+        source = next(iter(original_snapshot.immutable_views.values()))
+        handle = self.store.put_source(
+            "scene",
+            self.owner,
+            "story",
+            source.text + "\nA further report repeats the same goals.",
+        )
+        self.fixture.scene.handle = handle
+        self.request = replace(self.request, source_handles=(handle,))
+        self.fixture.request = self.request
+        candidate = self.aliased_revision_candidate()
+        snapshot = self.store.snapshot("scene", self.owner, self.request.source_handles)
+        source_refs = [
+            s.segment_id
+            for s in segment_snapshot(snapshot, self.request.question)
+            if s.kind == "SOURCE"
+        ]
+        self.assertGreater(len(source_refs), 1)
+        for goal in candidate["models"][0]["episodes"][1]["goals"]:
+            goal["segment_ids"] = [source_refs[-1]]
+        result, port = self.run_candidate(candidate)
+        self.assertEqual(result.status, "COMPLETED", result.diagnostics)
+        actual = self.actual(result)
+        changes = actual.values["models"][0]["episodes"][1]["derived"]["reappraisal"][
+            "changes"
+        ]
+        self.assertEqual({r["change"] for r in changes}, {"UNCHANGED"})
+        self.assertTrue(all(r["evidence_changed"] for r in changes))
+        self.assertTrue(
+            all(r["goal_model_comparison"]["status"] == "EQUIVALENT" for r in changes)
+        )
+        self.assertTrue(
+            all(
+                r["goal_model_comparison"]["state_aliases"]["r"] == "renamed-r"
+                for r in changes
+            )
+        )
+        for mutation in ("change", "bijection"):
+            bad = thaw(actual.values)
+            row = bad["models"][0]["episodes"][1]["derived"]["reappraisal"]["changes"][
+                0
+            ]
+            if mutation == "change":
+                row["change"] = "REVISED"
+            else:
+                row["goal_model_comparison"]["state_aliases"]["r"] = "renamed-b"
+            with self.subTest(mutation=mutation), self.assertRaises(HCLFailure):
+                AnswerAssembler()._claim(replace(actual, values=bad))
+        path = self.store.path
+        self.store.close()
+        self.store = StateStore.sqlite(path, revision=True)
+        self.fixture.store = self.fixture.scene.store = self.store
+        port = OfflineModelPort("NO_NEW_SEND")
+        client = HCL(
+            self.store, principal=self.owner, gateway=ModelGateway(self.store, port)
+        )
+
+        async def collect():
+            return [e async for e in client.stream(self.request)]
+
+        for replay in (
+            client.run_sync(self.request),
+            asyncio.run(collect())[-1].result,
+        ):
+            self.assertEqual(
+                (replay.status, replay.answer, replay.claim_records),
+                (result.status, result.answer, result.claim_records),
+            )
+        self.assertEqual(port.attempts, 0)
+
+    def test_unreached_goal_consequences_and_transitions_are_not_discarded(self):
+        for mutation in ("utility", "transition"):
+            candidate = self.aliased_revision_candidate()
+            model = candidate["models"][0]
+            for episode in model["episodes"]:
+                episode["forecast_action"] = None
+            if mutation == "utility":
+                # Success is unreachable from the current known closed state.
+                model["episodes"][1]["goals"][0]["utilities"]["renamed-success"] = "6"
+            else:
+                model["mental"]["plans"][1]["graph"]["actions"][0]["transitions"][
+                    "renamed-r"
+                ] = "renamed-harm"
+            result, _ = self.run_candidate(
+                candidate, replace(self.request, request_id=mutation)
+            )
+            self.assertEqual(result.status, "COMPLETED", result.diagnostics)
+            first, second = self.actual(result).values["models"][0]["episodes"]
+            self.assertEqual(
+                first["derived"]["profiles"][0]["appraisal"],
+                second["derived"]["profiles"][0]["appraisal"],
+            )
+            change = next(
+                r
+                for r in second["derived"]["reappraisal"]["changes"]
+                if r["goal_id"] == "safety"
+            )
+            self.assertEqual(change["change"], "REVISED")
+            self.assertIn("goal_model", change["changed_dimensions"])
+            self.assertEqual(change["goal_model_comparison"]["status"], "DIFFERENT")
+
+    def test_reappraisal_comparison_work_exhaustion_is_visible_and_replayable(self):
+        candidate = self.aliased_revision_candidate()
+        complete, _ = self.run_candidate(
+            candidate, replace(self.request, request_id="measure-comparison")
+        )
+        row = self.actual(complete).values["models"][0]["episodes"][1]
+        comparison_work = row["derived"]["reappraisal"]["comparison_work"]
+        self.assertGreater(comparison_work, 1)
+        limit = complete.usage["local_evaluations"] - comparison_work
+        request = replace(
+            self.request,
+            request_id="comparison-bound",
+            budget=replace(self.request.budget, max_local_evaluations=limit),
+        )
+        result, port = self.run_candidate(candidate, request)
+        self.assertEqual(result.status, "PARTIAL", result.diagnostics)
+        self.assertEqual(result.usage["local_evaluations"], limit)
+        self.assertIn("AFFECT_GOAL_COMPARISON_FRONTIER", result.answer)
+        changes = self.actual(result).values["models"][0]["episodes"][1]["derived"][
+            "reappraisal"
+        ]["changes"]
+        self.assertTrue(all(r["change"] == "UNRESOLVED" for r in changes))
+        self.assertTrue(all(r["goal_model_comparison"]["work"] == 0 for r in changes))
+        replay = HCL(
+            self.store, principal=self.owner, gateway=ModelGateway(self.store, port)
+        ).run_sync(request)
+        self.assertEqual((replay.status, replay.answer), (result.status, result.answer))
+        self.assertEqual(port.attempts, 1)
+
+    def test_composition_capacity_names_exact_operator_before_any_model_send(self):
+        import asyncio
+        from hcl import RevisionIssue
+
+        handle = self.store.put_source(
+            "scene", self.owner, "story", "An actor observes a changed route.\n" * 200
+        )
+        for kind, prefix in [
+            ("revision.evaluate", "REVISION"),
+            ("mental.simulate", "MENTAL"),
+            ("argument.evaluate", "ARGUMENT"),
+            ("hypothesis.discover", "DISCOVERY"),
+            ("interaction.evaluate", "INTERACTION"),
+            ("affect.evaluate", "AFFECT"),
+        ]:
+            request = replace(
+                self.request,
+                request_id=kind,
+                source_handles=(handle,),
+                issue=ExecutionIssue(
+                    "root",
+                    goals=(
+                        (
+                            RevisionIssue(kind)
+                            if kind == "revision.evaluate"
+                            else Issue(kind, kind)
+                        ),
+                    ),
+                ),
+                budget=replace(
+                    self.request.budget, max_request_bytes=4000, max_context_tokens=4000
+                ),
+            )
+            port = OfflineModelPort("{}")
+            client = HCL(
+                self.store, principal=self.owner, gateway=ModelGateway(self.store, port)
+            )
+
+            async def collect():
+                return [e async for e in client.stream(request)]
+
+            result = asyncio.run(collect())[-1].result
+            self.assertEqual(result.status, "BUDGET_EXHAUSTED", result.diagnostics)
+            self.assertEqual(
+                [d.code for d in result.diagnostics], [prefix + "_COMPOSITION_CAPACITY"]
+            )
+            self.assertFalse(result.answer or result.claim_records)
+            self.assertEqual(port.attempts, 0)
+            self.assertEqual(client.run_sync(request).diagnostics, result.diagnostics)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -17,6 +17,7 @@ from hcl.operators.affect import (
     update_coping,
     changed_goals,
     validate_observation_coarsening,
+    goal_model_description,
 )
 from hcl.semantics.model_compiler import planning_model
 
@@ -169,6 +170,7 @@ def derive_episode(
         profile = dict(
             goal_id=goal["id"],
             goal=goal,
+            goal_model=goal_model_description(plan, goal),
             appraisal=appraise(
                 goal["utilities"],
                 before,
@@ -242,7 +244,21 @@ def derive_episode(
                 actually_used="NOT_ESTABLISHED",
             )
         )
-    changes = changed_goals(prior.get("profiles", ()), profiles) if prior else ()
+    coping_work = sum(
+        row["computation"].get("expansions", 0)
+        for alternative in alternatives
+        for row in alternative["branches"]
+    )
+    comparison = (
+        changed_goals(
+            prior.get("profiles", ()),
+            profiles,
+            max_work=max(0, allowance - coping_work),
+        )
+        if prior
+        else dict(changes=(), work=0, frontier=())
+    )
+    frontier.extend(comparison["frontier"])
     return dict(
         status="COMPUTED",
         profiles=profiles,
@@ -257,7 +273,9 @@ def derive_episode(
         reappraisal=dict(
             previous_id=episode["previous_id"],
             kind=episode["revision_kind"],
-            changes=changes,
+            changes=comparison["changes"],
+            comparison_work=comparison["work"],
+            frontier=comparison["frontier"],
             character_reappraisal=(
                 "NOT_ESTABLISHED_ANALYST_ALTERNATIVE"
                 if episode["revision_kind"] == "ANALYST_REINTERPRETATION"
@@ -447,6 +465,7 @@ class AffectModelOperator:
                     recorded_solve,
                     allowance=limit - start,
                 )
+                used += row["derived"]["reappraisal"]["comparison_work"]
                 row["coping_solver_calls"] = calls
                 row["status"] = "COMPUTED"
                 row["derived_allowance"] = limit - start
