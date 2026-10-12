@@ -1107,8 +1107,11 @@ class ExecutionRunner:
             if self.lease is not None:
                 try:
                     usage.update(self.ledger.usage(self.lease))
-                except HCLFailure:
-                    usage.update(mock_calls=None, mock_usage_unknown=True)
+                except HCLFailure as usage_error:
+                    # An authenticated erasure fence carries its retained,
+                    # content-free accounting. Do not turn known past usage
+                    # into unknown merely because the task payload is gone.
+                    usage.update(usage_error.resource_usage or dict(mock_calls=None, mock_usage_unknown=True))
             if self.counters:
                 usage.update(
                     local_evaluations=(

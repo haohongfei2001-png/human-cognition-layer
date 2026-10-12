@@ -3,7 +3,7 @@
 
 完整规格：[HCL_SYSTEM_REDESIGN_SPEC.md](docs/HCL_SYSTEM_REDESIGN_SPEC.md)；唯一结构化计划：[hcl_design_manifest.json](docs/hcl_design_manifest.json)；执行交接：[HCL_CODEX_HANDOFF.md](docs/HCL_CODEX_HANDOFF.md)。
 
-实施基线main：`0c7e9b866bc2aa82cc98420af82458059ec47f70`。
+实施基线main：`542e2ea5c91bca24dd8983cf6a6b0c701f843fc8`。
 
 当前切片：**S2.3 / INTEGRATED_OFFLINE**。预算化Issue图、实际并行算子、字段/来源反馈修复、完整外存与有界上下文、受控恢复和共同LocalModel协议接入同一engine。
 
@@ -11,7 +11,7 @@
 
 **NEXT_READY：S3 ∥ S4**。继续完整S3/M03–M09与并行S4/M10–M14；当前有限三机制是增量证据，不关闭阶段。完整S1/S2实模功能、S5–S7及T01–T32研究目标全部保留。
 
-**在建领域：**S3有限M03/M05/M06、M04共享发现、M07互动、M08评价、M09关系/角色/纵向模型与S4有限M13论证已接入同一runtime；M10在建：实际授权词法/向量检索、记录反证闭包、按需材料消费、查询失效与恢复。自然长文语义检索、全部记忆治理/隐私擦除和完整领域研究退出仍开放。
+**在建领域：**S3有限M03/M05/M06、M04共享发现、M07互动、M08评价、M09关系/角色/纵向模型与S4有限M13论证已接入同一runtime；M10增量具实际授权检索、依赖闭包、原文消费和持久恢复，以及保留对象归属、当前读出口墓碑门、可恢复受控擦除和逐源旧原件封装。前驱/未知来源保留限制显式存在；自然语义检索、完整记忆治理与所有领域研究退出仍开放。
 
 S1尚未完整完成。真实本地算子与模拟端口的离线接通不能证明真实模型语义能力。每次运行的精确commit和代码文件hash由对应scripts/witness_unified_s*.py生成；CI在准确PR head上执行，不将旧回归数量作为新能力完成率。
 

@@ -17,8 +17,11 @@ def version_bundle(*, schema=NAMESPACE_SCHEMA):
     # Explicit runtime source only, never evaluation data, private packages or git history.
     files = {str(path.relative_to(root)): sha256(path.read_bytes()).hexdigest()
              for path in sorted(root.rglob("*.py"))}
-    return {"code_sha256": sha256(codec.canonical(files).encode()).hexdigest(),
+    bundle = {"code_sha256": sha256(codec.canonical(files).encode()).hexdigest(),
             "schema": schema, "rules": RULE_VERSION, "indexes": ({"revision":1, "retrieval":"hcl-evidence-retrieval-1"} if schema in (3, 4) else {})}
+    if schema in (3, 4):
+        bundle["governance"] = "hcl-memory-governance-1"
+    return bundle
 
 
 def blocked():

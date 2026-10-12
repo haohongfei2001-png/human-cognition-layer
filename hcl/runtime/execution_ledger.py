@@ -29,7 +29,7 @@ class ExecutionLedger:
         """Load only the committed results used by this authenticated delivery."""
         with self.store._transaction() as db:
             session = self.store._session(db, request.session_id, request.principal)
-            results = []
+            results, expected = [], []
             for result_id in result_ids:
                 row = db.execute(
                     "SELECT * FROM inferences WHERE session_id=? AND result_id=?",
@@ -49,7 +49,9 @@ class ExecutionLedger:
                 if type(result) is not InferenceResult or result.result_id != result_id:
                     raise stopped("COMMITTED_RESULT_MISMATCH")
                 results.append(result)
-            return tuple(results)
+                expected.append(dict(row))
+        self.store._validate_inference_delivery(request.session_id, request.principal, expected)
+        return tuple(results)
 
     def _checkpoint(self, task):
         if not task["result_hash"]:
@@ -88,7 +90,8 @@ class ExecutionLedger:
                     )
                 checkpoint = replace(checkpoint, mode="RUNNING")
                 task = dict(row)
-                task["result_hash"] = self.store._put_object(checkpoint)
+                task["result_hash"] = self.store._put_content(checkpoint, session_id=request.session_id,
+                    owner=("task", request.session_id, key))
                 self.store._record(db, "tasks", task, session["revision"])
                 return (
                     TaskLease(
@@ -110,7 +113,8 @@ class ExecutionLedger:
                 raise stopped("EXECUTION_CHECKPOINT_OWNER")
             if len(codec.dumps(checkpoint)) > 4 * 1024 * 1024:
                 raise stopped("AUDIT_CHECKPOINT_CAPACITY", "BUDGET_EXHAUSTED", "storage")
-            task["result_hash"] = self.store._put_object(checkpoint)
+            task["result_hash"] = self.store._put_content(checkpoint, session_id=lease.session_id,
+                owner=("task", lease.session_id, lease.task_key))
             self.store._record(db, "tasks", task, session["revision"])
         self.store._checkpoint("execution_checkpoint_saved")
 
@@ -163,7 +167,8 @@ class ExecutionLedger:
             else:
                 task["owner_id"] = self.store.owner_id
                 checkpoint = replace(checkpoint, owner_id=self.store.owner_id, mode="RESUMABLE")
-                task["result_hash"] = self.store._put_object(checkpoint)
+                task["result_hash"] = self.store._put_content(checkpoint, session_id=request.session_id,
+                    owner=("task", request.session_id, key))
                 self.store._record(db, "tasks", task, session["revision"])
                 token = ResumeToken(key, fingerprint, self.store.owner_id)
         if token is None:
@@ -184,6 +189,8 @@ class ExecutionLedger:
             row = db.execute("SELECT * FROM tasks WHERE task_key=?", (key,)).fetchone()
             if row is None or row["fingerprint"] != fingerprint:
                 raise stopped("EXECUTION_AUDIT_DENIED", "DENIED", "access")
+            from hcl.memory.erasure import erased_task
+            erased_task(self.store, db, row)
             for source in db.execute(
                 "SELECT source_id FROM sources WHERE session_id=?", (request.session_id,)
             ):
@@ -243,7 +250,8 @@ class ExecutionLedger:
                 raise stopped("TASK_QUERY_DEPENDENCY_BOUND", "BUDGET_EXHAUSTED", "commit")
             task.update(
                 state="COMPLETED" if result.status in ("COMPLETED", "PARTIAL") else "FAILED",
-                result_hash=self.store._put_object(result),
+                result_hash=self.store._put_content(result, session_id=lease.session_id, context=checkpoint,
+                    owner=("task", lease.session_id, lease.task_key)),
                 dependencies=codec.canonical(pack_dependencies(positive, queries)),
             )
             self.store._record(db, "tasks", task, session["revision"])
