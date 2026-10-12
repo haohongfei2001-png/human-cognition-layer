@@ -94,7 +94,7 @@ class LocalModelOperator:
                 snapshot, segments, ast["candidate"], allowance
             )
             result = ReadingLogicOperator(self.semantic_profile).run(snapshot, issue, allowance, forest)
-        elif model.dialect == "mental-scene-1":
+        elif model.dialect in ("mental-scene-1", "argument-model-1"):
             from hcl.semantics.model_compiler import LocalModelCompiler
             from hcl.operators.mental_scene import MentalSceneOperator
             from hcl.runtime.context import ContextChunk
@@ -103,13 +103,18 @@ class LocalModelOperator:
                 raise ValueError("source-bound mental model fields required")
             segments = tuple(SourceSegment(**row) for row in ast["segments"])
             sources = tuple(row for row in segments if row.kind == "SOURCE")
-            self.context.serialize(snapshot, ast["question"], ContextChunk("mental_compile", sources, 0, 1))
+            purpose = "mental_compile" if model.dialect == "mental-scene-1" else "argument_compile"
+            self.context.serialize(snapshot, ast["question"], ContextChunk(purpose, sources, 0, 1))
             if tuple(row for row in segments if row.kind == "QUESTION") != question_segments(
                 ast["question"]
             ):
                 raise ValueError("query anchors changed")
-            program = LocalModelCompiler().compile(snapshot, segments, ast["candidate"], allowance)
-            result = MentalSceneOperator().run(snapshot, issue, allowance, program)
+            from hcl.semantics.argument_compiler import ArgumentCompiler
+            from hcl.operators.argument_model import ArgumentModelOperator
+            compiler = LocalModelCompiler() if model.dialect == "mental-scene-1" else ArgumentCompiler()
+            operator = MentalSceneOperator() if model.dialect == "mental-scene-1" else ArgumentModelOperator()
+            program = compiler.compile(snapshot, segments, ast["candidate"], allowance)
+            result = operator.run(snapshot, issue, allowance, program)
         elif model.dialect == "scoped-revision-1":
             if set(ast) != {"query"}:
                 raise HCLFailure(

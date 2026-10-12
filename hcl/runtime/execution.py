@@ -118,25 +118,27 @@ class ExecutionRunner:
                 "logic.compare_semantic_readings",
                 "revision.evaluate",
                 "mental.simulate",
+                "argument.evaluate",
                 "model.respond",
             ):
                 purpose = {
                     "logic.compare_semantic_readings": "semantic_compile",
                     "revision.evaluate": "revision_compile",
                     "mental.simulate": "mental_compile",
+                    "argument.evaluate": "argument_compile",
                     "model.respond": "answer",
                 }[goal.kind]
                 parts = self.context.chunks(
                     snapshot, request.question, purpose, request.budget, self.gateway.capabilities
                 )
-                if goal.kind in ("revision.evaluate", "mental.simulate") and len(parts) > 1:
+                if goal.kind in ("revision.evaluate", "mental.simulate", "argument.evaluate") and len(parts) > 1:
                     # Cross-packet rule/identity IDs need a future composition
                     # compiler; never publish the final fragment as a full index.
                     raise stopped(
                         (
                             "REVISION_COMPOSITION_CAPACITY"
                             if goal.kind == "revision.evaluate"
-                            else "MENTAL_COMPOSITION_CAPACITY"
+                            else ("MENTAL_COMPOSITION_CAPACITY" if goal.kind == "mental.simulate" else "ARGUMENT_COMPOSITION_CAPACITY")
                         ),
                         "BUDGET_EXHAUSTED",
                         "context",
@@ -306,10 +308,12 @@ class ExecutionRunner:
                     residuals,
                 )
                 node["result"] = model
-            elif goal.kind == "mental.simulate":
+            elif goal.kind in ("mental.simulate", "argument.evaluate"):
                 from hcl.semantics.model_compiler import LocalModelCompiler
 
-                program = LocalModelCompiler().compile(snapshot, segments, raw, request.budget)
+                from hcl.semantics.argument_compiler import ArgumentCompiler
+                compiler = LocalModelCompiler() if goal.kind == "mental.simulate" else ArgumentCompiler()
+                program = compiler.compile(snapshot, segments, raw, request.budget)
                 assumptions = tuple(
                     sorted({a for model in program["models"] for a in model["active_assumptions"]})
                 )
@@ -317,8 +321,8 @@ class ExecutionRunner:
                     sorted({s for model in program["models"] for s in model["unmodeled_segments"]})
                 )
                 node["result"] = LocalModel(
-                    "mental-proposal:" + sha256(raw.encode()).hexdigest(),
-                    "mental-scene-1",
+                    ("mental-proposal:" if goal.kind == "mental.simulate" else "argument-proposal:") + sha256(raw.encode()).hexdigest(),
+                    "mental-scene-1" if goal.kind == "mental.simulate" else "argument-model-1",
                     dict(candidate=raw, segments=[asdict(s) for s in segments], question=request.question),
                     snapshot.source_versions,
                     assumptions,
@@ -525,7 +529,7 @@ class ExecutionRunner:
                 request.budget,
             )
             cost = len(forest.readings)
-        elif goal.kind == "mental.simulate":
+        elif goal.kind in ("mental.simulate", "argument.evaluate"):
             compiled = self.nodes[node["requires"][0]]["result"]
             issue = ModelIssue(goal.issue_id, goal.kind, goal.source_id, compiled)
             cost = request.budget.max_local_evaluations - self.counters["local_reserved"]
@@ -534,7 +538,7 @@ class ExecutionRunner:
             snapshot = node["compute_snapshot"]
             cost = request.budget.max_local_evaluations - self.counters["local_reserved"]
         remaining = request.budget.max_local_evaluations - self.counters["local_reserved"]
-        if cost > remaining or (cost == 0 and goal.kind in ("revision.evaluate", "mental.simulate")):
+        if cost > remaining or (cost == 0 and goal.kind in ("revision.evaluate", "mental.simulate", "argument.evaluate")):
             if any(
                 other is not node
                 and other["operation"] == "compute"

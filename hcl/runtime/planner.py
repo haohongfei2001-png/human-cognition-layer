@@ -15,6 +15,7 @@ SUPPORTED_GOALS = frozenset(
         "logic.compare_semantic_readings",
         "revision.evaluate",
         "mental.simulate",
+        "argument.evaluate",
         "source.report",
         "model.respond",
     }
@@ -45,6 +46,7 @@ class IssuePlanner:
                 "logic.compare_semantic_readings",
                 "revision.evaluate",
                 "mental.simulate",
+        "argument.evaluate",
                 "model.respond",
             ):
                 requirements.append("compile" if goal.kind != "model.respond" else "respond")
@@ -103,7 +105,7 @@ class IssuePlanner:
         if error is not None:
             d = error.diagnostic
             if (
-                d.stage in ("semantic_compile", "revision_compile", "model_compile")
+                d.stage in ("semantic_compile", "revision_compile", "model_compile", "argument_compile")
                 and error.status == "INVALID_REQUEST"
             ):
                 return dict(kind="REPRESENTATION_REPAIR", code=d.code, field=d.field_path)
