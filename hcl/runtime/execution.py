@@ -772,6 +772,105 @@ class ExecutionRunner:
                 resource_usage=result.usage,
             )
 
+    def _qualify_replay(self, request, replay):
+        """Reassemble pre-fix M04 delivery from unchanged committed evidence.
+
+        History stays byte-identical. No model/operator is reexecuted and no
+        accepted-operation digest is rewritten. Late ACL and capacity checks
+        happen on the actual newly qualified delivery in the caller.
+        """
+        old = [
+            claim
+            for claim in replay.claim_records
+            if claim.epistemic_status == "CONDITIONAL_MECHANISM_COMPARISON_NOT_TRUTH"
+            and not any(
+                field.field == "domain_issues" for field in claim.used_result_fields
+            )
+        ]
+        if not old:
+            return replay
+        try:
+            ids = tuple(
+                sorted(
+                    {
+                        field.result_id
+                        for claim in old
+                        for field in claim.used_result_fields
+                    }
+                )
+            )
+            if not ids or not set(ids) <= set(
+                replay.execution_receipt.get("result_ids", ())
+            ):
+                raise stopped("CACHED_RESULT_BINDING_INVALID")
+            results = self.ledger.delivery_inferences(request, ids)
+            assembler = self.engine._assembler
+            claims = tuple(assembler.compact_claim(result) for result in results)
+            contract = AnswerContract(
+                "\n\n".join(claim.text for claim in claims),
+                claims,
+                "ACTUAL_RESULT_FIELDS",
+                "NOT_CERTIFIED",
+            )
+            assembler.validate_compact(contract, results)
+            replacements = {claim.claim_id: claim for claim in claims}
+            if set(replacements) != {claim.claim_id for claim in old}:
+                raise stopped("CACHED_RESULT_BINDING_INVALID")
+            claims = tuple(
+                replacements.get(claim.claim_id, claim)
+                for claim in replay.claim_records
+            )
+            unresolved = tuple(
+                sorted(
+                    set(replay.unresolved_issues)
+                    | {
+                        code
+                        for result in results
+                        for code in assembler.qualification_issues(result)
+                    }
+                )
+            )
+            return replace(
+                replay,
+                answer="\n\n".join(claim.text for claim in claims),
+                claim_records=claims,
+                unresolved_issues=unresolved,
+                status=(
+                    "PARTIAL"
+                    if unresolved and replay.status == "COMPLETED"
+                    else replay.status
+                ),
+                execution_receipt=dict(
+                    replay.execution_receipt,
+                    discovery_delivery_qualification="SCOPED_DOMAIN_LIMITATIONS_V1",
+                ),
+            )
+        except HCLFailure as error:
+            raise HCLFailure(
+                error.status,
+                error.diagnostic.stage,
+                error.diagnostic.code,
+                error.diagnostic.field_path,
+                error.diagnostic.message,
+                resource_usage=replay.usage,
+            ) from None
+
+    def _deliver_replay(self, request, replay):
+        """Retain all known historical usage even if late delivery is refused."""
+        try:
+            replay = self._qualify_replay(request, replay)
+            self.ledger.tasks.validate_cached_delivery(request)
+            self._check_delivery(request, replay)
+            return replay
+        except HCLFailure as error:
+            usage = dict(replay.usage)
+            usage.update(error.resource_usage)
+            raise HCLFailure(
+                error.status, error.diagnostic.stage, error.diagnostic.code,
+                error.diagnostic.field_path, error.diagnostic.message,
+                resource_usage=usage,
+            ) from None
+
     async def run(self, request):
         self.request = request
         safe = dict(
@@ -792,9 +891,7 @@ class ExecutionRunner:
                     raise
                 replay = None
             if replay is not None:
-                self.ledger.tasks.validate_cached_delivery(request)
-                self._check_delivery(request, replay)
-                return replay
+                return self._deliver_replay(request, replay)
             initial = self._initial(request)
             root_goal = request.issue.goals[0] if type(request.issue.goals[0]) is RevisionIssue else None
             if root_goal is not None and root_goal.known_at is not None:
@@ -808,9 +905,7 @@ class ExecutionRunner:
                 root = self._snapshot(request)
             self.lease, checkpoint, replay = self.ledger.open(request, root, initial)
             if replay is not None:
-                self.ledger.tasks.validate_cached_delivery(request)
-                self._check_delivery(request, replay)
-                return replay
+                return self._deliver_replay(request, replay)
             self._restore(checkpoint)
             while True:
                 ready = self.planner.ready(self.nodes)
@@ -847,6 +942,8 @@ class ExecutionRunner:
                 if node["operation"] == "respond" and node["state"] == "DONE":
                     extra_claims.extend(self.engine._assembler.offline_reply(node["result"]).claims)
             unresolved.extend(row["code"] for row in self.trace if row["event"] == "UNRESOLVED")
+            unresolved.extend(code for result in results
+                              for code in self.engine._assembler.qualification_issues(result))
             compact = tuple(self.engine._assembler.compact_claim(result) for result in results)
             computed = AnswerContract(
                 "\n\n".join(c.text for c in compact), compact, "ACTUAL_RESULT_FIELDS", "NOT_CERTIFIED"

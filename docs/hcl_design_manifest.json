@@ -3441,7 +3441,7 @@
   "current_execution": {
     "started_at_utc": "2026-10-11T20:31:00Z",
     "authority": "Owner explicitly authorized continued implementation, tests, PRs and verified merges under the approved S1–S7 plan.",
-    "base_main": "b24c826a10e299ff9c3d713dc0dcdd0ff2d65dd3",
+    "base_main": "e5f70bbb2afcfef665c6e9d7a7d3da2bb612cc83",
     "current_stage": "S3 ∥ S4",
     "delivered_slice": "S2.3",
     "readiness": "INTEGRATED_OFFLINE",
@@ -3490,7 +3490,7 @@
         "readiness": "INTEGRATED_OFFLINE_PARTIAL",
         "stage_complete": false,
         "document": "docs/HCL_UNIFIED_S3_DISCOVERY.md",
-        "checks": "tests/test_unified_s3_abduction.py; tests/test_unified_s3_discovery*.py",
+        "checks": "tests/test_unified_s3_abduction.py; tests/test_unified_s3_discovery*.py; tests/test_unified_discovery_*.py",
         "witness": "scripts/witness_unified_discovery.py",
         "scope": "Shared bounded discovery with actual M03/M05/M06/M13 predictions and residual mechanism edits; injected source interpretations, incomplete grammar, no calibrated posterior or full M04 proof."
       }

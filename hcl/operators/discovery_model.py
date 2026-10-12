@@ -4,7 +4,15 @@ from copy import deepcopy
 from dataclasses import replace
 import json
 
-from hcl.kernel.types import Delta, HCLFailure, InferenceResult, Issue, OpResult, thaw
+from hcl.kernel.types import (
+    Delta,
+    HCLFailure,
+    InferenceResult,
+    Issue,
+    OpResult,
+    thaw,
+    freeze,
+)
 from hcl.memory import codec
 from hcl.operators.abduction import (
     VERSION,
@@ -22,6 +30,99 @@ from hcl.semantics.model_compiler import LocalModelCompiler
 from hcl.semantics.argument_compiler import ArgumentCompiler
 
 KIND = "CONDITIONAL_MECHANISM_DISCOVERY"
+
+
+def domain_limitations(records):
+    """Keep solver caveats attached to their exact program/context/result.
+
+    The issue list is not a claim of no limitations: material structured
+    argument caveats remain visible even if an adapter drops its summary code.
+    """
+    result = []
+    for record in records:
+        codes = set(record.get("issues", ()))
+        models = []
+        for model in record.get("values", {}).get("models", ()):
+            details = {
+                name: model[name]
+                for name in (
+                    "model_id",
+                    "acceptance_scope",
+                    "theory_consistency",
+                    "excluded_circular_rules",
+                    "strict_conflicts",
+                    "inactive_assumptions",
+                    "frontier",
+                )
+                if name in model
+            }
+            codes.update(model.get("frontier", ()))
+            if model.get("excluded_circular_rules"):
+                codes.add("CYCLIC_PROOF_FRAGMENT_EXCLUDED")
+            if (
+                model.get("strict_conflicts")
+                or model.get("theory_consistency") == "INCONSISTENT_STRICT_CORE"
+            ):
+                codes.add("INCONSISTENT_STRICT_CORE")
+            models.append(details)
+        if codes:
+            result.append(
+                dict(
+                    result_id=record["result_id"],
+                    program_hash=record["program_hash"],
+                    context_hash=record["context_hash"],
+                    kind=record["kind"],
+                    issues=tuple(sorted(codes)),
+                    scope=record["values"].get("scope"),
+                    models=tuple(models),
+                )
+            )
+    return tuple(result)
+
+
+def qualify_domain_results(values):
+    """A computed prediction can still be materially partial in its domain."""
+    all_limitations = []
+    for column in values["prediction_matrix"].values():
+        column["domain_limitations"] = domain_limitations(column["actual_results"])
+        all_limitations.extend(column["domain_limitations"])
+    for probe in values["distinguishing_observations"]:
+        probe["domain_limitations"] = {
+            key: domain_limitations(value["actual_results"])
+            for key, value in probe["evaluations"].items()
+        }
+        for limitations in probe["domain_limitations"].values():
+            all_limitations.extend(limitations)
+        for prediction in probe["predictions"].values():
+            prediction["domain_limitations"] = domain_limitations(
+                prediction["actual_results"]
+            )
+    values["domain_issues"] = tuple(
+        sorted({code for row in all_limitations for code in row["issues"]})
+    )
+    return values
+
+
+def delivery_values(values):
+    """Qualify historical facts without modifying their immutable record.
+
+    Shipped M04 records predate the scoped qualification fields. All fields must
+    be absent for that historical shape; a partially stripped current record is
+    invalid. The current verifier still checks every retained domain prediction.
+    """
+    containers = [values]
+    containers.extend(values["prediction_matrix"].values())
+    for probe in values["distinguishing_observations"]:
+        containers.append(probe)
+        containers.extend(probe["predictions"].values())
+    present = ["domain_issues" in values] + [
+        "domain_limitations" in row for row in containers[1:]
+    ]
+    if not any(present):
+        return freeze(qualify_domain_results(thaw(values)))
+    if not all(present):
+        raise ValueError("incomplete domain qualification contract")
+    return values
 
 
 def instantiate(program, context):
@@ -250,7 +351,8 @@ class DiscoveryModelOperator:
             grammar=data["grammar"],
             search=data["search"],
         )
-        issues = list(values["frontier"])
+        qualify_domain_results(values)
+        issues = [*values["frontier"], *values["domain_issues"]]
         if values["unmodeled_segments"]:
             issues.append("UNMODELED_DISCOVERY_SOURCE")
         if any(c["profile"]["unmodeled"] for c in values["prediction_matrix"].values()):
@@ -321,6 +423,25 @@ def verify_discovery(values):
         or data["posterior"] != "NOT_CALIBRATED"
     ):
         raise ValueError("conditional discovery boundary missing")
+    expected_qualifications = qualify_domain_results(deepcopy(data))
+    if data["domain_issues"] != list(expected_qualifications["domain_issues"]):
+        raise ValueError("domain issue summary mismatch")
+    for key, column in data["prediction_matrix"].items():
+        if codec.canonical(column["domain_limitations"]) != codec.canonical(
+            expected_qualifications["prediction_matrix"][key]["domain_limitations"]
+        ):
+            raise ValueError("observed domain limitations mismatch")
+    for index, probe in enumerate(data["distinguishing_observations"]):
+        expected = expected_qualifications["distinguishing_observations"][index]
+        if codec.canonical(probe["domain_limitations"]) != codec.canonical(
+            expected["domain_limitations"]
+        ):
+            raise ValueError("probe evaluation limitations mismatch")
+        for key, prediction in probe["predictions"].items():
+            if codec.canonical(prediction["domain_limitations"]) != codec.canonical(
+                expected["predictions"][key]["domain_limitations"]
+            ):
+                raise ValueError("probe prediction limitations mismatch")
     observations = data["observations"]
     programs, columns = data["programs"], data["prediction_matrix"]
     if set(programs) != set(columns) or not programs:

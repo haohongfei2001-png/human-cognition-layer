@@ -152,3 +152,35 @@ probabilities, full M04/M05/M13 or LIVE_FUNCTIONAL/EFFECT_CONFIRMED. Full S3/S4,
 the five-domain S5 chain, S6 scale, S7 independent effect confirmation and all
 original acceptance families remain open. Provider calls/spend and sealed reads
 are zero, with no new credentials or service permissions.
+
+## Post-merge domain-qualification correction
+
+PR #432's original discovery composition omitted nested operator issues from
+outer status and compact delivery. Real cycle-exclusion and inconsistent-strict-
+core examples were reproduced for both observed fits and hypothetical probes:
+the direct argument entry returned PARTIAL while discovery returned COMPLETED.
+The current composition retains each actual result's issues, finite acceptance
+scope, excluded circular rules, strict conflicts and frontier beside its exact
+program/context/result identity. Both incomplete and computed probe evaluations
+retain these qualifications. A computed label can remain usable as a conditional
+value while its task is PARTIAL; it does not certify a complete or consistent
+argument theory. Probe caveats qualify that probe rather than a clean observed fit.
+
+The delivery verifier derives the required qualifiers from retained actual
+solver evidence and rejects stripped or altered current qualification fields.
+The side-copy allowlist now also admits the exact published M04 runtime from
+`e5f70bbb2afcfef665c6e9d7a7d3da2bb612cc83`: 179 Python files with bundle hash
+`1d8dd8c70f98fe8b370939f016615550b09fc7aa1dbcaf7d27820b479f89ebbd`.
+Real old completed tasks and RETURNED/computed/committed checkpoints are tested
+across schema 3/4. Historical result objects, event records and accepted-operation
+digests remain unchanged. Current replay reassembles its answer from those
+committed facts and projects original per-result/per-model evidence paths instead
+of pretending synthesized qualifiers were present in the historical record.
+Recovered checkpoints use the same current qualification. No model resend or
+recomputation of accepted results is required. An UNKNOWN send remains blocked.
+The newly assembled delivery still passes full byte budgets and a fresh ACL
+check after leaving its read transaction; failure returns no source content.
+
+`test_unified_discovery_limitations.py` and `test_unified_discovery_upgrade.py`
+retain these regression and historical-recovery checks. This is a correctness
+repair within the same bounded offline M04 increment, not stage completion.
