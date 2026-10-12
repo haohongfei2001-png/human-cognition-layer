@@ -3,7 +3,7 @@
 
 完整规格：[HCL_SYSTEM_REDESIGN_SPEC.md](docs/HCL_SYSTEM_REDESIGN_SPEC.md)；唯一结构化计划：[hcl_design_manifest.json](docs/hcl_design_manifest.json)；执行交接：[HCL_CODEX_HANDOFF.md](docs/HCL_CODEX_HANDOFF.md)。
 
-实施基线main：`b24c826a10e299ff9c3d713dc0dcdd0ff2d65dd3`。
+实施基线main：`e5f70bbb2afcfef665c6e9d7a7d3da2bb612cc83`。
 
 当前切片：**S2.3 / INTEGRATED_OFFLINE**。预算化Issue图、实际并行算子、字段/来源反馈修复、完整外存与有界上下文、受控恢复和共同LocalModel协议接入同一engine。
 

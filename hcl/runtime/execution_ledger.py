@@ -9,7 +9,7 @@ from hashlib import sha256
 import json
 
 from hcl.kernel.execution import ExecutionCheckpoint, ExecutionIssue, PROTOCOL, ResumeToken
-from hcl.kernel.types import HCLFailure, TaskResult
+from hcl.kernel.types import HCLFailure, TaskResult, InferenceResult
 from hcl.kernel.dependencies import pack_dependencies, unpack_dependencies
 from hcl.memory import codec
 from .budget import TaskBudgetLedger, TaskLease, task_key
@@ -24,6 +24,32 @@ def stopped(code, status="FAILED", stage="recovery"):
 class ExecutionLedger:
     def __init__(self, store):
         self.store, self.tasks = store, TaskBudgetLedger(store)
+
+    def delivery_inferences(self, request, result_ids):
+        """Load only the committed results used by this authenticated delivery."""
+        with self.store._transaction() as db:
+            session = self.store._session(db, request.session_id, request.principal)
+            results = []
+            for result_id in result_ids:
+                row = db.execute(
+                    "SELECT * FROM inferences WHERE session_id=? AND result_id=?",
+                    (request.session_id, result_id),
+                ).fetchone()
+                if row is None:
+                    raise stopped("COMMITTED_RESULT_MISSING")
+                self.store._validate_dependencies(
+                    db,
+                    session,
+                    request.principal,
+                    json.loads(row["read_set"]),
+                    row["epoch"],
+                    session["rule"],
+                )
+                result = self.store._get_object(row["object_hash"])
+                if type(result) is not InferenceResult or result.result_id != result_id:
+                    raise stopped("COMMITTED_RESULT_MISMATCH")
+                results.append(result)
+            return tuple(results)
 
     def _checkpoint(self, task):
         if not task["result_hash"]:
