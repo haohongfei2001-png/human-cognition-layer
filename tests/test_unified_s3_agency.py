@@ -184,3 +184,38 @@ class PlanningComputationTests(unittest.TestCase):
         ):
             with self.assertRaises(ValueError):
                 solve_action_values(route_model(), weights, 2)
+
+    def test_internal_q_range_and_denominator_are_not_external_input_caps(self):
+        import math
+
+        for values in (
+            {"a": "-32000000", "b": "1000000"},
+            {"a": "-2000000", "b": "-2000000"},
+            {"a": "1000001/1000003", "b": "1000002/1000033"},
+        ):
+            result = mixed_policy(
+                values,
+                beta=100,
+                rational_weight=1,
+                habit_weight=0,
+                error_weight=0,
+                habit={"a": "1/2", "b": "1/2"},
+            )
+            self.assertTrue(
+                all(
+                    math.isfinite(p) and 0 <= p <= 1
+                    for p in result["probabilities"].values()
+                )
+            )
+            self.assertAlmostEqual(sum(result["probabilities"].values()), 1)
+        self.assertEqual(
+            mixed_policy(
+                {"a": "-32000000", "b": "1000000"},
+                beta=100,
+                rational_weight=1,
+                habit_weight=0,
+                error_weight=0,
+                habit={"a": "1/2", "b": "1/2"},
+            )["probabilities"],
+            {"a": 0, "b": 1},
+        )

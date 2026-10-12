@@ -492,7 +492,12 @@ class SceneExecutionTests(unittest.TestCase):
         self.assertEqual(calculated["plans"][0]["status"], "UNSPECIFIED_BELIEF_WEIGHTS")
         self.assertEqual(calculated["plans"][0]["q"], {})
         self.assertEqual(
-            set(calculated["shared_variables"][0]["planning_states"]),
+            set(
+                [
+                    "open" if row["open"] else "closed"
+                    for row in calculated["shared_variables"][0]["remaining_states"]
+                ]
+            ),
             {"open", "closed"},
         )
         model["plans"][0]["weights"] = {"open": "1/4", "closed": "3/4"}
@@ -569,3 +574,115 @@ class SceneExecutionTests(unittest.TestCase):
             original["beliefs"][1]["possible_values"],
             changed["beliefs"][1]["possible_values"],
         )
+
+    def test_two_plan_mappings_cannot_overwrite_one_shared_mental_variable(self):
+        from copy import deepcopy
+
+        candidate = self.candidate()
+        second = deepcopy(candidate["models"][0]["plans"][0])
+        second["id"] = "different-state-codebook"
+        second["bindings"][0]["state"], second["bindings"][1]["state"] = (
+            "closed",
+            "open",
+        )
+        candidate["models"][0]["plans"].append(second)
+        result, _ = self.run_model(candidate=candidate)
+        self.assertEqual(result.status, "COMPLETED", result.diagnostics)
+        model = self.current_model(result)
+        self.assertEqual(len(model["shared_variables"]), 1)
+        variable = model["shared_variables"][0]
+        self.assertNotIn("planning_states", variable)
+        self.assertEqual(
+            [dict(row) for row in variable["remaining_states"]], [{"open": True}]
+        )
+        self.assertEqual(model["plans"][0]["planning_states"], ("open",))
+        self.assertEqual(model["plans"][1]["planning_states"], ("closed",))
+        self.assertEqual(
+            model["plans"][0]["belief_variable_id"],
+            model["plans"][1]["belief_variable_id"],
+        )
+        self.assertEqual(model["plans"][0]["q"]["direct"], "5")
+        self.assertEqual(model["plans"][1]["q"]["direct"], "-1")
+        fields = [
+            f
+            for c in result.claim_records
+            for f in c.used_result_fields
+            if getattr(f, "path", ())[:2] == ("0", "plans")
+        ]
+        self.assertEqual(
+            [f.value["planning_states"] for f in fields], [("open",), ("closed",)]
+        )
+        # Completed graph replay and stream consume the same distinct bindings.
+        client = HCL(self.store, principal=self.owner)
+
+        async def stream():
+            return [event async for event in client.stream(self.request())]
+
+        self.assertEqual(
+            asyncio.run(stream())[-1].result.claim_records, result.claim_records
+        )
+        self.store.close()
+        self.store = StateStore.sqlite(self.path)
+        self.assertEqual(
+            HCL(self.store, principal=self.owner)
+            .run_sync(self.request())
+            .claim_records,
+            result.claim_records,
+        )
+
+    def test_large_valid_accumulated_q_is_not_an_invalid_policy_input(self):
+        candidate = self.candidate()
+        plan = candidate["models"][0]["plans"][0]
+        graph = plan["graph"]
+        graph["utilities"] = {state: 0 for state in graph["states"]}
+        for action in graph["actions"]:
+            action["cost"] = 1000000
+            action["transitions"] = {state: state for state in graph["states"]}
+        plan["policy"] = dict(
+            beta=1,
+            rational_weight=1,
+            habit_weight=0,
+            error_weight=0,
+            habit={"direct": "1/2", "detour-start": "1/2"},
+        )
+        result, _ = self.run_model(candidate=candidate)
+        self.assertEqual(result.status, "COMPLETED", result.diagnostics)
+        calculated = self.current_model(result)["plans"][0]
+        self.assertEqual(
+            dict(calculated["q"]), {"direct": "-2000000", "detour-start": "-2000000"}
+        )
+        self.assertEqual(
+            dict(calculated["policy"]["probabilities"]),
+            {"direct": 0.5, "detour-start": 0.5},
+        )
+
+    def test_answer_rejects_plan_binding_that_only_reuses_a_shared_variable_id(self):
+        from hcl.kernel.types import HCLFailure, thaw
+        from hcl.runtime.answer import AnswerAssembler
+
+        result, _ = self.run_model()
+        inference = next(
+            row
+            for row in self.store.inferences("scene", self.owner)
+            if row.result_id in result.execution_receipt["result_ids"]
+        )
+        for edit in ("mapping", "states", "weights", "actor", "formula"):
+            values = thaw(inference.values)
+            plan = values["models"][0]["plans"][0]
+            if edit == "mapping":
+                plan["belief_world_bindings"] = {
+                    key: "closed" for key in plan["belief_world_bindings"]
+                }
+            elif edit == "states":
+                plan["planning_states"] = ["closed"]
+            elif edit == "weights":
+                plan["belief"] = {"closed": "1"}
+            elif edit == "actor":
+                plan["actor"] = "b"
+            else:
+                plan["state_bindings"][0]["when"] = False
+            with self.assertRaises(HCLFailure) as caught:
+                AnswerAssembler()._claim(replace(inference, values=values))
+            self.assertEqual(
+                caught.exception.diagnostic.code, "COGNITIVE_DEPENDENCY_MISSING"
+            )

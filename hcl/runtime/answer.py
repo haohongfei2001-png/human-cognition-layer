@@ -51,7 +51,7 @@ class AnswerAssembler:
         lines = ["Conditional computations for source-bound proposed cognitive models."]
         for model in values["models"]:
             lines.append("Model " + model["model_id"] + " [" + model["frame_kind"] + "]:")
-            variables = {row["variable_id"] for row in model["shared_variables"]}
+            variables = {row["variable_id"]: row for row in model["shared_variables"]}
             if model["inactive_assumptions"]:
                 lines.append("Withdrawn model assumptions: " + ", ".join(model["inactive_assumptions"]) + ".")
             for query in model["beliefs"]:
@@ -59,7 +59,9 @@ class AnswerAssembler:
                              + json.dumps(thaw(query["formula"]), ensure_ascii=False, sort_keys=True)
                              + ": " + query["status"] + ", possible=" + str(tuple(query["possible_values"])) + ".")
             for plan in model["plans"]:
-                if plan["status"] == "SOLVED" and plan["belief_variable_id"] not in variables:
+                from hcl.operators.agency import verify_plan_belief
+                if plan["status"] == "SOLVED" and not verify_plan_belief(
+                        variables.get(plan["belief_variable_id"]), plan):
                     raise HCLFailure("FAILED", "answer", "COGNITIVE_DEPENDENCY_MISSING", "belief_variable_id",
                                      "The action result lacks its actual computed belief dependency.")
                 lines.append("Plan " + plan["plan_id"] + ": " + plan["status"] + "; Q="
@@ -291,8 +293,8 @@ class AnswerAssembler:
                 projections.append(ProjectedResultField(result.result_id, "models", {key:model[key] for key in keys}, (str(i),), keys))
                 selections = {
                     "beliefs": ("query_id", "at", "formula", "status", "possible_values", "assumptions"),
-                    "shared_variables": ("variable_id", "actor", "at", "planning_states", "status", "assumptions"),
-                    "plans": ("plan_id", "actor", "at", "belief_variable_id", "status", "q", "best_actions", "belief", "subjective_feasibility", "world_feasibility", "actual_possible_states", "policy"),
+                    "shared_variables": ("variable_id", "actor", "at", "remaining_states", "remaining_world_ids", "status", "assumptions"),
+                    "plans": ("plan_id", "actor", "at", "belief_variable_id", "status", "q", "best_actions", "belief", "subjective_feasibility", "world_feasibility", "actual_possible_states", "planning_states", "state_bindings", "belief_world_bindings", "actual_world_bindings", "policy"),
                     "causal": ("query_id", "status", "possible_values", "observations", "interventions", "scope", "identification"),
                 }
                 for field, selected in selections.items():

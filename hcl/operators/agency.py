@@ -36,7 +36,11 @@ class Action:
     observations: object
 
     def __post_init__(self):
-        if type(self.action_id) is not str or not self.action_id or len(self.action_id) > 160:
+        if (
+            type(self.action_id) is not str
+            or not self.action_id
+            or len(self.action_id) > 160
+        ):
             raise ValueError("action identity required")
         if rational(self.cost) < 0:
             raise ValueError("nonnegative action cost required")
@@ -60,13 +64,17 @@ class PlanModel:
             or any(type(x) is not str or not x or len(x) > 160 for x in self.states)
         ):
             raise ValueError("finite planning states required")
-        if not set(self.terminal) <= set(self.states) or set(self.utilities) != set(self.states):
-            raise ValueError("terminal states and every state's terminal utility required")
+        if not set(self.terminal) <= set(self.states) or set(self.utilities) != set(
+            self.states
+        ):
+            raise ValueError(
+                "terminal states and every state's terminal utility required"
+            )
         for value in self.utilities.values():
             rational(value)
-        if not 1 <= len(self.actions) <= 32 or len({a.action_id for a in self.actions}) != len(
-            self.actions
-        ):
+        if not 1 <= len(self.actions) <= 32 or len(
+            {a.action_id for a in self.actions}
+        ) != len(self.actions):
             raise ValueError("finite unique typed actions required")
         states = set(self.states)
         for action in self.actions:
@@ -81,8 +89,13 @@ class PlanModel:
                 or not set(action.transitions.values()) <= states
                 or set(action.observations) != states
             ):
-                raise ValueError("total finite transition and observation functions required")
-            if any(type(value) is not str or len(value) > 160 for value in action.observations.values()):
+                raise ValueError(
+                    "total finite transition and observation functions required"
+                )
+            if any(
+                type(value) is not str or len(value) > 160
+                for value in action.observations.values()
+            ):
                 raise ValueError("bounded observation symbols required")
             if any(action.transitions[state] != state for state in self.terminal):
                 raise ValueError("terminal planning states must be absorbing")
@@ -93,7 +106,11 @@ class PlanModel:
 
 
 def _belief(model, weights):
-    if not isinstance(weights, Mapping) or not weights or not set(weights) <= set(model.states):
+    if (
+        not isinstance(weights, Mapping)
+        or not weights
+        or not set(weights) <= set(model.states)
+    ):
         raise ValueError("declared belief distribution required")
     parsed = {state: rational(value) for state, value in weights.items()}
     if any(value < 0 for value in parsed.values()) or sum(parsed.values()) != 1:
@@ -101,7 +118,9 @@ def _belief(model, weights):
     return tuple(sorted((state, value) for state, value in parsed.items() if value))
 
 
-def solve_action_values(model, weights, horizon, *, max_expansions=100000, actual_state=None):
+def solve_action_values(
+    model, weights, horizon, *, max_expansions=100000, actual_state=None
+):
     """Exact finite-horizon planning over observation-conditioned belief states."""
     if (
         type(horizon) is not int
@@ -127,7 +146,9 @@ def solve_action_values(model, weights, horizon, *, max_expansions=100000, actua
         return tuple(a for a in model.actions if active and active <= set(a.enabled))
 
     def stop(distribution):
-        return sum(weight * rational(model.utilities[state]) for state, weight in distribution)
+        return sum(
+            weight * rational(model.utilities[state]) for state, weight in distribution
+        )
 
     @lru_cache(None)
     def value(distribution, left):
@@ -151,7 +172,9 @@ def solve_action_values(model, weights, horizon, *, max_expansions=100000, actua
         expected = -cost
         for group in groups.values():
             mass = sum(group.values())
-            successor = tuple(sorted((state, weight / mass) for state, weight in group.items()))
+            successor = tuple(
+                sorted((state, weight / mass) for state, weight in group.items())
+            )
             expected += mass * value(successor, left - 1)
         return expected
 
@@ -164,13 +187,19 @@ def solve_action_values(model, weights, horizon, *, max_expansions=100000, actua
                 "SOLVED"
                 if actions
                 else (
-                    "TERMINAL" if all(state in terminal for state, _ in belief) else "NO_AVAILABLE_ACTIONS"
+                    "TERMINAL"
+                    if all(state in terminal for state, _ in belief)
+                    else "NO_AVAILABLE_ACTIONS"
                 )
             ),
             q={key: encoded(v) for key, v in results.items()},
             best_actions=sorted(key for key, v in results.items() if v == best),
             subjective_feasibility={
-                a.action_id: all(state in a.feasible for state, weight in belief if state not in terminal)
+                a.action_id: all(
+                    state in a.feasible
+                    for state, weight in belief
+                    if state not in terminal
+                )
                 for a in actions
             },
             world_feasibility=(
@@ -199,7 +228,13 @@ def mixed_policy(q_values, *, beta, rational_weight, habit_weight, error_weight,
     """All mixture parameters are declared hypotheses, not human constants."""
     if not isinstance(q_values, Mapping) or not q_values:
         raise ValueError("computed nonempty action values required")
-    values = {key: rational(value) for key, value in q_values.items()}
+    # Q accumulates up to 32 bounded costs and a terminal utility. It is an
+    # internally computed rational, not a single externally supplied cost.
+    if any(type(value) not in (int, str) for value in q_values.values()):
+        raise ValueError("computed finite rational action values required")
+    values = {key: Fraction(value) for key, value in q_values.items()}
+    if any(abs(value) > 33000000 for value in values.values()):
+        raise ValueError("computed finite-horizon value bound")
     weights = tuple(rational(v) for v in (rational_weight, habit_weight, error_weight))
     b = rational(beta)
     if b < 0 or b > 100 or any(w < 0 for w in weights) or sum(weights) != 1:
@@ -230,3 +265,60 @@ def mixed_policy(q_values, *, beta, rational_weight, habit_weight, error_weight,
         },
         calibration="DECLARED_MODEL_PARAMETERS_NOT_CALIBRATED_HUMAN_PROBABILITIES",
     )
+
+
+def verify_plan_belief(variable, plan):
+    """Verify each plan's own state mapping against its immutable M03 view.
+
+    A shared cognitive variable never contains a particular action graph's
+    state codebook. Different codebooks must remain separate consumption paths.
+    """
+    try:
+        if variable is None or any(
+            variable[key] != plan[key] for key in ("actor", "at")
+        ):
+            return False
+        worlds = variable["remaining_world_ids"]
+        values = variable["remaining_states"]
+        if len(worlds) != len(values) or len(set(worlds)) != len(worlds):
+            return False
+
+        def evaluate(node, valuation):
+            if type(node) is bool:
+                return node
+            if node["op"] == "atom":
+                return valuation[node["name"]]
+            if node["op"] == "not":
+                return not evaluate(node["arg"], valuation)
+            if node["op"] == "and":
+                return all(evaluate(arg, valuation) for arg in node["args"])
+            if node["op"] == "or":
+                return any(evaluate(arg, valuation) for arg in node["args"])
+            raise ValueError("non-Boolean planning binding")
+
+        expected = {}
+        for identity, valuation in zip(worlds, values):
+            selected = [
+                row["state"]
+                for row in plan["state_bindings"]
+                if evaluate(row["when"], valuation)
+            ]
+            if len(selected) != 1:
+                return False
+            expected[identity] = selected[0]
+        states = set(expected.values())
+        return (
+            expected == dict(plan["belief_world_bindings"])
+            and states == set(plan["planning_states"])
+            and states
+            == {state for state, value in plan["belief"].items() if Fraction(value) > 0}
+        )
+    except (
+        ValueError,
+        TypeError,
+        KeyError,
+        IndexError,
+        RecursionError,
+        ZeroDivisionError,
+    ):
+        return False

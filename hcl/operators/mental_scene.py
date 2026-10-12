@@ -286,7 +286,7 @@ class MentalSceneOperator:
                 mapping_work = Work(limits)
 
                 def mapped(worlds):
-                    states = set()
+                    states = {}
                     for world in worlds:
                         matches = [
                             row["state"]
@@ -296,12 +296,18 @@ class MentalSceneOperator:
                         ]
                         if len(matches) != 1:
                             return None
-                        states.add(matches[0])
+                        states[world] = matches[0]
                     return states
 
                 try:
-                    selected = mapped(view["worlds"])
-                    actual_states = mapped(actual["worlds"])
+                    selected_map = mapped(view["worlds"])
+                    actual_map = mapped(actual["worlds"])
+                    selected = (
+                        None if selected_map is None else set(selected_map.values())
+                    )
+                    actual_states = (
+                        None if actual_map is None else set(actual_map.values())
+                    )
                 except EpistemicFrontier:
                     result["plans"].append(
                         dict(
@@ -314,16 +320,21 @@ class MentalSceneOperator:
                     )
                     result["frontier"].append("STATE_MAPPING_FRONTIER")
                     continue
-                shared[identity] = dict(
+                mental_variable = dict(
                     variable_id=identity,
                     actor=plan["actor"],
                     at=plan["at"],
                     remaining_states=tuple(dict(v) for v in view["values"]),
-                    planning_states=sorted(selected or ()),
+                    remaining_world_ids=view["worlds"],
                     status=view["status"],
                     assumptions=environments[plan["at"]],
                     history=mental.history,
                 )
+                if identity in shared and shared[identity] != mental_variable:
+                    raise ValueError(
+                        "one shared mental variable must have one actual perspective value"
+                    )
+                shared[identity] = mental_variable
                 if not selected or actual_states is None:
                     result["plans"].append(
                         dict(
@@ -371,6 +382,10 @@ class MentalSceneOperator:
                     at=plan["at"],
                     belief_variable_id=identity,
                     actual_possible_states=sorted(actual_states),
+                    planning_states=sorted(selected),
+                    state_bindings=bindings,
+                    belief_world_bindings=selected_map,
+                    actual_world_bindings=actual_map,
                     **computed
                 )
                 if (

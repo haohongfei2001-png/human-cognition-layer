@@ -70,6 +70,10 @@ terminal utilities. Posterior branches depend on what the agent can observe,
 not on hidden actual state. It returns actual Q values, ties and subjective
 versus world feasibility. The action calculation consumes the exact remaining
 states from M03 under a stable source/model/actor/time variable ID.
+The shared variable retains only raw M03 alternatives. Each plan has its own
+explicit Boolean state-codebook mapping and mapped belief; answer validation
+rechecks that mapping against the shared worlds. Two plans cannot overwrite each
+other's cognitive dependency just by using different state names.
 
 If more than one planning state remains, the engine requires an explicit
 normalized rational distribution. It never invents uniform or calibrated human
