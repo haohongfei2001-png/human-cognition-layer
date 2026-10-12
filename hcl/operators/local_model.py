@@ -94,7 +94,7 @@ class LocalModelOperator:
                 snapshot, segments, ast["candidate"], allowance
             )
             result = ReadingLogicOperator(self.semantic_profile).run(snapshot, issue, allowance, forest)
-        elif model.dialect in ("mental-scene-1", "argument-model-1", "discovery-model-1", "interaction-model-1"):
+        elif model.dialect in ("mental-scene-1", "argument-model-1", "discovery-model-1", "interaction-model-1", "affect-model-1"):
             from hcl.semantics.model_compiler import LocalModelCompiler
             from hcl.operators.mental_scene import MentalSceneOperator
             from hcl.runtime.context import ContextChunk
@@ -103,7 +103,7 @@ class LocalModelOperator:
                 raise ValueError("source-bound mental model fields required")
             segments = tuple(SourceSegment(**row) for row in ast["segments"])
             sources = tuple(row for row in segments if row.kind == "SOURCE")
-            purpose = {"mental-scene-1":"mental_compile", "argument-model-1":"argument_compile", "discovery-model-1":"discovery_compile", "interaction-model-1":"interaction_compile"}[model.dialect]
+            purpose = {"mental-scene-1":"mental_compile", "argument-model-1":"argument_compile", "discovery-model-1":"discovery_compile", "interaction-model-1":"interaction_compile", "affect-model-1":"affect_compile"}[model.dialect]
             self.context.serialize(snapshot, ast["question"], ContextChunk(purpose, sources, 0, 1))
             if tuple(row for row in segments if row.kind == "QUESTION") != question_segments(
                 ast["question"]
@@ -115,10 +115,12 @@ class LocalModelOperator:
             from hcl.operators.discovery_model import DiscoveryModelOperator
             from hcl.semantics.interaction_compiler import InteractionCompiler
             from hcl.operators.interaction_model import InteractionModelOperator
+            from hcl.semantics.affect_compiler import AffectCompiler
+            from hcl.operators.affect_model import AffectModelOperator
             compiler = {"mental-scene-1":LocalModelCompiler, "argument-model-1":ArgumentCompiler,
-                        "discovery-model-1":DiscoveryCompiler, "interaction-model-1":InteractionCompiler}[model.dialect]()
+                        "discovery-model-1":DiscoveryCompiler, "interaction-model-1":InteractionCompiler, "affect-model-1":AffectCompiler}[model.dialect]()
             operator = {"mental-scene-1":MentalSceneOperator, "argument-model-1":ArgumentModelOperator,
-                        "discovery-model-1":DiscoveryModelOperator, "interaction-model-1":InteractionModelOperator}[model.dialect]()
+                        "discovery-model-1":DiscoveryModelOperator, "interaction-model-1":InteractionModelOperator, "affect-model-1":AffectModelOperator}[model.dialect]()
             program = compiler.compile(snapshot, segments, ast["candidate"], allowance)
             result = (operator.run(snapshot, issue, allowance, program, segments) if model.dialect == "discovery-model-1"
                       else operator.run(snapshot, issue, allowance, program))

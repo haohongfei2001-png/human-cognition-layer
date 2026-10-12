@@ -11,6 +11,8 @@ from hcl.kernel.types import (
 
 class AnswerAssembler:
     def _claim(self, result: InferenceResult) -> AnswerClaim:
+        if result.kind == "CONDITIONAL_AFFECT_MODEL":
+            return self._affect_claim(result)
         if result.kind == "CONDITIONAL_INTERACTION_MODEL":
             return self._interaction_claim(result)
         if result.kind == "CONDITIONAL_MECHANISM_DISCOVERY":
@@ -46,6 +48,172 @@ class AnswerAssembler:
         return AnswerClaim(text, f"claim:{result.result_id}", fields,
                                   result.assumption_environments, result.counterevidence_ids,
                                   "EXACT_MODEL")
+
+    def _affect_claim(self, result):
+        from hcl.operators.affect_model import verify_affect
+
+        try:
+            verify_affect(result.values)
+            expected_assumptions = {
+                a
+                for model in result.values["models"]
+                for a in model["inputs"]["mental"]["active_assumptions"]
+            }
+            qualification = result.values.get("local_model")
+            if qualification is not None:
+                if qualification["dialect"] != "affect-model-1":
+                    raise ValueError("affect local model dialect changed")
+                expected_assumptions.update(
+                    "local-model:" + qualification["model_id"] + ":assumption:" + str(i)
+                    for i in range(len(qualification["domain_assumptions"]))
+                )
+            if set(result.assumption_environments) != expected_assumptions:
+                raise ValueError("affect assumption qualification changed")
+            mental_claims = {}
+            for model in result.values["models"]:
+                actual = model["actual_mental"]
+                mental_claims[(model["source_id"], model["model_id"])] = self._mental_claim(
+                    InferenceResult(
+                        actual["result_id"],
+                        actual["kind"],
+                        actual["values"],
+                        tuple(actual["assumption_environments"]),
+                        tuple(actual["source_versions"]),
+                        (),
+                        result.rule_version,
+                        "CONDITIONAL_FINITE_COGNITIVE_MODEL",
+                    )
+                )
+        except (
+            ValueError,
+            TypeError,
+            KeyError,
+            IndexError,
+            StopIteration,
+            ZeroDivisionError,
+        ):
+            raise HCLFailure(
+                "FAILED",
+                "answer",
+                "AFFECT_RESULT_MISMATCH",
+                "models",
+                "Appraisal or coping claims differ from their actual computational dependencies.",
+            ) from None
+        lines = [
+            "Conditional goal appraisal and coping under source-bound mechanism hypotheses."
+        ]
+        for model in result.values["models"]:
+            lines.append(mental_claims[(model["source_id"], model["model_id"])].text)
+            for episode in model["episodes"]:
+                lines.append(
+                    "Episode " + episode["episode_id"] + ": " + episode["status"] + "."
+                )
+                if episode["status"] != "COMPUTED":
+                    continue
+                derived = episode["derived"]
+                lines.append(
+                    "Conditional on=" + str(tuple(episode["assumption_environments"])) + "."
+                )
+                for profile in derived["profiles"]:
+                    appraisal = profile["appraisal"]
+                    lines.append(
+                        "Goal "
+                        + profile["goal_id"]
+                        + ": value="
+                        + json.dumps(thaw(appraisal["current_value"]), sort_keys=True)
+                        + "; state change="
+                        + json.dumps(thaw(appraisal["state_change"]), sort_keys=True)
+                        + "; prospective expectation gap="
+                        + json.dumps(thaw(appraisal["expectation_gap"]), sort_keys=True)
+                        + "; control="
+                        + json.dumps(thaw(profile["control"]), sort_keys=True)
+                        + "."
+                    )
+                for hypothesis in derived["hypotheses"]:
+                    lines.append(
+                        "Emotion mapping "
+                        + hypothesis["mapping_id"]
+                        + " ("
+                        + hypothesis["label"]
+                        + "): "
+                        + hypothesis["status"]
+                        + "."
+                    )
+                for coping in derived["coping"]:
+                    lines.append(
+                        "Hypothetical coping "
+                        + coping["coping_id"]
+                        + " ["
+                        + coping["kind"]
+                        + "]:"
+                    )
+                    for branch in coping["branches"]:
+                        lines.append(
+                            "Branch "
+                            + branch["status"]
+                            + "; computed priorities="
+                            + json.dumps(
+                                thaw(branch["input"]["priorities"]), sort_keys=True
+                            )
+                            + "; conditional adjustment history="
+                            + json.dumps(
+                                thaw(branch["input"]["adjustment_history"]), sort_keys=True
+                            )
+                            + "; actual M05 Q="
+                            + json.dumps(
+                                thaw(branch["computation"].get("q", {})), sort_keys=True
+                            )
+                            + "; conditional next appraisal="
+                            + json.dumps(thaw(branch["consequences"]), sort_keys=True)
+                            + "."
+                        )
+                for channel in derived["channels"]:
+                    lines.append(
+                        "Source "
+                        + channel["kind"]
+                        + " from "
+                        + channel["speaker"]
+                        + " about "
+                        + channel["actor"]
+                        + ": "
+                        + channel["content"]
+                        + "."
+                    )
+                lines.append(
+                    "Reappraisal qualification="
+                    + derived["reappraisal"]["character_reappraisal"]
+                    + "; changed goals="
+                    + str(
+                        tuple(
+                            (g["goal_id"], g["change"])
+                            for g in derived["reappraisal"]["changes"]
+                        )
+                    )
+                    + "."
+                )
+            if model["frontier"]:
+                lines.append("Unexplored: " + ", ".join(model["frontier"]) + ".")
+            lines.append("Domain limitations=" + str(tuple(model["domain_issues"])) + ".")
+        lines.append(
+            "Self-report, expression and conditional explanation remain distinct. Coping and next appraisals are hypotheses, not enacted actions. "
+            "Attribution, normative and identity appraisal are not modeled here. No private feeling, clinical diagnosis or calibrated emotion intensity is established."
+        )
+        return AnswerClaim(
+            " ".join(lines),
+            "claim:" + result.result_id,
+            tuple(
+                ResultField(result.result_id, name, result.values[name])
+                for name in (
+                    "models",
+                    "semantic_certified",
+                    "candidate_completeness",
+                    "scope",
+                )
+            ),
+            result.assumption_environments,
+            result.counterevidence_ids,
+            "CONDITIONAL_AFFECT_NOT_PRIVATE_TRUTH",
+        )
 
     def _interaction_claim(self, result):
         from hcl.operators.interaction_model import verify_interaction
@@ -464,7 +632,19 @@ class AnswerAssembler:
         checked = self._claim(result)
         projections = []
         value = result.values
-        if result.kind == "CONDITIONAL_INTERACTION_MODEL":
+        if result.kind == "CONDITIONAL_AFFECT_MODEL":
+            text = checked.text
+            names = ("semantic_certified", "candidate_completeness", "scope", "source_versions")
+            for i, model in enumerate(value["models"]):
+                keys = ("model_id", "source_id", "frame_kind", "domain_issues", "episodes", "frontier")
+                projections.append(ProjectedResultField(result.result_id,"models",{name:model[name] for name in keys},(str(i),),keys))
+                actual = model["actual_mental"]
+                nested = InferenceResult(actual["result_id"],actual["kind"],actual["values"],
+                    tuple(actual["assumption_environments"]),tuple(actual["source_versions"]),(),result.rule_version,"CONDITIONAL_FINITE_COGNITIVE_MODEL")
+                for field in self.compact_claim(nested).used_result_fields:
+                    projections.append(ProjectedResultField(result.result_id,"models",field.value,
+                        (str(i),"actual_mental","values",field.field,*getattr(field,"path",())),getattr(field,"selection",())))
+        elif result.kind == "CONDITIONAL_INTERACTION_MODEL":
             text = checked.text
             names = ("semantic_certified", "candidate_completeness", "scope", "source_versions")
             for i, model in enumerate(value["models"]):
