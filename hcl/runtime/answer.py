@@ -67,7 +67,7 @@ class AnswerAssembler:
             lines.append("Domain assumptions=" + str(tuple(model["assumption_environments"])) + "; limitations=" + str(tuple(model["domain_issues"])) + ".")
             for commitment in model["commitments"]:
                 lines.append("Original commitment " + commitment["commitment_id"] + " version " + commitment["original_version"]
-                             + ": " + commitment["status"] + "; conditional on=" + str(tuple(commitment["assumption_environments"])) + "; history=" + str(tuple((r["at"], r["status"]) for r in commitment["history"])) + ".")
+                             + ": " + commitment["status"] + "; conditional on=" + str(tuple(commitment["assumption_environments"])) + "; assumption status=" + commitment["assumption_status"] + "; history=" + str(tuple((r["at"], r["status"]) for r in commitment["history"])) + ".")
                 if commitment["invalid_acts"]:
                     lines.append("Commitment act qualifications: " + json.dumps(thaw(commitment["invalid_acts"]),sort_keys=True) + ".")
             if model["acknowledgments"].get("diagnostics"):

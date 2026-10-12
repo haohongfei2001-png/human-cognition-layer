@@ -115,6 +115,14 @@ be complete. Mere sending, joint hearing or an uncomprehended acknowledgment
 cannot establish it. The result reports a finite chain and its limitations,
 never infinite common knowledge or certified private understanding.
 
+An M03 resource frontier remains an unresolved commitment, never an invalid
+candidate or evidence that acceptance, fulfillment or breach did not occur.
+Each condition/outcome row retains its genuine query status and frontier.
+Missing frontier assumptions are explicitly NOT_FULLY_COMPUTED, not a proof
+with an empty environment. The lifecycle preserves only the fully computed
+historical prefix and labels the current state FRONTIER_UNEXPLORED; cached and
+restarted delivery retain the same qualification and actual consumed values.
+
 ## Persistence, qualification and resource boundaries
 
 The model has at most eight source-local mental models, eight agents per model,

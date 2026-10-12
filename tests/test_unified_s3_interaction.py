@@ -549,6 +549,145 @@ class InteractionExecutionTests(unittest.TestCase):
         ]
         return candidate
 
+    def frontier_candidate(self, late=False):
+        candidate = self.commitment_candidate()
+        row = candidate["models"][0]
+        mental = row["mental"]
+        refs = mental["variables"][0]["segment_ids"]
+        mental["plans"] = []
+        mental["queries"] = [
+            dict(
+                id="early", at=0, formula=dict(op="atom", name="open"), segment_ids=refs
+            )
+        ]
+        for variable in mental["variables"]:
+            variable["observed_by"] = ["a", "b"]
+        mental["variables"].extend(
+            dict(
+                id="extra-" + str(i),
+                initial=False,
+                observed_by=["a", "b"],
+                segment_ids=refs,
+            )
+            for i in range(5)
+        )
+        if late:
+            for variable in mental["variables"]:
+                variable["initial"] = None
+            row["commitments"][0]["condition"] = True
+            row["commitments"][0]["outcome"] = False
+            mental["events"].append(
+                dict(
+                    id="later-frontier",
+                    at=4,
+                    kind="message",
+                    effects={"done": True},
+                    seen_by=[],
+                    received_by=["b"],
+                    understood_by=["b"],
+                    trusted_by=["b"],
+                    assumptions=[],
+                    segment_ids=refs,
+                )
+            )
+        else:
+            mental["events"][0]["trusted_by"] = ["b"]
+        return candidate
+
+    def test_actual_world_frontier_preserves_unresolved_commitment_and_replay(self):
+        import asyncio
+        from hcl.memory.store import StateStore
+
+        for late in (False, True):
+            for streamed in (False, True):
+                with self.subTest(late=late, streamed=streamed):
+                    request = replace(
+                        self.request,
+                        request_id="world-frontier-" + str((late, streamed)),
+                    )
+                    port = OfflineModelPort(json.dumps(self.frontier_candidate(late)))
+                    client = HCL(
+                        self.store,
+                        principal=self.owner,
+                        gateway=ModelGateway(self.store, port),
+                    )
+
+                    async def collect():
+                        return [event async for event in client.stream(request)]
+
+                    result = (
+                        asyncio.run(collect())[-1].result
+                        if streamed
+                        else client.run_sync(request)
+                    )
+                    self.assertEqual(result.status, "PARTIAL", result.diagnostics)
+                    actual = self.actual(result)
+                    commitment = actual.values["models"][0]["commitments"][0]
+                    self.assertEqual(commitment["status"], "FRONTIER_UNEXPLORED")
+                    self.assertEqual(commitment["unresolved_from"], 4 if late else 1)
+                    self.assertEqual(
+                        commitment["assumption_status"], "NOT_FULLY_COMPUTED"
+                    )
+                    self.assertEqual(
+                        [f["at"] for f in commitment["history"]], [1, 2] if late else []
+                    )
+                    if late:
+                        self.assertEqual(commitment["history"][-1]["status"], "ACTIVE")
+                    for fact in commitment["facts"]:
+                        if fact["at"] >= commitment["unresolved_from"]:
+                            self.assertEqual(fact["condition"], (False, True))
+                            self.assertEqual(fact["outcome"], (False, True))
+                            self.assertEqual(
+                                fact["assumption_status"], "NOT_FULLY_COMPUTED"
+                            )
+                    self.assertIn("WORLD_FRONTIER", result.answer)
+                    self.assertIn("NOT_FULLY_COMPUTED", result.answer)
+                    self.assertFalse(
+                        any(
+                            h["fulfilled"] or h["breached"]
+                            for h in commitment["history"]
+                        )
+                    )
+                    for tamper in ("status", "fact", "qualification"):
+                        bad = thaw(actual.values)
+                        changed = bad["models"][0]["commitments"][0]
+                        if tamper == "status":
+                            changed["status"] = "FULFILLED"
+                        elif tamper == "fact":
+                            changed["facts"][-1]["outcome"] = [True]
+                        else:
+                            changed["assumption_status"] = "BOUND_TO_QUERY_RESULTS"
+                        with self.assertRaises(HCLFailure):
+                            AnswerAssembler()._claim(replace(actual, values=bad))
+                    path = self.store.path
+                    self.store.close()
+                    self.store = StateStore.sqlite(path, revision=True)
+                    self.scene.store = self.store
+                    port = OfflineModelPort("NO_NEW_SEND")
+                    replay = HCL(
+                        self.store,
+                        principal=self.owner,
+                        gateway=ModelGateway(self.store, port),
+                    ).run_sync(request)
+                    self.assertEqual(
+                        (replay.status, replay.answer, replay.claim_records),
+                        (result.status, result.answer, result.claim_records),
+                    )
+                    self.assertEqual(port.attempts, 0)
+                    self.assertEqual(replay.usage["mock_calls"], 1)
+
+    def test_commitment_budget_frontiers_are_not_invalid_models(self):
+        for limit in (1, 2, 4, 8, 12):
+            request = replace(
+                self.request,
+                request_id="commit-budget-" + str(limit),
+                budget=replace(self.request.budget, max_local_evaluations=limit),
+            )
+            result, _ = self.run_candidate(self.commitment_candidate(), request)
+            self.assertEqual(result.status, "PARTIAL", result.diagnostics)
+            self.assertLessEqual(result.usage["local_evaluations"], limit)
+            self.assertIn("FRONTIER", result.answer)
+
     def test_actual_m03_condition_and_outcome_drive_commitment_not_report_label(self):
         first, _ = self.run_candidate(self.commitment_candidate())
         self.assertEqual(first.status, "COMPLETED", first.diagnostics)

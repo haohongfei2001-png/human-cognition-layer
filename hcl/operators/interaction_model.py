@@ -80,6 +80,78 @@ def receipts(model, actual):
     return deliveries, interpretations
 
 
+def commitment_facts(model, terms, actual):
+    """Retain each genuine query's status; absent frontier environments are unknown."""
+    mental = actual["values"]["models"][0]
+    beliefs = {q["query_id"]: q for q in mental["beliefs"]}
+    facts = []
+    for at in relevant_times(model, terms):
+        fact = dict(at=at, result_refs={}, query_status={}, frontier=[])
+        assumptions, missing = set(), False
+        for field in ("condition", "outcome"):
+            qid = query_id(terms, field, at)
+            query = beliefs[qid]
+            if query["formula"] != terms[field] or query["at"] != at:
+                raise ValueError("commitment query identity changed")
+            fact["query_status"][field] = query["status"]
+            if query["status"] == "FRONTIER_UNEXPLORED":
+                missing |= "assumptions" not in query
+                assumptions.update(query.get("assumptions", ()))
+                fact["frontier"].extend(
+                    query.get("frontier", ())
+                    or mental["frontier"]
+                    or ("MENTAL_QUERY_UNEXPLORED",)
+                )
+            else:
+                assumptions.update(query["assumptions"])
+            fact[field] = (
+                query["possible_values"]
+                if query["status"] == "DETERMINATE"
+                else [False, True]
+            )
+            fact["result_refs"][field] = dict(
+                result_id=actual["result_id"], query_id=qid
+            )
+        fact["assumption_environments"] = sorted(assumptions)
+        fact["assumption_status"] = (
+            "NOT_FULLY_COMPUTED" if missing else "BOUND_TO_QUERY_RESULTS"
+        )
+        fact["frontier"] = sorted(set(fact["frontier"]))
+        facts.append(fact)
+    return facts
+
+
+def qualified_commitment_history(
+    terms, facts, acts, deliveries, interpretations, *, through
+):
+    """An unexecuted query is not evidence of absent acceptance or fulfillment."""
+    unresolved = [
+        fact for fact in facts if "FRONTIER_UNEXPLORED" in fact["query_status"].values()
+    ]
+    if not unresolved:
+        return commitment_history(
+            terms, facts, acts, deliveries, interpretations, through=through
+        )
+    cut = min(fact["at"] for fact in unresolved)
+    earlier = [f for f in facts if f["at"] < cut]
+    prefix_at = max((f["at"] for f in earlier), default=terms["offered_at"] - 1)
+    prefix = commitment_history(
+        terms, earlier, acts, deliveries, interpretations, through=prefix_at
+    )
+    return dict(
+        prefix,
+        status="FRONTIER_UNEXPLORED",
+        unresolved_from=cut,
+        frontier=tuple(
+            sorted(
+                set(prefix["frontier"])
+                | {"COMMITMENT_MENTAL_FRONTIER"}
+                | {f for fact in unresolved for f in fact["frontier"]}
+            )
+        ),
+    )
+
+
 def truth(node, valuation):
     if type(node) is bool:
         return node
@@ -277,33 +349,15 @@ class InteractionModelOperator:
                 continue
             timeline, environments = trace[original["id"]]
             deliveries, interpretations = receipts(model, output["actual_mental"])
-            beliefs = {q["query_id"]: q for q in mental["beliefs"]}
             for c in model["commitments"]:
                 if used >= limit:
                     output["frontier"].append("COMMITMENT_BUDGET_FRONTIER")
                     break
                 used += 1
-                facts = []
-                for at in relevant_times(model, c):
-                    fact = dict(at=at, result_refs={}, assumption_environments=[])
-                    conditions = set()
-                    for field in ("condition", "outcome"):
-                        qid = query_id(c, field, at)
-                        q = beliefs[qid]
-                        conditions.update(q["assumptions"])
-                        fact[field] = (
-                            q["possible_values"]
-                            if q["status"] == "DETERMINATE"
-                            else [False, True]
-                        )
-                        fact["result_refs"][field] = dict(
-                            result_id=actual.result_id, query_id=qid
-                        )
-                    fact["assumption_environments"] = sorted(conditions)
-                    facts.append(fact)
+                facts = commitment_facts(model, c, output["actual_mental"])
                 offer = next(u for u in model["utterances"] if u["id"] == c["offer_id"])
                 terms = dict(c, offered_at=offer["at"], offer_literal=offer["literal"])
-                result = commitment_history(
+                result = qualified_commitment_history(
                     terms,
                     facts,
                     model["acts"],
@@ -317,6 +371,14 @@ class InteractionModelOperator:
                         commitment_id=c["id"],
                         terms=terms,
                         facts=facts,
+                        assumption_status=(
+                            "NOT_FULLY_COMPUTED"
+                            if any(
+                                f["assumption_status"] == "NOT_FULLY_COMPUTED"
+                                for f in facts
+                            )
+                            else "BOUND_TO_QUERY_RESULTS"
+                        ),
                         assumption_environments=sorted(
                             {
                                 a
@@ -503,7 +565,6 @@ def verify_interaction(values):
             raise ValueError(
                 "interaction assumptions differ from actual domain computation"
             )
-        beliefs = {q["query_id"]: q for q in actual["values"]["models"][0]["beliefs"]}
         for commitment in model["commitments"]:
             c = next(
                 c
@@ -514,28 +575,18 @@ def verify_interaction(values):
             terms = dict(c, offered_at=offer["at"], offer_literal=offer["literal"])
             if codec.canonical(terms) != codec.canonical(commitment["terms"]):
                 raise ValueError("original commitment terms changed")
-            for fact in commitment["facts"]:
-                conditions = set()
-                for field in ("condition", "outcome"):
-                    ref = fact["result_refs"][field]
-                    q = beliefs[query_id(c, field, fact["at"])]
-                    conditions.update(q["assumptions"])
-                    expected = (
-                        q["possible_values"]
-                        if q["status"] == "DETERMINATE"
-                        else [False, True]
-                    )
-                    if (
-                        ref
-                        != dict(result_id=actual["result_id"], query_id=q["query_id"])
-                        or fact[field] != expected
-                        or q["formula"] != c[field]
-                    ):
-                        raise ValueError(
-                            "commitment facts differ from actual M03 queries"
-                        )
-                if fact["assumption_environments"] != sorted(conditions):
-                    raise ValueError("commitment fact assumptions changed")
+            expected_facts = commitment_facts(inputs, c, actual)
+            if codec.canonical(expected_facts) != codec.canonical(commitment["facts"]):
+                raise ValueError("commitment facts differ from actual M03 queries")
+            if commitment["assumption_status"] != (
+                "NOT_FULLY_COMPUTED"
+                if any(
+                    f["assumption_status"] == "NOT_FULLY_COMPUTED"
+                    for f in expected_facts
+                )
+                else "BOUND_TO_QUERY_RESULTS"
+            ):
+                raise ValueError("commitment assumption qualification changed")
             if commitment["assumption_environments"] != sorted(
                 {
                     a
@@ -546,7 +597,7 @@ def verify_interaction(values):
                 raise ValueError("commitment assumptions changed")
             if tuple(f["at"] for f in commitment["facts"]) != relevant_times(inputs, c):
                 raise ValueError("commitment time coverage mismatch")
-            expected = commitment_history(
+            expected = qualified_commitment_history(
                 terms,
                 commitment["facts"],
                 inputs["acts"],
