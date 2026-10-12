@@ -11,6 +11,8 @@ from hcl.kernel.types import (
 
 class AnswerAssembler:
     def _claim(self, result: InferenceResult) -> AnswerClaim:
+        if result.kind == "CONDITIONAL_FOL":
+            return self._semantic_claim(result)
         values = result.values
         if (result.kind != "EXACT_MODEL" or result.coverage != FORMAL_SCOPE
                 or type(values.get("conclusion")) is not bool
@@ -35,10 +37,52 @@ class AnswerAssembler:
                                   result.assumption_environments, result.counterevidence_ids,
                                   "EXACT_MODEL")
 
+    def _semantic_claim(self, result):
+        values = result.values
+        if (values.get('semantic_certified') is not False
+                or values.get('candidate_completeness') != 'NOT_ESTABLISHED'
+                or not isinstance(values.get('readings'), tuple) or not values['readings']):
+            raise HCLFailure('FAILED', 'answer', 'SEMANTIC_RESULT_CONTRACT_INVALID', 'values',
+                             'The conditional semantic result does not satisfy its contract.')
+        lines = ['Conditional formal results for the supplied candidate readings. '
+                 'The extraction is an injected offline fixture, not verified language understanding or world/private truth.']
+        conclusions = {'True': 'follows in this formal reading', 'False': 'is contradicted in this formal reading',
+                       'Uncertain': 'is neither entailed nor refuted in this formal reading'}
+        for row in values['readings']:
+            if row['status'] == 'CLASSIFIED':
+                if row['label'] not in conclusions:
+                    raise HCLFailure('FAILED', 'answer', 'INVALID_CONDITIONAL_LABEL', 'values.readings',
+                                     'The conditional result has an invalid classification.')
+                conclusion = conclusions[row['label']]
+            elif row['status'] == 'INCONSISTENT_PREMISES':
+                conclusion = 'has inconsistent premises; no conclusion is licensed by explosion'
+            else:
+                conclusion = 'remains unresolved (' + row['status'] + ')'
+            lines.append('Reading ' + row['id'] + ' [' + row['frame_kind'] + ']: ' + row['query_reading'] + ' ' + conclusion + '.')
+            if row['assumptions']:
+                lines.append('Explicit candidate assumptions: ' + '; '.join(row['assumptions']) + '.')
+            for witness in row['countermodels']:
+                lines.append('A checked finite scenario has all premise values ' + str(tuple(witness['premise_values']))
+                             + ' and original query value ' + str(witness['query_value']) + '. '
+                             + 'This is a generated formal scenario, not an original quotation: '
+                             + json.dumps(thaw(witness['scenario']), ensure_ascii=False, sort_keys=True))
+            if row['unresolved']:
+                lines.append('Unresolved obligations: ' + ', '.join(row['unresolved']) + '.')
+        if values['status'] == 'READING_DEPENDENT':
+            lines.append('The readings disagree. No unique unconditional answer is established.')
+        lines.append('Source references and typed syntax were checked. Semantic alignment and completeness remain unverified.')
+        text = '\n'.join(lines)
+        fields = tuple(ResultField(result.result_id, name, values[name])
+                       for name in ('status', 'label', 'readings', 'semantic_certified', 'candidate_completeness'))
+        return AnswerClaim(text, 'claim:' + result.result_id, fields, result.assumption_environments,
+                           result.counterevidence_ids, 'CONDITIONAL_FORMAL_NOT_SEMANTIC_TRUTH')
+
     def build(self, snapshot: Snapshot, issues, accepted_results: tuple[InferenceResult, ...]) -> AnswerContract:
         claims = tuple(self._claim(result) for result in accepted_results)
         contract = AnswerContract("\n\n".join(claim.text for claim in claims), tuple(claims),
-                                  "RESULT_FIELDS_VERIFIED", "EXPLICIT_FORMAL_INPUT_ONLY")
+                                  "RESULT_FIELDS_VERIFIED", "MODEL_INTERPRETATIONS_UNVERIFIED"
+                                  if any(result.kind == 'CONDITIONAL_FOL' for result in accepted_results)
+                                  else "EXPLICIT_FORMAL_INPUT_ONLY")
         self.validate(contract, accepted_results)
         return contract
 

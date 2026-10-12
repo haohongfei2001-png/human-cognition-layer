@@ -102,9 +102,9 @@ class TaskBudgetLedger:
     def finish(self, lease, snapshot, read_set, result):
         with self.store._transaction(True) as db:
             session, row = self._lease(db, lease)
-            if result.status == "COMPLETED":
+            if result.status in ("COMPLETED", "PARTIAL"):
                 self.store._validate_snapshot(db, snapshot, read_set)
-            row.update(state="COMPLETED" if result.status == "COMPLETED" else "FAILED",
+            row.update(state="COMPLETED" if result.status in ("COMPLETED", "PARTIAL") else "FAILED",
                        result_hash=self.store._put_object(result), dependencies=codec.canonical(dict(read_set)))
             self.store._record(db, "tasks", row, session["revision"])
 

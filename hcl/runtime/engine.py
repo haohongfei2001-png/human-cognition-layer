@@ -6,6 +6,7 @@ new requests never call their provider callbacks. No paid/live path exists here.
 from __future__ import annotations
 
 from dataclasses import fields
+import asyncio
 
 from hcl.kernel.types import (
     BudgetSlice, DeliveryEvent, HCLFailure, Issue, Principal, SCHEMA_VERSION,
@@ -18,13 +19,21 @@ from hcl.runtime.answer import AnswerAssembler
 
 
 class Engine:
-    def __init__(self, store: StateStore, principal: Principal, gateway: ModelGateway | None = None):
+    def __init__(self, store: StateStore, principal: Principal, gateway: ModelGateway | None = None,
+                 *, semantic_profile=None):
         self.store = store
         self.principal = principal  # Authenticated by the embedding host, not a source claim.
         if gateway is not None and gateway._store is not store:
             raise ValueError("The engine and gateway must share one state store")
         self.gateway = gateway if gateway is not None else ModelGateway(store)
         self._logic = FiniteLogicOperator()
+        from hcl.operators.semantic_logic import ReadingLogicOperator
+        from hcl.semantics.compiler import SemanticCompiler
+        from hcl.semantics.frames import SemanticProfile
+        if semantic_profile is not None and type(semantic_profile) is not SemanticProfile:
+            raise ValueError("typed semantic execution profile required")
+        self._semantic = SemanticCompiler(semantic_profile)
+        self._reading_logic = ReadingLogicOperator(semantic_profile)
         self._assembler = AnswerAssembler()
         self._requests: set[tuple[str, str]] = set()
         from hcl.runtime.budget import TaskBudgetLedger
@@ -61,7 +70,7 @@ class Engine:
         if not isinstance(request.issue, Issue):
             raise HCLFailure("INVALID_REQUEST", "admission", "INVALID_ISSUE", "issue",
                              "A typed issue is required.")
-        if request.issue.kind not in ("logic.check_interpretation", "source.report", "model.respond"):
+        if request.issue.kind not in ("logic.check_interpretation", "source.report", "model.respond", "logic.compare_semantic_readings"):
             raise HCLFailure("INVALID_REQUEST", "admission", "UNSUPPORTED_ISSUE", "issue.kind",
                              "This issue is outside the implemented execution slice.")
         if not isinstance(request.issue.issue_id, str) or not request.issue.issue_id:
@@ -105,10 +114,13 @@ class Engine:
                     self._ledger.validate_cached_delivery(request)
                     return replay
             results = ()
+            unresolved = ()
+            operation_ids = ()
             read_set = snapshot.source_versions
             state_revision = snapshot.revision
             if request.issue.kind == "logic.check_interpretation":
                 operation = self._logic.run(snapshot, request.issue, request.budget)
+                usage.update(operation.resource_usage)
                 results = operation.candidate_delta.new_inferences
                 contract = self._assembler.build(snapshot, (request.issue,), results)
                 read_set = operation.read_set
@@ -119,7 +131,32 @@ class Engine:
                                      "The store did not commit the proposed computation identities.")
                 state_revision = committed.revision
                 committed_revision = committed.revision
+                operation_ids = (operation.operation_id,)
+            elif request.issue.kind == "logic.compare_semantic_readings":
+                from hcl.semantics.segments import segment_snapshot
+                segments = segment_snapshot(snapshot, request.question)
+                owns_current_call = self._ledger is None and self.gateway.call_state(
+                    self.principal, request.session_id, request.request_id) is None
+                response = await self.gateway.generate(AuthorizedContext(snapshot, request.question, "semantic_compile",
+                                                                                self._semantic.profile),
+                                                       CallSpec(request.request_id, request.budget, lease))
+                usage.update(mock_calls=1, request_bytes=response.request_bytes, output_bytes=response.output_bytes)
+                if response.resource_usage is not None:
+                    usage.update(response.resource_usage)
+                forest = self._semantic.compile(snapshot, segments, response.visible_text, request.budget)
+                operation = await asyncio.to_thread(self._reading_logic.run, snapshot, request.issue, request.budget, forest)
                 usage.update(operation.resource_usage)
+                results = operation.candidate_delta.new_inferences
+                contract = self._assembler.build(snapshot, (request.issue,), results)
+                read_set = operation.read_set
+                committed = self.store.commit(snapshot.revision, read_set, snapshot.access_epoch,
+                                              operation.candidate_delta)
+                if committed.result_ids != operation.result_refs:
+                    raise HCLFailure("FAILED", "commit", "COMMIT_RESULT_MISMATCH", "result_refs",
+                                     "The store did not commit the proposed computation identities.")
+                state_revision = committed_revision = committed.revision
+                unresolved = operation.issues
+                operation_ids = (operation.operation_id,)
             elif request.issue.kind == "source.report":
                 if not snapshot.immutable_views:
                     raise HCLFailure("NEEDS_EVIDENCE", "answer", "NO_SOURCES", "source_handles",
@@ -152,9 +189,10 @@ class Engine:
                 inference_values={result.result_id: result.values for result in results},
                 mechanical_validation=contract.mechanical_validation,
                 semantic_validation=contract.semantic_validation,
-                operation_ids=(self._logic.operation_id,) if results else (),
+                operation_ids=operation_ids,
             )
-            result = TaskResult(contract.answer, contract.claims, "COMPLETED", (), receipt, usage, state_revision)
+            result = TaskResult(contract.answer, contract.claims, "PARTIAL" if unresolved else "COMPLETED",
+                                unresolved, receipt, usage, state_revision)
             if self._ledger is not None:
                 self._ledger.finish(lease, snapshot, read_set, result)
                 self.store._checkpoint("task_finished")

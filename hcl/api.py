@@ -10,8 +10,9 @@ from hcl.runtime.engine import Engine
 
 
 class HCL:
-    def __init__(self, store: StateStore, *, principal: Principal, gateway: ModelGateway | None = None):
-        self._engine = Engine(store, principal, gateway)
+    def __init__(self, store: StateStore, *, principal: Principal, gateway: ModelGateway | None = None,
+                 semantic_profile=None):
+        self._engine = Engine(store, principal, gateway, semantic_profile=semantic_profile)
 
     async def run(self, request: TaskRequest) -> TaskResult:
         return await self._engine.run(request)

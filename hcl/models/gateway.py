@@ -71,6 +71,8 @@ class OfflineModelPort:
 class AuthorizedContext:
     snapshot: Snapshot
     question: str
+    purpose: str = "answer"
+    semantic_profile: object = None
 
 
 @dataclass(frozen=True)
@@ -113,10 +115,23 @@ class ModelGateway:
             raise HCLFailure("BUDGET_EXHAUSTED", "model", "MOCK_CALL_BUDGET", "budget.max_mock_calls",
                              "No offline model call was allowed for this task.")
         # Source contents are tagged as untrusted data, never as system policy.
-        serialized = json.dumps({"schema": "hcl-offline-context-1", "question": authorized_context.question,
-                                 "untrusted_sources": [
-                                     {"source_id": source.handle.source_id, "text": source.text}
-                                     for source in snapshot.immutable_views.values()]}, ensure_ascii=False)
+        context = {"schema": "hcl-offline-context-1", "question": authorized_context.question,
+                   "untrusted_sources": [
+                       {"source_id": source.handle.source_id, "text": source.text}
+                       for source in snapshot.immutable_views.values()]}
+        if authorized_context.purpose == "semantic_compile":
+            from hcl.semantics.segments import semantic_context
+            from hcl.semantics.frames import SemanticProfile
+            if authorized_context.semantic_profile is not None and type(authorized_context.semantic_profile) is not SemanticProfile:
+                raise HCLFailure("INVALID_REQUEST", "model", "INVALID_SEMANTIC_PROFILE", "semantic_profile",
+                                 "The semantic execution profile is not typed.")
+            # Build only from the already authenticated snapshot. A caller cannot
+            # attach arbitrary extra context or foreign source text to this mode.
+            context["semantic_task"] = semantic_context(snapshot, authorized_context.question, authorized_context.semantic_profile)
+        elif authorized_context.purpose != "answer":
+            raise HCLFailure("INVALID_REQUEST", "model", "UNSUPPORTED_MODEL_PURPOSE", "purpose",
+                             "The requested model purpose is not supported.")
+        serialized = json.dumps(context, ensure_ascii=False)
         request_bytes = len(serialized.encode("utf-8"))
         if request_bytes > allowance.max_request_bytes:
             raise HCLFailure("BUDGET_EXHAUSTED", "model", "REQUEST_BYTES_EXCEEDED",

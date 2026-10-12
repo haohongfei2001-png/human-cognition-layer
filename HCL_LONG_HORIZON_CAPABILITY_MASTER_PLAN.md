@@ -7,8 +7,8 @@
 
 完整规格：[HCL_SYSTEM_REDESIGN_SPEC.md](docs/HCL_SYSTEM_REDESIGN_SPEC.md)；唯一结构化计划：[hcl_design_manifest.json](docs/hcl_design_manifest.json)；执行交接：[HCL_CODEX_HANDOFF.md](docs/HCL_CODEX_HANDOFF.md)。
 
-当前切片：**S1.3 / INTEGRATED_OFFLINE**。有界旧typed快照幂等旁路导入、语义保真/quarantine、持久namespace回滚fence与同一engine兼容入口；导入原文继续驱动真实有限模型计算及回答。
+当前切片：**S2.1 / INTEGRATED_OFFLINE**。原文片段与候选语义IR接入同一engine，执行真实条件FOL、多读法和反模型回译；抽取端口仍是明确注入fixture。
 
-本切片离线结果不等于完整验收族、S1阶段完成、LIVE_FUNCTIONAL或EFFECT_CONFIRMED。
+本切片只证明离线候选到真实计算和回答消费，不证明开放自然语言抽取、语义对齐、读法完整性或S1/S2阶段完成。
 
-**NEXT_READY：S2.1**。继续S2.1普通语言到实际计算再到回答；S1真实模型功能证据、S5全局旧域切换及全部S2–S7/T01–T32研究验收保持原范围。
+**NEXT_READY：S2.2**。继续S2.2时间、显式Bridge、身份与撤回依赖；完整S1/S2实模功能、S3–S7及T01–T32研究目标全部保留。

@@ -1245,7 +1245,7 @@
       "exit": "公开入口的轻任务和至少一个旧认知操作在同一engine中实际运行；迁移/回滚与预算故障通过。进入真实功能完成需新批准的真实模型调用，离线只能记INTEGRATED_OFFLINE。",
       "blocked_policy": "未获收费授权时继续离线核心/领域开发，不反复创建批准包装；不给S1标记LIVE_FUNCTIONAL；独立分支不因effect未知停工。",
       "status": "IN_PROGRESS_OFFLINE",
-      "implementation_progress": "S1.1 and S1.2 integrated offline; S1.3 remains open. No full-stage functional completion."
+      "implementation_progress": "S1.1/S1.2/S1.3 integrated offline; full live-model functional acceptance remains open."
     },
     {
       "id": "S2",
@@ -1275,7 +1275,8 @@
       ],
       "exit": "在真实自然输入中从解析→计算→主张输出跑通，含跨源、非显式时间、至少一次假设撤回和反模型回译；schema成功不算闭环。",
       "blocked_policy": "语义错误归入编译/对齐修复；solver未知保留unknown，不能删事件或提高置信度掩盖。通过核心contract后S3/S4可并行，不要求先战胜Base。",
-      "status": "APPROVED_PLAN_NOT_STARTED"
+      "status": "IN_PROGRESS_OFFLINE",
+      "implementation_progress": "S2.1 source-bound injected candidates drive actual formal computation; open-language extraction and full S2 acceptance remain open."
     },
     {
       "id": "S3",
@@ -3228,7 +3229,22 @@
         "T20"
       ],
       "exit": "正向/否定/条件及歧义对照改变对应计算结果；反模型可回译并核对。无实模权限时明确模型候选为注入fixture，不称开放语义已实模可用。",
-      "not_required": "先解析全部世界、先训练语义模型、先实现全部M03–M14。"
+      "not_required": "先解析全部世界、先训练语义模型、先实现全部M03–M14。",
+      "status": "INTEGRATED_OFFLINE",
+      "evidence": {
+        "runtime_entry": "HCL same engine: logic.compare_semantic_readings; ModelGateway candidate purpose",
+        "real_operator": "SemanticCompiler → ReadingLogicOperator → isolated existing argument_readings.classify_reading + quantified_logic",
+        "checks": "tests/test_unified_s21.py; prior unified and unchanged legacy behavior regressions",
+        "witness": "scripts/witness_unified_s21.py (exact commit/runtime hashes, source contrasts, actual values and countermodels)",
+        "scope": "Bounded offline portions of T01/T02/T09/T20 only. Fixture extraction proposals are inputs, not proven model-semantic capability.",
+        "stage_complete": false,
+        "limits": [
+          "Open natural-language extraction, independent alignment and reading completeness are not established.",
+          "Full-FOL unsat has no independent proof object; finite witnesses are independently evaluated and formally round-tripped.",
+          "Time, bridges, identity withdrawal and query/absence dependencies remain S2.2; dynamic scheduling remains S2.3.",
+          "No real provider, credentials, paid service, sealed material, live-functional or effectiveness evidence."
+        ]
+      }
     },
     {
       "id": "S2.2",
@@ -3363,18 +3379,18 @@
   "current_execution": {
     "started_at_utc": "2026-10-11T20:31:00Z",
     "authority": "Owner explicitly authorized continued implementation, tests, PRs and verified merges under the approved S1–S7 plan.",
-    "base_main": "21b63e227ead583ded0575f2ab65b073ba26733c",
-    "current_stage": "S1",
-    "delivered_slice": "S1.3",
+    "base_main": "de92d28279d8cb5b3e0ba407a12af0a9cde1fb7d",
+    "current_stage": "S2",
+    "delivered_slice": "S2.1",
     "readiness": "INTEGRATED_OFFLINE",
     "stage_complete": false,
-    "next_slice": "S2.1",
+    "next_slice": "S2.2",
     "provider_calls": 0,
     "provider_spend_usd": "0",
     "sealed_content_reads": 0,
-    "scope": "有界旧typed快照幂等旁路导入、语义保真/quarantine、持久namespace回滚fence与同一engine兼容入口；导入原文继续驱动真实有限模型计算及回答。",
-    "remaining": "继续S2.1普通语言到实际计算再到回答；S1真实模型功能证据、S5全局旧域切换及全部S2–S7/T01–T32研究验收保持原范围。",
+    "scope": "原文片段与候选语义IR接入同一engine，执行真实条件FOL、多读法和反模型回译；抽取端口仍是明确注入fixture。",
+    "remaining": "继续S2.2时间、显式Bridge、身份与撤回依赖；完整S1/S2实模功能、S3–S7及T01–T32研究目标全部保留。",
     "historical_boundary": "旧A–H/G-HC/G-ARCH、实验和closed grants保持原证据等级，不自动继承。",
-    "validation": "本切片离线结果不等于完整验收族、S1阶段完成、LIVE_FUNCTIONAL或EFFECT_CONFIRMED。"
+    "validation": "本切片只证明离线候选到真实计算和回答消费，不证明开放自然语言抽取、语义对齐、读法完整性或S1/S2阶段完成。"
   }
 }
