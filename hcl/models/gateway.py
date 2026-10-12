@@ -109,6 +109,7 @@ class ModelGateway:
         if type(self._port) is not OfflineModelPort:
             raise ValueError("Only the built-in offline fixture port is currently supported")
         self._calls: dict[tuple[Principal, str, str, str], str] = {}
+        self._context_compiler = None
         from hcl.runtime.budget import TaskBudgetLedger
         self._ledger = TaskBudgetLedger(store) if store.durable else None
 
@@ -139,7 +140,9 @@ class ModelGateway:
             if type(allowance) is not ExecutionBudget:
                 raise HCLFailure("INVALID_REQUEST", "context", "EXECUTION_BUDGET_REQUIRED", "budget",
                                  "Bounded contexts require explicit task execution limits.")
-            compiler = ContextCompiler(authorized_context.semantic_profile)
+            compiler = self._context_compiler
+            if compiler is None or compiler.semantic_profile != authorized_context.semantic_profile:
+                compiler = self._context_compiler = ContextCompiler(authorized_context.semantic_profile)
             serialized = compiler.serialize(snapshot, authorized_context.question, authorized_context.chunk)
             if tokens_upper_bound(serialized) > compiler.limit(allowance, self.capabilities):
                 raise HCLFailure("BUDGET_EXHAUSTED", "context", "CONTEXT_TOKENS_EXCEEDED", "context",

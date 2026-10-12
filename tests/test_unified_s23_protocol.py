@@ -242,6 +242,168 @@ class ProtocolTests(graph_fixtures.ExecutionGraphTests):
         finally:
             peer.close()
 
+    def test_repair_same_result_id_different_values_never_delivers_uncommitted_candidate(self):
+        from hcl.kernel.types import thaw
+        from hcl.memory.store import StateStore
+        from hcl.semantics.segments import segment_snapshot
+        from tests.test_unified_s23_recovery import Crash
+
+        original = LocalModelOperator.run
+        for mode in ("run", "stream", "recover-second-computation", "changed-read-set", "changed-effects"):
+            candidate = self.candidate()
+            segment = next(
+                s.segment_id
+                for s in segment_snapshot(
+                    self.store.snapshot("s", self.owner, (self.handle,)), self.question
+                )
+                if s.kind == "SOURCE"
+            )
+            candidate["readings"][0]["unparsed_segments"] = [segment]
+            request = replace(
+                self.semantic_request(), request_id=mode, budget=replace(self.budget, max_feedback=1)
+            )
+            attempts = 0
+
+            def corrupt_second(op, snapshot, issue, allowance):
+                nonlocal attempts
+                actual = original(op, snapshot, issue, allowance)
+                attempts += 1
+                if attempts != 2:
+                    return actual
+                values = thaw(actual.candidate_delta.new_inferences[0].values)
+                values["label"] = "False"
+                for row in values["readings"]:
+                    row["label"] = "False"
+                inference = replace(actual.candidate_delta.new_inferences[0], values=values)
+                changed = replace(
+                    actual, candidate_delta=replace(actual.candidate_delta, new_inferences=(inference,))
+                )
+                if mode == "changed-read-set":
+                    changed = replace(
+                        changed, read_set={}, candidate_delta=replace(changed.candidate_delta, read_set={})
+                    )
+                if mode == "changed-effects":
+                    changed = replace(changed, effects=("overwrite_source",))
+                return changed
+
+            port = OfflineModelPort(responses=(json.dumps(candidate), json.dumps(candidate)))
+            client = HCL(self.store, principal=self.owner, gateway=ModelGateway(self.store, port))
+            with self.subTest(mode=mode), patch.object(LocalModelOperator, "run", corrupt_second):
+                if mode == "stream":
+
+                    async def events():
+                        return [event async for event in client.stream(request)]
+
+                    result = asyncio.run(events())[-1].result
+                elif mode == "recover-second-computation":
+                    old_owner = self.store.owner_id
+
+                    def checkpoint(stage):
+                        if stage == "execution_computed" and attempts == 2:
+                            raise Crash()
+
+                    with patch.object(self.store, "_checkpoint", checkpoint), self.assertRaises(Crash):
+                        client.run_sync(request)
+                    self.store.close()
+                    self.store = StateStore.sqlite(self.path)
+                    RecoveryManager(self.store).resume_execution(request, expected_owner_id=old_owner)
+                    result, resumed = self.run_request(request)
+                    self.assertEqual(resumed.attempts, 0)
+                else:
+                    result = client.run_sync(request)
+                self.assertEqual(result.status, "PARTIAL", result.diagnostics)
+                self.assertEqual(
+                    result.diagnostics[0].code,
+                    (
+                        "OPERATOR_EFFECT_CONTRACT"
+                        if mode == "changed-effects"
+                        else "COMMITTED_EFFECT_MISMATCH"
+                    ),
+                )
+                self.assertIn("label=True", result.answer)
+                self.assertNotIn("label=False", result.answer)
+                self.assertEqual(port.attempts, 2)
+                actuals = {value.result_id: value for value in self.store.inferences("s", self.owner)}
+                for claim in result.claim_records:
+                    for field in claim.used_result_fields:
+                        if field.field == "label":
+                            self.assertEqual(field.value, actuals[field.result_id].values["label"])
+                self.store.close()
+                self.store = StateStore.sqlite(self.path)
+                replay, again = self.run_request(request)
+                self.assertEqual(replay.answer, result.answer)
+                self.assertEqual(replay.claim_records, result.claim_records)
+                self.assertEqual(again.attempts, 0)
+
+    def test_replay_checks_actual_serialized_delivery_after_metadata_added(self):
+        from hcl.memory.store import StateStore
+
+        first, _ = self.run_request()
+        size = len(codec.dumps(first))
+        # Rebuild the identical finite task; measure rather than hard-code an
+        # implementation-dependent JSON size. Its initial answer exactly fits.
+        for bound in ("max_output_bytes", "max_total_output_bytes"):
+            self.store.close()
+            self.path = self.path.parent / (bound + ".sqlite")
+            self.store = StateStore.sqlite(self.path, revision=True)
+            self.store.create_session("s", self.owner, frozenset({"bob"}))
+            self.handle = self.store.put_source(
+                "s", self.owner, "source", "张三收到通知。张三出席。", formal_problem=self.problem
+            )
+            request = self.request(budget=replace(self.budget, **{bound: size}))
+            initial, _ = self.run_request(request)
+            self.assertEqual(initial.status, "COMPLETED", initial.diagnostics)
+            self.assertEqual(len(codec.dumps(initial)), size)
+            replay, port = self.run_request(request)
+            self.assertEqual(replay.status, "BUDGET_EXHAUSTED")
+            self.assertEqual(replay.diagnostics[0].code, "DELIVERY_CAPACITY")
+            self.assertFalse(replay.answer)
+            self.assertEqual(port.attempts, 0)
+            self.store.close()
+            self.store = StateStore.sqlite(self.path)
+            port = OfflineModelPort()
+            client = HCL(self.store, principal=self.owner, gateway=ModelGateway(self.store, port))
+
+            async def stream():
+                return [event async for event in client.stream(request)]
+
+            result = asyncio.run(stream())[-1].result
+            self.assertEqual(result.status, "BUDGET_EXHAUSTED")
+            self.assertEqual(result.usage["local_evaluations"], 2)
+            self.assertEqual(port.attempts, 0)
+
+    def test_semantic_replay_capacity_failure_retains_known_original_call_usage(self):
+        from hcl.memory.store import StateStore
+
+        request = self.semantic_request()
+        raw = json.dumps(self.candidate())
+        measured, _ = self.run_request(request, (raw,))
+        size = len(codec.dumps(measured))
+        self.store.close()
+        self.path = self.path.parent / "semantic-replay.sqlite"
+        self.store = StateStore.sqlite(self.path, revision=True)
+        self.store.create_session("s", self.owner, frozenset({"bob"}))
+        self.handle = self.store.put_source(
+            "s", self.owner, "source", "张三收到通知。张三出席。", formal_problem=self.problem
+        )
+        request = self.semantic_request(budget=replace(self.budget, max_output_bytes=size))
+        original, port = self.run_request(request, (raw,))
+        self.assertEqual(original.status, "COMPLETED", original.diagnostics)
+        self.assertEqual(len(codec.dumps(original)), size)
+        before = self.store._db.execute("SELECT state,result_hash FROM tasks").fetchone()
+        self.store.close()
+        self.store = StateStore.sqlite(self.path)
+        result, repeated = self.run_request(request)
+        self.assertEqual(result.diagnostics[0].code, "DELIVERY_CAPACITY")
+        self.assertEqual(result.usage["mock_calls"], 1)
+        self.assertEqual(result.usage["held_mock_calls"], 1)
+        self.assertEqual(result.usage["observed_output_bytes"], len(raw.encode()))
+        self.assertFalse(result.answer)
+        self.assertNotIn("result_ids", result.execution_receipt)
+        self.assertEqual((port.attempts, repeated.attempts), (1, 0))
+        after = self.store._db.execute("SELECT state,result_hash FROM tasks").fetchone()
+        self.assertEqual(tuple(before), tuple(after))
+
 
 def load_tests(loader, tests, pattern):
     return unittest.TestSuite(

@@ -23,7 +23,7 @@ from hcl.kernel.dependencies import RevisionIssue, QueryDelta, IndexQuery, pack_
 from hcl.memory import codec
 from hcl.models.gateway import AuthorizedContext, CallSpec
 from hcl.operators.local_model import LocalModelOperator
-from hcl.semantics.segments import SourceSegment, segment_snapshot
+from hcl.semantics.segments import SourceSegment, question_segments
 from .context import ContextCompiler, ContextChunk
 from .execution_ledger import ExecutionLedger, stopped
 from .planner import IssuePlanner, progress_key
@@ -275,7 +275,7 @@ class ExecutionRunner:
             node["result"] = raw
             return
         source_segments = chunk.segments
-        questions = tuple(s for s in segment_snapshot(snapshot, request.question) if s.kind == "QUESTION")
+        questions = question_segments(request.question)
         segments = (*source_segments, *questions)
         try:
             if goal.kind == "logic.compare_semantic_readings":
@@ -465,7 +465,7 @@ class ExecutionRunner:
         snapshot = self.snapshots[goal.issue_id]
         if node.get("result") is not None:
             node["commit_revision"] = self._commit(node["result"])
-            node["committed_result_refs"] = node["result"].result_refs
+            self._mark_committed(node, node["result"])
             return
         if goal.kind == "logic.check_interpretation":
             model = LocalModel(
@@ -536,7 +536,7 @@ class ExecutionRunner:
         self._save()
         self.store._checkpoint("execution_computed")
         node["commit_revision"] = self._commit(operation)
-        node["committed_result_refs"] = operation.result_refs
+        self._mark_committed(node, operation)
 
     def _feedback(self, request, node, error=None):
         result = None
@@ -595,7 +595,8 @@ class ExecutionRunner:
         )
         target["result"] = None
         if node is not target:
-            node["previous_results"] = (*node.get("previous_results", ()), node["result"])
+            if self._accepted(node, node["result"]):
+                node["previous_results"] = (*node.get("previous_results", ()), node["result"])
             node["result"] = None
             node["state"] = "PENDING"
         self._save()
@@ -669,11 +670,31 @@ class ExecutionRunner:
         self._save()
 
     @staticmethod
-    def _operation(node):
+    def _mark_committed(node, operation):
+        # Eligibility is a successful commit of the complete immutable effect,
+        # never an ID left behind by an earlier repair iteration.
+        digest = sha256(codec.dumps(operation)).hexdigest()
+        node["committed_operations"] = tuple(sorted({*node.get("committed_operations", ()), digest}))
+
+    @staticmethod
+    def _accepted(node, operation):
+        return operation is not None and sha256(codec.dumps(operation)).hexdigest() in node.get(
+            "committed_operations", ()
+        )
+
+    @classmethod
+    def _operation(cls, node):
         current = node.get("result")
-        if current is not None and node.get("committed_result_refs") == current.result_refs:
+        if cls._accepted(node, current):
             return current
-        return node.get("previous_results", ())[-1] if node.get("previous_results") else None
+        return next(
+            (
+                previous
+                for previous in reversed(node.get("previous_results", ()))
+                if cls._accepted(node, previous)
+            ),
+            None,
+        )
 
     def _bindings(self):
         result = []
@@ -688,6 +709,23 @@ class ExecutionRunner:
                 snapshot = self.snapshots[node["goal"].issue_id]
                 result.append((snapshot, snapshot.source_versions))
         return result
+
+    @staticmethod
+    def _check_delivery(request, result):
+        size = len(codec.dumps(result))
+        if (
+            size > request.budget.max_output_bytes
+            or len(result.answer.encode()) > request.budget.max_visible_output_tokens
+            or result.usage.get("observed_output_bytes", 0) + size > request.budget.max_total_output_bytes
+        ):
+            raise HCLFailure(
+                "BUDGET_EXHAUSTED",
+                "answer",
+                "DELIVERY_CAPACITY",
+                "execution",
+                "The actual delivery exceeds its unchanged task allowance.",
+                resource_usage=result.usage,
+            )
 
     async def run(self, request):
         self.request = request
@@ -710,6 +748,7 @@ class ExecutionRunner:
                 replay = None
             if replay is not None:
                 self.ledger.tasks.validate_cached_delivery(request)
+                self._check_delivery(request, replay)
                 return replay
             initial = self._initial(request)
             root_goal = request.issue.goals[0] if type(request.issue.goals[0]) is RevisionIssue else None
@@ -725,6 +764,7 @@ class ExecutionRunner:
             self.lease, checkpoint, replay = self.ledger.open(request, root, initial)
             if replay is not None:
                 self.ledger.tasks.validate_cached_delivery(request)
+                self._check_delivery(request, replay)
                 return replay
             self._restore(checkpoint)
             while True:
@@ -811,13 +851,7 @@ class ExecutionRunner:
                 max(revisions) if revisions else root.revision,
                 diagnostics,
             )
-            if (
-                len(codec.dumps(result)) > request.budget.max_output_bytes
-                or len(answer.encode()) > request.budget.max_visible_output_tokens
-                or usage["observed_output_bytes"] + len(codec.dumps(result))
-                > request.budget.max_total_output_bytes
-            ):
-                raise stopped("DELIVERY_CAPACITY", "BUDGET_EXHAUSTED", "answer")
+            self._check_delivery(request, result)
             bindings = self._bindings()
             self.ledger.finalize(self.lease, self._checkpoint(), result, bindings)
             self.ledger.tasks.validate_cached_delivery(request)

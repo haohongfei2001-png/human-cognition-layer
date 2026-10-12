@@ -7,10 +7,11 @@ The UTF-8 byte count is a conservative fixture token bound, not observed usage.
 
 from dataclasses import asdict, dataclass, replace
 from hashlib import sha256
+from array import array
 import json
 
 from hcl.kernel.types import HCLFailure
-from hcl.semantics.segments import SourceSegment, segment_snapshot
+from hcl.semantics.segments import SourceSegment, iter_segments, question_segments
 
 
 @dataclass(frozen=True)
@@ -31,11 +32,52 @@ class ContextCompiler:
 
     def __init__(self, semantic_profile=None):
         self.semantic_profile = semantic_profile
+        self._metadata_cache = None
+        self._template_cache = None
+
+    def _metadata(self, snapshot):
+        cached = self._metadata_cache
+        if cached is not None and cached[0] is snapshot:
+            return cached[1]
+        values = {}
+        for key, source in snapshot.immutable_views.items():
+            offsets = array("I", (0,))
+            count = 0
+            for char in source.text:
+                count += len(char.encode("utf-8"))
+                offsets.append(count)
+            values[key] = (sha256(source.text.encode()).hexdigest(), offsets)
+        self._metadata_cache = (snapshot, values)
+        return values
+
+    def _template(self, snapshot, question, purpose):
+        cached = self._template_cache
+        if cached is not None and cached[0] is snapshot and cached[1:3] == (question, purpose):
+            return dict(cached[3]), cached[4]
+        # Keep source version/query bindings, but never construct discarded full
+        # source segments merely to obtain the typed contract and query anchors.
+        empty = replace(snapshot, immutable_views={})
+        if purpose == "semantic_compile":
+            from hcl.semantics.segments import semantic_context
+
+            context = semantic_context(empty, question, self.semantic_profile)
+        elif purpose == "revision_compile":
+            from hcl.semantics.revision import revision_context
+
+            context = revision_context(empty, question)
+        elif purpose == "answer":
+            context = dict(schema="hcl-bounded-answer-context-1", purpose="OFFLINE_EXPRESSION_ONLY")
+        else:
+            raise ValueError("unsupported context purpose")
+        questions = tuple(question_segments(question))
+        self._template_cache = (snapshot, question, purpose, context, questions)
+        return dict(context), questions
 
     def serialize(self, snapshot, question, chunk):
         if type(chunk) is not ContextChunk:
             raise ValueError("typed context chunk required")
         checked = []
+        metadata = self._metadata(snapshot)
         for segment in chunk.segments:
             if type(segment) is not SourceSegment or segment.kind != "SOURCE":
                 raise ValueError("original source segment required")
@@ -48,14 +90,14 @@ class ContextCompiler:
                     "segments",
                     "A selected source is outside the authorized snapshot.",
                 )
-            digest = sha256(source.text.encode()).hexdigest()
+            digest, offsets = metadata[segment.source_id]
             if (
                 segment.version != source.handle.version
                 or segment.source_sha256 != digest
                 or not 0 <= segment.start < segment.end <= len(source.text)
                 or source.text[segment.start : segment.end] != segment.text
-                or segment.byte_start != len(source.text[: segment.start].encode())
-                or segment.byte_end != len(source.text[: segment.end].encode())
+                or segment.byte_start != offsets[segment.start]
+                or segment.byte_end != offsets[segment.end]
             ):
                 raise HCLFailure(
                     "DENIED",
@@ -65,20 +107,8 @@ class ContextCompiler:
                     "The selected bytes do not match an original authorized source.",
                 )
             checked.append(segment)
-        if chunk.purpose == "semantic_compile":
-            from hcl.semantics.segments import semantic_context
-
-            context = semantic_context(snapshot, question, self.semantic_profile)
-        elif chunk.purpose == "revision_compile":
-            from hcl.semantics.revision import revision_context
-
-            context = revision_context(snapshot, question)
-        elif chunk.purpose == "answer":
-            context = dict(schema="hcl-bounded-answer-context-1", purpose="OFFLINE_EXPRESSION_ONLY")
-        else:
-            raise ValueError("unsupported context purpose")
-        question_segments = tuple(s for s in segment_snapshot(snapshot, question) if s.kind == "QUESTION")
-        context["segments"] = [asdict(s) for s in (*checked, *question_segments)]
+        context, questions = self._template(snapshot, question, chunk.purpose)
+        context["segments"] = [asdict(s) for s in (*checked, *questions)]
         context["coverage"] = dict(
             ordinal=chunk.ordinal,
             total=chunk.total,
@@ -117,53 +147,57 @@ class ContextCompiler:
                 "budget",
                 "The question and necessary operator contract exceed context capacity.",
             )
-        segments = [s for s in segment_snapshot(snapshot, question) if s.kind == "SOURCE"]
-        pieces = []
-        for segment in segments:
-            # Long paragraphs are partitioned at Unicode character boundaries.
-            start = segment.start
-            while start < segment.end:
-                low, high = start + 1, segment.end
-                end = start
-                while low <= high:
-                    middle = (low + high) // 2
-                    part = self._piece(snapshot, segment, start, middle)
-                    size = len(json.dumps(asdict(part), ensure_ascii=False).encode())
-                    if size <= room:
-                        end, low = middle, middle + 1
-                    else:
-                        high = middle - 1
-                if end == start:
-                    raise HCLFailure(
-                        "BUDGET_EXHAUSTED",
-                        "context",
-                        "CONTEXT_SEGMENT_CAPACITY",
-                        "segments",
-                        "An exact source fragment cannot fit the available context.",
+        groups, group, group_size = [], [], overhead
+        # Stream mechanical slices once. Packet size is additive in serialized
+        # segment records, so packing never reserializes the growing source.
+        for source in snapshot.immutable_views.values():
+            segments = iter_segments(source.text, source.handle.source_id, source.handle.version, "SOURCE")
+            for segment in segments:
+                start = segment.start
+                while start < segment.end:
+                    low, high, end = start + 1, segment.end, start
+                    while low <= high:
+                        middle = (low + high) // 2
+                        part = self._piece(snapshot, segment, start, middle)
+                        size = len(
+                            json.dumps(asdict(part), ensure_ascii=False, separators=(",", ":")).encode()
+                        )
+                        if size <= room:
+                            end, low = middle, middle + 1
+                        else:
+                            high = middle - 1
+                    if end == start:
+                        raise HCLFailure(
+                            "BUDGET_EXHAUSTED",
+                            "context",
+                            "CONTEXT_SEGMENT_CAPACITY",
+                            "segments",
+                            "An exact source fragment cannot fit the available context.",
+                        )
+                    piece = self._piece(snapshot, segment, start, end)
+                    size = (
+                        len(json.dumps(asdict(piece), ensure_ascii=False, separators=(",", ":")).encode())
+                        + 1
                     )
-                pieces.append(self._piece(snapshot, segment, start, end))
-                start = end
-        groups, group = [], []
-        for piece in pieces:
-            candidate = ContextChunk(purpose, tuple((*group, piece)), 1024, 1024)
-            if group and len(self.serialize(snapshot, question, candidate).encode()) + 1024 > limit:
-                groups.append(tuple(group))
-                group = []
-            group.append(piece)
+                    if group and group_size + size > limit:
+                        groups.append(tuple(group))
+                        group, group_size = [], overhead
+                        if len(groups) >= 1024:
+                            raise HCLFailure(
+                                "BUDGET_EXHAUSTED",
+                                "context",
+                                "CONTEXT_CHUNK_BOUND",
+                                "segments",
+                                "The bounded context partition has too many fragments.",
+                            )
+                    group.append(piece)
+                    group_size += size
+                    start = end
         if group or not groups:
             groups.append(tuple(group))
-        if len(groups) > 1024:
-            raise HCLFailure(
-                "BUDGET_EXHAUSTED",
-                "context",
-                "CONTEXT_CHUNK_BOUND",
-                "segments",
-                "The bounded context partition has too many fragments.",
-            )
         return tuple(ContextChunk(purpose, group, i, len(groups)) for i, group in enumerate(groups))
 
-    @staticmethod
-    def _piece(snapshot, segment, start, end):
+    def _piece(self, snapshot, segment, start, end):
         if start == segment.start and end == segment.end:
             return segment
         text = snapshot.immutable_views[segment.source_id].text
@@ -180,7 +214,7 @@ class ContextCompiler:
             segment.source_sha256,
             start,
             end,
-            len(text[:start].encode()),
-            len(text[:end].encode()),
+            self._metadata(snapshot)[segment.source_id][1][start],
+            self._metadata(snapshot)[segment.source_id][1][end],
             text[start:end],
         )

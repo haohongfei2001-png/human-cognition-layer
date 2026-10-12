@@ -68,7 +68,9 @@ source bytes or historical failure are discarded by this interning.
 
 Every computed operation declares actual `append_inference` effects. The
 controller checks source/principal/session/version/read-set identity, result
-IDs, resources and the effect declaration before accepting a commit. It is the
+IDs, resources and the effect declaration before accepting a commit.
+Delivery eligibility binds the complete accepted operation hash, including values,
+read sets and effects, across repair iterations and checkpoint recovery. It is the
 only writer. A stored, byte-identical committed candidate may be recognized
 after a crash; a mismatching result or dependency cannot masquerade as that
 commit. Only committed accepted effects are eligible for final delivery.
@@ -120,7 +122,10 @@ There is no full catalog or complete audit-log dump in a model request.
 The context compiler covers all source characters, splitting long paragraphs at
 Unicode boundaries and preserving source version, full-source hash, character
 positions and byte positions. It greedily packs exact fragments against the
-complete serialized request limit. An oversized question/necessary contract
+complete serialized request limit. Mechanical segmentation is streamed once;
+source hashes/byte-offset indexes and empty-source contract templates are reused.
+Packing accumulates exact encoded segment sizes without repeated whole-source
+construction, including thousands of short lines. An oversized question/necessary contract
 fails before reservation. Tests include Chinese/emoji evidence exceeding 36KB
 and a decisive final negative fragment; every fragment is processed or an
 explicit unresolved obligation is returned.
@@ -148,7 +153,9 @@ never a generated summary.
 Frame, perspective, time/cutoff and model qualifications remain visible. Full
 countermodels and source slices remain in storage instead of being copied into
 every final receipt. The byte allowance is checked against the encoded complete
-TaskResult as well as its visible text and cumulative output consumption. A
+TaskResult as well as its visible text and cumulative output consumption, including
+metadata added to cached/restarted delivery. A replay capacity refusal preserves
+the original known call usage and completed task object. A
 refusal retains verified intermediate results, without emitting partial unchecked
 prose. `stream` emits status then the same verified result as `run`.
 
@@ -230,7 +237,11 @@ committed result references. A 4-MiB checkpoint test then exposed repeated full
 snapshot expansion; lossless in-checkpoint interning fixed the real long-input
 case without deleting source evidence or raising the limit. The failing tests
 and subsequent positive/negative regressions are retained in the development
-verification history.
+verification history. Independent review additionally found a repeated-ID repair
+collision, quadratic short-line context preprocessing and replay metadata capacity
+overrun. Full operation-hash eligibility, streamed additive packing and shared
+initial/replay delivery checks address them; run/stream/restart and exact-usage
+negative regressions retain the original failures.
 
 This is offline functional integration under supplied interpretations. It does
 not establish open task/semantic decomposition, cross-chunk meaning, independent

@@ -22,26 +22,29 @@ class SourceSegment:
     text: str
 
 
-def _segments(text, source_id, version, kind):
+def iter_segments(text, source_id, version, kind):
+    """Lazily yield the same exact mechanical slices with linear byte offsets."""
     digest = sha256(text.encode('utf-8')).hexdigest()
-    # A mechanical display partition, not a sentence parser or coverage proof.
-    # Whitespace and punctuation stay in the original slice, without normalization.
-    offsets = [0]
-    offsets.extend(match.end() for match in re.finditer(r'[.!?。！？](?:[”’"\'])*(?:[ \t]+|\r?\n|$)|\r\n|[\n\r]', text))
-    if offsets[-1] != len(text):
-        offsets.append(len(text))
-    result = []
-    byte_offset = 0
-    for start, end in zip(offsets, offsets[1:]):
+    ends = (match.end() for match in re.finditer(r'[.!?。！？](?:[”’"\'])*(?:[ \t]+|\r?\n|$)|\r\n|[\n\r]', text))
+    from itertools import chain
+    start, byte_offset = 0, 0
+    for end in chain(ends, (len(text),)):
         if start == end:
             continue
         identity = json.dumps([kind, source_id, version, digest, start, end], ensure_ascii=False, separators=(',', ':'))
         piece = text[start:end]
         byte_end = byte_offset + len(piece.encode('utf-8'))
-        result.append(SourceSegment('segment:' + sha256(identity.encode()).hexdigest(), kind, source_id, version,
-            digest, start, end, byte_offset, byte_end, piece))
-        byte_offset = byte_end
-    return tuple(result)
+        yield SourceSegment('segment:' + sha256(identity.encode()).hexdigest(), kind, source_id, version,
+            digest, start, end, byte_offset, byte_end, piece)
+        start, byte_offset = end, byte_end
+
+
+def _segments(text, source_id, version, kind):
+    return tuple(iter_segments(text, source_id, version, kind))
+
+
+def question_segments(question):
+    return _segments(question, None, None, 'QUESTION')
 
 
 def segment_snapshot(snapshot: Snapshot, question: str):

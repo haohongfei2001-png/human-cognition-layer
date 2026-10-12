@@ -3,6 +3,7 @@
 from dataclasses import replace
 import json
 import unittest
+from unittest.mock import patch
 
 from hcl.kernel.types import Issue
 from hcl.models.gateway import OfflineModelPort
@@ -88,6 +89,39 @@ class ContextExecutionTests(graph_fixtures.ExecutionGraphTests):
         self.assertEqual(port.attempts, 1)
         self.assertEqual(result.status, "PARTIAL")
         self.assertEqual(result.diagnostics[0].code, "TOTAL_REQUEST_BYTES_EXCEEDED")
+
+    def test_many_short_lines_are_segmented_once_with_exact_linear_packet_coverage(self):
+        from hcl.semantics import segments as anchors
+        from hcl.runtime import context as packing
+
+        text = "a\n" * 1000 + "最后🧪反证。"
+        self.handle = self.store.put_source("s", self.owner, "source", text)
+        snapshot = self.store.snapshot("s", self.owner, (self.handle,))
+        budget = replace(self.budget, max_request_bytes=12000, max_context_tokens=12000)
+        compiler = ContextCompiler()
+        original = anchors.semantic_context
+        contexts = []
+
+        def contract(selected, question, profile):
+            contexts.append(len(selected.immutable_views))
+            return original(selected, question, profile)
+
+        with patch.object(anchors, "semantic_context", contract), patch.object(
+            packing, "iter_segments", wraps=anchors.iter_segments
+        ) as mechanical:
+            chunks = compiler.chunks(
+                snapshot, self.question, "semantic_compile", budget, OfflineModelPort().describe()
+            )
+            wires = [compiler.serialize(snapshot, self.question, chunk) for chunk in chunks]
+        self.assertEqual(mechanical.call_count, 1)
+        self.assertEqual(contexts, [0])
+        self.assertEqual("".join(s.text for c in chunks for s in c.segments), text)
+        self.assertTrue(all(len(wire.encode()) <= 12000 for wire in wires))
+        self.assertIn("最后🧪反证", wires[-1])
+        self.assertEqual(
+            tuple(anchors.iter_segments(text, "source", self.handle.version, "SOURCE")),
+            tuple(s for s in segment_snapshot(snapshot, self.question) if s.kind == "SOURCE"),
+        )
 
 
 def load_tests(loader, tests, pattern):

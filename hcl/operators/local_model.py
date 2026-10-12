@@ -9,7 +9,7 @@ from hcl.kernel.types import HCLFailure, thaw
 from hcl.operators.logic import FiniteLogicOperator
 from hcl.operators.semantic_logic import ReadingLogicOperator
 from hcl.semantics.compiler import SemanticCompiler
-from hcl.semantics.segments import SourceSegment, segment_snapshot
+from hcl.semantics.segments import SourceSegment, question_segments
 
 
 class LocalModelOperator:
@@ -18,6 +18,9 @@ class LocalModelOperator:
 
     def __init__(self, semantic_profile=None):
         self.semantic_profile = semantic_profile
+        from hcl.runtime.context import ContextCompiler
+
+        self.context = ContextCompiler(semantic_profile)
 
     def run(self, snapshot, issue, allowance):
         try:
@@ -75,12 +78,10 @@ class LocalModelOperator:
             from hcl.runtime.context import ContextCompiler, ContextChunk
 
             source_segments = tuple(s for s in segments if s.kind == "SOURCE")
-            ContextCompiler(self.semantic_profile).serialize(
+            self.context.serialize(
                 snapshot, ast["question"], ContextChunk("semantic_compile", source_segments, 0, 1)
             )
-            questions = tuple(
-                s for s in segment_snapshot(snapshot, ast["question"]) if s.kind == "QUESTION"
-            )
+            questions = question_segments(ast["question"])
             if tuple(s for s in segments if s.kind == "QUESTION") != questions:
                 raise HCLFailure(
                     "INVALID_REQUEST",
