@@ -855,6 +855,22 @@ class ExecutionRunner:
                 resource_usage=replay.usage,
             ) from None
 
+    def _deliver_replay(self, request, replay):
+        """Retain all known historical usage even if late delivery is refused."""
+        try:
+            replay = self._qualify_replay(request, replay)
+            self.ledger.tasks.validate_cached_delivery(request)
+            self._check_delivery(request, replay)
+            return replay
+        except HCLFailure as error:
+            usage = dict(replay.usage)
+            usage.update(error.resource_usage)
+            raise HCLFailure(
+                error.status, error.diagnostic.stage, error.diagnostic.code,
+                error.diagnostic.field_path, error.diagnostic.message,
+                resource_usage=usage,
+            ) from None
+
     async def run(self, request):
         self.request = request
         safe = dict(
@@ -875,10 +891,7 @@ class ExecutionRunner:
                     raise
                 replay = None
             if replay is not None:
-                replay = self._qualify_replay(request, replay)
-                self.ledger.tasks.validate_cached_delivery(request)
-                self._check_delivery(request, replay)
-                return replay
+                return self._deliver_replay(request, replay)
             initial = self._initial(request)
             root_goal = request.issue.goals[0] if type(request.issue.goals[0]) is RevisionIssue else None
             if root_goal is not None and root_goal.known_at is not None:
@@ -892,10 +905,7 @@ class ExecutionRunner:
                 root = self._snapshot(request)
             self.lease, checkpoint, replay = self.ledger.open(request, root, initial)
             if replay is not None:
-                replay = self._qualify_replay(request, replay)
-                self.ledger.tasks.validate_cached_delivery(request)
-                self._check_delivery(request, replay)
-                return replay
+                return self._deliver_replay(request, replay)
             self._restore(checkpoint)
             while True:
                 ready = self.planner.ready(self.nodes)

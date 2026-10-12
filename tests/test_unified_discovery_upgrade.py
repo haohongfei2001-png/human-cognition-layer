@@ -220,6 +220,9 @@ class M04RuntimeUpgradeTests(previous.S4RuntimeUpgradeTests):
                                 "request"
                             ].encode()
                         )
+                        historical_usage = dict(
+                            HCL(store, principal=self.owner).run_sync(request).usage
+                        )
                         original = store._get_object
                         revoked = []
 
@@ -262,6 +265,8 @@ class M04RuntimeUpgradeTests(previous.S4RuntimeUpgradeTests):
                             "discovery-source", str(denied.execution_receipt)
                         )
                         self.assertEqual(denied.usage["mock_calls"], 1)
+                        for key, value in historical_usage.items():
+                            self.assertEqual(denied.usage.get(key), value, key)
                     finally:
                         peer.close()
                     # Current delivery ACL must still take precedence over old cached content.
