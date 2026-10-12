@@ -10,8 +10,11 @@ from hcl.kernel.execution import ExecutionBudget, ExecutionIssue, LocalModel, Mo
 from hcl.runtime.context import ContextChunk
 from hcl.semantics.segments import SourceSegment
 
+from hcl.kernel.retrieval import RetrievalQuery, RetrievalDependency, RetrievalIssue, EvidenceNode
+
 FORMAT = "hcl-content-object-1"
 CLASSES = {cls.__name__: cls for cls in (
+    RetrievalQuery, RetrievalDependency, RetrievalIssue, EvidenceNode,
     ExecutionBudget, ExecutionIssue, LocalModel, ModelIssue, ExecutionCheckpoint, ResumeToken, ProjectedResultField, SnapshotRef, ContextChunk, SourceSegment,
     types.Principal, types.AccessPolicy, types.SourceHandle, types.FormalProblem,
     types.SourceDocument, types.BudgetSlice, types.Issue, types.TaskRequest,

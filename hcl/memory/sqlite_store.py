@@ -149,6 +149,7 @@ class SQLiteStateStore:
         with self._lock:
             try:
                 self._db.execute("BEGIN IMMEDIATE" if write else "BEGIN")
+                self._retrieval_preparation = None
                 if self._db.execute("PRAGMA user_version").fetchone()[0] != self._schema:
                     raise corrupt()
                 if self._revision_control is not None:
@@ -166,6 +167,10 @@ class SQLiteStateStore:
                 if isinstance(error, (sqlite3.Error, OSError)):
                     raise failure("FAILED", "STORAGE_FAILURE", "store", "The state transaction could not complete.", "storage") from None
                 raise
+            finally:
+                # In particular, never carry an old WAL authorization decision
+                # into the separate late-delivery transaction.
+                self._retrieval_preparation = None
 
     def _put_object(self, value):
         body = codec.dumps(value)
@@ -260,8 +265,16 @@ class SQLiteStateStore:
             previous = db.execute("SELECT * FROM sources WHERE session_id=? AND source_id=?", (session_id, source_id)).fetchone()
             readers = sorted(identifier(member) for member in (readers if readers is not None else json.loads(session["members"])))
             readers = codec.canonical(sorted(set(readers)))
-            digest = self._put_object({"text": text, "formal_problem": formal_problem})
             version = previous["version"] + 1 if previous else 1
+            content = {"text": text, "formal_problem": formal_problem}
+            if self._schema in (3, 4):
+                from hcl.memory.index import build_index
+                source = SourceDocument(SourceHandle(source_id, version), text,
+                                        AccessPolicy(principal.tenant_id, frozenset(json.loads(readers))), formal_problem)
+                # Disposable cached projection. Keep the authoritative source
+                # object small; a dropped cache is rebuilt from exact originals.
+                content["retrieval_index_hash"] = self._put_object(build_index(source))
+            digest = self._put_object(content)
             session["revision"] += 1
             if previous and previous["readers"] != readers:
                 session["epoch"] += 1
@@ -310,6 +323,14 @@ class SQLiteStateStore:
 
     def _query_projection(self, db, session, principal, query):
         from hcl.kernel.dependencies import INDEX_KIND, query_projection
+        from hcl.kernel.retrieval import RetrievalQuery
+        if type(query) is RetrievalQuery:
+            from hcl.memory.query_store import RetrievalPreparation
+            if not db.in_transaction:
+                raise ValueError("retrieval requires an authorized transaction")
+            if self._retrieval_preparation is None:
+                self._retrieval_preparation = RetrievalPreparation()
+            return self._retrieval_preparation.project(self, db, session, principal, query)
 
         if self._schema not in (3, 4):
             raise failure(
@@ -536,8 +557,12 @@ class SQLiteStateStore:
                 selected,
             )
 
+    def search_snapshot(self, session_id, principal, query):
+        from hcl.memory.query_store import QueryStore
+        return QueryStore(self).search(session_id, principal, query)
+
     def query_snapshot(self, session_id, principal, source_handles, queries):
-        from hcl.kernel.dependencies import INDEX_VERSION, QuerySnapshot
+        from hcl.kernel.dependencies import INDEX_VERSION, QuerySnapshot, query_index_versions
 
         queries = tuple(queries)
         if not 1 <= len(queries) <= 64:
@@ -575,7 +600,7 @@ class SQLiteStateStore:
                 session["epoch"],
                 session["rule"],
                 {key: source.handle.version for key, source in views.items()},
-                {"revision": INDEX_VERSION},
+                query_index_versions(dependencies),
                 views,
                 tuple(dependencies),
                 query_views,
@@ -693,7 +718,7 @@ class SQLiteStateStore:
         )
 
     def _validate_snapshot(self, db, snapshot, read_set=None):
-        from hcl.kernel.dependencies import QuerySnapshot, INDEX_VERSION
+        from hcl.kernel.dependencies import QuerySnapshot, INDEX_VERSION, query_index_versions
         session = self._session(db, snapshot.session_id, snapshot.principal)
         # Revocation is an access failure before any query comparison, including
         # queries whose result disappears precisely because ACL filtering changed.
@@ -702,7 +727,7 @@ class SQLiteStateStore:
         )
         indexed = type(snapshot) is QuerySnapshot
         if indexed:
-            if self._schema not in (3, 4) or dict(snapshot.index_versions) != {"revision": INDEX_VERSION}:
+            if self._schema not in (3, 4) or dict(snapshot.index_versions) != query_index_versions(snapshot.query_dependencies):
                 raise corrupt()
             expected_views = {}
             for number, dependency in enumerate(snapshot.query_dependencies):

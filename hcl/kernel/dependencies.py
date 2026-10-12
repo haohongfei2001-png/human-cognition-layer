@@ -7,6 +7,7 @@ import re
 
 from hcl.kernel.scope import identifier, version_map
 from hcl.kernel.types import Delta, Snapshot, Issue, freeze, thaw
+from hcl.kernel.retrieval import RetrievalDependency, RetrievalQuery
 
 INDEX_VERSION = 1
 INDEX_KIND = "revision.source_index"
@@ -109,12 +110,22 @@ class QueryDelta(Delta):
         object.__setattr__(self, "query_dependencies", tuple(self.query_dependencies))
 
 
+def query_index_versions(queries):
+    versions = {}
+    if any(type(query) is QueryDependency for query in queries):
+        versions["revision"] = INDEX_VERSION
+    if any(type(query) is RetrievalDependency for query in queries):
+        from hcl.kernel.retrieval import RETRIEVAL_VERSION
+        versions["retrieval"] = RETRIEVAL_VERSION
+    return versions
+
+
 def pack_dependencies(positive, queries=()):
     positive = version_map(positive)
     queries = tuple(queries)
     if not queries:
         return positive  # Preserve old task/request/object bytes and exact maps.
-    if len(queries) > 64 or any(type(item) is not QueryDependency for item in queries):
+    if len(queries) > 64 or any(type(item) not in (QueryDependency, RetrievalDependency) for item in queries):
         raise ValueError("bounded typed query dependencies required")
     return {"schema": DEPENDENCY_SCHEMA, "positive": positive, "queries": [item.wire() for item in queries]}
 
@@ -131,6 +142,12 @@ def unpack_dependencies(value):
         raise ValueError("bounded query dependencies required")
     queries = []
     for item in value["queries"]:
+        if isinstance(item, Mapping) and set(item) == {"retrieval_query", "digest", "index_version"}:
+            wire = item["retrieval_query"]
+            if not isinstance(wire, Mapping) or set(wire) != {"queries", "source_scope", "seed_nodes", "evidence_result_ids", "max_hits_per_route", "max_nodes", "max_characters", "version"}:
+                raise ValueError("unknown retrieval query fields")
+            queries.append(RetrievalDependency(RetrievalQuery(**wire), item["digest"], item["index_version"]))
+            continue
         if not isinstance(item, Mapping) or set(item) != {"query", "digest", "index_version"}:
             raise ValueError("unknown query dependency fields")
         wire = item["query"]

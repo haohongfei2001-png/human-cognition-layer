@@ -18,6 +18,7 @@ from hcl.kernel.execution import (
     PROTOCOL,
     SnapshotRef,
 )
+from hcl.kernel.retrieval import RetrievalIssue, RetrievalQuery
 from hcl.kernel.types import AnswerContract, Delta, HCLFailure, InferenceResult, Issue, TaskResult, thaw
 from hcl.kernel.dependencies import RevisionIssue, QueryDelta, IndexQuery, pack_dependencies
 from hcl.memory import codec
@@ -63,7 +64,7 @@ class ExecutionRunner:
         ids = set()
         for goal in request.issue.goals:
             if (
-                type(goal) not in (Issue, RevisionIssue)
+                type(goal) not in (Issue, RevisionIssue, RetrievalIssue)
                 or type(goal.issue_id) is not str
                 or not goal.issue_id
                 or len(goal.issue_id) > 128
@@ -83,6 +84,11 @@ class ExecutionRunner:
                 raise stopped("INVALID_RECORDED_CUTOFF", "INVALID_REQUEST", "admission")
             if goal.kind == "revision.evaluate" and type(goal) is not RevisionIssue:
                 raise stopped("REVISION_ISSUE_REQUIRED", "INVALID_REQUEST", "admission")
+            if type(goal) is RetrievalIssue and (type(goal.query) is not RetrievalQuery or goal.source_id is not None
+                    or goal.kind not in ("memory.retrieve", "logic.compare_semantic_readings", "argument.evaluate")):
+                raise stopped("RETRIEVAL_ISSUE_INVALID", "INVALID_REQUEST", "admission")
+            if goal.kind == "memory.retrieve" and type(goal) is not RetrievalIssue:
+                raise stopped("RETRIEVAL_QUERY_REQUIRED", "INVALID_REQUEST", "admission")
             ids.add(goal.issue_id)
         cuts = {
             g.known_at for g in request.issue.goals if type(g) is RevisionIssue and g.known_at is not None
@@ -94,6 +100,8 @@ class ExecutionRunner:
             raise stopped("MIXED_HISTORICAL_CUTOFF", "INVALID_REQUEST", "admission")
 
     def _snapshot(self, request, goal=None):
+        if type(goal) is RetrievalIssue:
+            return self.store.search_snapshot(request.session_id, request.principal, goal.query)
         handles = request.source_handles
         if goal is not None and goal.source_id is not None:
             handles = tuple(h for h in handles if h.source_id == goal.source_id)
@@ -136,9 +144,15 @@ class ExecutionRunner:
                     "relationship.evaluate": "relationship_compile",
                     "model.respond": "answer",
                 }[goal.kind]
-                parts = self.context.chunks(
-                    snapshot, request.question, purpose, request.budget, self.gateway.capabilities
-                )
+                if type(goal) is RetrievalIssue:
+                    view = snapshot.query_views["0"]
+                    parts = (ContextChunk(purpose, tuple(SourceSegment(**row) for row in view["packet"]["segments"]), 0, 1),)
+                    if len(self.context.serialize(snapshot, request.question, parts[0]).encode()) > self.context.limit(request.budget, self.gateway.capabilities):
+                        raise stopped("RETRIEVAL_CLOSURE_CONTEXT_CAPACITY", "BUDGET_EXHAUSTED", "context")
+                else:
+                    parts = self.context.chunks(
+                        snapshot, request.question, purpose, request.budget, self.gateway.capabilities
+                    )
                 if goal.kind in ("revision.evaluate", "mental.simulate", "argument.evaluate", "hypothesis.discover", "interaction.evaluate", "affect.evaluate", "relationship.evaluate") and len(parts) > 1:
                     # Cross-packet rule/identity IDs need a future composition
                     # compiler; never publish the final fragment as a full index.
@@ -524,7 +538,10 @@ class ExecutionRunner:
             node["commit_revision"] = self._commit(node["result"])
             self._mark_committed(node, node["result"])
             return
-        if goal.kind == "logic.check_interpretation":
+        if goal.kind == "memory.retrieve":
+            issue = goal
+            cost = 1
+        elif goal.kind == "logic.check_interpretation":
             model = LocalModel(
                 "source-interpretation:" + str(goal.source_id),
                 "finite-interpretation-1",
@@ -569,11 +586,15 @@ class ExecutionRunner:
                 raise stopped("LOCAL_BUDGET_IN_USE", "DEFERRED", "planning")
             raise stopped("SHARED_LOCAL_BUDGET", "BUDGET_EXHAUSTED", "operator")
         self.counters["local_reserved"] += cost
-        node["local_model"] = issue.model
+        node["local_model"] = getattr(issue, "model", None)
         node["local_hold"] = cost
         self._save()
         allowance = replace(request.budget, max_local_evaluations=cost)
-        operation = await asyncio.to_thread(self.operator.run, snapshot, issue, allowance)
+        if goal.kind == "memory.retrieve":
+            from hcl.operators.retrieval import RetrievalOperator
+            operation = await asyncio.to_thread(RetrievalOperator().run, snapshot, issue, allowance)
+        else:
+            operation = await asyncio.to_thread(self.operator.run, snapshot, issue, allowance)
         delta = operation.candidate_delta
         if (
             delta.session_id != snapshot.session_id
@@ -587,6 +608,10 @@ class ExecutionRunner:
             or (type(delta) is QueryDelta and delta.query_dependencies != snapshot.query_dependencies)
         ):
             raise stopped("OPERATOR_SNAPSHOT_CONTRACT", "FAILED", "operator")
+        if type(goal) is RetrievalIssue and any(
+            value.values.get("retrieval") != snapshot.query_views["0"] for value in delta.new_inferences
+        ):
+            raise stopped("RETRIEVAL_EFFECT_BINDING_MISMATCH", "FAILED", "operator")
         actual = operation.resource_usage.get("local_evaluations")
         if type(actual) is not int or not 0 <= actual <= cost:
             raise stopped("OPERATOR_RESOURCE_CONTRACT", "FAILED", "operator")
@@ -673,12 +698,14 @@ class ExecutionRunner:
             except HCLFailure as error:
                 if (
                     error.diagnostic.code != "QUERY_DEPENDENCY_CHANGED"
-                    or node["goal"].kind != "revision.evaluate"
+                    or node["goal"].kind not in ("revision.evaluate", "memory.retrieve")
                     or self.counters["steps"] >= request.budget.max_steps
                 ):
                     raise
                 node["invalidated_results"] = (*node.get("invalidated_results", ()), node["result"])
                 node["result"], node["state"] = None, "PENDING"
+                if node["goal"].kind == "memory.retrieve":
+                    self.snapshots[node["goal"].issue_id] = self._snapshot(request, node["goal"])
                 self.nodes[node["goal"].issue_id + ":deliver"]["state"] = "PENDING"
                 self.trace.append(dict(event="LOCAL_RECOMPUTE", node=node["id"]))
                 changed = True
@@ -713,7 +740,7 @@ class ExecutionRunner:
                 error.status == "STALE_STATE"
                 and error.diagnostic.code == "QUERY_DEPENDENCY_CHANGED"
                 and node["operation"] == "compute"
-                and node["goal"].kind == "revision.evaluate"
+                and node["goal"].kind in ("revision.evaluate", "memory.retrieve")
                 and self.counters["steps"] < request.budget.max_steps
             ):
                 # The exact model response remains; only the dependent local
@@ -722,6 +749,8 @@ class ExecutionRunner:
                     node["invalidated_results"] = (*node.get("invalidated_results", ()), node["result"])
                 node["result"] = None
                 node["state"] = "PENDING"
+                if node["goal"].kind == "memory.retrieve":
+                    self.snapshots[node["goal"].issue_id] = self._snapshot(request, node["goal"])
                 self.trace.append(dict(event="LOCAL_RECOMPUTE", node=node["id"]))
             elif self._feedback(request, node, error):
                 return

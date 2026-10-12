@@ -164,6 +164,21 @@ class LocalModelOperator:
                 "effects",
                 "The declared inference effects differ from actual computed results.",
             )
+        from hcl.kernel.dependencies import QueryDelta, QuerySnapshot
+        from hcl.kernel.retrieval import RetrievalDependency
+        if type(snapshot) is QuerySnapshot and any(type(d) is RetrievalDependency for d in snapshot.query_dependencies):
+            delta = result.candidate_delta
+            if type(delta) is not QueryDelta:
+                from dataclasses import fields
+                delta = QueryDelta(**{field.name: getattr(delta, field.name) for field in fields(delta)},
+                                   query_dependencies=snapshot.query_dependencies)
+            result = replace(result, candidate_delta=delta)
+            from hcl.operators.retrieval import retrieval_issues
+            result = replace(result,
+                             issues=tuple((*result.issues, *retrieval_issues(snapshot.query_views["0"]))),
+                             candidate_delta=replace(delta, new_inferences=tuple(
+                                 replace(value, values=dict(value.values, retrieval=snapshot.query_views["0"]))
+                                 for value in delta.new_inferences)))
         qualifications = dict(
             model_id=model.model_id,
             version=model.version,

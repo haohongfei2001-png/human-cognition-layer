@@ -20,6 +20,7 @@ SUPPORTED_GOALS = frozenset(
         "interaction.evaluate",
         "affect.evaluate",
         "relationship.evaluate",
+        "memory.retrieve",
         "source.report",
         "model.respond",
     }
