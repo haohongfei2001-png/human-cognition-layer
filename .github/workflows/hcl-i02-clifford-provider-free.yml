@@ -1,10 +1,10 @@
 name: HCL I02 Clifford Complete Essay Source and Strong Comparator Preflight
 on:
   pull_request:
-    paths: ['hcl/**', 'scripts/i02_clifford*', 'scripts/i02_source_qualification_v13.py', 'scripts/run_i02_clifford*', 'scripts/serious_eval_full_source_arms_v9.py', 'reports/HCL_I02_CLIFFORD*', 'tests/test_i02_clifford*', '.github/**clifford*', '.github/workflows/hcl-i02-clifford*', '.github/frozen/hcl-i02-clifford*']
+    paths: ['hcl/**', 'scripts/retry_public_download.py', 'scripts/i02_clifford*', 'scripts/i02_source_qualification_v13.py', 'scripts/run_i02_clifford*', 'scripts/serious_eval_full_source_arms_v9.py', 'reports/HCL_I02_CLIFFORD*', 'tests/test_i02_clifford*', '.github/**clifford*', '.github/workflows/hcl-i02-clifford*', '.github/frozen/hcl-i02-clifford*']
   push:
     branches: [main]
-    paths: ['hcl/**', 'scripts/i02_clifford*', 'scripts/i02_source_qualification_v13.py', 'scripts/run_i02_clifford*', 'scripts/serious_eval_full_source_arms_v9.py', 'reports/HCL_I02_CLIFFORD*', 'tests/test_i02_clifford*', '.github/**clifford*', '.github/workflows/hcl-i02-clifford*', '.github/frozen/hcl-i02-clifford*']
+    paths: ['hcl/**', 'scripts/retry_public_download.py', 'scripts/i02_clifford*', 'scripts/i02_source_qualification_v13.py', 'scripts/run_i02_clifford*', 'scripts/serious_eval_full_source_arms_v9.py', 'reports/HCL_I02_CLIFFORD*', 'tests/test_i02_clifford*', '.github/**clifford*', '.github/workflows/hcl-i02-clifford*', '.github/frozen/hcl-i02-clifford*']
 permissions:
   contents: read
 jobs:
@@ -18,11 +18,13 @@ jobs:
         with:
           python-version: '3.12'
       - name: Download pinned public edition
+        timeout-minutes: 3
         run: |
           python - <<'PY'
           from pathlib import Path
           from scripts.i02_clifford_source import download_material
-          raw,rdf=download_material()
+          from scripts.retry_public_download import retry_public_download
+          raw,rdf=retry_public_download(download_material)
           Path('/tmp/clifford.txt').write_bytes(raw)
           Path('/tmp/clifford.rdf').write_bytes(rdf)
           PY
