@@ -261,7 +261,8 @@ class RuntimeUpgradeTests(unittest.TestCase):
                     db = sqlite3.connect(source)
                     db.row_factory = sqlite3.Row
                     self.assertEqual(
-                        dict(db.execute("SELECT * FROM revision_control").fetchone()), old_control
+                        dict(db.execute("SELECT * FROM revision_control").fetchone()),
+                        {**old_control, "mode": "TERMINAL_SOURCE"},
                     )
                     self.assertEqual(db.execute("PRAGMA user_version").fetchone()[0], 91)
                     db.close()

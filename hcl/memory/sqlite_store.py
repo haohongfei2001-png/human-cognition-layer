@@ -53,6 +53,7 @@ class SQLiteStateStore:
         self._db.row_factory = sqlite3.Row
         self._db.execute("PRAGMA journal_mode=WAL")
         self._db.execute("PRAGMA synchronous=FULL")
+        self._db.execute("PRAGMA secure_delete=ON")
         version = self._db.execute("PRAGMA user_version").fetchone()[0]
         if version not in (0, SCHEMA, 2, 3, 4) or (revision and version in (1, 2)):
             self._db.close()
@@ -128,6 +129,8 @@ class SQLiteStateStore:
 
     def _validate_layout(self):
         required = set(TABLE_KEYS) | {"events", "revision_control"}
+        from hcl.memory.governance import TABLES as GOVERNANCE_TABLES
+        required |= GOVERNANCE_TABLES
         tables = {row[0] for row in self._db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
         if not required <= tables:
             raise corrupt()
@@ -145,22 +148,26 @@ class SQLiteStateStore:
         """No-op seam for tests to simulate abrupt interruption, never callbacks from input."""
 
     @contextmanager
-    def _transaction(self, write=False):
+    def _transaction(self, write=False, *, maintenance=False):
         with self._lock:
             try:
                 self._db.execute("BEGIN IMMEDIATE" if write else "BEGIN")
                 self._retrieval_preparation = None
+                self._retention_journals = []
                 if self._db.execute("PRAGMA user_version").fetchone()[0] != self._schema:
                     raise corrupt()
                 if self._revision_control is not None:
                     from hcl.memory.migrations.revision_control import validate
-                    validate(self._db, self._revision_control)
+                    validate(self._db, self._revision_control, maintenance=maintenance)
                 if self._namespace_generation is not None:
                     from hcl.memory.migrations.control import validate_execution
                     validate_execution(self._db, self._namespace_generation, self._version_bundle)
                 yield self._db
                 self._checkpoint("before_commit")
                 self._db.commit()
+                if self._revision_control is not None:
+                    from hcl.memory.retention_objects import cleanup_committed
+                    cleanup_committed(self)
             except BaseException as error:
                 if self._db.in_transaction:
                     self._db.rollback()
@@ -171,6 +178,7 @@ class SQLiteStateStore:
                 # In particular, never carry an old WAL authorization decision
                 # into the separate late-delivery transaction.
                 self._retrieval_preparation = None
+                self._retention_journals = []
 
     def _put_object(self, value):
         body = codec.dumps(value)
@@ -179,7 +187,8 @@ class SQLiteStateStore:
         if target.exists():
             self._get_object(digest)
             return digest
-        descriptor, temporary = tempfile.mkstemp(prefix="pending-", dir=self.object_root)
+        journal = getattr(self, "_retention_current_journal", None)
+        descriptor, temporary = tempfile.mkstemp(prefix="pending-" + (journal + "-" if journal else ""), dir=self.object_root)
         try:
             with os.fdopen(descriptor, "wb") as stream:
                 stream.write(body)
@@ -197,6 +206,13 @@ class SQLiteStateStore:
         self._checkpoint("object_persisted")
         return digest
 
+    def _put_content(self, value, *, session_id, context=None, bindings=(), owner=None, dependencies=None, principal=None):
+        if self._revision_control is None:
+            return self._put_object(value)
+        from hcl.memory.retention_objects import put
+        return put(self, value, session_id=session_id, context=context, bindings=bindings, owner=owner,
+                   dependencies=dependencies, principal=principal)
+
     def _get_object(self, digest):
         if type(digest) is not str or not re.fullmatch("[0-9a-f]{64}", digest):
             raise corrupt()
@@ -211,16 +227,21 @@ class SQLiteStateStore:
         except (OSError, ValueError, TypeError, KeyError, RecursionError):
             raise corrupt() from None
 
-    def _record(self, db, table, record, revision):
-        if table not in TABLE_KEYS:
+    def _record(self, db, table, record, revision, *, principal=None):
+        from hcl.memory.governance import EVENT_KEYS
+        if table not in TABLE_KEYS and not (self._revision_control is not None and table in EVENT_KEYS):
             raise ValueError("unknown projection")
         session_id = record["session_id"]
         prior = db.execute("SELECT event_hash FROM events WHERE session_id=? ORDER BY seq DESC LIMIT 1", (session_id,)).fetchone()
         previous = prior[0] if prior else ""
         payload = codec.canonical(record)
         digest = sha256(codec.canonical([session_id, revision, table, payload, previous]).encode()).hexdigest()
-        db.execute("INSERT INTO events(session_id,revision,kind,payload,previous_hash,event_hash) VALUES(?,?,?,?,?,?)",
+        event = db.execute("INSERT INTO events(session_id,revision,kind,payload,previous_hash,event_hash) VALUES(?,?,?,?,?,?)",
                    (session_id, revision, table, payload, previous, digest))
+        if self._revision_control is not None:
+            from hcl.memory.governance import capture
+            capture(self, db, dict(seq=event.lastrowid, session_id=session_id, event_hash=digest),
+                    table, record, principal=principal)
         self._checkpoint("event_appended")
         self._upsert(db, table, record)
         self._checkpoint("projection_updated")
@@ -273,8 +294,9 @@ class SQLiteStateStore:
                                         AccessPolicy(principal.tenant_id, frozenset(json.loads(readers))), formal_problem)
                 # Disposable cached projection. Keep the authoritative source
                 # object small; a dropped cache is rebuilt from exact originals.
-                content["retrieval_index_hash"] = self._put_object(build_index(source))
-            digest = self._put_object(content)
+                content["retrieval_index_hash"] = self._put_content(build_index(source), session_id=session_id,
+                                                                     bindings=((session_id, source_id, version),))
+            digest = self._put_content(content, session_id=session_id, bindings=((session_id, source_id, version),))
             session["revision"] += 1
             if previous and previous["readers"] != readers:
                 session["epoch"] += 1
@@ -318,8 +340,12 @@ class SQLiteStateStore:
                 if handle.source_id in views:
                     raise failure("INVALID_REQUEST", "DUPLICATE_SOURCE", "source_handles", "A source was requested twice.", "admission")
                 views[handle.source_id] = source
-            return Snapshot(session_id, principal, session["revision"], session["epoch"], session["rule"],
-                            {key: source.handle.version for key, source in views.items()}, {}, views)
+            result = Snapshot(session_id, principal, session["revision"], session["epoch"], session["rule"],
+                              {key: source.handle.version for key, source in views.items()}, {}, views)
+        # A public snapshot contains original bytes. Leave its old WAL view
+        # before the delivery gate, just as QueryStore.search already does.
+        self.validate_snapshot(result)
+        return result
 
     def _query_projection(self, db, session, principal, query):
         from hcl.kernel.dependencies import INDEX_KIND, query_projection
@@ -489,12 +515,23 @@ class SQLiteStateStore:
                     "source_version": row["version"],
                     "recorded_at": event["revision"],
                     "object_hash": row["object_hash"],
-                    "event_hash": event["event_hash"],
+                    "event_hash": self._historical_event_identity(db, event),
                 }
             latest[source_id] = row
         if latest != visible:
             raise corrupt()
         return tuple(first.values())
+
+    def _historical_event_identity(self, db, event):
+        if self._revision_control is None:
+            return event["event_hash"]
+        row = db.execute("SELECT annotation,annotation_hash FROM retention_events WHERE seq=?", (event["seq"],)).fetchone()
+        if row is None or sha256(codec.canonical([event["event_hash"], row["annotation"]]).encode()).hexdigest() != row["annotation_hash"]:
+            raise corrupt()
+        identity = json.loads(row["annotation"])["source_event_identity"]
+        if type(identity) is not str or not re.fullmatch("[0-9a-f]{64}", identity):
+            raise corrupt()
+        return identity
 
     def _historical_source(self, db, session, principal, binding):
         source = self._source(db, session, principal, binding["source_id"])  # always CURRENT ACL
@@ -543,7 +580,7 @@ class SQLiteStateStore:
                 views[handle.source_id] = self._historical_source(
                     db, session, principal, selected[handle.source_id]
                 )
-            return QuerySnapshot(
+            result = QuerySnapshot(
                 session_id,
                 principal,
                 session["revision"],
@@ -556,6 +593,8 @@ class SQLiteStateStore:
                 {"0": view},
                 selected,
             )
+        self.validate_snapshot(result)
+        return result
 
     def search_snapshot(self, session_id, principal, query):
         from hcl.memory.query_store import QueryStore
@@ -593,7 +632,7 @@ class SQLiteStateStore:
                 dependency, projection = self._query_projection(db, session, principal, query)
                 dependencies.append(dependency)
                 query_views[str(number)] = projection
-            return QuerySnapshot(
+            result = QuerySnapshot(
                 session_id,
                 principal,
                 session["revision"],
@@ -605,6 +644,8 @@ class SQLiteStateStore:
                 tuple(dependencies),
                 query_views,
             )
+        self.validate_snapshot(result)
+        return result
 
     def revision_snapshot(self, session_id, principal, source_handles, *, known_at=None):
         from hcl.kernel.dependencies import IndexQuery, QuerySnapshot
@@ -829,40 +870,90 @@ class SQLiteStateStore:
                 session["revision"] += 1
                 for result in delta.new_inferences:
                     self._record(db, "inferences", dict(session_id=delta.session_id, result_id=result.result_id,
-                        object_hash=self._put_object(result), read_set=codec.canonical(dependencies), epoch=access_epoch,
-                        base_revision=expected_revision, commit_revision=session["revision"]), session["revision"])
+                        object_hash=self._put_content(result, session_id=delta.session_id, context=delta,
+                            dependencies=dependencies, principal=delta.principal), read_set=codec.canonical(dependencies), epoch=access_epoch,
+                        base_revision=expected_revision, commit_revision=session["revision"]), session["revision"], principal=delta.principal)
                 self._record(db, "sessions", session, session["revision"])
             return CommitResult(session["revision"], tuple(ids))
+
+    def _validate_inference_delivery(self, session_id, principal, expected):
+        """Fresh current authority and exact row identity for loaded results."""
+        with self._transaction() as db:
+            session = self._session(db, session_id, principal)
+            for original in expected:
+                row = db.execute("SELECT * FROM inferences WHERE session_id=? AND result_id=?",
+                                 (session_id, original["result_id"])).fetchone()
+                if row is None or dict(row) != dict(original):
+                    raise failure("DENIED", "INFERENCE_DELIVERY_CHANGED", "inferences",
+                                  "The loaded inference is no longer an authorized current reference.", "access")
+                self._validate_dependencies(db, session, principal, json.loads(row["read_set"]),
+                                            row["epoch"], session["rule"])
 
     def inferences(self, session_id, principal):
         with self._transaction() as db:
             session = self._session(db, session_id, principal)
-            result = []
+            result, expected = [], []
             for row in db.execute("SELECT * FROM inferences WHERE session_id=? ORDER BY result_id", (session_id,)):
                 self._validate_dependencies(db, session, principal, json.loads(row["read_set"]), row["epoch"], RULE_VERSION)
                 result.append(self._get_object(row["object_hash"]))
-            return tuple(result)
+                expected.append(dict(row))
+        self._validate_inference_delivery(session_id, principal, expected)
+        return tuple(result)
+
+    def plan_source_erasure(self, session_id, principal, source_id, *, expected_version):
+        from hcl.memory.governance import plan_source_erasure
+        return plan_source_erasure(self, session_id, principal, source_id, expected_version)
+
+    def prepare_legacy_capsules(self, session_id, principal):
+        from hcl.memory.legacy_capsule_store import prepare
+        return prepare(self, session_id, principal)
+
+    def legacy_source_view(self, session_id, principal, source_ids):
+        from hcl.memory.legacy_capsule_store import source_view
+        return source_view(self, session_id, principal, source_ids)
+
+    def set_legacy_readers(self, session_id, principal, source_id, readers):
+        from hcl.memory.legacy_capsule_store import set_readers
+        return set_readers(self, session_id, principal, source_id, readers)
+
+    def begin_source_erasure(self, session_id, principal, source_id, *, expected_version, plan_hash, erasure_id):
+        from hcl.memory.erasure import begin_source_erasure
+        return begin_source_erasure(self, session_id, principal, source_id, expected_version, plan_hash, erasure_id)
+
+    def resume_source_erasure(self, session_id, principal, erasure_id):
+        from hcl.memory.erasure_cleanup import resume
+        return resume(self, session_id, principal, erasure_id)
+
+    def source_erasure_receipt(self, session_id, principal, erasure_id):
+        from hcl.memory.erasure_cleanup import receipt
+        return receipt(self, session_id, principal, erasure_id)
 
     def rebuild_projections(self):
         """Trusted host maintenance with exclusive write lock; no external calls."""
         with self._transaction(True) as db:
-            records = {table: {} for table in TABLE_KEYS}
+            from hcl.memory.erasure import event_keys, object_references, REDACTED
+            keys = event_keys(db)
+            if self._revision_control is not None:
+                from hcl.memory.governance import verify_inventory
+                verify_inventory(db)
+            records = {table: {} for table in keys}
             previous = {}
             for event in db.execute("SELECT * FROM events ORDER BY seq"):
                 table, session_id = event["kind"], event["session_id"]
                 digest = sha256(codec.canonical([session_id, event["revision"], table, event["payload"], event["previous_hash"]]).encode()).hexdigest()
-                if table not in TABLE_KEYS or event["previous_hash"] != previous.get(session_id, "") or digest != event["event_hash"]:
+                if (table not in keys and table != REDACTED) or event["previous_hash"] != previous.get(session_id, "") or digest != event["event_hash"]:
                     raise corrupt()
                 previous[session_id] = digest
                 record = json.loads(event["payload"])
                 if record["session_id"] != session_id:
                     raise corrupt()
-                for name in OBJECT_FIELDS & set(record):
-                    if record[name] is not None:
-                        self._get_object(record[name])
-                records[table][tuple(record[key] for key in TABLE_KEYS[table])] = record
-            for table in TABLE_KEYS:
+                if table == REDACTED:
+                    continue
+                for digest in object_references(table, record):
+                    self._get_object(digest)
+                records[table][tuple(record[key] for key in keys[table])] = record
+            for table in keys:
                 db.execute(f"DELETE FROM {table}")
                 for record in records[table].values():
                     self._upsert(db, table, record)
-            return {table: len(rows) for table, rows in records.items()}
+            return {table: len(rows) for table, rows in records.items() if table in TABLE_KEYS}

@@ -3455,7 +3455,7 @@
   "current_execution": {
     "started_at_utc": "2026-10-11T20:31:00Z",
     "authority": "Owner explicitly authorized continued implementation, tests, PRs and verified merges under the approved S1–S7 plan.",
-    "base_main": "0c7e9b866bc2aa82cc98420af82458059ec47f70",
+    "base_main": "542e2ea5c91bca24dd8983cf6a6b0c701f843fc8",
     "current_stage": "S3 ∥ S4",
     "delivered_slice": "S2.3",
     "readiness": "INTEGRATED_OFFLINE",
@@ -3468,7 +3468,7 @@
     "remaining": "继续完整S3/M03–M09与并行S4/M10–M14；当前有限三机制是增量证据，不关闭阶段。完整S1/S2实模功能、S5–S7及T01–T32研究目标全部保留。",
     "historical_boundary": "旧A–H/G-HC/G-ARCH、实验和closed grants保持原证据等级，不自动继承。",
     "validation": "本切片证明注入候选下的真实离线预算执行、结果消费、修订和恢复；不证明开放语义/任务分解、跨块语义组合、完整性或S1/S2阶段完成。",
-    "active_work": "S3有限M03/M05/M06、M04共享发现、M07互动、M08评价、M09关系/角色/纵向模型与S4有限M13论证已接入同一runtime；M10在建：实际授权词法/向量检索、记录反证闭包、按需材料消费、查询失效与恢复。自然长文语义检索、全部记忆治理/隐私擦除和完整领域研究退出仍开放。",
+    "active_work": "S3有限M03/M05/M06、M04共享发现、M07互动、M08评价、M09关系/角色/纵向模型与S4有限M13论证已接入同一runtime；M10增量具实际授权检索、依赖闭包、原文消费和持久恢复，以及保留对象归属、当前读出口墓碑门、可恢复受控擦除和逐源旧原件封装。前驱/未知来源保留限制显式存在；自然语义检索、完整记忆治理与所有领域研究退出仍开放。",
     "domain_evidence": [
       {
         "stage": "S3",
@@ -3551,10 +3551,10 @@
         ],
         "readiness": "INTEGRATED_OFFLINE_PARTIAL",
         "stage_complete": false,
-        "document": "docs/HCL_UNIFIED_S4_RETRIEVAL.md",
-        "checks": "tests/test_unified_s4_retrieval*.py",
-        "witness": "scripts/witness_unified_retrieval.py",
-        "scope": "Current-ACL-filtered original-region BM25 and sparse TF-IDF retrieval, actual recorded M13 graph closure, exact query dependencies, conditional FOL/argument packet consumption and durable recovery. Open semantic recall, active query synthesis, full memory governance/erasure, natural long-text and full M10 acceptance remain open."
+        "document": "docs/HCL_UNIFIED_S4_RETRIEVAL.md; docs/HCL_UNIFIED_S4_MEMORY_GOVERNANCE.md",
+        "checks": "tests/test_unified_s4_retrieval*.py; tests/test_unified_memory*.py; tests/test_unified_retention*.py; tests/test_unified_erasure*.py; tests/test_unified_legacy_capsule*.py; tests/test_unified_governance_upgrade.py",
+        "witness": "scripts/witness_unified_retrieval.py; scripts/witness_unified_memory_governance.py",
+        "scope": "Current-ACL-filtered original-region BM25 and sparse TF-IDF retrieval, recorded graph closure, exact query dependencies, conditional packet consumption and durable recovery. Bounded retained-object ownership, tombstone/fresh public delivery gates, resumable synthetic erasure and scoped legacy capsules preserve predecessor/unknown retained-copy limitations. No real user data is erased by validation. Open semantic recall, active query synthesis, complete memory/privacy governance, natural long-text and full M10 acceptance remain open."
       }
     ]
   }
