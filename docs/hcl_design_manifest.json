@@ -3309,7 +3309,23 @@
         "T28"
       ],
       "exit": "同一正式入口从普通输入到结果消费、修订和恢复可用；单切片通过不冒称完整验收族通过。冻结接口后释放S3/S4依赖安全的开发，不等待Base增益或S3整体完成。",
-      "not_required": "学习型调度器、无限自动程序生成、S6规模目标和S7独立评测。"
+      "not_required": "学习型调度器、无限自动程序生成、S6规模目标和S7独立评测。",
+      "status": "INTEGRATED_OFFLINE",
+      "evidence": {
+        "runtime_entry": "HCL same authenticated run/stream engine: ExecutionIssue and ExecutionBudget on explicitly upgraded schema3/4",
+        "real_operator": "IssuePlanner → actual finite/FOL/revision LocalModelOperator → atomic accepted effects → exact compact result-field consumption",
+        "checks": "tests/test_unified_s23*.py; unchanged unified/legacy behavior and precise historical identity partitions",
+        "witness": "scripts/witness_unified_s23.py (exact head/runtime hashes, zero-call computation, three-call repair, returned-response recovery and actual absence revision)",
+        "scope": "Bounded offline portions of T20/T21/T22/T25/T28 only. Extraction proposals are supplied test conditions, not model-semantic proof.",
+        "stage_complete": false,
+        "limits": [
+          "Open semantic extraction and automatic source-faithful task decomposition remain unestablished.",
+          "All source chunks are accounted for, but cross-chunk meaning composition remains explicitly partial; no S6 capacity claim.",
+          "Current LocalModel dialects execute finite interpretations, candidate FOL and scoped revision; S3/S4 must implement their full typed models and mechanisms.",
+          "Explicit host recovery never releases UNKNOWN holds or resends; real provider capabilities and live functionality remain unproved.",
+          "No provider, new credentials, paid service, sealed material, historical grant inheritance or effect-confirmed evidence."
+        ]
+      }
     }
   ],
   "research_completion_contract": {
@@ -3395,18 +3411,18 @@
   "current_execution": {
     "started_at_utc": "2026-10-11T20:31:00Z",
     "authority": "Owner explicitly authorized continued implementation, tests, PRs and verified merges under the approved S1–S7 plan.",
-    "base_main": "9c739f3d65ac3d49277e6cb4001d904304e8dd9f",
+    "base_main": "8643a82cf909890879fb413f56a7ebe74a44334f",
     "current_stage": "S2",
-    "delivered_slice": "S2.2",
+    "delivered_slice": "S2.3",
     "readiness": "INTEGRATED_OFFLINE",
     "stage_complete": false,
-    "next_slice": "S2.3",
+    "next_slice": "S3 ∥ S4",
     "provider_calls": 0,
     "provider_spend_usd": "0",
     "sealed_content_reads": 0,
-    "scope": "持久化有界支持修订、相对时间、显式身份/Bridge与QueryDependency/AbsenceWatch接入同一engine；迟到与撤回证据实际重算，保留旧视角和独立支持。",
-    "remaining": "继续S2.3预算化动态执行、局部恢复与S3/S4共同接口冻结；完整S1/S2实模功能、S3–S7及T01–T32研究目标全部保留。",
+    "scope": "预算化Issue图、实际并行算子、字段/来源反馈修复、完整外存与有界上下文、受控恢复和共同LocalModel协议接入同一engine。",
+    "remaining": "按已批准S3/M03–M09和S4/M10–M14推进依赖安全的领域实现；完整S1/S2实模功能、S5–S7及T01–T32研究目标全部保留。",
     "historical_boundary": "旧A–H/G-HC/G-ARCH、实验和closed grants保持原证据等级，不自动继承。",
-    "validation": "本切片证明注入候选下的真实离线联合修订闭环，不证明开放语义抽取、完整性、私人信念真值或S1/S2阶段完成。"
+    "validation": "本切片证明注入候选下的真实离线预算执行、结果消费、修订和恢复；不证明开放语义/任务分解、跨块语义组合、完整性或S1/S2阶段完成。"
   }
 }

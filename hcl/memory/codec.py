@@ -6,8 +6,13 @@ import json
 from hcl.kernel import types
 from hcl.kernel.dependencies import IndexQuery, QueryDependency, QuerySnapshot, QueryDelta, RevisionIssue
 
+from hcl.kernel.execution import ExecutionBudget, ExecutionIssue, LocalModel, ModelIssue, ExecutionCheckpoint, ResumeToken, ProjectedResultField, SnapshotRef
+from hcl.runtime.context import ContextChunk
+from hcl.semantics.segments import SourceSegment
+
 FORMAT = "hcl-content-object-1"
 CLASSES = {cls.__name__: cls for cls in (
+    ExecutionBudget, ExecutionIssue, LocalModel, ModelIssue, ExecutionCheckpoint, ResumeToken, ProjectedResultField, SnapshotRef, ContextChunk, SourceSegment,
     types.Principal, types.AccessPolicy, types.SourceHandle, types.FormalProblem,
     types.SourceDocument, types.BudgetSlice, types.Issue, types.TaskRequest,
     types.Diagnostic, types.InferenceResult, types.Snapshot, types.Delta,

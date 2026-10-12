@@ -127,6 +127,7 @@ class Engine:
             "model.respond",
             "logic.compare_semantic_readings",
             "revision.evaluate",
+            "cognition.execute",
         ):
             raise HCLFailure(
                 "INVALID_REQUEST",
@@ -216,6 +217,9 @@ class Engine:
         read_set = {}
         try:
             self._admit(request)
+            if request.issue.kind == "cognition.execute":
+                from hcl.runtime.execution import ExecutionRunner
+                return await ExecutionRunner(self).run(request)
             if self._ledger is not None:
                 replay = self._ledger.resume(request)
                 if replay is not None:

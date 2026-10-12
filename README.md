@@ -5,11 +5,11 @@
 
 用户已批准全系统整改v1.0、D1–D6推荐默认及后续连续实施。完整规格：[HCL_SYSTEM_REDESIGN_SPEC.md](docs/HCL_SYSTEM_REDESIGN_SPEC.md)；唯一结构化计划：[hcl_design_manifest.json](docs/hcl_design_manifest.json)；执行交接：[HCL_CODEX_HANDOFF.md](docs/HCL_CODEX_HANDOFF.md)。
 
-当前切片：**S2.2 / INTEGRATED_OFFLINE**。持久化有界支持修订、相对时间、显式身份/Bridge与QueryDependency/AbsenceWatch接入同一engine；迟到与撤回证据实际重算，保留旧视角和独立支持。
+当前切片：**S2.3 / INTEGRATED_OFFLINE**。预算化Issue图、实际并行算子、字段/来源反馈修复、完整外存与有界上下文、受控恢复和共同LocalModel协议接入同一engine。
 
-本切片证明注入候选下的真实离线联合修订闭环，不证明开放语义抽取、完整性、私人信念真值或S1/S2阶段完成。
+本切片证明注入候选下的真实离线预算执行、结果消费、修订和恢复；不证明开放语义/任务分解、跨块语义组合、完整性或S1/S2阶段完成。
 
-**NEXT_READY：S2.3**。继续S2.3预算化动态执行、局部恢复与S3/S4共同接口冻结；完整S1/S2实模功能、S3–S7及T01–T32研究目标全部保留。
+**NEXT_READY：S3 ∥ S4**。按已批准S3/M03–M09和S4/M10–M14推进依赖安全的领域实现；完整S1/S2实模功能、S5–S7及T01–T32研究目标全部保留。
 
 [当前状态](STATUS.md)与[执行计划入口](DEVELOPMENT_PLAN.md)由同一manifest生成。本次模型调用数为0，未新增收费、部署或sealed访问权限。
 

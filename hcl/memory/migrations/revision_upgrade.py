@@ -135,8 +135,29 @@ def _history(db, object_root):
     return sha256(codec.canonical(payload).encode()).hexdigest(), tuple(sorted(objects)), events
 
 
-def _validate_predecessor(db, schema):
+S22_CODE_HASH = "ff8d68236a625b575c4d39f4eabf7aeba7da034ae5277338d6a518b4723fecea"
+
+
+def _target_schema(schema):
+    return {1: 3, 2: 4, 3: 3, 4: 4}[schema]
+
+
+def _validate_predecessor(db, schema, source_path):
+    if db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='cutover_control'").fetchone():
+        raise ValueError("active predecessor has unexpected terminal cutover metadata")
     if schema == 1:
+        return
+    if schema in (3, 4):
+        revision = control.read(db)
+        bundle = json.loads(revision["versions"])
+        expected = {"schema": schema, "rules": RULE_VERSION, "indexes": {"revision": 1}, "code_sha256": S22_CODE_HASH}
+        if (revision["mode"] != control.ACTIVE or bundle != expected
+                or revision["target_path"] != str(source_path)):
+            raise ValueError("unsupported, relocated or inactive revision predecessor")
+        if schema == 4:
+            namespace = read_control(db)
+            if namespace["mode"] != LEGACY_ACTIVE or json.loads(namespace["versions"]) != bundle:
+                raise ValueError("controlled predecessor bundles disagree")
         return
     row = read_control(db)
     bundle = json.loads(row["versions"])
@@ -145,7 +166,7 @@ def _validate_predecessor(db, schema):
         row["mode"] != LEGACY_ACTIVE
         or any(bundle.get(key) != value for key, value in expected.items())
         or set(bundle) != {"schema", "rules", "indexes", "code_sha256"}
-        or bundle["code_sha256"] not in PREDECESSOR_CODE_HASHES | {version_bundle()["code_sha256"]}
+        or bundle["code_sha256"] not in PREDECESSOR_CODE_HASHES | {S22_CODE_HASH, version_bundle()["code_sha256"]}
     ):
         raise ValueError("unsupported or inactive controlled predecessor")
 
@@ -181,7 +202,7 @@ class RevisionCutover:
             db.execute("BEGIN IMMEDIATE")
             _authorize(db, principal)
             schema = db.execute("PRAGMA user_version").fetchone()[0]
-            if schema not in (1, 2, control.TERMINAL_SOURCE):
+            if schema not in (1, 2, 3, 4, control.TERMINAL_SOURCE):
                 raise ValueError("explicit supported predecessor required")
             if self.intent.exists():
                 if self.intent.is_symlink():
@@ -198,16 +219,16 @@ class RevisionCutover:
                     "source": str(self.source),
                     "target": str(self.directory),
                     "origin_schema": schema,
-                    "target_schema": 3 if schema == 1 else 4,
-                    "versions": version_bundle(schema=3 if schema == 1 else 4),
+                    "target_schema": _target_schema(schema),
+                    "versions": version_bundle(schema=_target_schema(schema)),
                     "checkpoint": None,
                     "phase": "PREPARING",
                 }
                 _persist(self.intent, intent)
             if (
                 intent.get("format") != "hcl-ledger-cutover-1"
-                or intent.get("origin_schema") not in (1, 2)
-                or intent.get("target_schema") != (3 if intent["origin_schema"] == 1 else 4)
+                or intent.get("origin_schema") not in (1, 2, 3, 4)
+                or intent.get("target_schema") != _target_schema(intent["origin_schema"])
                 or intent.get("versions") != version_bundle(schema=intent["target_schema"])
             ):
                 raise ValueError("cutover intent version mismatch")
@@ -215,10 +236,10 @@ class RevisionCutover:
             if object_root.is_symlink():
                 raise ValueError("invalid predecessor object root")
             checkpoint, objects, source_events = _history(db, object_root)
-            if schema in (1, 2):
+            if schema in (1, 2, 3, 4):
                 if schema != intent["origin_schema"] or self.directory.exists():
                     raise ValueError("cutover source/target identity conflict")
-                _validate_predecessor(db, schema)
+                _validate_predecessor(db, schema, self.source)
                 # Only our exact, still-unpublished copy can be rebuilt. The old
                 # store remains the sole writer until this entire copy verifies.
                 if self.stage.exists():
@@ -296,6 +317,12 @@ class RevisionCutover:
                         raise corrupt()
                     stage_schema = copy.execute("PRAGMA user_version").fetchone()[0]
                     if stage_schema == control.UNPUBLISHED:
+                        if intent["origin_schema"] in (3, 4):
+                            # Only this fully verified unpublished copy may replace
+                            # its predecessor control. Original source metadata is
+                            # retained under the terminal fence for audit.
+                            _validate_predecessor(copy, intent["origin_schema"], self.source)
+                            copy.execute("DROP TABLE revision_control")
                         control.install(
                             copy,
                             schema=intent["target_schema"],

@@ -137,7 +137,13 @@ class TaskBudgetLedger:
             session, task = self._lease(db, lease)
             self.store._validate_snapshot(db, snapshot)
             request = self.store._get_object(task["request_hash"])
-            if (snapshot.session_id != lease.session_id or snapshot.principal != lease.principal
+            from hcl.kernel.execution import ExecutionIssue
+            if type(request.issue) is ExecutionIssue:
+                if snapshot.session_id != lease.session_id or snapshot.principal != lease.principal or question != request.question:
+                    raise failure("DENIED", "TASK_CONTEXT_MISMATCH", "call_spec", "Call identity differs from the bound task.", "access")
+                from hcl.runtime.execution_ledger import validate_execution_reservation
+                validate_execution_reservation(self, db, task, request, snapshot, call_id, serialized, allowance)
+            elif (snapshot.session_id != lease.session_id or snapshot.principal != lease.principal
                     or question != request.question or allowance != request.budget
                     or self.store.snapshot_dependencies(snapshot) != json.loads(task["dependencies"])):
                 raise failure("DENIED", "TASK_CONTEXT_MISMATCH", "call_spec", "Call context or allowance differs from the bound task.", "access")
