@@ -65,6 +65,9 @@ class ContextCompiler:
             from hcl.semantics.revision import revision_context
 
             context = revision_context(empty, question)
+        elif purpose == "discovery_compile":
+            from hcl.semantics.discovery_compiler import discovery_context
+            context = discovery_context(empty, question)
         elif purpose == "argument_compile":
             from hcl.semantics.argument_compiler import argument_context
             context = argument_context(empty, question)

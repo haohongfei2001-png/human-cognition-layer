@@ -12,7 +12,7 @@ from .types import BudgetSlice, Issue, ResultField, freeze
 
 PROTOCOL = "hcl-execution-1"
 DIALECTS = frozenset(
-    {"finite-interpretation-1", "semantic-readings-1", "scoped-revision-1", "mental-scene-1", "argument-model-1"}
+    {"finite-interpretation-1", "semantic-readings-1", "scoped-revision-1", "mental-scene-1", "argument-model-1", "discovery-model-1"}
 )
 
 

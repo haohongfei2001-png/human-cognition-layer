@@ -94,7 +94,7 @@ class LocalModelOperator:
                 snapshot, segments, ast["candidate"], allowance
             )
             result = ReadingLogicOperator(self.semantic_profile).run(snapshot, issue, allowance, forest)
-        elif model.dialect in ("mental-scene-1", "argument-model-1"):
+        elif model.dialect in ("mental-scene-1", "argument-model-1", "discovery-model-1"):
             from hcl.semantics.model_compiler import LocalModelCompiler
             from hcl.operators.mental_scene import MentalSceneOperator
             from hcl.runtime.context import ContextChunk
@@ -103,7 +103,7 @@ class LocalModelOperator:
                 raise ValueError("source-bound mental model fields required")
             segments = tuple(SourceSegment(**row) for row in ast["segments"])
             sources = tuple(row for row in segments if row.kind == "SOURCE")
-            purpose = "mental_compile" if model.dialect == "mental-scene-1" else "argument_compile"
+            purpose = {"mental-scene-1":"mental_compile", "argument-model-1":"argument_compile", "discovery-model-1":"discovery_compile"}[model.dialect]
             self.context.serialize(snapshot, ast["question"], ContextChunk(purpose, sources, 0, 1))
             if tuple(row for row in segments if row.kind == "QUESTION") != question_segments(
                 ast["question"]
@@ -111,10 +111,15 @@ class LocalModelOperator:
                 raise ValueError("query anchors changed")
             from hcl.semantics.argument_compiler import ArgumentCompiler
             from hcl.operators.argument_model import ArgumentModelOperator
-            compiler = LocalModelCompiler() if model.dialect == "mental-scene-1" else ArgumentCompiler()
-            operator = MentalSceneOperator() if model.dialect == "mental-scene-1" else ArgumentModelOperator()
+            from hcl.semantics.discovery_compiler import DiscoveryCompiler
+            from hcl.operators.discovery_model import DiscoveryModelOperator
+            compiler = {"mental-scene-1":LocalModelCompiler, "argument-model-1":ArgumentCompiler,
+                        "discovery-model-1":DiscoveryCompiler}[model.dialect]()
+            operator = {"mental-scene-1":MentalSceneOperator, "argument-model-1":ArgumentModelOperator,
+                        "discovery-model-1":DiscoveryModelOperator}[model.dialect]()
             program = compiler.compile(snapshot, segments, ast["candidate"], allowance)
-            result = operator.run(snapshot, issue, allowance, program)
+            result = (operator.run(snapshot, issue, allowance, program, segments) if model.dialect == "discovery-model-1"
+                      else operator.run(snapshot, issue, allowance, program))
         elif model.dialect == "scoped-revision-1":
             if set(ast) != {"query"}:
                 raise HCLFailure(

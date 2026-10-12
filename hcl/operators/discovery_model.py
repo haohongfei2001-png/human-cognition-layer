@@ -1,0 +1,451 @@
+"""Execute the shared discoverer using real mental/planning/causal/argument code."""
+
+from copy import deepcopy
+from dataclasses import replace
+import json
+
+from hcl.kernel.types import Delta, HCLFailure, InferenceResult, Issue, OpResult, thaw
+from hcl.memory import codec
+from hcl.operators.abduction import (
+    VERSION,
+    discover,
+    evaluate_expression,
+    identity,
+    program_hash,
+)
+from hcl.operators.mental_scene import MentalSceneOperator
+from hcl.operators.argument_model import ArgumentModelOperator
+from hcl.semantics.model_compiler import LocalModelCompiler
+from hcl.semantics.argument_compiler import ArgumentCompiler
+
+KIND = "CONDITIONAL_MECHANISM_DISCOVERY"
+
+
+def instantiate(program, context):
+    template = deepcopy(context["template"])
+    model = template["models"][0]
+    features, latent = context["features"], program["latent"]
+    constraints = [
+        evaluate_expression(expr, features, latent) for expr in program["constraint"]
+    ]
+    if any(type(value) is not bool for value in constraints):
+        raise ValueError("Boolean mechanism constraints required")
+    if not all(constraints):
+        return None
+    for binding in program["observe"]:
+        event = next(row for row in model["events"] if row["id"] == binding["event_id"])
+        members = set(event[binding["channel"]])
+        when = evaluate_expression(binding["when"], features, latent)
+        if type(when) is not bool:
+            raise ValueError("Boolean observation condition required")
+        if when:
+            members.add(binding["actor"])
+        else:
+            members.discard(binding["actor"])
+        event[binding["channel"]] = sorted(members)
+    for binding in program["transition"]:
+        target = binding["target"]
+        value = evaluate_expression(binding["value"], features, latent)
+        if target["kind"] in ("utility", "cost"):
+            plan = next(row for row in model["plans"] if row["id"] == target["plan_id"])
+            if type(value) not in (str, int):
+                raise ValueError("rational mechanism value required")
+            if target["kind"] == "utility":
+                plan["graph"]["utilities"][target["state"]] = str(value)
+            else:
+                action = next(
+                    a
+                    for a in plan["graph"]["actions"]
+                    if a["id"] == target["action_id"]
+                )
+                action["cost"] = str(value)
+        else:
+            if type(value) is not bool:
+                raise ValueError("Boolean argument mechanism value required")
+            if target["kind"] == "ordinary":
+                row = next(
+                    r for r in model["premises"] if r["id"] == target["premise_id"]
+                )
+                row["ordinary"] = value
+            else:
+                row = next(r for r in model["rules"] if r["id"] == target["rule_id"])
+                row["strict"] = value
+    return template
+
+
+def extract_prediction(inference, selector):
+    values = inference["values"]
+    model = values["models"][0]
+    field = selector["field"]
+    group, name, identity_key = {
+        "belief.possible_values": ("beliefs", "possible_values", "query_id"),
+        "plan.best_actions": ("plans", "best_actions", "plan_id"),
+        "causal.possible_values": ("causal", "possible_values", "query_id"),
+        "argument.acceptance": ("queries", None, "query_id"),
+    }[field]
+    match = next(
+        (
+            (i, row)
+            for i, row in enumerate(model[group])
+            if row[identity_key] == selector["record_id"]
+        ),
+        None,
+    )
+    if match is None:
+        return dict(status="UNMODELED", values=[], result_refs=[])
+    index, row = match
+    acceptable = {
+        "belief.possible_values": {"DETERMINATE", "UNRESOLVED"},
+        "plan.best_actions": {"SOLVED"},
+        "causal.possible_values": {"DETERMINATE", "UNDERDETERMINED"},
+        "argument.acceptance": {"COMPLETE"},
+    }[field]
+    # The SCM's own status taxonomy is retained. A finite nonempty result with
+    # no frontier is usable except explicitly inconsistent/unsupported cases.
+    if field == "causal.possible_values":
+        complete = (
+            bool(row["possible_values"])
+            and not row.get("frontier")
+            and row["status"] not in {"INCONSISTENT", "NO_COMPATIBLE_WORLDS"}
+        )
+    else:
+        complete = row["status"] in acceptable and not row.get("frontier")
+    if not complete:
+        return dict(
+            status="UNCOMPUTED", values=[], result_refs=[], diagnostic=row["status"]
+        )
+    if field == "argument.acceptance":
+        predicted = [
+            dict(positive=row["positive_accepted"], opposed=row["opposed_accepted"])
+        ]
+        selected = ("positive_accepted", "opposed_accepted")
+    else:
+        predicted = list(row[name])
+        selected = (name,)
+    return dict(
+        status="COMPUTED",
+        values=predicted,
+        result_refs=[
+            dict(
+                result_id=inference["result_id"],
+                path=("models", "0", group, str(index)),
+                fields=selected,
+                selector=dict(selector),
+            )
+        ],
+    )
+
+
+class DiscoveryModelOperator:
+    def run(self, snapshot, issue, allowance, program, segments):
+        data = thaw(program)
+
+        def evaluate(hypothesis, context, remaining):
+            try:
+                template = instantiate(hypothesis, context)
+                if template is None:
+                    return dict(
+                        status="UNMODELED",
+                        predictions={},
+                        work=0,
+                        actual_results=[],
+                        diagnostic="HYPOTHESIS_CONSTRAINT_INAPPLICABLE",
+                    )
+                mental = hypothesis["adapter"] == "mental-scene-1"
+                compiler = LocalModelCompiler() if mental else ArgumentCompiler()
+                typed = compiler.compile(
+                    snapshot,
+                    segments,
+                    json.dumps(template, ensure_ascii=False),
+                    allowance,
+                )
+            except HCLFailure as error:
+                if error.status not in ("INVALID_REQUEST", "BUDGET_EXHAUSTED"):
+                    raise
+                return dict(
+                    status=(
+                        "UNMODELED"
+                        if error.status == "INVALID_REQUEST"
+                        else "UNCOMPUTED"
+                    ),
+                    predictions={},
+                    work=0,
+                    actual_results=[],
+                    diagnostic=error.diagnostic.code,
+                )
+            except (ValueError, TypeError, KeyError, StopIteration, ZeroDivisionError):
+                return dict(
+                    status="UNMODELED",
+                    predictions={},
+                    work=0,
+                    actual_results=[],
+                    diagnostic="INADMISSIBLE_EDITED_MECHANISM",
+                )
+            operator = MentalSceneOperator() if mental else ArgumentModelOperator()
+            operation = operator.run(
+                snapshot,
+                Issue(
+                    "prediction:" + identity([hypothesis, context]),
+                    "hypothesis.predict",
+                ),
+                replace(allowance, max_local_evaluations=remaining),
+                typed,
+            )
+            inference = operation.candidate_delta.new_inferences[0]
+            actual = dict(
+                result_id=inference.result_id,
+                kind=inference.kind,
+                values=thaw(inference.values),
+                source_versions=dict(operation.read_set),
+                resource_usage=dict(operation.resource_usage),
+                issues=operation.issues,
+                program_hash=program_hash(hypothesis),
+                context_hash=identity(context),
+                assumption_environments=inference.assumption_environments,
+            )
+            predictions = {
+                selector["id"]: extract_prediction(actual, selector)
+                for selector in hypothesis["predict"]
+            }
+            return dict(
+                status="COMPUTED",
+                predictions=predictions,
+                work=operation.resource_usage["local_evaluations"],
+                actual_results=[actual],
+            )
+
+        values = discover(
+            data["programs"],
+            data["observations"],
+            data["contexts"],
+            data["probes"],
+            data["grammar"],
+            evaluate,
+            max_evaluations=allowance.max_local_evaluations,
+            **data["search"],
+            scope=dict(
+                source_versions=dict(snapshot.source_versions),
+                rule_version=snapshot.rule_version,
+                contexts=identity(data["contexts"]),
+                observations=identity(data["observations"]),
+            )
+        )
+        values.update(
+            observations=data["observations"],
+            context_bindings={c["id"]: identity(c) for c in data["contexts"]},
+            probe_bindings={
+                p["id"]: dict(
+                    context_hash=identity(p["context"]), query_id=p["query_id"]
+                )
+                for p in data["probes"]
+            },
+            source_bindings=data["source_bindings"],
+            unmodeled_segments=data["unmodeled_segments"],
+            source_versions=dict(snapshot.source_versions),
+            scope="CONDITIONAL_DECLARED_MECHANISM_PREDICTIONS_NOT_CAUSAL_OR_PRIVATE_TRUTH",
+            factor_independence="NOT_ESTABLISHED",
+            grammar=data["grammar"],
+            search=data["search"],
+        )
+        issues = list(values["frontier"])
+        if values["unmodeled_segments"]:
+            issues.append("UNMODELED_DISCOVERY_SOURCE")
+        if any(c["profile"]["unmodeled"] for c in values["prediction_matrix"].values()):
+            issues.append("UNCOMPUTED_OR_UNMODELED_PREDICTION")
+        inference = InferenceResult(
+            "discovery-result:"
+            + identity([issue.issue_id, dict(snapshot.source_versions), values]),
+            KIND,
+            values,
+            (),
+            tuple(snapshot.source_versions),
+            (),
+            snapshot.rule_version,
+            "CONDITIONAL_MECHANISM_DISCOVERY",
+        )
+        return OpResult(
+            "abduction.execute",
+            VERSION,
+            snapshot.source_versions,
+            ("append_inference",),
+            (inference.result_id,),
+            tuple(sorted(set(issues))),
+            {"local_evaluations": values["local_evaluations"]},
+            (),
+            Delta(
+                snapshot.session_id,
+                snapshot.principal,
+                snapshot.revision,
+                snapshot.access_epoch,
+                snapshot.rule_version,
+                snapshot.source_versions,
+                (inference,),
+            ),
+        )
+
+
+def verify_discovery(values):
+    """Recheck matrix claims against the retained actual domain solver fields."""
+    from hcl.operators.abduction import (
+        expression_size,
+        compare_prediction,
+        factor_profile,
+        pareto_frontier,
+        prediction_classes,
+        program_hash,
+    )
+
+    data = thaw(values)
+    if (
+        data["semantic_certified"] is not False
+        or data["candidate_completeness"] != "NOT_ESTABLISHED"
+        or data["posterior"] != "NOT_CALIBRATED"
+    ):
+        raise ValueError("conditional discovery boundary missing")
+    observations = data["observations"]
+    programs, columns = data["programs"], data["prediction_matrix"]
+    if set(programs) != set(columns) or not programs:
+        raise ValueError("program matrix mismatch")
+
+    def check_prediction(prediction, actual_results, selector, key, context_hash):
+        if prediction["status"] != "COMPUTED":
+            if prediction["values"] or prediction["result_refs"]:
+                raise ValueError("unknown prediction contains asserted values")
+            return
+        if len(prediction["result_refs"]) != 1:
+            raise ValueError("actual prediction reference required")
+        ref = prediction["result_refs"][0]
+        actual = next(
+            (r for r in actual_results if r["result_id"] == ref["result_id"]), None
+        )
+        if (
+            actual is None
+            or actual["source_versions"] != data["source_versions"]
+            or actual["program_hash"] != key
+            or actual["context_hash"] != context_hash
+        ):
+            raise ValueError("prediction dependency mismatch")
+        expected = extract_prediction(actual, selector)
+        if codec.canonical(expected) != codec.canonical(prediction):
+            raise ValueError("prediction differs from actual solver fields")
+
+    for key, column in columns.items():
+        if (
+            key != program_hash(programs[key])
+            or key != column["program_hash"]
+            or len(column["cells"]) != len(observations)
+        ):
+            raise ValueError("mechanism identity mismatch")
+        if column["complexity"] != expression_size(
+            {k: v for k, v in programs[key].items() if k != "id"}
+        ):
+            raise ValueError("mechanism complexity mismatch")
+        if column["work"] != sum(
+            r["resource_usage"]["local_evaluations"] for r in column["actual_results"]
+        ):
+            raise ValueError("domain work mismatch")
+        conditions = [
+            dict(
+                result_id=r["result_id"],
+                context_hash=r["context_hash"],
+                assumption_environments=r["assumption_environments"],
+            )
+            for r in column["actual_results"]
+        ]
+        if codec.canonical(conditions) != codec.canonical(column["domain_conditions"]):
+            raise ValueError("prediction condition mismatch")
+        selectors = {p["id"]: p for p in programs[key]["predict"]}
+        for observation, cell in zip(observations, column["cells"]):
+            if any(
+                cell[k] != observation[v]
+                for k, v in (
+                    ("observation_id", "id"),
+                    ("context_id", "context_id"),
+                    ("factor_id", "factor_id"),
+                    ("provenance_group", "provenance_group"),
+                )
+            ):
+                raise ValueError("observation matrix mismatch")
+            check_prediction(
+                cell["prediction"],
+                column["actual_results"],
+                selectors[observation["query_id"]],
+                key,
+                data["context_bindings"][observation["context_id"]],
+            )
+            if cell["relation"] != compare_prediction(cell["prediction"], observation):
+                raise ValueError("prediction relation mismatch")
+        if codec.canonical(column["profile"]) != codec.canonical(
+            factor_profile(column["cells"])
+        ):
+            raise ValueError("evidence factor mismatch")
+    if tuple(data["pareto_programs"]) != pareto_frontier(columns):
+        raise ValueError("Pareto result mismatch")
+    if codec.canonical(data["prediction_classes"]) != codec.canonical(
+        prediction_classes(columns, observations, data["equivalence_scope"])
+    ):
+        raise ValueError("prediction equivalence mismatch")
+    from itertools import combinations
+
+    expected_members = tuple(
+        sorted(
+            {
+                member
+                for group in data["prediction_classes"]
+                if set(group["members"]) & set(data["pareto_programs"])
+                for member in group["members"]
+            }
+        )
+    )
+    for probe in data["distinguishing_observations"]:
+        binding = data["probe_bindings"][probe["probe_id"]]
+        if (
+            probe["query_id"] != binding["query_id"]
+            or tuple(probe["tested_members"]) != expected_members
+        ):
+            raise ValueError("probe obligation mismatch")
+        if set(probe["predictions"]) & set(probe["incomplete"]) or set(
+            probe["predictions"]
+        ) | set(probe["incomplete"]) != set(expected_members):
+            raise ValueError("probe member coverage mismatch")
+        groups = {}
+        for key, value in probe["predictions"].items():
+            selector = next(
+                p for p in programs[key]["predict"] if p["id"] == binding["query_id"]
+            )
+            check_prediction(
+                value["prediction"],
+                value["actual_results"],
+                selector,
+                key,
+                binding["context_hash"],
+            )
+            signature = codec.canonical(
+                sorted(codec.canonical(v) for v in value["prediction"]["values"])
+            )
+            groups.setdefault(signature, []).append(key)
+        partitions = tuple(
+            tuple(sorted(members)) for _, members in sorted(groups.items())
+        )
+        if codec.canonical(partitions) != codec.canonical(probe["partitions"]) or probe[
+            "separated_pairs"
+        ] != sum(len(a) * len(b) for a, b in combinations(partitions, 2)):
+            raise ValueError("probe separation mismatch")
+
+    total = sum(c["work"] for c in columns.values())
+    for probe in data["distinguishing_observations"]:
+        if set(probe["evaluations"]) != set(probe["tested_members"]):
+            raise ValueError("probe audit mismatch")
+        for evaluated in probe["evaluations"].values():
+            if evaluated["work"] != sum(
+                r["resource_usage"]["local_evaluations"]
+                for r in evaluated["actual_results"]
+            ):
+                raise ValueError("probe work mismatch")
+            total += evaluated["work"]
+    if total != data["local_evaluations"]:
+        raise ValueError("discovery work mismatch")
+    if tuple(data["evidence_factor_ids"]) != tuple(
+        sorted({o["factor_id"] for o in observations})
+    ):
+        raise ValueError("factor registration mismatch")
