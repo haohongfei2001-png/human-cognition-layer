@@ -11,6 +11,8 @@ from hcl.kernel.types import (
 
 class AnswerAssembler:
     def _claim(self, result: InferenceResult) -> AnswerClaim:
+        if result.kind == "CONDITIONAL_MECHANISM_DISCOVERY":
+            return self._discovery_claim(result)
         if result.kind == "CONDITIONAL_ARGUMENT_ACCEPTANCE":
             return self._argument_claim(result)
         if result.kind == "CONDITIONAL_COGNITIVE_MODEL":
@@ -42,6 +44,51 @@ class AnswerAssembler:
         return AnswerClaim(text, f"claim:{result.result_id}", fields,
                                   result.assumption_environments, result.counterevidence_ids,
                                   "EXACT_MODEL")
+
+    def _discovery_claim(self, result):
+        from hcl.operators.discovery_model import verify_discovery
+        try:
+            verify_discovery(result.values)
+            actuals = [record for column in result.values["prediction_matrix"].values() for record in column["actual_results"]]
+            actuals.extend(record for probe in result.values["distinguishing_observations"]
+                           for predicted in probe["predictions"].values() for record in predicted["actual_results"])
+            for record in actuals:
+                if record["kind"] not in ("CONDITIONAL_COGNITIVE_MODEL", "CONDITIONAL_ARGUMENT_ACCEPTANCE"):
+                    raise ValueError("unregistered domain prediction")
+                self._claim(InferenceResult(record["result_id"],record["kind"],record["values"],
+                            tuple(record["assumption_environments"]),tuple(record["source_versions"]),(),
+                            result.rule_version,"CONDITIONAL_DOMAIN_PREDICTION"))
+        except (ValueError, TypeError, KeyError, IndexError, StopIteration):
+            raise HCLFailure("FAILED", "answer", "DISCOVERY_RESULT_MISMATCH", "prediction_matrix",
+                             "Explanation claims differ from their actual mechanism predictions.") from None
+        values = result.values
+        lines = ["Conditional mechanism comparison using actual domain predictions; candidate coverage is not established."]
+        for key in values["pareto_programs"]:
+            column = values["prediction_matrix"][key]
+            lines.append("Program " + key[:12] + ": explained factors=" + str(len(column["profile"]["explained"]))
+                         + ", contradicted=" + str(len(column["profile"]["contradicted"]))
+                         + ", unmodeled/uncomputed=" + str(len(column["profile"]["unmodeled"])) + ".")
+            for condition in column["domain_conditions"]:
+                lines.append("Observed-fit context " + condition["context_hash"][:12] + " is conditional on "
+                             + str(tuple(condition["assumption_environments"])) + ".")
+        computed_edits = sum(edit["evaluation_status"] == "RECOMPUTED" for edit in values["edit_history"])
+        lines.append("Actually recomputed mechanism edits: " + str(computed_edits) + "; proposed=" + str(len(values["edit_history"])) + ".")
+        for probe in values["distinguishing_observations"]:
+            lines.append("Hypothetical probe " + probe["probe_id"] + " separates " + str(probe["separated_pairs"])
+                         + " computed candidate pairs; incomplete=" + str(len(probe["incomplete"])) + ".")
+            for key, prediction in probe["predictions"].items():
+                for condition in prediction["domain_conditions"]:
+                    lines.append("Hypothetical probe " + probe["probe_id"] + ", candidate " + key[:12]
+                                 + " is conditional on " + str(tuple(condition["assumption_environments"])) + ".")
+        if values["frontier"]:
+            lines.append("Unexplored: " + ", ".join(values["frontier"]) + ".")
+        lines.append("Prediction equivalence concerns only the stated contexts and observations. "
+                     "Source interpretation, mechanism truth and evidence independence remain unverified; no calibrated posterior is claimed.")
+        names = ("programs", "initial_program_hashes", "prediction_matrix", "pareto_programs", "prediction_classes", "edit_history",
+                 "distinguishing_observations", "frontier", "semantic_certified", "candidate_completeness")
+        fields = tuple(ResultField(result.result_id,name,values[name]) for name in names)
+        return AnswerClaim(" ".join(lines),"claim:"+result.result_id,fields,result.assumption_environments,
+                           result.counterevidence_ids,"CONDITIONAL_MECHANISM_COMPARISON_NOT_TRUTH")
 
     def _argument_claim(self, result):
         values = result.values
@@ -302,7 +349,7 @@ class AnswerAssembler:
             (
                 "MODEL_INTERPRETATIONS_UNVERIFIED"
                 if any(
-                    result.kind in ("CONDITIONAL_FOL", "CONDITIONAL_REVISION", "CONDITIONAL_COGNITIVE_MODEL", "CONDITIONAL_ARGUMENT_ACCEPTANCE") for result in accepted_results
+                    result.kind in ("CONDITIONAL_FOL", "CONDITIONAL_REVISION", "CONDITIONAL_COGNITIVE_MODEL", "CONDITIONAL_ARGUMENT_ACCEPTANCE", "CONDITIONAL_MECHANISM_DISCOVERY") for result in accepted_results
                 )
                 else "EXPLICIT_FORMAL_INPUT_ONLY"
             ),
@@ -350,7 +397,24 @@ class AnswerAssembler:
         checked = self._claim(result)
         projections = []
         value = result.values
-        if result.kind == "CONDITIONAL_ARGUMENT_ACCEPTANCE":
+        if result.kind == "CONDITIONAL_MECHANISM_DISCOVERY":
+            text = checked.text
+            names = ("programs", "initial_program_hashes", "pareto_programs", "prediction_classes", "edit_history", "observations",
+                     "source_bindings", "context_bindings", "probe_bindings", "frontier", "semantic_certified", "candidate_completeness", "posterior",
+                     "scope", "factor_independence", "evidence_factor_ids", "equivalence_scope", "unmodeled_segments")
+            for key, column in value["prediction_matrix"].items():
+                keys = ("program_hash", "cells", "profile", "complexity", "work", "domain_conditions")
+                projections.append(ProjectedResultField(result.result_id,"prediction_matrix",
+                                   {name:column[name] for name in keys},(key,),keys))
+            for i, probe in enumerate(value["distinguishing_observations"]):
+                keys = ("probe_id", "query_id", "tested_members", "hypothetical", "partitions", "separated_pairs", "incomplete", "information_gain")
+                projections.append(ProjectedResultField(result.result_id,"distinguishing_observations",
+                                   {name:probe[name] for name in keys},(str(i),),keys))
+                for key, prediction in probe["predictions"].items():
+                    projections.append(ProjectedResultField(result.result_id,"distinguishing_observations",
+                                       {"prediction":prediction["prediction"], "domain_conditions":prediction["domain_conditions"]},
+                                       (str(i),"predictions",key),("prediction","domain_conditions")))
+        elif result.kind == "CONDITIONAL_ARGUMENT_ACCEPTANCE":
             text = checked.text
             names = ("semantic_certified", "candidate_completeness", "scope")
             for i, model in enumerate(value["models"]):

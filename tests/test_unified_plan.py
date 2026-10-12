@@ -61,3 +61,10 @@ class UnifiedPlanTests(unittest.TestCase):
         self.assertEqual(row['evidence_status'],'DESIGNED_NOT_HCL_VALIDATED')
         self.assertEqual(self.manifest['current_execution']['domain_evidence'][1]['mechanisms'],['M13'])
         self.assertFalse(self.manifest['current_execution']['domain_evidence'][1]['stage_complete'])
+
+    def test_shared_discovery_increment_does_not_close_full_m04_research(self):
+        row=next(row for row in self.manifest['mechanisms'] if row['id']=='M04')
+        self.assertFalse(row['partial_implementation_evidence']['complete'])
+        self.assertEqual(row['evidence_status'],'DESIGNED_NOT_HCL_VALIDATED')
+        self.assertEqual(self.manifest['current_execution']['domain_evidence'][2]['mechanisms'],['M04'])
+        self.assertFalse(self.manifest['current_execution']['domain_evidence'][2]['stage_complete'])
