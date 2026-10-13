@@ -241,7 +241,7 @@ def extract_prediction(inference, selector):
 
 
 class DiscoveryModelOperator:
-    def run(self, snapshot, issue, allowance, program, segments):
+    def run(self, snapshot, issue, allowance, program, segments, *, context_scopes=None):
         data = thaw(program)
 
         def evaluate(hypothesis, context, remaining):
@@ -259,7 +259,7 @@ class DiscoveryModelOperator:
                 compiler = LocalModelCompiler() if mental else ArgumentCompiler()
                 typed = compiler.compile(
                     snapshot,
-                    segments,
+                    segments if context_scopes is None else context_scopes[context["id"]],
                     json.dumps(template, ensure_ascii=False),
                     allowance,
                 )

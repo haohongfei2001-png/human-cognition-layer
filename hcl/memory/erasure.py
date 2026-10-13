@@ -233,10 +233,16 @@ def authorized_prefix(db, original_events, current_events):
         return False
     for original, current in zip(original_events, current_events):
         digest = semantic_hash(original)
+        target = semantic_hash(current)
+        started = False
         for change in changes.get(original["seq"], ()):
+            if not started:
+                if digest != change["before"]:
+                    continue  # Before this source checkpoint, not a new permission.
+                started = True
             if digest != change["before"]:
-                return False
+                return False  # Once begun, every later change must be contiguous.
             digest = change["after"]
-        if digest != semantic_hash(current):
+        if digest != target:
             return False
     return True

@@ -1,6 +1,9 @@
 """Physical cleanup tests use newly created, disposable synthetic files only."""
 from pathlib import Path
+import json
 import sqlite3
+import subprocess
+import sys
 import unittest
 from unittest.mock import patch
 
@@ -36,6 +39,9 @@ class ErasureCleanupTests(unittest.TestCase):
         self.assertEqual(receipt["status"], "LOCAL_REFERENCE_ERASURE_COMPLETE")
         self.assertTrue(receipt["database_scrubbed"])
         self.assertTrue(all(not (self.store.object_root / digest).exists() for digest in plan["objects_to_unlink"]))
+        # Raw byte inspection must not itself close a descriptor for a live
+        # SQLite inode and invalidate the locks this regression is protecting.
+        self.store.close()
         for path in Path(self.f.tmp.name).rglob("*"):
             if path.is_file():
                 body = path.read_bytes()
@@ -91,6 +97,62 @@ class ErasureCleanupTests(unittest.TestCase):
         self.assertIn("DATABASE_SCRUB_PENDING", result["limitations"])
         reader.rollback()
         self.assertEqual(self.resume()["status"], "LOCAL_REFERENCE_ERASURE_COMPLETE")
+
+    def test_cleanup_never_opens_a_raw_database_descriptor(self):
+        self.f.begin()
+        original = Path.open
+
+        def guarded(path, *args, **kwargs):
+            self.assertNotEqual(path, self.store.path,
+                                "raw database close would invalidate SQLite's locks")
+            return original(path, *args, **kwargs)
+
+        with patch.object(Path, "open", guarded):
+            self.assertTrue(self.resume()["database_scrubbed"])
+
+    def test_cleanup_restores_full_sync_before_vacuum_and_checkpoint(self):
+        self.f.begin()
+        self.store._db.execute("PRAGMA synchronous=OFF")
+        statements = []
+        self.store._db.set_trace_callback(statements.append)
+        try:
+            self.assertTrue(self.resume()["database_scrubbed"])
+        finally:
+            self.store._db.set_trace_callback(None)
+        full = statements.index("PRAGMA synchronous=FULL")
+        self.assertLess(full, statements.index("VACUUM"))
+        self.assertLess(full, statements.index("PRAGMA wal_checkpoint(TRUNCATE)"))
+        self.assertEqual(self.store._db.execute("PRAGMA synchronous").fetchone()[0], 2)
+
+    def test_peer_close_preserves_live_wal_and_subsequent_commits(self):
+        self.f.begin()
+        receipt = self.resume()
+        self.assertTrue(receipt["database_scrubbed"])
+        program = r"""
+import json, sqlite3, sys
+db = sqlite3.connect(sys.argv[1])
+receipt = json.loads(db.execute('SELECT receipt FROM erasures WHERE erasure_id=?',
+                               ('a' * 32,)).fetchone()[0])
+sources = sorted(row[0] for row in db.execute('SELECT source_id FROM sources'))
+integrity = db.execute('PRAGMA integrity_check').fetchone()[0]
+db.close()
+print(json.dumps(dict(receipt=receipt, sources=sources, integrity=integrity)))
+"""
+
+        def peer():
+            return json.loads(subprocess.check_output(
+                [sys.executable, "-B", "-c", program, str(self.f.path)],
+                text=True, timeout=15,
+            ))
+
+        self.assertEqual(peer()["receipt"], receipt)
+        self.assertTrue(self.f.path.with_name(self.f.path.name + "-wal").exists(),
+                        "a peer must not unlink a live connection's WAL")
+        self.store.put_source("session", self.f.owner, "after-cleanup", "SYNTHETIC_AFTER_CLEANUP")
+        observed = peer()
+        self.assertEqual(observed["receipt"], receipt)
+        self.assertEqual(observed["sources"], ["after-cleanup", "independent"])
+        self.assertEqual(observed["integrity"], "ok")
 
     def test_shared_cas_acquired_after_intent_preserves_independent_owner(self):
         self.f.begin()

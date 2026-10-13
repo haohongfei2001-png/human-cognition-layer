@@ -5,7 +5,6 @@ File unlink is never reported complete while a SQLite reader retains old WAL
 pages. Tests use only temporary synthetic namespaces.
 """
 import json
-import os
 import re
 import sqlite3
 
@@ -105,14 +104,18 @@ def resume(store, session_id, principal, erasure_id):
     scrubbed = False
     try:
         with store._lock:
+            store._db.execute("PRAGMA synchronous=FULL")
             store._db.execute("PRAGMA secure_delete=ON")
             store._db.execute("VACUUM")
             store._checkpoint("erasure_database_vacuumed")
             checkpoint = store._db.execute("PRAGMA wal_checkpoint(TRUNCATE)").fetchone()
             scrubbed = checkpoint[0] == 0 and checkpoint[1] == 0 and checkpoint[2] == 0
             if scrubbed:
-                with store.path.open("rb") as stream:
-                    os.fsync(stream.fileno())
+                # SQLite owns the database descriptors and syncs the database
+                # before a successful FULL/TRUNCATE checkpoint. Opening and
+                # closing this inode ourselves would release *all* traditional
+                # POSIX locks held by this process, including SQLite's locks.
+                # A peer could then unlink a WAL still used by this connection.
                 sync_directory(store.path.parent)
                 store._checkpoint("erasure_database_scrubbed")
     except (sqlite3.Error, OSError):

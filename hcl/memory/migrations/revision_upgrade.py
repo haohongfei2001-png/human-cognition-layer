@@ -180,7 +180,10 @@ M09_QUALIFIED_CODE_HASH = "70ca9691b43d0873e0078e707ce70cfe6109a5eff2b852984755e
 # published main identity before this governance candidate can be published.
 M10_RETRIEVAL_CODE_HASH = "0cff907d511fc684251b4bcce902e5800b372885ed4b27bd8989f99c22fc436f"
 M10_QUALIFIED_RETRIEVAL_CODE_HASH = "96e5bf0fb7099dd6c4d98ca4cb80fc2bc3147a26a85a4a935ead3cdd8289d5f7"
-REVISION_PREDECESSORS = frozenset((S22_CODE_HASH, S23_CODE_HASH, S3_FINITE_CODE_HASH, S4_ARGUMENT_CODE_HASH, M04_DISCOVERY_CODE_HASH, M04_QUALIFIED_CODE_HASH, M07_INTERACTION_CODE_HASH, M08_AFFECT_CODE_HASH, M09_RELATIONSHIP_CODE_HASH, M09_QUALIFIED_CODE_HASH, M10_RETRIEVAL_CODE_HASH, M10_QUALIFIED_RETRIEVAL_CODE_HASH))
+M10_GOVERNANCE_CODE_HASH = "856f2077af271a5a69e2d4261bf61cc22a414742b38b9637d428951eb97b50c0"
+# Qualified 203-file governance continuation; retain the original 202-file pin.
+M10_QUALIFIED_GOVERNANCE_CODE_HASH = "ec4d6c13e2c008f2b639303d0967ba2719c93e4e31add0e834740f510e2361c0"
+REVISION_PREDECESSORS = frozenset((S22_CODE_HASH, S23_CODE_HASH, S3_FINITE_CODE_HASH, S4_ARGUMENT_CODE_HASH, M04_DISCOVERY_CODE_HASH, M04_QUALIFIED_CODE_HASH, M07_INTERACTION_CODE_HASH, M08_AFFECT_CODE_HASH, M09_RELATIONSHIP_CODE_HASH, M09_QUALIFIED_CODE_HASH, M10_RETRIEVAL_CODE_HASH, M10_QUALIFIED_RETRIEVAL_CODE_HASH, M10_GOVERNANCE_CODE_HASH, M10_QUALIFIED_GOVERNANCE_CODE_HASH))
 
 
 def _target_schema(schema):
@@ -193,12 +196,17 @@ def _validate_predecessor(db, schema, source_path):
     if schema == 1:
         return
     if schema in (3, 4):
-        revision = control.read_legacy(db)
+        columns = {row[1] for row in db.execute("PRAGMA table_info(revision_control)")}
+        governed = bool(columns & {"governance_protocol", "governance_salt", "governance_binding"})
+        revision = control.read(db) if governed else control.read_legacy(db)
         bundle = json.loads(revision["versions"])
         expected = {"schema": schema, "rules": RULE_VERSION, "indexes": {"revision": 1}, "code_sha256": bundle.get("code_sha256")}
-        if bundle.get("code_sha256") in (M10_RETRIEVAL_CODE_HASH, M10_QUALIFIED_RETRIEVAL_CODE_HASH):
+        if bundle.get("code_sha256") in (M10_RETRIEVAL_CODE_HASH, M10_QUALIFIED_RETRIEVAL_CODE_HASH, M10_GOVERNANCE_CODE_HASH, M10_QUALIFIED_GOVERNANCE_CODE_HASH):
             expected["indexes"] = {"revision": 1, "retrieval": "hcl-evidence-retrieval-1"}
-        if (revision["mode"] != control.ACTIVE or bundle != expected
+        if governed:
+            expected["governance"] = "hcl-memory-governance-1"
+        if (governed != (bundle.get("code_sha256") in (M10_GOVERNANCE_CODE_HASH, M10_QUALIFIED_GOVERNANCE_CODE_HASH))
+                or revision["mode"] != control.ACTIVE or bundle != expected
                 or bundle.get("code_sha256") not in REVISION_PREDECESSORS
                 or revision["target_path"] != str(source_path)):
             raise ValueError("unsupported, relocated or inactive revision predecessor")
@@ -206,7 +214,7 @@ def _validate_predecessor(db, schema, source_path):
             namespace = read_control(db)
             if namespace["mode"] != LEGACY_ACTIVE or json.loads(namespace["versions"]) != bundle:
                 raise ValueError("controlled predecessor bundles disagree")
-        return
+        return revision if governed else None
     row = read_control(db)
     bundle = json.loads(row["versions"])
     expected = {"schema": 2, "rules": RULE_VERSION, "indexes": {}}
@@ -217,6 +225,30 @@ def _validate_predecessor(db, schema, source_path):
         or bundle["code_sha256"] not in PREDECESSOR_CODE_HASHES | REVISION_PREDECESSORS | {version_bundle()["code_sha256"]}
     ):
         raise ValueError("unsupported or inactive controlled predecessor")
+
+
+def _governance_identity(row):
+    value = dict(row, mode=control.ACTIVE)
+    return dict(protocol=row["governance_protocol"],
+                salt_sha256=sha256(row["governance_salt"].encode()).hexdigest(),
+                control_sha256=sha256(codec.canonical(value).encode()).hexdigest())
+
+
+def _governance_ready(db, source_path):
+    """No pending object ownership or unfinished physical cleanup is discarded."""
+    staging = source_path.with_name(source_path.name + ".retention")
+    if staging.is_symlink():
+        raise ValueError("invalid governed staging path")
+    if staging.exists() and (not staging.is_dir() or next(staging.iterdir(), None) is not None):
+        raise failure("DEFERRED", "GOVERNANCE_STAGING_UNRESOLVED", "migration",
+                      "Resolve retained object staging before migrating this namespace.", "migration")
+    for row in db.execute("SELECT status,receipt FROM erasures"):
+        receipt = json.loads(row["receipt"])
+        if (row["status"] not in ("LOCAL_REFERENCE_ERASURE_COMPLETE", "PARTIAL_ERASURE_RETAINED_COPIES")
+                or receipt.get("database_scrubbed") is not True
+                or set(receipt["limitations"]) & {"DATABASE_SCRUB_PENDING", "UNATTRIBUTED_OBJECTS_RETAINED"}):
+            raise failure("DEFERRED", "GOVERNANCE_CLEANUP_UNRESOLVED", "migration",
+                          "Finish the existing local cleanup before migrating this namespace.", "migration")
 
 
 class RevisionCutover:
@@ -288,7 +320,15 @@ class RevisionCutover:
             if schema in (1, 2, 3, 4):
                 if schema != intent["origin_schema"] or self.directory.exists():
                     raise ValueError("cutover source/target identity conflict")
-                _validate_predecessor(db, schema, self.source)
+                governed = _validate_predecessor(db, schema, self.source)
+                if governed is not None:
+                    _governance_ready(db, self.source)
+                    inherited = _governance_identity(governed)
+                    if intent.get("predecessor_governance", inherited) != inherited:
+                        raise ValueError("governed predecessor identity changed")
+                    intent["predecessor_governance"] = inherited
+                elif "predecessor_governance" in intent:
+                    raise ValueError("governed predecessor disappeared")
                 # Only our exact, still-unpublished copy can be rebuilt. The old
                 # store remains the sole writer until this entire copy verifies.
                 if self.stage.exists():
@@ -363,6 +403,10 @@ class RevisionCutover:
                     old_control = db.execute("SELECT mode FROM revision_control").fetchall()
                     if len(old_control) != 1 or old_control[0][0] != "TERMINAL_SOURCE":
                         raise ValueError("terminal predecessor reader fence is missing")
+                    if "predecessor_governance" in intent:
+                        row = dict(db.execute("SELECT * FROM revision_control").fetchone())
+                        if _governance_identity(row) != intent["predecessor_governance"]:
+                            raise ValueError("terminal governance identity changed")
                 # Keep BEGIN IMMEDIATE until publication and receipt persistence.
             self._checkpoint("source_fenced")
             if not self.directory.exists():
@@ -376,31 +420,30 @@ class RevisionCutover:
                     if stage_schema == control.UNPUBLISHED:
                         if _history(copy, self.stage / "state.sqlite.objects")[0] != intent["checkpoint"]:
                             raise corrupt()
+                        governed = None
                         if intent["origin_schema"] in (3, 4):
-                            # Only this fully verified unpublished copy may replace
-                            # its predecessor control. Original source metadata is
-                            # retained under the terminal fence for audit.
-                            _validate_predecessor(copy, intent["origin_schema"], self.source)
-                            copy.execute("DROP TABLE revision_control")
-                        control.install(
-                            copy,
-                            schema=intent["target_schema"],
-                            upgrade_id=intent["upgrade_id"],
-                            origin_schema=intent["origin_schema"],
-                            checkpoint=intent["checkpoint"],
-                            source_path=str(self.source),
-                            target_path=str(self.path),
-                        )
-                        from hcl.memory.governance import backfill
-                        salt = bytes.fromhex(control.read(copy)["governance_salt"])
-                        object_root = self.stage / "state.sqlite.objects"
-                        def read_original(digest):
-                            body = (object_root / digest).read_bytes()
-                            if sha256(body).hexdigest() != digest:
-                                raise corrupt()
-                            return codec.loads(body)
-                        backfill(copy, salt, read_original,
-                                 object_size=lambda digest: (object_root / digest).stat().st_size)
+                            governed = _validate_predecessor(copy, intent["origin_schema"], self.source)
+                        arguments = dict(schema=intent["target_schema"], upgrade_id=intent["upgrade_id"],
+                            origin_schema=intent["origin_schema"], checkpoint=intent["checkpoint"],
+                            source_path=str(self.source), target_path=str(self.path))
+                        if governed is not None:
+                            if _governance_identity(governed) != intent.get("predecessor_governance"):
+                                raise ValueError("unpublished governance identity changed")
+                            control.continue_governance(copy, **arguments)
+                        else:
+                            if intent["origin_schema"] in (3, 4):
+                                copy.execute("DROP TABLE revision_control")
+                            control.install(copy, **arguments)
+                            from hcl.memory.governance import backfill
+                            salt = bytes.fromhex(control.read(copy)["governance_salt"])
+                            object_root = self.stage / "state.sqlite.objects"
+                            def read_original(digest):
+                                body = (object_root / digest).read_bytes()
+                                if sha256(body).hexdigest() != digest:
+                                    raise corrupt()
+                                return codec.loads(body)
+                            backfill(copy, salt, read_original,
+                                     object_size=lambda digest: (object_root / digest).stat().st_size)
                         if intent["target_schema"] == 4:
                             copy.execute(
                                 "UPDATE namespace_control SET versions=? WHERE singleton=1",
@@ -449,6 +492,10 @@ class RevisionCutover:
 
     def _validate_target_identity(self, db, intent):
         row = control.read(db)
+        inherited = intent.get("predecessor_governance")
+        if inherited is not None and (row["governance_protocol"] != inherited["protocol"]
+                or sha256(row["governance_salt"].encode()).hexdigest() != inherited["salt_sha256"]):
+            raise ValueError("successor governance ownership changed")
         if (
             db.execute("PRAGMA user_version").fetchone()[0] != intent["target_schema"]
             or row["upgrade_id"] != intent["upgrade_id"]
