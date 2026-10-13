@@ -183,7 +183,9 @@ M10_QUALIFIED_RETRIEVAL_CODE_HASH = "96e5bf0fb7099dd6c4d98ca4cb80fc2bc3147a26a85
 M10_GOVERNANCE_CODE_HASH = "856f2077af271a5a69e2d4261bf61cc22a414742b38b9637d428951eb97b50c0"
 # Qualified 203-file governance continuation; retain the original 202-file pin.
 M10_QUALIFIED_GOVERNANCE_CODE_HASH = "ec4d6c13e2c008f2b639303d0967ba2719c93e4e31add0e834740f510e2361c0"
-REVISION_PREDECESSORS = frozenset((S22_CODE_HASH, S23_CODE_HASH, S3_FINITE_CODE_HASH, S4_ARGUMENT_CODE_HASH, M04_DISCOVERY_CODE_HASH, M04_QUALIFIED_CODE_HASH, M07_INTERACTION_CODE_HASH, M08_AFFECT_CODE_HASH, M09_RELATIONSHIP_CODE_HASH, M09_QUALIFIED_CODE_HASH, M10_RETRIEVAL_CODE_HASH, M10_QUALIFIED_RETRIEVAL_CODE_HASH, M10_GOVERNANCE_CODE_HASH, M10_QUALIFIED_GOVERNANCE_CODE_HASH))
+# Exact 214-file main bc17f21 after the reviewed WAL cleanup repair.
+M14_PREDECESSOR_CODE_HASH = "2ddcbbe57f495210a80357825f3ac2ed9f0cca2b6d7bf710574dccb2303afec6"
+REVISION_PREDECESSORS = frozenset((S22_CODE_HASH, S23_CODE_HASH, S3_FINITE_CODE_HASH, S4_ARGUMENT_CODE_HASH, M04_DISCOVERY_CODE_HASH, M04_QUALIFIED_CODE_HASH, M07_INTERACTION_CODE_HASH, M08_AFFECT_CODE_HASH, M09_RELATIONSHIP_CODE_HASH, M09_QUALIFIED_CODE_HASH, M10_RETRIEVAL_CODE_HASH, M10_QUALIFIED_RETRIEVAL_CODE_HASH, M10_GOVERNANCE_CODE_HASH, M10_QUALIFIED_GOVERNANCE_CODE_HASH, M14_PREDECESSOR_CODE_HASH))
 
 
 def _target_schema(schema):
@@ -201,11 +203,11 @@ def _validate_predecessor(db, schema, source_path):
         revision = control.read(db) if governed else control.read_legacy(db)
         bundle = json.loads(revision["versions"])
         expected = {"schema": schema, "rules": RULE_VERSION, "indexes": {"revision": 1}, "code_sha256": bundle.get("code_sha256")}
-        if bundle.get("code_sha256") in (M10_RETRIEVAL_CODE_HASH, M10_QUALIFIED_RETRIEVAL_CODE_HASH, M10_GOVERNANCE_CODE_HASH, M10_QUALIFIED_GOVERNANCE_CODE_HASH):
+        if bundle.get("code_sha256") in (M10_RETRIEVAL_CODE_HASH, M10_QUALIFIED_RETRIEVAL_CODE_HASH, M10_GOVERNANCE_CODE_HASH, M10_QUALIFIED_GOVERNANCE_CODE_HASH, M14_PREDECESSOR_CODE_HASH):
             expected["indexes"] = {"revision": 1, "retrieval": "hcl-evidence-retrieval-1"}
         if governed:
             expected["governance"] = "hcl-memory-governance-1"
-        if (governed != (bundle.get("code_sha256") in (M10_GOVERNANCE_CODE_HASH, M10_QUALIFIED_GOVERNANCE_CODE_HASH))
+        if (governed != (bundle.get("code_sha256") in (M10_GOVERNANCE_CODE_HASH, M10_QUALIFIED_GOVERNANCE_CODE_HASH, M14_PREDECESSOR_CODE_HASH))
                 or revision["mode"] != control.ACTIVE or bundle != expected
                 or bundle.get("code_sha256") not in REVISION_PREDECESSORS
                 or revision["target_path"] != str(source_path)):

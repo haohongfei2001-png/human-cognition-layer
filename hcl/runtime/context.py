@@ -71,6 +71,9 @@ class ContextCompiler:
         elif purpose == "literature_compile":
             from hcl.semantics.literature_compiler import literature_context
             context = literature_context(empty, question)
+        elif purpose == "judgment_compile":
+            from hcl.semantics.judgment_compiler import judgment_context
+            context = judgment_context(empty, question)
         elif purpose == "relationship_compile":
             from hcl.semantics.relationship_compiler import relationship_context
             context = relationship_context(empty, question)
