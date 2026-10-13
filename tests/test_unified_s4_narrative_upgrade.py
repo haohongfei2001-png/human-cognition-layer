@@ -66,6 +66,13 @@ plan=store.plan_source_erasure(session,owner,ids['A'],expected_version=1)
 store.begin_source_erasure(session,owner,ids['A'],expected_version=1,plan_hash=plan['plan_hash'],erasure_id='a'*32)
 receipt=store.resume_source_erasure(session,owner,'a'*32)
 assert receipt['database_scrubbed'],receipt
+# These exact frozen runtimes closed a raw database descriptor during cleanup,
+# invalidating their traditional POSIX locks. Retire that connection before any
+# other process opens the store; do not patch the predecessor bytes or pins.
+path=store.path
+store.close()
+store=StateStore.sqlite(path)
+assert store.source_erasure_receipt(session,owner,'a'*32)==receipt
 b_view=None if schema==3 else codec.dumps(store.legacy_source_view(session,owner,(ids['B'],))).decode()
 assert not pending(store)
 print(json.dumps(dict(path=str(store.path),session=session,ids=ids,requests=requests,bundle=version_bundle(schema=schema),
@@ -83,7 +90,11 @@ for line in sys.stdin:
   if action=='erase-pending':
    p=store.plan_source_erasure(session,owner,'C',expected_version=1)
    store.begin_source_erasure(session,owner,'C',expected_version=1,plan_hash=p['plan_hash'],erasure_id='c'*32)
-  if action=='finish':store.resume_source_erasure(session,owner,'c'*32)
+  if action=='finish':
+   finished=store.resume_source_erasure(session,owner,'c'*32)
+   store.close()
+   store=StateStore.sqlite(path)
+   assert store.source_erasure_receipt(session,owner,'c'*32)==finished
   print(json.dumps({'ok':True}),flush=True)
  except Exception as error:print(json.dumps({'ok':False,'error':type(error).__name__}),flush=True)
 store.close()
@@ -372,6 +383,17 @@ class GovernedNarrativeUpgradeTests(unittest.TestCase):
             self.assertTrue(f.command(process, action="write")["ok"])
             if mode == "erase-pending":
                 self.assertTrue(f.command(process, action="finish")["ok"])
+                # Independently observe the durable receipt before cutover;
+                # never turn an unresolved old cleanup into a permitted upgrade.
+                db = sqlite3.connect(source)
+                try:
+                    receipt = json.loads(db.execute(
+                        "SELECT receipt FROM erasures WHERE erasure_id=?", ("c" * 32,)
+                    ).fetchone()[0])
+                    self.assertTrue(receipt["database_scrubbed"])
+                    self.assertNotIn("DATABASE_SCRUB_PENDING", receipt["limitations"])
+                finally:
+                    db.close()
                 RevisionCutover.upgrade(source, f.root / ("blocked-" + mode), f.owner)
 
     def test_recovery_rejects_rekeyed_unpublished_successor_even_with_valid_control_binding(
