@@ -3455,7 +3455,7 @@
   "current_execution": {
     "started_at_utc": "2026-10-11T20:31:00Z",
     "authority": "Owner explicitly authorized continued implementation, tests, PRs and verified merges under the approved S1–S7 plan.",
-    "base_main": "b6ea0534f64ef6a02b9aac6414c09d0465561bdd",
+    "base_main": "bc17f21d9bd417a2dc319781079d284160109c72",
     "current_stage": "S3 ∥ S4",
     "delivered_slice": "S2.3",
     "readiness": "INTEGRATED_OFFLINE",
@@ -3468,7 +3468,7 @@
     "remaining": "继续完整S3/M03–M09与并行S4/M10–M14；当前有限三机制是增量证据，不关闭阶段。完整S1/S2实模功能、S5–S7及T01–T32研究目标全部保留。",
     "historical_boundary": "旧A–H/G-HC/G-ARCH、实验和closed grants保持原证据等级，不自动继承。",
     "validation": "本切片证明注入候选下的真实离线预算执行、结果消费、修订和恢复；不证明开放语义/任务分解、跨块语义组合、完整性或S1/S2阶段完成。",
-    "active_work": "S3有限M03–M09与S4有限M13已接同一runtime；M10已具实际授权检索、依赖闭包及有界保留/擦除治理。当前M11/M12增量实现持久分段阅读、时序/原文形式及精确假设重排、条件段落比较、结构映射与概念反统一。完整自然语义、文学/审美解释、记忆治理及所有研究退出仍开放。",
+    "active_work": "S3有限M03–M09与S4有限M13已接同一runtime；M10已具实际授权检索、依赖闭包及有界保留/擦除治理。当前M11/M12增量实现持久分段阅读、时序/原文形式及精确假设重排、条件段落比较、结构映射与概念反统一。完整自然语义、文学/审美解释、记忆治理及所有研究退出仍开放。 M14新增有限单步规范与价值判断：共享M03/M05/M07事实、M13联合争议、精确条件期望/未知权重Pareto/联合情景稳健推荐与可重算异议；尚不证明完整伦理能力。",
     "domain_evidence": [
       {
         "stage": "S3",
@@ -3579,6 +3579,18 @@
         "checks": "tests/test_unified_s4_structure_mapping.py; tests/test_unified_s4_concept*.py; tests/test_unified_s4_narrative_analogies.py",
         "witness": "scripts/witness_unified_concepts.py",
         "scope": "Source-qualified finite consistent partial relational mappings, higher-order DAGs, counterexamples and typed anti-unification, with actual condition-bound metrics and resource frontier. No unrestricted analogy/metaphor interpretation, open concept discovery or full M12 acceptance."
+      },
+      {
+        "stage": "S4",
+        "mechanisms": [
+          "M14"
+        ],
+        "readiness": "INTEGRATED_OFFLINE_PARTIAL",
+        "stage_complete": false,
+        "document": "docs/HCL_UNIFIED_S4_JUDGMENT.md",
+        "checks": "tests/test_unified_s4_judgment*.py",
+        "witness": "scripts/witness_unified_judgment.py",
+        "scope": "Source-bound injected conditional normative frameworks; actual shared M03/M05 knowledge/opportunities, M07 commitments and M13 joint disputes feed exact finite single-step permission, Pareto/expected/joint-scenario maximin recommendations and dissent. Full replay/source/assumption certificates, interrupted recovery and exact shipped predecessor migration. No moral truth, authenticated user adoption, open conceptual sensitivity, candidate completeness, multi-step policies, full M14/T17/T18/T19 or full S4 acceptance."
       }
     ]
   }

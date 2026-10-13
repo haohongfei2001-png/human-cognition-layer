@@ -94,7 +94,7 @@ class LocalModelOperator:
                 snapshot, segments, ast["candidate"], allowance
             )
             result = ReadingLogicOperator(self.semantic_profile).run(snapshot, issue, allowance, forest)
-        elif model.dialect in ("mental-scene-1", "argument-model-1", "discovery-model-1", "interaction-model-1", "affect-model-1", "relationship-model-1", "structural-model-1"):
+        elif model.dialect in ("mental-scene-1", "argument-model-1", "discovery-model-1", "interaction-model-1", "affect-model-1", "relationship-model-1", "structural-model-1", "judgment-model-1"):
             from hcl.semantics.model_compiler import LocalModelCompiler
             from hcl.operators.mental_scene import MentalSceneOperator
             from hcl.runtime.context import ContextChunk
@@ -103,7 +103,7 @@ class LocalModelOperator:
                 raise ValueError("source-bound mental model fields required")
             segments = tuple(SourceSegment(**row) for row in ast["segments"])
             sources = tuple(row for row in segments if row.kind == "SOURCE")
-            purpose = {"mental-scene-1":"mental_compile", "argument-model-1":"argument_compile", "discovery-model-1":"discovery_compile", "interaction-model-1":"interaction_compile", "affect-model-1":"affect_compile", "relationship-model-1":"relationship_compile", "structural-model-1":"concept_compile"}[model.dialect]
+            purpose = {"mental-scene-1":"mental_compile", "argument-model-1":"argument_compile", "discovery-model-1":"discovery_compile", "interaction-model-1":"interaction_compile", "affect-model-1":"affect_compile", "relationship-model-1":"relationship_compile", "structural-model-1":"concept_compile", "judgment-model-1":"judgment_compile"}[model.dialect]
             self.context.serialize(snapshot, ast["question"], ContextChunk(purpose, sources, 0, 1))
             if tuple(row for row in segments if row.kind == "QUESTION") != question_segments(
                 ast["question"]
@@ -121,10 +121,12 @@ class LocalModelOperator:
             from hcl.operators.relationship_model import RelationshipModelOperator
             from hcl.semantics.concept_compiler import ConceptCompiler
             from hcl.operators.concepts import ConceptOperator
+            from hcl.semantics.judgment_compiler import JudgmentCompiler
+            from hcl.operators.judgment_model import JudgmentModelOperator
             compiler = {"mental-scene-1":LocalModelCompiler, "argument-model-1":ArgumentCompiler,
-                        "discovery-model-1":DiscoveryCompiler, "interaction-model-1":InteractionCompiler, "affect-model-1":AffectCompiler, "relationship-model-1":RelationshipCompiler, "structural-model-1":ConceptCompiler}[model.dialect]()
+                        "discovery-model-1":DiscoveryCompiler, "interaction-model-1":InteractionCompiler, "affect-model-1":AffectCompiler, "relationship-model-1":RelationshipCompiler, "structural-model-1":ConceptCompiler, "judgment-model-1":JudgmentCompiler}[model.dialect]()
             operator = {"mental-scene-1":MentalSceneOperator, "argument-model-1":ArgumentModelOperator,
-                        "discovery-model-1":DiscoveryModelOperator, "interaction-model-1":InteractionModelOperator, "affect-model-1":AffectModelOperator, "relationship-model-1":RelationshipModelOperator, "structural-model-1":ConceptOperator}[model.dialect]()
+                        "discovery-model-1":DiscoveryModelOperator, "interaction-model-1":InteractionModelOperator, "affect-model-1":AffectModelOperator, "relationship-model-1":RelationshipModelOperator, "structural-model-1":ConceptOperator, "judgment-model-1":JudgmentModelOperator}[model.dialect]()
             program = compiler.compile(snapshot, segments, ast["candidate"], allowance)
             result = (operator.run(snapshot, issue, allowance, program, segments) if model.dialect == "discovery-model-1"
                       else operator.run(snapshot, issue, allowance, program))

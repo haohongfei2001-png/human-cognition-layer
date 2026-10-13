@@ -14,6 +14,8 @@ class AnswerAssembler:
         return self._retrieval_boundary(self._base_claim(result), result)
 
     def _base_claim(self, result: InferenceResult) -> AnswerClaim:
+        if result.kind == "CONDITIONAL_ACTION_JUDGMENT":
+            return self._judgment_claim(result)
         if result.kind == "CONDITIONAL_STRUCTURAL_MAPPINGS":
             return self._concept_claim(result)
         if result.kind == "CONDITIONAL_NARRATIVE_MODEL":
@@ -64,6 +66,78 @@ class AnswerAssembler:
         return AnswerClaim(text, f"claim:{result.result_id}", fields,
                                   result.assumption_environments, result.counterevidence_ids,
                                   "EXACT_MODEL")
+
+    def _judgment_claim(self, result):
+        from hcl.operators.judgment_model import verify_judgment
+        try:
+            verified = verify_judgment(result.values)
+            expected = verified.candidate_delta.new_inferences[0]
+            environments = set(expected.assumption_environments)
+            local = result.values.get("local_model")
+            if local is not None:
+                from hcl.semantics.judgment_compiler import judgment_qualifications
+                from hcl.kernel.execution import PROTOCOL
+                assumptions, residuals = judgment_qualifications(result.values["program"])
+                qualified = dict(model_id="judgment-proposal:" + result.values["program"]["candidate_identity"],
+                    version=PROTOCOL, dialect="judgment-model-1", domain_assumptions=list(assumptions),
+                    fit_residuals=[], unmodeled_observations=list(residuals))
+                if thaw(local) != qualified:
+                    raise ValueError("judgment model qualifications changed")
+                environments.update("local-model:" + local["model_id"] + ":assumption:" + str(i)
+                                    for i in range(len(local["domain_assumptions"])))
+            if (set(result.assumption_environments) != environments
+                    or tuple(result.premise_ids) != expected.premise_ids
+                    or result.counterevidence_ids != expected.counterevidence_ids
+                    or result.rule_version != expected.rule_version
+                    or result.coverage != expected.coverage):
+                raise ValueError("judgment conditions or source identities changed")
+        except (ValueError, TypeError, KeyError, IndexError, RecursionError, StopIteration, ZeroDivisionError, OverflowError):
+            raise HCLFailure("FAILED", "answer", "JUDGMENT_RESULT_MISMATCH", "values",
+                             "The judgment differs from its actual shared facts, argument disputes or joint decisions.") from None
+        lines = ["Conditional single-step action judgment. Principles, value scales and probability scenarios are explicit source-model hypotheses; source-reported adoption is not authenticated user authorization."]
+        for model in result.values["models"]:
+            for fact in model["facts"].values():
+                lines.append("Factor " + fact["fact_id"] + " (" + fact["role"] + "): " + repr(tuple(fact["possible_values"])) + ".")
+            for decision in model["decisions"]:
+                lines.append("Decision " + decision["decision_id"] + " for " + decision["actor"] + " at " + str(decision["at"]) + ": " + decision["status"] + ".")
+                if decision["status"] == "UNCOMPUTED":
+                    lines.append("Its partially explored branches are not a complete recommendation.")
+                    continue
+                lines.append("Stable across all supplied frameworks and retained branches: " + repr(tuple(decision["robust_across_frameworks"])) + ".")
+                for frame in decision["frameworks"]:
+                    lines.append("Framework " + frame["framework_id"] + " (" + frame["origin"]["kind"] + ", " + frame["origin"]["declarer"] + "): " + frame["status"] + "; conditional recommendation=" + repr(tuple(frame["robust_recommended"])) + ".")
+                    for branch in frame["branches"]:
+                        choice = branch["result"]
+                        lines.append(branch["basis"] + ": " + choice["recommendation_basis"] + "; weights=" + choice["weight_status"]
+                                     + "; permitted Pareto options=" + repr(tuple(choice["pareto"])) + "; recommended=" + repr(tuple(choice["recommended"]))
+                                     + "; scenario scores=" + repr(thaw(choice["scenario_scores"])) + "; joint worst scores=" + repr(thaw(choice["worst_scores"])) + ".")
+                        for eligibility in choice["eligibility"]:
+                            if eligibility["status"] != "PERMITTED_IN_DECLARED_FRAMEWORK":
+                                lines.append(eligibility["action_id"] + ": " + eligibility["status"] + "; norms=" + repr(tuple((*eligibility["prohibiting_norms"], *eligibility["unresolved_norms"]))) + ".")
+                        for alternative in choice["alternatives"]:
+                            if alternative["alternative_on_frontier"] or alternative["costs_of_recommendation"]:
+                                lines.append("Against " + alternative["alternative"] + ", costs of " + alternative["recommendation"] + ": " + repr(thaw(alternative["costs_of_recommendation"])) + ".")
+                        if choice["constraint_tradeoffs"]:
+                            lines.append("Foregone gains under hard constraints: " + repr(thaw(choice["constraint_tradeoffs"])) + ".")
+                        if choice["value_change_conditions"]:
+                            lines.append("Value-change conditions: " + repr(thaw(choice["value_change_conditions"])) + ".")
+                    if frame["revision_conditions"]:
+                        lines.append("Reconsider if these fact guards or norm arguments change: "
+                                     + repr(tuple(frame["revision_conditions"]["factual_guards"])) + ", "
+                                     + repr(tuple(q["query_id"] for q in frame["revision_conditions"]["argument_disputes"])) + ".")
+                for responsibility in decision["responsibility"]:
+                    actual = responsibility["actual"]
+                    lines.append("Responsibility argument " + responsibility["query_id"] + ": "
+                                 + ("UNCOMPUTED" if actual is None else responsibility["status"] if responsibility["status"] == "UNRESOLVED_FACT_DEPENDENCY" else "accepted=" + str(actual["positive_accepted"]) + ", opposed=" + str(actual["opposed_accepted"]))
+                                 + "; this is framework-conditional acceptance, not a moral truth or inferred intention.")
+        if result.values["issues"]:
+            lines.append("Unresolved: " + ", ".join(result.values["issues"]) + ".")
+        lines.append("Open semantic extraction, candidate completeness, multi-step policy judgment and full ethical acceptance remain unverified.")
+        names = ("models", "program", "source_versions", "issues", "local_evaluations", "semantic_certified", "candidate_completeness", "scope")
+        return AnswerClaim(" ".join(lines), "claim:" + result.result_id,
+                           tuple(ResultField(result.result_id, name, result.values[name]) for name in names),
+                           result.assumption_environments, result.counterevidence_ids,
+                           "CONDITIONAL_ACTION_JUDGMENT_NOT_MORAL_TRUTH")
 
     def _concept_claim(self, result):
         from hcl.operators.concepts import verify_concepts
@@ -895,7 +969,7 @@ class AnswerAssembler:
             (
                 "MODEL_INTERPRETATIONS_UNVERIFIED"
                 if any(
-                    result.kind in ("CONDITIONAL_FOL", "CONDITIONAL_REVISION", "CONDITIONAL_COGNITIVE_MODEL", "CONDITIONAL_ARGUMENT_ACCEPTANCE", "CONDITIONAL_MECHANISM_DISCOVERY") for result in accepted_results
+                    result.kind in ("CONDITIONAL_FOL", "CONDITIONAL_REVISION", "CONDITIONAL_COGNITIVE_MODEL", "CONDITIONAL_ARGUMENT_ACCEPTANCE", "CONDITIONAL_MECHANISM_DISCOVERY", "CONDITIONAL_ACTION_JUDGMENT") for result in accepted_results
                 )
                 else "EXPLICIT_FORMAL_INPUT_ONLY"
             ),
@@ -943,7 +1017,17 @@ class AnswerAssembler:
         checked = self._claim(result)
         projections = []
         value = result.values
-        if result.kind == "CONDITIONAL_NARRATIVE_MODEL":
+        if result.kind == "CONDITIONAL_ACTION_JUDGMENT":
+            text = checked.text
+            for i, model in enumerate(value["models"]):
+                projections.append(ProjectedResultField(result.result_id, "models", model["decisions"], (str(i), "decisions")))
+                for key, fact in model["facts"].items():
+                    selection = ("fact_id", "kind", "role", "reference", "possible_values", "status", "result_id", "scope")
+                    from hcl.kernel.types import freeze
+                    projections.append(ProjectedResultField(result.result_id, "models", freeze({k: fact[k] for k in selection}),
+                                                            (str(i), "facts", key), selection))
+            names = ("source_versions", "issues", "local_evaluations", "semantic_certified", "candidate_completeness", "scope")
+        elif result.kind == "CONDITIONAL_NARRATIVE_MODEL":
             text = checked.text
             names = tuple(field.field for field in checked.used_result_fields if field.field not in ("comparisons","analogies"))
             for i, record in enumerate(value["comparisons"]):
