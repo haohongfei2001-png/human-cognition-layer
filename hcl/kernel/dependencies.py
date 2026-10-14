@@ -8,6 +8,7 @@ import re
 from hcl.kernel.scope import identifier, version_map
 from hcl.kernel.types import Delta, Snapshot, Issue, freeze, thaw
 from hcl.kernel.retrieval import RetrievalDependency, RetrievalQuery
+from hcl.kernel.concept_registry import ConceptDependency, ConceptQuery
 
 INDEX_VERSION = 1
 INDEX_KIND = "revision.source_index"
@@ -117,6 +118,9 @@ def query_index_versions(queries):
     if any(type(query) is RetrievalDependency for query in queries):
         from hcl.kernel.retrieval import RETRIEVAL_VERSION
         versions["retrieval"] = RETRIEVAL_VERSION
+    if any(type(query) is ConceptDependency for query in queries):
+        from hcl.kernel.concept_registry import VERSION
+        versions["concepts"] = VERSION
     return versions
 
 
@@ -125,7 +129,7 @@ def pack_dependencies(positive, queries=()):
     queries = tuple(queries)
     if not queries:
         return positive  # Preserve old task/request/object bytes and exact maps.
-    if len(queries) > 64 or any(type(item) not in (QueryDependency, RetrievalDependency) for item in queries):
+    if len(queries) > 64 or any(type(item) not in (QueryDependency, RetrievalDependency, ConceptDependency) for item in queries):
         raise ValueError("bounded typed query dependencies required")
     return {"schema": DEPENDENCY_SCHEMA, "positive": positive, "queries": [item.wire() for item in queries]}
 
@@ -142,6 +146,12 @@ def unpack_dependencies(value):
         raise ValueError("bounded query dependencies required")
     queries = []
     for item in value["queries"]:
+        if isinstance(item, Mapping) and set(item) == {"concept_query", "digest", "index_version"}:
+            wire = item["concept_query"]
+            if not isinstance(wire, Mapping) or set(wire) != {"mode", "key", "at"}:
+                raise ValueError("unknown concept query fields")
+            queries.append(ConceptDependency(ConceptQuery(**wire), item["digest"], item["index_version"]))
+            continue
         if isinstance(item, Mapping) and set(item) == {"retrieval_query", "digest", "index_version"}:
             wire = item["retrieval_query"]
             if not isinstance(wire, Mapping) or set(wire) != {"queries", "source_scope", "seed_nodes", "evidence_result_ids", "max_hits_per_route", "max_nodes", "max_characters", "version"}:

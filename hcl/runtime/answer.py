@@ -14,6 +14,12 @@ class AnswerAssembler:
         return self._retrieval_boundary(self._base_claim(result), result)
 
     def _base_claim(self, result: InferenceResult) -> AnswerClaim:
+        if result.kind == "CONCEPT_ADOPTION":
+            from hcl.runtime.persistent_concept_answer import adoption_claim
+            return adoption_claim(result)
+        if result.kind == "CONDITIONAL_PERSISTENT_CONCEPT_JUDGMENT":
+            from hcl.runtime.persistent_concept_answer import persistent_claim
+            return persistent_claim(result)
         if result.kind == "CONDITIONAL_CONCEPT_JUDGMENT":
             from hcl.runtime.concept_answer import concept_judgment_claim
             return concept_judgment_claim(result)
@@ -1020,7 +1026,14 @@ class AnswerAssembler:
         checked = self._claim(result)
         projections = []
         value = result.values
-        if result.kind == "CONDITIONAL_CONCEPT_JUDGMENT":
+        if result.kind == "CONDITIONAL_PERSISTENT_CONCEPT_JUDGMENT":
+            text = checked.text
+            names = ("robust_recommended", "complete", "source_versions", "issues", "local_evaluations")
+            for i, branch in enumerate(value["branches"]):
+                for name in ("selections", "classifications", "decision_projection", "complete"):
+                    projections.append(ProjectedResultField(result.result_id, "branches", branch[name], (str(i), name)))
+            projections.append(ProjectedResultField(result.result_id, "concepts", value["concepts"]["definitions"], ("definitions",)))
+        elif result.kind == "CONDITIONAL_CONCEPT_JUDGMENT":
             text = checked.text
             names = ("robust_recommended", "sensitivity", "complete", "source_versions", "issues", "local_evaluations", "semantic_certified", "scope")
             projections.append(ProjectedResultField(result.result_id, "concepts", value["concepts"]["definitions"], ("definitions",)))

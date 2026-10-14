@@ -114,6 +114,11 @@ class JudgmentModelOperator:
         verify_program_bindings(program, snapshot, allowance)
         if dict(program["source_versions"]) != dict(snapshot.source_versions):
             raise ValueError("judgment sources differ from immutable snapshot")
+        if concept_context is not None and "fixed_models" in concept_context:
+            if (codec.canonical(thaw(concept_context["fixed_program"])) != codec.canonical(thaw(program))
+                    or dict(concept_context["fixed_sources"]) != dict(snapshot.source_versions)
+                    or concept_context["fixed_rule"] != snapshot.rule_version):
+                raise ValueError("reused judgment computations have different fixed inputs or bindings")
         work = JudgmentWork(allowance.max_local_evaluations)
         outputs, issues = [], []
         environments = set()
@@ -125,100 +130,118 @@ class JudgmentModelOperator:
             mental = model["mental"]
             interaction = dict(model["interaction"], mental=mental)
             plans = {p["id"]: p for p in mental["plans"]}
-            cache = None if concept_context is None else concept_context["shared_upstream"]
-            reused = cache is not None and model_index in cache
-            if reused:
-                bundle, op07 = cache[model_index]
+            fixed = None if concept_context is None else concept_context.get("fixed_models", {}).get(model_index)
+            if fixed is None:
+                cache = None if concept_context is None else concept_context["shared_upstream"]
+                reused = cache is not None and model_index in cache
+                if reused:
+                    bundle, op07 = cache[model_index]
+                else:
+                    bundle = compute_shared_cognition(snapshot, issue, remaining(), interaction,
+                                                       tuple(sorted({p["at"] for p in plans.values()})))
+                    work.spend(bundle.operation.resource_usage["local_evaluations"])
+                    op07 = InteractionModelOperator()._run(snapshot, issue, remaining(), dict(models=[interaction]),
+                        shared_cognition={(mental["source_id"], mental["id"]): bundle})
+                    work.spend(op07.resource_usage["local_evaluations"])
+                    if cache is not None:
+                        cache[model_index] = (bundle, op07)
+                actual_cognition = record(bundle.operation)
+                environments.update(actual_cognition["assumption_environments"])
+                actual07 = record(op07)
+                environments.update(actual07["assumption_environments"])
+                out = dict(model_id=mental["id"], source_id=mental["source_id"],
+                           cognition=cognitive_record(bundle), actual_interaction=actual07,
+                           opportunities={}, facts={}, argument_input=None, actual_argument=None, argument_dependency_gaps={},
+                           fact_bindings=[], decisions=[], frontier=[])
+                outputs.append(out)
+                issues.extend((*bundle.operation.issues, *op07.issues))
             else:
-                bundle = compute_shared_cognition(snapshot, issue, remaining(), interaction,
-                                                   tuple(sorted({p["at"] for p in plans.values()})))
-                work.spend(bundle.operation.resource_usage["local_evaluations"])
-                op07 = InteractionModelOperator()._run(snapshot, issue, remaining(), dict(models=[interaction]),
-                    shared_cognition={(mental["source_id"], mental["id"]): bundle})
-                work.spend(op07.resource_usage["local_evaluations"])
-                if cache is not None:
-                    cache[model_index] = (bundle, op07)
-            actual_cognition = record(bundle.operation)
-            environments.update(actual_cognition["assumption_environments"])
-            actual07 = record(op07)
-            environments.update(actual07["assumption_environments"])
-            out = dict(model_id=mental["id"], source_id=mental["source_id"],
-                       cognition=cognitive_record(bundle), actual_interaction=actual07,
-                       opportunities={}, facts={}, argument_input=None, actual_argument=None, argument_dependency_gaps={},
-                       fact_bindings=[], decisions=[], frontier=[])
-            outputs.append(out)
-            issues.extend((*bundle.operation.issues, *op07.issues))
-            cognitive = actual_cognition["values"]["models"][0]
-            timeline, envs = bundle.trace.get(mental["id"], ({}, {}))
-            beliefs = {q["query_id"]: q for q in cognitive["beliefs"]}
+                # Only the persistent wrapper supplies this internal context,
+                # after binding the exact original model and evidence proof.
+                actual_cognition = deepcopy(fixed["cognition"]["actual"])
+                actual07 = deepcopy(fixed["actual_interaction"])
+                environments.update(actual_cognition["assumption_environments"])
+                environments.update(actual07["assumption_environments"])
+                out = dict(model_id=mental["id"], source_id=mental["source_id"],
+                    cognition=deepcopy(fixed["cognition"]), actual_interaction=actual07,
+                    opportunities=deepcopy(fixed["opportunities"]),
+                    facts={f["id"]: deepcopy(fixed["facts"][f["id"]]) for f in model["facts"]},
+                    argument_input=None, actual_argument=None, argument_dependency_gaps={},
+                    fact_bindings=[], decisions=[], frontier=[])
+                outputs.append(out)
+                issues.extend((*actual_cognition["issues"], *actual07["issues"]))
             try:
-                for plan in plans.values():
-                    state = timeline.get(plan["at"])
-                    if state is None:
-                        out["opportunities"][plan["id"]] = dict(status="UNRESOLVED", actual={}, subjective={}, state_results={})
-                        continue
-                    work.spend(2)
-                    actual = map_view(remaining_states(state, (), EpistemicLimits(max_depth=16)), plan)
-                    subjective = map_view(remaining_states(state, (plan["actor"],), EpistemicLimits(max_depth=16)), plan)
-                    value = dict(status="MAPPED" if actual["status"] == subjective["status"] == "MAPPED" else "UNRESOLVED",
-                                 actual=actual, subjective=subjective, state_results={},
-                                 actor=plan["actor"], at=plan["at"], cognitive_result_id=actual_cognition["result_id"],
-                                 actual_plan=next((p for p in cognitive["plans"] if p["plan_id"] == plan["id"]), None),
-                                 assumption_environments=envs[plan["at"]])
-                    out["opportunities"][plan["id"]] = value
-                    if value["status"] != "MAPPED":
-                        continue
-                    for selected in sorted(set(actual["states"]) | set(subjective["states"])):
-                        if work.used >= work.limit:
-                            raise OverflowError("JUDGMENT_WORK_FRONTIER")
-                        computed = solve_action_values(planning_model(plan["graph"]), {selected: "1"}, 1,
-                            actual_state=selected, max_expansions=max(1, work.limit - work.used))
-                        work.spend(computed["expansions"])
-                        value["state_results"][selected] = computed
-                        if computed["frontier"]:
-                            value["status"] = "UNRESOLVED"
-                for fact in model["facts"]:
-                    work.spend()
-                    ref = fact["reference"]
-                    row = dict(fact_id=fact["id"], role=fact["role"], kind=fact["kind"], reference=ref,
-                               possible_values=[False, True], status="UNRESOLVED", actual=None,
-                               result_id=actual_cognition["result_id"],
-                               scope="CONDITIONAL_COMPUTATION_NOT_WORLD_OR_PRIVATE_TRUTH")
-                    out["facts"][fact["id"]] = row
-                    if fact["kind"] == "MENTAL_QUERY":
-                        value = beliefs.get(ref["query_id"])
-                        row["actual"] = value
-                        if value is not None and value["status"] != "FRONTIER_UNEXPLORED":
-                            row["possible_values"] = list(value["possible_values"])
-                            if fact["role"] == "KNOWLEDGE":
-                                formula = value["formula"]
-                                if not isinstance(formula, dict) or formula.get("op") != "believes":
-                                    raise ValueError("knowledge must reference an explicit belief query")
-                                # A believed proposition need not be true. Retain
-                                # actual truth and belief as independent outputs.
-                                work.spend()
-                                joint = query_belief(timeline[value["at"]], dict(op="and", args=[formula["arg"], formula]), EpistemicLimits(max_depth=16))
-                                row["knowledge_truth_and_belief"] = joint
-                                row["possible_values"] = list(joint["possible_values"])
-                    elif fact["kind"] == "OPPORTUNITY":
-                        opportunity = out["opportunities"][ref["plan_id"]]
-                        row["actual"] = opportunity
-                        if opportunity["status"] == "MAPPED":
-                            states = opportunity["actual" if ref["view"] == "WORLD" else "subjective"]["states"]
-                            values = {opportunity["state_results"][s]["world_feasibility"][ref["action_id"]] for s in states}
-                            if values:
-                                row["possible_values"] = sorted(values)
-                    elif fact["kind"] == "COMMITMENT":
-                        proof = commitment_condition(ref, actual07["values"]["models"][0], actual07["result_id"], work.limit - work.used)
-                        work.spend(proof["work"])
-                        row.update(actual=proof, possible_values=list(proof["possible_values"]), result_id=actual07["result_id"])
-                    else:
-                        value = next((c for c in cognitive["causal"] if c["query_id"] == ref["query_id"]), None)
-                        row["actual"] = value
-                        if value is not None and not value["frontier"] and value["possible_values"]:
-                            row["possible_values"] = sorted({v == ref["expected"] for v in value["possible_values"]})
-                    if len(row["possible_values"]) == 1:
-                        row["status"] = "DETERMINATE_IN_MODEL"
+                if fixed is None:
+                    cognitive = actual_cognition["values"]["models"][0]
+                    timeline, envs = bundle.trace.get(mental["id"], ({}, {}))
+                    beliefs = {q["query_id"]: q for q in cognitive["beliefs"]}
+                    for plan in plans.values():
+                        state = timeline.get(plan["at"])
+                        if state is None:
+                            out["opportunities"][plan["id"]] = dict(status="UNRESOLVED", actual={}, subjective={}, state_results={})
+                            continue
+                        work.spend(2)
+                        actual = map_view(remaining_states(state, (), EpistemicLimits(max_depth=16)), plan)
+                        subjective = map_view(remaining_states(state, (plan["actor"],), EpistemicLimits(max_depth=16)), plan)
+                        value = dict(status="MAPPED" if actual["status"] == subjective["status"] == "MAPPED" else "UNRESOLVED",
+                                     actual=actual, subjective=subjective, state_results={},
+                                     actor=plan["actor"], at=plan["at"], cognitive_result_id=actual_cognition["result_id"],
+                                     actual_plan=next((p for p in cognitive["plans"] if p["plan_id"] == plan["id"]), None),
+                                     assumption_environments=envs[plan["at"]])
+                        out["opportunities"][plan["id"]] = value
+                        if value["status"] != "MAPPED":
+                            continue
+                        for selected in sorted(set(actual["states"]) | set(subjective["states"])):
+                            if work.used >= work.limit:
+                                raise OverflowError("JUDGMENT_WORK_FRONTIER")
+                            computed = solve_action_values(planning_model(plan["graph"]), {selected: "1"}, 1,
+                                actual_state=selected, max_expansions=max(1, work.limit - work.used))
+                            work.spend(computed["expansions"])
+                            value["state_results"][selected] = computed
+                            if computed["frontier"]:
+                                value["status"] = "UNRESOLVED"
+                    for fact in model["facts"]:
+                        work.spend()
+                        ref = fact["reference"]
+                        row = dict(fact_id=fact["id"], role=fact["role"], kind=fact["kind"], reference=ref,
+                                   possible_values=[False, True], status="UNRESOLVED", actual=None,
+                                   result_id=actual_cognition["result_id"],
+                                   scope="CONDITIONAL_COMPUTATION_NOT_WORLD_OR_PRIVATE_TRUTH")
+                        out["facts"][fact["id"]] = row
+                        if fact["kind"] == "MENTAL_QUERY":
+                            value = beliefs.get(ref["query_id"])
+                            row["actual"] = value
+                            if value is not None and value["status"] != "FRONTIER_UNEXPLORED":
+                                row["possible_values"] = list(value["possible_values"])
+                                if fact["role"] == "KNOWLEDGE":
+                                    formula = value["formula"]
+                                    if not isinstance(formula, dict) or formula.get("op") != "believes":
+                                        raise ValueError("knowledge must reference an explicit belief query")
+                                    # A believed proposition need not be true. Retain
+                                    # actual truth and belief as independent outputs.
+                                    work.spend()
+                                    joint = query_belief(timeline[value["at"]], dict(op="and", args=[formula["arg"], formula]), EpistemicLimits(max_depth=16))
+                                    row["knowledge_truth_and_belief"] = joint
+                                    row["possible_values"] = list(joint["possible_values"])
+                        elif fact["kind"] == "OPPORTUNITY":
+                            opportunity = out["opportunities"][ref["plan_id"]]
+                            row["actual"] = opportunity
+                            if opportunity["status"] == "MAPPED":
+                                states = opportunity["actual" if ref["view"] == "WORLD" else "subjective"]["states"]
+                                values = {opportunity["state_results"][s]["world_feasibility"][ref["action_id"]] for s in states}
+                                if values:
+                                    row["possible_values"] = sorted(values)
+                        elif fact["kind"] == "COMMITMENT":
+                            proof = commitment_condition(ref, actual07["values"]["models"][0], actual07["result_id"], work.limit - work.used)
+                            work.spend(proof["work"])
+                            row.update(actual=proof, possible_values=list(proof["possible_values"]), result_id=actual07["result_id"])
+                        else:
+                            value = next((c for c in cognitive["causal"] if c["query_id"] == ref["query_id"]), None)
+                            row["actual"] = value
+                            if value is not None and not value["frontier"] and value["possible_values"]:
+                                row["possible_values"] = sorted({v == ref["expected"] for v in value["possible_values"]})
+                        if len(row["possible_values"]) == 1:
+                            row["status"] = "DETERMINATE_IN_MODEL"
                 argument = deepcopy(model["argument"])
                 all_bindings = list(model["fact_bindings"])
                 if concept_context is not None:

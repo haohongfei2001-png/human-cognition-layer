@@ -180,11 +180,21 @@ class S23RuntimeUpgradeTests(previous.RuntimeUpgradeTests):
                     name: [f.name for f in fields(cls)]
                     for name, cls in codec.CLASSES.items()
                 }
-                # M10 adds four disjoint tagged contracts; it must not change
-                # any historical class/field or silently allow arbitrary growth.
+                # Additive M10 and explicit persistent-concept contracts must
+                # not change any historical class/field or permit unlisted tags.
+                concept_shapes = {
+                    "ConceptBinding": ["choice_id", "stream_id"],
+                    "ConceptAdoptionIssue": ["issue_id", "kind", "source_id", "stream_id",
+                                             "support_result_ids", "version_labels", "expected_head"],
+                    "ConceptFollowIssue": ["issue_id", "kind", "source_id", "base_result_id", "bindings"],
+                    "ConceptQuery": ["mode", "key", "at"],
+                    "ConceptDependency": ["query", "digest", "index_version"],
+                }
                 self.assertEqual(set(current_shapes) - set(old["shapes"]), {
                     "RetrievalQuery", "RetrievalDependency", "RetrievalIssue", "EvidenceNode",
+                    *concept_shapes,
                 })
+                self.assertEqual({name: current_shapes[name] for name in concept_shapes}, concept_shapes)
                 self.assertEqual(old["shapes"], {
                     name: current_shapes[name] for name in old["shapes"]
                 })

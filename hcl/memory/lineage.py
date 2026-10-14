@@ -34,7 +34,10 @@ def projection_bindings(session_id, projection):
     """
     from hcl.kernel.retrieval import RETRIEVAL_VERSION
     result = set()
-    if projection.get("schema") == RETRIEVAL_VERSION:
+    from hcl.kernel.concept_registry import VERSION as CONCEPT_VERSION
+    if projection.get("schema") == CONCEPT_VERSION:
+        result.update(binding(session_id, source, version) for source, version in projection["source_versions"].items())
+    elif projection.get("schema") == RETRIEVAL_VERSION:
         for source_id, row in projection["search_scope"].items():
             result.add(binding(session_id, source_id, row["version"]))
     else:
@@ -78,6 +81,8 @@ def retained_bindings(value, *, session_id, origin_refs=None):
                 for row in item.historical_sources.values():
                     result.add(binding(session, row["source_id"], row["source_version"]))
                 for view in item.query_views.values():
+                    if origin_refs is not None:
+                        origin_refs.update((session, identity) for identity in view.get("origin_result_ids", ()))
                     result.update(projection_bindings(session, view))
         elif isinstance(item, Delta):
             session = item.session_id
@@ -85,6 +90,14 @@ def retained_bindings(value, *, session_id, origin_refs=None):
             if origin_refs is not None:
                 origin_refs.update((session, result_id) for dependency in getattr(item, "query_dependencies", ())
                                    for result_id in getattr(dependency.query, "evidence_result_ids", ()))
+        elif type(item).__name__ == "ConceptAdoptionIssue":
+            from hcl.kernel.concept_registry import ConceptAdoptionIssue
+            if type(item) is ConceptAdoptionIssue and origin_refs is not None:
+                origin_refs.update((session, identity) for identity in item.support_result_ids)
+        elif type(item).__name__ == "ConceptFollowIssue":
+            from hcl.kernel.concept_registry import ConceptFollowIssue
+            if type(item) is ConceptFollowIssue and origin_refs is not None:
+                origin_refs.add((session, item.base_result_id))
         elif type(item) is TaskRequest:
             session = item.session_id
             result.update(binding(session, handle.source_id, handle.version) for handle in item.source_handles)
