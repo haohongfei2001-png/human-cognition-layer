@@ -24,6 +24,8 @@ def judgment_context(snapshot, question):
 
     return dict(schema="hcl-judgment-context-1", candidate_schema=SCHEMA,
                 purpose="PROPOSE_CONDITIONAL_SINGLE_STEP_NORMATIVE_MODELS_NOT_PERMISSIONS_SCORES_OR_WINNERS",
+                concept_candidate_schema="hcl-judgment-candidates-2",
+                concept_contract="v2 adds concepts(versions,cases,uses,choices,constraints,unmodeled_segments), and model concept_bindings(premise_id,use_id,expected,segment_ids). Directional criteria use actual typed positive/negative/boundary examples. Version selectors are PINNED or shared CHOICE. Never supply namespace, hashes or classification results.",
                 model_fields=MODEL_FIELDS.split(), decision_fields=DECISION_FIELDS.split(),
                 framework_fields=FRAMEWORK_FIELDS.split(),
                 instructions=(
@@ -55,6 +57,12 @@ class JudgmentCompiler(LocalModelCompiler):
 
     def compile(self, snapshot, segments, raw_candidate, allowance):
         try:
+            if type(raw_candidate) is not str or len(raw_candidate.encode()) > min(allowance.max_output_bytes, 1048576):
+                raise self._limit("candidate_bytes")
+            header = json.loads(raw_candidate) if type(raw_candidate) is str else None
+            if type(header) is dict and header.get("schema") == "hcl-judgment-candidates-2":
+                from hcl.semantics.judgment_concept_compiler import ConceptJudgmentCompiler
+                return ConceptJudgmentCompiler().compile(snapshot, segments, raw_candidate, allowance)
             return self._compile_judgment(snapshot, segments, raw_candidate, allowance)
         except (ValueError, TypeError, KeyError, IndexError, RecursionError, OverflowError, ZeroDivisionError):
             raise self._invalid() from None
@@ -260,6 +268,9 @@ class JudgmentCompiler(LocalModelCompiler):
 
 
 def judgment_qualifications(program):
+    if program.get("schema") == "hcl-judgment-candidates-2":
+        from hcl.semantics.judgment_concept_compiler import concept_judgment_qualifications
+        return concept_judgment_qualifications(program)
     assumptions = tuple(sorted({a for model in program["models"] for a in (
         *model["mental"]["active_assumptions"], *model["argument"]["active_assumptions"],
         *(a for d in model["decisions"] for f in d["frameworks"] for a in f["active_assumptions"]))}))

@@ -189,3 +189,31 @@ def generalize_examples(positive, negative, *, max_work=100000):
             "UNSEEN_AND_OPEN_WORLD_CASES_NOT_CERTIFIED",
         ),
     )
+
+
+def match_independent_case(pattern, term, charge):
+    """Match an already computed pattern against a new complete ground case.
+
+    None represents missing case information, never a negative match. Each visit
+    uses the caller's shared budget; repeated generated variables stay correlated.
+    """
+    if term is None or pattern is None:
+        return dict(status="UNKNOWN", substitution={})
+    validate_term(pattern, variables=True)
+    validate_term(term)
+    bindings = {}
+
+    def visit(p, t):
+        charge()
+        if p["sort"] != t["sort"]:
+            return False
+        if p["kind"] == "VARIABLE":
+            if p["id"] in bindings:
+                return bindings[p["id"]] == t
+            bindings[p["id"]] = t
+            return True
+        return (p["symbol"] == t["symbol"] and len(p["arguments"]) == len(t["arguments"])
+                and all(visit(a, b) for a, b in zip(p["arguments"], t["arguments"])))
+
+    matched = visit(pattern, term)
+    return dict(status="MATCH" if matched else "NO_MATCH", substitution=bindings if matched else {})

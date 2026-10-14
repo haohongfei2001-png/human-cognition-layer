@@ -19,17 +19,18 @@ KIND = "CONDITIONAL_ARGUMENT_ACCEPTANCE"
 
 
 class ArgumentModelOperator:
-    def run(self, snapshot, issue, allowance, program):
-        used = 0
+    def run(self, snapshot, issue, allowance, program, *, meter_work=False):
+        used, batches = 0, 0
         issues = []
         models = []
 
         def batch():
-            nonlocal used
+            nonlocal used, batches
             if used >= allowance.max_local_evaluations:
                 issues.append("ARGUMENT_BATCH_FRONTIER")
                 return False
             used += 1
+            batches += 1
             return True
 
         for proposal in program["models"]:
@@ -76,7 +77,10 @@ class ArgumentModelOperator:
                 model["frontier"].append("ARGUMENT_BATCH_FRONTIER")
                 continue
             theory, literals = argument_theory(proposal)
-            computed = evaluate_arguments(theory, max_arguments=256, max_work=100000)
+            computed = evaluate_arguments(theory, max_arguments=256,
+                max_work=min(100000, allowance.max_local_evaluations - used + 1) if meter_work else 100000)
+            if meter_work:
+                used += computed["work"] - 1
             model.update(
                 arguments=[
                     dict(
@@ -156,7 +160,8 @@ class ArgumentModelOperator:
                         )
                     elif batch():
                         result["preferred"] = preferred_extensions(
-                            computed["arguments"], computed["defeats"], max_work=100000
+                            computed["arguments"], computed["defeats"],
+                            max_work=min(100000, allowance.max_local_evaluations - used + 1) if meter_work else 100000
                         )
                     else:
                         result["preferred"] = dict(
@@ -164,6 +169,8 @@ class ArgumentModelOperator:
                             preferred=(),
                             frontier=("ARGUMENT_BATCH_FRONTIER",),
                         )
+                    if meter_work and "work" in result["preferred"]:
+                        used += result["preferred"]["work"] - 1
                     model["frontier"].extend(result["preferred"]["frontier"])
                 if query["critical_candidates"]:
                     if batch():
@@ -171,7 +178,7 @@ class ArgumentModelOperator:
                             theory,
                             literal,
                             query["critical_candidates"],
-                            max_work=100000,
+                            max_work=min(100000, allowance.max_local_evaluations - used + 1) if meter_work else 100000,
                         )
                     else:
                         result["critical"] = dict(
@@ -179,6 +186,8 @@ class ArgumentModelOperator:
                             edits=(),
                             minimum_cardinality=None,
                         )
+                    if meter_work and "work" in result["critical"]:
+                        used += result["critical"]["work"] - 1
                     if result["critical"]["status"] == "FRONTIER_UNEXPLORED":
                         model["frontier"].append("CRITICAL_EDIT_FRONTIER")
             issues.extend(model["frontier"])
@@ -187,12 +196,14 @@ class ArgumentModelOperator:
         values = dict(
             operator_version=VERSION,
             models=models,
-            batch_evaluations=used,
+            batch_evaluations=batches if meter_work else used,
             semantic_certified=False,
             candidate_completeness="NOT_ESTABLISHED",
             source_versions=dict(snapshot.source_versions),
             scope="DECLARED_ARGUMENT_THEORY_ACCEPTANCE_NOT_PREMISE_OR_PHILOSOPHICAL_TRUTH",
         )
+        if meter_work:
+            values.update(operator_version="s4-structured-arguments-metered-2", accounting="ACTUAL_SOLVER_WORK_UNITS", local_evaluations=used)
         inference = InferenceResult(
             "argument-result:"
             + sha256(
@@ -210,7 +221,7 @@ class ArgumentModelOperator:
         )
         return OpResult(
             "argument_model.execute",
-            VERSION,
+            values["operator_version"],
             snapshot.source_versions,
             ("append_inference",),
             (inference.result_id,),

@@ -109,7 +109,7 @@ class JudgmentModelOperator:
             raise HCLFailure("INVALID_REQUEST", "judgment", "INVALID_JUDGMENT_MODEL", "model",
                              "The conditional judgment is outside its finite executable contract.") from None
 
-    def _run(self, snapshot, issue, allowance, program):
+    def _run(self, snapshot, issue, allowance, program, *, concept_context=None):
         from hcl.semantics.judgment_compiler import verify_program_bindings
         verify_program_bindings(program, snapshot, allowance)
         if dict(program["source_versions"]) != dict(snapshot.source_versions):
@@ -121,18 +121,25 @@ class JudgmentModelOperator:
         def remaining():
             return replace(allowance, max_local_evaluations=work.limit - work.used)
 
-        for model in program["models"]:
+        for model_index, model in enumerate(program["models"]):
             mental = model["mental"]
             interaction = dict(model["interaction"], mental=mental)
             plans = {p["id"]: p for p in mental["plans"]}
-            bundle = compute_shared_cognition(snapshot, issue, remaining(), interaction,
-                                               tuple(sorted({p["at"] for p in plans.values()})))
-            work.spend(bundle.operation.resource_usage["local_evaluations"])
+            cache = None if concept_context is None else concept_context["shared_upstream"]
+            reused = cache is not None and model_index in cache
+            if reused:
+                bundle, op07 = cache[model_index]
+            else:
+                bundle = compute_shared_cognition(snapshot, issue, remaining(), interaction,
+                                                   tuple(sorted({p["at"] for p in plans.values()})))
+                work.spend(bundle.operation.resource_usage["local_evaluations"])
+                op07 = InteractionModelOperator()._run(snapshot, issue, remaining(), dict(models=[interaction]),
+                    shared_cognition={(mental["source_id"], mental["id"]): bundle})
+                work.spend(op07.resource_usage["local_evaluations"])
+                if cache is not None:
+                    cache[model_index] = (bundle, op07)
             actual_cognition = record(bundle.operation)
             environments.update(actual_cognition["assumption_environments"])
-            op07 = InteractionModelOperator()._run(snapshot, issue, remaining(), dict(models=[interaction]),
-                shared_cognition={(mental["source_id"], mental["id"]): bundle})
-            work.spend(op07.resource_usage["local_evaluations"])
             actual07 = record(op07)
             environments.update(actual07["assumption_environments"])
             out = dict(model_id=mental["id"], source_id=mental["source_id"],
@@ -213,8 +220,14 @@ class JudgmentModelOperator:
                     if len(row["possible_values"]) == 1:
                         row["status"] = "DETERMINATE_IN_MODEL"
                 argument = deepcopy(model["argument"])
+                all_bindings = list(model["fact_bindings"])
+                if concept_context is not None:
+                    from hcl.operators.concept_judgment import bind_classifications
+                    out["source_versions"] = dict(snapshot.source_versions)
+                    all_bindings.extend(bind_classifications(model, concept_context["bindings"][model_index],
+                        concept_context["classifications"], out, argument, actual07, work))
                 premise_map = {p["id"]: p for p in argument["premises"]}
-                for binding in model["fact_bindings"]:
+                for binding in all_bindings:
                     guard = "judgment-fact:" + sha256(codec.dumps([mental["source_id"], mental["id"], binding])).hexdigest()
                     if any(guard in p["assumptions"] for p in argument["premises"]) or guard in argument["active_assumptions"]:
                         raise ValueError("computed fact guard identity collision")
@@ -230,8 +243,8 @@ class JudgmentModelOperator:
                     if q["id"] in norm_queries:
                         q["preferred"] = True
                 out["argument_input"] = argument
-                out["argument_dependency_gaps"] = unresolved_argument_dependencies(argument, model["fact_bindings"], out["facts"])
-                op13 = ArgumentModelOperator().run(snapshot, issue, remaining(), dict(models=[argument]))
+                out["argument_dependency_gaps"] = unresolved_argument_dependencies(argument, all_bindings, out["facts"])
+                op13 = ArgumentModelOperator().run(snapshot, issue, remaining(), dict(models=[argument]), meter_work=concept_context is not None)
                 work.spend(op13.resource_usage["local_evaluations"])
                 actual13 = record(op13)
                 out["actual_argument"] = actual13
@@ -310,7 +323,7 @@ class JudgmentModelOperator:
                         decision["robust_across_frameworks"] = []
             issues.extend(out["frontier"])
             issues.extend(f for d in out["decisions"] for f in d["frontier"])
-        values = dict(operator_version=VERSION, issue_id=issue.issue_id,
+        values = dict(operator_version=VERSION if concept_context is None else "s4-concept-branch-judgment-2", issue_id=issue.issue_id,
                       rule_version=snapshot.rule_version, source_versions=dict(snapshot.source_versions),
                       program=program, models=outputs, execution_allowance=work.limit,
                       local_evaluations=work.used, issues=sorted(set(issues)),

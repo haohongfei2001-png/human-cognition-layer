@@ -14,6 +14,9 @@ class AnswerAssembler:
         return self._retrieval_boundary(self._base_claim(result), result)
 
     def _base_claim(self, result: InferenceResult) -> AnswerClaim:
+        if result.kind == "CONDITIONAL_CONCEPT_JUDGMENT":
+            from hcl.runtime.concept_answer import concept_judgment_claim
+            return concept_judgment_claim(result)
         if result.kind == "CONDITIONAL_ACTION_JUDGMENT":
             return self._judgment_claim(result)
         if result.kind == "CONDITIONAL_STRUCTURAL_MAPPINGS":
@@ -969,7 +972,7 @@ class AnswerAssembler:
             (
                 "MODEL_INTERPRETATIONS_UNVERIFIED"
                 if any(
-                    result.kind in ("CONDITIONAL_FOL", "CONDITIONAL_REVISION", "CONDITIONAL_COGNITIVE_MODEL", "CONDITIONAL_ARGUMENT_ACCEPTANCE", "CONDITIONAL_MECHANISM_DISCOVERY", "CONDITIONAL_ACTION_JUDGMENT") for result in accepted_results
+                    result.kind in ("CONDITIONAL_FOL", "CONDITIONAL_REVISION", "CONDITIONAL_COGNITIVE_MODEL", "CONDITIONAL_ARGUMENT_ACCEPTANCE", "CONDITIONAL_MECHANISM_DISCOVERY", "CONDITIONAL_ACTION_JUDGMENT", "CONDITIONAL_CONCEPT_JUDGMENT") for result in accepted_results
                 )
                 else "EXPLICIT_FORMAL_INPUT_ONLY"
             ),
@@ -1017,7 +1020,16 @@ class AnswerAssembler:
         checked = self._claim(result)
         projections = []
         value = result.values
-        if result.kind == "CONDITIONAL_ACTION_JUDGMENT":
+        if result.kind == "CONDITIONAL_CONCEPT_JUDGMENT":
+            text = checked.text
+            names = ("robust_recommended", "sensitivity", "complete", "source_versions", "issues", "local_evaluations", "semantic_certified", "scope")
+            projections.append(ProjectedResultField(result.result_id, "concepts", value["concepts"]["definitions"], ("definitions",)))
+            for i, branch in enumerate(value["branches"]):
+                for name in ("selections", "classifications", "decision_projection", "complete"):
+                    projections.append(ProjectedResultField(result.result_id, "branches", branch[name], (str(i), name)))
+                for j, model in enumerate(branch["actual_judgment"]["models"]):
+                    projections.append(ProjectedResultField(result.result_id, "branches", model["fact_bindings"], (str(i), "actual_judgment", "models", str(j), "fact_bindings")))
+        elif result.kind == "CONDITIONAL_ACTION_JUDGMENT":
             text = checked.text
             for i, model in enumerate(value["models"]):
                 projections.append(ProjectedResultField(result.result_id, "models", model["decisions"], (str(i), "decisions")))
