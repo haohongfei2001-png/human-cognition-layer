@@ -126,7 +126,34 @@ class JudgmentModelOperator:
         def remaining():
             return replace(allowance, max_local_evaluations=work.limit - work.used)
 
+        joint_computations, joint_reuses = [], []
         for model_index, model in enumerate(program["models"]):
+            joint_search_context = None if concept_context is None else concept_context.get("joint_search")
+            cache_key = None
+            issue_start = len(issues)
+            if joint_search_context is not None:
+                from hcl.semantics.joint_change_compiler import node_count
+                relevant = {b["use_id"] for b in concept_context["bindings"][model_index]}
+                signature = [program["source_versions"], snapshot.rule_version, model,
+                    concept_context["bindings"][model_index],
+                    {k: concept_context["classifications"][k] for k in sorted(relevant)},
+                    joint_search_context["retractions"].get(model_index, []), joint_search_context["target"]]
+                # Cache lookup, source/semantic validation and copying are work.
+                validation_cost = node_count(signature)
+                if validation_cost > work.limit - work.used:
+                    work.spend(work.limit - work.used)
+                    issues.append("JOINT_MODEL_CACHE_VALIDATION_FRONTIER")
+                    break
+                work.spend(validation_cost)
+                cache_key = sha256(codec.dumps(signature)).hexdigest()
+                if cache_key in joint_search_context["model_cache"]:
+                    saved, conditions, diagnostics = joint_search_context["model_cache"][cache_key]
+                    outputs.append(deepcopy(saved))
+                    environments.update(conditions)
+                    issues.extend(diagnostics)
+                    joint_reuses.append(model_index)
+                    continue
+                joint_computations.append(model_index)
             mental = model["mental"]
             interaction = dict(model["interaction"], mental=mental)
             plans = {p["id"]: p for p in mental["plans"]}
@@ -262,11 +289,24 @@ class JudgmentModelOperator:
                     out["fact_bindings"].append(dict(binding, guard=guard, included=included,
                         fact_result_id=out["facts"][binding["fact_id"]]["result_id"]))
                 norm_queries = {n["argument_query_id"] for d in model["decisions"] for f in d["frameworks"] for n in f["norms"]}
+                if joint_search_context is not None:
+                    joint_target = joint_search_context["target"]
+                    if (joint_target["kind"] == "M13_ACCEPTANCE"
+                            and (joint_target["source_id"], joint_target["model_id"]) == (mental["source_id"], mental["id"])):
+                        # The v4 target includes preferred acceptance even when
+                        # the original query requested only grounded semantics.
+                        norm_queries.add(joint_target["query_id"])
                 for q in argument["queries"]:
                     if q["id"] in norm_queries:
                         q["preferred"] = True
+                gap_argument, gap_bindings = argument, all_bindings
+                if joint_search_context is not None:
+                    from hcl.operators.joint_changes import deactivate_arguments
+                    gap_argument, gap_bindings, retractions = deactivate_arguments(
+                        argument, all_bindings, joint_search_context["retractions"].get(model_index, []), work)
+                    out["counterfactual_retractions"] = retractions
                 out["argument_input"] = argument
-                out["argument_dependency_gaps"] = unresolved_argument_dependencies(argument, all_bindings, out["facts"])
+                out["argument_dependency_gaps"] = unresolved_argument_dependencies(gap_argument, gap_bindings, out["facts"])
                 op13 = ArgumentModelOperator().run(snapshot, issue, remaining(), dict(models=[argument]), meter_work=concept_context is not None)
                 work.spend(op13.resource_usage["local_evaluations"])
                 actual13 = record(op13)
@@ -346,12 +386,22 @@ class JudgmentModelOperator:
                         decision["robust_across_frameworks"] = []
             issues.extend(out["frontier"])
             issues.extend(f for d in out["decisions"] for f in d["frontier"])
+            if joint_search_context is not None and cache_key is not None and not out["frontier"] and out["actual_argument"] is not None:
+                model_conditions = set(actual_cognition["assumption_environments"]) | set(actual07["assumption_environments"])
+                model_conditions.update(out["actual_argument"]["assumption_environments"])
+                model_conditions.update(a for d in model["decisions"] for f in d["frameworks"] for a in f["active_assumptions"])
+                joint_search_context["model_cache"][cache_key] = (deepcopy(out), tuple(sorted(model_conditions)),
+                                                 tuple(issues[issue_start:]))
         values = dict(operator_version=VERSION if concept_context is None else "s4-concept-branch-judgment-2", issue_id=issue.issue_id,
                       rule_version=snapshot.rule_version, source_versions=dict(snapshot.source_versions),
                       program=program, models=outputs, execution_allowance=work.limit,
                       local_evaluations=work.used, issues=sorted(set(issues)),
                       semantic_certified=False, candidate_completeness="NOT_ESTABLISHED",
                       scope="SOURCE_BOUND_FINITE_SINGLE_STEP_CONDITIONAL_JUDGMENT_NOT_MORAL_TRUTH")
+        if concept_context is not None and concept_context.get("joint_search") is not None:
+            values["operator_version"] = "s4-joint-activation-branch-judgment-4"
+            values["joint_model_computations"] = joint_computations
+            values["joint_model_reuses"] = joint_reuses
         inference = InferenceResult("judgment-result:" + sha256(codec.dumps([issue.issue_id, values])).hexdigest(), KIND, values,
                                     tuple(sorted(environments)), tuple(sorted(snapshot.source_versions)), (), snapshot.rule_version,
                                     "CONDITIONAL_SINGLE_STEP_ACTION_JUDGMENT")
