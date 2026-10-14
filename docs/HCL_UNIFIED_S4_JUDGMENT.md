@@ -69,8 +69,9 @@ Recommendations retain rival options, per-dimension costs, foregone benefits of
 excluded actions, excluding norms, preferred-extension dissent, and factual and
 principle dependencies. Weights/scales, priorities and facts can be changed and
 recomputed independently; unchanged cognitive/commitment results are tested.
-Concept meaning and scale choice remain explicit hypotheses, not an implemented
-open conceptual-sensitivity search. If supplied frameworks or joint extensions
+Concept meaning and scale choice remain explicit hypotheses. The additive
+[v2 concept consumer](HCL_UNIFIED_S4_CONCEPT_JUDGMENT.md) implements finite joint
+version interventions; open conceptual-sensitivity search remains unimplemented. If supplied frameworks or joint extensions
 disagree, the overall recommendation is their intersection; individual
 conditional conclusions and the needed value/principle choice remain visible.
 This allows actual positive recommendations without manufacturing a winner.
@@ -117,6 +118,6 @@ maximin example. Evidence is bound to the checked-out commit/runtime hashes.
 Still open: open framework/principle and action-model discovery; semantic
 alignment and completeness; authenticated preference acquisition; general
 parameter uncertainty; multi-step joint policies; open conceptual revisions and
-M12 version propagation; broader relationship/identity and narrative consumers;
+global/automatic M12 version propagation; broader relationship/identity and narrative consumers;
 reflective equilibrium; real-model functional and research-effect acceptance.
 The full M01–M16/S1–S7/T01–T32 plan is unchanged.

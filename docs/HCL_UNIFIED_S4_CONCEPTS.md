@@ -99,6 +99,15 @@ whole-work metaphor/irony interpretation and the approved multi-reviewer
 natural-language research acceptance. The broader M11 character, rhetoric,
 form-effect and aesthetic obligations are unchanged.
 
+## Additive directional classification consumer
+
+The legacy structural-concepts contract above remains unchanged. A separate
+v2 judgment contract now consumes real typed induction for finite immutable
+versions and independent directional classification, propagating joint choices
+into actual M13/M14. See [the bounded version contract](HCL_UNIFIED_S4_CONCEPT_JUDGMENT.md).
+A global registry, automatic cross-task revision and full concept acceptance
+remain open; semantic identity is separate from evidence and access validity.
+
 ## Method attribution
 
 Relational correspondence and argument-preserving structural consistency follow
