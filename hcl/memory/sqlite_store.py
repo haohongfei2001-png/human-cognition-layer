@@ -350,6 +350,10 @@ class SQLiteStateStore:
     def _query_projection(self, db, session, principal, query):
         from hcl.kernel.dependencies import INDEX_KIND, query_projection
         from hcl.kernel.retrieval import RetrievalQuery
+        from hcl.kernel.concept_registry import ConceptQuery
+        if type(query) is ConceptQuery:
+            from hcl.memory.concept_registry import project
+            return project(self, db, session, principal, query)
         if type(query) is RetrievalQuery:
             from hcl.memory.query_store import RetrievalPreparation
             if not db.in_transaction:
@@ -825,10 +829,24 @@ class SQLiteStateStore:
             self._validate_dependencies(db, session, delta.principal, dependencies, access_epoch, delta.rule_version)
             if expected_revision > session["revision"]:
                 raise failure("STALE_STATE", "FUTURE_REVISION", "base_revision", "A future base revision cannot commit.")
+            # Validate the entire adoption write-set before per-row CAS checks.
+            # Every row below sees the pre-commit database, so two replacements
+            # of one stream in a batch must never both pass the same old head.
+            adoption_streams = [result.values.get("stream_token") for result in delta.new_inferences
+                                if type(result) is InferenceResult and result.kind == "CONCEPT_ADOPTION"]
+            if any(type(stream) is not str or not stream for stream in adoption_streams):
+                raise failure("INVALID_REQUEST", "CONCEPT_ADOPTION_IDENTITY", "new_inferences",
+                              "An adoption stream must have its exact opaque identity.")
+            if len(adoption_streams) != len(set(adoption_streams)):
+                raise failure("INVALID_REQUEST", "CONCEPT_ADOPTION_BATCH_FORK", "new_inferences",
+                              "A batch can append at most one adoption per explicit stream.")
             for result in delta.new_inferences:
                 if type(result) is not InferenceResult or result.rule_version != delta.rule_version:
                     raise failure("FAILED", "INVALID_INFERENCE", "new_inferences", "Inference type and rules must match the delta.")
                 identifier(result.result_id)
+                if result.kind in ("CONCEPT_ADOPTION", "CONCEPT_SUBSCRIPTION"):
+                    from hcl.memory.concept_registry import validate_commit
+                    validate_commit(self, db, session, delta, result)
                 if result.kind == INDEX_KIND:
                     if self._schema not in (3, 4):
                         raise failure(
@@ -888,6 +906,8 @@ class SQLiteStateStore:
                                   "The loaded inference is no longer an authorized current reference.", "access")
                 self._validate_dependencies(db, session, principal, json.loads(row["read_set"]),
                                             row["epoch"], session["rule"])
+                from hcl.memory.concept_registry import authorize_delivery
+                authorize_delivery(self, session_id, principal, row)
 
     def inferences(self, session_id, principal):
         with self._transaction() as db:

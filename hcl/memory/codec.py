@@ -12,8 +12,11 @@ from hcl.semantics.segments import SourceSegment
 
 from hcl.kernel.retrieval import RetrievalQuery, RetrievalDependency, RetrievalIssue, EvidenceNode
 
+from hcl.kernel.concept_registry import ConceptBinding, ConceptAdoptionIssue, ConceptFollowIssue, ConceptQuery, ConceptDependency
+
 FORMAT = "hcl-content-object-1"
 CLASSES = {cls.__name__: cls for cls in (
+    ConceptBinding, ConceptAdoptionIssue, ConceptFollowIssue, ConceptQuery, ConceptDependency,
     RetrievalQuery, RetrievalDependency, RetrievalIssue, EvidenceNode,
     ExecutionBudget, ExecutionIssue, LocalModel, ModelIssue, ExecutionCheckpoint, ResumeToken, ProjectedResultField, SnapshotRef, ContextChunk, SourceSegment,
     types.Principal, types.AccessPolicy, types.SourceHandle, types.FormalProblem,

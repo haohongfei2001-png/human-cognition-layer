@@ -20,6 +20,7 @@ from hcl.kernel.execution import (
     SnapshotRef,
 )
 from hcl.kernel.retrieval import RetrievalIssue, RetrievalQuery
+from hcl.kernel.concept_registry import ConceptAdoptionIssue, ConceptFollowIssue
 from hcl.kernel.types import AnswerContract, Delta, HCLFailure, InferenceResult, Issue, TaskResult, thaw
 from hcl.kernel.dependencies import RevisionIssue, QueryDelta, IndexQuery, pack_dependencies
 from hcl.memory import codec
@@ -65,7 +66,7 @@ class ExecutionRunner:
         ids = set()
         for goal in request.issue.goals:
             if (
-                type(goal) not in (Issue, RevisionIssue, RetrievalIssue)
+                type(goal) not in (Issue, RevisionIssue, RetrievalIssue, ConceptAdoptionIssue, ConceptFollowIssue)
                 or type(goal.issue_id) is not str
                 or not goal.issue_id
                 or len(goal.issue_id) > 128
@@ -90,6 +91,9 @@ class ExecutionRunner:
                 raise stopped("RETRIEVAL_ISSUE_INVALID", "INVALID_REQUEST", "admission")
             if goal.kind == "memory.retrieve" and type(goal) is not RetrievalIssue:
                 raise stopped("RETRIEVAL_QUERY_REQUIRED", "INVALID_REQUEST", "admission")
+            if ((goal.kind == "concept.adopt" and type(goal) is not ConceptAdoptionIssue)
+                    or (goal.kind == "judgment.follow_concepts" and type(goal) is not ConceptFollowIssue)):
+                raise stopped("TYPED_CONCEPT_CONTRACT_REQUIRED", "INVALID_REQUEST", "admission")
             ids.add(goal.issue_id)
         cuts = {
             g.known_at for g in request.issue.goals if type(g) is RevisionIssue and g.known_at is not None
@@ -101,6 +105,11 @@ class ExecutionRunner:
             raise stopped("MIXED_HISTORICAL_CUTOFF", "INVALID_REQUEST", "admission")
 
     def _snapshot(self, request, goal=None):
+        if type(goal) is ConceptFollowIssue:
+            from .concept_propagation import follow_snapshot
+            return follow_snapshot(self, request, goal)
+        if type(goal) is ConceptAdoptionIssue:
+            return self.store.snapshot(request.session_id, request.principal, ())
         if type(goal) is RetrievalIssue:
             return self.store.search_snapshot(request.session_id, request.principal, goal.query)
         handles = request.source_handles
@@ -581,7 +590,10 @@ class ExecutionRunner:
             node["commit_revision"] = self._commit(node["result"])
             self._mark_committed(node, node["result"])
             return
-        if goal.kind == "memory.retrieve":
+        if goal.kind in ("concept.adopt", "judgment.follow_concepts"):
+            issue = goal
+            cost = 1 if goal.kind == "concept.adopt" else request.budget.max_local_evaluations - self.counters["local_reserved"]
+        elif goal.kind == "memory.retrieve":
             issue = goal
             cost = 1
         elif goal.kind == "logic.check_interpretation":
@@ -618,7 +630,7 @@ class ExecutionRunner:
             snapshot = node["compute_snapshot"]
             cost = request.budget.max_local_evaluations - self.counters["local_reserved"]
         remaining = request.budget.max_local_evaluations - self.counters["local_reserved"]
-        if cost > remaining or (cost == 0 and goal.kind in ("revision.evaluate", "mental.simulate", "argument.evaluate", "hypothesis.discover", "interaction.evaluate", "affect.evaluate", "relationship.evaluate", "judgment.evaluate", "literature.analyze", "analogy.compare")):
+        if cost > remaining or (cost == 0 and goal.kind in ("judgment.follow_concepts", "concept.adopt", "revision.evaluate", "mental.simulate", "argument.evaluate", "hypothesis.discover", "interaction.evaluate", "affect.evaluate", "relationship.evaluate", "judgment.evaluate", "literature.analyze", "analogy.compare")):
             if any(
                 other is not node
                 and other["operation"] == "compute"
@@ -633,7 +645,13 @@ class ExecutionRunner:
         node["local_hold"] = cost
         self._save()
         allowance = replace(request.budget, max_local_evaluations=cost)
-        if goal.kind == "memory.retrieve":
+        if goal.kind == "concept.adopt":
+            from .concept_propagation import adopt_operation
+            operation = adopt_operation(self, request, goal, snapshot)
+        elif goal.kind == "judgment.follow_concepts":
+            from .concept_propagation import follow_operation
+            operation = await asyncio.to_thread(follow_operation, self, request, node, snapshot, allowance)
+        elif goal.kind == "memory.retrieve":
             from hcl.operators.retrieval import RetrievalOperator
             operation = await asyncio.to_thread(RetrievalOperator().run, snapshot, issue, allowance)
         else:
@@ -737,7 +755,8 @@ class ExecutionRunner:
         return True
 
     def _invalidate_changed_queries(self, request):
-        changed = False
+        from .concept_propagation import discover
+        changed = discover(self, request)
         for node in self.nodes.values():
             if node["operation"] != "compute" or node["state"] != "DONE" or node.get("result") is None:
                 continue
@@ -746,13 +765,13 @@ class ExecutionRunner:
             except HCLFailure as error:
                 if (
                     error.diagnostic.code != "QUERY_DEPENDENCY_CHANGED"
-                    or node["goal"].kind not in ("revision.evaluate", "memory.retrieve")
+                    or node["goal"].kind not in ("revision.evaluate", "memory.retrieve", "judgment.follow_concepts")
                     or self.counters["steps"] >= request.budget.max_steps
                 ):
                     raise
                 node["invalidated_results"] = (*node.get("invalidated_results", ()), node["result"])
                 node["result"], node["state"] = None, "PENDING"
-                if node["goal"].kind == "memory.retrieve":
+                if node["goal"].kind in ("memory.retrieve", "judgment.follow_concepts"):
                     self.snapshots[node["goal"].issue_id] = self._snapshot(request, node["goal"])
                 self.nodes[node["goal"].issue_id + ":deliver"]["state"] = "PENDING"
                 self.trace.append(dict(event="LOCAL_RECOMPUTE", node=node["id"]))
@@ -773,6 +792,9 @@ class ExecutionRunner:
                         return
                 else:
                     await self._compile(request, node)
+            elif node["operation"] == "subscribe":
+                from .concept_propagation import subscribe
+                subscribe(self, request, node)
             elif node["operation"] == "compute":
                 await self._compute(request, node)
                 if self._feedback(request, node):
@@ -795,7 +817,7 @@ class ExecutionRunner:
                 error.status == "STALE_STATE"
                 and error.diagnostic.code == "QUERY_DEPENDENCY_CHANGED"
                 and node["operation"] == "compute"
-                and node["goal"].kind in ("revision.evaluate", "memory.retrieve")
+                and node["goal"].kind in ("revision.evaluate", "memory.retrieve", "judgment.follow_concepts")
                 and self.counters["steps"] < request.budget.max_steps
             ):
                 # The exact model response remains; only the dependent local
@@ -804,7 +826,7 @@ class ExecutionRunner:
                     node["invalidated_results"] = (*node.get("invalidated_results", ()), node["result"])
                 node["result"] = None
                 node["state"] = "PENDING"
-                if node["goal"].kind == "memory.retrieve":
+                if node["goal"].kind in ("memory.retrieve", "judgment.follow_concepts"):
                     self.snapshots[node["goal"].issue_id] = self._snapshot(request, node["goal"])
                 self.trace.append(dict(event="LOCAL_RECOMPUTE", node=node["id"]))
             elif self._feedback(request, node, error):
@@ -1128,6 +1150,9 @@ class ExecutionRunner:
                 result_ids=tuple(r.result_id for r in results),
                 checkpoint_audit="AUTHORIZED_TASK_EVENT_LOG",
                 protocol=PROTOCOL,
+                **({"concept_successors": tuple({k: row[k] for k in ("consumer", "original_request_id", "revision_request_id", "goal")}
+                    for row in self.trace if row["event"] == "CONCEPT_SUCCESSOR_SCHEDULED")}
+                   if any(row["event"] == "CONCEPT_SUCCESSOR_SCHEDULED" for row in self.trace) else {}),
             )
             revisions = [n["commit_revision"] for n in self.nodes.values() if "commit_revision" in n]
             result = TaskResult(

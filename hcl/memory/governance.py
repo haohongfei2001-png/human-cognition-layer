@@ -114,6 +114,12 @@ def dependency_bindings(store, db, session, principal, packed):
         raise ValueError("new query-bearing content requires captured principal")
     for dependency in queries:
         query = dependency.query
+        from hcl.kernel.concept_registry import ConceptQuery
+        if type(query) is ConceptQuery:
+            session_row = store._session(db, session, principal)
+            _, view = store._query_projection(db, session_row, principal, query)
+            result.update(binding(session, key, version) for key, version in view["source_versions"].items())
+            continue
         sources = list(db.execute("SELECT source_id,version,readers FROM sources WHERE session_id=?", (session,)))
         allowed = {source["source_id"]: source["version"] for source in sources
                    if principal.subject_id in json.loads(source["readers"])

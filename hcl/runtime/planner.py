@@ -24,6 +24,7 @@ SUPPORTED_GOALS = frozenset(
         "literature.analyze",
         "analogy.compare",
         "memory.retrieve",
+        "concept.adopt", "judgment.follow_concepts",
         "source.report",
         "model.respond",
     }
@@ -49,7 +50,7 @@ class IssuePlanner:
                     "goals",
                     "The requested obligation has no installed executable operator.",
                 )
-            requirements = []
+            requirements = ["subscribe"] if goal.kind == "judgment.follow_concepts" else []
             if goal.kind in (
                 "logic.compare_semantic_readings",
                 "revision.evaluate",
