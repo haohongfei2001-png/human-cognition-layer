@@ -14,6 +14,9 @@ class AnswerAssembler:
         return self._retrieval_boundary(self._base_claim(result), result)
 
     def _base_claim(self, result: InferenceResult) -> AnswerClaim:
+        if result.kind == "CONDITIONAL_JOINT_CHANGE_JUDGMENT":
+            from hcl.runtime.joint_change_answer import joint_change_claim
+            return joint_change_claim(result)
         if result.kind == "CONCEPT_ADOPTION":
             from hcl.runtime.persistent_concept_answer import adoption_claim
             return adoption_claim(result)
@@ -978,7 +981,7 @@ class AnswerAssembler:
             (
                 "MODEL_INTERPRETATIONS_UNVERIFIED"
                 if any(
-                    result.kind in ("CONDITIONAL_FOL", "CONDITIONAL_REVISION", "CONDITIONAL_COGNITIVE_MODEL", "CONDITIONAL_ARGUMENT_ACCEPTANCE", "CONDITIONAL_MECHANISM_DISCOVERY", "CONDITIONAL_ACTION_JUDGMENT", "CONDITIONAL_CONCEPT_JUDGMENT", "CONDITIONAL_CONCEPT_REPAIR_JUDGMENT") for result in accepted_results
+                    result.kind in ("CONDITIONAL_FOL", "CONDITIONAL_REVISION", "CONDITIONAL_COGNITIVE_MODEL", "CONDITIONAL_ARGUMENT_ACCEPTANCE", "CONDITIONAL_MECHANISM_DISCOVERY", "CONDITIONAL_ACTION_JUDGMENT", "CONDITIONAL_CONCEPT_JUDGMENT", "CONDITIONAL_CONCEPT_REPAIR_JUDGMENT", "CONDITIONAL_JOINT_CHANGE_JUDGMENT") for result in accepted_results
                 )
                 else "EXPLICIT_FORMAL_INPUT_ONLY"
             ),
@@ -1026,7 +1029,13 @@ class AnswerAssembler:
         checked = self._claim(result)
         projections = []
         value = result.values
-        if result.kind in ("CONDITIONAL_PERSISTENT_CONCEPT_JUDGMENT", "CONDITIONAL_PERSISTENT_CONCEPT_REPAIR_JUDGMENT"):
+        if result.kind == "CONDITIONAL_JOINT_CHANGE_JUDGMENT":
+            text = checked.text
+            names = ("joint_search", "complete", "source_versions", "issues", "local_evaluations", "semantic_certified", "scope")
+            for i, evaluation in enumerate(value["evaluations"]):
+                for name in ("evaluation_id", "atom_ids", "selections", "retractions", "classifications", "target", "complete"):
+                    projections.append(ProjectedResultField(result.result_id, "evaluations", evaluation[name], (str(i), name)))
+        elif result.kind in ("CONDITIONAL_PERSISTENT_CONCEPT_JUDGMENT", "CONDITIONAL_PERSISTENT_CONCEPT_REPAIR_JUDGMENT"):
             text = checked.text
             names = ("robust_recommended", "complete", "source_versions", "issues", "local_evaluations")
             for i, branch in enumerate(value["branches"]):
