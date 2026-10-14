@@ -4,6 +4,8 @@ Only the 230 hcl Python files at the pinned predecessor tree are projected.
 Real old processes create the ledgers, v1/v2/v3 judgments, capsule-1 proofs and
 interrupted two-subscriber adoptions. Synthetic workloads have separate stores
 so neither the 4 MiB audit limit nor the 128 MiB migration limit is enlarged.
+The four interrupted persistent workloads use three positive examples; all
+judgment checkpoints and completed persistent chains retain the full example.
 """
 
 from contextlib import contextmanager
@@ -25,7 +27,9 @@ from hcl.memory.migrations.revision_upgrade import RevisionCutover
 from hcl.memory.store import StateStore
 from hcl.models.gateway import ModelGateway, OfflineModelPort
 from hcl.operators.concept_proof import unpack_proof
+from hcl.operators.concept_judgment import decision_key
 from hcl.operators.local_model import LocalModelOperator
+from hcl.operators.persistent_concepts import verify_persistent_inference
 from hcl.runtime.answer import AnswerAssembler
 from hcl.runtime.execution_ledger import ExecutionLedger
 from hcl.runtime.recovery import RecoveryManager
@@ -85,22 +89,52 @@ else:
     session = 's'
     store.create_session(session, owner, {'bob'})
 repair_mode = '-v3' in MODE
+repair_profile = ('small' if MODE in ('persistent-v3-computed', 'persistent-v3-committed')
+                  else 'full') if repair_mode else None
+principles = REPAIR_PRINCIPLES if repair_mode else PRINCIPLES
+if repair_profile == 'small':
+    # The smaller synthetic source agrees with its three-positive proposal.
+    # Both counterexamples and the standard/zoe/signed case remain unchanged.
+    assert principles.count(',(emergency,d,waiver)') == 1
+    principles = principles.replace(',(emergency,d,waiver)', '')
 handles = (store.put_source(session, owner, 'scene', REPAIR_SCENE if repair_mode else SCENE),
-           store.put_source(session, owner, 'principles', REPAIR_PRINCIPLES if repair_mode else PRINCIPLES))
+           store.put_source(session, owner, 'principles', principles))
 
 class Crash(BaseException):
     pass
 
 requests, request_objects, capsules = {}, {}, {}
 
+def assert_repair_profile(proof):
+    repair = proof.values['repairs'][0]
+    candidates = repair['candidates']
+    expected = (5, 5, 2) if repair_profile == 'small' else (14, 15, 4)
+    actual = (len(candidates), sum(len(item['equivalent_partitions']) for item in candidates),
+              sum(item['consistent'] for item in candidates))
+    assert actual == expected, (repair_profile, actual)
+    assert proof.values['complete'] and repair['complete']
+    assert set(repair['triggered_by']) == {'n0', 'n1'}
+    assert len(repair['minimum_consistent_candidate_ids']) == 1
+    best = next(item for item in candidates
+                if item['id'] == repair['minimum_consistent_candidate_ids'][0])
+    assert best['consistent'] and len(best['patterns']) == 2
+    assert repair['adopted'] is False
+
+
 def capture_capsules(value):
     if isinstance(value, dict):
         if value.get('schema') == 'hcl-concept-proof-capsule-1':
+            wire = codec.dumps(value)
+            digest = sha256(wire).hexdigest()
+            if digest in capsules:
+                # Every occurrence is still compared byte for byte. A pure
+                # decode/repack need only run once for this exact old wire.
+                assert capsules[digest] == wire.decode()
+                return
             proof = unpack_proof(value)
             assert proof.kind == 'CONDITIONAL_CONCEPT_REPAIR_JUDGMENT'
             assert sha256(codec.dumps(proof)).hexdigest() == value['sha256']
-            wire = codec.dumps(value)
-            capsules[sha256(wire).hexdigest()] = wire.decode()
+            capsules[digest] = wire.decode()
         else:
             for item in value.values():
                 capture_capsules(item)
@@ -114,28 +148,61 @@ def remember(request, state, family, result=None):
                                  (request.request_id,)).fetchone())
     calls = [dict(row) for row in store._db.execute('SELECT * FROM calls WHERE task_key=?',
                                                   (task['task_key'],))]
-    value = store._get_object(task['result_hash'])
     accepted = []
+    successor_checkpoint = None
     if state in ('computed', 'committed'):
+        value = store._get_object(task['result_hash'])
         for node in value.nodes.values():
             operation = node.get('result')
             if node.get('operation') == 'compute' and operation is not None:
                 accepted.extend(operation.candidate_delta.new_inferences)
         assert accepted, request.request_id
+        if request.request_id == 'D' and repair_mode:
+            successors, origins, states = [], [], []
+            for node in value.nodes.values():
+                operation = node.get('result')
+                if node.get('operation') != 'compute' or operation is None:
+                    continue
+                results = [item for item in operation.candidate_delta.new_inferences
+                           if item.kind == 'CONDITIONAL_PERSISTENT_CONCEPT_REPAIR_JUDGMENT']
+                if results:
+                    assert len(results) == 1
+                    successors.extend(results)
+                    origins.append(node['subscription']['origin_request_id'])
+                    states.append(node['state'])
+            assert len(successors) == 2 and set(origins) == {'B', 'C'}
+            assert sorted(states) == ['DONE', 'RUNNING']
+            committed = []
+            for item in successors:
+                assert item.result_id.startswith('concept-successor:')
+                row = store._db.execute('SELECT object_hash FROM inferences WHERE result_id=?',
+                                        (item.result_id,)).fetchone()
+                if row is not None:
+                    assert row['object_hash'] == sha256(codec.dumps(item)).hexdigest()
+                    committed.append(item.result_id)
+            # Count D's two new effects, not B/C's earlier follow results.
+            assert len(committed) == (1 if state == 'computed' else 2)
+            successor_checkpoint = dict(
+                computed_result_ids=sorted(item.result_id for item in successors),
+                committed_result_ids=sorted(committed), original_request_ids=sorted(origins),
+                node_states=sorted(states))
     elif state == 'completed':
         accepted = ExecutionLedger(store).delivery_inferences(
             request, result.execution_receipt['result_ids'])
         assert accepted, request.request_id
     for item in accepted:
+        if item.kind == 'CONDITIONAL_CONCEPT_REPAIR_JUDGMENT':
+            assert_repair_profile(item)
         capture_capsules(thaw(item.values))
     requests[request.request_id] = dict(
         request=codec.dumps(request).decode(), owner_id=store.owner_id, state=state,
-        family=family, task=task, calls=calls,
+        family=family, task=task, calls=calls, successor_checkpoint=successor_checkpoint,
         inference_hashes={item.result_id: sha256(codec.dumps(item)).hexdigest() for item in accepted},
         inference_kinds={item.result_id: item.kind for item in accepted},
         answer=result.answer if result is not None else None,
         claims=codec.dumps(result.claim_records).decode() if result is not None else None)
     request_objects[request.request_id] = request
+    return tuple(accepted)
 
 
 dialect = MODE.split('-')[1] if MODE != 'pins' else None
@@ -155,6 +222,17 @@ for state, seam in (checkpoints if MODE.startswith('judgment-') else checkpoints
         issue=ExecutionIssue('root', goals=(Issue(key, 'judgment.evaluate'),)))
     candidate = proposer(store.snapshot(session, owner, handles), request.question)
     assert candidate['schema'] == 'hcl-judgment-candidates-' + dialect[1:]
+    if repair_mode:
+        criterion = candidate['concepts']['versions'][1]['criteria'][0]
+        assert [item['id'] for item in criterion['positive']] == ['p0', 'p1', 'p2', 'p3']
+        if repair_profile == 'small':
+            criterion['positive'] = criterion['positive'][:3]
+        assert [item['id'] for item in criterion['negative']] == ['n0', 'n1']
+        assert [item['term'] for item in criterion['negative']] == [
+            term('request', term('standard'), term('e'), term('waiver')),
+            term('request', term('emergency'), term('f'), term('signed'))]
+        assert candidate['concepts']['cases'][0]['term'] == term(
+            'request', term('standard'), term('zoe'), term('signed'))
     port = OfflineModelPort(json.dumps(candidate))
     crashed = False
     def stop(stage):
@@ -172,7 +250,7 @@ for state, seam in (checkpoints if MODE.startswith('judgment-') else checkpoints
         assert crashed, key
     else:
         assert result.status == 'PARTIAL', (key, result.diagnostics)
-    remember(request, state, dialect, result)
+    accepted = remember(request, state, dialect, result)
     calls = requests[key]['calls']
     assert len(calls) == 1, key
     assert calls[0]['state'] == ('SEND_STARTED' if state == 'unknown' else 'RETURNED')
@@ -185,7 +263,10 @@ if MODE.startswith('persistent-'):
             'committed': 'execution_effects_committed'}[state]
     base_request = request_objects[dialect + '-completed']
     base_id = next(iter(requests[dialect + '-completed']['inference_hashes']))
-    proof = ExecutionLedger(store).delivery_inferences(base_request, (base_id,))[0]
+    # remember() just obtained these authenticated, immutable results; nothing
+    # has changed in the store since that read.
+    proof = accepted[0]
+    assert proof.result_id == base_id
     assert proof.kind == ('CONDITIONAL_CONCEPT_REPAIR_JUDGMENT' if repair_mode else
                           'CONDITIONAL_CONCEPT_JUDGMENT')
     label = 'revised'
@@ -266,7 +347,8 @@ retained = _history(store._db, store.object_root)[1]
 assert sum((store.object_root / digest).stat().st_size for digest in retained) <= 128 * 1024 * 1024
 assert all((store.object_root / digest).stat().st_size <= 4 * 1024 * 1024 for digest in retained)
 print(json.dumps(dict(path=str(store.path), session=session, owner_id=store.owner_id,
-    requests=requests, capsules=capsules, mode=MODE, bundle=version_bundle(schema=schema),
+    requests=requests, capsules=capsules, mode=MODE, repair_profile=repair_profile,
+    bundle=version_bundle(schema=schema),
     shapes={name: [field.name for field in fields(cls)] for name, cls in codec.CLASSES.items()},
     retained_hashes=retained, salt=store._revision_control['governance_salt'])), flush=True)
 for line in sys.stdin:
@@ -312,6 +394,9 @@ class JointChangePredecessorUpgradeTests(unittest.TestCase):
 
         cls.runtime = FrozenRuntime
         cls.runtime.setUpClass()
+        # Test-only pure decoding cache, keyed by the complete wire bytes.
+        # Actual runtime delivery and source authorization are never cached.
+        cls.verified_capsule_wires = set()
 
     @classmethod
     def tearDownClass(cls):
@@ -347,30 +432,38 @@ class JointChangePredecessorUpgradeTests(unittest.TestCase):
             self.assertEqual(value.kind, metadata['inference_kinds'][result_id])
             self.assertNotIn('JOINT_CHANGE', value.kind)
 
-    def assert_capsules_unchanged(self, store, old):
+    def assert_capsules_unchanged(self, inferences, old):
         observed = {}
         def visit(value):
             if isinstance(value, dict):
                 if value.get('schema') == 'hcl-concept-proof-capsule-1':
                     wire = codec.dumps(value)
-                    observed[sha256(wire).hexdigest()] = wire.decode()
-                    proof = unpack_proof(value)
-                    self.assertEqual(proof.kind, 'CONDITIONAL_CONCEPT_REPAIR_JUDGMENT')
-                    self.assertEqual(sha256(codec.dumps(proof)).hexdigest(), value['sha256'])
+                    digest = sha256(wire).hexdigest()
+                    if digest in observed:
+                        self.assertEqual(observed[digest], wire.decode())
+                    observed[digest] = wire.decode()
+                    if wire not in self.verified_capsule_wires:
+                        proof = unpack_proof(value)
+                        self.assertEqual(proof.kind, 'CONDITIONAL_CONCEPT_REPAIR_JUDGMENT')
+                        self.assertEqual(sha256(codec.dumps(proof)).hexdigest(), value['sha256'])
+                        self.verified_capsule_wires.add(wire)
                 else:
                     for child in value.values():
                         visit(child)
             elif isinstance(value, list):
                 for child in value:
                     visit(child)
-        for row in store._db.execute('SELECT object_hash FROM inferences'):
-            visit(thaw(store._get_object(row['object_hash']).values))
+        for inference in inferences:
+            visit(thaw(inference.values))
         self.assertTrue(old['capsules'])
         self.assertEqual(observed, old['capsules'])
 
     def exercise_workload(self, fixture, schema, mode, *, erase=False):
         suffix = str(schema) + '-' + mode
         source, old, process = fixture.old(schema, 'old-' + suffix, mode=mode)
+        expected_profile = ('small' if mode in ('persistent-v3-computed', 'persistent-v3-committed')
+                            else 'full') if '-v3' in mode else None
+        self.assertEqual(old['repair_profile'], expected_profile)
         shapes = {name: [field.name for field in fields(cls)] for name, cls in codec.CLASSES.items()}
         self.assertEqual(old['shapes'], {name: shapes[name] for name in old['shapes']})
         self.assertEqual(len(old['requests']), 5)
@@ -392,6 +485,16 @@ class JointChangePredecessorUpgradeTests(unittest.TestCase):
         self.assertEqual(store._revision_control['governance_salt'], old['salt'])
         self.assertEqual(self.rows(store._db), original_rows)
         verify_inventory(store._db)
+        if expected_profile == 'small':
+            checkpoint = old['requests']['D']['successor_checkpoint']
+            self.assertEqual(checkpoint['original_request_ids'], ['B', 'C'])
+            self.assertEqual(checkpoint['node_states'], ['DONE', 'RUNNING'])
+            self.assertEqual(len(checkpoint['computed_result_ids']), 2)
+            committed = sorted(result_id for result_id in checkpoint['computed_result_ids']
+                if store._db.execute('SELECT 1 FROM inferences WHERE result_id=?',
+                                     (result_id,)).fetchone() is not None)
+            self.assertEqual(committed, checkpoint['committed_result_ids'])
+            self.assertEqual(len(committed), 1 if mode.endswith('computed') else 2)
         for digest in retained:
             self.assertEqual((store.object_root / digest).read_bytes(), objects[digest])
             self.assertEqual(sha256(objects[digest]).hexdigest(), digest)
@@ -422,6 +525,15 @@ class JointChangePredecessorUpgradeTests(unittest.TestCase):
                     for field in ('request_hash', 'request_bytes', 'response_hash', 'output_bytes'):
                         self.assertEqual(call[field], metadata['calls'][0][field])
                 else:
+                    verified_persistent = {}
+
+                    def observe_verification(inference):
+                        # Observe the genuine verifier's successful return;
+                        # never substitute a result or skip its proof replay.
+                        operation = verify_persistent_inference(inference)
+                        verified_persistent[inference.result_id] = inference
+                        return operation
+
                     if state != 'completed':
                         RecoveryManager(store).resume_execution(request, expected_owner_id=metadata['owner_id'])
                     if state == 'returned':
@@ -430,7 +542,9 @@ class JointChangePredecessorUpgradeTests(unittest.TestCase):
                         with patch.object(LocalModelOperator, 'run', side_effect=AssertionError(
                                 'accepted model computation cannot run again')), patch(
                                 'hcl.operators.persistent_concepts.compute_persistent',
-                                side_effect=AssertionError('accepted successor cannot run again')):
+                                side_effect=AssertionError('accepted successor cannot run again')), patch(
+                                'hcl.operators.persistent_concepts.verify_persistent_inference',
+                                new=observe_verification):
                             result = client.run_sync(request)
                     if state == 'completed':
                         self.assertEqual(result.status, metadata['replay_status'], result.diagnostics)
@@ -457,9 +571,23 @@ class JointChangePredecessorUpgradeTests(unittest.TestCase):
                         successors = [item for item in inferred if item.kind == kind]
                         self.assertEqual(len(successors), 2)
                         for item in successors:
-                            AnswerAssembler().compact_claim(item)
+                            if state == 'completed':
+                                # Cached delivery does not freshly assemble
+                                # these claims, so retain the explicit check.
+                                AnswerAssembler().compact_claim(item)
+                            else:
+                                # A resumed delivery already ran the complete
+                                # verifier. Bind that observed success to the
+                                # exact committed proof instead of replaying it
+                                # a third time solely in the test harness.
+                                self.assertIn(item.result_id, verified_persistent)
+                                self.assertEqual(codec.dumps(verified_persistent[item.result_id]),
+                                                 codec.dumps(item))
                             self.assertEqual(item.values['branches'][0]['classifications']
                                              ['current']['actual']['status'], 'MEMBER')
+                            self.assertEqual(item.values['branches'][0]['decision_projection']
+                                [decision_key('scene', 'notice', 'notification')]['recommended'],
+                                ('protect',))
                         # The old expected head remains a compare-and-adopt
                         # fence after cutover, even under a new request identity.
                         stale = replace(request, request_id='stale-adoption')
@@ -474,15 +602,19 @@ class JointChangePredecessorUpgradeTests(unittest.TestCase):
                     for field in ('request_hash', 'request_bytes', 'response_hash', 'output_bytes'):
                         self.assertEqual(after[field], before[field])
 
-        kinds = {store._get_object(row['object_hash']).kind
-                 for row in store._db.execute('SELECT object_hash FROM inferences')}
+        # No store action occurs between these two test-only observations.
+        # Keep actual delivery, ACL and erasure reads on their normal paths.
+        inferences = tuple(store._get_object(row['object_hash'])
+                           for row in store._db.execute('SELECT object_hash FROM inferences'))
+        kinds = {inference.kind for inference in inferences}
         self.assertFalse(any('JOINT_CHANGE' in kind for kind in kinds))
         if mode.startswith('judgment-'):
             self.assertTrue(kinds.isdisjoint({'CONCEPT_ADOPTION', 'CONCEPT_SUBSCRIPTION',
                 'CONDITIONAL_PERSISTENT_CONCEPT_JUDGMENT',
                 'CONDITIONAL_PERSISTENT_CONCEPT_REPAIR_JUDGMENT'}))
         if mode.startswith('persistent-v3-'):
-            self.assert_capsules_unchanged(store, old)
+            self.assert_capsules_unchanged(inferences, old)
+        del inferences
         self.assertEqual(store._db.execute('SELECT count(*) FROM calls').fetchone()[0],
                          len(original_rows['calls']))
         for action in ('snapshot', 'write'):

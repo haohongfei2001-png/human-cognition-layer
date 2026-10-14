@@ -144,6 +144,22 @@ and real adoption/follow/successor states. It preserves request/answer/claim/obj
 bytes, CAS, UNKNOWN holds, zero resend and terminal writer fencing. Independent
 workloads use separate bounded stores. All older predecessor pins remain.
 
+The migration matrix retains the full 14-candidate v3 repair in both schemas for
+all five judgment checkpoints and for completed adoption with two successors,
+including byte-preserving replay, current ACL and physical erasure. The four
+persistent computed/committed workloads use a smaller three-positive-example
+repair with a correspondingly explicit synthetic source. Its two negative
+examples and target case are unchanged. The old process checks the full/small
+candidate, partition and consistent-candidate counts (14/15/4 and 5/5/2), the same
+two triggering counterexamples and the unique two-pattern repair. Each interrupted
+adoption has two computed successor proofs and exactly one/two committed
+successors at the computed/committed seam; both restored successors classify the
+target as a member and recommend protection. This preserves the predecessor
+type/state and safety matrix, not the original 14-candidate-by-every-recovery-state
+data cross-product. Test-only reuse removes identical wire decoding and a third
+proof replay only after observing the real verifier succeed on the exact same
+proof bytes. Completed cached delivery retains its separate explicit replay.
+
 `scripts/witness_unified_joint_changes.py` binds ordinary-entry computed values,
 consumed fields and zero-new-send replay to the checked commit and all runtime
 file hashes. Existing 21 witnesses and historical/diagnostic regressions remain.
