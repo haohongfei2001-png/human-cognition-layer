@@ -26,6 +26,8 @@ def judgment_context(snapshot, question):
                 purpose="PROPOSE_CONDITIONAL_SINGLE_STEP_NORMATIVE_MODELS_NOT_PERMISSIONS_SCORES_OR_WINNERS",
                 concept_candidate_schema="hcl-judgment-candidates-2",
                 repair_candidate_schema="hcl-judgment-candidates-3",
+                weight_region_candidate_schema="hcl-judgment-candidates-5",
+                weight_region_contract="v5 uses unchanged v1 models with unknown-weight PARETO target frameworks plus weight_domains(id,source_id,model_id,decision_id,framework_id,decision_rule,origin,segment_ids,constraints). All weights are nonnegative and sum to one; 1-4 dimensions, at most 16 source-bound rational LE/LT/EQ constraints(id,coefficients,rhs,relation,segment_ids). Domain rule EXPECTED or MAXIMIN; no supplied regions, winners, inferred preferences or adoption.",
                 joint_change_candidate_schema="hcl-judgment-candidates-4",
                 joint_change_contract="v4 extends v2 with joint_changes(baseline,target,edits): one legal complete choice assignment; target M13_ACCEPTANCE(source_id,model_id,argument_id,query_id) or M14_DECISION(source_id,model_id,decision_id); edits CHOICE_REPLACE(choice_id,version_id,segment_ids) or PREMISE_RETRACT/RULE_RETRACT(source_id,model_id,argument_id,item_id,segment_ids). At most 12 distinct unit-cost atoms; simultaneous final assignments may be legal when intermediates are not. No supplied winners, minima, adoption or facts.",
                 repair_contract="v3 additionally requests one repairs row(id,version_id,choice_id,segment_ids), targeting a single criterion in one existing choice of at most two versions, no pair constraints, at most five distinct positive terms. The runtime generates finite positive-partition LGG disjunctions from actual sufficient/biconditional counterexamples. Never supply partitions, patterns, membership, scores, rankings or adoption.",
@@ -64,6 +66,9 @@ class JudgmentCompiler(LocalModelCompiler):
             if type(raw_candidate) is not str or len(raw_candidate.encode()) > min(allowance.max_output_bytes, 1048576):
                 raise self._limit("candidate_bytes")
             header = json.loads(raw_candidate) if type(raw_candidate) is str else None
+            if type(header) is dict and header.get("schema") == "hcl-judgment-candidates-5":
+                from hcl.semantics.weight_region_compiler import WeightRegionCompiler
+                return WeightRegionCompiler().compile(snapshot, segments, raw_candidate, allowance)
             if type(header) is dict and header.get("schema") == "hcl-judgment-candidates-4":
                 from hcl.semantics.joint_change_compiler import JointChangeCompiler
                 return JointChangeCompiler().compile(snapshot, segments, raw_candidate, allowance)
@@ -278,6 +283,8 @@ class JudgmentCompiler(LocalModelCompiler):
 
 
 def judgment_qualifications(program):
+    if program.get("schema") == "hcl-judgment-candidates-5":
+        return judgment_qualifications(program["base_program"])
     if program.get("schema") in ("hcl-judgment-candidates-2", "hcl-judgment-candidates-3", "hcl-judgment-candidates-4"):
         from hcl.semantics.judgment_concept_compiler import concept_judgment_qualifications
         return concept_judgment_qualifications(program)

@@ -74,7 +74,26 @@ def _authorize(db, principal):
         raise ValueError("unsupported predecessor rule version")
 
 
-def _history(db, object_root, *, load_content=True):
+class _HistoryDecodeCache:
+    """Attempt-local successful structural decoding of exact immutable bytes.
+
+    This carries no file, database, ACL, capsule or migration authority. Every
+    _history call still rereads and hashes each current file. Never store decoded
+    mutable values or carry this set across attempts, recovery, or open_store.
+    """
+    def __init__(self):
+        self._validated = set()
+        self._size = 0
+
+    def validate(self, body):
+        if body not in self._validated:
+            codec.loads(body)  # Add only after successful structural validation.
+            if self._size + len(body) <= 128 * 1024 * 1024:
+                self._validated.add(body)
+                self._size += len(body)
+
+
+def _history(db, object_root, *, load_content=True, decode_cache=None):
     """Validate every old event/object and exact projection, without repairing it."""
     from hcl.memory.erasure import event_keys, object_references, REDACTED
     keys = event_keys(db)
@@ -154,10 +173,16 @@ def _history(db, object_root, *, load_content=True):
         body = path.read_bytes()
         if sha256(body).hexdigest() != digest:
             raise corrupt()
-        value = codec.loads(body)
         if capsule_root is not None and digest == legacy_package:
+            # Capsule interpretation remains a fresh semantic validation even
+            # when the same root bytes were read in another stage.
+            value = codec.loads(body)
             from .capsules import validate_root
             validate_root(value, namespace["namespace_id"], capsule_root["import_hash"])
+        elif decode_cache is None:
+            codec.loads(body)
+        else:
+            decode_cache.validate(body)
     payload = {
         "events": events,
         "projections": {key: sorted(values.values(), key=codec.canonical) for key, values in records.items()},
@@ -193,7 +218,8 @@ PERSISTENT_CONCEPT_PREDECESSOR_CODE_HASH = "9edd62dff949615310c41827aeb10bb5582d
 CONCEPT_REPAIR_PREDECESSOR_CODE_HASH = "5aadaf9bfed53e096e2258badb69b0d807f2303443411ef630e436769ad14de0"
 # Exact shipped 230-file PR443 main efe7d78, including v3 and capsule-1.
 JOINT_CHANGE_PREDECESSOR_CODE_HASH = "8310ca28dad0ceeadb24b2dc432827a280680b84e30c014d8e38203bf003413f"
-REVISION_PREDECESSORS = frozenset((S22_CODE_HASH, S23_CODE_HASH, S3_FINITE_CODE_HASH, S4_ARGUMENT_CODE_HASH, M04_DISCOVERY_CODE_HASH, M04_QUALIFIED_CODE_HASH, M07_INTERACTION_CODE_HASH, M08_AFFECT_CODE_HASH, M09_RELATIONSHIP_CODE_HASH, M09_QUALIFIED_CODE_HASH, M10_RETRIEVAL_CODE_HASH, M10_QUALIFIED_RETRIEVAL_CODE_HASH, M10_GOVERNANCE_CODE_HASH, M10_QUALIFIED_GOVERNANCE_CODE_HASH, M14_PREDECESSOR_CODE_HASH, CONCEPT_JUDGMENT_PREDECESSOR_CODE_HASH, PERSISTENT_CONCEPT_PREDECESSOR_CODE_HASH, CONCEPT_REPAIR_PREDECESSOR_CODE_HASH, JOINT_CHANGE_PREDECESSOR_CODE_HASH))
+WEIGHT_REGION_PREDECESSOR_CODE_HASH = "ceb99bffedbc109a038973fae8258c8a202d52abbd30ab556902ce78e7b1d5fc"
+REVISION_PREDECESSORS = frozenset((S22_CODE_HASH, S23_CODE_HASH, S3_FINITE_CODE_HASH, S4_ARGUMENT_CODE_HASH, M04_DISCOVERY_CODE_HASH, M04_QUALIFIED_CODE_HASH, M07_INTERACTION_CODE_HASH, M08_AFFECT_CODE_HASH, M09_RELATIONSHIP_CODE_HASH, M09_QUALIFIED_CODE_HASH, M10_RETRIEVAL_CODE_HASH, M10_QUALIFIED_RETRIEVAL_CODE_HASH, M10_GOVERNANCE_CODE_HASH, M10_QUALIFIED_GOVERNANCE_CODE_HASH, M14_PREDECESSOR_CODE_HASH, CONCEPT_JUDGMENT_PREDECESSOR_CODE_HASH, PERSISTENT_CONCEPT_PREDECESSOR_CODE_HASH, CONCEPT_REPAIR_PREDECESSOR_CODE_HASH, JOINT_CHANGE_PREDECESSOR_CODE_HASH, WEIGHT_REGION_PREDECESSOR_CODE_HASH))
 
 
 def _target_schema(schema):
@@ -211,11 +237,11 @@ def _validate_predecessor(db, schema, source_path):
         revision = control.read(db) if governed else control.read_legacy(db)
         bundle = json.loads(revision["versions"])
         expected = {"schema": schema, "rules": RULE_VERSION, "indexes": {"revision": 1}, "code_sha256": bundle.get("code_sha256")}
-        if bundle.get("code_sha256") in (M10_RETRIEVAL_CODE_HASH, M10_QUALIFIED_RETRIEVAL_CODE_HASH, M10_GOVERNANCE_CODE_HASH, M10_QUALIFIED_GOVERNANCE_CODE_HASH, M14_PREDECESSOR_CODE_HASH, CONCEPT_JUDGMENT_PREDECESSOR_CODE_HASH, PERSISTENT_CONCEPT_PREDECESSOR_CODE_HASH, CONCEPT_REPAIR_PREDECESSOR_CODE_HASH, JOINT_CHANGE_PREDECESSOR_CODE_HASH):
+        if bundle.get("code_sha256") in (M10_RETRIEVAL_CODE_HASH, M10_QUALIFIED_RETRIEVAL_CODE_HASH, M10_GOVERNANCE_CODE_HASH, M10_QUALIFIED_GOVERNANCE_CODE_HASH, M14_PREDECESSOR_CODE_HASH, CONCEPT_JUDGMENT_PREDECESSOR_CODE_HASH, PERSISTENT_CONCEPT_PREDECESSOR_CODE_HASH, CONCEPT_REPAIR_PREDECESSOR_CODE_HASH, JOINT_CHANGE_PREDECESSOR_CODE_HASH, WEIGHT_REGION_PREDECESSOR_CODE_HASH):
             expected["indexes"] = {"revision": 1, "retrieval": "hcl-evidence-retrieval-1"}
         if governed:
             expected["governance"] = "hcl-memory-governance-1"
-        if (governed != (bundle.get("code_sha256") in (M10_GOVERNANCE_CODE_HASH, M10_QUALIFIED_GOVERNANCE_CODE_HASH, M14_PREDECESSOR_CODE_HASH, CONCEPT_JUDGMENT_PREDECESSOR_CODE_HASH, PERSISTENT_CONCEPT_PREDECESSOR_CODE_HASH, CONCEPT_REPAIR_PREDECESSOR_CODE_HASH, JOINT_CHANGE_PREDECESSOR_CODE_HASH))
+        if (governed != (bundle.get("code_sha256") in (M10_GOVERNANCE_CODE_HASH, M10_QUALIFIED_GOVERNANCE_CODE_HASH, M14_PREDECESSOR_CODE_HASH, CONCEPT_JUDGMENT_PREDECESSOR_CODE_HASH, PERSISTENT_CONCEPT_PREDECESSOR_CODE_HASH, CONCEPT_REPAIR_PREDECESSOR_CODE_HASH, JOINT_CHANGE_PREDECESSOR_CODE_HASH, WEIGHT_REGION_PREDECESSOR_CODE_HASH))
                 or revision["mode"] != control.ACTIVE or bundle != expected
                 or bundle.get("code_sha256") not in REVISION_PREDECESSORS
                 or revision["target_path"] != str(source_path)):
@@ -286,6 +312,7 @@ class RevisionCutover:
 
     def _upgrade(self, principal):
         db = None
+        decode_cache = _HistoryDecodeCache()
         try:
             self.directory.parent.mkdir(parents=True, exist_ok=True)
             db = _connect(self.source, write=True)
@@ -326,7 +353,7 @@ class RevisionCutover:
             if object_root.is_symlink():
                 raise ValueError("invalid predecessor object root")
             checkpoint, objects, source_events = _history(
-                db, object_root, load_content=not (schema == control.TERMINAL_SOURCE and self.directory.exists()))
+                db, object_root, load_content=not (schema == control.TERMINAL_SOURCE and self.directory.exists()), decode_cache=decode_cache)
             if schema in (1, 2, 3, 4):
                 if schema != intent["origin_schema"] or self.directory.exists():
                     raise ValueError("cutover source/target identity conflict")
@@ -379,7 +406,7 @@ class RevisionCutover:
                 _sync_directory(destination_objects)
                 verification = _connect(copied)
                 try:
-                    if _history(verification, destination_objects)[0] != checkpoint:
+                    if _history(verification, destination_objects, decode_cache=decode_cache)[0] != checkpoint:
                         raise corrupt()
                 finally:
                     verification.close()
@@ -428,7 +455,7 @@ class RevisionCutover:
                     copy.execute("BEGIN IMMEDIATE")
                     stage_schema = copy.execute("PRAGMA user_version").fetchone()[0]
                     if stage_schema == control.UNPUBLISHED:
-                        if _history(copy, self.stage / "state.sqlite.objects")[0] != intent["checkpoint"]:
+                        if _history(copy, self.stage / "state.sqlite.objects", decode_cache=decode_cache)[0] != intent["checkpoint"]:
                             raise corrupt()
                         governed = None
                         if intent["origin_schema"] in (3, 4):
@@ -464,7 +491,7 @@ class RevisionCutover:
                         raise ValueError("unknown unpublished schema")
                     else:
                         from hcl.memory.erasure import authorized_prefix
-                        _, _, staged_events = _history(copy, self.stage / "state.sqlite.objects")
+                        _, _, staged_events = _history(copy, self.stage / "state.sqlite.objects", decode_cache=decode_cache)
                         if not authorized_prefix(copy, source_events, staged_events):
                             raise corrupt()
                     self._validate_target_identity(copy, intent)
@@ -483,7 +510,7 @@ class RevisionCutover:
                         raise
                 _sync_directory(self.directory.parent)
             self._checkpoint("published")
-            self._verify_published(intent, source_events)
+            self._verify_published(intent, source_events, decode_cache=decode_cache)
             intent["phase"] = "PUBLISHED"
             _persist(self.intent, intent)
         except (sqlite3.Error, OSError):
@@ -499,6 +526,8 @@ class RevisionCutover:
                 if db.in_transaction:
                     db.rollback()
                 db.close()
+            decode_cache._validated.clear()
+            decode_cache._size = 0
 
     def _validate_target_identity(self, db, intent):
         row = control.read(db)
@@ -517,12 +546,12 @@ class RevisionCutover:
         ):
             raise ValueError("published target does not match its exact cutover")
 
-    def _verify_published(self, intent, source_events):
+    def _verify_published(self, intent, source_events, *, decode_cache=None):
         db = _connect(self.path)
         try:
             db.execute("BEGIN")
             self._validate_target_identity(db, intent)
-            _, _, events = _history(db, self.path.with_name(self.path.name + ".objects"))
+            _, _, events = _history(db, self.path.with_name(self.path.name + ".objects"), decode_cache=decode_cache)
             from hcl.memory.erasure import authorized_prefix
             if not authorized_prefix(db, source_events, events):
                 raise corrupt()
