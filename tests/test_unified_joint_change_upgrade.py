@@ -430,7 +430,7 @@ class JointChangePredecessorUpgradeTests(unittest.TestCase):
             value = store._get_object(digest)
             self.assertEqual(codec.dumps(value), body)
             self.assertEqual(value.kind, metadata['inference_kinds'][result_id])
-            self.assertNotIn('JOINT_CHANGE', value.kind)
+            self.assertNotIn(getattr(self, 'forbidden_result_fragment', 'JOINT_CHANGE'), value.kind)
 
     def assert_capsules_unchanged(self, inferences, old):
         observed = {}
@@ -463,6 +463,7 @@ class JointChangePredecessorUpgradeTests(unittest.TestCase):
         source, old, process = fixture.old(schema, 'old-' + suffix, mode=mode)
         expected_profile = ('small' if mode in ('persistent-v3-computed', 'persistent-v3-committed')
                             else 'full') if '-v3' in mode else None
+        expected_profile = getattr(self, 'repair_profile_overrides', {}).get(mode, expected_profile)
         self.assertEqual(old['repair_profile'], expected_profile)
         shapes = {name: [field.name for field in fields(cls)] for name, cls in codec.CLASSES.items()}
         self.assertEqual(old['shapes'], {name: shapes[name] for name in old['shapes']})
@@ -485,7 +486,7 @@ class JointChangePredecessorUpgradeTests(unittest.TestCase):
         self.assertEqual(store._revision_control['governance_salt'], old['salt'])
         self.assertEqual(self.rows(store._db), original_rows)
         verify_inventory(store._db)
-        if expected_profile == 'small':
+        if expected_profile == 'small' and mode.endswith(('computed', 'committed')):
             checkpoint = old['requests']['D']['successor_checkpoint']
             self.assertEqual(checkpoint['original_request_ids'], ['B', 'C'])
             self.assertEqual(checkpoint['node_states'], ['DONE', 'RUNNING'])
@@ -607,7 +608,7 @@ class JointChangePredecessorUpgradeTests(unittest.TestCase):
         inferences = tuple(store._get_object(row['object_hash'])
                            for row in store._db.execute('SELECT object_hash FROM inferences'))
         kinds = {inference.kind for inference in inferences}
-        self.assertFalse(any('JOINT_CHANGE' in kind for kind in kinds))
+        self.assertFalse(any(getattr(self, 'forbidden_result_fragment', 'JOINT_CHANGE') in kind for kind in kinds))
         if mode.startswith('judgment-'):
             self.assertTrue(kinds.isdisjoint({'CONCEPT_ADOPTION', 'CONCEPT_SUBSCRIPTION',
                 'CONDITIONAL_PERSISTENT_CONCEPT_JUDGMENT',
