@@ -12,9 +12,10 @@ from types import SimpleNamespace
 from hcl.kernel.execution import ExecutionBudget, PROTOCOL
 from hcl.kernel.types import Delta, HCLFailure, InferenceResult, Issue, OpResult, Principal, thaw
 from hcl.memory import codec
+from hcl.operators.concept_proof import pack_proof, unpack_proof
 from hcl.operators.concept_induction import validate_term
 from hcl.operators.concept_judgment import (
-    KIND as BASE_KIND, VERSION as BASE_VERSION, classification_semantics,
+    KIND as BASE_KIND, VERSION as BASE_VERSION, REPAIR_KIND, REPAIR_VERSION, classification_semantics,
     decision_projection, decision_semantics, verify_concept_judgment,
 )
 from hcl.operators.concept_versions import compute_versions
@@ -31,6 +32,17 @@ KIND = "CONDITIONAL_PERSISTENT_CONCEPT_JUDGMENT"
 COVERAGE = "CONDITIONAL_SAME_HOST_PERSISTED_CONCEPT_JUDGMENT"
 SELECTION_FIELDS = {"choice_id", "stream_id", "adoption_id", "definition_version", "proof", "version_label"}
 MAX_WORK = 10000000
+REPAIR_SCHEMA = "hcl-persistent-concept-judgment-2"
+PERSISTENT_REPAIR_VERSION = "s4-persistent-concept-judgment-2"
+PERSISTENT_REPAIR_KIND = "CONDITIONAL_PERSISTENT_CONCEPT_REPAIR_JUDGMENT"
+
+
+def _concept_program(data):
+    return data["generated_concepts"] if data["operator_version"] == REPAIR_VERSION else data["program"]["concepts"]
+
+
+def _has_repair(base, selections):
+    return base.kind == REPAIR_KIND or any(_decode_proof(s["proof"]).kind == REPAIR_KIND for s in selections)
 
 
 def _canonical(value):
@@ -54,8 +66,8 @@ def _needs(reason):
 
 
 def _decode_proof(encoded):
-    result = codec.decode(thaw(encoded))
-    if type(result) is not InferenceResult or result.kind != BASE_KIND:
+    result = unpack_proof(encoded)
+    if type(result) is not InferenceResult or result.kind not in (BASE_KIND, REPAIR_KIND):
         raise ValueError("an original v2 concept judgment proof is required")
     return result
 
@@ -66,7 +78,7 @@ def _local_environments(result, data):
     if local is not None:
         assumptions, residuals = concept_judgment_qualifications(data["program"])
         expected = dict(model_id="judgment-proposal:" + data["program"]["candidate_identity"],
-            version=PROTOCOL, dialect="judgment-model-2", domain_assumptions=list(assumptions),
+            version=PROTOCOL, dialect="judgment-model-3" if result.kind == REPAIR_KIND else "judgment-model-2", domain_assumptions=list(assumptions),
             fit_residuals=[], unmodeled_observations=list(residuals))
         if local != expected:
             raise ValueError("original local-model qualifications changed")
@@ -85,10 +97,10 @@ def verify_concept_inference(result, *, replay=True):
     tokens, unavailable inside the v2 certificate. Those IDs must be matched to
     the original accepted store object by the caller, as with shipped v2.
     """
-    if type(result) is not InferenceResult or result.kind != BASE_KIND:
+    if type(result) is not InferenceResult or result.kind not in (BASE_KIND, REPAIR_KIND):
         raise ValueError("original concept inference required")
     data = thaw(result.values)
-    if data["operator_version"] != BASE_VERSION:
+    if data["operator_version"] != (REPAIR_VERSION if result.kind == REPAIR_KIND else BASE_VERSION):
         raise ValueError("unsupported original concept operator")
     _bound(data["execution_allowance"])
     environments = _local_environments(result, data)
@@ -106,7 +118,11 @@ def verify_concept_inference(result, *, replay=True):
             raise ValueError("original concept condition order or multiplicity changed")
     else:
         snapshot = _snapshot(data["program"]["host_context"], data["source_versions"], data["rule_version"])
-        verify_concept_program(data["program"], snapshot, _bound(data["execution_allowance"]))
+        if result.kind == REPAIR_KIND:
+            from hcl.semantics.concept_repair_compiler import verify_repair_program
+            verify_repair_program(data["program"], snapshot, _bound(data["execution_allowance"]))
+        else:
+            verify_concept_program(data["program"], snapshot, _bound(data["execution_allowance"]))
         environments.update(data["concepts"]["assumption_environments"])
         for branch in data["branches"]:
             for model in branch["actual_judgment"]["models"]:
@@ -179,7 +195,7 @@ def _compatible(program, choice, adopted):
 def _prepare(base, selections, *, replay=False):
     data = thaw(base.values)
     verify_concept_inference(base, replay=replay)
-    program = deepcopy(data["program"]["concepts"])
+    program = deepcopy(_concept_program(data))
     sources = dict(data["source_versions"])
     choices = {c["id"]: c for c in program["choices"]}
     original_versions = {v["id"]: v for v in program["versions"]}
@@ -207,7 +223,7 @@ def _prepare(base, selections, *, replay=False):
         if len(matching) != 1 or not adopted["concepts"]["complete"]:
             _needs("uncomputed_adopted_definition")
         definition = matching[0]
-        version = deepcopy(next(v for v in adopted["program"]["concepts"]["versions"] if v["id"] == selection["version_label"]))
+        version = deepcopy(next(v for v in _concept_program(adopted)["versions"] if v["id"] == selection["version_label"]))
         family = "concept:" + digest([program["namespace"], version["scope"], version["concept_key"]])
         if (definition["concept_id"] != family or definition["definition_version"] !=
                 "concept-definition:" + digest([family, semantic_definition(version)])):
@@ -226,7 +242,7 @@ def _prepare(base, selections, *, replay=False):
         program["versions"].append(version)
         choices[key]["versions"] = [label]
         _merge_sources(sources, adopted["source_versions"])
-        for segment_id, binding in adopted["program"]["concepts"]["source_bindings"].items():
+        for segment_id, binding in _concept_program(adopted)["source_bindings"].items():
             if segment_id in program["source_bindings"] and program["source_bindings"][segment_id] != binding:
                 _needs("conflicting_source_binding")
             program["source_bindings"][segment_id] = binding
@@ -333,9 +349,10 @@ def _solve(snapshot, issue, allowance, base, selections):
         issues.append("PERSISTENT_CONCEPT_INCOMPLETE_VERSION_FRONTIER")
     if program["unmodeled_segments"]:
         issues.append("UNMODELED_CONCEPT_SOURCE")
-    values = dict(schema=SCHEMA, operator_version=VERSION, issue_id=issue.issue_id,
+    repair = _has_repair(base, selections)
+    values = dict(schema=REPAIR_SCHEMA if repair else SCHEMA, operator_version=PERSISTENT_REPAIR_VERSION if repair else VERSION, issue_id=issue.issue_id,
         rule_version=snapshot.rule_version, source_versions=dict(snapshot.source_versions),
-        base_result=codec.encode(base), selections=list(selections), concepts=concepts, branches=branches,
+        base_result=pack_proof(base), selections=list(selections), concepts=concepts, branches=branches,
         robust_recommended=robust, complete=complete, issues=sorted(set(issues)),
         local_evaluations=work.used, execution_allowance=work.limit,
         reused_fixed_models=len(fixed) * len(branches), semantic_certified=False,
@@ -344,13 +361,13 @@ def _solve(snapshot, issue, allowance, base, selections):
 
 
 def _previous_recipe(previous, base):
-    if type(previous) is not InferenceResult or previous.kind != KIND:
+    if type(previous) is not InferenceResult or previous.kind not in (KIND, PERSISTENT_REPAIR_KIND):
         raise ValueError("previous persistent inference required")
     data = thaw(previous.values)
     # Previous is already an accepted result at the runtime boundary. Recheck
     # its immutable base and metadata; delivery independently replays its recipe.
     _check_persistent_metadata(previous)
-    if data["base_result"] != codec.encode(base):
+    if data["base_result"] != pack_proof(base):
         _needs("different_original_base")
     sources = dict(base.values["source_versions"])
     for selection in data["selections"]:
@@ -372,13 +389,16 @@ def _operation(snapshot, issue, allowance, base, selections, previous=None):
                 _needs("missing_prior_comparison_source")
             environments.update(proof.assumption_environments)
             counters.update(proof.counterevidence_ids)
+    if previous is not None and _has_repair(base, previous["selections"]):
+        values.update(schema=REPAIR_SCHEMA, operator_version=PERSISTENT_REPAIR_VERSION)
+    repair = values["schema"] == REPAIR_SCHEMA
     values.update(comparison_basis="ORIGINAL_BASE_BUNDLE" if previous is None else "PRIOR_PERSISTENT_PROJECTION",
                   semantics_changed=projection["semantics"] != prior["semantics"],
                   trace_changed=projection["trace"] != prior["trace"])
-    inference = InferenceResult("persistent-concept:" + digest([issue.issue_id, _canonical(values)]), KIND, values,
+    inference = InferenceResult("persistent-concept:" + digest([issue.issue_id, _canonical(values)]), PERSISTENT_REPAIR_KIND if repair else KIND, values,
         tuple(sorted(environments)), tuple(sorted(snapshot.source_versions)), tuple(sorted(counters)),
         snapshot.rule_version, COVERAGE)
-    return OpResult("judgment.persistent_concepts", VERSION, snapshot.source_versions, ("append_inference",),
+    return OpResult("judgment.persistent_concepts", PERSISTENT_REPAIR_VERSION if repair else VERSION, snapshot.source_versions, ("append_inference",),
         (inference.result_id,), tuple(values["issues"]), dict(local_evaluations=values["local_evaluations"]), (),
         Delta(snapshot.session_id, snapshot.principal, snapshot.revision, snapshot.access_epoch,
               snapshot.rule_version, snapshot.source_versions, (inference,)))
@@ -404,7 +424,7 @@ def compute_persistent(snapshot, issue, allowance, base_result: InferenceResult,
 def verify_persistent(values):
     """Replay all evidence, one bounded prior projection, and the actual new solve."""
     data = thaw(values)
-    if data["schema"] != SCHEMA or data["operator_version"] != VERSION:
+    if (data["schema"],data["operator_version"]) not in ((SCHEMA,VERSION),(REPAIR_SCHEMA,PERSISTENT_REPAIR_VERSION)):
         raise ValueError("unsupported persistent concept certificate")
     base = _decode_proof(data["base_result"])
     _prepare(base, data["selections"], replay=True)
@@ -443,7 +463,8 @@ def _valid_result_identity(result_id, data):
 
 def _check_persistent_metadata(result, expected=None):
     data = thaw(result.values)
-    if (result.kind != KIND or data["schema"] != SCHEMA or data["operator_version"] != VERSION
+    if ((result.kind,data["schema"],data["operator_version"]) not in
+            ((KIND,SCHEMA,VERSION),(PERSISTENT_REPAIR_KIND,REPAIR_SCHEMA,PERSISTENT_REPAIR_VERSION))
             or not _valid_result_identity(result.result_id, data)
             or tuple(result.premise_ids) != tuple(sorted(data["source_versions"]))
             or result.rule_version != data["rule_version"] or result.coverage != COVERAGE or result.diagnostics):

@@ -13,12 +13,14 @@ def concept_judgment_claim(result):
         if local is not None:
             assumptions, residuals = concept_judgment_qualifications(result.values["program"])
             qualifications = dict(model_id="judgment-proposal:" + result.values["program"]["candidate_identity"],
-                version=PROTOCOL, dialect="judgment-model-2", domain_assumptions=list(assumptions),
+                version=PROTOCOL, dialect="judgment-model-3" if result.kind=="CONDITIONAL_CONCEPT_REPAIR_JUDGMENT" else "judgment-model-2", domain_assumptions=list(assumptions),
                 fit_residuals=[], unmodeled_observations=list(residuals))
             if thaw(local) != qualifications:
                 raise ValueError("conceptual model qualifications changed")
             environments.update("local-model:" + local["model_id"] + ":assumption:" + str(i)
                                 for i in range(len(local["domain_assumptions"])))
+        if result.kind != expected.kind:
+            raise ValueError("concept result dialect kind changed")
         if (set(result.assumption_environments) != environments or result.premise_ids != expected.premise_ids
                 or result.counterevidence_ids != expected.counterevidence_ids or result.rule_version != expected.rule_version
                 or result.coverage != expected.coverage):
@@ -28,6 +30,12 @@ def concept_judgment_claim(result):
                          "The judgment differs from its actual concept definitions, original terms or joint calculations.") from None
     value = result.values
     lines = ["Conditional concept-sensitive judgment. Definition direction, examples and source interpretation remain explicit hypotheses."]
+    for repair in value.get("repairs", ()):
+        lines.append("Counterexample repair " + repair["id"] + ": " + repair["status"]
+            + "; language=" + repair.get("language", "WITHDRAWN")
+            + "; finite minimum-structure candidates=" + repr(tuple(repair.get("minimum_consistent_candidate_ids", ())))
+            + "; Pareto proposals=" + repr(tuple(repair.get("pareto_candidate_ids", ())))
+            + ". Proposals and comparison do not authorize adoption.")
     for definition in value["concepts"]["definitions"]:
         lines.append("Definition " + definition["id"] + "=" + definition["definition_version"] + "; purpose="
                      + definition["semantic_definition"]["purpose"] + ".")
@@ -53,6 +61,8 @@ def concept_judgment_claim(result):
     if value["issues"]:
         lines.append("Unresolved: " + ", ".join(value["issues"]) + ".")
     names = ("concepts", "branches", "robust_recommended", "sensitivity", "complete", "source_versions", "issues", "local_evaluations", "semantic_certified", "scope")
+    if "repairs" in value:
+        names = (*names, "repairs")
     return AnswerClaim(" ".join(lines), "claim:" + result.result_id,
         tuple(ResultField(result.result_id, name, value[name]) for name in names),
         result.assumption_environments, result.counterevidence_ids, "CONDITIONAL_CONCEPT_SENSITIVE_NOT_MORAL_TRUTH")

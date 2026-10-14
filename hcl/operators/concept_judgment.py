@@ -14,6 +14,8 @@ from hcl.semantics.judgment_concept_compiler import verify_concept_program
 
 VERSION = "s4-concept-sensitive-judgment-2"
 KIND = "CONDITIONAL_CONCEPT_JUDGMENT"
+REPAIR_KIND = "CONDITIONAL_CONCEPT_REPAIR_JUDGMENT"
+REPAIR_VERSION = "s4-counterexample-concept-judgment-3"
 
 
 def bind_classifications(model, group, classifications, out, argument, actual07, work):
@@ -107,11 +109,23 @@ class ConceptJudgmentOperator:
 
     def _run(self, snapshot, issue, allowance, program):
         from hcl.operators.judgment_model import JudgmentModelOperator
-        verify_concept_program(program, snapshot, allowance)
+        repair = program.get("schema") == "hcl-judgment-candidates-3"
+        expansion = None
+        if repair:
+            from hcl.semantics.concept_repair_compiler import verify_repair_program
+            verify_repair_program(program, snapshot, allowance)
+        else:
+            verify_concept_program(program, snapshot, allowance)
         work = JudgmentWork(allowance.max_local_evaluations)
-        concepts = compute_versions(program["concepts"], work.limit)
+        if repair:
+            from hcl.operators.concept_repairs import expand_repairs
+            expansion = expand_repairs(program, work.limit)
+            work.spend(expansion["work"])
+        concepts = compute_versions(program["concepts"] if expansion is None else expansion["concepts"], work.limit-work.used)
         work.spend(concepts["local_evaluations"])
         branches, issues, environments = [], list(concepts["frontier"]), set(concepts["assumption_environments"])
+        if expansion is not None:
+            issues.extend(expansion["frontier"])
         shared_upstream = {}
         try:
             for branch in concepts["branches"]:
@@ -137,7 +151,7 @@ class ConceptJudgmentOperator:
                     issues.append("CONCEPT_JUDGMENT_BRANCH_INCOMPLETE")
         except OverflowError:
             issues.append("CONCEPT_JUDGMENT_WORK_FRONTIER")
-        complete = bool(branches) and concepts["complete"] and len(branches) == len(concepts["branches"]) and all(b["complete"] for b in branches)
+        complete = (expansion is None or not expansion["frontier"]) and bool(branches) and concepts["complete"] and len(branches) == len(concepts["branches"]) and all(b["complete"] for b in branches)
         robust, sensitivity = {}, []
         try:
             if complete:
@@ -168,15 +182,18 @@ class ConceptJudgmentOperator:
             issues.append("CONCEPT_JUDGMENT_INCOMPLETE_VERSION_FRONTIER")
         if program["concepts"]["unmodeled_segments"]:
             issues.append("UNMODELED_CONCEPT_SOURCE")
-        values = dict(operator_version=VERSION, issue_id=issue.issue_id, rule_version=snapshot.rule_version,
+        values = dict(operator_version=REPAIR_VERSION if repair else VERSION, issue_id=issue.issue_id, rule_version=snapshot.rule_version,
             source_versions=dict(snapshot.source_versions), program=program, concepts=concepts, branches=branches,
             complete=complete, robust_recommended=robust, sensitivity=sensitivity, local_evaluations=work.used,
             execution_allowance=work.limit, issues=sorted(set(issues)), semantic_certified=False,
             scope="FINITE_DECLARED_JOINT_VERSION_SENSITIVITY_NOT_GLOBAL_PROPAGATION")
-        result = InferenceResult("concept-judgment:" + digest([issue.issue_id, values]), KIND, values,
+        if expansion is not None:
+            values.update(repairs=expansion["repairs"], generated_concepts=expansion["concepts"],
+                scope="FINITE_COUNTEREXAMPLE_PARTITION_REPAIR_NOT_ADOPTION_OR_GLOBAL_OPTIMALITY")
+        result = InferenceResult("concept-judgment:" + digest([issue.issue_id, values]), REPAIR_KIND if repair else KIND, values,
             tuple(sorted(environments)), tuple(sorted(snapshot.source_versions)), tuple(concepts["counterevidence_ids"]),
             snapshot.rule_version, "CONDITIONAL_CONCEPT_SENSITIVE_JUDGMENT")
-        return OpResult("judgment.concept_versions", VERSION, snapshot.source_versions, ("append_inference",),
+        return OpResult("judgment.concept_versions", REPAIR_VERSION if repair else VERSION, snapshot.source_versions, ("append_inference",),
             (result.result_id,), tuple(sorted(set(issues))), dict(local_evaluations=work.used), (),
             Delta(snapshot.session_id, snapshot.principal, snapshot.revision, snapshot.access_epoch,
                   snapshot.rule_version, snapshot.source_versions, (result,)))

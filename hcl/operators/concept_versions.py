@@ -26,7 +26,11 @@ def classify_case(definition, case, work):
             uncertain.append(criterion["id"])
             traces.append(dict(criterion_id=criterion["id"], match="UNCOMPUTED", direction=criterion["direction"]))
             continue
-        check = match_independent_case(actual["pattern"], case["term"], work.spend)
+        if "patterns" in actual:
+            from hcl.operators.concept_repairs import match_disjunction
+            check = match_disjunction(actual["patterns"], case["term"], work.spend)
+        else:
+            check = match_independent_case(actual["pattern"], case["term"], work.spend)
         direction = criterion["direction"]
         trace = dict(criterion_id=criterion["id"], direction=direction, actual=check,
                      challenged_by=criterion["counterexamples"], boundary=criterion["boundary"])
@@ -82,7 +86,13 @@ def compute_versions(program, max_work):
                 withdrawn = (not set(criterion["assumptions"]) <= active or
                              any(len(selected[k]) != len(criterion[k]) for k in selected))
                 actual = None
-                if selected["positive"] and not set(criterion["assumptions"]) - active:
+                if version.get("definition_language") == "OR_OF_POSITIVE_PARTITION_LGGS_1":
+                    from hcl.operators.concept_repairs import evaluate_partition
+                    if not withdrawn:
+                        actual = evaluate_partition(criterion, min(1000000, work.limit-work.used))
+                        work.spend(actual["work"])
+                        frontier.extend(actual["frontier"])
+                elif selected["positive"] and not set(criterion["assumptions"]) - active:
                     actual = generalize_examples(*([dict(id=r["id"], term=r["term"]) for r in selected[k]]
                                                    for k in ("positive", "negative")),
                                                  max_work=min(1000000, work.limit - work.used))
@@ -94,7 +104,11 @@ def compute_versions(program, max_work):
                 counters.update("concept-example:" + version["id"] + ":" + criterion["id"] + ":" + k for k in challenged)
                 boundary = []
                 for row in selected["boundary"]:
-                    check = match_independent_case(None if actual is None else actual["pattern"], row["term"], work.spend)
+                    if actual is not None and "patterns" in actual:
+                        from hcl.operators.concept_repairs import match_disjunction
+                        check = match_disjunction(actual["patterns"], row["term"], work.spend)
+                    else:
+                        check = match_independent_case(None if actual is None else actual["pattern"], row["term"], work.spend)
                     boundary.append(dict(id=row["id"], term=row["term"], actual=check, segment_ids=row["segment_ids"]))
                 definition["criteria"].append(dict(id=criterion["id"], direction=criterion["direction"],
                     actual=actual, counterexamples=challenged, boundary=boundary, withdrawn=withdrawn))

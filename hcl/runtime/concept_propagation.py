@@ -11,6 +11,7 @@ from hcl.kernel.concept_registry import ConceptAdoptionIssue, ConceptFollowIssue
 from hcl.kernel.dependencies import QueryDelta, pack_dependencies
 from hcl.kernel.types import Delta, InferenceResult, OpResult, SourceHandle, thaw
 from hcl.memory import codec
+from hcl.operators.concept_proof import unpack_proof
 from hcl.memory import concept_registry as registry
 from hcl.semantics.concept_version_compiler import digest, host_context
 
@@ -20,7 +21,7 @@ KINDS = ("concept.adopt", "judgment.follow_concepts")
 def follow_snapshot(runner, request, goal):
     store = runner.store
     first = store.query_snapshot(request.session_id, request.principal, (), (ConceptQuery("RESULT", goal.base_result_id),))
-    proof = codec.decode(thaw(first.query_views["0"]["proof"]))
+    proof = unpack_proof(first.query_views["0"]["proof"])
     concepts = proof.values["program"]["concepts"]
     choices = {c["id"]:c for c in concepts["choices"]}
     queries = [ConceptQuery("RESULT", goal.base_result_id)]
@@ -83,7 +84,7 @@ def adopt_operation(runner, request, goal, snapshot):
 
 def follow_operation(runner, request, node, snapshot, allowance):
     from hcl.operators.persistent_concepts import compute_persistent
-    base = codec.decode(thaw(snapshot.query_views["0"]["proof"]))
+    base = unpack_proof(snapshot.query_views["0"]["proof"])
     selections = []
     for number,binding in enumerate(node["goal"].bindings,1):
         selection = thaw(snapshot.query_views[str(number)]["selection"])
