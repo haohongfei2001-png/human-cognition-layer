@@ -12,6 +12,7 @@ from hcl.kernel.types import HCLFailure, InferenceResult, freeze, thaw
 from hcl.kernel.concept_registry import ConceptQuery, ConceptDependency, VERSION
 from hcl.kernel.dependencies import unpack_dependencies
 from hcl.memory import codec
+from hcl.operators.concept_proof import pack_proof, unpack_proof
 from hcl.semantics.concept_version_compiler import digest, host_context
 
 ADOPTION = "CONCEPT_ADOPTION"
@@ -68,7 +69,7 @@ def load_proof(store, db, session, principal, result_id):
             raise failure("CONCEPT_SOURCE_REQUIRES_RECOMPILE", "NEEDS_RECOMPILE") from None
         raise
     result = store._get_object(row["object_hash"])
-    if (type(result) is not InferenceResult or result.kind != "CONDITIONAL_CONCEPT_JUDGMENT"
+    if (type(result) is not InferenceResult or result.kind not in ("CONDITIONAL_CONCEPT_JUDGMENT", "CONDITIONAL_CONCEPT_REPAIR_JUDGMENT")
             or thaw(result.values["program"]["host_context"]) != dict(session_id=session["session_id"], principal=asdict(principal))
             or dict(result.values["source_versions"]) != positive or result.rule_version != session["rule"]):
         raise failure("CONCEPT_PROOF_NAMESPACE_MISMATCH", "DENIED")
@@ -93,7 +94,7 @@ def project(store, db, session, principal, query):
     body = dict(schema=VERSION, query=query.wire(), source_versions={}, origin_result_ids=[])
     if query.mode == "RESULT":
         proof, positive = load_proof(store, db, session, principal, query.key)
-        body.update(status="AVAILABLE", proof=codec.encode(proof), source_versions=positive,
+        body.update(status="AVAILABLE", proof=pack_proof(proof), source_versions=positive,
                     origin_result_ids=[proof.result_id])
     else:
         rows = header_rows(store, db, session, principal, query.key)
@@ -127,7 +128,7 @@ def project(store, db, session, principal, query):
                 proof, positive, d = sorted(supports, key=lambda s:s[0].result_id)[0]
                 body.update(status="AVAILABLE", source_versions=positive, origin_result_ids=[proof.result_id],
                     selection=dict(adoption_id=latest.result_id, definition_version=d["definition_version"],
-                        concept_id=d["concept_id"], proof=codec.encode(proof), version_label=d["id"], stream_id=query.key))
+                        concept_id=d["concept_id"], proof=pack_proof(proof), version_label=d["id"], stream_id=query.key))
     dependency = ConceptDependency(query, sha256(codec.canonical(body).encode()).hexdigest())
     return dependency, freeze(body)
 
@@ -245,9 +246,11 @@ def authorize_delivery(store, session_id, principal, row):
     # Native operators and runtime-wrapped successors have different valid IDs.
     # The structured additive kind owns this boundary, never an ID convention.
     result = store._get_object(row["object_hash"])
-    if result.kind == "CONDITIONAL_PERSISTENT_CONCEPT_JUDGMENT":
-        base = codec.decode(thaw(result.values["base_result"]))
+    if result.kind in ("CONDITIONAL_PERSISTENT_CONCEPT_JUDGMENT", "CONDITIONAL_PERSISTENT_CONCEPT_REPAIR_JUDGMENT"):
+        base = unpack_proof(result.values["base_result"])
         host = base.values["program"]["host_context"]
+    elif result.kind == "CONDITIONAL_CONCEPT_REPAIR_JUDGMENT":
+        host = result.values["program"]["host_context"]
     elif result.kind in (ADOPTION,SUBSCRIPTION):
         host = result.values["host_context"]
     else:

@@ -3455,7 +3455,7 @@
   "current_execution": {
     "started_at_utc": "2026-10-11T20:31:00Z",
     "authority": "Owner explicitly authorized continued implementation, tests, PRs and verified merges under the approved S1–S7 plan.",
-    "base_main": "5c9080559b00b067b31f99cc6ed0ff0c92120feb",
+    "base_main": "f813ca5fb93ff62b167dd33268cdae4ec0e247d3",
     "current_stage": "S3 ∥ S4",
     "delivered_slice": "S2.3",
     "readiness": "INTEGRATED_OFFLINE",
@@ -3468,7 +3468,7 @@
     "remaining": "继续完整S3/M03–M09与并行S4/M10–M14；当前有限三机制是增量证据，不关闭阶段。完整S1/S2实模功能、S5–S7及T01–T32研究目标全部保留。",
     "historical_boundary": "旧A–H/G-HC/G-ARCH、实验和closed grants保持原证据等级，不自动继承。",
     "validation": "本切片证明注入候选下的真实离线预算执行、结果消费、修订和恢复；不证明开放语义/任务分解、跨块语义组合、完整性或S1/S2阶段完成。",
-    "active_work": "S3有限M03–M09与S4有限M13已接同一runtime；M10已具实际授权检索、依赖闭包及有界保留/擦除治理。当前M11/M12增量实现持久分段阅读、时序/原文形式及精确假设重排、条件段落比较、结构映射与概念反统一。完整自然语义、文学/审美解释、记忆治理及所有研究退出仍开放。 M14新增有限单步规范与价值判断：共享M03/M05/M07事实、M13联合争议、精确条件期望/未知权重Pareto/联合情景稳健推荐与可重算异议；尚不证明完整伦理能力。 M12→M13/M14新增有限不可变概念版本、独立方向分类与联合版本干预，实际改变规范/建议并保持旧承诺原义；同一已授权session/principal内新增显式采用链、跨request自动发现与真实M12/M13/M14局部重算；旧任务字节与原承诺保持。跨session/主体对齐、一般循环与开放语义重编译及完整概念敏感性仍开放。",
+    "active_work": "S3有限M03–M09与S4有限M13已接同一runtime；M10已具实际授权检索、依赖闭包及有界保留/擦除治理。当前M11/M12增量实现持久分段阅读、时序/原文形式及精确假设重排、条件段落比较、结构映射与概念反统一。完整自然语义、文学/审美解释、记忆治理及所有研究退出仍开放。 M14新增有限单步规范与价值判断：共享M03/M05/M07事实、M13联合争议、精确条件期望/未知权重Pareto/联合情景稳健推荐与可重算异议；尚不证明完整伦理能力。 M12→M13/M14新增有限不可变概念版本、独立方向分类与联合版本干预，实际改变规范/建议并保持旧承诺原义；同一已授权session/principal内新增显式采用链、跨request自动发现与真实M12/M13/M14局部重算；旧任务字节与原承诺保持。跨session/主体对齐、一般循环与开放语义重编译及完整概念敏感性仍开放。 M12§4/M13有限反思新增显式正例分区LGG析取修复：保留全部反例与有限语言Pareto，全部一致修复和原读法进入真实M13/M14；只有显式host采用才传播，完整搜索才声明有限语言内最小结构。",
     "domain_evidence": [
       {
         "stage": "S3",
@@ -3491,10 +3491,10 @@
         ],
         "readiness": "INTEGRATED_OFFLINE_PARTIAL",
         "stage_complete": false,
-        "document": "docs/HCL_UNIFIED_S4_ARGUMENT_MODELS.md",
-        "checks": "tests/test_unified_s4_*.py",
-        "witness": "scripts/witness_unified_s4.py",
-        "scope": "Source-anchored injected argument reconstructions; actual finite proof/defeat/acceptance and critical-retraction computations; no full M13, reconstruction, premise truth, open conceptual feedback or reflective-equilibrium proof. Finite directional classification feedback and actual per-solver work accounting are provided by the separate v2 concept-judgment consumer."
+        "document": "docs/HCL_UNIFIED_S4_ARGUMENT_MODELS.md; docs/HCL_UNIFIED_S4_CONCEPT_REPAIRS.md",
+        "checks": "tests/test_unified_s4_*.py; tests/test_unified_concept_repair*.py",
+        "witness": "scripts/witness_unified_s4.py; scripts/witness_unified_concept_repairs.py",
+        "scope": "Source-anchored injected argument reconstructions; actual finite proof/defeat/acceptance and critical-retraction computations; no full M13, reconstruction, premise truth, open conceptual feedback or reflective-equilibrium proof. Finite directional classification feedback and actual per-solver work accounting are provided by the separate v2 concept-judgment consumer. Additive v3 finite positive-partition LGG disjunctions are generated from counterexamples and compared through shared M04; every consistent repair plus original readings feeds actual M12/M13/M14. Conditional proposals never adopt themselves; explicit same-host adoption uses an additive persistent-v2 proof. Only complete finite-language search certifies its structural/block minimum; open concept repair and global reflective-equilibrium optimality remain unproved."
       },
       {
         "stage": "S3",
@@ -3575,10 +3575,10 @@
         ],
         "readiness": "INTEGRATED_OFFLINE_PARTIAL",
         "stage_complete": false,
-        "document": "docs/HCL_UNIFIED_S4_CONCEPTS.md; docs/HCL_UNIFIED_S4_CONCEPT_JUDGMENT.md; docs/HCL_UNIFIED_S4_PERSISTENT_CONCEPTS.md",
-        "checks": "tests/test_unified_s4_structure_mapping.py; tests/test_unified_s4_concept*.py; tests/test_unified_s4_narrative_analogies.py; tests/test_unified_persistent_concept_*.py",
-        "witness": "scripts/witness_unified_concepts.py; scripts/witness_unified_concept_judgment.py; scripts/witness_unified_persistent_concepts.py",
-        "scope": "Source-qualified finite consistent partial relational mappings, higher-order DAGs, counterexamples and typed anti-unification, with actual condition-bound metrics and resource frontier. No unrestricted analogy/metaphor interpretation, open concept discovery or full M12 acceptance. Additive v2 immutable semantic versions, independent directional classification, joint constrained uses and original commitment scope feed actual M13/M14; evidence validity remains separate from semantic identity. Explicit same-session/principal adoption streams now drive bounded cross-request local M12/M13/M14 successors through existing query invalidation. Old tasks and pinned commitments remain immutable; cross-session alignment, general cycles and open semantic recompilation remain open."
+        "document": "docs/HCL_UNIFIED_S4_CONCEPTS.md; docs/HCL_UNIFIED_S4_CONCEPT_JUDGMENT.md; docs/HCL_UNIFIED_S4_PERSISTENT_CONCEPTS.md; docs/HCL_UNIFIED_S4_CONCEPT_REPAIRS.md",
+        "checks": "tests/test_unified_s4_structure_mapping.py; tests/test_unified_s4_concept*.py; tests/test_unified_s4_narrative_analogies.py; tests/test_unified_persistent_concept_*.py; tests/test_unified_concept_repair*.py",
+        "witness": "scripts/witness_unified_concepts.py; scripts/witness_unified_concept_judgment.py; scripts/witness_unified_persistent_concepts.py; scripts/witness_unified_concept_repairs.py",
+        "scope": "Source-qualified finite consistent partial relational mappings, higher-order DAGs, counterexamples and typed anti-unification, with actual condition-bound metrics and resource frontier. No unrestricted analogy/metaphor interpretation, open concept discovery or full M12 acceptance. Additive v2 immutable semantic versions, independent directional classification, joint constrained uses and original commitment scope feed actual M13/M14; evidence validity remains separate from semantic identity. Explicit same-session/principal adoption streams now drive bounded cross-request local M12/M13/M14 successors through existing query invalidation. Old tasks and pinned commitments remain immutable; cross-session alignment, general cycles and open semantic recompilation remain open. Additive v3 finite positive-partition LGG disjunctions are generated from counterexamples and compared through shared M04; every consistent repair plus original readings feeds actual M12/M13/M14. Conditional proposals never adopt themselves; explicit same-host adoption uses an additive persistent-v2 proof. Only complete finite-language search certifies its structural/block minimum; open concept repair and global reflective-equilibrium optimality remain unproved."
       },
       {
         "stage": "S4",
@@ -3587,10 +3587,10 @@
         ],
         "readiness": "INTEGRATED_OFFLINE_PARTIAL",
         "stage_complete": false,
-        "document": "docs/HCL_UNIFIED_S4_JUDGMENT.md; docs/HCL_UNIFIED_S4_CONCEPT_JUDGMENT.md; docs/HCL_UNIFIED_S4_PERSISTENT_CONCEPTS.md",
-        "checks": "tests/test_unified_s4_judgment*.py; tests/test_unified_s4_concept_classification.py; tests/test_unified_s4_concept_judgment*.py; tests/test_unified_persistent_concept_*.py",
-        "witness": "scripts/witness_unified_judgment.py; scripts/witness_unified_concept_judgment.py; scripts/witness_unified_persistent_concepts.py",
-        "scope": "Source-bound injected conditional normative frameworks; actual shared M03/M05 knowledge/opportunities, M07 commitments and M13 joint disputes feed exact finite single-step permission, Pareto/expected/joint-scenario maximin recommendations and dissent. Full replay/source/assumption certificates, interrupted recovery and exact shipped predecessor migration. No moral truth, authenticated user adoption, open conceptual sensitivity, candidate completeness, multi-step policies, full M14/T17/T18/T19 or full S4 acceptance. Additive finite M12 joint-version interventions recompute actual normative branches and conditional decisions, preserve original M07 meaning, and distinguish semantic changes from proof traces. Bounded host-scoped cross-request propagation is covered separately; no automatic global alignment, general cyclic propagation or exhaustive minimal-revision proof."
+        "document": "docs/HCL_UNIFIED_S4_JUDGMENT.md; docs/HCL_UNIFIED_S4_CONCEPT_JUDGMENT.md; docs/HCL_UNIFIED_S4_PERSISTENT_CONCEPTS.md; docs/HCL_UNIFIED_S4_CONCEPT_REPAIRS.md",
+        "checks": "tests/test_unified_s4_judgment*.py; tests/test_unified_s4_concept_classification.py; tests/test_unified_s4_concept_judgment*.py; tests/test_unified_persistent_concept_*.py; tests/test_unified_concept_repair*.py",
+        "witness": "scripts/witness_unified_judgment.py; scripts/witness_unified_concept_judgment.py; scripts/witness_unified_persistent_concepts.py; scripts/witness_unified_concept_repairs.py",
+        "scope": "Source-bound injected conditional normative frameworks; actual shared M03/M05 knowledge/opportunities, M07 commitments and M13 joint disputes feed exact finite single-step permission, Pareto/expected/joint-scenario maximin recommendations and dissent. Full replay/source/assumption certificates, interrupted recovery and exact shipped predecessor migration. No moral truth, authenticated user adoption, open conceptual sensitivity, candidate completeness, multi-step policies, full M14/T17/T18/T19 or full S4 acceptance. Additive finite M12 joint-version interventions recompute actual normative branches and conditional decisions, preserve original M07 meaning, and distinguish semantic changes from proof traces. Bounded host-scoped cross-request propagation is covered separately; no automatic global alignment, general cyclic propagation or exhaustive minimal-revision proof. Additive v3 finite positive-partition LGG disjunctions are generated from counterexamples and compared through shared M04; every consistent repair plus original readings feeds actual M12/M13/M14. Conditional proposals never adopt themselves; explicit same-host adoption uses an additive persistent-v2 proof. Only complete finite-language search certifies its structural/block minimum; open concept repair and global reflective-equilibrium optimality remain unproved."
       }
     ]
   }

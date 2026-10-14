@@ -686,3 +686,31 @@ def verify_discovery(values):
 
     if seen_children != set(programs) - initial:
         raise ValueError("missing mechanism edit lineage")
+
+
+def evaluate_concept_partition(hypothesis, context, remaining):
+    """M12 domain adapter for M04: complete terms in, actual OR matches out.
+
+    Observation labels and scores are deliberately absent from this contract.
+    Patterns were computed from positive partitions, not supplied predictions.
+    """
+    from hcl.operators.concept_repairs import ADAPTER, match_disjunction
+    from hcl.operators.judgment import JudgmentWork
+    if hypothesis.get("adapter") != ADAPTER:
+        raise ValueError("explicit concept partition adapter required")
+    work = JudgmentWork(remaining)
+    predictions, actual = {}, []
+    try:
+        for case in context["cases"]:
+            work.spend()
+            check = match_disjunction(hypothesis["patterns"],case["term"],work.spend)
+            predictions[case["id"]] = dict(status="COMPUTED",values=[check["status"]=="MATCH"],result_refs=[])
+            actual.append(dict(case_id=case["id"],actual=check))
+    except OverflowError:
+        pass
+    record = dict(result_id="concept-partition-prediction:"+identity([hypothesis,context,actual]),
+        kind="CONDITIONAL_PARTITION_MATCH",matches=actual,assumption_environments=[],
+        context_hash=context_identity(context),program_hash=program_hash(hypothesis),
+        resource_usage=dict(local_evaluations=work.used))
+    return dict(status="COMPUTED" if len(predictions)==len(context["cases"]) else "UNCOMPUTED",
+        predictions=predictions,work=work.used,actual_results=[record])

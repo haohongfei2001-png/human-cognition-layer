@@ -33,10 +33,18 @@ def semantic_definition(version):
     """
     criteria = []
     for c in version["criteria"]:
-        criteria.append(dict(direction=c["direction"], assumptions=sorted(c["assumptions"]),
+        criterion = dict(direction=c["direction"], assumptions=sorted(c["assumptions"]),
             **{kind: sorted((dict(term=r["term"], assumptions=sorted(r["assumptions"]))
                             for r in c[kind]), key=codec.canonical)
-               for kind in ("positive", "negative", "boundary")}))
+               for kind in ("positive", "negative", "boundary")})
+        if version.get("definition_language") == "OR_OF_POSITIVE_PARTITION_LGGS_1":
+            terms = {r["id"]: r["term"] for r in c["positive"]}
+            for kind in ("positive", "negative", "boundary"):
+                criterion[kind] = [value for _, value in sorted({codec.canonical(r):r for r in criterion[kind]}.items())]
+            criterion["partition"] = sorted([list({codec.canonical(terms[k]):terms[k] for k in sorted(block, key=lambda x:codec.canonical(terms[x]))}.values())
+                for block in c["partition"]], key=codec.canonical)
+            criterion["definition_language"] = version["definition_language"]
+        criteria.append(criterion)
     return dict(purpose=version["purpose"], frame_kind=version["frame_kind"],
                 effective_at=version["effective_at"], assumptions=sorted(version["assumptions"]),
                 criteria=sorted(criteria, key=codec.canonical))
