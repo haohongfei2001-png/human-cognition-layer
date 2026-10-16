@@ -170,10 +170,35 @@ def point_result(vectors, ids, point, rule, work):
     worst = {a: min(s.values()) for a, s in scores.items()}
     best = max(worst.values(), default=None)
     recommended = sorted(a for a in scores if worst[a] == best and (rule == 'EXPECTED' or a not in dominated))
-    return dict(recommended=recommended, dominated=sorted(dominated), comparisons=comparisons,
+    result = dict(recommended=recommended, dominated=sorted(dominated), comparisons=comparisons,
         worst_scenarios={a: sorted(s for s, v in values.items() if v == worst[a]) for a, values in scores.items()},
         witness_weights={d: encoded(w) for d, w in zip(ids, weights)},
         witness_scores={a: {s: encoded(v) for s, v in values.items()} for a, values in scores.items()})
+    if rule == 'MINIMAX_REGRET':
+        # Opportunity loss compares feasible, norm-permitted alternatives in
+        # the SAME scenario. It needs no probability distribution over worlds.
+        scenario_best = {}
+        for action_scores in scores.values():
+            for scenario, value in action_scores.items():
+                work.spend()
+                scenario_best[scenario] = max(value, scenario_best.get(scenario, value))
+        regrets = {}
+        for action, action_scores in scores.items():
+            regrets[action] = {}
+            for scenario, value in action_scores.items():
+                work.spend()
+                regrets[action][scenario] = scenario_best[scenario] - value
+        maxima = {a: max(values.values()) for a, values in regrets.items()}
+        minimum = min(maxima.values(), default=None)
+        # Preserve all minimizers, including dominated ties: Pareto refinement
+        # is a different decision rule and cannot silently alter this rule.
+        result.update(recommended=sorted(a for a, v in maxima.items() if v == minimum),
+            witness_regrets={a: {s: encoded(v) for s, v in values.items()} for a, values in regrets.items()},
+            maximum_regrets={a: encoded(v) for a, v in maxima.items()},
+            regret_scenarios={a: sorted(s for s, v in values.items() if v == maxima[a]) for a, values in regrets.items()},
+            scenario_best_actions={s: sorted(a for a, values in scores.items() if values[s] == value)
+                                   for s, value in scenario_best.items()})
+    return result
 
 
 def interval(constraints):
@@ -197,7 +222,7 @@ def solve_regions(domain, vectors, ids, rule, work, *, max_cells=256, max_proof_
     Outputs partial certified cells on budget exhaustion, never universal claims.
     Coverage includes every sign branch, including exact lower-dimensional ties.
     """
-    if rule not in ('EXPECTED', 'MAXIMIN') or not 1 <= len(ids) <= 4: raise ValueError('bounded weight domain required')
+    if rule not in ('EXPECTED', 'MAXIMIN', 'MINIMAX_REGRET') or not 1 <= len(ids) <= 4: raise ValueError('bounded weight domain required')
     scenario_ids = None
     for scenarios in vectors.values():
         if not scenarios or (rule == 'EXPECTED' and len(scenarios) != 1): raise ValueError('joint scenarios required')
@@ -222,6 +247,18 @@ def solve_regions(domain, vectors, ids, rule, work, *, max_cells=256, max_proof_
                 work.spend(1+len(ids))
                 v = [Fraction(vectors[action][scenario][d]) for d in ids]
                 lines.append(tuple([x-v[-1] for x in v[:-1]]+[v[-1]]))
+        if rule == 'MINIMAX_REGRET':
+            # Regret is max_{scenario,alternative}(u(other,s)-u(action,s)).
+            # Pairwise differences of these affine forms are essential: utility
+            # crossings alone miss regret-switch and recommendation boundaries.
+            regret_lines = set()
+            for action in sorted(vectors):
+                for other in sorted(vectors):
+                    for scenario in sorted(vectors[action]):
+                        work.spend(1+len(ids))
+                        v = [Fraction(vectors[other][scenario][d])-Fraction(vectors[action][scenario][d]) for d in ids]
+                        regret_lines.add(tuple([x-v[-1] for x in v[:-1]]+[v[-1]]))
+            lines.extend(sorted(regret_lines))
         planes = set()
         for left, right in combinations(lines, 2):
             work.spend(1+len(ids))

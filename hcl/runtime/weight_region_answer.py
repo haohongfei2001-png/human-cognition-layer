@@ -28,6 +28,8 @@ def weight_region_claim(result):
     for analysis in value['analyses']:
         lines.append('Domain '+analysis['domain_id']+': robust recommendations '+repr(tuple(analysis['robust_recommended']))+
                      '; possible recommendations '+repr(tuple(analysis['possible_recommended']))+'.')
+        if analysis['decision_rule'] == 'MINIMAX_REGRET':
+            lines.append('Declared MINIMAX_REGRET minimizes the largest same-scenario opportunity loss against permitted alternatives, retains all minimizer ties, and assumes no probabilities across scenarios.')
         for branch in analysis['branches']:
             regions = branch['regions']
             lines.append('Joint branch '+str(branch['branch_index'])+' '+regions['status']+'.')

@@ -52,13 +52,14 @@ def witness():
     with tempfile.TemporaryDirectory() as directory:
         store=StateStore.sqlite(Path(directory)/'state.sqlite', revision=True); store.create_session('s',owner,{'bob'})
         handles=(store.put_source('s',owner,'scene',SCENE), store.put_source('s',owner,'principles',PRINCIPLES))
-        for mode in ('simplex','interval','empty','budget','joint-norms'):
+        for mode in ('simplex','interval','empty','budget','joint-norms','minimax-regret'):
             request=TaskRequest(mode,QUESTION,handles,'s',owner, budget=ExecutionBudget(max_mock_calls=1,max_feedback=0,
                 max_local_evaluations=1800 if mode=='budget' else 100000,max_request_bytes=1048576,max_context_tokens=1048576,
                 max_output_bytes=1048576,max_total_output_bytes=8000000,max_visible_output_tokens=1048576),
                 issue=ExecutionIssue('root',goals=(Issue(mode,'judgment.evaluate'),)))
             candidate=propose(store.snapshot('s',owner,handles),QUESTION); domain=candidate['weight_domains'][0]
             if mode in ('interval','empty'): domain['constraints']=interval_constraints(domain['segment_ids'],high='1/4' if mode=='empty' else '11/20')
+            if mode=='minimax-regret': domain['decision_rule']='MINIMAX_REGRET'
             if mode=='joint-norms':
                 model=candidate['models'][0]; model['argument']['priorities']=[]
                 model['decisions'][0]['frameworks'][0]['norms']=[dict(id='protect',label='duty',permitted_actions=['X'],guard_fact_ids=['knowledge','control'],argument_query_id='duty',segment_ids=domain['segment_ids'])]
@@ -70,6 +71,10 @@ def witness():
                 analysis=value['analyses'][0]; partition=analysis['branches'][0]['regions']['recommendation_partition']
                 assert len(partition)==5 and partition[1]['lower']=='2/5' and partition[3]['lower']=='3/5'
                 assert analysis['complete'] and analysis['robust_recommended']==[] and analysis['possible_recommended']==['X','Y','Z']
+            elif mode=='minimax-regret':
+                assert value['analyses'][0]['complete']
+                assert 'MINIMAX_REGRET' in result.answer
+                assert all('maximum_regrets' in c for c in value['analyses'][0]['branches'][0]['regions']['cells'])
             elif mode=='interval': assert value['analyses'][0]['unique_robust_recommended']==['Y']
             elif mode=='empty': assert value['analyses'][0]['robust_recommended']==[] and value['analyses'][0]['branches'][0]['regions']['domain_status']=='EMPTY'
             elif mode=='joint-norms': assert len(value['analyses'][0]['branches'])==2 and value['analyses'][0]['robust_recommended']==[]

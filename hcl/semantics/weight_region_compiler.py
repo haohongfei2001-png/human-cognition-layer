@@ -56,7 +56,7 @@ class WeightRegionCompiler(JudgmentCompiler):
             framework = next(f for f in decision['frameworks'] if f['id'] == domain['framework_id'])
             if framework['weights'] is not None or framework['decision_rule'] != 'PARETO':
                 raise ValueError('domain analysis must explicitly preserve unknown fixed weights')
-            if domain['decision_rule'] not in ('EXPECTED', 'MAXIMIN'): raise ValueError('explicit scalar rule required')
+            if domain['decision_rule'] not in ('EXPECTED', 'MAXIMIN', 'MINIMAX_REGRET'): raise ValueError('explicit scalar rule required')
             if domain['decision_rule'] == 'EXPECTED' and len(decision['scenarios']) > 1: raise ValueError('expected rule requires one scenario')
             ids = [d['id'] for d in decision['dimensions']]
             if len(ids) > 4: raise ValueError('at most four declared dimensions')

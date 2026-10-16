@@ -13,6 +13,7 @@ from hcl.semantics.weight_region_compiler import verify_weight_program
 
 KIND = 'CONDITIONAL_WEIGHT_REGION_JUDGMENT'
 VERSION = 's4-exact-weight-region-judgment-5'
+REGRET_VERSION = 's4-exact-weight-region-minimax-regret-1'
 COVERAGE = 'EXACT_FINITE_WEIGHT_DOMAIN_NOT_PREFERENCE_INFERENCE_OR_ADOPTION'
 MAX_CERTIFICATE_BYTES = 4 * 1024 * 1024
 
@@ -96,7 +97,8 @@ class WeightRegionOperator:
             issues.append('WEIGHT_WORK_OR_PROOF_FRONTIER')
         complete = len(analyses) == len(program['weight_domains']) and all(a['complete'] for a in analyses)
         if not complete: issues.append('WEIGHT_REGIONS_CONDITIONAL_FRONTIER')
-        values = dict(operator_version=VERSION, issue_id=issue.issue_id, rule_version=snapshot.rule_version,
+        version = REGRET_VERSION if any(d['decision_rule'] == 'MINIMAX_REGRET' for d in program['weight_domains']) else VERSION
+        values = dict(operator_version=version, issue_id=issue.issue_id, rule_version=snapshot.rule_version,
             source_versions=dict(snapshot.source_versions), program=program, actual_judgment=actual,
             analyses=analyses, complete=complete, execution_allowance=work.limit, local_evaluations=work.used,
             issues=sorted(set(issues)), semantic_certified=False, scope=COVERAGE)
@@ -104,7 +106,7 @@ class WeightRegionOperator:
             tuple(sorted(environments)), tuple(sorted(snapshot.source_versions)), tuple(sorted(counters)), snapshot.rule_version, COVERAGE)
         if len(codec.dumps(result)) > MAX_CERTIFICATE_BYTES:
             raise HCLFailure('BUDGET_EXHAUSTED', 'weight_regions', 'WEIGHT_AUDIT_CAPACITY', 'proof', 'The exact weight proof exceeds the unchanged audit capacity.')
-        return OpResult('judgment.weight_regions', VERSION, snapshot.source_versions, ('append_inference',),
+        return OpResult('judgment.weight_regions', version, snapshot.source_versions, ('append_inference',),
             (result.result_id,), tuple(sorted(set(issues))), dict(local_evaluations=work.used), (),
             Delta(snapshot.session_id, snapshot.principal, snapshot.revision, snapshot.access_epoch, snapshot.rule_version, snapshot.source_versions, (result,)))
 
