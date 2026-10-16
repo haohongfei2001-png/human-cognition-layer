@@ -117,3 +117,26 @@ fixed upstream values, hard obligations, budgets, tampering, stream/reopen,
 recovery and current access. `witness_unified_weight_regions` binds the exact
 checked commit and runtime source hashes to computed final fields. No live model,
 sealed content, paid service, automatic preference inference or adoption is used.
+
+## Explicit minimax regret (M14 §3/§5)
+
+The additive v5 `MINIMAX_REGRET` rule minimizes, over feasible and definitely
+permitted actions, the maximum same-scenario opportunity loss
+`max_s(max_b U(b,s,w) - U(a,s,w))`. No probabilities over scenarios are inferred.
+Hard-excluded actions are absent from both the choice set and benchmark. All
+minimizing ties remain, including Pareto-dominated ties; Pareto refinement would
+be a separate declared rule. Unresolved upstream branches cannot certify robust
+recommendations.
+
+The exact arrangement additionally includes crossings of every same-scenario
+regret affine form. Utility crossings alone are insufficient. Witnesses retain
+regrets, maxima, adverse scenarios and best alternative identities at each cell's
+explicit rational witness. Values at a witness are not asserted constant over
+a cell. Proof/work/cell frontiers retain no universal winner claim. Replay
+recomputes these fields; compact delivery exposes the values and witness weights.
+
+Existing EXPECTED/MAXIMIN outputs and operator version remain unchanged. New
+regret requests carry `s4-exact-weight-region-minimax-regret-1`; no historical
+certificate is rewritten. Tests use an independent continuous rational envelope
+oracle, actual HCL.run/receipts, tamper rejection, hard duties and unknown guards.
+This is a finite conditional offline capability, not full M14/S4 acceptance.

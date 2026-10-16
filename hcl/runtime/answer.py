@@ -1044,6 +1044,9 @@ class AnswerAssembler:
                     for k, cell in enumerate(branch["regions"]["cells"]):
                         for name in ("cell_id", "constraints", "recommended", "dominated", "worst_scenarios"):
                             projections.append(ProjectedResultField(result.result_id, "analyses", cell[name], (str(i), "branches", str(j), "regions", "cells", str(k), name)))
+                        if analysis["decision_rule"] == "MINIMAX_REGRET":
+                            for name in ("witness_weights", "witness_scores", "witness_regrets", "maximum_regrets", "regret_scenarios", "scenario_best_actions"):
+                                projections.append(ProjectedResultField(result.result_id, "analyses", cell[name], (str(i), "branches", str(j), "regions", "cells", str(k), name)))
                     for name in ("status", "complete", "domain_status", "recommendation_partition", "robust_recommended", "possible_recommended", "tie_boundaries", "frontier"):
                         projections.append(ProjectedResultField(result.result_id, "analyses", branch["regions"][name], (str(i), "branches", str(j), "regions", name)))
         elif result.kind == "CONDITIONAL_JOINT_CHANGE_JUDGMENT":
