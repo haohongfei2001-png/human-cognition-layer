@@ -38,8 +38,6 @@ class WeightRegionCompiler(JudgmentCompiler):
             parse_constant=lambda _: (_ for _ in ()).throw(ValueError('nonfinite value')))
         self._keys(data, 'schema models weight_domains')
         if data['schema'] != SCHEMA: raise ValueError('explicit v5 required')
-        if any('policy_horizon' in d for m in data['models'] for d in m['decisions']):
-            raise self._invalid('bounded_policy_composition')
         base = thaw(JudgmentCompiler().compile(snapshot, segments,
             json.dumps(dict(schema='hcl-judgment-candidates-1', models=data['models']), ensure_ascii=False), allowance))
         domains = data['weight_domains']

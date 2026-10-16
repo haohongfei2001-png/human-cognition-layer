@@ -151,7 +151,7 @@ def sign_constraints(hyperplane, sign):
     return [inequality(a, b), inequality([-v for v in a], -b)]
 
 
-def point_result(vectors, ids, point, rule, work):
+def point_result(vectors, ids, point, rule, work, *, preserve_scalar_ties=False):
     weights = [*map(Fraction, point), 1-sum(map(Fraction, point))]
     scores = {}
     for action, scenarios in vectors.items():
@@ -169,7 +169,7 @@ def point_result(vectors, ids, point, rule, work):
         comparisons.append(dict(left=left, right=right, dominates=direction))
     worst = {a: min(s.values()) for a, s in scores.items()}
     best = max(worst.values(), default=None)
-    recommended = sorted(a for a in scores if worst[a] == best and (rule == 'EXPECTED' or a not in dominated))
+    recommended = sorted(a for a in scores if worst[a] == best and (rule == 'EXPECTED' or preserve_scalar_ties or a not in dominated))
     result = dict(recommended=recommended, dominated=sorted(dominated), comparisons=comparisons,
         worst_scenarios={a: sorted(s for s, v in values.items() if v == worst[a]) for a, values in scores.items()},
         witness_weights={d: encoded(w) for d, w in zip(ids, weights)},
@@ -216,13 +216,15 @@ def interval(constraints):
     return dict(lower=encoded(lower), upper=encoded(upper), lower_closed=lc, upper_closed=uc)
 
 
-def solve_regions(domain, vectors, ids, rule, work, *, max_cells=256, max_proof_bytes=786432):
+def solve_regions(domain, vectors, ids, rule, work, *, max_cells=256, max_proof_bytes=786432,
+                  preserve_scalar_ties=False):
     """Public pure finite solver; vectors are actual per-action joint scenarios.
 
     Outputs partial certified cells on budget exhaustion, never universal claims.
     Coverage includes every sign branch, including exact lower-dimensional ties.
     """
     if rule not in ('EXPECTED', 'MAXIMIN', 'MINIMAX_REGRET') or not 1 <= len(ids) <= 4: raise ValueError('bounded weight domain required')
+    if type(preserve_scalar_ties) is not bool: raise ValueError('typed scalar tie semantics required')
     scenario_ids = None
     for scenarios in vectors.values():
         if not scenarios or (rule == 'EXPECTED' and len(scenarios) != 1): raise ValueError('joint scenarios required')
@@ -232,6 +234,8 @@ def solve_regions(domain, vectors, ids, rule, work, *, max_cells=256, max_proof_
         hyperplanes=[], coverage=[], cells=[], pending_cells=[], frontier=[], recommendation_partition=[],
         robust_recommended=[], unique_robust_recommended=[], possible_recommended=[], tie_boundaries=[],
         scope='EXACT_DECLARED_WEIGHT_DOMAIN_CONDITIONAL_ON_FIXED_JOINT_BRANCH')
+    if preserve_scalar_ties:
+        result['scalar_tie_semantics'] = 'ALL_COMPLETE_POLICY_SCALAR_OPTIMA'
     try:
         work.spend(1 + (len(domain["constraints"])+len(ids))*len(ids))
         base = domain_constraints(domain, ids)
@@ -290,7 +294,8 @@ def solve_regions(domain, vectors, ids, rule, work, *, max_cells=256, max_proof_
         for index, cell in enumerate(active):
             work.spend()
             row = dict(cell_id='cell:'+str(index), signs=cell['signs'], constraints=cell['constraints'], certificate=cell['certificate'],
-                       **point_result(vectors, ids, cell['certificate']['point'], rule, work))
+                       **point_result(vectors, ids, cell['certificate']['point'], rule, work,
+                                      preserve_scalar_ties=preserve_scalar_ties))
             if len(ids) == 2: row['interval'] = interval(cell['constraints'])
             proof_bytes += len(codec.dumps(row))
             if proof_bytes > max_proof_bytes: raise OverflowError('WEIGHT_PROOF_CAPACITY_FRONTIER')

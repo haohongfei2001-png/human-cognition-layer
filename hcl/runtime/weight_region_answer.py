@@ -28,6 +28,13 @@ def weight_region_claim(result):
     for analysis in value['analyses']:
         lines.append('Domain '+analysis['domain_id']+': robust recommendations '+repr(tuple(analysis['robust_recommended']))+
                      '; possible recommendations '+repr(tuple(analysis['possible_recommended']))+'.')
+        if analysis.get('policy_horizon') == 2:
+            lines.append('Each alternative is one complete two-step observation-conditioned policy, shared across every dimension and scenario; fixed action-time hard norms constrain every reachable step. All scalar optima remain tied.')
+            mentioned = set(analysis['robust_recommended']) | set(analysis['possible_recommended'])
+            mentioned.update(a for b in analysis['branches'] for c in b['regions']['cells'] for a in c['recommended'])
+            for identity in sorted(mentioned):
+                policy = analysis['policy_catalog'][identity]
+                lines.append('Policy '+identity+': root '+policy['root_action_id']+'; after observation '+repr(thaw(policy['continuations']))+'.')
         if analysis['decision_rule'] == 'MINIMAX_REGRET':
             lines.append('Declared MINIMAX_REGRET minimizes the largest same-scenario opportunity loss against permitted alternatives, retains all minimizer ties, and assumes no probabilities across scenarios.')
         for branch in analysis['branches']:
@@ -43,6 +50,8 @@ def weight_region_claim(result):
                 lines.append('First-dimension weight '+left+region['lower']+', '+region['upper']+right+' recommends '+repr(tuple(region['recommended']))+'.')
         if not analysis['complete']: lines.append('Unresolved branches or resource frontiers prevent a complete robustness claim.')
     lines.append('Declared weights are conditional analysis, never inferred personal preferences or adoption. Hard obligations cannot be compensated by utility. Exact branch cells retain boundary ties, worst-scenario switches, dominance exclusions and alternative value losses.')
+    if any(a.get('policy_horizon') == 2 for a in value['analyses']):
+        lines[-1] = lines[-1].replace('dominance exclusions', 'dominance comparisons')
     if value['issues']: lines.append('Unresolved: '+', '.join(value['issues'])+'.')
     fields = ('analyses', 'complete', 'source_versions', 'issues', 'local_evaluations', 'semantic_certified', 'scope')
     return AnswerClaim(' '.join(lines), 'claim:'+result.result_id, tuple(ResultField(result.result_id, name, value[name]) for name in fields),

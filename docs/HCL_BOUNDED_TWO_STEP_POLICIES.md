@@ -10,8 +10,7 @@ Existing judgment v1 decisions remain single-step and unchanged. An explicit
 optional `policy_horizon: 2` on a source-bound decision requires its referenced
 M05 graph to have horizon 2. Supplying horizon 2 without that opt-in, or any
 other policy horizon, is invalid. No supplied policy, score or winner is accepted. Combining policy_horizon with
-v2–v5 concept/repair/joint-change/weight-domain inputs is explicitly rejected;
-those single-step compositions, including MINIMAX_REGRET, remain unchanged.
+v2–v4 concept/repair/joint-change inputs is explicitly rejected. V5 exact weight-domain composition is documented in HCL_POLICY_WEIGHT_REGIONS.md; existing single-step inputs remain unchanged.
 
 The host exhaustively enumerates a root action and one continuation action for
 each reachable nonterminal observation symbol. As in M05, the observation is

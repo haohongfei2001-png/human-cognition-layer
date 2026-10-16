@@ -109,18 +109,15 @@ class BoundedPolicyExecutionTests(unittest.TestCase):
         legacy.JudgmentExecutionTests.test_returned_computed_committed_recovery_never_resends(self)
 
     def test_higher_schema_compositions_reject_policy_opt_in(self):
-        for version in (2, 3, 4, 5):
+        for version in (2, 3, 4):
             candidate = self.candidate()
             candidate['schema'] = 'hcl-judgment-candidates-' + str(version)
-            if version == 5:
-                candidate['weight_domains'] = []
-            else:
-                candidate['concepts'] = {}
-                candidate['models'][0]['concept_bindings'] = []
-                if version == 3:
-                    candidate['repairs'] = [{}]
-                if version == 4:
-                    candidate['joint_changes'] = {}
+            candidate['concepts'] = {}
+            candidate['models'][0]['concept_bindings'] = []
+            if version == 3:
+                candidate['repairs'] = [{}]
+            if version == 4:
+                candidate['joint_changes'] = {}
             result, _ = self.run_candidate(candidate, replace(self.request, request_id='composition-' + str(version)))
             self.assertEqual(result.status, 'INVALID_REQUEST', result.diagnostics)
             self.assertFalse(result.claim_records)

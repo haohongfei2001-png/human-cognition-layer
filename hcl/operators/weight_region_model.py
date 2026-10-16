@@ -14,6 +14,7 @@ from hcl.semantics.weight_region_compiler import verify_weight_program
 KIND = 'CONDITIONAL_WEIGHT_REGION_JUDGMENT'
 VERSION = 's4-exact-weight-region-judgment-5'
 REGRET_VERSION = 's4-exact-weight-region-minimax-regret-1'
+POLICY_VERSION = 's4-two-step-policy-weight-regions-1'
 COVERAGE = 'EXACT_FINITE_WEIGHT_DOMAIN_NOT_PREFERENCE_INFERENCE_OR_ADOPTION'
 MAX_CERTIFICATE_BYTES = 4 * 1024 * 1024
 
@@ -64,13 +65,21 @@ class WeightRegionOperator:
                 theory = model['actual_argument']['values']['models'][0]
                 upstream_complete = not (model['frontier'] or decision['frontier'] or theory['frontier'] or theory['strict_conflicts'] or theory['inactive_assumptions'])
                 outcomes = {row['action_id']: row for row in decision['outcomes']}
+                policy_target = decision.get('policy_horizon') == 2
+                if policy_target:
+                    # Host-computed definitions, covered by the same replay certificate.
+                    # Never infer policy semantics from user-chosen action ID spelling.
+                    analysis['policy_horizon'] = 2
+                    analysis['policy_catalog'] = {a: row['policy'] for a, row in outcomes.items()}
+                    work.spend(node_count(analysis['policy_catalog']))
                 for index, branch in enumerate(frame['branches']):
                     work.spend(1+len(outcomes))
                     permitted = {e['action_id'] for e in branch['result']['eligibility'] if e['status'] == 'PERMITTED_IN_DECLARED_FRAMEWORK'}
                     vectors = {a: {s['scenario_id']: s['vector'] for s in outcomes[a]['scenarios']} for a in sorted(permitted)}
                     if domain['decision_rule'] == 'EXPECTED' and any(len(row['scenarios']) != 1 for row in decision['outcomes'] if row['feasible']):
                         analysis['frontier'].append('EXPECTED_PROBABILITIES_UNSPECIFIED'); break
-                    regions = solve_regions(domain, vectors, domain['dimensions'], domain['decision_rule'], work)
+                    regions = solve_regions(domain, vectors, domain['dimensions'], domain['decision_rule'], work,
+                                            preserve_scalar_ties=policy_target)
                     conditions_complete = upstream_complete and 'UNRESOLVED' not in branch['states'].values() and branch['basis'] != 'CONSERVATIVE_UNRESOLVED'
                     reasons = []
                     for left, right in combinations_for_reasons(vectors, domain['dimensions'], work): reasons.append(dict(left=left[0], right=right[0], joint_value_differences=left[1], scope='LOSSES_AND_GAINS_REMAIN_CONDITIONAL_ON_DECLARED_WEIGHTS'))
@@ -98,6 +107,8 @@ class WeightRegionOperator:
         complete = len(analyses) == len(program['weight_domains']) and all(a['complete'] for a in analyses)
         if not complete: issues.append('WEIGHT_REGIONS_CONDITIONAL_FRONTIER')
         version = REGRET_VERSION if any(d['decision_rule'] == 'MINIMAX_REGRET' for d in program['weight_domains']) else VERSION
+        if any(d.get('policy_horizon') == 2 for m in program['base_program']['models'] for d in m['decisions']):
+            version = POLICY_VERSION
         values = dict(operator_version=version, issue_id=issue.issue_id, rule_version=snapshot.rule_version,
             source_versions=dict(snapshot.source_versions), program=program, actual_judgment=actual,
             analyses=analyses, complete=complete, execution_allowance=work.limit, local_evaluations=work.used,
