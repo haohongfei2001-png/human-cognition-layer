@@ -71,7 +71,7 @@ permissions:
 jobs:
   unified-contracts:
     runs-on: ubuntu-latest
-    timeout-minutes: 60  # Full unchanged regressions plus bounded true-predecessor repair checkpoints.
+    timeout-minutes: 90  # The full regression run takes ~59 minutes; retain time for every witness and artifact upload.
     steps:
       - uses: actions/checkout@v4
         with:
