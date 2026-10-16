@@ -1043,6 +1043,9 @@ class AnswerAssembler:
             for i, analysis in enumerate(value["analyses"]):
                 for name in ("domain_id", "target", "decision_rule", "origin", "complete", "robust_recommended", "unique_robust_recommended", "possible_recommended", "frontier"):
                     projections.append(ProjectedResultField(result.result_id, "analyses", analysis[name], (str(i), name)))
+                if analysis.get("policy_horizon") == 2:
+                    for name in ("policy_horizon", "policy_catalog"):
+                        projections.append(ProjectedResultField(result.result_id, "analyses", analysis[name], (str(i), name)))
                 for j, branch in enumerate(analysis["branches"]):
                     for name in ("norm_states", "eligibility", "alternative_reasons", "hard_constraint_reasons", "conditions_complete"):
                         projections.append(ProjectedResultField(result.result_id, "analyses", branch[name], (str(i), "branches", str(j), name)))
