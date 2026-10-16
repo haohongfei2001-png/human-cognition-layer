@@ -335,7 +335,13 @@ class JudgmentModelOperator:
                     if set(opportunity["actual"]["states"]) & set(plan["graph"]["terminal"]):
                         row["frontier"].append("TERMINAL_OR_UNRESOLVED_DECISION_STATE")
                         continue
-                    row["outcomes"] = joint_outcomes(plan["graph"], decision["dimensions"], scenarios,
+                    outcome_solver = joint_outcomes
+                    if decision.get("policy_horizon") == 2:
+                        from hcl.operators.bounded_policy import joint_policy_outcomes
+                        outcome_solver = joint_policy_outcomes
+                        row["policy_horizon"] = 2
+                        row["policy_scope"] = "EXHAUSTIVE_TWO_STEP_OBSERVATION_POLICIES_FIXED_ACTION_TIME_NORMS"
+                    row["outcomes"] = outcome_solver(plan["graph"], decision["dimensions"], scenarios,
                         opportunity["actual"]["states"], opportunity["subjective"]["states"], work)
                     accepted_sets = []
                     for framework in decision["frameworks"]:
@@ -402,9 +408,13 @@ class JudgmentModelOperator:
             values["operator_version"] = "s4-joint-activation-branch-judgment-4"
             values["joint_model_computations"] = joint_computations
             values["joint_model_reuses"] = joint_reuses
+        if any(d.get("policy_horizon") == 2 for m in program.get("models", []) for d in m["decisions"]):
+            values["scope"] = "SOURCE_BOUND_BOUNDED_TWO_STEP_CONDITIONAL_POLICY_JUDGMENT_NOT_MORAL_TRUTH"
+            values["operator_version"] = "s4-bounded-two-step-policy-1"
         inference = InferenceResult("judgment-result:" + sha256(codec.dumps([issue.issue_id, values])).hexdigest(), KIND, values,
                                     tuple(sorted(environments)), tuple(sorted(snapshot.source_versions)), (), snapshot.rule_version,
-                                    "CONDITIONAL_SINGLE_STEP_ACTION_JUDGMENT")
+                                    ("CONDITIONAL_BOUNDED_POLICY_JUDGMENT" if values["operator_version"] == "s4-bounded-two-step-policy-1"
+                                     else "CONDITIONAL_SINGLE_STEP_ACTION_JUDGMENT"))
         return OpResult("judgment.execute", VERSION, snapshot.source_versions, ("append_inference",),
                         (inference.result_id,), tuple(sorted(set(issues))), dict(local_evaluations=work.used), (),
                         Delta(snapshot.session_id, snapshot.principal, snapshot.revision, snapshot.access_epoch,

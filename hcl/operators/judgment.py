@@ -82,10 +82,11 @@ def compare_framework(framework, outcomes, norm_states, dimensions, work):
     for row in outcomes:
         work.spend()
         action = row["action_id"]
+        used_actions = set(row.get("reachable_actions", [action]))
         forbidden = [key for key, state in norm_states.items()
-                     if state == "ACTIVE" and action not in norms[key]["permitted_actions"]]
+                     if state == "ACTIVE" and not used_actions <= set(norms[key]["permitted_actions"])]
         unresolved = [key for key, state in norm_states.items()
-                      if state == "UNRESOLVED" and action not in norms[key]["permitted_actions"]]
+                      if state == "UNRESOLVED" and not used_actions <= set(norms[key]["permitted_actions"])]
         status = ("INFEASIBLE" if not row["feasible"] else "PROHIBITED" if forbidden
                   else "PERMISSION_UNRESOLVED" if unresolved else "PERMITTED_IN_DECLARED_FRAMEWORK")
         eligibility.append(dict(action_id=action, status=status,
@@ -146,7 +147,7 @@ def compare_framework(framework, outcomes, norm_states, dimensions, work):
         # minima would manufacture an outcome vector that never occurred.
         worst = {a: encoded(min(Fraction(v) for v in values.values())) for a, values in scores.items()}
         best = max((Fraction(v) for v in worst.values()), default=None)
-        recommended = sorted(a for a, value in worst.items() if Fraction(value) == best and a in frontier)
+        recommended = sorted(a for a, value in worst.items() if Fraction(value) == best and (a in frontier or any("policy" in row for row in outcomes)))
         reason = "DECLARED_JOINT_SCENARIO_MAXIMIN"
     if not safe:
         reason = ("NO_FEASIBLE_ACTION" if not feasible else "NO_DEFINITELY_PERMITTED_ACTION")

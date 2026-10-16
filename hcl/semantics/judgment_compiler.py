@@ -23,7 +23,7 @@ def judgment_context(snapshot, question):
     from hcl.semantics.segments import segment_snapshot
 
     return dict(schema="hcl-judgment-context-1", candidate_schema=SCHEMA,
-                purpose="PROPOSE_CONDITIONAL_SINGLE_STEP_NORMATIVE_MODELS_NOT_PERMISSIONS_SCORES_OR_WINNERS",
+                purpose="PROPOSE_CONDITIONAL_BOUNDED_NORMATIVE_MODELS_NOT_PERMISSIONS_SCORES_OR_WINNERS",
                 concept_candidate_schema="hcl-judgment-candidates-2",
                 repair_candidate_schema="hcl-judgment-candidates-3",
                 weight_region_candidate_schema="hcl-judgment-candidates-5",
@@ -33,6 +33,7 @@ def judgment_context(snapshot, question):
                 repair_contract="v3 additionally requests one repairs row(id,version_id,choice_id,segment_ids), targeting a single criterion in one existing choice of at most two versions, no pair constraints, at most five distinct positive terms. The runtime generates finite positive-partition LGG disjunctions from actual sufficient/biconditional counterexamples. Never supply partitions, patterns, membership, scores, rankings or adoption.",
                 concept_contract="v2 adds concepts(versions,cases,uses,choices,constraints,unmodeled_segments), and model concept_bindings(premise_id,use_id,expected,segment_ids). Directional criteria use actual typed positive/negative/boundary examples. Version selectors are PINNED or shared CHOICE. Never supply namespace, hashes or classification results.",
                 model_fields=MODEL_FIELDS.split(), decision_fields=DECISION_FIELDS.split(),
+                optional_decision_fields=["policy_horizon"],
                 framework_fields=FRAMEWORK_FIELDS.split(),
                 instructions=(
                     "mental is the common M03/M05 model. interaction omits mental and supplies actual M07 inputs. "
@@ -40,7 +41,10 @@ def judgment_context(snapshot, question):
                     "MENTAL_QUERY references query_id, OPPORTUNITY references plan_id/action_id/view (WORLD or SUBJECTIVE), "
                     "COMMITMENT references commitment_id/at/status, CAUSAL references query_id/expected (0 or 1). "
                     "fact_bindings have premise_id/fact_id/expected/segment_ids; bound M13 premises are included only when actual facts establish expected. "
-                    "All decisions are explicitly single-step. Dimensions have id/label/state_values/action_costs/segment_ids over the plan graph. "
+                    "Decisions default to single-step; optional policy_horizon=2 explicitly enables exhaustive two-step observation-conditioned policies in v1 only (not v2-v5 compositions). "
+                    "One policy is shared across scenarios/dimensions, final-state values minus every executed action cost; terminal states stop. "
+                    "Norm applicability is fixed at decision time and constrains every reachable step; evolving future guards are unsupported. "
+                    "At most 256 complete policies; incomplete enumeration never certifies an optimum. Dimensions have id/label/state_values/action_costs/segment_ids over the plan graph. "
                     "Scenarios have id/distribution/segment_ids; empty means all actually retained states separately, never uniform probabilities. "
                     "Framework origins have kind/declarer/at/frame_kind/segment_ids. USER_REPORTED_ADOPTION is a source reconstruction, never current user authorization. "
                     "Weights are null for PARETO or explicit normalized rationals for EXPECTED (one scenario) or MAXIMIN. "
@@ -192,10 +196,13 @@ class JudgmentCompiler(LocalModelCompiler):
                 bound.add(binding["premise_id"])
             decisions = set()
             for decision in rows(model["decisions"], 4, 1):
-                self._keys(decision, DECISION_FIELDS)
+                self._keys(decision, DECISION_FIELDS + (" policy_horizon" if "policy_horizon" in decision else ""))
                 identify(decision, decisions)
                 plan = plans[decision["plan_id"]]
-                if plan["graph"]["horizon"] != 1 or plan["at"] > interaction["through"]:
+                horizon = decision.get("policy_horizon", 1)
+                if "policy_horizon" in decision and (type(horizon) is not int or horizon != 2):
+                    raise self._invalid("bounded_policy_horizon")
+                if plan["graph"]["horizon"] != horizon or plan["at"] > interaction["through"]:
                     raise self._invalid("single_step_decision")
                 # Fact-conditioned argument premises may not backfill a decision
                 # from a later receipt, control opportunity or commitment state.
