@@ -1040,6 +1040,8 @@ class AnswerAssembler:
         if result.kind == "CONDITIONAL_WEIGHT_REGION_JUDGMENT":
             text = checked.text
             names = ("complete", "source_versions", "issues", "local_evaluations", "semantic_certified", "scope")
+            if "reasoned_delivery" in value:
+                names = (*names, "reasoned_delivery")
             for i, analysis in enumerate(value["analyses"]):
                 for name in ("domain_id", "target", "decision_rule", "origin", "complete", "robust_recommended", "unique_robust_recommended", "possible_recommended", "frontier"):
                     projections.append(ProjectedResultField(result.result_id, "analyses", analysis[name], (str(i), name)))

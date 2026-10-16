@@ -15,6 +15,7 @@ KIND = 'CONDITIONAL_WEIGHT_REGION_JUDGMENT'
 VERSION = 's4-exact-weight-region-judgment-5'
 REGRET_VERSION = 's4-exact-weight-region-minimax-regret-1'
 POLICY_VERSION = 's4-two-step-policy-weight-regions-1'
+DELIVERY_VERSION = 's4-weight-region-reasoned-delivery-1'
 COVERAGE = 'EXACT_FINITE_WEIGHT_DOMAIN_NOT_PREFERENCE_INFERENCE_OR_ADOPTION'
 MAX_CERTIFICATE_BYTES = 4 * 1024 * 1024
 
@@ -26,7 +27,7 @@ class WeightRegionOperator:
             raise HCLFailure('INVALID_REQUEST', 'weight_regions', 'INVALID_WEIGHT_REGION', 'weight_domains',
                              'The weight domain violates its exact bounded source and scope contract.') from None
 
-    def _run(self, snapshot, issue, allowance, program):
+    def _run(self, snapshot, issue, allowance, program, *, reasoned_delivery=True):
         from hcl.operators.judgment_model import JudgmentModelOperator
         work = JudgmentWork(allowance.max_local_evaluations)
         # Reserve bounded validation before replaying any compiler or solver.
@@ -104,15 +105,31 @@ class WeightRegionOperator:
                 issues.extend(analysis['frontier'])
         except OverflowError:
             issues.append('WEIGHT_WORK_OR_PROOF_FRONTIER')
+        delivery = None
+        if reasoned_delivery:
+            from hcl.operators.weight_region_delivery import explain_regions
+            delivery = explain_regions(program, actual, analyses, work)
+            if delivery['status'] != 'COMPLETE':
+                issues.extend(delivery['frontier'])
+                for analysis in analyses:
+                    analysis['complete'] = False
+                    analysis['robust_recommended'] = []
+                    analysis['unique_robust_recommended'] = []
+                    analysis['possible_recommended'] = []
+                    analysis['frontier'].extend(delivery['frontier'])
         complete = len(analyses) == len(program['weight_domains']) and all(a['complete'] for a in analyses)
         if not complete: issues.append('WEIGHT_REGIONS_CONDITIONAL_FRONTIER')
         version = REGRET_VERSION if any(d['decision_rule'] == 'MINIMAX_REGRET' for d in program['weight_domains']) else VERSION
         if any(d.get('policy_horizon') == 2 for m in program['base_program']['models'] for d in m['decisions']):
             version = POLICY_VERSION
+        if reasoned_delivery:
+            version = DELIVERY_VERSION
         values = dict(operator_version=version, issue_id=issue.issue_id, rule_version=snapshot.rule_version,
             source_versions=dict(snapshot.source_versions), program=program, actual_judgment=actual,
             analyses=analyses, complete=complete, execution_allowance=work.limit, local_evaluations=work.used,
             issues=sorted(set(issues)), semantic_certified=False, scope=COVERAGE)
+        if reasoned_delivery:
+            values['reasoned_delivery'] = delivery
         result = InferenceResult('weight-region:'+digest([issue.issue_id, values]), KIND, values,
             tuple(sorted(environments)), tuple(sorted(snapshot.source_versions)), tuple(sorted(counters)), snapshot.rule_version, COVERAGE)
         if len(codec.dumps(result)) > MAX_CERTIFICATE_BYTES:
@@ -141,7 +158,8 @@ def verify_weight_regions(values):
     snapshot = SimpleNamespace(session_id=host['session_id'], principal=Principal(**host['principal']), revision=0,
         access_epoch=0, rule_version=data['rule_version'], source_versions=data['source_versions'])
     expected = WeightRegionOperator()._run(snapshot, Issue(data['issue_id'], 'judgment.evaluate'),
-        replace(ExecutionBudget(), max_local_evaluations=data['execution_allowance']), data['program'])
+        replace(ExecutionBudget(), max_local_evaluations=data['execution_allowance']), data['program'],
+        reasoned_delivery=data.get('operator_version') == DELIVERY_VERSION)
     if codec.canonical(thaw(expected.candidate_delta.new_inferences[0].values)) != codec.canonical(data):
         raise ValueError('weight domain, exact coverage or boundary certificate changed')
     return expected
