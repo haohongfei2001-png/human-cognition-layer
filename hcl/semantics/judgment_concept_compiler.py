@@ -38,6 +38,8 @@ class ConceptJudgmentCompiler(JudgmentCompiler):
         bindings = []
         for model in base["models"]:
             self._keys(model, "mental interaction argument facts fact_bindings decisions concept_bindings")
+            if any("policy_horizon" in d for d in model["decisions"]):
+                raise self._invalid("bounded_policy_composition")
             bindings.append(model.pop("concept_bindings"))
         base.pop("concepts")
         base["schema"] = "hcl-judgment-candidates-1"

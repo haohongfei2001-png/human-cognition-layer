@@ -109,7 +109,8 @@ class AnswerAssembler:
         except (ValueError, TypeError, KeyError, IndexError, RecursionError, StopIteration, ZeroDivisionError, OverflowError):
             raise HCLFailure("FAILED", "answer", "JUDGMENT_RESULT_MISMATCH", "values",
                              "The judgment differs from its actual shared facts, argument disputes or joint decisions.") from None
-        lines = ["Conditional single-step action judgment. Principles, value scales and probability scenarios are explicit source-model hypotheses; source-reported adoption is not authenticated user authorization."]
+        has_policies = any(d.get("policy_horizon") == 2 for m in result.values["models"] for d in m["decisions"])
+        lines = [("Conditional bounded two-step policy judgment." if has_policies else "Conditional single-step action judgment.") + " Principles, value scales and probability scenarios are explicit source-model hypotheses; source-reported adoption is not authenticated user authorization."]
         for model in result.values["models"]:
             for fact in model["facts"].values():
                 lines.append("Factor " + fact["fact_id"] + " (" + fact["role"] + "): " + repr(tuple(fact["possible_values"])) + ".")
@@ -118,6 +119,10 @@ class AnswerAssembler:
                 if decision["status"] == "UNCOMPUTED":
                     lines.append("Its partially explored branches are not a complete recommendation.")
                     continue
+                if decision.get("policy_horizon") == 2:
+                    lines.append("Policies use one observation-conditioned continuation across all scenarios and dimensions; fixed action-time hard norms apply at every reachable step.")
+                    for outcome in decision["outcomes"]:
+                        lines.append(outcome["action_id"] + ": " + repr(thaw(outcome["policy"])) + ".")
                 lines.append("Stable across all supplied frameworks and retained branches: " + repr(tuple(decision["robust_across_frameworks"])) + ".")
                 for frame in decision["frameworks"]:
                     lines.append("Framework " + frame["framework_id"] + " (" + frame["origin"]["kind"] + ", " + frame["origin"]["declarer"] + "): " + frame["status"] + "; conditional recommendation=" + repr(tuple(frame["robust_recommended"])) + ".")
