@@ -123,7 +123,10 @@ Gratch, “EMA: A process model of appraisal dynamics” (2009), as a design inf
 https://stacymarsella.org/publications/pdf/EMA_Dynamics.pdf . The explicit finite
 models here are not that paper's full model and are not human psychological laws.
 
-Attribution, normative/identity relevance, calibrated temporal affect dynamics,
+The additive explicit v2 finite attribution bridge is documented in
+[HCL_CAUSAL_AFFECT_ATTRIBUTION.md](HCL_CAUSAL_AFFECT_ATTRIBUTION.md).
+V1 remains byte-compatible with attribution NOT_MODELED. Open-ended attribution,
+normative/identity relevance, calibrated temporal affect dynamics,
 a richer affect-to-coping search and semantic category validation remain open.
 Those profile dimensions say NOT_MODELED, not zero blame/relevance. Full M08,
 M09, cross-domain S3 integration and all remaining approved research requirements

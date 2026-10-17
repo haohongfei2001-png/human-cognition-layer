@@ -496,7 +496,8 @@ class AnswerAssembler:
             }
             qualification = result.values.get("local_model")
             if qualification is not None:
-                if qualification["dialect"] != "affect-model-1":
+                expected_dialect = "affect-model-2" if result.values["operator_version"] == "s3-finite-affect-2" else "affect-model-1"
+                if qualification["dialect"] != expected_dialect:
                     raise ValueError("affect local model dialect changed")
                 expected_assumptions.update(
                     "local-model:" + qualification["model_id"] + ":assumption:" + str(i)
@@ -564,6 +565,12 @@ class AnswerAssembler:
                         + json.dumps(thaw(profile["control"]), sort_keys=True)
                         + "."
                     )
+                if result.values["operator_version"] == "s3-finite-affect-2":
+                    for profile in derived["profiles"]:
+                        for attribution in profile["attribution"]["candidates"]:
+                            lines.append("Character-conditional but-for attribution " + attribution["attribution_id"]
+                                         + " about " + str(attribution["contributor"]) + ": "
+                                         + str(tuple(attribution["possibilities"])) + ".")
                 for hypothesis in derived["hypotheses"]:
                     lines.append(
                         "Emotion mapping "
@@ -631,7 +638,10 @@ class AnswerAssembler:
             lines.append("Domain limitations=" + str(tuple(model["domain_issues"])) + ".")
         lines.append(
             "Self-report, expression and conditional explanation remain distinct. Coping and next appraisals are hypotheses, not enacted actions. "
-            "Attribution, normative and identity appraisal are not modeled here. No private feeling, clinical diagnosis or calibrated emotion intensity is established."
+            + ("Attribution, normative and identity appraisal are not modeled here. "
+               if result.values["operator_version"] == "s3-finite-affect-1" else
+               "Finite causal contribution is conditional on character-accessible model hypotheses and belief possibilities, not knowledge, intention, control or blame. Normative and identity appraisal remain unmodeled. ")
+            + "No private feeling, clinical diagnosis or calibrated emotion intensity is established."
         )
         return AnswerClaim(
             " ".join(lines),
