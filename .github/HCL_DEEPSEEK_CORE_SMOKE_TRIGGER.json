@@ -1,0 +1,8 @@
+{
+  "campaign": "hcl-core-deepseek-synthetic-v1",
+  "case_sha256": "770beaae03fd6c72d3c169e5a3e99f565bc50c0c5022cb540dcaab24f87b50dc",
+  "executor_commit": "01a7df03a0eeaf6736b21e6f464726684f8a750a",
+  "grant_commit": "a58694c8f88aadbdcd7b2bb679eb1d001ecd61df",
+  "grant_sha256": "bcb686e4d61eda23e05e2fe8f2c61e4c1b27bbe3f35e6b55f0d3cdf63564aad9",
+  "schema": "hcl-deepseek-core-smoke-marker-1"
+}
