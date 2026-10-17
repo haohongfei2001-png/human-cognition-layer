@@ -16,9 +16,12 @@ from hcl.kernel.concept_registry import ConceptBinding, ConceptAdoptionIssue, Co
 
 from hcl.models.candidate_contracts import CandidateAuthorization, MeteredCandidateRequest, MeteredCandidateReturn
 
+from hcl.models.deepseek_contracts import DeepSeekBatchAuthorization, DeepSeekCandidateRequest, DeepSeekCandidateReturn
+
 FORMAT = "hcl-content-object-1"
 CLASSES = {cls.__name__: cls for cls in (
     CandidateAuthorization, MeteredCandidateRequest, MeteredCandidateReturn,
+    DeepSeekBatchAuthorization, DeepSeekCandidateRequest, DeepSeekCandidateReturn,
     ConceptBinding, ConceptAdoptionIssue, ConceptFollowIssue, ConceptQuery, ConceptDependency,
     RetrievalQuery, RetrievalDependency, RetrievalIssue, EvidenceNode,
     ExecutionBudget, ExecutionIssue, LocalModel, ModelIssue, ExecutionCheckpoint, ResumeToken, ProjectedResultField, SnapshotRef, ContextChunk, SourceSegment,

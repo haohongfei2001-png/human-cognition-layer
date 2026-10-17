@@ -200,12 +200,23 @@ class S23RuntimeUpgradeTests(previous.RuntimeUpgradeTests):
                         "finish_reason", "input_tokens", "cached_input_tokens", "output_tokens", "settled_nanos",
                         "validation_code"],
                 }
+                deepseek_shapes = {
+                    "DeepSeekBatchAuthorization": ["batch_id","ledger_path","state_store_path","task_fingerprints",
+                        "verified_at","expires_at","account_currency","account_scope","source_policy","max_calls",
+                        "max_cost_nanoyuan","rate_version","model","model_version","mode"],
+                    "DeepSeekCandidateRequest": ["protocol","batch_id","authorization_hash","claim_id","task_fingerprint",
+                        "source_versions","context","body","reservation_nanoyuan"],
+                    "DeepSeekCandidateReturn": ["protocol","visible_text","provider_response_id","model","finish_reason",
+                        "input_tokens","cached_input_tokens","uncached_input_tokens","output_tokens","reasoning_tokens",
+                        "usage_cost_upper_nanoyuan","validation_code"],
+                }
                 self.assertEqual(set(current_shapes) - set(old["shapes"]), {
                     "RetrievalQuery", "RetrievalDependency", "RetrievalIssue", "EvidenceNode",
-                    *concept_shapes, *candidate_shapes,
+                    *concept_shapes, *candidate_shapes, *deepseek_shapes,
                 })
                 self.assertEqual({name: current_shapes[name] for name in concept_shapes}, concept_shapes)
                 self.assertEqual({name: current_shapes[name] for name in candidate_shapes}, candidate_shapes)
+                self.assertEqual({name: current_shapes[name] for name in deepseek_shapes}, deepseek_shapes)
                 self.assertEqual(old["shapes"], {
                     name: current_shapes[name] for name in old["shapes"]
                 })
