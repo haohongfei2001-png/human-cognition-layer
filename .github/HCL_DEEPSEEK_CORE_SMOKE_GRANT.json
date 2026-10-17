@@ -1,5 +1,24 @@
 {
+  "account_scope": "HCL_CORE_DEEPSEEK_DIRECT",
+  "authorized_calls": 2,
+  "authorized_cny": "20.00",
+  "campaign": "hcl-core-deepseek-synthetic-v1",
+  "case_sha256": "770beaae03fd6c72d3c169e5a3e99f565bc50c0c5022cb540dcaab24f87b50dc",
+  "currency": "CNY",
+  "endpoint": "https://api.deepseek.com/chat/completions",
+  "executor_commit": "01a7df03a0eeaf6736b21e6f464726684f8a750a",
+  "historical_budget_transfer": false,
+  "max_semantic_repairs": 1,
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "publication": "SYNTHETIC_RESULT_AND_MECHANICAL_USAGE_ONLY",
+  "reader_sha256": {
+    "scripts/two_stage_account.py": "18bbb9085a3a0789115d2065d7aa498e485a547b477ada40aecdd4a67d58582b",
+    "scripts/two_stage_price.py": "32c9747dc3411f4d090517f07fc60a524d327f9aecc49b5cf0a10dfcd50451b0"
+  },
+  "retries": 0,
+  "runtime_sha256": "00a916b82d45bb667f593cc8dae31d74403a3592e27c3d6a44c59fb56f740c87",
   "schema": "hcl-deepseek-core-smoke-grant-1",
-  "status": "CLOSED_UNISSUED",
-  "campaign": "hcl-core-deepseek-synthetic-v1"
+  "source_policy": "SYNTHETIC_ONLY",
+  "status": "READY"
 }
