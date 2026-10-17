@@ -42,6 +42,46 @@ before the first write. These byte caps are not claims of exact online token
 counts. Monetary reservation uses the full documented 1,048,576-token context,
 including all system, schema and framing contributions.
 
+### Narrow HTTP response-header compatibility
+
+The sender accepts repeated `Set-Cookie`, `Vary`, and `Cache-Control` fields,
+discarding every occurrence. It has no cookie jar or HTTP response cache and
+never combines, persists, or forwards these values. All lines are first checked
+for token field names and invalid control characters; whitespace before the
+colon, obsolete folding, and bare CR/LF remain rejected. Header/body limits and
+deadlines still apply. Every other duplicate name, including unknown extension
+fields and `Content-Length`, `Transfer-Encoding`, `Content-Type`, and
+`Content-Encoding`, remains rejected even when the values are identical.
+Duplicate fields are never combined or normalized into an accepted response.
+`Content-Length` together with `Transfer-Encoding` and unsupported encodings
+remain rejected. This patch does not broaden media-type parameter parsing.
+The no-redirect/no-retry policy is unchanged.
+
+Primary standards checked on 2026-10-17:
+
+- [RFC 9110 §5.3](https://www.rfc-editor.org/rfc/rfc9110.html#section-5.3)
+  describes repeated list fields and the separate `Set-Cookie` case;
+  [§12.5.5](https://www.rfc-editor.org/rfc/rfc9110.html#section-12.5.5)
+  defines `Vary` as a list.
+- [RFC 9111 §5.2](https://www.rfc-editor.org/rfc/rfc9111.html#section-5.2)
+  defines `Cache-Control` as a directive list.
+- [RFC 6265 §5.2](https://www.rfc-editor.org/rfc/rfc6265.html#section-5.2)
+  permits ignoring `Set-Cookie` entirely.
+- [RFC 9112 §5](https://www.rfc-editor.org/rfc/rfc9112.html#section-5)
+  and [§6.3](https://www.rfc-editor.org/rfc/rfc9112.html#section-6.3)
+  cover field syntax and framing ambiguity. This bounded client deliberately
+  keeps stricter duplicate framing rejection rather than recovering it.
+
+Isolated loopback tests reproduce the former blanket-duplicate rejection,
+then exercise all three accepted fields with fixed-length, chunked, and
+close-delimited bodies, the existing candidate-to-cognition path, no cookie
+retention/replay, and malformed/ambiguous-header full-hold failures. These are
+synthetic compatibility tests. The earlier one-use external run stopped with
+`DEEPSEEK_HEADERS_INVALID`; its original headers were not retained, so the
+specific provider header and underlying cause remain unknown. This patch
+does not establish that it fixes that run, settle its unknown usage, authorize
+another call, reopen its closed grant, or change its immutable marker.
+
 ## Native CNY, shared across the batch
 
 No simulated USD nanodollar value is converted into CNY. The unit is integer

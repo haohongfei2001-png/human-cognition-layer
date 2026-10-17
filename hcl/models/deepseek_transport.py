@@ -13,6 +13,15 @@ from hcl.models.deepseek_contracts import ENDPOINT, MAX_REQUEST_BYTES, MAX_RESPO
 from hcl.kernel.types import HCLFailure
 
 
+# RFC 9110 sections 5.3/12.5.5 and RFC 9111 section 5.2 permit these
+# response fields on multiple lines. This client has no cookie jar or HTTP
+# cache: discard every occurrence, without combining, retaining or forwarding
+# values. All other duplicate names remain fail-closed, especially framing,
+# representation metadata and unknown extension fields.
+_IGNORED_REPEATABLE_HEADERS = frozenset({"set-cookie", "vary", "cache-control"})
+_FIELD_NAME_CHARS = frozenset("!#$%&'*+-.^_`|~0123456789abcdefghijklmnopqrstuvwxyz")
+
+
 class HostCredentialProvider(Protocol):
     def borrow_bearer(self, endpoint: str) -> AbstractContextManager[str]:
         """Borrow a credential for this exact destination; never log/cache it."""
@@ -85,9 +94,17 @@ class DeepSeekHTTPTransport:
                 for line in lines[1:-2]:
                     name, sep, value = line.partition(":")
                     name = name.lower()
-                    if not sep or not name or name in headers or name.strip() != name:
+                    # Validate even ignored lines before discarding them. Only
+                    # SP/HTAB are whitespace in field values; reject controls,
+                    # bare CR/LF, obsolete folding and non-token field names.
+                    if (not sep or not name or any(c not in _FIELD_NAME_CHARS for c in name)
+                            or any((ord(c) < 32 and c != "\t") or ord(c) == 127 for c in value)):
                         raise DeepSeekTransportFailure("DEEPSEEK_HEADERS_INVALID")
-                    headers[name] = value.strip()
+                    if name in _IGNORED_REPEATABLE_HEADERS:
+                        continue
+                    if name in headers:
+                        raise DeepSeekTransportFailure("DEEPSEEK_HEADERS_INVALID")
+                    headers[name] = value.strip(" \t")
                 if headers.get("content-type", "").split(";",1)[0].lower() != "application/json":
                     raise DeepSeekTransportFailure("DEEPSEEK_CONTENT_TYPE_INVALID")
                 if headers.get("content-encoding", "identity").lower() != "identity":

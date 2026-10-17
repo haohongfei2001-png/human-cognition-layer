@@ -305,6 +305,50 @@ class DeepSeekHTTPTests(unittest.TestCase):
             self.assertEqual(result.status,"SEND_UNKNOWN");self.assertEqual(len(requests),1)
             self.assertEqual(gateway.batch_usage()["held_nanoyuan"],RESERVATION_NANOYUAN)
 
+    def test_repeatable_ignored_headers_reach_cognition_without_persisting_cookies(self):
+        # Synthetic HTTP metadata, not a reconstruction of the live failure.
+        raw=completion(self.candidate,self.snapshot.source_versions)
+        async def send(w):
+            w.write(b"HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n"
+                b"Set-Cookie: fixture=never-retain-this-cookie; Secure; HttpOnly\r\n"
+                b"sEt-CoOkIe: other=also-not-retained; Expires=Wed, 21 Oct 2037 07:28:00 GMT\r\n"
+                b"Vary: Accept-Encoding\r\nVARY: Origin\r\n"
+                b"Cache-Control: no-cache\r\nCACHE-Control: no-store\r\n"
+                +f"Content-Length: {len(raw)}\r\n\r\n".encode()+raw)
+            await w.drain()
+        result,gateway,requests=self.run_case([send])
+        self.assertEqual(result.status,"COMPLETED",result.diagnostics)
+        self.assertIn("Character-conditional but-for attribution",result.answer)
+        self.assertEqual(len(requests),1)
+        self.assertEqual(gateway.batch_usage()["claimed_calls"],1)
+        self.assertEqual(result.usage["observed_usage_cost_upper_nanoyuan"],90060000)
+        self.assertEqual(gateway.batch_usage()["held_nanoyuan"],90060000)
+        self.assertFalse(gateway.batch_usage()["unresolved"])
+        self.assertNotIn("never-retain-this-cookie",str(result))
+        for path in self.root.iterdir():
+            if path.is_file():self.assertNotIn(b"never-retain-this-cookie",path.read_bytes())
+
+    def test_repeatable_metadata_cannot_mask_ambiguous_framing_or_release_hold(self):
+        for header in (
+            b"Content-Length: 2\r\ncOnTeNt-LeNgTh: 2",
+            b"Transfer-Encoding: chunked\r\nTRANSFER-ENCODING: chunked",
+            b"Content-Type: application/json\r\ncontent-type: application/json",
+            b"Content-Encoding: identity\r\ncontent-encoding: identity",
+        ):
+            with self.subTest(header=header):
+                self.doCleanups();self.setUp()
+                async def send(w,header=header):
+                    w.write(b"HTTP/1.1 200 OK\r\nSet-Cookie: synthetic=a\r\nSet-Cookie: synthetic=b\r\n"
+                        +header+b"\r\n\r\n{}");await w.drain()
+                result,gateway,requests=self.run_case([send])
+                self.assertEqual(result.status,"SEND_UNKNOWN",result.diagnostics)
+                self.assertEqual([d.code for d in result.diagnostics],["DEEPSEEK_HEADERS_INVALID"])
+                self.assertEqual(len(requests),1)
+                self.assertEqual(gateway.batch_usage()["held_nanoyuan"],RESERVATION_NANOYUAN)
+                self.assertEqual(gateway.batch_usage()["status"],"BLOCKED")
+                second=HCL(self.store,principal=self.owner,gateway=gateway).run_sync(self.second)
+                self.assertFalse(second.answer);self.assertEqual(gateway.batch_usage()["claimed_calls"],1)
+
     def test_synchronous_gate_and_credential_delay_cannot_send_after_deadline(self):
         for seam in ("credential","gate"):
             self.doCleanups();self.setUp()
@@ -405,6 +449,92 @@ class DeepSeekHTTPTests(unittest.TestCase):
         self.batch.stop("CLOSED")
         with self.assertRaises(HCLFailure):self.gateway()
         self.assertEqual(self.batch.audit()["status"],"CLOSED")
+
+
+class DeepSeekHeaderSyntaxTests(unittest.TestCase):
+    """Exercise exact sender parsing with real socket bytes, never external egress."""
+    def exchange(self, raw):
+        async def send(w):w.write(raw);await w.drain()
+        async def run():
+            gates=[]
+            async with LoopbackHTTP([send]) as server:
+                try:result=await DeepSeekHTTPTransport(FakeCredentials()).send("{}",lambda:gates.append(True))
+                except DeepSeekTransportFailure as error:result=error
+                self.assertEqual(len(server.requests),1);self.assertEqual(gates,[True])
+                return result
+        return asyncio.run(run())
+
+    def test_each_repeatable_header_under_all_existing_body_framings(self):
+        for header in (
+            b"Set-Cookie: fixture=a; Expires=Wed, 21 Oct 2037 07:28:00 GMT\r\nsEt-CoOkIe: fixture=b\r\n",
+            b"Vary: Accept-Encoding\r\nvary: Origin\r\n",
+            b"Cache-Control: no-cache\r\ncache-control: no-store\r\n",
+        ):
+            for framing,body in (
+                (b"Content-Length: 2\r\n",b"{}"),
+                (b"Transfer-Encoding: chunked\r\n",b"2\r\n{}\r\n0\r\n\r\n"),
+                (b"",b"{}"),
+            ):
+                with self.subTest(header=header,framing=framing):
+                    self.assertEqual(self.exchange(b"HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n"
+                        +header+framing+b"\r\n"+body),b"{}")
+
+    def test_duplicate_unknown_or_singleton_headers_remain_rejected(self):
+        for name,value,other in ((b"Content-Length",b"2",b"3"),(b"Transfer-Encoding",b"chunked",b"gzip"),
+            (b"Content-Type",b"application/json",b"text/html"),(b"Content-Encoding",b"identity",b"gzip"),
+            (b"Connection",b"close",b"keep-alive"),(b"X-Unknown",b"synthetic",b"other"),
+            (b"Location",b"https://example.invalid/",b"https://other.invalid/")):
+            for second in (value,other):
+                with self.subTest(name=name,second=second):
+                    raw=b"HTTP/1.1 200 OK\r\n"+name+b": "+value+b"\r\n"+name.lower()+b": "+second+b"\r\n\r\n{}"
+                    result=self.exchange(raw)
+                    self.assertIsInstance(result,DeepSeekTransportFailure)
+                    self.assertEqual(result.code,"DEEPSEEK_HEADERS_INVALID")
+
+    def test_every_header_is_syntax_checked_before_ignoring(self):
+        bad_lines=[b"No-colon",b": empty",b" Set-Cookie: x=y",b"Set-Cookie : x=y",b"Vary\t: x",
+            b"Bad(Name): x",b"Bad/Name: x",b"Bad Name: x",b"Set-Cookie: x=y\r\n folded",b"Vary: x\r\n\tfolded"]
+        for name in (b"Set-Cookie",b"Vary",b"Cache-Control",b"X-Unknown",b"Content-Length"):
+            for octet in (0,1,10,11,12,13,31,127):bad_lines.append(name+b": a"+bytes([octet])+b"b")
+        for line in bad_lines:
+            with self.subTest(line=line):
+                result=self.exchange(b"HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n"+line+b"\r\n\r\n{}")
+                self.assertIsInstance(result,DeepSeekTransportFailure)
+                self.assertEqual(result.code,"DEEPSEEK_HEADERS_INVALID")
+
+    def test_optional_horizontal_whitespace_and_valid_unknown_token_remain_accepted(self):
+        self.assertEqual(self.exchange(b"HTTP/1.1 200 OK\r\nContent-Type:\tapplication/json \t\r\n"
+            b"Content-Length:\t2\t\r\n!#$%&'*+-.^_`|~09AZaz: opaque\tvalue\r\n\r\n{}"),b"{}")
+
+    def test_ignored_headers_do_not_disable_capacity_or_framing_checks(self):
+        for header in (b"Set-Cookie: a="+b"x"*17000,b"Vary: x\r\n"*2000,
+            b"Content-Length: 2\r\nTransfer-Encoding: chunked",b"Content-Length: 2, 2",
+            b"Content-Length: 2\r\nContent-Encoding: gzip",
+            b"Content-Length: 2\r\nContent-Encoding: identity, gzip",
+            b"Content-Length: 2\r\nContent-Type: application/json, text/html"):
+            with self.subTest(header=header[:100]):
+                result=self.exchange(b"HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n"
+                    b"Set-Cookie: a=b\r\nSet-Cookie: c=d\r\n"+header+b"\r\n\r\n{}")
+                self.assertIsInstance(result,DeepSeekTransportFailure)
+        for header in (b"Content-Type: application/json, text/html\r\nContent-Length: 2",
+            b"Content-Type: application/json\r\nTransfer-Encoding: chunked, chunked",
+            b"Content-Type: application/json\r\nContent-Encoding: identity, identity\r\nContent-Length: 2",
+            b"Content-Type: application/json\r\nSet-Cookie: a=\x80\r\nContent-Length: 2"):
+            with self.subTest(header=header):
+                self.assertIsInstance(self.exchange(b"HTTP/1.1 200 OK\r\n"+header+b"\r\n\r\n{}"),DeepSeekTransportFailure)
+
+    def test_ignored_cookies_are_never_replayed_on_a_second_explicit_send(self):
+        async def first(w):
+            w.write(b"HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: 2\r\n"
+                b"Set-Cookie: synthetic=never-replay\r\nSet-Cookie: other=never-replay\r\n\r\n{}");await w.drain()
+        async def run():
+            transport=DeepSeekHTTPTransport(FakeCredentials())
+            async with LoopbackHTTP([first,b"{}"]) as server:
+                for _ in range(2):self.assertEqual(await transport.send("{}",lambda:None),b"{}")
+                self.assertEqual(len(server.requests),2)
+                for head,body in server.requests:
+                    self.assertNotIn(b"cookie:",head.lower());self.assertNotIn(b"never-replay",head+body)
+        asyncio.run(run())
 
 
 if __name__=="__main__":unittest.main()
