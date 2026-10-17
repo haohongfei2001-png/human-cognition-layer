@@ -24,6 +24,13 @@ def weight_region_claim(result):
         raise HCLFailure('FAILED', 'answer', 'WEIGHT_REGION_RESULT_MISMATCH', 'values',
             'The weight analysis differs from its source-bound exact domain, joint branches or coverage proof.') from None
     value = result.values
+    if 'reasoned_delivery' in value:
+        delivery = value['reasoned_delivery']
+        text = delivery['text']
+        if value['issues']: text += ' Unresolved: ' + ', '.join(value['issues']) + '.'
+        fields = ('reasoned_delivery', 'analyses', 'complete', 'source_versions', 'issues', 'local_evaluations', 'semantic_certified', 'scope')
+        return AnswerClaim(text, 'claim:' + result.result_id, tuple(ResultField(result.result_id, name, value[name]) for name in fields),
+                           result.assumption_environments, result.counterevidence_ids, COVERAGE)
     lines = ['Conditional exact normalized rational weight-domain analysis. Facts, feasibility, hard norms and real joint argument branches remain fixed.']
     for analysis in value['analyses']:
         lines.append('Domain '+analysis['domain_id']+': robust recommendations '+repr(tuple(analysis['robust_recommended']))+
