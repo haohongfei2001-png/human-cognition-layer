@@ -210,7 +210,9 @@ class AnswerAssembler:
             if type(result.premise_ids) is not tuple or tuple(sorted(result.premise_ids)) != tuple(sorted(result.values["source_versions"])):
                 raise ValueError("narrative inference source identities changed")
             expected_envs = tuple(sorted(set(result.values["assumption_environments"]) |
-                                        {a for row in (*result.values["comparisons"],*result.values["analogies"]) for a in row["assumption_environments"]}))
+                                        {a for row in (*result.values["comparisons"],*result.values["analogies"],*result.values.get("character_arcs", ())) for a in row["assumption_environments"]}))
+            if any(row["values"]["rule_version"] != result.rule_version for row in result.values.get("character_arcs", ())):
+                raise ValueError("narrative character rule version changed")
             local = result.values.get("local_model")
             if local is not None:
                 expected_envs += tuple("local-model:" + local["model_id"] + ":assumption:" + str(i)
@@ -254,6 +256,27 @@ class AnswerAssembler:
             nested = InferenceResult(record["result_id"],record["kind"],record["values"],tuple(record["assumption_environments"]),
                 tuple(record["source_versions"]),tuple(record["counterevidence_ids"]),result.rule_version,"CONDITIONAL_STRUCTURAL_MODEL")
             lines.append("Passage structural reading " + record["local_id"] + ": " + self._concept_claim(nested).text)
+        for record in value.get("character_arcs", ()):
+            nested = InferenceResult(record["result_id"], record["kind"], record["values"],
+                tuple(record["assumption_environments"]), tuple(record["source_versions"]),
+                tuple(record["counterevidence_ids"]), result.rule_version, "CONDITIONAL_FINITE_LONGITUDINAL_MODEL")
+            lines.append("Packet-local character reading " + record["local_id"] + "; original source=" + record["source_id"]
+                + "; declared actor=" + record["actor"] + "; event/episode/time bindings=" + repr(thaw(record["bindings"]))
+                + "; binding assumptions=" + repr(tuple(record["binding_assumptions"])) + ". " + self._relationship_claim(nested).text)
+            for model in record["values"]["models"]:
+                mechanisms = {m["mechanism_id"]: m for m in model["mechanisms"]}
+                for trajectory in model["longitudinal"]["trajectories"]:
+                    if trajectory["trajectory_id"] in model["longitudinal"]["pareto_explored"]:
+                        lines.append("Actual candidate trajectory: " + repr(tuple(dict(segment,
+                            mechanism=thaw(mechanisms[segment["model_id"]]["input"])) for segment in trajectory["segments"]))
+                            + "; evidence factors=" + repr(tuple(model["longitudinal"]["evidence_factor_ids"])) + ".")
+                        observations = {o["id"]: o for o in model["observations"]}
+                        for cell in trajectory["cells"]:
+                            observed = observations[cell["observation_id"]]
+                            lines.append("Evidence at event time " + str(observed["at"]) + ": observed=" + repr(tuple(observed["values"]))
+                                + "; actual prediction=" + repr(tuple(cell["prediction"]["values"])) + "; " + cell["relation"]
+                                + "; shared factor=" + cell["factor_id"] + ".")
+            lines.append("These are conditional event-time readings within this packet, not discourse-order turns or cross-packet identity conclusions. Historical self-identification and other attribution remain unchanged.")
         if value["comparison_issues"]:
             lines.append("Comparison limitations: " + ", ".join(value["comparison_issues"]) + ".")
         lines.append("Coverage: " + str(value["coverage"]["read_fragments"]) + " source packets; "
@@ -262,6 +285,8 @@ class AnswerAssembler:
         if value["issues"]:lines.append("Unresolved: " + ", ".join(value["issues"]) + ".")
         names = ("story_queries", "story_constraints", "inactive_events", "unusable_orders", "frames", "mentions", "discourse_edges",
                  "form", "variants", "coverage", "issues", "comparisons", "analogies", "comparison_issues", "local_evaluations", "semantic_certified", "candidate_completeness", "scope", "source_versions")
+        if "character_arcs" in value:
+            names += ("character_arcs",)
         return AnswerClaim(" ".join(lines), "claim:" + result.result_id,
                            tuple(ResultField(result.result_id, name, value[name]) for name in names),
                            result.assumption_environments, result.counterevidence_ids, "CONDITIONAL_NARRATIVE_NOT_AESTHETIC_OR_AUTHOR_TRUTH")

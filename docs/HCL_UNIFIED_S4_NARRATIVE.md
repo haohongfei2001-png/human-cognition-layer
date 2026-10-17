@@ -114,7 +114,7 @@ old unsafe likelihood results are neither rewritten nor granted fresh authority.
 ## Remaining implementation and research obligations
 
 This is deliberately still work in progress. Full M12 structural/intertextual mapping,
-M03–M09 shared character-mechanism composition, richer rhetoric/form-effect
+cross-packet M03–M09 shared character-mechanism assembly, richer rhetoric/form-effect
 models, semantic/emotional evaluation of explicit rewrite/reorder contrasts,
 robust context directories and hierarchical
 whole-work composition, final witnesses
@@ -122,3 +122,11 @@ and independent end-to-end review are not finished. Open extraction/alignment,
 novel natural-language generalization, multi-reviewer literary research and full
 M11/M12/S4 validation remain open. No formal objective or accepted exit criterion
 has been reduced to these fixture tests.
+
+## Explicit packet-local character consumption
+
+An opt-in fragment-2 path now binds and consumes actual M09 trajectories in
+M11 answers. The existing provider context stays v1; automatic v2 extraction and
+cross-packet character assembly are not claimed. See
+[HCL_NARRATIVE_CHARACTER_ARCS.md](HCL_NARRATIVE_CHARACTER_ARCS.md) for the exact
+source/actor/time, resource, delivery and predecessor contract.

@@ -41,6 +41,11 @@ def compute_narrative(program, originals, max_batches):
         raise ValueError("nonnegative narrative batch allowance required")
     program = thaw(program)
     fragments = program["fragments"]
+    character_version = program.get("schema") == "hcl-literature-composed-2"
+    if (program.get("schema") not in ("hcl-literature-composed-1", "hcl-literature-composed-2")
+            or character_version != ("character_arcs" in program)
+            or character_version != any(f.get("schema") == "hcl-literature-fragment-2" for f in fragments)):
+        raise ValueError("narrative character protocol mismatch")
     if type(program["source_versions"]) is not dict or any(
         type(v) is not int or v < 1 for v in program["source_versions"].values()
     ):
@@ -68,6 +73,9 @@ def compute_narrative(program, originals, max_batches):
         raise ValueError("narrative source omitted")
     used = 0
     issues = list(OPEN_MECHANISMS)
+    if program.get("schema") == "hcl-literature-composed-2" and program["character_arcs"]:
+        issues.remove("CHARACTER_MECHANISM_COMPOSITION_UNCOMPUTED")
+        issues.extend(("CHARACTER_READINGS_REMAIN_CONDITIONAL", "CROSS_PACKET_CHARACTER_COMPOSITION_UNCOMPUTED"))
     if program["comparisons"]:
         issues.remove("THEME_MECHANISM_COMPARISON_UNCOMPUTED")
         issues.append("THEME_INTERPRETATIONS_REMAIN_CONDITIONAL")
@@ -418,7 +426,7 @@ def compute_narrative(program, originals, max_batches):
         external_chapters="OUTSIDE_EXPLICIT_SOURCE_SCOPE",
     )
     return dict(
-        schema=VERSION,
+        schema="narrative-computation-2" if program.get("schema") == "hcl-literature-composed-2" else VERSION,
         batch_evaluations=used,
         story_queries=queries,
         story_constraints=[
@@ -535,6 +543,15 @@ class LiteratureOperator:
                     resource_usage=dict(operation.resource_usage),
                 )
             )
+        characters = []
+        if program.get("schema") == "hcl-literature-composed-2":
+            from hcl.operators.narrative_characters import execute_arc
+            for source in program["character_arcs"]:
+                record = execute_arc(snapshot, source, replace(allowance,
+                    max_local_evaluations=allowance.max_local_evaluations - used))
+                used += record["resource_usage"]["local_evaluations"]
+                comparison_issues.update(record["issues"])
+                characters.append(record)
         values = dict(
             computed,
             comparisons=comparisons,
@@ -549,6 +566,8 @@ class LiteratureOperator:
             ),
             source_versions=dict(snapshot.source_versions),
         )
+        if program.get("schema") == "hcl-literature-composed-2":
+            values["character_arcs"] = characters
         result = InferenceResult(
             "narrative-result:"
             + sha256(codec.dumps([issue.issue_id, values])).hexdigest(),
@@ -559,7 +578,7 @@ class LiteratureOperator:
                     set(computed["assumption_environments"])
                     | {
                         a
-                        for c in (*comparisons, *analogies)
+                        for c in (*comparisons, *analogies, *characters)
                         for a in c["assumption_environments"]
                     }
                 )
@@ -571,7 +590,7 @@ class LiteratureOperator:
         )
         return OpResult(
             "literature.execute",
-            VERSION,
+            computed["schema"],
             snapshot.source_versions,
             ("append_inference",),
             (result.result_id,),
@@ -592,6 +611,8 @@ class LiteratureOperator:
 
 def verify_narrative(values):
     inputs = values["inputs"]
+    if ("character_arcs" in values) != (inputs["program"].get("schema") == "hcl-literature-composed-2"):
+        raise ValueError("narrative character result protocol mismatch")
     if type(inputs["issue_id"]) is not str or not inputs["issue_id"]:
         raise ValueError("narrative issue identity missing")
     if codec.dumps(freeze(values["source_versions"])) != codec.dumps(
@@ -733,6 +754,10 @@ def verify_narrative(values):
             raise ValueError("narrative analogy evidence or limitations changed")
         used += value["local_evaluations"]
         issues.update(record["issues"])
+    if inputs["program"].get("schema") == "hcl-literature-composed-2":
+        from hcl.operators.narrative_characters import verify_arcs
+        used, character_issues = verify_arcs(values, used)
+        issues.update(character_issues)
     if (
         type(values["local_evaluations"]) is not int
         or used != values["local_evaluations"]

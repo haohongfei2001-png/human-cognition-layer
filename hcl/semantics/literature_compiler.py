@@ -14,6 +14,8 @@ from hcl.semantics.compiler import SemanticCompiler
 
 SCHEMA = "hcl-literature-fragment-1"
 COMPOSED = "hcl-literature-composed-1"
+CHARACTER_SCHEMA = "hcl-literature-fragment-2"
+CHARACTER_COMPOSED = "hcl-literature-composed-2"
 KINDS = frozenset(
     {
         "NARRATION",
@@ -119,8 +121,10 @@ class LiteratureCompiler(SemanticCompiler):
                 self._invalid("nonfinite_json")
             ),
         )
-        self._keys(data, FIELDS)
-        if data["schema"] != SCHEMA:
+        if type(data) is not dict:
+            raise self._invalid("candidate")
+        self._keys(data, FIELDS + (" character_arcs" if data.get("schema") == CHARACTER_SCHEMA else ""))
+        if data["schema"] not in (SCHEMA, CHARACTER_SCHEMA):
             raise self._invalid("schema")
         sources = {s.segment_id: s for s in chunk.segments}
         if any(s.kind != "SOURCE" for s in sources.values()):
@@ -296,6 +300,12 @@ class LiteratureCompiler(SemanticCompiler):
                 allowance,
             )
             used.update(sources)
+        if data["schema"] == CHARACTER_SCHEMA:
+            from hcl.semantics.narrative_characters import compile_arcs
+            local = dict(data, fragment=chunk.ordinal, source_segments=[asdict(s) for s in chunk.segments])
+            arcs = compile_arcs(self, snapshot, local, chunk.segments, allowance)
+            for arc in arcs:
+                used.update(s.segment_id for s in chunk.segments if s.source_id == arc["source_id"])
         unmodeled = set(self._strings(data["unmodeled_segments"], 1024))
         if not unmodeled <= set(sources) or used | unmodeled != set(sources):
             raise self._invalid("source_coverage")
@@ -319,7 +329,7 @@ class LiteratureCompiler(SemanticCompiler):
         if any(chunk.total != len(fragments) for chunk, raw in candidates):
             raise self._invalid("fragment_coverage")
         result = dict(
-            schema=COMPOSED,
+            schema=CHARACTER_COMPOSED if any(f["schema"] == CHARACTER_SCHEMA for f in fragments) else COMPOSED,
             source_versions=dict(snapshot.source_versions),
             fragments=fragments,
         )
@@ -412,6 +422,16 @@ class LiteratureCompiler(SemanticCompiler):
                 )
         if len(result["analogies"]) > 16:
             raise self._limit("composed_analogies")
+        if result["schema"] == CHARACTER_COMPOSED:
+            from hcl.semantics.narrative_characters import compile_arcs
+            result["character_arcs"] = [arc for fragment, (chunk, raw) in zip(fragments, candidates)
+                if fragment["schema"] == CHARACTER_SCHEMA
+                for arc in compile_arcs(self, snapshot, fragment, chunk.segments, allowance)]
+            from hcl.semantics.narrative_characters import validate_arc_clock
+            for arc in result["character_arcs"]:
+                validate_arc_clock(self, fragments, arc)
+            if len(result["character_arcs"]) > 16:
+                raise self._limit("composed_character_arcs")
         result["unresolved_references"] = unresolved
         result["candidate_identity"] = sha256(codec.dumps(result)).hexdigest()
         return freeze(result)
