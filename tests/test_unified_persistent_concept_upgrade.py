@@ -49,6 +49,17 @@ CANDIDATE_SHAPES = {
         "validation_code"],
 }
 
+DEEPSEEK_SHAPES = {
+    "DeepSeekBatchAuthorization": ["batch_id","ledger_path","state_store_path","task_fingerprints",
+        "verified_at","expires_at","account_currency","account_scope","source_policy","max_calls",
+        "max_cost_nanoyuan","rate_version","model","model_version","mode"],
+    "DeepSeekCandidateRequest": ["protocol","batch_id","authorization_hash","claim_id","task_fingerprint",
+        "source_versions","context","body","reservation_nanoyuan"],
+    "DeepSeekCandidateReturn": ["protocol","visible_text","provider_response_id","model","finish_reason",
+        "input_tokens","cached_input_tokens","uncached_input_tokens","output_tokens","reasoning_tokens",
+        "usage_cost_upper_nanoyuan","validation_code"],
+}
+
 PROPOSALS = (
     "from copy import deepcopy\n"
     "from hcl.semantics.segments import segment_snapshot\n"
@@ -226,8 +237,9 @@ class PersistentConceptPredecessorUpgradeTests(unittest.TestCase):
             current_shapes = {name: [field.name for field in fields(cls)]
                               for name, cls in codec.CLASSES.items()}
             self.assertEqual(set(current_shapes) - set(old['shapes']),
-                             ADDITIVE_CONTRACTS | CANDIDATE_SHAPES.keys())
+                             ADDITIVE_CONTRACTS | CANDIDATE_SHAPES.keys() | DEEPSEEK_SHAPES.keys())
             self.assertEqual({name: current_shapes[name] for name in CANDIDATE_SHAPES}, CANDIDATE_SHAPES)
+            self.assertEqual({name: current_shapes[name] for name in DEEPSEEK_SHAPES}, DEEPSEEK_SHAPES)
             self.assertEqual(old['shapes'], {name: current_shapes[name] for name in old['shapes']})
             with sqlite3.connect(source) as db:
                 db.row_factory = sqlite3.Row

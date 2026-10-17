@@ -37,3 +37,7 @@ current-flow-public.json
 # Bounded new-study receipts; only explicit public export may leave runner.
 two-stage-*-private/
 two-stage-*-public.json
+
+# Native CNY smoke: no private state or unreviewed generated evidence in Git.
+hcl-deepseek-core-smoke-private/
+hcl-deepseek-core-smoke-public.json

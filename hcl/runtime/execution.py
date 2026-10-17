@@ -336,7 +336,9 @@ class ExecutionRunner:
                 )
             raw = self.store._get_object(row["response_hash"])
             from hcl.models.candidate_contracts import MeteredCandidateReturn
-            if type(raw) is MeteredCandidateReturn:
+            from hcl.models.deepseek_contracts import DeepSeekCandidateReturn, MAX_VISIBLE_BYTES
+            native_return = type(raw) is DeepSeekCandidateReturn
+            if type(raw) in (MeteredCandidateReturn, DeepSeekCandidateReturn):
                 from hcl.models.candidate_protocol import candidate_text
                 try:
                     raw = candidate_text(raw, snapshot.source_versions)
@@ -353,6 +355,8 @@ class ExecutionRunner:
                 request.budget.max_visible_output_tokens,
                 self.gateway.capabilities.output_tokens or request.budget.max_visible_output_tokens,
             )
+            if native_return:
+                cap = min(request.budget.max_output_bytes, MAX_VISIBLE_BYTES)
             if output_bytes > cap:
                 raise stopped("OUTPUT_CAPACITY", "BUDGET_EXHAUSTED", "model")
             self.store.validate_snapshot(snapshot)
@@ -1153,6 +1157,9 @@ class ExecutionRunner:
                 repair_calls=self.counters["feedback"],
                 tokenizer="UTF8_BYTES_CONSERVATIVE_UPPER_BOUND",
             )
+            if hasattr(self.gateway, "batch_usage"):
+                usage["native_cny_batch"] = self.gateway.batch_usage()
+                usage["tokenizer"] = "PROVIDER_REPORTED_USAGE;LOCAL_CAPACITY_IN_BYTES"
             receipt = dict(
                 safe,
                 operation_ids=tuple(n["id"] for n in self.nodes.values() if n["state"] == "DONE"),

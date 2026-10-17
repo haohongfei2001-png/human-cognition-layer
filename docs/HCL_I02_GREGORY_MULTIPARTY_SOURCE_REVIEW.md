@@ -74,3 +74,25 @@ Resolve exact historic-fragment rights with adequate primary evidence or keep
 this item held and continue another dependency-safe family. No paid interface
 source swap, old-case rerun, confirmation upgrade, leaderboard or new H module.
 LongMemEval remains SEALED / NOT ACCESSED.
+
+## 2026-10-17 metadata maintenance: explicit v2 boundary
+
+The original review and frozen candidate/RDF SHA above remain historical. The
+current official RDF differs from that raw SHA; the old raw bytes were not
+recovered, so whole-file or full semantic equivalence is **not established**.
+Project Gutenberg documents [daily catalog regeneration](https://www.gutenberg.org/ebooks/offline_catalogs.html).
+The versioned [v2 metadata contract](../reports/HCL_I02_GREGORY_METADATA_CONTRACT_V2.json)
+now fixes exact selected book/creator/provenance/language/type/rights/license and
+source-file fields in a bounded, explicitly supported XML/RDF shape. Unknown
+protected predicates, attributes, duplicate subjects, indirect aliases or
+unsupported graph syntax fail closed. The observed raw RDF SHA is still audited.
+
+This deliberately replaces whole-RDF byte-change detection for this gate only.
+Unused aliases, descriptions, credits, subjects/catalog listings and other-format
+metadata may change without failing the selected-field contract; some of those
+changes could be meaningful in another task. They are not certified equivalent
+and must be added to a new frozen contract before being consumed. Original text,
+extraction, question, candidate and source-first obligation pins are unchanged.
+Catalog CC0 is metadata-only and supplies no lyric rights. Provider input remains
+unconditionally held; no model grant, source redistribution or live call follows
+from this maintenance.

@@ -1,0 +1,59 @@
+{
+  "schema": "hcl-i02-gregory-publisher-metadata-contract-2",
+  "projection": {
+    "catalog_metadata_license_uri": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "creator": {
+      "birthdate": "1852",
+      "deathdate": "1932",
+      "name": "Gregory, Lady",
+      "uri": "http://www.gutenberg.org/2009/agents/4092"
+    },
+    "ebook_license_uri": "http://www.gutenberg.org/license",
+    "ebook_uri": "http://www.gutenberg.org/ebooks/41653",
+    "issued": "2012-12-18",
+    "language": "en",
+    "publisher": "Project Gutenberg",
+    "rights": "Public domain in the USA.",
+    "schema": "hcl-i02-gregory-publisher-semantic-projection-2",
+    "source_file": {
+      "extent": "242477",
+      "is_format_of": "http://www.gutenberg.org/ebooks/41653",
+      "publisher_format_claim": "text/plain; charset=us-ascii",
+      "uri": "https://www.gutenberg.org/files/41653/41653-0.txt"
+    },
+    "title": "Seven Short Plays",
+    "type": "Text"
+  },
+  "projection_sha256": "48d77ae423357cacc1e0507bcfef0572042be88b0b812641be8d182b6d201d9f",
+  "historical_full_rdf_sha256": "e32d60224cbf64f51d8a10e16e5c9e7ae62302db4173bda4a2e1900aa1b92901",
+  "historical_full_rdf_equivalence": "NOT_ESTABLISHED",
+  "official_observation": {
+    "checked_at": "2026-10-17T09:40:18Z",
+    "requested_url": "https://www.gutenberg.org/ebooks/41653.rdf",
+    "returned_url": "https://www.gutenberg.org/cache/epub/41653/pg41653.rdf",
+    "http_status": 200,
+    "bytes": 22261,
+    "raw_sha256": "f723afd3ec5d715fae8e2032deec5f130aab0a1e90c25e55f719ec7dbc29d5e4",
+    "last_modified": "2026-10-17T07:47:45Z"
+  },
+  "catalog_update_documentation": "https://www.gutenberg.org/ebooks/offline_catalogs.html",
+  "scope": "Exact selected metadata identity and provenance for the already byte-pinned public source; not full RDF equivalence or additional source rights.",
+  "ignored_fields": [
+    "downloads",
+    "blank-node identifiers",
+    "XML prefix/order/serialization",
+    "non-selected format metadata/list",
+    "aliases",
+    "webpages",
+    "subjects/bookshelves",
+    "table of contents",
+    "summary",
+    "transcription and catalog credits",
+    "format modified timestamps"
+  ],
+  "reduced_protection": "The historical full-RDF byte pin detected every change. This v2 contract intentionally does not detect changes to unused unselected metadata, which may be meaningful elsewhere. Add any newly consumed field to a new frozen contract before relying on it.",
+  "metadata_license_scope": "Catalog CC0 metadata only; it does not establish embedded lyric rights.",
+  "provider_input_allowed": false,
+  "source_and_question_and_obligations_pins_changed": false,
+  "projection_serialization": "UTF-8 JSON, sort_keys=True, separators=(comma,colon), ensure_ascii=False, no trailing newline"
+}
