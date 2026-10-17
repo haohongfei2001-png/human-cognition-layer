@@ -11,3 +11,6 @@ from hcl.kernel.retrieval import RetrievalQuery, RetrievalIssue
 from hcl.kernel.concept_registry import ConceptBinding, ConceptAdoptionIssue, ConceptFollowIssue
 
 __all__ = ["ConceptBinding", "ConceptAdoptionIssue", "ConceptFollowIssue", "HCL", "TaskRequest", "TaskResult", "RevisionIssue", "ExecutionIssue", "ExecutionBudget", "LocalModel", "RetrievalQuery", "RetrievalIssue"]
+
+from hcl.models.controlled_candidates import affect_request
+__all__.append("affect_request")

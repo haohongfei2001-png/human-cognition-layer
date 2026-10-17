@@ -63,8 +63,9 @@ def _usage(store, db, task):
     calls = list(db.execute("SELECT output_bytes FROM calls WHERE task_key=?", (task["task_key"],)))
     usage.update(TaskBudgetLedger(store)._usage(db, task["task_key"]),
                  observed_output_bytes=sum(row[0] or 0 for row in calls),
-                 output_usage_unknown=any(row[0] is None for row in calls),
-                 provider_calls=0, provider_spend_usd="0")
+                 output_usage_unknown=any(row[0] is None for row in calls))
+    usage.setdefault("provider_calls", 0)
+    usage.setdefault("provider_spend_usd", "0")
     return usage
 
 
