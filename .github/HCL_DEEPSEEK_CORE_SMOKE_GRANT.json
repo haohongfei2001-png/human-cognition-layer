@@ -20,5 +20,11 @@
   "runtime_sha256": "00a916b82d45bb667f593cc8dae31d74403a3592e27c3d6a44c59fb56f740c87",
   "schema": "hcl-deepseek-core-smoke-grant-1",
   "source_policy": "SYNTHETIC_ONLY",
-  "status": "READY"
+  "status": "CLOSED_BLOCKED",
+  "closure": {
+    "schema": "hcl-deepseek-core-smoke-closure-1",
+    "marker_commit": "7ed5600b3187faad00dad8262f62ec262cb9119d",
+    "run_id": "39032128879",
+    "receipt_sha256": "4a208a38f3fddfa6f3d105d4439ed087fd6a01e57e1d7f5cbb91722a1ce5c710"
+  }
 }
