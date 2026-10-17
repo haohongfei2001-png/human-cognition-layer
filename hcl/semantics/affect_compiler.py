@@ -8,6 +8,8 @@ from hcl.operators.affect import validate_observation_coarsening
 from hcl.semantics.model_compiler import LocalModelCompiler, SCHEMA as MENTAL_SCHEMA
 
 SCHEMA = "hcl-affect-candidates-1"
+from hcl.operators.affect_attribution import SCHEMA as ATTRIBUTION_SCHEMA, VALUES as ATTRIBUTION_VALUES
+from hcl.semantics.affect_attribution import validate_bridges, stable_bridges
 EPISODE_FIELDS = "id episode_id actor before at plan_id previous_weights current_weights forecast_action goals mappings coping previous_id revision_kind segment_ids"
 GOAL_FIELDS = "id label utilities segment_ids"
 COPING_FIELDS = "id kind priorities adjustments horizon action_ids observation_overrides segment_ids"
@@ -100,7 +102,7 @@ class AffectCompiler(LocalModelCompiler):
             ),
         )
         self._keys(data, "schema models")
-        if data["schema"] != SCHEMA:
+        if data["schema"] not in (SCHEMA, ATTRIBUTION_SCHEMA):
             raise self._invalid("schema")
         source_refs = {s.segment_id for s in segments if s.kind == "SOURCE"}
 
@@ -146,7 +148,7 @@ class AffectCompiler(LocalModelCompiler):
             plans = {p["id"]: p for p in mental["plans"]}
             previous = {}
             for episode in rows(model["episodes"], 16, 1):
-                self._keys(episode, EPISODE_FIELDS)
+                self._keys(episode, EPISODE_FIELDS + (" attributions" if data["schema"] == ATTRIBUTION_SCHEMA else ""))
                 for key in ("id", "episode_id"):
                     self._text(episode[key], 128)
                 if episode["id"] in previous or episode["actor"] not in agents:
@@ -188,9 +190,16 @@ class AffectCompiler(LocalModelCompiler):
                         rational(value)
                     refs(goal["segment_ids"])
 
+                bridges = (validate_bridges(self, episode, mental, goals, refs, rows)
+                           if data["schema"] == ATTRIBUTION_SCHEMA else {})
+
                 def conditions(value):
                     for condition in rows(value, 16, 1):
-                        self._keys(condition, "goal_id dimension value")
+                        if type(condition) is not dict:
+                            raise self._invalid("condition")
+                        self._keys(condition, "goal_id dimension value" +
+                                   (" attribution_id" if condition.get("dimension") == "attribution"
+                                    and data["schema"] == ATTRIBUTION_SCHEMA else ""))
                         if condition["goal_id"] not in goals:
                             raise self._invalid("condition_goal")
                         if condition["dimension"] in (
@@ -199,6 +208,11 @@ class AffectCompiler(LocalModelCompiler):
                             "expectation_gap_direction",
                         ):
                             allowed = {"NEGATIVE", "ZERO", "POSITIVE"}
+                        elif condition["dimension"] == "attribution" and data["schema"] == ATTRIBUTION_SCHEMA:
+                            bridge = bridges.get(condition["attribution_id"])
+                            if bridge is None or bridge["goal_id"] != condition["goal_id"]:
+                                raise self._invalid("condition_attribution_binding")
+                            allowed = ATTRIBUTION_VALUES
                         elif condition["dimension"] == "control":
                             allowed = {"IMPROVABLE", "NO_IMPROVEMENT"}
                         else:
@@ -316,6 +330,8 @@ class AffectCompiler(LocalModelCompiler):
                         )
                         if any(episode[key] != p[key] for key in stable):
                             raise self._invalid("new_information_changed_mechanism")
+                        if data["schema"] == ATTRIBUTION_SCHEMA and stable_bridges(episode) != stable_bridges(p):
+                            raise self._invalid("new_information_changed_attribution")
                         old_plan = plans[p["plan_id"]]
                         if any(
                             plan[key] != old_plan[key] for key in ("graph", "bindings")

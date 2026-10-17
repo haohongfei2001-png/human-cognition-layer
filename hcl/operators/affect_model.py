@@ -21,6 +21,11 @@ from hcl.operators.affect import (
 )
 from hcl.semantics.model_compiler import planning_model
 
+from hcl.operators.affect_attribution import (
+    SCHEMA as ATTRIBUTION_SCHEMA, VERSION as ATTRIBUTION_VERSION,
+    derive_attributions, profile_attribution,
+)
+
 KIND = "CONDITIONAL_AFFECT_MODEL"
 
 
@@ -135,7 +140,7 @@ def consequences(episode, plan, profiles, coping, branch, computed):
 
 
 def derive_episode(
-    episode, plan, views, state_plans, prior, channels, solve, *, allowance
+    episode, plan, views, state_plans, prior, channels, solve, *, allowance, attribution=None
 ):
     """Derived values depend on actual perspectives and actual solver records."""
     previous, current, actual = views["previous"], views["current"], views["actual"]
@@ -182,12 +187,15 @@ def derive_episode(
             ),
             control=computed,
             source_variable_ids=(previous["variable_id"], current["variable_id"]),
-            attribution=dict(status="NOT_MODELED"),
+            attribution=(dict(status="NOT_MODELED") if attribution is None
+                         else profile_attribution(attribution, goal["id"])),
             normative_relevance=dict(status="NOT_MODELED"),
             identity_relevance=dict(status="NOT_MODELED"),
         )
         frontier.extend(computed["frontier"])
         profiles.append(profile)
+    if attribution is not None:
+        frontier.extend(attribution["frontier"])
     previous_labels = tuple(
         h["label"]
         for h in prior.get("hypotheses", ())
@@ -283,7 +291,8 @@ def derive_episode(
             ),
         ),
         frontier=tuple(sorted(set(frontier))),
-        attribution_scope="UNMODELED_NOT_ZERO_BLAME",
+        attribution_scope=("UNMODELED_NOT_ZERO_BLAME" if attribution is None else
+                           "CHARACTER_CONDITIONAL_BUT_FOR_NOT_ANALYST_TRUTH_INTENTION_OR_BLAME"),
         calibration="QUALITATIVE_UNCALIBRATED_MODEL_NOT_PRIVATE_EMOTION_MEASUREMENT",
     )
 
@@ -311,6 +320,7 @@ class AffectModelOperator:
 
     def _run(self, snapshot, issue, allowance, program, *, shared_cognition=None):
         used = 0
+        version = ATTRIBUTION_VERSION if program.get("schema") == ATTRIBUTION_SCHEMA else VERSION
         limit = allowance.max_local_evaluations
         outputs = []
         issues = []
@@ -373,6 +383,9 @@ class AffectModelOperator:
                 episodes=[],
                 frontier=[],
             )
+            if version == ATTRIBUTION_VERSION:
+                output["mental_evaluation_charge"] = (operation.resource_usage["local_evaluations"]
+                                                       if shared_cognition is None else 0)
             outputs.append(output)
             if original["id"] not in trace:
                 output["frontier"].append("AFFECT_MENTAL_STATE_UNAVAILABLE")
@@ -428,6 +441,9 @@ class AffectModelOperator:
                 row["assumption_environments"] = sorted(
                     {a for v in row["views"].values() for a in v["assumptions"]}
                 )
+                if version == ATTRIBUTION_VERSION and episode["previous_id"] is not None and episode["previous_id"] not in completed:
+                    output["frontier"].append("AFFECT_PREVIOUS_VERSION_UNAVAILABLE")
+                    continue
                 states = sorted(
                     set(row["views"]["current"]["mapping"]["states"])
                     | set(row["views"]["actual"]["mapping"]["states"])
@@ -440,6 +456,13 @@ class AffectModelOperator:
                         state: solve(graph, {state: "1"}, 1, actual_state=state)
                         for state in states
                     }
+                attribution = None
+                if version == ATTRIBUTION_VERSION:
+                    row["attribution_allowance"] = max(0, limit - used)
+                    attribution = derive_attributions(episode, original, row["views"]["current"],
+                                                     allowance=row["attribution_allowance"])
+                    row["attribution"] = attribution
+                    used += attribution["world_evaluations"]
                 start = used
                 calls = []
 
@@ -469,6 +492,7 @@ class AffectModelOperator:
                     model["channels"],
                     recorded_solve,
                     allowance=limit - start,
+                    attribution=attribution,
                 )
                 used += row["derived"]["reappraisal"]["comparison_work"]
                 row["coping_solver_calls"] = calls
@@ -478,7 +502,7 @@ class AffectModelOperator:
                 output["frontier"].extend(row["derived"]["frontier"])
             issues.extend(output["frontier"])
         values = dict(
-            operator_version=VERSION,
+            operator_version=version,
             models=outputs,
             semantic_certified=False,
             candidate_completeness="NOT_ESTABLISHED",
@@ -486,6 +510,8 @@ class AffectModelOperator:
             local_evaluations=used,
             scope="CONDITIONAL_GOAL_APPRAISAL_AND_COPING_NOT_PRIVATE_EMOTION_OR_DIAGNOSIS",
         )
+        if version == ATTRIBUTION_VERSION:
+            values["local_evaluation_limit"] = limit
         inference = InferenceResult(
             "affect-result:"
             + sha256(codec.dumps([issue.issue_id, values])).hexdigest(),
@@ -507,7 +533,7 @@ class AffectModelOperator:
         )
         return OpResult(
             "affect.execute",
-            VERSION,
+            version,
             snapshot.source_versions,
             ("append_inference",),
             (inference.result_id,),
@@ -538,10 +564,48 @@ def verify_affect(values, *, shared_cognition=None):
         or data["candidate_completeness"] != "NOT_ESTABLISHED"
     ):
         raise ValueError("conditional affect boundary missing")
+    if data["operator_version"] not in (VERSION, ATTRIBUTION_VERSION):
+        raise ValueError("unknown affect version")
+    attribution_version = data["operator_version"] == ATTRIBUTION_VERSION
+    work = 0
+    if attribution_version:
+        if type(data["local_evaluation_limit"]) is not int or data["local_evaluation_limit"] < 0:
+            raise ValueError("invalid affect work limit")
+        limit = data["local_evaluation_limit"]
     for output in data["models"]:
         model = output["inputs"]
         original = model["mental"]
         actual = output["actual_mental"]
+        verified_trace = None
+        if attribution_version:
+            expected_charge = 0
+            if shared_cognition is None:
+                # Replay the real finite M03/M05/M06 operation. A certificate's
+                # self-reported batch count is not an independent work witness.
+                # This synthetic metadata has no store/ACL authority and reads
+                # no source content; only the bound immutable input is executed.
+                from hcl.kernel.types import Snapshot, Principal, BudgetSlice, Issue
+                replay_snapshot = Snapshot("affect-certificate", Principal("certificate", "verifier"),
+                                           0, 0, "", data["source_versions"], {}, {})
+                verified_trace = {}
+                times = {t for e in model["episodes"] for t in (e["before"], e["at"])}
+                replay = MentalSceneOperator()._run(
+                    replay_snapshot, Issue("verify-affect"),
+                    BudgetSlice(max_local_evaluations=max(0, limit - work)),
+                    dict(models=[original]), trace=verified_trace,
+                    trace_times={original["id"]: tuple(sorted(times))},
+                )
+                nested = replay.candidate_delta.new_inferences[0]
+                if (canonical(nested.values) != canonical(actual["values"])
+                        or canonical(replay.issues) != canonical(actual["issues"])
+                        or canonical(nested.assumption_environments) != canonical(actual["assumption_environments"])):
+                    raise ValueError("actual mental computation or work differs from replay")
+                expected_charge = replay.resource_usage["local_evaluations"]
+            if output["mental_evaluation_charge"] != expected_charge:
+                raise ValueError("mental evaluation accounting changed")
+            work += expected_charge
+            if work > limit:
+                raise ValueError("affect budget exceeded by mental work")
         if (output["model_id"], output["source_id"], output["frame_kind"]) != (
             original["id"],
             original["source_id"],
@@ -581,6 +645,8 @@ def verify_affect(values, *, shared_cognition=None):
             ) != canonical(nested.values):
                 raise ValueError("affect is not consuming the shared cognitive result")
             states, environments = bundle.trace.get(original["id"], ({}, {}))
+        elif attribution_version:
+            states, environments = verified_trace.get(original["id"], ({}, {}))
         else:
             cognitive, frontier = initial_model(original, limits)
             effective = set(original["assumptions"])
@@ -630,6 +696,10 @@ def verify_affect(values, *, shared_cognition=None):
                 "current": (episode["at"], episode["actor"]),
                 "actual": (episode["at"], None),
             }
+            if attribution_version:
+                work += len(row["views"])
+                if work > limit:
+                    raise ValueError("affect budget exceeded by views")
             for role, variable in row["views"].items():
                 at, actor = roles[role]
                 cognitive = states[at]
@@ -656,6 +726,8 @@ def verify_affect(values, *, shared_cognition=None):
                         "affect view differs from actual M03 event mechanism"
                     )
             if row["status"] != "COMPUTED":
+                if attribution_version and (row["state_plans"] or "attribution" in row):
+                    raise ValueError("uncomputed affect contains unverified solver work")
                 if row["derived"]:
                     raise ValueError("uncomputed affect contains conclusions")
                 continue
@@ -697,10 +769,32 @@ def verify_affect(values, *, shared_cognition=None):
                         )
                     if canonical(result) != canonical(expected):
                         raise ValueError("goal Q differs from actual M05 computation")
+                    if attribution_version:
+                        work += result["expansions"]
+                        if work > limit:
+                            raise ValueError("affect budget exceeded by goal planning")
+            attribution = None
+            if attribution_version:
+                if type(row["attribution_allowance"]) is not int or row["attribution_allowance"] < 0:
+                    raise ValueError("attribution allowance changed")
+                if row["attribution_allowance"] != limit - work:
+                    raise ValueError("attribution allowance accounting changed")
+                attribution = derive_attributions(episode, original, row["views"]["current"],
+                                                 allowance=row["attribution_allowance"])
+                if canonical(attribution) != canonical(row["attribution"]):
+                    raise ValueError("attribution differs from actual M03/M06 dependencies")
+                work += attribution["world_evaluations"]
+                if row["derived_allowance"] != limit - work:
+                    raise ValueError("coping allowance accounting changed")
+            elif "attributions" in episode or "attribution" in row:
+                raise ValueError("attribution requires affect v2")
             calls = iter(row["coping_solver_calls"])
 
             def checked_solve(graph, weights, horizon):
+                nonlocal work
                 call = next(calls)
+                if attribution_version and call["allowance"] != limit - work:
+                    raise ValueError("coping solver allowance accounting changed")
                 if call["weights"] != weights or call["horizon"] != horizon:
                     raise ValueError("coping solver input changed")
                 if call["allowance"] <= 0:
@@ -717,6 +811,8 @@ def verify_affect(values, *, shared_cognition=None):
                     )
                 if canonical(expected) != canonical(call["result"]):
                     raise ValueError("coping Q differs from actual M05 computation")
+                if attribution_version:
+                    work += expected["expansions"]
                 return expected
 
             prior = completed.get(episode["previous_id"], {})
@@ -731,6 +827,7 @@ def verify_affect(values, *, shared_cognition=None):
                 model["channels"],
                 checked_solve,
                 allowance=row["derived_allowance"],
+                attribution=attribution,
             )
             if next(calls, None) is not None or canonical(expected) != canonical(
                 row["derived"]
@@ -739,3 +836,10 @@ def verify_affect(values, *, shared_cognition=None):
             if not set(row["derived"]["frontier"]) <= set(output["frontier"]):
                 raise ValueError("affect limitations missing")
             completed[episode["id"]] = row["derived"]
+            if attribution_version:
+                work += expected["reappraisal"]["comparison_work"]
+                if work > limit:
+                    raise ValueError("affect budget exceeded")
+
+    if attribution_version and work != data["local_evaluations"]:
+        raise ValueError("affect total work accounting changed")

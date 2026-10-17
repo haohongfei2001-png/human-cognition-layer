@@ -210,6 +210,9 @@ def predicate(profile, condition):
             if possibilities == {expected}
             else "UNKNOWN" if expected in possibilities else "FALSE"
         )
+    if dimension == "attribution":
+        from hcl.operators.affect_attribution import attribution_predicate
+        return attribution_predicate(profile, condition)
     if dimension == "control":
         computed = profile["control"]
         if computed["status"] != "COMPUTED":
@@ -431,6 +434,9 @@ def changed_goals(previous, current, *, max_work):
         goal = result.pop("goal")
         result["goal_identity"] = {key: goal[key] for key in ("id", "label")}
         result.pop("goal_model")
+        if result["attribution"].get("status") == "CONDITIONAL_FINITE_ATTRIBUTION":
+            from hcl.operators.affect_attribution import attribution_semantics
+            result["attribution"] = attribution_semantics(result["attribution"])
         for row in result["control"].get("actions", {}).values():
             available = row.pop("subjective_available_states", ())
             feasible = row.pop("subjective_feasible_states", ())
