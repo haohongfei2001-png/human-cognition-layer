@@ -38,6 +38,16 @@ ADDITIVE_CONTRACTS = {
     "ConceptBinding", "ConceptAdoptionIssue", "ConceptFollowIssue",
     "ConceptQuery", "ConceptDependency",
 }
+CANDIDATE_SHAPES = {
+    "CandidateAuthorization": ["authorization_id", "provider", "model", "source_versions",
+        "max_calls", "max_cost_nanos", "max_input_tokens", "max_output_tokens", "rate_version",
+        "input_nanos_per_token", "cached_input_nanos_per_token", "output_nanos_per_token",
+        "task_fingerprint", "mode"],
+    "MeteredCandidateRequest": ["protocol", "authorization", "task_fingerprint", "context", "body"],
+    "MeteredCandidateReturn": ["protocol", "visible_text", "provider_response_id", "model",
+        "finish_reason", "input_tokens", "cached_input_tokens", "output_tokens", "settled_nanos",
+        "validation_code"],
+}
 
 PROPOSALS = (
     "from copy import deepcopy\n"
@@ -215,7 +225,9 @@ class PersistentConceptPredecessorUpgradeTests(unittest.TestCase):
             source, old, process = fixture.old(schema, 'old-' + str(schema))
             current_shapes = {name: [field.name for field in fields(cls)]
                               for name, cls in codec.CLASSES.items()}
-            self.assertEqual(set(current_shapes) - set(old['shapes']), ADDITIVE_CONTRACTS)
+            self.assertEqual(set(current_shapes) - set(old['shapes']),
+                             ADDITIVE_CONTRACTS | CANDIDATE_SHAPES.keys())
+            self.assertEqual({name: current_shapes[name] for name in CANDIDATE_SHAPES}, CANDIDATE_SHAPES)
             self.assertEqual(old['shapes'], {name: current_shapes[name] for name in old['shapes']})
             with sqlite3.connect(source) as db:
                 db.row_factory = sqlite3.Row
