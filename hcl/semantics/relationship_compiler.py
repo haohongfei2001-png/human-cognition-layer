@@ -71,10 +71,10 @@ class RelationshipCompiler(LocalModelCompiler):
             "The longitudinal model exceeds its explicit finite compilation bound.",
         )
 
-    def compile(self, snapshot, segments, raw_candidate, allowance):
+    def compile(self, snapshot, segments, raw_candidate, allowance, *, mental_segments=None):
         try:
             return self._compile_relationship(
-                snapshot, segments, raw_candidate, allowance
+                snapshot, segments, raw_candidate, allowance, mental_segments=mental_segments
             )
         except (
             ValueError,
@@ -87,7 +87,7 @@ class RelationshipCompiler(LocalModelCompiler):
         ):
             raise self._invalid() from None
 
-    def _compile_relationship(self, snapshot, segments, raw, allowance):
+    def _compile_relationship(self, snapshot, segments, raw, allowance, *, mental_segments=None):
         if type(raw) is not str or len(raw.encode()) > min(
             allowance.max_output_bytes, 1048576
         ):
@@ -158,6 +158,7 @@ class RelationshipCompiler(LocalModelCompiler):
                         )
                     ),
                     allowance,
+                    mental_segments=mental_segments,
                 )
             )["models"][0]
             affect = thaw(
@@ -173,6 +174,7 @@ class RelationshipCompiler(LocalModelCompiler):
                         )
                     ),
                     allowance,
+                    mental_segments=mental_segments,
                 )
             )["models"][0]
             if codec.canonical(interaction["mental"]) != codec.canonical(

@@ -83,6 +83,7 @@ class RelationshipModelOperator:
             ) from None
 
     def _run(self, snapshot, issue, allowance, program):
+        version = "s3-conditional-longitudinal-2" if any("evidence_protocol" in m for m in program["models"]) else VERSION
         used = 0
         outputs = []
         issues = []
@@ -93,6 +94,9 @@ class RelationshipModelOperator:
 
         for model in program["models"]:
             mental = model["mental"]
+            explicit_factors = model.get("evidence_protocol") == "explicit-narrative-episode-1"
+            if "evidence_protocol" in model and not explicit_factors:
+                raise ValueError("unknown longitudinal evidence protocol")
             episodes = {e["id"]: e for e in model["affect"]["episodes"]}
             interaction = dict(model["interaction"], mental=mental)
             affect = dict(model["affect"], mental=mental)
@@ -674,7 +678,7 @@ class RelationshipModelOperator:
                         mental["source_id"],
                         episodes[c["episode_id"]]["actor"],
                         episodes[c["episode_id"]]["at"],
-                        c["segment_ids"],
+                        ["model:" + mental["id"], "episode:" + episodes[c["episode_id"]]["episode_id"]] if explicit_factors else c["segment_ids"],
                     ),
                     values=[c["action"]],
                 )
@@ -717,7 +721,7 @@ class RelationshipModelOperator:
             out["frontier"] = sorted(set(out["frontier"]))
             issues.extend(out["frontier"])
         values = dict(
-            operator_version=VERSION,
+            operator_version=version,
             models=outputs,
             source_versions=dict(snapshot.source_versions),
             rule_version=snapshot.rule_version,
@@ -760,7 +764,7 @@ class RelationshipModelOperator:
         )
         return OpResult(
             "relationships.execute",
-            VERSION,
+            version,
             snapshot.source_versions,
             ("append_inference",),
             (inference.result_id,),
