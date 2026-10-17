@@ -14,8 +14,11 @@ from hcl.kernel.retrieval import RetrievalQuery, RetrievalDependency, RetrievalI
 
 from hcl.kernel.concept_registry import ConceptBinding, ConceptAdoptionIssue, ConceptFollowIssue, ConceptQuery, ConceptDependency
 
+from hcl.models.candidate_contracts import CandidateAuthorization, MeteredCandidateRequest, MeteredCandidateReturn
+
 FORMAT = "hcl-content-object-1"
 CLASSES = {cls.__name__: cls for cls in (
+    CandidateAuthorization, MeteredCandidateRequest, MeteredCandidateReturn,
     ConceptBinding, ConceptAdoptionIssue, ConceptFollowIssue, ConceptQuery, ConceptDependency,
     RetrievalQuery, RetrievalDependency, RetrievalIssue, EvidenceNode,
     ExecutionBudget, ExecutionIssue, LocalModel, ModelIssue, ExecutionCheckpoint, ResumeToken, ProjectedResultField, SnapshotRef, ContextChunk, SourceSegment,

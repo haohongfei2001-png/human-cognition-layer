@@ -45,6 +45,9 @@ class TaskBudgetLedger:
 
     def _usage(self, db, key):
         calls = list(db.execute("SELECT * FROM calls WHERE task_key=?", (key,)))
+        from .candidate_ledger import split_calls, metered_usage
+        all_calls = calls
+        calls, metered = split_calls(self.store, calls)
         unknown = any(call["attempted"] is None for call in calls)
         known = sum(call["attempted"] or 0 for call in calls)
         usage = {
@@ -52,11 +55,12 @@ class TaskBudgetLedger:
             "observed_mock_calls": known,
             "held_mock_calls": len(calls),
             "mock_usage_unknown": unknown,
-            "estimated_request_bytes": sum(call["request_bytes"] for call in calls),
+            "estimated_request_bytes": sum(call["request_bytes"] for call in all_calls),
             "replay_new_mock_calls": 0,
         }
         if len(calls) == 1:
             usage["mock_call_state"] = calls[0]["state"]
+        usage.update(metered_usage(metered))
         return usage
 
     def _replay_dependencies(self, db, request, session, row):

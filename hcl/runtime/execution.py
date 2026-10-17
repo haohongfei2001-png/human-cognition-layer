@@ -165,6 +165,8 @@ class ExecutionRunner:
                     "analogy.compare": "concept_compile",
                     "model.respond": "answer",
                 }[goal.kind]
+                if goal.kind == "affect.evaluate":
+                    purpose = getattr(self.gateway, "candidate_purpose", purpose)
                 if type(goal) is RetrievalIssue:
                     view = snapshot.query_views["0"]
                     parts = (ContextChunk(purpose, tuple(SourceSegment(**row) for row in view["packet"]["segments"]), 0, 1),)
@@ -333,6 +335,13 @@ class ExecutionRunner:
                     "model",
                 )
             raw = self.store._get_object(row["response_hash"])
+            from hcl.models.candidate_contracts import MeteredCandidateReturn
+            if type(raw) is MeteredCandidateReturn:
+                from hcl.models.candidate_protocol import candidate_text
+                try:
+                    raw = candidate_text(raw, snapshot.source_versions)
+                except (ValueError, TypeError, RecursionError):
+                    raise stopped("CANDIDATE_RETURN_NOT_REUSABLE", "FAILED", "model") from None
             if type(raw) is not str or not raw.strip():
                 raise stopped("INVALID_MODEL_RETURN", "FAILED", "model")
             try:
@@ -1132,9 +1141,9 @@ class ExecutionRunner:
             if not claims:
                 status = failures[0] if failures else "NEEDS_EVIDENCE"
             usage = self.ledger.usage(self.lease)
+            usage.setdefault("provider_calls", 0)
+            usage.setdefault("provider_spend_usd", "0")
             usage.update(
-                provider_calls=0,
-                provider_spend_usd="0",
                 local_evaluations=(
                     None if self.counters["local_unknown"] else self.counters["local_observed"]
                 ),

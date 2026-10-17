@@ -180,7 +180,7 @@ class S23RuntimeUpgradeTests(previous.RuntimeUpgradeTests):
                     name: [f.name for f in fields(cls)]
                     for name, cls in codec.CLASSES.items()
                 }
-                # Additive M10 and explicit persistent-concept contracts must
+                # Additive M10, persistent-concept and metered-candidate contracts must
                 # not change any historical class/field or permit unlisted tags.
                 concept_shapes = {
                     "ConceptBinding": ["choice_id", "stream_id"],
@@ -190,11 +190,22 @@ class S23RuntimeUpgradeTests(previous.RuntimeUpgradeTests):
                     "ConceptQuery": ["mode", "key", "at"],
                     "ConceptDependency": ["query", "digest", "index_version"],
                 }
+                candidate_shapes = {
+                    "CandidateAuthorization": ["authorization_id", "provider", "model", "source_versions",
+                        "max_calls", "max_cost_nanos", "max_input_tokens", "max_output_tokens", "rate_version",
+                        "input_nanos_per_token", "cached_input_nanos_per_token", "output_nanos_per_token",
+                        "task_fingerprint", "mode"],
+                    "MeteredCandidateRequest": ["protocol", "authorization", "task_fingerprint", "context", "body"],
+                    "MeteredCandidateReturn": ["protocol", "visible_text", "provider_response_id", "model",
+                        "finish_reason", "input_tokens", "cached_input_tokens", "output_tokens", "settled_nanos",
+                        "validation_code"],
+                }
                 self.assertEqual(set(current_shapes) - set(old["shapes"]), {
                     "RetrievalQuery", "RetrievalDependency", "RetrievalIssue", "EvidenceNode",
-                    *concept_shapes,
+                    *concept_shapes, *candidate_shapes,
                 })
                 self.assertEqual({name: current_shapes[name] for name in concept_shapes}, concept_shapes)
+                self.assertEqual({name: current_shapes[name] for name in candidate_shapes}, candidate_shapes)
                 self.assertEqual(old["shapes"], {
                     name: current_shapes[name] for name in old["shapes"]
                 })
