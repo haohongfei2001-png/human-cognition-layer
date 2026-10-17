@@ -64,9 +64,9 @@ class AffectCompiler(LocalModelCompiler):
             "The proposed appraisal exceeds its finite compilation bound.",
         )
 
-    def compile(self, snapshot, segments, raw_candidate, allowance):
+    def compile(self, snapshot, segments, raw_candidate, allowance, *, mental_segments=None):
         try:
-            return self._compile_affect(snapshot, segments, raw_candidate, allowance)
+            return self._compile_affect(snapshot, segments, raw_candidate, allowance, mental_segments=mental_segments)
         except (
             ValueError,
             TypeError,
@@ -78,7 +78,7 @@ class AffectCompiler(LocalModelCompiler):
         ):
             raise self._invalid() from None
 
-    def _compile_affect(self, snapshot, segments, raw, allowance):
+    def _compile_affect(self, snapshot, segments, raw, allowance, *, mental_segments=None):
         if type(raw) is not str or len(raw.encode()) > min(
             allowance.max_output_bytes, 1048576
         ):
@@ -132,7 +132,7 @@ class AffectCompiler(LocalModelCompiler):
             self._keys(model, "mental episodes channels")
             base = LocalModelCompiler().compile(
                 snapshot,
-                segments,
+                segments if mental_segments is None else mental_segments,
                 json.dumps(dict(schema=MENTAL_SCHEMA, models=[model["mental"]])),
                 allowance,
             )

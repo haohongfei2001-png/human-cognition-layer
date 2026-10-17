@@ -260,7 +260,7 @@ class AnswerAssembler:
             nested = InferenceResult(record["result_id"], record["kind"], record["values"],
                 tuple(record["assumption_environments"]), tuple(record["source_versions"]),
                 tuple(record["counterevidence_ids"]), result.rule_version, "CONDITIONAL_FINITE_LONGITUDINAL_MODEL")
-            lines.append("Packet-local character reading " + record["local_id"] + "; original source=" + record["source_id"]
+            lines.append(("Explicit cross-packet character reading " if "composition" in record else "Packet-local character reading ") + record["local_id"] + "; original source=" + record["source_id"]
                 + "; declared actor=" + record["actor"] + "; event/episode/time bindings=" + repr(thaw(record["bindings"]))
                 + "; binding assumptions=" + repr(tuple(record["binding_assumptions"])) + ". " + self._relationship_claim(nested).text)
             for model in record["values"]["models"]:
@@ -276,7 +276,12 @@ class AnswerAssembler:
                             lines.append("Evidence at event time " + str(observed["at"]) + ": observed=" + repr(tuple(observed["values"]))
                                 + "; actual prediction=" + repr(tuple(cell["prediction"]["values"])) + "; " + cell["relation"]
                                 + "; shared factor=" + cell["factor_id"] + ".")
-            lines.append("These are conditional event-time readings within this packet, not discourse-order turns or cross-packet identity conclusions. Historical self-identification and other attribution remain unchanged.")
+            if "composition" in record:
+                lines.append("Explicit shared model=" + record["composition"]["model_id"]
+                    + "; contributing packet records=" + repr(thaw(record["composition"]["contributions"]))
+                    + ". Conditional event-time readings preserve historical knowledge and identity reports; source presentation supplies no event time. Only these explicit links were composed.")
+            else:
+                lines.append("These are conditional event-time readings within this packet, not discourse-order turns or cross-packet identity conclusions. Historical self-identification and other attribution remain unchanged.")
         if value["comparison_issues"]:
             lines.append("Comparison limitations: " + ", ".join(value["comparison_issues"]) + ".")
         lines.append("Coverage: " + str(value["coverage"]["read_fragments"]) + " source packets; "

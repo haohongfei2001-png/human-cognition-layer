@@ -82,10 +82,10 @@ class InteractionCompiler(LocalModelCompiler):
             "The interaction exceeds its explicit finite compilation bound.",
         )
 
-    def compile(self, snapshot, segments, raw_candidate, allowance):
+    def compile(self, snapshot, segments, raw_candidate, allowance, *, mental_segments=None):
         try:
             return self._compile_interaction(
-                snapshot, segments, raw_candidate, allowance
+                snapshot, segments, raw_candidate, allowance, mental_segments=mental_segments
             )
         except (
             ValueError,
@@ -98,7 +98,7 @@ class InteractionCompiler(LocalModelCompiler):
         ):
             raise self._invalid() from None
 
-    def _compile_interaction(self, snapshot, segments, raw, allowance):
+    def _compile_interaction(self, snapshot, segments, raw, allowance, *, mental_segments=None):
         if type(raw) is not str or len(raw.encode()) > min(
             allowance.max_output_bytes, 1048576
         ):
@@ -149,7 +149,7 @@ class InteractionCompiler(LocalModelCompiler):
             # Existing compiler still owns the base M03/M05 mechanism and anchors.
             base = LocalModelCompiler().compile(
                 snapshot,
-                segments,
+                segments if mental_segments is None else mental_segments,
                 json.dumps(dict(schema=MENTAL_SCHEMA, models=[mental])),
                 allowance,
             )
