@@ -168,6 +168,37 @@ never automatically claims semantic fidelity, an effect gain or stage completion
 This change does not issue the later grant/marker, trigger the workflow, read a
 real credential or perform an external model request.
 
+### Read-only repository lifecycle audit
+
+Provider-free CI uses `scripts/deepseek_core_smoke_lifecycle.py` to validate the
+versioned preparation, exact grant-only G, exact marker-only M, and terminal
+closure states. It is not imported by the live host and cannot authorize a send.
+The live preflight still accepts only READY with its exact E/G/M/run gates.
+The CLOSED/no-marker rejection test uses an explicit fixture, rather than
+incorrectly requiring the repository to remain unissued after an authorized run.
+
+After the one run terminates, a single-parent grant-only child C of M may change
+the original grant's status to `CLOSED_CONSUMED` or `CLOSED_BLOCKED` and add exactly
+`closure={schema: hcl-deepseek-core-smoke-closure-1, marker_commit: M,
+run_id: <positive decimal string>, receipt_sha256: <64 lowercase hex>}`. All
+other grant fields stay equal to G. The receipt hash identifies the sanitized
+public artifact; the audit does not claim to verify the external run or invoice.
+The marker remains untouched. No terminal state can be reset to UNISSUED/READY.
+If cancelled before M exists, a grant-only child C of G may instead set
+`CLOSED_CANCELLED`, with exactly
+`closure={schema: hcl-deepseek-core-smoke-closure-1, grant_commit: G,
+reason: CANCELLED_BEFORE_TRIGGER}`. No marker may exist anywhere in that
+history; this terminal branch cannot later acquire one or authorize execution.
+
+Normal development after C is allowed, while any later grant/marker edit,
+including an edit then revert, is rejected. The audit validates G against the
+historical E runtime blobs and frozen v1 source/reader identities, never against
+an unrelated future runtime and never by executing historical Python. This
+keeps a legitimate closed experiment from permanently breaking subsequent CI.
+G and C match the existing Unified provider-free path filter; M matches only
+the new one-use workflow. Real secret/account/model checks are not part of this
+read-only audit, and repository closure is not a refund or a reset of usage.
+
 ## Evidence and compatibility
 
 - `tests/test_unified_deepseek_transport.py`: real sender over loopback, exact

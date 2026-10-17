@@ -18,6 +18,7 @@ from hcl.memory import codec
 from hcl.memory.store import StateStore
 from hcl.kernel.types import Principal
 from scripts import deepseek_core_smoke_once as once
+from scripts import deepseek_core_smoke_lifecycle as lifecycle
 from scripts import witness_unified_causal_affect as fixture
 from tests.test_unified_deepseek_transport import LoopbackHTTP,completion
 
@@ -33,10 +34,141 @@ class OnceGuardTests(unittest.TestCase):
             path=once.WORKFLOW,head_sha="c"*40,event="push")])]
 
     def test_default_closed_no_marker_no_credential_or_network(self):
-        grant=once.load_json(once.ROOT/once.GRANT)
-        self.assertEqual(grant["status"],"CLOSED_UNISSUED");self.assertFalse((once.ROOT/once.MARKER).exists())
-        with patch.dict(os.environ,self.environment,clear=True),patch.object(once.ExistingCoreCredentialProvider,"borrow_bearer",side_effect=AssertionError("no key access")):
-            with self.assertRaises(ValueError):once.preflight()
+        # Preparation is an explicit fixture, not an invariant that forbids the
+        # authorized grant/marker/closure lifecycle forever in provider-free CI.
+        (self.root/once.GRANT).parent.mkdir(parents=True)
+        (self.root/once.GRANT).write_text(json.dumps(lifecycle.UNISSUED))
+        closed=once.load_json(self.root/once.GRANT)
+        self.assertFalse((self.root/once.MARKER).exists())
+        original_load=once.load_json
+        def load(path,*args):
+            return closed if path==once.ROOT/once.GRANT else original_load(path,*args)
+        with patch.dict(os.environ,self.environment,clear=True),patch.object(once,"load_json",side_effect=load),\
+                patch.object(once.ExistingCoreCredentialProvider,"borrow_bearer",side_effect=AssertionError("no key access")) as credential,\
+                patch.object(once,"opener",side_effect=AssertionError("no network")) as network,\
+                patch.object(once.DeepSeekHTTPTransport,"send",side_effect=AssertionError("no model")) as sender:
+            with self.assertRaisesRegex(ValueError,"EXACT_NEW_GRANT_REQUIRED"):once.preflight()
+        credential.assert_not_called();network.assert_not_called();sender.assert_not_called()
+
+    def test_current_repository_has_exact_versioned_lifecycle(self):
+        with patch.object(once.ExistingCoreCredentialProvider,"borrow_bearer",side_effect=AssertionError("no key")),\
+                patch.object(once,"opener",side_effect=AssertionError("no network")):
+            self.assertIn(lifecycle.validate_repository(once.ROOT),
+                {"PREPARATION","GRANT_COMMITTED","MARKER_COMMITTED","CLOSED_CONSUMED","CLOSED_BLOCKED","CLOSED_CANCELLED"})
+
+    def test_historical_runtime_projection_matches_live_grant_before_issuance(self):
+        head=lifecycle.text(once.ROOT,"rev-parse","HEAD")
+        grant=lifecycle.document(once.ROOT,head,once.GRANT)
+        if grant["status"]=="CLOSED_UNISSUED":
+            self.assertEqual(lifecycle.historical_grant(once.ROOT,head),once.expected_grant(head))
+        else:
+            # Later runtime/case changes must not be used to rewrite history.
+            original=lifecycle.historical_grant(once.ROOT,grant["executor_commit"])
+            self.assertEqual(original,{k:grant[k] for k in original} | {"status":"READY"})
+
+    def _lifecycle_repo(self,name="fixture"):
+        root=self.root/name;root.mkdir()
+        def git(*args):return subprocess.check_output(["git","-C",str(root),*args],text=True,stderr=subprocess.DEVNULL).strip()
+        def commit(message):
+            git("add",".");git("commit","-m",message)
+            return git("rev-parse","HEAD")
+        def write(path,value):
+            target=root/path;target.parent.mkdir(parents=True,exist_ok=True)
+            target.write_text(json.dumps(value))
+        git("init");git("config","user.name","Synthetic Test");git("config","user.email","test@example.invalid")
+        checked=lifecycle.text(once.ROOT,"rev-parse","HEAD")
+        current=lifecycle.document(once.ROOT,checked,lifecycle.GRANT)
+        historical=current.get("executor_commit",checked)
+        for path in (lifecycle.CASE,*lifecycle.READERS):
+            target=root/path;target.parent.mkdir(parents=True,exist_ok=True)
+            target.write_bytes(lifecycle.git(once.ROOT,"show",historical+":"+path))
+        runtime=b"# Historical synthetic runtime, hashed but never executed.\n"
+        (root/"hcl").mkdir();(root/"hcl/runtime.py").write_bytes(runtime)
+        write(once.GRANT,lifecycle.UNISSUED);executor=commit("executor")
+        grant=dict(schema="hcl-deepseek-core-smoke-grant-1",status="READY",campaign="hcl-core-deepseek-synthetic-v1",
+            executor_commit=executor,case_sha256=lifecycle.CASE_HASH,
+            runtime_sha256=once.hash_value({"runtime.py":sha256(runtime).hexdigest()}),reader_sha256=dict(lifecycle.READERS),
+            currency="CNY",authorized_cny="20.00",authorized_calls=2,max_semantic_repairs=1,
+            model="deepseek-v4-pro",model_version="DeepSeek-V4-Pro-0813",endpoint="https://api.deepseek.com/chat/completions",
+            account_scope="HCL_CORE_DEEPSEEK_DIRECT",source_policy="SYNTHETIC_ONLY",retries=0,
+            historical_budget_transfer=False,publication="SYNTHETIC_RESULT_AND_MECHANICAL_USAGE_ONLY")
+        return root,git,commit,write,executor,grant
+
+    def _lifecycle_to_marker(self,name="fixture"):
+        root,git,commit,write,executor,grant=self._lifecycle_repo(name)
+        self.assertEqual(lifecycle.validate_repository(root),"PREPARATION")
+        write(once.GRANT,grant);adopted=commit("grant")
+        self.assertEqual(lifecycle.validate_repository(root),"GRANT_COMMITTED")
+        marker=dict(schema="hcl-deepseek-core-smoke-marker-1",campaign=lifecycle.CAMPAIGN,executor_commit=executor,
+            grant_commit=adopted,grant_sha256=once.hash_value(grant),case_sha256=lifecycle.CASE_HASH)
+        write(once.MARKER,marker);marker_head=commit("marker")
+        self.assertEqual(lifecycle.validate_repository(root),"MARKER_COMMITTED")
+        return root,git,commit,write,grant,marker,marker_head
+
+    def test_lifecycle_all_phases_close_then_allow_ordinary_runtime_update(self):
+        for status in ("CLOSED_CONSUMED","CLOSED_BLOCKED"):
+            root,git,commit,write,grant,marker,marker_head=self._lifecycle_to_marker(status)
+            closure=dict(schema="hcl-deepseek-core-smoke-closure-1",marker_commit=marker_head,run_id="123",receipt_sha256="a"*64)
+            write(once.GRANT,dict(grant,status=status,closure=closure));commit("terminal grant only")
+            self.assertEqual(lifecycle.validate_repository(root),status)
+            (root/"hcl/runtime.py").write_text("# New ordinary runtime after the closed experiment.\n")
+            (root/lifecycle.CASE).write_text("# Future source module is not historical grant evidence.\n")
+            commit("normal later development")
+            self.assertEqual(lifecycle.validate_repository(root),status)
+            # The execution validator is not expanded by the audit's states.
+            with self.assertRaises(ValueError):once.validate_grant(lifecycle.document(root,git("rev-parse","HEAD"),once.GRANT))
+
+    def test_lifecycle_rejects_arbitrary_ready_wrong_parent_and_extra_changes(self):
+        for mutation in ("budget","executor","runtime","case","extra_file","bool_calls"):
+            root,git,commit,write,executor,grant=self._lifecycle_repo(mutation)
+            if mutation=="extra_file":(root/"unreviewed.txt").write_text("synthetic")
+            else:
+                key,value={"budget":("authorized_cny","20.01"),"executor":("executor_commit","a"*40),
+                    "runtime":("runtime_sha256","a"*64),"case":("case_sha256","a"*64),"bool_calls":("authorized_calls",True)}[mutation]
+                grant[key]=value
+            write(once.GRANT,grant);commit("invalid grant")
+            with self.subTest(mutation=mutation),self.assertRaises(ValueError):lifecycle.validate_repository(root)
+
+    def test_lifecycle_rejects_wrong_marker_close_reset_and_change_then_revert(self):
+        for mutation in ("marker_hash","closure_extra","closure_receipt","close_extra_file","marker_revert","grant_revert","reset"):
+            root,git,commit,write,grant,marker,marker_head=self._lifecycle_to_marker(mutation)
+            if mutation=="marker_hash":
+                write(once.MARKER,dict(marker,grant_sha256="b"*64));commit("wrong marker")
+            else:
+                closure=dict(schema="hcl-deepseek-core-smoke-closure-1",marker_commit=marker_head,run_id="123",receipt_sha256="a"*64)
+                if mutation=="closure_extra":closure["extra"]=True
+                if mutation=="closure_receipt":closure["receipt_sha256"]="unknown"
+                if mutation=="close_extra_file":(root/"other.txt").write_text("synthetic")
+                terminal=dict(grant,status="CLOSED_CONSUMED",closure=closure)
+                write(once.GRANT,terminal);commit("closure")
+                if mutation in ("marker_revert","grant_revert"):
+                    path,value=(once.MARKER,marker) if mutation=="marker_revert" else (once.GRANT,terminal)
+                    write(path,dict(value,extra=True));commit("changed protected path")
+                    write(path,value);commit("reverted protected path")
+                if mutation=="reset":
+                    (root/once.MARKER).unlink();write(once.GRANT,lifecycle.UNISSUED);commit("forbidden reset")
+            with self.subTest(mutation=mutation),self.assertRaises(ValueError):lifecycle.validate_repository(root)
+
+    def test_lifecycle_cannot_reset_grant_without_ever_sending(self):
+        root,git,commit,write,executor,grant=self._lifecycle_repo()
+        write(once.GRANT,grant);commit("grant")
+        write(once.GRANT,lifecycle.UNISSUED);commit("forbidden reset before marker")
+        with self.assertRaises(ValueError):lifecycle.validate_repository(root)
+
+    def test_lifecycle_pretrigger_cancel_is_terminal_and_never_accepts_marker(self):
+        root,git,commit,write,executor,grant=self._lifecycle_repo()
+        write(once.GRANT,grant);adopted=commit("grant")
+        closure=dict(schema="hcl-deepseek-core-smoke-closure-1",grant_commit=adopted,reason="CANCELLED_BEFORE_TRIGGER")
+        terminal=dict(grant,status="CLOSED_CANCELLED",closure=closure)
+        write(once.GRANT,terminal);commit("cancel before marker")
+        self.assertEqual(lifecycle.validate_repository(root),"CLOSED_CANCELLED")
+        (root/"hcl/runtime.py").write_text("# ordinary development\n");commit("later code")
+        self.assertEqual(lifecycle.validate_repository(root),"CLOSED_CANCELLED")
+        with self.assertRaises(ValueError):once.validate_grant(terminal)
+        write(once.MARKER,dict(schema="hcl-deepseek-core-smoke-marker-1",campaign=lifecycle.CAMPAIGN,
+            executor_commit=executor,grant_commit=adopted,grant_sha256=once.hash_value(grant),case_sha256=lifecycle.CASE_HASH))
+        commit("forbidden marker after cancel")
+        with self.assertRaises(ValueError):lifecycle.validate_repository(root)
 
     def test_identity_and_complete_history_reject_replay_and_forgery(self):
         self.assertEqual(once.environment_identity(self.environment),self.identity)
